@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-07-28T17:43:10Z",
+ "generated_at": "2026-07-28T17:48:17Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -12,7 +12,7 @@
   "open_issues": 84,
   "size_kb": 27638,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-07-28T17:42:50Z",
+  "pushed_at": "2026-07-28T17:48:05Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -22,8 +22,8 @@
   "cdn_hits": 65,
   "release_downloads": 0,
   "page_views": 75,
-  "clone_uniques_14d": 0,
-  "view_uniques_14d": 0,
+  "clone_uniques_14d": 387,
+  "view_uniques_14d": 20,
   "clone_uniques_daily_sum": 581,
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
@@ -38,10 +38,13 @@
   "upvotes": 7,
   "downvotes": 1,
   "voters": 3,
-  "reviews": 375,
-  "reviewers": 20,
-  "avg_rating": 3.53,
-  "agents_reviewed": 127,
+  "reviews": 0,
+  "reviewers": 0,
+  "avg_rating": 0.0,
+  "agents_reviewed": 0,
+  "curator_reviews": 375,
+  "curator_agents_reviewed": 127,
+  "curator_avg_rating": 3.53,
   "agents_voted": 7
  },
  "daily": [
@@ -152,10 +155,84 @@
   }
  ],
  "traffic": {
-  "paths": [],
-  "referrers": [],
-  "clones_14d": 0,
-  "views_14d": 0
+  "paths": [
+   {
+    "path": "/kody-w/RAR",
+    "title": "Overview",
+    "count": 15,
+    "uniques": 6
+   },
+   {
+    "path": "/kody-w/RAR/agents",
+    "title": "/agents",
+    "count": 4,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/discussions/228",
+    "title": "/discussions/228",
+    "count": 3,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/blob/main/agents/@howardh/tuftelove_agent.py",
+    "title": "/blob/main/agents/@howardh/tuftelove_agent.py",
+    "count": 2,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/discussions/378",
+    "title": "/discussions/378",
+    "count": 2,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/pulls",
+    "title": "/pulls",
+    "count": 2,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/tree/main/agents",
+    "title": "/tree/main/agents",
+    "count": 2,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/forks",
+    "title": "/forks",
+    "count": 2,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/issues/174",
+    "title": "/issues/174",
+    "count": 2,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
+    "title": "/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
+    "count": 2,
+    "uniques": 1
+   }
+  ],
+  "referrers": [
+   {
+    "referrer": "github.com",
+    "count": 57,
+    "uniques": 15
+   },
+   {
+    "referrer": "Bing",
+    "count": 2,
+    "uniques": 1
+   }
+  ],
+  "clones_14d": 2743,
+  "views_14d": 75,
+  "live": true,
+  "as_of": "2026-07-28T17:48:17Z"
  },
  "cdn": {
   "total_hits": 65,
@@ -209,19 +286,38 @@
   ]
  },
  "reviews": {
-  "by_angle": {
-   "usability": 91,
-   "primary": 89,
-   "code_quality": 86,
-   "community": 66,
-   "comparison": 43
+  "user": {
+   "total": 0,
+   "reviewers": 0,
+   "avg_rating": 0.0,
+   "distribution": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0
+   }
   },
-  "distribution": {
-   "1": 14,
-   "2": 38,
-   "3": 116,
-   "4": 149,
-   "5": 58
+  "curator": {
+   "total": 375,
+   "reviewers": 20,
+   "avg_rating": 3.53,
+   "agents": 127,
+   "by_angle": {
+    "usability": 91,
+    "primary": 89,
+    "code_quality": 86,
+    "community": 66,
+    "comparison": 43
+   },
+   "distribution": {
+    "1": 14,
+    "2": 38,
+    "3": 116,
+    "4": 149,
+    "5": 58
+   },
+   "note": "Engine-generated curator notes from state/curator_reviews.json. Reported for transparency; NOT counted in the review totals or the review leaderboards."
   }
  },
  "leaderboards": {
@@ -242,7 +338,9 @@
     "size_kb": 37.9,
     "added_at": "2026-04-20T12:38:45-04:00",
     "file": "agents/@rapp/learn_new_agent.py",
-    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates."
+    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@aibast-agents-library/customer_360_speech",
@@ -254,13 +352,15 @@
     "up": 0,
     "down": 0,
     "score": 0,
-    "reviews": 3,
-    "rating": 4.0,
+    "reviews": 0,
+    "rating": 0.0,
     "lines": 440,
     "size_kb": 21.8,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py",
-    "description": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback."
+    "description": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
+    "curator_reviews": 3,
+    "curator_rating": 4.0
    },
    {
     "name": "@aibast-agents-library/customer_loyalty_rewards",
@@ -272,13 +372,15 @@
     "up": 0,
     "down": 0,
     "score": 0,
-    "reviews": 1,
-    "rating": 4.0,
+    "reviews": 0,
+    "rating": 0.0,
     "lines": 585,
     "size_kb": 27.8,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py",
-    "description": "Builds loyalty dashboards, tier analysis, and win-back offers from a live simulated Dynamics 365 tenant, with an offline demo fallback."
+    "description": "Builds loyalty dashboards, tier analysis, and win-back offers from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "curator_reviews": 1,
+    "curator_rating": 4.0
    }
   ],
   "most_upvoted": [
@@ -292,13 +394,15 @@
     "up": 2,
     "down": 0,
     "score": 2,
-    "reviews": 2,
-    "rating": 3.5,
+    "reviews": 0,
+    "rating": 0.0,
     "lines": 644,
     "size_kb": 31.2,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py",
-    "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback."
+    "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "curator_reviews": 2,
+    "curator_rating": 3.5
    },
    {
     "name": "@aibast-agents-library/deal_tracking",
@@ -310,13 +414,15 @@
     "up": 1,
     "down": 0,
     "score": 1,
-    "reviews": 2,
-    "rating": 2.5,
+    "reviews": 0,
+    "rating": 0.0,
     "lines": 402,
     "size_kb": 18.6,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/deal_tracking_agent.py",
-    "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data."
+    "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
+    "curator_reviews": 2,
+    "curator_rating": 2.5
    },
    {
     "name": "@kody-w/power_apps_code_app_agent",
@@ -334,7 +440,9 @@
     "size_kb": 39.6,
     "added_at": "2026-07-22T15:35:38-04:00",
     "file": "agents/@kody-w/power_apps_code_app_agent.py",
-    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components."
+    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@aibast-agents-library/account_risk_assessment",
@@ -346,559 +454,19 @@
     "up": 0,
     "down": 1,
     "score": -1,
-    "reviews": 3,
-    "rating": 3.67,
+    "reviews": 0,
+    "rating": 0.0,
     "lines": 495,
     "size_kb": 23.0,
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
-    "description": "Scores deal risk, churn probability, and financial health with mitigation advice, using built-in demo account data."
+    "description": "Scores deal risk, churn probability, and financial health with mitigation advice, using built-in demo account data.",
+    "curator_reviews": 3,
+    "curator_rating": 3.67
    }
   ],
-  "most_reviewed": [
-   {
-    "name": "@aibast-agents-library/cart_abandonment_recovery",
-    "display_name": "Cart Abandonment Recovery Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "b2c_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 6,
-    "rating": 3.33,
-    "lines": 512,
-    "size_kb": 24.5,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
-    "description": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/fraud_detection_alert",
-    "display_name": "Fraud Detection & Alert Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "financial_services",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 6,
-    "rating": 4.0,
-    "lines": 675,
-    "size_kb": 35.4,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py",
-    "description": "Triages fraud alerts and tracks investigations from a live simulated Dynamics 365 tenant (cases as fraud cases), with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/revenue_forecast",
-    "display_name": "Revenue Forecast",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 6,
-    "rating": 4.0,
-    "lines": 488,
-    "size_kb": 22.3,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
-    "description": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/building_permit_processing",
-    "display_name": "Building Permit Processing Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "slg_government",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 5,
-    "rating": 3.6,
-    "lines": 762,
-    "size_kb": 33.2,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py",
-    "description": "Tracks permit status and fees from a live simulated Dynamics 365 tenant's permit cases, with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/cross_selling",
-    "display_name": "Cross-Selling Opportunities",
-    "publisher": "@aibast-agents-library",
-    "category": "general",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 5,
-    "rating": 3.8,
-    "lines": 510,
-    "size_kb": 25.6,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py",
-    "description": "Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback."
-   },
-   {
-    "name": "@aibast-agents-library/deal_stakeholder_engagement",
-    "display_name": "Stakeholder Engagement",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 5,
-    "rating": 4.4,
-    "lines": 538,
-    "size_kb": 25.6,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
-    "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/portfolio_rebalancing",
-    "display_name": "Portfolio Rebalancing Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "financial_services",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 5,
-    "rating": 3.6,
-    "lines": 574,
-    "size_kb": 27.2,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py",
-    "description": "Analyzes portfolio drift and trades from a live simulated Dynamics 365 tenant (product lines as positions), with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/time_entry_billing",
-    "display_name": "Time Entry & Billing Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "professional_services",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 5,
-    "rating": 4.0,
-    "lines": 629,
-    "size_kb": 29.8,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py",
-    "description": "Audits time entries and tracks receivables from a live simulated Dynamics 365 tenant invoice ledger, with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/voice_to_crm_email",
-    "display_name": "Voice to CRM Email",
-    "publisher": "@aibast-agents-library",
-    "category": "general",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 5,
-    "rating": 4.2,
-    "lines": 428,
-    "size_kb": 21.0,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
-    "description": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback."
-   },
-   {
-    "name": "@aibast-agents-library/workforce_clearance_onboarding",
-    "display_name": "Workforce Clearance & Onboarding Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "federal_government",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 5,
-    "rating": 3.8,
-    "lines": 575,
-    "size_kb": 25.8,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py",
-    "description": "Tracks onboarding blockers from a live simulated Dynamics 365 CRM joined to an HRIS hire roster, with clearance checklists that work offline."
-   },
-   {
-    "name": "@aibast-agents-library/citizen_service_request",
-    "display_name": "Citizen Service Request Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "slg_government",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 4.25,
-    "lines": 479,
-    "size_kb": 21.6,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
-    "description": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/emission_tracking",
-    "display_name": "Emission Tracking Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "energy",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 4.5,
-    "lines": 639,
-    "size_kb": 27.1,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
-    "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/field_service_dispatch",
-    "display_name": "Field Service Dispatch Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "energy",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 3.5,
-    "lines": 907,
-    "size_kb": 36.3,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py",
-    "description": "Dispatches from live simulated Dynamics 365 work orders with a telemetry alert overlay, routing, crews, and an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/financial_advisor_copilot",
-    "display_name": "Financial Advisor Copilot Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "financial_services",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 3.75,
-    "lines": 664,
-    "size_kb": 33.7,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/financial_services_stacks/financial_advisor_copilot_stack/financial_advisor_copilot_agent.py",
-    "description": "Reviews advisory client books from a live simulated Dynamics 365 tenant (contacts as clients), with portfolio demos and an offline fallback."
-   },
-   {
-    "name": "@aibast-agents-library/find_accurate_models",
-    "display_name": "Find Accurate Models",
-    "publisher": "@aibast-agents-library",
-    "category": "general",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 3.25,
-    "lines": 456,
-    "size_kb": 22.8,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py",
-    "description": "Compares models by accuracy, readiness, and cost, merging live catalog entries from a simulated Dynamics 365 tenant with offline fallback."
-   }
-  ],
-  "highest_rated": [
-   {
-    "name": "@aibast-agents-library/supply_chain_disruption_alert",
-    "display_name": "Supply Chain Disruption Alert Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "retail_cpg",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 4.75,
-    "lines": 1085,
-    "size_kb": 43.9,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
-    "description": "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/acquisition_support",
-    "display_name": "Acquisition Support Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "federal_government",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 3,
-    "rating": 4.67,
-    "lines": 526,
-    "size_kb": 23.1,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
-    "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback."
-   },
-   {
-    "name": "@aibast-agents-library/wealth_insights_generator",
-    "display_name": "Wealth Insights Generator Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "financial_services",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 3,
-    "rating": 4.67,
-    "lines": 675,
-    "size_kb": 33.5,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
-    "description": "Generates opportunity alerts and client insights from a live simulated Dynamics 365 tenant pipeline, with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/emission_tracking",
-    "display_name": "Emission Tracking Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "energy",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 4.5,
-    "lines": 639,
-    "size_kb": 27.1,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
-    "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/deal_stakeholder_engagement",
-    "display_name": "Stakeholder Engagement",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 5,
-    "rating": 4.4,
-    "lines": 538,
-    "size_kb": 25.6,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
-    "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/email_drafting",
-    "display_name": "Email Drafting",
-    "publisher": "@aibast-agents-library",
-    "category": "general",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 3,
-    "rating": 4.33,
-    "lines": 433,
-    "size_kb": 21.3,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py",
-    "description": "Drafts outreach, follow-up, and proposal emails personalized with live contacts from a simulated Dynamics 365 tenant, with offline fallback."
-   },
-   {
-    "name": "@aibast-agents-library/returns_complaints_resolution",
-    "display_name": "Returns & Complaints Resolution Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "retail_cpg",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 3,
-    "rating": 4.33,
-    "lines": 867,
-    "size_kb": 36.6,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py",
-    "description": "Processes returns and complaints from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/returns_exchange",
-    "display_name": "Returns & Exchange Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "b2c_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 4.25,
-    "lines": 482,
-    "size_kb": 22.2,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
-    "description": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline."
-   },
-   {
-    "name": "@aibast-agents-library/voice_to_crm_servicenow",
-    "display_name": "Voice to CRM (ServiceNow)",
-    "publisher": "@aibast-agents-library",
-    "category": "general",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 4.25,
-    "lines": 581,
-    "size_kb": 28.2,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py",
-    "description": "Tracks incidents from a simulated ServiceNow Table-API desk, joining each CI's u_d365_customerassetid to the live D365 asset; offline fallback."
-   },
-   {
-    "name": "@aibast-agents-library/production_line_optimization",
-    "display_name": "Production Line Optimization Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "manufacturing",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 4.25,
-    "lines": 685,
-    "size_kb": 31.6,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py",
-    "description": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/inventory_visibility",
-    "display_name": "Inventory Visibility Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "retail_cpg",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 4.25,
-    "lines": 779,
-    "size_kb": 33.7,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py",
-    "description": "Reports stock dashboards joining a simulated Dynamics 365 catalog with ERP materials and goods receipts as inbound supply, with offline fallback."
-   },
-   {
-    "name": "@aibast-agents-library/citizen_service_request",
-    "display_name": "Citizen Service Request Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "slg_government",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 4,
-    "rating": 4.25,
-    "lines": 479,
-    "size_kb": 21.6,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
-    "description": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/voice_to_crm_email",
-    "display_name": "Voice to CRM Email",
-    "publisher": "@aibast-agents-library",
-    "category": "general",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 5,
-    "rating": 4.2,
-    "lines": 428,
-    "size_kb": 21.0,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
-    "description": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback."
-   },
-   {
-    "name": "@aibast-agents-library/revenue_forecast",
-    "display_name": "Revenue Forecast",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 6,
-    "rating": 4.0,
-    "lines": 488,
-    "size_kb": 22.3,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
-    "description": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback."
-   },
-   {
-    "name": "@aibast-agents-library/fraud_detection_alert",
-    "display_name": "Fraud Detection & Alert Agent",
-    "publisher": "@aibast-agents-library",
-    "category": "financial_services",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 6,
-    "rating": 4.0,
-    "lines": 675,
-    "size_kb": 35.4,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py",
-    "description": "Triages fraud alerts and tracks investigations from a live simulated Dynamics 365 tenant (cases as fraud cases), with an offline demo fallback."
-   }
-  ],
+  "most_reviewed": [],
+  "highest_rated": [],
   "largest": [
    {
     "name": "@kody-w/transcript2prototype",
@@ -916,7 +484,9 @@
     "size_kb": 387.9,
     "added_at": "2026-06-17T17:06:07-04:00",
     "file": "agents/@kody-w/transcript2prototype_agent.py",
-    "description": "Turns a business transcript into a working prototype \u2014 demo script, injected M365 demo iframe, generated agents, twin test runs, factory export."
+    "description": "Turns a business transcript into a working prototype \u2014 demo script, injected M365 demo iframe, generated agents, twin test runs, factory export.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/copilot_studio_forge_agent",
@@ -934,7 +504,9 @@
     "size_kb": 218.4,
     "added_at": "2026-07-07T00:52:21Z",
     "file": "agents/@kody-w/copilot_studio_forge_agent.py",
-    "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports."
+    "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/copilot_studio_deploy_agent",
@@ -952,7 +524,9 @@
     "size_kb": 442.8,
     "added_at": "2026-06-07T20:27:02-04:00",
     "file": "agents/@kody-w/copilot_studio_deploy_agent.py",
-    "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified)."
+    "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified).",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@howardh/vaultmind_agent",
@@ -970,7 +544,9 @@
     "size_kb": 146.1,
     "added_at": "2026-05-24T21:45:25-04:00",
     "file": "agents/@howardh/vaultmind_agent.py",
-    "description": "Manages an Obsidian vault through 28 actions \u2014 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks."
+    "description": "Manages an Obsidian vault through 28 actions \u2014 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@discreetRappers/rapp_pipeline_agent",
@@ -988,7 +564,9 @@
     "size_kb": 121.6,
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/rapp_pipeline_agent.py",
-    "description": "Runs the full RAPP pipeline \u2014 discovery, MVP, code gen, quality gates QG1-QG6, PDF reports \u2014 using Azure OpenAI and Azure File Storage."
+    "description": "Runs the full RAPP pipeline \u2014 discovery, MVP, code gen, quality gates QG1-QG6, PDF reports \u2014 using Azure OpenAI and Azure File Storage.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@rapp/rapp",
@@ -1006,7 +584,9 @@
     "size_kb": 173.4,
     "added_at": "2026-06-09T21:40:04-04:00",
     "file": "agents/@rapp/rapp_agent.py",
-    "description": "Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map."
+    "description": "Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/connected_solution_agent",
@@ -1024,7 +604,9 @@
     "size_kb": 127.3,
     "added_at": "2026-06-22T21:04:42-04:00",
     "file": "agents/@kody-w/connected_solution_agent.py",
-    "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API."
+    "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@discreetRappers/sharepoint_contract_analysis_agent",
@@ -1042,7 +624,9 @@
     "size_kb": 119.9,
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
-    "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI \u2014 clause extraction, risk flagging, and comparison."
+    "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI \u2014 clause extraction, risk flagging, and comparison.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@discreetRappers/copilot_studio_transpiler_agent",
@@ -1060,7 +644,9 @@
     "size_kb": 88.5,
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/copilot_studio_transpiler_agent.py",
-    "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency."
+    "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@rapp/twin_agent",
@@ -1078,7 +664,9 @@
     "size_kb": 71.9,
     "added_at": "2026-05-11T10:53:36-04:00",
     "file": "agents/@rapp/twin_agent.py",
-    "description": "Manages the local digital-twin lifecycle \u2014 summon, hatch eggs, boot each twin as its own brainstem, stop, chat, inspect \u2014 under ~/.rapp/twins/."
+    "description": "Manages the local digital-twin lifecycle \u2014 summon, hatch eggs, boot each twin as its own brainstem, stop, chat, inspect \u2014 under ~/.rapp/twins/.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@discreetRappers/powerpoint_generator_agent",
@@ -1096,7 +684,9 @@
     "size_kb": 61.3,
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/powerpoint_generator_agent.py",
-    "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection."
+    "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/rapp_skill_bridge_agent",
@@ -1114,7 +704,9 @@
     "size_kb": 57.8,
     "added_at": "2026-07-23T12:26:59-04:00",
     "file": "agents/@kody-w/rapp_skill_bridge_agent.py",
-    "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills."
+    "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/rar_remote_agent",
@@ -1132,7 +724,9 @@
     "size_kb": 58.4,
     "added_at": "2026-05-24T21:45:25-04:00",
     "file": "agents/@kody-w/rar_remote_agent.py",
-    "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token."
+    "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/perpetual_loop_factory",
@@ -1150,7 +744,9 @@
     "size_kb": 54.3,
     "added_at": "2026-05-05T08:57:33-04:00",
     "file": "agents/@kody-w/perpetual_loop_factory_agent.py",
-    "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons."
+    "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@discreetRappers/scripted_demo_agent",
@@ -1168,7 +764,9 @@
     "size_kb": 54.2,
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/scripted_demo_agent.py",
-    "description": "Plays back scripted demo conversations from JSON files in storage, simulating agent responses for live demonstrations."
+    "description": "Plays back scripted demo conversations from JSON files in storage, simulating agent responses for live demonstrations.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    }
   ],
   "newest": [
@@ -1188,7 +786,9 @@
     "size_kb": 26.9,
     "added_at": "2026-07-24T16:53:40Z",
     "file": "agents/@kody-w/project_tracker_agent.py",
-    "description": "Local-first tracker for a portfolio of AI-agent projects and their MVP statements. Speaks the aibast-agents-library project-tracker web tool's native JSON (projectTrackerData) so data round-trips via its JSON import/export. Add/update projects, set the MVP use case/description/timeline, register agents, and export a file ready to merge-import into the web tool. Data stays on this device \u2014 never in a repo or egg."
+    "description": "Local-first tracker for a portfolio of AI-agent projects and their MVP statements. Speaks the aibast-agents-library project-tracker web tool's native JSON (projectTrackerData) so data round-trips via its JSON import/export. Add/update projects, set the MVP use case/description/timeline, register agents, and export a file ready to merge-import into the web tool. Data stays on this device \u2014 never in a repo or egg.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/rapp_skill_bridge_agent",
@@ -1206,7 +806,9 @@
     "size_kb": 57.8,
     "added_at": "2026-07-23T12:26:59-04:00",
     "file": "agents/@kody-w/rapp_skill_bridge_agent.py",
-    "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills."
+    "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/power_apps_code_app_agent",
@@ -1224,7 +826,9 @@
     "size_kb": 39.6,
     "added_at": "2026-07-22T15:35:38-04:00",
     "file": "agents/@kody-w/power_apps_code_app_agent.py",
-    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components."
+    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/rapp_x_notary_canary_agent",
@@ -1242,7 +846,9 @@
     "size_kb": 1.3,
     "added_at": "2026-07-18T23:41:02Z",
     "file": "agents/@kody-w/rapp_x_notary_canary_agent.py",
-    "description": "Validates the Issues-backed RAR notarization lifecycle."
+    "description": "Validates the Issues-backed RAR notarization lifecycle.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/rapp_sdk_builder",
@@ -1260,7 +866,9 @@
     "size_kb": 19.3,
     "added_at": "2026-07-15T15:23:19Z",
     "file": "agents/@kody-w/rapp_sdk_builder_agent.py",
-    "description": "Mints rappids, builds and verifies rapp/1 frames, scaffolds organism seeds, and lints public GitHub repos for RAPP spec compliance."
+    "description": "Mints rappids, builds and verifies rapp/1 frames, scaffolds organism seeds, and lints public GitHub repos for RAPP spec compliance.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/copilot_studio_forge_agent",
@@ -1278,7 +886,9 @@
     "size_kb": 218.4,
     "added_at": "2026-07-07T00:52:21Z",
     "file": "agents/@kody-w/copilot_studio_forge_agent.py",
-    "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports."
+    "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/copilot_studio_probe_agent",
@@ -1296,7 +906,9 @@
     "size_kb": 7.0,
     "added_at": "2026-07-07T00:32:03Z",
     "file": "agents/@kody-w/copilot_studio_probe_agent.py",
-    "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification."
+    "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/microsoft_deck_studio_agent",
@@ -1314,7 +926,9 @@
     "size_kb": 38.1,
     "added_at": "2026-07-02T19:31:47Z",
     "file": "agents/@kody-w/microsoft_deck_studio_agent.py",
-    "description": "Generate a polished, Microsoft-Fluent-styled PowerPoint (.pptx) deck from a JSON spec of slides and layouts."
+    "description": "Generate a polished, Microsoft-Fluent-styled PowerPoint (.pptx) deck from a JSON spec of slides and layouts.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/flight_recorder",
@@ -1332,7 +946,9 @@
     "size_kb": 22.7,
     "added_at": "2026-06-27T13:28:13-04:00",
     "file": "agents/@kody-w/flight_recorder_agent.py",
-    "description": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls."
+    "description": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/neuron_swarm",
@@ -1350,7 +966,9 @@
     "size_kb": 18.8,
     "added_at": "2026-06-26T23:08:53-04:00",
     "file": "agents/@kody-w/neuron_swarm_agent.py",
-    "description": "Fans a task out across parallel expert 'neuron' prompts using the host brainstem's own LLM call, then reconciles them into one converged answer."
+    "description": "Fans a task out across parallel expert 'neuron' prompts using the host brainstem's own LLM call, then reconciles them into one converged answer.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/connected_solution_agent",
@@ -1368,7 +986,9 @@
     "size_kb": 127.3,
     "added_at": "2026-06-22T21:04:42-04:00",
     "file": "agents/@kody-w/connected_solution_agent.py",
-    "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API."
+    "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/double_jump_agent",
@@ -1386,7 +1006,9 @@
     "size_kb": 12.5,
     "added_at": "2026-06-20T19:46:03-04:00",
     "file": "agents/@kody-w/double_jump_agent.py",
-    "description": "Improves any draft by competing it against the local brainstem's /chat output round over round, keeping each round's winner; defaults to offline demo."
+    "description": "Improves any draft by competing it against the local brainstem's /chat output round over round, keeping each round's winner; defaults to offline demo.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/arena_compete_agent",
@@ -1404,7 +1026,9 @@
     "size_kb": 13.3,
     "added_at": "2026-06-20T19:39:59-04:00",
     "file": "agents/@kody-w/arena_compete_agent.py",
-    "description": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation."
+    "description": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/matrix_arena_agent",
@@ -1422,7 +1046,9 @@
     "size_kb": 14.0,
     "added_at": "2026-06-20T19:39:59-04:00",
     "file": "agents/@kody-w/matrix_arena_agent.py",
-    "description": "Drives multiple headless RAPP Commons browser tabs via a local Playwright harness to sync-test host-led presence, signed actions, and succession."
+    "description": "Drives multiple headless RAPP Commons browser tabs via a local Playwright harness to sync-test host-led presence, signed actions, and succession.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    },
    {
     "name": "@kody-w/commons_life_agent",
@@ -1440,7 +1066,9 @@
     "size_kb": 21.1,
     "added_at": "2026-06-20T19:05:34-04:00",
     "file": "agents/@kody-w/commons_life_agent.py",
-    "description": "Records the live commons as signed frames via Playwright, grows in-between fidelity with EZsharpen, and emits an HTML LifePlayer scrubber."
+    "description": "Records the live commons as signed frames via Playwright, grows in-between fidelity with EZsharpen, and emits an HTML LifePlayer scrubber.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0
    }
   ],
   "publishers": [
@@ -1449,9 +1077,10 @@
     "agents": 104,
     "downloads": 6,
     "score": 2,
-    "reviews": 297,
+    "reviews": 0,
     "lines": 62569,
-    "rating": 3.79
+    "curator_reviews": 297,
+    "rating": 0.0
    },
    {
     "name": "@kody-w",
@@ -1460,6 +1089,7 @@
     "score": 1,
     "reviews": 0,
     "lines": 43419,
+    "curator_reviews": 0,
     "rating": 0.0
    },
    {
@@ -1467,9 +1097,10 @@
     "agents": 21,
     "downloads": 8,
     "score": 0,
-    "reviews": 2,
+    "reviews": 0,
     "lines": 14164,
-    "rating": 2.0
+    "curator_reviews": 2,
+    "rating": 0.0
    },
    {
     "name": "@discreetRappers",
@@ -1478,6 +1109,7 @@
     "score": 0,
     "reviews": 0,
     "lines": 17056,
+    "curator_reviews": 0,
     "rating": 0.0
    },
    {
@@ -1487,6 +1119,7 @@
     "score": 0,
     "reviews": 0,
     "lines": 7229,
+    "curator_reviews": 0,
     "rating": 0.0
    },
    {
@@ -1496,6 +1129,7 @@
     "score": 0,
     "reviews": 0,
     "lines": 1084,
+    "curator_reviews": 0,
     "rating": 0.0
    },
    {
@@ -1505,6 +1139,7 @@
     "score": 0,
     "reviews": 0,
     "lines": 1350,
+    "curator_reviews": 0,
     "rating": 0.0
    },
    {
@@ -1514,6 +1149,7 @@
     "score": 0,
     "reviews": 0,
     "lines": 384,
+    "curator_reviews": 0,
     "rating": 0.0
    },
    {
@@ -1523,6 +1159,7 @@
     "score": 0,
     "reviews": 0,
     "lines": 990,
+    "curator_reviews": 0,
     "rating": 0.0
    }
   ],
@@ -1539,14 +1176,14 @@
     "agents": 25,
     "downloads": 0,
     "score": 0,
-    "reviews": 62
+    "reviews": 0
    },
    {
     "name": "b2b_sales",
     "agents": 24,
     "downloads": 0,
     "score": 2,
-    "reviews": 60
+    "reviews": 0
    },
    {
     "name": "productivity",
@@ -1567,7 +1204,7 @@
     "agents": 10,
     "downloads": 0,
     "score": 0,
-    "reviews": 33
+    "reviews": 0
    },
    {
     "name": "integrations",
@@ -1581,14 +1218,14 @@
     "agents": 9,
     "downloads": 0,
     "score": 0,
-    "reviews": 2
+    "reviews": 0
    },
    {
     "name": "b2c_sales",
     "agents": 7,
     "downloads": 6,
     "score": 0,
-    "reviews": 20
+    "reviews": 0
    },
    {
     "name": "platform",
@@ -1602,56 +1239,56 @@
     "agents": 6,
     "downloads": 0,
     "score": 0,
-    "reviews": 17
+    "reviews": 0
    },
    {
     "name": "federal_government",
     "agents": 5,
     "downloads": 0,
     "score": 0,
-    "reviews": 16
+    "reviews": 0
    },
    {
     "name": "healthcare",
     "agents": 5,
     "downloads": 0,
     "score": 0,
-    "reviews": 11
+    "reviews": 0
    },
    {
     "name": "manufacturing",
     "agents": 5,
     "downloads": 0,
     "score": 0,
-    "reviews": 13
+    "reviews": 0
    },
    {
     "name": "professional_services",
     "agents": 5,
     "downloads": 0,
     "score": 0,
-    "reviews": 17
+    "reviews": 0
    },
    {
     "name": "retail_cpg",
     "agents": 5,
     "downloads": 0,
     "score": 0,
-    "reviews": 12
+    "reviews": 0
    },
    {
     "name": "slg_government",
     "agents": 5,
     "downloads": 0,
     "score": 0,
-    "reviews": 20
+    "reviews": 0
    },
    {
     "name": "software_digital_products",
     "agents": 5,
     "downloads": 0,
     "score": 0,
-    "reviews": 11
+    "reviews": 0
    },
    {
     "name": "workflow",
@@ -1686,14 +1323,14 @@
     "agents": 1,
     "downloads": 0,
     "score": 0,
-    "reviews": 3
+    "reviews": 0
    },
    {
     "name": "it_management",
     "agents": 1,
     "downloads": 0,
     "score": 0,
-    "reviews": 2
+    "reviews": 0
    }
   ],
   "tiers": {
@@ -1709,800 +1346,1000 @@
    "u": 2,
    "n": 0,
    "s": 2,
-   "r": 2,
-   "rt": 3.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.5
   },
   "@aibast-agents-library/action_prioritization": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.0
   },
   "@aibast-agents-library/competitive_intelligence": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 4.0
   },
   "@aibast-agents-library/deal_tracking": {
    "d": 0,
    "u": 1,
    "n": 0,
    "s": 1,
-   "r": 2,
-   "rt": 2.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 2.5
   },
   "@aibast-agents-library/meeting_prep": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.0
   },
   "@aibast-agents-library/account_messaging": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.5
   },
   "@aibast-agents-library/account_risk_assessment": {
    "d": 0,
    "u": 0,
    "n": 1,
    "s": -1,
-   "r": 3,
-   "rt": 3.67
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.67
   },
   "@aibast-agents-library/stakeholder_intelligence": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 5.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 5.0
   },
   "@aibast-agents-library/activity_gap": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.0
   },
   "@aibast-agents-library/deal_competitor_intel": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 4.0
   },
   "@aibast-agents-library/deal_health_score": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.33
   },
   "@aibast-agents-library/deal_progression": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 2.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 2.33
   },
   "@aibast-agents-library/deal_risk_assessment": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.0
   },
   "@aibast-agents-library/next_best_action": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 2.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 2.75
   },
   "@aibast-agents-library/pipeline_velocity": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.75
   },
   "@aibast-agents-library/revenue_forecast": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 6,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 6,
+   "crt": 4.0
   },
   "@aibast-agents-library/deal_stakeholder_engagement": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 5,
-   "rt": 4.4
+   "r": 0,
+   "rt": 0.0,
+   "cr": 5,
+   "crt": 4.4
   },
   "@aibast-agents-library/stalled_deal_detection": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.0
   },
   "@aibast-agents-library/win_probability": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 2.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 2.33
   },
   "@aibast-agents-library/proposal_generation": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.0
   },
   "@aibast-agents-library/sales_qualification": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.0
   },
   "@aibast-agents-library/win_loss_analysis": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.5
   },
   "@aibast-agents-library/cart_abandonment_recovery": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 6,
-   "rt": 3.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 6,
+   "crt": 3.33
   },
   "@aibast-agents-library/customer_360_speech": {
    "d": 3,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.0
   },
   "@aibast-agents-library/customer_loyalty_rewards": {
    "d": 3,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 4.0
   },
   "@aibast-agents-library/omnichannel_engagement": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.67
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.67
   },
   "@aibast-agents-library/personalized_shopping_assistant": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.33
   },
   "@aibast-agents-library/returns_exchange": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.25
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.25
   },
   "@aibast-agents-library/asset_maintenance_forecast": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.0
   },
   "@aibast-agents-library/emission_tracking": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.5
   },
   "@aibast-agents-library/field_service_dispatch": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.5
   },
   "@aibast-agents-library/permit_license_management": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.0
   },
   "@aibast-agents-library/energy_regulatory_reporting": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.5
   },
   "@aibast-agents-library/acquisition_support": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.67
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.67
   },
   "@aibast-agents-library/federal_grants_oversight": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.5
   },
   "@aibast-agents-library/mission_reporting_assistant": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 5.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 5.0
   },
   "@aibast-agents-library/regulatory_compliance_fed": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.75
   },
   "@aibast-agents-library/workforce_clearance_onboarding": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 5,
-   "rt": 3.8
+   "r": 0,
+   "rt": 0.0,
+   "cr": 5,
+   "crt": 3.8
   },
   "@aibast-agents-library/claims_processing": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.0
   },
   "@aibast-agents-library/fs_customer_onboarding": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.0
   },
   "@aibast-agents-library/customer_sentiment_churn": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 3.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 3.0
   },
   "@aibast-agents-library/financial_advisor_copilot": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.75
   },
   "@aibast-agents-library/fraud_detection_alert": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 6,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 6,
+   "crt": 4.0
   },
   "@aibast-agents-library/loan_origination_assistant": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.33
   },
   "@aibast-agents-library/portfolio_rebalancing": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 5,
-   "rt": 3.6
+   "r": 0,
+   "rt": 0.0,
+   "cr": 5,
+   "crt": 3.6
   },
   "@aibast-agents-library/fs_regulatory_compliance": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.75
   },
   "@aibast-agents-library/underwriting_support": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.5
   },
   "@aibast-agents-library/wealth_insights_generator": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.67
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.67
   },
   "@aibast-agents-library/ai_customer_assistant": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.0
   },
   "@aibast-agents-library/general_ask_hr": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.75
   },
   "@aibast-agents-library/dynamics_365_connector": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 4.0
   },
   "@aibast-agents-library/one_click_crm_intake": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 5.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 5.0
   },
   "@aibast-agents-library/cross_selling": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 5,
-   "rt": 3.8
+   "r": 0,
+   "rt": 0.0,
+   "cr": 5,
+   "crt": 3.8
   },
   "@aibast-agents-library/customer_360": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.33
   },
   "@aibast-agents-library/email_drafting": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.33
   },
   "@aibast-agents-library/find_accurate_models": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.25
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.25
   },
   "@aibast-agents-library/identify_discounts": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.33
   },
   "@aibast-agents-library/it_ticket_management": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 2.25
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 2.25
   },
   "@aibast-agents-library/procurement_agent": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.5
   },
   "@aibast-agents-library/procurement_support": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.0
   },
   "@aibast-agents-library/product_reference": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.33
   },
   "@aibast-agents-library/sales_coach": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 4.0
   },
   "@aibast-agents-library/sales_simulation": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.25
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.25
   },
   "@aibast-agents-library/speech_to_crm": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.0
   },
   "@aibast-agents-library/triage_bot": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 2.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 2.5
   },
   "@aibast-agents-library/voice_to_crm_d365": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.75
   },
   "@aibast-agents-library/voice_to_crm_email": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 5,
-   "rt": 4.2
+   "r": 0,
+   "rt": 0.0,
+   "cr": 5,
+   "crt": 4.2
   },
   "@aibast-agents-library/sharepoint_document_extractor": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.0
   },
   "@aibast-agents-library/voice_to_crm_servicenow": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.25
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.25
   },
   "@aibast-agents-library/care_gap_closure": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.0
   },
   "@aibast-agents-library/clinical_notes_summarizer": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.0
   },
   "@aibast-agents-library/patient_intake": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.0
   },
   "@aibast-agents-library/prior_authorization": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 4.0
   },
   "@aibast-agents-library/staff_credentialing": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.5
   },
   "@aibast-agents-library/ask_hr": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.67
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.67
   },
   "@aibast-agents-library/it_helpdesk": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.5
   },
   "@aibast-agents-library/inventory_rebalancing": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.67
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.67
   },
   "@aibast-agents-library/maintenance_scheduling": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.0
   },
   "@aibast-agents-library/order_status_communication": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.5
   },
   "@aibast-agents-library/production_line_optimization": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.25
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.25
   },
   "@aibast-agents-library/supplier_risk_monitoring": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.5
   },
   "@aibast-agents-library/client_health_score": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.67
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.67
   },
   "@aibast-agents-library/contract_risk_review": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 3.67
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 3.67
   },
   "@aibast-agents-library/proposal_copilot": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.0
   },
   "@aibast-agents-library/resource_utilization": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.0
   },
   "@aibast-agents-library/time_entry_billing": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 5,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 5,
+   "crt": 4.0
   },
   "@aibast-agents-library/inventory_visibility": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.25
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.25
   },
   "@aibast-agents-library/personalized_marketing": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 5.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 5.0
   },
   "@aibast-agents-library/returns_complaints_resolution": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.33
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.33
   },
   "@aibast-agents-library/supply_chain_disruption_alert": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.75
   },
   "@aibast-agents-library/building_permit_processing": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 5,
-   "rt": 3.6
+   "r": 0,
+   "rt": 0.0,
+   "cr": 5,
+   "crt": 3.6
   },
   "@aibast-agents-library/citizen_service_request": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.25
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.25
   },
   "@aibast-agents-library/foia_request_assistant": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.75
   },
   "@aibast-agents-library/slg_grants_management": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 3,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 3,
+   "crt": 4.0
   },
   "@aibast-agents-library/utility_billing_assistance": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 4.0
   },
   "@aibast-agents-library/software_competitive_intel": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 1,
-   "rt": 4.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 1,
+   "crt": 4.0
   },
   "@aibast-agents-library/software_customer_onboarding": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 4,
-   "rt": 3.75
+   "r": 0,
+   "rt": 0.0,
+   "cr": 4,
+   "crt": 3.75
   },
   "@aibast-agents-library/license_renewal_expansion": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.5
   },
   "@aibast-agents-library/product_feedback_synthesizer": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 4.5
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 4.5
   },
   "@aibast-agents-library/support_ticket_resolution": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 3.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 3.0
   },
   "@kody-w/power_apps_code_app_agent": {
    "d": 0,
@@ -2510,15 +2347,19 @@
    "n": 0,
    "s": 1,
    "r": 0,
-   "rt": 0.0
+   "rt": 0.0,
+   "cr": 0,
+   "crt": 0.0
   },
   "@rapp/basic_agent": {
    "d": 0,
    "u": 0,
    "n": 0,
    "s": 0,
-   "r": 2,
-   "rt": 2.0
+   "r": 0,
+   "rt": 0.0,
+   "cr": 2,
+   "crt": 2.0
   },
   "@rapp/learn_new": {
    "d": 8,
@@ -2526,7 +2367,9 @@
    "n": 0,
    "s": 0,
    "r": 0,
-   "rt": 0.0
+   "rt": 0.0,
+   "cr": 0,
+   "crt": 0.0
   }
  },
  "sources": [
@@ -2551,13 +2394,18 @@
    "url": "https://kody-w.github.io/RAR/registry.json"
   },
   {
+   "name": "state/reviews.json",
+   "metric": "user reviews and ratings",
+   "url": "https://kody-w.github.io/RAR/state/reviews.json"
+  },
+  {
    "name": "state/votes.json",
    "metric": "up/down votes",
    "url": "https://kody-w.github.io/RAR/state/votes.json"
   },
   {
    "name": "state/curator_reviews.json",
-   "metric": "reviews and ratings",
+   "metric": "engine-generated curator notes (not counted as reviews)",
    "url": "https://kody-w.github.io/RAR/state/curator_reviews.json"
   }
  ]

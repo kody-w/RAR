@@ -60,6 +60,87 @@
    "uniques": 26
   }
  },
+ "last_known": {
+  "at": "2026-07-28T17:48:17Z",
+  "clone_uniques_14d": 387,
+  "clones_14d": 2743,
+  "paths": [
+   {
+    "count": 15,
+    "path": "/kody-w/RAR",
+    "title": "Overview",
+    "uniques": 6
+   },
+   {
+    "count": 4,
+    "path": "/kody-w/RAR/agents",
+    "title": "/agents",
+    "uniques": 1
+   },
+   {
+    "count": 3,
+    "path": "/kody-w/RAR/discussions/228",
+    "title": "/discussions/228",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/blob/main/agents/@howardh/tuftelove_agent.py",
+    "title": "/blob/main/agents/@howardh/tuftelove_agent.py",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/discussions/378",
+    "title": "/discussions/378",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/pulls",
+    "title": "/pulls",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/tree/main/agents",
+    "title": "/tree/main/agents",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/forks",
+    "title": "/forks",
+    "uniques": 1
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/issues/174",
+    "title": "/issues/174",
+    "uniques": 1
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
+    "title": "/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
+    "uniques": 1
+   }
+  ],
+  "referrers": [
+   {
+    "count": 57,
+    "referrer": "github.com",
+    "uniques": 15
+   },
+   {
+    "count": 2,
+    "referrer": "Bing",
+    "uniques": 1
+   }
+  ],
+  "view_uniques_14d": 20,
+  "views_14d": 75
+ },
  "snapshots": [
   {
    "at": "2026-07-28T17:22:35Z",
@@ -123,6 +204,16 @@
   },
   {
    "at": "2026-07-28T17:43:10Z",
+   "cdn_all_time": 65,
+   "clone_uniques_all_time": 581,
+   "clones_all_time": 2743,
+   "days_tracked": 14,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 27,
+   "views_all_time": 75
+  },
+  {
+   "at": "2026-07-28T17:48:17Z",
    "cdn_all_time": 65,
    "clone_uniques_all_time": 581,
    "clones_all_time": 2743,
