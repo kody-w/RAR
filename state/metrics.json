@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-07-28T18:26:05Z",
+ "generated_at": "2026-07-28T18:30:02Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 84,
-  "size_kb": 27638,
+  "size_kb": 28324,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-07-28T17:48:19Z",
+  "pushed_at": "2026-07-28T18:29:41Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -161,81 +161,81 @@
  "traffic": {
   "paths": [
    {
+    "count": 15,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 15,
     "uniques": 6
    },
    {
+    "count": 4,
     "path": "/kody-w/RAR/agents",
     "title": "/agents",
-    "count": 4,
     "uniques": 1
    },
    {
+    "count": 3,
     "path": "/kody-w/RAR/discussions/228",
     "title": "/discussions/228",
-    "count": 3,
     "uniques": 2
    },
    {
+    "count": 2,
     "path": "/kody-w/RAR/blob/main/agents/@howardh/tuftelove_agent.py",
     "title": "/blob/main/agents/@howardh/tuftelove_agent.py",
-    "count": 2,
     "uniques": 2
    },
    {
+    "count": 2,
     "path": "/kody-w/RAR/discussions/378",
     "title": "/discussions/378",
-    "count": 2,
     "uniques": 2
    },
    {
+    "count": 2,
     "path": "/kody-w/RAR/pulls",
     "title": "/pulls",
-    "count": 2,
     "uniques": 2
    },
    {
+    "count": 2,
     "path": "/kody-w/RAR/tree/main/agents",
     "title": "/tree/main/agents",
-    "count": 2,
     "uniques": 2
    },
    {
+    "count": 2,
     "path": "/kody-w/RAR/forks",
     "title": "/forks",
-    "count": 2,
     "uniques": 1
    },
    {
+    "count": 2,
     "path": "/kody-w/RAR/issues/174",
     "title": "/issues/174",
-    "count": 2,
     "uniques": 1
    },
    {
+    "count": 2,
     "path": "/kody-w/RAR/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
     "title": "/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
-    "count": 2,
     "uniques": 1
    }
   ],
   "referrers": [
    {
-    "referrer": "github.com",
     "count": 57,
+    "referrer": "github.com",
     "uniques": 15
    },
    {
-    "referrer": "Bing",
     "count": 2,
+    "referrer": "Bing",
     "uniques": 1
    }
   ],
   "clones_14d": 2743,
   "views_14d": 75,
-  "live": true,
+  "live": false,
   "as_of": "2026-07-28T18:26:05Z"
  },
  "cdn": {
