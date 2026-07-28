@@ -189,7 +189,7 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
   <div class="section">
     <div class="section-head">
       <h2>Agent leaderboards</h2>
-      <div class="hint">ranked across 181 single-file agents</div>
+      <div class="hint" id="board-hint">ranked across all registry agents</div>
     </div>
     <div class="tabs" id="tabs"></div>
     <div class="card"><div id="board"></div></div>
@@ -253,6 +253,12 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
         14-day traffic window, so <code>scripts/build_metrics.py</code> snapshots it daily into
         <code>state/metrics_history.json</code>, deduplicated by date — the all-time total grows from the first day of
         tracking and never double-counts.
+      </p>
+      <p class="note" style="margin-top:10px">
+        <b>On unique counts.</b> GitHub reports uniques per 14-day window, not per day, so daily unique figures cannot
+        be summed into a true all-time unique. The headline <b>unique cloners</b> figure is GitHub's own 14-day number;
+        the "daily-unique sum" beside it is an upper bound, since one machine cloning on three days counts three times.
+        Clone counts and CDN hits have no such caveat — they are plain event counts and do accumulate exactly.
       </p>
     </div>
   </div>
@@ -334,6 +340,7 @@ function render() {
     ? `tracking since ${t.tracking_since} (${t.days_tracked} days)`
     : 'tracking started';
   renderKPIs();
+  $('board-hint').textContent = `ranked across ${num(t.agents)} single-file agents`;
   renderChart();
   renderBoards();
   renderPublishers();
@@ -352,11 +359,11 @@ function renderKPIs() {
   const t = M.totals, r = M.repo || {};
   const cards = [
     { hero: true, label: 'Total downloads', value: num(t.downloads), sub: `${num(t.clones)} clones · ${num(t.cdn_hits)} CDN hits · ${num(t.release_downloads)} release assets` },
-    { label: 'Unique cloners', value: num(t.clone_uniques), sub: 'distinct machines' },
+    { label: 'Unique cloners', value: num(t.clone_uniques_14d), sub: `last 14 days · ${num(t.clone_uniques_daily_sum)} daily-unique sum since ${t.tracking_since || '—'}` },
     { label: 'Agents', value: num(t.agents), sub: `${num(t.publishers)} publishers · ${num(t.categories)} categories` },
     { label: 'Reviews', value: num(t.reviews), sub: `${num(t.agents_reviewed)} agents · ★ ${t.avg_rating} avg` },
     { label: 'Votes', value: num(t.votes), sub: `${num(t.upvotes)} up · ${num(t.downvotes)} down` },
-    { label: 'Page views', value: num(t.page_views), sub: `${num(t.view_uniques)} unique visitors` },
+    { label: 'Page views', value: num(t.page_views), sub: `${num(t.view_uniques_14d)} unique visitors (14d)` },
     { label: 'Stars', value: num(r.stars), sub: `${num(r.forks)} forks · ${num(r.open_issues)} open issues` },
     { label: 'Registry size', value: num(t.total_lines), sub: `lines of Python · ${num(t.swarms)} swarms` }
   ];

@@ -14,6 +14,12 @@ GitHub's traffic API only returns a 14-day rolling window, so daily rows are
 merged into state/metrics_history.json keyed by date. That turns a rolling
 window into an accumulating all-time total.
 
+Counts vs uniques: clones, views, and CDN hits are plain event counts and
+accumulate exactly. Uniques do NOT — GitHub reports uniques per window, so
+summing daily uniques over-counts any machine active on more than one day.
+The snapshot therefore publishes both: *_uniques_14d (GitHub's own figure,
+authoritative) and *_uniques_daily_sum (an explicit upper bound).
+
 Usage:
     python scripts/build_metrics.py                 # snapshot everything
     python scripts/build_metrics.py --offline       # local files only, no network
@@ -441,11 +447,13 @@ def main():
         "totals": {
             "downloads": total_downloads,
             "clones": hist_totals["clones_all_time"],
-            "clone_uniques": hist_totals["clone_uniques_all_time"],
             "cdn_hits": hist_totals["cdn_all_time"],
             "release_downloads": releases.get("total_downloads", 0) if releases else 0,
             "page_views": hist_totals["views_all_time"],
-            "view_uniques": hist_totals["view_uniques_all_time"],
+            "clone_uniques_14d": traffic.get("clones", {}).get("uniques_14d", 0),
+            "view_uniques_14d": traffic.get("views", {}).get("uniques_14d", 0),
+            "clone_uniques_daily_sum": hist_totals["clone_uniques_all_time"],
+            "view_uniques_daily_sum": hist_totals["view_uniques_all_time"],
             "days_tracked": hist_totals["days_tracked"],
             "tracking_since": hist_totals["first_day"],
             "agents": registry.get("stats", {}).get("total_agents", len(agents)),
