@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-07-28T18:57:13Z",
+ "generated_at": "2026-07-28T19:07:50Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -12,7 +12,7 @@
   "open_issues": 84,
   "size_kb": 28324,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-07-28T18:55:35Z",
+  "pushed_at": "2026-07-28T18:57:17Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -21,6 +21,9 @@
   "clones": 2743,
   "cdn_hits": 65,
   "release_downloads": 0,
+  "agent_file_downloads": 14,
+  "clones_excluding_ci_estimate": 951,
+  "ci_clone_estimate": 1792,
   "page_views": 75,
   "clone_uniques_14d": 387,
   "view_uniques_14d": 20,
@@ -46,10 +49,10 @@
   "curator_reviews": 299,
   "curator_agents_reviewed": 101,
   "curator_avg_rating": 3.77,
-  "critic_score": 77,
+  "critic_score": 68,
   "user_score": 67,
-  "critic_reviews": 84,
-  "agents_scored": 18,
+  "critic_reviews": 41,
+  "agents_scored": 14,
   "agents_voted": 4
  },
  "daily": [
@@ -237,7 +240,7 @@
   "clones_14d": 2743,
   "views_14d": 75,
   "live": true,
-  "as_of": "2026-07-28T18:57:13Z"
+  "as_of": "2026-07-28T19:07:50Z"
  },
  "cdn": {
   "total_hits": 65,
@@ -343,121 +346,42 @@
     "id": "sentinel",
     "name": "Security Sentinel",
     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing"
+   },
+   {
+    "id": "pragmatist",
+    "name": "The Pragmatist",
+    "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product"
+   },
+   {
+    "id": "docs",
+    "name": "Docs Desk",
+    "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone"
+   },
+   {
+    "id": "maintainer",
+    "name": "The Maintainer",
+    "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-07-28T18:55:05Z",
-  "agents_scored": 18,
-  "critic_reviews": 84,
-  "avg_critic_score": 77,
+  "generated_at": "2026-07-28T19:04:09Z",
+  "agents_scored": 14,
+  "critic_reviews": 41,
+  "avg_critic_score": 68,
   "avg_user_score": 67,
   "by_state": {
-   "fresh": 14,
-   "rotten": 4
+   "unrated": 5,
+   "fresh": 9,
+   "rotten": 5
   },
   "backends": {
-   "rubric": 15,
+   "rubric": 16,
    "github-models:openai/gpt-4.1": 7,
    "github-models:openai/gpt-4.1-mini": 14
-  }
+  },
+  "rubric_only_agents": 5
  },
  "leaderboards": {
   "top_critic": [
-   {
-    "name": "@aibast-agents-library/account_intelligence_orchestrator_agent",
-    "display_name": "Account Intelligence Orchestrator",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 457,
-    "size_kb": 20.8,
-    "added_at": "2026-04-06T16:39:03-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_orchestrator_agent.py",
-    "description": "Simulates a multi-agent pipeline for account intelligence briefings, with stage sequencing and status reports over built-in demo data.",
-    "curator_reviews": 0,
-    "curator_rating": 0.0,
-    "critic_score": 100,
-    "critic_count": 5,
-    "user_score": null,
-    "tomato": "fresh"
-   },
-   {
-    "name": "@aibast-agents-library/action_prioritization",
-    "display_name": "Action Prioritization",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 398,
-    "size_kb": 19.7,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/action_prioritization_agent.py",
-    "description": "Prioritizes sales actions and builds daily plans, weekly reviews, and resource allocations from built-in demo deal data.",
-    "curator_reviews": 2,
-    "curator_rating": 3.0,
-    "critic_score": 100,
-    "critic_count": 5,
-    "user_score": null,
-    "tomato": "fresh"
-   },
-   {
-    "name": "@aibast-agents-library/activity_gap",
-    "display_name": "Activity Gap Analyzer",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 516,
-    "size_kb": 23.2,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py",
-    "description": "Flags missing sales activities per stage using live opportunities from a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
-    "curator_reviews": 2,
-    "curator_rating": 4.0,
-    "critic_score": 100,
-    "critic_count": 5,
-    "user_score": null,
-    "tomato": "fresh"
-   },
-   {
-    "name": "@aibast-agents-library/competitive_intelligence",
-    "display_name": "Competitive Intelligence",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 441,
-    "size_kb": 21.3,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/competitive_intelligence_agent.py",
-    "description": "Builds competitive landscape analyses, win/loss reviews, and battlecards for enterprise deals from built-in demo data.",
-    "curator_reviews": 1,
-    "curator_rating": 4.0,
-    "critic_score": 100,
-    "critic_count": 5,
-    "user_score": null,
-    "tomato": "fresh"
-   },
    {
     "name": "@aibast-agents-library/deal_competitor_intel",
     "display_name": "Deal Competitor Intelligence",
@@ -483,6 +407,30 @@
     "tomato": "fresh"
    },
    {
+    "name": "@aibast-agents-library/activity_gap",
+    "display_name": "Activity Gap Analyzer",
+    "publisher": "@aibast-agents-library",
+    "category": "b2b_sales",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 516,
+    "size_kb": 23.2,
+    "added_at": "2026-04-03T16:15:52-04:00",
+    "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py",
+    "description": "Flags missing sales activities per stage using live opportunities from a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
+    "curator_reviews": 2,
+    "curator_rating": 4.0,
+    "critic_score": 100,
+    "critic_count": 4,
+    "user_score": null,
+    "tomato": "fresh"
+   },
+   {
     "name": "@aibast-agents-library/deal_health_score",
     "display_name": "Deal Health Score",
     "publisher": "@aibast-agents-library",
@@ -502,7 +450,7 @@
     "curator_reviews": 3,
     "curator_rating": 3.33,
     "critic_score": 100,
-    "critic_count": 5,
+    "critic_count": 2,
     "user_score": null,
     "tomato": "fresh"
    },
@@ -526,7 +474,7 @@
     "curator_reviews": 2,
     "curator_rating": 4.0,
     "critic_score": 100,
-    "critic_count": 5,
+    "critic_count": 2,
     "user_score": null,
     "tomato": "fresh"
    },
@@ -550,7 +498,7 @@
     "curator_reviews": 4,
     "curator_rating": 2.75,
     "critic_score": 100,
-    "critic_count": 5,
+    "critic_count": 2,
     "user_score": null,
     "tomato": "fresh"
    },
@@ -574,7 +522,7 @@
     "curator_reviews": 4,
     "curator_rating": 3.75,
     "critic_score": 100,
-    "critic_count": 5,
+    "critic_count": 2,
     "user_score": null,
     "tomato": "fresh"
    },
@@ -598,32 +546,8 @@
     "curator_reviews": 6,
     "curator_rating": 4.0,
     "critic_score": 100,
-    "critic_count": 5,
-    "user_score": null,
-    "tomato": "fresh"
-   },
-   {
-    "name": "@aibast-agents-library/account_risk_assessment",
-    "display_name": "Account Risk Assessment",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 1,
-    "score": -1,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 674,
-    "size_kb": 32.2,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
-    "description": "Scores deal risk, churn probability, and financial health with mitigation advice \u2014 on built-in demo accounts, or on real figures you supply via account_data.",
-    "curator_reviews": 3,
-    "curator_rating": 3.67,
-    "critic_score": 100,
     "critic_count": 2,
-    "user_score": 0,
+    "user_score": null,
     "tomato": "fresh"
    },
    {
@@ -651,27 +575,27 @@
     "tomato": "fresh"
    },
    {
-    "name": "@aibast-agents-library/account_intelligence",
-    "display_name": "Account Intelligence",
+    "name": "@aibast-agents-library/account_risk_assessment",
+    "display_name": "Account Risk Assessment",
     "publisher": "@aibast-agents-library",
     "category": "b2b_sales",
     "tier": "community",
     "downloads": 0,
-    "up": 2,
-    "down": 0,
-    "score": 2,
+    "up": 0,
+    "down": 1,
+    "score": -1,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 644,
-    "size_kb": 31.2,
+    "lines": 674,
+    "size_kb": 32.2,
     "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py",
-    "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
-    "curator_reviews": 2,
-    "curator_rating": 3.5,
-    "critic_score": 80,
-    "critic_count": 5,
-    "user_score": 100,
+    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
+    "description": "Scores deal risk, churn probability, and financial health with mitigation advice \u2014 on built-in demo accounts, or on real figures you supply via account_data.",
+    "curator_reviews": 3,
+    "curator_rating": 3.67,
+    "critic_score": 100,
+    "critic_count": 1,
+    "user_score": 0,
     "tomato": "fresh"
    },
    {
@@ -693,10 +617,82 @@
     "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
     "curator_reviews": 2,
     "curator_rating": 2.5,
-    "critic_score": 60,
-    "critic_count": 5,
+    "critic_score": 50,
+    "critic_count": 4,
     "user_score": 100,
-    "tomato": "fresh"
+    "tomato": "rotten"
+   },
+   {
+    "name": "@aibast-agents-library/meeting_prep",
+    "display_name": "Meeting Prep",
+    "publisher": "@aibast-agents-library",
+    "category": "b2b_sales",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 521,
+    "size_kb": 25.2,
+    "added_at": "2026-04-03T16:15:52-04:00",
+    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py",
+    "description": "Generates pre-meeting briefs, talking points, objection prep, and follow-up templates from built-in demo account data.",
+    "curator_reviews": 2,
+    "curator_rating": 3.0,
+    "critic_score": 0,
+    "critic_count": 5,
+    "user_score": null,
+    "tomato": "rotten"
+   },
+   {
+    "name": "@aibast-agents-library/account_messaging",
+    "display_name": "Account Messaging",
+    "publisher": "@aibast-agents-library",
+    "category": "b2b_sales",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 429,
+    "size_kb": 20.3,
+    "added_at": "2026-04-03T16:15:52-04:00",
+    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py",
+    "description": "Drafts personalized outreach, follow-up emails, and campaign sequences for enterprise accounts using built-in demo data.",
+    "curator_reviews": 2,
+    "curator_rating": 3.5,
+    "critic_score": 0,
+    "critic_count": 4,
+    "user_score": null,
+    "tomato": "rotten"
+   },
+   {
+    "name": "@aibast-agents-library/stakeholder_intelligence",
+    "display_name": "Stakeholder Intelligence",
+    "publisher": "@aibast-agents-library",
+    "category": "b2b_sales",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 440,
+    "size_kb": 23.4,
+    "added_at": "2026-04-03T16:15:52-04:00",
+    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py",
+    "description": "Maps org charts, buying committees, engagement gaps, and relationship strength for accounts using built-in demo data.",
+    "curator_reviews": 1,
+    "curator_rating": 5.0,
+    "critic_score": 0,
+    "critic_count": 4,
+    "user_score": null,
+    "tomato": "rotten"
    },
    {
     "name": "@aibast-agents-library/deal_progression",
@@ -717,8 +713,8 @@
     "description": "Analyzes pipeline health and stalled deals from live opportunities in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
     "curator_reviews": 3,
     "curator_rating": 2.33,
-    "critic_score": 20,
-    "critic_count": 5,
+    "critic_score": 0,
+    "critic_count": 2,
     "user_score": null,
     "tomato": "rotten"
    }
@@ -743,10 +739,10 @@
     "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "curator_reviews": 2,
     "curator_rating": 3.5,
-    "critic_score": 80,
-    "critic_count": 5,
+    "critic_score": null,
+    "critic_count": 0,
     "user_score": 100,
-    "tomato": "fresh"
+    "tomato": "unrated"
    },
    {
     "name": "@aibast-agents-library/deal_tracking",
@@ -767,10 +763,10 @@
     "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
     "curator_reviews": 2,
     "curator_rating": 2.5,
-    "critic_score": 60,
-    "critic_count": 5,
+    "critic_score": 50,
+    "critic_count": 4,
     "user_score": 100,
-    "tomato": "fresh"
+    "tomato": "rotten"
    },
    {
     "name": "@aibast-agents-library/account_risk_assessment",
@@ -792,7 +788,7 @@
     "curator_reviews": 3,
     "curator_rating": 3.67,
     "critic_score": 100,
-    "critic_count": 2,
+    "critic_count": 1,
     "user_score": 0,
     "tomato": "fresh"
    }
@@ -818,7 +814,7 @@
     "curator_reviews": 3,
     "curator_rating": 3.67,
     "critic_score": 100,
-    "critic_count": 2,
+    "critic_count": 1,
     "user_score": 0,
     "tomato": "fresh",
     "_gap": 100
@@ -842,36 +838,11 @@
     "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
     "curator_reviews": 2,
     "curator_rating": 2.5,
-    "critic_score": 60,
-    "critic_count": 5,
+    "critic_score": 50,
+    "critic_count": 4,
     "user_score": 100,
-    "tomato": "fresh",
-    "_gap": -40
-   },
-   {
-    "name": "@aibast-agents-library/account_intelligence",
-    "display_name": "Account Intelligence",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 2,
-    "down": 0,
-    "score": 2,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 644,
-    "size_kb": 31.2,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py",
-    "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
-    "curator_reviews": 2,
-    "curator_rating": 3.5,
-    "critic_score": 80,
-    "critic_count": 5,
-    "user_score": 100,
-    "tomato": "fresh",
-    "_gap": -20
+    "tomato": "rotten",
+    "_gap": -50
    }
   ],
   "most_downloaded": [
@@ -968,10 +939,10 @@
     "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "curator_reviews": 2,
     "curator_rating": 3.5,
-    "critic_score": 80,
-    "critic_count": 5,
+    "critic_score": null,
+    "critic_count": 0,
     "user_score": 100,
-    "tomato": "fresh"
+    "tomato": "unrated"
    },
    {
     "name": "@aibast-agents-library/deal_tracking",
@@ -992,10 +963,10 @@
     "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
     "curator_reviews": 2,
     "curator_rating": 2.5,
-    "critic_score": 60,
-    "critic_count": 5,
+    "critic_score": 50,
+    "critic_count": 4,
     "user_score": 100,
-    "tomato": "fresh"
+    "tomato": "rotten"
    },
    {
     "name": "@kody-w/power_apps_code_app_agent",
@@ -1041,7 +1012,7 @@
     "curator_reviews": 3,
     "curator_rating": 3.67,
     "critic_score": 100,
-    "critic_count": 2,
+    "critic_count": 1,
     "user_score": 0,
     "tomato": "fresh"
    }
@@ -2051,24 +2022,10 @@
    "rt": 0.0,
    "cr": 2,
    "crt": 3.5,
-   "cs": 80,
-   "cn": 5,
+   "cs": null,
+   "cn": 0,
    "us": 100,
-   "t": "fresh"
-  },
-  "@aibast-agents-library/account_intelligence_orchestrator_agent": {
-   "d": 0,
-   "u": 0,
-   "n": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0,
-   "cr": 0,
-   "crt": 0.0,
-   "cs": 100,
-   "cn": 5,
-   "us": null,
-   "t": "fresh"
+   "t": "unrated"
   },
   "@aibast-agents-library/action_prioritization": {
    "d": 0,
@@ -2079,10 +2036,10 @@
    "rt": 0.0,
    "cr": 2,
    "crt": 3.0,
-   "cs": 100,
-   "cn": 5,
+   "cs": null,
+   "cn": 0,
    "us": null,
-   "t": "fresh"
+   "t": "unrated"
   },
   "@aibast-agents-library/competitive_intelligence": {
    "d": 0,
@@ -2093,10 +2050,10 @@
    "rt": 0.0,
    "cr": 1,
    "crt": 4.0,
-   "cs": 100,
-   "cn": 5,
+   "cs": null,
+   "cn": 0,
    "us": null,
-   "t": "fresh"
+   "t": "unrated"
   },
   "@aibast-agents-library/deal_tracking": {
    "d": 0,
@@ -2107,10 +2064,10 @@
    "rt": 0.0,
    "cr": 2,
    "crt": 2.5,
-   "cs": 60,
-   "cn": 5,
+   "cs": 50,
+   "cn": 4,
    "us": 100,
-   "t": "fresh"
+   "t": "rotten"
   },
   "@aibast-agents-library/meeting_prep": {
    "d": 0,
@@ -2136,7 +2093,7 @@
    "cr": 2,
    "crt": 3.5,
    "cs": 0,
-   "cn": 5,
+   "cn": 4,
    "us": null,
    "t": "rotten"
   },
@@ -2150,7 +2107,7 @@
    "cr": 3,
    "crt": 3.67,
    "cs": 100,
-   "cn": 2,
+   "cn": 1,
    "us": 0,
    "t": "fresh"
   },
@@ -2163,8 +2120,8 @@
    "rt": 0.0,
    "cr": 1,
    "crt": 5.0,
-   "cs": 20,
-   "cn": 5,
+   "cs": 0,
+   "cn": 4,
    "us": null,
    "t": "rotten"
   },
@@ -2178,7 +2135,7 @@
    "cr": 2,
    "crt": 4.0,
    "cs": 100,
-   "cn": 5,
+   "cn": 4,
    "us": null,
    "t": "fresh"
   },
@@ -2206,7 +2163,7 @@
    "cr": 3,
    "crt": 3.33,
    "cs": 100,
-   "cn": 5,
+   "cn": 2,
    "us": null,
    "t": "fresh"
   },
@@ -2219,8 +2176,8 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 2.33,
-   "cs": 20,
-   "cn": 5,
+   "cs": 0,
+   "cn": 2,
    "us": null,
    "t": "rotten"
   },
@@ -2234,7 +2191,7 @@
    "cr": 2,
    "crt": 4.0,
    "cs": 100,
-   "cn": 5,
+   "cn": 2,
    "us": null,
    "t": "fresh"
   },
@@ -2248,7 +2205,7 @@
    "cr": 4,
    "crt": 2.75,
    "cs": 100,
-   "cn": 5,
+   "cn": 2,
    "us": null,
    "t": "fresh"
   },
@@ -2262,7 +2219,7 @@
    "cr": 4,
    "crt": 3.75,
    "cs": 100,
-   "cn": 5,
+   "cn": 2,
    "us": null,
    "t": "fresh"
   },
@@ -2276,7 +2233,7 @@
    "cr": 6,
    "crt": 4.0,
    "cs": 100,
-   "cn": 5,
+   "cn": 2,
    "us": null,
    "t": "fresh"
   },

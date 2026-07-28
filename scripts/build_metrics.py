@@ -206,6 +206,8 @@ def apply_critic(agents, critic_doc):
         if rec.get("critic_score") is not None:
             totals["scored"] += 1
             totals["critic_sum"] += rec["critic_score"]
+        else:
+            totals["rubric_only"] = totals.get("rubric_only", 0) + 1
         if rec.get("user_score") is not None:
             totals["rated_users"] += 1
             totals["user_sum"] += rec["user_score"]
@@ -221,6 +223,7 @@ def apply_critic(agents, critic_doc):
         "avg_user_score": round(totals["user_sum"] / totals["rated_users"]) if totals["rated_users"] else None,
         "by_state": dict(totals["by_state"]),
         "backends": dict(totals["backends"]),
+        "rubric_only_agents": totals.get("rubric_only", 0),
     }
 
 
@@ -573,9 +576,19 @@ def main():
     hist_totals, daily, last_known = merge_history(traffic, jsd)
     traffic_live = bool(traffic.get("clones"))
 
-    total_downloads = (hist_totals["clones_all_time"]
-                       + hist_totals["cdn_all_time"]
-                       + (releases.get("total_downloads", 0) if releases else 0))
+    release_dl = releases.get("total_downloads", 0) if releases else 0
+    agent_hits = jsd.get("agent_hits", 0)
+
+    # GitHub counts every actions/checkout as a clone, and this repo runs a dozen
+    # scheduled and push-triggered workflows. The lowest daily clone count over the
+    # tracked window is a floor on that self-generated baseline; subtracting it
+    # gives a defensible estimate of clones that were not our own CI.
+    daily_clones = sorted(v["count"] for v in load_json(HISTORY, {}).get("clones", {}).values())
+    ci_floor = daily_clones[0] if daily_clones else 0
+    ci_estimate = ci_floor * len(daily_clones)
+    clones_excl_ci = max(0, hist_totals["clones_all_time"] - ci_estimate)
+
+    total_downloads = hist_totals["clones_all_time"] + hist_totals["cdn_all_time"] + release_dl
 
     doc = {
         "schema": "rar-metrics/1.0",
@@ -587,7 +600,10 @@ def main():
             "downloads": total_downloads,
             "clones": hist_totals["clones_all_time"],
             "cdn_hits": hist_totals["cdn_all_time"],
-            "release_downloads": releases.get("total_downloads", 0) if releases else 0,
+            "release_downloads": release_dl,
+            "agent_file_downloads": agent_hits,
+            "clones_excluding_ci_estimate": clones_excl_ci,
+            "ci_clone_estimate": ci_estimate,
             "page_views": hist_totals["views_all_time"],
             # `is None` not `or` — a genuine 0 from a live read must not be
             # overwritten by a stale non-zero figure.
@@ -635,7 +651,7 @@ def main():
             "as_of": now_iso() if traffic_live else last_known.get("at"),
         },
         "cdn": {"total_hits": jsd["total_hits"], "bandwidth": jsd["bandwidth"],
-                "rank": jsd.get("rank"), "agent_hits": jsd.get("agent_hits", 0),
+                "rank": jsd.get("rank"), "agent_hits": agent_hits,
                 "files": jsd["files"]},
         "releases": releases or {"total_downloads": 0, "count": 0, "releases": []},
         "reviews": {

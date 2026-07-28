@@ -840,7 +840,7 @@ function metricBadges(a) {
   if (cs !== null && cs !== undefined) {
     const st = TOMATO[state] || TOMATO.unrated;
     const n = cr ? cr.critic_count : (m ? m.cn : 0);
-    bits.push(`<a href="#reviews/${encodeURIComponent(a.name)}" onclick="event.stopPropagation();openReviews('${esc(a.name)}');return false" title="${st.label} — ${cs}% of ${n} AI critic reviews came back fresh" style="color:${st.color};text-decoration:none;font-weight:700">${st.mark} ${cs}%</a>`);
+    bits.push(`<a href="#reviews/${encodeURIComponent(a.name)}" onclick="event.stopPropagation();openReviews('${esc(a.name)}');return false" title="${st.label} — ${cs}% of ${n} model-written critic reviews came back fresh" style="color:${st.color};text-decoration:none;font-weight:700">${st.mark} ${cs}%</a>`);
     if (us !== null && us !== undefined) {
       bits.push(`<span title="User score — ${us}% positive human signal" style="color:var(--text-dim)">&#128100; ${us}%</span>`);
     }
@@ -1049,7 +1049,7 @@ function scoreSection(a) {
   return `<div class="section">
       <h3>Critic score vs user score</h3>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${meter('Critic score', cr.critic_score, st.color, `${st.mark} ${st.label} &middot; ${cr.critic_count} AI critic reviews`)}
+        ${meter('Critic score', cr.critic_score, st.color, `${st.mark} ${st.label} &middot; ${cr.critic_count || 0} model-written review${cr.critic_count === 1 ? '' : 's'}${cr.rubric_reviews ? ` &middot; ${cr.rubric_reviews} rubric (not scored)` : ''}`)}
         ${meter('User score', cr.user_score, 'var(--accent)', `${cr.user_signal || 0} piece${cr.user_signal === 1 ? '' : 's'} of human signal`)}
       </div>
       <div style="font-size:.74rem;color:var(--text-muted);margin-top:8px">
@@ -1118,7 +1118,10 @@ function criticSection(a) {
   return `<div class="section" id="critic-section">
       <h3>Critic panel (${cr.reviews.length})</h3>
       <div style="font-size:.78rem;color:var(--text-muted);margin:-4px 0 10px">
-        Each critic reads the same file through a different lens. Fresh is 60/100 or better.
+        Each critic reads the same file through a different lens and cites the run transcript.
+        Fresh is 60/100 or better. Verdicts marked <code>rubric</code> came from a deterministic
+        heuristic because no model was reachable — they are shown for completeness but do not
+        count toward the critic score.
       </div>
       ${cr.reviews.map(r => `<div style="border:1px solid var(--border);border-left:3px solid ${r.fresh ? 'var(--green)' : '#f85149'};border-radius:8px;padding:12px 14px;margin-bottom:8px;background:var(--surface2)">
         <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap">

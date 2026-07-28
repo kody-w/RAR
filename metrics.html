@@ -267,6 +267,20 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
         tracking and never double-counts.
       </p>
       <p class="note" style="margin-top:10px">
+        <b>On downloads.</b> The headline figure adds repository clones, CDN file hits and release asset
+        downloads. Be aware that GitHub counts every <code>actions/checkout</code> as a clone, and this
+        repository runs a dozen scheduled and push-triggered workflows — so clones, the largest component,
+        are substantially self-generated. The estimated CI baseline is published as
+        <code>ci_clone_estimate</code> alongside <code>clones_excluding_ci_estimate</code> in the snapshot.
+        <b>Agent file fetches</b> is the narrowest and most trustworthy number on this page.
+      </p>
+      <p class="note" style="margin-top:10px">
+        <b>On critic scores.</b> Only reviews written by a model count toward a critic score. When no model
+        backend is reachable the panel falls back to a deterministic rubric — a line-count and regex
+        heuristic — and those verdicts are reported separately and never published as a critic score. An
+        agent no model has read shows as unrated rather than fresh.
+      </p>
+      <p class="note" style="margin-top:10px">
         <b>On reviews.</b> Only real user reviews from <code>state/reviews.json</code> — submitted through the
         GitHub issues API — are counted in the review total, the average rating, and the review leaderboards.
         The registry also carries engine-generated curator notes in <code>state/curator_reviews.json</code>;
@@ -382,8 +396,9 @@ function render() {
 function renderKPIs() {
   const t = M.totals, r = M.repo || {};
   const cards = [
-    { hero: true, label: 'Total downloads', value: num(t.downloads), sub: `${num(t.clones)} clones · ${num(t.cdn_hits)} CDN hits · ${num(t.release_downloads)} release assets` },
-    { label: 'Critic score', value: t.critic_score === null || t.critic_score === undefined ? '—' : t.critic_score + '%', sub: `${num((M.critic || {}).critic_reviews || 0)} AI critic reviews · ${num(t.agents_scored || 0)} agents scored` },
+    { hero: true, label: 'Total downloads', value: num(t.downloads), sub: `${num(t.clones)} repository clones (includes this repo's own CI) · ${num(t.cdn_hits)} CDN hits · ${num(t.release_downloads)} release assets` },
+    { label: 'Agent file fetches', value: num(t.agent_file_downloads), sub: 'individual agent files pulled from the CDN — the cleanest signal here' },
+    { label: 'Critic score', value: t.critic_score === null || t.critic_score === undefined ? '—' : t.critic_score + '%', sub: `${num((M.critic || {}).model_reviews || 0)} model-written reviews · ${num(t.agents_scored || 0)} agents scored${(M.critic || {}).rubric_only_agents ? ` · ${num(M.critic.rubric_only_agents)} unscored (rubric only)` : ''}` },
     { label: 'User score', value: t.user_score === null || t.user_score === undefined ? '—' : t.user_score + '%', sub: 'votes + user reviews' },
     { label: 'Unique cloners', value: num(t.clone_uniques_14d), sub: `last 14 days · ${num(t.clone_uniques_daily_sum)} daily-unique sum since ${t.tracking_since || '—'}` },
     { label: 'Agents', value: num(t.agents), sub: `${num(t.publishers)} publishers · ${num(t.categories)} categories` },
@@ -543,7 +558,7 @@ function renderTomato() {
       }).join('')}
     </div>
     <p class="note">
-      <b>Critic score</b> is the share of AI critic reviews that came back fresh (${th.fresh_at || 60}/100 or better).
+      <b>Critic score</b> is the share of model-written critic reviews that came back fresh (${th.fresh_at || 60}/100 or better).
       <b>User score</b> is the share of positive human signal — upvotes plus user reviews rated 3 or higher.
       An agent is <b>Certified Fresh</b> at ${th.certified_critic || 75}%+ critic with at least
       ${th.certified_min_reviews || 5} critic reviews, ${th.certified_user || 60}%+ user score and at least
