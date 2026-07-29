@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-07-28T19:17:56Z",
+ "generated_at": "2026-07-29T07:33:56Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 84,
-  "size_kb": 28324,
+  "size_kb": 16659,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-07-28T19:17:45Z",
+  "pushed_at": "2026-07-29T05:21:12Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -49,10 +49,10 @@
   "curator_reviews": 299,
   "curator_agents_reviewed": 101,
   "curator_avg_rating": 3.77,
-  "critic_score": 68,
+  "critic_score": 37,
   "user_score": 67,
-  "critic_reviews": 41,
-  "agents_scored": 14,
+  "critic_reviews": 91,
+  "agents_scored": 26,
   "agents_voted": 4
  },
  "daily": [
@@ -245,7 +245,7 @@
  "cdn": {
   "total_hits": 65,
   "bandwidth": 3037163,
-  "rank": 1854107,
+  "rank": 1857326,
   "agent_hits": 14,
   "files": [
    {
@@ -363,22 +363,22 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-07-28T19:04:09Z",
-  "agents_scored": 14,
-  "critic_reviews": 41,
-  "model_reviews": 41,
-  "rubric_reviews": 48,
-  "avg_critic_score": 68,
+  "generated_at": "2026-07-29T07:33:53Z",
+  "agents_scored": 26,
+  "critic_reviews": 91,
+  "model_reviews": 91,
+  "rubric_reviews": 58,
+  "avg_critic_score": 37,
   "avg_user_score": 67,
   "by_state": {
    "unrated": 5,
    "fresh": 9,
-   "rotten": 5
+   "rotten": 17
   },
   "backends": {
-   "rubric": 16,
-   "github-models:openai/gpt-4.1": 7,
-   "github-models:openai/gpt-4.1-mini": 14
+   "rubric": 22,
+   "github-models:openai/gpt-4.1": 18,
+   "github-models:openai/gpt-4.1-mini": 26
   },
   "rubric_only_agents": 5
  },
@@ -625,6 +625,54 @@
     "tomato": "rotten"
    },
    {
+    "name": "@aibast-agents-library/cart_abandonment_recovery",
+    "display_name": "Cart Abandonment Recovery Agent",
+    "publisher": "@aibast-agents-library",
+    "category": "b2c_sales",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 512,
+    "size_kb": 24.5,
+    "added_at": "2026-04-03T16:15:52-04:00",
+    "file": "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
+    "description": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback.",
+    "curator_reviews": 6,
+    "curator_rating": 3.33,
+    "critic_score": 0,
+    "critic_count": 5,
+    "user_score": null,
+    "tomato": "rotten"
+   },
+   {
+    "name": "@aibast-agents-library/customer_loyalty_rewards",
+    "display_name": "Customer Loyalty & Rewards Agent",
+    "publisher": "@aibast-agents-library",
+    "category": "b2c_sales",
+    "tier": "community",
+    "downloads": 3,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 585,
+    "size_kb": 27.8,
+    "added_at": "2026-04-03T16:15:52-04:00",
+    "file": "agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py",
+    "description": "Builds loyalty dashboards, tier analysis, and win-back offers from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "curator_reviews": 1,
+    "curator_rating": 4.0,
+    "critic_score": 0,
+    "critic_count": 5,
+    "user_score": null,
+    "tomato": "rotten"
+   },
+   {
     "name": "@aibast-agents-library/meeting_prep",
     "display_name": "Meeting Prep",
     "publisher": "@aibast-agents-library",
@@ -649,10 +697,10 @@
     "tomato": "rotten"
    },
    {
-    "name": "@aibast-agents-library/account_messaging",
-    "display_name": "Account Messaging",
+    "name": "@aibast-agents-library/omnichannel_engagement",
+    "display_name": "Omnichannel Engagement Agent",
     "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
+    "category": "b2c_sales",
     "tier": "community",
     "downloads": 0,
     "up": 0,
@@ -660,63 +708,39 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 429,
-    "size_kb": 20.3,
+    "lines": 515,
+    "size_kb": 25.7,
     "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py",
-    "description": "Drafts personalized outreach, follow-up emails, and campaign sequences for enterprise accounts using built-in demo data.",
-    "curator_reviews": 2,
-    "curator_rating": 3.5,
-    "critic_score": 0,
-    "critic_count": 4,
-    "user_score": null,
-    "tomato": "rotten"
-   },
-   {
-    "name": "@aibast-agents-library/stakeholder_intelligence",
-    "display_name": "Stakeholder Intelligence",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 440,
-    "size_kb": 23.4,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py",
-    "description": "Maps org charts, buying committees, engagement gaps, and relationship strength for accounts using built-in demo data.",
-    "curator_reviews": 1,
-    "curator_rating": 5.0,
-    "critic_score": 0,
-    "critic_count": 4,
-    "user_score": null,
-    "tomato": "rotten"
-   },
-   {
-    "name": "@aibast-agents-library/deal_progression",
-    "display_name": "Deal Progression",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 824,
-    "size_kb": 50.0,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py",
-    "description": "Analyzes pipeline health and stalled deals from live opportunities in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
+    "file": "agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
+    "description": "Analyzes channel mix, journeys, and campaign attribution from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "curator_reviews": 3,
-    "curator_rating": 2.33,
+    "curator_rating": 3.67,
     "critic_score": 0,
-    "critic_count": 2,
+    "critic_count": 5,
+    "user_score": null,
+    "tomato": "rotten"
+   },
+   {
+    "name": "@aibast-agents-library/proposal_generation",
+    "display_name": "Proposal Generation",
+    "publisher": "@aibast-agents-library",
+    "category": "b2b_sales",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 896,
+    "size_kb": 44.8,
+    "added_at": "2026-04-03T16:15:52-04:00",
+    "file": "agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py",
+    "description": "Analyzes RFPs and live quotes from a simulated Dynamics 365 tenant into proposal packages with pricing, plus an embedded offline demo fallback.",
+    "curator_reviews": 4,
+    "curator_rating": 4.0,
+    "critic_score": 0,
+    "critic_count": 5,
     "user_score": null,
     "tomato": "rotten"
    }
@@ -891,10 +915,10 @@
     "description": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
     "curator_reviews": 3,
     "curator_rating": 4.0,
-    "critic_score": null,
-    "critic_count": 0,
+    "critic_score": 0,
+    "critic_count": 4,
     "user_score": null,
-    "tomato": "unrated"
+    "tomato": "rotten"
    },
    {
     "name": "@aibast-agents-library/customer_loyalty_rewards",
@@ -915,10 +939,10 @@
     "description": "Builds loyalty dashboards, tier analysis, and win-back offers from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "curator_reviews": 1,
     "curator_rating": 4.0,
-    "critic_score": null,
-    "critic_count": 0,
+    "critic_score": 0,
+    "critic_count": 5,
     "user_score": null,
-    "tomato": "unrated"
+    "tomato": "rotten"
    }
   ],
   "most_upvoted": [
@@ -2262,10 +2286,10 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 4.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 5,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/win_probability": {
    "d": 0,
@@ -2276,10 +2300,10 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 2.33,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 5,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/proposal_generation": {
    "d": 0,
@@ -2290,10 +2314,10 @@
    "rt": 0.0,
    "cr": 4,
    "crt": 4.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 5,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/sales_qualification": {
    "d": 0,
@@ -2304,10 +2328,10 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 3.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 3,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/win_loss_analysis": {
    "d": 0,
@@ -2318,10 +2342,10 @@
    "rt": 0.0,
    "cr": 2,
    "crt": 4.5,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 3,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/cart_abandonment_recovery": {
    "d": 0,
@@ -2332,10 +2356,10 @@
    "rt": 0.0,
    "cr": 6,
    "crt": 3.33,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 5,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/customer_360_speech": {
    "d": 3,
@@ -2346,10 +2370,10 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 4.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 4,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/customer_loyalty_rewards": {
    "d": 3,
@@ -2360,10 +2384,10 @@
    "rt": 0.0,
    "cr": 1,
    "crt": 4.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 5,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/omnichannel_engagement": {
    "d": 0,
@@ -2374,10 +2398,10 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 3.67,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 5,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/personalized_shopping_assistant": {
    "d": 0,
@@ -2388,10 +2412,10 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 3.33,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 4,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/returns_exchange": {
    "d": 0,
@@ -2402,10 +2426,24 @@
    "rt": 0.0,
    "cr": 4,
    "crt": 4.25,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 2,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
+  },
+  "@aibast-agents-library/sales_chat": {
+   "d": 0,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 0,
+   "rt": 0.0,
+   "cr": 0,
+   "crt": 0.0,
+   "cs": 0,
+   "cn": 4,
+   "us": null,
+   "t": "rotten"
   },
   "@aibast-agents-library/asset_maintenance_forecast": {
    "d": 0,
