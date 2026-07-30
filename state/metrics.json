@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-07-29T08:01:13Z",
+ "generated_at": "2026-07-30T07:26:20Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,10 +9,10 @@
   "stars": 3,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 84,
-  "size_kb": 16659,
+  "open_issues": 85,
+  "size_kb": 22131,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-07-29T07:33:57Z",
+  "pushed_at": "2026-07-30T04:54:02Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -49,10 +49,10 @@
   "curator_reviews": 299,
   "curator_agents_reviewed": 101,
   "curator_avg_rating": 3.77,
-  "critic_score": 37,
+  "critic_score": 25,
   "user_score": 67,
-  "critic_reviews": 91,
-  "agents_scored": 26,
+  "critic_reviews": 134,
+  "agents_scored": 38,
   "agents_voted": 4
  },
  "daily": [
@@ -245,7 +245,7 @@
  "cdn": {
   "total_hits": 65,
   "bandwidth": 3037163,
-  "rank": 1857326,
+  "rank": 1860083,
   "agent_hits": 14,
   "files": [
    {
@@ -363,22 +363,22 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-07-29T07:33:53Z",
-  "agents_scored": 26,
-  "critic_reviews": 91,
-  "model_reviews": 91,
-  "rubric_reviews": 58,
-  "avg_critic_score": 37,
+  "generated_at": "2026-07-30T07:26:18Z",
+  "agents_scored": 38,
+  "critic_reviews": 134,
+  "model_reviews": 134,
+  "rubric_reviews": 75,
+  "avg_critic_score": 25,
   "avg_user_score": 67,
   "by_state": {
    "unrated": 5,
    "fresh": 9,
-   "rotten": 17
+   "rotten": 29
   },
   "backends": {
-   "rubric": 22,
-   "github-models:openai/gpt-4.1": 18,
-   "github-models:openai/gpt-4.1-mini": 26
+   "rubric": 32,
+   "github-models:openai/gpt-4.1": 27,
+   "github-models:openai/gpt-4.1-mini": 38
   },
   "rubric_only_agents": 5
  },
@@ -673,6 +673,30 @@
     "tomato": "rotten"
    },
    {
+    "name": "@aibast-agents-library/federal_grants_oversight",
+    "display_name": "Federal Grants Oversight Agent",
+    "publisher": "@aibast-agents-library",
+    "category": "federal_government",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 461,
+    "size_kb": 21.2,
+    "added_at": "2026-04-03T16:15:52-04:00",
+    "file": "agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py",
+    "description": "Monitors grant compliance events from a live simulated Dynamics 365 tenant, with dashboards and audit prep that work offline.",
+    "curator_reviews": 2,
+    "curator_rating": 4.5,
+    "critic_score": 0,
+    "critic_count": 5,
+    "user_score": null,
+    "tomato": "rotten"
+   },
+   {
     "name": "@aibast-agents-library/meeting_prep",
     "display_name": "Meeting Prep",
     "publisher": "@aibast-agents-library",
@@ -715,30 +739,6 @@
     "description": "Analyzes channel mix, journeys, and campaign attribution from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
     "curator_reviews": 3,
     "curator_rating": 3.67,
-    "critic_score": 0,
-    "critic_count": 5,
-    "user_score": null,
-    "tomato": "rotten"
-   },
-   {
-    "name": "@aibast-agents-library/proposal_generation",
-    "display_name": "Proposal Generation",
-    "publisher": "@aibast-agents-library",
-    "category": "b2b_sales",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 896,
-    "size_kb": 44.8,
-    "added_at": "2026-04-03T16:15:52-04:00",
-    "file": "agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py",
-    "description": "Analyzes RFPs and live quotes from a simulated Dynamics 365 tenant into proposal packages with pricing, plus an embedded offline demo fallback.",
-    "curator_reviews": 4,
-    "curator_rating": 4.0,
     "critic_score": 0,
     "critic_count": 5,
     "user_score": null,
@@ -2454,10 +2454,10 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 4.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 4,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/emission_tracking": {
    "d": 0,
@@ -2468,10 +2468,10 @@
    "rt": 0.0,
    "cr": 4,
    "crt": 4.5,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 2,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/field_service_dispatch": {
    "d": 0,
@@ -2482,10 +2482,10 @@
    "rt": 0.0,
    "cr": 4,
    "crt": 3.5,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 2,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/permit_license_management": {
    "d": 0,
@@ -2496,10 +2496,10 @@
    "rt": 0.0,
    "cr": 4,
    "crt": 4.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 2,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/energy_regulatory_reporting": {
    "d": 0,
@@ -2510,10 +2510,10 @@
    "rt": 0.0,
    "cr": 2,
    "crt": 4.5,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 4,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/acquisition_support": {
    "d": 0,
@@ -2524,10 +2524,10 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 4.67,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 4,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/federal_grants_oversight": {
    "d": 0,
@@ -2538,10 +2538,10 @@
    "rt": 0.0,
    "cr": 2,
    "crt": 4.5,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 5,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/mission_reporting_assistant": {
    "d": 0,
@@ -2552,10 +2552,10 @@
    "rt": 0.0,
    "cr": 2,
    "crt": 5.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 4,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/regulatory_compliance_fed": {
    "d": 0,
@@ -2566,10 +2566,10 @@
    "rt": 0.0,
    "cr": 4,
    "crt": 3.75,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 3,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/workforce_clearance_onboarding": {
    "d": 0,
@@ -2580,10 +2580,10 @@
    "rt": 0.0,
    "cr": 5,
    "crt": 3.8,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 5,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/claims_processing": {
    "d": 0,
@@ -2594,10 +2594,10 @@
    "rt": 0.0,
    "cr": 2,
    "crt": 4.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 4,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/fs_customer_onboarding": {
    "d": 0,
@@ -2608,10 +2608,10 @@
    "rt": 0.0,
    "cr": 3,
    "crt": 4.0,
-   "cs": null,
-   "cn": 0,
+   "cs": 0,
+   "cn": 4,
    "us": null,
-   "t": "unrated"
+   "t": "rotten"
   },
   "@aibast-agents-library/customer_sentiment_churn": {
    "d": 0,
