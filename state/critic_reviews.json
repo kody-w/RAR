@@ -1,6 +1,6 @@
 {
  "schema": "rar-critic/1.0",
- "generated_at": "2026-07-30T07:26:18Z",
+ "generated_at": "2026-07-31T07:32:50Z",
  "thresholds": {
   "fresh_at": 60,
   "certified_critic": 75,
@@ -39,12 +39,12 @@
   "agents_scored": 38,
   "critic_reviews": 134,
   "model_reviews": 134,
-  "rubric_reviews": 75,
+  "rubric_reviews": 135,
   "orphaned_records": 0,
   "avg_critic_score": 25,
   "avg_user_score": 67,
   "by_state": {
-   "unrated": 5,
+   "unrated": 17,
    "fresh": 9,
    "rotten": 29
   }
@@ -4471,6 +4471,990 @@
      "review": "The transcript shows the agent could not be run, indicating a failure to load or execute. Regardless of source clarity and fallback handling, inability to successfully instantiate or invoke perform() on real inputs is a critical defect. This caps the score at 30, as actual function is not demonstrated.",
      "backend": "github-models:openai/gpt-4.1",
      "at": "2026-07-30T07:26:18Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/customer_sentiment_churn": {
+   "name": "@aibast-agents-library/customer_sentiment_churn",
+   "display_name": "Customer Sentiment & Churn Agent",
+   "sha256": "196850ced898f6460b04bf9cf38f7cc8f5eb59f0a23c87a920a6b0fa42977c99",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 69,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:31:59Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 67,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 727 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:31:58Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 55,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 727 lines, which is a long single read. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:31:59Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:31:59Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:31:59Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:31:59Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/financial_advisor_copilot": {
+   "name": "@aibast-agents-library/financial_advisor_copilot",
+   "display_name": "Financial Advisor Copilot Agent",
+   "sha256": "5c6c283b2e847401d4ab91916ecfebf5cd0bffefbfb47ef3a45eee548511b32c",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 69,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:00Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 67,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 664 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:00Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 55,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 664 lines, which is a long single read. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:00Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:00Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:00Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:00Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/fraud_detection_alert": {
+   "name": "@aibast-agents-library/fraud_detection_alert",
+   "display_name": "Fraud Detection & Alert Agent",
+   "sha256": "b2ef284db2b4e93836c6668a16feeafcd78f49cd2a8913f9ce54dbeb128b214a",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 69,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:07Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 67,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 675 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:01Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 55,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 675 lines, which is a long single read. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:01Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:01Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:06Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:07Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/loan_origination_assistant": {
+   "name": "@aibast-agents-library/loan_origination_assistant",
+   "display_name": "Loan Origination Assistant Agent",
+   "sha256": "2ad6d00682c63994761dfa50167f9ad6457547ee7ac1b624d112f4391012513f",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 69,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:08Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 67,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 711 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:07Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 55,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 711 lines, which is a long single read. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:07Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:07Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:08Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:08Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/portfolio_rebalancing": {
+   "name": "@aibast-agents-library/portfolio_rebalancing",
+   "display_name": "Portfolio Rebalancing Agent",
+   "sha256": "0f1d4d1d56d9c6249854b927421a486038d693daa784e6d4e7fbaccf6c19f83f",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 73,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:14Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 574 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:13Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 57,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 574 lines \u2014 auditable in one sitting. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:13Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:13Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:13Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 72,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:14Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/fs_regulatory_compliance": {
+   "name": "@aibast-agents-library/fs_regulatory_compliance",
+   "display_name": "FS Regulatory Compliance Agent",
+   "sha256": "3db36e36416a456a6669e40e96b14edd3b31b7eb53228aa97ba9f967ff10334b",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 69,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:21Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 67,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 701 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:14Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 55,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 701 lines, which is a long single read. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:20Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:20Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:20Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:21Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/underwriting_support": {
+   "name": "@aibast-agents-library/underwriting_support",
+   "display_name": "Underwriting Support Agent",
+   "sha256": "2687b8b34f22b99554c31a34d0cd9588fa27cf746c384603c8f14e07bef95d67",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 69,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:28Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 67,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 734 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:21Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 55,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 734 lines, which is a long single read. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:21Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:21Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:27Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:28Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/wealth_insights_generator": {
+   "name": "@aibast-agents-library/wealth_insights_generator",
+   "display_name": "Wealth Insights Generator Agent",
+   "sha256": "4f77a77ea429868c58bf1d065ec5ba49819b932f594f212a2689bbc512363c48",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 69,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:29Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 67,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 675 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:28Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 55,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 675 lines, which is a long single read. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:28Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:28Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:29Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:29Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/ai_customer_assistant": {
+   "name": "@aibast-agents-library/ai_customer_assistant",
+   "display_name": "AI Customer Assistant",
+   "sha256": "1008045bc23665d6fc31fd8bb4d4dbaf62a4f376d8d80deb916fd4431733fb9a",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 69,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:35Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 67,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 758 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:29Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 55,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 758 lines, which is a long single read. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:34Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:34Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:34Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:35Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/general_ask_hr": {
+   "name": "@aibast-agents-library/general_ask_hr",
+   "display_name": "General Ask HR",
+   "sha256": "282fc9a22522b758241ccc3bada4f76bb7f968e49ff3a54101325a4066e84faa",
+   "version": "1.2.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 69,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:41Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 67,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 715 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:35Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 55,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 715 lines, which is a long single read. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:35Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:41Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:41Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:41Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/bulk_crm_data_generator_agent": {
+   "name": "@aibast-agents-library/bulk_crm_data_generator_agent",
+   "display_name": "Bulk CRM Data Generator",
+   "sha256": "587ddfc10256eab771b2371321f0fe22b38f261e57f0344b8b69be7ce534513d",
+   "version": "1.1.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 75,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:48Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 398 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:42Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 65,
+     "fresh": true,
+     "headline": "Fresh on sec",
+     "review": "Reading for how it treats secrets and failure, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:42Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:42Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:42Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:48Z"
+    }
+   ],
+   "history": []
+  },
+  "@aibast_agents_library/dynamics_365_connector": {
+   "name": "@aibast-agents-library/dynamics_365_connector",
+   "display_name": "Dynamics 365 Connector",
+   "sha256": "20284436e19fe975c867b9c69d3720eee9b56cc5fb2b6fa6f398a88122d5fa7a",
+   "version": "1.1.0",
+   "vote_tally": "0/0",
+   "critic_score": null,
+   "rubric_score": 73,
+   "critic_avg": null,
+   "critic_count": 0,
+   "panel_size": 5,
+   "model_reviews": 0,
+   "rubric_reviews": 5,
+   "user_score": null,
+   "user_signal": 0,
+   "state": "unrated",
+   "backends": [
+    "rubric"
+   ],
+   "run": null,
+   "reviewed_at": "2026-07-31T07:32:50Z",
+   "trigger": "never reviewed",
+   "evidence": null,
+   "reviews": [
+    {
+     "critic": "The Architect",
+     "critic_id": "architect",
+     "lens": "structure, separation of concerns, and whether the single-file constraint is honored or abused",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on struct",
+     "review": "Reading for the shape of the file at 445 lines, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:49Z"
+    },
+    {
+     "critic": "Security Sentinel",
+     "critic_id": "sentinel",
+     "lens": "secret handling, input trust, network and filesystem blast radius, and failure modes when env vars are missing",
+     "score": 57,
+     "fresh": false,
+     "headline": "Rotten on sec",
+     "review": "Reading for how it treats secrets and failure, this does not clear the bar. The file shows a single try block doing a lot of load-bearing work and 445 lines \u2014 auditable in one sitting. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:49Z"
+    },
+    {
+     "critic": "The Pragmatist",
+     "critic_id": "pragmatist",
+     "lens": "whether this actually does useful work for a real person, or is a template pretending to be a product",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on value",
+     "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:49Z"
+    },
+    {
+     "critic": "Docs Desk",
+     "critic_id": "docs",
+     "lens": "the docstring and manifest as documentation \u2014 could a stranger install and use this without asking anyone",
+     "score": 78,
+     "fresh": true,
+     "headline": "Fresh on docs",
+     "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:49Z"
+    },
+    {
+     "critic": "The Maintainer",
+     "critic_id": "maintainer",
+     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails",
+     "score": 72,
+     "fresh": true,
+     "headline": "Fresh on robust",
+     "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that could stand in for a README and environment reads the manifest never declares. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "backend": "rubric",
+     "at": "2026-07-31T07:32:50Z"
     }
    ],
    "history": []
