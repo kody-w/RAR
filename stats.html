@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAR — Public Catalog Statistics</title>
+<meta name="description" content="Public, aggregate statistics for the RAPP Agent Registry. No personal data.">
+<style>
+/* ── Tokens. Light and dark are both selected sets, not an auto-flip. ── */
+:root {
+  color-scheme: light;
+  --surface-0: #f4f4f2;
+  --surface-1: #fcfcfb;
+  --surface-2: #eeeeeb;
+  --border:    #dcdcd6;
+  --text-primary:   #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted:     #78776f;
+  --series-1: #2a78d6;
+  --good:     #0ca30c;
+  --critical: #d03b3b;
+  --grid: #e6e6e1;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --surface-0: #111110;
+    --surface-1: #1a1a19;
+    --surface-2: #232322;
+    --border:    #34342f;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #8d8c82;
+    --series-1: #3987e5;
+    --good:     #0ca30c;
+    --critical: #d03b3b;
+    --grid: #2b2b28;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-0: #111110; --surface-1: #1a1a19; --surface-2: #232322;
+  --border: #34342f;
+  --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #8d8c82;
+  --series-1: #3987e5; --good: #0ca30c; --critical: #d03b3b; --grid: #2b2b28;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--surface-0); color: var(--text-primary);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 96px; }
+
+header { margin-bottom: 8px; }
+h1 { font-size: 26px; font-weight: 650; letter-spacing: -0.02em; margin: 0 0 6px; }
+.sub { color: var(--text-secondary); font-size: 14px; margin: 0; }
+.stamp { color: var(--text-muted); font-size: 12.5px; margin-top: 10px; font-variant-numeric: tabular-nums; }
+
+h2 {
+  font-size: 12px; font-weight: 650; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--text-muted); margin: 44px 0 4px;
+}
+.h2note { color: var(--text-secondary); font-size: 13.5px; margin: 0 0 18px; max-width: 62ch; }
+
+/* ── Stat tiles ── */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr)); gap: 12px; }
+.tile {
+  background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px;
+}
+.tile .v {
+  font-size: 30px; font-weight: 620; letter-spacing: -0.02em; font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.tile .k { font-size: 12.5px; color: var(--text-secondary); margin-top: 5px; }
+.tile .n { font-size: 11.5px; color: var(--text-muted); margin-top: 3px; }
+
+/* ── Bar rows ── */
+.panel {
+  background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+  padding: 20px 22px; overflow-x: auto;
+}
+table.bars { width: 100%; border-collapse: collapse; min-width: 420px; }
+table.bars th {
+  text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.07em;
+  text-transform: uppercase; color: var(--text-muted); padding: 0 0 10px; border-bottom: 1px solid var(--grid);
+}
+table.bars th:last-child, table.bars td:last-child { text-align: right; }
+table.bars td { padding: 7px 0; vertical-align: middle; font-size: 13.5px; }
+table.bars td.lbl { color: var(--text-primary); white-space: nowrap; padding-right: 16px; }
+table.bars td.num {
+  font-variant-numeric: tabular-nums; color: var(--text-primary); font-weight: 600;
+  white-space: nowrap; padding-left: 14px;
+}
+.track { width: 100%; min-width: 120px; }
+/* 4px rounded data-end, anchored to the baseline; thin marks. */
+.bar { height: 11px; border-radius: 0 4px 4px 0; background: var(--series-1); min-width: 2px; }
+.bar.good { background: var(--good); }
+.bar.bad  { background: var(--critical); }
+.bar.zero { background: var(--grid); width: 100% !important; max-width: 44px; border-radius: 4px; }
+
+/* ── Coverage meters ── */
+.meters { display: grid; gap: 14px; }
+.meter .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.meter .name { font-size: 13.5px; }
+.meter .val { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.meter .rail { height: 7px; background: var(--grid); border-radius: 4px; margin-top: 7px; overflow: hidden; }
+.meter .fill { height: 100%; background: var(--series-1); border-radius: 4px; }
+.meter .note { font-size: 12px; color: var(--text-muted); margin-top: 5px; }
+
+/* ── Honesty block ── */
+.notmeasured { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; }
+.notmeasured ul { margin: 10px 0 0; padding-left: 18px; }
+.notmeasured li { font-size: 13.5px; color: var(--text-secondary); margin-bottom: 7px; }
+.notmeasured strong { color: var(--text-primary); font-weight: 600; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 14px; font-size: 12.5px; color: var(--text-secondary); }
+.legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; margin-right: 6px; vertical-align: -1px; }
+
+.empty { color: var(--text-muted); font-size: 13px; padding: 6px 0 2px; }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 12.5px; }
+footer a, .sub a { color: var(--series-1); }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Registry statistics</h1>
+  <p class="sub">Public, aggregate figures for the RAPP Agent Registry — what the catalog holds, how far it reaches, and how it is received.</p>
+  <p class="stamp" id="stamp">Loading…</p>
+</header>
+
+<h2>Catalog</h2>
+<p class="h2note">What exists. Counted directly from <code>registry.json</code>, which is rebuilt from the agent files on every push.</p>
+<div class="tiles" id="catalogTiles"></div>
+
+<h2>Reach</h2>
+<p class="h2note">How far agents travel. Release downloads are counted by GitHub itself, server-side, and include people who were never signed in. Acquisitions are counted per person, so repeat installs by the same person count once.</p>
+<div class="tiles" id="reachTiles"></div>
+
+<h2>Reception</h2>
+<p class="h2note">One tap on an agent&rsquo;s thread, no form. Each row is a separate counter and each person can appear in more than one, so rows do not sum to a total &mdash; they are seven independent questions, each answered by a number of <em>people</em>.</p>
+<div class="panel">
+  <div class="legend">
+    <span><i style="background:var(--good)"></i>Went well</span>
+    <span><i style="background:var(--critical)"></i>Went badly</span>
+    <span><i style="background:var(--series-1)"></i>Intent</span>
+  </div>
+  <div id="signalPanel"></div>
+</div>
+
+<h2>Instrumentation coverage</h2>
+<p class="h2note">Whether the measurement exists at all, kept deliberately separate from what it has measured so far. A count of zero against full coverage means &ldquo;asked, not yet answered&rdquo; &mdash; not &ldquo;broken&rdquo;.</p>
+<div class="panel"><div class="meters" id="coverage"></div></div>
+
+<h2>Composition</h2>
+<p class="h2note">How the catalog is distributed across review tiers and problem areas.</p>
+<div class="panel" style="margin-bottom:14px"><div id="tierChart"></div></div>
+<div class="panel"><div id="catChart"></div></div>
+
+<h2>What this does not measure</h2>
+<div class="notmeasured">
+  <ul>
+    <li><strong>Anything about a person.</strong> No names, no accounts, no per-person history. Every figure here is a count of distinct people or of catalog objects &mdash; never who they were.</li>
+    <li><strong>Anything you typed.</strong> Prompts, chat, agent inputs and outputs are never recorded anywhere in this system.</li>
+    <li><strong>Page visits.</strong> The site is static with no analytics of any kind, so there is no visitor count and cannot be one.</li>
+    <li><strong>What happens after download.</strong> Whether an agent was run, changed, or deployed is not observable from here.</li>
+    <li><strong>Downloads by direct file URL.</strong> Source files stay openly fetchable, and those fetches are uncounted &mdash; every reach figure is a floor, not a total.</li>
+  </ul>
+</div>
+
+<footer>
+  Built from <code>registry.json</code>, <code>state/discussion_ratings.json</code> and <code>state/downloads.json</code> &mdash;
+  all public files in <a href="https://github.com/kody-w/RAR">kody-w/RAR</a>, refreshed daily.
+  Anyone can fetch the same numbers from the same URLs.
+</footer>
+
+</div>
+
+<script>
+const RAW = 'https://raw.githubusercontent.com/kody-w/RAR/main';
+const fmt = n => (n ?? 0).toLocaleString('en-US');
+const el = id => document.getElementById(id);
+
+// Seven independent counters. `tone` drives the only place color carries
+// meaning, and every row is direct-labelled, so identity never rests on hue.
+const SIGNAL_ROWS = [
+  ['worked',       'It worked',                  'good'],
+  ['saved_time',   'It saved me real time',      'good'],
+  ['regular_use',  'I use this regularly',       'good'],
+  ['shipped',      'I shipped it to a customer', 'good'],
+  ['want_to_try',  'I want to try this',         'intent'],
+  ['stuck',        "I couldn't get it running",  'bad'],
+  ['did_not_work', "It didn't work",             'bad'],
+];
+
+const tile = (v, k, n) =>
+  `<div class="tile"><div class="v">${v}</div><div class="k">${k}</div>${n ? `<div class="n">${n}</div>` : ''}</div>`;
+
+// Bars share one scale so lengths are comparable; a zero renders as a short
+// neutral stub rather than nothing, so an unanswered row stays visible.
+function barTable(rows, headers, toneClass) {
+  const max = Math.max(1, ...rows.map(r => r[1]));
+  const body = rows.map(([label, value, tone]) => {
+    const pct = value > 0 ? Math.max(3, (value / max) * 100) : 0;
+    const cls = value > 0 ? (toneClass ? toneClass(tone) : '') : 'zero';
+    return `<tr>
+      <td class="lbl">${label}</td>
+      <td class="track"><div class="bar ${cls}" style="width:${pct}%"></div></td>
+      <td class="num">${fmt(value)}</td>
+    </tr>`;
+  }).join('');
+  return `<table class="bars">
+    <thead><tr><th>${headers[0]}</th><th></th><th>${headers[1]}</th></tr></thead>
+    <tbody>${body}</tbody></table>`;
+}
+
+function meter(name, have, total, note) {
+  const pct = total > 0 ? (have / total) * 100 : 0;
+  return `<div class="meter">
+    <div class="top"><span class="name">${name}</span>
+      <span class="val">${fmt(have)} / ${fmt(total)} &middot; ${pct.toFixed(pct >= 99.5 || pct === 0 ? 0 : 1)}%</span></div>
+    <div class="rail"><div class="fill" style="width:${pct}%"></div></div>
+    ${note ? `<div class="note">${note}</div>` : ''}
+  </div>`;
+}
+
+async function getJSON(path) {
+  try {
+    const r = await fetch(`${RAW}/${path}?t=${Date.now()}`);
+    return r.ok ? await r.json() : null;
+  } catch { return null; }
+}
+
+(async function render() {
+  const [reg, ratings, downloads] = await Promise.all([
+    getJSON('registry.json'), getJSON('state/discussion_ratings.json'), getJSON('state/downloads.json'),
+  ]);
+
+  if (!reg) {
+    el('stamp').textContent = 'Could not load the registry. These figures come from raw.githubusercontent.com; check your connection.';
+    return;
+  }
+
+  const agents = reg.agents || [];
+  const n = agents.length;
+  const publishers = new Set(agents.map(a => (a.name || '').split('/')[0])).size;
+  const categories = {};
+  const tiers = {};
+  let withStack = 0, withHash = 0, withReceipt = 0;
+  for (const a of agents) {
+    categories[a.category || 'uncategorised'] = (categories[a.category || 'uncategorised'] || 0) + 1;
+    tiers[a.quality_tier || 'community'] = (tiers[a.quality_tier || 'community'] || 0) + 1;
+    if (a._stack) withStack++;
+    if (a._sha256) withHash++;
+    if (a._receipt) withReceipt++;
+  }
+  const verticals = new Set(agents.map(a => a._stack_vertical).filter(Boolean)).size;
+
+  el('catalogTiles').innerHTML =
+    tile(fmt(n), 'Agents published') +
+    tile(fmt(publishers), 'Publisher namespaces') +
+    tile(fmt(Object.keys(categories).length), 'Problem areas covered') +
+    tile(fmt(verticals), 'Industry verticals', `${fmt(withStack)} agents belong to a bundled stack`);
+
+  // ── Reach ──
+  const ra = (ratings && ratings.agents) || {};
+  const names = Object.keys(ra);
+  const acquisitions = names.reduce((s, k) => s + (ra[k].downloads || 0), 0);
+  const upvotes = names.reduce((s, k) => s + (ra[k].upvotes || 0), 0);
+  const comments = names.reduce((s, k) => s + (ra[k].comments || 0), 0);
+  const reached = names.filter(k => (ra[k].downloads || 0) > 0).length;
+  const relDl = downloads?.totals?.attributed_downloads ?? null;
+
+  el('reachTiles').innerHTML =
+    tile(relDl === null ? '&mdash;' : fmt(relDl), 'Release downloads',
+         relDl === null ? 'No release carries agent files yet' : 'Counted by GitHub, includes signed-out') +
+    tile(fmt(acquisitions), 'Acquisitions', 'Distinct people, deduplicated') +
+    tile(fmt(upvotes), 'Upvotes', 'Distinct people') +
+    tile(fmt(comments), 'Thread replies', 'Written feedback, excludes fixtures') +
+    tile(`${fmt(reached)} / ${fmt(n)}`, 'Agents with any reach');
+
+  // ── Reception ──
+  const totals = Object.fromEntries(SIGNAL_ROWS.map(([k]) => [k, 0]));
+  let anySignalData = false;
+  for (const k of names) {
+    const s = ra[k].signals;
+    if (!s) continue;
+    anySignalData = true;
+    for (const [key] of SIGNAL_ROWS) totals[key] += s[key] || 0;
+  }
+  const rows = SIGNAL_ROWS.map(([key, label, tone]) => [label, totals[key], tone]);
+  const sum = rows.reduce((s, r) => s + r[1], 0);
+  const toneClass = t => t === 'good' ? 'good' : t === 'bad' ? 'bad' : '';
+  el('signalPanel').innerHTML =
+    barTable(rows, ['Response', 'People'], toneClass) +
+    (!anySignalData
+      ? `<p class="empty">The feedback surface is being added to every agent thread. Counts appear here once the daily refresh runs.</p>`
+      : sum === 0
+        ? `<p class="empty">Every agent can be answered; nobody has answered yet.</p>` : '');
+
+  // ── Coverage ──
+  const threads = names.length;
+  const withSignals = names.filter(k => ra[k].signals).length;
+  el('coverage').innerHTML =
+    meter('Agents with a public feedback thread', threads, n,
+          'Created automatically when an agent enters the registry.') +
+    meter('Agents whose feedback surface is live', withSignals, n,
+          'Back-filled in capped batches to stay within platform limits.') +
+    meter('Agents with a verifiable content hash', withHash, n,
+          'Lets any consumer confirm a file matches what was published.') +
+    meter('Agents with a provenance record', withReceipt, n,
+          'An append-only record of who published each version.');
+
+  // ── Composition ──
+  const TIER_ORDER = ['official', 'verified', 'community', 'private'];
+  const tierRows = TIER_ORDER.filter(t => tiers[t]).map(t => [t[0].toUpperCase() + t.slice(1), tiers[t]]);
+  el('tierChart').innerHTML = barTable(tierRows, ['Review tier', 'Agents']);
+
+  const catRows = Object.entries(categories).sort((a, b) => b[1] - a[1]);
+  const TOP = 10;
+  const shown = catRows.slice(0, TOP).map(([k, v]) => [k.replace(/_/g, ' '), v]);
+  const rest = catRows.slice(TOP).reduce((s, r) => s + r[1], 0);
+  if (rest) shown.push([`Other (${catRows.length - TOP} areas)`, rest]);
+  el('catChart').innerHTML = barTable(shown, ['Problem area', 'Agents']);
+
+  const stampBits = [`${fmt(n)} agents`];
+  if (reg.generated_at) stampBits.push(`catalog built ${new Date(reg.generated_at).toISOString().slice(0, 10)}`);
+  el('stamp').textContent = stampBits.join(' · ') + ' · figures refresh daily · no personal data';
+})();
+</script>
+</body>
+</html>
