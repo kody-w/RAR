@@ -197,13 +197,20 @@ def render(agent: dict, rating: dict, critic: dict,
 
 
 def splice(body: str, block: str) -> str:
-    """Replace the report block, preserving every human-written word around it."""
+    """Replace the report block, preserving every human-written word around it.
+
+    Keyed on START alone, and END is only sought AFTER it. A card someone
+    truncated mid-edit leaves START with no END; requiring both markers made
+    that fall through to the append branch, which stacked a second card on
+    every run — so a single bad edit would grow the post forever.
+    """
     body = body or ""
-    if START in body and END in body:
-        head = body.split(START, 1)[0].rstrip()
-        tail = body.split(END, 1)[1].lstrip()
-        return f"{head}\n\n{block}\n\n{tail}".strip() + "\n"
-    return f"{body.rstrip()}\n\n{block}\n"
+    if START not in body:
+        return f"{body.rstrip()}\n\n{block}\n"
+    head, rest = body.split(START, 1)
+    tail = rest.split(END, 1)[1] if END in rest else ""
+    parts = [head.rstrip(), block, tail.lstrip()]
+    return "\n\n".join(p for p in parts if p).strip() + "\n"
 
 
 def fetch_discussions(owner: str, name: str) -> list[dict]:
