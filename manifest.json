@@ -1,0 +1,72 @@
+{
+  "schema": "rapp-static-api/1.0",
+  "name": "rar",
+  "title": "RAPP Agent Registry — headless static API",
+  "description": "Read-only agent registry served entirely from GitHub raw. No backend, no authentication, no SDK and no GitHub account. Host applications such as AIdeate and the vBrainstem fetch these endpoints directly and render their own experience, so an end user never sees a repository.",
+  "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
+  "cdn_base": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main",
+  "pages_base": "https://kody-w.github.io/RAR",
+  "generated": "2026-08-01T23:47:47Z",
+  "cors": "open — GitHub raw and jsDelivr both send Access-Control-Allow-Origin: *",
+  "auth": "none",
+  "stability": "Agent source paths are frozen permanently under CONSTITUTION.md Article XXIII and verified in CI on every pull request. A URL that resolves today resolves forever.",
+  "endpoints": {
+    "manifest": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/manifest.json",
+      "description": "This file. Start here."
+    },
+    "catalog": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
+      "description": "Every agent as a lean record. One fetch renders a full catalog."
+    },
+    "business": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
+      "description": "Pre-curated enterprise slice. Safe to surface without further filtering."
+    },
+    "consumer": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
+      "description": "Pre-curated individual slice."
+    },
+    "match": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/match.json",
+      "description": "Use-case → ranked agents, plus a term index for free-text queries."
+    },
+    "taxonomy": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/taxonomy.json",
+      "description": "Categories, publishers, quality tiers and tags with counts."
+    },
+    "status": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/status.json",
+      "description": "Counts and per-endpoint content hashes for change detection."
+    },
+    "badge": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/badge.json",
+      "description": "shields.io endpoint descriptor."
+    },
+    "agent_source": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/{path}",
+      "description": "The agent file itself. `path` comes from an agent record's source.path.",
+      "example": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py"
+    },
+    "pokedex": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/index.json",
+      "description": "Federation feed consumed by the rapp-zoo. Separate shape, maintained by build_pokedex_api.py."
+    }
+  },
+  "recipes": {
+    "render_a_catalog": [
+      "GET https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
+      "Render agents[] — every record already carries description, tags, tier and provenance."
+    ],
+    "recommend_from_a_use_case": [
+      "GET https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/match.json",
+      "Tokenize the user's description, sum index[token] weights per agent id, sort descending.",
+      "Or read use_cases[] directly for the twenty canonical entry points."
+    ],
+    "install_an_agent": [
+      "Take source.raw from the agent record.",
+      "GET it — the response body is the complete agent. The file is the package.",
+      "Optionally verify against source.sha256."
+    ]
+  }
+}
