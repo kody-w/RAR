@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-01T01:52:54.780527+00:00",
+  "generated_at": "2026-08-01T01:53:36.648165+00:00",
   "stats": {
     "total_agents": 202,
     "total_swarms": 82,
