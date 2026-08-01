@@ -50,6 +50,24 @@ jobs:
       - name: Agent contract tests
         run: pytest tests/test_agent_contract.py -v --tb=short
 
+  # ─── REPORTING (the public numbers) ────────────────────────────
+  # RAR publishes these figures, and a wrong number is worse than a missing
+  # one because nobody re-checks a plausible-looking figure. Hermetic by
+  # design — no network, no token — so it runs on every push and a red here
+  # always means the code broke, never that GitHub was having a bad day.
+  # The live half is driven by hand; see docs/REPORTING-TESTS.md.
+  reporting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test deps
+        run: pip install pytest
+      - name: Reporting machinery tests
+        run: pytest tests/test_reporting.py -v --tb=short
+
   # ─── NOTARY (trusted PR policy lives in notary-policy.yml) ─────
   notary:
     if: github.event_name != 'pull_request'
