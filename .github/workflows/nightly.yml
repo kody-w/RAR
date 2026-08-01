@@ -66,15 +66,18 @@ jobs:
           python -c "
           import re, json, sys
           from pathlib import Path
-          PATTERNS = [
-              (r'\beval\s*\(', 'eval()'),
-              (r'\bexec\s*\(', 'exec()'),
-              (r'\b__import__\s*\(', '__import__()'),
-              (r'\bos\.system\s*\(', 'os.system()'),
-          ]
-          # Load allowlist from build_registry
+          # Import the patterns, don't restate them. This step used to keep its
+          # own stricter list that hard-failed on eval/exec/__import__ — a rule
+          # the registry DELIBERATELY retired. build_registry.py moved dynamic
+          # code out of DANGEROUS_PATTERNS into CAPABILITY_PATTERNS: such agents
+          # are allowed and TAGGED (_capabilities), so consumers can filter
+          # instead of the registry refusing legitimate meta-programming.
+          # Nightly never got the memo, so it failed every night on an agent the
+          # registry had already cleared. One source of truth means this check
+          # can no longer drift from the policy it is supposed to enforce.
           sys.path.insert(0, '.')
-          from build_registry import SECURITY_ALLOWLIST
+          from build_registry import SECURITY_ALLOWLIST, DANGEROUS_PATTERNS
+          PATTERNS = DANGEROUS_PATTERNS
           fails = []
           for f in Path('agents').rglob('*.py'):
               if str(f) in SECURITY_ALLOWLIST:
