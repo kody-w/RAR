@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-07-28T19:07:21.218114+00:00",
+  "generated_at": "2026-08-01T00:07:57.239865+00:00",
   "stats": {
     "total_agents": 202,
     "total_swarms": 82,
@@ -8665,7 +8665,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/rar_remote_agent",
-      "version": "1.7.3",
+      "version": "1.7.4",
       "display_name": "RAR Remote Agent",
       "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
       "author": "RAPP Core Team",
@@ -8686,9 +8686,9 @@
       ],
       "_file": "agents/@kody-w/rar_remote_agent.py",
       "_install_filename": "rar_kody_w_rar_remote_agent.py",
-      "_sha256": "5917d0f6f98d4c6acff59f1c96a1df4990750671f5a86b3ba21c204204f132ee",
+      "_sha256": "584e0e180d07918b1b9371dc0271950991088a54db3664eb5f5e294e03716ee2",
       "_lifecycle": "notarized",
-      "_receipt": "rar_2bf6a7134e0a97caa218f878628ab74c476960fc8c829df4f041c2091a1c38fb",
+      "_receipt": "rar_64b2f2ae8fe113bb15c3aee6e2de1c47561dcdc756ab9694e62db8513cd9ed40",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -8705,12 +8705,12 @@
         ]
       },
       "_seed": 13515315761908692801,
-      "_size_kb": 58.4,
-      "_lines": 1382,
+      "_size_kb": 59.4,
+      "_lines": 1400,
       "_has_card": true,
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
-      "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
+      "_latest_commit_sha": "3a3b7bd341bda4161b9c668d47698b13498eb292",
       "_card_sha256": "2313bf65842a03532f9e3eead0dbb5b0718b0c4c057b1f1bb5a3b8c66d12082c"
     },
     {

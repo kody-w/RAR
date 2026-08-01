@@ -173,6 +173,16 @@ jobs:
           git diff --cached --quiet || git commit -m "Release ${{ inputs.release_name }} (${{ steps.tag.outputs.tag }}) [skip ci]"
           git push
 
+      # Every agent ships as a flat release asset. This is the ONLY download
+      # path GitHub counts for us: a public release asset needs no token to
+      # fetch, and GitHub increments download_count server-side on every
+      # fetch, anonymous ones included — the same property that makes npm's
+      # public download numbers real. raw.githubusercontent.com fetches are
+      # invisible to us by comparison, which is why the reaction-based tally
+      # reads ~0. Reactions stay for upvotes; assets carry downloads.
+      - name: Stage release assets
+        run: python scripts/stage_release_assets.py
+
       - name: Create GitHub release
         uses: actions/github-script@v7
         with:
@@ -221,3 +231,16 @@ jobs:
             });
 
             console.log(`Release created: ${tag}`);
+
+      # Upload after the release exists. --clobber makes a re-run idempotent.
+      # Clients fetch these by the STABLE alias
+      #   github.com/<repo>/releases/latest/download/<asset>
+      # which 302s to the newest release's copy, so no client pins a tag.
+      - name: Upload agent assets to the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${{ steps.tag.outputs.tag }}" \
+            dist/release-assets/* \
+            --clobber --repo "${{ github.repository }}"
+          echo "Uploaded $(ls dist/release-assets | wc -l) asset(s)."

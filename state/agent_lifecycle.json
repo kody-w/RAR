@@ -1861,14 +1861,14 @@
     },
     "@kody-w/rar_remote_agent": {
       "canonical_path": "agents/@kody-w/rar_remote_agent.py",
-      "latest_receipt": "rar_2bf6a7134e0a97caa218f878628ab74c476960fc8c829df4f041c2091a1c38fb",
+      "latest_receipt": "rar_64b2f2ae8fe113bb15c3aee6e2de1c47561dcdc756ab9694e62db8513cd9ed40",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "5917d0f6f98d4c6acff59f1c96a1df4990750671f5a86b3ba21c204204f132ee",
+      "sha256": "584e0e180d07918b1b9371dc0271950991088a54db3664eb5f5e294e03716ee2",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.7.3"
+      "updated_at": "2026-08-01T00:06:46.251551+00:00",
+      "version": "1.7.4"
     },
     "@kody-w/recon_deck_agent": {
       "canonical_path": "agents/@kody-w/recon_deck_agent.py",
@@ -2477,5 +2477,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-07-28T18:46:33.173806+00:00"
+  "updated_at": "2026-08-01T00:06:46.251551+00:00"
 }

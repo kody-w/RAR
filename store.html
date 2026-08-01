@@ -3885,12 +3885,29 @@ function bumpGhRatings(name, field, delta) {
   e.score = 2 * (e.upvotes || 0) + (e.downloads || 0);
 }
 
+// Stable alias that always 302s to the newest release's copy of an asset.
+const RELEASE_BASE = `https://github.com/${REPO}/releases/latest/download/`;
+
+// Prefer the release asset over raw: GitHub counts release-asset fetches
+// server-side with no token on either end, anonymous ones included. That
+// is the download number we publish (state/downloads.json). The reaction
+// tally below stays, but it counts UPVOTES and signed-in installs only —
+// it was never able to see an anonymous download.
+// Returns null when the release doesn't carry this agent yet.
+async function releaseAssetUrl(a) {
+  return a?._install_filename ? RELEASE_BASE + a._install_filename : null;
+}
+
 // Download agent.py via fetch+blob (cross-origin download attribute doesn't work)
 async function downloadAgentPy(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a?._file) return;
   try {
-    const res = await fetch(`${RAW}/${a._file}?t=${Date.now()}`);
+    // Release asset first (counted); raw is the fallback for agents
+    // published since the last tag. A metric must never block a download.
+    const asset = await releaseAssetUrl(a);
+    let res = asset ? await fetch(asset).catch(() => null) : null;
+    if (!res?.ok) res = await fetch(`${RAW}/${a._file}?t=${Date.now()}`);
     if (!res.ok) throw new Error(res.status);
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);

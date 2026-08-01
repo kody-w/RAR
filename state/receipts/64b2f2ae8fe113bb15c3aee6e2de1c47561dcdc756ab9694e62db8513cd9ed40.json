@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-01"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/rar_remote_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "584e0e180d07918b1b9371dc0271950991088a54db3664eb5f5e294e03716ee2"
+ },
+ "canonical_path": "agents/@kody-w/rar_remote_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-01T00:06:46.251551+00:00",
+ "id": "rar_64b2f2ae8fe113bb15c3aee6e2de1c47561dcdc756ab9694e62db8513cd9ed40",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "5917d0f6f98d4c6acff59f1c96a1df4990750671f5a86b3ba21c204204f132ee",
+  "receipt": "rar_2bf6a7134e0a97caa218f878628ab74c476960fc8c829df4f041c2091a1c38fb",
+  "version": "1.7.3"
+ },
+ "quality_tier": "official",
+ "request_id": "req_64b2f2ae8fe113bb15c3aee6",
+ "revision_id": "64b2f2ae8fe113bb15c3aee6e2de1c47561dcdc756ab9694e62db8513cd9ed40",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "rar_remote_agent v1.7.4: install via GitHub release asset (counted download path) with raw fallback"
+ },
+ "version": "1.7.4"
+}

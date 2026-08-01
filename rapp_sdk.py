@@ -38,6 +38,9 @@ SUBMITTABLE_TIERS = ["experimental", "community"]
 
 REPO = "kody-w/RAR"
 RAW_BASE = f"https://raw.githubusercontent.com/{REPO}/main"
+# Stable alias: always 302s to the newest release's copy of an asset, so
+# no client pins a tag. This is the download path GitHub actually counts.
+RELEASE_BASE = f"https://github.com/{REPO}/releases/latest/download"
 API_BASE = f"https://api.github.com/repos/{REPO}"
 INLINE_ISSUE_COMMAND_LIMIT = 50 * 1024
 
@@ -488,17 +491,39 @@ def install_agent(name: str, output_dir: str = "agents") -> str:
     if not file_path:
         raise ValueError(f"No _file path recorded for '{name}'")
 
-    url = f"{RAW_BASE}/{file_path}"
+    # Prefer the GitHub release asset. It is the only fetch GitHub counts
+    # for us: a public release asset needs no token, and download_count is
+    # incremented server-side on every fetch, anonymous ones included —
+    # the same property behind npm's public download numbers. A raw
+    # fetch is invisible to us, which is why track_download() below (a
+    # reaction, and therefore token-gated) reads ~0 across the catalog.
+    #
+    # Falls back to raw for agents published since the last release. The
+    # fallback is silent: a metric must never block an install.
     token = _get_token()
-    req = urllib.request.Request(url)
-    if token:
-        req.add_header("Authorization", f"Bearer {token}")
 
-    try:
+    def _fetch(url: str, *, auth: bool) -> str:
+        req = urllib.request.Request(url)
+        if auth and token:
+            req.add_header("Authorization", f"Bearer {token}")
         with urllib.request.urlopen(req, timeout=15) as resp:
-            content = resp.read().decode()
-    except Exception as e:
-        raise RuntimeError(f"Failed to download agent: {e}")
+            return resp.read().decode()
+
+    content = None
+    asset = agent.get("_install_filename")
+    if asset:
+        try:
+            # No auth header: the counted path is the anonymous one, and
+            # a public release asset needs no credential.
+            content = _fetch(f"{RELEASE_BASE}/{asset}", auth=False)
+        except Exception:
+            content = None
+
+    if content is None:
+        try:
+            content = _fetch(f"{RAW_BASE}/{file_path}", auth=True)
+        except Exception as e:
+            raise RuntimeError(f"Failed to download agent: {e}")
 
     # Agents land flat at the agents root. Prefer the registry's package-derived
     # filename so same-basename agents from different publishers cannot collide.

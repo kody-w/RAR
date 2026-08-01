@@ -2353,9 +2353,31 @@ async function loadRegistry() {
   }
 }
 
+// Stable alias that always 302s to the newest release's copy of an asset,
+// so no client ever pins a tag.
+const RELEASE_BASE = 'https://github.com/kody-w/RAR/releases/latest/download/';
+
+// Resolve an agent's source, counted.
+//
+// Release assets are the only fetch GitHub counts for us: a public
+// release asset needs no token, and GitHub increments download_count
+// server-side on every fetch, anonymous ones included. That is what makes
+// npm's public download numbers real, and it is the whole reason this
+// path exists — raw.githubusercontent.com fetches are invisible to us.
+//
+// Falls back to raw for anything the current release doesn't carry (an
+// agent published since the last tag, or a private stub). The fallback is
+// silent and never blocks a run: a missing metric must not break the
+// brainstem.
 async function fetchAgent(entry) {
-  const url = RAW_BASE + entry._file;
-  const resp = await fetch(url);
+  const asset = entry._install_filename;
+  if (asset) {
+    try {
+      const resp = await fetch(RELEASE_BASE + asset);
+      if (resp.ok) return resp.text();
+    } catch (e) { /* fall through to raw */ }
+  }
+  const resp = await fetch(RAW_BASE + entry._file);
   if (!resp.ok) throw new Error(`Failed to fetch ${entry._file}: ${resp.status}`);
   return resp.text();
 }

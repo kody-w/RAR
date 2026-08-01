@@ -59,16 +59,34 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # The real download number: GitHub counts release-asset fetches
+      # server-side, anonymously, with no token on either end. Assets are
+      # per-release, so a new tag restarts its counters — this sums an
+      # asset across every release it appeared in, and the git history of
+      # state/downloads.json is the resulting time series. Non-fatal:
+      # an API problem leaves the snapshot untouched rather than zeroing it.
+      - name: Snapshot release download counts
+        run: python scripts/fetch_download_counts.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Commit snapshots if changed
         run: |
-          FILES="state/discussion_ratings.json state/federation.json"
-          if [ -z "$(git status --porcelain $FILES)" ]; then
+          # Only stage files that exist. state/downloads.json is absent
+          # until the first release with assets is cut, and an unmatched
+          # pathspec would fail `git add` for every other snapshot too.
+          FILES=""
+          for f in state/discussion_ratings.json state/federation.json \
+                   state/downloads.json api/v1/stats/downloads.json; do
+            [ -f "$f" ] && FILES="$FILES $f"
+          done
+          if [ -z "$FILES" ] || [ -z "$(git status --porcelain $FILES)" ]; then
             echo "No changes; nothing to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add $FILES
-          git commit -m "chore(community): refresh ratings + federation snapshots [skip ci]"
+          git commit -m "chore(community): refresh ratings, federation + download snapshots [skip ci]"
           git pull --rebase origin main
           git push origin main
