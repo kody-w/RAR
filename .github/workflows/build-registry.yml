@@ -51,12 +51,20 @@ jobs:
       - name: Build registry
         run: python build_registry.py
 
+      # Article XXIII — record newly published agents into the permanent
+      # URL ledger the moment they land on main. From this point the path
+      # is frozen: check_url_stability.py will fail any later PR that
+      # renames, moves, or deletes it. Append-only by construction.
+      - name: Record new agents in the permanent URL ledger
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: python scripts/check_url_stability.py --update
+
       - name: Commit registry.json
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
-          git add registry.json
+          git add registry.json state/published_paths.json
           git diff --cached --quiet || git commit -m "Auto-build registry.json [skip ci]"
           git push
 

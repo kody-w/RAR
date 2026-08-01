@@ -11,6 +11,23 @@ permissions:
   contents: read
 
 jobs:
+  # ─── URL STABILITY (Article XXIII — the permanent URL contract) ──
+  # Published agent paths are a public contract, exactly like an npm
+  # version. People install agents by URL and those URLs live inside
+  # other people's brainstems, scripts and products. We cannot see a
+  # broken install and we cannot notify anyone it happened. So this
+  # gate runs first and blocks the merge: no rename, no move, no
+  # delete of anything already published on main. Ever.
+  url-stability:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify every published agent URL still resolves
+        run: python scripts/check_url_stability.py
+
   # ─── SMOKE (fast gate — runs on every PR) ───────────────────────
   smoke:
     runs-on: ubuntu-latest
@@ -87,7 +104,7 @@ jobs:
   # ─── FULL (all tests) ──────────────────────────────────────────
   full:
     runs-on: ubuntu-latest
-    needs: [smoke, pipeline, contract]
+    needs: [url-stability, smoke, pipeline, contract]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
