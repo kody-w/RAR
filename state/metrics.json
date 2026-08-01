@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-01T00:09:16Z",
+ "generated_at": "2026-08-01T02:44:22Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 87,
-  "size_kb": 31509,
+  "size_kb": 14432,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-01T00:08:33Z",
+  "pushed_at": "2026-08-01T02:43:18Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 202,
+  "agents": 278,
   "swarms": 82,
-  "publishers": 9,
+  "publishers": 10,
   "categories": 24,
-  "total_lines": 148442,
-  "total_kb": 7109.7,
+  "total_lines": 156270,
+  "total_kb": 7433.7,
   "votes": 5,
   "upvotes": 4,
   "downvotes": 1,
@@ -363,24 +363,24 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-01T00:09:12Z",
+  "generated_at": "2026-08-01T02:44:20Z",
   "agents_scored": 38,
   "critic_reviews": 134,
   "model_reviews": 134,
-  "rubric_reviews": 195,
+  "rubric_reviews": 255,
   "avg_critic_score": 25,
   "avg_user_score": 67,
   "by_state": {
-   "unrated": 29,
+   "unrated": 41,
    "fresh": 9,
    "rotten": 29
   },
   "backends": {
-   "rubric": 56,
+   "rubric": 68,
    "github-models:openai/gpt-4.1": 27,
    "github-models:openai/gpt-4.1-mini": 38
   },
-  "rubric_only_agents": 29
+  "rubric_only_agents": 41
  },
  "leaderboards": {
   "top_critic": [
@@ -1781,6 +1781,16 @@
     "rating": 0.0
    },
    {
+    "name": "@cat-agent-skills",
+    "agents": 76,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0,
+    "lines": 7828,
+    "curator_reviews": 0,
+    "rating": 0.0
+   },
+   {
     "name": "@kody-w",
     "agents": 49,
     "downloads": 0,
@@ -1863,17 +1873,24 @@
   ],
   "categories": [
    {
+    "name": "general",
+    "agents": 56,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
+    "name": "productivity",
+    "agents": 39,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
     "name": "core",
     "agents": 26,
     "downloads": 8,
     "score": 1,
-    "reviews": 0
-   },
-   {
-    "name": "general",
-    "agents": 25,
-    "downloads": 0,
-    "score": 0,
     "reviews": 0
    },
    {
@@ -1884,7 +1901,7 @@
     "reviews": 0
    },
    {
-    "name": "productivity",
+    "name": "devtools",
     "agents": 19,
     "downloads": 0,
     "score": 0,
@@ -1892,7 +1909,14 @@
    },
    {
     "name": "pipeline",
-    "agents": 11,
+    "agents": 15,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
+    "name": "integrations",
+    "agents": 14,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -1905,23 +1929,16 @@
     "reviews": 0
    },
    {
-    "name": "integrations",
-    "agents": 9,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
-   },
-   {
-    "name": "devtools",
-    "agents": 9,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
-   },
-   {
     "name": "b2c_sales",
     "agents": 7,
     "downloads": 6,
+    "score": 0,
+    "reviews": 0
+   },
+   {
+    "name": "analysis",
+    "agents": 7,
+    "downloads": 0,
     "score": 0,
     "reviews": 0
    },
@@ -1989,6 +2006,13 @@
     "reviews": 0
    },
    {
+    "name": "creative",
+    "agents": 5,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
     "name": "workflow",
     "agents": 4,
     "downloads": 0,
@@ -1996,21 +2020,7 @@
     "reviews": 0
    },
    {
-    "name": "creative",
-    "agents": 4,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
-   },
-   {
     "name": "meta",
-    "agents": 2,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
-   },
-   {
-    "name": "analysis",
     "agents": 2,
     "downloads": 0,
     "score": 0,
@@ -2033,6 +2043,7 @@
   ],
   "tiers": {
    "community": 156,
+   "frontier": 76,
    "official": 39,
    "verified": 5,
    "private": 2
