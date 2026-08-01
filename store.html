@@ -3831,7 +3831,7 @@ const THREAD_QUERY =
   'query($q: String!) { search(query: $q, type: DISCUSSION, first: 10) { nodes {' +
   ' ... on Discussion { id number url title repository { nameWithOwner }' +
   ' reactionGroups { content viewerHasReacted reactors { totalCount } }' +
-  ' comments(first: 5) { nodes { id body reactionGroups { content viewerHasReacted reactors { totalCount } } } }' +
+  ' comments(first: 25) { nodes { id body reactionGroups { content viewerHasReacted reactors { totalCount } } } }' +
   ' } } } }';
 
 // Resolve an agent's Discussion thread + the viewer's own reaction state.

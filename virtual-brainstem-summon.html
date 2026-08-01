@@ -3569,7 +3569,7 @@ async function ghGraphQL(query, variables) {
 const TALLY_QUERY =
   'query($q: String!) { search(query: $q, type: DISCUSSION, first: 10) { nodes {' +
   ' ... on Discussion { id title repository { nameWithOwner }' +
-  ' comments(first: 5) { nodes { id body reactionGroups { content viewerHasReacted } } }' +
+  ' comments(first: 25) { nodes { id body reactionGroups { content viewerHasReacted } } }' +
   ' } } } }';
 
 const ADD_REACTION =

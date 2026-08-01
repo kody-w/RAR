@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  discussions: write # provision the new agent's signal surface at add time
 
 jobs:
   build-registry:
@@ -58,3 +59,19 @@ jobs:
           git add registry.json
           git diff --cached --quiet || git commit -m "Auto-build registry.json [skip ci]"
           git push
+
+      # An agent's signal surface is provisioned the moment it enters the
+      # registry — its Discussion thread plus every marker comment in
+      # MARKERS — instead of waiting up to 24h for the nightly refresh.
+      # Both commands are idempotent and capped, so re-running is free and a
+      # large import drains over subsequent runs rather than tripping
+      # GitHub's content-creation limits. Non-fatal: a registry build must
+      # never fail because a comment could not be posted.
+      - name: Provision signal surface for new agents
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/discussion_ratings.py seed --limit 25
+          python scripts/discussion_ratings.py tally --limit 25

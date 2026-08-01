@@ -572,7 +572,7 @@ def track_download(name: str) -> bool:
         data = gql(
             'query($q: String!) { search(query: $q, type: DISCUSSION, first: 10) {'
             ' nodes { ... on Discussion { id title repository { nameWithOwner }'
-            ' comments(first: 5) { nodes { id body } } } } } }',
+            ' comments(first: 25) { nodes { id body } } } } } }',
             {"q": f'repo:{REPO} in:title "{name}"'},
         )
         node = next(

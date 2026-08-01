@@ -92,6 +92,60 @@ TALLY_BODY = (
     "not here."
 )
 
+# ── The feedback comment: a poll that can actually be provisioned ─────────
+#
+# GitHub Discussions has a real poll type (DiscussionPoll, with
+# addDiscussionPollVote), but `createDiscussion` accepts only
+# repositoryId/title/body/categoryId — polls can ONLY be created by hand in
+# the web UI. A signal surface that needs a human to click through the web UI
+# once per agent is not a pattern; it is a chore that will not survive the
+# catalog growing. So it is not used here.
+#
+# A comment IS creatable over the API (addDiscussionComment), and every
+# comment carries all eight reaction contents as independent, per-user-deduped
+# counters. One comment therefore behaves as an eight-option poll, and gets
+# provisioned automatically for every agent the moment it enters the registry.
+SIGNAL_MARKER = "<!-- rar:signal -->"
+
+# Reaction content -> the snapshot key it feeds. LAUGH is deliberately
+# unmapped: there is no honest question it answers, and an option that means
+# nothing pollutes every other count.
+SIGNAL_MAP = {
+    "THUMBS_UP": "worked",
+    "THUMBS_DOWN": "did_not_work",
+    "CONFUSED": "stuck",
+    "HEART": "regular_use",
+    "ROCKET": "shipped",
+    "EYES": "want_to_try",
+    "HOORAY": "saved_time",
+}
+
+SIGNAL_BODY = (
+    SIGNAL_MARKER
+    + "\n### How did this agent go?\n\n"
+    "React **on this comment** — one tap, no form. Pick as many as apply.\n\n"
+    "| React | Means |\n"
+    "|---|---|\n"
+    "| :+1: | It worked |\n"
+    "| :-1: | It didn't work |\n"
+    "| :confused: | I couldn't get it running |\n"
+    "| :heart: | I use this regularly |\n"
+    "| :rocket: | I shipped it to a customer |\n"
+    "| :eyes: | I want to try this |\n"
+    "| :tada: | It saved me real time |\n\n"
+    "One reaction per person per row, so each count is *people*, not clicks. "
+    "Something specific to say? Reply in the thread — a sentence is worth "
+    "more than any of these."
+)
+
+# Every marker a thread should carry, in provisioning order. Adding an entry
+# here is all it takes for a new signal surface to be created on every agent,
+# old and new, by the same idempotent seeder.
+MARKERS = {
+    "download": (TALLY_MARKER, TALLY_BODY),
+    "signal": (SIGNAL_MARKER, SIGNAL_BODY),
+}
+
 DISCUSSIONS_QUERY = """
 query ($owner: String!, $name: String!, $after: String) {
   repository(owner: $owner, name: $name) {
@@ -103,7 +157,7 @@ query ($owner: String!, $name: String!, $after: String) {
         title
         url
         category { name }
-        comments(first: 5) {
+        comments(first: 25) {
           totalCount
           nodes {
             id
@@ -143,7 +197,7 @@ query ($q: String!) {
         number
         title
         repository { nameWithOwner }
-        comments(first: 5) { nodes { id body } }
+        comments(first: 25) { nodes { id body } }
       }
     }
   }
@@ -224,12 +278,37 @@ def positive_score(reaction_groups: list | None) -> int:
     return total
 
 
-def tally_comment_of(node: dict) -> dict | None:
-    """The download-tally comment of a discussion node, if seeded."""
+def marker_comment_of(node: dict, marker: str) -> dict | None:
+    """The comment carrying ``marker`` on a discussion node, if seeded."""
     for c in ((node.get("comments") or {}).get("nodes") or []):
-        if TALLY_MARKER in (c.get("body") or ""):
+        if marker in (c.get("body") or ""):
             return c
     return None
+
+
+def tally_comment_of(node: dict) -> dict | None:
+    """The download-tally comment of a discussion node, if seeded."""
+    return marker_comment_of(node, TALLY_MARKER)
+
+
+def signal_counts(node: dict) -> dict[str, int]:
+    """Per-reaction people-counts from the feedback comment.
+
+    Each of the eight reaction contents is an independent, one-per-user
+    counter, so this reads as *how many distinct people said each thing* —
+    not how many times it was clicked. Absent surface -> all zeros, so a
+    thread that has not been provisioned yet is indistinguishable in shape
+    from one nobody has answered, and callers need no special case.
+    """
+    counts = {key: 0 for key in SIGNAL_MAP.values()}
+    comment = marker_comment_of(node, SIGNAL_MARKER)
+    if not comment:
+        return counts
+    for group in comment.get("reactionGroups") or []:
+        key = SIGNAL_MAP.get(group.get("content"))
+        if key:
+            counts[key] = (group.get("reactors") or {}).get("totalCount", 0)
+    return counts
 
 
 def download_count(node: dict) -> int:
@@ -263,14 +342,21 @@ def build_snapshot(
             continue
         upvotes = positive_score(node.get("reactionGroups"))
         downloads = download_count(node)
+        signals = signal_counts(node)
+        # Provisioned marker comments are machinery, not conversation — one
+        # per marker present, so the count stays honest as markers are added.
         n_comments = (node.get("comments") or {}).get("totalCount", 0)
-        if tally_comment_of(node) is not None:
-            n_comments = max(0, n_comments - 1)  # the tally comment isn't discussion
+        provisioned = sum(
+            1 for marker, _ in MARKERS.values()
+            if marker_comment_of(node, marker) is not None
+        )
+        n_comments = max(0, n_comments - provisioned)
         entry = {
             "upvotes": upvotes,
             "downloads": downloads,
             "score": 2 * upvotes + downloads,  # storefront rank: votes weigh double
             "comments": n_comments,
+            "signals": signals,
             "url": node.get("url", ""),
             "number": node.get("number", 0),
         }
@@ -422,9 +508,14 @@ def cmd_seed(limit: int, delay: float) -> int:
             )
             disc_id = (((made.get("createDiscussion") or {}).get("discussion"))
                        or {}).get("id")
-            if disc_id:  # new threads get their download tally immediately
-                graphql(ADD_COMMENT_MUTATION,
-                        {"discussionId": disc_id, "body": TALLY_BODY})
+            # A new agent gets its FULL signal surface at creation, not
+            # eventually. Every marker in MARKERS, in one pass — so the day an
+            # agent lands it can already record downloads and feedback, and no
+            # later back-fill is needed for it.
+            if disc_id:
+                for _marker, body in MARKERS.values():
+                    graphql(ADD_COMMENT_MUTATION,
+                            {"discussionId": disc_id, "body": body})
             created += 1
         except (OSError, RuntimeError, urllib.error.URLError) as exc:
             # Likely a secondary rate limit — stop here; the next run
@@ -440,9 +531,16 @@ def cmd_seed(limit: int, delay: float) -> int:
 
 
 def cmd_tally(limit: int, delay: float, only: str | None = None) -> int:
-    """Ensure the download-tally comment exists on agent threads."""
+    """Provision every marker comment in MARKERS on every agent thread.
+
+    Idempotent and per-marker: a thread missing only the newer marker gets
+    only that one. This is what makes a new signal surface a one-entry change
+    in MARKERS rather than a migration — add the entry, and the next run
+    back-fills the whole catalog on its own, capped per run so it stays under
+    GitHub's content-creation limits and drains over successive runs.
+    """
     if not TOKEN:
-        warn("no GITHUB_TOKEN set; cannot add tally comments.")
+        warn("no GITHUB_TOKEN set; cannot add marker comments.")
         return 0
     owner, _, name = REPO.partition("/")
     registry_names = set(load_registry_agents())
@@ -451,7 +549,7 @@ def cmd_tally(limit: int, delay: float, only: str | None = None) -> int:
     except (OSError, RuntimeError, urllib.error.URLError) as exc:
         warn(f"tally preflight failed ({exc}); nothing added.")
         return 0
-    targets = []
+    targets: list[tuple[str, str, str, str]] = []  # (title, id, kind, body)
     for node in discussions:
         title = str(node.get("title", "")).strip()
         if ((node.get("category") or {}).get("name")) != CATEGORY:
@@ -460,25 +558,29 @@ def cmd_tally(limit: int, delay: float, only: str | None = None) -> int:
             continue
         if only and title != only:
             continue
-        if tally_comment_of(node) is None:
-            targets.append((title, node.get("id")))
+        for kind, (marker, body) in MARKERS.items():
+            if marker_comment_of(node, marker) is None:
+                targets.append((title, node.get("id"), kind, body))
     if not targets:
-        print("[discussion-ratings] every targeted thread already has a tally.")
+        print("[discussion-ratings] every targeted thread has every marker.")
         return 0
     batch = targets[:limit]
-    print(f"[discussion-ratings] adding tally to {len(batch)} of "
-          f"{len(targets)} thread(s) (limit {limit})...")
+    print(f"[discussion-ratings] adding {len(batch)} of {len(targets)} "
+          f"missing marker comment(s) (limit {limit})...")
     added = 0
-    for title, disc_id in batch:
+    by_kind: dict[str, int] = {}
+    for title, disc_id, kind, body in batch:
         try:
             graphql(ADD_COMMENT_MUTATION,
-                    {"discussionId": disc_id, "body": TALLY_BODY})
+                    {"discussionId": disc_id, "body": body})
             added += 1
+            by_kind[kind] = by_kind.get(kind, 0) + 1
         except (OSError, RuntimeError, urllib.error.URLError) as exc:
-            warn(f"stopping after {added} tally comment(s): {exc}")
+            warn(f"stopping after {added} marker comment(s): {exc}")
             break
         time.sleep(delay)
-    print(f"[discussion-ratings] added {added} tally comment(s); "
+    detail = ", ".join(f"{k}={v}" for k, v in sorted(by_kind.items())) or "none"
+    print(f"[discussion-ratings] added {added} marker comment(s) ({detail}); "
           f"{len(targets) - added} still missing.")
     return 0
 
