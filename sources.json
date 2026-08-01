@@ -1,0 +1,33 @@
+{
+  "schema": "rar-sources/1.0",
+  "_comment": [
+    "Third-party agent/skill libraries RAR aggregates. Adding a source is a",
+    "config edit, not a code change — scripts/crawl_sources.py reads this file.",
+    "",
+    "RAR INDEXES, IT DOES NOT MIRROR. Only catalog metadata is stored (name,",
+    "description, tags, author, link, and any counts the source itself",
+    "publishes). Skill bodies, bundles and source files are never copied into",
+    "this repo — every item links back to the origin. That keeps aggregation on",
+    "the same footing as a search index rather than a redistribution, which is",
+    "what makes it safe to do across sources whose licenses differ or cannot be",
+    "read. `license` below records what we could actually verify, and",
+    "`license_verified: false` means exactly that — unknown, so treat as",
+    "all-rights-reserved and never republish content from it."
+  ],
+  "sources": [
+    {
+      "id": "cat-agent-skills",
+      "namespace": "@cat-agent-skills",
+      "display_name": "CAT Agent Skills",
+      "publisher": "microsoft",
+      "home_url": "https://microsoft.github.io/cat-agent-skills/",
+      "index_url": "https://microsoft.github.io/cat-agent-skills/skills.json",
+      "item_url_template": "https://microsoft.github.io/cat-agent-skills/#{slug}",
+      "format": "cat-skills/1",
+      "license": "unverified",
+      "license_verified": false,
+      "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
+      "enabled": true
+    }
+  ]
+}

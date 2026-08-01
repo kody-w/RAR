@@ -65,6 +65,13 @@ jobs:
       # asset across every release it appeared in, and the git history of
       # state/downloads.json is the resulting time series. Non-fatal:
       # an API problem leaves the snapshot untouched rather than zeroing it.
+      # Third-party libraries RAR aggregates (sources.json). Index-only:
+      # catalog metadata and links, never copied content — which is what keeps
+      # this on the footing of a search index rather than a redistribution.
+      # Non-fatal per source: a bad day upstream leaves the catalog unchanged.
+      - name: Crawl aggregated sources
+        run: python scripts/crawl_sources.py
+
       - name: Snapshot release download counts
         run: python scripts/fetch_download_counts.py
         env:
@@ -77,7 +84,8 @@ jobs:
           # pathspec would fail `git add` for every other snapshot too.
           FILES=""
           for f in state/discussion_ratings.json state/federation.json \
-                   state/downloads.json api/v1/stats/downloads.json; do
+                   state/downloads.json api/v1/stats/downloads.json \
+                   state/aggregated.json; do
             [ -f "$f" ] && FILES="$FILES $f"
           done
           if [ -z "$FILES" ] || [ -z "$(git status --porcelain $FILES)" ]; then

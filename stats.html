@@ -152,6 +152,11 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1
   <div id="signalPanel"></div>
 </div>
 
+<h2>Aggregated libraries</h2>
+<p class="h2note">Other public agent and skill libraries indexed here. Metadata and links only &mdash; content is never copied, so each entry points back to its origin. Where a library publishes its own engagement numbers those are shown as reported, kept separate from this registry&rsquo;s own counters: they count different populations by different methods, so adding them together would produce a figure neither system could defend.</p>
+<div class="tiles" id="aggTiles"></div>
+<div class="panel" style="margin-top:14px"><div id="aggSources"></div></div>
+
 <h2>Instrumentation coverage</h2>
 <p class="h2note">Whether the measurement exists at all, kept deliberately separate from what it has measured so far. A count of zero against full coverage means &ldquo;asked, not yet answered&rdquo; &mdash; not &ldquo;broken&rdquo;.</p>
 <div class="panel"><div class="meters" id="coverage"></div></div>
@@ -236,8 +241,9 @@ async function getJSON(path) {
 }
 
 (async function render() {
-  const [reg, ratings, downloads] = await Promise.all([
-    getJSON('registry.json'), getJSON('state/discussion_ratings.json'), getJSON('state/downloads.json'),
+  const [reg, ratings, downloads, agg] = await Promise.all([
+    getJSON('registry.json'), getJSON('state/discussion_ratings.json'),
+    getJSON('state/downloads.json'), getJSON('state/aggregated.json'),
   ]);
 
   if (!reg) {
@@ -301,6 +307,37 @@ async function getJSON(path) {
       ? `<p class="empty">The feedback surface is being added to every agent thread. Counts appear here once the daily refresh runs.</p>`
       : sum === 0
         ? `<p class="empty">Every agent can be answered; nobody has answered yet.</p>` : '');
+
+  // ── Aggregated libraries ──
+  const aggSrcs = agg?.sources || [];
+  if (aggSrcs.length) {
+    const items = agg.items || [];
+    const srcDl = agg.totals?.source_downloads ?? 0;
+    const authors = new Set(items.map(i => i.author_github).filter(Boolean)).size;
+    el('aggTiles').innerHTML =
+      tile(fmt(aggSrcs.length), 'Libraries indexed') +
+      tile(fmt(items.length), 'Items indexed', 'Metadata and links only') +
+      tile(fmt(srcDl), 'Downloads, as reported by source', 'Their number, their method') +
+      tile(fmt(authors), 'Distinct contributors upstream');
+
+    el('aggSources').innerHTML = aggSrcs.map(s => {
+      const lic = s.license_verified
+        ? `License ${s.license}`
+        : `License unverified &mdash; indexed, never republished`;
+      return `<div class="meter" style="margin-bottom:16px">
+        <div class="top">
+          <span class="name"><strong>${s.display_name}</strong>
+            <span style="color:var(--text-muted)">&middot; ${s.publisher || 'independent'}</span></span>
+          <span class="val">${fmt(s.item_count)} items &middot; ${fmt(s.source_downloads)} downloads</span>
+        </div>
+        <div class="note">${lic} &middot;
+          <a href="${s.home_url}" rel="noopener">${(s.home_url || '').replace(/^https?:\/\//, '')}</a></div>
+      </div>`;
+    }).join('');
+  } else {
+    el('aggTiles').innerHTML = tile('&mdash;', 'Libraries indexed', 'Crawl has not run yet');
+    el('aggSources').innerHTML = '<p class="empty">No aggregated sources yet.</p>';
+  }
 
   // ── Coverage ──
   const threads = names.length;
