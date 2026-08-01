@@ -77,6 +77,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Close the loop. Every step above COLLECTS signal; this one reports it
+      # back to the place people actually land — each agent's own Discussion
+      # thread, rewritten with a report card built from the snapshots just
+      # refreshed. Runs last so the card reflects today's numbers, and is
+      # idempotent: threads whose numbers didn't move cost zero writes.
+      - name: Publish per-agent report cards
+        run: python scripts/publish_reports.py --limit 60
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Commit snapshots if changed
         run: |
           # Only stage files that exist. state/downloads.json is absent
