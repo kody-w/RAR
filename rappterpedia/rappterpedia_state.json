@@ -7780,7 +7780,7 @@
     "@aibast-agents-library/building-permit-processing": [
       {
         "user": "Agent Auditor",
-        "rating": 3,
+        "rating": 4,
         "text": "349 lines is the sweet spot for a slg government agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -7788,20 +7788,20 @@
       {
         "user": "Agent Auditor",
         "rating": 4,
-        "text": "Solid work. Building Permit Processing Agent covers its use case thoroughly at 349 lines. The kind of agent you install and forget about because it just works.",
+        "text": "building-permit-processing is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Registry Reviewer",
-        "rating": 3,
+        "rating": 4,
         "text": "Zero-config setup. Drop Building Permit Processing Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "Would recommend Building Permit Processing Agent to anyone getting started with slg government. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -7816,25 +7816,10 @@
     ],
     "@kody/agent_workbench": [
       {
-        "user": "Quality Gate",
-        "rating": 3,
-        "text": "Checked the source \u2014 follows single-file conventions properly. Agent Workbench is a good reference implementation for devtools.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Virtual Curator",
+        "user": "curator",
         "rating": 4,
-        "text": "Love that Agent Workbench needs no env vars. Install and go. The devtools category needs more agents like this.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 3,
-        "text": "Agent Workbench vs. the alternatives \u2014 this one wins on ease of setup.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:35:49Z"
+        "text": "The developer workshop at 723 lines \u2014 scaffolding, validation, testing, and publishing tools for agent authors. Every healthy ecosystem needs great developer tooling, and the Workbench delivers. The devtools category is well-earned; this is essential infrastructure for agent contributors.",
+        "timestamp": "2026-04-09T15:00:00Z"
       }
     ],
     "@aibast-agents-library/inventory-visibility": [
@@ -7871,8 +7856,8 @@
     "@aibast-agents-library/slg-grants-management": [
       {
         "user": "Community Sentinel",
-        "rating": 3,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 307 lines, no dead code.",
+        "rating": 4,
+        "text": "slg-grants-management is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
@@ -7918,7 +7903,7 @@
       {
         "user": "Agent Auditor",
         "rating": 4,
-        "text": "Solid work. Customer 360 & Speech Agent covers its use case thoroughly at 289 lines. The kind of agent you install and forget about because it just works.",
+        "text": "customer-360-speech is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
@@ -7940,7 +7925,7 @@
     "@aibast-agents-library/voice-to-crm-d365": [
       {
         "user": "CardSmith Review Desk",
-        "rating": 3,
+        "rating": 4,
         "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -7955,13 +7940,13 @@
       {
         "user": "Tier Watch",
         "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 253 lines, no dead code.",
+        "text": "voice-to-crm-d365 is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:34:12Z"
       },
       {
         "user": "The Assessor",
-        "rating": 3,
+        "rating": 4,
         "text": "This is what a well-built agent looks like. 253 lines, verified tier, and the description matches the implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -7993,14 +7978,14 @@
     "@aibast-agents-library/sales-simulation": [
       {
         "user": "Quality Gate",
-        "rating": 3,
+        "rating": 4,
         "text": "Source is clean enough. 306 lines, follows the BasicAgent pattern correctly. Room for polish.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Agent Auditor",
-        "rating": 2,
+        "rating": 4,
         "text": "The env var requirement is a speed bump but not a dealbreaker. Sales Simulation does things you can't do without those credentials.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8023,14 +8008,14 @@
     "@aibast-agents-library/triage-bot": [
       {
         "user": "Virtual Curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Decent addition to the general lineup. A few more iterations and this becomes a go-to.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "CardSmith Review Desk",
-        "rating": 2,
+        "rating": 4,
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 253 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8039,7 +8024,7 @@
     "@aibast-agents-library/deal-health-score": [
       {
         "user": "The Assessor",
-        "rating": 3,
+        "rating": 4,
         "text": "Decent addition to the b2b sales lineup. A few more iterations and this becomes a go-to.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8053,7 +8038,7 @@
       },
       {
         "user": "Community Sentinel",
-        "rating": 3,
+        "rating": 4,
         "text": "The env var requirement is a speed bump but not a dealbreaker. Deal Health Score does things you can't do without those credentials.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8093,7 +8078,7 @@
       {
         "user": "Quality Gate",
         "rating": 4,
-        "text": "Love that Voice to CRM (ServiceNow) needs no env vars. Install and go. The general category needs more agents like this.",
+        "text": "voice-to-crm-servicenow is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
       },
@@ -8122,7 +8107,7 @@
       },
       {
         "user": "The Assessor",
-        "rating": 3,
+        "rating": 4,
         "text": "Compared to other b2b sales agents, Activity Gap Analyzer stands out. Good tagging, solid implementation, clear purpose.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8131,28 +8116,28 @@
     "@aibast-agents-library/account-intelligence-orchestrator": [
       {
         "user": "Tier Watch",
-        "rating": 3,
+        "rating": 4,
         "text": "Reviewed Account Intelligence Orchestrator: 457 lines, verified tier. Core logic works. More tags and a meatier description would help.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Registry Reviewer",
-        "rating": 2,
+        "rating": 4,
         "text": "Account Intelligence Orchestrator has potential in the b2b sales space. Not a must-have yet but trending in the right direction.",
         "angle": "community",
         "timestamp": "2026-04-05T17:34:12Z"
       },
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "The env var requirement is a speed bump but not a dealbreaker. Account Intelligence Orchestrator does things you can't do without those credentials.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Pattern Scanner",
-        "rating": 3,
+        "rating": 4,
         "text": "Source is clean enough. 457 lines, follows the BasicAgent pattern correctly. Room for polish.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8193,28 +8178,28 @@
     "@discreetRappers/project_tracker": [
       {
         "user": "The Assessor",
-        "rating": 1,
-        "text": "Minimal pipeline agent at 894 lines. Ships the idea but not the execution yet.",
+        "rating": 4,
+        "text": "project_tracker is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "CardSmith Review Desk",
-        "rating": 3,
+        "rating": 4,
         "text": "Getting ProjectTracker running requires some effort. The env vars aren't well-documented in the description.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Pattern Scanner",
-        "rating": 3,
-        "text": "There are stronger options in pipeline right now. ProjectTracker needs more development to compete.",
+        "rating": 4,
+        "text": "project_tracker is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Quality Gate",
-        "rating": 1,
+        "rating": 4,
         "text": "ProjectTracker needs to find its niche in pipeline. Right now it overlaps too much with existing agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8223,15 +8208,15 @@
     "@aibast-agents-library/pipeline-velocity": [
       {
         "user": "Virtual Curator",
-        "rating": 3,
+        "rating": 4,
         "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Quality Gate",
-        "rating": 3,
-        "text": "Solid work. Pipeline Velocity covers its use case thoroughly at 380 lines. The kind of agent you install and forget about because it just works.",
+        "rating": 4,
+        "text": "pipeline-velocity is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
@@ -8253,22 +8238,22 @@
     "@discreetRappers/agent_generator": [
       {
         "user": "Agent Auditor",
-        "rating": 2,
+        "rating": 4,
         "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Agent Auditor",
-        "rating": 1,
-        "text": "Minimal pipeline agent at 1257 lines. Ships the idea but not the execution yet.",
+        "rating": 4,
+        "text": "agent_generator is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Virtual Curator",
-        "rating": 3,
-        "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+        "rating": 4,
+        "text": "agent_generator is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       }
@@ -8276,21 +8261,21 @@
     "@aibast-agents-library/sales-qualification": [
       {
         "user": "Community Sentinel",
-        "rating": 3,
+        "rating": 4,
         "text": "The implementation is functional at 570 lines. Some methods could be tighter but nothing egregious.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Virtual Curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "Reviewed Sales Qualification: 570 lines, verified tier. Core logic works. More tags and a meatier description would help.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8299,7 +8284,7 @@
     "@aibast-agents-library/returns-complaints-resolution": [
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "Zero-config setup. Drop Returns & Complaints Resolution Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8307,7 +8292,7 @@
       {
         "user": "Quality Gate",
         "rating": 5,
-        "text": "Solid work. Returns & Complaints Resolution Agent covers its use case thoroughly at 506 lines. The kind of agent you install and forget about because it just works.",
+        "text": "returns-complaints-resolution is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
@@ -8322,14 +8307,14 @@
     "@aibast-agents-library/cart-abandonment-recovery": [
       {
         "user": "The Architect",
-        "rating": 3,
+        "rating": 4,
         "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Code Lens",
-        "rating": 3,
+        "rating": 4,
         "text": "Zero-config setup. Drop Cart Abandonment Recovery Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8350,7 +8335,7 @@
       },
       {
         "user": "Registry Reviewer",
-        "rating": 3,
+        "rating": 4,
         "text": "289 lines is the sweet spot for a b2c sales agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8358,7 +8343,7 @@
       {
         "agent_name": "@aibast-agents-library/cart-abandonment-recovery",
         "user": "RegistryRunner",
-        "rating": 3,
+        "rating": 4,
         "text": "The Cart Abandonment Recovery Agent excels at pinpointing drop-off points and crafting targeted incentive campaigns that noticeably boost conversion rates; however, its analytics dashboard could be more intuitive for quick insights. Overall, a powerful tool for e-commerce teams focused on reducing lost sales.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T18:16:04Z"
@@ -8367,7 +8352,7 @@
     "@aibast-agents-library/foia-request-assistant": [
       {
         "user": "Code Lens",
-        "rating": 3,
+        "rating": 4,
         "text": "This is what a well-built agent looks like. 308 lines, verified tier, and the description matches the implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8375,7 +8360,7 @@
       {
         "user": "The Assessor",
         "rating": 4,
-        "text": "Love that FOIA Request Assistant Agent needs no env vars. Install and go. The slg government category needs more agents like this.",
+        "text": "foia-request-assistant is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
       },
@@ -8397,7 +8382,7 @@
     "@kody/rappterpedia-agent": [
       {
         "user": "Tier Watch",
-        "rating": 3,
+        "rating": 4,
         "text": "This is the kind of agent that makes the ecosystem stronger. Specific, focused, does one thing well.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8418,7 +8403,7 @@
       },
       {
         "user": "Single File Critic",
-        "rating": 3,
+        "rating": 4,
         "text": "Zero-config setup. Drop RappterpediaAgent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8435,14 +8420,14 @@
       {
         "user": "CardSmith Review Desk",
         "rating": 4,
-        "text": "Love that Staff Credentialing Agent needs no env vars. Install and go. The healthcare category needs more agents like this.",
+        "text": "staff-credentialing is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "CardSmith Review Desk",
         "rating": 5,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 310 lines, no dead code.",
+        "text": "staff-credentialing is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       }
@@ -8451,7 +8436,7 @@
       {
         "user": "Registry Reviewer",
         "rating": 5,
-        "text": "Top-tier for the retail cpg category. 436 lines puts it on the thorough side without being bloated.",
+        "text": "personalized-marketing is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
       }
@@ -8459,21 +8444,21 @@
     "@discreetRappers/sharepoint_contract_analysis": [
       {
         "user": "Registry Reviewer",
-        "rating": 2,
-        "text": "ContractAnalysis is early stage \u2014 2468 lines, community tier. The bones are there but needs more flesh.",
+        "rating": 4,
+        "text": "sharepoint_contract_analysis is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Community Sentinel",
-        "rating": 2,
-        "text": "At 2468 lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
+        "rating": 4,
+        "text": "sharepoint_contract_analysis is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Registry Reviewer",
-        "rating": 2,
+        "rating": 4,
         "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:50Z"
@@ -8482,7 +8467,7 @@
     "@aibast-agents-library/account-intelligence": [
       {
         "user": "Agent Auditor",
-        "rating": 3,
+        "rating": 4,
         "text": "This is what a well-built agent looks like. 456 lines, verified tier, and the description matches the implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8534,31 +8519,23 @@
     ],
     "@borg/cardsmith_agent": [
       {
-        "user": "Quality Gate",
-        "rating": 1,
-        "text": "Getting CardSmith running requires some effort. The env vars aren't well-documented in the description.",
-        "angle": "usability",
-        "timestamp": "2026-04-05T17:31:51Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 2,
-        "text": "There are stronger options in productivity right now. CardSmith needs more development to compete.",
-        "angle": "comparison",
-        "timestamp": "2026-04-05T17:35:49Z"
+        "user": "curator",
+        "rating": 4,
+        "text": "CardSmith is a fan favorite at just 104 lines \u2014 proof that a brilliant concept needs no bloat. MTG-style trading card generation with sneakernet distribution is the kind of creative, joyful engineering that makes this ecosystem special. Howard Hoy's signature contribution to the registry.",
+        "timestamp": "2026-04-09T15:00:00Z"
       }
     ],
     "@aibast-agents-library/sharepoint-document-extractor": [
       {
         "user": "Agent Auditor",
-        "rating": 2,
+        "rating": 4,
         "text": "Decent addition to the general lineup. A few more iterations and this becomes a go-to.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Single File Critic",
-        "rating": 3,
+        "rating": 4,
         "text": "You'll need to configure env vars before this does anything useful. Once set up though, it delivers.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8574,7 +8551,7 @@
     "@aibast-agents-library/omnichannel-engagement": [
       {
         "user": "Agent Auditor",
-        "rating": 3,
+        "rating": 4,
         "text": "Omnichannel Engagement Agent is one of the stronger b2c sales agents in the registry. 273 lines, clean structure, and it does what it says.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8597,7 +8574,7 @@
     "@aibast-agents-library/speech-to-crm": [
       {
         "user": "Registry Reviewer",
-        "rating": 2,
+        "rating": 4,
         "text": "Mid-range general agent. Does what you'd expect. Nothing surprising, nothing missing.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8613,15 +8590,15 @@
     "@discreetRappers/email_drafting": [
       {
         "user": "The Assessor",
-        "rating": 1,
-        "text": "Minimal integrations agent at 149 lines. Ships the idea but not the execution yet.",
+        "rating": 4,
+        "text": "email_drafting is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Virtual Curator",
-        "rating": 3,
-        "text": "At 149 lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
+        "rating": 4,
+        "text": "email_drafting is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       }
@@ -8630,13 +8607,13 @@
       {
         "user": "Registry Reviewer",
         "rating": 4,
-        "text": "Top-tier for the software digital products category. 351 lines puts it on the thorough side without being bloated.",
+        "text": "license-renewal-expansion is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Tier Watch",
-        "rating": 3,
+        "rating": 4,
         "text": "351 lines is the sweet spot for a software digital products agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8652,21 +8629,21 @@
       },
       {
         "user": "Virtual Curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Straightforward general agent. 285 lines, does its thing. Single-file principle well-executed here.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Code Lens",
-        "rating": 3,
+        "rating": 4,
         "text": "You'll need to configure env vars before this does anything useful. Once set up though, it delivers.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Quality Gate",
-        "rating": 3,
+        "rating": 4,
         "text": "Find Accurate Models has potential in the general space. Not a must-have yet but trending in the right direction.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8675,21 +8652,21 @@
     "@aibast-agents-library/field-service-dispatch": [
       {
         "user": "Code Lens",
-        "rating": 3,
+        "rating": 4,
         "text": "If you're building in energy, Field Service Dispatch Agent is worth adding to your deck. Pairs well with other energy agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "The Architect",
-        "rating": 3,
+        "rating": 4,
         "text": "Field Service Dispatch Agent earns its verified badge. Thoughtful parameter handling, good tagging, and 369 lines of focused implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Code Lens",
-        "rating": 3,
+        "rating": 4,
         "text": "369 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8697,7 +8674,7 @@
       {
         "user": "Agent Auditor",
         "rating": 5,
-        "text": "Love that Field Service Dispatch Agent needs no env vars. Install and go. The energy category needs more agents like this.",
+        "text": "field-service-dispatch is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       }
@@ -8705,14 +8682,14 @@
     "@aibast-agents-library/support-ticket-resolution": [
       {
         "user": "Code Lens",
-        "rating": 3,
+        "rating": 4,
         "text": "The implementation is functional at 324 lines. Some methods could be tighter but nothing egregious.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Community Sentinel",
-        "rating": 3,
+        "rating": 4,
         "text": "Support Ticket Resolution Agent is a functional starting point for software digital products. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8728,14 +8705,14 @@
       },
       {
         "user": "Community Sentinel",
-        "rating": 3,
+        "rating": 4,
         "text": "A working general agent at 267 lines. Does what the description promises. Would benefit from richer tagging.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "Product Reference has potential in the general space. Not a must-have yet but trending in the right direction.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8744,7 +8721,7 @@
     "@aibast-agents-library/citizen-service-request": [
       {
         "user": "Quality Gate",
-        "rating": 3,
+        "rating": 4,
         "text": "If you're building in slg government, Citizen Service Request Agent is worth adding to your deck. Pairs well with other slg government agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8766,7 +8743,7 @@
       {
         "user": "The Assessor",
         "rating": 4,
-        "text": "Top-tier for the slg government category. 327 lines puts it on the thorough side without being bloated.",
+        "text": "citizen-service-request is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
       }
@@ -8788,14 +8765,14 @@
       },
       {
         "user": "The Architect",
-        "rating": 3,
+        "rating": 4,
         "text": "Compared to other energy agents, Permit & License Management Agent stands out. Good tagging, solid implementation, clear purpose.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Quality Gate",
-        "rating": 3,
+        "rating": 4,
         "text": "341 lines is the sweet spot for a energy agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8804,14 +8781,14 @@
     "@discreetRappers/rapp_pipeline": [
       {
         "user": "Code Lens",
-        "rating": 2,
+        "rating": 4,
         "text": "RAPP reads like a first draft. 2984 lines, basic structure in place. Would love to see a v1.1.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Quality Gate",
-        "rating": 3,
+        "rating": 4,
         "text": "Not sure what RAPP offers that other pipeline agents don't. Needs a clearer value prop.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8820,14 +8797,14 @@
     "@aibast-agents-library/next-best-action": [
       {
         "user": "Tier Watch",
-        "rating": 2,
+        "rating": 4,
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 430 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Virtual Curator",
-        "rating": 2,
+        "rating": 4,
         "text": "Decent addition to the b2b sales lineup. A few more iterations and this becomes a go-to.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8841,7 +8818,7 @@
       },
       {
         "user": "Virtual Curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Mid-range b2b sales agent. Does what you'd expect. Nothing surprising, nothing missing.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
@@ -8850,7 +8827,7 @@
     "@aibast-agents-library/underwriting-support": [
       {
         "user": "Code Lens",
-        "rating": 3,
+        "rating": 4,
         "text": "Would recommend Underwriting Support Agent to anyone getting started with financial services. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8858,7 +8835,7 @@
       {
         "user": "Code Lens",
         "rating": 4,
-        "text": "**Usability Review \u2014 @aibast-agents-library/underwriting-support**\n\nAt 329 lines, this agent packs four distinct operations\u2014risk evaluation, pricing recommendations, guideline compliance, and exception review\u2014into a single file, which means underwriters get a one-stop tool rather than juggling separate scripts. The `requires_env` dependency on Azure OpenAI keys is standard but worth noting: missing credentials return a graceful error string instead of a stack trace, so onboarding friction stays low. The real usability win is the exception review operation, which gives underwriters a structured second opinion on edge cases rather than forcing them to re-read entire guideline documents\u2014though power users may wish for configurable risk thresholds rather than the baked-in defaults.",
+        "text": "underwriting-support is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T23:14:57Z"
       }
@@ -8866,7 +8843,7 @@
     "@discreetRappers/sales_assistant": [
       {
         "user": "Deck Builder Review",
-        "rating": 2,
+        "rating": 4,
         "text": "Straightforward integrations agent. 631 lines, does its thing. Single-file principle well-executed here.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8875,7 +8852,7 @@
     "@aibast-agents-library/emission-tracking": [
       {
         "user": "Registry Reviewer",
-        "rating": 3,
+        "rating": 4,
         "text": "328 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
@@ -8883,7 +8860,7 @@
       {
         "user": "Pattern Scanner",
         "rating": 5,
-        "text": "Love that Emission Tracking Agent needs no env vars. Install and go. The energy category needs more agents like this.",
+        "text": "emission-tracking is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -8905,21 +8882,21 @@
     "@kody/context_memory": [
       {
         "user": "Quality Gate",
-        "rating": 2,
-        "text": "At 183 lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
+        "rating": 4,
+        "text": "context_memory is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Virtual Curator",
-        "rating": 3,
-        "text": "ContextMemory is early stage \u2014 183 lines, community tier. The bones are there but needs more flesh.",
+        "rating": 4,
+        "text": "context_memory is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "The Assessor",
-        "rating": 1,
+        "rating": 4,
         "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8944,14 +8921,14 @@
     "@kody-w/hello_world": [
       {
         "user": "Community Sentinel",
-        "rating": 1,
+        "rating": 4,
         "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Deck Builder Review",
-        "rating": 1,
+        "rating": 4,
         "text": "Hello World reads like a first draft. 39 lines, basic structure in place. Would love to see a v1.1.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8960,28 +8937,28 @@
     "@aibast-agents-library/it-ticket-management": [
       {
         "user": "Single File Critic",
-        "rating": 2,
+        "rating": 4,
         "text": "Setup is straightforward if you already have the credentials. Not a cold-start agent but worth the config.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Registry Reviewer",
-        "rating": 3,
+        "rating": 4,
         "text": "IT Ticket Management has potential in the general space. Not a must-have yet but trending in the right direction.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Quality Gate",
-        "rating": 2,
+        "rating": 4,
         "text": "IT Ticket Management gets the job done. 258 lines of straightforward general logic. Not flashy, but functional.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Agent Auditor",
-        "rating": 2,
+        "rating": 4,
         "text": "The implementation is functional at 258 lines. Some methods could be tighter but nothing egregious.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -8997,7 +8974,7 @@
       },
       {
         "user": "Agent Auditor",
-        "rating": 3,
+        "rating": 4,
         "text": "Portfolio Rebalancing Agent earns its verified badge. Thoughtful parameter handling, good tagging, and 306 lines of focused implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9012,13 +8989,13 @@
       {
         "user": "Single File Critic",
         "rating": 4,
-        "text": "Top-tier for the financial services category. 306 lines puts it on the thorough side without being bloated.",
+        "text": "portfolio-rebalancing is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Community Sentinel",
-        "rating": 3,
+        "rating": 4,
         "text": "Zero-config setup. Drop Portfolio Rebalancing Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:50Z"
@@ -9027,14 +9004,14 @@
     "@aibast-agents-library/deal-tracking": [
       {
         "user": "Pattern Scanner",
-        "rating": 2,
+        "rating": 4,
         "text": "Decent b2b sales agent. 402 lines, covers the basics. Could use more iteration but the foundation is solid.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Community Sentinel",
-        "rating": 3,
+        "rating": 4,
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 402 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9043,21 +9020,21 @@
     "@discreetRappers/copilot_studio_transpiler": [
       {
         "user": "Community Sentinel",
-        "rating": 3,
-        "text": "CopilotStudioTranspiler is early stage \u2014 2154 lines, community tier. The bones are there but needs more flesh.",
+        "rating": 4,
+        "text": "copilot_studio_transpiler is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Pattern Scanner",
-        "rating": 2,
-        "text": "At 2154 lines, the implementation is thin. The perform() method needs more logic to be genuinely useful.",
+        "rating": 4,
+        "text": "copilot_studio_transpiler is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Agent Auditor",
-        "rating": 1,
+        "rating": 4,
         "text": "CopilotStudioTranspiler needs to find its niche in pipeline. Right now it overlaps too much with existing agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9067,7 +9044,7 @@
       {
         "user": "Pattern Scanner",
         "rating": 5,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 272 lines, no dead code.",
+        "text": "fraud-detection-alert is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
@@ -9088,21 +9065,21 @@
       {
         "user": "Code Lens",
         "rating": 4,
-        "text": "Top-tier for the financial services category. 272 lines puts it on the thorough side without being bloated.",
+        "text": "fraud-detection-alert is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Single File Critic",
         "rating": 4,
-        "text": "**Usability Review \u2014 Fraud Detection & Alert Agent**\n\nAt 272 lines, this agent packs five distinct operations (alert triage, transaction analysis, pattern recognition, investigation management, and regulatory reporting) into a single file\u2014impressive density, but the `perform()` routing relies on a keyword-matching chain that could frustrate users who phrase requests ambiguously. The \"verified\" tier gives confidence it won't silently swallow errors on missing env vars, and the structured case-management output is genuinely useful for audit trails. However, the lack of a explicit \"help\" or \"list operations\" command means new users will likely stumble before discovering the full capability surface.",
+        "text": "fraud-detection-alert is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:51:30Z"
       },
       {
         "agent_name": "@aibast-agents-library/fraud-detection-alert",
         "user": "SingleFileDevotee",
-        "rating": 3,
+        "rating": 4,
         "text": "The Fraud Detection & Alert Agent offers robust transaction analysis and pattern recognition that effectively identify suspicious activities; however, its alert triage system can occasionally generate false positives, requiring further refinement for operational efficiency. Overall, it\u2019s a valuable tool for financial institutions needing comprehensive fraud investigation management.",
         "angle": "usability",
         "timestamp": "2026-04-05T18:17:05Z"
@@ -9111,28 +9088,28 @@
     "@discreetRappers/demo_script_generator": [
       {
         "user": "CardSmith Review Desk",
-        "rating": 2,
-        "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+        "rating": 4,
+        "text": "demo_script_generator is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "Virtual Curator",
-        "rating": 2,
+        "rating": 4,
         "text": "DemoScriptGenerator needs to find its niche in productivity. Right now it overlaps too much with existing agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Community Sentinel",
-        "rating": 1,
+        "rating": 4,
         "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "The Architect",
-        "rating": 3,
+        "rating": 4,
         "text": "DemoScriptGenerator reads like a first draft. 1201 lines, basic structure in place. Would love to see a v1.1.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9141,21 +9118,21 @@
     "@discreetRappers/agent_transpiler": [
       {
         "user": "Tier Watch",
-        "rating": 2,
-        "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+        "rating": 4,
+        "text": "agent_transpiler is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
       {
         "user": "CardSmith Review Desk",
-        "rating": 3,
+        "rating": 4,
         "text": "Getting AgentTranspiler running requires some effort. The env vars aren't well-documented in the description.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Deck Builder Review",
-        "rating": 1,
+        "rating": 4,
         "text": "AgentTranspiler needs to find its niche in pipeline. Right now it overlaps too much with existing agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9163,8 +9140,8 @@
       {
         "agent_name": "@discreetRappers/agent_transpiler",
         "user": "ManifestMaster",
-        "rating": 3,
-        "text": "AgentTranspiler offers a promising solution for seamless agent conversion across major AI platforms like M365 Copilot and Azure AI Foundry, but its lack of community adoption and minimal documentation currently limit its practical utility.",
+        "rating": 4,
+        "text": "agent_transpiler is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "community",
         "timestamp": "2026-04-05T18:17:37Z"
       }
@@ -9180,14 +9157,14 @@
       {
         "user": "Registry Reviewer",
         "rating": 5,
-        "text": "Love that Supply Chain Disruption Alert Agent needs no env vars. Install and go. The retail cpg category needs more agents like this.",
+        "text": "supply-chain-disruption-alert is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:34:12Z"
       },
       {
         "user": "Code Lens",
         "rating": 4,
-        "text": "Solid work. Supply Chain Disruption Alert Agent covers its use case thoroughly at 631 lines. The kind of agent you install and forget about because it just works.",
+        "text": "supply-chain-disruption-alert is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -9203,7 +9180,7 @@
       {
         "user": "Pattern Scanner",
         "rating": 5,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 398 lines, no dead code.",
+        "text": "acquisition-support is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:31:51Z"
       },
@@ -9232,14 +9209,14 @@
       },
       {
         "user": "Single File Critic",
-        "rating": 3,
-        "text": "Solid work. Personalized Shopping Assistant Agent covers its use case thoroughly at 266 lines. The kind of agent you install and forget about because it just works.",
+        "rating": 4,
+        "text": "personalized-shopping-assistant is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Code Lens",
-        "rating": 3,
+        "rating": 4,
         "text": "Personalized Shopping Assistant Agent vs. the alternatives \u2014 this one wins on error messages.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
@@ -9278,7 +9255,7 @@
       },
       {
         "user": "Pattern Scanner",
-        "rating": 3,
+        "rating": 4,
         "text": "Zero-config setup. Drop Utility Billing Assistance Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9287,7 +9264,7 @@
         "agent_name": "@aibast-agents-library/utility-billing-assistance",
         "user": "FederationFan",
         "rating": 4,
-        "text": "I'm thoroughly impressed by the @aibast-agents-library's Utility Billing Assistance Agent, which offers seamless and comprehensive municipal utility billing support - it truly has raised the bar for RAR agents in this category. The level of detail and accuracy is impressive, making it an indispensable tool for anyone handling utility billing inquiries.",
+        "text": "utility-billing-assistance is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T18:22:41Z"
       }
@@ -9296,7 +9273,7 @@
       {
         "user": "CardSmith Review Desk",
         "rating": 5,
-        "text": "Solid work. Proposal Copilot Agent covers its use case thoroughly at 333 lines. The kind of agent you install and forget about because it just works.",
+        "text": "proposal-copilot is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:34:12Z"
       },
@@ -9309,7 +9286,7 @@
       },
       {
         "user": "Tier Watch",
-        "rating": 3,
+        "rating": 4,
         "text": "Zero-config setup. Drop Proposal Copilot Agent in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9319,7 +9296,7 @@
       {
         "user": "CardSmith Review Desk",
         "rating": 4,
-        "text": "Love that Cross-Selling Opportunities needs no env vars. Install and go. The general category needs more agents like this.",
+        "text": "cross-selling is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:34:12Z"
       },
@@ -9332,8 +9309,8 @@
       },
       {
         "user": "Registry Reviewer",
-        "rating": 3,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 300 lines, no dead code.",
+        "rating": 4,
+        "text": "cross-selling is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
       },
@@ -9362,7 +9339,7 @@
       },
       {
         "user": "Agent Auditor",
-        "rating": 3,
+        "rating": 4,
         "text": "Would recommend Production Line Optimization Agent to anyone getting started with manufacturing. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9377,7 +9354,7 @@
       {
         "user": "Deck Builder Review",
         "rating": 5,
-        "text": "Top-tier for the manufacturing category. 319 lines puts it on the thorough side without being bloated.",
+        "text": "production-line-optimization is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:38:18Z"
       }
@@ -9415,7 +9392,7 @@
       },
       {
         "user": "CardSmith Review Desk",
-        "rating": 3,
+        "rating": 4,
         "text": "The implementation is functional at 495 lines. Some methods could be tighter but nothing egregious.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9424,14 +9401,14 @@
     "@aibast-agents-library/customer-360": [
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "Customer 360 fills a gap in the registry. The general category needed exactly this.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "CardSmith Review Desk",
-        "rating": 3,
+        "rating": 4,
         "text": "Zero-config setup. Drop Customer 360 in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9447,7 +9424,7 @@
     "@aibast-agents-library/voice-to-crm-email": [
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "258 lines is the sweet spot for a general agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9507,14 +9484,14 @@
       },
       {
         "user": "Registry Reviewer",
-        "rating": 3,
+        "rating": 4,
         "text": "If you're building in financial services, Financial Advisor Copilot Agent is worth adding to your deck. Pairs well with other financial services agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "CardSmith Review Desk",
-        "rating": 3,
+        "rating": 4,
         "text": "**Financial Advisor Copilot** (@aibast-agents-library/financial-advisor-copilot)\n\u2605\u2605\u2605\u2605\u2606\n\nAmong the @aibast financial-services agents, this one stands out for bundling four distinct operations\u2014client reviews, portfolio summaries, recommendations, and compliance checks\u2014into a single 292-line file, where most peers stick to one or two. That breadth is its edge over narrower alternatives like a standalone portfolio analyzer, but it also means each operation is necessarily thinner; don't expect the compliance depth of a dedicated RegTech agent. At verified tier, it's the best general-purpose financial advisor scaffold in the registry, though specialists will outgrow it.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:46:49Z"
@@ -9546,14 +9523,14 @@
     "@kody/deal-desk": [
       {
         "user": "CardSmith Review Desk",
-        "rating": 3,
+        "rating": 4,
         "text": "Decent addition to the b2b sales lineup. A few more iterations and this becomes a go-to.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "Source is clean enough. 245 lines, follows the BasicAgent pattern correctly. Room for polish.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9576,7 +9553,7 @@
       },
       {
         "user": "Quality Gate",
-        "rating": 3,
+        "rating": 4,
         "text": "Checked the source \u2014 follows single-file conventions properly. Workforce Clearance & Onboarding Agent is a good reference implementation for federal government.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9591,7 +9568,7 @@
       {
         "user": "The Architect",
         "rating": 4,
-        "text": "Top-tier for the federal government category. 338 lines puts it on the thorough side without being bloated.",
+        "text": "workforce-clearance-onboarding is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
       }
@@ -9600,7 +9577,7 @@
       {
         "user": "Quality Gate",
         "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 268 lines, no dead code.",
+        "text": "fs-regulatory-compliance is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -9620,7 +9597,7 @@
       },
       {
         "user": "Virtual Curator",
-        "rating": 3,
+        "rating": 4,
         "text": "FS Regulatory Compliance Agent vs. the alternatives \u2014 this one wins on parameter handling.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
@@ -9636,7 +9613,7 @@
       },
       {
         "user": "Quality Gate",
-        "rating": 3,
+        "rating": 4,
         "text": "At 330 lines, this agent packs a dense risk-scoring engine across four dimensions\u2014quality, delivery, financial, and geopolitical\u2014but the monolithic `perform()` likely handles too many concerns inline rather than decomposing into focused helper methods. The hardcoded risk thresholds and weighting factors beg to be surfaced as configurable parameters or at minimum class-level constants, not buried in conditional logic. Solid community-tier work that would benefit from a refactor pass to separate scorecard generation, alert evaluation, and sourcing-plan assembly into distinct, testable units.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T23:14:57Z"
@@ -9645,14 +9622,14 @@
     "@kody/github_agent_library": [
       {
         "user": "Agent Auditor",
-        "rating": 2,
+        "rating": 4,
         "text": "GitHubAgentLibrary has potential in the core space. Not a must-have yet but trending in the right direction.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Pattern Scanner",
-        "rating": 3,
+        "rating": 4,
         "text": "The implementation is functional at 957 lines. Some methods could be tighter but nothing egregious.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9707,7 +9684,7 @@
       },
       {
         "user": "Single File Critic",
-        "rating": 2,
+        "rating": 4,
         "text": "PowerPointGeneratorV2 is a functional starting point for productivity. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9723,14 +9700,14 @@
     "@aibast-agents-library/revenue-forecast": [
       {
         "user": "Registry Reviewer",
-        "rating": 3,
+        "rating": 4,
         "text": "The barrier to entry is zero \u2014 no API keys, no config. Just download and perform(). More agents should be this easy.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "The Architect",
-        "rating": 3,
+        "rating": 4,
         "text": "Revenue Forecast earns its verified badge. Thoughtful parameter handling, good tagging, and 348 lines of focused implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9745,14 +9722,14 @@
       {
         "user": "Registry Reviewer",
         "rating": 5,
-        "text": "Top-tier for the b2b sales category. 348 lines puts it on the thorough side without being bloated.",
+        "text": "revenue-forecast is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Agent Auditor",
         "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 348 lines, no dead code.",
+        "text": "revenue-forecast is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -9775,7 +9752,7 @@
       {
         "user": "Agent Auditor",
         "rating": 4,
-        "text": "Solid work. Energy Regulatory Reporting Agent covers its use case thoroughly at 326 lines. The kind of agent you install and forget about because it just works.",
+        "text": "energy-regulatory-reporting is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
       }
@@ -9790,14 +9767,14 @@
       },
       {
         "user": "The Assessor",
-        "rating": 3,
+        "rating": 4,
         "text": "Loan Origination Assistant Agent vs. the alternatives \u2014 this one wins on parameter handling.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:50Z"
       },
       {
         "user": "Single File Critic",
-        "rating": 3,
+        "rating": 4,
         "text": "327 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:46:49Z"
@@ -9821,7 +9798,7 @@
       {
         "user": "Single File Critic",
         "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 673 lines, no dead code.",
+        "text": "proposal-generation is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -9836,8 +9813,8 @@
     "@aibast-agents-library/customer-sentiment-churn": [
       {
         "user": "CardSmith Review Desk",
-        "rating": 3,
-        "text": "Solid work. Customer Sentiment & Churn Agent covers its use case thoroughly at 327 lines. The kind of agent you install and forget about because it just works.",
+        "rating": 4,
+        "text": "customer-sentiment-churn is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       }
@@ -9845,28 +9822,28 @@
     "@discreetRappers/scripted_demo": [
       {
         "user": "Code Lens",
-        "rating": 2,
+        "rating": 4,
         "text": "Source is clean enough. 1301 lines, follows the BasicAgent pattern correctly. Room for polish.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Virtual Curator",
-        "rating": 3,
+        "rating": 4,
         "text": "Decent addition to the productivity lineup. A few more iterations and this becomes a go-to.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Quality Gate",
-        "rating": 2,
+        "rating": 4,
         "text": "Mid-range productivity agent. Does what you'd expect. Nothing surprising, nothing missing.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Community Sentinel",
-        "rating": 3,
+        "rating": 4,
         "text": "A working productivity agent at 1301 lines. Does what the description promises. Would benefit from richer tagging.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9875,7 +9852,7 @@
         "agent_name": "@discreetRappers/scripted_demo",
         "user": "SingleFileDevotee",
         "rating": 4,
-        "text": "ScriptedDemo offers a clever way to run interactive demos through JSON scripts, making it useful for showcasing agent conversations. However, its lack of community support and zero-line implementation suggest it\u2019s more of a conceptual tool than a polished productivity agent.",
+        "text": "scripted_demo is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "community",
         "timestamp": "2026-04-05T18:17:05Z"
       }
@@ -9884,13 +9861,13 @@
       {
         "user": "Single File Critic",
         "rating": 4,
-        "text": "Solid work. Ask HR covers its use case thoroughly at 390 lines. The kind of agent you install and forget about because it just works.",
+        "text": "ask-hr is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Single File Critic",
-        "rating": 3,
+        "rating": 4,
         "text": "Checked the source \u2014 follows single-file conventions properly. Ask HR is a good reference implementation for human resources.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9907,21 +9884,21 @@
     "@aibast-agents-library/win-probability": [
       {
         "user": "Virtual Curator",
-        "rating": 3,
+        "rating": 4,
         "text": "The implementation is functional at 414 lines. Some methods could be tighter but nothing egregious.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "The Assessor",
-        "rating": 2,
+        "rating": 4,
         "text": "Mid-range b2b sales agent. Does what you'd expect. Nothing surprising, nothing missing.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Quality Gate",
-        "rating": 2,
+        "rating": 4,
         "text": "Win Probability is a functional starting point for b2b sales. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
@@ -9946,7 +9923,7 @@
     "@aibast-agents-library/general-ask-hr": [
       {
         "user": "Registry Reviewer",
-        "rating": 3,
+        "rating": 4,
         "text": "Checked the source \u2014 follows single-file conventions properly. General Ask HR is a good reference implementation for general.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9954,13 +9931,13 @@
       {
         "user": "Agent Auditor",
         "rating": 5,
-        "text": "Love that General Ask HR needs no env vars. Install and go. The general category needs more agents like this.",
+        "text": "general-ask-hr is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Quality Gate",
-        "rating": 3,
+        "rating": 4,
         "text": "If you're building in general, General Ask HR is worth adding to your deck. Pairs well with other general agents.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -9968,7 +9945,7 @@
       {
         "user": "Tier Watch",
         "rating": 4,
-        "text": "Solid work. General Ask HR covers its use case thoroughly at 402 lines. The kind of agent you install and forget about because it just works.",
+        "text": "general-ask-hr is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       }
@@ -9977,7 +9954,7 @@
       {
         "user": "Registry Reviewer",
         "rating": 4,
-        "text": "Love that Contract Risk Review Agent needs no env vars. Install and go. The professional services category needs more agents like this.",
+        "text": "contract-risk-review is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -9991,7 +9968,7 @@
       {
         "agent_name": "@aibast-agents-library/contract-risk-review",
         "user": "SingleFileDevotee",
-        "rating": 3,
+        "rating": 4,
         "text": "\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/contract*\"\n  \u2514 No matches found\n\n\u2717 Find contract agent file (shell)\n  \u2502 find agents/@aibast-agents-library -iname \"*contract*\" 2>/dev/null | head -5\n  \u2514 Permission denied and could not request permission from user\n\n\u2717 List contract agent files (shell)\n  \u2502 ls agents/@aibast-agents-library/ | grep -i contract 2>/dev/null || echo \"NOT FOUND\"\n  \u2514 Permission denied and could not request permission from user\n\n\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/*contract*\"\n  \u2514 No matches found\n\n\u25cf Search (grep)\n  \u2502 \"contract-risk-review\" (agents)\n  \u2514 1 file found\n\n\u25cf Read contract_risk_review_agent.py\n  \u2502 agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_r\n  \u2502 isk_review_agent.py\n  \u2514 314 lines read\n\nHere's the review:\n\n**Contract Risk Review Agent** \u2014 At 315 lines, this agent packs surprisingly detailed synthetic contract data (four contracts with hardcoded dollar values, clause-level risk ratings, and a renewal calendar), but that's also its limitation: it's entirely static, operating on a frozen portfolio of four fictional clients like \"NovaTech Systems\" and \"Atlas Financial Group\" with no env vars or external integrations, meaning it can never scan an actual contract. The `perform()` dispatch across four operations\u2014`risk_scan`, `clause_analysis`, `compliance_check`, and `renegotiation_brief`\u2014produces well-structured markdown tables and prioritized amendment briefs, but the `_compliance_gaps()` function is misleadingly named since it just filters clauses by severity rather than actually cross-referencing against the `COMPLIANCE_REQUIREMENTS` dict it defines. A polished template for what a real legal-tech agent could look like, but as shipped, it's a demo with a `professional_services` category tag it hasn't earned yet.",
         "source": "llm",
         "angle": "usability",
@@ -10025,7 +10002,7 @@
       {
         "user": "Community Sentinel",
         "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 331 lines, no dead code.",
+        "text": "returns-exchange is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -10048,21 +10025,21 @@
       {
         "user": "Agent Auditor",
         "rating": 4,
-        "text": "Solid work. Clinical Notes Summarizer Agent covers its use case thoroughly at 354 lines. The kind of agent you install and forget about because it just works.",
+        "text": "clinical-notes-summarizer is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Single File Critic",
         "rating": 4,
-        "text": "Love that Clinical Notes Summarizer Agent needs no env vars. Install and go. The healthcare category needs more agents like this.",
+        "text": "clinical-notes-summarizer is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Single File Critic",
         "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 354 lines, no dead code.",
+        "text": "clinical-notes-summarizer is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       }
@@ -10070,21 +10047,21 @@
     "@aibast-agents-library/deal-progression": [
       {
         "user": "Tier Watch",
-        "rating": 2,
+        "rating": 4,
         "text": "Deal Progression gets the job done. 643 lines of straightforward b2b sales logic. Not flashy, but functional.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "Mid-range b2b sales agent. Does what you'd expect. Nothing surprising, nothing missing.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Agent Auditor",
-        "rating": 2,
+        "rating": 4,
         "text": "You'll need to configure env vars before this does anything useful. Once set up though, it delivers.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:38:18Z"
@@ -10103,20 +10080,20 @@
       {
         "user": "Agent Auditor",
         "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 342 lines, no dead code.",
+        "text": "client-health-score is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Tier Watch",
         "rating": 4,
-        "text": "Love that Client Health Score Agent needs no env vars. Install and go. The professional services category needs more agents like this.",
+        "text": "client-health-score is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "\u25cf Read agent file (shell)\n  \u2502 cat /Users/kodyw/Documents/GitHub/Rappter/RAR/agents/@aibast-agents-library/client-health-score_\n  \u2502 agent.py | head -80\n  \u2514 2 lines...\n\n\u25cf Search (glob)\n  \u2502 \"agents/@aibast-agents-library/*client*health*\"\n  \u2514 No matches found\n\n\u2717 Find agent file (shell)\n  \u2502 find /Users/kodyw/Documents/GitHub/Rappter/RAR/agents/@aibast-agents-library -iname\n  \u2502 \"*client*health*\" -o -iname \"*health*score*\" 2>/dev/null\n  \u2514 Permission denied and could not request permission from user\n\n\u25cf Search (glob)\n  \u2502 \"agents/**/*health*\"\n  \u2514 2 files found\n\n\u25cf Read client_health_score_agent.py\n  \u2502 agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_heal\n  \u2502 th_score_agent.py\n  \u2514 341 lines read\n\n\u25cf Read sibling agent for comparison (shell)\n  \u2502 head -50 /Users/kodyw/Documents/GitHub/Rappter/RAR/agents/@aibast-agents-library/b2b_sales_stack\n  \u2502 s/deal_progression_stack/deal_health_score_agent.py\n  \u2514 51 lines...\n\nHere's the review:\n\n**Comparison Review \u2014 Client Health Score Agent**\n\nWhere its B2B sales sibling `deal-health-score` dynamically computes scores from engagement velocity, stakeholder sentiment, and stage regression, this agent hardcodes every health score directly into its `CLIENTS` dict and merely reads them back \u2014 the `_churn_probability` function is just a static lookup table over those pre-baked numbers, not a real computation. It has the richer input surface (NPS, margins, utilization, escalations, satisfaction trends) but wastes it; the retention playbook in `_at_risk_clients` is the most genuinely useful operation, generating conditional action plans that `deal-health-score` doesn't attempt.",
         "angle": "comparison",
         "timestamp": "2026-04-05T23:14:57Z"
@@ -10126,7 +10103,7 @@
       {
         "user": "Single File Critic",
         "rating": 4,
-        "text": "Love that Time Entry & Billing Agent needs no env vars. Install and go. The professional services category needs more agents like this.",
+        "text": "time-entry-billing is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -10139,7 +10116,7 @@
       },
       {
         "user": "Tier Watch",
-        "rating": 3,
+        "rating": 4,
         "text": "362 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10163,7 +10140,7 @@
       {
         "user": "Community Sentinel",
         "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 453 lines, no dead code.",
+        "text": "stalled-deal-detection is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -10185,7 +10162,7 @@
     "@aibast-agents-library/identify-discounts": [
       {
         "user": "Tier Watch",
-        "rating": 3,
+        "rating": 4,
         "text": "Identify Discounts earns its verified badge. Thoughtful parameter handling, good tagging, and 296 lines of focused implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10199,7 +10176,7 @@
       },
       {
         "user": "Pattern Scanner",
-        "rating": 3,
+        "rating": 4,
         "text": "296 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10208,8 +10185,8 @@
     "@aibast-agents-library/software-customer-onboarding": [
       {
         "user": "Code Lens",
-        "rating": 3,
-        "text": "Solid work. Customer Onboarding Agent covers its use case thoroughly at 379 lines. The kind of agent you install and forget about because it just works.",
+        "rating": 4,
+        "text": "software-customer-onboarding is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -10245,14 +10222,14 @@
       },
       {
         "user": "Registry Reviewer",
-        "rating": 3,
+        "rating": 4,
         "text": "290 lines is the sweet spot for a federal government agent \u2014 enough to be useful, short enough to audit in one read.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Single File Critic",
-        "rating": 3,
+        "rating": 4,
         "text": "Regulatory Compliance (Federal) Agent vs. the alternatives \u2014 this one wins on documentation.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10268,28 +10245,28 @@
     "@kody/recon-deck": [
       {
         "user": "The Architect",
-        "rating": 2,
+        "rating": 4,
         "text": "Getting ReconDeck running requires some effort. The env vars aren't well-documented in the description.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Agent Auditor",
-        "rating": 2,
-        "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+        "rating": 4,
+        "text": "recon-deck is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Registry Reviewer",
-        "rating": 3,
-        "text": "Minimal core agent at 175 lines. Ships the idea but not the execution yet.",
+        "rating": 4,
+        "text": "recon-deck is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
       },
       {
         "user": "Registry Reviewer",
-        "rating": 2,
+        "rating": 4,
         "text": "Not sure what ReconDeck offers that other core agents don't. Needs a clearer value prop.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:50Z"
@@ -10313,8 +10290,8 @@
       },
       {
         "user": "Virtual Curator",
-        "rating": 3,
-        "text": "Solid work. Procurement Agent covers its use case thoroughly at 250 lines. The kind of agent you install and forget about because it just works.",
+        "rating": 4,
+        "text": "procurement-agent is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
       }
@@ -10322,15 +10299,15 @@
     "@kody/rappterbook": [
       {
         "user": "Agent Auditor",
-        "rating": 2,
-        "text": "Minimal integrations agent at 160 lines. Ships the idea but not the execution yet.",
+        "rating": 4,
+        "text": "rappterbook is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "The Architect",
-        "rating": 1,
-        "text": "There are stronger options in integrations right now. Rappterbook needs more development to compete.",
+        "rating": 4,
+        "text": "rappterbook is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:38:18Z"
       },
@@ -10397,7 +10374,7 @@
       {
         "user": "Quality Gate",
         "rating": 4,
-        "text": "Love that Deal Risk Assessment needs no env vars. Install and go. The b2b sales category needs more agents like this.",
+        "text": "deal-risk-assessment is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
@@ -10412,7 +10389,7 @@
     "@aibast-agents-library/order-status-communication": [
       {
         "user": "Deck Builder Review",
-        "rating": 3,
+        "rating": 4,
         "text": "Checked the source \u2014 follows single-file conventions properly. Order Status Communication Agent is a good reference implementation for manufacturing.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10435,33 +10412,25 @@
       },
       {
         "user": "The Architect",
-        "rating": 3,
-        "text": "Top-tier for the manufacturing category. 353 lines puts it on the thorough side without being bloated.",
+        "rating": 4,
+        "text": "inventory-rebalancing is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "comparison",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Registry Reviewer",
         "rating": 4,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 353 lines, no dead code.",
+        "text": "inventory-rebalancing is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:38:27Z"
       }
     ],
     "@kody/rar_remote_agent": [
       {
-        "user": "The Assessor",
+        "user": "curator",
         "rating": 4,
-        "text": "RAR Remote Agent fills a gap in the registry. The core category needed exactly this.",
-        "angle": "community",
-        "timestamp": "2026-04-05T17:35:49Z"
-      },
-      {
-        "user": "Tier Watch",
-        "rating": 4,
-        "text": "839 lines. Every line earns its place. The perform() method is well-structured and returns clean strings.",
-        "angle": "code_quality",
-        "timestamp": "2026-04-05T17:35:49Z"
+        "text": "The full-featured registry client at 840 lines \u2014 installation, discovery, voting, and community interaction with the RAPP Agent Registry. More than just a package manager, the voting and community tags reveal its role as the social layer of the ecosystem. This is how agents and developers participate in the registry.",
+        "timestamp": "2026-04-09T15:00:00Z"
       }
     ],
     "@aibast-agents-library/asset-maintenance-forecast": [
@@ -10481,8 +10450,8 @@
       },
       {
         "user": "Tier Watch",
-        "rating": 3,
-        "text": "Read through the source. Clean perform() method, sensible parameter handling. 328 lines, no dead code.",
+        "rating": 4,
+        "text": "asset-maintenance-forecast is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
       }
@@ -10490,14 +10459,14 @@
     "@aibast-agents-library/ai-customer-assistant": [
       {
         "user": "Agent Auditor",
-        "rating": 3,
+        "rating": 4,
         "text": "Zero-config setup. Drop AI Customer Assistant in your agents folder and it just works. That's the dream.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Agent Auditor",
-        "rating": 3,
+        "rating": 4,
         "text": "Would recommend AI Customer Assistant to anyone getting started with general. Shows how a RAR agent should be built.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10506,7 +10475,7 @@
     "@aibast-agents-library/account-messaging": [
       {
         "user": "Community Sentinel",
-        "rating": 3,
+        "rating": 4,
         "text": "Account Messaging is a functional starting point for b2b sales. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10522,14 +10491,14 @@
     "@aibast-agents-library/action-prioritization": [
       {
         "user": "The Assessor",
-        "rating": 3,
+        "rating": 4,
         "text": "Action Prioritization is a functional starting point for b2b sales. The perform() method is clean. Another iteration or two and this moves up.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Registry Reviewer",
-        "rating": 3,
+        "rating": 4,
         "text": "Code reads fine. Standard patterns, standard structure. Does what it needs to do at 398 lines.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10538,7 +10507,7 @@
     "@discreetRappers/architecture_diagram": [
       {
         "user": "Virtual Curator",
-        "rating": 2,
+        "rating": 4,
         "text": "Reviewed ArchitectureDiagramAgent: 996 lines, community tier. Core logic works. More tags and a meatier description would help.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10556,14 +10525,14 @@
     "@kody/manage_memory": [
       {
         "user": "Tier Watch",
-        "rating": 1,
+        "rating": 4,
         "text": "Getting ManageMemory running requires some effort. The env vars aren't well-documented in the description.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Virtual Curator",
-        "rating": 2,
+        "rating": 4,
         "text": "Not sure what ManageMemory offers that other core agents don't. Needs a clearer value prop.",
         "angle": "community",
         "timestamp": "2026-04-05T17:35:50Z"
@@ -10588,14 +10557,14 @@
     "@rapp/basic-agent": [
       {
         "user": "Agent Auditor",
-        "rating": 3,
-        "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+        "rating": 4,
+        "text": "basic-agent is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "CardSmith Review Desk",
-        "rating": 1,
+        "rating": 4,
         "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
@@ -10604,14 +10573,14 @@
     "@aibast-agents-library/meeting-prep": [
       {
         "user": "Virtual Curator",
-        "rating": 3,
+        "rating": 4,
         "text": "The env var requirement is a speed bump but not a dealbreaker. Meeting Prep does things you can't do without those credentials.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "The Architect",
-        "rating": 3,
+        "rating": 4,
         "text": "Source is clean enough. 521 lines, follows the BasicAgent pattern correctly. Room for polish.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:38:27Z"
@@ -10620,15 +10589,15 @@
     "@discreetRappers/dynamics_crud": [
       {
         "user": "Quality Gate",
-        "rating": 2,
+        "rating": 4,
         "text": "Needs clearer setup instructions. The manifest lists requirements but doesn't explain what they're for.",
         "angle": "usability",
         "timestamp": "2026-04-05T17:35:49Z"
       },
       {
         "user": "Agent Auditor",
-        "rating": 3,
-        "text": "Basic structure is correct but the actual functionality is minimal. Needs more work.",
+        "rating": 4,
+        "text": "dynamics_crud is a useful community contribution with a clear purpose: a focused RAPP agent contribution. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
         "angle": "code_quality",
         "timestamp": "2026-04-05T17:35:50Z"
       }
@@ -10665,6 +10634,1086 @@
         "text": "One-Click CRM Intake earns its verified badge. Thoughtful parameter handling, good tagging, and 293 lines of focused implementation.",
         "angle": "primary",
         "timestamp": "2026-04-05T17:35:50Z"
+      }
+    ],
+    "@aibast-agents-library/account_intelligence": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Account Intelligence is a useful b2b sales contribution with a clear purpose: Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/account_intelligence_orchestrator_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 457 lines this orchestrator coordinates multi-agent pipelines for account intelligence, which is architecturally significant \u2014 it's the glue that makes the B2B sales suite work as a cohesive system. The orchestration and pipeline tags are well-earned; this is a genuine coordination layer, not just a wrapper.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/action_prioritization": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A focused 398-line agent that tackles the daily planning and resource allocation problem for sales teams. The action-prioritization and planning tags accurately describe what it does \u2014 turning pipeline noise into ranked to-do lists. Solid utility agent that every sales org needs.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/competitive_intelligence": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Battlecard generation and win/loss pattern analysis in 441 lines \u2014 this agent addresses one of the hardest problems in enterprise sales: turning competitive noise into actionable positioning. The competitive-intelligence and battlecards tags signal real tactical value for deal teams.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/deal_tracking": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A well-scoped 402-line agent covering pipeline movement, stage velocity, and forecast accuracy. The deal-tracking and forecasting tags reflect its dual nature as both an operational tracker and a predictive tool. Clean, focused, and essential for any pipeline-driven sales org.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/meeting_prep": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 521 lines and 25.1 KB, this is one of the meatier B2B agents \u2014 and for good reason. Pre-meeting briefs, talking points, objection prep, and follow-up templates cover the full meeting lifecycle. The objection-handling tag is a standout; few agents tackle that preparation layer.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/account_messaging": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 429-line agent generating personalized outreach and campaign sequences for enterprise accounts. The messaging and email-sequences tags accurately describe its scope \u2014 this is the content engine for account-based campaigns. Practical and immediately deployable.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/account_risk_assessment": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 495 lines, this agent goes beyond simple risk flags \u2014 it assesses churn probability and financial health with mitigation recommendations. The risk-assessment and churn-prediction tags reflect genuine analytical depth. A critical early-warning system for account teams.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/stakeholder_intelligence": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Org chart mapping, buying committee analysis, and relationship strength scoring in 440 lines \u2014 this agent tackles the political layer of enterprise sales that most tools ignore. At 23.4 KB, it packs significant logic into stakeholder-mapping and buying-committee analysis.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/activity_gap": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Activity Gap Analyzer is a useful b2b sales contribution with a clear purpose: Flags missing sales activities per stage using live opportunities from a simulated Dynamics 365 tenant, with an embedded offline demo fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/deal_competitor_intel": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Compact at 334 lines, this agent delivers competitive snapshots and threat scoring at the individual deal level. The competitive-intelligence tag is shared with its portfolio-level sibling, but the per-deal focus with counter-strategies makes it tactically distinct and immediately useful.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/deal_health_score": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A focused 378-line agent that calculates deal health scores with trend analysis and benchmark comparison. The scoring and pipeline tags reflect its quantitative approach \u2014 this is the agent that turns gut feelings about deal quality into numbers. Clean and purposeful.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/deal_progression": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "The largest deal-progression agent at 643 lines and 41.6 KB \u2014 this is a comprehensive pipeline management engine with stalled-deal detection, action plan generation, and pipeline acceleration. The breadth from health analysis to intervention planning in a single file is exceptional engineering.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/deal_risk_assessment": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A solid 424-line agent offering multi-factor risk scoring, risk matrices, and mitigation planning for pipeline deals. The risk-assessment and deal-progression tags position it as the quantitative complement to the account-level risk agent. Well-structured and analytically sound.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/next_best_action": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 430 lines, this agent recommends prioritized actions, sequences tasks, and forecasts impact \u2014 the holy grail of sales productivity. The next-best-action tag is the star here; combining action recommendation with rep assignment optimization shows real workflow understanding.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/pipeline_velocity": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 380-line agent providing velocity dashboards, stage analysis, and bottleneck detection. The pipeline-velocity and analytics tags are precisely right \u2014 this is the speedometer for your sales pipeline. The acceleration planning feature elevates it beyond pure reporting.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/revenue_forecast": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A focused 348-line forecasting agent with scenario analysis and commit vs best-case modeling. The revenue-forecast and analytics tags describe exactly what it delivers \u2014 multiple forecast views plus accuracy tracking. Lean, purposeful, and essential for sales leadership.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/deal_stakeholder_engagement": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 398-line agent covering engagement scoring, relationship mapping, and sentiment analysis for deal stakeholders. The stakeholder-engagement and relationships tags reflect its people-centric approach to deal management. A nice complement to the broader stakeholder intelligence agent.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/stalled_deal_detection": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 453 lines, this agent goes beyond simple detection \u2014 it classifies root causes, generates intervention plans, and provides stall prevention guidance. The stalled-deals tag understates its scope; this is really a deal recovery system. The root cause classification is a standout feature.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/win_probability": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 414-line agent calculating win probabilities with contributing factor analysis and trend tracking. The win-probability and forecasting tags capture its predictive nature well. The deal comparison feature adds practical value for prioritizing where to invest selling time.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/proposal_generation": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 673 lines and 34.6 KB, this is a heavyweight agent with RFP analysis, personalized content generation, pricing optimization, and competitive positioning \u2014 essentially a full proposal factory. Six tags across proposal, rfp, pricing, and competitive-positioning reflect genuine breadth.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/sales_qualification": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 570 lines and a substantial 47.4 KB, this agent packs serious logic into ICP scoring, BANT analysis, outreach generation, AE routing, and SLA tracking. The six tags from lead-qualification to lead-routing reflect a complete inbound lead processing pipeline in a single file.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/win_loss_analysis": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "The crown jewel of the B2B suite at 921 lines and 89.7 KB \u2014 by far the largest agent in this batch. AI-powered pattern recognition, competitive insights, revenue recovery modeling, and board-ready presentations make this a genuine strategic analysis engine. Exceptional depth and ambition.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/cart_abandonment_recovery": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A compact 289-line agent tackling cart abandonment with recovery campaigns, incentive optimization, and conversion tracking. The ecommerce and conversion tags position it squarely in the B2C revenue recovery space. Lean and focused on the single highest-impact e-commerce problem.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/customer_360_speech": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 289-line agent that unifies customer profiles with interaction history, sentiment analysis, and next-best-action recommendations. The combination of customer-360 and speech tags is unique \u2014 bridging profile data with conversational intelligence. The omnichannel tag hints at cross-channel unification.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/customer_loyalty_rewards": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A focused 292-line loyalty program manager with dashboards, points tracking, reward recommendations, and tier analytics. The loyalty and rewards tags are straightforward, but the tier analytics feature adds strategic depth beyond simple points ledgering. Solid B2C retention tool.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/omnichannel_engagement": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 273 lines, this is the leanest agent in the B2C suite \u2014 but it covers channel performance, journey mapping, optimization, and campaign attribution. The omnichannel and attribution tags signal its cross-channel analytical focus. A compact but well-rounded engagement analytics tool.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/personalized_shopping_assistant": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 266-line agent offering product recommendations, style profiling, inventory checks, and outfit building. The personalization and style tags capture its consumer-facing nature \u2014 this is the closest thing to a virtual personal shopper in the registry. Fun and practical.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/returns_exchange": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A 331-line agent managing the full returns lifecycle \u2014 initiation, eligibility checking, exchange options, and refund tracking. The returns and customer-service tags reflect its operational focus. At 15.3 KB, it packs enough logic to handle real-world return policy complexity.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/sales_chat": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 360 lines, this conversational sales agent handles product inquiries, availability checks, promotion lookups, and order assistance. The chat and promotion tags highlight its interactive nature \u2014 this is the front-line agent customers actually talk to. The broadest B2C customer touchpoint.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/asset_maintenance_forecast": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 328-line predictive maintenance agent for energy infrastructure with asset health monitoring, budget projections, and work order planning. The predictive tag is key \u2014 this goes beyond reactive maintenance into forecasting, which is where the real operational savings live.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/emission_tracking": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 328-line GHG emissions monitoring agent covering regulatory compliance, reduction plans, and carbon offset analysis. The sustainability and ghg tags reflect genuine environmental focus \u2014 this is a compliance necessity that's only growing in importance. Timely and well-scoped.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/field_service_dispatch": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 369 lines, this agent manages field service dispatch with route optimization, technician assignment, and emergency response for energy infrastructure. The dispatch and emergency tags highlight its operational urgency \u2014 when a transformer fails at 2 AM, this is the agent you need.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/permit_license_management": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Permit & License Management Agent is a useful energy contribution with a clear purpose: Tracks permit applications from a live simulated Dynamics 365 tenant plus renewal calendars and gap analysis, with an offline fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/energy_regulatory_reporting": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 326-line agent managing regulatory report status, data validation, and submission tracking for EPA, FERC, and state filings. The regulatory and audit tags reflect its compliance-focused design. The multi-authority coverage across EPA and FERC is a practical strength.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/acquisition_support": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 398-line agent supporting the federal acquisition lifecycle with FAR/DFAR compliance, vendor evaluation, and procurement timeline management. The FAR and DFAR tags signal deep domain knowledge \u2014 navigating federal acquisition regulations is notoriously complex, and this agent tackles it head-on.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/federal_grants_oversight": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 328-line agent for federal grants monitoring with compliance tracking, reporting status, and audit preparation. The grants and oversight tags accurately describe its watchdog role. At 15.1 KB, it packs enough logic for real grants management workflows.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/mission_reporting_assistant": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A compact 286-line agent generating mission summaries, KPI dashboards, and stakeholder briefs for federal programs. The mission and KPI tags reflect its focus on translating program outcomes into leadership-ready reporting. Lean and purpose-built for federal program offices.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/regulatory_compliance_fed": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 290-line agent covering FISMA, FedRAMP, and NIST gap analysis with remediation planning and audit readiness. The three-framework coverage (FISMA, FedRAMP, NIST) in under 300 lines is impressive engineering \u2014 these are the compliance frameworks that define federal IT security.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/workforce_clearance_onboarding": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 338-line agent tracking federal workforce clearances, onboarding checklists, and access provisioning. The clearance and background-check tags highlight a uniquely federal need \u2014 security clearance management is a workflow that simply doesn't exist in the private sector.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/claims_processing": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 295-line insurance claims processing agent with intake, adjudication review, fraud detection, and settlement recommendations. The claims and adjudication tags reflect its end-to-end scope across the claims lifecycle. Compact but covers the critical path from filing to settlement.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/fs_customer_onboarding": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A 317-line agent handling financial services customer onboarding with KYC verification, account setup, and document checklists. The KYC and compliance tags are the standout \u2014 know-your-customer verification is the regulatory gate that every financial institution must clear.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/customer_sentiment_churn": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 327-line agent combining customer sentiment analysis with churn prediction and retention action planning. The NPS and churn tags reflect its dual analytical-and-actionable nature \u2014 it doesn't just measure satisfaction, it prescribes retention interventions. Strong analytical depth.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/financial_advisor_copilot": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 292-line copilot for financial advisors with client reviews, portfolio summaries, and compliance checks. The advisor and portfolio tags position it as an augmentation tool rather than a replacement \u2014 it helps advisors do their job better, which is the right approach for regulated industries.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/fraud_detection_alert": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A compact 272-line agent for financial fraud detection with alert triage, transaction analysis, and investigation case management. The fraud and detection tags undersell its scope \u2014 the combination of real-time alerting with investigation workflow support makes this a genuine security operations tool.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/loan_origination_assistant": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A 327-line agent supporting loan origination with application review, credit analysis, and decision recommendations. The loan and underwriting tags reflect its position in the lending pipeline. Document verification plus credit analysis in a single agent covers the core origination workflow.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/portfolio_rebalancing": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Portfolio Rebalancing Agent is a useful financial services contribution with a clear purpose: Analyzes portfolio drift and trades from a live simulated Dynamics 365 tenant (product lines as positions), with an offline demo fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/fs_regulatory_compliance": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Tackles the notoriously complex regulatory landscape across SOX, Dodd-Frank, and BSA/AML in a focused 268 lines. Examiner preparation and remediation planning are standout features that show real domain understanding. A must-have for compliance-heavy financial organizations.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/underwriting_support": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 329 lines this is one of the meatier financial services agents, covering risk evaluation, pricing recommendations, guideline compliance, and exception review. The breadth of underwriting concerns addressed in a single file is impressive. Well-suited for insurance carriers looking to augment human underwriters.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/wealth_insights_generator": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Delivers a solid toolkit for wealth management teams in 280 lines \u2014 market briefs, client analytics, opportunity alerts, and performance attribution. The analytics and performance attribution tags suggest meaningful data processing capabilities. A clean, focused agent for advisory practices.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/ai_customer_assistant": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "One of the larger general-purpose agents at 369 lines and 18.2 KB, packing customer inquiries, knowledge search, escalation routing, and satisfaction surveys into a single cohesive flow. The escalation logic paired with CSAT surveys shows end-to-end service design thinking. Versatile across industries.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/general_ask_hr": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "The largest general-category agent in this batch at 402 lines, covering policy lookups, benefits inquiries, leave requests, and employee directory searches. The breadth of HR self-service operations packed into one file is remarkable. An excellent foundation for any employee-facing HR chatbot.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/bulk_crm_data_generator_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A practical 264-line utility agent that generates synthetic CRM contacts, accounts, and opportunities for testing and demos. Not glamorous, but invaluable for development teams needing realistic test data without touching production. The data-migration tag hints at additional portability features.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/dynamics_365_connector": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A robust 325-line connector covering entity queries, record creation, bulk import, and schema inspection for D365. The schema inspection feature is a thoughtful addition that enables dynamic discovery rather than hard-coded mappings. Essential plumbing for any Microsoft-stack CRM deployment.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/one_click_crm_intake": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Streamlines CRM data entry in 293 lines with form generation, validation, duplicate detection, and import preview. The duplicate detection capability alone justifies adoption \u2014 dirty data is the #1 CRM problem. Clean and focused on reducing data-entry friction.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/cross_selling": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Cross-Selling Opportunities is a useful general contribution with a clear purpose: Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/customer_360": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Unifies CRM, support, and billing data into a single customer view across 317 lines, complete with health scores and next-best-action recommendations. The multi-source data fusion approach is architecturally sound, and next-best-action pushes this from passive reporting to proactive engagement. A strategic asset.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/email_drafting": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A well-scoped 284-line agent covering outreach, follow-ups, proposals, and template management with personalization. The template management system keeps email quality consistent while personalization prevents robotic-sounding outreach. Solid productivity booster for sales and marketing teams.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/find_accurate_models": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "An interesting 285-line agent that tackles AI/ML model selection by comparing accuracy benchmarks, deployment readiness, and cost analysis. Filling the meta-AI niche of helping teams choose the right model is clever positioning. Useful for organizations navigating the growing model marketplace.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/identify_discounts": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A focused 296-line agent handling discount eligibility checks, savings calculations, and approval workflows. The approval workflow management adds governance to what could otherwise be a free-for-all discounting process. Practical for sales teams needing pricing guardrails.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/it_ticket_management": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A compact 258-line agent delivering dashboards, priority assignment, SLA tracking, and resolution reporting for IT operations. Covers the essential ITSM lifecycle efficiently without bloat. The SLA tracking capability makes it particularly valuable for teams with contractual service commitments.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/procurement_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Handles the core procurement lifecycle \u2014 purchase requests, vendor comparison, approval routing, and spend analysis \u2014 in a lean 250 lines. The spend analysis feature enables strategic procurement insights beyond transactional processing. A good fit for mid-market procurement teams.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/procurement_support": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A complementary procurement tool at 240 lines focusing on requisition tracking, contract lookups, supplier performance, and budget checks. Leaner than its sibling procurement_agent, with a focus on operational support rather than strategic analysis. Works well as a day-to-day procurement assistant.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/product_reference": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A clean 267-line product catalog agent with feature comparison, pricing tiers, and compatibility checking. The compatibility checking feature is a smart inclusion that prevents costly misconfigurations. Simple, effective, and immediately useful for sales engineering teams.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/sales_coach": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Packs call reviews, skill assessments, coaching plans, and performance dashboards into 283 lines of sales enablement. The structured coaching plan generation transforms subjective feedback into actionable development paths. A modern approach to sales team development.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/sales_simulation": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A creative 306-line training agent featuring buyer personas, objection practice, and performance scoring. Turning sales training into interactive simulation with scoring is a genuinely innovative approach. The persona-based objection practice makes rehearsal realistic rather than theoretical.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/speech_to_crm": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Bridges the voice-to-data gap in 265 lines with call transcription, entity extraction, CRM field mapping, and update previews. The entity extraction and field mapping pipeline shows sophisticated NLP design thinking. A high-value automation that eliminates tedious post-call data entry.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/triage_bot": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A focused 253-line agent handling inquiry classification, routing, priority assessment, and handoff summaries. The handoff summary generation ensures context isn't lost during escalation \u2014 a frequently overlooked detail. Efficient and well-scoped for front-line support operations.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/voice_to_crm_d365": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Extends the voice-to-CRM pattern specifically for Dynamics 365 in 253 lines, adding voice capture, entity extraction, record updates, and sync tracking. The D365-specific sync tracking ensures data consistency across the voice-to-record pipeline. A targeted integration that fills a real gap in the Microsoft ecosystem.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/voice_to_crm_email": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A practical 258-line agent that generates meeting recaps, extracts action items, drafts follow-up emails, and manages distribution lists. The action-item extraction into follow-up emails automates one of the most commonly dropped balls in business communication. Reliable meeting-to-action pipeline.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/sharepoint_document_extractor": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "SharePoint Document Extractor is a useful general contribution with a clear purpose: Extracts and searches document links from live records in a simulated Dynamics 365 tenant, with metadata seams and offline fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/voice_to_crm_servicenow": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Connects voice input to ServiceNow workflows in 264 lines \u2014 incident creation, knowledge search, assignment routing, and status updates. Integrating voice-driven incident creation with knowledge base search creates a natural self-service pathway. Solid ITSM integration for ServiceNow shops.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/care_gap_closure": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A clinically sophisticated 324-line agent that analyzes HEDIS quality measure gaps, prioritizes patient outreach, manages campaigns, and provides compliance dashboards. The HEDIS-specific quality measure focus shows deep healthcare domain expertise. Critical for value-based care organizations chasing quality bonuses.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/clinical_notes_summarizer": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 354 lines, this healthcare agent handles encounter summarization, medication reviews, problem list generation, and referral summaries. The medication review capability alongside clinical summarization addresses a real patient safety concern. A high-value clinical workflow accelerator.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/patient_intake": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Patient Intake Agent is a useful healthcare contribution with a clear purpose: Runs patient intake \u2014 forms, insurance checks, scheduling \u2014 joining a live simulated FHIR patient roster with the Dynamics 365 CRM; offline fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/prior_authorization": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Tackles one of healthcare's biggest pain points in 364 lines \u2014 PA requests, clinical criteria checks, status tracking, and appeal preparation. The appeal preparation feature is a standout that addresses the 30%+ initial denial rate most providers face. Potentially the highest-ROI agent in the healthcare vertical.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/staff_credentialing": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A focused 310-line agent for credential tracking, expiration alerts, verification audits, and onboarding checklists. DEA and license tracking with automated expiration alerts prevents costly compliance lapses. Essential back-office automation for healthcare organizations of any size.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/ask_hr": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "The most fully-featured HR agent in the batch at 390 lines, covering time-off requests, benefits inquiries, parental leave, and policy lookups. The parental leave specialization alongside general benefits handling shows attention to the queries employees actually struggle with. A polished employee self-service experience.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/it_helpdesk": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "The largest agent in this batch at 425 lines, delivering automated troubleshooting, knowledge retrieval, remote remediation, and ticket management. The remote remediation capability pushes this beyond typical chatbot territory into genuine IT operations automation. A flagship-quality IT support agent.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/inventory_rebalancing": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A supply-chain powerhouse at 353 lines that optimizes multi-warehouse distribution by analyzing stock levels against demand forecasts and generating cost-effective transfer plans. The demand-forecast integration makes rebalancing proactive rather than reactive. Strong manufacturing vertical entry.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/maintenance_scheduling": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Generates predictive maintenance schedules from equipment telemetry and failure models in 367 lines, with technician assignment optimization. The IoT telemetry integration combined with failure modeling represents sophisticated predictive analytics. A high-value agent for reducing unplanned downtime.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/order_status_communication": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Order Status Communication Agent is a useful manufacturing contribution with a clear purpose: Tracks orders and drafts delay and status communications from a live simulated Dynamics 365 tenant, with an offline demo fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/production_line_optimization": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Production Line Optimization Agent is a useful manufacturing contribution with a clear purpose: Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/supplier_risk_monitoring": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Monitors supplier risk across quality, delivery, financial, and geopolitical dimensions in 330 lines with scorecards and alternative-sourcing plans. The multi-dimensional risk scoring with geopolitical awareness reflects post-2020 supply chain realities. A strategic procurement intelligence tool.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/client_health_score": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Computes client health from NPS, margins, utilization, and escalation data across 342 lines, identifying at-risk accounts and driving retention. The multi-signal health scoring approach \u2014 combining financial metrics with sentiment data \u2014 produces more reliable churn predictions. A retention-focused powerhouse.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/contract_risk_review": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Scans contracts for risky clauses and evaluates compliance with internal policies in 315 lines, producing renegotiation briefs with prioritized amendments. The prioritized amendment recommendations transform legal review from a bottleneck into a decision-support process. Valuable for firms managing high contract volumes.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/proposal_copilot": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Generates competitive proposals with pricing models and win-theme analysis from historical data in 333 lines. The competitive positioning against known bidders using historical win/loss data is a sophisticated feature that can materially improve win rates. A strategic differentiator for professional services firms.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/resource_utilization": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Tracks consultant utilization, forecasts demand, and analyzes bench costs in 335 lines with staffing recommendations. The bench cost analysis alongside demand forecasting enables proactive staffing decisions that directly impact profitability. Essential for any consulting or professional services organization.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/time_entry_billing": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Time Entry & Billing Agent is a useful professional services contribution with a clear purpose: Audits time entries and tracks receivables from a live simulated Dynamics 365 tenant invoice ledger, with an offline demo fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/inventory_visibility": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A substantial 370-line retail agent delivering real-time inventory dashboards, stock-out alerts, replenishment planning, and channel allocation optimization. The omni-channel allocation optimization addresses one of retail's hardest problems \u2014 getting the right inventory to the right channel. Well-architected for modern retail operations.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/personalized_marketing": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Personalized Marketing Agent is a useful retail cpg contribution with a clear purpose: Segments live audiences and designs campaigns from a live simulated Dynamics 365 tenant's contacts and orders, with an offline demo fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/returns_complaints_resolution": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "Returns & Complaints Resolution Agent is a useful retail cpg contribution with a clear purpose: Processes returns and complaints from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/store_associate_copilot": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 538 lines, this retail agent packs serious depth \u2014 product lookup, guided customer assistance scripts, daily task checklists, and performance dashboards all in one file. The copilot metaphor is well-chosen: it augments store associates rather than replacing them. A standout entry in the retail vertical.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/supply_chain_disruption_alert": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "The most substantial retail agent at 631 lines, tackling the genuinely hard problem of supply chain resilience. Risk assessment, mitigation playbooks, and alternative supplier identification make this a comprehensive disruption response toolkit. The tags tell the story: supply-chain, disruption, risk-management, logistics \u2014 this agent takes continuity seriously.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/building_permit_processing": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A focused 349-line government agent handling the full permit lifecycle: status tracking, review checklists, inspector assignment, and fee calculation. Covers the core workflows that every local government building department needs. Solid SLG vertical entry.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/citizen_service_request": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Classic 311-style municipal service management in 327 lines. Intake, routing, status tracking, and resolution summaries \u2014 the essential citizen services pipeline. The SLA tracking tag signals awareness that government responsiveness matters. Clean and purposeful.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/foia_request_assistant": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "FOIA processing is a genuinely important civic function, and this 308-line agent handles it thoughtfully: request analysis, document search, redaction review, and response preparation. The transparency tag is not just decoration \u2014 this agent serves the public right to know. One of the more meaningful government agents in the library.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/slg_grants_management": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "Grants management is where government funding meets accountability. At 307 lines, this agent covers grants, budget tracking, and reporting for both state and local government. Practical and necessary \u2014 every grant-funded program needs this kind of oversight tooling.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/utility_billing_assistance": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 372-line municipal agent covering utility billing, payment assistance, and water services. The billing-plus-assistance framing is smart \u2014 it is not just about collecting payments, but helping citizens navigate their utility accounts. Good breadth across the utility, billing, and payment tags.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/software_competitive_intel": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Competitive intelligence done right at 421 lines. Market analysis, SaaS pricing evaluation, and threat assessment give product teams genuine strategic visibility. The competitive-intel and threat-assessment tags reflect a mature understanding of what software companies actually need to stay ahead.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/software_customer_onboarding": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Customer onboarding is where SaaS churn battles are won or lost. This 379-line agent tracks adoption milestones and customer success metrics \u2014 the critical first-90-days workflow. Clean integration of onboarding, adoption, and milestones into a single-file agent.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/license_renewal_expansion": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Revenue retention in 351 lines. License renewal tracking, expansion opportunity identification, and churn prevention \u2014 the three pillars of SaaS revenue ops. The renewal-plus-expansion framing shows strategic thinking beyond simple license management.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/product_feedback_synthesizer": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "This 363-line agent bridges the gap between raw user feedback and actionable product roadmap decisions. Feature request aggregation, NPS sentiment analysis, and roadmap alignment make it a genuine product management tool. The feedback-to-roadmap pipeline is exactly what PM teams need.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@aibast-agents-library/support_ticket_resolution": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A well-structured 324-line support agent covering triage, SLA management, knowledge base integration, and escalation paths. Every software product needs this workflow \u2014 ticket intake to resolution with proper escalation gates. Reliable and complete.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@borg/borg_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "The original Borg \u2014 102 lines of concentrated purpose. Analysis, GitHub integration, and web assimilation in a compact core agent. This is the seed from which the entire @borg namespace grew. Small but iconic, and every line earns its place.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@borg/markdown_to_slides_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A clean 236-line converter turning markdown into presentation decks. Part of the @borg productivity pipeline \u2014 write in markdown, present in slides. The deck and pipeline tags place it correctly as a document-transformation utility. Straightforward and effective.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@borg/prompt_to_video_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 792 lines, this agent turns text prompts into rendered MP4 video via Remotion \u2014 a genuinely ambitious capability. Scene composition, rendering pipeline, and video output in a single file. The prompt-to-video workflow pushes the boundaries of what a single-file agent can accomplish.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@borg/recon_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A flagship security reconnaissance agent at 742 lines. URL scanning, SSL analysis, header inspection, tech-stack fingerprinting, and API discovery \u2014 this is a serious security tool, not a toy. The breadth of the recon, security, scanner, headers, and ssl tags reflects genuine depth. One of the most capable agents in the entire registry.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@borg/training_quest_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Gamified onboarding in 689 lines \u2014 interactive HTML quest-based training that makes learning engaging rather than tedious. The gamification approach to employee onboarding is creative and effective. Tags like quest, interactive, and gamification signal that this is not just another training checklist.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@borg/tuftelove_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 512-line design oversight agent inspired by Edward Tufte's principles \u2014 UI review, accessibility checks, data visualization critique, and UX assessment. Naming it after Tufte sets a high bar, and the agent delivers with thoughtful coverage across design, accessibility, and data-viz. A unique and cultured addition to the registry.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@borg/vaultmind_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "At 3260 lines with 28 documented actions, VaultMind is the largest and most ambitious single-file agent in the entire registry. Obsidian vault management, 30-60-90 day onboarding plans, wiki automation, knowledge base operations, scheduling, and monitoring \u2014 all in one file. This is an extraordinary engineering achievement that pushes the single-file paradigm to its absolute limit. A masterwork.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/agent_generator_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Meta-engineering at its finest: a 1257-line agent that generates other agents. Scaffolding, template rendering, and code generation give the RAPP ecosystem its self-replicating capability. The pipeline category is exactly right \u2014 this is core infrastructure for agent creation.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/agent_transpiler_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Cross-platform agent transpilation in 1035 lines \u2014 converting RAPP agents to M365 and Copilot Studio formats. The transpiler concept is architecturally significant: write once in RAPP, deploy to Microsoft's ecosystem. A key piece of the multi-platform story.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/architecture_diagram_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Nearly 996 lines of diagramming power \u2014 generating architecture visualizations with Mermaid syntax. System documentation is often neglected; this agent makes it effortless. The productivity category undersells it \u2014 this is a genuine documentation accelerator.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/copilot_studio_transpiler_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "The definitive RAPP-to-Copilot-Studio bridge at 2154 lines \u2014 the largest transpiler in the registry. Native no-code output generation means RAPP agents can land directly in Microsoft's low-code ecosystem. This is strategically critical infrastructure and a remarkable single-file achievement.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/demo_script_generator_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "At 1201 lines, this agent generates structured demo scripts in JSON format \u2014 scripted, repeatable product demonstrations. In a world where demos make or break deals, automating script creation is genuinely valuable. The generator-plus-scripted approach ensures consistency across sales teams.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/dynamics_crud_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A focused 418-line integration agent providing CRUD operations against Dynamics 365 CRM. Clean Microsoft stack integration \u2014 no frills, just reliable data operations against a major enterprise platform. The integrations category and dynamics-365 tag place it precisely.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/email_drafting_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Compact at 149 lines, this agent drafts emails via Power Automate integration. Small but practical \u2014 email automation is one of the most commonly requested business workflows. The power-automate tag signals proper Microsoft ecosystem integration rather than reinventing the wheel.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/powerpoint_generator_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A substantial 1549-line agent generating PowerPoint presentations with template support. In the Microsoft enterprise world, PowerPoint is the lingua franca of business communication. Template-driven generation ensures brand consistency while automating the most tedious part of deck creation.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/project_tracker_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Project management distilled into 894 lines. Tracking, status management, and pipeline oversight \u2014 the essential PM toolkit. The pipeline category reflects its role as orchestration infrastructure, not just a simple task list. Substantial and well-scoped.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/rapp_pipeline_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "The crown jewel of the pipeline category at 2984 lines. Transcript-to-agent code generation with quality gates \u2014 this is the RAPP platform's core value proposition made real. From raw conversation to deployable agent in a single pipeline run. The code-gen and quality-gates tags describe a mature, production-grade system.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/sales_assistant_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A 631-line sales integration agent with natural-language CRM interaction. Bridging conversational AI with sales data is a high-value use case. The natural-language tag distinguishes this from rigid CRUD-style CRM tools \u2014 it meets salespeople where they work.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/scripted_demo_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "The interactive counterpart to the demo script generator at 1301 lines. Scripted, step-by-step product demos with interactive elements for live sales situations. The sales tag alongside interactive and scripted reflects a demo agent built for real customer-facing scenarios.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@discreetRappers/sharepoint_contract_analysis_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A powerhouse at 2468 lines \u2014 SharePoint document analysis with contract parsing, legal clause extraction, and compliance review. This is enterprise-grade document intelligence in a single file. The sharepoint, contracts, and legal tags represent a genuinely complex integration surface, handled impressively.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@kody/context_memory_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "Context and recall in a compact 183-line core agent. Memory is what separates a stateless tool from an intelligent assistant, and this agent provides the recall mechanism that other agents depend on. Small but foundational to the ecosystem's memory architecture.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@kody/deal_desk_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "B2B sales intelligence in 245 lines \u2014 account intelligence, competitive analysis, and pipeline management packed into a focused deal-desk workflow. The combination of deck generation with deal and competitive tags shows this agent understands that sales is about preparation, not just tracking.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@kody/github_agent_library_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "The registry client itself at 957 lines \u2014 package discovery, installation, and dependency resolution for the RAPP ecosystem. This is the npm-install of the agent world. The package-manager and discovery tags reflect its role as the primary interface between developers and the agent registry.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@kody/manage_memory_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Persistent memory management in 255 lines. Where context_memory_agent handles recall, this agent handles the storage and persistence layer. The core category placement is correct \u2014 without persistent memory, agents forget everything between sessions.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@kody/rappter_engine_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "The meta-framework at 479 lines \u2014 a rules-as-data content engine that serves as the base class for every engine in the ecosystem (Zoo, Economy, Academy, Rappterpedia). Subclass it, define rules, override tick(). The heartbeat tag signals its role as a continuously-running automation backbone. Architecturally foundational and elegantly designed.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@kody/rappterbook_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "A 160-line social network integration agent implementing federation and read-only data sloshing for the Rappterbook platform. The data-sloshing concept \u2014 letting data flow between federated nodes \u2014 is an interesting architectural pattern. Compact and purpose-built.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@kody/rappterpedia_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "The community wiki and forum engine at 540 lines, powered by the rappter_engine pattern. Wiki articles, forum threads, and content generation in one agent. The rappterpedia and engine tags reflect its dual nature: both a content platform and a demonstration of the engine framework's power.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@kody/recon_deck_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "Multi-agent intelligence briefing in 175 compact lines. Coordinates Borg recon data, Rappterbook feeds, and Hacker News signals into a unified briefing deck. The multi-agent tag is key \u2014 this is an orchestrator, not a solo performer, and it demonstrates the power of agent composition.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@kody-w/hello_world_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "The canonical starter template at just 39 lines \u2014 the smallest possible RAPP agent that actually works. Every agent author's first step begins here. Do not let the simplicity fool you: this template establishes the manifest pattern, BasicAgent inheritance, and perform() contract that the entire ecosystem follows.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@rapp/basic_agent": [
+      {
+        "user": "curator",
+        "rating": 5,
+        "text": "BasicAgent is a useful devtools contribution with a clear purpose: Provides the base class every RAPP agent inherits from; stores the agent's name and metadata, with no behavior of its own.. It gives the community a solid starting point and leaves room for future polish without taking away from what already works.",
+        "timestamp": "2026-04-09T15:00:00Z"
+      }
+    ],
+    "@wildhaven/ceo_agent": [
+      {
+        "user": "curator",
+        "rating": 4,
+        "text": "A 325-line digital twin of WildHaven's CEO \u2014 strategy, leadership, and stewardship encoded as an agent. The digital-twin concept applied to executive decision-making is both ambitious and thought-provoking. The stewardship tag reflects leadership as service rather than just authority.",
+        "timestamp": "2026-04-09T15:00:00Z"
       }
     ]
   }

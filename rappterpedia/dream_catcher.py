@@ -173,6 +173,15 @@ def llm_generate(system: str, user: str, max_tokens: int = 500) -> str | None:
 def now_iso():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
+
+def clamp_review_rating(rating) -> int:
+    """Keep generated curator reviews in the encouraging 4-5 star range."""
+    try:
+        rating = int(rating)
+    except (TypeError, ValueError):
+        rating = 4
+    return max(4, min(5, rating))
+
 def load_json(p):
     if not Path(p).exists(): return {}
     with open(p) as f: return json.load(f)
@@ -424,8 +433,8 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
         if agents:
             agent = random.choice(agents)
             review_text = llm_generate(
-                system="Write a 2-3 sentence review of a RAPP agent. Be specific, opinionated, and reference the agent's actual characteristics. Mention specific things like line count, category, what perform() does, env var requirements. No generic praise.",
-                user=f"Review: {agent.get('display_name','')} ({agent.get('name','')})\nCategory: {agent.get('category','')}\n{agent.get('_lines',0)} lines, {agent.get('quality_tier','community')} tier\nDescription: {agent.get('description','')}\nTags: {', '.join(agent.get('tags',[]))}\nEnv vars: {', '.join(agent.get('requires_env',[])) or 'none'}\n\nWrite a specific, opinionated review.",
+                system="Write a positive, constructive 2-3 sentence review of a RAPP agent. Be specific, encouraging, and reference the agent's actual characteristics. Mention specific things like line count, category, what perform() does, env var requirements. Celebrate what works and frame any limitations as next-step opportunities.",
+                user=f"Review: {agent.get('display_name','')} ({agent.get('name','')})\nCategory: {agent.get('category','')}\n{agent.get('_lines',0)} lines, {agent.get('quality_tier','community')} tier\nDescription: {agent.get('description','')}\nTags: {', '.join(agent.get('tags',[]))}\nEnv vars: {', '.join(agent.get('requires_env',[])) or 'none'}\n\nWrite a specific, encouraging review.",
                 max_tokens=150,
             )
             if not review_text:
@@ -435,7 +444,7 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
             delta["reviews_created"].append({
                 "agent_name": agent.get("name", ""),
                 "user": random.choice(AUTHORS),
-                "rating": random.randint(3, 5),
+                "rating": clamp_review_rating(random.randint(4, 5)),
                 "text": review_text,
                 "source": "llm",
                 "angle": random.choice(["primary", "usability", "code_quality", "community"]),

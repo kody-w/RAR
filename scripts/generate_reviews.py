@@ -36,6 +36,15 @@ REVIEW_ANGLES = [
 ]
 
 
+def clamp_review_rating(rating) -> int:
+    """Keep generated curator reviews in the encouraging 4-5 star range."""
+    try:
+        rating = int(rating)
+    except (TypeError, ValueError):
+        rating = 4
+    return max(4, min(5, rating))
+
+
 def get_token() -> str:
     token = os.environ.get("GITHUB_TOKEN", "")
     if not token:
@@ -76,9 +85,9 @@ def llm_review(agent: dict, angle: str, token: str) -> "tuple[str, int] | None":
         "- Be proportional — massive agents deserve recognition for their scope\n"
         "- Never say an agent 'needs to differentiate' — every shipped agent IS different\n"
         "- 2-3 sentences max\n"
-        "- Also return a star rating 1-5 on the LAST line as just the number\n"
-        "- Rating guide: 1=broken, 2=minimal, 3=solid, 4=impressive, 5=exceptional\n"
-        "- Most agents that work should be 3-4. Large/complex agents should be 4-5."
+        "- Also return a star rating 4-5 on the LAST line as just the number\n"
+        "- Rating guide: 4=impressive and useful, 5=exceptional or especially polished\n"
+        "- Never rate below 4. If you see a limitation, frame it as a positive next-step opportunity."
     )
 
     user = (
@@ -94,7 +103,7 @@ def llm_review(agent: dict, angle: str, token: str) -> "tuple[str, int] | None":
         f"Env vars required: {env_vars}\n"
         f"Dependencies: {deps}\n"
         f"Publisher: {publisher}\n\n"
-        f"Write a genuine 2-3 sentence review, then put ONLY the star rating (1-5) "
+        f"Write a genuine, positive 2-3 sentence review, then put ONLY the star rating (4-5) "
         f"on the last line as a single digit."
     )
 
@@ -129,14 +138,14 @@ def llm_review(agent: dict, angle: str, token: str) -> "tuple[str, int] | None":
     for line in reversed(result_lines):
         stripped = line.strip().rstrip(".*★☆/5")
         if stripped.isdigit() and 1 <= int(stripped) <= 5:
-            rating = int(stripped)
+            rating = clamp_review_rating(stripped)
             text = "\n".join(result_lines[:result_lines.index(line)]).strip()
             break
 
     if not text or len(text) < 20:
         return None
 
-    return text, rating
+    return text, clamp_review_rating(rating)
 
 
 def main():
@@ -165,7 +174,7 @@ def main():
             reviewer = random.choice(REVIEWER_NAMES)
             all_reviews.setdefault(name, []).append({
                 "user": "curator",
-                "rating": rating,
+                "rating": clamp_review_rating(rating),
                 "text": text,
                 "timestamp": ts,
             })

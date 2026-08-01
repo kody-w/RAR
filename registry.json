@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-01T02:42:47.772527+00:00",
+  "generated_at": "2026-08-01T23:32:47.197076+00:00",
   "stats": {
     "total_agents": 278,
     "total_swarms": 82,
@@ -5595,9 +5595,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5642,9 +5642,9 @@
       "_size_kb": 4.0,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5689,9 +5689,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5739,9 +5739,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5787,9 +5787,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5833,9 +5833,9 @@
       "_size_kb": 4.0,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5884,9 +5884,9 @@
       "_size_kb": 4.6,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5934,9 +5934,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5983,9 +5983,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6033,9 +6033,9 @@
       "_size_kb": 4.4,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6083,9 +6083,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6133,9 +6133,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6181,9 +6181,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6230,9 +6230,9 @@
       "_size_kb": 4.0,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6279,9 +6279,9 @@
       "_size_kb": 4.6,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6327,9 +6327,9 @@
       "_size_kb": 4.7,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6374,9 +6374,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6422,9 +6422,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6467,9 +6467,9 @@
       "_size_kb": 4.0,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6519,9 +6519,9 @@
       "_size_kb": 4.6,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6564,9 +6564,9 @@
       "_size_kb": 3.9,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6609,9 +6609,9 @@
       "_size_kb": 4.7,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6656,9 +6656,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6706,9 +6706,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6756,9 +6756,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6805,9 +6805,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6851,9 +6851,9 @@
       "_size_kb": 4.4,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6900,9 +6900,9 @@
       "_size_kb": 4.4,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6948,9 +6948,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6997,9 +6997,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7047,9 +7047,9 @@
       "_size_kb": 4.4,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7092,9 +7092,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7140,9 +7140,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7188,9 +7188,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7240,9 +7240,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7287,9 +7287,9 @@
       "_size_kb": 4.0,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7334,9 +7334,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7384,9 +7384,9 @@
       "_size_kb": 4.4,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7431,9 +7431,9 @@
       "_size_kb": 4.4,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7480,9 +7480,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7527,9 +7527,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7577,9 +7577,9 @@
       "_size_kb": 4.5,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7626,9 +7626,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7672,9 +7672,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7719,9 +7719,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7770,9 +7770,9 @@
       "_size_kb": 4.4,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7820,9 +7820,9 @@
       "_size_kb": 4.6,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7870,9 +7870,9 @@
       "_size_kb": 4.6,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7919,9 +7919,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7968,9 +7968,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8016,9 +8016,9 @@
       "_size_kb": 4.4,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8065,9 +8065,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8113,9 +8113,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8165,9 +8165,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8214,9 +8214,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8262,9 +8262,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8310,9 +8310,9 @@
       "_size_kb": 4.5,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8360,9 +8360,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8406,9 +8406,9 @@
       "_size_kb": 4.5,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8455,9 +8455,9 @@
       "_size_kb": 4.5,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8502,9 +8502,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8547,9 +8547,9 @@
       "_size_kb": 3.9,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8595,9 +8595,9 @@
       "_size_kb": 4.6,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8643,9 +8643,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8689,9 +8689,9 @@
       "_size_kb": 3.9,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8738,9 +8738,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8785,9 +8785,9 @@
       "_size_kb": 4.8,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8834,9 +8834,9 @@
       "_size_kb": 4.1,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8880,9 +8880,9 @@
       "_size_kb": 4.4,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8929,9 +8929,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8978,9 +8978,9 @@
       "_size_kb": 4.0,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9024,9 +9024,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9073,9 +9073,9 @@
       "_size_kb": 4.3,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9122,9 +9122,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9173,9 +9173,9 @@
       "_size_kb": 4.2,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9222,9 +9222,9 @@
       "_size_kb": 4.0,
       "_lines": 103,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-07-31T22:43:16-04:00",
+      "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
+      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
     },
     {
       "schema": "rapp-agent/1.0",

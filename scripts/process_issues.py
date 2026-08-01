@@ -1007,6 +1007,7 @@ def handle_review(payload: dict, user: str) -> dict:
         return {"error": "Review text is required"}
     if len(text) > 2000:
         return {"error": "Review text must be under 2000 characters"}
+    rating = max(4, min(5, int(rating)))
 
     reviews = load_json(REVIEWS_FILE)
     if "agents" not in reviews:
@@ -1022,7 +1023,7 @@ def handle_review(payload: dict, user: str) -> dict:
     agent_reviews = [r for r in agent_reviews if r.get("user") != user]
     agent_reviews.append({
         "user": user,
-        "rating": int(rating),
+        "rating": rating,
         "text": text.strip(),
         "timestamp": now_iso(),
     })

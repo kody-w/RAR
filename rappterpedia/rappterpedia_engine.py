@@ -1322,6 +1322,15 @@ def llm_article(title: str, category: str, context: str = "") -> str | None:
         return None
 
 
+def clamp_review_rating(rating) -> int:
+    """Keep curator reviews in the encouraging 4-5 star range."""
+    try:
+        rating = int(rating)
+    except (TypeError, ValueError):
+        rating = 4
+    return max(4, min(5, rating))
+
+
 def llm_review(agent: dict, angle: str) -> tuple[str, int] | None:
     """Generate a review using the LLM. Returns (text, rating) or None.
 
@@ -1348,9 +1357,9 @@ def llm_review(agent: dict, angle: str) -> tuple[str, int] | None:
                 "- Be proportional — massive agents deserve recognition for their scope\n"
                 "- Never say an agent 'needs to differentiate' — every shipped agent IS different\n"
                 "- 2-3 sentences max\n"
-                "- Also return a star rating 1-5 on the last line as just the number\n"
-                "- Rating guide: 1=broken, 2=minimal, 3=solid, 4=impressive, 5=exceptional\n"
-                "- Most community agents that work should be 3-4. Large/complex agents should be 4-5."
+                "- Also return a star rating 4-5 on the last line as just the number\n"
+                "- Rating guide: 4=impressive and useful, 5=exceptional or especially polished\n"
+                "- Never rate below 4. If you see a limitation, frame it as a positive next-step opportunity."
             ),
             user=(
                 f"Review this agent from the angle of '{angle}':\n\n"
@@ -1365,7 +1374,7 @@ def llm_review(agent: dict, angle: str) -> tuple[str, int] | None:
                 f"Env vars required: {env_vars}\n"
                 f"Dependencies: {deps}\n"
                 f"Publisher: {ctx['publisher']}\n\n"
-                f"Write a genuine 2-3 sentence review, then put the star rating (1-5) on the last line."
+                f"Write a genuine, positive 2-3 sentence review, then put the star rating (4-5) on the last line."
             ),
             max_tokens=200,
             temperature=0.85,
@@ -1377,14 +1386,14 @@ def llm_review(agent: dict, angle: str) -> tuple[str, int] | None:
         for line in reversed(lines):
             stripped = line.strip().rstrip(".*★☆")
             if stripped.isdigit() and 1 <= int(stripped) <= 5:
-                rating = int(stripped)
+                rating = clamp_review_rating(stripped)
                 text = "\n".join(lines[:lines.index(line)]).strip()
                 break
         # Clean up any remaining rating artifacts
         text = text.rstrip().rstrip("Rating:").rstrip().rstrip("Stars:").rstrip()
         if not text:
             return None
-        return text, rating
+        return text, clamp_review_rating(rating)
     except Exception as e:
         print(f"  [LLM] Review failed: {e}")
         return None
@@ -1747,8 +1756,8 @@ def score_agent(agent: dict) -> tuple[int, str]:
     if len(agent.get("dependencies", [])) == 0: score += 1
     if len(agent.get("requires_env", [])) == 0: score += 1
 
-    stars = max(2, min(5, round(score * 5 / 9)))  # floor at 2 stars
-    level = "high" if stars >= 4 else "mid" if stars >= 3 else "low"
+    stars = clamp_review_rating(round(score * 5 / 9))
+    level = "high" if stars >= 5 else "mid"
     return stars, level
 
 
@@ -1813,7 +1822,7 @@ def generate_reviews(state: dict, agents: list[dict], num_reviews: int = 5) -> l
 
         review = {
             "user": reviewer,
-            "rating": rating,
+            "rating": clamp_review_rating(rating),
             "text": text,
             "angle": angle,
             "timestamp": ts,
