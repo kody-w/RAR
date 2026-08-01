@@ -59,12 +59,23 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: python scripts/check_url_stability.py --update
 
+      # The headless API is what AIdeate, the vBrainstem and the grail
+      # brainstem actually read. A stale catalog is an invisible failure —
+      # host applications keep serving yesterday's registry with no error —
+      # so it is rebuilt in the same step that rebuilds the registry.
+      # Additive by construction: it refuses to write api/v1/index.json.
+      - name: Rebuild the headless static API
+        run: python scripts/build_static_api.py
+
       - name: Commit registry.json
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
-          git add registry.json state/published_paths.json
+          git add registry.json state/published_paths.json \
+                  manifest.json api/v1/catalog.json api/v1/taxonomy.json \
+                  api/v1/match.json api/v1/status.json api/v1/badge.json \
+                  api/v1/audience
           git diff --cached --quiet || git commit -m "Auto-build registry.json [skip ci]"
           git push
 
