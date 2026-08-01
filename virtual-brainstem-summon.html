@@ -150,6 +150,16 @@
     background: none; border: none; cursor: pointer; width: 100%;
   }
   .login-skip:hover { color: #e6edf3; }
+  /* Tracking disclosure. Running an agent reacts publicly under the user's
+     own GitHub account, so say so at the moment they authorise it, and give
+     them a real way to decline. */
+  .login-track {
+    display: flex; align-items: flex-start; gap: 8px; text-align: left;
+    margin-top: 18px; padding-top: 16px; border-top: 1px solid #30363d;
+    color: #8b949e; font-size: 12px; line-height: 1.5; cursor: pointer;
+  }
+  .login-track input { margin-top: 2px; flex-shrink: 0; cursor: pointer; }
+  .login-track em { font-style: normal; color: #6e7681; display: block; margin-top: 3px; }
 
   /* ── Chat ── */
   #chat {
@@ -710,6 +720,8 @@
   body.light-mode .login-card p { color: #57606a; }
   body.light-mode #login-overlay { background: rgba(255, 255, 255, 0.95); }
   body.light-mode .login-skip { color: #57606a; }
+  body.light-mode .login-track { border-top-color: #d0d7de; color: #57606a; }
+  body.light-mode .login-track em { color: #6e7681; }
   body.light-mode .login-skip:hover { color: #24292e; }
   body.light-mode .toolbar-link { color: #57606a; }
   body.light-mode .toolbar-link:hover { color: #24292e; }
@@ -774,6 +786,14 @@
       <p>Sign in with your GitHub account to chat through GitHub Copilot (full model catalog incl. Claude Opus 4.7). You can also skip and run Python agents in your browser without signing in.</p>
       <button class="login-btn" id="loginStartBtn" onclick="startLogin()">Sign in with GitHub</button>
       <button class="login-skip" onclick="dismissLogin()">Skip &mdash; explore without signing in</button>
+      <label class="login-track">
+        <input type="checkbox" id="trackOptOut" onchange="setTrackOptOut(this.checked)">
+        <span>Don&rsquo;t count my agent runs.
+          <em>Running an agent adds one reaction to that agent&rsquo;s public thread in the
+          registry, under your GitHub account &mdash; once per agent, never per run. That is
+          how the registry counts real usage. Nothing about your prompts, your chat, or
+          your data is ever recorded.</em></span>
+      </label>
     </div>
 
     <!-- step 2: show the user_code + verification link, poll for authorization -->
@@ -1063,9 +1083,24 @@ function showLogin() {
   const o = document.getElementById('login-overlay');
   if (!o) return;
   setLoginStep(1);
+  syncTrackOptOut();
   const btn = document.getElementById('loginStartBtn');
   if (btn) { btn.disabled = false; btn.textContent = 'Sign in with GitHub'; }
   o.style.display = 'flex';
+}
+// Tracking opt-out. Mirrors the SDK's RAR_NO_TRACK env var so the same
+// choice exists on every surface. Checked at fire time, not cached.
+function setTrackOptOut(off) {
+  try { off ? localStorage.setItem('vb_no_track', '1')
+            : localStorage.removeItem('vb_no_track'); } catch (_) {}
+}
+function trackOptedOut() {
+  try { return localStorage.getItem('vb_no_track') === '1'; } catch (_) { return false; }
+}
+// Reflect the stored choice whenever the card is shown, so it never lies.
+function syncTrackOptOut() {
+  const el = document.getElementById('trackOptOut');
+  if (el) el.checked = trackOptedOut();
 }
 function showLoginIfNeeded() {
   // Show the (dismissible) sign-in card once, only when not signed in.
@@ -1075,6 +1110,7 @@ function showLoginIfNeeded() {
   if (!o) return;
   if ((typeof chatToken !== 'undefined' && chatToken) || dismissed) { o.style.display = 'none'; return; }
   setLoginStep(1);
+  syncTrackOptOut();
   o.style.display = 'flex';
 }
 // Clear the current chat (transcript + rendered messages), restore the welcome tour.
@@ -3545,7 +3581,7 @@ const ADD_REACTION =
 // number reads as unique acquirers.
 async function trackAcquisition(name) {
   try {
-    if (!chatToken || !name) return;
+    if (!chatToken || !name || trackOptedOut()) return;
     const data = await ghGraphQL(TALLY_QUERY, { q: `repo:${RAR_REPO} in:title "${name}"` });
     const node = (data.search?.nodes || []).find(n =>
       n && n.title === name && n.repository?.nameWithOwner === RAR_REPO);
