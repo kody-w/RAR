@@ -71,13 +71,24 @@ jobs:
               f = Path(a['_file'])
               if not f.exists(): continue
               actual = hashlib.sha256(f.read_bytes()).hexdigest()
-              assert a.get('_sha256') == actual, f'{a[\"name\"]} hash mismatch'
+              # Gated agents ship as .py.stub and record _stub_sha256; the
+              # builder never writes _sha256 for them. Verify each against the
+              # digest its own kind records rather than skipping stubs — the
+              # release notes claim SHA256 verification for everything, so
+              # everything on disk has to actually be verified.
+              expected = a.get('_sha256') or a.get('_stub_sha256')
+              assert expected and expected == actual, f'{a[\"name\"]} hash mismatch'
           print(f'All {len(reg[\"agents\"])} agents verified')
           "
 
       - name: No staging leftovers
         run: |
-          STAGED=$(find staging -name '*.py' 2>/dev/null | head -5)
+          # Pending submissions land in staging/@publisher/. staging/demo-assets/
+          # is permanent demo material — the n8n->RAPP transpilation showcase,
+          # documented in its own README — so it is not a submission and no
+          # approve/reject could ever clear it. Excluding it keeps this gate
+          # meaningful instead of permanently red for a reason nobody can act on.
+          STAGED=$(find staging -name '*.py' -not -path 'staging/demo-assets/*' 2>/dev/null | head -5)
           if [ -n "$STAGED" ]; then
             echo "❌ Agents still in staging/ — approve or reject before release:"
             echo "$STAGED"

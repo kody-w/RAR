@@ -45,8 +45,15 @@ jobs:
               f = Path(a['_file'])
               if not f.exists(): continue
               actual = hashlib.sha256(f.read_bytes()).hexdigest()
-              if a.get('_sha256') != actual:
-                  bad.append(f'{a[\"name\"]}: expected {a[\"_sha256\"][:16]}... got {actual[:16]}...')
+              # Gated agents ship as .py.stub and record _stub_sha256; the
+              # builder never writes _sha256 for them. Verify each against the
+              # digest its own kind records — and read that same value back when
+              # reporting, because indexing a[_sha256] on a stub raised KeyError
+              # and killed this check silently for 60 consecutive nights.
+              expected = a.get('_sha256') or a.get('_stub_sha256')
+              if expected != actual:
+                  shown = expected[:16] if expected else 'NO DIGEST RECORDED'
+                  bad.append(f'{a[\"name\"]}: expected {shown}... got {actual[:16]}...')
           if bad:
               print('❌ Integrity failures:')
               for b in bad: print(f'  {b}')
