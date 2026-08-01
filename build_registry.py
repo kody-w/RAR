@@ -538,17 +538,69 @@ def check_version_immutability(name: str, version: str, sha256: str, file_path: 
     return None
 
 
-def _git_first_committed(path: Path):
-    """Return the ISO date a file was first committed, or None if unavailable."""
+# ── Git history, read once instead of per file ────────────────────────────
+#
+# These three facts (first-commit date, first-commit sha, latest-commit sha)
+# used to cost one `git log` subprocess EACH, per agent — 3n spawns, which at
+# 278 agents is 834 processes and a ~2min build that blew the pipeline test's
+# 60s budget. Aggregation only makes n grow, so this is read in a single pass:
+# one `git log --name-status` walk of the whole history builds the map, and
+# every lookup afterwards is a dict hit.
+#
+# Semantics are preserved exactly: history is walked newest-first, so the LAST
+# add seen for a path is its earliest ("A" status, matching --diff-filter=A),
+# and the FIRST commit touching a path is its latest.
+_GIT_HISTORY: dict[str, dict] | None = None
+
+
+def _load_git_history() -> dict[str, dict]:
+    global _GIT_HISTORY
+    if _GIT_HISTORY is not None:
+        return _GIT_HISTORY
+    history: dict[str, dict] = {}
     try:
         result = subprocess.run(
-            ["git", "log", "--diff-filter=A", "--format=%cI", "--", str(path)],
-            capture_output=True, text=True, timeout=10
+            ["git", "log", "--name-status", "--format=%x00%H%x00%cI", "--no-renames"],
+            capture_output=True, text=True, timeout=180,
         )
-        dates = result.stdout.strip().splitlines()
-        return dates[-1] if dates else None
-    except (FileNotFoundError, subprocess.TimeoutExpired):
-        return None
+        sha = date = None
+        for line in result.stdout.splitlines():
+            if line.startswith("\x00"):
+                _, sha, date = line.split("\x00", 2)
+                continue
+            if not line.strip() or sha is None:
+                continue
+            parts = line.split("\t")
+            if len(parts) < 2:
+                continue
+            status, path = parts[0], parts[-1]
+            entry = history.setdefault(path, {})
+            # Newest-first walk: the first sighting is the latest change.
+            entry.setdefault("latest_sha", sha)
+            if status.startswith("A"):
+                # Overwritten as we go back in time, so it ends on the earliest add.
+                entry["first_sha"] = sha
+                entry["first_date"] = date
+    except (FileNotFoundError, subprocess.TimeoutExpired, ValueError):
+        history = {}
+    _GIT_HISTORY = history
+    return history
+
+
+def _git_key(path: Path) -> str:
+    """Repo-relative, forward-slashed — the form `git log --name-status` emits.
+
+    Every path constant in this module is already CWD-relative (AGENTS_DIR =
+    Path("agents")) and the build runs from the repo root, so the incoming path
+    is repo-relative as given; it only needs POSIX separators to match git.
+    """
+    return Path(path).as_posix()
+
+
+def _git_first_committed(path: Path):
+    """Return the ISO date a file was first committed, or None if unavailable."""
+    return _load_git_history().get(_git_key(path), {}).get("first_date")
+
 
 
 def _git_first_commit_sha(path: Path):
@@ -557,30 +609,16 @@ def _git_first_commit_sha(path: Path):
     fetch the original bytes via raw.githubusercontent.com/<repo>/<sha>/<path>
     and verify against the recorded _sha256. Part of the poor-man's-
     blockchain provenance chain (commit graph IS the ledger)."""
-    try:
-        result = subprocess.run(
-            ["git", "log", "--diff-filter=A", "--format=%H", "--", str(path)],
-            capture_output=True, text=True, timeout=10
-        )
-        shas = result.stdout.strip().splitlines()
-        return shas[-1] if shas else None
-    except (FileNotFoundError, subprocess.TimeoutExpired):
-        return None
+    return _load_git_history().get(_git_key(path), {}).get("first_sha")
+
 
 
 def _git_latest_commit_sha(path: Path):
     """Return the commit SHA of the most recent change to `path`. Together
     with _first_commit_sha this bounds the file's edit window — anyone
     can `git log <first>..<latest> -- <path>` to audit every change."""
-    try:
-        result = subprocess.run(
-            ["git", "log", "-1", "--format=%H", "--", str(path)],
-            capture_output=True, text=True, timeout=10
-        )
-        sha = result.stdout.strip()
-        return sha or None
-    except (FileNotFoundError, subprocess.TimeoutExpired):
-        return None
+    return _load_git_history().get(_git_key(path), {}).get("latest_sha")
+
 
 
 def _card_content_sha256(card_data: dict) -> str:

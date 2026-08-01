@@ -1,17 +1,18 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-01T02:12:43.164178+00:00",
+  "generated_at": "2026-08-01T02:42:47.772527+00:00",
   "stats": {
-    "total_agents": 202,
+    "total_agents": 278,
     "total_swarms": 82,
     "total_stubs": 2,
-    "publishers": 9,
+    "publishers": 10,
     "categories": 24,
     "publisher_list": [
       "@aibast-agents-library",
       "@bill",
       "@borg",
+      "@cat-agent-skills",
       "@discreetRappers",
       "@howardh",
       "@kody-w",
@@ -5548,6 +5549,3682 @@
         "artist": "Howard"
       },
       "_card_sha256": "fd52a2a0fe2072465b0e0d1c053db868ab6637ade4af844d400340586fd16709"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/accessibility_pass",
+      "version": "1.0.0",
+      "display_name": "Accessibility Pass",
+      "description": "Check a PowerPoint deck, Word document, HTML page, or Markdown file against Microsoft's Accessibility Checker rules (missing alt text, untitled slides, headerless tables, low contrast, illogical reading order) and fix what it finds.",
+      "author": "Tim Karlsson",
+      "tags": [
+        "accessibility",
+        "documents",
+        "presentations",
+        "powerpoint",
+        "quality",
+        "scripts"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "accessibility-pass",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#accessibility-pass",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "183550ba28bed17f"
+      },
+      "platforms": [
+        "Copilot Studio",
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/accessibility_pass_agent.py",
+      "_install_filename": "rar_cat_agent_skills_accessibility_pass_agent.py",
+      "_sha256": "bb8ec378fafa064065d587e8ed0e2344cd06a0e3fffc6935f94449f191513afe",
+      "_lifecycle": "legacy_active",
+      "_seed": 9504038116777540819,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/acroform_writer",
+      "version": "1.0.0",
+      "display_name": "AcroForm Writer",
+      "description": "Fill an existing AcroForm PDF's real form fields from supplied data and flatten the result into a finished, non-editable PDF",
+      "author": "Sandeep Angara",
+      "tags": [
+        "acroform",
+        "pdf",
+        "forms",
+        "python",
+        "documents"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "acroform-writer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#acroform-writer",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "b96d3187f92bf269"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/acroform_writer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_acroform_writer_agent.py",
+      "_sha256": "a8e6269a1d502235f57f388e2e1e464f170d12d1148f2852b79bbb0c6a718ce3",
+      "_lifecycle": "legacy_active",
+      "_seed": 11477520274489491024,
+      "_size_kb": 4.0,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/agent_evaluation_designer",
+      "version": "1.0.0",
+      "display_name": "Agent Evaluation Designer",
+      "description": "Design a rigorous, platform-aware evaluation for an AI agent - define what good looks like, pick the right grading method, build a test set, and turn results into a defensible go/no-go decision.",
+      "author": "James Papadimitriou",
+      "tags": [
+        "evaluation",
+        "testing",
+        "quality_assurance",
+        "go_live",
+        "decision_making"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "agent-evaluation-designer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#agent-evaluation-designer",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "5932d5f6ea50fb35"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_agent_evaluation_designer_agent.py",
+      "_sha256": "825e16b1417f1db3a9fd255f6cdb2c3e29605412283607ba7089e0579c0574fc",
+      "_lifecycle": "legacy_active",
+      "_seed": 10844162841117336458,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/agent_harness_explorer",
+      "version": "0.1.0",
+      "display_name": "Agent Harness Explorer",
+      "description": "Discover, document, and monitor what the agent harness can do \u2014 Python libraries, tools, MCP servers, and runtime capabilities \u2014 with repeatable, comparable snapshots.",
+      "author": "Chris Garty and Andrew Hess",
+      "tags": [
+        "diagnostics",
+        "runtime",
+        "python",
+        "capabilities",
+        "snapshots",
+        "scripts"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "agent-harness-explorer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#agent-harness-explorer",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "61ae6c239cb9c236"
+      },
+      "platforms": [
+        "Copilot Studio",
+        "Cowork",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/agent_harness_explorer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_agent_harness_explorer_agent.py",
+      "_sha256": "c901fe16f1597af10fc04c215053417876f0aa3af5f720b88d10154d6fb245d7",
+      "_lifecycle": "legacy_active",
+      "_seed": 17177931939257792821,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/ai_demo_assistant",
+      "version": "1.0.0",
+      "display_name": "AI Demo Assistant",
+      "description": "Turns a customer name, line of business, and personas into a ready-to-seed Microsoft 365 Copilot demo \u2014 fictional Word/PowerPoint/Excel example files plus a full delivery and provisioning plan, with optional one-click seeding to OneDrive and Teams.",
+      "author": "Doak Moore",
+      "tags": [
+        "demo",
+        "copilot",
+        "microsoft_365",
+        "sales_enablement",
+        "content",
+        "productivity"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "ai-demo-assistant",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#ai-demo-assistant",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "c768346e949547d4"
+      },
+      "platforms": [
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/ai_demo_assistant_agent.py",
+      "_install_filename": "rar_cat_agent_skills_ai_demo_assistant_agent.py",
+      "_sha256": "7f59d5a6e77b77b25e33c92d28cf63b6c0a0077ec2fc55de6b6afbdcda548b1a",
+      "_lifecycle": "legacy_active",
+      "_seed": 9040658266229318837,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/ai_first_process_redesign",
+      "version": "2.1.0",
+      "display_name": "AI-First Process Redesign",
+      "description": "Redesign your existing processes with AI-first thinking",
+      "author": "Tim Sparks",
+      "tags": [
+        "productivity",
+        "process_improvement",
+        "agentic_workflow"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "ai-first-process-redesign",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#ai-first-process-redesign",
+        "upstream_version": "2.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "7ed095eee2005624"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
+      "_install_filename": "rar_cat_agent_skills_ai_first_process_redesign_agent.py",
+      "_sha256": "6a2f16b035575acfbc12fd7f460bfd56c05dd7d6c50e4a97824511647ea2a71b",
+      "_lifecycle": "legacy_active",
+      "_seed": 16381594575904849287,
+      "_size_kb": 4.0,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/ai_usecase_assessment",
+      "version": "1.0.0",
+      "display_name": "AI Use Case Assessment",
+      "description": "Turn any AI/agentic use case idea (chat, uploaded doc, or attached file) into an evidence-grounded, rubric-scored assessment with a customer-branded HTML report. Guides the user question-by-question through intake, categorisation, strengthening, scoring, and reporting \u2014 grounded in the Agentic Use Case Assessment Rubric v2. Runs in Microsoft Scout and Microsoft 365 Copilot Cowork.",
+      "author": "Alicja Gilderdale",
+      "tags": [
+        "assessment",
+        "ai",
+        "agent",
+        "use_case",
+        "scoring",
+        "report",
+        "html",
+        "intake"
+      ],
+      "category": "analysis",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "ai-usecase-assessment",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#ai-usecase-assessment",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "8d143663df287664"
+      },
+      "platforms": [
+        "Scout",
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/ai_usecase_assessment_agent.py",
+      "_install_filename": "rar_cat_agent_skills_ai_usecase_assessment_agent.py",
+      "_sha256": "8f599df973c55e3addf056896ca6b631207877f2008cb6694559848da608c384",
+      "_lifecycle": "legacy_active",
+      "_seed": 10924947176552414345,
+      "_size_kb": 4.6,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/anonymised_case_study_writer",
+      "version": "0.1.0",
+      "display_name": "Anonymised Case Study Writer",
+      "description": "Turn engagement notes into anonymised, publishable case studies without exposing client-confidential details.",
+      "author": "Simon Owen",
+      "tags": [
+        "writing",
+        "case_study",
+        "marketing",
+        "documents",
+        "content",
+        "privacy"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "anonymised-case-study-writer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#anonymised-case-study-writer",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "30ca39e3e8405c3e"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_anonymised_case_study_writer_agent.py",
+      "_sha256": "ed24cdaa8aef663e2096a7b2a94319edb20b5570d76a856b5cf01e7c8dae5e5c",
+      "_lifecycle": "legacy_active",
+      "_seed": 16539406066661473949,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/awaiting_reply",
+      "version": "1.0.0",
+      "display_name": "Awaiting Reply",
+      "description": "A weekday-morning Scout automation that finds emails you sent that asked for something and never got an answer, reports how many are waiting, and prepares follow-up drafts in each thread's own language that it never sends.",
+      "author": "Allan De Castro",
+      "tags": [
+        "email",
+        "follow_up",
+        "automation",
+        "productivity",
+        "inbox",
+        "reminder",
+        "multilingual"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "awaiting-reply",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#awaiting-reply",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "d269450ca78b236a"
+      },
+      "platforms": [
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/awaiting_reply_agent.py",
+      "_install_filename": "rar_cat_agent_skills_awaiting_reply_agent.py",
+      "_sha256": "d5077b709f4aee8ca8335aa651a76afcda29588efbbf6b0505092923d6dbbad2",
+      "_lifecycle": "legacy_active",
+      "_seed": 13614116300938687365,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/b2b_outreach_suite",
+      "version": "1.0.0",
+      "display_name": "B2B Outreach Suite",
+      "description": "A six-playbook toolkit for agentic B2B sales outreach: prospect research briefings, cold emails, LinkedIn/social DMs, follow-up cadences, ad copywriting, and objection handling. Configurable via a company profile template, works for any industry, market, and language.",
+      "author": "Marcel",
+      "tags": [
+        "sales_enablement",
+        "email",
+        "linkedin",
+        "writing",
+        "marketing",
+        "content"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "b2b-outreach-suite",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#b2b-outreach-suite",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "b6d141c5052aba20"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/b2b_outreach_suite_agent.py",
+      "_install_filename": "rar_cat_agent_skills_b2b_outreach_suite_agent.py",
+      "_sha256": "4a2672db19dd8515afbc0ae93de973b38141fb8e450b8fbda1bdde550140b8f3",
+      "_lifecycle": "legacy_active",
+      "_seed": 10254470509799157961,
+      "_size_kb": 4.4,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/blog_content_auditor",
+      "version": "0.1.0",
+      "display_name": "Blog Content Auditor",
+      "description": "Audit blog posts or a blog library for clarity, structure, evidence, audience fit, and improvement priority.",
+      "author": "Simon Owen",
+      "tags": [
+        "blog",
+        "content",
+        "audit",
+        "writing",
+        "seo",
+        "productivity"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "blog-content-auditor",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#blog-content-auditor",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "a5c6bd31581e4eda"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/blog_content_auditor_agent.py",
+      "_install_filename": "rar_cat_agent_skills_blog_content_auditor_agent.py",
+      "_sha256": "623bfaef5ef6fc7a8e80c8103b34a0db1354e04c612761093c88d1736b70be26",
+      "_lifecycle": "legacy_active",
+      "_seed": 4868201021057018339,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/blog_post_structure_pass",
+      "version": "0.1.0",
+      "display_name": "Blog Post Structure Pass",
+      "description": "Restructure draft or existing blog posts into a stronger narrative without inventing new claims.",
+      "author": "Simon Owen",
+      "tags": [
+        "blog",
+        "writing",
+        "authoring",
+        "content",
+        "structure",
+        "productivity"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "blog-post-structure-pass",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#blog-post-structure-pass",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "bae79e6f9e5b1b0c"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
+      "_install_filename": "rar_cat_agent_skills_blog_post_structure_pass_agent.py",
+      "_sha256": "8f84a92e636def9fc1bf84156286a86af84dd9f717ff86853ebf9c530eda16b2",
+      "_lifecycle": "legacy_active",
+      "_seed": 8600030501833290801,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/brand_template_enforcer",
+      "version": "1.2.0",
+      "display_name": "Brand Template Enforcer",
+      "description": "Ensure every generated PowerPoint deck or Word document starts from the correct bundled or SharePoint-hosted brand template.",
+      "author": "Doug Bellingeri",
+      "tags": [
+        "branding",
+        "powerpoint",
+        "word",
+        "templates",
+        "documents",
+        "presentations"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "brand-template-enforcer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#brand-template-enforcer",
+        "upstream_version": "1.2.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "5bd07a11a05931f7"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/brand_template_enforcer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_brand_template_enforcer_agent.py",
+      "_sha256": "033b5c9d59fa2b95346ea0cbf4b43d61ca059399bd0238ebad3a1f777e1d688f",
+      "_lifecycle": "legacy_active",
+      "_seed": 15714727124118812132,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/brand_voice_pass",
+      "version": "0.1.0",
+      "display_name": "Brand Voice Pass",
+      "description": "Rewrite drafts into a configurable house style, preserving meaning while removing generic AI phrasing.",
+      "author": "Simon Owen",
+      "tags": [
+        "writing",
+        "content",
+        "voice",
+        "authoring",
+        "productivity"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "brand-voice-pass",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#brand-voice-pass",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "ab6312662367dcfc"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/brand_voice_pass_agent.py",
+      "_install_filename": "rar_cat_agent_skills_brand_voice_pass_agent.py",
+      "_sha256": "07b1ed0622f666092280d444e574a820e84ac1af5852d3e2542b745fc3dc35b3",
+      "_lifecycle": "legacy_active",
+      "_seed": 17511070829000666516,
+      "_size_kb": 4.0,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/business_os",
+      "version": "1.0.0",
+      "display_name": "Business OS",
+      "description": "A practical operating system for Copilot Studio that gives agents a consistent way to clarify outcomes, choose the right approach, solve problems, make decisions, plan projects, improve processes, handle incidents, and turn repeatable work into reusable skills. Unlike a standard Copilot experience that relies mainly on the prompt and available context, Business OS adds a structured way of working\u2026",
+      "author": "Matthew James Davis",
+      "tags": [
+        "business",
+        "decision_making",
+        "problem_solving",
+        "project_planning",
+        "process_improvement",
+        "governance",
+        "skill_generation"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "business-os",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#business-os",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "0f102cac2f8ea262"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/business_os_agent.py",
+      "_install_filename": "rar_cat_agent_skills_business_os_agent.py",
+      "_sha256": "6922e233fa1067391744e90441c25c6a77ef697466161891d8259e4e55fb51a5",
+      "_lifecycle": "legacy_active",
+      "_seed": 13964790072920126755,
+      "_size_kb": 4.6,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/call_for_speakers_digest",
+      "version": "1.0.0",
+      "display_name": "Call for Speakers Digest",
+      "description": "Weekly HTML email digest of open conference Call for Speakers (CFP) opportunities matching your topics of interest. Pulls from confs.tech, Papercall, AdatoSystems' CFP tracker, CFP Radar, Sessionize's public user-groups directory, community-specific hubs (like communitydays.org for the Microsoft ecosystem), targeted search of standalone Sessionize conferences and run.events, and general web searc\u2026",
+      "author": "Michael Heath",
+      "tags": [
+        "productivity",
+        "speaking",
+        "conference",
+        "automation"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "call-for-speakers-digest",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#call-for-speakers-digest",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "d964e313b2ca6981"
+      },
+      "platforms": [
+        "Copilot Studio",
+        "Scout",
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/call_for_speakers_digest_agent.py",
+      "_install_filename": "rar_cat_agent_skills_call_for_speakers_digest_agent.py",
+      "_sha256": "06388603f3387d2b8039a1e8675f3d439152efe50f9c6e33a1b1fa89d888c43a",
+      "_lifecycle": "legacy_active",
+      "_seed": 2919470167317029465,
+      "_size_kb": 4.7,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/campaign_deck_builder",
+      "version": "1.0.0",
+      "display_name": "Campaign Deck Builder",
+      "description": "Turn a short interview into a charming, vibrant 3-slide marketing-campaign deck by filling a bundled PowerPoint template.",
+      "author": "Adi Leibowitz",
+      "tags": [
+        "marketing",
+        "presentations",
+        "powerpoint",
+        "automation",
+        "scripts"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "campaign-deck-builder",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#campaign-deck-builder",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "23b22be138aae9b6"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/campaign_deck_builder_agent.py",
+      "_install_filename": "rar_cat_agent_skills_campaign_deck_builder_agent.py",
+      "_sha256": "a29bb133a12cd4d58f1cef408a06452945aac3ae5450fe8a2164e7e2a7370cca",
+      "_lifecycle": "legacy_active",
+      "_seed": 17775331859636040019,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/chart_builder",
+      "version": "1.0.0",
+      "display_name": "Chart Builder",
+      "description": "Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call.",
+      "author": "CAT Agent Skills",
+      "tags": [
+        "data",
+        "charts",
+        "matplotlib",
+        "scripts"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "chart-builder",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#chart-builder",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "cbd81663d9b9dc5b"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/chart_builder_agent.py",
+      "_install_filename": "rar_cat_agent_skills_chart_builder_agent.py",
+      "_sha256": "95aa7dbb6209114fe1326f75564ad2fe379c647857575336c71ae07df956a4b5",
+      "_lifecycle": "legacy_active",
+      "_seed": 13126391526794469953,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/classic_text_adventure",
+      "version": "0.1.0",
+      "display_name": "Classic Text Adventure",
+      "description": "Play a deterministic, resumable Colossal Cave adventure with exact game output and built-in diagnostics.",
+      "author": "Andreas Adner",
+      "tags": [
+        "adventure",
+        "game",
+        "python"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "classic-text-adventure",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#classic-text-adventure",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "9a6d89774728370c"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/classic_text_adventure_agent.py",
+      "_install_filename": "rar_cat_agent_skills_classic_text_adventure_agent.py",
+      "_sha256": "2aa13dd80cebdcf2159690084f1dcaf103abc8390afc0a7f0691d9efb15e40e9",
+      "_lifecycle": "legacy_active",
+      "_seed": 11341645754264855482,
+      "_size_kb": 4.0,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/clt_hr_assistant",
+      "version": "0.1.0",
+      "display_name": "Assistente CLT para RH",
+      "description": "Assistente de legisla\u00e7\u00e3o trabalhista brasileira (CLT) para equipes de RH e Departamento Pessoal. Responde d\u00favidas sobre f\u00e9rias, 13\u00ba sal\u00e1rio, aviso pr\u00e9vio, jornada e tipos de rescis\u00e3o, e calcula verbas rescis\u00f3rias com mem\u00f3ria de c\u00e1lculo completa usando as tabelas oficiais vigentes de 2026 (sal\u00e1rio m\u00ednimo, INSS e IRRF, incluindo a Lei 15.270/2025).",
+      "author": "Michael Ferro Pereira",
+      "tags": [
+        "rh",
+        "folha",
+        "clt",
+        "brasil",
+        "trabalhista",
+        "rescisao",
+        "inss",
+        "irrf"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "clt-hr-assistant",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#clt-hr-assistant",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "b57e7dd7cdb6e7f3"
+      },
+      "platforms": [
+        "Copilot Studio",
+        "Cowork",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+      "_install_filename": "rar_cat_agent_skills_clt_hr_assistant_agent.py",
+      "_sha256": "0874005b9dc09bcf47b1b5bbf116b6b6c8edb14269ee0e0daf5d745b53ef0367",
+      "_lifecycle": "legacy_active",
+      "_seed": 414581764968687158,
+      "_size_kb": 4.6,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/commenting_content",
+      "version": "1.0.0",
+      "display_name": "Commenting Content",
+      "description": "Comments Word or PowerPoint files with Comments.",
+      "author": "AndrewHessMSFT",
+      "tags": [
+        "documents",
+        "productivity"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "commenting-content",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#commenting-content",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "fcac24466182f80a"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/commenting_content_agent.py",
+      "_install_filename": "rar_cat_agent_skills_commenting_content_agent.py",
+      "_sha256": "c7beab6f50486e866c7dd5ce7fb25e6b18461db49fd9848ddfec7ff6a3069854",
+      "_lifecycle": "legacy_active",
+      "_seed": 1551566260712782138,
+      "_size_kb": 3.9,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/competitive_battlecard_builder",
+      "version": "1.0.0",
+      "display_name": "Competitive Battlecard Builder",
+      "description": "Build an interactive comparison app, either a sales battlecard advocating for your product against named competitors, or a neutral, unbiased comparison across two or more peer items with no side taken. Filterable by item and category, with live search, a compact scorecard, and copy-to-clipboard talking points. Every claim is tagged verified or unverified so nothing invented ends up in front of a\u2026",
+      "author": "Michael Heath",
+      "tags": [
+        "sales_enablement",
+        "productivity",
+        "comparison"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "competitive-battlecard-builder",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#competitive-battlecard-builder",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "d2d932cf8ec2e523"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
+      "_install_filename": "rar_cat_agent_skills_competitive_battlecard_builder_agent.py",
+      "_sha256": "2314b32cf7d6b3f2ef031e6cf9efca9603aeaeb3db2586ee3164f95362626c5f",
+      "_lifecycle": "legacy_active",
+      "_seed": 15263790686693370475,
+      "_size_kb": 4.7,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/conditional_chat_reminder",
+      "version": "1.0.0",
+      "display_name": "Conditional Chat Reminder",
+      "description": "Schedule a Teams reminder that sends only when the expected person has not already posted a relevant update.",
+      "author": "Giorgio Ughini",
+      "tags": [
+        "automation",
+        "teams",
+        "reminders",
+        "follow_up",
+        "productivity"
+      ],
+      "category": "integrations",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "conditional-chat-reminder",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#conditional-chat-reminder",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "a519bd3119d92722"
+      },
+      "platforms": [
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/conditional_chat_reminder_agent.py",
+      "_install_filename": "rar_cat_agent_skills_conditional_chat_reminder_agent.py",
+      "_sha256": "c292d13f5f54a5260ca965e2042e39f317e4ca3d223669027964cfabedc3868f",
+      "_lifecycle": "legacy_active",
+      "_seed": 18132164803866276539,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/conference_session_abstract_pack",
+      "version": "0.1.0",
+      "display_name": "Conference Session Abstract Pack",
+      "description": "Create CFP-ready talk titles, abstracts, takeaways, speaker notes, and submission copy from a topic.",
+      "author": "Simon Owen",
+      "tags": [
+        "writing",
+        "conference",
+        "abstract",
+        "speaking",
+        "content",
+        "productivity"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "conference-session-abstract-pack",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#conference-session-abstract-pack",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "79b0788cb04dc619"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/conference_session_abstract_pack_agent.py",
+      "_install_filename": "rar_cat_agent_skills_conference_session_abstract_pack_agent.py",
+      "_sha256": "bec77cd5b82010b8310e4ad0175d6db6170320bc89e39ef325021310e86b9f35",
+      "_lifecycle": "legacy_active",
+      "_seed": 8374508069837349419,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/content_quality_auditor",
+      "version": "0.1.0",
+      "display_name": "Content Quality Auditor",
+      "description": "Score documents, pages, posts, or artefact libraries against a configurable quality rubric and recommend fixes.",
+      "author": "Simon Owen",
+      "tags": [
+        "content",
+        "quality",
+        "audit",
+        "documents",
+        "productivity",
+        "governance"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "content-quality-auditor",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#content-quality-auditor",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "b2eca5049c1ef246"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/content_quality_auditor_agent.py",
+      "_install_filename": "rar_cat_agent_skills_content_quality_auditor_agent.py",
+      "_sha256": "d0d1e414b616a86d29d8f7d41ca40416c6f25a7d8b0a0227cc9145559cab8eec",
+      "_lifecycle": "legacy_active",
+      "_seed": 9530655618668179899,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/copilot_agents_news_scout",
+      "version": "1.0.0",
+      "display_name": "Copilot & Agents News Scout",
+      "description": "A Monday-morning Scout automation that scans authoritative Microsoft sources for the past week's Copilot, Copilot Studio, and agent news and posts a concise, linked digest to Teams.",
+      "author": "Elliot Margot",
+      "tags": [
+        "news",
+        "copilot",
+        "agent",
+        "digest",
+        "automation",
+        "weekly",
+        "teams"
+      ],
+      "category": "integrations",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "copilot-agents-news-scout",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-agents-news-scout",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "fc3502443ed8b977"
+      },
+      "platforms": [
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/copilot_agents_news_scout_agent.py",
+      "_install_filename": "rar_cat_agent_skills_copilot_agents_news_scout_agent.py",
+      "_sha256": "87e41a22f09c910dcd3be70afd9425c94b6d5dfe0cb9c480561ba99c56ea57e4",
+      "_lifecycle": "legacy_active",
+      "_seed": 16956411046955722208,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/copilot_studio_test_planner",
+      "version": "1.0.0",
+      "display_name": "Copilot Studio Test Planner",
+      "description": "Reads an exported Copilot Studio agent and generates a graded, runnable test suite (happy-path, paraphrase, disambiguation, negative, knowledge-grounding, multilingual, and safety cases) plus a regression set, ready to run in the free Copilot Studio test panel.",
+      "author": "Elliot Margot",
+      "tags": [
+        "qa",
+        "eval",
+        "regression",
+        "agent"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "copilot-studio-test-planner",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-test-planner",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "ddaf3694d8c2a432"
+      },
+      "platforms": [
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
+      "_install_filename": "rar_cat_agent_skills_copilot_studio_test_planner_agent.py",
+      "_sha256": "fb9881c8aa1cfd941ee56098333c34863abff8941663a78749f974f886e80566",
+      "_lifecycle": "legacy_active",
+      "_seed": 408310021794313050,
+      "_size_kb": 4.4,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/copilot_studio_topic_blueprint",
+      "version": "1.0.0",
+      "display_name": "Copilot Studio Topic Blueprint",
+      "description": "Turn a one-line use case into a build-ready Microsoft Copilot Studio agent blueprint: recommended agent type and orchestration, topics, tools, knowledge, variables, a welcome Adaptive Card, security and Copilot Credits notes, and a first test plan.",
+      "author": "Elliot Margot",
+      "tags": [
+        "agent",
+        "blueprint",
+        "topics",
+        "design",
+        "power_platform",
+        "orchestration",
+        "adaptive_card"
+      ],
+      "category": "creative",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "copilot-studio-topic-blueprint",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-topic-blueprint",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "05163d5246a491ef"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
+      "_install_filename": "rar_cat_agent_skills_copilot_studio_topic_blueprint_agent.py",
+      "_sha256": "8a31f915c3c65f50bd999268f16495fb312b6964e8b8c5972b66db0fc1649119",
+      "_lifecycle": "legacy_active",
+      "_seed": 5018947165587645429,
+      "_size_kb": 4.4,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/doc_format_converter",
+      "version": "1.0.0",
+      "display_name": "Universal Document Converter",
+      "description": "Convert documents between Markdown, HTML, PDF, Word, PowerPoint, Excel/CSV and text \u2014 fully offline, using only the libraries already in the agent sandbox.",
+      "author": "Andreas Adner",
+      "tags": [
+        "documents",
+        "conversion",
+        "markdown",
+        "pdf",
+        "office",
+        "scripts"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "doc-format-converter",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#doc-format-converter",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "d1c0d69a8989af49"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/doc_format_converter_agent.py",
+      "_install_filename": "rar_cat_agent_skills_doc_format_converter_agent.py",
+      "_sha256": "7c7356b4ad1bfcb94eb8236d07b3e145a8aec6870c02acec35c49cf30e59b279",
+      "_lifecycle": "legacy_active",
+      "_seed": 428413629298910657,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/enterprise_agent_design_authority",
+      "version": "1.0.0",
+      "display_name": "Enterprise Agent Design Authority (EADA)",
+      "description": "An enterprise design review framework that helps architects build secure, scalable, governable, and production-ready Microsoft Copilot Studio agents.",
+      "author": "Faride Ilanda",
+      "tags": [
+        "assessment",
+        "review",
+        "architecture",
+        "enterprise",
+        "design_review",
+        "copilot_studio"
+      ],
+      "category": "analysis",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "enterprise-agent-design-authority",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#enterprise-agent-design-authority",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "b69cc3ecf5e4507e"
+      },
+      "platforms": [
+        "Copilot Studio",
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/enterprise_agent_design_authority_agent.py",
+      "_install_filename": "rar_cat_agent_skills_enterprise_agent_design_authority_agent.py",
+      "_sha256": "869e3a6d2668d5c77a5a85ab6747ca562a26c2f60078e6ed60197d42afba6465",
+      "_lifecycle": "legacy_active",
+      "_seed": 14866744023498637228,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/eu_greenwashing_analysis",
+      "version": "1.0.0",
+      "display_name": "EU Greenwashing Analysis",
+      "description": "Detect greenwashing in product descriptions, marketing copy, and catalog entries against EU Directive 2024/825 and the Green Claims Directive. Returns a structured per-claim findings report with risk levels, regulation references, and recommended corrections.",
+      "author": "Remi Dyon",
+      "tags": [
+        "compliance",
+        "sustainability",
+        "greenwashing",
+        "eu_regulation",
+        "marketing_review",
+        "esg"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "eu-greenwashing-analysis",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#eu-greenwashing-analysis",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "d9597c05205098f3"
+      },
+      "platforms": [
+        "Copilot Studio",
+        "Cowork",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
+      "_install_filename": "rar_cat_agent_skills_eu_greenwashing_analysis_agent.py",
+      "_sha256": "cf963f7a4ec3ed62a79bd79418c57639cdef2966e87f7d72c4afb71c9ef5e106",
+      "_lifecycle": "legacy_active",
+      "_seed": 4284668008049948509,
+      "_size_kb": 4.4,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/exam_prep_learning_plan_builder",
+      "version": "2.0.1",
+      "display_name": "Exam Prep Learning Plan Builder",
+      "description": "Build a personalized study plan app for an exam or certification: overview timeline, day-by-day schedule with a calendar picker, domain breakdown, one-click .ics download, and a notes tab to track confidence over time.",
+      "author": "Michael Heath",
+      "tags": [
+        "planning",
+        "productivity",
+        "learning"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "exam-prep-learning-plan-builder",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#exam-prep-learning-plan-builder",
+        "upstream_version": "2.0.1",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "afe330883bb69ced"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
+      "_install_filename": "rar_cat_agent_skills_exam_prep_learning_plan_builder_agent.py",
+      "_sha256": "ea95254941dacd04c7d30aa6d4d71de07531e01573ef072158011487675b8e9a",
+      "_lifecycle": "legacy_active",
+      "_seed": 7994811168206501417,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/gantt_chart_generator",
+      "version": "1.0.0",
+      "display_name": "Gantt Chart Builder",
+      "description": "Generate clean, consistently-styled matplotlib Gantt charts from a schedule CSV or DataFrame \u2014 with group colours, completion overlays, and a today line.",
+      "author": "Nazish Qasim",
+      "tags": [
+        "gantt",
+        "timeline",
+        "project_management",
+        "matplotlib",
+        "charts",
+        "scripts"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "gantt-chart-generator",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#gantt-chart-generator",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "fe66d46e3035d79c"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/gantt_chart_generator_agent.py",
+      "_install_filename": "rar_cat_agent_skills_gantt_chart_generator_agent.py",
+      "_sha256": "cf004250fa1ed590062eca1057572f77056cc6c74f0d73f7317c30561aceeb27",
+      "_lifecycle": "legacy_active",
+      "_seed": 3636448999034860981,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/generating_podcast_script",
+      "version": "1.1.0",
+      "display_name": "Podcast Script Generator",
+      "description": "Turn a topic or a pile of source material \u2014 a newsletter, news digest, or set of articles \u2014 into a two-host, NotebookLM-style podcast episode, with multi-voice SSML and optional Azure Text-to-Speech audio.",
+      "author": "Remi Dyon",
+      "tags": [
+        "content",
+        "podcast",
+        "audio",
+        "text_to_speech",
+        "ssml",
+        "news"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "generating-podcast-script",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#generating-podcast-script",
+        "upstream_version": "1.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "b619697cd53a907a"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/generating_podcast_script_agent.py",
+      "_install_filename": "rar_cat_agent_skills_generating_podcast_script_agent.py",
+      "_sha256": "fe410b079a2179244b20015e82ef76723e80e0d23fc2aafa12fbe42b61808559",
+      "_lifecycle": "legacy_active",
+      "_seed": 4067689056279740149,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/global_greenwashing_claim_auditor",
+      "version": "1.0.0",
+      "display_name": "Global Greenwashing Claim Auditor",
+      "description": "Audit environmental claims in CSV, XLSX, DOCX, PPTX, conversational text, and public websites with separate ANY, CA, EU, and UK findings.",
+      "author": "Chris Garty",
+      "tags": [
+        "greenwashing",
+        "environmental_claims",
+        "sustainability",
+        "compliance",
+        "canada",
+        "european_union",
+        "united_kingdom",
+        "documents"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "global-greenwashing-claim-auditor",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#global-greenwashing-claim-auditor",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "4eb5e370798c4538"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py",
+      "_install_filename": "rar_cat_agent_skills_global_greenwashing_claim_auditor_agent.py",
+      "_sha256": "ea022c3b18531f7bde75f4fcf851128d557c48a1141254a76faf97d4d0455d54",
+      "_lifecycle": "legacy_active",
+      "_seed": 5531283365091617834,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/grab_my_files",
+      "version": "1.0.0",
+      "display_name": "Grab My Files",
+      "description": "One-tap way to bundle every file your Copilot Studio agent produced in a session into a single timestamped .zip and hand it back as a download.",
+      "author": "Rafael Alcaraz",
+      "tags": [
+        "files",
+        "export",
+        "zip",
+        "download",
+        "productivity"
+      ],
+      "category": "pipeline",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "grab-my-files",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#grab-my-files",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "846bd7a050af6ac5"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/grab_my_files_agent.py",
+      "_install_filename": "rar_cat_agent_skills_grab_my_files_agent.py",
+      "_sha256": "d04b497dd0dd898017e66fb14e2585dc7b80d4e724fa74c91b849a50e2dbbccf",
+      "_lifecycle": "legacy_active",
+      "_seed": 10969737389413118152,
+      "_size_kb": 4.0,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/idea_refiner",
+      "version": "1.0.0",
+      "display_name": "Idea Refiner",
+      "description": "Refines an existing plan, decision, or draft through relentless, branch-by-branch questioning. Grouped in batches of 2-5 with recommended answers, pulling facts from Work IQ where possible, until every part has been fully thought through.",
+      "author": "Mathias Salomonsen",
+      "tags": [
+        "productivity",
+        "planning",
+        "decision_making",
+        "refinement",
+        "brainstorming"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "idea-refiner",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#idea-refiner",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "f0afbd6c6948a24e"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/idea_refiner_agent.py",
+      "_install_filename": "rar_cat_agent_skills_idea_refiner_agent.py",
+      "_sha256": "dd6fb8342091107375cbacfea670285fa5d5182b74235e3f005ae558783696ef",
+      "_lifecycle": "legacy_active",
+      "_seed": 5565544014402955713,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/institutional_knowledge",
+      "version": "1.0.1",
+      "display_name": "Institutional Knowledge Archivist",
+      "description": "Preserve a departing senior leader's institutional knowledge \u2014 decisions, rationale, relationships, and tribal knowledge \u2014 by mining their M365 signals into a structured, multi-phase archive a successor can ground on.",
+      "author": "Srinivas Varukala",
+      "tags": [
+        "knowledge",
+        "handoff",
+        "leadership",
+        "m365",
+        "offboarding",
+        "documentation",
+        "productivity"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "institutional-knowledge",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#institutional-knowledge",
+        "upstream_version": "1.0.1",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "3ac7896e76455716"
+      },
+      "platforms": [
+        "Cowork",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/institutional_knowledge_agent.py",
+      "_install_filename": "rar_cat_agent_skills_institutional_knowledge_agent.py",
+      "_sha256": "a4304a18b67f287dd9135ee945a02562fd9c05524894df10c0dc02a6e0ea8d7c",
+      "_lifecycle": "legacy_active",
+      "_seed": 16365069444420875887,
+      "_size_kb": 4.4,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/iterative_file_editing",
+      "version": "1.0.0",
+      "display_name": "Iterative File Editing",
+      "description": "In Copilot Studio, re-sending an edited file under the same name fails to deliver it \u2014 the change is made but never reaches the user. This skill gives each iteration a new version-numbered filename (report_v1.docx, report_v2.docx\u2026) so every update actually lands in the chat as its own attachment.",
+      "author": "Adi Leibowitz",
+      "tags": [
+        "files",
+        "iteration",
+        "workflow",
+        "collaboration",
+        "productivity"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "iterative-file-editing",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#iterative-file-editing",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "fe1e0e3d17cbdfee"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/iterative_file_editing_agent.py",
+      "_install_filename": "rar_cat_agent_skills_iterative_file_editing_agent.py",
+      "_sha256": "a532f41b2ec9ea63e4917ac8ad8f942ffbdab5dd177a3864692e5527c63050b2",
+      "_lifecycle": "legacy_active",
+      "_seed": 7212495103012251170,
+      "_size_kb": 4.4,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/knowledge_corpus_curator",
+      "version": "0.8.0",
+      "display_name": "Knowledge Corpus Curator",
+      "description": "Review uploaded knowledge-source files for duplication, redundancy, staleness, overlap, and potentially conflicting guidance, then produce an evidence-based curation backlog.",
+      "author": "Doug Bellingeri",
+      "tags": [
+        "knowledge",
+        "sharepoint",
+        "governance",
+        "deduplication",
+        "documents",
+        "uploads",
+        "excel"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "knowledge-corpus-curator",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#knowledge-corpus-curator",
+        "upstream_version": "0.8.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "44b7b1e672580b5c"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/knowledge_corpus_curator_agent.py",
+      "_install_filename": "rar_cat_agent_skills_knowledge_corpus_curator_agent.py",
+      "_sha256": "67d21dc360bba5c24e274d3f006be0501d4ed06e01c60e17439e590602ae980f",
+      "_lifecycle": "legacy_active",
+      "_seed": 3167800125289278461,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/knowledge_source_router",
+      "version": "1.0.0",
+      "display_name": "Knowledge Source Router",
+      "description": "Route Copilot Studio knowledge searches to the right region-specific source (Americas, EMEA, APAC, or Global) based on where the user is, so answers stay locally accurate.",
+      "author": "Adi Leibowitz",
+      "tags": [
+        "knowledge",
+        "routing",
+        "localization",
+        "location",
+        "grounding"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "knowledge-source-router",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#knowledge-source-router",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "bcc9646e4cda8666"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/knowledge_source_router_agent.py",
+      "_install_filename": "rar_cat_agent_skills_knowledge_source_router_agent.py",
+      "_sha256": "e1ef4ddb2be43ff1e8c2d50b0663a37b7c2d20fcb9eb41be8ef370b558091799",
+      "_lifecycle": "legacy_active",
+      "_seed": 6734445765290763835,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/lab_column_mapper",
+      "version": "1.0.0",
+      "display_name": "Lab Column Mapper",
+      "description": "When a health system's lab results ingestion pipeline hits an unknown column header, this skill semantically matches the source column against the canonical clinical schema (LOINC-anchored), scoped by lab and clinical domain, and writes a suggested mapping to a Dataverse review queue for a clinical informatics steward to approve.",
+      "author": "Rafsan Huseynov",
+      "tags": [
+        "healthcare",
+        "clinical_data",
+        "lab_results",
+        "schema_drift",
+        "column_mapping",
+        "data_ingestion",
+        "loinc",
+        "azure_ai_search"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "lab-column-mapper",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#lab-column-mapper",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "a5d0633999e8c453"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/lab_column_mapper_agent.py",
+      "_install_filename": "rar_cat_agent_skills_lab_column_mapper_agent.py",
+      "_sha256": "a559b5fc3edc23fd96931c79e0b59757a2327452871ec7fa610167bccaef6515",
+      "_lifecycle": "legacy_active",
+      "_seed": 14850472892638966648,
+      "_size_kb": 4.5,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/linkedin_content_system",
+      "version": "0.1.0",
+      "display_name": "LinkedIn Content System",
+      "description": "Create evidence-led LinkedIn posts, promos, newsletter intros, and long-form copy from supplied facts or drafts.",
+      "author": "Simon Owen",
+      "tags": [
+        "linkedin",
+        "social_media",
+        "writing",
+        "marketing",
+        "content"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "linkedin-content-system",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#linkedin-content-system",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "207c56909d447f78"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/linkedin_content_system_agent.py",
+      "_install_filename": "rar_cat_agent_skills_linkedin_content_system_agent.py",
+      "_sha256": "161a2e203fc3ce255d6228271425c4268fd8caa6758ef0eec6bd23978d81637c",
+      "_lifecycle": "legacy_active",
+      "_seed": 11405386844750888335,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/linkedin_content_writer",
+      "version": "1.0.1",
+      "display_name": "LinkedIn Content Writer",
+      "description": "Create credible LinkedIn content from facts, notes or drafts, with configurable voice and no invented evidence.",
+      "author": "Becky Still, Digital Boop Ltd",
+      "tags": [
+        "linkedin",
+        "social_media",
+        "writing",
+        "content"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "linkedin-content-writer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#linkedin-content-writer",
+        "upstream_version": "1.0.1",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "b67b1c225f5d7237"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/linkedin_content_writer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_linkedin_content_writer_agent.py",
+      "_sha256": "513622fb3c6c72b4eacc7485e0d7322a455379c07813be25a617c6e888e934bb",
+      "_lifecycle": "legacy_active",
+      "_seed": 11868186974102237577,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/lookup_dataverse_table",
+      "version": "1.0.0",
+      "display_name": "Dataverse Table Lookup",
+      "description": "Search any Microsoft Dataverse table, browse matching records, and drill into full record details \u2014 sourced live via the Dataverse MCP Server.",
+      "author": "Chris Garty",
+      "tags": [
+        "dataverse",
+        "mcp",
+        "data_lookup",
+        "power_platform",
+        "crm"
+      ],
+      "category": "integrations",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "lookup-dataverse-table",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#lookup-dataverse-table",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "9a79dc859cb36791"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/lookup_dataverse_table_agent.py",
+      "_install_filename": "rar_cat_agent_skills_lookup_dataverse_table_agent.py",
+      "_sha256": "4711a7ae7d45b59605527836000f145786d83dd6ef0fd4e2504ed07af3065947",
+      "_lifecycle": "legacy_active",
+      "_seed": 9113709509289323895,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/mct_excellence_iq",
+      "version": "1.0.0",
+      "display_name": "MCT Excellence IQ",
+      "description": "An AI-powered Instructional Intelligence Skill that helps Microsoft Certified Trainers design, deliver, assess, localize, and continuously improve world-class Microsoft learning experiences across Azure, Business Applications, Data & AI, Modern Work, and Security.",
+      "author": "Faride Ilanda",
+      "tags": [
+        "mct",
+        "instructional_intelligence",
+        "microsoft_learning",
+        "courseware",
+        "microsoft_learn",
+        "azure",
+        "business_applications",
+        "data_ai"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "mct-excellence-iq",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#mct-excellence-iq",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "dc7072f847ebe5f9"
+      },
+      "platforms": [
+        "Copilot Studio",
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/mct_excellence_iq_agent.py",
+      "_install_filename": "rar_cat_agent_skills_mct_excellence_iq_agent.py",
+      "_sha256": "23a33d02b2842024f7c58e8d32fed5ab129b54b231e8aec27a562e301a21ef4f",
+      "_lifecycle": "legacy_active",
+      "_seed": 12691269472889086481,
+      "_size_kb": 4.4,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/meeting_analyzer",
+      "version": "0.1.0",
+      "display_name": "Meeting Analyzer",
+      "description": "Analyzes meeting content pasted as text or provided as audio/video transcripts. Delivers a structured intelligence report: explicit decisions and action items, participant persona profiles, and \u2014 most importantly \u2014 hidden insights: unspoken tensions, implicit risks, unresolved topics, and signals that were not made explicit during the meeting but are critical to the context.",
+      "author": "Michael Ferro Pereira",
+      "tags": [
+        "meetings",
+        "analysis",
+        "insights",
+        "personas",
+        "transcription",
+        "productivity",
+        "communication"
+      ],
+      "category": "analysis",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "meeting-analyzer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#meeting-analyzer",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "71c742aa9f713491"
+      },
+      "platforms": [
+        "Copilot Studio",
+        "Cowork"
+      ],
+      "_file": "agents/@cat-agent-skills/meeting_analyzer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_meeting_analyzer_agent.py",
+      "_sha256": "6f223d5abca3b8739c014f1121de7ef490dcd57b48fac998679445111f20c87a",
+      "_lifecycle": "legacy_active",
+      "_seed": 9131837247170952006,
+      "_size_kb": 4.6,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/microsoft_ai_platform_advisor",
+      "version": "1.0.0",
+      "display_name": "Microsoft AI Platform Advisor",
+      "description": "Guides a customer through a discovery interview, recommends the right Microsoft AI platform (M365 Copilot, Agent Builder, Copilot Studio, Foundry, Foundry Agent Service, Windows AI Foundry, or Agent 365 as the governance layer), scores technical complexity and risk, and plots them on a 2x2 quadrant chart with planning guidance.",
+      "author": "Rafsan Huseynov",
+      "tags": [
+        "advisor",
+        "discovery",
+        "architecture",
+        "decision_making",
+        "requirements",
+        "risk_assessment",
+        "microsoft_365_copilot",
+        "foundry"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "microsoft-ai-platform-advisor",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#microsoft-ai-platform-advisor",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "80671ffc99dbbc48"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
+      "_install_filename": "rar_cat_agent_skills_microsoft_ai_platform_advisor_agent.py",
+      "_sha256": "19adaa1cac8fb2ce8158fdeae87f4deb164c17e3bc315538cdc3ba112f69c450",
+      "_lifecycle": "legacy_active",
+      "_seed": 3511732026926445992,
+      "_size_kb": 4.6,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/own_voice_builder",
+      "version": "1.0.0",
+      "display_name": "Own Voice Builder",
+      "description": "Mines your sent emails to extract your real writing voice \u2014 languages, tone modes, structure, vocabulary, taboo phrases \u2014 and generates a personal voice skill that makes every email and Teams draft sound like you.",
+      "author": "Marcel",
+      "tags": [
+        "writing",
+        "voice",
+        "email",
+        "teams",
+        "productivity",
+        "microsoft_365"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "own-voice-builder",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#own-voice-builder",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "45c780ef5e1ffdad"
+      },
+      "platforms": [
+        "Cowork",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/own_voice_builder_agent.py",
+      "_install_filename": "rar_cat_agent_skills_own_voice_builder_agent.py",
+      "_sha256": "d63fd7688f802176ef34fa453ba2477cf40301c55ff4f30c78dd3b38c9620591",
+      "_lifecycle": "legacy_active",
+      "_seed": 1530004408078446771,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/pattern_radar",
+      "version": "1.0.0",
+      "display_name": "Pattern Radar",
+      "description": "Scans your recent Microsoft 365 signals to surface recurring patterns worth productizing \u2014 things you keep explaining (blog candidates) or multi-step tasks you keep doing by hand (automation candidates).",
+      "author": "Srinivas Varukala",
+      "tags": [
+        "productivity",
+        "automation",
+        "content",
+        "email",
+        "teams",
+        "insights"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "pattern-radar",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pattern-radar",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "cde1b5f304153695"
+      },
+      "platforms": [
+        "Cowork",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/pattern_radar_agent.py",
+      "_install_filename": "rar_cat_agent_skills_pattern_radar_agent.py",
+      "_sha256": "c09a1104dbefd987c9cc20787636643239c93fe7840e76645dbd3d0d016a3a4f",
+      "_lifecycle": "legacy_active",
+      "_seed": 17145226772901279339,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/pattern_radar_automation",
+      "version": "1.0.0",
+      "display_name": "Pattern Radar (Scheduled)",
+      "description": "Twice a week, scans your recent Microsoft 365 signals and posts a Teams summary of recurring patterns worth productizing \u2014 things you keep explaining (blog candidates) and multi-step tasks you keep doing by hand (automation candidates). Read-only and privacy-aware.",
+      "author": "Srinivas Varukala",
+      "tags": [
+        "automation",
+        "productivity",
+        "teams",
+        "email",
+        "content",
+        "insights"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "pattern-radar-automation",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pattern-radar-automation",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "137112290f4a7fbf"
+      },
+      "platforms": [
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/pattern_radar_automation_agent.py",
+      "_install_filename": "rar_cat_agent_skills_pattern_radar_automation_agent.py",
+      "_sha256": "5dde3bff6f8031d08300b45511d672b0a549e055c1b0e25faba3b245f7eb71f1",
+      "_lifecycle": "legacy_active",
+      "_seed": 3678695620493451797,
+      "_size_kb": 4.4,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/pdf_table_data_conversion",
+      "version": "1.0.0",
+      "display_name": "PDF Table Data Conversion",
+      "description": "Extract tables from a PDF document (e.g. contract rebate or pricing schedules) and convert them into a clean, workable Excel spreadsheet or CSV.",
+      "author": "Lewis Baybutt",
+      "tags": [
+        "documents",
+        "extraction",
+        "pdf",
+        "csv",
+        "xlsx",
+        "tables",
+        "sharepoint"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "pdf-table-data-conversion",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pdf-table-data-conversion",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "a997eb9d6266624c"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/pdf_table_data_conversion_agent.py",
+      "_install_filename": "rar_cat_agent_skills_pdf_table_data_conversion_agent.py",
+      "_sha256": "294cd62831b307fe6d91bb5c2bb5a5c7b8986cd271f40fc5dbda1da53ac53d53",
+      "_lifecycle": "legacy_active",
+      "_seed": 929244689336253662,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/persona_reaction_panel",
+      "version": "1.0.0",
+      "display_name": "Persona Reaction Panel",
+      "description": "Pre-test an internal launch, comms, or enablement artefact against your own role-based personas before it ships \u2014 surfaces blackspots, domain gaps, credible-detractor risks, and concrete edits. Bring your own personas file.",
+      "author": "Olivia Zhang",
+      "tags": [
+        "communications",
+        "change_management",
+        "launch_readiness",
+        "personas",
+        "qa"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "persona-reaction-panel",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#persona-reaction-panel",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "d947b7c2da61f3de"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/persona_reaction_panel_agent.py",
+      "_install_filename": "rar_cat_agent_skills_persona_reaction_panel_agent.py",
+      "_sha256": "8ada2cf0117297d5513acbddc04c8c7eb41f4857b93f42657ba7685c7f9e1f11",
+      "_lifecycle": "legacy_active",
+      "_seed": 5998955572450961048,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/phi_deidentifier",
+      "version": "1.0.0",
+      "display_name": "PHI De-identifier",
+      "description": "Redact the 18 HIPAA Safe Harbor identifiers from clinical text (or produce a Limited Data Set) with consistent pseudonym tokens and an audit manifest of what was removed.",
+      "author": "Rafael Lopez Alcaraz",
+      "tags": [
+        "healthcare",
+        "hls",
+        "phi",
+        "privacy",
+        "redaction",
+        "hipaa",
+        "compliance",
+        "scripts"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "phi-deidentifier",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#phi-deidentifier",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "4c6bd1961fad5f45"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/phi_deidentifier_agent.py",
+      "_install_filename": "rar_cat_agent_skills_phi_deidentifier_agent.py",
+      "_sha256": "c7291a506f5e59c73791122ceb888c21b4cbd4ab5e2334cf63a802c1dee94128",
+      "_lifecycle": "legacy_active",
+      "_seed": 5971328241960499032,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/pov_line_generator",
+      "version": "0.1.0",
+      "display_name": "POV Line Generator",
+      "description": "Generate sharp, specific point-of-view lines for posts, slides, talks, campaigns, or positioning work.",
+      "author": "Simon Owen",
+      "tags": [
+        "writing",
+        "positioning",
+        "marketing",
+        "content",
+        "social_media"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "pov-line-generator",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pov-line-generator",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "bf492abfe32d66ad"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/pov_line_generator_agent.py",
+      "_install_filename": "rar_cat_agent_skills_pov_line_generator_agent.py",
+      "_sha256": "0da802405f3f7989a34a6667e161a5c22b8ee25bb3d10b63370610785452130d",
+      "_lifecycle": "legacy_active",
+      "_seed": 7769812297019176766,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/power_automate_desktop_assessment",
+      "version": "1.1.0",
+      "display_name": "Power Automate Desktop Assessment",
+      "description": "Assess Power Automate Desktop and hybrid automation projects with evidence-based findings and prioritized remediation guidance.",
+      "author": "Ricardo Calejo",
+      "tags": [
+        "power_automate",
+        "desktop_flows",
+        "automation",
+        "assessment",
+        "governance"
+      ],
+      "category": "analysis",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "power-automate-desktop-assessment",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#power-automate-desktop-assessment",
+        "upstream_version": "1.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "d026e3d4a8378798"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/power_automate_desktop_assessment_agent.py",
+      "_install_filename": "rar_cat_agent_skills_power_automate_desktop_assessment_agent.py",
+      "_sha256": "51723d1828dc5f35dfaacbf3578924aa6c6a8618e98ebf97b6abbd089d1dee04",
+      "_lifecycle": "legacy_active",
+      "_seed": 13447834008772291623,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/power_automate_documentation",
+      "version": "1.0.0",
+      "display_name": "Power Automate Documentation",
+      "description": "Turns a Power Automate solution .zip into a clean markdown reference for every flow inside it: trigger, plain-English process, connection references, and a read/write/delete table for everything it touches. Maps which flows call each other and unresolved connections automatically.",
+      "author": "Mathias Salomonsen",
+      "tags": [
+        "power_automate",
+        "documentation",
+        "audit",
+        "governance"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "power-automate-documentation",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#power-automate-documentation",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "4c5eb6e7dd7c2d70"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/power_automate_documentation_agent.py",
+      "_install_filename": "rar_cat_agent_skills_power_automate_documentation_agent.py",
+      "_sha256": "8a1ccb6d3f47133fe5bbd520a071dbd66cfff33ca69fb2ee8b3043aaf767435c",
+      "_lifecycle": "legacy_active",
+      "_seed": 8747558204567204639,
+      "_size_kb": 4.5,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/power_bi_model_review",
+      "version": "1.0.0",
+      "display_name": "Power BI Model Review",
+      "description": "Review a Power BI or Analysis Services semantic model (TMDL, BIM/JSON, or a pasted table/measure list) for relationship, DAX, date-handling, and naming issues, with corrected DAX for anything flagged.",
+      "author": "Tim Karlsson",
+      "tags": [
+        "power_bi",
+        "dax",
+        "semantic_model",
+        "data",
+        "review",
+        "fabric"
+      ],
+      "category": "pipeline",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "power-bi-model-review",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#power-bi-model-review",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "d7479319485ce4bf"
+      },
+      "platforms": [
+        "Copilot Studio",
+        "Cowork",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/power_bi_model_review_agent.py",
+      "_install_filename": "rar_cat_agent_skills_power_bi_model_review_agent.py",
+      "_sha256": "f3fa219c1aa4ee23764e1411624aee29d96f877136bc93959330fa09572b91ec",
+      "_lifecycle": "legacy_active",
+      "_seed": 8065371055089006787,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/powerpoint_deck_designer",
+      "version": "1.0.0",
+      "display_name": "PowerPoint Deck Designer",
+      "description": "Creates polished PowerPoint decks from a JSON specification using python-pptx. Designed as a Copilot Studio Skill that runs natively inside the agent's Python container (no Azure Function or custom connector required). Supports 8 layouts plus native charts (bar, column, line, pie, donut with stacked / 100% stacked variants).",
+      "author": "Ferran Chopo",
+      "tags": [
+        "powerpoint",
+        "presentations",
+        "python",
+        "charts"
+      ],
+      "category": "devtools",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "powerpoint-deck-designer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#powerpoint-deck-designer",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "13a4c71ffb14ed1c"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/powerpoint_deck_designer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_powerpoint_deck_designer_agent.py",
+      "_sha256": "b4a3d8e8259d1fecf2df7efe70f4056c5ab37d82407f72d4d6ba89f7f1162f9e",
+      "_lifecycle": "legacy_active",
+      "_seed": 16919150354179307997,
+      "_size_kb": 4.5,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/presentation_talk_track_builder",
+      "version": "1.0.0",
+      "display_name": "Presentation Talk Track Builder",
+      "description": "Writes natural, first-person spoken presenter scripts for the slides in a deck. Treats existing speaker notes as authoritative when they contradict slide text. Calibrates length to a target duration and speaking pace and returns a timing table. Never modifies visible slide content.",
+      "author": "Jagmeet Chabra",
+      "tags": [
+        "presentations",
+        "speaker_notes",
+        "powerpoint",
+        "writing",
+        "productivity"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "presentation-talk-track-builder",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#presentation-talk-track-builder",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "10389b967a5e68a1"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
+      "_install_filename": "rar_cat_agent_skills_presentation_talk_track_builder_agent.py",
+      "_sha256": "4c9ce829908d046a285849eec2dbeec46800f8a9e8a3b1ab0eeb94d31248d726",
+      "_lifecycle": "legacy_active",
+      "_seed": 9191655984660619781,
+      "_size_kb": 4.5,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/process_sop_architect",
+      "version": "1.1.0",
+      "display_name": "Process & SOP Architect",
+      "description": "Turn process notes and transcripts into an editable SOP, process map, RACI, control register, improvement backlog, and polished PowerPoint briefing.",
+      "author": "Parag Dessai",
+      "tags": [
+        "process_improvement",
+        "sop",
+        "operations",
+        "powerpoint",
+        "productivity"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "process-sop-architect",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#process-sop-architect",
+        "upstream_version": "1.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "3851098193863859"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/process_sop_architect_agent.py",
+      "_install_filename": "rar_cat_agent_skills_process_sop_architect_agent.py",
+      "_sha256": "74fefbfa4839a9dc3e3801bb43a38dbbb3740a0e40859b151429d410dba1cfef",
+      "_lifecycle": "legacy_active",
+      "_seed": 4473299887886842713,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/redlining_content",
+      "version": "1.0.0",
+      "display_name": "Redlining Content",
+      "description": "Redlines a document based on changes from a template with Track Changes.",
+      "author": "AndrewHessMSFT",
+      "tags": [
+        "documents",
+        "productivity"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "redlining-content",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#redlining-content",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "1c2ec4d219101bd1"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/redlining_content_agent.py",
+      "_install_filename": "rar_cat_agent_skills_redlining_content_agent.py",
+      "_sha256": "78580708f30267a3f194fa4901aeb619b74ee8f1097551f996fa855c8f5effcc",
+      "_lifecycle": "legacy_active",
+      "_seed": 14912481654756096314,
+      "_size_kb": 3.9,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/regulation_monitor",
+      "version": "1.0.0",
+      "display_name": "Regulation Monitor",
+      "description": "Configure once, then on a schedule sweeps a locked list of authoritative sources (auto-discovered at setup, confirmed by the user) plus any user-supplied seeds. Classifies each item, flags items relevant to the user's team using a light WorkIQ-derived profile, and renders a self-contained HTML dashboard. A tightly-bounded fallback web search is used only when a locked source is silent in the wind\u2026",
+      "author": "Jagmeet Chabra",
+      "tags": [
+        "regulation",
+        "monitoring",
+        "compliance",
+        "dashboard",
+        "research"
+      ],
+      "category": "analysis",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "regulation-monitor",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#regulation-monitor",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "455a25cb3f6e394c"
+      },
+      "platforms": [
+        "Cowork",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/regulation_monitor_agent.py",
+      "_install_filename": "rar_cat_agent_skills_regulation_monitor_agent.py",
+      "_sha256": "a45d439c523cd8bbe845a75d84bc9590d3be2c2e0524a7f7c6681cccfaffee8a",
+      "_lifecycle": "legacy_active",
+      "_seed": 2048339254354519978,
+      "_size_kb": 4.6,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/rich_html_presentation",
+      "version": "1.0.0",
+      "display_name": "Rich HTML Presentation",
+      "description": "Create polished, self-contained HTML slide decks with keynote-style visuals, keyboard navigation, themes, animations, and reusable presentation components.",
+      "author": "Henry Jammes",
+      "tags": [
+        "presentations",
+        "html",
+        "design",
+        "productivity",
+        "writing"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "rich-html-presentation",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#rich-html-presentation",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "742d89a7bc9519a5"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/rich_html_presentation_agent.py",
+      "_install_filename": "rar_cat_agent_skills_rich_html_presentation_agent.py",
+      "_sha256": "f3597c06868262fd34c7a6d659bcfb802926117cd8ae15b3d1a7760c0ba49096",
+      "_lifecycle": "legacy_active",
+      "_seed": 9062438139641605218,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/scrollytelling_data",
+      "version": "1.0.0",
+      "display_name": "Scrollytelling Data",
+      "description": "Turns data into a scroll-driven HTML story.",
+      "author": "AndrewHessMSFT",
+      "tags": [
+        "data",
+        "visualization",
+        "storytelling",
+        "reporting"
+      ],
+      "category": "pipeline",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "scrollytelling-data",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#scrollytelling-data",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "0b872fe30f38e4cf"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/scrollytelling_data_agent.py",
+      "_install_filename": "rar_cat_agent_skills_scrollytelling_data_agent.py",
+      "_sha256": "8ea320d5ed9b68f88e96b5929114033792fd503008bc4c752b24cbd994c816d4",
+      "_lifecycle": "legacy_active",
+      "_seed": 9394345777536970812,
+      "_size_kb": 3.9,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/sharepoint_list_formatter",
+      "version": "1.0.0",
+      "display_name": "SharePoint List Formatter",
+      "description": "Turns any SharePoint list data into a clean, consistent markdown table. Dynamic columns based on list type and query, plus a one-click Open link for every row.",
+      "author": "Mathias Salomonsen",
+      "tags": [
+        "sharepoint",
+        "microsoft_365",
+        "productivity",
+        "tables",
+        "data"
+      ],
+      "category": "pipeline",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "sharepoint-list-formatter",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#sharepoint-list-formatter",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "081ee2e4c6d01a36"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
+      "_install_filename": "rar_cat_agent_skills_sharepoint_list_formatter_agent.py",
+      "_sha256": "c41430a97a33bb3aa3d06fd98b6d5bf4c6ef5103349447147951d6bc6ec38c62",
+      "_lifecycle": "legacy_active",
+      "_seed": 8153718373571246085,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
+      "version": "1.0.0",
+      "display_name": "SharePoint List Insight Report Generator",
+      "description": "Automatically discovers and validates a SharePoint list within a connected knowledge source, analyzes its structure and data, identifies key business insights, and generates a downloadable interactive HTML report. The report includes dynamic filters, interactive charts, sortable and searchable tables with pagination, detailed record drill-down through modal popups, and direct links to open items\u2026",
+      "author": "Marco Rocca",
+      "tags": [
+        "sharepoint",
+        "microsoft_365",
+        "lists",
+        "report",
+        "html"
+      ],
+      "category": "integrations",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "sharepoint-list-insight-report-generator",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#sharepoint-list-insight-report-generator",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "271bccfbe07e039e"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py",
+      "_install_filename": "rar_cat_agent_skills_sharepoint_list_insight_report_generator_agent.py",
+      "_sha256": "2277851e5a76f27472c32805075abb93f0a4ba895ab2df68dfbfd061ef4c720d",
+      "_lifecycle": "legacy_active",
+      "_seed": 10334818382721464574,
+      "_size_kb": 4.8,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/skill_authoring_coach",
+      "version": "0.1.0",
+      "display_name": "Skill Authoring Coach",
+      "description": "Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.",
+      "author": "Simon Owen",
+      "tags": [
+        "skills",
+        "authoring",
+        "documentation",
+        "productivity",
+        "agent"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "skill-authoring-coach",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#skill-authoring-coach",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "dd0ed10e586119e5"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/skill_authoring_coach_agent.py",
+      "_install_filename": "rar_cat_agent_skills_skill_authoring_coach_agent.py",
+      "_sha256": "62bf0a10514c0d6e25434f4e47c36192c136d2350b90e83e5d4fbfb9509e6fb6",
+      "_lifecycle": "legacy_active",
+      "_seed": 16010864256023666820,
+      "_size_kb": 4.1,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/spend_more_time_with_friends_and_family",
+      "version": "1.0.0",
+      "display_name": "Spend More Time With Friends & Family",
+      "description": "While you're out of office, watches a group chat and answers questions from your local knowledge docs (clearly marked AI-generated), logs anything it can't answer for later, and pings you on Teams if its setup is incomplete.",
+      "author": "Adi Leibowitz",
+      "tags": [
+        "automation",
+        "teams",
+        "out_of_office",
+        "knowledge"
+      ],
+      "category": "integrations",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "spend-more-time-with-friends-and-family",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#spend-more-time-with-friends-and-family",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "bd12abb4ba09a5e5"
+      },
+      "platforms": [
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py",
+      "_install_filename": "rar_cat_agent_skills_spend_more_time_with_friends_and_family_agent.py",
+      "_sha256": "152ec06f27bd65ba3159e8cd8e9fb8f252f62a8b33a67da63e1ddf4bf50e7369",
+      "_lifecycle": "legacy_active",
+      "_seed": 14428155759068455262,
+      "_size_kb": 4.4,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/style_analyzer",
+      "version": "1.0.0",
+      "display_name": "Communication Style Analyzer",
+      "description": "Analyzes your Teams chats and emails to build a reusable profile of your writing voice \u2014 greetings, tone, length, punctuation, sign-offs, common phrases, and quirks \u2014 and saves it to memory for other assistants to use.",
+      "author": "Srinivas Varukala",
+      "tags": [
+        "writing",
+        "style",
+        "teams",
+        "email",
+        "memory",
+        "productivity"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "style-analyzer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#style-analyzer",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "e5e6f66aa29bdddf"
+      },
+      "platforms": [
+        "Cowork",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/style_analyzer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_style_analyzer_agent.py",
+      "_sha256": "b55122e5889049b9dd66ac71cae21a2f753e83089b4912b40b812f73c96aa228",
+      "_lifecycle": "legacy_active",
+      "_seed": 6797201095569191536,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/tool_tracer",
+      "version": "1.0.0",
+      "display_name": "Tool Tracer",
+      "description": "On-demand tool/action trace for Copilot Studio runs (`/special-debug tool-trace` \u2192 `tool_trace.json`).",
+      "author": "Rafael Lopez Alcaraz",
+      "tags": [
+        "transparency",
+        "observability",
+        "debugging",
+        "workflow",
+        "logging",
+        "json",
+        "productivity"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "tool-tracer",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#tool-tracer",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "5fcd9f882c958e11"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/tool_tracer_agent.py",
+      "_install_filename": "rar_cat_agent_skills_tool_tracer_agent.py",
+      "_sha256": "3617383e4ed7a62351a231b2298295d10c0c964156e5e9b32f560e1f6789fb2c",
+      "_lifecycle": "legacy_active",
+      "_seed": 7403808000236730049,
+      "_size_kb": 4.0,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/vacation_urgent_forwarder",
+      "version": "1.0.0",
+      "display_name": "Vacation Urgent Forwarder",
+      "description": "A Scout automation installer that, only during a configured vacation window, scans work email and Teams and forwards genuinely urgent items to your personal email.",
+      "author": "Giorgio Ughini",
+      "tags": [
+        "automation",
+        "email",
+        "teams",
+        "out_of_office"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "vacation-urgent-forwarder",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#vacation-urgent-forwarder",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "e2fd9f42fce2d9e9"
+      },
+      "platforms": [
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
+      "_install_filename": "rar_cat_agent_skills_vacation_urgent_forwarder_agent.py",
+      "_sha256": "25ec6addfe2486fa03a3d16963e75a30c3c897bb524c65d9ee1320fd651b71a9",
+      "_lifecycle": "legacy_active",
+      "_seed": 10930056148061532476,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/vendor_contract_risk_review",
+      "version": "1.0.0",
+      "display_name": "Vendor Contract Risk Review",
+      "description": "First-pass review of a vendor contract or SOW for the clauses that commonly cause problems (auto-renewal, liability caps, termination, IP ownership), flagged by risk level to prepare for legal review, not replace it.",
+      "author": "Tim Karlsson",
+      "tags": [
+        "contracts",
+        "legal",
+        "procurement",
+        "risk",
+        "vendor_management",
+        "review"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "vendor-contract-risk-review",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#vendor-contract-risk-review",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "b809a298c80e1782"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/vendor_contract_risk_review_agent.py",
+      "_install_filename": "rar_cat_agent_skills_vendor_contract_risk_review_agent.py",
+      "_sha256": "f584f3a4ddb7d841f5aaaa4ad67eeb5653f28ade58568470d0acdb2a5971e955",
+      "_lifecycle": "legacy_active",
+      "_seed": 15801285580082129977,
+      "_size_kb": 4.3,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/whiteboard_to_infographic",
+      "version": "1.0.0",
+      "display_name": "Whiteboard to Infographic",
+      "description": "Turn a photo of a hand-drawn whiteboard or process sketch into a polished, client-ready infographic slide (.pptx), generated natively in the agent's Python container.",
+      "author": "Andy Zehr",
+      "tags": [
+        "infographic",
+        "whiteboard",
+        "powerpoint",
+        "presentations",
+        "diagrams",
+        "design",
+        "consulting"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "whiteboard-to-infographic",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#whiteboard-to-infographic",
+        "upstream_version": "1.0.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "8ba98fb5f2eb84f8"
+      },
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "_file": "agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
+      "_install_filename": "rar_cat_agent_skills_whiteboard_to_infographic_agent.py",
+      "_sha256": "633aaf2062889757d724550ec49f76c59a4aa0d0ab433bb120c19a95284e008c",
+      "_lifecycle": "legacy_active",
+      "_seed": 17572275169396663511,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/wikipedia_human_style_writing",
+      "version": "0.1.0",
+      "display_name": "Wikipedia Human Style Writing",
+      "description": "Rewrite or draft prose so it avoids the tell-tale signs of AI writing, using Wikipedia's 'Signs of AI writing' field guide.",
+      "author": "Chris Garty",
+      "tags": [
+        "writing",
+        "content",
+        "editing",
+        "style",
+        "humanize",
+        "ai_detection",
+        "wikipedia"
+      ],
+      "category": "general",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "wikipedia-human-style-writing",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#wikipedia-human-style-writing",
+        "upstream_version": "0.1.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "4a55ea6837b037ca"
+      },
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py",
+      "_install_filename": "rar_cat_agent_skills_wikipedia_human_style_writing_agent.py",
+      "_sha256": "a4db25b315f5ba4c79efb53b6f03659f5300b29334cde6e0ff45d7f6486d2d4f",
+      "_lifecycle": "legacy_active",
+      "_seed": 5001731747512988380,
+      "_size_kb": 4.2,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@cat-agent-skills/work_brief",
+      "version": "0.4.0",
+      "display_name": "Work Brief",
+      "description": "A morning brief that reads your mail, calendar, and Teams, then tells you what you owe people before the week starts.",
+      "author": "Allan De Castro",
+      "tags": [
+        "productivity",
+        "automation",
+        "teams",
+        "email",
+        "calendar",
+        "briefing",
+        "multilingual"
+      ],
+      "category": "productivity",
+      "quality_tier": "frontier",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "aggregated": true,
+        "source_id": "cat-agent-skills",
+        "source_name": "CAT Agent Skills",
+        "source_url": "https://microsoft.github.io/cat-agent-skills/",
+        "upstream_slug": "work-brief",
+        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#work-brief",
+        "upstream_version": "0.4.0",
+        "license": "unverified",
+        "license_verified": false,
+        "content_digest": "669d0b5ee44266f3"
+      },
+      "platforms": [
+        "Scout"
+      ],
+      "_file": "agents/@cat-agent-skills/work_brief_agent.py",
+      "_install_filename": "rar_cat_agent_skills_work_brief_agent.py",
+      "_sha256": "3fc71d228759b6e97ef7e9df3439b589e18e5280cca5c18a46636cad35456d86",
+      "_lifecycle": "legacy_active",
+      "_seed": 12709215022938472432,
+      "_size_kb": 4.0,
+      "_lines": 103,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
     },
     {
       "schema": "rapp-agent/1.0",
