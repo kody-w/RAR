@@ -2369,24 +2369,14 @@ async function loadRegistry() {
   }
 }
 
-// Stable alias that always 302s to the newest release's copy of an asset,
-// so no client ever pins a tag.
-const RELEASE_BASE = 'https://github.com/kody-w/RAR/releases/latest/download/';
-
-// Resolve an agent's source, counted. Release assets are the only fetch
-// GitHub counts for us — no token needed, anonymous fetches included —
-// which is what makes the published download number real. Falls back to
-// raw for anything the current release doesn't carry; the fallback is
-// silent and never blocks a run.
+// Reads agent source over raw, deliberately — NOT the counted release
+// asset. Release assets carry no Access-Control-Allow-Origin header, so a
+// cross-origin fetch() from this page is blocked by CORS and can never
+// read the bytes. raw.githubusercontent.com sends `ACAO: *`. The brainstem
+// must READ the source to transpile and run it, so raw is the only option.
 async function fetchAgent(entry) {
-  const asset = entry._install_filename;
-  if (asset) {
-    try {
-      const resp = await fetch(RELEASE_BASE + asset);
-      if (resp.ok) return resp.text();
-    } catch (e) { /* fall through to raw */ }
-  }
-  const resp = await fetch(RAW_BASE + entry._file);
+  const url = RAW_BASE + entry._file;
+  const resp = await fetch(url);
   if (!resp.ok) throw new Error(`Failed to fetch ${entry._file}: ${resp.status}`);
   return resp.text();
 }

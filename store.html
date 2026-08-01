@@ -3888,26 +3888,37 @@ function bumpGhRatings(name, field, delta) {
 // Stable alias that always 302s to the newest release's copy of an asset.
 const RELEASE_BASE = `https://github.com/${REPO}/releases/latest/download/`;
 
-// Prefer the release asset over raw: GitHub counts release-asset fetches
-// server-side with no token on either end, anonymous ones included. That
-// is the download number we publish (state/downloads.json). The reaction
-// tally below stays, but it counts UPVOTES and signed-in installs only —
-// it was never able to see an anonymous download.
-// Returns null when the release doesn't carry this agent yet.
-async function releaseAssetUrl(a) {
-  return a?._install_filename ? RELEASE_BASE + a._install_filename : null;
-}
-
-// Download agent.py via fetch+blob (cross-origin download attribute doesn't work)
-async function downloadAgentPy(name) {
+// Download agent.py by NAVIGATING to the release asset.
+//
+// This is the one browser path that can be counted. Release assets carry
+// no Access-Control-Allow-Origin header, so fetch() is blocked by CORS —
+// but a navigation is not CORS-restricted, and the signed asset response
+// sets `Content-Disposition: attachment`, so the browser saves the file
+// without us ever reading the bytes. GitHub increments download_count
+// server-side, anonymously, and that is the number in state/downloads.json.
+//
+// Falls back to the old fetch+blob over raw for agents the current release
+// doesn't carry yet. A metric must never block a download.
+function downloadAgentPy(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a?._file) return;
+  if (a._install_filename) {
+    const link = document.createElement('a');
+    link.href = RELEASE_BASE + a._install_filename;
+    // The download attribute is ignored cross-origin; Content-Disposition
+    // on the asset is what forces the save. Kept for the same-origin case.
+    link.download = a._install_filename;
+    link.rel = 'noopener';
+    link.click();
+    return;
+  }
+  return downloadAgentPyViaRaw(a);
+}
+
+// Fallback: fetch+blob over raw (cross-origin download attribute doesn't work)
+async function downloadAgentPyViaRaw(a) {
   try {
-    // Release asset first (counted); raw is the fallback for agents
-    // published since the last tag. A metric must never block a download.
-    const asset = await releaseAssetUrl(a);
-    let res = asset ? await fetch(asset).catch(() => null) : null;
-    if (!res?.ok) res = await fetch(`${RAW}/${a._file}?t=${Date.now()}`);
+    const res = await fetch(`${RAW}/${a._file}?t=${Date.now()}`);
     if (!res.ok) throw new Error(res.status);
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
@@ -3916,11 +3927,11 @@ async function downloadAgentPy(name) {
     link.download = a._file.split('/').pop() || `${a.name.split('/')[1]}.py`;
     link.click();
     URL.revokeObjectURL(url);
-    trackDownload(name);
+    trackDownload(a.name);
   } catch (e) {
     // Fallback: open in new tab
     window.open(`${RAW}/${a._file}`, '_blank');
-    trackDownload(name);
+    trackDownload(a.name);
   }
 }
 
