@@ -6,408 +6,1542 @@
 <title>RAPP Brainstem — Summon</title>
 <meta name="description" content="Browser-native agent runtime — run any RAPP agent in a LisPy VM, no server required. This variant accepts ?agent=@pub/slug deep-links from QR scans.">
 <style>
-:root {
-  --bg: #0d1117;
-  --surface: #161b22;
-  --surface2: #21262d;
-  --surface3: #30363d;
-  --border: #30363d;
-  --border-hover: #484f58;
-  --text: #e6edf3;
-  --text-dim: #8b949e;
-  --text-muted: #656d76;
-  --accent: #58a6ff;
-  --accent-bg: rgba(88,166,255,.1);
-  --green: #3fb950;
-  --green-bg: rgba(63,185,80,.12);
-  --orange: #d29922;
-  --orange-bg: rgba(210,153,34,.12);
-  --purple: #bc8cff;
-  --purple-bg: rgba(188,140,255,.12);
-  --red: #f85149;
-  --red-bg: rgba(248,81,73,.12);
-  --yellow: #e3b341;
-  --gold: #ffd700;
-  --shadow: 0 3px 12px rgba(0,0,0,.4);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,.5);
-  --radius: 10px;
-  --radius-lg: 14px;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  background: var(--bg); color: var(--text);
-  min-height:100vh; min-height:100dvh; /* dvh tracks iOS toolbar; vh is the fallback */
-  display: flex; flex-direction: column;
-}
-a { color: var(--accent); text-decoration:none; }
-code, .mono { font-family: 'SF Mono','Fira Code',Consolas,'Liberation Mono',Menlo,monospace; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    height: 100vh; height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  a { color: #58a6ff; text-decoration: none; }
 
-/* Header */
-.bs-header {
-  background: var(--surface); border-bottom:1px solid var(--border);
-  padding:12px 24px; padding-top:calc(12px + env(safe-area-inset-top));
-  padding-left:calc(24px + env(safe-area-inset-left)); padding-right:calc(24px + env(safe-area-inset-right));
-  display:flex; align-items:center; justify-content:space-between;
-  flex-shrink:0;
-}
-.bs-logo { display:flex; align-items:center; gap:10px; font-size:1.1rem; font-weight:700; }
-.bs-logo-mark {
-  background: linear-gradient(135deg, var(--green), var(--accent));
-  color:#fff; width:30px; height:30px; border-radius:7px;
-  display:flex; align-items:center; justify-content:center;
-  font-size:.75rem; font-weight:800;
-}
-.bs-status {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:4px 12px; border-radius:12px; font-size:.8rem; font-weight:600;
-}
-.bs-status.idle { background:var(--surface2); color:var(--text-dim); }
-.bs-status.loading { background:var(--orange-bg); color:var(--orange); }
-.bs-status.running { background:var(--green-bg); color:var(--green); }
-.bs-status.error { background:var(--red-bg); color:var(--red); }
-.bs-status-dot {
-  width:8px; height:8px; border-radius:50%; background:currentColor;
-}
-.bs-status.running .bs-status-dot { animation: pulse 1.2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-.bs-header-right { display:flex; align-items:center; gap:10px; }
-.bs-btn {
-  background:var(--surface2); border:1px solid var(--border); color:var(--text);
-  padding:6px 14px; border-radius:7px; cursor:pointer; font-size:.82rem; transition:all .15s;
-}
-.bs-btn:hover { border-color:var(--border-hover); background:var(--surface3); }
-.bs-btn.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
-.bs-btn.primary:hover { opacity:.85; }
-.bs-btn.green { background:var(--green); border-color:var(--green); color:#fff; }
-.bs-btn.green:hover { opacity:.85; }
+  /* ── Inline SVG icon helper ── */
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px; height: 16px;
+    flex-shrink: 0;
+  }
+  .icon svg { width: 100%; height: 100%; fill: currentColor; }
+  .icon-lg { width: 20px; height: 20px; }
+  .icon-xl { width: 40px; height: 40px; }
 
-/* GitHub auth */
-.gh-pill {
-  display:flex; align-items:center; gap:6px; padding:5px 12px;
-  background:var(--surface2); border:1px solid var(--border); border-radius:7px;
-  font-size:.8rem; cursor:pointer; color:var(--text); transition:all .15s;
-}
-.gh-pill:hover { border-color:var(--border-hover); }
-.gh-pill .gh-avatar {
-  width:20px; height:20px; border-radius:50%; background:var(--surface3);
-}
-.gh-pill .gh-dot {
-  width:6px; height:6px; border-radius:50%;
-}
-.gh-pill .gh-dot.on { background:var(--green); }
-.gh-pill .gh-dot.off { background:var(--red); }
+  header {
+    padding: 12px 24px;
+    padding-top: calc(12px + env(safe-area-inset-top));
+    border-bottom: 1px solid #21262d;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #161b22;
+    flex-shrink: 0;
+  }
+  header .logo {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #3fb950, #1f6feb);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; flex-shrink: 0;
+  }
+  header .logo .icon { width: 18px; height: 18px; }
+  header h1 { font-size: 15px; font-weight: 600; color: #e6edf3; cursor: default; }
+  header .controls {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #8b949e;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #3fb950;
+    animation: pulse 2s infinite;
+  }
+  .dot.offline { background: #f85149; animation: none; }
+  .dot.pending { background: #d29922; animation: pulse 1s infinite; }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+  }
 
-/* Chat */
-.chat-wrap { display:flex; flex-direction:column; flex:1; overflow:hidden; position:relative; }
-.chat-messages {
-  flex:1; min-height:0; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:20px; max-width:820px; width:100%; margin:0 auto;
-}
-.chat-msg { display:flex; gap:10px; margin-bottom:18px; align-items:flex-start; }
-.chat-msg.user { flex-direction:row-reverse; }
-.chat-avatar {
-  width:30px; height:30px; border-radius:50%; display:flex; align-items:center;
-  justify-content:center; font-size:.65rem; font-weight:700; flex-shrink:0;
-}
-.chat-msg.user .chat-avatar { background:var(--accent); color:#fff; }
-.chat-msg.assistant .chat-avatar { background:var(--green); color:var(--bg); }
-.chat-bubble {
-  max-width:72%; padding:10px 14px; border-radius:14px; font-size:.85rem; line-height:1.55;
-  word-wrap:break-word; white-space:pre-wrap;
-}
-.chat-msg.user .chat-bubble {
-  background:var(--accent); color:#fff; border-bottom-right-radius:4px;
-}
-.chat-msg.assistant .chat-bubble {
-  background:var(--surface); border:1px solid var(--border); border-bottom-left-radius:4px;
-  color:var(--text);
-}
-.chat-bubble table { border-collapse:collapse; margin:6px 0; width:auto; }
-.chat-bubble th, .chat-bubble td {
-  border:1px solid var(--border); padding:3px 10px; text-align:left; font-size:.8rem;
-}
-.chat-bubble th { background:var(--surface2); color:var(--accent); font-weight:600; }
-.chat-bubble strong { color:inherit; font-weight:700; }
-.chat-bubble a { color:var(--accent); text-decoration:underline; }
-.chat-bubble code {
-  background:var(--surface2); padding:1px 5px; border-radius:3px; font-size:.8rem;
-}
-.chat-activity {
-  text-align:center; margin:10px 0; font-size:.75rem; color:var(--text-muted);
-  font-family:'SF Mono',monospace;
-}
-.chat-activity-pill {
-  display:inline-flex; align-items:center; gap:6px; padding:4px 12px;
-  background:var(--surface); border:1px dashed var(--border); border-radius:12px;
-}
-.chat-activity-dot {
-  width:5px; height:5px; border-radius:50%; background:var(--green);
-  animation: pulse 1s infinite;
-}
-.chat-input-bar {
-  display:flex; gap:8px; padding:12px 20px;
-  padding-bottom:calc(12px + env(safe-area-inset-bottom));
-  border-top:1px solid var(--border);
-  background:var(--surface); max-width:820px; width:100%; margin:0 auto;
-}
-.chat-input {
-  flex:1; padding:10px 14px; background:var(--bg); border:1px solid var(--border);
-  border-radius:10px; color:var(--text); font-size:.85rem; outline:none;
-  font-family:inherit; resize:none;
-}
-.chat-input:focus { border-color:var(--accent); }
-.chat-input::placeholder { color:var(--text-muted); }
-.chat-send {
-  padding:10px 18px; background:var(--accent); color:#fff; border:none;
-  border-radius:10px; cursor:pointer; font-size:.85rem; font-weight:600; transition:all .15s;
-}
-.chat-send:hover { opacity:.85; }
-.chat-send:disabled { opacity:.4; cursor:not-allowed; }
+  /* Engine status pill (#vmStatus) — rendered as a slim dot + text to match the local header */
+  #vmStatus {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: #8b949e;
+  }
+  #vmStatus .bs-status-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #3fb950;
+    animation: pulse 2s infinite;
+  }
+  #vmStatus.idle .bs-status-dot { background: #8b949e; animation: none; }
+  #vmStatus.loading .bs-status-dot { background: #d29922; animation: pulse 1s infinite; }
+  #vmStatus.running .bs-status-dot { background: #3fb950; }
+  #vmStatus.error .bs-status-dot { background: #f85149; animation: none; }
 
-.chat-welcome-box {
-  text-align:center; padding:60px 24px 40px; max-width:560px; margin:0 auto;
-}
-.chat-welcome-box h2 { font-size:1.3rem; margin-bottom:8px; }
-.chat-welcome-box p { color:var(--text-dim); line-height:1.6; margin-bottom:16px; }
-.chat-agent-pills {
-  display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;
-}
-.chat-agent-pill {
-  padding:4px 12px; background:var(--surface); border:1px solid var(--border);
-  border-radius:12px; font-size:.75rem; color:var(--green); font-weight:600;
-}
-.chat-suggestions {
-  display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:8px;
-}
-.chat-suggestion {
-  padding:8px 14px; background:var(--surface); border:1px solid var(--border);
-  border-radius:10px; font-size:.8rem; color:var(--text-dim); cursor:pointer;
-  transition:all .15s;
-}
-.chat-suggestion:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-bg); }
+  .icon-btn {
+    background: none;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 4px 7px;
+    cursor: pointer;
+    color: #8b949e;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .icon-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+  .icon-btn.active { border-color: #3fb950; color: #3fb950; background: rgba(63,185,80,0.08); }
 
-.typing-indicator { display:flex; gap:4px; padding:4px 0; }
-.typing-dot {
-  width:6px; height:6px; border-radius:50%; background:var(--text-muted);
-  animation:typeBounce .6s infinite alternate;
-}
-.typing-dot:nth-child(2) { animation-delay:.15s; }
-.typing-dot:nth-child(3) { animation-delay:.3s; }
-@keyframes typeBounce { from{opacity:.3;transform:translateY(0)} to{opacity:1;transform:translateY(-3px)} }
+  /* ── GitHub auth pill (engine IDs: ghPill/ghDot/ghLabel) ── */
+  .gh-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: none; border: 1px solid #30363d; border-radius: 6px;
+    padding: 4px 9px; cursor: pointer; color: #8b949e;
+    font-size: 11px; transition: all 0.15s;
+  }
+  .gh-pill:hover { border-color: #58a6ff; color: #58a6ff; }
+  .gh-pill .gh-avatar { width: 16px; height: 16px; border-radius: 50%; background: #30363d; }
+  .gh-pill .gh-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .gh-pill .gh-dot.on { background: #3fb950; }
+  .gh-pill .gh-dot.off { background: #f85149; }
 
-.chat-model-bar {
-  padding:6px 20px; font-size:.7rem; color:var(--text-muted); text-align:center;
-  border-top:1px solid var(--border); display:flex; align-items:center; justify-content:center;
-  gap:8px; flex-wrap:wrap; row-gap:6px;
-}
-.agent-enabled-pills { justify-content:center; }
-.agent-enabled-pill {
-  max-width:60vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-}
-.model-select {
-  background:var(--surface2); border:1px solid var(--border); color:var(--text-dim);
-  padding:2px 8px; border-radius:5px; font-size:.7rem; cursor:pointer; outline:none;
-  max-width:260px;
-}
-.model-select:focus { border-color:var(--accent); }
-.model-select option { background:var(--surface); color:var(--text); }
+  /* ── Login overlay ── */
+  #login-overlay {
+    position: fixed; inset: 0;
+    background: rgba(13,17,23,0.95);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+  }
+  .login-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    max-width: 420px;
+    position: relative;
+  }
+  .login-card .login-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #3fb950, #1f6feb);
+    margin: 0 auto 20px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+  }
+  .login-card h2 { font-size: 20px; margin-bottom: 8px; }
+  .login-card p { color: #8b949e; font-size: 14px; margin-bottom: 24px; }
+  .login-btn {
+    background: #238636; color: #fff; border: none; border-radius: 8px;
+    padding: 12px 24px; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .login-btn:hover { background: #2ea043; }
+  .login-btn:disabled { opacity: 0.5; cursor: default; }
+  .login-skip {
+    display: block; margin-top: 16px; color: #8b949e; font-size: 13px;
+    background: none; border: none; cursor: pointer; width: 100%;
+  }
+  .login-skip:hover { color: #e6edf3; }
 
-/* Agent dropdown */
-.agent-dropdown-wrap {
-  position:relative; display:inline-block;
-}
-.agent-dropdown-btn {
-  background:var(--surface2); border:1px solid var(--border); color:var(--text-dim);
-  padding:2px 8px; border-radius:5px; font-size:.7rem; cursor:pointer; outline:none;
-  transition:all .15s;
-}
-.agent-dropdown-btn:hover { border-color:var(--border-hover); color:var(--text); }
-.agent-dropdown-btn .agent-count {
-  background:var(--green); color:#fff; padding:0 5px; border-radius:8px;
-  font-size:.65rem; margin-left:4px; font-weight:700;
-}
-.agent-dropdown-panel {
-  display:none; position:absolute; bottom:100%; left:0;
-  margin-bottom:6px; background:var(--surface); border:1px solid var(--border);
-  border-radius:10px; width:320px; max-height:400px; overflow:hidden;
-  box-shadow:var(--shadow-lg); z-index:100;
-}
-.agent-dropdown-panel.open { display:block; }
-.agent-dropdown-search {
-  width:100%; background:var(--bg); border:none; border-bottom:1px solid var(--border);
-  padding:10px 12px; color:var(--text); font-size:.82rem; outline:none;
-}
-.agent-dropdown-list {
-  max-height:320px; overflow-y:auto; padding:4px;
-}
-.agent-dropdown-item {
-  display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:6px;
-  cursor:pointer; transition:background .1s; font-size:.8rem;
-}
-.agent-dropdown-item:hover { background:var(--surface2); }
-.agent-dropdown-item .agent-check {
-  width:16px; height:16px; border:1.5px solid var(--border); border-radius:4px;
-  flex-shrink:0; display:flex; align-items:center; justify-content:center;
-  transition:all .15s; font-size:.65rem; color:transparent;
-}
-.agent-dropdown-item.enabled .agent-check {
-  background:var(--green); border-color:var(--green); color:#fff;
-}
-.agent-dropdown-item-info { flex:1; min-width:0; }
-.agent-dropdown-item-name { font-weight:600; color:var(--text); }
-.agent-dropdown-item-desc {
-  font-size:.72rem; color:var(--text-muted); white-space:nowrap;
-  overflow:hidden; text-overflow:ellipsis;
-}
-.agent-enabled-pills {
-  display:flex; gap:4px; flex-wrap:wrap; padding:0 4px;
-}
-.agent-enabled-pill {
-  padding:1px 8px; background:var(--green-bg); border:1px solid rgba(63,185,80,.3);
-  border-radius:10px; font-size:.65rem; color:var(--green); font-weight:600;
-  cursor:pointer; transition:all .15s;
-}
-.agent-enabled-pill:hover { border-color:var(--red); color:var(--red); background:var(--red-bg); }
+  /* ── Chat ── */
+  #chat {
+    flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 16px;
+    position: relative;
+  }
+  .msg, .chat-msg { display: flex; gap: 12px; max-width: 760px; width: 100%; margin: 0 auto; z-index: 2; align-items: flex-start; }
+  .msg.user, .chat-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg.system, .chat-msg.system { align-self: center; }
+  /* engine appends .chat-msg directly to #chat; center the column like .msg */
+  .chat-msg { margin-bottom: 0; }
 
-/* Drop zone overlay */
-.chat-drop-overlay {
-  display:none; position:absolute; inset:0; z-index:90;
-  background:rgba(13,17,23,.85); backdrop-filter:blur(4px);
-  flex-direction:column; align-items:center; justify-content:center; gap:12px;
-  border:3px dashed var(--accent); border-radius:12px; margin:8px;
-  pointer-events:none;
-}
-.chat-drop-overlay.active { display:flex; }
-.chat-drop-overlay .drop-icon { font-size:2.5rem; opacity:.7; }
-.chat-drop-overlay .drop-text { font-size:1rem; color:var(--accent); font-weight:600; }
-.chat-drop-overlay .drop-hint { font-size:.8rem; color:var(--text-muted); }
+  /* Chat Watermark */
+  #chat-watermark {
+    position: absolute; bottom: 24px; right: 24px;
+    color: #30363d; font-size: 14px; font-weight: 500; text-align: right;
+    pointer-events: none; z-index: 1; user-select: none;
+    display: flex; flex-direction: row; align-items: center; gap: 8px;
+    opacity: 0.6;
+  }
+  #chat-watermark svg { width: 20px; height: 20px; fill: #30363d; }
+  /* Hide the empty-state hint once a real conversation begins */
+  #chat.has-messages #chat-watermark { display: none; }
 
-/* Toast notification */
-.vb-toast {
-  position:fixed; bottom:80px; left:50%; transform:translateX(-50%);
-  background:var(--green); color:#fff; padding:10px 20px; border-radius:8px;
-  font-size:.85rem; font-weight:600; z-index:200; box-shadow:var(--shadow-lg);
-  animation: toastIn .3s ease-out;
-}
-@keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+  .avatar, .chat-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: #8b949e; background: #21262d;
+    font-size: 11px; font-weight: 700;
+  }
+  .avatar .icon { width: 18px; height: 18px; }
+  .msg.user .avatar, .chat-msg.user .chat-avatar { background: #1f6feb; color: #fff; }
+  .msg.assistant .avatar, .chat-msg.assistant .chat-avatar { background: #161b22; border: 1px solid #30363d; color: #58a6ff; }
 
-/* Agent download button in dropdown */
-.agent-dl-btn {
-  flex-shrink:0; width:24px; height:24px; border:none; background:none;
-  color:var(--text-muted); cursor:pointer; border-radius:4px; font-size:.75rem;
-  display:flex; align-items:center; justify-content:center; transition:all .15s;
-}
-.agent-dl-btn:hover { background:var(--accent); color:#fff; }
+  .bubble, .chat-bubble {
+    padding: 12px 16px; border-radius: 12px;
+    font-size: 14px; line-height: 1.6;
+    max-width: 780px; word-break: break-word;
+  }
+  .msg.assistant .bubble, .chat-msg.assistant .chat-bubble {
+    background: #161b22; border: 1px solid #21262d;
+    border-radius: 4px 12px 12px 12px;
+    color: #e6edf3;
+  }
+  .bubble a, .chat-bubble a { color: #58a6ff; text-decoration: none; }
+  .bubble a:hover, .chat-bubble a:hover { text-decoration: underline; }
+  .bubble strong, .chat-bubble strong { color: #e6edf3; }
+  .bubble ol, .bubble ul, .chat-bubble ol, .chat-bubble ul { padding-left: 20px; margin: 8px 0; }
+  .bubble li, .chat-bubble li { margin: 6px 0; }
+  .bubble p, .chat-bubble p { margin: 6px 0; }
+  .bubble p:first-child, .chat-bubble p:first-child { margin-top: 0; }
+  .bubble p:last-child, .chat-bubble p:last-child { margin-bottom: 0; }
+  .bubble code, .chat-bubble code {
+    background: #0d1117; padding: 2px 6px; border-radius: 4px;
+    font-family: "SF Mono", monospace; font-size: 12px;
+  }
+  .bubble pre, .chat-bubble pre {
+    background: #0d1117; padding: 10px; border-radius: 6px;
+    overflow-x: auto; margin: 8px 0;
+  }
+  .bubble pre code, .chat-bubble pre code { padding: 0; background: none; }
+  .bubble table, .chat-bubble table {
+    border-collapse: collapse; width: 100%; margin: 10px 0;
+    font-size: 13px;
+  }
+  .bubble th, .bubble td, .chat-bubble th, .chat-bubble td {
+    border: 1px solid #30363d; padding: 8px 12px; text-align: left;
+    vertical-align: top;
+  }
+  .bubble th, .chat-bubble th {
+    background: #0d1117; color: #e6edf3; font-weight: 600;
+    white-space: nowrap;
+  }
+  .bubble tr:nth-child(even), .chat-bubble tr:nth-child(even) { background: rgba(13,17,23,0.4); }
+  .bubble h1, .bubble h2, .bubble h3 {
+    margin: 14px 0 8px 0; color: #e6edf3; line-height: 1.3;
+  }
+  .bubble h1 { font-size: 18px; }
+  .bubble h2 { font-size: 16px; }
+  .bubble h3 { font-size: 14px; }
+  .bubble h1:first-child, .bubble h2:first-child, .bubble h3:first-child { margin-top: 0; }
+  .bubble blockquote {
+    border-left: 3px solid #30363d; margin: 8px 0; padding: 4px 12px;
+    color: #8b949e;
+  }
+  .bubble hr { border: none; border-top: 1px solid #21262d; margin: 12px 0; }
+  .msg.user .bubble, .chat-msg.user .chat-bubble {
+    background: #1f6feb; color: #fff; border-radius: 12px 4px 12px 12px;
+    white-space: pre-wrap;
+  }
+  .msg.system .bubble {
+    background: transparent; color: #8b949e;
+    font-size: 13px; border: none; padding: 4px 8px;
+  }
+  .msg.system .bubble h2 { color: #e6edf3; font-size: 16px; margin-bottom: 8px; }
+  .msg.system .bubble ul { padding-left: 20px; margin: 12px 0; }
+  .msg.system .bubble li { margin-bottom: 6px; }
+  .msg.system .bubble code { background: rgba(255,255,255,0.1); padding: 2px 4px; border-radius: 4px; }
+  .msg.system .bubble strong { color: #c9d1d9; }
 
-/* Chat toolbar (export/import/clear) */
-.chat-toolbar {
-  display:flex; gap:4px; align-items:center; margin-left:auto;
-}
-.chat-toolbar-btn {
-  padding:2px 8px; background:var(--surface2); border:1px solid var(--border);
-  border-radius:6px; color:var(--text-muted); font-size:.65rem; cursor:pointer;
-  transition:all .15s; white-space:nowrap;
-}
-.chat-toolbar-btn:hover { border-color:var(--accent); color:var(--accent); }
+  /* ── Agent activity indicator (engine emits .chat-activity / .chat-activity-pill) ── */
+  .chat-activity {
+    align-self: center; max-width: 760px; width: 100%; z-index: 2;
+    text-align: center; margin: 2px auto; font-size: 11px; color: #8b949e;
+    font-family: "SF Mono", monospace;
+  }
+  .chat-activity-pill {
+    display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+    background: #161b22; border: 1px dashed #30363d; border-radius: 999px;
+    color: #8b949e;
+  }
+  .chat-activity-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: #3fb950;
+    animation: pulse 1s infinite;
+  }
+  .vb-agent-output { max-width: 760px; margin: 4px auto 0; width: 100%; }
 
-/* Responsive */
-@media (max-width:768px) {
-  .bs-header { padding:10px 16px; padding-top:calc(10px + env(safe-area-inset-top)); }
-  .chat-bubble { max-width:88%; }
-  .chat-input-bar { padding:10px 12px; padding-bottom:calc(10px + env(safe-area-inset-bottom)); }
-  .chat-model-bar { padding:6px 10px; }
-  .chat-messages { padding:16px 12px; }
-}
+  .typing, .typing-indicator { display: flex; gap: 4px; align-items: center; padding: 4px 0; }
+  .typing span, .typing-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #8b949e; animation: bounce 1.2s infinite;
+  }
+  .typing span:nth-child(2), .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3), .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
 
-/* ─── Summon toast (variant-only) ────────────────────────── */
-.summon-toast {
-  position: fixed; left: 50%; bottom: 24px;
-  transform: translate(-50%, 120%);
-  background: linear-gradient(135deg, #58a6ff, #bc8cff);
-  color: #fff; padding: 12px 22px; border-radius: 999px;
-  font-size: .9rem; font-weight: 600; letter-spacing: .2px;
-  box-shadow: 0 12px 40px rgba(88,166,255,.35), 0 0 0 1px rgba(255,255,255,.15) inset;
-  z-index: 10000; opacity: 0;
-  transition: transform .35s cubic-bezier(.2,.9,.3,1.2), opacity .35s ease;
-  max-width: calc(100vw - 32px); text-align: center;
-  pointer-events: none;
-}
-.summon-toast.show { transform: translate(-50%, 0); opacity: 1; }
-.summon-toast b { font-weight: 800; }
+  /* ── Footer ── */
+  footer {
+    padding: 16px 24px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    border-top: 1px solid #21262d;
+    background: #161b22;
+    flex-shrink: 0;
+  }
+  .input-row {
+    display: flex; gap: 10px;
+    max-width: 760px; margin: 0 auto;
+  }
+  #input, #chatInput {
+    flex: 1; background: #0d1117;
+    border: 1px solid #30363d; border-radius: 8px;
+    color: #e6edf3; font-size: 14px;
+    padding: 10px 14px; resize: none; outline: none;
+    line-height: 1.5; max-height: 120px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+  }
+  #input:focus, #chatInput:focus { border-color: #1f6feb; }
+  #input::placeholder, #chatInput::placeholder { color: #484f58; }
+  #input:disabled, #chatInput:disabled { opacity: 0.6; }
+  #send, #chatSend {
+    background: #1f6feb; color: #fff; border: none; border-radius: 8px;
+    padding: 10px 18px; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: background 0.15s, opacity 0.15s;
+    align-self: flex-end;
+  }
+  #send:hover, #chatSend:hover { background: #388bfd; }
+  #send:disabled, #chatSend:disabled { opacity: 0.4; cursor: default; }
+
+  .toolbar-row {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 760px; margin: 0 auto 8px;
+    font-size: 11px; color: #484f58;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .toolbar-row .left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .toolbar-row .right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .toolbar-link {
+    background: none; border: none; color: #484f58;
+    cursor: pointer; font-size: 11px;
+    display: inline-flex; align-items: center; gap: 3px;
+    text-decoration: none; transition: color 0.15s;
+  }
+  .toolbar-link:hover { color: #8b949e; }
+
+  /* Enabled-agent pills shown in the toolbar (engine: #enabledAgentPills) */
+  #enabledAgentPills { display: flex; gap: 4px; flex-wrap: wrap; }
+  .agent-enabled-pill {
+    padding: 1px 8px; background: rgba(63,185,80,0.12);
+    border: 1px solid rgba(63,185,80,0.3);
+    border-radius: 10px; font-size: 10px; color: #3fb950; font-weight: 600;
+    cursor: pointer; transition: all 0.15s; max-width: 160px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .agent-enabled-pill:hover { border-color: #f85149; color: #f85149; background: rgba(248,81,73,0.12); }
+
+  /* ── Model selector (engine: #modelSelect) ── */
+  #model-select, #modelSelect, .model-select {
+    background: #0d1117; color: #e6edf3;
+    border: 1px solid #30363d; border-radius: 6px;
+    padding: 4px 8px; font-size: 12px;
+    font-family: "SF Mono", monospace;
+    cursor: pointer; outline: none; transition: border-color 0.15s;
+    max-width: min(420px, 32vw);
+  }
+  #model-select:hover, #modelSelect:hover, .model-select:hover { border-color: #58a6ff; }
+  #model-select:focus, #modelSelect:focus, .model-select:focus { border-color: #1f6feb; }
+  #modelSelect option, .model-select option { background: #161b22; color: #e6edf3; }
+  #chatModelLabel { color: #8b949e; font-size: 11px; }
+
+  /* ── Agent dropdown (engine IDs: agentDropdownPanel / agentDropdownList / agentCount) ── */
+  .agents-wrapper { position: relative; }
+  #agents-panel, #agentDropdownPanel {
+    display: none;
+    position: absolute; top: 100%; right: 0; margin-top: 6px;
+    background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+    padding: 16px; width: 320px; z-index: 50;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    font-size: 13px;
+    max-height: 440px; overflow-y: auto; overflow-x: hidden;
+  }
+  #agents-panel.open, #agentDropdownPanel.open { display: block; }
+  #agents-panel h3 {
+    font-size: 13px; font-weight: 600; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .agent-dropdown-search {
+    width: 100%; box-sizing: border-box;
+    background: #0d1117; color: #e6edf3;
+    border: 1px solid #30363d; border-radius: 6px;
+    padding: 6px 8px; font-size: 12px; outline: none; margin-bottom: 8px;
+    transition: border-color 0.15s;
+  }
+  .agent-dropdown-search:focus { border-color: #1f6feb; }
+  .agent-dropdown-list { display: flex; flex-direction: column; }
+  .agent-dropdown-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 8px 0; border-bottom: 1px solid #21262d;
+    font-size: 12px; cursor: pointer;
+  }
+  .agent-dropdown-item:last-child { border-bottom: none; }
+  .agent-dropdown-item:hover { background: rgba(255,255,255,0.02); }
+  .agent-dropdown-item .agent-check {
+    width: 16px; height: 16px; border: 1.5px solid #30363d; border-radius: 4px;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; font-size: 10px; color: transparent; margin-top: 1px;
+  }
+  .agent-dropdown-item.enabled .agent-check { background: #238636; border-color: #238636; color: #fff; }
+  .agent-dropdown-item-info { flex: 1; min-width: 0; }
+  .agent-dropdown-item-name { color: #e6edf3; font-weight: 600; word-break: break-word; line-height: 1.4; }
+  .agent-dropdown-item-desc {
+    color: #8b949e; font-size: 10px; line-height: 1.35; margin-top: 2px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .agent-dl-btn {
+    flex-shrink: 0; width: 24px; height: 24px; border: 1px solid #30363d;
+    background: #21262d; color: #8b949e; cursor: pointer; border-radius: 4px;
+    font-size: 11px; display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .agent-dl-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+  .agent-count {
+    background: #238636; color: #fff; padding: 0 6px; border-radius: 9px;
+    font-size: 10px; margin-left: 4px; font-weight: 700; vertical-align: middle;
+  }
+
+  /* ── Registry panel (book button) — repurposes the engine's #agentDropdownPanel ── */
+  .registry-wrapper { position: relative; }
+
+  /* ── Installed/enabled Agents panel (⊕ button) — local-brainstem .agent-list look ── */
+  #agents-panel {
+    display: none;
+    position: absolute; top: 100%; right: 0; margin-top: 6px;
+    background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+    padding: 16px; width: 300px; z-index: 50;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    font-size: 13px;
+    max-height: 400px; overflow-y: auto; overflow-x: hidden;
+  }
+  #agents-panel.open { display: block; }
+  #agents-panel h3 {
+    font-size: 13px; font-weight: 600; margin-bottom: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .agent-list { list-style: none; margin: 0; padding: 0; }
+  .agent-list li {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 8px; padding: 8px 0; border-bottom: 1px solid #21262d;
+    font-size: 12px;
+  }
+  .agent-list li:last-child { border-bottom: none; }
+  .agent-list .agent-name { flex: 1; min-width: 0; }
+  .agent-list .agent-title {
+    color: #e6edf3; font-family: "SF Mono", monospace;
+    word-break: break-word; line-height: 1.4;
+  }
+  .agent-list .agent-file {
+    color: #8b949e; font-family: "SF Mono", monospace;
+    font-size: 10px; word-break: break-all; margin-top: 2px;
+  }
+  .agent-list .agent-controls { display: flex; gap: 4px; flex-shrink: 0; }
+  .agent-list .export-btn {
+    background: #21262d; color: #e6edf3; border: 1px solid #30363d;
+    border-radius: 4px; padding: 3px 6px; font-size: 10px;
+    cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  }
+  .agent-list .export-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+  .agent-list .del-btn:hover { border-color: #f85149; color: #f85149; }
+
+  /* ── Voice settings panel ── */
+  .voice-wrapper { position: relative; }
+  #voice-panel {
+    display: none;
+    position: absolute; top: 100%; right: 0; margin-top: 6px;
+    background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+    padding: 16px; width: 300px; z-index: 50;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    font-size: 13px;
+  }
+  #voice-panel.open { display: block; }
+  #voice-panel h3 {
+    font-size: 13px; font-weight: 600; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  #voice-panel label {
+    display: block; color: #8b949e; font-size: 11px;
+    margin-bottom: 4px; margin-top: 10px;
+  }
+  #voice-panel label:first-of-type { margin-top: 0; }
+  #voice-panel input, #voice-panel select {
+    width: 100%; background: #0d1117; color: #e6edf3;
+    border: 1px solid #30363d; border-radius: 6px;
+    padding: 6px 8px; font-size: 12px;
+    font-family: "SF Mono", monospace;
+    outline: none; transition: border-color 0.15s;
+  }
+  #voice-panel input:focus, #voice-panel select:focus { border-color: #1f6feb; }
+  #voice-panel .panel-row {
+    display: flex; gap: 8px; align-items: center; margin-top: 12px;
+  }
+  #voice-panel .panel-btn {
+    background: #21262d; color: #e6edf3; border: 1px solid #30363d;
+    border-radius: 6px; padding: 5px 10px; font-size: 11px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  #voice-panel .panel-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+  #voice-panel .panel-btn.primary { background: #238636; border-color: #238636; color: #fff; }
+  #voice-panel .panel-btn.primary:hover { background: #2ea043; }
+  #voice-panel .panel-status {
+    font-size: 11px; color: #8b949e; margin-top: 8px;
+    min-height: 16px;
+  }
+
+  /* ── Secrets vault panel ── */
+  .secrets-wrapper { position: relative; }
+  #secrets-panel {
+    display: none;
+    position: absolute; top: 100%; right: 0; margin-top: 6px;
+    background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+    padding: 16px; width: 320px; z-index: 50;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    font-size: 13px; max-height: 70vh; overflow-y: auto; overflow-x: hidden;
+  }
+  #secrets-panel.open { display: block; }
+  #secrets-panel h3 {
+    font-size: 13px; font-weight: 600; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  #secrets-panel label {
+    display: block; color: #8b949e; font-size: 11px;
+    margin-bottom: 4px; margin-top: 10px;
+  }
+  #secrets-panel input {
+    flex: 1; min-width: 0; background: #0d1117; color: #e6edf3;
+    border: 1px solid #30363d; border-radius: 6px;
+    padding: 6px 8px; font-size: 12px;
+    font-family: "SF Mono", monospace;
+    outline: none; transition: border-color 0.15s;
+  }
+  #secrets-panel input:focus { border-color: #1f6feb; }
+  #secrets-panel .panel-row { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+  #secrets-panel .panel-btn {
+    background: #21262d; color: #e6edf3; border: 1px solid #30363d;
+    border-radius: 6px; padding: 5px 10px; font-size: 11px;
+    cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  }
+  #secrets-panel .panel-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+  #secrets-panel .panel-btn.primary { background: #238636; border-color: #238636; color: #fff; }
+  #secrets-panel .panel-btn.primary:hover { background: #2ea043; }
+  .secrets-state {
+    font-size: 11px; padding: 6px 8px; border-radius: 6px;
+    background: rgba(248,81,73,0.10); color: #f85149;
+    border: 1px solid rgba(248,81,73,0.25); margin-bottom: 12px;
+  }
+  .secrets-state.unlocked {
+    background: rgba(63,185,80,0.10); color: #3fb950;
+    border-color: rgba(63,185,80,0.25);
+  }
+  .secrets-list { list-style: none; margin: 12px 0 0; padding: 0; }
+  .secrets-list li {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 8px; padding: 7px 0; border-bottom: 1px solid #21262d; font-size: 12px;
+  }
+  .secrets-list li:last-child { border-bottom: none; }
+  .secrets-list .sk-key {
+    color: #e6edf3; font-family: "SF Mono", monospace;
+    word-break: break-all; flex: 1; min-width: 0;
+  }
+  .secrets-list .sk-mask { color: #8b949e; font-family: "SF Mono", monospace; font-size: 11px; }
+  .secrets-list .sk-del {
+    background: #21262d; color: #8b949e; border: 1px solid #30363d;
+    border-radius: 4px; padding: 1px 7px; font-size: 13px; line-height: 1.4;
+    cursor: pointer; transition: all 0.15s; flex-shrink: 0;
+  }
+  .secrets-list .sk-del:hover { border-color: #f85149; color: #f85149; }
+  .secrets-empty { font-size: 11px; color: #8b949e; margin-top: 10px; text-align: center; }
+  .secrets-note { font-size: 10px; color: #8b949e; margin-top: 12px; line-height: 1.4; }
+
+  /* ── Drag & Drop Overlay (engine: #dropOverlay) ── */
+  #drop-overlay, #dropOverlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(35,134,54,0.9); z-index: 200;
+    align-items: center; justify-content: center; flex-direction: column;
+    color: #fff; font-size: 24px; font-weight: 600;
+    border: 6px dashed rgba(255,255,255,0.5); border-radius: 16px; margin: 16px;
+    pointer-events: none; text-align: center; padding: 24px;
+  }
+  #dropOverlay.active { display: flex; }
+  #drop-overlay .icon { width: 64px; height: 64px; margin-bottom: 16px; }
+  #dropOverlay .drop-icon { font-size: 48px; margin-bottom: 12px; }
+  #dropOverlay .drop-text { font-size: 22px; }
+  #dropOverlay .drop-hint { font-size: 13px; opacity: 0.85; margin-top: 8px; font-weight: 400; }
+
+  /* ── Starter Prompts ── */
+  #starter-prompts {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    max-width: 760px; margin: 0 auto 16px; padding: 0 24px;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .starter-btn {
+    background: #161b22; color: #58a6ff; border: 1px solid #30363d;
+    border-radius: 20px; padding: 8px 16px; font-size: 13px;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    font-family: inherit;
+  }
+  .starter-btn:hover {
+    background: #21262d; border-color: #58a6ff; transform: translateY(-1px);
+  }
+
+  /* ── Toasts ── */
+  .vb-toast {
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+    background: #238636; color: #fff; padding: 10px 20px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; z-index: 250; box-shadow: 0 8px 30px rgba(0,0,0,.5);
+    animation: toastIn .3s ease-out;
+  }
+  @keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(10px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+  /* ─── Summon toast (variant-only) ────────────────────────── */
+  .summon-toast {
+    position: fixed; left: 50%; bottom: 24px;
+    transform: translate(-50%, 120%);
+    background: linear-gradient(135deg, #58a6ff, #bc8cff);
+    color: #fff; padding: 12px 22px; border-radius: 999px;
+    font-size: .9rem; font-weight: 600; letter-spacing: .2px;
+    box-shadow: 0 12px 40px rgba(88,166,255,.35), 0 0 0 1px rgba(255,255,255,.15) inset;
+    z-index: 10000; opacity: 0;
+    transition: transform .35s cubic-bezier(.2,.9,.3,1.2), opacity .35s ease;
+    max-width: calc(100vw - 32px); text-align: center;
+    pointer-events: none;
+  }
+  .summon-toast.show { transform: translate(-50%, 0); opacity: 1; }
+  .summon-toast b { font-weight: 800; }
+
+  @media (max-width: 768px) {
+    header { padding: 10px 16px; padding-top: calc(10px + env(safe-area-inset-top)); }
+    #chat { padding: 16px 12px; }
+    .bubble, .chat-bubble { max-width: 100%; }
+    #agents-panel, #agentDropdownPanel { width: min(320px, calc(100vw - 32px)); }
+    footer { padding: 12px 14px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+  }
+
+  /* ── Light Mode Overrides ── */
+  body.light-mode {
+    background: #ffffff;
+    color: #24292e;
+  }
+  body.light-mode header {
+    background: #f6f8fa;
+    border-bottom-color: #d0d7de;
+  }
+  body.light-mode header h1, body.light-mode .msg.assistant .bubble strong, body.light-mode .chat-bubble strong {
+    color: #24292e;
+  }
+  body.light-mode .icon-btn, body.light-mode .gh-pill, body.light-mode header .controls, body.light-mode #vmStatus, body.light-mode .avatar, body.light-mode .chat-avatar {
+    color: #57606a;
+    border-color: #d0d7de;
+  }
+  body.light-mode .avatar, body.light-mode .chat-avatar {
+    background: #eaeef2;
+  }
+  body.light-mode .icon-btn:hover, body.light-mode .gh-pill:hover {
+    border-color: #0969da;
+    color: #0969da;
+  }
+  body.light-mode .msg.system .bubble h2 { color: #24292e; }
+  body.light-mode .msg.system .bubble strong { color: #24292e; }
+  body.light-mode .msg.assistant .bubble, body.light-mode .chat-msg.assistant .chat-bubble {
+    background: #f6f8fa;
+    border-color: #d0d7de;
+    color: #24292e;
+  }
+  body.light-mode .bubble h1, body.light-mode .bubble h2, body.light-mode .bubble h3 {
+    color: #24292e;
+  }
+  body.light-mode .bubble code, body.light-mode .chat-bubble code {
+    background: rgba(175, 184, 193, 0.2);
+  }
+  body.light-mode .bubble pre, body.light-mode .chat-bubble pre {
+    background: #f6f8fa; border: 1px solid #d0d7de;
+  }
+  body.light-mode .bubble th, body.light-mode .bubble td,
+  body.light-mode .chat-bubble th, body.light-mode .chat-bubble td { border-color: #d0d7de; }
+  body.light-mode .bubble th, body.light-mode .chat-bubble th { background: #eaeef2; color: #24292e; }
+  body.light-mode .bubble tr:nth-child(even), body.light-mode .chat-bubble tr:nth-child(even) { background: #eef1f4; }
+  body.light-mode .msg.assistant .avatar, body.light-mode .chat-msg.assistant .chat-avatar {
+    background: #f6f8fa; border-color: #d0d7de; color: #0969da;
+  }
+  body.light-mode .chat-activity-pill { background: #f6f8fa; border-color: #d0d7de; color: #57606a; }
+  body.light-mode .vb-ao-box { background: #f6f8fa !important; border-color: #d0d7de !important; color: #24292e !important; }
+  body.light-mode footer { background: #f6f8fa; border-top-color: #d0d7de; }
+  body.light-mode #input, body.light-mode #chatInput {
+    background: #ffffff; border-color: #d0d7de; color: #24292e;
+  }
+  body.light-mode #input::placeholder, body.light-mode #chatInput::placeholder { color: #57606a; }
+  body.light-mode .starter-btn {
+    background: #ffffff; border: 1px solid #d0d7de; color: #57606a;
+  }
+  body.light-mode .starter-btn:hover {
+    background: rgba(9, 105, 218, 0.08); color: #0969da; border-color: #0969da;
+  }
+  body.light-mode #chat-watermark { color: #57606a; }
+  body.light-mode #chat-watermark svg { fill: #57606a; }
+  body.light-mode #agents-panel, body.light-mode #agentDropdownPanel {
+    background: #ffffff; border-color: #d0d7de; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  body.light-mode #agents-panel h3 { color: #24292e; }
+  body.light-mode .agent-dropdown-item { border-color: #d0d7de; }
+  body.light-mode .agent-dropdown-item:hover { background: #f6f8fa; }
+  body.light-mode .agent-dropdown-item-name { color: #24292e; }
+  body.light-mode .agent-dropdown-item-desc { color: #57606a; }
+  body.light-mode .agent-dropdown-search { background: #ffffff; color: #24292e; border-color: #d0d7de; }
+  body.light-mode .agent-dropdown-search:focus { border-color: #0969da; }
+  body.light-mode .agent-dl-btn { background: #f6f8fa; color: #57606a; border-color: #d0d7de; }
+  body.light-mode .agent-dl-btn:hover { border-color: #0969da; color: #0969da; }
+  body.light-mode #model-select, body.light-mode #modelSelect, body.light-mode .model-select {
+    background: #ffffff; color: #24292e; border-color: #d0d7de;
+  }
+  body.light-mode #modelSelect option, body.light-mode .model-select option { background: #ffffff; color: #24292e; }
+  body.light-mode #modelSelect:hover, body.light-mode .model-select:hover { border-color: #0969da; }
+  body.light-mode #chatModelLabel, body.light-mode #vmStatus { color: #57606a; }
+  body.light-mode .login-card { background: #f6f8fa; border-color: #d0d7de; }
+  body.light-mode .login-card p { color: #57606a; }
+  body.light-mode #login-overlay { background: rgba(255, 255, 255, 0.95); }
+  body.light-mode .login-skip { color: #57606a; }
+  body.light-mode .login-skip:hover { color: #24292e; }
+  body.light-mode .toolbar-link { color: #57606a; }
+  body.light-mode .toolbar-link:hover { color: #24292e; }
+  body.light-mode #agents-panel {
+    background: #ffffff; border-color: #d0d7de; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  body.light-mode #agents-panel h3 { color: #24292e; }
+  body.light-mode .agent-list li { border-color: #d0d7de; }
+  body.light-mode .agent-list li:hover { background: #f6f8fa; }
+  body.light-mode .agent-list .agent-title { color: #24292e; }
+  body.light-mode .agent-list .agent-file { color: #57606a; }
+  body.light-mode .agent-list .export-btn {
+    background: #f6f8fa; color: #24292e; border-color: #d0d7de;
+  }
+  body.light-mode .agent-list .export-btn:hover { border-color: #0969da; color: #0969da; }
+  body.light-mode .agent-list .del-btn:hover { border-color: #cf222e; }
+  body.light-mode #voice-panel {
+    background: #ffffff; border-color: #d0d7de; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  body.light-mode #voice-panel select, body.light-mode #voice-panel input {
+    background: #ffffff; border-color: #d0d7de; color: #24292e;
+  }
+  body.light-mode #voice-panel h3 { color: #24292e; }
+  body.light-mode #voice-panel .panel-btn {
+    background: #f6f8fa; color: #24292e; border-color: #d0d7de;
+  }
+  body.light-mode #voice-panel .panel-btn:hover { border-color: #0969da; color: #0969da; }
+  body.light-mode #voice-panel .panel-btn.primary { background: #1f883d; border-color: #1f883d; color: #fff; }
+  body.light-mode #voice-panel .panel-btn.primary:hover { background: #1a7f37; }
+  body.light-mode #secrets-panel {
+    background: #ffffff; border-color: #d0d7de; box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  body.light-mode #secrets-panel h3 { color: #24292e; }
+  body.light-mode #secrets-panel input { background: #ffffff; border-color: #d0d7de; color: #24292e; }
+  body.light-mode #secrets-panel .panel-btn { background: #f6f8fa; color: #24292e; border-color: #d0d7de; }
+  body.light-mode #secrets-panel .panel-btn:hover { border-color: #0969da; color: #0969da; }
+  body.light-mode #secrets-panel .panel-btn.primary { background: #1f883d; border-color: #1f883d; color: #fff; }
+  body.light-mode #secrets-panel .panel-btn.primary:hover { background: #1a7f37; }
+  body.light-mode .secrets-list li { border-color: #d0d7de; }
+  body.light-mode .secrets-list .sk-key { color: #24292e; }
+  body.light-mode .secrets-list .sk-del { background: #f6f8fa; border-color: #d0d7de; }
 </style>
 </head>
 <body>
 
-<!-- Header -->
-<div class="bs-header">
-  <div class="bs-logo">
-    <div class="bs-logo-mark">RB</div>
-    <span>RAPP Brainstem</span>
+<div id="dropOverlay" class="chat-drop-overlay">
+  <div class="drop-icon">&#128230;</div>
+  <div class="drop-text">Drop a .py agent — or a shared agent link — to install</div>
+  <div class="drop-hint">A dropped link carries the agent inside it (private, nothing fetched). Parsed, enabled, ready instantly.</div>
+</div>
+
+<div id="login-overlay" style="display:none">
+  <div class="login-card">
+    <a href="#" onclick="dismissLogin(); return false;" style="position:absolute;top:12px;right:16px;color:#8b949e;font-size:18px;text-decoration:none;line-height:1" title="Dismiss">&times;</a>
+    <div class="login-icon">
+      <span class="icon icon-xl"><svg viewBox="0 0 512 512" fill="#fff"><path d="M184 0c-30.9 0-56.5 22.7-61.1 52.3C54.5 67 0 130 0 206.8c0 41.6 17.4 79.2 45.3 105.9-2 9.2-3.3 18.8-3.3 28.7 0 55.3 35.8 102.2 85.5 119C142.2 493 172.6 512 208 512h16c35.3 0 64-28.7 64-64V86c0-8.8-7.2-16-16-16h-16c-8.8 0-16 7.2-16 16v16c0 8.8-7.2 16-16 16s-16-7.2-16-16V64c0-35.3-28.7-64-64-64h40zm144 0c30.9 0 56.5 22.7 61.1 52.3C457.5 67 512 130 512 206.8c0 41.6-17.4 79.2-45.3 105.9 2 9.2 3.3 18.8 3.3 28.7 0 55.3-35.8 102.2-85.5 119C369.8 493 339.4 512 304 512h-16c-35.3 0-64-28.7-64-64V86c0-8.8 7.2-16 16-16h16c8.8 0 16 7.2 16 16v16c0 8.8 7.2 16 16 16s16-7.2 16-16V64c0-35.3 28.7-64 64-64h-40z"/></svg></span>
+    </div>
+    <h2>RAPP Brainstem</h2>
+
+    <!-- step 1: kick off the GitHub device-code flow -->
+    <div id="login-step1">
+      <p>Sign in with your GitHub account to chat through GitHub Copilot (full model catalog incl. Claude Opus 4.7). You can also skip and run Python agents in your browser without signing in.</p>
+      <button class="login-btn" id="loginStartBtn" onclick="startLogin()">Sign in with GitHub</button>
+      <button class="login-skip" onclick="dismissLogin()">Skip &mdash; explore without signing in</button>
+    </div>
+
+    <!-- step 2: show the user_code + verification link, poll for authorization -->
+    <div id="login-step2" style="display:none">
+      <p>Enter this code on GitHub to authorize this device:</p>
+      <div id="login-user-code"
+        style="font-family:'SF Mono',monospace;font-size:30px;font-weight:700;letter-spacing:4px;color:#e6edf3;background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:14px 18px;margin:4px 0 14px;user-select:all">----&ndash;----</div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px">
+        <button class="icon-btn" onclick="copyUserCode()" title="Copy code">
+          <span class="icon"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"/><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"/></svg></span>
+          Copy code
+        </button>
+        <a class="login-btn" id="login-open-link" href="https://github.com/login/device" target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;text-decoration:none;padding:6px 14px;font-size:13px">Open GitHub &rarr;</a>
+      </div>
+      <p id="login-poll-status" style="margin-bottom:0;color:#8b949e;font-size:13px">Waiting for authorization&hellip;</p>
+      <button class="login-skip" id="login-retry-btn" style="display:none" onclick="startLogin()">Retry</button>
+    </div>
+
+    <!-- step 3: success -->
+    <div id="login-step3" style="display:none">
+      <div style="font-size:48px;line-height:1;margin-bottom:12px;color:#3fb950">&#10003;</div>
+      <p id="login-success-msg" style="margin-bottom:0">Signed in! Loading models&hellip;</p>
+    </div>
   </div>
-  <div id="vmStatus" class="bs-status idle"><div class="bs-status-dot"></div><span>Idle</span></div>
-  <div class="bs-header-right">
-    <div class="gh-pill" id="ghPill" onclick="handleGHAuth()">
+</div>
+
+<header>
+  <div class="logo">
+    <span class="icon"><svg viewBox="0 0 512 512" fill="#fff"><path d="M184 0c-30.9 0-56.5 22.7-61.1 52.3C54.5 67 0 130 0 206.8c0 41.6 17.4 79.2 45.3 105.9-2 9.2-3.3 18.8-3.3 28.7 0 55.3 35.8 102.2 85.5 119C142.2 493 172.6 512 208 512h16c35.3 0 64-28.7 64-64V86c0-8.8-7.2-16-16-16h-16c-8.8 0-16 7.2-16 16v16c0 8.8-7.2 16-16 16s-16-7.2-16-16V64c0-35.3-28.7-64-64-64h40zm144 0c30.9 0 56.5 22.7 61.1 52.3C457.5 67 512 130 512 206.8c0 41.6-17.4 79.2-45.3 105.9 2 9.2 3.3 18.8 3.3 28.7 0 55.3-35.8 102.2-85.5 119C369.8 493 339.4 512 304 512h-16c-35.3 0-64-28.7-64-64V86c0-8.8 7.2-16 16-16h16c8.8 0 16 7.2 16 16v16c0 8.8 7.2 16 16 16s16-7.2 16-16V64c0-35.3 28.7-64 64-64h-40z"/></svg></span>
+  </div>
+  <h1>RAPP Brainstem <span id="version-tag" style="font-size:11px;font-weight:400;color:#8b949e;vertical-align:middle">virtual</span></h1>
+  <div class="controls">
+    <div id="vmStatus" class="bs-status idle"><div class="bs-status-dot"></div><span>Idle</span></div>
+    <select id="modelSelect" class="model-select" onchange="selectModel(this.value)" style="display:none"></select>
+
+    <div class="gh-pill" id="ghPill" onclick="handleGHAuth()" title="Sign in / out of GitHub">
       <div class="gh-dot off" id="ghDot"></div>
       <span id="ghLabel">Sign in</span>
     </div>
-    <a href="index.html" class="bs-btn">Back to RAPP</a>
-  </div>
-</div>
 
-<!-- Chat Mode (default) -->
-<div id="chatMode" class="chat-wrap"
+    <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg></span>
+    </button>
+
+    <button class="icon-btn" id="term-btn" onclick="toggleTerminal()" title="Terminal — Python REPL + shell over the WASM filesystem">
+      <span class="icon" style="font:700 12px 'SF Mono',monospace">&gt;_</span>
+    </button>
+
+    <div class="secrets-wrapper">
+      <button class="icon-btn" id="secrets-btn" onclick="toggleSecretsPanel(event)" title="Secrets vault — encrypted API keys & env (local-first)">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10h-8.35A5.99 5.99 0 007 6c-3.31 0-6 2.69-6 6s2.69 6 6 6a5.99 5.99 0 005.65-4H13l2 2 2-2 2 2 3-3.03L21 10zM7 15c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/></svg></span>
+      </button>
+      <div id="secrets-panel">
+        <h3>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10h-8.35A5.99 5.99 0 007 6c-3.31 0-6 2.69-6 6s2.69 6 6 6a5.99 5.99 0 005.65-4H13l2 2 2-2 2 2 3-3.03L21 10zM7 15c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/></svg></span>
+          Secrets vault (encrypted, local-first)
+        </h3>
+        <div class="secrets-state" id="secrets-state">Locked &middot; enter a passphrase to unlock or create the vault.</div>
+        <label for="secrets-pass">Passphrase</label>
+        <div class="panel-row" style="margin-top:0">
+          <input type="password" id="secrets-pass" placeholder="vault passphrase…" autocomplete="off" spellcheck="false" onkeydown="if(event.key==='Enter')doUnlockVault()">
+          <button class="panel-btn primary" onclick="doUnlockVault()">Unlock / Set</button>
+        </div>
+        <label style="margin-top:14px">Add secret</label>
+        <div class="panel-row" style="margin-top:0">
+          <input type="text" id="secret-key" placeholder="KEY (e.g. OPENAI_API_KEY)" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="panel-row" style="margin-top:6px">
+          <input type="password" id="secret-val" placeholder="value" autocomplete="off" spellcheck="false" onkeydown="if(event.key==='Enter')doAddSecret()">
+          <button class="panel-btn" onclick="doAddSecret()">Add</button>
+        </div>
+        <ul class="secrets-list" id="secrets-list"><!-- Populated by JS --></ul>
+        <div class="panel-row" style="margin-top:12px">
+          <button class="panel-btn" onclick="document.getElementById('holocard-import').click()" title="Import a .rappid holocard">Import holocard…</button>
+          <input type="file" id="holocard-import" accept=".json,.rappid.json" style="display:none" onchange="handleHolocardImport(event)">
+        </div>
+        <div class="secrets-note">Secrets are AES-256-GCM encrypted with your passphrase and never leave your browser.</div>
+      </div>
+    </div>
+
+    <div class="registry-wrapper">
+      <button class="icon-btn" id="registry-btn" onclick="toggleAgentDropdown(event)" title="Browse the RAR agent registry">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg></span>
+      </button>
+      <div id="agentDropdownPanel">
+        <h3>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg></span>
+          RAR Agent Registry
+        </h3>
+        <input class="agent-dropdown-search" type="text" placeholder="Search the RAR agent registry…" oninput="filterAgentDropdown(this.value)" autocomplete="off" spellcheck="false">
+        <div class="agent-dropdown-list" id="agentDropdownList"></div>
+        <div style="font-size:10px; color:#8b949e; margin-top:12px; text-align:center;">
+          Add an agent here, then manage it from the Agents panel.
+        </div>
+      </div>
+    </div>
+
+    <div class="agents-wrapper">
+      <button class="icon-btn" id="agents-btn" onclick="toggleAgentsPanel(event)" title="Manage enabled agents">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v4h4v2h-4v4h-2v-4H7v-2h4z"/></svg></span>
+        <span class="agent-count" id="agentCount">3</span>
+      </button>
+      <div id="agents-panel">
+        <h3>
+          <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v4h4v2h-4v4h-2v-4H7v-2h4z"/></svg></span>
+          Enabled Agents
+        </h3>
+        <ul class="agent-list" id="agent-list-ul"><!-- Populated by JS --></ul>
+        <div style="font-size:10px; color:#8b949e; margin-top:12px; text-align:center;">
+          Drag &amp; drop .py files anywhere, or add from the registry.
+        </div>
+      </div>
+    </div>
+
+    <div class="voice-wrapper">
+      <button class="icon-btn" id="voice-btn" onclick="toggleVoice()" title="Voice mode off">
+        <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg></span>
+      </button>
+      <button class="icon-btn" id="voice-settings-btn" onclick="toggleVoicePanel()" title="Voice settings">
+        <span class="icon"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.429 1.525a6.593 6.593 0 011.142 0c.036.003.108.036.137.146l.289 1.105c.147.56.55.967.997 1.189.174.086.341.183.501.29.417.278.97.423 1.53.27l1.102-.303c.11-.03.175.016.195.046.219.31.41.641.573.989.014.031.022.11-.059.19l-.815.806c-.411.406-.562.957-.53 1.456a4.588 4.588 0 010 .582c-.032.499.119 1.05.53 1.456l.815.806c.08.08.073.159.059.19a6.494 6.494 0 01-.573.99c-.02.029-.086.074-.195.045l-1.103-.303c-.559-.153-1.112-.008-1.529.27-.16.107-.327.204-.5.29-.449.222-.851.628-.998 1.189l-.289 1.105c-.029.11-.1.143-.137.146a6.613 6.613 0 01-1.142 0c-.036-.003-.108-.037-.137-.146l-.289-1.105c-.147-.56-.55-.967-.997-1.189a4.502 4.502 0 01-.501-.29c-.417-.278-.97-.423-1.53-.27l-1.102.303c-.11.03-.175-.016-.195-.046a6.492 6.492 0 01-.573-.989c-.014-.031-.022-.11.059-.19l.815-.806c.411-.406.562-.957.53-1.456a4.587 4.587 0 010-.582c.032-.499-.119-1.05-.53-1.456l-.815-.806c-.08-.08-.073-.159-.059-.19a6.44 6.44 0 01.573-.99c.02-.029.086-.074.195-.045l1.103.303c.559.153 1.112.008 1.529-.27.16-.107.327-.204.5-.29.449-.222.851-.628.998-1.189l.289-1.105c.029-.11.1-.143.137-.146zM8 0c-.236 0-.47.01-.701.03-.743.065-1.29.615-1.458 1.261l-.29 1.106c-.017.066-.078.158-.211.224a5.994 5.994 0 00-.668.386c-.123.082-.233.117-.3.117h-.013l-1.104-.304c-.646-.178-1.314.023-1.71.64a7.994 7.994 0 00-.573.989c-.358.658-.217 1.381.164 1.758l.816.806c.046.046.106.144.098.284a6.095 6.095 0 000 .772c.008.14-.052.238-.098.284l-.816.806c-.38.377-.522 1.1-.164 1.758.145.267.306.524.573.99.396.616 1.064.817 1.71.639l1.104-.304c.068-.019.146-.003.3.117.195.13.4.25.668.387.133.066.194.158.212.224l.289 1.106c.169.646.715 1.196 1.458 1.26a8.094 8.094 0 001.402 0c.743-.064 1.29-.614 1.458-1.26l.29-1.106c.017-.066.078-.158.211-.224a5.98 5.98 0 00.668-.386c.123-.082.233-.117.3-.117h.013l1.104.304c.646.178 1.314-.023 1.71-.64.267-.465.428-.722.573-.989.358-.658.217-1.381-.164-1.758l-.816-.806c-.046-.046-.106-.144-.098-.284a6.095 6.095 0 000-.772c-.008-.14.052-.238.098-.284l.816-.806c.38-.377.522-1.1.164-1.758a7.994 7.994 0 00-.573-.99c-.396-.616-1.064-.817-1.71-.639l-1.104.304c-.068.019-.146.003-.3-.117a5.994 5.994 0 00-.668-.387c-.133-.066-.194-.158-.212-.224L10.16 1.29C9.99.645 9.444.095 8.701.031A8.094 8.094 0 008 0zm0 11a3 3 0 100-6 3 3 0 000 6z"/></svg></span>
+      </button>
+      <div id="voice-panel">
+        <h3>
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>
+          Voice Settings
+        </h3>
+        <label for="voice-provider">Provider</label>
+        <select id="voice-provider" onchange="switchVoiceProvider()">
+          <option value="browser">Browser (free)</option>
+          <option value="azure">Azure Speech</option>
+          <option value="elevenlabs">ElevenLabs</option>
+        </select>
+        <div id="azure-fields">
+          <label for="az-speech-key">Speech API Key</label>
+          <input type="password" id="az-speech-key" placeholder="paste key from Azure portal..." autocomplete="off">
+          <label for="az-speech-region">Region</label>
+          <select id="az-speech-region" onchange="loadAzureVoices()">
+            <option value="eastus">East US</option>
+            <option value="eastus2">East US 2</option>
+            <option value="westus">West US</option>
+            <option value="westus2">West US 2</option>
+            <option value="centralus">Central US</option>
+            <option value="northeurope">North Europe</option>
+            <option value="westeurope">West Europe</option>
+            <option value="swedencentral">Sweden Central</option>
+            <option value="southeastasia">Southeast Asia</option>
+            <option value="australiaeast">Australia East</option>
+            <option value="japaneast">Japan East</option>
+          </select>
+          <label for="az-voice-select">Voice</label>
+          <select id="az-voice-select">
+            <option value="">Enter key &amp; save to load voices</option>
+          </select>
+        </div>
+        <div id="elevenlabs-fields" style="display:none">
+          <label for="el-api-key">ElevenLabs API Key</label>
+          <input type="password" id="el-api-key" placeholder="sk_..." autocomplete="off">
+          <label for="el-voice-select">Voice</label>
+          <select id="el-voice-select">
+            <option value="">Enter API key first</option>
+          </select>
+          <label for="el-model-select">Model</label>
+          <select id="el-model-select">
+            <option value="eleven_multilingual_v2">Multilingual v2</option>
+            <option value="eleven_turbo_v2_5">Turbo v2.5 (low latency)</option>
+            <option value="eleven_monolingual_v1">English v1</option>
+          </select>
+        </div>
+        <div class="panel-row">
+          <button class="panel-btn primary" onclick="saveVoiceSettings()">Save</button>
+          <button class="panel-btn" onclick="testVoice()">Test</button>
+          <button class="panel-btn" onclick="clearVoiceSettings()">Clear Key</button>
+        </div>
+        <div class="panel-row" style="margin-top:6px">
+          <button class="panel-btn" onclick="exportVoiceConfig()">Export</button>
+          <button class="panel-btn" onclick="document.getElementById('voice-import').click()">Import</button>
+          <input type="file" id="voice-import" accept=".json" style="display:none" onchange="importVoiceConfig(event)">
+        </div>
+        <div class="panel-status" id="voice-panel-status"></div>
+      </div>
+    </div>
+
+    <a class="icon-btn" href="https://kody-w.github.io/RAR/" title="Back to RAPP">
+      <span class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg></span>
+    </a>
+  </div>
+</header>
+
+<div id="chat"
   ondragover="event.preventDefault();document.getElementById('dropOverlay').classList.add('active')"
   ondragleave="if(!event.relatedTarget||!this.contains(event.relatedTarget))document.getElementById('dropOverlay').classList.remove('active')"
   ondrop="handleAgentDrop(event)">
-  <div class="chat-drop-overlay" id="dropOverlay">
-    <div class="drop-icon">&#128230;</div>
-    <div class="drop-text">Drop agent.py to hot-load</div>
-    <div class="drop-hint">The agent will be parsed, enabled, and ready to use instantly</div>
+
+  <!-- Subtle Drop Watermark -->
+  <div id="chat-watermark">
+    Drag & Drop .py Agents Here
+    <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
   </div>
+
   <div class="chat-messages" id="chatMessages">
-    <div class="chat-welcome-box" id="chatWelcome">
-      <h2>RAPP Brainstem</h2>
-      <p>A brainstem running in your browser. Chat naturally -- I'll route to the right agent automatically.</p>
-      <div class="chat-agent-pills" id="welcomeAgentPills">
-        <span class="chat-agent-pill">ManageMemory</span>
-        <span class="chat-agent-pill">ContextMemory</span>
-        <span class="chat-agent-pill">HackerNews</span>
-      </div>
-      <div class="chat-suggestions">
-        <div class="chat-suggestion" onclick="useSuggestion(this)">What's trending on Hacker News?</div>
-        <div class="chat-suggestion" onclick="useSuggestion(this)">Remember that I prefer dark mode</div>
-        <div class="chat-suggestion" onclick="useSuggestion(this)">What do you know about me?</div>
-      </div>
-    </div>
-  </div>
-  <div class="chat-model-bar" id="chatModelBar">
-    <div class="agent-enabled-pills" id="enabledAgentPills"></div>
-    <div class="agent-dropdown-wrap">
-      <button class="agent-dropdown-btn" onclick="toggleAgentDropdown(event)">
-        Agents <span class="agent-count" id="agentCount">3</span>
-      </button>
-      <div class="agent-dropdown-panel" id="agentDropdownPanel">
-        <input class="agent-dropdown-search" type="text" placeholder="Search agents..." oninput="filterAgentDropdown(this.value)">
-        <div class="agent-dropdown-list" id="agentDropdownList"></div>
+    <div class="msg system" id="chatWelcome">
+      <div class="bubble">
+        <h2>Welcome to the RAPP Brainstem!</h2>
+        <p>I am running right in your browser via Pyodide &mdash; real CPython, no server, no install. Here is a quick tour:</p>
+        <ul>
+          <li><strong>Chat</strong>: Just ask me questions below to start building and researching!</li>
+          <li><strong>Agents Panel</strong>: Click the <svg style="vertical-align: middle; width: 1.25em; height: 1.25em;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v4h4v2h-4v4h-2v-4H7v-2h4z"/></svg> Agents button (top right) to browse the registry and enable tools.</li>
+          <li><strong>Add Skills</strong>: Drag and drop any <code>.py</code> agent file directly onto this window to instantly teach me new things.</li>
+        </ul>
+        <div class="chat-agent-pills" id="welcomeAgentPills" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0 4px;">
+          <span class="agent-enabled-pill" style="cursor:default">ManageMemory</span>
+          <span class="agent-enabled-pill" style="cursor:default">ContextMemory</span>
+          <span class="agent-enabled-pill" style="cursor:default">HackerNews</span>
+        </div>
+        <p><em>Click one of the prompts below to get started!</em></p>
       </div>
     </div>
-    <span style="color:var(--border)">|</span>
-    <span id="chatModelLabel">GitHub Models -- sign in to start chatting</span>
-    <select id="modelSelect" class="model-select" onchange="selectModel(this.value)" style="display:none"></select>
-    <div class="chat-toolbar">
-      <button class="chat-toolbar-btn" onclick="exportChat()" title="Export chat transcript">Export</button>
-      <button class="chat-toolbar-btn" onclick="importChat()" title="Import chat transcript">Import</button>
-      <input type="file" id="importChatFile" accept=".json" style="display:none" onchange="handleChatImport(event)">
-    </div>
-  </div>
-  <div class="chat-input-bar">
-    <input class="chat-input" id="chatInput" type="text" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}" disabled>
-    <button class="chat-send" id="chatSend" onclick="sendChat()" disabled>Send</button>
   </div>
 </div>
 
+<footer>
+  <div id="starter-prompts">
+    <button class="starter-btn" onclick="useStarter('What exactly can you do?')">What can you do?</button>
+    <button class="starter-btn" onclick="useStarter(&quot;What's trending on Hacker News?&quot;)">What's trending on Hacker News?</button>
+    <button class="starter-btn" onclick="useStarter('What do you know about me?')">What do you know about me?</button>
+  </div>
+  <div class="toolbar-row">
+    <div class="left"></div>
+    <div class="right">
+      <button class="toolbar-link" onclick="exportChat()" title="Export transcript">
+        <span class="icon"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.47 10.78a.75.75 0 001.06 0l3.75-3.75a.75.75 0 00-1.06-1.06L8.75 8.44V1.75a.75.75 0 00-1.5 0v6.69L4.78 5.97a.75.75 0 00-1.06 1.06l3.75 3.75zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"/></svg></span>
+        Export
+      </button>
+      <button class="toolbar-link" onclick="importChat()" title="Import transcript">Import</button>
+      <input type="file" id="importChatFile" accept=".json" style="display:none" onchange="handleChatImport(event)">
+      <button class="toolbar-link" onclick="clearChat()">Clear</button>
+      <a class="toolbar-link" href="https://kody-w.github.io/RAR/" target="_blank" title="Learn more about RAPP">&#128218; Tutorial</a>
+    </div>
+  </div>
+  <div class="input-row">
+    <textarea id="chatInput" rows="1" placeholder="Message brainstem..." autocomplete="off"
+      onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}" disabled></textarea>
+    <button id="chatSend" onclick="sendChat()" disabled>Send</button>
+  </div>
+</footer>
 
 <script>
+// ── Theme (light/dark) — defaults to light, persisted in localStorage('vb_theme') ──
+// Applied synchronously before first paint so there is no flash of the wrong theme.
+(function () {
+  try {
+    if (localStorage.getItem('vb_theme') !== 'dark') document.body.classList.add('light-mode');
+  } catch (_) { document.body.classList.add('light-mode'); }
+})();
+function toggleTheme() {
+  document.body.classList.toggle('light-mode');
+  const isLight = document.body.classList.contains('light-mode');
+  try { localStorage.setItem('vb_theme', isLight ? 'light' : 'dark'); } catch (_) {}
+}
+
+// ── UI glue: thin wrappers binding the local-brainstem markup to the engine ──
+// Fill the input from a starter-prompt and send (engine: useSuggestion → sendChat).
+function useStarter(text) {
+  const inp = document.getElementById('chatInput');
+  if (!inp) return;
+  if (inp.disabled) { handleGHAuth(); return; } // not signed in → prompt sign-in
+  inp.value = text;
+  sendChat();
+}
+// Dismissible, non-blocking login prompt (GitHub device-code flow).
+function dismissLogin() {
+  const o = document.getElementById('login-overlay');
+  if (o) o.style.display = 'none';
+  if (typeof _stopLoginPoll === 'function') _stopLoginPoll();
+  try { localStorage.setItem('vb_login_dismissed', '1'); } catch (_) {}
+}
+// Show which of the 3 login steps is visible (1=start, 2=code, 3=success).
+function setLoginStep(n) {
+  for (const i of [1, 2, 3]) {
+    const el = document.getElementById('login-step' + i);
+    if (el) el.style.display = (i === n) ? '' : 'none';
+  }
+}
+// Open the login card on step 1 (used by the header pill when signed out).
+function showLogin() {
+  const o = document.getElementById('login-overlay');
+  if (!o) return;
+  setLoginStep(1);
+  const btn = document.getElementById('loginStartBtn');
+  if (btn) { btn.disabled = false; btn.textContent = 'Sign in with GitHub'; }
+  o.style.display = 'flex';
+}
+function showLoginIfNeeded() {
+  // Show the (dismissible) sign-in card once, only when not signed in.
+  let dismissed = false;
+  try { dismissed = localStorage.getItem('vb_login_dismissed') === '1'; } catch (_) {}
+  const o = document.getElementById('login-overlay');
+  if (!o) return;
+  if ((typeof chatToken !== 'undefined' && chatToken) || dismissed) { o.style.display = 'none'; return; }
+  setLoginStep(1);
+  o.style.display = 'flex';
+}
+// Clear the current chat (transcript + rendered messages), restore the welcome tour.
+function clearChat() {
+  const container = document.getElementById('chatMessages');
+  if (container) {
+    container.querySelectorAll('.chat-msg, .chat-activity').forEach(el => el.remove());
+  }
+  const welcome = document.getElementById('chatWelcome');
+  if (welcome) welcome.style.display = '';
+  if (typeof chatHistory !== 'undefined') chatHistory = [];
+  const chatEl = document.getElementById('chat');
+  if (chatEl) chatEl.classList.remove('has-messages');
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Voice mode (UI-only) — Azure Speech + ElevenLabs + browser TTS, plus
+// webkitSpeechRecognition dictation. Ported from the local brainstem, adapted
+// to be 100% client-side (no server endpoints). Settings persist in localStorage.
+// This block touches NO auth/engine state — it only reads #chatInput and speaks replies.
+// ═══════════════════════════════════════════════════════════════════════
+let voiceMode = false;
+let voiceProvider = localStorage.getItem('voice_provider') || 'browser';
+
+// Azure Speech state
+let azSpeechKey = localStorage.getItem('az_speech_key') || '';
+let azSpeechRegion = localStorage.getItem('az_speech_region') || 'eastus';
+let azVoiceName = localStorage.getItem('az_voice_name') || 'en-US-JennyNeural';
+
+// ElevenLabs state
+let elApiKey = localStorage.getItem('el_api_key') || '';
+let elVoiceId = localStorage.getItem('el_voice_id') || '';
+let elModel = localStorage.getItem('el_model') || 'eleven_multilingual_v2';
+
+let currentAudio = null;
+let _sttRecognition = null;   // webkitSpeechRecognition instance (dictation)
+let _sttActive = false;
+
+// Seed the panel inputs from saved settings once the DOM is parsed.
+function _voiceInitPanel() {
+  const p = document.getElementById('voice-provider'); if (!p) return;
+  p.value = voiceProvider;
+  document.getElementById('az-speech-key').value = azSpeechKey;
+  document.getElementById('az-speech-region').value = azSpeechRegion;
+  document.getElementById('el-api-key').value = elApiKey;
+  document.getElementById('el-model-select').value = elModel;
+  switchVoiceProvider();
+
+  document.getElementById('az-speech-key').addEventListener('change', () => {
+    const key = document.getElementById('az-speech-key').value.trim();
+    if (key) { azSpeechKey = key; loadAzureVoices(); }
+  });
+  document.getElementById('el-api-key').addEventListener('change', () => {
+    const key = document.getElementById('el-api-key').value.trim();
+    if (key) { elApiKey = key; loadElevenLabsVoices(); }
+  });
+}
+
+function switchVoiceProvider() {
+  const p = document.getElementById('voice-provider').value;
+  document.getElementById('azure-fields').style.display = p === 'azure' ? 'block' : 'none';
+  document.getElementById('elevenlabs-fields').style.display = p === 'elevenlabs' ? 'block' : 'none';
+  // Only fetch a provider's voice list when it's actually selected.
+  if (p === 'azure' && azSpeechKey) loadAzureVoices();
+  else if (p === 'elevenlabs' && elApiKey) loadElevenLabsVoices();
+}
+
+function toggleVoicePanel() {
+  document.getElementById('voice-panel').classList.toggle('open');
+}
+
+document.addEventListener('click', (e) => {
+  const panel = document.getElementById('voice-panel');
+  if (panel && !e.target.closest('.voice-wrapper') && panel.classList.contains('open')) {
+    panel.classList.remove('open');
+  }
+});
+
+// ── Azure Speech TTS ──
+async function loadAzureVoices() {
+  const key = document.getElementById('az-speech-key').value.trim() || azSpeechKey;
+  const region = document.getElementById('az-speech-region').value || azSpeechRegion;
+  const sel = document.getElementById('az-voice-select');
+  const status = document.getElementById('voice-panel-status');
+  if (!key) {
+    sel.innerHTML = '<option value="">Enter API key first</option>';
+    return;
+  }
+  sel.innerHTML = '<option value="">Loading voices...</option>';
+  try {
+    const r = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/voices/list`, {
+      headers: { 'Ocp-Apim-Subscription-Key': key }
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const voices = await r.json();
+    const neural = voices.filter(v => v.VoiceType === 'Neural')
+      .sort((a, b) => a.LocaleName.localeCompare(b.LocaleName) || a.DisplayName.localeCompare(b.DisplayName));
+    sel.innerHTML = '';
+    const enVoices = neural.filter(v => v.Locale.startsWith('en-'));
+    const otherVoices = neural.filter(v => !v.Locale.startsWith('en-'));
+    if (enVoices.length) {
+      const g = document.createElement('optgroup');
+      g.label = 'English';
+      enVoices.forEach(v => {
+        const o = document.createElement('option');
+        o.value = v.ShortName;
+        o.textContent = `${v.DisplayName} (${v.LocaleName}, ${v.Gender})`;
+        if (v.ShortName === azVoiceName) o.selected = true;
+        g.appendChild(o);
+      });
+      sel.appendChild(g);
+    }
+    if (otherVoices.length) {
+      const g = document.createElement('optgroup');
+      g.label = 'Other Languages';
+      otherVoices.forEach(v => {
+        const o = document.createElement('option');
+        o.value = v.ShortName;
+        o.textContent = `${v.DisplayName} (${v.LocaleName}, ${v.Gender})`;
+        if (v.ShortName === azVoiceName) o.selected = true;
+        g.appendChild(o);
+      });
+      sel.appendChild(g);
+    }
+    if (!sel.value && enVoices.length) sel.value = enVoices[0].ShortName;
+    status.textContent = `${neural.length} Azure voices loaded`;
+    status.style.color = '#3fb950';
+  } catch (e) {
+    sel.innerHTML = '<option value="">Failed to load</option>';
+    status.textContent = 'Error: ' + e.message;
+    status.style.color = '#f85149';
+  }
+}
+
+function escapeXml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+}
+
+async function speakWithAzure(text) {
+  const locale = azVoiceName.split('-').slice(0, 2).join('-') || 'en-US';
+  const ssml = `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='${locale}'><voice name='${azVoiceName}'>${escapeXml(text)}</voice></speak>`;
+  const r = await fetch(`https://${azSpeechRegion}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+    method: 'POST',
+    headers: {
+      'Ocp-Apim-Subscription-Key': azSpeechKey,
+      'Content-Type': 'application/ssml+xml',
+      'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3'
+    },
+    body: ssml
+  });
+  if (!r.ok) throw new Error(`Azure Speech ${r.status}`);
+  const blob = await r.blob();
+  const url = URL.createObjectURL(blob);
+  currentAudio = new Audio(url);
+  currentAudio.onended = () => URL.revokeObjectURL(url);
+  currentAudio.play();
+}
+
+// ── ElevenLabs TTS ──
+async function loadElevenLabsVoices() {
+  const sel = document.getElementById('el-voice-select');
+  const status = document.getElementById('voice-panel-status');
+  if (!elApiKey) {
+    sel.innerHTML = '<option value="">Enter API key first</option>';
+    return;
+  }
+  sel.innerHTML = '<option value="">Loading...</option>';
+  try {
+    const r = await fetch('https://api.elevenlabs.io/v1/voices', {
+      headers: { 'xi-api-key': elApiKey }
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const d = await r.json();
+    sel.innerHTML = '';
+    (d.voices || []).forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = v.voice_id;
+      opt.textContent = v.name + (v.labels?.accent ? ` (${v.labels.accent})` : '');
+      if (v.voice_id === elVoiceId) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    if (!elVoiceId && d.voices?.length) elVoiceId = d.voices[0].voice_id;
+    status.textContent = `${d.voices.length} ElevenLabs voices loaded`;
+    status.style.color = '#3fb950';
+  } catch (e) {
+    sel.innerHTML = '<option value="">Failed to load</option>';
+    status.textContent = 'Error: ' + e.message;
+    status.style.color = '#f85149';
+  }
+}
+
+async function speakWithElevenLabs(text) {
+  const r = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${elVoiceId}`, {
+    method: 'POST',
+    headers: {
+      'xi-api-key': elApiKey,
+      'Content-Type': 'application/json',
+      'Accept': 'audio/mpeg'
+    },
+    body: JSON.stringify({
+      text: text.slice(0, 5000),
+      model_id: elModel,
+      voice_settings: { stability: 0.5, similarity_boost: 0.75 }
+    })
+  });
+  if (!r.ok) throw new Error(`ElevenLabs ${r.status}`);
+  const blob = await r.blob();
+  const url = URL.createObjectURL(blob);
+  currentAudio = new Audio(url);
+  currentAudio.onended = () => URL.revokeObjectURL(url);
+  currentAudio.play();
+}
+
+// ── Voice settings persistence (localStorage) ──
+function saveVoiceSettings() {
+  const provider = document.getElementById('voice-provider').value;
+  voiceProvider = provider;
+  localStorage.setItem('voice_provider', provider);
+  const status = document.getElementById('voice-panel-status');
+
+  if (provider === 'azure') {
+    azSpeechKey = document.getElementById('az-speech-key').value.trim();
+    azSpeechRegion = document.getElementById('az-speech-region').value;
+    azVoiceName = document.getElementById('az-voice-select').value;
+    if (azSpeechKey) localStorage.setItem('az_speech_key', azSpeechKey);
+    if (azSpeechRegion) localStorage.setItem('az_speech_region', azSpeechRegion);
+    if (azVoiceName) localStorage.setItem('az_voice_name', azVoiceName);
+    if (azSpeechKey && document.getElementById('az-voice-select').options.length <= 1) loadAzureVoices();
+    status.textContent = azSpeechKey ? 'Saved — Azure Speech active' : 'Saved — enter API key to activate';
+  } else if (provider === 'elevenlabs') {
+    elApiKey = document.getElementById('el-api-key').value.trim();
+    elVoiceId = document.getElementById('el-voice-select').value;
+    elModel = document.getElementById('el-model-select').value;
+    if (elApiKey) localStorage.setItem('el_api_key', elApiKey);
+    if (elVoiceId) localStorage.setItem('el_voice_id', elVoiceId);
+    localStorage.setItem('el_model', elModel);
+    status.textContent = elApiKey ? 'Saved — ElevenLabs active' : 'Saved — enter API key to activate';
+  } else {
+    status.textContent = 'Saved — using browser voice';
+  }
+  status.style.color = '#3fb950';
+  setTimeout(() => { status.textContent = ''; }, 3000);
+}
+
+function clearVoiceSettings() {
+  const provider = document.getElementById('voice-provider').value;
+  const status = document.getElementById('voice-panel-status');
+  if (provider === 'azure') {
+    azSpeechKey = '';
+    document.getElementById('az-speech-key').value = '';
+    document.getElementById('az-voice-select').innerHTML = '<option value="">Enter API key first</option>';
+    localStorage.removeItem('az_speech_key');
+    localStorage.removeItem('az_voice_name');
+  } else if (provider === 'elevenlabs') {
+    elApiKey = '';
+    elVoiceId = '';
+    document.getElementById('el-api-key').value = '';
+    document.getElementById('el-voice-select').innerHTML = '<option value="">Enter API key first</option>';
+    localStorage.removeItem('el_api_key');
+    localStorage.removeItem('el_voice_id');
+  }
+  status.textContent = 'Key cleared';
+  status.style.color = '#8b949e';
+}
+
+async function testVoice() {
+  saveVoiceSettings();
+  const status = document.getElementById('voice-panel-status');
+  status.textContent = 'Playing test...';
+  status.style.color = '#d29922';
+  try {
+    await speakText('Hello, I am your RAPP Brainstem assistant.', true);
+    const names = { azure: 'Azure Speech', elevenlabs: 'ElevenLabs', browser: 'browser voice' };
+    status.textContent = `Playing via ${names[voiceProvider] || 'browser voice'}`;
+    status.style.color = '#3fb950';
+  } catch (e) {
+    status.textContent = 'Error: ' + e.message;
+    status.style.color = '#f85149';
+  }
+}
+
+// ── Speech-to-text dictation (webkitSpeechRecognition) ──
+function _startDictation() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) return false;
+  const input = document.getElementById('chatInput');
+  if (!input) return false;
+  try {
+    _sttRecognition = new SR();
+    _sttRecognition.continuous = true;
+    _sttRecognition.interimResults = true;
+    _sttRecognition.lang = 'en-US';
+    let baseText = input.value ? input.value.trimEnd() + ' ' : '';
+    _sttRecognition.onresult = (ev) => {
+      let finalText = '';
+      let interim = '';
+      for (let i = ev.resultIndex; i < ev.results.length; i++) {
+        const t = ev.results[i][0].transcript;
+        if (ev.results[i].isFinal) finalText += t + ' '; else interim += t;
+      }
+      if (finalText) baseText += finalText;
+      input.value = (baseText + interim).replace(/\s+/g, ' ').trimStart();
+    };
+    _sttRecognition.onend = () => {
+      // Auto-restart while voice mode stays on (continuous dictation).
+      if (_sttActive && voiceMode) { try { _sttRecognition.start(); } catch (_) {} }
+    };
+    _sttRecognition.onerror = () => {};
+    _sttRecognition.start();
+    _sttActive = true;
+    return true;
+  } catch (_) { return false; }
+}
+
+function _stopDictation() {
+  _sttActive = false;
+  if (_sttRecognition) { try { _sttRecognition.stop(); } catch (_) {} _sttRecognition = null; }
+}
+
+// Mic button: toggle voice mode. ON → spoken replies + STT dictation into the input.
+function toggleVoice() {
+  voiceMode = !voiceMode;
+  try { localStorage.setItem('vb_voice_mode', voiceMode ? '1' : '0'); } catch (_) {}
+  updateVoiceBtn();
+  if (voiceMode) {
+    const sttOk = _startDictation();
+    const names = { azure: 'Azure Speech', elevenlabs: 'ElevenLabs', browser: 'browser' };
+    const name = names[voiceProvider] || 'browser';
+    const dictNote = sttOk ? ' Speak — your words appear in the input box.' : ' (Dictation unavailable in this browser.)';
+    if (typeof addChatMsg === 'function') {
+      addChatMsg('system', `<strong>Voice mode enabled</strong> — replies spoken via ${name} TTS.${dictNote} Click the gear to change voice settings.`);
+    }
+    speakText('Voice mode enabled.', true);
+  } else {
+    _stopDictation();
+    stopSpeaking();
+    if (typeof addChatMsg === 'function') addChatMsg('system', 'Voice mode disabled.');
+  }
+}
+
+function updateVoiceBtn() {
+  const btn = document.getElementById('voice-btn');
+  if (!btn) return;
+  btn.className = voiceMode ? 'icon-btn active' : 'icon-btn';
+  btn.title = voiceMode ? 'Voice mode on' : 'Voice mode off';
+}
+
+function stopSpeaking() {
+  try { window.speechSynthesis.cancel(); } catch (_) {}
+  if (currentAudio) { try { currentAudio.pause(); } catch (_) {} currentAudio = null; }
+}
+
+async function speakText(text, force) {
+  if (!text || (!voiceMode && !force)) return;
+  stopSpeaking();
+
+  const clean = text.replace(/[#*`_\[\]()>|]/g, '').trim();
+  if (!clean) return;
+
+  if (voiceProvider === 'azure' && azSpeechKey) {
+    try { await speakWithAzure(clean); return; } catch (e) {
+      console.warn('Azure Speech TTS failed, falling back to browser:', e);
+    }
+  }
+
+  if (voiceProvider === 'elevenlabs' && elApiKey && elVoiceId) {
+    try { await speakWithElevenLabs(clean); return; } catch (e) {
+      console.warn('ElevenLabs TTS failed, falling back to browser:', e);
+    }
+  }
+
+  // Browser fallback
+  const utter = new SpeechSynthesisUtterance(clean.slice(0, 300));
+  utter.rate = 1.05; utter.pitch = 1.0;
+  window.speechSynthesis.speak(utter);
+}
+
+// ── Voice export/import — plain JSON (client-side; no server) ──
+function _gatherVoiceConfig() {
+  return {
+    provider: voiceProvider,
+    azure_speech_key: azSpeechKey,
+    azure_speech_region: azSpeechRegion,
+    azure_voice_name: azVoiceName,
+    api_key: elApiKey,
+    voice_id: elVoiceId,
+    model: elModel
+  };
+}
+
+function _applyVoiceConfig(cfg) {
+  if (cfg.provider) {
+    voiceProvider = cfg.provider;
+    document.getElementById('voice-provider').value = cfg.provider;
+    localStorage.setItem('voice_provider', cfg.provider);
+  }
+  if (cfg.azure_speech_key) {
+    azSpeechKey = cfg.azure_speech_key;
+    document.getElementById('az-speech-key').value = cfg.azure_speech_key;
+    localStorage.setItem('az_speech_key', cfg.azure_speech_key);
+  }
+  if (cfg.azure_speech_region) {
+    azSpeechRegion = cfg.azure_speech_region;
+    document.getElementById('az-speech-region').value = cfg.azure_speech_region;
+    localStorage.setItem('az_speech_region', cfg.azure_speech_region);
+  }
+  if (cfg.azure_voice_name) {
+    azVoiceName = cfg.azure_voice_name;
+    localStorage.setItem('az_voice_name', cfg.azure_voice_name);
+  }
+  if (cfg.api_key) {
+    elApiKey = cfg.api_key;
+    document.getElementById('el-api-key').value = cfg.api_key;
+    localStorage.setItem('el_api_key', cfg.api_key);
+  }
+  if (cfg.voice_id) {
+    elVoiceId = cfg.voice_id;
+    localStorage.setItem('el_voice_id', cfg.voice_id);
+  }
+  if (cfg.model) {
+    elModel = cfg.model;
+    document.getElementById('el-model-select').value = cfg.model;
+    localStorage.setItem('el_model', cfg.model);
+  }
+  switchVoiceProvider();
+  if (azSpeechKey) loadAzureVoices();
+  if (elApiKey) loadElevenLabsVoices();
+}
+
+function exportVoiceConfig() {
+  const status = document.getElementById('voice-panel-status');
+  try {
+    const blob = new Blob([JSON.stringify(_gatherVoiceConfig(), null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'voice-config.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    status.textContent = 'Exported voice-config.json';
+    status.style.color = '#3fb950';
+  } catch (e) {
+    status.textContent = 'Export failed: ' + e.message;
+    status.style.color = '#f85149';
+  }
+}
+
+function importVoiceConfig(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  event.target.value = '';
+  const status = document.getElementById('voice-panel-status');
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      _applyVoiceConfig(JSON.parse(reader.result));
+      status.textContent = 'Imported — voice config loaded';
+      status.style.color = '#3fb950';
+    } catch (e) {
+      status.textContent = 'Import failed: ' + e.message;
+      status.style.color = '#f85149';
+    }
+  };
+  reader.readAsText(file);
+}
+
 // ═══════════════════════════════════════════════════════════════════════
 // SECTION 1: lispy.js — Complete Lisp Interpreter in JavaScript
 // ═══════════════════════════════════════════════════════════════════════
@@ -2369,13 +3503,19 @@ async function loadRegistry() {
   }
 }
 
-// ── Acquisition tracking ──────────────────────────────────────────────
-// Release assets carry no Access-Control-Allow-Origin header, so the
-// counted release path can never be READ cross-origin. But
-// api.github.com/graphql sends `ACAO: *` and accepts POST +
-// Authorization — so the browser CAN still register the acquisition the
-// same way store.html does: one THUMBS_UP on the thread's tally comment.
-// Read over raw, count over the API. Signed-out is a silent no-op.
+// ── Acquisition tracking (RAR) ────────────────────────────────────────
+// Two different CORS stories, and the distinction is the whole design:
+//
+//   release-assets.githubusercontent.com  — NO Access-Control-Allow-Origin.
+//     A cross-origin fetch() can never read a release asset's bytes, so
+//     GitHub's counted download path is unusable *for reading source*.
+//   api.github.com/graphql                — `ACAO: *`, POST + Authorization
+//     allowed. So the browser CAN still register an acquisition, the same
+//     way store.html does: one THUMBS_UP on the thread's tally comment.
+//
+// So: read the source over raw (below), count the acquisition over the
+// API. A brainstem run lands in state/discussion_ratings.json instead of
+// being invisible. Signed-out is a silent no-op — metrics never block a run.
 const RAR_REPO = 'kody-w/RAR';
 const TALLY_MARKER = '<!-- rar:download-tally -->';
 
@@ -2400,8 +3540,9 @@ const ADD_REACTION =
   'mutation($id: ID!) { addReaction(input: {subjectId: $id, content: THUMBS_UP})' +
   ' { reaction { content } } }';
 
-// One reaction per user per comment, so repeat runs never double-count —
-// the number reads as unique acquirers.
+// Register one acquisition. Idempotent by construction: GitHub allows one
+// reaction per user per comment, so repeat runs never double-count and the
+// number reads as unique acquirers.
 async function trackAcquisition(name) {
   try {
     if (!chatToken || !name) return;
@@ -2412,7 +3553,7 @@ async function trackAcquisition(name) {
       (c.body || '').includes(TALLY_MARKER));
     if (!tally) return;
     const mine = (tally.reactionGroups || []).find(g => g.content === 'THUMBS_UP');
-    if (mine?.viewerHasReacted) return;
+    if (mine?.viewerHasReacted) return;   // already counted for this user
     await ghGraphQL(ADD_REACTION, { id: tally.id });
   } catch (e) { /* metrics must never break a run */ }
 }
@@ -3227,16 +4368,201 @@ function runTests() {
 // SECTION 6: Chat Mode — GitHub Models + Built-in Agents
 // ═══════════════════════════════════════════════════════════════════════
 
-const GH_MODELS_URL = 'https://models.inference.ai.azure.com/chat/completions';
-const AUTH_CLIENT_ID = 'Ov23liuueQBIUggrH8NG';
-const AUTH_WORKER_URL = 'https://rappterbook-auth.kwildfeuer.workers.dev';
+// ── RAPP auth worker (device-code → GitHub Copilot) ──
+// Deployed, live, CORS-enabled for kody-w.github.io. This is the new auth path:
+// device-code login yields a durable ghu_ token; we exchange it for a short-lived
+// Copilot bearer and proxy models/chat through the worker (same as the local brainstem).
+const AUTH_WORKER = 'https://rapp-auth.kwildfeuer.workers.dev';
 
-let chatToken = localStorage.getItem('rb_access_token') || localStorage.getItem('gh_token') || null;
+// Legacy GitHub Models fallback (used only when the account has no Copilot).
+const GH_MODELS_URL = 'https://models.inference.ai.azure.com/chat/completions';   // legacy fallback (bare model ids)
+
+// The durable GitHub token (ghu_…) — persisted. Migrate any old key over once.
+let chatToken = localStorage.getItem('vb_gh_token')
+  || localStorage.getItem('rb_access_token')
+  || localStorage.getItem('gh_token') || null;
+if (chatToken && !localStorage.getItem('vb_gh_token')) {
+  try { localStorage.setItem('vb_gh_token', chatToken); } catch (_) {}
+}
+
+// Short-lived Copilot session — in memory only, never persisted.
+let copilotToken = null;        // the Copilot bearer
+let copilotEndpoint = null;     // e.g. https://api.individual.githubcopilot.com
+let copilotExpiresAt = 0;       // unix seconds
+let usingCopilot = false;       // true once a Copilot token was obtained (drives primary vs fallback)
+
 let chatUser = null;
-let chatModel = localStorage.getItem('vb_model') || 'gpt-4o-mini';
+let chatModel = localStorage.getItem('vb_model') || 'gpt-4o';
 let availableModels = [];
 let chatHistory = [];
 let chatBusy = false;
+
+// ═══════════════════════════════════════════════════════════════════════
+// Device-code login → durable ghu_ token (via the RAPP auth worker)
+// ═══════════════════════════════════════════════════════════════════════
+let _loginPollTimer = null;
+function _stopLoginPoll() { if (_loginPollTimer) { clearTimeout(_loginPollTimer); _loginPollTimer = null; } }
+
+function copyUserCode() {
+  const el = document.getElementById('login-user-code');
+  if (!el) return;
+  const code = el.textContent.trim();
+  navigator.clipboard?.writeText(code).then(
+    () => { try { showToast('Code copied'); } catch (_) {} },
+    () => {}
+  );
+}
+
+// Kick off the GitHub device-code flow against the worker, then poll for the token.
+async function startLogin() {
+  const startBtn = document.getElementById('loginStartBtn');
+  if (startBtn) { startBtn.disabled = true; startBtn.textContent = 'Starting…'; }
+  _stopLoginPoll();
+  try {
+    const resp = await fetch(AUTH_WORKER + '/api/auth/device', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: '{}'
+    });
+    if (!resp.ok) throw new Error('device request failed (' + resp.status + ')');
+    const data = await resp.json();
+    if (!data.device_code || !data.user_code) throw new Error('bad device response');
+
+    // Render step 2 — the user code + verification link.
+    const codeEl = document.getElementById('login-user-code');
+    if (codeEl) codeEl.textContent = data.user_code;
+    const linkEl = document.getElementById('login-open-link');
+    if (linkEl && data.verification_uri) linkEl.href = data.verification_uri;
+    const retry = document.getElementById('login-retry-btn');
+    if (retry) retry.style.display = 'none';
+    const statusEl = document.getElementById('login-poll-status');
+    if (statusEl) statusEl.textContent = 'Waiting for authorization…';
+    setLoginStep(2);
+
+    _pollDeviceToken(data.device_code, Math.max(1, data.interval || 5), 0);
+  } catch (e) {
+    if (startBtn) { startBtn.disabled = false; startBtn.textContent = 'Sign in with GitHub'; }
+    const statusEl = document.getElementById('login-poll-status');
+    if (statusEl) statusEl.textContent = 'Could not start sign-in: ' + e.message;
+    console.error('startLogin failed:', e);
+  }
+}
+
+// Poll /api/auth/device/poll until we get an access_token (or give up).
+function _pollDeviceToken(deviceCode, intervalSec, attempt) {
+  const MAX_ATTEMPTS = 150;
+  const statusEl = document.getElementById('login-poll-status');
+  if (attempt >= MAX_ATTEMPTS) {
+    if (statusEl) statusEl.textContent = 'Sign-in timed out. Please try again.';
+    const retry = document.getElementById('login-retry-btn');
+    if (retry) retry.style.display = '';
+    return;
+  }
+  _loginPollTimer = setTimeout(async () => {
+    try {
+      const resp = await fetch(AUTH_WORKER + '/api/auth/device/poll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ device_code: deviceCode })
+      });
+      const data = await resp.json().catch(() => ({}));
+
+      if (data.access_token) {
+        _onDeviceAuthorized(data.access_token);
+        return;
+      }
+      const err = data.error || (resp.ok ? 'authorization_pending' : 'authorization_pending');
+      if (err === 'authorization_pending') {
+        _pollDeviceToken(deviceCode, intervalSec, attempt + 1);
+      } else if (err === 'slow_down') {
+        _pollDeviceToken(deviceCode, intervalSec + 5, attempt + 1);
+      } else if (err === 'expired_token' || err === 'access_denied') {
+        if (statusEl) statusEl.textContent = err === 'access_denied'
+          ? 'Authorization was denied. Try again.'
+          : 'The code expired. Try again.';
+        const retry = document.getElementById('login-retry-btn');
+        if (retry) retry.style.display = '';
+      } else {
+        // Unknown — keep polling (transient).
+        _pollDeviceToken(deviceCode, intervalSec, attempt + 1);
+      }
+    } catch (e) {
+      // Network blip — keep trying.
+      _pollDeviceToken(deviceCode, intervalSec, attempt + 1);
+    }
+  }, intervalSec * 1000);
+}
+
+// Got the durable ghu_ token: persist it, exchange for a Copilot token, wire up state.
+async function _onDeviceAuthorized(ghToken) {
+  _stopLoginPoll();
+  chatToken = ghToken;
+  try { localStorage.setItem('vb_gh_token', ghToken); } catch (_) {}
+
+  const successMsg = document.getElementById('login-success-msg');
+  try {
+    await getCopilotToken();   // throws on 403 / no Copilot
+    // Copilot available — full catalog.
+    if (successMsg) successMsg.textContent = 'Signed in with GitHub Copilot! Loading models…';
+    setLoginStep(3);
+    setTimeout(() => { const o = document.getElementById('login-overlay'); if (o) o.style.display = 'none'; }, 1100);
+    updateGHPill();
+    fetchGHUser();
+    fetchModels();
+  } catch (e) {
+    // No Copilot on this account → fall back to the public GitHub Models path.
+    usingCopilot = false;
+    const noCopilot = /\b403\b/.test(e.message);
+    if (noCopilot) {
+      const statusEl = document.getElementById('login-poll-status');
+      if (statusEl) {
+        statusEl.innerHTML = 'This account doesn\'t have GitHub Copilot access. ' +
+          'You can still use the public GitHub Models catalog. ' +
+          '<a href="https://github.com/github-copilot/signup" target="_blank" rel="noopener">Get Copilot &rarr;</a>';
+      }
+      // Keep the message visible briefly, then dismiss into the (fallback) signed-in state.
+      setTimeout(() => { const o = document.getElementById('login-overlay'); if (o) o.style.display = 'none'; }, 2600);
+    } else {
+      const o = document.getElementById('login-overlay'); if (o) o.style.display = 'none';
+      console.warn('Copilot token exchange failed:', e.message);
+    }
+    updateGHPill();
+    fetchGHUser();
+    fetchModels();   // fetchModels() falls back to the public catalog when usingCopilot is false
+  }
+}
+
+// ── Copilot session token (short-lived) ──
+
+// Exchange the durable ghu_ token for a Copilot bearer + endpoint. Throws on failure.
+async function getCopilotToken() {
+  if (!chatToken) throw new Error('Not signed in');
+  const resp = await fetch(AUTH_WORKER + '/api/copilot/token', {
+    headers: { 'Authorization': 'Bearer ' + chatToken }
+  });
+  if (!resp.ok) {
+    // 403 → account has no Copilot. Surface the status code in the message.
+    throw new Error('Copilot token exchange failed (' + resp.status + ')');
+  }
+  const data = await resp.json();
+  if (!data.token) throw new Error('Copilot token exchange returned no token');
+  copilotToken = data.token;
+  copilotEndpoint = (data.endpoints && data.endpoints.api) || copilotEndpoint;
+  copilotExpiresAt = data.expires_at || (Math.floor(Date.now() / 1000) + 1500);
+  usingCopilot = true;
+  return data;
+}
+
+// Ensure a fresh Copilot token before any models/chat call. Re-exchanges using the
+// stored ghu_ when missing or within 60s of expiry. Throws if no Copilot (caller falls back).
+async function ensureCopilotToken() {
+  if (!chatToken) throw new Error('Not signed in');
+  const now = Math.floor(Date.now() / 1000);
+  if (!copilotToken || now >= (copilotExpiresAt - 60)) {
+    await getCopilotToken();
+  }
+  return copilotToken;
+}
 
 let availableAgents = [];  // All agents — registry + hot-loaded
 let enabledAgents = new Set(JSON.parse(localStorage.getItem('vb_enabled_agents') || '[]'));
@@ -3452,11 +4778,27 @@ def _rapp_install_shims():
     agents_pkg.basic_agent = ag_ba; sys.modules['agents'] = agents_pkg; sys.modules['agents.basic_agent'] = ag_ba
     utils_pkg = types.ModuleType('utils'); utils_pkg.__path__ = []
     afs = types.ModuleType('utils.azure_file_storage')
+    import os as _os
     class AzureFileStorageManager:
-        _store = {}
-        def __init__(self, *a, **k): pass
-        def read_file(self, *a, **k): return ''
-        def write_file(self, *a, **k): return True
+        # Real, persistent file store backed by the Pyodide FS (/brainstem/data).
+        _root = '/brainstem/data'
+        def __init__(self, *a, **k):
+            try: _os.makedirs(self._root, exist_ok=True)
+            except Exception: pass
+        def _p(self, name):
+            safe = str(name).replace('..', '_').lstrip('/').replace('/', '__')
+            return _os.path.join(self._root, safe or 'store')
+        def read_file(self, name, *a, **k):
+            try:
+                with open(self._p(name), 'r') as f: return f.read()
+            except Exception: return ''
+        def write_file(self, name, content='', *a, **k):
+            try:
+                _os.makedirs(self._root, exist_ok=True)
+                with open(self._p(name), 'w') as f:
+                    f.write(content if isinstance(content, str) else json.dumps(content, default=str))
+                return True
+            except Exception: return False
         def __getattr__(self, n): return lambda *a, **k: None
     afs.AzureFileStorageManager = AzureFileStorageManager
     utils_pkg.azure_file_storage = afs; sys.modules['utils'] = utils_pkg; sys.modules['utils.azure_file_storage'] = afs
@@ -3467,9 +4809,22 @@ def _rapp_norm(s):
 
 def _rapp_run(source, display_name, request):
     BasicAgent = _rapp_install_shims()
-    ns = {'__name__': '_rapp_agent_'}
+    import os
+    # Materialize the agent onto the real (Pyodide) filesystem and run it from
+    # a real path, so __file__, os.path.dirname(__file__), sibling reads, and
+    # open()/write all work — agents are not just exec'd strings.
+    agent_dir = '/brainstem/agents'
+    try: os.makedirs(agent_dir, exist_ok=True)
+    except Exception: pass
+    agent_path = agent_dir + '/_active_agent.py'
     try:
-        exec(compile(source, '<agent>', 'exec'), ns)
+        with open(agent_path, 'w') as f: f.write(source)
+    except Exception:
+        agent_path = '/agents/agent.py'  # last-resort fallback if FS write fails
+    if agent_dir not in sys.path: sys.path.insert(0, agent_dir)
+    ns = {'__name__': '_rapp_agent_', '__file__': agent_path}
+    try:
+        exec(compile(source, agent_path, 'exec'), ns)
     except Exception as e:
         return json.dumps({'error': 'exec failed: ' + repr(e), 'trace': traceback.format_exc()[-1200:]})
     candidates = []
@@ -3510,7 +4865,133 @@ def _rapp_run(source, display_name, request):
         try: out = json.dumps(out, default=str)
         except Exception: out = str(out)
     return json.dumps({'ran_class': name, 'agent_count': len(candidates), 'output': out})
+
+def _rapp_eval(code):
+    # REPL helper for the terminal: run code, capture stdout/stderr, return text.
+    import io, contextlib, traceback
+    buf = io.StringIO()
+    try:
+        with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
+            try:
+                _r = eval(code, globals())
+                if _r is not None: print(repr(_r))
+            except SyntaxError:
+                exec(code, globals())
+    except Exception:
+        buf.write(traceback.format_exc())
+    return buf.getvalue()
 `;
+
+// Give the runtime a real, persistent working filesystem: Pyodide's MEMFS plus
+// best-effort IDBFS persistence mounted at /brainstem. Mirrors the catalog/VFS
+// agents into it so imports + sibling files resolve. All best-effort — on any
+// failure agents still run against the in-memory MEMFS.
+async function setupBrainstemFS(py) {
+  try {
+    py.FS.mkdirTree('/brainstem');
+    try {
+      py.FS.mount(py.FS.filesystems.IDBFS, {}, '/brainstem');
+      await new Promise((res) => py.FS.syncfs(true, () => res()));   // load persisted data
+    } catch (e) { /* IDBFS unavailable — in-memory only */ }
+    py.FS.mkdirTree('/brainstem/agents');
+    py.FS.mkdirTree('/brainstem/data');
+    py.runPython("import os, sys\ntry:\n    os.chdir('/brainstem')\nexcept Exception: pass\nif '/brainstem/agents' not in sys.path: sys.path.insert(0, '/brainstem/agents')");
+    try {
+      for (const f of VFS.listAgents()) {
+        const src = VFS.read(f); if (!src) continue;
+        py.FS.writeFile('/brainstem/agents/' + f.split('/').pop(), src, { encoding: 'utf8' });
+      }
+    } catch (e) {}
+  } catch (e) { console.warn('Brainstem FS setup failed (running in-memory):', e.message); }
+}
+
+// Persist FS writes (IDBFS) so memory/data survives a reload. Best-effort.
+async function _persistFS() {
+  try { if (_pyodide && _pyodide.FS) await new Promise((res) => _pyodide.FS.syncfs(false, () => res())); } catch (e) {}
+}
+
+// ── In-browser terminal: a real Python REPL + a shell shim over the live
+// Pyodide (WASM/Emscripten) filesystem. There's no OS shell to drop into
+// (no subprocess), so this drives the actual interpreter + its FS directly. ──
+let _termEl = null, _termHist = [], _termHi = 0;
+function _termEnsureUI() {
+  if (_termEl) return _termEl;
+  const st = document.createElement('style');
+  st.textContent = "#rapp-term{position:fixed;right:16px;bottom:16px;width:min(680px,92vw);height:min(440px,72vh);background:#0d1117;border:1px solid #30363d;border-radius:10px;box-shadow:0 16px 50px rgba(0,0,0,.5);display:none;flex-direction:column;z-index:9000;overflow:hidden;font-family:'SF Mono','Fira Code',monospace}#rapp-term.open{display:flex}#rapp-term .term-bar{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;background:#161b22;border-bottom:1px solid #21262d;font-size:11px;color:#8b949e}#rapp-term .term-bar button{background:none;border:none;color:#8b949e;cursor:pointer;font-size:13px}#rapp-term .term-out{flex:1;overflow-y:auto;padding:10px 12px;font-size:12.5px;line-height:1.5;color:#e6edf3;white-space:pre-wrap;word-break:break-word}#rapp-term .term-line.cmd{color:#58a6ff}#rapp-term .term-line.ok{color:#3fb950}#rapp-term .term-line.err{color:#f85149}#rapp-term .term-line.dim{color:#6e7681}#rapp-term .term-in{display:flex;align-items:center;gap:8px;padding:8px 12px;border-top:1px solid #21262d}#rapp-term .term-prompt{color:#3fb950}#rapp-term #term-input{flex:1;background:none;border:none;outline:none;color:#e6edf3;font-family:inherit;font-size:12.5px}";
+  document.head.appendChild(st);
+  const el = document.createElement('div');
+  el.id = 'rapp-term';
+  el.innerHTML = '<div class="term-bar"><span>brainstem · wasm (emscripten) · python REPL</span><button onclick="toggleTerminal()" title="Close">&#10005;</button></div><div class="term-out" id="term-out"></div><div class="term-in"><span class="term-prompt">$</span><input id="term-input" autocomplete="off" spellcheck="false" placeholder="sysinfo · ls · python 1+1 · pip install requests · help"></div>';
+  document.body.appendChild(el);
+  _termEl = el;
+  const inp = el.querySelector('#term-input');
+  inp.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { const v = inp.value; inp.value = ''; if (v.trim()) { _termHist.push(v); _termHi = _termHist.length; } termRun(v); }
+    else if (e.key === 'ArrowUp') { if (_termHi > 0) { _termHi--; inp.value = _termHist[_termHi] || ''; } e.preventDefault(); }
+    else if (e.key === 'ArrowDown') { if (_termHi < _termHist.length) { _termHi++; inp.value = _termHist[_termHi] || ''; } e.preventDefault(); }
+  });
+  return el;
+}
+function _termPrint(text, cls) {
+  const out = document.getElementById('term-out'); if (!out) return;
+  const d = document.createElement('div'); d.className = 'term-line' + (cls ? ' ' + cls : ''); d.textContent = text;
+  out.appendChild(d); out.scrollTop = out.scrollHeight;
+}
+function toggleTerminal() {
+  const el = _termEnsureUI();
+  const open = el.classList.toggle('open');
+  try { document.getElementById('term-btn').classList.toggle('active', open); } catch (e) {}
+  if (open) {
+    setTimeout(() => { const i = document.getElementById('term-input'); if (i) i.focus(); }, 30);
+    if (!el.dataset.booted) { el.dataset.booted = '1'; termRun('sysinfo'); }
+  }
+}
+function _shellToPy(line) {
+  const parts = line.trim().split(/\s+/), c = parts[0], a = parts.slice(1);
+  const q = s => JSON.stringify(String(s)), nf = a.find(x => !x.startsWith('-'));
+  switch (c) {
+    case 'pwd': return 'import os;print(os.getcwd())';
+    case 'ls': case 'dir': return `import os;_p=${q(nf || '.')};print(('  '.join(sorted(os.listdir(_p)))) if os.path.isdir(_p) else (_p if os.path.exists(_p) else 'ls: no such path: '+_p))`;
+    case 'cd': return `import os;os.chdir(${q(a[0] || '/brainstem')});print(os.getcwd())`;
+    case 'cat': return `print(open(${q(nf || '')}).read())`;
+    case 'echo': return `print(${q(a.join(' '))})`;
+    case 'mkdir': return `import os;os.makedirs(${q(nf || '')},exist_ok=True);print('created '+${q(nf || '')})`;
+    case 'touch': return `open(${q(nf || '')},'a').close()`;
+    case 'rm': return `import os,shutil;_p=${q(nf || '')};\n(shutil.rmtree(_p) if os.path.isdir(_p) else os.remove(_p)) if os.path.exists(_p) else print('rm: not found: '+_p)`;
+    case 'find': return `import os;[print(os.path.join(_d,_f)) for _d,_,_fs in os.walk(${q(nf || '.')}) for _f in _fs]`;
+    case 'env': return "import os;[print(k+'='+v) for k,v in sorted(os.environ.items())]";
+    case 'whoami': return "print('pyodide')";
+    case 'uname': return "import os;_u=os.uname();print(_u.sysname,_u.nodename,_u.release,_u.machine)";
+    case 'sysinfo': return "import os,sys,platform;_u=os.uname();print('uname  :',_u.sysname,_u.nodename,_u.release,_u.machine);print('python :',sys.version.split()[0]);print('arch   :',platform.machine(),'| sys.platform:',sys.platform);print('os.name:',os.name,'| cwd:',os.getcwd());print('--> WebAssembly VM (Emscripten). Not Linux; no subprocess/native shell.')";
+    case 'help': return "print('built-ins: sysinfo uname pwd ls cd cat echo mkdir touch rm find env whoami | pip install <pkg> | clear | anything else runs as Python')";
+    default: return null;  // not an alias → run the raw line as Python
+  }
+}
+async function termRun(line) {
+  line = (line || '').trim();
+  if (line) _termPrint('$ ' + line, 'cmd');
+  if (!line) return;
+  if (line === 'clear') { const o = document.getElementById('term-out'); if (o) o.innerHTML = ''; return; }
+  let py, loadingLine = null;
+  if (!_pyodide) { _termPrint('loading CPython (WASM)…', 'dim'); loadingLine = document.querySelector('#term-out .term-line.dim:last-child'); }
+  try { py = await ensurePyodide(); } catch (e) { _termPrint('failed to load CPython: ' + (e.message || e), 'err'); return; }
+  if (loadingLine) loadingLine.remove();
+  const m = line.match(/^(?:pip|micropip)\s+install\s+(.+)$/);
+  if (m) {
+    const pkgs = m[1].trim().split(/\s+/);
+    try { _termPrint('installing ' + pkgs.join(' ') + ' …', 'dim'); await py.runPythonAsync('import micropip\nawait micropip.install(' + JSON.stringify(pkgs) + ')'); _termPrint('✓ installed ' + pkgs.join(' '), 'ok'); }
+    catch (e) { _termPrint('pip error: ' + (e.message || e), 'err'); }
+    return;
+  }
+  const code = _shellToPy(line);
+  try {
+    py.globals.set('_term_code', code == null ? line : code);
+    const out = await py.runPythonAsync('_rapp_eval(_term_code)');
+    const s = (out == null) ? '' : String(out).replace(/\n$/, '');
+    if (s.length) _termPrint(s);
+    await _persistFS();
+  } catch (e) { _termPrint(String(e.message || e), 'err'); }
+}
 
 async function ensurePyodide() {
   if (_pyodide) return _pyodide;
@@ -3527,10 +5008,205 @@ async function ensurePyodide() {
     }
     const py = await loadPyodide({ indexURL: `https://cdn.jsdelivr.net/pyodide/${PYODIDE_VERSION}/full/` });
     py.runPython(PYODIDE_RUNNER_SRC);
+    await setupBrainstemFS(py);
     _pyodide = py;
     return py;
   })();
   return _pyodideLoading;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Local-first encrypted secrets vault + .rappid holocards
+// ═══════════════════════════════════════════════════════════════════════
+// Crypto: WebCrypto (AES-256-GCM, PBKDF2-SHA256, 210k iters). Browser only.
+// Secrets are encrypted at rest in localStorage; the passphrase lives only in
+// memory for the session and is never persisted. Never log secret VALUES.
+
+const _b64 = u8 => btoa(String.fromCharCode(...new Uint8Array(u8)));
+const _ub64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function _deriveKey(pass, salt) {
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 210000, hash: 'SHA-256' }, km, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+}
+async function encryptJSON(obj, pass) {
+  const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await _deriveKey(pass, salt);
+  const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(obj)));
+  return { v: 1, kdf: 'PBKDF2-SHA256', iter: 210000, salt: _b64(salt), iv: _b64(iv), ct: _b64(new Uint8Array(ct)) };
+}
+async function decryptJSON(blob, pass) {
+  const key = await _deriveKey(pass, _ub64(blob.salt));
+  const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: _ub64(blob.iv) }, key, _ub64(blob.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+// ── Secrets vault state (memory only; passphrase never persisted) ──
+let _secrets = null;     // decrypted { KEY: VALUE } once unlocked; null = locked
+let _vaultPass = null;   // session passphrase — memory only, never written anywhere
+
+function getSessionEnv() { return _secrets || {}; }
+
+// Unlock (or initialize) the vault with a passphrase. Throws on wrong passphrase.
+async function unlockVault(pass) {
+  const it = localStorage.getItem('vb_secrets_enc');
+  if (it) {
+    try {
+      _secrets = await decryptJSON(JSON.parse(it), pass);   // throws on wrong pass
+    } catch (e) {
+      throw new Error('wrong passphrase');
+    }
+  } else {
+    _secrets = {};
+  }
+  _vaultPass = pass;
+  return _secrets;
+}
+
+// Persist the (encrypted) vault. Only ever writes the ENCRYPTED blob.
+async function persistVault() {
+  if (_vaultPass == null) return;
+  try {
+    const blob = await encryptJSON(_secrets || {}, _vaultPass);
+    localStorage.setItem('vb_secrets_enc', JSON.stringify(blob));
+  } catch (e) {
+    console.warn('Vault persist failed:', e.message);   // never log secret values
+  }
+}
+
+async function setSecret(k, v) {
+  if (_secrets == null) _secrets = {};
+  _secrets[k] = v;
+  await persistVault();
+}
+
+async function removeSecret(k) {
+  if (_secrets == null) return;
+  delete _secrets[k];
+  await persistVault();
+}
+
+// Ensure the vault is unlocked; prompt for a passphrase if it is locked.
+// Returns true if unlocked (or freshly initialized), false if the user cancelled.
+async function ensureVaultUnlocked() {
+  if (_secrets != null) return true;
+  const has = !!localStorage.getItem('vb_secrets_enc');
+  const msg = has
+    ? 'Enter your vault passphrase to unlock saved secrets:'
+    : 'Set a passphrase for your new secrets vault:';
+  const pass = window.prompt(msg);
+  if (pass == null || pass === '') return false;
+  try {
+    await unlockVault(pass);
+    return true;
+  } catch (e) {
+    showToast(e.message || 'Could not unlock vault', true);
+    return false;
+  }
+}
+
+// ── Secrets vault panel UI ──
+function toggleSecretsPanel(e) {
+  if (e) e.stopPropagation();
+  const panel = document.getElementById('secrets-panel');
+  if (!panel) return;
+  // Close sibling panels so only one is open at a time.
+  document.getElementById('agentDropdownPanel')?.classList.remove('open');
+  document.getElementById('agents-panel')?.classList.remove('open');
+  document.getElementById('voice-panel')?.classList.remove('open');
+  const open = panel.classList.toggle('open');
+  if (open) { updateSecretsState(); renderSecretsList(); }
+}
+
+function updateSecretsState() {
+  const el = document.getElementById('secrets-state');
+  if (!el) return;
+  if (_secrets != null) {
+    const n = Object.keys(_secrets).length;
+    el.textContent = `Unlocked · ${n} secret${n === 1 ? '' : 's'} in this session.`;
+    el.classList.add('unlocked');
+  } else {
+    const has = !!localStorage.getItem('vb_secrets_enc');
+    el.textContent = has
+      ? 'Locked · enter your passphrase to unlock saved secrets.'
+      : 'Locked · enter a passphrase to create the vault.';
+    el.classList.remove('unlocked');
+  }
+}
+
+function renderSecretsList() {
+  const ul = document.getElementById('secrets-list');
+  if (!ul) return;
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  if (_secrets == null) {
+    ul.innerHTML = '<div class="secrets-empty">Unlock the vault to view secrets.</div>';
+    updateSecretsState();
+    return;
+  }
+  const keys = Object.keys(_secrets);
+  if (keys.length === 0) {
+    ul.innerHTML = '<div class="secrets-empty">No secrets yet. Add one above.</div>';
+  } else {
+    // Values are always masked — never render or log the real value.
+    ul.innerHTML = keys.map(k => {
+      const s = k.replace(/'/g, "\\'");
+      return `<li><span class="sk-key">${esc(k)}</span><span class="sk-mask">••••••</span><button class="sk-del" onclick="doRemoveSecret('${s}')" title="Remove secret">×</button></li>`;
+    }).join('');
+  }
+  updateSecretsState();
+}
+
+async function doUnlockVault() {
+  const input = document.getElementById('secrets-pass');
+  const pass = input ? input.value : '';
+  if (!pass) { showToast('Enter a passphrase', true); return; }
+  try {
+    await unlockVault(pass);
+    if (input) input.value = '';   // don't leave the passphrase in the DOM
+    showToast('Vault unlocked');
+  } catch (e) {
+    showToast(e.message || 'Could not unlock vault', true);
+  }
+  renderSecretsList();
+}
+
+async function doAddSecret() {
+  if (_secrets == null) {
+    const ok = await ensureVaultUnlocked();
+    if (!ok) return;
+  }
+  const kEl = document.getElementById('secret-key');
+  const vEl = document.getElementById('secret-val');
+  const k = (kEl?.value || '').trim();
+  const v = vEl?.value || '';
+  if (!k) { showToast('Enter a KEY', true); return; }
+  if (!v) { showToast('Enter a value', true); return; }
+  await setSecret(k, v);
+  if (kEl) kEl.value = '';
+  if (vEl) vEl.value = '';   // clear the value field immediately
+  renderSecretsList();
+  showToast(`Saved ${k}`);
+}
+
+async function doRemoveSecret(k) {
+  await removeSecret(k);
+  renderSecretsList();
+}
+
+function handleHolocardImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    let parsed = null;
+    try { parsed = JSON.parse(reader.result); } catch (_) {}
+    if (parsed && parsed.schema === 'rapp-holocard/1.0') {
+      importHolocard(parsed);
+    } else {
+      showToast('Not a valid .rappid holocard', true);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
 }
 
 async function runAgentInPyodide(source, displayName, request) {
@@ -3538,7 +5214,18 @@ async function runAgentInPyodide(source, displayName, request) {
   py.globals.set('_agent_src', source);
   py.globals.set('_agent_display', displayName || '');
   py.globals.set('_agent_request', request || '');
+  // Inject the unlocked secrets vault into the real os.environ so agents that
+  // call os.environ.get("OPENAI_API_KEY") etc. see the user's values. If the
+  // vault is locked/empty this injects nothing — env-gated agents return their
+  // normal "not set" message. Wrapped so a failure never breaks the agent run.
+  try {
+    py.globals.set('_env_json', JSON.stringify(getSessionEnv()));
+    await py.runPythonAsync("import os, json\nos.environ.update({str(k): str(v) for k,v in json.loads(_env_json).items()})");
+  } catch (e) {
+    console.warn('Env injection skipped:', e.message);   // never log secret values
+  }
   const resJson = await py.runPythonAsync('_rapp_run(_agent_src, _agent_display, _agent_request)');
+  await _persistFS();   // persist any files the agent wrote (survives reload via IDBFS)
   return JSON.parse(resJson);
 }
 
@@ -3686,14 +5373,7 @@ class <ClassName>Agent(BasicAgent):
       { role: 'user', content: genPrompt }
     ];
 
-    const resp = await fetch(GH_MODELS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${chatToken}` },
-      body: JSON.stringify({ model: chatModel, messages: genMessages, temperature: 0.4, max_tokens: 2048 })
-    });
-
-    if (!resp.ok) throw new Error(`LLM error: ${resp.status}`);
-    const data = await resp.json();
+    const data = await ghChatCompletions({ model: chatModel, messages: genMessages, temperature: 0.4, max_tokens: 2048 });
     let source = data.choices[0].message.content;
 
     // Strip markdown fences if the LLM wrapped it anyway
@@ -3726,35 +5406,88 @@ class <ClassName>Agent(BasicAgent):
 
 // ── GitHub Models API ──
 
+function _handleAuthExpired() {
+  chatToken = null;
+  copilotToken = null; copilotEndpoint = null; copilotExpiresAt = 0; usingCopilot = false;
+  localStorage.removeItem('vb_gh_token');
+  localStorage.removeItem('rb_access_token');
+  localStorage.removeItem('gh_token');
+  updateGHPill();
+}
+
+// 'openai/gpt-4o' -> 'gpt-4o' — the legacy fallback endpoint uses bare model names.
+function stripPublisher(model) {
+  return (model && model.includes('/')) ? model.split('/').pop() : model;
+}
+
+// Does the selected model advertise tool-calling? Agent routing needs it.
+// o1 family never supports tools; unknown → assume yes (old behavior).
+function modelSupportsTools(id) {
+  if (/\bo1(-mini|-preview)?\b/.test(String(id))) return false;
+  const m = availableModels.find(x => (x.id || x) === id);
+  if (!m || !m.capabilities || !m.capabilities.length) return true;
+  return m.capabilities.includes('tool-calling');
+}
+
+// POST a chat-completions body. PRIMARY path is GitHub Copilot via the worker
+// (full catalog incl. Claude Opus 4.7). If the account has no Copilot, we fall
+// back to the legacy public GitHub Models endpoint (bare model id, ghu_ token).
+async function ghChatCompletions(body) {
+  if (!chatToken) throw new Error('Not signed in');
+
+  // 1) PRIMARY — GitHub Copilot through the worker.
+  if (usingCopilot || copilotToken) {
+    try {
+      await ensureCopilotToken();
+      const url = AUTH_WORKER + '/api/copilot/chat?endpoint=' + encodeURIComponent(copilotEndpoint || '');
+      let resp = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + copilotToken },
+        body: JSON.stringify(body)
+      });
+      // 401 → refresh the Copilot token once and retry.
+      if (resp.status === 401) {
+        copilotToken = null; copilotExpiresAt = 0;
+        await ensureCopilotToken();
+        resp = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + copilotToken },
+          body: JSON.stringify(body)
+        });
+      }
+      if (resp.ok) return resp.json();
+      const errText = await resp.text();
+      throw new Error(`Copilot (${resp.status}): ${errText.slice(0, 200)}`);
+    } catch (e) {
+      // If the ghu_ itself is dead, surface a sign-in prompt; otherwise rethrow.
+      if (/\b401\b/.test(e.message)) { _handleAuthExpired(); throw new Error('Session expired -- please sign in again'); }
+      throw e;
+    }
+  }
+
+  // 2) FALLBACK — legacy public GitHub Models (no Copilot on this account).
+  const resp2 = await fetch(GH_MODELS_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${chatToken}` },
+    body: JSON.stringify({ ...body, model: stripPublisher(body.model) })
+  });
+  if (!resp2.ok) {
+    const errText = await resp2.text();
+    if (resp2.status === 401) { _handleAuthExpired(); throw new Error('Token expired -- please sign in again'); }
+    throw new Error(`GitHub Models (${resp2.status}): ${errText.slice(0, 200)}`);
+  }
+  return resp2.json();
+}
+
 async function callGitHubModels(messages) {
   if (!chatToken) throw new Error('Not signed in');
-  const resp = await fetch(GH_MODELS_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${chatToken}`
-    },
-    body: JSON.stringify({
-      model: chatModel,
-      messages,
-      tools: buildChatTools(),
-      tool_choice: 'auto',
-      temperature: 0.7,
-      max_tokens: 2048
-    })
-  });
-  if (!resp.ok) {
-    const errText = await resp.text();
-    if (resp.status === 401) {
-      chatToken = null;
-      localStorage.removeItem('rb_access_token');
-      localStorage.removeItem('gh_token');
-      updateGHPill();
-      throw new Error('Token expired -- please sign in again');
-    }
-    throw new Error(`GitHub Models (${resp.status}): ${errText.slice(0, 200)}`);
+  const body = { model: chatModel, messages, temperature: 0.7, max_tokens: 2048 };
+  // Only request tools when the chosen model supports them; otherwise plain chat.
+  if (modelSupportsTools(chatModel)) {
+    body.tools = buildChatTools();
+    body.tool_choice = 'auto';
   }
-  return resp.json();
+  return ghChatCompletions(body);
 }
 
 // ── Chat UI ──
@@ -3778,6 +5511,9 @@ function addChatMsg(role, html) {
   div.appendChild(avatar);
   div.appendChild(bubble);
   container.appendChild(div);
+  // Hide the corner watermark once a real conversation begins (local-brainstem behavior).
+  const chatEl = document.getElementById('chat');
+  if (chatEl) chatEl.classList.add('has-messages');
   container.scrollTop = container.scrollHeight;
   return bubble;
 }
@@ -3976,6 +5712,8 @@ async function sendChat() {
     const reply = msg.content || '(no response)';
     chatHistory.push({ role: 'assistant', content: reply });
     addChatMsg('assistant', renderChatMarkdown(reply));
+    // Speak the finished assistant reply when voice mode is on (TTS via selected provider).
+    if (typeof speakText === 'function' && voiceMode) speakText(reply);
 
   } catch(e) {
     removeTypingIndicator();
@@ -4000,25 +5738,30 @@ function updateGHPill() {
   const label = document.getElementById('ghLabel');
   const input = document.getElementById('chatInput');
   const send = document.getElementById('chatSend');
-  const modelLabel = document.getElementById('chatModelLabel');
-  const modelSelect = document.getElementById('modelSelect');
+  const modelLabel = document.getElementById('chatModelLabel');   // optional (footer model bar removed)
+  const modelSelect = document.getElementById('modelSelect');     // now lives in the header controls
 
   if (chatToken) {
     dot.className = 'gh-dot on';
     label.textContent = chatUser || 'Connected';
     input.disabled = false;
     send.disabled = false;
-    input.placeholder = 'Ask me anything...';
-    modelLabel.textContent = 'Model:';
-    modelSelect.style.display = '';
+    input.placeholder = 'Message brainstem...';
+    // Header status dot + text: "Copilot · <model>" on Copilot, else the GitHub Models fallback.
+    const shortModel = stripPublisher(chatModel || '') || chatModel || '';
+    if (modelLabel) modelLabel.textContent = usingCopilot ? ('Copilot · ' + shortModel) : 'GitHub Models · ' + shortModel;
+    if (typeof setStatus === 'function') {
+      setStatus('running', usingCopilot ? ('Copilot · ' + shortModel) : 'Signed in');
+    }
+    if (modelSelect) modelSelect.style.display = '';
   } else {
     dot.className = 'gh-dot off';
     label.textContent = 'Sign in';
     input.disabled = true;
     send.disabled = true;
     input.placeholder = 'Sign in with GitHub to chat...';
-    modelLabel.textContent = 'GitHub Models -- sign in to start chatting';
-    modelSelect.style.display = 'none';
+    if (modelLabel) modelLabel.textContent = 'GitHub Copilot -- sign in to start chatting';
+    if (modelSelect) modelSelect.style.display = 'none';
   }
 }
 
@@ -4036,55 +5779,101 @@ function extractModelName(raw) {
   return raw;
 }
 
+// Normalize one raw Copilot/GitHub-Models entry into the shape the UI expects.
+function _normModel(m) {
+  const id = m.id || m.model || m.name;
+  let caps = m.capabilities;
+  if (caps && !Array.isArray(caps)) {
+    // Copilot capabilities can be an object like { supports: { tool_calls: true } }.
+    const supports = caps.supports || caps;
+    caps = [];
+    if (supports && (supports.tool_calls || supports.tool_calling || supports.tools)) caps.push('tool-calling');
+    if (supports && supports.streaming) caps.push('streaming');
+  }
+  if (!Array.isArray(caps)) caps = [];
+  if (/\bo1(-mini|-preview)?\b/.test(String(id))) caps = caps.filter(c => c !== 'tool-calling'); // o1 → no tools
+  return {
+    id,
+    name: m.name || id,
+    publisher: m.vendor || m.publisher || (String(id).includes('/') ? String(id).split('/')[0] : 'Copilot'),
+    capabilities: caps
+  };
+}
+
 async function fetchModels() {
-  if (!chatToken) return;
-  try {
-    const resp = await fetch('https://models.inference.ai.azure.com/models', {
-      headers: { 'Authorization': `Bearer ${chatToken}` }
-    });
-    if (!resp.ok) return;
-    const data = await resp.json();
-    const list = data.data || data || [];
-
-    // Extract clean model names, filter to chat models
-    const seen = new Set();
-    const models = [];
-    for (const m of list) {
-      const rawId = m.id || m.name || '';
-      const caps = m.capabilities || {};
-      // Skip non-chat models
-      if (caps.chat_completion === false) continue;
-      if (/embed|whisper|dall-e|tts|audio/i.test(rawId)) continue;
-
-      const clean = extractModelName(rawId);
-      if (!seen.has(clean)) {
-        seen.add(clean);
-        models.push(clean);
-      }
-    }
-    models.sort();
-
-    if (models.length > 0) {
+  // PRIMARY: GitHub Copilot catalog (full set incl. Claude Opus 4.7) via the worker.
+  if (chatToken) {
+    try {
+      await ensureCopilotToken();
+      const url = AUTH_WORKER + '/api/copilot/models?endpoint=' + encodeURIComponent(copilotEndpoint || '');
+      const resp = await fetch(url, { headers: { 'Authorization': 'Bearer ' + copilotToken } });
+      if (!resp.ok) throw new Error('copilot models ' + resp.status);
+      const raw = await resp.json();
+      const list = Array.isArray(raw) ? raw : (raw.data || []);
+      if (list.length) console.log('[vBrainstem] first Copilot model:', list[0]);
+      const models = list.map(_normModel)
+        .filter(m => m.id)
+        .sort((a, b) => (a.publisher + a.id).localeCompare(b.publisher + b.id));
+      if (!models.length) throw new Error('empty copilot catalog');
       availableModels = models;
       populateModelSelect(models);
+      updateGHPill();
+      return;
+    } catch (e) {
+      console.warn('Copilot model list failed, falling back to public catalog:', e.message);
+      usingCopilot = false;  // ensure chat takes the fallback path too
     }
-  } catch(e) {
-    console.warn('Failed to fetch models:', e.message);
-    populateModelSelect(['gpt-4o-mini', 'gpt-4o', 'gpt-4.1-mini', 'gpt-4.1-nano']);
   }
+
+  // FALLBACK: public GitHub Models catalog via the worker (no token, CORS+cached).
+  try {
+    const resp = await fetch(AUTH_WORKER + '/api/models', { headers: { 'Accept': 'application/json' } });
+    if (!resp.ok) throw new Error('catalog ' + resp.status);
+    const list = await resp.json();
+    const models = (Array.isArray(list) ? list : (list.data || []))
+      .filter(m => !m.supported_output_modalities || (m.supported_output_modalities || []).includes('text'))
+      .map(_normModel)
+      .filter(m => m.id)
+      .sort((a, b) => (a.publisher + a.id).localeCompare(b.publisher + b.id));
+    if (!models.length) throw new Error('empty catalog');
+    availableModels = models;
+    populateModelSelect(models);
+  } catch (e) {
+    console.warn('Model catalog fetch failed, using defaults:', e.message);
+    availableModels = [
+      { id: 'openai/gpt-4o-mini', name: 'OpenAI GPT-4o Mini', publisher: 'OpenAI', capabilities: ['tool-calling'] },
+      { id: 'openai/gpt-4o',      name: 'OpenAI GPT-4o',      publisher: 'OpenAI', capabilities: ['tool-calling'] },
+      { id: 'openai/gpt-4.1',     name: 'OpenAI GPT-4.1',     publisher: 'OpenAI', capabilities: ['tool-calling'] }
+    ];
+    populateModelSelect(availableModels);
+  }
+  updateGHPill();
 }
 
 function populateModelSelect(models) {
   const select = document.getElementById('modelSelect');
-  select.innerHTML = models.map(m =>
-    `<option value="${m}" ${m === chatModel ? 'selected' : ''}>${m}</option>`
-  ).join('');
-  // If saved model not in list, select first
-  if (!models.includes(chatModel) && models.length > 0) {
-    chatModel = models[0];
-    select.value = chatModel;
+  const ids = models.map(m => m.id);
+  // Reconcile the saved/selected model with what's available
+  // (tolerates a legacy bare/prefixed name by matching the suffix);
+  // default to gpt-4o if present, else the first model.
+  if (!ids.includes(chatModel)) {
+    const match = ids.find(id => stripPublisher(id) === stripPublisher(chatModel))
+      || ids.find(id => stripPublisher(id) === 'gpt-4o');
+    chatModel = match || ids[0] || chatModel;
     localStorage.setItem('vb_model', chatModel);
   }
+  // Group by publisher for a scannable dropdown.
+  const groups = {};
+  for (const m of models) (groups[m.publisher] = groups[m.publisher] || []).push(m);
+  select.innerHTML = Object.keys(groups).sort().map(pub => {
+    const opts = groups[pub].map(m => {
+      const label = m.name.startsWith(pub + ' ') ? m.name.slice(pub.length + 1) : m.name;
+      const noTools = (m.capabilities || []).includes('tool-calling') ? '' : ' (no tools)';
+      return `<option value="${m.id}" ${m.id === chatModel ? 'selected' : ''}>${label}${noTools}</option>`;
+    }).join('');
+    return `<optgroup label="${pub}">${opts}</optgroup>`;
+  }).join('');
+  select.value = chatModel;
 }
 
 function selectModel(model) {
@@ -4095,65 +5884,43 @@ function selectModel(model) {
 async function fetchGHUser() {
   if (!chatToken) return;
   try {
-    const resp = await fetch('https://api.github.com/user', {
+    // Worker proxies GitHub's /user using the ghu_ token (for the username pill).
+    const resp = await fetch(AUTH_WORKER + '/api/user', {
       headers: { 'Authorization': `Bearer ${chatToken}` }
     });
     if (resp.ok) {
       const data = await resp.json();
-      chatUser = data.login;
-    } else {
-      chatToken = null;
-      localStorage.removeItem('rb_access_token');
-      localStorage.removeItem('gh_token');
+      chatUser = data.login || data.name || chatUser;
+    } else if (resp.status === 401) {
+      _handleAuthExpired();
     }
   } catch(e) { /* offline, keep token */ }
   updateGHPill();
 }
 
+// Header pill: signed in → sign out; signed out → open the device-code login card.
 function handleGHAuth() {
   if (chatToken) {
-    // Already signed in — sign out
     if (confirm('Sign out of GitHub?')) {
       chatToken = null;
       chatUser = null;
+      copilotToken = null; copilotEndpoint = null; copilotExpiresAt = 0; usingCopilot = false;
+      localStorage.removeItem('vb_gh_token');
       localStorage.removeItem('rb_access_token');
       localStorage.removeItem('gh_token');
       updateGHPill();
+      if (typeof setStatus === 'function') setStatus('idle', 'Idle');
     }
   } else {
-    // OAuth redirect
-    const redirect = window.location.origin + window.location.pathname;
-    const url = `https://github.com/login/oauth/authorize?client_id=${AUTH_CLIENT_ID}&scope=public_repo&redirect_uri=${encodeURIComponent(redirect)}`;
-    window.location.href = url;
+    // Device-code flow — open the login card and start immediately.
+    try { localStorage.removeItem('vb_login_dismissed'); } catch (_) {}
+    showLogin();
+    startLogin();
   }
 }
 
-async function handleAuthCallback() {
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get('code');
-  if (!code) return;
-
-  // Clean URL
-  const cleanUrl = window.location.href.split('?')[0] + (window.location.hash || '');
-  window.history.replaceState({}, '', cleanUrl);
-
-  try {
-    const resp = await fetch(AUTH_WORKER_URL + '/api/auth/token', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code })
-    });
-    const data = await resp.json();
-    if (data.access_token) {
-      chatToken = data.access_token;
-      localStorage.setItem('rb_access_token', chatToken);
-      await fetchGHUser();
-      fetchModels();
-    }
-  } catch(e) {
-    console.error('Auth failed:', e);
-  }
-}
+// Device flow needs no redirect; kept as a harmless no-op so old references don't crash.
+async function handleAuthCallback() { /* no-op: replaced by device-code flow */ }
 
 
 // ── Agent Dropdown ──
@@ -4212,44 +5979,113 @@ function toggleAgent(slug) {
 }
 
 function updateEnabledPills() {
-  // Update count badge
+  // Update count badge (built-ins + enabled registry/hot-loaded agents)
   const total = BUILTIN_AGENTS.length + enabledAgents.size;
-  document.getElementById('agentCount').textContent = total;
+  const countEl = document.getElementById('agentCount');
+  if (countEl) countEl.textContent = total;
 
-  // Update bottom-bar pills
+  // Footer enabled-agent pills were removed; keep this tolerant if the element is gone.
   const pillsEl = document.getElementById('enabledAgentPills');
-  let html = '';
-  for (const slug of enabledAgents) {
-    const agent = availableAgents.find(a => a.name === slug);
-    if (agent) {
-      html += `<span class="agent-enabled-pill" onclick="toggleAgent('${slug.replace(/'/g, "\\'")}')" title="Click to disable">${agent.display_name}</span>`;
+  if (pillsEl) {
+    let html = '';
+    for (const slug of enabledAgents) {
+      const agent = availableAgents.find(a => a.name === slug);
+      if (agent) {
+        html += `<span class="agent-enabled-pill" onclick="toggleAgent('${slug.replace(/'/g, "\\'")}')" title="Click to disable">${agent.display_name}</span>`;
+      }
     }
+    pillsEl.innerHTML = html;
   }
-  pillsEl.innerHTML = html;
 
   // Update welcome pills
   const welcomePills = document.getElementById('welcomeAgentPills');
   if (welcomePills) {
-    let whtml = '<span class="chat-agent-pill">ManageMemory</span><span class="chat-agent-pill">ContextMemory</span><span class="chat-agent-pill">HackerNews</span>';
+    let whtml = '<span class="agent-enabled-pill" style="cursor:default">ManageMemory</span><span class="agent-enabled-pill" style="cursor:default">ContextMemory</span><span class="agent-enabled-pill" style="cursor:default">HackerNews</span>';
     for (const slug of enabledAgents) {
       const agent = availableAgents.find(a => a.name === slug);
       if (agent) {
-        whtml += `<span class="chat-agent-pill">${agent.display_name}</span>`;
+        whtml += `<span class="agent-enabled-pill" style="cursor:default">${agent.display_name}</span>`;
       }
     }
     welcomePills.innerHTML = whtml;
   }
+
+  // Keep the header Agents panel (enabled-agent list) in sync if it's open.
+  const ap = document.getElementById('agents-panel');
+  if (ap && ap.classList.contains('open')) renderEnabledAgentsList();
 }
 
+// ── Agents panel (⊕): the local-brainstem .agent-list view of enabled tools ──
+function toggleAgentsPanel(e) {
+  if (e) e.stopPropagation();
+  const panel = document.getElementById('agents-panel');
+  document.getElementById('agentDropdownPanel')?.classList.remove('open');
+  const open = panel.classList.toggle('open');
+  if (open) renderEnabledAgentsList();
+}
+
+function renderEnabledAgentsList() {
+  const ul = document.getElementById('agent-list-ul');
+  if (!ul) return;
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  let html = '';
+  // Always-on built-in agents (memory + Hacker News) — listed, not removable.
+  const builtinMeta = {
+    store_memory: ['ManageMemory', 'store_memory'],
+    recall_memories: ['ContextMemory', 'recall_memories'],
+    hacker_news: ['HackerNews', 'hacker_news'],
+  };
+  for (const slug of BUILTIN_AGENTS) {
+    const [title, file] = builtinMeta[slug] || [slug, slug];
+    html += `<li><div class="agent-name"><div class="agent-title">${esc(title)}</div><div class="agent-file">${esc(file)} · built-in</div></div></li>`;
+  }
+  // Enabled registry / hot-loaded agents — with download + disable controls.
+  for (const slug of enabledAgents) {
+    const agent = availableAgents.find(a => a.name === slug) || { display_name: slug, name: slug };
+    const file = (agent._file ? agent._file.split('/').pop() : flatAgentName(slug));
+    const s = slug.replace(/'/g, "\\'");
+    html += `<li>
+      <div class="agent-name"><div class="agent-title">${esc(agent.display_name)}</div><div class="agent-file">${esc(file)}</div></div>
+      <div class="agent-controls">
+        <button class="export-btn" onclick="shareAgentBySlug('${s}')" title="Share — the agent rides inside a link &amp; QR (private, nothing server-side)">Share</button>
+        <button class="export-btn" onclick="downloadAgent('${s}')" title="Download .py">Export</button>
+        <button class="export-btn" onclick="exportHolocard('${s}')" title="Export .rappid holocard (agent + encrypted secrets)">&#128230;</button>
+        <button class="export-btn del-btn" onclick="toggleAgent('${s}')" title="Disable agent">Remove</button>
+      </div>
+    </li>`;
+  }
+  ul.innerHTML = html || '<li><span class="agent-name" style="color:#8b949e">No agents found.</span></li>';
+}
+
+// Close the Agents panel on outside click (mirrors the registry panel behavior).
+document.addEventListener('click', (e) => {
+  const p = document.getElementById('agents-panel');
+  const b = document.getElementById('agents-btn');
+  if (p && p.classList.contains('open') && !p.contains(e.target) && b && !b.contains(e.target)) {
+    p.classList.remove('open');
+  }
+});
+
 function toggleAgentDropdown(e) {
-  e.stopPropagation();
+  if (e) e.stopPropagation();
   const panel = document.getElementById('agentDropdownPanel');
+  // Registry and Agents panels are mutually exclusive (both anchor top-right).
+  document.getElementById('agents-panel')?.classList.remove('open');
   panel.classList.toggle('open');
   if (panel.classList.contains('open')) {
     panel.querySelector('.agent-dropdown-search').focus();
     populateAgentDropdown();
   }
 }
+
+// Close the registry panel on outside click (mirrors the local-brainstem behavior).
+document.addEventListener('click', (e) => {
+  const p = document.getElementById('agentDropdownPanel');
+  const b = document.getElementById('registry-btn');
+  if (p && p.classList.contains('open') && !p.contains(e.target) && b && !b.contains(e.target)) {
+    p.classList.remove('open');
+  }
+});
 
 function filterAgentDropdown(q) {
   populateAgentDropdown(q);
@@ -4263,17 +6099,142 @@ function handleAgentDrop(event) {
   event.preventDefault();
   document.getElementById('dropOverlay').classList.remove('active');
 
+  // ── Share-by-link: a dropped URL/text carrying an agent (#a=…) → decode + install.
+  // The agent's full source rides INSIDE the link (gzip+base64url in the fragment), so nothing
+  // is fetched from a server — it's AirDrop-style private. The DROP itself is your consent.
+  try {
+    const dt = event.dataTransfer;
+    const text = (dt.getData('text/uri-list') || dt.getData('text/plain') || dt.getData('URL') || '').trim();
+    if (text && _parseAgentLink(text)) { installAgentFromLink(text); return; }
+  } catch (e) {}
+
   const files = event.dataTransfer.files;
   for (const file of files) {
-    if (!file.name.endsWith('.py')) {
-      showToast(`Skipped ${file.name} — only .py files`, true);
-      continue;
+    const isHolocard = /\.rappid\.json$/i.test(file.name) || /\.json$/i.test(file.name);
+    if (file.name.endsWith('.py')) {
+      const reader = new FileReader();
+      reader.onload = () => hotLoadAgent(file.name, reader.result);
+      reader.readAsText(file);
+    } else if (isHolocard) {
+      // A .json drop might be a .rappid holocard — peek at the schema and route it.
+      const reader = new FileReader();
+      reader.onload = () => {
+        let parsed = null;
+        try { parsed = JSON.parse(reader.result); } catch (_) {}
+        if (parsed && parsed.schema === 'rapp-holocard/1.0') {
+          importHolocard(parsed);
+        } else {
+          showToast(`Skipped ${file.name} — not a .rappid holocard`, true);
+        }
+      };
+      reader.readAsText(file);
+    } else {
+      showToast(`Skipped ${file.name} — only .py or .rappid.json files`, true);
     }
-    const reader = new FileReader();
-    reader.onload = () => hotLoadAgent(file.name, reader.result);
-    reader.readAsText(file);
   }
 }
+
+// ── Agent-in-a-link: share a .py by encoding its FULL source into the URL fragment ──────────
+// gzip → base64url, carried in #a= (the fragment is never sent to a server). The link IS the
+// agent — private, AirDrop-style. Receiving = dropping/opening the link (the user's consent).
+function _u8b64url(u8){ let b=btoa(String.fromCharCode.apply(null, u8)); return b.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+function _b64urlU8(s){ s=String(s).replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4) s+='='; return Uint8Array.from(atob(s), c=>c.charCodeAt(0)); }
+async function _encPayload(str){
+  if (typeof CompressionStream !== 'undefined') {
+    const buf = await new Response(new Blob([new TextEncoder().encode(str)]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer();
+    return 'G' + _u8b64url(new Uint8Array(buf));            // G = gzipped
+  }
+  return 'B' + _u8b64url(new TextEncoder().encode(str));     // B = plain (fallback)
+}
+async function _decPayload(p){
+  const method = p[0], data = _b64urlU8(p.slice(1));
+  if (method === 'G') { const buf = await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer(); return new TextDecoder().decode(buf); }
+  return new TextDecoder().decode(data);
+}
+function _parseAgentLink(url){                                // returns {payload,name} or null
+  const m = String(url).match(/[#?&]a=([A-Za-z0-9\-_]+)/);
+  if (!m) return null;
+  const n = String(url).match(/[#?&]n=([^&\s]+)/);
+  return { payload: m[1], name: n ? decodeURIComponent(n[1]) : null };
+}
+async function encodeAgentLink(source, name){
+  let u = location.origin + location.pathname + '#a=' + (await _encPayload(source));
+  if (name) u += '&n=' + encodeURIComponent(name);
+  return u;
+}
+// A share-sheet link: opening it lands on share.html (the agent's package page with a draggable
+// link + QR). Dropping it onto a vBrainstem still installs (the drop handler matches #a= anywhere).
+function _shareSheetURL(payload, name){
+  const dir = location.pathname.replace(/[^/]*$/, '');
+  return location.origin + dir + 'share.html#a=' + payload + (name ? '&n=' + encodeURIComponent(name) : '');
+}
+// One-click share for an agent in the panel: resolve its source (hot-loaded → VFS → registry).
+async function shareAgentBySlug(slug){
+  let source = null;
+  if (hotLoadedAgents[slug]) source = hotLoadedAgents[slug].source;
+  if (!source) { try { for (const f of VFS.listAgents()) { const c = VFS.read(f); if (c && c.includes(slug)) { source = c; break; } } } catch (e) {} }
+  if (!source) { const a = availableAgents.find(x => x.name === slug); if (a && a._file) { try { source = await fetchAgent(a); } catch (e) {} } }
+  if (!source) { try { showToast('Could not get agent source to share', true); } catch (_) {} return; }
+  const a = availableAgents.find(x => x.name === slug);
+  return window.rapp.shareAgent(source, (a && a.display_name) || flatAgentName(slug));
+}
+async function installAgentFromLink(url){
+  const p = _parseAgentLink(url); if (!p) return false;
+  let src; try { src = await _decPayload(p.payload); } catch (e) { try { showToast('Could not decode the shared agent link', true); } catch(_){} return false; }
+  hotLoadAgent((p.name || 'shared_agent').replace(/\.py$/,'') + '.py', src);   // same install path as a dropped file
+  return true;
+}
+// Consent banner for arriving via a link (not a drop): show name + Add/Dismiss.
+function _offerSharedAgent(name, source){
+  if (document.getElementById('shared-agent-offer')) return;
+  const o = document.createElement('div'); o.id = 'shared-agent-offer';
+  o.style.cssText = 'position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:99999;background:#161b22;border:1px solid #30363d;border-radius:12px;padding:14px 18px;box-shadow:0 16px 50px rgba(0,0,0,.5);font:14px -apple-system,sans-serif;color:#e6edf3;max-width:92vw;text-align:center';
+  o.innerHTML = '🪁 <b>Shared agent:</b> ' + (name||'agent') + '<div style="color:#8b949e;font-size:12.5px;margin:6px 0 10px">It rode here inside the link — runs in your browser sandbox. Add it to your vBrainstem?</div>'
+    + '<button id="sa-add" style="background:#238636;border:0;color:#fff;border-radius:8px;padding:7px 16px;font-weight:600;cursor:pointer;margin-right:8px">Add agent</button>'
+    + '<button id="sa-no" style="background:#21262d;border:1px solid #30363d;color:#8b949e;border-radius:8px;padding:7px 14px;cursor:pointer">Dismiss</button>';
+  document.body.appendChild(o);
+  o.querySelector('#sa-add').onclick = () => { hotLoadAgent((name||'shared_agent').replace(/\.py$/,'') + '.py', source); o.remove(); };
+  o.querySelector('#sa-no').onclick = () => o.remove();
+}
+function _loadQRLib(){ return new Promise((res,rej)=>{ if(window.qrcode) return res(); const s=document.createElement('script'); s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js'; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+async function _showShareQR(link, name){
+  let o = document.getElementById('agent-share-qr'); if (o) o.remove();
+  o = document.createElement('div'); o.id = 'agent-share-qr';
+  o.style.cssText = 'position:fixed;right:16px;top:60px;z-index:9600;background:#161b22;border:1px solid #30363d;border-radius:12px;padding:16px;text-align:center;box-shadow:0 16px 50px rgba(0,0,0,.5);font:12px -apple-system,sans-serif;color:#e6edf3;max-width:280px';
+  o.innerHTML = '<div style="font-weight:700;font-size:14px">🪁 Share agent: ' + (name||'agent') + '</div>'
+    + '<div style="color:#8b949e;margin:4px 0 10px">the agent is <b>inside</b> this link — <b>copied</b>. Drag it onto a vBrainstem, or scan it below.</div>'
+    + '<div id="asq" style="background:#fff;border-radius:8px;padding:8px;display:inline-block;min-width:180px;min-height:60px;line-height:0"></div>'
+    + '<div style="margin-top:8px"><button onclick="this.closest(\'#agent-share-qr\').remove()" style="background:#21262d;border:1px solid #30363d;color:#8b949e;border-radius:6px;padding:4px 12px;cursor:pointer">close</button></div>';
+  document.body.appendChild(o);
+  // QR only when the link is comfortably scannable; otherwise lead with the (copied) drag-link.
+  if (link.length <= 1500) {
+    try { await _loadQRLib(); const q = qrcode(0,'L'); q.addData(link); q.make(); o.querySelector('#asq').innerHTML = q.createImgTag(4,0); const im=o.querySelector('#asq img'); if(im){im.style.width='200px';im.style.height='200px';im.style.imageRendering='pixelated';} }
+    catch (e) { o.querySelector('#asq').innerHTML = '<div style="color:#333;padding:14px;font-size:12px">Link copied — <b>drag it</b> onto a vBrainstem.</div>'; }
+  } else {
+    o.querySelector('#asq').innerHTML = '<div style="color:#333;padding:16px;font-size:12px">📦 Big agent — <b>link copied</b>. Drag it onto a vBrainstem. (Too large to scan as a QR.)</div>';
+  }
+}
+// Wire the share API + handle arriving via a #a= link (after window.rapp exists).
+window.addEventListener('load', () => setTimeout(async () => {
+  if (window.rapp) window.rapp.shareAgent = async function(sourceOrName, name){
+    let src = sourceOrName, nm = name;
+    if (typeof src === 'string' && !/[\n{]/.test(src)) {       // looks like a name/path → try the VFS
+      try { const path = src.startsWith('agents/') ? src : ('agents/' + (src.includes('/') ? src : ('@local/' + src.replace(/\.py$/,'') + '.py')));
+        const r = (window.VFS && VFS.read) ? VFS.read(path) : null; if (r) { src = r; if (!nm) nm = path.split('/').pop().replace(/\.py$/,''); } } catch (e) {}
+    }
+    if (!nm) nm = (src.match(/["']display_name["']\s*:\s*["']([^"']+)["']/) || [])[1] || 'shared_agent';
+    const link = _shareSheetURL(await _encPayload(src), nm);
+    try { await navigator.clipboard.writeText(link); } catch (e) {}
+    _showShareQR(link, nm);
+    console.log('🪁 share link (copied — drag it onto any vBrainstem):', link);
+    return link;
+  };
+  const p = _parseAgentLink(location.hash);
+  if (p) { let src; try { src = await _decPayload(p.payload); } catch (e) { return; }
+    _offerSharedAgent(p.name || 'shared agent', src);
+    try { history.replaceState(null, '', location.origin + location.pathname + location.search); } catch (e) {}
+  }
+}, 1500));
 
 function hotLoadAgent(filename, source) {
   // Extract docstring (used for description fallback)
@@ -4389,7 +6350,23 @@ document.addEventListener('click', e => {
   }
 });
 
+// Close the secrets panel when clicking outside of it.
+document.addEventListener('click', e => {
+  const panel = document.getElementById('secrets-panel');
+  if (panel && panel.classList.contains('open') && !e.target.closest('.secrets-wrapper')) {
+    panel.classList.remove('open');
+  }
+});
+
 // ── Agent Download ──
+
+// Flatten any slug/path to a bare, root-level <slug>_agent.py. Brainstems
+// hot-load flat files from the agents root — never nested @publisher/ paths.
+function flatAgentName(slugOrPath) {
+  let b = String(slugOrPath).split('/').pop().replace(/\.py$/, '');
+  if (!b.endsWith('_agent')) b += '_agent';
+  return b + '.py';
+}
 
 async function downloadAgent(slug) {
   let source = null;
@@ -4398,7 +6375,7 @@ async function downloadAgent(slug) {
   // Check VFS / hot-loaded first
   if (hotLoadedAgents[slug]) {
     source = hotLoadedAgents[slug].source;
-    filename = slug.replace(/^@\w+\//, '') + '.py';
+    filename = flatAgentName(slug);
   }
 
   // Try VFS
@@ -4408,7 +6385,7 @@ async function downloadAgent(slug) {
       const content = VFS.read(f);
       if (content && content.includes(slug)) {
         source = content;
-        filename = f.replace('agents/', '');
+        filename = f.split('/').pop();   // flat basename only
         break;
       }
     }
@@ -4442,6 +6419,138 @@ async function downloadAgent(slug) {
   a.click();
   URL.revokeObjectURL(url);
   showToast(`Downloaded ${filename}`);
+}
+
+// ── .rappid Holocards — portable agent + (optionally) its encrypted secrets ──
+// Schema:
+//   { "schema":"rapp-holocard/1.0", "exported_at":"<iso>",
+//     "agent": { "manifest": {<manifest>}, "source": "<full .py source>" },
+//     "env_keys": ["OPENAI_API_KEY", ...],         // manifest.requires_env
+//     "secrets": {<encryptJSON blob>} | null }      // AES-GCM {KEY:VALUE}, null if none
+
+// Resolve an agent's source the same way downloadAgent does: hot-loaded → VFS → registry.
+async function resolveAgentSource(slug) {
+  if (hotLoadedAgents[slug]) return hotLoadedAgents[slug].source;
+  const vfsFiles = VFS.listAgents();
+  for (const f of vfsFiles) {
+    const content = VFS.read(f);
+    if (content && content.includes(slug)) return content;
+  }
+  const agent = availableAgents.find(a => a.name === slug);
+  if (agent && agent._file) return await fetchAgent(agent);
+  return null;
+}
+
+async function exportHolocard(slug) {
+  try {
+    const agent = availableAgents.find(a => a.name === slug) || (hotLoadedAgents[slug] && hotLoadedAgents[slug].manifest) || null;
+    if (!agent) { showToast('Agent not found', true); return; }
+    let source;
+    try {
+      source = await resolveAgentSource(slug);
+    } catch (e) {
+      showToast(`Failed to read agent: ${e.message}`, true);
+      return;
+    }
+    if (!source) { showToast('Agent source not available', true); return; }
+
+    // The full manifest: prefer the hot-loaded one (richest), else the registry entry.
+    const manifest = (hotLoadedAgents[slug] && hotLoadedAgents[slug].manifest) || agent;
+    const env_keys = (manifest.requires_env || agent.requires_env || []);
+
+    // Collect env values: from the unlocked vault, else prompt (blank = omit).
+    const envObj = {};
+    const sessionEnv = getSessionEnv();
+    for (const key of env_keys) {
+      let val = sessionEnv[key];
+      if (val == null || val === '') {
+        val = window.prompt(`Value for ${key} (blank to omit):`);
+      }
+      if (val != null && val !== '') envObj[key] = val;
+    }
+
+    // Encrypt any provided secrets under a card passphrase; else null.
+    let secrets = null;
+    if (Object.keys(envObj).length > 0) {
+      const pass = window.prompt('Passphrase to encrypt the secrets in this card:');
+      if (pass == null || pass === '') {
+        showToast('Export cancelled (no passphrase)', true);
+        return;
+      }
+      secrets = await encryptJSON(envObj, pass);
+    }
+
+    const card = {
+      schema: 'rapp-holocard/1.0',
+      exported_at: new Date().toISOString(),
+      agent: { manifest, source },
+      env_keys,
+      secrets
+    };
+
+    // Filename: flatten to the bare basename (no @publisher/), e.g. my_agent.rappid.json
+    const base = flatAgentName(slug).replace(/\.py$/, '');
+    const fname = `${base}.rappid.json`;
+    const blob = new Blob([JSON.stringify(card, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fname;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast(`Exported ${fname}${secrets ? ` (+${Object.keys(envObj).length} secrets)` : ''}`);
+  } catch (e) {
+    showToast(`Holocard export failed: ${e.message}`, true);
+  }
+}
+
+async function importHolocard(obj) {
+  try {
+    if (!obj || obj.schema !== 'rapp-holocard/1.0') {
+      showToast('Not a valid .rappid holocard', true);
+      return;
+    }
+    const ag = obj.agent || {};
+    const manifest = ag.manifest || {};
+    const source = ag.source;
+    if (!source) { showToast('Holocard has no agent source', true); return; }
+
+    // Load + enable the agent via the existing hot-load path (dropdown + FS).
+    const slug = manifest.name || '@local/imported';
+    const base = flatAgentName(slug);
+    hotLoadAgent(base, source);
+    const displayName = (hotLoadedAgents[slug] && hotLoadedAgents[slug].manifest.display_name) || manifest.display_name || base;
+
+    // Merge any attached secrets into the vault. Wrong passphrase → still load agent.
+    let added = 0;
+    if (obj.secrets) {
+      const pass = window.prompt("Passphrase to unlock this card's secrets:");
+      if (pass != null && pass !== '') {
+        try {
+          const dec = await decryptJSON(obj.secrets, pass);
+          // Ensure the vault is unlocked. If still locked, reuse this passphrase.
+          if (_secrets == null) {
+            try {
+              await unlockVault(pass);
+            } catch (e) {
+              // The card passphrase isn't the vault passphrase — prompt for the vault.
+              const ok = await ensureVaultUnlocked();
+              if (!ok) { showToast(`Imported ${displayName} (secrets skipped — vault locked)`, true); renderSecretsList(); return; }
+            }
+          }
+          if (_secrets == null) _secrets = {};
+          for (const [k, v] of Object.entries(dec)) { _secrets[k] = v; added++; }
+          await persistVault();
+        } catch (e) {
+          alert('Wrong passphrase — the agent was loaded, but its secrets could not be unlocked.');
+        }
+      }
+    }
+    renderSecretsList();
+    showToast(`Imported ${displayName} (+${added} secrets)`);
+  } catch (e) {
+    showToast(`Holocard import failed: ${e.message}`, true);
+  }
 }
 
 // ── Chat Export / Import ──
@@ -4517,7 +6626,7 @@ function restoreVFSAgents() {
   for (const path of agentFiles) {
     const source = VFS.read(path);
     if (!source) continue;
-    const filename = path.replace('agents/', '');
+    const filename = path.split('/').pop();   // flat basename only
     hotLoadAgent(filename, source);
   }
   _silentRestore = false;
@@ -4580,16 +6689,436 @@ async function applySummonDeepLink() {
   history.replaceState({}, '', url.toString());
 }
 
+// ── Console API (window.rapp) — the SAME shape as vbrainstem_sdk.py, but in
+// the browser: drive the brainstem from DevTools (or automation) with no server
+// and no port. health/agents/run/eval mirror the SDK's HTTP endpoints 1:1.
+//   await rapp.run('@aibast-agents-library/account_intelligence', 'Acme Corp')
+//   await rapp.eval('import sys; print(sys.version)');  rapp.agents('fraud');  rapp.health()
+window.rapp = {
+  health() {                                                   // = GET /health
+    return { status: 'ok', agents: (availableAgents || []).length,
+             runtime: 'CPython ' + ((_pyodide && _pyodide.version) || '(pyodide/wasm)'),
+             registry: 'RAR', sdk: 'vbrainstem-console/1',
+             signed_in: !!chatToken, model: chatModel, secrets_unlocked: _secrets != null };
+  },
+  agents(grep) {                                               // = GET /agents
+    let xs = (availableAgents || []).map(a => ({ name: a.name, display_name: a.display_name,
+      description: a.description, category: a.category, requires_env: a.requires_env || [], _file: a._file }));
+    if (grep) { const q = String(grep).toLowerCase(); xs = xs.filter(a => JSON.stringify(a).toLowerCase().includes(q)); }
+    return xs;
+  },
+  async run(slug, request, args) {                             // = POST /run {slug,request,args}
+    const a = (availableAgents || []).find(x => x.name === slug)
+           || (availableAgents || []).find(x => x.name.split('/').pop() === String(slug).split('/').pop());
+    if (!a) return { executed: false, error: 'agent not found: ' + slug };
+    let source;
+    try { source = (typeof hotLoadedAgents !== 'undefined' && hotLoadedAgents[a.name]) ? hotLoadedAgents[a.name].source : await fetchAgent(a); }
+    catch (e) { return { executed: false, error: 'fetch failed: ' + (e.message || e) }; }
+    const res = await runAgentInPyodide(source, a.display_name, request);
+    return Object.assign({ agent: a.display_name, slug: a.name }, res);
+  },
+  async eval(code) {                                           // = POST /eval {code}
+    const py = await ensurePyodide();
+    py.globals.set('_rapp_console_code', String(code));
+    return { output: await py.runPythonAsync('_rapp_eval(_rapp_console_code)') };
+  },
+  // POST /chat — same contract as vbrainstem_sdk.py / brainstem.py:
+  //   {user_input, conversation_history?, session_id?} → {response, session_id, agent_logs, voice_mode}
+  async chat(input, conversation_history) {
+    const req = (input && typeof input === 'object') ? input : { user_input: input, conversation_history };
+    const user_input = String(req.user_input || '').trim();
+    const session_id = req.session_id || (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2));
+    if (!user_input) return { error: 'user_input is required' };
+    if (!chatToken) return { error: 'not signed in (no LLM token for routing)' };
+    const msgs = [{ role: 'system', content: buildSystemPrompt() }]
+      .concat((req.conversation_history || []).filter(m => ['user', 'assistant', 'tool'].includes(m.role)),
+              [{ role: 'user', content: user_input }]);
+    const logs = []; let m = {};
+    for (let i = 0; i < 3; i++) {                              // up to 3 tool-call rounds (brainstem parity)
+      const resp = await callGitHubModels(msgs);
+      m = resp.choices[0].message; msgs.push(m);
+      if (!m.tool_calls || !m.tool_calls.length) break;
+      for (const tc of m.tool_calls) {
+        let a = {}; try { a = JSON.parse(tc.function.arguments || '{}'); } catch (e) {}
+        let res; try { res = await executeToolCall(tc.function.name, a); } catch (e) { res = { error: e.message }; }
+        const out = (res && (res.output || res.error)) || '';
+        logs.push('[' + tc.function.name + '] ' + String(out).slice(0, 200));
+        msgs.push({ role: 'tool', tool_call_id: tc.id, content: JSON.stringify(res && res.output_full !== undefined ? { ...res, output_full: undefined } : res) });
+      }
+    }
+    return { response: m.content || '', session_id, agent_logs: logs.join('\n'), voice_mode: (typeof voiceMode !== 'undefined' && !!voiceMode) };
+  },
+  // ── console-only conveniences (beyond the server shape) ──
+  summon(slug) {
+    const a = (availableAgents || []).find(x => x.name === slug); if (!a) return 'not found: ' + slug;
+    enabledAgents.add(a.name); localStorage.setItem('vb_enabled_agents', JSON.stringify([...enabledAgents]));
+    try { populateAgentDropdown(); updateEnabledPills(); } catch (e) {}
+    return 'enabled ' + a.name;
+  },
+  secrets: {
+    list() { return _secrets ? Object.keys(_secrets) : (localStorage.getItem('vb_secrets_enc') ? '(locked — rapp.secrets.unlock(passphrase))' : []); },
+    async unlock(p) { await unlockVault(p); return Object.keys(_secrets || {}); },
+    async set(k, v) { await setSecret(k, v); return 'set ' + k; }
+  },
+  help() {
+    const lines = ['rapp.health()', 'rapp.agents(grep?)', 'await rapp.run(slug, request)', 'await rapp.eval(code)',
+                   'rapp.summon(slug)', 'rapp.secrets.list() / .unlock(pass) / .set(k,v)',
+                   '— same shape as: python3 vbrainstem_sdk.py serve  (/health /agents /run /eval)'];
+    console.log('%cvBrainstem console API', 'color:#3fb950;font-weight:bold'); lines.forEach(l => console.log('  ' + l)); return lines;
+  }
+};
+try { console.log('%c🧠 vBrainstem console ready — rapp.help()', 'color:#3fb950;font-weight:bold'); } catch (e) {}
+
+// ── Neighborhood: WebRTC tether (§5a) speaking the twin-chat protocol (§6a/§6e)
+// of rapp-neighborhood-protocol/1.0. Pair by QR or peer-id (PeerJS public broker
+// for the handshake; then direct DTLS P2P). Peers are UNIFORM — a person, a
+// brainstem, a vBrainstem, or Claude-in-the-console all speak {kind:'say',
+// payload:{text}}, which is routed into THIS tab's rapp.chat and answered
+// transparently. So a neighbor can't tell what's on the other end.
+const _hood = { peer: null, id: null, conns: {}, log: [], onmsg: null };
+let _peerjsLoading = null;
+function _myRappid() {
+  let r = localStorage.getItem('vb_rappid');
+  if (!r) { r = (crypto.randomUUID ? crypto.randomUUID() : 'vb-' + Date.now().toString(36) + Math.random().toString(36).slice(2)); localStorage.setItem('vb_rappid', r); }
+  return r;
+}
+// ── §5a SEALED channel: end-to-end AES-256-GCM over the twin-chat wire ──────────
+// The wire (PeerJS broker, TURN relays, the whole network) is treated as fully untrusted.
+// Every envelope is sealed with a key derived (PBKDF2-SHA256, 210k) from a secret that
+// travels ONLY in the pairing link you copy out-of-band — never to the broker. So the line
+// carries opaque ciphertext, can't be forged or modified (GCM auth tag), and only the two
+// endpoints holding the secret can read or speak: as secure as if it were all on one device.
+// Identical code runs in the browser and in Node (both expose crypto.subtle / btoa / atob).
+const _keyCache = {};
+async function _channelKey(secret) {
+  if (!secret) throw new Error('sealed channel needs a secret');
+  if (_keyCache[secret]) return _keyCache[secret];
+  const enc = new TextEncoder();
+  const base = await crypto.subtle.importKey('raw', enc.encode(secret), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt: enc.encode('rapp-neighborhood-5a/1'), iterations: 210000, hash: 'SHA-256' },
+    base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+  _keyCache[secret] = key; return key;
+}
+// (reuses the page's existing base64 helpers _b64 / _ub64)
+async function _seal(secret, obj) {                         // obj → {schema:'rapp-sealed/1.0', iv, ct}
+  const key = await _channelKey(secret);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(obj)));
+  return { schema: 'rapp-sealed/1.0', iv: _b64(iv), ct: _b64(ct) };
+}
+async function _open(secret, sealed) {                      // throws if wrong key OR tampered (GCM verify)
+  const key = await _channelKey(secret);
+  const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: _ub64(sealed.iv) }, key, _ub64(sealed.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+function _loadPeerJS() {
+  if (window.Peer) return Promise.resolve();
+  if (_peerjsLoading) return _peerjsLoading;
+  _peerjsLoading = new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = 'https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';
+    s.onload = res; s.onerror = () => rej(new Error('PeerJS failed to load'));
+    document.head.appendChild(s);
+  });
+  return _peerjsLoading;
+}
+function _hoodEnsure() {
+  if (_hood.id && _hood.peer) return Promise.resolve(_hood.id);
+  return _loadPeerJS().then(() => new Promise((res, rej) => {
+    const p = new Peer();                       // PeerJS public broker assigns an id
+    _hood.peer = p;
+    p.on('open', (id) => { _hood.id = id; res(id); });
+    p.on('connection', (c) => _hoodWire(c));    // inbound neighbor
+    p.on('error', (e) => rej(e));
+  }));
+}
+function _hoodWire(conn) {
+  _hood.conns[conn.peer] = conn;
+  conn.on('data', (m) => _hoodHandle(conn, m));
+  conn.on('close', () => { delete _hood.conns[conn.peer]; });
+}
+async function _hoodHandle(conn, raw) {
+  let msg = raw, sealed = false;
+  if (raw && raw.schema === 'rapp-sealed/1.0') {            // E2E-encrypted — decrypt with the session secret
+    sealed = true;
+    try { msg = await _open(_hood.opToken, raw); }
+    catch (e) {                                             // wrong key or tampered → leak nothing, refuse
+      try { conn.send(await _seal(_hood.opToken || '·', { schema: 'rapp-twin-chat-response/1.0', channel: '5a-tether-sealed', status: 403, response: { error: 'decrypt/auth failed' } })); } catch (_) {}
+      return;
+    }
+  }
+  if (!msg || msg.schema !== 'rapp-twin-chat/1.0') return;
+  _hood.log.push({ dir: 'in', sealed, msg });
+  try { if (_hood.onmsg) _hood.onmsg(msg); } catch (e) {}
+  const respond = async (kind, status, response) => {
+    const out = { schema: 'rapp-twin-chat-response/1.0', channel: sealed ? '5a-tether-sealed' : '5a-tether',
+      from_rappid: _myRappid(), to_rappid: msg.from_rappid, kind, envelope: msg, status, response };
+    conn.send(sealed ? await _seal(_hood.opToken, out) : out);   // seal the reply too
+  };
+  if (msg.kind === 'say') {                     // route a neighbor's turn into our own brainstem
+    let reply;
+    try { reply = await window.rapp.chat({ user_input: (msg.payload && msg.payload.text) || '' }); }
+    catch (e) { reply = { error: e.message }; }
+    await respond('say', (reply && reply.error) ? 502 : 200, reply);
+  } else if (msg.kind === 'console') {          // OPERATOR access — call any rapp.* method remotely
+    // Authorization: a SEALED console op is authorized by key possession (only a holder of the
+    // out-of-band secret can produce a valid sealed envelope). A PLAINTEXT console op must carry
+    // the session token. The secret/token lives only in this tab — closing it ends the session.
+    const p = msg.payload || {};
+    if (!sealed && (!_hood.opToken || p.token !== _hood.opToken)) {
+      return respond('console', 403, { error: 'console access denied — invalid or missing session token' });
+    }
+    let status = 200, response;
+    try {
+      const path = String(p.method || '').split('.');   // supports dotted paths e.g. "secrets.list"
+      let fn = window.rapp, ctx = null;
+      for (const k of path) { ctx = fn; fn = fn && fn[k]; }
+      if (typeof fn !== 'function') throw new Error('no such console method: rapp.' + p.method);
+      response = await fn.apply(ctx, Array.isArray(p.args) ? p.args : []);
+    } catch (e) { status = 502; response = { error: (e && e.message) || String(e) }; }
+    await respond('console', status, response);
+  }
+}
+window.rapp.neighborhood = {
+  async host(opts) {                            // become reachable; returns peer-id + QR + operator token
+    const id = await _hoodEnsure();
+    opts = opts || {};
+    // Operator session token — required for `console` (operate) ops. Minted once per
+    // session unless the caller pins one. Closing the tab destroys the peer + token.
+    if (opts.token) _hood.opToken = String(opts.token);
+    else if (!_hood.opToken) _hood.opToken = (crypto.randomUUID ? crypto.randomUUID() : 'op-' + Date.now().toString(36) + Math.random().toString(36).slice(2));
+    const base = location.origin + location.pathname + '?peer=' + id;
+    const op_link = base + '&op=' + encodeURIComponent(_hood.opToken);
+    const qr = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&data=' + encodeURIComponent(base);
+    // `token` doubles as the channel `secret`: it authorizes AND derives the AES-256-GCM key.
+    // It rides in op_link only — share that out-of-band (copy to your other browser); the broker never sees it.
+    return { peer_id: id, rappid: _myRappid(), link: base, op_link, token: _hood.opToken, secret: _hood.opToken, qr };
+  },
+  async join(peerId) {                          // connect to a neighbor by peer-id
+    await _hoodEnsure();
+    return new Promise((res, rej) => {
+      const c = _hood.peer.connect(peerId);
+      const t = setTimeout(() => rej(new Error('connect timeout')), 15000);
+      c.on('open', () => { clearTimeout(t); _hoodWire(c); res({ connected: peerId }); });
+      c.on('error', (e) => { clearTimeout(t); rej(e); });
+    });
+  },
+  peers() { return Object.keys(_hood.conns); },
+  async _send(peerId, kind, payload, secret) {  // send an envelope, await its §6e response (correlated by nonce)
+    if (!_hood.conns[peerId]) await this.join(peerId);
+    const c = _hood.conns[peerId];
+    const nonce = (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2));
+    const env = { schema: 'rapp-twin-chat/1.0', from_rappid: _myRappid(), to_rappid: peerId,
+      utc: new Date().toISOString(), nonce, kind, payload: payload || {}, facets: [] };
+    const wire = secret ? await _seal(secret, env) : env;   // seal the whole envelope when a secret is set
+    return new Promise((res, rej) => {
+      const t = setTimeout(() => { c.off && c.off('data', h); rej(new Error(kind + ' timeout')); }, 60000);
+      const h = async (m) => {
+        let r = m;
+        if (m && m.schema === 'rapp-sealed/1.0') { if (!secret) return; try { r = await _open(secret, m); } catch (e) { return; } }
+        if (r && r.schema === 'rapp-twin-chat-response/1.0' && r.envelope &&
+            (r.envelope.nonce === nonce || r.envelope.utc === env.utc)) {
+          clearTimeout(t); c.off && c.off('data', h); res(r);
+        }
+      };
+      c.on('data', h); c.send(wire);
+    });
+  },
+  // Pass `secret` (the session token from host()) to make the turn END-TO-END SEALED (AES-256-GCM).
+  // Omit it for plaintext open chat. `operate` always requires the secret — operating a neighbor's
+  // console only happens over a sealed, authenticated channel.
+  async ask(peerId, user_input, secret) {       // send a 'say' to a neighbor, await their reply (§6e)
+    return this._send(peerId, 'say', { text: String(user_input) }, secret);
+  },
+  async operate(peerId, method, args, secret) { // OPERATE a neighbor's console: rapp.<method>(...args) — sealed
+    if (!secret) throw new Error('operate requires the session secret (E2E-sealed channel)');
+    return this._send(peerId, 'console', { method, args: args || [] }, secret);
+  },
+  _seal, _open, _channelKey,                    // exposed so the Node bridge + tests speak the same seal
+  onMessage(fn) { _hood.onmsg = fn; },
+  id() { return _hood.id; },
+  log() { return _hood.log; }
+};
+// QR pairing button in the header + auto-join when arriving via ?peer=…
+(function () {
+  function bow(x, y, c) { const s = 3.2; return '<path d="M' + (x - s) + ',' + (y - s) + ' L' + x + ',' + y + ' L' + (x - s) + ',' + (y + s) + ' Z M' + (x + s) + ',' + (y - s) + ' L' + x + ',' + y + ' L' + (x + s) + ',' + (y + s) + ' Z" fill="' + c + '"/>'; }
+  // The "kited" mark: the Microsoft 4-colour logo turned on point and stretched at the bottom
+  // into a real kite — red/green/yellow/blue panels, white spars, a little bow tail. Shown when
+  // a vtwin is actively kited (hosting); sways gently like a kite in the wind.
+  function kiteMark(size) {
+    size = size || 60;
+    if (!document.getElementById('kite-kf')) { const s = document.createElement('style'); s.id = 'kite-kf';
+      s.textContent = '@keyframes kiteSway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}.kite-mark{animation:kiteSway 3.4s ease-in-out infinite;transform-origin:50% 5%}'; document.head.appendChild(s); }
+    return '<svg class="kite-mark" viewBox="0 0 100 134" width="' + size + '" height="' + Math.round(size * 1.34) + '" style="filter:drop-shadow(0 3px 7px rgba(0,0,0,.45))">'
+      + '<polygon points="50,6 10,40 50,40" fill="#e07a5f"/>'
+      + '<polygon points="50,6 90,40 50,40" fill="#81b29a"/>'
+      + '<polygon points="50,98 90,40 50,40" fill="#f2cc8f"/>'
+      + '<polygon points="50,98 10,40 50,40" fill="#3d5a80"/>'
+      + '<polygon points="50,6 90,40 50,98 10,40" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/>'
+      + '<line x1="50" y1="6" x2="50" y2="98" stroke="#fff" stroke-width="2.2"/>'
+      + '<line x1="10" y1="40" x2="90" y2="40" stroke="#fff" stroke-width="2.2"/>'
+      + '<path d="M50,98 Q58,108 52,116 Q46,124 54,131" fill="none" stroke="#8b949e" stroke-width="1.4" stroke-linecap="round"/>'
+      + bow(54, 109, '#e07a5f') + bow(50, 117, '#81b29a') + bow(55, 127, '#f2cc8f')
+      + '</svg>';
+  }
+  async function showQR(info) {
+    // A kited twin that's hosting shows its JOIN link as a scannable QR — anyone who scans
+    // joins this kited neighborhood (sealed). Multiplayer = whoever joins. QR is rendered
+    // entirely client-side (no third party sees the token).
+    const link = info.op_link || info.link;
+    let o = document.getElementById('hood-qr');
+    if (!o) { o = document.createElement('div'); o.id = 'hood-qr';
+      o.style.cssText = 'position:fixed;right:16px;top:60px;z-index:9500;background:#161b22;border:1px solid #30363d;border-radius:12px;padding:16px;text-align:center;box-shadow:0 16px 50px rgba(0,0,0,.5);font:12px -apple-system,sans-serif;color:#e6edf3;max-width:260px';
+      document.body.appendChild(o); }
+    o.innerHTML = '<div style="margin-bottom:6px;line-height:0">' + kiteMark(58) + '</div>'
+      + '<div style="font-weight:700;margin-bottom:2px;font-size:14px">Kited — scan to join</div>'
+      + '<div style="color:#8b949e;margin-bottom:10px">this kited neighborhood · 🔒 sealed</div>'
+      + '<div id="hood-qr-img" style="background:#fff;border-radius:8px;padding:8px;display:inline-block;min-width:190px;min-height:190px;line-height:0"></div>'
+      + '<div id="hood-peers" style="margin-top:10px;color:#3fb950;font-weight:600">neighbors: ' + window.rapp.neighborhood.peers().length + '</div>'
+      + '<div style="margin-top:8px"><button id="hood-copy" style="background:#21262d;border:1px solid #30363d;color:#8b949e;border-radius:6px;padding:4px 12px;cursor:pointer;margin-right:6px">copy link</button>'
+      + '<button id="hood-close" style="background:#21262d;border:1px solid #30363d;color:#8b949e;border-radius:6px;padding:4px 12px;cursor:pointer">close</button></div>';
+    o.querySelector('#hood-copy').onclick = () => { navigator.clipboard.writeText(link); };
+    o.querySelector('#hood-close').onclick = () => { if (o._iv) clearInterval(o._iv); o.remove(); };
+    try {
+      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js');
+      const qr = qrcode(0, 'M'); qr.addData(link); qr.make();
+      o.querySelector('#hood-qr-img').innerHTML = qr.createImgTag(5, 0);
+      const img = o.querySelector('#hood-qr-img img'); if (img) { img.style.width = '190px'; img.style.height = '190px'; img.style.imageRendering = 'pixelated'; }
+    } catch (e) {  // fallback: third-party renderer if the lib CDN is unreachable
+      o.querySelector('#hood-qr-img').innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=8&data=' + encodeURIComponent(link) + '" width="190" height="190">';
+    }
+    if (o._iv) clearInterval(o._iv);   // live multiplayer membership count
+    o._iv = setInterval(() => { const el = document.getElementById('hood-peers'); if (!el) { clearInterval(o._iv); return; } el.textContent = 'neighbors: ' + window.rapp.neighborhood.peers().length; }, 1500);
+  }
+  function addBtn() {
+    const c = document.querySelector('header .controls'); if (!c || document.getElementById('hood-btn')) return;
+    const b = document.createElement('button'); b.id = 'hood-btn'; b.className = 'icon-btn'; b.title = 'Neighborhood — host a WebRTC line (QR to pair)';
+    b.innerHTML = '<span class="icon" style="font-size:14px">🏘</span>';
+    b.onclick = async () => { try { showQR(await window.rapp.neighborhood.host()); } catch (e) { alert('Neighborhood error: ' + e.message); } };
+    c.insertBefore(b, c.firstChild);
+  }
+  window.addEventListener('load', () => {
+    setTimeout(addBtn, 200);
+    const params = new URLSearchParams(location.search);
+    const peer = params.get('peer');
+    if (peer) setTimeout(() => dialPanel(peer, params.get('op') || ''), 1200);
+  });
+  // "Dial" panel — arrive via ?peer=…&op=… (e.g. by scanning a QR) and get a sealed chat
+  // box wired straight to that neighbor (the door). This is how a phone dials a brainstem
+  // across the network: join the kited neighborhood, talk end-to-end encrypted.
+  function dialPanel(peer, op) {
+    if (document.getElementById('dial-panel')) return;
+    const w = document.createElement('div'); w.id = 'dial-panel';
+    w.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99999;margin:0 auto;max-width:520px;background:#0d1117;border:1px solid #30363d;border-radius:14px 14px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.6);font:15px -apple-system,BlinkMacSystemFont,sans-serif;color:#e6edf3;display:flex;flex-direction:column;max-height:72vh';
+    w.innerHTML =
+      '<div style="padding:11px 14px;border-bottom:1px solid #21262d;font-weight:600">🪁 kited neighborhood'
+      + '<span id="dial-status" style="float:right;font-weight:400;color:#8b949e;font-size:12px">connecting…</span></div>'
+      + '<div id="dial-msgs" style="flex:1;overflow:auto;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-height:120px"></div>'
+      + '<div style="display:flex;gap:8px;padding:10px 12px;border-top:1px solid #21262d">'
+      + '<input id="dial-in" placeholder="message your brainstem…" autocomplete="off" enterkeyhint="send" '
+      + 'style="flex:1;background:#161b22;border:1px solid #30363d;border-radius:8px;color:#e6edf3;padding:11px 12px;font-size:16px">'
+      + '<button id="dial-send" style="background:#238636;border:0;color:#fff;border-radius:8px;padding:0 16px;font-weight:600;font-size:15px">Send</button></div>';
+    document.body.appendChild(w);
+    const msgs = w.querySelector('#dial-msgs'), inp = w.querySelector('#dial-in'),
+          send = w.querySelector('#dial-send'), st = w.querySelector('#dial-status');
+    const bubble = (who, text) => { const d = document.createElement('div');
+      d.style.cssText = 'max-width:86%;padding:8px 11px;border-radius:10px;white-space:pre-wrap;word-break:break-word;font-size:15px;'
+        + (who === 'me' ? 'align-self:flex-end;background:#1f6feb;color:#fff' : who === 'them' ? 'align-self:flex-start;background:#161b22;border:1px solid #30363d' : 'align-self:center;color:#8b949e;font-size:12px');
+      d.textContent = text; msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight; return d; };
+    bubble('sys', op ? '🔒 sealed channel — end-to-end encrypted (AES-256-GCM)' : 'plaintext channel');
+    window.rapp.neighborhood.join(peer).then(() => { st.textContent = op ? '🔒 connected' : 'connected'; })
+      .catch(e => { st.textContent = 'connect failed'; bubble('sys', 'connect failed: ' + (e && e.message || e)); });
+    async function go() {
+      const text = inp.value.trim(); if (!text) return; inp.value = '';
+      bubble('me', text); const pend = bubble('sys', '…');
+      try { const r = await window.rapp.neighborhood.ask(peer, text, op || undefined);
+        pend.remove();
+        const resp = (r && r.response && (r.response.response !== undefined ? r.response.response : JSON.stringify(r.response)));
+        bubble('them', resp !== undefined ? resp : JSON.stringify(r));
+      } catch (e) { pend.remove(); bubble('sys', 'error: ' + (e && e.message || e)); }
+    }
+    send.onclick = go; inp.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+
+    // Hands-free (voice + gesture): raise your hand → mic ON (twin listening); lower your hand →
+    // mic OFF + send the utterance; the reply is spoken. For on-the-go / eyes-off use.
+    let hf = null;
+    const hfBtn = document.createElement('button');
+    hfBtn.id = 'dial-hf'; hfBtn.textContent = '✋🎤'; hfBtn.title = 'Hands-free — raise your hand to talk, lower to send';
+    hfBtn.style.cssText = 'background:#21262d;border:1px solid #30363d;color:#e6edf3;border-radius:8px;padding:0 12px;font-size:16px';
+    send.parentElement.insertBefore(hfBtn, send);
+    hfBtn.onclick = async () => {
+      if (hf) { hf.stop(); hf = null; hfBtn.style.background = '#21262d'; st.textContent = op ? '🔒 connected' : 'connected'; return; }
+      try {
+        hf = await startHandsFree({ status: st, onUtterance: async (text) => {
+          bubble('me', text + '  🎤'); const pend = bubble('sys', '…');
+          try { const r = await window.rapp.neighborhood.ask(peer, text, op || undefined); pend.remove();
+            const resp = (r && r.response && (r.response.response !== undefined ? r.response.response : JSON.stringify(r.response)));
+            bubble('them', resp !== undefined ? resp : JSON.stringify(r)); if (resp) speak(resp);
+          } catch (e) { pend.remove(); bubble('sys', 'error: ' + (e && e.message || e)); } } });
+        hfBtn.style.background = '#238636';
+      } catch (e) { hf = null; bubble('sys', 'hands-free unavailable: ' + (e && e.message || e)); }
+    };
+    try { inp.focus(); } catch (_) {}
+  }
+  function speak(text) { try { const u = new SpeechSynthesisUtterance(String(text)); u.rate = 1.05; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (_) {} }
+  function loadScript(src) { return new Promise((res, rej) => { if ([].slice.call(document.scripts).some(s => s.src === src)) return res();
+    const s = document.createElement('script'); s.src = src; s.crossOrigin = 'anonymous'; s.onload = () => res(); s.onerror = () => rej(new Error('failed to load ' + src)); document.head.appendChild(s); }); }
+  // Gesture-gated push-to-talk: MediaPipe Hands gates the Web Speech mic. Hand visible → listen;
+  // hand gone (>0.5s) → stop + send. Best on Chrome/Android desktop or mobile; iOS Safari lacks SpeechRecognition.
+  async function startHandsFree({ status, onUtterance }) {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) throw new Error('no SpeechRecognition (use Chrome / Android)');
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('no camera API');
+    const video = document.createElement('video'); video.autoplay = true; video.playsInline = true; video.muted = true;
+    video.style.cssText = 'position:fixed;right:10px;top:10px;width:120px;height:90px;border-radius:8px;border:2px solid #30363d;object-fit:cover;z-index:100000;transform:scaleX(-1)';
+    document.body.appendChild(video);
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+    video.srcObject = stream;
+    await loadScript('https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js');
+    const hands = new Hands({ locateFile: f => 'https://cdn.jsdelivr.net/npm/@mediapipe/hands/' + f });
+    hands.setOptions({ maxNumHands: 1, modelComplexity: 0, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
+    let handPresent = false, lastSeen = 0;
+    hands.onResults(r => { const now = Date.now();
+      if (r.multiHandLandmarks && r.multiHandLandmarks.length) { handPresent = true; lastSeen = now; }
+      else if (now - lastSeen > 500) handPresent = false; });
+    let running = true;
+    const pump = async () => { if (!running) return; try { await hands.send({ image: video }); } catch (_) {} if (running) requestAnimationFrame(pump); };
+    video.onloadeddata = () => pump();
+    let rec = null, listening = false, transcript = '';
+    const startListen = () => { if (listening) return; listening = true; transcript = ''; status.textContent = '🎤 listening…';
+      rec = new SR(); rec.continuous = true; rec.interimResults = true; rec.lang = 'en-US';
+      rec.onresult = e => { let t = ''; for (let i = e.resultIndex; i < e.results.length; i++) t += e.results[i][0].transcript; transcript = t; status.textContent = '🎤 ' + t.slice(-42); };
+      rec.onend = () => { if (listening) { try { rec.start(); } catch (_) {} } };
+      try { rec.start(); } catch (_) {} };
+    const stopListen = () => { if (!listening) return; listening = false; status.textContent = '✋ raise hand to talk';
+      try { rec.onend = null; rec.stop(); } catch (_) {} const t = (transcript || '').trim(); transcript = ''; if (t) onUtterance(t); };
+    const gate = setInterval(() => { if (handPresent && !listening) startListen(); else if (!handPresent && listening) stopListen(); }, 200);
+    status.textContent = '✋ raise hand to talk';
+    return { stop() { running = false; clearInterval(gate); listening = false; try { rec && (rec.onend = null, rec.stop()); } catch (_) {} try { stream.getTracks().forEach(t => t.stop()); } catch (_) {} try { hands.close(); } catch (_) {} try { video.remove(); } catch (_) {} } };
+  }
+})();
+
+// ── Landing page (mirrors rapp-installer) — boot terminal + launch ──
 (async function init() {
-  // Handle OAuth callback if present
+  // Seed the voice settings panel from localStorage and reflect the mic button state.
+  try { _voiceInitPanel(); } catch (_) {}
+  // Note: voice mode always starts OFF on load (no autoplay/dictation without a user gesture).
+  try { updateVoiceBtn(); } catch (_) {}
+
+  // Device-code flow needs no redirect callback; handleAuthCallback is a no-op.
   await handleAuthCallback();
 
-  // Check existing token
+  // Restored a durable ghu_ token? Verify it, then load the Copilot catalog
+  // (fetchModels() exchanges for a Copilot token and sets usingCopilot, or falls back).
   if (chatToken) {
-    await fetchGHUser();
-    fetchModels(); // non-blocking — populates dropdown in background
+    fetchGHUser();      // non-blocking — username pill
+    fetchModels();      // non-blocking — primary Copilot catalog (fallback to public)
   }
   updateGHPill();
+
+  // Sign-in is optional: show the dismissible login card only when not signed in.
+  showLoginIfNeeded();
 
   // Restore agents from VFS (persisted across sessions)
   restoreVFSAgents();
@@ -4597,8 +7126,15 @@ async function applySummonDeepLink() {
   // Load registry for agent dropdown — await so summon can validate
   await loadRegistryForChat();
 
-  // Apply summon deep-link (?agent=@pub/slug) if present
+  // Apply summon deep-link (?agent=@pub/slug) if present — opens straight into chat.
   await applySummonDeepLink();
+
+  // Warm CPython in the background so the first agent run is instant.
+  ensurePyodide().catch(() => {});
+
+  // Focus the input if we're signed in and ready.
+  const inp = document.getElementById('chatInput');
+  if (inp && !inp.disabled) setTimeout(() => inp.focus(), 60);
 })();
 
 </script>
