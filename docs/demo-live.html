@@ -8,7 +8,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;--text:#e6edf3;--dim:#8b949e;--accent:#58a6ff;--green:#39d353;--purple:#d2a8ff;--orange:#f0883e;--yellow:#e3b341;--red:#f85149;--n8n:#ff6d5a}
 html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
-.app{display:grid;grid-template-rows:auto 1fr;height:100%}
+.app{display:grid;grid-template-rows:auto auto auto 1fr;height:100%;min-height:0}
 .toolbar{display:flex;align-items:center;gap:16px;padding:12px 24px;background:var(--surface);border-bottom:1px solid var(--border)}
 .toolbar h1{font-size:1.1rem;font-weight:700}
 .toolbar .tag{font-size:.75rem;padding:3px 10px;border-radius:12px;font-weight:600}
@@ -30,6 +30,10 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .panel:last-child{border:none}
 .panel-header{padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;font-weight:600;font-size:.9rem}
 .panel-body{flex:1;overflow:auto;padding:20px}
+/* split mode: code scrolls in its own region so the terminal stays pinned in view */
+.panel-body.split{display:flex;flex-direction:column;overflow:hidden}
+.panel-body.split .code{flex:1 1 auto;overflow:auto;min-height:0}
+.panel-body.split .terminal{flex:0 0 auto}
 
 /* n8n canvas */
 .n8n-canvas{position:relative;width:100%;height:100%;min-height:500px;background:radial-gradient(circle at 50% 50%,#1a1f2a,var(--bg));overflow:hidden}
@@ -54,7 +58,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 .code .cls{color:var(--green)}
 
 /* Terminal */
-.terminal{background:#000;border-radius:8px;padding:16px;font-family:'SF Mono',monospace;font-size:.8rem;line-height:1.6;color:var(--green);margin-top:16px;min-height:120px;max-height:200px;overflow:auto}
+.terminal{background:#000;border-radius:8px;padding:16px;font-family:'SF Mono',monospace;font-size:.8rem;line-height:1.6;color:var(--green);margin-top:16px;min-height:120px;max-height:200px;overflow:auto;white-space:pre-wrap}
 .terminal .prompt{color:var(--accent)}
 .terminal .output{color:var(--dim)}
 
@@ -93,7 +97,7 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 
 <div class="app">
   <div class="toolbar">
-    <h1>⚡ RAPP Transpiler Demo</h1>
+    <h1>RAPP Transpiler Demo</h1>
     <span class="tag tag-n8n">n8n</span>
     <span class="tag tag-rapp">→ RAPP</span>
     <span class="tag tag-mcs">→ Copilot Studio</span>
@@ -130,12 +134,12 @@ html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFo
 
     <div class="result-overlay" id="resultOverlay">
       <div class="result-card">
-        <h2>✅ Transpilation Complete</h2>
+        <h2>Transpilation Complete</h2>
         <p>36-node n8n workflow → single RAPP agent → Copilot Studio skill</p>
         <div class="result-stats">
           <div class="result-stat"><span class="num" style="color:var(--n8n)">36</span><span class="lbl">n8n Nodes</span></div>
           <div class="result-stat"><span class="num" style="color:var(--accent)">1</span><span class="lbl">RAPP File</span></div>
-          <div class="result-stat"><span class="num" style="color:var(--green)">200</span><span class="lbl">Lines</span></div>
+          <div class="result-stat"><span class="num" style="color:var(--green)">269</span><span class="lbl">Lines</span></div>
           <div class="result-stat"><span class="num" style="color:var(--purple)">1</span><span class="lbl">MCS Skill</span></div>
         </div>
         <div class="test-grid">
@@ -337,7 +341,7 @@ N8N_NODES.forEach((n, i) => {
   el.textContent = n.name;
   canvas.appendChild(el);
 });
-canvas.innerHTML += `<div class="n8n-stats" id="canvasStats">26 nodes · 22 connections · Microsoft Outlook + AI Agent + Switch Routing</div>`;
+canvas.innerHTML += `<div class="n8n-stats" id="canvasStats">36 nodes · 34 connections · Microsoft Outlook + AI Agent + Switch Routing <span style="opacity:.6">(simplified view)</span></div>`;
 
 // ── Demo Logic ──────────────────────────────────────────
 let running = false;
@@ -388,7 +392,7 @@ async function startDemo() {
 
   await termLine('<span class="prompt">$</span> rapp transpile n8n_outlook_email_categorizer.json');
   await termLine('');
-  await termLine('<span class="output">⏳ Parsing n8n workflow...</span>');
+  await termLine('<span class="output">Parsing n8n workflow...</span>');
   setProgress(20);
 
   // Highlight nodes sequentially
@@ -400,14 +404,14 @@ async function startDemo() {
   }
 
   await termLine(`<span class="output">  Found 26 functional nodes:</span>`);
-  await termLine(`<span class="output">    📧 Outlook nodes ×12 (inbox, folders, move)</span>`, 100);
-  await termLine(`<span class="output">    🤖 AI Agent ×1 (Ollama categorizer)</span>`, 100);
-  await termLine(`<span class="output">    🔀 Logic nodes ×8 (switch, filter, loop, merge)</span>`, 100);
-  await termLine(`<span class="output">    📦 Data nodes ×5 (parse, extract, set)</span>`, 100);
+  await termLine(`<span class="output">    Outlook nodes ×13 (inbox, folders, move)</span>`, 100);
+  await termLine(`<span class="output">    AI nodes    ×2  (Agent + Ollama model)</span>`, 100);
+  await termLine(`<span class="output">    Logic nodes ×6  (trigger, filter, loop, if, switch, merge)</span>`, 100);
+  await termLine(`<span class="output">    Data nodes  ×5  (set ×4, markdown)</span>`, 100);
   setProgress(35);
   await sleep(300);
 
-  await termLine(`<span class="output">  Connections: 26 edges mapped</span>`);
+  await termLine(`<span class="output">  Connections: 34 edges mapped</span>`);
   await termLine(`<span class="output">  Categories: sales, support, billing, internal, spam, other</span>`);
   await termLine('');
   setProgress(42);
@@ -415,20 +419,21 @@ async function startDemo() {
   // STEP 2: Transpile to RAPP
   setStepActive(2);
   setStatus('Transpiling to RAPP agent...');
-  await termLine('<span class="output">⚡ Transpiling to single-file RAPP agent...</span>');
-  await termLine('<span class="output">  Collapsing 12 Outlook nodes → Graph API calls</span>', 200);
+  await termLine('<span class="output">Transpiling to single-file RAPP agent...</span>');
+  await termLine('<span class="output">  Collapsing 13 Outlook nodes → Graph API calls</span>', 200);
   await termLine('<span class="output">  Collapsing AI Agent + Ollama → Azure OpenAI call</span>', 200);
   await termLine('<span class="output">  Collapsing Switch(6) → category dict lookup</span>', 200);
   await termLine('<span class="output">  Collapsing Loop + Merge → for loop</span>', 200);
   setProgress(55);
 
   await termLine('');
-  await termLine('<span style="color:#39d353">  ✓ outlook_email_categorizer_agent.py (200 lines)</span>');
+  await termLine('<span style="color:#39d353">  ✓ outlook_email_categorizer_agent.py (269 lines)</span>');
   await sleep(500);
 
   // Show RAPP code on right
   document.getElementById('rightHeader').innerHTML = '<span style="color:var(--accent)">●</span> RAPP Agent — outlook_email_categorizer_agent.py';
   rightPanel.innerHTML = `<div class="code" id="codeBlock" style="opacity:0;transition:opacity .5s"></div><div class="terminal" id="term2" style="margin-top:16px"></div>`;
+  rightPanel.classList.add('split');
   const codeBlock = document.getElementById('codeBlock');
   codeBlock.innerHTML = RAPP_CODE;
   await sleep(100);
@@ -490,7 +495,7 @@ async function startDemo() {
 
   // STEP 6: Done
   setStepActive(6);
-  setStatus('✅ Complete');
+  setStatus('Complete');
   setProgress(100);
   document.querySelectorAll('.step-dot').forEach(d => { d.classList.remove('active'); d.classList.add('done'); });
 
@@ -512,6 +517,7 @@ function resetDemo() {
   document.getElementById('resultOverlay').classList.remove('show');
   document.getElementById('leftHeader').innerHTML = '<span style="color:var(--n8n)">●</span> n8n Workflow — 36 nodes';
   document.getElementById('rightHeader').innerHTML = '<span style="color:var(--dim)">●</span> Output';
+  document.getElementById('rightPanel').classList.remove('split');
   document.getElementById('rightPanel').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--dim)"><p style="text-align:center;font-size:1.1rem">Press <strong style="color:var(--accent)">▶ Run Demo</strong> to start the transpilation</p></div>';
 }
 </script>
