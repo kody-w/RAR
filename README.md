@@ -124,6 +124,50 @@ All four produce the same card. Lossless. Offline. Permanent.
 
 ---
 
+## Run RAR headless
+
+RAR is consumable as a static, read-only API. Every endpoint is a plain JSON
+file on a CDN — no server, no key, no rate limit, CORS open to everyone. This is
+how host applications embed the registry without sending anyone to GitHub.
+
+Start at **[manifest.json](https://raw.githubusercontent.com/kody-w/RAR/main/manifest.json)**;
+it names every other endpoint, so one URL is the only thing worth hardcoding.
+
+| Endpoint | What it is for |
+|----------|----------------|
+| `manifest.json` | Discovery root. Start here. |
+| `api/v1/catalog.json` | Every agent as a lean record — one fetch renders a whole catalog |
+| `api/v1/audience/business.json` | Pre-curated enterprise slice, safe to surface unfiltered |
+| `api/v1/audience/consumer.json` | Pre-curated individual slice |
+| `api/v1/audience/map.json` | Just the audience verdict per agent (~14KB) if you already hold the catalog |
+| `api/v1/match.json` | Use case → ranked agents, plus a term index for free-text search you run client-side |
+| `api/v1/taxonomy.json` | Categories, tags and publishers with counts |
+| `api/v1/status.json` | Content hashes per endpoint, for cheap change detection |
+
+```bash
+# The curated enterprise catalog, ready to render
+curl -s https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json
+
+# Installing an agent is one request — the response body is the whole package
+curl -s https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py
+```
+
+**[discover.html](https://kody-w.github.io/RAR/discover.html)** is this API with a
+face on it: search, recommend and copy an install command without a GitHub
+account. It is the reference implementation for embedding RAR elsewhere.
+
+Those agent URLs are permanent. See
+[Article XXIII](CONSTITUTION.md#article-xxiii--the-permanent-url-contract) — a
+published agent path is a public contract and is never renamed, moved or
+deleted. `scripts/check_url_stability.py` enforces it in CI on every push.
+
+For how RAR answers specific enterprise-adoption requirements — consumption,
+trust, curation, integration, economics — see
+**[docs/FIELD-REQUIREMENTS.md](docs/FIELD-REQUIREMENTS.md)**, which states what is
+solved, what is partly solved, and what is deliberately not claimed.
+
+---
+
 ## For AI Agents
 
 Read **[api.json](https://raw.githubusercontent.com/kody-w/RAR/main/api.json)** —

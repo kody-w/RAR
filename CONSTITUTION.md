@@ -887,4 +887,87 @@ The spirit of this document is **simplicity**. If an amendment adds complexity, 
 
 ---
 
-*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. Amended 2026-05-25 to add Article XXI — the Kited Neighborhood (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**, and the **kite mark**), specified in [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md). The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent. The twin is kited; the line is sealed; scan to join.*
+## Article XXIII — The Permanent URL Contract
+
+A published agent path is a public contract. It is not an implementation
+detail, it is not ours to tidy, and it is not subject to refactoring taste.
+
+People install agents by URL. Those URLs end up in other people's brainstems,
+scripts, notebooks, container builds, product code and documentation — places
+we cannot see, cannot enumerate, and cannot migrate. A rename that looks
+harmless here is a silent 404 on a stranger's machine, and they will not know
+we caused it. npm learned this the expensive way; we do not need to learn it
+again.
+
+### What is frozen
+
+Once an agent file has been pushed to `main`, these are permanent:
+
+| Surface | Example |
+|---------|---------|
+| Repository path | `agents/@publisher/thing_agent.py` |
+| Raw URL | `https://raw.githubusercontent.com/kody-w/RAR/main/agents/@publisher/thing_agent.py` |
+| CDN URL | `https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@publisher/thing_agent.py` |
+| Manifest `name` | `@publisher/thing_agent` — the callable tool ID |
+| Registry `_file` | the path callers resolve through `registry.json` |
+
+The manifest `name` is frozen for the same reason as the path: it is how a
+brainstem addresses the agent at call time. Changing it breaks callers exactly
+as thoroughly as moving the file, and more confusingly.
+
+### Forbidden
+
+- Renaming a published agent file
+- Moving it to a different directory, publisher or namespace
+- Deleting it
+- Changing only its capitalisation — some filesystems hide this locally and
+  the CDN does not
+- Changing the manifest `name` of a published agent
+
+None of these become acceptable because the agent is old, unpopular,
+embarrassing, superseded, or believed to be unused. We cannot measure who
+depends on a static file. Absence of evidence of use is not evidence of
+absence of use.
+
+### Permitted
+
+- **Adding** a new agent at a new path. Always.
+- **Editing in place.** Fix bugs, improve behaviour, bump the version. The URL
+  keeps resolving, which is the entire promise. This is how agents are
+  maintained and it must never be discouraged.
+- **Deprecating.** Mark it in the manifest and say what to use instead. A
+  deprecated agent still resolves. Deprecation is a label, never a deletion.
+- **Superseding.** Publish the successor at a new path and point the old one at
+  it. Both keep working.
+
+### Enforcement
+
+`state/published_paths.json` is an append-only ledger of every path that has
+been published on `main`, recorded with its manifest name. Removing an entry
+from that ledger *is* the forbidden act — the ledger is the promise made
+durable, not a cache of the current directory listing.
+
+`scripts/check_url_stability.py` verifies that every recorded path still
+resolves and still carries the same manifest name. It parses files with `ast`
+and never imports or executes them. It runs as the first job in CI, and the
+rest of the suite depends on it, so a change that breaks a published URL cannot
+merge on a green build. When a file has moved, the checker reports where it
+went, so the correct fix — put it back — is obvious.
+
+New agents are appended to the ledger automatically when they land on `main`.
+Publishing is therefore free and irreversible, which is the correct asymmetry:
+easy to add, impossible to quietly take away.
+
+### Why this is constitutional rather than a policy
+
+A policy is advice and erodes under deadline pressure. This is the property
+that makes RAR usable as infrastructure instead of as a website: a host
+application can hardcode a URL and walk away. Every other guarantee in this
+document is downstream of it, because an agent no one can fetch is not an
+agent. If a future change cannot be made without breaking a published URL, the
+change is wrong — not the contract.
+
+The path is a promise.
+---
+
+*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. Amended 2026-05-25 to add Article XXI — the Kited Neighborhood (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**, and the **kite mark**), specified in [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md). The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent. The twin is kited; the line is sealed; scan to join. Amended 2026-08-02 to add Article XXIII — the Permanent URL Contract, enforced by `state/published_paths.json` and `scripts/check_url_stability.py`. The path is a promise.*
