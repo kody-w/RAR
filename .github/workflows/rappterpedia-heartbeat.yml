@@ -56,14 +56,18 @@ jobs:
           python-version: '3.11'
 
       - name: "Stream ${{ matrix.stream }}: produce delta"
+        # `ticks` is an untyped workflow_dispatch input — operator free text.
+        # Interpolated straight into the shell it was an injection vector, so
+        # every value now arrives through env and is quoted at use.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FRAME: ${{ needs.get-frame.outputs.frame }}
+          TICKS: ${{ github.event.inputs.ticks || '3' }}
+          STREAM: ${{ matrix.stream }}
         run: |
-          FRAME="${{ needs.get-frame.outputs.frame }}"
-          TICKS="${{ github.event.inputs.ticks || '3' }}"
-          echo "Stream ${{ matrix.stream }}: producing delta for frame ${FRAME}, ${TICKS} ticks"
+          echo "Stream ${STREAM}: producing delta for frame ${FRAME}, ${TICKS} ticks"
           python rappterpedia/dream_catcher.py produce \
-            --stream "${{ matrix.stream }}" \
+            --stream "$STREAM" \
             --frame "$FRAME" \
             --ticks "$TICKS"
 

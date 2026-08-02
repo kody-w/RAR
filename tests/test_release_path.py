@@ -177,6 +177,33 @@ def test_no_workflow_evaluates_an_empty_expression_in_a_run_body():
     assert not offenders, f"empty ${{{{ }}}} expression in a run body: {offenders}"
 
 
+def test_no_workflow_splices_an_operator_input_into_a_shell_body():
+    """workflow_dispatch inputs are free text typed by whoever runs the
+    workflow. Interpolated into a `run:` body they are spliced into the
+    command line before the shell ever sees a quote, so a crafted value
+    executes on the runner. They have to arrive through `env:` and be quoted
+    at the point of use.
+
+    Deliberately narrow: `github.repository`, `matrix.*` and `needs.*` are
+    workflow-defined and interpolate harmlessly, so flagging every expression
+    would be noise nobody acts on."""
+    import re
+
+    import yaml
+
+    dangerous = re.compile(r"\$\{\{[^}]*\binputs\.", re.S)
+    offenders = []
+    for wf in sorted((REPO_ROOT / ".github" / "workflows").glob("*.yml")):
+        doc = yaml.safe_load(wf.read_text()) or {}
+        for jname, job in (doc.get("jobs") or {}).items():
+            for step in (job.get("steps") or []):
+                bodies = [step.get("run"), (step.get("with") or {}).get("script")]
+                for body in bodies:
+                    if isinstance(body, str) and dangerous.search(body):
+                        offenders.append(f"{wf.name}::{jname}::{step.get('name')}")
+    assert not offenders, f"dispatch input interpolated into a run body: {offenders}"
+
+
 def test_computed_tag_is_not_interpolated_into_shell():
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
     for line in src.splitlines():
