@@ -22,17 +22,59 @@ jobs:
       - name: Install test deps
         run: pip install pytest pyyaml
 
+      # Snapshot BEFORE anything can rewrite it. The test suite itself runs
+      # build_registry.py, so from the next step onward registry.json is a
+      # freshly built file, not the one that is committed and served.
+      - name: Snapshot the committed registry
+        run: cp registry.json /tmp/registry.committed.json
+
+      # `shell: bash` is what turns on pipefail. Without it the default is
+      # `bash -e` with NO pipefail, so `pytest | tee` exited with TEE's status
+      # — always 0. The full test suite, this check's headline, could not fail
+      # the workflow; PIPESTATUS was captured into an output nothing read.
       - name: Full test suite
-        id: tests
-        run: |
-          pytest -v --tb=short 2>&1 | tee /tmp/test_output.txt
-          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+        shell: bash
+        run: pytest -v --tb=short 2>&1 | tee /tmp/test_output.txt
 
       - name: Rebuild registry (integrity check)
-        id: build
+        shell: bash
+        run: python build_registry.py 2>&1 | tee -a /tmp/test_output.txt
+
+      # registry.json is what consumers actually fetch — the brainstem, the
+      # store and every federated instance read the COMMITTED file. Every
+      # workflow rebuilds it before validating, so a stale committed registry
+      # was structurally invisible: CI only ever checked a file it had just
+      # regenerated. This is nightly rather than per-push on purpose —
+      # build-registry.yml commits the rebuild moments after an agent push, and
+      # a gate that races that bot would be red for a reason nobody can act on.
+      - name: Committed registry matches agents/
+        shell: bash
         run: |
-          python build_registry.py 2>&1 | tee -a /tmp/test_output.txt
-          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+          python - <<'PY' 2>&1 | tee -a /tmp/test_output.txt
+          import json, sys
+          a = json.load(open('/tmp/registry.committed.json'))
+          b = json.load(open('registry.json'))
+          # A build timestamp differs on every run by design.
+          a.pop('generated_at', None); b.pop('generated_at', None)
+          if a == b:
+              print('OK registry.json is in sync with agents/')
+              sys.exit(0)
+          print('FAIL registry.json is stale - run build_registry.py and commit')
+          for k in sorted(set(a) | set(b)):
+              av, bv = a.get(k), b.get(k)
+              if av == bv:
+                  continue
+              if isinstance(av, list) and isinstance(bv, list):
+                  na = {x.get('name') for x in av if isinstance(x, dict)}
+                  nb = {x.get('name') for x in bv if isinstance(x, dict)}
+                  print(f'  {k}: committed={len(av)} rebuilt={len(bv)}')
+                  if na - nb: print(f'    only in committed: {sorted(na - nb)[:10]}')
+                  if nb - na: print(f'    only in rebuilt:   {sorted(nb - na)[:10]}')
+              else:
+                  print(f'  {k}: committed={str(av)[:200]}')
+                  print(f'  {k}: rebuilt  ={str(bv)[:200]}')
+          sys.exit(1)
+          PY
 
       - name: SHA256 integrity audit
         run: |

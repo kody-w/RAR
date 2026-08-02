@@ -204,6 +204,53 @@ def test_no_workflow_splices_an_operator_input_into_a_shell_body():
     assert not offenders, f"dispatch input interpolated into a run body: {offenders}"
 
 
+def test_piped_run_steps_cannot_swallow_a_failure():
+    """GitHub's default shell for `run:` on Linux is `bash -e {0}` — with NO
+    pipefail. So `pytest ... | tee log` exits with TEE's status, which is
+    always 0, and the step passes however badly the command failed. Nightly's
+    headline step was exactly this shape: the full test suite could not fail
+    the health check, and the PIPESTATUS it captured was written to an output
+    nothing ever read.
+
+    Declaring `shell: bash` switches to `bash --noprofile --norc -eo pipefail`,
+    which is what makes the failure propagate. An explicit `set -o pipefail`
+    counts too.
+
+    Scoped to `| tee` specifically. Broadening it to every pipe flags
+    `find | head`, `ls | wc -l` and even a literal '|' inside a Python string
+    — and `set -o pipefail` on `find | head` would newly FAIL the step when
+    head closes the pipe early. A check that cries wolf gets switched off, so
+    this one only names the idiom that actually hides a failure: capturing a
+    command's log while discarding its exit status.
+    """
+    import re
+
+    import yaml
+
+    tee_pipe = re.compile(r"\|\s*tee\b")
+    offenders = []
+    for wf in sorted((REPO_ROOT / ".github" / "workflows").glob("*.yml")):
+        doc = yaml.safe_load(wf.read_text()) or {}
+        for jname, job in (doc.get("jobs") or {}).items():
+            for step in (job.get("steps") or []):
+                body = step.get("run")
+                if not isinstance(body, str) or not tee_pipe.search(body):
+                    continue
+                # Three ways to propagate the real status: pipefail via
+                # `shell: bash`, an explicit `set -o pipefail`, or reading
+                # PIPESTATUS and exiting with it by hand.
+                safe = (
+                    step.get("shell") == "bash"
+                    or "pipefail" in body
+                    or ("PIPESTATUS" in body and "exit" in body)
+                )
+                if not safe:
+                    offenders.append(f"{wf.name}::{jname}::{step.get('name')}")
+    assert not offenders, (
+        "`| tee` without pipefail — the command's failure exits 0: " f"{offenders}"
+    )
+
+
 def test_computed_tag_is_not_interpolated_into_shell():
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
     for line in src.splitlines():
