@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-02T01:30:35.950938+00:00",
+  "generated_at": "2026-08-02T01:46:12.131659+00:00",
   "stats": {
     "total_agents": 279,
     "total_swarms": 82,
@@ -5590,14 +5590,30 @@
       "_file": "agents/@cat-agent-skills/accessibility_pass_agent.py",
       "_install_filename": "rar_cat_agent_skills_accessibility_pass_agent.py",
       "_sha256": "78b164685399af6a913c512c893a064b71d4476f161bb1f868bf8cd03156ee76",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_7ae3eebce88c325742f10bb22ab4ed6fac6e5ad129a6139d27b8db99b9125772",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 9504038116777540819,
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5637,14 +5653,30 @@
       "_file": "agents/@cat-agent-skills/acroform_writer_agent.py",
       "_install_filename": "rar_cat_agent_skills_acroform_writer_agent.py",
       "_sha256": "40d2f38bf76d47a54b443ea70f777001ac77ae612979550aab56a5bf2147f8d4",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_3663c11889f9b41d96280b407a64e9d93a64e3112881adf6ea037ca64241429e",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 11477520274489491024,
       "_size_kb": 8.8,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5684,14 +5716,30 @@
       "_file": "agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
       "_install_filename": "rar_cat_agent_skills_agent_evaluation_designer_agent.py",
       "_sha256": "20b0e309fde16bdfc1a363d270e1aec083d9c00b1a1d7735edd30dff9d6000a2",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_6f0481e697989c02b21546d5800cc2dbe19aa0c00205b4a7e37941cf7fb5d6d5",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 10844162841117336458,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5734,14 +5782,30 @@
       "_file": "agents/@cat-agent-skills/agent_harness_explorer_agent.py",
       "_install_filename": "rar_cat_agent_skills_agent_harness_explorer_agent.py",
       "_sha256": "77aeeb418357389bf065c769985559925b8f7165557d4f2b63421baa21bcc4b7",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_e8187c2d821065af48d7326abe7fc5dcf773c795d41928954d6f1834616fd562",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 17177931939257792821,
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5782,14 +5846,30 @@
       "_file": "agents/@cat-agent-skills/ai_demo_assistant_agent.py",
       "_install_filename": "rar_cat_agent_skills_ai_demo_assistant_agent.py",
       "_sha256": "91fdd28e1096d53816d4397debef31b39e5539d37b57a29783db543dc51482d1",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_dffca4590a079dac66895c6c179d1cfeb710ceeb23e0a6183968edc5b32bf3c0",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 9040658266229318837,
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5828,14 +5908,30 @@
       "_file": "agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
       "_install_filename": "rar_cat_agent_skills_ai_first_process_redesign_agent.py",
       "_sha256": "e8d05f6872cfd6ed788e7486bf726503ad43e38a8aa6005a6449dcae017c0ada",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_803602584217ad2d14994ff028f384133a70d0c236bbdd1ac41b50b263d9764d",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 16381594575904849287,
       "_size_kb": 8.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5879,14 +5975,30 @@
       "_file": "agents/@cat-agent-skills/ai_usecase_assessment_agent.py",
       "_install_filename": "rar_cat_agent_skills_ai_usecase_assessment_agent.py",
       "_sha256": "b1c7ceb11b90cd8bd781cbfab3f8c914f11830d1ae2eb360f2aa3b68152fef67",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_b3ceaea7626a17edcd146aa30e90ac719ef77315f41e4faa256569867c1b6a6a",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 10924947176552414345,
       "_size_kb": 9.4,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5929,14 +6041,30 @@
       "_file": "agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
       "_install_filename": "rar_cat_agent_skills_anonymised_case_study_writer_agent.py",
       "_sha256": "acca33c8954fc23a9d6b76b4ab200a7bf5a076cd44c2200f1c42565e98f20361",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_ef266986e788aacf76f29911e7ad99e9215574a99cce27d7507c44bfa784c575",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 16539406066661473949,
       "_size_kb": 8.9,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5978,14 +6106,30 @@
       "_file": "agents/@cat-agent-skills/awaiting_reply_agent.py",
       "_install_filename": "rar_cat_agent_skills_awaiting_reply_agent.py",
       "_sha256": "fbd75b3e3e375301db703b7b0f2205c47d0a33f8b137b721c7380dfac54b5193",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_e6886d7928acbf076e9c6b3a2d0a2ad1efaaa7de0b35ee822bbbb51dbfbd9879",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 13614116300938687365,
       "_size_kb": 9.2,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6028,14 +6172,30 @@
       "_file": "agents/@cat-agent-skills/b2b_outreach_suite_agent.py",
       "_install_filename": "rar_cat_agent_skills_b2b_outreach_suite_agent.py",
       "_sha256": "dd2ff9fa0279217e4c73141b6680ecc31bb0dcf55b50f43d15f580b82452c119",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_b171ae303d962aad6f5562a43b3f443593102e1cd4cbd8129213660c72c28055",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 10254470509799157961,
       "_size_kb": 9.2,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6078,14 +6238,30 @@
       "_file": "agents/@cat-agent-skills/blog_content_auditor_agent.py",
       "_install_filename": "rar_cat_agent_skills_blog_content_auditor_agent.py",
       "_sha256": "ba98bc211f37593e39cd7bdcd7c53edd1db5e2484a9378500c897505f902b262",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_3000e79a3629052a2a5a09422c34bd2c4f9e2fb52412e27d60921328a6718d33",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 4868201021057018339,
       "_size_kb": 8.8,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6128,14 +6304,30 @@
       "_file": "agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
       "_install_filename": "rar_cat_agent_skills_blog_post_structure_pass_agent.py",
       "_sha256": "b337e49ea0b120fa4994304c114666c76182f2b76b6081e1c3d478d82ee4b5b5",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_7e01f683f50a0f35bfd3a4a4ccea09dd63b647de61d9e3b7d27d7ec06d17815d",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 8600030501833290801,
       "_size_kb": 8.9,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6176,14 +6368,30 @@
       "_file": "agents/@cat-agent-skills/brand_template_enforcer_agent.py",
       "_install_filename": "rar_cat_agent_skills_brand_template_enforcer_agent.py",
       "_sha256": "ae1779f176150087d15edf582f1193947f2b3df165ad863d53759e62dd1e9061",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_7886fb174d8388fbfd5f761175c901ff6c423c361eddf8a93ba022b939e57ea6",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 15714727124118812132,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6225,14 +6433,30 @@
       "_file": "agents/@cat-agent-skills/brand_voice_pass_agent.py",
       "_install_filename": "rar_cat_agent_skills_brand_voice_pass_agent.py",
       "_sha256": "3635849b3dcd5b55c5f9f9d6f3ec7e7a977033ca09ab57020fe9b172e8901cf4",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_db985eb149cc20ba90f0e00460f0e5715bdfc4515f0dfa3d340caeff234db6a0",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 17511070829000666516,
       "_size_kb": 8.8,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6274,14 +6498,30 @@
       "_file": "agents/@cat-agent-skills/business_os_agent.py",
       "_install_filename": "rar_cat_agent_skills_business_os_agent.py",
       "_sha256": "b455d3229e78336c3772968e71167a3aa49c2a131e16710432b069cef3bf77aa",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_0faf65433a085649ff342ecd1379816205a6d46b8dafea986dd4dcf152dac870",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 13964790072920126755,
       "_size_kb": 9.6,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6322,14 +6562,30 @@
       "_file": "agents/@cat-agent-skills/call_for_speakers_digest_agent.py",
       "_install_filename": "rar_cat_agent_skills_call_for_speakers_digest_agent.py",
       "_sha256": "a3e15016b7641d3e6b947d84b323b4343bdb427effe8afb6d280f09d53a39511",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_2873a7de2553f6e007871f2de0b869abad8d437d0dc4579b93c808b52914a18f",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 2919470167317029465,
       "_size_kb": 9.6,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6369,14 +6625,30 @@
       "_file": "agents/@cat-agent-skills/campaign_deck_builder_agent.py",
       "_install_filename": "rar_cat_agent_skills_campaign_deck_builder_agent.py",
       "_sha256": "9eaee36124c834b7c71a49853abb992be0a0ca4f7db6ab125621475019ee15de",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_fb88b7cb6a55acfe59cdb549750bc1014a20a65eff0e3f00877418ff9419796f",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 17775331859636040019,
       "_size_kb": 8.9,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6417,14 +6689,30 @@
       "_file": "agents/@cat-agent-skills/chart_builder_agent.py",
       "_install_filename": "rar_cat_agent_skills_chart_builder_agent.py",
       "_sha256": "324f56ae344f7fa425d43020732f423cb1c323c4b203ece4c33eed13f26b7cf1",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_7d9ac04e3f472e9ca5abff3cbab7f4144ccbca865b624b7ef4f92d3384117e81",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 13126391526794469953,
       "_size_kb": 8.8,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6462,14 +6750,30 @@
       "_file": "agents/@cat-agent-skills/classic_text_adventure_agent.py",
       "_install_filename": "rar_cat_agent_skills_classic_text_adventure_agent.py",
       "_sha256": "90b57384eee43f39e7dd44a0ba50ba226615e3b65355dcdc8f5b1f49fac559a1",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_246bf04068b467bfabd2eb0ddd4917854032f8cb51698fcc2216fa80ae0728e1",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 11341645754264855482,
       "_size_kb": 8.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6514,14 +6818,30 @@
       "_file": "agents/@cat-agent-skills/clt_hr_assistant_agent.py",
       "_install_filename": "rar_cat_agent_skills_clt_hr_assistant_agent.py",
       "_sha256": "c3a3b868ca1ca03b82006c23c3c8829fb083d1e64b9dbaa6d054300752a39688",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_33f697487ce816ec466d56f3bd175bbd14559006042b1b9c1d93009ec0606641",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 414581764968687158,
       "_size_kb": 8.8,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6559,14 +6879,30 @@
       "_file": "agents/@cat-agent-skills/commenting_content_agent.py",
       "_install_filename": "rar_cat_agent_skills_commenting_content_agent.py",
       "_sha256": "187b091fcba2f8fb7bbd54d2846dd5fa025aafe300aaf05cb4e79baa06416c15",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_b280337c0a028e66bf07fdc574df67e15ac80172d34ea147de8404fcf807bb50",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 1551566260712782138,
       "_size_kb": 8.7,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6604,14 +6940,30 @@
       "_file": "agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
       "_install_filename": "rar_cat_agent_skills_competitive_battlecard_builder_agent.py",
       "_sha256": "0b7356f6516b4afaabbed99ae04111381a60d133eeba92effdad8545f2f05ddd",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_70dcc3308354eb9cb0588bb5634e05f23baf85ad93a8288efd6c2eb1d840a8be",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 15263790686693370475,
       "_size_kb": 9.5,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6651,14 +7003,30 @@
       "_file": "agents/@cat-agent-skills/conditional_chat_reminder_agent.py",
       "_install_filename": "rar_cat_agent_skills_conditional_chat_reminder_agent.py",
       "_sha256": "2ff960cf9799c7e9336fd4eea85e8acf88d5d9ebf2ff5c3a52dce0da0f069171",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_699e0d275f0267ecc4eb57009c479f57036a2f9b196d0a45e2735e0d8795eb57",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 18132164803866276539,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6701,14 +7069,30 @@
       "_file": "agents/@cat-agent-skills/conference_session_abstract_pack_agent.py",
       "_install_filename": "rar_cat_agent_skills_conference_session_abstract_pack_agent.py",
       "_sha256": "1555f077ef0d78b201887122101980ce639036b47f08e647ccded556eebc4070",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_a4b5d3ce9bc749aa5e5a2fa0f9abc49f553d5b52eb09d99d72b7f104e9306930",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 8374508069837349419,
       "_size_kb": 8.9,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6751,14 +7135,30 @@
       "_file": "agents/@cat-agent-skills/content_quality_auditor_agent.py",
       "_install_filename": "rar_cat_agent_skills_content_quality_auditor_agent.py",
       "_sha256": "884464387bc3f9da6f84ffad05a6432081cc32e356efba67a74c2d4a5ed0ed99",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_4fd4369d9aa39219d4b67b34791aadad3d133afd6f003f4599354000d5f0af74",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 9530655618668179899,
       "_size_kb": 9.2,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6800,14 +7200,30 @@
       "_file": "agents/@cat-agent-skills/copilot_agents_news_scout_agent.py",
       "_install_filename": "rar_cat_agent_skills_copilot_agents_news_scout_agent.py",
       "_sha256": "6fc2a0fa301aa19d483c4c839feed41debd86262eb0fa2852fdcaccdebed450e",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_033e4570c410dd8c599f2f280bb68fc19a580a923958473458914ccedd043cf4",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 16956411046955722208,
       "_size_kb": 9.2,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6846,14 +7262,30 @@
       "_file": "agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
       "_install_filename": "rar_cat_agent_skills_copilot_studio_test_planner_agent.py",
       "_sha256": "3cfc5e42ce1e3f436c2129fd6b933475640c6476a63b042d5d0d6ac22e817bd2",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_f622ca51bf6dbe06dc5bb49198b4588a031cb150e15b7d59f25f07ac9fa8bfa3",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 408310021794313050,
       "_size_kb": 8.6,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6895,14 +7327,30 @@
       "_file": "agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
       "_install_filename": "rar_cat_agent_skills_copilot_studio_topic_blueprint_agent.py",
       "_sha256": "c11337248088a38d1cbbbba408808e2a111734b20ccebd659534832ff67882f2",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_5929103b96a5e93ed63c4646bbc28f80a244ab4b5d862c3beb09cf0717be08cb",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 5018947165587645429,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6943,14 +7391,30 @@
       "_file": "agents/@cat-agent-skills/doc_format_converter_agent.py",
       "_install_filename": "rar_cat_agent_skills_doc_format_converter_agent.py",
       "_sha256": "fe4a32bfd496ea42fe68d4815d3f6835297ca9434e9a3c72129873a4b5ea0f3a",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_ede672229cbeba6c3ebde9885038ccb6d49ae5a166cf9e5abb54fd93c1050d77",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 428413629298910657,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6992,14 +7456,30 @@
       "_file": "agents/@cat-agent-skills/enterprise_agent_design_authority_agent.py",
       "_install_filename": "rar_cat_agent_skills_enterprise_agent_design_authority_agent.py",
       "_sha256": "1b8d67a3b9d2dab18a77b43f93af6285ad595ac5b44c49ff0568605b8a596f6f",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_618368e1ee2fd29881d453588da8eeb90897150f0f5f8a56fdd328016adbb610",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 14866744023498637228,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7042,14 +7522,30 @@
       "_file": "agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
       "_install_filename": "rar_cat_agent_skills_eu_greenwashing_analysis_agent.py",
       "_sha256": "60f5b0746b2395fef7e8225ba803aeb9de1264b58c9797df97fb0a80123d7a5e",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_3e42c5b3fc15d1c449dc576df03d783ed2f2c209371fec33d9b7c45649049a61",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 4284668008049948509,
       "_size_kb": 9.5,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7087,14 +7583,30 @@
       "_file": "agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
       "_install_filename": "rar_cat_agent_skills_exam_prep_learning_plan_builder_agent.py",
       "_sha256": "35509b26742d474c7b205a420085c28a755754e18621d8599f5d4a54f0bdab35",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_9e0236c8b34120e75c40c8a0389946deac5e8d993be8caf99d3575b10dc9563c",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 7994811168206501417,
       "_size_kb": 9.2,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7135,14 +7647,30 @@
       "_file": "agents/@cat-agent-skills/gantt_chart_generator_agent.py",
       "_install_filename": "rar_cat_agent_skills_gantt_chart_generator_agent.py",
       "_sha256": "2df2f858299c6f1239e65bb152f4bbb593ba2072dbcac6316d6362416bdee486",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_422f0d8aaf92f11735bce44654c1470b56d45a3eb976f72f815a7f7d5f33d63a",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 3636448999034860981,
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7183,14 +7711,30 @@
       "_file": "agents/@cat-agent-skills/generating_podcast_script_agent.py",
       "_install_filename": "rar_cat_agent_skills_generating_podcast_script_agent.py",
       "_sha256": "38267f60dffe6f5f867e473ee794685bb89ea2833f4716dfd9ea9431b3bef325",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_02d51c1c484b45620c274d92167d50239089b17a624cafd7fc5f449a09b376ba",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 4067689056279740149,
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7235,14 +7779,30 @@
       "_file": "agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py",
       "_install_filename": "rar_cat_agent_skills_global_greenwashing_claim_auditor_agent.py",
       "_sha256": "3899d6d4b21a00ce391389c46b6172786c9e8e3023f60b715765165d5343d9fe",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_1eafcaa28ebf9d91d112fa1192c9d368572cb8c018ee772d9401f2736fbc78bb",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 5531283365091617834,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7282,14 +7842,30 @@
       "_file": "agents/@cat-agent-skills/grab_my_files_agent.py",
       "_install_filename": "rar_cat_agent_skills_grab_my_files_agent.py",
       "_sha256": "7bf1e47a108ee4b7ac096b531ca8a1a6518e55f1e5b25c33b597b31f435852d3",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_bff00492c37104806f3807fcee928c27f797cc3a84206a064826d743a14e09cb",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 10969737389413118152,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7329,14 +7905,30 @@
       "_file": "agents/@cat-agent-skills/idea_refiner_agent.py",
       "_install_filename": "rar_cat_agent_skills_idea_refiner_agent.py",
       "_sha256": "1f45a76ddaa7dca12d9857414545d29e8dc4e2ee13f87af6eb03b928acdb7bb7",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_67df3e2494aa21fb67eee9c33334f545452db3282d5101f6d40287a14c5d9cba",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 5565544014402955713,
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7379,14 +7971,30 @@
       "_file": "agents/@cat-agent-skills/institutional_knowledge_agent.py",
       "_install_filename": "rar_cat_agent_skills_institutional_knowledge_agent.py",
       "_sha256": "b9574a93f4efeb61a83d8e843f8caae6f11d146b20edaca294837c209bc4723a",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_4edd3deaa06bd60b410a15eb32395b91b4372860e6204a57f5b6bf1af40a7158",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 16365069444420875887,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7426,14 +8034,30 @@
       "_file": "agents/@cat-agent-skills/iterative_file_editing_agent.py",
       "_install_filename": "rar_cat_agent_skills_iterative_file_editing_agent.py",
       "_sha256": "cce8b6e20451b55794496c50b14c159915737e03af94e3e7c2d3dcc01b8588f8",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_a9275c9507ea4d6a23860441bd928636c8a725e821f6e8f70001aaaee57002cd",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 7212495103012251170,
       "_size_kb": 9.4,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7475,14 +8099,30 @@
       "_file": "agents/@cat-agent-skills/knowledge_corpus_curator_agent.py",
       "_install_filename": "rar_cat_agent_skills_knowledge_corpus_curator_agent.py",
       "_sha256": "64d1835538128e525a1d912cc3140cda56f126332bd118ed0eeef34adf18b00f",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_802e6c9b07e1f67b89394ca84f0f773d65c5845723407a47938bdaa033f5646c",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 3167800125289278461,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7522,14 +8162,30 @@
       "_file": "agents/@cat-agent-skills/knowledge_source_router_agent.py",
       "_install_filename": "rar_cat_agent_skills_knowledge_source_router_agent.py",
       "_sha256": "a6d2ac6a36c781505665b517953328f2dd809e91140dd40f56588569f87edeb6",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_115964f85fe5c7b6a11d57a02b53ba0e59b5aac5a1e784acf3a387ce302ed546",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 6734445765290763835,
       "_size_kb": 8.5,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7572,14 +8228,30 @@
       "_file": "agents/@cat-agent-skills/lab_column_mapper_agent.py",
       "_install_filename": "rar_cat_agent_skills_lab_column_mapper_agent.py",
       "_sha256": "5589a92823bbb860000ebb088852972236b3df0668bbe743601f90be85ce0aa1",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_6329bc5302fd78a7bb8e014ae48847db6512e1073f777b71c7b0691e0f1a9de9",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 14850472892638966648,
       "_size_kb": 9.6,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7621,14 +8293,30 @@
       "_file": "agents/@cat-agent-skills/linkedin_content_system_agent.py",
       "_install_filename": "rar_cat_agent_skills_linkedin_content_system_agent.py",
       "_sha256": "cd5a44eb81ec76324921f288cf231f95096b3a9c67f5a5269038dc5b748eb744",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_7d1b22e232c9407cb9f4b5c4a1fa390f4708c488ebbf447fdae93cf264fb314c",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 11405386844750888335,
       "_size_kb": 8.9,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7667,14 +8355,30 @@
       "_file": "agents/@cat-agent-skills/linkedin_content_writer_agent.py",
       "_install_filename": "rar_cat_agent_skills_linkedin_content_writer_agent.py",
       "_sha256": "2e8b65f13ef8f8b4f9470b5fcd78960b3d95028cd00408c86e07adcf1724fab5",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_e37fd97958f470c11e38d2623c10e951c58f04eeb6d11852edf990e827267e4f",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 11868186974102237577,
       "_size_kb": 8.9,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7714,14 +8418,30 @@
       "_file": "agents/@cat-agent-skills/lookup_dataverse_table_agent.py",
       "_install_filename": "rar_cat_agent_skills_lookup_dataverse_table_agent.py",
       "_sha256": "6525511bf6ee244af3473793a5042254fed4e36052023cb062438af1f3636eb4",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_e0fe7aa4bcdd96dd77ccc4093604a0ca011fff95762d48e540aec1ad11d93f76",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 9113709509289323895,
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7765,14 +8485,30 @@
       "_file": "agents/@cat-agent-skills/mct_excellence_iq_agent.py",
       "_install_filename": "rar_cat_agent_skills_mct_excellence_iq_agent.py",
       "_sha256": "1b62ce1f0c3641b283c403b6a6c3146f554f5222346d9d7a2d127ea6bdc61875",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_57c1dae23a099f2c8746f498cb2af20a0247240e3e81efd5dc3e1ed61e15b544",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 12691269472889086481,
       "_size_kb": 9.4,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7815,14 +8551,30 @@
       "_file": "agents/@cat-agent-skills/meeting_analyzer_agent.py",
       "_install_filename": "rar_cat_agent_skills_meeting_analyzer_agent.py",
       "_sha256": "bb10c34d0d9a18bf34f0487582f49eeaaaba6c1400fa00a2abe1943c42c44f03",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_05ffdd83d2d29bc72e57288914f0610201553266955632cc960c880f7a001ead",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 9131837247170952006,
       "_size_kb": 9.4,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7865,14 +8617,30 @@
       "_file": "agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
       "_install_filename": "rar_cat_agent_skills_microsoft_ai_platform_advisor_agent.py",
       "_sha256": "8bbf35ee4a97ee4ed92876adbbfd13d2b7624c98a137dc949f1f46080a0637d4",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_5ae6b7cf85d3096871ea873dd47597c5b9e9ee328218c962df9c43f5e39ed447",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 3511732026926445992,
       "_size_kb": 9.4,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7914,14 +8682,30 @@
       "_file": "agents/@cat-agent-skills/own_voice_builder_agent.py",
       "_install_filename": "rar_cat_agent_skills_own_voice_builder_agent.py",
       "_sha256": "c94c678de5a3bd69cf2f1f4e4b50b38cdd931bfcd23aeec345fb3263b86df1b0",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_f02fb6252ea7b48ff7cffaaac956f0bb64643311a66e0f47d232cba616402b11",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 1530004408078446771,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7963,14 +8747,30 @@
       "_file": "agents/@cat-agent-skills/pattern_radar_agent.py",
       "_install_filename": "rar_cat_agent_skills_pattern_radar_agent.py",
       "_sha256": "5ab75e34a67a13fa24db57751e922a5b329554145596e626e4e324b6feb31aac",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_09e0c3b6c86be3dd32691c43ef02c55fa2ede48a830db689427adf069281f28d",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 17145226772901279339,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8011,14 +8811,30 @@
       "_file": "agents/@cat-agent-skills/pattern_radar_automation_agent.py",
       "_install_filename": "rar_cat_agent_skills_pattern_radar_automation_agent.py",
       "_sha256": "4a46e8a71dfa5a6e08732d289372d52fe203669fef202c3956fa38a1d6f3317a",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_5853985ba76c99c47dd89578cbb6ac4f0ddfd004e84cb8d3e4f557d823e27d74",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 3678695620493451797,
       "_size_kb": 9.2,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8060,14 +8876,30 @@
       "_file": "agents/@cat-agent-skills/pdf_table_data_conversion_agent.py",
       "_install_filename": "rar_cat_agent_skills_pdf_table_data_conversion_agent.py",
       "_sha256": "111afc6de615d21bd7a889670fe83fb7a8c062d7eced5a34668f69aad0e6d049",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_b20c230f1fe7597c04667cd10bd836919d656d55285820918cf1ea15e2bc7413",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 929244689336253662,
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8108,14 +8940,30 @@
       "_file": "agents/@cat-agent-skills/persona_reaction_panel_agent.py",
       "_install_filename": "rar_cat_agent_skills_persona_reaction_panel_agent.py",
       "_sha256": "471d20b0f203e9a3937b853274583f5028962fe9de6d1da42222cc2b2771bc33",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_23fd347f6602d85d7a327a9b0c465a52ffa485f9d44304e753e230401a07bf93",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 5998955572450961048,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8160,14 +9008,30 @@
       "_file": "agents/@cat-agent-skills/phi_deidentifier_agent.py",
       "_install_filename": "rar_cat_agent_skills_phi_deidentifier_agent.py",
       "_sha256": "deacbb22ef7601fa437aa51aa7ccdd07ed16fa8c3eaa345c50ff44dc6d975d6f",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_81355fecb1fc50342f669043f95fcc05a3e430161f4dfcdb3a1f6d761cc269e0",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 5971328241960499032,
       "_size_kb": 9.2,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8209,14 +9073,30 @@
       "_file": "agents/@cat-agent-skills/pov_line_generator_agent.py",
       "_install_filename": "rar_cat_agent_skills_pov_line_generator_agent.py",
       "_sha256": "181aaa29ab74475fe1d1b73cbfec45f0cdd31f3016bbf34eabcaf3ec23213ded",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_37f5762e709ff217826829bc33ed5a219ff66b088f04e5f0ec988fad2d30ccfa",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 7769812297019176766,
       "_size_kb": 8.8,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8257,14 +9137,30 @@
       "_file": "agents/@cat-agent-skills/power_automate_desktop_assessment_agent.py",
       "_install_filename": "rar_cat_agent_skills_power_automate_desktop_assessment_agent.py",
       "_sha256": "a002ab6df0f13d216069dc399971ecec085e96ce854ee960de87ac043cd8435a",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_eeebb70ce9ffea2c2a7bd01f67a60599db5546d43a12e5cfbe92dbb9ae7ae250",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 13447834008772291623,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8305,14 +9201,30 @@
       "_file": "agents/@cat-agent-skills/power_automate_documentation_agent.py",
       "_install_filename": "rar_cat_agent_skills_power_automate_documentation_agent.py",
       "_sha256": "db07d9c1a188ccc5657ca62c42bf1782d6716fd9edc11d5efd9ee5c9f9490f30",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_6fd57886e008b6f839f033bbd3d6a4c3e29d6f9fc16f72a7c07c57d2710aff6e",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 8747558204567204639,
       "_size_kb": 9.5,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8355,14 +9267,30 @@
       "_file": "agents/@cat-agent-skills/power_bi_model_review_agent.py",
       "_install_filename": "rar_cat_agent_skills_power_bi_model_review_agent.py",
       "_sha256": "29cae30baa09510e4c1adaf840d54147afc9476821ab7c5a1303194987097b7c",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_7e7106d0e7818b1b0f4d1743a81993b849949c52468fa1c064bce0d6d94aa2f4",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 8065371055089006787,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8401,14 +9329,30 @@
       "_file": "agents/@cat-agent-skills/powerpoint_deck_designer_agent.py",
       "_install_filename": "rar_cat_agent_skills_powerpoint_deck_designer_agent.py",
       "_sha256": "eb611944514156ad3588142f26e0526500af98a8a80fd3ce408ee6b0451c6c80",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_a60003b359de10448956f7e3bacd27500f63b3833905419bf7bfffc8790a4abb",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 16919150354179307997,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8450,14 +9394,30 @@
       "_file": "agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
       "_install_filename": "rar_cat_agent_skills_presentation_talk_track_builder_agent.py",
       "_sha256": "0b292d4a5a102713a81298e77e673258e3e9dc9d67595b37b4afadf58449e531",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_a4ad9737ce11c178d02361fa398ae5a01f9febbc90af67071ffd913e4ae30551",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 9191655984660619781,
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8497,14 +9457,30 @@
       "_file": "agents/@cat-agent-skills/process_sop_architect_agent.py",
       "_install_filename": "rar_cat_agent_skills_process_sop_architect_agent.py",
       "_sha256": "7b3e33d031c6c6388c76d4fe360cb24beb8092dd33e2d45b60ab5a93431d84a2",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_46910b7d976802b4c59356f659a5a3c62ef3481f4d9786cd32eb635f409899c3",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 4473299887886842713,
       "_size_kb": 8.9,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8542,14 +9518,30 @@
       "_file": "agents/@cat-agent-skills/redlining_content_agent.py",
       "_install_filename": "rar_cat_agent_skills_redlining_content_agent.py",
       "_sha256": "1196f5449b1e765cd968e70f0a5568c40598968414f4ffb10380e02b9bdfed98",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_6d89c0a4b1f20532544f0772eb3e6e65fd2ca48b5e4c55e4a21bcfd6c2abaa10",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 14912481654756096314,
       "_size_kb": 8.7,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8590,14 +9582,30 @@
       "_file": "agents/@cat-agent-skills/regulation_monitor_agent.py",
       "_install_filename": "rar_cat_agent_skills_regulation_monitor_agent.py",
       "_sha256": "094fa86c7092388fb65e3ce1e381c016d4d8b9fb2ddcdb92be6e720016a6b0e7",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_3d84b3e2df148549d2c51c91a089c2715ccaeb5699be4f3a1d28dfd78078aaf7",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 2048339254354519978,
       "_size_kb": 9.6,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8638,14 +9646,30 @@
       "_file": "agents/@cat-agent-skills/rich_html_presentation_agent.py",
       "_install_filename": "rar_cat_agent_skills_rich_html_presentation_agent.py",
       "_sha256": "3850f22f2c00d0923e80824512c44cd7075e0bdbe4aa9bfc1ba8377df89e2004",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_f1b5cc961dad4c08247af044134b03cfa5a16e9fb28dfb5a1dc3f8e860f1509d",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 9062438139641605218,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8684,14 +9708,30 @@
       "_file": "agents/@cat-agent-skills/scrollytelling_data_agent.py",
       "_install_filename": "rar_cat_agent_skills_scrollytelling_data_agent.py",
       "_sha256": "0dc2134948992af0c75f37446ddf370d42a355e9e563a6988f0de3c719d35e18",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_30601ab9b57d7640214078877966e7107f74635b650a2779331d2224f9632f31",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 9394345777536970812,
       "_size_kb": 8.7,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8733,14 +9773,30 @@
       "_file": "agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
       "_install_filename": "rar_cat_agent_skills_sharepoint_list_formatter_agent.py",
       "_sha256": "8ce15990887997b95ee23d598dab87d7f22a644e38e5dd49d089571a201564f2",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_0f5ef542b2d440619fff4cd7c8d0d023d7a577a701cd89eea3db4f86e0906381",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 8153718373571246085,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8780,14 +9836,30 @@
       "_file": "agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py",
       "_install_filename": "rar_cat_agent_skills_sharepoint_list_insight_report_generator_agent.py",
       "_sha256": "1755e4d761977ef94e93304dc8d180edc0dc810f70e304a513ed4909b525f0d7",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_c8d90c19c946758a89e9c5c9674d77fc8b7c751a558f8a54a718ac09c4e50152",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 10334818382721464574,
       "_size_kb": 9.6,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8829,14 +9901,30 @@
       "_file": "agents/@cat-agent-skills/skill_authoring_coach_agent.py",
       "_install_filename": "rar_cat_agent_skills_skill_authoring_coach_agent.py",
       "_sha256": "123cd43acf80de040e407c00cd0991d61bd4c8dafd7972602a769fc8f647b6e1",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_66d7a9f2ccaea72dfa01fa14262b01973dd121e7599c493ce1ba5de64b92e5a2",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 16010864256023666820,
       "_size_kb": 8.9,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8875,14 +9963,30 @@
       "_file": "agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py",
       "_install_filename": "rar_cat_agent_skills_spend_more_time_with_friends_and_family_agent.py",
       "_sha256": "d11659b95fb22912398412b573f58ec52b940dcff10574f772ed0a4b4be892db",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_6e06412c1d06d137f8e7f0ec084182be83e7c72ad1694a7f51f2d5742f7c3702",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 14428155759068455262,
       "_size_kb": 9.4,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8924,14 +10028,30 @@
       "_file": "agents/@cat-agent-skills/style_analyzer_agent.py",
       "_install_filename": "rar_cat_agent_skills_style_analyzer_agent.py",
       "_sha256": "529eb8528b62f6d9e5c1d80182371e91a9c7d725ddb394fb0588a2d6f7608287",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_1213e068205d6818ffe62206d0a1546d1b5dc41f94267760b61d3b6f8155dacf",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 6797201095569191536,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8973,14 +10093,30 @@
       "_file": "agents/@cat-agent-skills/tool_tracer_agent.py",
       "_install_filename": "rar_cat_agent_skills_tool_tracer_agent.py",
       "_sha256": "9bdbbbf6039d95cd831a928da5055dd9dec8dd45c1fc63c67142f4c8260c4e84",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_eb9f3701997e86cfa206afc0174360a0876dddf251da89425c80d3c2ab1393db",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 7403808000236730049,
       "_size_kb": 8.9,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9019,14 +10155,30 @@
       "_file": "agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
       "_install_filename": "rar_cat_agent_skills_vacation_urgent_forwarder_agent.py",
       "_sha256": "a945ea6ac53c04d6b788b7a61d287b33fed92bc1d34272178e5a7c74c2c66e7e",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_c10559aa48f07770518f91551c36f379ace63098daed992a1c6224d675f2ffc1",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 10930056148061532476,
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9068,14 +10220,30 @@
       "_file": "agents/@cat-agent-skills/vendor_contract_risk_review_agent.py",
       "_install_filename": "rar_cat_agent_skills_vendor_contract_risk_review_agent.py",
       "_sha256": "b83fe34b7b87dcbf87a736131abad982e5fe477b0823a4204428b09fb1750590",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_9622bdddda3a4bf07a71b079343b9b72d503ad0767025d1de51a9ce5d9048e3f",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 15801285580082129977,
       "_size_kb": 9.4,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9117,14 +10285,30 @@
       "_file": "agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
       "_install_filename": "rar_cat_agent_skills_whiteboard_to_infographic_agent.py",
       "_sha256": "b4b6836d3126428ba7cb3ba517721d886362be50d8ef10c3de03706a275330e5",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_3364ce748c536f10d724150d188d7d9947483498b84b3ab2b79006a84ae5eed0",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 17572275169396663511,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9168,14 +10352,30 @@
       "_file": "agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py",
       "_install_filename": "rar_cat_agent_skills_wikipedia_human_style_writing_agent.py",
       "_sha256": "1f50f40dc28b1760c266836dc179d8cb5be8ca2151a339e00fe612af9c163131",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_c0e3658d2128117d1efa43687f4151170a61df9b6242a38880875c031fee5579",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 5001731747512988380,
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9217,14 +10417,30 @@
       "_file": "agents/@cat-agent-skills/work_brief_agent.py",
       "_install_filename": "rar_cat_agent_skills_work_brief_agent.py",
       "_sha256": "9a295dbb76bd5acabb6141ccd43ef65992dc2e63b2a0553d06d6f30fb42f24d2",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_c0f91da4e8c210bdbc116576bca229051f27770552cd98d5c26c6e33c7cc732c",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 12709215022938472432,
       "_size_kb": 8.8,
       "_lines": 188,
       "_has_card": false,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf"
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12517,14 +13733,30 @@
       "_file": "agents/@kody-w/skill_toaster_agent.py",
       "_install_filename": "rar_kody_w_skill_toaster_agent.py",
       "_sha256": "b05707e55b486c96363ae170a6ee0c755bc0c5b797b5e7ff9fcb57c9dc86d625",
-      "_lifecycle": "legacy_active",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_1223343ad40680ee737268a46550a556ebaf01c23b41aa45cad7bb2c9dce631f",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
       "_seed": 7786951904550601248,
       "_size_kb": 31.4,
       "_lines": 687,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-08-01T21:33:29-04:00",
+      "_first_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080",
+      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080"
     },
     {
       "schema": "rapp-agent/1.0",
