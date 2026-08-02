@@ -67,9 +67,11 @@ jobs:
       - name: Agent contract tests
         run: pytest tests/test_agent_contract.py -v --tb=short
 
-  # ─── REPORTING (the public numbers) ────────────────────────────
-  # RAR publishes these figures, and a wrong number is worse than a missing
-  # one because nobody re-checks a plausible-looking figure. Hermetic by
+  # ─── PUBLISHED CLAIMS (reporting + the release path) ───────────
+  # Everything RAR asserts in public: the per-agent numbers, and the release
+  # that stamps them. A wrong number is worse than a missing one because
+  # nobody re-checks a plausible-looking figure, and a release defect can
+  # only otherwise be found by publishing something wrong. Hermetic by
   # design — no network, no token — so it runs on every push and a red here
   # always means the code broke, never that GitHub was having a bad day.
   # The live half is driven by hand; see docs/REPORTING-TESTS.md.
@@ -84,6 +86,8 @@ jobs:
         run: pip install pytest
       - name: Reporting machinery tests
         run: pytest tests/test_reporting.py -v --tb=short
+      - name: Release path tests
+        run: pytest tests/test_release_path.py -v --tb=short
 
   # ─── NOTARY (trusted PR policy lives in notary-policy.yml) ─────
   notary:

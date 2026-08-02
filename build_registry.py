@@ -1173,6 +1173,27 @@ def build_registry():
     if stacks:
         registry["stacks"] = stacks
 
+    # ─── Release ledger ───────────────────────────────────────────────
+    # The release workflow used to append its record straight into
+    # registry.json. This function rebuilds that file from scratch on every
+    # push to agents/**, so the entire release history was erased by the next
+    # agent submission — and because nothing ever read the field, it vanished
+    # silently. state/releases.json is the durable record; registry.json only
+    # ever carries a projection of it, which keeps registry.json fully derived
+    # (its contract) while giving consumers one place to look.
+    releases_file = Path("state") / "releases.json"
+    if releases_file.exists():
+        try:
+            ledger = json.loads(releases_file.read_text(encoding="utf-8"))
+            entries = ledger.get("releases") or []
+            if entries:
+                registry["releases"] = entries
+                registry["latest_release"] = entries[-1]
+        except (json.JSONDecodeError, OSError, AttributeError):
+            # A malformed ledger must not take the registry build down with
+            # it; the agents are the payload, the release stamp is metadata.
+            pass
+
     # Include instance metadata if rar.config.json exists
     config_file = Path("rar.config.json")
     if config_file.exists():
