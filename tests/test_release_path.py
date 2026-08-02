@@ -150,6 +150,33 @@ def test_release_name_never_reaches_a_shell_or_js_context_via_interpolation():
             )
 
 
+def test_no_workflow_evaluates_an_empty_expression_in_a_run_body():
+    """`#` inside a `run:` block is a SHELL comment, not a YAML one — GitHub's
+    expression parser still evaluates ${{ }} on those lines. A comment written
+    to explain the injection rule contained a bare, empty expression, and an
+    empty expression is invalid: GitHub rejected the whole workflow file. The
+    failure is easy to miss because the run is named by file path rather than
+    by workflow name, and it carries no jobs and no logs."""
+    import re
+
+    import yaml
+
+    expr = re.compile(r"\$\{\{(.*?)\}\}", re.S)
+    offenders = []
+    for wf in sorted((REPO_ROOT / ".github" / "workflows").glob("*.yml")):
+        doc = yaml.safe_load(wf.read_text()) or {}
+        for jname, job in (doc.get("jobs") or {}).items():
+            for step in (job.get("steps") or []):
+                bodies = [step.get("run"), (step.get("with") or {}).get("script")]
+                for body in bodies:
+                    if not isinstance(body, str):
+                        continue
+                    for m in expr.finditer(body):
+                        if not m.group(1).strip():
+                            offenders.append(f"{wf.name}::{jname}::{step.get('name')}")
+    assert not offenders, f"empty ${{{{ }}}} expression in a run body: {offenders}"
+
+
 def test_computed_tag_is_not_interpolated_into_shell():
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
     for line in src.splitlines():

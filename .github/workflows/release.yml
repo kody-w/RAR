@@ -204,8 +204,9 @@ jobs:
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
           git add registry.json state/releases.json
-          # The name is passed as an argv element, so it is never parsed as
-          # shell. ${{ }} here would splice operator free text into the command.
+          # Read from env, so the name is an argv element and is never parsed
+          # as shell. Interpolating the input here would splice operator free
+          # text straight into the command line.
           git diff --cached --quiet || git commit -m "Release $RELEASE_NAME ($RELEASE_TAG) [skip ci]"
           git push
           # The tag must point at the commit that RECORDS the release, not at
