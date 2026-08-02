@@ -62,11 +62,13 @@ enterprise audience on first impression.
 
 | # | Requirement | Status | Evidence |
 |---|-------------|--------|----------|
-| 3.1 | An enterprise-safe slice that needs no further filtering | **Solved** | `api/v1/audience/business.json` — 271 agents, novelty excluded. Serve it directly; `discover.html` does exactly that. |
-| 3.2 | Novelty must not leak in through a mislabelled category | **Solved** | An explicit novelty tag (`game`, `pokemon`, `collectible`, `adventure`, …) forces the consumer slice regardless of category. A text adventure filed under `devtools` still does not reach the business slice. See `classify()` in `scripts/build_static_api.py`. |
+| 3.1 | An enterprise-safe slice that needs no further filtering | **Solved** | `api/v1/audience/business.json` — 275 agents, novelty excluded. Serve it directly; `discover.html` does exactly that. |
+| 3.2 | Novelty must not leak in through a mislabelled category | **Solved** | An explicit novelty tag (`game`, `pokemon`, `collectible`, `adventure`, …) forces the consumer slice regardless of category. A text adventure filed under `devtools` still does not reach the business slice. Tags are normalised, so `trading-card`, `trading-cards` and `Trading Card` are all caught. See `classify()` and `norm_tag()` in `scripts/build_static_api.py`. |
 | 3.3 | Curation demonstrably holds | **Solved** | Query the business slice for *"I want to play a game"* — it returns essentially nothing. The games are in the catalog; they are not in the enterprise surface. |
-| 3.4 | Curation must not silently hide useful agents | **Solved** | `both` is the default for ambiguous cases, and `both` appears in every slice. Misclassification degrades to over-showing, never to hiding. |
+| 3.4 | Curation must not silently hide useful agents | **Solved** | `both` is the default for ambiguous cases and appears in every slice — 170 of 278 agents are in both, so segmentation filters the extremes rather than partitioning the catalog. Misclassification degrades to over-showing, never to hiding. `tests/test_audience_segmentation.py` asserts this in both directions. |
 | 3.5 | Quality signal per agent | **Partly solved** | `quality_tier` (`frontier` → `community` → `verified` → `official`) ships on every record and renders on each card. Promotion beyond automated validation is still a human review step. |
+| 3.6 | Segmentation visible in RAR itself, not only in the API | **Solved** | `index.html` has an Everything / For work / Personal mode bar backed by `api/v1/audience/map.json` (~14KB). The choice persists, and `index.html?mode=business` deep-links a host application straight into the work view. |
+| 3.7 | Segmentation must not become a way to break the page | **Solved** | The mode bar is hidden until the audience map loads and no filtering happens without it, so a blocked fetch or an offline `file://` open renders exactly what it did before modes existed. An agent absent from the map is treated as `both`. Verified in a headless browser with the map blocked at the network layer. |
 
 ---
 
@@ -137,10 +139,23 @@ for aid, s in sorted(scores.items(), key=lambda x: -x[1])[:3]:
     print(f"{s:4}  {cat[aid]['display_name']}")
 PY
 
-# 4. Install an agent — the response body is the whole package
+# 4. Prove the curation actually holds — no games in the enterprise slice
+curl -s https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json > /tmp/a.json
+python3 - <<'PY'
+import json
+d = json.load(open('/tmp/a.json'))
+print(d['counts']['in_business_mode'], 'agents in work mode,',
+      d['counts']['consumer_only'], 'hidden as consumer-only,',
+      d['counts']['both'], 'visible in both')
+PY
+curl -s https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json \
+  | grep -ci "trading card\|pokemon\|text adventure" \
+  || echo "0 novelty agents in the enterprise slice"
+
+# 5. Install an agent — the response body is the whole package
 curl -s https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py -o drift_agent.py
 
-# 5. Prove the URL contract holds
+# 6. Prove the URL contract holds
 python scripts/check_url_stability.py
 ```
 

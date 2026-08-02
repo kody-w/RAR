@@ -6,7 +6,7 @@
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "cdn_base": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main",
   "pages_base": "https://kody-w.github.io/RAR",
-  "generated": "2026-08-02T00:35:03Z",
+  "generated": "2026-08-02T00:46:15Z",
   "cors": "open — GitHub raw and jsDelivr both send Access-Control-Allow-Origin: *",
   "auth": "none",
   "stability": "Agent source paths are frozen permanently under CONSTITUTION.md Article XXIII and verified in CI on every pull request. A URL that resolves today resolves forever.",
@@ -26,6 +26,10 @@
     "consumer": {
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
       "description": "Pre-curated individual slice."
+    },
+    "audience_map": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
+      "description": "Compact audience verdict per agent (b/c/x). For clients that already hold the catalog and only need to filter it — ~14KB instead of a second full copy."
     },
     "match": {
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/match.json",

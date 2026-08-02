@@ -617,6 +617,8 @@ def main() -> int:
              "sha8": sha8(business_doc)},
             {"name": "audience/consumer", "count": len(consumer),
              "sha8": sha8(consumer_doc)},
+            {"name": "audience/map", "count": len(audience_map["map"]),
+             "sha8": sha8(audience_map)},
         ],
     }
 
@@ -665,6 +667,14 @@ def main() -> int:
             "consumer": {
                 "url": f"{RAW_BASE}/api/v1/audience/consumer.json",
                 "description": "Pre-curated individual slice.",
+            },
+            "audience_map": {
+                "url": f"{RAW_BASE}/api/v1/audience/map.json",
+                "description": (
+                    "Compact audience verdict per agent (b/c/x). For clients "
+                    "that already hold the catalog and only need to filter it "
+                    "— ~14KB instead of a second full copy."
+                ),
             },
             "match": {
                 "url": f"{RAW_BASE}/api/v1/match.json",
