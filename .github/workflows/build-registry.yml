@@ -68,7 +68,12 @@ jobs:
         run: python scripts/build_static_api.py
 
       - name: Commit registry.json
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        # Also commits on workflow_dispatch. A dispatch run used to rebuild the
+        # API and then throw it away, so the one button a maintainer reaches for
+        # when the catalog looks stale could not actually fix it.
+        if: >-
+          github.ref == 'refs/heads/main' &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
         run: |
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"

@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-02T00:46:15Z",
-  "count": 275,
+  "generated": "2026-08-02T01:43:44Z",
+  "count": 276,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -3685,7 +3685,7 @@
       "name": "@cat-agent-skills/accessibility_pass",
       "display_name": "Accessibility Pass",
       "description": "Check a PowerPoint deck, Word document, HTML page, or Markdown file against Microsoft's Accessibility Checker rules (missing alt text, untitled slides, headerless tables, low contrast, illogical reading order) and fix what it finds.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Tim Karlsson",
       "category": "devtools",
@@ -3707,11 +3707,11 @@
         "path": "agents/@cat-agent-skills/accessibility_pass_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/accessibility_pass_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/accessibility_pass_agent.py",
-        "sha256": "bb8ec378fafa064065d587e8ed0e2344cd06a0e3fffc6935f94449f191513afe"
+        "sha256": "78b164685399af6a913c512c893a064b71d4476f161bb1f868bf8cd03156ee76"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3720,7 +3720,7 @@
       "name": "@cat-agent-skills/acroform_writer",
       "display_name": "AcroForm Writer",
       "description": "Fill an existing AcroForm PDF's real form fields from supplied data and flatten the result into a finished, non-editable PDF",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Sandeep Angara",
       "category": "devtools",
@@ -3741,11 +3741,11 @@
         "path": "agents/@cat-agent-skills/acroform_writer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/acroform_writer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/acroform_writer_agent.py",
-        "sha256": "a8e6269a1d502235f57f388e2e1e464f170d12d1148f2852b79bbb0c6a718ce3"
+        "sha256": "40d2f38bf76d47a54b443ea70f777001ac77ae612979550aab56a5bf2147f8d4"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.0,
+        "lines": 188,
+        "size_kb": 8.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3754,7 +3754,7 @@
       "name": "@cat-agent-skills/agent_evaluation_designer",
       "display_name": "Agent Evaluation Designer",
       "description": "Design a rigorous, platform-aware evaluation for an AI agent - define what good looks like, pick the right grading method, build a test set, and turn results into a defensible go/no-go decision.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "James Papadimitriou",
       "category": "general",
@@ -3775,11 +3775,11 @@
         "path": "agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
-        "sha256": "825e16b1417f1db3a9fd255f6cdb2c3e29605412283607ba7089e0579c0574fc"
+        "sha256": "20b0e309fde16bdfc1a363d270e1aec083d9c00b1a1d7735edd30dff9d6000a2"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3788,7 +3788,7 @@
       "name": "@cat-agent-skills/agent_harness_explorer",
       "display_name": "Agent Harness Explorer",
       "description": "Discover, document, and monitor what the agent harness can do — Python libraries, tools, MCP servers, and runtime capabilities — with repeatable, comparable snapshots.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Chris Garty and Andrew Hess",
       "category": "devtools",
@@ -3810,11 +3810,11 @@
         "path": "agents/@cat-agent-skills/agent_harness_explorer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_harness_explorer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/agent_harness_explorer_agent.py",
-        "sha256": "c901fe16f1597af10fc04c215053417876f0aa3af5f720b88d10154d6fb245d7"
+        "sha256": "77aeeb418357389bf065c769985559925b8f7165557d4f2b63421baa21bcc4b7"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3823,7 +3823,7 @@
       "name": "@cat-agent-skills/ai_demo_assistant",
       "display_name": "AI Demo Assistant",
       "description": "Turns a customer name, line of business, and personas into a ready-to-seed Microsoft 365 Copilot demo — fictional Word/PowerPoint/Excel example files plus a full delivery and provisioning plan, with optional one-click seeding to OneDrive and Teams.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Doak Moore",
       "category": "general",
@@ -3845,11 +3845,11 @@
         "path": "agents/@cat-agent-skills/ai_demo_assistant_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_demo_assistant_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/ai_demo_assistant_agent.py",
-        "sha256": "7f59d5a6e77b77b25e33c92d28cf63b6c0a0077ec2fc55de6b6afbdcda548b1a"
+        "sha256": "91fdd28e1096d53816d4397debef31b39e5539d37b57a29783db543dc51482d1"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3858,7 +3858,7 @@
       "name": "@cat-agent-skills/ai_first_process_redesign",
       "display_name": "AI-First Process Redesign",
       "description": "Redesign your existing processes with AI-first thinking",
-      "version": "2.1.0",
+      "version": "3.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Tim Sparks",
       "category": "general",
@@ -3877,11 +3877,11 @@
         "path": "agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
-        "sha256": "6a2f16b035575acfbc12fd7f460bfd56c05dd7d6c50e4a97824511647ea2a71b"
+        "sha256": "e8d05f6872cfd6ed788e7486bf726503ad43e38a8aa6005a6449dcae017c0ada"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.0,
+        "lines": 188,
+        "size_kb": 8.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3890,7 +3890,7 @@
       "name": "@cat-agent-skills/ai_usecase_assessment",
       "display_name": "AI Use Case Assessment",
       "description": "Turn any AI/agentic use case idea (chat, uploaded doc, or attached file) into an evidence-grounded, rubric-scored assessment with a customer-branded HTML report. Guides the user question-by-question through intake, categorisation, strengthening, scoring, and reporting — grounded in the Agentic Use Case Assessment Rubric v2. Runs in Microsoft Scout and Microsoft 365 Copilot Cowork.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Alicja Gilderdale",
       "category": "analysis",
@@ -3914,11 +3914,11 @@
         "path": "agents/@cat-agent-skills/ai_usecase_assessment_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_usecase_assessment_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/ai_usecase_assessment_agent.py",
-        "sha256": "8f599df973c55e3addf056896ca6b631207877f2008cb6694559848da608c384"
+        "sha256": "b1c7ceb11b90cd8bd781cbfab3f8c914f11830d1ae2eb360f2aa3b68152fef67"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.6,
+        "lines": 188,
+        "size_kb": 9.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3927,7 +3927,7 @@
       "name": "@cat-agent-skills/anonymised_case_study_writer",
       "display_name": "Anonymised Case Study Writer",
       "description": "Turn engagement notes into anonymised, publishable case studies without exposing client-confidential details.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Simon Owen",
       "category": "productivity",
@@ -3949,11 +3949,11 @@
         "path": "agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
-        "sha256": "ed24cdaa8aef663e2096a7b2a94319edb20b5570d76a856b5cf01e7c8dae5e5c"
+        "sha256": "acca33c8954fc23a9d6b76b4ab200a7bf5a076cd44c2200f1c42565e98f20361"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3962,7 +3962,7 @@
       "name": "@cat-agent-skills/awaiting_reply",
       "display_name": "Awaiting Reply",
       "description": "A weekday-morning Scout automation that finds emails you sent that asked for something and never got an answer, reports how many are waiting, and prepares follow-up drafts in each thread's own language that it never sends.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Allan De Castro",
       "category": "productivity",
@@ -3985,11 +3985,11 @@
         "path": "agents/@cat-agent-skills/awaiting_reply_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/awaiting_reply_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/awaiting_reply_agent.py",
-        "sha256": "d5077b709f4aee8ca8335aa651a76afcda29588efbbf6b0505092923d6dbbad2"
+        "sha256": "fbd75b3e3e375301db703b7b0f2205c47d0a33f8b137b721c7380dfac54b5193"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3998,7 +3998,7 @@
       "name": "@cat-agent-skills/b2b_outreach_suite",
       "display_name": "B2B Outreach Suite",
       "description": "A six-playbook toolkit for agentic B2B sales outreach: prospect research briefings, cold emails, LinkedIn/social DMs, follow-up cadences, ad copywriting, and objection handling. Configurable via a company profile template, works for any industry, market, and language.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Marcel",
       "category": "productivity",
@@ -4020,11 +4020,11 @@
         "path": "agents/@cat-agent-skills/b2b_outreach_suite_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/b2b_outreach_suite_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/b2b_outreach_suite_agent.py",
-        "sha256": "4a2672db19dd8515afbc0ae93de973b38141fb8e450b8fbda1bdde550140b8f3"
+        "sha256": "dd2ff9fa0279217e4c73141b6680ecc31bb0dcf55b50f43d15f580b82452c119"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.4,
+        "lines": 188,
+        "size_kb": 9.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4033,7 +4033,7 @@
       "name": "@cat-agent-skills/blog_content_auditor",
       "display_name": "Blog Content Auditor",
       "description": "Audit blog posts or a blog library for clarity, structure, evidence, audience fit, and improvement priority.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Simon Owen",
       "category": "general",
@@ -4055,11 +4055,11 @@
         "path": "agents/@cat-agent-skills/blog_content_auditor_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/blog_content_auditor_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/blog_content_auditor_agent.py",
-        "sha256": "623bfaef5ef6fc7a8e80c8103b34a0db1354e04c612761093c88d1736b70be26"
+        "sha256": "ba98bc211f37593e39cd7bdcd7c53edd1db5e2484a9378500c897505f902b262"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 8.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4068,7 +4068,7 @@
       "name": "@cat-agent-skills/blog_post_structure_pass",
       "display_name": "Blog Post Structure Pass",
       "description": "Restructure draft or existing blog posts into a stronger narrative without inventing new claims.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Simon Owen",
       "category": "general",
@@ -4090,11 +4090,11 @@
         "path": "agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
-        "sha256": "8f84a92e636def9fc1bf84156286a86af84dd9f717ff86853ebf9c530eda16b2"
+        "sha256": "b337e49ea0b120fa4994304c114666c76182f2b76b6081e1c3d478d82ee4b5b5"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4103,7 +4103,7 @@
       "name": "@cat-agent-skills/brand_template_enforcer",
       "display_name": "Brand Template Enforcer",
       "description": "Ensure every generated PowerPoint deck or Word document starts from the correct bundled or SharePoint-hosted brand template.",
-      "version": "1.2.0",
+      "version": "2.2.0",
       "publisher": "@cat-agent-skills",
       "author": "Doug Bellingeri",
       "category": "productivity",
@@ -4125,11 +4125,11 @@
         "path": "agents/@cat-agent-skills/brand_template_enforcer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/brand_template_enforcer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/brand_template_enforcer_agent.py",
-        "sha256": "033b5c9d59fa2b95346ea0cbf4b43d61ca059399bd0238ebad3a1f777e1d688f"
+        "sha256": "ae1779f176150087d15edf582f1193947f2b3df165ad863d53759e62dd1e9061"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4138,7 +4138,7 @@
       "name": "@cat-agent-skills/brand_voice_pass",
       "display_name": "Brand Voice Pass",
       "description": "Rewrite drafts into a configurable house style, preserving meaning while removing generic AI phrasing.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Simon Owen",
       "category": "general",
@@ -4159,11 +4159,11 @@
         "path": "agents/@cat-agent-skills/brand_voice_pass_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/brand_voice_pass_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/brand_voice_pass_agent.py",
-        "sha256": "07b1ed0622f666092280d444e574a820e84ac1af5852d3e2542b745fc3dc35b3"
+        "sha256": "3635849b3dcd5b55c5f9f9d6f3ec7e7a977033ca09ab57020fe9b172e8901cf4"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.0,
+        "lines": 188,
+        "size_kb": 8.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4172,7 +4172,7 @@
       "name": "@cat-agent-skills/business_os",
       "display_name": "Business OS",
       "description": "A practical operating system for Copilot Studio that gives agents a consistent way to clarify outcomes, choose the right approach, solve problems, make decisions, plan projects, improve processes, handle incidents, and turn repeatable work into reusable skills. Unlike a standard Copilot experience that relies mainly on the prompt and available context, Business OS adds a structured way of working…",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Matthew James Davis",
       "category": "general",
@@ -4195,11 +4195,11 @@
         "path": "agents/@cat-agent-skills/business_os_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/business_os_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/business_os_agent.py",
-        "sha256": "6922e233fa1067391744e90441c25c6a77ef697466161891d8259e4e55fb51a5"
+        "sha256": "b455d3229e78336c3772968e71167a3aa49c2a131e16710432b069cef3bf77aa"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.6,
+        "lines": 188,
+        "size_kb": 9.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4208,7 +4208,7 @@
       "name": "@cat-agent-skills/call_for_speakers_digest",
       "display_name": "Call for Speakers Digest",
       "description": "Weekly HTML email digest of open conference Call for Speakers (CFP) opportunities matching your topics of interest. Pulls from confs.tech, Papercall, AdatoSystems' CFP tracker, CFP Radar, Sessionize's public user-groups directory, community-specific hubs (like communitydays.org for the Microsoft ecosystem), targeted search of standalone Sessionize conferences and run.events, and general web searc…",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Michael Heath",
       "category": "general",
@@ -4228,11 +4228,11 @@
         "path": "agents/@cat-agent-skills/call_for_speakers_digest_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/call_for_speakers_digest_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/call_for_speakers_digest_agent.py",
-        "sha256": "06388603f3387d2b8039a1e8675f3d439152efe50f9c6e33a1b1fa89d888c43a"
+        "sha256": "a3e15016b7641d3e6b947d84b323b4343bdb427effe8afb6d280f09d53a39511"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.7,
+        "lines": 188,
+        "size_kb": 9.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4241,7 +4241,7 @@
       "name": "@cat-agent-skills/campaign_deck_builder",
       "display_name": "Campaign Deck Builder",
       "description": "Turn a short interview into a charming, vibrant 3-slide marketing-campaign deck by filling a bundled PowerPoint template.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Adi Leibowitz",
       "category": "devtools",
@@ -4262,11 +4262,11 @@
         "path": "agents/@cat-agent-skills/campaign_deck_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/campaign_deck_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/campaign_deck_builder_agent.py",
-        "sha256": "a29bb133a12cd4d58f1cef408a06452945aac3ae5450fe8a2164e7e2a7370cca"
+        "sha256": "9eaee36124c834b7c71a49853abb992be0a0ca4f7db6ab125621475019ee15de"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4275,7 +4275,7 @@
       "name": "@cat-agent-skills/chart_builder",
       "display_name": "Chart Builder",
       "description": "Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "CAT Agent Skills",
       "category": "devtools",
@@ -4295,11 +4295,11 @@
         "path": "agents/@cat-agent-skills/chart_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/chart_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/chart_builder_agent.py",
-        "sha256": "95aa7dbb6209114fe1326f75564ad2fe379c647857575336c71ae07df956a4b5"
+        "sha256": "324f56ae344f7fa425d43020732f423cb1c323c4b203ece4c33eed13f26b7cf1"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 8.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4308,7 +4308,7 @@
       "name": "@cat-agent-skills/clt_hr_assistant",
       "display_name": "Assistente CLT para RH",
       "description": "Assistente de legislação trabalhista brasileira (CLT) para equipes de RH e Departamento Pessoal. Responde dúvidas sobre férias, 13º salário, aviso prévio, jornada e tipos de rescisão, e calcula verbas rescisórias com memória de cálculo completa usando as tabelas oficiais vigentes de 2026 (salário mínimo, INSS e IRRF, incluindo a Lei 15.270/2025).",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Michael Ferro Pereira",
       "category": "general",
@@ -4332,11 +4332,11 @@
         "path": "agents/@cat-agent-skills/clt_hr_assistant_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
-        "sha256": "0874005b9dc09bcf47b1b5bbf116b6b6c8edb14269ee0e0daf5d745b53ef0367"
+        "sha256": "c3a3b868ca1ca03b82006c23c3c8829fb083d1e64b9dbaa6d054300752a39688"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.6,
+        "lines": 188,
+        "size_kb": 8.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4345,7 +4345,7 @@
       "name": "@cat-agent-skills/commenting_content",
       "display_name": "Commenting Content",
       "description": "Comments Word or PowerPoint files with Comments.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "AndrewHessMSFT",
       "category": "productivity",
@@ -4363,11 +4363,11 @@
         "path": "agents/@cat-agent-skills/commenting_content_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/commenting_content_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/commenting_content_agent.py",
-        "sha256": "c7beab6f50486e866c7dd5ce7fb25e6b18461db49fd9848ddfec7ff6a3069854"
+        "sha256": "187b091fcba2f8fb7bbd54d2846dd5fa025aafe300aaf05cb4e79baa06416c15"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 3.9,
+        "lines": 188,
+        "size_kb": 8.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4376,7 +4376,7 @@
       "name": "@cat-agent-skills/competitive_battlecard_builder",
       "display_name": "Competitive Battlecard Builder",
       "description": "Build an interactive comparison app, either a sales battlecard advocating for your product against named competitors, or a neutral, unbiased comparison across two or more peer items with no side taken. Filterable by item and category, with live search, a compact scorecard, and copy-to-clipboard talking points. Every claim is tagged verified or unverified so nothing invented ends up in front of a…",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Michael Heath",
       "category": "general",
@@ -4395,11 +4395,11 @@
         "path": "agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
-        "sha256": "2314b32cf7d6b3f2ef031e6cf9efca9603aeaeb3db2586ee3164f95362626c5f"
+        "sha256": "0b7356f6516b4afaabbed99ae04111381a60d133eeba92effdad8545f2f05ddd"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.7,
+        "lines": 188,
+        "size_kb": 9.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4408,7 +4408,7 @@
       "name": "@cat-agent-skills/conditional_chat_reminder",
       "display_name": "Conditional Chat Reminder",
       "description": "Schedule a Teams reminder that sends only when the expected person has not already posted a relevant update.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Giorgio Ughini",
       "category": "integrations",
@@ -4429,11 +4429,11 @@
         "path": "agents/@cat-agent-skills/conditional_chat_reminder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/conditional_chat_reminder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/conditional_chat_reminder_agent.py",
-        "sha256": "c292d13f5f54a5260ca965e2042e39f317e4ca3d223669027964cfabedc3868f"
+        "sha256": "2ff960cf9799c7e9336fd4eea85e8acf88d5d9ebf2ff5c3a52dce0da0f069171"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4442,7 +4442,7 @@
       "name": "@cat-agent-skills/conference_session_abstract_pack",
       "display_name": "Conference Session Abstract Pack",
       "description": "Create CFP-ready talk titles, abstracts, takeaways, speaker notes, and submission copy from a topic.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Simon Owen",
       "category": "general",
@@ -4464,11 +4464,11 @@
         "path": "agents/@cat-agent-skills/conference_session_abstract_pack_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/conference_session_abstract_pack_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/conference_session_abstract_pack_agent.py",
-        "sha256": "bec77cd5b82010b8310e4ad0175d6db6170320bc89e39ef325021310e86b9f35"
+        "sha256": "1555f077ef0d78b201887122101980ce639036b47f08e647ccded556eebc4070"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4477,7 +4477,7 @@
       "name": "@cat-agent-skills/content_quality_auditor",
       "display_name": "Content Quality Auditor",
       "description": "Score documents, pages, posts, or artefact libraries against a configurable quality rubric and recommend fixes.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Simon Owen",
       "category": "productivity",
@@ -4499,11 +4499,11 @@
         "path": "agents/@cat-agent-skills/content_quality_auditor_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/content_quality_auditor_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/content_quality_auditor_agent.py",
-        "sha256": "d0d1e414b616a86d29d8f7d41ca40416c6f25a7d8b0a0227cc9145559cab8eec"
+        "sha256": "884464387bc3f9da6f84ffad05a6432081cc32e356efba67a74c2d4a5ed0ed99"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 9.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4512,7 +4512,7 @@
       "name": "@cat-agent-skills/copilot_agents_news_scout",
       "display_name": "Copilot & Agents News Scout",
       "description": "A Monday-morning Scout automation that scans authoritative Microsoft sources for the past week's Copilot, Copilot Studio, and agent news and posts a concise, linked digest to Teams.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Elliot Margot",
       "category": "integrations",
@@ -4535,11 +4535,11 @@
         "path": "agents/@cat-agent-skills/copilot_agents_news_scout_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_agents_news_scout_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_agents_news_scout_agent.py",
-        "sha256": "87e41a22f09c910dcd3be70afd9425c94b6d5dfe0cb9c480561ba99c56ea57e4"
+        "sha256": "6fc2a0fa301aa19d483c4c839feed41debd86262eb0fa2852fdcaccdebed450e"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4548,7 +4548,7 @@
       "name": "@cat-agent-skills/copilot_studio_test_planner",
       "display_name": "Copilot Studio Test Planner",
       "description": "Reads an exported Copilot Studio agent and generates a graded, runnable test suite (happy-path, paraphrase, disambiguation, negative, knowledge-grounding, multilingual, and safety cases) plus a regression set, ready to run in the free Copilot Studio test panel.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Elliot Margot",
       "category": "general",
@@ -4568,11 +4568,11 @@
         "path": "agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
-        "sha256": "fb9881c8aa1cfd941ee56098333c34863abff8941663a78749f974f886e80566"
+        "sha256": "3cfc5e42ce1e3f436c2129fd6b933475640c6476a63b042d5d0d6ac22e817bd2"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.4,
+        "lines": 188,
+        "size_kb": 8.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4581,7 +4581,7 @@
       "name": "@cat-agent-skills/copilot_studio_topic_blueprint",
       "display_name": "Copilot Studio Topic Blueprint",
       "description": "Turn a one-line use case into a build-ready Microsoft Copilot Studio agent blueprint: recommended agent type and orchestration, topics, tools, knowledge, variables, a welcome Adaptive Card, security and Copilot Credits notes, and a first test plan.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Elliot Margot",
       "category": "creative",
@@ -4604,11 +4604,11 @@
         "path": "agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
-        "sha256": "8a31f915c3c65f50bd999268f16495fb312b6964e8b8c5972b66db0fc1649119"
+        "sha256": "c11337248088a38d1cbbbba408808e2a111734b20ccebd659534832ff67882f2"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.4,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4617,7 +4617,7 @@
       "name": "@cat-agent-skills/doc_format_converter",
       "display_name": "Universal Document Converter",
       "description": "Convert documents between Markdown, HTML, PDF, Word, PowerPoint, Excel/CSV and text — fully offline, using only the libraries already in the agent sandbox.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Andreas Adner",
       "category": "devtools",
@@ -4639,11 +4639,11 @@
         "path": "agents/@cat-agent-skills/doc_format_converter_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/doc_format_converter_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/doc_format_converter_agent.py",
-        "sha256": "7c7356b4ad1bfcb94eb8236d07b3e145a8aec6870c02acec35c49cf30e59b279"
+        "sha256": "fe4a32bfd496ea42fe68d4815d3f6835297ca9434e9a3c72129873a4b5ea0f3a"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4652,7 +4652,7 @@
       "name": "@cat-agent-skills/enterprise_agent_design_authority",
       "display_name": "Enterprise Agent Design Authority (EADA)",
       "description": "An enterprise design review framework that helps architects build secure, scalable, governable, and production-ready Microsoft Copilot Studio agents.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Faride Ilanda",
       "category": "analysis",
@@ -4674,11 +4674,11 @@
         "path": "agents/@cat-agent-skills/enterprise_agent_design_authority_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/enterprise_agent_design_authority_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/enterprise_agent_design_authority_agent.py",
-        "sha256": "869e3a6d2668d5c77a5a85ab6747ca562a26c2f60078e6ed60197d42afba6465"
+        "sha256": "1b8d67a3b9d2dab18a77b43f93af6285ad595ac5b44c49ff0568605b8a596f6f"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4687,7 +4687,7 @@
       "name": "@cat-agent-skills/eu_greenwashing_analysis",
       "display_name": "EU Greenwashing Analysis",
       "description": "Detect greenwashing in product descriptions, marketing copy, and catalog entries against EU Directive 2024/825 and the Green Claims Directive. Returns a structured per-claim findings report with risk levels, regulation references, and recommended corrections.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Remi Dyon",
       "category": "general",
@@ -4709,11 +4709,11 @@
         "path": "agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
-        "sha256": "cf963f7a4ec3ed62a79bd79418c57639cdef2966e87f7d72c4afb71c9ef5e106"
+        "sha256": "60f5b0746b2395fef7e8225ba803aeb9de1264b58c9797df97fb0a80123d7a5e"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.4,
+        "lines": 188,
+        "size_kb": 9.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4722,7 +4722,7 @@
       "name": "@cat-agent-skills/exam_prep_learning_plan_builder",
       "display_name": "Exam Prep Learning Plan Builder",
       "description": "Build a personalized study plan app for an exam or certification: overview timeline, day-by-day schedule with a calendar picker, domain breakdown, one-click .ics download, and a notes tab to track confidence over time.",
-      "version": "2.0.1",
+      "version": "3.0.1",
       "publisher": "@cat-agent-skills",
       "author": "Michael Heath",
       "category": "general",
@@ -4741,11 +4741,11 @@
         "path": "agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
-        "sha256": "ea95254941dacd04c7d30aa6d4d71de07531e01573ef072158011487675b8e9a"
+        "sha256": "35509b26742d474c7b205a420085c28a755754e18621d8599f5d4a54f0bdab35"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4754,7 +4754,7 @@
       "name": "@cat-agent-skills/gantt_chart_generator",
       "display_name": "Gantt Chart Builder",
       "description": "Generate clean, consistently-styled matplotlib Gantt charts from a schedule CSV or DataFrame — with group colours, completion overlays, and a today line.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Nazish Qasim",
       "category": "devtools",
@@ -4776,11 +4776,11 @@
         "path": "agents/@cat-agent-skills/gantt_chart_generator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/gantt_chart_generator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/gantt_chart_generator_agent.py",
-        "sha256": "cf004250fa1ed590062eca1057572f77056cc6c74f0d73f7317c30561aceeb27"
+        "sha256": "2df2f858299c6f1239e65bb152f4bbb593ba2072dbcac6316d6362416bdee486"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4789,7 +4789,7 @@
       "name": "@cat-agent-skills/generating_podcast_script",
       "display_name": "Podcast Script Generator",
       "description": "Turn a topic or a pile of source material — a newsletter, news digest, or set of articles — into a two-host, NotebookLM-style podcast episode, with multi-voice SSML and optional Azure Text-to-Speech audio.",
-      "version": "1.1.0",
+      "version": "2.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Remi Dyon",
       "category": "general",
@@ -4811,11 +4811,11 @@
         "path": "agents/@cat-agent-skills/generating_podcast_script_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/generating_podcast_script_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/generating_podcast_script_agent.py",
-        "sha256": "fe410b079a2179244b20015e82ef76723e80e0d23fc2aafa12fbe42b61808559"
+        "sha256": "38267f60dffe6f5f867e473ee794685bb89ea2833f4716dfd9ea9431b3bef325"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4824,7 +4824,7 @@
       "name": "@cat-agent-skills/global_greenwashing_claim_auditor",
       "display_name": "Global Greenwashing Claim Auditor",
       "description": "Audit environmental claims in CSV, XLSX, DOCX, PPTX, conversational text, and public websites with separate ANY, CA, EU, and UK findings.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Chris Garty",
       "category": "productivity",
@@ -4848,11 +4848,11 @@
         "path": "agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py",
-        "sha256": "ea022c3b18531f7bde75f4fcf851128d557c48a1141254a76faf97d4d0455d54"
+        "sha256": "3899d6d4b21a00ce391389c46b6172786c9e8e3023f60b715765165d5343d9fe"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4861,7 +4861,7 @@
       "name": "@cat-agent-skills/grab_my_files",
       "display_name": "Grab My Files",
       "description": "One-tap way to bundle every file your Copilot Studio agent produced in a session into a single timestamped .zip and hand it back as a download.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Rafael Alcaraz",
       "category": "pipeline",
@@ -4882,11 +4882,11 @@
         "path": "agents/@cat-agent-skills/grab_my_files_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/grab_my_files_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/grab_my_files_agent.py",
-        "sha256": "d04b497dd0dd898017e66fb14e2585dc7b80d4e724fa74c91b849a50e2dbbccf"
+        "sha256": "7bf1e47a108ee4b7ac096b531ca8a1a6518e55f1e5b25c33b597b31f435852d3"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.0,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4895,7 +4895,7 @@
       "name": "@cat-agent-skills/idea_refiner",
       "display_name": "Idea Refiner",
       "description": "Refines an existing plan, decision, or draft through relentless, branch-by-branch questioning. Grouped in batches of 2-5 with recommended answers, pulling facts from Work IQ where possible, until every part has been fully thought through.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Mathias Salomonsen",
       "category": "general",
@@ -4916,11 +4916,11 @@
         "path": "agents/@cat-agent-skills/idea_refiner_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/idea_refiner_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/idea_refiner_agent.py",
-        "sha256": "dd6fb8342091107375cbacfea670285fa5d5182b74235e3f005ae558783696ef"
+        "sha256": "1f45a76ddaa7dca12d9857414545d29e8dc4e2ee13f87af6eb03b928acdb7bb7"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4929,7 +4929,7 @@
       "name": "@cat-agent-skills/institutional_knowledge",
       "display_name": "Institutional Knowledge Archivist",
       "description": "Preserve a departing senior leader's institutional knowledge — decisions, rationale, relationships, and tribal knowledge — by mining their M365 signals into a structured, multi-phase archive a successor can ground on.",
-      "version": "1.0.1",
+      "version": "2.0.1",
       "publisher": "@cat-agent-skills",
       "author": "Srinivas Varukala",
       "category": "general",
@@ -4952,11 +4952,11 @@
         "path": "agents/@cat-agent-skills/institutional_knowledge_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/institutional_knowledge_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/institutional_knowledge_agent.py",
-        "sha256": "a4304a18b67f287dd9135ee945a02562fd9c05524894df10c0dc02a6e0ea8d7c"
+        "sha256": "b9574a93f4efeb61a83d8e843f8caae6f11d146b20edaca294837c209bc4723a"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.4,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4965,7 +4965,7 @@
       "name": "@cat-agent-skills/iterative_file_editing",
       "display_name": "Iterative File Editing",
       "description": "In Copilot Studio, re-sending an edited file under the same name fails to deliver it — the change is made but never reaches the user. This skill gives each iteration a new version-numbered filename (report_v1.docx, report_v2.docx…) so every update actually lands in the chat as its own attachment.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Adi Leibowitz",
       "category": "general",
@@ -4986,11 +4986,11 @@
         "path": "agents/@cat-agent-skills/iterative_file_editing_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/iterative_file_editing_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/iterative_file_editing_agent.py",
-        "sha256": "a532f41b2ec9ea63e4917ac8ad8f942ffbdab5dd177a3864692e5527c63050b2"
+        "sha256": "cce8b6e20451b55794496c50b14c159915737e03af94e3e7c2d3dcc01b8588f8"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.4,
+        "lines": 188,
+        "size_kb": 9.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -4999,7 +4999,7 @@
       "name": "@cat-agent-skills/knowledge_corpus_curator",
       "display_name": "Knowledge Corpus Curator",
       "description": "Review uploaded knowledge-source files for duplication, redundancy, staleness, overlap, and potentially conflicting guidance, then produce an evidence-based curation backlog.",
-      "version": "0.8.0",
+      "version": "1.8.0",
       "publisher": "@cat-agent-skills",
       "author": "Doug Bellingeri",
       "category": "productivity",
@@ -5022,11 +5022,11 @@
         "path": "agents/@cat-agent-skills/knowledge_corpus_curator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/knowledge_corpus_curator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/knowledge_corpus_curator_agent.py",
-        "sha256": "67d21dc360bba5c24e274d3f006be0501d4ed06e01c60e17439e590602ae980f"
+        "sha256": "64d1835538128e525a1d912cc3140cda56f126332bd118ed0eeef34adf18b00f"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5035,7 +5035,7 @@
       "name": "@cat-agent-skills/knowledge_source_router",
       "display_name": "Knowledge Source Router",
       "description": "Route Copilot Studio knowledge searches to the right region-specific source (Americas, EMEA, APAC, or Global) based on where the user is, so answers stay locally accurate.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Adi Leibowitz",
       "category": "general",
@@ -5056,11 +5056,11 @@
         "path": "agents/@cat-agent-skills/knowledge_source_router_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/knowledge_source_router_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/knowledge_source_router_agent.py",
-        "sha256": "e1ef4ddb2be43ff1e8c2d50b0663a37b7c2d20fcb9eb41be8ef370b558091799"
+        "sha256": "a6d2ac6a36c781505665b517953328f2dd809e91140dd40f56588569f87edeb6"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 8.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5069,7 +5069,7 @@
       "name": "@cat-agent-skills/lab_column_mapper",
       "display_name": "Lab Column Mapper",
       "description": "When a health system's lab results ingestion pipeline hits an unknown column header, this skill semantically matches the source column against the canonical clinical schema (LOINC-anchored), scoped by lab and clinical domain, and writes a suggested mapping to a Dataverse review queue for a clinical informatics steward to approve.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Rafsan Huseynov",
       "category": "general",
@@ -5093,11 +5093,11 @@
         "path": "agents/@cat-agent-skills/lab_column_mapper_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/lab_column_mapper_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/lab_column_mapper_agent.py",
-        "sha256": "a559b5fc3edc23fd96931c79e0b59757a2327452871ec7fa610167bccaef6515"
+        "sha256": "5589a92823bbb860000ebb088852972236b3df0668bbe743601f90be85ce0aa1"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.5,
+        "lines": 188,
+        "size_kb": 9.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5106,7 +5106,7 @@
       "name": "@cat-agent-skills/linkedin_content_system",
       "display_name": "LinkedIn Content System",
       "description": "Create evidence-led LinkedIn posts, promos, newsletter intros, and long-form copy from supplied facts or drafts.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Simon Owen",
       "category": "general",
@@ -5127,11 +5127,11 @@
         "path": "agents/@cat-agent-skills/linkedin_content_system_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/linkedin_content_system_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/linkedin_content_system_agent.py",
-        "sha256": "161a2e203fc3ce255d6228271425c4268fd8caa6758ef0eec6bd23978d81637c"
+        "sha256": "cd5a44eb81ec76324921f288cf231f95096b3a9c67f5a5269038dc5b748eb744"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5140,7 +5140,7 @@
       "name": "@cat-agent-skills/linkedin_content_writer",
       "display_name": "LinkedIn Content Writer",
       "description": "Create credible LinkedIn content from facts, notes or drafts, with configurable voice and no invented evidence.",
-      "version": "1.0.1",
+      "version": "2.0.1",
       "publisher": "@cat-agent-skills",
       "author": "Becky Still, Digital Boop Ltd",
       "category": "general",
@@ -5160,11 +5160,11 @@
         "path": "agents/@cat-agent-skills/linkedin_content_writer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/linkedin_content_writer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/linkedin_content_writer_agent.py",
-        "sha256": "513622fb3c6c72b4eacc7485e0d7322a455379c07813be25a617c6e888e934bb"
+        "sha256": "2e8b65f13ef8f8b4f9470b5fcd78960b3d95028cd00408c86e07adcf1724fab5"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5173,7 +5173,7 @@
       "name": "@cat-agent-skills/lookup_dataverse_table",
       "display_name": "Dataverse Table Lookup",
       "description": "Search any Microsoft Dataverse table, browse matching records, and drill into full record details — sourced live via the Dataverse MCP Server.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Chris Garty",
       "category": "integrations",
@@ -5194,11 +5194,11 @@
         "path": "agents/@cat-agent-skills/lookup_dataverse_table_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/lookup_dataverse_table_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/lookup_dataverse_table_agent.py",
-        "sha256": "4711a7ae7d45b59605527836000f145786d83dd6ef0fd4e2504ed07af3065947"
+        "sha256": "6525511bf6ee244af3473793a5042254fed4e36052023cb062438af1f3636eb4"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 9.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5207,7 +5207,7 @@
       "name": "@cat-agent-skills/mct_excellence_iq",
       "display_name": "MCT Excellence IQ",
       "description": "An AI-powered Instructional Intelligence Skill that helps Microsoft Certified Trainers design, deliver, assess, localize, and continuously improve world-class Microsoft learning experiences across Azure, Business Applications, Data & AI, Modern Work, and Security.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Faride Ilanda",
       "category": "general",
@@ -5231,11 +5231,11 @@
         "path": "agents/@cat-agent-skills/mct_excellence_iq_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/mct_excellence_iq_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/mct_excellence_iq_agent.py",
-        "sha256": "23a33d02b2842024f7c58e8d32fed5ab129b54b231e8aec27a562e301a21ef4f"
+        "sha256": "1b62ce1f0c3641b283c403b6a6c3146f554f5222346d9d7a2d127ea6bdc61875"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.4,
+        "lines": 188,
+        "size_kb": 9.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5244,7 +5244,7 @@
       "name": "@cat-agent-skills/meeting_analyzer",
       "display_name": "Meeting Analyzer",
       "description": "Analyzes meeting content pasted as text or provided as audio/video transcripts. Delivers a structured intelligence report: explicit decisions and action items, participant persona profiles, and — most importantly — hidden insights: unspoken tensions, implicit risks, unresolved topics, and signals that were not made explicit during the meeting but are critical to the context.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Michael Ferro Pereira",
       "category": "analysis",
@@ -5267,11 +5267,11 @@
         "path": "agents/@cat-agent-skills/meeting_analyzer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/meeting_analyzer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/meeting_analyzer_agent.py",
-        "sha256": "6f223d5abca3b8739c014f1121de7ef490dcd57b48fac998679445111f20c87a"
+        "sha256": "bb10c34d0d9a18bf34f0487582f49eeaaaba6c1400fa00a2abe1943c42c44f03"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.6,
+        "lines": 188,
+        "size_kb": 9.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5280,7 +5280,7 @@
       "name": "@cat-agent-skills/microsoft_ai_platform_advisor",
       "display_name": "Microsoft AI Platform Advisor",
       "description": "Guides a customer through a discovery interview, recommends the right Microsoft AI platform (M365 Copilot, Agent Builder, Copilot Studio, Foundry, Foundry Agent Service, Windows AI Foundry, or Agent 365 as the governance layer), scores technical complexity and risk, and plots them on a 2x2 quadrant chart with planning guidance.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Rafsan Huseynov",
       "category": "general",
@@ -5304,11 +5304,11 @@
         "path": "agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
-        "sha256": "19adaa1cac8fb2ce8158fdeae87f4deb164c17e3bc315538cdc3ba112f69c450"
+        "sha256": "8bbf35ee4a97ee4ed92876adbbfd13d2b7624c98a137dc949f1f46080a0637d4"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.6,
+        "lines": 188,
+        "size_kb": 9.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5317,7 +5317,7 @@
       "name": "@cat-agent-skills/own_voice_builder",
       "display_name": "Own Voice Builder",
       "description": "Mines your sent emails to extract your real writing voice — languages, tone modes, structure, vocabulary, taboo phrases — and generates a personal voice skill that makes every email and Teams draft sound like you.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Marcel",
       "category": "productivity",
@@ -5339,11 +5339,11 @@
         "path": "agents/@cat-agent-skills/own_voice_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/own_voice_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/own_voice_builder_agent.py",
-        "sha256": "d63fd7688f802176ef34fa453ba2477cf40301c55ff4f30c78dd3b38c9620591"
+        "sha256": "c94c678de5a3bd69cf2f1f4e4b50b38cdd931bfcd23aeec345fb3263b86df1b0"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5352,7 +5352,7 @@
       "name": "@cat-agent-skills/pattern_radar",
       "display_name": "Pattern Radar",
       "description": "Scans your recent Microsoft 365 signals to surface recurring patterns worth productizing — things you keep explaining (blog candidates) or multi-step tasks you keep doing by hand (automation candidates).",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Srinivas Varukala",
       "category": "productivity",
@@ -5374,11 +5374,11 @@
         "path": "agents/@cat-agent-skills/pattern_radar_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pattern_radar_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/pattern_radar_agent.py",
-        "sha256": "c09a1104dbefd987c9cc20787636643239c93fe7840e76645dbd3d0d016a3a4f"
+        "sha256": "5ab75e34a67a13fa24db57751e922a5b329554145596e626e4e324b6feb31aac"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5387,7 +5387,7 @@
       "name": "@cat-agent-skills/pattern_radar_automation",
       "display_name": "Pattern Radar (Scheduled)",
       "description": "Twice a week, scans your recent Microsoft 365 signals and posts a Teams summary of recurring patterns worth productizing — things you keep explaining (blog candidates) and multi-step tasks you keep doing by hand (automation candidates). Read-only and privacy-aware.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Srinivas Varukala",
       "category": "productivity",
@@ -5409,11 +5409,11 @@
         "path": "agents/@cat-agent-skills/pattern_radar_automation_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pattern_radar_automation_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/pattern_radar_automation_agent.py",
-        "sha256": "5dde3bff6f8031d08300b45511d672b0a549e055c1b0e25faba3b245f7eb71f1"
+        "sha256": "4a46e8a71dfa5a6e08732d289372d52fe203669fef202c3956fa38a1d6f3317a"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.4,
+        "lines": 188,
+        "size_kb": 9.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5422,7 +5422,7 @@
       "name": "@cat-agent-skills/pdf_table_data_conversion",
       "display_name": "PDF Table Data Conversion",
       "description": "Extract tables from a PDF document (e.g. contract rebate or pricing schedules) and convert them into a clean, workable Excel spreadsheet or CSV.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Lewis Baybutt",
       "category": "productivity",
@@ -5445,11 +5445,11 @@
         "path": "agents/@cat-agent-skills/pdf_table_data_conversion_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pdf_table_data_conversion_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/pdf_table_data_conversion_agent.py",
-        "sha256": "294cd62831b307fe6d91bb5c2bb5a5c7b8986cd271f40fc5dbda1da53ac53d53"
+        "sha256": "111afc6de615d21bd7a889670fe83fb7a8c062d7eced5a34668f69aad0e6d049"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5458,7 +5458,7 @@
       "name": "@cat-agent-skills/persona_reaction_panel",
       "display_name": "Persona Reaction Panel",
       "description": "Pre-test an internal launch, comms, or enablement artefact against your own role-based personas before it ships — surfaces blackspots, domain gaps, credible-detractor risks, and concrete edits. Bring your own personas file.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Olivia Zhang",
       "category": "general",
@@ -5479,11 +5479,11 @@
         "path": "agents/@cat-agent-skills/persona_reaction_panel_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/persona_reaction_panel_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/persona_reaction_panel_agent.py",
-        "sha256": "8ada2cf0117297d5513acbddc04c8c7eb41f4857b93f42657ba7685c7f9e1f11"
+        "sha256": "471d20b0f203e9a3937b853274583f5028962fe9de6d1da42222cc2b2771bc33"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5492,7 +5492,7 @@
       "name": "@cat-agent-skills/phi_deidentifier",
       "display_name": "PHI De-identifier",
       "description": "Redact the 18 HIPAA Safe Harbor identifiers from clinical text (or produce a Limited Data Set) with consistent pseudonym tokens and an audit manifest of what was removed.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Rafael Lopez Alcaraz",
       "category": "devtools",
@@ -5516,11 +5516,11 @@
         "path": "agents/@cat-agent-skills/phi_deidentifier_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/phi_deidentifier_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/phi_deidentifier_agent.py",
-        "sha256": "c7291a506f5e59c73791122ceb888c21b4cbd4ab5e2334cf63a802c1dee94128"
+        "sha256": "deacbb22ef7601fa437aa51aa7ccdd07ed16fa8c3eaa345c50ff44dc6d975d6f"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5529,7 +5529,7 @@
       "name": "@cat-agent-skills/pov_line_generator",
       "display_name": "POV Line Generator",
       "description": "Generate sharp, specific point-of-view lines for posts, slides, talks, campaigns, or positioning work.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Simon Owen",
       "category": "general",
@@ -5550,11 +5550,11 @@
         "path": "agents/@cat-agent-skills/pov_line_generator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pov_line_generator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/pov_line_generator_agent.py",
-        "sha256": "0da802405f3f7989a34a6667e161a5c22b8ee25bb3d10b63370610785452130d"
+        "sha256": "181aaa29ab74475fe1d1b73cbfec45f0cdd31f3016bbf34eabcaf3ec23213ded"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 8.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5563,7 +5563,7 @@
       "name": "@cat-agent-skills/power_automate_desktop_assessment",
       "display_name": "Power Automate Desktop Assessment",
       "description": "Assess Power Automate Desktop and hybrid automation projects with evidence-based findings and prioritized remediation guidance.",
-      "version": "1.1.0",
+      "version": "2.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Ricardo Calejo",
       "category": "analysis",
@@ -5584,11 +5584,11 @@
         "path": "agents/@cat-agent-skills/power_automate_desktop_assessment_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/power_automate_desktop_assessment_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/power_automate_desktop_assessment_agent.py",
-        "sha256": "51723d1828dc5f35dfaacbf3578924aa6c6a8618e98ebf97b6abbd089d1dee04"
+        "sha256": "a002ab6df0f13d216069dc399971ecec085e96ce854ee960de87ac043cd8435a"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5597,7 +5597,7 @@
       "name": "@cat-agent-skills/power_automate_documentation",
       "display_name": "Power Automate Documentation",
       "description": "Turns a Power Automate solution .zip into a clean markdown reference for every flow inside it: trigger, plain-English process, connection references, and a read/write/delete table for everything it touches. Maps which flows call each other and unresolved connections automatically.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Mathias Salomonsen",
       "category": "general",
@@ -5617,11 +5617,11 @@
         "path": "agents/@cat-agent-skills/power_automate_documentation_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/power_automate_documentation_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/power_automate_documentation_agent.py",
-        "sha256": "8a1ccb6d3f47133fe5bbd520a071dbd66cfff33ca69fb2ee8b3043aaf767435c"
+        "sha256": "db07d9c1a188ccc5657ca62c42bf1782d6716fd9edc11d5efd9ee5c9f9490f30"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.5,
+        "lines": 188,
+        "size_kb": 9.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5630,7 +5630,7 @@
       "name": "@cat-agent-skills/power_bi_model_review",
       "display_name": "Power BI Model Review",
       "description": "Review a Power BI or Analysis Services semantic model (TMDL, BIM/JSON, or a pasted table/measure list) for relationship, DAX, date-handling, and naming issues, with corrected DAX for anything flagged.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Tim Karlsson",
       "category": "pipeline",
@@ -5652,11 +5652,11 @@
         "path": "agents/@cat-agent-skills/power_bi_model_review_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/power_bi_model_review_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/power_bi_model_review_agent.py",
-        "sha256": "f3fa219c1aa4ee23764e1411624aee29d96f877136bc93959330fa09572b91ec"
+        "sha256": "29cae30baa09510e4c1adaf840d54147afc9476821ab7c5a1303194987097b7c"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5665,7 +5665,7 @@
       "name": "@cat-agent-skills/powerpoint_deck_designer",
       "display_name": "PowerPoint Deck Designer",
       "description": "Creates polished PowerPoint decks from a JSON specification using python-pptx. Designed as a Copilot Studio Skill that runs natively inside the agent's Python container (no Azure Function or custom connector required). Supports 8 layouts plus native charts (bar, column, line, pie, donut with stacked / 100% stacked variants).",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Ferran Chopo",
       "category": "devtools",
@@ -5685,11 +5685,11 @@
         "path": "agents/@cat-agent-skills/powerpoint_deck_designer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/powerpoint_deck_designer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/powerpoint_deck_designer_agent.py",
-        "sha256": "b4a3d8e8259d1fecf2df7efe70f4056c5ab37d82407f72d4d6ba89f7f1162f9e"
+        "sha256": "eb611944514156ad3588142f26e0526500af98a8a80fd3ce408ee6b0451c6c80"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.5,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5698,7 +5698,7 @@
       "name": "@cat-agent-skills/presentation_talk_track_builder",
       "display_name": "Presentation Talk Track Builder",
       "description": "Writes natural, first-person spoken presenter scripts for the slides in a deck. Treats existing speaker notes as authoritative when they contradict slide text. Calibrates length to a target duration and speaking pace and returns a timing table. Never modifies visible slide content.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Jagmeet Chabra",
       "category": "productivity",
@@ -5719,11 +5719,11 @@
         "path": "agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
-        "sha256": "4c9ce829908d046a285849eec2dbeec46800f8a9e8a3b1ab0eeb94d31248d726"
+        "sha256": "0b292d4a5a102713a81298e77e673258e3e9dc9d67595b37b4afadf58449e531"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.5,
+        "lines": 188,
+        "size_kb": 9.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5732,7 +5732,7 @@
       "name": "@cat-agent-skills/process_sop_architect",
       "display_name": "Process & SOP Architect",
       "description": "Turn process notes and transcripts into an editable SOP, process map, RACI, control register, improvement backlog, and polished PowerPoint briefing.",
-      "version": "1.1.0",
+      "version": "2.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Parag Dessai",
       "category": "productivity",
@@ -5753,11 +5753,11 @@
         "path": "agents/@cat-agent-skills/process_sop_architect_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/process_sop_architect_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/process_sop_architect_agent.py",
-        "sha256": "74fefbfa4839a9dc3e3801bb43a38dbbb3740a0e40859b151429d410dba1cfef"
+        "sha256": "7b3e33d031c6c6388c76d4fe360cb24beb8092dd33e2d45b60ab5a93431d84a2"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5766,7 +5766,7 @@
       "name": "@cat-agent-skills/redlining_content",
       "display_name": "Redlining Content",
       "description": "Redlines a document based on changes from a template with Track Changes.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "AndrewHessMSFT",
       "category": "productivity",
@@ -5784,11 +5784,11 @@
         "path": "agents/@cat-agent-skills/redlining_content_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/redlining_content_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/redlining_content_agent.py",
-        "sha256": "78580708f30267a3f194fa4901aeb619b74ee8f1097551f996fa855c8f5effcc"
+        "sha256": "1196f5449b1e765cd968e70f0a5568c40598968414f4ffb10380e02b9bdfed98"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 3.9,
+        "lines": 188,
+        "size_kb": 8.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5797,7 +5797,7 @@
       "name": "@cat-agent-skills/regulation_monitor",
       "display_name": "Regulation Monitor",
       "description": "Configure once, then on a schedule sweeps a locked list of authoritative sources (auto-discovered at setup, confirmed by the user) plus any user-supplied seeds. Classifies each item, flags items relevant to the user's team using a light WorkIQ-derived profile, and renders a self-contained HTML dashboard. A tightly-bounded fallback web search is used only when a locked source is silent in the wind…",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Jagmeet Chabra",
       "category": "analysis",
@@ -5818,11 +5818,11 @@
         "path": "agents/@cat-agent-skills/regulation_monitor_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/regulation_monitor_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/regulation_monitor_agent.py",
-        "sha256": "a45d439c523cd8bbe845a75d84bc9590d3be2c2e0524a7f7c6681cccfaffee8a"
+        "sha256": "094fa86c7092388fb65e3ce1e381c016d4d8b9fb2ddcdb92be6e720016a6b0e7"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.6,
+        "lines": 188,
+        "size_kb": 9.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5831,7 +5831,7 @@
       "name": "@cat-agent-skills/rich_html_presentation",
       "display_name": "Rich HTML Presentation",
       "description": "Create polished, self-contained HTML slide decks with keynote-style visuals, keyboard navigation, themes, animations, and reusable presentation components.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Henry Jammes",
       "category": "productivity",
@@ -5852,11 +5852,11 @@
         "path": "agents/@cat-agent-skills/rich_html_presentation_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/rich_html_presentation_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/rich_html_presentation_agent.py",
-        "sha256": "f3597c06868262fd34c7a6d659bcfb802926117cd8ae15b3d1a7760c0ba49096"
+        "sha256": "3850f22f2c00d0923e80824512c44cd7075e0bdbe4aa9bfc1ba8377df89e2004"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5865,7 +5865,7 @@
       "name": "@cat-agent-skills/scrollytelling_data",
       "display_name": "Scrollytelling Data",
       "description": "Turns data into a scroll-driven HTML story.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "AndrewHessMSFT",
       "category": "pipeline",
@@ -5885,11 +5885,11 @@
         "path": "agents/@cat-agent-skills/scrollytelling_data_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/scrollytelling_data_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/scrollytelling_data_agent.py",
-        "sha256": "8ea320d5ed9b68f88e96b5929114033792fd503008bc4c752b24cbd994c816d4"
+        "sha256": "0dc2134948992af0c75f37446ddf370d42a355e9e563a6988f0de3c719d35e18"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 3.9,
+        "lines": 188,
+        "size_kb": 8.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5898,7 +5898,7 @@
       "name": "@cat-agent-skills/sharepoint_list_formatter",
       "display_name": "SharePoint List Formatter",
       "description": "Turns any SharePoint list data into a clean, consistent markdown table. Dynamic columns based on list type and query, plus a one-click Open link for every row.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Mathias Salomonsen",
       "category": "pipeline",
@@ -5919,11 +5919,11 @@
         "path": "agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
-        "sha256": "c41430a97a33bb3aa3d06fd98b6d5bf4c6ef5103349447147951d6bc6ec38c62"
+        "sha256": "8ce15990887997b95ee23d598dab87d7f22a644e38e5dd49d089571a201564f2"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5932,7 +5932,7 @@
       "name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
       "display_name": "SharePoint List Insight Report Generator",
       "description": "Automatically discovers and validates a SharePoint list within a connected knowledge source, analyzes its structure and data, identifies key business insights, and generates a downloadable interactive HTML report. The report includes dynamic filters, interactive charts, sortable and searchable tables with pagination, detailed record drill-down through modal popups, and direct links to open items…",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Marco Rocca",
       "category": "integrations",
@@ -5953,11 +5953,11 @@
         "path": "agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py",
-        "sha256": "2277851e5a76f27472c32805075abb93f0a4ba895ab2df68dfbfd061ef4c720d"
+        "sha256": "1755e4d761977ef94e93304dc8d180edc0dc810f70e304a513ed4909b525f0d7"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.8,
+        "lines": 188,
+        "size_kb": 9.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -5966,7 +5966,7 @@
       "name": "@cat-agent-skills/skill_authoring_coach",
       "display_name": "Skill Authoring Coach",
       "description": "Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Simon Owen",
       "category": "general",
@@ -5987,11 +5987,11 @@
         "path": "agents/@cat-agent-skills/skill_authoring_coach_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/skill_authoring_coach_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/skill_authoring_coach_agent.py",
-        "sha256": "62bf0a10514c0d6e25434f4e47c36192c136d2350b90e83e5d4fbfb9509e6fb6"
+        "sha256": "123cd43acf80de040e407c00cd0991d61bd4c8dafd7972602a769fc8f647b6e1"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.1,
+        "lines": 188,
+        "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -6000,7 +6000,7 @@
       "name": "@cat-agent-skills/spend_more_time_with_friends_and_family",
       "display_name": "Spend More Time With Friends & Family",
       "description": "While you're out of office, watches a group chat and answers questions from your local knowledge docs (clearly marked AI-generated), logs anything it can't answer for later, and pings you on Teams if its setup is incomplete.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Adi Leibowitz",
       "category": "integrations",
@@ -6020,11 +6020,11 @@
         "path": "agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py",
-        "sha256": "152ec06f27bd65ba3159e8cd8e9fb8f252f62a8b33a67da63e1ddf4bf50e7369"
+        "sha256": "d11659b95fb22912398412b573f58ec52b940dcff10574f772ed0a4b4be892db"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.4,
+        "lines": 188,
+        "size_kb": 9.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -6033,7 +6033,7 @@
       "name": "@cat-agent-skills/style_analyzer",
       "display_name": "Communication Style Analyzer",
       "description": "Analyzes your Teams chats and emails to build a reusable profile of your writing voice — greetings, tone, length, punctuation, sign-offs, common phrases, and quirks — and saves it to memory for other assistants to use.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Srinivas Varukala",
       "category": "productivity",
@@ -6055,11 +6055,11 @@
         "path": "agents/@cat-agent-skills/style_analyzer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/style_analyzer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/style_analyzer_agent.py",
-        "sha256": "b55122e5889049b9dd66ac71cae21a2f753e83089b4912b40b812f73c96aa228"
+        "sha256": "529eb8528b62f6d9e5c1d80182371e91a9c7d725ddb394fb0588a2d6f7608287"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -6068,7 +6068,7 @@
       "name": "@cat-agent-skills/tool_tracer",
       "display_name": "Tool Tracer",
       "description": "On-demand tool/action trace for Copilot Studio runs (`/special-debug tool-trace` → `tool_trace.json`).",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Rafael Lopez Alcaraz",
       "category": "general",
@@ -6091,11 +6091,11 @@
         "path": "agents/@cat-agent-skills/tool_tracer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/tool_tracer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/tool_tracer_agent.py",
-        "sha256": "3617383e4ed7a62351a231b2298295d10c0c964156e5e9b32f560e1f6789fb2c"
+        "sha256": "9bdbbbf6039d95cd831a928da5055dd9dec8dd45c1fc63c67142f4c8260c4e84"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.0,
+        "lines": 188,
+        "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -6104,7 +6104,7 @@
       "name": "@cat-agent-skills/vacation_urgent_forwarder",
       "display_name": "Vacation Urgent Forwarder",
       "description": "A Scout automation installer that, only during a configured vacation window, scans work email and Teams and forwards genuinely urgent items to your personal email.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Giorgio Ughini",
       "category": "productivity",
@@ -6124,11 +6124,11 @@
         "path": "agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
-        "sha256": "25ec6addfe2486fa03a3d16963e75a30c3c897bb524c65d9ee1320fd651b71a9"
+        "sha256": "a945ea6ac53c04d6b788b7a61d287b33fed92bc1d34272178e5a7c74c2c66e7e"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -6137,7 +6137,7 @@
       "name": "@cat-agent-skills/vendor_contract_risk_review",
       "display_name": "Vendor Contract Risk Review",
       "description": "First-pass review of a vendor contract or SOW for the clauses that commonly cause problems (auto-renewal, liability caps, termination, IP ownership), flagged by risk level to prepare for legal review, not replace it.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Tim Karlsson",
       "category": "general",
@@ -6159,11 +6159,11 @@
         "path": "agents/@cat-agent-skills/vendor_contract_risk_review_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/vendor_contract_risk_review_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/vendor_contract_risk_review_agent.py",
-        "sha256": "f584f3a4ddb7d841f5aaaa4ad67eeb5653f28ade58568470d0acdb2a5971e955"
+        "sha256": "b83fe34b7b87dcbf87a736131abad982e5fe477b0823a4204428b09fb1750590"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.3,
+        "lines": 188,
+        "size_kb": 9.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -6172,7 +6172,7 @@
       "name": "@cat-agent-skills/whiteboard_to_infographic",
       "display_name": "Whiteboard to Infographic",
       "description": "Turn a photo of a hand-drawn whiteboard or process sketch into a polished, client-ready infographic slide (.pptx), generated natively in the agent's Python container.",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "publisher": "@cat-agent-skills",
       "author": "Andy Zehr",
       "category": "productivity",
@@ -6195,11 +6195,11 @@
         "path": "agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
-        "sha256": "633aaf2062889757d724550ec49f76c59a4aa0d0ab433bb120c19a95284e008c"
+        "sha256": "b4b6836d3126428ba7cb3ba517721d886362be50d8ef10c3de03706a275330e5"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -6208,7 +6208,7 @@
       "name": "@cat-agent-skills/wikipedia_human_style_writing",
       "display_name": "Wikipedia Human Style Writing",
       "description": "Rewrite or draft prose so it avoids the tell-tale signs of AI writing, using Wikipedia's 'Signs of AI writing' field guide.",
-      "version": "0.1.0",
+      "version": "1.1.0",
       "publisher": "@cat-agent-skills",
       "author": "Chris Garty",
       "category": "general",
@@ -6231,11 +6231,11 @@
         "path": "agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py",
-        "sha256": "a4db25b315f5ba4c79efb53b6f03659f5300b29334cde6e0ff45d7f6486d2d4f"
+        "sha256": "1f50f40dc28b1760c266836dc179d8cb5be8ca2151a339e00fe612af9c163131"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.2,
+        "lines": 188,
+        "size_kb": 9.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -6244,7 +6244,7 @@
       "name": "@cat-agent-skills/work_brief",
       "display_name": "Work Brief",
       "description": "A morning brief that reads your mail, calendar, and Teams, then tells you what you owe people before the week starts.",
-      "version": "0.4.0",
+      "version": "1.4.0",
       "publisher": "@cat-agent-skills",
       "author": "Allan De Castro",
       "category": "productivity",
@@ -6267,11 +6267,11 @@
         "path": "agents/@cat-agent-skills/work_brief_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/work_brief_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/work_brief_agent.py",
-        "sha256": "3fc71d228759b6e97ef7e9df3439b589e18e5280cca5c18a46636cad35456d86"
+        "sha256": "9a295dbb76bd5acabb6141ccd43ef65992dc2e63b2a0553d06d6f30fb42f24d2"
       },
       "stats": {
-        "lines": 103,
-        "size_kb": 4.0,
+        "lines": 188,
+        "size_kb": 8.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -8516,6 +8516,41 @@
         "lines": 175,
         "size_kb": 6.9,
         "added_at": "2026-05-24T21:45:25-04:00"
+      }
+    },
+    {
+      "id": "kody-w__skill_toaster_agent",
+      "name": "@kody-w/skill_toaster_agent",
+      "display_name": "SkillToaster",
+      "description": "Turns an aggregated third-party skill entry into a real, callable RAPP agent by inferring the capability's shape from its metadata and generating a working procedure for it.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "devtools",
+      "tags": [
+        "aggregation",
+        "codegen",
+        "engine",
+        "rules_as_data",
+        "toaster"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent",
+        "@kody-w/rappter_engine_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/skill_toaster_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/skill_toaster_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/skill_toaster_agent.py",
+        "sha256": "b05707e55b486c96363ae170a6ee0c755bc0c5b797b5e7ff9fcb57c9dc86d625"
+      },
+      "stats": {
+        "lines": 687,
+        "size_kb": 31.4,
+        "added_at": null
       }
     },
     {

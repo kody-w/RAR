@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-08-02T00:46:15Z",
+  "generated": "2026-08-02T01:43:44Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 105,
     "consumer_only": 3,
-    "both": 170,
-    "in_business_mode": 275,
-    "in_consumer_mode": 173
+    "both": 171,
+    "in_business_mode": 276,
+    "in_consumer_mode": 174
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -263,6 +263,7 @@
     "@kody-w/rar_remote_agent": "x",
     "@kody-w/recon_deck_agent": "x",
     "@kody-w/second_life_agent": "c",
+    "@kody-w/skill_toaster_agent": "x",
     "@kody-w/transcript2prototype": "b",
     "@kody-w/twin_egg_hatcher": "x",
     "@kody-w/twin_me": "x",
