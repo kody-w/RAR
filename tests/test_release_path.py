@@ -338,6 +338,42 @@ def test_release_type_options_all_produce_a_tag():
         assert tag.startswith("v"), f"{rtype} produced {tag!r}"
 
 
+def test_registry_is_rebuilt_before_the_seal_is_computed():
+    """The integrity seal must describe the registry that actually ships.
+
+    The metadata step seals every agent digest; a later step rebuilds
+    registry.json and it is the REBUILT file that gets committed, tagged, and
+    turned into release assets. Measuring before that rebuild published a seal
+    over the old file — unrecomputable from the release, which is the only
+    thing a seal is for — and left latest_release.agent_count contradicting
+    stats.total_agents inside the same file.
+
+    Reachable whenever the committed registry is behind agents/: a new
+    `.py.stub` does not match build-registry.yml's `agents/**/*.py` trigger, so
+    no rebuild is ever fired for it, and the URL-stability ledger only tracks
+    `.py` — so it clears every validate gate and lands here."""
+    import yaml
+
+    doc = yaml.safe_load((REPO_ROOT / ".github" / "workflows" / "release.yml").read_text())
+    steps = doc["jobs"]["release"]["steps"]
+
+    build_at = seal_at = None
+    for i, s in enumerate(steps):
+        body = str(s.get("run", ""))
+        if build_at is None and "build_registry.py" in body:
+            build_at = i
+        if seal_at is None and "integrity_seal" in body:
+            seal_at = i
+
+    assert build_at is not None, "the release job never rebuilds registry.json"
+    assert seal_at is not None, "the release job never computes an integrity seal"
+    assert build_at < seal_at, (
+        f"registry.json is rebuilt at step {build_at} but the seal is computed at "
+        f"step {seal_at} — the published seal describes a registry that is not "
+        "the one committed, tagged, and shipped as assets"
+    )
+
+
 def test_computed_tag_is_not_interpolated_into_shell():
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
     for line in src.splitlines():

@@ -123,6 +123,19 @@ jobs:
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
           echo "Tag: $TAG"
 
+      # Rebuild BEFORE measuring. The metadata below seals the agent digests,
+      # and the ledger step further down also rebuilds — so measuring first
+      # sealed the OLD registry while the tag, the committed file and the
+      # uploaded assets all carried the REBUILT one. The published seal then
+      # could not be recomputed from the released registry, which is the only
+      # thing a seal is for, and latest_release.agent_count contradicted
+      # stats.total_agents inside the same file. Reachable whenever the
+      # committed registry is behind agents/ — notably for a new .py.stub,
+      # which build-registry.yml's `agents/**/*.py` filter does not match, so
+      # no rebuild is ever triggered for it.
+      - name: Rebuild registry before measuring it
+        run: python build_registry.py
+
       - name: Generate release metadata
         id: meta
         # release_name is operator-supplied free text. It reaches Python through

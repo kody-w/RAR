@@ -22,16 +22,28 @@ the actual thing and then checking the actual JSON.
 pytest tests/test_reporting.py -q      # ~0.05s, no network, no token
 ```
 
-Fourteen tests. The two that matter most are regressions for bugs that shipped:
+Fifteen tests. The ones that matter most are regressions for bugs that shipped:
 
-**`test_critic_lookup_resolves_dashed_publishers`** — `state/critic_reviews.json`
-keys its map with an underscore-normalized name (`@aibast_agents_library/x`)
-while each record's own `name` field holds the real dashed one
-(`@aibast-agents-library/x`). Looking up by dict key silently resolved *nothing*
-for every publisher with a dash, which is most of the registry. Every report card
-read "not yet scored" while 79 agents had real scores. It failed silently and
-looked exactly like "no data yet" — the worst way for a metric to break, because
-the broken state is indistinguishable from the honest empty state.
+**`test_critic_index_resolves_a_dashed_publisher`** and
+**`test_a_scored_agent_renders_its_score_not_not_yet_scored`** —
+`state/critic_reviews.json` keys its map with an underscore-normalized name
+(`@aibast_agents_library/x`) while each record's own `name` field holds the real
+dashed one (`@aibast-agents-library/x`). Looking up by dict key silently resolved
+*nothing* for every publisher with a dash, which is most of the registry. Every
+report card read "not yet scored" while real scores existed. It failed silently
+and looked exactly like "no data yet" — the worst way for a metric to break,
+because the broken state is indistinguishable from the honest empty state.
+
+> **These replaced a test that could not fail.** The original
+> `test_critic_lookup_resolves_dashed_publishers` re-implemented *both* lookups
+> inside the test body and compared them to each other. It asserted a property
+> of `critic_reviews.json`, never of `publish_reports.py`, so reintroducing the
+> bug in the shipped code left it green — while this document cited it as proof.
+> A test that cannot fail is worse than no test, because the documentation
+> around it becomes a false assurance. The lookup now lives in a named function
+> (`reports.critic_index`) that the script itself calls, and both tests were
+> verified by reintroducing the bug in a scratch copy and confirming they go
+> red. Do that for any test you add here.
 
 **`test_splice_replaces_block_when_end_marker_is_missing`** — the report block is
 delimited by `<!-- rar:report:start -->` / `<!-- rar:report:end -->`. If someone

@@ -97,28 +97,49 @@ def test_splice_replaces_block_when_end_marker_is_missing(reports):
 
 # ── the critic-score join: the bug that read as "no data" ────────────────────
 
-def test_critic_lookup_resolves_dashed_publishers():
-    """REGRESSION. Index critic records by their authoritative `name` field, not
-    by the dict key, which is underscore-normalized."""
-    critic_file = REPO_ROOT / "state" / "critic_reviews.json"
-    registry = REPO_ROOT / "registry.json"
-    if not critic_file.exists() or not registry.exists():
-        pytest.skip("critic_reviews.json or registry.json absent")
+def test_critic_index_resolves_a_dashed_publisher(reports):
+    """REGRESSION, exercising the SHIPPED code.
 
-    raw = json.loads(critic_file.read_text(encoding="utf-8")).get("agents", {})
-    if not raw:
-        pytest.skip("no critic records yet")
-    names = {a["name"] for a in json.loads(registry.read_text(encoding="utf-8"))["agents"]}
+    The first version of this test re-implemented both lookups inside the test
+    body and compared them to each other. It therefore asserted a property of
+    critic_reviews.json, not of publish_reports.py, and stayed green with the
+    bug fully reintroduced — while every card silently reverted to "not yet
+    scored". A regression test that cannot fail is worse than no test, because
+    the documentation then cites it as proof.
 
-    by_key = sum(1 for n in names if n in raw)
-    by_name = sum(1 for n in names if n in {(v.get("name") or k) for k, v in raw.items()})
+    This calls reports.critic_index directly, on a fixture shaped like the real
+    file: key underscore-normalized, record's own `name` dashed.
+    """
+    raw = {
+        "@aibast_agents_library/account_intelligence": {
+            "name": "@aibast-agents-library/account_intelligence",
+            "critic_avg": 80.0,
+            "critic_count": 2,
+        }
+    }
+    idx = reports.critic_index(raw)
+    assert "@aibast-agents-library/account_intelligence" in idx, (
+        "critic records are not indexed by their authoritative dashed `name` — "
+        "every dashed publisher resolves to nothing and reads 'not yet scored'"
+    )
+    assert idx["@aibast-agents-library/account_intelligence"]["critic_avg"] == 80.0
 
-    assert by_name >= by_key, "indexing by `name` must never resolve fewer records than by key"
-    if any("-" in n.split("/")[0] for n in names):
-        assert by_name > 0, (
-            "no critic record resolved for any dashed publisher — the key/name "
-            "mismatch has regressed and every card will read 'not yet scored'"
-        )
+
+def test_a_scored_agent_renders_its_score_not_not_yet_scored(reports):
+    """End-to-end over render(): a resolved critic record must reach the card.
+
+    Pins the observable symptom rather than the mechanism, so any future way of
+    breaking the join — not just the key/name one — still fails here.
+    """
+    agent = {"name": "@aibast-agents-library/account_intelligence", "version": "1.0.0",
+             "category": "core", "quality_tier": "community"}
+    raw = {"@aibast_agents_library/account_intelligence": {
+        "name": "@aibast-agents-library/account_intelligence",
+        "critic_avg": 80.0, "critic_count": 2}}
+    critic = reports.critic_index(raw).get(agent["name"], {})
+    card = reports.render(agent, {}, critic, None, None)
+    assert "80/100" in card, f"scored agent rendered without its score:\n{card}"
+    assert "not yet scored" not in card
 
 
 # ── the seven feedback channels must agree everywhere they are written ──────

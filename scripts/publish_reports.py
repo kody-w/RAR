@@ -196,6 +196,23 @@ def render(agent: dict, rating: dict, critic: dict,
     return "\n".join(lines)
 
 
+def critic_index(raw: dict) -> dict:
+    """Index critic records by the name a registry agent is actually called.
+
+    critic_reviews.json keys its map with an UNDERSCORE-normalized name
+    ('@aibast_agents_library/x') while each record's own `name` field holds the
+    real dashed one ('@aibast-agents-library/x'). Keying off the dict silently
+    resolved NOTHING for every publisher with a dash — most of the registry —
+    and every card read "not yet scored" while real scores existed.
+
+    This is a named function, not three lines inlined in main(), so a test can
+    exercise the code that actually runs. The first regression test for this bug
+    re-implemented the lookup inside the test and therefore stayed green with
+    the bug fully reintroduced.
+    """
+    return {(rec.get("name") or key): rec for key, rec in (raw or {}).items()}
+
+
 def splice(body: str, block: str) -> str:
     """Replace the report block, preserving every human-written word around it.
 
@@ -242,15 +259,7 @@ def main() -> int:
         warn("registry.json has no agents; nothing to report.")
         return 0
     ratings = (load(RATINGS_FILE, {}) or {}).get("agents", {})
-    # critic_reviews.json keys its map with an UNDERSCORE-normalized name
-    # ('@aibast_agents_library/x') while the record's own `name` field holds
-    # the real dashed one. Keying off the dict would silently miss every
-    # publisher with a dash — which is most of the registry — so index by the
-    # authoritative field instead.
-    critics = {
-        (rec.get("name") or key): rec
-        for key, rec in ((load(CRITIC_FILE, {}) or {}).get("agents", {})).items()
-    }
+    critics = critic_index((load(CRITIC_FILE, {}) or {}).get("agents", {}))
     downloads = (load(DOWNLOADS_FILE, {}) or {}).get("agents", {})
     aggregated = {i["ref"]: i for i in (load(AGGREGATED_FILE, {}) or {}).get("items", [])}
 
