@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-02T00:15:11Z",
-  "count": 271,
+  "generated": "2026-08-02T00:35:03Z",
+  "count": 275,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -405,7 +405,7 @@
         "opportunities"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -475,7 +475,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -785,7 +785,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -1935,7 +1935,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -2125,6 +2125,41 @@
       }
     },
     {
+      "id": "aibast-agents-library__personalized_shopping_assistant",
+      "name": "@aibast-agents-library/personalized_shopping_assistant",
+      "display_name": "Personalized Shopping Assistant Agent",
+      "description": "Recommends products and checks a live catalog from a simulated Dynamics 365 tenant, with an offline demo fallback for every operation.",
+      "version": "1.2.0",
+      "publisher": "@aibast-agents-library",
+      "author": "AIBAST",
+      "category": "b2c_sales",
+      "tags": [
+        "shopping",
+        "personalization",
+        "recommendations",
+        "style",
+        "inventory",
+        "b2c"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py",
+        "sha256": "6f02e955c5212f2deb68cab2674901f367a6eaa77ca0e85834df0da46189d83c"
+      },
+      "stats": {
+        "lines": 494,
+        "size_kb": 25.7,
+        "added_at": "2026-04-03T16:15:52-04:00"
+      }
+    },
+    {
       "id": "aibast-agents-library__pipeline_velocity",
       "name": "@aibast-agents-library/pipeline_velocity",
       "display_name": "Pipeline Velocity",
@@ -2281,7 +2316,7 @@
         "budget"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -2592,7 +2627,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -2661,7 +2696,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -4534,6 +4569,42 @@
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
         "sha256": "fb9881c8aa1cfd941ee56098333c34863abff8941663a78749f974f886e80566"
+      },
+      "stats": {
+        "lines": 103,
+        "size_kb": 4.4,
+        "added_at": "2026-07-31T22:43:16-04:00"
+      }
+    },
+    {
+      "id": "cat-agent-skills__copilot_studio_topic_blueprint",
+      "name": "@cat-agent-skills/copilot_studio_topic_blueprint",
+      "display_name": "Copilot Studio Topic Blueprint",
+      "description": "Turn a one-line use case into a build-ready Microsoft Copilot Studio agent blueprint: recommended agent type and orchestration, topics, tools, knowledge, variables, a welcome Adaptive Card, security and Copilot Credits notes, and a first test plan.",
+      "version": "1.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Elliot Margot",
+      "category": "creative",
+      "tags": [
+        "agent",
+        "blueprint",
+        "topics",
+        "design",
+        "power_platform",
+        "orchestration",
+        "adaptive_card"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
+        "sha256": "8a31f915c3c65f50bd999268f16495fb312b6964e8b8c5972b66db0fc1649119"
       },
       "stats": {
         "lines": 103,
@@ -6662,40 +6733,6 @@
       }
     },
     {
-      "id": "howardh__cardsmith_agent",
-      "name": "@howardh/cardsmith_agent",
-      "display_name": "CardSmith",
-      "description": "Forges MTG-style trading cards for brainstem agents from a built-in card database, with forge-all and gallery-link actions.",
-      "version": "1.0.1",
-      "publisher": "@howardh",
-      "author": "Howard",
-      "category": "productivity",
-      "tags": [
-        "productivity",
-        "cards",
-        "visualization",
-        "trading-cards",
-        "sneakernet"
-      ],
-      "quality_tier": "community",
-      "audience": "both",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "path": "agents/@howardh/cardsmith_agent.py",
-        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/cardsmith_agent.py",
-        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@howardh/cardsmith_agent.py",
-        "sha256": "d7389ce10549693f4f97098379ca86c4ddbb22c9b4b93f891c99ae2f1aa0d4d4"
-      },
-      "stats": {
-        "lines": 318,
-        "size_kb": 32.1,
-        "added_at": "2026-05-24T21:45:25-04:00"
-      }
-    },
-    {
       "id": "howardh__chief_of_staff_agent",
       "name": "@howardh/chief_of_staff_agent",
       "display_name": "ChiefOfStaff",
@@ -7161,6 +7198,74 @@
         "lines": 409,
         "size_kb": 16.9,
         "added_at": "2026-05-09T15:25:18-04:00"
+      }
+    },
+    {
+      "id": "kody-w__commons_life_agent",
+      "name": "@kody-w/commons_life_agent",
+      "display_name": "Commons Life",
+      "description": "Records the live commons as signed frames via Playwright, grows in-between fidelity with EZsharpen, and emits an HTML LifePlayer scrubber.",
+      "version": "1.0.1",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "creative",
+      "tags": [
+        "commons",
+        "frames",
+        "playback",
+        "lifeplayer",
+        "digital-organism"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/commons_life_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_life_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/commons_life_agent.py",
+        "sha256": "1f097fe46efeb8c2298fde16d0469016cb62bb59b4448d954bb6757fe53f27bc"
+      },
+      "stats": {
+        "lines": 321,
+        "size_kb": 21.1,
+        "added_at": "2026-06-20T19:05:34-04:00"
+      }
+    },
+    {
+      "id": "kody-w__commons_show_agent",
+      "name": "@kody-w/commons_show_agent",
+      "display_name": "Commons Show",
+      "description": "Captures staged shows in the live RAPP Commons via Playwright and renders narrated MP4 episodes with TTS, rsvg-convert, and ffmpeg.",
+      "version": "1.0.1",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "creative",
+      "tags": [
+        "commons",
+        "video",
+        "content",
+        "receipts",
+        "virtual-world"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/commons_show_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_show_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/commons_show_agent.py",
+        "sha256": "c7b97c5fbe3611f175f3812831450a5e559a4fcee17cb46fdad27b30d26a49ee"
+      },
+      "stats": {
+        "lines": 342,
+        "size_kb": 20.3,
+        "added_at": "2026-06-20T18:41:00-04:00"
       }
     },
     {
@@ -8926,6 +9031,40 @@
         "lines": 1025,
         "size_kb": 37.9,
         "added_at": "2026-04-20T12:38:45-04:00"
+      }
+    },
+    {
+      "id": "rapp__moment_factory_agent",
+      "name": "@rapp/moment_factory_agent",
+      "display_name": "MomentFactory",
+      "description": "Converts a moment (commit, message, idea) into a publishable Drop — hook, body, channel, card, and seed — through seven inlined LLM personas.",
+      "version": "0.1.4",
+      "publisher": "@rapp",
+      "author": "RAPP",
+      "category": "creative",
+      "tags": [
+        "composite",
+        "moment-pipeline",
+        "rapplication",
+        "rappterbook-engine",
+        "singleton"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@rapp/moment_factory_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/moment_factory_agent.py",
+        "sha256": "02a5b7154b7bd205223d58d3d61489bfa725ad7218915a0012709fe0d5f1ccf8"
+      },
+      "stats": {
+        "lines": 512,
+        "size_kb": 23.6,
+        "added_at": "2026-04-27T21:16:54Z"
       }
     },
     {

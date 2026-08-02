@@ -30,6 +30,7 @@ Written surface (all new paths):
     api/v1/match.json              use-case → ranked agents + term index
     api/v1/audience/business.json  curated enterprise slice
     api/v1/audience/consumer.json  curated consumer slice
+    api/v1/audience/map.json       compact per-agent verdict for UI filtering
 
 Usage:
     python scripts/build_static_api.py
@@ -69,6 +70,7 @@ OWNED_PATHS = [
     API_DIR / "match.json",
     AUDIENCE_DIR / "business.json",
     AUDIENCE_DIR / "consumer.json",
+    AUDIENCE_DIR / "map.json",
 ]
 
 # Paths owned by build_pokedex_api.py. Guarded so a future edit here cannot
@@ -87,7 +89,7 @@ FOREIGN_PATHS = {
 
 CATEGORY_WEIGHTS = {
     "b2b_sales": (4.0, 0.0),
-    "b2c_sales": (2.0, 2.0),
+    "b2c_sales": (3.0, 1.0),
     "financial_services": (4.0, 0.0),
     "healthcare": (4.0, 0.0),
     "federal_government": (5.0, 0.0),
@@ -103,12 +105,17 @@ CATEGORY_WEIGHTS = {
     "integrations": (2.5, 0.0),
     "productivity": (1.5, 1.5),
     "workflow": (2.0, 0.0),
-    "creative": (0.0, 3.0),
     "general": (0.0, 0.0),
 }
 
-# Neutral infrastructure serves both audiences and is never hidden from either.
-NEUTRAL_CATEGORIES = {"core", "meta", "platform", "devtools", "pipeline"}
+# Categories that serve both audiences and are never hidden from either.
+#
+# 'creative' belongs here, not in the consumer column. Marketing content,
+# design systems and agent blueprints are ordinary business work, and scoring
+# the category as consumer meant one incidental word could bury them: a
+# Microsoft Power Platform blueprint agent was ruled consumer-only because its
+# description mentioned an "adaptive card". Let tags and language decide.
+NEUTRAL_CATEGORIES = {"core", "meta", "platform", "devtools", "pipeline", "creative"}
 
 BUSINESS_TAGS = {
     "crm", "erp", "sales", "revenue", "pipeline", "forecast", "compliance",
@@ -147,13 +154,43 @@ BUSINESS_WORDS = {
 }
 
 CONSUMER_WORDS = {
-    "game", "play", "player", "card", "collect", "fun", "pet", "avatar",
-    "hobby", "recipe", "workout", "vacation", "personal", "friend",
+    # Deliberately excludes "card" (adaptive cards, Teams cards, credit cards)
+    # and "collect" (data collection) — both read as consumer while appearing
+    # constantly in enterprise descriptions.
+    "game", "play", "player", "fun", "pet", "avatar",
+    "hobby", "recipe", "workout", "vacation", "friend",
     "creature", "battle", "quest", "sticker", "meme",
 }
 
 MIN_SIGNAL = 3.0
 MIN_MARGIN = 2.0
+
+
+def norm_tag(tag: str) -> str:
+    """Canonicalise a tag so plural and punctuation variants match.
+
+    Publishers write "trading-cards", "trading_card" and "Trading Card" for the
+    same idea. Exact set membership missed all but one spelling and let an
+    MTG-style card generator through into the enterprise slice -- precisely the
+    class of leak this classifier exists to stop. Both the agent's tags and the
+    reference sets go through this function, so they always meet in the middle.
+    """
+    t = tag.strip().lower().replace("_", "-").replace(" ", "-")
+    # Don't maim words whose singular already ends in s ("analysis", "process").
+    if len(t) > 3 and t.endswith("s") and not t.endswith(("ss", "us", "is", "as")):
+        t = t[:-1]
+    return t
+
+
+def norm_tags(tags) -> set[str]:
+    return {norm_tag(t) for t in (tags or []) if isinstance(t, str)}
+
+
+# Normalise the reference sets through the same function as the agent tags,
+# so a plural in either place can never cause a miss again.
+BUSINESS_TAGS = {norm_tag(t) for t in BUSINESS_TAGS}
+CONSUMER_TAGS = {norm_tag(t) for t in CONSUMER_TAGS}
+NOVELTY_TAGS = {norm_tag(t) for t in NOVELTY_TAGS}
 
 
 def classify(agent: dict) -> tuple[str, float, float, list[str]]:
@@ -166,7 +203,7 @@ def classify(agent: dict) -> tuple[str, float, float, list[str]]:
     b = c = 0.0
     why: list[str] = []
 
-    tags = {str(t).lower().strip() for t in (agent.get("tags") or [])}
+    tags = norm_tags(agent.get("tags"))
 
     # An explicit novelty tag settles it before anything else is considered.
     novelty = tags & NOVELTY_TAGS
@@ -530,6 +567,33 @@ def main() -> int:
         "are excluded.",
     )
 
+    # A UI that already holds the full registry needs the verdict, not the rows.
+    # One ~10KB fetch instead of two ~1MB ones, so segmentation costs a landing
+    # page nothing. "both" is the safe default: an unclassified agent shows in
+    # every mode rather than disappearing from all of them.
+    audience_map = {
+        "schema": "rar-audience-map/1.0",
+        "description": (
+            "Compact audience verdict per agent, for clients that already have "
+            "the registry and only need to filter it. b=business, c=consumer, "
+            "x=both. Absent means both."
+        ),
+        "generated": now(),
+        "legend": {"b": "business", "c": "consumer", "x": "both"},
+        "counts": {
+            "business_only": counts.get("business", 0),
+            "consumer_only": counts.get("consumer", 0),
+            "both": counts.get("both", 0),
+            "in_business_mode": len(business),
+            "in_consumer_mode": len(consumer),
+        },
+        "self_url": f"{RAW_BASE}/api/v1/audience/map.json",
+        "map": {
+            r["name"]: {"business": "b", "consumer": "c", "both": "x"}[r["audience"]]
+            for r in records
+        },
+    }
+
     match = build_match(records)
 
     # ── status + badge
@@ -654,6 +718,7 @@ def main() -> int:
         (API_DIR / "match.json", match),
         (AUDIENCE_DIR / "business.json", business_doc),
         (AUDIENCE_DIR / "consumer.json", consumer_doc),
+        (AUDIENCE_DIR / "map.json", audience_map),
         (API_DIR / "status.json", status),
         (API_DIR / "badge.json", badge),
     ]

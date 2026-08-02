@@ -104,6 +104,30 @@ header {
 .pub-pill.active { border-color: var(--purple, #d2a8ff); color: var(--purple, #d2a8ff); background: rgba(210,168,255,.1); }
 .pub-pill.active .ct { background: rgba(210,168,255,.2); }
 
+/* Audience mode — hidden until the audience map loads, so a failed or
+   offline fetch leaves the page behaving exactly as it did before. */
+.modebar {
+  display: none; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 14px; padding: 10px 14px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+}
+.modebar.on { display: flex; }
+.modebar .ml { font-size: .78rem; color: var(--text-muted); letter-spacing: .02em; }
+.modeopts { display: flex; gap: 4px; background: var(--bg, #0d1117); padding: 3px; border-radius: 10px; }
+.modeopt {
+  padding: 5px 13px; border-radius: 8px; cursor: pointer; font-size: .82rem;
+  color: var(--text-dim); border: 1px solid transparent; transition: all .15s;
+  white-space: nowrap; user-select: none;
+}
+.modeopt:hover { color: var(--text); }
+.modeopt.active { background: var(--surface2); color: var(--text); border-color: var(--border-hover); }
+.modeopt[data-mode="business"].active { color: #7ee787; border-color: rgba(126,231,135,.4); }
+.modeopt[data-mode="consumer"].active { color: #ffa657; border-color: rgba(255,166,87,.4); }
+.modenote { font-size: .74rem; color: var(--text-muted); }
+.modenote a { color: var(--accent); text-decoration: none; }
+.modenote a:hover { text-decoration: underline; }
+
+
 /* Recently Added */
 .recently-added { margin-bottom: 24px; }
 .recently-added-header {
@@ -362,6 +386,7 @@ header {
   </div>
   <div class="header-right">
     <a class="get-started" href="virtual-brainstem.html">Get Started</a>
+    <a class="adv-link" href="discover.html">For Work</a>
     <a class="adv-link" href="metrics.html">Metrics</a>
     <a class="adv-link" href="submit.html">Submit</a>
     <a class="adv-link" href="admin.html">Admin</a>
@@ -414,6 +439,15 @@ header {
       <div style="color:var(--text-muted);font-size:.78rem;margin-top:4px">If your AI can't fetch URLs, copy the contents of <a href="skill.md">skill.md</a> and paste it directly.</div>
     </div>
   </div>
+  <div class="modebar" id="modebar">
+    <span class="ml">Showing</span>
+    <div class="modeopts">
+      <span class="modeopt active" data-mode="all"      onclick="setMode('all')">Everything</span>
+      <span class="modeopt"        data-mode="business" onclick="setMode('business')">For work</span>
+      <span class="modeopt"        data-mode="consumer" onclick="setMode('consumer')">Personal</span>
+    </div>
+    <span class="modenote" id="modenote"></span>
+  </div>
   <div class="pills" id="pills"></div>
   <div class="pills" id="publisher-pills" style="margin-top:6px"></div>
   <div id="recently-added-section" style="margin-top:16px;display:none"></div>
@@ -435,6 +469,91 @@ let RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO_NAME}/main`;
 let allAgents = [];
 let currentCat = 'all';
 let currentPub = 'all';
+
+// ── Audience mode ─────────────────────────────────────────────────────────
+// RAR serves two populations that want opposite things: someone evaluating it
+// for work should not have to scroll past collectible-monster agents, and
+// someone here to play should not wade through procurement tooling. The
+// verdict per agent is computed at build time and published as a compact map.
+//
+// Everything here fails open. Until the map arrives the bar stays hidden and
+// no filtering happens, so an offline file:// open or a blocked fetch leaves
+// the page identical to what it was before modes existed. An agent missing
+// from the map is treated as 'x' (both) — an unclassified agent shows up
+// everywhere rather than vanishing from every mode.
+let audienceMap = null;
+let currentMode = (() => {
+  const p = new URLSearchParams(location.search).get('mode');
+  if (p === 'business' || p === 'consumer' || p === 'all') {
+    // A host application deep-linking someone in is stating their audience.
+    // Remember it, or the next visit drops them back into the mixed catalog.
+    try { localStorage.setItem('rar_mode', p); } catch (e) {}
+    return p;
+  }
+  try { return localStorage.getItem('rar_mode') || 'all'; } catch (e) { return 'all'; }
+})();
+
+function inMode(a) {
+  if (currentMode === 'all' || !audienceMap) return true;
+  const v = audienceMap[a.name] || 'x';
+  return v === 'x' || v === (currentMode === 'business' ? 'b' : 'c');
+}
+
+function setMode(mode) {
+  currentMode = mode;
+  try { localStorage.setItem('rar_mode', mode); } catch (e) {}
+  document.querySelectorAll('.modeopt').forEach(el => {
+    el.classList.toggle('active', el.dataset.mode === mode);
+  });
+  buildPills();
+  // Category and publisher pills are rebuilt for the new mode, so a filter
+  // that no longer has any agents behind it would strand an empty grid.
+  currentCat = 'all';
+  currentPub = 'all';
+  updateModeNote();
+  render();
+}
+
+function updateModeNote() {
+  const el = document.getElementById('modenote');
+  if (!el || !audienceMap) return;
+  const shown = allAgents.filter(a => inMode(a) && (showGated || a.type !== 'stub')).length;
+  if (currentMode === 'all') {
+    el.innerHTML = 'All ' + shown + ' agents. Pick a mode to hide what is not for you.';
+  } else if (currentMode === 'business') {
+    el.innerHTML = shown + ' agents suited to work. Games, collectibles and novelty are hidden. ' +
+      '<a href="discover.html">Open the focused view &rarr;</a>';
+  } else {
+    el.innerHTML = shown + ' agents for personal use. Enterprise-only tooling is hidden.';
+  }
+}
+
+// Relative first so forks and federated instances read their own map; raw as
+// the fallback for file:// opens, where a relative fetch is blocked.
+async function loadAudienceMap() {
+  const t = '?t=' + Date.now();
+  for (const url of ['api/v1/audience/map.json' + t, RAW + '/api/v1/audience/map.json' + t]) {
+    try {
+      const r = await fetch(url);
+      if (!r.ok) continue;
+      const d = await r.json();
+      if (d && d.map) return d.map;
+    } catch (e) { /* try the next source */ }
+  }
+  return null;
+}
+
+loadAudienceMap().then(map => {
+  if (!map) return;  // fail open: no map, no modes, page unchanged
+  audienceMap = map;
+  const bar = document.getElementById('modebar');
+  if (bar) bar.classList.add('on');
+  document.querySelectorAll('.modeopt').forEach(el => {
+    el.classList.toggle('active', el.dataset.mode === currentMode);
+  });
+  if (allAgents.length) { buildPills(); updateModeNote(); render(); }
+});
+
 let showGated = (() => {
   try { return localStorage.getItem('rar_show_gated') === '1'; }
   catch (e) { return false; }
@@ -467,6 +586,7 @@ async function init() {
       `<div class="stat"><strong>${publishers}</strong> Publishers</div>`;
 
     buildPills();
+    updateModeNote();
     render();
     // Fire-and-forget: fetch LIVE commit dates from GitHub so Recently
     // Added reflects ACTUAL recent commits, not the stale registry.json
@@ -516,25 +636,25 @@ async function refreshLiveAddedDates() {
 
 function buildPills() {
   const counts = {};
-  const visibleAgents = allAgents.filter(a => showGated || a.type !== 'stub');
+  const visibleAgents = allAgents.filter(a => (showGated || a.type !== 'stub') && inMode(a));
   visibleAgents.forEach(a => { counts[a.category] = (counts[a.category] || 0) + 1; });
   const cats = Object.keys(counts).sort();
-  let h = `<span class="pill active" onclick="setCat('all',this)">All <span class="ct">${visibleAgents.length}</span></span>`;
+  let h = `<span class="pill ${currentCat === 'all' ? 'active' : ''}" onclick="setCat('all',this)">All <span class="ct">${visibleAgents.length}</span></span>`;
   cats.forEach(c => {
-    h += `<span class="pill" onclick="setCat('${c}',this)">${c.replace(/_/g, ' ')} <span class="ct">${counts[c]}</span></span>`;
+    h += `<span class="pill ${currentCat === c ? 'active' : ''}" onclick="setCat('${c}',this)">${c.replace(/_/g, ' ')} <span class="ct">${counts[c]}</span></span>`;
   });
-  const gatedCount = allAgents.filter(a => a.type === 'stub').length;
+  const gatedCount = allAgents.filter(a => a.type === 'stub' && inMode(a)).length;
   if (gatedCount > 0) {
     h += `<span class="pill ${showGated ? 'active' : ''}" onclick="toggleGated()" title="Gated agents are hosted in private repos and require auth to install." style="border-color:rgba(188,140,255,.35);color:#bc8cff">${LOCK_SVG}${showGated ? 'Hide' : 'Show'} gated <span class="ct">${gatedCount}</span></span>`;
   }
   document.getElementById('pills').innerHTML = h;
 
   const pubCounts = {};
-  allAgents.forEach(a => { const p = a.name.split('/')[0]; pubCounts[p] = (pubCounts[p] || 0) + 1; });
+  allAgents.filter(inMode).forEach(a => { const p = a.name.split('/')[0]; pubCounts[p] = (pubCounts[p] || 0) + 1; });
   const pubs = Object.keys(pubCounts).sort();
-  let ph = `<span class="pill pub-pill active" onclick="setPub('all',this)">All Publishers</span>`;
+  let ph = `<span class="pill pub-pill ${currentPub === 'all' ? 'active' : ''}" onclick="setPub('all',this)">All Publishers</span>`;
   pubs.forEach(p => {
-    ph += `<span class="pill pub-pill" onclick="setPub('${p}',this)">${p} <span class="ct">${pubCounts[p]}</span></span>`;
+    ph += `<span class="pill pub-pill ${currentPub === p ? 'active' : ''}" onclick="setPub('${p}',this)">${p} <span class="ct">${pubCounts[p]}</span></span>`;
   });
   document.getElementById('publisher-pills').innerHTML = ph;
 }
@@ -578,7 +698,7 @@ function renderRecentlyAdded() {
   const el = document.getElementById('recently-added-section');
   const q = document.getElementById('search').value.trim();
   if (currentCat !== 'all' || currentPub !== 'all' || q) { el.style.display = 'none'; return; }
-  const dated = allAgents.filter(a => addedTs(a) && (showGated || a.type !== 'stub')).sort((a, b) => addedTs(b).localeCompare(addedTs(a)));
+  const dated = allAgents.filter(a => addedTs(a) && (showGated || a.type !== 'stub') && inMode(a)).sort((a, b) => addedTs(b).localeCompare(addedTs(a)));
   const recent = dated.slice(0, 8);
   if (!recent.length) { el.style.display = 'none'; return; }
   el.style.display = 'block';
@@ -609,6 +729,7 @@ function render() {
   const q = document.getElementById('search').value.toLowerCase().trim();
   let filtered = allAgents.filter(a => {
     if (a.type === 'stub' && !showGated) return false;
+    if (!inMode(a)) return false;
     if (currentCat !== 'all' && a.category !== currentCat) return false;
     if (currentPub !== 'all' && !a.name.startsWith(currentPub + '/')) return false;
     if (!q) return true;

@@ -1,7 +1,7 @@
 {
   "schema": "rar-match/1.0",
   "description": "Precomputed use-case matching. A host application asks the user to describe a use case, tokenizes it, sums the term weights from `index`, and returns the top agents — entirely client-side, with no backend and no GitHub access.",
-  "generated": "2026-08-02T00:15:11Z",
+  "generated": "2026-08-02T00:35:03Z",
   "how_to_query": {
     "canonical": "Look up a use_cases[].id for a curated, ranked list.",
     "free_text": "Lowercase the query, split on non-alphanumerics, drop tokens of 2 characters or fewer, then for each token read index[token] (entries are 'agent_id:weight'). Sum weights per agent_id and sort descending."
@@ -184,7 +184,7 @@
           "id": "aibast-agents-library__customer_360_speech",
           "name": "@aibast-agents-library/customer_360_speech",
           "display_name": "Customer 360 & Speech Agent",
-          "audience": "both",
+          "audience": "business",
           "score": 38.19
         }
       ]
@@ -240,7 +240,7 @@
           "id": "aibast-agents-library__customer_360_speech",
           "name": "@aibast-agents-library/customer_360_speech",
           "display_name": "Customer 360 & Speech Agent",
-          "audience": "both",
+          "audience": "business",
           "score": 38.19
         },
         {
@@ -268,7 +268,7 @@
           "id": "aibast-agents-library__returns_exchange",
           "name": "@aibast-agents-library/returns_exchange",
           "display_name": "Returns & Exchange Agent",
-          "audience": "both",
+          "audience": "business",
           "score": 33.81
         },
         {
@@ -471,7 +471,7 @@
           "id": "aibast-agents-library__procurement_support",
           "name": "@aibast-agents-library/procurement_support",
           "display_name": "Procurement Support",
-          "audience": "both",
+          "audience": "business",
           "score": 28.01
         },
         {
@@ -618,7 +618,7 @@
           "id": "aibast-agents-library__procurement_support",
           "name": "@aibast-agents-library/procurement_support",
           "display_name": "Procurement Support",
-          "audience": "both",
+          "audience": "business",
           "score": 89.35
         },
         {
@@ -800,7 +800,7 @@
           "id": "aibast-agents-library__bulk_crm_data_generator_agent",
           "name": "@aibast-agents-library/bulk_crm_data_generator_agent",
           "display_name": "Bulk CRM Data Generator",
-          "audience": "both",
+          "audience": "business",
           "score": 27.32
         },
         {
@@ -975,7 +975,7 @@
           "id": "aibast-agents-library__bulk_crm_data_generator_agent",
           "name": "@aibast-agents-library/bulk_crm_data_generator_agent",
           "display_name": "Bulk CRM Data Generator",
-          "audience": "both",
+          "audience": "business",
           "score": 31.8
         },
         {
@@ -1101,7 +1101,7 @@
           "id": "aibast-agents-library__omnichannel_engagement",
           "name": "@aibast-agents-library/omnichannel_engagement",
           "display_name": "Omnichannel Engagement Agent",
-          "audience": "both",
+          "audience": "business",
           "score": 37.35
         },
         {
@@ -1402,14 +1402,14 @@
           "id": "aibast-agents-library__returns_exchange",
           "name": "@aibast-agents-library/returns_exchange",
           "display_name": "Returns & Exchange Agent",
-          "audience": "both",
+          "audience": "business",
           "score": 77.62
         },
         {
           "id": "aibast-agents-library__sales_chat",
           "name": "@aibast-agents-library/sales_chat",
           "display_name": "Sales Chat Agent",
-          "audience": "both",
+          "audience": "business",
           "score": 48.51
         },
         {
@@ -1437,7 +1437,7 @@
           "id": "aibast-agents-library__customer_360_speech",
           "name": "@aibast-agents-library/customer_360_speech",
           "display_name": "Customer 360 & Speech Agent",
-          "audience": "both",
+          "audience": "business",
           "score": 38.19
         },
         {

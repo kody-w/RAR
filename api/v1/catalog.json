@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-08-02T00:15:11Z",
+  "generated": "2026-08-02T00:35:03Z",
   "count": 278,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -404,7 +404,7 @@
         "opportunities"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -474,7 +474,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -784,7 +784,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -1934,7 +1934,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -2141,7 +2141,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -2315,7 +2315,7 @@
         "budget"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -2626,7 +2626,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -2695,7 +2695,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "business",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -4626,7 +4626,7 @@
         "adaptive_card"
       ],
       "quality_tier": "frontier",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -6780,7 +6780,7 @@
         "sneakernet"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "consumer",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -7282,7 +7282,7 @@
         "digital-organism"
       ],
       "quality_tier": "community",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -7316,7 +7316,7 @@
         "virtual-world"
       ],
       "quality_tier": "community",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -9149,7 +9149,7 @@
         "singleton"
       ],
       "quality_tier": "official",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"

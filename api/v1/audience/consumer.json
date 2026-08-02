@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-08-02T00:15:11Z",
-  "count": 180,
+  "generated": "2026-08-02T00:35:03Z",
+  "count": 173,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -39,76 +39,6 @@
       "stats": {
         "lines": 758,
         "size_kb": 38.1,
-        "added_at": "2026-04-03T16:15:52-04:00"
-      }
-    },
-    {
-      "id": "aibast-agents-library__bulk_crm_data_generator_agent",
-      "name": "@aibast-agents-library/bulk_crm_data_generator_agent",
-      "display_name": "Bulk CRM Data Generator",
-      "description": "Generates synthetic CRM records and audits a live simulated Dynamics 365 tenant's data shape, with an offline demo fallback.",
-      "version": "1.1.0",
-      "publisher": "@aibast-agents-library",
-      "author": "AIBAST",
-      "category": "general",
-      "tags": [
-        "crm",
-        "data-generation",
-        "testing",
-        "contacts",
-        "accounts",
-        "opportunities"
-      ],
-      "quality_tier": "community",
-      "audience": "both",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "path": "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py",
-        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py",
-        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py",
-        "sha256": "587ddfc10256eab771b2371321f0fe22b38f261e57f0344b8b69be7ce534513d"
-      },
-      "stats": {
-        "lines": 398,
-        "size_kb": 21.9,
-        "added_at": "2026-04-06T16:39:03-04:00"
-      }
-    },
-    {
-      "id": "aibast-agents-library__cart_abandonment_recovery",
-      "name": "@aibast-agents-library/cart_abandonment_recovery",
-      "display_name": "Cart Abandonment Recovery Agent",
-      "description": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback.",
-      "version": "1.2.0",
-      "publisher": "@aibast-agents-library",
-      "author": "AIBAST",
-      "category": "b2c_sales",
-      "tags": [
-        "cart-abandonment",
-        "recovery",
-        "ecommerce",
-        "conversion",
-        "email",
-        "b2c"
-      ],
-      "quality_tier": "community",
-      "audience": "both",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "path": "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
-        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
-        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
-        "sha256": "f74e09c3d9a4fbe53fca3697ab5d147b766ded273023ef10507f94b1278e0dc2"
-      },
-      "stats": {
-        "lines": 512,
-        "size_kb": 24.5,
         "added_at": "2026-04-03T16:15:52-04:00"
       }
     },
@@ -177,41 +107,6 @@
       "stats": {
         "lines": 534,
         "size_kb": 28.1,
-        "added_at": "2026-04-03T16:15:52-04:00"
-      }
-    },
-    {
-      "id": "aibast-agents-library__customer_360_speech",
-      "name": "@aibast-agents-library/customer_360_speech",
-      "display_name": "Customer 360 & Speech Agent",
-      "description": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
-      "version": "1.1.0",
-      "publisher": "@aibast-agents-library",
-      "author": "AIBAST",
-      "category": "b2c_sales",
-      "tags": [
-        "customer-360",
-        "speech",
-        "sentiment",
-        "omnichannel",
-        "profile",
-        "b2c"
-      ],
-      "quality_tier": "community",
-      "audience": "both",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "path": "agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py",
-        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py",
-        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py",
-        "sha256": "6ba087b8885c52ce347b6692679ee5a8e75b6d4a205615cbe3f0f35531b9d1db"
-      },
-      "stats": {
-        "lines": 440,
-        "size_kb": 21.8,
         "added_at": "2026-04-03T16:15:52-04:00"
       }
     },
@@ -460,41 +355,6 @@
       }
     },
     {
-      "id": "aibast-agents-library__omnichannel_engagement",
-      "name": "@aibast-agents-library/omnichannel_engagement",
-      "display_name": "Omnichannel Engagement Agent",
-      "description": "Analyzes channel mix, journeys, and campaign attribution from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
-      "version": "1.2.0",
-      "publisher": "@aibast-agents-library",
-      "author": "AIBAST",
-      "category": "b2c_sales",
-      "tags": [
-        "omnichannel",
-        "engagement",
-        "journey",
-        "attribution",
-        "campaign",
-        "b2c"
-      ],
-      "quality_tier": "community",
-      "audience": "both",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "path": "agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
-        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
-        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
-        "sha256": "8e9c11585b63da13bd5ed59343bed3e9ee9a1d32c5b34d89e4daa7087f3b3d12"
-      },
-      "stats": {
-        "lines": 515,
-        "size_kb": 25.7,
-        "added_at": "2026-04-03T16:15:52-04:00"
-      }
-    },
-    {
       "id": "aibast-agents-library__one_click_crm_intake",
       "name": "@aibast-agents-library/one_click_crm_intake",
       "display_name": "One-Click CRM Intake",
@@ -546,7 +406,7 @@
         "b2c"
       ],
       "quality_tier": "community",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -598,40 +458,6 @@
       }
     },
     {
-      "id": "aibast-agents-library__procurement_support",
-      "name": "@aibast-agents-library/procurement_support",
-      "display_name": "Procurement Support",
-      "description": "Tracks requisitions and supplier signals over a simulated Dynamics 365 tenant and ERP (POs, receipts, blocked invoices), with offline fallback.",
-      "version": "1.2.0",
-      "publisher": "@aibast-agents-library",
-      "author": "AIBAST",
-      "category": "general",
-      "tags": [
-        "procurement",
-        "requisition",
-        "contracts",
-        "supplier",
-        "budget"
-      ],
-      "quality_tier": "community",
-      "audience": "both",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "path": "agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
-        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
-        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
-        "sha256": "08de4f1c0f746fef3915574fb31e4a3c55a817402532f4cd58b5756dd3faebf8"
-      },
-      "stats": {
-        "lines": 491,
-        "size_kb": 26.2,
-        "added_at": "2026-04-03T16:15:52-04:00"
-      }
-    },
-    {
       "id": "aibast-agents-library__product_reference",
       "name": "@aibast-agents-library/product_reference",
       "display_name": "Product Reference",
@@ -662,76 +488,6 @@
       "stats": {
         "lines": 420,
         "size_kb": 21.9,
-        "added_at": "2026-04-03T16:15:52-04:00"
-      }
-    },
-    {
-      "id": "aibast-agents-library__returns_exchange",
-      "name": "@aibast-agents-library/returns_exchange",
-      "display_name": "Returns & Exchange Agent",
-      "description": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline.",
-      "version": "1.1.0",
-      "publisher": "@aibast-agents-library",
-      "author": "AIBAST",
-      "category": "b2c_sales",
-      "tags": [
-        "returns",
-        "exchange",
-        "refund",
-        "retail",
-        "customer-service",
-        "b2c"
-      ],
-      "quality_tier": "community",
-      "audience": "both",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "path": "agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
-        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
-        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
-        "sha256": "89065ae5961458e590f5aeb78b797ad3f71bd85632b4e5d9d4f7f951b9c3d444"
-      },
-      "stats": {
-        "lines": 482,
-        "size_kb": 22.2,
-        "added_at": "2026-04-03T16:15:52-04:00"
-      }
-    },
-    {
-      "id": "aibast-agents-library__sales_chat",
-      "name": "@aibast-agents-library/sales_chat",
-      "display_name": "Sales Chat Agent",
-      "description": "Answers chat questions from a live product catalog on a simulated Dynamics 365 tenant, with promotions and an offline demo fallback.",
-      "version": "1.1.0",
-      "publisher": "@aibast-agents-library",
-      "author": "AIBAST",
-      "category": "b2c_sales",
-      "tags": [
-        "sales",
-        "chat",
-        "product",
-        "promotion",
-        "order",
-        "b2c"
-      ],
-      "quality_tier": "community",
-      "audience": "both",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "path": "agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py",
-        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py",
-        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py",
-        "sha256": "db0e860853560f566ee7107dad1928d1e5c14256fd8f3074ccd0957d7b6be10c"
-      },
-      "stats": {
-        "lines": 488,
-        "size_kb": 20.5,
         "added_at": "2026-04-03T16:15:52-04:00"
       }
     },
@@ -1886,7 +1642,7 @@
         "adaptive_card"
       ],
       "quality_tier": "frontier",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -3515,7 +3271,7 @@
         "sneakernet"
       ],
       "quality_tier": "community",
-      "audience": "both",
+      "audience": "consumer",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -4017,7 +3773,7 @@
         "digital-organism"
       ],
       "quality_tier": "community",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -4051,7 +3807,7 @@
         "virtual-world"
       ],
       "quality_tier": "community",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
@@ -5740,7 +5496,7 @@
         "singleton"
       ],
       "quality_tier": "official",
-      "audience": "consumer",
+      "audience": "both",
       "requires_env": [],
       "dependencies": [
         "@rapp/basic_agent"
