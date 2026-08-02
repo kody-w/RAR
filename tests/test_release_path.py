@@ -291,36 +291,28 @@ def test_every_step_output_reference_resolves():
     values into `createRef` and the release title, so a renamed or typo'd step
     id would create `refs/tags/` with an empty name and a release called
     " ()", after the registry had already been stamped and pushed. Nothing
-    fails loudly; you find out by looking at the tag list."""
+    fails loudly; you find out by looking at the tag list.
+
+    Checks that the step id EXISTS, not that the named output is written:
+    a step can emit outputs from a program it calls (process_issues.py writes
+    to $GITHUB_OUTPUT from Python), which no static scan of the run body can
+    see. Asserting on that produced eighteen false positives on a workflow
+    that was entirely correct."""
     import re
 
     import yaml
 
-    ref = re.compile(r"steps\.([A-Za-z0-9_-]+)\.outputs\.([A-Za-z0-9_-]+)")
+    ref = re.compile(r"steps\.([A-Za-z0-9_-]+)\.outputs\.[A-Za-z0-9_-]+")
     problems = []
     for wf in sorted((REPO_ROOT / ".github" / "workflows").glob("*.yml")):
-        raw = wf.read_text()
-        doc = yaml.safe_load(raw) or {}
+        doc = yaml.safe_load(wf.read_text()) or {}
         for jname, job in (doc.get("jobs") or {}).items():
             steps = job.get("steps") or []
             ids = {s.get("id") for s in steps if s.get("id")}
-            # What each step actually writes to $GITHUB_OUTPUT.
-            written = {}
-            for s in steps:
-                sid = s.get("id")
-                if not sid:
-                    continue
-                body = str(s.get("run", ""))
-                for m in re.finditer(r'([A-Za-z0-9_-]+)=.*>>\s*"?\$\{?GITHUB_OUTPUT', body):
-                    written.setdefault(sid, set()).add(m.group(1))
-            blob = yaml.dump(job)
-            for sid, out in ref.findall(blob):
+            for sid in set(ref.findall(yaml.dump(job))):
                 if sid not in ids:
-                    problems.append(f"{wf.name}::{jname}: steps.{sid} has no such step id")
-                elif sid in written and out not in written[sid]:
                     problems.append(
-                        f"{wf.name}::{jname}: steps.{sid}.outputs.{out} is never written "
-                        f"(writes: {sorted(written[sid])})"
+                        f"{wf.name}::{jname}: steps.{sid}.outputs.* — no step has id '{sid}'"
                     )
     assert not problems, "unresolvable step output reference: " + "; ".join(problems)
 
