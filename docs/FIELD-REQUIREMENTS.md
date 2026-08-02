@@ -30,10 +30,12 @@ repository. The consuming application owns the experience.
 | 1.3 | Call it from a browser without a proxy | **Solved** | GitHub raw and jsDelivr both return `Access-Control-Allow-Origin: *`. Verify: `curl -sI .../manifest.json \| grep -i access-control`. |
 | 1.4 | No backend to run, fund, or operate | **Solved** | There is no server. Every endpoint is a file committed to `main` and served by GitHub's CDN. |
 | 1.5 | Pin to a known-good version | **Solved** | Swap `main` for a commit SHA in any URL, or use `cdn.jsdelivr.net/gh/kody-w/RAR@<sha>/...`. |
+| 1.6 | Prove a real user journey needs no GitHub at all | **Solved** | **[discover.html](https://kody-w.github.io/RAR/discover.html)** — describe a problem in plain English, get ranked agents. Automated test loads it with `github.com` blocked at the network layer; it completes with zero errors because it only ever reads two static files. No account, no repo chrome, no publisher handles. |
 
 **Read `manifest.json` first** — it lists every endpoint and includes copy-paste
 recipes for rendering a catalog, recommending from a use case, and installing an
-agent.
+agent. For the experience itself, open
+**[discover.html](https://kody-w.github.io/RAR/discover.html)**.
 
 ---
 
@@ -47,8 +49,9 @@ user's own words.
 | 2.1 | User describes a use case, a recommendation comes back | **Solved** | `api/v1/match.json` ships 20 canonical use cases plus a 2,226-term ranking index. Matching runs client-side; no model call, no backend. |
 | 2.2 | Free-text queries, not just fixed categories | **Solved** | `match.json.index` maps term → `agent_id:weight`. Tokenize, sum, sort. The algorithm is written out in `how_to_query`. |
 | 2.3 | Ranked results, not an unordered dump | **Solved** | Weighted by field (name and tags ×3, category ×2, description ×1) and damped by document frequency so common words cannot dominate. |
-| 2.4 | Relevance good enough to trust | **Solved** | "review vendor contracts for risk" → *Vendor Contract Risk Review* first. "supply chain has supplier delays" → *Supplier Risk Monitoring* first. Reproduce with the snippet in § "Try it" below. |
-| 2.5 | One destination, not several competing libraries | **Partly solved** | `manifest.json` is a single discovery root, and `state/federation.json` consolidates peer catalogs. Genuine consolidation is an organisational decision, not a schema one. |
+| 2.4 | Relevance good enough to trust | **Solved** | "review vendor contracts for risk" → *Vendor Contract Risk Review* first. "supply chain has supplier delays" → *Supplier Risk Monitoring* first. "sales team keeps missing forecast" → *Deal Health Score*, *Pipeline Velocity*, *Revenue Forecast*. Reproduce with the snippet in § "Try it", or use [discover.html](https://kody-w.github.io/RAR/discover.html). |
+| 2.5 | Show why something matched, not just that it did | **Solved** | Ranking retains the matched terms; `discover.html` renders them on every result ("Matched on **review**, **contracts**, **risk**, **renewal**"). |
+| 2.6 | One destination, not several competing libraries | **Partly solved** | `manifest.json` is a single discovery root, and `state/federation.json` consolidates peer catalogs. Genuine consolidation is an organisational decision, not a schema one. |
 
 ---
 
@@ -59,10 +62,11 @@ enterprise audience on first impression.
 
 | # | Requirement | Status | Evidence |
 |---|-------------|--------|----------|
-| 3.1 | An enterprise-safe slice that needs no further filtering | **Solved** | `api/v1/audience/business.json` — 271 agents, novelty excluded. Serve it directly. |
+| 3.1 | An enterprise-safe slice that needs no further filtering | **Solved** | `api/v1/audience/business.json` — 271 agents, novelty excluded. Serve it directly; `discover.html` does exactly that. |
 | 3.2 | Novelty must not leak in through a mislabelled category | **Solved** | An explicit novelty tag (`game`, `pokemon`, `collectible`, `adventure`, …) forces the consumer slice regardless of category. A text adventure filed under `devtools` still does not reach the business slice. See `classify()` in `scripts/build_static_api.py`. |
-| 3.3 | Curation must not silently hide useful agents | **Solved** | `both` is the default for ambiguous cases, and `both` appears in every slice. Misclassification degrades to over-showing, never to hiding. |
-| 3.4 | Quality signal per agent | **Partly solved** | `quality_tier` (`frontier` → `community` → `verified` → `official`) ships on every record. Promotion beyond automated validation is still a human review step. |
+| 3.3 | Curation demonstrably holds | **Solved** | Query the business slice for *"I want to play a game"* — it returns essentially nothing. The games are in the catalog; they are not in the enterprise surface. |
+| 3.4 | Curation must not silently hide useful agents | **Solved** | `both` is the default for ambiguous cases, and `both` appears in every slice. Misclassification degrades to over-showing, never to hiding. |
+| 3.5 | Quality signal per agent | **Partly solved** | `quality_tier` (`frontier` → `community` → `verified` → `official`) ships on every record and renders on each card. Promotion beyond automated validation is still a human review step. |
 
 ---
 
