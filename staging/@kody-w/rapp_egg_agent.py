@@ -39,7 +39,7 @@ __manifest__ = {
         "hippocampus",
         "communityRAPP",
     ],
-    "category": "infrastructure",
+    "category": "pipeline",
     "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
@@ -54,9 +54,20 @@ import os
 # class at `basic_agent` (rapp-installer layout) or `agents.basic_agent`
 # (Virtual Brainstem layout / rapp-installer via agents/ package).
 try:
-    from basic_agent import BasicAgent
-except ModuleNotFoundError:
-    from agents.basic_agent import BasicAgent
+    from agents.basic_agent import BasicAgent  # RAR layout
+except Exception:
+    try:
+        from basic_agent import BasicAgent  # Virtual Brainstem layout
+    except Exception:
+        class BasicAgent:  # standalone fallback: `python agent.py` must exit 0
+            def __init__(self, name=None, metadata=None):
+                if name is not None:
+                    self.name = name
+                if metadata is not None:
+                    self.metadata = metadata
+
+            def perform(self, **kwargs):
+                return "Not implemented."
 
 
 # Environment detection — are we in Pyodide (browser) or CPython (local)?

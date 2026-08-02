@@ -21,7 +21,21 @@ import sys
 import urllib.request
 from pathlib import Path
 
-from agents.basic_agent import BasicAgent
+try:
+    from agents.basic_agent import BasicAgent  # RAR layout
+except Exception:
+    try:
+        from basic_agent import BasicAgent  # Virtual Brainstem layout
+    except Exception:
+        class BasicAgent:  # standalone fallback: `python agent.py` must exit 0
+            def __init__(self, name=None, metadata=None):
+                if name is not None:
+                    self.name = name
+                if metadata is not None:
+                    self.metadata = metadata
+
+            def perform(self, **kwargs):
+                return "Not implemented."
 
 
 __manifest__ = {
@@ -36,7 +50,7 @@ __manifest__ = {
     ),
     "author": "Kody",
     "tags": ["m365", "copilot-studio", "factory", "agent-template", "deliverable"],
-    "category": "industry",
+    "category": "productivity",
     "quality_tier": "community",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],

@@ -69,7 +69,21 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-from agents.basic_agent import BasicAgent
+try:
+    from agents.basic_agent import BasicAgent  # RAR layout
+except Exception:
+    try:
+        from basic_agent import BasicAgent  # Virtual Brainstem layout
+    except Exception:
+        class BasicAgent:  # standalone fallback: `python agent.py` must exit 0
+            def __init__(self, name=None, metadata=None):
+                if name is not None:
+                    self.name = name
+                if metadata is not None:
+                    self.metadata = metadata
+
+            def perform(self, **kwargs):
+                return "Not implemented."
 
 
 RAPP_HOME = Path(os.environ.get("RAPP_HOME", str(Path.home() / ".rapp")))
