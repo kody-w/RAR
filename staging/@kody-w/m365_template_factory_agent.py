@@ -40,7 +40,7 @@ except Exception:
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@kody/m365_template_factory_agent",
+    "name": "@kody-w/m365_template_factory_agent",
     "version": "1.0.0",
     "display_name": "M365 Template Factory",
     "description": (
