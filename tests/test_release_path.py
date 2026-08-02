@@ -285,6 +285,67 @@ def test_workflows_that_commit_the_registry_check_out_full_history():
     )
 
 
+def test_every_step_output_reference_resolves():
+    """`steps.<id>.outputs.<name>` for an id that does not exist evaluates to
+    the EMPTY STRING — Actions does not error. The release job pipes those
+    values into `createRef` and the release title, so a renamed or typo'd step
+    id would create `refs/tags/` with an empty name and a release called
+    " ()", after the registry had already been stamped and pushed. Nothing
+    fails loudly; you find out by looking at the tag list."""
+    import re
+
+    import yaml
+
+    ref = re.compile(r"steps\.([A-Za-z0-9_-]+)\.outputs\.([A-Za-z0-9_-]+)")
+    problems = []
+    for wf in sorted((REPO_ROOT / ".github" / "workflows").glob("*.yml")):
+        raw = wf.read_text()
+        doc = yaml.safe_load(raw) or {}
+        for jname, job in (doc.get("jobs") or {}).items():
+            steps = job.get("steps") or []
+            ids = {s.get("id") for s in steps if s.get("id")}
+            # What each step actually writes to $GITHUB_OUTPUT.
+            written = {}
+            for s in steps:
+                sid = s.get("id")
+                if not sid:
+                    continue
+                body = str(s.get("run", ""))
+                for m in re.finditer(r'([A-Za-z0-9_-]+)=.*>>\s*"?\$\{?GITHUB_OUTPUT', body):
+                    written.setdefault(sid, set()).add(m.group(1))
+            blob = yaml.dump(job)
+            for sid, out in ref.findall(blob):
+                if sid not in ids:
+                    problems.append(f"{wf.name}::{jname}: steps.{sid} has no such step id")
+                elif sid in written and out not in written[sid]:
+                    problems.append(
+                        f"{wf.name}::{jname}: steps.{sid}.outputs.{out} is never written "
+                        f"(writes: {sorted(written[sid])})"
+                    )
+    assert not problems, "unresolvable step output reference: " + "; ".join(problems)
+
+
+def test_release_type_options_all_produce_a_tag():
+    """The workflow's release_type choices and the tag script's accepted types
+    have to agree. Adding an option to the dropdown without teaching the script
+    about it fails at tag time — which is after the gates have passed and the
+    operator believes the release is underway."""
+    import yaml
+
+    doc = yaml.safe_load((REPO_ROOT / ".github" / "workflows" / "release.yml").read_text())
+    triggers = doc[True] if True in doc else doc["on"]
+    options = set(triggers["workflow_dispatch"]["inputs"]["release_type"]["options"])
+    accepted = {"seasonal", "hotfix", "canary"}
+    assert options == accepted, (
+        f"release_type options {sorted(options)} do not match the tag script's "
+        f"accepted types {sorted(accepted)}"
+    )
+    # And every one of them actually yields a tag rather than raising.
+    for rtype in sorted(options):
+        tag = nrt.next_tag(["v1.0.0"], rtype, "20260801")
+        assert tag.startswith("v"), f"{rtype} produced {tag!r}"
+
+
 def test_computed_tag_is_not_interpolated_into_shell():
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
     for line in src.splitlines():

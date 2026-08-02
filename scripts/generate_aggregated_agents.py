@@ -450,6 +450,12 @@ def main() -> int:
         return 0
 
     print(f"[gen-agents] wrote {written}, unchanged {unchanged}.")
+    if written:
+        # Changed agent bytes need lifecycle evidence or build-registry.yml
+        # rejects the push. This is the maintainer bulk path for exactly this
+        # kind of template regeneration.
+        print("[gen-agents] next: python3 scripts/mint_maintainer_receipts.py "
+              '--note "regenerated aggregated agents"')
     return 0
 
 
