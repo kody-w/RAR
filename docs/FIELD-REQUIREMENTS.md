@@ -78,10 +78,11 @@ enterprise audience on first impression.
 |---|-------------|--------|----------|
 | 4.1 | Every recommendation traceable to a source | **Solved** | Each record carries `source.path`, `source.raw`, `source.cdn` and `source.sha256`. |
 | 4.2 | Verify what you downloaded is what was published | **Solved** | `sha256sum` the fetched file against `source.sha256`. |
-| 4.3 | Published URLs must not break | **Solved** | CONSTITUTION.md Article XXIII freezes every published path permanently. Enforced by `scripts/check_url_stability.py`, gated in CI ahead of every other job, and covered by `tests/test_url_stability.py` — which proves the gate *fails* on rename and on deletion, not merely that it passes when nothing is wrong. Currently 319/319 paths resolve. |
+| 4.3 | Published URLs must not break | **Solved** | CONSTITUTION.md Article XXIII freezes every published path permanently. Enforced by `scripts/check_url_stability.py`, gated in CI ahead of every other job, and covered by `tests/test_url_stability.py` — which proves the gate *fails* on rename and on deletion, not merely that it passes when nothing is wrong. Currently 320/320 paths resolve. |
 | 4.4 | Content stays fresh | **Solved** | `build-registry.yml` rebuilds the registry and the API on every push to `agents/**`, so the catalog cannot drift from the files. |
 | 4.5 | Detect change without re-downloading everything | **Solved** | `api/v1/status.json` publishes a content hash per endpoint. Compare, then fetch only what moved. |
 | 4.6 | Responsible-AI review and formal ALM sign-off | **Out of scope** | An approval process, not a code change. RAR supplies the audit surface (immutable paths, hashes, receipts, CI history); it cannot grant the approval. |
+| 4.7 | Aggregating other libraries must not launder their work | **Solved** | Aggregation is index-only: `scripts/crawl_sources.py` records metadata and links, and never fetches or mirrors an upstream body. Every aggregated container carries `source.upstream_url`, `source.upstream_author`, `source.license` and a `content_digest`, and its `describe` operation prints the source. Pinned by `tests/test_skill_toaster.py::test_agent_still_credits_upstream` across all 76 entries. |
 
 ---
 
@@ -94,6 +95,7 @@ enterprise audience on first impression.
 | 5.3 | Declare dependencies | **Solved** | `dependencies` lists `@publisher/slug` entries per record. |
 | 5.4 | Agents usable as-is, without rework | **Partly solved** | Agents install as-is; connecting them to a customer's own systems still requires configuration. Honest position: RAR removes the packaging and distribution problem, not the integration problem. |
 | 5.5 | One-click deploy to Copilot Studio | **Out of scope here** | Blocked upstream by a platform API limitation, tracked outside this repository. |
+| 5.6 | An indexed third-party skill must be callable, not just a bookmark | **Solved** | `@kody-w/skill_toaster_agent` infers each upstream capability's shape from its metadata and generates RAR's own method for that shape, so every aggregated entry ships real `operation`/`subject` parameters, a procedure, acceptance checks and a stated deliverable. Output binds to caller input. `tests/test_skill_toaster.py` proves it: the pre-toast shells fail seven of those assertions, the 76 toasted agents pass all 391. |
 
 ---
 

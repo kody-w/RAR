@@ -30,3 +30,8 @@ private-rar-template.tar.gz
 # Release-asset staging — rebuilt on demand by scripts/stage_release_assets.py,
 # uploaded to the GitHub release. Never committed (200+ duplicate agent files).
 dist/
+
+# Local HyperFrames video projects and their renders. Multi-megabyte binaries
+# that would live in git history forever; a `git add -A` should never sweep
+# them in. Publish renders as release assets instead.
+videos/
