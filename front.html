@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Front Page &mdash; RAPP Agent Registry</title>
+<meta name="description" content="One ranked list over every agent RAR hosts and every third-party skill it indexes. Every row shows why it ranked.">
+<meta property="og:title" content="Front Page — RAPP Agent Registry">
+<meta property="og:description" content="One ranked list over every agent RAR hosts and every third-party skill it indexes. Every row shows why it ranked.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kody-w.github.io/RAR/front.html">
+<style>
+/* The palette, type scale and chrome are index.html's. This page is a new
+   surface on the same site, not a new site. */
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --border: #30363d;
+  --border-hover: #484f58;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --text-muted: #656d76;
+  --accent: #58a6ff;
+  --purple: #bc8cff;
+  --green: #3fb950;
+  --amber: #d29922;
+  --red: #f85149;
+  --radius: 10px;
+  --mono: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.5;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+header {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; position: sticky; top: 0; z-index: 50;
+}
+.logo { display: flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 700; }
+.logo-mark {
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  color: #fff; width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; font-weight: 800; flex: none;
+}
+.header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+.adv-link {
+  background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+  padding: 6px 14px; border-radius: 6px; font-size: .78rem; font-weight: 600;
+  transition: all .15s;
+}
+.adv-link:hover { border-color: var(--border-hover); color: var(--text); text-decoration: none; }
+.conn { display: flex; align-items: center; gap: 7px; font-size: .75rem; color: var(--text-muted); }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); flex: none; }
+.dot.live { background: var(--green); box-shadow: 0 0 0 3px rgba(63,185,80,.18); }
+.dot.err  { background: var(--red);   box-shadow: 0 0 0 3px rgba(248,81,73,.18); }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 28px 24px 72px; }
+
+/* ── masthead ─────────────────────────────────────────────────────────── */
+.masthead { margin-bottom: 22px; }
+.masthead h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: 6px; }
+.masthead .lede { color: var(--text-dim); font-size: .95rem; max-width: 68ch; }
+.counts {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;
+  font-size: .78rem; color: var(--text-dim);
+}
+.count-block {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 7px 12px; font-variant-numeric: tabular-nums;
+}
+.count-block b { color: var(--text); font-weight: 700; }
+.count-block.native b { color: var(--accent); }
+.count-block.agg b { color: var(--purple); }
+.count-note { color: var(--text-muted); font-size: .74rem; align-self: center; }
+
+/* ── how ranking works — every word of it comes from the data ─────────── */
+.explain { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 18px; }
+.explain > summary {
+  cursor: pointer; list-style: none; padding: 12px 16px;
+  font-size: .85rem; font-weight: 600; color: var(--text-dim);
+  display: flex; align-items: center; gap: 8px;
+}
+.explain > summary::-webkit-details-marker { display: none; }
+.explain > summary::before { content: "\25B8"; transition: transform .2s; font-size: .8rem; }
+.explain[open] > summary::before { transform: rotate(90deg); }
+.explain > summary:hover { color: var(--text); }
+.explain-body { padding: 0 16px 16px; font-size: .86rem; color: var(--text-dim); line-height: 1.65; }
+.explain-body p { margin-bottom: 14px; }
+.comp { display: grid; grid-template-columns: 92px 1fr; gap: 10px 14px; align-items: start; margin-bottom: 10px; }
+.comp-head { display: flex; align-items: baseline; gap: 6px; }
+.comp-key { font-family: var(--mono); font-size: .8rem; color: var(--text); }
+.comp-w { font-variant-numeric: tabular-nums; font-size: .78rem; color: var(--text); font-weight: 700; }
+.comp-bar { height: 4px; border-radius: 2px; background: var(--surface2); overflow: hidden; margin-top: 6px; }
+.comp-bar i { display: block; height: 100%; background: var(--accent); }
+.comp-bar.agg i { background: var(--purple); }
+.comp-bar.both i { background: linear-gradient(90deg, var(--accent), var(--purple)); }
+.comp-desc { font-size: .82rem; color: var(--text-dim); }
+.comp-applies { font-size: .7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
+.explain-note { font-size: .78rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 12px; margin-top: 4px; }
+
+/* ── controls ─────────────────────────────────────────────────────────── */
+.controls {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  padding: 12px 14px; margin-bottom: 6px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  position: sticky; top: 61px; z-index: 40;
+}
+.seg { display: flex; gap: 3px; background: var(--bg); padding: 3px; border-radius: 9px; }
+.seg span {
+  padding: 5px 12px; border-radius: 7px; cursor: pointer; font-size: .8rem;
+  color: var(--text-dim); border: 1px solid transparent; transition: all .15s;
+  white-space: nowrap; user-select: none;
+}
+.seg span:hover { color: var(--text); }
+.seg span.active { background: var(--surface2); color: var(--text); border-color: var(--border-hover); }
+.seg span[data-origin="native"].active { color: var(--accent); border-color: rgba(88,166,255,.45); }
+.seg span[data-origin="aggregated"].active { color: var(--purple); border-color: rgba(188,140,255,.45); }
+.seg span[data-audience="business"].active { color: #7ee787; border-color: rgba(126,231,135,.4); }
+.seg span[data-audience="consumer"].active { color: #ffa657; border-color: rgba(255,166,87,.4); }
+.filter-box { position: relative; flex: 1 1 190px; min-width: 160px; }
+.filter-box input {
+  width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 7px 12px 7px 32px; color: var(--text); font-size: .85rem; outline: none;
+  font-family: inherit; transition: border-color .15s;
+}
+.filter-box input:focus { border-color: var(--accent); }
+.filter-box input::placeholder { color: var(--text-muted); }
+.filter-box .si { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; display: flex; }
+.showing { font-size: .78rem; color: var(--text-muted); font-variant-numeric: tabular-nums; margin-left: auto; }
+.showing b { color: var(--text-dim); }
+.scale-warn {
+  width: 100%; font-size: .74rem; color: var(--text-muted);
+  border-top: 1px solid var(--border); padding-top: 9px;
+}
+
+/* ── the feed ─────────────────────────────────────────────────────────── */
+.feed { list-style: none; }
+.row {
+  display: grid; grid-template-columns: 46px 1fr 88px; gap: 0 12px;
+  padding: 14px 14px 14px 12px; border-bottom: 1px solid var(--border);
+  border-left: 3px solid transparent; scroll-margin-top: 130px;
+}
+.row:hover { background: var(--surface); }
+/* Blue is RAR's own work, purple is somebody else's. A row that is both —
+   hosted here, credited elsewhere — reads purple and says so in its badges. */
+.row.rar { border-left-color: rgba(88,166,255,.5); }
+.row.sourced { border-left-color: rgba(188,140,255,.5); }
+.row.pinned { background: rgba(88,166,255,.07); border-left-color: var(--accent); }
+.rank {
+  font-variant-numeric: tabular-nums; font-size: 1.05rem; font-weight: 700;
+  color: var(--text-muted); text-align: right; padding-top: 1px;
+}
+.rank .hash { font-size: .7rem; font-weight: 400; }
+
+.title-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.title { font-size: 1.02rem; font-weight: 600; color: var(--text); }
+.title:hover { color: var(--accent); text-decoration: none; }
+.badge {
+  font-size: .68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 5px; white-space: nowrap;
+}
+.badge.native { background: rgba(88,166,255,.13); color: var(--accent); border: 1px solid rgba(88,166,255,.35); }
+.badge.aggregated { background: rgba(188,140,255,.13); color: var(--purple); border: 1px solid rgba(188,140,255,.35); }
+.badge.tier { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); text-transform: none; letter-spacing: 0; font-weight: 600; }
+.badge.tier-official { color: var(--green); border-color: rgba(63,185,80,.4); }
+.badge.tier-verified { color: var(--accent); border-color: rgba(88,166,255,.4); }
+.badge.tier-private  { color: var(--amber); border-color: rgba(210,153,34,.4); }
+.ref { font-family: var(--mono); font-size: .72rem; color: var(--text-muted); word-break: break-all; }
+.desc { color: var(--text-dim); font-size: .86rem; line-height: 1.5; margin-top: 4px; }
+
+/* The why strings are the product. They sit in the row, never behind a hover. */
+.why { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; margin-top: 8px; }
+.why-label {
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--text-muted); margin-right: 2px;
+}
+.chip {
+  font-size: .74rem; padding: 2px 8px; border-radius: 5px;
+  background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border);
+}
+.row.rar .chip { border-color: rgba(88,166,255,.22); }
+.row.sourced .chip { border-color: rgba(188,140,255,.22); }
+.chip.est { border-style: dashed; color: var(--text-muted); background: transparent; }
+
+.meta { display: flex; flex-wrap: wrap; gap: 5px 10px; align-items: center; margin-top: 8px; font-size: .75rem; color: var(--text-muted); }
+.meta .sep { color: var(--border-hover); }
+.act {
+  background: none; border: 1px solid var(--border); color: var(--text-dim);
+  padding: 2px 9px; border-radius: 5px; font-size: .73rem; cursor: pointer;
+  font-family: inherit; transition: all .15s; line-height: 1.45;
+}
+.act:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+.act.copied { border-color: var(--green); color: var(--green); }
+
+/* A third party's numbers are always attributed to the third party. */
+.srcline {
+  margin-top: 8px; padding: 7px 10px; border-radius: 7px;
+  background: rgba(188,140,255,.07); border: 1px solid rgba(188,140,255,.2);
+  font-size: .75rem; color: var(--text-dim);
+}
+.srcline b { color: var(--purple); font-weight: 600; }
+.srcline .caveat { color: var(--text-muted); }
+
+.score { text-align: right; padding-top: 2px; }
+.score-num { font-size: 1.05rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text); }
+.row.rar .score-num { color: var(--accent); }
+.row.sourced .score-num { color: var(--purple); }
+.score-bar { height: 4px; border-radius: 2px; background: var(--surface2); overflow: hidden; margin: 5px 0 4px auto; width: 100%; }
+.score-bar i { display: block; height: 100%; background: currentColor; }
+.row.rar .score-bar i { background: var(--accent); }
+.row.sourced .score-bar i { background: var(--purple); }
+.score-scale { font-size: .62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
+
+/* ── states ───────────────────────────────────────────────────────────── */
+.state { padding: 44px 20px; text-align: center; color: var(--text-muted); font-size: .9rem; }
+.fail {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 26px 24px; margin-top: 4px;
+}
+.fail h2 { font-size: 1.05rem; color: var(--text); margin-bottom: 8px; font-weight: 650; }
+.fail p { color: var(--text-dim); font-size: .88rem; margin-bottom: 14px; max-width: 72ch; }
+.fail ol { margin: 0 0 14px 20px; color: var(--text-dim); font-size: .88rem; }
+.fail li { margin-bottom: 9px; }
+.fail code {
+  font-family: var(--mono); font-size: .8rem; background: var(--bg);
+  border: 1px solid var(--border); border-radius: 5px; padding: 2px 7px; color: var(--text);
+  display: inline-block; word-break: break-all;
+}
+.fail .tried {
+  margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);
+  font-family: var(--mono); font-size: .72rem; color: var(--text-muted); line-height: 1.9;
+  word-break: break-all;
+}
+
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--surface); border: 1px solid var(--accent); color: var(--text);
+  padding: 9px 18px; border-radius: 8px; font-size: .82rem; z-index: 70;
+  box-shadow: 0 4px 20px rgba(0,0,0,.5);
+}
+
+footer {
+  border-top: 1px solid var(--border); margin-top: 30px; padding-top: 20px;
+  font-size: .76rem; color: var(--text-muted); line-height: 1.7;
+}
+footer .src { font-family: var(--mono); font-size: .72rem; word-break: break-all; }
+
+@media (max-width: 760px) {
+  header { padding: 12px 16px; }
+  .header-right { gap: 8px; }
+  .container { padding: 20px 14px 60px; }
+  .controls { position: static; }
+  .row { grid-template-columns: 30px 1fr; padding: 13px 8px; }
+  .rank { font-size: .9rem; }
+  .score { grid-column: 2; text-align: left; display: flex; align-items: center; gap: 8px; margin-top: 9px; }
+  .score-bar { width: 70px; margin: 0; }
+  .comp { grid-template-columns: 1fr; gap: 2px; margin-bottom: 14px; }
+  .showing { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">R</div>
+    <span>Front Page</span>
+  </div>
+  <div class="header-right">
+    <a class="adv-link" href="index.html">Browse</a>
+    <a class="adv-link" href="discover.html">For Work</a>
+    <a class="adv-link" href="metrics.html">Metrics</a>
+    <a class="adv-link" href="store.html">Advanced</a>
+    <span class="conn"><span class="dot" id="dot"></span><span id="conn-label">loading</span></span>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="masthead">
+    <h1>The front page of the agentic web</h1>
+    <p class="lede">
+      One ranked list over every agent this registry hosts and every third-party
+      skill it indexes. The ranking is the point: each row carries the numbers it
+      was scored on, so you can disagree with the order for a stated reason.
+    </p>
+    <div class="counts" id="counts"></div>
+  </section>
+
+  <details class="explain" id="explain" style="display:none">
+    <summary>How this ranking works</summary>
+    <div class="explain-body" id="explain-body"></div>
+  </details>
+
+  <section class="controls" id="controls" style="display:none">
+    <div class="seg" id="seg-origin">
+      <span class="active" data-origin="all">Everything</span>
+      <span data-origin="native">RAR-only</span>
+      <span data-origin="sourced">From a crawled source</span>
+    </div>
+    <div class="seg" id="seg-audience">
+      <span class="active" data-audience="all">Any audience</span>
+      <span data-audience="business">For work</span>
+      <span data-audience="consumer">Personal</span>
+    </div>
+    <div class="filter-box">
+      <span class="si"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="2" opacity="0.6"/><line x1="12" y1="12" x2="17" y2="17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/></svg></span>
+      <input type="text" id="q" placeholder="Filter by name, tag, description" autocomplete="off" spellcheck="false">
+    </div>
+    <span class="showing" id="showing"></span>
+    <div class="scale-warn" id="scale-warn"></div>
+  </section>
+
+  <ol class="feed" id="feed">
+    <li class="state" id="boot-state">Loading the ranked list&hellip;</li>
+  </ol>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+/* ────────────────────────────────────────────────────────────────────────
+   This page renders one file: api/v1/front.json. It computes no ranking of
+   its own — the order, the scores and the `why` strings are all decided at
+   build time by scripts/build_front_page.py, so what a reader sees here is
+   exactly what any other consumer of the endpoint sees.
+
+   Relative first, so a fork, a mirror or a local checkout reads its own
+   ranking; raw.githubusercontent as the fallback, which is what makes a
+   file:// open work at all (a relative fetch from file:// is blocked by
+   every browser). If both fail the page says so and tells you how to get
+   the data — it never leaves a spinner running over an empty shell.
+   ──────────────────────────────────────────────────────────────────────── */
+
+const RAW = 'https://raw.githubusercontent.com/kody-w/RAR/main';
+const ENDPOINTS = ['api/v1/front.json', RAW + '/api/v1/front.json'];
+
+let DATA = null;
+let ITEMS = [];
+let SOURCE_URL = '';
+
+const state = { origin: 'all', audience: 'all', q: '', ref: '' };
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g,
+  c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const plural = (n, one, many) => n + ' ' + (n === 1 ? one : many);
+
+function setConn(cls, label) {
+  $('dot').className = 'dot' + (cls ? ' ' + cls : '');
+  $('conn-label').textContent = label;
+}
+
+/* ── hash routing ──────────────────────────────────────────────────────
+   Filters and the focused row live in the hash so any view of this page is
+   a link somebody can paste. replaceState keeps typing in the filter box
+   from stacking a history entry per keystroke. */
+
+function readHash() {
+  const h = location.hash.replace(/^#/, '');
+  if (!h) return;
+  for (const part of h.split('&')) {
+    const i = part.indexOf('=');
+    if (i < 0) continue;
+    const k = part.slice(0, i);
+    let v;
+    try { v = decodeURIComponent(part.slice(i + 1).replace(/\+/g, ' ')); }
+    catch (e) { v = part.slice(i + 1); }
+    if (k === 'origin' && ['all', 'native', 'sourced'].includes(v)) state.origin = v;
+    else if (k === 'audience' && ['all', 'business', 'consumer'].includes(v)) state.audience = v;
+    else if (k === 'q') state.q = v;
+    else if (k === 'ref') state.ref = v;
+  }
+}
+
+function hashFor(overrides) {
+  const s = Object.assign({}, state, overrides || {});
+  const parts = [];
+  if (s.origin !== 'all') parts.push('origin=' + s.origin);
+  if (s.audience !== 'all') parts.push('audience=' + s.audience);
+  if (s.q) parts.push('q=' + encodeURIComponent(s.q));
+  if (s.ref) parts.push('ref=' + encodeURIComponent(s.ref));
+  return '#' + parts.join('&');
+}
+
+function writeHash() {
+  const h = hashFor();
+  if (h !== location.hash && !(h === '#' && !location.hash)) {
+    history.replaceState(null, '', location.pathname + location.search + h);
+  }
+}
+
+/* ── filtering ─────────────────────────────────────────────────────────── */
+
+// An item with no audience verdict shows up under every audience, the same
+// rule index.html uses: unclassified means unknown, not excluded.
+function inAudience(it) {
+  if (state.audience === 'all') return true;
+  return !it.audience || it.audience === 'both' || it.audience === state.audience;
+}
+
+function haystack(it) {
+  if (it._hay === undefined) {
+    it._hay = [it.title, it.ref, it.description, it.category,
+               (it.tags || []).join(' '), it.source ? it.source.display_name : '']
+              .join(' ').toLowerCase();
+  }
+  return it._hay;
+}
+
+function visible() {
+  const terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+  return ITEMS.filter(it => {
+    // 'native' means RAR-only; 'sourced' means a hosted agent that a crawler also
+    // found upstream. 'aggregated' (indexed but not hosted) is still a valid origin
+    // in the schema and simply has no rows while every source is materialised.
+    if (state.origin === 'native' && (it.source || it.origin !== 'native')) return false;
+    if (state.origin === 'sourced' && !it.source) return false;
+    if (!inAudience(it)) return false;
+    if (terms.length) {
+      const h = haystack(it);
+      if (!terms.every(t => h.includes(t))) return false;
+    }
+    return true;
+  });
+}
+
+/* ── rendering ─────────────────────────────────────────────────────────── */
+
+const AUDIENCE_LABEL = { business: 'for work', consumer: 'personal', both: 'work or personal' };
+
+function whyChip(text) {
+  // A component that had no signal was filled with the population median.
+  // Marking those visually stops a median fill from reading as evidence.
+  const est = /median/.test(text) || /^no /.test(text);
+  return '<span class="chip' + (est ? ' est' : '') + '">' + esc(text) + '</span>';
+}
+
+function nativeMeta(it) {
+  const r = it.signals.rar || {};
+  const bits = [];
+  if (r.tier) {
+    bits.push('<span class="badge tier tier-' + esc(r.tier) + '">' + esc(r.tier) + '</span>');
+  }
+  if (it.category) bits.push(esc(it.category));
+  if (it.audience) bits.push(esc(AUDIENCE_LABEL[it.audience] || it.audience));
+  if (r.curator_n) bits.push('RAR reviews: ' + r.curator_n + (r.curator_mean ? ' at ' + r.curator_mean + '/5' : ''));
+  if (r.upvotes) bits.push('RAR upvotes: ' + r.upvotes);
+  if (r.lines) bits.push(r.lines + ' lines');
+  return bits;
+}
+
+// Aggregated rows carry the origin's own counters, always attributed to the
+// origin. RAR's counters and a source's counters measure different
+// populations by different methods; they are shown side by side and never
+// added into one number.
+function sourceLine(it) {
+  const s = it.source || {};
+  const n = it.signals.source || {};
+  const facts = [];
+  if (typeof n.downloads === 'number') facts.push(plural(n.downloads, 'download', 'downloads'));
+  if (typeof n.rating === 'number' && n.rating) facts.push('rating ' + n.rating);
+  if (n.has_bundle) facts.push('ships a bundle');
+  if (n.featured) facts.push('featured there');
+  if (typeof n.age_days === 'number') facts.push('published ' + plural(n.age_days, 'day', 'days') + ' ago');
+  if (n.author) facts.push('by ' + n.author);
+  const home = s.home_url
+    ? '<a href="' + esc(s.home_url) + '" target="_blank" rel="noopener">' + esc(s.display_name || s.id) + '</a>'
+    : esc(s.display_name || s.id || 'the source');
+  return '<div class="srcline"><b>' + home + '</b> reports: ' +
+    (facts.length ? esc(facts.join(' · ')) : 'no counters published') +
+    '. <span class="caveat">These are that source&#39;s own numbers, not RAR&#39;s, and are never added to RAR&#39;s' +
+    (s.license ? '. License: ' + esc(s.license) : '') + '.</span></div>';
+}
+
+function rowHtml(it) {
+  const agg = it.origin === 'aggregated';
+  const sourced = !!it.source;
+  const originBadge = agg
+    ? '<span class="badge aggregated">indexed &middot; ' + esc((it.source && it.source.display_name) || 'third party') + '</span>'
+    : (sourced
+        ? '<span class="badge native">RAR agent</span> <span class="badge aggregated">also at ' +
+          esc(it.source.display_name) + '</span>'
+        : '<span class="badge native">RAR agent</span>');
+
+  const meta = agg
+    ? [esc(it.category), it.audience ? esc(AUDIENCE_LABEL[it.audience] || it.audience) : ''].filter(Boolean)
+    : nativeMeta(it);
+
+  const acts = [];
+  if (it.url) {
+    acts.push('<a class="act" href="' + esc(it.url) + '" target="_blank" rel="noopener">' +
+      (agg ? 'Open at the source &#8599;' : 'Open in RAR &#8599;') + '</a>');
+  }
+  if (it.install) {
+    acts.push('<a class="act" href="' + esc(it.install) + '" target="_blank" rel="noopener">Agent file &#8599;</a>');
+  }
+  acts.push('<button class="act" data-share="' + esc(it.ref) + '">Link to this</button>');
+
+  return '<li class="row ' + esc(it.origin) + (sourced ? ' sourced' : '') + (it.ref === state.ref ? ' pinned' : '') +
+      '" id="row-' + encodeURIComponent(it.ref) + '">' +
+    '<div class="rank"><span class="hash">#</span>' + it.rank + '</div>' +
+    '<div>' +
+      '<div class="title-line">' +
+        '<a class="title" href="' + esc(it.url || '#') + '" target="_blank" rel="noopener">' + esc(it.title) + '</a>' +
+        originBadge +
+        '<span class="ref">' + esc(it.ref) + '</span>' +
+      '</div>' +
+      '<div class="desc">' + esc(it.description) + '</div>' +
+      '<div class="why"><span class="why-label">why it ranks</span>' +
+        (it.why || []).map(whyChip).join('') +
+      '</div>' +
+      (agg ? sourceLine(it) : '') +
+      '<div class="meta">' + meta.join('<span class="sep">&middot;</span>') +
+        (meta.length && acts.length ? '<span class="sep">&middot;</span>' : '') + acts.join('') +
+      '</div>' +
+    '</div>' +
+    '<div class="score">' +
+      '<div class="score-num">' + it.score.toFixed(1) + '</div>' +
+      '<div class="score-bar"><i style="width:' + Math.max(2, Math.min(100, it.score)) + '%"></i></div>' +
+      '<div class="score-scale">' + (agg ? 'indexed scale' : 'RAR scale') + '</div>' +
+    '</div>' +
+  '</li>';
+}
+
+function render() {
+  const rows = visible();
+  const feed = $('feed');
+
+  if (!rows.length) {
+    feed.innerHTML = '<li class="state">Nothing matches that filter. ' +
+      'Clear the text filter, or switch back to Everything.</li>';
+  } else {
+    feed.innerHTML = rows.map(rowHtml).join('');
+  }
+
+  $('showing').innerHTML = 'showing <b>' + rows.length + '</b> of ' + ITEMS.length;
+
+  // Two origins in one list means two scales in one column. Say so whenever
+  // both are on screen, and stop saying it once the reader has filtered to one.
+  const warn = $('scale-warn');
+  if (state.origin === 'all') {
+    warn.style.display = '';
+    warn.innerHTML = 'Both origins are shown. A score is comparable only within its origin &mdash; ' +
+      'a RAR agent at 80 and an indexed entry at 80 are not the same claim. ' +
+      'Filter to one origin to compare like with like.';
+  } else {
+    warn.style.display = 'none';
+  }
+}
+
+function focusRow() {
+  if (!state.ref) return;
+  const el = document.getElementById('row-' + encodeURIComponent(state.ref));
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/* ── the ranking explanation, rendered from the data ───────────────────
+   Nothing about the weights is written into this page. If the engine
+   changes a weight, or adds a component, this section changes with it. */
+
+function renderExplain(r) {
+  const parts = [];
+  if (r.explain) parts.push('<p>' + esc(r.explain) + '</p>');
+
+  for (const c of (r.components || [])) {
+    const pct = Math.round((c.weight || 0) * 100);
+    const cls = c.applies_to === 'aggregated' ? 'agg' : c.applies_to === 'both' ? 'both' : '';
+    parts.push(
+      '<div class="comp">' +
+        '<div>' +
+          '<div class="comp-head"><span class="comp-key">' + esc(c.key) + '</span>' +
+          '<span class="comp-w">' + pct + '</span></div>' +
+          '<div class="comp-applies">' + esc(c.applies_to || '') + '</div>' +
+          '<div class="comp-bar ' + cls + '"><i style="width:' + pct + '%"></i></div>' +
+        '</div>' +
+        '<div class="comp-desc">' + esc(c.description || '') + '</div>' +
+      '</div>');
+  }
+
+  const notes = [];
+  if ((r.not_scored || []).length) {
+    notes.push('Deliberately not scored: ' + esc(r.not_scored.join(', ')) + '.');
+  }
+  if (r.median_fill) notes.push(esc(r.median_fill));
+  if (r.clock) notes.push(esc(r.clock));
+  if (notes.length) parts.push('<div class="explain-note">' + notes.join('<br>') + '</div>');
+
+  $('explain-body').innerHTML = parts.join('');
+  $('explain').style.display = '';
+}
+
+function renderCounts(c) {
+  const blocks = [];
+  if (typeof c.native === 'number') {
+    blocks.push('<span class="count-block native"><b>' + c.native + '</b> agents hosted here</span>');
+  }
+  if (typeof c.with_source_provenance === 'number' && c.with_source_provenance) {
+    blocks.push('<span class="count-block agg"><b>' + c.with_source_provenance +
+      '</b> of them also found at ' + plural(c.sources || 0, 'crawled source', 'crawled sources') + '</span>');
+  }
+  if (typeof c.aggregated === 'number' && c.aggregated) {
+    blocks.push('<span class="count-block agg"><b>' + c.aggregated + '</b> indexed but not hosted</span>');
+  }
+  if (typeof c.ranked === 'number') {
+    blocks.push('<span class="count-block"><b>' + c.ranked + '</b> ranked, one row each</span>');
+  }
+  blocks.push('<span class="count-note">Two sets of counters, kept apart &mdash; never summed.</span>');
+  $('counts').innerHTML = blocks.join('');
+}
+
+/* ── fail-open ─────────────────────────────────────────────────────────
+   The honest failure is more useful than a half-page: name what was tried,
+   and give the three commands that actually fix it. */
+
+function renderFailure(attempts) {
+  setConn('err', 'no data');
+  $('feed').innerHTML =
+    '<li class="fail">' +
+      '<h2>No ranking data loaded</h2>' +
+      '<p>This page renders one file, <code>api/v1/front.json</code>, and computes nothing ' +
+      'itself &mdash; so with the file out of reach there is no honest list to show you. ' +
+      'The ranking explanation ships inside that file too, which is why this page will not ' +
+      'invent one. Any of these gets you the data:</p>' +
+      '<ol>' +
+        '<li>Serve the repository instead of opening the file directly &mdash; browsers block ' +
+        'a page on <code>file://</code> from reading files next to it:<br>' +
+        '<code>python3 -m http.server 8000</code> then open ' +
+        '<code>http://localhost:8000/front.html</code></li>' +
+        '<li>Build the endpoint if this checkout has never produced one:<br>' +
+        '<code>python scripts/build_front_page.py</code></li>' +
+        '<li>Or read the published copy: ' +
+        '<a href="https://kody-w.github.io/RAR/front.html">kody-w.github.io/RAR/front.html</a> ' +
+        '&mdash; the raw endpoint is ' +
+        '<a href="' + RAW + '/api/v1/front.json">api/v1/front.json</a>.</li>' +
+      '</ol>' +
+      '<p>The rest of the registry does not depend on this page: ' +
+      '<a href="index.html">browse every agent</a>, or ' +
+      '<a href="discover.html">describe what you need</a>.</p>' +
+      '<div class="tried">tried:<br>' +
+        attempts.map(a => esc(a.url) + ' &rarr; ' + esc(a.error)).join('<br>') +
+      '</div>' +
+    '</li>';
+  $('foot').innerHTML = 'Front page of the RAPP Agent Registry. ' +
+    'Ranking is produced by <span class="src">scripts/build_front_page.py</span> and served as ' +
+    '<span class="src">api/v1/front.json</span>.';
+}
+
+/* ── events ────────────────────────────────────────────────────────────── */
+
+$('seg-origin').addEventListener('click', e => {
+  const t = e.target.closest('[data-origin]');
+  if (!t) return;
+  state.origin = t.dataset.origin;
+  [...e.currentTarget.children].forEach(el => el.classList.toggle('active', el === t));
+  writeHash();
+  render();
+});
+
+$('seg-audience').addEventListener('click', e => {
+  const t = e.target.closest('[data-audience]');
+  if (!t) return;
+  state.audience = t.dataset.audience;
+  [...e.currentTarget.children].forEach(el => el.classList.toggle('active', el === t));
+  writeHash();
+  render();
+});
+
+let qTimer = null;
+$('q').addEventListener('input', e => {
+  state.q = e.target.value.trim();
+  clearTimeout(qTimer);
+  qTimer = setTimeout(() => { writeHash(); render(); }, 110);
+});
+
+// One delegated listener rather than 355 inline handlers.
+$('feed').addEventListener('click', e => {
+  const btn = e.target.closest('[data-share]');
+  if (!btn) return;
+  state.ref = btn.dataset.share;
+  const url = location.origin + location.pathname + location.search + hashFor();
+  history.replaceState(null, '', location.pathname + location.search + hashFor());
+  document.querySelectorAll('.row.pinned').forEach(el => el.classList.remove('pinned'));
+  btn.closest('.row').classList.add('pinned');
+  // Clipboard is unavailable on file:// and without a user-gesture permission
+  // in some browsers; the hash is already in the address bar either way.
+  const done = ok => {
+    btn.classList.add('copied');
+    btn.textContent = ok ? 'Link copied' : 'Link in address bar';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Link to this'; }, 1800);
+  };
+  try {
+    navigator.clipboard.writeText(url).then(() => done(true), () => done(false));
+  } catch (err) { done(false); }
+});
+
+window.addEventListener('hashchange', () => {
+  if (!DATA) return;
+  state.origin = 'all'; state.audience = 'all'; state.q = ''; state.ref = '';
+  readHash();
+  syncControls();
+  render();
+  focusRow();
+});
+
+function syncControls() {
+  document.querySelectorAll('#seg-origin [data-origin]').forEach(
+    el => el.classList.toggle('active', el.dataset.origin === state.origin));
+  document.querySelectorAll('#seg-audience [data-audience]').forEach(
+    el => el.classList.toggle('active', el.dataset.audience === state.audience));
+  $('q').value = state.q;
+}
+
+/* ── boot ──────────────────────────────────────────────────────────────── */
+
+async function boot() {
+  const t0 = performance.now();
+  const attempts = [];
+
+  for (const url of ENDPOINTS) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) { attempts.push({ url, error: 'HTTP ' + res.status }); continue; }
+      const json = await res.json();
+      if (!json || json.schema !== 'rar-front-page/1.0' || !Array.isArray(json.items)) {
+        attempts.push({ url, error: 'not a rar-front-page/1.0 document' });
+        continue;
+      }
+      DATA = json;
+      SOURCE_URL = url;
+      break;
+    } catch (err) {
+      attempts.push({ url, error: (err && err.message) || 'fetch failed' });
+    }
+  }
+
+  if (!DATA) { renderFailure(attempts); return; }
+
+  ITEMS = DATA.items;
+  const ms = Math.round(performance.now() - t0);
+  setConn('live', ITEMS.length + ' ranked · ' + ms + ' ms');
+
+  renderCounts(DATA.counts || {});
+  if (DATA.ranking) renderExplain(DATA.ranking);
+  $('controls').style.display = '';
+
+  readHash();
+  syncControls();
+  render();
+  focusRow();
+
+  $('foot').innerHTML =
+    'Ranked ' + esc(DATA.generated || 'unknown') + ' by ' +
+    '<span class="src">scripts/build_front_page.py</span> from this registry&#39;s own review, ' +
+    'discussion and crawl state. Indexed entries are metadata and a link home &mdash; ' +
+    (DATA.policy ? esc(DATA.policy) + '. ' : 'content is never copied here. ') +
+    '<br>Read the same data yourself: <span class="src">' + esc(SOURCE_URL) + '</span>';
+}
+
+boot();
+</script>
+</body>
+</html>

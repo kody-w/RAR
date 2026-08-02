@@ -31,11 +31,24 @@ own counters. They are never added together: they count different populations
 measured different ways, and silently summing them would invent a number
 neither system can defend. The storefront shows both.
 
+Failure posture
+---------------
+Two callers want opposite things from a bad day upstream, so the choice is the
+caller's. ``refresh-ratings.yml`` runs this as one of six snapshot steps: a 404
+there must not fail the other five, so the default is to warn, skip the source
+and leave the existing catalog untouched. ``aggregate.yml`` runs it as the
+whole job and owns the freshness of the result: there a swallowed 404 is
+indistinguishable from a quiet week — green run, catalog silently ageing — so
+it passes ``--strict`` and any skipped source becomes a non-zero exit. Strict
+refuses *before* writing, because a snapshot rebuilt from the sources that
+happened to answer is a deletion of the ones that did not.
+
 Usage
 -----
     python scripts/crawl_sources.py            # crawl every enabled source
     python scripts/crawl_sources.py --only cat-agent-skills
     python scripts/crawl_sources.py --dry-run  # print, write nothing
+    python scripts/crawl_sources.py --strict   # a skipped source fails the run
 """
 from __future__ import annotations
 
@@ -60,8 +73,25 @@ USER_AGENT = "rar-aggregator (+https://github.com/kody-w/RAR)"
 SLUG_OK = re.compile(r"^[a-z0-9_]+$")
 
 
+# Every reason a source contributed nothing to this run. Populated by fail()
+# and read only by --strict; the default caller never looks at it, so the
+# non-fatal posture is unchanged.
+FAILURES: list[str] = []
+
+
 def warn(msg: str) -> None:
     print(f"[crawl-sources] {msg}", file=sys.stderr)
+
+
+def fail(msg: str) -> None:
+    """A warning that also arms --strict.
+
+    Reserved for a source that produced no records at all. A slug collision
+    stays a plain warning: it is a handled data quirk, not a source going
+    dark, and failing on it would train the operator to ignore the signal.
+    """
+    FAILURES.append(msg)
+    warn(msg)
 
 
 def fetch_json(url: str):
@@ -133,18 +163,18 @@ ADAPTERS = {"cat-skills/1": parse_cat_skills}
 def crawl_source(source: dict) -> list[dict] | None:
     adapter = ADAPTERS.get(source.get("format", ""))
     if adapter is None:
-        warn(f"'{source.get('id')}': unknown format {source.get('format')!r}; skipped.")
+        fail(f"'{source.get('id')}': unknown format {source.get('format')!r}; skipped.")
         return None
     try:
         payload = fetch_json(source["index_url"])
     except (OSError, ValueError, urllib.error.URLError) as exc:
-        warn(f"'{source['id']}': index fetch failed ({exc}); source skipped.")
+        fail(f"'{source['id']}': index fetch failed ({exc}); source skipped.")
         return None
 
     items = payload if isinstance(payload, list) else (
         payload.get("skills") or payload.get("items") or payload.get("agents") or [])
     if not isinstance(items, list) or not items:
-        warn(f"'{source['id']}': index carried no items; source skipped.")
+        fail(f"'{source['id']}': index carried no items; source skipped.")
         return None
 
     records = adapter(items, source)
@@ -166,14 +196,14 @@ def crawl_source(source: dict) -> list[dict] | None:
 
 def build(only: str | None = None) -> dict | None:
     if not SOURCES_FILE.exists():
-        warn("sources.json missing; nothing to crawl.")
+        fail("sources.json missing; nothing to crawl.")
         return None
     cfg = json.loads(SOURCES_FILE.read_text(encoding="utf-8"))
     sources = [s for s in cfg.get("sources", []) if s.get("enabled", True)]
     if only:
         sources = [s for s in sources if s.get("id") == only]
     if not sources:
-        warn("no enabled sources matched.")
+        fail("no enabled sources matched.")
         return None
 
     out_sources, out_items = [], []
@@ -203,6 +233,10 @@ def build(only: str | None = None) -> dict | None:
               f"{sig_dl} source-reported download(s).")
 
     if not out_items:
+        # Every source answered but the adapters recognised nothing in any of
+        # them — an upstream shape change, which looks identical to silence
+        # from the outside and has to be nameable by --strict.
+        fail("every source produced zero records; nothing to write.")
         return None
     return {
         "schema": SCHEMA,
@@ -238,9 +272,21 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--only", help="crawl a single source id")
     ap.add_argument("--dry-run", action="store_true", help="print, write nothing")
+    ap.add_argument("--strict", action="store_true",
+                    help="exit non-zero if any source produced no records")
     args = ap.parse_args()
 
     snapshot = build(args.only)
+
+    # Checked before persist(), not after: a snapshot rebuilt from the sources
+    # that happened to answer would drop the failed source's items from the
+    # catalog. That is a deletion wearing the costume of a successful crawl.
+    if args.strict and FAILURES:
+        warn(f"--strict: {len(FAILURES)} source problem(s); nothing written.")
+        for problem in FAILURES:
+            warn(f"  - {problem}")
+        return 1
+
     if snapshot is None:
         # Non-fatal by design, like every other snapshot step: a bad day
         # upstream leaves the catalog untouched rather than failing the run.

@@ -1,0 +1,200 @@
+name: Aggregate and Rank
+
+# `api/v1/front.json` is the one surface that ranks RAR's own agents and the
+# third-party libraries it indexes in a single list, and both halves go stale
+# without anything erroring. An upstream catalog publishes a new skill; an
+# agent push lands new registry rows that build-registry.yml commits without
+# re-ranking; the nightly community refresh moves upvote counts the ranking
+# reads. None of those events notify anyone, so freshness has to be a clock.
+#
+# Six-hourly. Slower and the front page can trail a day behind an agent that
+# just landed; faster and four extra fetches a day buy nothing from a source
+# that publishes on a human schedule. Off the top of the hour because GitHub
+# queues :00 crons behind everybody else's and delivers them late, and away
+# from 07:00 UTC because refresh-ratings.yml is holding state/aggregated.json
+# then — the 09:40 pass lands after that job finishes, so the day's first
+# ranking is built on the ratings it just committed.
+on:
+  schedule:
+    - cron: '40 3,9,15,21 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Crawl and re-rank, report the diff, commit nothing'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write # commit the refreshed catalog and ranking. Nothing else:
+                  # this job opens no issue, writes no discussion, cuts no tag.
+
+concurrency:
+  # Two runs rebuild the same two files and would race each other to push.
+  # Never cancel in progress — the loser would be killed mid-push, and the
+  # window this protects is the one where a half-written commit exists.
+  group: aggregate-front-page
+  cancel-in-progress: false
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      # Shallow on purpose, not an oversight. build_registry.py is the one
+      # builder that derives its output from `git log` and so needs depth 0;
+      # nothing in this job reads history.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # `--strict` is the whole difference between this crawl and the one in
+      # refresh-ratings.yml. There the crawler is one of six snapshot steps and
+      # a bad day upstream must not fail the other five, so a 404 is a warning.
+      # Here the crawl IS the job: a swallowed 404 looks exactly like a quiet
+      # week — green run, index quietly ageing — which is the precise failure
+      # this workflow exists to prevent. Strict also refuses before writing, so
+      # a partial crawl cannot delete the sources that did not answer.
+      - name: Crawl aggregated sources
+        run: python scripts/crawl_sources.py --strict
+
+      # Belt and braces on the file the ranking is about to be built from.
+      # --strict catches a source that went dark on THIS run; this catches a
+      # catalog that is already wrong on disk, which is the state a commit
+      # would make permanent.
+      - name: Verify the catalog is real and complete
+        run: |
+          python - <<'PY'
+          import json, sys
+          from pathlib import Path
+
+          sources = json.loads(Path("sources.json").read_text(encoding="utf-8"))
+          enabled = {s["id"] for s in sources.get("sources", []) if s.get("enabled", True)}
+          snapshot = json.loads(Path("state/aggregated.json").read_text(encoding="utf-8"))
+          crawled = {s["id"]: s.get("item_count", 0) for s in snapshot.get("sources", [])}
+
+          problems = []
+          if not snapshot.get("items"):
+              problems.append("state/aggregated.json carries zero items")
+          for sid in sorted(enabled - set(crawled)):
+              problems.append(f"enabled source '{sid}' is absent from the snapshot")
+          for sid, count in sorted(crawled.items()):
+              if not count:
+                  problems.append(f"source '{sid}' contributed zero items")
+
+          if problems:
+              print("[aggregate] the catalog is not fit to publish:", file=sys.stderr)
+              for p in problems:
+                  print(f"  - {p}", file=sys.stderr)
+              sys.exit(1)
+          print(f"[aggregate] {len(snapshot['items'])} item(s) across "
+                f"{len(crawled)} source(s).")
+          PY
+
+      # Unconditional, and so is the commit below. This is the step that used
+      # to be gated: build-registry.yml rebuilt the static API behind
+      # `if: github.event_name == 'push'`, so the one button a maintainer
+      # reaches for when the published API looks stale rebuilt the artifact and
+      # then threw it away. The API sat two versions behind main while every
+      # job reported green. A dispatch run has to be able to repair staleness,
+      # which means the producer and the committer must agree on the event.
+      - name: Rebuild the front page ranking
+        run: python scripts/build_front_page.py
+
+      # `generated` moves on every single run, so `git diff` on front.json is
+      # never empty and a naive gate would push an identical ranking four times
+      # a day forever. Compare through the builder's own `comparable()` — the
+      # same function `--check` uses — so "actually changed" cannot drift from
+      # the definition the builder enforces, and put the committed file back
+      # when only the clock moved.
+      - name: Discard a rebuild that only moved the clock
+        run: |
+          python - <<'PY'
+          import json, subprocess, sys
+          sys.path.insert(0, "scripts")
+          from build_front_page import comparable
+
+          REL = "api/v1/front.json"
+          head = subprocess.run(["git", "show", f"HEAD:{REL}"],
+                                capture_output=True, text=True)
+          if head.returncode != 0:
+              print("[aggregate] front.json has never been committed; keeping the build.")
+              sys.exit(0)
+
+          built = json.loads(open(REL, encoding="utf-8").read())
+          if comparable(json.loads(head.stdout)) != comparable(built):
+              print(f"[aggregate] ranking changed ({built['counts']['ranked']} ranked).")
+              sys.exit(0)
+
+          subprocess.run(["git", "checkout", "--", REL], check=True)
+          print("[aggregate] ranking is unchanged; only the build stamp moved.")
+          PY
+
+      # Explicit pathspecs, never `git add -A`: the runner's working tree also
+      # holds whatever the steps above touched, and a scheduled job that
+      # commits by wildcard eventually commits something nobody chose.
+      #
+      # Gated on the branch and on the operator's own dry-run switch, and on
+      # nothing else. In particular NOT on github.event_name — see the rebuild
+      # step above for what that costs.
+      - name: Commit the refreshed catalog and ranking
+        id: commit
+        if: github.ref == 'refs/heads/main' && github.event.inputs.dry_run != 'true'
+        run: |
+          FILES="state/aggregated.json api/v1/front.json"
+          if [ -z "$(git status --porcelain $FILES)" ]; then
+            echo "No change to the catalog or the ranking; nothing to commit."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add $FILES
+          git commit -m "chore(front): refresh aggregated catalog + ranking [skip ci]"
+          # Rebase rather than merge so the history stays linear, and let a
+          # conflict fail the job: two writers disagreeing about the catalog is
+          # exactly the thing that must not be resolved by a bot at 03:40.
+          git pull --rebase origin main
+          git push origin main
+          echo "committed=true" >> "$GITHUB_OUTPUT"
+
+      # A scheduled job nobody watches has to say what it did somewhere a human
+      # will actually look. Still runs when the commit was skipped, because
+      # "unchanged" is the answer this report most often has to give — and the
+      # commit status is read from the step's own output rather than re-derived
+      # from `git status`, which reads clean both before a change and after one
+      # has been committed.
+      - name: Report
+        if: success()
+        env:
+          COMMITTED: ${{ steps.commit.outputs.committed }}
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, os
+          from pathlib import Path
+
+          payload = json.loads(Path("api/v1/front.json").read_text(encoding="utf-8"))
+          # `.get` throughout: this step exists to describe a run that already
+          # succeeded, so a key the builder renames must not turn a good run
+          # red at the last step.
+          counts = payload.get("counts", {})
+          outcome = {
+              "true": "committed",
+              "false": "unchanged; nothing committed",
+          }.get(os.environ.get("COMMITTED", ""), "not committed (dry run or not main)")
+
+          print("## Aggregate and Rank\n")
+          print(f"- {counts.get('ranked', 0)} ranked: "
+                f"{counts.get('native', 0)} native "
+                f"+ {counts.get('aggregated', 0)} aggregated "
+                f"across {counts.get('sources', 0)} source(s)")
+          print(f"- built {payload['generated']}")
+          print(f"- {outcome}\n")
+          print("| # | score | origin | ref |")
+          print("|---|-------|--------|-----|")
+          for item in payload.get("items", [])[:10]:
+              print(f"| {item.get('rank')} | {item.get('score')} "
+                    f"| {item.get('origin')} | `{item.get('ref')}` |")
+          PY
