@@ -298,11 +298,23 @@ class TestSecurityScanner:
         assert len(warnings) == 0, f"Clean agent should pass: {warnings}"
 
     @pytest.mark.security
-    def test_allowlist_skips_first_party(self):
-        """First-party agents in SECURITY_ALLOWLIST should not be scanned."""
+    def test_allowlist_entries_are_real_and_not_load_bearing(self):
+        """Every SECURITY_ALLOWLIST entry must name a real file.
+
+        Previously this also asserted the list was NON-EMPTY. That baked in the
+        old state: the list existed to excuse agents that needed eval/exec back
+        when those were banned. Once dynamic code moved to CAPABILITY_PATTERNS
+        (allowed for everyone, tagged) and subprocess left the ban list, the
+        waiver stopped excusing what it was written for and started excusing
+        the only rules left — os.system, suspicious file access, and hardcoded
+        secrets — for ten files that never asked for it. It is now empty, and
+        an empty waiver is the correct state, not a regression.
+
+        Whether an entry is waiving a real finding is checked by
+        tests/test_release_path.py::test_security_allowlist_waives_nothing_dangerous.
+        """
         sys.path.insert(0, str(REPO_ROOT))
         import build_registry as br
-        assert len(br.SECURITY_ALLOWLIST) > 0
         for path in br.SECURITY_ALLOWLIST:
             assert Path(REPO_ROOT / path).exists(), f"Allowlisted file missing: {path}"
 

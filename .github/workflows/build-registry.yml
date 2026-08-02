@@ -4,7 +4,19 @@ on:
   push:
     paths:
       - 'agents/**/*.py'
+      # Gated agents ship as .py.stub and ARE indexed by build_registry.py,
+      # but '*.py' does not match '*.py.stub' — adding one never triggered a
+      # rebuild, so the registry silently omitted it until an unrelated push.
+      - 'agents/**/*.py.stub'
       - 'agents/**/*.py.card'
+      # build_registry.py reads these and folds them into registry.json
+      # (tombstones, per-agent _lifecycle/_receipt, the release ledger). They
+      # were not triggers, so minting receipts left the committed registry
+      # stale with nothing to rebuild it — and the nightly drift gate would
+      # then fail every night on a difference nobody could act on.
+      - 'state/agent_lifecycle.json'
+      - 'state/receipts/**'
+      - 'state/releases.json'
       - 'build_registry.py'
       - 'rar.config.json'
       - '.github/workflows/build-registry.yml'

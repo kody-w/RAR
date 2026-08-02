@@ -82,7 +82,14 @@ jobs:
       # thread, rewritten with a report card built from the snapshots just
       # refreshed. Runs last so the card reflects today's numbers, and is
       # idempotent: threads whose numbers didn't move cost zero writes.
+      # Non-fatal, like every collection step above it. This step sits between
+      # the collectors and the commit, so an unhandled error here failed the
+      # job before "Commit snapshots if changed" ran and threw away the entire
+      # day's collected signal — to report numbers, not to gather them. Writing
+      # a card is the least important thing this workflow does; losing a day of
+      # reactions is the most expensive.
       - name: Publish per-agent report cards
+        continue-on-error: true
         run: python scripts/publish_reports.py --limit 60
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

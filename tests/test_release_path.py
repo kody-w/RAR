@@ -8,6 +8,9 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -107,30 +110,76 @@ def test_registry_json_carries_no_hand_written_release_state():
     submission, which is exactly what used to happen — silently, because
     nothing read the field back."""
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
-    assert "reg['latest_release'] = meta" not in src
+    # Quote-agnostic: the same bug written with double quotes was invisible to
+    # the original single-quoted substring check.
+    assert not re.search(r"""reg\[['"]latest_release['"]\]\s*=""", src), (
+        "the release workflow writes latest_release straight into registry.json"
+    )
     assert "state/releases.json" in src
 
 
-def test_build_registry_projects_the_ledger(tmp_path, monkeypatch):
-    """build_registry.py must surface state/releases.json as `latest_release`
-    so consumers have one place to look and the value survives every rebuild."""
-    src = (REPO_ROOT / "build_registry.py").read_text()
-    assert 'registry["latest_release"] = entries[-1]' in src
-    assert 'releases_file = Path("state") / "releases.json"' in src
+def _minimal_repo(tmp_path, ledger=None):
+    """A tree just large enough to run build_registry.py for real."""
+    (tmp_path / "agents" / "@test").mkdir(parents=True)
+    (tmp_path / "state").mkdir()
+    shutil.copy(REPO_ROOT / "build_registry.py", tmp_path / "build_registry.py")
+    # build_registry.py imports rapp_sdk once an agent validates cleanly.
+    shutil.copy(REPO_ROOT / "rapp_sdk.py", tmp_path / "rapp_sdk.py")
+    (tmp_path / "agents" / "@test" / "foo_agent.py").write_text(
+        '"""T."""\nfrom agents.basic_agent import BasicAgent\n\n'
+        '__manifest__ = {"schema": "rapp-agent/1.0", "name": "@test/foo",\n'
+        '  "version": "1.0.0", "display_name": "Foo", "description": "d.",\n'
+        '  "author": "T", "tags": ["t"], "category": "core"}\n\n'
+        "class FooAgent(BasicAgent):\n"
+        "    name = 'Foo'\n"
+        "    def perform(self, **kwargs):\n        return 'ok'\n"
+    )
+    if ledger is not None:
+        (tmp_path / "state" / "releases.json").write_text(json.dumps(ledger))
+    return tmp_path
 
 
-def test_ledger_projection_picks_the_most_recent_entry():
-    """Mirrors the projection logic against a ledger shape, so a change to the
-    file format that breaks 'latest' is caught here rather than on a slide."""
-    ledger = {
+def test_build_registry_actually_projects_the_ledger(tmp_path):
+    """RUNS build_registry.py and reads its output.
+
+    The original version of this test grepped build_registry.py for two exact
+    source substrings, and its sibling asserted `entries[-1]["tag"]` against a
+    dict literal it had just written — testing Python list indexing. Both were
+    green while the projection could have been deleted entirely.
+    """
+    repo = _minimal_repo(tmp_path, ledger={
         "schema": "rar-releases/1.0",
-        "releases": [
-            {"tag": "v1.0.0", "release_name": "Genesis"},
-            {"tag": "v2.0.0", "release_name": "Spring 2026"},
-        ],
-    }
-    entries = ledger["releases"]
-    assert entries[-1]["tag"] == "v2.0.0"
+        "releases": [{"tag": "v1.0.0", "release_name": "Genesis"},
+                     {"tag": "v2.0.0", "release_name": "Spring 2026"}],
+    })
+    subprocess.run([sys.executable, "build_registry.py"], cwd=repo,
+                   capture_output=True, text=True, timeout=120)
+    reg = json.loads((repo / "registry.json").read_text())
+    assert reg.get("latest_release", {}).get("tag") == "v2.0.0", (
+        "state/releases.json is not projected into registry.json — the release "
+        "ledger is invisible to every consumer"
+    )
+    assert len(reg.get("releases", [])) == 2
+
+
+def test_registry_build_survives_a_malformed_ledger(tmp_path):
+    """A hand-edited ledger must not take the whole registry build down.
+
+    The guard caught JSONDecodeError/OSError/AttributeError, which does not
+    cover a `releases` value that is an object or a number.
+    """
+    for bad in ({"releases": {"not": "a list"}}, {"releases": 7}, {"releases": "x"}):
+        repo = _minimal_repo(tmp_path / f"r{abs(hash(str(bad)))}", ledger=bad)
+        r = subprocess.run([sys.executable, "build_registry.py"], cwd=repo,
+                           capture_output=True, text=True, timeout=120)
+        assert (repo / "registry.json").exists(), (
+            f"build_registry.py produced no registry for ledger {bad!r}\n{r.stderr[-500:]}"
+        )
+        reg = json.loads((repo / "registry.json").read_text())
+        lr = reg.get("latest_release")
+        assert lr is None or isinstance(lr, dict), (
+            f"garbage projected as latest_release for ledger {bad!r}: {lr!r}"
+        )
 
 
 # ─── Workflow injection ────────────────────────────────────────────────
@@ -141,7 +190,6 @@ def test_release_name_never_reaches_a_shell_or_js_context_via_interpolation():
     backtick in the name executes on the runner; in `git commit -m` it splices
     into the command line. Both must read the value from env at runtime."""
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
-    assert "${{ inputs.release_name }}" not in src.split("env:", 1)[0] or True
     # The input may appear ONLY as the right-hand side of an env: assignment.
     for line in src.splitlines():
         if "inputs.release_name" in line:
@@ -317,26 +365,6 @@ def test_every_step_output_reference_resolves():
     assert not problems, "unresolvable step output reference: " + "; ".join(problems)
 
 
-def test_release_type_options_all_produce_a_tag():
-    """The workflow's release_type choices and the tag script's accepted types
-    have to agree. Adding an option to the dropdown without teaching the script
-    about it fails at tag time — which is after the gates have passed and the
-    operator believes the release is underway."""
-    import yaml
-
-    doc = yaml.safe_load((REPO_ROOT / ".github" / "workflows" / "release.yml").read_text())
-    triggers = doc[True] if True in doc else doc["on"]
-    options = set(triggers["workflow_dispatch"]["inputs"]["release_type"]["options"])
-    accepted = {"seasonal", "hotfix", "canary"}
-    assert options == accepted, (
-        f"release_type options {sorted(options)} do not match the tag script's "
-        f"accepted types {sorted(accepted)}"
-    )
-    # And every one of them actually yields a tag rather than raising.
-    for rtype in sorted(options):
-        tag = nrt.next_tag(["v1.0.0"], rtype, "20260801")
-        assert tag.startswith("v"), f"{rtype} produced {tag!r}"
-
 
 def test_registry_is_rebuilt_before_the_seal_is_computed():
     """The integrity seal must describe the registry that actually ships.
@@ -378,9 +406,15 @@ def test_computed_tag_is_not_interpolated_into_shell():
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
     for line in src.splitlines():
         if "steps.tag.outputs.tag" in line:
-            assert line.strip().startswith(("RELEASE_TAG:", "tag=")), (
-                f"tag interpolated into a command -> {line.strip()}"
+            stripped = line.strip()
+            # `tag=$(...)` writes the computed value to $GITHUB_OUTPUT and is
+            # fine, but the previous allowlist accepted any line starting
+            # `tag=` — including the shell-assignment form this test exists to
+            # forbid. Require an env: binding, or the one $GITHUB_OUTPUT write.
+            ok = stripped.startswith("RELEASE_TAG:") or (
+                stripped.startswith("tag=") and "GITHUB_OUTPUT" in stripped
             )
+            assert ok, f"tag interpolated into a command -> {stripped}"
 
 
 # ─── Release notes must describe the policy that is actually enforced ──
@@ -393,6 +427,68 @@ def test_release_notes_do_not_claim_eval_exec_are_blocked():
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
     assert "no eval/exec/subprocess/hardcoded secrets" not in src
     assert "_capabilities" in src
+
+
+def test_security_allowlist_waives_nothing_dangerous():
+    """A waiver may not excuse a rule that is actually enforced.
+
+    SECURITY_ALLOWLIST was written when eval/exec were banned, to excuse ten
+    agents that legitimately needed them. eval/exec then moved to
+    CAPABILITY_PATTERNS (allowed for everyone, merely tagged) and subprocess
+    was dropped from the ban list — so the waiver stopped excusing what it was
+    written for and started excusing the only three rules left, one of which is
+    HARDCODED SECRETS. A secret committed in an allowlisted agent shipped
+    unflagged.
+
+    Rather than forbid the mechanism, forbid it being load-bearing: any file
+    listed here must pass the scan on its own merits."""
+    import re as _re
+    import sys as _sys
+
+    _sys.path.insert(0, str(REPO_ROOT))
+    from build_registry import DANGEROUS_PATTERNS, SECURITY_ALLOWLIST
+
+    offenders = []
+    for rel in sorted(SECURITY_ALLOWLIST):
+        p = REPO_ROOT / rel
+        if not p.exists():
+            offenders.append(f"{rel}: stale entry, file does not exist")
+            continue
+        src = p.read_text(encoding="utf-8")
+        for pat, msg in DANGEROUS_PATTERNS:
+            if _re.search(pat, src):
+                offenders.append(f"{rel}: waived from an ENFORCED rule — {msg}")
+    assert not offenders, "security allowlist is waiving real findings: " + "; ".join(offenders)
+
+
+def test_release_type_options_are_exactly_what_the_tag_script_accepts():
+    """Reads the script's argparse choices instead of restating them.
+
+    The previous version hardcoded {"seasonal","hotfix","canary"} on both sides
+    and called next_tag() directly, bypassing the argparse `choices` list the
+    workflow actually goes through — so adding a fourth option to the script
+    and the dropdown, but not to the hardcoded set, failed the test for the
+    wrong reason, and adding it to only the dropdown was invisible."""
+    import re as _re
+
+    import yaml
+
+    doc = yaml.safe_load((REPO_ROOT / ".github" / "workflows" / "release.yml").read_text())
+    triggers = doc[True] if True in doc else doc["on"]
+    options = set(triggers["workflow_dispatch"]["inputs"]["release_type"]["options"])
+
+    src = (REPO_ROOT / "scripts" / "next_release_tag.py").read_text()
+    m = _re.search(r'add_argument\(\s*"--type".*?choices=\[(.*?)\]', src, _re.S)
+    assert m, "could not find the --type choices in next_release_tag.py"
+    accepted = set(_re.findall(r'"([^"]+)"', m.group(1)))
+
+    assert options == accepted, (
+        f"release.yml offers {sorted(options)} but the tag script accepts "
+        f"{sorted(accepted)} — a dropdown option the script rejects fails at "
+        "tag time, after every gate has passed"
+    )
+    for rtype in sorted(options):
+        assert nrt.next_tag(["v1.0.0"], rtype, "20260801").startswith("v")
 
 
 def test_documented_bans_match_the_enforced_pattern_list():

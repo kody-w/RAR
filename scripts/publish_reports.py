@@ -193,7 +193,15 @@ def render(agent: dict, rating: dict, critic: dict,
         f"[registry statistics](https://kody-w.github.io/RAR/stats.html)._",
         END,
     ]
-    return "\n".join(lines)
+    block = "\n".join(lines)
+    # The block interpolates registry free text (category, platforms, the
+    # upstream source name and URL). A value containing the literal end marker
+    # would leave two END markers in the post, so splice() would replace up to
+    # the FIRST one and leave the tail behind — the card growing on every daily
+    # run, which is exactly the non-convergence this whole mechanism exists to
+    # avoid. Guarantee exactly one of each by construction.
+    inner = block[len(START):-len(END)].replace(START, "").replace(END, "")
+    return f"{START}{inner}{END}"
 
 
 def critic_index(raw: dict) -> dict:

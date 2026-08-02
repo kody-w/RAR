@@ -20,13 +20,21 @@ on:
         type: boolean
         default: false
 
+# Read-only by default. Only the job that actually commits gets write.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   # ─── GATE: full test suite must pass ────────────────────────────
   validate:
     runs-on: ubuntu-latest
+    # This job IMPORTS AND EXECUTES every agent file in the repository (the
+    # contract suite instantiates each one and calls perform()). Granting it
+    # contents: write handed that code a push-capable GITHUB_TOKEN, which
+    # actions/checkout persists into .git/config — any agent could have
+    # committed to main from inside a test run. It only ever needs to read.
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -101,6 +109,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: validate
     if: ${{ !inputs.dry_run }}
+    # The only job that commits, pushes, tags and publishes.
+    permissions:
+      contents: write
+    # main receives automated pushes (the registry bot, the heartbeat fleet).
+    # Without a concurrency group two releases could interleave on the same
+    # tag line; without this the bare `git push` below is also racing them.
+    concurrency:
+      group: rar-release
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
         with:
@@ -207,6 +224,12 @@ jobs:
           "
           # Re-project the ledger into registry.json.
           python build_registry.py
+          # And regenerate the headless API from it. build-registry.yml always
+          # does these two together; the release job rebuilt the registry but
+          # not the API, so a release published a catalog the API disagreed
+          # with — and since nothing else rebuilds on a release commit, nothing
+          # would ever have repaired it.
+          python scripts/build_static_api.py
 
       - name: Commit release stamp
         id: commit
@@ -216,16 +239,36 @@ jobs:
         run: |
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
-          git add registry.json state/releases.json
+          # Same file set build-registry.yml commits, plus the ledger — so a
+          # release leaves registry, API and ledger mutually consistent.
+          git add registry.json state/releases.json \
+                  manifest.json api/v1/catalog.json api/v1/taxonomy.json \
+                  api/v1/match.json api/v1/status.json api/v1/badge.json \
+                  api/v1/audience
           # Read from env, so the name is an argv element and is never parsed
           # as shell. Interpolating the input here would splice operator free
           # text straight into the command line.
           git diff --cached --quiet || git commit -m "Release $RELEASE_NAME ($RELEASE_TAG) [skip ci]"
-          git push
+          # main takes automated pushes (registry bot, heartbeat fleet) while
+          # the validate gate runs for minutes. A bare `git push` aborts the
+          # release on a non-fast-forward — after the tag has been derived and
+          # the ledger written. Rebase and retry instead of dying.
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              break
+            fi
+            if [ "$attempt" = 3 ]; then
+              echo "::error::could not push the release stamp after 3 attempts"
+              exit 1
+            fi
+            echo "push rejected; rebasing onto the updated main and retrying"
+            git pull --rebase --autostash origin main
+          done
           # The tag must point at the commit that RECORDS the release, not at
           # the commit that triggered the run. Tagging context.sha meant
           # `git checkout <tag>` produced a tree with no record of that release
-          # in it. Resolves to the same sha when there was nothing to commit.
+          # in it. Read AFTER the push loop so a rebase is reflected.
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       # Every agent ships as a flat release asset. This is the ONLY download

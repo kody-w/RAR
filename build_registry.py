@@ -403,24 +403,25 @@ def validate_stub_purity(py_path: Path) -> list:
     return errors
 
 
-# Files that legitimately need elevated capabilities (eval / exec) which
-# stay banned for everyone else. Subprocess is no longer banned — agents
-# routinely wrap external CLIs (gh, kubectl, terraform, ffmpeg, az, gcloud,
-# npm, workiq, etc.), and the allowlist approach didn't scale to the
-# integration category. Submitters should declare wrapped binaries in
-# `requires_env` so consumers know what gets shelled out at install time.
-SECURITY_ALLOWLIST = {
-    "agents/@kody-w/agent_workbench_agent.py",       # workbench needs exec for agent orchestration
-    "agents/@kody-w/transcript2prototype_agent.py",   # exec/compile to load its own generated + trusted-sibling agent.pys (test-local twin + factory export)
-    "agents/@kody-w/rappter_engine_agent.py",         # engine needs subprocess for CLI mode
-    "agents/@kody-w/rar_remote_agent.py",             # remote agent needs subprocess for git/install
-    "agents/@howardh/prompt_to_video_agent.py",        # video rendering needs subprocess for ffmpeg
-    "agents/@discreetRappers/scripted_demo_agent.py", # demo runner needs exec for script execution
-    "agents/@rapp/learn_new_agent.py",               # meta-agent uses subprocess for Copilot code gen + pip install
-    "agents/@rapp/fleet_commander_agent.py",          # TDD pipeline uses subprocess for Copilot CLI + pytest + git
-    "swarms/@rapp/bookfactory_agent.py",            # converged swarm with inlined LLM dispatch
-    "swarms/@rapp/momentfactory_agent.py",          # converged swarm with inlined LLM dispatch
-}
+# Per-file waivers from DANGEROUS_PATTERNS. Deliberately EMPTY.
+#
+# This list used to name ten agents that "legitimately need eval / exec, which
+# stay banned for everyone else", plus some that need subprocess. Both premises
+# are now false: subprocess was removed from DANGEROUS_PATTERNS, and eval/exec/
+# __import__/compile moved to CAPABILITY_PATTERNS, where they are allowed for
+# EVERY agent and merely tagged as `_capabilities`.
+#
+# So the waiver stopped excusing what it was written for and started excusing
+# the only three rules left — os.system(), suspicious file access, and
+# HARDCODED SECRETS — for ten files, none of which ever asked for that. A
+# secret committed in an allowlisted agent would have shipped unflagged.
+#
+# Emptying it costs nothing: verified that zero allowlisted files trip any
+# current DANGEROUS_PATTERN, so every one of them passes on its own merits.
+# The mechanism is kept so a future, genuinely-justified waiver has somewhere
+# to go — but see test_security_allowlist_waives_nothing_dangerous: a file
+# added here that actually trips a pattern will fail the build.
+SECURITY_ALLOWLIST: set = set()
 
 
 def _security_allowlisted(path: Path) -> bool:
@@ -1185,11 +1186,26 @@ def build_registry():
     if releases_file.exists():
         try:
             ledger = json.loads(releases_file.read_text(encoding="utf-8"))
-            entries = ledger.get("releases") or []
+            entries = (ledger or {}).get("releases")
+            # Validate the SHAPE, don't just catch exceptions. The previous
+            # guard caught JSONDecodeError/OSError/AttributeError, none of
+            # which a hand-edited ledger actually raises: {"releases": {...}}
+            # reached entries[-1] and died on KeyError, {"releases": 7} on
+            # TypeError, and {"releases": "abc"} silently projected the
+            # character "c" into registry.json as latest_release.
+            entries = [e for e in entries if isinstance(e, dict)] \
+                if isinstance(entries, list) else []
             if entries:
                 registry["releases"] = entries
-                registry["latest_release"] = entries[-1]
-        except (json.JSONDecodeError, OSError, AttributeError):
+                # "Latest" must mean the same thing here as it does on GitHub.
+                # release.yml marks canaries prerelease:true, and GitHub's
+                # /releases/latest alias — the documented client download path
+                # — skips prereleases. Taking entries[-1] made a canary the
+                # registry's advertised latest release while every client
+                # actually downloading "latest" still got the prior stable one.
+                stable = [e for e in entries if e.get("release_type") != "canary"]
+                registry["latest_release"] = (stable or entries)[-1]
+        except (json.JSONDecodeError, OSError, TypeError, AttributeError):
             # A malformed ledger must not take the registry build down with
             # it; the agents are the payload, the release stamp is metadata.
             pass
