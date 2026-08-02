@@ -251,6 +251,40 @@ def test_piped_run_steps_cannot_swallow_a_failure():
     )
 
 
+def test_workflows_that_commit_the_registry_check_out_full_history():
+    """build_registry.py derives each agent's `_added_at`,
+    `_first_commit_sha` and `_latest_commit_sha` by walking
+    `git log --name-status`. On a shallow checkout (`fetch-depth: 1`, the
+    default) there is exactly one commit, so every agent's provenance
+    collapses onto it — verified by building in a `--depth 1` clone, where all
+    278 agents came back stamped with the same sha and today's date.
+
+    Any job that rebuilds AND commits registry.json therefore has to check out
+    full history, or it publishes a registry whose provenance chain is
+    destroyed. Jobs that only rebuild to validate are fine: the checks that
+    matter there read `_sha256`, which is content-derived, not git-derived."""
+    import yaml
+
+    offenders = []
+    for wf in sorted((REPO_ROOT / ".github" / "workflows").glob("*.yml")):
+        doc = yaml.safe_load(wf.read_text()) or {}
+        for jname, job in (doc.get("jobs") or {}).items():
+            steps = job.get("steps") or []
+            depth = 1
+            for s in steps:
+                if "checkout" in str(s.get("uses", "")):
+                    depth = (s.get("with") or {}).get("fetch-depth", 1)
+            bodies = " ".join(str(s.get("run", "")) for s in steps)
+            builds = "build_registry.py" in bodies
+            commits = "git commit" in bodies or "git push" in bodies
+            if builds and commits and depth != 0:
+                offenders.append(f"{wf.name}::{jname} (fetch-depth={depth})")
+    assert not offenders, (
+        "commits a registry built from shallow history — provenance is "
+        f"destroyed: {offenders}"
+    )
+
+
 def test_computed_tag_is_not_interpolated_into_shell():
     src = (REPO_ROOT / ".github" / "workflows" / "release.yml").read_text()
     for line in src.splitlines():

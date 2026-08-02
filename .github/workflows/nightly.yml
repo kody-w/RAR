@@ -13,7 +13,15 @@ jobs:
   nightly:
     runs-on: ubuntu-latest
     steps:
+      # Full history is REQUIRED, not a nicety. build_registry.py derives
+      # _added_at, _first_commit_sha and _latest_commit_sha by walking
+      # `git log --name-status`; on a shallow checkout those come back empty,
+      # so a rebuild here can never match the registry that build-registry.yml
+      # committed (which does check out at depth 0). The drift check below
+      # would fail every night on a difference that says nothing about drift.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -70,6 +78,27 @@ jobs:
                   print(f'  {k}: committed={len(av)} rebuilt={len(bv)}')
                   if na - nb: print(f'    only in committed: {sorted(na - nb)[:10]}')
                   if nb - na: print(f'    only in rebuilt:   {sorted(nb - na)[:10]}')
+                  # Same membership, different contents: name the actual
+                  # fields. Reporting only the counts (278 vs 278) says
+                  # nothing about what to fix.
+                  ia = {x.get('name'): x for x in av if isinstance(x, dict)}
+                  ib = {x.get('name'): x for x in bv if isinstance(x, dict)}
+                  shown = 0
+                  for name in sorted(na & nb):
+                      ea, eb = ia[name], ib[name]
+                      if ea == eb:
+                          continue
+                      diff = sorted(
+                          f for f in set(ea) | set(eb) if ea.get(f) != eb.get(f)
+                      )
+                      print(f'    {name}: fields differ -> {diff[:8]}')
+                      for f in diff[:3]:
+                          print(f'       {f}: committed={str(ea.get(f))[:60]!r}')
+                          print(f'       {f}: rebuilt  ={str(eb.get(f))[:60]!r}')
+                      shown += 1
+                      if shown >= 3:
+                          print(f'    ... and more')
+                          break
               else:
                   print(f'  {k}: committed={str(av)[:200]}')
                   print(f'  {k}: rebuilt  ={str(bv)[:200]}')

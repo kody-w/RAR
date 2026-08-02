@@ -14,7 +14,14 @@ jobs:
     # Only run on template instances, not the main RAR repo
     if: github.repository != 'kody-w/RAR'
     steps:
+      # This job rebuilds AND commits registry.json. build_registry.py derives
+      # each agent's _added_at / _first_commit_sha / _latest_commit_sha by
+      # walking git history, so on a shallow checkout every agent collapses to
+      # the single available commit and the committed registry ships a
+      # destroyed provenance chain.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
