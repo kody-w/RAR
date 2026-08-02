@@ -6,7 +6,7 @@
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "cdn_base": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main",
   "pages_base": "https://kody-w.github.io/RAR",
-  "generated": "2026-08-02T14:44:33Z",
+  "generated": "2026-08-02T14:56:21Z",
   "cors": "open — GitHub raw and jsDelivr both send Access-Control-Allow-Origin: *",
   "auth": "none",
   "stability": "Agent source paths are frozen permanently under CONSTITUTION.md Article XXIII and verified in CI on every pull request. A URL that resolves today resolves forever.",
@@ -34,6 +34,10 @@
     "match": {
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/match.json",
       "description": "Use-case → ranked agents, plus a term index for free-text queries."
+    },
+    "front": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/front.json",
+      "description": "One ranked list over every hosted agent and every indexed third-party entry, newest ranking first. Each item carries the components it was scored on and a `why` a human can read. Built by build_front_page.py, not by this script."
     },
     "taxonomy": {
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/taxonomy.json",

@@ -8,10 +8,13 @@
 <meta property="og:title" content="Front Page — RAPP Agent Registry">
 <meta property="og:description" content="One ranked list over every agent RAR hosts and every third-party skill it indexes. Every row shows why it ranked.">
 <meta property="og:type" content="website">
+<!-- The browser probes /favicon.ico on every load and logs a 404 when it is
+     absent. An empty data: URI answers it without adding a request. -->
+<link rel="icon" href="data:,">
 <meta property="og:url" content="https://kody-w.github.io/RAR/front.html">
 <style>
-/* The palette, type scale and chrome are index.html's. This page is a new
-   surface on the same site, not a new site. */
+/* The palette, type scale and chrome are index.html's. This is a new surface
+   on the same site, not a new site. */
 :root {
   --bg: #0d1117;
   --surface: #161b22;
@@ -76,8 +79,8 @@ header {
   padding: 7px 12px; font-variant-numeric: tabular-nums;
 }
 .count-block b { color: var(--text); font-weight: 700; }
-.count-block.native b { color: var(--accent); }
-.count-block.agg b { color: var(--purple); }
+.count-block.rar b { color: var(--accent); }
+.count-block.sourced b { color: var(--purple); }
 .count-note { color: var(--text-muted); font-size: .74rem; align-self: center; }
 
 /* ── how ranking works — every word of it comes from the data ─────────── */
@@ -93,17 +96,18 @@ header {
 .explain > summary:hover { color: var(--text); }
 .explain-body { padding: 0 16px 16px; font-size: .86rem; color: var(--text-dim); line-height: 1.65; }
 .explain-body p { margin-bottom: 14px; }
-.comp { display: grid; grid-template-columns: 92px 1fr; gap: 10px 14px; align-items: start; margin-bottom: 10px; }
+.comp { display: grid; grid-template-columns: 96px 1fr; gap: 10px 14px; align-items: start; margin-bottom: 10px; }
 .comp-head { display: flex; align-items: baseline; gap: 6px; }
 .comp-key { font-family: var(--mono); font-size: .8rem; color: var(--text); }
 .comp-w { font-variant-numeric: tabular-nums; font-size: .78rem; color: var(--text); font-weight: 700; }
 .comp-bar { height: 4px; border-radius: 2px; background: var(--surface2); overflow: hidden; margin-top: 6px; }
 .comp-bar i { display: block; height: 100%; background: var(--accent); }
-.comp-bar.agg i { background: var(--purple); }
+.comp-bar.sourced i { background: var(--purple); }
 .comp-bar.both i { background: linear-gradient(90deg, var(--accent), var(--purple)); }
 .comp-desc { font-size: .82rem; color: var(--text-dim); }
 .comp-applies { font-size: .7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
 .explain-note { font-size: .78rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 12px; margin-top: 4px; }
+.explain-note p { margin-bottom: 8px; }
 
 /* ── controls ─────────────────────────────────────────────────────────── */
 .controls {
@@ -113,17 +117,19 @@ header {
   position: sticky; top: 61px; z-index: 40;
 }
 .seg { display: flex; gap: 3px; background: var(--bg); padding: 3px; border-radius: 9px; }
-.seg span {
+.seg button {
   padding: 5px 12px; border-radius: 7px; cursor: pointer; font-size: .8rem;
   color: var(--text-dim); border: 1px solid transparent; transition: all .15s;
   white-space: nowrap; user-select: none;
+  background: none; font-family: inherit; line-height: inherit;
 }
-.seg span:hover { color: var(--text); }
-.seg span.active { background: var(--surface2); color: var(--text); border-color: var(--border-hover); }
-.seg span[data-origin="native"].active { color: var(--accent); border-color: rgba(88,166,255,.45); }
-.seg span[data-origin="aggregated"].active { color: var(--purple); border-color: rgba(188,140,255,.45); }
-.seg span[data-audience="business"].active { color: #7ee787; border-color: rgba(126,231,135,.4); }
-.seg span[data-audience="consumer"].active { color: #ffa657; border-color: rgba(255,166,87,.4); }
+.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.seg button:hover { color: var(--text); }
+.seg button.active { background: var(--surface2); color: var(--text); border-color: var(--border-hover); }
+.seg button[data-origin="native"].active { color: var(--accent); border-color: rgba(88,166,255,.45); }
+.seg button[data-origin="sourced"].active { color: var(--purple); border-color: rgba(188,140,255,.45); }
+.seg button[data-audience="business"].active { color: #7ee787; border-color: rgba(126,231,135,.4); }
+.seg button[data-audience="consumer"].active { color: #ffa657; border-color: rgba(255,166,87,.4); }
 .filter-box { position: relative; flex: 1 1 190px; min-width: 160px; }
 .filter-box input {
   width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
@@ -135,7 +141,7 @@ header {
 .filter-box .si { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; display: flex; }
 .showing { font-size: .78rem; color: var(--text-muted); font-variant-numeric: tabular-nums; margin-left: auto; }
 .showing b { color: var(--text-dim); }
-.scale-warn {
+.order-note {
   width: 100%; font-size: .74rem; color: var(--text-muted);
   border-top: 1px solid var(--border); padding-top: 9px;
 }
@@ -143,13 +149,13 @@ header {
 /* ── the feed ─────────────────────────────────────────────────────────── */
 .feed { list-style: none; }
 .row {
-  display: grid; grid-template-columns: 46px 1fr 88px; gap: 0 12px;
-  padding: 14px 14px 14px 12px; border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 46px 1fr 92px; gap: 0 12px;
+  padding: 12px 14px 12px 12px; border-bottom: 1px solid var(--border);
   border-left: 3px solid transparent; scroll-margin-top: 130px;
 }
 .row:hover { background: var(--surface); }
 /* Blue is RAR's own work, purple is somebody else's. A row that is both —
-   hosted here, credited elsewhere — reads purple and says so in its badges. */
+   hosted here, credited upstream — reads purple and says so in its badges. */
 .row.rar { border-left-color: rgba(88,166,255,.5); }
 .row.sourced { border-left-color: rgba(188,140,255,.5); }
 .row.pinned { background: rgba(88,166,255,.07); border-left-color: var(--accent); }
@@ -166,14 +172,19 @@ header {
   font-size: .68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
   padding: 2px 7px; border-radius: 5px; white-space: nowrap;
 }
-.badge.native { background: rgba(88,166,255,.13); color: var(--accent); border: 1px solid rgba(88,166,255,.35); }
-.badge.aggregated { background: rgba(188,140,255,.13); color: var(--purple); border: 1px solid rgba(188,140,255,.35); }
+.badge.rar { background: rgba(88,166,255,.13); color: var(--accent); border: 1px solid rgba(88,166,255,.35); }
+.badge.sourced { background: rgba(188,140,255,.13); color: var(--purple); border: 1px solid rgba(188,140,255,.35); }
 .badge.tier { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); text-transform: none; letter-spacing: 0; font-weight: 600; }
 .badge.tier-official { color: var(--green); border-color: rgba(63,185,80,.4); }
 .badge.tier-verified { color: var(--accent); border-color: rgba(88,166,255,.4); }
 .badge.tier-private  { color: var(--amber); border-color: rgba(210,153,34,.4); }
 .ref { font-family: var(--mono); font-size: .72rem; color: var(--text-muted); word-break: break-all; }
-.desc { color: var(--text-dim); font-size: .86rem; line-height: 1.5; margin-top: 4px; }
+/* Clamped like index.html's cards: this is a ranked list, not a reading page,
+   and the full description is one click away at the row's own destination. */
+.desc {
+  color: var(--text-dim); font-size: .86rem; line-height: 1.5; margin-top: 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
 
 /* The why strings are the product. They sit in the row, never behind a hover. */
 .why { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; margin-top: 8px; }
@@ -213,7 +224,7 @@ header {
 .row.rar .score-num { color: var(--accent); }
 .row.sourced .score-num { color: var(--purple); }
 .score-bar { height: 4px; border-radius: 2px; background: var(--surface2); overflow: hidden; margin: 5px 0 4px auto; width: 100%; }
-.score-bar i { display: block; height: 100%; background: currentColor; }
+.score-bar i { display: block; height: 100%; background: var(--text-dim); }
 .row.rar .score-bar i { background: var(--accent); }
 .row.sourced .score-bar i { background: var(--purple); }
 .score-scale { font-size: .62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; }
@@ -237,13 +248,6 @@ header {
   margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);
   font-family: var(--mono); font-size: .72rem; color: var(--text-muted); line-height: 1.9;
   word-break: break-all;
-}
-
-.toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-  background: var(--surface); border: 1px solid var(--accent); color: var(--text);
-  padding: 9px 18px; border-radius: 8px; font-size: .82rem; z-index: 70;
-  box-shadow: 0 4px 20px rgba(0,0,0,.5);
 }
 
 footer {
@@ -288,8 +292,8 @@ footer .src { font-family: var(--mono); font-size: .72rem; word-break: break-all
     <h1>The front page of the agentic web</h1>
     <p class="lede">
       One ranked list over every agent this registry hosts and every third-party
-      skill it indexes. The ranking is the point: each row carries the numbers it
-      was scored on, so you can disagree with the order for a stated reason.
+      skill it has crawled. The ranking is the point: each row carries the numbers
+      it was scored on, so you can disagree with the order for a stated reason.
     </p>
     <div class="counts" id="counts"></div>
   </section>
@@ -301,21 +305,21 @@ footer .src { font-family: var(--mono); font-size: .72rem; word-break: break-all
 
   <section class="controls" id="controls" style="display:none">
     <div class="seg" id="seg-origin">
-      <span class="active" data-origin="all">Everything</span>
-      <span data-origin="native">RAR-only</span>
-      <span data-origin="sourced">From a crawled source</span>
+      <button type="button" class="active" data-origin="all">Everything</button>
+      <button type="button" data-origin="native">RAR only</button>
+      <button type="button" data-origin="sourced">From a crawled source</button>
     </div>
     <div class="seg" id="seg-audience">
-      <span class="active" data-audience="all">Any audience</span>
-      <span data-audience="business">For work</span>
-      <span data-audience="consumer">Personal</span>
+      <button type="button" class="active" data-audience="all">Any audience</button>
+      <button type="button" data-audience="business">For work</button>
+      <button type="button" data-audience="consumer">Personal</button>
     </div>
     <div class="filter-box">
       <span class="si"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="2" opacity="0.6"/><line x1="12" y1="12" x2="17" y2="17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/></svg></span>
       <input type="text" id="q" placeholder="Filter by name, tag, description" autocomplete="off" spellcheck="false">
     </div>
     <span class="showing" id="showing"></span>
-    <div class="scale-warn" id="scale-warn"></div>
+    <div class="order-note" id="order-note"></div>
   </section>
 
   <ol class="feed" id="feed">
@@ -328,15 +332,15 @@ footer .src { font-family: var(--mono); font-size: .72rem; word-break: break-all
 <script>
 /* ────────────────────────────────────────────────────────────────────────
    This page renders one file: api/v1/front.json. It computes no ranking of
-   its own — the order, the scores and the `why` strings are all decided at
-   build time by scripts/build_front_page.py, so what a reader sees here is
-   exactly what any other consumer of the endpoint sees.
+   its own — the order, the scores and the `why` strings are decided at build
+   time by scripts/build_front_page.py, so a reader here sees exactly what any
+   other consumer of the endpoint sees.
 
    Relative first, so a fork, a mirror or a local checkout reads its own
    ranking; raw.githubusercontent as the fallback, which is what makes a
-   file:// open work at all (a relative fetch from file:// is blocked by
-   every browser). If both fail the page says so and tells you how to get
-   the data — it never leaves a spinner running over an empty shell.
+   file:// open work at all — a relative fetch from file:// is blocked by
+   every browser. If both fail the page says so and prints the commands that
+   fix it; it never leaves a spinner running over an empty shell.
    ──────────────────────────────────────────────────────────────────────── */
 
 const RAW = 'https://raw.githubusercontent.com/kody-w/RAR/main';
@@ -345,6 +349,7 @@ const ENDPOINTS = ['api/v1/front.json', RAW + '/api/v1/front.json'];
 let DATA = null;
 let ITEMS = [];
 let SOURCE_URL = '';
+let MULTI_ORIGIN = false;   // does this build hold more than one scoring population?
 
 const state = { origin: 'all', audience: 'all', q: '', ref: '' };
 
@@ -358,10 +363,17 @@ function setConn(cls, label) {
   $('conn-label').textContent = label;
 }
 
+/* Provenance, not hosting, is what a reader needs to keep straight. An entry
+   the crawler found upstream keeps its credit even after the toaster
+   materialises it into a hosted agent here, so `source` — not `origin` — is
+   what decides whether a row is presented as somebody else's work. */
+const isSourced = it => !!it.source;
+const isHosted  = it => it.origin !== 'aggregated';
+
 /* ── hash routing ──────────────────────────────────────────────────────
-   Filters and the focused row live in the hash so any view of this page is
+   Filters and the focused row live in the hash, so any view of this page is
    a link somebody can paste. replaceState keeps typing in the filter box
-   from stacking a history entry per keystroke. */
+   from stacking one history entry per keystroke. */
 
 function readHash() {
   const h = location.hash.replace(/^#/, '');
@@ -373,6 +385,8 @@ function readHash() {
     let v;
     try { v = decodeURIComponent(part.slice(i + 1).replace(/\+/g, ' ')); }
     catch (e) { v = part.slice(i + 1); }
+    // 'aggregated' was the earlier word for the same set; old links still work.
+    if (v === 'aggregated') v = 'sourced';
     if (k === 'origin' && ['all', 'native', 'sourced'].includes(v)) state.origin = v;
     else if (k === 'audience' && ['all', 'business', 'consumer'].includes(v)) state.audience = v;
     else if (k === 'q') state.q = v;
@@ -399,8 +413,8 @@ function writeHash() {
 
 /* ── filtering ─────────────────────────────────────────────────────────── */
 
-// An item with no audience verdict shows up under every audience, the same
-// rule index.html uses: unclassified means unknown, not excluded.
+// An item with no audience verdict shows up under every audience, the rule
+// index.html already uses: unclassified means unknown, not excluded.
 function inAudience(it) {
   if (state.audience === 'all') return true;
   return !it.audience || it.audience === 'both' || it.audience === state.audience;
@@ -418,11 +432,8 @@ function haystack(it) {
 function visible() {
   const terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
   return ITEMS.filter(it => {
-    // 'native' means RAR-only; 'sourced' means a hosted agent that a crawler also
-    // found upstream. 'aggregated' (indexed but not hosted) is still a valid origin
-    // in the schema and simply has no rows while every source is materialised.
-    if (state.origin === 'native' && (it.source || it.origin !== 'native')) return false;
-    if (state.origin === 'sourced' && !it.source) return false;
+    if (state.origin === 'native'  && isSourced(it)) return false;
+    if (state.origin === 'sourced' && !isSourced(it)) return false;
     if (!inAudience(it)) return false;
     if (terms.length) {
       const h = haystack(it);
@@ -437,95 +448,107 @@ function visible() {
 const AUDIENCE_LABEL = { business: 'for work', consumer: 'personal', both: 'work or personal' };
 
 function whyChip(text) {
-  // A component that had no signal was filled with the population median.
-  // Marking those visually stops a median fill from reading as evidence.
+  // A component with no signal was filled with the population median. Marking
+  // those stops a median fill from reading as evidence somebody produced.
   const est = /median/.test(text) || /^no /.test(text);
   return '<span class="chip' + (est ? ' est' : '') + '">' + esc(text) + '</span>';
 }
 
-function nativeMeta(it) {
-  const r = it.signals.rar || {};
+// RAR's own counters, labelled as RAR's.
+function rarMeta(it) {
+  const r = (it.signals && it.signals.rar) || {};
   const bits = [];
-  if (r.tier) {
-    bits.push('<span class="badge tier tier-' + esc(r.tier) + '">' + esc(r.tier) + '</span>');
-  }
+  if (r.tier) bits.push('<span class="badge tier tier-' + esc(r.tier) + '">' + esc(r.tier) + '</span>');
   if (it.category) bits.push(esc(it.category));
   if (it.audience) bits.push(esc(AUDIENCE_LABEL[it.audience] || it.audience));
+  // Counts get RAR's name on them, because the row below may carry a second
+  // set of counts belonging to somebody else. Length is left to the why chips.
   if (r.curator_n) bits.push('RAR reviews: ' + r.curator_n + (r.curator_mean ? ' at ' + r.curator_mean + '/5' : ''));
   if (r.upvotes) bits.push('RAR upvotes: ' + r.upvotes);
-  if (r.lines) bits.push(r.lines + ' lines');
+  if (r.comments) bits.push('RAR comments: ' + r.comments);
   return bits;
 }
 
-// Aggregated rows carry the origin's own counters, always attributed to the
-// origin. RAR's counters and a source's counters measure different
-// populations by different methods; they are shown side by side and never
-// added into one number.
+// The source's counters, labelled as the source's. RAR's numbers and a
+// source's numbers count different populations by different methods; they sit
+// side by side here and are never added into one figure.
 function sourceLine(it) {
   const s = it.source || {};
-  const n = it.signals.source || {};
+  const n = (it.signals && it.signals.source) || {};
+  const age = typeof n.published_age_days === 'number' ? n.published_age_days : n.age_days;
   const facts = [];
   if (typeof n.downloads === 'number') facts.push(plural(n.downloads, 'download', 'downloads'));
   if (typeof n.rating === 'number' && n.rating) facts.push('rating ' + n.rating);
   if (n.has_bundle) facts.push('ships a bundle');
   if (n.featured) facts.push('featured there');
-  if (typeof n.age_days === 'number') facts.push('published ' + plural(n.age_days, 'day', 'days') + ' ago');
+  if (typeof age === 'number') facts.push('published ' + plural(age, 'day', 'days') + ' ago');
   if (n.author) facts.push('by ' + n.author);
+
+  const name = esc(s.display_name || s.id || 'the source');
   const home = s.home_url
-    ? '<a href="' + esc(s.home_url) + '" target="_blank" rel="noopener">' + esc(s.display_name || s.id) + '</a>'
-    : esc(s.display_name || s.id || 'the source');
+    ? '<a href="' + esc(s.home_url) + '" target="_blank" rel="noopener">' + name + '</a>' : name;
+
   return '<div class="srcline"><b>' + home + '</b> reports: ' +
-    (facts.length ? esc(facts.join(' · ')) : 'no counters published') +
-    '. <span class="caveat">These are that source&#39;s own numbers, not RAR&#39;s, and are never added to RAR&#39;s' +
-    (s.license ? '. License: ' + esc(s.license) : '') + '.</span></div>';
+    (facts.length ? esc(facts.join(' · ')) : 'no counters published') + '. ' +
+    '<span class="caveat">Those are ' + name + '&#39;s own numbers, not RAR&#39;s, and are never ' +
+    'added to RAR&#39;s' + (s.license ? '. Licence at the source: ' + esc(s.license) : '') + '.</span></div>';
 }
 
 function rowHtml(it) {
-  const agg = it.origin === 'aggregated';
-  const sourced = !!it.source;
-  const originBadge = agg
-    ? '<span class="badge aggregated">indexed &middot; ' + esc((it.source && it.source.display_name) || 'third party') + '</span>'
-    : (sourced
-        ? '<span class="badge native">RAR agent</span> <span class="badge aggregated">also at ' +
-          esc(it.source.display_name) + '</span>'
-        : '<span class="badge native">RAR agent</span>');
+  const sourced = isSourced(it);
+  const hosted = isHosted(it);
+  const srcName = sourced ? esc(it.source.display_name || it.source.id) : '';
 
-  const meta = agg
-    ? [esc(it.category), it.audience ? esc(AUDIENCE_LABEL[it.audience] || it.audience) : ''].filter(Boolean)
-    : nativeMeta(it);
+  // Three states, never confusable: RAR's own, RAR's copy of somebody's work,
+  // and an entry that only exists upstream.
+  let badges;
+  if (!sourced)     badges = '<span class="badge rar">RAR agent</span>';
+  else if (hosted)  badges = '<span class="badge rar">RAR agent</span>' +
+                             '<span class="badge sourced">also at ' + srcName + '</span>';
+  else              badges = '<span class="badge sourced">indexed at ' + srcName +
+                             ' &middot; not hosted here</span>';
+
+  const meta = hosted
+    ? rarMeta(it)
+    : [esc(it.category), it.audience ? esc(AUDIENCE_LABEL[it.audience] || it.audience) : ''].filter(Boolean);
 
   const acts = [];
-  if (it.url) {
-    acts.push('<a class="act" href="' + esc(it.url) + '" target="_blank" rel="noopener">' +
-      (agg ? 'Open at the source &#8599;' : 'Open in RAR &#8599;') + '</a>');
+  if (hosted && it.url) {
+    acts.push('<a class="act" href="' + esc(it.url) + '" target="_blank" rel="noopener">Open in RAR &#8599;</a>');
   }
   if (it.install) {
     acts.push('<a class="act" href="' + esc(it.install) + '" target="_blank" rel="noopener">Agent file &#8599;</a>');
   }
+  const away = sourced ? (it.source.url || it.source.home_url || (!hosted ? it.url : '')) : '';
+  if (away) {
+    acts.push('<a class="act" href="' + esc(away) + '" target="_blank" rel="noopener">Open at ' + srcName + ' &#8599;</a>');
+  }
   acts.push('<button class="act" data-share="' + esc(it.ref) + '">Link to this</button>');
 
-  return '<li class="row ' + esc(it.origin) + (sourced ? ' sourced' : '') + (it.ref === state.ref ? ' pinned' : '') +
+  const pct = Math.max(2, Math.min(100, Number(it.score) || 0));
+
+  return '<li class="row ' + (sourced ? 'sourced' : 'rar') + (it.ref === state.ref ? ' pinned' : '') +
       '" id="row-' + encodeURIComponent(it.ref) + '">' +
     '<div class="rank"><span class="hash">#</span>' + it.rank + '</div>' +
     '<div>' +
       '<div class="title-line">' +
         '<a class="title" href="' + esc(it.url || '#') + '" target="_blank" rel="noopener">' + esc(it.title) + '</a>' +
-        originBadge +
+        badges +
         '<span class="ref">' + esc(it.ref) + '</span>' +
       '</div>' +
       '<div class="desc">' + esc(it.description) + '</div>' +
       '<div class="why"><span class="why-label">why it ranks</span>' +
         (it.why || []).map(whyChip).join('') +
       '</div>' +
-      (agg ? sourceLine(it) : '') +
+      (sourced ? sourceLine(it) : '') +
       '<div class="meta">' + meta.join('<span class="sep">&middot;</span>') +
         (meta.length && acts.length ? '<span class="sep">&middot;</span>' : '') + acts.join('') +
       '</div>' +
     '</div>' +
     '<div class="score">' +
-      '<div class="score-num">' + it.score.toFixed(1) + '</div>' +
-      '<div class="score-bar"><i style="width:' + Math.max(2, Math.min(100, it.score)) + '%"></i></div>' +
-      '<div class="score-scale">' + (agg ? 'indexed scale' : 'RAR scale') + '</div>' +
+      '<div class="score-num">' + Number(it.score).toFixed(1) + '</div>' +
+      '<div class="score-bar"><i style="width:' + pct + '%"></i></div>' +
+      '<div class="score-scale">' + (MULTI_ORIGIN ? esc(it.origin) + ' scale' : 'score') + '</div>' +
     '</div>' +
   '</li>';
 }
@@ -543,17 +566,18 @@ function render() {
 
   $('showing').innerHTML = 'showing <b>' + rows.length + '</b> of ' + ITEMS.length;
 
-  // Two origins in one list means two scales in one column. Say so whenever
-  // both are on screen, and stop saying it once the reader has filtered to one.
-  const warn = $('scale-warn');
-  if (state.origin === 'all') {
-    warn.style.display = '';
-    warn.innerHTML = 'Both origins are shown. A score is comparable only within its origin &mdash; ' +
-      'a RAR agent at 80 and an indexed entry at 80 are not the same claim. ' +
-      'Filter to one origin to compare like with like.';
-  } else {
-    warn.style.display = 'none';
+  // The ordering rule is the engine's to state. Only the caveat about mixed
+  // scales is this page's, and it is only true while two populations are on
+  // screen at once — so it appears and disappears with them.
+  const note = $('order-note');
+  const parts = [];
+  if (DATA && DATA.ranking && DATA.ranking.order) parts.push(esc(DATA.ranking.order));
+  if (MULTI_ORIGIN && state.origin === 'all' && new Set(rows.map(r => r.origin)).size > 1) {
+    parts.push('Both populations are on screen: a score is comparable only within its own origin, ' +
+      'so filter to one to compare like with like.');
   }
+  note.innerHTML = parts.join(' ');
+  note.style.display = parts.length ? '' : 'none';
 }
 
 function focusRow() {
@@ -563,8 +587,10 @@ function focusRow() {
 }
 
 /* ── the ranking explanation, rendered from the data ───────────────────
-   Nothing about the weights is written into this page. If the engine
-   changes a weight, or adds a component, this section changes with it. */
+   No weight is written into this page. If the engine changes a weight, adds
+   a component or adds a caveat, this section changes with it. */
+
+const NOTE_ORDER = ['order', 'deduplication', 'median_fill', 'clock'];
 
 function renderExplain(r) {
   const parts = [];
@@ -572,7 +598,7 @@ function renderExplain(r) {
 
   for (const c of (r.components || [])) {
     const pct = Math.round((c.weight || 0) * 100);
-    const cls = c.applies_to === 'aggregated' ? 'agg' : c.applies_to === 'both' ? 'both' : '';
+    const cls = c.applies_to === 'aggregated' ? 'sourced' : c.applies_to === 'both' ? 'both' : '';
     parts.push(
       '<div class="comp">' +
         '<div>' +
@@ -589,36 +615,53 @@ function renderExplain(r) {
   if ((r.not_scored || []).length) {
     notes.push('Deliberately not scored: ' + esc(r.not_scored.join(', ')) + '.');
   }
-  if (r.median_fill) notes.push(esc(r.median_fill));
-  if (r.clock) notes.push(esc(r.clock));
-  if (notes.length) parts.push('<div class="explain-note">' + notes.join('<br>') + '</div>');
+  // Every remaining prose field the engine ships gets printed, in a stable
+  // order, so a caveat added upstream shows up here without an edit.
+  Object.keys(r)
+    .filter(k => k !== 'explain' && typeof r[k] === 'string')
+    .sort((a, b) => ((NOTE_ORDER.indexOf(a) + 1) || 99) - ((NOTE_ORDER.indexOf(b) + 1) || 99))
+    .forEach(k => notes.push(esc(r[k])));
+
+  if (notes.length) {
+    parts.push('<div class="explain-note">' + notes.map(n => '<p>' + n + '</p>').join('') + '</div>');
+  }
 
   $('explain-body').innerHTML = parts.join('');
   $('explain').style.display = '';
 }
 
+/* Counts are printed as separate blocks, one per population, and never added
+   together — two counters that measure different things by different methods
+   do not make a third number. */
+const COUNT_LABEL = {
+  native: 'agents hosted here',
+  aggregated: 'indexed upstream, not hosted here',
+  with_source_provenance: 'of them credited to a crawled source',
+  sources: 'crawled source',
+  ranked: 'rows on this page'
+};
+const COUNT_CLASS = { native: 'rar', aggregated: 'sourced', with_source_provenance: 'sourced' };
+const COUNT_ORDER = ['native', 'aggregated', 'with_source_provenance', 'sources', 'ranked'];
+
 function renderCounts(c) {
-  const blocks = [];
-  if (typeof c.native === 'number') {
-    blocks.push('<span class="count-block native"><b>' + c.native + '</b> agents hosted here</span>');
-  }
-  if (typeof c.with_source_provenance === 'number' && c.with_source_provenance) {
-    blocks.push('<span class="count-block agg"><b>' + c.with_source_provenance +
-      '</b> of them also found at ' + plural(c.sources || 0, 'crawled source', 'crawled sources') + '</span>');
-  }
-  if (typeof c.aggregated === 'number' && c.aggregated) {
-    blocks.push('<span class="count-block agg"><b>' + c.aggregated + '</b> indexed but not hosted</span>');
-  }
-  if (typeof c.ranked === 'number') {
-    blocks.push('<span class="count-block"><b>' + c.ranked + '</b> ranked, one row each</span>');
-  }
-  blocks.push('<span class="count-note">Two sets of counters, kept apart &mdash; never summed.</span>');
+  const keys = Object.keys(c)
+    .filter(k => typeof c[k] === 'number' && c[k] > 0)
+    .sort((a, b) => ((COUNT_ORDER.indexOf(a) + 1) || 99) - ((COUNT_ORDER.indexOf(b) + 1) || 99));
+
+  const blocks = keys.map(k => {
+    let label = COUNT_LABEL[k] || k.replace(/_/g, ' ');
+    if (k === 'sources') label = plural(c[k], 'crawled source', 'crawled sources').replace(/^\d+\s/, '');
+    return '<span class="count-block ' + (COUNT_CLASS[k] || '') + '"><b>' + c[k] + '</b> ' + esc(label) + '</span>';
+  });
+
+  blocks.push('<span class="count-note">Separate populations, kept separate &mdash; ' +
+    'their counters are never summed.</span>');
   $('counts').innerHTML = blocks.join('');
 }
 
 /* ── fail-open ─────────────────────────────────────────────────────────
-   The honest failure is more useful than a half-page: name what was tried,
-   and give the three commands that actually fix it. */
+   The honest failure is more useful than half a page: name what was tried,
+   and give the commands that actually fix it. */
 
 function renderFailure(attempts) {
   setConn('err', 'no data');
@@ -626,15 +669,15 @@ function renderFailure(attempts) {
     '<li class="fail">' +
       '<h2>No ranking data loaded</h2>' +
       '<p>This page renders one file, <code>api/v1/front.json</code>, and computes nothing ' +
-      'itself &mdash; so with the file out of reach there is no honest list to show you. ' +
-      'The ranking explanation ships inside that file too, which is why this page will not ' +
-      'invent one. Any of these gets you the data:</p>' +
+      'itself &mdash; so with that file out of reach there is no honest list to show you. ' +
+      'The ranking explanation ships inside it too, which is why this page will not invent ' +
+      'one. Any of these gets you the data:</p>' +
       '<ol>' +
-        '<li>Serve the repository instead of opening the file directly &mdash; browsers block ' +
+        '<li>Serve the repository instead of opening the file directly &mdash; a browser blocks ' +
         'a page on <code>file://</code> from reading files next to it:<br>' +
         '<code>python3 -m http.server 8000</code> then open ' +
         '<code>http://localhost:8000/front.html</code></li>' +
-        '<li>Build the endpoint if this checkout has never produced one:<br>' +
+        '<li>Build the endpoint, if this checkout has never produced one:<br>' +
         '<code>python scripts/build_front_page.py</code></li>' +
         '<li>Or read the published copy: ' +
         '<a href="https://kody-w.github.io/RAR/front.html">kody-w.github.io/RAR/front.html</a> ' +
@@ -648,8 +691,8 @@ function renderFailure(attempts) {
         attempts.map(a => esc(a.url) + ' &rarr; ' + esc(a.error)).join('<br>') +
       '</div>' +
     '</li>';
-  $('foot').innerHTML = 'Front page of the RAPP Agent Registry. ' +
-    'Ranking is produced by <span class="src">scripts/build_front_page.py</span> and served as ' +
+  $('foot').innerHTML = 'Front page of the RAPP Agent Registry. The ranking is produced by ' +
+    '<span class="src">scripts/build_front_page.py</span> and served as ' +
     '<span class="src">api/v1/front.json</span>.';
 }
 
@@ -680,24 +723,25 @@ $('q').addEventListener('input', e => {
   qTimer = setTimeout(() => { writeHash(); render(); }, 110);
 });
 
-// One delegated listener rather than 355 inline handlers.
+// One delegated listener rather than one per row.
 $('feed').addEventListener('click', e => {
   const btn = e.target.closest('[data-share]');
   if (!btn) return;
   state.ref = btn.dataset.share;
-  const url = location.origin + location.pathname + location.search + hashFor();
-  history.replaceState(null, '', location.pathname + location.search + hashFor());
+  const hash = hashFor();
+  history.replaceState(null, '', location.pathname + location.search + hash);
   document.querySelectorAll('.row.pinned').forEach(el => el.classList.remove('pinned'));
   btn.closest('.row').classList.add('pinned');
-  // Clipboard is unavailable on file:// and without a user-gesture permission
-  // in some browsers; the hash is already in the address bar either way.
+  // Clipboard is unavailable on file:// and needs a permission in some
+  // browsers; the shareable hash is in the address bar either way.
   const done = ok => {
     btn.classList.add('copied');
     btn.textContent = ok ? 'Link copied' : 'Link in address bar';
     setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Link to this'; }, 1800);
   };
   try {
-    navigator.clipboard.writeText(url).then(() => done(true), () => done(false));
+    navigator.clipboard.writeText(location.origin + location.pathname + location.search + hash)
+      .then(() => done(true), () => done(false));
   } catch (err) { done(false); }
 });
 
@@ -744,6 +788,7 @@ async function boot() {
   if (!DATA) { renderFailure(attempts); return; }
 
   ITEMS = DATA.items;
+  MULTI_ORIGIN = new Set(ITEMS.map(i => i.origin)).size > 1;
   const ms = Math.round(performance.now() - t0);
   setConn('live', ITEMS.length + ' ranked · ' + ms + ' ms');
 
@@ -758,9 +803,9 @@ async function boot() {
 
   $('foot').innerHTML =
     'Ranked ' + esc(DATA.generated || 'unknown') + ' by ' +
-    '<span class="src">scripts/build_front_page.py</span> from this registry&#39;s own review, ' +
-    'discussion and crawl state. Indexed entries are metadata and a link home &mdash; ' +
-    (DATA.policy ? esc(DATA.policy) + '. ' : 'content is never copied here. ') +
+    '<span class="src">scripts/build_front_page.py</span>, from this registry&#39;s own review, ' +
+    'discussion and crawl state. ' +
+    (DATA.policy ? esc(DATA.policy.charAt(0).toUpperCase() + DATA.policy.slice(1)) + '. ' : '') +
     '<br>Read the same data yourself: <span class="src">' + esc(SOURCE_URL) + '</span>';
 }
 

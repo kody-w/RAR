@@ -169,27 +169,44 @@ INDEXED_KEYS = ["freshness", "depth", "reach"]
 
 
 def applicable_keys(row: dict) -> list[str]:
+    """Reach never scores a hosted agent.
+
+    It was briefly folded into the native score for the rows a crawler also
+    found upstream, and that was wrong twice over. It made one published number
+    out of RAR's counters and a third party's, which the payload's own
+    `explain` denies doing. And it was a thin signal sold as a strong one: of
+    the 76 crawled entries, 66 publish `downloads: 0` — the source has no
+    telemetry for them — so a 25%-weighted component would have been measuring
+    10 rows and quietly penalising the other 66 for a number nobody published.
+
+    The source's counters are still carried in `signals.source` and shown on
+    the page. They are provenance, not rank.
+    """
     if row["origin"] != "native":
         return list(INDEXED_KEYS)
-    return NATIVE_KEYS + (["reach"] if row["raw"].get("reach") is not None else [])
+    return list(NATIVE_KEYS)
 
 NOT_SCORED = ["raw file size", "tag count", "anything summed across populations"]
 
 EXPLAIN = (
-    "Every entry is scored 0-100 from the signals RAR actually holds. Native "
-    "agents are scored on curator reviews (30), RAR community feedback (25), "
-    "quality tier (15), freshness (15) and depth (15). Aggregated third-party "
-    "entries are indexed, not hosted, so RAR holds no reviews, tier or "
-    "community feedback for them; they are scored on freshness (15), depth "
-    "(15) and the source's own reach (25), renormalised over the components "
-    "that apply. That is why a score is comparable only within its `origin` — "
-    "a native 80 and an aggregated 80 are not the same claim, and adding RAR's "
-    "counters to a source's counters would produce a number neither system "
-    "could defend. What is deliberately NOT scored: raw file size, tag count, "
-    "publisher popularity, and anything summed across the two populations. "
-    "A missing component is filled with the median of the population that has "
-    "it, never with zero — absence of signal is not negative signal, and every "
-    "row that was filled this way says so in `why`."
+    "Every entry is scored 0-100 from the signals RAR actually holds. A hosted "
+    "agent is scored on curator reviews (30), RAR community feedback (25), "
+    "quality tier (15), freshness (15) and depth (15) — those five and nothing "
+    "else, whether or not a crawler also found it upstream. An entry that is "
+    "indexed but NOT hosted has no reviews, tier or community feedback here, so "
+    "it is scored on freshness (15), depth (15) and the source's own reach (25), "
+    "renormalised over the components that apply; today that population is empty, "
+    "because every crawled entry has been materialised into a hosted agent by the "
+    "skill toaster and appears once, as a hosted agent carrying a `source` block. "
+    "A source's own counters are shown on those rows and deliberately do NOT "
+    "score them: adding RAR's counters to a third party's would produce a number "
+    "neither system could defend, and of the 76 crawled entries only 10 publish "
+    "any download telemetry at all. A score is therefore comparable only within "
+    "its `origin`. What is deliberately NOT scored: raw file size, tag count, "
+    "publisher popularity, a source's reach on a hosted agent, and anything "
+    "summed across the two populations. A missing component is filled with the "
+    "median of the rows that carry it, never with zero — absence of signal is "
+    "not negative signal, and every row filled this way says so in `why`."
 )
 
 
@@ -535,10 +552,9 @@ def build() -> dict:
                 "license": tmeta.get("license", "unverified"),
                 "url": twin.get("url", ""),
             }
-            trow["raw"]["reach"] = measure_reach(
-                tsig.get("downloads"), source_max.get(twin.get("source_id", ""), 0.0))
             trow["signals"]["source"] = {
                 "id": twin.get("source_id", ""),
+                "display_name": tmeta.get("display_name", twin.get("source_id", "")),
                 "downloads": tsig.get("downloads"),
                 "rating": tsig.get("rating"),
                 "featured": bool(tsig.get("featured")),
@@ -640,20 +656,6 @@ def build() -> dict:
 
         if row["origin"] == "native":
             why = native_why(row["signals"]["rar"], filled)
-            src = row["signals"].get("source")
-            # Only the reach line is added: it is the one source-derived number
-            # that actually scores this row. Freshness and depth already came
-            # from the hosted agent, so repeating the source's would double-count
-            # in prose what is not double-counted in the score.
-            if src is not None:
-                dl = src.get("downloads")
-                if dl is None:
-                    why.append("no download count published by the source "
-                               "- scored at the population median")
-                elif dl:
-                    why.append(f"{plural(dl, 'download')} at {row['source']['display_name']}")
-                else:
-                    why.append(f"no downloads reported by {row['source']['display_name']}")
             row["why"] = why
         else:
             row["why"] = aggregated_why(row["signals"]["source"])

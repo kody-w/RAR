@@ -234,6 +234,24 @@ def test_aggregated_items_link_home_and_offer_no_local_install(items):
             f"{item['ref']} points at this repo instead of its origin")
 
 
+def test_a_source_never_scores_a_hosted_agent(items):
+    """The blocker an adversarial pass caught: reach was briefly folded into the
+    native score for rows a crawler also found, making one published number out
+    of two populations' counters while `explain` denied doing it."""
+    carried = [i for i in items if i["source"] is not None]
+    assert carried, "expected some hosted agents to carry source provenance"
+    for item in carried:
+        assert "reach" not in item["components"], (
+            f"{item['ref']} is a hosted agent scored on its source's reach")
+        assert "reach" not in item["scores_on"]
+        # The number is still there — as provenance, which is the whole point.
+        assert "downloads" in item["signals"]["source"]
+    # And no why-line may cite a number that did not move the rank.
+    for item in carried:
+        assert not any("download" in w for w in item["why"]), (
+            f"{item['ref']} explains its rank with a number that does not score it")
+
+
 def test_source_blocks_appear_only_where_provenance_exists(items):
     """A source block means "this also exists in a crawled index" — nothing else."""
     for item in items:
@@ -257,12 +275,6 @@ def test_no_item_is_scored_on_a_component_from_the_other_population(payload, ite
     applies = {c["key"]: c["applies_to"] for c in payload["ranking"]["components"]}
     for item in items:
         for key in item.get("components", {}):
-            if key == "reach":
-                # Reach is legitimate on a hosted agent ONLY when that agent was
-                # also found in a crawled index — that is what supplies the number.
-                assert item["source"] is not None, (
-                    f"{item['ref']} is scored on reach without provenance")
-                continue
             assert applies[key] in ("both", item["origin"]), (
                 f"{item['ref']} ({item['origin']}) is scored on '{key}', "
                 f"which applies to {applies[key]}")

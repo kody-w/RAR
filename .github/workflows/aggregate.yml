@@ -125,7 +125,8 @@ jobs:
 
           built = json.loads(open(REL, encoding="utf-8").read())
           if comparable(json.loads(head.stdout)) != comparable(built):
-              print(f"[aggregate] ranking changed ({built['counts']['ranked']} ranked).")
+              ranked = built.get("counts", {}).get("ranked", "?")
+              print(f"[aggregate] ranking changed ({ranked} ranked).")
               sys.exit(0)
 
           subprocess.run(["git", "checkout", "--", REL], check=True)
@@ -190,7 +191,7 @@ jobs:
                 f"{counts.get('native', 0)} native "
                 f"+ {counts.get('aggregated', 0)} aggregated "
                 f"across {counts.get('sources', 0)} source(s)")
-          print(f"- built {payload['generated']}")
+          print(f"- built {payload.get('generated', 'unknown')}")
           print(f"- {outcome}\n")
           print("| # | score | origin | ref |")
           print("|---|-------|--------|-----|")

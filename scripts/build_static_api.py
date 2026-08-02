@@ -680,6 +680,15 @@ def main() -> int:
                 "url": f"{RAW_BASE}/api/v1/match.json",
                 "description": "Use-case → ranked agents, plus a term index for free-text queries.",
             },
+            "front": {
+                "url": f"{RAW_BASE}/api/v1/front.json",
+                "description": (
+                    "One ranked list over every hosted agent and every indexed "
+                    "third-party entry, newest ranking first. Each item carries "
+                    "the components it was scored on and a `why` a human can "
+                    "read. Built by build_front_page.py, not by this script."
+                ),
+            },
             "taxonomy": {
                 "url": f"{RAW_BASE}/api/v1/taxonomy.json",
                 "description": "Categories, publishers, quality tiers and tags with counts.",
