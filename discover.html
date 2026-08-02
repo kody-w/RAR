@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Find an agent — RAPP Agent Registry</title>
+<meta name="description" content="Describe what you need to get done. Get a ranked set of agents back. No account, no repository, no backend.">
+<style>
+  /* ── A host-application surface, not a repository ────────────────────
+     Everything a business user sees here comes from static JSON on a CDN.
+     No GitHub account, no login, no backend, no SDK. Technical detail is
+     available on demand but never leads.                                */
+
+  :root {
+    --ink:        #14161a;
+    --ink-soft:   #545a63;
+    --ink-faint:  #878e99;
+    --line:       #e4e7ec;
+    --line-soft:  #f0f2f5;
+    --bg:         #ffffff;
+    --bg-tint:    #f7f8fa;
+    --accent:     #1a56db;
+    --accent-dim: #eaf0fd;
+    --good:       #0b7a53;
+    --good-dim:   #e6f4ee;
+    --warn:       #92610a;
+    --radius:     10px;
+    --radius-sm:  6px;
+    --shadow:     0 1px 2px rgba(16,24,40,.04), 0 4px 16px rgba(16,24,40,.06);
+    --shadow-lg:  0 4px 12px rgba(16,24,40,.06), 0 16px 40px rgba(16,24,40,.10);
+    --ease:       cubic-bezier(.22,.61,.36,1);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 ui-sans-serif, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── header ───────────────────────────────────────────────────────── */
+
+  header {
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: saturate(180%) blur(12px);
+  }
+  .header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-weight: 640; letter-spacing: -.01em; }
+  .brand-mark {
+    width: 28px; height: 28px; border-radius: 8px; flex: none;
+    background: linear-gradient(135deg, var(--accent), #6d4ae0);
+    display: grid; place-items: center;
+    color: #fff; font-size: 13px; font-weight: 700;
+  }
+  .brand small { display: block; font-weight: 420; font-size: 12px; color: var(--ink-faint); letter-spacing: 0; }
+
+  .conn { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink-soft); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-faint); flex: none; }
+  .dot.live { background: var(--good); box-shadow: 0 0 0 3px var(--good-dim); }
+  .dot.err  { background: #b42318; box-shadow: 0 0 0 3px #fdeceb; }
+
+  /* ── hero ─────────────────────────────────────────────────────────── */
+
+  .hero { padding: 60px 0 34px; }
+  h1 {
+    margin: 0 0 12px;
+    font-size: clamp(30px, 5vw, 42px);
+    line-height: 1.14;
+    letter-spacing: -.028em;
+    font-weight: 660;
+  }
+  .lede { margin: 0 0 30px; font-size: 17.5px; color: var(--ink-soft); max-width: 62ch; }
+
+  .ask { position: relative; }
+  .ask textarea {
+    width: 100%;
+    min-height: 96px;
+    padding: 17px 19px;
+    font: inherit;
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius);
+    resize: vertical;
+    transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
+  }
+  .ask textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-dim);
+  }
+  .ask textarea::placeholder { color: var(--ink-faint); }
+
+  .ask-row { display: flex; align-items: center; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+
+  .btn {
+    appearance: none; border: 0; cursor: pointer;
+    font: inherit; font-weight: 560;
+    padding: 11px 22px;
+    border-radius: var(--radius-sm);
+    background: var(--accent); color: #fff;
+    transition: transform .12s var(--ease), box-shadow .18s var(--ease), background .18s;
+  }
+  .btn:hover { background: #1748bd; box-shadow: 0 4px 14px rgba(26,86,219,.28); }
+  .btn:active { transform: translateY(1px); }
+  .btn[disabled] { opacity: .5; cursor: default; box-shadow: none; }
+
+  .hint { font-size: 13.5px; color: var(--ink-faint); }
+
+  .examples { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .examples .lbl { font-size: 13px; color: var(--ink-faint); margin-right: 2px; }
+  .chip {
+    cursor: pointer; font: inherit; font-size: 13.5px;
+    padding: 6px 13px; border-radius: 100px;
+    border: 1px solid var(--line); background: var(--bg-tint); color: var(--ink-soft);
+    transition: all .16s var(--ease);
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+  /* ── results ──────────────────────────────────────────────────────── */
+
+  .results { padding: 8px 0 70px; }
+  .results-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    margin: 30px 0 4px; padding-top: 26px; border-top: 1px solid var(--line);
+  }
+  .results-head h2 { margin: 0; font-size: 15px; font-weight: 620; letter-spacing: -.01em; }
+  .results-head .meta { font-size: 13px; color: var(--ink-faint); }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-top: 14px;
+    background: var(--bg);
+    transition: border-color .18s var(--ease), box-shadow .22s var(--ease), transform .18s var(--ease);
+  }
+  .card:hover { border-color: #cfd6e0; box-shadow: var(--shadow); transform: translateY(-1px); }
+
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+  .card h3 { margin: 0 0 6px; font-size: 17.5px; font-weight: 620; letter-spacing: -.015em; }
+  .card p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+
+  .fit {
+    flex: none; text-align: right;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 5px;
+  }
+  .fit-bar { width: 62px; height: 5px; border-radius: 3px; background: var(--line-soft); overflow: hidden; }
+  .fit-bar i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+  .fit-label { font-size: 11px; color: var(--ink-faint); letter-spacing: .04em; text-transform: uppercase; }
+
+  .tags { margin-top: 13px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .tag {
+    font-size: 12px; padding: 3px 9px; border-radius: 5px;
+    background: var(--bg-tint); color: var(--ink-soft); border: 1px solid var(--line-soft);
+  }
+  .tag.tier { background: var(--good-dim); color: var(--good); border-color: transparent; font-weight: 560; }
+  .tag.env  { background: #fdf5e6; color: var(--warn); border-color: transparent; }
+
+  .why {
+    margin-top: 13px; padding: 10px 13px;
+    background: var(--accent-dim); border-radius: var(--radius-sm);
+    font-size: 13.5px; color: #1c3f8f;
+  }
+  .why b { font-weight: 620; }
+
+  /* Technical detail is available, but it never leads. */
+  details.tech { margin-top: 14px; }
+  details.tech > summary {
+    cursor: pointer; font-size: 13px; color: var(--ink-faint);
+    list-style: none; display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 0; user-select: none;
+  }
+  details.tech > summary::-webkit-details-marker { display: none; }
+  details.tech > summary::before {
+    content: "›"; display: inline-block; transition: transform .18s var(--ease); font-size: 15px;
+  }
+  details.tech[open] > summary::before { transform: rotate(90deg); }
+  details.tech > summary:hover { color: var(--accent); }
+  .tech-body {
+    margin-top: 11px; padding: 13px 15px;
+    background: var(--bg-tint); border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sm);
+    font: 12.5px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--ink-soft);
+    overflow-x: auto;
+  }
+  .tech-body .k { color: var(--ink-faint); }
+  .tech-body a { color: var(--accent); text-decoration: none; word-break: break-all; }
+  .tech-body a:hover { text-decoration: underline; }
+
+  .empty, .loading {
+    padding: 44px 0; text-align: center; color: var(--ink-faint); font-size: 15px;
+  }
+  .spinner {
+    width: 18px; height: 18px; margin: 0 auto 12px;
+    border: 2px solid var(--line); border-top-color: var(--accent);
+    border-radius: 50%; animation: spin .7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── provenance footer ────────────────────────────────────────────── */
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 26px 0 60px;
+    font-size: 13px; color: var(--ink-faint);
+  }
+  footer .src { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
+  footer a { color: var(--ink-soft); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 0 26px; }
+    .card-top { flex-direction: column; }
+    .fit { flex-direction: row; align-items: center; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <div class="brand">
+      <div class="brand-mark">R</div>
+      <div>
+        Agent Registry
+        <small>Find the agent that fits your work</small>
+      </div>
+    </div>
+    <div class="conn"><span class="dot" id="dot"></span><span id="conn-label">connecting…</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Describe what you need to get done.</h1>
+    <p class="lede">
+      Tell us the problem in your own words. We will rank the agents that fit,
+      explain why each one matched, and show you exactly what it needs to run.
+    </p>
+
+    <div class="ask">
+      <textarea id="q" rows="3"
+        placeholder="For example: we need to review supplier contracts for risk before renewal, and flag anything unusual to legal."></textarea>
+      <div class="ask-row">
+        <button class="btn" id="go">Find agents</button>
+        <span class="hint" id="hint">No account required.</span>
+      </div>
+    </div>
+
+    <div class="examples" id="examples">
+      <span class="lbl">Try:</span>
+    </div>
+  </section>
+
+  <section class="results" id="results"></section>
+
+</main>
+
+<footer class="wrap">
+  <div>
+    Every result on this page was produced from static files on a CDN — no
+    backend, no login, no repository. This page is a reference implementation of
+    the headless registry API.
+  </div>
+  <div class="src" style="margin-top:9px" id="src"></div>
+</footer>
+
+<script>
+/* ────────────────────────────────────────────────────────────────────────
+   The whole experience is three static GETs against a CDN. There is no
+   server to call, nothing to authenticate against, and no GitHub account
+   in the path. Ranking runs here, in the page.
+   ──────────────────────────────────────────────────────────────────────── */
+
+const BASE = 'https://raw.githubusercontent.com/kody-w/RAR/main';
+
+// The business slice is pre-curated, so this surface never has to filter out
+// novelty agents itself — that decision was already made at build time.
+const ENDPOINTS = {
+  catalog: BASE + '/api/v1/audience/business.json',
+  match:   BASE + '/api/v1/match.json'
+};
+
+const STOP = new Set(('a an the and or for to of in on with that this it is are be as by from at ' +
+  'agent agents using use used your you we our can will into via when which their them all any ' +
+  'based each one more other than then they my i need needs want help me us have has do does ' +
+  'about would could should so if then out up down over under before after new').split(' '));
+
+let CATALOG = null, INDEX = null, USE_CASES = [];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g,
+  c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function setConn(state, label) {
+  const d = $('dot');
+  d.className = 'dot' + (state ? ' ' + state : '');
+  $('conn-label').textContent = label;
+}
+
+function tokenize(text) {
+  return (text || '').toLowerCase().match(/[a-z0-9]+/g)?.filter(
+    w => w.length > 2 && !STOP.has(w)) || [];
+}
+
+/* Rank by summing the precomputed term weights shipped in match.json.
+   Keeping the matched terms lets us tell the user WHY something matched,
+   which is the difference between a recommendation and a guess. */
+function rank(query) {
+  const toks = tokenize(query);
+  const scores = new Map(), reasons = new Map();
+
+  for (const t of toks) {
+    const postings = INDEX[t];
+    if (!postings) continue;
+    for (const entry of postings) {
+      const cut = entry.lastIndexOf(':');
+      const id = entry.slice(0, cut), w = +entry.slice(cut + 1);
+      scores.set(id, (scores.get(id) || 0) + w);
+      if (!reasons.has(id)) reasons.set(id, new Set());
+      reasons.get(id).add(t);
+    }
+  }
+
+  return [...scores.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .map(([id, score]) => ({ id, score, terms: [...reasons.get(id)] }))
+    .filter(r => CATALOG.has(r.id));
+}
+
+function card(hit, best) {
+  const a = CATALOG.get(hit.id);
+  const pct = Math.max(12, Math.round((hit.score / best) * 100));
+  const strength = pct > 66 ? 'Strong fit' : pct > 33 ? 'Good fit' : 'Possible fit';
+
+  const tags = (a.tags || []).slice(0, 5)
+    .map(t => `<span class="tag">${esc(t)}</span>`).join('');
+
+  const tier = a.quality_tier && a.quality_tier !== 'community'
+    ? `<span class="tag tier">${esc(a.quality_tier)}</span>` : '';
+
+  // Surfacing configuration up front means a team learns what an agent needs
+  // before they commit to it, rather than discovering it at runtime.
+  const env = (a.requires_env || []).length
+    ? `<span class="tag env">needs ${a.requires_env.length} setting${a.requires_env.length > 1 ? 's' : ''}</span>`
+    : '';
+
+  const why = hit.terms.length
+    ? `<div class="why">Matched on <b>${hit.terms.slice(0, 6).map(esc).join('</b>, <b>')}</b></div>`
+    : '';
+
+  return `
+  <article class="card">
+    <div class="card-top">
+      <div>
+        <h3>${esc(a.display_name || a.name)}</h3>
+        <p>${esc(a.description)}</p>
+      </div>
+      <div class="fit">
+        <div class="fit-bar"><i style="width:${pct}%"></i></div>
+        <div class="fit-label">${strength}</div>
+      </div>
+    </div>
+    <div class="tags">${tier}${env}${tags}</div>
+    ${why}
+    <details class="tech">
+      <summary>Technical details</summary>
+      <div class="tech-body">
+        <div><span class="k">identifier </span>${esc(a.name)}</div>
+        <div><span class="k">version    </span>${esc(a.version)} &nbsp; <span class="k">category </span>${esc(a.category)}</div>
+        <div><span class="k">maintainer </span>${esc(a.author || '—')}</div>
+        ${(a.requires_env || []).length
+          ? `<div><span class="k">settings   </span>${a.requires_env.map(esc).join(', ')}</div>` : ''}
+        ${(a.dependencies || []).length
+          ? `<div><span class="k">depends on </span>${a.dependencies.map(esc).join(', ')}</div>` : ''}
+        <div><span class="k">checksum   </span>${esc((a.source.sha256 || '').slice(0, 32))}…</div>
+        <div><span class="k">source     </span><a href="${esc(a.source.raw)}" rel="noopener">${esc(a.source.path)}</a></div>
+      </div>
+    </details>
+  </article>`;
+}
+
+function render(query) {
+  const out = $('results');
+  const hits = rank(query);
+
+  if (!hits.length) {
+    out.innerHTML = `<div class="empty">
+      Nothing matched that description yet. Try naming the business process —
+      contracts, forecasting, onboarding, supplier risk, support tickets.
+    </div>`;
+    return;
+  }
+
+  const best = hits[0].score;
+  out.innerHTML = `
+    <div class="results-head">
+      <h2>${hits.length} agent${hits.length > 1 ? 's' : ''} matched</h2>
+      <div class="meta">ranked in your browser · no query left this device</div>
+    </div>
+    ${hits.map(h => card(h, best)).join('')}`;
+  out.querySelector('.results-head').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function seedExamples() {
+  const box = $('examples');
+  // Pull real use cases from the API rather than inventing them, so the
+  // examples always reflect what the catalog can actually answer.
+  USE_CASES.slice(0, 5).forEach(uc => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.textContent = uc.label;
+    b.onclick = () => { $('q').value = uc.label; render(uc.label); };
+    box.appendChild(b);
+  });
+}
+
+async function boot() {
+  const out = $('results');
+  out.innerHTML = `<div class="loading"><div class="spinner"></div>Loading the catalog…</div>`;
+  const t0 = performance.now();
+
+  try {
+    const [catRes, matchRes] = await Promise.all([
+      fetch(ENDPOINTS.catalog), fetch(ENDPOINTS.match)
+    ]);
+    if (!catRes.ok || !matchRes.ok) throw new Error('HTTP ' + catRes.status + '/' + matchRes.status);
+
+    const cat = await catRes.json(), match = await matchRes.json();
+
+    CATALOG = new Map(cat.agents.map(a => [a.id, a]));
+    INDEX = match.index;
+    USE_CASES = match.use_cases || [];
+
+    const ms = Math.round(performance.now() - t0);
+    setConn('live', `${cat.count} agents · ${ms} ms`);
+    $('src').innerHTML =
+      `${esc(ENDPOINTS.catalog)}<br>${esc(ENDPOINTS.match)}`;
+    $('hint').textContent =
+      `${cat.count} agents ready · ${Object.keys(INDEX).length.toLocaleString()} indexed terms`;
+
+    out.innerHTML = '';
+    seedExamples();
+  } catch (err) {
+    setConn('err', 'offline');
+    out.innerHTML = `<div class="empty">
+      Could not reach the registry (${esc(err.message)}).<br>
+      This page reads two public files and needs a network connection the first time.
+    </div>`;
+  }
+}
+
+$('go').onclick = () => {
+  const q = $('q').value.trim();
+  if (q && INDEX) render(q);
+};
+$('q').addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') $('go').click();
+});
+
+boot();
+</script>
+</body>
+</html>
