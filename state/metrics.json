@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-02T01:34:54Z",
+ "generated_at": "2026-08-02T07:15:40Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 91,
-  "size_kb": 19810,
+  "size_kb": 20752,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-02T01:33:47Z",
+  "pushed_at": "2026-08-02T06:29:07Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -364,24 +364,24 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-02T01:34:51Z",
+  "generated_at": "2026-08-02T07:15:38Z",
   "agents_scored": 38,
   "critic_reviews": 134,
   "model_reviews": 134,
-  "rubric_reviews": 375,
+  "rubric_reviews": 435,
   "avg_critic_score": 25,
   "avg_user_score": 67,
   "by_state": {
-   "unrated": 65,
+   "unrated": 77,
    "fresh": 9,
    "rotten": 29
   },
   "backends": {
-   "rubric": 92,
+   "rubric": 104,
    "github-models:openai/gpt-4.1": 27,
    "github-models:openai/gpt-4.1-mini": 38
   },
-  "rubric_only_agents": 65
+  "rubric_only_agents": 77
  },
  "leaderboards": {
   "top_critic": [
@@ -1410,6 +1410,30 @@
   ],
   "newest": [
    {
+    "name": "@kody-w/skill_toaster_agent",
+    "display_name": "SkillToaster",
+    "publisher": "@kody-w",
+    "category": "devtools",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 687,
+    "size_kb": 31.4,
+    "added_at": "2026-08-01T21:33:29-04:00",
+    "file": "agents/@kody-w/skill_toaster_agent.py",
+    "description": "Turns an aggregated third-party skill entry into a real, callable RAPP agent by inferring the capability's shape from its metadata and generating a working procedure for it.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0,
+    "critic_score": null,
+    "critic_count": 0,
+    "user_score": null,
+    "tomato": "unrated"
+   },
+   {
     "name": "@cat-agent-skills/accessibility_pass",
     "display_name": "Accessibility Pass",
     "publisher": "@cat-agent-skills",
@@ -1738,30 +1762,6 @@
     "added_at": "2026-07-31T22:43:16-04:00",
     "file": "agents/@cat-agent-skills/brand_voice_pass_agent.py",
     "description": "Rewrite drafts into a configurable house style, preserving meaning while removing generic AI phrasing.",
-    "curator_reviews": 0,
-    "curator_rating": 0.0,
-    "critic_score": null,
-    "critic_count": 0,
-    "user_score": null,
-    "tomato": "unrated"
-   },
-   {
-    "name": "@cat-agent-skills/business_os",
-    "display_name": "Business OS",
-    "publisher": "@cat-agent-skills",
-    "category": "general",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 188,
-    "size_kb": 9.6,
-    "added_at": "2026-07-31T22:43:16-04:00",
-    "file": "agents/@cat-agent-skills/business_os_agent.py",
-    "description": "A practical operating system for Copilot Studio that gives agents a consistent way to clarify outcomes, choose the right approach, solve problems, make decisions, plan projects, improve processes, handle incidents, and turn repeatable work into reusable skills. Unlike a standard Copilot experience that relies mainly on the prompt and available context, Business OS adds a structured way of working\u2026",
     "curator_reviews": 0,
     "curator_rating": 0.0,
     "critic_score": null,
