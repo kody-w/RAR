@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-02T07:41:54Z",
+ "generated_at": "2026-08-03T02:39:18Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,18 +10,18 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 91,
-  "size_kb": 21336,
+  "size_kb": 18136,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-02T07:15:41Z",
+  "pushed_at": "2026-08-03T02:38:17Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 2808,
+  "downloads": 2815,
   "clones": 2743,
-  "cdn_hits": 65,
+  "cdn_hits": 72,
   "release_downloads": 0,
-  "agent_file_downloads": 14,
+  "agent_file_downloads": 18,
   "clones_excluding_ci_estimate": 951,
   "ci_clone_estimate": 1792,
   "page_views": 75,
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 279,
+  "agents": 280,
   "swarms": 82,
   "publishers": 10,
   "categories": 24,
-  "total_lines": 163417,
-  "total_kb": 7832.5,
+  "total_lines": 163716,
+  "total_kb": 7847.9,
   "votes": 5,
   "upvotes": 4,
   "downvotes": 1,
@@ -160,6 +160,13 @@
    "clone_uniques": 26,
    "views": 26,
    "cdn": 0
+  },
+  {
+   "date": "2026-08-01",
+   "clones": 0,
+   "clone_uniques": 0,
+   "views": 0,
+   "cdn": 7
   }
  ],
  "traffic": {
@@ -243,14 +250,14 @@
   "as_of": "2026-07-28T19:07:50Z"
  },
  "cdn": {
-  "total_hits": 65,
-  "bandwidth": 3037163,
-  "rank": 1873049,
-  "agent_hits": 14,
+  "total_hits": 72,
+  "bandwidth": 3670545,
+  "rank": 1767178,
+  "agent_hits": 18,
   "files": [
    {
     "file": "/registry.json",
-    "hits": 48,
+    "hits": 51,
     "agent": null,
     "kind": "registry"
    },
@@ -258,6 +265,12 @@
     "file": "/agents/@rapp/learn_new_agent.py",
     "hits": 8,
     "agent": "@rapp/learn_new",
+    "kind": "agent"
+   },
+   {
+    "file": "/agents/@kody-w/agent_team_agent.py",
+    "hits": 4,
+    "agent": "@kody-w/agent_team_agent",
     "kind": "agent"
    },
    {
@@ -364,24 +377,24 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-02T07:15:38Z",
+  "generated_at": "2026-08-03T02:39:15Z",
   "agents_scored": 38,
   "critic_reviews": 134,
   "model_reviews": 134,
-  "rubric_reviews": 435,
+  "rubric_reviews": 495,
   "avg_critic_score": 25,
   "avg_user_score": 67,
   "by_state": {
-   "unrated": 77,
+   "unrated": 89,
    "fresh": 9,
    "rotten": 29
   },
   "backends": {
-   "rubric": 104,
+   "rubric": 116,
    "github-models:openai/gpt-4.1": 27,
    "github-models:openai/gpt-4.1-mini": 38
   },
-  "rubric_only_agents": 77
+  "rubric_only_agents": 89
  },
  "leaderboards": {
   "top_critic": [
@@ -890,6 +903,30 @@
     "added_at": "2026-04-20T12:38:45-04:00",
     "file": "agents/@rapp/learn_new_agent.py",
     "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0,
+    "critic_score": null,
+    "critic_count": 0,
+    "user_score": null,
+    "tomato": "unrated"
+   },
+   {
+    "name": "@kody-w/agent_team_agent",
+    "display_name": "AgentTeam",
+    "publisher": "@kody-w",
+    "category": "productivity",
+    "tier": "community",
+    "downloads": 4,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 390,
+    "size_kb": 15.8,
+    "added_at": "2026-05-05T10:49:27-04:00",
+    "file": "agents/@kody-w/agent_team_agent.py",
+    "description": "Turns a project goal into an outcome frame, persona route, and paste-ready GitHub issue body for the Agent Team Starter Kit in one LLM call.",
     "curator_reviews": 0,
     "curator_rating": 0.0,
     "critic_score": null,
@@ -1793,11 +1830,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 50,
-    "downloads": 0,
+    "agents": 51,
+    "downloads": 4,
     "score": 1,
     "reviews": 0,
-    "lines": 44124,
+    "lines": 44423,
     "curator_reviews": 1,
     "rating": 0.0
    },
@@ -1883,7 +1920,7 @@
    {
     "name": "productivity",
     "agents": 39,
-    "downloads": 0,
+    "downloads": 4,
     "score": 0,
     "reviews": 0
    },
@@ -2015,7 +2052,7 @@
    },
    {
     "name": "workflow",
-    "agents": 4,
+    "agents": 5,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -2043,7 +2080,7 @@
    }
   ],
   "tiers": {
-   "community": 156,
+   "community": 157,
    "frontier": 76,
    "official": 40,
    "verified": 5,
@@ -3698,6 +3735,20 @@
    "rt": 0.0,
    "cr": 1,
    "crt": 5.0,
+   "cs": null,
+   "cn": 0,
+   "us": null,
+   "t": "unrated"
+  },
+  "@kody-w/agent_team_agent": {
+   "d": 4,
+   "u": 0,
+   "n": 0,
+   "s": 0,
+   "r": 0,
+   "rt": 0.0,
+   "cr": 0,
+   "crt": 0.0,
    "cs": null,
    "cn": 0,
    "us": null,
