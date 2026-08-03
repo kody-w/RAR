@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-03T08:44:35Z",
+ "generated_at": "2026-08-03T13:48:29Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,10 +9,10 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 91,
-  "size_kb": 19407,
+  "open_issues": 92,
+  "size_kb": 20066,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-03T08:02:20Z",
+  "pushed_at": "2026-08-03T13:47:23Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 280,
+  "agents": 282,
   "swarms": 82,
   "publishers": 10,
   "categories": 24,
-  "total_lines": 163716,
-  "total_kb": 7847.9,
+  "total_lines": 164722,
+  "total_kb": 7887.2,
   "votes": 5,
   "upvotes": 4,
   "downvotes": 1,
@@ -377,24 +377,24 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-03T08:02:15Z",
+  "generated_at": "2026-08-03T13:48:27Z",
   "agents_scored": 38,
   "critic_reviews": 134,
   "model_reviews": 134,
-  "rubric_reviews": 555,
+  "rubric_reviews": 615,
   "avg_critic_score": 25,
   "avg_user_score": 67,
   "by_state": {
-   "unrated": 101,
+   "unrated": 113,
    "fresh": 9,
    "rotten": 29
   },
   "backends": {
-   "rubric": 128,
+   "rubric": 140,
    "github-models:openai/gpt-4.1": 27,
    "github-models:openai/gpt-4.1-mini": 38
   },
-  "rubric_only_agents": 101
+  "rubric_only_agents": 113
  },
  "leaderboards": {
   "top_critic": [
@@ -1447,6 +1447,30 @@
   ],
   "newest": [
    {
+    "name": "@kody-w/buzzsaw",
+    "display_name": "Buzzsaw",
+    "publisher": "@kody-w",
+    "category": "workflow",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 299,
+    "size_kb": 15.4,
+    "added_at": "2026-08-02T22:38:06-04:00",
+    "file": "agents/@kody-w/buzzsaw.py",
+    "description": "Set up an adversarial build-and-verify loop: seed prompt, disjoint region split for parallel builders, harsh read-only critic brief, and an acceptance gate that defines when to stop.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0,
+    "critic_score": null,
+    "critic_count": 0,
+    "user_score": null,
+    "tomato": "unrated"
+   },
+   {
     "name": "@kody-w/skill_toaster_agent",
     "display_name": "SkillToaster",
     "publisher": "@kody-w",
@@ -1781,30 +1805,6 @@
     "critic_count": 0,
     "user_score": null,
     "tomato": "unrated"
-   },
-   {
-    "name": "@cat-agent-skills/brand_voice_pass",
-    "display_name": "Brand Voice Pass",
-    "publisher": "@cat-agent-skills",
-    "category": "general",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 188,
-    "size_kb": 8.8,
-    "added_at": "2026-07-31T22:43:16-04:00",
-    "file": "agents/@cat-agent-skills/brand_voice_pass_agent.py",
-    "description": "Rewrite drafts into a configurable house style, preserving meaning while removing generic AI phrasing.",
-    "curator_reviews": 0,
-    "curator_rating": 0.0,
-    "critic_score": null,
-    "critic_count": 0,
-    "user_score": null,
-    "tomato": "unrated"
    }
   ],
   "publishers": [
@@ -1830,11 +1830,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 51,
+    "agents": 53,
     "downloads": 4,
     "score": 1,
     "reviews": 0,
-    "lines": 44423,
+    "lines": 45429,
     "curator_reviews": 1,
     "rating": 0.0
    },
@@ -1919,7 +1919,7 @@
    },
    {
     "name": "productivity",
-    "agents": 39,
+    "agents": 40,
     "downloads": 4,
     "score": 0,
     "reviews": 0
@@ -1946,15 +1946,15 @@
     "reviews": 0
    },
    {
-    "name": "pipeline",
+    "name": "integrations",
     "agents": 15,
     "downloads": 0,
     "score": 0,
     "reviews": 0
    },
    {
-    "name": "integrations",
-    "agents": 14,
+    "name": "pipeline",
+    "agents": 15,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -2080,7 +2080,7 @@
    }
   ],
   "tiers": {
-   "community": 157,
+   "community": 159,
    "frontier": 76,
    "official": 40,
    "verified": 5,
