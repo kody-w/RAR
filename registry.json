@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-03T02:38:06.809475+00:00",
+  "generated_at": "2026-08-03T13:46:43.885465+00:00",
   "stats": {
-    "total_agents": 280,
+    "total_agents": 282,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -11776,9 +11776,9 @@
       "_size_kb": 15.4,
       "_lines": 299,
       "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_added_at": "2026-08-02T22:38:06-04:00",
+      "_first_commit_sha": "ae1d6143f70e0182abd968e9c1c80ead38750484",
+      "_latest_commit_sha": "ae1d6143f70e0182abd968e9c1c80ead38750484"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -13224,6 +13224,38 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/prompt_extractor",
+      "version": "1.0.1",
+      "display_name": "Prompt Extractor",
+      "description": "Extract the prompts shown on screen in a video by OCRing it frame by frame, merging scrolled and repeated views into one entry each, so prompts demoed in a screen recording do not have to be transcribed by hand.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "ocr",
+        "video",
+        "prompts",
+        "extraction",
+        "vision"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/prompt_extractor.py",
+      "_install_filename": "rar_kody_w_prompt_extractor_agent.py",
+      "_sha256": "9b03c1b6d286d219e1f19966eea18eb2ef9c980213455963226b264c038440ba",
+      "_lifecycle": "legacy_active",
+      "_seed": 12848396680882170249,
+      "_size_kb": 27.6,
+      "_lines": 735,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/rapp_leviathan_factory",
       "version": "0.2.2",
       "display_name": "RappLeviathanFactory",
@@ -14061,6 +14093,42 @@
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
       "_card_sha256": "d71838d32944b756a78153b250aa2599f4e28cd97ec6eb537d2c48c4bda65d0e"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/wp_publish",
+      "version": "1.0.0",
+      "display_name": "WordPress Publish",
+      "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "wordpress",
+        "publishing",
+        "rest-api",
+        "blog",
+        "idempotent"
+      ],
+      "category": "integrations",
+      "quality_tier": "community",
+      "requires_env": [
+        "WP_URL",
+        "WP_USER",
+        "WP_APP_PASSWORD"
+      ],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/wp_publish.py",
+      "_install_filename": "rar_kody_w_wp_publish_agent.py",
+      "_sha256": "624c7a945e4b1428675ddb9e213bb7a41ad24096c5705783d4923bc130467d8d",
+      "_lifecycle": "legacy_active",
+      "_seed": 5077406524201645790,
+      "_size_kb": 11.7,
+      "_lines": 271,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
     },
     {
       "schema": "rapp-agent/1.0",
