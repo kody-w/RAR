@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-02T14:44:31.984303+00:00",
+  "generated_at": "2026-08-03T02:38:06.809475+00:00",
   "stats": {
-    "total_agents": 279,
+    "total_agents": 280,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -11746,6 +11746,39 @@
       "_first_commit_sha": "e6cd9f56504cb8f49311fb0794ad527b3c010868",
       "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
       "_card_sha256": "b81a8f375bc38fa7d401cbe0fb44351872a416cbc70a797d470569e8a3fd5618"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/buzzsaw",
+      "version": "1.0.0",
+      "display_name": "Buzzsaw",
+      "description": "Set up an adversarial build-and-verify loop: seed prompt, disjoint region split for parallel builders, harsh read-only critic brief, and an acceptance gate that defines when to stop.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "buzzsaw",
+        "verification",
+        "adversarial",
+        "testing",
+        "determinism",
+        "ark"
+      ],
+      "category": "workflow",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/buzzsaw.py",
+      "_install_filename": "rar_kody_w_buzzsaw_agent.py",
+      "_sha256": "68ffa820bc89cd8966f9929725bd9befd616ac26ad26867b828dc790b9cf13bb",
+      "_lifecycle": "legacy_active",
+      "_seed": 12151990569740805168,
+      "_size_kb": 15.4,
+      "_lines": 299,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
     },
     {
       "schema": "rapp-agent/1.0",
