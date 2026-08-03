@@ -657,6 +657,13 @@
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/overnight/SKILL.md"
     },
     {
+      "name": "rapp-agent-bridge",
+      "description": "Use whenever a skill directory contains a `*_agent.py` beside its SKILL.md, or the user mentions a toasted skill, a RAPP agent file, an RCI capsule, or asks why a skill ships a Python file. Teaches this host to take the skill's parameters and ordered steps from the agent file's deterministic contra…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/rapp-agent-bridge",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/rapp-agent-bridge/SKILL.md"
+    },
+    {
       "name": "rapp-brainstem",
       "description": "Drive the local RAPP brainstem (a Flask server on localhost:7071) for any request that involves RAPP, the brainstem, RAR (the RAPP Agent Registry), community agents, or \"the twin\". Every capability — discover/install/vote on community agents, run user-defined Python agents, drive memory, ask the tw…",
       "repo": "kody-w/rapp-skills",
