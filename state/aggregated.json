@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 76,
+      "item_count": 77,
       "source_downloads": 1031
     }
   ],
@@ -177,8 +177,8 @@
         "Copilot Studio"
       ],
       "author": "Tim Sparks",
-      "author_github": null,
-      "version": "2.1.0",
+      "author_github": "SparkyT",
+      "version": "2.1.1",
       "created_at": null,
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#ai-first-process-redesign",
@@ -1420,6 +1420,36 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/monte_carlo_analysis",
+      "source_id": "cat-agent-skills",
+      "source_slug": "monte-carlo-analysis",
+      "name": "Monte Carlo Analysis",
+      "description": "Run Monte Carlo simulations from natural-language risk inputs \u2014 triangular, normal, uniform, or log-normal \u2014 and return percentiles, a histogram PNG, optional interactive HTML, and a downloadable results spreadsheet.",
+      "kind": "skill",
+      "tags": [
+        "monte-carlo",
+        "risk-assessment",
+        "python",
+        "simulation",
+        "matplotlib",
+        "charts",
+        "csv",
+        "analysis"
+      ],
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "author": "Nazish Qasim",
+      "author_github": "nazishqassim",
+      "version": "1.0.0",
+      "created_at": "2026-07-31T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#monte-carlo-analysis",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/own_voice_builder",
       "source_id": "cat-agent-skills",
       "source_slug": "own-voice-builder",
@@ -1899,7 +1929,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#scrollytelling-data",
       "source_signal": {
         "downloads": 0,
-        "rating": 2
+        "rating": 5
       }
     },
     {
@@ -2222,7 +2252,7 @@
   ],
   "totals": {
     "sources": 1,
-    "items": 76,
+    "items": 77,
     "source_downloads": 1031
   }
 }
