@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 77,
+      "item_count": 78,
       "source_downloads": 1031
     }
   ],
@@ -215,7 +215,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#ai-usecase-assessment",
       "source_signal": {
         "downloads": 101,
-        "rating": 2
+        "rating": 3
       }
     },
     {
@@ -1902,7 +1902,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#rich-html-presentation",
       "source_signal": {
         "downloads": 92,
-        "rating": 1
+        "rating": 2
       }
     },
     {
@@ -1929,7 +1929,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#scrollytelling-data",
       "source_signal": {
         "downloads": 0,
-        "rating": 5
+        "rating": 6
       }
     },
     {
@@ -2158,6 +2158,32 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/what_to_use_when",
+      "source_id": "cat-agent-skills",
+      "source_slug": "what-to-use-when",
+      "name": "What to Use When",
+      "description": "Routes single-output requests to the best-fit included Microsoft 365 Copilot 1p agents and reserves Cowork for long-running or multi-output work.",
+      "kind": "skill",
+      "tags": [
+        "productivity",
+        "automation",
+        "copilot",
+        "routing"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Gaurav Mahajan",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#what-to-use-when",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/whiteboard_to_infographic",
       "source_id": "cat-agent-skills",
       "source_slug": "whiteboard-to-infographic",
@@ -2252,7 +2278,7 @@
   ],
   "totals": {
     "sources": 1,
-    "items": 77,
+    "items": 78,
     "source_downloads": 1031
   }
 }

@@ -4049,6 +4049,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/414",
       "number": 414
     },
+    "@kody-w/prompt_extractor": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/507",
+      "number": 507
+    },
     "@kody-w/rapp_leviathan_factory": {
       "upvotes": 0,
       "downloads": 0,
@@ -4320,6 +4337,23 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/379",
       "number": 379
+    },
+    "@kody-w/wp_publish": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/508",
+      "number": 508
     },
     "@rapp/basic_agent": {
       "upvotes": 1,
