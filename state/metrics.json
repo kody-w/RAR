@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-03T13:48:29Z",
+ "generated_at": "2026-08-04T07:21:27Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 92,
-  "size_kb": 20066,
+  "size_kb": 24244,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-03T13:47:23Z",
+  "pushed_at": "2026-08-04T04:59:31Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -252,7 +252,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1767178,
+  "rank": 1772645,
   "agent_hits": 18,
   "files": [
    {
@@ -377,24 +377,24 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-03T13:48:27Z",
+  "generated_at": "2026-08-04T07:21:25Z",
   "agents_scored": 38,
   "critic_reviews": 134,
   "model_reviews": 134,
-  "rubric_reviews": 615,
+  "rubric_reviews": 675,
   "avg_critic_score": 25,
   "avg_user_score": 67,
   "by_state": {
-   "unrated": 113,
+   "unrated": 125,
    "fresh": 9,
    "rotten": 29
   },
   "backends": {
-   "rubric": 140,
+   "rubric": 152,
    "github-models:openai/gpt-4.1": 27,
    "github-models:openai/gpt-4.1-mini": 38
   },
-  "rubric_only_agents": 113
+  "rubric_only_agents": 125
  },
  "leaderboards": {
   "top_critic": [
