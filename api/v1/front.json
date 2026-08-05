@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-04T11:44:25Z",
+  "generated": "2026-08-05T06:09:15Z",
   "counts": {
     "native": 282,
     "aggregated": 2,
@@ -13008,7 +13008,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 87,
+          "downloads": 142,
           "rating": 4,
           "featured": true,
           "has_bundle": true,
@@ -13241,7 +13241,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 101,
+          "downloads": 133,
           "rating": 3,
           "featured": false,
           "has_bundle": true,
@@ -13710,7 +13710,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 87,
+          "downloads": 98,
           "rating": 1,
           "featured": false,
           "has_bundle": true,
@@ -14095,7 +14095,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 218,
+          "downloads": 255,
           "rating": 3,
           "featured": true,
           "has_bundle": true,
@@ -14944,7 +14944,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 152,
+          "downloads": 177,
           "rating": 3,
           "featured": true,
           "has_bundle": true,
@@ -16110,7 +16110,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 56,
+          "downloads": 60,
           "rating": 2,
           "featured": false,
           "has_bundle": false,
@@ -17280,7 +17280,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 89,
+          "downloads": 101,
           "rating": null,
           "featured": false,
           "has_bundle": true,
@@ -17508,7 +17508,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 70,
+          "downloads": 81,
           "rating": 2,
           "featured": true,
           "has_bundle": true,
@@ -17662,7 +17662,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 92,
+          "downloads": 110,
           "rating": 2,
           "featured": false,
           "has_bundle": true,
@@ -17969,7 +17969,7 @@
         "source": {
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
-          "downloads": 79,
+          "downloads": 101,
           "rating": null,
           "featured": false,
           "has_bundle": true,

@@ -13,7 +13,7 @@
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
       "item_count": 78,
-      "source_downloads": 1031
+      "source_downloads": 1258
     }
   ],
   "items": [
@@ -127,7 +127,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#agent-harness-explorer",
       "source_signal": {
-        "downloads": 87,
+        "downloads": 142,
         "rating": 4,
         "featured": true
       }
@@ -214,7 +214,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#ai-usecase-assessment",
       "source_signal": {
-        "downloads": 101,
+        "downloads": 133,
         "rating": 3
       }
     },
@@ -392,7 +392,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#brand-template-enforcer",
       "source_signal": {
-        "downloads": 87,
+        "downloads": 98,
         "rating": 1
       }
     },
@@ -535,7 +535,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#chart-builder",
       "source_signal": {
-        "downloads": 218,
+        "downloads": 255,
         "rating": 3,
         "featured": true
       }
@@ -849,7 +849,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#doc-format-converter",
       "source_signal": {
-        "downloads": 152,
+        "downloads": 177,
         "rating": 3,
         "featured": true
       }
@@ -1288,7 +1288,7 @@
       "has_bundle": false,
       "url": "https://microsoft.github.io/cat-agent-skills/#linkedin-content-writer",
       "source_signal": {
-        "downloads": 56,
+        "downloads": 60,
         "rating": 2
       }
     },
@@ -1762,7 +1762,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#powerpoint-deck-designer",
       "source_signal": {
-        "downloads": 89
+        "downloads": 101
       }
     },
     {
@@ -1843,7 +1843,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#redlining-content",
       "source_signal": {
-        "downloads": 70,
+        "downloads": 81,
         "rating": 2,
         "featured": true
       }
@@ -1901,7 +1901,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#rich-html-presentation",
       "source_signal": {
-        "downloads": 92,
+        "downloads": 110,
         "rating": 2
       }
     },
@@ -2014,7 +2014,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#skill-authoring-coach",
       "source_signal": {
-        "downloads": 79
+        "downloads": 101
       }
     },
     {
@@ -2279,6 +2279,6 @@
   "totals": {
     "sources": 1,
     "items": 78,
-    "source_downloads": 1031
+    "source_downloads": 1258
   }
 }
