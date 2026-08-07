@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-07T01:04:17Z",
+  "generated": "2026-08-07T10:28:35Z",
   "counts": {
     "native": 282,
     "aggregated": 2,
@@ -14712,7 +14712,7 @@
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
           "downloads": 0,
-          "rating": null,
+          "rating": 1,
           "featured": false,
           "has_bundle": true,
           "author": "Elliot Margot",
