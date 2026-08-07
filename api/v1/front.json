@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-05T06:09:15Z",
+  "generated": "2026-08-07T01:04:17Z",
   "counts": {
     "native": 282,
     "aggregated": 2,
@@ -14099,7 +14099,7 @@
           "rating": 3,
           "featured": true,
           "has_bundle": true,
-          "author": "CAT Agent Skills",
+          "author": "Adi Leibowitz",
           "entry_chars": 129,
           "published_age_days": 20
         }
@@ -17739,7 +17739,7 @@
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
           "downloads": 0,
-          "rating": 6,
+          "rating": 7,
           "featured": false,
           "has_bundle": true,
           "author": "AndrewHessMSFT",

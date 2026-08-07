@@ -528,8 +528,8 @@
         "Copilot Studio",
         "Scout"
       ],
-      "author": "CAT Agent Skills",
-      "author_github": null,
+      "author": "Adi Leibowitz",
+      "author_github": "adilei",
       "version": "1.0.0",
       "created_at": "2026-07-14T00:00:00.000Z",
       "has_bundle": true,
@@ -1929,7 +1929,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#scrollytelling-data",
       "source_signal": {
         "downloads": 0,
-        "rating": 6
+        "rating": 7
       }
     },
     {
