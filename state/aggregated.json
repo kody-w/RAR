@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 78,
+      "item_count": 79,
       "source_downloads": 1258
     }
   ],
@@ -768,6 +768,35 @@
       "source_signal": {
         "downloads": 0,
         "rating": 1
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/copilot_studio_harness_picker",
+      "source_id": "cat-agent-skills",
+      "source_slug": "copilot-studio-harness-picker",
+      "name": "Copilot Studio Harness Picker",
+      "description": "Choose the right Copilot Studio harness and build shape; in Cowork, use GPT-5.6 with High effort for Detailed mode, Claude Opus 5 as fallback, or Auto for Quick mode.",
+      "kind": "skill",
+      "tags": [
+        "copilot-studio",
+        "cowork",
+        "architecture",
+        "agent-design",
+        "governance",
+        "licensing"
+      ],
+      "platforms": [
+        "Cowork",
+        "Copilot Studio"
+      ],
+      "author": "Liam O'Grady",
+      "author_github": "ogradyliam5",
+      "version": "1.1.0",
+      "created_at": "2026-08-04T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-harness-picker",
+      "source_signal": {
+        "downloads": 0
       }
     },
     {
@@ -2279,7 +2308,7 @@
   ],
   "totals": {
     "sources": 1,
-    "items": 78,
+    "items": 79,
     "source_downloads": 1258
   }
 }
