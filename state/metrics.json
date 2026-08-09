@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-08T05:59:57Z",
+ "generated_at": "2026-08-09T05:32:41Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,10 +9,10 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 96,
-  "size_kb": 30615,
+  "open_issues": 97,
+  "size_kb": 36886,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-08T05:23:58Z",
+  "pushed_at": "2026-08-09T04:59:12Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -50,7 +50,7 @@
   "curator_agents_reviewed": 222,
   "curator_avg_rating": 4.17,
   "critic_score": 25,
-  "user_score": 67,
+  "user_score": 75,
   "critic_reviews": 134,
   "agents_scored": 38,
   "agents_voted": 4
@@ -252,7 +252,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1795000,
+  "rank": 1801494,
   "agent_hits": 18,
   "files": [
    {
@@ -377,24 +377,24 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-08T05:23:53Z",
+  "generated_at": "2026-08-09T05:32:37Z",
   "agents_scored": 38,
   "critic_reviews": 134,
   "model_reviews": 134,
-  "rubric_reviews": 975,
+  "rubric_reviews": 1035,
   "avg_critic_score": 25,
-  "avg_user_score": 67,
+  "avg_user_score": 75,
   "by_state": {
-   "unrated": 185,
+   "unrated": 197,
    "fresh": 9,
    "rotten": 29
   },
   "backends": {
-   "rubric": 212,
+   "rubric": 224,
    "github-models:openai/gpt-4.1": 27,
    "github-models:openai/gpt-4.1-mini": 38
   },
-  "rubric_only_agents": 185
+  "rubric_only_agents": 197
  },
  "leaderboards": {
   "top_critic": [
@@ -809,6 +809,30 @@
     "tomato": "rotten"
    },
    {
+    "name": "@kody-w/power_apps_code_app_agent",
+    "display_name": "PowerAppsCodeApp",
+    "publisher": "@kody-w",
+    "category": "core",
+    "tier": "community",
+    "downloads": 0,
+    "up": 1,
+    "down": 0,
+    "score": 1,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 861,
+    "size_kb": 39.6,
+    "added_at": "2026-07-22T15:35:38-04:00",
+    "file": "agents/@kody-w/power_apps_code_app_agent.py",
+    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0,
+    "critic_score": null,
+    "critic_count": 0,
+    "user_score": 100,
+    "tomato": "unrated"
+   },
+   {
     "name": "@aibast-agents-library/account_risk_assessment",
     "display_name": "Account Risk Assessment",
     "publisher": "@aibast-agents-library",
@@ -1053,7 +1077,7 @@
     "curator_rating": 0.0,
     "critic_score": null,
     "critic_count": 0,
-    "user_score": null,
+    "user_score": 100,
     "tomato": "unrated"
    },
    {
@@ -3779,7 +3803,7 @@
    "crt": 0.0,
    "cs": null,
    "cn": 0,
-   "us": null,
+   "us": 100,
    "t": "unrated"
   },
   "@kody-w/rar_remote_agent": {
