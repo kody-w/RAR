@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 79,
+      "item_count": 80,
       "source_downloads": 1258
     }
   ],
@@ -2075,6 +2075,39 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/stoic_negotiator",
+      "source_id": "cat-agent-skills",
+      "source_slug": "stoic-negotiator",
+      "name": "Stoic Negotiator",
+      "description": "A principled negotiation intelligence skill that combines Stoic decision disciplines with evidence-backed research to help individuals, executives, and analyst agents prepare, analyze, and execute high-quality negotiations. Supports interactive scoping workflows, Deep Research sourcing (citations and source URLs), and audit-ready outputs.",
+      "kind": "skill",
+      "tags": [
+        "negotiation",
+        "decision-making",
+        "offers",
+        "salary",
+        "sales",
+        "commerce",
+        "BATNA",
+        "ZOPA",
+        "deals",
+        "stoicism"
+      ],
+      "platforms": [
+        "Copilot Studio",
+        "Cowork"
+      ],
+      "author": "Faride Ilanda",
+      "author_github": "farideilanda",
+      "version": "1.0.0",
+      "created_at": "2026-08-04T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#stoic-negotiator",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/style_analyzer",
       "source_id": "cat-agent-skills",
       "source_slug": "style-analyzer",
@@ -2308,7 +2341,7 @@
   ],
   "totals": {
     "sources": 1,
-    "items": 79,
+    "items": 80,
     "source_downloads": 1258
   }
 }

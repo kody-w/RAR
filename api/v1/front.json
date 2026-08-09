@@ -1,11 +1,11 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-08T21:57:56Z",
+  "generated": "2026-08-09T10:06:47Z",
   "counts": {
     "native": 282,
-    "aggregated": 3,
+    "aggregated": 4,
     "with_source_provenance": 76,
-    "ranked": 285,
+    "ranked": 286,
     "sources": 1
   },
   "policy": "index-only for aggregated entries: catalog metadata and a link home, never a copy of the content",
@@ -163,7 +163,7 @@
       },
       "score": 47.3,
       "origin_rank": 1,
-      "origin_size": 3,
+      "origin_size": 4,
       "components": {
         "depth": 0.7565,
         "freshness": 0.9772,
@@ -4617,6 +4617,75 @@
     },
     {
       "rank": 73,
+      "ref": "@cat-agent-skills/copilot_studio_harness_picker",
+      "title": "Copilot Studio Harness Picker",
+      "description": "Choose the right Copilot Studio harness and build shape; in Cowork, use GPT-5.6 with High effort for Detailed mode, Claude Opus 5 as fallback, or Auto for Quick mode.",
+      "origin": "aggregated",
+      "category": "skill",
+      "tags": [
+        "copilot-studio",
+        "cowork",
+        "architecture",
+        "agent-design",
+        "governance",
+        "licensing"
+      ],
+      "audience": null,
+      "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-harness-picker",
+      "install": null,
+      "source": {
+        "id": "cat-agent-skills",
+        "display_name": "CAT Agent Skills",
+        "home_url": "https://microsoft.github.io/cat-agent-skills/",
+        "license": "unverified"
+      },
+      "score": 46.1,
+      "origin_rank": 2,
+      "origin_size": 4,
+      "components": {
+        "depth": 0.6903,
+        "freshness": 1.0,
+        "reach": 0.0
+      },
+      "scores_on": [
+        "depth",
+        "freshness",
+        "reach"
+      ],
+      "scored_at_median": [],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": null,
+          "age_days": null,
+          "lines": null,
+          "has_card": false
+        },
+        "source": {
+          "id": "cat-agent-skills",
+          "downloads": 0,
+          "rating": null,
+          "featured": false,
+          "has_bundle": true,
+          "author": "Liam O'Grady",
+          "entry_chars": 166,
+          "published_age_days": 0
+        }
+      },
+      "why": [
+        "no downloads reported by the source",
+        "newest at the source",
+        "ships a bundle at the source",
+        "166 characters of catalog description"
+      ]
+    },
+    {
+      "rank": 74,
       "ref": "@discreetRappers/sharepoint_contract_analysis_agent",
       "title": "ContractAnalysis",
       "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI — clause extraction, risk flagging, and comparison.",
@@ -4676,7 +4745,7 @@
       ]
     },
     {
-      "rank": 74,
+      "rank": 75,
       "ref": "@kody-w/neuron_swarm",
       "title": "NeuronSwarm",
       "description": "Fans a task out across parallel expert 'neuron' prompts using the host brainstem's own LLM call, then reconciles them into one converged answer.",
@@ -4740,7 +4809,7 @@
       ]
     },
     {
-      "rank": 75,
+      "rank": 76,
       "ref": "@aibast-agents-library/acquisition_support",
       "title": "Acquisition Support Agent",
       "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback.",
@@ -4801,7 +4870,7 @@
       ]
     },
     {
-      "rank": 76,
+      "rank": 77,
       "ref": "@aibast-agents-library/wealth_insights_generator",
       "title": "Wealth Insights Generator Agent",
       "description": "Generates opportunity alerts and client insights from a live simulated Dynamics 365 tenant pipeline, with an offline demo fallback.",
@@ -4862,7 +4931,7 @@
       ]
     },
     {
-      "rank": 77,
+      "rank": 78,
       "ref": "@kody-w/perpetual_loop_factory",
       "title": "PerpetualLoopFactory",
       "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons.",
@@ -4926,7 +4995,7 @@
       ]
     },
     {
-      "rank": 78,
+      "rank": 79,
       "ref": "@aibast-agents-library/permit_license_management",
       "title": "Permit & License Management Agent",
       "description": "Tracks permit applications from a live simulated Dynamics 365 tenant plus renewal calendars and gap analysis, with an offline fallback.",
@@ -4987,7 +5056,7 @@
       ]
     },
     {
-      "rank": 79,
+      "rank": 80,
       "ref": "@aibast-agents-library/production_line_optimization",
       "title": "Production Line Optimization Agent",
       "description": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback.",
@@ -5047,7 +5116,7 @@
       ]
     },
     {
-      "rank": 80,
+      "rank": 81,
       "ref": "@aibast-agents-library/personalized_marketing",
       "title": "Personalized Marketing Agent",
       "description": "Segments live audiences and designs campaigns from a live simulated Dynamics 365 tenant's contacts and orders, with an offline demo fallback.",
@@ -5107,7 +5176,7 @@
       ]
     },
     {
-      "rank": 81,
+      "rank": 82,
       "ref": "@aibast-agents-library/deal_stakeholder_engagement",
       "title": "Stakeholder Engagement",
       "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback.",
@@ -5167,7 +5236,7 @@
       ]
     },
     {
-      "rank": 82,
+      "rank": 83,
       "ref": "@aibast-agents-library/slg_grants_management",
       "title": "SLG Grants Management Agent",
       "description": "Tracks grant compliance and budgets from a live simulated Dynamics 365 tenant's grant cases, with an offline demo fallback.",
@@ -5227,7 +5296,7 @@
       ]
     },
     {
-      "rank": 83,
+      "rank": 84,
       "ref": "@howardh/chief_of_staff_agent",
       "title": "ChiefOfStaff",
       "description": "Generates M365-grounded briefs, inbox triage, meeting prep, commitment tracking, and drafts via the WorkIQ CLI, plus HN/DDG signal scans.",
@@ -5291,7 +5360,7 @@
       ]
     },
     {
-      "rank": 84,
+      "rank": 85,
       "ref": "@kody-w/commons_show_agent",
       "title": "Commons Show",
       "description": "Captures staged shows in the live RAPP Commons via Playwright and renders narrated MP4 episodes with TTS, rsvg-convert, and ffmpeg.",
@@ -5353,7 +5422,7 @@
       ]
     },
     {
-      "rank": 85,
+      "rank": 86,
       "ref": "@aibast-agents-library/citizen_service_request",
       "title": "Citizen Service Request Agent",
       "description": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
@@ -5414,7 +5483,7 @@
       ]
     },
     {
-      "rank": 86,
+      "rank": 87,
       "ref": "@aibast-agents-library/returns_exchange",
       "title": "Returns & Exchange Agent",
       "description": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline.",
@@ -5475,7 +5544,7 @@
       ]
     },
     {
-      "rank": 87,
+      "rank": 88,
       "ref": "@aibast-agents-library/activity_gap",
       "title": "Activity Gap Analyzer",
       "description": "Flags missing sales activities per stage using live opportunities from a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
@@ -5535,7 +5604,7 @@
       ]
     },
     {
-      "rank": 88,
+      "rank": 89,
       "ref": "@aibast-agents-library/deal_risk_assessment",
       "title": "Deal Risk Assessment",
       "description": "Assesses deal risk from live opportunities in a simulated Dynamics 365 tenant, with matrices, plans, and an embedded offline demo fallback.",
@@ -5595,7 +5664,7 @@
       ]
     },
     {
-      "rank": 89,
+      "rank": 90,
       "ref": "@aibast-agents-library/energy_regulatory_reporting",
       "title": "Energy Regulatory Reporting Agent",
       "description": "Tracks filing deadlines from live work items on a simulated Dynamics 365 tenant, with validation and audit prep that work offline.",
@@ -5657,7 +5726,7 @@
       ]
     },
     {
-      "rank": 90,
+      "rank": 91,
       "ref": "@aibast-agents-library/product_feedback_synthesizer",
       "title": "Product Feedback Synthesizer Agent",
       "description": "Synthesizes feedback themes from a live simulated Dynamics 365 tenant's cases and emails, with an offline demo fallback; writes simulated.",
@@ -5718,7 +5787,7 @@
       ]
     },
     {
-      "rank": 91,
+      "rank": 92,
       "ref": "@aibast-agents-library/revenue_forecast",
       "title": "Revenue Forecast",
       "description": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback.",
@@ -5778,7 +5847,7 @@
       ]
     },
     {
-      "rank": 92,
+      "rank": 93,
       "ref": "@kody-w/commons_life_agent",
       "title": "Commons Life",
       "description": "Records the live commons as signed frames via Playwright, grows in-between fidelity with EZsharpen, and emits an HTML LifePlayer scrubber.",
@@ -5840,7 +5909,7 @@
       ]
     },
     {
-      "rank": 93,
+      "rank": 94,
       "ref": "@rarbookworld/bookfactory",
       "title": "BookFactory (converged singleton)",
       "description": "Writes, edits, gates, and publishes a chapter through five inlined LLM personas over Azure OpenAI, with structured verdicts that halt on hold.",
@@ -5902,7 +5971,7 @@
       ]
     },
     {
-      "rank": 94,
+      "rank": 95,
       "ref": "@rarbookworld/momentfactory",
       "title": "MomentFactory (converged singleton)",
       "description": "Converts a moment (commit, message, idea) into a publishable Drop through seven inlined LLM personas, calling Azure OpenAI.",
@@ -5964,7 +6033,7 @@
       ]
     },
     {
-      "rank": 95,
+      "rank": 96,
       "ref": "@aibast-agents-library/asset_maintenance_forecast",
       "title": "Asset Maintenance Forecast Agent",
       "description": "Monitors asset health from live CRM work orders joined to simulated telemetry sensor stats and alerts, with an offline demo fallback.",
@@ -6025,7 +6094,7 @@
       ]
     },
     {
-      "rank": 96,
+      "rank": 97,
       "ref": "@aibast-agents-library/deal_progression",
       "title": "Deal Progression",
       "description": "Analyzes pipeline health and stalled deals from live opportunities in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
@@ -6082,75 +6151,6 @@
         "added 122 days ago",
         "824 lines",
         "has a rendered card"
-      ]
-    },
-    {
-      "rank": 97,
-      "ref": "@cat-agent-skills/copilot_studio_harness_picker",
-      "title": "Copilot Studio Harness Picker",
-      "description": "Choose the right Copilot Studio harness and build shape; in Cowork, use GPT-5.6 with High effort for Detailed mode, Claude Opus 5 as fallback, or Auto for Quick mode.",
-      "origin": "aggregated",
-      "category": "skill",
-      "tags": [
-        "copilot-studio",
-        "cowork",
-        "architecture",
-        "agent-design",
-        "governance",
-        "licensing"
-      ],
-      "audience": null,
-      "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-harness-picker",
-      "install": null,
-      "source": {
-        "id": "cat-agent-skills",
-        "display_name": "CAT Agent Skills",
-        "home_url": "https://microsoft.github.io/cat-agent-skills/",
-        "license": "unverified"
-      },
-      "score": 46.1,
-      "origin_rank": 2,
-      "origin_size": 3,
-      "components": {
-        "depth": 0.6903,
-        "freshness": 1.0,
-        "reach": 0.0
-      },
-      "scores_on": [
-        "depth",
-        "freshness",
-        "reach"
-      ],
-      "scored_at_median": [],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": null,
-          "age_days": null,
-          "lines": null,
-          "has_card": false
-        },
-        "source": {
-          "id": "cat-agent-skills",
-          "downloads": 0,
-          "rating": null,
-          "featured": false,
-          "has_bundle": true,
-          "author": "Liam O'Grady",
-          "entry_chars": 166,
-          "published_age_days": 0
-        }
-      },
-      "why": [
-        "no downloads reported by the source",
-        "newest at the source",
-        "ships a bundle at the source",
-        "166 characters of catalog description"
       ]
     },
     {
@@ -9002,6 +9002,78 @@
     },
     {
       "rank": 145,
+      "ref": "@cat-agent-skills/stoic_negotiator",
+      "title": "Stoic Negotiator",
+      "description": "A principled negotiation intelligence skill that combines Stoic decision disciplines with evidence-backed research to help individuals, executives, and analyst agents prepare, analyze, and execute high-quality negotiations. Supports interactive scoping workflows, Deep Research sourcing (citations and source URLs), and audit-ready outputs.",
+      "origin": "aggregated",
+      "category": "skill",
+      "tags": [
+        "negotiation",
+        "decision-making",
+        "offers",
+        "salary",
+        "sales",
+        "commerce",
+        "BATNA",
+        "ZOPA",
+        "deals",
+        "stoicism"
+      ],
+      "audience": null,
+      "url": "https://microsoft.github.io/cat-agent-skills/#stoic-negotiator",
+      "install": null,
+      "source": {
+        "id": "cat-agent-skills",
+        "display_name": "CAT Agent Skills",
+        "home_url": "https://microsoft.github.io/cat-agent-skills/",
+        "license": "unverified"
+      },
+      "score": 37.4,
+      "origin_rank": 3,
+      "origin_size": 4,
+      "components": {
+        "depth": 0.3706,
+        "freshness": 1.0,
+        "reach": 0.0
+      },
+      "scores_on": [
+        "depth",
+        "freshness",
+        "reach"
+      ],
+      "scored_at_median": [],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": null,
+          "age_days": null,
+          "lines": null,
+          "has_card": false
+        },
+        "source": {
+          "id": "cat-agent-skills",
+          "downloads": 0,
+          "rating": null,
+          "featured": false,
+          "has_bundle": false,
+          "author": "Faride Ilanda",
+          "entry_chars": 340,
+          "published_age_days": 0
+        }
+      },
+      "why": [
+        "no downloads reported by the source",
+        "newest at the source",
+        "340 characters of catalog description"
+      ]
+    },
+    {
+      "rank": 146,
       "ref": "@aibast-agents-library/care_gap_closure",
       "title": "Care Gap Closure Agent",
       "description": "Analyzes HEDIS care gaps, joining live simulated FHIR appointment gap signals with the Dynamics 365 care-coordination queue; offline fallback.",
@@ -9062,7 +9134,7 @@
       ]
     },
     {
-      "rank": 146,
+      "rank": 147,
       "ref": "@aibast-agents-library/client_health_score",
       "title": "Client Health Score Agent",
       "description": "Flags at-risk accounts from escalations and pipeline on a live simulated Dynamics 365 tenant, with an offline demo metric fallback.",
@@ -9122,7 +9194,7 @@
       ]
     },
     {
-      "rank": 147,
+      "rank": 148,
       "ref": "@aibast-agents-library/clinical_notes_summarizer",
       "title": "Clinical Notes Summarizer Agent",
       "description": "Summarizes encounters and medication reviews, joining live simulated FHIR appointment-patient headers with the Dynamics 365 CRM; offline fallback.",
@@ -9183,7 +9255,7 @@
       ]
     },
     {
-      "rank": 148,
+      "rank": 149,
       "ref": "@aibast-agents-library/contract_risk_review",
       "title": "Contract Risk Review Agent",
       "description": "Scans agreements for risk and drafts renegotiation briefs from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
@@ -9243,7 +9315,7 @@
       ]
     },
     {
-      "rank": 149,
+      "rank": 150,
       "ref": "@aibast-agents-library/customer_360",
       "title": "Customer 360",
       "description": "Builds unified customer profiles and timelines from a live simulated Dynamics 365 tenant (accounts, cases, emails), with an offline fallback.",
@@ -9303,7 +9375,7 @@
       ]
     },
     {
-      "rank": 150,
+      "rank": 151,
       "ref": "@aibast-agents-library/deal_health_score",
       "title": "Deal Health Score",
       "description": "Scores deal health from live opportunities in a simulated Dynamics 365 tenant, with trends, alerts, and an embedded offline demo fallback.",
@@ -9363,7 +9435,7 @@
       ]
     },
     {
-      "rank": 151,
+      "rank": 152,
       "ref": "@aibast-agents-library/find_accurate_models",
       "title": "Find Accurate Models",
       "description": "Compares models by accuracy, readiness, and cost, merging live catalog entries from a simulated Dynamics 365 tenant with offline fallback.",
@@ -9424,7 +9496,7 @@
       ]
     },
     {
-      "rank": 152,
+      "rank": 153,
       "ref": "@aibast-agents-library/inventory_rebalancing",
       "title": "Inventory Rebalancing Agent",
       "description": "Analyzes stock vs demand and joins simulated ERP materials and goods receipts to the Dynamics 365 catalog, with an offline demo fallback.",
@@ -9484,7 +9556,7 @@
       ]
     },
     {
-      "rank": 153,
+      "rank": 154,
       "ref": "@aibast-agents-library/omnichannel_engagement",
       "title": "Omnichannel Engagement Agent",
       "description": "Analyzes channel mix, journeys, and campaign attribution from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
@@ -9545,7 +9617,7 @@
       ]
     },
     {
-      "rank": 154,
+      "rank": 155,
       "ref": "@aibast-agents-library/resource_utilization",
       "title": "Resource Utilization Agent",
       "description": "Reports consultant utilization and staffing plans from a live simulated Dynamics 365 tenant booking calendar, with an offline fallback.",
@@ -9605,7 +9677,7 @@
       ]
     },
     {
-      "rank": 155,
+      "rank": 156,
       "ref": "@aibast-agents-library/sales_qualification",
       "title": "Sales Qualification",
       "description": "Tiers live leads from a simulated Dynamics 365 tenant by CRM rating and value, with ICP/BANT tooling and an embedded offline demo fallback.",
@@ -9666,7 +9738,7 @@
       ]
     },
     {
-      "rank": 156,
+      "rank": 157,
       "ref": "@aibast-agents-library/stalled_deal_detection",
       "title": "Stalled Deal Detection",
       "description": "Detects stalled deals from live opportunities in a simulated Dynamics 365 tenant using real CRM dates, with an embedded offline demo fallback.",
@@ -9726,7 +9798,7 @@
       ]
     },
     {
-      "rank": 157,
+      "rank": 158,
       "ref": "@aibast-agents-library/win_probability",
       "title": "Win Probability",
       "description": "Scores win probability for live deals from a simulated Dynamics 365 tenant, with factor analysis and an embedded offline demo fallback.",
@@ -9786,7 +9858,7 @@
       ]
     },
     {
-      "rank": 158,
+      "rank": 159,
       "ref": "@bill/neuron_agent",
       "title": "Neuron",
       "description": "Injects a compact Knowledge Base block of hardcoded Copilot Studio and Dataverse lessons into the brainstem prompt at session start.",
@@ -9852,7 +9924,7 @@
       ]
     },
     {
-      "rank": 159,
+      "rank": 160,
       "ref": "@rapp/ping_agent",
       "title": "Ping",
       "description": "Returns 'pong'. The smallest possible agent — useful as a smoke test that the brainstem can discover, load, and dispatch a tool call end-to-end.",
@@ -9912,7 +9984,7 @@
       ]
     },
     {
-      "rank": 160,
+      "rank": 161,
       "ref": "@aibast-agents-library/cross_selling",
       "title": "Cross-Selling Opportunities",
       "description": "Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback.",
@@ -9972,7 +10044,7 @@
       ]
     },
     {
-      "rank": 161,
+      "rank": 162,
       "ref": "@aibast-agents-library/fs_regulatory_compliance",
       "title": "FS Regulatory Compliance Agent",
       "description": "Tracks compliance findings and remediation from a live simulated Dynamics 365 tenant (cases and tasks), with an offline demo fallback.",
@@ -10038,7 +10110,7 @@
       ]
     },
     {
-      "rank": 162,
+      "rank": 163,
       "ref": "@aibast-agents-library/it_ticket_management",
       "title": "IT Ticket Management",
       "description": "Builds ticket dashboards from live D365 cases plus a simulated ServiceNow-shaped ITSM desk, joining repeat-CI clusters to CRM cases; offline fallback.",
@@ -10099,7 +10171,7 @@
       ]
     },
     {
-      "rank": 163,
+      "rank": 164,
       "ref": "@aibast-agents-library/next_best_action",
       "title": "Next Best Action",
       "description": "Recommends next actions for live deals from a simulated Dynamics 365 tenant, matched by CRM stage, with an embedded offline demo fallback.",
@@ -10159,7 +10231,7 @@
       ]
     },
     {
-      "rank": 164,
+      "rank": 165,
       "ref": "@aibast-agents-library/personalized_shopping_assistant",
       "title": "Personalized Shopping Assistant Agent",
       "description": "Recommends products and checks a live catalog from a simulated Dynamics 365 tenant, with an offline demo fallback for every operation.",
@@ -10220,7 +10292,7 @@
       ]
     },
     {
-      "rank": 165,
+      "rank": 166,
       "ref": "@aibast-agents-library/portfolio_rebalancing",
       "title": "Portfolio Rebalancing Agent",
       "description": "Analyzes portfolio drift and trades from a live simulated Dynamics 365 tenant (product lines as positions), with an offline demo fallback.",
@@ -10283,7 +10355,7 @@
       ]
     },
     {
-      "rank": 166,
+      "rank": 167,
       "ref": "@aibast-agents-library/procurement_support",
       "title": "Procurement Support",
       "description": "Tracks requisitions and supplier signals over a simulated Dynamics 365 tenant and ERP (POs, receipts, blocked invoices), with offline fallback.",
@@ -10343,7 +10415,7 @@
       ]
     },
     {
-      "rank": 167,
+      "rank": 168,
       "ref": "@aibast-agents-library/proposal_generation",
       "title": "Proposal Generation",
       "description": "Analyzes RFPs and live quotes from a simulated Dynamics 365 tenant into proposal packages with pricing, plus an embedded offline demo fallback.",
@@ -10404,7 +10476,7 @@
       ]
     },
     {
-      "rank": 168,
+      "rank": 169,
       "ref": "@aibast-agents-library/software_customer_onboarding",
       "title": "Customer Onboarding Agent",
       "description": "Tracks onboarding pipelines and blockers from a live simulated Dynamics 365 tenant's accounts and cases, with an offline demo fallback.",
@@ -10464,7 +10536,7 @@
       ]
     },
     {
-      "rank": 169,
+      "rank": 170,
       "ref": "@aibast-agents-library/triage_bot",
       "title": "Triage Bot",
       "description": "Classifies live D365 cases and ServiceNow-shaped ITSM incidents, comparing classifier verdicts to live desk priorities; routes and hands off; offline-safe.",
@@ -10524,7 +10596,7 @@
       ]
     },
     {
-      "rank": 170,
+      "rank": 171,
       "ref": "@aibast-agents-library/workforce_clearance_onboarding",
       "title": "Workforce Clearance & Onboarding Agent",
       "description": "Tracks onboarding blockers from a live simulated Dynamics 365 CRM joined to an HRIS hire roster, with clearance checklists that work offline.",
@@ -10585,7 +10657,7 @@
       ]
     },
     {
-      "rank": 171,
+      "rank": 172,
       "ref": "@aibast-agents-library/cart_abandonment_recovery",
       "title": "Cart Abandonment Recovery Agent",
       "description": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback.",
@@ -10646,7 +10718,7 @@
       ]
     },
     {
-      "rank": 172,
+      "rank": 173,
       "ref": "@aibast-agents-library/one_click_crm_intake",
       "title": "One-Click CRM Intake",
       "description": "Runs CRM intake with duplicate checks against a live simulated Dynamics 365 tenant's leads, with an offline demo fallback.",
@@ -10706,7 +10778,7 @@
       ]
     },
     {
-      "rank": 173,
+      "rank": 174,
       "ref": "@aibast-agents-library/account_intelligence_orchestrator_agent",
       "title": "Account Intelligence Orchestrator",
       "description": "Simulates a multi-agent pipeline for account intelligence briefings, with stage sequencing and status reports over built-in demo data.",
@@ -10766,7 +10838,7 @@
       ]
     },
     {
-      "rank": 174,
+      "rank": 175,
       "ref": "@aibast-agents-library/email_drafting",
       "title": "Email Drafting",
       "description": "Drafts outreach, follow-up, and proposal emails personalized with live contacts from a simulated Dynamics 365 tenant, with offline fallback.",
@@ -10827,7 +10899,7 @@
       ]
     },
     {
-      "rank": 175,
+      "rank": 176,
       "ref": "@kody-w/agent_team_agent",
       "title": "AgentTeam",
       "description": "Turns a project goal into an outcome frame, persona route, and paste-ready GitHub issue body for the Agent Team Starter Kit in one LLM call.",
@@ -10891,7 +10963,7 @@
       ]
     },
     {
-      "rank": 176,
+      "rank": 177,
       "ref": "@aibast-agents-library/foia_request_assistant",
       "title": "FOIA Request Assistant Agent",
       "description": "Analyzes FOIA queues and drafts responses from a live simulated Dynamics 365 tenant's records cases, with an offline demo fallback.",
@@ -10951,7 +11023,7 @@
       ]
     },
     {
-      "rank": 177,
+      "rank": 178,
       "ref": "@aibast-agents-library/deal_tracking",
       "title": "Deal Tracking",
       "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
@@ -11011,7 +11083,7 @@
       ]
     },
     {
-      "rank": 178,
+      "rank": 179,
       "ref": "@howardh/cardsmith_agent",
       "title": "CardSmith",
       "description": "Forges MTG-style trading cards for brainstem agents from a built-in card database, with forge-all and gallery-link actions.",
@@ -11073,7 +11145,7 @@
       ]
     },
     {
-      "rank": 179,
+      "rank": 180,
       "ref": "@kody-w/arena_compete_agent",
       "title": "Arena Compete",
       "description": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation.",
@@ -11135,7 +11207,7 @@
       ]
     },
     {
-      "rank": 180,
+      "rank": 181,
       "ref": "@aibast-agents-library/deal_competitor_intel",
       "title": "Deal Competitor Intelligence",
       "description": "Maps competitive exposure across live deals from a simulated Dynamics 365 tenant, with threat scores and an embedded offline demo fallback.",
@@ -11195,7 +11267,7 @@
       ]
     },
     {
-      "rank": 181,
+      "rank": 182,
       "ref": "@aibast-agents-library/dynamics_365_connector",
       "title": "Dynamics 365 Connector",
       "description": "Queries live entities from a simulated Dynamics 365 tenant over HTTP, with simulated writes and an offline schema/demo fallback.",
@@ -11256,7 +11328,7 @@
       ]
     },
     {
-      "rank": 182,
+      "rank": 183,
       "ref": "@aibast-agents-library/competitive_intelligence",
       "title": "Competitive Intelligence",
       "description": "Builds competitive landscape analyses, win/loss reviews, and battlecards for enterprise deals from built-in demo data.",
@@ -11316,7 +11388,7 @@
       ]
     },
     {
-      "rank": 183,
+      "rank": 184,
       "ref": "@aibast-agents-library/regulatory_compliance_fed",
       "title": "Regulatory Compliance (Federal) Agent",
       "description": "Tracks remediation from live tasks on a simulated Dynamics 365 tenant, with FISMA/FedRAMP gap analysis that works offline.",
@@ -11378,7 +11450,7 @@
       ]
     },
     {
-      "rank": 184,
+      "rank": 185,
       "ref": "@kody-w/double_jump_agent",
       "title": "Double Jump",
       "description": "Improves any draft by competing it against the local brainstem's /chat output round over round, keeping each round's winner; defaults to offline demo.",
@@ -11440,7 +11512,7 @@
       ]
     },
     {
-      "rank": 185,
+      "rank": 186,
       "ref": "@aibast-agents-library/sales_coach",
       "title": "Sales Coach",
       "description": "Coaches reps with live pipeline stats from a simulated Dynamics 365 tenant plus call reviews and skill plans, with offline fallback.",
@@ -11500,7 +11572,7 @@
       ]
     },
     {
-      "rank": 186,
+      "rank": 187,
       "ref": "@discreetRappers/dynamics_crud_agent",
       "title": "DynamicsCRUD",
       "description": "Simulates Dynamics 365 CRUD on accounts, contacts, opportunities, and leads with disambiguation, using built-in demo data.",
@@ -11560,7 +11632,7 @@
       ]
     },
     {
-      "rank": 187,
+      "rank": 188,
       "ref": "@kody-w/copilot_studio_probe_agent",
       "title": "CopilotStudioProbe",
       "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification.",
@@ -11623,7 +11695,7 @@
       ]
     },
     {
-      "rank": 188,
+      "rank": 189,
       "ref": "@kody-w/vibe_coding_loop",
       "title": "Vibe Coding Demo Loop",
       "description": "Returns prompt and shell-command templates for shipping batches of single-file HTML demos to a Jekyll site; makes no LLM or network calls itself.",
@@ -11685,7 +11757,7 @@
       ]
     },
     {
-      "rank": 189,
+      "rank": 190,
       "ref": "@aibast-agents-library/customer_360_speech",
       "title": "Customer 360 & Speech Agent",
       "description": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
@@ -11746,7 +11818,7 @@
       ]
     },
     {
-      "rank": 190,
+      "rank": 191,
       "ref": "@aibast-agents-library/sales_simulation",
       "title": "Sales Simulation",
       "description": "Builds sales role-play scenarios from live opportunities in a simulated Dynamics 365 tenant, with personas, scoring, and offline fallback.",
@@ -11807,7 +11879,7 @@
       ]
     },
     {
-      "rank": 191,
+      "rank": 192,
       "ref": "@kody-w/git_warehouse_agent",
       "title": "Git Warehouse",
       "description": "Builds a queryable git-tracked warehouse from any repo's data by running a shaper script, committing on change, and emitting the Datasette command.",
@@ -11866,74 +11938,6 @@
         "added 44 days ago",
         "205 lines",
         "has a rendered card"
-      ]
-    },
-    {
-      "rank": 192,
-      "ref": "@cat-agent-skills/what_to_use_when",
-      "title": "What to Use When",
-      "description": "Routes single-output requests to the best-fit included Microsoft 365 Copilot 1p agents and reserves Cowork for long-running or multi-output work.",
-      "origin": "aggregated",
-      "category": "skill",
-      "tags": [
-        "productivity",
-        "automation",
-        "copilot",
-        "routing"
-      ],
-      "audience": null,
-      "url": "https://microsoft.github.io/cat-agent-skills/#what-to-use-when",
-      "install": null,
-      "source": {
-        "id": "cat-agent-skills",
-        "display_name": "CAT Agent Skills",
-        "home_url": "https://microsoft.github.io/cat-agent-skills/",
-        "license": "unverified"
-      },
-      "score": 19.6,
-      "origin_rank": 3,
-      "origin_size": 3,
-      "components": {
-        "depth": 0.1125,
-        "freshness": 0.6078,
-        "reach": 0.0
-      },
-      "scores_on": [
-        "depth",
-        "freshness",
-        "reach"
-      ],
-      "scored_at_median": [
-        "freshness"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": null,
-          "age_days": null,
-          "lines": null,
-          "has_card": false
-        },
-        "source": {
-          "id": "cat-agent-skills",
-          "downloads": 0,
-          "rating": null,
-          "featured": false,
-          "has_bundle": false,
-          "author": "Gaurav Mahajan",
-          "entry_chars": 145,
-          "published_age_days": null
-        }
-      },
-      "why": [
-        "no downloads reported by the source",
-        "no publish date at the source - scored at the population median",
-        "145 characters of catalog description"
       ]
     },
     {
@@ -13486,6 +13490,74 @@
     },
     {
       "rank": 216,
+      "ref": "@cat-agent-skills/what_to_use_when",
+      "title": "What to Use When",
+      "description": "Routes single-output requests to the best-fit included Microsoft 365 Copilot 1p agents and reserves Cowork for long-running or multi-output work.",
+      "origin": "aggregated",
+      "category": "skill",
+      "tags": [
+        "productivity",
+        "automation",
+        "copilot",
+        "routing"
+      ],
+      "audience": null,
+      "url": "https://microsoft.github.io/cat-agent-skills/#what-to-use-when",
+      "install": null,
+      "source": {
+        "id": "cat-agent-skills",
+        "display_name": "CAT Agent Skills",
+        "home_url": "https://microsoft.github.io/cat-agent-skills/",
+        "license": "unverified"
+      },
+      "score": 19.6,
+      "origin_rank": 4,
+      "origin_size": 4,
+      "components": {
+        "depth": 0.1125,
+        "freshness": 0.6078,
+        "reach": 0.0
+      },
+      "scores_on": [
+        "depth",
+        "freshness",
+        "reach"
+      ],
+      "scored_at_median": [
+        "freshness"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": null,
+          "age_days": null,
+          "lines": null,
+          "has_card": false
+        },
+        "source": {
+          "id": "cat-agent-skills",
+          "downloads": 0,
+          "rating": null,
+          "featured": false,
+          "has_bundle": false,
+          "author": "Gaurav Mahajan",
+          "entry_chars": 145,
+          "published_age_days": null
+        }
+      },
+      "why": [
+        "no downloads reported by the source",
+        "no publish date at the source - scored at the population median",
+        "145 characters of catalog description"
+      ]
+    },
+    {
+      "rank": 217,
       "ref": "@cat-agent-skills/b2b_outreach_suite",
       "title": "B2B Outreach Suite",
       "description": "A six-playbook toolkit for agentic B2B sales outreach: prospect research briefings, cold emails, LinkedIn/social DMs, follow-up cadences, ad copywriting, and objection handling. Configurable via a company profile template, works for any industry, market, and language.",
@@ -13563,7 +13635,7 @@
       ]
     },
     {
-      "rank": 217,
+      "rank": 218,
       "ref": "@cat-agent-skills/blog_content_auditor",
       "title": "Blog Content Auditor",
       "description": "Audit blog posts or a blog library for clarity, structure, evidence, audience fit, and improvement priority.",
@@ -13641,7 +13713,7 @@
       ]
     },
     {
-      "rank": 218,
+      "rank": 219,
       "ref": "@cat-agent-skills/blog_post_structure_pass",
       "title": "Blog Post Structure Pass",
       "description": "Restructure draft or existing blog posts into a stronger narrative without inventing new claims.",
@@ -13719,7 +13791,7 @@
       ]
     },
     {
-      "rank": 219,
+      "rank": 220,
       "ref": "@cat-agent-skills/brand_template_enforcer",
       "title": "Brand Template Enforcer",
       "description": "Ensure every generated PowerPoint deck or Word document starts from the correct bundled or SharePoint-hosted brand template.",
@@ -13797,7 +13869,7 @@
       ]
     },
     {
-      "rank": 220,
+      "rank": 221,
       "ref": "@cat-agent-skills/brand_voice_pass",
       "title": "Brand Voice Pass",
       "description": "Rewrite drafts into a configurable house style, preserving meaning while removing generic AI phrasing.",
@@ -13874,7 +13946,7 @@
       ]
     },
     {
-      "rank": 221,
+      "rank": 222,
       "ref": "@cat-agent-skills/business_os",
       "title": "Business OS",
       "description": "A practical operating system for Copilot Studio that gives agents a consistent way to clarify outcomes, choose the right approach, solve problems, make decisions, plan projects, improve processes, handle incidents, and turn repeatable work into reusable skills. Unlike a standard Copilot experience that relies mainly on the prompt and available context, Business OS adds a structured way of working…",
@@ -13953,7 +14025,7 @@
       ]
     },
     {
-      "rank": 222,
+      "rank": 223,
       "ref": "@cat-agent-skills/call_for_speakers_digest",
       "title": "Call for Speakers Digest",
       "description": "Weekly HTML email digest of open conference Call for Speakers (CFP) opportunities matching your topics of interest. Pulls from confs.tech, Papercall, AdatoSystems' CFP tracker, CFP Radar, Sessionize's public user-groups directory, community-specific hubs (like communitydays.org for the Microsoft ecosystem), targeted search of standalone Sessionize conferences and run.events, and general web searc…",
@@ -14029,7 +14101,7 @@
       ]
     },
     {
-      "rank": 223,
+      "rank": 224,
       "ref": "@cat-agent-skills/campaign_deck_builder",
       "title": "Campaign Deck Builder",
       "description": "Turn a short interview into a charming, vibrant 3-slide marketing-campaign deck by filling a bundled PowerPoint template.",
@@ -14106,7 +14178,7 @@
       ]
     },
     {
-      "rank": 224,
+      "rank": 225,
       "ref": "@cat-agent-skills/chart_builder",
       "title": "Chart Builder",
       "description": "Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call.",
@@ -14182,7 +14254,7 @@
       ]
     },
     {
-      "rank": 225,
+      "rank": 226,
       "ref": "@cat-agent-skills/classic_text_adventure",
       "title": "Classic Text Adventure",
       "description": "Play a deterministic, resumable Colossal Cave adventure with exact game output and built-in diagnostics.",
@@ -14257,7 +14329,7 @@
       ]
     },
     {
-      "rank": 226,
+      "rank": 227,
       "ref": "@cat-agent-skills/clt_hr_assistant",
       "title": "Assistente CLT para RH",
       "description": "Assistente de legislação trabalhista brasileira (CLT) para equipes de RH e Departamento Pessoal. Responde dúvidas sobre férias, 13º salário, aviso prévio, jornada e tipos de rescisão, e calcula verbas rescisórias com memória de cálculo completa usando as tabelas oficiais vigentes de 2026 (salário mínimo, INSS e IRRF, incluindo a Lei 15.270/2025).",
@@ -14337,7 +14409,7 @@
       ]
     },
     {
-      "rank": 227,
+      "rank": 228,
       "ref": "@cat-agent-skills/commenting_content",
       "title": "Commenting Content",
       "description": "Comments Word or PowerPoint files with Comments.",
@@ -14411,7 +14483,7 @@
       ]
     },
     {
-      "rank": 228,
+      "rank": 229,
       "ref": "@cat-agent-skills/competitive_battlecard_builder",
       "title": "Competitive Battlecard Builder",
       "description": "Build an interactive comparison app, either a sales battlecard advocating for your product against named competitors, or a neutral, unbiased comparison across two or more peer items with no side taken. Filterable by item and category, with live search, a compact scorecard, and copy-to-clipboard talking points. Every claim is tagged verified or unverified so nothing invented ends up in front of a…",
@@ -14486,7 +14558,7 @@
       ]
     },
     {
-      "rank": 229,
+      "rank": 230,
       "ref": "@cat-agent-skills/conditional_chat_reminder",
       "title": "Conditional Chat Reminder",
       "description": "Schedule a Teams reminder that sends only when the expected person has not already posted a relevant update.",
@@ -14563,7 +14635,7 @@
       ]
     },
     {
-      "rank": 230,
+      "rank": 231,
       "ref": "@cat-agent-skills/conference_session_abstract_pack",
       "title": "Conference Session Abstract Pack",
       "description": "Create CFP-ready talk titles, abstracts, takeaways, speaker notes, and submission copy from a topic.",
@@ -14641,7 +14713,7 @@
       ]
     },
     {
-      "rank": 231,
+      "rank": 232,
       "ref": "@cat-agent-skills/content_quality_auditor",
       "title": "Content Quality Auditor",
       "description": "Score documents, pages, posts, or artefact libraries against a configurable quality rubric and recommend fixes.",
@@ -14719,7 +14791,7 @@
       ]
     },
     {
-      "rank": 232,
+      "rank": 233,
       "ref": "@cat-agent-skills/copilot_agents_news_scout",
       "title": "Copilot & Agents News Scout",
       "description": "A Monday-morning Scout automation that scans authoritative Microsoft sources for the past week's Copilot, Copilot Studio, and agent news and posts a concise, linked digest to Teams.",
@@ -14798,7 +14870,7 @@
       ]
     },
     {
-      "rank": 233,
+      "rank": 234,
       "ref": "@cat-agent-skills/copilot_studio_test_planner",
       "title": "Copilot Studio Test Planner",
       "description": "Reads an exported Copilot Studio agent and generates a graded, runnable test suite (happy-path, paraphrase, disambiguation, negative, knowledge-grounding, multilingual, and safety cases) plus a regression set, ready to run in the free Copilot Studio test panel.",
@@ -14874,7 +14946,7 @@
       ]
     },
     {
-      "rank": 234,
+      "rank": 235,
       "ref": "@cat-agent-skills/copilot_studio_topic_blueprint",
       "title": "Copilot Studio Topic Blueprint",
       "description": "Turn a one-line use case into a build-ready Microsoft Copilot Studio agent blueprint: recommended agent type and orchestration, topics, tools, knowledge, variables, a welcome Adaptive Card, security and Copilot Credits notes, and a first test plan.",
@@ -14953,7 +15025,7 @@
       ]
     },
     {
-      "rank": 235,
+      "rank": 236,
       "ref": "@cat-agent-skills/doc_format_converter",
       "title": "Universal Document Converter",
       "description": "Convert documents between Markdown, HTML, PDF, Word, PowerPoint, Excel/CSV and text — fully offline, using only the libraries already in the agent sandbox.",
@@ -15031,7 +15103,7 @@
       ]
     },
     {
-      "rank": 236,
+      "rank": 237,
       "ref": "@cat-agent-skills/enterprise_agent_design_authority",
       "title": "Enterprise Agent Design Authority (EADA)",
       "description": "An enterprise design review framework that helps architects build secure, scalable, governable, and production-ready Microsoft Copilot Studio agents.",
@@ -15109,7 +15181,7 @@
       ]
     },
     {
-      "rank": 237,
+      "rank": 238,
       "ref": "@cat-agent-skills/eu_greenwashing_analysis",
       "title": "EU Greenwashing Analysis",
       "description": "Detect greenwashing in product descriptions, marketing copy, and catalog entries against EU Directive 2024/825 and the Green Claims Directive. Returns a structured per-claim findings report with risk levels, regulation references, and recommended corrections.",
@@ -15187,7 +15259,7 @@
       ]
     },
     {
-      "rank": 238,
+      "rank": 239,
       "ref": "@cat-agent-skills/exam_prep_learning_plan_builder",
       "title": "Exam Prep Learning Plan Builder",
       "description": "Build a personalized study plan app for an exam or certification: overview timeline, day-by-day schedule with a calendar picker, domain breakdown, one-click .ics download, and a notes tab to track confidence over time.",
@@ -15262,7 +15334,7 @@
       ]
     },
     {
-      "rank": 239,
+      "rank": 240,
       "ref": "@cat-agent-skills/gantt_chart_generator",
       "title": "Gantt Chart Builder",
       "description": "Generate clean, consistently-styled matplotlib Gantt charts from a schedule CSV or DataFrame — with group colours, completion overlays, and a today line.",
@@ -15340,7 +15412,7 @@
       ]
     },
     {
-      "rank": 240,
+      "rank": 241,
       "ref": "@cat-agent-skills/generating_podcast_script",
       "title": "Podcast Script Generator",
       "description": "Turn a topic or a pile of source material — a newsletter, news digest, or set of articles — into a two-host, NotebookLM-style podcast episode, with multi-voice SSML and optional Azure Text-to-Speech audio.",
@@ -15418,7 +15490,7 @@
       ]
     },
     {
-      "rank": 241,
+      "rank": 242,
       "ref": "@cat-agent-skills/global_greenwashing_claim_auditor",
       "title": "Global Greenwashing Claim Auditor",
       "description": "Audit environmental claims in CSV, XLSX, DOCX, PPTX, conversational text, and public websites with separate ANY, CA, EU, and UK findings.",
@@ -15498,7 +15570,7 @@
       ]
     },
     {
-      "rank": 242,
+      "rank": 243,
       "ref": "@cat-agent-skills/grab_my_files",
       "title": "Grab My Files",
       "description": "One-tap way to bundle every file your Copilot Studio agent produced in a session into a single timestamped .zip and hand it back as a download.",
@@ -15575,7 +15647,7 @@
       ]
     },
     {
-      "rank": 243,
+      "rank": 244,
       "ref": "@cat-agent-skills/idea_refiner",
       "title": "Idea Refiner",
       "description": "Refines an existing plan, decision, or draft through relentless, branch-by-branch questioning. Grouped in batches of 2-5 with recommended answers, pulling facts from Work IQ where possible, until every part has been fully thought through.",
@@ -15652,7 +15724,7 @@
       ]
     },
     {
-      "rank": 244,
+      "rank": 245,
       "ref": "@cat-agent-skills/institutional_knowledge",
       "title": "Institutional Knowledge Archivist",
       "description": "Preserve a departing senior leader's institutional knowledge — decisions, rationale, relationships, and tribal knowledge — by mining their M365 signals into a structured, multi-phase archive a successor can ground on.",
@@ -15731,7 +15803,7 @@
       ]
     },
     {
-      "rank": 245,
+      "rank": 246,
       "ref": "@cat-agent-skills/iterative_file_editing",
       "title": "Iterative File Editing",
       "description": "In Copilot Studio, re-sending an edited file under the same name fails to deliver it — the change is made but never reaches the user. This skill gives each iteration a new version-numbered filename (report_v1.docx, report_v2.docx…) so every update actually lands in the chat as its own attachment.",
@@ -15808,7 +15880,7 @@
       ]
     },
     {
-      "rank": 246,
+      "rank": 247,
       "ref": "@cat-agent-skills/knowledge_corpus_curator",
       "title": "Knowledge Corpus Curator",
       "description": "Review uploaded knowledge-source files for duplication, redundancy, staleness, overlap, and potentially conflicting guidance, then produce an evidence-based curation backlog.",
@@ -15887,7 +15959,7 @@
       ]
     },
     {
-      "rank": 247,
+      "rank": 248,
       "ref": "@cat-agent-skills/knowledge_source_router",
       "title": "Knowledge Source Router",
       "description": "Route Copilot Studio knowledge searches to the right region-specific source (Americas, EMEA, APAC, or Global) based on where the user is, so answers stay locally accurate.",
@@ -15964,7 +16036,7 @@
       ]
     },
     {
-      "rank": 248,
+      "rank": 249,
       "ref": "@cat-agent-skills/lab_column_mapper",
       "title": "Lab Column Mapper",
       "description": "When a health system's lab results ingestion pipeline hits an unknown column header, this skill semantically matches the source column against the canonical clinical schema (LOINC-anchored), scoped by lab and clinical domain, and writes a suggested mapping to a Dataverse review queue for a clinical informatics steward to approve.",
@@ -16044,7 +16116,7 @@
       ]
     },
     {
-      "rank": 249,
+      "rank": 250,
       "ref": "@cat-agent-skills/linkedin_content_system",
       "title": "LinkedIn Content System",
       "description": "Create evidence-led LinkedIn posts, promos, newsletter intros, and long-form copy from supplied facts or drafts.",
@@ -16121,7 +16193,7 @@
       ]
     },
     {
-      "rank": 250,
+      "rank": 251,
       "ref": "@cat-agent-skills/linkedin_content_writer",
       "title": "LinkedIn Content Writer",
       "description": "Create credible LinkedIn content from facts, notes or drafts, with configurable voice and no invented evidence.",
@@ -16197,7 +16269,7 @@
       ]
     },
     {
-      "rank": 251,
+      "rank": 252,
       "ref": "@cat-agent-skills/lookup_dataverse_table",
       "title": "Dataverse Table Lookup",
       "description": "Search any Microsoft Dataverse table, browse matching records, and drill into full record details — sourced live via the Dataverse MCP Server.",
@@ -16274,7 +16346,7 @@
       ]
     },
     {
-      "rank": 252,
+      "rank": 253,
       "ref": "@cat-agent-skills/mct_excellence_iq",
       "title": "MCT Excellence IQ",
       "description": "An AI-powered Instructional Intelligence Skill that helps Microsoft Certified Trainers design, deliver, assess, localize, and continuously improve world-class Microsoft learning experiences across Azure, Business Applications, Data & AI, Modern Work, and Security.",
@@ -16354,7 +16426,7 @@
       ]
     },
     {
-      "rank": 253,
+      "rank": 254,
       "ref": "@cat-agent-skills/meeting_analyzer",
       "title": "Meeting Analyzer",
       "description": "Analyzes meeting content pasted as text or provided as audio/video transcripts. Delivers a structured intelligence report: explicit decisions and action items, participant persona profiles, and — most importantly — hidden insights: unspoken tensions, implicit risks, unresolved topics, and signals that were not made explicit during the meeting but are critical to the context.",
@@ -16433,7 +16505,7 @@
       ]
     },
     {
-      "rank": 254,
+      "rank": 255,
       "ref": "@cat-agent-skills/microsoft_ai_platform_advisor",
       "title": "Microsoft AI Platform Advisor",
       "description": "Guides a customer through a discovery interview, recommends the right Microsoft AI platform (M365 Copilot, Agent Builder, Copilot Studio, Foundry, Foundry Agent Service, Windows AI Foundry, or Agent 365 as the governance layer), scores technical complexity and risk, and plots them on a 2x2 quadrant chart with planning guidance.",
@@ -16513,7 +16585,7 @@
       ]
     },
     {
-      "rank": 255,
+      "rank": 256,
       "ref": "@cat-agent-skills/own_voice_builder",
       "title": "Own Voice Builder",
       "description": "Mines your sent emails to extract your real writing voice — languages, tone modes, structure, vocabulary, taboo phrases — and generates a personal voice skill that makes every email and Teams draft sound like you.",
@@ -16591,7 +16663,7 @@
       ]
     },
     {
-      "rank": 256,
+      "rank": 257,
       "ref": "@cat-agent-skills/pattern_radar",
       "title": "Pattern Radar",
       "description": "Scans your recent Microsoft 365 signals to surface recurring patterns worth productizing — things you keep explaining (blog candidates) or multi-step tasks you keep doing by hand (automation candidates).",
@@ -16669,7 +16741,7 @@
       ]
     },
     {
-      "rank": 257,
+      "rank": 258,
       "ref": "@cat-agent-skills/pattern_radar_automation",
       "title": "Pattern Radar (Scheduled)",
       "description": "Twice a week, scans your recent Microsoft 365 signals and posts a Teams summary of recurring patterns worth productizing — things you keep explaining (blog candidates) and multi-step tasks you keep doing by hand (automation candidates). Read-only and privacy-aware.",
@@ -16747,7 +16819,7 @@
       ]
     },
     {
-      "rank": 258,
+      "rank": 259,
       "ref": "@cat-agent-skills/pdf_table_data_conversion",
       "title": "PDF Table Data Conversion",
       "description": "Extract tables from a PDF document (e.g. contract rebate or pricing schedules) and convert them into a clean, workable Excel spreadsheet or CSV.",
@@ -16826,7 +16898,7 @@
       ]
     },
     {
-      "rank": 259,
+      "rank": 260,
       "ref": "@cat-agent-skills/persona_reaction_panel",
       "title": "Persona Reaction Panel",
       "description": "Pre-test an internal launch, comms, or enablement artefact against your own role-based personas before it ships — surfaces blackspots, domain gaps, credible-detractor risks, and concrete edits. Bring your own personas file.",
@@ -16903,7 +16975,7 @@
       ]
     },
     {
-      "rank": 260,
+      "rank": 261,
       "ref": "@cat-agent-skills/phi_deidentifier",
       "title": "PHI De-identifier",
       "description": "Redact the 18 HIPAA Safe Harbor identifiers from clinical text (or produce a Limited Data Set) with consistent pseudonym tokens and an audit manifest of what was removed.",
@@ -16983,7 +17055,7 @@
       ]
     },
     {
-      "rank": 261,
+      "rank": 262,
       "ref": "@cat-agent-skills/pov_line_generator",
       "title": "POV Line Generator",
       "description": "Generate sharp, specific point-of-view lines for posts, slides, talks, campaigns, or positioning work.",
@@ -17060,7 +17132,7 @@
       ]
     },
     {
-      "rank": 262,
+      "rank": 263,
       "ref": "@cat-agent-skills/power_automate_desktop_assessment",
       "title": "Power Automate Desktop Assessment",
       "description": "Assess Power Automate Desktop and hybrid automation projects with evidence-based findings and prioritized remediation guidance.",
@@ -17137,7 +17209,7 @@
       ]
     },
     {
-      "rank": 263,
+      "rank": 264,
       "ref": "@cat-agent-skills/power_automate_documentation",
       "title": "Power Automate Documentation",
       "description": "Turns a Power Automate solution .zip into a clean markdown reference for every flow inside it: trigger, plain-English process, connection references, and a read/write/delete table for everything it touches. Maps which flows call each other and unresolved connections automatically.",
@@ -17213,7 +17285,7 @@
       ]
     },
     {
-      "rank": 264,
+      "rank": 265,
       "ref": "@cat-agent-skills/power_bi_model_review",
       "title": "Power BI Model Review",
       "description": "Review a Power BI or Analysis Services semantic model (TMDL, BIM/JSON, or a pasted table/measure list) for relationship, DAX, date-handling, and naming issues, with corrected DAX for anything flagged.",
@@ -17291,7 +17363,7 @@
       ]
     },
     {
-      "rank": 265,
+      "rank": 266,
       "ref": "@cat-agent-skills/powerpoint_deck_designer",
       "title": "PowerPoint Deck Designer",
       "description": "Creates polished PowerPoint decks from a JSON specification using python-pptx. Designed as a Copilot Studio Skill that runs natively inside the agent's Python container (no Azure Function or custom connector required). Supports 8 layouts plus native charts (bar, column, line, pie, donut with stacked / 100% stacked variants).",
@@ -17367,7 +17439,7 @@
       ]
     },
     {
-      "rank": 266,
+      "rank": 267,
       "ref": "@cat-agent-skills/presentation_talk_track_builder",
       "title": "Presentation Talk Track Builder",
       "description": "Writes natural, first-person spoken presenter scripts for the slides in a deck. Treats existing speaker notes as authoritative when they contradict slide text. Calibrates length to a target duration and speaking pace and returns a timing table. Never modifies visible slide content.",
@@ -17444,7 +17516,7 @@
       ]
     },
     {
-      "rank": 267,
+      "rank": 268,
       "ref": "@cat-agent-skills/process_sop_architect",
       "title": "Process & SOP Architect",
       "description": "Turn process notes and transcripts into an editable SOP, process map, RACI, control register, improvement backlog, and polished PowerPoint briefing.",
@@ -17521,7 +17593,7 @@
       ]
     },
     {
-      "rank": 268,
+      "rank": 269,
       "ref": "@cat-agent-skills/redlining_content",
       "title": "Redlining Content",
       "description": "Redlines a document based on changes from a template with Track Changes.",
@@ -17595,7 +17667,7 @@
       ]
     },
     {
-      "rank": 269,
+      "rank": 270,
       "ref": "@cat-agent-skills/regulation_monitor",
       "title": "Regulation Monitor",
       "description": "Configure once, then on a schedule sweeps a locked list of authoritative sources (auto-discovered at setup, confirmed by the user) plus any user-supplied seeds. Classifies each item, flags items relevant to the user's team using a light WorkIQ-derived profile, and renders a self-contained HTML dashboard. A tightly-bounded fallback web search is used only when a locked source is silent in the wind…",
@@ -17672,7 +17744,7 @@
       ]
     },
     {
-      "rank": 270,
+      "rank": 271,
       "ref": "@cat-agent-skills/rich_html_presentation",
       "title": "Rich HTML Presentation",
       "description": "Create polished, self-contained HTML slide decks with keynote-style visuals, keyboard navigation, themes, animations, and reusable presentation components.",
@@ -17749,7 +17821,7 @@
       ]
     },
     {
-      "rank": 271,
+      "rank": 272,
       "ref": "@cat-agent-skills/scrollytelling_data",
       "title": "Scrollytelling Data",
       "description": "Turns data into a scroll-driven HTML story.",
@@ -17825,7 +17897,7 @@
       ]
     },
     {
-      "rank": 272,
+      "rank": 273,
       "ref": "@cat-agent-skills/sharepoint_list_formatter",
       "title": "SharePoint List Formatter",
       "description": "Turns any SharePoint list data into a clean, consistent markdown table. Dynamic columns based on list type and query, plus a one-click Open link for every row.",
@@ -17902,7 +17974,7 @@
       ]
     },
     {
-      "rank": 273,
+      "rank": 274,
       "ref": "@cat-agent-skills/sharepoint_list_insight_report_generator",
       "title": "SharePoint List Insight Report Generator",
       "description": "Automatically discovers and validates a SharePoint list within a connected knowledge source, analyzes its structure and data, identifies key business insights, and generates a downloadable interactive HTML report. The report includes dynamic filters, interactive charts, sortable and searchable tables with pagination, detailed record drill-down through modal popups, and direct links to open items…",
@@ -17979,7 +18051,7 @@
       ]
     },
     {
-      "rank": 274,
+      "rank": 275,
       "ref": "@cat-agent-skills/skill_authoring_coach",
       "title": "Skill Authoring Coach",
       "description": "Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.",
@@ -18056,7 +18128,7 @@
       ]
     },
     {
-      "rank": 275,
+      "rank": 276,
       "ref": "@cat-agent-skills/spend_more_time_with_friends_and_family",
       "title": "Spend More Time With Friends & Family",
       "description": "While you're out of office, watches a group chat and answers questions from your local knowledge docs (clearly marked AI-generated), logs anything it can't answer for later, and pings you on Teams if its setup is incomplete.",
@@ -18132,7 +18204,7 @@
       ]
     },
     {
-      "rank": 276,
+      "rank": 277,
       "ref": "@cat-agent-skills/style_analyzer",
       "title": "Communication Style Analyzer",
       "description": "Analyzes your Teams chats and emails to build a reusable profile of your writing voice — greetings, tone, length, punctuation, sign-offs, common phrases, and quirks — and saves it to memory for other assistants to use.",
@@ -18210,7 +18282,7 @@
       ]
     },
     {
-      "rank": 277,
+      "rank": 278,
       "ref": "@cat-agent-skills/tool_tracer",
       "title": "Tool Tracer",
       "description": "On-demand tool/action trace for Copilot Studio runs (`/special-debug tool-trace` → `tool_trace.json`).",
@@ -18289,7 +18361,7 @@
       ]
     },
     {
-      "rank": 278,
+      "rank": 279,
       "ref": "@cat-agent-skills/vacation_urgent_forwarder",
       "title": "Vacation Urgent Forwarder",
       "description": "A Scout automation installer that, only during a configured vacation window, scans work email and Teams and forwards genuinely urgent items to your personal email.",
@@ -18365,7 +18437,7 @@
       ]
     },
     {
-      "rank": 279,
+      "rank": 280,
       "ref": "@cat-agent-skills/vendor_contract_risk_review",
       "title": "Vendor Contract Risk Review",
       "description": "First-pass review of a vendor contract or SOW for the clauses that commonly cause problems (auto-renewal, liability caps, termination, IP ownership), flagged by risk level to prepare for legal review, not replace it.",
@@ -18443,7 +18515,7 @@
       ]
     },
     {
-      "rank": 280,
+      "rank": 281,
       "ref": "@cat-agent-skills/whiteboard_to_infographic",
       "title": "Whiteboard to Infographic",
       "description": "Turn a photo of a hand-drawn whiteboard or process sketch into a polished, client-ready infographic slide (.pptx), generated natively in the agent's Python container.",
@@ -18522,7 +18594,7 @@
       ]
     },
     {
-      "rank": 281,
+      "rank": 282,
       "ref": "@cat-agent-skills/wikipedia_human_style_writing",
       "title": "Wikipedia Human Style Writing",
       "description": "Rewrite or draft prose so it avoids the tell-tale signs of AI writing, using Wikipedia's 'Signs of AI writing' field guide.",
@@ -18601,7 +18673,7 @@
       ]
     },
     {
-      "rank": 282,
+      "rank": 283,
       "ref": "@cat-agent-skills/work_brief",
       "title": "Work Brief",
       "description": "A morning brief that reads your mail, calendar, and Teams, then tells you what you owe people before the week starts.",
@@ -18680,7 +18752,7 @@
       ]
     },
     {
-      "rank": 283,
+      "rank": 284,
       "ref": "@kody-w/example_private",
       "title": "ExamplePrivate",
       "description": "Demonstrates the RAR private-agent stub layer — metadata only, with source resolved from a private GitHub repo at install time.",
@@ -18740,7 +18812,7 @@
       ]
     },
     {
-      "rank": 284,
+      "rank": 285,
       "ref": "@kody-w/legal_helper",
       "title": "LegalHelper",
       "description": "Maps the IP boundary between Wildhaven and Microsoft product lines as structural strategy, never legal advice; gated stub for a private agent.",
@@ -18803,7 +18875,7 @@
       ]
     },
     {
-      "rank": 285,
+      "rank": 286,
       "ref": "@kody-w/wp_publish",
       "title": "WordPress Publish",
       "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored.",
