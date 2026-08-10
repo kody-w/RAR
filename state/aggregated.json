@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 80,
+      "item_count": 81,
       "source_downloads": 1258
     }
   ],
@@ -128,7 +128,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#agent-harness-explorer",
       "source_signal": {
         "downloads": 142,
-        "rating": 4,
+        "rating": 5,
         "featured": true
       }
     },
@@ -795,6 +795,37 @@
       "created_at": "2026-08-04T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-harness-picker",
+      "source_signal": {
+        "downloads": 0,
+        "rating": 1
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/copilot_studio_knowledge_readiness",
+      "source_id": "cat-agent-skills",
+      "source_slug": "copilot-studio-knowledge-readiness",
+      "name": "Copilot Studio Knowledge Readiness",
+      "description": "Assess whether an uploaded or exported document set is ready to power a Copilot Studio agent. Produces a corpus-based readiness score, prioritized cleanup backlog, chunking and metadata guidance, and a test-prompt suite, while calling out any evidence gaps that require live system review.",
+      "kind": "skill",
+      "tags": [
+        "copilot-studio",
+        "knowledge",
+        "rag",
+        "sharepoint",
+        "dataverse",
+        "governance",
+        "readiness",
+        "assessment"
+      ],
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "author": "Jay Padimiti",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": "2026-06-22T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-knowledge-readiness",
       "source_signal": {
         "downloads": 0
       }
@@ -2104,7 +2135,8 @@
       "has_bundle": false,
       "url": "https://microsoft.github.io/cat-agent-skills/#stoic-negotiator",
       "source_signal": {
-        "downloads": 0
+        "downloads": 0,
+        "rating": 2
       }
     },
     {
@@ -2341,7 +2373,7 @@
   ],
   "totals": {
     "sources": 1,
-    "items": 80,
+    "items": 81,
     "source_downloads": 1258
   }
 }
