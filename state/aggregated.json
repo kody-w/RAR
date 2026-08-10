@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 82,
+      "item_count": 85,
       "source_downloads": 1258
     }
   ],
@@ -368,6 +368,35 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/booth_loop_video",
+      "source_id": "cat-agent-skills",
+      "source_slug": "booth-loop-video",
+      "name": "Booth Loop Video",
+      "description": "Generate a silent, looping 1920x1080 MP4 for a conference booth, kiosk, or lobby screen \u2014 rendered frame-by-frame in Python (Pillow + ffmpeg), with previews before the full render.",
+      "kind": "skill",
+      "tags": [
+        "video",
+        "animation",
+        "python",
+        "marketing",
+        "events",
+        "design",
+        "ffmpeg"
+      ],
+      "platforms": [
+        "Scout"
+      ],
+      "author": "Al Macey",
+      "author_github": "amacey-msft",
+      "version": "1.0.0",
+      "created_at": "2026-08-04T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#booth-loop-video",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/brand_template_enforcer",
       "source_id": "cat-agent-skills",
       "source_slug": "brand-template-enforcer",
@@ -421,6 +450,35 @@
       "created_at": "2026-07-17T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#brand-voice-pass",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/browser_uat_analyst",
+      "source_id": "cat-agent-skills",
+      "source_slug": "browser-uat-analyst",
+      "name": "Browser UAT Analyst",
+      "description": "Run evidence-driven UAT on any browser-based app \u2014 Copilot Studio, Power Platform, Dataverse, Dynamics 365, admin centres, or a custom web app \u2014 with Playwright execution, a screenshot evidence ledger, and failure classification that separates product defects from tenant config.",
+      "kind": "skill",
+      "tags": [
+        "testing",
+        "uat",
+        "playwright",
+        "quality",
+        "copilot-studio",
+        "power-platform",
+        "automation"
+      ],
+      "platforms": [
+        "Scout"
+      ],
+      "author": "Al Macey",
+      "author_github": "amacey-msft",
+      "version": "1.0.0",
+      "created_at": "2026-08-04T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#browser-uat-analyst",
       "source_signal": {
         "downloads": 0
       }
@@ -2226,6 +2284,34 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/travel_cost_estimator",
+      "source_id": "cat-agent-skills",
+      "source_slug": "travel-cost-estimator",
+      "name": "Travel Cost Estimator",
+      "description": "Price a business trip from live fares in your corporate booking tool, benchmark the non-bookable lines against your own approved expense reports, and produce an estimate a manager can approve \u2014 with a hard guardrail that never enters the booking funnel.",
+      "kind": "skill",
+      "tags": [
+        "travel",
+        "expenses",
+        "browser-automation",
+        "playwright",
+        "finance",
+        "productivity"
+      ],
+      "platforms": [
+        "Scout"
+      ],
+      "author": "Al Macey",
+      "author_github": "amacey-msft",
+      "version": "1.0.0",
+      "created_at": "2026-08-04T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#travel-cost-estimator",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/vacation_urgent_forwarder",
       "source_id": "cat-agent-skills",
       "source_slug": "vacation-urgent-forwarder",
@@ -2401,7 +2487,7 @@
   ],
   "totals": {
     "sources": 1,
-    "items": 82,
+    "items": 85,
     "source_downloads": 1258
   }
 }
