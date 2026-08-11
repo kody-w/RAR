@@ -49,7 +49,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_parity_deploy",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Copilot Studio Parity Deploy",
     "description": (
         "Compiles caller-selected local RAPP agents into a provisioned, "
@@ -4304,9 +4304,22 @@ def _edge_javascript(
     source: str,
     timeout: int = 60,
     target_fragment: str | None = None,
+    target_window_id: int | None = None,
+    target_tab_id: int | None = None,
 ) -> str:
     escaped = source.replace("\\", "\\\\").replace('"', '\\"')
-    if target_fragment:
+    if target_window_id is not None and target_tab_id is not None:
+        applescript = (
+            'tell application "Microsoft Edge" to execute '
+            f'tab id {int(target_tab_id)} of window id {int(target_window_id)} '
+            f'javascript "{escaped}"'
+        )
+    elif target_window_id is not None:
+        applescript = (
+            'tell application "Microsoft Edge" to execute active tab '
+            f'of window id {int(target_window_id)} javascript "{escaped}"'
+        )
+    elif target_fragment:
         escaped_fragment = target_fragment.replace("\\", "\\\\").replace(
             '"',
             '\\"',
@@ -4358,7 +4371,7 @@ def _active_pac_user() -> str | None:
     return match.group(1).strip() if match else None
 
 
-def _run_draft_edge_case(
+def _run_draft_edge_case_once(
     project: Path,
     prompt: str,
 ) -> dict:
@@ -4373,34 +4386,29 @@ def _run_draft_edge_case(
         "https://copilotstudio.microsoft.com/environments/"
         f"{environment}/agents/{agent_id}"
     )
-    target_fragment = f"/environments/{environment}/agents/{agent_id}"
     navigation = (
         'tell application "Microsoft Edge"\n'
         "  activate\n"
         "  if (count of windows) is 0 then make new window\n"
-        "  set targetTab to missing value\n"
-        "  set windowCount to count of windows\n"
-        "  repeat with windowIndex from 1 to windowCount\n"
-        "    set currentWindow to window windowIndex\n"
-        "    set tabCount to count of tabs of currentWindow\n"
-        "    repeat with tabIndex from 1 to tabCount\n"
-        "      set currentTab to tab tabIndex of currentWindow\n"
-        "      try\n"
-        "        if (URL of currentTab as text) contains "
-        f'"{target_fragment}" then set targetTab to currentTab\n'
-        "      end try\n"
-        "    end repeat\n"
-        "  end repeat\n"
-        "  if targetTab is missing value then\n"
-        "    tell front window to set targetTab to make new tab with "
+        "  set targetWindow to front window\n"
+        "  tell targetWindow to set targetTab to make new tab with "
         f'properties {{URL:"{url}"}}\n'
-        "  else\n"
-        f'    set URL of targetTab to "{url}"\n'
-        "    reload targetTab\n"
-        "  end if\n"
+        "  return (id of targetWindow as text) & \",\" & "
+        "(id of targetTab as text)\n"
         "end tell"
     )
-    _run(["osascript", "-e", navigation], timeout=60)
+    navigation_result = _run(["osascript", "-e", navigation], timeout=60)
+    try:
+        window_value, tab_value = navigation_result.stdout.strip().split(
+            ",",
+            1,
+        )
+        target_window_id = int(window_value)
+        target_tab_id = int(tab_value)
+    except (TypeError, ValueError) as error:
+        raise RuntimeError(
+            "Edge did not return the dedicated Preview tab identity"
+        ) from error
     time.sleep(10)
     account = os.getenv("RAPP_STUDIO_EDGE_ACCOUNT") or _active_pac_user()
     if account:
@@ -4409,13 +4417,15 @@ def _run_draft_edge_case(
             "const choice=[...document.querySelectorAll('[role=button]')]"
             f".find(e=>e.innerText.includes({json.dumps(account)}));"
             "if(choice) choice.click(); return !!choice;})()",
-            target_fragment=target_fragment,
+            target_window_id=target_window_id,
+            target_tab_id=target_tab_id,
         )
         time.sleep(8)
     loaded_url = json.loads(
         _edge_javascript(
             "JSON.stringify(window.location.href)",
-            target_fragment=target_fragment,
+            target_window_id=target_window_id,
+            target_tab_id=target_tab_id,
         )
     )
     parsed_url = urllib.parse.urlparse(loaded_url)
@@ -4433,13 +4443,15 @@ def _run_draft_edge_case(
         "const b=[...document.querySelectorAll('button')]"
         ".find(e=>e.innerText.trim()==='Preview');"
         "if(b) b.click(); return !!b;})()",
-        target_fragment=target_fragment,
+        target_window_id=target_window_id,
+        target_tab_id=target_tab_id,
     )
     time.sleep(8)
     _edge_javascript(
         "document.querySelector(\"button[aria-label='New chat']\")?.click();"
         "'new'",
-        target_fragment=target_fragment,
+        target_window_id=target_window_id,
+        target_tab_id=target_tab_id,
     )
     time.sleep(4)
     _edge_javascript(
@@ -4455,7 +4467,8 @@ def _run_draft_edge_case(
         "const send=document.querySelector(\"button[aria-label='Send']\");"
         "if(!send || send.disabled) throw new Error('send unavailable');"
         "send.click(); return 'sent';})()",
-        target_fragment=target_fragment,
+        target_window_id=target_window_id,
+        target_tab_id=target_tab_id,
     )
     stable_text = None
     stable_count = 0
@@ -4492,7 +4505,8 @@ def _run_draft_edge_case(
             "last:answer?md(answer).trim():'',"
             "streaming:last?last.querySelector('[data-streaming=true]')"
             "!==null:false});})()",
-            target_fragment=target_fragment,
+            target_window_id=target_window_id,
+            target_tab_id=target_tab_id,
         )
         snapshot = json.loads(raw)
         complete = (
@@ -4520,6 +4534,39 @@ def _run_draft_edge_case(
         "loaded_url": loaded_url,
         "project_tree_sha256": _component_tree_digest(project)["sha256"],
     }
+
+
+def _run_draft_edge_case(
+    project: Path,
+    prompt: str,
+    retries: int = 0,
+) -> dict:
+    last_error = None
+    for attempt in range(retries + 1):
+        try:
+            return _run_draft_edge_case_once(project, prompt)
+        except (RuntimeError, subprocess.TimeoutExpired) as error:
+            last_error = error
+            retryable = isinstance(
+                error,
+                subprocess.TimeoutExpired,
+            ) or any(
+                marker in str(error)
+                for marker in (
+                    "Draft Preview did not settle",
+                    "chat input missing",
+                    "send unavailable",
+                    "target Copilot Studio tab not found",
+                    "Can't get window id",
+                    "Can\u2019t get window id",
+                    "Can't get tab id",
+                    "Can\u2019t get tab id",
+                )
+            )
+            if not retryable or attempt >= retries:
+                raise
+            time.sleep(5)
+    raise last_error
 
 
 def _read_result_artifact(run_dir: Path, relative: str):
@@ -4748,7 +4795,13 @@ def _run_parity_gate(
             raise ValueError(
                 f"unsupported studio_driver for {case_id}: {driver or '<empty>'}"
             )
-        studio_payload = _run_draft_edge_case(project, prompt)
+        analysis = contracts[selector].get("analysis") or {}
+        read_only_case = not analysis.get("side_effect_signals")
+        studio_payload = _run_draft_edge_case(
+            project,
+            prompt,
+            retries=1 if read_only_case else 0,
+        )
         if studio_payload.get("target_identity") != target_identity:
             raise RuntimeError(
                 f"parity case {case_id} ran against a different target"
@@ -4761,7 +4814,6 @@ def _run_parity_gate(
             raise RuntimeError(
                 f"parity case {case_id} did not prove its live challenge"
             )
-        analysis = contracts[selector].get("analysis") or {}
         volatile_read = bool(
             analysis.get("endpoints") or analysis.get("network_imports")
         ) and not analysis.get("side_effect_signals")
@@ -5366,7 +5418,10 @@ def _completion_evidence(
     }
 
 
-def _finalize_run(run_dir_value: str) -> dict:
+def _finalize_run(
+    run_dir_value: str,
+    reuse_parity: bool = False,
+) -> dict:
     if not run_dir_value.strip():
         raise ValueError("run_dir is required for action=finalize")
     run_dir = Path(run_dir_value).expanduser().resolve()
@@ -5393,15 +5448,68 @@ def _finalize_run(run_dir_value: str) -> dict:
     parity_cases_sha256 = hashlib.sha256(parity_cases_bytes).hexdigest()
     parity_plan = json.loads(parity_cases_bytes.decode("utf-8"))
     validation = _validate_target_project(run_dir / "project", prefix)
-    parity_result = _run_parity_gate(
-        str(run_dir),
-        bound_manifest=manifest,
-        bound_manifest_sha256=current_manifest_sha256,
-        bound_plan=parity_plan,
-        bound_plan_sha256=parity_cases_sha256,
-    )
-    if parity_result.get("status") != "success":
-        raise RuntimeError("live parity recapture failed during finalize")
+    if reuse_parity:
+        parity = json.loads(
+            (run_dir / "parity-evidence.json").read_text(encoding="utf-8")
+        )
+        captured_at = datetime.fromisoformat(
+            str(parity.get("captured_at") or "").replace("Z", "+00:00")
+        )
+        if (
+            datetime.now(timezone.utc) - captured_at
+        ).total_seconds() > 86400:
+            raise RuntimeError(
+                "reused parity evidence is older than 24 hours"
+            )
+        cases = parity.get("cases") or []
+        challenges = {
+            row.get("challenge_sha256")
+            for row in cases
+            if isinstance(row, dict)
+        }
+        if (
+            not parity.get("run_nonce")
+            or not cases
+            or None in challenges
+            or len(challenges) != len(cases)
+        ):
+            raise RuntimeError(
+                "reused parity evidence lacks distinct live challenges"
+            )
+    else:
+        parity_result = None
+        for attempt in range(2):
+            try:
+                parity_result = _run_parity_gate(
+                    str(run_dir),
+                    bound_manifest=manifest,
+                    bound_manifest_sha256=current_manifest_sha256,
+                    bound_plan=parity_plan,
+                    bound_plan_sha256=parity_cases_sha256,
+                )
+                break
+            except (RuntimeError, subprocess.TimeoutExpired) as error:
+                transient = isinstance(
+                    error,
+                    subprocess.TimeoutExpired,
+                ) or any(
+                    marker in str(error)
+                    for marker in (
+                        "Draft Preview did not settle",
+                        "chat input missing",
+                        "send unavailable",
+                        "target Copilot Studio tab not found",
+                        "Can't get window id",
+                        "Can\u2019t get window id",
+                        "Can't get tab id",
+                        "Can\u2019t get tab id",
+                    )
+                )
+                if not transient or attempt == 1:
+                    raise
+                time.sleep(5)
+        if parity_result.get("status") != "success":
+            raise RuntimeError("live parity recapture failed during finalize")
     evidence = _completion_evidence(
         run_dir,
         manifest,
@@ -6819,6 +6927,14 @@ class CopilotStudioDeployAgent(BasicAgent):
                         "type": "boolean",
                         "description": "Build manifest/brief without init or push.",
                     },
+                    "reuse_parity": {
+                        "type": "boolean",
+                        "description": (
+                            "For finalize, reuse live parity evidence captured "
+                            "within 24 hours after revalidating all local and "
+                            "remote hashes."
+                        ),
+                    },
                 },
                 "required": ["action"],
             },
@@ -6873,7 +6989,10 @@ class CopilotStudioDeployAgent(BasicAgent):
                     kwargs.get("client_id"),
                 )
             elif action == "finalize":
-                result = _finalize_run(str(kwargs.get("run_dir") or ""))
+                result = _finalize_run(
+                    str(kwargs.get("run_dir") or ""),
+                    bool(kwargs.get("reuse_parity", False)),
+                )
             elif action == "release_plan":
                 result = _release_plan(str(kwargs.get("run_dir") or ""))
             elif action == "release":
