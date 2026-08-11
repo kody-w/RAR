@@ -13,6 +13,38 @@ import build_registry
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
+def test_canonical_agent_path_supersedes_legacy_alias(tmp_path):
+    legacy = tmp_path / "wp_publish.py"
+    canonical = tmp_path / "wp_publish_agent.py"
+    canonical_names = {canonical: "@kody-w/wp_publish_agent"}
+
+    assert build_registry.superseded_legacy_agent_path(
+        legacy,
+        canonical_names,
+        "@kody-w/wp_publish",
+    )
+    assert not build_registry.superseded_legacy_agent_path(
+        canonical,
+        canonical_names,
+        "@kody-w/wp_publish",
+    )
+    assert not build_registry.superseded_legacy_agent_path(
+        legacy,
+        {},
+        "@kody-w/wp_publish",
+    )
+    assert not build_registry.superseded_legacy_agent_path(
+        legacy,
+        canonical_names,
+        "@kody-w/unrelated",
+    )
+    assert not build_registry.superseded_legacy_agent_path(
+        legacy,
+        {canonical: "@kody-w/wp_publish_agent_agent"},
+        "@kody-w/wp_publish_agent",
+    )
+
+
 def test_seed_aliases_preserve_previous_identity():
     assert build_registry.preserved_seed_aliases(
         {"_seed": 10, "_seed_aliases": [8, 9, 10]},
