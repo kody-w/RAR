@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__store_associate_copilot",
   "name": "Store Associate Copilot Agent",
   "rar_name": "@aibast-agents-library/store_associate_copilot",
-  "rappid": "rappid:@aibast-agents-library/store_associate_copilot:7349d37a2c80111b9eaa8f2444e6d215a5638f8267bb16855e61c44eb68389cb",
-  "_migrated_from": "rappid:@aibast-agents-library/store_associate_copilot:e78dd185832a3cc4abd1c3f65f2a7f12753fc65e0a017f091d4557c5c821dc11",
-  "_migrated_from_all": [
-    "rappid:@aibast-agents-library/store_associate_copilot:f8e40f1b84cd222f3c8a35bb0c30b6c908ca9974ea8647f4c5accea189cd32b3",
-    "rappid:@aibast-agents-library/store_associate_copilot:e78dd185832a3cc4abd1c3f65f2a7f12753fc65e0a017f091d4557c5c821dc11"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.3.0",
+  "rappid": "rappid:@aibast-agents-library/store_associate_copilot:e78dd185832a3cc4abd1c3f65f2a7f12753fc65e0a017f091d4557c5c821dc11",
+  "_migrated_from": "rappid:@aibast-agents-library/store_associate_copilot:f8e40f1b84cd222f3c8a35bb0c30b6c908ca9974ea8647f4c5accea189cd32b3", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "retail_cpg",
   "tags": [
@@ -20,24 +15,24 @@
     "product-lookup",
     "retail"
   ],
-  "description": "Gives associates product lookups, scripts, dashboards, and a live refrigeration alert joining simulated telemetry to CRM, with offline fallback.",
+  "description": "Provides store associates with instant product lookup, guided customer assistance scripts, daily task checklists, and real-time performance dashboards to improve in-store operations.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 1117,
-  "size_kb": 47.4,
-  "sha256": "9c75b3deb9ab3750efe6e8dd200630a35dcb42458dc799fc57ae729309ae9a26",
+  "lines": 877,
+  "size_kb": 37.3,
+  "sha256": "f8e40f1b84cd222f3c8a35bb0c30b6c908ca9974ea8647f4c5accea189cd32b3",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__store_associate_copilot.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__store_associate_copilot.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__store_associate_copilot.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__store_associate_copilot.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py"
 }

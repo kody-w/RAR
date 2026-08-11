@@ -3,14 +3,9 @@
   "id": "wildhaven__ceo_agent",
   "name": "CEO Agent",
   "rar_name": "@wildhaven/ceo_agent",
-  "rappid": "rappid:@wildhaven/ceo_agent:e336b84423b5264a00ada4a82df2a84ce6fe0ecc09999125c71e79b76ba0f02b",
-  "_migrated_from": "rappid:@wildhaven/ceo_agent:21b1a025d8cdb48a797d3e5dfc72872eb915202c37f7de48762ad8f59985e6ca",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@wildhaven/ceo_agent:252842017521a19e87f2febdaabc624b",
-    "rappid:@wildhaven/ceo_agent:21b1a025d8cdb48a797d3e5dfc72872eb915202c37f7de48762ad8f59985e6ca"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.2",
+  "rappid": "rappid:@wildhaven/ceo_agent:21b1a025d8cdb48a797d3e5dfc72872eb915202c37f7de48762ad8f59985e6ca",
+  "_migrated_from": "rappid:v2:agent:@wildhaven/ceo_agent:252842017521a19e87f2febdaabc624b", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@wildhaven",
   "category": "core",
   "tags": [
@@ -22,7 +17,7 @@
     "leadership",
     "stewardship"
   ],
-  "description": "Answers as Molly Wildfeuer's Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
+  "description": "Molly Wildfeuer's digital twin \u2014 the CEO of Wildhaven of America. Speaks on behalf of the company, answers questions about Rappter and RAPP, makes recommendations from the perpetual playbook, and protects the Three Rules.",
   "author": "Wildhaven of America",
   "quality_tier": "official",
   "requires_env": [],
@@ -30,16 +25,16 @@
     "@rapp/basic_agent"
   ],
   "lines": 325,
-  "size_kb": 13.4,
-  "sha256": "006b32bc874c15356bf40764d7e95a2f818a9155cf53361f55a425f855c75c2e",
+  "size_kb": 13.5,
+  "sha256": "a1eda394888d243b73354b5ea82d94bb1cbb0c485db0b61984d85d36fc93ca22",
   "has_card": true,
-  "added_at": "2026-04-05T16:48:32-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/wildhaven__ceo_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/ceo_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/ceo_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__ceo_agent.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__ceo_agent.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__ceo_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@wildhaven/ceo_agent.py"
 }

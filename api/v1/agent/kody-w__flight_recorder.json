@@ -3,13 +3,10 @@
   "id": "kody-w__flight_recorder",
   "name": "FlightRecorder",
   "rar_name": "@kody-w/flight_recorder",
-  "rappid": "rappid:@kody-w/flight_recorder:9a613108ca90bb5562b5c1dd7869616c4c42c3edeabc4c5df7b5c52efabbf7ca",
-  "_migrated_from": "rappid:@kody-w/flight_recorder:81d0647b991b89f8a494f28c8b0c6c3ffe0c30c4c6dc3337654a5f674efab17e",
-  "_migrated_from_all": [
-    "rappid:@kody-w/flight_recorder:81d0647b991b89f8a494f28c8b0c6c3ffe0c30c4c6dc3337654a5f674efab17e"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@kody-w/flight_recorder:81d0647b991b89f8a494f28c8b0c6c3ffe0c30c4c6dc3337654a5f674efab17e",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
   "publisher": "@kody-w",
   "category": "core",
   "tags": [
@@ -23,7 +20,7 @@
     "local-first",
     "ownership"
   ],
-  "description": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls.",
+  "description": "A local black box for your brainstem: transparently records BOTH SIDES of every /chat conversation -- whoever is talking (you, another AI, a script) -- to append-only JSON files on your own machine that you fully own. Steer it by talking: status, stats, search, export to an HTML transcript, pause/resume, or wipe. No engine edits; nothing leaves your machine.",
   "author": "Kody Wildfeuer",
   "quality_tier": "community",
   "requires_env": [
@@ -32,17 +29,17 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 536,
-  "size_kb": 22.7,
-  "sha256": "6a3976cfba0492a585ccab318125caed4ca0820e05dddf4119e98d5f22dea659",
+  "lines": 540,
+  "size_kb": 22.9,
+  "sha256": "e5f8220e25f0bbb6f30e3f32ad8cd0c800728ec6f0ec2fad1eb431ed4d1d19c3",
   "has_card": true,
-  "added_at": "2026-06-27T13:28:13-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__flight_recorder.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/flight_recorder_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/flight_recorder_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__flight_recorder.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__flight_recorder.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__flight_recorder.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/flight_recorder_agent.py"
 }

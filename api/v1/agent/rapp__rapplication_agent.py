@@ -38,10 +38,12 @@ __manifest__ = {
     "name": "@rapp/rapplication_agent",
     "display_name": "Rapplication",
     "description": (
-        "Bundles a single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry."
+        "Bundle a teammate's single-file agent (and optional service) into "
+        "a publish-ready rapplication directory with manifest.json and a "
+        "catalog index entry."
     ),
     "author": "RAPP",
-    "version": "1.0.2",
+    "version": "1.0.1",
     "tags": ["meta", "build", "rapplication", "bundler", "publish"],
     "category": "core",
     "quality_tier": "official",

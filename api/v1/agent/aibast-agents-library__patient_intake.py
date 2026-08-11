@@ -1,52 +1,18 @@
 """
-Patient Intake Agent \u2014 a template you are meant to mutate.
+Patient Intake Agent for Healthcare.
 
 Manages patient intake workflows including form generation, insurance
-verification, appointment scheduling, pre-visit summary preparation, and
-the demonstrated Sarah Martinez registration/booking/packet/no-show flows
-(simulated receipts, never live writes) for front desk and clinical staff.
+verification, appointment scheduling, and pre-visit summary preparation
+for front desk and clinical staff.
 
-HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live records over real HTTP from TWO
-     globally hosted simulated systems (synthetic data, no credentials,
-     works from anywhere):
-       CRM  \u2014 the Static Dynamics 365 tenant (Aster Lane Office Systems):
-              https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-              Dynamics contacts of the healthcare account Riverbend
-              Medical Group are reinterpreted as the CRM-side patient
-              roster \u2014 e.g. contact Priya Natarajan.
-       FHIR \u2014 the Static FHIR R4 server (Riverbend Medical Group):
-              https://kody-w.github.io/static-fhir/fhir/
-              20 live Patient resources form the clinical intake roster,
-              with real MRNs, DOBs, and demographics.
-     Try: perform(operation="intake_form")
-     \u2014 one output renders the CRM contact roster and the FHIR Patient
-     intake roster side by side, joined on the shared Riverbend Medical
-     Group organization.
-  2. No network? Everything falls back to the embedded demo layer below
-     (PATIENTS / INSURANCE_PLANS / PROVIDER_SCHEDULES) \u2014 the agent never
-     crashes offline.
-  3. Make it yours at the LIVE DATA SEAM below: set
-     PATIENT_INTAKE_DATA_URL (CRM side) to any OData-shaped endpoint and
-     PATIENT_INTAKE_FHIR_URL (clinical side) to any FHIR R4
-     searchset-bundle host \u2014 or replace _fetch_collection() /
-     _fetch_fhir_bundle() with an Epic/Cerner registration API client.
-     Fields the rest of the file needs are listed in
-     _normalize_live_patient() and _normalize_fhir_patient() \u2014 insurance
-     and coverage fields render as "n/a \u2014 enrichment seam" until you wire
-     an eligibility clearinghouse.
-
-OPERATIONS
-  intake_form | insurance_verification | appointment_scheduling
-  | pre_visit_summary | register_patient | book_appointment
-  | send_digital_intake_packet | activate_reminder_workflow
-  kwargs: operation (required), patient_id, patient_key
+Version 1.1.0 preserves those read operations and adds the demonstrated
+registration, booking, digital packet, and no-show prevention outcomes. The
+new operations use the Sarah Martinez demo facts, support exact keyed results,
+and return simulated receipts instead of writing to clinical systems.
 """
 
 import sys
 import os
-import json
-import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -54,9 +20,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/patient_intake",
-    "version": "1.3.0",
+    "version": "1.1.0",
     "display_name": "Patient Intake Agent",
-    "description": "Runs patient intake \u2014 forms, insurance checks, scheduling \u2014 joining a live simulated FHIR patient roster with the Dynamics 365 CRM; offline fallback.",
+    "description": "Manages patient intake forms, insurance verification, appointment scheduling, and pre-visit summary preparation.",
     "author": "AIBAST",
     "tags": ["intake", "insurance", "scheduling", "patient", "registration", "healthcare"],
     "category": "healthcare",
@@ -66,131 +32,8 @@ __manifest__ = {
 }
 
 
-# ═══════════════════════════════════════════════════════════════
-# LIVE DATA SEAM — swap this for your real systems
-#
-# Two live sources, both synthetic and hosted on GitHub Pages:
-#   CRM  (OData-shaped Dynamics 365, Aster Lane Office Systems):
-#     export PATIENT_INTAKE_DATA_URL=https://your-org/api/data/v9.2
-#   FHIR (R4 searchset bundles, Riverbend Medical Group):
-#     export PATIENT_INTAKE_FHIR_URL=https://your-fhir-host/fhir
-# or replace _fetch_collection() / _fetch_fhir_bundle() with your
-# EHR/PM client. Downstream code only needs the fields produced by
-# _normalize_live_patient() and _normalize_fhir_patient().
-# ═══════════════════════════════════════════════════════════════
-
-DATA_SOURCE_URL = os.environ.get(
-    "PATIENT_INTAKE_DATA_URL",
-    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
-)
-FHIR_SOURCE_URL = os.environ.get(
-    "PATIENT_INTAKE_FHIR_URL",
-    "https://kody-w.github.io/static-fhir/fhir",
-)
-_LIVE_CACHE = {}
-
-
-def _fetch_collection(collection, timeout=6):
-    """One bounded GET per collection per process. Returns [] on ANY
-    failure — offline, DNS, bad JSON — so the demo layer takes over."""
-    if collection in _LIVE_CACHE:
-        return _LIVE_CACHE[collection]
-    try:
-        req = urllib.request.Request(
-            f"{DATA_SOURCE_URL}/{collection}.json",
-            headers={"User-Agent": "rapp-agent-template/1.0"},
-        )
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
-    except Exception:
-        rows = []
-    _LIVE_CACHE[collection] = rows
-    return rows
-
-
-def _normalize_live_patient(row):
-    """Project a Dynamics contact onto the intake-form shape this agent
-    renders. THIS is the contract your replacement data source must meet —
-    a dict with these keys. None means 'not available from the CRM record
-    alone' and the renderer labels it as an enrichment seam (wire your
-    eligibility clearinghouse or payer portal there)."""
-    city = row.get("address1_city") or "?"
-    state = row.get("address1_stateorprovince") or "?"
-    return {
-        "patient_id": row.get("contactid", "")[:8] or "live",
-        "name": row.get("fullname", "Unknown"),
-        "dob": None,                # enrichment seam — wire your EHR demographics
-        "gender": None,             # enrichment seam
-        "phone": row.get("telephone1") or "n/a",
-        "email": row.get("emailaddress1") or "n/a",
-        "address": f"{city}, {state}",
-        "emergency_contact": None,  # enrichment seam
-        "insurance_payer": None,    # enrichment seam — wire eligibility 270/271
-        "member_id": None,          # enrichment seam
-        "_live": True,
-    }
-
-
-def _live_patients():
-    """Riverbend Medical Group contacts from the live tenant, reinterpreted
-    as the patient roster; [] when offline."""
-    rows = _fetch_collection("contacts")
-    return [
-        _normalize_live_patient(r) for r in rows
-        if r.get("parentcustomeridname") == "Riverbend Medical Group"
-    ]
-
-
-def _fetch_fhir_bundle(resource, timeout=6):
-    """Sibling helper for the FHIR side: one bounded GET per resource
-    type per process (cached by full URL). Returns the list of entry
-    resources from the R4 searchset Bundle; [] on ANY failure."""
-    url = f"{FHIR_SOURCE_URL}/{resource}.json"
-    if url in _LIVE_CACHE:
-        return _LIVE_CACHE[url]
-    try:
-        req = urllib.request.Request(
-            url, headers={"User-Agent": "rapp-agent-template/1.0"}
-        )
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            bundle = json.loads(resp.read().decode("utf-8"))
-        rows = [e.get("resource", {}) for e in bundle.get("entry", [])]
-    except Exception:
-        rows = []
-    _LIVE_CACHE[url] = rows
-    return rows
-
-
-def _normalize_fhir_patient(res):
-    """Project a FHIR R4 Patient resource onto the intake-roster row this
-    agent renders. Real MRN, DOB, gender, and contact details come from
-    the clinical record; insurance stays an enrichment seam (wire your
-    eligibility clearinghouse or the Coverage resources)."""
-    name = (res.get("name") or [{}])[0]
-    full = " ".join(list(name.get("given", [])) + [name.get("family", "")]).strip() or "Unknown"
-    telecom = res.get("telecom") or []
-    addr = (res.get("address") or [{}])[0]
-    return {
-        "mrn": (res.get("identifier") or [{}])[0].get("value", res.get("id", "")[:8]),
-        "name": full,
-        "dob": res.get("birthDate") or None,
-        "gender": (res.get("gender") or "").title() or None,
-        "phone": next((t.get("value") for t in telecom if t.get("system") == "phone"), "n/a"),
-        "email": next((t.get("value") for t in telecom if t.get("system") == "email"), "n/a"),
-        "address": f"{addr.get('city', '?')}, {addr.get('state', '?')}",
-        "organization": res.get("managingOrganization", {}).get("display", "n/a"),
-        "active": res.get("active", True),
-    }
-
-
-def _live_fhir_intake_roster():
-    """The live FHIR Patient resources as the clinical intake roster;
-    [] when the FHIR feed is unreachable."""
-    return [_normalize_fhir_patient(r) for r in _fetch_fhir_bundle("Patient")]
-
-
 # ---------------------------------------------------------------------------
-# EMBEDDED DEMO LAYER (offline fallback)
+# Synthetic domain data
 # ---------------------------------------------------------------------------
 
 PATIENTS = {
@@ -401,10 +244,7 @@ def _intake_form(patient_id=None):
             "insurance_payer": ins.get("primary", {}).get("payer", "Unknown"),
             "member_id": ins.get("primary", {}).get("member_id", "Unknown"),
         })
-    # Prefer live tenant patients when reachable; embedded demo stays too.
-    live = [] if patient_id else _live_patients()
-    fhir = [] if patient_id else _live_fhir_intake_roster()
-    return {"forms": forms, "live": live, "fhir": fhir}
+    return {"forms": forms}
 
 
 def _insurance_verification():
@@ -544,53 +384,6 @@ class PatientIntakeAgent(BasicAgent):
             lines.append(f"- Emergency Contact: {ec['name']} ({ec['relation']}) - {ec['phone']}")
             lines.append(f"- Insurance: {f['insurance_payer']} (ID: {f['member_id']})")
             lines.append("")
-        if data["live"]:
-            lines.append("---")
-            lines.append("# Live Tenant Patient Roster (Dynamics contacts — Riverbend Medical Group)")
-            lines.append("")
-            seam = "n/a — enrichment seam"
-            for f in data["live"]:
-                lines.append(f"## {f['name']} ({f['patient_id']})")
-                lines.append(f"- DOB: {f['dob'] or seam} | Gender: {f['gender'] or seam}")
-                lines.append(f"- Phone: {f['phone']} | Email: {f['email']}")
-                lines.append(f"- Address: {f['address']}")
-                lines.append(f"- Emergency Contact: {seam}")
-                lines.append(f"- Insurance: {f['insurance_payer'] or seam} (ID: {f['member_id'] or seam})")
-                lines.append("")
-        else:
-            lines.append("_Live tenant unreachable — showing embedded demo patients only._")
-        if data["fhir"]:
-            seam = "n/a — enrichment seam"
-            lines += [
-                "",
-                "---",
-                f"# Live FHIR Intake Roster ({len(data['fhir'])} Patient resources — "
-                "Riverbend Medical Group)",
-                "",
-                "Clinical-side roster from the live FHIR R4 server. The managing "
-                "organization is the same Riverbend Medical Group account whose CRM "
-                "contacts appear above — one provider group, two live systems. DOB "
-                "and gender, enrichment seams on the CRM side, are real here.",
-                "",
-                "| MRN | Patient | DOB | Gender | Phone | City | Insurance |",
-                "|-----|---------|-----|--------|-------|------|-----------|",
-            ]
-            for p in data["fhir"]:
-                lines.append(
-                    f"| {p['mrn']} | {p['name']} | {p['dob'] or seam} "
-                    f"| {p['gender'] or seam} | {p['phone']} | {p['address']} "
-                    f"| {seam} |"
-                )
-            orgs = {p["organization"] for p in data["fhir"]}
-            lines += [
-                "",
-                f"_Join: managing organization {', '.join(sorted(orgs))} — matches "
-                "the CRM account of the contact roster above. Insurance renders as "
-                "an enrichment seam until you wire eligibility 270/271 or the FHIR "
-                "Coverage resources._",
-            ]
-        else:
-            lines += ["", "_Live FHIR server unreachable — clinical intake roster unavailable offline._"]
         return "\n".join(lines)
 
     def _insurance_verification(self) -> str:
@@ -711,15 +504,8 @@ class PatientIntakeAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = PatientIntakeAgent()
-    print("=" * 60)
-    print("EMBEDDED DEMO + LIVE CRM ROSTER + LIVE FHIR INTAKE ROSTER")
-    print("(sibling-live demo: 20 FHIR Patient resources join the CRM")
-    print("contact roster on the Riverbend Medical Group organization;")
-    print("both feeds fetched over HTTP and fall back offline)")
-    print("=" * 60)
-    print(agent.perform(operation="intake_form"))
     for op in [
-        "insurance_verification", "appointment_scheduling", "pre_visit_summary",
+        "intake_form", "insurance_verification", "appointment_scheduling", "pre_visit_summary",
         "register_patient", "book_appointment", "send_digital_intake_packet",
         "activate_reminder_workflow",
     ]:

@@ -73,10 +73,13 @@ from __future__ import annotations
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_egg_hatcher",
-    "version": "1.0.2",
+    "version": "1.0.1",
     "display_name": "HatchTwinEgg",
     "description": (
-        "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it."
+        "Generic single-file hatcher for any RAPP digital-organism twin. "
+        "Loads identity from cwd auto-detect, --source REPO (raw GitHub), "
+        "or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The "
+        "global brainstem's built-in Twin agent boots/chats with it immediately."
     ),
     "author": "Kody Wildfeuer",
     "tags": ["twin", "egg", "hatcher", "organism", "federation", "single-file", "rapp"],

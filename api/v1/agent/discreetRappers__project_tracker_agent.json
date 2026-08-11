@@ -3,14 +3,9 @@
   "id": "discreetRappers__project_tracker_agent",
   "name": "ProjectTracker",
   "rar_name": "@discreetRappers/project_tracker_agent",
-  "rappid": "rappid:@discreetRappers/project_tracker_agent:82267706404c016883bf5577e967f88c62570e65ae91894b45aea6f7f49313e1",
-  "_migrated_from": "rappid:@discreetRappers/project_tracker_agent:6ea1f9dae8625ab312cbd71f82ff4dae90ae4136e94afdd4c0ca02653a7d9dfa",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@discreetRappers/project_tracker_agent:701fe6481c8d3b00c27426e912b659a1",
-    "rappid:@discreetRappers/project_tracker_agent:6ea1f9dae8625ab312cbd71f82ff4dae90ae4136e94afdd4c0ca02653a7d9dfa"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@discreetRappers/project_tracker_agent:6ea1f9dae8625ab312cbd71f82ff4dae90ae4136e94afdd4c0ca02653a7d9dfa",
+  "_migrated_from": "rappid:v2:agent:@discreetRappers/project_tracker_agent:701fe6481c8d3b00c27426e912b659a1", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
   "publisher": "@discreetRappers",
   "category": "pipeline",
   "tags": [
@@ -18,7 +13,7 @@
     "project-management",
     "tracking"
   ],
-  "description": "Creates, updates, lists, imports, and exports RAPP project tracking records stored as JSON in Azure File Storage.",
+  "description": "RAPP project management \u2014 create, update, list, retrieve, import, and export project tracking data.",
   "author": "Bill Whalen",
   "quality_tier": "community",
   "requires_env": [],
@@ -26,16 +21,16 @@
     "@rapp/basic_agent"
   ],
   "lines": 894,
-  "size_kb": 39.2,
-  "sha256": "b9df9cb9d4f0743092aae62cabc5a156bd6b7f73fd773fce14584278f1c56fa4",
+  "size_kb": 39.1,
+  "sha256": "701fe6481c8d3b00c27426e912b659a18da5a358a429b6c9c6fb275a3c1ff244",
   "has_card": true,
-  "added_at": "2026-04-06T16:39:03-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__project_tracker_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/project_tracker_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/project_tracker_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__project_tracker_agent.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__project_tracker_agent.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__project_tracker_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/project_tracker_agent.py"
 }

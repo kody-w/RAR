@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__activity_gap",
   "name": "Activity Gap Analyzer",
   "rar_name": "@aibast-agents-library/activity_gap",
-  "rappid": "rappid:@aibast-agents-library/activity_gap:1bbeef4b191cc57bd080483585a47ebcd8187f88c51fff6fa54364ed3e0b2018",
-  "_migrated_from": "rappid:@aibast-agents-library/activity_gap:fb2d0da22c3ad06dccbe6540c341254b70c8cb03eaf1a8d69994c444f4e6b2c0",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@aibast-agents-library/activity_gap:1dca5a2e99732f7aadf05fac1f4dbf3d",
-    "rappid:@aibast-agents-library/activity_gap:fb2d0da22c3ad06dccbe6540c341254b70c8cb03eaf1a8d69994c444f4e6b2c0"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/activity_gap:fb2d0da22c3ad06dccbe6540c341254b70c8cb03eaf1a8d69994c444f4e6b2c0",
+  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/activity_gap:1dca5a2e99732f7aadf05fac1f4dbf3d", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
   "publisher": "@aibast-agents-library",
   "category": "b2b_sales",
   "tags": [
@@ -20,24 +15,24 @@
     "deal-progression",
     "pipeline"
   ],
-  "description": "Flags missing sales activities per stage using live opportunities from a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
+  "description": "Identifies missing sales activities per stage, evaluates completion, generates roadmaps, and analyzes gap impact.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 516,
-  "size_kb": 23.2,
-  "sha256": "99bc2d4e0e44d0930ac4218d16dc91503d2cc56928551dc8a13efc9f7347258a",
+  "lines": 393,
+  "size_kb": 18.0,
+  "sha256": "1dca5a2e99732f7aadf05fac1f4dbf3dfad0f14855265eaacb9fd16dff4938e8",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__activity_gap.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__activity_gap.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__activity_gap.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__activity_gap.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py"
 }

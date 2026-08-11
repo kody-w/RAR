@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__software_customer_onboarding",
   "name": "Customer Onboarding Agent",
   "rar_name": "@aibast-agents-library/software_customer_onboarding",
-  "rappid": "rappid:@aibast-agents-library/software_customer_onboarding:a88b3466406f92af5736b864e76b2731623e412fe08daee91f27a5eae541c81e",
-  "_migrated_from": "rappid:@aibast-agents-library/software_customer_onboarding:d5c77994cc14c70fdff79aa1ec1420fb5b3c901071c411871295430363160e27",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@aibast-agents-library/software_customer_onboarding:92cddee1bf1ac865fbf22c04360da73f",
-    "rappid:@aibast-agents-library/software_customer_onboarding:d5c77994cc14c70fdff79aa1ec1420fb5b3c901071c411871295430363160e27"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/software_customer_onboarding:d5c77994cc14c70fdff79aa1ec1420fb5b3c901071c411871295430363160e27",
+  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/software_customer_onboarding:92cddee1bf1ac865fbf22c04360da73f", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@aibast-agents-library",
   "category": "software_digital_products",
   "tags": [
@@ -20,24 +15,24 @@
     "adoption",
     "milestones"
   ],
-  "description": "Tracks onboarding pipelines and blockers from a live simulated Dynamics 365 tenant's accounts and cases, with an offline demo fallback.",
+  "description": "Tracks SaaS customer onboarding status, milestone completion, feature adoption metrics, and risk flags.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 538,
-  "size_kb": 21.6,
-  "sha256": "66ae08bf5fe89d05a0f1cc1a8b365adadb72a72e127d4487111e71baf83effea",
+  "lines": 379,
+  "size_kb": 14.3,
+  "sha256": "b6b19095e392c0ac3156689880b56113bf837db8f26c5416d5967930b1ed480f",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__software_customer_onboarding.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/customer_onboarding_stack/customer_onboarding_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/customer_onboarding_stack/customer_onboarding_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__software_customer_onboarding.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__software_customer_onboarding.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__software_customer_onboarding.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/software_dp_stacks/customer_onboarding_stack/customer_onboarding_agent.py"
 }

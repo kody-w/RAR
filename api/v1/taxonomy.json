@@ -1,14 +1,14 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-11T06:27:23Z",
+  "generated": "2026-08-02T14:56:21Z",
   "categories": [
     {
       "name": "general",
-      "count": 62
+      "count": 56
     },
     {
       "name": "productivity",
-      "count": 40
+      "count": 39
     },
     {
       "name": "core",
@@ -20,15 +20,15 @@
     },
     {
       "name": "devtools",
-      "count": 22
-    },
-    {
-      "name": "integrations",
-      "count": 16
+      "count": 20
     },
     {
       "name": "pipeline",
       "count": 15
+    },
+    {
+      "name": "integrations",
+      "count": 14
     },
     {
       "name": "financial_services",
@@ -84,11 +84,11 @@
     },
     {
       "name": "workflow",
-      "count": 5
+      "count": 4
     },
     {
       "name": "meta",
-      "count": 3
+      "count": 2
     },
     {
       "name": "human_resources",
@@ -106,11 +106,11 @@
     },
     {
       "name": "@cat-agent-skills",
-      "count": 85
+      "count": 76
     },
     {
       "name": "@kody-w",
-      "count": 54
+      "count": 50
     },
     {
       "name": "@rapp",
@@ -144,11 +144,11 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 160
+      "count": 156
     },
     {
       "name": "frontier",
-      "count": 85
+      "count": 76
     },
     {
       "name": "official",
@@ -166,11 +166,11 @@
   "tags": [
     {
       "name": "productivity",
-      "count": 38
+      "count": 36
     },
     {
       "name": "sales",
-      "count": 30
+      "count": 29
     },
     {
       "name": "b2b",
@@ -185,10 +185,6 @@
       "count": 17
     },
     {
-      "name": "automation",
-      "count": 16
-    },
-    {
       "name": "compliance",
       "count": 14
     },
@@ -197,7 +193,15 @@
       "count": 14
     },
     {
+      "name": "automation",
+      "count": 14
+    },
+    {
       "name": "email",
+      "count": 13
+    },
+    {
+      "name": "rapplication",
       "count": 13
     },
     {
@@ -205,8 +209,8 @@
       "count": 12
     },
     {
-      "name": "rapplication",
-      "count": 12
+      "name": "meta",
+      "count": 11
     },
     {
       "name": "deal-progression",
@@ -225,24 +229,12 @@
       "count": 10
     },
     {
-      "name": "meta",
-      "count": 10
-    },
-    {
       "name": "audit",
       "count": 9
     },
     {
       "name": "powerpoint",
       "count": 9
-    },
-    {
-      "name": "testing",
-      "count": 8
-    },
-    {
-      "name": "sharepoint",
-      "count": 8
     },
     {
       "name": "presentations",
@@ -257,7 +249,7 @@
       "count": 7
     },
     {
-      "name": "marketing",
+      "name": "sharepoint",
       "count": 7
     },
     {
@@ -265,19 +257,15 @@
       "count": 7
     },
     {
-      "name": "governance",
-      "count": 7
-    },
-    {
       "name": "m365",
       "count": 7
     },
     {
-      "name": "energy",
-      "count": 6
+      "name": "singleton",
+      "count": 7
     },
     {
-      "name": "routing",
+      "name": "energy",
       "count": 6
     },
     {
@@ -289,23 +277,15 @@
       "count": 6
     },
     {
+      "name": "marketing",
+      "count": 6
+    },
+    {
       "name": "copilot-studio",
       "count": 6
     },
     {
-      "name": "python",
-      "count": 6
-    },
-    {
-      "name": "design",
-      "count": 6
-    },
-    {
-      "name": "copilot_studio",
-      "count": 6
-    },
-    {
-      "name": "singleton",
+      "name": "composite",
       "count": 6
     },
     {
@@ -322,6 +302,14 @@
     },
     {
       "name": "knowledge-base",
+      "count": 5
+    },
+    {
+      "name": "testing",
+      "count": 5
+    },
+    {
+      "name": "routing",
       "count": 5
     },
     {
@@ -345,18 +333,6 @@
       "count": 5
     },
     {
-      "name": "analysis",
-      "count": 5
-    },
-    {
-      "name": "quality",
-      "count": 5
-    },
-    {
-      "name": "decision_making",
-      "count": 5
-    },
-    {
       "name": "agent",
       "count": 5
     },
@@ -365,7 +341,7 @@
       "count": 5
     },
     {
-      "name": "power_platform",
+      "name": "governance",
       "count": 5
     },
     {
@@ -373,7 +349,7 @@
       "count": 5
     },
     {
-      "name": "knowledge",
+      "name": "design",
       "count": 5
     },
     {
@@ -389,15 +365,19 @@
       "count": 5
     },
     {
-      "name": "composite",
-      "count": 5
-    },
-    {
       "name": "operator-mediated",
       "count": 5
     },
     {
       "name": "commons",
+      "count": 5
+    },
+    {
+      "name": "factory",
+      "count": 5
+    },
+    {
+      "name": "estate",
       "count": 5
     },
     {
@@ -433,10 +413,6 @@
       "count": 4
     },
     {
-      "name": "copilot",
-      "count": 4
-    },
-    {
       "name": "voice",
       "count": 4
     },
@@ -449,7 +425,15 @@
       "count": 4
     },
     {
-      "name": "dataverse",
+      "name": "analysis",
+      "count": 4
+    },
+    {
+      "name": "python",
+      "count": 4
+    },
+    {
+      "name": "decision_making",
       "count": 4
     },
     {
@@ -457,31 +441,15 @@
       "count": 4
     },
     {
-      "name": "assessment",
-      "count": 4
-    },
-    {
       "name": "authoring",
       "count": 4
     },
     {
-      "name": "video",
-      "count": 4
-    },
-    {
-      "name": "playwright",
-      "count": 4
-    },
-    {
-      "name": "charts",
-      "count": 4
-    },
-    {
-      "name": "architecture",
-      "count": 4
-    },
-    {
       "name": "review",
+      "count": 4
+    },
+    {
+      "name": "knowledge",
       "count": 4
     },
     {
@@ -498,14 +466,6 @@
     },
     {
       "name": "integrations",
-      "count": 4
-    },
-    {
-      "name": "factory",
-      "count": 4
-    },
-    {
-      "name": "estate",
       "count": 4
     },
     {
@@ -645,11 +605,23 @@
       "count": 3
     },
     {
+      "name": "copilot",
+      "count": 3
+    },
+    {
       "name": "triage",
       "count": 3
     },
     {
+      "name": "dataverse",
+      "count": 3
+    },
+    {
       "name": "power-platform",
+      "count": 3
+    },
+    {
+      "name": "quality",
       "count": 3
     },
     {
@@ -665,6 +637,10 @@
       "count": 3
     },
     {
+      "name": "assessment",
+      "count": 3
+    },
+    {
       "name": "privacy",
       "count": 3
     },
@@ -673,15 +649,19 @@
       "count": 3
     },
     {
-      "name": "blog",
-      "count": 3
-    },
-    {
-      "name": "matplotlib",
+      "name": "charts",
       "count": 3
     },
     {
       "name": "news",
+      "count": 3
+    },
+    {
+      "name": "power_platform",
+      "count": 3
+    },
+    {
+      "name": "architecture",
       "count": 3
     },
     {
@@ -690,10 +670,6 @@
     },
     {
       "name": "social_media",
-      "count": 3
-    },
-    {
-      "name": "foundry",
       "count": 3
     },
     {
@@ -721,10 +697,6 @@
       "count": 3
     },
     {
-      "name": "publishing",
-      "count": 3
-    },
-    {
       "name": "loop",
       "count": 3
     },
@@ -734,10 +706,6 @@
     },
     {
       "name": "deploy",
-      "count": 3
-    },
-    {
-      "name": "brainstem",
       "count": 3
     },
     {
@@ -945,19 +913,11 @@
       "count": 2
     },
     {
-      "name": "compatibility",
-      "count": 2
-    },
-    {
       "name": "returns",
       "count": 2
     },
     {
       "name": "performance",
-      "count": 2
-    },
-    {
-      "name": "simulation",
       "count": 2
     },
     {
@@ -993,10 +953,6 @@
       "count": 2
     },
     {
-      "name": "evaluation",
-      "count": 2
-    },
-    {
       "name": "demo",
       "count": 2
     },
@@ -1013,6 +969,10 @@
       "count": 2
     },
     {
+      "name": "blog",
+      "count": 2
+    },
+    {
       "name": "speaking",
       "count": 2
     },
@@ -1021,7 +981,7 @@
       "count": 2
     },
     {
-      "name": "agents",
+      "name": "matplotlib",
       "count": 2
     },
     {
@@ -1033,7 +993,7 @@
       "count": 2
     },
     {
-      "name": "enterprise",
+      "name": "copilot_studio",
       "count": 2
     },
     {
@@ -1065,15 +1025,7 @@
       "count": 2
     },
     {
-      "name": "risk_assessment",
-      "count": 2
-    },
-    {
-      "name": "csv",
-      "count": 2
-    },
-    {
-      "name": "extraction",
+      "name": "foundry",
       "count": 2
     },
     {
@@ -1090,10 +1042,6 @@
     },
     {
       "name": "out_of_office",
-      "count": 2
-    },
-    {
-      "name": "commerce",
       "count": 2
     },
     {
@@ -1137,11 +1085,19 @@
       "count": 2
     },
     {
+      "name": "video",
+      "count": 2
+    },
+    {
       "name": "recon",
       "count": 2
     },
     {
       "name": "wiki",
+      "count": 2
+    },
+    {
+      "name": "publishing",
       "count": 2
     },
     {
@@ -1158,10 +1114,6 @@
     },
     {
       "name": "heartbeat",
-      "count": 2
-    },
-    {
-      "name": "determinism",
       "count": 2
     },
     {
@@ -1189,15 +1141,15 @@
       "count": 2
     },
     {
+      "name": "brainstem",
+      "count": 2
+    },
+    {
       "name": "private",
       "count": 2
     },
     {
       "name": "stub",
-      "count": 2
-    },
-    {
-      "name": "leviathan",
       "count": 2
     },
     {
@@ -1214,6 +1166,10 @@
     },
     {
       "name": "wildhaven",
+      "count": 2
+    },
+    {
+      "name": "playwright",
       "count": 2
     },
     {
@@ -1362,6 +1318,50 @@
     },
     {
       "name": "zoning",
+      "count": 1
+    },
+    {
+      "name": "inspection",
+      "count": 1
+    },
+    {
+      "name": "fees",
+      "count": 1
+    },
+    {
+      "name": "code-compliance",
+      "count": 1
+    },
+    {
+      "name": "workflow-routing",
+      "count": 1
+    },
+    {
+      "name": "data-generation",
+      "count": 1
+    },
+    {
+      "name": "contacts",
+      "count": 1
+    },
+    {
+      "name": "accounts",
+      "count": 1
+    },
+    {
+      "name": "opportunities",
+      "count": 1
+    },
+    {
+      "name": "hedis",
+      "count": 1
+    },
+    {
+      "name": "care-gaps",
+      "count": 1
+    },
+    {
+      "name": "quality-measures",
       "count": 1
     }
   ]

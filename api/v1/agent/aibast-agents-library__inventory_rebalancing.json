@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__inventory_rebalancing",
   "name": "Inventory Rebalancing Agent",
   "rar_name": "@aibast-agents-library/inventory_rebalancing",
-  "rappid": "rappid:@aibast-agents-library/inventory_rebalancing:adc11d0e0a603ad5bd947cc64b0c543ea397d8aa25f9910bb82ef4ded5c891a1",
-  "_migrated_from": "rappid:@aibast-agents-library/inventory_rebalancing:b2e7292ffb901d3913a26242b541484eb2fd169ce024e7a5672c5c80b3e7be88",
-  "_migrated_from_all": [
-    "rappid:@aibast-agents-library/inventory_rebalancing:b227465ff849a70ccad8b5f24862e200ccf8fa80353c49af60f97eae42db3899",
-    "rappid:@aibast-agents-library/inventory_rebalancing:b2e7292ffb901d3913a26242b541484eb2fd169ce024e7a5672c5c80b3e7be88"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.3.0",
+  "rappid": "rappid:@aibast-agents-library/inventory_rebalancing:b2e7292ffb901d3913a26242b541484eb2fd169ce024e7a5672c5c80b3e7be88",
+  "_migrated_from": "rappid:@aibast-agents-library/inventory_rebalancing:b227465ff849a70ccad8b5f24862e200ccf8fa80353c49af60f97eae42db3899", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.1",
   "publisher": "@aibast-agents-library",
   "category": "manufacturing",
   "tags": [
@@ -20,24 +15,24 @@
     "rebalancing",
     "manufacturing"
   ],
-  "description": "Analyzes stock vs demand and joins simulated ERP materials and goods receipts to the Dynamics 365 catalog, with an offline demo fallback.",
+  "description": "Optimizes multi-warehouse inventory distribution by analyzing stock levels against demand forecasts and generating cost-effective transfer plans.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 707,
-  "size_kb": 31.5,
-  "sha256": "7c44c44d6539d4a22d69eb6ace52608bed017348cd144ec56638b41c102ffd37",
+  "lines": 484,
+  "size_kb": 21.2,
+  "sha256": "b227465ff849a70ccad8b5f24862e200ccf8fa80353c49af60f97eae42db3899",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__inventory_rebalancing.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__inventory_rebalancing.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__inventory_rebalancing.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__inventory_rebalancing.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py"
 }

@@ -3,14 +3,9 @@
   "id": "rapp__rapplication_agent",
   "name": "Rapplication",
   "rar_name": "@rapp/rapplication_agent",
-  "rappid": "rappid:@rapp/rapplication_agent:2cb0b31e7b9749611867ba68163c09e70fc2a4cbea9f7c9e9afdffc0c68064c8",
-  "_migrated_from": "rappid:@rapp/rapplication_agent:0dd79b9e987e430475f9ecb2bd2d5d8c57067af26ed65273f980fe7b0f06fa0d",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@rapp/rapplication_agent:b9157463be242d97e8c0a789e7a755fe",
-    "rappid:@rapp/rapplication_agent:0dd79b9e987e430475f9ecb2bd2d5d8c57067af26ed65273f980fe7b0f06fa0d"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.2",
+  "rappid": "rappid:@rapp/rapplication_agent:0dd79b9e987e430475f9ecb2bd2d5d8c57067af26ed65273f980fe7b0f06fa0d",
+  "_migrated_from": "rappid:v2:agent:@rapp/rapplication_agent:b9157463be242d97e8c0a789e7a755fe", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@rapp",
   "category": "core",
   "tags": [
@@ -20,24 +15,24 @@
     "bundler",
     "publish"
   ],
-  "description": "Bundles a single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry.",
+  "description": "Bundle a teammate's single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry.",
   "author": "RAPP",
   "quality_tier": "official",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 592,
-  "size_kb": 23.2,
-  "sha256": "a40d2ce08abde9774ebb4d34f02577a31e15a2ef66d2064953ab08a3f39baa0b",
+  "lines": 594,
+  "size_kb": 23.3,
+  "sha256": "19e35f25df4515cfb7a8fadf6379f79eea8128d7a5a33b701f1c5962faa74abd",
   "has_card": true,
-  "added_at": "2026-04-27T18:52:27-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rapplication_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapplication_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapplication_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapplication_agent.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapplication_agent.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapplication_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/rapplication_agent.py"
 }

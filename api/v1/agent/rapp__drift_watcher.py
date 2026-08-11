@@ -48,9 +48,12 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/drift_watcher",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "display_name": "DriftWatcherAgent",
-    "description": ("Watches drift-labeled GitHub Issues via the gh CLI and stages each proposed fix as a pull request; proposes only, never merges or closes."),
+    "description": ("Watch GitHub Issues filed by the drift/steward agents and "
+                    "stage the local-repo fix as a pull request — "
+                    "operator-mediated: it proposes PRs (Fixes #), never "
+                    "merges or closes. Closes the drift traceability loop."),
     "author": "Kody Wildfeuer",
     "tags": ["drift", "spec", "github", "issues", "pull-request", "traceability",
              "steward", "alignment", "operator-mediated"],

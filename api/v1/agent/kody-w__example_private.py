@@ -19,9 +19,9 @@ rejected by build_registry.py — stubs are pure metadata.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/example_private",
-    "version": "1.0.2",
+    "version": "1.0.1",
     "display_name": "ExamplePrivate",
-    "description": "Demonstrates the RAR private-agent stub layer \u2014 metadata only, with source resolved from a private GitHub repo at install time.",
+    "description": "Sample gated stub demonstrating the private layer.",
     "author": "Kody Wildfeuer",
     "tags": ["example", "private", "stub"],
     "category": "productivity",

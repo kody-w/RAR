@@ -22,9 +22,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/deal_tracking",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "display_name": "Deal Tracking",
-    "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
+    "description": "Tracks pipeline, deal movement, stage velocity, and forecast accuracy for enterprise sales.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "deal-tracking", "pipeline", "forecasting"],
     "category": "b2b_sales",

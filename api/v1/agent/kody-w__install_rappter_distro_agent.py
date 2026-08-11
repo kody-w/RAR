@@ -58,10 +58,14 @@ from typing import Callable, Optional
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/install_rappter_distro_agent",
-    "version": "1.0.2",
+    "version": "1.0.1",
     "display_name": "Install Rappter Distro",
     "description": (
-        "Installs the full rappter-distro over a bare kernel by fetching files from raw.githubusercontent.com with per-file sha256 verification."
+        "Single-file installer that pulls the full rappter-distro "
+        "(organs, senses, lib/, rich UI, @rappter agents) from "
+        "raw.githubusercontent.com via MANIFEST.json with sha256 "
+        "verification per file. Refuses to touch the three sacred "
+        "kernel files."
     ),
     "author": "Kody Wildfeuer",
     "tags": ["installer", "distro", "rappter", "bootstrap", "organism"],

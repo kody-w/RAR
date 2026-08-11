@@ -3,14 +3,9 @@
   "id": "rapp__fleet_commander",
   "name": "FleetCommander",
   "rar_name": "@rapp/fleet_commander",
-  "rappid": "rappid:@rapp/fleet_commander:e094d1a11f86c58081db8daa6bfa2dd4f5853fe1598f14112953f3d12b0eeebc",
-  "_migrated_from": "rappid:@rapp/fleet_commander:376e8806101cd98d3ae8433a02fe4a7d3522630eaaa518f8050e3b305e80382f",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@rapp/fleet_commander:ad1f3782296fae46bfad91f33e93e4f8",
-    "rappid:@rapp/fleet_commander:376e8806101cd98d3ae8433a02fe4a7d3522630eaaa518f8050e3b305e80382f"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@rapp/fleet_commander:376e8806101cd98d3ae8433a02fe4a7d3522630eaaa518f8050e3b305e80382f",
+  "_migrated_from": "rappid:v2:agent:@rapp/fleet_commander:ad1f3782296fae46bfad91f33e93e4f8", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
   "publisher": "@rapp",
   "category": "devtools",
   "tags": [
@@ -21,24 +16,24 @@
     "tdd",
     "pipeline"
   ],
-  "description": "Builds new RAR agents from a natural-language spec \u2014 plans, writes pytest tests, generates code via the Copilot CLI, iterates, and publishes.",
+  "description": "Autonomous agent development pipeline. Accepts a natural-language spec, generates a plan, writes tests, builds the agent, iterates until tests pass, and publishes to the RAR registry. Uses Copilot CLI for code generation.",
   "author": "RAPP",
   "quality_tier": "official",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 797,
-  "size_kb": 31.1,
-  "sha256": "2ba26bb68c2fdaf8f75f5068fe244d227330e8ab96c7ee6516c6d2530b386487",
+  "lines": 799,
+  "size_kb": 31.2,
+  "sha256": "ad1f3782296fae46bfad91f33e93e4f8c2ca8e288236d01476e7fa6a17c6532c",
   "has_card": true,
-  "added_at": "2026-04-21T13:35:42-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__fleet_commander.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/fleet_commander_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/fleet_commander_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__fleet_commander.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__fleet_commander.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__fleet_commander.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/fleet_commander_agent.py"
 }

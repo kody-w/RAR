@@ -43,9 +43,12 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rar_steward",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "display_name": "RarStewardAgent",
-    "description": ("Surveys the public RAR catalog over HTTP for health, duplicate clusters, and junk candidates, returning operator-mediated cleanup guidance."),
+    "description": ("Autonomous steward of the public RAR: surveys catalog "
+                    "health, clusters same-but-different agents that should be "
+                    "merged into one quality base, and flags noise/junk for "
+                    "review — operator-mediated guidance, never auto-deletes."),
     "author": "Kody Wildfeuer",
     "tags": ["rar", "steward", "registry", "quality", "dedup", "merge", "curation"],
     "category": "core",

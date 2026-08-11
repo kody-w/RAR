@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__procurement_support",
   "name": "Procurement Support",
   "rar_name": "@aibast-agents-library/procurement_support",
-  "rappid": "rappid:@aibast-agents-library/procurement_support:ca469dd4b65742a32be84285ee118901b92b121281eb8fc4cef648f01c2e218e",
-  "_migrated_from": "rappid:@aibast-agents-library/procurement_support:5402643a50190cd701de5d31ad03f9414160a45f28b771b28bb54a16be1c35b1",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@aibast-agents-library/procurement_support:e5981f8efd6223ac8e190cec54f86a75",
-    "rappid:@aibast-agents-library/procurement_support:5402643a50190cd701de5d31ad03f9414160a45f28b771b28bb54a16be1c35b1"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.2.0",
+  "rappid": "rappid:@aibast-agents-library/procurement_support:5402643a50190cd701de5d31ad03f9414160a45f28b771b28bb54a16be1c35b1",
+  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/procurement_support:e5981f8efd6223ac8e190cec54f86a75", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
   "publisher": "@aibast-agents-library",
   "category": "general",
   "tags": [
@@ -20,24 +15,24 @@
     "supplier",
     "budget"
   ],
-  "description": "Tracks requisitions and supplier signals over a simulated Dynamics 365 tenant and ERP (POs, receipts, blocked invoices), with offline fallback.",
+  "description": "Procurement support for requisition tracking, contract lookups, supplier performance, and budget checks.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 491,
-  "size_kb": 26.2,
-  "sha256": "08de4f1c0f746fef3915574fb31e4a3c55a817402532f4cd58b5756dd3faebf8",
+  "lines": 240,
+  "size_kb": 14.8,
+  "sha256": "e5981f8efd6223ac8e190cec54f86a753665ac1b03c860f5cacdbd1fa926de79",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__procurement_support.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__procurement_support.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__procurement_support.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__procurement_support.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py"
 }

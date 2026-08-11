@@ -20,9 +20,9 @@ problems before they reach the registry.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/agent_workbench",
-    "version": "1.1.2",
+    "version": "1.1.1",
     "display_name": "Agent Workbench",
-    "description": "Scaffolds, validates, dry-runs, diffs, and publishes single-file RAPP agents against the registry via GitHub Issues-as-API.",
+    "description": "Build, validate, test, and publish single-file RAPP agents. The development companion for the agent.py pattern.",
     "author": "RAPP Core Team",
     "tags": ["devtools", "workbench", "scaffolding", "validation", "testing", "publishing"],
     "category": "devtools",

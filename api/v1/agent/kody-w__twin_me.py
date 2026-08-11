@@ -79,10 +79,13 @@ except Exception:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_me",
-    "version": "1.0.3",
+    "version": "1.0.2",
     "display_name": "TwinMe",
     "description": (
-        "Packs a PII-stripped .egg of the current brainstem's persona, custom agents, and calibration baseline, refusing if its content scan finds leaks."),
+        "Say 'twin me' to pack a generic, PII-stripped digital-twin .egg of this "
+        "brainstem — your persona/voice + custom agents + calibration baseline only, "
+        "with the entire workspace memory corpus and all secrets stripped. Hatchable "
+        "on anyone else's local brainstem via @kody-w/twin_egg_hatcher."),
     "author": "Kody Wildfeuer",
     "tags": ["twin", "egg", "twin-me", "pii-strip", "persona", "portable", "federation", "rapp"],
     "category": "core",

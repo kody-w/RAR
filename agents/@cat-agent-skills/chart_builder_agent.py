@@ -13,7 +13,7 @@ this agent is callable on its own terms and links home for the source.
 
   Source library : CAT Agent Skills (microsoft)
   Upstream entry : https://microsoft.github.io/cat-agent-skills/#chart-builder
-  Upstream author: Adi Leibowitz
+  Upstream author: CAT Agent Skills
   Upstream version: 1.0.0
   Licence        : unverified (unverified — indexed, never republished)
 
@@ -27,7 +27,7 @@ __manifest__ = {
     "version": '2.0.0',
     "display_name": 'Chart Builder',
     "description": 'Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call.',
-    "author": 'Adi Leibowitz',
+    "author": 'CAT Agent Skills',
     "tags": ['data', 'charts', 'matplotlib', 'scripts'],
     "category": 'devtools',
     "quality_tier": "frontier",
@@ -45,7 +45,7 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'unverified',
         "license_verified": False,
-        "content_digest": 'f32fa164a482da33',
+        "content_digest": 'cbd81663d9b9dc5b',
     },
     # The platforms the upstream entry targets. First-class and queryable, not
     # buried in prose: this is what lets the registry answer "what can I launch

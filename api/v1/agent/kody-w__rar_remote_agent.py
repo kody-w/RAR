@@ -16,9 +16,9 @@ Fully compatible with the RAPP brainstem runtime:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rar_remote_agent",
-    "version": "1.7.4",
+    "version": "1.7.2",
     "display_name": "RAR Remote Agent",
-    "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
+    "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote, review, and submit single-file agents from the open RAPP ecosystem. Runs autonomously under the brainstem.",
     "author": "RAPP Core Team",
     "tags": ["core", "registry", "package-manager", "install", "discovery", "voting", "community"],
     "category": "core",
@@ -65,9 +65,6 @@ class RARRemoteAgent(BasicAgent):
     REPO_NAME = "RAR"
     REPO = f"{REPO_OWNER}/{REPO_NAME}"
     RAW_BASE = f"https://raw.githubusercontent.com/{REPO}/main"
-    # Stable alias: always 302s to the newest release's copy of an asset,
-    # so no client pins a tag. This is the download path GitHub counts.
-    RELEASE_BASE = f"https://github.com/{REPO}/releases/latest/download"
     API_BASE = f"https://api.github.com/repos/{REPO}"
     API_MANIFEST_URL = f"{RAW_BASE}/api.json"
 
@@ -235,8 +232,6 @@ class RARRemoteAgent(BasicAgent):
                     self.REPO_NAME = config.get("repo", self.REPO_NAME)
                     self.REPO = f"{self.REPO_OWNER}/{self.REPO_NAME}"
                     self.RAW_BASE = f"https://raw.githubusercontent.com/{self.REPO}/main"
-                    self.RELEASE_BASE = (
-                        f"https://github.com/{self.REPO}/releases/latest/download")
                     self.API_BASE = f"https://api.github.com/repos/{self.REPO}"
                     if config.get("role") == "instance" and config.get("upstream"):
                         self._upstream = config["upstream"]
@@ -762,25 +757,12 @@ class RARRemoteAgent(BasicAgent):
             # Save under the path the private repo uses, not the stub path
             filename = src.get("path", "").split("/")[-1] or f"{name.split('/')[-1]}.py"
         else:
+            raw_url = f"{self.RAW_BASE}/{agent['_file']}"
             filename = agent["_file"].split("/")[-1]
-            # Prefer the GitHub release asset. It is the only fetch GitHub
-            # counts for us: a public release asset needs no token, and
-            # download_count is incremented server-side on every fetch,
-            # anonymous ones included. A raw fetch is invisible to us.
-            # Falls back to raw for agents published since the last
-            # release — a metric must never block an install.
-            code = None
-            asset = agent.get("_install_filename")
-            if asset:
-                try:
-                    code = self._fetch_text(f"{self.RELEASE_BASE}/{asset}")
-                except Exception:
-                    code = None
-            if code is None:
-                try:
-                    code = self._fetch_text(f"{self.RAW_BASE}/{agent['_file']}")
-                except Exception as e:
-                    return f"Error downloading agent: {e}"
+            try:
+                code = self._fetch_text(raw_url)
+            except Exception as e:
+                return f"Error downloading agent: {e}"
 
         try:
             os.makedirs(output_dir, exist_ok=True)

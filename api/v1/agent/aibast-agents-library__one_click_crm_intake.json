@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__one_click_crm_intake",
   "name": "One-Click CRM Intake",
   "rar_name": "@aibast-agents-library/one_click_crm_intake",
-  "rappid": "rappid:@aibast-agents-library/one_click_crm_intake:496f13116f8f00319ae3d5b71972f38d8317d7ce7f281e3341a912a76c0898cf",
-  "_migrated_from": "rappid:@aibast-agents-library/one_click_crm_intake:e1c3da636e3cbec21f0965b088177072feeda0efd9ef764848918151af9c1148",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@aibast-agents-library/one_click_crm_intake:2da3039e90aeabf99eaf9b080c144fc8",
-    "rappid:@aibast-agents-library/one_click_crm_intake:e1c3da636e3cbec21f0965b088177072feeda0efd9ef764848918151af9c1148"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/one_click_crm_intake:e1c3da636e3cbec21f0965b088177072feeda0efd9ef764848918151af9c1148",
+  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/one_click_crm_intake:2da3039e90aeabf99eaf9b080c144fc8", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
   "publisher": "@aibast-agents-library",
   "category": "general",
   "tags": [
@@ -20,24 +15,24 @@
     "duplicate-detection",
     "import"
   ],
-  "description": "Runs CRM intake with duplicate checks against a live simulated Dynamics 365 tenant's leads, with an offline demo fallback.",
+  "description": "Streamlined CRM data intake with form generation, validation, duplicate detection, and import preview.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 406,
-  "size_kb": 20.8,
-  "sha256": "d025351a091cb6883853cdae93a6f645317936844f5a781e11352d0fd9527bb5",
+  "lines": 293,
+  "size_kb": 15.6,
+  "sha256": "2da3039e90aeabf99eaf9b080c144fc8f047c63e9609a5eb8273dd05f8ffad5d",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__one_click_crm_intake.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__one_click_crm_intake.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__one_click_crm_intake.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__one_click_crm_intake.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py"
 }

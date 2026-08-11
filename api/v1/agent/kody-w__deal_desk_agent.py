@@ -14,9 +14,9 @@ One prompt. Full deal intelligence. No CRM required.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/deal_desk_agent",
-    "version": "1.1.1",
+    "version": "1.1.0",
     "display_name": "DealDesk",
-    "description": "Produces templated deal briefings, health scores, and competitive analyses for a named company, listing sales agents from the live RAR registry.",
+    "description": "B2B sales intelligence deck — runs account briefing, competitive analysis, deal health scoring, and proposal recommendations. Shows available RAPP sales agents for deeper workflow.",
     "author": "Kody Wildfeuer",
     "tags": ["deck", "deal", "sales", "b2b", "account-intelligence", "competitive", "pipeline", "crm"],
     "category": "b2b_sales",

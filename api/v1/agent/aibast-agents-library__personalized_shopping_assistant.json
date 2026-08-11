@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__personalized_shopping_assistant",
   "name": "Personalized Shopping Assistant Agent",
   "rar_name": "@aibast-agents-library/personalized_shopping_assistant",
-  "rappid": "rappid:@aibast-agents-library/personalized_shopping_assistant:5cefa38ec683beda75ccb61838f2bdc6a35a3de8325cb005fc1b7360d1b8dfc1",
-  "_migrated_from": "rappid:@aibast-agents-library/personalized_shopping_assistant:57dbd856c86f05d1049c9f98a5c9e55ec2e53b085d8d0408e6a47a7a0ecb5758",
-  "_migrated_from_all": [
-    "rappid:@aibast-agents-library/personalized_shopping_assistant:63a69ec7c375a8d2721e535d3e983fbe47024708c19c34ec73f58fac34be23eb",
-    "rappid:@aibast-agents-library/personalized_shopping_assistant:57dbd856c86f05d1049c9f98a5c9e55ec2e53b085d8d0408e6a47a7a0ecb5758"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.2.0",
+  "rappid": "rappid:@aibast-agents-library/personalized_shopping_assistant:57dbd856c86f05d1049c9f98a5c9e55ec2e53b085d8d0408e6a47a7a0ecb5758",
+  "_migrated_from": "rappid:@aibast-agents-library/personalized_shopping_assistant:63a69ec7c375a8d2721e535d3e983fbe47024708c19c34ec73f58fac34be23eb", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "b2c_sales",
   "tags": [
@@ -21,24 +16,24 @@
     "inventory",
     "b2c"
   ],
-  "description": "Recommends products and checks a live catalog from a simulated Dynamics 365 tenant, with an offline demo fallback for every operation.",
+  "description": "Personalized retail shopping with product recommendations, style profiling, inventory checks, and outfit building.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 494,
-  "size_kb": 25.7,
-  "sha256": "6f02e955c5212f2deb68cab2674901f367a6eaa77ca0e85834df0da46189d83c",
+  "lines": 373,
+  "size_kb": 20.2,
+  "sha256": "63a69ec7c375a8d2721e535d3e983fbe47024708c19c34ec73f58fac34be23eb",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__personalized_shopping_assistant.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__personalized_shopping_assistant.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__personalized_shopping_assistant.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__personalized_shopping_assistant.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py"
 }

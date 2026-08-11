@@ -3,14 +3,9 @@
   "id": "rapp__moment_factory_agent",
   "name": "MomentFactory",
   "rar_name": "@rapp/moment_factory_agent",
-  "rappid": "rappid:@rapp/moment_factory_agent:8c5ac449441a68d1f61995109dd0a885048eb49e14122f8e58aa5bdf91582cfd",
-  "_migrated_from": "rappid:@rapp/moment_factory_agent:f282fb0b34299ab5ba73722359a1429c088b4ea32ac1d48a743d37b6da6bc306",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@rapp/moment_factory_agent:099d6645c9f837609f63b439ead2e4d1",
-    "rappid:@rapp/moment_factory_agent:f282fb0b34299ab5ba73722359a1429c088b4ea32ac1d48a743d37b6da6bc306"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "0.1.4",
+  "rappid": "rappid:@rapp/moment_factory_agent:f282fb0b34299ab5ba73722359a1429c088b4ea32ac1d48a743d37b6da6bc306",
+  "_migrated_from": "rappid:v2:agent:@rapp/moment_factory_agent:099d6645c9f837609f63b439ead2e4d1", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "0.1.3",
   "publisher": "@rapp",
   "category": "creative",
   "tags": [
@@ -20,7 +15,7 @@
     "rappterbook-engine",
     "singleton"
   ],
-  "description": "Converts a moment (commit, message, idea) into a publishable Drop \u2014 hook, body, channel, card, and seed \u2014 through seven inlined LLM personas.",
+  "description": "Seven-persona moment-to-Drop pipeline (Sensorium \u2192 SignificanceFilter \u2192 HookWriter \u2192 BodyWriter \u2192 ChannelRouter \u2192 CardForger \u2192 SeedStamper). Converts a moment (commit, message, idea, observation) into a publishable Drop with hook, body, channel routing, render card, and seed.",
   "author": "RAPP",
   "quality_tier": "official",
   "requires_env": [],
@@ -28,16 +23,16 @@
     "@rapp/basic_agent"
   ],
   "lines": 512,
-  "size_kb": 23.6,
-  "sha256": "02a5b7154b7bd205223d58d3d61489bfa725ad7218915a0012709fe0d5f1ccf8",
+  "size_kb": 23.7,
+  "sha256": "ef274fad5f3cb9f2e5035d2e0463fe0d245be6e52757a9000f6ccece93f78f1a",
   "has_card": true,
-  "added_at": "2026-04-27T21:16:54Z",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__moment_factory_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__moment_factory_agent.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__moment_factory_agent.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__moment_factory_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/moment_factory_agent.py"
 }

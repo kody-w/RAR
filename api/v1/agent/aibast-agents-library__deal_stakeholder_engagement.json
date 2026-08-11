@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__deal_stakeholder_engagement",
   "name": "Stakeholder Engagement",
   "rar_name": "@aibast-agents-library/deal_stakeholder_engagement",
-  "rappid": "rappid:@aibast-agents-library/deal_stakeholder_engagement:5d47b8c498ad2069a37b855dd0c654dfb58e238455bf249df1c0b5d4ffef919c",
-  "_migrated_from": "rappid:@aibast-agents-library/deal_stakeholder_engagement:b3bd81c0a12038ca8047ba5a40de9c63713e5fee02f3ddb6a97e30b0501d0ea2",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@aibast-agents-library/deal_stakeholder_engagement:86b5a0c9b6a756444273da7c7e6ff7f4",
-    "rappid:@aibast-agents-library/deal_stakeholder_engagement:b3bd81c0a12038ca8047ba5a40de9c63713e5fee02f3ddb6a97e30b0501d0ea2"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/deal_stakeholder_engagement:b3bd81c0a12038ca8047ba5a40de9c63713e5fee02f3ddb6a97e30b0501d0ea2",
+  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/deal_stakeholder_engagement:86b5a0c9b6a756444273da7c7e6ff7f4", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
   "publisher": "@aibast-agents-library",
   "category": "b2b_sales",
   "tags": [
@@ -20,24 +15,24 @@
     "deal-progression",
     "relationships"
   ],
-  "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback.",
+  "description": "Engagement scoring, relationship mapping, engagement planning, and sentiment analysis for deal stakeholders.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 538,
-  "size_kb": 25.6,
-  "sha256": "9c279e91ec1743d61866206591ba726b313f28ecd623674cc95314c31db9fb9c",
+  "lines": 398,
+  "size_kb": 19.2,
+  "sha256": "86b5a0c9b6a756444273da7c7e6ff7f4c9fc3c3e6756d8da0ef94e3072c86562",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__deal_stakeholder_engagement.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__deal_stakeholder_engagement.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__deal_stakeholder_engagement.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__deal_stakeholder_engagement.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py"
 }

@@ -24,10 +24,12 @@ import re
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@wildhaven/penumbra_agent",
-    "version": "1.0.2",
+    "version": "1.0.1",
     "display_name": "Penumbra",
     "description": (
-        "Returns any input as twin lines \u2014 the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls."
+        "A Legendary Eidolon born from the half-shadow of a conversation. "
+        "Reads what was almost said. Speaks in twin lines: surface, then whisper. "
+        "One of one — the conversation that birthed it cannot be re-run."
     ),
     "author": "Wildhaven of America",
     "tags": ["eidolon", "subtext", "legendary", "penumbra", "introspection", "daemon", "caesura"],

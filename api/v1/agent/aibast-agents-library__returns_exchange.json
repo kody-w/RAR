@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__returns_exchange",
   "name": "Returns & Exchange Agent",
   "rar_name": "@aibast-agents-library/returns_exchange",
-  "rappid": "rappid:@aibast-agents-library/returns_exchange:dbd31ccf4597df9f2ade1f3926e74b870af221faca27a3e1a1eaf3bf8636cd21",
-  "_migrated_from": "rappid:@aibast-agents-library/returns_exchange:05d87b077e6c2ac4dbe0c7d4814c76b34c1a49cbb39af489f66c3d215f1da670",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@aibast-agents-library/returns_exchange:5bba48bb0a5e9ce23c1ba33b27912d9a",
-    "rappid:@aibast-agents-library/returns_exchange:05d87b077e6c2ac4dbe0c7d4814c76b34c1a49cbb39af489f66c3d215f1da670"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/returns_exchange:05d87b077e6c2ac4dbe0c7d4814c76b34c1a49cbb39af489f66c3d215f1da670",
+  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/returns_exchange:5bba48bb0a5e9ce23c1ba33b27912d9a", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@aibast-agents-library",
   "category": "b2c_sales",
   "tags": [
@@ -21,24 +16,24 @@
     "customer-service",
     "b2c"
   ],
-  "description": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline.",
+  "description": "Retail returns and exchange management with initiation, eligibility checking, exchange options, and refund tracking.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 482,
-  "size_kb": 22.2,
-  "sha256": "89065ae5961458e590f5aeb78b797ad3f71bd85632b4e5d9d4f7f951b9c3d444",
+  "lines": 331,
+  "size_kb": 15.2,
+  "sha256": "a3e13b8773bee28d867c822c8f131e75238b60788548a46a574f7ff5757dd4ae",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__returns_exchange.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__returns_exchange.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__returns_exchange.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__returns_exchange.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py"
 }

@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__supplier_risk_monitoring",
   "name": "Supplier Risk Monitoring Agent",
   "rar_name": "@aibast-agents-library/supplier_risk_monitoring",
-  "rappid": "rappid:@aibast-agents-library/supplier_risk_monitoring:c0daa1ddbe7c0a80c3c2e3e3ca2b7120e0907bddec3abe07e4ae55b9cc00d0cb",
-  "_migrated_from": "rappid:@aibast-agents-library/supplier_risk_monitoring:6b72e033c7edb5124a6a1dce141b4fa73fd1e065523a9c1f4cb984fa2bb32564",
-  "_migrated_from_all": [
-    "rappid:@aibast-agents-library/supplier_risk_monitoring:52867b2ab9e03d8f6c473fe4bd18c1ce283e217f37a9b28dba6520e703755d00",
-    "rappid:@aibast-agents-library/supplier_risk_monitoring:6b72e033c7edb5124a6a1dce141b4fa73fd1e065523a9c1f4cb984fa2bb32564"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.3.0",
+  "rappid": "rappid:@aibast-agents-library/supplier_risk_monitoring:6b72e033c7edb5124a6a1dce141b4fa73fd1e065523a9c1f4cb984fa2bb32564",
+  "_migrated_from": "rappid:@aibast-agents-library/supplier_risk_monitoring:52867b2ab9e03d8f6c473fe4bd18c1ce283e217f37a9b28dba6520e703755d00", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.1",
   "publisher": "@aibast-agents-library",
   "category": "manufacturing",
   "tags": [
@@ -20,24 +15,24 @@
     "supply-chain",
     "manufacturing"
   ],
-  "description": "Computes supplier risk from simulated ERP blocked invoices and late receipts, joined to Dynamics 365 cases, with an offline demo fallback.",
+  "description": "Monitors supplier risk across quality, delivery, financial, and geopolitical dimensions with scorecards, disruption alerts, and alternative-sourcing plans.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 740,
-  "size_kb": 32.3,
-  "sha256": "93ad57d2e6b7a0d36375c39acbb1314bb7f52ebd3b2bacc6136b75fc2e85d392",
+  "lines": 491,
+  "size_kb": 21.5,
+  "sha256": "52867b2ab9e03d8f6c473fe4bd18c1ce283e217f37a9b28dba6520e703755d00",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__supplier_risk_monitoring.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__supplier_risk_monitoring.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__supplier_risk_monitoring.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__supplier_risk_monitoring.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py"
 }

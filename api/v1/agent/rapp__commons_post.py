@@ -54,10 +54,14 @@ except ImportError:  # Pyodide / Doorman context
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/commons_post",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "display_name": "CommonsPost",
     "description": (
-        "Composes a canonical rapp-commons-event/1.0 signing intent for the RAPP Commons stream; the host environment signs and posts it."
+        "Compose a signed event for the RAPP Commons event stream. "
+        "Builds the canonical rapp-commons-event/1.0 object and returns a "
+        "signing intent — the host environment (browser WebCrypto or "
+        "server-side ECDSA) signs and posts. Splitting compose from sign "
+        "keeps the operator's private key out of the agent layer."
     ),
     "author": "RAPP",
     "tags": ["commons", "neighborhood", "post", "event-stream", "sign"],

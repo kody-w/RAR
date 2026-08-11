@@ -3,13 +3,10 @@
   "id": "howardh__cardsmith_agent",
   "name": "CardSmith",
   "rar_name": "@howardh/cardsmith_agent",
-  "rappid": "rappid:@howardh/cardsmith_agent:db818f93e9eae1ca8c85cc5fa95909f7ca810b3df5d14bcd18a73081b730e083",
-  "_migrated_from": "rappid:@howardh/cardsmith_agent:fc02dee6c388081b8a6367b928102e5c774cb3f63594ebe642924fe8a0f6d91b",
-  "_migrated_from_all": [
-    "rappid:@howardh/cardsmith_agent:fc02dee6c388081b8a6367b928102e5c774cb3f63594ebe642924fe8a0f6d91b"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@howardh/cardsmith_agent:fc02dee6c388081b8a6367b928102e5c774cb3f63594ebe642924fe8a0f6d91b",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
   "publisher": "@howardh",
   "category": "productivity",
   "tags": [
@@ -19,7 +16,7 @@
     "trading-cards",
     "sneakernet"
   ],
-  "description": "Forges MTG-style trading cards for brainstem agents from a built-in card database, with forge-all and gallery-link actions.",
+  "description": "Forges trading cards for AI agents. Turn any agent into a collectible card with stats, abilities, and art.",
   "author": "Howard",
   "quality_tier": "community",
   "requires_env": [],
@@ -28,15 +25,15 @@
   ],
   "lines": 318,
   "size_kb": 32.1,
-  "sha256": "d7389ce10549693f4f97098379ca86c4ddbb22c9b4b93f891c99ae2f1aa0d4d4",
+  "sha256": "c0464d0c97ea5233a6e568b398ab40cd932ef27c39c30251ca0dcf7030c0ea3d",
   "has_card": true,
-  "added_at": "2026-05-24T21:45:25-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__cardsmith_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/cardsmith_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/cardsmith_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__cardsmith_agent.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__cardsmith_agent.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__cardsmith_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/cardsmith_agent.py"
 }

@@ -3,13 +3,10 @@
   "id": "kody-w__twin_egg_hatcher",
   "name": "HatchTwinEgg",
   "rar_name": "@kody-w/twin_egg_hatcher",
-  "rappid": "rappid:@kody-w/twin_egg_hatcher:d6802d18761f81ebef3758b3d1d2bc78eae68ceb9d2309f04d046e578309c999",
-  "_migrated_from": "rappid:@kody-w/twin_egg_hatcher:f7a37cc24aabbc9d9b0f20555b5df6f6724e8acb3d8fb39a36a332d571c566dc",
-  "_migrated_from_all": [
-    "rappid:@kody-w/twin_egg_hatcher:f7a37cc24aabbc9d9b0f20555b5df6f6724e8acb3d8fb39a36a332d571c566dc"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.2",
+  "rappid": "rappid:@kody-w/twin_egg_hatcher:f7a37cc24aabbc9d9b0f20555b5df6f6724e8acb3d8fb39a36a332d571c566dc",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.1",
   "publisher": "@kody-w",
   "category": "core",
   "tags": [
@@ -21,24 +18,24 @@
     "single-file",
     "rapp"
   ],
-  "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
+  "description": "Generic single-file hatcher for any RAPP digital-organism twin. Loads identity from cwd auto-detect, --source REPO (raw GitHub), or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The global brainstem's built-in Twin agent boots/chats with it immediately.",
   "author": "Kody Wildfeuer",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 895,
-  "size_kb": 32.2,
-  "sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
+  "lines": 898,
+  "size_kb": 32.4,
+  "sha256": "aa53c3d325959dfe46094788204fbdb8d210c345763a6e0180b6908fb89496f5",
   "has_card": true,
-  "added_at": "2026-05-24T21:45:25-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__twin_egg_hatcher.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_egg_hatcher.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_egg_hatcher.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_egg_hatcher.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/twin_egg_hatcher_agent.py"
 }

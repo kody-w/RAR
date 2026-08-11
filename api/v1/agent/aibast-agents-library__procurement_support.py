@@ -1,54 +1,17 @@
 """
-Procurement Support Agent — a template you are meant to mutate.
+Procurement Support Agent
 
-Provides procurement support operations including requisition status
-tracking, contract lookups, supplier performance scoring, and budget
-checking.
+Provides procurement support operations including requisition status tracking,
+contract lookups, supplier performance scoring, and budget checking.
 
-The live tenant has no native "requisition" entity, so in this template
-a Dynamics SALES ORDER is read from the buying side — an order your
-organization has placed with the supplier Aster Lane Office Systems.
-Say the same in your own mutation if you reinterpret an entity.
-
-HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live records over real HTTP from TWO
-     globally hosted simulated systems (synthetic data, no credentials,
-     works from anywhere):
-       CRM — Static Dynamics 365 tenant (Aster Lane Office Systems):
-         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-       ERP — Static ERP (suppliers, purchase orders, goods receipts,
-       supplier invoices):
-         https://kody-w.github.io/static-erp/api/v1/
-     Try: perform(operation="supplier_performance")
-     — the embedded scorecard PLUS real per-supplier signals joined
-     from live ERP documents: Orchard Signal Works shows the blocked
-     invoice SINV-92003 (PO-47003) and Quarry Bend Foundry the goods
-     receipt GR-88005 posted 9 days late against PO-47005.
-     Also try: perform(operation="requisition_status",
-     requisition_id="PO-47003") to track one live ERP PO.
-  2. No network? Everything falls back to the embedded demo layer below
-     (_REQUISITIONS / _CONTRACTS) — the agent never crashes offline.
-  3. Make it yours at the LIVE DATA SEAM below: set
-     PROCUREMENT_SUPPORT_DATA_URL (CRM side) and/or
-     PROCUREMENT_SUPPORT_ERP_URL (ERP side) to any endpoint with the
-     same shapes, or replace _fetch_collection() with your procurement
-     client. The fields the rest of the file needs are listed in
-     _normalize_live_requisition() — requester and department are
-     labeled "n/a — enrichment seam"; wire your HR/identity system
-     there.
-
-OPERATIONS
-  requisition_status | contract_lookup | supplier_performance
-  | budget_check
-  kwargs: operation (required), requisition_id
+Where a real deployment would connect to ERP and contract management systems,
+this agent uses a synthetic data layer so it runs anywhere without credentials.
 """
 
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 
 from basic_agent import BasicAgent
-import json
-import urllib.request
 
 # ═══════════════════════════════════════════════════════════════
 # RAPP AGENT MANIFEST
@@ -56,9 +19,9 @@ import urllib.request
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/procurement_support",
-    "version": "1.2.0",
+    "version": "1.0.0",
     "display_name": "Procurement Support",
-    "description": "Tracks requisitions and supplier signals over a simulated Dynamics 365 tenant and ERP (POs, receipts, blocked invoices), with offline fallback.",
+    "description": "Procurement support for requisition tracking, contract lookups, supplier performance, and budget checks.",
     "author": "AIBAST",
     "tags": ["procurement", "requisition", "contracts", "supplier", "budget"],
     "category": "general",
@@ -69,172 +32,7 @@ __manifest__ = {
 
 
 # ═══════════════════════════════════════════════════════════════
-# LIVE DATA SEAM — swap this for your real systems
-#
-# Defaults: TWO globally hosted simulated systems (synthetic data
-# served as JSON from GitHub Pages). To hook your own world, either:
-#   export PROCUREMENT_SUPPORT_DATA_URL=https://your-org/api/data/v9.2
-#   export PROCUREMENT_SUPPORT_ERP_URL=https://your-erp/api/v1
-# or replace _fetch_collection() with your procurement client.
-# Downstream code only needs the fields produced by
-# _normalize_live_requisition() and _normalize_erp_requisition().
-# ═══════════════════════════════════════════════════════════════
-
-DATA_SOURCE_URL = os.environ.get(
-    "PROCUREMENT_SUPPORT_DATA_URL",
-    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
-)
-ERP_SOURCE_URL = os.environ.get(
-    "PROCUREMENT_SUPPORT_ERP_URL",
-    "https://kody-w.github.io/static-erp/api/v1",
-)
-_LIVE_CACHE = {}
-
-
-def _fetch_collection(collection, timeout=6, base_url=None):
-    """One bounded GET per collection per source per process. Returns []
-    on ANY failure — offline, DNS, bad JSON — so the demo layer takes
-    over. Cache is keyed by full URL so CRM and ERP never collide."""
-    url = f"{base_url or DATA_SOURCE_URL}/{collection}.json"
-    if url in _LIVE_CACHE:
-        return _LIVE_CACHE[url]
-    try:
-        req = urllib.request.Request(
-            url,
-            headers={"User-Agent": "rapp-agent-template/1.0"},
-        )
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
-    except Exception:
-        rows = []
-    _LIVE_CACHE[url] = rows
-    return rows
-
-
-def _erp(collection):
-    """Rows from the live simulated ERP (suppliers, materials,
-    purchase_orders, goods_receipts, supplier_invoices); [] offline."""
-    return _fetch_collection(collection, base_url=ERP_SOURCE_URL)
-
-
-def _normalize_live_requisition(row):
-    """Project a Dynamics sales order (read from the buying side) onto
-    the requisition shape this agent uses. THIS is the contract your
-    replacement data source must meet — a dict with these keys. None
-    means 'not available from the order alone' (enrichment seam); 0 is
-    a real zero."""
-    fulfilled = str(row.get("datefulfilled") or "")[:10] or None
-    return {
-        "id": row.get("ordernumber", row.get("salesorderid", "")),
-        "title": row.get("name", "Unnamed order"),
-        "requester": None,     # enrichment seam — wire your HR/identity system
-        "department": None,    # enrichment seam
-        "amount": float(row.get("totalamount") or 0),
-        "status": row.get("statuscode@OData.Community.Display.V1.FormattedValue", "Open"),
-        "created": str(row.get("createdon", ""))[:10],
-        "po_number": row.get("ordernumber"),
-        "supplier": "Aster Lane Office Systems",
-        "delivery_date": fulfilled,
-        "received_pct": 100 if fulfilled else 0,
-        "_live": True,
-    }
-
-
-def _live_requisitions():
-    """Live tenant orders as requisitions; [] when offline."""
-    rows = _fetch_collection("salesorders")
-    return [_normalize_live_requisition(r) for r in rows if r.get("ordernumber")]
-
-
-def _normalize_erp_requisition(row, receipts):
-    """Project a live ERP purchase order onto the requisition shape."""
-    received = [g for g in receipts if g.get("po_number") == row.get("po_number")]
-    title = "; ".join(
-        str(l.get("material_description", l.get("material_number", "?")))
-        for l in row.get("lines", [])
-    ) or "Unnamed purchase order"
-    return {
-        "id": row.get("po_number", ""),
-        "title": title,
-        "requester": row.get("buyer_name"),
-        "department": None,      # enrichment seam
-        "amount": float(row.get("total_amount") or 0),
-        "status": row.get("status", "open"),
-        "created": str(row.get("order_date", ""))[:10],
-        "po_number": row.get("po_number"),
-        "supplier": row.get("supplier_name", "Unknown"),
-        "delivery_date": str(received[0].get("posting_date", ""))[:10] if received else None,
-        "received_pct": 100 if received else 0,
-        "_live": True,
-        "_erp": True,
-    }
-
-
-def _erp_requisitions():
-    """Live ERP purchase orders as requisitions; [] when offline."""
-    receipts = _erp("goods_receipts")
-    return [
-        _normalize_erp_requisition(r, receipts)
-        for r in _erp("purchase_orders")
-        if r.get("po_number")
-    ]
-
-
-def _erp_supplier_signals():
-    """Real per-supplier risk signals joined from live ERP documents:
-    purchase orders, goods receipts (late vs expected delivery), and
-    supplier invoices (payment blocks). [] when the ERP is unreachable."""
-    suppliers = _erp("suppliers")
-    if not suppliers:
-        return []
-    pos = _erp("purchase_orders")
-    grs = _erp("goods_receipts")
-    invs = _erp("supplier_invoices")
-    expected = {
-        p.get("po_number"): str(p.get("expected_delivery_date", ""))[:10]
-        for p in pos
-    }
-    signals = []
-    for s in suppliers:
-        name = s.get("name", "?")
-        s_pos = [p for p in pos if p.get("supplier_name") == name]
-        s_grs = [g for g in grs if g.get("supplier_name") == name]
-        late = [
-            g for g in s_grs
-            if expected.get(g.get("po_number"))
-            and str(g.get("posting_date", ""))[:10] > expected[g.get("po_number")]
-        ]
-        blocked = [
-            i for i in invs
-            if i.get("supplier_name") == name and i.get("payment_block")
-        ]
-        flags = []
-        for g in late:
-            flags.append(
-                f"{g.get('receipt_number')} posted {str(g.get('posting_date',''))[:10]} "
-                f"vs {expected.get(g.get('po_number'))} expected on {g.get('po_number')}"
-            )
-        for i in blocked:
-            flags.append(
-                f"{i.get('invoice_number')} payment-blocked on {i.get('po_number')} "
-                f"(${float(i.get('total_amount') or 0):,.2f})"
-            )
-        signals.append({
-            "name": name,
-            "terms": s.get("payment_terms", "?"),
-            "category": s.get("category", "?"),
-            "po_count": len(s_pos),
-            "receipt_count": len(s_grs),
-            "late_count": len(late),
-            "blocked_count": len(blocked),
-            "status": "REVIEW" if (late or blocked) else "OK",
-            "flags": flags,
-        })
-    return signals
-
-
-# ═══════════════════════════════════════════════════════════════
-# EMBEDDED DEMO LAYER (offline fallback)
+# SYNTHETIC DATA LAYER
 # ═══════════════════════════════════════════════════════════════
 
 _REQUISITIONS = {
@@ -274,6 +72,16 @@ _BUDGET_ALLOCATIONS = {
 # ═══════════════════════════════════════════════════════════════
 # HELPERS
 # ═══════════════════════════════════════════════════════════════
+
+def _resolve_requisition(query):
+    if not query:
+        return "REQ-7001"
+    q = query.upper().strip()
+    for key in _REQUISITIONS:
+        if key in q:
+            return key
+    return "REQ-7001"
+
 
 def _contracts_expiring_soon(days=90):
     expiring = []
@@ -346,36 +154,19 @@ class ProcurementSupportAgent(BasicAgent):
 
     # ── requisition_status ─────────────────────────────────────
     def _requisition_status(self, params):
-        query = (params.get("requisition_id") or "").upper().strip()
-        live = _live_requisitions()
-        erp = _erp_requisitions() if query.startswith("PO-") else []
-        if query.startswith("REQ-") and query in _REQUISITIONS:
-            reqs, source = [_REQUISITIONS[query]], "embedded demo layer (simulated)"
-        elif query and any(r["id"] == query for r in erp):
-            reqs = [r for r in erp if r["id"] == query]
-            source = "LIVE purchase order from the simulated ERP (real supplier, receipt, and invoice joins)"
-        elif query and any(r["id"] == query for r in live):
-            reqs = [r for r in live if r["id"] == query]
-            source = "LIVE order from the Aster Lane Dynamics 365 tenant (read as a requisition)"
-        elif live:
-            reqs, source = live, "LIVE orders from the Aster Lane Dynamics 365 tenant (read as requisitions)"
-        else:
-            reqs, source = list(_REQUISITIONS.values()), "embedded demo layer (simulated — live tenant unreachable)"
         rows = ""
-        for req in reqs:
+        for req in _REQUISITIONS.values():
             po = req["po_number"] or "Pending"
-            rows += f"| {req['id']} | {req['title'][:35]} | ${req['amount']:,.0f} | {req['status']} | {po} | {req['supplier']} |\n"
-        delivered = sum(1 for r in reqs if r["received_pct"] == 100)
-        in_flight = len(reqs) - delivered
+            rows += f"| {req['id']} | {req['title'][:35]} | ${req['amount']:,} | {req['status']} | {po} | {req['supplier']} |\n"
         return (
             f"**Requisition Status Dashboard**\n\n"
             f"| ID | Title | Amount | Status | PO# | Supplier |\n|---|---|---|---|---|---|\n"
             f"{rows}\n"
             f"**Status Summary:**\n"
-            f"- Delivered/received: {delivered}\n"
-            f"- In flight: {in_flight}\n"
-            f"- Total tracked spend: ${sum(r['amount'] for r in reqs):,.0f}\n\n"
-            f"Record source: {source}\n"
+            f"- Delivered: {sum(1 for r in _REQUISITIONS.values() if r['status'] == 'Delivered')}\n"
+            f"- In Transit: {sum(1 for r in _REQUISITIONS.values() if r['status'] == 'In Transit')}\n"
+            f"- Approved: {sum(1 for r in _REQUISITIONS.values() if r['status'] == 'Approved')}\n"
+            f"- Pending: {sum(1 for r in _REQUISITIONS.values() if 'Pending' in r['status'] or 'Review' in r['status'])}\n\n"
             f"Source: [Procurement System + ERP]\nAgents: ProcurementSupportAgent"
         )
 
@@ -388,7 +179,7 @@ class ProcurementSupportAgent(BasicAgent):
         renewal_count = sum(1 for c in _CONTRACTS.values() if c["status"] == "Renewal Due")
         total_value = sum(c["annual_value"] for c in _CONTRACTS.values())
         return (
-            f"**Contract Portfolio** (embedded demo data — simulated)\n\n"
+            f"**Contract Portfolio**\n\n"
             f"| ID | Supplier | Title | Annual Value | End Date | Status | Auto-Renew |\n|---|---|---|---|---|---|---|\n"
             f"{rows}\n"
             f"**Summary:**\n"
@@ -403,46 +194,15 @@ class ProcurementSupportAgent(BasicAgent):
         rows = ""
         for name, s in sorted(_SUPPLIER_SCORES.items(), key=lambda x: x[1]["overall"], reverse=True):
             rows += f"| {name} | {s['overall']} | {s['quality']} | {s['delivery']} | {s['responsiveness']} | {s['pricing']} | {s['risk_level']} | {s['on_time_pct']}% |\n"
-        live = _live_requisitions()
-        if live:
-            fulfilled = sum(1 for r in live if r["received_pct"] == 100)
-            live_line = (
-                f"\n**Live supplier snapshot (Aster Lane Office Systems, from the LIVE tenant):** "
-                f"{len(live)} orders on record, {fulfilled} fulfilled. Quality/responsiveness "
-                "scores are an enrichment seam — wire your supplier scorecard system.\n"
-            )
-        else:
-            live_line = "\n**Live supplier snapshot:** live tenant unreachable — embedded demo data only.\n"
-        signals = _erp_supplier_signals()
-        if signals:
-            erp_rows = ""
-            erp_flags = []
-            for s in signals:
-                erp_rows += (
-                    f"| {s['name']} | {s['category']} | {s['terms']} | {s['po_count']} | "
-                    f"{s['receipt_count']} | {s['late_count']} | {s['blocked_count']} | {s['status']} |\n"
-                )
-                erp_flags.extend(f"- {s['name']}: {f}" for f in s["flags"])
-            erp_block = (
-                "\n**Live ERP Supplier Signals** (joined from LIVE ERP POs, goods receipts, and invoices):\n\n"
-                "| Supplier | Category | Terms | POs | Receipts | Late Receipts | Blocked Invoices | Signal |\n"
-                "|---|---|---|---|---|---|---|---|\n"
-                f"{erp_rows}\n"
-                + ("**ERP Exceptions:**\n" + "\n".join(erp_flags) + "\n" if erp_flags else "")
-            )
-        else:
-            erp_block = "\n**Live ERP supplier signals:** ERP unreachable — embedded demo data only.\n"
         return (
-            f"**Supplier Performance Scorecard** (embedded demo scores — simulated)\n\n"
+            f"**Supplier Performance Scorecard**\n\n"
             f"| Supplier | Overall | Quality | Delivery | Response | Pricing | Risk | On-Time |\n|---|---|---|---|---|---|---|---|\n"
             f"{rows}\n"
-            f"**Scoring Methodology:** Weighted composite (Quality 30%, Delivery 25%, Responsiveness 20%, Pricing 15%, Innovation 10%)\n"
-            f"{live_line}"
-            f"{erp_block}\n"
+            f"**Scoring Methodology:** Weighted composite (Quality 30%, Delivery 25%, Responsiveness 20%, Pricing 15%, Innovation 10%)\n\n"
             f"**Alerts:**\n"
             f"- PrintPro Services: Below 80 overall - consider alternative suppliers\n"
             f"- All strategic suppliers (AWS, Salesforce) maintaining 87+ scores\n\n"
-            f"Source: [Supplier Management System + Live Dynamics 365 Tenant + Live ERP]\nAgents: ProcurementSupportAgent"
+            f"Source: [Supplier Management System]\nAgents: ProcurementSupportAgent"
         )
 
     # ── budget_check ───────────────────────────────────────────
@@ -455,7 +215,7 @@ class ProcurementSupportAgent(BasicAgent):
             status = "Over" if b["remaining"] < 0 else ("At Risk" if util > 85 else "On Track")
             rows += f"| {dept} | ${b['annual_budget']:,} | ${b['spent']:,} | ${b['committed']:,} | ${b['remaining']:,} | {util:.0f}% | {status} |\n"
         return (
-            f"**Budget Check** (embedded demo data — simulated)\n\n"
+            f"**Budget Check**\n\n"
             f"| Metric | Value |\n|---|---|\n"
             f"| Total Budget | ${total_budget:,} |\n"
             f"| Spent YTD | ${total_spent:,} ({total_spent/total_budget*100:.0f}%) |\n"
@@ -473,18 +233,7 @@ class ProcurementSupportAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = ProcurementSupportAgent()
-    print("=" * 60)
-    print("EMBEDDED DEMO REQUISITION (works offline)")
-    print(agent.perform(operation="requisition_status", requisition_id="REQ-7001"))
-    print()
-    print("=" * 60)
-    print("LIVE TENANT REQUISITIONS (fetched over HTTP; falls back offline)")
-    print(agent.perform(operation="requisition_status"))
-    print()
-    print("=" * 60)
-    print("LIVE ERP PURCHASE ORDER (blocked-invoice PO; falls back offline)")
-    print(agent.perform(operation="requisition_status", requisition_id="PO-47003"))
-    print()
-    print("=" * 60)
-    print("SUPPLIER PERFORMANCE + LIVE ERP SIGNALS (late receipts, blocked invoices)")
-    print(agent.perform(operation="supplier_performance"))
+    for op in ["requisition_status", "contract_lookup", "supplier_performance", "budget_check"]:
+        print("=" * 60)
+        print(agent.perform(operation=op))
+        print()

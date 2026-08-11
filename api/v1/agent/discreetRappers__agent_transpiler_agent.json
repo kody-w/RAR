@@ -3,14 +3,9 @@
   "id": "discreetRappers__agent_transpiler_agent",
   "name": "AgentTranspiler",
   "rar_name": "@discreetRappers/agent_transpiler_agent",
-  "rappid": "rappid:@discreetRappers/agent_transpiler_agent:5b791fa732b009d98c427e86b1d8c9f86cc3b84845d0ce4c28abfaee04658fde",
-  "_migrated_from": "rappid:@discreetRappers/agent_transpiler_agent:da9dd6bb654fd2a2fcd661d254006d8763292823946a3c56209effc881984608",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@discreetRappers/agent_transpiler_agent:966e2b299ccdd9b57bcb085522f79def",
-    "rappid:@discreetRappers/agent_transpiler_agent:da9dd6bb654fd2a2fcd661d254006d8763292823946a3c56209effc881984608"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@discreetRappers/agent_transpiler_agent:da9dd6bb654fd2a2fcd661d254006d8763292823946a3c56209effc881984608",
+  "_migrated_from": "rappid:v2:agent:@discreetRappers/agent_transpiler_agent:966e2b299ccdd9b57bcb085522f79def", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
   "publisher": "@discreetRappers",
   "category": "pipeline",
   "tags": [
@@ -20,7 +15,7 @@
     "copilot-studio",
     "multi-platform"
   ],
-  "description": "Converts RAPP agent definitions into M365 declarative, Copilot Studio, and Azure AI Foundry formats, with optional Foundry deployment.",
+  "description": "Converts agents between platforms: M365 Copilot, Copilot Studio, Azure AI Foundry.",
   "author": "Bill Whalen",
   "quality_tier": "community",
   "requires_env": [
@@ -30,16 +25,16 @@
     "@rapp/basic_agent"
   ],
   "lines": 1035,
-  "size_kb": 39.2,
-  "sha256": "5ae4e24760415ab5d1ad427c6a2f52518d4919d2811bee13914e65f3b159210c",
+  "size_kb": 39.1,
+  "sha256": "966e2b299ccdd9b57bcb085522f79defac1584dd291c2124fd729f86de5f7388",
   "has_card": true,
-  "added_at": "2026-04-06T16:39:03-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__agent_transpiler_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_transpiler_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_transpiler_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__agent_transpiler_agent.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__agent_transpiler_agent.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__agent_transpiler_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/agent_transpiler_agent.py"
 }

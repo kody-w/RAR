@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__maintenance_scheduling",
   "name": "Maintenance Scheduling Agent",
   "rar_name": "@aibast-agents-library/maintenance_scheduling",
-  "rappid": "rappid:@aibast-agents-library/maintenance_scheduling:504d517c10b31a4fe30ed31a0edc8303846ddaa36e6fa8a9ce3ab6131b5c5a74",
-  "_migrated_from": "rappid:@aibast-agents-library/maintenance_scheduling:a646e1532fab91821e357983108672a9535a1d9d0b9304932b1b09e125112925",
-  "_migrated_from_all": [
-    "rappid:@aibast-agents-library/maintenance_scheduling:1f068d29d6052dc41260b9e8623aa964e5fca3a6a7e31871fea6b2fbbaeb5e36",
-    "rappid:@aibast-agents-library/maintenance_scheduling:a646e1532fab91821e357983108672a9535a1d9d0b9304932b1b09e125112925"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.2.0",
+  "rappid": "rappid:@aibast-agents-library/maintenance_scheduling:a646e1532fab91821e357983108672a9535a1d9d0b9304932b1b09e125112925",
+  "_migrated_from": "rappid:@aibast-agents-library/maintenance_scheduling:1f068d29d6052dc41260b9e8623aa964e5fca3a6a7e31871fea6b2fbbaeb5e36", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.1",
   "publisher": "@aibast-agents-library",
   "category": "manufacturing",
   "tags": [
@@ -20,24 +15,24 @@
     "manufacturing",
     "IoT"
   ],
-  "description": "Builds predictive maintenance schedules and work orders from a live simulated Dynamics 365 tenant, with an offline demo telemetry fallback.",
+  "description": "Generates predictive maintenance schedules from equipment telemetry and failure models, optimizing technician assignments to minimize unplanned downtime.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 618,
-  "size_kb": 28.4,
-  "sha256": "d6c819ed44648205ffc79f63a1c65f990f552fb45897638e2a59a259630358d2",
+  "lines": 502,
+  "size_kb": 23.0,
+  "sha256": "1f068d29d6052dc41260b9e8623aa964e5fca3a6a7e31871fea6b2fbbaeb5e36",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__maintenance_scheduling.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__maintenance_scheduling.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__maintenance_scheduling.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__maintenance_scheduling.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py"
 }

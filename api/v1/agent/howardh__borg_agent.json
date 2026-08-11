@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__borg_agent",
+  "name": "Borg",
+  "rar_name": "@howardh/borg_agent",
+  "rappid": "rappid:@howardh/borg_agent:0a5d4889705c999cd0dc8154addd694f32d0506c97d397b3c90d3d1070195be8",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@howardh",
+  "category": "core",
+  "tags": [
+    "core",
+    "analysis",
+    "github",
+    "web",
+    "assimilation"
+  ],
+  "description": "Assimilates knowledge from GitHub repos and web URLs into structured reports.",
+  "author": "Howard",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 990,
+  "size_kb": 39.8,
+  "sha256": "14b1b16904570577d6a35128ead2fb6ca825975fc3b1b3413e335c293bd7c431",
+  "has_card": true,
+  "added_at": "2026-07-16T17:09:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__borg_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/borg_agent.py.card",
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/borg_agent.py.card.card",
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__borg_agent.py",
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__borg_agent.card",
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__borg_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/borg_agent.py.card"
+}

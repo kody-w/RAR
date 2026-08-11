@@ -23,9 +23,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/account_messaging",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "display_name": "Account Messaging",
-    "description": "Drafts personalized outreach, follow-up emails, and campaign sequences for enterprise accounts using built-in demo data.",
+    "description": "Generates personalized outreach, follow-ups, and campaign sequences for enterprise accounts.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "messaging", "outreach", "email-sequences"],
     "category": "b2b_sales",

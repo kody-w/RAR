@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__identify_discounts",
   "name": "Identify Discounts",
   "rar_name": "@aibast-agents-library/identify_discounts",
-  "rappid": "rappid:@aibast-agents-library/identify_discounts:f3b5e6e1498c465837095c269a1f95127ce7a5532ac7a2a85ecbaf0431b5bf06",
-  "_migrated_from": "rappid:@aibast-agents-library/identify_discounts:0033179d8b5d266caa38ace6fb49a8ae74181d926e0a0425638eb1b998f0252c",
-  "_migrated_from_all": [
-    "rappid:@aibast-agents-library/identify_discounts:f649919e864f7318107314e5831dbf10a614502afafb175262735fe774aa5f0a",
-    "rappid:@aibast-agents-library/identify_discounts:0033179d8b5d266caa38ace6fb49a8ae74181d926e0a0425638eb1b998f0252c"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.2.0",
+  "rappid": "rappid:@aibast-agents-library/identify_discounts:0033179d8b5d266caa38ace6fb49a8ae74181d926e0a0425638eb1b998f0252c",
+  "_migrated_from": "rappid:@aibast-agents-library/identify_discounts:f649919e864f7318107314e5831dbf10a614502afafb175262735fe774aa5f0a", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "general",
   "tags": [
@@ -20,24 +15,24 @@
     "eligibility",
     "approval"
   ],
-  "description": "Scans live quotes from a simulated Dynamics 365 tenant for discounts and expiring savings, with eligibility checks and offline fallback.",
+  "description": "Discount identification with eligibility checks, savings calculations, and approval workflow management.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 542,
-  "size_kb": 28.4,
-  "sha256": "291a85fc41aab99c74b58fff0d3f4bc90a669e9c82ef14cefaae2a961b91c0d2",
+  "lines": 416,
+  "size_kb": 22.1,
+  "sha256": "f649919e864f7318107314e5831dbf10a614502afafb175262735fe774aa5f0a",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__identify_discounts.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__identify_discounts.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__identify_discounts.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__identify_discounts.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py"
 }

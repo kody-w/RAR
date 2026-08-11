@@ -3,14 +3,9 @@
   "id": "discreetRappers__rapp_pipeline_agent",
   "name": "RAPP",
   "rar_name": "@discreetRappers/rapp_pipeline_agent",
-  "rappid": "rappid:@discreetRappers/rapp_pipeline_agent:c4ed91b4db3af9a98410906de73b385b584300f3b70bc8328bf5518afb8643c8",
-  "_migrated_from": "rappid:@discreetRappers/rapp_pipeline_agent:3ab737bb204cff5731f4b20fd771273123583244d45846ec2795e5ae919c3930",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@discreetRappers/rapp_pipeline_agent:ad8745e98be7491d061f5c5ea49eb25e",
-    "rappid:@discreetRappers/rapp_pipeline_agent:3ab737bb204cff5731f4b20fd771273123583244d45846ec2795e5ae919c3930"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.2",
+  "rappid": "rappid:@discreetRappers/rapp_pipeline_agent:3ab737bb204cff5731f4b20fd771273123583244d45846ec2795e5ae919c3930",
+  "_migrated_from": "rappid:v2:agent:@discreetRappers/rapp_pipeline_agent:ad8745e98be7491d061f5c5ea49eb25e", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@discreetRappers",
   "category": "pipeline",
   "tags": [
@@ -20,7 +15,7 @@
     "code-gen",
     "quality-gates"
   ],
-  "description": "Runs the full RAPP pipeline \u2014 discovery, MVP, code gen, quality gates QG1-QG6, PDF reports \u2014 using Azure OpenAI and Azure File Storage.",
+  "description": "Full RAPP pipeline \u2014 transcript to agent, discovery, MVP, code gen, quality gates QG1-QG6, PDF reports.",
   "author": "Bill Whalen",
   "quality_tier": "community",
   "requires_env": [
@@ -32,16 +27,16 @@
     "@rapp/basic_agent"
   ],
   "lines": 2999,
-  "size_kb": 121.6,
-  "sha256": "feb4bd1dfa316f9aaa83bea4e4c220084794d1207ebee2ba4c3d823aa6bc7b44",
+  "size_kb": 121.5,
+  "sha256": "aeff80e396a54cf458177df5264f01989c5de76443ecf527dbcddd415ad3741c",
   "has_card": true,
-  "added_at": "2026-04-06T16:39:03-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__rapp_pipeline_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/rapp_pipeline_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/rapp_pipeline_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__rapp_pipeline_agent.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__rapp_pipeline_agent.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__rapp_pipeline_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/rapp_pipeline_agent.py"
 }

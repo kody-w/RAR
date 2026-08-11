@@ -3,14 +3,9 @@
   "id": "aibast-agents-library__proposal_generation",
   "name": "Proposal Generation",
   "rar_name": "@aibast-agents-library/proposal_generation",
-  "rappid": "rappid:@aibast-agents-library/proposal_generation:10d618137a4ba2754a42debce0f60cdd78f009ff9bd841b30c8b8f8efcc8b730",
-  "_migrated_from": "rappid:@aibast-agents-library/proposal_generation:8f388442db0131e7e114ec33287c4548e1efb89f20389d81d189fcb641816595",
-  "_migrated_from_all": [
-    "rappid:@aibast-agents-library/proposal_generation:887bdf670652002106ec7a6209799ff0bc42135a7a7548162d8e1c47588da3da",
-    "rappid:@aibast-agents-library/proposal_generation:8f388442db0131e7e114ec33287c4548e1efb89f20389d81d189fcb641816595"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.2.0",
+  "rappid": "rappid:@aibast-agents-library/proposal_generation:8f388442db0131e7e114ec33287c4548e1efb89f20389d81d189fcb641816595",
+  "_migrated_from": "rappid:@aibast-agents-library/proposal_generation:887bdf670652002106ec7a6209799ff0bc42135a7a7548162d8e1c47588da3da", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "b2b_sales",
   "tags": [
@@ -21,24 +16,24 @@
     "pricing",
     "competitive-positioning"
   ],
-  "description": "Analyzes RFPs and live quotes from a simulated Dynamics 365 tenant into proposal packages with pricing, plus an embedded offline demo fallback.",
+  "description": "AI-powered proposal generation with RFP analysis, personalized content, pricing optimization, and competitive positioning.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 896,
-  "size_kb": 44.8,
-  "sha256": "a1b7b71d3bb6e0a54079d527ac2bfa059d3ef8913475c24f107a5fd92362d5c7",
+  "lines": 710,
+  "size_kb": 36.3,
+  "sha256": "887bdf670652002106ec7a6209799ff0bc42135a7a7548162d8e1c47588da3da",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__proposal_generation.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__proposal_generation.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__proposal_generation.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__proposal_generation.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py"
 }

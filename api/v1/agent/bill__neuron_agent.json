@@ -3,13 +3,10 @@
   "id": "bill__neuron_agent",
   "name": "Neuron",
   "rar_name": "@bill/neuron_agent",
-  "rappid": "rappid:@bill/neuron_agent:3ffdf670d411cc6307351926dfab8d0fbb7f66314cadbf87b073a488e4f2acf3",
-  "_migrated_from": "rappid:@bill/neuron_agent:8a3c88f21fc23793c519b959aaf1b9e72f95bc38355003fec85304fb83ac8ea5",
-  "_migrated_from_all": [
-    "rappid:@bill/neuron_agent:8a3c88f21fc23793c519b959aaf1b9e72f95bc38355003fec85304fb83ac8ea5"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@bill/neuron_agent:8a3c88f21fc23793c519b959aaf1b9e72f95bc38355003fec85304fb83ac8ea5",
+  "_migrated_from": null,
+  "_migrated_from_note": null,
+  "version": "1.0.0",
   "publisher": "@bill",
   "category": "core",
   "tags": [
@@ -23,7 +20,7 @@
     "d365",
     "power-platform"
   ],
-  "description": "Injects a compact Knowledge Base block of hardcoded Copilot Studio and Dataverse lessons into the brainstem prompt at session start.",
+  "description": "Portable memory packs \u2014 drop the file in, get a compact Knowledge Base block injected at session start.",
   "author": "Bill Whalen",
   "quality_tier": "community",
   "requires_env": [],
@@ -32,15 +29,15 @@
   ],
   "lines": 384,
   "size_kb": 27.7,
-  "sha256": "093ac6ab4dcd123fdf55998ddc8f1dc904be9bb4b27d7eb82e118099e353fcc1",
+  "sha256": "6bf5e44870ad56d83816cb330b6eb170a6f637b396f8ce6d2b51f7ab6f5dc275",
   "has_card": true,
-  "added_at": "2026-05-12T13:37:05-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/bill__neuron_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/bill__neuron_agent.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/bill__neuron_agent.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/bill__neuron_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@bill/neuron_agent.py"
 }

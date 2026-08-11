@@ -14,7 +14,7 @@ this agent is callable on its own terms and links home for the source.
   Source library : CAT Agent Skills (microsoft)
   Upstream entry : https://microsoft.github.io/cat-agent-skills/#rich-html-presentation
   Upstream author: Henry Jammes
-  Upstream version: 1.2.0
+  Upstream version: 1.0.0
   Licence        : unverified (unverified — indexed, never republished)
 
 Regenerated automatically by scripts/generate_aggregated_agents.py whenever the
@@ -24,7 +24,7 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cat-agent-skills/rich_html_presentation',
-    "version": '2.2.0',
+    "version": '2.0.0',
     "display_name": 'Rich HTML Presentation',
     "description": 'Create polished, self-contained HTML slide decks with keynote-style visuals, keyboard navigation, themes, animations, and reusable presentation components.',
     "author": 'Henry Jammes',
@@ -42,10 +42,10 @@ __manifest__ = {
         "source_url": 'https://microsoft.github.io/cat-agent-skills/',
         "upstream_slug": 'rich-html-presentation',
         "upstream_url": 'https://microsoft.github.io/cat-agent-skills/#rich-html-presentation',
-        "upstream_version": '1.2.0',
+        "upstream_version": '1.0.0',
         "license": 'unverified',
         "license_verified": False,
-        "content_digest": 'dc40638371835363',
+        "content_digest": '742d89a7bc9519a5',
     },
     # The platforms the upstream entry targets. First-class and queryable, not
     # buried in prose: this is what lets the registry answer "what can I launch

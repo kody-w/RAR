@@ -1,41 +1,8 @@
 """
-Workforce Clearance & Onboarding Agent — a template you are meant to mutate.
+Workforce Clearance & Onboarding Agent — Federal Government Stack
 
 Manages security clearance tracking, onboarding checklists, background
 check status, and access provisioning for federal workforce management.
-
-HOW THIS TEMPLATE WORKS
-  1. Out of the box it pulls live records over real HTTP from TWO
-     globally hosted systems (synthetic data, no credentials, works
-     from anywhere):
-       CRM  https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
-       HRIS https://kody-w.github.io/static-hris/api/v1/
-     An onboarding or background-check hold is represented as a
-     Dynamics case — e.g. CAS-260135 "Contractor onboarding blocked on
-     background check" for Nina Kowalski of Beacon Hill Staffing
-     Partners; days-in-queue is real clock math. The HRIS workers
-     collection is the live onboarding roster (25 workers AL-00xx with
-     hire dates, departments, manager chains).
-     Try: perform(operation="onboarding_checklist")
-     to see the live roster joined with the open CRM clearance holds
-     in one view.
-  2. No network? Everything falls back to the embedded demo layer below
-     (EMPLOYEES / ONBOARDING_STEPS / INVESTIGATION_TIMELINES) — the
-     agent never crashes offline.
-  3. Make it yours at the LIVE DATA SEAM below: set
-     WORKFORCE_CLEARANCE_ONBOARDING_DATA_URL (CRM) and
-     WORKFORCE_CLEARANCE_ONBOARDING_HRIS_URL (HRIS) to your own
-     endpoints, or replace _fetch_collection() with your own API
-     client. Fields the rest of the file needs are listed in
-     _normalize_live_case() / _normalize_roster_worker() — everything
-     else keeps working untouched. Fields marked "enrichment seam" in
-     the output (investigation tier, clearance level) are where you
-     wire DCSA/eQIP.
-
-OPERATIONS
-  clearance_status | onboarding_checklist | background_check_tracker
-  | access_provisioning
-  kwargs: operation (required), employee_id
 """
 
 import sys
@@ -43,16 +10,13 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
-import json
-import urllib.request
-from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/workforce_clearance_onboarding",
-    "version": "1.2.0",
+    "version": "1.0.1",
     "display_name": "Workforce Clearance & Onboarding Agent",
-    "description": "Tracks onboarding blockers from a live simulated Dynamics 365 CRM joined to an HRIS hire roster, with clearance checklists that work offline.",
+    "description": "Federal workforce clearance tracking, onboarding checklists, background check monitoring, and access provisioning.",
     "author": "AIBAST",
     "tags": ["clearance", "onboarding", "background-check", "workforce", "federal", "access"],
     "category": "federal_government",
@@ -62,127 +26,7 @@ __manifest__ = {
 }
 
 # ---------------------------------------------------------------------------
-# LIVE DATA SEAM — swap this for your real system
-#
-# TWO live sources, both synthetic OData-shaped JSON on GitHub Pages:
-#   CRM  (Dynamics 365 — onboarding/clearance holds as cases):
-#     export WORKFORCE_CLEARANCE_ONBOARDING_DATA_URL=...
-#   HRIS (workers collection = the live onboarding roster):
-#     export WORKFORCE_CLEARANCE_ONBOARDING_HRIS_URL=...
-# or replace _fetch_collection() with your clients. Downstream code
-# only needs the fields produced by _normalize_live_case() and
-# _normalize_roster_worker().
-# ---------------------------------------------------------------------------
-
-DATA_SOURCE_URL = os.environ.get(
-    "WORKFORCE_CLEARANCE_ONBOARDING_DATA_URL",
-    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
-)
-HRIS_SOURCE_URL = os.environ.get(
-    "WORKFORCE_CLEARANCE_ONBOARDING_HRIS_URL",
-    "https://kody-w.github.io/static-hris/api/v1",
-)
-_LIVE_CACHE = {}
-
-
-def _fetch_collection(collection, timeout=6, base_url=None):
-    """One bounded GET per URL per process. Returns [] on ANY
-    failure — offline, DNS, bad JSON — so the demo layer takes over."""
-    url = f"{base_url or DATA_SOURCE_URL}/{collection}.json"
-    if url in _LIVE_CACHE:
-        return _LIVE_CACHE[url]
-    try:
-        req = urllib.request.Request(
-            url, headers={"User-Agent": "rapp-agent-template/1.0"},
-        )
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
-    except Exception:
-        rows = []
-    _LIVE_CACHE[url] = rows
-    return rows
-
-
-def _fetch_hris(collection):
-    """Fetch a collection from the sibling HRIS; [] when offline."""
-    return _fetch_collection(collection, base_url=HRIS_SOURCE_URL)
-
-
-_ONBOARDING_KEYWORDS = ("onboarding", "background check", "clearance", "badge")
-
-
-def _days_since(iso_date):
-    try:
-        then = datetime.fromisoformat(str(iso_date).replace("Z", "+00:00"))
-        if then.tzinfo is None:
-            then = then.replace(tzinfo=timezone.utc)
-        return max(0, (datetime.now(timezone.utc) - then).days)
-    except (ValueError, TypeError):
-        return None
-
-
-def _normalize_live_case(row):
-    """Project a Dynamics case onto the onboarding-blocker shape this
-    agent uses. THIS is the contract your replacement data source must
-    meet — a dict with these keys. None means 'not available from CRM
-    alone' and the renderers label it as an enrichment seam. In this
-    template an onboarding or background-check hold is represented as a
-    Dynamics case."""
-    return {
-        "id": row.get("ticketnumber", ""),
-        "candidate": row.get("customeridname", "Unknown"),
-        "issue": row.get("title", "untitled"),
-        "opened": str(row.get("createdon", ""))[:10],
-        "days_in_queue": _days_since(row.get("createdon")),  # real clock math
-        "status": "open" if row.get("statecode") == 0 else "resolved",
-        "investigation_tier": None,  # enrichment seam — wire DCSA/eQIP
-        "clearance_level": None,     # enrichment seam — wire your HRIS
-        "_live": True,
-    }
-
-
-def _live_onboarding_cases():
-    """Live tenant cases that read as onboarding/clearance holds; []
-    when offline."""
-    return [
-        _normalize_live_case(i)
-        for i in _fetch_collection("incidents")
-        if any(k in str(i.get("title", "")).lower() for k in _ONBOARDING_KEYWORDS)
-    ]
-
-
-def _normalize_roster_worker(row):
-    """Project an HRIS worker onto the onboarding-roster shape this
-    agent uses. Hire date, department, and manager are real HRIS
-    fields; clearance level is not an HRIS concept here — it stays an
-    enrichment seam (wire DCSA/eQIP)."""
-    return {
-        "worker_id": row.get("worker_id", ""),
-        "name": row.get("full_name", "Unknown"),
-        "title": row.get("job_title", ""),
-        "department": row.get("department_name", ""),
-        "hire_date": row.get("hire_date", ""),
-        "days_since_hire": _days_since(row.get("hire_date")),  # real clock math
-        "manager": row.get("manager_name", ""),
-        "level": row.get("level", ""),
-        "clearance_level": None,  # enrichment seam — wire DCSA/eQIP
-        "_live": True,
-    }
-
-
-def _live_roster():
-    """Live HRIS onboarding roster (workers, newest hires first); []
-    when offline."""
-    roster = [
-        _normalize_roster_worker(row)
-        for row in _fetch_hris("workers")
-        if row.get("full_name") and row.get("status") == "active"
-    ]
-    return sorted(roster, key=lambda w: w["hire_date"], reverse=True)
-
-
-# ---------------------------------------------------------------------------
-# EMBEDDED DEMO LAYER (offline fallback)
+# Synthetic domain data
 # ---------------------------------------------------------------------------
 
 EMPLOYEES = {
@@ -413,56 +257,7 @@ class WorkforceClearanceOnboardingAgent(BasicAgent):
                 lines.append("")
             return "\n".join(lines)
 
-        roster = _live_roster()
-        if roster:
-            recent = roster[:10]
-            lines = ["# Onboarding Roster (live HRIS workers, joined to CRM holds)\n"]
-            lines.append(f"**Active workers on the roster:** {len(roster)} "
-                         f"(showing {len(recent)} most recent hires)\n")
-            lines.append("## Most Recent Hires\n")
-            lines.append("| Worker | Title | Department | Hire Date | Days Since Hire | Manager | Clearance |")
-            lines.append("|---|---|---|---|---|---|---|")
-            for w in recent:
-                days = w["days_since_hire"] if w["days_since_hire"] is not None else "n/a"
-                lines.append(
-                    f"| {w['name']} ({w['worker_id']}) | {w['title']} ({w['level']}) "
-                    f"| {w['department']} | {w['hire_date']} | {days} "
-                    f"| {w['manager']} | n/a — enrichment seam |"
-                )
-            holds = [c for c in _live_onboarding_cases() if c["status"] == "open"]
-            lines.append("\n## Open Onboarding/Clearance Holds (CRM join)\n")
-            if holds:
-                lines.append("| Case | Candidate | Issue | Opened | Days in Queue |")
-                lines.append("|---|---|---|---|---|")
-                for c in sorted(holds, key=lambda x: x["opened"]):
-                    days = c["days_in_queue"] if c["days_in_queue"] is not None else "n/a"
-                    lines.append(
-                        f"| {c['id']} | {c['candidate']} | {c['issue']} "
-                        f"| {c['opened']} | {days} |"
-                    )
-                roster_names = {w["name"].lower() for w in roster}
-                matched = [c for c in holds
-                           if str(c["candidate"]).lower() in roster_names]
-                if matched:
-                    lines.append(
-                        f"\n{len(matched)} hold(s) match a roster worker by name."
-                    )
-                else:
-                    lines.append(
-                        "\nNo hold matches a roster worker by name — these are "
-                        "candidate/staffing-partner cases still upstream of the "
-                        "HRIS roster; the candidate-to-worker link is an "
-                        "enrichment seam."
-                    )
-            else:
-                lines.append("No open onboarding or clearance holds in the CRM.")
-            lines.append("\n_Sources: live Static HRIS (workers = onboarding "
-                         "roster; hire dates and days-since-hire are real clock "
-                         "math) + live Static Dynamics 365 tenant (incidents = "
-                         "onboarding/clearance holds)._")
-            return "\n".join(lines)
-
-        lines = ["# Onboarding Status Summary (embedded demo data — offline)\n"]
+        lines = ["# Onboarding Status Summary\n"]
         lines.append("| Employee | Position | EOD | Completion |")
         lines.append("|---|---|---|---|")
         for eid, emp in EMPLOYEES.items():
@@ -471,33 +266,7 @@ class WorkforceClearanceOnboardingAgent(BasicAgent):
         return "\n".join(lines)
 
     def _background_check_tracker(self, **kwargs) -> str:
-        live = _live_onboarding_cases()
-        if live:
-            open_holds = [c for c in live if c["status"] == "open"]
-            lines = ["# Background Check Tracker (live tenant data)\n"]
-            lines.append(f"**Onboarding/clearance holds on record:** {len(live)} "
-                         f"({len(open_holds)} open)\n")
-            lines.append("## Live Holds\n")
-            lines.append("| Case | Candidate | Issue | Opened | Days in Queue | Tier | Status |")
-            lines.append("|---|---|---|---|---|---|---|")
-            for c in sorted(live, key=lambda x: (x["status"] != "open", x["opened"])):
-                days = c["days_in_queue"] if c["days_in_queue"] is not None else "n/a"
-                lines.append(
-                    f"| {c['id']} | {c['candidate']} | {c['issue']} | {c['opened']} "
-                    f"| {days} | n/a — enrichment seam | {c['status'].title()} |"
-                )
-            lines.append("\n## Investigation Timeline Reference\n")
-            lines.append("| Tier | Name | Avg Days | Target Days |")
-            lines.append("|---|---|---|---|")
-            for tid, t in INVESTIGATION_TIMELINES.items():
-                lines.append(f"| {tid} | {t['name']} | {t['avg_days']} | {t['target_days']} |")
-            lines.append("\n_Source: live Static Dynamics 365 tenant (incidents). An "
-                         "onboarding or background-check hold is represented as a Dynamics "
-                         "case; days-in-queue is real clock math, investigation tier is an "
-                         "enrichment seam._")
-            return "\n".join(lines)
-
-        lines = ["# Background Check Tracker (embedded demo data — offline)\n"]
+        lines = ["# Background Check Tracker\n"]
         lines.append("## Investigation Timeline Reference\n")
         lines.append("| Tier | Name | Avg Days | Target Days |")
         lines.append("|---|---|---|---|")
@@ -557,18 +326,12 @@ class WorkforceClearanceOnboardingAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = WorkforceClearanceOnboardingAgent()
-    print("=" * 60)
-    print("LIVE TENANT ONBOARDING HOLDS (fetched over HTTP; falls back offline)")
-    print(agent.perform(operation="background_check_tracker"))
-    print()
-    print("=" * 60)
-    print("LIVE HRIS ONBOARDING ROSTER + CRM CLEARANCE HOLDS (joined; falls back offline)")
-    print(agent.perform(operation="onboarding_checklist"))
-    print()
-    print("=" * 60)
-    print("EMBEDDED DEMO WORKFORCE (works offline)")
     print(agent.perform(operation="clearance_status"))
-    print("\n" + "=" * 60 + "\n")
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="onboarding_checklist"))
+    print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="onboarding_checklist", employee_id="EMP-5001"))
-    print("\n" + "=" * 60 + "\n")
+    print("\n" + "=" * 80 + "\n")
+    print(agent.perform(operation="background_check_tracker"))
+    print("\n" + "=" * 80 + "\n")
     print(agent.perform(operation="access_provisioning", employee_id="EMP-5001"))

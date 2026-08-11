@@ -3,14 +3,9 @@
   "id": "discreetRappers__powerpoint_generator_agent",
   "name": "PowerPointGeneratorV2",
   "rar_name": "@discreetRappers/powerpoint_generator_agent",
-  "rappid": "rappid:@discreetRappers/powerpoint_generator_agent:a4eb325709daf1075eb870b312c808538300e411785e0953f02e8e2a0de68e40",
-  "_migrated_from": "rappid:@discreetRappers/powerpoint_generator_agent:58a2aaac89deaa2277d03c485a76359de6f82d1104bc5d83f14e91ba99de364f",
-  "_migrated_from_all": [
-    "rappid:v2:agent:@discreetRappers/powerpoint_generator_agent:cbd34b4863b492b9a367c2dc8ea00bbc",
-    "rappid:@discreetRappers/powerpoint_generator_agent:58a2aaac89deaa2277d03c485a76359de6f82d1104bc5d83f14e91ba99de364f"
-  ],
-  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.2",
+  "rappid": "rappid:@discreetRappers/powerpoint_generator_agent:58a2aaac89deaa2277d03c485a76359de6f82d1104bc5d83f14e91ba99de364f",
+  "_migrated_from": "rappid:v2:agent:@discreetRappers/powerpoint_generator_agent:cbd34b4863b492b9a367c2dc8ea00bbc", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@discreetRappers",
   "category": "productivity",
   "tags": [
@@ -20,7 +15,7 @@
     "templates",
     "microsoft"
   ],
-  "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection.",
+  "description": "Template-based PowerPoint generation with Microsoft design. Supports multiple templates and smart layout selection.",
   "author": "Bill Whalen",
   "quality_tier": "community",
   "requires_env": [],
@@ -29,15 +24,15 @@
   ],
   "lines": 1551,
   "size_kb": 61.3,
-  "sha256": "5a9fc79dfbf2038ba411e2789dc988713389b2219ff5ce721b02d684d88a23f5",
+  "sha256": "0f657aa41435693ec40824d734c6e8ba5b8effefc70b810554c327ff3313e465",
   "has_card": true,
-  "added_at": "2026-04-06T16:39:03-04:00",
+  "added_at": "2026-07-16T17:09:27Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__powerpoint_generator_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/powerpoint_generator_agent.py",
-  "card_url": null,
+  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/powerpoint_generator_agent.py.card",
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__powerpoint_generator_agent.py",
-  "api_card_url": null,
+  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__powerpoint_generator_agent.card",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__powerpoint_generator_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/powerpoint_generator_agent.py"
 }

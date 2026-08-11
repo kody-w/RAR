@@ -45,9 +45,12 @@ __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/agent_team_agent",
     "display_name": "AgentTeam",
-    "version": "0.1.2",
+    "version": "0.1.1",
     "description": (
-        "Turns a project goal into an outcome frame, persona route, and paste-ready GitHub issue body for the Agent Team Starter Kit in one LLM call."
+        "The persona-routing brain of the Agent Team Starter Kit as a "
+        "single agent. Given a project goal, returns the outcome frame, "
+        "persona route, paste-ready GitHub issue body, and the "
+        "needs-you questions the team would surface."
     ),
     "author": "@kody-w",
     "tags": [

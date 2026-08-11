@@ -6,9 +6,9 @@ import json
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/scripted_demo_agent",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "display_name": "ScriptedDemo",
-    "description": "Plays back scripted demo conversations from JSON files in storage, simulating agent responses for live demonstrations.",
+    "description": "Executes interactive scripted demonstrations from JSON files. Simulates real agent conversations for demos.",
     "author": "Bill Whalen",
     "tags": ["productivity", "demos", "scripted", "interactive", "sales"],
     "category": "productivity",
