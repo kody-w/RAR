@@ -491,6 +491,37 @@ def registry_path(file_path: Path) -> str:
     return file_path.as_posix()
 
 
+def superseded_legacy_agent_path(
+    file_path: Path,
+    canonical_names: dict[Path, str],
+    legacy_name: str | None,
+) -> bool:
+    if (
+        file_path.suffix != ".py"
+        or file_path.name.endswith("_agent.py")
+    ):
+        return False
+    canonical = file_path.with_name(
+        f"{file_path.stem}_agent.py"
+    )
+    canonical_name = canonical_names.get(canonical)
+    normalized_legacy_name = (
+        legacy_name
+        if legacy_name and legacy_name.endswith("_agent")
+        else f"{legacy_name}_agent"
+        if legacy_name
+        else None
+    )
+    return bool(
+        canonical_name
+        and (
+            legacy_name is None
+            or legacy_name == canonical_name
+            or normalized_legacy_name == canonical_name
+        )
+    )
+
+
 def _seed_hash(s: str) -> int:
     h = 0
     for c in s:
@@ -807,8 +838,40 @@ def build_registry():
         list(AGENTS_DIR.rglob("*.py")) +
         [p for p in AGENTS_DIR.rglob("*.py.card")]
     ))
+    canonical_names = {}
+    for candidate in all_files:
+        if (
+            candidate.suffix != ".py"
+            or not candidate.name.endswith("_agent.py")
+        ):
+            continue
+        candidate_manifest = extract_manifest(candidate)
+        if candidate_manifest is None:
+            continue
+        if (
+            validate_manifest(candidate, candidate_manifest)
+            or validate_runtime_contract(candidate, candidate_manifest)
+        ):
+            continue
+        canonical_names[candidate] = candidate_manifest["name"]
 
     for py_path in all_files:
+        legacy_manifest = None
+        if (
+            py_path.suffix == ".py"
+            and not py_path.name.endswith("_agent.py")
+        ):
+            legacy_manifest = extract_manifest(py_path)
+        if superseded_legacy_agent_path(
+            py_path,
+            canonical_names,
+            (
+                legacy_manifest.get("name")
+                if legacy_manifest
+                else None
+            ),
+        ):
+            continue
         # Enforce snake_case filenames — no dashes allowed
         stem = py_path.stem.replace('.py', '')  # handle .py.card
         if '-' in stem:
@@ -822,7 +885,7 @@ def build_registry():
         if is_utility or is_template or is_source:
             continue
 
-        manifest = extract_manifest(py_path)
+        manifest = legacy_manifest or extract_manifest(py_path)
         if manifest is None:
             continue
 
