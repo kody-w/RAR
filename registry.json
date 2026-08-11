@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-11T09:42:52.896657+00:00",
+  "generated_at": "2026-08-11T09:43:12.642689+00:00",
   "stats": {
     "total_agents": 291,
     "total_swarms": 82,
@@ -5955,7 +5955,7 @@
       "_has_card": true,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "627f7343799ef3834ab71e9f09db911a0ffbeb2e2fd491eb1bb3d7ca381b7ac1",
       "_seed_aliases": [
         16381594575904849287
@@ -6446,9 +6446,9 @@
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "27dfe75668112966b2291f68bc8cae062073869813e6cb93c01e23e48384b330"
     },
     {
@@ -6653,9 +6653,9 @@
       "_size_kb": 9.4,
       "_lines": 188,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "d6dd319c4039baf0a059243c7119bf536c8028088d16379004d297675459b8ea"
     },
     {
@@ -6928,7 +6928,7 @@
       "_has_card": true,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "bf4855fbdcff5fad0e1fe5db1c006a85fdd7d54dfa4ff87eaf39b312159294d0",
       "_seed_aliases": [
         13126391526794469953
@@ -7541,9 +7541,9 @@
       "_size_kb": 9.2,
       "_lines": 188,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "9941f5027b587ce590fbe18facf68270849bac462fa15ce171460319e8dd106a"
     },
     {
@@ -7611,9 +7611,9 @@
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "fd2eefed2816a30386bd32ed0302d26386ba1355e2afe7242495b1248c8f1e2b"
     },
     {
@@ -7682,9 +7682,9 @@
       "_size_kb": 9.6,
       "_lines": 188,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "d543d5148442e9f421101033b8f9a596eb5627193b1ff9186e2010a643ea84a7"
     },
     {
@@ -9258,9 +9258,9 @@
       "_size_kb": 9.1,
       "_lines": 188,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "8c734df8137c5103c19ba813ad4d3700e38f6d7b20a3452c5d24a0bc54f47d10"
     },
     {
@@ -10354,7 +10354,7 @@
       "_has_card": true,
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
-      "_latest_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "4c132dacac2c695f7da89a8c4dd5f22fd97f4b4aaa63a3caed59364fd91e9130",
       "_seed_aliases": [
         9062438139641605218
@@ -10764,9 +10764,9 @@
       "_size_kb": 9.3,
       "_lines": 188,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "492376a885b7e488f127604896fa55e3df508080d8a358b4f364db3c3a47cce1"
     },
     {
@@ -10971,9 +10971,9 @@
       "_size_kb": 9.4,
       "_lines": 188,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "d98d9567f59ded18580df085f0e200365ec397c32b1f3abaf22d709690b99747"
     },
     {
@@ -11173,9 +11173,9 @@
       "_size_kb": 9.0,
       "_lines": 188,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "306835e30c53c45a207fb875ca008fb0ca5a69a7f739707ff3290753f3a4c7c9"
     },
     {
@@ -13653,9 +13653,9 @@
       "_size_kb": 39.7,
       "_lines": 1246,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-11T09:43:05Z",
+      "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "26e529177e4a41bf2e4672096a2d6b2299ecc25c62f4fcac4583a999e4c2c2ca"
     },
     {
@@ -14348,7 +14348,7 @@
       "_has_card": true,
       "_added_at": "2026-05-16T16:33:02-04:00",
       "_first_commit_sha": "14c67230dd646569c66e22761625d258c6a7e33c",
-      "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "9c4eb137efbda52644e5f11aed0e34d577f6777a58c1952d35a4f3877f1bfda1",
       "_seed_aliases": [
         1006668578169169842
@@ -15683,7 +15683,7 @@
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
-      "_latest_commit_sha": "af4738c1351fbb402a78e59a8ee016f56c1bf6ad",
+      "_latest_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_card_sha256": "18d01b56413850fbeb31c042d318f332c094daffeb80d86c72a4e7b6d359f770"
     },
     {

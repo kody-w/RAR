@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-08-11T09:42:14Z",
+  "generated": "2026-08-11T09:43:14Z",
   "count": 291,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -4130,7 +4130,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
@@ -4235,7 +4235,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.4,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
@@ -4678,7 +4678,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.2,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
@@ -4713,7 +4713,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
@@ -4750,7 +4750,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.6,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
@@ -5556,7 +5556,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
@@ -6309,7 +6309,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
@@ -6415,7 +6415,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.4,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
@@ -6516,7 +6516,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
@@ -8128,7 +8128,7 @@
       "stats": {
         "lines": 1246,
         "size_kb": 39.7,
-        "added_at": null
+        "added_at": "2026-08-11T09:43:05Z"
       }
     },
     {
