@@ -546,7 +546,7 @@
   "skills": [
     {
       "name": "brainstem-reset",
-      "description": "Fresh-install test of the RAPP brainstem exactly as a first-time user would get it: kill the running service, archive and clear ~/.brainstem, VERIFY it is actually gone, reinstall from the public one-liner, and verify the new install answers on :7071. USE THIS SKILL when Kody says: \"fresh install t…",
+      "description": "Fresh-install test of the RAPP brainstem exactly as a first-time user would get\\nit: kill the running service, archive and clear ~/.brainstem, VERIFY it is\\nactually gone, reinstall from the public one-liner, and verify the new install\\nanswers on :7071. USE THIS SKILL when Kody says: \\\"fresh insta…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/brainstem-reset",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/brainstem-reset/SKILL.md"
@@ -560,7 +560,7 @@
     },
     {
       "name": "demo-ship",
-      "description": "Deploy the current agents to the cloud function, prove them end-to-end against the LIVE endpoint, generate the M365-styled HTML demo page, pop it open, and notify. One verb for the whole chain — never hand work back unverified. USE THIS SKILL when Kody says anything like: \"upload to the function an…",
+      "description": "Deploy the current agents to the cloud function, prove them end-to-end against the\\nLIVE endpoint, generate the M365-styled HTML demo page, pop it open, and notify.\\nOne verb for the whole chain \\u2014 never hand work back unverified. USE THIS SKILL when\\nKody says anything like: \\\"upload to the fu…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/demo-ship",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/demo-ship/SKILL.md"
@@ -581,28 +581,28 @@
     },
     {
       "name": "exec-proof",
-      "description": "Pre-demo smoke test — verify the install/demo path works on a machine that is NOT this one, exactly as a first-time user would run it, before anyone runs it live. Use before demos, customer sessions, or offsites; whenever the user says \\\"exec proof this\\\", \\\"will this work on their machine\\\", \\\"smo…",
+      "description": "Pre-demo smoke test \\u2014 verify the install/demo path works on a machine that is NOT this one, exactly as a first-time user would run it, before anyone runs it live. Use before demos, customer sessions, or offsites; whenever the user says \\\"exec proof this\\\", \\\"will this work on their machine\\\",…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/exec-proof",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/exec-proof/SKILL.md"
     },
     {
       "name": "film-m365",
-      "description": "Film a Copilot Studio agent in the REAL M365 Copilot surface — the ONLY sanctioned way to make agent demo videos. Playwright drives a dedicated authed Chrome profile, records the page via CDP (no screen capture, no desktop takeover), then trims, dead-time-compresses, and gate-verifies to GO. Use wh…",
+      "description": "Film a Copilot Studio agent in the REAL M365 Copilot surface \\u2014 the ONLY sanctioned way to make agent demo videos. Playwright drives a dedicated authed Chrome profile, records the page via CDP (no screen capture, no desktop takeover), then trims, dead-time-compresses, and gate-verifies to GO. U…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/film-m365",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/film-m365/SKILL.md"
     },
     {
       "name": "flex-unbrick",
-      "description": "Unbrick an Azure Flex Consumption function app after a tenant security-policy sweep silently re-disables storage public network access (app 403/503s, PNA=Disabled). Runs the proven 2026-07-09 runbook — PNA check, SecurityControl=Ignore tag, re-enable PNA, full stop/start, bounded health poll.",
+      "description": "Unbrick an Azure Flex Consumption function app after a tenant security-policy sweep silently re-disables storage public network access (app 403/503s, PNA=Disabled). Runs the proven 2026-07-09 runbook \\u2014 PNA check, SecurityControl=Ignore tag, re-enable PNA, full stop/start, bounded health poll.",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/flex-unbrick",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/flex-unbrick/SKILL.md"
     },
     {
       "name": "fy27-priority-agents",
-      "description": "Regenerate the FY27 Priority Agents report (cross-customer analysis) with the LATEST data. USE THIS SKILL when the user asks to \"run the FY27 report\", \"refresh the priority agents report\", \"re-pull the agent scenarios\", \"get the latest customer agents\", \"rerun the agent sweep\", or anything about th…",
+      "description": "Regenerate the FY27 Priority Agents report (cross-customer analysis) with the\\nLATEST data. USE THIS SKILL when the user asks to \\\"run the FY27 report\\\",\\n\\\"refresh the priority agents report\\\", \\\"re-pull the agent scenarios\\\",\\n\\\"get the latest customer agents\\\", \\\"rerun the agent sweep\\\", or anyt…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/fy27-priority-agents",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/fy27-priority-agents/SKILL.md"
@@ -623,7 +623,7 @@
     },
     {
       "name": "mcs-deploy",
-      "description": "Take a built Copilot Studio solution (or build one from agent.py files first), import it with a FRESH version name, publish in the correct order, verify it actually answers, and hand back the maker-portal link. Never asks Kody for creds that live in local.settings.json. USE THIS SKILL when Kody say…",
+      "description": "Take a built Copilot Studio solution (or build one from agent.py files first),\\nimport it with a FRESH version name, publish in the correct order, verify it\\nactually answers, and hand back the maker-portal link. Never asks Kody for creds\\nthat live in local.settings.json. USE THIS SKILL when Kody…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/mcs-deploy",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/mcs-deploy/SKILL.md"
@@ -658,14 +658,14 @@
     },
     {
       "name": "rapp-agent-bridge",
-      "description": "Use whenever a skill directory contains a `*_agent.py` beside its SKILL.md, or the user mentions a toasted skill, a RAPP agent file, an RCI capsule, or asks why a skill ships a Python file. Teaches this host to take the skill's parameters and ordered steps from the agent file's deterministic contra…",
+      "description": "Use whenever an Agent Skill ships a linked *_agent.py beside SKILL.md, the linked file is missing, or the user asks how to run a RAPP agent projection without paraphrasing it. Prefer execution of the exact linked agent where Python is available; otherwise use the complete embedded Python as the exa…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/rapp-agent-bridge",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/rapp-agent-bridge/SKILL.md"
     },
     {
       "name": "rapp-brainstem",
-      "description": "Drive the local RAPP brainstem (a Flask server on localhost:7071) for any request that involves RAPP, the brainstem, RAR (the RAPP Agent Registry), community agents, or \"the twin\". Every capability — discover/install/vote on community agents, run user-defined Python agents, drive memory, ask the tw…",
+      "description": "Drive the local RAPP brainstem (a Flask server on localhost:7071) for any\\nrequest that involves RAPP, the brainstem, RAR (the RAPP Agent Registry),\\ncommunity agents, or \\\"the twin\\\". Every capability \\u2014 discover/install/vote on\\ncommunity agents, run user-defined Python agents, drive memory,…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/rapp-brainstem",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/rapp-brainstem/SKILL.md"
@@ -700,7 +700,7 @@
     },
     {
       "name": "wow",
-      "description": "Generate demo prompts that show off the current product's power — with a persistent ledger so suggestions never repeat and ambition ratchets up. Use whenever the user asks for \\\"the coolest prompts\\\", \\\"mind-blowing prompts\\\", \\\"prompts that show off the power\\\", \\\"demo prompts\\\", \\\"give me 10\\\", o…",
+      "description": "Generate demo prompts that show off the current product's power \\u2014 with a persistent ledger so suggestions never repeat and ambition ratchets up. Use whenever the user asks for \\\"the coolest prompts\\\", \\\"mind-blowing prompts\\\", \\\"prompts that show off the power\\\", \\\"demo prompts\\\", \\\"give me 10…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/wow",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/wow/SKILL.md"
