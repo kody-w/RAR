@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-11T17:28:31Z",
+  "generated": "2026-08-11T17:30:53Z",
   "categories": [
     {
       "name": "general",
@@ -23,11 +23,11 @@
       "count": 22
     },
     {
-      "name": "integrations",
-      "count": 16
+      "name": "pipeline",
+      "count": 17
     },
     {
-      "name": "pipeline",
+      "name": "integrations",
       "count": 16
     },
     {
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 55
+      "count": 56
     },
     {
       "name": "@rapp",
@@ -144,7 +144,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 161
+      "count": 162
     },
     {
       "name": "frontier",
@@ -178,7 +178,7 @@
     },
     {
       "name": "pipeline",
-      "count": 18
+      "count": 19
     },
     {
       "name": "content",
@@ -249,6 +249,10 @@
       "count": 8
     },
     {
+      "name": "copilot_studio",
+      "count": 8
+    },
+    {
       "name": "healthcare",
       "count": 7
     },
@@ -262,10 +266,6 @@
     },
     {
       "name": "scripts",
-      "count": 7
-    },
-    {
-      "name": "copilot_studio",
       "count": 7
     },
     {
@@ -302,6 +302,10 @@
     },
     {
       "name": "design",
+      "count": 6
+    },
+    {
+      "name": "factory",
       "count": 6
     },
     {
@@ -398,10 +402,6 @@
     },
     {
       "name": "commons",
-      "count": 5
-    },
-    {
-      "name": "factory",
       "count": 5
     },
     {
@@ -598,6 +598,10 @@
     },
     {
       "name": "portfolio",
+      "count": 3
+    },
+    {
+      "name": "deployment",
       "count": 3
     },
     {
@@ -866,10 +870,6 @@
     },
     {
       "name": "ai",
-      "count": 2
-    },
-    {
-      "name": "deployment",
       "count": 2
     },
     {
@@ -1193,6 +1193,10 @@
       "count": 2
     },
     {
+      "name": "parity",
+      "count": 2
+    },
+    {
       "name": "private",
       "count": 2
     },
@@ -1358,10 +1362,6 @@
     },
     {
       "name": "work-orders",
-      "count": 1
-    },
-    {
-      "name": "building",
       "count": 1
     }
   ]

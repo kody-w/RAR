@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-11T17:28:28.783361+00:00",
+  "generated_at": "2026-08-11T17:31:53.839766+00:00",
   "stats": {
-    "total_agents": 293,
+    "total_agents": 294,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -13595,6 +13595,72 @@
       "_seed_aliases": [
         7742404069922845596
       ]
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/factory",
+      "version": "1.0.2",
+      "display_name": "RAPP to Copilot Studio Factory",
+      "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
+      "author": "kody-w",
+      "tags": [
+        "copilot_studio",
+        "factory",
+        "pipeline",
+        "deployment",
+        "parity"
+      ],
+      "category": "pipeline",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent",
+        "@kody-w/copilot_studio_parity_deploy"
+      ],
+      "example_call": {
+        "args": {
+          "action": "plan",
+          "agents": [
+            "HackerNews",
+            "Weatheragent"
+          ],
+          "display_name": "News and Weather",
+          "environment": "00000000-0000-0000-0000-000000000000",
+          "publisher_prefix": "rapp"
+        }
+      },
+      "_file": "agents/@kody-w/factory_agent.py",
+      "_install_filename": "rar_kody_w_factory_agent.py",
+      "_sha256": "c9ece96b9fe326166797c1437c3b72ae3654d6cef4f0e58c1006fa2ae1238801",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_a8e502d113e6df5760972723a40f16b676bfb7313f9000f33f8ca6dd71e7dd37",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 554,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 6401207017692351703,
+      "_size_kb": 17.8,
+      "_lines": 487,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "5622762aa186d2479ad0bb1bd1ce29b4c2b5baf828062a842b9403ed222648f1"
     },
     {
       "schema": "rapp-agent/1.0",

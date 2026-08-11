@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-11T17:28:31Z",
-  "count": 290,
+  "generated": "2026-08-11T17:30:53Z",
+  "count": 291,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -8021,6 +8021,41 @@
         "lines": 413,
         "size_kb": 25.8,
         "added_at": "2026-06-20T18:58:25-04:00"
+      }
+    },
+    {
+      "id": "kody-w__factory",
+      "name": "@kody-w/factory",
+      "display_name": "RAPP to Copilot Studio Factory",
+      "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
+      "version": "1.0.2",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "pipeline",
+      "tags": [
+        "copilot_studio",
+        "factory",
+        "pipeline",
+        "deployment",
+        "parity"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent",
+        "@kody-w/copilot_studio_parity_deploy"
+      ],
+      "source": {
+        "path": "agents/@kody-w/factory_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/factory_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/factory_agent.py",
+        "sha256": "c9ece96b9fe326166797c1437c3b72ae3654d6cef4f0e58c1006fa2ae1238801"
+      },
+      "stats": {
+        "lines": 487,
+        "size_kb": 17.8,
+        "added_at": null
       }
     },
     {
