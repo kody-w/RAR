@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-11T09:43:14Z",
+  "generated": "2026-08-11T09:49:21Z",
   "categories": [
     {
       "name": "general",
@@ -24,7 +24,7 @@
     },
     {
       "name": "integrations",
-      "count": 15
+      "count": 16
     },
     {
       "name": "pipeline",
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 53
+      "count": 54
     },
     {
       "name": "@rapp",
@@ -144,7 +144,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 159
+      "count": 160
     },
     {
       "name": "frontier",
@@ -673,6 +673,10 @@
       "count": 3
     },
     {
+      "name": "blog",
+      "count": 3
+    },
+    {
       "name": "matplotlib",
       "count": 3
     },
@@ -714,6 +718,10 @@
     },
     {
       "name": "devtools",
+      "count": 3
+    },
+    {
+      "name": "publishing",
       "count": 3
     },
     {
@@ -1005,10 +1013,6 @@
       "count": 2
     },
     {
-      "name": "blog",
-      "count": 2
-    },
-    {
       "name": "speaking",
       "count": 2
     },
@@ -1138,10 +1142,6 @@
     },
     {
       "name": "wiki",
-      "count": 2
-    },
-    {
-      "name": "publishing",
       "count": 2
     },
     {

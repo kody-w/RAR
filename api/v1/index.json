@@ -3,8 +3,8 @@
   "name": "RAR Pok\u00e9dex API",
   "description": "Static catalog API for bare RAPP agents (single-file Python, BasicAgent subclass, perform()). Mirrors the RAPP_Store API shape so the rapp-zoo can browse all federation stores with the same client code. Each entry has a sprite, a downloadable .py (and .card holocard if shipped), lineage back to the species root, and stats (lines, size, sha256).",
   "version": "1.0.0",
-  "generated_at": "2026-08-11T09:43:14Z",
-  "count": 291,
+  "generated_at": "2026-08-11T09:49:21Z",
+  "count": 292,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/index.json",
   "agents": [
     {
@@ -3424,6 +3424,19 @@
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__workiq.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__workiq.svg",
       "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__workiq.py",
+      "card": null
+    },
+    {
+      "id": "kody-w__wp_publish_agent",
+      "name": "WordPress Publish",
+      "rar_name": "@kody-w/wp_publish_agent",
+      "publisher": "@kody-w",
+      "category": "integrations",
+      "version": "1.0.1",
+      "has_card": true,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__wp_publish_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__wp_publish_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__wp_publish_agent.py",
       "card": null
     },
     {

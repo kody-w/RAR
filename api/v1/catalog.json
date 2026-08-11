@@ -1,8 +1,8 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-08-11T09:43:14Z",
-  "count": 291,
+  "generated": "2026-08-11T09:49:21Z",
+  "count": 292,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
     {
@@ -9251,6 +9251,44 @@
         "lines": 249,
         "size_kb": 9.5,
         "added_at": "2026-05-24T21:45:25-04:00"
+      }
+    },
+    {
+      "id": "kody-w__wp_publish_agent",
+      "name": "@kody-w/wp_publish_agent",
+      "display_name": "WordPress Publish",
+      "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored.",
+      "version": "1.0.1",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "integrations",
+      "tags": [
+        "wordpress",
+        "publishing",
+        "rest-api",
+        "blog",
+        "idempotent"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [
+        "WP_URL",
+        "WP_USER",
+        "WP_APP_PASSWORD"
+      ],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/wp_publish_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/wp_publish_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/wp_publish_agent.py",
+        "sha256": "2240c6e471f6c3c54e35e62553e9cd9af314cd520790120d23e88045120ee87a"
+      },
+      "stats": {
+        "lines": 276,
+        "size_kb": 11.8,
+        "added_at": null
       }
     },
     {
