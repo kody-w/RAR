@@ -24,6 +24,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parent.parent
 AGG_DIR = REPO_ROOT / "agents" / "@cat-agent-skills"
 TOASTER_PATH = REPO_ROOT / "agents" / "@kody-w" / "skill_toaster_agent.py"
+GENERATOR_PATH = REPO_ROOT / "scripts" / "generate_aggregated_agents.py"
 AGGREGATED_JSON = REPO_ROOT / "state" / "aggregated.json"
 
 AGG_FILES = sorted(AGG_DIR.glob("*_agent.py")) if AGG_DIR.exists() else []
@@ -47,6 +48,11 @@ def agent_of(mod):
 @pytest.fixture(scope="module")
 def toaster():
     return load_module(TOASTER_PATH)
+
+
+@pytest.fixture(scope="module")
+def generator():
+    return load_module(GENERATOR_PATH)
 
 
 # ── the toaster engine ──────────────────────────────────────────────────────
@@ -80,6 +86,54 @@ def test_toast_is_deterministic(toaster):
     first = json.dumps(toaster.toast_skill(item), sort_keys=True)
     for _ in range(5):
         assert json.dumps(toaster.toast_skill(item), sort_keys=True) == first
+
+
+def test_container_version_advances_only_when_bytes_change(generator):
+    assert generator.choose_container_version(
+        "1.0.0",
+        None,
+        False,
+    ) == "2.0.0"
+    assert generator.choose_container_version(
+        "1.0.0",
+        "2.0.1",
+        True,
+    ) == "2.0.1"
+    assert generator.choose_container_version(
+        "1.0.0",
+        "2.0.1",
+        False,
+    ) == "2.0.2"
+    assert generator.choose_container_version(
+        "1.1.0",
+        "2.0.9",
+        False,
+    ) == "2.1.0"
+    published = generator.latest_container_version(None, "2.0.9")
+    assert published == "2.0.9"
+    assert generator.choose_container_version(
+        "1.0.0",
+        published,
+        False,
+    ) == "2.0.10"
+
+
+def test_generated_version_reads_only_the_manifest(generator):
+    source = '''"""Untrusted text.
+    "version": "99.0.0",
+"""
+__manifest__ = {
+    "name": "@test/example",
+    "version": "2.0.0",
+}
+'''
+    assert generator.generated_version(source) == "2.0.0"
+    duplicate = source + '\n__manifest__ = {"version": "99.0.0"}\n'
+    assert generator.generated_version(duplicate) is None
+
+    injected = 'text"""; __manifest__ = {"version": "99.0.0"}; """'
+    safe = generator.doc_fragment(injected)
+    compile(f'"""{safe}"""', "<doc-fragment>", "exec")
 
 
 def test_analysis_recognises_shape(toaster):
