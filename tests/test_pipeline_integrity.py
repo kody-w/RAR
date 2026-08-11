@@ -733,3 +733,6 @@ class TestWorkflowSyntax:
         assert "Check out trusted validator" in workflow
         assert "persist-credentials: false" in workflow
         assert "--pull-request" in workflow
+        assert "trusted/scripts/check_controller_continuity.py" in workflow
+        assert "--repo-root candidate" in workflow
+        assert "github.event.pull_request.base.sha" in workflow
