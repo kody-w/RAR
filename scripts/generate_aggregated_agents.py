@@ -19,12 +19,12 @@ and every one of them links home.
 
 Version locking — the part that matters
 ---------------------------------------
-The generated manifest's ``version`` IS the upstream version, and
-``source.content_digest`` fingerprints the upstream record. When upstream ships a
-new version the digest changes, this regenerates, and the two can never silently
-diverge. ``--check`` asserts that in CI: it exits non-zero if any generated agent
-has drifted from what its source now says, which turns drift into a build
-failure rather than a slow rot nobody notices.
+The generated manifest carries RAR's container version while
+``source.upstream_version`` records the upstream value verbatim. If upstream
+metadata changes without a version bump, RAR advances the existing container's
+patch version so published bytes remain immutable. ``source.content_digest``
+fingerprints the upstream record, and ``--check`` turns any drift into a build
+failure rather than silent rot.
 
 What is NOT copied
 ------------------
@@ -44,6 +44,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 import importlib.util
@@ -54,6 +55,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 AGG_FILE = REPO_ROOT / "state" / "aggregated.json"
 AGENTS_DIR = REPO_ROOT / "agents"
+REGISTRY_FILE = REPO_ROOT / "registry.json"
 
 # The toaster. Aggregated entries are not shells: the engine infers the shape of
 # each upstream capability from the metadata we hold and generates RAR's own
@@ -297,15 +299,109 @@ def container_version(upstream_version: str) -> str:
     return f"{major + TOAST_GENERATION}.{minor}.{patch}"
 
 
-def render(item: dict, source: dict) -> str:
+def normalized_upstream_version(item: dict) -> str:
+    version = item.get("version") or "0.1.0"
+    return version if re.fullmatch(r"\d+\.\d+\.\d+", version) else "0.1.0"
+
+
+def generated_version(source: str) -> str | None:
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return None
+    versions = []
+    for node in tree.body:
+        if not isinstance(node, ast.Assign):
+            continue
+        if not any(
+            isinstance(target, ast.Name)
+            and target.id == "__manifest__"
+            for target in node.targets
+        ):
+            continue
+        try:
+            manifest = ast.literal_eval(node.value)
+        except (TypeError, ValueError):
+            return None
+        version = manifest.get("version") if isinstance(manifest, dict) else None
+        if not (
+            isinstance(version, str)
+            and re.fullmatch(r"\d+\.\d+\.\d+", version)
+        ):
+            return None
+        versions.append(version)
+    return versions[0] if len(versions) == 1 else None
+
+
+def doc_fragment(value: object) -> str:
+    text = str(value)
+    if '"""' not in text:
+        return text
+    return text.replace("\\", "\\\\").replace('"', '\\"')
+
+
+def latest_container_version(*versions: str | None) -> str | None:
+    valid = [
+        version
+        for version in versions
+        if isinstance(version, str)
+        and re.fullmatch(r"\d+\.\d+\.\d+", version)
+    ]
+    return max(
+        valid,
+        key=lambda version: tuple(
+            int(value) for value in version.split(".")
+        ),
+    ) if valid else None
+
+
+def published_versions() -> dict[str, str]:
+    if not REGISTRY_FILE.exists():
+        return {}
+    try:
+        registry = json.loads(REGISTRY_FILE.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    return {
+        agent["name"]: agent["version"]
+        for agent in registry.get("agents", [])
+        if isinstance(agent, dict)
+        and isinstance(agent.get("name"), str)
+        and isinstance(agent.get("version"), str)
+        and re.fullmatch(r"\d+\.\d+\.\d+", agent["version"])
+    }
+
+
+def choose_container_version(
+    upstream_version: str,
+    existing_version: str | None,
+    existing_matches: bool,
+) -> str:
+    default = container_version(upstream_version)
+    if not existing_version:
+        return default
+    if existing_matches:
+        return existing_version
+    default_key = tuple(int(value) for value in default.split("."))
+    existing_key = tuple(int(value) for value in existing_version.split("."))
+    if default_key > existing_key:
+        return default
+    major, minor, patch = existing_key
+    return f"{major}.{minor}.{patch + 1}"
+
+
+def render(
+    item: dict,
+    source: dict,
+    *,
+    version_override: str | None = None,
+) -> str:
     slug = item["ref"].split("/", 1)[1]
     cls = slug_to_class(slug)
     display = item["name"]
     desc = item["description"] or f"{display} — aggregated from {source['display_name']}."
-    upstream_version = item.get("version") or "0.1.0"
-    if not re.fullmatch(r"\d+\.\d+\.\d+", upstream_version):
-        upstream_version = "0.1.0"
-    version = container_version(upstream_version)
+    upstream_version = normalized_upstream_version(item)
+    version = version_override or container_version(upstream_version)
     author = item.get("author") or source.get("display_name", "Unknown")
     tags = [re.sub(r"[^a-z0-9_]+", "_", str(t).lower()) for t in item.get("tags", [])][:8]
     tags = [t for t in tags if t] or ["aggregated"]
@@ -315,7 +411,7 @@ def render(item: dict, source: dict) -> str:
     archetype = spec["archetype"]
 
     header = f'''"""
-{display} — {desc}
+{doc_fragment(display)} — {doc_fragment(desc)}
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
@@ -327,11 +423,11 @@ for this shape of work — a {archetype} capability — generated from the metad
 we index. The upstream library remains the authority for its own instructions;
 this agent is callable on its own terms and links home for the source.
 
-  Source library : {source['display_name']} ({source.get('publisher') or 'independent'})
-  Upstream entry : {item['url']}
-  Upstream author: {author}
+  Source library : {doc_fragment(source['display_name'])} ({doc_fragment(source.get('publisher') or 'independent')})
+  Upstream entry : {doc_fragment(item['url'])}
+  Upstream author: {doc_fragment(author)}
   Upstream version: {upstream_version}
-  Licence        : {source.get('license', 'unverified')}{'' if source.get('license_verified') else ' (unverified — indexed, never republished)'}
+  Licence        : {doc_fragment(source.get('license', 'unverified'))}{'' if source.get('license_verified') else ' (unverified — indexed, never republished)'}
 
 Regenerated automatically by scripts/generate_aggregated_agents.py whenever the
 upstream record changes, so this file and its source cannot silently diverge.
@@ -421,15 +517,40 @@ def main() -> int:
         return 0
 
     written, unchanged, drifted = 0, 0, []
+    registry_versions = published_versions()
     for item in items:
         source = sources.get(item["source_id"])
         if not source:
             continue
         ns, slug = item["ref"].split("/", 1)
         dest = AGENTS_DIR / ns / f"{slug}_agent.py"
-        body = render(item, source)
+        existing = (
+            dest.read_text(encoding="utf-8")
+            if dest.exists()
+            else None
+        )
+        file_version = generated_version(existing) if existing else None
+        existing_version = latest_container_version(
+            file_version,
+            registry_versions.get(item["ref"]),
+        )
+        existing_matches = bool(
+            existing
+            and file_version == existing_version
+            and render(
+                item,
+                source,
+                version_override=existing_version,
+            ) == existing
+        )
+        version = choose_container_version(
+            normalized_upstream_version(item),
+            existing_version,
+            existing_matches,
+        )
+        body = render(item, source, version_override=version)
 
-        if dest.exists() and dest.read_text(encoding="utf-8") == body:
+        if existing == body:
             unchanged += 1
             continue
         if args.check:
