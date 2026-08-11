@@ -49,15 +49,10 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/estate_outbound",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "EstateOutbound",
     "description": (
-        "Stage a signed neighborhood event in the operator's outbound lane "
-        "(Article XLVIII). The companion to commons_post — once an event is "
-        "signed, this writes it to ~/.brainstem/outbound/<rappid>/ so the "
-        "neighborhood's federation roll-up can pull it on its beat. Does NOT "
-        "push to the operator's public-estate repo — that's a separate step "
-        "the operator owns (gh CLI or a future estate_publish_agent)."
+        "Writes an already-signed neighborhood event into ~/.brainstem/outbound/ for federation roll-up; pushing to the estate repo stays manual."
     ),
     "author": "RAPP",
     "tags": ["estate", "outbound", "federation", "neighborhood", "publish"],

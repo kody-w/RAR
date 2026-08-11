@@ -27,9 +27,9 @@ from __future__ import annotations
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/powerpoint_generator_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "PowerPointGeneratorV2",
-    "description": "Template-based PowerPoint generation with Microsoft design. Supports multiple templates and smart layout selection.",
+    "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection.",
     "author": "Bill Whalen",
     "tags": ["productivity", "powerpoint", "presentations", "templates", "microsoft"],
     "category": "productivity",

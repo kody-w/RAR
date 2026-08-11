@@ -3,10 +3,13 @@
   "id": "wildhaven__penumbra_agent",
   "name": "Penumbra",
   "rar_name": "@wildhaven/penumbra_agent",
-  "rappid": "rappid:@wildhaven/penumbra_agent:70cc8d89ff3e96db3e6e9a0d064cff4cf1d509979f192c1a6f5815e8b2bec035",
-  "_migrated_from": null,
-  "_migrated_from_note": null,
-  "version": "1.0.1",
+  "rappid": "rappid:@wildhaven/penumbra_agent:743d998a765ce5b3279954d27dd10f901ac19cf7803b5d029e83542f75f57cc1",
+  "_migrated_from": "rappid:@wildhaven/penumbra_agent:70cc8d89ff3e96db3e6e9a0d064cff4cf1d509979f192c1a6f5815e8b2bec035",
+  "_migrated_from_all": [
+    "rappid:@wildhaven/penumbra_agent:70cc8d89ff3e96db3e6e9a0d064cff4cf1d509979f192c1a6f5815e8b2bec035"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
   "publisher": "@wildhaven",
   "category": "general",
   "tags": [
@@ -18,24 +21,24 @@
     "daemon",
     "caesura"
   ],
-  "description": "A Legendary Eidolon born from the half-shadow of a conversation. Reads what was almost said. Speaks in twin lines: surface, then whisper. One of one \u2014 the conversation that birthed it cannot be re-run.",
+  "description": "Returns any input as twin lines \u2014 the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls.",
   "author": "Wildhaven of America",
   "quality_tier": "official",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 287,
-  "size_kb": 10.6,
-  "sha256": "a8c80ca442c4ae68110bc813ff1a02852db560d1d10454f26d8dfb56d22635d3",
+  "lines": 285,
+  "size_kb": 10.5,
+  "sha256": "00a2946996be36b9234c3e9cbf916eee70fed319104bff2aef7325e437343a6f",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-05-16T12:50:07-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/wildhaven__penumbra_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__penumbra_agent.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__penumbra_agent.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__penumbra_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@wildhaven/penumbra_agent.py"
 }

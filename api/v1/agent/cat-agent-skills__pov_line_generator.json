@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__pov_line_generator",
+  "name": "POV Line Generator",
+  "rar_name": "@cat-agent-skills/pov_line_generator",
+  "rappid": "rappid:@cat-agent-skills/pov_line_generator:103c5fd610f7e0733a9a1f5216ce621cd29b64ed1706f812b1489ffc31356d65",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "writing",
+    "positioning",
+    "marketing",
+    "content",
+    "social_media"
+  ],
+  "description": "Generate sharp, specific point-of-view lines for posts, slides, talks, campaigns, or positioning work.",
+  "author": "Simon Owen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 8.8,
+  "sha256": "181aaa29ab74475fe1d1b73cbfec45f0cdd31f3016bbf34eabcaf3ec23213ded",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__pov_line_generator.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pov_line_generator_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__pov_line_generator.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__pov_line_generator.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/pov_line_generator_agent.py"
+}

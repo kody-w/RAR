@@ -1,25 +1,60 @@
 """
-Emission Tracking Agent for Energy sector.
+Emission Tracking Agent — a template you are meant to mutate.
 
 Monitors greenhouse gas emissions across facilities, tracks regulatory
 compliance, develops reduction plans, and analyzes carbon offset opportunities.
 
-Version 1.1.0 adds an evidence-backed, deterministic strategic implementation
-plan while preserving every legacy operation.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted systems (synthetic data, no credentials, works
+     from anywhere):
+       CRM  https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+            — cases at Energy-industry accounts become compliance events
+       TEL  https://kody-w.github.io/static-telemetry/api/v1/
+            — sensors, alerts, and 672-point reading series
+     The two join on the shared world: the live load_fault alert on
+     Prairie Wind Energy Cooperative's feeder breaker F-7 carries the
+     real CRM case number CAS-260128 ("Substation feeder fault flagged
+     in telemetry export"), and load/power reading series become
+     load-proxy aggregates. Converting those aggregates to tonnes CO2e
+     needs an emission factor telemetry cannot know — that stays an
+     enrichment seam.
+     Try: perform(operation="compliance_status")
+     (renders the CRM compliance cases PLUS the telemetry load overlay
+     joined on CAS-260128)
+  2. No network? Everything falls back to the embedded demo layer below
+     (FACILITIES / CARBON_OFFSETS / REGULATIONS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     EMISSION_TRACKING_DATA_URL (CRM) and/or EMISSION_TRACKING_TEL_URL
+     (telemetry) to your own endpoints (your real Dynamics org, your
+     CEMS/metering platform), or replace _fetch_collection() /
+     _fetch_telemetry() with your own API client. Fields the rest of
+     the file needs are listed in _normalize_live_event() — everything
+     else keeps working untouched. Fields marked "enrichment seam" in
+     the output (tonnes CO2e, emission factors) are where you wire your
+     emissions metering / CEMS platform.
+
+OPERATIONS
+  emissions_dashboard | compliance_status | reduction_plan
+  | carbon_offset_analysis | strategic_implementation_plan
+  kwargs: operation (required), facility_id
 """
 
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/emission_tracking",
-    "version": "1.1.0",
+    "version": "1.3.0",
     "display_name": "Emission Tracking Agent",
-    "description": "Monitors GHG emissions by facility, tracks regulatory compliance, develops reduction plans, and analyzes carbon offset opportunities.",
+    "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["emissions", "carbon", "compliance", "ghg", "sustainability", "energy"],
     "category": "energy",
@@ -30,7 +65,162 @@ __manifest__ = {
 
 
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export EMISSION_TRACKING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your EHS/CEMS client. Downstream
+# code only needs the fields produced by _normalize_live_event().
+# ---------------------------------------------------------------------------
+
+DATA_SOURCE_URL = os.environ.get(
+    "EMISSION_TRACKING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+# Sibling live source: the static-telemetry API. Load/power reading
+# series become load-proxy aggregates, and the load_fault alert joins
+# the CRM compliance case CAS-260128 (Prairie Wind Energy Cooperative).
+# Override with EMISSION_TRACKING_TEL_URL.
+TELEMETRY_SOURCE_URL = os.environ.get(
+    "EMISSION_TRACKING_TEL_URL",
+    "https://kody-w.github.io/static-telemetry/api/v1",
+)
+
+
+def _fetch_telemetry(path, key="value", timeout=6):
+    """Bounded GET against the telemetry API, cached in _LIVE_CACHE by
+    full URL. Returns [] on ANY failure — offline-safe. Reading series
+    are large (672 points each) — fetch them lazily, at most a couple
+    per run."""
+    url = f"{TELEMETRY_SOURCE_URL}/{path}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8")).get(key, [])
+    except Exception:
+        data = []
+    _LIVE_CACHE[url] = data
+    return data
+
+
+def _reading_aggregates(sensor_id):
+    """avg/max/latest over one live reading series; None offline."""
+    points = _fetch_telemetry(f"readings/{sensor_id}", key="points")
+    values = [p.get("v") for p in points if isinstance(p.get("v"), (int, float))]
+    if not values:
+        return None
+    return {
+        "n": len(values),
+        "avg": round(sum(values) / len(values), 2),
+        "max": max(values),
+        "latest": values[-1],
+    }
+
+
+def _load_proxy_rows(limit=2):
+    """Load-proxy aggregates from live load/power sensors. The feeder
+    load sensor (Prairie Wind Energy Cooperative — the account behind
+    compliance case CAS-260128) is picked first. Converting a load
+    proxy to tonnes CO2e requires an emission factor telemetry cannot
+    know — the renderer labels it as an enrichment seam. Fetches at
+    most `limit` reading series per run."""
+    sensors = _fetch_telemetry("sensors")
+    if not sensors:
+        return []
+    picks = [s for s in sensors if "load" in str(s.get("sensor_type", ""))]
+    picks += [
+        s for s in sensors
+        if "power" in str(s.get("sensor_type", "")) and s not in picks
+    ]
+    rows = []
+    for s in picks[:limit]:
+        agg = _reading_aggregates(s.get("sensor_id"))
+        if not agg:
+            continue
+        rows.append({
+            "sensor": s.get("sensor_code", "?"),
+            "type": s.get("sensor_type", "?"),
+            "unit": s.get("unit", ""),
+            "account": s.get("account_name", "?"),
+            "asset": s.get("asset_name", "?"),
+            "agg": agg,
+        })
+    return rows
+
+
+def _load_fault_alert():
+    """The live load_fault alert (joins CRM case CAS-260128); None
+    when offline."""
+    for a in _fetch_telemetry("alerts"):
+        if a.get("alert_type") == "load_fault":
+            return a
+    return None
+
+
+def _normalize_live_event(row):
+    """Project a Dynamics case onto the compliance-event shape this
+    agent uses. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not available from CRM
+    alone' and the renderers label it as an enrichment seam. In this
+    template a case at an Energy-industry account is reinterpreted as an
+    environmental/telemetry compliance event."""
+    return {
+        "facility": row.get("customeridname", "Unknown"),
+        "case": row.get("ticketnumber", ""),
+        "event": row.get("title", "untitled"),
+        "priority": {1: "High", 2: "Normal", 3: "Low"}.get(row.get("prioritycode"), "Normal"),
+        "status": "Open" if row.get("statecode") == 0 else "Resolved",
+        "opened": str(row.get("createdon", ""))[:10],
+        "co2_impact_tonnes": None,  # enrichment seam — wire your CEMS / metering
+        "_live": True,
+    }
+
+
+def _live_compliance_events():
+    """Compliance events at live Energy-industry accounts; [] offline."""
+    accounts = _fetch_collection("accounts")
+    if not accounts:
+        return []
+    energy_names = {
+        a["name"] for a in accounts
+        if "energy" in str(a.get("industrycode", "")).lower() and a.get("name")
+    }
+    return [
+        _normalize_live_event(i)
+        for i in _fetch_collection("incidents")
+        if i.get("customeridname") in energy_names
+    ]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 FACILITIES = {
@@ -291,9 +481,70 @@ class EmissionTrackingAgent(BasicAgent):
         return "\n".join(lines)
 
     def _compliance_status(self) -> str:
+        events = _live_compliance_events()
+        if events:
+            open_events = [e for e in events if e["status"] == "Open"]
+            lines = [
+                "# Compliance Status (live tenant data)",
+                "",
+                f"**Energy-sector compliance events on record:** {len(events)} "
+                f"({len(open_events)} open)",
+                "**Metered CO2e impact:** n/a — enrichment seam (wire your CEMS / metering)",
+                "",
+                "| Case | Facility | Event | Priority | Status | Opened | CO2e Impact |",
+                "|------|----------|-------|----------|--------|--------|-------------|",
+            ]
+            for e in sorted(events, key=lambda x: (x["status"] != "Open", x["opened"])):
+                lines.append(
+                    f"| {e['case']} | {e['facility']} | {e['event']} | {e['priority']} "
+                    f"| {e['status']} | {e['opened']} | n/a — enrichment seam |"
+                )
+            lines.append("")
+            lines.append("_Source: live Static Dynamics 365 tenant (accounts + incidents). "
+                         "A case at an Energy-industry account is reinterpreted as an "
+                         "environmental/telemetry compliance event._")
+            alert = _load_fault_alert()
+            proxies = _load_proxy_rows()
+            if alert or proxies:
+                lines.extend(["", "## Live Telemetry Load Overlay", ""])
+            if alert:
+                unit = alert.get("unit", "")
+                lines.extend([
+                    f"- **{alert.get('alert_code', '?')} {alert.get('alert_type', '?')}** "
+                    f"({str(alert.get('severity', '?')).upper()}): "
+                    f"{alert.get('asset_name', '?')} at {alert.get('account_name', '?')} — "
+                    f"peak {alert.get('peak_value')} {unit} vs threshold "
+                    f"{alert.get('threshold')} {unit}",
+                    f"- **Joined CRM case:** {alert.get('crm_case', 'n/a')} "
+                    "(the compliance event in the table above)",
+                    f"- **Alert window:** {alert.get('window_start', '?')} -> "
+                    f"{alert.get('window_end', '?')}",
+                    "",
+                ])
+            if proxies:
+                lines.extend([
+                    "| Sensor | Signal | Account | Avg | Max | Latest | Samples | CO2e Impact |",
+                    "|--------|--------|---------|-----|-----|--------|---------|-------------|",
+                ])
+                for p in proxies:
+                    a, u = p["agg"], p["unit"]
+                    lines.append(
+                        f"| {p['sensor']} | {p['type']} | {p['account']} "
+                        f"| {a['avg']} {u} | {a['max']} {u} | {a['latest']} {u} "
+                        f"| {a['n']} @ 15 min | n/a — enrichment seam (emission factor) |"
+                    )
+                lines.append("")
+                lines.append(
+                    "_Source: live static-telemetry sensors, alerts, and reading "
+                    "series. Load-proxy aggregates are real; converting them to "
+                    "tonnes CO2e needs an emission factor from your CEMS/metering "
+                    "platform — that column is an enrichment seam._"
+                )
+            return "\n".join(lines)
+
         data = _compliance_status()
         lines = [
-            "# Compliance Status",
+            "# Compliance Status (embedded demo data — offline)",
             "",
             "| Facility | Scope 1 CO2 | Threshold | Compliant | Gap | Target Reduction | Actual |",
             "|----------|-------------|-----------|-----------|-----|-----------------|--------|",
@@ -372,7 +623,15 @@ class EmissionTrackingAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = EmissionTrackingAgent()
-    for op in ["emissions_dashboard", "compliance_status", "reduction_plan", "carbon_offset_analysis"]:
+    print("=" * 60)
+    print("LIVE TENANT COMPLIANCE EVENTS + TELEMETRY LOAD OVERLAY")
+    print("(CRM cases joined to the load_fault alert on CAS-260128; falls back offline)")
+    print(agent.perform(operation="compliance_status"))
+    print()
+    print("=" * 60)
+    print("EMBEDDED DEMO PORTFOLIO (works offline)")
+    print(agent.perform(operation="emissions_dashboard"))
+    for op in ["reduction_plan", "carbon_offset_analysis"]:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")
         print("=" * 60)

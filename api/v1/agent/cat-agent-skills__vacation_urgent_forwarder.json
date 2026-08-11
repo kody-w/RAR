@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__vacation_urgent_forwarder",
+  "name": "Vacation Urgent Forwarder",
+  "rar_name": "@cat-agent-skills/vacation_urgent_forwarder",
+  "rappid": "rappid:@cat-agent-skills/vacation_urgent_forwarder:7689803fba95ea766059f29e4e49aa892e790b7c9ff7d6553438b70e93bd2691",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "automation",
+    "email",
+    "teams",
+    "out_of_office"
+  ],
+  "description": "A Scout automation installer that, only during a configured vacation window, scans work email and Teams and forwards genuinely urgent items to your personal email.",
+  "author": "Giorgio Ughini",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.1,
+  "sha256": "a945ea6ac53c04d6b788b7a61d287b33fed92bc1d34272178e5a7c74c2c66e7e",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__vacation_urgent_forwarder.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__vacation_urgent_forwarder.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__vacation_urgent_forwarder.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py"
+}

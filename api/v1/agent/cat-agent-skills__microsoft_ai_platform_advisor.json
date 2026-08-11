@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__microsoft_ai_platform_advisor",
+  "name": "Microsoft AI Platform Advisor",
+  "rar_name": "@cat-agent-skills/microsoft_ai_platform_advisor",
+  "rappid": "rappid:@cat-agent-skills/microsoft_ai_platform_advisor:d46d69e288abcb8bdb34a878981b684269bfad2c969733149c4c8830f60812fa",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "advisor",
+    "discovery",
+    "architecture",
+    "decision_making",
+    "requirements",
+    "risk_assessment",
+    "microsoft_365_copilot",
+    "foundry"
+  ],
+  "description": "Guides a customer through a discovery interview, recommends the right Microsoft AI platform (M365 Copilot, Agent Builder, Copilot Studio, Foundry, Foundry Agent Service, Windows AI Foundry, or Agent 365 as the governance layer), scores technical complexity and risk, and plots them on a 2x2 quadrant chart with planning guidance.",
+  "author": "Rafsan Huseynov",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.4,
+  "sha256": "8bbf35ee4a97ee4ed92876adbbfd13d2b7624c98a137dc949f1f46080a0637d4",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__microsoft_ai_platform_advisor.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__microsoft_ai_platform_advisor.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__microsoft_ai_platform_advisor.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py"
+}

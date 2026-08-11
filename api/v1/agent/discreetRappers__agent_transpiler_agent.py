@@ -23,9 +23,9 @@ Usage:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/agent_transpiler_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "AgentTranspiler",
-    "description": "Converts agents between platforms: M365 Copilot, Copilot Studio, Azure AI Foundry.",
+    "description": "Converts RAPP agent definitions into M365 declarative, Copilot Studio, and Azure AI Foundry formats, with optional Foundry deployment.",
     "author": "Bill Whalen",
     "tags": ["pipeline", "transpiler", "m365", "copilot-studio", "multi-platform"],
     "category": "pipeline",

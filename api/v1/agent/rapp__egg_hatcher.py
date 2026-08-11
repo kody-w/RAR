@@ -52,9 +52,9 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/egg_hatcher",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "EggHatcher",
-    "description": "Universal .egg cartridge router. Introspects any .egg (local path or URL), reads manifest.schema/type, and routes by kind: organism / rapplication / session / neighborhood (real — joins via Article XLVI two-tier estate) / estate (planned). Refuses on unknown kinds — never a destructive fallback.",
+    "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
     "author": "RAPP",
     "tags": ["egg", "cartridge", "hatch", "organism", "rapplication", "lifecycle"],
     "category": "core",

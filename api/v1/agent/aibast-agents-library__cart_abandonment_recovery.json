@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__cart_abandonment_recovery",
   "name": "Cart Abandonment Recovery Agent",
   "rar_name": "@aibast-agents-library/cart_abandonment_recovery",
-  "rappid": "rappid:@aibast-agents-library/cart_abandonment_recovery:e353894d2d93b11172d67f16f99b43588f6a3c5fa08ee23087cc1133e22623e2",
-  "_migrated_from": "rappid:@aibast-agents-library/cart_abandonment_recovery:3d93a860e9eba778ee4279adbb97753f5ec92c5af79d7d78186741aa0312e276", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/cart_abandonment_recovery:ca3d86632074befcf551dbf0cbfce9408fd8850a8f9d45907dc111efe145f06d",
+  "_migrated_from": "rappid:@aibast-agents-library/cart_abandonment_recovery:e353894d2d93b11172d67f16f99b43588f6a3c5fa08ee23087cc1133e22623e2",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/cart_abandonment_recovery:3d93a860e9eba778ee4279adbb97753f5ec92c5af79d7d78186741aa0312e276",
+    "rappid:@aibast-agents-library/cart_abandonment_recovery:e353894d2d93b11172d67f16f99b43588f6a3c5fa08ee23087cc1133e22623e2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "b2c_sales",
   "tags": [
@@ -16,24 +21,24 @@
     "email",
     "b2c"
   ],
-  "description": "Cart abandonment analysis with recovery campaigns, incentive optimization, and conversion tracking for e-commerce.",
+  "description": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 400,
-  "size_kb": 19.1,
-  "sha256": "3d93a860e9eba778ee4279adbb97753f5ec92c5af79d7d78186741aa0312e276",
+  "lines": 512,
+  "size_kb": 24.5,
+  "sha256": "f74e09c3d9a4fbe53fca3697ab5d147b766ded273023ef10507f94b1278e0dc2",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__cart_abandonment_recovery.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__cart_abandonment_recovery.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__cart_abandonment_recovery.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__cart_abandonment_recovery.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py"
 }

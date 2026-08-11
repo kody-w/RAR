@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__fs_regulatory_compliance",
   "name": "FS Regulatory Compliance Agent",
   "rar_name": "@aibast-agents-library/fs_regulatory_compliance",
-  "rappid": "rappid:@aibast-agents-library/fs_regulatory_compliance:9803d44ef6c5aeeb7b3b3c2edf479e767ee04c6d7ac1ebc92cbfdb5ac82434ad",
-  "_migrated_from": "rappid:@aibast-agents-library/fs_regulatory_compliance:74a85537defa7ce67746cd20cd330d069078ae0b4eda290e774322cf3710a07d", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/fs_regulatory_compliance:5b22e307c52cde5c33a1f50792d0ee29611cde7b42f5d8313cca8a8e76ac814c",
+  "_migrated_from": "rappid:@aibast-agents-library/fs_regulatory_compliance:9803d44ef6c5aeeb7b3b3c2edf479e767ee04c6d7ac1ebc92cbfdb5ac82434ad",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/fs_regulatory_compliance:74a85537defa7ce67746cd20cd330d069078ae0b4eda290e774322cf3710a07d",
+    "rappid:@aibast-agents-library/fs_regulatory_compliance:9803d44ef6c5aeeb7b3b3c2edf479e767ee04c6d7ac1ebc92cbfdb5ac82434ad"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "financial_services",
   "tags": [
@@ -21,24 +26,24 @@
     "best-execution",
     "venue-ranking"
   ],
-  "description": "Financial services regulatory compliance with SOX, Dodd-Frank, BSA tracking, remediation planning, and examiner preparation.",
+  "description": "Tracks compliance findings and remediation from a live simulated Dynamics 365 tenant (cases and tasks), with an offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 572,
-  "size_kb": 28.8,
-  "sha256": "74a85537defa7ce67746cd20cd330d069078ae0b4eda290e774322cf3710a07d",
+  "lines": 701,
+  "size_kb": 34.4,
+  "sha256": "3db36e36416a456a6669e40e96b14edd3b31b7eb53228aa97ba9f967ff10334b",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__fs_regulatory_compliance.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__fs_regulatory_compliance.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__fs_regulatory_compliance.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__fs_regulatory_compliance.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py"
 }

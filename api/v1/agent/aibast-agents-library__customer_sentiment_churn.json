@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__customer_sentiment_churn",
   "name": "Customer Sentiment & Churn Agent",
   "rar_name": "@aibast-agents-library/customer_sentiment_churn",
-  "rappid": "rappid:@aibast-agents-library/customer_sentiment_churn:94054ad8213b33aa92ddfa77be602120161a7ef85ac790c085fab89dfc3cce6b",
-  "_migrated_from": "rappid:@aibast-agents-library/customer_sentiment_churn:3324058be61fcc58bdab5cf69a4a4d55fa189b569ffd8d1f9775dbdd9595dc4f", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/customer_sentiment_churn:fed6e713fbaef94f00b0ded9e80b156df1595ca13146ebd0a39c9c4956d2d3eb",
+  "_migrated_from": "rappid:@aibast-agents-library/customer_sentiment_churn:94054ad8213b33aa92ddfa77be602120161a7ef85ac790c085fab89dfc3cce6b",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/customer_sentiment_churn:3324058be61fcc58bdab5cf69a4a4d55fa189b569ffd8d1f9775dbdd9595dc4f",
+    "rappid:@aibast-agents-library/customer_sentiment_churn:94054ad8213b33aa92ddfa77be602120161a7ef85ac790c085fab89dfc3cce6b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "financial_services",
   "tags": [
@@ -16,24 +21,24 @@
     "analytics",
     "financial-services"
   ],
-  "description": "Customer sentiment analysis, churn prediction, retention action planning, and segment analytics for financial services.",
+  "description": "Scores churn risk and plans retention from a live simulated Dynamics 365 tenant (cases as sentiment signals), with an offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 572,
-  "size_kb": 27.9,
-  "sha256": "3324058be61fcc58bdab5cf69a4a4d55fa189b569ffd8d1f9775dbdd9595dc4f",
+  "lines": 727,
+  "size_kb": 34.9,
+  "sha256": "196850ced898f6460b04bf9cf38f7cc8f5eb59f0a23c87a920a6b0fa42977c99",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__customer_sentiment_churn.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_sentiment_churn.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_sentiment_churn.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_sentiment_churn.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py"
 }

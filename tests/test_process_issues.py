@@ -577,6 +577,37 @@ class TestCrudRequestContract:
         assert result["action"] == "agent.create"
         assert result["request_id"] == "req_create_123"
 
+    def test_versioned_create_preserves_public_identity(self):
+        code = VALID_AGENT_CODE.replace(
+            "@testuser/my_agent",
+            "@testuser/full_rapp_leviathan",
+        )
+        request = {
+            "schema": pi.CHANGE_REQUEST_SCHEMA,
+            "request_id": "req_identity_123",
+            "operation": "create",
+            "resource": {
+                "kind": "agent",
+                "id": "@testuser/full_rapp_leviathan",
+            },
+            "preconditions": {"if_none_match": "*"},
+            "payload": {
+                "source": {
+                    "content": code,
+                    "sha256": f"sha256:{pi.sha256_bytes(code.encode())}",
+                }
+            },
+        }
+        result = pi.process(request, "testuser")
+        assert result["ok"] is True
+        staged = json.loads(
+            (pi.REPO_ROOT / result["file"]).read_text()
+        )
+        assert staged["agent"] == "@testuser/full_rapp_leviathan"
+        assert staged["canonical_path"] == (
+            "agents/@testuser/full_rapp_leviathan_agent.py"
+        )
+
     def test_same_issue_revision_is_idempotent(self):
         payload = {
             "code": VALID_AGENT_CODE,

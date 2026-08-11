@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__presentation_talk_track_builder",
+  "name": "Presentation Talk Track Builder",
+  "rar_name": "@cat-agent-skills/presentation_talk_track_builder",
+  "rappid": "rappid:@cat-agent-skills/presentation_talk_track_builder:9b16184a930c951660075cd151fed63f75455dc3cb281b4f3b84e9be85d57e30",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "presentations",
+    "speaker_notes",
+    "powerpoint",
+    "writing",
+    "productivity"
+  ],
+  "description": "Writes natural, first-person spoken presenter scripts for the slides in a deck. Treats existing speaker notes as authoritative when they contradict slide text. Calibrates length to a target duration and speaking pace and returns a timing table. Never modifies visible slide content.",
+  "author": "Jagmeet Chabra",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.3,
+  "sha256": "0b292d4a5a102713a81298e77e673258e3e9dc9d67595b37b4afadf58449e531",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__presentation_talk_track_builder.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__presentation_talk_track_builder.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__presentation_talk_track_builder.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/presentation_talk_track_builder_agent.py"
+}

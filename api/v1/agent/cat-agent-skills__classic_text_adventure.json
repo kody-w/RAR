@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__classic_text_adventure",
+  "name": "Classic Text Adventure",
+  "rar_name": "@cat-agent-skills/classic_text_adventure",
+  "rappid": "rappid:@cat-agent-skills/classic_text_adventure:456bfbe09351a9d85e145446c355ed06882e917ca42abab106380333c86c8361",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@cat-agent-skills",
+  "category": "devtools",
+  "tags": [
+    "adventure",
+    "game",
+    "python"
+  ],
+  "description": "Play a deterministic, resumable Colossal Cave adventure with exact game output and built-in diagnostics.",
+  "author": "Andreas Adner",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 8.3,
+  "sha256": "90b57384eee43f39e7dd44a0ba50ba226615e3b65355dcdc8f5b1f49fac559a1",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__classic_text_adventure.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/classic_text_adventure_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__classic_text_adventure.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__classic_text_adventure.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/classic_text_adventure_agent.py"
+}

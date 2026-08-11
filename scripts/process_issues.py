@@ -1186,17 +1186,13 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
         else manifest["name"]
     )
 
-    # Auto-append _agent suffix if missing
+    # The file path is normalized to an _agent suffix, but the manifest identity
+    # remains stable so existing public names and source-index refs do not change.
     if manifest["name"] != f"{publisher}/{slug}":
         if preserves_existing_identity or preserves_tombstone_identity:
             name = original_name
         elif versioned:
-            return {
-                "error": (
-                    f"Versioned manifest name must be canonical: "
-                    f"{publisher}/{slug}"
-                )
-            }
+            name = original_name
         else:
             name = f"{publisher}/{slug}"
             code = replace_manifest_string_field(code, "name", name) or ""
@@ -1205,7 +1201,11 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
                 return {"error": "Could not normalize agent name safely"}
     declared_agent = str(payload.get("agent") or "")
     if declared_agent:
-        if preserves_existing_identity or preserves_tombstone_identity:
+        if (
+            preserves_existing_identity
+            or preserves_tombstone_identity
+            or versioned
+        ):
             declared_matches = declared_agent.casefold() == name.casefold()
         else:
             declared_publisher, declared_slug, declared_error = (

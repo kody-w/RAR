@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__rapp_x_notary_canary_agent",
+  "name": "RAPP X Notary Canary",
+  "rar_name": "@kody-w/rapp_x_notary_canary_agent",
+  "rappid": "rappid:@kody-w/rapp_x_notary_canary_agent:0372f8294843abc81a357c7e64b1172cb86ba988197c0edc895e61a881e47dfc",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.2.0",
+  "publisher": "@kody-w",
+  "category": "devtools",
+  "tags": [
+    "canary",
+    "notary",
+    "rapp_x"
+  ],
+  "description": "Validates the Issues-backed RAR notarization lifecycle.",
+  "author": "Kody W",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 43,
+  "size_kb": 1.3,
+  "sha256": "5d34d87380925aa0f60c14e0066c8aa5e59ecd884bf19034619ebea58ad27149",
+  "has_card": true,
+  "added_at": "2026-07-18T23:41:02Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rapp_x_notary_canary_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_x_notary_canary_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_x_notary_canary_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_x_notary_canary_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/rapp_x_notary_canary_agent.py"
+}

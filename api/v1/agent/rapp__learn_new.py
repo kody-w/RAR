@@ -34,9 +34,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/learn_new",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "display_name": "LearnNew",
-    "description": "Creates new RAPP agents or swarms from natural-language descriptions. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry.",
+    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
     "author": "RAPP",
     "tags": ["meta", "generator", "scaffolding", "learn", "swarm"],
     "category": "core",
@@ -78,6 +78,8 @@ __manifest__ = {{
     "requires_env": {env_json},
     "dependencies": ["@rapp/basic_agent"],
     "example_call": {{"args": {example_args_json}}},
+    "estimated_rpp": {estimated_rpp},
+    "rpp_basis": "{rpp_basis}",
 }}
 
 
@@ -87,6 +89,7 @@ class {class_name}(BasicAgent):
         self.metadata = {{
             "name": self.name,
             "description": __manifest__["description"],
+            "estimated_rpp": __manifest__.get("estimated_rpp"),
             "parameters": {{
                 "type": "object",
                 "properties": {{
@@ -149,6 +152,7 @@ class {class_name}(BasicAgent):
         self.metadata = {{
             "name": self.name,
             "description": __manifest__["description"],
+            "estimated_rpp": __manifest__.get("estimated_rpp"),
             "parameters": {{
                 "type": "object",
                 "properties": {{
@@ -217,6 +221,7 @@ class {class_name}(BasicAgent):
         self.metadata = {{
             "name": self.name,
             "description": __manifest__["description"],
+            "estimated_rpp": __manifest__.get("estimated_rpp"),
             "parameters": {{
                 "type": "object",
                 "properties": {{
@@ -687,6 +692,14 @@ if __name__ == "__main__":
         else:
             example_args["query"] = "example query"
 
+        # rpp trace (github.com/kody-w/rapp-personpower): conservative run-rating.
+        # Manual baseline = 180s to do the task by hand + 120s per input the
+        # agent gathers/uses; engine = ~30s per run. Rounded down, floor 1.
+        _manual_s = 180 + 120 * len(extra_params_inferred)
+        estimated_rpp = max(1, _manual_s // 30)
+        rpp_basis = ("~%ds manual baseline (180s task + 120s/input x %d) vs ~30s per run; "
+                     "preview stat, rounded down") % (_manual_s, len(extra_params_inferred))
+
         return self.AGENT_TEMPLATE.format(
             description=description,
             date=datetime.now().strftime("%Y-%m-%d %H:%M"),
@@ -697,6 +710,8 @@ if __name__ == "__main__":
             extra_params=extra_params,
             perform_body=perform_body,
             tags_json=json.dumps(tags),
+            estimated_rpp=estimated_rpp,
+            rpp_basis=rpp_basis,
             category=category,
             namespace=namespace,
             snake_name=snake,

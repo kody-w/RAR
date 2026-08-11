@@ -3,10 +3,13 @@
   "id": "kody-w__rappter_engine_agent",
   "name": "RappterEngine",
   "rar_name": "@kody-w/rappter_engine_agent",
-  "rappid": "rappid:@kody-w/rappter_engine_agent:8afa3bc0e18b1c7be1a8ef31a9904add0775b3e911f048bcf289901d84cb94ec",
-  "_migrated_from": null,
-  "_migrated_from_note": null,
-  "version": "1.0.0",
+  "rappid": "rappid:@kody-w/rappter_engine_agent:361750ea315ebcd743884c3ae0d4a9a99439bdf32d91170a378863f82ac69e21",
+  "_migrated_from": "rappid:@kody-w/rappter_engine_agent:8afa3bc0e18b1c7be1a8ef31a9904add0775b3e911f048bcf289901d84cb94ec",
+  "_migrated_from_all": [
+    "rappid:@kody-w/rappter_engine_agent:8afa3bc0e18b1c7be1a8ef31a9904add0775b3e911f048bcf289901d84cb94ec"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@kody-w",
   "category": "devtools",
   "tags": [
@@ -17,7 +20,7 @@
     "rules-as-data",
     "heartbeat"
   ],
-  "description": "Base agent for building data-driven content engines. Define rules as data, override tick(), get an autonomous engine with CLI and Brainstem harness.",
+  "description": "Provides a base class for rules-as-data content engines \u2014 subclass it, override tick(), and run it as a CLI or brainstem tool.",
   "author": "Kody Wildfeuer",
   "quality_tier": "official",
   "requires_env": [],
@@ -25,16 +28,16 @@
     "@rapp/basic_agent"
   ],
   "lines": 479,
-  "size_kb": 17.5,
-  "sha256": "ca2f7195446656d2f1aa84ac74e03bb601a51a6c977bffa232ce29c9b9cfc22e",
+  "size_kb": 17.4,
+  "sha256": "5679d82a2ea53a7dc8ae3b9c78e932ed83d068947f07d53be3af7582e32f7fd9",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rappter_engine_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappter_engine_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappter_engine_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rappter_engine_agent.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rappter_engine_agent.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rappter_engine_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/rappter_engine_agent.py"
 }

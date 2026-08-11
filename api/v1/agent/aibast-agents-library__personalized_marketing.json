@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__personalized_marketing",
   "name": "Personalized Marketing Agent",
   "rar_name": "@aibast-agents-library/personalized_marketing",
-  "rappid": "rappid:@aibast-agents-library/personalized_marketing:1cae62f90f787cb66659811a4ff07c97939a7893dc36403a4fc2c517c9d6ac9b",
-  "_migrated_from": "rappid:@aibast-agents-library/personalized_marketing:3e8a27d4300383d81ab2bce986e6d48da643f6bb4a59df44f9e760cc29fcebd7", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/personalized_marketing:4c4d971752fd4bfbc917d0ce1374147da80d178dbc92223d4356fbe35e05d0e2",
+  "_migrated_from": "rappid:@aibast-agents-library/personalized_marketing:1cae62f90f787cb66659811a4ff07c97939a7893dc36403a4fc2c517c9d6ac9b",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/personalized_marketing:3e8a27d4300383d81ab2bce986e6d48da643f6bb4a59df44f9e760cc29fcebd7",
+    "rappid:@aibast-agents-library/personalized_marketing:1cae62f90f787cb66659811a4ff07c97939a7893dc36403a4fc2c517c9d6ac9b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "retail_cpg",
   "tags": [
@@ -15,24 +20,24 @@
     "campaigns",
     "retail"
   ],
-  "description": "Enables customer segmentation, personalized campaign design, dynamic content personalization, and marketing performance analysis for retail and CPG brands.",
+  "description": "Segments live audiences and designs campaigns from a live simulated Dynamics 365 tenant's contacts and orders, with an offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 693,
-  "size_kb": 27.2,
-  "sha256": "3e8a27d4300383d81ab2bce986e6d48da643f6bb4a59df44f9e760cc29fcebd7",
+  "lines": 834,
+  "size_kb": 33.9,
+  "sha256": "6092f9183c36ec5135ef15dcb022012a8d9a0f86f87ea2595629ab1eac566e1f",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__personalized_marketing.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__personalized_marketing.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__personalized_marketing.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__personalized_marketing.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py"
 }

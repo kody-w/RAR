@@ -31,12 +31,10 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/fleet_commander",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "FleetCommander",
     "description": (
-        "Autonomous agent development pipeline. Accepts a natural-language spec, "
-        "generates a plan, writes tests, builds the agent, iterates until tests pass, "
-        "and publishes to the RAR registry. Uses Copilot CLI for code generation."
+        "Builds new RAR agents from a natural-language spec \u2014 plans, writes pytest tests, generates code via the Copilot CLI, iterates, and publishes."
     ),
     "author": "RAPP",
     "tags": ["meta", "automation", "fleet", "ci", "tdd", "pipeline"],

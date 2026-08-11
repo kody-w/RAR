@@ -684,6 +684,34 @@ class TestWorkflowSyntax:
         assert "target_slug" not in workflow
         assert "Issue body changed after approval" in workflow
         assert "git pull --rebase" not in workflow
+        assert "rar-notary-main" in workflow
+        for builder in (
+            "build_pokedex_api.py",
+            "build_static_api.py",
+            "build_front_page.py",
+        ):
+            assert workflow.count(builder) >= 2
+        assert "api/v1/ manifest.json" in workflow
+
+    @pytest.mark.smoke
+    def test_batch_approval_is_atomic_and_globally_serialized(self):
+        workflow = (
+            REPO_ROOT
+            / ".github"
+            / "workflows"
+            / "approve-agent-batch.yml"
+        ).read_text()
+        assert "workflow_dispatch" in workflow
+        assert "apply_agent_batch.py" in workflow
+        assert "rar-notary-main" in workflow
+        assert 'test "${{ github.ref }}" = "refs/heads/main"' in workflow
+        assert "ref: main" in workflow
+        assert "getCollaboratorPermissionLevel" in workflow
+        assert "python -m pytest -q" in workflow
+        assert "Issue #{number} changed before batch commit" in workflow
+        assert "git push origin HEAD:main" in workflow
+        assert "steps.apply.outcome == 'success'" in workflow
+        assert "was published, but projection" in workflow
 
     @pytest.mark.smoke
     def test_issue_processor_reconciles_edits_and_fails_pushes(self):
@@ -705,3 +733,6 @@ class TestWorkflowSyntax:
         assert "Check out trusted validator" in workflow
         assert "persist-credentials: false" in workflow
         assert "--pull-request" in workflow
+        assert "trusted/scripts/check_controller_continuity.py" in workflow
+        assert "--repo-root candidate" in workflow
+        assert "github.event.pull_request.base.sha" in workflow

@@ -9,9 +9,9 @@ import json
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@howardh/cardsmith_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "CardSmith",
-    "description": "Forges trading cards for AI agents. Turn any agent into a collectible card with stats, abilities, and art.",
+    "description": "Forges MTG-style trading cards for brainstem agents from a built-in card database, with forge-all and gallery-link actions.",
     "author": "Howard",
     "tags": ["productivity", "cards", "visualization", "trading-cards", "sneakernet"],
     "category": "productivity",

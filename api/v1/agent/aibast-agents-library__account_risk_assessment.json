@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__account_risk_assessment",
   "name": "Account Risk Assessment",
   "rar_name": "@aibast-agents-library/account_risk_assessment",
-  "rappid": "rappid:@aibast-agents-library/account_risk_assessment:82076e97416f38d01eebb1e84d9e5eea6a8ad1d2f6b62c4b89737900de3a81d5",
-  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/account_risk_assessment:cbad0b7262b8a1262e20919b18e56d14", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/account_risk_assessment:402c143532df36f4b948a5ff0725c1ae6b88aa575dc166ea3a48ef5a90b8773f",
+  "_migrated_from": "rappid:@aibast-agents-library/account_risk_assessment:82076e97416f38d01eebb1e84d9e5eea6a8ad1d2f6b62c4b89737900de3a81d5",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@aibast-agents-library/account_risk_assessment:cbad0b7262b8a1262e20919b18e56d14",
+    "rappid:@aibast-agents-library/account_risk_assessment:82076e97416f38d01eebb1e84d9e5eea6a8ad1d2f6b62c4b89737900de3a81d5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "b2b_sales",
   "tags": [
@@ -15,24 +20,24 @@
     "churn-prediction",
     "deal-risk"
   ],
-  "description": "Assesses deal risk, churn probability, and financial health with mitigation recommendations.",
+  "description": "Scores deal risk, churn probability, and financial health with mitigation advice \u2014 on built-in demo accounts, or on real figures you supply via account_data.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 495,
-  "size_kb": 23.0,
-  "sha256": "cbad0b7262b8a1262e20919b18e56d148cc6c256477a697d455af50757cac83a",
+  "lines": 674,
+  "size_kb": 32.2,
+  "sha256": "27c4185b7f6ed7654bf6f6b8ded0bf1c3a1043cd1129d20dcc039d46adecd2fb",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__account_risk_assessment.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__account_risk_assessment.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__account_risk_assessment.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__account_risk_assessment.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py"
 }

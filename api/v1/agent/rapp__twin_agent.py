@@ -53,9 +53,9 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/twin_agent",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "display_name": "Twin",
-    "description": "Full digital-twin lifecycle and estate inspection in one cartridge: summon, hatch, boot, stop, list, inspect, browse eggs, soul history, lineage. Absorbs the prior Estate / Summon Twin / Hatch Egg cartridges.",
+    "description": "Manages the local digital-twin lifecycle \u2014 summon, hatch eggs, boot each twin as its own brainstem, stop, chat, inspect \u2014 under ~/.rapp/twins/.",
     "author": "RAPP",
     "tags": ["twin", "summon", "hatch", "boot", "lifecycle", "egg", "estate", "local-first"],
     "category": "core",

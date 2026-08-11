@@ -3,10 +3,13 @@
   "id": "kody-w__connected_solution_agent",
   "name": "ConnectedSolution",
   "rar_name": "@kody-w/connected_solution_agent",
-  "rappid": "rappid:@kody-w/connected_solution_agent:64d3aa50276adbd78809df068fa9edfb28439f25939a97f1c0fcf7f81cda1cd5",
-  "_migrated_from": null,
-  "_migrated_from_note": null,
-  "version": "1.0.1",
+  "rappid": "rappid:@kody-w/connected_solution_agent:a1f9a83e7d67c1f433c5194e5900d517ab56f43ff4bfb77fe3c75bf304c4b122",
+  "_migrated_from": "rappid:@kody-w/connected_solution_agent:64d3aa50276adbd78809df068fa9edfb28439f25939a97f1c0fcf7f81cda1cd5",
+  "_migrated_from_all": [
+    "rappid:@kody-w/connected_solution_agent:64d3aa50276adbd78809df068fa9edfb28439f25939a97f1c0fcf7f81cda1cd5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
   "publisher": "@kody-w",
   "category": "integrations",
   "tags": [
@@ -17,24 +20,24 @@
     "integration",
     "converter"
   ],
-  "description": "Turn any agent stack (BasicAgent *.py files) into ONE import-ready Microsoft Copilot Studio connected-agents solution: an orchestrator plus one connected sub-agent per agent, each with a deterministic topic that runs the agent's perform() logic on synthetic stand-in data and declares its perform() params as typed inputs. Optionally imports AND publishes into your own Copilot Studio (Dataverse) environment via the Web API (no pac CLI; credentials read only from env/settings, never chat).",
+  "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API.",
   "author": "Kody Wildfeuer",
   "quality_tier": "official",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 2737,
-  "size_kb": 127.7,
-  "sha256": "07f85a7da6626411c14dd4be371752901b30fd17619017a3e1354eae33ca57cf",
+  "lines": 2731,
+  "size_kb": 127.3,
+  "sha256": "63b3de4722f83a981745927a80ad07804dfc42815b05c79314d8a6850908aa0f",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-06-22T21:04:42-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__connected_solution_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/connected_solution_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/connected_solution_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__connected_solution_agent.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__connected_solution_agent.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__connected_solution_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/connected_solution_agent.py"
 }

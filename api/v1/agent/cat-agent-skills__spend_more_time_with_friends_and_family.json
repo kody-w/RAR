@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__spend_more_time_with_friends_and_family",
+  "name": "Spend More Time With Friends & Family",
+  "rar_name": "@cat-agent-skills/spend_more_time_with_friends_and_family",
+  "rappid": "rappid:@cat-agent-skills/spend_more_time_with_friends_and_family:3328bc380adee4bcad1f628ea8c80d1e7af3148fbc3646db31350e266f0858b2",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "integrations",
+  "tags": [
+    "automation",
+    "teams",
+    "out_of_office",
+    "knowledge"
+  ],
+  "description": "While you're out of office, watches a group chat and answers questions from your local knowledge docs (clearly marked AI-generated), logs anything it can't answer for later, and pings you on Teams if its setup is incomplete.",
+  "author": "Adi Leibowitz",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.4,
+  "sha256": "d11659b95fb22912398412b573f58ec52b940dcff10574f772ed0a4b4be892db",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__spend_more_time_with_friends_and_family.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__spend_more_time_with_friends_and_family.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__spend_more_time_with_friends_and_family.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py"
+}

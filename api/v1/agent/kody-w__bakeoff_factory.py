@@ -103,13 +103,10 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/bakeoff_factory",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "display_name": "BakeoffFactory",
     "description": (
-        "Generic content-improvement bakeoff loop. Variants compete on a "
-        "task; a judge scores every output on a rubric; the worst variant "
-        "evolves by grafting techniques from the best. Rising tide raises "
-        "all boats. Drop it on any text-producing task."
+        "Runs a persistent tournament where prompt variants compete on a text task, an LLM judge scores outputs, and the worst variant mutates toward the best."
     ),
     "author": "kody-w",
     "tags": ["meta", "evolution", "tournament", "loop", "self-improving",

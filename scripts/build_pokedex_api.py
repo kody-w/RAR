@@ -34,6 +34,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -102,6 +103,14 @@ def _build_entry(agent: dict) -> dict:
     publisher = name.split("/")[0] if "/" in name else "@anon"
     file_rel = agent.get("_file", "")           # agents/@rapp/learn_new_agent.py
     has_card = bool(agent.get("_has_card"))
+    card_source = (
+        _REPO / file_rel
+        if file_rel.endswith(".card")
+        else _REPO / f"{file_rel}.card"
+    )
+    shipped_card = bool(
+        file_rel and card_source.is_file()
+    )
     # stubs (private agents published as .stub) are content-addressed by the
     # stub artifact itself
     sha256 = agent.get("_sha256") or agent.get("_stub_sha256") or ""
@@ -116,16 +125,33 @@ def _build_entry(agent: dict) -> dict:
         _tail = None
     rappid = f"rappid:{publisher}/{name.split('/')[-1]}:{_tail}" if _tail else None
     # legacy bridge: carry the previously served identity as _migrated_from
-    _old, _old_bridge = _PRIOR_RAPPIDS.get(slug) or (None, None)
-    migrated_from = _old if (_old and _old != rappid) else _old_bridge
+    _old, _old_aliases = _PRIOR_RAPPIDS.get(slug) or (None, [])
+    migrated_from_all = list(_old_aliases)
+    if _old and _old != rappid and _old not in migrated_from_all:
+        migrated_from_all.append(_old)
+    migrated_from = (
+        migrated_from_all[-1]
+        if migrated_from_all
+        else None
+    )
 
     # File-on-disk references (publisher-namespaced under agents/)
     py_url = f"{RAW_PREFIX}/{file_rel}" if file_rel else None
     # If a .card file is shipped alongside, link it too. The registry
     # uses `_card_sha256`; the file lives at <_file>.card.
-    card_url = py_url + ".card" if (py_url and has_card) else None
+    card_url = (
+        py_url
+        if py_url and file_rel.endswith(".card")
+        else py_url + ".card"
+        if py_url and shipped_card
+        else None
+    )
     # The Pokédex API also serves a fetch-friendly mirror under api/v1/agent/
-    api_card_url = f"{RAW_PREFIX}/api/v1/agent/{slug}.card" if has_card else None
+    api_card_url = (
+        f"{RAW_PREFIX}/api/v1/agent/{slug}.card"
+        if shipped_card
+        else None
+    )
     api_py_url = f"{RAW_PREFIX}/api/v1/agent/{slug}.py"
 
     return {
@@ -135,6 +161,7 @@ def _build_entry(agent: dict) -> dict:
         "rar_name": name,                       # original @publisher/slug
         "rappid": rappid,
         "_migrated_from": migrated_from,
+        "_migrated_from_all": migrated_from_all,
         "_migrated_from_note": (
             "legacy identity string, read-forever; the canonical rappid "
             "above is authoritative"
@@ -179,13 +206,65 @@ def main():
 
     global _PRIOR_RAPPIDS
     _PRIOR_RAPPIDS = {}
+    head_paths = subprocess.run(
+        [
+            "git",
+            "ls-tree",
+            "-r",
+            "--name-only",
+            "HEAD",
+            "--",
+            "api/v1/agent",
+        ],
+        cwd=_REPO,
+        capture_output=True,
+        text=True,
+    )
+    if head_paths.returncode == 0:
+        for relative in head_paths.stdout.splitlines():
+            if not relative.endswith(".json"):
+                continue
+            prior = subprocess.run(
+                ["git", "show", f"HEAD:{relative}"],
+                cwd=_REPO,
+                capture_output=True,
+                text=True,
+            )
+            if prior.returncode != 0:
+                continue
+            try:
+                document = json.loads(prior.stdout)
+            except json.JSONDecodeError:
+                continue
+            if document.get("rappid"):
+                aliases = list(
+                    document.get("_migrated_from_all") or []
+                )
+                if (
+                    document.get("_migrated_from")
+                    and document["_migrated_from"] not in aliases
+                ):
+                    aliases.append(document["_migrated_from"])
+                _PRIOR_RAPPIDS[Path(relative).stem] = (
+                    document["rappid"],
+                    aliases,
+                )
     if (_API / "agent").is_dir():
         for _f in (_API / "agent").glob("*.json"):
             try:
                 _d = json.loads(_f.read_text())
-                if _d.get("rappid"):
+                if _d.get("rappid") and _f.stem not in _PRIOR_RAPPIDS:
+                    aliases = list(
+                        _d.get("_migrated_from_all") or []
+                    )
+                    if (
+                        _d.get("_migrated_from")
+                        and _d["_migrated_from"] not in aliases
+                    ):
+                        aliases.append(_d["_migrated_from"])
                     _PRIOR_RAPPIDS[_f.stem] = (
-                        _d["rappid"], _d.get("_migrated_from")
+                        _d["rappid"],
+                        aliases,
                     )
             except Exception:
                 pass
@@ -224,11 +303,17 @@ def main():
         file_rel = agent.get("_file", "")
         if file_rel:
             src_py = _REPO / file_rel
+            card_source = (
+                src_py
+                if file_rel.endswith(".card")
+                else _REPO / f"{file_rel}.card"
+            )
             if src_py.is_file():
                 (_API / "agent" / f"{slug}.py").write_bytes(src_py.read_bytes())
-            src_card = _REPO / f"{file_rel}.card"
-            if src_card.is_file():
-                (_API / "agent" / f"{slug}.card").write_bytes(src_card.read_bytes())
+            if card_source.is_file():
+                (_API / "agent" / f"{slug}.card").write_bytes(
+                    card_source.read_bytes()
+                )
 
     # Index — paginated summary tiles (matches RAPP_Store's shape)
     index = {

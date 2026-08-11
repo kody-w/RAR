@@ -422,12 +422,12 @@ def aggregated_why(src: dict) -> list[str]:
     why: list[str] = []
 
     if src["downloads"] is None:
-        why.append("no download count published by the source "
+        why.append("no download count published at the source "
                    "- scored at the population median")
     elif src["downloads"]:
         why.append(f"{plural(src['downloads'], 'download')} at the source")
     else:
-        why.append("no downloads reported by the source")
+        why.append("no downloads reported at the source")
 
     if src["published_age_days"] is None:
         why.append("no publish date at the source - scored at the population median")

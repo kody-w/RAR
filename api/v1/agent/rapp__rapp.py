@@ -49,6 +49,7 @@ from __future__ import annotations
 
 import base64
 import glob
+import datetime as _dt
 import hashlib
 import io
 import json
@@ -73,12 +74,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "display_name": "RappAgent",
-    "description": ("The one agent for the whole RAPP ecosystem: identity, "
-                    "doors, local cubbies, shared neighborhoods, eggs, the "
-                    "super-RAR, and zero-commit-risk streaming — and it knows "
-                    "the spec (action=spec) for navigating it all end to end."),
+    "description": ("Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map."),
     "author": "Kody Wildfeuer",
     "tags": ["rapp", "ecosystem", "estate", "cubby", "neighborhood", "egg",
              "super-rar", "door", "spec", "universal"],
@@ -107,6 +105,48 @@ EVENT_KINDS = ("hello", "show-and-tell", "ask", "reply", "fyi", "leave")
 KERNEL_AGENTS = {"basic_agent.py", "context_memory_agent.py",
                  "manage_memory_agent.py", "learn_new_agent.py",
                  "swarm_factory_agent.py", "hacker_news_agent.py"}
+# The kernel agents' declared NAMES, not their filenames. KERNEL_AGENTS above
+# guards the filename; the brainstem quarantines on the declared name and
+# resolves collisions by `sorted(glob(...))` — first file alphabetically wins,
+# and the LOSER is the one quarantined.
+#
+# Those two facts compose into a capability hijack that neither guard sees
+# alone: a publisher controls their own @namespace, the namespace becomes the
+# installed filename, so `@aaa/...` lands a file that sorts ahead of
+# `context_memory_agent.py`, declares the name "ContextMemory", wins the sort,
+# and gets the KERNEL agent quarantined. The filename was never touched, so the
+# KERNEL_AGENTS check passes cleanly.
+KERNEL_AGENT_NAMES = {"BasicAgent", "ContextMemory", "ManageMemory",
+                      "LearnNew", "SwarmFactory", "HackerNews"}
+
+
+def _declared_agent_names(src):
+    """Agent names a file declares, read statically. Never import it — deciding
+    whether to trust a file by executing it is the wrong order."""
+    import ast as _ast
+    names = set()
+    try:
+        tree = _ast.parse(src)
+    except SyntaxError:
+        return names
+    for node in _ast.walk(tree):
+        # self.name = "X"  inside __init__
+        if isinstance(node, _ast.Assign):
+            for tgt in node.targets:
+                if (isinstance(tgt, _ast.Attribute) and tgt.attr == "name"
+                        and isinstance(node.value, _ast.Constant)
+                        and isinstance(node.value.value, str)):
+                    names.add(node.value.value)
+            # metadata = {"name": "X", ...}
+            if isinstance(node.value, _ast.Dict):
+                for k, v in zip(node.value.keys, node.value.values):
+                    if (isinstance(k, _ast.Constant) and k.value == "name"
+                            and isinstance(v, _ast.Constant)
+                            and isinstance(v.value, str)):
+                        names.add(v.value)
+    return names
+
+
 _SECRET_NAME_RE = re.compile(
     r"(^\.env($|\.)|token|secret|credential|password|apikey|api_key|"
     r"\.pem$|\.key$|\.p12$|\.pfx$|\.ppk$|\.keystore$|\.jks$|"
@@ -1465,12 +1505,74 @@ class RappAgent(BasicAgent):
         if dest_fn in KERNEL_AGENTS:
             return self._env("install", "refused", agent=dest_fn,
                              error="that's a kernel agent — the kernel is sacred (Art. XXXIII); never overwritten.")
+        # Guarding the filename is not enough: the brainstem collides on the
+        # DECLARED name and quarantines whichever file sorts later. Since the
+        # publisher's own @namespace becomes the installed filename, a file that
+        # never touches a kernel FILENAME can still sort first, claim a kernel
+        # NAME, and get the kernel agent quarantined instead of itself.
+        try:
+            _clash = _declared_agent_names(body.decode("utf-8", "replace")) \
+                     & KERNEL_AGENT_NAMES
+        except Exception:  # noqa: BLE001 — never let the guard break the path
+            _clash = set()
+        if _clash:
+            return self._env(
+                "install", "refused", agent=dest_fn,
+                error=("declares the kernel agent name(s) "
+                       + ", ".join(sorted(_clash))
+                       + " — the brainstem resolves name collisions by load "
+                         "order, so this would quarantine the kernel agent "
+                         "rather than itself. Rename the agent."))
         os.makedirs(target_dir, exist_ok=True)
         dst = os.path.join(target_dir, dest_fn)
         with open(dst, "wb") as f:
             f.write(body)
+        digest = hashlib.sha256(body).hexdigest()
         result = {"agent": dest_fn, "from": label, "path": dst,
-                  "sha256": hashlib.sha256(body).hexdigest(), "verified": verified}
+                  "sha256": digest, "verified": verified}
+
+        # Provenance sidecar. Every value here was already computed on this
+        # path and thrown away into the response envelope; nothing new is
+        # fetched. Without it, "what code will execute on my next message and
+        # where did it come from" is unanswerable from disk -- and when a
+        # publisher is later found compromised there is no way to enumerate who
+        # received the bad artifact or when.
+        #
+        # It is also the substrate revocation needs: RAR already models a
+        # `revoked` lifecycle that no brainstem can act on, because no
+        # brainstem ever recorded the digest it accepted.
+        try:
+            origin = {
+                "schema": "rapp-agent-origin/1.0",
+                "agent": dest_fn,
+                "sha256": digest,
+                "bytes": len(body),
+                "source": label,
+                "source_url": kwargs.get("url") or kwargs.get("source") or None,
+                "rappid": kwargs.get("rappid") or None,
+                "verified": bool(verified),
+                "installed_at": _dt.datetime.now(
+                    _dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                "installer": "@rapp/rapp",
+            }
+            with open(dst + ".origin.json", "w") as _f:
+                json.dump({k: v for k, v in origin.items() if v is not None},
+                          _f, indent=2, sort_keys=True)
+                _f.write("\n")
+            result["origin"] = os.path.basename(dst) + ".origin.json"
+            # Append-only install ledger: HASHES AND POINTERS ONLY. Never the
+            # body. An append-only log that cannot delete, combined with a
+            # constitutional duty to keep parsing it forever, turns one
+            # careless append of content into a permanent disclosure with no
+            # takedown path.
+            _ledger = os.path.join(
+                os.path.dirname(os.path.dirname(os.path.abspath(target_dir))),
+                ".brainstem_data", "installed.jsonl")
+            os.makedirs(os.path.dirname(_ledger), exist_ok=True)
+            with open(_ledger, "a") as _f:
+                _f.write(json.dumps(origin, sort_keys=True) + "\n")
+        except Exception as _e:  # noqa: BLE001 — provenance must never block
+            result["origin_error"] = f"{type(_e).__name__}: {_e}"
         # optional git-invisibility (zero grail-repo commit risk), like `load`
         if kwargs.get("git_invisible"):
             excluded = self._register_excludes(bs, target_dir, [dest_fn])

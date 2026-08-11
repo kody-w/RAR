@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__institutional_knowledge",
+  "name": "Institutional Knowledge Archivist",
+  "rar_name": "@cat-agent-skills/institutional_knowledge",
+  "rappid": "rappid:@cat-agent-skills/institutional_knowledge:58d7cd58d602587eb3a8e105d8ffe243bb55b6434d4ac1d6f7816863e516cf01",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "knowledge",
+    "handoff",
+    "leadership",
+    "m365",
+    "offboarding",
+    "documentation",
+    "productivity"
+  ],
+  "description": "Preserve a departing senior leader's institutional knowledge \u2014 decisions, rationale, relationships, and tribal knowledge \u2014 by mining their M365 signals into a structured, multi-phase archive a successor can ground on.",
+  "author": "Srinivas Varukala",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.3,
+  "sha256": "b9574a93f4efeb61a83d8e843f8caae6f11d146b20edaca294837c209bc4723a",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__institutional_knowledge.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/institutional_knowledge_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__institutional_knowledge.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__institutional_knowledge.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/institutional_knowledge_agent.py"
+}

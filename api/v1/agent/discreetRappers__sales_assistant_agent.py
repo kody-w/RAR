@@ -16,9 +16,9 @@ The "waiter" in the waiter-cook model.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/sales_assistant_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "SalesAssistant",
-    "description": "Natural language CRM assistant — handles requests about accounts, opportunities, contacts, and pipeline.",
+    "description": "Routes natural-language CRM requests about accounts, contacts, and opportunities to the Dynamics CRUD agent, which serves built-in demo data.",
     "author": "Bill Whalen",
     "tags": ["integrations", "sales", "crm", "natural-language"],
     "category": "integrations",

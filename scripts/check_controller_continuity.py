@@ -21,9 +21,10 @@ Two distinct events, deliberately reported differently:
            with a reason; that turns an alarm into a decision someone signed.
 """
 import json
-import os
+import argparse
 import subprocess
 import sys
+from pathlib import Path
 
 
 def entries(blob):
@@ -43,24 +44,32 @@ def entries(blob):
     return out
 
 
-def previous(path="registry.json", ref="HEAD~1"):
-    r = subprocess.run(["git", "show", f"{ref}:{path}"],
-                       capture_output=True, text=True)
+def previous(repo_root: Path, path="registry.json", ref="HEAD~1"):
+    r = subprocess.run(
+        ["git", "show", f"{ref}:{path}"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+    )
     return r.stdout if r.returncode == 0 else None
 
 
-def main():
-    cur_raw = open("registry.json").read()
-    prev_raw = previous()
+def main(repo_root: Path = Path("."), base: str = "HEAD~1"):
+    repo_root = repo_root.resolve()
+    cur_raw = (repo_root / "registry.json").read_text(encoding="utf-8")
+    prev_raw = previous(repo_root, ref=base)
     if not prev_raw:
         print("  no previous registry.json to compare against — recording only")
         return 0
     cur, prev = entries(cur_raw), entries(prev_raw)
 
     allowed = {}
-    p = "scripts/controller-handovers.json"
-    if os.path.isfile(p):
-        allowed = json.load(open(p)).get("handovers", {})
+    p = repo_root / "scripts" / "controller-handovers.json"
+    if p.is_file():
+        allowed = json.loads(p.read_text(encoding="utf-8")).get(
+            "handovers",
+            {},
+        )
 
     renames, handovers = [], []
     for ns, (gid, login) in sorted(cur.items()):
@@ -97,4 +106,8 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo-root", type=Path, default=Path("."))
+    parser.add_argument("--base", default="HEAD~1")
+    args = parser.parse_args()
+    sys.exit(main(args.repo_root, args.base))

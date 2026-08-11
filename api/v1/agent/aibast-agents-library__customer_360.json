@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__customer_360",
   "name": "Customer 360",
   "rar_name": "@aibast-agents-library/customer_360",
-  "rappid": "rappid:@aibast-agents-library/customer_360:38b6b47b4d3b1f2ddc08eb64899432f40c5a4fa07f7af85ecdeb68f262fad0cf",
-  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/customer_360:3fa23ccf9158d0892802d65c7987fb56", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/customer_360:ec7f9b05ae96eeeb0e998c129eb38851954f9b204f94420842de771a06b3b338",
+  "_migrated_from": "rappid:@aibast-agents-library/customer_360:38b6b47b4d3b1f2ddc08eb64899432f40c5a4fa07f7af85ecdeb68f262fad0cf",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@aibast-agents-library/customer_360:3fa23ccf9158d0892802d65c7987fb56",
+    "rappid:@aibast-agents-library/customer_360:38b6b47b4d3b1f2ddc08eb64899432f40c5a4fa07f7af85ecdeb68f262fad0cf"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "general",
   "tags": [
@@ -15,24 +20,24 @@
     "next-best-action",
     "crm"
   ],
-  "description": "Unified customer profiles merging CRM, support, and billing data with health scores and next-best-action recommendations.",
+  "description": "Builds unified customer profiles and timelines from a live simulated Dynamics 365 tenant (accounts, cases, emails), with an offline fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 317,
-  "size_kb": 17.7,
-  "sha256": "3fa23ccf9158d0892802d65c7987fb56b9737abf548ff12bee7bdb6d7e452271",
+  "lines": 534,
+  "size_kb": 28.1,
+  "sha256": "1207a85d5c8291b3e542573f45a0335c6cc24085bf1215e3ff2d9048d5756294",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__customer_360.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_360.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_360.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_360.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py"
 }

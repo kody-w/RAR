@@ -46,15 +46,10 @@ from pathlib import Path
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@wildhaven/bellows_agent",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Bellows",
     "description": (
-        "Summoning this card asks: 'What are the absolute coolest, most "
-        "mind-blowing, out of the box prompts that will really show off "
-        "the power? Give me 10.' Then it runs the doubledown loop — "
-        "generate, self-critique against a tangibility rubric, kill the "
-        "weak, surface only survivors. Pass a topic to escalate something "
-        "else. Each loop sharpens itself with the previous loop's kills."
+        "Builds a paste-ready self-critique 'doubledown' prompt for ten escalating ideas, persisting a local kill log so each loop learns from the last."
     ),
     "author": "Wildhaven of America",
     "tags": ["bellows", "doubledown", "self-judge", "creative", "loop", "daemon", "construct", "show-off-the-power"],

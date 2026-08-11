@@ -1,18 +1,53 @@
 """
-Clinical Notes Summarizer Agent for Healthcare.
+Clinical Notes Summarizer Agent — a template you are meant to mutate.
 
 Summarizes patient encounters, performs medication reviews, generates
-problem lists, and produces referral summaries from clinical documentation
+problem lists, produces referral summaries, and runs the demonstrated
+pre-op clearance workflow (deterministic, keyed by patient ID ``78392``)
 for healthcare providers and care coordinators.
 
-Version 1.1.0 preserves those operations and adds the demonstrated pre-op
-clearance workflow. Added results use the patient facts visible in the source
-demo, are deterministic and keyed by patient ID ``78392``, and simulate the
-final EHR and care-team update without performing a live write.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works from anywhere):
+       CRM  — the Static Dynamics 365 tenant (Aster Lane Office Systems):
+              https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+              A Dynamics case (incident) is reinterpreted as a clinical
+              encounter event — e.g. Riverbend Medical Group's case
+              "Patient intake forms failing to sync to records system".
+       FHIR — the Static FHIR R4 server (Riverbend Medical Group):
+              https://kody-w.github.io/static-fhir/fhir/
+              Each fulfilled Appointment is joined to its Patient
+              resource and summarized as an encounter header with real
+              MRN, DOB, gender, visit, and practitioner.
+     Try: perform(operation="summarize_encounter")
+     — one output renders the embedded demo encounters, the CRM-side
+     encounter events, AND the live FHIR Appointment+Patient encounter
+     headers (the narrative bodies stay declared simulated).
+  2. No network? Everything falls back to the embedded demo layer below
+     (PATIENT_ENCOUNTERS / MEDICATIONS / REFERRALS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CLINICAL_NOTES_SUMMARIZER_DATA_URL (CRM side) to any OData-shaped
+     endpoint and CLINICAL_NOTES_SUMMARIZER_FHIR_URL (clinical side) to
+     any FHIR R4 searchset-bundle host — or replace _fetch_collection()
+     / _fetch_fhir_bundle() with calls into an Epic/Cerner FHIR API.
+     Fields the rest of the file needs are listed in
+     _normalize_live_encounter() — vitals, diagnoses, and labs render as
+     "n/a — enrichment seam" until you wire a clinical system.
+
+OPERATIONS
+  summarize_encounter | medication_review | problem_list | referral_summary
+  | preop_clearance | cardiopulmonary_assessment
+  | surgical_medication_reconciliation | anesthesia_risk_plan
+  | issue_clearance_note
+  kwargs: operation (required), encounter_id, patient_id
 """
 
 import sys
 import os
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -20,9 +55,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/clinical_notes_summarizer",
-    "version": "1.1.0",
+    "version": "1.3.0",
     "display_name": "Clinical Notes Summarizer Agent",
-    "description": "Summarizes patient encounters, performs medication reviews, generates problem lists, and produces referral summaries.",
+    "description": "Summarizes encounters and medication reviews, joining live simulated FHIR appointment-patient headers with the Dynamics 365 CRM; offline fallback.",
     "author": "AIBAST",
     "tags": ["clinical-notes", "ehr", "encounters", "medications", "referrals", "healthcare"],
     "category": "healthcare",
@@ -32,8 +67,141 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real systems
+#
+# Two live sources, both synthetic and hosted on GitHub Pages:
+#   CRM  (OData-shaped Dynamics 365, Aster Lane Office Systems):
+#     export CLINICAL_NOTES_SUMMARIZER_DATA_URL=https://your-org/api/data/v9.2
+#   FHIR (R4 searchset bundles, Riverbend Medical Group):
+#     export CLINICAL_NOTES_SUMMARIZER_FHIR_URL=https://your-fhir-host/fhir
+# or replace _fetch_collection() / _fetch_fhir_bundle() with your
+# EHR/FHIR client. Downstream code only needs the fields produced by
+# _normalize_live_encounter() and _live_fhir_encounter_headers().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "CLINICAL_NOTES_SUMMARIZER_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+FHIR_SOURCE_URL = os.environ.get(
+    "CLINICAL_NOTES_SUMMARIZER_FHIR_URL",
+    "https://kody-w.github.io/static-fhir/fhir",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_encounter(row):
+    """Project a Dynamics case onto the encounter-summary shape this agent
+    renders. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None / empty list means 'not available from the
+    CRM-side record alone' and the renderer labels it as an enrichment seam
+    (wire your EHR, lab system, or vitals feed there)."""
+    return {
+        "encounter_id": row.get("ticketnumber", "?"),
+        "patient": row.get("primarycontactidname") or "Unknown",
+        "age": None,          # enrichment seam — wire your EHR demographics
+        "date": str(row.get("createdon", ""))[:10],
+        "type": row.get(
+            "casetypecode@OData.Community.Display.V1.FormattedValue", "Case"
+        ),
+        "provider": row.get("owneridname", "Unassigned"),
+        "chief_complaint": row.get("title", "untitled"),
+        "diagnoses": [],      # enrichment seam — wire your EHR problem list
+        "abnormal_labs": [],  # enrichment seam — wire your lab system
+        "bp": None,           # enrichment seam
+        "bmi": None,          # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_encounters():
+    """Riverbend Medical Group cases from the live tenant, reinterpreted as
+    clinical encounter events; [] when offline."""
+    rows = _fetch_collection("incidents")
+    return [
+        _normalize_live_encounter(r) for r in rows
+        if r.get("customeridname") == "Riverbend Medical Group"
+    ]
+
+
+def _fetch_fhir_bundle(resource, timeout=6):
+    """Sibling helper for the FHIR side: one bounded GET per resource
+    type per process (cached by full URL). Returns the list of entry
+    resources from the R4 searchset Bundle; [] on ANY failure."""
+    url = f"{FHIR_SOURCE_URL}/{resource}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            bundle = json.loads(resp.read().decode("utf-8"))
+        rows = [e.get("resource", {}) for e in bundle.get("entry", [])]
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+def _live_fhir_encounter_headers():
+    """Each fulfilled FHIR Appointment joined to its Patient resource,
+    summarized as an encounter header: real MRN, DOB, gender, visit
+    description, date, and practitioner from the live clinical record.
+    Narrative bodies, diagnoses, and vitals remain enrichment seams —
+    the demo narratives in this file stay declared simulated. [] when
+    the FHIR feed is unreachable."""
+    appts = _fetch_fhir_bundle("Appointment")
+    if not appts:
+        return []
+    patients = {p.get("id"): p for p in _fetch_fhir_bundle("Patient")}
+    headers = []
+    for a in appts:
+        if a.get("status") != "fulfilled":
+            continue
+        patient_name, practitioner, pat_res = "Unknown", "Unassigned", None
+        for p in a.get("participant", []):
+            ref = p.get("actor", {}).get("reference", "")
+            if ref.startswith("Patient/"):
+                patient_name = p.get("actor", {}).get("display", "Unknown")
+                pat_res = patients.get(ref.split("/", 1)[1])
+            elif ref.startswith("Practitioner/"):
+                practitioner = p.get("actor", {}).get("display", "Unassigned")
+        headers.append({
+            "patient": patient_name,
+            "mrn": (pat_res.get("identifier") or [{}])[0].get("value")
+            if pat_res else None,
+            "dob": pat_res.get("birthDate") if pat_res else None,
+            "gender": (pat_res.get("gender") or "").title() or None
+            if pat_res else None,
+            "visit": a.get("description", "untitled visit"),
+            "date": str(a.get("start", ""))[:10],
+            "practitioner": practitioner,
+        })
+    return headers
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 PATIENT_ENCOUNTERS = {
@@ -220,7 +388,10 @@ def _summarize_encounter(encounter_id=None):
             "bp": f"{enc['vital_signs']['bp_systolic']}/{enc['vital_signs']['bp_diastolic']}",
             "bmi": enc["vital_signs"]["bmi"],
         })
-    return {"summaries": summaries}
+    # Prefer live tenant encounters when reachable; embedded demo stays too.
+    live = [] if encounter_id else _live_encounters()
+    fhir = [] if encounter_id else _live_fhir_encounter_headers()
+    return {"summaries": summaries, "live": live, "fhir": fhir}
 
 
 def _medication_review(patient_id=None):
@@ -365,6 +536,48 @@ class ClinicalNotesSummarizerAgent(BasicAgent):
                 for lab in s["abnormal_labs"]:
                     lines.append(f"| {lab['test']} | {lab['value']} | {lab['reference']} | {lab['flag'].upper()} |")
             lines.append("")
+        if data["live"]:
+            lines.append("---")
+            lines.append("# Live Tenant Encounters (Dynamics cases — Riverbend Medical Group)")
+            lines.append("")
+            for s in data["live"]:
+                age = "n/a — enrichment seam" if s["age"] is None else s["age"]
+                bp = s["bp"] or "n/a — enrichment seam"
+                bmi = "n/a — enrichment seam" if s["bmi"] is None else s["bmi"]
+                lines.append(f"## {s['patient']} ({s['encounter_id']}) - {s['date']}")
+                lines.append(f"**Type:** {s['type']} | **Provider:** {s['provider']}")
+                lines.append(f"**Chief Complaint:** {s['chief_complaint']}")
+                lines.append(f"**Age:** {age} | **BP:** {bp} | **BMI:** {bmi}")
+                lines.append("**Diagnoses:** n/a — enrichment seam (wire your EHR problem list)")
+                lines.append("")
+        else:
+            lines.append("_Live tenant unreachable — showing embedded demo encounters only._")
+        if data["fhir"]:
+            seam = "n/a — enrichment seam"
+            lines.append("---")
+            lines.append(
+                f"# Live FHIR Encounter Headers ({len(data['fhir'])} fulfilled "
+                "Appointment + Patient joins — Riverbend Medical Group)"
+            )
+            lines.append("")
+            lines.append(
+                "Each header joins a fulfilled FHIR Appointment to its Patient "
+                "resource — MRN, DOB, gender, visit, date, and practitioner are "
+                "live clinical data. The narrative bodies remain the embedded "
+                "demo layer above and stay declared simulated."
+            )
+            lines.append("")
+            for h in data["fhir"]:
+                lines.append(f"## {h['patient']} ({h['mrn'] or seam}) - {h['date']}")
+                lines.append(f"**Visit:** {h['visit']} | **Provider:** {h['practitioner']}")
+                lines.append(f"**DOB:** {h['dob'] or seam} | **Gender:** {h['gender'] or seam}")
+                lines.append(
+                    "**Narrative, diagnoses, vitals, labs:** n/a — enrichment seam "
+                    "(wire Encounter/Condition/Observation resources)"
+                )
+                lines.append("")
+        else:
+            lines.append("_Live FHIR server unreachable — encounter headers unavailable offline._")
         return "\n".join(lines)
 
     def _medication_review(self) -> str:
@@ -496,8 +709,15 @@ class ClinicalNotesSummarizerAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = ClinicalNotesSummarizerAgent()
+    print("=" * 60)
+    print("EMBEDDED DEMO + LIVE CRM ENCOUNTERS + LIVE FHIR HEADERS")
+    print("(sibling-live demo: fulfilled FHIR Appointments join their")
+    print("Patient resources as encounter headers; canned narratives")
+    print("stay simulated; both feeds fetched over HTTP, offline-safe)")
+    print("=" * 60)
+    print(agent.perform(operation="summarize_encounter"))
     for op in [
-        "summarize_encounter", "medication_review", "problem_list", "referral_summary",
+        "medication_review", "problem_list", "referral_summary",
         "preop_clearance", "cardiopulmonary_assessment",
         "surgical_medication_reconciliation", "anesthesia_risk_plan", "issue_clearance_note",
     ]:

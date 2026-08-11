@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__eu_greenwashing_analysis",
+  "name": "EU Greenwashing Analysis",
+  "rar_name": "@cat-agent-skills/eu_greenwashing_analysis",
+  "rappid": "rappid:@cat-agent-skills/eu_greenwashing_analysis:3dc1831141fbb48efed565255ae95a03bb1da4bad48ce4ceeebe551e5c317d65",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "compliance",
+    "sustainability",
+    "greenwashing",
+    "eu_regulation",
+    "marketing_review",
+    "esg"
+  ],
+  "description": "Detect greenwashing in product descriptions, marketing copy, and catalog entries against EU Directive 2024/825 and the Green Claims Directive. Returns a structured per-claim findings report with risk levels, regulation references, and recommended corrections.",
+  "author": "Remi Dyon",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.5,
+  "sha256": "60f5b0746b2395fef7e8225ba803aeb9de1264b58c9797df97fb0a80123d7a5e",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__eu_greenwashing_analysis.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__eu_greenwashing_analysis.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__eu_greenwashing_analysis.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py"
+}
