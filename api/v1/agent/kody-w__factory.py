@@ -21,7 +21,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/factory",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "RAPP to Copilot Studio Factory",
     "description": (
         "Turns any caller-selected group of local RAPP agent.py files into one "
@@ -182,6 +182,13 @@ class RappCopilotStudioFactoryAgent(BasicAgent):
                         "description": (
                             "For action=build, generate the complete manifest, "
                             "snapshots, and brief without initializing or pushing."
+                        ),
+                    },
+                    "reuse_parity": {
+                        "type": "boolean",
+                        "description": (
+                            "For action=finalize, reuse a live parity run from "
+                            "the last 24 hours after full hash revalidation."
                         ),
                     },
                 },
@@ -421,6 +428,7 @@ class RappCopilotStudioFactoryAgent(BasicAgent):
                 "parity_cases",
                 "client_id",
                 "dry_run",
+                "reuse_parity",
             )
             if kwargs.get(key) is not None
         }

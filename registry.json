@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-11T18:38:10.482053+00:00",
+  "generated_at": "2026-08-11T18:40:15.441348+00:00",
   "stats": {
     "total_agents": 294,
     "total_swarms": 82,
@@ -13599,7 +13599,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/factory",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "display_name": "RAPP to Copilot Studio Factory",
       "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
       "author": "kody-w",
@@ -13631,15 +13631,15 @@
       },
       "_file": "agents/@kody-w/factory_agent.py",
       "_install_filename": "rar_kody_w_factory_agent.py",
-      "_sha256": "c9ece96b9fe326166797c1437c3b72ae3654d6cef4f0e58c1006fa2ae1238801",
+      "_sha256": "e81878cc359660ac98047c607bea3245cda5967f4725091ded356597309c2b77",
       "_lifecycle": "notarized",
-      "_receipt": "rar_a8e502d113e6df5760972723a40f16b676bfb7313f9000f33f8ca6dd71e7dd37",
+      "_receipt": "rar_1ebbd588cb6ad4dbc3d589c3c33e59a63325fbc775851bd26b535a9858758bb5",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 554,
+        "issue": 557,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
@@ -13654,8 +13654,8 @@
         ]
       },
       "_seed": 6401207017692351703,
-      "_size_kb": 17.8,
-      "_lines": 487,
+      "_size_kb": 18.1,
+      "_lines": 495,
       "_has_card": true,
       "_added_at": "2026-08-11T17:32:02Z",
       "_first_commit_sha": "8cb7572e8ecec18c1d2f29e8a09263d49c056c84",

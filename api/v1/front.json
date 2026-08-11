@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-11T18:38:12Z",
+  "generated": "2026-08-11T18:39:51Z",
   "counts": {
     "native": 294,
     "aggregated": 0,
@@ -1279,6 +1279,69 @@
     },
     {
       "rank": 20,
+      "ref": "@kody-w/factory",
+      "title": "RAPP to Copilot Studio Factory",
+      "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
+      "origin": "native",
+      "category": "pipeline",
+      "tags": [
+        "copilot_studio",
+        "factory",
+        "pipeline",
+        "deployment",
+        "parity"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffactory",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/factory_agent.py",
+      "source": null,
+      "score": 61.6,
+      "origin_rank": 20,
+      "origin_size": 294,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 0.9935,
+        "freshness": 1.0,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community",
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 0,
+          "lines": 495,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "newest in the registry",
+        "495 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 21,
       "ref": "@kody-w/full_rapp_leviathan",
       "title": "FullRappLeviathan",
       "description": "Compiles and assesses public-safe Full RAPP Leviathan blueprints across identity, intelligence, production, truth, and commerce.",
@@ -1299,7 +1362,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/full_rapp_leviathan_agent.py",
       "source": null,
       "score": 61.6,
-      "origin_rank": 20,
+      "origin_rank": 21,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1344,7 +1407,7 @@
       ]
     },
     {
-      "rank": 21,
+      "rank": 22,
       "ref": "@rapp/exec_brief_agent",
       "title": "Executive Brief",
       "description": "Produces an executive brief on a topic by chaining four inlined LLM personas over Azure OpenAI, OpenAI, or a local Copilot session.",
@@ -1360,7 +1423,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/exec_brief_agent.py",
       "source": null,
       "score": 61.6,
-      "origin_rank": 21,
+      "origin_rank": 22,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1404,7 +1467,7 @@
       ]
     },
     {
-      "rank": 22,
+      "rank": 23,
       "ref": "@rapp/moment_factory_agent",
       "title": "MomentFactory",
       "description": "Converts a moment (commit, message, idea) into a publishable Drop — hook, body, channel, card, and seed — through seven inlined LLM personas.",
@@ -1422,7 +1485,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py",
       "source": null,
       "score": 61.6,
-      "origin_rank": 22,
+      "origin_rank": 23,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1466,7 +1529,7 @@
       ]
     },
     {
-      "rank": 23,
+      "rank": 24,
       "ref": "@rapp/pitch_deck_agent",
       "title": "PitchDeck",
       "description": "Generates a self-contained HTML executive pitch deck from a topic — one LLM call shapes the narrative, a fixed template assembles the slides.",
@@ -1485,7 +1548,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/pitch_deck_agent.py",
       "source": null,
       "score": 61.6,
-      "origin_rank": 23,
+      "origin_rank": 24,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1529,7 +1592,7 @@
       ]
     },
     {
-      "rank": 24,
+      "rank": 25,
       "ref": "@rapp/rapp_publish_agent",
       "title": "RappPublish",
       "description": "Classifies a RAPP artifact (agent, rapplication, or sense) and opens the matching submission issue in its store repo via the GitHub API.",
@@ -1548,7 +1611,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_publish_agent.py",
       "source": null,
       "score": 61.6,
-      "origin_rank": 24,
+      "origin_rank": 25,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1592,7 +1655,7 @@
       ]
     },
     {
-      "rank": 25,
+      "rank": 26,
       "ref": "@rapp/rapplication_agent",
       "title": "Rapplication",
       "description": "Bundles a single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry.",
@@ -1610,7 +1673,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapplication_agent.py",
       "source": null,
       "score": 61.6,
-      "origin_rank": 25,
+      "origin_rank": 26,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1654,7 +1717,7 @@
       ]
     },
     {
-      "rank": 26,
+      "rank": 27,
       "ref": "@rapp/vibe_builder_agent",
       "title": "VibeBuilder",
       "description": "Builds a complete rapplication (agent + service) from a natural language description.",
@@ -1670,7 +1733,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/vibe_builder_agent.py",
       "source": null,
       "score": 61.6,
-      "origin_rank": 26,
+      "origin_rank": 27,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1710,69 +1773,6 @@
         "official tier",
         "added 106 days ago",
         "532 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 27,
-      "ref": "@kody-w/factory",
-      "title": "RAPP to Copilot Studio Factory",
-      "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
-      "origin": "native",
-      "category": "pipeline",
-      "tags": [
-        "copilot_studio",
-        "factory",
-        "pipeline",
-        "deployment",
-        "parity"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffactory",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/factory_agent.py",
-      "source": null,
-      "score": 61.4,
-      "origin_rank": 27,
-      "origin_size": 294,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 0.983,
-        "freshness": 1.0,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community",
-        "curator"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 0,
-          "lines": 487,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "newest in the registry",
-        "487 lines",
         "has a rendered card"
       ]
     },
