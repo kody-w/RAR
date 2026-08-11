@@ -1,7 +1,7 @@
 {
   "schema": "rar-match/1.0",
   "description": "Precomputed use-case matching. A host application asks the user to describe a use case, tokenizes it, sums the term weights from `index`, and returns the top agents — entirely client-side, with no backend and no GitHub access.",
-  "generated": "2026-08-11T18:36:56Z",
+  "generated": "2026-08-11T18:38:12Z",
   "how_to_query": {
     "canonical": "Look up a use_cases[].id for a curated, ranked list.",
     "free_text": "Lowercase the query, split on non-alphanumerics, drop tokens of 2 characters or fewer, then for each token read index[token] (entries are 'agent_id:weight'). Sum weights per agent_id and sort descending."
