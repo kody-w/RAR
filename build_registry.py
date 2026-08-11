@@ -510,6 +510,28 @@ def compute_seed(name: str, category: str, tier: str, tags: list, deps: list) ->
     return _forge(name, category, tier, tags, deps)
 
 
+def preserved_seed_aliases(previous: dict, current_seed: int) -> list[int]:
+    aliases = []
+    previous_aliases = previous.get("_seed_aliases", [])
+    if not isinstance(previous_aliases, list):
+        previous_aliases = []
+    for value in previous_aliases:
+        if (
+            isinstance(value, int)
+            and value != current_seed
+            and value not in aliases
+        ):
+            aliases.append(value)
+    previous_seed = previous.get("_seed")
+    if (
+        isinstance(previous_seed, int)
+        and previous_seed != current_seed
+        and previous_seed not in aliases
+    ):
+        aliases.append(previous_seed)
+    return aliases
+
+
 def scan_security(py_path: Path) -> list:
     """Static security scan — returns list of warnings."""
     warnings = []
@@ -749,6 +771,19 @@ def build_registry():
     categories = set()
     errors = []
     seen_names = set()
+    previous_agents = {}
+    if REGISTRY_FILE.exists():
+        try:
+            previous_registry = json.loads(
+                REGISTRY_FILE.read_text(encoding="utf-8")
+            )
+            previous_agents = {
+                agent.get("name"): agent
+                for agent in previous_registry.get("agents", [])
+                if isinstance(agent, dict) and agent.get("name")
+            }
+        except (json.JSONDecodeError, OSError):
+            previous_agents = {}
     lifecycle_agents = {}
     if LIFECYCLE_FILE.exists():
         try:
@@ -1067,19 +1102,28 @@ def build_registry():
 
         agents.append(manifest)
 
+    for agent in agents:
+        agent.pop("_seed_aliases", None)
+        aliases = preserved_seed_aliases(
+            previous_agents.get(agent["name"], {}),
+            agent["_seed"],
+        )
+        if aliases:
+            agent["_seed_aliases"] = aliases
+
     # ─── Seed collision check (agents + converged swarms) ─────────────
     seen_seeds = {}
     for a in agents:
-        seed = a.get("_seed")
-        if seed is None:
-            continue
-        if seed in seen_seeds:
-            errors.append(
-                f"Seed collision: {a['name']} and {seen_seeds[seed]} "
-                f"both resolve to seed {seed}"
-            )
-        else:
-            seen_seeds[seed] = a["name"]
+        for seed in [a.get("_seed"), *a.get("_seed_aliases", [])]:
+            if seed is None:
+                continue
+            if seed in seen_seeds:
+                errors.append(
+                    f"Seed collision: {a['name']} and {seen_seeds[seed]} "
+                    f"both resolve to seed {seed}"
+                )
+            else:
+                seen_seeds[seed] = a["name"]
 
     for s in converged_swarms:
         seed = s.get("_seed")

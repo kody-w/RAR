@@ -13,6 +13,21 @@ import build_registry
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
+def test_seed_aliases_preserve_previous_identity():
+    assert build_registry.preserved_seed_aliases(
+        {"_seed": 10, "_seed_aliases": [8, 9, 10]},
+        11,
+    ) == [8, 9, 10]
+    assert build_registry.preserved_seed_aliases(
+        {"_seed": 11, "_seed_aliases": [8, 11]},
+        11,
+    ) == [8]
+    assert build_registry.preserved_seed_aliases(
+        {"_seed": 10, "_seed_aliases": 123},
+        11,
+    ) == [10]
+
+
 def test_registry_build_exits_zero():
     result = subprocess.run(
         [sys.executable, str(REPO_ROOT / "build_registry.py")],
