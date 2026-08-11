@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__copilot_studio_parity_deploy",
+  "name": "Copilot Studio Parity Deploy",
+  "rar_name": "@kody-w/copilot_studio_parity_deploy",
+  "rappid": "rappid:@kody-w/copilot_studio_parity_deploy:c4155e20efbeff5d52ae64f33a9a81bf372ead6c26b28064635efb62a6a53a2a",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "pipeline",
+  "tags": [
+    "copilot_studio",
+    "deployment",
+    "parity",
+    "pipeline",
+    "factory"
+  ],
+  "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 6904,
+  "size_kb": 241.1,
+  "sha256": "92d79b2f534027720ebb110c8f988e86b1d1df401fb590a43ef4945c02d9d6f7",
+  "has_card": true,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__copilot_studio_parity_deploy.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_parity_deploy_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_parity_deploy.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_parity_deploy.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/copilot_studio_parity_deploy_agent.py"
+}

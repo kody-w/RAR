@@ -3442,8 +3442,19 @@
       "sha256": "2240c6e471f6c3c54e35e62553e9cd9af314cd520790120d23e88045120ee87a",
       "latest_receipt": "rar_50df9a9403e143fc7ea935afe4369dc523ed6d527fbd5f17373a52851217dfbe",
       "updated_at": "2026-08-11T09:49:09.688445+00:00"
+    },
+    "@kody-w/copilot_studio_parity_deploy": {
+      "status": "active",
+      "version": "1.0.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
+      "sha256": "92d79b2f534027720ebb110c8f988e86b1d1df401fb590a43ef4945c02d9d6f7",
+      "latest_receipt": "rar_35b5f2233453e812872f375a8fee5df02813abd789fdceea188efcc51db7eaec",
+      "updated_at": "2026-08-11T17:26:39.020310+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-11T13:33:22.490817+00:00"
+  "updated_at": "2026-08-11T17:26:39.020310+00:00"
 }

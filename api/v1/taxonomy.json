@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-11T13:34:56Z",
+  "generated": "2026-08-11T17:27:03Z",
   "categories": [
     {
       "name": "general",
@@ -28,7 +28,7 @@
     },
     {
       "name": "pipeline",
-      "count": 15
+      "count": 16
     },
     {
       "name": "financial_services",
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 54
+      "count": 55
     },
     {
       "name": "@rapp",
@@ -144,7 +144,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 160
+      "count": 161
     },
     {
       "name": "frontier",
@@ -177,12 +177,12 @@
       "count": 24
     },
     {
-      "name": "content",
+      "name": "pipeline",
       "count": 18
     },
     {
-      "name": "pipeline",
-      "count": 17
+      "name": "content",
+      "count": 18
     },
     {
       "name": "automation",
@@ -265,6 +265,10 @@
       "count": 7
     },
     {
+      "name": "copilot_studio",
+      "count": 7
+    },
+    {
       "name": "governance",
       "count": 7
     },
@@ -298,10 +302,6 @@
     },
     {
       "name": "design",
-      "count": 6
-    },
-    {
-      "name": "copilot_studio",
       "count": 6
     },
     {
@@ -398,6 +398,10 @@
     },
     {
       "name": "commons",
+      "count": 5
+    },
+    {
+      "name": "factory",
       "count": 5
     },
     {
@@ -498,10 +502,6 @@
     },
     {
       "name": "integrations",
-      "count": 4
-    },
-    {
-      "name": "factory",
       "count": 4
     },
     {
@@ -866,6 +866,10 @@
     },
     {
       "name": "ai",
+      "count": 2
+    },
+    {
+      "name": "deployment",
       "count": 2
     },
     {
@@ -1358,10 +1362,6 @@
     },
     {
       "name": "building",
-      "count": 1
-    },
-    {
-      "name": "zoning",
       "count": 1
     }
   ]

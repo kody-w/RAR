@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "31517552331"
+  },
+  "action": "agent.create",
+  "agent": "@kody-w/copilot_studio_parity_deploy",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "92d79b2f534027720ebb110c8f988e86b1d1df401fb590a43ef4945c02d9d6f7"
+  },
+  "canonical_path": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-08-11T17:26:39.020310+00:00",
+  "id": "rar_35b5f2233453e812872f375a8fee5df02813abd789fdceea188efcc51db7eaec",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "",
+    "receipt": "",
+    "version": ""
+  },
+  "quality_tier": "community",
+  "request_id": "req_a5019b105e69212dd875f89a",
+  "revision_id": "35b5f2233453e812872f375a8fee5df02813abd789fdceea188efcc51db7eaec",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABMVgiVw",
+    "issue_number": 553,
+    "source_body_sha256": "792c4f1a9df69c728c93055e64615ca5eff940fb0f572e3096f49c311ad5fcf8"
+  },
+  "version": "1.0.0"
+}
