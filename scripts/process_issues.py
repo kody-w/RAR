@@ -47,8 +47,16 @@ REQUIRED_MANIFEST_FIELDS = [
     "description", "author", "tags", "category",
 ]
 
-VALID_TIERS = {"official", "verified", "community", "experimental", "unverified"}
+VALID_TIERS = {
+    "official",
+    "verified",
+    "community",
+    "experimental",
+    "unverified",
+    "frontier",
+}
 SUBMITTABLE_TIERS = {"unverified", "community", "experimental"}
+FRONTIER_PUBLISHERS = {"@cat-agent-skills"}
 REMOTE_SOURCE_LIMIT = 2 * 1024 * 1024
 REMOTE_SOURCE_HOSTS = {
     "github.com",
@@ -67,6 +75,7 @@ BRAND_ALLOWLIST: dict[str, set[str]] = {
     "@kody": {"kody-w"},
     "@kody-w": {"kody-w"},
     "@borg": {"howardh", "kody-w"},
+    "@cat-agent-skills": {"kody-w"},
 }
 
 
@@ -520,7 +529,11 @@ def _normalize_agent_identity(
     expected_publisher = f"@{user}"
     pub_lc = publisher.lower()
     user_lc = user.lower()
-    is_self = pub_lc == expected_publisher.lower()
+    is_reserved_brand = pub_lc in BRAND_ALLOWLIST
+    is_self = (
+        pub_lc == expected_publisher.lower()
+        and not is_reserved_brand
+    )
     is_allowlisted_brand = (
         pub_lc in BRAND_ALLOWLIST
         and user_lc in {allowed.lower() for allowed in BRAND_ALLOWLIST[pub_lc]}
@@ -1151,6 +1164,10 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
 
     tier = manifest.get("quality_tier", "unverified")
     if tier not in SUBMITTABLE_TIERS:
+        trusted_frontier = (
+            tier == "frontier"
+            and publisher.casefold() in FRONTIER_PUBLISHERS
+        )
         preserves_existing_tier = (
             preserves_existing_identity
             and existing_candidate_manifest.get("quality_tier", "community") == tier
@@ -1158,7 +1175,7 @@ def handle_submit_agent(payload: dict, user: str) -> dict:
             preserves_tombstone_identity
             and existing_tombstone.get("quality_tier") == tier
         )
-        if preserves_existing_tier:
+        if preserves_existing_tier or trusted_frontier:
             pass
         elif versioned:
             return {

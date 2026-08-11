@@ -59,6 +59,16 @@ def test_tier_rarity_mapping_complete():
     for tier in rapp_sdk.VALID_TIERS:
         assert tier in rapp_sdk.TIER_TO_RARITY, f"Tier '{tier}' missing from TIER_TO_RARITY"
 
+
+def test_sdk_categories_cover_registry_taxonomy():
+    registry = json.loads(REGISTRY_JSON.read_text(encoding="utf-8"))
+    categories = {
+        agent.get("category")
+        for agent in registry.get("agents", [])
+        if agent.get("category")
+    }
+    assert categories <= set(rapp_sdk.VALID_CATEGORIES)
+
 def test_rarity_labels_complete():
     for rarity in rapp_sdk.TIER_TO_RARITY.values():
         assert rarity in rapp_sdk.RARITY_LABELS, f"Rarity '{rarity}' missing from RARITY_LABELS"
@@ -152,6 +162,48 @@ def test_submit_preserves_identity_without_agent_suffix(tmp_path, monkeypatch):
     )[1].rsplit("\n```", 1)[0]
     command = json.loads(command_text)
     assert command["resource"]["id"] == "@testuser/full_rapp_leviathan"
+
+
+def test_submit_allows_approved_frontier_mirror(tmp_path, monkeypatch):
+    path = _write_submission_agent(
+        tmp_path,
+        name="@cat-agent-skills/new_skill",
+    )
+    path.write_text(
+        path.read_text()
+        .replace(
+            '"quality_tier": "community"',
+            '"quality_tier": "frontier"',
+        )
+        .replace('"category": "general"', '"category": "analysis"')
+    )
+    captured = {}
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_fetch_target_registry",
+        lambda _upstream, _token: {
+            "agents": [],
+            "lifecycle": {"tombstones": []},
+        },
+    )
+
+    def fake_urlopen(request, timeout):
+        captured["payload"] = json.loads(request.data)
+        return FakeResponse({
+            "number": 126,
+            "html_url": "https://example.test/126",
+        })
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", fake_urlopen)
+    rapp_sdk.submit_agent(str(path), upstream="owner/rar")
+    command_text = captured["payload"]["body"].split(
+        "```json\n",
+        1,
+    )[1].rsplit("\n```", 1)[0]
+    command = json.loads(command_text)
+    assert command["resource"]["id"] == "@cat-agent-skills/new_skill"
+    assert command["payload"]["source"]["content"].count("frontier") == 1
 
 
 def test_mutation_registry_uses_fresh_contents_api(monkeypatch):
@@ -437,6 +489,137 @@ def test_mint_card_basic_agent():
     assert isinstance(card["flavor"], str)
     assert len(card["flavor"]) > 0
 
+
+def test_frontier_seed_round_trip_is_lossless(tmp_path):
+    path = _write_submission_agent(
+        tmp_path,
+        name="@cat-agent-skills/frontier_skill",
+    )
+    path.write_text(
+        path.read_text().replace(
+            '"quality_tier": "community"',
+            '"quality_tier": "frontier"',
+        )
+    )
+
+    minted = rapp_sdk.mint_card(str(path))
+    resolved = rapp_sdk.resolve_card_from_seed(minted["seed"])
+
+    assert minted["seed"] >= 1 << 64
+    assert minted["tier"] == resolved["tier"] == "frontier"
+    assert minted["rarity"] == resolved["rarity"] == "starter"
+    assert minted["floor_pts"] == resolved["floor_pts"] == 10
+    assert minted["stats"] == resolved["stats"]
+    assert minted["abilities"] == resolved["abilities"]
+    compact = rapp_sdk.egg_to_compact({
+        "schema": "rapp-egg/1.0",
+        "seeds": [minted["seed"]],
+        "count": 1,
+    })
+    assert compact.startswith("v2.")
+    assert rapp_sdk.compact_to_egg(compact)["seeds"] == [minted["seed"]]
+
+    path.write_text(
+        path.read_text().replace(
+            '"category": "general"',
+            '"category": "future_category"',
+        )
+    )
+    unknown_category = rapp_sdk.mint_card(str(path))
+    assert unknown_category["tier"] == "frontier"
+    assert unknown_category["types"] == ["SOCIAL"]
+
+
+def test_full_seed_resolution_does_not_depend_on_numeric_size():
+    seed = rapp_sdk.forge_seed(
+        "@cat-agent-skills/5aifkye",
+        "core",
+        "community",
+        ["one"],
+        [],
+    )
+    assert seed < 1 << 32
+
+    resolved = rapp_sdk.resolve_card_from_seed(seed, full_seed=True)
+
+    assert resolved["seed"] == seed
+    assert resolved["tier"] == "community"
+
+
+def test_frontier_seed_preserves_secondary_type():
+    seed = rapp_sdk.forge_seed(
+        "@cat-agent-skills/dual_type",
+        "general",
+        "frontier",
+        ["analysis"],
+        [],
+    )
+    resolved = rapp_sdk.resolve_card_from_seed(seed, full_seed=True)
+    assert resolved["types"] == ["SOCIAL", "LOGIC"]
+
+
+def test_extended_category_seed_is_versioned():
+    seed = rapp_sdk.forge_seed(
+        "@cat-agent-skills/analysis_skill",
+        "analysis",
+        "community",
+        [],
+        [],
+    )
+    resolved = rapp_sdk.resolve_card_from_seed(seed, full_seed=True)
+    assert seed & (1 << 65)
+    assert resolved["category"] == "analysis"
+    assert resolved["types"] == ["LOGIC"]
+
+
+def test_legacy_unused_category_index_keeps_general_fallback():
+    legacy_seed = (19 << 27) | (7 << 24)
+    resolved = rapp_sdk.resolve_card_from_seed(
+        legacy_seed,
+        full_seed=True,
+    )
+    assert resolved["category"] == "general"
+    assert resolved["types"] == ["SOCIAL"]
+
+
+def test_legacy_compact_egg_format_still_decodes():
+    compact = rapp_sdk.egg_to_compact({
+        "schema": "rapp-egg/1.0",
+        "seeds": [1, (1 << 63) + 7],
+        "count": 2,
+    })
+    assert not compact.startswith("v2.")
+    assert rapp_sdk.compact_to_egg(compact)["seeds"] == [
+        1,
+        (1 << 63) + 7,
+    ]
+
+
+def test_cli_can_force_low_numeric_full_seed():
+    seed = rapp_sdk.forge_seed(
+        "@cat-agent-skills/5aifkye",
+        "core",
+        "community",
+        ["one"],
+        [],
+    )
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(SDK_PATH),
+            "card",
+            "resolve",
+            str(seed),
+            "--full-seed",
+            "--json",
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert json.loads(result.stdout)["seed"] == seed
+
+
 def test_mint_card_deterministic():
     card1 = rapp_sdk.mint_card(str(BASIC_AGENT))
     card2 = rapp_sdk.mint_card(str(BASIC_AGENT))
@@ -491,6 +674,34 @@ def test_agents_status():
     assert status["total_agents"] >= 131  # 131 founding + new agents
     assert "by_tier" in status
     assert status["total_pts"] > 0
+
+
+def test_hatch_egg_accepts_legacy_seed_alias(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        rapp_sdk,
+        "fetch_registry",
+        lambda: {
+            "agents": [{
+                "name": "@cat-agent-skills/frontier_skill",
+                "_seed": 200,
+                "_seed_aliases": [100],
+            }]
+        },
+    )
+    monkeypatch.setattr(
+        rapp_sdk,
+        "install_agent",
+        lambda _name, output_dir: str(Path(output_dir) / "installed.py"),
+    )
+
+    result = rapp_sdk.hatch_egg(
+        {"schema": "rapp-egg/1.0", "seeds": [100], "count": 1},
+        str(tmp_path),
+    )
+
+    assert result[0]["name"] == "@cat-agent-skills/frontier_skill"
+    assert result[0]["installed"].endswith("installed.py")
+
 
 def test_transfer_card():
     result = rapp_sdk.transfer_card("TEST-MINT-001", "0xdeadbeef1234567890")

@@ -32,10 +32,18 @@ VALID_CATEGORIES = [
     "b2b_sales", "b2c_sales", "healthcare", "financial_services", "manufacturing",
     "energy", "federal_government", "slg_government", "human_resources",
     "it_management", "professional_services", "retail_cpg", "software_digital_products",
+    "analysis", "creative", "meta", "platform", "workflow",
 ]
 
-VALID_TIERS = ["experimental", "community", "verified", "official"]
+VALID_TIERS = [
+    "experimental",
+    "community",
+    "verified",
+    "official",
+    "frontier",
+]
 SUBMITTABLE_TIERS = ["experimental", "community"]
+FRONTIER_PUBLISHERS = {"@cat-agent-skills"}
 
 REPO = "kody-w/RAR"
 RAW_BASE = f"https://raw.githubusercontent.com/{REPO}/main"
@@ -50,6 +58,7 @@ TIER_TO_RARITY = {
     "verified": "rare",
     "community": "core",
     "experimental": "starter",
+    "frontier": "starter",
 }
 
 RARITY_LABELS = {
@@ -634,7 +643,7 @@ def mulberry32(seed: int):
 
 MNEMONIC_WORDS = """FORGE ANVIL BLADE RUNE SHARD SMELT TEMPER WELD CHISEL BRAND MOLD CAST STAMP ETCH CARVE BIND FUSE ALLOY INGOT RIVET CLASP THORN BARB SPIKE PRONG EDGE HONE GRIND QUENCH SEAR HAMMER STOKE FIRE FROST STORM TIDE QUAKE GUST BOLT SURGE BLAZE EMBER PYRE ASH SMOKE SPARK FLARE FLASH FLOOD GALE DRIFT MIST HAZE VOID FLUX PULSE WAVE SHOCK BURST CRACK ROAR HOWL ECHO BOOM THUNDER VENOM BLIGHT SCORCH SINGE CHAR WITHER ERODE CORRODE DISSOLVE OAK PINE MOSS FERN ROOT VINE BLOOM SEED GROVE GLEN VALE CRAG PEAK RIDGE GORGE CLIFF SHORE REEF DUNE MARSH CAVE LAIR DEN NEST HIVE BURROW STONE IRON STEEL GOLD JADE ONYX RUBY OPAL AMBER PEARL CORAL QUARTZ OBSIDIAN FLINT GRANITE BASALT COBALT CHROME BRONZE COPPER NICKEL RELIC TOTEM SIGIL GLYPH WARD CHARM BANE DOOM FATE OMEN ORACLE SAGE SEER MAGE DRUID SHAMAN WRAITH SHADE PHANTOM SPECTER GOLEM TITAN DRAKE WYRM GRYPHON SPHINX HYDRA CHIMERA SCROLL TOME CODEX LORE MYTH FABLE SAGA EPIC VERSE CHANT HYMN DIRGE OATH CREED VOW AURA MANA ETHER PRISM NEXUS VORTEX RIFT WARP BREACH PORTAL GATE VAULT SHRINE ALTAR CRYPT SPIRE STRIKE SLASH THRUST PARRY GUARD SHIELD HELM LANCE MACE PIKE STAFF WAND DAGGER BOW ARROW QUIVER ARMOR PLATE GAUNTLET VISOR CLOAK CAPE MANTLE AEGIS BULWARK RAMPART BASTION CITADEL KEEP TOWER FORT RALLY CHARGE SIEGE FLANK AMBUSH ROUT VALOR MIGHT FURY WRATH RAGE SPITE MALICE GRUDGE HAVOC CHAOS DASH LEAP SPRINT LUNGE DIVE SOAR GLIDE PROWL STALK CREEP SWIFT FLEET BRISK RAPID SPIN WHIRL TWIST COIL SPIRAL ORBIT ARC CURVE BEND LOOP DAWN DUSK NOON NIGHT SHADOW GLEAM GLOW SHINE BEAM RAY HALO LUSTER MURK GLOOM DREAD FELL GRIM STARK BLEAK PALE ASHEN DIRE GRAVE SOMBER EBON ABYSS SHRIEK WAIL RUMBLE HISS GROWL SNARL BARK BELLOW DRONE CHIME TOLL KNELL CLANG CLASH SNAP THUD RING PEAL GONG HORN DRUM FLUTE LYRE PIPE BOLD KEEN FIERCE STERN VAST DEEP GRAND PRIME NOBLE ROYAL SACRED ANCIENT PRIMAL ELDER PURE VIVID SHARP BRIGHT DARK WILD CALM STILL SILENT STRONG PROUD BRAVE WISE JUST RAW DENSE SOLID WHOLE CORE APEX ZENITH NADIR CUSP BRINK VERGE CREST STAR MOON SUN COMET NOVA SOLAR LUNAR ASTRAL COSMIC NEBULA QUASAR PULSAR ECLIPSE AURORA CORONA PHASE WANE WAX WOLF HAWK EAGLE RAVEN SERPENT VIPER COBRA FALCON STAG BEAR LION TIGER LYNX PANTHER CONDOR OSPREY CRANE HERON OWL CROW BULL BOAR RAM HORSE MARE STALLION AX ORB AWE OAT EEL URN ELK ELM ION IRE ORE AIM ZAP JAB JAW JET JOT JAG HEX HEW HUE HUM DIN DUB DYE FIN FIG FOG FUR GAP GEM GNU SOUL MIND WILL FORCE POWER CRAFT SKILL GRACE POISE NERVE GRIT METTLE VIGOR ZEAL VERVE PLUCK GUILE CUNNING WILE LURE TRAP SNARE BAIT DECOY RUSE FEINT GAMBIT PLOY MESA TARN FORD PASS BLUFF KNOLL MOOR HEATH STEPPE TUNDRA DELTA BASIN PLATEAU FJORD ISLE ATOLL STRAIT CHANNEL HARBOR COVE BAY GULF SOUND CREEK BROOK RAPIDS FALLS CASCADE ARCH DOME PILLAR COLUMN BRIDGE WALL MOAT RAMP LEDGE STEP STAIR HALL NAVE ALCOVE NICHE SILL TRUSS BRACE STRUT JOIST FRAME PLINTH DAIS THRONE QUEST HUNT TRIAL ORDEAL RITE RITUAL PACT BOND PLEDGE DECREE EDICT MANDATE LAW RULE REIGN CROWN SCEPTER BANNER EMBLEM BADGE MARK SEAL TOKEN GUILD CLAN TRIBE ORDER SECT COVEN LEGION HORDE SWARM PACK FLOCK BROOD CLUTCH CRUX JINX GLINT DINT STINT KNIT SLIT SPLIT WHIT CLEFT DEFT HEFT LEFT THEFT WEFT BEREFT SHAFT GRAFT RAFT DRAFT TUFT LOFT CROFT DROIT BRUNT BLUNT STUNT RUNT GRUNT FRONT FONT HAUNT GAUNT FLAUNT JAUNT TAUNT SALT MALT HALT JOLT COLT MOLT SMOLT QUALM BALM PSALM FARM HARM ALARM DISARM FOREARM PLUME FUME LOOM ZOOM GROOM BROOM VROOM SCARCE TERSE MORSE COURSE SOURCE NORSE REMORSE WRENCH CLENCH STENCH TRENCH DRENCH FRENCH BENCH TORCH PORCH MARCH LARCH STARCH SEARCH PERCH BIRCH CHURCH THATCH CATCH MATCH BATCH HATCH LATCH PATCH WATCH SCRATCH SNATCH HEDGE WEDGE DREDGE SLEDGE FRIDGE DANCE TRANCE GLANCE STANCE PRANCE CHANCE ADVANCE ENHANCE BLISS MISS KISS DISMISS AMISS REMISS WHISK DISK RISK FRISK TUSK MUSK RUSK HUSK CROAK SOAK STROKE SPOKE BROKE WOKE INVOKE EVOKE PROVOKE VEIN CHAIN PLAIN STRAIN GRAIN TRAIN BRAIN DOMAIN TERRAIN REMAIN TREAD SPREAD THREAD SHRED BRED SLED STEAD INSTEAD COST LOST HOST GHOST MOST POST ROAST TOAST COAST BOAST STREAM DREAM TEAM CREAM SCHEME THEME SUPREME EXTREME SWAY FRAY PRAY STRAY ARRAY DECAY RELAY CONVEY OBEY SURVEY BETRAY THROW FLOW SNOW GROW KNOW BELOW HOLLOW CLIMB RHYME SLIME THYME SUBLIME PARADIGM PROWESS DURESS FORTRESS MISTRESS COMPASS BYPASS SURPASS AMASS CRIMSON LINDEN MAIDEN WARDEN GOLDEN MOLTEN FROZEN CHOSEN WOVEN SCYTHE CRUCIBLE TORRENT TEMPEST MAELSTROM CINDER INFERNO TYPHOON CYCLONE GLACIER ICECAP PERMAFROST MONSOON SOLSTICE EQUINOX MERIDIAN TWILIGHT MIDNIGHT DAYBREAK SENTINEL WATCHER HUNTER RANGER SCOUT TRACKER SEEKER FINDER KEEPER BINDER ARBITER HERALD ENVOY REGENT PREFECT CONSUL MARSHAL VASSAL SQUIRE KNIGHT PALADIN CHAMPION PARAGON MONARCH SOVEREIGN OVERLORD WARLORD CHIEFTAIN PATRIARCH MATRIARCH PROPHET MYSTIC HERMIT ASCETIC NOMAD PILGRIM WANDERER EXILE OUTCAST ROGUE REBEL VAGRANT DRIFTER MARAUDER BRIGAND CORSAIR BUCCANEER RAIDER REAVER SLAYER BERSERKER GLADIATOR CENTURION LEGIONNAIRE TEMPLAR CRUSADER INQUISITOR ZEALOT HARBINGER AUGUR PORTENT PRESAGE AUGURY PROPHECY DIVINATION REVELATION EPIPHANY REMNANT VESTIGE ARTIFACT FRAGMENT SPLINTER SLIVER MORSEL CRUMB PARTICLE MOTE FILAMENT STRAND FIBER SINEW TENDON LIGAMENT MARROW ICHOR ELIXIR POTION TONIC SALVE REMEDY ANTIDOTE CURE PANACEA CATALYST REAGENT COMPOUND TINCTURE DISTILL INFUSE IMBUE ENCHANT CONJURE SUMMON BANISH DISPEL REVOKE ANNUL NEGATE NULLIFY SUNDER CLEAVE REND SHATTER FRACTURE RUPTURE PIERCE IMPALE SKEWER GORE MAIM RAVAGE DEVASTATE OBLITERATE ANNIHILATE ERADICATE PURGE EXPUNGE EFFACE EXTINGUISH QUELL SUBDUE VANQUISH CONQUER PREVAIL TRIUMPH ASCEND TRANSCEND EVOLVE AWAKEN ARISE EMERGE MANIFEST EMBODY HARNESS WIELD MASTER COMMAND PROCLAIM SANCTIFY CONSECRATE ANOINT BESTOW ENDOW BEQUEST LEGACY HEIRLOOM COVENANT COMPACT TREATY ACCORD ALLIANCE FEDERATION DOMINION REALM KINGDOM EMPIRE DYNASTY EPOCH AEON CYCLE HELIX MATRIX LATTICE TAPESTRY MOSAIC CIPHER ENIGMA RIDDLE PUZZLE LABYRINTH MAZE CAULDRON CHALICE GOBLET GRAIL TRIDENT MAUL FLAIL HALBERD GLAIVE RAPIER SABRE KATANA MACHETE SCIMITAR CUTLASS BROADSWORD GREATSWORD LONGBOW CROSSBOW BALLISTA CATAPULT TREBUCHET MIRAGE ILLUSION REVENANT LICH BANSHEE GHOUL VAMPIRE WEREWOLF GARGOYLE BASILISK KRAKEN LEVIATHAN BEHEMOTH COLOSSUS JUGGERNAUT MONOLITH OBELISK ZIGGURAT MINARET PAGODA DOLMEN BARROW CATACOMB DUNGEON PARAPET TURRET BATTLEMENT DRAWBRIDGE PORTCULLIS BARBICAN PALISADE CONDUIT PYLON TORQUE RATCHET LODESTONE KEYSTONE CAPSTONE BEDROCK SEQUOIA REDWOOD CYPRESS HEMLOCK WILLOW ASPEN HICKORY JUNIPER MAGNOLIA HAWTHORN SAFFRON MYRRH MANGROVE ORCHID THISTLE POPPY HEATHER JASMINE VECTOR SCALAR TENSOR FULCRUM PIVOT CRESCENT PINNACLE VERTEX""".split()
 
-# 10 bits per word, 7 words = 70 bits (covers 64-bit seed)
+# 10 bits per word, 7 words = 70 bits (covers legacy and frontier seeds)
 # The word list is the protocol. Once locked, it's PERMANENT.
 # Future: locale-specific word lists map same indices to different languages.
 _MNEM_BITS = 10
@@ -644,7 +653,7 @@ _WORD_TO_IDX = {w: i for i, w in enumerate(MNEMONIC_WORDS)}
 
 
 def seed_to_words(seed: int) -> str:
-    """Encode a 64-bit seed as 7 memorable words. Full fidelity. Offline forever.
+    """Encode a seed as 7 memorable words. Full fidelity. Offline forever.
     This is the hero use case: memorize 7 words, reconstruct the exact card anywhere."""
     words = []
     remaining = seed
@@ -656,7 +665,7 @@ def seed_to_words(seed: int) -> str:
 
 
 def words_to_seed(mnemonic: str) -> int:
-    """Decode 7 words back to a 64-bit seed. Lossless round-trip."""
+    """Decode 7 words back to a seed. Lossless round-trip."""
     words = [w.strip().upper() for w in mnemonic.replace("-", " ").split()]
     if len(words) != 7:
         raise ValueError(f"Mnemonic must be 7 words, got {len(words)}")
@@ -705,6 +714,21 @@ CATEGORY_TYPE = {
     "software_digital_products": "DATA",
 }
 
+EXTENDED_CATEGORY_TYPE = {
+    "analysis":                 "LOGIC",
+    "creative":                 "SOCIAL",
+    "meta":                     "LOGIC",
+    "platform":                 "DATA",
+    "workflow":                 "DATA",
+}
+
+
+def _primary_type(category: str) -> str:
+    return CATEGORY_TYPE.get(
+        category,
+        EXTENDED_CATEGORY_TYPE.get(category, "SOCIAL"),
+    )
+
 # Tag keywords → secondary type (first match wins)
 TAG_TYPE_HINTS = {
     "LOGIC":  ["ai", "ml", "algorithm", "compute", "analysis", "ast", "parse", "model", "intelligence"],
@@ -740,6 +764,7 @@ TYPE_RESISTANCE = {
 
 # Evolution stages — tied to quality tier
 EVOLUTION_STAGES = {
+    "frontier":     {"stage": 0, "label": "Frontier",   "icon": "compass"},
     "experimental": {"stage": 0, "label": "Seed",       "icon": "seed"},
     "community":    {"stage": 1, "label": "Base",       "icon": "sprout"},
     "verified":     {"stage": 2, "label": "Evolved",    "icon": "flame"},
@@ -750,7 +775,7 @@ EVOLUTION_STAGES = {
 
 def _derive_types(category: str, tags: list) -> list:
     """Derive primary + optional secondary type from category and tags."""
-    primary = CATEGORY_TYPE.get(category, "SOCIAL")
+    primary = _primary_type(category)
     types = [primary]
 
     # Check tags for secondary type
@@ -772,7 +797,13 @@ def _derive_stats(name: str, tier: str, tags: list, deps: list,
     rng = mulberry32(seed_hash(name + ":stats"))
 
     # Base stats from tier
-    tier_base = {"experimental": 15, "community": 30, "verified": 50, "official": 70}
+    tier_base = {
+        "frontier": 10,
+        "experimental": 15,
+        "community": 30,
+        "verified": 50,
+        "official": 70,
+    }
     base = tier_base.get(tier, 30)
 
     # Version multiplier (higher version = more refined)
@@ -851,11 +882,17 @@ def _derive_abilities(name: str, tags: list, category: str, tier: str) -> list:
         ],
     }
 
-    primary_type = CATEGORY_TYPE.get(category, "SOCIAL")
+    primary_type = _primary_type(category)
     pool = ABILITY_POOL.get(primary_type, ABILITY_POOL["SOCIAL"])
 
     # Number of abilities: 1 for experimental, 2 for community, 3 for verified/official
-    tier_count = {"experimental": 1, "community": 2, "verified": 3, "official": 3}
+    tier_count = {
+        "frontier": 1,
+        "experimental": 1,
+        "community": 2,
+        "verified": 3,
+        "official": 3,
+    }
     count = tier_count.get(tier, 2)
 
     abilities = []
@@ -921,6 +958,11 @@ _TYPE_PREFIXES = {
     "professional_services": "Professional",
     "retail_cpg": "Retail",
     "software_digital_products": "Software",
+    "analysis": "Analysis",
+    "creative": "Creative",
+    "meta": "Meta",
+    "platform": "Platform",
+    "workflow": "Workflow",
 }
 
 
@@ -948,7 +990,7 @@ def mint_card(path: str) -> dict:
     seed = forge_seed(name, category, tier, tags, deps)
 
     # Resolve the card FROM the seed — one canonical path
-    card = resolve_card_from_seed(seed)
+    card = resolve_card_from_seed(seed, full_seed=True)
 
     # Enrich with manifest metadata that doesn't affect the card identity
     card["name"] = name
@@ -999,11 +1041,11 @@ def forge_seed(name: str, category: str, tier: str, tags: list, deps: list) -> i
     """
     Forge a seed FROM agent data. The seed IS the card's DNA.
 
-    Packs the agent's identity, types, tier, and hints into a 64-bit
+    Packs the agent's identity, types, tier, and hints into a versioned
     integer. Anyone with this number reconstructs the exact card —
     no registry, no network, no lookup. The protocol is permanent.
 
-    Bit layout (64 bits):
+    Legacy bit layout (64 bits):
       [63-32] name_hash      (32 bits — identity, drives stat variation)
       [31-27] category_idx   (5 bits — 0-18, maps to primary type)
       [26-24] secondary_type (3 bits — 0-7, 7=none)
@@ -1011,11 +1053,23 @@ def forge_seed(name: str, category: str, tier: str, tags: list, deps: list) -> i
       [21-17] tag_count      (5 bits — 0-31, influences ability count)
       [16-13] dep_count      (4 bits — 0-15, influences retreat cost)
       [12-0]  tag_hash       (13 bits — drives ability selection)
+
+    Frontier cards set bit 64. Extended registry categories set bit 65 and use
+    the category field as an index into the append-only extended taxonomy.
+    Existing 64-bit seed meanings remain unchanged.
     """
     name_hash = seed_hash(name) & 0xFFFFFFFF
 
     cat_list = list(CATEGORY_TYPE.keys())
-    cat_idx = cat_list.index(category) if category in cat_list else 0
+    extended_categories = list(EXTENDED_CATEGORY_TYPE.keys())
+    extended_category_flag = 0
+    if category in CATEGORY_TYPE:
+        cat_idx = cat_list.index(category)
+    elif category in EXTENDED_CATEGORY_TYPE:
+        cat_idx = extended_categories.index(category)
+        extended_category_flag = 1 << 65
+    else:
+        cat_idx = cat_list.index("general")
 
     # Derive types the same way as _derive_types, then encode
     types = _derive_types(category, tags)
@@ -1024,14 +1078,20 @@ def forge_seed(name: str, category: str, tier: str, tags: list, deps: list) -> i
     if len(types) > 1:
         secondary_idx = type_names.index(types[1]) if types[1] in type_names else 7
 
-    tier_map = {"experimental": 0, "community": 1, "verified": 2, "official": 3}
-    tier_idx = tier_map.get(tier, 1)
+    tier_map = {
+        "experimental": 0,
+        "community": 1,
+        "verified": 2,
+        "official": 3,
+    }
+    frontier_flag = 1 << 64 if tier == "frontier" else 0
+    tier_idx = tier_map.get(tier, 0 if tier == "frontier" else 1)
 
     tag_count = min(31, len(tags))
     dep_count = min(15, len(deps))
     tag_hash = seed_hash(" ".join(tags)) & 0x1FFF if tags else 0
 
-    seed = (
+    seed = frontier_flag | extended_category_flag | (
         (name_hash << 32) |
         (cat_idx << 27) |
         (secondary_idx << 24) |
@@ -1043,7 +1103,11 @@ def forge_seed(name: str, category: str, tier: str, tags: list, deps: list) -> i
     return seed
 
 
-def resolve_card_from_seed(seed: int) -> dict:
+def resolve_card_from_seed(
+    seed: int,
+    *,
+    full_seed: bool | None = None,
+) -> dict:
     """
     Reconstruct a card from a seed number.
 
@@ -1058,8 +1122,11 @@ def resolve_card_from_seed(seed: int) -> dict:
 
     Share the short seed. It always points to the latest card.
     """
+    if full_seed is None:
+        full_seed = seed >= (1 << 32)
+
     # 32-bit name seed → lookup current version in registry
-    if seed < (1 << 32):
+    if not full_seed:
         try:
             registry = fetch_registry()
             for agent in registry.get("agents", []):
@@ -1072,31 +1139,51 @@ def resolve_card_from_seed(seed: int) -> dict:
         # Pack as if it were the top 32 bits with default lower bits
         seed = seed << 32  # name_hash only, defaults for everything else
 
-    # 64-bit full seed → unpack exact version
+    frontier = bool(seed & (1 << 64))
+    extended_category = bool(seed & (1 << 65))
+    packed_seed = seed & ((1 << 64) - 1)
+
     # Unpack the seed DNA
-    name_hash = (seed >> 32) & 0xFFFFFFFF
-    cat_idx = (seed >> 27) & 0x1F
-    secondary_idx = (seed >> 24) & 0x7
-    tier_idx = (seed >> 22) & 0x3
-    tag_count = (seed >> 17) & 0x1F
-    dep_count = (seed >> 13) & 0xF
-    tag_hash = seed & 0x1FFF
+    name_hash = (packed_seed >> 32) & 0xFFFFFFFF
+    cat_idx = (packed_seed >> 27) & 0x1F
+    secondary_idx = (packed_seed >> 24) & 0x7
+    tier_idx = (packed_seed >> 22) & 0x3
+    tag_count = (packed_seed >> 17) & 0x1F
+    dep_count = (packed_seed >> 13) & 0xF
+    tag_hash = packed_seed & 0x1FFF
 
     # Reconstruct category → primary type
     cat_list = list(CATEGORY_TYPE.keys())
-    category = cat_list[cat_idx] if cat_idx < len(cat_list) else "general"
-    primary_type = CATEGORY_TYPE.get(category, "SOCIAL")
+    extended_categories = list(EXTENDED_CATEGORY_TYPE.keys())
+    if extended_category:
+        category = (
+            extended_categories[cat_idx]
+            if cat_idx < len(extended_categories)
+            else "general"
+        )
+    else:
+        category = cat_list[cat_idx] if cat_idx < len(cat_list) else "general"
+    primary_type = _primary_type(category)
+    type_names = list(AGENT_TYPES.keys())
 
     # Reconstruct tier
     tier_list = ["experimental", "community", "verified", "official"]
-    tier = tier_list[tier_idx] if tier_idx < len(tier_list) else "community"
+    tier = (
+        "frontier"
+        if frontier
+        else tier_list[tier_idx]
+        if tier_idx < len(tier_list)
+        else "community"
+    )
     rarity = TIER_TO_RARITY.get(tier, "core")
     evo = EVOLUTION_STAGES.get(tier, EVOLUTION_STAGES["community"])
 
     # Reconstruct types (secondary encoded directly)
     types = [primary_type]
-    type_names = list(AGENT_TYPES.keys())
-    if secondary_idx < len(type_names) and type_names[secondary_idx] != primary_type:
+    if (
+        secondary_idx < len(type_names)
+        and type_names[secondary_idx] != primary_type
+    ):
         types.append(type_names[secondary_idx])
 
     # Stats — same derivation as _derive_stats using only seed-encoded fields
@@ -1110,7 +1197,13 @@ def resolve_card_from_seed(seed: int) -> dict:
     )
     # Override with name_hash-seeded stats for full fidelity
     rng = mulberry32(name_hash ^ 0x57415453)  # XOR with "STAT" for unique stream
-    tier_base = {"experimental": 15, "community": 30, "verified": 50, "official": 70}
+    tier_base = {
+        "frontier": 10,
+        "experimental": 15,
+        "community": 30,
+        "verified": 50,
+        "official": 70,
+    }
     base = tier_base.get(tier, 30)
     tag_bonus = min(20, tag_count * 3)
     dep_penalty = min(20, dep_count * 5)
@@ -1133,7 +1226,13 @@ def resolve_card_from_seed(seed: int) -> dict:
         "WEALTH": [("Prospect", 20), ("Forecast", 30), ("Negotiate", 35), ("Close", 40)],
     }.get(primary_type, [("Perform", 25)])
 
-    tier_count = {"experimental": 1, "community": 2, "verified": 3, "official": 3}
+    tier_count = {
+        "frontier": 1,
+        "experimental": 1,
+        "community": 2,
+        "verified": 3,
+        "official": 3,
+    }
     count = tier_count.get(tier, 2)
     ab_rng = mulberry32(tag_hash | (name_hash & 0xFF00))
     abilities = []
@@ -1218,7 +1317,7 @@ def resolve_card(name: str) -> dict:
     seed = forge_seed(name, category, tier, tags, deps)
 
     # Resolve from seed — one canonical path
-    card = resolve_card_from_seed(seed)
+    card = resolve_card_from_seed(seed, full_seed=True)
 
     # Enrich with registry metadata
     card["name"] = name
@@ -1379,21 +1478,28 @@ def egg_to_compact(egg: dict) -> str:
     A 20-agent egg compresses to ~220 characters. A 50-agent egg to ~540.
     """
     seeds = egg.get("seeds", [])
-    # Pack seeds as 8-byte big-endian integers
-    raw = b"".join(s.to_bytes(8, "big") for s in seeds)
-    return base64.urlsafe_b64encode(raw).decode().rstrip("=")
+    extended = any(seed >= (1 << 64) for seed in seeds)
+    width = 9 if extended else 8
+    raw = b"".join(seed.to_bytes(width, "big") for seed in seeds)
+    encoded = base64.urlsafe_b64encode(raw).decode().rstrip("=")
+    return f"v2.{encoded}" if extended else encoded
 
 
 def compact_to_egg(compact: str) -> dict:
     """Decompress a compact string back to an egg."""
+    width = 9 if compact.startswith("v2.") else 8
+    if width == 9:
+        compact = compact[3:]
     # Re-pad base64
     padding = 4 - len(compact) % 4
     if padding < 4:
         compact += "=" * padding
     raw = base64.urlsafe_b64decode(compact)
     seeds = []
-    for i in range(0, len(raw), 8):
-        seed = int.from_bytes(raw[i:i+8], "big")
+    if len(raw) % width:
+        raise ValueError("Compact egg payload has an invalid byte length")
+    for i in range(0, len(raw), width):
+        seed = int.from_bytes(raw[i:i+width], "big")
         seeds.append(seed)
     return {"schema": "rapp-egg/1.0", "seeds": seeds, "count": len(seeds)}
 
@@ -1415,6 +1521,11 @@ def hatch_egg(egg: dict, output_dir: str = "agents") -> list:
         s = agent.get("_seed")
         if s:
             seed_map[s] = agent
+        aliases = agent.get("_seed_aliases", [])
+        if isinstance(aliases, list):
+            for alias in aliases:
+                if isinstance(alias, int):
+                    seed_map.setdefault(alias, agent)
 
     for seed in egg.get("seeds", []):
         agent = seed_map.get(seed)
@@ -1427,7 +1538,7 @@ def hatch_egg(egg: dict, output_dir: str = "agents") -> list:
                 results.append({"seed": seed, "name": agent["name"], "error": str(e)})
         else:
             # Unknown seed — resolve preview card
-            card = resolve_card_from_seed(seed)
+            card = resolve_card_from_seed(seed, full_seed=True)
             results.append({"seed": seed, "preview": True, "card": card})
 
     return results
@@ -1689,9 +1800,14 @@ def submit_agent(
             raise ValueError(
                 "New versioned registrations require a lowercase snake_case slug"
             )
-        if tier not in SUBMITTABLE_TIERS:
+        trusted_frontier = (
+            tier == "frontier"
+            and name_parts[0].casefold() in FRONTIER_PUBLISHERS
+        )
+        if tier not in SUBMITTABLE_TIERS and not trusted_frontier:
             raise ValueError(
-                "New registrations require quality_tier community or experimental"
+                "New registrations require quality_tier community or "
+                "experimental unless the publisher is an approved frontier mirror"
             )
     elif operation == "update":
         if not existing:
@@ -2038,6 +2154,17 @@ def main():
 
     p_card_resolve = card_sub.add_parser("resolve", help="Resolve a full card from just a name — micro-bandwidth self-assembly")
     p_card_resolve.add_argument("name", nargs="+", help="Agent name, numeric seed, or 7-word mnemonic")
+    seed_mode = p_card_resolve.add_mutually_exclusive_group()
+    seed_mode.add_argument(
+        "--full-seed",
+        action="store_true",
+        help="Interpret a numeric value as complete card DNA",
+    )
+    seed_mode.add_argument(
+        "--short-seed",
+        action="store_true",
+        help="Interpret a numeric value as a 32-bit registry identity",
+    )
     p_card_resolve.add_argument("--json", action="store_true", help="Output JSON")
 
     p_card_words = card_sub.add_parser("words", help="Get the 7-word mnemonic for an agent's seed")
@@ -2348,11 +2475,24 @@ def main():
             if len(parts) >= 7 and parts[0].upper() in _WORD_TO_IDX:
                 # Mnemonic words
                 seed_val = words_to_seed(" ".join(parts[:7]))
-                result = resolve_card_from_seed(seed_val)
+                result = resolve_card_from_seed(
+                    seed_val,
+                    full_seed=True,
+                )
             elif len(parts) == 1:
                 try:
                     seed_val = int(parts[0])
-                    result = resolve_card_from_seed(seed_val)
+                    seed_mode = (
+                        True
+                        if args.full_seed
+                        else False
+                        if args.short_seed
+                        else None
+                    )
+                    result = resolve_card_from_seed(
+                        seed_val,
+                        full_seed=seed_mode,
+                    )
                 except ValueError:
                     result = resolve_card(parts[0])
             else:

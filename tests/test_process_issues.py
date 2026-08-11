@@ -477,6 +477,10 @@ class TestTierValidation:
         m = {**VALID_MANIFEST_BASE, "quality_tier": "official"}
         assert pi.validate_manifest(m) == []
 
+    def test_frontier_tier_valid(self):
+        m = {**VALID_MANIFEST_BASE, "quality_tier": "frontier"}
+        assert pi.validate_manifest(m) == []
+
     def test_invalid_tier_rejected(self):
         m = {**VALID_MANIFEST_BASE, "quality_tier": "platinum"}
         errors = pi.validate_manifest(m)
@@ -607,6 +611,68 @@ class TestCrudRequestContract:
         assert staged["canonical_path"] == (
             "agents/@testuser/full_rapp_leviathan_agent.py"
         )
+
+    def test_authorized_frontier_mirror_create(self):
+        code = (
+            VALID_AGENT_CODE
+            .replace(
+                "@testuser/my_agent",
+                "@cat-agent-skills/new_skill",
+            )
+            .replace('"community"', '"frontier"')
+        )
+        request = {
+            "schema": pi.CHANGE_REQUEST_SCHEMA,
+            "request_id": "req_frontier_123",
+            "operation": "create",
+            "resource": {
+                "kind": "agent",
+                "id": "@cat-agent-skills/new_skill",
+            },
+            "preconditions": {"if_none_match": "*"},
+            "payload": {
+                "source": {
+                    "content": code,
+                    "sha256": f"sha256:{pi.sha256_bytes(code.encode())}",
+                }
+            },
+        }
+        result = pi.process(request, "kody-w")
+        assert result["ok"] is True
+        staged = json.loads(
+            (pi.REPO_ROOT / result["file"]).read_text()
+        )
+        assert staged["candidate_quality_tier"] == "frontier"
+        assert staged["canonical_path"] == (
+            "agents/@cat-agent-skills/new_skill_agent.py"
+        )
+
+    def test_frontier_mirror_rejects_unauthorized_submitter(self):
+        code = (
+            VALID_AGENT_CODE
+            .replace(
+                "@testuser/my_agent",
+                "@cat-agent-skills/new_skill",
+            )
+            .replace('"community"', '"frontier"')
+        )
+        result = pi.handle_submit_agent({"code": code}, "other-user")
+        assert "Publisher must be '@other-user'" in result["error"]
+
+    def test_frontier_brand_rejects_same_named_github_user(self):
+        code = (
+            VALID_AGENT_CODE
+            .replace(
+                "@testuser/my_agent",
+                "@cat-agent-skills/new_skill",
+            )
+            .replace('"community"', '"frontier"')
+        )
+        result = pi.handle_submit_agent(
+            {"code": code},
+            "cat-agent-skills",
+        )
+        assert "Publisher must be '@cat-agent-skills'" in result["error"]
 
     def test_same_issue_revision_is_idempotent(self):
         payload = {
