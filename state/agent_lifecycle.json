@@ -3445,14 +3445,14 @@
     },
     "@kody-w/copilot_studio_parity_deploy": {
       "status": "active",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "quality_tier": "community",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "canonical_path": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
-      "sha256": "92d79b2f534027720ebb110c8f988e86b1d1df401fb590a43ef4945c02d9d6f7",
-      "latest_receipt": "rar_35b5f2233453e812872f375a8fee5df02813abd789fdceea188efcc51db7eaec",
-      "updated_at": "2026-08-11T17:26:39.020310+00:00"
+      "sha256": "498cc8dc2a98652e20c33cde2d0fbf9f20f4d7c86b254e004d22daf67cb6d930",
+      "latest_receipt": "rar_0172e0b7c2ceffb66750dca72bc455b94d979f3a38397561cf95bdfda03e4f83",
+      "updated_at": "2026-08-11T17:40:19.059353+00:00"
     },
     "@kody-w/factory": {
       "status": "active",
@@ -3467,5 +3467,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-11T17:30:32.222815+00:00"
+  "updated_at": "2026-08-11T17:40:19.059353+00:00"
 }

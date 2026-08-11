@@ -49,7 +49,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_parity_deploy",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Copilot Studio Parity Deploy",
     "description": (
         "Compiles caller-selected local RAPP agents into a provisioned, "
@@ -4615,6 +4615,11 @@ def _build_parity_oracle(
             "_oracle_source_path": str(oracle_root / source_relative),
             "_oracle_root": str(oracle_root),
         }
+    packaged_basic_agent = oracle_root / "agents" / "basic_agent.py"
+    top_level_basic_agent = oracle_root / "basic_agent.py"
+    if packaged_basic_agent.is_file() and not top_level_basic_agent.exists():
+        shutil.copy2(packaged_basic_agent, top_level_basic_agent)
+        top_level_basic_agent.chmod(0o444)
     return temporary, bound_contracts
 
 
