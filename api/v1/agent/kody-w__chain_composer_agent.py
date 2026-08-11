@@ -75,9 +75,9 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/chain_composer_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Chain Composer",
-    "description": "Compose multi-primitive chain plans from any high-level operator prompt. Reads the canonical RAPP toolbox (BondRhythm, ant pheromones, art submissions, braintrust requests, vbrainstem, tick_twin, push_canvas, holo card grail, etc.) and returns rapp-chain-plan/1.0 envelope + writes an executable bash script. Calls `claude` CLI under the hood. Operator-mediated: never auto-runs.",
+    "description": "Composes multi-primitive RAPP chain plans from a natural-language prompt via the claude CLI, writing a plan envelope and reviewable bash script.",
     "author": "kody-w",
     "tags": [
         "compose",

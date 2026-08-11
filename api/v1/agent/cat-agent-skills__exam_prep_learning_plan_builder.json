@@ -1,0 +1,38 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__exam_prep_learning_plan_builder",
+  "name": "Exam Prep Learning Plan Builder",
+  "rar_name": "@cat-agent-skills/exam_prep_learning_plan_builder",
+  "rappid": "rappid:@cat-agent-skills/exam_prep_learning_plan_builder:1d0ed87c4edf11cb7e9c2b4d9337cc634a1bd945b3d82bb0eb24e917ec9b9275",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "3.0.1",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "planning",
+    "productivity",
+    "learning"
+  ],
+  "description": "Build a personalized study plan app for an exam or certification: overview timeline, day-by-day schedule with a calendar picker, domain breakdown, one-click .ics download, and a notes tab to track confidence over time.",
+  "author": "Michael Heath",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.2,
+  "sha256": "35509b26742d474c7b205a420085c28a755754e18621d8599f5d4a54f0bdab35",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__exam_prep_learning_plan_builder.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__exam_prep_learning_plan_builder.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__exam_prep_learning_plan_builder.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py"
+}

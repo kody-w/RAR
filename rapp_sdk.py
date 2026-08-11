@@ -15,6 +15,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import re
 import subprocess
 import sys
 import urllib.request
@@ -1681,9 +1682,12 @@ def submit_agent(
     name_parts = str(manifest.get("name", "")).split("/", 1)
     tier = manifest.get("quality_tier", "community")
     if operation == "create":
-        if len(name_parts) != 2 or not name_parts[1].endswith("_agent"):
+        if (
+            len(name_parts) != 2
+            or not re.fullmatch(r"[a-z0-9_]+", name_parts[1])
+        ):
             raise ValueError(
-                "New versioned registrations require manifest names ending in _agent"
+                "New versioned registrations require a lowercase snake_case slug"
             )
         if tier not in SUBMITTABLE_TIERS:
             raise ValueError(

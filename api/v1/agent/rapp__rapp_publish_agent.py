@@ -47,13 +47,9 @@ __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp_publish_agent",
     "display_name": "RappPublish",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": (
-        "Submit any RAPP artifact (agent, rapplication, sense) to the right "
-        "store. Auto-detects type and opens an [AGENT]/[RAPP]/[SENSE] issue "
-        "in kody-w/RAR / kody-w/RAPP_Store / kody-w/RAPP_Sense_Store "
-        "respectively. Replaces the rapplication-only publish_to_rapp_store "
-        "agent with a unified router covering all three peer stores."
+        "Classifies a RAPP artifact (agent, rapplication, or sense) and opens the matching submission issue in its store repo via the GitHub API."
     ),
     "author": "RAPP",
     "tags": ["publish", "submission", "router", "ecosystem", "store", "registry"],

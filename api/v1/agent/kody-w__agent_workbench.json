@@ -3,10 +3,13 @@
   "id": "kody-w__agent_workbench",
   "name": "Agent Workbench",
   "rar_name": "@kody-w/agent_workbench",
-  "rappid": "rappid:@kody-w/agent_workbench:99e15443437f0bea78df5161ab887cf5aa6480835729b7fcf2dc16cbb7c548f3",
-  "_migrated_from": null,
-  "_migrated_from_note": null,
-  "version": "1.1.1",
+  "rappid": "rappid:@kody-w/agent_workbench:8881ee2399f4745d70b3da9e4be3b9a16b86319845eac85232ad97813b6bc41a",
+  "_migrated_from": "rappid:@kody-w/agent_workbench:99e15443437f0bea78df5161ab887cf5aa6480835729b7fcf2dc16cbb7c548f3",
+  "_migrated_from_all": [
+    "rappid:@kody-w/agent_workbench:99e15443437f0bea78df5161ab887cf5aa6480835729b7fcf2dc16cbb7c548f3"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.2",
   "publisher": "@kody-w",
   "category": "devtools",
   "tags": [
@@ -17,7 +20,7 @@
     "testing",
     "publishing"
   ],
-  "description": "Build, validate, test, and publish single-file RAPP agents. The development companion for the agent.py pattern.",
+  "description": "Scaffolds, validates, dry-runs, diffs, and publishes single-file RAPP agents against the registry via GitHub Issues-as-API.",
   "author": "RAPP Core Team",
   "quality_tier": "official",
   "requires_env": [],
@@ -26,15 +29,15 @@
   ],
   "lines": 737,
   "size_kb": 29.2,
-  "sha256": "afdb5658f8079d3fa3eca347721b9faa963634d06cc27a72c3bc20b981d8bee2",
+  "sha256": "00b19b2e98b854333dbf7d89d74980f3e54c4f5753f31ac9039cf8f8ed30e2b4",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__agent_workbench.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_workbench_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_workbench_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_workbench.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_workbench.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_workbench.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/agent_workbench_agent.py"
 }

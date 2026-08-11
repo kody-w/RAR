@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-02T14:56:21Z",
+  "generated": "2026-08-11T06:55:35Z",
   "categories": [
     {
       "name": "general",
@@ -8,7 +8,7 @@
     },
     {
       "name": "productivity",
-      "count": 39
+      "count": 40
     },
     {
       "name": "core",
@@ -23,12 +23,12 @@
       "count": 20
     },
     {
-      "name": "pipeline",
+      "name": "integrations",
       "count": 15
     },
     {
-      "name": "integrations",
-      "count": 14
+      "name": "pipeline",
+      "count": 15
     },
     {
       "name": "financial_services",
@@ -84,7 +84,7 @@
     },
     {
       "name": "workflow",
-      "count": 4
+      "count": 5
     },
     {
       "name": "meta",
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 50
+      "count": 53
     },
     {
       "name": "@rapp",
@@ -144,7 +144,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 156
+      "count": 159
     },
     {
       "name": "frontier",
@@ -269,6 +269,10 @@
       "count": 6
     },
     {
+      "name": "testing",
+      "count": 6
+    },
+    {
       "name": "pricing",
       "count": 6
     },
@@ -302,10 +306,6 @@
     },
     {
       "name": "knowledge-base",
-      "count": 5
-    },
-    {
-      "name": "testing",
       "count": 5
     },
     {
@@ -649,6 +649,10 @@
       "count": 3
     },
     {
+      "name": "blog",
+      "count": 3
+    },
+    {
       "name": "charts",
       "count": 3
     },
@@ -693,7 +697,15 @@
       "count": 3
     },
     {
+      "name": "video",
+      "count": 3
+    },
+    {
       "name": "devtools",
+      "count": 3
+    },
+    {
+      "name": "publishing",
       "count": 3
     },
     {
@@ -969,10 +981,6 @@
       "count": 2
     },
     {
-      "name": "blog",
-      "count": 2
-    },
-    {
       "name": "speaking",
       "count": 2
     },
@@ -1026,6 +1034,10 @@
     },
     {
       "name": "foundry",
+      "count": 2
+    },
+    {
+      "name": "extraction",
       "count": 2
     },
     {
@@ -1085,19 +1097,11 @@
       "count": 2
     },
     {
-      "name": "video",
-      "count": 2
-    },
-    {
       "name": "recon",
       "count": 2
     },
     {
       "name": "wiki",
-      "count": 2
-    },
-    {
-      "name": "publishing",
       "count": 2
     },
     {
@@ -1114,6 +1118,10 @@
     },
     {
       "name": "heartbeat",
+      "count": 2
+    },
+    {
+      "name": "determinism",
       "count": 2
     },
     {
@@ -1354,14 +1362,6 @@
     },
     {
       "name": "hedis",
-      "count": 1
-    },
-    {
-      "name": "care-gaps",
-      "count": 1
-    },
-    {
-      "name": "quality-measures",
       "count": 1
     }
   ]

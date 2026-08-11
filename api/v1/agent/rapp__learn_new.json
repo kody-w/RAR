@@ -3,9 +3,14 @@
   "id": "rapp__learn_new",
   "name": "LearnNew",
   "rar_name": "@rapp/learn_new",
-  "rappid": "rappid:@rapp/learn_new:4b849a9bd8534e3b76132d60b6f2a1ba2c5ca6361641166cb5be288f3e2d231f",
-  "_migrated_from": "rappid:v2:agent:@rapp/learn_new:0edcecec861b4dce7ad6c06ef77a320d", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "2.0.0",
+  "rappid": "rappid:@rapp/learn_new:510b5eff3ae07f71d61270320a2917786728e1ebe30048c4f0aab6c62c461169",
+  "_migrated_from": "rappid:@rapp/learn_new:4b849a9bd8534e3b76132d60b6f2a1ba2c5ca6361641166cb5be288f3e2d231f",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@rapp/learn_new:0edcecec861b4dce7ad6c06ef77a320d",
+    "rappid:@rapp/learn_new:4b849a9bd8534e3b76132d60b6f2a1ba2c5ca6361641166cb5be288f3e2d231f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.0.1",
   "publisher": "@rapp",
   "category": "core",
   "tags": [
@@ -15,7 +20,7 @@
     "learn",
     "swarm"
   ],
-  "description": "Creates new RAPP agents or swarms from natural-language descriptions. Generates, saves, and hot-loads them. Output is dual-compatible with brainstem and RAR registry.",
+  "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
   "author": "RAPP",
   "quality_tier": "official",
   "requires_env": [],
@@ -23,16 +28,16 @@
     "@rapp/basic_agent"
   ],
   "lines": 1025,
-  "size_kb": 38.0,
-  "sha256": "0edcecec861b4dce7ad6c06ef77a320d4c8affe51f8a9944b8c77aca0803c21c",
+  "size_kb": 37.9,
+  "sha256": "51f67fdc60473fb805021b6b183f3f33aec49a0e73fe95f28236f14204c499b7",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-20T12:38:45-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__learn_new.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__learn_new.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__learn_new.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__learn_new.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/learn_new_agent.py"
 }

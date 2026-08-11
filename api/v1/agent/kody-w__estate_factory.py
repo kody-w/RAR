@@ -74,13 +74,10 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/estate_factory",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "display_name": "EstateFactory",
     "description": (
-        "Generate a full functioning digital estate from intent. Picks "
-        "estate type (1st-5th, classical estates framing), designs the "
-        "industries→neighborhoods→factories tree, writes every file the "
-        "estate needs, and optionally provisions live rapps."
+        "Generates a complete digital estate from an intent \u2014 org tree, factory agent stubs, souls, HTML dashboard \u2014 via brainstem or LLM APIs when available."
     ),
     "author": "kody-w",
     "industry": "meta",

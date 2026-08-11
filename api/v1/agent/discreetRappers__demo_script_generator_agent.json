@@ -3,9 +3,14 @@
   "id": "discreetRappers__demo_script_generator_agent",
   "name": "DemoScriptGenerator",
   "rar_name": "@discreetRappers/demo_script_generator_agent",
-  "rappid": "rappid:@discreetRappers/demo_script_generator_agent:5c3a118c68bf6e1d3448385bb3699f3769b7b51177553d92e208f42b7b2c5d7d",
-  "_migrated_from": "rappid:v2:agent:@discreetRappers/demo_script_generator_agent:d452650e00a71e7ae3c566c0d12b4ecf", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.0",
+  "rappid": "rappid:@discreetRappers/demo_script_generator_agent:57a9f50fcccf392a3db49898bfff75708011d8991a00b701d4963d9c92e5d6da",
+  "_migrated_from": "rappid:@discreetRappers/demo_script_generator_agent:5c3a118c68bf6e1d3448385bb3699f3769b7b51177553d92e208f42b7b2c5d7d",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@discreetRappers/demo_script_generator_agent:d452650e00a71e7ae3c566c0d12b4ecf",
+    "rappid:@discreetRappers/demo_script_generator_agent:5c3a118c68bf6e1d3448385bb3699f3769b7b51177553d92e208f42b7b2c5d7d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@discreetRappers",
   "category": "productivity",
   "tags": [
@@ -15,7 +20,7 @@
     "json",
     "scripted"
   ],
-  "description": "Generates v2.0.0 demo script JSON files for ScriptedDemoAgent. Creates 60-second demos with personas.",
+  "description": "Generates 60-second persona-driven demo script JSON files for ScriptedDemoAgent, via Azure OpenAI or built-in templates.",
   "author": "Bill Whalen",
   "quality_tier": "community",
   "requires_env": [
@@ -28,15 +33,15 @@
   ],
   "lines": 1201,
   "size_kb": 58.4,
-  "sha256": "d452650e00a71e7ae3c566c0d12b4ecf46e0d7e1d162a5e080f6c253fcf934c2",
+  "sha256": "8c3f230c67c330e7334e103653e34b810fbbcf2fe2acd120f7806f5f0cf26149",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-06T16:39:03-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__demo_script_generator_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/demo_script_generator_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/demo_script_generator_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__demo_script_generator_agent.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__demo_script_generator_agent.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__demo_script_generator_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/demo_script_generator_agent.py"
 }

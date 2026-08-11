@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__speech_to_crm",
   "name": "Speech to CRM",
   "rar_name": "@aibast-agents-library/speech_to_crm",
-  "rappid": "rappid:@aibast-agents-library/speech_to_crm:50a3fbe0ade0507835f31ea471d986f748b7897dedbdd9fe4453e39298bfeb71",
-  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/speech_to_crm:1cc540db9541e2cc83267239db431ab8", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/speech_to_crm:fefea9105b4f4df6ae50e817ce15ebc597e93d88688026701578c1271f82230d",
+  "_migrated_from": "rappid:@aibast-agents-library/speech_to_crm:50a3fbe0ade0507835f31ea471d986f748b7897dedbdd9fe4453e39298bfeb71",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@aibast-agents-library/speech_to_crm:1cc540db9541e2cc83267239db431ab8",
+    "rappid:@aibast-agents-library/speech_to_crm:50a3fbe0ade0507835f31ea471d986f748b7897dedbdd9fe4453e39298bfeb71"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "general",
   "tags": [
@@ -15,24 +20,24 @@
     "entity-extraction",
     "nlp"
   ],
-  "description": "Transcribes sales calls, extracts entities, maps to CRM fields, and previews record updates.",
+  "description": "Maps call transcripts to CRM fields grounded against live records in a simulated Dynamics 365 tenant, with an offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 265,
-  "size_kb": 14.6,
-  "sha256": "1cc540db9541e2cc83267239db431ab8da13242d0153867de22e164396001ee5",
+  "lines": 407,
+  "size_kb": 21.7,
+  "sha256": "6109a47956495120a36efec146400544f2ca20f7f857da1963d378f8dfcbbb6a",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__speech_to_crm.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/speech_to_crm_stack/speech_to_crm_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/speech_to_crm_stack/speech_to_crm_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__speech_to_crm.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__speech_to_crm.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__speech_to_crm.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/speech_to_crm_stack/speech_to_crm_agent.py"
 }

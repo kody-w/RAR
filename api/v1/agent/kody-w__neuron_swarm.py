@@ -21,12 +21,10 @@ Companion to the ebook "RAPP and the Art of Brainstemming".
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/neuron_swarm",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "NeuronSwarm",
     "description": (
-        "Summon a neuron swarm on demand: fan any task out across many independent expert "
-        "'neuron' lenses, then reconcile their takes into one converged, higher-confidence "
-        "answer -- using your brainstem's own model, no API keys."
+        "Fans a task out across parallel expert 'neuron' prompts using the host brainstem's own LLM call, then reconciles them into one converged answer."
     ),
     "author": "Kody Wildfeuer",
     "tags": ["swarm", "orchestration", "reasoning", "multi-agent", "analysis", "ensemble", "brainstem"],

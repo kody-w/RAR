@@ -3,10 +3,13 @@
   "id": "kody-w__example_private",
   "name": "ExamplePrivate",
   "rar_name": "@kody-w/example_private",
-  "rappid": "rappid:@kody-w/example_private:3248da31f89615dfeb689762f6cf83be0bc6baf1ba802bea3675417e41c00a7e",
-  "_migrated_from": null,
-  "_migrated_from_note": null,
-  "version": "1.0.1",
+  "rappid": "rappid:@kody-w/example_private:7327a708d405cf3fd59060948eb32ee045af8538f65654446dc6338bd88ee0cb",
+  "_migrated_from": "rappid:@kody-w/example_private:3248da31f89615dfeb689762f6cf83be0bc6baf1ba802bea3675417e41c00a7e",
+  "_migrated_from_all": [
+    "rappid:@kody-w/example_private:3248da31f89615dfeb689762f6cf83be0bc6baf1ba802bea3675417e41c00a7e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
   "publisher": "@kody-w",
   "category": "productivity",
   "tags": [
@@ -14,7 +17,7 @@
     "private",
     "stub"
   ],
-  "description": "Sample gated stub demonstrating the private layer.",
+  "description": "Demonstrates the RAR private-agent stub layer \u2014 metadata only, with source resolved from a private GitHub repo at install time.",
   "author": "Kody Wildfeuer",
   "quality_tier": "private",
   "requires_env": [],
@@ -22,16 +25,16 @@
     "@rapp/basic_agent"
   ],
   "lines": 40,
-  "size_kb": 1.2,
-  "sha256": "011cd86a58e75b0b414ea0114f2cf2c4bfe6e7b52c5c4fa25e76fe97ed21b2b2",
+  "size_kb": 1.3,
+  "sha256": "41e0a5a7e2eb75df92ef107444dda944e01837e95a1c32caaec74836601f8ba8",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__example_private.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/private/example_private_agent.py.stub",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/private/example_private_agent.py.stub.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__example_private.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__example_private.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__example_private.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/private/example_private_agent.py.stub"
 }

@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__meeting_prep",
   "name": "Meeting Prep",
   "rar_name": "@aibast-agents-library/meeting_prep",
-  "rappid": "rappid:@aibast-agents-library/meeting_prep:a9fb5ea4137990191ae283d8ce0b62296089a3c7996e6a7ef3c88ee32d5268a2",
-  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/meeting_prep:2cbc7c997ad204220703545c9210025d", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.0",
+  "rappid": "rappid:@aibast-agents-library/meeting_prep:4c638e933e5300a477f62e994df79099b8dbf964aa56a7c1014cb0754250cb6e",
+  "_migrated_from": "rappid:@aibast-agents-library/meeting_prep:a9fb5ea4137990191ae283d8ce0b62296089a3c7996e6a7ef3c88ee32d5268a2",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@aibast-agents-library/meeting_prep:2cbc7c997ad204220703545c9210025d",
+    "rappid:@aibast-agents-library/meeting_prep:a9fb5ea4137990191ae283d8ce0b62296089a3c7996e6a7ef3c88ee32d5268a2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@aibast-agents-library",
   "category": "b2b_sales",
   "tags": [
@@ -15,7 +20,7 @@
     "briefing",
     "objection-handling"
   ],
-  "description": "Generates pre-meeting briefs, talking points, objection prep, and follow-up templates.",
+  "description": "Generates pre-meeting briefs, talking points, objection prep, and follow-up templates from built-in demo account data.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
@@ -23,16 +28,16 @@
     "@rapp/basic_agent"
   ],
   "lines": 521,
-  "size_kb": 25.1,
-  "sha256": "2cbc7c997ad204220703545c9210025d0e84982aa395cb1b40ec7e73a7da4b65",
+  "size_kb": 25.2,
+  "sha256": "4a91d34945375407eebd1affec505833c1c541efadd6d98354d8a15f06ca38b9",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__meeting_prep.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__meeting_prep.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__meeting_prep.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__meeting_prep.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py"
 }

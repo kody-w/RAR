@@ -17,9 +17,9 @@ header. Subsequent perform() calls are cached.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@bill/neuron_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Neuron",
-    "description": "Portable memory packs — drop the file in, get a compact Knowledge Base block injected at session start.",
+    "description": "Injects a compact Knowledge Base block of hardcoded Copilot Studio and Dataverse lessons into the brainstem prompt at session start.",
     "author": "Bill Whalen",
     "tags": ["memory", "neuron", "knowledge-base", "bootstrap", "platform", "copilot-studio", "dataverse", "d365", "power-platform"],
     "category": "core",

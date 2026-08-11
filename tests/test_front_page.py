@@ -125,7 +125,10 @@ def test_no_entry_is_listed_twice(items):
 
 def test_provenance_rows_keep_the_two_populations_apart(items):
     """A hosted agent may carry a source's numbers, but never merged into RAR's."""
-    carried = [i for i in items if i["source"] is not None]
+    carried = [
+        i for i in items
+        if i["origin"] == "native" and i["source"] is not None
+    ]
     assert carried, "expected some hosted agents to carry source provenance"
     for item in carried:
         assert item["origin"] == "native"
@@ -172,16 +175,34 @@ def test_list_is_sorted_by_rank(items):
     assert [i["rank"] for i in items] == list(range(1, len(items) + 1))
 
 
-def test_rank_order_matches_score_order(items):
-    """Rank is the presentation of score, not a second opinion."""
-    for previous, current in zip(items, items[1:]):
-        assert previous["score"] >= current["score"], (
-            f"{current['ref']} outranks {previous['ref']} with a lower score")
+def origin_percentile(item):
+    return round(
+        1.0 - (item["origin_rank"] - 1) / item["origin_size"],
+        6,
+    )
+
+
+def test_rank_order_matches_published_policy(items):
+    """Global rank interleaves each population by its within-origin percentile."""
+    expected = sorted(
+        items,
+        key=lambda item: (
+            -origin_percentile(item),
+            -item["score"],
+            item["ref"],
+        ),
+    )
+    assert [item["ref"] for item in items] == [
+        item["ref"] for item in expected
+    ]
 
 
 def test_ties_break_on_ref_ascending(items):
     for previous, current in zip(items, items[1:]):
-        if previous["score"] == current["score"]:
+        if (
+            origin_percentile(previous) == origin_percentile(current)
+            and previous["score"] == current["score"]
+        ):
             assert previous["ref"] < current["ref"], (
                 f"tie between {previous['ref']} and {current['ref']} is unstable")
 
@@ -238,7 +259,10 @@ def test_a_source_never_scores_a_hosted_agent(items):
     """The blocker an adversarial pass caught: reach was briefly folded into the
     native score for rows a crawler also found, making one published number out
     of two populations' counters while `explain` denied doing it."""
-    carried = [i for i in items if i["source"] is not None]
+    carried = [
+        i for i in items
+        if i["origin"] == "native" and i["source"] is not None
+    ]
     assert carried, "expected some hosted agents to carry source provenance"
     for item in carried:
         assert "reach" not in item["components"], (
@@ -318,7 +342,7 @@ NUMERIC_WHY = [
     # loud, so nobody can read the number as one of RAR's own.
     (r"^(\d+) downloads? at (.+)$",
      lambda g, s: s["source"] and s["source"]["downloads"] == int(g[0]) > 0),
-    (r"^no downloads reported by (.+)$",
+    (r"^no downloads reported at (.+)$",
      lambda g, s: s["source"] is not None and not s["source"]["downloads"]),
     (r"^published (\d+) days? ago$",
      lambda g, s: s["source"] and s["source"]["published_age_days"] == int(g[0]) > 0),
@@ -339,9 +363,9 @@ LITERAL_WHY = {
     "no recorded add date - scored at the population median":
         lambda s: s["rar"]["age_days"] is None,
     "has a rendered card": lambda s: s["rar"]["has_card"] is True,
-    "no downloads reported by the source":
+    "no downloads reported at the source":
         lambda s: bool(s["source"]) and s["source"]["downloads"] == 0,
-    "no download count published by the source - scored at the population median":
+    "no download count published at the source - scored at the population median":
         lambda s: bool(s["source"]) and s["source"]["downloads"] is None,
     "newest at the source":
         lambda s: bool(s["source"]) and s["source"]["published_age_days"] == 0,

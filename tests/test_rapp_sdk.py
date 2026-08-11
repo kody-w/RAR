@@ -72,11 +72,15 @@ def test_agent_template_has_placeholders():
         assert token in rapp_sdk.AGENT_TEMPLATE, f"Template missing {token}"
 
 
-def _write_submission_agent(tmp_path: Path, version: str = "1.0.0") -> Path:
+def _write_submission_agent(
+    tmp_path: Path,
+    version: str = "1.0.0",
+    name: str = "@testuser/my_agent",
+) -> Path:
     path = tmp_path / "my_agent.py"
     path.write_text(
         rapp_sdk.AGENT_TEMPLATE
-        .replace("__NAME__", "@testuser/my_agent")
+        .replace("__NAME__", name)
         .replace("__DISPLAY_NAME__", "My Agent")
         .replace("__CLASS_NAME__", "MyAgent")
         .replace("__DESCRIPTION__", "A test agent.")
@@ -115,6 +119,39 @@ def test_submit_uses_versioned_issue_command(tmp_path, monkeypatch):
     assert command["preconditions"] == {"if_none_match": "*"}
     assert command["payload"]["source"]["sha256"].startswith("sha256:")
     assert "labels" not in captured["payload"]
+
+
+def test_submit_preserves_identity_without_agent_suffix(tmp_path, monkeypatch):
+    path = _write_submission_agent(
+        tmp_path,
+        name="@testuser/full_rapp_leviathan",
+    )
+    captured = {}
+    monkeypatch.setattr(rapp_sdk, "_get_token", lambda: "test-token")
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_fetch_target_registry",
+        lambda _upstream, _token: {
+            "agents": [],
+            "lifecycle": {"tombstones": []},
+        },
+    )
+
+    def fake_urlopen(request, timeout):
+        captured["payload"] = json.loads(request.data)
+        return FakeResponse({
+            "number": 125,
+            "html_url": "https://example.test/125",
+        })
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", fake_urlopen)
+    rapp_sdk.submit_agent(str(path), upstream="owner/rar")
+    command_text = captured["payload"]["body"].split(
+        "```json\n",
+        1,
+    )[1].rsplit("\n```", 1)[0]
+    command = json.loads(command_text)
+    assert command["resource"]["id"] == "@testuser/full_rapp_leviathan"
 
 
 def test_mutation_registry_uses_fresh_contents_api(monkeypatch):

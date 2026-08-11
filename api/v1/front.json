@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-10T22:09:51Z",
+  "generated": "2026-08-11T07:14:02Z",
   "counts": {
     "native": 282,
     "aggregated": 9,
@@ -200,7 +200,7 @@
         }
       },
       "why": [
-        "no downloads reported by the source",
+        "no downloads reported at the source",
         "published 10 days ago",
         "ships a bundle at the source",
         "216 characters of catalog description"
@@ -2216,7 +2216,7 @@
         }
       },
       "why": [
-        "no downloads reported by the source",
+        "no downloads reported at the source",
         "published 6 days ago",
         "ships a bundle at the source",
         "166 characters of catalog description"
@@ -4253,7 +4253,7 @@
         }
       },
       "why": [
-        "no downloads reported by the source",
+        "no downloads reported at the source",
         "newest at the source",
         "ships a bundle at the source",
         "111 characters of catalog description"
@@ -6285,7 +6285,7 @@
         }
       },
       "why": [
-        "no downloads reported by the source",
+        "no downloads reported at the source",
         "published 49 days ago",
         "ships a bundle at the source",
         "289 characters of catalog description"
@@ -8239,7 +8239,7 @@
         }
       },
       "why": [
-        "no downloads reported by the source",
+        "no downloads reported at the source",
         "published 6 days ago",
         "340 characters of catalog description"
       ]
@@ -10188,7 +10188,7 @@
         }
       },
       "why": [
-        "no downloads reported by the source",
+        "no downloads reported at the source",
         "published 6 days ago",
         "279 characters of catalog description"
       ]
@@ -12210,7 +12210,7 @@
         }
       },
       "why": [
-        "no downloads reported by the source",
+        "no downloads reported at the source",
         "published 6 days ago",
         "253 characters of catalog description"
       ]
@@ -12777,7 +12777,7 @@
         "determinism",
         "ark"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fbuzzsaw",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/buzzsaw.py",
       "source": null,
@@ -12900,7 +12900,7 @@
         "extraction",
         "vision"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fprompt_extractor",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prompt_extractor.py",
       "source": null,
@@ -14450,7 +14450,7 @@
         }
       },
       "why": [
-        "no downloads reported by the source",
+        "no downloads reported at the source",
         "published 6 days ago",
         "180 characters of catalog description"
       ]
@@ -16925,7 +16925,7 @@
         }
       },
       "why": [
-        "no downloads reported by the source",
+        "no downloads reported at the source",
         "no publish date at the source - scored at the population median",
         "145 characters of catalog description"
       ]
@@ -19234,7 +19234,7 @@
         "blog",
         "idempotent"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fwp_publish",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/wp_publish.py",
       "source": null,

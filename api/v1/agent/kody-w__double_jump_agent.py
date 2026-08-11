@@ -26,7 +26,7 @@ Actions:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/double_jump_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Double Jump",
     "author": "kody-w",
     "category": "workflow",
@@ -35,7 +35,7 @@ __manifest__ = {
     "dependencies": [
         "@rapp/basic_agent"
     ],
-    "description": "A general improvement engine: two loops compete on the same task and ratchet it up. Jump 1 is the caller's draft; Jump 2 is the brainstem (via /chat). Each round it judges, keeps the winner, and feeds what made it better forward \u2014 pulling the laggard up without losing gains. Point it at anything: an agent.py, a commons feature, a plan, a draft.",
+    "description": "Improves any draft by competing it against the local brainstem's /chat output round over round, keeping each round's winner; defaults to offline demo.",
     "tags": [
         "improvement",
         "competition",

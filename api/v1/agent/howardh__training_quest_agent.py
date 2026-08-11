@@ -26,9 +26,9 @@ agent management) and adds dynamic checkpoints for each loaded agent.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@howardh/training_quest_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "TrainingQuest",
-    "description": "Generates a personalized interactive training quest HTML page based on the brainstem's loaded agents — auto-discovers capabilities and builds a gamified onboarding experience with progress tracking, copy-to-clipboard prompts, and celebrations.",
+    "description": "Generates a gamified HTML onboarding quest from the brainstem's loaded agents, with checkpoints, progress tracking, and copyable prompts.",
     "author": "Howard Hoy",
     "tags": ["training", "onboarding", "quest", "html", "interactive", "gamification"],
     "category": "productivity",
@@ -685,4 +685,4 @@ render();window.addEventListener('resize',()=>render());
     def perform(self, action="generate", title="", **kwargs):
         if action == "preview":
             return self._action_preview(title=title)
-        return self._action_generate(title=title)
+        return self._action_generate(title=title)

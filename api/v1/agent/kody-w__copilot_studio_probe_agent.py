@@ -19,9 +19,9 @@ or passed at call time.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_probe_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "CopilotStudioProbe",
-    "description": "Send a message to a deployed Microsoft Copilot Studio agent over Direct Line and return its reply — a runtime tester for published agents.",
+    "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification.",
     "author": "kody-w",
     "tags": ["copilot-studio", "direct-line", "probe", "testing", "integration", "m365"],
     "category": "integrations",

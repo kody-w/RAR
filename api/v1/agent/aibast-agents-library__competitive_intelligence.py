@@ -24,9 +24,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/competitive_intelligence",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Competitive Intelligence",
-    "description": "Analyzes competitive landscapes, win/loss patterns, and generates battlecards for enterprise deals.",
+    "description": "Builds competitive landscape analyses, win/loss reviews, and battlecards for enterprise deals from built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "competitive-intelligence", "battlecards", "win-loss"],
     "category": "b2b_sales",

@@ -23,9 +23,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/meeting_prep",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Meeting Prep",
-    "description": "Generates pre-meeting briefs, talking points, objection prep, and follow-up templates.",
+    "description": "Generates pre-meeting briefs, talking points, objection prep, and follow-up templates from built-in demo account data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "meeting-prep", "briefing", "objection-handling"],
     "category": "b2b_sales",

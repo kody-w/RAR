@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__product_feedback_synthesizer",
   "name": "Product Feedback Synthesizer Agent",
   "rar_name": "@aibast-agents-library/product_feedback_synthesizer",
-  "rappid": "rappid:@aibast-agents-library/product_feedback_synthesizer:cf0e9c8d63a8607eab0b04c58505c136a3812bf838ce22b850d4c578a5d2bc34",
-  "_migrated_from": "rappid:@aibast-agents-library/product_feedback_synthesizer:9ef149464ffdacf6b0ab8833fdbb95eeefb071fba041440854d30543ed5b3876", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/product_feedback_synthesizer:7be8aef8de30ba669246e701b14c34ba553942dc925525458d35f214a0882c0b",
+  "_migrated_from": "rappid:@aibast-agents-library/product_feedback_synthesizer:cf0e9c8d63a8607eab0b04c58505c136a3812bf838ce22b850d4c578a5d2bc34",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/product_feedback_synthesizer:9ef149464ffdacf6b0ab8833fdbb95eeefb071fba041440854d30543ed5b3876",
+    "rappid:@aibast-agents-library/product_feedback_synthesizer:cf0e9c8d63a8607eab0b04c58505c136a3812bf838ce22b850d4c578a5d2bc34"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "software_digital_products",
   "tags": [
@@ -16,24 +21,24 @@
     "roadmap",
     "nps"
   ],
-  "description": "Aggregates customer feedback, feature requests, sentiment analysis, and roadmap impact assessments for product teams.",
+  "description": "Synthesizes feedback themes from a live simulated Dynamics 365 tenant's cases and emails, with an offline demo fallback; writes simulated.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 528,
-  "size_kb": 19.9,
-  "sha256": "9ef149464ffdacf6b0ab8833fdbb95eeefb071fba041440854d30543ed5b3876",
+  "lines": 685,
+  "size_kb": 27.0,
+  "sha256": "92333a27ab814748b8e39d8132396b0874eee15f045ad777c1048e368bc83aae",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__product_feedback_synthesizer.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__product_feedback_synthesizer.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__product_feedback_synthesizer.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__product_feedback_synthesizer.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py"
 }

@@ -24,9 +24,9 @@ no classes, no imports, no executable code.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/legal_helper",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "LegalHelper",
-    "description": "Wildhaven IP-separation strategist. Maps the boundary between Wildhaven (rappter, consumer AI, digital twin, perpetuity) and Microsoft (RAPP engine, business applications). Outputs are structural strategy — NOT legal advice; every reply ends with the disclaimer.",
+    "description": "Maps the IP boundary between Wildhaven and Microsoft product lines as structural strategy, never legal advice; gated stub for a private agent.",
     "author": "Kody Wildfeuer",
     "tags": ["legal", "ip", "wildhaven", "private", "stub", "operator-personal"],
     "category": "productivity",

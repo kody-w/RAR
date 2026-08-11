@@ -1,22 +1,44 @@
 """
-Store Associate Copilot Agent — Retail & CPG Stack
+Store Associate Copilot Agent — a template you are meant to mutate.
 
 Empowers store associates with product lookup, customer assistance
 scripts, daily task management, and performance dashboards.
 
-Version 1.1.0 adds four backward-compatible operations demonstrated by the
-Retail Store Associate Copilot evidence:
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted systems (synthetic data, no credentials, works
+     from anywhere):
+       CRM  https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+            — the product catalog and store cases
+       TEL  https://kody-w.github.io/static-telemetry/api/v1/
+            — sensors, alerts, and 672-point reading series
+     Try: perform(operation="product_lookup", query="Mobile Cart")
+     — with network up, that finds the tenant's live "Mobile Cart M8"
+     (AST-CRT-008) even though it is not in the embedded catalog.
+     Try: perform(operation="task_checklist")
+     — the checklist now ends with the LIVE store alert: the
+     temperature_excursion on Harbor Lights Grocery's refrigeration
+     case R-4 (aisle four), joined by ticket number to CRM case
+     CAS-260138 — the case that was created via the CRM Write API.
+  2. No network? Everything falls back to the embedded demo layer below
+     (PRODUCT_CATALOG / DAILY_TASK_LIST) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     STORE_ASSOCIATE_COPILOT_DATA_URL (CRM) and/or
+     STORE_ASSOCIATE_COPILOT_TEL_URL (telemetry) to your own endpoints
+     (your real Dynamics org, your store IoT platform), or replace
+     _fetch_collection() / _fetch_telemetry() with your own catalog
+     API. The fields the rest of the file needs are listed in
+     _normalize_live_product() — aisle location, on-hand, sizes, and
+     care instructions stay "n/a — enrichment seam" until you wire your
+     store systems.
 
-  - product_intelligence   Current product, inventory, promotion, and sales guidance.
-  - add_on_commission      Accessory, warranty, conversion-tip, and commission guidance.
-  - product_comparison     Alternative comparison and priority-based recommendation.
-  - transaction_preparation
-                           Discounted sale preparation with warranty, financing,
-                           and a simulated transaction receipt.
-
-The new operations use deterministic embedded records and exact-keyed lookup.
-The transaction operation only simulates a Dynamics 365 Commerce write. The
-four original operations and their outputs remain unchanged.
+OPERATIONS
+  product_lookup | customer_assist | task_checklist |
+  performance_dashboard | product_intelligence | add_on_commission |
+  product_comparison | transaction_preparation
+  kwargs: operation (required), query, sku_id, scenario, shift, key,
+  user_input
 """
 
 import sys
@@ -27,16 +49,16 @@ sys.path.insert(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"),
 )
 from basic_agent import BasicAgent
+import json
+import urllib.request
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/store_associate_copilot",
-    "version": "1.1.0",
+    "version": "1.3.0",
     "display_name": "Store Associate Copilot Agent",
     "description": (
-        "Provides store associates with instant product lookup, guided "
-        "customer assistance scripts, daily task checklists, and real-time "
-        "performance dashboards to improve in-store operations."
+        "Gives associates product lookups, scripts, dashboards, and a live refrigeration alert joining simulated telemetry to CRM, with offline fallback."
     ),
     "author": "AIBAST",
     "tags": [
@@ -52,8 +74,147 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export STORE_ASSOCIATE_COPILOT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your commerce client. Downstream
+# code only needs the fields produced by _normalize_live_product().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "STORE_ASSOCIATE_COPILOT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+# Sibling live source: the static-telemetry API. Its refrigeration
+# temperature_excursion alert on Harbor Lights Grocery joins CRM case
+# CAS-260138 (created via the CRM Write API) and surfaces on the task
+# checklist. Override with STORE_ASSOCIATE_COPILOT_TEL_URL.
+TELEMETRY_SOURCE_URL = os.environ.get(
+    "STORE_ASSOCIATE_COPILOT_TEL_URL",
+    "https://kody-w.github.io/static-telemetry/api/v1",
+)
+
+
+def _fetch_telemetry(path, key="value", timeout=6):
+    """Bounded GET against the telemetry API, cached in _LIVE_CACHE by
+    full URL. Returns [] on ANY failure — offline-safe. Reading series
+    are large (672 points each) — fetch them lazily, at most a couple
+    per run."""
+    url = f"{TELEMETRY_SOURCE_URL}/{path}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8")).get(key, [])
+    except Exception:
+        data = []
+    _LIVE_CACHE[url] = data
+    return data
+
+
+def _store_refrigeration_alert():
+    """The live Harbor Lights Grocery temperature_excursion alert
+    joined to its real CRM case (CAS-260138 — created via the CRM
+    Write API), with stats over the case-temperature reading series
+    (ONE lazy 672-point fetch); None when offline."""
+    alert = next(
+        (a for a in _fetch_telemetry("alerts")
+         if a.get("alert_type") == "temperature_excursion"),
+        None,
+    )
+    if not alert:
+        return None
+    case = next(
+        (c for c in _fetch_collection("incidents")
+         if c.get("ticketnumber") == alert.get("crm_case")),
+        None,
+    )
+    points = _fetch_telemetry(
+        f"readings/{alert.get('sensor_id')}", key="points"
+    )
+    values = [
+        p.get("v") for p in points if isinstance(p.get("v"), (int, float))
+    ]
+    return {
+        "alert": alert,
+        "case": case,
+        "latest": values[-1] if values else None,
+        "max": max(values) if values else None,
+        "n": len(values),
+    }
+
+
+def _normalize_live_product(row):
+    """Project a Dynamics product record onto the catalog shape this agent
+    uses. THIS is the contract your replacement data source must meet — a
+    dict with these keys. None means 'not available from the catalog
+    alone' and the renderer labels it as an enrichment seam."""
+    def _f(value):
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None
+    features = [row["description"]] if row.get("description") else []
+    return {
+        "sku_id": row.get("productnumber") or row.get("productid", ""),
+        "name": row.get("name", "Unknown"),
+        "category": row.get(
+            "producttypecode@OData.Community.Display.V1.FormattedValue", "General"
+        ),
+        "brand": "Aster Lane Office Systems (live tenant)",
+        "retail_price": _f(row.get("price")),
+        "sizes": None,            # enrichment seam — wire your PIM
+        "colors": None,           # enrichment seam
+        "materials": None,        # enrichment seam
+        "care": None,             # enrichment seam
+        "location_aisle": None,   # enrichment seam — wire store planogram
+        "location_shelf": None,   # enrichment seam
+        "on_hand": None,          # enrichment seam — wire your POS/WMS
+        "upc": None,              # enrichment seam
+        "features": features,
+        "_live": True,
+    }
+
+
+def _na(value, fmt="{}"):
+    """None = the source system alone can't know this (enrichment seam)."""
+    if value is None:
+        return "n/a — enrichment seam"
+    if isinstance(value, list):
+        return ", ".join(str(v) for v in value)
+    return fmt.format(value)
+
+
 # ---------------------------------------------------------------------------
-# Synthetic Data — Product Catalog
+# EMBEDDED DEMO LAYER (offline fallback) — Product Catalog
 # ---------------------------------------------------------------------------
 
 PRODUCT_CATALOG = {
@@ -649,13 +810,28 @@ class StoreAssociateCopilotAgent(BasicAgent):
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
+    def _search_live_products(self, query):
+        """Search the live tenant catalog; [] when offline or no match."""
+        q = query.lower()
+        results = []
+        for row in _fetch_collection("products"):
+            prod = _normalize_live_product(row)
+            if not prod["sku_id"]:
+                continue
+            if (q in prod["name"].lower()
+                    or q in prod["sku_id"].lower()
+                    or q in prod["category"].lower()):
+                results.append((prod["sku_id"], prod))
+        return results
+
     def _product_lookup(self, **kwargs):
         query = kwargs.get("query", "")
         sku_id = kwargs.get("sku_id", "")
         if sku_id and sku_id in PRODUCT_CATALOG:
             results = [(sku_id, PRODUCT_CATALOG[sku_id])]
         elif query:
-            results = _search_products(query)
+            # Embedded demo catalog first, then the live tenant catalog.
+            results = _search_products(query) or self._search_live_products(query)
         else:
             results = list(PRODUCT_CATALOG.items())
         lines = ["# Product Lookup", ""]
@@ -663,23 +839,33 @@ class StoreAssociateCopilotAgent(BasicAgent):
             lines.append(f"No products found for query: \"{query}\"")
             return "\n".join(lines)
         for sid, prod in results:
+            live = prod.get("_live", False)
             lines.append(f"## {prod['name']} (`{sid}`)")
             lines.append("")
+            if live:
+                lines.append(
+                    f"_Live record from {DATA_SOURCE_URL} "
+                    "(Aster Lane Office Systems)_"
+                )
             lines.append(f"- **Brand:** {prod['brand']}")
             lines.append(f"- **Category:** {prod['category']}")
-            lines.append(f"- **Price:** ${prod['retail_price']:.2f}")
-            lines.append(f"- **Sizes:** {', '.join(prod['sizes'])}")
-            lines.append(f"- **Colors:** {', '.join(prod['colors'])}")
-            lines.append(f"- **Materials:** {prod['materials']}")
-            lines.append(f"- **Care:** {prod['care']}")
-            lines.append(f"- **Location:** Aisle {prod['location_aisle']}, {prod['location_shelf']}")
-            lines.append(f"- **In Stock:** {prod['on_hand']} units")
-            lines.append(f"- **UPC:** {prod['upc']}")
+            lines.append(f"- **Price:** {_na(prod['retail_price'], '${:.2f}')}")
+            lines.append(f"- **Sizes:** {_na(prod['sizes'])}")
+            lines.append(f"- **Colors:** {_na(prod['colors'])}")
+            lines.append(f"- **Materials:** {_na(prod['materials'])}")
+            lines.append(f"- **Care:** {_na(prod['care'])}")
+            if prod["location_aisle"] is None:
+                lines.append("- **Location:** n/a — enrichment seam")
+            else:
+                lines.append(f"- **Location:** Aisle {prod['location_aisle']}, {prod['location_shelf']}")
+            lines.append(f"- **In Stock:** {_na(prod['on_hand'], '{} units')}")
+            lines.append(f"- **UPC:** {_na(prod['upc'])}")
             lines.append("")
-            lines.append("**Key Features:**")
-            for feat in prod["features"]:
-                lines.append(f"  - {feat}")
-            lines.append("")
+            if prod["features"]:
+                lines.append("**Key Features:**")
+                for feat in prod["features"]:
+                    lines.append(f"  - {feat}")
+                lines.append("")
             comp_skus = COMPLEMENTARY_PRODUCTS.get(sid, [])
             if comp_skus:
                 comp_names = [PRODUCT_CATALOG[c]["name"] for c in comp_skus if c in PRODUCT_CATALOG]
@@ -728,6 +914,54 @@ class StoreAssociateCopilotAgent(BasicAgent):
             for i, task in enumerate(tasks, 1):
                 lines.append(f"| {i} | {task['task']} | {task['priority'].upper()} | {task['est_minutes']} min |")
             lines.append("")
+        # Live telemetry overlay — purely additive: everything above is
+        # unchanged, and offline this section simply does not appear.
+        live = _store_refrigeration_alert()
+        if live:
+            alert, case = live["alert"], live["case"]
+            unit = alert.get("unit", "")
+            lines.append("## Live Store Alerts (telemetry overlay)")
+            lines.append("")
+            lines.append(
+                f"- **{alert.get('alert_code', '?')} "
+                f"{alert.get('alert_type', '?')} "
+                f"({str(alert.get('severity', '?')).upper()}):** "
+                f"{alert.get('asset_name', '?')} at "
+                f"{alert.get('account_name', '?')} — "
+                f"{alert.get('title', '')}"
+            )
+            lines.append(
+                f"- **Reading:** peak {alert.get('peak_value')} {unit} vs "
+                f"threshold {alert.get('threshold')} {unit}"
+                + (
+                    f"; latest {live['latest']} {unit}, series max "
+                    f"{live['max']} {unit} ({live['n']} samples @ 15 min)"
+                    if live["latest"] is not None else ""
+                )
+            )
+            if case:
+                case_status = "Open" if case.get("statecode") == 0 else "Resolved"
+                lines.append(
+                    f"- **CRM case:** {case.get('ticketnumber', '?')} — "
+                    f"{case.get('title', '?')} ({case_status}) — the case "
+                    "created via the CRM Write API, joined by ticket number"
+                )
+            else:
+                lines.append(
+                    f"- **CRM case:** {alert.get('crm_case', 'n/a')} "
+                    "(case detail unavailable — CRM offline)"
+                )
+            lines.append(
+                "- **Suggested task:** Check the aisle-four refrigeration "
+                "case, move perishables per SOP, and confirm the case is "
+                "acknowledged."
+            )
+            lines.append("")
+            lines.append(
+                "_Source: live static-telemetry alert + reading series "
+                "joined to the Static Dynamics 365 case by its real ticket "
+                "number._"
+            )
         return "\n".join(lines)
 
     def _performance_dashboard(self, **kwargs):
@@ -866,10 +1100,16 @@ class StoreAssociateCopilotAgent(BasicAgent):
 if __name__ == "__main__":
     agent = StoreAssociateCopilotAgent()
     print("=" * 80)
+    print("EMBEDDED DEMO PRODUCT (works offline)")
     print(agent.perform(operation="product_lookup", sku_id="SKU-1005"))
+    print("\n" + "=" * 80)
+    print("LIVE TENANT PRODUCT (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="product_lookup", query="Mobile Cart"))
     print("\n" + "=" * 80)
     print(agent.perform(operation="customer_assist", scenario="upsell"))
     print("\n" + "=" * 80)
+    print("TASK CHECKLIST + LIVE REFRIGERATION ALERT (telemetry joined to CRM")
+    print("case CAS-260138; overlay disappears offline)")
     print(agent.perform(operation="task_checklist", shift="opening"))
     print("\n" + "=" * 80)
     print(agent.perform(operation="performance_dashboard"))

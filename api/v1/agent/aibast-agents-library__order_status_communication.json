@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__order_status_communication",
   "name": "Order Status Communication Agent",
   "rar_name": "@aibast-agents-library/order_status_communication",
-  "rappid": "rappid:@aibast-agents-library/order_status_communication:6897f94185e93c3b87a4ebc2fbe910b96ade75e39aa07446d6f318b6ac02798a",
-  "_migrated_from": "rappid:@aibast-agents-library/order_status_communication:b26f950dea880e9382190afcf8da3e347ac907d9a79caee6c86aec170e5a4e61", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.1",
+  "rappid": "rappid:@aibast-agents-library/order_status_communication:e869a532990fe2f2ae1a96ebd72a65ee6d1c65d2fa2293c86dc6926540d62e52",
+  "_migrated_from": "rappid:@aibast-agents-library/order_status_communication:6897f94185e93c3b87a4ebc2fbe910b96ade75e39aa07446d6f318b6ac02798a",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/order_status_communication:b26f950dea880e9382190afcf8da3e347ac907d9a79caee6c86aec170e5a4e61",
+    "rappid:@aibast-agents-library/order_status_communication:6897f94185e93c3b87a4ebc2fbe910b96ade75e39aa07446d6f318b6ac02798a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "manufacturing",
   "tags": [
@@ -15,24 +20,24 @@
     "customer-service",
     "manufacturing"
   ],
-  "description": "Tracks manufacturing orders through fulfillment, generates proactive delay notifications, and drafts customer status updates with shipment details.",
+  "description": "Tracks orders and drafts delay and status communications from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 503,
-  "size_kb": 20.7,
-  "sha256": "b26f950dea880e9382190afcf8da3e347ac907d9a79caee6c86aec170e5a4e61",
+  "lines": 615,
+  "size_kb": 26.0,
+  "sha256": "d42aa6d42446646d0f1307cc0b3b813e6b10f59f211da17d529fceee878135b3",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__order_status_communication.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__order_status_communication.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__order_status_communication.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__order_status_communication.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py"
 }

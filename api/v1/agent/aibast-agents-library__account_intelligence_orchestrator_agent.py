@@ -23,9 +23,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/account_intelligence_orchestrator_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Account Intelligence Orchestrator",
-    "description": "Coordinates multi-agent pipelines for 360-degree account intelligence briefings.",
+    "description": "Simulates a multi-agent pipeline for account intelligence briefings, with stage sequencing and status reports over built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "orchestration", "pipeline", "account-intelligence"],
     "category": "b2b_sales",

@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__sharepoint_list_formatter",
+  "name": "SharePoint List Formatter",
+  "rar_name": "@cat-agent-skills/sharepoint_list_formatter",
+  "rappid": "rappid:@cat-agent-skills/sharepoint_list_formatter:1639c8d4c26f7d6ad5381d471b045c23e72b84dc24ff60a193b233099b584064",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "pipeline",
+  "tags": [
+    "sharepoint",
+    "microsoft_365",
+    "productivity",
+    "tables",
+    "data"
+  ],
+  "description": "Turns any SharePoint list data into a clean, consistent markdown table. Dynamic columns based on list type and query, plus a one-click Open link for every row.",
+  "author": "Mathias Salomonsen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.0,
+  "sha256": "8ce15990887997b95ee23d598dab87d7f22a644e38e5dd49d089571a201564f2",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__sharepoint_list_formatter.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__sharepoint_list_formatter.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__sharepoint_list_formatter.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py"
+}

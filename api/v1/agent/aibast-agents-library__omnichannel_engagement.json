@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__omnichannel_engagement",
   "name": "Omnichannel Engagement Agent",
   "rar_name": "@aibast-agents-library/omnichannel_engagement",
-  "rappid": "rappid:@aibast-agents-library/omnichannel_engagement:d2734214e6489e476c343666b305a98bb756f07bc782be97d99a5b139b93f52d",
-  "_migrated_from": "rappid:@aibast-agents-library/omnichannel_engagement:cb25554252f4193b40feed5866395dc1f604afc74beed8e2f0d83a5770e1ed82", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/omnichannel_engagement:62710dd2bbd0da986926a9952aeade476d53557f15ae7ec5290c84b7d9578601",
+  "_migrated_from": "rappid:@aibast-agents-library/omnichannel_engagement:d2734214e6489e476c343666b305a98bb756f07bc782be97d99a5b139b93f52d",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/omnichannel_engagement:cb25554252f4193b40feed5866395dc1f604afc74beed8e2f0d83a5770e1ed82",
+    "rappid:@aibast-agents-library/omnichannel_engagement:d2734214e6489e476c343666b305a98bb756f07bc782be97d99a5b139b93f52d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "b2c_sales",
   "tags": [
@@ -16,24 +21,24 @@
     "campaign",
     "b2c"
   ],
-  "description": "Omnichannel engagement analytics with channel performance, journey mapping, optimization, and campaign attribution.",
+  "description": "Analyzes channel mix, journeys, and campaign attribution from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 384,
-  "size_kb": 19.4,
-  "sha256": "cb25554252f4193b40feed5866395dc1f604afc74beed8e2f0d83a5770e1ed82",
+  "lines": 515,
+  "size_kb": 25.7,
+  "sha256": "8e9c11585b63da13bd5ed59343bed3e9ee9a1d32c5b34d89e4daa7087f3b3d12",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__omnichannel_engagement.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__omnichannel_engagement.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__omnichannel_engagement.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__omnichannel_engagement.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py"
 }

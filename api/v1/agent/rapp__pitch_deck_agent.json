@@ -3,9 +3,14 @@
   "id": "rapp__pitch_deck_agent",
   "name": "PitchDeck",
   "rar_name": "@rapp/pitch_deck_agent",
-  "rappid": "rappid:@rapp/pitch_deck_agent:bd041b2e1d13d31c61a12c2cf12ecd279fbfeaacc201a4dd778b194756776671",
-  "_migrated_from": "rappid:v2:agent:@rapp/pitch_deck_agent:7882b22bae29b0092079a7568dcfc13a", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@rapp/pitch_deck_agent:ac978ad102e2b9609ecc8d98930bec01888b5a5a4be1ddf4e1da6ab0ab559248",
+  "_migrated_from": "rappid:@rapp/pitch_deck_agent:bd041b2e1d13d31c61a12c2cf12ecd279fbfeaacc201a4dd778b194756776671",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@rapp/pitch_deck_agent:7882b22bae29b0092079a7568dcfc13a",
+    "rappid:@rapp/pitch_deck_agent:bd041b2e1d13d31c61a12c2cf12ecd279fbfeaacc201a4dd778b194756776671"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
   "publisher": "@rapp",
   "category": "productivity",
   "tags": [
@@ -16,7 +21,7 @@
     "html",
     "executive"
   ],
-  "description": "Generates a polished HTML executive pitch deck from a topic and thesis. Output: a single self-contained HTML file with exec/rehearse modes, light/dark theme, keyboard/swipe nav.",
+  "description": "Generates a self-contained HTML executive pitch deck from a topic \u2014 one LLM call shapes the narrative, a fixed template assembles the slides.",
   "author": "RAPP / AIBAST",
   "quality_tier": "official",
   "requires_env": [],
@@ -25,15 +30,15 @@
   ],
   "lines": 1087,
   "size_kb": 56.0,
-  "sha256": "ae2d11bc41afefedecf4373a56478bb908d808074d38f09642cafeac646eb9da",
+  "sha256": "ca3c2f325342769f9d799ccb0fc0cd41a23f90d2e6ddfb1dcb7c79d7bdd78145",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-27T21:24:10Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__pitch_deck_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/pitch_deck_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/pitch_deck_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__pitch_deck_agent.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__pitch_deck_agent.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__pitch_deck_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/pitch_deck_agent.py"
 }

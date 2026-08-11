@@ -1,0 +1,304 @@
+name: Notarize Agent Mutation Batch
+
+on:
+  workflow_dispatch:
+    inputs:
+      issues:
+        description: Comma-separated approved agent-submission issue numbers
+        required: true
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: rar-notary-main
+  cancel-in-progress: false
+
+jobs:
+  notarize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require a main-branch dispatch
+        run: test "${{ github.ref }}" = "refs/heads/main"
+
+      - name: Authorize approver
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.actor,
+            });
+            if (!['admin', 'maintain'].includes(data.permission)) {
+              core.setFailed(
+                `@${context.actor} has ${data.permission} permission; maintain or admin is required`
+              );
+            }
+
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install admission test dependencies
+        run: pip install pytest pyyaml
+
+      - name: Synchronize main
+        run: git pull --ff-only origin main
+
+      - name: Fetch approved issue revisions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBERS: ${{ inputs.issues }}
+          REPOSITORY_ID: ${{ github.repository_id }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          import subprocess
+
+          raw = os.environ["ISSUE_NUMBERS"]
+          numbers = [
+              int(value)
+              for value in re.split(r"[\s,]+", raw.strip())
+              if value
+          ]
+          if not numbers or len(numbers) != len(set(numbers)):
+              raise SystemExit("Issue numbers must be a unique, non-empty list")
+          events = []
+          for number in sorted(numbers):
+              issue = json.loads(subprocess.check_output(
+                  [
+                      "gh",
+                      "api",
+                      f"repos/${{ github.repository }}/issues/{number}",
+                  ],
+                  text=True,
+              ))
+              events.append({
+                  "issue": issue,
+                  "repository": {
+                      "id": int(os.environ["REPOSITORY_ID"]),
+                      "full_name": "${{ github.repository }}",
+                  },
+              })
+          json.dump(
+              events,
+              open("/tmp/batch-events.json", "w", encoding="utf-8"),
+          )
+          PY
+
+      - name: Apply exact staged revisions
+        id: apply
+        run: |
+          python scripts/apply_agent_batch.py \
+            --events-path /tmp/batch-events.json \
+            --result-path /tmp/batch-results.json \
+            --approver-id "${{ github.actor_id }}" \
+            --approver-login "${{ github.actor }}"
+
+      - name: Run admission checks
+        run: |
+          set -euo pipefail
+          python security_scan.py
+          python build_registry.py
+          python scripts/generate_holo_cards.py
+          python build_registry.py
+          python scripts/check_url_stability.py --update
+          python scripts/build_pokedex_api.py
+          python scripts/build_static_api.py
+          python scripts/build_front_page.py
+          python -m pytest -q
+
+      - name: Commit notarized batch
+        id: commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBERS: ${{ inputs.issues }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import subprocess
+
+          approved = {
+              event["issue"]["number"]: event["issue"]
+              for event in json.load(
+                  open("/tmp/batch-events.json", encoding="utf-8")
+              )
+          }
+          for number, prior in approved.items():
+              current = json.loads(subprocess.check_output(
+                  [
+                      "gh",
+                      "api",
+                      f"repos/${{ github.repository }}/issues/{number}",
+                  ],
+                  text=True,
+              ))
+              labels = {
+                  label["name"] if isinstance(label, dict) else str(label)
+                  for label in current.get("labels", [])
+              }
+              if current.get("state") != "open" or not {
+                  "approved",
+                  "agent-submission",
+              } <= labels:
+                  raise SystemExit(
+                      f"Issue #{number} is no longer approved before commit"
+                  )
+              prior_hash = hashlib.sha256(
+                  (prior.get("body") or "").encode()
+              ).digest()
+              current_hash = hashlib.sha256(
+                  (current.get("body") or "").encode()
+              ).digest()
+              if prior_hash != current_hash:
+                  raise SystemExit(
+                      f"Issue #{number} changed before batch commit"
+                  )
+          PY
+          git config user.name "RAPP Registry Bot"
+          git config user.email "rapp-bot@users.noreply.github.com"
+          git add agents/ staging/ state/ registry.json cards/ api/v1/ manifest.json
+          test -n "$(git diff --cached --name-only)"
+          git commit \
+            -m "Notarize approved RAR mutation batch" \
+            -m "RAR-Issues: ${ISSUE_NUMBERS}" \
+            -m "RAR-Approved-By: ${{ github.actor_id }}"
+          test "$(git branch --show-current)" = "main"
+          commit_sha=$(git rev-parse HEAD)
+          git push origin HEAD:main
+          echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
+          git fetch origin main
+          git merge-base --is-ancestor "$commit_sha" origin/main
+
+      - name: Refresh post-commit projections
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          python build_registry.py
+          python scripts/check_url_stability.py --update
+          python scripts/build_pokedex_api.py
+          python scripts/build_static_api.py
+          python scripts/build_front_page.py
+          git add registry.json state/published_paths.json api/v1/ manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh registry projections for notarized batch [skip ci]"
+            git push origin HEAD:main
+          fi
+
+      - name: Publish notarization receipts
+        uses: actions/github-script@v7
+        env:
+          COMMIT_SHA: ${{ steps.commit.outputs.commit_sha }}
+        with:
+          script: |
+            const fs = require('fs');
+            const batch = JSON.parse(
+              fs.readFileSync('/tmp/batch-results.json', 'utf8')
+            );
+            for (const result of batch.results) {
+              const marker =
+                `<!-- rar-receipt:v1 revision=${result.revision_id} event=applied -->`;
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: result.issue_number,
+                per_page: 100,
+              });
+              if (!comments.some(comment => (comment.body || '').includes(marker))) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: result.issue_number,
+                  body: `${marker}\n✅ **RAR batch notarization complete.**\n\n` +
+                    `- Agent: \`${result.agent}\`\n` +
+                    `- Revision: \`${result.revision_id}\`\n` +
+                    `- Receipt: \`${result.receipt}\`\n` +
+                    `- Commit: \`${process.env.COMMIT_SHA}\`\n` +
+                    `- Lifecycle: \`${result.status}\`\n\n` +
+                    `The batch committed only after every approved revision and the full admission suite passed.`,
+                });
+              }
+              for (const name of ['pending-review', 'failed', 'conflict']) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: result.issue_number,
+                    name,
+                  });
+                } catch (error) {
+                  if (error.status !== 404) throw error;
+                }
+              }
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: result.issue_number,
+                labels: [
+                  'approved',
+                  result.status === 'deleted' ? 'deleted' : 'notarized',
+                ],
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: result.issue_number,
+                state: 'closed',
+              });
+            }
+
+      - name: Report batch failure
+        if: failure() && steps.apply.outcome == 'success'
+        uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBERS: ${{ inputs.issues }}
+          COMMIT_SHA: ${{ steps.commit.outputs.commit_sha }}
+        with:
+          script: |
+            const numbers = [...new Set(
+              process.env.ISSUE_NUMBERS
+                .split(/[\s,]+/)
+                .filter(Boolean)
+                .map(Number)
+                .filter(Number.isInteger)
+            )];
+            for (const issueNumber of numbers) {
+              const { data: issue } = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+              });
+              const labels = issue.labels.map(label => label.name || label);
+              if (
+                issue.state === 'closed' &&
+                (labels.includes('notarized') || labels.includes('deleted'))
+              ) {
+                continue;
+              }
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                labels: ['failed'],
+              });
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: process.env.COMMIT_SHA
+                  ? `⚠️ Batch commit \`${process.env.COMMIT_SHA}\` was published, but projection or Issue reconciliation failed. Repository receipts remain authoritative; rerun reconciliation without restaging bytes.`
+                  : '❌ Atomic batch admission failed before publication. No batch commit was published; correct the failure and rerun the same approved revisions.',
+              });
+            }

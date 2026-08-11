@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__brand_voice_pass",
+  "name": "Brand Voice Pass",
+  "rar_name": "@cat-agent-skills/brand_voice_pass",
+  "rappid": "rappid:@cat-agent-skills/brand_voice_pass:94e423414e334076d614e523d99797c3699573165bb43f0f5c7d7eaaa048598b",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "writing",
+    "content",
+    "voice",
+    "authoring",
+    "productivity"
+  ],
+  "description": "Rewrite drafts into a configurable house style, preserving meaning while removing generic AI phrasing.",
+  "author": "Simon Owen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 8.8,
+  "sha256": "3635849b3dcd5b55c5f9f9d6f3ec7e7a977033ca09ab57020fe9b172e8901cf4",
+  "has_card": false,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__brand_voice_pass.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/brand_voice_pass_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__brand_voice_pass.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__brand_voice_pass.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/brand_voice_pass_agent.py"
+}

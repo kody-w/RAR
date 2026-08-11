@@ -3,9 +3,14 @@
   "id": "rapp__drift",
   "name": "DriftAgent",
   "rar_name": "@rapp/drift",
-  "rappid": "rappid:@rapp/drift:8ed7405158cbf360b3fe5b5c5d648eaf73c7d0830b7a593d8a7ee4f62362358c",
-  "_migrated_from": "rappid:@rapp/drift:6a8ba760bac1f79e922616fdc9b8c237c213f16fc201d327d4cd8190b942e3d3", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@rapp/drift:4111570a6821186ad1f54d806344ee23e6d116b1c3a7b7fd4664055c2e5824e6",
+  "_migrated_from": "rappid:@rapp/drift:8ed7405158cbf360b3fe5b5c5d648eaf73c7d0830b7a593d8a7ee4f62362358c",
+  "_migrated_from_all": [
+    "rappid:@rapp/drift:6a8ba760bac1f79e922616fdc9b8c237c213f16fc201d327d4cd8190b942e3d3",
+    "rappid:@rapp/drift:8ed7405158cbf360b3fe5b5c5d648eaf73c7d0830b7a593d8a7ee4f62362358c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
   "publisher": "@rapp",
   "category": "core",
   "tags": [
@@ -16,24 +21,24 @@
     "alignment",
     "audit"
   ],
-  "description": "Troll every canonical RAPP source for spec drift and report each conflict with which source wins (per the ecosystem authority order) and how to reconcile it.",
+  "description": "Fetches canonical RAPP spec sources from GitHub, detects schema-version drift, and reports which source wins per the fixed authority order.",
   "author": "Kody Wildfeuer",
   "quality_tier": "official",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 687,
-  "size_kb": 36.4,
-  "sha256": "51de403c7e8c6a4c543c98170e2dc119c3c05a367233c60904c0ebdca904fa87",
+  "lines": 685,
+  "size_kb": 36.3,
+  "sha256": "00ffb4b96beb3024e1b412caf5d2191a84846e73091132eefa30ffe6c2c5e31c",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-06-09T21:40:07-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__drift.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/drift_agent.py"
 }

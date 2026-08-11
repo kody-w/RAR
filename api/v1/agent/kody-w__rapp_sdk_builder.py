@@ -48,12 +48,9 @@ except Exception:                               # dropped in / run standalone
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_sdk_builder",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "RAPP SDK Builder",
-    "description": "A hotloadable RAPP toolkit: mint compliant rappids, build/verify frames, "
-                   "content-address values, scaffold organism seeds, and lint any public repo in "
-                   "the stack for compliance. Build with RAPP and stay synced against the public "
-                   "GitHubs — and back again. Builds on the public RAPP standard (kody-w/rapp-1).",
+    "description": "Mints rappids, builds and verifies rapp/1 frames, scaffolds organism seeds, and lints public GitHub repos for RAPP spec compliance.",
     "author": "Kody Wildfeuer",
     "tags": ["starter", "rapp", "sdk", "identity", "frame", "builder"],
     "category": "devtools",

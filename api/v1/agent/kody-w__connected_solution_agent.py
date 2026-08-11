@@ -76,15 +76,9 @@ Self-contained: standard library only. Drop into any RAPP agents/ directory.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/connected_solution_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "ConnectedSolution",
-    "description": "Turn any agent stack (BasicAgent *.py files) into ONE import-ready "
-                   "Microsoft Copilot Studio connected-agents solution: an orchestrator plus one "
-                   "connected sub-agent per agent, each with a deterministic topic that runs the "
-                   "agent's perform() logic on synthetic stand-in data and declares its perform() "
-                   "params as typed inputs. Optionally imports AND publishes into your own Copilot "
-                   "Studio (Dataverse) environment via the Web API (no pac CLI; credentials read only "
-                   "from env/settings, never chat).",
+    "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API.",
     "author": "Kody Wildfeuer",
     "tags": ["copilot_studio", "connected_agents", "power_platform", "deploy", "integration", "converter"],
     "category": "integrations",
