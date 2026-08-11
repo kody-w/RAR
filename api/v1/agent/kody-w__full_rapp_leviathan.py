@@ -81,7 +81,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/full_rapp_leviathan",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "FullRappLeviathan",
     "description": (
         "Compiles and assesses public-safe Full RAPP Leviathan blueprints "
@@ -411,7 +411,241 @@ def _text(
     return result
 
 
-def _public_text(value: Any, label: str, maximum: int) -> str:
+def _parse_ipv6(candidate: str):
+    normalized = candidate.split("%", 1)[0]
+    try:
+        address = ipaddress.ip_address(normalized)
+    except ValueError:
+        return None
+    return address if address.version == 6 else None
+
+
+def _parse_legacy_ipv4_candidates(candidate: str):
+    parts = candidate.lower().split(".")
+    if not 1 <= len(parts) <= 4:
+        return set()
+    options = []
+    for part in parts:
+        try:
+            if part.startswith("0x"):
+                values = {int(part[2:], 16)}
+            elif len(part) > 1 and part.startswith("0"):
+                if not re.fullmatch(r"[0-9]+", part):
+                    return set()
+                values = {int(part, 10)}
+                if re.fullmatch(r"0[0-7]+", part):
+                    values.add(int(part, 8))
+            elif re.fullmatch(r"[0-9]+", part):
+                values = {int(part, 10)}
+            else:
+                return set()
+        except ValueError:
+            return set()
+        options.append(values)
+
+    limits = {
+        1: (0xFFFFFFFF,),
+        2: (0xFF, 0xFFFFFF),
+        3: (0xFF, 0xFF, 0xFFFF),
+        4: (0xFF, 0xFF, 0xFF, 0xFF),
+    }[len(options)]
+    combinations = [()]
+    for values in options:
+        combinations = [
+            previous + (value,)
+            for previous in combinations
+            for value in values
+        ]
+    addresses = set()
+    for values in combinations:
+        if any(
+            value > limit
+            for value, limit in zip(values, limits)
+        ):
+            continue
+        if len(values) == 1:
+            packed = values[0]
+        elif len(values) == 2:
+            packed = (values[0] << 24) | values[1]
+        elif len(values) == 3:
+            packed = (
+                (values[0] << 24)
+                | (values[1] << 16)
+                | values[2]
+            )
+        else:
+            packed = (
+                (values[0] << 24)
+                | (values[1] << 16)
+                | (values[2] << 8)
+                | values[3]
+            )
+        addresses.add(ipaddress.ip_address(packed))
+    return addresses
+
+
+def _parse_legacy_ipv4(candidate: str):
+    return next(
+        iter(_parse_legacy_ipv4_candidates(candidate)),
+        None,
+    )
+
+
+def _legacy_ipv4_addresses(value: str):
+    pattern = re.compile(
+        r"(?i)(?<![0-9a-z])"
+        r"(?:0x[0-9a-f]+|[0-9]+)"
+        r"(?:\.(?:0x[0-9a-f]+|[0-9]+)){0,3}"
+        r"(?![0-9a-z])"
+    )
+    for match in pattern.finditer(value):
+        candidate = match.group()
+        addresses = _parse_legacy_ipv4_candidates(candidate)
+        if (
+            "." not in candidate
+            and not candidate.lower().startswith("0x")
+            and not any(
+                int(address) >= (1 << 24)
+                for address in addresses
+            )
+        ):
+            continue
+        for address in addresses:
+            yield candidate, address
+
+
+def _is_public_ip(address) -> bool:
+    return bool(
+        address.is_global
+        and not address.is_private
+        and not address.is_loopback
+        and not address.is_link_local
+        and not address.is_multicast
+        and not address.is_reserved
+        and not address.is_unspecified
+        and not getattr(address, "is_site_local", False)
+    )
+
+
+def _validate_public_dns_hostname(hostname: str, label: str) -> None:
+    if (
+        len(hostname) > 253
+        or hostname.endswith(".")
+        or "." not in hostname
+        or hostname == "localhost"
+        or hostname.endswith((".local", ".internal", ".lan", ".home"))
+        or hostname == "home.arpa"
+        or hostname.endswith(".home.arpa")
+        or _parse_legacy_ipv4(hostname) is not None
+    ):
+        raise LeviathanError(f"{label} contains an internal hostname")
+    for part in hostname.split("."):
+        if not re.fullmatch(
+            r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?",
+            part,
+        ):
+            raise LeviathanError(
+                f"{label} contains an invalid public hostname"
+            )
+
+
+def _ipv6_addresses(value: str):
+    seen = set()
+    pattern = re.compile(
+        r"(?i)[0-9a-f:.]+(?:%[0-9a-z_.-]+)?"
+    )
+    for match in pattern.finditer(value):
+        raw = match.group()
+        bracketed = (
+            match.start() > 0
+            and match.end() < len(value)
+            and value[match.start() - 1] == "["
+            and value[match.end()] == "]"
+        )
+        standalone_unspecified = (
+            raw == "::"
+            and (
+                match.start() == 0
+                or not (
+                    value[match.start() - 1].isalnum()
+                    or value[match.start() - 1] == "_"
+                )
+            )
+            and (
+                match.end() == len(value)
+                or not (
+                    value[match.end()].isalnum()
+                    or value[match.end()] == "_"
+                )
+            )
+        )
+        if (
+            raw.count(":") < 2
+            or (
+                not re.search(r"[0-9a-f]", raw, re.I)
+                and not bracketed
+                and not standalone_unspecified
+            )
+        ):
+            continue
+        trimmed = raw.rstrip(".,!?")
+        full = _parse_ipv6(trimmed)
+        embedded = (
+            match.start() > 0
+            and (
+                value[match.start() - 1].isalnum()
+                or value[match.start() - 1] == "_"
+            )
+        )
+        if full is not None and not embedded:
+            key = str(full)
+            if key not in seen:
+                seen.add(key)
+                yield full
+            continue
+
+        boundaries = {0, len(trimmed)}
+        for index, character in enumerate(trimmed):
+            if character == ":":
+                boundaries.update({index, index + 1})
+        forms = set()
+        ordered = sorted(boundaries)
+        for position, start in enumerate(ordered):
+            for end in ordered[position + 1:position + 22]:
+                if end - start > 80:
+                    break
+                fragment = trimmed[start:end]
+                forms.update({
+                    fragment,
+                    fragment.lstrip(":"),
+                    fragment.rstrip(":"),
+                    fragment.strip(":"),
+                })
+        for candidate in forms:
+            if candidate.count(":") < 2:
+                continue
+            lowered = candidate.lower()
+            if (
+                not any(character.isdigit() for character in candidate)
+                and not lowered.startswith(("fc", "fd", "fe"))
+            ):
+                continue
+            address = _parse_ipv6(candidate)
+            if address is None:
+                continue
+            key = str(address)
+            if key not in seen:
+                seen.add(key)
+                yield address
+
+
+def _public_text(
+    value: Any,
+    label: str,
+    maximum: int,
+    *,
+    scan_ip_literals: bool = True,
+) -> str:
     result = _text(value, label, maximum=maximum)
     if SENSITIVE.search(result):
         raise LeviathanError(
@@ -425,21 +659,35 @@ def _public_text(value: Any, label: str, maximum: int) -> str:
         )
     ):
         raise LeviathanError(f"{label} contains private topology")
-    for candidate in re.findall(
-        r"(?<![0-9])(?:[0-9]{1,3}\.){3}[0-9]{1,3}(?![0-9])",
-        result,
-    ):
-        try:
-            address = ipaddress.ip_address(candidate)
-        except ValueError:
-            continue
-        if not address.is_global:
-            raise LeviathanError(f"{label} contains private topology")
+    if scan_ip_literals:
+        for candidate in re.findall(
+            r"(?<![0-9])(?:[0-9]{1,3}\.){3}[0-9]{1,3}(?![0-9])",
+            result,
+        ):
+            try:
+                address = ipaddress.ip_address(candidate)
+            except ValueError:
+                continue
+            if not _is_public_ip(address):
+                raise LeviathanError(f"{label} contains private topology")
+        for candidate, address in _legacy_ipv4_addresses(result):
+            if candidate == str(address):
+                continue
+            if not _is_public_ip(address):
+                raise LeviathanError(f"{label} contains private topology")
+        for address in _ipv6_addresses(result):
+            if not _is_public_ip(address):
+                raise LeviathanError(f"{label} contains private topology")
     return result
 
 
 def _public_surface(value: Any, label: str) -> str:
-    result = _public_text(value, label, 2000)
+    result = _public_text(
+        value,
+        label,
+        2000,
+        scan_ip_literals=False,
+    )
     if result.startswith("urn:rapp:surface:") and re.fullmatch(
         r"urn:rapp:surface:[a-z0-9][a-z0-9._-]{2,127}",
         result,
@@ -449,9 +697,49 @@ def _public_surface(value: Any, label: str) -> str:
         raise LeviathanError(
             f"{label} must be a public HTTPS URL or RAPP surface URN"
         )
+    if "\\" in result or any(
+        ord(character) < 32 or ord(character) == 127
+        for character in result
+    ):
+        raise LeviathanError(
+            f"{label} URL cannot contain controls or backslashes"
+        )
     parsed = urlsplit(result)
     if parsed.scheme != "https" or not parsed.hostname:
         raise LeviathanError(f"{label} must use a public HTTPS URL")
+    if (
+        "@" in parsed.netloc
+        or "?" in result
+        or "#" in result
+        or parsed.netloc.endswith(":")
+    ):
+        raise LeviathanError(
+            f"{label} URL contains an empty or forbidden component"
+        )
+    authority = parsed.netloc
+    if authority.startswith("[") and not re.fullmatch(
+        r"\[[0-9a-fA-F:.]+\](?::[0-9]+)?",
+        authority,
+    ):
+        raise LeviathanError(
+            f"{label} URL contains an unsupported bracketed host"
+        )
+    if "%" in parsed.netloc:
+        raise LeviathanError(
+            f"{label} URL hostname cannot contain percent escapes"
+        )
+    try:
+        parsed.netloc.encode("ascii")
+    except UnicodeEncodeError as error:
+        raise LeviathanError(
+            f"{label} URL authority must use ASCII or punycode"
+        ) from error
+    try:
+        parsed.port
+    except ValueError as error:
+        raise LeviathanError(
+            f"{label} URL contains an invalid port"
+        ) from error
     if (
         parsed.username
         or parsed.password
@@ -467,32 +755,43 @@ def _public_surface(value: Any, label: str) -> str:
     except ValueError:
         address = None
     if address is not None:
-        if not address.is_global:
+        if not _is_public_ip(address):
             raise LeviathanError(
                 f"{label} contains a non-public IP address"
             )
         return result
+    if _parse_legacy_ipv4(hostname) is not None:
+        raise LeviathanError(f"{label} contains a numeric private host")
     if re.fullmatch(r"(?:0x[0-9a-f]+|[0-9.]+)", hostname):
         raise LeviathanError(f"{label} contains a numeric private host")
-    if (
-        hostname == "localhost"
-        or hostname.endswith((".local", ".internal", ".lan", ".home"))
-        or "." not in hostname
-    ):
-        raise LeviathanError(f"{label} contains an internal hostname")
+    _validate_public_dns_hostname(hostname, label)
     return result
 
 
 def _public_reference(value: Any, label: str) -> str:
-    result = _public_text(value, label, 2000)
+    result = _public_text(
+        value,
+        label,
+        2000,
+        scan_ip_literals=False,
+    )
     if re.fullmatch(r"urn:sha256:[0-9a-f]{64}", result):
         return result
     return _public_surface(result, label)
 
 
 def _public_verifier(value: Any) -> str:
-    result = _public_text(value, "verifier", 1000)
-    if re.fullmatch(r"did:(?:web|key):[A-Za-z0-9._:%-]+", result):
+    result = _public_text(
+        value,
+        "verifier",
+        1000,
+        scan_ip_literals=False,
+    )
+    if re.fullmatch(r"did:key:[A-Za-z0-9._-]+", result):
+        return result
+    if re.fullmatch(r"did:web:[A-Za-z0-9.-]+", result):
+        hostname = result.removeprefix("did:web:")
+        _validate_public_dns_hostname(hostname.lower(), "verifier")
         return result
     return _public_surface(result, "verifier")
 
@@ -665,6 +964,7 @@ def _evidence_valid(
         and value.get("claim") == claim
         and isinstance(value.get("reference"), str)
         and bool(value["reference"].strip())
+        and value["reference"] == value["reference"].strip()
         and _is_public_reference(value["reference"])
         and isinstance(value.get("artifact_sha256"), str)
         and bool(re.fullmatch(r"[0-9a-f]{64}", value["artifact_sha256"]))

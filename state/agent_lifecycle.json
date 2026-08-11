@@ -3423,14 +3423,14 @@
     },
     "@kody-w/full_rapp_leviathan": {
       "status": "active",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "quality_tier": "community",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "canonical_path": "agents/@kody-w/full_rapp_leviathan_agent.py",
-      "sha256": "1ff67f88c94de822aecfbbd6083a8c233f6b2f2c996ba60ebc313868e8eae193",
-      "latest_receipt": "rar_e9f0eed3955ce20306758f2b7bda61bf7a645b9175c6c611268ea1c6cd79cc4d",
-      "updated_at": "2026-08-11T09:42:00.494853+00:00"
+      "sha256": "78dac24c84eeca02f8e40144562d9ace2dd4da28b8fd7ca8f78b8b075feaad5a",
+      "latest_receipt": "rar_4ed7782f3454ec64bc31c704562b27359d71344cf3e4366e4e87d8e3a046c6a2",
+      "updated_at": "2026-08-11T13:33:22.490817+00:00"
     },
     "@kody-w/wp_publish_agent": {
       "status": "active",
@@ -3445,5 +3445,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-11T09:49:09.688445+00:00"
+  "updated_at": "2026-08-11T13:33:22.490817+00:00"
 }

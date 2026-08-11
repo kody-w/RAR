@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-11T10:14:21.455546+00:00",
+  "generated_at": "2026-08-11T13:34:33.367896+00:00",
   "stats": {
     "total_agents": 292,
     "total_swarms": 82,
@@ -13596,7 +13596,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/full_rapp_leviathan",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "display_name": "FullRappLeviathan",
       "description": "Compiles and assesses public-safe Full RAPP Leviathan blueprints across identity, intelligence, production, truth, and commerce.",
       "author": "kody-w",
@@ -13627,15 +13627,15 @@
       },
       "_file": "agents/@kody-w/full_rapp_leviathan_agent.py",
       "_install_filename": "rar_kody_w_full_rapp_leviathan_agent.py",
-      "_sha256": "1ff67f88c94de822aecfbbd6083a8c233f6b2f2c996ba60ebc313868e8eae193",
+      "_sha256": "78dac24c84eeca02f8e40144562d9ace2dd4da28b8fd7ca8f78b8b075feaad5a",
       "_lifecycle": "notarized",
-      "_receipt": "rar_e9f0eed3955ce20306758f2b7bda61bf7a645b9175c6c611268ea1c6cd79cc4d",
+      "_receipt": "rar_4ed7782f3454ec64bc31c704562b27359d71344cf3e4366e4e87d8e3a046c6a2",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 534,
+        "issue": 549,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
@@ -13650,8 +13650,8 @@
         ]
       },
       "_seed": 547613733431553905,
-      "_size_kb": 39.7,
-      "_lines": 1246,
+      "_size_kb": 48.5,
+      "_lines": 1546,
       "_has_card": true,
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",

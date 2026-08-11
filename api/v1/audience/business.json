@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-11T10:14:22Z",
+  "generated": "2026-08-11T13:33:44Z",
   "count": 289,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
@@ -8034,7 +8034,7 @@
       "name": "@kody-w/full_rapp_leviathan",
       "display_name": "FullRappLeviathan",
       "description": "Compiles and assesses public-safe Full RAPP Leviathan blueprints across identity, intelligence, production, truth, and commerce.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "publisher": "@kody-w",
       "author": "kody-w",
       "category": "core",
@@ -8058,11 +8058,11 @@
         "path": "agents/@kody-w/full_rapp_leviathan_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/full_rapp_leviathan_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/full_rapp_leviathan_agent.py",
-        "sha256": "1ff67f88c94de822aecfbbd6083a8c233f6b2f2c996ba60ebc313868e8eae193"
+        "sha256": "78dac24c84eeca02f8e40144562d9ace2dd4da28b8fd7ca8f78b8b075feaad5a"
       },
       "stats": {
-        "lines": 1246,
-        "size_kb": 39.7,
+        "lines": 1546,
+        "size_kb": 48.5,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
