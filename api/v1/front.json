@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-11T17:31:30Z",
+  "generated": "2026-08-11T17:32:16Z",
   "counts": {
     "native": 294,
     "aggregated": 0,
@@ -57,12 +57,12 @@
     "median_fill": "A component with no signal is filled with the median of every row that does carry it, and the row lists that component in `scored_at_median`. Absence of signal is not negative signal.",
     "order": "Rows are ordered by `origin_percentile` — position within their own origin — not by raw score, because a score is only comparable inside its origin. Sorting the raw numbers globally would hand the whole top of the page to whichever origin has the more generous signal distribution.",
     "deduplication": "A ref found in both the registry and a crawled index is ONE row. The skill toaster materialises index entries into real hosted agents, so the hosted agent is canonical and the index row becomes its provenance: `source` is populated and the source's own counters ride in `signals.source`, never added to RAR's.",
-    "clock": "Ages are measured from the newest timestamp in the inputs (2026-08-11T17:28:15Z), not from build time, so the same inputs always produce the same ages.",
+    "clock": "Ages are measured from the newest timestamp in the inputs (2026-08-11T17:32:02Z), not from build time, so the same inputs always produce the same ages.",
     "medians": {
       "community": 0.0,
       "curator": 0.7804,
       "depth": 0.928,
-      "freshness": 0.5878,
+      "freshness": 0.5895,
       "reach": 0.5,
       "tier": 0.55
     }
@@ -160,7 +160,7 @@
         "community": 0.2958,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.8914,
+        "freshness": 0.8913,
         "tier": 0.55
       },
       "scores_on": [
@@ -1715,6 +1715,69 @@
     },
     {
       "rank": 27,
+      "ref": "@kody-w/factory",
+      "title": "RAPP to Copilot Studio Factory",
+      "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
+      "origin": "native",
+      "category": "pipeline",
+      "tags": [
+        "copilot_studio",
+        "factory",
+        "pipeline",
+        "deployment",
+        "parity"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffactory",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/factory_agent.py",
+      "source": null,
+      "score": 61.4,
+      "origin_rank": 27,
+      "origin_size": 294,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 0.983,
+        "freshness": 1.0,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community",
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 0,
+          "lines": 487,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "newest in the registry",
+        "487 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 28,
       "ref": "@rapp/fleet_commander",
       "title": "FleetCommander",
       "description": "Builds new RAR agents from a natural-language spec — plans, writes pytest tests, generates code via the Copilot CLI, iterates, and publishes.",
@@ -1733,7 +1796,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/fleet_commander_agent.py",
       "source": null,
       "score": 61.3,
-      "origin_rank": 27,
+      "origin_rank": 28,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1777,7 +1840,7 @@
       ]
     },
     {
-      "rank": 28,
+      "rank": 29,
       "ref": "@rapp/learn_new",
       "title": "LearnNew",
       "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
@@ -1795,7 +1858,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
       "source": null,
       "score": 61.2,
-      "origin_rank": 28,
+      "origin_rank": 29,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1839,7 +1902,7 @@
       ]
     },
     {
-      "rank": 29,
+      "rank": 30,
       "ref": "@rapp/swarm_factory_agent",
       "title": "SwarmFactory",
       "description": "Generates, builds, installs, and uninstalls RAPP swarms — converging local agents into single shareable .py files via the RAPP Store catalog.",
@@ -1857,7 +1920,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/swarm_factory_agent.py",
       "source": null,
       "score": 61.2,
-      "origin_rank": 29,
+      "origin_rank": 30,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1901,7 +1964,7 @@
       ]
     },
     {
-      "rank": 30,
+      "rank": 31,
       "ref": "@kody-w/prompt_extractor",
       "title": "Prompt Extractor",
       "description": "Extract the prompts shown on screen in a video by OCRing it frame by frame, merging scrolled and repeated views into one entry each, so prompts demoed in a screen recording do not have to be transcribed by hand.",
@@ -1919,7 +1982,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prompt_extractor.py",
       "source": null,
       "score": 61.0,
-      "origin_rank": 30,
+      "origin_rank": 31,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -1963,7 +2026,7 @@
       ]
     },
     {
-      "rank": 31,
+      "rank": 32,
       "ref": "@rapp/basic_agent",
       "title": "BasicAgent",
       "description": "Provides the base class every RAPP agent inherits from; stores the agent's name and metadata, with no behavior of its own.",
@@ -1979,7 +2042,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/basic_agent.py",
       "source": null,
       "score": 60.7,
-      "origin_rank": 31,
+      "origin_rank": 32,
       "origin_size": 294,
       "components": {
         "community": 0.2958,
@@ -2021,7 +2084,7 @@
       ]
     },
     {
-      "rank": 32,
+      "rank": 33,
       "ref": "@kody-w/project_tracker_agent",
       "title": "Project Tracker",
       "description": "Local-first tracker for a portfolio of AI-agent projects and their MVP statements. Speaks the aibast-agents-library project-tracker web tool's native JSON (projectTrackerData) so data round-trips via its JSON import/export. Add/update projects, set the MVP use case/description/timeline, register agents, and export a file ready to merge-import into the web tool. Data stays on this device — never in a repo or egg.",
@@ -2041,7 +2104,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/project_tracker_agent.py",
       "source": null,
       "score": 60.2,
-      "origin_rank": 32,
+      "origin_rank": 33,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2085,7 +2148,7 @@
       ]
     },
     {
-      "rank": 33,
+      "rank": 34,
       "ref": "@kody-w/rapp_skill_bridge_agent",
       "title": "RAPP Skill Bridge",
       "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills.",
@@ -2106,7 +2169,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_skill_bridge_agent.py",
       "source": null,
       "score": 60.1,
-      "origin_rank": 33,
+      "origin_rank": 34,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2150,7 +2213,7 @@
       ]
     },
     {
-      "rank": 34,
+      "rank": 35,
       "ref": "@rapp/store_navigator_agent",
       "title": "StoreNavigator",
       "description": "Lists, searches, compares, and recommends rapplications from the RAPP_Store catalog over HTTP, with keyword scoring when no LLM is available.",
@@ -2168,7 +2231,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
       "source": null,
       "score": 60.1,
-      "origin_rank": 34,
+      "origin_rank": 35,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2212,7 +2275,7 @@
       ]
     },
     {
-      "rank": 35,
+      "rank": 36,
       "ref": "@kody-w/launch_to_public_agent",
       "title": "Launch to Public",
       "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
@@ -2231,7 +2294,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
       "source": null,
       "score": 59.9,
-      "origin_rank": 35,
+      "origin_rank": 36,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2275,7 +2338,7 @@
       ]
     },
     {
-      "rank": 36,
+      "rank": 37,
       "ref": "@kody-w/plant_seed_agent",
       "title": "Plant Seed",
       "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
@@ -2295,7 +2358,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
       "source": null,
       "score": 59.9,
-      "origin_rank": 36,
+      "origin_rank": 37,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2339,7 +2402,7 @@
       ]
     },
     {
-      "rank": 37,
+      "rank": 38,
       "ref": "@rapp/egg_hatcher",
       "title": "EggHatcher",
       "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
@@ -2358,7 +2421,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
       "source": null,
       "score": 59.2,
-      "origin_rank": 37,
+      "origin_rank": 38,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2402,7 +2465,7 @@
       ]
     },
     {
-      "rank": 38,
+      "rank": 39,
       "ref": "@kody-w/copilot_studio_forge_agent",
       "title": "CopilotStudioForge",
       "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines — bundles, topics, solutions, and exports.",
@@ -2423,7 +2486,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_forge_agent.py",
       "source": null,
       "score": 58.9,
-      "origin_rank": 38,
+      "origin_rank": 39,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2467,7 +2530,7 @@
       ]
     },
     {
-      "rank": 39,
+      "rank": 40,
       "ref": "@kody-w/microsoft_deck_studio_agent",
       "title": "Microsoft Deck Studio",
       "description": "Generate a polished, Microsoft-Fluent-styled PowerPoint (.pptx) deck from a JSON spec of slides and layouts.",
@@ -2489,7 +2552,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/microsoft_deck_studio_agent.py",
       "source": null,
       "score": 58.6,
-      "origin_rank": 39,
+      "origin_rank": 40,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2533,7 +2596,7 @@
       ]
     },
     {
-      "rank": 40,
+      "rank": 41,
       "ref": "@wildhaven/penumbra_agent",
       "title": "Penumbra",
       "description": "Returns any input as twin lines — the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls.",
@@ -2553,7 +2616,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
       "source": null,
       "score": 58.3,
-      "origin_rank": 40,
+      "origin_rank": 41,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2597,7 +2660,7 @@
       ]
     },
     {
-      "rank": 41,
+      "rank": 42,
       "ref": "@kody-w/flight_recorder",
       "title": "FlightRecorder",
       "description": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls.",
@@ -2619,7 +2682,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/flight_recorder_agent.py",
       "source": null,
       "score": 58.2,
-      "origin_rank": 41,
+      "origin_rank": 42,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2663,7 +2726,7 @@
       ]
     },
     {
-      "rank": 42,
+      "rank": 43,
       "ref": "@kody-w/chain_composer_agent",
       "title": "Chain Composer",
       "description": "Composes multi-primitive RAPP chain plans from a natural-language prompt via the claude CLI, writing a plan envelope and reviewable bash script.",
@@ -2682,7 +2745,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
       "source": null,
       "score": 58.1,
-      "origin_rank": 42,
+      "origin_rank": 43,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2726,7 +2789,7 @@
       ]
     },
     {
-      "rank": 43,
+      "rank": 44,
       "ref": "@kody-w/manage_memory_agent",
       "title": "ManageMemory",
       "description": "Stores facts, preferences, insights, and tasks to persistent memory.",
@@ -2743,7 +2806,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/manage_memory_agent.py",
       "source": null,
       "score": 58.1,
-      "origin_rank": 43,
+      "origin_rank": 44,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2787,7 +2850,7 @@
       ]
     },
     {
-      "rank": 44,
+      "rank": 45,
       "ref": "@kody-w/workiq",
       "title": "WorkIQ",
       "description": "Queries Microsoft 365 data — email, calendar, SharePoint/OneDrive, Teams, people — by shelling out to the workiq CLI with Entra ID auth.",
@@ -2807,7 +2870,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/workiq_agent.py",
       "source": null,
       "score": 58.0,
-      "origin_rank": 44,
+      "origin_rank": 45,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2851,7 +2914,7 @@
       ]
     },
     {
-      "rank": 45,
+      "rank": 46,
       "ref": "@kody-w/deal_desk_agent",
       "title": "DealDesk",
       "description": "Produces templated deal briefings, health scores, and competitive analyses for a named company, listing sales agents from the live RAR registry.",
@@ -2872,7 +2935,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/deal_desk_agent.py",
       "source": null,
       "score": 57.9,
-      "origin_rank": 45,
+      "origin_rank": 46,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2916,7 +2979,7 @@
       ]
     },
     {
-      "rank": 46,
+      "rank": 47,
       "ref": "@kody-w/bond_rhythm_agent",
       "title": "Bond Pulse",
       "description": "Audits local-versus-global RAPP repo drift, classifies push/pull direction, suggests operator actions, and records rhythm bond events.",
@@ -2935,7 +2998,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
       "source": null,
       "score": 57.3,
-      "origin_rank": 46,
+      "origin_rank": 47,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -2979,7 +3042,7 @@
       ]
     },
     {
-      "rank": 47,
+      "rank": 48,
       "ref": "@kody-w/wp_publish_agent",
       "title": "WordPress Publish",
       "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored.",
@@ -2997,13 +3060,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/wp_publish_agent.py",
       "source": null,
       "score": 57.2,
-      "origin_rank": 47,
+      "origin_rank": 48,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7067,
-        "freshness": 0.9982,
+        "freshness": 0.9981,
         "tier": 0.55
       },
       "scores_on": [
@@ -3042,7 +3105,7 @@
       ]
     },
     {
-      "rank": 48,
+      "rank": 49,
       "ref": "@rapp/commons_post",
       "title": "CommonsPost",
       "description": "Composes a canonical rapp-commons-event/1.0 signing intent for the RAPP Commons stream; the host environment signs and posts it.",
@@ -3060,7 +3123,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
       "source": null,
       "score": 57.1,
-      "origin_rank": 48,
+      "origin_rank": 49,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3104,7 +3167,7 @@
       ]
     },
     {
-      "rank": 49,
+      "rank": 50,
       "ref": "@wildhaven/ceo_agent",
       "title": "CEO Agent",
       "description": "Answers as Molly Wildfeuer's Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
@@ -3124,7 +3187,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/ceo_agent.py",
       "source": null,
       "score": 57.1,
-      "origin_rank": 49,
+      "origin_rank": 50,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3166,7 +3229,7 @@
       ]
     },
     {
-      "rank": 50,
+      "rank": 51,
       "ref": "@kody-w/buzzsaw",
       "title": "Buzzsaw",
       "description": "Set up an adversarial build-and-verify loop: seed prompt, disjoint region split for parallel builders, harsh read-only critic brief, and an acceptance gate that defines when to stop.",
@@ -3185,7 +3248,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/buzzsaw.py",
       "source": null,
       "score": 57.0,
-      "origin_rank": 50,
+      "origin_rank": 51,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3229,7 +3292,7 @@
       ]
     },
     {
-      "rank": 51,
+      "rank": 52,
       "ref": "@kody-w/copilot_studio_deploy_agent",
       "title": "CopilotStudioDeploy",
       "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified).",
@@ -3258,7 +3321,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_deploy_agent.py",
       "source": null,
       "score": 57.0,
-      "origin_rank": 51,
+      "origin_rank": 52,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3302,7 +3365,7 @@
       ]
     },
     {
-      "rank": 52,
+      "rank": 53,
       "ref": "@kody-w/twin_me",
       "title": "TwinMe",
       "description": "Packs a PII-stripped .egg of the current brainstem's persona, custom agents, and calibration baseline, refusing if its content scan finds leaks.",
@@ -3323,7 +3386,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_me_agent.py",
       "source": null,
       "score": 57.0,
-      "origin_rank": 52,
+      "origin_rank": 53,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3367,7 +3430,7 @@
       ]
     },
     {
-      "rank": 53,
+      "rank": 54,
       "ref": "@kody-w/context_memory_agent",
       "title": "ContextMemory",
       "description": "Recalls stored memories and conversation context from the brainstem's JSON memory store, per-user or shared.",
@@ -3384,7 +3447,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/context_memory_agent.py",
       "source": null,
       "score": 56.7,
-      "origin_rank": 53,
+      "origin_rank": 54,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3428,7 +3491,7 @@
       ]
     },
     {
-      "rank": 54,
+      "rank": 55,
       "ref": "@aibast-agents-library/returns_complaints_resolution",
       "title": "Returns & Complaints Resolution Agent",
       "description": "Processes returns and complaints from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
@@ -3446,13 +3509,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py",
       "source": null,
       "score": 56.6,
-      "origin_rank": 54,
+      "origin_rank": 55,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8745,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -3488,7 +3551,7 @@
       ]
     },
     {
-      "rank": 55,
+      "rank": 56,
       "ref": "@kody-w/recon_deck_agent",
       "title": "ReconDeck",
       "description": "Builds a recon briefing on a topic by querying Hacker News top stories and Rappterbook agent profiles over HTTP.",
@@ -3509,7 +3572,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/recon_deck_agent.py",
       "source": null,
       "score": 56.6,
-      "origin_rank": 55,
+      "origin_rank": 56,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3553,7 +3616,7 @@
       ]
     },
     {
-      "rank": 56,
+      "rank": 57,
       "ref": "@kody-w/rappterbook_agent",
       "title": "Rappterbook",
       "description": "Fetches Rappterbook agent profiles, trending posts, stats, and channels read-only from the project's GitHub state files.",
@@ -3572,7 +3635,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappterbook_agent.py",
       "source": null,
       "score": 56.3,
-      "origin_rank": 56,
+      "origin_rank": 57,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3616,7 +3679,7 @@
       ]
     },
     {
-      "rank": 57,
+      "rank": 58,
       "ref": "@howardh/prompt_to_video_agent",
       "title": "PromptToVideo",
       "description": "Renders videos from structured scene descriptions using Remotion — title, content, quote, and list scenes with style presets.",
@@ -3636,7 +3699,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/prompt_to_video_agent.py",
       "source": null,
       "score": 56.2,
-      "origin_rank": 57,
+      "origin_rank": 58,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3680,7 +3743,7 @@
       ]
     },
     {
-      "rank": 58,
+      "rank": 59,
       "ref": "@howardh/recon_agent",
       "title": "Recon",
       "description": "Scans any URL and produces an auto-opening HTML recon report covering tech stack, security headers, SSL, performance, and API schema.",
@@ -3701,7 +3764,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
       "source": null,
       "score": 56.2,
-      "origin_rank": 58,
+      "origin_rank": 59,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3745,7 +3808,7 @@
       ]
     },
     {
-      "rank": 59,
+      "rank": 60,
       "ref": "@howardh/training_quest_agent",
       "title": "TrainingQuest",
       "description": "Generates a gamified HTML onboarding quest from the brainstem's loaded agents, with checkpoints, progress tracking, and copyable prompts.",
@@ -3764,7 +3827,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/training_quest_agent.py",
       "source": null,
       "score": 56.2,
-      "origin_rank": 59,
+      "origin_rank": 60,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3808,7 +3871,7 @@
       ]
     },
     {
-      "rank": 60,
+      "rank": 61,
       "ref": "@howardh/tuftelove_agent",
       "title": "TufteLove",
       "description": "Advises on and reviews agent UI design using Tufte principles and Microsoft's Agent Oversight pattern taxonomy.",
@@ -3829,7 +3892,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/tuftelove_agent.py",
       "source": null,
       "score": 56.2,
-      "origin_rank": 60,
+      "origin_rank": 61,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3873,7 +3936,7 @@
       ]
     },
     {
-      "rank": 61,
+      "rank": 62,
       "ref": "@howardh/vaultmind_agent",
       "title": "VaultMind",
       "description": "Manages an Obsidian vault through 28 actions — 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks.",
@@ -3895,7 +3958,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/vaultmind_agent.py",
       "source": null,
       "score": 56.2,
-      "origin_rank": 61,
+      "origin_rank": 62,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -3939,7 +4002,7 @@
       ]
     },
     {
-      "rank": 62,
+      "rank": 63,
       "ref": "@kody-w/predictive_asset_maintenance_intelligence",
       "title": "Predictive Asset Maintenance Intelligence",
       "description": "Simulates a grid predictive-maintenance pipeline — telemetry scoring, failure ranking, work-order and capex drafts — from seeded synthetic demo data.",
@@ -3957,7 +4020,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
       "source": null,
       "score": 56.2,
-      "origin_rank": 62,
+      "origin_rank": 63,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -4001,7 +4064,7 @@
       ]
     },
     {
-      "rank": 63,
+      "rank": 64,
       "ref": "@kody-w/twin_egg_hatcher",
       "title": "HatchTwinEgg",
       "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
@@ -4021,7 +4084,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
       "source": null,
       "score": 56.2,
-      "origin_rank": 63,
+      "origin_rank": 64,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -4065,7 +4128,7 @@
       ]
     },
     {
-      "rank": 64,
+      "rank": 65,
       "ref": "@aibast-agents-library/emission_tracking",
       "title": "Emission Tracking Agent",
       "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback.",
@@ -4084,13 +4147,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
       "source": null,
       "score": 56.1,
-      "origin_rank": 64,
+      "origin_rank": 65,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8589,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -4126,7 +4189,7 @@
       ]
     },
     {
-      "rank": 65,
+      "rank": 66,
       "ref": "@aibast-agents-library/supply_chain_disruption_alert",
       "title": "Supply Chain Disruption Alert Agent",
       "description": "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback.",
@@ -4144,13 +4207,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
       "source": null,
       "score": 56.1,
-      "origin_rank": 65,
+      "origin_rank": 66,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8589,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -4186,7 +4249,7 @@
       ]
     },
     {
-      "rank": 66,
+      "rank": 67,
       "ref": "@kody-w/ez_sharpen_agent",
       "title": "EZSharpen",
       "description": "Grows in-between detail for recorded commons frames by bounded interpolation, keeping only candidates consistent with signed neighbor frames.",
@@ -4204,7 +4267,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py",
       "source": null,
       "score": 56.1,
-      "origin_rank": 66,
+      "origin_rank": 67,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -4248,7 +4311,7 @@
       ]
     },
     {
-      "rank": 67,
+      "rank": 68,
       "ref": "@aibast-agents-library/it_helpdesk",
       "title": "IT Helpdesk",
       "description": "Runs IT support — diagnostics, remediation, technician booking — over a live simulated D365 tenant plus a ServiceNow-shaped ITSM desk; offline-safe.",
@@ -4266,13 +4329,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py",
       "source": null,
       "score": 55.9,
-      "origin_rank": 67,
+      "origin_rank": 68,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8536,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -4308,7 +4371,7 @@
       ]
     },
     {
-      "rank": 68,
+      "rank": 69,
       "ref": "@aibast-agents-library/staff_credentialing",
       "title": "Staff Credentialing Agent",
       "description": "Tracks staff credentials and onboarding, joining a live simulated FHIR practitioner registry with the Dynamics 365 CRM directory; offline fallback.",
@@ -4327,13 +4390,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py",
       "source": null,
       "score": 55.9,
-      "origin_rank": 68,
+      "origin_rank": 69,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8536,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -4369,7 +4432,7 @@
       ]
     },
     {
-      "rank": 69,
+      "rank": 70,
       "ref": "@aibast-agents-library/win_loss_analysis",
       "title": "Win/Loss Analysis",
       "description": "Computes win/loss stats from live closed deals in a simulated Dynamics 365 tenant, with recovery models and an embedded offline demo fallback.",
@@ -4387,13 +4450,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/win_loss_analysis_stack/win_loss_analysis_agent.py",
       "source": null,
       "score": 55.9,
-      "origin_rank": 69,
+      "origin_rank": 70,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8536,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -4429,7 +4492,7 @@
       ]
     },
     {
-      "rank": 70,
+      "rank": 71,
       "ref": "@rapp/estate_outbound",
       "title": "EstateOutbound",
       "description": "Writes an already-signed neighborhood event into ~/.brainstem/outbound/ for federation roll-up; pushing to the estate repo stays manual.",
@@ -4447,7 +4510,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
       "source": null,
       "score": 55.9,
-      "origin_rank": 70,
+      "origin_rank": 71,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -4491,7 +4554,7 @@
       ]
     },
     {
-      "rank": 71,
+      "rank": 72,
       "ref": "@discreetRappers/copilot_studio_transpiler_agent",
       "title": "CopilotStudioTranspiler",
       "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.",
@@ -4509,13 +4572,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 71,
+      "origin_rank": 72,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8429,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -4551,7 +4614,7 @@
       ]
     },
     {
-      "rank": 72,
+      "rank": 73,
       "ref": "@discreetRappers/rapp_pipeline_agent",
       "title": "RAPP",
       "description": "Runs the full RAPP pipeline — discovery, MVP, code gen, quality gates QG1-QG6, PDF reports — using Azure OpenAI and Azure File Storage.",
@@ -4569,13 +4632,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/rapp_pipeline_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 72,
+      "origin_rank": 73,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8429,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -4611,7 +4674,7 @@
       ]
     },
     {
-      "rank": 73,
+      "rank": 74,
       "ref": "@discreetRappers/sales_assistant_agent",
       "title": "SalesAssistant",
       "description": "Routes natural-language CRM requests about accounts, contacts, and opportunities to the Dynamics CRUD agent, which serves built-in demo data.",
@@ -4628,13 +4691,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sales_assistant_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 73,
+      "origin_rank": 74,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8429,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -4670,7 +4733,7 @@
       ]
     },
     {
-      "rank": 74,
+      "rank": 75,
       "ref": "@discreetRappers/sharepoint_contract_analysis_agent",
       "title": "ContractAnalysis",
       "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI — clause extraction, risk flagging, and comparison.",
@@ -4688,13 +4751,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 74,
+      "origin_rank": 75,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8429,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -4730,7 +4793,7 @@
       ]
     },
     {
-      "rank": 75,
+      "rank": 76,
       "ref": "@kody-w/bakeoff_factory",
       "title": "BakeoffFactory",
       "description": "Runs a persistent tournament where prompt variants compete on a text task, an LLM judge scores outputs, and the worst variant mutates toward the best.",
@@ -4750,7 +4813,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/bakeoff_factory_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 75,
+      "origin_rank": 76,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -4794,7 +4857,7 @@
       ]
     },
     {
-      "rank": 76,
+      "rank": 77,
       "ref": "@kody-w/estate_factory",
       "title": "EstateFactory",
       "description": "Generates a complete digital estate from an intent — org tree, factory agent stubs, souls, HTML dashboard — via brainstem or LLM APIs when available.",
@@ -4813,7 +4876,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/estate_factory_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 76,
+      "origin_rank": 77,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -4857,7 +4920,7 @@
       ]
     },
     {
-      "rank": 77,
+      "rank": 78,
       "ref": "@aibast-agents-library/acquisition_support",
       "title": "Acquisition Support Agent",
       "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback.",
@@ -4876,13 +4939,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 77,
+      "origin_rank": 78,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8388,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -4918,7 +4981,7 @@
       ]
     },
     {
-      "rank": 78,
+      "rank": 79,
       "ref": "@aibast-agents-library/wealth_insights_generator",
       "title": "Wealth Insights Generator Agent",
       "description": "Generates opportunity alerts and client insights from a live simulated Dynamics 365 tenant pipeline, with an offline demo fallback.",
@@ -4937,13 +5000,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 78,
+      "origin_rank": 79,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8388,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -4979,7 +5042,7 @@
       ]
     },
     {
-      "rank": 79,
+      "rank": 80,
       "ref": "@kody-w/neuron_swarm",
       "title": "NeuronSwarm",
       "description": "Fans a task out across parallel expert 'neuron' prompts using the host brainstem's own LLM call, then reconciles them into one converged answer.",
@@ -4999,13 +5062,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/neuron_swarm_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 79,
+      "origin_rank": 80,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8206,
-        "freshness": 0.7685,
+        "freshness": 0.7684,
         "tier": 0.55
       },
       "scores_on": [
@@ -5043,7 +5106,7 @@
       ]
     },
     {
-      "rank": 80,
+      "rank": 81,
       "ref": "@aibast-agents-library/permit_license_management",
       "title": "Permit & License Management Agent",
       "description": "Tracks permit applications from a live simulated Dynamics 365 tenant plus renewal calendars and gap analysis, with an offline fallback.",
@@ -5062,13 +5125,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/permit_license_management_stack/permit_license_management_agent.py",
       "source": null,
       "score": 55.2,
-      "origin_rank": 80,
+      "origin_rank": 81,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8277,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5104,7 +5167,7 @@
       ]
     },
     {
-      "rank": 81,
+      "rank": 82,
       "ref": "@aibast-agents-library/production_line_optimization",
       "title": "Production Line Optimization Agent",
       "description": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback.",
@@ -5122,13 +5185,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py",
       "source": null,
       "score": 55.2,
-      "origin_rank": 81,
+      "origin_rank": 82,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.8277,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5160,70 +5223,6 @@
         "community tier",
         "added 130 days ago",
         "685 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 82,
-      "ref": "@kody-w/factory",
-      "title": "RAPP to Copilot Studio Factory",
-      "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
-      "origin": "native",
-      "category": "pipeline",
-      "tags": [
-        "copilot_studio",
-        "factory",
-        "pipeline",
-        "deployment",
-        "parity"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffactory",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/factory_agent.py",
-      "source": null,
-      "score": 55.2,
-      "origin_rank": 82,
-      "origin_size": 294,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 0.983,
-        "freshness": 0.5878,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community",
-        "curator",
-        "freshness"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": null,
-          "lines": 487,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "no recorded add date - scored at the population median",
-        "487 lines",
         "has a rendered card"
       ]
     },
@@ -5316,7 +5315,7 @@
         "community": 0.0,
         "curator": 0.8243,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5376,7 +5375,7 @@
         "community": 0.0,
         "curator": 0.8191,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5437,7 +5436,7 @@
         "community": 0.0,
         "curator": 0.8277,
         "depth": 0.9725,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5498,7 +5497,7 @@
         "community": 0.0,
         "curator": 0.8277,
         "depth": 0.9764,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5558,7 +5557,7 @@
         "community": 0.0,
         "curator": 0.8388,
         "depth": 0.9555,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5682,7 +5681,7 @@
         "community": 0.0,
         "curator": 0.8119,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5742,7 +5741,7 @@
         "community": 0.0,
         "curator": 0.8119,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5804,7 +5803,7 @@
         "community": 0.0,
         "curator": 0.8119,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5865,7 +5864,7 @@
         "community": 0.0,
         "curator": 0.8119,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -5987,7 +5986,7 @@
         "community": 0.0,
         "curator": 0.8122,
         "depth": 0.9843,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6048,7 +6047,7 @@
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6108,7 +6107,7 @@
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6171,7 +6170,7 @@
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6231,7 +6230,7 @@
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6292,7 +6291,7 @@
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6477,7 +6476,7 @@
         "community": 0.0,
         "curator": 0.8119,
         "depth": 0.9712,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6537,7 +6536,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7656,
-        "freshness": 0.7416,
+        "freshness": 0.7415,
         "tier": 0.55
       },
       "scores_on": [
@@ -6600,7 +6599,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6662,7 +6661,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6723,7 +6722,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6783,7 +6782,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6843,7 +6842,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6906,7 +6905,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -6966,7 +6965,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -7089,7 +7088,7 @@
         "community": 0.0,
         "curator": 0.7913,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -7150,7 +7149,7 @@
         "community": 0.0,
         "curator": 0.8536,
         "depth": 0.8769,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -7210,7 +7209,7 @@
         "community": 0.0,
         "curator": 0.7913,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -7271,7 +7270,7 @@
         "community": 0.0,
         "curator": 0.8119,
         "depth": 0.9489,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -7332,7 +7331,7 @@
         "community": 0.0,
         "curator": 0.7872,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -7392,7 +7391,7 @@
         "community": 0.0,
         "curator": 0.8243,
         "depth": 0.9214,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -7451,7 +7450,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -7511,7 +7510,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -7571,7 +7570,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -7631,7 +7630,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -7691,7 +7690,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -7749,7 +7748,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -7809,7 +7808,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -7869,7 +7868,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -7930,7 +7929,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -7991,7 +7990,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8052,7 +8051,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8112,7 +8111,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8173,7 +8172,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.9843,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8233,7 +8232,7 @@
         "community": 0.0,
         "curator": 0.8191,
         "depth": 0.9057,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8293,7 +8292,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8353,7 +8352,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8415,7 +8414,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8475,7 +8474,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8536,7 +8535,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8597,7 +8596,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8657,7 +8656,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8718,7 +8717,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8778,7 +8777,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8838,7 +8837,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8898,7 +8897,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -8959,7 +8958,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 0.9424,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9019,7 +9018,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9080,7 +9079,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9140,7 +9139,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9200,7 +9199,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9261,7 +9260,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9321,7 +9320,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9382,7 +9381,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9442,7 +9441,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9502,7 +9501,7 @@
         "community": 0.0,
         "curator": 0.8031,
         "depth": 0.9345,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9562,7 +9561,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9623,7 +9622,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9683,7 +9682,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9743,7 +9742,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9804,7 +9803,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9864,7 +9863,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -9924,7 +9923,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7054,
-        "freshness": 0.7417,
+        "freshness": 0.7416,
         "tier": 0.55
       },
       "scores_on": [
@@ -9992,7 +9991,7 @@
         "community": 0.0,
         "curator": 0.7652,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10052,7 +10051,7 @@
         "community": 0.0,
         "curator": 0.7652,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10112,7 +10111,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.9882,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10173,7 +10172,7 @@
         "community": 0.0,
         "curator": 0.7652,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10233,7 +10232,7 @@
         "community": 0.0,
         "curator": 0.7652,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10357,7 +10356,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.45,
-        "freshness": 0.5429,
+        "freshness": 0.5428,
         "tier": 1.0
       },
       "scores_on": [
@@ -10420,7 +10419,7 @@
         "community": 0.0,
         "curator": 0.7622,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10480,7 +10479,7 @@
         "community": 0.0,
         "curator": 0.7635,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10541,7 +10540,7 @@
         "community": 0.0,
         "curator": 0.7652,
         "depth": 0.9961,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10601,7 +10600,7 @@
         "community": 0.0,
         "curator": 0.8243,
         "depth": 0.8769,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10662,7 +10661,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 0.9921,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10725,7 +10724,7 @@
         "community": 0.0,
         "curator": 0.7635,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10785,7 +10784,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.9869,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10846,7 +10845,7 @@
         "community": 0.0,
         "curator": 0.7635,
         "depth": 1.0,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10907,7 +10906,7 @@
         "community": 0.0,
         "curator": 0.8031,
         "depth": 0.9123,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -10967,7 +10966,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.9437,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -11091,7 +11090,7 @@
         "community": 0.0,
         "curator": 0.8119,
         "depth": 0.8717,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -11151,7 +11150,7 @@
         "community": 0.0,
         "curator": 0.7652,
         "depth": 0.9699,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -11273,7 +11272,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 0.928,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -11334,7 +11333,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 0.928,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -11394,7 +11393,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 0.9227,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -11456,7 +11455,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 0.8769,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -11516,7 +11515,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.6425,
-        "freshness": 0.7417,
+        "freshness": 0.7416,
         "tier": 0.55
       },
       "scores_on": [
@@ -11578,7 +11577,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8926,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -11639,7 +11638,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 0.9214,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -11699,7 +11698,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 0.9123,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -11760,7 +11759,7 @@
         "community": 0.0,
         "curator": 0.7652,
         "depth": 0.9267,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -11859,69 +11858,6 @@
     },
     {
       "rank": 192,
-      "ref": "@kody-w/copilot_studio_probe_agent",
-      "title": "CopilotStudioProbe",
-      "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification.",
-      "origin": "native",
-      "category": "integrations",
-      "tags": [
-        "copilot-studio",
-        "direct-line",
-        "probe",
-        "testing",
-        "integration",
-        "m365"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fcopilot_studio_probe_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py",
-      "source": null,
-      "score": 52.1,
-      "origin_rank": 192,
-      "origin_size": 294,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 0.5456,
-        "freshness": 0.8136,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "curator"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 36,
-          "lines": 153,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet",
-        "community tier",
-        "added 36 days ago",
-        "153 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 193,
       "ref": "@kody-w/double_jump_agent",
       "title": "Double Jump",
       "description": "Improves any draft by competing it against the local brainstem's /chat output round over round, keeping each round's winner; defaults to offline demo.",
@@ -11939,7 +11875,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/double_jump_agent.py",
       "source": null,
       "score": 52.1,
-      "origin_rank": 193,
+      "origin_rank": 192,
       "origin_size": 294,
       "components": {
         "community": 0.0,
@@ -11983,7 +11919,7 @@
       ]
     },
     {
-      "rank": 194,
+      "rank": 193,
       "ref": "@aibast-agents-library/account_messaging",
       "title": "Account Messaging",
       "description": "Drafts personalized outreach, follow-up emails, and campaign sequences for enterprise accounts using built-in demo data.",
@@ -12001,13 +11937,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py",
       "source": null,
       "score": 52.0,
-      "origin_rank": 194,
+      "origin_rank": 193,
       "origin_size": 294,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.907,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -12039,6 +11975,69 @@
         "community tier",
         "added 130 days ago",
         "429 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 194,
+      "ref": "@kody-w/copilot_studio_probe_agent",
+      "title": "CopilotStudioProbe",
+      "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification.",
+      "origin": "native",
+      "category": "integrations",
+      "tags": [
+        "copilot-studio",
+        "direct-line",
+        "probe",
+        "testing",
+        "integration",
+        "m365"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fcopilot_studio_probe_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py",
+      "source": null,
+      "score": 52.0,
+      "origin_rank": 194,
+      "origin_size": 294,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 0.5456,
+        "freshness": 0.8136,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 36,
+          "lines": 153,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet",
+        "community tier",
+        "added 36 days ago",
+        "153 lines",
         "has a rendered card"
       ]
     },
@@ -12130,7 +12129,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8664,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -12191,7 +12190,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 0.8415,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -12251,7 +12250,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 0.8952,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -13037,7 +13036,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.8782,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -13095,7 +13094,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.45,
-        "freshness": 0.8719,
+        "freshness": 0.8718,
         "tier": 0.55
       },
       "scores_on": [
@@ -13157,7 +13156,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.8664,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -13217,7 +13216,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 0.8402,
-        "freshness": 0.4723,
+        "freshness": 0.4722,
         "tier": 0.55
       },
       "scores_on": [
@@ -19432,7 +19431,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5404,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
@@ -19490,7 +19489,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.45,
-        "freshness": 0.4806,
+        "freshness": 0.4805,
         "tier": 0.55
       },
       "scores_on": [
