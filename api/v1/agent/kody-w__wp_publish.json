@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__wp_publish",
+  "name": "WordPress Publish",
+  "rar_name": "@kody-w/wp_publish",
+  "rappid": "rappid:@kody-w/wp_publish:e898a8e0b963e3548285525588751449d4e34c46851c882abec28f0d80273e6a",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "integrations",
+  "tags": [
+    "wordpress",
+    "publishing",
+    "rest-api",
+    "blog",
+    "idempotent"
+  ],
+  "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "community",
+  "requires_env": [
+    "WP_URL",
+    "WP_USER",
+    "WP_APP_PASSWORD"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 271,
+  "size_kb": 11.7,
+  "sha256": "624c7a945e4b1428675ddb9e213bb7a41ad24096c5705783d4923bc130467d8d",
+  "has_card": true,
+  "added_at": "2026-08-03T09:47:21-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__wp_publish.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/wp_publish.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__wp_publish.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__wp_publish.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/wp_publish.py"
+}

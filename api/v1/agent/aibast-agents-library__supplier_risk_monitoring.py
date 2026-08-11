@@ -1,13 +1,51 @@
 """
-Supplier Risk Monitoring Agent
+Supplier Risk Monitoring Agent — a template you are meant to mutate.
 
 Monitors supplier health across quality, delivery, financial stability,
 and geopolitical dimensions. Produces risk scorecards, disruption alerts,
 and alternative-sourcing recommendations to protect supply continuity.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works from anywhere):
+       CRM — Static Dynamics 365 tenant (Aster Lane Office Systems):
+         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       ERP — Static ERP (suppliers, purchase orders, goods receipts,
+       supplier invoices):
+         https://kody-w.github.io/static-erp/api/v1/
+     An open high-priority Dynamics case is a supply-disruption event,
+     and REAL risk signals are computed per live ERP supplier — blocked
+     invoices, late goods receipts — joined to CRM cases by account
+     name.
+     Try: perform(operation="risk_dashboard")
+     — Orchard Signal Works flags blocked invoice SINV-92003
+     (PO-47003), Quarry Bend Foundry flags GR-88005 posted 9 days late
+     (PO-47005), and Granite Peak Manufacturing joins to its CRM
+     downtime case CAS-260132.
+  2. No network? Everything falls back to the embedded demo layer below
+     (SUPPLIERS / RECENT_INCIDENTS / BACKUP_SUPPLIERS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     SUPPLIER_RISK_MONITORING_DATA_URL (CRM side) and/or
+     SUPPLIER_RISK_MONITORING_ERP_URL (ERP side) to any endpoint with
+     the same shapes, or replace _fetch_collection() with a Coupa/SAP
+     Ariba client. Fields the rest of the file needs are listed in
+     _normalize_live_disruption() — spend exposure and risk scores render
+     as "n/a — enrichment seam" until you wire spend analytics.
+
+OPERATIONS
+  risk_dashboard | supplier_scorecard | disruption_alerts
+  | alternative_sourcing | risk_driver_analysis | mitigation_plan
+  | financial_exposure | execution_timeline | monitoring_plan
+  kwargs: operation (required), supplier_id
 """
 
 import sys
 import os
+import json
+import datetime
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -15,9 +53,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/supplier_risk_monitoring",
-    "version": "1.1.1",
+    "version": "1.3.0",
     "display_name": "Supplier Risk Monitoring Agent",
-    "description": "Monitors supplier risk across quality, delivery, financial, and geopolitical dimensions with scorecards, disruption alerts, and alternative-sourcing plans.",
+    "description": "Computes supplier risk from simulated ERP blocked invoices and late receipts, joined to Dynamics 365 cases, with an offline demo fallback.",
     "author": "AIBAST",
     "tags": ["supplier", "risk", "procurement", "supply-chain", "manufacturing"],
     "category": "manufacturing",
@@ -27,8 +65,169 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real systems
+#
+# Defaults: TWO globally hosted simulated systems (synthetic data
+# served as JSON from GitHub Pages). To hook your own world, either:
+#   export SUPPLIER_RISK_MONITORING_DATA_URL=https://your-org/api/data/v9.2
+#   export SUPPLIER_RISK_MONITORING_ERP_URL=https://your-erp/api/v1
+# or replace _fetch_collection() with your SRM client. Downstream
+# code only needs the fields from _normalize_live_disruption() and
+# _erp_supplier_risk().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "SUPPLIER_RISK_MONITORING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+ERP_SOURCE_URL = os.environ.get(
+    "SUPPLIER_RISK_MONITORING_ERP_URL",
+    "https://kody-w.github.io/static-erp/api/v1",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6, base_url=None):
+    """One bounded GET per collection per source per process. Returns []
+    on ANY failure — offline, DNS, bad JSON — so the demo layer takes
+    over. Cache is keyed by full URL so CRM and ERP never collide."""
+    url = f"{base_url or DATA_SOURCE_URL}/{collection}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+def _erp(collection):
+    """Rows from the live simulated ERP (suppliers, materials,
+    purchase_orders, goods_receipts, supplier_invoices); [] offline."""
+    return _fetch_collection(collection, base_url=ERP_SOURCE_URL)
+
+
+def _days_between(earlier_iso, later_iso):
+    """Whole days between two ISO date(-time) strings; 0 on parse issues."""
+    try:
+        a = datetime.date.fromisoformat(str(earlier_iso)[:10])
+        b = datetime.date.fromisoformat(str(later_iso)[:10])
+        return (b - a).days
+    except (ValueError, TypeError):
+        return 0
+
+
+def _erp_supplier_risk():
+    """REAL risk signals per live ERP supplier: payment-blocked invoices,
+    goods receipts posted after the PO's expected delivery date, and open
+    PO exposure — joined to CRM cases by account name (e.g. Granite Peak
+    Manufacturing -> CAS-260132). [] when the ERP is unreachable."""
+    suppliers = _erp("suppliers")
+    if not suppliers:
+        return []
+    pos = _erp("purchase_orders")
+    grs = _erp("goods_receipts")
+    invs = _erp("supplier_invoices")
+    incidents = _fetch_collection("incidents")
+    expected = {
+        p.get("po_number"): str(p.get("expected_delivery_date", ""))[:10]
+        for p in pos
+    }
+    out = []
+    for s in suppliers:
+        name = s.get("name", "?")
+        open_exposure = sum(
+            float(p.get("total_amount") or 0)
+            for p in pos
+            if p.get("supplier_name") == name and p.get("status") == "open"
+        )
+        blocked = [
+            i for i in invs
+            if i.get("supplier_name") == name and i.get("payment_block")
+        ]
+        late = []
+        for g in grs:
+            if g.get("supplier_name") != name:
+                continue
+            exp = expected.get(g.get("po_number"), "")
+            post = str(g.get("posting_date", ""))[:10]
+            if exp and post > exp:
+                late.append((g, _days_between(exp, post)))
+        case = next(
+            (c for c in incidents if c.get("customeridname") == name), None
+        )
+        flags = [
+            f"invoice {i.get('invoice_number')} payment-blocked on "
+            f"{i.get('po_number')} (${float(i.get('total_amount') or 0):,.2f})"
+            for i in blocked
+        ] + [
+            f"{g.get('receipt_number')} posted {days} days after "
+            f"{g.get('po_number')} expected delivery"
+            for g, days in late
+        ]
+        if case:
+            flags.append(
+                f"CRM case {case.get('ticketnumber')} "
+                f"\"{case.get('title')}\" "
+                f"({case.get('statecode@OData.Community.Display.V1.FormattedValue', 'Active')})"
+            )
+        out.append({
+            "name": name,
+            "category": s.get("category", "?"),
+            "terms": s.get("payment_terms", "?"),
+            "open_exposure": open_exposure,
+            "blocked_count": len(blocked),
+            "late_count": len(late),
+            "crm_case": case.get("ticketnumber") if case else None,
+            "signal": "ELEVATED" if (blocked or late or case) else "OK",
+            "flags": flags,
+        })
+    return out
+
+
+_LIVE_SEVERITY = {"High": "HIGH", "Normal": "MEDIUM", "Low": "LOW"}
+
+
+def _normalize_live_disruption(row):
+    """Project an open Dynamics case onto the disruption-event shape this
+    agent renders. THIS is the contract your replacement data source must
+    meet — a dict with these keys. None means 'not knowable from the case
+    alone' and the renderer labels it as an enrichment seam (wire spend
+    analytics for exposure)."""
+    prio = row.get(
+        "prioritycode@OData.Community.Display.V1.FormattedValue", "Normal"
+    )
+    return {
+        "supplier": row.get("customeridname", "Unknown"),
+        "date": str(row.get("createdon", ""))[:10],
+        "severity": _LIVE_SEVERITY.get(prio, "MEDIUM"),
+        "description": row.get("title", "untitled"),
+        "spend_exposed": None,  # enrichment seam — wire your spend cube
+        "_live": True,
+    }
+
+
+def _live_disruptions():
+    """Open high-priority cases from the live tenant, reinterpreted as
+    supply-disruption events; [] when offline."""
+    rows = _fetch_collection("incidents")
+    events = [
+        _normalize_live_disruption(r) for r in rows
+        if r.get("statecode") == 0
+        and r.get("prioritycode@OData.Community.Display.V1.FormattedValue") == "High"
+    ]
+    return sorted(events, key=lambda e: e["date"], reverse=True)
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 SUPPLIERS = {
@@ -280,6 +479,30 @@ class SupplierRiskMonitoringAgent(BasicAgent):
         lines.append(f"\n**Active incidents:** {len(RECENT_INCIDENTS)}")
         high_incidents = sum(1 for i in RECENT_INCIDENTS if i["severity"] == "HIGH")
         lines.append(f"**HIGH severity incidents:** {high_incidents}")
+
+        erp_risk = _erp_supplier_risk()
+        if erp_risk:
+            lines.append("\n### Live ERP Supplier Risk Signals (REAL joins: invoices, receipts, CRM cases)\n")
+            lines.append("| Supplier | Category | Terms | Open PO Exposure | Blocked Invoices | Late Receipts | CRM Case | Signal |")
+            lines.append("|----------|----------|-------|------------------|------------------|---------------|----------|--------|")
+            for r in sorted(erp_risk, key=lambda x: (x["signal"] == "OK", x["name"])):
+                lines.append(
+                    f"| {r['name']} | {r['category']} | {r['terms']} | "
+                    f"${r['open_exposure']:,.2f} | {r['blocked_count']} | {r['late_count']} | "
+                    f"{r['crm_case'] or '—'} | **{r['signal']}** |"
+                )
+            flagged = [r for r in erp_risk if r["flags"]]
+            if flagged:
+                lines.append("\n**ERP/CRM risk evidence:**")
+                for r in flagged:
+                    for f in r["flags"]:
+                        lines.append(f"- {r['name']}: {f}")
+            lines.append(
+                "\nAnnual spend and financial scores per ERP supplier: "
+                "n/a — enrichment seam (wire your spend cube)."
+            )
+        else:
+            lines.append("\n_Simulated ERP unreachable — live supplier risk signals unavailable._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -337,6 +560,20 @@ class SupplierRiskMonitoringAgent(BasicAgent):
             has_backup = inc["supplier_id"] in BACKUP_SUPPLIERS
             lines.append(f"- Backup suppliers available: {'Yes' if has_backup else 'No'}")
             lines.append("")
+        live = _live_disruptions()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("### Live Tenant Disruption Events (open high-priority Dynamics cases)\n")
+            lines.append("| Severity | Date | Supplier/Account | Description | Spend Exposed |")
+            lines.append("|----------|------|------------------|-------------|---------------|")
+            for e in live:
+                exposed = seam if e["spend_exposed"] is None else f"${e['spend_exposed']:,.0f}"
+                lines.append(
+                    f"| **{e['severity']}** | {e['date']} | {e['supplier'][:28]} | "
+                    f"{e['description']} | {exposed} |"
+                )
+        else:
+            lines.append("_Live tenant unreachable — showing embedded demo incidents only._")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
@@ -484,7 +721,19 @@ class SupplierRiskMonitoringAgent(BasicAgent):
 
 if __name__ == "__main__":
     agent = SupplierRiskMonitoringAgent()
-    for op in agent.metadata["operations"]:
+    print("=" * 72)
+    print("EMBEDDED DEMO INCIDENTS + LIVE TENANT DISRUPTION EVENTS")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="disruption_alerts"))
+    print()
+    print("=" * 72)
+    print("LIVE ERP SUPPLIER RISK SIGNALS + CRM CASE JOIN")
+    print("(blocked invoices, late receipts; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="risk_dashboard"))
+    print()
+    for op in [o for o in agent.metadata["operations"] if o not in ("disruption_alerts", "risk_dashboard")]:
         print("=" * 72)
         print(agent.perform(operation=op))
         print()

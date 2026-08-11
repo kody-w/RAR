@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__campaign_deck_builder",
+  "name": "Campaign Deck Builder",
+  "rar_name": "@cat-agent-skills/campaign_deck_builder",
+  "rappid": "rappid:@cat-agent-skills/campaign_deck_builder:655c07724d8519e43432beca64570b96371a0ab752d6113bbbe3c29ee5c4f5a0",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "devtools",
+  "tags": [
+    "marketing",
+    "presentations",
+    "powerpoint",
+    "automation",
+    "scripts"
+  ],
+  "description": "Turn a short interview into a charming, vibrant 3-slide marketing-campaign deck by filling a bundled PowerPoint template.",
+  "author": "Adi Leibowitz",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 8.9,
+  "sha256": "9eaee36124c834b7c71a49853abb992be0a0ca4f7db6ab125621475019ee15de",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__campaign_deck_builder.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/campaign_deck_builder_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__campaign_deck_builder.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__campaign_deck_builder.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/campaign_deck_builder_agent.py"
+}

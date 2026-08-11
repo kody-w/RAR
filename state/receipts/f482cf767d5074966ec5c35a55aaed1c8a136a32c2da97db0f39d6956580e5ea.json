@@ -1,0 +1,43 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "maintainer_review"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-11"
+ },
+ "action": "agent.update",
+ "agent": "@rapp/learn_new",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ad5acd2d0e4aeeb3d392e14764b79b7d0437ca0b112826f1f42e68e90129e59f"
+ },
+ "canonical_path": "agents/@rapp/learn_new_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-11T04:20:21.302225+00:00",
+ "id": "rar_f482cf767d5074966ec5c35a55aaed1c8a136a32c2da97db0f39d6956580e5ea",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "51f67fdc60473fb805021b6b183f3f33aec49a0e73fe95f28236f14204c499b7",
+  "receipt": "rar_ffaade31cea654be0af643c5b0ad448c3ebbb6245ac55038459a51de2fea2289",
+  "version": "2.0.1"
+ },
+ "quality_tier": "official",
+ "request_id": "req_f482cf767d5074966ec5c35a",
+ "revision_id": "f482cf767d5074966ec5c35a55aaed1c8a136a32c2da97db0f39d6956580e5ea",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "repair pre-existing lifecycle drift detected on origin/main"
+ },
+ "version": "2.1.0"
+}

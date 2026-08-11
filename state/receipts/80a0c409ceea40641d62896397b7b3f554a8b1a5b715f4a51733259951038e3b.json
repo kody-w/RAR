@@ -1,0 +1,39 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "maintainer_review"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-11"
+ },
+ "action": "agent.create",
+ "agent": "@cat-agent-skills/copilot_studio_harness_picker",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "1517c780cf92757e91fb379b2b85ddf7d16ea2c1dac2057dae9a320cd351af59"
+ },
+ "canonical_path": "agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-11T04:23:26.252973+00:00",
+ "id": "rar_80a0c409ceea40641d62896397b7b3f554a8b1a5b715f4a51733259951038e3b",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_80a0c409ceea40641d628963",
+ "revision_id": "80a0c409ceea40641d62896397b7b3f554a8b1a5b715f4a51733259951038e3b",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "regenerated aggregated agents and repaired public catalog drift"
+ },
+ "version": "2.1.0"
+}

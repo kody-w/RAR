@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__lab_column_mapper",
+  "name": "Lab Column Mapper",
+  "rar_name": "@cat-agent-skills/lab_column_mapper",
+  "rappid": "rappid:@cat-agent-skills/lab_column_mapper:b38661e67b984c8bc8f31750078c17758e794395308296010d7b1e1848e9ecb1",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "healthcare",
+    "clinical_data",
+    "lab_results",
+    "schema_drift",
+    "column_mapping",
+    "data_ingestion",
+    "loinc",
+    "azure_ai_search"
+  ],
+  "description": "When a health system's lab results ingestion pipeline hits an unknown column header, this skill semantically matches the source column against the canonical clinical schema (LOINC-anchored), scoped by lab and clinical domain, and writes a suggested mapping to a Dataverse review queue for a clinical informatics steward to approve.",
+  "author": "Rafsan Huseynov",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.6,
+  "sha256": "5589a92823bbb860000ebb088852972236b3df0668bbe743601f90be85ce0aa1",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__lab_column_mapper.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/lab_column_mapper_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__lab_column_mapper.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__lab_column_mapper.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/lab_column_mapper_agent.py"
+}

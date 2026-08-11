@@ -1,0 +1,39 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "maintainer_review"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-11"
+ },
+ "action": "agent.create",
+ "agent": "@cat-agent-skills/copilot_studio_agent_test",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6f7094123eb0552125abc477d11ace64488fb220132b6687d3b97322dd477ab7"
+ },
+ "canonical_path": "agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-11T04:23:26.252973+00:00",
+ "id": "rar_64a1f29db5c54a1a9161f89d89c41b00426cda7bd992c3d1c10263cfd02eb80d",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_64a1f29db5c54a1a9161f89d",
+ "revision_id": "64a1f29db5c54a1a9161f89d89c41b00426cda7bd992c3d1c10263cfd02eb80d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "regenerated aggregated agents and repaired public catalog drift"
+ },
+ "version": "2.0.0"
+}

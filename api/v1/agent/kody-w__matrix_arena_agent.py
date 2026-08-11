@@ -30,9 +30,9 @@ Actions:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/matrix_arena_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Matrix Arena",
-    "description": "Open and autonomously drive multiple headless RAPP Commons tabs \u2014 a HOST leader/recorder + FOLLOWER replicas \u2014 and sync-test them: host-led frontier, WebRTC presence sync, navigation, signed actions, and seamless host succession. Play as the leader and test the live world.",
+    "description": "Drives multiple headless RAPP Commons browser tabs via a local Playwright harness to sync-test host-led presence, signed actions, and succession.",
     "author": "kody-w",
     "tags": [
         "commons",

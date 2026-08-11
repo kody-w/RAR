@@ -3,9 +3,14 @@
   "id": "howardh__chief_of_staff_agent",
   "name": "ChiefOfStaff",
   "rar_name": "@howardh/chief_of_staff_agent",
-  "rappid": "rappid:@howardh/chief_of_staff_agent:2e1420b480929d893e768d01b6f2235ba1bbf57dd871913ecde8204ffadc751f",
-  "_migrated_from": "rappid:v2:agent:@howardh/chief_of_staff_agent:f624281fea118bbe53fc6726d7154398", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.0",
+  "rappid": "rappid:@howardh/chief_of_staff_agent:3ec8015046317493d6c2a369ce5b8fd2af844bce82354394e08237b3f8fc7b2b",
+  "_migrated_from": "rappid:@howardh/chief_of_staff_agent:2e1420b480929d893e768d01b6f2235ba1bbf57dd871913ecde8204ffadc751f",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@howardh/chief_of_staff_agent:f624281fea118bbe53fc6726d7154398",
+    "rappid:@howardh/chief_of_staff_agent:2e1420b480929d893e768d01b6f2235ba1bbf57dd871913ecde8204ffadc751f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@howardh",
   "category": "productivity",
   "tags": [
@@ -17,7 +22,7 @@
     "triage",
     "meeting-prep"
   ],
-  "description": "Personal AI executive partner \u2014 live M365-grounded brief, triage, meeting prep, commitments, drafts, weekly review.",
+  "description": "Generates M365-grounded briefs, inbox triage, meeting prep, commitment tracking, and drafts via the WorkIQ CLI, plus HN/DDG signal scans.",
   "author": "Howard Hoy",
   "quality_tier": "community",
   "requires_env": [],
@@ -26,15 +31,15 @@
   ],
   "lines": 683,
   "size_kb": 32.5,
-  "sha256": "f624281fea118bbe53fc6726d71543985e95c6ddba37affbc2215149da742d63",
+  "sha256": "5d904f34d63faa2271e66a6d1c6f033c269136c840a1bd4d4dcc57875bbf8354",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-28T17:29:54-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__chief_of_staff_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/chief_of_staff_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/chief_of_staff_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__chief_of_staff_agent.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__chief_of_staff_agent.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__chief_of_staff_agent.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/chief_of_staff_agent.py"
 }

@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__business_os",
+  "name": "Business OS",
+  "rar_name": "@cat-agent-skills/business_os",
+  "rappid": "rappid:@cat-agent-skills/business_os:6113839e5b71ed083d97bd3e3785604d05945397df935c7748a11a1143bd8c52",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "business",
+    "decision_making",
+    "problem_solving",
+    "project_planning",
+    "process_improvement",
+    "governance",
+    "skill_generation"
+  ],
+  "description": "A practical operating system for Copilot Studio that gives agents a consistent way to clarify outcomes, choose the right approach, solve problems, make decisions, plan projects, improve processes, handle incidents, and turn repeatable work into reusable skills. Unlike a standard Copilot experience that relies mainly on the prompt and available context, Business OS adds a structured way of working\u2026",
+  "author": "Matthew James Davis",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.6,
+  "sha256": "b455d3229e78336c3772968e71167a3aa49c2a131e16710432b069cef3bf77aa",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__business_os.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/business_os_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__business_os.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__business_os.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/business_os_agent.py"
+}

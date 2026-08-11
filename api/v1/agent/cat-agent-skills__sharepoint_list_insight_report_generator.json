@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__sharepoint_list_insight_report_generator",
+  "name": "SharePoint List Insight Report Generator",
+  "rar_name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
+  "rappid": "rappid:@cat-agent-skills/sharepoint_list_insight_report_generator:678fbc815b78d2f9b5b06a972db59d6c07ffdb89e09d04d9174c6e06bb7b3fbf",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "integrations",
+  "tags": [
+    "sharepoint",
+    "microsoft_365",
+    "lists",
+    "report",
+    "html"
+  ],
+  "description": "Automatically discovers and validates a SharePoint list within a connected knowledge source, analyzes its structure and data, identifies key business insights, and generates a downloadable interactive HTML report. The report includes dynamic filters, interactive charts, sortable and searchable tables with pagination, detailed record drill-down through modal popups, and direct links to open items\u2026",
+  "author": "Marco Rocca",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.6,
+  "sha256": "1755e4d761977ef94e93304dc8d180edc0dc810f70e304a513ed4909b525f0d7",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__sharepoint_list_insight_report_generator.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__sharepoint_list_insight_report_generator.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__sharepoint_list_insight_report_generator.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py"
+}

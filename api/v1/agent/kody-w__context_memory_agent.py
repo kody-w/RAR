@@ -7,9 +7,9 @@
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/context_memory_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "ContextMemory",
-    "description": "Recalls conversation history and stored memories from past interactions.",
+    "description": "Recalls stored memories and conversation context from the brainstem's JSON memory store, per-user or shared.",
     "author": "Kody Wildfeuer",
     "tags": ["core", "memory", "context", "recall"],
     "category": "core",

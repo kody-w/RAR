@@ -6,9 +6,9 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/github_agent_library_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "GitHubAgentLibrary",
-    "description": "Browse, search, and install agents from the RAPP Agent Repo via chat. The autonomous package manager.",
+    "description": "Browses, searches, and installs agents from the kody-w/AI-Agent-Templates GitHub repo into local agent storage.",
     "author": "Kody Wildfeuer",
     "tags": ["core", "package-manager", "install", "discovery"],
     "category": "core",

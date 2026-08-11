@@ -44,14 +44,10 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/predictive_asset_maintenance_intelligence",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Predictive Asset Maintenance Intelligence",
     "description": (
-        "End-to-end predictive maintenance for grid infrastructure: aggregates "
-        "telemetry, scores asset health, ranks failure probability over "
-        "30/90/180 days, drafts Field Service work orders and parts procurement, "
-        "and builds a multi-year capex replacement pipeline — eight specialist "
-        "agents plus an orchestrator in one file."
+        "Simulates a grid predictive-maintenance pipeline \u2014 telemetry scoring, failure ranking, work-order and capex drafts \u2014 from seeded synthetic demo data."
     ),
     "author": "Kody Wildfeuer",
     "tags": [

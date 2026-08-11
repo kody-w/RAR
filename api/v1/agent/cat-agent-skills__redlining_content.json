@@ -1,0 +1,37 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__redlining_content",
+  "name": "Redlining Content",
+  "rar_name": "@cat-agent-skills/redlining_content",
+  "rappid": "rappid:@cat-agent-skills/redlining_content:8d14652d434b7699d327dcbac2945d184a3412ab216040056ad992d64cd89d2a",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "documents",
+    "productivity"
+  ],
+  "description": "Redlines a document based on changes from a template with Track Changes.",
+  "author": "AndrewHessMSFT",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 8.7,
+  "sha256": "1196f5449b1e765cd968e70f0a5568c40598968414f4ffb10380e02b9bdfed98",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__redlining_content.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/redlining_content_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__redlining_content.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__redlining_content.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/redlining_content_agent.py"
+}

@@ -28,9 +28,9 @@ Actions:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/arena_compete_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Arena Compete",
-    "description": "Run a competition of player-agents that dynamically LEARN: each round the bottom performer is pulled up by adjusting its strategy toward what made the top performer better, so the field climbs round over round and the laggard is never left behind. Live mode drives real commons tabs; default is a fast deterministic simulation.",
+    "description": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation.",
     "author": "kody-w",
     "tags": [
         "competition",

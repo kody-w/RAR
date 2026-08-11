@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__license_renewal_expansion",
   "name": "License Renewal & Expansion Agent",
   "rar_name": "@aibast-agents-library/license_renewal_expansion",
-  "rappid": "rappid:@aibast-agents-library/license_renewal_expansion:4d2b10922cf2efefe56f57a3e55f2086c9ba052d7aa271966cf042c79327a7e4",
-  "_migrated_from": "rappid:@aibast-agents-library/license_renewal_expansion:ed66e44c3e7d5ffee9ce017ba13382bd52a8724dfef3f3344134c8660e99fa75", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/license_renewal_expansion:9060af0a074dab39d8c297f90db4f33fd43e4a918beedae9b34db3327c8c4fe3",
+  "_migrated_from": "rappid:@aibast-agents-library/license_renewal_expansion:4d2b10922cf2efefe56f57a3e55f2086c9ba052d7aa271966cf042c79327a7e4",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/license_renewal_expansion:ed66e44c3e7d5ffee9ce017ba13382bd52a8724dfef3f3344134c8660e99fa75",
+    "rappid:@aibast-agents-library/license_renewal_expansion:4d2b10922cf2efefe56f57a3e55f2086c9ba052d7aa271966cf042c79327a7e4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "software_digital_products",
   "tags": [
@@ -16,24 +21,24 @@
     "revenue",
     "saas"
   ],
-  "description": "Manages SaaS license renewal pipelines, expansion opportunities, churn risk analysis, and revenue impact projections.",
+  "description": "Manages renewal pipelines and churn risk from a live simulated Dynamics 365 tenant's cases and quotes, with an offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 535,
-  "size_kb": 22.5,
-  "sha256": "ed66e44c3e7d5ffee9ce017ba13382bd52a8724dfef3f3344134c8660e99fa75",
+  "lines": 710,
+  "size_kb": 30.4,
+  "sha256": "398c857f909ae664d8aac2632735ab54f932f7a4a42efd9e91055e0c8d8fc213",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__license_renewal_expansion.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__license_renewal_expansion.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__license_renewal_expansion.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__license_renewal_expansion.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py"
 }

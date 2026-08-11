@@ -16,9 +16,9 @@ from __future__ import annotations
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@discreetRappers/sharepoint_contract_analysis_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "ContractAnalysis",
-    "description": "Analyzes contracts stored in Azure File Storage / SharePoint. Risk identification, clause extraction, comparison.",
+    "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI \u2014 clause extraction, risk flagging, and comparison.",
     "author": "Bill Whalen",
     "tags": ["integrations", "sharepoint", "contracts", "analysis", "legal"],
     "category": "integrations",

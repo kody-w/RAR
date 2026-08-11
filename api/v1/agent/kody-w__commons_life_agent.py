@@ -24,7 +24,7 @@ Actions:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/commons_life_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Commons Life",
     "author": "kody-w",
     "category": "creative",
@@ -33,7 +33,7 @@ __manifest__ = {
     "dependencies": [
         "@rapp/basic_agent"
     ],
-    "description": "Record, grow, and play the life of the commons as a digital organism, cradle to grave: capture frozen signed frames at a chosen resolution, grow the fidelity between them with EZsharpen, and emit a LifePlayer HTML scrubber that spins/plays the grown life back with signed events ticking like vitals.",
+    "description": "Records the live commons as signed frames via Playwright, grows in-between fidelity with EZsharpen, and emits an HTML LifePlayer scrubber.",
     "tags": [
         "commons",
         "frames",

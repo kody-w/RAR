@@ -2,7 +2,7 @@
 VaultMind — "Your second brain has a brain." — Made by HOLO
 
 One agent to manage it all: multi-person 30-60-90 day plans, Now/Next/Later
-priorities, OKRs, Kanban boards, team dashboards, Karpathy-style knowledge 
+priorities, OKRs, Kanban boards, team dashboards, Karpathy-style knowledge
 bases, training quests, and scheduled automation — all through your Obsidian vault.
 28 actions. One file. Zero dependencies beyond brainstem.
 
@@ -42,7 +42,7 @@ bases, training quests, and scheduled automation — all through your Obsidian v
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@howardh/vaultmind_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "VaultMind",
     "description": (
         "Manages an Obsidian vault through 28 actions \u2014 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks."

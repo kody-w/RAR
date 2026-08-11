@@ -32,12 +32,10 @@ import json
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/vibe_coding_loop",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Vibe Coding Demo Loop",
     "description": (
-        "Ship batches of 10 single-file HTML demos to a Jekyll site via parallel sub-agents. "
-        "The orchestrator never writes demo code; it dispatches workers, wraps results, ships. "
-        "This agent returns the templates you feed to your LLM/sub-agents — provider-agnostic."
+        "Returns prompt and shell-command templates for shipping batches of single-file HTML demos to a Jekyll site; makes no LLM or network calls itself."
     ),
     "author": "kody-w",
     "tags": ["publishing", "orchestration", "vibe-coding", "single-file-html", "loop"],

@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__skill_authoring_coach",
+  "name": "Skill Authoring Coach",
+  "rar_name": "@cat-agent-skills/skill_authoring_coach",
+  "rappid": "rappid:@cat-agent-skills/skill_authoring_coach:9b3bcb9beee1e2e015e3a030b0c3f7d2369a28873d3278de475eb31e4142f48a",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "skills",
+    "authoring",
+    "documentation",
+    "productivity",
+    "agent"
+  ],
+  "description": "Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.",
+  "author": "Simon Owen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 8.9,
+  "sha256": "123cd43acf80de040e407c00cd0991d61bd4c8dafd7972602a769fc8f647b6e1",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__skill_authoring_coach.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/skill_authoring_coach_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__skill_authoring_coach.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__skill_authoring_coach.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/skill_authoring_coach_agent.py"
+}

@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__cross_selling",
   "name": "Cross-Selling Opportunities",
   "rar_name": "@aibast-agents-library/cross_selling",
-  "rappid": "rappid:@aibast-agents-library/cross_selling:403eec0c340252668055c88bfa09da0ad9ee1c51c51fa6d5bb824e6b6b5e7854",
-  "_migrated_from": "rappid:@aibast-agents-library/cross_selling:53aa06b56d89d0c57c3722b71d02e66833374c05196be8ef15fe58605d5610cd", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/cross_selling:12a546eb4067c53e4871890cc34f4b9c4e2f0b45ddb1926b2d5b34d8eddf2902",
+  "_migrated_from": "rappid:@aibast-agents-library/cross_selling:403eec0c340252668055c88bfa09da0ad9ee1c51c51fa6d5bb824e6b6b5e7854",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/cross_selling:53aa06b56d89d0c57c3722b71d02e66833374c05196be8ef15fe58605d5610cd",
+    "rappid:@aibast-agents-library/cross_selling:403eec0c340252668055c88bfa09da0ad9ee1c51c51fa6d5bb824e6b6b5e7854"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "general",
   "tags": [
@@ -15,24 +20,24 @@
     "product-affinity",
     "recommendations"
   ],
-  "description": "Identifies cross-selling opportunities via product affinity analysis, customer ownership mapping, and revenue impact projections.",
+  "description": "Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 398,
-  "size_kb": 20.4,
-  "sha256": "53aa06b56d89d0c57c3722b71d02e66833374c05196be8ef15fe58605d5610cd",
+  "lines": 510,
+  "size_kb": 25.6,
+  "sha256": "12d3bbf7a218d40f4e2238e57f5441f78a23b11e3e3dfe72de8d5374cf236197",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__cross_selling.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__cross_selling.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__cross_selling.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__cross_selling.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py"
 }

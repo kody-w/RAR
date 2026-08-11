@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__global_greenwashing_claim_auditor",
+  "name": "Global Greenwashing Claim Auditor",
+  "rar_name": "@cat-agent-skills/global_greenwashing_claim_auditor",
+  "rappid": "rappid:@cat-agent-skills/global_greenwashing_claim_auditor:d55989763e629eaa824e480fa643c297b3055a374f1bc9cd451cd72a4280b8ce",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "greenwashing",
+    "environmental_claims",
+    "sustainability",
+    "compliance",
+    "canada",
+    "european_union",
+    "united_kingdom",
+    "documents"
+  ],
+  "description": "Audit environmental claims in CSV, XLSX, DOCX, PPTX, conversational text, and public websites with separate ANY, CA, EU, and UK findings.",
+  "author": "Chris Garty",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.3,
+  "sha256": "3899d6d4b21a00ce391389c46b6172786c9e8e3023f60b715765165d5343d9fe",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__global_greenwashing_claim_auditor.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__global_greenwashing_claim_auditor.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__global_greenwashing_claim_auditor.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py"
+}

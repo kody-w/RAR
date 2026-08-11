@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__doc_format_converter",
+  "name": "Universal Document Converter",
+  "rar_name": "@cat-agent-skills/doc_format_converter",
+  "rappid": "rappid:@cat-agent-skills/doc_format_converter:61884b93b5e9a48fc18551cfbb2c2d9fa6da1ab12cc93ac08f52ff0d68af48d1",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "devtools",
+  "tags": [
+    "documents",
+    "conversion",
+    "markdown",
+    "pdf",
+    "office",
+    "scripts"
+  ],
+  "description": "Convert documents between Markdown, HTML, PDF, Word, PowerPoint, Excel/CSV and text \u2014 fully offline, using only the libraries already in the agent sandbox.",
+  "author": "Andreas Adner",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.0,
+  "sha256": "fe4a32bfd496ea42fe68d4815d3f6835297ca9434e9a3c72129873a4b5ea0f3a",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__doc_format_converter.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/doc_format_converter_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__doc_format_converter.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__doc_format_converter.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/doc_format_converter_agent.py"
+}

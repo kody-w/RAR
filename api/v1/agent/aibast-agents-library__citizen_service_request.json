@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__citizen_service_request",
   "name": "Citizen Service Request Agent",
   "rar_name": "@aibast-agents-library/citizen_service_request",
-  "rappid": "rappid:@aibast-agents-library/citizen_service_request:ec4747330be713159d20deb6830ff22cfbb633c15349e2c845a233636a20136c",
-  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/citizen_service_request:c7d3ec4ff988173d90118bf2936df4f0", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@aibast-agents-library/citizen_service_request:8efa2866cf8921695a3056dc0e349da007e04f9f3520062e74134cee7238202d",
+  "_migrated_from": "rappid:@aibast-agents-library/citizen_service_request:ec4747330be713159d20deb6830ff22cfbb633c15349e2c845a233636a20136c",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@aibast-agents-library/citizen_service_request:c7d3ec4ff988173d90118bf2936df4f0",
+    "rappid:@aibast-agents-library/citizen_service_request:ec4747330be713159d20deb6830ff22cfbb633c15349e2c845a233636a20136c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "slg_government",
   "tags": [
@@ -16,24 +21,24 @@
     "SLA",
     "local-government"
   ],
-  "description": "Municipal service request management with intake, routing, status tracking, and resolution summaries.",
+  "description": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 327,
-  "size_kb": 14.6,
-  "sha256": "53c83b0a3c8d567e687c2d293bbfca6c906e1323bdf60b03ccdddac60b32fdd4",
+  "lines": 479,
+  "size_kb": 21.6,
+  "sha256": "33b6a25019280cb2c687286897a5bcef088ecef796331b206a1a4827a973246c",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__citizen_service_request.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__citizen_service_request.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__citizen_service_request.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__citizen_service_request.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py"
 }

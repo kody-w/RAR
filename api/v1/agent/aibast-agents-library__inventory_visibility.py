@@ -1,13 +1,41 @@
 """
-Inventory Visibility Agent — Retail & CPG Stack
+Inventory Visibility Agent — a template you are meant to mutate.
 
-Provides real-time inventory visibility across stores, warehouses, and channels.
-Surfaces stock alerts, generates replenishment plans, and optimizes channel
-allocation for omni-channel retail operations.
+Provides omni-channel inventory visibility across stores, warehouses, and
+channels: stock dashboards, stock-out alerts, replenishment plans, and
+channel allocation for retail operations.
 
-Version 1.1.0 adds deterministic, exact-keyed examples for demonstrated
-network status, store reallocation, simulated execution, and investment
-proposal workflows. All external writes are simulated.
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works anywhere):
+       CRM — Static Dynamics 365 tenant (Aster Lane Office Systems):
+         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       ERP — Static ERP (materials, purchase orders, goods receipts):
+         https://kody-w.github.io/static-erp/api/v1/
+     Try: perform(operation="inventory_dashboard")
+     — the dashboard is built from the tenant's live products (e.g.
+     "Mobile Cart M8", AST-CRT-008) plus live sales-order demand, and
+     joins the ERP's 20 materials with goods receipts as REAL inbound
+     supply per CRM product (material CMP-PRH-0420 "Print head assembly,
+     AsterPrint M420" feeds AST-PRN-420 — and only 36 of 40 units
+     arrived on PO-47003, which the dashboard flags).
+  2. No network? Everything falls back to the embedded demo layer below
+     (STORES / SKUS / INVENTORY) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     INVENTORY_VISIBILITY_DATA_URL (CRM side) and/or
+     INVENTORY_VISIBILITY_ERP_URL (ERP side) to any endpoint with the
+     same shapes, or replace _fetch_collection() with your own inventory
+     API. The fields the rest of the file needs are listed in
+     _normalize_live_product() — everything else keeps working
+     untouched. Per-location on-hand and days-of-supply are labeled
+     "n/a — enrichment seam" until you wire your WMS.
+
+OPERATIONS
+  inventory_dashboard | stock_alerts | replenishment_plan |
+  channel_allocation | network_inventory_status | reallocation_scenarios |
+  reallocation_execution | investment_proposal
+  kwargs: operation (required), sku_id, location_id, key, user_input
 """
 
 import sys
@@ -18,16 +46,17 @@ sys.path.insert(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"),
 )
 from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/inventory_visibility",
-    "version": "1.1.0",
+    "version": "1.3.0",
     "display_name": "Inventory Visibility Agent",
     "description": (
-        "Delivers real-time inventory dashboards, stock-out alerts, "
-        "replenishment planning, and channel allocation optimization "
-        "for omni-channel retail and CPG operations."
+        "Reports stock dashboards joining a simulated Dynamics 365 catalog with ERP materials and goods receipts as inbound supply, with offline fallback."
     ),
     "author": "AIBAST",
     "tags": [
@@ -43,8 +72,140 @@ __manifest__ = {
     "dependencies": ["@rapp/basic_agent"],
 }
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real systems
+#
+# Defaults: TWO globally hosted simulated systems (synthetic data
+# served as JSON from GitHub Pages). To hook your own world, either:
+#   export INVENTORY_VISIBILITY_DATA_URL=https://your-org/api/data/v9.2
+#   export INVENTORY_VISIBILITY_ERP_URL=https://your-erp/api/v1
+# or replace _fetch_collection() with your ERP/WMS client. Downstream
+# code only needs the fields produced by _normalize_live_product()
+# and _erp_inbound_by_product().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "INVENTORY_VISIBILITY_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+ERP_SOURCE_URL = os.environ.get(
+    "INVENTORY_VISIBILITY_ERP_URL",
+    "https://kody-w.github.io/static-erp/api/v1",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6, base_url=None):
+    """One bounded GET per collection per source per process. Returns []
+    on ANY failure — offline, DNS, bad JSON — so the demo layer takes
+    over. Cache is keyed by full URL so CRM and ERP never collide."""
+    url = f"{base_url or DATA_SOURCE_URL}/{collection}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+def _erp(collection):
+    """Rows from the live simulated ERP (materials, purchase_orders,
+    goods_receipts, suppliers, supplier_invoices); [] offline."""
+    return _fetch_collection(collection, base_url=ERP_SOURCE_URL)
+
+
+def _erp_inbound_by_product(products):
+    """Join live ERP materials + goods receipts to the CRM catalog:
+    each ERP material whose description names a CRM product becomes
+    REAL inbound component supply for that product. Also flags short
+    receipts (received < ordered on receipted POs). Returns (rows,
+    short_flags); ([], []) when the ERP is unreachable."""
+    materials = _erp("materials")
+    if not materials:
+        return [], []
+    received = {}
+    for g in _erp("goods_receipts"):
+        for l in g.get("lines", []):
+            m = l.get("material_number", "?")
+            received[m] = received.get(m, 0) + int(float(l.get("quantity_received") or 0))
+    rows = []
+    for m in materials:
+        desc = m.get("description", "")
+        crm = next(
+            (p for p in products if p.get("name") and p["name"] in desc), None
+        )
+        rows.append({
+            "material": m.get("material_number", "?"),
+            "description": desc,
+            "group": m.get("material_group", "?"),
+            "lead_time_days": m.get("lead_time_days"),
+            "supplier": m.get("preferred_supplier_name", "?"),
+            "inbound_received": received.get(m.get("material_number"), 0),
+            "feeds_sku": (crm.get("productnumber") or crm.get("sku_id")) if crm else None,
+        })
+    shorts = []
+    grs = _erp("goods_receipts")
+    for p in _erp("purchase_orders"):
+        po_no = p.get("po_number")
+        p_grs = [g for g in grs if g.get("po_number") == po_no]
+        if not p_grs:
+            continue
+        got = {}
+        for g in p_grs:
+            for l in g.get("lines", []):
+                m = l.get("material_number", "?")
+                got[m] = got.get(m, 0) + int(float(l.get("quantity_received") or 0))
+        for l in p.get("lines", []):
+            m = l.get("material_number", "?")
+            ordered = int(float(l.get("quantity") or 0))
+            if got.get(m, 0) < ordered:
+                shorts.append(
+                    f"{m} ({l.get('material_description', '')}): "
+                    f"{got.get(m, 0)} of {ordered} received on {po_no} "
+                    f"({p.get('supplier_name', '?')})"
+                )
+    return rows, shorts
+
+
+def _normalize_live_product(row):
+    """Project a Dynamics product record onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from the catalog alone'
+    and the renderers label it as an enrichment seam."""
+    def _f(value):
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None
+    return {
+        "sku_id": row.get("productnumber") or row.get("productid", ""),
+        "name": row.get("name", "Unknown"),
+        "category": row.get(
+            "producttypecode@OData.Community.Display.V1.FormattedValue", "General"
+        ),
+        "unit_cost": _f(row.get("currentcost")),
+        "retail_price": _f(row.get("price")),
+        "on_hand": None,          # enrichment seam — wire your WMS
+        "description": row.get("description", ""),
+        "active": row.get("statecode") == 0,
+        "_live": True,
+    }
+
+
+def _na(value, fmt="{}"):
+    """None = the source system alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else fmt.format(value)
+
+
 # ---------------------------------------------------------------------------
-# Synthetic Data — Stores & Warehouses
+# EMBEDDED DEMO LAYER (offline fallback) — Stores & Warehouses
 # ---------------------------------------------------------------------------
 
 STORES = {
@@ -344,8 +505,72 @@ class InventoryVisibilityAgent(BasicAgent):
 
     # ---- operations -------------------------------------------------------
 
+    def _live_inventory_dashboard(self, products):
+        """Dashboard built from live tenant records (preferred when online)."""
+        orders = _fetch_collection("salesorders")
+        open_orders = [o for o in orders if o.get("statecode") in (0, 1)]
+        open_demand = sum(float(o.get("totalamount") or 0) for o in open_orders)
+        lines = [
+            "# Inventory Dashboard — Live Tenant Catalog",
+            "",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "Pass `location_id` (e.g. STR-001) for the embedded demo store view.",
+            "",
+            "| SKU | Product | Category | Unit Cost | Retail | On-Hand | Active |",
+            "|-----|---------|----------|-----------|--------|---------|--------|",
+        ]
+        for p in sorted(products, key=lambda x: x["sku_id"]):
+            lines.append(
+                f"| {p['sku_id']} | {p['name']} | {p['category']} "
+                f"| {_na(p['unit_cost'], '${:,.2f}')} | {_na(p['retail_price'], '${:,.2f}')} "
+                f"| {_na(p['on_hand'])} | {'yes' if p['active'] else 'no'} |"
+            )
+        lines.append("")
+        lines.append(f"**Catalog size:** {len(products)} live products")
+        lines.append(
+            f"**Demand signal (live sales orders):** {len(open_orders)} open orders, "
+            f"${open_demand:,.2f} open order value"
+        )
+        lines.append(
+            "**Per-location on-hand / days-of-supply:** n/a — enrichment seam "
+            "(wire your WMS at the LIVE DATA SEAM)"
+        )
+        erp_rows, shorts = _erp_inbound_by_product(products)
+        if erp_rows:
+            lines.append("")
+            lines.append("## Inbound Supply — Live ERP Materials + Goods Receipts")
+            lines.append("")
+            lines.append("| Material | Description | Group | Lead Time | Supplier | Inbound Received | Feeds SKU |")
+            lines.append("|----------|-------------|-------|-----------|----------|------------------|-----------|")
+            for r in erp_rows:
+                lines.append(
+                    f"| {r['material']} | {r['description']} | {r['group']} "
+                    f"| {r['lead_time_days']}d | {r['supplier']} "
+                    f"| {r['inbound_received']:,} | {r['feeds_sku'] or '—'} |"
+                )
+            lines.append("")
+            lines.append(
+                f"**ERP inbound view:** {len(erp_rows)} live materials joined to the "
+                "CRM catalog by product name; quantities are REAL goods-receipt sums."
+            )
+            for s in shorts:
+                lines.append(f"**Short receipt flagged:** {s}")
+        else:
+            lines.append("")
+            lines.append("_Simulated ERP unreachable — inbound supply view unavailable._")
+        return "\n".join(lines)
+
     def _inventory_dashboard(self, **kwargs):
         location_id = kwargs.get("location_id")
+        if not location_id:
+            live = [
+                p for p in (
+                    _normalize_live_product(r) for r in _fetch_collection("products")
+                )
+                if p["sku_id"]
+            ]
+            if live:
+                return self._live_inventory_dashboard(live)
         locations = [location_id] if location_id and location_id in INVENTORY else list(STORES.keys())
         lines = ["# Inventory Dashboard", ""]
         for loc_id in locations:
@@ -538,7 +763,12 @@ class InventoryVisibilityAgent(BasicAgent):
 if __name__ == "__main__":
     agent = InventoryVisibilityAgent()
     print("=" * 80)
+    print("EMBEDDED DEMO STORE (works offline)")
     print(agent.perform(operation="inventory_dashboard", location_id="STR-001"))
+    print("\n" + "=" * 80)
+    print("LIVE TENANT CATALOG + LIVE ERP INBOUND SUPPLY (goods-receipt join;")
+    print("fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="inventory_dashboard"))
     print("\n" + "=" * 80)
     print(agent.perform(operation="stock_alerts"))
     print("\n" + "=" * 80)

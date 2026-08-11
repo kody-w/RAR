@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__portfolio_rebalancing",
   "name": "Portfolio Rebalancing Agent",
   "rar_name": "@aibast-agents-library/portfolio_rebalancing",
-  "rappid": "rappid:@aibast-agents-library/portfolio_rebalancing:85698532087e297c103658c042ce0281fdde3294877b13cbd8508aae348afe43",
-  "_migrated_from": "rappid:@aibast-agents-library/portfolio_rebalancing:48a766087d076c3cb87730d38e4e69c3bc8fec52094983c8ab25eed1b4a2b1e9", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.0",
+  "rappid": "rappid:@aibast-agents-library/portfolio_rebalancing:13b98a74fbf84ea33b3109680cf80ffbd2164164a371dd1fec75992e5c2942af",
+  "_migrated_from": "rappid:@aibast-agents-library/portfolio_rebalancing:85698532087e297c103658c042ce0281fdde3294877b13cbd8508aae348afe43",
+  "_migrated_from_all": [
+    "rappid:@aibast-agents-library/portfolio_rebalancing:48a766087d076c3cb87730d38e4e69c3bc8fec52094983c8ab25eed1b4a2b1e9",
+    "rappid:@aibast-agents-library/portfolio_rebalancing:85698532087e297c103658c042ce0281fdde3294877b13cbd8508aae348afe43"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.2.0",
   "publisher": "@aibast-agents-library",
   "category": "financial_services",
   "tags": [
@@ -18,24 +23,24 @@
     "retirement-projection",
     "risk-analysis"
   ],
-  "description": "Portfolio rebalancing with drift analysis, trade recommendations, tax impact assessment, and execution planning.",
+  "description": "Analyzes portfolio drift and trades from a live simulated Dynamics 365 tenant (product lines as positions), with an offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 438,
-  "size_kb": 21.1,
-  "sha256": "48a766087d076c3cb87730d38e4e69c3bc8fec52094983c8ab25eed1b4a2b1e9",
+  "lines": 574,
+  "size_kb": 27.2,
+  "sha256": "0f1d4d1d56d9c6249854b927421a486038d693daa784e6d4e7fbaccf6c19f83f",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__portfolio_rebalancing.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__portfolio_rebalancing.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__portfolio_rebalancing.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__portfolio_rebalancing.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py"
 }

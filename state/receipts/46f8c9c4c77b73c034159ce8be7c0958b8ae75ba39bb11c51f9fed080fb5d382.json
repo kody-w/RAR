@@ -1,0 +1,43 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "maintainer_review"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-11"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/ai_first_process_redesign",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6fcb40c0aefde81d18f04518bfc8826d717720562bf6014f8f96d11677b90bb9"
+ },
+ "canonical_path": "agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-11T04:23:26.252973+00:00",
+ "id": "rar_46f8c9c4c77b73c034159ce8be7c0958b8ae75ba39bb11c51f9fed080fb5d382",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "e8d05f6872cfd6ed788e7486bf726503ad43e38a8aa6005a6449dcae017c0ada",
+  "receipt": "rar_803602584217ad2d14994ff028f384133a70d0c236bbdd1ac41b50b263d9764d",
+  "version": "3.1.0"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_46f8c9c4c77b73c034159ce8",
+ "revision_id": "46f8c9c4c77b73c034159ce8be7c0958b8ae75ba39bb11c51f9fed080fb5d382",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "regenerated aggregated agents and repaired public catalog drift"
+ },
+ "version": "3.1.1"
+}

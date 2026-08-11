@@ -23,9 +23,9 @@ Actions:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/git_warehouse_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Git Warehouse",
-    "description": "Turn any repo's data into a queryable, time-tracked warehouse using the git-scraping + Datasette methodology: shape data with a .py, commit on every change so git history is the time-series, and serve it with Datasette.",
+    "description": "Builds a queryable git-tracked warehouse from any repo's data by running a shaper script, committing on change, and emitting the Datasette command.",
     "author": "kody-w",
     "tags": [
         "data",

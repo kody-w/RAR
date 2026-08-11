@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__mission_reporting_assistant",
   "name": "Mission Reporting Assistant Agent",
   "rar_name": "@aibast-agents-library/mission_reporting_assistant",
-  "rappid": "rappid:@aibast-agents-library/mission_reporting_assistant:b4a94359ca6fca3ffef3f0f72fa013eff05b897c876968eb53711e23a9cb0d10",
-  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/mission_reporting_assistant:e3459b8792513bffd47c56ab5fc10811", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@aibast-agents-library/mission_reporting_assistant:149200580f97a4a7fbf35160a9edbc15194fb520cc3c44ecdde0894f30ae7d99",
+  "_migrated_from": "rappid:@aibast-agents-library/mission_reporting_assistant:b4a94359ca6fca3ffef3f0f72fa013eff05b897c876968eb53711e23a9cb0d10",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@aibast-agents-library/mission_reporting_assistant:e3459b8792513bffd47c56ab5fc10811",
+    "rappid:@aibast-agents-library/mission_reporting_assistant:b4a94359ca6fca3ffef3f0f72fa013eff05b897c876968eb53711e23a9cb0d10"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "federal_government",
   "tags": [
@@ -16,24 +21,24 @@
     "federal",
     "dashboard"
   ],
-  "description": "Generates mission summaries, KPI dashboards, stakeholder briefs, and trend analyses for federal programs.",
+  "description": "Computes mission KPIs from live records on a simulated Dynamics 365 tenant, with briefs and trend analyses that work offline.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 286,
-  "size_kb": 13.0,
-  "sha256": "4d6499b268464decf9da18001da5353c9fa4e002c8c53b59f735eedb782a01d2",
+  "lines": 406,
+  "size_kb": 18.7,
+  "sha256": "9cfa2e32539fd7d1848bf36ec4354cd334a7adadfba826d7582cb5b85ca2b42c",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__mission_reporting_assistant.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__mission_reporting_assistant.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__mission_reporting_assistant.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__mission_reporting_assistant.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py"
 }

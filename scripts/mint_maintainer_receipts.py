@@ -13,6 +13,8 @@ ride the Issue notarization pipeline, which produces the same shapes.
 
 Usage:
   python3 scripts/mint_maintainer_receipts.py [--note "why"]
+  python3 scripts/mint_maintainer_receipts.py \
+    --agent @publisher/agent_name --note "why"
 """
 
 from __future__ import annotations
@@ -21,6 +23,7 @@ import argparse
 import ast as astmod
 import hashlib
 import json
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -53,15 +56,88 @@ def manifest_of(source: str) -> dict | None:
     return None
 
 
+def write_lifecycle(value: dict) -> None:
+    temporary = LIFECYCLE_FILE.with_suffix(".json.tmp")
+    temporary.write_text(
+        json.dumps(value, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    temporary.replace(LIFECYCLE_FILE)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--note", default="maintainer bulk maintenance pass")
+    parser.add_argument(
+        "--agent",
+        help="Mint only the named @publisher/agent lifecycle record.",
+    )
+    parser.add_argument(
+        "--collapse-unpublished",
+        action="store_true",
+        help=(
+            "With --agent, remove only untracked receipt descendants and "
+            "restore the committed lifecycle ancestor before minting."
+        ),
+    )
     args = parser.parse_args()
+    if args.collapse_unpublished and not args.agent:
+        parser.error("--collapse-unpublished requires --agent")
 
     lifecycle = json.loads(LIFECYCLE_FILE.read_text(encoding="utf-8"))
     agents_lc = lifecycle.setdefault("agents", {})
+    if args.collapse_unpublished:
+        baseline = json.loads(
+            subprocess.check_output(
+                [
+                    "git",
+                    "show",
+                    "HEAD:state/agent_lifecycle.json",
+                ],
+                cwd=REPO_ROOT,
+                text=True,
+            )
+        )
+        baseline_record = baseline.get("agents", {}).get(args.agent)
+        current_record = agents_lc.get(args.agent)
+        if not baseline_record or not current_record:
+            parser.error("agent lacks committed lifecycle ancestry")
+        cursor = current_record.get("latest_receipt", "")
+        stop = baseline_record.get("latest_receipt", "")
+        removable = []
+        seen = set()
+        while cursor != stop:
+            if not cursor.startswith("rar_") or cursor in seen:
+                parser.error("unpublished receipt ancestry is invalid")
+            seen.add(cursor)
+            relative = Path(
+                "state/receipts"
+            ) / f"{cursor.removeprefix('rar_')}.json"
+            receipt_path = REPO_ROOT / relative
+            if not receipt_path.exists():
+                parser.error(f"receipt is missing: {relative}")
+            tracked = subprocess.run(
+                ["git", "cat-file", "-e", f"HEAD:{relative.as_posix()}"],
+                cwd=REPO_ROOT,
+                capture_output=True,
+            ).returncode == 0
+            if tracked:
+                parser.error(
+                    f"refusing to remove published receipt: {relative}"
+                )
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+            if receipt.get("agent") != args.agent:
+                parser.error("receipt ancestry crosses agent identity")
+            removable.append(receipt_path)
+            cursor = (receipt.get("previous") or {}).get("receipt", "")
+        agents_lc[args.agent] = baseline_record
+        lifecycle["updated_at"] = datetime.now(timezone.utc).isoformat()
+        write_lifecycle(lifecycle)
+        for path in removable:
+            path.unlink()
     now = datetime.now(timezone.utc).isoformat()
     minted = 0
+    matched = 0
 
     paths = sorted(REPO_ROOT.glob("agents/**/*.py")) + sorted(
         REPO_ROOT.glob("agents/**/*.py.card")
@@ -73,6 +149,9 @@ def main() -> int:
         if not manifest or not manifest.get("name"):
             continue
         name = manifest["name"]
+        if args.agent and name != args.agent:
+            continue
+        matched += 1
         digest = canonical_sha256(content)
         existing = agents_lc.get(name)
         if existing and existing.get("sha256") == digest:
@@ -87,6 +166,15 @@ def main() -> int:
                 "digest": digest,
                 "version": version,
                 "action": action,
+                "previous": (
+                    {
+                        "digest": existing.get("sha256", ""),
+                        "receipt": existing.get("latest_receipt", ""),
+                        "version": existing.get("version", ""),
+                    }
+                    if existing
+                    else None
+                ),
             },
             sort_keys=True,
             separators=(",", ":"),
@@ -98,8 +186,7 @@ def main() -> int:
                 "checks": [
                     "manifest",
                     "content_sha256",
-                    "registry_build",
-                    "full_test_suite",
+                    "maintainer_review",
                 ],
                 **MAINTAINER,
                 "policy": POLICY,
@@ -130,10 +217,22 @@ def main() -> int:
             "submission": {**MAINTAINER, "note": args.note},
             "version": version,
         }
-        (RECEIPTS_DIR / f"{revision_id}.json").write_text(
-            json.dumps(receipt, indent=1, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
+        receipt_path = RECEIPTS_DIR / f"{revision_id}.json"
+        receipt_text = json.dumps(
+            receipt,
+            indent=1,
+            sort_keys=True,
+        ) + "\n"
+        if receipt_path.exists():
+            if receipt_path.read_text(encoding="utf-8") != receipt_text:
+                raise RuntimeError(
+                    f"refusing to overwrite different receipt {receipt_path}"
+                )
+        else:
+            receipt_path.write_text(
+                receipt_text,
+                encoding="utf-8",
+            )
         agents_lc[name] = {
             "status": "active",
             "version": version,
@@ -147,11 +246,11 @@ def main() -> int:
         }
         minted += 1
 
-    lifecycle["updated_at"] = now
-    LIFECYCLE_FILE.write_text(
-        json.dumps(lifecycle, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
+    if args.agent and matched == 0:
+        parser.error(f"agent was not found: {args.agent}")
+    if minted:
+        lifecycle["updated_at"] = now
+        write_lifecycle(lifecycle)
     print(f"minted {minted} receipt(s); total records: {len(agents_lc)}")
     return 0
 

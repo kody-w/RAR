@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__pdf_table_data_conversion",
+  "name": "PDF Table Data Conversion",
+  "rar_name": "@cat-agent-skills/pdf_table_data_conversion",
+  "rappid": "rappid:@cat-agent-skills/pdf_table_data_conversion:deb867307a6bd283cca54d26945dc2b3d1ac038ae4368313981ec0e0f27018b4",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "documents",
+    "extraction",
+    "pdf",
+    "csv",
+    "xlsx",
+    "tables",
+    "sharepoint"
+  ],
+  "description": "Extract tables from a PDF document (e.g. contract rebate or pricing schedules) and convert them into a clean, workable Excel spreadsheet or CSV.",
+  "author": "Lewis Baybutt",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.1,
+  "sha256": "111afc6de615d21bd7a889670fe83fb7a8c062d7eced5a34668f69aad0e6d049",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__pdf_table_data_conversion.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pdf_table_data_conversion_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__pdf_table_data_conversion.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__pdf_table_data_conversion.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/pdf_table_data_conversion_agent.py"
+}

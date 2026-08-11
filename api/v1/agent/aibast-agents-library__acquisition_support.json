@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__acquisition_support",
   "name": "Acquisition Support Agent",
   "rar_name": "@aibast-agents-library/acquisition_support",
-  "rappid": "rappid:@aibast-agents-library/acquisition_support:a2fe5e9f3d3af9bd7bea5338bb51a416d25bb45704e31d6e0fe99e4d8df1f0c2",
-  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/acquisition_support:cbb68406cd8f076c3e2f1c77710d6537", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@aibast-agents-library/acquisition_support:e55125b26829edc80cee62490915a46cf6854236487d2c3b6b5ecd71dad727e6",
+  "_migrated_from": "rappid:@aibast-agents-library/acquisition_support:a2fe5e9f3d3af9bd7bea5338bb51a416d25bb45704e31d6e0fe99e4d8df1f0c2",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@aibast-agents-library/acquisition_support:cbb68406cd8f076c3e2f1c77710d6537",
+    "rappid:@aibast-agents-library/acquisition_support:a2fe5e9f3d3af9bd7bea5338bb51a416d25bb45704e31d6e0fe99e4d8df1f0c2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "federal_government",
   "tags": [
@@ -16,24 +21,24 @@
     "vendor-evaluation",
     "federal"
   ],
-  "description": "Federal acquisition lifecycle support with FAR/DFAR compliance, vendor evaluation, and procurement timeline management.",
+  "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 398,
-  "size_kb": 16.9,
-  "sha256": "209fadf699dafa78d524912aa2af9c2a7fc0405cb69a86ae40ca53212fbb8052",
+  "lines": 526,
+  "size_kb": 23.1,
+  "sha256": "b470bfbe595b3f5c1b01f2d7454c359a20be6ac3714db588a97743a9969fdf13",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__acquisition_support.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__acquisition_support.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__acquisition_support.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__acquisition_support.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py"
 }

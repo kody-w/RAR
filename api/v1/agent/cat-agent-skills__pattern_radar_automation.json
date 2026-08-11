@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__pattern_radar_automation",
+  "name": "Pattern Radar (Scheduled)",
+  "rar_name": "@cat-agent-skills/pattern_radar_automation",
+  "rappid": "rappid:@cat-agent-skills/pattern_radar_automation:e65289cf1a3d622a36fab6f8f53812ee081105f23a544dfe2ddd437fe7ba96c0",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "automation",
+    "productivity",
+    "teams",
+    "email",
+    "content",
+    "insights"
+  ],
+  "description": "Twice a week, scans your recent Microsoft 365 signals and posts a Teams summary of recurring patterns worth productizing \u2014 things you keep explaining (blog candidates) and multi-step tasks you keep doing by hand (automation candidates). Read-only and privacy-aware.",
+  "author": "Srinivas Varukala",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.2,
+  "sha256": "4a46e8a71dfa5a6e08732d289372d52fe203669fef202c3956fa38a1d6f3317a",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__pattern_radar_automation.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pattern_radar_automation_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__pattern_radar_automation.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__pattern_radar_automation.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/pattern_radar_automation_agent.py"
+}

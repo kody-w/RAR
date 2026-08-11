@@ -24,9 +24,9 @@ from datetime import datetime, timedelta
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/stakeholder_intelligence",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Stakeholder Intelligence",
-    "description": "Maps org charts, analyzes buying committees, and scores relationship strength for enterprise accounts.",
+    "description": "Maps org charts, buying committees, engagement gaps, and relationship strength for accounts using built-in demo data.",
     "author": "AIBAST",
     "tags": ["b2b", "sales", "stakeholder-mapping", "org-chart", "buying-committee"],
     "category": "b2b_sales",

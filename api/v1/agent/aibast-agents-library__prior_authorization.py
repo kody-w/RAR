@@ -1,30 +1,55 @@
 """
-Prior Authorization Agent for Healthcare.
+Prior Authorization Agent — a template you are meant to mutate.
 
 Manages prior authorization requests, checks clinical criteria against
-payer rules, tracks authorization status, and prepares appeal documentation
-for denied or pending authorizations.
+payer rules, tracks authorization status, prepares appeal documentation,
+and replays six demonstrated capability outcomes (keyed evidence lookups
+with simulated write receipts — never live writes).
 
-Version 1.1.0 extends the agent with six outcomes demonstrated in the source
-prior authorization demo while preserving every legacy operation:
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works from anywhere):
+       CRM  — the Static Dynamics 365 tenant (Aster Lane Office Systems):
+              https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+              A Dynamics case for the healthcare account Riverbend
+              Medical Group is reinterpreted as an authorization
+              work-queue item — e.g. CAS-260124 "Prior authorization
+              request pending beyond SLA".
+       FHIR — the Static FHIR R4 server (Riverbend Medical Group):
+              https://kody-w.github.io/static-fhir/fhir/
+              The denied preauthorization Claim RMG-CLM-260108 (the
+              $1,875 Cardiac MRI) and the cancelled Appointment it
+              references.
+     Try: perform(operation="auth_request")
+     — one briefing joins the denied FHIR preauth Claim, the cancelled
+     FHIR Appointment it deferred, and the CRM case CAS-260124 that
+     tracks the same SLA breach: three systems in one output.
+  2. No network? Everything falls back to the embedded demo layer below
+     (AUTH_REQUESTS / CLINICAL_CRITERIA / CAPABILITIES) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     PRIOR_AUTHORIZATION_DATA_URL (CRM side) to any OData-shaped endpoint
+     and PRIOR_AUTHORIZATION_FHIR_URL (clinical side) to any FHIR R4
+     searchset-bundle host — or replace _fetch_collection() /
+     _fetch_fhir_bundle() with an X12 278 or payer-API client. Fields the
+     rest of the file needs are listed in _normalize_live_auth() — CPT
+     code and auth number render as "n/a — enrichment seam" until you
+     wire a payer system.
 
-- ``authorization_verification`` — Authorization Intake and Verification
-- ``payer_requirement``          — Payer Requirement Analysis
-- ``authorization_submission``   — Authorization Submission and Notification (simulated write)
-- ``approval_prediction``        — Approval Probability and Appeal Strategy (generative)
-- ``authorization_tracking``     — Authorization Tracking and Teams Notification (simulated write)
-- ``denial_appeal_status``       — Denial and Active Appeal Insight
-
-Each new capability is a keyed lookup over embedded evidence records. Pass an
-exact record key via ``key`` (or embed it in ``user_input``) to retrieve one
-record; omit it for a no-input evidence summary. Write-capable operations emit
-an explicit *simulated* write receipt and never mutate an external system — all
-data lives in-file and every response is fully deterministic.
+OPERATIONS
+  auth_request | clinical_criteria_check | status_tracking
+  | appeal_preparation | authorization_verification | payer_requirement
+  | authorization_submission | approval_prediction | authorization_tracking
+  | denial_appeal_status
+  kwargs: operation (required), auth_id, key, user_input
 """
 
 import sys
 import os
 import re
+import json
+import urllib.request
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
 from basic_agent import BasicAgent
 
@@ -32,9 +57,9 @@ from basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@aibast-agents-library/prior_authorization",
-    "version": "1.1.0",
+    "version": "1.3.0",
     "display_name": "Prior Authorization Agent",
-    "description": "Manages prior authorization requests, clinical criteria checks, status tracking, and appeal preparation for healthcare payers.",
+    "description": "Tracks prior-auth requests and appeals, joining a live simulated FHIR server (denied preauth claim) with the Dynamics 365 CRM case; offline fallback.",
     "author": "AIBAST",
     "tags": ["prior-auth", "authorization", "payer", "clinical-criteria", "appeals", "healthcare"],
     "category": "healthcare",
@@ -44,8 +69,176 @@ __manifest__ = {
 }
 
 
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real systems
+#
+# Two live sources, both synthetic and hosted on GitHub Pages:
+#   CRM  (OData-shaped Dynamics 365, Aster Lane Office Systems):
+#     export PRIOR_AUTHORIZATION_DATA_URL=https://your-org/api/data/v9.2
+#   FHIR (R4 searchset bundles, Riverbend Medical Group):
+#     export PRIOR_AUTHORIZATION_FHIR_URL=https://your-fhir-host/fhir
+# or replace _fetch_collection() / _fetch_fhir_bundle() with your
+# payer-portal client. Downstream code only needs the fields from
+# _normalize_live_auth() and _live_preauth_story().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "PRIOR_AUTHORIZATION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+FHIR_SOURCE_URL = os.environ.get(
+    "PRIOR_AUTHORIZATION_FHIR_URL",
+    "https://kody-w.github.io/static-fhir/fhir",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _fetch_fhir_bundle(resource, timeout=6):
+    """Sibling helper for the FHIR side: one bounded GET per resource
+    type per process (cached by full URL). Returns the list of entry
+    resources from the R4 searchset Bundle; [] on ANY failure."""
+    url = f"{FHIR_SOURCE_URL}/{resource}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            bundle = json.loads(resp.read().decode("utf-8"))
+        rows = [e.get("resource", {}) for e in bundle.get("entry", [])]
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+_LIVE_STATE = {0: "pending_review", 1: "approved", 2: "cancelled"}
+
+
+def _normalize_live_auth(row):
+    """Project a Dynamics case onto the auth-request row this agent renders.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from the CRM-side record
+    alone' and the renderer labels it as an enrichment seam (wire your
+    payer portal or X12 278 clearinghouse there)."""
+    return {
+        "id": row.get("ticketnumber", "?"),
+        "patient": row.get("primarycontactidname") or "Unknown",
+        "procedure": row.get("title", "untitled request"),
+        "cpt": None,          # enrichment seam — wire your coding system
+        "payer": row.get("customeridname", "Unknown"),
+        "status": _LIVE_STATE.get(row.get("statecode"), "pending_review"),
+        "submitted": str(row.get("createdon", ""))[:10],
+        "decision": str(row.get("resolvedon") or "")[:10] or "Pending",
+        "auth_number": None,  # enrichment seam — assigned by the payer
+        "_live": True,
+    }
+
+
+def _live_auth_queue():
+    """Riverbend Medical Group cases from the live tenant, reinterpreted as
+    the authorization work queue; [] when offline."""
+    rows = _fetch_collection("incidents")
+    return [
+        _normalize_live_auth(r) for r in rows
+        if r.get("customeridname") == "Riverbend Medical Group"
+    ]
+
+
+def _live_preauth_story():
+    """The cross-system denial story joined on the shared Riverbend
+    Medical Group world: the FHIR preauthorization Claim (denied,
+    cancelled), the cancelled FHIR Appointment the claim references,
+    and the CRM case tracking the same prior-auth SLA breach.
+    None when the FHIR feed is unreachable."""
+    claims = _fetch_fhir_bundle("Claim")
+    claim = next((c for c in claims if c.get("use") == "preauthorization"), None)
+    if not claim:
+        return None
+    seam = "n/a — enrichment seam"
+    item = (claim.get("item") or [{}])[0]
+    coding = (item.get("productOrService", {}).get("coding") or [{}])[0]
+    outcome = next(
+        (e.get("valueCode") for e in claim.get("extension", [])
+         if str(e.get("url", "")).endswith("adjudication-outcome")),
+        seam,
+    )
+    note = next(
+        (s.get("valueString") for s in claim.get("supportingInfo", [])
+         if s.get("valueString")),
+        seam,
+    )
+    appt_ref = next(
+        (s.get("valueReference", {}).get("reference", "")
+         for s in claim.get("supportingInfo", [])
+         if s.get("valueReference", {}).get("reference", "").startswith("Appointment/")),
+        "",
+    )
+    appointment = None
+    if appt_ref:
+        appt_id = appt_ref.split("/", 1)[1]
+        raw = next(
+            (a for a in _fetch_fhir_bundle("Appointment") if a.get("id") == appt_id),
+            None,
+        )
+        if raw:
+            appointment = {
+                "id": raw.get("id", "?"),
+                "description": raw.get("description", "untitled"),
+                "status": raw.get("status", "?"),
+                "start": str(raw.get("start", ""))[:16].replace("T", " "),
+                "participants": "; ".join(
+                    p.get("actor", {}).get("display", "?")
+                    for p in raw.get("participant", [])
+                ) or "none listed",
+            }
+    crm_case = next(
+        (c for c in _live_auth_queue()
+         if "prior authorization" in c["procedure"].lower()),
+        None,
+    )
+    return {
+        "claim": {
+            "claim_number": (claim.get("identifier") or [{}])[0].get(
+                "value", claim.get("id", "?")
+            ),
+            "use": claim.get("use", "?"),
+            "patient": claim.get("patient", {}).get("display", "Unknown"),
+            "service": coding.get("display", "unspecified service"),
+            "serviced": item.get("servicedDate", "n/a"),
+            "total": float(claim.get("total", {}).get("value") or 0.0),
+            "currency": claim.get("total", {}).get("currency", "USD"),
+            "status": claim.get("status", "?"),
+            "outcome": outcome,
+            "insurer": claim.get("insurer", {}).get("display", "Unknown"),
+            "note": note,
+        },
+        "appointment": appointment,
+        "crm_case": crm_case,
+    }
+
+
 # ---------------------------------------------------------------------------
-# Synthetic domain data
+# EMBEDDED DEMO LAYER (offline fallback)
 # ---------------------------------------------------------------------------
 
 AUTH_REQUESTS = {
@@ -568,6 +761,72 @@ class PriorAuthorizationAgent(BasicAgent):
                 f"| {r['payer']} | {r['status'].upper()} | {r['submitted']} "
                 f"| {r['decision']} | {r['auth_number']} |"
             )
+        live = _live_auth_queue()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines += [
+                "",
+                "## Live Tenant Authorization Queue (Dynamics cases — Riverbend Medical Group)",
+                "",
+                "| ID | Patient | Request | CPT | Account | Status | Submitted | Decision | Auth # |",
+                "|----|---------|---------|-----|---------|--------|-----------|----------|--------|",
+            ]
+            for r in live:
+                lines.append(
+                    f"| {r['id']} | {r['patient']} | {r['procedure']} | {r['cpt'] or seam} "
+                    f"| {r['payer']} | {r['status'].upper()} | {r['submitted']} "
+                    f"| {r['decision']} | {r['auth_number'] or seam} |"
+                )
+        else:
+            lines += ["", "_Live tenant unreachable — showing embedded demo requests only._"]
+        story = _live_preauth_story()
+        if story:
+            claim = story["claim"]
+            lines += [
+                "",
+                "## Live Denial Briefing — FHIR Claim + FHIR Appointment + CRM Case",
+                "",
+                "One prior-auth denial, three live systems, joined on the shared "
+                "Riverbend Medical Group world:",
+                "",
+                f"**FHIR Claim {claim['claim_number']}** (use: {claim['use']})",
+                f"- Patient: {claim['patient']}",
+                f"- Service: {claim['service']} (serviced {claim['serviced']})",
+                f"- Total: ${claim['total']:,.2f} {claim['currency']}",
+                f"- Status: {claim['status']} | Adjudication outcome: {claim['outcome']}",
+                f"- Insurer: {claim['insurer']}",
+                f"- Denial note: {claim['note']}",
+            ]
+            appt = story.get("appointment")
+            if appt:
+                lines += [
+                    "",
+                    f"**FHIR Appointment {appt['id'][:8]}** (referenced by the claim)",
+                    f"- Description: {appt['description']}",
+                    f"- Status: {appt['status']} | Was scheduled: {appt['start']} UTC",
+                    f"- Participants: {appt['participants']}",
+                ]
+            else:
+                lines += ["", "**FHIR Appointment:** linked appointment unresolvable — n/a"]
+            case = story.get("crm_case")
+            if case:
+                lines += [
+                    "",
+                    f"**CRM Case {case['id']}** (Dynamics 365 — account: {case['payer']})",
+                    f"- Title: {case['procedure']}",
+                    f"- Status: {case['status'].upper()} | Opened: {case['submitted']} "
+                    f"| Contact: {case['patient']}",
+                ]
+            else:
+                lines += ["", "**CRM Case:** no matching prior-auth case reachable — n/a"]
+            lines += [
+                "",
+                "_Join: the cancelled preauthorization Claim references the deferred "
+                "Cardiac MRI Appointment; the CRM case tracks the same prior-auth "
+                "SLA breach for the same provider group._",
+            ]
+        else:
+            lines += ["", "_Live FHIR server unreachable — denial briefing unavailable offline._"]
         return "\n".join(lines)
 
     def _clinical_criteria_check(self) -> str:
@@ -733,7 +992,14 @@ class PriorAuthorizationAgent(BasicAgent):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent = PriorAuthorizationAgent()
-    legacy_ops = ["auth_request", "clinical_criteria_check", "status_tracking", "appeal_preparation"]
+    print("=" * 60)
+    print("EMBEDDED DEMO + LIVE CRM AUTH QUEUE + LIVE FHIR DENIAL STORY")
+    print("(sibling-live demo: the FHIR preauth Claim, its cancelled")
+    print("Appointment, and CRM case CAS-260124 join in one briefing;")
+    print("both feeds fetched over HTTP and fall back offline)")
+    print("=" * 60)
+    print(agent.perform(operation="auth_request"))
+    legacy_ops = ["clinical_criteria_check", "status_tracking", "appeal_preparation"]
     for op in legacy_ops:
         print(f"\n{'='*60}")
         print(f"Operation: {op}")

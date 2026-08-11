@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__brand_template_enforcer",
+  "name": "Brand Template Enforcer",
+  "rar_name": "@cat-agent-skills/brand_template_enforcer",
+  "rappid": "rappid:@cat-agent-skills/brand_template_enforcer:e4038f625b385e5b958f14db899a02e54706917a52db54daa35a5a4ea0372b37",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.2.0",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "branding",
+    "powerpoint",
+    "word",
+    "templates",
+    "documents",
+    "presentations"
+  ],
+  "description": "Ensure every generated PowerPoint deck or Word document starts from the correct bundled or SharePoint-hosted brand template.",
+  "author": "Doug Bellingeri",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.0,
+  "sha256": "ae1779f176150087d15edf582f1193947f2b3df165ad863d53759e62dd1e9061",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__brand_template_enforcer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/brand_template_enforcer_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__brand_template_enforcer.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__brand_template_enforcer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/brand_template_enforcer_agent.py"
+}

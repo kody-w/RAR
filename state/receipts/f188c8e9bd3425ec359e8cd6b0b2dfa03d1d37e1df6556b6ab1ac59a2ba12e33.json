@@ -1,0 +1,43 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "maintainer_review"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-11"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/rapp_leviathan_factory",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "b89e7e5481f8072c94b06c75634095a5e2cedfda970d5b28ca322252d4a8cb92"
+ },
+ "canonical_path": "agents/@kody-w/rapp_leviathan_factory_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-11T05:53:48.250993+00:00",
+ "id": "rar_f188c8e9bd3425ec359e8cd6b0b2dfa03d1d37e1df6556b6ab1ac59a2ba12e33",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "855cdb3fe56ba9fc8a06cbe9a99960f78a10baedf205f1f27582baa0e9301a6f",
+  "receipt": "rar_8995908d43ddc8c15f9a8c4fadce03a0c154d4473523744480f7269bcd6467fb",
+  "version": "0.2.2"
+ },
+ "quality_tier": "community",
+ "request_id": "req_f188c8e9bd3425ec359e8cd6",
+ "revision_id": "f188c8e9bd3425ec359e8cd6b0b2dfa03d1d37e1df6556b6ab1ac59a2ba12e33",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "retired compatibility adapter 0.3.0"
+ },
+ "version": "0.3.0"
+}

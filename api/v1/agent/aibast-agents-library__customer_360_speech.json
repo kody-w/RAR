@@ -3,9 +3,14 @@
   "id": "aibast-agents-library__customer_360_speech",
   "name": "Customer 360 & Speech Agent",
   "rar_name": "@aibast-agents-library/customer_360_speech",
-  "rappid": "rappid:@aibast-agents-library/customer_360_speech:a0920c8bf24606f3ca346babc9eafec156f3373e38182f965db9c291675a507d",
-  "_migrated_from": "rappid:v2:agent:@aibast-agents-library/customer_360_speech:ee5e50007aec0734879eb5971153e2fd", "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.1",
+  "rappid": "rappid:@aibast-agents-library/customer_360_speech:760eaeaf9c99fdafea6b4b0ce8822f8c4ea7468bc0e0951d1b9239c8098441a0",
+  "_migrated_from": "rappid:@aibast-agents-library/customer_360_speech:a0920c8bf24606f3ca346babc9eafec156f3373e38182f965db9c291675a507d",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@aibast-agents-library/customer_360_speech:ee5e50007aec0734879eb5971153e2fd",
+    "rappid:@aibast-agents-library/customer_360_speech:a0920c8bf24606f3ca346babc9eafec156f3373e38182f965db9c291675a507d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
   "publisher": "@aibast-agents-library",
   "category": "b2c_sales",
   "tags": [
@@ -16,24 +21,24 @@
     "profile",
     "b2c"
   ],
-  "description": "Unified customer profiles with interaction history, sentiment analysis, and next-best-action recommendations.",
+  "description": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
   "author": "AIBAST",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 289,
-  "size_kb": 14.5,
-  "sha256": "64c895216535ec7ea76330e25ab4522af7525666a1557c40778943c12ef45b9d",
+  "lines": 440,
+  "size_kb": 21.8,
+  "sha256": "6ba087b8885c52ce347b6692679ee5a8e75b6d4a205615cbe3f0f35531b9d1db",
   "has_card": true,
-  "added_at": "2026-07-16T17:09:27Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__customer_360_speech.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py",
-  "card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py.card",
+  "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_360_speech.py",
-  "api_card_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_360_speech.card",
+  "api_card_url": null,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/aibast-agents-library__customer_360_speech.json",
   "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py"
 }
