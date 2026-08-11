@@ -27,7 +27,7 @@
   "lines": 188,
   "size_kb": 8.9,
   "sha256": "9eaee36124c834b7c71a49853abb992be0a0ca4f7db6ab125621475019ee15de",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__campaign_deck_builder.svg",

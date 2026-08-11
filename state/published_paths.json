@@ -4,8 +4,8 @@
   "policy": "Append-only. Every path listed here has been published on main and must resolve forever. Add freely. Edit in place. Deprecate with a label. Never move, never rename, never delete.",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "cdn_base": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main",
-  "generated": "2026-08-11T07:02:40Z",
-  "count": 323,
+  "generated": "2026-08-11T09:42:14Z",
+  "count": 333,
   "paths": {
     "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py": {
       "name": "@aibast-agents-library/account_intelligence",
@@ -1298,6 +1298,46 @@
     "agents/@kody-w/wp_publish.py": {
       "name": "@kody-w/wp_publish",
       "first_seen": "2026-08-03T09:47:16-04:00"
+    },
+    "agents/@cat-agent-skills/booth_loop_video_agent.py": {
+      "name": "@cat-agent-skills/booth_loop_video",
+      "first_seen": "2026-08-11T09:42:13Z"
+    },
+    "agents/@cat-agent-skills/browser_uat_analyst_agent.py": {
+      "name": "@cat-agent-skills/browser_uat_analyst",
+      "first_seen": "2026-08-11T09:42:13Z"
+    },
+    "agents/@cat-agent-skills/copilot_studio_agent_test_agent.py": {
+      "name": "@cat-agent-skills/copilot_studio_agent_test",
+      "first_seen": "2026-08-11T09:42:14Z"
+    },
+    "agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py": {
+      "name": "@cat-agent-skills/copilot_studio_harness_picker",
+      "first_seen": "2026-08-11T09:42:14Z"
+    },
+    "agents/@cat-agent-skills/copilot_studio_knowledge_readiness_agent.py": {
+      "name": "@cat-agent-skills/copilot_studio_knowledge_readiness",
+      "first_seen": "2026-08-11T09:42:14Z"
+    },
+    "agents/@cat-agent-skills/monte_carlo_analysis_agent.py": {
+      "name": "@cat-agent-skills/monte_carlo_analysis",
+      "first_seen": "2026-08-11T09:42:14Z"
+    },
+    "agents/@cat-agent-skills/stoic_negotiator_agent.py": {
+      "name": "@cat-agent-skills/stoic_negotiator",
+      "first_seen": "2026-08-11T09:42:14Z"
+    },
+    "agents/@cat-agent-skills/travel_cost_estimator_agent.py": {
+      "name": "@cat-agent-skills/travel_cost_estimator",
+      "first_seen": "2026-08-11T09:42:14Z"
+    },
+    "agents/@cat-agent-skills/what_to_use_when_agent.py": {
+      "name": "@cat-agent-skills/what_to_use_when",
+      "first_seen": "2026-08-11T09:42:14Z"
+    },
+    "agents/@kody-w/full_rapp_leviathan_agent.py": {
+      "name": "@kody-w/full_rapp_leviathan",
+      "first_seen": "2026-08-11T09:42:14Z"
     }
   }
 }

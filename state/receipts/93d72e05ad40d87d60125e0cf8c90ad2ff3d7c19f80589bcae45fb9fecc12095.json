@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": "1735900",
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "31478848515"
+  },
+  "action": "agent.update",
+  "agent": "@cat-agent-skills/chart_builder",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0"
+  },
+  "canonical_path": "agents/@cat-agent-skills/chart_builder_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-08-11T09:42:00.441972+00:00",
+  "id": "rar_93d72e05ad40d87d60125e0cf8c90ad2ff3d7c19f80589bcae45fb9fecc12095",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "324f56ae344f7fa425d43020732f423cb1c323c4b203ece4c33eed13f26b7cf1",
+    "receipt": "rar_7d9ac04e3f472e9ca5abff3cbab7f4144ccbca865b624b7ef4f92d3384117e81",
+    "version": "2.0.0"
+  },
+  "quality_tier": "frontier",
+  "request_id": "req_4ccf2248cec61b9e01c3ae9c",
+  "revision_id": "93d72e05ad40d87d60125e0cf8c90ad2ff3d7c19f80589bcae45fb9fecc12095",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABMRl_2A",
+    "issue_number": 525,
+    "source_body_sha256": "079e951b58396a23f9d6617b8ded312645cdc712001d23db1f7380e98b676ead"
+  },
+  "version": "2.0.1"
+}

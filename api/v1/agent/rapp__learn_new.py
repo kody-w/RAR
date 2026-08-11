@@ -34,7 +34,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/learn_new",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "display_name": "LearnNew",
     "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
     "author": "RAPP",

@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__chart_builder",
   "name": "Chart Builder",
   "rar_name": "@cat-agent-skills/chart_builder",
-  "rappid": "rappid:@cat-agent-skills/chart_builder:8e746d7ca11f6dc69efbcdc05d32ee4a4ac351da2398e51ee947c64d40159536",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/chart_builder:7f7a6b9ea3458caffe425fbe60d71d253e966af884c502e27041d9fe8c51baf2",
+  "_migrated_from": "rappid:@cat-agent-skills/chart_builder:8e746d7ca11f6dc69efbcdc05d32ee4a4ac351da2398e51ee947c64d40159536",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/chart_builder:8e746d7ca11f6dc69efbcdc05d32ee4a4ac351da2398e51ee947c64d40159536"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.0.1",
   "publisher": "@cat-agent-skills",
   "category": "devtools",
   "tags": [
@@ -17,7 +19,7 @@
     "scripts"
   ],
   "description": "Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call.",
-  "author": "CAT Agent Skills",
+  "author": "Adi Leibowitz",
   "quality_tier": "frontier",
   "requires_env": [],
   "dependencies": [
@@ -25,8 +27,8 @@
   ],
   "lines": 188,
   "size_kb": 8.8,
-  "sha256": "324f56ae344f7fa425d43020732f423cb1c323c4b203ece4c33eed13f26b7cf1",
-  "has_card": false,
+  "sha256": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0",
+  "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__chart_builder.svg",

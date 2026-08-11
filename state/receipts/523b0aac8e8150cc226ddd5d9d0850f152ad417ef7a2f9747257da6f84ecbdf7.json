@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": "1735900",
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "31478848515"
+  },
+  "action": "agent.create",
+  "agent": "@cat-agent-skills/travel_cost_estimator",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "90fc9c773d6b9ea7d45ec20a0c13dde3ab6a6ad370d0c0915fd99ecbac14a9b9"
+  },
+  "canonical_path": "agents/@cat-agent-skills/travel_cost_estimator_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-08-11T09:42:00.479476+00:00",
+  "id": "rar_523b0aac8e8150cc226ddd5d9d0850f152ad417ef7a2f9747257da6f84ecbdf7",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "",
+    "receipt": "",
+    "version": ""
+  },
+  "quality_tier": "frontier",
+  "request_id": "req_b51f149894613c84d541c21b",
+  "revision_id": "523b0aac8e8150cc226ddd5d9d0850f152ad417ef7a2f9747257da6f84ecbdf7",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABMRng-g",
+    "issue_number": 532,
+    "source_body_sha256": "f6d7c3bdf3832a772316c158e771b4e047144376662dd3425b630544bf92e545"
+  },
+  "version": "2.0.0"
+}

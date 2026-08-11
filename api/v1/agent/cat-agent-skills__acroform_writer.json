@@ -27,7 +27,7 @@
   "lines": 188,
   "size_kb": 8.8,
   "sha256": "40d2f38bf76d47a54b443ea70f777001ac77ae612979550aab56a5bf2147f8d4",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__acroform_writer.svg",

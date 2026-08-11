@@ -14,7 +14,7 @@ this agent is callable on its own terms and links home for the source.
   Source library : CAT Agent Skills (microsoft)
   Upstream entry : https://microsoft.github.io/cat-agent-skills/#ai-first-process-redesign
   Upstream author: Tim Sparks
-  Upstream version: 2.1.0
+  Upstream version: 2.1.1
   Licence        : unverified (unverified — indexed, never republished)
 
 Regenerated automatically by scripts/generate_aggregated_agents.py whenever the
@@ -24,7 +24,7 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cat-agent-skills/ai_first_process_redesign',
-    "version": '3.1.0',
+    "version": '3.1.1',
     "display_name": 'AI-First Process Redesign',
     "description": 'Redesign your existing processes with AI-first thinking',
     "author": 'Tim Sparks',
@@ -42,10 +42,10 @@ __manifest__ = {
         "source_url": 'https://microsoft.github.io/cat-agent-skills/',
         "upstream_slug": 'ai-first-process-redesign',
         "upstream_url": 'https://microsoft.github.io/cat-agent-skills/#ai-first-process-redesign',
-        "upstream_version": '2.1.0',
+        "upstream_version": '2.1.1',
         "license": 'unverified',
         "license_verified": False,
-        "content_digest": '7ed095eee2005624',
+        "content_digest": 'ae3bcfad1b711034',
     },
     # The platforms the upstream entry targets. First-class and queryable, not
     # buried in prose: this is what lets the registry answer "what can I launch

@@ -1233,15 +1233,15 @@
       "version": "2.0.0"
     },
     "@cat-agent-skills/ai_first_process_redesign": {
-      "canonical_path": "agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
-      "latest_receipt": "rar_803602584217ad2d14994ff028f384133a70d0c236bbdd1ac41b50b263d9764d",
+      "status": "active",
+      "version": "3.1.1",
+      "quality_tier": "frontier",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "quality_tier": "frontier",
-      "sha256": "e8d05f6872cfd6ed788e7486bf726503ad43e38a8aa6005a6449dcae017c0ada",
-      "status": "active",
-      "updated_at": "2026-08-02T01:35:52.563615+00:00",
-      "version": "3.1.0"
+      "canonical_path": "agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
+      "sha256": "6fcb40c0aefde81d18f04518bfc8826d717720562bf6014f8f96d11677b90bb9",
+      "latest_receipt": "rar_7e3904e90380e9969dcb88c6dbed9c40d66d2c510d6e04b6186b6695548c2745",
+      "updated_at": "2026-08-11T09:42:00.425127+00:00"
     },
     "@cat-agent-skills/ai_usecase_assessment": {
       "canonical_path": "agents/@cat-agent-skills/ai_usecase_assessment_agent.py",
@@ -1365,15 +1365,15 @@
       "version": "2.0.0"
     },
     "@cat-agent-skills/chart_builder": {
-      "canonical_path": "agents/@cat-agent-skills/chart_builder_agent.py",
-      "latest_receipt": "rar_7d9ac04e3f472e9ca5abff3cbab7f4144ccbca865b624b7ef4f92d3384117e81",
+      "status": "active",
+      "version": "2.0.1",
+      "quality_tier": "frontier",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "quality_tier": "frontier",
-      "sha256": "324f56ae344f7fa425d43020732f423cb1c323c4b203ece4c33eed13f26b7cf1",
-      "status": "active",
-      "updated_at": "2026-08-02T01:35:52.563615+00:00",
-      "version": "2.0.0"
+      "canonical_path": "agents/@cat-agent-skills/chart_builder_agent.py",
+      "sha256": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0",
+      "latest_receipt": "rar_93d72e05ad40d87d60125e0cf8c90ad2ff3d7c19f80589bcae45fb9fecc12095",
+      "updated_at": "2026-08-11T09:42:00.441972+00:00"
     },
     "@cat-agent-skills/classic_text_adventure": {
       "canonical_path": "agents/@cat-agent-skills/classic_text_adventure_agent.py",
@@ -1871,15 +1871,15 @@
       "version": "2.0.0"
     },
     "@cat-agent-skills/rich_html_presentation": {
-      "canonical_path": "agents/@cat-agent-skills/rich_html_presentation_agent.py",
-      "latest_receipt": "rar_f1b5cc961dad4c08247af044134b03cfa5a16e9fb28dfb5a1dc3f8e860f1509d",
+      "status": "active",
+      "version": "2.2.0",
+      "quality_tier": "frontier",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "quality_tier": "frontier",
-      "sha256": "3850f22f2c00d0923e80824512c44cd7075e0bdbe4aa9bfc1ba8377df89e2004",
-      "status": "active",
-      "updated_at": "2026-08-02T01:35:52.563615+00:00",
-      "version": "2.0.0"
+      "canonical_path": "agents/@cat-agent-skills/rich_html_presentation_agent.py",
+      "sha256": "3d19b945bbfafa005314156f60b03bb2f0361556e9f269fae151015b8e007ec8",
+      "latest_receipt": "rar_326df599969a24c27d818a319652554b15922dda6f82bc525bd2eaf6076d8c67",
+      "updated_at": "2026-08-11T09:42:00.469082+00:00"
     },
     "@cat-agent-skills/scrollytelling_data": {
       "canonical_path": "agents/@cat-agent-skills/scrollytelling_data_agent.py",
@@ -2619,15 +2619,15 @@
       "version": "1.0.0"
     },
     "@kody-w/rapp_leviathan_factory": {
-      "canonical_path": "agents/@kody-w/rapp_leviathan_factory_agent.py",
-      "latest_receipt": "rar_8995908d43ddc8c15f9a8c4fadce03a0c154d4473523744480f7269bcd6467fb",
+      "status": "active",
+      "version": "0.3.0",
+      "quality_tier": "community",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "quality_tier": "community",
-      "sha256": "855cdb3fe56ba9fc8a06cbe9a99960f78a10baedf205f1f27582baa0e9301a6f",
-      "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "0.2.2"
+      "canonical_path": "agents/@kody-w/rapp_leviathan_factory_agent.py",
+      "sha256": "e381f1fe6add6c47eec0d59307110f136103f8d349c611f7be0bff02edb0c6d0",
+      "latest_receipt": "rar_ff044630f5e628dde0706769b5d6073d866bd3adf789df89e54fb6cba229f128",
+      "updated_at": "2026-08-11T09:42:00.507093+00:00"
     },
     "@kody-w/rapp_sdk_builder": {
       "canonical_path": "agents/@kody-w/rapp_sdk_builder_agent.py",
@@ -2894,15 +2894,15 @@
       "version": "1.0.0"
     },
     "@rapp/learn_new": {
-      "canonical_path": "agents/@rapp/learn_new_agent.py",
-      "latest_receipt": "rar_ffaade31cea654be0af643c5b0ad448c3ebbb6245ac55038459a51de2fea2289",
+      "status": "active",
+      "version": "2.1.1",
+      "quality_tier": "official",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "quality_tier": "official",
-      "sha256": "51f67fdc60473fb805021b6b183f3f33aec49a0e73fe95f28236f14204c499b7",
-      "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "2.0.1"
+      "canonical_path": "agents/@rapp/learn_new_agent.py",
+      "sha256": "ee12a37ef550c9ffb1097334da29ebcb4dcaeeac5b3f8b5dbab366e5178eab71",
+      "latest_receipt": "rar_05fb911fe9fb330c2837766a77b399d2a1413d23ae9be89002ca3daad4b4045b",
+      "updated_at": "2026-08-11T09:42:00.418637+00:00"
     },
     "@rapp/moment_factory_agent": {
       "canonical_path": "agents/@rapp/moment_factory_agent.py",
@@ -3321,8 +3321,118 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
+    },
+    "@cat-agent-skills/booth_loop_video": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/booth_loop_video_agent.py",
+      "sha256": "a57ed23652a00cd4a470cd1e4b9ed2235169a024082d805be21ebc268a01cc6c",
+      "latest_receipt": "rar_8f980bdf985560b7b964c763386113f4727f019f9e3f8b78af0be5bce1e3bfb8",
+      "updated_at": "2026-08-11T09:42:00.430375+00:00"
+    },
+    "@cat-agent-skills/browser_uat_analyst": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/browser_uat_analyst_agent.py",
+      "sha256": "7510a8a0f67113bdb0bafd437d5471c7c655e0420db4c4bcd2672e3678e6f387",
+      "latest_receipt": "rar_287aaf66b533bb1ba2fbe11948d6a885840b47e89f380403f3a1e187ff993d71",
+      "updated_at": "2026-08-11T09:42:00.435589+00:00"
+    },
+    "@cat-agent-skills/copilot_studio_agent_test": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
+      "sha256": "6f7094123eb0552125abc477d11ace64488fb220132b6687d3b97322dd477ab7",
+      "latest_receipt": "rar_2646318e802f1946d662043886e706c73d813bd67b1c839b6b28011c926e169f",
+      "updated_at": "2026-08-11T09:42:00.447160+00:00"
+    },
+    "@cat-agent-skills/copilot_studio_harness_picker": {
+      "status": "active",
+      "version": "2.1.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
+      "sha256": "1517c780cf92757e91fb379b2b85ddf7d16ea2c1dac2057dae9a320cd351af59",
+      "latest_receipt": "rar_b6eba53012172d011705e79e45cce822d10a8a92e4585aeb0c26053363f64a18",
+      "updated_at": "2026-08-11T09:42:00.452302+00:00"
+    },
+    "@cat-agent-skills/copilot_studio_knowledge_readiness": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/copilot_studio_knowledge_readiness_agent.py",
+      "sha256": "2c9e627e44f3ee2fd57547d82642251701389b02ee2d6252532f8bfa9c6a15e7",
+      "latest_receipt": "rar_9064ecca82cbae6b11e608c5cbb641addac706a6b000388e842fd87b42d80ba6",
+      "updated_at": "2026-08-11T09:42:00.457537+00:00"
+    },
+    "@cat-agent-skills/monte_carlo_analysis": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/monte_carlo_analysis_agent.py",
+      "sha256": "33b7c20af7270399ddff663b9d1f2e284248d5d4d316cf53a57fb526dbaaadc0",
+      "latest_receipt": "rar_59675189a8b829b5874206ccc617c93ce50056cda6df943ca243cb3b704b78dc",
+      "updated_at": "2026-08-11T09:42:00.462735+00:00"
+    },
+    "@cat-agent-skills/stoic_negotiator": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/stoic_negotiator_agent.py",
+      "sha256": "8575b10ac9af4f658319a16d30a5f1171a7497cf0325d9f7363f461b52657e69",
+      "latest_receipt": "rar_951765b14e73e521868e4c7f0cd43692fcd2df403f398af238e042d0787f9d08",
+      "updated_at": "2026-08-11T09:42:00.474260+00:00"
+    },
+    "@cat-agent-skills/travel_cost_estimator": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/travel_cost_estimator_agent.py",
+      "sha256": "90fc9c773d6b9ea7d45ec20a0c13dde3ab6a6ad370d0c0915fd99ecbac14a9b9",
+      "latest_receipt": "rar_523b0aac8e8150cc226ddd5d9d0850f152ad417ef7a2f9747257da6f84ecbdf7",
+      "updated_at": "2026-08-11T09:42:00.479476+00:00"
+    },
+    "@cat-agent-skills/what_to_use_when": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/what_to_use_when_agent.py",
+      "sha256": "ad03b72ad9729dff9de3030e89da9b9ec4e10c326d6a8685d0557e30f5eafacf",
+      "latest_receipt": "rar_3554b120cd6e95804b17a1b703df3370c21257819bad7d0ec431d405c375f97b",
+      "updated_at": "2026-08-11T09:42:00.484660+00:00"
+    },
+    "@kody-w/full_rapp_leviathan": {
+      "status": "active",
+      "version": "1.0.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/full_rapp_leviathan_agent.py",
+      "sha256": "1ff67f88c94de822aecfbbd6083a8c233f6b2f2c996ba60ebc313868e8eae193",
+      "latest_receipt": "rar_e9f0eed3955ce20306758f2b7bda61bf7a645b9175c6c611268ea1c6cd79cc4d",
+      "updated_at": "2026-08-11T09:42:00.494853+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-02T01:35:52.563615+00:00"
+  "updated_at": "2026-08-11T09:42:00.507093+00:00"
 }

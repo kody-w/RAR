@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-11T06:55:35Z",
-  "count": 279,
+  "generated": "2026-08-11T09:42:14Z",
+  "count": 288,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -3858,7 +3858,7 @@
       "name": "@cat-agent-skills/ai_first_process_redesign",
       "display_name": "AI-First Process Redesign",
       "description": "Redesign your existing processes with AI-first thinking",
-      "version": "3.1.0",
+      "version": "3.1.1",
       "publisher": "@cat-agent-skills",
       "author": "Tim Sparks",
       "category": "general",
@@ -3877,7 +3877,7 @@
         "path": "agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
-        "sha256": "e8d05f6872cfd6ed788e7486bf726503ad43e38a8aa6005a6449dcae017c0ada"
+        "sha256": "6fcb40c0aefde81d18f04518bfc8826d717720562bf6014f8f96d11677b90bb9"
       },
       "stats": {
         "lines": 188,
@@ -4099,6 +4099,42 @@
       }
     },
     {
+      "id": "cat-agent-skills__booth_loop_video",
+      "name": "@cat-agent-skills/booth_loop_video",
+      "display_name": "Booth Loop Video",
+      "description": "Generate a silent, looping 1920x1080 MP4 for a conference booth, kiosk, or lobby screen — rendered frame-by-frame in Python (Pillow + ffmpeg), with previews before the full render.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Al Macey",
+      "category": "devtools",
+      "tags": [
+        "video",
+        "animation",
+        "python",
+        "marketing",
+        "events",
+        "design",
+        "ffmpeg"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/booth_loop_video_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/booth_loop_video_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/booth_loop_video_agent.py",
+        "sha256": "a57ed23652a00cd4a470cd1e4b9ed2235169a024082d805be21ebc268a01cc6c"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.0,
+        "added_at": null
+      }
+    },
+    {
       "id": "cat-agent-skills__brand_template_enforcer",
       "name": "@cat-agent-skills/brand_template_enforcer",
       "display_name": "Brand Template Enforcer",
@@ -4165,6 +4201,42 @@
         "lines": 188,
         "size_kb": 8.8,
         "added_at": "2026-07-31T22:43:16-04:00"
+      }
+    },
+    {
+      "id": "cat-agent-skills__browser_uat_analyst",
+      "name": "@cat-agent-skills/browser_uat_analyst",
+      "display_name": "Browser UAT Analyst",
+      "description": "Run evidence-driven UAT on any browser-based app — Copilot Studio, Power Platform, Dataverse, Dynamics 365, admin centres, or a custom web app — with Playwright execution, a screenshot evidence ledger, and failure classification that separates product defects from tenant config.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Al Macey",
+      "category": "general",
+      "tags": [
+        "testing",
+        "uat",
+        "playwright",
+        "quality",
+        "copilot_studio",
+        "power_platform",
+        "automation"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/browser_uat_analyst_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/browser_uat_analyst_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/browser_uat_analyst_agent.py",
+        "sha256": "7510a8a0f67113bdb0bafd437d5471c7c655e0420db4c4bcd2672e3678e6f387"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.4,
+        "added_at": null
       }
     },
     {
@@ -4275,9 +4347,9 @@
       "name": "@cat-agent-skills/chart_builder",
       "display_name": "Chart Builder",
       "description": "Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "publisher": "@cat-agent-skills",
-      "author": "CAT Agent Skills",
+      "author": "Adi Leibowitz",
       "category": "devtools",
       "tags": [
         "data",
@@ -4295,7 +4367,7 @@
         "path": "agents/@cat-agent-skills/chart_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/chart_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/chart_builder_agent.py",
-        "sha256": "324f56ae344f7fa425d43020732f423cb1c323c4b203ece4c33eed13f26b7cf1"
+        "sha256": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0"
       },
       "stats": {
         "lines": 188,
@@ -4541,6 +4613,113 @@
         "lines": 188,
         "size_kb": 9.2,
         "added_at": "2026-07-31T22:43:16-04:00"
+      }
+    },
+    {
+      "id": "cat-agent-skills__copilot_studio_agent_test",
+      "name": "@cat-agent-skills/copilot_studio_agent_test",
+      "display_name": "Copilot Studio Agent Test",
+      "description": "Test a Copilot Studio agent against your own Q&A set and get a graded pass/fail report — no browser automation.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Matteo Pagani",
+      "category": "general",
+      "tags": [
+        "copilot_studio",
+        "testing",
+        "evaluation",
+        "quality",
+        "agents",
+        "power_platform"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
+        "sha256": "6f7094123eb0552125abc477d11ace64488fb220132b6687d3b97322dd477ab7"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.2,
+        "added_at": null
+      }
+    },
+    {
+      "id": "cat-agent-skills__copilot_studio_harness_picker",
+      "name": "@cat-agent-skills/copilot_studio_harness_picker",
+      "display_name": "Copilot Studio Harness Picker",
+      "description": "Choose the right Copilot Studio harness and build shape; in Cowork, use GPT-5.6 with High effort for Detailed mode, Claude Opus 5 as fallback, or Auto for Quick mode.",
+      "version": "2.1.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Liam O'Grady",
+      "category": "general",
+      "tags": [
+        "copilot_studio",
+        "cowork",
+        "architecture",
+        "agent_design",
+        "governance",
+        "licensing"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
+        "sha256": "1517c780cf92757e91fb379b2b85ddf7d16ea2c1dac2057dae9a320cd351af59"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.1,
+        "added_at": null
+      }
+    },
+    {
+      "id": "cat-agent-skills__copilot_studio_knowledge_readiness",
+      "name": "@cat-agent-skills/copilot_studio_knowledge_readiness",
+      "display_name": "Copilot Studio Knowledge Readiness",
+      "description": "Assess whether an uploaded or exported document set is ready to power a Copilot Studio agent. Produces a corpus-based readiness score, prioritized cleanup backlog, chunking and metadata guidance, and a test-prompt suite, while calling out any evidence gaps that require live system review.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Jay Padimiti",
+      "category": "integrations",
+      "tags": [
+        "copilot_studio",
+        "knowledge",
+        "rag",
+        "sharepoint",
+        "dataverse",
+        "governance",
+        "readiness",
+        "assessment"
+      ],
+      "quality_tier": "frontier",
+      "audience": "business",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/copilot_studio_knowledge_readiness_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_knowledge_readiness_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_knowledge_readiness_agent.py",
+        "sha256": "2c9e627e44f3ee2fd57547d82642251701389b02ee2d6252532f8bfa9c6a15e7"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.6,
+        "added_at": null
       }
     },
     {
@@ -5313,6 +5492,43 @@
       }
     },
     {
+      "id": "cat-agent-skills__monte_carlo_analysis",
+      "name": "@cat-agent-skills/monte_carlo_analysis",
+      "display_name": "Monte Carlo Analysis",
+      "description": "Run Monte Carlo simulations from natural-language risk inputs — triangular, normal, uniform, or log-normal — and return percentiles, a histogram PNG, optional interactive HTML, and a downloadable results spreadsheet.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Nazish Qasim",
+      "category": "devtools",
+      "tags": [
+        "monte_carlo",
+        "risk_assessment",
+        "python",
+        "simulation",
+        "matplotlib",
+        "charts",
+        "csv",
+        "analysis"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/monte_carlo_analysis_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/monte_carlo_analysis_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/monte_carlo_analysis_agent.py",
+        "sha256": "33b7c20af7270399ddff663b9d1f2e284248d5d4d316cf53a57fb526dbaaadc0"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.1,
+        "added_at": null
+      }
+    },
+    {
       "id": "cat-agent-skills__own_voice_builder",
       "name": "@cat-agent-skills/own_voice_builder",
       "display_name": "Own Voice Builder",
@@ -5831,7 +6047,7 @@
       "name": "@cat-agent-skills/rich_html_presentation",
       "display_name": "Rich HTML Presentation",
       "description": "Create polished, self-contained HTML slide decks with keynote-style visuals, keyboard navigation, themes, animations, and reusable presentation components.",
-      "version": "2.0.0",
+      "version": "2.2.0",
       "publisher": "@cat-agent-skills",
       "author": "Henry Jammes",
       "category": "productivity",
@@ -5852,7 +6068,7 @@
         "path": "agents/@cat-agent-skills/rich_html_presentation_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/rich_html_presentation_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/rich_html_presentation_agent.py",
-        "sha256": "3850f22f2c00d0923e80824512c44cd7075e0bdbe4aa9bfc1ba8377df89e2004"
+        "sha256": "3d19b945bbfafa005314156f60b03bb2f0361556e9f269fae151015b8e007ec8"
       },
       "stats": {
         "lines": 188,
@@ -6029,6 +6245,43 @@
       }
     },
     {
+      "id": "cat-agent-skills__stoic_negotiator",
+      "name": "@cat-agent-skills/stoic_negotiator",
+      "display_name": "Stoic Negotiator",
+      "description": "A principled negotiation intelligence skill that combines Stoic decision disciplines with evidence-backed research to help individuals, executives, and analyst agents prepare, analyze, and execute high-quality negotiations. Supports interactive scoping workflows, Deep Research sourcing (citations and source URLs), and audit-ready outputs.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Faride Ilanda",
+      "category": "general",
+      "tags": [
+        "negotiation",
+        "decision_making",
+        "offers",
+        "salary",
+        "sales",
+        "commerce",
+        "batna",
+        "zopa"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/stoic_negotiator_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/stoic_negotiator_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/stoic_negotiator_agent.py",
+        "sha256": "8575b10ac9af4f658319a16d30a5f1171a7497cf0325d9f7363f461b52657e69"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.3,
+        "added_at": null
+      }
+    },
+    {
       "id": "cat-agent-skills__style_analyzer",
       "name": "@cat-agent-skills/style_analyzer",
       "display_name": "Communication Style Analyzer",
@@ -6100,6 +6353,41 @@
       }
     },
     {
+      "id": "cat-agent-skills__travel_cost_estimator",
+      "name": "@cat-agent-skills/travel_cost_estimator",
+      "display_name": "Travel Cost Estimator",
+      "description": "Price a business trip from live fares in your corporate booking tool, benchmark the non-bookable lines against your own approved expense reports, and produce an estimate a manager can approve — with a hard guardrail that never enters the booking funnel.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Al Macey",
+      "category": "general",
+      "tags": [
+        "travel",
+        "expenses",
+        "browser_automation",
+        "playwright",
+        "finance",
+        "productivity"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/travel_cost_estimator_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/travel_cost_estimator_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/travel_cost_estimator_agent.py",
+        "sha256": "90fc9c773d6b9ea7d45ec20a0c13dde3ab6a6ad370d0c0915fd99ecbac14a9b9"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.4,
+        "added_at": null
+      }
+    },
+    {
       "id": "cat-agent-skills__vacation_urgent_forwarder",
       "name": "@cat-agent-skills/vacation_urgent_forwarder",
       "display_name": "Vacation Urgent Forwarder",
@@ -6165,6 +6453,39 @@
         "lines": 188,
         "size_kb": 9.4,
         "added_at": "2026-07-31T22:43:16-04:00"
+      }
+    },
+    {
+      "id": "cat-agent-skills__what_to_use_when",
+      "name": "@cat-agent-skills/what_to_use_when",
+      "display_name": "What to Use When",
+      "description": "Routes single-output requests to the best-fit included Microsoft 365 Copilot 1p agents and reserves Cowork for long-running or multi-output work.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Gaurav Mahajan",
+      "category": "general",
+      "tags": [
+        "productivity",
+        "automation",
+        "copilot",
+        "routing"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/what_to_use_when_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/what_to_use_when_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/what_to_use_when_agent.py",
+        "sha256": "ad03b72ad9729dff9de3030e89da9b9ec4e10c326d6a8685d0557e30f5eafacf"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.0,
+        "added_at": null
       }
     },
     {
@@ -7709,6 +8030,43 @@
       }
     },
     {
+      "id": "kody-w__full_rapp_leviathan",
+      "name": "@kody-w/full_rapp_leviathan",
+      "display_name": "FullRappLeviathan",
+      "description": "Compiles and assesses public-safe Full RAPP Leviathan blueprints across identity, intelligence, production, truth, and commerce.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "core",
+      "tags": [
+        "leviathan",
+        "protocol",
+        "brainstem",
+        "foundry",
+        "evidence",
+        "commerce",
+        "x402",
+        "enterprise"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/full_rapp_leviathan_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/full_rapp_leviathan_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/full_rapp_leviathan_agent.py",
+        "sha256": "1ff67f88c94de822aecfbbd6083a8c233f6b2f2c996ba60ebc313868e8eae193"
+      },
+      "stats": {
+        "lines": 1246,
+        "size_kb": 39.7,
+        "added_at": null
+      }
+    },
+    {
       "id": "kody-w__git_warehouse_agent",
       "name": "@kody-w/git_warehouse_agent",
       "display_name": "Git Warehouse",
@@ -8264,28 +8622,22 @@
       "stats": {
         "lines": 735,
         "size_kb": 27.6,
-        "added_at": null
+        "added_at": "2026-08-03T09:47:21-04:00"
       }
     },
     {
       "id": "kody-w__rapp_leviathan_factory",
       "name": "@kody-w/rapp_leviathan_factory",
       "display_name": "RappLeviathanFactory",
-      "description": "Generates a multi-estate 'Leviathan' digital entity under ~/.rapp — estate files, a five-organ anatomy dashboard, and an LLM reachability check.",
-      "version": "0.2.2",
+      "description": "Retired compatibility adapter. Use @kody-w/full_rapp_leviathan for the clean-room Full RAPP Leviathan protocol.",
+      "version": "0.3.0",
       "publisher": "@kody-w",
       "author": "kody-w",
-      "category": "meta",
+      "category": "core",
       "tags": [
-        "meta",
-        "factory",
-        "leviathan",
-        "estate",
-        "composite",
-        "anatomy",
-        "rapplication",
-        "singleton",
-        "self-contained"
+        "retired",
+        "compatibility",
+        "leviathan"
       ],
       "quality_tier": "community",
       "audience": "both",
@@ -8297,11 +8649,11 @@
         "path": "agents/@kody-w/rapp_leviathan_factory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_leviathan_factory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_leviathan_factory_agent.py",
-        "sha256": "855cdb3fe56ba9fc8a06cbe9a99960f78a10baedf205f1f27582baa0e9301a6f"
+        "sha256": "e381f1fe6add6c47eec0d59307110f136103f8d349c611f7be0bff02edb0c6d0"
       },
       "stats": {
-        "lines": 1301,
-        "size_kb": 54.3,
+        "lines": 77,
+        "size_kb": 2.3,
         "added_at": "2026-05-16T16:33:02-04:00"
       }
     },
@@ -8803,44 +9155,6 @@
       }
     },
     {
-      "id": "kody-w__wp_publish",
-      "name": "@kody-w/wp_publish",
-      "display_name": "WordPress Publish",
-      "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored.",
-      "version": "1.0.0",
-      "publisher": "@kody-w",
-      "author": "Kody Wildfeuer",
-      "category": "integrations",
-      "tags": [
-        "wordpress",
-        "publishing",
-        "rest-api",
-        "blog",
-        "idempotent"
-      ],
-      "quality_tier": "community",
-      "audience": "both",
-      "requires_env": [
-        "WP_URL",
-        "WP_USER",
-        "WP_APP_PASSWORD"
-      ],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "path": "agents/@kody-w/wp_publish.py",
-        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/wp_publish.py",
-        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/wp_publish.py",
-        "sha256": "624c7a945e4b1428675ddb9e213bb7a41ad24096c5705783d4923bc130467d8d"
-      },
-      "stats": {
-        "lines": 271,
-        "size_kb": 11.7,
-        "added_at": null
-      }
-    },
-    {
       "id": "rapp__basic_agent",
       "name": "@rapp/basic_agent",
       "display_name": "BasicAgent",
@@ -9146,7 +9460,7 @@
       "name": "@rapp/learn_new",
       "display_name": "LearnNew",
       "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
-      "version": "2.0.1",
+      "version": "2.1.1",
       "publisher": "@rapp",
       "author": "RAPP",
       "category": "core",
@@ -9167,11 +9481,11 @@
         "path": "agents/@rapp/learn_new_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/learn_new_agent.py",
-        "sha256": "51f67fdc60473fb805021b6b183f3f33aec49a0e73fe95f28236f14204c499b7"
+        "sha256": "ee12a37ef550c9ffb1097334da29ebcb4dcaeeac5b3f8b5dbab366e5178eab71"
       },
       "stats": {
-        "lines": 1025,
-        "size_kb": 37.9,
+        "lines": 1040,
+        "size_kb": 38.8,
         "added_at": "2026-04-20T12:38:45-04:00"
       }
     },
