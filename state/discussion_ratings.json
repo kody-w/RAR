@@ -2009,6 +2009,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/435",
       "number": 435
     },
+    "@cat-agent-skills/booth_loop_video": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/538",
+      "number": 538
+    },
     "@cat-agent-skills/brand_template_enforcer": {
       "upvotes": 0,
       "downloads": 0,
@@ -2042,6 +2059,23 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/437",
       "number": 437
+    },
+    "@cat-agent-skills/browser_uat_analyst": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/539",
+      "number": 539
     },
     "@cat-agent-skills/business_os": {
       "upvotes": 0,
@@ -2246,6 +2280,57 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/451",
       "number": 451
+    },
+    "@cat-agent-skills/copilot_studio_agent_test": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/540",
+      "number": 540
+    },
+    "@cat-agent-skills/copilot_studio_harness_picker": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/541",
+      "number": 541
+    },
+    "@cat-agent-skills/copilot_studio_knowledge_readiness": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/542",
+      "number": 542
     },
     "@cat-agent-skills/copilot_studio_test_planner": {
       "upvotes": 0,
@@ -2621,6 +2706,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/474",
       "number": 474
     },
+    "@cat-agent-skills/monte_carlo_analysis": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/543",
+      "number": 543
+    },
     "@cat-agent-skills/own_voice_builder": {
       "upvotes": 0,
       "downloads": 0,
@@ -2978,6 +3080,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/495",
       "number": 495
     },
+    "@cat-agent-skills/stoic_negotiator": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/544",
+      "number": 544
+    },
     "@cat-agent-skills/style_analyzer": {
       "upvotes": 0,
       "downloads": 0,
@@ -3012,6 +3131,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/497",
       "number": 497
     },
+    "@cat-agent-skills/travel_cost_estimator": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/545",
+      "number": 545
+    },
     "@cat-agent-skills/vacation_urgent_forwarder": {
       "upvotes": 0,
       "downloads": 0,
@@ -3045,6 +3181,23 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/499",
       "number": 499
+    },
+    "@cat-agent-skills/what_to_use_when": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/546",
+      "number": 546
     },
     "@cat-agent-skills/whiteboard_to_infographic": {
       "upvotes": 0,
@@ -3675,6 +3828,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/345",
       "number": 345
     },
+    "@kody-w/copilot_studio_parity_deploy": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/558",
+      "number": 558
+    },
     "@kody-w/copilot_studio_probe_agent": {
       "upvotes": 0,
       "downloads": 0,
@@ -3777,6 +3947,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/351",
       "number": 351
     },
+    "@kody-w/factory": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/559",
+      "number": 559
+    },
     "@kody-w/flight_recorder": {
       "upvotes": 0,
       "downloads": 0,
@@ -3793,6 +3980,23 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/352",
       "number": 352
+    },
+    "@kody-w/full_rapp_leviathan": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/547",
+      "number": 547
     },
     "@kody-w/git_warehouse_agent": {
       "upvotes": 0,
@@ -4338,7 +4542,7 @@
       "url": "https://github.com/kody-w/RAR/discussions/379",
       "number": 379
     },
-    "@kody-w/wp_publish": {
+    "@kody-w/wp_publish_agent": {
       "upvotes": 0,
       "downloads": 0,
       "score": 0,
@@ -4352,8 +4556,8 @@
         "want_to_try": 0,
         "saved_time": 0
       },
-      "url": "https://github.com/kody-w/RAR/discussions/508",
-      "number": 508
+      "url": "https://github.com/kody-w/RAR/discussions/548",
+      "number": 548
     },
     "@rapp/basic_agent": {
       "upvotes": 1,
