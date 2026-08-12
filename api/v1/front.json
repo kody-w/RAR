@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-11T18:40:38Z",
+  "generated": "2026-08-12T10:38:53Z",
   "counts": {
     "native": 294,
     "aggregated": 0,
@@ -1250,7 +1250,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -1270,7 +1269,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "community tier",
         "newest in the registry",
         "7028 lines",
@@ -1313,7 +1312,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -1333,7 +1331,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "community tier",
         "newest in the registry",
         "495 lines",
@@ -1379,7 +1377,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -1399,7 +1396,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "community tier",
         "newest in the registry",
         "1546 lines",
@@ -3077,7 +3074,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -3097,7 +3093,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "community tier",
         "newest in the registry",
         "276 lines",
@@ -12329,7 +12325,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -12359,7 +12354,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
@@ -12410,7 +12405,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -12440,7 +12434,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
@@ -12490,7 +12484,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -12520,7 +12513,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
@@ -12570,7 +12563,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -12600,7 +12592,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
@@ -12652,7 +12644,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -12682,7 +12673,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
@@ -12734,7 +12725,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -12764,7 +12754,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
@@ -12816,7 +12806,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -12846,7 +12835,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
@@ -12896,7 +12885,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -12926,7 +12914,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
@@ -12974,7 +12962,6 @@
         "tier"
       ],
       "scored_at_median": [
-        "community",
         "curator"
       ],
       "signals": {
@@ -13004,7 +12991,7 @@
       },
       "why": [
         "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
