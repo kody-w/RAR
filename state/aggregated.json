@@ -1938,7 +1938,8 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#presentation-talk-track-builder",
       "source_signal": {
-        "downloads": 0
+        "downloads": 0,
+        "rating": 1
       }
     },
     {
@@ -2020,7 +2021,8 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#regulation-monitor",
       "source_signal": {
-        "downloads": 0
+        "downloads": 0,
+        "rating": 1
       }
     },
     {
