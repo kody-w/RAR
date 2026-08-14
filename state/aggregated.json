@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 85,
+      "item_count": 86,
       "source_downloads": 1258
     }
   ],
@@ -2485,11 +2485,39 @@
         "rating": 2,
         "featured": true
       }
+    },
+    {
+      "ref": "@cat-agent-skills/work_iq_signalboard",
+      "source_id": "cat-agent-skills",
+      "source_slug": "work-iq-signalboard",
+      "name": "Work IQ Signalboard",
+      "description": "Turn four weeks of Calendar, Mail, and Teams chat activity into a colorful dashboard of reconciled Work IQ counts.",
+      "kind": "skill",
+      "tags": [
+        "work-iq",
+        "microsoft-365",
+        "dashboard",
+        "visualization",
+        "work-patterns",
+        "analytics"
+      ],
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "author": "Andreas Adner",
+      "author_github": "adner",
+      "version": "2.0.0",
+      "created_at": "2026-08-10T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#work-iq-signalboard",
+      "source_signal": {
+        "downloads": 0
+      }
     }
   ],
   "totals": {
     "sources": 1,
-    "items": 85,
+    "items": 86,
     "source_downloads": 1258
   }
 }
