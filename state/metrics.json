@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-14T06:47:49Z",
+ "generated_at": "2026-08-15T05:00:53Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 101,
-  "size_kb": 35079,
+  "size_kb": 41461,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-14T06:04:54Z",
+  "pushed_at": "2026-08-15T04:24:09Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -49,10 +49,10 @@
   "curator_reviews": 420,
   "curator_agents_reviewed": 222,
   "curator_avg_rating": 4.17,
-  "critic_score": 25,
+  "critic_score": 23,
   "user_score": 75,
-  "critic_reviews": 134,
-  "agents_scored": 38,
+  "critic_reviews": 132,
+  "agents_scored": 37,
   "agents_voted": 4
  },
  "daily": [
@@ -252,7 +252,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1822596,
+  "rank": 1826729,
   "agent_hits": 18,
   "files": [
    {
@@ -377,24 +377,24 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-14T06:04:48Z",
-  "agents_scored": 38,
-  "critic_reviews": 134,
-  "model_reviews": 134,
-  "rubric_reviews": 1335,
-  "avg_critic_score": 25,
+  "generated_at": "2026-08-15T05:00:50Z",
+  "agents_scored": 37,
+  "critic_reviews": 132,
+  "model_reviews": 132,
+  "rubric_reviews": 1340,
+  "avg_critic_score": 23,
   "avg_user_score": 75,
   "by_state": {
-   "unrated": 257,
-   "fresh": 9,
+   "unrated": 258,
+   "fresh": 8,
    "rotten": 29
   },
   "backends": {
-   "rubric": 284,
-   "github-models:openai/gpt-4.1": 27,
-   "github-models:openai/gpt-4.1-mini": 38
+   "rubric": 285,
+   "github-models:openai/gpt-4.1-mini": 37,
+   "github-models:openai/gpt-4.1": 26
   },
-  "rubric_only_agents": 257
+  "rubric_only_agents": 258
  },
  "leaderboards": {
   "top_critic": [
@@ -567,30 +567,6 @@
     "tomato": "fresh"
    },
    {
-    "name": "@kody-w/rar_remote_agent",
-    "display_name": "RAR Remote Agent",
-    "publisher": "@kody-w",
-    "category": "core",
-    "tier": "official",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1400,
-    "size_kb": 59.4,
-    "added_at": "2026-05-24T21:45:25-04:00",
-    "file": "agents/@kody-w/rar_remote_agent.py",
-    "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
-    "curator_reviews": 0,
-    "curator_rating": 0.0,
-    "critic_score": 100,
-    "critic_count": 2,
-    "user_score": null,
-    "tomato": "fresh"
-   },
-   {
     "name": "@aibast-agents-library/account_risk_assessment",
     "display_name": "Account Risk Assessment",
     "publisher": "@aibast-agents-library",
@@ -751,6 +727,30 @@
     "added_at": "2026-04-03T16:15:52-04:00",
     "file": "agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
     "description": "Analyzes channel mix, journeys, and campaign attribution from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "curator_reviews": 1,
+    "curator_rating": 4.0,
+    "critic_score": 0,
+    "critic_count": 5,
+    "user_score": null,
+    "tomato": "rotten"
+   },
+   {
+    "name": "@aibast-agents-library/proposal_generation",
+    "display_name": "Proposal Generation",
+    "publisher": "@aibast-agents-library",
+    "category": "b2b_sales",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 896,
+    "size_kb": 44.8,
+    "added_at": "2026-04-03T16:15:52-04:00",
+    "file": "agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py",
+    "description": "Analyzes RFPs and live quotes from a simulated Dynamics 365 tenant into proposal packages with pricing, plus an embedded offline demo fallback.",
     "curator_reviews": 1,
     "curator_rating": 4.0,
     "critic_score": 0,
@@ -1463,10 +1463,10 @@
     "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
     "curator_reviews": 0,
     "curator_rating": 0.0,
-    "critic_score": 100,
-    "critic_count": 2,
+    "critic_score": null,
+    "critic_count": 0,
     "user_score": null,
-    "tomato": "fresh"
+    "tomato": "unrated"
    }
   ],
   "newest": [
@@ -3805,20 +3805,6 @@
    "cn": 0,
    "us": 100,
    "t": "unrated"
-  },
-  "@kody-w/rar_remote_agent": {
-   "d": 0,
-   "u": 0,
-   "n": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0,
-   "cr": 0,
-   "crt": 0.0,
-   "cs": 100,
-   "cn": 2,
-   "us": null,
-   "t": "fresh"
   },
   "@rapp/basic_agent": {
    "d": 0,
