@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 86,
+      "item_count": 89,
       "source_downloads": 1258
     }
   ],
@@ -972,6 +972,34 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/cowork_use_case_one_pager",
+      "source_id": "cat-agent-skills",
+      "source_slug": "cowork-use-case-one-pager",
+      "name": "Cowork Use Case One-Pager",
+      "description": "Turn a Cowork conversation, into a one-page HTML use case write-up \u2014 narrative, impact figures, workflow steps, and outputs.",
+      "kind": "skill",
+      "tags": [
+        "productivity",
+        "use-case",
+        "html",
+        "documents",
+        "writing",
+        "audit"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Tim Sparks",
+      "author_github": "SparkyT",
+      "version": "1.0.1",
+      "created_at": null,
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#cowork-use-case-one-pager",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/doc_format_converter",
       "source_id": "cat-agent-skills",
       "source_slug": "doc-format-converter",
@@ -997,7 +1025,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#doc-format-converter",
       "source_signal": {
         "downloads": 177,
-        "rating": 4,
+        "rating": 5,
         "featured": true
       }
     },
@@ -2055,6 +2083,40 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/route_map_visualizer",
+      "source_id": "cat-agent-skills",
+      "source_slug": "route-map-visualizer",
+      "name": "Route Map Visualizer",
+      "description": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and durations. Produces PNG, interactive HTML (Leaflet/OSM), GeoJSON, KML, deep links, and QR codes. Fully offline Python engine \u2014 road geometry rendered directly when provided, or OSRM used browser-side as\u2026",
+      "kind": "skill",
+      "tags": [
+        "maps",
+        "routing",
+        "visualization",
+        "openstreetmap",
+        "python",
+        "leaflet",
+        "geojson",
+        "kml",
+        "deep-links",
+        "qr-codes",
+        "logistics",
+        "azure-maps"
+      ],
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "author": "Nazish Qasim",
+      "author_github": "nazishqassim",
+      "version": "1.0.0",
+      "created_at": "2026-08-10T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#route-map-visualizer",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/scrollytelling_data",
       "source_id": "cat-agent-skills",
       "source_slug": "scrollytelling-data",
@@ -2369,6 +2431,36 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/wcag_power_platform",
+      "source_id": "cat-agent-skills",
+      "source_slug": "wcag-power-platform",
+      "name": "WCAG 2.1 for Web Apps & Power Platform",
+      "description": "Makes everything the agent builds or reviews conform to WCAG 2.1 AA \u2014 HTML pages, SPAs, theming, PCF controls, model-driven and canvas apps, and Power Pages.",
+      "kind": "skill",
+      "tags": [
+        "accessibility",
+        "wcag",
+        "a11y",
+        "power-platform",
+        "power-apps",
+        "pcf",
+        "power-pages",
+        "web"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Mark Christie",
+      "author_github": "TheMarkChristie",
+      "version": "1.0.0",
+      "created_at": "2026-07-23T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#wcag-power-platform",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/what_to_use_when",
       "source_id": "cat-agent-skills",
       "source_slug": "what-to-use-when",
@@ -2517,7 +2609,7 @@
   ],
   "totals": {
     "sources": 1,
-    "items": 86,
+    "items": 89,
     "source_downloads": 1258
   }
 }
