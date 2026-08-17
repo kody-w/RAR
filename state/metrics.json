@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-16T05:47:44Z",
+ "generated_at": "2026-08-17T00:44:58Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,10 +9,10 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 102,
-  "size_kb": 49290,
+  "open_issues": 103,
+  "size_kb": 54618,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-16T05:04:35Z",
+  "pushed_at": "2026-08-17T00:44:45Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -35,8 +35,8 @@
   "swarms": 82,
   "publishers": 10,
   "categories": 24,
-  "total_lines": 174279,
-  "total_kb": 8231.4,
+  "total_lines": 174273,
+  "total_kb": 8231.0,
   "votes": 5,
   "upvotes": 4,
   "downvotes": 1,
@@ -252,7 +252,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1832511,
+  "rank": 1837202,
   "agent_hits": 18,
   "files": [
    {
@@ -377,7 +377,7 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-16T05:04:31Z",
+  "generated_at": "2026-08-17T00:44:55Z",
   "agents_scored": 37,
   "critic_reviews": 132,
   "model_reviews": 132,
@@ -1858,7 +1858,7 @@
     "downloads": 4,
     "score": 1,
     "reviews": 0,
-    "lines": 53279,
+    "lines": 53276,
     "curator_reviews": 1,
     "rating": 0.0
    },
@@ -1898,7 +1898,7 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 1084,
+    "lines": 1081,
     "curator_reviews": 1,
     "rating": 0.0
    },

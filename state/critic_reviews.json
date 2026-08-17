@@ -1,6 +1,6 @@
 {
  "schema": "rar-critic/1.0",
- "generated_at": "2026-08-16T05:04:31Z",
+ "generated_at": "2026-08-17T00:44:55Z",
  "thresholds": {
   "fresh_at": 60,
   "certified_critic": 75,
@@ -24947,8 +24947,8 @@
   "@wildhaven/ceo_agent": {
    "name": "@wildhaven/ceo_agent",
    "display_name": "CEO Agent",
-   "sha256": "006b32bc874c15356bf40764d7e95a2f818a9155cf53361f55a425f855c75c2e",
-   "version": "1.0.2",
+   "sha256": "c1e49265becbe104dceacd371dcbc6cce39aa53f3a36075fd47f06d9cf476896",
+   "version": "1.0.3",
    "vote_tally": "0/0",
    "critic_score": null,
    "rubric_score": 77,
@@ -24964,8 +24964,8 @@
     "rubric"
    ],
    "run": null,
-   "reviewed_at": "2026-08-14T06:04:35Z",
-   "trigger": "never reviewed",
+   "reviewed_at": "2026-08-17T00:44:55Z",
+   "trigger": "published change",
    "evidence": null,
    "reviews": [
     {
@@ -24975,9 +24975,9 @@
      "score": 78,
      "fresh": true,
      "headline": "Fresh on struct",
-     "review": "Reading for the shape of the file at 325 lines, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
+     "review": "Reading for the shape of the file at 322 lines, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
      "backend": "rubric",
-     "at": "2026-08-14T06:04:29Z"
+     "at": "2026-08-17T00:44:54Z"
     },
     {
      "critic": "Security Sentinel",
@@ -24988,7 +24988,7 @@
      "headline": "Fresh on sec",
      "review": "Reading for how it treats secrets and failure, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
      "backend": "rubric",
-     "at": "2026-08-14T06:04:29Z"
+     "at": "2026-08-17T00:44:54Z"
     },
     {
      "critic": "The Pragmatist",
@@ -24999,7 +24999,7 @@
      "headline": "Fresh on value",
      "review": "Reading for whether this does real work for a real person, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
      "backend": "rubric",
-     "at": "2026-08-14T06:04:34Z"
+     "at": "2026-08-17T00:44:54Z"
     },
     {
      "critic": "Docs Desk",
@@ -25010,7 +25010,7 @@
      "headline": "Fresh on docs",
      "review": "Reading for whether a stranger could use this unaided, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
      "backend": "rubric",
-     "at": "2026-08-14T06:04:34Z"
+     "at": "2026-08-17T00:44:55Z"
     },
     {
      "critic": "The Maintainer",
@@ -25021,10 +25021,30 @@
      "headline": "Fresh on robust",
      "review": "Reading for what happens when something goes wrong, this holds up. The file shows a docstring that covers the basics and no secrets to mishandle. Scored by rubric against the run transcript \u2014 no model backend was reachable for this pass.",
      "backend": "rubric",
-     "at": "2026-08-14T06:04:35Z"
+     "at": "2026-08-17T00:44:55Z"
     }
    ],
-   "history": []
+   "history": [
+    {
+     "critic_score": null,
+     "critic_avg": null,
+     "critic_count": 0,
+     "user_score": null,
+     "state": "unrated",
+     "version": "1.0.2",
+     "sha256": "006b32bc874c15356bf40764d7e95a2f818a9155cf53361f55a425f855c75c2e",
+     "reviewed_at": "2026-08-14T06:04:35Z",
+     "ran_ok": false,
+     "loaded": null,
+     "headlines": [
+      "Fresh on struct",
+      "Fresh on sec",
+      "Fresh on value",
+      "Fresh on docs",
+      "Fresh on robust"
+     ]
+    }
+   ]
   },
   "@wildhaven/penumbra_agent": {
    "name": "@wildhaven/penumbra_agent",
