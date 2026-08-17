@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-17T22:06:50Z",
+  "generated": "2026-08-17T22:07:37Z",
   "counts": {
     "native": 299,
     "aggregated": 0,
@@ -57,7 +57,7 @@
     "median_fill": "A component with no signal is filled with the median of every row that does carry it, and the row lists that component in `scored_at_median`. Absence of signal is not negative signal.",
     "order": "Rows are ordered by `origin_percentile` — position within their own origin — not by raw score, because a score is only comparable inside its origin. Sorting the raw numbers globally would hand the whole top of the page to whichever origin has the more generous signal distribution.",
     "deduplication": "A ref found in both the registry and a crawled index is ONE row. The skill toaster materialises index entries into real hosted agents, so the hosted agent is canonical and the index row becomes its provenance: `source` is populated and the source's own counters ride in `signals.source`, never added to RAR's.",
-    "clock": "Ages are measured from the newest timestamp in the inputs (2026-08-17T22:03:09Z), not from build time, so the same inputs always produce the same ages.",
+    "clock": "Ages are measured from the newest timestamp in the inputs (2026-08-17T22:07:23Z), not from build time, so the same inputs always produce the same ages.",
     "medians": {
       "community": 0.0,
       "curator": 0.7804,
@@ -283,7 +283,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.7242,
+        "freshness": 0.7241,
         "tier": 1.0
       },
       "scores_on": [
@@ -1487,7 +1487,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5238,
+        "freshness": 0.5237,
         "tier": 1.0
       },
       "scores_on": [
@@ -1775,6 +1775,70 @@
     },
     {
       "rank": 28,
+      "ref": "@kody-w/prototype_lock_factory_agent",
+      "title": "Prototype Lock Factory",
+      "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff.",
+      "origin": "native",
+      "category": "pipeline",
+      "tags": [
+        "prototype",
+        "factory",
+        "local_first",
+        "acceptance",
+        "handoff",
+        "no_pii"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fprototype_lock_factory_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prototype_lock_factory_agent.py",
+      "source": null,
+      "score": 61.0,
+      "origin_rank": 28,
+      "origin_size": 299,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 0.9581,
+        "freshness": 1.0,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community",
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 0,
+          "lines": 468,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "newest in the registry",
+        "468 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 29,
       "ref": "@rapp/fleet_commander",
       "title": "FleetCommander",
       "description": "Builds new RAR agents from a natural-language spec — plans, writes pytest tests, generates code via the Copilot CLI, iterates, and publishes.",
@@ -1793,7 +1857,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/fleet_commander_agent.py",
       "source": null,
       "score": 61.0,
-      "origin_rank": 28,
+      "origin_rank": 29,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -1837,7 +1901,7 @@
       ]
     },
     {
-      "rank": 29,
+      "rank": 30,
       "ref": "@rapp/learn_new",
       "title": "LearnNew",
       "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
@@ -1855,7 +1919,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
       "source": null,
       "score": 60.9,
-      "origin_rank": 29,
+      "origin_rank": 30,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -1899,7 +1963,7 @@
       ]
     },
     {
-      "rank": 30,
+      "rank": 31,
       "ref": "@rapp/swarm_factory_agent",
       "title": "SwarmFactory",
       "description": "Generates, builds, installs, and uninstalls RAPP swarms — converging local agents into single shareable .py files via the RAPP Store catalog.",
@@ -1917,7 +1981,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/swarm_factory_agent.py",
       "source": null,
       "score": 60.9,
-      "origin_rank": 30,
+      "origin_rank": 31,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -1961,7 +2025,7 @@
       ]
     },
     {
-      "rank": 31,
+      "rank": 32,
       "ref": "@kody-w/prompt_extractor",
       "title": "Prompt Extractor",
       "description": "Extract the prompts shown on screen in a video by OCRing it frame by frame, merging scrolled and repeated views into one entry each, so prompts demoed in a screen recording do not have to be transcribed by hand.",
@@ -1979,7 +2043,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prompt_extractor.py",
       "source": null,
       "score": 60.5,
-      "origin_rank": 31,
+      "origin_rank": 32,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2023,7 +2087,7 @@
       ]
     },
     {
-      "rank": 32,
+      "rank": 33,
       "ref": "@rapp/basic_agent",
       "title": "BasicAgent",
       "description": "Provides the base class every RAPP agent inherits from; stores the agent's name and metadata, with no behavior of its own.",
@@ -2039,7 +2103,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/basic_agent.py",
       "source": null,
       "score": 60.5,
-      "origin_rank": 32,
+      "origin_rank": 33,
       "origin_size": 299,
       "components": {
         "community": 0.2958,
@@ -2081,7 +2145,7 @@
       ]
     },
     {
-      "rank": 33,
+      "rank": 34,
       "ref": "@rapp/store_navigator_agent",
       "title": "StoreNavigator",
       "description": "Lists, searches, compares, and recommends rapplications from the RAPP_Store catalog over HTTP, with keyword scoring when no LLM is available.",
@@ -2099,7 +2163,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
       "source": null,
       "score": 59.8,
-      "origin_rank": 33,
+      "origin_rank": 34,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2143,7 +2207,7 @@
       ]
     },
     {
-      "rank": 34,
+      "rank": 35,
       "ref": "@kody-w/project_tracker_agent",
       "title": "Project Tracker",
       "description": "Local-first tracker for a portfolio of AI-agent projects and their MVP statements. Speaks the aibast-agents-library project-tracker web tool's native JSON (projectTrackerData) so data round-trips via its JSON import/export. Add/update projects, set the MVP use case/description/timeline, register agents, and export a file ready to merge-import into the web tool. Data stays on this device — never in a repo or egg.",
@@ -2163,7 +2227,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/project_tracker_agent.py",
       "source": null,
       "score": 59.7,
-      "origin_rank": 34,
+      "origin_rank": 35,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2207,7 +2271,7 @@
       ]
     },
     {
-      "rank": 35,
+      "rank": 36,
       "ref": "@kody-w/launch_to_public_agent",
       "title": "Launch to Public",
       "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
@@ -2226,7 +2290,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
       "source": null,
       "score": 59.6,
-      "origin_rank": 35,
+      "origin_rank": 36,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2270,7 +2334,7 @@
       ]
     },
     {
-      "rank": 36,
+      "rank": 37,
       "ref": "@kody-w/plant_seed_agent",
       "title": "Plant Seed",
       "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
@@ -2290,7 +2354,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
       "source": null,
       "score": 59.6,
-      "origin_rank": 36,
+      "origin_rank": 37,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2334,7 +2398,7 @@
       ]
     },
     {
-      "rank": 37,
+      "rank": 38,
       "ref": "@kody-w/rapp_skill_bridge_agent",
       "title": "RAPP Skill Bridge",
       "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills.",
@@ -2355,7 +2419,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_skill_bridge_agent.py",
       "source": null,
       "score": 59.6,
-      "origin_rank": 37,
+      "origin_rank": 38,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2399,7 +2463,7 @@
       ]
     },
     {
-      "rank": 38,
+      "rank": 39,
       "ref": "@rapp/egg_hatcher",
       "title": "EggHatcher",
       "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
@@ -2418,7 +2482,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
       "source": null,
       "score": 58.9,
-      "origin_rank": 38,
+      "origin_rank": 39,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2462,7 +2526,7 @@
       ]
     },
     {
-      "rank": 39,
+      "rank": 40,
       "ref": "@kody-w/copilot_studio_forge_agent",
       "title": "CopilotStudioForge",
       "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines — bundles, topics, solutions, and exports.",
@@ -2483,7 +2547,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_forge_agent.py",
       "source": null,
       "score": 58.4,
-      "origin_rank": 39,
+      "origin_rank": 40,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2527,7 +2591,7 @@
       ]
     },
     {
-      "rank": 40,
+      "rank": 41,
       "ref": "@kody-w/microsoft_deck_studio_agent",
       "title": "Microsoft Deck Studio",
       "description": "Generate a polished, Microsoft-Fluent-styled PowerPoint (.pptx) deck from a JSON spec of slides and layouts.",
@@ -2549,7 +2613,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/microsoft_deck_studio_agent.py",
       "source": null,
       "score": 58.2,
-      "origin_rank": 40,
+      "origin_rank": 41,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2593,7 +2657,7 @@
       ]
     },
     {
-      "rank": 41,
+      "rank": 42,
       "ref": "@wildhaven/penumbra_agent",
       "title": "Penumbra",
       "description": "Returns any input as twin lines — the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls.",
@@ -2613,13 +2677,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
       "source": null,
       "score": 57.9,
-      "origin_rank": 41,
+      "origin_rank": 42,
       "origin_size": 299,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7185,
-        "freshness": 0.5837,
+        "freshness": 0.5836,
         "tier": 1.0
       },
       "scores_on": [
@@ -2657,7 +2721,7 @@
       ]
     },
     {
-      "rank": 42,
+      "rank": 43,
       "ref": "@kody-w/chain_composer_agent",
       "title": "Chain Composer",
       "description": "Composes multi-primitive RAPP chain plans from a natural-language prompt via the claude CLI, writing a plan envelope and reviewable bash script.",
@@ -2676,7 +2740,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
       "source": null,
       "score": 57.8,
-      "origin_rank": 42,
+      "origin_rank": 43,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2720,7 +2784,7 @@
       ]
     },
     {
-      "rank": 43,
+      "rank": 44,
       "ref": "@kody-w/flight_recorder",
       "title": "FlightRecorder",
       "description": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls.",
@@ -2742,7 +2806,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/flight_recorder_agent.py",
       "source": null,
       "score": 57.8,
-      "origin_rank": 43,
+      "origin_rank": 44,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2786,7 +2850,7 @@
       ]
     },
     {
-      "rank": 44,
+      "rank": 45,
       "ref": "@kody-w/manage_memory_agent",
       "title": "ManageMemory",
       "description": "Stores facts, preferences, insights, and tasks to persistent memory.",
@@ -2803,7 +2867,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/manage_memory_agent.py",
       "source": null,
       "score": 57.8,
-      "origin_rank": 44,
+      "origin_rank": 45,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2847,7 +2911,7 @@
       ]
     },
     {
-      "rank": 45,
+      "rank": 46,
       "ref": "@kody-w/workiq",
       "title": "WorkIQ",
       "description": "Queries Microsoft 365 data — email, calendar, SharePoint/OneDrive, Teams, people — by shelling out to the workiq CLI with Entra ID auth.",
@@ -2867,7 +2931,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/workiq_agent.py",
       "source": null,
       "score": 57.7,
-      "origin_rank": 45,
+      "origin_rank": 46,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2911,7 +2975,7 @@
       ]
     },
     {
-      "rank": 46,
+      "rank": 47,
       "ref": "@kody-w/deal_desk_agent",
       "title": "DealDesk",
       "description": "Produces templated deal briefings, health scores, and competitive analyses for a named company, listing sales agents from the live RAR registry.",
@@ -2932,7 +2996,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/deal_desk_agent.py",
       "source": null,
       "score": 57.6,
-      "origin_rank": 46,
+      "origin_rank": 47,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -2976,7 +3040,7 @@
       ]
     },
     {
-      "rank": 47,
+      "rank": 48,
       "ref": "@kody-w/bond_rhythm_agent",
       "title": "Bond Pulse",
       "description": "Audits local-versus-global RAPP repo drift, classifies push/pull direction, suggests operator actions, and records rhythm bond events.",
@@ -2995,7 +3059,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
       "source": null,
       "score": 57.0,
-      "origin_rank": 47,
+      "origin_rank": 48,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3039,7 +3103,7 @@
       ]
     },
     {
-      "rank": 48,
+      "rank": 49,
       "ref": "@rapp/commons_post",
       "title": "CommonsPost",
       "description": "Composes a canonical rapp-commons-event/1.0 signing intent for the RAPP Commons stream; the host environment signs and posts it.",
@@ -3057,7 +3121,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
       "source": null,
       "score": 56.8,
-      "origin_rank": 48,
+      "origin_rank": 49,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3101,7 +3165,7 @@
       ]
     },
     {
-      "rank": 49,
+      "rank": 50,
       "ref": "@wildhaven/ceo_agent",
       "title": "CEO Agent",
       "description": "Answers as the Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
@@ -3121,7 +3185,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/ceo_agent.py",
       "source": null,
       "score": 56.8,
-      "origin_rank": 49,
+      "origin_rank": 50,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3163,7 +3227,7 @@
       ]
     },
     {
-      "rank": 50,
+      "rank": 51,
       "ref": "@kody-w/twin_me",
       "title": "TwinMe",
       "description": "Packs a PII-stripped .egg of the current brainstem's persona, custom agents, and calibration baseline, refusing if its content scan finds leaks.",
@@ -3184,7 +3248,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_me_agent.py",
       "source": null,
       "score": 56.7,
-      "origin_rank": 50,
+      "origin_rank": 51,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3228,7 +3292,7 @@
       ]
     },
     {
-      "rank": 51,
+      "rank": 52,
       "ref": "@kody-w/wp_publish_agent",
       "title": "WordPress Publish",
       "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored.",
@@ -3246,7 +3310,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/wp_publish_agent.py",
       "source": null,
       "score": 56.7,
-      "origin_rank": 51,
+      "origin_rank": 52,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3290,7 +3354,7 @@
       ]
     },
     {
-      "rank": 52,
+      "rank": 53,
       "ref": "@kody-w/copilot_studio_deploy_agent",
       "title": "CopilotStudioDeploy",
       "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified).",
@@ -3319,13 +3383,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_deploy_agent.py",
       "source": null,
       "score": 56.6,
-      "origin_rank": 52,
+      "origin_rank": 53,
       "origin_size": 299,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.664,
+        "freshness": 0.6639,
         "tier": 0.55
       },
       "scores_on": [
@@ -3363,7 +3427,7 @@
       ]
     },
     {
-      "rank": 53,
+      "rank": 54,
       "ref": "@kody-w/buzzsaw",
       "title": "Buzzsaw",
       "description": "Set up an adversarial build-and-verify loop: seed prompt, disjoint region split for parallel builders, harsh read-only critic brief, and an acceptance gate that defines when to stop.",
@@ -3382,7 +3446,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/buzzsaw.py",
       "source": null,
       "score": 56.5,
-      "origin_rank": 53,
+      "origin_rank": 54,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3426,7 +3490,7 @@
       ]
     },
     {
-      "rank": 54,
+      "rank": 55,
       "ref": "@kody-w/context_memory_agent",
       "title": "ContextMemory",
       "description": "Recalls stored memories and conversation context from the brainstem's JSON memory store, per-user or shared.",
@@ -3443,7 +3507,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/context_memory_agent.py",
       "source": null,
       "score": 56.4,
-      "origin_rank": 54,
+      "origin_rank": 55,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3487,7 +3551,7 @@
       ]
     },
     {
-      "rank": 55,
+      "rank": 56,
       "ref": "@aibast-agents-library/returns_complaints_resolution",
       "title": "Returns & Complaints Resolution Agent",
       "description": "Processes returns and complaints from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
@@ -3505,7 +3569,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py",
       "source": null,
       "score": 56.3,
-      "origin_rank": 55,
+      "origin_rank": 56,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3547,7 +3611,7 @@
       ]
     },
     {
-      "rank": 56,
+      "rank": 57,
       "ref": "@kody-w/recon_deck_agent",
       "title": "ReconDeck",
       "description": "Builds a recon briefing on a topic by querying Hacker News top stories and Rappterbook agent profiles over HTTP.",
@@ -3568,7 +3632,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/recon_deck_agent.py",
       "source": null,
       "score": 56.2,
-      "origin_rank": 56,
+      "origin_rank": 57,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3612,7 +3676,7 @@
       ]
     },
     {
-      "rank": 57,
+      "rank": 58,
       "ref": "@aibast-agents-library/emission_tracking",
       "title": "Emission Tracking Agent",
       "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback.",
@@ -3631,7 +3695,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
       "source": null,
       "score": 55.9,
-      "origin_rank": 57,
+      "origin_rank": 58,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3673,7 +3737,7 @@
       ]
     },
     {
-      "rank": 58,
+      "rank": 59,
       "ref": "@aibast-agents-library/supply_chain_disruption_alert",
       "title": "Supply Chain Disruption Alert Agent",
       "description": "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback.",
@@ -3691,7 +3755,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
       "source": null,
       "score": 55.9,
-      "origin_rank": 58,
+      "origin_rank": 59,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -3733,330 +3797,7 @@
       ]
     },
     {
-      "rank": 59,
-      "ref": "@howardh/prompt_to_video_agent",
-      "title": "PromptToVideo",
-      "description": "Renders videos from structured scene descriptions using Remotion — title, content, quote, and list scenes with style presets.",
-      "origin": "native",
-      "category": "productivity",
-      "tags": [
-        "video",
-        "remotion",
-        "render",
-        "mp4",
-        "scenes",
-        "presentation",
-        "prompt_to_video"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Fprompt_to_video_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/prompt_to_video_agent.py",
-      "source": null,
-      "score": 55.9,
-      "origin_rank": 59,
-      "origin_size": 299,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 1.0,
-        "freshness": 0.6126,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "curator"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 85,
-          "lines": 792,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet",
-        "community tier",
-        "added 85 days ago",
-        "792 lines",
-        "has a rendered card"
-      ]
-    },
-    {
       "rank": 60,
-      "ref": "@howardh/recon_agent",
-      "title": "Recon",
-      "description": "Scans any URL and produces an auto-opening HTML recon report covering tech stack, security headers, SSL, performance, and API schema.",
-      "origin": "native",
-      "category": "productivity",
-      "tags": [
-        "recon",
-        "url",
-        "security",
-        "api",
-        "scanner",
-        "headers",
-        "ssl",
-        "tech-stack"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Frecon_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
-      "source": null,
-      "score": 55.9,
-      "origin_rank": 60,
-      "origin_size": 299,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 1.0,
-        "freshness": 0.6126,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "curator"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 85,
-          "lines": 742,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet",
-        "community tier",
-        "added 85 days ago",
-        "742 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 61,
-      "ref": "@howardh/training_quest_agent",
-      "title": "TrainingQuest",
-      "description": "Generates a gamified HTML onboarding quest from the brainstem's loaded agents, with checkpoints, progress tracking, and copyable prompts.",
-      "origin": "native",
-      "category": "productivity",
-      "tags": [
-        "training",
-        "onboarding",
-        "quest",
-        "html",
-        "interactive",
-        "gamification"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Ftraining_quest_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/training_quest_agent.py",
-      "source": null,
-      "score": 55.9,
-      "origin_rank": 61,
-      "origin_size": 299,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 1.0,
-        "freshness": 0.6126,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "curator"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 85,
-          "lines": 689,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet",
-        "community tier",
-        "added 85 days ago",
-        "689 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 62,
-      "ref": "@howardh/tuftelove_agent",
-      "title": "TufteLove",
-      "description": "Advises on and reviews agent UI design using Tufte principles and Microsoft's Agent Oversight pattern taxonomy.",
-      "origin": "native",
-      "category": "productivity",
-      "tags": [
-        "ui",
-        "design",
-        "tufte",
-        "oversight",
-        "ux",
-        "review",
-        "accessibility",
-        "data-visualization"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Ftuftelove_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/tuftelove_agent.py",
-      "source": null,
-      "score": 55.9,
-      "origin_rank": 62,
-      "origin_size": 299,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 1.0,
-        "freshness": 0.6126,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "curator"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 85,
-          "lines": 512,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet",
-        "community tier",
-        "added 85 days ago",
-        "512 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 63,
-      "ref": "@howardh/vaultmind_agent",
-      "title": "VaultMind",
-      "description": "Manages an Obsidian vault through 28 actions — 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks.",
-      "origin": "native",
-      "category": "productivity",
-      "tags": [
-        "obsidian",
-        "30-60-90",
-        "onboarding",
-        "wiki",
-        "knowledge-base",
-        "vault",
-        "automation",
-        "scheduling",
-        "monitoring"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Fvaultmind_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/vaultmind_agent.py",
-      "source": null,
-      "score": 55.9,
-      "origin_rank": 63,
-      "origin_size": 299,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 1.0,
-        "freshness": 0.6126,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "curator"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 85,
-          "lines": 3257,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet",
-        "community tier",
-        "added 85 days ago",
-        "3257 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 64,
       "ref": "@kody-w/rappterbook_agent",
       "title": "Rappterbook",
       "description": "Fetches Rappterbook agent profiles, trending posts, stats, and channels read-only from the project's GitHub state files.",
@@ -4075,7 +3816,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappterbook_agent.py",
       "source": null,
       "score": 55.9,
-      "origin_rank": 64,
+      "origin_rank": 60,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4119,26 +3860,285 @@
       ]
     },
     {
-      "rank": 65,
-      "ref": "@kody-w/twin_egg_hatcher",
-      "title": "HatchTwinEgg",
-      "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
+      "rank": 61,
+      "ref": "@howardh/prompt_to_video_agent",
+      "title": "PromptToVideo",
+      "description": "Renders videos from structured scene descriptions using Remotion — title, content, quote, and list scenes with style presets.",
       "origin": "native",
-      "category": "core",
+      "category": "productivity",
       "tags": [
-        "twin",
-        "egg",
-        "hatcher",
-        "organism",
-        "federation",
-        "single-file",
-        "rapp"
+        "video",
+        "remotion",
+        "render",
+        "mp4",
+        "scenes",
+        "presentation",
+        "prompt_to_video"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ftwin_egg_hatcher",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Fprompt_to_video_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/prompt_to_video_agent.py",
       "source": null,
-      "score": 55.9,
+      "score": 55.8,
+      "origin_rank": 61,
+      "origin_size": 299,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 1.0,
+        "freshness": 0.6126,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 85,
+          "lines": 792,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet",
+        "community tier",
+        "added 85 days ago",
+        "792 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 62,
+      "ref": "@howardh/recon_agent",
+      "title": "Recon",
+      "description": "Scans any URL and produces an auto-opening HTML recon report covering tech stack, security headers, SSL, performance, and API schema.",
+      "origin": "native",
+      "category": "productivity",
+      "tags": [
+        "recon",
+        "url",
+        "security",
+        "api",
+        "scanner",
+        "headers",
+        "ssl",
+        "tech-stack"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Frecon_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
+      "source": null,
+      "score": 55.8,
+      "origin_rank": 62,
+      "origin_size": 299,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 1.0,
+        "freshness": 0.6126,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 85,
+          "lines": 742,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet",
+        "community tier",
+        "added 85 days ago",
+        "742 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 63,
+      "ref": "@howardh/training_quest_agent",
+      "title": "TrainingQuest",
+      "description": "Generates a gamified HTML onboarding quest from the brainstem's loaded agents, with checkpoints, progress tracking, and copyable prompts.",
+      "origin": "native",
+      "category": "productivity",
+      "tags": [
+        "training",
+        "onboarding",
+        "quest",
+        "html",
+        "interactive",
+        "gamification"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Ftraining_quest_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/training_quest_agent.py",
+      "source": null,
+      "score": 55.8,
+      "origin_rank": 63,
+      "origin_size": 299,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 1.0,
+        "freshness": 0.6126,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 85,
+          "lines": 689,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet",
+        "community tier",
+        "added 85 days ago",
+        "689 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 64,
+      "ref": "@howardh/tuftelove_agent",
+      "title": "TufteLove",
+      "description": "Advises on and reviews agent UI design using Tufte principles and Microsoft's Agent Oversight pattern taxonomy.",
+      "origin": "native",
+      "category": "productivity",
+      "tags": [
+        "ui",
+        "design",
+        "tufte",
+        "oversight",
+        "ux",
+        "review",
+        "accessibility",
+        "data-visualization"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Ftuftelove_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/tuftelove_agent.py",
+      "source": null,
+      "score": 55.8,
+      "origin_rank": 64,
+      "origin_size": 299,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 1.0,
+        "freshness": 0.6126,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 85,
+          "lines": 512,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet",
+        "community tier",
+        "added 85 days ago",
+        "512 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 65,
+      "ref": "@howardh/vaultmind_agent",
+      "title": "VaultMind",
+      "description": "Manages an Obsidian vault through 28 actions — 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks.",
+      "origin": "native",
+      "category": "productivity",
+      "tags": [
+        "obsidian",
+        "30-60-90",
+        "onboarding",
+        "wiki",
+        "knowledge-base",
+        "vault",
+        "automation",
+        "scheduling",
+        "monitoring"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Fvaultmind_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/vaultmind_agent.py",
+      "source": null,
+      "score": 55.8,
       "origin_rank": 65,
       "origin_size": 299,
       "components": {
@@ -4168,7 +4168,7 @@
           "channels": {},
           "tier": "community",
           "age_days": 85,
-          "lines": 895,
+          "lines": 3257,
           "has_card": true
         },
         "source": null
@@ -4178,7 +4178,7 @@
         "no community feedback yet",
         "community tier",
         "added 85 days ago",
-        "895 lines",
+        "3257 lines",
         "has a rendered card"
       ]
     },
@@ -4246,6 +4246,70 @@
     },
     {
       "rank": 67,
+      "ref": "@kody-w/twin_egg_hatcher",
+      "title": "HatchTwinEgg",
+      "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
+      "origin": "native",
+      "category": "core",
+      "tags": [
+        "twin",
+        "egg",
+        "hatcher",
+        "organism",
+        "federation",
+        "single-file",
+        "rapp"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ftwin_egg_hatcher",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
+      "source": null,
+      "score": 55.8,
+      "origin_rank": 67,
+      "origin_size": 299,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 1.0,
+        "freshness": 0.6126,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 85,
+          "lines": 895,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet",
+        "community tier",
+        "added 85 days ago",
+        "895 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 68,
       "ref": "@aibast-agents-library/it_helpdesk",
       "title": "IT Helpdesk",
       "description": "Runs IT support — diagnostics, remediation, technician booking — over a live simulated D365 tenant plus a ServiceNow-shaped ITSM desk; offline-safe.",
@@ -4263,7 +4327,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 67,
+      "origin_rank": 68,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4305,7 +4369,7 @@
       ]
     },
     {
-      "rank": 68,
+      "rank": 69,
       "ref": "@aibast-agents-library/staff_credentialing",
       "title": "Staff Credentialing Agent",
       "description": "Tracks staff credentials and onboarding, joining a live simulated FHIR practitioner registry with the Dynamics 365 CRM directory; offline fallback.",
@@ -4324,7 +4388,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 68,
+      "origin_rank": 69,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4366,7 +4430,7 @@
       ]
     },
     {
-      "rank": 69,
+      "rank": 70,
       "ref": "@aibast-agents-library/win_loss_analysis",
       "title": "Win/Loss Analysis",
       "description": "Computes win/loss stats from live closed deals in a simulated Dynamics 365 tenant, with recovery models and an embedded offline demo fallback.",
@@ -4384,7 +4448,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/win_loss_analysis_stack/win_loss_analysis_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 69,
+      "origin_rank": 70,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4426,7 +4490,7 @@
       ]
     },
     {
-      "rank": 70,
+      "rank": 71,
       "ref": "@kody-w/ez_sharpen_agent",
       "title": "EZSharpen",
       "description": "Grows in-between detail for recorded commons frames by bounded interpolation, keeping only candidates consistent with signed neighbor frames.",
@@ -4444,7 +4508,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 70,
+      "origin_rank": 71,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4488,7 +4552,7 @@
       ]
     },
     {
-      "rank": 71,
+      "rank": 72,
       "ref": "@rapp/estate_outbound",
       "title": "EstateOutbound",
       "description": "Writes an already-signed neighborhood event into ~/.brainstem/outbound/ for federation roll-up; pushing to the estate repo stays manual.",
@@ -4506,7 +4570,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
       "source": null,
       "score": 55.6,
-      "origin_rank": 71,
+      "origin_rank": 72,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4550,7 +4614,7 @@
       ]
     },
     {
-      "rank": 72,
+      "rank": 73,
       "ref": "@discreetRappers/copilot_studio_transpiler_agent",
       "title": "CopilotStudioTranspiler",
       "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.",
@@ -4568,7 +4632,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 72,
+      "origin_rank": 73,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4610,7 +4674,7 @@
       ]
     },
     {
-      "rank": 73,
+      "rank": 74,
       "ref": "@discreetRappers/rapp_pipeline_agent",
       "title": "RAPP",
       "description": "Runs the full RAPP pipeline — discovery, MVP, code gen, quality gates QG1-QG6, PDF reports — using Azure OpenAI and Azure File Storage.",
@@ -4628,7 +4692,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/rapp_pipeline_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 73,
+      "origin_rank": 74,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4670,7 +4734,7 @@
       ]
     },
     {
-      "rank": 74,
+      "rank": 75,
       "ref": "@discreetRappers/sales_assistant_agent",
       "title": "SalesAssistant",
       "description": "Routes natural-language CRM requests about accounts, contacts, and opportunities to the Dynamics CRUD agent, which serves built-in demo data.",
@@ -4687,7 +4751,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sales_assistant_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 74,
+      "origin_rank": 75,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4729,7 +4793,7 @@
       ]
     },
     {
-      "rank": 75,
+      "rank": 76,
       "ref": "@discreetRappers/sharepoint_contract_analysis_agent",
       "title": "ContractAnalysis",
       "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI — clause extraction, risk flagging, and comparison.",
@@ -4747,7 +4811,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 75,
+      "origin_rank": 76,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4789,7 +4853,7 @@
       ]
     },
     {
-      "rank": 76,
+      "rank": 77,
       "ref": "@kody-w/bakeoff_factory",
       "title": "BakeoffFactory",
       "description": "Runs a persistent tournament where prompt variants compete on a text task, an LLM judge scores outputs, and the worst variant mutates toward the best.",
@@ -4809,7 +4873,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/bakeoff_factory_agent.py",
       "source": null,
       "score": 55.4,
-      "origin_rank": 76,
+      "origin_rank": 77,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4853,7 +4917,7 @@
       ]
     },
     {
-      "rank": 77,
+      "rank": 78,
       "ref": "@kody-w/estate_factory",
       "title": "EstateFactory",
       "description": "Generates a complete digital estate from an intent — org tree, factory agent stubs, souls, HTML dashboard — via brainstem or LLM APIs when available.",
@@ -4872,7 +4936,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/estate_factory_agent.py",
       "source": null,
       "score": 55.4,
-      "origin_rank": 77,
+      "origin_rank": 78,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4916,7 +4980,7 @@
       ]
     },
     {
-      "rank": 78,
+      "rank": 79,
       "ref": "@aibast-agents-library/acquisition_support",
       "title": "Acquisition Support Agent",
       "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback.",
@@ -4935,7 +4999,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
       "source": null,
       "score": 55.2,
-      "origin_rank": 78,
+      "origin_rank": 79,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -4977,7 +5041,7 @@
       ]
     },
     {
-      "rank": 79,
+      "rank": 80,
       "ref": "@aibast-agents-library/wealth_insights_generator",
       "title": "Wealth Insights Generator Agent",
       "description": "Generates opportunity alerts and client insights from a live simulated Dynamics 365 tenant pipeline, with an offline demo fallback.",
@@ -4996,7 +5060,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
       "source": null,
       "score": 55.2,
-      "origin_rank": 79,
+      "origin_rank": 80,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -5038,7 +5102,7 @@
       ]
     },
     {
-      "rank": 80,
+      "rank": 81,
       "ref": "@kody-w/neuron_swarm",
       "title": "NeuronSwarm",
       "description": "Fans a task out across parallel expert 'neuron' prompts using the host brainstem's own LLM call, then reconciles them into one converged answer.",
@@ -5058,13 +5122,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/neuron_swarm_agent.py",
       "source": null,
       "score": 55.1,
-      "origin_rank": 80,
+      "origin_rank": 81,
       "origin_size": 299,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8206,
-        "freshness": 0.7415,
+        "freshness": 0.7414,
         "tier": 0.55
       },
       "scores_on": [
@@ -5102,7 +5166,7 @@
       ]
     },
     {
-      "rank": 81,
+      "rank": 82,
       "ref": "@aibast-agents-library/permit_license_management",
       "title": "Permit & License Management Agent",
       "description": "Tracks permit applications from a live simulated Dynamics 365 tenant plus renewal calendars and gap analysis, with an offline fallback.",
@@ -5121,7 +5185,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/permit_license_management_stack/permit_license_management_agent.py",
       "source": null,
       "score": 54.9,
-      "origin_rank": 81,
+      "origin_rank": 82,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -5163,7 +5227,7 @@
       ]
     },
     {
-      "rank": 82,
+      "rank": 83,
       "ref": "@aibast-agents-library/production_line_optimization",
       "title": "Production Line Optimization Agent",
       "description": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback.",
@@ -5181,7 +5245,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py",
       "source": null,
       "score": 54.9,
-      "origin_rank": 82,
+      "origin_rank": 83,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -5223,7 +5287,7 @@
       ]
     },
     {
-      "rank": 83,
+      "rank": 84,
       "ref": "@kody-w/perpetual_loop_factory",
       "title": "PerpetualLoopFactory",
       "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons.",
@@ -5243,7 +5307,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/perpetual_loop_factory_agent.py",
       "source": null,
       "score": 54.9,
-      "origin_rank": 83,
+      "origin_rank": 84,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -5287,7 +5351,7 @@
       ]
     },
     {
-      "rank": 84,
+      "rank": 85,
       "ref": "@aibast-agents-library/personalized_marketing",
       "title": "Personalized Marketing Agent",
       "description": "Segments live audiences and designs campaigns from a live simulated Dynamics 365 tenant's contacts and orders, with an offline demo fallback.",
@@ -5305,7 +5369,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py",
       "source": null,
       "score": 54.8,
-      "origin_rank": 84,
+      "origin_rank": 85,
       "origin_size": 299,
       "components": {
         "community": 0.0,
@@ -5343,71 +5407,6 @@
         "community tier",
         "added 136 days ago",
         "834 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 85,
-      "ref": "@kody-w/prototype_lock_factory_agent",
-      "title": "Prototype Lock Factory",
-      "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff.",
-      "origin": "native",
-      "category": "pipeline",
-      "tags": [
-        "prototype",
-        "factory",
-        "local_first",
-        "acceptance",
-        "handoff",
-        "no_pii"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fprototype_lock_factory_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prototype_lock_factory_agent.py",
-      "source": null,
-      "score": 54.8,
-      "origin_rank": 85,
-      "origin_size": 299,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 0.9581,
-        "freshness": 0.5837,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community",
-        "curator",
-        "freshness"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": null,
-          "lines": 468,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "no recorded add date - scored at the population median",
-        "468 lines",
         "has a rendered card"
       ]
     },
@@ -11089,7 +11088,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.856,
-        "freshness": 0.5475,
+        "freshness": 0.5474,
         "tier": 0.55
       },
       "scores_on": [
@@ -12511,7 +12510,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5456,
-        "freshness": 0.7851,
+        "freshness": 0.785,
         "tier": 0.55
       },
       "scores_on": [
@@ -19916,7 +19915,7 @@
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fexample_private",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/private/example_private_agent.py.stub",
       "source": null,
-      "score": 43.9,
+      "score": 43.8,
       "origin_rank": 298,
       "origin_size": 299,
       "components": {
@@ -19977,7 +19976,7 @@
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Flegal_helper",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/legal_helper_agent.py.stub",
       "source": null,
-      "score": 43.9,
+      "score": 43.8,
       "origin_rank": 299,
       "origin_size": 299,
       "components": {
