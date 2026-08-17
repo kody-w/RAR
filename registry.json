@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-17T00:43:51.173982+00:00",
+  "generated_at": "2026-08-17T00:46:32.346322+00:00",
   "stats": {
     "total_agents": 294,
     "total_swarms": 82,
@@ -16681,7 +16681,7 @@
       "_has_card": true,
       "_added_at": "2026-04-05T16:48:32-04:00",
       "_first_commit_sha": "0165ccdc2b908885ce29c012c359d72fa8330046",
-      "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
+      "_latest_commit_sha": "d28a518312990c33b2d787dc051ae7c8cb90a2bb",
       "_card_sha256": "6b004ef37153513d35e4c1aa7b83fd1b044adb456d50d08f651fd72c3fe3271b"
     },
     {
@@ -16772,7 +16772,7 @@
       "_has_card": true,
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
-      "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
+      "_latest_commit_sha": "d28a518312990c33b2d787dc051ae7c8cb90a2bb",
       "_card_sha256": "d999261be636a4beafd424c54813deaa5d45eaab6881447d47840fe299a97bec",
       "_seed_aliases": [
         7945059615535541162
