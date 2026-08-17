@@ -445,7 +445,7 @@
       "id": "wildhaven_ceo",
       "name": "WildhavenCEO",
       "version": "0.1.0",
-      "summary": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. 'Talk to the workspace' as the whole interface — no reading files, no learning the org,…",
+      "summary": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. Wraps the pattern from kody-w/wildhaven-ceo: 'talk to the workspace' as the whole interface — no reading files, no learning the org,…",
       "category": "productivity",
       "tags": [
         "rapplication",
@@ -545,11 +545,25 @@
   ],
   "skills": [
     {
+      "name": "blindspot",
+      "description": "Systematically surface what the user doesn't know they don't know \\u2014 the gaps, risks, and missing practices in a system, plan, or product only visible from cross-domain expertise. Use on \\\"what am I missing\\\", \\\"blindspot this\\\", \\\"what would an expert see here\\\", \\\"stress test my plan\\\", \\\"san…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/blindspot",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/blindspot/SKILL.md"
+    },
+    {
       "name": "brainstem-reset",
       "description": "Fresh-install test of the RAPP brainstem exactly as a first-time user would get\\nit: kill the running service, archive and clear ~/.brainstem, VERIFY it is\\nactually gone, reinstall from the public one-liner, and verify the new install\\nanswers on :7071. USE THIS SKILL when Kody says: \\\"fresh insta…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/brainstem-reset",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/brainstem-reset/SKILL.md"
+    },
+    {
+      "name": "cs-agent-live",
+      "description": "Take a Copilot Studio agent that was generated and deployed by the RAPP Factory and make it actually answer from its data \\u2014 then make it presentable enough to film. Covers the MCP attach, the auth mode that everyone gets wrong, the silent name truncation, and the toggle that hides the build ma…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/cs-agent-live",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/cs-agent-live/SKILL.md"
     },
     {
       "name": "deep-research",
@@ -571,6 +585,13 @@
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/digital-twin-builder",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/digital-twin-builder/SKILL.md"
+    },
+    {
+      "name": "ecosystem-audit",
+      "description": "Audit a GitHub owner's whole ecosystem and prove or disprove the invariants its own docs assert: repo inventory and family shape, commit velocity in a window, star traction, declared-core-versus-actual-effort mismatch, and a mirror drift audit that catches silently diverged canonical documents. Use…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/ecosystem-audit",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/ecosystem-audit/SKILL.md"
     },
     {
       "name": "estate-sweep",
@@ -685,6 +706,13 @@
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/rapp1-compliance-sweep/SKILL.md"
     },
     {
+      "name": "rapplication-egg",
+      "description": "Build a RAPPlication twin, pack it as a .egg, cubby it in a private egg hub (the batcave), and hatch it back on a clean path to prove it works. Use when asked to make something repeatable, \\\"hatch it as a twin\\\", cubby something, or ship a local-first app that takes a use case and produces a protot…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/rapplication-egg",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/rapplication-egg/SKILL.md"
+    },
+    {
       "name": "ship",
       "description": "Commit, push, publish to GitHub Pages, and hand back a VERIFIED live URL. Use whenever the user says \\\"push it\\\", \\\"publish this\\\", \\\"ship it\\\", \\\"make this live\\\", \\\"show me the link so I can test\\\", or finishes building anything static (single-file HTML app, demo, deck, agent page) that belongs o…",
       "repo": "kody-w/rapp-skills",
@@ -692,11 +720,32 @@
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/ship/SKILL.md"
     },
     {
+      "name": "showcase-film",
+      "description": "Produce a catalog-quality showcase film from any source \\u2014 an agent, an app, a portal, a process. The full pipeline: derive grammar from reference films, write the beatmap, capture, narrate, mix, gate. Trigger on any request for a showcase, demo film, sizzle reel, walkthrough or customer-facing…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/showcase-film",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/showcase-film/SKILL.md"
+    },
+    {
+      "name": "tab-film",
+      "description": "Capture a demo film from a live web app safely and cut it to narration. Use for any \\\"film this agent / app / portal\\\" ask. Encodes the capture method that works on a developer laptop, the three ways desktop capture leaks private windows, and the post-processing step that destroys text. Trigger on…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/tab-film",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/tab-film/SKILL.md"
+    },
+    {
       "name": "transcript-miner",
       "description": "Mine Claude Code session history for usage patterns, mistakes, and automation candidates. Use when Kody says \\\"audit my sessions\\\", \\\"what am I doing wrong in Claude Code\\\", \\\"usage audit\\\", \\\"mine my transcripts\\\", \\\"analyze my Claude Code history\\\", \\\"what should be a skill\\\", or asks how he's us…",
       "repo": "kody-w/rapp-skills",
       "url": "https://github.com/kody-w/rapp-skills/tree/main/transcript-miner",
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/transcript-miner/SKILL.md"
+    },
+    {
+      "name": "usecase-to-showcase",
+      "description": "Take a customer MVP use-case brief (a paragraph, a slide, a discovery transcript) all the way to a demonstrable showcase: a synthetic enterprise data plane at tenant scale, grounded citation-first agents, a deployed function app, a Copilot Studio suite that actually answers, a filmed customer showc…",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/usecase-to-showcase",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/usecase-to-showcase/SKILL.md"
     },
     {
       "name": "wow",
