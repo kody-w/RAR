@@ -31,7 +31,7 @@
   "size_kb": 16.9,
   "sha256": "5c3eec3b482e9a812b963cfb7570175ec73fe1cec384269a9c9a0a9866347d18",
   "has_card": true,
-  "added_at": "2026-05-09T15:25:18-04:00",
+  "added_at": "2026-08-17T21:44:24Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__chain_composer_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",

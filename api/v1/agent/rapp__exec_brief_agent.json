@@ -27,7 +27,7 @@
   "size_kb": 27.2,
   "sha256": "b43fbf2ac29f381c41c6cd7e2a247ffb7a6143c579e095c4ab2d961bf26ef45d",
   "has_card": true,
-  "added_at": "2026-04-27T21:23:24Z",
+  "added_at": "2026-08-17T21:44:24Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__exec_brief_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/exec_brief_agent.py",

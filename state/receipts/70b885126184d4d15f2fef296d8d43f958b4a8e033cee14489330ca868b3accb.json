@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-17"
+ },
+ "action": "agent.create",
+ "agent": "@kody-w/prompt_extractor",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "9b03c1b6d286d219e1f19966eea18eb2ef9c980213455963226b264c038440ba"
+ },
+ "canonical_path": "agents/@kody-w/prompt_extractor.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-17T22:02:35.199982+00:00",
+ "id": "rar_70b885126184d4d15f2fef296d8d43f958b4a8e033cee14489330ca868b3accb",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_70b885126184d4d15f2fef29",
+ "revision_id": "70b885126184d4d15f2fef296d8d43f958b4a8e033cee14489330ca868b3accb",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "regenerated aggregated agents before prototype factory admission"
+ },
+ "version": "1.0.1"
+}

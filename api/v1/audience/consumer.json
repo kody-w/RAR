@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-08-17T00:46:32Z",
-  "count": 188,
+  "generated": "2026-08-17T22:00:07Z",
+  "count": 192,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -39,7 +39,7 @@
       "stats": {
         "lines": 758,
         "size_kb": 38.1,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -73,7 +73,7 @@
       "stats": {
         "lines": 510,
         "size_kb": 25.6,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -107,7 +107,7 @@
       "stats": {
         "lines": 534,
         "size_kb": 28.1,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -142,7 +142,7 @@
       "stats": {
         "lines": 585,
         "size_kb": 27.8,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -177,7 +177,7 @@
       "stats": {
         "lines": 445,
         "size_kb": 22.1,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -212,7 +212,7 @@
       "stats": {
         "lines": 433,
         "size_kb": 21.3,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -247,7 +247,7 @@
       "stats": {
         "lines": 456,
         "size_kb": 22.8,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -282,7 +282,7 @@
       "stats": {
         "lines": 715,
         "size_kb": 32.7,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -316,7 +316,7 @@
       "stats": {
         "lines": 542,
         "size_kb": 28.4,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -351,7 +351,7 @@
       "stats": {
         "lines": 497,
         "size_kb": 26.8,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -385,7 +385,7 @@
       "stats": {
         "lines": 406,
         "size_kb": 20.8,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -420,7 +420,7 @@
       "stats": {
         "lines": 494,
         "size_kb": 25.7,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -454,7 +454,7 @@
       "stats": {
         "lines": 671,
         "size_kb": 33.3,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -488,7 +488,7 @@
       "stats": {
         "lines": 420,
         "size_kb": 21.9,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -522,7 +522,7 @@
       "stats": {
         "lines": 433,
         "size_kb": 23.8,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -557,7 +557,7 @@
       "stats": {
         "lines": 444,
         "size_kb": 22.5,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -591,7 +591,7 @@
       "stats": {
         "lines": 378,
         "size_kb": 20.6,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -625,7 +625,7 @@
       "stats": {
         "lines": 407,
         "size_kb": 21.7,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -659,7 +659,7 @@
       "stats": {
         "lines": 490,
         "size_kb": 24.5,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -694,7 +694,7 @@
       "stats": {
         "lines": 379,
         "size_kb": 18.9,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -728,7 +728,7 @@
       "stats": {
         "lines": 428,
         "size_kb": 21.0,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -762,7 +762,7 @@
       "stats": {
         "lines": 581,
         "size_kb": 28.2,
-        "added_at": "2026-04-03T16:15:52-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -800,7 +800,7 @@
       "stats": {
         "lines": 384,
         "size_kb": 27.7,
-        "added_at": "2026-05-12T13:37:05-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -834,7 +834,7 @@
       "stats": {
         "lines": 990,
         "size_kb": 39.7,
-        "added_at": "2026-04-04T11:22:10-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -869,7 +869,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -903,7 +903,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.8,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -937,7 +937,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -972,7 +972,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1007,7 +1007,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1039,7 +1039,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.3,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1074,7 +1074,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.9,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1110,7 +1110,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.2,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1145,7 +1145,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.2,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1180,7 +1180,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.8,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1215,7 +1215,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.9,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1251,7 +1251,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-08-11T09:43:05Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1286,7 +1286,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1320,7 +1320,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.8,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1356,7 +1356,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.4,
-        "added_at": "2026-08-11T09:43:05Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1392,7 +1392,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.6,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1425,7 +1425,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.6,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1459,7 +1459,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.9,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1492,7 +1492,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.8,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1524,7 +1524,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.3,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1561,7 +1561,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.8,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1592,7 +1592,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.7,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1624,7 +1624,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.5,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1659,7 +1659,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.9,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1694,7 +1694,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.2,
-        "added_at": "2026-08-11T09:43:05Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1729,7 +1729,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": "2026-08-11T09:43:05Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1762,7 +1762,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.6,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1798,7 +1798,42 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
+      }
+    },
+    {
+      "id": "cat-agent-skills__cowork_use_case_one_pager",
+      "name": "@cat-agent-skills/cowork_use_case_one_pager",
+      "display_name": "Cowork Use Case One-Pager",
+      "description": "Turn a Cowork conversation, into a one-page HTML use case write-up — narrative, impact figures, workflow steps, and outputs.",
+      "version": "2.0.1",
+      "publisher": "@cat-agent-skills",
+      "author": "Tim Sparks",
+      "category": "productivity",
+      "tags": [
+        "productivity",
+        "use_case",
+        "html",
+        "documents",
+        "writing",
+        "audit"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
+        "sha256": "04d7936c14c1ba540141659716a7bacc34a2cd3fcb057a4625d749fd89492bb7"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 8.9,
+        "added_at": null
       }
     },
     {
@@ -1833,7 +1868,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1868,7 +1903,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.5,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1900,7 +1935,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.2,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1935,7 +1970,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -1970,7 +2005,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2004,7 +2039,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2038,7 +2073,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2074,7 +2109,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2108,7 +2143,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.4,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2142,7 +2177,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.5,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2179,7 +2214,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.6,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2213,7 +2248,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.9,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2246,7 +2281,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.9,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2283,7 +2318,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.4,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2319,7 +2354,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.4,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2356,7 +2391,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.4,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2393,7 +2428,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": "2026-08-11T09:43:05Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2428,7 +2463,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2463,7 +2498,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2498,7 +2533,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.2,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2532,7 +2567,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2566,7 +2601,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.8,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2601,7 +2636,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2634,7 +2669,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2668,7 +2703,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2702,7 +2737,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.9,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2733,7 +2768,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.7,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2767,7 +2802,44 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
+      }
+    },
+    {
+      "id": "cat-agent-skills__route_map_visualizer",
+      "name": "@cat-agent-skills/route_map_visualizer",
+      "display_name": "Route Map Visualizer",
+      "description": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and durations. Produces PNG, interactive HTML (Leaflet/OSM), GeoJSON, KML, deep links, and QR codes. Fully offline Python engine — road geometry rendered directly when provided, or OSRM used browser-side as…",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Nazish Qasim",
+      "category": "devtools",
+      "tags": [
+        "maps",
+        "routing",
+        "visualization",
+        "openstreetmap",
+        "python",
+        "leaflet",
+        "geojson",
+        "kml"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/route_map_visualizer_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/route_map_visualizer_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/route_map_visualizer_agent.py",
+        "sha256": "5c0cb3810b9ec755c91cad5a437f1fc98cd9de481f8e25c90d58dc0574b032dd"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 8.9,
+        "added_at": null
       }
     },
     {
@@ -2800,7 +2872,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.7,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2834,7 +2906,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2868,7 +2940,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.9,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2905,7 +2977,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": "2026-08-11T09:43:05Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2940,7 +3012,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -2976,7 +3048,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.9,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3011,7 +3083,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.4,
-        "added_at": "2026-08-11T09:43:05Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3044,7 +3116,44 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.1,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
+      }
+    },
+    {
+      "id": "cat-agent-skills__wcag_power_platform",
+      "name": "@cat-agent-skills/wcag_power_platform",
+      "display_name": "WCAG 2.1 for Web Apps & Power Platform",
+      "description": "Makes everything the agent builds or reviews conform to WCAG 2.1 AA — HTML pages, SPAs, theming, PCF controls, model-driven and canvas apps, and Power Pages.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Mark Christie",
+      "category": "general",
+      "tags": [
+        "accessibility",
+        "wcag",
+        "a11y",
+        "power_platform",
+        "power_apps",
+        "pcf",
+        "power_pages",
+        "web"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/wcag_power_platform_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/wcag_power_platform_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/wcag_power_platform_agent.py",
+        "sha256": "64c5ea9482a1d1ada8874099c362a028318cf35ce157fe91e5642f6eebdaf1b5"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.2,
+        "added_at": null
       }
     },
     {
@@ -3077,7 +3186,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-08-11T09:43:05Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3113,7 +3222,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3149,7 +3258,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.0,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3185,7 +3294,42 @@
       "stats": {
         "lines": 188,
         "size_kb": 8.8,
-        "added_at": "2026-07-31T22:43:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
+      }
+    },
+    {
+      "id": "cat-agent-skills__work_iq_signalboard",
+      "name": "@cat-agent-skills/work_iq_signalboard",
+      "display_name": "Work IQ Signalboard",
+      "description": "Turn four weeks of Calendar, Mail, and Teams chat activity into a colorful dashboard of reconciled Work IQ counts.",
+      "version": "3.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Andreas Adner",
+      "category": "general",
+      "tags": [
+        "work_iq",
+        "microsoft_365",
+        "dashboard",
+        "visualization",
+        "work_patterns",
+        "analytics"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/work_iq_signalboard_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/work_iq_signalboard_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/work_iq_signalboard_agent.py",
+        "sha256": "952f4d5714c90395e690cd9cb0dca9eae1d70e15f5a568f375f573ac5d4fe3d2"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.0,
+        "added_at": null
       }
     },
     {
@@ -3218,7 +3362,7 @@
       "stats": {
         "lines": 1257,
         "size_kb": 48.0,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3254,7 +3398,7 @@
       "stats": {
         "lines": 1035,
         "size_kb": 39.2,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3288,7 +3432,7 @@
       "stats": {
         "lines": 996,
         "size_kb": 38.4,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3326,7 +3470,7 @@
       "stats": {
         "lines": 2154,
         "size_kb": 88.5,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3364,7 +3508,7 @@
       "stats": {
         "lines": 1201,
         "size_kb": 58.4,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3397,7 +3541,7 @@
       "stats": {
         "lines": 149,
         "size_kb": 6.0,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3431,7 +3575,7 @@
       "stats": {
         "lines": 1551,
         "size_kb": 61.3,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3463,7 +3607,7 @@
       "stats": {
         "lines": 894,
         "size_kb": 39.2,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3501,7 +3645,7 @@
       "stats": {
         "lines": 2999,
         "size_kb": 121.6,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3535,7 +3679,7 @@
       "stats": {
         "lines": 1301,
         "size_kb": 54.2,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3569,7 +3713,7 @@
       "stats": {
         "lines": 318,
         "size_kb": 32.1,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3605,7 +3749,7 @@
       "stats": {
         "lines": 683,
         "size_kb": 32.5,
-        "added_at": "2026-04-28T17:29:54-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3640,7 +3784,7 @@
       "stats": {
         "lines": 236,
         "size_kb": 7.9,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3677,7 +3821,7 @@
       "stats": {
         "lines": 792,
         "size_kb": 26.3,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3714,7 +3858,7 @@
       "stats": {
         "lines": 742,
         "size_kb": 32.2,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3749,7 +3893,7 @@
       "stats": {
         "lines": 689,
         "size_kb": 45.6,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3786,7 +3930,7 @@
       "stats": {
         "lines": 512,
         "size_kb": 28.3,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3826,7 +3970,7 @@
       "stats": {
         "lines": 3257,
         "size_kb": 146.1,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3862,7 +4006,7 @@
       "stats": {
         "lines": 390,
         "size_kb": 15.8,
-        "added_at": "2026-05-05T10:49:27-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3897,7 +4041,7 @@
       "stats": {
         "lines": 737,
         "size_kb": 29.2,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3931,7 +4075,7 @@
       "stats": {
         "lines": 227,
         "size_kb": 13.3,
-        "added_at": "2026-06-20T19:39:59-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -3967,7 +4111,7 @@
       "stats": {
         "lines": 860,
         "size_kb": 36.2,
-        "added_at": "2026-05-16T16:03:13-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4002,7 +4146,7 @@
       "stats": {
         "lines": 368,
         "size_kb": 15.1,
-        "added_at": "2026-05-09T15:25:16-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4037,7 +4181,7 @@
       "stats": {
         "lines": 299,
         "size_kb": 15.4,
-        "added_at": "2026-08-02T22:38:06-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4072,7 +4216,7 @@
       "stats": {
         "lines": 409,
         "size_kb": 16.9,
-        "added_at": "2026-05-09T15:25:18-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4106,7 +4250,7 @@
       "stats": {
         "lines": 321,
         "size_kb": 21.1,
-        "added_at": "2026-06-20T19:05:34-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4140,7 +4284,7 @@
       "stats": {
         "lines": 342,
         "size_kb": 20.3,
-        "added_at": "2026-06-20T18:41:00-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4175,7 +4319,7 @@
       "stats": {
         "lines": 2731,
         "size_kb": 127.3,
-        "added_at": "2026-06-22T21:04:42-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4208,7 +4352,7 @@
       "stats": {
         "lines": 183,
         "size_kb": 8.4,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4253,7 +4397,7 @@
       "stats": {
         "lines": 4724,
         "size_kb": 442.8,
-        "added_at": "2026-06-07T20:27:02-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4295,7 +4439,7 @@
       "stats": {
         "lines": 5330,
         "size_kb": 218.4,
-        "added_at": "2026-07-07T00:52:21Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4329,7 +4473,7 @@
       "stats": {
         "lines": 7028,
         "size_kb": 245.5,
-        "added_at": "2026-08-11T17:28:15Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4367,7 +4511,7 @@
       "stats": {
         "lines": 153,
         "size_kb": 7.0,
-        "added_at": "2026-07-07T00:32:03Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4401,7 +4545,7 @@
       "stats": {
         "lines": 213,
         "size_kb": 12.5,
-        "added_at": "2026-06-20T19:46:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4436,7 +4580,7 @@
       "stats": {
         "lines": 934,
         "size_kb": 37.3,
-        "added_at": "2026-05-16T16:30:24-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4468,7 +4612,7 @@
       "stats": {
         "lines": 40,
         "size_kb": 1.3,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4502,7 +4646,7 @@
       "stats": {
         "lines": 413,
         "size_kb": 25.8,
-        "added_at": "2026-06-20T18:58:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4537,7 +4681,7 @@
       "stats": {
         "lines": 495,
         "size_kb": 18.1,
-        "added_at": "2026-08-11T17:32:02Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4577,7 +4721,7 @@
       "stats": {
         "lines": 536,
         "size_kb": 22.7,
-        "added_at": "2026-06-27T13:28:13-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4614,7 +4758,7 @@
       "stats": {
         "lines": 1546,
         "size_kb": 48.5,
-        "added_at": "2026-08-11T09:43:05Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4648,7 +4792,7 @@
       "stats": {
         "lines": 205,
         "size_kb": 12.0,
-        "added_at": "2026-06-20T18:41:00-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4681,7 +4825,7 @@
       "stats": {
         "lines": 957,
         "size_kb": 43.7,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4713,7 +4857,7 @@
       "stats": {
         "lines": 39,
         "size_kb": 1.2,
-        "added_at": "2026-04-06T16:39:03-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4747,7 +4891,7 @@
       "stats": {
         "lines": 940,
         "size_kb": 36.4,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4782,7 +4926,7 @@
       "stats": {
         "lines": 797,
         "size_kb": 34.5,
-        "added_at": "2026-05-09T15:25:17-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4815,7 +4959,7 @@
       "stats": {
         "lines": 42,
         "size_kb": 1.4,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4848,7 +4992,7 @@
       "stats": {
         "lines": 255,
         "size_kb": 10.8,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4882,7 +5026,7 @@
       "stats": {
         "lines": 275,
         "size_kb": 14.0,
-        "added_at": "2026-06-20T19:39:59-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4920,7 +5064,7 @@
       "stats": {
         "lines": 602,
         "size_kb": 38.1,
-        "added_at": "2026-07-02T19:31:47Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4956,7 +5100,7 @@
       "stats": {
         "lines": 363,
         "size_kb": 18.8,
-        "added_at": "2026-06-26T23:08:53-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -4992,7 +5136,7 @@
       "stats": {
         "lines": 1352,
         "size_kb": 54.3,
-        "added_at": "2026-05-05T08:57:33-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5028,7 +5172,7 @@
       "stats": {
         "lines": 578,
         "size_kb": 26.5,
-        "added_at": "2026-05-09T15:25:19-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5067,7 +5211,7 @@
       "stats": {
         "lines": 861,
         "size_kb": 39.6,
-        "added_at": "2026-07-22T15:35:38-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5103,7 +5247,7 @@
       "stats": {
         "lines": 535,
         "size_kb": 26.9,
-        "added_at": "2026-07-24T16:53:40Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5137,7 +5281,7 @@
       "stats": {
         "lines": 735,
         "size_kb": 27.6,
-        "added_at": "2026-08-03T09:47:21-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5169,7 +5313,7 @@
       "stats": {
         "lines": 77,
         "size_kb": 2.3,
-        "added_at": "2026-05-16T16:33:02-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5202,7 +5346,7 @@
       "stats": {
         "lines": 391,
         "size_kb": 19.3,
-        "added_at": "2026-07-15T15:23:19Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5239,7 +5383,7 @@
       "stats": {
         "lines": 1416,
         "size_kb": 57.8,
-        "added_at": "2026-07-23T12:26:59-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5271,7 +5415,7 @@
       "stats": {
         "lines": 43,
         "size_kb": 1.3,
-        "added_at": "2026-07-18T23:41:02Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5306,7 +5450,7 @@
       "stats": {
         "lines": 479,
         "size_kb": 17.4,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5341,7 +5485,7 @@
       "stats": {
         "lines": 160,
         "size_kb": 6.3,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5376,7 +5520,7 @@
       "stats": {
         "lines": 540,
         "size_kb": 24.2,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5412,7 +5556,7 @@
       "stats": {
         "lines": 1400,
         "size_kb": 59.4,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5451,7 +5595,7 @@
       "stats": {
         "lines": 175,
         "size_kb": 6.9,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5485,7 +5629,7 @@
       "stats": {
         "lines": 119,
         "size_kb": 5.6,
-        "added_at": "2026-06-20T18:41:00-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5520,7 +5664,7 @@
       "stats": {
         "lines": 687,
         "size_kb": 31.4,
-        "added_at": "2026-08-01T21:33:29-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5556,7 +5700,7 @@
       "stats": {
         "lines": 895,
         "size_kb": 32.2,
-        "added_at": "2026-05-24T21:45:25-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5593,7 +5737,7 @@
       "stats": {
         "lines": 781,
         "size_kb": 33.1,
-        "added_at": "2026-06-08T13:48:48-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5627,7 +5771,7 @@
       "stats": {
         "lines": 355,
         "size_kb": 14.7,
-        "added_at": "2026-05-03T14:51:56-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5665,7 +5809,7 @@
       "stats": {
         "lines": 276,
         "size_kb": 11.8,
-        "added_at": "2026-08-11T09:50:23Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5695,7 +5839,7 @@
       "stats": {
         "lines": 29,
         "size_kb": 1.3,
-        "added_at": "2026-04-06T14:07:43-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5729,7 +5873,7 @@
       "stats": {
         "lines": 237,
         "size_kb": 9.9,
-        "added_at": "2026-05-11T13:43:55-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5764,7 +5908,7 @@
       "stats": {
         "lines": 685,
         "size_kb": 36.3,
-        "added_at": "2026-06-09T21:40:07-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5802,7 +5946,7 @@
       "stats": {
         "lines": 418,
         "size_kb": 20.2,
-        "added_at": "2026-06-10T09:05:29-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5837,7 +5981,7 @@
       "stats": {
         "lines": 347,
         "size_kb": 14.5,
-        "added_at": "2026-05-11T10:53:36-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5871,7 +6015,7 @@
       "stats": {
         "lines": 178,
         "size_kb": 6.7,
-        "added_at": "2026-05-11T13:59:12-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5901,7 +6045,7 @@
       "stats": {
         "lines": 685,
         "size_kb": 27.2,
-        "added_at": "2026-04-27T21:23:24Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5936,7 +6080,7 @@
       "stats": {
         "lines": 797,
         "size_kb": 31.1,
-        "added_at": "2026-04-21T13:35:42-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -5966,7 +6110,7 @@
       "stats": {
         "lines": 115,
         "size_kb": 4.2,
-        "added_at": "2026-05-02T14:14:24-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6000,7 +6144,7 @@
       "stats": {
         "lines": 1040,
         "size_kb": 38.8,
-        "added_at": "2026-04-20T12:38:45-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6034,7 +6178,7 @@
       "stats": {
         "lines": 512,
         "size_kb": 23.6,
-        "added_at": "2026-04-27T21:16:54Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6066,7 +6210,7 @@
       "stats": {
         "lines": 37,
         "size_kb": 1.2,
-        "added_at": "2026-04-27T23:08:42Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6101,7 +6245,7 @@
       "stats": {
         "lines": 1087,
         "size_kb": 56.0,
-        "added_at": "2026-04-27T21:24:10Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6140,7 +6284,7 @@
       "stats": {
         "lines": 2963,
         "size_kb": 173.4,
-        "added_at": "2026-06-09T21:40:04-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6175,7 +6319,7 @@
       "stats": {
         "lines": 501,
         "size_kb": 20.6,
-        "added_at": "2026-04-27T23:18:27Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6209,7 +6353,7 @@
       "stats": {
         "lines": 592,
         "size_kb": 23.2,
-        "added_at": "2026-04-27T18:52:27-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6245,7 +6389,7 @@
       "stats": {
         "lines": 475,
         "size_kb": 23.4,
-        "added_at": "2026-06-09T21:45:37-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6279,7 +6423,7 @@
       "stats": {
         "lines": 424,
         "size_kb": 16.6,
-        "added_at": "2026-04-27T21:52:47Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6313,7 +6457,7 @@
       "stats": {
         "lines": 752,
         "size_kb": 40.4,
-        "added_at": "2026-04-20T12:38:45-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6350,7 +6494,7 @@
       "stats": {
         "lines": 1773,
         "size_kb": 71.9,
-        "added_at": "2026-05-11T10:53:36-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6380,7 +6524,7 @@
       "stats": {
         "lines": 532,
         "size_kb": 20.2,
-        "added_at": "2026-04-27T21:15:33Z"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6418,7 +6562,7 @@
       "stats": {
         "lines": 823,
         "size_kb": 37.5,
-        "added_at": "2026-04-19T18:58:15-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6456,7 +6600,7 @@
       "stats": {
         "lines": 527,
         "size_kb": 23.9,
-        "added_at": "2026-04-19T18:58:15-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6493,7 +6637,7 @@
       "stats": {
         "lines": 474,
         "size_kb": 18.8,
-        "added_at": "2026-05-16T13:08:37-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6529,7 +6673,7 @@
       "stats": {
         "lines": 322,
         "size_kb": 13.2,
-        "added_at": "2026-04-05T16:48:32-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     },
     {
@@ -6565,7 +6709,7 @@
       "stats": {
         "lines": 285,
         "size_kb": 10.5,
-        "added_at": "2026-05-16T12:50:07-04:00"
+        "added_at": "2026-08-17T21:44:24Z"
       }
     }
   ]

@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-17"
+ },
+ "action": "agent.create",
+ "agent": "@kody-w/buzzsaw",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "68ffa820bc89cd8966f9929725bd9befd616ac26ad26867b828dc790b9cf13bb"
+ },
+ "canonical_path": "agents/@kody-w/buzzsaw.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-17T22:02:35.199982+00:00",
+ "id": "rar_ac9d0c5bcecb1e5dfeb30e35afbf04117aaf7421613400caf12895533b98a067",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_ac9d0c5bcecb1e5dfeb30e35",
+ "revision_id": "ac9d0c5bcecb1e5dfeb30e35afbf04117aaf7421613400caf12895533b98a067",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "regenerated aggregated agents before prototype factory admission"
+ },
+ "version": "1.0.0"
+}

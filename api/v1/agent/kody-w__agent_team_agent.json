@@ -32,7 +32,7 @@
   "size_kb": 15.8,
   "sha256": "0ed520946386fb7d52aa8f9af1774f2656f4e9bc33d7ff911737e6f67b498332",
   "has_card": true,
-  "added_at": "2026-05-05T10:49:27-04:00",
+  "added_at": "2026-08-17T21:44:24Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__agent_team_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_team_agent.py",

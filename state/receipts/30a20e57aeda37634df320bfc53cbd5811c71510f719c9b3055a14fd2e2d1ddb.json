@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-17"
+ },
+ "action": "agent.create",
+ "agent": "@kody-w/wp_publish",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "624c7a945e4b1428675ddb9e213bb7a41ad24096c5705783d4923bc130467d8d"
+ },
+ "canonical_path": "agents/@kody-w/wp_publish.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-17T22:02:35.199982+00:00",
+ "id": "rar_30a20e57aeda37634df320bfc53cbd5811c71510f719c9b3055a14fd2e2d1ddb",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_30a20e57aeda37634df320bf",
+ "revision_id": "30a20e57aeda37634df320bfc53cbd5811c71510f719c9b3055a14fd2e2d1ddb",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "regenerated aggregated agents before prototype factory admission"
+ },
+ "version": "1.0.0"
+}

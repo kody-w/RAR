@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-17"
+ },
+ "action": "agent.create",
+ "agent": "@cat-agent-skills/cowork_use_case_one_pager",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "04d7936c14c1ba540141659716a7bacc34a2cd3fcb057a4625d749fd89492bb7"
+ },
+ "canonical_path": "agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-17T22:02:35.199982+00:00",
+ "id": "rar_cf13adfdc5d5cac0b4e2cebaea94670ec766c42d6d7991629ef89715b240bd76",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_cf13adfdc5d5cac0b4e2ceba",
+ "revision_id": "cf13adfdc5d5cac0b4e2cebaea94670ec766c42d6d7991629ef89715b240bd76",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "regenerated aggregated agents before prototype factory admission"
+ },
+ "version": "2.0.1"
+}

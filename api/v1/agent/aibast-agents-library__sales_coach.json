@@ -31,7 +31,7 @@
   "size_kb": 23.8,
   "sha256": "ccbfc298d6e53e7aef78b65e06bf84f2c5abe33fddc9ad5d705fcfa671695585",
   "has_card": true,
-  "added_at": "2026-04-03T16:15:52-04:00",
+  "added_at": "2026-08-17T21:44:24Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__sales_coach.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/sales_coach_stack/sales_coach_agent.py",

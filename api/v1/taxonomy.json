@@ -1,14 +1,14 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-17T00:46:32Z",
+  "generated": "2026-08-17T22:00:07Z",
   "categories": [
     {
       "name": "general",
-      "count": 62
+      "count": 64
     },
     {
       "name": "productivity",
-      "count": 40
+      "count": 41
     },
     {
       "name": "core",
@@ -20,7 +20,7 @@
     },
     {
       "name": "devtools",
-      "count": 22
+      "count": 23
     },
     {
       "name": "pipeline",
@@ -106,7 +106,7 @@
     },
     {
       "name": "@cat-agent-skills",
-      "count": 85
+      "count": 89
     },
     {
       "name": "@kody-w",
@@ -148,7 +148,7 @@
     },
     {
       "name": "frontier",
-      "count": 85
+      "count": 89
     },
     {
       "name": "official",
@@ -166,7 +166,7 @@
   "tags": [
     {
       "name": "productivity",
-      "count": 38
+      "count": 39
     },
     {
       "name": "sales",
@@ -189,11 +189,11 @@
       "count": 16
     },
     {
-      "name": "compliance",
-      "count": 14
+      "name": "writing",
+      "count": 15
     },
     {
-      "name": "writing",
+      "name": "compliance",
       "count": 14
     },
     {
@@ -202,7 +202,7 @@
     },
     {
       "name": "documents",
-      "count": 12
+      "count": 13
     },
     {
       "name": "rapplication",
@@ -221,16 +221,16 @@
       "count": 10
     },
     {
+      "name": "audit",
+      "count": 10
+    },
+    {
       "name": "teams",
       "count": 10
     },
     {
       "name": "meta",
       "count": 10
-    },
-    {
-      "name": "audit",
-      "count": 9
     },
     {
       "name": "powerpoint",
@@ -261,11 +261,19 @@
       "count": 7
     },
     {
+      "name": "routing",
+      "count": 7
+    },
+    {
       "name": "marketing",
       "count": 7
     },
     {
       "name": "scripts",
+      "count": 7
+    },
+    {
+      "name": "python",
       "count": 7
     },
     {
@@ -281,10 +289,6 @@
       "count": 6
     },
     {
-      "name": "routing",
-      "count": 6
-    },
-    {
       "name": "pricing",
       "count": 6
     },
@@ -297,11 +301,15 @@
       "count": 6
     },
     {
-      "name": "python",
+      "name": "html",
       "count": 6
     },
     {
       "name": "design",
+      "count": 6
+    },
+    {
+      "name": "power_platform",
       "count": 6
     },
     {
@@ -333,6 +341,10 @@
       "count": 5
     },
     {
+      "name": "analytics",
+      "count": 5
+    },
+    {
       "name": "reporting",
       "count": 5
     },
@@ -361,15 +373,11 @@
       "count": 5
     },
     {
+      "name": "microsoft_365",
+      "count": 5
+    },
+    {
       "name": "agent",
-      "count": 5
-    },
-    {
-      "name": "html",
-      "count": 5
-    },
-    {
-      "name": "power_platform",
       "count": 5
     },
     {
@@ -378,6 +386,10 @@
     },
     {
       "name": "knowledge",
+      "count": 5
+    },
+    {
+      "name": "visualization",
       "count": 5
     },
     {
@@ -429,10 +441,6 @@
       "count": 4
     },
     {
-      "name": "analytics",
-      "count": 4
-    },
-    {
       "name": "regulatory",
       "count": 4
     },
@@ -454,10 +462,6 @@
     },
     {
       "name": "dataverse",
-      "count": 4
-    },
-    {
-      "name": "microsoft_365",
       "count": 4
     },
     {
@@ -625,6 +629,10 @@
       "count": 3
     },
     {
+      "name": "dashboard",
+      "count": 3
+    },
+    {
       "name": "intake",
       "count": 3
     },
@@ -654,6 +662,10 @@
     },
     {
       "name": "power-platform",
+      "count": 3
+    },
+    {
+      "name": "accessibility",
       "count": 3
     },
     {
@@ -698,10 +710,6 @@
     },
     {
       "name": "foundry",
-      "count": 3
-    },
-    {
-      "name": "visualization",
       "count": 3
     },
     {
@@ -929,10 +937,6 @@
       "count": 2
     },
     {
-      "name": "dashboard",
-      "count": 2
-    },
-    {
       "name": "communication",
       "count": 2
     },
@@ -993,7 +997,7 @@
       "count": 2
     },
     {
-      "name": "accessibility",
+      "name": "web",
       "count": 2
     },
     {
@@ -1002,6 +1006,10 @@
     },
     {
       "name": "demo",
+      "count": 2
+    },
+    {
+      "name": "use_case",
       "count": 2
     },
     {
@@ -1354,14 +1362,6 @@
     },
     {
       "name": "asset-health",
-      "count": 1
-    },
-    {
-      "name": "work-orders",
-      "count": 1
-    },
-    {
-      "name": "building",
       "count": 1
     }
   ]

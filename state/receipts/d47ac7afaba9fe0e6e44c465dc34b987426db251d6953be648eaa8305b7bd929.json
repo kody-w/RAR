@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-17"
+ },
+ "action": "agent.create",
+ "agent": "@cat-agent-skills/route_map_visualizer",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "5c0cb3810b9ec755c91cad5a437f1fc98cd9de481f8e25c90d58dc0574b032dd"
+ },
+ "canonical_path": "agents/@cat-agent-skills/route_map_visualizer_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-17T22:02:35.199982+00:00",
+ "id": "rar_d47ac7afaba9fe0e6e44c465dc34b987426db251d6953be648eaa8305b7bd929",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_d47ac7afaba9fe0e6e44c465",
+ "revision_id": "d47ac7afaba9fe0e6e44c465dc34b987426db251d6953be648eaa8305b7bd929",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "regenerated aggregated agents before prototype factory admission"
+ },
+ "version": "2.0.0"
+}

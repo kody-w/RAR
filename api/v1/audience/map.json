@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-08-17T00:46:32Z",
+  "generated": "2026-08-17T22:00:07Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 106,
     "consumer_only": 3,
-    "both": 185,
-    "in_business_mode": 291,
-    "in_consumer_mode": 188
+    "both": 189,
+    "in_business_mode": 295,
+    "in_consumer_mode": 192
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -155,6 +155,7 @@
     "@cat-agent-skills/copilot_studio_knowledge_readiness": "b",
     "@cat-agent-skills/copilot_studio_test_planner": "x",
     "@cat-agent-skills/copilot_studio_topic_blueprint": "x",
+    "@cat-agent-skills/cowork_use_case_one_pager": "x",
     "@cat-agent-skills/doc_format_converter": "x",
     "@cat-agent-skills/enterprise_agent_design_authority": "b",
     "@cat-agent-skills/eu_greenwashing_analysis": "x",
@@ -192,6 +193,7 @@
     "@cat-agent-skills/redlining_content": "x",
     "@cat-agent-skills/regulation_monitor": "b",
     "@cat-agent-skills/rich_html_presentation": "x",
+    "@cat-agent-skills/route_map_visualizer": "x",
     "@cat-agent-skills/scrollytelling_data": "x",
     "@cat-agent-skills/sharepoint_list_formatter": "x",
     "@cat-agent-skills/sharepoint_list_insight_report_generator": "b",
@@ -203,10 +205,12 @@
     "@cat-agent-skills/travel_cost_estimator": "x",
     "@cat-agent-skills/vacation_urgent_forwarder": "x",
     "@cat-agent-skills/vendor_contract_risk_review": "b",
+    "@cat-agent-skills/wcag_power_platform": "x",
     "@cat-agent-skills/what_to_use_when": "x",
     "@cat-agent-skills/whiteboard_to_infographic": "x",
     "@cat-agent-skills/wikipedia_human_style_writing": "x",
     "@cat-agent-skills/work_brief": "x",
+    "@cat-agent-skills/work_iq_signalboard": "x",
     "@discreetRappers/agent_generator_agent": "x",
     "@discreetRappers/agent_transpiler_agent": "x",
     "@discreetRappers/architecture_diagram_agent": "x",
