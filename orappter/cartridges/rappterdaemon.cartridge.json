@@ -45,7 +45,7 @@
   ],
   "gym_leaders": [
     {"name": "Howard", "title": "The CardSmith", "badge": "Forge Badge", "daemon": "@borg/borg_agent"},
-    {"name": "Molly", "title": "The CEO", "badge": "SuperSeed Badge", "daemon": "@wildhaven/ceo-agent"},
+    {"name": "The Steward", "title": "The CEO", "badge": "SuperSeed Badge", "daemon": "@wildhaven/ceo-agent"},
     {"name": "Kody", "title": "The Architect", "badge": "Foundation Badge", "daemon": "@rapp/basic-agent"}
   ],
   "elite_four": [

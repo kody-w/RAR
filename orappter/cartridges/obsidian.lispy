@@ -85,12 +85,6 @@
       (shell (concat "git clone " repo-url " " local-path))
       (vault-open local-path))))
 
-;; Load the CEO workspace specifically
-(define (vault-open-ceo)
-  (vault-open-repo
-    "https://github.com/kody-w/wildhaven-ceo.git"
-    "/tmp/wildhaven-ceo"))
-
 
 ;; ═══════════════════════════════════════════════════════════════
 ;; SECTION 3: Parse Documents
@@ -553,7 +547,7 @@
   (log "")
   (log " Load a vault:")
   (log "   (vault-open \"/path/to/vault\")")
-  (log "   (vault-open-ceo)  — load the CEO workspace")
+  (log "   (vault-open-repo \"<git-url>\" \"/path/to/clone\")")
   (log "")
   (log " Navigate:")
   (log "   (ls)              — list all documents")

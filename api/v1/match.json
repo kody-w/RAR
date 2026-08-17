@@ -1,7 +1,7 @@
 {
   "schema": "rar-match/1.0",
   "description": "Precomputed use-case matching. A host application asks the user to describe a use case, tokenizes it, sums the term weights from `index`, and returns the top agents — entirely client-side, with no backend and no GitHub access.",
-  "generated": "2026-08-11T18:40:38Z",
+  "generated": "2026-08-17T00:40:08Z",
   "how_to_query": {
     "canonical": "Look up a use_cases[].id for a curated, ranked list.",
     "free_text": "Lowercase the query, split on non-alphanumerics, drop tokens of 2 characters or fewer, then for each token read index[token] (entries are 'agent_id:weight'). Sum weights per agent_id and sort descending."
@@ -1410,7 +1410,7 @@
           "name": "@aibast-agents-library/store_associate_copilot",
           "display_name": "Store Associate Copilot Agent",
           "audience": "business",
-          "score": 110.08
+          "score": 111.09
         },
         {
           "id": "aibast-agents-library__returns_complaints_resolution",
@@ -1431,7 +1431,7 @@
           "name": "@aibast-agents-library/sales_chat",
           "display_name": "Sales Chat Agent",
           "audience": "business",
-          "score": 48.68
+          "score": 49.69
         },
         {
           "id": "kody-w__full_rapp_leviathan",
@@ -1469,23 +1469,23 @@
           "score": 39.08
         },
         {
+          "id": "aibast-agents-library__product_feedback_synthesizer",
+          "name": "@aibast-agents-library/product_feedback_synthesizer",
+          "display_name": "Product Feedback Synthesizer Agent",
+          "audience": "business",
+          "score": 38.53
+        },
+        {
+          "id": "aibast-agents-library__product_reference",
+          "name": "@aibast-agents-library/product_reference",
+          "display_name": "Product Reference",
+          "audience": "both",
+          "score": 38.53
+        },
+        {
           "id": "aibast-agents-library__inventory_visibility",
           "name": "@aibast-agents-library/inventory_visibility",
           "display_name": "Inventory Visibility Agent",
-          "audience": "business",
-          "score": 37.4
-        },
-        {
-          "id": "aibast-agents-library__personalized_marketing",
-          "name": "@aibast-agents-library/personalized_marketing",
-          "display_name": "Personalized Marketing Agent",
-          "audience": "business",
-          "score": 37.4
-        },
-        {
-          "id": "aibast-agents-library__supply_chain_disruption_alert",
-          "name": "@aibast-agents-library/supply_chain_disruption_alert",
-          "display_name": "Supply Chain Disruption Alert Agent",
           "audience": "business",
           "score": 37.4
         }
@@ -1627,7 +1627,7 @@
           "name": "@aibast-agents-library/clinical_notes_summarizer",
           "display_name": "Clinical Notes Summarizer Agent",
           "audience": "business",
-          "score": 40.29
+          "score": 38.53
         },
         {
           "id": "howardh__chief_of_staff_agent",
@@ -1662,7 +1662,7 @@
           "name": "@cat-agent-skills/presentation_talk_track_builder",
           "display_name": "Presentation Talk Track Builder",
           "audience": "both",
-          "score": 26.86
+          "score": 25.69
         },
         {
           "id": "aibast-agents-library__ai_customer_assistant",
@@ -1907,8 +1907,7 @@
       "aibast-agents-library__software_competitive_intel:1",
       "aibast-agents-library__speech_to_crm:1",
       "aibast-agents-library__stakeholder_intelligence:1",
-      "cat-agent-skills__power_automate_documentation:1",
-      "kody-w__legal_helper:1"
+      "cat-agent-skills__power_automate_documentation:1"
     ],
     "deal": [
       "aibast-agents-library__deal_health_score:7",
@@ -2997,7 +2996,8 @@
     "questions": [
       "aibast-agents-library__ask_hr:1",
       "aibast-agents-library__sales_chat:1",
-      "cat-agent-skills__spend_more_time_with_friends_and_family:1"
+      "cat-agent-skills__spend_more_time_with_friends_and_family:1",
+      "kody-w__legal_helper:1"
     ],
     "hris": [
       "aibast-agents-library__ask_hr:1",
@@ -3576,7 +3576,8 @@
       "cat-agent-skills__copilot_studio_topic_blueprint:1",
       "cat-agent-skills__exam_prep_learning_plan_builder:1",
       "cat-agent-skills__linkedin_content_writer:1",
-      "cat-agent-skills__process_sop_architect:1"
+      "cat-agent-skills__process_sop_architect:1",
+      "kody-w__legal_helper:1"
     ],
     "summarizer": [
       "aibast-agents-library__clinical_notes_summarizer:3"
@@ -3715,8 +3716,7 @@
       "aibast-agents-library__portfolio_rebalancing:1",
       "cat-agent-skills__browser_uat_analyst:1",
       "cat-agent-skills__competitive_battlecard_builder:1",
-      "cat-agent-skills__eu_greenwashing_analysis:1",
-      "kody-w__legal_helper:1"
+      "cat-agent-skills__eu_greenwashing_analysis:1"
     ],
     "affinity": [
       "aibast-agents-library__cross_selling:4"
@@ -3737,7 +3737,8 @@
       "aibast-agents-library__cross_selling:1",
       "cat-agent-skills__call_for_speakers_digest:1",
       "cat-agent-skills__sharepoint_list_formatter:1",
-      "cat-agent-skills__sharepoint_list_insight_report_generator:1"
+      "cat-agent-skills__sharepoint_list_insight_report_generator:1",
+      "kody-w__legal_helper:1"
     ],
     "demos": [
       "discreetRappers__demo_script_generator_agent:3",
@@ -3865,8 +3866,7 @@
     "strategy": [
       "aibast-agents-library__deal_competitor_intel:3",
       "wildhaven__ceo_agent:3",
-      "kody-w__arena_compete_agent:1",
-      "kody-w__legal_helper:1"
+      "kody-w__arena_compete_agent:1"
     ],
     "exposure": [
       "aibast-agents-library__deal_competitor_intel:1"
@@ -4967,7 +4967,6 @@
       "aibast-agents-library__portfolio_rebalancing:1",
       "cat-agent-skills__pov_line_generator:1",
       "cat-agent-skills__travel_cost_estimator:1",
-      "kody-w__legal_helper:1",
       "wildhaven__penumbra_agent:1"
     ],
     "positions": [
@@ -6206,7 +6205,6 @@
       "cat-agent-skills__pattern_radar_automation:1",
       "cat-agent-skills__what_to_use_when:1",
       "howardh__tuftelove_agent:1",
-      "kody-w__legal_helper:1",
       "kody-w__power_apps_code_app_agent:1"
     ],
     "checker": [
@@ -6968,6 +6966,7 @@
       "cat-agent-skills__copilot_studio_agent_test:1",
       "cat-agent-skills__iterative_file_editing:1",
       "cat-agent-skills__travel_cost_estimator:1",
+      "kody-w__legal_helper:1",
       "kody-w__neuron_swarm:1",
       "rapp__basic_agent:1",
       "rapp__twin_agent:1"
@@ -8317,8 +8316,7 @@
     "between": [
       "cat-agent-skills__doc_format_converter:1",
       "kody-w__commons_life_agent:1",
-      "kody-w__ez_sharpen_agent:1",
-      "kody-w__legal_helper:1"
+      "kody-w__ez_sharpen_agent:1"
     ],
     "fully": [
       "cat-agent-skills__doc_format_converter:1",
@@ -10794,9 +10792,9 @@
     ],
     "operator": [
       "kody-w__bond_rhythm_agent:4",
+      "kody-w__legal_helper:4",
       "kody-w__chain_composer_agent:3",
       "kody-w__launch_to_public_agent:3",
-      "kody-w__legal_helper:3",
       "kody-w__plant_seed_agent:3",
       "rapp__drift_watcher:3",
       "rapp__rar_steward:1"
@@ -11454,14 +11452,16 @@
     "legalhelper": [
       "kody-w__legal_helper:3"
     ],
-    "wildhaven": [
-      "kody-w__legal_helper:4",
-      "wildhaven__ceo_agent:4"
-    ],
-    "boundary": [
+    "organizes": [
       "kody-w__legal_helper:1"
     ],
-    "structural": [
+    "raise": [
+      "kody-w__legal_helper:1"
+    ],
+    "qualified": [
+      "kody-w__legal_helper:1"
+    ],
+    "attorney": [
       "kody-w__legal_helper:1"
     ],
     "managememory": [
@@ -12417,14 +12417,11 @@
     "ceo": [
       "wildhaven__ceo_agent:7"
     ],
+    "wildhaven": [
+      "wildhaven__ceo_agent:4"
+    ],
     "stewardship": [
       "wildhaven__ceo_agent:3"
-    ],
-    "molly": [
-      "wildhaven__ceo_agent:1"
-    ],
-    "wildfeuer": [
-      "wildhaven__ceo_agent:1"
     ],
     "penumbra": [
       "wildhaven__penumbra_agent:6"

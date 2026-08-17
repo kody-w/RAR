@@ -25,7 +25,7 @@
     "SEARCH_MODE": "fuzzy"
   },
   "metadata": {
-    "compatible_vaults": ["wildhaven-ceo", "any local vault"],
+    "compatible_vaults": ["any local vault"],
     "offline": true,
     "ai_optional": true,
     "imports_from": "local filesystem or git repo"

@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-11T18:40:38Z",
+  "generated": "2026-08-17T00:40:08Z",
   "count": 291,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
@@ -8307,15 +8307,13 @@
       "id": "kody-w__legal_helper",
       "name": "@kody-w/legal_helper",
       "display_name": "LegalHelper",
-      "description": "Maps the IP boundary between Wildhaven and Microsoft product lines as structural strategy, never legal advice; gated stub for a private agent.",
+      "description": "Organizes an operator's own notes and open questions to raise with a qualified attorney, never legal advice; gated stub for a private agent.",
       "version": "1.0.2",
       "publisher": "@kody-w",
       "author": "Kody Wildfeuer",
       "category": "productivity",
       "tags": [
         "legal",
-        "ip",
-        "wildhaven",
         "private",
         "stub",
         "operator-personal"
@@ -8333,8 +8331,8 @@
         "sha256": ""
       },
       "stats": {
-        "lines": 45,
-        "size_kb": 1.6,
+        "lines": 42,
+        "size_kb": 1.4,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -10093,8 +10091,8 @@
       "id": "wildhaven__ceo_agent",
       "name": "@wildhaven/ceo_agent",
       "display_name": "CEO Agent",
-      "description": "Answers as Molly Wildfeuer's Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
-      "version": "1.0.2",
+      "description": "Answers as the Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
+      "version": "1.0.3",
       "publisher": "@wildhaven",
       "author": "Wildhaven of America",
       "category": "core",
@@ -10117,11 +10115,11 @@
         "path": "agents/@wildhaven/ceo_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/ceo_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@wildhaven/ceo_agent.py",
-        "sha256": "006b32bc874c15356bf40764d7e95a2f818a9155cf53361f55a425f855c75c2e"
+        "sha256": "c1e49265becbe104dceacd371dcbc6cce39aa53f3a36075fd47f06d9cf476896"
       },
       "stats": {
-        "lines": 325,
-        "size_kb": 13.4,
+        "lines": 322,
+        "size_kb": 13.2,
         "added_at": "2026-04-05T16:48:32-04:00"
       }
     },

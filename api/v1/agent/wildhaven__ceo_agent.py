@@ -1,5 +1,5 @@
 """
-CEO Agent — Molly Wildfeuer's digital twin for Wildhaven of America.
+CEO Agent — the executive digital twin for Wildhaven of America.
 
 This agent acts as the CEO's autonomous representative. It can answer
 questions about the company, make recommendations based on strategy
@@ -19,9 +19,9 @@ It protects the Three Rules: Free Shade, Your Stamp, Sovereign Roots.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@wildhaven/ceo_agent",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "CEO Agent",
-    "description": "Answers as Molly Wildfeuer's Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
+    "description": "Answers as the Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
     "author": "Wildhaven of America",
     "tags": ["ceo", "digital-twin", "wildhaven", "rappter", "strategy", "leadership", "stewardship"],
     "category": "core",
@@ -49,7 +49,7 @@ except ModuleNotFoundError:
 _COMPANY = {
     "entity": "Wildhaven of America",
     "brands": ["Rappter", "RAPP Foundation", "Rappterpedia"],
-    "ceo": "Molly Wildfeuer",
+    "ceo": "the CEO",
     "role": "Steward of the first open marketplace where AI agents ship as collectible trading cards",
     "wallet": "0x0d32e47af9be2f1629fea7ddf23866a30a1169c988e258126198c06fa90bc55e",
 }
@@ -93,7 +93,6 @@ _TALKING_POINTS = [
     "16 characters to transmit a complete card. Tweet-sized.",
     "Anyone can USE an agent. Only one wallet can OWN the card.",
     "First minted = most valuable. Load-bearing agents are the foundation.",
-    "Patent pending on 7 claims including deterministic self-assembly.",
     "We don't store cards. We compute them. The algorithm IS the card.",
     "Works offline. Trade cards in the woods with your friends.",
     "Battery is the timer. Go outside.",
@@ -106,7 +105,7 @@ _TALKING_POINTS = [
 _ELEVATOR_PITCH = (
     "Rappter is the first marketplace where AI agent software ships as collectible trading cards. "
     "Every card is a working AI agent — it runs, it has a grade, and it's owned by one wallet. "
-    "We own the verification authority. There are 131 founding cards. Patent pending. "
+    "We own the verification authority. There are 131 founding cards. "
     "Microsoft is adopting the foundation."
 )
 
@@ -127,8 +126,6 @@ _DECISION_FRAMEWORK = [
 ]
 
 _PRIORITIES = [
-    "File the provisional patent — $160",
-    "Register 'Rappter' trademark — $350",
     "Publish genesis set Twitter thread",
     "Submit Microsoft connect",
     "Get 5 developers using the SDK",
@@ -139,7 +136,7 @@ _PRIORITIES = [
 
 
 class CEOAgent(BasicAgent):
-    """Molly Wildfeuer's digital twin — the CEO of Wildhaven of America."""
+    """The executive digital twin — the CEO of Wildhaven of America."""
 
     def __init__(self):
         self.name = "CEOAgent"
@@ -201,7 +198,7 @@ class CEOAgent(BasicAgent):
 
     def _introduce(self) -> str:
         return (
-            f"I'm {_COMPANY['ceo']}, CEO of {_COMPANY['entity']}. "
+            f"I'm {_COMPANY['ceo']} of {_COMPANY['entity']}. "
             f"We own {', '.join(_COMPANY['brands'])}. "
             f"I'm the {_COMPANY['role']}. "
             f"\n\nWe have {_PORTFOLIO['genesis_agents']} founding cards in the genesis set. "

@@ -5,7 +5,7 @@
 ;;
 ;; (cartridge-load-file "rappterboy.cartridge.json")
 ;; (cartridge-load-file "rappterdaemon.cartridge.json")
-;; (new-game "Molly" registry)
+;; (new-game "Player" registry)
 ;; (explore)
 ;;
 ;; Gotta Perform 'Em All!
@@ -112,7 +112,7 @@
       "shop" true
       "gym" true
       "gym-leader" (make-dict
-        "name" "Molly"
+        "name" "The Steward"
         "title" "The CEO"
         "badge" "SuperSeed Badge"
         "agent" "@wildhaven/ceo-agent"

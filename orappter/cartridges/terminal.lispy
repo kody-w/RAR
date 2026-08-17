@@ -373,7 +373,7 @@
     "stat"    "stat <agent>\n  Detailed stats for an agent.\n  Example: (stat \"@rapp/basic-agent\")"
     "diff"    "diff <agent1> <agent2>\n  Compare two agents side by side.\n  Example: (diff \"@rapp/basic-agent\" \"@kody/deal-desk\")"
     "which"   "which <slug>\n  Find full path to an agent by slug.\n  Example: (which \"basic-agent\")"
-    "export"  "export <var> <value>\n  Set an environment variable.\n  Example: (export \"BINDER\" \"molly\")"
+    "export"  "export <var> <value>\n  Set an environment variable.\n  Example: (export \"BINDER\" \"main\")"
     "source"  "source <file>\n  Run a .lispy file.\n  Example: (source \"my-script.lispy\")"
     "clear"   "clear\n  Clear the terminal screen."
     "help"    "help\n  Show all available commands."))

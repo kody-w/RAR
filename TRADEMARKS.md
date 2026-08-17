@@ -29,15 +29,8 @@ This repository records public technical use of **RAPP + X™** in:
 
 Initial repository use date: **July 18, 2026**.
 
-## Legal handoff checklist
+## Reservation of rights
 
-This repository does not itself register a trademark. Before filing, the mark
-owner and qualified trademark counsel should:
-
-1. Confirm the legal owner and jurisdictions.
-2. Run clearance searches for confusingly similar marks.
-3. Select the applicable goods/services classes.
-4. Preserve dated specimens showing actual use.
-5. File and track applications with the relevant trademark offices.
-6. Define licensing, quality-control, enforcement, renewal, and assignment
-   policies for the open RAPP ecosystem.
+This document is a usage guide, not a grant. Nothing in this repository or in
+its licenses grants any right in the RAPP names, logos, or marks. All rights
+in the marks are reserved by their owner.

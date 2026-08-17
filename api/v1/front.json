@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-16T21:48:55Z",
+  "generated": "2026-08-17T00:43:29Z",
   "counts": {
     "native": 294,
     "aggregated": 4,
@@ -3241,7 +3241,7 @@
       "rank": 51,
       "ref": "@wildhaven/ceo_agent",
       "title": "CEO Agent",
-      "description": "Answers as Molly Wildfeuer's Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
+      "description": "Answers as the Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
       "origin": "native",
       "category": "core",
       "tags": [
@@ -3263,7 +3263,7 @@
       "components": {
         "community": 0.0,
         "curator": 0.7804,
-        "depth": 0.7708,
+        "depth": 0.7669,
         "freshness": 0.4778,
         "tier": 1.0
       },
@@ -3285,7 +3285,7 @@
           "channels": {},
           "tier": "official",
           "age_days": 128,
-          "lines": 325,
+          "lines": 322,
           "has_card": true
         },
         "source": null
@@ -3295,7 +3295,7 @@
         "no community feedback yet",
         "official tier",
         "added 128 days ago",
-        "325 lines",
+        "322 lines",
         "has a rendered card"
       ]
     },
@@ -19861,13 +19861,11 @@
       "rank": 298,
       "ref": "@kody-w/legal_helper",
       "title": "LegalHelper",
-      "description": "Maps the IP boundary between Wildhaven and Microsoft product lines as structural strategy, never legal advice; gated stub for a private agent.",
+      "description": "Organizes an operator's own notes and open questions to raise with a qualified attorney, never legal advice; gated stub for a private agent.",
       "origin": "native",
       "category": "productivity",
       "tags": [
         "legal",
-        "ip",
-        "wildhaven",
         "private",
         "stub",
         "operator-personal"
@@ -19906,7 +19904,7 @@
           "channels": {},
           "tier": "private",
           "age_days": 79,
-          "lines": 45,
+          "lines": 42,
           "has_card": true
         },
         "source": null
@@ -19916,7 +19914,7 @@
         "no community feedback yet",
         "private tier",
         "added 79 days ago",
-        "45 lines",
+        "42 lines",
         "has a rendered card"
       ]
     }

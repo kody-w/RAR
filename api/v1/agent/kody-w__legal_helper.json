@@ -3,10 +3,11 @@
   "id": "kody-w__legal_helper",
   "name": "LegalHelper",
   "rar_name": "@kody-w/legal_helper",
-  "rappid": "rappid:@kody-w/legal_helper:b642c6005ea5a90cebfb2319da9db8824563baff64911d6b80af2a5003b43e20",
-  "_migrated_from": "rappid:@kody-w/legal_helper:3641da4d557479b534e40421077df58aa371654203f9e294e456ef67c6d44c3b",
+  "rappid": "rappid:@kody-w/legal_helper:fbabcce11618291d9f699b830ed645a0822468a4b7c0631743b2cdb6e0a7fa34",
+  "_migrated_from": "rappid:@kody-w/legal_helper:b642c6005ea5a90cebfb2319da9db8824563baff64911d6b80af2a5003b43e20",
   "_migrated_from_all": [
-    "rappid:@kody-w/legal_helper:3641da4d557479b534e40421077df58aa371654203f9e294e456ef67c6d44c3b"
+    "rappid:@kody-w/legal_helper:3641da4d557479b534e40421077df58aa371654203f9e294e456ef67c6d44c3b",
+    "rappid:@kody-w/legal_helper:b642c6005ea5a90cebfb2319da9db8824563baff64911d6b80af2a5003b43e20"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -14,22 +15,20 @@
   "category": "productivity",
   "tags": [
     "legal",
-    "ip",
-    "wildhaven",
     "private",
     "stub",
     "operator-personal"
   ],
-  "description": "Maps the IP boundary between Wildhaven and Microsoft product lines as structural strategy, never legal advice; gated stub for a private agent.",
+  "description": "Organizes an operator's own notes and open questions to raise with a qualified attorney, never legal advice; gated stub for a private agent.",
   "author": "Kody Wildfeuer",
   "quality_tier": "private",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 45,
-  "size_kb": 1.6,
-  "sha256": "55cf4c7085fac06cb5503834a732027a08f70311d5a6476ee7b03f4fcc11e115",
+  "lines": 42,
+  "size_kb": 1.4,
+  "sha256": "3a2af3ef61ab711d5a6ed9ff3549c471acfac06863cc28b96bf9967bfab731b5",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

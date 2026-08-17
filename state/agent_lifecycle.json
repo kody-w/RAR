@@ -3302,14 +3302,14 @@
     },
     "@wildhaven/ceo_agent": {
       "canonical_path": "agents/@wildhaven/ceo_agent.py",
-      "latest_receipt": "rar_e9974ffc47463b25fdf493484bec55994a0651fc162410126df555123817cff6",
+      "latest_receipt": "rar_b62c6e093ebf8e26eca724a64f86c6d8f843f553dd31ea782fb97ed869cd28e1",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "006b32bc874c15356bf40764d7e95a2f818a9155cf53361f55a425f855c75c2e",
+      "sha256": "c1e49265becbe104dceacd371dcbc6cce39aa53f3a36075fd47f06d9cf476896",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.2"
+      "updated_at": "2026-08-17T00:38:41.141108+00:00",
+      "version": "1.0.3"
     },
     "@wildhaven/penumbra_agent": {
       "canonical_path": "agents/@wildhaven/penumbra_agent.py",
@@ -3467,5 +3467,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-11T18:38:53.432269+00:00"
+  "updated_at": "2026-08-17T00:38:41.141108+00:00"
 }

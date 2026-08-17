@@ -445,7 +445,7 @@
       "id": "wildhaven_ceo",
       "name": "WildhavenCEO",
       "version": "0.1.0",
-      "summary": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. Wraps the pattern from kody-w/wildhaven-ceo: 'talk to the workspace' as the whole interface — no reading files, no learning the org,…",
+      "summary": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. 'Talk to the workspace' as the whole interface — no reading files, no learning the org,…",
       "category": "productivity",
       "tags": [
         "rapplication",

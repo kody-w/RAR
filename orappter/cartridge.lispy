@@ -91,7 +91,6 @@
     (dict-set c "knowledge"
       (list
         (make-dict "key" "portfolio" "value" "206.20 BTC. 116 founding cards + SuperSeed at 200x.")
-        (make-dict "key" "patent" "value" "Filed April 5, 2026 via LegalZoom. Patent pending.")
         (make-dict "key" "hero" "value" "Your digital twin lives on. That's the product.")))
     (dict-set c "agents" (list "@wildhaven/ceo-agent"))
     (dict-set c "boot"

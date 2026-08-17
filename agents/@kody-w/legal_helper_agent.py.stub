@@ -1,21 +1,18 @@
 """
-Gated stub — actual agent.py lives in kody-w/RAR-private.
+Gated stub — the actual agent.py lives in a private repo.
 
-Wildhaven IP-separation strategist. Walks the operator through the IP
-boundary between Wildhaven (rappter / consumer-AI / digital-twin /
-perpetuity) and Microsoft (RAPP engine / business applications).
-
-Eight actions: audit_separation, recommend_filings, draft_attribution,
-check_artifact, prepare_employer_letter, next_action, find_lawyer,
-get_status.
+An operator-personal helper that organizes your own thinking before you
+talk to a professional. It structures notes, sorts open questions, and
+tracks what still needs an answer.
 
 Every output ends with NOT LEGAL ADVICE. The agent helps you organize
-your thinking and identify what to consult a real IP attorney about —
+your thinking and identify what to consult a qualified attorney about —
 it is not a substitute for one.
 
-To install: you need pull access on kody-w/RAR-private. The brainstem's
-loader resolves the __source__ pointer below using your GitHub token at
-install time. No access → clean access-denied; you don't see the bytes.
+To install: you need pull access on the source repo declared below. The
+brainstem's loader resolves the __source__ pointer using your GitHub
+token at install time. No access → clean access-denied; you don't see
+the bytes.
 
 This stub is pure metadata per the RAR stub contract — no functions,
 no classes, no imports, no executable code.
@@ -26,9 +23,9 @@ __manifest__ = {
     "name": "@kody-w/legal_helper",
     "version": "1.0.2",
     "display_name": "LegalHelper",
-    "description": "Maps the IP boundary between Wildhaven and Microsoft product lines as structural strategy, never legal advice; gated stub for a private agent.",
+    "description": "Organizes an operator's own notes and open questions to raise with a qualified attorney, never legal advice; gated stub for a private agent.",
     "author": "Kody Wildfeuer",
-    "tags": ["legal", "ip", "wildhaven", "private", "stub", "operator-personal"],
+    "tags": ["legal", "private", "stub", "operator-personal"],
     "category": "productivity",
     "quality_tier": "official",
     "requires_env": [],
