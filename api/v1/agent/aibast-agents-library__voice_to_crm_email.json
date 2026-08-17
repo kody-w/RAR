@@ -31,7 +31,7 @@
   "size_kb": 21.0,
   "sha256": "037bf9d7f2159d70382579eab207cc2f0a4f4baaa15fc148074d44d15e36ab7c",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__voice_to_crm_email.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",

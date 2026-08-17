@@ -31,7 +31,7 @@
   "size_kb": 32.2,
   "sha256": "27c4185b7f6ed7654bf6f6b8ded0bf1c3a1043cd1129d20dcc039d46adecd2fb",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__account_risk_assessment.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",

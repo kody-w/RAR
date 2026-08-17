@@ -34,7 +34,7 @@
   "size_kb": 33.2,
   "sha256": "804d55baff28a32c074f862436217a599966f8ab3579cc2493d1fc6655a743c9",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__building_permit_processing.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py",

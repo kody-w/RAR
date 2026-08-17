@@ -28,7 +28,7 @@
   "size_kb": 9.0,
   "sha256": "7bf1e47a108ee4b7ac096b531ca8a1a6518e55f1e5b25c33b597b31f435852d3",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__grab_my_files.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/grab_my_files_agent.py",

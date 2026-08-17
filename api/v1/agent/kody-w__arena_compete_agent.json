@@ -30,7 +30,7 @@
   "size_kb": 13.3,
   "sha256": "cb5fdc2203b8127d5f174fbe9773c1f8f24e01dcdfb7162fb0a17ad40a2239db",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-06-20T19:39:59-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__arena_compete_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/arena_compete_agent.py",

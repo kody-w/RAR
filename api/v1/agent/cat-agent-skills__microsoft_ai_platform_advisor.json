@@ -31,7 +31,7 @@
   "size_kb": 9.4,
   "sha256": "8bbf35ee4a97ee4ed92876adbbfd13d2b7624c98a137dc949f1f46080a0637d4",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__microsoft_ai_platform_advisor.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",

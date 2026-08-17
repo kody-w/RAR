@@ -27,7 +27,7 @@
   "size_kb": 8.7,
   "sha256": "0dc2134948992af0c75f37446ddf370d42a355e9e563a6988f0de3c719d35e18",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__scrollytelling_data.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/scrollytelling_data_agent.py",

@@ -34,7 +34,7 @@
   "size_kb": 27.7,
   "sha256": "093ac6ab4dcd123fdf55998ddc8f1dc904be9bb4b27d7eb82e118099e353fcc1",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-05-12T13:37:05-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/bill__neuron_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py",

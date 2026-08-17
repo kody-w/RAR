@@ -26,7 +26,7 @@
   "size_kb": 9.2,
   "sha256": "35509b26742d474c7b205a420085c28a755754e18621d8599f5d4a54f0bdab35",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__exam_prep_learning_plan_builder.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",

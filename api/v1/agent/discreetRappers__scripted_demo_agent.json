@@ -31,7 +31,7 @@
   "size_kb": 54.2,
   "sha256": "feb243a6c7bbd7bf0cb329b0a8c60a6f6d88949e1893f89ccaa1cf2da31a80bc",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-04-06T16:39:03-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__scripted_demo_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/scripted_demo_agent.py",

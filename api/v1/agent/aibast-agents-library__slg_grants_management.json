@@ -31,7 +31,7 @@
   "size_kb": 20.1,
   "sha256": "7f901350c900aa62b69b47e6e015847a8909265b1a0c1a68183c0757bddd1130",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-04-03T16:15:52-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/aibast-agents-library__slg_grants_management.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/grants_management_stack/grants_management_agent.py",

@@ -29,7 +29,7 @@
   "size_kb": 8.9,
   "sha256": "acca33c8954fc23a9d6b76b4ab200a7bf5a076cd44c2200f1c42565e98f20361",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__anonymised_case_study_writer.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",

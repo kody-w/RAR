@@ -31,7 +31,7 @@
   "size_kb": 9.4,
   "sha256": "1b62ce1f0c3641b283c403b6a6c3146f554f5222346d9d7a2d127ea6bdc61875",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__mct_excellence_iq.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/mct_excellence_iq_agent.py",

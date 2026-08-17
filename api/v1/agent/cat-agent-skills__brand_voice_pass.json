@@ -28,7 +28,7 @@
   "size_kb": 8.8,
   "sha256": "3635849b3dcd5b55c5f9f9d6f3ec7e7a977033ca09ab57020fe9b172e8901cf4",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__brand_voice_pass.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/brand_voice_pass_agent.py",

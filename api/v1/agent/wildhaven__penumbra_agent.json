@@ -32,7 +32,7 @@
   "size_kb": 10.5,
   "sha256": "00a2946996be36b9234c3e9cbf916eee70fed319104bff2aef7325e437343a6f",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-05-16T12:50:07-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/wildhaven__penumbra_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",

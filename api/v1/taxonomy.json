@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-17T22:00:07Z",
+  "generated": "2026-08-17T22:06:24Z",
   "categories": [
     {
       "name": "general",
@@ -24,7 +24,7 @@
     },
     {
       "name": "pipeline",
-      "count": 17
+      "count": 18
     },
     {
       "name": "integrations",
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 56
+      "count": 57
     },
     {
       "name": "@rapp",
@@ -144,7 +144,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 162
+      "count": 163
     },
     {
       "name": "frontier",
@@ -285,6 +285,10 @@
       "count": 7
     },
     {
+      "name": "factory",
+      "count": 7
+    },
+    {
       "name": "energy",
       "count": 6
     },
@@ -310,10 +314,6 @@
     },
     {
       "name": "power_platform",
-      "count": 6
-    },
-    {
-      "name": "factory",
       "count": 6
     },
     {
@@ -661,6 +661,10 @@
       "count": 3
     },
     {
+      "name": "handoff",
+      "count": 3
+    },
+    {
       "name": "power-platform",
       "count": 3
     },
@@ -981,10 +985,6 @@
       "count": 2
     },
     {
-      "name": "handoff",
-      "count": 2
-    },
-    {
       "name": "bootstrap",
       "count": 2
     },
@@ -1241,6 +1241,10 @@
       "count": 2
     },
     {
+      "name": "prototype",
+      "count": 2
+    },
+    {
       "name": "builder",
       "count": 2
     },
@@ -1358,10 +1362,6 @@
     },
     {
       "name": "employee-self-service",
-      "count": 1
-    },
-    {
-      "name": "asset-health",
       "count": 1
     }
   ]

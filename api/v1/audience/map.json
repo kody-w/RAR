@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-08-17T22:00:07Z",
+  "generated": "2026-08-17T22:06:24Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 106,
     "consumer_only": 3,
-    "both": 189,
-    "in_business_mode": 295,
-    "in_consumer_mode": 192
+    "both": 190,
+    "in_business_mode": 296,
+    "in_consumer_mode": 193
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -271,6 +271,7 @@
     "@kody-w/predictive_asset_maintenance_intelligence": "b",
     "@kody-w/project_tracker_agent": "x",
     "@kody-w/prompt_extractor": "x",
+    "@kody-w/prototype_lock_factory_agent": "x",
     "@kody-w/rapp_leviathan_factory": "x",
     "@kody-w/rapp_sdk_builder": "x",
     "@kody-w/rapp_skill_bridge_agent": "x",

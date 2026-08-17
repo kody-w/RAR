@@ -28,7 +28,7 @@
   "size_kb": 8.9,
   "sha256": "7b3e33d031c6c6388c76d4fe360cb24beb8092dd33e2d45b60ab5a93431d84a2",
   "has_card": true,
-  "added_at": "2026-08-17T21:44:24Z",
+  "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__process_sop_architect.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/process_sop_architect_agent.py",
