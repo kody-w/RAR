@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-18T03:04:02Z",
+  "generated": "2026-08-18T03:05:37Z",
   "categories": [
     {
       "name": "general",
@@ -28,7 +28,7 @@
     },
     {
       "name": "integrations",
-      "count": 16
+      "count": 17
     },
     {
       "name": "financial_services",
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 59
+      "count": 60
     },
     {
       "name": "@rapp",
@@ -144,7 +144,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 165
+      "count": 166
     },
     {
       "name": "frontier",
@@ -381,6 +381,10 @@
       "count": 5
     },
     {
+      "name": "video",
+      "count": 5
+    },
+    {
       "name": "data",
       "count": 5
     },
@@ -470,10 +474,6 @@
     },
     {
       "name": "authoring",
-      "count": 4
-    },
-    {
-      "name": "video",
       "count": 4
     },
     {

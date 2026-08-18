@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@kody-w/play_youtube_video_agent",
+  "applied_at": "2026-08-18T03:05:19.931098+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "",
   "base_lifecycle_sha256": "",
   "base_lifecycle_version": "",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-08-18T02:58:40Z",
   "publisher": "@kody-w",
   "reason": "",
+  "receipt": "rar_c903f6dae8cd79548f33c21989f392f974ab99a2cdccafcd7f1e9e7c9e5b8e59",
   "repository_id": 1200565697,
   "request_id": "req_e8843fb561b57a39c5329c75",
   "revision_id": "c903f6dae8cd79548f33c21989f392f974ab99a2cdccafcd7f1e9e7c9e5b8e59",
@@ -29,5 +35,5 @@
   "slug": "play_youtube_video_agent",
   "source_body_sha256": "61ca2d983be16c09403b95c6bc7e87102a3249d499881232f5bab355c069c847",
   "source_url": "",
-  "status": "pending_review"
+  "status": "applied"
 }

@@ -1,8 +1,8 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-08-18T03:04:02Z",
-  "count": 301,
+  "generated": "2026-08-18T03:05:37Z",
+  "count": 302,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
     {
@@ -8791,6 +8791,39 @@
         "lines": 578,
         "size_kb": 26.5,
         "added_at": "2026-05-09T15:25:19-04:00"
+      }
+    },
+    {
+      "id": "kody-w__play_youtube_video_agent",
+      "name": "@kody-w/play_youtube_video_agent",
+      "display_name": "Play YouTube Video",
+      "description": "Opens official YouTube URLs or title searches in the local default browser without downloading or extracting media.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "RAPP Community",
+      "category": "integrations",
+      "tags": [
+        "youtube",
+        "video",
+        "browser",
+        "media"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/play_youtube_video_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/play_youtube_video_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/play_youtube_video_agent.py",
+        "sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb"
+      },
+      "stats": {
+        "lines": 155,
+        "size_kb": 5.0,
+        "added_at": null
       }
     },
     {

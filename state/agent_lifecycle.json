@@ -3574,8 +3574,19 @@
       "sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
       "latest_receipt": "rar_4ea5b051baed0751e85d0733a566116497e65843920ad2d93ff3b2ada0702994",
       "updated_at": "2026-08-18T03:02:27.573130+00:00"
+    },
+    "@kody-w/play_youtube_video_agent": {
+      "status": "active",
+      "version": "1.0.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/play_youtube_video_agent.py",
+      "sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
+      "latest_receipt": "rar_c903f6dae8cd79548f33c21989f392f974ab99a2cdccafcd7f1e9e7c9e5b8e59",
+      "updated_at": "2026-08-18T03:05:19.931098+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-18T03:02:27.573130+00:00"
+  "updated_at": "2026-08-18T03:05:19.931098+00:00"
 }

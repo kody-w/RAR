@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__play_youtube_video_agent",
+  "name": "Play YouTube Video",
+  "rar_name": "@kody-w/play_youtube_video_agent",
+  "rappid": "rappid:@kody-w/play_youtube_video_agent:d3bb2373d03d3e2c0f4b49c055384dae3051be8e0a4212a96dcf0440729f2b92",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "integrations",
+  "tags": [
+    "youtube",
+    "video",
+    "browser",
+    "media"
+  ],
+  "description": "Opens official YouTube URLs or title searches in the local default browser without downloading or extracting media.",
+  "author": "RAPP Community",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 155,
+  "size_kb": 5.0,
+  "sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
+  "has_card": true,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__play_youtube_video_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/play_youtube_video_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__play_youtube_video_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__play_youtube_video_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/play_youtube_video_agent.py"
+}

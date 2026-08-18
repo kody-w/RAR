@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-18T03:04:00.393724+00:00",
+  "generated_at": "2026-08-18T03:06:42.688328+00:00",
   "stats": {
-    "total_agents": 301,
+    "total_agents": 302,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -14570,6 +14570,66 @@
       "_first_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
       "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
       "_card_sha256": "71f9b14c35a708d142e4e78e6e6065e48c9eb794fdde0664372705d562ea2fd0"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/play_youtube_video_agent",
+      "version": "1.0.0",
+      "display_name": "Play YouTube Video",
+      "description": "Opens official YouTube URLs or title searches in the local default browser without downloading or extracting media.",
+      "author": "RAPP Community",
+      "tags": [
+        "youtube",
+        "video",
+        "browser",
+        "media"
+      ],
+      "category": "integrations",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "A local graphical default browser"
+      ],
+      "example_call": {
+        "args": {
+          "video_title": "lo-fi beats"
+        }
+      },
+      "_file": "agents/@kody-w/play_youtube_video_agent.py",
+      "_install_filename": "rar_kody_w_play_youtube_video_agent.py",
+      "_sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_c903f6dae8cd79548f33c21989f392f974ab99a2cdccafcd7f1e9e7c9e5b8e59",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 566,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 64494354722991498,
+      "_size_kb": 5.0,
+      "_lines": 155,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "f8e70ce457cf9fe07317f007659893b5699ace613236c1ef641f91fcd0dc0faf"
     },
     {
       "schema": "rapp-agent/1.0",
