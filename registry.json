@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-18T03:03:40.219161+00:00",
+  "generated_at": "2026-08-18T03:04:00.393724+00:00",
   "stats": {
     "total_agents": 301,
     "total_swarms": 82,
@@ -15688,9 +15688,9 @@
       "_size_kb": 49.4,
       "_lines": 808,
       "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
+      "_added_at": "2026-08-18T03:03:49Z",
+      "_first_commit_sha": "078c9f76011af965f40983af7f225debec8e76b8",
+      "_latest_commit_sha": "078c9f76011af965f40983af7f225debec8e76b8",
       "_card_sha256": "880b2ab79ed2e2b5eab632701b3d8000697d6fb2d136247cd083ab94fdb02c8f"
     },
     {

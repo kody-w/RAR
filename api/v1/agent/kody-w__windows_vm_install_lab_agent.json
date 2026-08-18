@@ -28,7 +28,7 @@
   "size_kb": 49.4,
   "sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
   "has_card": true,
-  "added_at": null,
+  "added_at": "2026-08-18T03:03:49Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__windows_vm_install_lab_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
