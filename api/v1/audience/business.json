@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-18T03:07:01Z",
-  "count": 299,
+  "generated": "2026-08-18T22:17:46Z",
+  "count": 300,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -8099,6 +8099,41 @@
         "lines": 213,
         "size_kb": 12.5,
         "added_at": "2026-06-20T19:46:03-04:00"
+      }
+    },
+    {
+      "id": "kody-w__education_shorts_agent",
+      "name": "@kody-w/education_shorts_agent",
+      "display_name": "Education Shorts",
+      "description": "Turns a topic into an animated 9:16 educational YouTube Short: linted script, HyperFrames composition, check, MP4 — every stage a file on a chained ledger.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "creative",
+      "tags": [
+        "video",
+        "youtube-shorts",
+        "hyperframes",
+        "animation",
+        "education",
+        "creative"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/education_shorts_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/education_shorts_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/education_shorts_agent.py",
+        "sha256": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715"
+      },
+      "stats": {
+        "lines": 259,
+        "size_kb": 14.9,
+        "added_at": "2026-08-18T18:08:38-04:00"
       }
     },
     {
