@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-18T03:01:27Z",
+  "generated": "2026-08-18T03:02:05Z",
   "counts": {
     "native": 300,
     "aggregated": 0,
@@ -57,12 +57,12 @@
     "median_fill": "A component with no signal is filled with the median of every row that does carry it, and the row lists that component in `scored_at_median`. Absence of signal is not negative signal.",
     "order": "Rows are ordered by `origin_percentile` — position within their own origin — not by raw score, because a score is only comparable inside its origin. Sorting the raw numbers globally would hand the whole top of the page to whichever origin has the more generous signal distribution.",
     "deduplication": "A ref found in both the registry and a crawled index is ONE row. The skill toaster materialises index entries into real hosted agents, so the hosted agent is canonical and the index row becomes its provenance: `source` is populated and the source's own counters ride in `signals.source`, never added to RAR's.",
-    "clock": "Ages are measured from the newest timestamp in the inputs (2026-08-17T22:07:23Z), not from build time, so the same inputs always produce the same ages.",
+    "clock": "Ages are measured from the newest timestamp in the inputs (2026-08-18T03:01:53Z), not from build time, so the same inputs always produce the same ages.",
     "medians": {
       "community": 0.0,
       "curator": 0.7804,
       "depth": 0.9247,
-      "freshness": 0.5837,
+      "freshness": 0.5832,
       "reach": 0.5,
       "tier": 0.55
     }
@@ -93,7 +93,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.9125,
+        "freshness": 0.9114,
         "tier": 1.0
       },
       "scores_on": [
@@ -153,14 +153,14 @@
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpower_apps_code_app_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/power_apps_code_app_agent.py",
       "source": null,
-      "score": 67.0,
+      "score": 66.9,
       "origin_rank": 2,
       "origin_size": 300,
       "components": {
         "community": 0.2958,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.86,
+        "freshness": 0.859,
         "tier": 0.55
       },
       "scores_on": [
@@ -222,7 +222,7 @@
         "community": 0.2958,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4578,
+        "freshness": 0.4572,
         "tier": 0.85
       },
       "scores_on": [
@@ -283,7 +283,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.7241,
+        "freshness": 0.7233,
         "tier": 1.0
       },
       "scores_on": [
@@ -341,14 +341,14 @@
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ftranscript2prototype",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/transcript2prototype_agent.py",
       "source": null,
-      "score": 64.0,
+      "score": 63.9,
       "origin_rank": 5,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.7029,
+        "freshness": 0.702,
         "tier": 1.0
       },
       "scores_on": [
@@ -411,7 +411,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8573,
-        "freshness": 0.8251,
+        "freshness": 0.8241,
         "tier": 1.0
       },
       "scores_on": [
@@ -474,7 +474,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6719,
+        "freshness": 0.6711,
         "tier": 1.0
       },
       "scores_on": [
@@ -541,7 +541,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6719,
+        "freshness": 0.6711,
         "tier": 1.0
       },
       "scores_on": [
@@ -605,7 +605,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.9673,
-        "freshness": 0.6719,
+        "freshness": 0.6711,
         "tier": 1.0
       },
       "scores_on": [
@@ -668,7 +668,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -729,7 +729,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -791,7 +791,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -854,7 +854,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -918,7 +918,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -981,7 +981,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.9725,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -1047,7 +1047,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8926,
-        "freshness": 0.6737,
+        "freshness": 0.6729,
         "tier": 1.0
       },
       "scores_on": [
@@ -1069,7 +1069,7 @@
           "engagement": 0,
           "channels": {},
           "tier": "official",
-          "age_days": 68,
+          "age_days": 69,
           "lines": 418,
           "has_card": true
         },
@@ -1079,7 +1079,7 @@
         "not yet reviewed - scored at the population median",
         "no community feedback yet",
         "official tier",
-        "added 68 days ago",
+        "added 69 days ago",
         "418 lines",
         "has a rendered card"
       ]
@@ -1112,7 +1112,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5668,
+        "freshness": 0.5661,
         "tier": 1.0
       },
       "scores_on": [
@@ -1134,7 +1134,7 @@
           "engagement": 0,
           "channels": {},
           "tier": "official",
-          "age_days": 98,
+          "age_days": 99,
           "lines": 1773,
           "has_card": true
         },
@@ -1144,7 +1144,7 @@
         "not yet reviewed - scored at the population median",
         "no community feedback yet",
         "official tier",
-        "added 98 days ago",
+        "added 99 days ago",
         "1773 lines",
         "has a rendered card"
       ]
@@ -1170,14 +1170,14 @@
       "url": "https://kody-w.github.io/RAR/#agent/%40wildhaven%2Fbellows_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/bellows_agent.py",
       "source": null,
-      "score": 61.7,
+      "score": 61.6,
       "origin_rank": 18,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.966,
-        "freshness": 0.5837,
+        "freshness": 0.583,
         "tier": 1.0
       },
       "scores_on": [
@@ -1237,7 +1237,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5236,
+        "freshness": 0.5229,
         "tier": 1.0
       },
       "scores_on": [
@@ -1299,7 +1299,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5235,
+        "freshness": 0.5229,
         "tier": 1.0
       },
       "scores_on": [
@@ -1362,7 +1362,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5236,
+        "freshness": 0.5229,
         "tier": 1.0
       },
       "scores_on": [
@@ -1425,7 +1425,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5238,
+        "freshness": 0.5232,
         "tier": 1.0
       },
       "scores_on": [
@@ -1487,7 +1487,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5237,
+        "freshness": 0.5231,
         "tier": 1.0
       },
       "scores_on": [
@@ -1547,7 +1547,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5235,
+        "freshness": 0.5229,
         "tier": 1.0
       },
       "scores_on": [
@@ -1609,7 +1609,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.9649,
+        "freshness": 0.9637,
         "tier": 0.55
       },
       "scores_on": [
@@ -1674,7 +1674,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.55
       },
       "scores_on": [
@@ -1736,7 +1736,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.9935,
-        "freshness": 0.9649,
+        "freshness": 0.9637,
         "tier": 0.55
       },
       "scores_on": [
@@ -1799,7 +1799,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.9581,
-        "freshness": 1.0,
+        "freshness": 0.9988,
         "tier": 0.55
       },
       "scores_on": [
@@ -1863,7 +1863,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5053,
+        "freshness": 0.5047,
         "tier": 1.0
       },
       "scores_on": [
@@ -1925,7 +1925,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5022,
+        "freshness": 0.5016,
         "tier": 1.0
       },
       "scores_on": [
@@ -1987,7 +1987,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5022,
+        "freshness": 0.5016,
         "tier": 1.0
       },
       "scores_on": [
@@ -2049,7 +2049,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.9205,
+        "freshness": 0.9194,
         "tier": 0.55
       },
       "scores_on": [
@@ -2071,7 +2071,7 @@
           "engagement": 0,
           "channels": {},
           "tier": "community",
-          "age_days": 14,
+          "age_days": 15,
           "lines": 735,
           "has_card": true
         },
@@ -2081,7 +2081,7 @@
         "not yet reviewed - scored at the population median",
         "no community feedback yet",
         "community tier",
-        "added 14 days ago",
+        "added 15 days ago",
         "735 lines",
         "has a rendered card"
       ]
@@ -2102,14 +2102,14 @@
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fbasic_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/basic_agent.py",
       "source": null,
-      "score": 60.5,
+      "score": 60.4,
       "origin_rank": 33,
       "origin_size": 300,
       "components": {
         "community": 0.2958,
         "curator": 0.8119,
         "depth": 0.45,
-        "freshness": 0.4634,
+        "freshness": 0.4628,
         "tier": 1.0
       },
       "scores_on": [
@@ -2169,7 +2169,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.9005,
-        "freshness": 0.5236,
+        "freshness": 0.523,
         "tier": 1.0
       },
       "scores_on": [
@@ -2233,7 +2233,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.8695,
+        "freshness": 0.8684,
         "tier": 0.55
       },
       "scores_on": [
@@ -2296,7 +2296,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5609,
+        "freshness": 0.5602,
         "tier": 0.85
       },
       "scores_on": [
@@ -2360,7 +2360,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5609,
+        "freshness": 0.5602,
         "tier": 0.85
       },
       "scores_on": [
@@ -2425,7 +2425,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.8644,
+        "freshness": 0.8633,
         "tier": 0.55
       },
       "scores_on": [
@@ -2464,6 +2464,68 @@
     },
     {
       "rank": 39,
+      "ref": "@kody-w/art_generator_agent",
+      "title": "Art Generator",
+      "description": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it.",
+      "origin": "native",
+      "category": "creative",
+      "tags": [
+        "art",
+        "image-generation",
+        "azure-openai",
+        "creative"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fart_generator_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/art_generator_agent.py",
+      "source": null,
+      "score": 59.1,
+      "origin_rank": 39,
+      "origin_size": 300,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 0.8311,
+        "freshness": 1.0,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community",
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 0,
+          "lines": 371,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "newest in the registry",
+        "371 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 40,
       "ref": "@rapp/egg_hatcher",
       "title": "EggHatcher",
       "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
@@ -2482,13 +2544,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
       "source": null,
       "score": 58.9,
-      "origin_rank": 39,
+      "origin_rank": 40,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7996,
-        "freshness": 0.5668,
+        "freshness": 0.5661,
         "tier": 1.0
       },
       "scores_on": [
@@ -2510,7 +2572,7 @@
           "engagement": 0,
           "channels": {},
           "tier": "official",
-          "age_days": 98,
+          "age_days": 99,
           "lines": 347,
           "has_card": true
         },
@@ -2520,13 +2582,13 @@
         "not yet reviewed - scored at the population median",
         "no community feedback yet",
         "official tier",
-        "added 98 days ago",
+        "added 99 days ago",
         "347 lines",
         "has a rendered card"
       ]
     },
     {
-      "rank": 40,
+      "rank": 41,
       "ref": "@kody-w/copilot_studio_forge_agent",
       "title": "CopilotStudioForge",
       "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines — bundles, topics, solutions, and exports.",
@@ -2547,13 +2609,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_forge_agent.py",
       "source": null,
       "score": 58.4,
-      "origin_rank": 40,
+      "origin_rank": 41,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.7851,
+        "freshness": 0.7842,
         "tier": 0.55
       },
       "scores_on": [
@@ -2591,7 +2653,7 @@
       ]
     },
     {
-      "rank": 41,
+      "rank": 42,
       "ref": "@kody-w/microsoft_deck_studio_agent",
       "title": "Microsoft Deck Studio",
       "description": "Generate a polished, Microsoft-Fluent-styled PowerPoint (.pptx) deck from a JSON spec of slides and layouts.",
@@ -2612,14 +2674,14 @@
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fmicrosoft_deck_studio_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/microsoft_deck_studio_agent.py",
       "source": null,
-      "score": 58.2,
-      "origin_rank": 41,
+      "score": 58.1,
+      "origin_rank": 42,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.7662,
+        "freshness": 0.7653,
         "tier": 0.55
       },
       "scores_on": [
@@ -2657,7 +2719,7 @@
       ]
     },
     {
-      "rank": 42,
+      "rank": 43,
       "ref": "@wildhaven/penumbra_agent",
       "title": "Penumbra",
       "description": "Returns any input as twin lines — the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls.",
@@ -2677,13 +2739,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
       "source": null,
       "score": 57.9,
-      "origin_rank": 42,
+      "origin_rank": 43,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7185,
-        "freshness": 0.5836,
+        "freshness": 0.583,
         "tier": 1.0
       },
       "scores_on": [
@@ -2721,7 +2783,7 @@
       ]
     },
     {
-      "rank": 43,
+      "rank": 44,
       "ref": "@kody-w/chain_composer_agent",
       "title": "Chain Composer",
       "description": "Composes multi-primitive RAPP chain plans from a natural-language prompt via the claude CLI, writing a plan envelope and reviewable bash script.",
@@ -2740,13 +2802,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
       "source": null,
       "score": 57.8,
-      "origin_rank": 43,
+      "origin_rank": 44,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8808,
-        "freshness": 0.5609,
+        "freshness": 0.5602,
         "tier": 0.85
       },
       "scores_on": [
@@ -2784,7 +2846,7 @@
       ]
     },
     {
-      "rank": 44,
+      "rank": 45,
       "ref": "@kody-w/flight_recorder",
       "title": "FlightRecorder",
       "description": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls.",
@@ -2806,13 +2868,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/flight_recorder_agent.py",
       "source": null,
       "score": 57.8,
-      "origin_rank": 44,
+      "origin_rank": 45,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.744,
+        "freshness": 0.7431,
         "tier": 0.55
       },
       "scores_on": [
@@ -2850,7 +2912,7 @@
       ]
     },
     {
-      "rank": 45,
+      "rank": 46,
       "ref": "@kody-w/manage_memory_agent",
       "title": "ManageMemory",
       "description": "Stores facts, preferences, insights, and tasks to persistent memory.",
@@ -2867,13 +2929,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/manage_memory_agent.py",
       "source": null,
       "score": 57.8,
-      "origin_rank": 45,
+      "origin_rank": 46,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.6792,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -2911,7 +2973,7 @@
       ]
     },
     {
-      "rank": 46,
+      "rank": 47,
       "ref": "@kody-w/workiq",
       "title": "WorkIQ",
       "description": "Queries Microsoft 365 data — email, calendar, SharePoint/OneDrive, Teams, people — by shelling out to the workiq CLI with Entra ID auth.",
@@ -2931,13 +2993,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/workiq_agent.py",
       "source": null,
       "score": 57.7,
-      "origin_rank": 46,
+      "origin_rank": 47,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.6713,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -2975,7 +3037,7 @@
       ]
     },
     {
-      "rank": 47,
+      "rank": 48,
       "ref": "@kody-w/deal_desk_agent",
       "title": "DealDesk",
       "description": "Produces templated deal briefings, health scores, and competitive analyses for a named company, listing sales agents from the live RAR registry.",
@@ -2996,13 +3058,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/deal_desk_agent.py",
       "source": null,
       "score": 57.6,
-      "origin_rank": 47,
+      "origin_rank": 48,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.6661,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -3040,7 +3102,7 @@
       ]
     },
     {
-      "rank": 48,
+      "rank": 49,
       "ref": "@kody-w/bond_rhythm_agent",
       "title": "Bond Pulse",
       "description": "Audits local-versus-global RAPP repo drift, classifies push/pull direction, suggests operator actions, and records rhythm bond events.",
@@ -3059,13 +3121,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
       "source": null,
       "score": 57.0,
-      "origin_rank": 48,
+      "origin_rank": 49,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8271,
-        "freshness": 0.5609,
+        "freshness": 0.5602,
         "tier": 0.85
       },
       "scores_on": [
@@ -3103,68 +3165,6 @@
       ]
     },
     {
-      "rank": 49,
-      "ref": "@rapp/commons_post",
-      "title": "CommonsPost",
-      "description": "Composes a canonical rapp-commons-event/1.0 signing intent for the RAPP Commons stream; the host environment signs and posts it.",
-      "origin": "native",
-      "category": "core",
-      "tags": [
-        "commons",
-        "neighborhood",
-        "post",
-        "event-stream",
-        "sign"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fcommons_post",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
-      "source": null,
-      "score": 56.8,
-      "origin_rank": 49,
-      "origin_size": 300,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 0.6556,
-        "freshness": 0.5672,
-        "tier": 1.0
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "curator"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "official",
-          "age_days": 98,
-          "lines": 237,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet",
-        "official tier",
-        "added 98 days ago",
-        "237 lines",
-        "has a rendered card"
-      ]
-    },
-    {
       "rank": 50,
       "ref": "@wildhaven/ceo_agent",
       "title": "CEO Agent",
@@ -3191,7 +3191,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7669,
-        "freshness": 0.461,
+        "freshness": 0.4605,
         "tier": 1.0
       },
       "scores_on": [
@@ -3254,7 +3254,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6667,
+        "freshness": 0.6659,
         "tier": 0.55
       },
       "scores_on": [
@@ -3316,7 +3316,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7067,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.55
       },
       "scores_on": [
@@ -3355,6 +3355,68 @@
     },
     {
       "rank": 53,
+      "ref": "@rapp/commons_post",
+      "title": "CommonsPost",
+      "description": "Composes a canonical rapp-commons-event/1.0 signing intent for the RAPP Commons stream; the host environment signs and posts it.",
+      "origin": "native",
+      "category": "core",
+      "tags": [
+        "commons",
+        "neighborhood",
+        "post",
+        "event-stream",
+        "sign"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fcommons_post",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
+      "source": null,
+      "score": 56.7,
+      "origin_rank": 53,
+      "origin_size": 300,
+      "components": {
+        "community": 0.0,
+        "curator": 0.7804,
+        "depth": 0.6556,
+        "freshness": 0.5665,
+        "tier": 1.0
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "curator"
+      ],
+      "signals": {
+        "rar": {
+          "curator_mean": null,
+          "curator_n": 0,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "official",
+          "age_days": 98,
+          "lines": 237,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "not yet reviewed - scored at the population median",
+        "no community feedback yet",
+        "official tier",
+        "added 98 days ago",
+        "237 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 54,
       "ref": "@kody-w/copilot_studio_deploy_agent",
       "title": "CopilotStudioDeploy",
       "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified).",
@@ -3383,13 +3445,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_deploy_agent.py",
       "source": null,
       "score": 56.6,
-      "origin_rank": 53,
+      "origin_rank": 54,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6639,
+        "freshness": 0.6632,
         "tier": 0.55
       },
       "scores_on": [
@@ -3427,7 +3489,7 @@
       ]
     },
     {
-      "rank": 54,
+      "rank": 55,
       "ref": "@kody-w/buzzsaw",
       "title": "Buzzsaw",
       "description": "Set up an adversarial build-and-verify loop: seed prompt, disjoint region split for parallel builders, harsh read-only critic brief, and an acceptance gate that defines when to stop.",
@@ -3446,13 +3508,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/buzzsaw.py",
       "source": null,
       "score": 56.5,
-      "origin_rank": 54,
+      "origin_rank": 55,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7368,
-        "freshness": 0.918,
+        "freshness": 0.9169,
         "tier": 0.55
       },
       "scores_on": [
@@ -3490,7 +3552,7 @@
       ]
     },
     {
-      "rank": 55,
+      "rank": 56,
       "ref": "@kody-w/context_memory_agent",
       "title": "ContextMemory",
       "description": "Recalls stored memories and conversation context from the brainstem's JSON memory store, per-user or shared.",
@@ -3507,13 +3569,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/context_memory_agent.py",
       "source": null,
       "score": 56.4,
-      "origin_rank": 55,
+      "origin_rank": 56,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5849,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -3551,7 +3613,7 @@
       ]
     },
     {
-      "rank": 56,
+      "rank": 57,
       "ref": "@aibast-agents-library/returns_complaints_resolution",
       "title": "Returns & Complaints Resolution Agent",
       "description": "Processes returns and complaints from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
@@ -3569,13 +3631,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py",
       "source": null,
       "score": 56.3,
-      "origin_rank": 56,
+      "origin_rank": 57,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8745,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -3611,7 +3673,7 @@
       ]
     },
     {
-      "rank": 57,
+      "rank": 58,
       "ref": "@kody-w/recon_deck_agent",
       "title": "ReconDeck",
       "description": "Builds a recon briefing on a topic by querying Hacker News top stories and Rappterbook agent profiles over HTTP.",
@@ -3632,13 +3694,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/recon_deck_agent.py",
       "source": null,
       "score": 56.2,
-      "origin_rank": 57,
+      "origin_rank": 58,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5744,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -3676,128 +3738,7 @@
       ]
     },
     {
-      "rank": 58,
-      "ref": "@aibast-agents-library/emission_tracking",
-      "title": "Emission Tracking Agent",
-      "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback.",
-      "origin": "native",
-      "category": "energy",
-      "tags": [
-        "emissions",
-        "carbon",
-        "compliance",
-        "ghg",
-        "sustainability",
-        "energy"
-      ],
-      "audience": "business",
-      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Femission_tracking",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
-      "source": null,
-      "score": 55.9,
-      "origin_rank": 58,
-      "origin_size": 300,
-      "components": {
-        "community": 0.0,
-        "curator": 0.8589,
-        "depth": 1.0,
-        "freshness": 0.4557,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [],
-      "signals": {
-        "rar": {
-          "curator_mean": 4.6,
-          "curator_n": 5,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 136,
-          "lines": 639,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "4.6/5 from 5 curator reviews",
-        "no community feedback yet",
-        "community tier",
-        "added 136 days ago",
-        "639 lines",
-        "has a rendered card"
-      ]
-    },
-    {
       "rank": 59,
-      "ref": "@aibast-agents-library/supply_chain_disruption_alert",
-      "title": "Supply Chain Disruption Alert Agent",
-      "description": "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback.",
-      "origin": "native",
-      "category": "retail_cpg",
-      "tags": [
-        "supply-chain",
-        "disruption",
-        "risk-management",
-        "logistics",
-        "retail"
-      ],
-      "audience": "business",
-      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fsupply_chain_disruption_alert",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
-      "source": null,
-      "score": 55.9,
-      "origin_rank": 59,
-      "origin_size": 300,
-      "components": {
-        "community": 0.0,
-        "curator": 0.8589,
-        "depth": 1.0,
-        "freshness": 0.4557,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [],
-      "signals": {
-        "rar": {
-          "curator_mean": 4.6,
-          "curator_n": 5,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 136,
-          "lines": 1085,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "4.6/5 from 5 curator reviews",
-        "no community feedback yet",
-        "community tier",
-        "added 136 days ago",
-        "1085 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 60,
       "ref": "@kody-w/rappterbook_agent",
       "title": "Rappterbook",
       "description": "Fetches Rappterbook agent profiles, trending posts, stats, and channels read-only from the project's GitHub state files.",
@@ -3816,13 +3757,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappterbook_agent.py",
       "source": null,
       "score": 55.9,
-      "origin_rank": 60,
+      "origin_rank": 59,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5548,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 1.0
       },
       "scores_on": [
@@ -3860,7 +3801,128 @@
       ]
     },
     {
+      "rank": 60,
+      "ref": "@aibast-agents-library/emission_tracking",
+      "title": "Emission Tracking Agent",
+      "description": "Tracks GHG compliance events from a simulated Dynamics 365 tenant with telemetry load-proxy aggregates, plus an offline demo fallback.",
+      "origin": "native",
+      "category": "energy",
+      "tags": [
+        "emissions",
+        "carbon",
+        "compliance",
+        "ghg",
+        "sustainability",
+        "energy"
+      ],
+      "audience": "business",
+      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Femission_tracking",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py",
+      "source": null,
+      "score": 55.8,
+      "origin_rank": 60,
+      "origin_size": 300,
+      "components": {
+        "community": 0.0,
+        "curator": 0.8589,
+        "depth": 1.0,
+        "freshness": 0.4551,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [],
+      "signals": {
+        "rar": {
+          "curator_mean": 4.6,
+          "curator_n": 5,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 136,
+          "lines": 639,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "4.6/5 from 5 curator reviews",
+        "no community feedback yet",
+        "community tier",
+        "added 136 days ago",
+        "639 lines",
+        "has a rendered card"
+      ]
+    },
+    {
       "rank": 61,
+      "ref": "@aibast-agents-library/supply_chain_disruption_alert",
+      "title": "Supply Chain Disruption Alert Agent",
+      "description": "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback.",
+      "origin": "native",
+      "category": "retail_cpg",
+      "tags": [
+        "supply-chain",
+        "disruption",
+        "risk-management",
+        "logistics",
+        "retail"
+      ],
+      "audience": "business",
+      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fsupply_chain_disruption_alert",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py",
+      "source": null,
+      "score": 55.8,
+      "origin_rank": 61,
+      "origin_size": 300,
+      "components": {
+        "community": 0.0,
+        "curator": 0.8589,
+        "depth": 1.0,
+        "freshness": 0.4551,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "curator",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [],
+      "signals": {
+        "rar": {
+          "curator_mean": 4.6,
+          "curator_n": 5,
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 136,
+          "lines": 1085,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "4.6/5 from 5 curator reviews",
+        "no community feedback yet",
+        "community tier",
+        "added 136 days ago",
+        "1085 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 62,
       "ref": "@howardh/prompt_to_video_agent",
       "title": "PromptToVideo",
       "description": "Renders videos from structured scene descriptions using Remotion — title, content, quote, and list scenes with style presets.",
@@ -3880,13 +3942,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/prompt_to_video_agent.py",
       "source": null,
       "score": 55.8,
-      "origin_rank": 61,
+      "origin_rank": 62,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.55
       },
       "scores_on": [
@@ -3924,7 +3986,7 @@
       ]
     },
     {
-      "rank": 62,
+      "rank": 63,
       "ref": "@howardh/recon_agent",
       "title": "Recon",
       "description": "Scans any URL and produces an auto-opening HTML recon report covering tech stack, security headers, SSL, performance, and API schema.",
@@ -3945,13 +4007,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
       "source": null,
       "score": 55.8,
-      "origin_rank": 62,
+      "origin_rank": 63,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.55
       },
       "scores_on": [
@@ -3989,7 +4051,7 @@
       ]
     },
     {
-      "rank": 63,
+      "rank": 64,
       "ref": "@howardh/training_quest_agent",
       "title": "TrainingQuest",
       "description": "Generates a gamified HTML onboarding quest from the brainstem's loaded agents, with checkpoints, progress tracking, and copyable prompts.",
@@ -4008,13 +4070,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/training_quest_agent.py",
       "source": null,
       "score": 55.8,
-      "origin_rank": 63,
+      "origin_rank": 64,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.55
       },
       "scores_on": [
@@ -4052,7 +4114,7 @@
       ]
     },
     {
-      "rank": 64,
+      "rank": 65,
       "ref": "@howardh/tuftelove_agent",
       "title": "TufteLove",
       "description": "Advises on and reviews agent UI design using Tufte principles and Microsoft's Agent Oversight pattern taxonomy.",
@@ -4073,13 +4135,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/tuftelove_agent.py",
       "source": null,
       "score": 55.8,
-      "origin_rank": 64,
+      "origin_rank": 65,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.55
       },
       "scores_on": [
@@ -4117,7 +4179,7 @@
       ]
     },
     {
-      "rank": 65,
+      "rank": 66,
       "ref": "@howardh/vaultmind_agent",
       "title": "VaultMind",
       "description": "Manages an Obsidian vault through 28 actions — 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks.",
@@ -4139,13 +4201,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/vaultmind_agent.py",
       "source": null,
       "score": 55.8,
-      "origin_rank": 65,
+      "origin_rank": 66,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.55
       },
       "scores_on": [
@@ -4183,7 +4245,7 @@
       ]
     },
     {
-      "rank": 66,
+      "rank": 67,
       "ref": "@kody-w/predictive_asset_maintenance_intelligence",
       "title": "Predictive Asset Maintenance Intelligence",
       "description": "Simulates a grid predictive-maintenance pipeline — telemetry scoring, failure ranking, work-order and capex drafts — from seeded synthetic demo data.",
@@ -4201,13 +4263,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
       "source": null,
       "score": 55.8,
-      "origin_rank": 66,
+      "origin_rank": 67,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6112,
+        "freshness": 0.6105,
         "tier": 0.55
       },
       "scores_on": [
@@ -4245,7 +4307,7 @@
       ]
     },
     {
-      "rank": 67,
+      "rank": 68,
       "ref": "@kody-w/twin_egg_hatcher",
       "title": "HatchTwinEgg",
       "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
@@ -4265,13 +4327,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
       "source": null,
       "score": 55.8,
-      "origin_rank": 67,
+      "origin_rank": 68,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.55
       },
       "scores_on": [
@@ -4309,7 +4371,7 @@
       ]
     },
     {
-      "rank": 68,
+      "rank": 69,
       "ref": "@aibast-agents-library/it_helpdesk",
       "title": "IT Helpdesk",
       "description": "Runs IT support — diagnostics, remediation, technician booking — over a live simulated D365 tenant plus a ServiceNow-shaped ITSM desk; offline-safe.",
@@ -4327,13 +4389,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 68,
+      "origin_rank": 69,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8536,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -4369,7 +4431,7 @@
       ]
     },
     {
-      "rank": 69,
+      "rank": 70,
       "ref": "@aibast-agents-library/staff_credentialing",
       "title": "Staff Credentialing Agent",
       "description": "Tracks staff credentials and onboarding, joining a live simulated FHIR practitioner registry with the Dynamics 365 CRM directory; offline fallback.",
@@ -4388,13 +4450,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 69,
+      "origin_rank": 70,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8536,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -4430,7 +4492,7 @@
       ]
     },
     {
-      "rank": 70,
+      "rank": 71,
       "ref": "@aibast-agents-library/win_loss_analysis",
       "title": "Win/Loss Analysis",
       "description": "Computes win/loss stats from live closed deals in a simulated Dynamics 365 tenant, with recovery models and an embedded offline demo fallback.",
@@ -4448,13 +4510,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/win_loss_analysis_stack/win_loss_analysis_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 70,
+      "origin_rank": 71,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8536,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -4490,7 +4552,7 @@
       ]
     },
     {
-      "rank": 71,
+      "rank": 72,
       "ref": "@kody-w/ez_sharpen_agent",
       "title": "EZSharpen",
       "description": "Grows in-between detail for recorded commons frames by bounded interpolation, keeping only candidates consistent with signed neighbor frames.",
@@ -4508,13 +4570,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py",
       "source": null,
       "score": 55.7,
-      "origin_rank": 71,
+      "origin_rank": 72,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8861,
-        "freshness": 0.7155,
+        "freshness": 0.7146,
         "tier": 0.55
       },
       "scores_on": [
@@ -4552,7 +4614,7 @@
       ]
     },
     {
-      "rank": 72,
+      "rank": 73,
       "ref": "@rapp/estate_outbound",
       "title": "EstateOutbound",
       "description": "Writes an already-signed neighborhood event into ~/.brainstem/outbound/ for federation roll-up; pushing to the estate repo stays manual.",
@@ -4570,13 +4632,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
       "source": null,
       "score": 55.6,
-      "origin_rank": 72,
+      "origin_rank": 73,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5783,
-        "freshness": 0.5672,
+        "freshness": 0.5665,
         "tier": 1.0
       },
       "scores_on": [
@@ -4614,7 +4676,7 @@
       ]
     },
     {
-      "rank": 73,
+      "rank": 74,
       "ref": "@discreetRappers/copilot_studio_transpiler_agent",
       "title": "CopilotStudioTranspiler",
       "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.",
@@ -4632,13 +4694,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 73,
+      "origin_rank": 74,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8429,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -4674,7 +4736,7 @@
       ]
     },
     {
-      "rank": 74,
+      "rank": 75,
       "ref": "@discreetRappers/rapp_pipeline_agent",
       "title": "RAPP",
       "description": "Runs the full RAPP pipeline — discovery, MVP, code gen, quality gates QG1-QG6, PDF reports — using Azure OpenAI and Azure File Storage.",
@@ -4692,13 +4754,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/rapp_pipeline_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 74,
+      "origin_rank": 75,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8429,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -4734,7 +4796,7 @@
       ]
     },
     {
-      "rank": 75,
+      "rank": 76,
       "ref": "@discreetRappers/sales_assistant_agent",
       "title": "SalesAssistant",
       "description": "Routes natural-language CRM requests about accounts, contacts, and opportunities to the Dynamics CRUD agent, which serves built-in demo data.",
@@ -4751,13 +4813,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sales_assistant_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 75,
+      "origin_rank": 76,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8429,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -4793,7 +4855,7 @@
       ]
     },
     {
-      "rank": 76,
+      "rank": 77,
       "ref": "@discreetRappers/sharepoint_contract_analysis_agent",
       "title": "ContractAnalysis",
       "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI — clause extraction, risk flagging, and comparison.",
@@ -4811,13 +4873,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
       "source": null,
       "score": 55.5,
-      "origin_rank": 76,
+      "origin_rank": 77,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8429,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -4853,7 +4915,7 @@
       ]
     },
     {
-      "rank": 77,
+      "rank": 78,
       "ref": "@kody-w/bakeoff_factory",
       "title": "BakeoffFactory",
       "description": "Runs a persistent tournament where prompt variants compete on a text task, an LLM judge scores outputs, and the worst variant mutates toward the best.",
@@ -4873,13 +4935,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/bakeoff_factory_agent.py",
       "source": null,
       "score": 55.4,
-      "origin_rank": 77,
+      "origin_rank": 78,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5841,
+        "freshness": 0.5834,
         "tier": 0.55
       },
       "scores_on": [
@@ -4917,7 +4979,7 @@
       ]
     },
     {
-      "rank": 78,
+      "rank": 79,
       "ref": "@kody-w/estate_factory",
       "title": "EstateFactory",
       "description": "Generates a complete digital estate from an intent — org tree, factory agent stubs, souls, HTML dashboard — via brainstem or LLM APIs when available.",
@@ -4936,13 +4998,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/estate_factory_agent.py",
       "source": null,
       "score": 55.4,
-      "origin_rank": 78,
+      "origin_rank": 79,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5842,
+        "freshness": 0.5835,
         "tier": 0.55
       },
       "scores_on": [
@@ -4980,7 +5042,7 @@
       ]
     },
     {
-      "rank": 79,
+      "rank": 80,
       "ref": "@aibast-agents-library/acquisition_support",
       "title": "Acquisition Support Agent",
       "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback.",
@@ -4999,13 +5061,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py",
       "source": null,
       "score": 55.2,
-      "origin_rank": 79,
+      "origin_rank": 80,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8388,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5041,7 +5103,7 @@
       ]
     },
     {
-      "rank": 80,
+      "rank": 81,
       "ref": "@aibast-agents-library/wealth_insights_generator",
       "title": "Wealth Insights Generator Agent",
       "description": "Generates opportunity alerts and client insights from a live simulated Dynamics 365 tenant pipeline, with an offline demo fallback.",
@@ -5060,13 +5122,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py",
       "source": null,
       "score": 55.2,
-      "origin_rank": 80,
+      "origin_rank": 81,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8388,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5102,7 +5164,7 @@
       ]
     },
     {
-      "rank": 81,
+      "rank": 82,
       "ref": "@kody-w/neuron_swarm",
       "title": "NeuronSwarm",
       "description": "Fans a task out across parallel expert 'neuron' prompts using the host brainstem's own LLM call, then reconciles them into one converged answer.",
@@ -5122,13 +5184,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/neuron_swarm_agent.py",
       "source": null,
       "score": 55.1,
-      "origin_rank": 81,
+      "origin_rank": 82,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8206,
-        "freshness": 0.7414,
+        "freshness": 0.7406,
         "tier": 0.55
       },
       "scores_on": [
@@ -5166,7 +5228,7 @@
       ]
     },
     {
-      "rank": 82,
+      "rank": 83,
       "ref": "@aibast-agents-library/permit_license_management",
       "title": "Permit & License Management Agent",
       "description": "Tracks permit applications from a live simulated Dynamics 365 tenant plus renewal calendars and gap analysis, with an offline fallback.",
@@ -5185,13 +5247,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/permit_license_management_stack/permit_license_management_agent.py",
       "source": null,
       "score": 54.9,
-      "origin_rank": 82,
+      "origin_rank": 83,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8277,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5227,7 +5289,7 @@
       ]
     },
     {
-      "rank": 83,
+      "rank": 84,
       "ref": "@aibast-agents-library/production_line_optimization",
       "title": "Production Line Optimization Agent",
       "description": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback.",
@@ -5245,13 +5307,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py",
       "source": null,
       "score": 54.9,
-      "origin_rank": 83,
+      "origin_rank": 84,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8277,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5287,7 +5349,7 @@
       ]
     },
     {
-      "rank": 84,
+      "rank": 85,
       "ref": "@kody-w/perpetual_loop_factory",
       "title": "PerpetualLoopFactory",
       "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons.",
@@ -5307,13 +5369,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/perpetual_loop_factory_agent.py",
       "source": null,
       "score": 54.9,
-      "origin_rank": 84,
+      "origin_rank": 85,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5472,
+        "freshness": 0.5466,
         "tier": 0.55
       },
       "scores_on": [
@@ -5335,7 +5397,7 @@
           "engagement": 0,
           "channels": {},
           "tier": "community",
-          "age_days": 104,
+          "age_days": 105,
           "lines": 1352,
           "has_card": true
         },
@@ -5345,13 +5407,13 @@
         "not yet reviewed - scored at the population median",
         "no community feedback yet",
         "community tier",
-        "added 104 days ago",
+        "added 105 days ago",
         "1352 lines",
         "has a rendered card"
       ]
     },
     {
-      "rank": 85,
+      "rank": 86,
       "ref": "@aibast-agents-library/personalized_marketing",
       "title": "Personalized Marketing Agent",
       "description": "Segments live audiences and designs campaigns from a live simulated Dynamics 365 tenant's contacts and orders, with an offline demo fallback.",
@@ -5369,13 +5431,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py",
       "source": null,
       "score": 54.8,
-      "origin_rank": 85,
+      "origin_rank": 86,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8243,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5411,7 +5473,7 @@
       ]
     },
     {
-      "rank": 86,
+      "rank": 87,
       "ref": "@aibast-agents-library/deal_stakeholder_engagement",
       "title": "Stakeholder Engagement",
       "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback.",
@@ -5428,14 +5490,14 @@
       "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fdeal_stakeholder_engagement",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py",
       "source": null,
-      "score": 54.7,
-      "origin_rank": 86,
+      "score": 54.6,
+      "origin_rank": 87,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8191,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5471,7 +5533,7 @@
       ]
     },
     {
-      "rank": 87,
+      "rank": 88,
       "ref": "@aibast-agents-library/returns_exchange",
       "title": "Returns & Exchange Agent",
       "description": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline.",
@@ -5490,13 +5552,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py",
       "source": null,
       "score": 54.6,
-      "origin_rank": 87,
+      "origin_rank": 88,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8277,
         "depth": 0.9764,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5532,7 +5594,7 @@
       ]
     },
     {
-      "rank": 88,
+      "rank": 89,
       "ref": "@aibast-agents-library/slg_grants_management",
       "title": "SLG Grants Management Agent",
       "description": "Tracks grant compliance and budgets from a live simulated Dynamics 365 tenant's grant cases, with an offline demo fallback.",
@@ -5550,13 +5612,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/grants_management_stack/grants_management_agent.py",
       "source": null,
       "score": 54.6,
-      "origin_rank": 88,
+      "origin_rank": 89,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8388,
         "depth": 0.9555,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5592,7 +5654,7 @@
       ]
     },
     {
-      "rank": 89,
+      "rank": 90,
       "ref": "@howardh/chief_of_staff_agent",
       "title": "ChiefOfStaff",
       "description": "Generates M365-grounded briefs, inbox triage, meeting prep, commitment tracking, and drafts via the WorkIQ CLI, plus HN/DDG signal scans.",
@@ -5612,13 +5674,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/chief_of_staff_agent.py",
       "source": null,
       "score": 54.6,
-      "origin_rank": 89,
+      "origin_rank": 90,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5266,
+        "freshness": 0.526,
         "tier": 0.55
       },
       "scores_on": [
@@ -5656,7 +5718,7 @@
       ]
     },
     {
-      "rank": 90,
+      "rank": 91,
       "ref": "@aibast-agents-library/citizen_service_request",
       "title": "Citizen Service Request Agent",
       "description": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
@@ -5675,13 +5737,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py",
       "source": null,
       "score": 54.5,
-      "origin_rank": 90,
+      "origin_rank": 91,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8277,
         "depth": 0.9725,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5717,7 +5779,7 @@
       ]
     },
     {
-      "rank": 91,
+      "rank": 92,
       "ref": "@aibast-agents-library/activity_gap",
       "title": "Activity Gap Analyzer",
       "description": "Flags missing sales activities per stage using live opportunities from a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
@@ -5735,13 +5797,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py",
       "source": null,
       "score": 54.4,
-      "origin_rank": 91,
+      "origin_rank": 92,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8119,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5777,7 +5839,7 @@
       ]
     },
     {
-      "rank": 92,
+      "rank": 93,
       "ref": "@aibast-agents-library/deal_risk_assessment",
       "title": "Deal Risk Assessment",
       "description": "Assesses deal risk from live opportunities in a simulated Dynamics 365 tenant, with matrices, plans, and an embedded offline demo fallback.",
@@ -5795,13 +5857,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_risk_assessment_agent.py",
       "source": null,
       "score": 54.4,
-      "origin_rank": 92,
+      "origin_rank": 93,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8119,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5837,7 +5899,7 @@
       ]
     },
     {
-      "rank": 93,
+      "rank": 94,
       "ref": "@aibast-agents-library/energy_regulatory_reporting",
       "title": "Energy Regulatory Reporting Agent",
       "description": "Tracks filing deadlines from live work items on a simulated Dynamics 365 tenant, with validation and audit prep that work offline.",
@@ -5857,13 +5919,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/regulatory_reporting_stack/regulatory_reporting_agent.py",
       "source": null,
       "score": 54.4,
-      "origin_rank": 93,
+      "origin_rank": 94,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8119,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5899,7 +5961,7 @@
       ]
     },
     {
-      "rank": 94,
+      "rank": 95,
       "ref": "@aibast-agents-library/product_feedback_synthesizer",
       "title": "Product Feedback Synthesizer Agent",
       "description": "Synthesizes feedback themes from a live simulated Dynamics 365 tenant's cases and emails, with an offline demo fallback; writes simulated.",
@@ -5918,13 +5980,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py",
       "source": null,
       "score": 54.4,
-      "origin_rank": 94,
+      "origin_rank": 95,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8119,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -5960,7 +6022,7 @@
       ]
     },
     {
-      "rank": 95,
+      "rank": 96,
       "ref": "@kody-w/commons_show_agent",
       "title": "Commons Show",
       "description": "Captures staged shows in the live RAPP Commons via Playwright and renders narrated MP4 episodes with TTS, rsvg-convert, and ffmpeg.",
@@ -5978,13 +6040,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_show_agent.py",
       "source": null,
       "score": 54.3,
-      "origin_rank": 95,
+      "origin_rank": 96,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7931,
-        "freshness": 0.7154,
+        "freshness": 0.7146,
         "tier": 0.55
       },
       "scores_on": [
@@ -6022,7 +6084,7 @@
       ]
     },
     {
-      "rank": 96,
+      "rank": 97,
       "ref": "@aibast-agents-library/asset_maintenance_forecast",
       "title": "Asset Maintenance Forecast Agent",
       "description": "Monitors asset health from live CRM work orders joined to simulated telemetry sensor stats and alerts, with an offline demo fallback.",
@@ -6041,13 +6103,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/asset_maintenance_forecast_stack/asset_maintenance_forecast_agent.py",
       "source": null,
       "score": 54.2,
-      "origin_rank": 96,
+      "origin_rank": 97,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6083,7 +6145,7 @@
       ]
     },
     {
-      "rank": 97,
+      "rank": 98,
       "ref": "@aibast-agents-library/deal_progression",
       "title": "Deal Progression",
       "description": "Analyzes pipeline health and stalled deals from live opportunities in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
@@ -6101,13 +6163,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py",
       "source": null,
       "score": 54.2,
-      "origin_rank": 97,
+      "origin_rank": 98,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6143,7 +6205,7 @@
       ]
     },
     {
-      "rank": 98,
+      "rank": 99,
       "ref": "@aibast-agents-library/fs_customer_onboarding",
       "title": "FS Customer Onboarding Agent",
       "description": "Tracks bank customer onboarding and KYC from a live simulated Dynamics 365 tenant (leads as applications), with an offline demo fallback.",
@@ -6164,13 +6226,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/customer_onboarding_fs_stack/customer_onboarding_fs_agent.py",
       "source": null,
       "score": 54.2,
-      "origin_rank": 98,
+      "origin_rank": 99,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6206,7 +6268,7 @@
       ]
     },
     {
-      "rank": 99,
+      "rank": 100,
       "ref": "@aibast-agents-library/identify_discounts",
       "title": "Identify Discounts",
       "description": "Scans live quotes from a simulated Dynamics 365 tenant for discounts and expiring savings, with eligibility checks and offline fallback.",
@@ -6224,13 +6286,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py",
       "source": null,
       "score": 54.2,
-      "origin_rank": 99,
+      "origin_rank": 100,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6266,7 +6328,7 @@
       ]
     },
     {
-      "rank": 100,
+      "rank": 101,
       "ref": "@aibast-agents-library/loan_origination_assistant",
       "title": "Loan Origination Assistant Agent",
       "description": "Reviews loan pipelines from a live simulated Dynamics 365 tenant (opportunities as applications), with credit demos and an offline fallback.",
@@ -6285,13 +6347,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/loan_origination_assistant_stack/loan_origination_assistant_agent.py",
       "source": null,
       "score": 54.2,
-      "origin_rank": 100,
+      "origin_rank": 101,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8031,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6327,7 +6389,7 @@
       ]
     },
     {
-      "rank": 101,
+      "rank": 102,
       "ref": "@aibast-agents-library/revenue_forecast",
       "title": "Revenue Forecast",
       "description": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback.",
@@ -6345,13 +6407,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py",
       "source": null,
       "score": 54.2,
-      "origin_rank": 101,
+      "origin_rank": 102,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8122,
         "depth": 0.9843,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6387,7 +6449,7 @@
       ]
     },
     {
-      "rank": 102,
+      "rank": 103,
       "ref": "@rarbookworld/bookfactory",
       "title": "BookFactory (converged singleton)",
       "description": "Writes, edits, gates, and publishes a chapter through five inlined LLM personas over Azure OpenAI, with structured verdicts that halt on hold.",
@@ -6405,13 +6467,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/bookfactory_agent.py",
       "source": null,
       "score": 54.2,
-      "origin_rank": 102,
+      "origin_rank": 103,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5001,
+        "freshness": 0.4995,
         "tier": 0.55
       },
       "scores_on": [
@@ -6449,7 +6511,7 @@
       ]
     },
     {
-      "rank": 103,
+      "rank": 104,
       "ref": "@rarbookworld/momentfactory",
       "title": "MomentFactory (converged singleton)",
       "description": "Converts a moment (commit, message, idea) into a publishable Drop through seven inlined LLM personas, calling Azure OpenAI.",
@@ -6467,13 +6529,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/momentfactory_agent.py",
       "source": null,
       "score": 54.2,
-      "origin_rank": 103,
+      "origin_rank": 104,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.5001,
+        "freshness": 0.4995,
         "tier": 0.55
       },
       "scores_on": [
@@ -6511,7 +6573,7 @@
       ]
     },
     {
-      "rank": 104,
+      "rank": 105,
       "ref": "@aibast-agents-library/field_service_dispatch",
       "title": "Field Service Dispatch Agent",
       "description": "Dispatches from live simulated Dynamics 365 work orders with a telemetry alert overlay, routing, crews, and an offline demo fallback.",
@@ -6530,13 +6592,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py",
       "source": null,
       "score": 54.0,
-      "origin_rank": 104,
+      "origin_rank": 105,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6572,7 +6634,7 @@
       ]
     },
     {
-      "rank": 105,
+      "rank": 106,
       "ref": "@aibast-agents-library/financial_advisor_copilot",
       "title": "Financial Advisor Copilot Agent",
       "description": "Reviews advisory client books from a live simulated Dynamics 365 tenant (contacts as clients), with portfolio demos and an offline fallback.",
@@ -6592,13 +6654,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/financial_advisor_copilot_stack/financial_advisor_copilot_agent.py",
       "source": null,
       "score": 54.0,
-      "origin_rank": 105,
+      "origin_rank": 106,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6634,7 +6696,7 @@
       ]
     },
     {
-      "rank": 106,
+      "rank": 107,
       "ref": "@aibast-agents-library/general_ask_hr",
       "title": "General Ask HR",
       "description": "Answers HR policy, leave, and directory queries from a live simulated HRIS (workers, time off, benefits) joined to a D365 CRM, with offline fallback.",
@@ -6653,13 +6715,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/ask_hr_stack/ask_hr_agent.py",
       "source": null,
       "score": 54.0,
-      "origin_rank": 106,
+      "origin_rank": 107,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6695,7 +6757,7 @@
       ]
     },
     {
-      "rank": 107,
+      "rank": 108,
       "ref": "@aibast-agents-library/inventory_visibility",
       "title": "Inventory Visibility Agent",
       "description": "Reports stock dashboards joining a simulated Dynamics 365 catalog with ERP materials and goods receipts as inbound supply, with offline fallback.",
@@ -6713,13 +6775,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py",
       "source": null,
       "score": 54.0,
-      "origin_rank": 107,
+      "origin_rank": 108,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6755,7 +6817,7 @@
       ]
     },
     {
-      "rank": 108,
+      "rank": 109,
       "ref": "@aibast-agents-library/pipeline_velocity",
       "title": "Pipeline Velocity",
       "description": "Measures pipeline velocity from live opportunities in a simulated Dynamics 365 tenant, with bottlenecks and an embedded offline demo fallback.",
@@ -6773,13 +6835,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/pipeline_velocity_agent.py",
       "source": null,
       "score": 54.0,
-      "origin_rank": 108,
+      "origin_rank": 109,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6815,7 +6877,7 @@
       ]
     },
     {
-      "rank": 109,
+      "rank": 110,
       "ref": "@aibast-agents-library/support_ticket_resolution",
       "title": "Support Ticket Resolution Agent",
       "description": "Triages tickets and tracks SLAs from a live simulated Dynamics 365 tenant's support cases, with an offline demo fallback.",
@@ -6834,13 +6896,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py",
       "source": null,
       "score": 54.0,
-      "origin_rank": 109,
+      "origin_rank": 110,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8119,
         "depth": 0.9712,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6876,7 +6938,7 @@
       ]
     },
     {
-      "rank": 110,
+      "rank": 111,
       "ref": "@aibast-agents-library/utility_billing_assistance",
       "title": "Utility Billing Assistance Agent",
       "description": "Answers billing inquiries and screens assistance from a live simulated Dynamics 365 tenant's utility cases, with an offline demo fallback.",
@@ -6897,13 +6959,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/utility_billing_assistance_stack/utility_billing_assistance_agent.py",
       "source": null,
       "score": 54.0,
-      "origin_rank": 110,
+      "origin_rank": 111,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6939,7 +7001,7 @@
       ]
     },
     {
-      "rank": 111,
+      "rank": 112,
       "ref": "@aibast-agents-library/voice_to_crm_servicenow",
       "title": "Voice to CRM (ServiceNow)",
       "description": "Tracks incidents from a simulated ServiceNow Table-API desk, joining each CI's u_d365_customerassetid to the live D365 asset; offline fallback.",
@@ -6957,13 +7019,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py",
       "source": null,
       "score": 54.0,
-      "origin_rank": 111,
+      "origin_rank": 112,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7964,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -6999,7 +7061,7 @@
       ]
     },
     {
-      "rank": 112,
+      "rank": 113,
       "ref": "@kody-w/commons_life_agent",
       "title": "Commons Life",
       "description": "Records the live commons as signed frames via Playwright, grows in-between fidelity with EZsharpen, and emits an HTML LifePlayer scrubber.",
@@ -7017,13 +7079,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_life_agent.py",
       "source": null,
       "score": 53.9,
-      "origin_rank": 112,
+      "origin_rank": 113,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7656,
-        "freshness": 0.7155,
+        "freshness": 0.7146,
         "tier": 0.55
       },
       "scores_on": [
@@ -7061,7 +7123,7 @@
       ]
     },
     {
-      "rank": 113,
+      "rank": 114,
       "ref": "@rapp/hacker_news",
       "title": "Hacker News",
       "description": "Fetches the top N stories from Hacker News.",
@@ -7077,13 +7139,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/hacker_news_agent.py",
       "source": null,
       "score": 53.9,
-      "origin_rank": 113,
+      "origin_rank": 114,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.4958,
-        "freshness": 0.5385,
+        "freshness": 0.5379,
         "tier": 1.0
       },
       "scores_on": [
@@ -7121,7 +7183,7 @@
       ]
     },
     {
-      "rank": 114,
+      "rank": 115,
       "ref": "@aibast-agents-library/building_permit_processing",
       "title": "Building Permit Processing Agent",
       "description": "Tracks permit status and fees from a live simulated Dynamics 365 tenant's permit cases, with an offline demo fallback.",
@@ -7142,13 +7204,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py",
       "source": null,
       "score": 53.8,
-      "origin_rank": 114,
+      "origin_rank": 115,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7913,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -7184,7 +7246,7 @@
       ]
     },
     {
-      "rank": 115,
+      "rank": 116,
       "ref": "@aibast-agents-library/mission_reporting_assistant",
       "title": "Mission Reporting Assistant Agent",
       "description": "Computes mission KPIs from live records on a simulated Dynamics 365 tenant, with briefs and trend analyses that work offline.",
@@ -7203,13 +7265,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py",
       "source": null,
       "score": 53.8,
-      "origin_rank": 115,
+      "origin_rank": 116,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8536,
         "depth": 0.8769,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -7245,7 +7307,7 @@
       ]
     },
     {
-      "rank": 116,
+      "rank": 117,
       "ref": "@aibast-agents-library/time_entry_billing",
       "title": "Time Entry & Billing Agent",
       "description": "Audits time entries and tracks receivables from a live simulated Dynamics 365 tenant invoice ledger, with an offline demo fallback.",
@@ -7263,13 +7325,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py",
       "source": null,
       "score": 53.8,
-      "origin_rank": 116,
+      "origin_rank": 117,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7913,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -7305,7 +7367,7 @@
       ]
     },
     {
-      "rank": 117,
+      "rank": 118,
       "ref": "@aibast-agents-library/federal_grants_oversight",
       "title": "Federal Grants Oversight Agent",
       "description": "Monitors grant compliance events from a live simulated Dynamics 365 tenant, with dashboards and audit prep that work offline.",
@@ -7324,13 +7386,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py",
       "source": null,
       "score": 53.7,
-      "origin_rank": 117,
+      "origin_rank": 118,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8119,
         "depth": 0.9489,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -7366,7 +7428,7 @@
       ]
     },
     {
-      "rank": 118,
+      "rank": 119,
       "ref": "@aibast-agents-library/fraud_detection_alert",
       "title": "Fraud Detection & Alert Agent",
       "description": "Triages fraud alerts and tracks investigations from a live simulated Dynamics 365 tenant (cases as fraud cases), with an offline demo fallback.",
@@ -7385,13 +7447,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py",
       "source": null,
       "score": 53.7,
-      "origin_rank": 118,
+      "origin_rank": 119,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7872,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -7427,7 +7489,7 @@
       ]
     },
     {
-      "rank": 119,
+      "rank": 120,
       "ref": "@aibast-agents-library/stakeholder_intelligence",
       "title": "Stakeholder Intelligence",
       "description": "Maps org charts, buying committees, engagement gaps, and relationship strength for accounts using built-in demo data.",
@@ -7445,13 +7507,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py",
       "source": null,
       "score": 53.6,
-      "origin_rank": 119,
+      "origin_rank": 120,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8243,
         "depth": 0.9214,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -7487,7 +7549,7 @@
       ]
     },
     {
-      "rank": 120,
+      "rank": 121,
       "ref": "@discreetRappers/agent_generator_agent",
       "title": "AgentGenerator",
       "description": "Generates new RAPP agent JSON configs, Python code, and Copilot Studio assets from natural-language descriptions.",
@@ -7504,13 +7566,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_generator_agent.py",
       "source": null,
       "score": 53.6,
-      "origin_rank": 120,
+      "origin_rank": 121,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -7546,7 +7608,7 @@
       ]
     },
     {
-      "rank": 121,
+      "rank": 122,
       "ref": "@discreetRappers/agent_transpiler_agent",
       "title": "AgentTranspiler",
       "description": "Converts RAPP agent definitions into M365 declarative, Copilot Studio, and Azure AI Foundry formats, with optional Foundry deployment.",
@@ -7564,13 +7626,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_transpiler_agent.py",
       "source": null,
       "score": 53.6,
-      "origin_rank": 121,
+      "origin_rank": 122,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -7606,7 +7668,7 @@
       ]
     },
     {
-      "rank": 122,
+      "rank": 123,
       "ref": "@discreetRappers/architecture_diagram_agent",
       "title": "ArchitectureDiagramAgent",
       "description": "Generates architecture diagrams as PNG, SVG, PDF, Mermaid, or Draw.io XML from node/connection configs via the diagrams+graphviz library.",
@@ -7624,13 +7686,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/architecture_diagram_agent.py",
       "source": null,
       "score": 53.6,
-      "origin_rank": 122,
+      "origin_rank": 123,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -7666,7 +7728,7 @@
       ]
     },
     {
-      "rank": 123,
+      "rank": 124,
       "ref": "@discreetRappers/demo_script_generator_agent",
       "title": "DemoScriptGenerator",
       "description": "Generates 60-second persona-driven demo script JSON files for ScriptedDemoAgent, via Azure OpenAI or built-in templates.",
@@ -7684,13 +7746,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/demo_script_generator_agent.py",
       "source": null,
       "score": 53.6,
-      "origin_rank": 123,
+      "origin_rank": 124,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -7726,7 +7788,7 @@
       ]
     },
     {
-      "rank": 124,
+      "rank": 125,
       "ref": "@discreetRappers/powerpoint_generator_agent",
       "title": "PowerPointGeneratorV2",
       "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection.",
@@ -7744,13 +7806,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/powerpoint_generator_agent.py",
       "source": null,
       "score": 53.6,
-      "origin_rank": 124,
+      "origin_rank": 125,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -7786,7 +7848,7 @@
       ]
     },
     {
-      "rank": 125,
+      "rank": 126,
       "ref": "@discreetRappers/project_tracker_agent",
       "title": "ProjectTracker",
       "description": "Creates, updates, lists, imports, and exports RAPP project tracking records stored as JSON in Azure File Storage.",
@@ -7802,13 +7864,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/project_tracker_agent.py",
       "source": null,
       "score": 53.6,
-      "origin_rank": 125,
+      "origin_rank": 126,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -7844,7 +7906,7 @@
       ]
     },
     {
-      "rank": 126,
+      "rank": 127,
       "ref": "@discreetRappers/scripted_demo_agent",
       "title": "ScriptedDemo",
       "description": "Plays back scripted demo conversations from JSON files in storage, simulating agent responses for live demonstrations.",
@@ -7862,13 +7924,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/scripted_demo_agent.py",
       "source": null,
       "score": 53.6,
-      "origin_rank": 126,
+      "origin_rank": 127,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -7904,7 +7966,7 @@
       ]
     },
     {
-      "rank": 127,
+      "rank": 128,
       "ref": "@aibast-agents-library/store_associate_copilot",
       "title": "Store Associate Copilot Agent",
       "description": "Gives associates product lookups, scripts, dashboards, and a live refrigeration alert joining simulated telemetry to CRM, with offline fallback.",
@@ -7922,13 +7984,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py",
       "source": null,
       "score": 53.5,
-      "origin_rank": 127,
+      "origin_rank": 128,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -7964,7 +8026,7 @@
       ]
     },
     {
-      "rank": 128,
+      "rank": 129,
       "ref": "@aibast-agents-library/customer_loyalty_rewards",
       "title": "Customer Loyalty & Rewards Agent",
       "description": "Builds loyalty dashboards, tier analysis, and win-back offers from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
@@ -7983,13 +8045,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py",
       "source": null,
       "score": 53.3,
-      "origin_rank": 128,
+      "origin_rank": 129,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7743,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8025,7 +8087,7 @@
       ]
     },
     {
-      "rank": 129,
+      "rank": 130,
       "ref": "@aibast-agents-library/customer_sentiment_churn",
       "title": "Customer Sentiment & Churn Agent",
       "description": "Scores churn risk and plans retention from a live simulated Dynamics 365 tenant (cases as sentiment signals), with an offline demo fallback.",
@@ -8044,13 +8106,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py",
       "source": null,
       "score": 53.3,
-      "origin_rank": 129,
+      "origin_rank": 130,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7743,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8086,7 +8148,7 @@
       ]
     },
     {
-      "rank": 130,
+      "rank": 131,
       "ref": "@aibast-agents-library/prior_authorization",
       "title": "Prior Authorization Agent",
       "description": "Tracks prior-auth requests and appeals, joining a live simulated FHIR server (denied preauth claim) with the Dynamics 365 CRM case; offline fallback.",
@@ -8105,13 +8167,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py",
       "source": null,
       "score": 53.3,
-      "origin_rank": 130,
+      "origin_rank": 131,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7743,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8147,7 +8209,7 @@
       ]
     },
     {
-      "rank": 131,
+      "rank": 132,
       "ref": "@aibast-agents-library/sales_chat",
       "title": "Sales Chat Agent",
       "description": "Answers chat questions from a live product catalog on a simulated Dynamics 365 tenant, with promotions and an offline demo fallback.",
@@ -8166,13 +8228,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py",
       "source": null,
       "score": 53.3,
-      "origin_rank": 131,
+      "origin_rank": 132,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.9843,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8208,7 +8270,7 @@
       ]
     },
     {
-      "rank": 132,
+      "rank": 133,
       "ref": "@aibast-agents-library/software_competitive_intel",
       "title": "Competitive Intelligence Agent",
       "description": "Maps market landscape and threats from a live simulated Dynamics 365 tenant's accounts and pipeline, with an offline demo fallback.",
@@ -8226,13 +8288,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py",
       "source": null,
       "score": 53.3,
-      "origin_rank": 132,
+      "origin_rank": 133,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7743,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8268,7 +8330,7 @@
       ]
     },
     {
-      "rank": 133,
+      "rank": 134,
       "ref": "@aibast-agents-library/account_intelligence",
       "title": "Account Intelligence",
       "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
@@ -8286,13 +8348,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 133,
+      "origin_rank": 134,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8328,7 +8390,7 @@
       ]
     },
     {
-      "rank": 134,
+      "rank": 135,
       "ref": "@aibast-agents-library/ai_customer_assistant",
       "title": "AI Customer Assistant",
       "description": "Handles customer inquiries and escalations from a live simulated Dynamics 365 tenant (cases as tickets), with an offline demo fallback.",
@@ -8348,13 +8410,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/ai_customer_assistant_stack/ai_customer_assistant_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 134,
+      "origin_rank": 135,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8390,7 +8452,7 @@
       ]
     },
     {
-      "rank": 135,
+      "rank": 136,
       "ref": "@aibast-agents-library/claims_processing",
       "title": "Claims Processing Agent",
       "description": "Processes claims and disputes from a live simulated Dynamics 365 tenant, with triage, fraud flags, and an offline demo fallback.",
@@ -8409,13 +8471,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/claims_processing_stack/claims_processing_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 135,
+      "origin_rank": 136,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8451,7 +8513,7 @@
       ]
     },
     {
-      "rank": 136,
+      "rank": 137,
       "ref": "@aibast-agents-library/license_renewal_expansion",
       "title": "License Renewal & Expansion Agent",
       "description": "Manages renewal pipelines and churn risk from a live simulated Dynamics 365 tenant's cases and quotes, with an offline demo fallback.",
@@ -8470,13 +8532,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 136,
+      "origin_rank": 137,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8512,7 +8574,7 @@
       ]
     },
     {
-      "rank": 137,
+      "rank": 138,
       "ref": "@aibast-agents-library/maintenance_scheduling",
       "title": "Maintenance Scheduling Agent",
       "description": "Builds predictive maintenance schedules and work orders from a live simulated Dynamics 365 tenant, with an offline demo telemetry fallback.",
@@ -8530,13 +8592,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 137,
+      "origin_rank": 138,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8572,7 +8634,7 @@
       ]
     },
     {
-      "rank": 138,
+      "rank": 139,
       "ref": "@aibast-agents-library/meeting_prep",
       "title": "Meeting Prep",
       "description": "Generates pre-meeting briefs, talking points, objection prep, and follow-up templates from built-in demo account data.",
@@ -8590,13 +8652,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 138,
+      "origin_rank": 139,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8632,7 +8694,7 @@
       ]
     },
     {
-      "rank": 139,
+      "rank": 140,
       "ref": "@aibast-agents-library/order_status_communication",
       "title": "Order Status Communication Agent",
       "description": "Tracks orders and drafts delay and status communications from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
@@ -8650,13 +8712,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 139,
+      "origin_rank": 140,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8692,7 +8754,7 @@
       ]
     },
     {
-      "rank": 140,
+      "rank": 141,
       "ref": "@aibast-agents-library/patient_intake",
       "title": "Patient Intake Agent",
       "description": "Runs patient intake — forms, insurance checks, scheduling — joining a live simulated FHIR patient roster with the Dynamics 365 CRM; offline fallback.",
@@ -8711,13 +8773,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/patient_intake_stack/patient_intake_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 140,
+      "origin_rank": 141,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8753,7 +8815,7 @@
       ]
     },
     {
-      "rank": 141,
+      "rank": 142,
       "ref": "@aibast-agents-library/procurement_agent",
       "title": "Procurement Agent",
       "description": "Routes purchase requests over a simulated Dynamics 365 tenant and ERP, flagging three-way-match breaks and blocked invoices, with offline fallback.",
@@ -8771,13 +8833,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 141,
+      "origin_rank": 142,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8813,7 +8875,7 @@
       ]
     },
     {
-      "rank": 142,
+      "rank": 143,
       "ref": "@aibast-agents-library/proposal_copilot",
       "title": "Proposal Copilot Agent",
       "description": "Builds proposals, pricing models, and win-theme analyses from a live simulated Dynamics 365 tenant pipeline, with an offline demo fallback.",
@@ -8831,13 +8893,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/proposal_copilot_stack/proposal_copilot_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 142,
+      "origin_rank": 143,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8031,
         "depth": 0.9345,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8873,7 +8935,7 @@
       ]
     },
     {
-      "rank": 143,
+      "rank": 144,
       "ref": "@aibast-agents-library/supplier_risk_monitoring",
       "title": "Supplier Risk Monitoring Agent",
       "description": "Computes supplier risk from simulated ERP blocked invoices and late receipts, joined to Dynamics 365 cases, with an offline demo fallback.",
@@ -8891,13 +8953,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 143,
+      "origin_rank": 144,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8933,7 +8995,7 @@
       ]
     },
     {
-      "rank": 144,
+      "rank": 145,
       "ref": "@aibast-agents-library/underwriting_support",
       "title": "Underwriting Support Agent",
       "description": "Evaluates underwriting queues from a live simulated Dynamics 365 tenant (quotes as submissions), with pricing demos and an offline fallback.",
@@ -8952,13 +9014,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 144,
+      "origin_rank": 145,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -8994,7 +9056,7 @@
       ]
     },
     {
-      "rank": 145,
+      "rank": 146,
       "ref": "@aibast-agents-library/voice_to_crm_email",
       "title": "Voice to CRM Email",
       "description": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback.",
@@ -9012,13 +9074,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
       "source": null,
       "score": 53.2,
-      "origin_rank": 145,
+      "origin_rank": 146,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8191,
         "depth": 0.9057,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9054,7 +9116,7 @@
       ]
     },
     {
-      "rank": 146,
+      "rank": 147,
       "ref": "@aibast-agents-library/account_risk_assessment",
       "title": "Account Risk Assessment",
       "description": "Scores deal risk, churn probability, and financial health with mitigation advice — on built-in demo accounts, or on real figures you supply via account_data.",
@@ -9072,13 +9134,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 146,
+      "origin_rank": 147,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9114,7 +9176,7 @@
       ]
     },
     {
-      "rank": 147,
+      "rank": 148,
       "ref": "@aibast-agents-library/ask_hr",
       "title": "Ask HR",
       "description": "Answers time-off, benefits, and policy questions from a live simulated HRIS joined to a Dynamics 365 CRM, with an offline demo fallback.",
@@ -9132,13 +9194,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 147,
+      "origin_rank": 148,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9174,7 +9236,7 @@
       ]
     },
     {
-      "rank": 148,
+      "rank": 149,
       "ref": "@aibast-agents-library/care_gap_closure",
       "title": "Care Gap Closure Agent",
       "description": "Analyzes HEDIS care gaps, joining live simulated FHIR appointment gap signals with the Dynamics 365 care-coordination queue; offline fallback.",
@@ -9193,13 +9255,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 148,
+      "origin_rank": 149,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9235,7 +9297,7 @@
       ]
     },
     {
-      "rank": 149,
+      "rank": 150,
       "ref": "@aibast-agents-library/client_health_score",
       "title": "Client Health Score Agent",
       "description": "Flags at-risk accounts from escalations and pipeline on a live simulated Dynamics 365 tenant, with an offline demo metric fallback.",
@@ -9253,13 +9315,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 149,
+      "origin_rank": 150,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9295,7 +9357,7 @@
       ]
     },
     {
-      "rank": 150,
+      "rank": 151,
       "ref": "@aibast-agents-library/clinical_notes_summarizer",
       "title": "Clinical Notes Summarizer Agent",
       "description": "Summarizes encounters and medication reviews, joining live simulated FHIR appointment-patient headers with the Dynamics 365 CRM; offline fallback.",
@@ -9314,13 +9376,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/healthcare_stacks/clinical_notes_summarizer_stack/clinical_notes_summarizer_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 150,
+      "origin_rank": 151,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9356,7 +9418,7 @@
       ]
     },
     {
-      "rank": 151,
+      "rank": 152,
       "ref": "@aibast-agents-library/contract_risk_review",
       "title": "Contract Risk Review Agent",
       "description": "Scans agreements for risk and drafts renegotiation briefs from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
@@ -9374,13 +9436,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_risk_review_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 151,
+      "origin_rank": 152,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9416,7 +9478,7 @@
       ]
     },
     {
-      "rank": 152,
+      "rank": 153,
       "ref": "@aibast-agents-library/customer_360",
       "title": "Customer 360",
       "description": "Builds unified customer profiles and timelines from a live simulated Dynamics 365 tenant (accounts, cases, emails), with an offline fallback.",
@@ -9434,13 +9496,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 152,
+      "origin_rank": 153,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9476,7 +9538,7 @@
       ]
     },
     {
-      "rank": 153,
+      "rank": 154,
       "ref": "@aibast-agents-library/deal_health_score",
       "title": "Deal Health Score",
       "description": "Scores deal health from live opportunities in a simulated Dynamics 365 tenant, with trends, alerts, and an embedded offline demo fallback.",
@@ -9494,13 +9556,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_health_score_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 153,
+      "origin_rank": 154,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9536,7 +9598,7 @@
       ]
     },
     {
-      "rank": 154,
+      "rank": 155,
       "ref": "@aibast-agents-library/find_accurate_models",
       "title": "Find Accurate Models",
       "description": "Compares models by accuracy, readiness, and cost, merging live catalog entries from a simulated Dynamics 365 tenant with offline fallback.",
@@ -9555,13 +9617,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 154,
+      "origin_rank": 155,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7964,
         "depth": 0.9424,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9597,7 +9659,7 @@
       ]
     },
     {
-      "rank": 155,
+      "rank": 156,
       "ref": "@aibast-agents-library/inventory_rebalancing",
       "title": "Inventory Rebalancing Agent",
       "description": "Analyzes stock vs demand and joins simulated ERP materials and goods receipts to the Dynamics 365 catalog, with an offline demo fallback.",
@@ -9615,13 +9677,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 155,
+      "origin_rank": 156,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9657,7 +9719,7 @@
       ]
     },
     {
-      "rank": 156,
+      "rank": 157,
       "ref": "@aibast-agents-library/omnichannel_engagement",
       "title": "Omnichannel Engagement Agent",
       "description": "Analyzes channel mix, journeys, and campaign attribution from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
@@ -9676,13 +9738,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 156,
+      "origin_rank": 157,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9718,7 +9780,7 @@
       ]
     },
     {
-      "rank": 157,
+      "rank": 158,
       "ref": "@aibast-agents-library/resource_utilization",
       "title": "Resource Utilization Agent",
       "description": "Reports consultant utilization and staffing plans from a live simulated Dynamics 365 tenant booking calendar, with an offline fallback.",
@@ -9736,13 +9798,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 157,
+      "origin_rank": 158,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9778,7 +9840,7 @@
       ]
     },
     {
-      "rank": 158,
+      "rank": 159,
       "ref": "@aibast-agents-library/sales_qualification",
       "title": "Sales Qualification",
       "description": "Tiers live leads from a simulated Dynamics 365 tenant by CRM rating and value, with ICP/BANT tooling and an embedded offline demo fallback.",
@@ -9797,13 +9859,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/sales_qualification_stack/sales_qualification_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 158,
+      "origin_rank": 159,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9839,7 +9901,7 @@
       ]
     },
     {
-      "rank": 159,
+      "rank": 160,
       "ref": "@aibast-agents-library/stalled_deal_detection",
       "title": "Stalled Deal Detection",
       "description": "Detects stalled deals from live opportunities in a simulated Dynamics 365 tenant using real CRM dates, with an embedded offline demo fallback.",
@@ -9857,13 +9919,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stalled_deal_detection_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 159,
+      "origin_rank": 160,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9899,7 +9961,7 @@
       ]
     },
     {
-      "rank": 160,
+      "rank": 161,
       "ref": "@aibast-agents-library/win_probability",
       "title": "Win Probability",
       "description": "Scores win probability for live deals from a simulated Dynamics 365 tenant, with factor analysis and an embedded offline demo fallback.",
@@ -9917,13 +9979,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/win_probability_agent.py",
       "source": null,
       "score": 53.1,
-      "origin_rank": 160,
+      "origin_rank": 161,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -9959,7 +10021,7 @@
       ]
     },
     {
-      "rank": 161,
+      "rank": 162,
       "ref": "@aibast-agents-library/cross_selling",
       "title": "Cross-Selling Opportunities",
       "description": "Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback.",
@@ -9977,13 +10039,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 161,
+      "origin_rank": 162,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7635,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10019,7 +10081,7 @@
       ]
     },
     {
-      "rank": 162,
+      "rank": 163,
       "ref": "@aibast-agents-library/fs_regulatory_compliance",
       "title": "FS Regulatory Compliance Agent",
       "description": "Tracks compliance findings and remediation from a live simulated Dynamics 365 tenant (cases and tasks), with an offline demo fallback.",
@@ -10043,13 +10105,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 162,
+      "origin_rank": 163,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7652,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10085,7 +10147,7 @@
       ]
     },
     {
-      "rank": 163,
+      "rank": 164,
       "ref": "@aibast-agents-library/it_ticket_management",
       "title": "IT Ticket Management",
       "description": "Builds ticket dashboards from live D365 cases plus a simulated ServiceNow-shaped ITSM desk, joining repeat-CI clusters to CRM cases; offline fallback.",
@@ -10104,13 +10166,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 163,
+      "origin_rank": 164,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7652,
         "depth": 0.9961,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10146,7 +10208,7 @@
       ]
     },
     {
-      "rank": 164,
+      "rank": 165,
       "ref": "@aibast-agents-library/next_best_action",
       "title": "Next Best Action",
       "description": "Recommends next actions for live deals from a simulated Dynamics 365 tenant, matched by CRM stage, with an embedded offline demo fallback.",
@@ -10164,13 +10226,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/next_best_action_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 164,
+      "origin_rank": 165,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7652,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10206,7 +10268,7 @@
       ]
     },
     {
-      "rank": 165,
+      "rank": 166,
       "ref": "@aibast-agents-library/one_click_crm_intake",
       "title": "One-Click CRM Intake",
       "description": "Runs CRM intake with duplicate checks against a live simulated Dynamics 365 tenant's leads, with an offline demo fallback.",
@@ -10224,13 +10286,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 165,
+      "origin_rank": 166,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8243,
         "depth": 0.8769,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10266,7 +10328,7 @@
       ]
     },
     {
-      "rank": 166,
+      "rank": 167,
       "ref": "@aibast-agents-library/personalized_shopping_assistant",
       "title": "Personalized Shopping Assistant Agent",
       "description": "Recommends products and checks a live catalog from a simulated Dynamics 365 tenant, with an offline demo fallback for every operation.",
@@ -10285,13 +10347,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 166,
+      "origin_rank": 167,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7674,
         "depth": 0.9921,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10327,7 +10389,7 @@
       ]
     },
     {
-      "rank": 167,
+      "rank": 168,
       "ref": "@aibast-agents-library/portfolio_rebalancing",
       "title": "Portfolio Rebalancing Agent",
       "description": "Analyzes portfolio drift and trades from a live simulated Dynamics 365 tenant (product lines as positions), with an offline demo fallback.",
@@ -10348,13 +10410,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 167,
+      "origin_rank": 168,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7635,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10390,7 +10452,7 @@
       ]
     },
     {
-      "rank": 168,
+      "rank": 169,
       "ref": "@aibast-agents-library/procurement_support",
       "title": "Procurement Support",
       "description": "Tracks requisitions and supplier signals over a simulated Dynamics 365 tenant and ERP (POs, receipts, blocked invoices), with offline fallback.",
@@ -10408,13 +10470,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 168,
+      "origin_rank": 169,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.9882,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10450,7 +10512,7 @@
       ]
     },
     {
-      "rank": 169,
+      "rank": 170,
       "ref": "@aibast-agents-library/proposal_generation",
       "title": "Proposal Generation",
       "description": "Analyzes RFPs and live quotes from a simulated Dynamics 365 tenant into proposal packages with pricing, plus an embedded offline demo fallback.",
@@ -10469,13 +10531,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 169,
+      "origin_rank": 170,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7652,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10511,7 +10573,7 @@
       ]
     },
     {
-      "rank": 170,
+      "rank": 171,
       "ref": "@aibast-agents-library/software_customer_onboarding",
       "title": "Customer Onboarding Agent",
       "description": "Tracks onboarding pipelines and blockers from a live simulated Dynamics 365 tenant's accounts and cases, with an offline demo fallback.",
@@ -10529,13 +10591,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/software_dp_stacks/customer_onboarding_stack/customer_onboarding_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 170,
+      "origin_rank": 171,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7652,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10571,7 +10633,7 @@
       ]
     },
     {
-      "rank": 171,
+      "rank": 172,
       "ref": "@aibast-agents-library/triage_bot",
       "title": "Triage Bot",
       "description": "Classifies live D365 cases and ServiceNow-shaped ITSM incidents, comparing classifier verdicts to live desk priorities; routes and hands off; offline-safe.",
@@ -10589,13 +10651,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/triage_bot_stack/triage_bot_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 171,
+      "origin_rank": 172,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.9869,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10631,7 +10693,7 @@
       ]
     },
     {
-      "rank": 172,
+      "rank": 173,
       "ref": "@aibast-agents-library/workforce_clearance_onboarding",
       "title": "Workforce Clearance & Onboarding Agent",
       "description": "Tracks onboarding blockers from a live simulated Dynamics 365 CRM joined to an HRIS hire roster, with clearance checklists that work offline.",
@@ -10650,13 +10712,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 172,
+      "origin_rank": 173,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7635,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10692,7 +10754,7 @@
       ]
     },
     {
-      "rank": 173,
+      "rank": 174,
       "ref": "@kody-w/matrix_arena_agent",
       "title": "Matrix Arena",
       "description": "Drives multiple headless RAPP Commons browser tabs via a local Playwright harness to sync-test host-led presence, signed actions, and succession.",
@@ -10710,13 +10772,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/matrix_arena_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 173,
+      "origin_rank": 174,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7054,
-        "freshness": 0.7156,
+        "freshness": 0.7147,
         "tier": 0.55
       },
       "scores_on": [
@@ -10754,7 +10816,7 @@
       ]
     },
     {
-      "rank": 174,
+      "rank": 175,
       "ref": "@rapp/ping_agent",
       "title": "Ping",
       "description": "Returns 'pong'. The smallest possible agent — useful as a smoke test that the brainstem can discover, load, and dispatch a tool call end-to-end.",
@@ -10770,13 +10832,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/ping_agent.py",
       "source": null,
       "score": 53.0,
-      "origin_rank": 174,
+      "origin_rank": 175,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.45,
-        "freshness": 0.5238,
+        "freshness": 0.5232,
         "tier": 1.0
       },
       "scores_on": [
@@ -10814,7 +10876,7 @@
       ]
     },
     {
-      "rank": 175,
+      "rank": 176,
       "ref": "@aibast-agents-library/cart_abandonment_recovery",
       "title": "Cart Abandonment Recovery Agent",
       "description": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback.",
@@ -10833,13 +10895,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py",
       "source": null,
       "score": 52.9,
-      "origin_rank": 175,
+      "origin_rank": 176,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7622,
         "depth": 1.0,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10875,7 +10937,7 @@
       ]
     },
     {
-      "rank": 176,
+      "rank": 177,
       "ref": "@aibast-agents-library/email_drafting",
       "title": "Email Drafting",
       "description": "Drafts outreach, follow-up, and proposal emails personalized with live contacts from a simulated Dynamics 365 tenant, with offline fallback.",
@@ -10894,13 +10956,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py",
       "source": null,
       "score": 52.9,
-      "origin_rank": 176,
+      "origin_rank": 177,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.8031,
         "depth": 0.9123,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -10936,7 +10998,7 @@
       ]
     },
     {
-      "rank": 177,
+      "rank": 178,
       "ref": "@bill/neuron_agent",
       "title": "Neuron",
       "description": "Injects a compact Knowledge Base block of hardcoded Copilot Studio and Dataverse lessons into the brainstem prompt at session start.",
@@ -10958,13 +11020,13 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py",
       "source": null,
       "score": 52.9,
-      "origin_rank": 177,
+      "origin_rank": 178,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8481,
-        "freshness": 0.5704,
+        "freshness": 0.5697,
         "tier": 0.55
       },
       "scores_on": [
@@ -11002,69 +11064,6 @@
       ]
     },
     {
-      "rank": 178,
-      "ref": "@kody-w/art_generator_agent",
-      "title": "Art Generator",
-      "description": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it.",
-      "origin": "native",
-      "category": "creative",
-      "tags": [
-        "art",
-        "image-generation",
-        "azure-openai",
-        "creative"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fart_generator_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/art_generator_agent.py",
-      "source": null,
-      "score": 52.9,
-      "origin_rank": 178,
-      "origin_size": 300,
-      "components": {
-        "community": 0.0,
-        "curator": 0.7804,
-        "depth": 0.8311,
-        "freshness": 0.5837,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "curator",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community",
-        "curator",
-        "freshness"
-      ],
-      "signals": {
-        "rar": {
-          "curator_mean": null,
-          "curator_n": 0,
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": null,
-          "lines": 371,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "not yet reviewed - scored at the population median",
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "no recorded add date - scored at the population median",
-        "371 lines",
-        "has a rendered card"
-      ]
-    },
-    {
       "rank": 179,
       "ref": "@aibast-agents-library/account_intelligence_orchestrator_agent",
       "title": "Account Intelligence Orchestrator",
@@ -11089,7 +11088,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.9437,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -11151,7 +11150,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.856,
-        "freshness": 0.5474,
+        "freshness": 0.5468,
         "tier": 0.55
       },
       "scores_on": [
@@ -11173,7 +11172,7 @@
           "engagement": 0,
           "channels": {},
           "tier": "community",
-          "age_days": 104,
+          "age_days": 105,
           "lines": 390,
           "has_card": true
         },
@@ -11183,7 +11182,7 @@
         "not yet reviewed - scored at the population median",
         "no community feedback yet",
         "community tier",
-        "added 104 days ago",
+        "added 105 days ago",
         "390 lines",
         "has a rendered card"
       ]
@@ -11213,7 +11212,7 @@
         "community": 0.0,
         "curator": 0.7652,
         "depth": 0.9699,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -11273,7 +11272,7 @@
         "community": 0.0,
         "curator": 0.8119,
         "depth": 0.8717,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -11333,7 +11332,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.7617,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.55
       },
       "scores_on": [
@@ -11372,21 +11371,21 @@
     },
     {
       "rank": 184,
-      "ref": "@aibast-agents-library/competitive_intelligence",
-      "title": "Competitive Intelligence",
-      "description": "Builds competitive landscape analyses, win/loss reviews, and battlecards for enterprise deals from built-in demo data.",
+      "ref": "@aibast-agents-library/deal_competitor_intel",
+      "title": "Deal Competitor Intelligence",
+      "description": "Maps competitive exposure across live deals from a simulated Dynamics 365 tenant, with threat scores and an embedded offline demo fallback.",
       "origin": "native",
       "category": "b2b_sales",
       "tags": [
         "b2b",
         "sales",
         "competitive-intelligence",
-        "battlecards",
-        "win-loss"
+        "deal-progression",
+        "strategy"
       ],
       "audience": "business",
-      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fcompetitive_intelligence",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/competitive_intelligence_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fdeal_competitor_intel",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/competitor_intelligence_agent.py",
       "source": null,
       "score": 52.2,
       "origin_rank": 184,
@@ -11394,8 +11393,8 @@
       "components": {
         "community": 0.0,
         "curator": 0.7743,
-        "depth": 0.9227,
-        "freshness": 0.4557,
+        "depth": 0.928,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -11416,7 +11415,7 @@
           "channels": {},
           "tier": "community",
           "age_days": 136,
-          "lines": 441,
+          "lines": 445,
           "has_card": true
         },
         "source": null
@@ -11426,27 +11425,28 @@
         "no community feedback yet",
         "community tier",
         "added 136 days ago",
-        "441 lines",
+        "445 lines",
         "has a rendered card"
       ]
     },
     {
       "rank": 185,
-      "ref": "@aibast-agents-library/deal_competitor_intel",
-      "title": "Deal Competitor Intelligence",
-      "description": "Maps competitive exposure across live deals from a simulated Dynamics 365 tenant, with threat scores and an embedded offline demo fallback.",
+      "ref": "@aibast-agents-library/dynamics_365_connector",
+      "title": "Dynamics 365 Connector",
+      "description": "Queries live entities from a simulated Dynamics 365 tenant over HTTP, with simulated writes and an offline schema/demo fallback.",
       "origin": "native",
-      "category": "b2b_sales",
+      "category": "general",
       "tags": [
-        "b2b",
-        "sales",
-        "competitive-intelligence",
-        "deal-progression",
-        "strategy"
+        "dynamics-365",
+        "crm",
+        "d365",
+        "entity",
+        "bulk-import",
+        "schema"
       ],
-      "audience": "business",
-      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fdeal_competitor_intel",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/competitor_intelligence_agent.py",
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fdynamics_365_connector",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/dynamics_365_agent.py",
       "source": null,
       "score": 52.2,
       "origin_rank": 185,
@@ -11455,7 +11455,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 0.928,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -11492,31 +11492,30 @@
     },
     {
       "rank": 186,
-      "ref": "@aibast-agents-library/dynamics_365_connector",
-      "title": "Dynamics 365 Connector",
-      "description": "Queries live entities from a simulated Dynamics 365 tenant over HTTP, with simulated writes and an offline schema/demo fallback.",
+      "ref": "@aibast-agents-library/competitive_intelligence",
+      "title": "Competitive Intelligence",
+      "description": "Builds competitive landscape analyses, win/loss reviews, and battlecards for enterprise deals from built-in demo data.",
       "origin": "native",
-      "category": "general",
+      "category": "b2b_sales",
       "tags": [
-        "dynamics-365",
-        "crm",
-        "d365",
-        "entity",
-        "bulk-import",
-        "schema"
+        "b2b",
+        "sales",
+        "competitive-intelligence",
+        "battlecards",
+        "win-loss"
       ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fdynamics_365_connector",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/dynamics_365_agent.py",
+      "audience": "business",
+      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fcompetitive_intelligence",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/competitive_intelligence_agent.py",
       "source": null,
-      "score": 52.2,
+      "score": 52.1,
       "origin_rank": 186,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7743,
-        "depth": 0.928,
-        "freshness": 0.4557,
+        "depth": 0.9227,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -11537,7 +11536,7 @@
           "channels": {},
           "tier": "community",
           "age_days": 136,
-          "lines": 445,
+          "lines": 441,
           "has_card": true
         },
         "source": null
@@ -11547,7 +11546,7 @@
         "no community feedback yet",
         "community tier",
         "added 136 days ago",
-        "445 lines",
+        "441 lines",
         "has a rendered card"
       ]
     },
@@ -11578,7 +11577,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 0.8769,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -11638,7 +11637,7 @@
         "community": 0.0,
         "curator": 0.7743,
         "depth": 0.9123,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -11698,7 +11697,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8926,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -11758,7 +11757,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.6425,
-        "freshness": 0.7156,
+        "freshness": 0.7147,
         "tier": 0.55
       },
       "scores_on": [
@@ -11821,7 +11820,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 0.9214,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -11882,7 +11881,7 @@
         "community": 0.0,
         "curator": 0.7652,
         "depth": 0.9267,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -11942,7 +11941,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8101,
-        "freshness": 0.5417,
+        "freshness": 0.541,
         "tier": 0.55
       },
       "scores_on": [
@@ -12004,7 +12003,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.907,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -12071,7 +12070,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 1.0,
+        "freshness": 0.9988,
         "tier": 0.3
       },
       "scores_on": [
@@ -12153,7 +12152,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 1.0,
+        "freshness": 0.9988,
         "tier": 0.3
       },
       "scores_on": [
@@ -12235,7 +12234,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 1.0,
+        "freshness": 0.9988,
         "tier": 0.3
       },
       "scores_on": [
@@ -12315,7 +12314,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 1.0,
+        "freshness": 0.9988,
         "tier": 0.3
       },
       "scores_on": [
@@ -12381,14 +12380,14 @@
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fdouble_jump_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/double_jump_agent.py",
       "source": null,
-      "score": 51.8,
+      "score": 51.7,
       "origin_rank": 199,
       "origin_size": 300,
       "components": {
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.6242,
-        "freshness": 0.7156,
+        "freshness": 0.7148,
         "tier": 0.55
       },
       "scores_on": [
@@ -12451,7 +12450,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.8664,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -12512,7 +12511,7 @@
         "community": 0.0,
         "curator": 0.7964,
         "depth": 0.8415,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -12573,7 +12572,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5456,
-        "freshness": 0.785,
+        "freshness": 0.7841,
         "tier": 0.55
       },
       "scores_on": [
@@ -12635,7 +12634,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.6137,
-        "freshness": 0.7154,
+        "freshness": 0.7146,
         "tier": 0.55
       },
       "scores_on": [
@@ -12697,7 +12696,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 0.8952,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -12757,7 +12756,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.8782,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -12817,7 +12816,7 @@
         "community": 0.0,
         "curator": 0.7703,
         "depth": 0.8664,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -12885,7 +12884,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.3
       },
       "scores_on": [
@@ -12965,7 +12964,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.3
       },
       "scores_on": [
@@ -13044,7 +13043,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.3
       },
       "scores_on": [
@@ -13123,7 +13122,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.3
       },
       "scores_on": [
@@ -13204,7 +13203,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.3
       },
       "scores_on": [
@@ -13285,7 +13284,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.3
       },
       "scores_on": [
@@ -13366,7 +13365,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.3
       },
       "scores_on": [
@@ -13445,7 +13444,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.3
       },
       "scores_on": [
@@ -13522,7 +13521,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9631,
+        "freshness": 0.9619,
         "tier": 0.3
       },
       "scores_on": [
@@ -13592,7 +13591,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.45,
-        "freshness": 0.8412,
+        "freshness": 0.8402,
         "tier": 0.55
       },
       "scores_on": [
@@ -13654,7 +13653,7 @@
         "community": 0.0,
         "curator": 0.7674,
         "depth": 0.8402,
-        "freshness": 0.4557,
+        "freshness": 0.4551,
         "tier": 0.55
       },
       "scores_on": [
@@ -13715,7 +13714,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.6543,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.55
       },
       "scores_on": [
@@ -13784,7 +13783,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -13862,7 +13861,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -13940,7 +13939,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14019,7 +14018,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14098,7 +14097,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14174,7 +14173,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14255,7 +14254,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14334,7 +14333,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14414,7 +14413,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14493,7 +14492,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14572,7 +14571,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14651,7 +14650,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14730,7 +14729,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14808,7 +14807,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14888,7 +14887,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -14965,7 +14964,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15043,7 +15042,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15120,7 +15119,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15196,7 +15195,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15277,7 +15276,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15352,7 +15351,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15428,7 +15427,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15506,7 +15505,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15585,7 +15584,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15664,7 +15663,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15744,7 +15743,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15821,7 +15820,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15901,7 +15900,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -15980,7 +15979,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16059,7 +16058,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16138,7 +16137,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16214,7 +16213,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16293,7 +16292,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16372,7 +16371,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16453,7 +16452,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16531,7 +16530,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16609,7 +16608,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16689,7 +16688,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16767,7 +16766,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16847,7 +16846,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -16925,7 +16924,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17006,7 +17005,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17084,7 +17083,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17161,7 +17160,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17239,7 +17238,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17320,7 +17319,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17400,7 +17399,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17481,7 +17480,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17560,7 +17559,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17639,7 +17638,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17718,7 +17717,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17798,7 +17797,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17876,7 +17875,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -17957,7 +17956,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18035,7 +18034,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18113,7 +18112,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18190,7 +18189,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18269,7 +18268,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18346,7 +18345,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18424,7 +18423,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18502,7 +18501,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18577,7 +18576,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18655,7 +18654,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18733,7 +18732,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18810,7 +18809,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18888,7 +18887,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -18966,7 +18965,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19044,7 +19043,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19121,7 +19120,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19200,7 +19199,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19280,7 +19279,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19357,7 +19356,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19436,7 +19435,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19516,7 +19515,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19596,7 +19595,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19676,7 +19675,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5914,
-        "freshness": 0.9075,
+        "freshness": 0.9064,
         "tier": 0.3
       },
       "scores_on": [
@@ -19748,7 +19747,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5011,
-        "freshness": 0.7154,
+        "freshness": 0.7146,
         "tier": 0.55
       },
       "scores_on": [
@@ -19808,7 +19807,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.45,
-        "freshness": 0.5842,
+        "freshness": 0.5835,
         "tier": 0.55
       },
       "scores_on": [
@@ -19869,7 +19868,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.5404,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -19927,7 +19926,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.45,
-        "freshness": 0.4637,
+        "freshness": 0.4631,
         "tier": 0.55
       },
       "scores_on": [
@@ -19985,7 +19984,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.45,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.3
       },
       "scores_on": [
@@ -20046,7 +20045,7 @@
         "community": 0.0,
         "curator": 0.7804,
         "depth": 0.45,
-        "freshness": 0.6126,
+        "freshness": 0.6118,
         "tier": 0.3
       },
       "scores_on": [
