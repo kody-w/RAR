@@ -1,10 +1,10 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-18T22:17:46Z",
+  "generated": "2026-08-18T22:24:56Z",
   "categories": [
     {
       "name": "general",
-      "count": 64
+      "count": 65
     },
     {
       "name": "productivity",
@@ -106,7 +106,7 @@
     },
     {
       "name": "@cat-agent-skills",
-      "count": 89
+      "count": 90
     },
     {
       "name": "@kody-w",
@@ -148,7 +148,7 @@
     },
     {
       "name": "frontier",
-      "count": 89
+      "count": 90
     },
     {
       "name": "official",
@@ -241,15 +241,15 @@
       "count": 9
     },
     {
+      "name": "copilot_studio",
+      "count": 9
+    },
+    {
       "name": "sharepoint",
       "count": 8
     },
     {
       "name": "presentations",
-      "count": 8
-    },
-    {
-      "name": "copilot_studio",
       "count": 8
     },
     {
@@ -389,6 +389,10 @@
       "count": 5
     },
     {
+      "name": "architecture",
+      "count": 5
+    },
+    {
       "name": "knowledge",
       "count": 5
     },
@@ -482,10 +486,6 @@
     },
     {
       "name": "charts",
-      "count": 4
-    },
-    {
-      "name": "architecture",
       "count": 4
     },
     {
@@ -601,6 +601,10 @@
       "count": 3
     },
     {
+      "name": "advisor",
+      "count": 3
+    },
+    {
       "name": "portfolio",
       "count": 3
     },
@@ -698,6 +702,10 @@
     },
     {
       "name": "matplotlib",
+      "count": 3
+    },
+    {
+      "name": "agents",
       "count": 3
     },
     {
@@ -881,10 +889,6 @@
       "count": 2
     },
     {
-      "name": "advisor",
-      "count": 2
-    },
-    {
       "name": "ai",
       "count": 2
     },
@@ -1038,10 +1042,6 @@
     },
     {
       "name": "conference",
-      "count": 2
-    },
-    {
-      "name": "agents",
       "count": 2
     },
     {

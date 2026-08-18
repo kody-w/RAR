@@ -3,8 +3,8 @@
   "name": "RAR Pok\u00e9dex API",
   "description": "Static catalog API for bare RAPP agents (single-file Python, BasicAgent subclass, perform()). Mirrors the RAPP_Store API shape so the rapp-zoo can browse all federation stores with the same client code. Each entry has a sprite, a downloadable .py (and .card holocard if shipped), lineage back to the species root, and stats (lines, size, sha256).",
   "version": "1.0.0",
-  "generated_at": "2026-08-18T22:13:40Z",
-  "count": 303,
+  "generated_at": "2026-08-18T22:23:16Z",
+  "count": 304,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/index.json",
   "agents": [
     {
@@ -1737,6 +1737,19 @@
       "card": null
     },
     {
+      "id": "cat-agent-skills__copilot_agent_advisor",
+      "name": "Copilot Agent Advisor",
+      "rar_name": "@cat-agent-skills/copilot_agent_advisor",
+      "publisher": "@cat-agent-skills",
+      "category": "general",
+      "version": "2.0.0",
+      "has_card": false,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__copilot_agent_advisor.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__copilot_agent_advisor.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__copilot_agent_advisor.py",
+      "card": null
+    },
+    {
       "id": "cat-agent-skills__copilot_agents_news_scout",
       "name": "Copilot & Agents News Scout",
       "rar_name": "@cat-agent-skills/copilot_agents_news_scout",
@@ -3082,7 +3095,7 @@
       "publisher": "@kody-w",
       "category": "creative",
       "version": "1.0.0",
-      "has_card": false,
+      "has_card": true,
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__education_shorts_agent.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__education_shorts_agent.svg",
       "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__education_shorts_agent.py",

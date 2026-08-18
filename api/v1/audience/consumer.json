@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-08-18T22:17:46Z",
-  "count": 197,
+  "generated": "2026-08-18T22:24:56Z",
+  "count": 198,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -1660,6 +1660,40 @@
         "lines": 188,
         "size_kb": 8.9,
         "added_at": "2026-07-31T22:43:16-04:00"
+      }
+    },
+    {
+      "id": "cat-agent-skills__copilot_agent_advisor",
+      "name": "@cat-agent-skills/copilot_agent_advisor",
+      "display_name": "Copilot Agent Advisor",
+      "description": "Tells you which Microsoft 365 / Copilot Studio agent option fits your scenario — use M365 Copilot as-is, build a standard (declarative) agent, or build a custom (custom engine) agent — and which Copilot Studio harness (GitHub Copilot, standard, or Copilot chat) to build on.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Sandra Boucenna",
+      "category": "general",
+      "tags": [
+        "copilot_studio",
+        "agents",
+        "decision_support",
+        "architecture",
+        "advisor"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
+        "sha256": "d5cab65242f9c79bd79a21ec4e81f0801c1a64324d0619408d61a25528cbba8d"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.3,
+        "added_at": null
       }
     },
     {
@@ -4615,7 +4649,7 @@
       "stats": {
         "lines": 259,
         "size_kb": 14.9,
-        "added_at": "2026-08-18T18:08:38-04:00"
+        "added_at": "2026-08-18T18:19:54-04:00"
       }
     },
     {

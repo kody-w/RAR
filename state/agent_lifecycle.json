@@ -1474,6 +1474,17 @@
       "updated_at": "2026-08-02T01:35:52.563615+00:00",
       "version": "1.1.0"
     },
+    "@cat-agent-skills/copilot_agent_advisor": {
+      "canonical_path": "agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
+      "latest_receipt": "rar_cd6b985563f80b81bc3ffea8494418a7bb15f8f38bdfcc39b876988369753e23",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "frontier",
+      "sha256": "d5cab65242f9c79bd79a21ec4e81f0801c1a64324d0619408d61a25528cbba8d",
+      "status": "active",
+      "updated_at": "2026-08-18T22:23:01.360728+00:00",
+      "version": "2.0.0"
+    },
     "@cat-agent-skills/copilot_agents_news_scout": {
       "canonical_path": "agents/@cat-agent-skills/copilot_agents_news_scout_agent.py",
       "latest_receipt": "rar_033e4570c410dd8c599f2f280bb68fc19a580a923958473458914ccedd043cf4",
@@ -3599,5 +3610,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-18T22:08:19.735462+00:00"
+  "updated_at": "2026-08-18T22:23:01.360728+00:00"
 }

@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-08-18T22:17:46Z",
+  "generated": "2026-08-18T22:24:56Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 106,
     "consumer_only": 3,
-    "both": 194,
-    "in_business_mode": 300,
-    "in_consumer_mode": 197
+    "both": 195,
+    "in_business_mode": 301,
+    "in_consumer_mode": 198
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -149,6 +149,7 @@
     "@cat-agent-skills/conditional_chat_reminder": "b",
     "@cat-agent-skills/conference_session_abstract_pack": "x",
     "@cat-agent-skills/content_quality_auditor": "b",
+    "@cat-agent-skills/copilot_agent_advisor": "x",
     "@cat-agent-skills/copilot_agents_news_scout": "b",
     "@cat-agent-skills/copilot_studio_agent_test": "x",
     "@cat-agent-skills/copilot_studio_harness_picker": "x",
