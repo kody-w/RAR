@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-17T22:07:37Z",
+  "generated": "2026-08-18T03:00:35Z",
   "categories": [
     {
       "name": "general",
@@ -51,6 +51,10 @@
       "count": 6
     },
     {
+      "name": "creative",
+      "count": 6
+    },
+    {
       "name": "federal_government",
       "count": 5
     },
@@ -76,10 +80,6 @@
     },
     {
       "name": "software_digital_products",
-      "count": 5
-    },
-    {
-      "name": "creative",
       "count": 5
     },
     {
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 57
+      "count": 58
     },
     {
       "name": "@rapp",
@@ -144,7 +144,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 163
+      "count": 164
     },
     {
       "name": "frontier",
@@ -1169,6 +1169,10 @@
       "count": 2
     },
     {
+      "name": "creative",
+      "count": 2
+    },
+    {
       "name": "heartbeat",
       "count": 2
     },
@@ -1358,10 +1362,6 @@
     },
     {
       "name": "time-off",
-      "count": 1
-    },
-    {
-      "name": "employee-self-service",
       "count": 1
     }
   ]

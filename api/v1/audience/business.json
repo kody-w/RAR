@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-17T22:07:37Z",
-  "count": 296,
+  "generated": "2026-08-18T03:00:35Z",
+  "count": 297,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -7557,6 +7557,41 @@
         "lines": 227,
         "size_kb": 13.3,
         "added_at": "2026-06-20T19:39:59-04:00"
+      }
+    },
+    {
+      "id": "kody-w__art_generator_agent",
+      "name": "@kody-w/art_generator_agent",
+      "display_name": "Art Generator",
+      "description": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "RAPP Community",
+      "category": "creative",
+      "tags": [
+        "art",
+        "image-generation",
+        "azure-openai",
+        "creative"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [
+        "AZURE_OPENAI_ENDPOINT"
+      ],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/art_generator_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/art_generator_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/art_generator_agent.py",
+        "sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712"
+      },
+      "stats": {
+        "lines": 371,
+        "size_kb": 11.2,
+        "added_at": null
       }
     },
     {

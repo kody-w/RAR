@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-17T22:07:34.964395+00:00",
+  "generated_at": "2026-08-18T03:01:46.277354+00:00",
   "stats": {
-    "total_agents": 299,
+    "total_agents": 300,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -12882,6 +12882,70 @@
       "_seed_aliases": [
         17854677441894297361
       ]
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/art_generator_agent",
+      "version": "1.0.0",
+      "display_name": "Art Generator",
+      "description": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it.",
+      "author": "RAPP Community",
+      "tags": [
+        "art",
+        "image-generation",
+        "azure-openai",
+        "creative"
+      ],
+      "category": "creative",
+      "quality_tier": "community",
+      "requires_env": [
+        "AZURE_OPENAI_ENDPOINT"
+      ],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "Azure CLI login or managed identity",
+        "Azure OpenAI GPT Image deployments"
+      ],
+      "example_call": {
+        "args": {
+          "description": "A detailed original illustration",
+          "quality": "medium"
+        }
+      },
+      "_file": "agents/@kody-w/art_generator_agent.py",
+      "_install_filename": "rar_kody_w_art_generator_agent.py",
+      "_sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_124b90e6dad406484619ccf3a1a92ca401f50205e7229493a474d8759e3b3a72",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 565,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 50994286691416024678,
+      "_size_kb": 11.2,
+      "_lines": 371,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "d7b0f97d3ee142887d5656d972e4be0066ecef2b2c1304fc592c6894dc2fc25b"
     },
     {
       "schema": "rapp-agent/1.0",
