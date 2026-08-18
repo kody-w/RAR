@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 89,
+      "item_count": 90,
       "source_downloads": 1258
     }
   ],
@@ -794,6 +794,35 @@
       "created_at": "2026-07-17T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#content-quality-auditor",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/copilot_agent_advisor",
+      "source_id": "cat-agent-skills",
+      "source_slug": "copilot-agent-advisor",
+      "name": "Copilot Agent Advisor",
+      "description": "Tells you which Microsoft 365 / Copilot Studio agent option fits your scenario \u2014 use M365 Copilot as-is, build a standard (declarative) agent, or build a custom (custom engine) agent \u2014 and which Copilot Studio harness (GitHub Copilot, standard, or Copilot chat) to build on.",
+      "kind": "skill",
+      "tags": [
+        "copilot-studio",
+        "agents",
+        "decision-support",
+        "architecture",
+        "advisor"
+      ],
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "author": "Sandra Boucenna",
+      "author_github": "SandraBcna",
+      "version": "1.0.0",
+      "created_at": "2026-08-04T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#copilot-agent-advisor",
       "source_signal": {
         "downloads": 0
       }
@@ -2079,7 +2108,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#rich-html-presentation",
       "source_signal": {
         "downloads": 110,
-        "rating": 2
+        "rating": 3
       }
     },
     {
@@ -2609,7 +2638,7 @@
   ],
   "totals": {
     "sources": 1,
-    "items": 89,
+    "items": 90,
     "source_downloads": 1258
   }
 }
