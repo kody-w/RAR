@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-18T05:49:13Z",
+ "generated_at": "2026-08-18T22:20:15Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 104,
-  "size_kb": 66098,
+  "size_kb": 70847,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-18T05:05:49Z",
+  "pushed_at": "2026-08-18T22:20:01Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 302,
+  "agents": 303,
   "swarms": 82,
   "publishers": 10,
   "categories": 24,
-  "total_lines": 176827,
-  "total_kb": 8349.6,
+  "total_lines": 177086,
+  "total_kb": 8364.5,
   "votes": 5,
   "upvotes": 4,
   "downvotes": 1,
@@ -377,24 +377,24 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-18T05:05:45Z",
+  "generated_at": "2026-08-18T22:20:11Z",
   "agents_scored": 37,
   "critic_reviews": 132,
   "model_reviews": 132,
-  "rubric_reviews": 1380,
+  "rubric_reviews": 1385,
   "avg_critic_score": 23,
   "avg_user_score": 75,
   "by_state": {
-   "unrated": 266,
+   "unrated": 267,
    "fresh": 8,
    "rotten": 29
   },
   "backends": {
-   "rubric": 293,
+   "rubric": 294,
    "github-models:openai/gpt-4.1-mini": 37,
    "github-models:openai/gpt-4.1": 26
   },
-  "rubric_only_agents": 266
+  "rubric_only_agents": 267
  },
  "leaderboards": {
   "top_critic": [
@@ -1471,6 +1471,30 @@
   ],
   "newest": [
    {
+    "name": "@kody-w/education_shorts_agent",
+    "display_name": "Education Shorts",
+    "publisher": "@kody-w",
+    "category": "creative",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "down": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 259,
+    "size_kb": 14.9,
+    "added_at": "2026-08-18T18:08:38-04:00",
+    "file": "agents/@kody-w/education_shorts_agent.py",
+    "description": "Turns a topic into an animated 9:16 educational YouTube Short: linted script, HyperFrames composition, check, MP4 \u2014 every stage a file on a chained ledger.",
+    "curator_reviews": 0,
+    "curator_rating": 0.0,
+    "critic_score": null,
+    "critic_count": 0,
+    "user_score": null,
+    "tomato": "unrated"
+   },
+   {
     "name": "@kody-w/play_youtube_video_agent",
     "display_name": "Play YouTube Video",
     "publisher": "@kody-w",
@@ -1805,30 +1829,6 @@
     "critic_count": 0,
     "user_score": null,
     "tomato": "unrated"
-   },
-   {
-    "name": "@cat-agent-skills/copilot_studio_harness_picker",
-    "display_name": "Copilot Studio Harness Picker",
-    "publisher": "@cat-agent-skills",
-    "category": "general",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "down": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 188,
-    "size_kb": 9.1,
-    "added_at": "2026-08-11T09:43:05Z",
-    "file": "agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
-    "description": "Choose the right Copilot Studio harness and build shape; in Cowork, use GPT-5.6 with High effort for Detailed mode, Claude Opus 5 as fallback, or Auto for Quick mode.",
-    "curator_reviews": 0,
-    "curator_rating": 0.0,
-    "critic_score": null,
-    "critic_count": 0,
-    "user_score": null,
-    "tomato": "unrated"
    }
   ],
   "publishers": [
@@ -1854,11 +1854,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 60,
+    "agents": 61,
     "downloads": 4,
     "score": 1,
     "reviews": 0,
-    "lines": 55078,
+    "lines": 55337,
     "curator_reviews": 1,
     "rating": 0.0
    },
@@ -2005,6 +2005,13 @@
     "reviews": 0
    },
    {
+    "name": "creative",
+    "agents": 7,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
     "name": "platform",
     "agents": 7,
     "downloads": 0,
@@ -2013,13 +2020,6 @@
    },
    {
     "name": "energy",
-    "agents": 6,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
-   },
-   {
-    "name": "creative",
     "agents": 6,
     "downloads": 0,
     "score": 0,
@@ -2106,7 +2106,7 @@
   "tiers": {
    "community": 166,
    "frontier": 89,
-   "official": 40,
+   "official": 41,
    "verified": 5,
    "private": 2
   }
