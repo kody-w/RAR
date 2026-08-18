@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-18T22:20:15Z",
+ "generated_at": "2026-08-18T22:26:38Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -12,7 +12,7 @@
   "open_issues": 104,
   "size_kb": 70847,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-18T22:20:01Z",
+  "pushed_at": "2026-08-18T22:26:23Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 303,
+  "agents": 304,
   "swarms": 82,
   "publishers": 10,
   "categories": 24,
-  "total_lines": 177086,
-  "total_kb": 8364.5,
+  "total_lines": 177274,
+  "total_kb": 8373.8,
   "votes": 5,
   "upvotes": 4,
   "downvotes": 1,
@@ -377,24 +377,24 @@
     "lens": "what this costs to own six months from now \u2014 clarity, error handling, and how it fails"
    }
   ],
-  "generated_at": "2026-08-18T22:20:11Z",
+  "generated_at": "2026-08-18T22:26:35Z",
   "agents_scored": 37,
   "critic_reviews": 132,
   "model_reviews": 132,
-  "rubric_reviews": 1385,
+  "rubric_reviews": 1390,
   "avg_critic_score": 23,
   "avg_user_score": 75,
   "by_state": {
-   "unrated": 267,
+   "unrated": 268,
    "fresh": 8,
    "rotten": 29
   },
   "backends": {
-   "rubric": 294,
+   "rubric": 295,
    "github-models:openai/gpt-4.1-mini": 37,
    "github-models:openai/gpt-4.1": 26
   },
-  "rubric_only_agents": 267
+  "rubric_only_agents": 268
  },
  "leaderboards": {
   "top_critic": [
@@ -1484,7 +1484,7 @@
     "rating": 0.0,
     "lines": 259,
     "size_kb": 14.9,
-    "added_at": "2026-08-18T18:08:38-04:00",
+    "added_at": "2026-08-18T18:19:54-04:00",
     "file": "agents/@kody-w/education_shorts_agent.py",
     "description": "Turns a topic into an animated 9:16 educational YouTube Short: linted script, HyperFrames composition, check, MP4 \u2014 every stage a file on a chained ledger.",
     "curator_reviews": 0,
@@ -1844,11 +1844,11 @@
    },
    {
     "name": "@cat-agent-skills",
-    "agents": 89,
+    "agents": 90,
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 16732,
+    "lines": 16920,
     "curator_reviews": 0,
     "rating": 0.0
    },
@@ -1936,7 +1936,7 @@
   "categories": [
    {
     "name": "general",
-    "agents": 64,
+    "agents": 65,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -2105,7 +2105,7 @@
   ],
   "tiers": {
    "community": 166,
-   "frontier": 89,
+   "frontier": 90,
    "official": 41,
    "verified": 5,
    "private": 2
