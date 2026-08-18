@@ -2366,6 +2366,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/453",
       "number": 453
     },
+    "@cat-agent-skills/cowork_use_case_one_pager": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/568",
+      "number": 568
+    },
     "@cat-agent-skills/doc_format_converter": {
       "upvotes": 0,
       "downloads": 0,
@@ -2995,6 +3012,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/490",
       "number": 490
     },
+    "@cat-agent-skills/route_map_visualizer": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/569",
+      "number": 569
+    },
     "@cat-agent-skills/scrollytelling_data": {
       "upvotes": 0,
       "downloads": 0,
@@ -3182,6 +3216,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/499",
       "number": 499
     },
+    "@cat-agent-skills/wcag_power_platform": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/570",
+      "number": 570
+    },
     "@cat-agent-skills/what_to_use_when": {
       "upvotes": 0,
       "downloads": 0,
@@ -3249,6 +3300,23 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/502",
       "number": 502
+    },
+    "@cat-agent-skills/work_iq_signalboard": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/571",
+      "number": 571
     },
     "@discreetRappers/agent_generator_agent": {
       "upvotes": 0,
@@ -3657,6 +3725,23 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/336",
       "number": 336
+    },
+    "@kody-w/art_generator_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/572",
+      "number": 572
     },
     "@kody-w/bakeoff_factory": {
       "upvotes": 0,
@@ -4202,6 +4287,23 @@
       "url": "https://github.com/kody-w/RAR/discussions/364",
       "number": 364
     },
+    "@kody-w/play_youtube_video_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/573",
+      "number": 573
+    },
     "@kody-w/power_apps_code_app_agent": {
       "upvotes": 1,
       "downloads": 1,
@@ -4269,6 +4371,23 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/507",
       "number": 507
+    },
+    "@kody-w/prototype_lock_factory_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/574",
+      "number": 574
     },
     "@kody-w/rapp_leviathan_factory": {
       "upvotes": 0,
@@ -4524,6 +4643,23 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/378",
       "number": 378
+    },
+    "@kody-w/windows_vm_install_lab_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "did_not_work": 0,
+        "stuck": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/575",
+      "number": 575
     },
     "@kody-w/workiq": {
       "upvotes": 0,

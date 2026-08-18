@@ -678,6 +678,13 @@
       "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/overnight/SKILL.md"
     },
     {
+      "name": "prototype-lock-factory",
+      "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff.",
+      "repo": "kody-w/rapp-skills",
+      "url": "https://github.com/kody-w/rapp-skills/tree/main/prototype-lock-factory",
+      "skill_md_url": "https://raw.githubusercontent.com/kody-w/rapp-skills/main/prototype-lock-factory/SKILL.md"
+    },
+    {
       "name": "rapp-agent-bridge",
       "description": "Use whenever an Agent Skill ships a linked *_agent.py beside SKILL.md, the linked file is missing, or the user asks how to run a RAPP agent projection without paraphrasing it. Prefer execution of the exact linked agent where Python is available; otherwise use the complete embedded Python as the exa…",
       "repo": "kody-w/rapp-skills",
