@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-18T03:02:05Z",
+  "generated": "2026-08-18T03:02:49Z",
   "categories": [
     {
       "name": "general",
@@ -20,7 +20,7 @@
     },
     {
       "name": "devtools",
-      "count": 23
+      "count": 24
     },
     {
       "name": "pipeline",
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 58
+      "count": 59
     },
     {
       "name": "@rapp",
@@ -144,7 +144,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 164
+      "count": 165
     },
     {
       "name": "frontier",
@@ -186,7 +186,7 @@
     },
     {
       "name": "automation",
-      "count": 16
+      "count": 17
     },
     {
       "name": "writing",
@@ -233,12 +233,12 @@
       "count": 10
     },
     {
-      "name": "powerpoint",
+      "name": "testing",
       "count": 9
     },
     {
-      "name": "testing",
-      "count": 8
+      "name": "powerpoint",
+      "count": 9
     },
     {
       "name": "sharepoint",
@@ -1229,6 +1229,10 @@
       "count": 2
     },
     {
+      "name": "installer",
+      "count": 2
+    },
+    {
       "name": "rappter",
       "count": 2
     },
@@ -1358,10 +1362,6 @@
     },
     {
       "name": "human-resources",
-      "count": 1
-    },
-    {
-      "name": "time-off",
       "count": 1
     }
   ]

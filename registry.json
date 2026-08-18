@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-18T03:02:03.843559+00:00",
+  "generated_at": "2026-08-18T03:03:40.219161+00:00",
   "stats": {
-    "total_agents": 300,
+    "total_agents": 301,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -15629,6 +15629,69 @@
       "_seed_aliases": [
         14594474776493433666
       ]
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/windows_vm_install_lab_agent",
+      "version": "1.0.0",
+      "display_name": "Windows VM Install Lab",
+      "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
+      "author": "RAPP Community",
+      "tags": [
+        "windows",
+        "hyper-v",
+        "installer",
+        "testing",
+        "automation"
+      ],
+      "category": "devtools",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "Windows 11 Pro, Enterprise, or Education",
+        "Administrator access and Hyper-V capable hardware",
+        "At least 100 GB of free disk space"
+      ],
+      "example_call": {
+        "args": {
+          "action": "status"
+        }
+      },
+      "_file": "agents/@kody-w/windows_vm_install_lab_agent.py",
+      "_install_filename": "rar_kody_w_windows_vm_install_lab_agent.py",
+      "_sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_4ea5b051baed0751e85d0733a566116497e65843920ad2d93ff3b2ada0702994",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 567,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 5571140270470871847,
+      "_size_kb": 49.4,
+      "_lines": 808,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "880b2ab79ed2e2b5eab632701b3d8000697d6fb2d136247cd083ab94fdb02c8f"
     },
     {
       "schema": "rapp-agent/1.0",

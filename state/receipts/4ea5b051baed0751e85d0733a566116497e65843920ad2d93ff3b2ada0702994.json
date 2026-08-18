@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "32093992225"
+  },
+  "action": "agent.create",
+  "agent": "@kody-w/windows_vm_install_lab_agent",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb"
+  },
+  "canonical_path": "agents/@kody-w/windows_vm_install_lab_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-08-18T03:02:27.573130+00:00",
+  "id": "rar_4ea5b051baed0751e85d0733a566116497e65843920ad2d93ff3b2ada0702994",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "",
+    "receipt": "",
+    "version": ""
+  },
+  "quality_tier": "community",
+  "request_id": "req_dffc020a1c86f74951abd2c7",
+  "revision_id": "4ea5b051baed0751e85d0733a566116497e65843920ad2d93ff3b2ada0702994",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABNJuX3A",
+    "issue_number": 567,
+    "source_body_sha256": "c807a5451ff2d8a6cffaef3410661ab9b4ef6391dc6fec94e351b80c25397484"
+  },
+  "version": "1.0.0"
+}

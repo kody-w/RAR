@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-18T03:02:05Z",
-  "count": 297,
+  "generated": "2026-08-18T03:02:49Z",
+  "count": 298,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -9397,6 +9397,40 @@
         "lines": 355,
         "size_kb": 14.7,
         "added_at": "2026-05-03T14:51:56-04:00"
+      }
+    },
+    {
+      "id": "kody-w__windows_vm_install_lab_agent",
+      "name": "@kody-w/windows_vm_install_lab_agent",
+      "display_name": "Windows VM Install Lab",
+      "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "RAPP Community",
+      "category": "devtools",
+      "tags": [
+        "windows",
+        "hyper-v",
+        "installer",
+        "testing",
+        "automation"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/windows_vm_install_lab_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/windows_vm_install_lab_agent.py",
+        "sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb"
+      },
+      "stats": {
+        "lines": 808,
+        "size_kb": 49.4,
+        "added_at": null
       }
     },
     {

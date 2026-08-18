@@ -3563,8 +3563,19 @@
       "sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
       "latest_receipt": "rar_124b90e6dad406484619ccf3a1a92ca401f50205e7229493a474d8759e3b3a72",
       "updated_at": "2026-08-18T03:00:16.878834+00:00"
+    },
+    "@kody-w/windows_vm_install_lab_agent": {
+      "status": "active",
+      "version": "1.0.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/windows_vm_install_lab_agent.py",
+      "sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
+      "latest_receipt": "rar_4ea5b051baed0751e85d0733a566116497e65843920ad2d93ff3b2ada0702994",
+      "updated_at": "2026-08-18T03:02:27.573130+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-18T03:00:16.878834+00:00"
+  "updated_at": "2026-08-18T03:02:27.573130+00:00"
 }

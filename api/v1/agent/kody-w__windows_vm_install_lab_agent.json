@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__windows_vm_install_lab_agent",
+  "name": "Windows VM Install Lab",
+  "rar_name": "@kody-w/windows_vm_install_lab_agent",
+  "rappid": "rappid:@kody-w/windows_vm_install_lab_agent:7e3e9d35eb6e62e1bec07d024fc5e0a1183dc809867088caf3190e582c813c72",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "devtools",
+  "tags": [
+    "windows",
+    "hyper-v",
+    "installer",
+    "testing",
+    "automation"
+  ],
+  "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
+  "author": "RAPP Community",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 808,
+  "size_kb": 49.4,
+  "sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
+  "has_card": true,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__windows_vm_install_lab_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__windows_vm_install_lab_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__windows_vm_install_lab_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/windows_vm_install_lab_agent.py"
+}
