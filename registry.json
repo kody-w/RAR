@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-18T03:07:00.045396+00:00",
+  "generated_at": "2026-08-18T22:08:27.860457+00:00",
   "stats": {
-    "total_agents": 302,
+    "total_agents": 303,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -13827,6 +13827,68 @@
       "_seed_aliases": [
         344646004249601931
       ]
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/education_shorts_agent",
+      "version": "1.0.0",
+      "display_name": "Education Shorts",
+      "description": "Turns a topic into an animated 9:16 educational YouTube Short: linted script, HyperFrames composition, check, MP4 \u2014 every stage a file on a chained ledger.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "video",
+        "youtube-shorts",
+        "hyperframes",
+        "animation",
+        "education",
+        "creative"
+      ],
+      "category": "creative",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "git",
+        "Node.js with npx (HyperFrames renderer, pinned per project)",
+        "optional: GitHub Copilot CLI on PATH, if you want the pack's model to write scripts"
+      ],
+      "example_call": {
+        "args": {
+          "action": "once",
+          "slug": "sky",
+          "topic": "Why is the sky blue?",
+          "theme": "midnight"
+        }
+      },
+      "_file": "agents/@kody-w/education_shorts_agent.py",
+      "_install_filename": "rar_kody_w_education_shorts_agent.py",
+      "_sha256": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_c487d51f509db15b0b2858f91d28bf222f3ce10421f0e42e38386fbf56ee0902",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 54657433438960493003,
+      "_size_kb": 14.9,
+      "_lines": 259,
+      "_has_card": false,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null
     },
     {
       "schema": "rapp-agent/1.0",

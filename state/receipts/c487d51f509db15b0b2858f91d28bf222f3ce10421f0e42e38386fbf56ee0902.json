@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-18"
+ },
+ "action": "agent.create",
+ "agent": "@kody-w/education_shorts_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715"
+ },
+ "canonical_path": "agents/@kody-w/education_shorts_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-18T22:08:19.735462+00:00",
+ "id": "rar_c487d51f509db15b0b2858f91d28bf222f3ce10421f0e42e38386fbf56ee0902",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "official",
+ "request_id": "req_c487d51f509db15b0b2858f9",
+ "revision_id": "c487d51f509db15b0b2858f91d28bf222f3ce10421f0e42e38386fbf56ee0902",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "publish @kody-w/education_shorts_agent 1.0.0 (Education Shorts: kody-w/rapp-education-shorts cartridge)"
+ },
+ "version": "1.0.0"
+}

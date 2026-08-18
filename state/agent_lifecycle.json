@@ -2431,6 +2431,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
     },
+    "@kody-w/art_generator_agent": {
+      "canonical_path": "agents/@kody-w/art_generator_agent.py",
+      "latest_receipt": "rar_124b90e6dad406484619ccf3a1a92ca401f50205e7229493a474d8759e3b3a72",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
+      "status": "active",
+      "updated_at": "2026-08-18T03:00:16.878834+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/bakeoff_factory": {
       "canonical_path": "agents/@kody-w/bakeoff_factory_agent.py",
       "latest_receipt": "rar_290d6ff952ded61e46d3f6b6fa7c8dca1c5c88cc7c622281c397fe0e618f9a42",
@@ -2595,6 +2606,17 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
+    },
+    "@kody-w/education_shorts_agent": {
+      "canonical_path": "agents/@kody-w/education_shorts_agent.py",
+      "latest_receipt": "rar_c487d51f509db15b0b2858f91d28bf222f3ce10421f0e42e38386fbf56ee0902",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "official",
+      "sha256": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715",
+      "status": "active",
+      "updated_at": "2026-08-18T22:08:19.735462+00:00",
+      "version": "1.0.0"
     },
     "@kody-w/estate_factory": {
       "canonical_path": "agents/@kody-w/estate_factory_agent.py",
@@ -2772,6 +2794,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.4"
     },
+    "@kody-w/play_youtube_video_agent": {
+      "canonical_path": "agents/@kody-w/play_youtube_video_agent.py",
+      "latest_receipt": "rar_c903f6dae8cd79548f33c21989f392f974ab99a2cdccafcd7f1e9e7c9e5b8e59",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
+      "status": "active",
+      "updated_at": "2026-08-18T03:05:19.931098+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/power_apps_code_app_agent": {
       "canonical_path": "agents/@kody-w/power_apps_code_app_agent.py",
       "latest_receipt": "rar_0c4e8e88118787381a6bbb50c01e21fe40d4be05e5b68233eb132ac4ec52dc4a",
@@ -2814,6 +2847,17 @@
       "sha256": "9b03c1b6d286d219e1f19966eea18eb2ef9c980213455963226b264c038440ba",
       "status": "active",
       "updated_at": "2026-08-17T22:02:35.199982+00:00",
+      "version": "1.0.1"
+    },
+    "@kody-w/prototype_lock_factory_agent": {
+      "canonical_path": "agents/@kody-w/prototype_lock_factory_agent.py",
+      "latest_receipt": "rar_acd47f8c029c06db1a61c5f0c60951a20079f0cbd0ca1e2ebaa8460bb280d607",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "916f1fb4e63074c6302593d80a28f31779ef070b6e4352ec4c45cda14cab431b",
+      "status": "active",
+      "updated_at": "2026-08-17T22:06:01.903478+00:00",
       "version": "1.0.1"
     },
     "@kody-w/rapp_leviathan_factory": {
@@ -2980,6 +3024,17 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
+    },
+    "@kody-w/windows_vm_install_lab_agent": {
+      "canonical_path": "agents/@kody-w/windows_vm_install_lab_agent.py",
+      "latest_receipt": "rar_4ea5b051baed0751e85d0733a566116497e65843920ad2d93ff3b2ada0702994",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
+      "status": "active",
+      "updated_at": "2026-08-18T03:02:27.573130+00:00",
+      "version": "1.0.0"
     },
     "@kody-w/workiq": {
       "canonical_path": "agents/@kody-w/workiq_agent.py",
@@ -3541,52 +3596,8 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
-    },
-    "@kody-w/prototype_lock_factory_agent": {
-      "status": "active",
-      "version": "1.0.1",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/prototype_lock_factory_agent.py",
-      "sha256": "916f1fb4e63074c6302593d80a28f31779ef070b6e4352ec4c45cda14cab431b",
-      "latest_receipt": "rar_acd47f8c029c06db1a61c5f0c60951a20079f0cbd0ca1e2ebaa8460bb280d607",
-      "updated_at": "2026-08-17T22:06:01.903478+00:00"
-    },
-    "@kody-w/art_generator_agent": {
-      "status": "active",
-      "version": "1.0.0",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/art_generator_agent.py",
-      "sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
-      "latest_receipt": "rar_124b90e6dad406484619ccf3a1a92ca401f50205e7229493a474d8759e3b3a72",
-      "updated_at": "2026-08-18T03:00:16.878834+00:00"
-    },
-    "@kody-w/windows_vm_install_lab_agent": {
-      "status": "active",
-      "version": "1.0.0",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/windows_vm_install_lab_agent.py",
-      "sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
-      "latest_receipt": "rar_4ea5b051baed0751e85d0733a566116497e65843920ad2d93ff3b2ada0702994",
-      "updated_at": "2026-08-18T03:02:27.573130+00:00"
-    },
-    "@kody-w/play_youtube_video_agent": {
-      "status": "active",
-      "version": "1.0.0",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/play_youtube_video_agent.py",
-      "sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
-      "latest_receipt": "rar_c903f6dae8cd79548f33c21989f392f974ab99a2cdccafcd7f1e9e7c9e5b8e59",
-      "updated_at": "2026-08-18T03:05:19.931098+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-18T03:05:19.931098+00:00"
+  "updated_at": "2026-08-18T22:08:19.735462+00:00"
 }
