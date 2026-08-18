@@ -189,17 +189,6 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
 
   <div class="section">
     <div class="section-head">
-      <h2>Critic score vs user score</h2>
-      <div class="hint" id="critic-hint"></div>
-    </div>
-    <div class="card">
-      <div id="tomato-summary"></div>
-      <div id="panel-list" style="margin-top:16px"></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-head">
       <h2>Agent leaderboards</h2>
       <div class="hint" id="board-hint">ranked across all registry agents</div>
     </div>
@@ -224,12 +213,8 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
       <div class="card" id="tier-bars"></div>
     </div>
     <div>
-      <div class="section-head"><h2>Rating spread</h2><div class="hint">engine notes</div></div>
+      <div class="section-head"><h2>Rating spread</h2><div class="hint">human reviews</div></div>
       <div class="card" id="rating-bars"></div>
-    </div>
-    <div>
-      <div class="section-head"><h2>Review angles</h2><div class="hint">engine notes</div></div>
-      <div class="card" id="angle-bars"></div>
     </div>
   </div>
 
@@ -275,16 +260,11 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
         <b>Agent file fetches</b> is the narrowest and most trustworthy number on this page.
       </p>
       <p class="note" style="margin-top:10px">
-        <b>On critic scores.</b> Only reviews written by a model count toward a critic score. When no model
-        backend is reachable the panel falls back to a deterministic rubric — a line-count and regex
-        heuristic — and those verdicts are reported separately and never published as a critic score. An
-        agent no model has read shows as unrated rather than fresh.
-      </p>
-      <p class="note" style="margin-top:10px">
-        <b>On reviews.</b> Only real user reviews from <code>state/reviews.json</code> — submitted through the
+        <b>On reviews and votes.</b> Only real user reviews from <code>state/reviews.json</code> — submitted through the
         GitHub issues API — are counted in the review total, the average rating, and the review leaderboards.
-        The registry also carries engine-generated curator notes in <code>state/curator_reviews.json</code>;
-        those are shown separately and labelled "engine notes", never mixed into the headline number.
+        Votes are upvotes only: RAR stopped tracking downvotes and retired every automated review
+        (the model critic panel and the engine "curator notes") on 2026-08-18. Nothing on this page is a
+        machine's opinion of an agent.
       </p>
       <p class="note" style="margin-top:10px">
         <b>On unique counts.</b> GitHub reports uniques per 14-day window, not per day, so daily unique figures cannot
@@ -382,10 +362,8 @@ function render() {
   renderPublishers();
   renderBars('cat-bars', (M.leaderboards.categories || []).slice(0, 12).map(c => ({ label: c.name.replace(/_/g,' '), value: c.agents, extra: `${c.reviews} reviews` })));
   renderBars('tier-bars', Object.entries(M.leaderboards.tiers || {}).map(([k, v]) => ({ label: k, value: v })));
-  const cur = (M.reviews && M.reviews.curator) || {};
-  renderBars('rating-bars', Object.entries(cur.distribution || {}).reverse().map(([k, v]) => ({ label: '★'.repeat(+k), value: v })));
-  renderBars('angle-bars', Object.entries(cur.by_angle || {}).map(([k, v]) => ({ label: k.replace(/_/g,' '), value: v })));
-  renderTomato();
+  const usr = (M.reviews && M.reviews.user) || {};
+  renderBars('rating-bars', Object.entries(usr.distribution || {}).reverse().map(([k, v]) => ({ label: '★'.repeat(+k), value: v })));
   renderCDNFiles();
   renderPaths();
   renderReferrers();
@@ -398,12 +376,10 @@ function renderKPIs() {
   const cards = [
     { hero: true, label: 'Total downloads', value: num(t.downloads), sub: `${num(t.clones)} repository clones (includes this repo's own CI) · ${num(t.cdn_hits)} CDN hits · ${num(t.release_downloads)} release assets` },
     { label: 'Agent file fetches', value: num(t.agent_file_downloads), sub: 'individual agent files pulled from the CDN — the cleanest signal here' },
-    { label: 'Critic score', value: t.critic_score === null || t.critic_score === undefined ? '—' : t.critic_score + '%', sub: `${num((M.critic || {}).model_reviews || 0)} model-written reviews · ${num(t.agents_scored || 0)} agents scored${(M.critic || {}).rubric_only_agents ? ` · ${num(M.critic.rubric_only_agents)} unscored (rubric only)` : ''}` },
-    { label: 'User score', value: t.user_score === null || t.user_score === undefined ? '—' : t.user_score + '%', sub: 'votes + user reviews' },
     { label: 'Unique cloners', value: num(t.clone_uniques_14d), sub: `last 14 days · ${num(t.clone_uniques_daily_sum)} daily-unique sum since ${t.tracking_since || '—'}` },
     { label: 'Agents', value: num(t.agents), sub: `${num(t.publishers)} publishers · ${num(t.categories)} categories` },
-    { label: 'Reviews', value: num(t.reviews), sub: t.reviews ? `${num(t.agents_reviewed)} agents · ★ ${t.avg_rating} avg` : `no user reviews yet · ${num(t.curator_reviews)} engine notes` },
-    { label: 'Votes', value: num(t.votes), sub: `${num(t.upvotes)} up · ${num(t.downvotes)} down` },
+    { label: 'Reviews', value: num(t.reviews), sub: t.reviews ? `${num(t.agents_reviewed)} agents · ★ ${t.avg_rating} avg` : 'no user reviews yet' },
+    { label: 'Upvotes', value: num(t.upvotes), sub: 'distinct people · RAR tracks upvotes only' },
     { label: 'Page views', value: num(t.page_views), sub: `${num(t.view_uniques_14d)} unique visitors (14d)` },
     { label: 'Stars', value: num(r.stars), sub: `${num(r.forks)} forks · ${num(r.open_issues)} open issues` },
     { label: 'Registry size', value: num(t.total_lines), sub: `lines of Python · ${num(t.swarms)} swarms` }
@@ -449,17 +425,14 @@ function renderChart() {
 }
 
 const BOARDS = [
-  { id: 'top_critic', label: 'Top critic score', metric: 'critic_score', unit: '% fresh' },
-  { id: 'top_audience', label: 'Top user score', metric: 'user_score', unit: '% positive' },
-  { id: 'biggest_split', label: 'Biggest split', metric: '_gap', unit: 'critic − user' },
   { id: 'most_downloaded', label: 'Most downloaded', metric: 'downloads', unit: 'downloads' },
-  { id: 'most_upvoted', label: 'Most upvoted', metric: 'score', unit: 'net votes' },
+  { id: 'most_upvoted', label: 'Most upvoted', metric: 'score', unit: 'upvotes' },
   { id: 'most_reviewed', label: 'Most reviewed', metric: 'reviews', unit: 'reviews' },
   { id: 'highest_rated', label: 'Highest rated', metric: 'rating', unit: 'avg ★' },
   { id: 'newest', label: 'Newest', metric: 'added_at', unit: 'added' },
   { id: 'largest', label: 'Biggest', metric: 'lines', unit: 'lines' }
 ];
-let activeBoard = 'top_critic';
+let activeBoard = 'most_downloaded';
 
 function renderBoards() {
   $('tabs').innerHTML = BOARDS.map(b =>
@@ -468,13 +441,9 @@ function renderBoards() {
   const cfg = BOARDS.find(b => b.id === activeBoard);
   const rows = (M.leaderboards[activeBoard] || []);
   if (!rows.length) {
-    if (activeBoard === 'top_critic' || activeBoard === 'biggest_split' || activeBoard === 'top_audience') {
-      $('board').innerHTML = `<div class="empty">The critic panel has not scored anything yet. It runs on publish, on a vote, and nightly &mdash; or trigger it with <code>python scripts/critic_review.py</code>.</div>`;
-      return;
-    }
     const isRev = activeBoard === 'most_reviewed' || activeBoard === 'highest_rated';
     $('board').innerHTML = isRev
-      ? `<div class="empty">No <b>user</b> reviews yet — only ${num(M.totals.curator_reviews)} engine-generated curator notes exist, and those are deliberately not counted here.<br><br>
+      ? `<div class="empty">No <b>user</b> reviews yet.<br><br>
          <a href="https://github.com/${OWNER}/${REPO}/issues/new?title=%5BRAR%5D%20review&body=%60%60%60json%0A%7B%22action%22%3A%22review%22%2C%22payload%22%3A%7B%22agent%22%3A%22%40pub%2Fslug%22%2C%22rating%22%3A5%2C%22text%22%3A%22Your%20review%22%7D%7D%0A%60%60%60" target="_blank" rel="noopener">Leave the first review &rarr;</a></div>`
       : '<div class="empty">No data recorded yet for this metric.</div>';
     return;
@@ -483,8 +452,6 @@ function renderBoards() {
     let val = r[cfg.metric];
     if (cfg.metric === 'added_at') val = String(val).slice(0, 10);
     else if (cfg.metric === 'rating') val = '★ ' + val;
-    else if (cfg.metric === '_gap') val = (val > 0 ? '+' : '') + val;
-    else if (cfg.metric === 'critic_score' || cfg.metric === 'user_score') val = val + '%';
     else val = num(val);
     const tier = r.tier && r.tier !== 'community' ? `<span class="pill ${esc(r.tier)}">${esc(r.tier)}</span>` : '';
     const url = r.file ? `https://github.com/${OWNER}/${REPO}/blob/main/${encodeURI(r.file)}` : `https://github.com/${OWNER}/${REPO}`;
@@ -492,30 +459,23 @@ function renderBoards() {
       <div class="rank-n">${i + 1}</div>
       <div>
         <div class="rank-name"><a href="${url}" target="_blank" rel="noopener">${esc(r.display_name || short(r.name))}</a>${tier}</div>
-        <div class="rank-meta">${tomatoTag(r)}<span class="mono">${esc(r.name)}</span> · ${esc(String(r.category).replace(/_/g,' '))}${r.critic_score !== null && r.critic_score !== undefined ? ` · critic ${r.critic_score}% (${r.critic_count})` : ''}${r.user_score !== null && r.user_score !== undefined ? ` · user ${r.user_score}%` : ''}
-          ${r.reviews ? ` · ${r.reviews} reviews` : ''}${r.rating ? ` · ★${r.rating}` : ''}${r.score ? ` · ${r.score > 0 ? '+' : ''}${r.score} votes` : ''}</div>
+        <div class="rank-meta"><span class="mono">${esc(r.name)}</span> · ${esc(String(r.category).replace(/_/g,' '))}
+          ${r.reviews ? ` · ${r.reviews} reviews` : ''}${r.rating ? ` · ★${r.rating}` : ''}${r.score ? ` · ${r.score} upvotes` : ''}</div>
       </div>
       <div class="rank-val">${val}<small>${esc(cfg.unit)}</small></div>
     </div>`;
   }).join('');
 }
 
-function tomatoTag(r) {
-  const st = STATE_STYLE[r.tomato];
-  if (!st || r.tomato === 'unrated') return '';
-  return `<span style="color:${st.color};font-weight:700">${st.mark} ${st.label}</span> · `;
-}
-
 function renderPublishers() {
   const rows = M.leaderboards.publishers || [];
   $('pub-table').innerHTML =
-    `<thead><tr><th>Publisher</th><th class="num">Agents</th><th class="num">Downloads</th><th class="num">Reviews</th><th class="num">★</th><th class="num">Votes</th><th class="num">Engine notes</th></tr></thead>
+    `<thead><tr><th>Publisher</th><th class="num">Agents</th><th class="num">Downloads</th><th class="num">Reviews</th><th class="num">★</th><th class="num">Upvotes</th></tr></thead>
      <tbody>${rows.map(p => `<tr>
        <td><a href="https://github.com/${OWNER}/${REPO}/tree/main/agents/${encodeURIComponent(p.name)}" target="_blank" rel="noopener">${esc(p.name)}</a></td>
        <td class="num">${num(p.agents)}</td><td class="num">${num(p.downloads)}</td>
        <td class="num">${num(p.reviews)}</td><td class="num">${p.rating || '—'}</td>
-       <td class="num">${p.score > 0 ? '+' : ''}${p.score || 0}</td>
-       <td class="num" style="color:var(--text-muted)">${num(p.curator_reviews || 0)}</td></tr>`).join('')}</tbody>`;
+       <td class="num">${p.score || 0}</td></tr>`).join('')}</tbody>`;
 }
 
 function renderBars(target, rows) {
@@ -527,52 +487,6 @@ function renderBars(target, rows) {
       <div class="bar-track"><div class="bar-fill" style="width:${(r.value / max) * 100}%"></div></div>
       <div class="bar-num">${num(r.value)}</div>
     </div>`).join('');
-}
-
-const STATE_STYLE = {
-  certified: { label: 'Certified Fresh', color: 'var(--green)', mark: '\u2726' },
-  fresh:     { label: 'Fresh',           color: 'var(--green)', mark: '\u25CF' },
-  rotten:    { label: 'Rotten',          color: 'var(--red)',   mark: '\u25CB' },
-  unrated:   { label: 'Not yet scored',  color: 'var(--text-muted)', mark: '\u2013' }
-};
-
-function renderTomato() {
-  const c = M.critic || {};
-  const th = c.thresholds || {};
-  $('critic-hint').textContent = c.generated_at
-    ? `panel last sat ${new Date(c.generated_at).toLocaleDateString()} · fresh at ${th.fresh_at || 60}/100`
-    : 'panel has not run yet';
-
-  const states = c.by_state || {};
-  const order = ['certified', 'fresh', 'rotten', 'unrated'];
-  const total = order.reduce((n, k) => n + (states[k] || 0), 0);
-  const summary = `
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px">
-      ${order.filter(k => states[k]).map(k => {
-        const st = STATE_STYLE[k];
-        return `<div style="flex:1;min-width:150px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:13px 15px">
-          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:${st.color};font-weight:750">${st.mark} ${st.label}</div>
-          <div style="font-size:1.6rem;font-weight:830;margin-top:2px">${num(states[k])}</div>
-          <div style="font-size:.72rem;color:var(--text-muted)">${total ? Math.round(100 * states[k] / total) : 0}% of scored agents</div>
-        </div>`;
-      }).join('')}
-    </div>
-    <p class="note">
-      <b>Critic score</b> is the share of model-written critic reviews that came back fresh (${th.fresh_at || 60}/100 or better).
-      <b>User score</b> is the share of positive human signal — upvotes plus user reviews rated 3 or higher.
-      An agent is <b>Certified Fresh</b> at ${th.certified_critic || 75}%+ critic with at least
-      ${th.certified_min_reviews || 5} critic reviews, ${th.certified_user || 60}%+ user score and at least
-      ${th.certified_min_user_signal || 3} pieces of human signal. Every verdict is pinned to the SHA-256 of the
-      exact file the panel read, and re-earned when the agent is republished or its votes move.
-    </p>`;
-  $('tomato-summary').innerHTML = summary;
-
-  const panel = c.panel || [];
-  $('panel-list').innerHTML = panel.length
-    ? `<div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);font-weight:750;margin-bottom:8px">The panel</div>
-       ${panel.map(p => `<div class="src-item"><b>${esc(p.name)}</b><span>${esc(p.lens)}</span></div>`).join('')}
-       <p class="note" style="margin-top:12px">Backends this run: ${Object.entries(c.backends || {}).map(([k, v]) => `<code>${esc(k)}</code> &times;${v}`).join(', ') || 'none recorded'}.</p>`
-    : '';
 }
 
 function renderCDNFiles() {

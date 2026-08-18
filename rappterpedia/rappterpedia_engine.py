@@ -1956,18 +1956,12 @@ def rappterpedia_tick(num_articles: int = 2, num_threads: int = 2, dry_run: bool
             thread["updated"] = ts
             results.append(f"  ↳ Reply on \"{thread['title'][:40]}...\" by {thread['replies'][-1]['author']}")
 
-    # ── Phase 4: Generate curator reviews ────────────────
-    review_results = generate_reviews(state, agents, num_reviews=random.randint(3, 8))
-    results.extend(review_results)
+    # (Phase 4, automated curator reviews, was retired 2026-08-18: RAR carries
+    #  human reviews only — state/reviews.json via the Issue pipeline.)
 
     # ── Save state ──────────────────────────────────────
     if not dry_run:
         save_json(STATE_FILE, state)
-
-    # ── Export reviews for store consumption ────────────
-    if not dry_run:
-        reviews_export = {"agents": state.get("reviews", {})}
-        save_json(RAR_DIR / "state" / "curator_reviews.json", reviews_export)
 
     # ── Export for web consumption ──────────────────────
     if not dry_run:

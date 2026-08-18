@@ -3,13 +3,14 @@
   "id": "kody-w__rar_remote_agent",
   "name": "RAR Remote Agent",
   "rar_name": "@kody-w/rar_remote_agent",
-  "rappid": "rappid:@kody-w/rar_remote_agent:4824a515b7b8c745681b0a67e9523b105e587818a158c501253220f334e846f0",
-  "_migrated_from": "rappid:@kody-w/rar_remote_agent:2ce9a916fff435ea3b88a257c8c14859a246805a5e8d7e7985766c51eaf388e9",
+  "rappid": "rappid:@kody-w/rar_remote_agent:cba3e3ffb9266fd0730c0b792efbad58d2fa36321db447c50d8252a93efaa03d",
+  "_migrated_from": "rappid:@kody-w/rar_remote_agent:4824a515b7b8c745681b0a67e9523b105e587818a158c501253220f334e846f0",
   "_migrated_from_all": [
-    "rappid:@kody-w/rar_remote_agent:2ce9a916fff435ea3b88a257c8c14859a246805a5e8d7e7985766c51eaf388e9"
+    "rappid:@kody-w/rar_remote_agent:2ce9a916fff435ea3b88a257c8c14859a246805a5e8d7e7985766c51eaf388e9",
+    "rappid:@kody-w/rar_remote_agent:4824a515b7b8c745681b0a67e9523b105e587818a158c501253220f334e846f0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.7.4",
+  "version": "1.8.0",
   "publisher": "@kody-w",
   "category": "core",
   "tags": [
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 1400,
-  "size_kb": 59.4,
-  "sha256": "584e0e180d07918b1b9371dc0271950991088a54db3664eb5f5e294e03716ee2",
+  "lines": 1403,
+  "size_kb": 59.7,
+  "sha256": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

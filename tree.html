@@ -160,7 +160,7 @@ async function init() {
   const [registry, wikiExport, reviewsData] = await Promise.all([
     fetchJSON('registry.json'),
     fetchJSON('rappterpedia/rappterpedia_export.json'),
-    fetchJSON('state/curator_reviews.json'),
+    fetchJSON('state/reviews.json'),
   ]);
 
   if (!registry) { document.getElementById('layers').innerHTML = '<p style="text-align:center;color:#666;padding:40px">Loading ecosystem data...</p>'; return; }
@@ -237,7 +237,7 @@ async function init() {
   const bloomNodes = [
     { name: 'wiki', display_name: 'Wiki Articles', quality_tier: 'verified', _meta: totalArticles },
     { name: 'forum', display_name: 'Forum Threads', quality_tier: 'community', _meta: totalThreads },
-    { name: 'reviews', display_name: 'Curator Reviews', quality_tier: 'verified', _meta: totalReviews },
+    { name: 'reviews', display_name: 'Human Reviews', quality_tier: 'verified', _meta: totalReviews },
     { name: 'cards', display_name: 'Holo Cards', quality_tier: 'official', _meta: totalAgents },
     { name: 'book', display_name: 'Kindle Book', quality_tier: 'official', _meta: '20 chapters' },
     { name: 'engine', display_name: 'Rappter Engine', quality_tier: 'official', _meta: 'ticking' },

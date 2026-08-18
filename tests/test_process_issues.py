@@ -154,10 +154,12 @@ class TestVote:
         assert result["ok"] is True
         assert result["score"] == 1
 
-    def test_downvote(self):
+    def test_downvote_is_declined_upvotes_only(self):
+        # RAR tracks upvotes only (2026-08-18): a downvote is refused with a
+        # pointer to the review path, and nothing is written.
         result = pi.handle_vote({"agent": "@test/agent-a", "direction": "down"}, "user1")
-        assert result["ok"] is True
-        assert result["score"] == -1
+        assert "error" in result and "upvotes only" in result["error"]
+        assert "review" in result["error"]
 
     def test_toggle_vote_off(self):
         pi.handle_vote({"agent": "@test/agent-a", "direction": "up"}, "user1")
@@ -165,11 +167,22 @@ class TestVote:
         assert result["ok"] is True
         assert result["score"] == 0
 
-    def test_switch_vote_direction(self):
+    def test_downvote_after_upvote_leaves_the_upvote_alone(self):
         pi.handle_vote({"agent": "@test/agent-a", "direction": "up"}, "user1")
         result = pi.handle_vote({"agent": "@test/agent-a", "direction": "down"}, "user1")
+        assert "error" in result
+        again = pi.handle_vote({"agent": "@test/agent-a", "direction": "up"}, "user2")
+        assert again["score"] == 2   # user1's upvote survived; no 'down' counter exists
+
+    def test_legacy_down_counters_are_dropped_on_touch(self):
+        votes = pi.load_json(pi.VOTES_FILE)
+        votes.setdefault("agents", {})["@test/agent-a"] = {"up": 2, "down": 3, "score": -1,
+                                                          "voters": {"a": "up", "b": "up", "c": "down"}}
+        pi.save_json(pi.VOTES_FILE, votes)
+        result = pi.handle_vote({"agent": "@test/agent-a", "direction": "up"}, "c")
         assert result["ok"] is True
-        assert result["score"] == -1
+        rec = pi.load_json(pi.VOTES_FILE)["agents"]["@test/agent-a"]
+        assert "down" not in rec and rec["score"] == rec["up"] == 3
 
     def test_multiple_voters(self):
         pi.handle_vote({"agent": "@test/agent-a", "direction": "up"}, "user1")

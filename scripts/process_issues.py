@@ -6,7 +6,7 @@ Follows the RAPPterBook pattern:
   Issue (JSON body) --> validate --> mutate state/*.json --> commit --> close issue
 
 Supported actions:
-  vote           - Upvote/downvote an agent
+  vote           - Upvote an agent (RAR tracks upvotes only)
   review         - Submit a text review with rating
   submit_agent   - Submit a community agent.py for inclusion
 
@@ -954,15 +954,22 @@ def cancel_issue_requests(issue_number: int, actor_id: int | str) -> dict:
 # ──────────────────────────────────────────────────────────────────────
 
 def handle_vote(payload: dict, user: str) -> dict:
-    """Process a vote action. Returns {"ok": True} or {"error": "..."}."""
+    """Process a vote action. Returns {"ok": True} or {"error": "..."}.
+
+    Upvotes only (2026-08-18). A registry that only counts what people liked
+    stays a place people want to publish into; a downvote is declined with a
+    pointer to the review path, where a sentence helps more than a thumb.
+    """
     agent = payload.get("agent", "")
     direction = payload.get("direction", "up")
 
     err = validate_agent_name(agent)
     if err:
         return {"error": err}
-    if direction not in ("up", "down"):
-        return {"error": f"Invalid direction '{direction}' — must be 'up' or 'down'"}
+    if direction != "up":
+        return {"error": (f"RAR tracks upvotes only (got direction '{direction}'). "
+                          "If something did not work, leave a review — a sentence helps the "
+                          "author more than a thumb.")}
 
     votes = load_json(VOTES_FILE)
     if "agents" not in votes:
@@ -972,23 +979,23 @@ def handle_vote(payload: dict, user: str) -> dict:
     if operation_key and operation_key in votes["operations"]:
         return votes["operations"][operation_key]
 
-    agent_votes = votes["agents"].setdefault(agent, {
-        "up": 0, "down": 0, "score": 0, "voters": {}
-    })
+    agent_votes = votes["agents"].setdefault(agent, {"up": 0, "score": 0, "voters": {}})
+    agent_votes.setdefault("up", 0)
+    agent_votes.setdefault("voters", {})
 
     prev = agent_votes["voters"].get(user)
-    if prev == direction:
+    if prev == "up":
         # Undo vote (toggle off)
         agent_votes["voters"].pop(user)
-        agent_votes[direction] -= 1
+        agent_votes["up"] = max(0, agent_votes["up"] - 1)
     else:
-        # Remove previous vote if switching
-        if prev:
-            agent_votes[prev] -= 1
-        agent_votes["voters"][user] = direction
-        agent_votes[direction] += 1
+        # A legacy 'down' from before 2026-08-18 is simply replaced.
+        agent_votes["voters"][user] = "up"
+        agent_votes["up"] += 1
 
-    agent_votes["score"] = agent_votes["up"] - agent_votes["down"]
+    # Score is the upvote count; legacy 'down' counters are no longer subtracted.
+    agent_votes.pop("down", None)
+    agent_votes["score"] = agent_votes["up"]
     votes["updated_at"] = now_iso()
     save_json(VOTES_FILE, votes)
 

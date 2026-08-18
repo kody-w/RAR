@@ -6,15 +6,9 @@ being flaky, and a failure always means the code broke rather than the internet
 did. The behaviours that genuinely require a live API are NOT faked here; they
 are exercised by the documented manual scenarios in docs/REPORTING-TESTS.md.
 
-Two of these are regression tests for bugs that actually shipped:
-
-  test_critic_lookup_resolves_dashed_publishers
-      state/critic_reviews.json keys its map with an UNDERSCORE-normalized name
-      while each record's own `name` field holds the real dashed one. A lookup
-      by dict key silently returned nothing for every publisher with a dash —
-      which is most of the registry — so every report card read "not yet
-      scored" while 79 agents had real scores. It failed silently and looked
-      exactly like "no data yet", which is the worst way for a metric to break.
+One of these is a regression test for a bug that actually shipped (the critic
+panel and its lookup regressions were retired on 2026-08-18 — RAR publishes
+human signal only):
 
   test_splice_replaces_block_when_end_marker_is_missing
       If a human truncated the report block, START survived without END and the
@@ -95,55 +89,6 @@ def test_splice_replaces_block_when_end_marker_is_missing(reports):
     assert "Intro." in out
 
 
-# ── the critic-score join: the bug that read as "no data" ────────────────────
-
-def test_critic_index_resolves_a_dashed_publisher(reports):
-    """REGRESSION, exercising the SHIPPED code.
-
-    The first version of this test re-implemented both lookups inside the test
-    body and compared them to each other. It therefore asserted a property of
-    critic_reviews.json, not of publish_reports.py, and stayed green with the
-    bug fully reintroduced — while every card silently reverted to "not yet
-    scored". A regression test that cannot fail is worse than no test, because
-    the documentation then cites it as proof.
-
-    This calls reports.critic_index directly, on a fixture shaped like the real
-    file: key underscore-normalized, record's own `name` dashed.
-    """
-    raw = {
-        "@aibast_agents_library/account_intelligence": {
-            "name": "@aibast-agents-library/account_intelligence",
-            "critic_avg": 80.0,
-            "critic_count": 2,
-        }
-    }
-    idx = reports.critic_index(raw)
-    assert "@aibast-agents-library/account_intelligence" in idx, (
-        "critic records are not indexed by their authoritative dashed `name` — "
-        "every dashed publisher resolves to nothing and reads 'not yet scored'"
-    )
-    assert idx["@aibast-agents-library/account_intelligence"]["critic_avg"] == 80.0
-
-
-def test_a_scored_agent_renders_its_score_not_not_yet_scored(reports):
-    """End-to-end over render(): a resolved critic record must reach the card.
-
-    Pins the observable symptom rather than the mechanism, so any future way of
-    breaking the join — not just the key/name one — still fails here.
-    """
-    agent = {"name": "@aibast-agents-library/account_intelligence", "version": "1.0.0",
-             "category": "core", "quality_tier": "community"}
-    raw = {"@aibast_agents_library/account_intelligence": {
-        "name": "@aibast-agents-library/account_intelligence",
-        "critic_avg": 80.0, "critic_count": 2}}
-    critic = reports.critic_index(raw).get(agent["name"], {})
-    card = reports.render(agent, {}, critic, None, None)
-    assert "80/100" in card, f"scored agent rendered without its score:\n{card}"
-    assert "not yet scored" not in card
-
-
-# ── the seven feedback channels must agree everywhere they are written ──────
-
 def test_signal_channels_agree_across_surfaces(reports, ratings):
     """The 7 channels are declared in three places — the collector, the report
     card, and stats.html. They are a contract: if they drift, a reaction is
@@ -212,33 +157,31 @@ def _sample_agent():
 
 
 def test_report_card_renders_every_channel(reports):
-    card = reports.render(_sample_agent(), {}, {}, None, None)
+    card = reports.render(_sample_agent(), {}, None, None)
     for _, label in reports.SIGNAL_ROWS:
         assert label in card, f"channel '{label}' missing from the card"
     assert card.startswith(reports.START) and card.rstrip().endswith(reports.END)
 
 
-def test_report_card_states_critic_score_when_present(reports):
-    card = reports.render(_sample_agent(), {}, {"critic_avg": 80.0, "critic_count": 2}, None, None)
-    assert "80/100" in card and "2 independent" in card
-
-
-def test_report_card_says_not_scored_when_absent(reports):
-    card = reports.render(_sample_agent(), {}, {}, None, None)
-    assert "not yet scored" in card
+def test_report_card_carries_no_negative_rows_and_no_machine_score(reports):
+    """Positive by design (2026-08-18): the card lists positive outcome
+    channels only and never a model-written score."""
+    card = reports.render(_sample_agent(), {}, None, None)
+    for gone in ("Didn't work", "Couldn't get it running", "Critic score"):
+        assert gone not in card, f"{gone!r} must not appear on a report card"
+    assert {k for k, _ in reports.SIGNAL_ROWS}.isdisjoint({"did_not_work", "stuck"})
 
 
 def test_report_card_marks_downloads_unknown_rather_than_zero(reports):
     """No release yet is NOT the same as zero downloads. Printing 0 would be a
     claim we cannot support."""
-    card = reports.render(_sample_agent(), {}, {}, None, None)
+    card = reports.render(_sample_agent(), {}, None, None)
     reach = card.split("| Reach")[1].split("| Reception")[0]
     assert "—" in reach, "unknown downloads must render as em-dash, never as 0"
 
 
 def test_aggregated_card_links_home(reports):
-    card = reports.render(
-        _sample_agent(), {}, {}, None,
+    card = reports.render(_sample_agent(), {}, None,
         {"source_name": "cat-agent-skills", "upstream_url": "https://example.invalid/x"},
     )
     assert "cat-agent-skills" in card and "https://example.invalid/x" in card

@@ -13,20 +13,20 @@ it generally.
 
 The three rules that shape everything below
 -------------------------------------------
-1. **Populations are never summed.** RAR's counters (curator reviews, Discussion
-   upvotes, quality tier) and a source's counters (its own download numbers)
+1. **Populations are never summed.** RAR's counters (Discussion upvotes,
+   quality tier) and a source's counters (its own download numbers)
    measure different populations by different methods. They live in two blocks
    under ``signals`` and are never added into one number, because that number
    would be defensible by neither system. Consequently a score is comparable
    only *within* an origin, and the payload says so out loud.
 
-2. **Absence of signal is not negative signal.** 158 of 279 native agents have
-   no curator review and 213 of 216 Discussion threads are silent. Scoring a
-   missing component as zero would rank the catalog by who happened to get
-   reviewed, then present that as quality. Every missing component is filled
-   with the median of the population that *does* have it, and the row says
-   "not yet reviewed" in ``why`` so the reader knows the difference between
-   "judged average" and "not judged".
+2. **Absence of signal is not negative signal.** Most Discussion threads are
+   silent. Scoring a missing component as zero would rank the catalog by who
+   happened to get noticed, then present that as quality. Every missing
+   component is filled with the median of the population that *does* have it,
+   and the row says so in ``why`` so the reader knows the difference between
+   "judged average" and "not judged". (Automated curator reviews were retired
+   2026-08-18; RAR scores no machine-written opinion of an agent.)
 
 3. **Every claim in ``why`` is backed by a number in ``signals``.** The ranking
    is only worth publishing if it can be audited from the payload itself, with
@@ -58,7 +58,6 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = REPO_ROOT / "registry.json"
-CURATOR = REPO_ROOT / "state" / "curator_reviews.json"
 DISCUSSION = REPO_ROOT / "state" / "discussion_ratings.json"
 AGGREGATED = REPO_ROOT / "state" / "aggregated.json"
 AUDIENCE_MAP = REPO_ROOT / "api" / "v1" / "audience" / "map.json"
@@ -85,11 +84,6 @@ OWNED_PATHS = frozenset({OUT_FILE.resolve()})
 # are module-level and named so a disagreement can be argued about the constant
 # rather than reverse-engineered out of an expression.
 
-# Reviews are shrunk toward the population mean by this many phantom reviews.
-# One five-star review is an opinion, not a track record; five of them are
-# evidence. PRIOR=3 means a single review moves a score a quarter of the way.
-CURATOR_PRIOR = 3.0
-
 # Feedback saturates: the difference between 0 and 1 hands-on report is the
 # whole story, the difference between 30 and 31 is noise. log1p over this scale
 # encodes that. 40 is roughly "as engaged as anything in RAR has ever been".
@@ -105,8 +99,6 @@ COMMUNITY_WEIGHTS = {
     "worked": 3.0,
     "saved_time": 3.0,
     "want_to_try": 1.0,
-    "did_not_work": -2.0,
-    "stuck": -1.0,
 }
 UPVOTE_WEIGHT = 2.0
 COMMENT_WEIGHT = 1.0
@@ -137,13 +129,10 @@ HAS_CARD_SHARE = 0.45
 HAS_BUNDLE_SHARE = 0.55
 
 COMPONENTS = [
-    ("curator", 0.30, "native",
-     "Bayesian-shrunk mean of curator review ratings (1-5). Shrinking toward "
-     "the population mean stops a single review outranking a sustained record."),
     ("community", 0.25, "native",
-     "RAR's own Discussion signal: upvotes, comments and the seven hands-on "
+     "RAR's own Discussion signal: upvotes, comments and the positive hands-on "
      "outcome channels, saturating so early engagement counts and volume does "
-     "not run away."),
+     "not run away. Only positive signals are tracked."),
     ("tier", 0.15, "native",
      "Quality tier along the CONSTITUTION promotion path "
      "frontier -> community -> verified -> official."),
@@ -164,7 +153,7 @@ COMPONENTS = [
 # in addition to everything RAR knows about it. Every entry from the one source
 # crawled so far was materialised into a real agent by the skill toaster, so in
 # practice today every row is native and 76 of them also carry reach.
-NATIVE_KEYS = ["curator", "community", "tier", "freshness", "depth"]
+NATIVE_KEYS = ["community", "tier", "freshness", "depth"]
 INDEXED_KEYS = ["freshness", "depth", "reach"]
 
 
@@ -190,10 +179,10 @@ NOT_SCORED = ["raw file size", "tag count", "anything summed across populations"
 
 EXPLAIN = (
     "Every entry is scored 0-100 from the signals RAR actually holds. A hosted "
-    "agent is scored on curator reviews (30), RAR community feedback (25), "
-    "quality tier (15), freshness (15) and depth (15) — those five and nothing "
+    "agent is scored on RAR community feedback (25), quality tier (15), "
+    "freshness (15) and depth (15), renormalised over those four and nothing "
     "else, whether or not a crawler also found it upstream. An entry that is "
-    "indexed but NOT hosted has no reviews, tier or community feedback here, so "
+    "indexed but NOT hosted has no tier or community feedback here, so "
     "it is scored on freshness (15), depth (15) and the source's own reach (25), "
     "renormalised over the components that apply; today that population is empty, "
     "because every crawled entry has been materialised into a hosted agent by the "
@@ -269,30 +258,6 @@ def normalize_ref(ref: str) -> str:
 # ── input reduction ─────────────────────────────────────────────────────────
 
 
-def curator_index(raw: dict) -> dict[str, list[dict]]:
-    """ref -> reviews, with both slug spellings merged under the canonical ref.
-
-    Merging is additive rather than first-wins: the two spellings hold different
-    reviews from different passes of the review engine, so picking one silently
-    discards real ratings. Identical reviews recorded under both spellings are
-    collapsed on their natural key.
-    """
-    merged: dict[str, dict[tuple, dict]] = {}
-    for ref, reviews in (raw.get("agents") or {}).items():
-        if not isinstance(reviews, list):
-            continue
-        bucket = merged.setdefault(normalize_ref(ref), {})
-        for review in reviews:
-            if not isinstance(review, dict):
-                continue
-            if not isinstance(review.get("rating"), (int, float)):
-                continue
-            key = (review.get("timestamp", ""), review.get("user", ""),
-                   review.get("angle", ""), review.get("text", ""))
-            bucket.setdefault(key, review)
-    return {ref: [b[k] for k in sorted(b)] for ref, b in merged.items()}
-
-
 def discussion_index(raw: dict) -> dict[str, dict]:
     return {normalize_ref(ref): row
             for ref, row in (raw.get("agents") or {}).items()
@@ -310,17 +275,6 @@ def audience_index(raw: dict) -> dict[str, str]:
 # Each measurement returns None when the signal is genuinely absent, so the
 # median fill below can tell "scored zero" apart from "never measured". That
 # distinction is the whole of ranking rule 2.
-
-
-def measure_curator(reviews: list[dict], population_mean: float):
-    ratings = [float(r["rating"]) for r in reviews]
-    if not ratings:
-        return None, {"curator_mean": None, "curator_n": 0}
-    mean = sum(ratings) / len(ratings)
-    shrunk = ((CURATOR_PRIOR * population_mean + len(ratings) * mean)
-              / (CURATOR_PRIOR + len(ratings)))
-    sub = min(1.0, max(0.0, (shrunk - 1.0) / 4.0))
-    return sub, {"curator_mean": round(mean, 2), "curator_n": len(ratings)}
 
 
 def measure_community(row: dict | None):
@@ -387,12 +341,6 @@ def measure_reach(downloads, source_max: float):
 def native_why(rar: dict, filled: set[str]) -> list[str]:
     why: list[str] = []
 
-    if rar["curator_n"]:
-        why.append(f"{rar['curator_mean']:g}/5 from "
-                   f"{plural(rar['curator_n'], 'curator review')}")
-    else:
-        why.append("not yet reviewed - scored at the population median")
-
     if rar["upvotes"]:
         why.append(plural(rar["upvotes"], "upvote"))
     if rar["comments"]:
@@ -451,7 +399,6 @@ def build() -> dict:
     if not agents:
         raise SystemExit("registry.json contains no agents; run build_registry.py")
 
-    curators = curator_index(load(CURATOR)) if CURATOR.exists() else {}
     discussions = discussion_index(load(DISCUSSION)) if DISCUSSION.exists() else {}
     audiences = audience_index(load(AUDIENCE_MAP)) if AUDIENCE_MAP.exists() else {}
     aggregated = load(AGGREGATED) if AGGREGATED.exists() else {"items": [], "sources": []}
@@ -464,11 +411,6 @@ def build() -> dict:
     stamps += [parse_ts(i.get("created_at")) for i in agg_items]
     known = [s for s in stamps if s is not None]
     reference = max(known) if known else datetime.now(timezone.utc)
-
-    # Population mean of curator ratings, for the shrink prior. Computed over
-    # reviewed agents only — the whole point is to have something to shrink to.
-    rated = [float(r["rating"]) for reviews in curators.values() for r in reviews]
-    population_mean = sum(rated) / len(rated) if rated else 3.0
 
     # Per-source download ceiling. Reach is normalised inside this bracket and
     # never across it.
@@ -492,7 +434,6 @@ def build() -> dict:
     # ── native agents
     for agent in agents:
         ref = agent.get("name", "")
-        rar_sub, curator_facts = measure_curator(curators.get(ref, []), population_mean)
         comm_sub, comm_facts = measure_community(discussions.get(ref))
         added = parse_ts(agent.get("_added_at"))
         fresh_sub, age_days = measure_freshness(added, reference)
@@ -512,14 +453,12 @@ def build() -> dict:
             "url": f"{PAGES_BASE}/#agent/{urllib.parse.quote(ref, safe='')}",
             "install": f"{RAW_BASE}/{path}" if path else None,
             "source": None,
-            "raw": {"curator": rar_sub, "community": comm_sub,
+            "raw": {"community": comm_sub,
                     "tier": TIER_SCORE.get(tier, TIER_DEFAULT),
                     "freshness": fresh_sub,
                     "depth": measure_native_depth(lines, has_card)},
             "signals": {
                 "rar": {
-                    "curator_mean": curator_facts["curator_mean"],
-                    "curator_n": curator_facts["curator_n"],
                     "upvotes": comm_facts["upvotes"],
                     "comments": comm_facts["comments"],
                     "engagement": comm_facts["engagement"],
@@ -609,8 +548,6 @@ def build() -> dict:
                     "reach": measure_reach(downloads, source_max.get(sid, 0.0))},
             "signals": {
                 "rar": {
-                    "curator_mean": None,
-                    "curator_n": 0,
                     "upvotes": comm_facts["upvotes"],
                     "comments": comm_facts["comments"],
                     "engagement": comm_facts["engagement"],

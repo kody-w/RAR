@@ -52,7 +52,6 @@ RAR_DIR = BASE_DIR.parent
 DELTAS_DIR = BASE_DIR / "stream_deltas"
 STATE_FILE = BASE_DIR / "rappterpedia_state.json"
 EXPORT_FILE = BASE_DIR / "rappterpedia_export.json"
-REVIEWS_FILE = RAR_DIR / "state" / "curator_reviews.json"
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -429,27 +428,128 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
             "votes": random.randint(1, 8), "replies": replies,
         })
 
-        # ── Reviews ──
+        # (Automated agent reviews were retired 2026-08-18: RAR carries human reviews only.)
+
+    delta["completed_at"] = now_iso()
+    return delta
+
+
+def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
+    """
+    Produce a content delta for one stream.
+    A delta contains ONLY what this stream created — never reads or modifies shared state.
+    """
+    ts = now_iso()
+    agents = load_registry()
+
+    # Read previous state for echoes (read-only — we never write to it)
+    prev_state = load_json(STATE_FILE)
+    recent_titles = set()
+    for a in prev_state.get("articles", [])[-20:]:
+        recent_titles.add(a.get("title", ""))
+    for t in prev_state.get("threads", [])[-20:]:
+        recent_titles.add(t.get("title", ""))
+    covered_agents = set(prev_state.get("generated_agent_ids", []))
+
+    delta = {
+        "frame": frame,
+        "stream_id": stream_id,
+        "completed_at": "",  # Set after production
+        "articles_created": [],
+        "threads_created": [],
+        "reviews_created": [],
+    }
+
+    echo_context = (
+        f"Frame {frame}, stream {stream_id}. "
+        f"Total existing: {len(prev_state.get('articles',[]))} articles, "
+        f"{len(prev_state.get('threads',[]))} threads. "
+        f"Don't repeat recent topics: {', '.join(list(recent_titles)[:5])}."
+    )
+
+    for tick in range(ticks):
+        # ── Article ──
         if agents:
-            agent = random.choice(agents)
-            review_text = llm_generate(
-                system="Write a positive, constructive 2-3 sentence review of a RAPP agent. Be specific, encouraging, and reference the agent's actual characteristics. Mention specific things like line count, category, what perform() does, env var requirements. Celebrate what works and frame any limitations as next-step opportunities.",
-                user=f"Review: {agent.get('display_name','')} ({agent.get('name','')})\nCategory: {agent.get('category','')}\n{agent.get('_lines',0)} lines, {agent.get('quality_tier','community')} tier\nDescription: {agent.get('description','')}\nTags: {', '.join(agent.get('tags',[]))}\nEnv vars: {', '.join(agent.get('requires_env',[])) or 'none'}\n\nWrite a specific, encouraging review.",
+            uncovered = [a for a in agents if a.get("name") not in covered_agents]
+            agent = random.choice(uncovered if uncovered else agents)
+            ctx = {
+                "name": agent.get("display_name", ""),
+                "agent_name": agent.get("name", ""),
+                "description": agent.get("description", ""),
+                "category": agent.get("category", "general").replace("_", " "),
+                "lines": agent.get("_lines", 0),
+                "tier": agent.get("quality_tier", "community"),
+                "tags": ", ".join(agent.get("tags", [])),
+            }
+
+            title = f"Deep Dive: {ctx['name']}"
+            if title in recent_titles:
+                title = f"How {ctx['name']} Works"
+            if title in recent_titles:
+                title = f"Using {ctx['name']} in Production"
+
+            content = llm_generate(
+                system=SYSTEM_PROMPT,
+                user=f"Write a wiki article: \"{title}\"\n\nAgent: {ctx['name']} ({ctx['agent_name']})\nDescription: {ctx['description']}\nCategory: {ctx['category']}, {ctx['lines']} lines, {ctx['tier']} tier\nTags: {ctx['tags']}\n\n{echo_context}\n\nWrite practical, specific content with ## headers.",
+            )
+            if not content:
+                print(f"  [SKIP] No LLM response for article: {title}")
+                continue  # LLM-only — no template fallback
+
+            author = random.choice(AUTHORS)
+            pk = composite_pk(frame)
+            delta["articles_created"].append({
+                "pk": pk, "title": title, "category": "agents",
+                "tags": agent.get("tags", [])[:4] + ["deep-dive"],
+                "content": content, "author": author,
+                "source": "llm",
+                "created": ts, "updated": ts,
+            })
+            recent_titles.add(title)
+            covered_agents.add(agent.get("name", ""))
+
+        # ── Thread ──
+        topics = [
+            "the single-file principle", "agent testing best practices",
+            "the Holo card system", "federation for teams",
+            "manifest design patterns", "the Agent Workbench",
+            "community quality standards", "agent versioning strategy",
+        ]
+        topic = random.choice(topics)
+        thread_title = f"Discussion: {topic}"
+        body = llm_generate(
+            system="You are a community member in the Rappterpedia forum. Write an authentic, detailed post about the RAPP agent ecosystem. Be specific about agents, manifests, perform(), BasicAgent, the single-file principle. Write 3-5 paragraphs.",
+            user=f"Write a forum post titled \"{thread_title}\".\n\n{echo_context}",
+            max_tokens=400,
+        )
+        if not body:
+            print(f"  [SKIP] No LLM response for thread: {thread_title}")
+            continue  # LLM-only — no template fallback
+
+        author = random.choice(AUTHORS)
+        pk = composite_pk(frame)
+
+        # Generate 1-3 replies (LLM-only, skip if no response)
+        replies = []
+        for _ in range(random.randint(1, 3)):
+            reply_author = random.choice(AUTHORS)
+            reply_text = llm_generate(
+                system="Reply to a Rappterpedia forum thread. Be helpful, specific, and conversational. Reference RAPP concepts like manifests, perform(), BasicAgent, quality tiers, the registry.",
+                user=f"Thread: {thread_title}\nPost: {body[:300]}\n\nWrite a thoughtful 2-3 sentence reply.",
                 max_tokens=150,
             )
-            if not review_text:
-                print(f"  [SKIP] No LLM response for review: {agent.get('name','')}")
-                continue  # LLM-only
+            if reply_text:
+                replies.append({"author": reply_author, "content": reply_text, "source": "llm", "created": ts})
 
-            delta["reviews_created"].append({
-                "agent_name": agent.get("name", ""),
-                "user": random.choice(AUTHORS),
-                "rating": clamp_review_rating(random.randint(4, 5)),
-                "text": review_text,
-                "source": "llm",
-                "angle": random.choice(["primary", "usability", "code_quality", "community"]),
-                "timestamp": ts,
-            })
+        delta["threads_created"].append({
+            "pk": pk, "title": thread_title, "channel": "general",
+            "content": body, "author": author, "source": "llm",
+            "created": ts, "updated": ts,
+            "votes": random.randint(1, 8), "replies": replies,
+        })
+
+        # ── Reviews ──
+        # (Automated agent reviews retired 2026-08-18 — human reviews only.)
 
     delta["completed_at"] = now_iso()
     return delta
@@ -545,7 +645,6 @@ def merge_deltas(frame: int) -> dict:
     })
 
     # Export reviews for store
-    save_json(REVIEWS_FILE, {"agents": state.get("reviews", {})})
 
     print(f"\n  Dream Catcher merge complete (frame {frame}):")
     print(f"    +{new_articles} articles, +{new_threads} threads, +{new_reviews} reviews")

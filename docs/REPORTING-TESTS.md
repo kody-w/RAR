@@ -24,26 +24,10 @@ pytest tests/test_reporting.py -q      # ~0.05s, no network, no token
 
 Fifteen tests. The ones that matter most are regressions for bugs that shipped:
 
-**`test_critic_index_resolves_a_dashed_publisher`** and
-**`test_a_scored_agent_renders_its_score_not_not_yet_scored`** —
-`state/critic_reviews.json` keys its map with an underscore-normalized name
-(`@aibast_agents_library/x`) while each record's own `name` field holds the real
-dashed one (`@aibast-agents-library/x`). Looking up by dict key silently resolved
-*nothing* for every publisher with a dash, which is most of the registry. Every
-report card read "not yet scored" while real scores existed. It failed silently
-and looked exactly like "no data yet" — the worst way for a metric to break,
-because the broken state is indistinguishable from the honest empty state.
-
-> **These replaced a test that could not fail.** The original
-> `test_critic_lookup_resolves_dashed_publishers` re-implemented *both* lookups
-> inside the test body and compared them to each other. It asserted a property
-> of `critic_reviews.json`, never of `publish_reports.py`, so reintroducing the
-> bug in the shipped code left it green — while this document cited it as proof.
-> A test that cannot fail is worse than no test, because the documentation
-> around it becomes a false assurance. The lookup now lives in a named function
-> (`reports.critic_index`) that the script itself calls, and both tests were
-> verified by reintroducing the bug in a scratch copy and confirming they go
-> red. Do that for any test you add here.
+**(Retired 2026-08-18)** The two critic-lookup regressions that used to lead this
+list went with the critic panel itself; the lesson they carried — a test that
+re-implements the lookup it claims to test cannot fail — stays. Verify every
+test here by reintroducing its bug in a scratch copy and watching it go red.
 
 **`test_splice_replaces_block_when_end_marker_is_missing`** — the report block is
 delimited by `<!-- rar:report:start -->` / `<!-- rar:report:end -->`. If someone
@@ -88,8 +72,6 @@ in a different field or nowhere.
 | # | Reaction | Channel | Appears at |
 |---|---|---|---|
 | S1 | 👍 `THUMBS_UP` | `worked` | `agents["@pub/slug"].signals.worked` |
-| S2 | 👎 `THUMBS_DOWN` | `did_not_work` | `…signals.did_not_work` |
-| S3 | 😕 `CONFUSED` | `stuck` | `…signals.stuck` |
 | S4 | ❤️ `HEART` | `regular_use` | `…signals.regular_use` |
 | S5 | 🚀 `ROCKET` | `shipped` | `…signals.shipped` |
 | S6 | 👀 `EYES` | `want_to_try` | `…signals.want_to_try` |
@@ -177,6 +159,6 @@ card must be replaced rather than duplicated.
   no independent way to check it, and pretending otherwise would be theatre.
 - **Whether a signal is *honest*.** The suite proves a reaction lands in the
   right field. Whether "worked" means it worked is a human question.
-- **The critic panel's judgement.** `critic_review.py` is model-written and
-  rotates models by design. Tests pin its plumbing — that scores parse, land, and
-  join to the right agent — never the scores themselves.
+- **Any machine opinion of an agent.** The critic panel was retired on
+  2026-08-18 (with the engine curator notes and downvotes); RAR reports human
+  signal only, and negative poll rows are no longer seeded or counted.

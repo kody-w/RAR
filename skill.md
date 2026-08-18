@@ -197,7 +197,7 @@ Returns (`schema: rar-discussion-ratings/1.0`) `agents` keyed by agent name: `{u
 - **Comment / review** an agent: reply in its Discussion thread (`url`).
 - The snapshot refreshes daily; a live vote appears on the next refresh.
 
-Legacy issue-based votes/reviews still work too (`state/votes.json`, `state/reviews.json`, filed via `[RAR]`-prefixed Issues) and are merged with reaction counts in the store UI.
+Legacy issue-based votes/reviews still work too (`state/votes.json`, `state/reviews.json`, filed via `[RAR]`-prefixed Issues) and are merged with reaction counts in the store UI. Votes are upvotes only — RAR tracks no downvotes and publishes no automated reviews (human reviews only).
 
 ---
 

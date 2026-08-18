@@ -47,7 +47,6 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_FILE = REPO_ROOT / "registry.json"
 RATINGS_FILE = REPO_ROOT / "state" / "discussion_ratings.json"
-CRITIC_FILE = REPO_ROOT / "state" / "critic_reviews.json"
 DOWNLOADS_FILE = REPO_ROOT / "state" / "downloads.json"
 AGGREGATED_FILE = REPO_ROOT / "state" / "aggregated.json"
 
@@ -66,8 +65,6 @@ SIGNAL_ROWS = [
     ("regular_use", "In regular use"),
     ("shipped", "Shipped to a customer"),
     ("want_to_try", "Want to try"),
-    ("stuck", "Couldn't get it running"),
-    ("did_not_work", "Didn't work"),
 ]
 
 DISCUSSIONS_QUERY = """
@@ -120,7 +117,7 @@ def fmt(n) -> str:
     return f"{n:,}" if isinstance(n, int) else str(n)
 
 
-def render(agent: dict, rating: dict, critic: dict,
+def render(agent: dict, rating: dict,
            rel_downloads, upstream: dict | None) -> str:
     """The report card. Every number traces to a state file; none are typed."""
     name = agent.get("name", "")
@@ -171,14 +168,9 @@ def render(agent: dict, rating: dict, critic: dict,
         lines += ["_Nobody has answered yet — react on the “How did this agent "
                   "go?” comment below. One tap, no form._", ""]
 
-    # ── Quality ─────────────────────────────────────────────────────────
-    avg, count = critic.get("critic_avg"), critic.get("critic_count") or 0
-    if count:
-        lines.append(f"**Critic score** {avg:.0f}/100 from {count} independent "
-                     f"{'critic' if count == 1 else 'critics'}, each reading a "
-                     "different lens. Model-written, not human review.")
-    else:
-        lines.append("**Critic score** not yet scored.")
+    # ── Provenance ──────────────────────────────────────────────────────
+    # (The model-written critic score was retired 2026-08-18; RAR publishes
+    #  human signal only.)
     digest = agent.get("_sha256") or agent.get("_stub_sha256")
     if digest:
         lines.append(f"**Content hash** `{digest[:16]}…` — anyone can verify the "
@@ -202,23 +194,6 @@ def render(agent: dict, rating: dict, critic: dict,
     # avoid. Guarantee exactly one of each by construction.
     inner = block[len(START):-len(END)].replace(START, "").replace(END, "")
     return f"{START}{inner}{END}"
-
-
-def critic_index(raw: dict) -> dict:
-    """Index critic records by the name a registry agent is actually called.
-
-    critic_reviews.json keys its map with an UNDERSCORE-normalized name
-    ('@aibast_agents_library/x') while each record's own `name` field holds the
-    real dashed one ('@aibast-agents-library/x'). Keying off the dict silently
-    resolved NOTHING for every publisher with a dash — most of the registry —
-    and every card read "not yet scored" while real scores existed.
-
-    This is a named function, not three lines inlined in main(), so a test can
-    exercise the code that actually runs. The first regression test for this bug
-    re-implemented the lookup inside the test and therefore stayed green with
-    the bug fully reintroduced.
-    """
-    return {(rec.get("name") or key): rec for key, rec in (raw or {}).items()}
 
 
 def splice(body: str, block: str) -> str:
@@ -267,7 +242,6 @@ def main() -> int:
         warn("registry.json has no agents; nothing to report.")
         return 0
     ratings = (load(RATINGS_FILE, {}) or {}).get("agents", {})
-    critics = critic_index((load(CRITIC_FILE, {}) or {}).get("agents", {}))
     downloads = (load(DOWNLOADS_FILE, {}) or {}).get("agents", {})
     aggregated = {i["ref"]: i for i in (load(AGGREGATED_FILE, {}) or {}).get("items", [])}
 
@@ -278,7 +252,7 @@ def main() -> int:
             if n not in agents:
                 warn(f"'{n}' is not in the registry."); return 1
             up = aggregated.get(n)
-            print(render(agents[n], ratings.get(n, {}), critics.get(n, {}),
+            print(render(agents[n], ratings.get(n, {}),
                          (downloads.get(n) or {}).get("downloads"),
                          {"source_name": up["source_id"],
                           "upstream_url": up["url"]} if up else None))
@@ -306,7 +280,7 @@ def main() -> int:
             continue
         up = aggregated.get(title)
         block = render(
-            agents[title], ratings.get(title, {}), critics.get(title, {}),
+            agents[title], ratings.get(title, {}),
             (downloads.get(title) or {}).get("downloads"),
             {"source_name": up["source_id"], "upstream_url": up["url"]} if up else None,
         )

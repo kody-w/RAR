@@ -108,7 +108,9 @@ Promotion path: **Frontier → Community → Verified → Official**
 
 - `build-registry.yml` — rebuilds `registry.json` on pushes to `agents/**`
 - `process-issues.yml` — processes GitHub Issues with `[RAR]`/`[AGENT]` prefix for votes, reviews, submissions
-- `refresh-ratings.yml` — daily: seeds Discussion threads for new agents, re-counts positive reactions (thumbs-up/heart/hooray/rocket/laugh only; downvotes never count), commits `state/discussion_ratings.json` only when counts changed
+- `refresh-ratings.yml` — daily: seeds Discussion threads for new agents, re-counts positive reactions (thumbs-up/heart/hooray/rocket/laugh only; RAR tracks upvotes only — there is no downvote), commits `state/discussion_ratings.json` only when counts changed
+
+**Positive by design (2026-08-18):** RAR carries no automated reviews (the model critic panel and the engine "curator notes" were retired) and no downvotes. Reviews are human, via the Issue pipeline; votes are upvotes.
 - `rappterpedia-heartbeat.yml` — Dream Catcher fleet: 5 parallel workers every 2 hours, produces deltas, merges at frame boundary
 - `template_setup.yml` — setup automation for new federated instances
 
@@ -125,12 +127,11 @@ Community wiki and forum at `rappterpedia/index.html`. Agent-first Wikipedia wit
 | File | Role |
 |------|------|
 | `rappterpedia/index.html` | Zero-dependency wiki + forum web app |
-| `rappterpedia/rappterpedia_engine.py` | Rules-as-data content engine (articles, threads, reviews) |
+| `rappterpedia/rappterpedia_engine.py` | Rules-as-data content engine (articles, threads) |
 | `rappterpedia/dream_catcher.py` | Dream Catcher: parallel fleet with delta-based merge |
 | `rappterpedia/rappterpedia_state.json` | Accumulated state across all frames |
 | `rappterpedia/rappterpedia_export.json` | Export for web UI consumption |
 | `rappterpedia/stream_deltas/` | Delta files from fleet workers |
-| `state/curator_reviews.json` | Engine-generated reviews loaded by the store |
 
 ### The Dream Catcher Pattern
 

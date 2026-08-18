@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-18T22:23:10.674945+00:00",
+  "generated_at": "2026-08-18T22:42:42.853510+00:00",
   "stats": {
     "total_agents": 304,
     "total_swarms": 82,
@@ -7468,10 +7468,11 @@
       "_seed": 20167080258405281196,
       "_size_kb": 9.3,
       "_lines": 188,
-      "_has_card": false,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null
+      "_has_card": true,
+      "_added_at": "2026-08-18T18:26:12-04:00",
+      "_first_commit_sha": "871fe0c337dfb58aec623592c8890c66d9ee5bb0",
+      "_latest_commit_sha": "871fe0c337dfb58aec623592c8890c66d9ee5bb0",
+      "_card_sha256": "367c77631dd0afbcf83d898ad21ff753a857b9b565bb49e3ddfb38ec147bac85"
     },
     {
       "schema": "rapp-agent/1.0",
@@ -15394,7 +15395,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/rar_remote_agent",
-      "version": "1.7.4",
+      "version": "1.8.0",
       "display_name": "RAR Remote Agent",
       "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
       "author": "RAPP Core Team",
@@ -15415,9 +15416,9 @@
       ],
       "_file": "agents/@kody-w/rar_remote_agent.py",
       "_install_filename": "rar_kody_w_rar_remote_agent.py",
-      "_sha256": "584e0e180d07918b1b9371dc0271950991088a54db3664eb5f5e294e03716ee2",
+      "_sha256": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a",
       "_lifecycle": "notarized",
-      "_receipt": "rar_64b2f2ae8fe113bb15c3aee6e2de1c47561dcdc756ab9694e62db8513cd9ed40",
+      "_receipt": "rar_97803bde857c4794fee71e9894cdad43066a6688cc3ecde1680f193ed6ae6264",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -15434,13 +15435,13 @@
         ]
       },
       "_seed": 13515315761908692801,
-      "_size_kb": 59.4,
-      "_lines": 1400,
+      "_size_kb": 59.7,
+      "_lines": 1403,
       "_has_card": true,
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "d31f383a14b2ba7d8f6c5d6ee0321690dc3341d4",
-      "_card_sha256": "2313bf65842a03532f9e3eead0dbb5b0718b0c4c057b1f1bb5a3b8c66d12082c"
+      "_card_sha256": "00814edd84e2e154074e2c417624b1860d13fd0cf38805e4d3277ca30e702600"
     },
     {
       "schema": "rapp-agent/1.0",

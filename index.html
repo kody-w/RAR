@@ -877,21 +877,19 @@ function renderEcosystemIndex() {
     </div>`;
 }
 
-// Registry metrics (state/metrics.json) — per-agent downloads, votes and
-// review counts, plus the engine-written reviews themselves. Both are
-// snapshots rebuilt daily; the UI degrades to no badges if either is absent.
+// Registry metrics (state/metrics.json) — per-agent downloads, upvotes and
+// review counts — plus the human reviews themselves. Both are snapshots
+// rebuilt daily; the UI degrades to no badges if either is absent.
+// (Automated reviews — the critic panel and engine "curator notes" — were
+//  retired 2026-08-18. RAR shows human reviews and upvotes only.)
 let agentMetrics = {};
-let agentReviews = {};   // engine-generated curator notes
 let userReviews = {};    // real user reviews (state/reviews.json)
 
-// votes.json and curator_reviews.json key some agents with dashed slugs
-// while registry.json uses snake_case. Normalize before matching.
+// votes.json keys some agents with dashed slugs while registry.json uses
+// snake_case. Normalize before matching.
 const normKey = s => String(s || '').toLowerCase().replace(/[-\s]+/g, '_');
 function metricsFor(name) {
   return agentMetrics[name] || agentMetrics[normKey(name)] || null;
-}
-function reviewsFor(name) {
-  return agentReviews[name] || agentReviews[normKey(name)] || [];
 }
 function userReviewsFor(name) {
   return userReviews[name] || userReviews[normKey(name)] || [];
@@ -915,71 +913,20 @@ fetch(RAW + '/state/reviews.json?t=' + Date.now())
   })
   .catch(() => {});
 
-fetch(RAW + '/state/curator_reviews.json?t=' + Date.now())
-  .then(r => r.ok ? r.json() : null)
-  .then(d => {
-    if (!d || !d.agents) return;
-    for (const [k, v] of Object.entries(d.agents)) agentReviews[normKey(k)] = v;
-    if (allAgents.length) render();
-  })
-  .catch(() => {});
-
 const STAR = '&#9733;';
-
-// Rotten-Tomatoes-style verdict states from the AI critic panel.
-const TOMATO = {
-  certified: { label: 'Certified Fresh', color: 'var(--green)', mark: '&#10022;' },
-  fresh:     { label: 'Fresh',           color: 'var(--green)', mark: '&#9679;' },
-  rotten:    { label: 'Rotten',          color: '#f85149',      mark: '&#9675;' },
-  unrated:   { label: 'Not yet scored',  color: 'var(--text-muted)', mark: '&#8211;' }
-};
-
-let criticReviews = {};   // state/critic_reviews.json — full panel verdicts
-function criticFor(name) {
-  return criticReviews[name] || criticReviews[normKey(name)] || null;
-}
-
-fetch(RAW + '/state/critic_reviews.json?t=' + Date.now())
-  .then(r => r.ok ? r.json() : null)
-  .then(d => {
-    if (!d || !d.agents) return;
-    for (const [k, v] of Object.entries(d.agents)) criticReviews[normKey(k)] = v;
-    if (allAgents.length) render();
-  })
-  .catch(() => {});
 
 // Compact metric strip shown on every browse card.
 function metricBadges(a) {
   const m = metricsFor(a.name);
-  const revs = reviewsFor(a.name).length;
-  if (!m && !revs) return '';
+  if (!m) return '';
 
   const bits = [];
-  const cr = criticFor(a.name);
-  const cs = cr ? cr.critic_score : (m ? m.cs : null);
-  const us = cr ? cr.user_score : (m ? m.us : null);
-  const state = (cr && cr.state) || (m && m.t) || 'unrated';
-  if (cs !== null && cs !== undefined) {
-    const st = TOMATO[state] || TOMATO.unrated;
-    const n = cr ? cr.critic_count : (m ? m.cn : 0);
-    bits.push(`<a href="#reviews/${encodeURIComponent(a.name)}" onclick="event.stopPropagation();openReviews('${esc(a.name)}');return false" title="${st.label} — ${cs}% of ${n} model-written critic reviews came back fresh" style="color:${st.color};text-decoration:none;font-weight:700">${st.mark} ${cs}%</a>`);
-    if (us !== null && us !== undefined) {
-      bits.push(`<span title="User score — ${us}% positive human signal" style="color:var(--text-dim)">&#128100; ${us}%</span>`);
-    }
-  }
-  if (m && m.d) bits.push(`<span title="${m.d} download${m.d === 1 ? '' : 's'} through the jsDelivr CDN">&#8595; ${m.d}</span>`);
-  if (m && (m.u || m.n)) {
-    const s = m.s > 0 ? '+' + m.s : m.s;
-    bits.push(`<span title="${m.u} up / ${m.n} down">&#9650; ${s}</span>`);
-  }
-  const userRevs = m && m.r ? m.r : 0;
-  const curRevs = m && m.cr ? m.cr : revs;
+  if (m.d) bits.push(`<span title="${m.d} download${m.d === 1 ? '' : 's'} through the jsDelivr CDN">&#8595; ${m.d}</span>`);
+  if (m.u) bits.push(`<span title="${m.u} upvote${m.u === 1 ? '' : 's'}">&#9650; ${m.u}</span>`);
+  const userRevs = m.r ? m.r : 0;
   if (userRevs) {
-    const rt = m && m.rt ? m.rt : 0;
+    const rt = m.rt ? m.rt : 0;
     bits.push(`<a href="#reviews/${encodeURIComponent(a.name)}" onclick="event.stopPropagation();openReviews('${esc(a.name)}');return false" title="Read all ${userRevs} user review${userRevs === 1 ? '' : 's'}" style="color:var(--accent);text-decoration:none">${STAR} ${rt || '–'} (${userRevs})</a>`);
-  } else if (curRevs) {
-    const crt = m && m.crt ? m.crt : 0;
-    bits.push(`<a href="#reviews/${encodeURIComponent(a.name)}" onclick="event.stopPropagation();openReviews('${esc(a.name)}');return false" title="No user reviews yet — ${curRevs} engine-generated curator note${curRevs === 1 ? '' : 's'}" style="color:var(--text-muted);text-decoration:none">&#9678; ${crt || '–'} (${curRevs} engine)</a>`);
   }
   if (!bits.length) return '';
   return `<span class="metric-strip">${bits.join('<span class="metric-sep">&middot;</span>')}</span>`;
@@ -1158,116 +1105,14 @@ function loadSharedCart() {
 window.addEventListener('load', () => { updateCartUI(); loadSharedCart(); });
 
 // Per-agent metrics panel inside the detail modal.
-function scoreSection(a) {
-  const cr = criticFor(a.name);
-  if (!cr || cr.critic_score === null || cr.critic_score === undefined) return '';
-  const st = TOMATO[cr.state] || TOMATO.unrated;
-  const meter = (label, val, color, sub) => `
-    <div style="flex:1;min-width:150px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px 16px">
-      <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);font-weight:750">${label}</div>
-      <div style="font-size:2rem;font-weight:830;color:${color};line-height:1.1;margin-top:2px">${val === null || val === undefined ? '&mdash;' : val + '%'}</div>
-      <div style="font-size:.72rem;color:var(--text-muted)">${sub}</div>
-    </div>`;
-  return `<div class="section">
-      <h3>Critic score vs user score</h3>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${meter('Critic score', cr.critic_score, st.color, `${st.mark} ${st.label} &middot; ${cr.critic_count || 0} model-written review${cr.critic_count === 1 ? '' : 's'}${cr.rubric_reviews ? ` &middot; ${cr.rubric_reviews} rubric (not scored)` : ''}`)}
-        ${meter('User score', cr.user_score, 'var(--accent)', `${cr.user_signal || 0} piece${cr.user_signal === 1 ? '' : 's'} of human signal`)}
-      </div>
-      <div style="font-size:.74rem;color:var(--text-muted);margin-top:8px">
-        Panel read v${esc(cr.version || '?')} (<code>${esc(String(cr.sha256 || '').slice(0, 12))}</code>) on
-        ${esc(String(cr.reviewed_at || '').slice(0, 10))} &middot; triggered by ${esc(cr.trigger || 'schedule')} &middot;
-        ${esc((cr.backends || []).join(', ') || 'rubric')}
-      </div>
-    </div>`;
-}
-
-// Proof behind the verdict: the run transcript, streamed a frame at a time.
-function proofSection(a) {
-  const cr = criticFor(a.name);
-  const ev = cr && cr.evidence;
-  if (!ev || !ev.url) return '';
-  const run = cr.run || {};
-  const bits = [];
-  if (run.tier) bits.push(`loaded via <code>${esc(run.tier)}</code>`);
-  if (run.chat_probe && run.chat_probe.tool_invoked) bits.push('hot-loaded into a live brainstem and driven through <code>/chat</code>');
-  if (run.standalone_run && run.standalone_run.ran) bits.push(`<code>python agent.py</code> exited ${run.standalone_run.exit_code}`);
-  return `<div class="section">
-      <h3>Proof</h3>
-      <div style="font-size:.82rem;color:var(--text-dim)">
-        The panel didn't just read this file &mdash; it ran it. ${bits.join(' &middot; ')}.
-      </div>
-      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-        <button class="dl-btn" onclick="event.stopPropagation();streamProof('${esc(a.name)}')">Stream the transcript (${ev.frame_count} frames)</button>
-        <a class="dl-btn" style="text-decoration:none;display:inline-block" href="${esc(ev.url)}" download target="_blank" rel="noopener">Download evidence</a>
-      </div>
-      <div id="proof-frames" style="margin-top:10px"></div>
-      <div style="font-size:.74rem;color:var(--text-muted);margin-top:10px">
-        Continue this review on your own brainstem:
-        <code style="display:block;margin-top:4px;white-space:pre-wrap;word-break:break-all">python scripts/resume_review.py ${esc(a.name)}</code>
-      </div>
-    </div>`;
-}
-
-async function streamProof(name) {
-  const cr = criticFor(name);
-  const box = document.getElementById('proof-frames');
-  if (!cr || !cr.evidence || !box) return;
-  box.innerHTML = '<div style="color:var(--text-muted);font-size:.82rem">loading transcript…</div>';
-  let doc;
-  try {
-    const r = await fetch(cr.evidence.url + '?t=' + Date.now());
-    doc = await r.json();
-  } catch (e) {
-    box.innerHTML = '<div style="color:var(--text-muted);font-size:.82rem">Transcript not reachable.</div>';
-    return;
-  }
-  box.innerHTML = '';
-  for (const f of doc.frames || []) {
-    const el = document.createElement('div');
-    el.style.cssText = 'border:1px solid var(--border);border-radius:8px;margin-bottom:6px;background:var(--surface2);overflow:hidden';
-    el.innerHTML = `<div style="padding:8px 12px;font-size:.76rem;font-weight:700;border-bottom:1px solid var(--border)">
-        ${esc(f.label)} <span style="color:var(--text-muted);font-weight:500">&middot; frame ${f.i + 1}/${doc.frame_count} &middot; ${f.bytes} bytes &middot; ${esc(String(f.sha256).slice(0, 8))}</span></div>
-      <pre style="margin:0;padding:10px 12px;font-size:.72rem;color:var(--text-dim);white-space:pre-wrap;word-break:break-word;max-height:260px;overflow:auto">${esc(f.text)}</pre>`;
-    box.appendChild(el);
-    await new Promise(r => setTimeout(r, 90));
-  }
-}
-
-function criticSection(a) {
-  const cr = criticFor(a.name);
-  if (!cr || !(cr.reviews || []).length) return '';
-  return `<div class="section" id="critic-section">
-      <h3>Critic panel (${cr.reviews.length})</h3>
-      <div style="font-size:.78rem;color:var(--text-muted);margin:-4px 0 10px">
-        Each critic reads the same file through a different lens and cites the run transcript.
-        Fresh is 60/100 or better. Verdicts marked <code>rubric</code> came from a deterministic
-        heuristic because no model was reachable — they are shown for completeness but do not
-        count toward the critic score.
-      </div>
-      ${cr.reviews.map(r => `<div style="border:1px solid var(--border);border-left:3px solid ${r.fresh ? 'var(--green)' : '#f85149'};border-radius:8px;padding:12px 14px;margin-bottom:8px;background:var(--surface2)">
-        <div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap">
-          <strong style="font-size:.86rem">${esc(r.critic)}</strong>
-          <span style="font-size:.82rem;font-weight:800;color:${r.fresh ? 'var(--green)' : '#f85149'}">${r.score}/100</span>
-        </div>
-        <div style="font-size:.8rem;color:var(--text);margin-top:4px;font-weight:600">${esc(r.headline || '')}</div>
-        <div style="font-size:.85rem;color:var(--text-dim);margin-top:4px">${esc(r.review || '')}</div>
-        <div style="font-size:.68rem;color:var(--text-muted);margin-top:6px">${esc(r.lens || '')} &middot; ${esc(r.backend || '')}</div>
-      </div>`).join('')}
-    </div>`;
-}
-
 function metricsSection(a) {
   const m = metricsFor(a.name);
-  const revs = reviewsFor(a.name);
-  if (!m && !revs.length) return '';
-  const cr = criticFor(a.name);
-  const userRevs = m && m.r ? m.r : 0;
+  if (!m) return '';
+  const userRevs = m.r ? m.r : 0;
   const cells = [
-    ['Downloads', m && m.d ? m.d : 0, 'CDN file fetches'],
-    ['Votes', m ? ((m.s > 0 ? '+' : '') + (m.s || 0)) : 0, m ? `${m.u || 0} up / ${m.n || 0} down` : ''],
-    ['User reviews', userRevs, userRevs && m && m.rt ? `${STAR} ${m.rt} average` : 'none yet'],
-    ['Engine notes', revs.length, revs.length && m && m.crt ? `${STAR} ${m.crt} average` : 'not counted']
+    ['Downloads', m.d ? m.d : 0, 'CDN file fetches'],
+    ['Upvotes', m.u || 0, 'distinct people'],
+    ['User reviews', userRevs, userRevs && m.rt ? `${STAR} ${m.rt} average` : 'none yet']
   ];
   return `<div class="section">
       <h3>Metrics</h3>
@@ -1302,8 +1147,6 @@ function reviewCard(r) {
 const REVIEW_ISSUE = name => `https://github.com/${OWNER}/${REPO_NAME}/issues/new?title=${encodeURIComponent('[RAR] review')}&body=${encodeURIComponent('```json\n{"action":"review","payload":{"agent":"' + name + '","rating":5,"text":"Your review"}}\n```')}`;
 
 function reviewsSection(a) {
-  const revs = reviewsFor(a.name);
-  const m = metricsFor(a.name);
   const userRevs = userReviewsFor(a.name);
   const byDate = list => [...list].sort((x, y) => String(y.timestamp || '').localeCompare(String(x.timestamp || '')));
   const userBlock = `<div class="section" id="reviews-section">
@@ -1315,20 +1158,7 @@ function reviewsSection(a) {
            </div>`}
       <div style="font-size:.8rem;margin-top:8px"><a href="${REVIEW_ISSUE(a.name)}" target="_blank">Leave a review</a></div>
     </div>`;
-  if (!revs.length) return userBlock;
-  const sorted = byDate(revs);
-  return userBlock + `<div class="section" id="curator-section">
-      <h3 style="color:var(--text-muted)">Engine notes (${revs.length})</h3>
-      <div style="font-size:.78rem;color:var(--text-muted);margin:-4px 0 10px">
-        Generated by the Rappterpedia review engine, not written by users &mdash; shown for context and
-        <strong>not counted</strong> in this agent's review total or rating.
-      </div>
-      ${sorted.map(reviewCard).join('')}
-      <div style="font-size:.8rem;margin-top:4px">
-        <a href="${RAW}/state/curator_reviews.json" target="_blank">Raw engine data</a> &middot;
-        <a href="store.html#agent/${encodeURIComponent(a.name)}" target="_blank">Open in the full store</a>
-      </div>
-    </div>`;
+  return userBlock;
 }
 
 // Open an agent straight to its reviews (card star badge, #reviews/<name>).
@@ -1393,10 +1223,7 @@ function openAgent(name) {
       <h3>Environment Variables</h3>
       <div class="env-list">${envHtml}</div>
     </div>
-    ${scoreSection(a)}
     ${metricsSection(a)}
-    ${criticSection(a)}
-    ${proofSection(a)}
     ${reviewsSection(a)}
     ${ghUrl ? `<div class="section"><a href="${esc(ghUrl)}" target="_blank" style="font-size:.85rem">View source on GitHub</a></div>` : ''}
   `;

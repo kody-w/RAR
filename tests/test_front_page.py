@@ -290,7 +290,7 @@ def test_source_blocks_appear_only_where_provenance_exists(items):
 def test_components_declare_which_population_they_apply_to(payload):
     applies = {c["key"]: c["applies_to"] for c in payload["ranking"]["components"]}
     assert applies["reach"] == "aggregated"
-    for key in ("curator", "community", "tier"):
+    for key in ("community", "tier"):
         assert applies[key] == "native", (
             f"'{key}' is a RAR counter and cannot apply to a third-party entry")
 
@@ -324,10 +324,6 @@ def _num(value):
 
 
 NUMERIC_WHY = [
-    (r"^([\d.]+)/5 from (\d+) curator reviews?$",
-     lambda g, s: (_num(s["rar"]["curator_mean"]) == float(g[0])
-                   and s["rar"]["curator_n"] == int(g[1])
-                   and s["rar"]["curator_n"] > 0)),
     (r"^(\d+) upvotes?$", lambda g, s: s["rar"]["upvotes"] == int(g[0]) > 0),
     (r"^(\d+) comments?$", lambda g, s: s["rar"]["comments"] == int(g[0]) > 0),
     (r"^(\d+) hands-on reports?$",
@@ -351,8 +347,6 @@ NUMERIC_WHY = [
 ]
 
 LITERAL_WHY = {
-    "not yet reviewed - scored at the population median":
-        lambda s: s["rar"]["curator_n"] == 0,
     "no community feedback yet":
         lambda s: not (s["rar"]["upvotes"] or s["rar"]["comments"]
                        or s["rar"]["engagement"]),
@@ -462,28 +456,33 @@ def test_missing_components_are_filled_with_the_population_median(payload, items
                 "does not match the published median")
 
 
-def test_unreviewed_agents_say_so_and_are_not_zeroed(payload, items):
-    unreviewed = [i for i in items
-                  if i["origin"] == "native" and i["signals"]["rar"]["curator_n"] == 0]
-    assert unreviewed, "expected some agents to have no curator review"
-    median = payload["ranking"]["medians"]["curator"]
-    for item in unreviewed:
-        assert "not yet reviewed - scored at the population median" in item["why"]
-        assert item["components"]["curator"] == median
-        assert item["components"]["curator"] > 0, (
-            "a missing review scored as zero punishes silence, not quality")
+def test_agents_without_community_signal_are_scored_at_the_median(payload, items):
+    """Absence of signal is not negative signal — now measured on the community
+    component (curator reviews were retired 2026-08-18)."""
+    quiet = [i for i in items
+             if i["origin"] == "native" and i["signals"]["rar"]["upvotes"] == 0
+             and i["signals"]["rar"]["engagement"] == 0 and i["signals"]["rar"]["comments"] == 0
+             and "community" in i["scored_at_median"]]
+    assert quiet, "expected some agents with no community feedback"
+    median = payload["ranking"]["medians"]["community"]
+    for item in quiet:
+        assert item["components"]["community"] == median
 
 
-def test_an_unreviewed_agent_is_not_bottom_of_the_list(items):
+def test_no_component_is_a_machine_opinion(payload):
+    keys = {c["key"] for c in payload["ranking"]["components"]}
+    assert "curator" not in keys and "critic" not in keys
+    assert set(keys) == {"community", "tier", "freshness", "depth", "reach"}
+
+def test_a_quiet_agent_is_not_bottom_of_the_list(items):
     """The failure this guards: ranking the catalog by who happened to get
-    reviewed, then presenting it as quality."""
+    noticed, then presenting it as quality."""
     native = [i for i in items if i["origin"] == "native"]
-    unreviewed_ranks = [n for n, i in enumerate(native)
-                        if i["signals"]["rar"]["curator_n"] == 0]
-    assert unreviewed_ranks and unreviewed_ranks[0] < len(native) // 2, (
-        "every unreviewed agent landed in the bottom half; absence of signal is "
+    quiet_ranks = [n for n, i in enumerate(native)
+                   if i["signals"]["rar"]["upvotes"] == 0 and i["signals"]["rar"]["engagement"] == 0]
+    assert quiet_ranks and quiet_ranks[0] < len(native) // 2, (
+        "every quiet agent landed in the bottom half; absence of signal is "
         "being scored as negative signal")
-
 
 def test_freshness_decays_smoothly_rather_than_cliffing(bfp):
     reference = bfp.parse_ts("2026-08-01T00:00:00Z")

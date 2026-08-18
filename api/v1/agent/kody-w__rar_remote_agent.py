@@ -16,7 +16,7 @@ Fully compatible with the RAPP brainstem runtime:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rar_remote_agent",
-    "version": "1.7.4",
+    "version": "1.8.0",
     "display_name": "RAR Remote Agent",
     "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
     "author": "RAPP Core Team",
@@ -101,7 +101,7 @@ class RARRemoteAgent(BasicAgent):
                             "'install' — download agent (REQUIRES agent_name). For type='stub' "
                             "entries, resolves the bytes from the private repo declared in "
                             "__source__ using your GitHub credentials. "
-                            "'vote' — upvote/downvote (REQUIRES agent_name; optional: direction). "
+                            "'vote' — upvote an agent (REQUIRES agent_name; RAR tracks upvotes only). "
                             "'review' — write review (REQUIRES agent_name, rating, text). "
                             "'submit' — submit new public agent (REQUIRES code). "
                             "'submit_upstream' — federate a local agent to the upstream RAR. "
@@ -144,8 +144,8 @@ class RARRemoteAgent(BasicAgent):
                     },
                     "direction": {
                         "type": "string",
-                        "description": "Vote direction. Default: 'up'.",
-                        "enum": ["up", "down"],
+                        "description": "Vote direction. Only 'up' — RAR tracks upvotes only.",
+                        "enum": ["up"],
                     },
                     "rating": {
                         "type": "integer",
@@ -1251,14 +1251,17 @@ class RARRemoteAgent(BasicAgent):
         )
 
     def _vote(self, params):
-        """Upvote or downvote an agent via GitHub Issue."""
+        """Upvote an agent via GitHub Issue. RAR tracks upvotes only (2026-08-18):
+        if something did not work, write a review — a sentence helps the author more
+        than a thumb."""
         name = params.get("agent_name", "")
         direction = params.get("direction", "up")
 
         if not name:
             return "Error: 'agent_name' is required."
-        if direction not in ("up", "down"):
-            return "Error: 'direction' must be 'up' or 'down'."
+        if direction != "up":
+            return ("Error: RAR tracks upvotes only. If the agent did not work for you, "
+                    "use action='review' with a rating and a sentence — that reaches the author.")
 
         result = self._create_issue(
             f"vote: {name}",

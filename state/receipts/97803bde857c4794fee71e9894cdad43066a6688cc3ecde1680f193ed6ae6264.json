@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-18"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/rar_remote_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a"
+ },
+ "canonical_path": "agents/@kody-w/rar_remote_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-18T22:39:01.949436+00:00",
+ "id": "rar_97803bde857c4794fee71e9894cdad43066a6688cc3ecde1680f193ed6ae6264",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "584e0e180d07918b1b9371dc0271950991088a54db3664eb5f5e294e03716ee2",
+  "receipt": "rar_64b2f2ae8fe113bb15c3aee6e2de1c47561dcdc756ab9694e62db8513cd9ed40",
+  "version": "1.7.4"
+ },
+ "quality_tier": "official",
+ "request_id": "req_97803bde857c4794fee71e98",
+ "revision_id": "97803bde857c4794fee71e9894cdad43066a6688cc3ecde1680f193ed6ae6264",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "rar_remote_agent 1.8.0: upvotes only (RAR tracks no downvotes; automated reviews retired 2026-08-18)"
+ },
+ "version": "1.8.0"
+}

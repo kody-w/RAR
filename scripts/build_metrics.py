@@ -6,8 +6,6 @@ Sources (all public, no auth required except GitHub traffic):
   - registry.json                       agents, publishers, categories, sizes, dates
   - state/votes.json                    up/down votes per agent
   - state/reviews.json                  real user reviews + ratings per agent
-  - state/curator_reviews.json          engine-generated curator notes (reported separately)
-  - state/critic_reviews.json           AI critic panel verdicts (critic score vs user score)
   - api.github.com/repos/...            stars, forks, watchers, issues, releases
   - api.github.com/.../traffic/*        clones, views, popular paths/referrers (needs token)
   - data.jsdelivr.com                   CDN download hits, per-file + per-day
@@ -44,8 +42,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = ROOT / "registry.json"
 VOTES = ROOT / "state" / "votes.json"
-CURATOR_REVIEWS = ROOT / "state" / "curator_reviews.json"
-CRITIC_REVIEWS = ROOT / "state" / "critic_reviews.json"
 USER_REVIEWS = ROOT / "state" / "reviews.json"
 OUT = ROOT / "state" / "metrics.json"
 HISTORY = ROOT / "state" / "metrics_history.json"
@@ -121,16 +117,9 @@ def build_agent_index(registry):
             "has_card": bool(a.get("_has_card")),
             "downloads": 0,
             "up": 0,
-            "down": 0,
             "score": 0,
             "reviews": 0,
             "rating": 0.0,
-            "curator_reviews": 0,
-            "curator_rating": 0.0,
-            "critic_score": None,
-            "critic_count": 0,
-            "user_score": None,
-            "tomato": "unrated",
         }
         agents[key] = rec
         if rec["file"]:
@@ -141,22 +130,22 @@ def build_agent_index(registry):
 def apply_votes(agents, votes_doc):
     """Only votes for agents that still exist count. Stale keys for renamed or
     removed agents would otherwise quietly inflate the public tally."""
-    totals = {"up": 0, "down": 0, "voters": set(), "agents_voted": 0, "orphaned_keys": 0}
+    # Upvotes only. RAR stopped tracking downvotes on 2026-08-18: a registry that
+    # only counts what people liked stays a place people want to publish into.
+    totals = {"up": 0, "voters": set(), "agents_voted": 0, "orphaned_keys": 0}
     for raw_key, v in (votes_doc.get("agents") or {}).items():
         if norm(raw_key) not in agents:
             totals["orphaned_keys"] += 1
             continue
-        up, down = int(v.get("up", 0)), int(v.get("down", 0))
+        up = int(v.get("up", 0))
         totals["up"] += up
-        totals["down"] += down
-        totals["voters"].update((v.get("voters") or {}).keys())
-        if up or down:
+        totals["voters"].update(k for k, d in (v.get("voters") or {}).items() if d == "up")
+        if up:
             totals["agents_voted"] += 1
         rec = agents.get(norm(raw_key))
         if rec:
             rec["up"] += up
-            rec["down"] += down
-            rec["score"] = rec["up"] - rec["down"]
+            rec["score"] = rec["up"]
     totals["voters"] = len(totals["voters"])
     return totals
 
@@ -191,86 +180,6 @@ def apply_reviews(agents, user_doc):
     totals["distribution"] = dist
     return totals
 
-
-def apply_critic(agents, critic_doc):
-    """Fold the critic panel's Rotten-Tomatoes-style verdicts onto each agent."""
-    totals = {"scored": 0, "critic_reviews": 0, "model_reviews": 0, "rubric_reviews": 0,
-              "critic_sum": 0, "user_sum": 0, "rated_users": 0,
-              "by_state": defaultdict(int), "backends": defaultdict(int)}
-    for raw_key, rec in (critic_doc.get("agents") or {}).items():
-        a = agents.get(norm(raw_key))
-        state = rec.get("state", "unrated")
-        totals["by_state"][state] += 1
-        totals["critic_reviews"] += rec.get("critic_count", 0)
-        totals["model_reviews"] += rec.get("model_reviews", 0)
-        totals["rubric_reviews"] += rec.get("rubric_reviews", 0)
-        for b in rec.get("backends", []):
-            totals["backends"][b] += 1
-        if rec.get("critic_score") is not None:
-            totals["scored"] += 1
-            totals["critic_sum"] += rec["critic_score"]
-        else:
-            totals["rubric_only"] = totals.get("rubric_only", 0) + 1
-        if rec.get("user_score") is not None:
-            totals["rated_users"] += 1
-            totals["user_sum"] += rec["user_score"]
-        if a:
-            a["critic_score"] = rec.get("critic_score")
-            a["critic_count"] = rec.get("critic_count", 0)
-            a["user_score"] = rec.get("user_score")
-            a["tomato"] = state
-    return {
-        "agents_scored": totals["scored"],
-        "critic_reviews": totals["critic_reviews"],
-        "model_reviews": totals["model_reviews"],
-        "rubric_reviews": totals["rubric_reviews"],
-        "avg_critic_score": round(totals["critic_sum"] / totals["scored"]) if totals["scored"] else None,
-        "avg_user_score": round(totals["user_sum"] / totals["rated_users"]) if totals["rated_users"] else None,
-        "by_state": dict(totals["by_state"]),
-        "backends": dict(totals["backends"]),
-        "rubric_only_agents": totals.get("rubric_only", 0),
-    }
-
-
-def apply_curator(agents, curator_doc):
-    """Engine-generated curator notes. Reported separately, never counted as reviews."""
-    totals = {"reviews": 0, "agents_reviewed": 0, "reviewers": set(), "rating_sum": 0.0, "rated": 0,
-              "orphaned_keys": 0}
-    by_angle = defaultdict(int)
-    dist = {str(i): 0 for i in range(1, 6)}
-
-    for raw_key, reviews in (curator_doc.get("agents") or {}).items():
-        if not isinstance(reviews, list) or not reviews:
-            continue
-        if norm(raw_key) not in agents:
-            totals["orphaned_keys"] += 1
-            continue
-        ratings = [float(r["rating"]) for r in reviews if isinstance(r.get("rating"), (int, float))]
-        totals["reviews"] += len(reviews)
-        totals["agents_reviewed"] += 1
-        for r in reviews:
-            if r.get("user"):
-                totals["reviewers"].add(r["user"])
-            by_angle[r.get("angle") or "general"] += 1
-            rating = r.get("rating")
-            if isinstance(rating, (int, float)) and 1 <= rating <= 5:
-                dist[str(int(rating))] += 1
-        totals["rating_sum"] += sum(ratings)
-        totals["rated"] += len(ratings)
-        rec = agents.get(norm(raw_key))
-        if rec:
-            rec["curator_reviews"] = len(reviews)
-            rec["curator_rating"] = round(sum(ratings) / len(ratings), 2) if ratings else 0.0
-
-    totals["reviewers"] = len(totals["reviewers"])
-    totals["avg_rating"] = round(totals["rating_sum"] / totals["rated"], 2) if totals["rated"] else 0.0
-    totals.pop("rating_sum")
-    totals["by_angle"] = dict(sorted(by_angle.items(), key=lambda kv: -kv[1]))
-    totals["distribution"] = dist
-    return totals
-
-
-# --------------------------------------------------------------- remote data
 
 def fetch_repo(token):
     d = fetch_json(f"{GH_API}/repos/{OWNER}/{REPO}", token)
@@ -445,9 +354,8 @@ def top(rows, key, n=15, require=True):
 
 def slim(rec, *extra):
     fields = ("name", "display_name", "publisher", "category", "tier", "downloads",
-              "up", "down", "score", "reviews", "rating", "lines", "size_kb",
-              "added_at", "file", "description", "curator_reviews", "curator_rating",
-              "critic_score", "critic_count", "user_score", "tomato") + extra
+              "up", "score", "reviews", "rating", "lines", "size_kb",
+              "added_at", "file", "description") + extra
     return {k: rec[k] for k in fields if k in rec}
 
 
@@ -455,22 +363,14 @@ def build_agent_metrics(agents):
     """Compact per-agent map for the browse UI. Only agents with a signal."""
     out = {}
     for rec in agents.values():
-        if not (rec["downloads"] or rec["up"] or rec["down"] or rec["reviews"]
-                or rec["curator_reviews"] or rec["critic_score"] is not None):
+        if not (rec["downloads"] or rec["up"] or rec["reviews"]):
             continue
         out[rec["name"]] = {
             "d": rec["downloads"],
             "u": rec["up"],
-            "n": rec["down"],
             "s": rec["score"],
             "r": rec["reviews"],
             "rt": rec["rating"],
-            "cr": rec["curator_reviews"],
-            "crt": rec["curator_rating"],
-            "cs": rec["critic_score"],
-            "cn": rec["critic_count"],
-            "us": rec["user_score"],
-            "t": rec["tomato"],
         }
     return out
 
@@ -478,7 +378,7 @@ def build_agent_metrics(agents):
 def build_leaderboards(agents):
     rows = list(agents.values())
     publishers = defaultdict(lambda: {"agents": 0, "downloads": 0, "score": 0, "reviews": 0,
-                                      "rating_sum": 0.0, "rated": 0, "lines": 0, "curator_reviews": 0})
+                                      "rating_sum": 0.0, "rated": 0, "lines": 0})
     categories = defaultdict(lambda: {"agents": 0, "downloads": 0, "score": 0, "reviews": 0})
     tiers = defaultdict(int)
 
@@ -488,7 +388,6 @@ def build_leaderboards(agents):
         p["downloads"] += r["downloads"]
         p["score"] += r["score"]
         p["reviews"] += r["reviews"]
-        p["curator_reviews"] += r["curator_reviews"]
         p["lines"] += r["lines"]
         if r["rating"]:
             p["rating_sum"] += r["rating"]
@@ -505,7 +404,6 @@ def build_leaderboards(agents):
         pub_rows.append({
             "name": name, "agents": p["agents"], "downloads": p["downloads"],
             "score": p["score"], "reviews": p["reviews"], "lines": p["lines"],
-            "curator_reviews": p["curator_reviews"],
             "rating": round(p["rating_sum"] / p["rated"], 2) if p["rated"] else 0.0,
         })
     pub_rows.sort(key=lambda r: (-r["agents"], r["name"]))
@@ -519,19 +417,7 @@ def build_leaderboards(agents):
     newest = [r for r in rows if r["added_at"]]
     newest.sort(key=lambda r: r["added_at"], reverse=True)
 
-    critics = [r for r in rows if r.get("critic_score") is not None]
-    critics.sort(key=lambda r: (-r["critic_score"], -r["critic_count"], r["name"]))
-    audience = [r for r in rows if r.get("user_score") is not None]
-    audience.sort(key=lambda r: (-r["user_score"], r["name"]))
-    split = [r for r in rows if r.get("critic_score") is not None and r.get("user_score") is not None]
-    for r in split:
-        r["_gap"] = r["critic_score"] - r["user_score"]
-    split.sort(key=lambda r: -abs(r["_gap"]))
-
     return {
-        "top_critic": [slim(r) for r in critics[:15]],
-        "top_audience": [slim(r) for r in audience[:15]],
-        "biggest_split": [slim(r, "_gap") for r in split[:15]],
         "most_downloaded": [slim(r) for r in top(rows, "downloads")],
         "most_upvoted": [slim(r) for r in top(rows, "score")],
         "most_reviewed": [slim(r) for r in top(rows, "reviews")],
@@ -562,9 +448,6 @@ def main():
     agents, by_file = build_agent_index(registry)
     vote_totals = apply_votes(agents, load_json(VOTES, {}))
     review_totals = apply_reviews(agents, load_json(USER_REVIEWS, {}))
-    curator_totals = apply_curator(agents, load_json(CURATOR_REVIEWS, {}))
-    critic_doc = load_json(CRITIC_REVIEWS, {})
-    critic_totals = apply_critic(agents, critic_doc)
 
     repo = releases = traffic = {}
     jsd = {"total_hits": 0, "bandwidth": 0, "daily": [], "files": [], "agent_hits": 0}
@@ -626,22 +509,14 @@ def main():
             "categories": registry.get("stats", {}).get("categories", 0),
             "total_lines": sum(a["lines"] for a in agents.values()),
             "total_kb": round(sum(a["size_kb"] for a in agents.values()), 1),
-            "votes": vote_totals["up"] + vote_totals["down"],
+            "votes": vote_totals["up"],
             "upvotes": vote_totals["up"],
-            "downvotes": vote_totals["down"],
             "voters": vote_totals["voters"],
             "orphaned_vote_keys": vote_totals.get("orphaned_keys", 0),
             "reviews": review_totals["reviews"],
             "reviewers": review_totals["reviewers"],
             "avg_rating": review_totals["avg_rating"],
             "agents_reviewed": review_totals["agents_reviewed"],
-            "curator_reviews": curator_totals["reviews"],
-            "curator_agents_reviewed": curator_totals["agents_reviewed"],
-            "curator_avg_rating": curator_totals["avg_rating"],
-            "critic_score": critic_totals["avg_critic_score"],
-            "user_score": critic_totals["avg_user_score"],
-            "critic_reviews": critic_totals["critic_reviews"],
-            "agents_scored": critic_totals["agents_scored"],
             "agents_voted": vote_totals["agents_voted"],
         },
         "daily": daily,
@@ -662,16 +537,7 @@ def main():
         "reviews": {
             "user": {"total": review_totals["reviews"], "reviewers": review_totals["reviewers"],
                      "avg_rating": review_totals["avg_rating"], "distribution": review_totals["distribution"]},
-            "curator": {"total": curator_totals["reviews"], "reviewers": curator_totals["reviewers"],
-                        "avg_rating": curator_totals["avg_rating"], "agents": curator_totals["agents_reviewed"],
-                        "by_angle": curator_totals["by_angle"], "distribution": curator_totals["distribution"],
-                        "note": "Engine-generated curator notes from state/curator_reviews.json. Reported for transparency; NOT counted in the review totals or the review leaderboards."},
-        },
-        "critic": {
-            "thresholds": critic_doc.get("thresholds", {}),
-            "panel": critic_doc.get("panel", []),
-            "generated_at": critic_doc.get("generated_at"),
-            **critic_totals,
+            "note": "Human reviews only, from the Issue pipeline. Automated reviews were retired 2026-08-18.",
         },
         "leaderboards": build_leaderboards(agents),
         "agent_metrics": build_agent_metrics(agents),
@@ -681,9 +547,7 @@ def main():
             {"name": "GitHub Releases", "metric": "release asset downloads", "url": f"{GH_API}/repos/{OWNER}/{REPO}/releases"},
             {"name": "registry.json", "metric": "agents, publishers, categories", "url": f"https://{OWNER}.github.io/{REPO}/registry.json"},
             {"name": "state/reviews.json", "metric": "user reviews and ratings", "url": f"https://{OWNER}.github.io/{REPO}/state/reviews.json"},
-            {"name": "state/critic_reviews.json", "metric": "AI critic panel verdicts (critic score)", "url": f"https://{OWNER}.github.io/{REPO}/state/critic_reviews.json"},
-            {"name": "state/votes.json", "metric": "up/down votes", "url": f"https://{OWNER}.github.io/{REPO}/state/votes.json"},
-            {"name": "state/curator_reviews.json", "metric": "engine-generated curator notes (not counted as reviews)", "url": f"https://{OWNER}.github.io/{REPO}/state/curator_reviews.json"},
+            {"name": "state/votes.json", "metric": "upvotes (RAR tracks upvotes only)", "url": f"https://{OWNER}.github.io/{REPO}/state/votes.json"},
         ],
     }
 
@@ -691,7 +555,7 @@ def main():
     t = doc["totals"]
     log(f"✓ {args.out}")
     log(f"  downloads={t['downloads']} (clones {t['clones']} + cdn {t['cdn_hits']} + releases {t['release_downloads']})")
-    log(f"  agents={t['agents']} votes={t['votes']} user_reviews={t['reviews']} critic={t['critic_score']} user_score={t['user_score']} stars={doc['repo'].get('stars', 0)}")
+    log(f"  agents={t['agents']} upvotes={t['votes']} user_reviews={t['reviews']} stars={doc['repo'].get('stars', 0)}")
     return 0
 
 

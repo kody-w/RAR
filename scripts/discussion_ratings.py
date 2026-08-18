@@ -8,7 +8,8 @@ The pattern:
     ("Announcements") so nobody can spoof an agent's thread.
   * An upvote is a *positive* reaction on that Discussion
     (THUMBS_UP, HEART, HOORAY, ROCKET, LAUGH). Negative reactions
-    (THUMBS_DOWN, CONFUSED) and neutral (EYES) never contribute, so a
+    (THUMBS_DOWN, CONFUSED) and neutral (EYES) never contribute — RAR tracks
+    positive signal only (negative poll rows were retired 2026-08-18) — so a
     thumbs-down can't drag a score down or masquerade as a rating.
   * Comments are the Discussion thread itself — GitHub handles
     identity, spam controls, and one-reaction-per-user natively.
@@ -112,8 +113,6 @@ SIGNAL_MARKER = "<!-- rar:signal -->"
 # nothing pollutes every other count.
 SIGNAL_MAP = {
     "THUMBS_UP": "worked",
-    "THUMBS_DOWN": "did_not_work",
-    "CONFUSED": "stuck",
     "HEART": "regular_use",
     "ROCKET": "shipped",
     "EYES": "want_to_try",
@@ -127,8 +126,6 @@ SIGNAL_BODY = (
     "| React | Means |\n"
     "|---|---|\n"
     "| :+1: | It worked |\n"
-    "| :-1: | It didn't work |\n"
-    "| :confused: | I couldn't get it running |\n"
     "| :heart: | I use this regularly |\n"
     "| :rocket: | I shipped it to a customer |\n"
     "| :eyes: | I want to try this |\n"

@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-18T22:24:56Z",
+  "generated": "2026-08-18T22:41:24Z",
   "count": 301,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
@@ -4610,7 +4610,7 @@
       "stats": {
         "lines": 188,
         "size_kb": 9.3,
-        "added_at": null
+        "added_at": "2026-08-18T18:26:12-04:00"
       }
     },
     {
@@ -9252,7 +9252,7 @@
       "name": "@kody-w/rar_remote_agent",
       "display_name": "RAR Remote Agent",
       "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
-      "version": "1.7.4",
+      "version": "1.8.0",
       "publisher": "@kody-w",
       "author": "RAPP Core Team",
       "category": "core",
@@ -9275,11 +9275,11 @@
         "path": "agents/@kody-w/rar_remote_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_remote_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rar_remote_agent.py",
-        "sha256": "584e0e180d07918b1b9371dc0271950991088a54db3664eb5f5e294e03716ee2"
+        "sha256": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a"
       },
       "stats": {
-        "lines": 1400,
-        "size_kb": 59.4,
+        "lines": 1403,
+        "size_kb": 59.7,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
