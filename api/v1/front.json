@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-19T02:34:22Z",
+  "generated": "2026-08-19T10:01:17Z",
   "counts": {
     "native": 307,
     "aggregated": 0,
@@ -212,9 +212,7 @@
         "freshness",
         "tier"
       ],
-      "scored_at_median": [
-        "community"
-      ],
+      "scored_at_median": [],
       "signals": {
         "rar": {
           "upvotes": 0,
@@ -229,7 +227,7 @@
         "source": null
       },
       "why": [
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "official tier",
         "newest in the registry",
         "412 lines",
@@ -327,9 +325,7 @@
         "freshness",
         "tier"
       ],
-      "scored_at_median": [
-        "community"
-      ],
+      "scored_at_median": [],
       "signals": {
         "rar": {
           "upvotes": 0,
@@ -344,7 +340,7 @@
         "source": null
       },
       "why": [
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "official tier",
         "newest in the registry",
         "328 lines",
@@ -386,9 +382,7 @@
         "freshness",
         "tier"
       ],
-      "scored_at_median": [
-        "community"
-      ],
+      "scored_at_median": [],
       "signals": {
         "rar": {
           "upvotes": 0,
@@ -403,7 +397,7 @@
         "source": null
       },
       "why": [
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "official tier",
         "newest in the registry",
         "297 lines",
@@ -558,9 +552,7 @@
         "freshness",
         "tier"
       ],
-      "scored_at_median": [
-        "community"
-      ],
+      "scored_at_median": [],
       "signals": {
         "rar": {
           "upvotes": 0,
@@ -575,7 +567,7 @@
         "source": null
       },
       "why": [
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "official tier",
         "newest in the registry",
         "259 lines",
@@ -11114,9 +11106,7 @@
         "freshness",
         "tier"
       ],
-      "scored_at_median": [
-        "community"
-      ],
+      "scored_at_median": [],
       "signals": {
         "rar": {
           "upvotes": 0,
@@ -11141,7 +11131,7 @@
         }
       },
       "why": [
-        "no community feedback yet - scored at the population median",
+        "no community feedback yet",
         "frontier tier",
         "newest in the registry",
         "188 lines",
