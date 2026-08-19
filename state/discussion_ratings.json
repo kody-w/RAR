@@ -10,8 +10,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -27,8 +25,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -44,8 +40,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -61,8 +55,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -78,8 +70,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -95,8 +85,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -112,8 +100,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -129,8 +115,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -146,8 +130,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -163,8 +145,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -180,8 +160,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -197,8 +175,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -214,8 +190,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -231,8 +205,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -248,8 +220,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -265,8 +235,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -282,8 +250,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -299,8 +265,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -316,8 +280,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -333,8 +295,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -350,8 +310,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -367,8 +325,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -384,8 +340,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -401,8 +355,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -418,8 +370,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -435,8 +385,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -452,8 +400,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -469,8 +415,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -486,8 +430,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -503,8 +445,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -520,8 +460,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -537,8 +475,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -554,8 +490,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -571,8 +505,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -588,8 +520,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -605,8 +535,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -622,8 +550,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -639,8 +565,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -656,8 +580,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -673,8 +595,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -690,8 +610,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -707,8 +625,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -724,8 +640,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -741,8 +655,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -758,8 +670,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -775,8 +685,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -792,8 +700,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -809,8 +715,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -826,8 +730,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -843,8 +745,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -860,8 +760,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -877,8 +775,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -894,8 +790,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -911,8 +805,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -928,8 +820,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -945,8 +835,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -962,8 +850,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -979,8 +865,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -996,8 +880,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1013,8 +895,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1030,8 +910,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1047,8 +925,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1064,8 +940,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1081,8 +955,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1098,8 +970,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1115,8 +985,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1132,8 +1000,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1149,8 +1015,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1166,8 +1030,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1183,8 +1045,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1200,8 +1060,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1217,8 +1075,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1234,8 +1090,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1251,8 +1105,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1268,8 +1120,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1285,8 +1135,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1302,8 +1150,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1319,8 +1165,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1336,8 +1180,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1353,8 +1195,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1370,8 +1210,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1387,8 +1225,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1404,8 +1240,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1421,8 +1255,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1438,8 +1270,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1455,8 +1285,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1472,8 +1300,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1489,8 +1315,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1506,8 +1330,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1523,8 +1345,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1540,8 +1360,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1557,8 +1375,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1574,8 +1390,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1591,8 +1405,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1608,8 +1420,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1625,8 +1435,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1642,8 +1450,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1659,8 +1465,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1676,8 +1480,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1693,8 +1495,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1710,8 +1510,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1727,8 +1525,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1744,8 +1540,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1761,8 +1555,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1778,8 +1570,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1795,8 +1585,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1812,8 +1600,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1829,8 +1615,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1846,8 +1630,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1863,8 +1645,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1880,8 +1660,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1897,8 +1675,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1914,8 +1690,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1931,8 +1705,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1948,8 +1720,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1965,8 +1735,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1982,8 +1750,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -1999,8 +1765,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2016,8 +1780,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2033,8 +1795,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2050,8 +1810,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2067,8 +1825,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2084,8 +1840,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2101,8 +1855,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2118,8 +1870,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2135,8 +1885,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2152,8 +1900,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2169,8 +1915,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2186,8 +1930,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2203,8 +1945,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2220,8 +1960,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2237,8 +1975,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2254,8 +1990,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2264,6 +1998,21 @@
       "url": "https://github.com/kody-w/RAR/discussions/450",
       "number": 450
     },
+    "@cat-agent-skills/copilot_agent_advisor": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/576",
+      "number": 576
+    },
     "@cat-agent-skills/copilot_agents_news_scout": {
       "upvotes": 0,
       "downloads": 0,
@@ -2271,8 +2020,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2288,8 +2035,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2305,8 +2050,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2322,8 +2065,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2339,8 +2080,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2356,8 +2095,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2373,8 +2110,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2390,8 +2125,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2407,8 +2140,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2424,8 +2155,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2441,8 +2170,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2458,8 +2185,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2475,8 +2200,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2492,8 +2215,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2509,8 +2230,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2526,8 +2245,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2543,8 +2260,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2560,8 +2275,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2577,8 +2290,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2594,8 +2305,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2611,8 +2320,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2628,8 +2335,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2645,8 +2350,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2662,8 +2365,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2679,8 +2380,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2696,8 +2395,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2713,8 +2410,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2730,8 +2425,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2747,8 +2440,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2764,8 +2455,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2781,8 +2470,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2798,8 +2485,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2815,8 +2500,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2832,8 +2515,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2849,8 +2530,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2866,8 +2545,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2883,8 +2560,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2900,8 +2575,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2917,8 +2590,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2934,8 +2605,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2951,8 +2620,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2968,8 +2635,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -2985,8 +2650,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3002,8 +2665,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3019,8 +2680,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3036,8 +2695,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3053,8 +2710,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3070,8 +2725,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3087,8 +2740,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3104,8 +2755,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3121,8 +2770,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3138,8 +2785,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3155,8 +2800,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3172,8 +2815,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3189,8 +2830,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3206,8 +2845,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3223,8 +2860,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3240,8 +2875,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3257,8 +2890,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3274,8 +2905,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3291,8 +2920,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3308,8 +2935,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3325,8 +2950,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3342,8 +2965,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3359,8 +2980,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3376,8 +2995,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3393,8 +3010,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3410,8 +3025,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3427,8 +3040,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3444,8 +3055,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3461,8 +3070,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3478,8 +3085,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3495,8 +3100,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3512,8 +3115,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3529,8 +3130,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3546,8 +3145,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3563,8 +3160,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3580,8 +3175,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3597,8 +3190,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3614,8 +3205,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3631,8 +3220,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3648,8 +3235,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3665,8 +3250,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3682,8 +3265,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3699,8 +3280,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3716,8 +3295,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3733,8 +3310,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3750,8 +3325,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3767,8 +3340,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3784,8 +3355,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3801,8 +3370,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3818,8 +3385,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3835,8 +3400,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3852,8 +3415,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3869,8 +3430,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3886,8 +3445,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3903,8 +3460,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3920,8 +3475,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3937,8 +3490,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3954,8 +3505,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3971,8 +3520,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -3981,6 +3528,21 @@
       "url": "https://github.com/kody-w/RAR/discussions/348",
       "number": 348
     },
+    "@kody-w/education_shorts_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/577",
+      "number": 577
+    },
     "@kody-w/estate_factory": {
       "upvotes": 0,
       "downloads": 0,
@@ -3988,8 +3550,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4005,8 +3565,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4022,8 +3580,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4039,8 +3595,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4056,8 +3610,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4073,8 +3625,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4090,8 +3640,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4107,8 +3655,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4124,8 +3670,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4141,8 +3685,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4151,6 +3693,36 @@
       "url": "https://github.com/kody-w/RAR/discussions/356",
       "number": 356
     },
+    "@kody-w/kody2day_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/580",
+      "number": 580
+    },
+    "@kody-w/kody2day_studio_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/581",
+      "number": 581
+    },
     "@kody-w/launch_to_public_agent": {
       "upvotes": 0,
       "downloads": 0,
@@ -4158,8 +3730,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4175,8 +3745,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4192,8 +3760,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4209,8 +3775,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4226,8 +3790,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4243,8 +3805,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4260,8 +3820,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4277,8 +3835,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4294,8 +3850,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4311,8 +3865,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4328,8 +3880,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4345,8 +3895,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4362,8 +3910,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4379,8 +3925,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4396,8 +3940,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4413,8 +3955,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4423,6 +3963,21 @@
       "url": "https://github.com/kody-w/RAR/discussions/367",
       "number": 367
     },
+    "@kody-w/rapp_sentinel_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/578",
+      "number": 578
+    },
     "@kody-w/rapp_skill_bridge_agent": {
       "upvotes": 0,
       "downloads": 0,
@@ -4430,8 +3985,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4447,8 +4000,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4464,8 +4015,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4481,8 +4030,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4498,8 +4045,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4515,8 +4060,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4532,8 +4075,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4549,8 +4090,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4566,8 +4105,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4583,8 +4120,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4600,8 +4135,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4617,8 +4150,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4634,8 +4165,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4651,8 +4180,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4668,8 +4195,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4685,8 +4210,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4702,8 +4225,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4719,8 +4240,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4736,8 +4255,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4753,8 +4270,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4770,8 +4285,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4787,8 +4300,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4804,8 +4315,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4821,8 +4330,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4838,8 +4345,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4855,8 +4360,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4872,8 +4375,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4889,8 +4390,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4906,8 +4405,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4923,8 +4420,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4940,8 +4435,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4957,8 +4450,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4974,8 +4465,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -4991,8 +4480,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -5008,8 +4495,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -5025,8 +4510,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -5042,8 +4525,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -5059,8 +4540,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -5076,8 +4555,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -5093,8 +4570,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -5110,8 +4585,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
@@ -5127,8 +4600,6 @@
       "comments": 0,
       "signals": {
         "worked": 0,
-        "did_not_work": 0,
-        "stuck": 0,
         "regular_use": 0,
         "shipped": 0,
         "want_to_try": 0,
