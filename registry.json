@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-19T02:13:49.277677+00:00",
+  "generated_at": "2026-08-19T02:30:45.063583+00:00",
   "stats": {
     "total_agents": 307,
     "total_swarms": 82,
@@ -14547,9 +14547,9 @@
       },
       "_file": "agents/@kody-w/kody2day_studio_agent.py",
       "_install_filename": "rar_kody_w_kody2day_studio_agent.py",
-      "_sha256": "0d77f8a72fcf4547431c01018edce81892d44c152f06b3533b779028cdd037dd",
+      "_sha256": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9",
       "_lifecycle": "notarized",
-      "_receipt": "rar_8a2eb947a5515916c78751745021dfb522f50c676e7d826a031fe7f06c718462",
+      "_receipt": "rar_7aae4d429f8f80bf0e36e1f8ef2e52f73dc42e56493d4bc7719c707bc0de10b4",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -14566,12 +14566,12 @@
         ]
       },
       "_seed": 43090629577852075925,
-      "_size_kb": 16.7,
-      "_lines": 324,
+      "_size_kb": 17.0,
+      "_lines": 328,
       "_has_card": true,
       "_added_at": "2026-08-18T22:13:18-04:00",
       "_first_commit_sha": "34241ae10260c9d29669236e631d5bdd0ec1d141",
-      "_latest_commit_sha": "34241ae10260c9d29669236e631d5bdd0ec1d141",
+      "_latest_commit_sha": "6df086ae702e7b5f1dbfec69470a242317e780be",
       "_card_sha256": "e82a65c4a3d8eacc4ab61333dd07fa56828b6be13095c79388f0918525c887cb"
     },
     {
