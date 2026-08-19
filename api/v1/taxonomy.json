@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-19T00:49:38Z",
+  "generated": "2026-08-19T01:17:15Z",
   "categories": [
     {
       "name": "general",
@@ -8,7 +8,7 @@
     },
     {
       "name": "productivity",
-      "count": 41
+      "count": 42
     },
     {
       "name": "core",
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 62
+      "count": 63
     },
     {
       "name": "@rapp",
@@ -152,7 +152,7 @@
     },
     {
       "name": "official",
-      "count": 42
+      "count": 43
     },
     {
       "name": "verified",
@@ -493,6 +493,10 @@
       "count": 4
     },
     {
+      "name": "news",
+      "count": 4
+    },
+    {
       "name": "review",
       "count": 4
     },
@@ -677,6 +681,10 @@
       "count": 3
     },
     {
+      "name": "github",
+      "count": 3
+    },
+    {
       "name": "accessibility",
       "count": 3
     },
@@ -710,10 +718,6 @@
     },
     {
       "name": "agents",
-      "count": 3
-    },
-    {
-      "name": "news",
       "count": 3
     },
     {
@@ -1005,10 +1009,6 @@
       "count": 2
     },
     {
-      "name": "github",
-      "count": 2
-    },
-    {
       "name": "web",
       "count": 2
     },
@@ -1046,6 +1046,10 @@
     },
     {
       "name": "conference",
+      "count": 2
+    },
+    {
+      "name": "digest",
       "count": 2
     },
     {
@@ -1358,10 +1362,6 @@
     },
     {
       "name": "case-management",
-      "count": 1
-    },
-    {
-      "name": "action-plan",
       "count": 1
     }
   ]

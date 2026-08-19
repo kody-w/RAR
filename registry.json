@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-19T00:57:48.907999+00:00",
+  "generated_at": "2026-08-19T01:17:07.898875+00:00",
   "stats": {
-    "total_agents": 305,
+    "total_agents": 306,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -14447,6 +14447,65 @@
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
       "_card_sha256": "a75a9cf7516a8079f3007a1def9708b96281514b20983d8df506d0c46199c7d9"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/kody2day_agent",
+      "version": "1.0.0",
+      "display_name": "Kody2day",
+      "description": "Keep up with Kody: today's digest of what he shipped across his public GitHub, any past day, a multi-day catch-up, or a search by repo \u2014 Kody's own commits separated from the fleet of bots.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "digest",
+        "daily",
+        "changelog",
+        "github",
+        "kody",
+        "catch-up",
+        "news"
+      ],
+      "category": "productivity",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "network access to kody-w.github.io (static site, no token)"
+      ],
+      "example_call": {
+        "args": {
+          "action": "today"
+        }
+      },
+      "_file": "agents/@kody-w/kody2day_agent.py",
+      "_install_filename": "rar_kody_w_kody2day_agent.py",
+      "_sha256": "66928beb7fc4a9df0626ba11e37f0a345727ecfa0929fc26b6383bc750e541a0",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_d3c1ca6c7a4c1c7e1578f394150f0a2021b8f8bdcf12f4a3bf5a4b4268ed0838",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 17715257770192547629,
+      "_size_kb": 12.8,
+      "_lines": 273,
+      "_has_card": true,
+      "_added_at": "2026-08-18T21:17:02-04:00",
+      "_first_commit_sha": "075e7a3b8cf977f88a7fed0a615c46b2062b0c77",
+      "_latest_commit_sha": "075e7a3b8cf977f88a7fed0a615c46b2062b0c77",
+      "_card_sha256": "56fd215d028e122679338c9d79edb1a8dc015a6288f5ef0ecebe380b0402fa9c"
     },
     {
       "schema": "rapp-agent/1.0",
