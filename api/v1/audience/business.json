@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-19T01:17:48Z",
+  "generated": "2026-08-19T01:35:54Z",
   "count": 303,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
@@ -8544,11 +8544,11 @@
         "path": "agents/@kody-w/kody2day_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/kody2day_agent.py",
-        "sha256": "66928beb7fc4a9df0626ba11e37f0a345727ecfa0929fc26b6383bc750e541a0"
+        "sha256": "e4dd13bc20c0f1d3c4333cdbefe6f1e09359a7fc7da5309822248d41ba3b0638"
       },
       "stats": {
-        "lines": 273,
-        "size_kb": 12.8,
+        "lines": 297,
+        "size_kb": 14.5,
         "added_at": "2026-08-18T21:17:02-04:00"
       }
     },
