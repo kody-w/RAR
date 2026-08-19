@@ -1,8 +1,8 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-08-18T22:41:24Z",
-  "count": 304,
+  "generated": "2026-08-19T00:47:38Z",
+  "count": 305,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
     {
@@ -9136,6 +9136,43 @@
         "lines": 391,
         "size_kb": 19.3,
         "added_at": "2026-07-15T15:23:19Z"
+      }
+    },
+    {
+      "id": "kody-w__rapp_sentinel_agent",
+      "name": "@kody-w/rapp_sentinel_agent",
+      "display_name": "RAPP Sentinel",
+      "description": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup reports — a watchdog that can't quietly lie.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "devtools",
+      "tags": [
+        "sentinel",
+        "watchdog",
+        "health",
+        "monitoring",
+        "rapp1",
+        "neighborhood",
+        "trifecta",
+        "devtools"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/rapp_sentinel_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sentinel_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_sentinel_agent.py",
+        "sha256": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884"
+      },
+      "stats": {
+        "lines": 412,
+        "size_kb": 21.4,
+        "added_at": "2026-08-18T20:47:14-04:00"
       }
     },
     {

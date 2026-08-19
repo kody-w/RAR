@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-18T22:42:42.853510+00:00",
+  "generated_at": "2026-08-19T00:48:51.909249+00:00",
   "stats": {
-    "total_agents": 304,
+    "total_agents": 305,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -15137,6 +15137,69 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/rapp_sentinel_agent",
+      "version": "1.0.0",
+      "display_name": "RAPP Sentinel",
+      "description": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup reports \u2014 a watchdog that can't quietly lie.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "sentinel",
+        "watchdog",
+        "health",
+        "monitoring",
+        "rapp1",
+        "neighborhood",
+        "trifecta",
+        "devtools"
+      ],
+      "category": "devtools",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "git",
+        "gh (GitHub CLI, authenticated) for the GitHub health checks",
+        "optional: GitHub Copilot CLI for levels 1+ (repair/evolve arms)",
+        "optional: macOS launchd for install_launchd (every-15-minutes tick)"
+      ],
+      "example_call": {
+        "args": {
+          "action": "health"
+        }
+      },
+      "_file": "agents/@kody-w/rapp_sentinel_agent.py",
+      "_install_filename": "rar_kody_w_rapp_sentinel_agent.py",
+      "_sha256": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_f56b38b203a1c631d83992d6b9391e502303428b9504db684acc58be671831b2",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 9983162944433694679,
+      "_size_kb": 21.4,
+      "_lines": 412,
+      "_has_card": true,
+      "_added_at": "2026-08-18T20:47:14-04:00",
+      "_first_commit_sha": "b1fd92bcb71fdd64ac9e3b96273e4189486e9f9f",
+      "_latest_commit_sha": "b1fd92bcb71fdd64ac9e3b96273e4189486e9f9f",
+      "_card_sha256": "41f94962279ceaa6842a55289493b735ea864560643b1ab390ff0ab47fbf911c"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/rapp_skill_bridge_agent",
       "version": "1.0.1",
       "display_name": "RAPP Skill Bridge",
@@ -15440,7 +15503,7 @@
       "_has_card": true,
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
-      "_latest_commit_sha": "d31f383a14b2ba7d8f6c5d6ee0321690dc3341d4",
+      "_latest_commit_sha": "a406372feff89232194bf208658b526eb2440722",
       "_card_sha256": "00814edd84e2e154074e2c417624b1860d13fd0cf38805e4d3277ca30e702600"
     },
     {

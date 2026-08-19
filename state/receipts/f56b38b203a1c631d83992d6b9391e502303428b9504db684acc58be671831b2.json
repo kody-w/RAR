@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-19"
+ },
+ "action": "agent.create",
+ "agent": "@kody-w/rapp_sentinel_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884"
+ },
+ "canonical_path": "agents/@kody-w/rapp_sentinel_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-19T00:45:28.484049+00:00",
+ "id": "rar_f56b38b203a1c631d83992d6b9391e502303428b9504db684acc58be671831b2",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "official",
+ "request_id": "req_f56b38b203a1c631d83992d6",
+ "revision_id": "f56b38b203a1c631d83992d6b9391e502303428b9504db684acc58be671831b2",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "publish @kody-w/rapp_sentinel_agent: RAPP Sentinel watchdog agent"
+ },
+ "version": "1.0.0"
+}

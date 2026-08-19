@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-18T22:41:24Z",
+  "generated": "2026-08-19T00:47:38Z",
   "categories": [
     {
       "name": "general",
@@ -15,11 +15,11 @@
       "count": 28
     },
     {
-      "name": "b2b_sales",
-      "count": 24
+      "name": "devtools",
+      "count": 25
     },
     {
-      "name": "devtools",
+      "name": "b2b_sales",
       "count": 24
     },
     {
@@ -110,7 +110,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 61
+      "count": 62
     },
     {
       "name": "@rapp",
@@ -152,7 +152,7 @@
     },
     {
       "name": "official",
-      "count": 41
+      "count": 42
     },
     {
       "name": "verified",
@@ -425,6 +425,10 @@
       "count": 5
     },
     {
+      "name": "neighborhood",
+      "count": 5
+    },
+    {
       "name": "twin",
       "count": 5
     },
@@ -509,15 +513,15 @@
       "count": 4
     },
     {
+      "name": "devtools",
+      "count": 4
+    },
+    {
       "name": "estate",
       "count": 4
     },
     {
       "name": "publish",
-      "count": 4
-    },
-    {
-      "name": "neighborhood",
       "count": 4
     },
     {
@@ -725,6 +729,10 @@
       "count": 3
     },
     {
+      "name": "monitoring",
+      "count": 3
+    },
+    {
       "name": "transpiler",
       "count": 3
     },
@@ -738,10 +746,6 @@
     },
     {
       "name": "converter",
-      "count": 3
-    },
-    {
-      "name": "devtools",
       "count": 3
     },
     {
@@ -1102,10 +1106,6 @@
     },
     {
       "name": "power_automate",
-      "count": 2
-    },
-    {
-      "name": "monitoring",
       "count": 2
     },
     {

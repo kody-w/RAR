@@ -2893,6 +2893,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
     },
+    "@kody-w/rapp_sentinel_agent": {
+      "canonical_path": "agents/@kody-w/rapp_sentinel_agent.py",
+      "latest_receipt": "rar_f56b38b203a1c631d83992d6b9391e502303428b9504db684acc58be671831b2",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "official",
+      "sha256": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884",
+      "status": "active",
+      "updated_at": "2026-08-19T00:45:28.484049+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/rapp_skill_bridge_agent": {
       "canonical_path": "agents/@kody-w/rapp_skill_bridge_agent.py",
       "latest_receipt": "rar_2fc1715341adfad009953a492e86674f0e8f05705ed20a286ee71c19bf694d50",
@@ -3610,5 +3621,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-18T22:39:01.949436+00:00"
+  "updated_at": "2026-08-19T00:45:28.484049+00:00"
 }
