@@ -31,7 +31,7 @@
   "size_kb": 21.4,
   "sha256": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884",
   "has_card": true,
-  "added_at": "2026-08-18T20:47:14-04:00",
+  "added_at": "2026-08-18T20:49:04-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rapp_sentinel_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sentinel_agent.py",

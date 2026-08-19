@@ -2728,6 +2728,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
     },
+    "@kody-w/kody2day_agent": {
+      "canonical_path": "agents/@kody-w/kody2day_agent.py",
+      "latest_receipt": "rar_d3c1ca6c7a4c1c7e1578f394150f0a2021b8f8bdcf12f4a3bf5a4b4268ed0838",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "official",
+      "sha256": "66928beb7fc4a9df0626ba11e37f0a345727ecfa0929fc26b6383bc750e541a0",
+      "status": "active",
+      "updated_at": "2026-08-19T01:15:07.962586+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/launch_to_public_agent": {
       "canonical_path": "agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
       "latest_receipt": "rar_df1735192a344f41687d902e6f4f0965edd8c34a3fd99dc71d169db48d6ff2fd",
@@ -3621,5 +3632,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-19T00:45:28.484049+00:00"
+  "updated_at": "2026-08-19T01:15:07.962586+00:00"
 }

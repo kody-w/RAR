@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__kody2day_agent",
+  "name": "Kody2day",
+  "rar_name": "@kody-w/kody2day_agent",
+  "rappid": "rappid:@kody-w/kody2day_agent:94943d30dfd8cd306a40785c2f0862f1949d3b9ec0d21ecbeaea07178cfb6055",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "digest",
+    "daily",
+    "changelog",
+    "github",
+    "kody",
+    "catch-up",
+    "news"
+  ],
+  "description": "Keep up with Kody: today's digest of what he shipped across his public GitHub, any past day, a multi-day catch-up, or a search by repo \u2014 Kody's own commits separated from the fleet of bots.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 273,
+  "size_kb": 12.8,
+  "sha256": "66928beb7fc4a9df0626ba11e37f0a345727ecfa0929fc26b6383bc750e541a0",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__kody2day_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__kody2day_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__kody2day_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/kody2day_agent.py"
+}
