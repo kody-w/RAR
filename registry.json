@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-19T01:35:53.526361+00:00",
+  "generated_at": "2026-08-19T02:12:14.133882+00:00",
   "stats": {
-    "total_agents": 306,
+    "total_agents": 307,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -14507,6 +14507,72 @@
       "_first_commit_sha": "075e7a3b8cf977f88a7fed0a615c46b2062b0c77",
       "_latest_commit_sha": "12b72173806aa97877273642ec6173ce9d4cb154",
       "_card_sha256": "56fd215d028e122679338c9d79edb1a8dc015a6288f5ef0ecebe380b0402fa9c"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/kody2day_studio_agent",
+      "version": "1.0.0",
+      "display_name": "Kody2day Studio",
+      "description": "Make the daily Kody2day episode: the day's digest \u2192 Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts \u2192 queue with YouTube metadata.",
+      "author": "Kody Wildfeuer",
+      "tags": [
+        "video",
+        "youtube",
+        "shorts",
+        "education",
+        "kody2day",
+        "hyperframes",
+        "creative",
+        "autonomous"
+      ],
+      "category": "creative",
+      "quality_tier": "official",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "external_prereqs": [
+        "git",
+        "claude CLI (signed in) \u2014 the writer",
+        "GitHub Copilot CLI (signed in) \u2014 the refute reviewer",
+        "Node.js with npx (HyperFrames renderer)",
+        "ffprobe",
+        "optional: VibeVoice venv for narration (else tts='none')"
+      ],
+      "example_call": {
+        "args": {
+          "action": "run",
+          "date": "2026-08-18"
+        }
+      },
+      "_file": "agents/@kody-w/kody2day_studio_agent.py",
+      "_install_filename": "rar_kody_w_kody2day_studio_agent.py",
+      "_sha256": "0d77f8a72fcf4547431c01018edce81892d44c152f06b3533b779028cdd037dd",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_8a2eb947a5515916c78751745021dfb522f50c676e7d826a031fe7f06c718462",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 43090629577852075925,
+      "_size_kb": 16.7,
+      "_lines": 324,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "e82a65c4a3d8eacc4ab61333dd07fa56828b6be13095c79388f0918525c887cb"
     },
     {
       "schema": "rapp-agent/1.0",

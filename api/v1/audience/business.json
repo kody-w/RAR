@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-19T01:35:54Z",
-  "count": 303,
+  "generated": "2026-08-19T02:10:51Z",
+  "count": 304,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -8550,6 +8550,43 @@
         "lines": 297,
         "size_kb": 14.5,
         "added_at": "2026-08-18T21:17:02-04:00"
+      }
+    },
+    {
+      "id": "kody-w__kody2day_studio_agent",
+      "name": "@kody-w/kody2day_studio_agent",
+      "display_name": "Kody2day Studio",
+      "description": "Make the daily Kody2day episode: the day's digest → Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts → queue with YouTube metadata.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "creative",
+      "tags": [
+        "video",
+        "youtube",
+        "shorts",
+        "education",
+        "kody2day",
+        "hyperframes",
+        "creative",
+        "autonomous"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/kody2day_studio_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_studio_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/kody2day_studio_agent.py",
+        "sha256": "0d77f8a72fcf4547431c01018edce81892d44c152f06b3533b779028cdd037dd"
+      },
+      "stats": {
+        "lines": 324,
+        "size_kb": 16.7,
+        "added_at": null
       }
     },
     {

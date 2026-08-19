@@ -43,12 +43,14 @@ __manifest__ = {
     "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
-    "external_prereqs": ["network access to kody-w.github.io (static site, no token)"],
+    "external_prereqs": ["network access to kody-w.github.io (static site, no token)",
+                         "impact only: the owner's private ledger at ~/.rapp/kody2day-private (local, never published)"],
     "example_call": {"args": {"action": "today"}},
 }
 
 SITE = os.environ.get("KODY2DAY_SITE", "https://kody-w.github.io/kody2day").rstrip("/")
-ACTIONS = ("today", "day", "catchup", "repo", "days", "links", "build", "note")
+ACTIONS = ("today", "day", "catchup", "repo", "days", "links", "impact", "build", "note")
+PRIVATE_HOME = Path(os.environ.get("KODY2DAY_HOME", "") or (Path.home() / ".rapp" / "kody2day-private")).expanduser()
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
@@ -100,6 +102,7 @@ class Kody2day(BasicAgent):
                 "type": "object",
                 "properties": {
                     "action": {"type": "string", "enum": list(ACTIONS), "description": "Default: today."},
+                    "window": {"type": "string", "enum": ["last_7d", "last_30d", "all_time"], "description": "impact: which window to expand (default last_7d)."},
                     "date": {"type": "string", "description": "day/build/note: YYYY-MM-DD (UTC)."},
                     "days": {"type": "integer", "description": "catchup/repo: how many recent days (default 3, max 30)."},
                     "repo": {"type": "string", "description": "repo: repository name, e.g. 'rapp-sentinel'."},
@@ -178,6 +181,25 @@ class Kody2day(BasicAgent):
                 "rss": SITE + "/feed.xml", "source": "https://github.com/kody-w/kody2day",
                 "share_line": "Kody2day — a daily digest of what Kody shipped, so you can keep up: %s/" % SITE}
 
+    @staticmethod
+    def _impact(window, per_repo):
+        p = PRIVATE_HOME / "docs" / "impact.json"
+        if not p.exists():
+            return {"status": "error", "message": "no private ledger at %s — run KODY2DAY_PRIVATE=1 python3 kody2day.py build "
+                                                  "(or the com.rapp.kody2day-private launchd job) on the owner's machine" % p}
+        try:
+            imp = json.loads(p.read_text())
+        except Exception as e:
+            return {"status": "error", "message": "ledger unreadable: %s" % e}
+        w = imp.get(window) or {}
+        return {"status": "success", "private": True, "local_only": str(p), "as_of": imp.get("as_of"),
+                "generated": imp.get("generated"), "days_on_record": imp.get("days_on_record"),
+                "streak_days": imp.get("streak_days"),
+                "windows": {k: {kk: vv for kk, vv in (imp.get(k) or {}).items() if kk != "per_repo"}
+                            for k in ("last_7d", "last_30d", "all_time")},
+                "window": window, "per_repo": (w.get("per_repo") or [])[:max(per_repo, 10)],
+                "series": (imp.get("series") or [])[-14:], "page": "file://%s" % (PRIVATE_HOME / "docs" / "impact.html")}
+
     # ── maintainer side (needs a local checkout) ─────────────────────────
     @staticmethod
     def _checkout(params):
@@ -249,6 +271,8 @@ class Kody2day(BasicAgent):
                 out = self._days()
             elif action == "links":
                 out = self._links()
+            elif action == "impact":
+                out = self._impact(str(params.get("window") or "last_7d"), per_repo)
             elif action == "build":
                 out = self._build(params)
             elif action == "note":
