@@ -1,11 +1,11 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-08-19T02:11:50Z",
+  "generated": "2026-08-19T02:28:46Z",
   "counts": {
-    "native": 307,
+    "native": 306,
     "aggregated": 0,
     "with_source_provenance": 90,
-    "ranked": 307,
+    "ranked": 306,
     "sources": 1
   },
   "policy": "index-only for aggregated entries: catalog metadata and a link home, never a copy of the content",
@@ -81,7 +81,7 @@
       "source": null,
       "score": 62.3,
       "origin_rank": 1,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -141,7 +141,7 @@
       "source": null,
       "score": 62.1,
       "origin_rank": 2,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.2958,
         "depth": 1.0,
@@ -199,7 +199,7 @@
       "source": null,
       "score": 61.8,
       "origin_rank": 3,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8848,
@@ -256,7 +256,7 @@
       "source": null,
       "score": 60.0,
       "origin_rank": 4,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.2958,
         "depth": 1.0,
@@ -313,7 +313,7 @@
       "source": null,
       "score": 58.6,
       "origin_rank": 5,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7342,
@@ -371,7 +371,7 @@
       "source": null,
       "score": 58.3,
       "origin_rank": 6,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -429,7 +429,7 @@
       "source": null,
       "score": 57.8,
       "origin_rank": 7,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -485,7 +485,7 @@
       "source": null,
       "score": 57.5,
       "origin_rank": 8,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.6844,
@@ -543,7 +543,7 @@
       "source": null,
       "score": 57.4,
       "origin_rank": 9,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8573,
@@ -599,7 +599,7 @@
       "source": null,
       "score": 57.2,
       "origin_rank": 10,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -659,7 +659,7 @@
       "source": null,
       "score": 57.2,
       "origin_rank": 11,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -716,7 +716,7 @@
       "source": null,
       "score": 56.5,
       "origin_rank": 12,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9673,
@@ -772,7 +772,7 @@
       "source": null,
       "score": 55.9,
       "origin_rank": 13,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -826,7 +826,7 @@
       "source": null,
       "score": 55.9,
       "origin_rank": 14,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -881,7 +881,7 @@
       "source": null,
       "score": 55.9,
       "origin_rank": 15,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -937,7 +937,7 @@
       "source": null,
       "score": 55.9,
       "origin_rank": 16,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -994,7 +994,7 @@
       "source": null,
       "score": 55.9,
       "origin_rank": 17,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1050,7 +1050,7 @@
       "source": null,
       "score": 55.3,
       "origin_rank": 18,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9725,
@@ -1109,7 +1109,7 @@
       "source": null,
       "score": 54.9,
       "origin_rank": 19,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8926,
@@ -1167,7 +1167,7 @@
       "source": null,
       "score": 54.9,
       "origin_rank": 20,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1225,7 +1225,7 @@
       "source": null,
       "score": 54.6,
       "origin_rank": 21,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.966,
@@ -1280,7 +1280,7 @@
       "source": null,
       "score": 54.5,
       "origin_rank": 22,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1333,7 +1333,7 @@
       "source": null,
       "score": 54.0,
       "origin_rank": 23,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1388,7 +1388,7 @@
       "source": null,
       "score": 54.0,
       "origin_rank": 24,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1444,7 +1444,7 @@
       "source": null,
       "score": 54.0,
       "origin_rank": 25,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1500,7 +1500,7 @@
       "source": null,
       "score": 54.0,
       "origin_rank": 26,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1555,7 +1555,7 @@
       "source": null,
       "score": 54.0,
       "origin_rank": 27,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1608,7 +1608,7 @@
       "source": null,
       "score": 54.0,
       "origin_rank": 28,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1663,7 +1663,7 @@
       "source": null,
       "score": 53.8,
       "origin_rank": 29,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1721,7 +1721,7 @@
       "source": null,
       "score": 53.7,
       "origin_rank": 30,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1776,7 +1776,7 @@
       "source": null,
       "score": 53.6,
       "origin_rank": 31,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9935,
@@ -1832,7 +1832,7 @@
       "source": null,
       "score": 53.6,
       "origin_rank": 32,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9581,
@@ -1888,7 +1888,7 @@
       "source": null,
       "score": 53.6,
       "origin_rank": 33,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1943,7 +1943,7 @@
       "source": null,
       "score": 53.5,
       "origin_rank": 34,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -1998,7 +1998,7 @@
       "source": null,
       "score": 53.5,
       "origin_rank": 35,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -2053,7 +2053,7 @@
       "source": null,
       "score": 52.8,
       "origin_rank": 36,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -2108,7 +2108,7 @@
       "source": null,
       "score": 51.9,
       "origin_rank": 37,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9005,
@@ -2165,7 +2165,7 @@
       "source": null,
       "score": 51.7,
       "origin_rank": 38,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -2221,7 +2221,7 @@
       "source": null,
       "score": 51.6,
       "origin_rank": 39,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -2278,7 +2278,7 @@
       "source": null,
       "score": 51.6,
       "origin_rank": 40,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -2336,7 +2336,7 @@
       "source": null,
       "score": 51.6,
       "origin_rank": 41,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -2389,7 +2389,7 @@
       "source": null,
       "score": 51.5,
       "origin_rank": 42,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.2958,
         "depth": 0.45,
@@ -2443,7 +2443,7 @@
       "source": null,
       "score": 50.9,
       "origin_rank": 43,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8311,
@@ -2499,7 +2499,7 @@
       "source": null,
       "score": 50.6,
       "origin_rank": 44,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7996,
@@ -2557,7 +2557,7 @@
       "source": null,
       "score": 49.9,
       "origin_rank": 45,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -2616,7 +2616,7 @@
       "source": null,
       "score": 49.5,
       "origin_rank": 46,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -2673,7 +2673,7 @@
       "source": null,
       "score": 49.2,
       "origin_rank": 47,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7185,
@@ -2732,7 +2732,7 @@
       "source": null,
       "score": 49.1,
       "origin_rank": 48,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -2788,7 +2788,7 @@
       "source": null,
       "score": 49.0,
       "origin_rank": 49,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8808,
@@ -2842,7 +2842,7 @@
       "source": null,
       "score": 49.0,
       "origin_rank": 50,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.6792,
@@ -2899,7 +2899,7 @@
       "source": null,
       "score": 48.9,
       "origin_rank": 51,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.6713,
@@ -2957,7 +2957,7 @@
       "source": null,
       "score": 48.7,
       "origin_rank": 52,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.6661,
@@ -3013,7 +3013,7 @@
       "source": null,
       "score": 47.9,
       "origin_rank": 53,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8271,
@@ -3070,7 +3070,7 @@
       "source": null,
       "score": 47.7,
       "origin_rank": 54,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7669,
@@ -3125,7 +3125,7 @@
       "source": null,
       "score": 47.6,
       "origin_rank": 55,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.6556,
@@ -3183,7 +3183,7 @@
       "source": null,
       "score": 47.4,
       "origin_rank": 56,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -3238,7 +3238,7 @@
       "source": null,
       "score": 47.4,
       "origin_rank": 57,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7067,
@@ -3304,7 +3304,7 @@
       "source": null,
       "score": 47.3,
       "origin_rank": 58,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -3360,7 +3360,7 @@
       "source": null,
       "score": 47.1,
       "origin_rank": 59,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7368,
@@ -3414,7 +3414,7 @@
       "source": null,
       "score": 47.0,
       "origin_rank": 60,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5849,
@@ -3472,7 +3472,7 @@
       "source": null,
       "score": 46.8,
       "origin_rank": 61,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5744,
@@ -3528,7 +3528,7 @@
       "source": null,
       "score": 46.4,
       "origin_rank": 62,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5548,
@@ -3585,7 +3585,7 @@
       "source": null,
       "score": 46.3,
       "origin_rank": 63,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -3643,7 +3643,7 @@
       "source": null,
       "score": 46.3,
       "origin_rank": 64,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -3699,7 +3699,7 @@
       "source": null,
       "score": 46.3,
       "origin_rank": 65,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -3757,7 +3757,7 @@
       "source": null,
       "score": 46.3,
       "origin_rank": 66,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -3816,7 +3816,7 @@
       "source": null,
       "score": 46.3,
       "origin_rank": 67,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -3873,7 +3873,7 @@
       "source": null,
       "score": 46.3,
       "origin_rank": 68,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -3928,7 +3928,7 @@
       "source": null,
       "score": 46.2,
       "origin_rank": 69,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -3983,7 +3983,7 @@
       "source": null,
       "score": 46.0,
       "origin_rank": 70,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8861,
@@ -4038,7 +4038,7 @@
       "source": null,
       "score": 45.9,
       "origin_rank": 71,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5783,
@@ -4094,7 +4094,7 @@
       "source": null,
       "score": 45.7,
       "origin_rank": 72,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4151,7 +4151,7 @@
       "source": null,
       "score": 45.6,
       "origin_rank": 73,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4208,7 +4208,7 @@
       "source": null,
       "score": 45.2,
       "origin_rank": 74,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8206,
@@ -4265,7 +4265,7 @@
       "source": null,
       "score": 44.9,
       "origin_rank": 75,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4319,7 +4319,7 @@
       "source": null,
       "score": 44.8,
       "origin_rank": 76,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5482,
@@ -4376,7 +4376,7 @@
       "source": null,
       "score": 44.4,
       "origin_rank": 77,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4431,7 +4431,7 @@
       "source": null,
       "score": 44.0,
       "origin_rank": 78,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7931,
@@ -4486,7 +4486,7 @@
       "source": null,
       "score": 43.9,
       "origin_rank": 79,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4541,7 +4541,7 @@
       "source": null,
       "score": 43.9,
       "origin_rank": 80,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4594,7 +4594,7 @@
       "source": null,
       "score": 43.5,
       "origin_rank": 81,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.4958,
@@ -4649,7 +4649,7 @@
       "source": null,
       "score": 43.4,
       "origin_rank": 82,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7656,
@@ -4703,7 +4703,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 83,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4758,7 +4758,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 84,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4813,7 +4813,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 85,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4868,7 +4868,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 86,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4923,7 +4923,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 87,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -4978,7 +4978,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 88,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5031,7 +5031,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 89,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5086,7 +5086,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 90,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5140,7 +5140,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 91,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5195,7 +5195,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 92,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5250,7 +5250,7 @@
       "source": null,
       "score": 43.1,
       "origin_rank": 93,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5305,7 +5305,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 94,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5360,7 +5360,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 95,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5416,7 +5416,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 96,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5471,7 +5471,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 97,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5528,7 +5528,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 98,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5583,7 +5583,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 99,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5639,7 +5639,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 100,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5697,7 +5697,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 101,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5753,7 +5753,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 102,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5809,7 +5809,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 103,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5865,7 +5865,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 104,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5920,7 +5920,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 105,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -5976,7 +5976,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 106,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6031,7 +6031,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 107,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6086,7 +6086,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 108,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6141,7 +6141,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 109,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6197,7 +6197,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 110,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6253,7 +6253,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 111,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6308,7 +6308,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 112,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6363,7 +6363,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 113,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6418,7 +6418,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 114,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6473,7 +6473,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 115,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6529,7 +6529,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 116,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6586,7 +6586,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 117,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6642,7 +6642,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 118,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6699,7 +6699,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 119,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6755,7 +6755,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 120,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6813,7 +6813,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 121,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6874,7 +6874,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 122,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6930,7 +6930,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 123,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -6985,7 +6985,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 124,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7040,7 +7040,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 125,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7095,7 +7095,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 126,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7150,7 +7150,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 127,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7206,7 +7206,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 128,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7262,7 +7262,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 129,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7317,7 +7317,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 130,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7372,7 +7372,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 131,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7427,7 +7427,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 132,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7483,7 +7483,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 133,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7538,7 +7538,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 134,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7594,7 +7594,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 135,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7650,7 +7650,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 136,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7705,7 +7705,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 137,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7760,7 +7760,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 138,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7818,7 +7818,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 139,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7874,7 +7874,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 140,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7929,7 +7929,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 141,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -7985,7 +7985,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 142,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8040,7 +8040,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 143,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8096,7 +8096,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 144,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8151,7 +8151,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 145,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8206,7 +8206,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 146,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8262,7 +8262,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 147,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8317,7 +8317,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 148,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8372,7 +8372,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 149,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8428,7 +8428,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 150,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8483,7 +8483,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 151,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8538,7 +8538,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 152,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8593,7 +8593,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 153,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8648,7 +8648,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 154,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8703,7 +8703,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 155,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8759,7 +8759,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 156,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8817,7 +8817,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 157,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8872,7 +8872,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 158,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8928,7 +8928,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 159,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -8983,7 +8983,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 160,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -9038,7 +9038,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 161,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -9094,7 +9094,7 @@
       "source": null,
       "score": 42.9,
       "origin_rank": 162,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 1.0,
@@ -9150,7 +9150,7 @@
       "source": null,
       "score": 42.8,
       "origin_rank": 163,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9961,
@@ -9206,7 +9206,7 @@
       "source": null,
       "score": 42.7,
       "origin_rank": 164,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9921,
@@ -9261,7 +9261,7 @@
       "source": null,
       "score": 42.7,
       "origin_rank": 165,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9882,
@@ -9316,7 +9316,7 @@
       "source": null,
       "score": 42.6,
       "origin_rank": 166,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9843,
@@ -9372,7 +9372,7 @@
       "source": null,
       "score": 42.6,
       "origin_rank": 167,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9843,
@@ -9427,7 +9427,7 @@
       "source": null,
       "score": 42.6,
       "origin_rank": 168,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9869,
@@ -9483,7 +9483,7 @@
       "source": null,
       "score": 42.4,
       "origin_rank": 169,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9764,
@@ -9539,7 +9539,7 @@
       "source": null,
       "score": 42.3,
       "origin_rank": 170,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9725,
@@ -9594,7 +9594,7 @@
       "source": null,
       "score": 42.3,
       "origin_rank": 171,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9699,
@@ -9650,7 +9650,7 @@
       "source": null,
       "score": 42.3,
       "origin_rank": 172,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9712,
@@ -9703,7 +9703,7 @@
       "source": null,
       "score": 42.2,
       "origin_rank": 173,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.45,
@@ -9762,7 +9762,7 @@
       "source": null,
       "score": 42.1,
       "origin_rank": 174,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8481,
@@ -9817,7 +9817,7 @@
       "source": null,
       "score": 42.1,
       "origin_rank": 175,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7054,
@@ -9872,7 +9872,7 @@
       "source": null,
       "score": 42.0,
       "origin_rank": 176,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9555,
@@ -9927,7 +9927,7 @@
       "source": null,
       "score": 41.9,
       "origin_rank": 177,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9437,
@@ -9983,7 +9983,7 @@
       "source": null,
       "score": 41.8,
       "origin_rank": 178,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9489,
@@ -10040,7 +10040,7 @@
       "source": null,
       "score": 41.8,
       "origin_rank": 179,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.856,
@@ -10096,7 +10096,7 @@
       "source": null,
       "score": 41.7,
       "origin_rank": 180,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9424,
@@ -10151,7 +10151,7 @@
       "source": null,
       "score": 41.5,
       "origin_rank": 181,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9345,
@@ -10206,7 +10206,7 @@
       "source": null,
       "score": 41.4,
       "origin_rank": 182,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.928,
@@ -10262,7 +10262,7 @@
       "source": null,
       "score": 41.4,
       "origin_rank": 183,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.928,
@@ -10317,7 +10317,7 @@
       "source": null,
       "score": 41.3,
       "origin_rank": 184,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9227,
@@ -10373,7 +10373,7 @@
       "source": null,
       "score": 41.3,
       "origin_rank": 185,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9267,
@@ -10429,7 +10429,7 @@
       "source": null,
       "score": 41.2,
       "origin_rank": 186,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9214,
@@ -10484,7 +10484,7 @@
       "source": null,
       "score": 41.2,
       "origin_rank": 187,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9214,
@@ -10539,7 +10539,7 @@
       "source": null,
       "score": 41.1,
       "origin_rank": 188,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.7617,
@@ -10595,7 +10595,7 @@
       "source": null,
       "score": 41.0,
       "origin_rank": 189,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9123,
@@ -10650,7 +10650,7 @@
       "source": null,
       "score": 41.0,
       "origin_rank": 190,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9123,
@@ -10687,66 +10687,6 @@
     },
     {
       "rank": 191,
-      "ref": "@kody-w/kody2day_studio_agent",
-      "title": "Kody2day Studio",
-      "description": "Make the daily Kody2day episode: the day's digest → Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts → queue with YouTube metadata.",
-      "origin": "native",
-      "category": "creative",
-      "tags": [
-        "video",
-        "youtube",
-        "shorts",
-        "education",
-        "kody2day",
-        "hyperframes",
-        "creative",
-        "autonomous"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fkody2day_studio_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_studio_agent.py",
-      "source": null,
-      "score": 41.0,
-      "origin_rank": 191,
-      "origin_size": 307,
-      "components": {
-        "community": 0.0,
-        "depth": 0.3195,
-        "freshness": 0.5938,
-        "tier": 1.0
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community",
-        "freshness"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "official",
-          "age_days": null,
-          "lines": 324,
-          "has_card": false
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "official tier",
-        "no recorded add date - scored at the population median",
-        "324 lines"
-      ]
-    },
-    {
-      "rank": 192,
       "ref": "@aibast-agents-library/account_messaging",
       "title": "Account Messaging",
       "description": "Drafts personalized outreach, follow-up emails, and campaign sequences for enterprise accounts using built-in demo data.",
@@ -10764,8 +10704,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py",
       "source": null,
       "score": 40.9,
-      "origin_rank": 192,
-      "origin_size": 307,
+      "origin_rank": 191,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.907,
@@ -10801,7 +10741,7 @@
       ]
     },
     {
-      "rank": 193,
+      "rank": 192,
       "ref": "@aibast-agents-library/voice_to_crm_email",
       "title": "Voice to CRM Email",
       "description": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback.",
@@ -10819,8 +10759,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py",
       "source": null,
       "score": 40.9,
-      "origin_rank": 193,
-      "origin_size": 307,
+      "origin_rank": 192,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.9057,
@@ -10856,7 +10796,7 @@
       ]
     },
     {
-      "rank": 194,
+      "rank": 193,
       "ref": "@discreetRappers/dynamics_crud_agent",
       "title": "DynamicsCRUD",
       "description": "Simulates Dynamics 365 CRUD on accounts, contacts, opportunities, and leads with disambiguation, using built-in demo data.",
@@ -10874,8 +10814,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/dynamics_crud_agent.py",
       "source": null,
       "score": 40.8,
-      "origin_rank": 194,
-      "origin_size": 307,
+      "origin_rank": 193,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8926,
@@ -10911,7 +10851,7 @@
       ]
     },
     {
-      "rank": 195,
+      "rank": 194,
       "ref": "@kody-w/arena_compete_agent",
       "title": "Arena Compete",
       "description": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation.",
@@ -10929,8 +10869,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/arena_compete_agent.py",
       "source": null,
       "score": 40.8,
-      "origin_rank": 195,
-      "origin_size": 307,
+      "origin_rank": 194,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.6425,
@@ -10966,7 +10906,7 @@
       ]
     },
     {
-      "rank": 196,
+      "rank": 195,
       "ref": "@aibast-agents-library/product_reference",
       "title": "Product Reference",
       "description": "Looks up products and pricing from a live simulated Dynamics 365 tenant catalog, with feature comparison and an offline demo fallback.",
@@ -10984,8 +10924,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/product_reference_stack/product_reference_agent.py",
       "source": null,
       "score": 40.7,
-      "origin_rank": 196,
-      "origin_size": 307,
+      "origin_rank": 195,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8952,
@@ -11021,7 +10961,7 @@
       ]
     },
     {
-      "rank": 197,
+      "rank": 196,
       "ref": "@kody-w/vibe_coding_loop",
       "title": "Vibe Coding Demo Loop",
       "description": "Returns prompt and shell-command templates for shipping batches of single-file HTML demos to a Jekyll site; makes no LLM or network calls itself.",
@@ -11039,8 +10979,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/vibe_coding_loop_agent.py",
       "source": null,
       "score": 40.7,
-      "origin_rank": 197,
-      "origin_size": 307,
+      "origin_rank": 196,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8101,
@@ -11076,7 +11016,7 @@
       ]
     },
     {
-      "rank": 198,
+      "rank": 197,
       "ref": "@cat-agent-skills/copilot_agent_advisor",
       "title": "Copilot Agent Advisor",
       "description": "Tells you which Microsoft 365 / Copilot Studio agent option fits your scenario — use M365 Copilot as-is, build a standard (declarative) agent, or build a custom (custom engine) agent — and which Copilot Studio harness (GitHub Copilot, standard, or Copilot chat) to build on.",
@@ -11100,8 +11040,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#copilot-agent-advisor"
       },
       "score": 40.5,
-      "origin_rank": 198,
-      "origin_size": 307,
+      "origin_rank": 197,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -11149,7 +11089,7 @@
       ]
     },
     {
-      "rank": 199,
+      "rank": 198,
       "ref": "@cat-agent-skills/cowork_use_case_one_pager",
       "title": "Cowork Use Case One-Pager",
       "description": "Turn a Cowork conversation, into a one-page HTML use case write-up — narrative, impact figures, workflow steps, and outputs.",
@@ -11174,8 +11114,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#cowork-use-case-one-pager"
       },
       "score": 40.4,
-      "origin_rank": 199,
-      "origin_size": 307,
+      "origin_rank": 198,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -11221,7 +11161,7 @@
       ]
     },
     {
-      "rank": 200,
+      "rank": 199,
       "ref": "@cat-agent-skills/route_map_visualizer",
       "title": "Route Map Visualizer",
       "description": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and durations. Produces PNG, interactive HTML (Leaflet/OSM), GeoJSON, KML, deep links, and QR codes. Fully offline Python engine — road geometry rendered directly when provided, or OSRM used browser-side as…",
@@ -11248,8 +11188,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#route-map-visualizer"
       },
       "score": 40.4,
-      "origin_rank": 200,
-      "origin_size": 307,
+      "origin_rank": 199,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -11295,7 +11235,7 @@
       ]
     },
     {
-      "rank": 201,
+      "rank": 200,
       "ref": "@cat-agent-skills/wcag_power_platform",
       "title": "WCAG 2.1 for Web Apps & Power Platform",
       "description": "Makes everything the agent builds or reviews conform to WCAG 2.1 AA — HTML pages, SPAs, theming, PCF controls, model-driven and canvas apps, and Power Pages.",
@@ -11322,8 +11262,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#wcag-power-platform"
       },
       "score": 40.4,
-      "origin_rank": 201,
-      "origin_size": 307,
+      "origin_rank": 200,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -11369,7 +11309,7 @@
       ]
     },
     {
-      "rank": 202,
+      "rank": 201,
       "ref": "@cat-agent-skills/work_iq_signalboard",
       "title": "Work IQ Signalboard",
       "description": "Turn four weeks of Calendar, Mail, and Teams chat activity into a colorful dashboard of reconciled Work IQ counts.",
@@ -11394,8 +11334,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#work-iq-signalboard"
       },
       "score": 40.4,
-      "origin_rank": 202,
-      "origin_size": 307,
+      "origin_rank": 201,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -11441,7 +11381,7 @@
       ]
     },
     {
-      "rank": 203,
+      "rank": 202,
       "ref": "@kody-w/double_jump_agent",
       "title": "Double Jump",
       "description": "Improves any draft by competing it against the local brainstem's /chat output round over round, keeping each round's winner; defaults to offline demo.",
@@ -11459,8 +11399,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/double_jump_agent.py",
       "source": null,
       "score": 40.4,
-      "origin_rank": 203,
-      "origin_size": 307,
+      "origin_rank": 202,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.6242,
@@ -11496,7 +11436,7 @@
       ]
     },
     {
-      "rank": 204,
+      "rank": 203,
       "ref": "@aibast-agents-library/mission_reporting_assistant",
       "title": "Mission Reporting Assistant Agent",
       "description": "Computes mission KPIs from live records on a simulated Dynamics 365 tenant, with briefs and trend analyses that work offline.",
@@ -11515,8 +11455,63 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py",
       "source": null,
       "score": 40.3,
+      "origin_rank": 203,
+      "origin_size": 306,
+      "components": {
+        "community": 0.0,
+        "depth": 0.8769,
+        "freshness": 0.4527,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 137,
+          "lines": 406,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet",
+        "community tier",
+        "added 137 days ago",
+        "406 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 204,
+      "ref": "@aibast-agents-library/one_click_crm_intake",
+      "title": "One-Click CRM Intake",
+      "description": "Runs CRM intake with duplicate checks against a live simulated Dynamics 365 tenant's leads, with an offline demo fallback.",
+      "origin": "native",
+      "category": "general",
+      "tags": [
+        "crm",
+        "intake",
+        "data-validation",
+        "duplicate-detection",
+        "import"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fone_click_crm_intake",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py",
+      "source": null,
+      "score": 40.3,
       "origin_rank": 204,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8769,
@@ -11553,25 +11548,27 @@
     },
     {
       "rank": 205,
-      "ref": "@aibast-agents-library/one_click_crm_intake",
-      "title": "One-Click CRM Intake",
-      "description": "Runs CRM intake with duplicate checks against a live simulated Dynamics 365 tenant's leads, with an offline demo fallback.",
+      "ref": "@aibast-agents-library/regulatory_compliance_fed",
+      "title": "Regulatory Compliance (Federal) Agent",
+      "description": "Tracks remediation from live tasks on a simulated Dynamics 365 tenant, with FISMA/FedRAMP gap analysis that works offline.",
       "origin": "native",
-      "category": "general",
+      "category": "federal_government",
       "tags": [
-        "crm",
-        "intake",
-        "data-validation",
-        "duplicate-detection",
-        "import"
+        "compliance",
+        "FISMA",
+        "FedRAMP",
+        "NIST",
+        "audit",
+        "federal",
+        "regulatory"
       ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fone_click_crm_intake",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py",
+      "audience": "business",
+      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fregulatory_compliance_fed",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py",
       "source": null,
       "score": 40.3,
       "origin_rank": 205,
-      "origin_size": 307,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8769,
@@ -11608,63 +11605,6 @@
     },
     {
       "rank": 206,
-      "ref": "@aibast-agents-library/regulatory_compliance_fed",
-      "title": "Regulatory Compliance (Federal) Agent",
-      "description": "Tracks remediation from live tasks on a simulated Dynamics 365 tenant, with FISMA/FedRAMP gap analysis that works offline.",
-      "origin": "native",
-      "category": "federal_government",
-      "tags": [
-        "compliance",
-        "FISMA",
-        "FedRAMP",
-        "NIST",
-        "audit",
-        "federal",
-        "regulatory"
-      ],
-      "audience": "business",
-      "url": "https://kody-w.github.io/RAR/#agent/%40aibast-agents-library%2Fregulatory_compliance_fed",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py",
-      "source": null,
-      "score": 40.3,
-      "origin_rank": 206,
-      "origin_size": 307,
-      "components": {
-        "community": 0.0,
-        "depth": 0.8769,
-        "freshness": 0.4527,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 137,
-          "lines": 406,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet",
-        "community tier",
-        "added 137 days ago",
-        "406 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 207,
       "ref": "@aibast-agents-library/speech_to_crm",
       "title": "Speech to CRM",
       "description": "Maps call transcripts to CRM fields grounded against live records in a simulated Dynamics 365 tenant, with an offline demo fallback.",
@@ -11682,8 +11622,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/speech_to_crm_stack/speech_to_crm_agent.py",
       "source": null,
       "score": 40.3,
-      "origin_rank": 207,
-      "origin_size": 307,
+      "origin_rank": 206,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8782,
@@ -11719,7 +11659,7 @@
       ]
     },
     {
-      "rank": 208,
+      "rank": 207,
       "ref": "@aibast-agents-library/bulk_crm_data_generator_agent",
       "title": "Bulk CRM Data Generator",
       "description": "Generates synthetic CRM records and audits a live simulated Dynamics 365 tenant's data shape, with an offline demo fallback.",
@@ -11738,8 +11678,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py",
       "source": null,
       "score": 40.2,
-      "origin_rank": 208,
-      "origin_size": 307,
+      "origin_rank": 207,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8664,
@@ -11775,7 +11715,7 @@
       ]
     },
     {
-      "rank": 209,
+      "rank": 208,
       "ref": "@aibast-agents-library/deal_tracking",
       "title": "Deal Tracking",
       "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
@@ -11793,8 +11733,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/deal_tracking_agent.py",
       "source": null,
       "score": 40.2,
-      "origin_rank": 209,
-      "origin_size": 307,
+      "origin_rank": 208,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8717,
@@ -11830,7 +11770,7 @@
       ]
     },
     {
-      "rank": 210,
+      "rank": 209,
       "ref": "@kody-w/copilot_studio_probe_agent",
       "title": "CopilotStudioProbe",
       "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification.",
@@ -11849,8 +11789,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py",
       "source": null,
       "score": 40.2,
-      "origin_rank": 210,
-      "origin_size": 307,
+      "origin_rank": 209,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5456,
@@ -11886,7 +11826,7 @@
       ]
     },
     {
-      "rank": 211,
+      "rank": 210,
       "ref": "@kody-w/git_warehouse_agent",
       "title": "Git Warehouse",
       "description": "Builds a queryable git-tracked warehouse from any repo's data by running a shaper script, committing on change, and emitting the Datasette command.",
@@ -11904,8 +11844,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/git_warehouse_agent.py",
       "source": null,
       "score": 40.2,
-      "origin_rank": 211,
-      "origin_size": 307,
+      "origin_rank": 210,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.6137,
@@ -11941,7 +11881,7 @@
       ]
     },
     {
-      "rank": 212,
+      "rank": 211,
       "ref": "@aibast-agents-library/action_prioritization",
       "title": "Action Prioritization",
       "description": "Prioritizes sales actions and builds daily plans, weekly reviews, and resource allocations from built-in demo deal data.",
@@ -11959,8 +11899,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/action_prioritization_agent.py",
       "source": null,
       "score": 40.1,
-      "origin_rank": 212,
-      "origin_size": 307,
+      "origin_rank": 211,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8664,
@@ -11996,7 +11936,7 @@
       ]
     },
     {
-      "rank": 213,
+      "rank": 212,
       "ref": "@cat-agent-skills/booth_loop_video",
       "title": "Booth Loop Video",
       "description": "Generate a silent, looping 1920x1080 MP4 for a conference booth, kiosk, or lobby screen — rendered frame-by-frame in Python (Pillow + ffmpeg), with previews before the full render.",
@@ -12022,8 +11962,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#booth-loop-video"
       },
       "score": 39.6,
-      "origin_rank": 213,
-      "origin_size": 307,
+      "origin_rank": 212,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12069,7 +12009,7 @@
       ]
     },
     {
-      "rank": 214,
+      "rank": 213,
       "ref": "@cat-agent-skills/browser_uat_analyst",
       "title": "Browser UAT Analyst",
       "description": "Run evidence-driven UAT on any browser-based app — Copilot Studio, Power Platform, Dataverse, Dynamics 365, admin centres, or a custom web app — with Playwright execution, a screenshot evidence ledger, and failure classification that separates product defects from tenant config.",
@@ -12095,8 +12035,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#browser-uat-analyst"
       },
       "score": 39.6,
-      "origin_rank": 214,
-      "origin_size": 307,
+      "origin_rank": 213,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12142,7 +12082,7 @@
       ]
     },
     {
-      "rank": 215,
+      "rank": 214,
       "ref": "@cat-agent-skills/copilot_studio_agent_test",
       "title": "Copilot Studio Agent Test",
       "description": "Test a Copilot Studio agent against your own Q&A set and get a graded pass/fail report — no browser automation.",
@@ -12167,8 +12107,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-agent-test"
       },
       "score": 39.6,
-      "origin_rank": 215,
-      "origin_size": 307,
+      "origin_rank": 214,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12214,7 +12154,7 @@
       ]
     },
     {
-      "rank": 216,
+      "rank": 215,
       "ref": "@cat-agent-skills/copilot_studio_harness_picker",
       "title": "Copilot Studio Harness Picker",
       "description": "Choose the right Copilot Studio harness and build shape; in Cowork, use GPT-5.6 with High effort for Detailed mode, Claude Opus 5 as fallback, or Auto for Quick mode.",
@@ -12239,8 +12179,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-harness-picker"
       },
       "score": 39.6,
-      "origin_rank": 216,
-      "origin_size": 307,
+      "origin_rank": 215,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12286,7 +12226,7 @@
       ]
     },
     {
-      "rank": 217,
+      "rank": 216,
       "ref": "@cat-agent-skills/copilot_studio_knowledge_readiness",
       "title": "Copilot Studio Knowledge Readiness",
       "description": "Assess whether an uploaded or exported document set is ready to power a Copilot Studio agent. Produces a corpus-based readiness score, prioritized cleanup backlog, chunking and metadata guidance, and a test-prompt suite, while calling out any evidence gaps that require live system review.",
@@ -12313,8 +12253,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-knowledge-readiness"
       },
       "score": 39.6,
-      "origin_rank": 217,
-      "origin_size": 307,
+      "origin_rank": 216,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12360,7 +12300,7 @@
       ]
     },
     {
-      "rank": 218,
+      "rank": 217,
       "ref": "@cat-agent-skills/monte_carlo_analysis",
       "title": "Monte Carlo Analysis",
       "description": "Run Monte Carlo simulations from natural-language risk inputs — triangular, normal, uniform, or log-normal — and return percentiles, a histogram PNG, optional interactive HTML, and a downloadable results spreadsheet.",
@@ -12387,8 +12327,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#monte-carlo-analysis"
       },
       "score": 39.6,
-      "origin_rank": 218,
-      "origin_size": 307,
+      "origin_rank": 217,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12434,7 +12374,7 @@
       ]
     },
     {
-      "rank": 219,
+      "rank": 218,
       "ref": "@cat-agent-skills/stoic_negotiator",
       "title": "Stoic Negotiator",
       "description": "A principled negotiation intelligence skill that combines Stoic decision disciplines with evidence-backed research to help individuals, executives, and analyst agents prepare, analyze, and execute high-quality negotiations. Supports interactive scoping workflows, Deep Research sourcing (citations and source URLs), and audit-ready outputs.",
@@ -12461,8 +12401,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#stoic-negotiator"
       },
       "score": 39.6,
-      "origin_rank": 219,
-      "origin_size": 307,
+      "origin_rank": 218,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12508,7 +12448,7 @@
       ]
     },
     {
-      "rank": 220,
+      "rank": 219,
       "ref": "@cat-agent-skills/travel_cost_estimator",
       "title": "Travel Cost Estimator",
       "description": "Price a business trip from live fares in your corporate booking tool, benchmark the non-bookable lines against your own approved expense reports, and produce an estimate a manager can approve — with a hard guardrail that never enters the booking funnel.",
@@ -12533,8 +12473,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#travel-cost-estimator"
       },
       "score": 39.6,
-      "origin_rank": 220,
-      "origin_size": 307,
+      "origin_rank": 219,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12580,7 +12520,7 @@
       ]
     },
     {
-      "rank": 221,
+      "rank": 220,
       "ref": "@cat-agent-skills/what_to_use_when",
       "title": "What to Use When",
       "description": "Routes single-output requests to the best-fit included Microsoft 365 Copilot 1p agents and reserves Cowork for long-running or multi-output work.",
@@ -12603,8 +12543,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#what-to-use-when"
       },
       "score": 39.6,
-      "origin_rank": 221,
-      "origin_size": 307,
+      "origin_rank": 220,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12650,7 +12590,7 @@
       ]
     },
     {
-      "rank": 222,
+      "rank": 221,
       "ref": "@aibast-agents-library/sharepoint_document_extractor",
       "title": "SharePoint Document Extractor",
       "description": "Extracts and searches document links from live records in a simulated Dynamics 365 tenant, with metadata seams and offline fallback.",
@@ -12668,8 +12608,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py",
       "source": null,
       "score": 39.5,
-      "origin_rank": 222,
-      "origin_size": 307,
+      "origin_rank": 221,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8402,
@@ -12705,7 +12645,7 @@
       ]
     },
     {
-      "rank": 223,
+      "rank": 222,
       "ref": "@aibast-agents-library/voice_to_crm_d365",
       "title": "Voice to CRM (D365)",
       "description": "Previews voice-driven Dynamics 365 updates pre-flight checked against a live simulated tenant, with sync status and offline fallback.",
@@ -12724,8 +12664,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/dynamics_365_agent.py",
       "source": null,
       "score": 39.5,
-      "origin_rank": 223,
-      "origin_size": 307,
+      "origin_rank": 222,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.8415,
@@ -12761,7 +12701,7 @@
       ]
     },
     {
-      "rank": 224,
+      "rank": 223,
       "ref": "@kody-w/rapp_x_notary_canary_agent",
       "title": "RAPP X Notary Canary",
       "description": "Validates the Issues-backed RAR notarization lifecycle.",
@@ -12777,8 +12717,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_x_notary_canary_agent.py",
       "source": null,
       "score": 39.3,
-      "origin_rank": 224,
-      "origin_size": 307,
+      "origin_rank": 223,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.45,
@@ -12814,7 +12754,7 @@
       ]
     },
     {
-      "rank": 225,
+      "rank": 224,
       "ref": "@howardh/markdown_to_slides_agent",
       "title": "MarkdownToSlides",
       "description": "Converts markdown documents into structured JSON slide decks for presentations or video rendering.",
@@ -12833,8 +12773,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/markdown_to_slides_agent.py",
       "source": null,
       "score": 38.8,
-      "origin_rank": 225,
-      "origin_size": 307,
+      "origin_rank": 224,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.6543,
@@ -12870,7 +12810,7 @@
       ]
     },
     {
-      "rank": 226,
+      "rank": 225,
       "ref": "@cat-agent-skills/accessibility_pass",
       "title": "Accessibility Pass",
       "description": "Check a PowerPoint deck, Word document, HTML page, or Markdown file against Microsoft's Accessibility Checker rules (missing alt text, untitled slides, headerless tables, low contrast, illogical reading order) and fix what it finds.",
@@ -12895,8 +12835,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#accessibility-pass"
       },
       "score": 38.4,
-      "origin_rank": 226,
-      "origin_size": 307,
+      "origin_rank": 225,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -12942,7 +12882,7 @@
       ]
     },
     {
-      "rank": 227,
+      "rank": 226,
       "ref": "@cat-agent-skills/acroform_writer",
       "title": "AcroForm Writer",
       "description": "Fill an existing AcroForm PDF's real form fields from supplied data and flatten the result into a finished, non-editable PDF",
@@ -12966,8 +12906,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#acroform-writer"
       },
       "score": 38.4,
-      "origin_rank": 227,
-      "origin_size": 307,
+      "origin_rank": 226,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13013,7 +12953,7 @@
       ]
     },
     {
-      "rank": 228,
+      "rank": 227,
       "ref": "@cat-agent-skills/agent_evaluation_designer",
       "title": "Agent Evaluation Designer",
       "description": "Design a rigorous, platform-aware evaluation for an AI agent - define what good looks like, pick the right grading method, build a test set, and turn results into a defensible go/no-go decision.",
@@ -13037,8 +12977,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#agent-evaluation-designer"
       },
       "score": 38.4,
-      "origin_rank": 228,
-      "origin_size": 307,
+      "origin_rank": 227,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13084,7 +13024,7 @@
       ]
     },
     {
-      "rank": 229,
+      "rank": 228,
       "ref": "@cat-agent-skills/agent_harness_explorer",
       "title": "Agent Harness Explorer",
       "description": "Discover, document, and monitor what the agent harness can do — Python libraries, tools, MCP servers, and runtime capabilities — with repeatable, comparable snapshots.",
@@ -13109,8 +13049,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#agent-harness-explorer"
       },
       "score": 38.4,
-      "origin_rank": 229,
-      "origin_size": 307,
+      "origin_rank": 228,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13156,7 +13096,7 @@
       ]
     },
     {
-      "rank": 230,
+      "rank": 229,
       "ref": "@cat-agent-skills/ai_demo_assistant",
       "title": "AI Demo Assistant",
       "description": "Turns a customer name, line of business, and personas into a ready-to-seed Microsoft 365 Copilot demo — fictional Word/PowerPoint/Excel example files plus a full delivery and provisioning plan, with optional one-click seeding to OneDrive and Teams.",
@@ -13181,8 +13121,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#ai-demo-assistant"
       },
       "score": 38.4,
-      "origin_rank": 230,
-      "origin_size": 307,
+      "origin_rank": 229,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13228,7 +13168,7 @@
       ]
     },
     {
-      "rank": 231,
+      "rank": 230,
       "ref": "@cat-agent-skills/ai_first_process_redesign",
       "title": "AI-First Process Redesign",
       "description": "Redesign your existing processes with AI-first thinking",
@@ -13250,8 +13190,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#ai-first-process-redesign"
       },
       "score": 38.4,
-      "origin_rank": 231,
-      "origin_size": 307,
+      "origin_rank": 230,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13297,7 +13237,7 @@
       ]
     },
     {
-      "rank": 232,
+      "rank": 231,
       "ref": "@cat-agent-skills/ai_usecase_assessment",
       "title": "AI Use Case Assessment",
       "description": "Turn any AI/agentic use case idea (chat, uploaded doc, or attached file) into an evidence-grounded, rubric-scored assessment with a customer-branded HTML report. Guides the user question-by-question through intake, categorisation, strengthening, scoring, and reporting — grounded in the Agentic Use Case Assessment Rubric v2. Runs in Microsoft Scout and Microsoft 365 Copilot Cowork.",
@@ -13324,8 +13264,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#ai-usecase-assessment"
       },
       "score": 38.4,
-      "origin_rank": 232,
-      "origin_size": 307,
+      "origin_rank": 231,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13371,7 +13311,7 @@
       ]
     },
     {
-      "rank": 233,
+      "rank": 232,
       "ref": "@cat-agent-skills/anonymised_case_study_writer",
       "title": "Anonymised Case Study Writer",
       "description": "Turn engagement notes into anonymised, publishable case studies without exposing client-confidential details.",
@@ -13396,8 +13336,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#anonymised-case-study-writer"
       },
       "score": 38.4,
-      "origin_rank": 233,
-      "origin_size": 307,
+      "origin_rank": 232,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13443,7 +13383,7 @@
       ]
     },
     {
-      "rank": 234,
+      "rank": 233,
       "ref": "@cat-agent-skills/awaiting_reply",
       "title": "Awaiting Reply",
       "description": "A weekday-morning Scout automation that finds emails you sent that asked for something and never got an answer, reports how many are waiting, and prepares follow-up drafts in each thread's own language that it never sends.",
@@ -13469,8 +13409,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#awaiting-reply"
       },
       "score": 38.4,
-      "origin_rank": 234,
-      "origin_size": 307,
+      "origin_rank": 233,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13516,7 +13456,7 @@
       ]
     },
     {
-      "rank": 235,
+      "rank": 234,
       "ref": "@cat-agent-skills/b2b_outreach_suite",
       "title": "B2B Outreach Suite",
       "description": "A six-playbook toolkit for agentic B2B sales outreach: prospect research briefings, cold emails, LinkedIn/social DMs, follow-up cadences, ad copywriting, and objection handling. Configurable via a company profile template, works for any industry, market, and language.",
@@ -13541,8 +13481,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#b2b-outreach-suite"
       },
       "score": 38.4,
-      "origin_rank": 235,
-      "origin_size": 307,
+      "origin_rank": 234,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13588,7 +13528,7 @@
       ]
     },
     {
-      "rank": 236,
+      "rank": 235,
       "ref": "@cat-agent-skills/blog_content_auditor",
       "title": "Blog Content Auditor",
       "description": "Audit blog posts or a blog library for clarity, structure, evidence, audience fit, and improvement priority.",
@@ -13613,8 +13553,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#blog-content-auditor"
       },
       "score": 38.4,
-      "origin_rank": 236,
-      "origin_size": 307,
+      "origin_rank": 235,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13660,7 +13600,7 @@
       ]
     },
     {
-      "rank": 237,
+      "rank": 236,
       "ref": "@cat-agent-skills/blog_post_structure_pass",
       "title": "Blog Post Structure Pass",
       "description": "Restructure draft or existing blog posts into a stronger narrative without inventing new claims.",
@@ -13685,8 +13625,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#blog-post-structure-pass"
       },
       "score": 38.4,
-      "origin_rank": 237,
-      "origin_size": 307,
+      "origin_rank": 236,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13732,7 +13672,7 @@
       ]
     },
     {
-      "rank": 238,
+      "rank": 237,
       "ref": "@cat-agent-skills/brand_template_enforcer",
       "title": "Brand Template Enforcer",
       "description": "Ensure every generated PowerPoint deck or Word document starts from the correct bundled or SharePoint-hosted brand template.",
@@ -13757,8 +13697,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#brand-template-enforcer"
       },
       "score": 38.4,
-      "origin_rank": 238,
-      "origin_size": 307,
+      "origin_rank": 237,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13804,7 +13744,7 @@
       ]
     },
     {
-      "rank": 239,
+      "rank": 238,
       "ref": "@cat-agent-skills/brand_voice_pass",
       "title": "Brand Voice Pass",
       "description": "Rewrite drafts into a configurable house style, preserving meaning while removing generic AI phrasing.",
@@ -13828,8 +13768,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#brand-voice-pass"
       },
       "score": 38.4,
-      "origin_rank": 239,
-      "origin_size": 307,
+      "origin_rank": 238,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13875,7 +13815,7 @@
       ]
     },
     {
-      "rank": 240,
+      "rank": 239,
       "ref": "@cat-agent-skills/business_os",
       "title": "Business OS",
       "description": "A practical operating system for Copilot Studio that gives agents a consistent way to clarify outcomes, choose the right approach, solve problems, make decisions, plan projects, improve processes, handle incidents, and turn repeatable work into reusable skills. Unlike a standard Copilot experience that relies mainly on the prompt and available context, Business OS adds a structured way of working…",
@@ -13901,8 +13841,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#business-os"
       },
       "score": 38.4,
-      "origin_rank": 240,
-      "origin_size": 307,
+      "origin_rank": 239,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -13948,7 +13888,7 @@
       ]
     },
     {
-      "rank": 241,
+      "rank": 240,
       "ref": "@cat-agent-skills/call_for_speakers_digest",
       "title": "Call for Speakers Digest",
       "description": "Weekly HTML email digest of open conference Call for Speakers (CFP) opportunities matching your topics of interest. Pulls from confs.tech, Papercall, AdatoSystems' CFP tracker, CFP Radar, Sessionize's public user-groups directory, community-specific hubs (like communitydays.org for the Microsoft ecosystem), targeted search of standalone Sessionize conferences and run.events, and general web searc…",
@@ -13971,8 +13911,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#call-for-speakers-digest"
       },
       "score": 38.4,
-      "origin_rank": 241,
-      "origin_size": 307,
+      "origin_rank": 240,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14018,7 +13958,7 @@
       ]
     },
     {
-      "rank": 242,
+      "rank": 241,
       "ref": "@cat-agent-skills/campaign_deck_builder",
       "title": "Campaign Deck Builder",
       "description": "Turn a short interview into a charming, vibrant 3-slide marketing-campaign deck by filling a bundled PowerPoint template.",
@@ -14042,8 +13982,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#campaign-deck-builder"
       },
       "score": 38.4,
-      "origin_rank": 242,
-      "origin_size": 307,
+      "origin_rank": 241,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14089,7 +14029,7 @@
       ]
     },
     {
-      "rank": 243,
+      "rank": 242,
       "ref": "@cat-agent-skills/chart_builder",
       "title": "Chart Builder",
       "description": "Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call.",
@@ -14112,8 +14052,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#chart-builder"
       },
       "score": 38.4,
-      "origin_rank": 243,
-      "origin_size": 307,
+      "origin_rank": 242,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14159,7 +14099,7 @@
       ]
     },
     {
-      "rank": 244,
+      "rank": 243,
       "ref": "@cat-agent-skills/classic_text_adventure",
       "title": "Classic Text Adventure",
       "description": "Play a deterministic, resumable Colossal Cave adventure with exact game output and built-in diagnostics.",
@@ -14181,8 +14121,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#classic-text-adventure"
       },
       "score": 38.4,
-      "origin_rank": 244,
-      "origin_size": 307,
+      "origin_rank": 243,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14228,7 +14168,7 @@
       ]
     },
     {
-      "rank": 245,
+      "rank": 244,
       "ref": "@cat-agent-skills/clt_hr_assistant",
       "title": "Assistente CLT para RH",
       "description": "Assistente de legislação trabalhista brasileira (CLT) para equipes de RH e Departamento Pessoal. Responde dúvidas sobre férias, 13º salário, aviso prévio, jornada e tipos de rescisão, e calcula verbas rescisórias com memória de cálculo completa usando as tabelas oficiais vigentes de 2026 (salário mínimo, INSS e IRRF, incluindo a Lei 15.270/2025).",
@@ -14255,8 +14195,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#clt-hr-assistant"
       },
       "score": 38.4,
-      "origin_rank": 245,
-      "origin_size": 307,
+      "origin_rank": 244,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14302,7 +14242,7 @@
       ]
     },
     {
-      "rank": 246,
+      "rank": 245,
       "ref": "@cat-agent-skills/commenting_content",
       "title": "Commenting Content",
       "description": "Comments Word or PowerPoint files with Comments.",
@@ -14323,8 +14263,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#commenting-content"
       },
       "score": 38.4,
-      "origin_rank": 246,
-      "origin_size": 307,
+      "origin_rank": 245,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14370,7 +14310,7 @@
       ]
     },
     {
-      "rank": 247,
+      "rank": 246,
       "ref": "@cat-agent-skills/competitive_battlecard_builder",
       "title": "Competitive Battlecard Builder",
       "description": "Build an interactive comparison app, either a sales battlecard advocating for your product against named competitors, or a neutral, unbiased comparison across two or more peer items with no side taken. Filterable by item and category, with live search, a compact scorecard, and copy-to-clipboard talking points. Every claim is tagged verified or unverified so nothing invented ends up in front of a…",
@@ -14392,8 +14332,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#competitive-battlecard-builder"
       },
       "score": 38.4,
-      "origin_rank": 247,
-      "origin_size": 307,
+      "origin_rank": 246,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14439,7 +14379,7 @@
       ]
     },
     {
-      "rank": 248,
+      "rank": 247,
       "ref": "@cat-agent-skills/conditional_chat_reminder",
       "title": "Conditional Chat Reminder",
       "description": "Schedule a Teams reminder that sends only when the expected person has not already posted a relevant update.",
@@ -14463,8 +14403,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#conditional-chat-reminder"
       },
       "score": 38.4,
-      "origin_rank": 248,
-      "origin_size": 307,
+      "origin_rank": 247,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14510,7 +14450,7 @@
       ]
     },
     {
-      "rank": 249,
+      "rank": 248,
       "ref": "@cat-agent-skills/conference_session_abstract_pack",
       "title": "Conference Session Abstract Pack",
       "description": "Create CFP-ready talk titles, abstracts, takeaways, speaker notes, and submission copy from a topic.",
@@ -14535,8 +14475,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#conference-session-abstract-pack"
       },
       "score": 38.4,
-      "origin_rank": 249,
-      "origin_size": 307,
+      "origin_rank": 248,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14582,7 +14522,7 @@
       ]
     },
     {
-      "rank": 250,
+      "rank": 249,
       "ref": "@cat-agent-skills/content_quality_auditor",
       "title": "Content Quality Auditor",
       "description": "Score documents, pages, posts, or artefact libraries against a configurable quality rubric and recommend fixes.",
@@ -14607,8 +14547,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#content-quality-auditor"
       },
       "score": 38.4,
-      "origin_rank": 250,
-      "origin_size": 307,
+      "origin_rank": 249,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14654,7 +14594,7 @@
       ]
     },
     {
-      "rank": 251,
+      "rank": 250,
       "ref": "@cat-agent-skills/copilot_agents_news_scout",
       "title": "Copilot & Agents News Scout",
       "description": "A Monday-morning Scout automation that scans authoritative Microsoft sources for the past week's Copilot, Copilot Studio, and agent news and posts a concise, linked digest to Teams.",
@@ -14680,8 +14620,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#copilot-agents-news-scout"
       },
       "score": 38.4,
-      "origin_rank": 251,
-      "origin_size": 307,
+      "origin_rank": 250,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14727,7 +14667,7 @@
       ]
     },
     {
-      "rank": 252,
+      "rank": 251,
       "ref": "@cat-agent-skills/copilot_studio_test_planner",
       "title": "Copilot Studio Test Planner",
       "description": "Reads an exported Copilot Studio agent and generates a graded, runnable test suite (happy-path, paraphrase, disambiguation, negative, knowledge-grounding, multilingual, and safety cases) plus a regression set, ready to run in the free Copilot Studio test panel.",
@@ -14750,8 +14690,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-test-planner"
       },
       "score": 38.4,
-      "origin_rank": 252,
-      "origin_size": 307,
+      "origin_rank": 251,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14797,7 +14737,7 @@
       ]
     },
     {
-      "rank": 253,
+      "rank": 252,
       "ref": "@cat-agent-skills/copilot_studio_topic_blueprint",
       "title": "Copilot Studio Topic Blueprint",
       "description": "Turn a one-line use case into a build-ready Microsoft Copilot Studio agent blueprint: recommended agent type and orchestration, topics, tools, knowledge, variables, a welcome Adaptive Card, security and Copilot Credits notes, and a first test plan.",
@@ -14823,8 +14763,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-topic-blueprint"
       },
       "score": 38.4,
-      "origin_rank": 253,
-      "origin_size": 307,
+      "origin_rank": 252,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14870,7 +14810,7 @@
       ]
     },
     {
-      "rank": 254,
+      "rank": 253,
       "ref": "@cat-agent-skills/doc_format_converter",
       "title": "Universal Document Converter",
       "description": "Convert documents between Markdown, HTML, PDF, Word, PowerPoint, Excel/CSV and text — fully offline, using only the libraries already in the agent sandbox.",
@@ -14895,8 +14835,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#doc-format-converter"
       },
       "score": 38.4,
-      "origin_rank": 254,
-      "origin_size": 307,
+      "origin_rank": 253,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -14942,7 +14882,7 @@
       ]
     },
     {
-      "rank": 255,
+      "rank": 254,
       "ref": "@cat-agent-skills/enterprise_agent_design_authority",
       "title": "Enterprise Agent Design Authority (EADA)",
       "description": "An enterprise design review framework that helps architects build secure, scalable, governable, and production-ready Microsoft Copilot Studio agents.",
@@ -14967,8 +14907,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#enterprise-agent-design-authority"
       },
       "score": 38.4,
-      "origin_rank": 255,
-      "origin_size": 307,
+      "origin_rank": 254,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15014,7 +14954,7 @@
       ]
     },
     {
-      "rank": 256,
+      "rank": 255,
       "ref": "@cat-agent-skills/eu_greenwashing_analysis",
       "title": "EU Greenwashing Analysis",
       "description": "Detect greenwashing in product descriptions, marketing copy, and catalog entries against EU Directive 2024/825 and the Green Claims Directive. Returns a structured per-claim findings report with risk levels, regulation references, and recommended corrections.",
@@ -15039,8 +14979,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#eu-greenwashing-analysis"
       },
       "score": 38.4,
-      "origin_rank": 256,
-      "origin_size": 307,
+      "origin_rank": 255,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15086,7 +15026,7 @@
       ]
     },
     {
-      "rank": 257,
+      "rank": 256,
       "ref": "@cat-agent-skills/exam_prep_learning_plan_builder",
       "title": "Exam Prep Learning Plan Builder",
       "description": "Build a personalized study plan app for an exam or certification: overview timeline, day-by-day schedule with a calendar picker, domain breakdown, one-click .ics download, and a notes tab to track confidence over time.",
@@ -15108,8 +15048,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#exam-prep-learning-plan-builder"
       },
       "score": 38.4,
-      "origin_rank": 257,
-      "origin_size": 307,
+      "origin_rank": 256,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15155,7 +15095,7 @@
       ]
     },
     {
-      "rank": 258,
+      "rank": 257,
       "ref": "@cat-agent-skills/gantt_chart_generator",
       "title": "Gantt Chart Builder",
       "description": "Generate clean, consistently-styled matplotlib Gantt charts from a schedule CSV or DataFrame — with group colours, completion overlays, and a today line.",
@@ -15180,8 +15120,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#gantt-chart-generator"
       },
       "score": 38.4,
-      "origin_rank": 258,
-      "origin_size": 307,
+      "origin_rank": 257,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15227,7 +15167,7 @@
       ]
     },
     {
-      "rank": 259,
+      "rank": 258,
       "ref": "@cat-agent-skills/generating_podcast_script",
       "title": "Podcast Script Generator",
       "description": "Turn a topic or a pile of source material — a newsletter, news digest, or set of articles — into a two-host, NotebookLM-style podcast episode, with multi-voice SSML and optional Azure Text-to-Speech audio.",
@@ -15252,8 +15192,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#generating-podcast-script"
       },
       "score": 38.4,
-      "origin_rank": 259,
-      "origin_size": 307,
+      "origin_rank": 258,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15299,7 +15239,7 @@
       ]
     },
     {
-      "rank": 260,
+      "rank": 259,
       "ref": "@cat-agent-skills/global_greenwashing_claim_auditor",
       "title": "Global Greenwashing Claim Auditor",
       "description": "Audit environmental claims in CSV, XLSX, DOCX, PPTX, conversational text, and public websites with separate ANY, CA, EU, and UK findings.",
@@ -15326,8 +15266,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#global-greenwashing-claim-auditor"
       },
       "score": 38.4,
-      "origin_rank": 260,
-      "origin_size": 307,
+      "origin_rank": 259,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15373,7 +15313,7 @@
       ]
     },
     {
-      "rank": 261,
+      "rank": 260,
       "ref": "@cat-agent-skills/grab_my_files",
       "title": "Grab My Files",
       "description": "One-tap way to bundle every file your Copilot Studio agent produced in a session into a single timestamped .zip and hand it back as a download.",
@@ -15397,8 +15337,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#grab-my-files"
       },
       "score": 38.4,
-      "origin_rank": 261,
-      "origin_size": 307,
+      "origin_rank": 260,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15444,7 +15384,7 @@
       ]
     },
     {
-      "rank": 262,
+      "rank": 261,
       "ref": "@cat-agent-skills/idea_refiner",
       "title": "Idea Refiner",
       "description": "Refines an existing plan, decision, or draft through relentless, branch-by-branch questioning. Grouped in batches of 2-5 with recommended answers, pulling facts from Work IQ where possible, until every part has been fully thought through.",
@@ -15468,8 +15408,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#idea-refiner"
       },
       "score": 38.4,
-      "origin_rank": 262,
-      "origin_size": 307,
+      "origin_rank": 261,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15515,7 +15455,7 @@
       ]
     },
     {
-      "rank": 263,
+      "rank": 262,
       "ref": "@cat-agent-skills/institutional_knowledge",
       "title": "Institutional Knowledge Archivist",
       "description": "Preserve a departing senior leader's institutional knowledge — decisions, rationale, relationships, and tribal knowledge — by mining their M365 signals into a structured, multi-phase archive a successor can ground on.",
@@ -15541,8 +15481,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#institutional-knowledge"
       },
       "score": 38.4,
-      "origin_rank": 263,
-      "origin_size": 307,
+      "origin_rank": 262,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15588,7 +15528,7 @@
       ]
     },
     {
-      "rank": 264,
+      "rank": 263,
       "ref": "@cat-agent-skills/iterative_file_editing",
       "title": "Iterative File Editing",
       "description": "In Copilot Studio, re-sending an edited file under the same name fails to deliver it — the change is made but never reaches the user. This skill gives each iteration a new version-numbered filename (report_v1.docx, report_v2.docx…) so every update actually lands in the chat as its own attachment.",
@@ -15612,8 +15552,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#iterative-file-editing"
       },
       "score": 38.4,
-      "origin_rank": 264,
-      "origin_size": 307,
+      "origin_rank": 263,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15659,7 +15599,7 @@
       ]
     },
     {
-      "rank": 265,
+      "rank": 264,
       "ref": "@cat-agent-skills/knowledge_corpus_curator",
       "title": "Knowledge Corpus Curator",
       "description": "Review uploaded knowledge-source files for duplication, redundancy, staleness, overlap, and potentially conflicting guidance, then produce an evidence-based curation backlog.",
@@ -15685,8 +15625,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#knowledge-corpus-curator"
       },
       "score": 38.4,
-      "origin_rank": 265,
-      "origin_size": 307,
+      "origin_rank": 264,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15732,7 +15672,7 @@
       ]
     },
     {
-      "rank": 266,
+      "rank": 265,
       "ref": "@cat-agent-skills/knowledge_source_router",
       "title": "Knowledge Source Router",
       "description": "Route Copilot Studio knowledge searches to the right region-specific source (Americas, EMEA, APAC, or Global) based on where the user is, so answers stay locally accurate.",
@@ -15756,8 +15696,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#knowledge-source-router"
       },
       "score": 38.4,
-      "origin_rank": 266,
-      "origin_size": 307,
+      "origin_rank": 265,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15803,7 +15743,7 @@
       ]
     },
     {
-      "rank": 267,
+      "rank": 266,
       "ref": "@cat-agent-skills/lab_column_mapper",
       "title": "Lab Column Mapper",
       "description": "When a health system's lab results ingestion pipeline hits an unknown column header, this skill semantically matches the source column against the canonical clinical schema (LOINC-anchored), scoped by lab and clinical domain, and writes a suggested mapping to a Dataverse review queue for a clinical informatics steward to approve.",
@@ -15830,8 +15770,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#lab-column-mapper"
       },
       "score": 38.4,
-      "origin_rank": 267,
-      "origin_size": 307,
+      "origin_rank": 266,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15877,7 +15817,7 @@
       ]
     },
     {
-      "rank": 268,
+      "rank": 267,
       "ref": "@cat-agent-skills/linkedin_content_system",
       "title": "LinkedIn Content System",
       "description": "Create evidence-led LinkedIn posts, promos, newsletter intros, and long-form copy from supplied facts or drafts.",
@@ -15901,8 +15841,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#linkedin-content-system"
       },
       "score": 38.4,
-      "origin_rank": 268,
-      "origin_size": 307,
+      "origin_rank": 267,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -15948,7 +15888,7 @@
       ]
     },
     {
-      "rank": 269,
+      "rank": 268,
       "ref": "@cat-agent-skills/linkedin_content_writer",
       "title": "LinkedIn Content Writer",
       "description": "Create credible LinkedIn content from facts, notes or drafts, with configurable voice and no invented evidence.",
@@ -15971,8 +15911,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#linkedin-content-writer"
       },
       "score": 38.4,
-      "origin_rank": 269,
-      "origin_size": 307,
+      "origin_rank": 268,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16018,7 +15958,7 @@
       ]
     },
     {
-      "rank": 270,
+      "rank": 269,
       "ref": "@cat-agent-skills/lookup_dataverse_table",
       "title": "Dataverse Table Lookup",
       "description": "Search any Microsoft Dataverse table, browse matching records, and drill into full record details — sourced live via the Dataverse MCP Server.",
@@ -16042,8 +15982,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#lookup-dataverse-table"
       },
       "score": 38.4,
-      "origin_rank": 270,
-      "origin_size": 307,
+      "origin_rank": 269,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16089,7 +16029,7 @@
       ]
     },
     {
-      "rank": 271,
+      "rank": 270,
       "ref": "@cat-agent-skills/mct_excellence_iq",
       "title": "MCT Excellence IQ",
       "description": "An AI-powered Instructional Intelligence Skill that helps Microsoft Certified Trainers design, deliver, assess, localize, and continuously improve world-class Microsoft learning experiences across Azure, Business Applications, Data & AI, Modern Work, and Security.",
@@ -16116,8 +16056,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#mct-excellence-iq"
       },
       "score": 38.4,
-      "origin_rank": 271,
-      "origin_size": 307,
+      "origin_rank": 270,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16163,7 +16103,7 @@
       ]
     },
     {
-      "rank": 272,
+      "rank": 271,
       "ref": "@cat-agent-skills/meeting_analyzer",
       "title": "Meeting Analyzer",
       "description": "Analyzes meeting content pasted as text or provided as audio/video transcripts. Delivers a structured intelligence report: explicit decisions and action items, participant persona profiles, and — most importantly — hidden insights: unspoken tensions, implicit risks, unresolved topics, and signals that were not made explicit during the meeting but are critical to the context.",
@@ -16189,8 +16129,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#meeting-analyzer"
       },
       "score": 38.4,
-      "origin_rank": 272,
-      "origin_size": 307,
+      "origin_rank": 271,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16236,7 +16176,7 @@
       ]
     },
     {
-      "rank": 273,
+      "rank": 272,
       "ref": "@cat-agent-skills/microsoft_ai_platform_advisor",
       "title": "Microsoft AI Platform Advisor",
       "description": "Guides a customer through a discovery interview, recommends the right Microsoft AI platform (M365 Copilot, Agent Builder, Copilot Studio, Foundry, Foundry Agent Service, Windows AI Foundry, or Agent 365 as the governance layer), scores technical complexity and risk, and plots them on a 2x2 quadrant chart with planning guidance.",
@@ -16263,8 +16203,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#microsoft-ai-platform-advisor"
       },
       "score": 38.4,
-      "origin_rank": 273,
-      "origin_size": 307,
+      "origin_rank": 272,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16310,7 +16250,7 @@
       ]
     },
     {
-      "rank": 274,
+      "rank": 273,
       "ref": "@cat-agent-skills/own_voice_builder",
       "title": "Own Voice Builder",
       "description": "Mines your sent emails to extract your real writing voice — languages, tone modes, structure, vocabulary, taboo phrases — and generates a personal voice skill that makes every email and Teams draft sound like you.",
@@ -16335,8 +16275,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#own-voice-builder"
       },
       "score": 38.4,
-      "origin_rank": 274,
-      "origin_size": 307,
+      "origin_rank": 273,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16382,7 +16322,7 @@
       ]
     },
     {
-      "rank": 275,
+      "rank": 274,
       "ref": "@cat-agent-skills/pattern_radar",
       "title": "Pattern Radar",
       "description": "Scans your recent Microsoft 365 signals to surface recurring patterns worth productizing — things you keep explaining (blog candidates) or multi-step tasks you keep doing by hand (automation candidates).",
@@ -16407,8 +16347,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#pattern-radar"
       },
       "score": 38.4,
-      "origin_rank": 275,
-      "origin_size": 307,
+      "origin_rank": 274,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16454,7 +16394,7 @@
       ]
     },
     {
-      "rank": 276,
+      "rank": 275,
       "ref": "@cat-agent-skills/pattern_radar_automation",
       "title": "Pattern Radar (Scheduled)",
       "description": "Twice a week, scans your recent Microsoft 365 signals and posts a Teams summary of recurring patterns worth productizing — things you keep explaining (blog candidates) and multi-step tasks you keep doing by hand (automation candidates). Read-only and privacy-aware.",
@@ -16479,8 +16419,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#pattern-radar-automation"
       },
       "score": 38.4,
-      "origin_rank": 276,
-      "origin_size": 307,
+      "origin_rank": 275,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16526,7 +16466,7 @@
       ]
     },
     {
-      "rank": 277,
+      "rank": 276,
       "ref": "@cat-agent-skills/pdf_table_data_conversion",
       "title": "PDF Table Data Conversion",
       "description": "Extract tables from a PDF document (e.g. contract rebate or pricing schedules) and convert them into a clean, workable Excel spreadsheet or CSV.",
@@ -16552,8 +16492,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#pdf-table-data-conversion"
       },
       "score": 38.4,
-      "origin_rank": 277,
-      "origin_size": 307,
+      "origin_rank": 276,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16599,7 +16539,7 @@
       ]
     },
     {
-      "rank": 278,
+      "rank": 277,
       "ref": "@cat-agent-skills/persona_reaction_panel",
       "title": "Persona Reaction Panel",
       "description": "Pre-test an internal launch, comms, or enablement artefact against your own role-based personas before it ships — surfaces blackspots, domain gaps, credible-detractor risks, and concrete edits. Bring your own personas file.",
@@ -16623,8 +16563,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#persona-reaction-panel"
       },
       "score": 38.4,
-      "origin_rank": 278,
-      "origin_size": 307,
+      "origin_rank": 277,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16670,7 +16610,7 @@
       ]
     },
     {
-      "rank": 279,
+      "rank": 278,
       "ref": "@cat-agent-skills/phi_deidentifier",
       "title": "PHI De-identifier",
       "description": "Redact the 18 HIPAA Safe Harbor identifiers from clinical text (or produce a Limited Data Set) with consistent pseudonym tokens and an audit manifest of what was removed.",
@@ -16697,8 +16637,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#phi-deidentifier"
       },
       "score": 38.4,
-      "origin_rank": 279,
-      "origin_size": 307,
+      "origin_rank": 278,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16744,7 +16684,7 @@
       ]
     },
     {
-      "rank": 280,
+      "rank": 279,
       "ref": "@cat-agent-skills/pov_line_generator",
       "title": "POV Line Generator",
       "description": "Generate sharp, specific point-of-view lines for posts, slides, talks, campaigns, or positioning work.",
@@ -16768,8 +16708,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#pov-line-generator"
       },
       "score": 38.4,
-      "origin_rank": 280,
-      "origin_size": 307,
+      "origin_rank": 279,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16815,7 +16755,7 @@
       ]
     },
     {
-      "rank": 281,
+      "rank": 280,
       "ref": "@cat-agent-skills/power_automate_desktop_assessment",
       "title": "Power Automate Desktop Assessment",
       "description": "Assess Power Automate Desktop and hybrid automation projects with evidence-based findings and prioritized remediation guidance.",
@@ -16839,8 +16779,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#power-automate-desktop-assessment"
       },
       "score": 38.4,
-      "origin_rank": 281,
-      "origin_size": 307,
+      "origin_rank": 280,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16886,7 +16826,7 @@
       ]
     },
     {
-      "rank": 282,
+      "rank": 281,
       "ref": "@cat-agent-skills/power_automate_documentation",
       "title": "Power Automate Documentation",
       "description": "Turns a Power Automate solution .zip into a clean markdown reference for every flow inside it: trigger, plain-English process, connection references, and a read/write/delete table for everything it touches. Maps which flows call each other and unresolved connections automatically.",
@@ -16909,8 +16849,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#power-automate-documentation"
       },
       "score": 38.4,
-      "origin_rank": 282,
-      "origin_size": 307,
+      "origin_rank": 281,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -16956,7 +16896,7 @@
       ]
     },
     {
-      "rank": 283,
+      "rank": 282,
       "ref": "@cat-agent-skills/power_bi_model_review",
       "title": "Power BI Model Review",
       "description": "Review a Power BI or Analysis Services semantic model (TMDL, BIM/JSON, or a pasted table/measure list) for relationship, DAX, date-handling, and naming issues, with corrected DAX for anything flagged.",
@@ -16981,8 +16921,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#power-bi-model-review"
       },
       "score": 38.4,
-      "origin_rank": 283,
-      "origin_size": 307,
+      "origin_rank": 282,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17028,7 +16968,7 @@
       ]
     },
     {
-      "rank": 284,
+      "rank": 283,
       "ref": "@cat-agent-skills/powerpoint_deck_designer",
       "title": "PowerPoint Deck Designer",
       "description": "Creates polished PowerPoint decks from a JSON specification using python-pptx. Designed as a Copilot Studio Skill that runs natively inside the agent's Python container (no Azure Function or custom connector required). Supports 8 layouts plus native charts (bar, column, line, pie, donut with stacked / 100% stacked variants).",
@@ -17051,8 +16991,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#powerpoint-deck-designer"
       },
       "score": 38.4,
-      "origin_rank": 284,
-      "origin_size": 307,
+      "origin_rank": 283,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17098,7 +17038,7 @@
       ]
     },
     {
-      "rank": 285,
+      "rank": 284,
       "ref": "@cat-agent-skills/presentation_talk_track_builder",
       "title": "Presentation Talk Track Builder",
       "description": "Writes natural, first-person spoken presenter scripts for the slides in a deck. Treats existing speaker notes as authoritative when they contradict slide text. Calibrates length to a target duration and speaking pace and returns a timing table. Never modifies visible slide content.",
@@ -17122,8 +17062,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#presentation-talk-track-builder"
       },
       "score": 38.4,
-      "origin_rank": 285,
-      "origin_size": 307,
+      "origin_rank": 284,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17169,7 +17109,7 @@
       ]
     },
     {
-      "rank": 286,
+      "rank": 285,
       "ref": "@cat-agent-skills/process_sop_architect",
       "title": "Process & SOP Architect",
       "description": "Turn process notes and transcripts into an editable SOP, process map, RACI, control register, improvement backlog, and polished PowerPoint briefing.",
@@ -17193,8 +17133,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#process-sop-architect"
       },
       "score": 38.4,
-      "origin_rank": 286,
-      "origin_size": 307,
+      "origin_rank": 285,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17240,7 +17180,7 @@
       ]
     },
     {
-      "rank": 287,
+      "rank": 286,
       "ref": "@cat-agent-skills/redlining_content",
       "title": "Redlining Content",
       "description": "Redlines a document based on changes from a template with Track Changes.",
@@ -17261,8 +17201,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#redlining-content"
       },
       "score": 38.4,
-      "origin_rank": 287,
-      "origin_size": 307,
+      "origin_rank": 286,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17308,7 +17248,7 @@
       ]
     },
     {
-      "rank": 288,
+      "rank": 287,
       "ref": "@cat-agent-skills/regulation_monitor",
       "title": "Regulation Monitor",
       "description": "Configure once, then on a schedule sweeps a locked list of authoritative sources (auto-discovered at setup, confirmed by the user) plus any user-supplied seeds. Classifies each item, flags items relevant to the user's team using a light WorkIQ-derived profile, and renders a self-contained HTML dashboard. A tightly-bounded fallback web search is used only when a locked source is silent in the wind…",
@@ -17332,8 +17272,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#regulation-monitor"
       },
       "score": 38.4,
-      "origin_rank": 288,
-      "origin_size": 307,
+      "origin_rank": 287,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17379,7 +17319,7 @@
       ]
     },
     {
-      "rank": 289,
+      "rank": 288,
       "ref": "@cat-agent-skills/rich_html_presentation",
       "title": "Rich HTML Presentation",
       "description": "Create polished, self-contained HTML slide decks with keynote-style visuals, keyboard navigation, themes, animations, and reusable presentation components.",
@@ -17403,8 +17343,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#rich-html-presentation"
       },
       "score": 38.4,
-      "origin_rank": 289,
-      "origin_size": 307,
+      "origin_rank": 288,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17450,7 +17390,7 @@
       ]
     },
     {
-      "rank": 290,
+      "rank": 289,
       "ref": "@cat-agent-skills/scrollytelling_data",
       "title": "Scrollytelling Data",
       "description": "Turns data into a scroll-driven HTML story.",
@@ -17473,8 +17413,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#scrollytelling-data"
       },
       "score": 38.4,
-      "origin_rank": 290,
-      "origin_size": 307,
+      "origin_rank": 289,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17520,7 +17460,7 @@
       ]
     },
     {
-      "rank": 291,
+      "rank": 290,
       "ref": "@cat-agent-skills/sharepoint_list_formatter",
       "title": "SharePoint List Formatter",
       "description": "Turns any SharePoint list data into a clean, consistent markdown table. Dynamic columns based on list type and query, plus a one-click Open link for every row.",
@@ -17544,8 +17484,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#sharepoint-list-formatter"
       },
       "score": 38.4,
-      "origin_rank": 291,
-      "origin_size": 307,
+      "origin_rank": 290,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17591,7 +17531,7 @@
       ]
     },
     {
-      "rank": 292,
+      "rank": 291,
       "ref": "@cat-agent-skills/sharepoint_list_insight_report_generator",
       "title": "SharePoint List Insight Report Generator",
       "description": "Automatically discovers and validates a SharePoint list within a connected knowledge source, analyzes its structure and data, identifies key business insights, and generates a downloadable interactive HTML report. The report includes dynamic filters, interactive charts, sortable and searchable tables with pagination, detailed record drill-down through modal popups, and direct links to open items…",
@@ -17615,8 +17555,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#sharepoint-list-insight-report-generator"
       },
       "score": 38.4,
-      "origin_rank": 292,
-      "origin_size": 307,
+      "origin_rank": 291,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17662,7 +17602,7 @@
       ]
     },
     {
-      "rank": 293,
+      "rank": 292,
       "ref": "@cat-agent-skills/skill_authoring_coach",
       "title": "Skill Authoring Coach",
       "description": "Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.",
@@ -17686,8 +17626,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#skill-authoring-coach"
       },
       "score": 38.4,
-      "origin_rank": 293,
-      "origin_size": 307,
+      "origin_rank": 292,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17733,7 +17673,7 @@
       ]
     },
     {
-      "rank": 294,
+      "rank": 293,
       "ref": "@cat-agent-skills/spend_more_time_with_friends_and_family",
       "title": "Spend More Time With Friends & Family",
       "description": "While you're out of office, watches a group chat and answers questions from your local knowledge docs (clearly marked AI-generated), logs anything it can't answer for later, and pings you on Teams if its setup is incomplete.",
@@ -17756,8 +17696,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#spend-more-time-with-friends-and-family"
       },
       "score": 38.4,
-      "origin_rank": 294,
-      "origin_size": 307,
+      "origin_rank": 293,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17803,7 +17743,7 @@
       ]
     },
     {
-      "rank": 295,
+      "rank": 294,
       "ref": "@cat-agent-skills/style_analyzer",
       "title": "Communication Style Analyzer",
       "description": "Analyzes your Teams chats and emails to build a reusable profile of your writing voice — greetings, tone, length, punctuation, sign-offs, common phrases, and quirks — and saves it to memory for other assistants to use.",
@@ -17828,8 +17768,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#style-analyzer"
       },
       "score": 38.4,
-      "origin_rank": 295,
-      "origin_size": 307,
+      "origin_rank": 294,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17875,7 +17815,7 @@
       ]
     },
     {
-      "rank": 296,
+      "rank": 295,
       "ref": "@cat-agent-skills/tool_tracer",
       "title": "Tool Tracer",
       "description": "On-demand tool/action trace for Copilot Studio runs (`/special-debug tool-trace` → `tool_trace.json`).",
@@ -17901,8 +17841,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#tool-tracer"
       },
       "score": 38.4,
-      "origin_rank": 296,
-      "origin_size": 307,
+      "origin_rank": 295,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -17948,7 +17888,7 @@
       ]
     },
     {
-      "rank": 297,
+      "rank": 296,
       "ref": "@cat-agent-skills/vacation_urgent_forwarder",
       "title": "Vacation Urgent Forwarder",
       "description": "A Scout automation installer that, only during a configured vacation window, scans work email and Teams and forwards genuinely urgent items to your personal email.",
@@ -17971,8 +17911,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#vacation-urgent-forwarder"
       },
       "score": 38.4,
-      "origin_rank": 297,
-      "origin_size": 307,
+      "origin_rank": 296,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -18018,7 +17958,7 @@
       ]
     },
     {
-      "rank": 298,
+      "rank": 297,
       "ref": "@cat-agent-skills/vendor_contract_risk_review",
       "title": "Vendor Contract Risk Review",
       "description": "First-pass review of a vendor contract or SOW for the clauses that commonly cause problems (auto-renewal, liability caps, termination, IP ownership), flagged by risk level to prepare for legal review, not replace it.",
@@ -18043,8 +17983,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#vendor-contract-risk-review"
       },
       "score": 38.4,
-      "origin_rank": 298,
-      "origin_size": 307,
+      "origin_rank": 297,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -18090,7 +18030,7 @@
       ]
     },
     {
-      "rank": 299,
+      "rank": 298,
       "ref": "@cat-agent-skills/whiteboard_to_infographic",
       "title": "Whiteboard to Infographic",
       "description": "Turn a photo of a hand-drawn whiteboard or process sketch into a polished, client-ready infographic slide (.pptx), generated natively in the agent's Python container.",
@@ -18116,8 +18056,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#whiteboard-to-infographic"
       },
       "score": 38.4,
-      "origin_rank": 299,
-      "origin_size": 307,
+      "origin_rank": 298,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -18163,7 +18103,7 @@
       ]
     },
     {
-      "rank": 300,
+      "rank": 299,
       "ref": "@cat-agent-skills/wikipedia_human_style_writing",
       "title": "Wikipedia Human Style Writing",
       "description": "Rewrite or draft prose so it avoids the tell-tale signs of AI writing, using Wikipedia's 'Signs of AI writing' field guide.",
@@ -18189,8 +18129,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#wikipedia-human-style-writing"
       },
       "score": 38.4,
-      "origin_rank": 300,
-      "origin_size": 307,
+      "origin_rank": 299,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -18236,7 +18176,7 @@
       ]
     },
     {
-      "rank": 301,
+      "rank": 300,
       "ref": "@cat-agent-skills/work_brief",
       "title": "Work Brief",
       "description": "A morning brief that reads your mail, calendar, and Teams, then tells you what you owe people before the week starts.",
@@ -18262,8 +18202,8 @@
         "url": "https://microsoft.github.io/cat-agent-skills/#work-brief"
       },
       "score": 38.4,
-      "origin_rank": 301,
-      "origin_size": 307,
+      "origin_rank": 300,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5914,
@@ -18309,7 +18249,7 @@
       ]
     },
     {
-      "rank": 302,
+      "rank": 301,
       "ref": "@kody-w/second_life_agent",
       "title": "Second Life",
       "description": "Drives a headless Playwright browser tab into the live RAPP Commons to join as an avatar, post signed messages, read the stream, and screenshot.",
@@ -18327,8 +18267,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/second_life_agent.py",
       "source": null,
       "score": 37.8,
-      "origin_rank": 302,
-      "origin_size": 307,
+      "origin_rank": 301,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5011,
@@ -18364,7 +18304,7 @@
       ]
     },
     {
-      "rank": 303,
+      "rank": 302,
       "ref": "@kody-w/rapp_leviathan_factory",
       "title": "RappLeviathanFactory",
       "description": "Retired compatibility adapter. Use @kody-w/full_rapp_leviathan for the clean-room Full RAPP Leviathan protocol.",
@@ -18380,8 +18320,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_leviathan_factory_agent.py",
       "source": null,
       "score": 33.9,
-      "origin_rank": 303,
-      "origin_size": 307,
+      "origin_rank": 302,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.45,
@@ -18417,7 +18357,7 @@
       ]
     },
     {
-      "rank": 304,
+      "rank": 303,
       "ref": "@discreetRappers/email_drafting_agent",
       "title": "EmailDrafting",
       "description": "Drafts professional emails and sends via Microsoft Power Automate flow endpoint.",
@@ -18434,8 +18374,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/email_drafting_agent.py",
       "source": null,
       "score": 33.2,
-      "origin_rank": 304,
-      "origin_size": 307,
+      "origin_rank": 303,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.5404,
@@ -18471,7 +18411,7 @@
       ]
     },
     {
-      "rank": 305,
+      "rank": 304,
       "ref": "@kody-w/hello_world_agent",
       "title": "Hello World",
       "description": "Greets the user by name with a canned hello message; a starter example touching no external systems.",
@@ -18487,8 +18427,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hello_world_agent.py",
       "source": null,
       "score": 31.3,
-      "origin_rank": 305,
-      "origin_size": 307,
+      "origin_rank": 304,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.45,
@@ -18524,7 +18464,7 @@
       ]
     },
     {
-      "rank": 306,
+      "rank": 305,
       "ref": "@kody-w/example_private",
       "title": "ExamplePrivate",
       "description": "Demonstrates the RAR private-agent stub layer — metadata only, with source resolved from a private GitHub repo at install time.",
@@ -18540,8 +18480,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/private/example_private_agent.py.stub",
       "source": null,
       "score": 29.1,
-      "origin_rank": 306,
-      "origin_size": 307,
+      "origin_rank": 305,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.45,
@@ -18577,7 +18517,7 @@
       ]
     },
     {
-      "rank": 307,
+      "rank": 306,
       "ref": "@kody-w/legal_helper",
       "title": "LegalHelper",
       "description": "Organizes an operator's own notes and open questions to raise with a qualified attorney, never legal advice; gated stub for a private agent.",
@@ -18594,8 +18534,8 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/legal_helper_agent.py.stub",
       "source": null,
       "score": 29.1,
-      "origin_rank": 307,
-      "origin_size": 307,
+      "origin_rank": 306,
+      "origin_size": 306,
       "components": {
         "community": 0.0,
         "depth": 0.45,

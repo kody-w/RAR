@@ -2741,13 +2741,13 @@
     },
     "@kody-w/kody2day_studio_agent": {
       "canonical_path": "agents/@kody-w/kody2day_studio_agent.py",
-      "latest_receipt": "rar_8a2eb947a5515916c78751745021dfb522f50c676e7d826a031fe7f06c718462",
+      "latest_receipt": "rar_7aae4d429f8f80bf0e36e1f8ef2e52f73dc42e56493d4bc7719c707bc0de10b4",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "0d77f8a72fcf4547431c01018edce81892d44c152f06b3533b779028cdd037dd",
+      "sha256": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9",
       "status": "active",
-      "updated_at": "2026-08-19T02:10:23.312803+00:00",
+      "updated_at": "2026-08-19T02:27:15.246835+00:00",
       "version": "1.0.0"
     },
     "@kody-w/launch_to_public_agent": {
@@ -3643,5 +3643,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-19T02:10:23.312803+00:00"
+  "updated_at": "2026-08-19T02:27:15.246835+00:00"
 }
