@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-18T22:45:12Z",
+ "generated_at": "2026-08-19T05:50:22Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 104,
-  "size_kb": 70847,
+  "size_kb": 75312,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-18T22:44:59Z",
+  "pushed_at": "2026-08-19T04:31:27Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,20 +31,20 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 304,
+  "agents": 307,
   "swarms": 82,
   "publishers": 10,
   "categories": 24,
-  "total_lines": 177277,
-  "total_kb": 8374.1,
+  "total_lines": 178314,
+  "total_kb": 8427.0,
   "votes": 4,
   "upvotes": 4,
   "voters": 2,
   "orphaned_vote_keys": 4,
-  "reviews": 0,
-  "reviewers": 0,
-  "avg_rating": 0.0,
-  "agents_reviewed": 0,
+  "reviews": 1,
+  "reviewers": 1,
+  "avg_rating": 5.0,
+  "agents_reviewed": 1,
   "agents_voted": 3
  },
  "daily": [
@@ -244,7 +244,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1841195,
+  "rank": 1845398,
   "agent_hits": 18,
   "files": [
    {
@@ -300,15 +300,15 @@
  },
  "reviews": {
   "user": {
-   "total": 0,
-   "reviewers": 0,
-   "avg_rating": 0.0,
+   "total": 1,
+   "reviewers": 1,
+   "avg_rating": 5.0,
    "distribution": {
     "1": 0,
     "2": 0,
     "3": 0,
     "4": 0,
-    "5": 0
+    "5": 1
    }
   },
   "note": "Human reviews only, from the Issue pipeline. Automated reviews were retired 2026-08-18."
@@ -437,7 +437,25 @@
     "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components."
    }
   ],
-  "most_reviewed": [],
+  "most_reviewed": [
+   {
+    "name": "@kody-w/rapp_sentinel_agent",
+    "display_name": "RAPP Sentinel",
+    "publisher": "@kody-w",
+    "category": "devtools",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 1,
+    "rating": 5.0,
+    "lines": 412,
+    "size_kb": 21.4,
+    "added_at": "2026-08-18T20:49:04-04:00",
+    "file": "agents/@kody-w/rapp_sentinel_agent.py",
+    "description": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup reports \u2014 a watchdog that can't quietly lie."
+   }
+  ],
   "highest_rated": [],
   "largest": [
    {
@@ -698,6 +716,57 @@
   ],
   "newest": [
    {
+    "name": "@kody-w/kody2day_studio_agent",
+    "display_name": "Kody2day Studio",
+    "publisher": "@kody-w",
+    "category": "creative",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 328,
+    "size_kb": 17.0,
+    "added_at": "2026-08-18T22:13:18-04:00",
+    "file": "agents/@kody-w/kody2day_studio_agent.py",
+    "description": "Make the daily Kody2day episode: the day's digest \u2192 Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts \u2192 queue with YouTube metadata."
+   },
+   {
+    "name": "@kody-w/kody2day_agent",
+    "display_name": "Kody2day",
+    "publisher": "@kody-w",
+    "category": "productivity",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 297,
+    "size_kb": 14.5,
+    "added_at": "2026-08-18T21:17:02-04:00",
+    "file": "agents/@kody-w/kody2day_agent.py",
+    "description": "Keep up with Kody: today's digest of what he shipped across his public GitHub, any past day, a multi-day catch-up, or a search by repo \u2014 Kody's own commits separated from the fleet of bots."
+   },
+   {
+    "name": "@kody-w/rapp_sentinel_agent",
+    "display_name": "RAPP Sentinel",
+    "publisher": "@kody-w",
+    "category": "devtools",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 1,
+    "rating": 5.0,
+    "lines": 412,
+    "size_kb": 21.4,
+    "added_at": "2026-08-18T20:49:04-04:00",
+    "file": "agents/@kody-w/rapp_sentinel_agent.py",
+    "description": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup reports \u2014 a watchdog that can't quietly lie."
+   },
+   {
     "name": "@cat-agent-skills/copilot_agent_advisor",
     "display_name": "Copilot Agent Advisor",
     "publisher": "@cat-agent-skills",
@@ -900,57 +969,6 @@
     "added_at": "2026-08-11T17:28:15Z",
     "file": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
     "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft."
-   },
-   {
-    "name": "@kody-w/wp_publish_agent",
-    "display_name": "WordPress Publish",
-    "publisher": "@kody-w",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 276,
-    "size_kb": 11.8,
-    "added_at": "2026-08-11T09:50:23Z",
-    "file": "agents/@kody-w/wp_publish_agent.py",
-    "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored."
-   },
-   {
-    "name": "@cat-agent-skills/booth_loop_video",
-    "display_name": "Booth Loop Video",
-    "publisher": "@cat-agent-skills",
-    "category": "devtools",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 188,
-    "size_kb": 9.0,
-    "added_at": "2026-08-11T09:43:05Z",
-    "file": "agents/@cat-agent-skills/booth_loop_video_agent.py",
-    "description": "Generate a silent, looping 1920x1080 MP4 for a conference booth, kiosk, or lobby screen \u2014 rendered frame-by-frame in Python (Pillow + ffmpeg), with previews before the full render."
-   },
-   {
-    "name": "@cat-agent-skills/browser_uat_analyst",
-    "display_name": "Browser UAT Analyst",
-    "publisher": "@cat-agent-skills",
-    "category": "general",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 188,
-    "size_kb": 9.4,
-    "added_at": "2026-08-11T09:43:05Z",
-    "file": "agents/@cat-agent-skills/browser_uat_analyst_agent.py",
-    "description": "Run evidence-driven UAT on any browser-based app \u2014 Copilot Studio, Power Platform, Dataverse, Dynamics 365, admin centres, or a custom web app \u2014 with Playwright execution, a screenshot evidence ledger, and failure classification that separates product defects from tenant config."
    }
   ],
   "publishers": [
@@ -974,12 +992,12 @@
    },
    {
     "name": "@kody-w",
-    "agents": 61,
+    "agents": 64,
     "downloads": 4,
     "score": 1,
-    "reviews": 0,
-    "lines": 55340,
-    "rating": 0.0
+    "reviews": 1,
+    "lines": 56377,
+    "rating": 5.0
    },
    {
     "name": "@rapp",
@@ -1055,7 +1073,7 @@
    },
    {
     "name": "productivity",
-    "agents": 41,
+    "agents": 42,
     "downloads": 4,
     "score": 0,
     "reviews": 0
@@ -1068,17 +1086,17 @@
     "reviews": 0
    },
    {
+    "name": "devtools",
+    "agents": 25,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 1
+   },
+   {
     "name": "b2b_sales",
     "agents": 24,
     "downloads": 0,
     "score": 3,
-    "reviews": 0
-   },
-   {
-    "name": "devtools",
-    "agents": 24,
-    "downloads": 0,
-    "score": 0,
     "reviews": 0
    },
    {
@@ -1103,6 +1121,13 @@
     "reviews": 0
    },
    {
+    "name": "creative",
+    "agents": 8,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
     "name": "b2c_sales",
     "agents": 7,
     "downloads": 6,
@@ -1111,13 +1136,6 @@
    },
    {
     "name": "analysis",
-    "agents": 7,
-    "downloads": 0,
-    "score": 0,
-    "reviews": 0
-   },
-   {
-    "name": "creative",
     "agents": 7,
     "downloads": 0,
     "score": 0,
@@ -1218,7 +1236,7 @@
   "tiers": {
    "community": 166,
    "frontier": 90,
-   "official": 41,
+   "official": 44,
    "verified": 5,
    "private": 2
   }
@@ -1265,6 +1283,13 @@
    "s": 1,
    "r": 0,
    "rt": 0.0
+  },
+  "@kody-w/rapp_sentinel_agent": {
+   "d": 0,
+   "u": 0,
+   "s": 0,
+   "r": 1,
+   "rt": 5.0
   },
   "@rapp/learn_new": {
    "d": 8,
