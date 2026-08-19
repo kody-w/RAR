@@ -1,4 +1,21 @@
 {
-  "agents": {},
-  "updated_at": "2026-04-03T00:00:00Z"
+  "agents": {
+    "@kody-w/rapp_sentinel_agent": [
+      {
+        "user": "kody-w",
+        "rating": 5,
+        "text": "Your review",
+        "timestamp": "2026-08-19T00:57:39.584423+00:00"
+      }
+    ]
+  },
+  "updated_at": "2026-08-19T00:57:39.584436+00:00",
+  "operations": {
+    "I_kwDOR48twc8AAAABNTeWrg:5f8979d3510a8f29bc708ba56f1d5a198f475ee8ec24161dfacd11dd5a0ff570": {
+      "ok": true,
+      "action": "review",
+      "agent": "@kody-w/rapp_sentinel_agent",
+      "rating": 5
+    }
+  }
 }
