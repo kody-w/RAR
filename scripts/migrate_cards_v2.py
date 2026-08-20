@@ -77,6 +77,22 @@ def source_digest(agent_id: str, agent: dict) -> tuple[str, bool]:
     return digest, used_stub_hash
 
 
+def revision_bytes(revision: str, relative_path: str, agent_id: str) -> bytes:
+    result = subprocess.run(
+        ["git", "cat-file", "blob", f"{revision}:{relative_path}"],
+        cwd=ROOT,
+        capture_output=True,
+        timeout=30,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        raise RuntimeError(
+            f"{agent_id}: {relative_path} does not exist at {revision}: "
+            f"{detail or 'git cat-file failed'}"
+        )
+    return result.stdout
+
+
 def plan_migration(revision: str) -> tuple[dict[Path, bytes], list[str]]:
     faces = load_object(V1_PATH)
     agents = registry_by_name(load_object(REGISTRY_PATH))
@@ -107,6 +123,14 @@ def plan_migration(revision: str) -> tuple[dict[Path, bytes], list[str]]:
             raise RuntimeError(
                 f"{agent_id}: registry digest {expected_digest} "
                 f"does not match {relative_source} ({actual_digest})"
+            )
+        pinned_digest = sha256_lf_v1(
+            revision_bytes(revision, relative_source, agent_id)
+        )
+        if pinned_digest != expected_digest:
+            raise RuntimeError(
+                f"{agent_id}: {relative_source} at {revision} hashes to "
+                f"{pinned_digest}, not registry digest {expected_digest}"
             )
         if used_stub_hash:
             stub_ids.append(agent_id)

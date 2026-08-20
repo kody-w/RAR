@@ -58,6 +58,8 @@ API_BASE = f"https://api.github.com/repos/{REPO}"
 INLINE_ISSUE_COMMAND_LIMIT = 50 * 1024
 CARD_SCHEMA = "rar-card/2.0"
 CARD_MAX_INLINE_BYTES = 1024 * 1024
+CARD_MAX_DOCUMENT_BYTES = 4 * 1024 * 1024
+CARD_MAX_PINNED_PAYLOAD_BYTES = 64 * 1024 * 1024
 CARD_REQUIRED_FIELDS = {
     "schema", "id", "seed", "name_seed", "incantation", "version",
     "face", "manifest", "payload", "state", "origin", "dimension",
@@ -1506,11 +1508,18 @@ def _read_pinned_git_blob(revision: str, relative_path: str) -> bytes | None:
     return result.stdout if result.returncode == 0 else None
 
 
-def _read_url_bytes(url: str) -> bytes:
+def _read_url_bytes(url: str, *, max_bytes: int | None = None) -> bytes:
+    def ensure_size(data: bytes) -> bytes:
+        if max_bytes is not None and len(data) > max_bytes:
+            raise ValueError(f"Fetched content exceeds {max_bytes} bytes: {url}")
+        return data
+
     parsed = urllib.parse.urlparse(url)
     if parsed.scheme == "file":
         path = Path(urllib.request.url2pathname(parsed.path))
         try:
+            if max_bytes is not None and path.stat().st_size > max_bytes:
+                raise ValueError(f"Fetched content exceeds {max_bytes} bytes: {url}")
             return path.read_bytes()
         except OSError as exc:
             raise ValueError(f"Could not read file URL {url}: {exc}") from exc
@@ -1520,10 +1529,14 @@ def _read_url_bytes(url: str) -> bytes:
         revision, relative_path = repo_reference
         pinned = _read_pinned_git_blob(revision, relative_path)
         if pinned is not None:
-            return pinned
+            return ensure_size(pinned)
         if revision == "main":
             local = Path(__file__).resolve().parent / relative_path
             if local.is_file():
+                if max_bytes is not None and local.stat().st_size > max_bytes:
+                    raise ValueError(
+                        f"Fetched content exceeds {max_bytes} bytes: {url}"
+                    )
                 return local.read_bytes()
 
     if parsed.scheme not in {"http", "https"}:
@@ -1534,7 +1547,12 @@ def _read_url_bytes(url: str) -> bytes:
     )
     try:
         with urllib.request.urlopen(request, timeout=20) as response:
-            return response.read()
+            data = (
+                response.read(max_bytes + 1)
+                if max_bytes is not None
+                else response.read()
+            )
+            return ensure_size(data)
     except OSError as exc:
         raise ValueError(f"Could not fetch {url}: {exc}") from exc
 
@@ -1543,11 +1561,15 @@ def _read_card_document(source: str | os.PathLike) -> tuple[dict, bytes, str]:
     source_text = os.fspath(source)
     parsed = urllib.parse.urlparse(source_text)
     if parsed.scheme in {"http", "https", "file"}:
-        raw = _read_url_bytes(source_text)
+        raw = _read_url_bytes(source_text, max_bytes=CARD_MAX_DOCUMENT_BYTES)
         label = source_text
     else:
         path = Path(source_text)
         try:
+            if path.stat().st_size > CARD_MAX_DOCUMENT_BYTES:
+                raise ValueError(
+                    f"Card document exceeds {CARD_MAX_DOCUMENT_BYTES} bytes"
+                )
             raw = path.read_bytes()
         except OSError as exc:
             raise ValueError(f"Could not read card {path}: {exc}") from exc
@@ -1627,17 +1649,43 @@ def validate_card(card: object, *, serialized_size: int | None = None) -> list[s
         errors.append("face must be an object")
     elif not _is_int(face.get("seed")) or face["seed"] < 0:
         errors.append("face.seed must be a non-negative integer")
+    else:
+        for field in ("agent_name", "name", "avatar_svg"):
+            if field in face and not isinstance(face[field], str):
+                errors.append(f"face.{field} must be a string")
 
     manifest = card.get("manifest")
     if not isinstance(manifest, dict):
         errors.append("manifest must be an object")
     else:
-        manifest_errors = [
-            error
-            for error in validate_manifest("", manifest)
-            if not error.startswith("Invalid quality_tier ")
+        missing_manifest = [
+            field for field in REQUIRED_MANIFEST_FIELDS if field not in manifest
         ]
-        errors.extend(f"manifest: {error}" for error in manifest_errors)
+        for field in missing_manifest:
+            errors.append(f"manifest: Missing required field: {field}")
+        for field in (
+            "schema", "name", "version", "display_name",
+            "description", "author", "category",
+        ):
+            if field in manifest and not isinstance(manifest[field], str):
+                errors.append(f"manifest.{field} must be a string")
+        if "schema" in manifest and manifest["schema"] == "":
+            errors.append("manifest.schema must not be empty")
+        if (
+            isinstance(manifest.get("version"), str)
+            and not CARD_VERSION_RE.fullmatch(manifest["version"])
+        ):
+            errors.append("manifest.version must be semantic version text")
+        for field in ("tags", "requires_env", "dependencies"):
+            if field in manifest and (
+                not isinstance(manifest[field], list)
+                or not all(isinstance(value, str) for value in manifest[field])
+            ):
+                errors.append(f"manifest.{field} must be an array of strings")
+        if "quality_tier" in manifest and not isinstance(
+            manifest["quality_tier"], str
+        ):
+            errors.append("manifest.quality_tier must be a string")
 
     if card.get("state") not in {"dormant", "active"}:
         errors.append("state must be dormant or active")
@@ -1648,6 +1696,12 @@ def validate_card(card: object, *, serialized_size: int | None = None) -> list[s
         or not origin.get("kind")
     ):
         errors.append("origin must be null or an object with a non-empty kind")
+    elif isinstance(origin, dict):
+        for field in ("brainstem", "twin", "parkedAt"):
+            if field in origin and origin[field] is not None and not isinstance(
+                origin[field], str
+            ):
+                errors.append(f"origin.{field} must be a string or null")
     if card.get("dimension") is not None and not isinstance(card["dimension"], dict):
         errors.append("dimension must be null or an object")
 
@@ -1665,6 +1719,8 @@ def validate_card(card: object, *, serialized_size: int | None = None) -> list[s
             or not re.fullmatch(r"(?:https?|file|rar)://.+", scan_url)
         ):
             errors.append("scan.url must use http, https, file, or rar")
+        if "qr" in scan and not isinstance(scan["qr"], str):
+            errors.append("scan.qr must be a string")
     if isinstance(scan_url, str) and scan_url.startswith(("http://", "https://")):
         if card.get("dimension") is not None:
             errors.append("Published cards must have dimension set to null")
@@ -1853,7 +1909,10 @@ def _verify_card_identity(card: dict) -> list[str]:
 
 def _payload_bytes(item: dict) -> bytes:
     if "url" in item:
-        return _read_url_bytes(item["url"])
+        return _read_url_bytes(
+            item["url"],
+            max_bytes=CARD_MAX_PINNED_PAYLOAD_BYTES,
+        )
     inline = item["inline"]
     if item["kind"] == "agent.py":
         try:
@@ -1880,7 +1939,12 @@ def verify_card(
     else:
         card, raw, source = _read_card_document(card_or_source)
 
-    errors = validate_card(card, serialized_size=len(raw))
+    errors = []
+    if len(raw) > CARD_MAX_DOCUMENT_BYTES:
+        errors.append(
+            f"Card document exceeds {CARD_MAX_DOCUMENT_BYTES} bytes"
+        )
+    errors.extend(validate_card(card, serialized_size=len(raw)))
     if not errors:
         errors.extend(_verify_card_identity(card))
     if errors:
@@ -1972,6 +2036,22 @@ def pack_card(
         raise ValueError(f"Could not read agent {path}: {exc}") from exc
     except UnicodeDecodeError as exc:
         raise ValueError(f"Agent {path} must be UTF-8") from exc
+    if pin_url is not None:
+        pinned_bytes = _read_url_bytes(
+            pin_url,
+            max_bytes=CARD_MAX_PINNED_PAYLOAD_BYTES,
+        )
+        try:
+            pinned_bytes.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ValueError("Pinned agent payload must be UTF-8") from exc
+        pinned_digest = sha256_lf_v1(pinned_bytes)
+        local_digest = sha256_lf_v1(agent_bytes)
+        if pinned_digest != local_digest:
+            raise ValueError(
+                "Pinned agent payload does not match the local agent "
+                f"({pinned_digest} != {local_digest})"
+            )
 
     face = _legacy_faces().get(manifest["name"])
     face = copy.deepcopy(face) if face is not None else mint_card(str(path))

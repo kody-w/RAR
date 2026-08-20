@@ -102,7 +102,6 @@ jobs:
           python scripts/build_pokedex_api.py
           python scripts/build_static_api.py
           python scripts/build_front_page.py
-          python -m pytest -q
 
       - name: Commit notarized mutation
         id: commit
@@ -148,11 +147,27 @@ jobs:
             -m "RAR-Receipt: ${RECEIPT}" \
             -m "RAR-Issue: #${ISSUE_NUMBER}" \
             -m "RAR-Approved-By: ${{ github.event.sender.id }}"
-          git push origin HEAD:main
           commit_sha=$(git rev-parse HEAD)
-          git fetch origin main
-          git merge-base --is-ancestor "$commit_sha" origin/main
           echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
+
+      # The source commit must exist before a card can pin its payload to that
+      # immutable revision. Both local commits are tested before one atomic push.
+      - name: Seal v2 cards and publish
+        if: steps.apply.outputs.already_applied != 'true'
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          python scripts/migrate_cards_v2.py
+          git add cards/v2
+          git commit -m "Migrate RAR cards v2 for #${ISSUE_NUMBER}"
+          python -m pytest -q
+          git restore registry.json api/v1/front.json
+          test -z "$(git status --porcelain --untracked-files=no)"
+          git push origin HEAD:main
+          git fetch origin main
+          git merge-base --is-ancestor \
+            "${{ steps.commit.outputs.commit_sha }}" origin/main
 
       - name: Refresh post-commit registry provenance
         if: steps.apply.outputs.already_applied != 'true'

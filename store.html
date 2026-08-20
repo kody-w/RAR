@@ -2516,7 +2516,7 @@
         <option value="verified">Verified First</option>
       </select>
       <button onclick="openAgentSlides()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer;white-space:nowrap">Present</button>
-      <button onclick="document.getElementById('submit-file-input').click()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--accent);background:rgba(88,166,255,.1);color:var(--accent);font-size:.78rem;cursor:pointer;white-space:nowrap;font-weight:600">Submit agent.py</button>
+      <button onclick="document.getElementById('submit-file-input').click()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--accent);background:rgba(88,166,255,.1);color:var(--accent);font-size:.78rem;cursor:pointer;white-space:nowrap;font-weight:600">Load agent.py / .card</button>
       <input type="file" id="submit-file-input" accept=".py,.card" multiple style="display:none" onchange="handleFileDrop(this.files);this.value=''">
     </div>
     <div class="filter-pills" id="category-pills"></div>
@@ -3600,6 +3600,56 @@ function parseManifestFromPython(code) {
   } catch { return null; }
 }
 
+function parseRarCardV2(text) {
+  let card;
+  try {
+    const safe = text
+      .replace(/"seed":\s*(\d+)/g, '"seed":"$1"')
+      .replace(/"name_seed":\s*(\d+)/g, '"name_seed":"$1"');
+    card = JSON.parse(safe);
+  } catch {
+    return null;
+  }
+  if (card?.schema !== 'rar-card/2.0') return null;
+  if (
+    !card.id || card.manifest?.name !== card.id || !card.face ||
+    !Array.isArray(card.payload) || !card.scan?.url ||
+    String(card.face.seed) !== String(card.seed)
+  ) {
+    throw new Error('invalid rar-card/2.0 envelope');
+  }
+  return card;
+}
+
+async function importRarCardV2(file, text, card) {
+  const manifest = card.manifest;
+  const agentPayload = card.payload.find(item => item.kind === 'agent.py');
+  const inlineCode = typeof agentPayload?.inline === 'string'
+    ? agentPayload.inline
+    : '';
+  await putLocalAgent({
+    ...manifest,
+    _code: inlineCode,
+    _source: 'local-device',
+    _file: file.name,
+    _lines: inlineCode ? inlineCode.split('\n').length : 0,
+    _size_kb: (new Blob([text]).size / 1024).toFixed(1),
+    _added: new Date().toISOString(),
+    _card_v2: card,
+    quality_tier: manifest.quality_tier || 'unverified',
+    tags: manifest.tags || [],
+    requires_env: manifest.requires_env || [],
+    dependencies: manifest.dependencies || [],
+  });
+  _holoCards[card.id] = card.face;
+  _v2CardIndex[card.id] = {
+    seed: card.seed,
+    name_seed: card.name_seed,
+    incantation: card.incantation,
+    url: card.scan.url,
+  };
+}
+
 async function handleFileDrop(files) {
   let added = 0;
   for (const file of files) {
@@ -3619,6 +3669,23 @@ async function handleFileDrop(files) {
     const isPyOrCard = file.name.endsWith('.py') || file.name.endsWith('.card') || /\.py\.card\..+$/.test(file.name);
     if (!isPyOrCard) continue;
     let code = await file.text();
+    if (file.name.endsWith('.card')) {
+      try {
+        const v2Card = parseRarCardV2(code);
+        if (v2Card) {
+          await importRarCardV2(file, code, v2Card);
+          added++;
+          showToast(
+            `${v2Card.manifest.display_name || v2Card.id}: sealed card loaded; verify before hatching`,
+            'success',
+          );
+          continue;
+        }
+      } catch (error) {
+        showToast(`${file.name}: ${error.message}`, 'error');
+        continue;
+      }
+    }
     // Strip card metadata header if present (# __card__ = {...} lines)
     let cardMeta = null;
     const cardMatch = code.match(/^# __card__ = (.+)\n/);
@@ -3784,6 +3851,17 @@ async function submitDroppedAgents() {
 
 async function mergeLocalAgents() {
   const locals = await getAllLocalAgents();
+  for (const local of locals) {
+    const card = local._card_v2;
+    if (card?.schema !== 'rar-card/2.0') continue;
+    _holoCards[card.id] = card.face;
+    _v2CardIndex[card.id] = {
+      seed: card.seed,
+      name_seed: card.name_seed,
+      incantation: card.incantation,
+      url: card.scan.url,
+    };
+  }
   // Remove any existing local-device entries from allAgents
   allAgents = allAgents.filter(a => a._source !== 'local-device');
   allAgents = [...locals, ...allAgents];
@@ -10400,7 +10478,7 @@ async function openPack(setId) {
       <div style="margin-top:24px;animation:showcaseFadeIn .5s ease-out .7s both;opacity:0;display:flex;gap:12px">
         ${isLast ? `
           <button id="reveal-next-btn" style="padding:12px 32px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:all .2s;letter-spacing:1px" onclick="this.closest('.pack-open-overlay').remove();document.body.style.overflow='';renderCollection();renderPullHistory();renderTrophyCase()">Add All to Collection</button>
-          <button style="padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;transition:all .2s" onclick="exportPackCards()">Export .card</button>
+          <button style="padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;transition:all .2s" onclick="exportPackCards()">Export legacy .py.card</button>
         ` : `
           <button id="reveal-next-btn" style="padding:14px 48px;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer;border:2px solid ${glowColor};background:transparent;color:${glowColor};transition:all .2s;letter-spacing:2px;text-transform:uppercase;animation:showcasePulse 2s ease-in-out infinite" onclick="revealNext()">Next Card</button>
         `}
@@ -10733,9 +10811,8 @@ async function renderMiniCard(canvas, card) {
 }
 
 // ── .card File Export (wrapped agent.py — backward compatible) ──
-// A .card IS a .py file. Drop it into agents/ and the Brainstem loads it.
-// Card metadata lives in a # __card__ = {...} comment block that Python ignores
-// but the store can parse to reconstruct the card view.
+// Legacy .py.card exports are executable Python wrappers. They are deliberately
+// named differently from inert rar-card/2.0 JSON files.
 async function exportSingleCard(card) {
   const a = allAgents.find(x => x.name === card.agentName);
   if (!a) return;
@@ -11369,7 +11446,7 @@ async function openSlabViewer(mintId) {
         <div class="slab-panel">
           <h4>Actions</h4>
           <div class="slab-actions">
-            <button class="slab-btn primary" onclick="exportSingleCard(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export .card</button>
+            <button class="slab-btn primary" onclick="exportSingleCard(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export legacy .py.card</button>
             <button class="slab-btn" style="background:var(--purple-bg);color:var(--purple);border-color:var(--purple)" onclick="exportRAD(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export .rad.eggs</button>
             <button class="slab-btn" onclick="openSlabZoom('${mintId}')">Zoom</button>
             <button class="slab-btn" style="background:${_defaultHoloTheme === 'starwars' ? 'rgba(80,120,255,.08);color:#5080ff;border-color:rgba(80,120,255,.3)' : 'rgba(0,255,255,.08);color:#0ff;border-color:rgba(0,255,255,.3)'}" onclick="document.getElementById('slab-overlay').remove();openHologramViewer('${esc(card.agentName)}','${_defaultHoloTheme}')">${_defaultHoloTheme === 'starwars' ? 'SW Holo' : 'Hologram'}</button>

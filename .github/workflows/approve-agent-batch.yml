@@ -116,7 +116,6 @@ jobs:
           python scripts/build_pokedex_api.py
           python scripts/build_static_api.py
           python scripts/build_front_page.py
-          python -m pytest -q
 
       - name: Commit notarized batch
         id: commit
@@ -177,10 +176,25 @@ jobs:
             -m "RAR-Approved-By: ${{ github.actor_id }}"
           test "$(git branch --show-current)" = "main"
           commit_sha=$(git rev-parse HEAD)
-          git push origin HEAD:main
           echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
+
+      # Pin v2 payloads only after the source revision exists locally. The push
+      # remains atomic: neither commit reaches main unless the full suite passes.
+      - name: Seal v2 cards and publish
+        env:
+          ISSUE_NUMBERS: ${{ inputs.issues }}
+        run: |
+          set -euo pipefail
+          python scripts/migrate_cards_v2.py
+          git add cards/v2
+          git commit -m "Migrate RAR cards v2 for ${ISSUE_NUMBERS}"
+          python -m pytest -q
+          git restore registry.json api/v1/front.json
+          test -z "$(git status --porcelain --untracked-files=no)"
+          git push origin HEAD:main
           git fetch origin main
-          git merge-base --is-ancestor "$commit_sha" origin/main
+          git merge-base --is-ancestor \
+            "${{ steps.commit.outputs.commit_sha }}" origin/main
 
       - name: Refresh post-commit projections
         run: |

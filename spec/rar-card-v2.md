@@ -86,6 +86,10 @@ A card containing inline payload must be no larger than 1 MiB
 (1,048,576 bytes) as serialized on disk. Larger payloads must be pinned.
 Payload filenames are basenames; path traversal is invalid.
 
+The reference SDK also applies defensive read ceilings of 4 MiB for a card
+document and 64 MiB for one pinned payload. Clients that support larger pinned
+artifacts must stream them through verification instead of buffering them.
+
 ## State, dimensions, and publication
 
 `state` is either:

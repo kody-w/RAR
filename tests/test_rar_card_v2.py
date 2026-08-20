@@ -4,6 +4,7 @@ import functools
 import hashlib
 import http.server
 import json
+import copy
 import subprocess
 import sys
 import threading
@@ -152,6 +153,28 @@ def test_tampered_payload_hash_is_refused(tmp_path):
         rapp_sdk.verify_card(card_path)
 
 
+def test_pack_pin_must_resolve_to_the_local_agent(tmp_path):
+    agent = tmp_path / "card_fixture_agent.py"
+    agent.write_bytes(_fixture_agent_bytes())
+    packed = tmp_path / "pinned.card"
+    result = rapp_sdk.pack_card(
+        agent,
+        pin_url=agent.as_uri(),
+        output_path=packed,
+    )
+    assert Path(result) == packed
+    assert rapp_sdk.verify_card(packed)["valid"]
+
+    wrong = tmp_path / "wrong.py"
+    wrong.write_text("not the same agent\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="does not match the local agent"):
+        rapp_sdk.pack_card(
+            agent,
+            pin_url=wrong.as_uri(),
+            output_path=tmp_path / "wrong.card",
+        )
+
+
 @pytest.mark.parametrize(
     "mutate",
     [
@@ -253,6 +276,54 @@ def test_migration_is_idempotent():
     assert "0 changed, 0 stale removed" in result.stdout
 
 
+def test_migration_rejects_a_nonexistent_revision():
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/migrate_cards_v2.py",
+            "--revision",
+            "0" * 40,
+            "--check",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 1
+    assert "does not exist" in result.stderr
+
+
+@pytest.mark.parametrize(
+    ("path", "value", "message"),
+    [
+        (("scan", "qr"), 7, "scan.qr"),
+        (("manifest", "display_name"), 7, "manifest.display_name"),
+        (("manifest", "dependencies"), [7], "manifest.dependencies"),
+        (("origin", "parkedAt"), 7, "origin.parkedAt"),
+        (("face", "avatar_svg"), 7, "face.avatar_svg"),
+    ],
+)
+def test_verify_enforces_normative_property_types(path, value, message):
+    source = V2_ROOT / "@aibast-agents-library" / "account_intelligence.card"
+    card = json.loads(source.read_text(encoding="utf-8"))
+    target = card
+    for key in path[:-1]:
+        if target.get(key) is None:
+            target[key] = {}
+        target = target[key]
+    target[path[-1]] = value
+    with pytest.raises(ValueError, match=message):
+        rapp_sdk.verify_card(copy.deepcopy(card), fetch_payloads=False)
+
+
+def test_scan_refuses_oversized_card_document(tmp_path):
+    oversized = tmp_path / "oversized.card"
+    oversized.write_bytes(b"{" + b" " * rapp_sdk.CARD_MAX_DOCUMENT_BYTES + b"}\n")
+    with pytest.raises(ValueError, match="exceeds"):
+        rapp_sdk.scan_card(oversized.as_uri())
+
+
 def test_schema_is_draft_2020_12_and_models_sealed_payloads():
     schema = json.loads(
         (ROOT / "schema" / "rar-card-2.0.json").read_text(encoding="utf-8")
@@ -277,6 +348,7 @@ def test_site_and_api_publish_v2_cards_with_local_qr():
     }
     assert "cards/v2/index.json" in pages["store.html"]
     assert "_v2CardIndex" in pages["store.html"]
+    assert "parseRarCardV2" in pages["store.html"]
     assert "envelope.face" in pages["grail.html"]
     assert "CARD_V2" in pages["incantation-hero.html"]
     for name, page in pages.items():
@@ -284,3 +356,20 @@ def test_site_and_api_publish_v2_cards_with_local_qr():
     assert "rarQrSvg" in pages["store.html"]
     assert "rarQrSvg" in pages["grail.html"]
     assert "renderQR" in pages["incantation-hero.html"]
+
+
+@pytest.mark.parametrize(
+    "workflow_name",
+    ["approve-agent.yml", "approve-agent-batch.yml"],
+)
+def test_admission_commits_source_before_pinning_and_pushes_after_tests(
+    workflow_name,
+):
+    workflow = (
+        ROOT / ".github" / "workflows" / workflow_name
+    ).read_text(encoding="utf-8")
+    source_commit = workflow.index('git commit \\\n')
+    migrate = workflow.index("python scripts/migrate_cards_v2.py", source_commit)
+    tests = workflow.index("python -m pytest -q", migrate)
+    push = workflow.index("git push origin HEAD:main", tests)
+    assert source_commit < migrate < tests < push
