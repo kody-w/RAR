@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-__version__ = "1.1.0"
+__version__ = "2.0.0"
 
 # =============================================================================
 # SECTION 1: CONSTANTS + CONFIG
@@ -11,6 +11,9 @@ __version__ = "1.1.0"
 
 import ast
 import argparse
+import base64
+import binascii
+import copy
 import hashlib
 import importlib.util
 import json
@@ -18,6 +21,7 @@ import os
 import re
 import subprocess
 import sys
+import urllib.parse
 import urllib.request
 import uuid
 from pathlib import Path
@@ -52,6 +56,20 @@ RAW_BASE = f"https://raw.githubusercontent.com/{REPO}/main"
 RELEASE_BASE = f"https://github.com/{REPO}/releases/latest/download"
 API_BASE = f"https://api.github.com/repos/{REPO}"
 INLINE_ISSUE_COMMAND_LIMIT = 50 * 1024
+CARD_SCHEMA = "rar-card/2.0"
+CARD_MAX_INLINE_BYTES = 1024 * 1024
+CARD_REQUIRED_FIELDS = {
+    "schema", "id", "seed", "name_seed", "incantation", "version",
+    "face", "manifest", "payload", "state", "origin", "dimension",
+    "scan", "provenance", "signature",
+}
+CARD_ID_RE = re.compile(
+    r"^@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?/[a-z0-9_]+$"
+)
+CARD_DIGEST_RE = re.compile(r"^[0-9a-f]{64}$")
+CARD_VERSION_RE = re.compile(
+    r"^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+)
 
 TIER_TO_RARITY = {
     "official": "mythic",
@@ -1334,6 +1352,799 @@ def resolve_card(name: str) -> dict:
     return card
 
 
+_LEGACY_FACE_CACHE: dict | None = None
+
+
+def sha256_lf_v1(content: bytes | str) -> str:
+    """Hash UTF-8 text using RAR's CRLF-to-LF canonicalization."""
+    data = content.encode("utf-8") if isinstance(content, str) else content
+    return hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest()
+
+
+def _legacy_faces() -> dict:
+    global _LEGACY_FACE_CACHE
+    if _LEGACY_FACE_CACHE is None:
+        path = Path(__file__).resolve().parent / "cards" / "holo_cards.json"
+        if not path.exists():
+            _LEGACY_FACE_CACHE = {}
+            return _LEGACY_FACE_CACHE
+        try:
+            loaded = json.loads(path.read_text(encoding="utf-8"))
+            _LEGACY_FACE_CACHE = loaded if isinstance(loaded, dict) else {}
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Could not read frozen v1 card index: {exc}") from exc
+    return _LEGACY_FACE_CACHE
+
+
+def _manifest_for_card(manifest: dict) -> dict:
+    """Remove registry projection fields while preserving manifest metadata."""
+    return {
+        key: copy.deepcopy(value)
+        for key, value in manifest.items()
+        if not key.startswith("_")
+    }
+
+
+def _git_revision() -> str | None:
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=Path(__file__).resolve().parent,
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return None
+    revision = result.stdout.strip()
+    return revision if result.returncode == 0 and re.fullmatch(r"[0-9a-f]{40}", revision) else None
+
+
+def to_v2(
+    card: dict,
+    manifest: dict,
+    *,
+    payload: list[dict] | None = None,
+    state: str = "dormant",
+    origin: dict | None = None,
+    dimension: dict | None = None,
+    scan_url: str | None = None,
+    rar_revision: str | None = None,
+    minted_by: str | None = None,
+) -> dict:
+    """Wrap an existing card face in a validated ``rar-card/2.0`` envelope."""
+    if not isinstance(card, dict):
+        raise ValueError("Card face must be an object")
+    if not isinstance(manifest, dict):
+        raise ValueError("Manifest must be an object")
+
+    clean_manifest = _manifest_for_card(manifest)
+    agent_id = clean_manifest.get("name")
+    if not isinstance(agent_id, str) or not CARD_ID_RE.fullmatch(agent_id):
+        raise ValueError("Manifest name must be a valid @publisher/slug id")
+
+    seed = card.get("seed")
+    if type(seed) is not int or seed < 0:
+        raise ValueError("Card face must contain a non-negative integer seed")
+
+    if scan_url is None:
+        scan_url = f"rar://{agent_id}@{seed}"
+    result = {
+        "schema": CARD_SCHEMA,
+        "id": agent_id,
+        "seed": seed,
+        "name_seed": seed_hash(agent_id) & 0xFFFFFFFF,
+        "incantation": seed_to_words(seed),
+        "version": clean_manifest.get("version", "1.0.0"),
+        "face": copy.deepcopy(card),
+        "manifest": clean_manifest,
+        "payload": copy.deepcopy(payload or []),
+        "state": state,
+        "origin": copy.deepcopy(origin),
+        "dimension": copy.deepcopy(dimension),
+        "scan": {"url": scan_url},
+        "provenance": {
+            "minted_by": minted_by or f"rapp_sdk {__version__}",
+            "rar_revision": rar_revision if rar_revision is not None else _git_revision(),
+        },
+        "signature": None,
+    }
+    verify_card(result, fetch_payloads=False)
+    return result
+
+
+def to_v1(card: dict) -> dict:
+    """Return an exact copy of a v2 card's v1 face after local verification."""
+    verified = verify_card(card, fetch_payloads=False)
+    return copy.deepcopy(verified["card"]["face"])
+
+
+def _card_json_bytes(card: dict) -> bytes:
+    return (
+        json.dumps(card, ensure_ascii=False, indent=2, separators=(",", ": "))
+        + "\n"
+    ).encode("utf-8")
+
+
+def _duplicate_safe_object(pairs: list[tuple[str, object]]) -> dict:
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"Duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
+def _raw_repo_reference(url: str) -> tuple[str, str] | None:
+    parsed = urllib.parse.urlparse(url)
+    if parsed.hostname != "raw.githubusercontent.com":
+        return None
+    parts = [urllib.parse.unquote(part) for part in parsed.path.split("/") if part]
+    if len(parts) < 4 or parts[:2] != ["kody-w", "RAR"]:
+        return None
+    relative = Path(*parts[3:])
+    try:
+        relative.resolve().relative_to(Path.cwd().resolve())
+    except ValueError:
+        if relative.is_absolute() or ".." in relative.parts:
+            return None
+    return parts[2], relative.as_posix()
+
+
+def _read_pinned_git_blob(revision: str, relative_path: str) -> bytes | None:
+    if not re.fullmatch(r"[0-9a-fA-F]{7,64}", revision):
+        return None
+    try:
+        result = subprocess.run(
+            ["git", "cat-file", "blob", f"{revision}:{relative_path}"],
+            cwd=Path(__file__).resolve().parent,
+            capture_output=True,
+            timeout=15,
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        return None
+    return result.stdout if result.returncode == 0 else None
+
+
+def _read_url_bytes(url: str) -> bytes:
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme == "file":
+        path = Path(urllib.request.url2pathname(parsed.path))
+        try:
+            return path.read_bytes()
+        except OSError as exc:
+            raise ValueError(f"Could not read file URL {url}: {exc}") from exc
+
+    repo_reference = _raw_repo_reference(url)
+    if repo_reference is not None:
+        revision, relative_path = repo_reference
+        pinned = _read_pinned_git_blob(revision, relative_path)
+        if pinned is not None:
+            return pinned
+        if revision == "main":
+            local = Path(__file__).resolve().parent / relative_path
+            if local.is_file():
+                return local.read_bytes()
+
+    if parsed.scheme not in {"http", "https"}:
+        raise ValueError(f"Unsupported URL scheme: {parsed.scheme or 'none'}")
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": f"RAPP-SDK/{__version__}"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            return response.read()
+    except OSError as exc:
+        raise ValueError(f"Could not fetch {url}: {exc}") from exc
+
+
+def _read_card_document(source: str | os.PathLike) -> tuple[dict, bytes, str]:
+    source_text = os.fspath(source)
+    parsed = urllib.parse.urlparse(source_text)
+    if parsed.scheme in {"http", "https", "file"}:
+        raw = _read_url_bytes(source_text)
+        label = source_text
+    else:
+        path = Path(source_text)
+        try:
+            raw = path.read_bytes()
+        except OSError as exc:
+            raise ValueError(f"Could not read card {path}: {exc}") from exc
+        label = str(path)
+
+    if not raw.endswith(b"\n") or raw.endswith(b"\r\n"):
+        raise ValueError("Card must be terminated by one LF newline")
+    if raw[:-1].rstrip(b" \t\r\n") != raw[:-1]:
+        raise ValueError("Card has trailing whitespace before its final newline")
+    try:
+        text = raw[:-1].decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ValueError("Card must be valid UTF-8") from exc
+    try:
+        card = json.loads(text, object_pairs_hook=_duplicate_safe_object)
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise ValueError(f"Invalid card JSON: {exc}") from exc
+    return card, raw, label
+
+
+def _is_int(value: object) -> bool:
+    return type(value) is int
+
+
+def _validate_pinned_url(url: str, where: str, errors: list[str]) -> None:
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme not in {"http", "https", "file"}:
+        errors.append(f"{where}.url must use http, https, or file")
+        return
+    if parsed.hostname == "raw.githubusercontent.com":
+        parts = [part for part in parsed.path.split("/") if part]
+        revision = parts[2] if len(parts) >= 4 else ""
+        if not re.fullmatch(r"[0-9a-fA-F]{7,64}", revision):
+            errors.append(
+                f"{where}.url must pin a GitHub revision, not a branch"
+            )
+
+
+def validate_card(card: object, *, serialized_size: int | None = None) -> list[str]:
+    """Validate the dependency-free subset of the normative JSON Schema."""
+    errors: list[str] = []
+    if not isinstance(card, dict):
+        return ["Card document must be a JSON object"]
+
+    keys = set(card)
+    missing = CARD_REQUIRED_FIELDS - keys
+    extra = keys - CARD_REQUIRED_FIELDS
+    if missing:
+        errors.append(f"Missing required card field(s): {', '.join(sorted(missing))}")
+    if extra:
+        errors.append(f"Unknown card field(s): {', '.join(sorted(extra))}")
+    if missing:
+        return errors
+
+    if card.get("schema") != CARD_SCHEMA:
+        errors.append(f"schema must be {CARD_SCHEMA}")
+    agent_id = card.get("id")
+    if not isinstance(agent_id, str) or not CARD_ID_RE.fullmatch(agent_id):
+        errors.append("id must match @publisher/lowercase_snake_case")
+    if not _is_int(card.get("seed")) or card["seed"] < 0:
+        errors.append("seed must be a non-negative integer")
+    if (
+        not _is_int(card.get("name_seed"))
+        or not 0 <= card["name_seed"] <= 0xFFFFFFFF
+    ):
+        errors.append("name_seed must be a 32-bit unsigned integer")
+    if not isinstance(card.get("incantation"), str):
+        errors.append("incantation must be a string")
+    if (
+        not isinstance(card.get("version"), str)
+        or not CARD_VERSION_RE.fullmatch(card["version"])
+    ):
+        errors.append("version must be semantic version text")
+
+    face = card.get("face")
+    if not isinstance(face, dict):
+        errors.append("face must be an object")
+    elif not _is_int(face.get("seed")) or face["seed"] < 0:
+        errors.append("face.seed must be a non-negative integer")
+
+    manifest = card.get("manifest")
+    if not isinstance(manifest, dict):
+        errors.append("manifest must be an object")
+    else:
+        manifest_errors = validate_manifest("", manifest)
+        errors.extend(f"manifest: {error}" for error in manifest_errors)
+
+    if card.get("state") not in {"dormant", "active"}:
+        errors.append("state must be dormant or active")
+    origin = card.get("origin")
+    if origin is not None and (
+        not isinstance(origin, dict)
+        or not isinstance(origin.get("kind"), str)
+        or not origin.get("kind")
+    ):
+        errors.append("origin must be null or an object with a non-empty kind")
+    if card.get("dimension") is not None and not isinstance(card["dimension"], dict):
+        errors.append("dimension must be null or an object")
+
+    scan = card.get("scan")
+    scan_url = None
+    if not isinstance(scan, dict):
+        errors.append("scan must be an object")
+    else:
+        scan_extra = set(scan) - {"url", "qr"}
+        if scan_extra:
+            errors.append(f"Unknown scan field(s): {', '.join(sorted(scan_extra))}")
+        scan_url = scan.get("url")
+        if (
+            not isinstance(scan_url, str)
+            or not re.fullmatch(r"(?:https?|file|rar)://.+", scan_url)
+        ):
+            errors.append("scan.url must use http, https, file, or rar")
+    if isinstance(scan_url, str) and scan_url.startswith(("http://", "https://")):
+        if card.get("dimension") is not None:
+            errors.append("Published cards must have dimension set to null")
+        if card.get("state") != "dormant":
+            errors.append("Published cards must be dormant")
+
+    provenance = card.get("provenance")
+    if not isinstance(provenance, dict):
+        errors.append("provenance must be an object")
+    else:
+        if set(provenance) != {"minted_by", "rar_revision"}:
+            errors.append("provenance must contain only minted_by and rar_revision")
+        if not isinstance(provenance.get("minted_by"), str) or not provenance.get("minted_by"):
+            errors.append("provenance.minted_by must be a non-empty string")
+        revision = provenance.get("rar_revision")
+        if revision is not None and (
+            not isinstance(revision, str)
+            or not re.fullmatch(r"[0-9a-f]{7,40}", revision)
+        ):
+            errors.append("provenance.rar_revision must be null or a Git revision")
+    if card.get("signature") is not None and not isinstance(
+        card["signature"], (dict, str)
+    ):
+        errors.append("signature must be null, an object, or a string")
+
+    payload = card.get("payload")
+    has_inline = False
+    filenames: set[str] = set()
+    if not isinstance(payload, list):
+        errors.append("payload must be an array")
+    else:
+        for index, item in enumerate(payload):
+            where = f"payload[{index}]"
+            if not isinstance(item, dict):
+                errors.append(f"{where} must be an object")
+                continue
+            allowed = {
+                "kind", "filename", "sha256_lf_v1", "sha256", "inline", "url"
+            }
+            item_extra = set(item) - allowed
+            if item_extra:
+                errors.append(
+                    f"{where} has unknown field(s): {', '.join(sorted(item_extra))}"
+                )
+            kind = item.get("kind")
+            if kind not in {"agent.py", "egg"}:
+                errors.append(f"{where}.kind must be agent.py or egg")
+            filename = item.get("filename")
+            if (
+                not isinstance(filename, str)
+                or not filename
+                or Path(filename).name != filename
+                or "/" in filename
+                or "\\" in filename
+            ):
+                errors.append(f"{where}.filename must be a basename")
+            elif filename in filenames:
+                errors.append(f"{where}.filename is duplicated")
+            else:
+                filenames.add(filename)
+
+            sources = [key for key in ("inline", "url") if key in item]
+            if len(sources) != 1:
+                errors.append(f"{where} must contain exactly one of inline or url")
+            elif sources[0] == "inline":
+                has_inline = True
+                if not isinstance(item["inline"], str):
+                    errors.append(f"{where}.inline must be a string")
+            elif not isinstance(item["url"], str):
+                errors.append(f"{where}.url must be a string")
+            else:
+                _validate_pinned_url(item["url"], where, errors)
+
+            digest_key = "sha256_lf_v1" if kind == "agent.py" else "sha256"
+            other_digest = "sha256" if kind == "agent.py" else "sha256_lf_v1"
+            digest = item.get(digest_key)
+            if (
+                not isinstance(digest, str)
+                or not CARD_DIGEST_RE.fullmatch(digest)
+            ):
+                errors.append(f"{where}.{digest_key} must be a lowercase SHA-256")
+            if other_digest in item:
+                errors.append(f"{where} must not contain {other_digest}")
+
+    if has_inline and serialized_size is not None and serialized_size > CARD_MAX_INLINE_BYTES:
+        errors.append(
+            f"Card with inline payload exceeds {CARD_MAX_INLINE_BYTES} bytes"
+        )
+    return errors
+
+
+def _verify_card_identity(card: dict) -> list[str]:
+    errors: list[str] = []
+    agent_id = card["id"]
+    seed = card["seed"]
+    face = card["face"]
+    manifest = card["manifest"]
+
+    if face.get("seed") != seed:
+        errors.append("face.seed disagrees with seed")
+    if manifest.get("name") != agent_id:
+        errors.append("manifest.name disagrees with id")
+    if card.get("version") != manifest.get("version"):
+        errors.append("version disagrees with manifest.version")
+    if card.get("name_seed") != (seed_hash(agent_id) & 0xFFFFFFFF):
+        errors.append("name_seed disagrees with id")
+    try:
+        expected_words = seed_to_words(seed)
+    except (TypeError, ValueError):
+        expected_words = None
+    if card.get("incantation") != expected_words:
+        errors.append("incantation disagrees with seed")
+
+    face_id = face.get("agent_name")
+    if face_id is None and isinstance(face.get("name"), str) and face["name"].startswith("@"):
+        face_id = face["name"]
+    if face_id is None:
+        errors.append("face must identify the agent with agent_name or name")
+    elif face_id != agent_id:
+        errors.append("face identity disagrees with id")
+
+    try:
+        expected_seed = forge_seed(
+            manifest["name"],
+            manifest.get("category", "general"),
+            manifest.get("quality_tier", "community"),
+            manifest.get("tags", []),
+            manifest.get("dependencies", []),
+        )
+    except (KeyError, TypeError, ValueError) as exc:
+        errors.append(f"Could not recompute seed from manifest: {exc}")
+    else:
+        if expected_seed != seed:
+            errors.append("seed disagrees with manifest")
+
+    legacy = _legacy_faces().get(agent_id)
+    if legacy is not None:
+        if face != legacy:
+            errors.append("face disagrees with the frozen v1 card")
+        return errors
+
+    resolved = resolve_card_from_seed(seed, full_seed=True)
+    legacy_fields = {
+        "agent_types": "types",
+        "type_colors": "type_colors",
+        "weakness": "weakness",
+        "weakness_label": "weakness_label",
+        "resistance": "resistance",
+        "resistance_label": "resistance_label",
+        "retreat_cost": "retreat_cost",
+        "evolution": "evolution",
+        "tier": "tier",
+        "rarity_tier": "rarity",
+        "rarity_label": "rarity_label",
+        "floor_pts": "floor_pts",
+    }
+    for face_key, resolved_key in legacy_fields.items():
+        if face_key in face and face[face_key] != resolved.get(resolved_key):
+            errors.append(f"face.{face_key} disagrees with seed")
+    if "types" in face:
+        modern_fields = {
+            "types": "types",
+            "type_colors": "type_colors",
+            "hp": "hp",
+            "stats": "stats",
+            "abilities": "abilities",
+            "weakness": "weakness",
+            "weakness_label": "weakness_label",
+            "resistance": "resistance",
+            "resistance_label": "resistance_label",
+            "retreat_cost": "retreat_cost",
+            "evolution": "evolution",
+            "tier": "tier",
+            "rarity": "rarity",
+            "rarity_label": "rarity_label",
+            "category": "category",
+            "type_line": "type_line",
+            "flavor": "flavor",
+            "floor_pts": "floor_pts",
+        }
+        for face_key, resolved_key in modern_fields.items():
+            if face_key in face and face[face_key] != resolved.get(resolved_key):
+                errors.append(f"face.{face_key} disagrees with seed")
+    return errors
+
+
+def _payload_bytes(item: dict) -> bytes:
+    if "url" in item:
+        return _read_url_bytes(item["url"])
+    inline = item["inline"]
+    if item["kind"] == "agent.py":
+        try:
+            return inline.encode("utf-8")
+        except UnicodeEncodeError as exc:
+            raise ValueError(f"{item['filename']} is not valid UTF-8") from exc
+    try:
+        return base64.b64decode(inline, validate=True)
+    except (binascii.Error, ValueError) as exc:
+        raise ValueError(f"{item['filename']} is not valid base64") from exc
+
+
+def verify_card(
+    card_or_source: dict | str | os.PathLike,
+    *,
+    fetch_payloads: bool = True,
+    return_payload_bytes: bool = False,
+) -> dict:
+    """Validate a card and all available payload hashes without executing it."""
+    if isinstance(card_or_source, dict):
+        card = copy.deepcopy(card_or_source)
+        raw = _card_json_bytes(card)
+        source = "<memory>"
+    else:
+        card, raw, source = _read_card_document(card_or_source)
+
+    errors = validate_card(card, serialized_size=len(raw))
+    if not errors:
+        errors.extend(_verify_card_identity(card))
+    if errors:
+        raise ValueError("Card verification failed: " + "; ".join(errors))
+
+    payloads = []
+    for item in card["payload"]:
+        if "url" in item and not fetch_payloads:
+            digest_key = "sha256_lf_v1" if item["kind"] == "agent.py" else "sha256"
+            payloads.append({
+                "kind": item["kind"],
+                "filename": item["filename"],
+                "algorithm": digest_key.replace("_", "-"),
+                "hash": item[digest_key],
+                "source": item["url"],
+                "verified": False,
+            })
+            continue
+
+        content = _payload_bytes(item)
+        if item["kind"] == "agent.py":
+            try:
+                content.decode("utf-8")
+            except UnicodeDecodeError as exc:
+                raise ValueError(
+                    f"Card verification failed: {item['filename']} is not UTF-8"
+                ) from exc
+            digest_key = "sha256_lf_v1"
+            digest = sha256_lf_v1(content)
+        else:
+            digest_key = "sha256"
+            digest = hashlib.sha256(content).hexdigest()
+        if digest != item[digest_key]:
+            raise ValueError(
+                "Card verification failed: "
+                f"{item['filename']} {digest_key} mismatch "
+                f"(expected {item[digest_key]}, got {digest})"
+            )
+        payload_result = {
+            "kind": item["kind"],
+            "filename": item["filename"],
+            "algorithm": digest_key.replace("_", "-"),
+            "hash": digest,
+            "source": item.get("url", "inline"),
+            "verified": True,
+        }
+        if return_payload_bytes:
+            payload_result["_bytes"] = content
+        payloads.append(payload_result)
+
+    return {
+        "valid": True,
+        "source": source,
+        "card": card,
+        "payloads": payloads,
+    }
+
+
+def pack_card(
+    agent_path: str | os.PathLike,
+    *,
+    egg_path: str | os.PathLike | None = None,
+    inline: bool | None = None,
+    pin_url: str | None = None,
+    output_path: str | os.PathLike | None = None,
+) -> str:
+    """Pack an agent and optional egg into a verified v2 card file."""
+    path = Path(agent_path)
+    manifest = extract_manifest(str(path))
+    if manifest is None:
+        raise ValueError(f"No __manifest__ found in {path}")
+    manifest_errors = validate_manifest(str(path), manifest)
+    if manifest_errors:
+        raise ValueError("Invalid manifest: " + "; ".join(manifest_errors))
+    if inline is None:
+        inline = pin_url is None
+    if pin_url is not None and not inline:
+        pin_errors: list[str] = []
+        _validate_pinned_url(pin_url, "payload[0]", pin_errors)
+        if pin_errors:
+            raise ValueError("; ".join(pin_errors))
+    if pin_url is not None and inline:
+        raise ValueError("Choose inline payload or pin_url, not both")
+
+    try:
+        agent_bytes = path.read_bytes()
+        agent_text = agent_bytes.decode("utf-8")
+    except OSError as exc:
+        raise ValueError(f"Could not read agent {path}: {exc}") from exc
+    except UnicodeDecodeError as exc:
+        raise ValueError(f"Agent {path} must be UTF-8") from exc
+
+    face = _legacy_faces().get(manifest["name"])
+    face = copy.deepcopy(face) if face is not None else mint_card(str(path))
+    agent_payload = {
+        "kind": "agent.py",
+        "filename": path.name,
+        "sha256_lf_v1": sha256_lf_v1(agent_bytes),
+    }
+    if pin_url is not None:
+        agent_payload["url"] = pin_url
+    else:
+        agent_payload["inline"] = agent_text
+    payload = [agent_payload]
+
+    if egg_path is not None:
+        egg = Path(egg_path)
+        try:
+            egg_bytes = egg.read_bytes()
+        except OSError as exc:
+            raise ValueError(f"Could not read egg {egg}: {exc}") from exc
+        payload.append({
+            "kind": "egg",
+            "filename": egg.name,
+            "sha256": hashlib.sha256(egg_bytes).hexdigest(),
+            "inline": base64.b64encode(egg_bytes).decode("ascii"),
+        })
+
+    card = to_v2(face, manifest, payload=payload)
+    destination = Path(output_path) if output_path is not None else path.with_suffix(".card")
+    raw = _card_json_bytes(card)
+    size_errors = validate_card(card, serialized_size=len(raw))
+    if size_errors:
+        raise ValueError("Card packing failed: " + "; ".join(size_errors))
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(raw)
+    return str(destination)
+
+
+def unpack_card(
+    card_source: str | os.PathLike,
+    output_dir: str | os.PathLike | None = None,
+) -> list[str]:
+    """Verify and unpack exact payload bytes to a directory."""
+    verified = verify_card(card_source, return_payload_bytes=True)
+    if output_dir is None:
+        parsed = urllib.parse.urlparse(os.fspath(card_source))
+        stem = Path(parsed.path).stem or verified["card"]["id"].split("/", 1)[1]
+        destination = Path.cwd() / stem
+    else:
+        destination = Path(output_dir)
+    destination.mkdir(parents=True, exist_ok=True)
+
+    written = []
+    for item, payload_result in zip(
+        verified["card"]["payload"],
+        verified["payloads"],
+        strict=True,
+    ):
+        target = destination / item["filename"]
+        target.write_bytes(payload_result["_bytes"])
+        written.append(str(target))
+    return written
+
+
+def _load_card_index() -> tuple[dict, Path | None]:
+    local_path = Path(__file__).resolve().parent / "cards" / "v2" / "index.json"
+    if local_path.is_file():
+        try:
+            index = json.loads(local_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Could not read local card index: {exc}") from exc
+        if not isinstance(index, dict):
+            raise ValueError("Local card index must be an object")
+        return index, local_path
+
+    raw = _read_url_bytes(f"{RAW_BASE}/cards/v2/index.json")
+    try:
+        index = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError(f"Could not parse public card index: {exc}") from exc
+    if not isinstance(index, dict):
+        raise ValueError("Public card index must be an object")
+    return index, None
+
+
+def _resolve_indexed_card(seed: int) -> str:
+    index, local_path = _load_card_index()
+    matches = [
+        (agent_id, entry)
+        for agent_id, entry in index.items()
+        if isinstance(entry, dict)
+        and seed in {entry.get("seed"), entry.get("name_seed")}
+    ]
+    if not matches:
+        raise ValueError(f"No v2 card found for seed {seed}")
+    if len(matches) > 1:
+        raise ValueError(f"Seed {seed} is ambiguous in the v2 card index")
+    agent_id, entry = matches[0]
+    if local_path is not None:
+        candidate = local_path.parent / f"{agent_id}.card"
+        if candidate.is_file():
+            return str(candidate)
+    url = entry.get("url")
+    if not isinstance(url, str):
+        raise ValueError(f"Card index entry {agent_id} has no URL")
+    return url
+
+
+def scan_card(source: str) -> dict:
+    """Resolve and verify a URL, local path, seed, or seven-word incantation."""
+    value = source.strip()
+    if not value:
+        raise ValueError("Card scan input is empty")
+    parsed = urllib.parse.urlparse(value)
+    rar_match = re.fullmatch(
+        r"rar://(@[A-Za-z0-9][A-Za-z0-9-]*/[a-z0-9_]+)@([0-9]+)",
+        value,
+    )
+    if rar_match:
+        expected_id, seed_text = rar_match.groups()
+        seed = int(seed_text)
+        local = (
+            Path(__file__).resolve().parent
+            / "cards"
+            / "v2"
+            / f"{expected_id}.card"
+        )
+        result = verify_card(local if local.is_file() else _resolve_indexed_card(seed))
+        card = result["card"]
+        if card["id"] != expected_id or card["seed"] != seed:
+            raise ValueError("rar URL disagrees with the resolved card")
+        return result
+    if parsed.scheme in {"http", "https", "file"} or Path(value).is_file():
+        return verify_card(value)
+
+    words = value.split()
+    if len(words) == 7:
+        seed = words_to_seed(value)
+    elif len(words) == 1:
+        try:
+            seed = int(value)
+        except ValueError as exc:
+            raise ValueError(
+                "Card scan expects a URL, file, numeric seed, or seven words"
+            ) from exc
+        if seed < 0:
+            raise ValueError("Card seed must be non-negative")
+    else:
+        raise ValueError(
+            "Card scan expects a URL, file, numeric seed, or seven words"
+        )
+    return verify_card(_resolve_indexed_card(seed))
+
+
+def _print_v2_card(result: dict, *, include_face: bool) -> None:
+    card = result["card"]
+    print(f"  Verified: {card['id']}")
+    print(f"  Schema: {card['schema']}")
+    print(f"  Seed: {card['seed']}")
+    print(f"  Incantation: {card['incantation']}")
+    print(f"  State: {card['state']}")
+    if include_face:
+        face = card["face"]
+        print("  Face:")
+        for key in ("name", "title", "type_line", "rarity", "rarity_label", "hp"):
+            if key in face and face[key] not in (None, ""):
+                print(f"    {key}: {face[key]}")
+    print("  Payload hashes:")
+    if not result["payloads"]:
+        print("    (face-only)")
+    for payload in result["payloads"]:
+        print(
+            f"    {payload['kind']} {payload['filename']} "
+            f"{payload['algorithm']}:{payload['hash']}"
+        )
+
+
 def agents_status() -> dict:
     """Check local registry.json and count agents by tier, computing total collection value."""
     local = Path(__file__).parent / "registry.json"
@@ -2148,6 +2959,56 @@ def main():
     p_card_mint.add_argument("path", help="Path to agent .py file")
     p_card_mint.add_argument("--json", action="store_true", help="Output JSON")
 
+    p_card_pack = card_sub.add_parser(
+        "pack",
+        help="Pack an agent and optional egg into a rar-card/2.0 file",
+    )
+    p_card_pack.add_argument("path", help="Path to agent .py file")
+    p_card_pack.add_argument("--egg", help="Optional binary .egg payload")
+    pack_mode = p_card_pack.add_mutually_exclusive_group()
+    pack_mode.add_argument(
+        "--inline",
+        action="store_true",
+        help="Carry the agent source inline (default)",
+    )
+    pack_mode.add_argument(
+        "--pin",
+        metavar="RAW_URL",
+        help="Reference the agent source by a revision-pinned URL",
+    )
+    p_card_pack.add_argument(
+        "-o",
+        "--output",
+        help="Output .card path (default: beside the agent)",
+    )
+    p_card_pack.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_card_unpack = card_sub.add_parser(
+        "unpack",
+        help="Verify and unpack exact payload bytes",
+    )
+    p_card_unpack.add_argument("path", help="Path or URL to a .card file")
+    p_card_unpack.add_argument("directory", nargs="?", help="Output directory")
+    p_card_unpack.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_card_verify = card_sub.add_parser(
+        "verify",
+        help="Verify card schema, identity, and payload hashes",
+    )
+    p_card_verify.add_argument("path", help="Path or URL to a .card file")
+    p_card_verify.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_card_scan = card_sub.add_parser(
+        "scan",
+        help="Resolve and verify a card URL, seed, or seven words",
+    )
+    p_card_scan.add_argument(
+        "source",
+        nargs="+",
+        help="Card URL, local file, numeric seed, or seven-word incantation",
+    )
+    p_card_scan.add_argument("--json", action="store_true", help="Output JSON")
+
     p_card_value = card_sub.add_parser("value", help="Check the floor value of an agent card")
     p_card_value.add_argument("name", help="Agent name: @publisher/my-agent")
     p_card_value.add_argument("--json", action="store_true", help="Output JSON")
@@ -2411,7 +3272,71 @@ def main():
 
     # ---- card ----
     elif args.command == "card":
-        if args.card_command == "mint":
+        if args.card_command == "pack":
+            try:
+                packed = pack_card(
+                    args.path,
+                    egg_path=args.egg,
+                    inline=True if args.inline else None,
+                    pin_url=args.pin,
+                    output_path=args.output,
+                )
+                if use_json:
+                    print(json.dumps({"packed": packed}))
+                else:
+                    print(f"  Packed: {packed}")
+            except Exception as e:
+                if use_json:
+                    print(json.dumps({"error": str(e)}))
+                else:
+                    print(f"  Error: {e}")
+                sys.exit(1)
+
+        elif args.card_command == "unpack":
+            try:
+                written = unpack_card(args.path, args.directory)
+                if use_json:
+                    print(json.dumps({"unpacked": written}, indent=2))
+                else:
+                    print(f"  Unpacked {len(written)} payload(s):")
+                    for path in written:
+                        print(f"    {path}")
+            except Exception as e:
+                if use_json:
+                    print(json.dumps({"error": str(e)}))
+                else:
+                    print(f"  Error: {e}")
+                sys.exit(1)
+
+        elif args.card_command == "verify":
+            try:
+                result = verify_card(args.path)
+                if use_json:
+                    print(json.dumps(result, indent=2))
+                else:
+                    _print_v2_card(result, include_face=False)
+            except Exception as e:
+                if use_json:
+                    print(json.dumps({"error": str(e)}))
+                else:
+                    print(f"  Error: {e}")
+                sys.exit(1)
+
+        elif args.card_command == "scan":
+            try:
+                result = scan_card(" ".join(args.source))
+                if use_json:
+                    print(json.dumps(result, indent=2))
+                else:
+                    _print_v2_card(result, include_face=True)
+            except Exception as e:
+                if use_json:
+                    print(json.dumps({"error": str(e)}))
+                else:
+                    print(f"  Error: {e}")
+                sys.exit(1)
+
+        elif args.card_command == "mint":
             try:
                 card = mint_card(args.path)
                 if use_json:
