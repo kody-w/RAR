@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/deal_progression",
+  "seed": 16569251649731306541,
+  "name_seed": 3857829526,
+  "incantation": "SPARK RUSK WIELD TRENCH CHANNEL BOAR CARVE",
+  "version": "1.2.0",
+  "face": {
+    "name": "Deal Progression",
+    "title": "The Synthesizer",
+    "mana_cost": "{1}{R}{W}",
+    "colors": [
+      "R",
+      "W"
+    ],
+    "type_line": "Creature — Agent Conjurer",
+    "rarity": "common",
+    "power": 4,
+    "toughness": 1,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Analyzes pipeline health and stalled deals from live opportunities in a simulated Dynamics 365 tenant, with an embedded offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Data in. Decisions out. Humans in the loop.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-f1ce96\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-f1ce96\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-f1ce96)\"/><g filter=\"url(#gl-f1ce96)\"><circle cx=\"76\" cy=\"124\" r=\"30\" fill=\"#f47067\" opacity=\"0.09\"/><circle cx=\"119\" cy=\"98\" r=\"35\" fill=\"#f47067\" opacity=\"0.06\"/><circle cx=\"98\" cy=\"106\" r=\"32\" fill=\"#f47067\" opacity=\"0.06\"/><circle cx=\"123\" cy=\"116\" r=\"16\" fill=\"#f47067\" opacity=\"0.04\"/><circle cx=\"120\" cy=\"119\" r=\"21\" fill=\"#f47067\" opacity=\"0.12\"/><circle cx=\"97\" cy=\"71\" r=\"18\" fill=\"#f47067\" opacity=\"0.05\"/><circle cx=\"93\" cy=\"102\" r=\"38\" fill=\"#f47067\" opacity=\"0.08\"/><circle cx=\"128\" cy=\"122\" r=\"24\" fill=\"#f47067\" opacity=\"0.12\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#f47067\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#f47067\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#f47067\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"129.9\" y2=\"116.1\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"94.4\" y2=\"143.6\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"66.6\" y2=\"89.4\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"111.5\" y2=\"67.0\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/deal_progression",
+    "agent_types": [
+      "WEALTH",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#58a6ff"
+    ],
+    "hp": 62,
+    "stats": {
+      "hp": 62,
+      "atk": 63,
+      "def": 48,
+      "spd": 68,
+      "int": 67
+    },
+    "typed_abilities": [
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 3,
+        "damage": 41
+      },
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 3,
+        "damage": 18
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16569251649731306541
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/deal_progression",
+    "version": "1.2.0",
+    "display_name": "Deal Progression",
+    "description": "Analyzes pipeline health and stalled deals from live opportunities in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "deal-progression",
+      "pipeline",
+      "forecasting"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "deal_progression_agent.py",
+      "sha256_lf_v1": "71f69b7bf3a581b9a0549b696ac3730ffdddbf50fef3761bced7d0806f35b9a4",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/deal_progression.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

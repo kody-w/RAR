@@ -1,0 +1,130 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/rar_remote_agent",
+  "seed": 13515315761908692801,
+  "name_seed": 3146779668,
+  "incantation": "FILAMENT BEQUEST GLYPH BLOOM STAMP TEMPEST CAST",
+  "version": "1.8.0",
+  "face": {
+    "name": "RAR Remote Agent",
+    "title": "The Tactician",
+    "mana_cost": "{2}{W}",
+    "colors": [
+      "W"
+    ],
+    "type_line": "Legendary Creature — Agent Sentinel",
+    "rarity": "mythic",
+    "power": 10,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Execute",
+        "cost": "",
+        "text": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It works while you sleep. It finishes before you wake.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-900c14\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-900c14\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-900c14)\"/><g filter=\"url(#gl-900c14)\"><polygon points=\"132.1,107.7 123.9,136.9 91.1,126.5 53.3,111.2 62.1,77.7 95.4,69.3 124.9,76.9\" fill=\"#58a6ff\" opacity=\"0.1\" stroke=\"#58a6ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"113.5,108.6 102.7,117.8 82.3,119.0 75.0,98.9 90.7,89.5 107.5,80.4 120.8,86.1\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#58a6ff\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/rar_remote_agent",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 86,
+      "spd": 90,
+      "int": 99
+    },
+    "typed_abilities": [
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 1,
+        "damage": 23
+      },
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 2,
+        "damage": 27
+      },
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 2,
+        "damage": 45
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 13515315761908692801
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/rar_remote_agent",
+    "version": "1.8.0",
+    "display_name": "RAR Remote Agent",
+    "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
+    "author": "RAPP Core Team",
+    "tags": [
+      "core",
+      "registry",
+      "package-manager",
+      "install",
+      "discovery",
+      "voting",
+      "community"
+    ],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "rar_remote_agent.py",
+      "sha256_lf_v1": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/rar_remote_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rar_remote_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

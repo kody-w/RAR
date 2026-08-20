@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@discreetRappers/scripted_demo_agent",
+  "seed": 11288900214771561238,
+  "name_seed": 2628401903,
+  "incantation": "NOMAD SOAK BIRCH BALLISTA MALT TEMPLAR BRAND",
+  "version": "1.0.1",
+  "face": {
+    "name": "ScriptedDemo",
+    "title": "The Calibrator",
+    "mana_cost": "{2}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Curator",
+    "rarity": "common",
+    "power": 3,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Plays back scripted demo conversations from JSON files in storage, simulating agent responses for live demonstrations."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Precision at the speed of thought.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-aa3aef\"><stop offset=\"0%\" stop-color=\"#0a2a2a\"/><stop offset=\"100%\" stop-color=\"#050f0f\"/></radialGradient><filter id=\"gl-aa3aef\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-aa3aef)\"/><g filter=\"url(#gl-aa3aef)\"><polygon points=\"130.7,109.0 111.6,143.5 83.4,126.2 55.3,95.2 93.5,75.9 121.4,79.0\" fill=\"#7ee787\" opacity=\"0.1\" stroke=\"#7ee787\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"114.0,107.8 102.6,111.7 80.1,111.5 83.0,94.1 98.6,88.1 116.2,88.3\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#7ee787\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@discreetRappers/scripted_demo_agent",
+    "agent_types": [
+      "SOCIAL",
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#bc8cff"
+    ],
+    "hp": 48,
+    "stats": {
+      "hp": 48,
+      "atk": 57,
+      "def": 43,
+      "spd": 52,
+      "int": 62
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 1,
+        "damage": 19
+      },
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 3,
+        "damage": 48
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 11288900214771561238
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@discreetRappers/scripted_demo_agent",
+    "version": "1.0.1",
+    "display_name": "ScriptedDemo",
+    "description": "Plays back scripted demo conversations from JSON files in storage, simulating agent responses for live demonstrations.",
+    "author": "Bill Whalen",
+    "tags": [
+      "productivity",
+      "demos",
+      "scripted",
+      "interactive",
+      "sales"
+    ],
+    "category": "productivity",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "scripted_demo_agent.py",
+      "sha256_lf_v1": "feb243a6c7bbd7bf0cb329b0a8c60a6f6d88949e1893f89ccaa1cf2da31a80bc",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@discreetRappers/scripted_demo_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/scripted_demo_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

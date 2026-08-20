@@ -1,0 +1,124 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/supply_chain_disruption_alert",
+  "seed": 16804600987838460767,
+  "name_seed": 3912626064,
+  "incantation": "NEGATE SOAK OAT BALM DAIS BROOM CARVE",
+  "version": "1.3.0",
+  "face": {
+    "name": "Supply Chain Disruption Alert Agent",
+    "title": "The Pathfinder",
+    "mana_cost": "{2}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Legendary Creature — Agent Navigator",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Not all intelligence is artificial. Some is engineered.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-35ef90\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-35ef90\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-35ef90)\"/><g filter=\"url(#gl-35ef90)\"><polygon points=\"119.1,89.0 119.1,111.0 100.0,122.0 80.9,111.0 80.9,89.0 100.0,78.0\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.6\" opacity=\"0.40\"/><polygon points=\"138.1,78.0 138.1,122.0 100.0,144.0 61.9,122.0 61.9,78.0 100.0,56.0\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.2\" opacity=\"0.30\"/><polygon points=\"157.2,67.0 157.2,133.0 100.0,166.0 42.8,133.0 42.8,67.0 100.0,34.0\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.20\"/><polygon points=\"100.0,85.0 104.1,94.3 114.3,95.4 106.7,102.2 108.8,112.1 100.0,107.0 91.2,112.1 93.3,102.2 85.7,95.4 95.9,94.3\" fill=\"#f0883e\" opacity=\"0.3\"/><circle cx=\"138.1\" cy=\"78.0\" r=\"4\" fill=\"#f0883e\" opacity=\"0.4\"/><circle cx=\"138.1\" cy=\"122.0\" r=\"4\" fill=\"#f0883e\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"144.0\" r=\"4\" fill=\"#f0883e\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"122.0\" r=\"4\" fill=\"#f0883e\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"78.0\" r=\"4\" fill=\"#f0883e\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"56.0\" r=\"4\" fill=\"#f0883e\" opacity=\"0.4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/supply_chain_disruption_alert",
+    "agent_types": [
+      "CRAFT",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#f85149",
+      "#58a6ff"
+    ],
+    "hp": 61,
+    "stats": {
+      "hp": 61,
+      "atk": 61,
+      "def": 43,
+      "spd": 54,
+      "int": 63
+    },
+    "typed_abilities": [
+      {
+        "name": "Dispatch",
+        "text": "Route work to available capacity. Track completion.",
+        "cost": 1,
+        "damage": 43
+      },
+      {
+        "name": "Schedule",
+        "text": "Allocate resources across timeline. Minimize conflicts.",
+        "cost": 3,
+        "damage": 15
+      }
+    ],
+    "weakness": "SHIELD",
+    "weakness_label": "Shield",
+    "resistance": "HEAL",
+    "resistance_label": "Heal",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16804600987838460767
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/supply_chain_disruption_alert",
+    "version": "1.3.0",
+    "display_name": "Supply Chain Disruption Alert Agent",
+    "description": "Flags disruptions from simulated Dynamics 365 cases plus ERP late deliveries and blocked invoices in one feed, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "supply-chain",
+      "disruption",
+      "risk-management",
+      "logistics",
+      "retail"
+    ],
+    "category": "retail_cpg",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "supply_chain_disruption_alert_agent.py",
+      "sha256_lf_v1": "ed9a780b446808d9b6ac20d38a8e67344a9ee30cd4067fa095feb5884def7484",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/supply_chain_disruption_alert.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,131 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/chain_composer_agent",
+  "seed": 45443411580415654534,
+  "name_seed": 1990684176,
+  "incantation": "FRISK WARLORD ELM THUNDER OBLITERATE POISE SURGE",
+  "version": "1.0.1",
+  "face": {
+    "name": "Chain Composer",
+    "title": "The Strategist",
+    "mana_cost": "{2}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Legendary Creature — Agent Dispatcher",
+    "rarity": "rare",
+    "power": 5,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Dispatch",
+        "cost": "",
+        "text": "Composes multi-primitive RAPP chain plans from a natural-language prompt via the claude CLI, writing a plan envelope and reviewable bash script."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The simplest solution is usually an agent away.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-a76e10\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-a76e10\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-a76e10)\"/><g filter=\"url(#gl-a76e10)\"><path d=\"M40,120 Q100,72 160,120\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,82 160,125\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#8b949e\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#8b949e\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#8b949e\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#8b949e\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"86\" r=\"5\" fill=\"#8b949e\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/chain_composer_agent",
+    "agent_types": [
+      "DATA",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#3fb950",
+      "#58a6ff"
+    ],
+    "hp": 82,
+    "stats": {
+      "hp": 82,
+      "atk": 77,
+      "def": 54,
+      "spd": 72,
+      "int": 73
+    },
+    "typed_abilities": [
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 1,
+        "damage": 17
+      },
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 2,
+        "damage": 13
+      },
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 3,
+        "damage": 24
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 2,
+      "label": "Evolved",
+      "icon": "flame"
+    },
+    "tier": "verified",
+    "rarity_tier": "rare",
+    "rarity_label": "Elite",
+    "floor_pts": 100,
+    "seed": 45443411580415654534
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/chain_composer_agent",
+    "version": "1.0.1",
+    "display_name": "Chain Composer",
+    "description": "Composes multi-primitive RAPP chain plans from a natural-language prompt via the claude CLI, writing a plan envelope and reviewable bash script.",
+    "author": "kody-w",
+    "tags": [
+      "compose",
+      "chain",
+      "planning",
+      "claude-cli",
+      "operator-mediated",
+      "meta"
+    ],
+    "category": "platform",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "chain_composer_agent.py",
+      "sha256_lf_v1": "5c3eec3b482e9a812b963cfb7570175ec73fe1cec384269a9c9a0a9866347d18",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/chain_composer_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

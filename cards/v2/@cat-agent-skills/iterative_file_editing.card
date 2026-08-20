@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/iterative_file_editing",
+  "seed": 25659239176717608482,
+  "name_seed": 1679289877,
+  "incantation": "THEFT RUSK MERIDIAN VALE MAGNOLIA HALO BARB",
+  "version": "2.0.0",
+  "face": {
+    "name": "Iterative File Editing",
+    "title": "The Luminary",
+    "mana_cost": "{1}{N}{G}",
+    "colors": [
+      "N",
+      "G"
+    ],
+    "type_line": "Creature — Agent Scribe",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Calibrate",
+        "cost": "",
+        "text": "In Copilot Studio, re-sending an edited file under the same name fails to deliver it — the change is made but never reaches the user. This skill gives each iteration a new version-numbered filename (r"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“In a world of noise, the signal belongs to those who listen.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-17ee15\"><stop offset=\"0%\" stop-color=\"#2a0a0a\"/><stop offset=\"100%\" stop-color=\"#0a0808\"/></radialGradient><filter id=\"gl-17ee15\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-17ee15)\"/><g filter=\"url(#gl-17ee15)\"><circle cx=\"113.7\" cy=\"76.7\" r=\"18\" fill=\"#8b949e\" opacity=\"0.15\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"86.3\" cy=\"123.3\" r=\"19\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"113.7\" y1=\"76.7\" x2=\"86.3\" y2=\"123.3\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"37\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/iterative_file_editing",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 54,
+    "stats": {
+      "hp": 54,
+      "atk": 46,
+      "def": 23,
+      "spd": 26,
+      "int": 40
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 3,
+        "damage": 41
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 25659239176717608482
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/iterative_file_editing",
+    "version": "2.0.0",
+    "display_name": "Iterative File Editing",
+    "description": "In Copilot Studio, re-sending an edited file under the same name fails to deliver it — the change is made but never reaches the user. This skill gives each iteration a new version-numbered filename (report_v1.docx, report_v2.docx…) so every update actually lands in the chat as its own attachment.",
+    "author": "Adi Leibowitz",
+    "tags": [
+      "files",
+      "iteration",
+      "workflow",
+      "collaboration",
+      "productivity"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "iterative-file-editing",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#iterative-file-editing",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "fe1e0e3d17cbdfee"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "iterative_file_editing_agent.py",
+      "sha256_lf_v1": "cce8b6e20451b55794496c50b14c159915737e03af94e3e7c2d3dcc01b8588f8",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/iterative_file_editing_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/iterative_file_editing.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

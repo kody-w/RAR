@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@discreetRappers/email_drafting_agent",
+  "seed": 53027766882806255,
+  "name_seed": 12346489,
+  "incantation": "DAIS TRIBE OAT HALL STONE FLASH FORGE",
+  "version": "1.0.0",
+  "face": {
+    "name": "EmailDrafting",
+    "title": "The Nomad",
+    "mana_cost": "{3}{U}",
+    "colors": [
+      "U"
+    ],
+    "type_line": "Creature — Agent Vanguard",
+    "rarity": "uncommon",
+    "power": 4,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Intercept",
+        "cost": "",
+        "text": "Drafts professional emails and sends via Microsoft Power Automate flow endpoint."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“What the dashboard shows, the agent already knew.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-bc6479\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-bc6479\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-bc6479)\"/><g filter=\"url(#gl-bc6479)\"><path d=\"M40,120 Q100,77 160,120\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,87 160,125\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#bc8cff\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#bc8cff\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#bc8cff\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#bc8cff\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"89\" r=\"5\" fill=\"#bc8cff\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@discreetRappers/email_drafting_agent",
+    "agent_types": [
+      "DATA",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#3fb950",
+      "#58a6ff"
+    ],
+    "hp": 45,
+    "stats": {
+      "hp": 45,
+      "atk": 48,
+      "def": 47,
+      "spd": 65,
+      "int": 49
+    },
+    "typed_abilities": [
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 1,
+        "damage": 35
+      },
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 2,
+        "damage": 34
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 53027766882806255
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@discreetRappers/email_drafting_agent",
+    "version": "1.0.0",
+    "display_name": "EmailDrafting",
+    "description": "Drafts professional emails and sends via Microsoft Power Automate flow endpoint.",
+    "author": "Bill Whalen",
+    "tags": [
+      "integrations",
+      "email",
+      "power-automate",
+      "microsoft"
+    ],
+    "category": "integrations",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "email_drafting_agent.py",
+      "sha256_lf_v1": "b068d41da7ee04fa27d8ff0b267977914aab1eae186017ad47572e2b2c6cb399",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@discreetRappers/email_drafting_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/email_drafting_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

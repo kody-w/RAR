@@ -1,0 +1,136 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@rapp/exec_brief_agent",
+  "seed": 44708000625045412387,
+  "name_seed": 1819457970,
+  "incantation": "WEFT URN QUENCH BELOW FRAY REBEL BOLT",
+  "version": "1.2.2",
+  "face": {
+    "name": "Executive Brief",
+    "title": "The Sentinel",
+    "mana_cost": "{3}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Legendary Creature — Agent Optimizer",
+    "rarity": "mythic",
+    "power": 9,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Intercept",
+        "cost": "",
+        "text": "Produces an executive brief on a topic by chaining four inlined LLM personas over Azure OpenAI, OpenAI, or a local Copilot session."
+      },
+      {
+        "keyword": "Pipeline",
+        "cost": "",
+        "text": "Chain outputs to inputs. Each stage refines the result."
+      }
+    ],
+    "flavor_text": "“The simplest solution is usually an agent away.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-72b9b2\"><stop offset=\"0%\" stop-color=\"#141428\"/><stop offset=\"100%\" stop-color=\"#08081a\"/></radialGradient><filter id=\"gl-72b9b2\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-72b9b2)\"/><g filter=\"url(#gl-72b9b2)\"><circle cx=\"100\" cy=\"100\" r=\"44\" fill=\"#8b949e\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"44\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"59\" ry=\"6\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(23 100 100)\"/><circle cx=\"105\" cy=\"101\" r=\"10\" fill=\"#8b949e\" opacity=\"0.12\"/><circle cx=\"90\" cy=\"99\" r=\"6\" fill=\"#8b949e\" opacity=\"0.09\"/><circle cx=\"102\" cy=\"107\" r=\"9\" fill=\"#8b949e\" opacity=\"0.13\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rapp/exec_brief_agent",
+    "agent_types": [
+      "LOGIC",
+      "DATA"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#3fb950"
+    ],
+    "hp": 89,
+    "stats": {
+      "hp": 89,
+      "atk": 100,
+      "def": 82,
+      "spd": 100,
+      "int": 83
+    },
+    "typed_abilities": [
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 3,
+        "damage": 29
+      },
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 2,
+        "damage": 45
+      },
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 1,
+        "damage": 33
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 0,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 44708000625045412387
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/exec_brief_agent",
+    "version": "1.2.2",
+    "display_name": "Executive Brief",
+    "description": "Produces an executive brief on a topic by chaining four inlined LLM personas over Azure OpenAI, OpenAI, or a local Copilot session.",
+    "author": "@rapp",
+    "tags": [
+      "composite",
+      "exec-brief-pipeline",
+      "singleton"
+    ],
+    "category": "analysis",
+    "quality_tier": "official",
+    "requires_env": [],
+    "delegates_to_inlined": [
+      "@rapp/brief-scout",
+      "@rapp/brief-analyst",
+      "@rapp/brief-strategist",
+      "@rapp/brief-writer"
+    ],
+    "example_call": {
+      "args": {
+        "topic": "Why our org needs a unified agent sharing standard"
+      }
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "exec_brief_agent.py",
+      "sha256_lf_v1": "b43fbf2ac29f381c41c6cd7e2a247ffb7a6143c579e095c4ab2d961bf26ef45d",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rapp/exec_brief_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/exec_brief_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

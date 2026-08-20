@@ -18,12 +18,20 @@ on:
       - 'state/receipts/**'
       - 'state/releases.json'
       - 'build_registry.py'
+      - 'rapp_sdk.py'
+      - 'scripts/generate_holo_cards.py'
+      - 'scripts/migrate_cards_v2.py'
+      - 'schema/rar-card-2.0.json'
       - 'rar.config.json'
       - '.github/workflows/build-registry.yml'
   pull_request:
     paths:
       - 'agents/**/*.py'
       - 'agents/**/*.py.card'
+      - 'rapp_sdk.py'
+      - 'scripts/generate_holo_cards.py'
+      - 'scripts/migrate_cards_v2.py'
+      - 'schema/rar-card-2.0.json'
   workflow_dispatch:
 
 permissions:
@@ -63,6 +71,18 @@ jobs:
       - name: Build registry
         run: python build_registry.py
 
+      - name: Forge v1 cards
+        run: python scripts/generate_holo_cards.py
+
+      # The v1 forge adds the face hash that registry.json projects. Rebuild
+      # once before wrapping those exact faces in v2; neither format is minted
+      # from stale registry metadata.
+      - name: Refresh registry card metadata
+        run: python build_registry.py
+
+      - name: Migrate v1 cards to rar-card/2.0
+        run: python scripts/migrate_cards_v2.py
+
       # Article XXIII — record newly published agents into the permanent
       # URL ledger the moment they land on main. From this point the path
       # is frozen: check_url_stability.py will fail any later PR that
@@ -90,6 +110,7 @@ jobs:
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
           git add registry.json state/published_paths.json \
+                  cards/holo_cards.json cards/v2 \
                   manifest.json api/v1/catalog.json api/v1/taxonomy.json \
                   api/v1/match.json api/v1/status.json api/v1/badge.json \
                   api/v1/audience

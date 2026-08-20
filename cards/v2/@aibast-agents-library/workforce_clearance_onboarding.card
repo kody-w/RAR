@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/workforce_clearance_onboarding",
+  "seed": 15588155065239352323,
+  "name_seed": 3629400177,
+  "incantation": "RUNE OVERLORD EXTINGUISH HEATH THUNDER CRUX ETCH",
+  "version": "1.2.0",
+  "face": {
+    "name": "Workforce Clearance & Onboarding Agent",
+    "title": "The Quartermaster",
+    "mana_cost": "{2}{W}",
+    "colors": [
+      "W"
+    ],
+    "type_line": "Creature — Agent Marshal",
+    "rarity": "rare",
+    "power": 6,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Assess",
+        "cost": "",
+        "text": "Tracks onboarding blockers from a live simulated Dynamics 365 CRM joined to an HRIS hire roster, with clearance checklists that work offline."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-544071\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-544071\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-544071)\"/><g filter=\"url(#gl-544071)\"><polygon points=\"132.8,108.9 112.3,142.2 78.7,129.0 57.2,95.6 90.3,66.4 124.0,58.5\" fill=\"#79c0ff\" opacity=\"0.1\" stroke=\"#79c0ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"122.0,111.8 104.4,121.5 83.2,108.9 81.6,87.9 97.9,87.2 113.2,92.9\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#79c0ff\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/workforce_clearance_onboarding",
+    "agent_types": [
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#f0f0f0"
+    ],
+    "hp": 77,
+    "stats": {
+      "hp": 77,
+      "atk": 61,
+      "def": 43,
+      "spd": 64,
+      "int": 53
+    },
+    "typed_abilities": [
+      {
+        "name": "Certify",
+        "text": "Validate against standards. Issue compliance attestation.",
+        "cost": 1,
+        "damage": 37
+      },
+      {
+        "name": "Enforce",
+        "text": "Apply policy rules. Block non-compliant actions.",
+        "cost": 2,
+        "damage": 17
+      }
+    ],
+    "weakness": "SOCIAL",
+    "weakness_label": "Social",
+    "resistance": "CRAFT",
+    "resistance_label": "Craft",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 15588155065239352323
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/workforce_clearance_onboarding",
+    "version": "1.2.0",
+    "display_name": "Workforce Clearance & Onboarding Agent",
+    "description": "Tracks onboarding blockers from a live simulated Dynamics 365 CRM joined to an HRIS hire roster, with clearance checklists that work offline.",
+    "author": "AIBAST",
+    "tags": [
+      "clearance",
+      "onboarding",
+      "background-check",
+      "workforce",
+      "federal",
+      "access"
+    ],
+    "category": "federal_government",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "workforce_clearance_onboarding_agent.py",
+      "sha256_lf_v1": "181d78db4148c5939d7f6ff52142b5f80972d15303aad8505e716a758721b0aa",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/workforce_clearance_onboarding.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

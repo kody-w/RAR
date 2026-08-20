@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/perpetual_loop_factory",
+  "seed": 18392963094647028862,
+  "name_seed": 4282445436,
+  "incantation": "CHARM HEIRLOOM COBALT THRONE FLEET ZIGGURAT BIND",
+  "version": "1.0.3",
+  "face": {
+    "name": "PerpetualLoopFactory",
+    "title": "The Strategist",
+    "mana_cost": "{3}{W}{U}",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "type_line": "Creature — Agent Sage",
+    "rarity": "uncommon",
+    "power": 5,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Process",
+        "cost": "",
+        "text": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“One prompt. One purpose. Infinite execution.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-40ee7c\"><stop offset=\"0%\" stop-color=\"#1a1e0a\"/><stop offset=\"100%\" stop-color=\"#0a0a05\"/></radialGradient><filter id=\"gl-40ee7c\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-40ee7c)\"/><g filter=\"url(#gl-40ee7c)\"><polygon points=\"119.1,89.0 119.1,111.0 100.0,122.0 80.9,111.0 80.9,89.0 100.0,78.0\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.6\" opacity=\"0.40\"/><polygon points=\"138.1,78.0 138.1,122.0 100.0,144.0 61.9,122.0 61.9,78.0 100.0,56.0\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.2\" opacity=\"0.30\"/><polygon points=\"157.2,67.0 157.2,133.0 100.0,166.0 42.8,133.0 42.8,67.0 100.0,34.0\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.20\"/><polygon points=\"100.0,85.0 104.1,94.3 114.3,95.4 106.7,102.2 108.8,112.1 100.0,107.0 91.2,112.1 93.3,102.2 85.7,95.4 95.9,94.3\" fill=\"#58a6ff\" opacity=\"0.3\"/><circle cx=\"138.1\" cy=\"78.0\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.4\"/><circle cx=\"138.1\" cy=\"122.0\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"144.0\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"122.0\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"78.0\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"56.0\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/perpetual_loop_factory",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 76,
+    "stats": {
+      "hp": 76,
+      "atk": 61,
+      "def": 52,
+      "spd": 67,
+      "int": 55
+    },
+    "typed_abilities": [
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 1,
+        "damage": 27
+      },
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 2,
+        "damage": 43
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 18392963094647028862
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/perpetual_loop_factory",
+    "display_name": "PerpetualLoopFactory",
+    "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons.",
+    "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
+    "version": "1.0.3",
+    "tags": [
+      "meta",
+      "factory",
+      "perpetual",
+      "chain",
+      "twins",
+      "self-correcting",
+      "kaizen"
+    ],
+    "category": "core",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "perpetual_loop_factory_agent.py",
+      "sha256_lf_v1": "1e53fe183fd90dfda9e8c438e9d8b3fb82f98254763757ed87a9c28869477f53",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/perpetual_loop_factory_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/perpetual_loop_factory.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

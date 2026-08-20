@@ -1,0 +1,134 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/agent_harness_explorer",
+  "seed": 35624676012963150133,
+  "name_seed": 3999548950,
+  "incantation": "NOBLE WARLORD RAPID GORGE WITHER EMPIRE HAMMER",
+  "version": "1.1.0",
+  "face": {
+    "name": "Agent Harness Explorer",
+    "title": "The Sage",
+    "mana_cost": "{2}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Creature — Agent Oracle",
+    "rarity": "rare",
+    "power": 1,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Configure",
+        "cost": "",
+        "text": "Discover, document, and monitor what the agent harness can do — Python libraries, tools, MCP servers, and runtime capabilities — with repeatable, comparable snapshots."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“What the dashboard shows, the agent already knew.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-644616\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-644616\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-644616)\"/><g filter=\"url(#gl-644616)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#f0883e\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#f0883e\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"16\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(6 100 100)\"/><circle cx=\"117.3\" cy=\"93.1\" r=\"3\" fill=\"#f0883e\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"33\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(13 100 100)\"/><circle cx=\"128.8\" cy=\"128.8\" r=\"4\" fill=\"#f0883e\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"66\" ry=\"35\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.36\" transform=\"rotate(-22 100 100)\"/><circle cx=\"157.5\" cy=\"77.0\" r=\"5\" fill=\"#f0883e\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/agent_harness_explorer",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 45,
+    "stats": {
+      "hp": 45,
+      "atk": 41,
+      "def": 26,
+      "spd": 35,
+      "int": 34
+    },
+    "typed_abilities": [
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 1,
+        "damage": 43
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 35624676012963150133
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/agent_harness_explorer",
+    "version": "1.1.0",
+    "display_name": "Agent Harness Explorer",
+    "description": "Discover, document, and monitor what the agent harness can do — Python libraries, tools, MCP servers, and runtime capabilities — with repeatable, comparable snapshots.",
+    "author": "Chris Garty and Andrew Hess",
+    "tags": [
+      "diagnostics",
+      "runtime",
+      "python",
+      "capabilities",
+      "snapshots",
+      "scripts"
+    ],
+    "category": "devtools",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "agent-harness-explorer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#agent-harness-explorer",
+      "upstream_version": "0.1.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "61ae6c239cb9c236"
+    },
+    "platforms": [
+      "Copilot Studio",
+      "Cowork",
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "agent_harness_explorer_agent.py",
+      "sha256_lf_v1": "77aeeb418357389bf065c769985559925b8f7165557d4f2b63421baa21bcc4b7",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/agent_harness_explorer_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/agent_harness_explorer.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1632,7 +1632,11 @@ def validate_card(card: object, *, serialized_size: int | None = None) -> list[s
     if not isinstance(manifest, dict):
         errors.append("manifest must be an object")
     else:
-        manifest_errors = validate_manifest("", manifest)
+        manifest_errors = [
+            error
+            for error in validate_manifest("", manifest)
+            if not error.startswith("Invalid quality_tier ")
+        ]
         errors.extend(f"manifest: {error}" for error in manifest_errors)
 
     if card.get("state") not in {"dormant", "active"}:

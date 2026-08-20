@@ -1,0 +1,130 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/commenting_content",
+  "seed": 19998310334418139450,
+  "name_seed": 361252171,
+  "incantation": "ELDER PALE HEDGE PIPE CHAR AURORA ALLOY",
+  "version": "2.0.0",
+  "face": {
+    "name": "Commenting Content",
+    "title": "The Conjurer",
+    "mana_cost": "{1}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Luminary",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Comments Word or PowerPoint files with Comments."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The code compiles. The agent decides. The work gets done.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-88454b\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-88454b\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-88454b)\"/><g filter=\"url(#gl-88454b)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#7ee787\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#7ee787\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"17\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(-28 100 100)\"/><circle cx=\"116.9\" cy=\"106.7\" r=\"5\" fill=\"#7ee787\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"32\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(12 100 100)\"/><circle cx=\"114.9\" cy=\"80.9\" r=\"4\" fill=\"#7ee787\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/commenting_content",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 22,
+    "stats": {
+      "hp": 22,
+      "atk": 46,
+      "def": 28,
+      "spd": 47,
+      "int": 19
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 3,
+        "damage": 28
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 19998310334418139450
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/commenting_content",
+    "version": "2.0.0",
+    "display_name": "Commenting Content",
+    "description": "Comments Word or PowerPoint files with Comments.",
+    "author": "AndrewHessMSFT",
+    "tags": [
+      "documents",
+      "productivity"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "commenting-content",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#commenting-content",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "fcac24466182f80a"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "commenting_content_agent.py",
+      "sha256_lf_v1": "187b091fcba2f8fb7bbd54d2846dd5fa025aafe300aaf05cb4e79baa06416c15",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/commenting_content_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/commenting_content.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

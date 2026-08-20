@@ -1,0 +1,144 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/rapp_sentinel_agent",
+  "seed": 9983162944433694679,
+  "name_seed": 2324386254,
+  "incantation": "PARAPET BRAND RAGE VESTIGE CATALYST BRED CHISEL",
+  "version": "1.0.0",
+  "face": {
+    "name": "RAPP Sentinel",
+    "title": "The Analyst",
+    "mana_cost": "{3}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Legendary Creature — Agent Luminary",
+    "rarity": "mythic",
+    "power": 4,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Intercept",
+        "cost": "",
+        "text": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup re"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It doesn’t guess. It calculates.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-8b51ce\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-8b51ce\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-8b51ce)\"/><g filter=\"url(#gl-8b51ce)\"><line x1=\"116\" y1=\"93\" x2=\"69\" y2=\"68\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"69\" y1=\"68\" x2=\"70\" y2=\"96\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"70\" y1=\"96\" x2=\"127\" y2=\"142\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"127\" y1=\"142\" x2=\"56\" y2=\"138\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"56\" y1=\"138\" x2=\"67\" y2=\"57\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"67\" y1=\"57\" x2=\"87\" y2=\"83\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"87\" y1=\"83\" x2=\"116\" y2=\"93\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"116\" y1=\"93\" x2=\"70\" y2=\"96\" stroke=\"#f0883e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"116\" cy=\"93\" r=\"3\" fill=\"#f0883e\" opacity=\"0.41\"/><circle cx=\"69\" cy=\"68\" r=\"6\" fill=\"#f0883e\" opacity=\"0.53\"/><circle cx=\"70\" cy=\"96\" r=\"5\" fill=\"#f0883e\" opacity=\"0.60\"/><circle cx=\"127\" cy=\"142\" r=\"6\" fill=\"#f0883e\" opacity=\"0.36\"/><circle cx=\"56\" cy=\"138\" r=\"4\" fill=\"#f0883e\" opacity=\"0.42\"/><circle cx=\"67\" cy=\"57\" r=\"4\" fill=\"#f0883e\" opacity=\"0.38\"/><circle cx=\"87\" cy=\"83\" r=\"6\" fill=\"#f0883e\" opacity=\"0.49\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/rapp_sentinel_agent",
+    "agent_types": [
+      "LOGIC",
+      "HEAL"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#ff7eb3"
+    ],
+    "hp": 97,
+    "stats": {
+      "hp": 97,
+      "atk": 100,
+      "def": 88,
+      "spd": 98,
+      "int": 100
+    },
+    "typed_abilities": [
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 1,
+        "damage": 22
+      },
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 3,
+        "damage": 37
+      },
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 3,
+        "damage": 23
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 9983162944433694679
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/rapp_sentinel_agent",
+    "version": "1.0.0",
+    "display_name": "RAPP Sentinel",
+    "description": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup reports — a watchdog that can't quietly lie.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "sentinel",
+      "watchdog",
+      "health",
+      "monitoring",
+      "rapp1",
+      "neighborhood",
+      "trifecta",
+      "devtools"
+    ],
+    "category": "devtools",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "external_prereqs": [
+      "git",
+      "gh (GitHub CLI, authenticated) for the GitHub health checks",
+      "optional: GitHub Copilot CLI for levels 1+ (repair/evolve arms)",
+      "optional: macOS launchd for install_launchd (every-15-minutes tick)"
+    ],
+    "example_call": {
+      "args": {
+        "action": "health"
+      }
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "rapp_sentinel_agent.py",
+      "sha256_lf_v1": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/rapp_sentinel_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rapp_sentinel_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

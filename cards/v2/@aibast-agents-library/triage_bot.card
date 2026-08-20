@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/triage_bot",
+  "seed": 13241370335976767116,
+  "name_seed": 3082996778,
+  "incantation": "SOAK BROKE SENTINEL NEXUS SLIME THRONE CAST",
+  "version": "1.2.0",
+  "face": {
+    "name": "Triage Bot",
+    "title": "The Prospector",
+    "mana_cost": "{3}{N}{W}",
+    "colors": [
+      "N",
+      "W"
+    ],
+    "type_line": "Creature — Agent Cartographer",
+    "rarity": "common",
+    "power": 7,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Classifies live D365 cases and ServiceNow-shaped ITSM incidents, comparing classifier verdicts to live desk priorities; routes and hands off; offline-safe."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The simplest solution is usually an agent away.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-c2cc2a\"><stop offset=\"0%\" stop-color=\"#1a0a1e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-c2cc2a\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-c2cc2a)\"/><g filter=\"url(#gl-c2cc2a)\"><line x1=\"111\" y1=\"122\" x2=\"149\" y2=\"124\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"149\" y1=\"124\" x2=\"89\" y2=\"68\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"89\" y1=\"68\" x2=\"104\" y2=\"153\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"104\" y1=\"153\" x2=\"70\" y2=\"155\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"70\" y1=\"155\" x2=\"49\" y2=\"134\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"49\" y1=\"134\" x2=\"126\" y2=\"134\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"126\" y1=\"134\" x2=\"111\" y2=\"122\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"111\" y1=\"122\" x2=\"89\" y2=\"68\" stroke=\"#8b949e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"111\" cy=\"122\" r=\"6\" fill=\"#8b949e\" opacity=\"0.44\"/><circle cx=\"149\" cy=\"124\" r=\"5\" fill=\"#8b949e\" opacity=\"0.57\"/><circle cx=\"89\" cy=\"68\" r=\"3\" fill=\"#8b949e\" opacity=\"0.30\"/><circle cx=\"104\" cy=\"153\" r=\"6\" fill=\"#8b949e\" opacity=\"0.39\"/><circle cx=\"70\" cy=\"155\" r=\"6\" fill=\"#8b949e\" opacity=\"0.60\"/><circle cx=\"49\" cy=\"134\" r=\"5\" fill=\"#8b949e\" opacity=\"0.65\"/><circle cx=\"126\" cy=\"134\" r=\"6\" fill=\"#8b949e\" opacity=\"0.38\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/triage_bot",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 55,
+    "stats": {
+      "hp": 55,
+      "atk": 62,
+      "def": 53,
+      "spd": 50,
+      "int": 67
+    },
+    "typed_abilities": [
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 3,
+        "damage": 38
+      },
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 2,
+        "damage": 23
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 13241370335976767116
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/triage_bot",
+    "version": "1.2.0",
+    "display_name": "Triage Bot",
+    "description": "Classifies live D365 cases and ServiceNow-shaped ITSM incidents, comparing classifier verdicts to live desk priorities; routes and hands off; offline-safe.",
+    "author": "AIBAST",
+    "tags": [
+      "triage",
+      "classification",
+      "routing",
+      "priority",
+      "handoff"
+    ],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "triage_bot_agent.py",
+      "sha256_lf_v1": "c8e84498bbdc7aa20908a1d3e920e10f04e0808ed64bf5439c4e0df88102bfff",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/general_stacks/triage_bot_stack/triage_bot_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/triage_bot.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

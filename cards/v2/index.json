@@ -1,0 +1,2151 @@
+{
+  "@aibast-agents-library/account_intelligence": {
+    "seed": 4997715477691771520,
+    "name_seed": 1163621311,
+    "incantation": "DISMISS HUSK WIELD BINDER EFFACE MOON SHARD",
+    "sha": "7d8c60956142907c073af3593214fa6f093843d883d0f396ad6659a2ecc1ff4b",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/account_intelligence.card"
+  },
+  "@aibast-agents-library/account_intelligence_orchestrator_agent": {
+    "seed": 10723751930960163868,
+    "name_seed": 2496818064,
+    "incantation": "QUENCH STROKE WIELD BALM LATCH PRIME BRAND",
+    "sha": "72f475789b7f19097c838aa6dfbdc89156b443fdfca0fb941bfa7dfc554c10a7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/account_intelligence_orchestrator_agent.card"
+  },
+  "@aibast-agents-library/account_messaging": {
+    "seed": 16738861686366810084,
+    "name_seed": 3897319940,
+    "incantation": "CAPSTONE CROAK WIELD ALLOY HIVE BROOD CARVE",
+    "sha": "d1bc2a499bd5fefbfcd22c7a7ef2d30db3b4d2cf6439ed41e1d612f426c2ae34",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/account_messaging.card"
+  },
+  "@aibast-agents-library/account_risk_assessment": {
+    "seed": 15010362534912467138,
+    "name_seed": 3494872370,
+    "incantation": "ARROW MUSK KATANA CAPE MASTER RIVET ETCH",
+    "sha": "369cf6c1b61483a8b8934dfa447b63041487516e2c42f652ae84b3d7b8b82cfa",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/account_risk_assessment.card"
+  },
+  "@aibast-agents-library/acquisition_support": {
+    "seed": 5999981279495069821,
+    "name_seed": 1396979503,
+    "incantation": "WARD PALADIN EXTINGUISH MACE PULSE TOWER SMELT",
+    "sha": "77631d8eb8dc88b4b3d6891f67367ac063ad13c95f2c84364bb7a6824fffe1e7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/acquisition_support.card"
+  },
+  "@aibast-agents-library/action_prioritization": {
+    "seed": 10200811530753811576,
+    "name_seed": 2375061514,
+    "incantation": "NICKEL RUSK THISTLE EMBER WYRM SHATTER CHISEL",
+    "sha": "81d583a259bb68350e5c7d655cfd09cb3e7295d71313c2ca0c9d25cd9d077d6d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/action_prioritization.card"
+  },
+  "@aibast-agents-library/activity_gap": {
+    "seed": 13173877546091689666,
+    "name_seed": 3067282388,
+    "incantation": "BETRAY STROKE ALLIANCE CATALYST CONSUL LURE CAST",
+    "sha": "a4926081f379efd4cc425cf479db1c7c5546aade37c5def6d8f5683ca913a1bf",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/activity_gap.card"
+  },
+  "@aibast-agents-library/ai_customer_assistant": {
+    "seed": 776460569569797122,
+    "name_seed": 180783814,
+    "incantation": "BLADE CONSECRATE SENTINEL WANDERER HUSK DREAM FORGE",
+    "sha": "322b43fee3f2d33ac45c009716a5435c79df2569333b033b3a3b5b0c4062cc84",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/ai_customer_assistant.card"
+  },
+  "@aibast-agents-library/ask_hr": {
+    "seed": 637792878567503925,
+    "name_seed": 148497726,
+    "incantation": "VOID SPOKE SENTINEL BEND NAVE FLAUNT FORGE",
+    "sha": "13e849786780e0ab21cc4227e2a0d38f386738b0dbe0770a84bc972a75f1f8a1",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/ask_hr.card"
+  },
+  "@aibast-agents-library/asset_maintenance_forecast": {
+    "seed": 5836169530732982279,
+    "name_seed": 1358839108,
+    "incantation": "WELD SOVEREIGN RAY GRAVE COLT BOOM SMELT",
+    "sha": "3167bbee72a84d463f0b0a9c46e5e5fbe5c69f10f8d5ee72ce6de6a9a43d4ee2",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/asset_maintenance_forecast.card"
+  },
+  "@aibast-agents-library/building_permit_processing": {
+    "seed": 12233521075867099708,
+    "name_seed": 2848338586,
+    "incantation": "JOLT CHISEL POPPY MATCH FRONT WEDGE MOLD",
+    "sha": "b34e37f94377f4193c5d45fe333950ab476e4ef4aec84298d6a12ce8d8fc038c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/building_permit_processing.card"
+  },
+  "@aibast-agents-library/bulk_crm_data_generator_agent": {
+    "seed": 5020671239044998157,
+    "name_seed": 1168966116,
+    "incantation": "ETCH CHAMPION VEIN COVENANT GLOW SERPENT SHARD",
+    "sha": "30385802cc368e3593c3426d70caffae13758c4ed52c10f08fd61900297a5f68",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/bulk_crm_data_generator_agent.card"
+  },
+  "@aibast-agents-library/care_gap_closure": {
+    "seed": 16835577812647426117,
+    "name_seed": 3919838418,
+    "incantation": "CHAR WARLORD FRIDGE ELIXIR PIVOT MATCH CARVE",
+    "sha": "a657f2a723f840928e64463e67466e30db6ce89da2fc6183211a3b0b430b0ef3",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/care_gap_closure.card"
+  },
+  "@aibast-agents-library/cart_abandonment_recovery": {
+    "seed": 3606179690631149846,
+    "name_seed": 839629138,
+    "incantation": "WAIL WARLORD SHARD DENSE GREATSWORD OMEN RUNE",
+    "sha": "b393a39add0a14ec03f93569b3339086d653b8a8b63dfc2f8bc0cb3f9ac6527e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/cart_abandonment_recovery.card"
+  },
+  "@aibast-agents-library/citizen_service_request": {
+    "seed": 8921174840435288387,
+    "name_seed": 2077122880,
+    "incantation": "SILENT PARAGON THISTLE GLEAM STARCH DAYBREAK WELD",
+    "sha": "efdcdf72c9986c04bc592934dc8eaf3f38c477ed1e8116e58c9d21be5f7e0a6a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/citizen_service_request.card"
+  },
+  "@aibast-agents-library/claims_processing": {
+    "seed": 13561102833751435409,
+    "name_seed": 3157440301,
+    "incantation": "GRYPHON PARAGON MARSHAL SLASH EXTREME SOVEREIGN CAST",
+    "sha": "f7fa6010346894e1d2fd8a57abc7161723c2f93f54322ad4cdb43d7b020e2442",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/claims_processing.card"
+  },
+  "@aibast-agents-library/client_health_score": {
+    "seed": 8147017178597171709,
+    "name_seed": 1896875253,
+    "incantation": "LAW MUSK CHARGE DUNGEON SHARD SINGE WELD",
+    "sha": "b3731266cb77f946ac17c99affde3dceabe3879bb2377242cdb65345607bfe18",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/client_health_score.card"
+  },
+  "@aibast-agents-library/clinical_notes_summarizer": {
+    "seed": 4205376672235267561,
+    "name_seed": 979140557,
+    "incantation": "TRUSS CHAMPION FRIDGE REVELATION BANE STRAIN RUNE",
+    "sha": "7c75990272168fe102f6de850af4b73ce2e399f90332bbec8af6523804c13b23",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/clinical_notes_summarizer.card"
+  },
+  "@aibast-agents-library/competitive_intelligence": {
+    "seed": 11503270546515831146,
+    "name_seed": 2678313885,
+    "incantation": "RAVEN HUSK WIELD DANCE DOLMEN CYPRESS BRAND",
+    "sha": "5861a49d412fe2502431b557ea7d8507a1d9a09decd30bf10b0cb0c2858da2ed",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/competitive_intelligence.card"
+  },
+  "@aibast-agents-library/contract_risk_review": {
+    "seed": 13063354040569177065,
+    "name_seed": 3041549129,
+    "incantation": "HEMLOCK MUSK STRIKE PEAL FRENCH BRINK CAST",
+    "sha": "865c7111c3adb71fc6cf1bae5dde8e5bee70d9332fb837e94e5bd406fa220827",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/contract_risk_review.card"
+  },
+  "@aibast-agents-library/cross_selling": {
+    "seed": 17617098655100714102,
+    "name_seed": 4101800419,
+    "incantation": "BRONZE BROKE TEMPEST ENDOW FATE TOLL BIND",
+    "sha": "8e862b357a8dde66f4e23f434304763253efb3e1257c5a24420ce3a4bb392958",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/cross_selling.card"
+  },
+  "@aibast-agents-library/customer_360": {
+    "seed": 10044936445967873390,
+    "name_seed": 2338769018,
+    "incantation": "FALCON STROKE COMPASS SILL BELOW LINDEN CHISEL",
+    "sha": "f9d2d549edd34340bd68f8f5ab378e3622f8e83ccc9f154aa5356c99ccd789dd",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/customer_360.card"
+  },
+  "@aibast-agents-library/customer_360_speech": {
+    "seed": 14861492049442254073,
+    "name_seed": 3460210759,
+    "incantation": "BEND MONARCH COBALT CHIME THREAD HEIRLOOM STAMP",
+    "sha": "e961e019457ad0c7bdf7d274584e55d8d49b685d74221bb99206ef06a6bba183",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/customer_360_speech.card"
+  },
+  "@aibast-agents-library/customer_loyalty_rewards": {
+    "seed": 5195556347500573918,
+    "name_seed": 1209684728,
+    "incantation": "SPITE OVERLORD COBALT LODESTONE COURSE SEAL SHARD",
+    "sha": "146c70a51f6c7338c49c82253356f9c13c4a0559e9cd11e5823aed85179d0fbb",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/customer_loyalty_rewards.card"
+  },
+  "@aibast-agents-library/customer_sentiment_churn": {
+    "seed": 12655086543703912626,
+    "name_seed": 2946491945,
+    "incantation": "CRYPT SOVEREIGN EXTINGUISH MANA SEQUOIA REDWOOD MOLD",
+    "sha": "546efe18f5b5cd77b15c9e3cbdd5512cef33c3d581c60542efbff26aebb5f846",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/customer_sentiment_churn.card"
+  },
+  "@aibast-agents-library/deal_competitor_intel": {
+    "seed": 2665723234406249080,
+    "name_seed": 620662056,
+    "incantation": "STANCE SOAK WIELD OATH STROKE DARK BLADE",
+    "sha": "051e2666e606d301f61556a934d4df23c7e7033185253af0d3bd6a77e6c3f59e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/deal_competitor_intel.card"
+  },
+  "@aibast-agents-library/deal_health_score": {
+    "seed": 16195268016693984984,
+    "name_seed": 3770754676,
+    "incantation": "CRIMSON BROKE ALLIANCE BAY PEAL FLOOD CARVE",
+    "sha": "d6742ccd3727ae58bc1de5042cf29fd2a4681b2b5c4eb0c5e296fedf1eb38d7c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/deal_health_score.card"
+  },
+  "@aibast-agents-library/deal_progression": {
+    "seed": 16569251649731306541,
+    "name_seed": 3857829526,
+    "incantation": "SPARK RUSK WIELD TRENCH CHANNEL BOAR CARVE",
+    "sha": "9283e7b8ccc4b87fae4859122c7b54045645963038a574076f0ed46562aa61ad",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/deal_progression.card"
+  },
+  "@aibast-agents-library/deal_risk_assessment": {
+    "seed": 15415531861044765094,
+    "name_seed": 3589208205,
+    "incantation": "CRAFT MUSK ALLIANCE GAUNT SCOUT BULL ETCH",
+    "sha": "91713642fb36551e507fcc28772a80bfd5baadde3ac5a9fe8e41db90517cf489",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/deal_risk_assessment.card"
+  },
+  "@aibast-agents-library/deal_stakeholder_engagement": {
+    "seed": 11125880910024161837,
+    "name_seed": 2590446013,
+    "incantation": "BRUNT SPOKE THISTLE WATCHER MATRIARCH TRAIN BRAND",
+    "sha": "8026a74218800fd50da87b17b2f576512df4c9949e2d7c786a5017e26b1ac378",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/deal_stakeholder_engagement.card"
+  },
+  "@aibast-agents-library/deal_tracking": {
+    "seed": 6943812563063421267,
+    "name_seed": 1616732348,
+    "incantation": "VERGE SPOKE WIELD TWILIGHT PULSAR SPIKE TEMPER",
+    "sha": "97c70b3f17e5804b390259449b09fa38bc064e93fdd40c7bd030f24a10cf0624",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/deal_tracking.card"
+  },
+  "@aibast-agents-library/dynamics_365_connector": {
+    "seed": 14682849978474050837,
+    "name_seed": 3418617411,
+    "incantation": "SHRIEK OVERLORD VEIN STARK HEATHER MERIDIAN STAMP",
+    "sha": "e54afc97528b5386f398af872afc1fe149add5a2286e7a001f0d0077e0bdd32a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/dynamics_365_connector.card"
+  },
+  "@aibast-agents-library/email_drafting": {
+    "seed": 5909429225316429364,
+    "name_seed": 1375896210,
+    "incantation": "HAUNT MONARCH DISK PLUME REMISS DOOM SMELT",
+    "sha": "6299ce11be5190fc850703bd6f400c199856bc08b120aa06a6299b27c91432a7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/email_drafting.card"
+  },
+  "@aibast-agents-library/emission_tracking": {
+    "seed": 12145677136544149217,
+    "name_seed": 2827885825,
+    "incantation": "SCYTHE MONARCH RAY SMELT WHIT WEFT MOLD",
+    "sha": "e16795234f3e4a1d1c60b80a9cdd4a8c3adf9ee21219ad0e1176a27c4a2eba6c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/emission_tracking.card"
+  },
+  "@aibast-agents-library/energy_regulatory_reporting": {
+    "seed": 8887254288578788668,
+    "name_seed": 2069225136,
+    "incantation": "VIVID HEIRLOOM PRIME SURVEY WALL BYPASS WELD",
+    "sha": "b54d68e1a12a6480b2c343af0c112e580d6333e3b583feaebd10eb8457e50b7f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/energy_regulatory_reporting.card"
+  },
+  "@aibast-agents-library/federal_grants_oversight": {
+    "seed": 9923268848797892417,
+    "name_seed": 2310441073,
+    "incantation": "FILAMENT CHIEFTAIN EXTINGUISH HEATH MUSK WATCH CHISEL",
+    "sha": "d77a45a250eae809c0bcb8040101b181b3619ccb432df6624448a7dfde67fd94",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/federal_grants_oversight.card"
+  },
+  "@aibast-agents-library/field_service_dispatch": {
+    "seed": 5482587288805061290,
+    "name_seed": 1276514327,
+    "incantation": "MOST SOVEREIGN PANTHER MARSH SWARM VASSAL SHARD",
+    "sha": "2459a54d79c34d8335d3146dcafa2bb3907da6370d611fb43184b126855e2bc9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/field_service_dispatch.card"
+  },
+  "@aibast-agents-library/financial_advisor_copilot": {
+    "seed": 8826999372581318416,
+    "name_seed": 2055195945,
+    "incantation": "PATRIARCH BESTOW DIVINATION MANA JUGGERNAUT SPREAD WELD",
+    "sha": "ed3bd44d1eccd6e3c394e33055216be6274b04f7a44606374b31374624de503e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/financial_advisor_copilot.card"
+  },
+  "@aibast-agents-library/find_accurate_models": {
+    "seed": 2233591614042549795,
+    "name_seed": 520048573,
+    "incantation": "WEFT MONARCH DISK SENTINEL CURE MIRAGE ANVIL",
+    "sha": "efe4d050a79b17c3bc65a887aff5ff560565efd5a67455ed6add3533ecaa2b9d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/find_accurate_models.card"
+  },
+  "@aibast-agents-library/foia_request_assistant": {
+    "seed": 16868928112770562685,
+    "name_seed": 3927603390,
+    "incantation": "BLISS SPOKE THISTLE SCOUT STANCE FRISK CARVE",
+    "sha": "66a8e40e2c5f7ef8f1501bea7c35a490e90b604f90d25cda9cee0472ba5cab35",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/foia_request_assistant.card"
+  },
+  "@aibast-agents-library/fraud_detection_alert": {
+    "seed": 3404678271836368537,
+    "name_seed": 792713433,
+    "incantation": "TRAIN MONARCH EXTINGUISH FRACTURE TURRET OBELISK BLADE",
+    "sha": "73d807b655392ed7067d2dc68ddde1fc667359b819ce8530c0cfddbd2d9e85e2",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/fraud_detection_alert.card"
+  },
+  "@aibast-agents-library/fs_customer_onboarding": {
+    "seed": 2012642120884563444,
+    "name_seed": 468604760,
+    "incantation": "ORDEAL CAST REVELATION ECLIPSE CLENCH FINDER ANVIL",
+    "sha": "bdeece04a09023adb482a5139ff725448f153f7af2e42cc60f0336a0fbdb5cad",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/fs_customer_onboarding.card"
+  },
+  "@aibast-agents-library/fs_regulatory_compliance": {
+    "seed": 1477628584621653242,
+    "name_seed": 344037214,
+    "incantation": "LOOP JAW VASSAL OWL DIN KNELL ANVIL",
+    "sha": "05981af18286bb9bd5ff6359691e2f4fce83ff5c70b0ca4532bbdf2faa1dbec5",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/fs_regulatory_compliance.card"
+  },
+  "@aibast-agents-library/general_ask_hr": {
+    "seed": 16645293730949775296,
+    "name_seed": 3875534453,
+    "incantation": "ILLUSION CHIEFTAIN SENTINEL CREEK HEATHER FORD CARVE",
+    "sha": "f6ac1a4fcc92a6b495d8b528861f82cb9def854101c5b1b8d61d45380ea16ee0",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/general_ask_hr.card"
+  },
+  "@aibast-agents-library/identify_discounts": {
+    "seed": 3288425480277600421,
+    "name_seed": 765646221,
+    "incantation": "MANA HUSK TEMPEST HAUNT BYPASS IMPALE BLADE",
+    "sha": "9d7d9c075a639326893160a01b8f4e082bf73be1c0caa45c0779ae161dc02c75",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/identify_discounts.card"
+  },
+  "@aibast-agents-library/inventory_rebalancing": {
+    "seed": 741104875949665064,
+    "name_seed": 172551925,
+    "incantation": "CENTURION HUSK SAGE CATACOMB FLEET EVOKE FORGE",
+    "sha": "5aa04738231d446e8f1a966268fbd12f6edf1b70e9f2880feca5a48f0645880d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/inventory_rebalancing.card"
+  },
+  "@aibast-agents-library/inventory_visibility": {
+    "seed": 3131358552737328726,
+    "name_seed": 729076227,
+    "incantation": "WRENCH CROAK OAT ETCH FORT MOLTEN BLADE",
+    "sha": "f4f2b52675401affd38d677734f10c7dcda11e6044c76e8714ad87eb11dbc8c4",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/inventory_visibility.card"
+  },
+  "@aibast-agents-library/it_helpdesk": {
+    "seed": 8279755765930667339,
+    "name_seed": 1927780864,
+    "incantation": "SOLID CROAK COBALT ANVIL DYNASTY SHIELD WELD",
+    "sha": "e49fc4aec2a63863b418b2b06612249f528b4c2e5873e85c53209a0f74bcac90",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/it_helpdesk.card"
+  },
+  "@aibast-agents-library/it_ticket_management": {
+    "seed": 381057127156556376,
+    "name_seed": 88721776,
+    "incantation": "STENCH PALADIN SENTINEL PASS PLATEAU BRINK FORGE",
+    "sha": "1b2aac93d1be4db6833d600242695b9c2fa44f23cfa30f44a2cbfa0de65e355f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/it_ticket_management.card"
+  },
+  "@aibast-agents-library/license_renewal_expansion": {
+    "seed": 7396811422879724128,
+    "name_seed": 1722204364,
+    "incantation": "LARCH SOVEREIGN PRIME AUGURY OBEY POISE TEMPER",
+    "sha": "a0f233f461a2ac4a8f0bc7a88a3ea9491699b8ca5f56182269725806bad7725e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/license_renewal_expansion.card"
+  },
+  "@aibast-agents-library/loan_origination_assistant": {
+    "seed": 14273408934978795408,
+    "name_seed": 3323286989,
+    "incantation": "COVENANT OVERLORD EXTINGUISH REVELATION STAR EEL STAMP",
+    "sha": "b0a2ffd509f08179d1545340c99d9e39311c3a74ad0dbb752c3b472ff08b2cab",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/loan_origination_assistant.card"
+  },
+  "@aibast-agents-library/maintenance_scheduling": {
+    "seed": 16055120389735064948,
+    "name_seed": 3738124014,
+    "incantation": "PANTHER RUSK SAGE GREATSWORD CRUMB SABRE ETCH",
+    "sha": "36bf3cd30c947e72eea7b177e439d42d03d422da371e6c4346bb7b3a5c9e0571",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/maintenance_scheduling.card"
+  },
+  "@aibast-agents-library/meeting_prep": {
+    "seed": 17730020682391761346,
+    "name_seed": 4128092127,
+    "incantation": "KNOLL SOAK ENIGMA EVOLVE VERVE AWE BIND",
+    "sha": "2db37c836e4f98349e90884cdfa6251256921c373f078ea858348db6fa0f412f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/meeting_prep.card"
+  },
+  "@aibast-agents-library/mission_reporting_assistant": {
+    "seed": 9239080674509203253,
+    "name_seed": 2151141100,
+    "incantation": "REVELATION CHAMPION EXTINGUISH HALBERD MONOLITH ETCH CHISEL",
+    "sha": "d2cb6bced07fbf5325ce39d386831aa63da7e485cbdf6b1f66e64cf757f624bb",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/mission_reporting_assistant.card"
+  },
+  "@aibast-agents-library/next_best_action": {
+    "seed": 10025994443272366861,
+    "name_seed": 2334358739,
+    "incantation": "OVERLORD HUSK THISTLE REMEDY TRANSCEND BELOW CHISEL",
+    "sha": "82561f66b44e471fad88f4e8633a70442e6d8329986dd4fda6344345d7413767",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/next_best_action.card"
+  },
+  "@aibast-agents-library/omnichannel_engagement": {
+    "seed": 16390491864010865935,
+    "name_seed": 3816208770,
+    "incantation": "ASHEN CHIEFTAIN SHARD TRIBE FRAY RAGE CARVE",
+    "sha": "de588c0c9ed45069db06b03545eaf9b4e64c7479628c889ac51ad3136953b1a4",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/omnichannel_engagement.card"
+  },
+  "@aibast-agents-library/one_click_crm_intake": {
+    "seed": 1713805111300072952,
+    "name_seed": 399026347,
+    "incantation": "BOND RUSK VEIN ROAST NEXUS HUNT ANVIL",
+    "sha": "a0c315b653af863e7164944b608ac29eb9563ee440a25a7ca15b10f0b277cdb5",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/one_click_crm_intake.card"
+  },
+  "@aibast-agents-library/order_status_communication": {
+    "seed": 1417363157664017509,
+    "name_seed": 330005576,
+    "incantation": "IRON CROAK AURA CLANG TRANSCEND PROWL ANVIL",
+    "sha": "cb06d95ce79f13297b42e30e3276268a95ebcbbc47662465a98004e59260773d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/order_status_communication.card"
+  },
+  "@aibast-agents-library/patient_intake": {
+    "seed": 840299925014852615,
+    "name_seed": 195647572,
+    "incantation": "WELD OVERLORD FRIDGE CUSP COMET GLACIER FORGE",
+    "sha": "4d45c0aed09d1d33d12fcb12124466b5ba00e0f9da12ce2e19b88cd212838fc9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/patient_intake.card"
+  },
+  "@aibast-agents-library/permit_license_management": {
+    "seed": 15492855745775155274,
+    "name_seed": 3607211575,
+    "incantation": "OAK WARLORD PRIME RAGE ZEAL PASS ETCH",
+    "sha": "f18a68cfb9d334733e27ebff933aff444659361e5501b1154ffde79e9a41dde4",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/permit_license_management.card"
+  },
+  "@aibast-agents-library/personalized_marketing": {
+    "seed": 13430271910399845800,
+    "name_seed": 3126978853,
+    "incantation": "GRACE RUSK OAT SCROLL TRUSS GRAIN CAST",
+    "sha": "2c1e7696dbb225dd8a7a2c6c9f302e38a06b1f9b5f597e4485adb6a34d656b7d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/personalized_marketing.card"
+  },
+  "@aibast-agents-library/personalized_shopping_assistant": {
+    "seed": 12826547131641504102,
+    "name_seed": 2986413224,
+    "incantation": "WAX PALADIN SINGE BRED STARK DOOM CAST",
+    "sha": "287d0df63616c32e1e80084c8824b61dbbcdafc8f736a203cc32bcdd6f307e16",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/personalized_shopping_assistant.card"
+  },
+  "@aibast-agents-library/pipeline_velocity": {
+    "seed": 3953971822722691162,
+    "name_seed": 920605804,
+    "incantation": "SHORE SOAK ALLIANCE GUILE TINCTURE BAIT RUNE",
+    "sha": "d9ec301c73876653d615fe0f348220b15dc514352cbb020f09d5d2c7419f57ba",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/pipeline_velocity.card"
+  },
+  "@aibast-agents-library/portfolio_rebalancing": {
+    "seed": 6581827105700458465,
+    "name_seed": 1532451041,
+    "incantation": "RATCHET CAST VASSAL MASTER ENCHANT BYPASS SMELT",
+    "sha": "b98116f56dccf07642943845e647815c38261f250fd509d8cc04ef8e4678aa4d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/portfolio_rebalancing.card"
+  },
+  "@aibast-agents-library/prior_authorization": {
+    "seed": 2707536209626541719,
+    "name_seed": 630397398,
+    "incantation": "STRAIN MONARCH FRIDGE CONJURE EXILE PHASE BLADE",
+    "sha": "3cf011dd6f5a032d43a87577b92a6d36f2b24f2a22e746e651ec177389fbc7d7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/prior_authorization.card"
+  },
+  "@aibast-agents-library/procurement_agent": {
+    "seed": 5953920645506673794,
+    "name_seed": 1386255176,
+    "incantation": "OMEN CROAK DISK KNELL HYDRA NEXUS SMELT",
+    "sha": "e079dc0b7aaf75e7691f0da5f7a03080d7a230282bb2f0be1a5bd2b16d786627",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/procurement_agent.card"
+  },
+  "@aibast-agents-library/procurement_support": {
+    "seed": 18264571842642197414,
+    "name_seed": 4252552018,
+    "incantation": "PUZZLE SPOKE SENTINEL JUST AEGIS ANNUL BIND",
+    "sha": "4ea228b2a06a0a24e6aef7537da7581644b9fb06d6b7391e60446f8f1b0486f4",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/procurement_support.card"
+  },
+  "@aibast-agents-library/product_feedback_synthesizer": {
+    "seed": 17606540497672480195,
+    "name_seed": 4099342156,
+    "incantation": "MOOR CHAMPION PANTHER DEEP HERALD SHRIEK BIND",
+    "sha": "3755d1ad6197aa829e4a118c45cac35ac65f7816fb11d95b6686ecef2015726e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/product_feedback_synthesizer.card"
+  },
+  "@aibast-agents-library/product_reference": {
+    "seed": 2709938328044190111,
+    "name_seed": 630956685,
+    "incantation": "GEM SPOKE TEMPEST HAUNT MOSAIC WAX BLADE",
+    "sha": "a792fbcd8a98e7b7f5a287833bd37b9cf0913b80a771f99411c85ed76eeb04ed",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/product_reference.card"
+  },
+  "@aibast-agents-library/production_line_optimization": {
+    "seed": 11447213470199194507,
+    "name_seed": 2665262080,
+    "incantation": "BESTOW MUSK COIL ANVIL BREACH CUTLASS BRAND",
+    "sha": "48a5c75e4b5f34c361a1ad711501873b4d26a387030e655bc8fb564aba4bc51c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/production_line_optimization.card"
+  },
+  "@aibast-agents-library/proposal_copilot": {
+    "seed": 1841735498398838829,
+    "name_seed": 428812461,
+    "incantation": "SPARK SOAK SAGE SUPREME CENTURION PERCH ANVIL",
+    "sha": "e939f3f0d1026d9df5d19818583552036f294c3cc0d6f7b7376f4217ce66537a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/proposal_copilot.card"
+  },
+  "@aibast-agents-library/proposal_generation": {
+    "seed": 14350164510408194833,
+    "name_seed": 3341158039,
+    "incantation": "MATRIARCH WARLORD THISTLE TORCH SEAL PLATEAU STAMP",
+    "sha": "3692bf5f31f215940729a1d05dd706dfffcc356457f796ea1d78b0bd8798d6ff",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/proposal_generation.card"
+  },
+  "@aibast-agents-library/regulatory_compliance_fed": {
+    "seed": 16478343906997446426,
+    "name_seed": 3836663418,
+    "incantation": "OUTCAST CONSECRATE EXTINGUISH SILL SURPASS LYRE CARVE",
+    "sha": "802bf9ea0de3e60a0f5ad3cd483850748ab4c6f6461cddcab79cb783e1c0d68a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/regulatory_compliance_fed.card"
+  },
+  "@aibast-agents-library/resource_utilization": {
+    "seed": 2213254919820554190,
+    "name_seed": 515313567,
+    "incantation": "MONOLITH CROAK CHARGE MISS CHIEFTAIN TRIDENT ANVIL",
+    "sha": "bbf13dac36b2f012ae7e90ea3d914c60232079b8655e7f41ce713e987f0727d4",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/resource_utilization.card"
+  },
+  "@aibast-agents-library/returns_complaints_resolution": {
+    "seed": 7707877473434353400,
+    "name_seed": 1794630073,
+    "incantation": "SCOUT BROKE OAT MAELSTROM RATCHET DECAY TEMPER",
+    "sha": "598efb7549271e95589e46a42f1b96314ab429c29a9c25e819d67cf45a52182e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/returns_complaints_resolution.card"
+  },
+  "@aibast-agents-library/returns_exchange": {
+    "seed": 16427931656570809614,
+    "name_seed": 3824925901,
+    "incantation": "PALE MONARCH SHARD EPIPHANY BALLISTA NIGHT CARVE",
+    "sha": "59e3f57c8e2e4b4dd3beba8de47aa97e0fdc0e27a12619ce3f5143906eb4695c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/returns_exchange.card"
+  },
+  "@aibast-agents-library/revenue_forecast": {
+    "seed": 18173504355209722482,
+    "name_seed": 4231348716,
+    "incantation": "DREDGE SPOKE WIELD GLAIVE CALM OVERLORD BIND",
+    "sha": "bb2858e63dc9eb94fbfb93e37717d65dcd8aa0fb1010834a41b6156ff338f237",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/revenue_forecast.card"
+  },
+  "@aibast-agents-library/sales_chat": {
+    "seed": 743639680721625695,
+    "name_seed": 173142105,
+    "incantation": "MARCH PALADIN QUAKE WAX THRONE VEIN FORGE",
+    "sha": "bb846d9499a1671e398544b6a19851401cb9e08425c537404daa89c10564dbd7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/sales_chat.card"
+  },
+  "@aibast-agents-library/sales_coach": {
+    "seed": 4606979804393780853,
+    "name_seed": 1072646073,
+    "incantation": "DANCE STROKE DISK TEMPEST MARROW FULCRUM RUNE",
+    "sha": "85adfc88b6ab9414bfba153a9fe3a0826806493eb1cb1d7e32d33471c8383cb9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/sales_coach.card"
+  },
+  "@aibast-agents-library/sales_qualification": {
+    "seed": 3025664746881563672,
+    "name_seed": 704467470,
+    "incantation": "PRONG CHIEFTAIN THISTLE SHOCK BRINK KISS BLADE",
+    "sha": "f642603110548d1347a54fb9c4e0933f4e9d878e97d585b216222b1bff895d0d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/sales_qualification.card"
+  },
+  "@aibast-agents-library/sales_simulation": {
+    "seed": 3409504503786645323,
+    "name_seed": 793837128,
+    "incantation": "TONIC CHAMPION DISK KNELL NIGHT BARROW BLADE",
+    "sha": "1b3c2d1728da4a8bf0cd435f699899b0d3720a1e9ec0cca26aa7b904f29fe2be",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/sales_simulation.card"
+  },
+  "@aibast-agents-library/sharepoint_document_extractor": {
+    "seed": 3204150057113364789,
+    "name_seed": 746024320,
+    "incantation": "NOBLE HUSK VEIN CROWN DEVASTATE VAGRANT BLADE",
+    "sha": "7727e8f104a1f0f392e755d59475526d3e9cceab86e33df8a552b25641e3ddbf",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/sharepoint_document_extractor.card"
+  },
+  "@aibast-agents-library/slg_grants_management": {
+    "seed": 11818896142975508918,
+    "name_seed": 2751801196,
+    "incantation": "SNARE MUSK THISTLE PLUCK GONG GLOW MOLD",
+    "sha": "f2d339f9b682d7d60020e2af9a2cc0f76401cf9c684438bdb7b94ca272ddbbcf",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/slg_grants_management.card"
+  },
+  "@aibast-agents-library/software_competitive_intel": {
+    "seed": 3107145353423104918,
+    "name_seed": 723438652,
+    "incantation": "DOMINION HUSK RAY WHIRL SLIME KNOW BLADE",
+    "sha": "35ed7ea9a8bee22a81b889a5d1381ba64d185c72979b10f2e1b53da3e10d45ad",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/software_competitive_intel.card"
+  },
+  "@aibast-agents-library/software_customer_onboarding": {
+    "seed": 9696532239747785842,
+    "name_seed": 2257649842,
+    "incantation": "GRANITE RUSK PANTHER CLIMB GLEAM FORCE CHISEL",
+    "sha": "ee1aacaafa15def53564fef02526f825ed96179f0ba2cc0d44c59b30361a6400",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/software_customer_onboarding.card"
+  },
+  "@aibast-agents-library/speech_to_crm": {
+    "seed": 18066875627483051477,
+    "name_seed": 4206522281,
+    "incantation": "BROOK STROKE VEIN STEAD SNATCH COAST BIND",
+    "sha": "abc6a5e1ba6d43cab2105d10e071cd381b7914e239eecc144aec12d1069fecd4",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/speech_to_crm.card"
+  },
+  "@aibast-agents-library/staff_credentialing": {
+    "seed": 7498395653551960420,
+    "name_seed": 1745856286,
+    "incantation": "PHASE SOVEREIGN HAUNT RELIC LABYRINTH EMBLEM TEMPER",
+    "sha": "64da857f4d386488fc4fcc14f26c4e3640e26ba425a01dbbdf4dd7a172cf2169",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/staff_credentialing.card"
+  },
+  "@aibast-agents-library/stakeholder_intelligence": {
+    "seed": 15018051093375102546,
+    "name_seed": 3496662502,
+    "incantation": "COURSE CROAK THISTLE EMPIRE BYPASS HONE ETCH",
+    "sha": "e0ad543d0724bb75d4f0fe9f72e4c66e1134a2d595ef323bfa755fce9f1bb0b0",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/stakeholder_intelligence.card"
+  },
+  "@aibast-agents-library/stalled_deal_detection": {
+    "seed": 5854357498148564447,
+    "name_seed": 1363073824,
+    "incantation": "MOAT CROAK ALLIANCE FATE WARDEN VINE SMELT",
+    "sha": "ca0c21dae5ef2cb3a3ad5989f61fd76d8609c281d172d770196558da486c1696",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/stalled_deal_detection.card"
+  },
+  "@aibast-agents-library/store_associate_copilot": {
+    "seed": 15486760774949025133,
+    "name_seed": 3605792479,
+    "incantation": "COBRA STROKE OAT EVOLVE TEMPER GAMBIT ETCH",
+    "sha": "18bc22769f2164b0e42597bc653353ac9e8986b6112f6357e5720b658f4806ab",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/store_associate_copilot.card"
+  },
+  "@aibast-agents-library/supplier_risk_monitoring": {
+    "seed": 2701276264207625678,
+    "name_seed": 628939891,
+    "incantation": "CHANNEL CROAK SAGE STRAIT WRATH QUASAR BLADE",
+    "sha": "55788586b97e856c874d69aac5ddff338f0e16ef6d6a35e6b311bc7c87febd2a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/supplier_risk_monitoring.card"
+  },
+  "@aibast-agents-library/supply_chain_disruption_alert": {
+    "seed": 16804600987838460767,
+    "name_seed": 3912626064,
+    "incantation": "NEGATE SOAK OAT BALM DAIS BROOM CARVE",
+    "sha": "1b19b148e2bc03e8698e82214823fd172bddc42040d1b56ec534b67bb58f26d3",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/supply_chain_disruption_alert.card"
+  },
+  "@aibast-agents-library/support_ticket_resolution": {
+    "seed": 6795368757143024027,
+    "name_seed": 1582170081,
+    "incantation": "FIG SOVEREIGN PANTHER COMMAND REIGN ACCORD SMELT",
+    "sha": "60a297115d490d2b73915fcdd82b880bc189031ec41188a62702eebb1de3eda8",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/support_ticket_resolution.card"
+  },
+  "@aibast-agents-library/time_entry_billing": {
+    "seed": 17145926618142354208,
+    "name_seed": 3992097130,
+    "incantation": "BRIGAND HUSK STRIKE NERVE INVOKE TRANSCEND CARVE",
+    "sha": "d1962d6cab258bcffe9f854ef823b215a66e052db49ff343d53248c732bda14e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/time_entry_billing.card"
+  },
+  "@aibast-agents-library/triage_bot": {
+    "seed": 13241370335976767116,
+    "name_seed": 3082996778,
+    "incantation": "SOAK BROKE SENTINEL NEXUS SLIME THRONE CAST",
+    "sha": "2dc99ac5a8acdc5783da859fe636224156adc252ea18ce2db1846f9c78f120ba",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/triage_bot.card"
+  },
+  "@aibast-agents-library/underwriting_support": {
+    "seed": 18409195487267397654,
+    "name_seed": 4286224834,
+    "incantation": "BARB PALADIN DIVINATION CHAMPION TRAIN CONDUIT BIND",
+    "sha": "c0c97affcd3110c5726b4df8a29829678702c4611174cb7380b93292f8b4a327",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/underwriting_support.card"
+  },
+  "@aibast-agents-library/utility_billing_assistance": {
+    "seed": 1823358465969498010,
+    "name_seed": 424533725,
+    "incantation": "DYNASTY BRAND BEDROCK EXTINGUISH WALL SOURCE ANVIL",
+    "sha": "6281fe06039625e2c4ab62c0d893b89b62f5b4181dac56586de6f039d9b6d6f2",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/utility_billing_assistance.card"
+  },
+  "@aibast-agents-library/voice_to_crm_d365": {
+    "seed": 6632932916069154274,
+    "name_seed": 1544350040,
+    "incantation": "STEP CHIEFTAIN VEIN PULSAR GLIDE CONSUL SMELT",
+    "sha": "3347798869b58e686dc1ed7ce223439f6552247b6db31352789b0c61034fc343",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/voice_to_crm_d365.card"
+  },
+  "@aibast-agents-library/voice_to_crm_email": {
+    "seed": 2718308106806898885,
+    "name_seed": 632905426,
+    "incantation": "PLATE SOAK DISK ICHOR NEBULA FALCON BLADE",
+    "sha": "935cfd3656125346d60547f0d14fc19e37bcb28fcc4df8f1e41bc0f283c4975c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/voice_to_crm_email.card"
+  },
+  "@aibast-agents-library/voice_to_crm_servicenow": {
+    "seed": 11805318406759655329,
+    "name_seed": 2748639883,
+    "incantation": "TAPESTRY RUSK SENTINEL DROIT PROWL SPIRAL MOLD",
+    "sha": "ba3569ad7835181e0834a805d99a8d22cad10a2e2fde415448b04892e00875f7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/voice_to_crm_servicenow.card"
+  },
+  "@aibast-agents-library/wealth_insights_generator": {
+    "seed": 4746954344674107422,
+    "name_seed": 1105236435,
+    "incantation": "HAMMER PALADIN EXTINGUISH REMEDY GRYPHON NICKEL SHARD",
+    "sha": "35fbfdd0a1d363b7a4b5ff4898b48644bf10a8bb6654e1e182b4fef76aea4d14",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/wealth_insights_generator.card"
+  },
+  "@aibast-agents-library/win_loss_analysis": {
+    "seed": 2520427991298359032,
+    "name_seed": 586832871,
+    "incantation": "SCOUT BROKE THISTLE CYCLE FRENCH STAFF BLADE",
+    "sha": "8e741f4ada3bccc6e51f20049bc483bbd5102bae6e6d96455a926d1f04bc11d8",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/win_loss_analysis.card"
+  },
+  "@aibast-agents-library/win_probability": {
+    "seed": 15452430195650870719,
+    "name_seed": 3597799268,
+    "incantation": "FORD BROKE WIELD JOT HORDE FOG ETCH",
+    "sha": "38a52178fe7e0234b08ece73afb79eb86e9f05a644db2f2632ecd4cd8a58bdf4",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/win_probability.card"
+  },
+  "@aibast-agents-library/workforce_clearance_onboarding": {
+    "seed": 15588155065239352323,
+    "name_seed": 3629400177,
+    "incantation": "RUNE OVERLORD EXTINGUISH HEATH THUNDER CRUX ETCH",
+    "sha": "8314694e6276f56603f805a728206264103bce690fdb24b3677ed4ff4c31ddc6",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/workforce_clearance_onboarding.card"
+  },
+  "@bill/neuron_agent": {
+    "seed": 12416670467582209400,
+    "name_seed": 2890981377,
+    "incantation": "HERON PHANTOM THORN SHARD GRUDGE HERMIT MOLD",
+    "sha": "cb70702632db18846b4484a3dbc7e56745b9416adcf7c578a7bec36b6f6cde38",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@bill/neuron_agent.card"
+  },
+  "@borg/borg_agent": {
+    "seed": 6828785747777692595,
+    "name_seed": 1589950581,
+    "incantation": "SABRE MUSK NICKEL CREEK GUARD GLAIVE SMELT",
+    "sha": "7d77003cfe0399c9b7e22f50c519e31d83ceec99a8795041393f1deda1e44039",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@borg/borg_agent.card"
+  },
+  "@cat-agent-skills/accessibility_pass": {
+    "seed": 27950782190482898131,
+    "name_seed": 2212831312,
+    "incantation": "RALLY CHIEFTAIN DIRGE WILD KNELL BEND PRONG",
+    "sha": "930470f4165ceef9036081675fa608d6069ac6f38361b0d66404c1b968f81dfb",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/accessibility_pass.card"
+  },
+  "@cat-agent-skills/acroform_writer": {
+    "seed": 29924264348194848336,
+    "name_seed": 2672318433,
+    "incantation": "TERSE BROKE RAPID WIELD RIDGE PAGODA EDGE",
+    "sha": "000123c71cef701d6484c7f27d612c3d85a1b6caff491245e1d19acb7a038cdf",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/acroform_writer.card"
+  },
+  "@cat-agent-skills/agent_evaluation_designer": {
+    "seed": 29290906914822693770,
+    "name_seed": 2524853414,
+    "incantation": "ANOINT MUSK MERIDIAN GRAIN HAUNT GEM EDGE",
+    "sha": "83d42472d07088b7677e1774554c74aa1a014ce640fa543b6c90bba96cbd76a9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/agent_evaluation_designer.card"
+  },
+  "@cat-agent-skills/agent_harness_explorer": {
+    "seed": 35624676012963150133,
+    "name_seed": 3999548950,
+    "incantation": "NOBLE WARLORD RAPID GORGE WITHER EMPIRE HAMMER",
+    "sha": "5a9d85160607b2e8e9683947499fdedb2be7f9cdde092106f09305654fd4cc4b",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/agent_harness_explorer.card"
+  },
+  "@cat-agent-skills/ai_demo_assistant": {
+    "seed": 27487402339934676149,
+    "name_seed": 2104942283,
+    "incantation": "SLASH CHAMPION WOVEN INQUISITOR FROZEN REVOKE SPIKE",
+    "sha": "c22a4d583e2fcdf8a5492cc35b1680bc3be5fd56302f2d03504ef77775a8cbcc",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/ai_demo_assistant.card"
+  },
+  "@cat-agent-skills/ai_first_process_redesign": {
+    "seed": 34828338649610206599,
+    "name_seed": 3814137209,
+    "incantation": "ELK JAW MERIDIAN HALL VAGRANT SIEGE HAMMER",
+    "sha": "d5d7ee05065dde14be01cba90578f3fccf5a982b7ee11f53f58e2032795e373f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/ai_first_process_redesign.card"
+  },
+  "@cat-agent-skills/ai_usecase_assessment": {
+    "seed": 66265179397760760969,
+    "name_seed": 2543662483,
+    "incantation": "WRAITH BIND SEED GROOM NOBLE NICHE SHOCK",
+    "sha": "ef7128dd906c27af6bb7c5e7a80b34e302cb811a876e5a27dcc3dfaf6896ba19",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/ai_usecase_assessment.card"
+  },
+  "@cat-agent-skills/anonymised_case_study_writer": {
+    "seed": 34986150140366831261,
+    "name_seed": 3850880560,
+    "incantation": "REMAIN CHIEFTAIN HEDGE DAGGER WEREWOLF ECLIPSE HAMMER",
+    "sha": "276b70fe537e2c4258236bb2e1acee164a2a84921fd002bfa0b944c57fc11cf1",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/anonymised_case_study_writer.card"
+  },
+  "@cat-agent-skills/awaiting_reply": {
+    "seed": 32060860374644044677,
+    "name_seed": 3169783461,
+    "incantation": "MASTER ENDOW CROWN VEIN WARLORD SPLINTER GRIND",
+    "sha": "57e6fadb3cf4c3b97e8da6841f893f689337917259e926e1b922621a59072729",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/awaiting_reply.card"
+  },
+  "@cat-agent-skills/b2b_outreach_suite": {
+    "seed": 28701214583504515273,
+    "name_seed": 2387554969,
+    "incantation": "CAPE SOVEREIGN CROWN BIRCH AUGURY ACCORD PRONG",
+    "sha": "f71f474cd164f35c65006568a186c14feba08d57212333608148021f22ccbbf7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/b2b_outreach_suite.card"
+  },
+  "@cat-agent-skills/blog_content_auditor": {
+    "seed": 23314945094762375651,
+    "name_seed": 1133466377,
+    "incantation": "STAIR PARAGON STREAM QUAKE COMPOUND DASH CLASP",
+    "sha": "3153fec126c38c7c21904bc9250bd19b22eeb1e72558055ebe51b6ad5ea38c48",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/blog_content_auditor.card"
+  },
+  "@cat-agent-skills/blog_post_structure_pass": {
+    "seed": 27046774575538648113,
+    "name_seed": 2002350637,
+    "incantation": "GALE OVERLORD MERIDIAN STRIKE TIGER RAPIDS SPIKE",
+    "sha": "06bd2f8451e1b25cea7fdc3e6a4a499089e7f5103d27275396d9af34f1c7ed98",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/blog_post_structure_pass.card"
+  },
+  "@cat-agent-skills/booth_loop_video": {
+    "seed": 27708641585209943133,
+    "name_seed": 2156453559,
+    "incantation": "MARSH CONSECRATE RAPID GOLDEN SPITE STORM PRONG",
+    "sha": "6c53532479ea4f24d024e534242b5570c1b002051a249799edd4f6a889b8df3e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/booth_loop_video.card"
+  },
+  "@cat-agent-skills/brand_template_enforcer": {
+    "seed": 34161471197824169444,
+    "name_seed": 3658870031,
+    "incantation": "HALL OVERLORD HEDGE ROAR FRAME RISK SEAR",
+    "sha": "f7cb692d5398169c074f274ba7a18095c32165a1db6ee8615ef89031cd10550c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/brand_template_enforcer.card"
+  },
+  "@cat-agent-skills/brand_voice_pass": {
+    "seed": 35957814902706023828,
+    "name_seed": 4077113892,
+    "incantation": "HEW CROAK MERIDIAN WYRM PAGODA DAGGER STOKE",
+    "sha": "c640bb698d1048988eadf13f6a344fa05b675921a99e548b103492c88a498f08",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/brand_voice_pass.card"
+  },
+  "@cat-agent-skills/browser_uat_analyst": {
+    "seed": 24846435999137283891,
+    "name_seed": 1490044390,
+    "incantation": "PROPHECY HEIRLOOM MERIDIAN KINGDOM CHAR HAUNT THORN",
+    "sha": "aa66278c72be8edd4c77ea37108c24e04a1480d531388d48ce52eae9dc2e2eb0",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/browser_uat_analyst.card"
+  },
+  "@cat-agent-skills/business_os": {
+    "seed": 32411534146625484067,
+    "name_seed": 3251431061,
+    "incantation": "SNAP BEQUEST STREAM NORSE LUNGE BASALT QUENCH",
+    "sha": "c56d1c73945a0f44e4b6d490cec3f9784e33eccbb868c1a5e0b0394f12b0f495",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/business_os.card"
+  },
+  "@cat-agent-skills/call_for_speakers_digest": {
+    "seed": 21366214241022386777,
+    "name_seed": 679742118,
+    "incantation": "TRENCH GUILD MERIDIAN GRAIN MOLD LEFT INGOT",
+    "sha": "4b055d5ecd105e4e918525104375b83603aa0ac3fa80fc849c18bcb1a6b88b04",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/call_for_speakers_digest.card"
+  },
+  "@cat-agent-skills/campaign_deck_builder": {
+    "seed": 36222075933341397331,
+    "name_seed": 4138641958,
+    "incantation": "VERGE SOAK DIRGE LORE MOST GRIT STOKE",
+    "sha": "d52b56fb9795bdd55484ecc0013b1680991002c06e4e76d5995b9c5b08777a72",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/campaign_deck_builder.card"
+  },
+  "@cat-agent-skills/chart_builder": {
+    "seed": 31573135600499827265,
+    "name_seed": 3056226188,
+    "incantation": "BALM GUILD WYRM RUNT SCARCE IRE GRIND",
+    "sha": "389577bc057dd7b682b61165c0cf57a05ae7e0f82b88f50df7727a0643fedc82",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/chart_builder.card"
+  },
+  "@cat-agent-skills/classic_text_adventure": {
+    "seed": 29788389827970212794,
+    "name_seed": 2640682681,
+    "incantation": "LONGBOW ELM RAPID TEMPEST GAP CONJURE EDGE",
+    "sha": "2b1aad28b087780b3d6abbe60a42511caee115b6d79420b61aa7301a9ebfa5b6",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/classic_text_adventure.card"
+  },
+  "@cat-agent-skills/clt_hr_assistant": {
+    "seed": 18861325838674044470,
+    "name_seed": 96527339,
+    "incantation": "FLAUNT BRAND TWILIGHT GRAIL DASH BEAR FUSE",
+    "sha": "8b6b7a47c443414d153c3afcc6645ec9a9d1561d8bb909636a233dd3a6864e22",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/clt_hr_assistant.card"
+  },
+  "@cat-agent-skills/commenting_content": {
+    "seed": 19998310334418139450,
+    "name_seed": 361252171,
+    "incantation": "ELDER PALE HEDGE PIPE CHAR AURORA ALLOY",
+    "sha": "d68d63c12e5488d408891eb5fcce78d4fb77192a265d1ba8cc87ad8c40a59f40",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/commenting_content.card"
+  },
+  "@cat-agent-skills/competitive_battlecard_builder": {
+    "seed": 33710534760398727787,
+    "name_seed": 3553878210,
+    "incantation": "LATCH IRE WOVEN PALADIN TORQUE COIL SEAR",
+    "sha": "56a45257a02fdf7184ed237965ed2e5ac17d69a5e500bcb3378b9ee2c274a65a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/competitive_battlecard_builder.card"
+  },
+  "@cat-agent-skills/conditional_chat_reminder": {
+    "seed": 36578908877571633851,
+    "name_seed": 4221723602,
+    "incantation": "STRAY SOAK THRONE ICHOR PERCH TYPHOON STOKE",
+    "sha": "29305f54f26e19f595ed9247f553e5fb3b67036c871220b6e25da3247827be7f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/conditional_chat_reminder.card"
+  },
+  "@cat-agent-skills/conference_session_abstract_pack": {
+    "seed": 26821252143542706731,
+    "name_seed": 1949842104,
+    "incantation": "CROFT PALADIN MERIDIAN WOVEN BURST PALE SPIKE",
+    "sha": "d2d0ba40d05ee1da6e36b9b2b9d938c793fc7bf35802b029d66527b146100171",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/conference_session_abstract_pack.card"
+  },
+  "@cat-agent-skills/content_quality_auditor": {
+    "seed": 27977399692373537211,
+    "name_seed": 2219028682,
+    "incantation": "GAMBIT SOVEREIGN RUNT CENTURION HALBERD DIRE PRONG",
+    "sha": "981615b3117a3f646fd62e7a3694cf3d9a7ff6fe5eb86817ed2eb74fefe82784",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/content_quality_auditor.card"
+  },
+  "@cat-agent-skills/copilot_agent_advisor": {
+    "seed": 20167080258405281196,
+    "name_seed": 400546981,
+    "incantation": "METTLE CROAK MERIDIAN VEIN BARBICAN PACT ALLOY",
+    "sha": "94711a1a6aa2419c6ee343a9e7f3201fedbf11f01e2870be2da62d5eb1961353",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/copilot_agent_advisor.card"
+  },
+  "@cat-agent-skills/copilot_agents_news_scout": {
+    "seed": 35403155120661079520,
+    "name_seed": 3947972098,
+    "incantation": "RAMP CONSECRATE THRONE CHISEL BRAVE COMPASS HAMMER",
+    "sha": "925ede9ca7859047f125ac2614ea8809f0a67e442aab7683c8176071287ece31",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/copilot_agents_news_scout.card"
+  },
+  "@cat-agent-skills/copilot_studio_agent_test": {
+    "seed": 18846825792859289633,
+    "name_seed": 93151284,
+    "incantation": "FROST WARLORD MERIDIAN KEEP PULSAR CORONA FUSE",
+    "sha": "91b104c7650a5cb83e4f2bd99fa18ab9869b27b5ff875c625873d8d6c28b5d00",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/copilot_studio_agent_test.card"
+  },
+  "@cat-agent-skills/copilot_studio_harness_picker": {
+    "seed": 24713351107349063463,
+    "name_seed": 1459058149,
+    "incantation": "GLADIATOR CHAMPION STREAM ALLIANCE QUELL MESA THORN",
+    "sha": "d63462314eb7a386582d253fffecea1caa7ce73fe41688666dd716851feb9077",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/copilot_studio_harness_picker.card"
+  },
+  "@cat-agent-skills/copilot_studio_knowledge_readiness": {
+    "seed": 32498170903802164563,
+    "name_seed": 3271602753,
+    "incantation": "VERGE ETCH GUILE RAY CRYPT DAGGER QUENCH",
+    "sha": "91583f643172ef8950b89b674a6f4e92941da9d230312358e49856c61eab90a9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/copilot_studio_knowledge_readiness.card"
+  },
+  "@cat-agent-skills/copilot_studio_test_planner": {
+    "seed": 18855054095499670362,
+    "name_seed": 95067085,
+    "incantation": "SUMMON SECT MERIDIAN DIVINATION DOMAIN RAVEN FUSE",
+    "sha": "3d502c4232eefaeb308e82cfa7164173c775230907ae9e874ebd87a48b94081e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/copilot_studio_test_planner.card"
+  },
+  "@cat-agent-skills/copilot_studio_topic_blueprint": {
+    "seed": 60359179386846323701,
+    "name_seed": 1168564699,
+    "incantation": "POPPY SANCTIFY RAPID RAVAGE SCYTHE EAGLE HAZE",
+    "sha": "96ec870150d0b89eef6b50bec88279a4f866b1a49130c3151afcb1a824d865c3",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/copilot_studio_topic_blueprint.card"
+  },
+  "@cat-agent-skills/cowork_use_case_one_pager": {
+    "seed": 29823587042296868900,
+    "name_seed": 2648877671,
+    "incantation": "QUAKE SOVEREIGN CROWN FOG MOST CONQUER EDGE",
+    "sha": "b40b126356f37768c374f0ee12f893e2084d84c1d82080da3c5edd872ec7e3fa",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/cowork_use_case_one_pager.card"
+  },
+  "@cat-agent-skills/doc_format_converter": {
+    "seed": 18875157703004267969,
+    "name_seed": 99747821,
+    "incantation": "BLUFF CHAMPION RAPID KATANA TOKEN BOAR FUSE",
+    "sha": "646137d6c6434e3e32e7735bca531cec3469afaa71a68c41189f3b5a1ca3afe1",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/doc_format_converter.card"
+  },
+  "@cat-agent-skills/enterprise_agent_design_authority": {
+    "seed": 70206976244623097772,
+    "name_seed": 3461433580,
+    "incantation": "GRAIL CHIEFTAIN OBSIDIAN HALBERD JUST ALLIANCE ROAR",
+    "sha": "766af2c338bb0b123ec0479c2a8b9224f388b310a6ce448d23a07bb81521bfcc",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/enterprise_agent_design_authority.card"
+  },
+  "@cat-agent-skills/eu_greenwashing_analysis": {
+    "seed": 22731412081755305821,
+    "name_seed": 997602010,
+    "incantation": "REVOKE OVERLORD DISMISS IMPALE FRONT MOLTEN RIVET",
+    "sha": "511c71ccf6b099ceb0b2bfecf1920a3e6ef88280f472791e738e77d1e280a9e8",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/eu_greenwashing_analysis.card"
+  },
+  "@cat-agent-skills/exam_prep_learning_plan_builder": {
+    "seed": 26441555241911858729,
+    "name_seed": 1861437030,
+    "incantation": "TUFT ZAP MERIDIAN DUB LIGAMENT BALLISTA BARB",
+    "sha": "b4ce93909390b9500c59552e5dfa3015032ca454d2e770756b11b95fa628d7df",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/exam_prep_learning_plan_builder.card"
+  },
+  "@cat-agent-skills/gantt_chart_generator": {
+    "seed": 22083193072740218293,
+    "name_seed": 846676761,
+    "incantation": "TRAP OVERLORD RAPID STONE FIBER VERSE RIVET",
+    "sha": "8f947a65e459cfc67222cd991cdcef638e12f23bff9af5b0c68a2e10013cc873",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/gantt_chart_generator.card"
+  },
+  "@cat-agent-skills/generating_podcast_script": {
+    "seed": 22514433129985097461,
+    "name_seed": 947082661,
+    "incantation": "WATCHER CHIEFTAIN DISMISS VEIN DISTILL SPLIT RIVET",
+    "sha": "029e222e27fe84e1e967f97b58ec6480116f21487e477f3b4818ecba5733d2e0",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/generating_podcast_script.card"
+  },
+  "@cat-agent-skills/global_greenwashing_claim_auditor": {
+    "seed": 23978027438796975146,
+    "name_seed": 1287852266,
+    "incantation": "PYRE CAST SCEPTER MAZE PATRIARCH PORTENT CLASP",
+    "sha": "c3d3253dd87a8c04d90cc840ad31f97dbed41b7cdd096eb2c29b13f319c04d2d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/global_greenwashing_claim_auditor.card"
+  },
+  "@cat-agent-skills/grab_my_files": {
+    "seed": 29416481463118475464,
+    "name_seed": 2554091017,
+    "incantation": "CLOAK SOAK BEAR QUAKE PEAK HORDE EDGE",
+    "sha": "f92f81b34ad085956fe9d5e3549b3cb516b85851de439f5a09421cd5efed6300",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/grab_my_files.card"
+  },
+  "@cat-agent-skills/idea_refiner": {
+    "seed": 24012288088108313025,
+    "name_seed": 1295829195,
+    "incantation": "BLUFF HUSK DISMISS INQUISITOR CLOAK CURE CLASP",
+    "sha": "408336e5b4423f290f23962ab21e40aceb83c292d5ef40db40b937e5614ae699",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/idea_refiner.card"
+  },
+  "@cat-agent-skills/institutional_knowledge": {
+    "seed": 34811813518126233199,
+    "name_seed": 3810289652,
+    "incantation": "SNATCH BEQUEST MERIDIAN ZIGGURAT GOLD VISOR HAMMER",
+    "sha": "e0b4afbb71344915b5120fec64579af2668d88c27c36c4d81bb611d8e797c21d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/institutional_knowledge.card"
+  },
+  "@cat-agent-skills/iterative_file_editing": {
+    "seed": 25659239176717608482,
+    "name_seed": 1679289877,
+    "incantation": "THEFT RUSK MERIDIAN VALE MAGNOLIA HALO BARB",
+    "sha": "f06d3a5baabe193adc29a06c855f74ae4f5f59237952f5f5aefd38bd4738f72d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/iterative_file_editing.card"
+  },
+  "@cat-agent-skills/knowledge_corpus_curator": {
+    "seed": 21614544198994635773,
+    "name_seed": 737560942,
+    "incantation": "CRESCENT ANOINT RUNT DECOY FUME BINDER INGOT",
+    "sha": "31e489449ea2fc4bdd88adbcbbf1ec8bd5c9a8621547104b1b4c9ea1e26817ee",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/knowledge_corpus_curator.card"
+  },
+  "@cat-agent-skills/knowledge_source_router": {
+    "seed": 25181189838996121147,
+    "name_seed": 1567985342,
+    "incantation": "HALT RUSK MERIDIAN SCOUT JAB REVOKE THORN",
+    "sha": "c48d5efd3eb0fd037f57cf5d5635b80a2235491745422d4b9e7b26250ec56780",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/knowledge_source_router.card"
+  },
+  "@cat-agent-skills/lab_column_mapper": {
+    "seed": 33297216966344323960,
+    "name_seed": 3457645162,
+    "incantation": "CONQUER STAMP AMISS GRACE TRIUMPH MASTER QUENCH",
+    "sha": "86ced29050af6efa2753b72dc703944bcafe38c9f23ea5d1e62a2108585c8f8c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/lab_column_mapper.card"
+  },
+  "@cat-agent-skills/linkedin_content_system": {
+    "seed": 29852130918456245647,
+    "name_seed": 2655523560,
+    "incantation": "JAW BROKE MERIDIAN LATTICE INGOT TREATY EDGE",
+    "sha": "cfb882ee2f22b5555c684b2b428c7b146cb2bb1dfac33754683c3347304cd7c5",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/linkedin_content_system.card"
+  },
+  "@cat-agent-skills/linkedin_content_writer": {
+    "seed": 30314931047807594889,
+    "name_seed": 2763277612,
+    "incantation": "ION SECT MERIDIAN SHRINE CHAR BOLD HONE",
+    "sha": "28331febb61e92fa6f1fc3aa1c78484ed0dd9b02b1de05e96e9918078cb4c2a4",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/linkedin_content_writer.card"
+  },
+  "@cat-agent-skills/lookup_dataverse_table": {
+    "seed": 27560453582994681207,
+    "name_seed": 2121950851,
+    "incantation": "CRANE CROAK THRONE SECT THATCH HELIX SPIKE",
+    "sha": "3e431c98e808187d3f45d6514395292ae3b1002a2963abd7ca40e807fb4d3d6e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/lookup_dataverse_table.card"
+  },
+  "@cat-agent-skills/mct_excellence_iq": {
+    "seed": 31138013546594443793,
+    "name_seed": 2954916440,
+    "incantation": "PACK CHISEL AMISS PULSAR GRANITE CHISEL GRIND",
+    "sha": "a3f78561669489d520d5130f55f12e6b09622e12c97b15024f425fa0c74d5f9e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/mct_excellence_iq.card"
+  },
+  "@cat-agent-skills/meeting_analyzer": {
+    "seed": 64472069468328966982,
+    "name_seed": 2126171544,
+    "incantation": "LIGAMENT LEGACY FIRE LARCH THYME MAUL PULSE",
+    "sha": "c3b2ee550e69e04352727bbd86156aeaff041482d7c7ae29123629ba37449afb",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/meeting_analyzer.card"
+  },
+  "@cat-agent-skills/microsoft_ai_platform_advisor": {
+    "seed": 21958476100631803304,
+    "name_seed": 817638828,
+    "incantation": "GRACE ETCH DREAM STREAM SPARK FLASH RIVET",
+    "sha": "7a696105c16e0cb919dcd17b719fb6bd1ab4b61405799525272d2b91f3481451",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/microsoft_ai_platform_advisor.card"
+  },
+  "@cat-agent-skills/monte_carlo_analysis": {
+    "seed": 24127525053766057459,
+    "name_seed": 1322659892,
+    "incantation": "TRIAL BIND ALTAR KEEP RUNT MACHETE CLASP",
+    "sha": "473a9f32661836bf701e050beb7bbfab374aeeb0e9e22728a5e62d7d973fa769",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/monte_carlo_analysis.card"
+  },
+  "@cat-agent-skills/own_voice_builder": {
+    "seed": 19976748481783804083,
+    "name_seed": 356231911,
+    "incantation": "SPIRE SOVEREIGN CROWN AEON CHALICE APEX ALLOY",
+    "sha": "4bd244df19c4dd7e7bfa68ce5678473e38b2b0d46dd2de4bdf1dd2b680249502",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/own_voice_builder.card"
+  },
+  "@cat-agent-skills/pattern_radar": {
+    "seed": 35591970846606636651,
+    "name_seed": 3991934185,
+    "incantation": "LATCH OVERLORD CROWN ENIGMA CLASP TRANSCEND HAMMER",
+    "sha": "14147c27ed139ed9d474a6bbc9a5d391753fc2912d3422068eea324f84776be8",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/pattern_radar.card"
+  },
+  "@cat-agent-skills/pattern_radar_automation": {
+    "seed": 22125439694198809109,
+    "name_seed": 856513069,
+    "incantation": "CRUX PALADIN CROWN STRIKE SOLAR QUIVER RIVET",
+    "sha": "0fde4525f96e689e1f4f55fdf66ee97df5f61e055fbbe4ae3f1865a796f848b2",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/pattern_radar_automation.card"
+  },
+  "@cat-agent-skills/pdf_table_data_conversion": {
+    "seed": 19375988763041610974,
+    "name_seed": 216356639,
+    "incantation": "SPITE HEIRLOOM SWARM GLYPH SUN ARTIFACT FUSE",
+    "sha": "f2fa8e915d73556c85a536f79fef6712f0b5e15ff31124cbddc8aec801b8e635",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/pdf_table_data_conversion.card"
+  },
+  "@cat-agent-skills/persona_reaction_panel": {
+    "seed": 24445699646156318360,
+    "name_seed": 1396740687,
+    "incantation": "GRAIN RUSK MERIDIAN VIVID SPHINX KEEP THORN",
+    "sha": "2012807f0cb9a841cb59d9667824be79dabfd5992900a0627095513c13b670df",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/persona_reaction_panel.card"
+  },
+  "@cat-agent-skills/phi_deidentifier": {
+    "seed": 24418072315665856344,
+    "name_seed": 1390308198,
+    "incantation": "ENCHANT ETCH ALTAR DUB LATCH PARRY THORN",
+    "sha": "8e7f4c71ea4e85869a9a3484d8fc0e81dc600c74ce07475a8d3d16958b9be964",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/phi_deidentifier.card"
+  },
+  "@cat-agent-skills/pov_line_generator": {
+    "seed": 26216556370724534078,
+    "name_seed": 1809050398,
+    "incantation": "CRUMB STROKE MERIDIAN NICKEL ASPEN SENTINEL BARB",
+    "sha": "a542f79879c893012ea58b3f87a8308c8682cc4e02ff074560f4398dd2348bed",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/pov_line_generator.card"
+  },
+  "@cat-agent-skills/power_automate_desktop_assessment": {
+    "seed": 68788066229896752167,
+    "name_seed": 3131067848,
+    "incantation": "SURGE CROAK FLOOD BRIGAND FERN HOST CRACK",
+    "sha": "e9f91dc0aaaee0ea3dbb705256bf414a6ba394ebb6702463157342232c6f4b2d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/power_automate_desktop_assessment.card"
+  },
+  "@cat-agent-skills/power_automate_documentation": {
+    "seed": 27194302278272561951,
+    "name_seed": 2036699607,
+    "incantation": "MARAUDER SECT STREAM DISPEL JOT TRENCH SPIKE",
+    "sha": "e48aea064e5cddda4794bbafb042efe2f032c5b3829fb59e66b0f4827dd3ed3b",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/power_automate_documentation.card"
+  },
+  "@cat-agent-skills/power_bi_model_review": {
+    "seed": 26512115128794364099,
+    "name_seed": 1877865534,
+    "incantation": "QUIVER WARLORD GLEAM CURVE ORDEAL FULCRUM BARB",
+    "sha": "ee58895f3204274ee72e5f0fcfa1f90c83a99653f658c7da95b1755774444e1d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/power_bi_model_review.card"
+  },
+  "@cat-agent-skills/powerpoint_deck_designer": {
+    "seed": 35365894427884665309,
+    "name_seed": 3939296667,
+    "incantation": "BRIDGE LEGION DIRGE PATCH SPRINT CREAM HAMMER",
+    "sha": "0d5e1816268165331d04a3532b54d3ccd282cd2b8954e8716ad51f0601b3ad9d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/powerpoint_deck_designer.card"
+  },
+  "@cat-agent-skills/presentation_talk_track_builder": {
+    "seed": 27638400058365977093,
+    "name_seed": 2140099179,
+    "incantation": "MARK MUSK HEDGE METTLE REAGENT KEYSTONE SPIKE",
+    "sha": "5fa1ae6336c952837f0a36ccf7eac89bd829219ce580b07c6577b8c30b69d4a9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/presentation_talk_track_builder.card"
+  },
+  "@cat-agent-skills/process_sop_architect": {
+    "seed": 22920043961592200025,
+    "name_seed": 1041521292,
+    "incantation": "CONJURE SPOKE HEDGE RUNT SHORE MASTER RIVET",
+    "sha": "67c8387a4a335134e55b055f6aa5b56dfd73c6cceef84de9a0978c01ea078137",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/process_sop_architect.card"
+  },
+  "@cat-agent-skills/redlining_content": {
+    "seed": 33359225728461453626,
+    "name_seed": 3472082702,
+    "incantation": "ELDER PALE HEDGE WAVE GARGOYLE BALLISTA QUENCH",
+    "sha": "49ccf9b46674ce2b524a88d843fb1c2a3b508540b678b39d2f77276e945d974b",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/redlining_content.card"
+  },
+  "@cat-agent-skills/regulation_monitor": {
+    "seed": 57388571475478980522,
+    "name_seed": 476916147,
+    "incantation": "CHALICE RUSK FLOOD SLIME DRUM ROGUE GALE",
+    "sha": "1cc2463a53d17881e4ac70d9764271dc445bf4b69002f3c1549ba7c359ff3fb9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/regulation_monitor.card"
+  },
+  "@cat-agent-skills/rich_html_presentation": {
+    "seed": 27509182213346962530,
+    "name_seed": 2110013305,
+    "incantation": "HIVE CROAK CROWN HALL BOOM PURGE SPIKE",
+    "sha": "40ce208a935eaf286606852bb35c8a4ee2b87170a0969203b4e9f9c8b80cb0ea",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/rich_html_presentation.card"
+  },
+  "@cat-agent-skills/route_map_visualizer": {
+    "seed": 30079006195894466956,
+    "name_seed": 2708347077,
+    "incantation": "AIM CARVE SPIN HERMIT DINT REEF HONE",
+    "sha": "1a845f751e5dca8e595b535dc60f30c3ec6f982058a4efaa6856267323d32ac7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/route_map_visualizer.card"
+  },
+  "@cat-agent-skills/scrollytelling_data": {
+    "seed": 27841089851242328124,
+    "name_seed": 2187291574,
+    "incantation": "ROAR SECT BEAR CRIMSON MAIM CODEX PRONG",
+    "sha": "bd9b7ca6a618fbfcb73f576bfc75d88a206f4e695645762ba3dee19f3693aff1",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/scrollytelling_data.card"
+  },
+  "@cat-agent-skills/sharepoint_list_formatter": {
+    "seed": 26600462447276603397,
+    "name_seed": 1898435497,
+    "incantation": "SMELT SPOKE BEAR STEAD DOLMEN DISSOLVE SPIKE",
+    "sha": "cec5e9b6ec512998e49ee5f29386cf5be25ffe697f8811bf0ec339689f743fd9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/sharepoint_list_formatter.card"
+  },
+  "@cat-agent-skills/sharepoint_list_insight_report_generator": {
+    "seed": 28781562456426821886,
+    "name_seed": 2406262416,
+    "incantation": "NIGHT SPOKE STALLION QUALM ETHER PORTCULLIS PRONG",
+    "sha": "6ef7213f1c0a03e9014705fe9d3be797119e78193434124ca7316c814fb726e7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/sharepoint_list_insight_report_generator.card"
+  },
+  "@cat-agent-skills/skill_authoring_coach": {
+    "seed": 34457608329729024132,
+    "name_seed": 3727819830,
+    "incantation": "SAGE MUSK MERIDIAN ROUT BADGE ENDOW SEAR",
+    "sha": "934b89cbfc2379b08e029da5537c216204bdb8e76b7bc722697153acc3097ffe",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/skill_authoring_coach.card"
+  },
+  "@cat-agent-skills/spend_more_time_with_friends_and_family": {
+    "seed": 32874899832773812574,
+    "name_seed": 3359316792,
+    "incantation": "NEBULA GUILD THRONE GRUDGE ROGUE LEGION QUENCH",
+    "sha": "e9b71ffcaedd7b0e5f98c673ac4ea464e43a1e69fb5475bc03a17f3438614b99",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/spend_more_time_with_friends_and_family.card"
+  },
+  "@cat-agent-skills/stoic_negotiator": {
+    "seed": 30226545718965838833,
+    "name_seed": 2742698799,
+    "incantation": "MYRRH CHISEL SCYTHE MACE FARM SPITE HONE",
+    "sha": "ee55d0dfd6772553c51432ec69db3e355dc7be681f6864fa4cb8d4171674044e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/stoic_negotiator.card"
+  },
+  "@cat-agent-skills/style_analyzer": {
+    "seed": 25243945169274548848,
+    "name_seed": 1582596706,
+    "incantation": "HEDGE SOVEREIGN CROWN ELM OMEN FEDERATION THORN",
+    "sha": "19ca8f24cbebba4e15ca4c645d8e3aa473f86fabddfc8875511e735c76c81f48",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/style_analyzer.card"
+  },
+  "@cat-agent-skills/tool_tracer": {
+    "seed": 25850552073942087361,
+    "name_seed": 1723833382,
+    "incantation": "SURVEY BEQUEST MERIDIAN LORE AEON VERVE BARB",
+    "sha": "ba8d6e6098d43fe265106796bf3b8336dbf6d3a1e898d232664c400cb7e31896",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/tool_tracer.card"
+  },
+  "@cat-agent-skills/travel_cost_estimator": {
+    "seed": 20013808337493436524,
+    "name_seed": 364860581,
+    "incantation": "AMBER PARAGON MERIDIAN VEIN TINCTURE STAG ALLOY",
+    "sha": "23a196735a9d21c17630eeac3cde41274ab15a8b8c4014f8e8affcfd6ec52159",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/travel_cost_estimator.card"
+  },
+  "@cat-agent-skills/vacation_urgent_forwarder": {
+    "seed": 29376800221766889788,
+    "name_seed": 2544852008,
+    "incantation": "VIVID SECT CROWN DIRGE DISPEL STRUT EDGE",
+    "sha": "4e27ec21e51a6bf2a86561d41e7f0171cfa64fdcedb63c833c33f222c3ce4411",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/vacation_urgent_forwarder.card"
+  },
+  "@cat-agent-skills/vendor_contract_risk_review": {
+    "seed": 34248029653787487289,
+    "name_seed": 3679023492,
+    "incantation": "SHOCK MONARCH STREAM SWARM LION FORTRESS SEAR",
+    "sha": "9ea85c802643e6d43685c2ae263ecd7b05c4053a6037852c94fd0dacbda70c1d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/vendor_contract_risk_review.card"
+  },
+  "@cat-agent-skills/wcag_power_platform": {
+    "seed": 30336937773038055076,
+    "name_seed": 2768401452,
+    "incantation": "STEAD CAST TWILIGHT SHRINE FRIDGE WILD HONE",
+    "sha": "81539b1be7feb6d92289a17d089653d728beb61e7d3b58ffddc9bfa53cb93f6e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/wcag_power_platform.card"
+  },
+  "@cat-agent-skills/what_to_use_when": {
+    "seed": 33682846751230797175,
+    "name_seed": 3547431593,
+    "incantation": "CRANE CLAN MERIDIAN STEAD ORB WRATH SEAR",
+    "sha": "26d8d8ea4112044ae35683f51611195e07616cc7cf75998331f3e106daf3be54",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/what_to_use_when.card"
+  },
+  "@cat-agent-skills/whiteboard_to_infographic": {
+    "seed": 36019019243102020823,
+    "name_seed": 4091364138,
+    "incantation": "AMBUSH CONSECRATE HEDGE NEXUS SILENT ARC STOKE",
+    "sha": "932894a2489f9284396a19f2f49609219ef1a488212d75a2058c38b30e45e39f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/whiteboard_to_infographic.card"
+  },
+  "@cat-agent-skills/wikipedia_human_style_writing": {
+    "seed": 23448475821218345692,
+    "name_seed": 1164556422,
+    "incantation": "GOLDEN ENDOW DISMISS DINT DECOY SOLAR CLASP",
+    "sha": "bf624ca55016f4af1d601ea2874fa8e6a483cc8aef12dc6d6173a6c07f9c3048",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/wikipedia_human_style_writing.card"
+  },
+  "@cat-agent-skills/work_brief": {
+    "seed": 31155959096643829744,
+    "name_seed": 2959094714,
+    "incantation": "SAFFRON HEIRLOOM CROWN TYPHOON MIST PRONG GRIND",
+    "sha": "62caa66b1fb7fe475a5c1b05c3eac18acb4534921e2f0d8263b80d65575d151a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/work_brief.card"
+  },
+  "@cat-agent-skills/work_iq_signalboard": {
+    "seed": 34653850475019641510,
+    "name_seed": 3773511015,
+    "incantation": "COST PALADIN MERIDIAN FOG REVELATION BURST HAMMER",
+    "sha": "f33989c1ce6a86c5a3a15326d8b1c6a3305f1586ef7736e6afef1e024ba93e95",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/work_iq_signalboard.card"
+  },
+  "@discreetRappers/agent_generator_agent": {
+    "seed": 9916893050914225492,
+    "name_seed": 2308956592,
+    "incantation": "CREST HORDE PANTHER OBEY RATCHET CATCH CHISEL",
+    "sha": "5662fdf48b955a1e3ab19551ee70aafa81958bc052aad7ed99ffbe219b88fc0d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/agent_generator_agent.card"
+  },
+  "@discreetRappers/agent_transpiler_agent": {
+    "seed": 13928955966432878815,
+    "name_seed": 3243087783,
+    "incantation": "MALICE MUSK PANTHER TERRAIN DIN GLEN STAMP",
+    "sha": "1ac49f91f1acdca351777f05d6c835978ece41cd9d30ae5094ba2ad7ec3602e2",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/agent_transpiler_agent.card"
+  },
+  "@discreetRappers/architecture_diagram_agent": {
+    "seed": 16191435701781930066,
+    "name_seed": 3769862396,
+    "incantation": "GROVE MUSK BADGE SAFFRON SANCTIFY SMOKE CARVE",
+    "sha": "709fa093afb119af2e10b81fe8462148c4505fd51cdecd53f0f54c242a496388",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/architecture_diagram_agent.card"
+  },
+  "@discreetRappers/copilot_studio_transpiler_agent": {
+    "seed": 14025379966502974255,
+    "name_seed": 3265538245,
+    "incantation": "AUGUR SOAK PANTHER HERMIT BLAZE VORTEX STAMP",
+    "sha": "f0b079ce39919ef481bd10b0ef52eb10871410cd4b0b38aac79b95e1425a4617",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/copilot_studio_transpiler_agent.card"
+  },
+  "@discreetRappers/demo_script_generator_agent": {
+    "seed": 17174429428190159959,
+    "name_seed": 3998733458,
+    "incantation": "RIDGE RUSK FRIDGE PLUME BARROW FEDERATION CARVE",
+    "sha": "a65ec702f5479293994a280f6b9ffbe5acfa6cc72be68812692492c2f03460ce",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/demo_script_generator_agent.card"
+  },
+  "@discreetRappers/dynamics_crud_agent": {
+    "seed": 9628502902113448084,
+    "name_seed": 2241810528,
+    "incantation": "CHIMERA SOAK ORDEAL STALLION PANACEA WOLF CHISEL",
+    "sha": "b93207f505a0179943d0595ac887579a0d06ededacce40cfb9cfb6ae94bb1756",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/dynamics_crud_agent.card"
+  },
+  "@discreetRappers/email_drafting_agent": {
+    "seed": 53027766882806255,
+    "name_seed": 12346489,
+    "incantation": "DAIS TRIBE OAT HALL STONE FLASH FORGE",
+    "sha": "8d68b4ee2e95437eeb38def8277654775e6763750f0dfdf86f31bbc5198a2dc0",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/email_drafting_agent.card"
+  },
+  "@discreetRappers/powerpoint_generator_agent": {
+    "seed": 4049171833047104537,
+    "name_seed": 942771284,
+    "incantation": "EDGE BROKE FRIDGE NADIR AIM SECT RUNE",
+    "sha": "dfeb1b4f9fe3a1c08c7c7b24cb6665a5129799b8aca0a709cdbc2f276df102a1",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/powerpoint_generator_agent.card"
+  },
+  "@discreetRappers/project_tracker_agent": {
+    "seed": 18264010640337544386,
+    "name_seed": 4252421353,
+    "incantation": "ARROW ION PANTHER ENIGMA SLIME REVOKE BIND",
+    "sha": "46876207cada268f5e520b534f4bc6a30079ed42f3c19293ca4fb452a9c0505b",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/project_tracker_agent.card"
+  },
+  "@discreetRappers/rapp_pipeline_agent": {
+    "seed": 3348533564379118675,
+    "name_seed": 779641225,
+    "incantation": "GLEN BROKE PANTHER BEREFT NEST HELIX BLADE",
+    "sha": "6d1c793ed5144296772d1ffb8ac0e96b4223e744b588ba44e1439b97206c9d7a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/rapp_pipeline_agent.card"
+  },
+  "@discreetRappers/sales_assistant_agent": {
+    "seed": 2446964785980911795,
+    "name_seed": 569728386,
+    "incantation": "SPIRE SECT HALL GUILD COSMIC WARD BLADE",
+    "sha": "845796cbc2f5c0d6d74c45fab4df5c14008797634d58ad4b0009507c6ba24d57",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/sales_assistant_agent.card"
+  },
+  "@discreetRappers/scripted_demo_agent": {
+    "seed": 11288900214771561238,
+    "name_seed": 2628401903,
+    "incantation": "NOMAD SOAK BIRCH BALLISTA MALT TEMPLAR BRAND",
+    "sha": "374fc80361eaf1fdeb6ac583ae0c8e06656f8ea0747a6defdc7af8284052e770",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/scripted_demo_agent.card"
+  },
+  "@discreetRappers/sharepoint_contract_analysis_agent": {
+    "seed": 16553900515881791106,
+    "name_seed": 3854255312,
+    "incantation": "REMISS CROAK OAT MOTE SINEW FALCON CARVE",
+    "sha": "c9ba3be52f248262807ab49a235780cd213b6dd8d707a430da4e0115f2ef18ff",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/sharepoint_contract_analysis_agent.card"
+  },
+  "@howardh/cardsmith_agent": {
+    "seed": 2269828708368528044,
+    "name_seed": 528485679,
+    "incantation": "ROAST SOAK FRIDGE MACE ETCH TORQUE ANVIL",
+    "sha": "048f37c6840785e7b9fc25e2c8b55bf06154d672f0dc97d46c6ce3b122ab819d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@howardh/cardsmith_agent.card"
+  },
+  "@howardh/chief_of_staff_agent": {
+    "seed": 11483753548010627847,
+    "name_seed": 2673769730,
+    "incantation": "KNIGHT SANCTIFY NORSE CHISEL BLISS PARAPET BRAND",
+    "sha": "d876ff3510ff2396c573dfa4e37a4dba70bd64c322ea10de91f5871c2347b9a7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@howardh/chief_of_staff_agent.card"
+  },
+  "@howardh/markdown_to_slides_agent": {
+    "seed": 7287065703655156096,
+    "name_seed": 1696652198,
+    "incantation": "STALLION PARAGON CLUTCH GRAIN FURY JUST TEMPER",
+    "sha": "4d0f4ae1bf66d1b1a536a187b4b4ef56f379079b3f109785973c7578a2cfa6a6",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@howardh/markdown_to_slides_agent.card"
+  },
+  "@howardh/prompt_to_video_agent": {
+    "seed": 3150888811887483838,
+    "name_seed": 733623470,
+    "incantation": "TREBUCHET DOMINION FRIDGE SWAY HAUNT SOLSTICE BLADE",
+    "sha": "63dfd99f3eb4ea0312f4798aa9370976847d6a743dbfa2b59204577dc6d8723a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@howardh/prompt_to_video_agent.card"
+  },
+  "@howardh/recon_agent": {
+    "seed": 12093689657637743141,
+    "name_seed": 2815781547,
+    "incantation": "SHAFT MOLD GAUNT ROAST RAVEN RITE MOLD",
+    "sha": "e53621470dae85a08268bebc0e8ab1142fa349d1c6db4b79afee5c79459cded8",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@howardh/recon_agent.card"
+  },
+  "@howardh/training_quest_agent": {
+    "seed": 737623649666474497,
+    "name_seed": 171741389,
+    "incantation": "SCEPTER PALADIN BADGE DIVINATION WYRM BROKE FORGE",
+    "sha": "8f2bb9df9c69da909789315be848790ffe8620fe1dc5b37b011bf154ecd69ad1",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@howardh/training_quest_agent.card"
+  },
+  "@howardh/tuftelove_agent": {
+    "seed": 11185514463473186453,
+    "name_seed": 2604330532,
+    "incantation": "CHAIN ETCH CRUX WYRM SOLSTICE SUBLIME BRAND",
+    "sha": "bfd5d8be521aa0bca9a5ff056de2f269a2b7cc22e4a0d85d3ae34158523e9c3f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@howardh/tuftelove_agent.card"
+  },
+  "@howardh/vaultmind_agent": {
+    "seed": 2730279786962370221,
+    "name_seed": 635692800,
+    "incantation": "TOAST DRAKE DANCE FORGE REDWOOD HERON BLADE",
+    "sha": "f97ad4f900026bc790969bde9b917da107ea543842b4eb4e5f8a8ce9e34ad107",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@howardh/vaultmind_agent.card"
+  },
+  "@kody-w/agent_team_agent": {
+    "seed": 14143365278193295497,
+    "name_seed": 3293008841,
+    "incantation": "WRAITH SANCTIFY FRIDGE REAVER COMPOUND GRAVE STAMP",
+    "sha": "4185aa17c3bb18f85069f021a4d9433346ee7c4fe07f5ffe7f15f26887d54f97",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/agent_team_agent.card"
+  },
+  "@kody-w/agent_workbench": {
+    "seed": 1741744998414297403,
+    "name_seed": 405531609,
+    "incantation": "PURE PARAGON DUSK SHATTER ASPEN TRIBE ANVIL",
+    "sha": "2eb1fdac4ec3efa3775290058cfdab75c98ebba2fbf957d7ddea31584b0b93e6",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/agent_workbench.card"
+  },
+  "@kody-w/arena_compete_agent": {
+    "seed": 54748165589850271505,
+    "name_seed": 4157116041,
+    "incantation": "MATRIARCH CROAK FRIDGE BEREFT TITAN HUNT FLASH",
+    "sha": "185ab1a49fdd8de3fd3f0f24c10820acd38ebdfcc6afa9ff59a51b3469afb1e5",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/arena_compete_agent.card"
+  },
+  "@kody-w/art_generator_agent": {
+    "seed": 50994286691416024678,
+    "name_seed": 3283098001,
+    "incantation": "THATCH CLAN SAGE HARM EDGE CREEP SMOKE",
+    "sha": "3ac830363239be610966e352fca8745c0055ae731e979d64cca2a75ecf0ec6b5",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/art_generator_agent.card"
+  },
+  "@kody-w/bakeoff_factory": {
+    "seed": 6615244234692637790,
+    "name_seed": 1540231573,
+    "incantation": "CAVE BEQUEST PANTHER NORSE PACK DAYBREAK SMELT",
+    "sha": "434885dbf97fe04140f11187e15f23e440ccdece34dac51db5e312e992bbfb1a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/bakeoff_factory.card"
+  },
+  "@kody-w/bond_rhythm_agent": {
+    "seed": 44884320758306451612,
+    "name_seed": 1860510700,
+    "incantation": "EPIC SOVEREIGN BOND HALBERD SNAP GREATSWORD BOLT",
+    "sha": "ea9ec3ffd426e5e40e17b58b6aa9908233df0f8e91c3289873d99720d7cdbf4b",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/bond_rhythm_agent.card"
+  },
+  "@kody-w/buzzsaw": {
+    "seed": 49045478717696779312,
+    "name_seed": 2829355786,
+    "incantation": "FLOOD CHAMPION FRIDGE BLAZE PHANTOM TUFT PYRE",
+    "sha": "e0944f8dc77f37dfdfe255cdb167f2db84607680ac2932d78f33c989793cf6ee",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/buzzsaw.card"
+  },
+  "@kody-w/chain_composer_agent": {
+    "seed": 45443411580415654534,
+    "name_seed": 1990684176,
+    "incantation": "FRISK WARLORD ELM THUNDER OBLITERATE POISE SURGE",
+    "sha": "523805ee8a63efb891a997ff475dbd0a9516728fb85c5cfde5252815e9fc1859",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/chain_composer_agent.card"
+  },
+  "@kody-w/commons_life_agent": {
+    "seed": 44326438973395838023,
+    "name_seed": 1730618725,
+    "incantation": "ERODE RUSK COIL HEW SLAYER PLATEAU BOLT",
+    "sha": "29f4acf77c8cac1107a242bdca59c9ecd7569d017a63a2ed526eebe9205ba0e7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/commons_life_agent.card"
+  },
+  "@kody-w/commons_show_agent": {
+    "seed": 53034262381787229487,
+    "name_seed": 3758066854,
+    "incantation": "FIERCE CROAK COIL GRAIN ENDOW VERTEX SPARK",
+    "sha": "441c5f182c33b420e0eb3b113bdb0488eccfb348d3db4b8e53752887791623a9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/commons_show_agent.card"
+  },
+  "@kody-w/connected_solution_agent": {
+    "seed": 8602904848306551721,
+    "name_seed": 2003019873,
+    "incantation": "CAULDRON WARLORD MANDATE OAT MAZE CASCADE WELD",
+    "sha": "5c6d5631b352bbbd3fc473e100b6094a1f4302b19f73a48374445eddb4f5cb4d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/connected_solution_agent.card"
+  },
+  "@kody-w/context_memory_agent": {
+    "seed": 10528932706447274464,
+    "name_seed": 2451458179,
+    "incantation": "RAMP SECT GLYPH SECT PLUME DRUID BRAND",
+    "sha": "89a0849ac739bc777e83275f489a9670c14f8a0d3e00e590888374e25f837e27",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/context_memory_agent.card"
+  },
+  "@kody-w/copilot_studio_deploy_agent": {
+    "seed": 9376612445614782493,
+    "name_seed": 2183162711,
+    "incantation": "SEAR CARVE BARB ASTRAL OPAL SHAMAN CHISEL",
+    "sha": "5ac53b987e954af448968b5a0b92cf8ff7b7685b516074259f859898f1677ff7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/copilot_studio_deploy_agent.card"
+  },
+  "@kody-w/copilot_studio_forge_agent": {
+    "seed": 16650526091635598696,
+    "name_seed": 3876752707,
+    "incantation": "HAWK BRAND CONDOR STARK STROKE HEATH CARVE",
+    "sha": "39c7055cc1d38437e08466a9bf311e478079a9ddefa3aa1fedb4542f6142e917",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/copilot_studio_forge_agent.card"
+  },
+  "@kody-w/copilot_studio_parity_deploy": {
+    "seed": 618480303241568347,
+    "name_seed": 144001167,
+    "incantation": "REEF MUSK PANTHER JOLT JUST SHAFT FORGE",
+    "sha": "3564a8eb0c24c3fac2747f90ca8a352be8cbc49b7398ab8aa011dacf554fbd33",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/copilot_studio_parity_deploy.card"
+  },
+  "@kody-w/copilot_studio_probe_agent": {
+    "seed": 15036022497651468418,
+    "name_seed": 3500846796,
+    "incantation": "OMEN PARAGON ORDEAL PORTENT COAST PYRE ETCH",
+    "sha": "5c1245b2c135d5ced6f0861a9d4aae37d4fc893740b750a2b2b30c57f86bfc42",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/copilot_studio_probe_agent.card"
+  },
+  "@kody-w/deal_desk_agent": {
+    "seed": 15213597586998962419,
+    "name_seed": 3542191718,
+    "incantation": "TWIST MOLD BEQUEST DYE JAB CLOAK ETCH",
+    "sha": "4e9f8bc9ddd918429f35948cb9c9b44918d72a074bd299492541463f9ae3e03c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/deal_desk_agent.card"
+  },
+  "@kody-w/double_jump_agent": {
+    "seed": 39785989561997994839,
+    "name_seed": 673462966,
+    "incantation": "IMBUE HUSK BADGE CRIMSON BURST CLAN STORM",
+    "sha": "dbbd4150d399fb6a1a9c5da20f6471036a96ef9bb354c6784436b4f3fea7ab1d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/double_jump_agent.card"
+  },
+  "@kody-w/education_shorts_agent": {
+    "seed": 54657433438960493003,
+    "name_seed": 4135990816,
+    "incantation": "ISLE PALADIN DUSK DOOM FLAUNT SOUL FLASH",
+    "sha": "567640aee1f102cd7b2c90bc4044526e49f47845cf5e3f4e6a035c3b7da6df5e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/education_shorts_agent.card"
+  },
+  "@kody-w/estate_factory": {
+    "seed": 50747398167468974816,
+    "name_seed": 3225614787,
+    "incantation": "WOVEN PALADIN PANTHER SOVEREIGN TRACKER FUSE SMOKE",
+    "sha": "0717136bee633563907a8e8f00e8807d7b572a1c17d02ff8e03cb7d9ec1023fc",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/estate_factory.card"
+  },
+  "@kody-w/example_private": {
+    "seed": 9902068138336725025,
+    "name_seed": 2305504898,
+    "incantation": "FROST IRE FRIDGE GUILD EPIPHANY DRENCH CHISEL",
+    "sha": "1157ed7f7d041d458b5e6f2606d9e55569cc9f9f8b012e169103c01c589c6d07",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/example_private.card"
+  },
+  "@kody-w/ez_sharpen_agent": {
+    "seed": 44635892217341948828,
+    "name_seed": 1802668923,
+    "incantation": "AEON SOAK COBALT JOIST CROAK GOLDEN BOLT",
+    "sha": "d7f3595625ee9ae3b72b5ae04409ecf268e5fb4fb2d402815db157bb156b42bb",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/ez_sharpen_agent.card"
+  },
+  "@kody-w/factory": {
+    "seed": 6401207017692351703,
+    "name_seed": 1490397150,
+    "incantation": "AMBUSH PROVOKE PANTHER CONQUER SKILL GAUNT SMELT",
+    "sha": "45ceaad64227f6a1d39f8a1d3eba80fd841566e021ec3cc07930c520e1be19b1",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/factory.card"
+  },
+  "@kody-w/flight_recorder": {
+    "seed": 7703044877886567080,
+    "name_seed": 1793504897,
+    "incantation": "HOST SPECTER VOID BADGE SUPREME FRAY TEMPER",
+    "sha": "e6226e708b89a1e160f43a86e8542e56225b4377d4e2efe0a522aecffcdb4b2c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/flight_recorder.card"
+  },
+  "@kody-w/full_rapp_leviathan": {
+    "seed": 547613733431553905,
+    "name_seed": 127501258,
+    "incantation": "PURGE CAST CHROME CENTURION AWE ALCOVE FORGE",
+    "sha": "5076845b6514a8fcfdf9cb922b0c2acc7473ec9503388d07d08b3ba44e2f6207",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/full_rapp_leviathan.card"
+  },
+  "@kody-w/git_warehouse_agent": {
+    "seed": 10089854201187936778,
+    "name_seed": 2349227248,
+    "incantation": "TRIBE HUSK CHIMERA ILLUSION BENCH REGENT CHISEL",
+    "sha": "4d15ae6d119f7492ad6a78b5f94bad8d11c58f351be501e8ab327786c871cd51",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/git_warehouse_agent.card"
+  },
+  "@kody-w/github_agent_library_agent": {
+    "seed": 12050547483781643440,
+    "name_seed": 2805736727,
+    "incantation": "SHRINE HORDE GLYPH DUNE GUST HARBOR MOLD",
+    "sha": "ecb470feda27b8c91d1a8661b49e5dcf70dc542f3dffb1c90ca50330f6aa4427",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/github_agent_library_agent.card"
+  },
+  "@kody-w/hello_world_agent": {
+    "seed": 18289705222458979460,
+    "name_seed": 4258403839,
+    "incantation": "SAGE ZAP SENTINEL PIVOT CRUX EXTINGUISH BIND",
+    "sha": "3086c87cbe580cc343971826bf552cf6680aa3608e6b842a4b31142e5dd02332",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/hello_world_agent.card"
+  },
+  "@kody-w/install_rappter_distro_agent": {
+    "seed": 17771338021313587479,
+    "name_seed": 4137712070,
+    "incantation": "RUMBLE HUSK BOAR WANDERER RELIC GRACE BIND",
+    "sha": "8116761b946324d85723e18bfa555cfdd1f641957a991ad04431d5c627809cde",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/install_rappter_distro_agent.card"
+  },
+  "@kody-w/kody2day_agent": {
+    "seed": 17715257770192547629,
+    "name_seed": 4124654869,
+    "incantation": "ZEALOT BESTOW SECT VALE SHARP OSPREY BIND",
+    "sha": "cadf4877c1117174549a675bd0223e92d5a6fa7bb0b8e9d3d6b83c11657a8aa9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/kody2day_agent.card"
+  },
+  "@kody-w/kody2day_studio_agent": {
+    "seed": 43090629577852075925,
+    "name_seed": 1442884428,
+    "incantation": "FEDERATION BIND NOON STERN WARP STALLION GUST",
+    "sha": "cb00fdda075d2f3a50c2e71cb7ddb688d7e316586f19ed0f84aed94dc355f5e7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/kody2day_studio_agent.card"
+  },
+  "@kody-w/launch_to_public_agent": {
+    "seed": 50402416842385400298,
+    "name_seed": 3145292563,
+    "incantation": "BRACE PALADIN BOND MOSS LUNAR FROZEN ASH",
+    "sha": "238dfb04e12649a124374eeb837f5118273154db45b0665dad2531d4c7887dbc",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/launch_to_public_agent.card"
+  },
+  "@kody-w/legal_helper": {
+    "seed": 7945059615535277019,
+    "name_seed": 1849853344,
+    "incantation": "PORTCULLIS GUILD FRIDGE DISMISS RISK COVENANT TEMPER",
+    "sha": "5bc5a2170f84b62a5afe10539c336798bebd03efc48f0f5e0d6a8ad3496cc515",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/legal_helper.card"
+  },
+  "@kody-w/manage_memory_agent": {
+    "seed": 2698271581314493436,
+    "name_seed": 628240309,
+    "incantation": "PIVOT TRIBE GLYPH COMPASS STUNT ASTRAL BLADE",
+    "sha": "615fe8239e20bf738eb1e983d76b7bae776ded8482c9023e285906553a69eaa9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/manage_memory_agent.card"
+  },
+  "@kody-w/matrix_arena_agent": {
+    "seed": 126488895952662726,
+    "name_seed": 29450491,
+    "incantation": "GAUNTLET SOAK COIL HICKORY PULSAR OBSIDIAN FORGE",
+    "sha": "0e4dbbd82ba6d3f821d08fbb802d880a69a199d8725f4ba612458abd10a73bf9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/matrix_arena_agent.card"
+  },
+  "@kody-w/microsoft_deck_studio_agent": {
+    "seed": 5341232827592746981,
+    "name_seed": 1243602677,
+    "incantation": "BEDROCK WRAITH DANCE BARROW CONDUIT TUSK SHARD",
+    "sha": "9540b3b7f662bb8b2c798d1e7aa80a8d252936a0add1ab9994ef04f260f6a57f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/microsoft_deck_studio_agent.card"
+  },
+  "@kody-w/neuron_swarm": {
+    "seed": 17637454415722852404,
+    "name_seed": 4106539864,
+    "incantation": "HAZE ENDOW COBALT PULSAR RALLY VAST BIND",
+    "sha": "b59f90ec6e02767038b1de5ae309d80b3df8bd5097450b62615cb269ba3b4f01",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/neuron_swarm.card"
+  },
+  "@kody-w/perpetual_loop_factory": {
+    "seed": 18392963094647028862,
+    "name_seed": 4282445436,
+    "incantation": "CHARM HEIRLOOM COBALT THRONE FLEET ZIGGURAT BIND",
+    "sha": "82ec94a24ce52bec41b3188068a67d0579ae46249a7c471b4d10f8ce6120a7ae",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/perpetual_loop_factory.card"
+  },
+  "@kody-w/plant_seed_agent": {
+    "seed": 37238134152071358347,
+    "name_seed": 80244151,
+    "incantation": "BESTOW CONSECRATE ELM GOLDEN PEARL DEEP FIRE",
+    "sha": "75c259962a6edb4ea54ce5ec0da5b27f1ff32b0a2e63c78463e8cfe1de3fdb4d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/plant_seed_agent.card"
+  },
+  "@kody-w/play_youtube_video_agent": {
+    "seed": 64494354722991498,
+    "name_seed": 15016262,
+    "incantation": "IRE ORDER ORDEAL HISS CLANG SHOCK FORGE",
+    "sha": "1d20252519ee1922f84582db8f30932ff989b89684326ff2589bb68f3ccf7e8f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/play_youtube_video_agent.card"
+  },
+  "@kody-w/power_apps_code_app_agent": {
+    "seed": 4920082107970368948,
+    "name_seed": 1145545884,
+    "incantation": "LURE BLEAK CHROME HEDGE ENIGMA GRAVE SHARD",
+    "sha": "fa47311104f23328f267df3c64d8a877d7c6e89689fce0db4cda5e7fbb86bfab",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/power_apps_code_app_agent.card"
+  },
+  "@kody-w/predictive_asset_maintenance_intelligence": {
+    "seed": 11614853319453454341,
+    "name_seed": 2704293774,
+    "incantation": "SMELT SOAK RAY SALT BOOM MOSS MOLD",
+    "sha": "fe81230fb3ee4059ce921d216a08568ed85ae4112c2b2ed8bc387de0033b0349",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/predictive_asset_maintenance_intelligence.card"
+  },
+  "@kody-w/project_tracker_agent": {
+    "seed": 16476529652296202916,
+    "name_seed": 3836241004,
+    "incantation": "STEAD LEGACY BADGE PLUCK STONE FLUTE CARVE",
+    "sha": "46acd7a650c947d5b166789d4ad3801cf1c15f9d22ce411ee27fd27fccae0bfe",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/project_tracker_agent.card"
+  },
+  "@kody-w/prompt_extractor": {
+    "seed": 12848396680882170249,
+    "name_seed": 2991500469,
+    "incantation": "ION HUSK CLUTCH COMPASS ROAST HYDRA CAST",
+    "sha": "a2d82d8693fc4de5ca16b6ae0c6692f67a916357f0120b005bc378af64ba6bab",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/prompt_extractor.card"
+  },
+  "@kody-w/prototype_lock_factory_agent": {
+    "seed": 15808311325904089379,
+    "name_seed": 3680659301,
+    "incantation": "SNAP SOVEREIGN PANTHER HEW CATCH CRIMSON ETCH",
+    "sha": "a08eda6bf99886484d572d6ca83bd607a1ab8681bd3e26fd5a417a7197abcb44",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/prototype_lock_factory_agent.card"
+  },
+  "@kody-w/rapp_leviathan_factory": {
+    "seed": 1006668578285824239,
+    "name_seed": 234383293,
+    "incantation": "BRISK IRE COBALT SENTINEL GOLD AWAKEN FORGE",
+    "sha": "3b93d27aa839caae807563db612efe51a2d47858cc074fc755dc742489c48654",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rapp_leviathan_factory.card"
+  },
+  "@kody-w/rapp_sdk_builder": {
+    "seed": 8864751416184144236,
+    "name_seed": 2063985778,
+    "incantation": "VIPER ENVOY DUSK BASIN JOIST SURVEY WELD",
+    "sha": "5cd364daf155a1fe83c1b2ba3ae151a88de397028fe859d4575cafcc7debe35e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rapp_sdk_builder.card"
+  },
+  "@kody-w/rapp_sentinel_agent": {
+    "seed": 9983162944433694679,
+    "name_seed": 2324386254,
+    "incantation": "PARAPET BRAND RAGE VESTIGE CATALYST BRED CHISEL",
+    "sha": "68547a1a27a1b4b7ca60f2b62b147ebe01d845be5402c7c99f21aff3fca43f98",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rapp_sentinel_agent.card"
+  },
+  "@kody-w/rapp_skill_bridge_agent": {
+    "seed": 13439628186326413100,
+    "name_seed": 3129157281,
+    "incantation": "INQUISITOR CAST CONDOR DISK BERSERKER THREAD CAST",
+    "sha": "1c837992a8477541dc1ba89d5e9661f8ef9d7580f7e92305081d13ba93899e2e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rapp_skill_bridge_agent.card"
+  },
+  "@kody-w/rapp_x_notary_canary_agent": {
+    "seed": 16785949889267118827,
+    "name_seed": 3908283517,
+    "incantation": "ICECAP AIM COIL ORDEAL GRAIL JOLT CARVE",
+    "sha": "7b44d19aa6d8e8de690eb2db145d80fb9e2d09f25a0fc44e78fa4a8fb5349130",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rapp_x_notary_canary_agent.card"
+  },
+  "@kody-w/rappter_engine_agent": {
+    "seed": 18299495556831787817,
+    "name_seed": 4260683329,
+    "incantation": "LEGIONNAIRE WARLORD EPIC RAY SPITE EVOLVE BIND",
+    "sha": "da22375c95dcc3f261a253a6b94f5c7c3cb06dcaaf1586f9c0ccba39089377ad",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rappter_engine_agent.card"
+  },
+  "@kody-w/rappterbook_agent": {
+    "seed": 52555372028508826,
+    "name_seed": 12236501,
+    "incantation": "BRAIN WARLORD AIM TINCTURE SUPREME FLARE FORGE",
+    "sha": "f3f609b1ef4d96edba61e7eee4b566ee4c95724e6c3599f0f7e552812ffcbcb7",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rappterbook_agent.card"
+  },
+  "@kody-w/rappterpedia_agent": {
+    "seed": 16689037603366512672,
+    "name_seed": 3885719367,
+    "incantation": "FIRE PARAGON ENHANCE BELLOW NEGATE ALCOVE CARVE",
+    "sha": "0eebbcc30bad1916798ee8bb8b5cb4b25afc09153741d91b5114b97d2d0f4057",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rappterpedia_agent.card"
+  },
+  "@kody-w/rar_remote_agent": {
+    "seed": 13515315761908692801,
+    "name_seed": 3146779668,
+    "incantation": "FILAMENT BEQUEST GLYPH BLOOM STAMP TEMPEST CAST",
+    "sha": "26a0c3b06aca0bfd85c885071e91086f590229ea7faabc138aad1cec861a7cd0",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rar_remote_agent.card"
+  },
+  "@kody-w/recon_deck_agent": {
+    "seed": 2971425136199101038,
+    "name_seed": 691838827,
+    "incantation": "SCRATCH HONE WARD METTLE HYMN SCARCE BLADE",
+    "sha": "5600ec2aaa518ea794ed6c17d807de2102abff06f7fd49927acb67183533c55e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/recon_deck_agent.card"
+  },
+  "@kody-w/second_life_agent": {
+    "seed": 53529968244163229005,
+    "name_seed": 3873482369,
+    "incantation": "CORE STROKE COIL BADGE ETHER DECOY FLARE",
+    "sha": "8f0750d430cfe97b19e2cde25d38cda7b28db08833a14d8cdfd90ed2cd0de990",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/second_life_agent.card"
+  },
+  "@kody-w/skill_toaster_agent": {
+    "seed": 7786951904550601248,
+    "name_seed": 1813041024,
+    "incantation": "HEFT WOKE EPIC CROWN CITADEL MARSHAL TEMPER",
+    "sha": "31ac908161ce288003d76f53b4a977990db43e98e035e39335cad1c675a1b5ce",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/skill_toaster_agent.card"
+  },
+  "@kody-w/transcript2prototype": {
+    "seed": 40157413781133075371,
+    "name_seed": 759941906,
+    "incantation": "GOBLET CHISEL BRUNT CORRODE BEHEMOTH REAGENT STORM",
+    "sha": "ea824e81b34e216309035c5122cc2544ed25148694fa8778f797457005275b7c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/transcript2prototype.card"
+  },
+  "@kody-w/twin_egg_hatcher": {
+    "seed": 8075652905997056003,
+    "name_seed": 1880259464,
+    "incantation": "RUNE LEGACY COBALT HEFT ADVANCE SHARD WELD",
+    "sha": "6cc4e80dfac060077c22419142bcfa97fec18f2ab2ab452cfcfd6c4ae8ba61c9",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/twin_egg_hatcher.card"
+  },
+  "@kody-w/twin_me": {
+    "seed": 7154277121291989206,
+    "name_seed": 1665734947,
+    "incantation": "FLANK STAMP CHROME SPECTER GROWL FORT TEMPER",
+    "sha": "5729d142f14d6b8ef77110f04c3850b07890e3ab86f1844f5b648918b962c933",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/twin_me.card"
+  },
+  "@kody-w/vibe_coding_loop": {
+    "seed": 51487962924449407810,
+    "name_seed": 3398040956,
+    "incantation": "STRAND MUSK BADGE THRONE LAW BRED SMOKE",
+    "sha": "a677f773120feedffeaeefa00199a15a00d0cf1aef5d340bc4c62dfa589a4b45",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/vibe_coding_loop.card"
+  },
+  "@kody-w/windows_vm_install_lab_agent": {
+    "seed": 5571140270470871847,
+    "name_seed": 1297132175,
+    "incantation": "GLADIATOR SPOKE COIL JOLT RIFT TINCTURE SHARD",
+    "sha": "3a153c04fabf96b9d96272f32eb08e94cff836fb4ee8d2f7daf8963afa52d2b5",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/windows_vm_install_lab_agent.card"
+  },
+  "@kody-w/workiq": {
+    "seed": 18420763323030972077,
+    "name_seed": 4288918181,
+    "incantation": "TOAST CONSECRATE AIM VEIN RAPIER CYPRESS BIND",
+    "sha": "2e3bd29154b0d7a196ce810ef82cb2d99dbb261193ffe61f4e69e7d39910b73d",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/workiq.card"
+  },
+  "@kody-w/wp_publish_agent": {
+    "seed": 11229273338302576350,
+    "name_seed": 2614518939,
+    "incantation": "FROZEN STROKE ORDEAL PATCH BIRCH WATCHER BRAND",
+    "sha": "b1e84894fabd5107262d03e27fa9828fe6d7e68d7b1e7984dd0aa2182b89647e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/wp_publish_agent.card"
+  },
+  "@rapp/basic_agent": {
+    "seed": 2282791009467636617,
+    "name_seed": 531503700,
+    "incantation": "CONSECRATE URN DUSK NADIR KNIT ASPEN ANVIL",
+    "sha": "b39340e4ef750c2fa06d5a9f7561dffa4bdf21db1057d2d4067e1a9ce6fec8be",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/basic_agent.card"
+  },
+  "@rapp/commons_post": {
+    "seed": 12680104614663171396,
+    "name_seed": 2952316919,
+    "incantation": "STRONG CROAK GLYPH BARBICAN VISOR PINNACLE MOLD",
+    "sha": "23fc19c424d8e34e6371fd9101c33accb71501def15853356dcc22e39fdee12b",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/commons_post.card"
+  },
+  "@rapp/drift": {
+    "seed": 2087148261022121127,
+    "name_seed": 485952073,
+    "incantation": "PRISM CHIEFTAIN ROAR THUD PARAGON MORSEL ANVIL",
+    "sha": "0ce0884d57f14db825dcccac4b547cb1c3102890939029cb183c75ecdfdedf53",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/drift.card"
+  },
+  "@rapp/drift_watcher": {
+    "seed": 17977580014137392578,
+    "name_seed": 4185731526,
+    "incantation": "KNOLL DRAKE WARD WANDERER VAST MARCH BIND",
+    "sha": "fd149e957c6f702233130e4795ce06dcb7f762fa8dd853abda2c66dc22ed8964",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/drift_watcher.card"
+  },
+  "@rapp/egg_hatcher": {
+    "seed": 11747276046260251558,
+    "name_seed": 2735125843,
+    "incantation": "PUZZLE PARAGON GLYPH WHOLE THEME BOW MOLD",
+    "sha": "17c04c6fa1a1401dd0d2d5ec73c537c2cb0a68a309cc40021396836baa49f484",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/egg_hatcher.card"
+  },
+  "@rapp/estate_outbound": {
+    "seed": 13191466770999423966,
+    "name_seed": 3071377699,
+    "incantation": "CONDUIT SOAK GLYPH SPECTER AX HEATH CAST",
+    "sha": "2be44fbde2cd3fc157dba5c147ba069370450d40f1bcfdde215b2f34eee9163a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/estate_outbound.card"
+  },
+  "@rapp/exec_brief_agent": {
+    "seed": 44708000625045412387,
+    "name_seed": 1819457970,
+    "incantation": "WEFT URN QUENCH BELOW FRAY REBEL BOLT",
+    "sha": "940fb254767b55aef02e08197e8d9a601f977549adeb411366fb17b4a7c2fa97",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/exec_brief_agent.card"
+  },
+  "@rapp/fleet_commander": {
+    "seed": 17085564239353749608,
+    "name_seed": 3978042919,
+    "incantation": "JADE PALADIN EPIC EPIC HAMMER MARROW CARVE",
+    "sha": "a745d4a97c0217be1e95323e2adaee473ce65b857f5cab7cc9ccdde1cd3cc9f2",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/fleet_commander.card"
+  },
+  "@rapp/hacker_news": {
+    "seed": 12872764946609739620,
+    "name_seed": 2997174148,
+    "incantation": "SHATTER EEL MANDATE SWARM DARK VORTEX CAST",
+    "sha": "bbcc31ae1e9792a003c4a53e36c6f6f4ba277bab3b008a911836b89a7c76c431",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/hacker_news.card"
+  },
+  "@rapp/learn_new": {
+    "seed": 2538772095262403840,
+    "name_seed": 591103941,
+    "incantation": "GLEAM CROAK GLYPH HERMIT PROCLAIM BASTION BLADE",
+    "sha": "30073a174c906f74e214d8525da39b937c588b227f8f2b5614253c42b5ba9b12",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/learn_new.card"
+  },
+  "@rapp/moment_factory_agent": {
+    "seed": 48759968425442943959,
+    "name_seed": 2762880241,
+    "incantation": "PARAPET MUSK EPIC GHOUL HAUNT LYRE PYRE",
+    "sha": "a55f76ff057fac0f1fbb8445db98b72debb478a24462d7ffbd80584173e577c4",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/moment_factory_agent.card"
+  },
+  "@rapp/ping_agent": {
+    "seed": 5582206618789361866,
+    "name_seed": 1299708760,
+    "incantation": "MANTLE JAB DUSK PULSAR FULCRUM REVOKE SHARD",
+    "sha": "9b8e9244a0e0f4b6edc611ca50fd888e3d7bcc447f61744429e3903b075f6ca0",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/ping_agent.card"
+  },
+  "@rapp/pitch_deck_agent": {
+    "seed": 2887497502809669128,
+    "name_seed": 672297902,
+    "incantation": "GUILD CHIEFTAIN SECT SWAY SLEDGE BADGE BLADE",
+    "sha": "24f3b9c5101ec50f28344a1949743f40a6a2d0304727a5f7847b5bdf5052ec85",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/pitch_deck_agent.card"
+  },
+  "@rapp/rapp": {
+    "seed": 6614668339448129688,
+    "name_seed": 1540097487,
+    "incantation": "LORE FELL WARD SLIVER SMELT DAYBREAK SMELT",
+    "sha": "1abdfb8a93764d6e88607b5c902f9a98d5f0fed47fdd4ba7f7d378812191522e",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/rapp.card"
+  },
+  "@rapp/rapp_publish_agent": {
+    "seed": 38408946557819563920,
+    "name_seed": 352845157,
+    "incantation": "COVENANT MONARCH MANDATE HEW CRESCENT CALM FROST",
+    "sha": "e5cef7534eff64556bed3bb9ec50856925287a0fb20d1f8ef633ac5791ac7689",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/rapp_publish_agent.card"
+  },
+  "@rapp/rapplication_agent": {
+    "seed": 2918317732439668490,
+    "name_seed": 679473796,
+    "incantation": "PARAGON STROKE GLYPH SWARM MANGROVE DEFT BLADE",
+    "sha": "182c4b0fbf72a365687e2cc01f3f6cf3596abc9e2e8f73ddda9f8d911b95e59a",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/rapplication_agent.card"
+  },
+  "@rapp/rar_steward": {
+    "seed": 4423138620711250150,
+    "name_seed": 1029842212,
+    "incantation": "LUNGE ANOINT GLYPH WYRM SHAFT ENCHANT RUNE",
+    "sha": "8790a8109388a2d6e237cf85d95f1ea48b96043c758416e3856e25e0f3807852",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/rar_steward.card"
+  },
+  "@rapp/store_navigator_agent": {
+    "seed": 49830379751782101969,
+    "name_seed": 3012104799,
+    "incantation": "MINARET SOAK MANDATE BOAR SOMBER CHAOS ASH",
+    "sha": "11dd8d51a6ce6c04f1c68d3c9d4bcf6d47d1bc22da831506ce2cab55bf6c452c",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/store_navigator_agent.card"
+  },
+  "@rapp/swarm_factory_agent": {
+    "seed": 10141477066655803476,
+    "name_seed": 2361246633,
+    "incantation": "VALE HUSK GLYPH STEAD MOOR AUGUR CHISEL",
+    "sha": "656456207c490c70eab7d28c197be489124255807fa0ed3a09b37cda2cd81cd8",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/swarm_factory_agent.card"
+  },
+  "@rapp/twin_agent": {
+    "seed": 11907957554557236082,
+    "name_seed": 2772537422,
+    "incantation": "EXPUNGE STAMP WARD ANCIENT JET NADIR MOLD",
+    "sha": "79d995c2cad6bb7a06393d885a3f74724608574a2f66685ad12d0a2748c9b77f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/twin_agent.card"
+  },
+  "@rapp/vibe_builder_agent": {
+    "seed": 55242556522092698942,
+    "name_seed": 4272225400,
+    "incantation": "BRIGHT ELK MANDATE RAMP DUSK CAULDRON FLASH",
+    "sha": "7da81b64027e5742f98adebbe71e9f3cb07ab9cc0e063317113b85530b127053",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/vibe_builder_agent.card"
+  },
+  "@rarbookworld/bookfactory": {
+    "seed": 8003489415513650359,
+    "name_seed": 1863457592,
+    "incantation": "PARRY STROKE PANTHER GRUDGE SLIT GHOUL TEMPER",
+    "sha": "e3c918cfc96eef08d32bff9ac649e241ed845a79884c35cf5e1fb0f453799c16",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rarbookworld/bookfactory.card"
+  },
+  "@rarbookworld/momentfactory": {
+    "seed": 2634476594081183925,
+    "name_seed": 613386881,
+    "incantation": "SLASH SPOKE PANTHER BADGE ANOINT SNAP BLADE",
+    "sha": "0ee64e29eb6b8af302b9a2c5103b6cfa09739c39105af54c22cf634f75b350f6",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rarbookworld/momentfactory.card"
+  },
+  "@wildhaven/bellows_agent": {
+    "seed": 17618043376132700192,
+    "name_seed": 4102020379,
+    "incantation": "FIRE CARVE BINDER AMBER PALISADE TOLL BIND",
+    "sha": "c0582716a988a7ed5099a547052bafbc4da6b6dff599d4f01a571ff6a42348db",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@wildhaven/bellows_agent.card"
+  },
+  "@wildhaven/ceo_agent": {
+    "seed": 1463797972131002668,
+    "name_seed": 340817024,
+    "incantation": "PIPE LEGACY GLYPH CROWN COBALT ABYSS ANVIL",
+    "sha": "d928f1a70d451757d566f8c22521300d725c1814d6bb7df747723b09f6521ea8",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@wildhaven/ceo_agent.card"
+  },
+  "@wildhaven/penumbra_agent": {
+    "seed": 3244902051251893157,
+    "name_seed": 755512633,
+    "incantation": "RIDDLE ENDOW KEEPER LEAP VOID STRAND BLADE",
+    "sha": "d06f865975455a3f11c61ee03f83c112258dbb8dbcd91449a8d133d20aa48b0f",
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@wildhaven/penumbra_agent.card"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/copilot_studio_probe_agent",
+  "seed": 15036022497651468418,
+  "name_seed": 3500846796,
+  "incantation": "OMEN PARAGON ORDEAL PORTENT COAST PYRE ETCH",
+  "version": "1.0.1",
+  "face": {
+    "name": "CopilotStudioProbe",
+    "title": "The Operator",
+    "mana_cost": "{1}{U}{B}",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "type_line": "Legendary Creature — Agent Operator",
+    "rarity": "uncommon",
+    "power": 5,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification."
+      },
+      {
+        "keyword": "Requires",
+        "cost": "",
+        "text": "Needs COPILOT_DIRECTLINE_TOKEN_ENDPOINT, COPILOT_DIRECTLINE_SECRET to activate."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Some agents wait for instructions. This one has already started.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-aaaecc\"><stop offset=\"0%\" stop-color=\"#2a0a0a\"/><stop offset=\"100%\" stop-color=\"#0a0808\"/></radialGradient><filter id=\"gl-aaaecc\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-aaaecc)\"/><g filter=\"url(#gl-aaaecc)\"><path d=\"M40,120 Q100,60 160,120\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,70 160,125\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#bc8cff\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#bc8cff\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#bc8cff\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#bc8cff\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"80\" r=\"5\" fill=\"#bc8cff\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/copilot_studio_probe_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 59,
+    "stats": {
+      "hp": 59,
+      "atk": 58,
+      "def": 52,
+      "spd": 47,
+      "int": 69
+    },
+    "typed_abilities": [
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 1,
+        "damage": 29
+      },
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 2,
+        "damage": 14
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 15036022497651468418
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/copilot_studio_probe_agent",
+    "version": "1.0.1",
+    "display_name": "CopilotStudioProbe",
+    "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification.",
+    "author": "kody-w",
+    "tags": [
+      "copilot-studio",
+      "direct-line",
+      "probe",
+      "testing",
+      "integration",
+      "m365"
+    ],
+    "category": "integrations",
+    "quality_tier": "community",
+    "requires_env": [
+      "COPILOT_DIRECTLINE_TOKEN_ENDPOINT",
+      "COPILOT_DIRECTLINE_SECRET"
+    ],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "copilot_studio_probe_agent.py",
+      "sha256_lf_v1": "59b3c5cdb2228e333e20ea3ef89c41dac9bb8f12a940b68d591619726d2a0367",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/copilot_studio_probe_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/copilot_studio_probe_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

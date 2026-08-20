@@ -1,0 +1,131 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/lookup_dataverse_table",
+  "seed": 27560453582994681207,
+  "name_seed": 2121950851,
+  "incantation": "CRANE CROAK THRONE SECT THATCH HELIX SPIKE",
+  "version": "2.0.0",
+  "face": {
+    "name": "Dataverse Table Lookup",
+    "title": "The Herald",
+    "mana_cost": "{2}{U}",
+    "colors": [
+      "U"
+    ],
+    "type_line": "Creature — Agent Cipher",
+    "rarity": "common",
+    "power": 3,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Search any Microsoft Dataverse table, browse matching records, and drill into full record details — sourced live via the Dataverse MCP Server."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-7a6683\"><stop offset=\"0%\" stop-color=\"#15101e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-7a6683\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-7a6683)\"/><g filter=\"url(#gl-7a6683)\"><line x1=\"106\" y1=\"136\" x2=\"118\" y2=\"130\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"118\" y1=\"130\" x2=\"138\" y2=\"118\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"138\" y1=\"118\" x2=\"145\" y2=\"127\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"145\" y1=\"127\" x2=\"103\" y2=\"82\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"103\" y1=\"82\" x2=\"104\" y2=\"120\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"104\" y1=\"120\" x2=\"87\" y2=\"44\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"87\" y1=\"44\" x2=\"164\" y2=\"153\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"164\" y1=\"153\" x2=\"106\" y2=\"136\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"106\" y1=\"136\" x2=\"138\" y2=\"118\" stroke=\"#bc8cff\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"106\" cy=\"136\" r=\"4\" fill=\"#bc8cff\" opacity=\"0.58\"/><circle cx=\"118\" cy=\"130\" r=\"3\" fill=\"#bc8cff\" opacity=\"0.60\"/><circle cx=\"138\" cy=\"118\" r=\"3\" fill=\"#bc8cff\" opacity=\"0.42\"/><circle cx=\"145\" cy=\"127\" r=\"6\" fill=\"#bc8cff\" opacity=\"0.44\"/><circle cx=\"103\" cy=\"82\" r=\"3\" fill=\"#bc8cff\" opacity=\"0.43\"/><circle cx=\"104\" cy=\"120\" r=\"4\" fill=\"#bc8cff\" opacity=\"0.61\"/><circle cx=\"87\" cy=\"44\" r=\"6\" fill=\"#bc8cff\" opacity=\"0.62\"/><circle cx=\"164\" cy=\"153\" r=\"6\" fill=\"#bc8cff\" opacity=\"0.59\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/lookup_dataverse_table",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 35,
+    "stats": {
+      "hp": 35,
+      "atk": 33,
+      "def": 34,
+      "spd": 32,
+      "int": 40
+    },
+    "typed_abilities": [
+      {
+        "name": "Sync",
+        "text": "Synchronize state between two systems.",
+        "cost": 3,
+        "damage": 35
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 27560453582994681207
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/lookup_dataverse_table",
+    "version": "2.0.0",
+    "display_name": "Dataverse Table Lookup",
+    "description": "Search any Microsoft Dataverse table, browse matching records, and drill into full record details — sourced live via the Dataverse MCP Server.",
+    "author": "Chris Garty",
+    "tags": [
+      "dataverse",
+      "mcp",
+      "data_lookup",
+      "power_platform",
+      "crm"
+    ],
+    "category": "integrations",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "lookup-dataverse-table",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#lookup-dataverse-table",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "9a79dc859cb36791"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "lookup_dataverse_table_agent.py",
+      "sha256_lf_v1": "6525511bf6ee244af3473793a5042254fed4e36052023cb062438af1f3636eb4",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/lookup_dataverse_table_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/lookup_dataverse_table.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

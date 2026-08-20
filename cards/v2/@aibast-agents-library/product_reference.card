@@ -1,0 +1,124 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/product_reference",
+  "seed": 2709938328044190111,
+  "name_seed": 630956685,
+  "incantation": "GEM SPOKE TEMPEST HAUNT MOSAIC WAX BLADE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Product Reference",
+    "title": "The Analyst",
+    "mana_cost": "{1}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Compiler",
+    "rarity": "uncommon",
+    "power": 3,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Process",
+        "cost": "",
+        "text": "Looks up products and pricing from a live simulated Dynamics 365 tenant catalog, with feature comparison and an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“No API key required. No excuses accepted.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-9ba28d\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-9ba28d\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-9ba28d)\"/><g filter=\"url(#gl-9ba28d)\"><circle cx=\"76\" cy=\"109\" r=\"32\" fill=\"#8b949e\" opacity=\"0.11\"/><circle cx=\"111\" cy=\"111\" r=\"34\" fill=\"#8b949e\" opacity=\"0.06\"/><circle cx=\"114\" cy=\"71\" r=\"38\" fill=\"#8b949e\" opacity=\"0.06\"/><circle cx=\"82\" cy=\"126\" r=\"36\" fill=\"#8b949e\" opacity=\"0.08\"/><circle cx=\"129\" cy=\"93\" r=\"19\" fill=\"#8b949e\" opacity=\"0.04\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#8b949e\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#8b949e\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#8b949e\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"136.8\" y2=\"109.5\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"83.6\" y2=\"144.0\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"58.1\" y2=\"90.5\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"101.1\" y2=\"62.0\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/product_reference",
+    "agent_types": [
+      "SOCIAL",
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#bc8cff"
+    ],
+    "hp": 57,
+    "stats": {
+      "hp": 57,
+      "atk": 71,
+      "def": 40,
+      "spd": 67,
+      "int": 65
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 20
+      },
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 1,
+        "damage": 26
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 2709938328044190111
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/product_reference",
+    "version": "1.1.0",
+    "display_name": "Product Reference",
+    "description": "Looks up products and pricing from a live simulated Dynamics 365 tenant catalog, with feature comparison and an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "product",
+      "catalog",
+      "pricing",
+      "features",
+      "compatibility"
+    ],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "product_reference_agent.py",
+      "sha256_lf_v1": "1039e00d13b1925f90e6ae453729973bf6f7ca4b317a8c0dcac94f02330797d3",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/general_stacks/product_reference_stack/product_reference_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/product_reference.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

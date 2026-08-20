@@ -1,0 +1,126 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/returns_exchange",
+  "seed": 16427931656570809614,
+  "name_seed": 3824925901,
+  "incantation": "PALE MONARCH SHARD EPIPHANY BALLISTA NIGHT CARVE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Returns & Exchange Agent",
+    "title": "The Nomad",
+    "mana_cost": "{3}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Curator",
+    "rarity": "common",
+    "power": 3,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Process",
+        "cost": "",
+        "text": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The best agent is the one you forget is running.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-fbbccd\"><stop offset=\"0%\" stop-color=\"#0a2a2a\"/><stop offset=\"100%\" stop-color=\"#050f0f\"/></radialGradient><filter id=\"gl-fbbccd\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-fbbccd)\"/><g filter=\"url(#gl-fbbccd)\"><circle cx=\"100.8\" cy=\"66.0\" r=\"15\" fill=\"#7ee787\" opacity=\"0.15\" stroke=\"#7ee787\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"99.2\" cy=\"134.0\" r=\"19\" fill=\"#7ee787\" opacity=\"0.1\" stroke=\"#7ee787\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"100.8\" y1=\"66.0\" x2=\"99.2\" y2=\"134.0\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"44\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/returns_exchange",
+    "agent_types": [
+      "WEALTH",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#58a6ff"
+    ],
+    "hp": 58,
+    "stats": {
+      "hp": 58,
+      "atk": 81,
+      "def": 39,
+      "spd": 62,
+      "int": 54
+    },
+    "typed_abilities": [
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 2,
+        "damage": 27
+      },
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 1,
+        "damage": 44
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16427931656570809614
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/returns_exchange",
+    "version": "1.1.0",
+    "display_name": "Returns & Exchange Agent",
+    "description": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline.",
+    "author": "AIBAST",
+    "tags": [
+      "returns",
+      "exchange",
+      "refund",
+      "retail",
+      "customer-service",
+      "b2c"
+    ],
+    "category": "b2c_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "returns_exchange_agent.py",
+      "sha256_lf_v1": "89065ae5961458e590f5aeb78b797ad3f71bd85632b4e5d9d4f7f951b9c3d444",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/returns_exchange.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/mission_reporting_assistant",
+  "seed": 9239080674509203253,
+  "name_seed": 2151141100,
+  "incantation": "REVELATION CHAMPION EXTINGUISH HALBERD MONOLITH ETCH CHISEL",
+  "version": "1.1.0",
+  "face": {
+    "name": "Mission Reporting Assistant Agent",
+    "title": "The Overseer",
+    "mana_cost": "{3}{W}",
+    "colors": [
+      "W"
+    ],
+    "type_line": "Creature — Agent Herald",
+    "rarity": "uncommon",
+    "power": 2,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Computes mission KPIs from live records on a simulated Dynamics 365 tenant, with briefs and trend analyses that work offline."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Speed without accuracy is just expensive failure.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-37ceec\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-37ceec\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-37ceec)\"/><g filter=\"url(#gl-37ceec)\"><circle cx=\"128\" cy=\"94\" r=\"35\" fill=\"#79c0ff\" opacity=\"0.10\"/><circle cx=\"79\" cy=\"89\" r=\"32\" fill=\"#79c0ff\" opacity=\"0.04\"/><circle cx=\"128\" cy=\"128\" r=\"20\" fill=\"#79c0ff\" opacity=\"0.09\"/><circle cx=\"110\" cy=\"122\" r=\"35\" fill=\"#79c0ff\" opacity=\"0.10\"/><circle cx=\"125\" cy=\"111\" r=\"21\" fill=\"#79c0ff\" opacity=\"0.11\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#79c0ff\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#79c0ff\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#79c0ff\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"137.0\" y2=\"101.3\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"96.6\" y2=\"135.8\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"70.8\" y2=\"89.5\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"101.0\" y2=\"68.0\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/mission_reporting_assistant",
+    "agent_types": [
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#f0f0f0"
+    ],
+    "hp": 67,
+    "stats": {
+      "hp": 67,
+      "atk": 75,
+      "def": 46,
+      "spd": 66,
+      "int": 56
+    },
+    "typed_abilities": [
+      {
+        "name": "Certify",
+        "text": "Validate against standards. Issue compliance attestation.",
+        "cost": 1,
+        "damage": 25
+      },
+      {
+        "name": "Enforce",
+        "text": "Apply policy rules. Block non-compliant actions.",
+        "cost": 1,
+        "damage": 33
+      }
+    ],
+    "weakness": "SOCIAL",
+    "weakness_label": "Social",
+    "resistance": "CRAFT",
+    "resistance_label": "Craft",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 9239080674509203253
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/mission_reporting_assistant",
+    "version": "1.1.0",
+    "display_name": "Mission Reporting Assistant Agent",
+    "description": "Computes mission KPIs from live records on a simulated Dynamics 365 tenant, with briefs and trend analyses that work offline.",
+    "author": "AIBAST",
+    "tags": [
+      "mission",
+      "reporting",
+      "KPI",
+      "stakeholder",
+      "federal",
+      "dashboard"
+    ],
+    "category": "federal_government",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "mission_reporting_assistant_agent.py",
+      "sha256_lf_v1": "9cfa2e32539fd7d1848bf36ec4354cd334a7adadfba826d7582cb5b85ca2b42c",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/mission_reporting_assistant.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

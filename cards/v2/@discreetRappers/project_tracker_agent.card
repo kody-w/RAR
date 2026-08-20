@@ -1,0 +1,120 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@discreetRappers/project_tracker_agent",
+  "seed": 18264010640337544386,
+  "name_seed": 4252421353,
+  "incantation": "ARROW ION PANTHER ENIGMA SLIME REVOKE BIND",
+  "version": "1.0.1",
+  "face": {
+    "name": "ProjectTracker",
+    "title": "The Watcher",
+    "mana_cost": "{3}{B}",
+    "colors": [
+      "B"
+    ],
+    "type_line": "Creature — Agent Assessor",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Process",
+        "cost": "",
+        "text": "Creates, updates, lists, imports, and exports RAPP project tracking records stored as JSON in Azure File Storage."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Data in. Decisions out. Humans in the loop.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-76cce9\"><stop offset=\"0%\" stop-color=\"#1a0a1e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-76cce9\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-76cce9)\"/><g filter=\"url(#gl-76cce9)\"><polygon points=\"129.7,108.9 106.5,124.1 74.8,114.4 78.4,75.0 117.2,60.6\" fill=\"#f778ba\" opacity=\"0.1\" stroke=\"#f778ba\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"113.7,108.2 94.8,125.5 84.4,103.5 91.6,88.8 120.5,84.0\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#f778ba\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@discreetRappers/project_tracker_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 50,
+    "stats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 51,
+      "spd": 64,
+      "int": 59
+    },
+    "typed_abilities": [
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 3,
+        "damage": 47
+      },
+      {
+        "name": "Sync",
+        "text": "Synchronize state between two systems.",
+        "cost": 1,
+        "damage": 40
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 18264010640337544386
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@discreetRappers/project_tracker_agent",
+    "version": "1.0.1",
+    "display_name": "ProjectTracker",
+    "description": "Creates, updates, lists, imports, and exports RAPP project tracking records stored as JSON in Azure File Storage.",
+    "author": "Bill Whalen",
+    "tags": [
+      "pipeline",
+      "project-management",
+      "tracking"
+    ],
+    "category": "pipeline",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "project_tracker_agent.py",
+      "sha256_lf_v1": "b9df9cb9d4f0743092aae62cabc5a156bd6b7f73fd773fce14584278f1c56fa4",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@discreetRappers/project_tracker_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/project_tracker_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

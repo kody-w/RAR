@@ -1,0 +1,122 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/foia_request_assistant",
+  "seed": 16868928112770562685,
+  "name_seed": 3927603390,
+  "incantation": "BLISS SPOKE THISTLE SCOUT STANCE FRISK CARVE",
+  "version": "1.1.0",
+  "face": {
+    "name": "FOIA Request Assistant Agent",
+    "title": "The Calibrator",
+    "mana_cost": "{3}{W}",
+    "colors": [
+      "W"
+    ],
+    "type_line": "Creature — Agent Luminary",
+    "rarity": "rare",
+    "power": 2,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Analyzes FOIA queues and drafts responses from a live simulated Dynamics 365 tenant's records cases, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The best agent is the one you forget is running.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-1a78be\"><stop offset=\"0%\" stop-color=\"#15101e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-1a78be\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-1a78be)\"/><g filter=\"url(#gl-1a78be)\"><line x1=\"65\" y1=\"129\" x2=\"59\" y2=\"60\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"59\" y1=\"60\" x2=\"160\" y2=\"44\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"160\" y1=\"44\" x2=\"79\" y2=\"39\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"79\" y1=\"39\" x2=\"150\" y2=\"87\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"150\" y1=\"87\" x2=\"165\" y2=\"73\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"165\" y1=\"73\" x2=\"51\" y2=\"90\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"51\" y1=\"90\" x2=\"65\" y2=\"129\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"65\" y1=\"129\" x2=\"160\" y2=\"44\" stroke=\"#79c0ff\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"65\" cy=\"129\" r=\"4\" fill=\"#79c0ff\" opacity=\"0.52\"/><circle cx=\"59\" cy=\"60\" r=\"4\" fill=\"#79c0ff\" opacity=\"0.42\"/><circle cx=\"160\" cy=\"44\" r=\"5\" fill=\"#79c0ff\" opacity=\"0.43\"/><circle cx=\"79\" cy=\"39\" r=\"6\" fill=\"#79c0ff\" opacity=\"0.57\"/><circle cx=\"150\" cy=\"87\" r=\"6\" fill=\"#79c0ff\" opacity=\"0.54\"/><circle cx=\"165\" cy=\"73\" r=\"6\" fill=\"#79c0ff\" opacity=\"0.64\"/><circle cx=\"51\" cy=\"90\" r=\"3\" fill=\"#79c0ff\" opacity=\"0.50\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/foia_request_assistant",
+    "agent_types": [
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#f0f0f0"
+    ],
+    "hp": 73,
+    "stats": {
+      "hp": 73,
+      "atk": 66,
+      "def": 43,
+      "spd": 53,
+      "int": 50
+    },
+    "typed_abilities": [
+      {
+        "name": "Monitor",
+        "text": "Continuously watch for anomalies. Alert on deviation.",
+        "cost": 2,
+        "damage": 43
+      },
+      {
+        "name": "Certify",
+        "text": "Validate against standards. Issue compliance attestation.",
+        "cost": 2,
+        "damage": 42
+      }
+    ],
+    "weakness": "SOCIAL",
+    "weakness_label": "Social",
+    "resistance": "CRAFT",
+    "resistance_label": "Craft",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16868928112770562685
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/foia_request_assistant",
+    "version": "1.1.0",
+    "display_name": "FOIA Request Assistant Agent",
+    "description": "Analyzes FOIA queues and drafts responses from a live simulated Dynamics 365 tenant's records cases, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "FOIA",
+      "public-records",
+      "redaction",
+      "transparency",
+      "government"
+    ],
+    "category": "slg_government",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "foia_request_assistant_agent.py",
+      "sha256_lf_v1": "18fd8a77430845666b98e622f50fea1c65cff93a06ca536d7193f8d1a4917eb1",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/foia_request_assistant.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

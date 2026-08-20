@@ -1,0 +1,131 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@rapp/rar_steward",
+  "seed": 4423138620711250150,
+  "name_seed": 1029842212,
+  "incantation": "LUNGE ANOINT GLYPH WYRM SHAFT ENCHANT RUNE",
+  "version": "1.0.1",
+  "face": {
+    "name": "RarStewardAgent",
+    "title": "The Interceptor",
+    "mana_cost": "{2}{W}{U}",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "type_line": "Legendary Creature — Agent Sentinel",
+    "rarity": "mythic",
+    "power": 11,
+    "toughness": 10,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Surveys the public RAR catalog over HTTP for health, duplicate clusters, and junk candidates, returning operator-mediated cleanup guidance."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Where others see a task, it sees a system.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-622524\"><stop offset=\"0%\" stop-color=\"#0a2a2a\"/><stop offset=\"100%\" stop-color=\"#050f0f\"/></radialGradient><filter id=\"gl-622524\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-622524)\"/><g filter=\"url(#gl-622524)\"><polygon points=\"131.3,106.7 119.3,123.0 95.0,142.7 81.4,116.7 68.2,96.1 68.3,68.0 109.4,69.4 140.5,76.2\" fill=\"#58a6ff\" opacity=\"0.1\" stroke=\"#58a6ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"118.7,107.1 104.2,117.5 94.0,115.9 86.3,102.8 87.7,95.9 96.0,87.6 107.6,76.2 116.3,92.3\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#58a6ff\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rapp/rar_steward",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 95,
+      "def": 73,
+      "spd": 100,
+      "int": 96
+    },
+    "typed_abilities": [
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 1,
+        "damage": 36
+      },
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 2,
+        "damage": 19
+      },
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 1,
+        "damage": 43
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 4423138620711250150
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/rar_steward",
+    "version": "1.0.1",
+    "display_name": "RarStewardAgent",
+    "description": "Surveys the public RAR catalog over HTTP for health, duplicate clusters, and junk candidates, returning operator-mediated cleanup guidance.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "rar",
+      "steward",
+      "registry",
+      "quality",
+      "dedup",
+      "merge",
+      "curation"
+    ],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "rar_steward_agent.py",
+      "sha256_lf_v1": "e8cb15fe4f51fefb7c9f05fe3722dc7eccd67ab22beca8398591479d8fcc9e3e",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rapp/rar_steward_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/rar_steward.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

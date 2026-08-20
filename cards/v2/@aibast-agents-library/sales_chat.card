@@ -1,0 +1,126 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/sales_chat",
+  "seed": 743639680721625695,
+  "name_seed": 173142105,
+  "incantation": "MARCH PALADIN QUAKE WAX THRONE VEIN FORGE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Sales Chat Agent",
+    "title": "The Luminary",
+    "mana_cost": "{2}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Facilitator",
+    "rarity": "common",
+    "power": 7,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Answers chat questions from a live product catalog on a simulated Dynamics 365 tenant, with promotions and an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Trust is earned one successful execution at a time.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-51f059\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-51f059\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-51f059)\"/><g filter=\"url(#gl-51f059)\"><circle cx=\"100\" cy=\"100\" r=\"36\" fill=\"#7ee787\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"36\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"51\" ry=\"12\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(38 100 100)\"/><circle cx=\"96\" cy=\"107\" r=\"3\" fill=\"#7ee787\" opacity=\"0.13\"/><circle cx=\"102\" cy=\"97\" r=\"10\" fill=\"#7ee787\" opacity=\"0.13\"/><circle cx=\"96\" cy=\"99\" r=\"7\" fill=\"#7ee787\" opacity=\"0.11\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/sales_chat",
+    "agent_types": [
+      "WEALTH",
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#d29922"
+    ],
+    "hp": 66,
+    "stats": {
+      "hp": 66,
+      "atk": 68,
+      "def": 44,
+      "spd": 61,
+      "int": 70
+    },
+    "typed_abilities": [
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 1,
+        "damage": 11
+      },
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 3,
+        "damage": 30
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 743639680721625695
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/sales_chat",
+    "version": "1.1.0",
+    "display_name": "Sales Chat Agent",
+    "description": "Answers chat questions from a live product catalog on a simulated Dynamics 365 tenant, with promotions and an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "sales",
+      "chat",
+      "product",
+      "promotion",
+      "order",
+      "b2c"
+    ],
+    "category": "b2c_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "sales_chat_agent.py",
+      "sha256_lf_v1": "db0e860853560f566ee7107dad1928d1e5c14256fd8f3074ccd0957d7b6be10c",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/sales_chat.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

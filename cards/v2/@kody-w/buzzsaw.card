@@ -1,0 +1,124 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/buzzsaw",
+  "seed": 49045478717696779312,
+  "name_seed": 2829355786,
+  "incantation": "FLOOD CHAMPION FRIDGE BLAZE PHANTOM TUFT PYRE",
+  "version": "1.0.0",
+  "face": {
+    "name": "Buzzsaw",
+    "title": "The Operator",
+    "mana_cost": "{2}{N}{W}",
+    "colors": [
+      "N",
+      "W"
+    ],
+    "type_line": "Creature — Agent Catalyst",
+    "rarity": "common",
+    "power": 3,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Set up an adversarial build-and-verify loop: seed prompt, disjoint region split for parallel builders, harsh read-only critic brief, and an acceptance gate that defines when to stop."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Precision at the speed of thought.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-a48b0a\"><stop offset=\"0%\" stop-color=\"#2a1a0a\"/><stop offset=\"100%\" stop-color=\"#0a0805\"/></radialGradient><filter id=\"gl-a48b0a\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-a48b0a)\"/><g filter=\"url(#gl-a48b0a)\"><circle cx=\"80.5\" cy=\"66.2\" r=\"18\" fill=\"#8b949e\" opacity=\"0.15\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"119.5\" cy=\"133.8\" r=\"13\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"80.5\" y1=\"66.2\" x2=\"119.5\" y2=\"133.8\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"49\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/buzzsaw",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 53,
+    "stats": {
+      "hp": 53,
+      "atk": 54,
+      "def": 39,
+      "spd": 61,
+      "int": 71
+    },
+    "typed_abilities": [
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 1,
+        "damage": 44
+      },
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 1,
+        "damage": 22
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 49045478717696779312
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/buzzsaw",
+    "version": "1.0.0",
+    "display_name": "Buzzsaw",
+    "description": "Set up an adversarial build-and-verify loop: seed prompt, disjoint region split for parallel builders, harsh read-only critic brief, and an acceptance gate that defines when to stop.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "buzzsaw",
+      "verification",
+      "adversarial",
+      "testing",
+      "determinism",
+      "ark"
+    ],
+    "category": "workflow",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "buzzsaw.py",
+      "sha256_lf_v1": "68ffa820bc89cd8966f9929725bd9befd616ac26ad26867b828dc790b9cf13bb",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/buzzsaw.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/buzzsaw.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

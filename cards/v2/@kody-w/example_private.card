@@ -1,0 +1,121 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/example_private",
+  "seed": 9902068138336725025,
+  "name_seed": 2305504898,
+  "incantation": "FROST IRE FRIDGE GUILD EPIPHANY DRENCH CHISEL",
+  "version": "1.0.2",
+  "face": {
+    "name": "ExamplePrivate",
+    "title": "The Optimizer",
+    "mana_cost": "{2}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Creature — Agent Vanguard",
+    "rarity": "uncommon",
+    "power": 3,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Execute",
+        "cost": "",
+        "text": "Demonstrates the RAR private-agent stub layer — metadata only, with source resolved from a private GitHub repo at install time."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The pipeline never sleeps. The agent never forgets.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-6b3682\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"gl-6b3682\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-6b3682)\"/><g filter=\"url(#gl-6b3682)\"><circle cx=\"90\" cy=\"108\" r=\"28\" fill=\"#7ee787\" opacity=\"0.08\"/><circle cx=\"88\" cy=\"79\" r=\"32\" fill=\"#7ee787\" opacity=\"0.11\"/><circle cx=\"94\" cy=\"127\" r=\"34\" fill=\"#7ee787\" opacity=\"0.08\"/><circle cx=\"80\" cy=\"94\" r=\"36\" fill=\"#7ee787\" opacity=\"0.08\"/><circle cx=\"112\" cy=\"114\" r=\"20\" fill=\"#7ee787\" opacity=\"0.07\"/><circle cx=\"86\" cy=\"120\" r=\"24\" fill=\"#7ee787\" opacity=\"0.07\"/><circle cx=\"84\" cy=\"72\" r=\"20\" fill=\"#7ee787\" opacity=\"0.09\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#7ee787\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#7ee787\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#7ee787\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"132.5\" y2=\"113.0\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"80.7\" y2=\"138.4\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"68.0\" y2=\"85.8\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"120.9\" y2=\"59.0\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/example_private",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 51,
+    "stats": {
+      "hp": 51,
+      "atk": 54,
+      "def": 40,
+      "spd": 65,
+      "int": 52
+    },
+    "typed_abilities": [
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 3,
+        "damage": 44
+      },
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 2,
+        "damage": 47
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "private",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 9902068138336725025
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/example_private",
+    "version": "1.0.2",
+    "display_name": "ExamplePrivate",
+    "description": "Demonstrates the RAR private-agent stub layer — metadata only, with source resolved from a private GitHub repo at install time.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "example",
+      "private",
+      "stub"
+    ],
+    "category": "productivity",
+    "quality_tier": "private",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "type": "stub"
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "example_private_agent.py.stub",
+      "sha256_lf_v1": "41e0a5a7e2eb75df92ef107444dda944e01837e95a1c32caaec74836601f8ba8",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/private/example_private_agent.py.stub"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/example_private.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

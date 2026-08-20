@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@discreetRappers/demo_script_generator_agent",
+  "seed": 17174429428190159959,
+  "name_seed": 3998733458,
+  "incantation": "RIDGE RUSK FRIDGE PLUME BARROW FEDERATION CARVE",
+  "version": "1.0.1",
+  "face": {
+    "name": "DemoScriptGenerator",
+    "title": "The Curator",
+    "mana_cost": "{3}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Tactician",
+    "rarity": "common",
+    "power": 4,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Generates 60-second persona-driven demo script JSON files for ScriptedDemoAgent, via Azure OpenAI or built-in templates."
+      },
+      {
+        "keyword": "Requires",
+        "cost": "",
+        "text": "Needs AZURE_OPENAI_API_VERSION, AZURE_OPENAI_DEPLOYMENT_NAME, AZURE_OPENAI_ENDPOINT to activate."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Every edge case was someone’s main case.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-57d492\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-57d492\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-57d492)\"/><g filter=\"url(#gl-57d492)\"><circle cx=\"71.9\" cy=\"82.7\" r=\"16\" fill=\"#7ee787\" opacity=\"0.15\" stroke=\"#7ee787\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"128.1\" cy=\"117.3\" r=\"13\" fill=\"#7ee787\" opacity=\"0.1\" stroke=\"#7ee787\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"71.9\" y1=\"82.7\" x2=\"128.1\" y2=\"117.3\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"43\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@discreetRappers/demo_script_generator_agent",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 61,
+    "stats": {
+      "hp": 61,
+      "atk": 67,
+      "def": 62,
+      "spd": 52,
+      "int": 50
+    },
+    "typed_abilities": [
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 2,
+        "damage": 37
+      },
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 3,
+        "damage": 16
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 17174429428190159959
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@discreetRappers/demo_script_generator_agent",
+    "version": "1.0.1",
+    "display_name": "DemoScriptGenerator",
+    "description": "Generates 60-second persona-driven demo script JSON files for ScriptedDemoAgent, via Azure OpenAI or built-in templates.",
+    "author": "Bill Whalen",
+    "tags": [
+      "productivity",
+      "demos",
+      "generator",
+      "json",
+      "scripted"
+    ],
+    "category": "productivity",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_OPENAI_API_VERSION",
+      "AZURE_OPENAI_DEPLOYMENT_NAME",
+      "AZURE_OPENAI_ENDPOINT"
+    ],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "demo_script_generator_agent.py",
+      "sha256_lf_v1": "8c3f230c67c330e7334e103653e34b810fbbcf2fe2acd120f7806f5f0cf26149",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@discreetRappers/demo_script_generator_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/demo_script_generator_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

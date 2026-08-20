@@ -1,0 +1,138 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/ai_usecase_assessment",
+  "seed": 66265179397760760969,
+  "name_seed": 2543662483,
+  "incantation": "WRAITH BIND SEED GROOM NOBLE NICHE SHOCK",
+  "version": "2.0.0",
+  "face": {
+    "name": "AI Use Case Assessment",
+    "title": "The Overseer",
+    "mana_cost": "{3}{N}{R}",
+    "colors": [
+      "N",
+      "R"
+    ],
+    "type_line": "Creature — Agent Compiler",
+    "rarity": "uncommon",
+    "power": 3,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Intercept",
+        "cost": "",
+        "text": "Turn any AI/agentic use case idea (chat, uploaded doc, or attached file) into an evidence-grounded, rubric-scored assessment with a customer-branded HTML report. Guides the user question-by-question t"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The simplest solution is usually an agent away.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-9d3593\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-9d3593\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-9d3593)\"/><g filter=\"url(#gl-9d3593)\"><circle cx=\"131.0\" cy=\"98.9\" r=\"15\" fill=\"#8b949e\" opacity=\"0.15\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"69.0\" cy=\"101.1\" r=\"15\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"131.0\" y1=\"98.9\" x2=\"69.0\" y2=\"101.1\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"41\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/ai_usecase_assessment",
+    "agent_types": [
+      "LOGIC",
+      "HEAL"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#ff7eb3"
+    ],
+    "hp": 41,
+    "stats": {
+      "hp": 41,
+      "atk": 68,
+      "def": 27,
+      "spd": 35,
+      "int": 45
+    },
+    "typed_abilities": [
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 1,
+        "damage": 15
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 66265179397760760969
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/ai_usecase_assessment",
+    "version": "2.0.0",
+    "display_name": "AI Use Case Assessment",
+    "description": "Turn any AI/agentic use case idea (chat, uploaded doc, or attached file) into an evidence-grounded, rubric-scored assessment with a customer-branded HTML report. Guides the user question-by-question through intake, categorisation, strengthening, scoring, and reporting — grounded in the Agentic Use Case Assessment Rubric v2. Runs in Microsoft Scout and Microsoft 365 Copilot Cowork.",
+    "author": "Alicja Gilderdale",
+    "tags": [
+      "assessment",
+      "ai",
+      "agent",
+      "use_case",
+      "scoring",
+      "report",
+      "html",
+      "intake"
+    ],
+    "category": "analysis",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "ai-usecase-assessment",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#ai-usecase-assessment",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "8d143663df287664"
+    },
+    "platforms": [
+      "Scout",
+      "Cowork"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "ai_usecase_assessment_agent.py",
+      "sha256_lf_v1": "b1c7ceb11b90cd8bd781cbfab3f8c914f11830d1ae2eb360f2aa3b68152fef67",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/ai_usecase_assessment_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/ai_usecase_assessment.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

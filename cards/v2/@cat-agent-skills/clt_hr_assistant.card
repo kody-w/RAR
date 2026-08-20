@@ -1,0 +1,136 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/clt_hr_assistant",
+  "seed": 18861325838674044470,
+  "name_seed": 96527339,
+  "incantation": "FLAUNT BRAND TWILIGHT GRAIL DASH BEAR FUSE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Assistente CLT para RH",
+    "title": "The Resolver",
+    "mana_cost": "{2}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Prospector",
+    "rarity": "uncommon",
+    "power": 5,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Assistente de legislação trabalhista brasileira (CLT) para equipes de RH e Departamento Pessoal. Responde dúvidas sobre férias, 13º salário, aviso prévio, jornada e tipos de rescisão, e calcula verbas"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Where workflows end, this agent begins.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-c0e3eb\"><stop offset=\"0%\" stop-color=\"#15101e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-c0e3eb\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-c0e3eb)\"/><g filter=\"url(#gl-c0e3eb)\"><line x1=\"163\" y1=\"71\" x2=\"80\" y2=\"93\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"80\" y1=\"93\" x2=\"66\" y2=\"144\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"66\" y1=\"144\" x2=\"92\" y2=\"75\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"92\" y1=\"75\" x2=\"109\" y2=\"39\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"109\" y1=\"39\" x2=\"56\" y2=\"58\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"56\" y1=\"58\" x2=\"111\" y2=\"149\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"111\" y1=\"149\" x2=\"163\" y2=\"71\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"163\" y1=\"71\" x2=\"66\" y2=\"144\" stroke=\"#8b949e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"163\" cy=\"71\" r=\"5\" fill=\"#8b949e\" opacity=\"0.52\"/><circle cx=\"80\" cy=\"93\" r=\"4\" fill=\"#8b949e\" opacity=\"0.49\"/><circle cx=\"66\" cy=\"144\" r=\"4\" fill=\"#8b949e\" opacity=\"0.60\"/><circle cx=\"92\" cy=\"75\" r=\"6\" fill=\"#8b949e\" opacity=\"0.38\"/><circle cx=\"109\" cy=\"39\" r=\"6\" fill=\"#8b949e\" opacity=\"0.37\"/><circle cx=\"56\" cy=\"58\" r=\"3\" fill=\"#8b949e\" opacity=\"0.35\"/><circle cx=\"111\" cy=\"149\" r=\"4\" fill=\"#8b949e\" opacity=\"0.69\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/clt_hr_assistant",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 50,
+    "stats": {
+      "hp": 50,
+      "atk": 59,
+      "def": 17,
+      "spd": 49,
+      "int": 42
+    },
+    "typed_abilities": [
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 1,
+        "damage": 31
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 18861325838674044470
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/clt_hr_assistant",
+    "version": "1.1.0",
+    "display_name": "Assistente CLT para RH",
+    "description": "Assistente de legislação trabalhista brasileira (CLT) para equipes de RH e Departamento Pessoal. Responde dúvidas sobre férias, 13º salário, aviso prévio, jornada e tipos de rescisão, e calcula verbas rescisórias com memória de cálculo completa usando as tabelas oficiais vigentes de 2026 (salário mínimo, INSS e IRRF, incluindo a Lei 15.270/2025).",
+    "author": "Michael Ferro Pereira",
+    "tags": [
+      "rh",
+      "folha",
+      "clt",
+      "brasil",
+      "trabalhista",
+      "rescisao",
+      "inss",
+      "irrf"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "clt-hr-assistant",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#clt-hr-assistant",
+      "upstream_version": "0.1.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "b57e7dd7cdb6e7f3"
+    },
+    "platforms": [
+      "Copilot Studio",
+      "Cowork",
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "clt_hr_assistant_agent.py",
+      "sha256_lf_v1": "c3a3b868ca1ca03b82006c23c3c8829fb083d1e64b9dbaa6d054300752a39688",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/clt_hr_assistant_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/clt_hr_assistant.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

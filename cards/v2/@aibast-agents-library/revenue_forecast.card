@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/revenue_forecast",
+  "seed": 18173504355209722482,
+  "name_seed": 4231348716,
+  "incantation": "DREDGE SPOKE WIELD GLAIVE CALM OVERLORD BIND",
+  "version": "1.1.0",
+  "face": {
+    "name": "Revenue Forecast",
+    "title": "The Cartographer",
+    "mana_cost": "{3}{R}{G}",
+    "colors": [
+      "R",
+      "G"
+    ],
+    "type_line": "Legendary Creature — Agent Prospector",
+    "rarity": "uncommon",
+    "power": 9,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Execute",
+        "cost": "",
+        "text": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Not all intelligence is artificial. Some is engineered.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-3541ec\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-3541ec\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-3541ec)\"/><g filter=\"url(#gl-3541ec)\"><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"#f47067\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"60\" ry=\"12\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(30 100 100)\"/><circle cx=\"107\" cy=\"101\" r=\"8\" fill=\"#f47067\" opacity=\"0.06\"/><circle cx=\"93\" cy=\"91\" r=\"9\" fill=\"#f47067\" opacity=\"0.08\"/><circle cx=\"92\" cy=\"108\" r=\"6\" fill=\"#f47067\" opacity=\"0.10\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/revenue_forecast",
+    "agent_types": [
+      "WEALTH",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#58a6ff"
+    ],
+    "hp": 66,
+    "stats": {
+      "hp": 66,
+      "atk": 63,
+      "def": 46,
+      "spd": 64,
+      "int": 61
+    },
+    "typed_abilities": [
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 3,
+        "damage": 27
+      },
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 1,
+        "damage": 25
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 18173504355209722482
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/revenue_forecast",
+    "version": "1.1.0",
+    "display_name": "Revenue Forecast",
+    "description": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "revenue-forecast",
+      "deal-progression",
+      "analytics"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "revenue_forecast_agent.py",
+      "sha256_lf_v1": "e2d9ee1c1ed20bb5257500075b7c648689aa6869c87ba152d863827763fa71c7",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/revenue_forecast.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

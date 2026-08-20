@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/work_iq_signalboard",
+  "seed": 34653850475019641510,
+  "name_seed": 3773511015,
+  "incantation": "COST PALADIN MERIDIAN FOG REVELATION BURST HAMMER",
+  "version": "3.0.0",
+  "face": {
+    "name": "Work IQ Signalboard",
+    "title": "The Facilitator",
+    "mana_cost": "{2}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Forgemaster",
+    "rarity": "uncommon",
+    "power": 6,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Turn four weeks of Calendar, Mail, and Teams chat activity into a colorful dashboard of reconciled Work IQ counts."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Data in. Decisions out. Humans in the loop.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-eb3567\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-eb3567\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-eb3567)\"/><g filter=\"url(#gl-eb3567)\"><polygon points=\"137.3,111.5 120.0,132.3 87.0,146.2 75.4,111.1 67.6,80.2 98.1,64.0 129.8,76.5\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"114.1,105.0 105.7,117.1 88.0,112.1 88.1,98.6 84.8,85.5 104.3,87.7 118.1,94.3\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#8b949e\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/work_iq_signalboard",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 56,
+    "stats": {
+      "hp": 56,
+      "atk": 46,
+      "def": 20,
+      "spd": 40,
+      "int": 37
+    },
+    "typed_abilities": [
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 1,
+        "damage": 48
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 34653850475019641510
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/work_iq_signalboard",
+    "version": "3.0.0",
+    "display_name": "Work IQ Signalboard",
+    "description": "Turn four weeks of Calendar, Mail, and Teams chat activity into a colorful dashboard of reconciled Work IQ counts.",
+    "author": "Andreas Adner",
+    "tags": [
+      "work_iq",
+      "microsoft_365",
+      "dashboard",
+      "visualization",
+      "work_patterns",
+      "analytics"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "work-iq-signalboard",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#work-iq-signalboard",
+      "upstream_version": "2.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "267a75f8911138e0"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "work_iq_signalboard_agent.py",
+      "sha256_lf_v1": "952f4d5714c90395e690cd9cb0dca9eae1d70e15f5a568f375f573ac5d4fe3d2",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/work_iq_signalboard_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/work_iq_signalboard.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

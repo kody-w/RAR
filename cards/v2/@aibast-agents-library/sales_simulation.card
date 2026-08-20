@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/sales_simulation",
+  "seed": 3409504503786645323,
+  "name_seed": 793837128,
+  "incantation": "TONIC CHAMPION DISK KNELL NIGHT BARROW BLADE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Sales Simulation",
+    "title": "The Facilitator",
+    "mana_cost": "{1}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Alchemist",
+    "rarity": "common",
+    "power": 7,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Builds sales role-play scenarios from live opportunities in a simulated Dynamics 365 tenant, with personas, scoring, and offline fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“One prompt. One purpose. Infinite execution.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-50fe48\"><stop offset=\"0%\" stop-color=\"#1a1a2e\"/><stop offset=\"100%\" stop-color=\"#08080f\"/></radialGradient><filter id=\"gl-50fe48\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-50fe48)\"/><g filter=\"url(#gl-50fe48)\"><polygon points=\"119.1,89.0 119.1,111.0 100.0,122.0 80.9,111.0 80.9,89.0 100.0,78.0\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.6\" opacity=\"0.40\"/><polygon points=\"138.1,78.0 138.1,122.0 100.0,144.0 61.9,122.0 61.9,78.0 100.0,56.0\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.2\" opacity=\"0.30\"/><polygon points=\"157.2,67.0 157.2,133.0 100.0,166.0 42.8,133.0 42.8,67.0 100.0,34.0\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.20\"/><polygon points=\"100.0,85.0 104.1,94.3 114.3,95.4 106.7,102.2 108.8,112.1 100.0,107.0 91.2,112.1 93.3,102.2 85.7,95.4 95.9,94.3\" fill=\"#8b949e\" opacity=\"0.3\"/><circle cx=\"138.1\" cy=\"78.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"138.1\" cy=\"122.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"144.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"122.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"78.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"56.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/sales_simulation",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 59,
+    "stats": {
+      "hp": 59,
+      "atk": 65,
+      "def": 45,
+      "spd": 55,
+      "int": 70
+    },
+    "typed_abilities": [
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 3,
+        "damage": 22
+      },
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 1,
+        "damage": 11
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 3409504503786645323
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/sales_simulation",
+    "version": "1.1.0",
+    "display_name": "Sales Simulation",
+    "description": "Builds sales role-play scenarios from live opportunities in a simulated Dynamics 365 tenant, with personas, scoring, and offline fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "sales",
+      "simulation",
+      "training",
+      "objections",
+      "personas",
+      "scoring"
+    ],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "sales_simulation_agent.py",
+      "sha256_lf_v1": "73e63fad33cd0c6c6f10ed623e4b00cc753f68266548c5ca6d2744bd98401f04",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/general_stacks/simulation_sales_stack/sales_simulation_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/sales_simulation.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

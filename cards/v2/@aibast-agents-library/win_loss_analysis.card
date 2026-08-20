@@ -1,0 +1,124 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/win_loss_analysis",
+  "seed": 2520427991298359032,
+  "name_seed": 586832871,
+  "incantation": "SCOUT BROKE THISTLE CYCLE FRENCH STAFF BLADE",
+  "version": "1.2.0",
+  "face": {
+    "name": "Win/Loss Analysis",
+    "title": "The Alchemist",
+    "mana_cost": "{2}{R}{W}{B}",
+    "colors": [
+      "R",
+      "W",
+      "B"
+    ],
+    "type_line": "Creature — Agent Pilot",
+    "rarity": "uncommon",
+    "power": 6,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Computes win/loss stats from live closed deals in a simulated Dynamics 365 tenant, with recovery models and an embedded offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It reads the room before it reads the data.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-fa5be7\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-fa5be7\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-fa5be7)\"/><g filter=\"url(#gl-fa5be7)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#f47067\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#f47067\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"10\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(6 100 100)\"/><circle cx=\"114.1\" cy=\"88.6\" r=\"4\" fill=\"#f47067\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"36\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(6 100 100)\"/><circle cx=\"55.9\" cy=\"94.4\" r=\"5\" fill=\"#f47067\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"66\" ry=\"37\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.36\" transform=\"rotate(-17 100 100)\"/><circle cx=\"80.9\" cy=\"130.0\" r=\"4\" fill=\"#f47067\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/win_loss_analysis",
+    "agent_types": [
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#bc8cff"
+    ],
+    "hp": 52,
+    "stats": {
+      "hp": 52,
+      "atk": 56,
+      "def": 41,
+      "spd": 59,
+      "int": 53
+    },
+    "typed_abilities": [
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 2,
+        "damage": 26
+      },
+      {
+        "name": "Negotiate",
+        "text": "Propose terms optimized for mutual value.",
+        "cost": 1,
+        "damage": 13
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 2520427991298359032
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/win_loss_analysis",
+    "version": "1.2.0",
+    "display_name": "Win/Loss Analysis",
+    "description": "Computes win/loss stats from live closed deals in a simulated Dynamics 365 tenant, with recovery models and an embedded offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "win-loss",
+      "competitive-intel",
+      "revenue-recovery"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "win_loss_analysis_agent.py",
+      "sha256_lf_v1": "9506127641a61d589a0b1966fc7570b0b425bdc90968bc886e1eec84be143c6c",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/win_loss_analysis_stack/win_loss_analysis_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/win_loss_analysis.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

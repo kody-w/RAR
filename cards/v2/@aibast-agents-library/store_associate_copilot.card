@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/store_associate_copilot",
+  "seed": 15486760774949025133,
+  "name_seed": 3605792479,
+  "incantation": "COBRA STROKE OAT EVOLVE TEMPER GAMBIT ETCH",
+  "version": "1.3.0",
+  "face": {
+    "name": "Store Associate Copilot Agent",
+    "title": "The Surveyor",
+    "mana_cost": "{1}{G}{R}",
+    "colors": [
+      "G",
+      "R"
+    ],
+    "type_line": "Legendary Creature — Agent Broker",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Configure",
+        "cost": "",
+        "text": "Gives associates product lookups, scripts, dashboards, and a live refrigeration alert joining simulated telemetry to CRM, with offline fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The simplest solution is usually an agent away.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-ec06df\"><stop offset=\"0%\" stop-color=\"#2a1a0a\"/><stop offset=\"100%\" stop-color=\"#0a0805\"/></radialGradient><filter id=\"gl-ec06df\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-ec06df)\"/><g filter=\"url(#gl-ec06df)\"><path d=\"M40,120 Q100,53 160,120\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,63 160,125\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f0883e\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f0883e\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#f0883e\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#f0883e\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"77\" r=\"5\" fill=\"#f0883e\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/store_associate_copilot",
+    "agent_types": [
+      "CRAFT",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#f85149",
+      "#58a6ff"
+    ],
+    "hp": 69,
+    "stats": {
+      "hp": 69,
+      "atk": 51,
+      "def": 39,
+      "spd": 65,
+      "int": 49
+    },
+    "typed_abilities": [
+      {
+        "name": "Optimize",
+        "text": "Tune process parameters for maximum throughput.",
+        "cost": 2,
+        "damage": 14
+      },
+      {
+        "name": "Build",
+        "text": "Assemble components into deployable artifact.",
+        "cost": 2,
+        "damage": 13
+      }
+    ],
+    "weakness": "SHIELD",
+    "weakness_label": "Shield",
+    "resistance": "HEAL",
+    "resistance_label": "Heal",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 15486760774949025133
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/store_associate_copilot",
+    "version": "1.3.0",
+    "display_name": "Store Associate Copilot Agent",
+    "description": "Gives associates product lookups, scripts, dashboards, and a live refrigeration alert joining simulated telemetry to CRM, with offline fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "store-operations",
+      "associate",
+      "copilot",
+      "product-lookup",
+      "retail"
+    ],
+    "category": "retail_cpg",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "store_associate_copilot_agent.py",
+      "sha256_lf_v1": "9c75b3deb9ab3750efe6e8dd200630a35dcb42458dc799fc57ae729309ae9a26",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/store_associate_copilot.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

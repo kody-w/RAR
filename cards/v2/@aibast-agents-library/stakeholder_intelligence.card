@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/stakeholder_intelligence",
+  "seed": 15018051093375102546,
+  "name_seed": 3496662502,
+  "incantation": "COURSE CROAK THISTLE EMPIRE BYPASS HONE ETCH",
+  "version": "1.0.1",
+  "face": {
+    "name": "Stakeholder Intelligence",
+    "title": "The Optimizer",
+    "mana_cost": "{1}{R}{W}",
+    "colors": [
+      "R",
+      "W"
+    ],
+    "type_line": "Creature — Agent Conduit",
+    "rarity": "uncommon",
+    "power": 4,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Maps org charts, buying committees, engagement gaps, and relationship strength for accounts using built-in demo data."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Complexity is the enemy. Automation is the ally.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-6ad5e6\"><stop offset=\"0%\" stop-color=\"#2a1a0a\"/><stop offset=\"100%\" stop-color=\"#0a0805\"/></radialGradient><filter id=\"gl-6ad5e6\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-6ad5e6)\"/><g filter=\"url(#gl-6ad5e6)\"><circle cx=\"124.6\" cy=\"81.2\" r=\"17\" fill=\"#f47067\" opacity=\"0.15\" stroke=\"#f47067\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"75.4\" cy=\"118.8\" r=\"17\" fill=\"#f47067\" opacity=\"0.1\" stroke=\"#f47067\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"124.6\" y1=\"81.2\" x2=\"75.4\" y2=\"118.8\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"41\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/stakeholder_intelligence",
+    "agent_types": [
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#bc8cff"
+    ],
+    "hp": 52,
+    "stats": {
+      "hp": 52,
+      "atk": 60,
+      "def": 50,
+      "spd": 51,
+      "int": 58
+    },
+    "typed_abilities": [
+      {
+        "name": "Negotiate",
+        "text": "Propose terms optimized for mutual value.",
+        "cost": 3,
+        "damage": 27
+      },
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 1,
+        "damage": 33
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 15018051093375102546
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/stakeholder_intelligence",
+    "version": "1.0.1",
+    "display_name": "Stakeholder Intelligence",
+    "description": "Maps org charts, buying committees, engagement gaps, and relationship strength for accounts using built-in demo data.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "stakeholder-mapping",
+      "org-chart",
+      "buying-committee"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "stakeholder_intelligence_agent.py",
+      "sha256_lf_v1": "cb303ab64beaa9c9d5ed1ba797d18c561a66cdacb6afb4dacbc24dbb0015c897",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/stakeholder_intelligence.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

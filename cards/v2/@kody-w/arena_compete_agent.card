@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/arena_compete_agent",
+  "seed": 54748165589850271505,
+  "name_seed": 4157116041,
+  "incantation": "MATRIARCH CROAK FRIDGE BEREFT TITAN HUNT FLASH",
+  "version": "1.0.1",
+  "face": {
+    "name": "Arena Compete",
+    "title": "The Dispatcher",
+    "mana_cost": "{2}{N}{B}",
+    "colors": [
+      "N",
+      "B"
+    ],
+    "type_line": "Creature — Agent Overseer",
+    "rarity": "uncommon",
+    "power": 4,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Every edge case was someone’s main case.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-c88e89\"><stop offset=\"0%\" stop-color=\"#141428\"/><stop offset=\"100%\" stop-color=\"#08081a\"/></radialGradient><filter id=\"gl-c88e89\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-c88e89)\"/><g filter=\"url(#gl-c88e89)\"><polygon points=\"119.1,89.0 119.1,111.0 100.0,122.0 80.9,111.0 80.9,89.0 100.0,78.0\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.6\" opacity=\"0.40\"/><polygon points=\"138.1,78.0 138.1,122.0 100.0,144.0 61.9,122.0 61.9,78.0 100.0,56.0\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.2\" opacity=\"0.30\"/><polygon points=\"157.2,67.0 157.2,133.0 100.0,166.0 42.8,133.0 42.8,67.0 100.0,34.0\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.20\"/><polygon points=\"100.0,85.0 104.1,94.3 114.3,95.4 106.7,102.2 108.8,112.1 100.0,107.0 91.2,112.1 93.3,102.2 85.7,95.4 95.9,94.3\" fill=\"#8b949e\" opacity=\"0.3\"/><circle cx=\"138.1\" cy=\"78.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"138.1\" cy=\"122.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"144.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"122.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"78.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"56.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/arena_compete_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 63,
+    "stats": {
+      "hp": 63,
+      "atk": 60,
+      "def": 37,
+      "spd": 53,
+      "int": 57
+    },
+    "typed_abilities": [
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 2,
+        "damage": 45
+      },
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 2,
+        "damage": 31
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 54748165589850271505
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/arena_compete_agent",
+    "version": "1.0.1",
+    "display_name": "Arena Compete",
+    "description": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation.",
+    "author": "kody-w",
+    "tags": [
+      "competition",
+      "learning",
+      "self-improvement",
+      "agents",
+      "tournament"
+    ],
+    "category": "workflow",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "arena_compete_agent.py",
+      "sha256_lf_v1": "cb5fdc2203b8127d5f174fbe9773c1f8f24e01dcdfb7162fb0a17ad40a2239db",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/arena_compete_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/arena_compete_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

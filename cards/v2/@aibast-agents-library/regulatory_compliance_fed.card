@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/regulatory_compliance_fed",
+  "seed": 16478343906997446426,
+  "name_seed": 3836663418,
+  "incantation": "OUTCAST CONSECRATE EXTINGUISH SILL SURPASS LYRE CARVE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Regulatory Compliance (Federal) Agent",
+    "title": "The Machinist",
+    "mana_cost": "{2}{W}{U}",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "type_line": "Creature — Agent Conduit",
+    "rarity": "uncommon",
+    "power": 2,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Tracks remediation from live tasks on a simulated Dynamics 365 tenant, with FISMA/FedRAMP gap analysis that works offline."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Data in. Decisions out. Humans in the loop.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-aed67a\"><stop offset=\"0%\" stop-color=\"#1e0a1e\"/><stop offset=\"100%\" stop-color=\"#0a050a\"/></radialGradient><filter id=\"gl-aed67a\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-aed67a)\"/><g filter=\"url(#gl-aed67a)\"><polygon points=\"127.9,108.0 123.9,142.8 69.8,133.4 59.0,90.8 85.4,70.4 121.0,80.0\" fill=\"#79c0ff\" opacity=\"0.1\" stroke=\"#79c0ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"113.2,104.6 101.0,115.0 81.6,115.4 76.5,91.4 95.9,78.4 115.8,87.8\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#79c0ff\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/regulatory_compliance_fed",
+    "agent_types": [
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#f0f0f0"
+    ],
+    "hp": 69,
+    "stats": {
+      "hp": 69,
+      "atk": 72,
+      "def": 51,
+      "spd": 60,
+      "int": 67
+    },
+    "typed_abilities": [
+      {
+        "name": "Enforce",
+        "text": "Apply policy rules. Block non-compliant actions.",
+        "cost": 1,
+        "damage": 28
+      },
+      {
+        "name": "Monitor",
+        "text": "Continuously watch for anomalies. Alert on deviation.",
+        "cost": 3,
+        "damage": 18
+      }
+    ],
+    "weakness": "SOCIAL",
+    "weakness_label": "Social",
+    "resistance": "CRAFT",
+    "resistance_label": "Craft",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16478343906997446426
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/regulatory_compliance_fed",
+    "version": "1.1.0",
+    "display_name": "Regulatory Compliance (Federal) Agent",
+    "description": "Tracks remediation from live tasks on a simulated Dynamics 365 tenant, with FISMA/FedRAMP gap analysis that works offline.",
+    "author": "AIBAST",
+    "tags": [
+      "compliance",
+      "FISMA",
+      "FedRAMP",
+      "NIST",
+      "audit",
+      "federal",
+      "regulatory"
+    ],
+    "category": "federal_government",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "regulatory_compliance_fed_agent.py",
+      "sha256_lf_v1": "1a29a0ce065f24eb47b60af788a80a027314aa876ab5ea528685c2be865d10e8",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/regulatory_compliance_fed.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

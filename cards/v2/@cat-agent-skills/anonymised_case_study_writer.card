@@ -1,0 +1,134 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/anonymised_case_study_writer",
+  "seed": 34986150140366831261,
+  "name_seed": 3850880560,
+  "incantation": "REMAIN CHIEFTAIN HEDGE DAGGER WEREWOLF ECLIPSE HAMMER",
+  "version": "1.1.0",
+  "face": {
+    "name": "Anonymised Case Study Writer",
+    "title": "The Pilot",
+    "mana_cost": "{3}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Legendary Creature — Agent Alchemist",
+    "rarity": "common",
+    "power": 2,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Turn engagement notes into anonymised, publishable case studies without exposing client-confidential details."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Every edge case was someone’s main case.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-87c630\"><stop offset=\"0%\" stop-color=\"#1a1e0a\"/><stop offset=\"100%\" stop-color=\"#0a0a05\"/></radialGradient><filter id=\"gl-87c630\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-87c630)\"/><g filter=\"url(#gl-87c630)\"><polygon points=\"119.1,89.0 119.1,111.0 100.0,122.0 80.9,111.0 80.9,89.0 100.0,78.0\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1.6\" opacity=\"0.40\"/><polygon points=\"138.1,78.0 138.1,122.0 100.0,144.0 61.9,122.0 61.9,78.0 100.0,56.0\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1.2\" opacity=\"0.30\"/><polygon points=\"157.2,67.0 157.2,133.0 100.0,166.0 42.8,133.0 42.8,67.0 100.0,34.0\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.20\"/><polygon points=\"100.0,85.0 104.1,94.3 114.3,95.4 106.7,102.2 108.8,112.1 100.0,107.0 91.2,112.1 93.3,102.2 85.7,95.4 95.9,94.3\" fill=\"#7ee787\" opacity=\"0.3\"/><circle cx=\"138.1\" cy=\"78.0\" r=\"4\" fill=\"#7ee787\" opacity=\"0.4\"/><circle cx=\"138.1\" cy=\"122.0\" r=\"4\" fill=\"#7ee787\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"144.0\" r=\"4\" fill=\"#7ee787\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"122.0\" r=\"4\" fill=\"#7ee787\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"78.0\" r=\"4\" fill=\"#7ee787\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"56.0\" r=\"4\" fill=\"#7ee787\" opacity=\"0.4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/anonymised_case_study_writer",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 36,
+    "stats": {
+      "hp": 36,
+      "atk": 58,
+      "def": 27,
+      "spd": 49,
+      "int": 47
+    },
+    "typed_abilities": [
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 2,
+        "damage": 11
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 34986150140366831261
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/anonymised_case_study_writer",
+    "version": "1.1.0",
+    "display_name": "Anonymised Case Study Writer",
+    "description": "Turn engagement notes into anonymised, publishable case studies without exposing client-confidential details.",
+    "author": "Simon Owen",
+    "tags": [
+      "writing",
+      "case_study",
+      "marketing",
+      "documents",
+      "content",
+      "privacy"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "anonymised-case-study-writer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#anonymised-case-study-writer",
+      "upstream_version": "0.1.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "30ca39e3e8405c3e"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "anonymised_case_study_writer_agent.py",
+      "sha256_lf_v1": "acca33c8954fc23a9d6b76b4ab200a7bf5a076cd44c2200f1c42565e98f20361",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/anonymised_case_study_writer_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/anonymised_case_study_writer.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

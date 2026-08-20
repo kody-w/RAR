@@ -1,0 +1,126 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/rapp_skill_bridge_agent",
+  "seed": 13439628186326413100,
+  "name_seed": 3129157281,
+  "incantation": "INQUISITOR CAST CONDOR DISK BERSERKER THREAD CAST",
+  "version": "1.0.1",
+  "face": {
+    "name": "RAPP Skill Bridge",
+    "title": "The Luminary",
+    "mana_cost": "{3}{B}{R}",
+    "colors": [
+      "B",
+      "R"
+    ],
+    "type_line": "Creature — Agent Beacon",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“One prompt. One purpose. Infinite execution.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-8326a1\"><stop offset=\"0%\" stop-color=\"#15101e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-8326a1\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-8326a1)\"/><g filter=\"url(#gl-8326a1)\"><path d=\"M40,120 Q100,58 160,120\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,68 160,125\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f778ba\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f778ba\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#f778ba\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#f778ba\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"79\" r=\"5\" fill=\"#f778ba\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/rapp_skill_bridge_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 68,
+    "stats": {
+      "hp": 68,
+      "atk": 58,
+      "def": 39,
+      "spd": 54,
+      "int": 73
+    },
+    "typed_abilities": [
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 2,
+        "damage": 35
+      },
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 2,
+        "damage": 12
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 13439628186326413100
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/rapp_skill_bridge_agent",
+    "version": "1.0.1",
+    "display_name": "RAPP Skill Bridge",
+    "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills.",
+    "author": "kody-w",
+    "tags": [
+      "skill",
+      "plugin",
+      "claude-code",
+      "converter",
+      "bridge",
+      "interop",
+      "determinism",
+      "roundtrip"
+    ],
+    "category": "pipeline",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "rapp_skill_bridge_agent.py",
+      "sha256_lf_v1": "32d08f268896a835b4c63b9484ad95f1b1234216e0274f92c8455a6e32f406a5",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/rapp_skill_bridge_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rapp_skill_bridge_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

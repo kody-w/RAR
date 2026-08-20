@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@discreetRappers/rapp_pipeline_agent",
+  "seed": 3348533564379118675,
+  "name_seed": 779641225,
+  "incantation": "GLEN BROKE PANTHER BEREFT NEST HELIX BLADE",
+  "version": "1.0.2",
+  "face": {
+    "name": "RAPP",
+    "title": "The Beacon",
+    "mana_cost": "{1}{B}{R}",
+    "colors": [
+      "B",
+      "R"
+    ],
+    "type_line": "Creature — Agent Navigator",
+    "rarity": "uncommon",
+    "power": 6,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Calibrate",
+        "cost": "",
+        "text": "Runs the full RAPP pipeline — discovery, MVP, code gen, quality gates QG1-QG6, PDF reports — using Azure OpenAI and Azure File Storage."
+      },
+      {
+        "keyword": "Requires",
+        "cost": "",
+        "text": "Needs AZURE_OPENAI_API_VERSION, AZURE_OPENAI_DEPLOYMENT_NAME, AZURE_OPENAI_ENDPOINT to activate."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The best agent is the one you forget is running.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-786189\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-786189\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-786189)\"/><g filter=\"url(#gl-786189)\"><circle cx=\"100\" cy=\"100\" r=\"39\" fill=\"#f778ba\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"39\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"54\" ry=\"9\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(16 100 100)\"/><circle cx=\"95\" cy=\"93\" r=\"9\" fill=\"#f778ba\" opacity=\"0.09\"/><circle cx=\"108\" cy=\"100\" r=\"5\" fill=\"#f778ba\" opacity=\"0.13\"/><circle cx=\"93\" cy=\"93\" r=\"10\" fill=\"#f778ba\" opacity=\"0.08\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@discreetRappers/rapp_pipeline_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 54,
+    "stats": {
+      "hp": 54,
+      "atk": 67,
+      "def": 61,
+      "spd": 49,
+      "int": 67
+    },
+    "typed_abilities": [
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 1,
+        "damage": 31
+      },
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 3,
+        "damage": 26
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 3348533564379118675
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@discreetRappers/rapp_pipeline_agent",
+    "version": "1.0.2",
+    "display_name": "RAPP",
+    "description": "Runs the full RAPP pipeline — discovery, MVP, code gen, quality gates QG1-QG6, PDF reports — using Azure OpenAI and Azure File Storage.",
+    "author": "Bill Whalen",
+    "tags": [
+      "pipeline",
+      "rapp",
+      "transcript-to-agent",
+      "code-gen",
+      "quality-gates"
+    ],
+    "category": "pipeline",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_OPENAI_API_VERSION",
+      "AZURE_OPENAI_DEPLOYMENT_NAME",
+      "AZURE_OPENAI_ENDPOINT"
+    ],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "rapp_pipeline_agent.py",
+      "sha256_lf_v1": "feb4bd1dfa316f9aaa83bea4e4c220084794d1207ebee2ba4c3d823aa6bc7b44",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@discreetRappers/rapp_pipeline_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/rapp_pipeline_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/acquisition_support",
+  "seed": 5999981279495069821,
+  "name_seed": 1396979503,
+  "incantation": "WARD PALADIN EXTINGUISH MACE PULSE TOWER SMELT",
+  "version": "1.1.0",
+  "face": {
+    "name": "Acquisition Support Agent",
+    "title": "The Tactician",
+    "mana_cost": "{1}{W}",
+    "colors": [
+      "W"
+    ],
+    "type_line": "Legendary Creature — Agent Catalyst",
+    "rarity": "uncommon",
+    "power": 7,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Not all intelligence is artificial. Some is engineered.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-44372f\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-44372f\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-44372f)\"/><g filter=\"url(#gl-44372f)\"><circle cx=\"133.4\" cy=\"93.9\" r=\"23\" fill=\"#79c0ff\" opacity=\"0.15\" stroke=\"#79c0ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"66.6\" cy=\"106.1\" r=\"19\" fill=\"#79c0ff\" opacity=\"0.1\" stroke=\"#79c0ff\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"133.4\" y1=\"93.9\" x2=\"66.6\" y2=\"106.1\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"44\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/acquisition_support",
+    "agent_types": [
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#f0f0f0"
+    ],
+    "hp": 70,
+    "stats": {
+      "hp": 70,
+      "atk": 55,
+      "def": 40,
+      "spd": 61,
+      "int": 64
+    },
+    "typed_abilities": [
+      {
+        "name": "Audit",
+        "text": "Scan target for compliance violations. Report findings.",
+        "cost": 1,
+        "damage": 46
+      },
+      {
+        "name": "Certify",
+        "text": "Validate against standards. Issue compliance attestation.",
+        "cost": 2,
+        "damage": 30
+      }
+    ],
+    "weakness": "SOCIAL",
+    "weakness_label": "Social",
+    "resistance": "CRAFT",
+    "resistance_label": "Craft",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 5999981279495069821
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/acquisition_support",
+    "version": "1.1.0",
+    "display_name": "Acquisition Support Agent",
+    "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "acquisition",
+      "FAR",
+      "DFAR",
+      "procurement",
+      "vendor-evaluation",
+      "federal"
+    ],
+    "category": "federal_government",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "acquisition_support_agent.py",
+      "sha256_lf_v1": "b470bfbe595b3f5c1b01f2d7454c359a20be6ac3714db588a97743a9969fdf13",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/acquisition_support.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

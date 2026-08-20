@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/rappterbook_agent",
+  "seed": 52555372028508826,
+  "name_seed": 12236501,
+  "incantation": "BRAIN WARLORD AIM TINCTURE SUPREME FLARE FORGE",
+  "version": "1.0.1",
+  "face": {
+    "name": "Rappterbook",
+    "title": "The Synthesizer",
+    "mana_cost": "{1}{U}{B}",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "type_line": "Legendary Creature — Agent Sage",
+    "rarity": "mythic",
+    "power": 5,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Fetches Rappterbook agent profiles, trending posts, stats, and channels read-only from the project's GitHub state files."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Every edge case was someone’s main case.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-bab6d5\"><stop offset=\"0%\" stop-color=\"#15101e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-bab6d5\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-bab6d5)\"/><g filter=\"url(#gl-bab6d5)\"><circle cx=\"112.5\" cy=\"71.6\" r=\"19\" fill=\"#bc8cff\" opacity=\"0.15\" stroke=\"#bc8cff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"87.5\" cy=\"128.4\" r=\"17\" fill=\"#bc8cff\" opacity=\"0.1\" stroke=\"#bc8cff\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"112.5\" y1=\"71.6\" x2=\"87.5\" y2=\"128.4\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"41\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/rappterbook_agent",
+    "agent_types": [
+      "DATA",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#3fb950",
+      "#58a6ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 74,
+      "spd": 100,
+      "int": 100
+    },
+    "typed_abilities": [
+      {
+        "name": "Sync",
+        "text": "Synchronize state between two systems.",
+        "cost": 3,
+        "damage": 48
+      },
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 1,
+        "damage": 13
+      },
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 3,
+        "damage": 22
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 52555372028508826
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/rappterbook_agent",
+    "version": "1.0.1",
+    "display_name": "Rappterbook",
+    "description": "Fetches Rappterbook agent profiles, trending posts, stats, and channels read-only from the project's GitHub state files.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "rappterbook",
+      "social-network",
+      "ai-agents",
+      "federation",
+      "read-only",
+      "data-sloshing"
+    ],
+    "category": "integrations",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "rappterbook_agent.py",
+      "sha256_lf_v1": "1ec5f32b891f3aca40dc247573c79a27b5bbe097fb7f7a40ecd69c4cc15776d9",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/rappterbook_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/rappterbook_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/windows_vm_install_lab_agent",
+  "seed": 5571140270470871847,
+  "name_seed": 1297132175,
+  "incantation": "GLADIATOR SPOKE COIL JOLT RIFT TINCTURE SHARD",
+  "version": "1.0.0",
+  "face": {
+    "name": "Windows VM Install Lab",
+    "title": "The Sage",
+    "mana_cost": "{2}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Creature — Agent Dispatcher",
+    "rarity": "common",
+    "power": 9,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Where workflows end, this agent begins.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-50aa8f\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-50aa8f\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-50aa8f)\"/><g filter=\"url(#gl-50aa8f)\"><polygon points=\"125.9,102.1 122.7,140.0 79.7,142.4 65.4,110.0 59.6,72.3 98.9,59.0 132.7,67.6\" fill=\"#f0883e\" opacity=\"0.1\" stroke=\"#f0883e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"111.2,104.4 103.3,121.8 92.4,112.9 79.1,102.4 86.3,84.1 102.9,82.2 113.3,95.7\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#f0883e\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/windows_vm_install_lab_agent",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 60,
+    "stats": {
+      "hp": 60,
+      "atk": 55,
+      "def": 50,
+      "spd": 61,
+      "int": 53
+    },
+    "typed_abilities": [
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 3,
+        "damage": 32
+      },
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 1,
+        "damage": 49
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 5571140270470871847
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/windows_vm_install_lab_agent",
+    "version": "1.0.0",
+    "display_name": "Windows VM Install Lab",
+    "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
+    "author": "RAPP Community",
+    "tags": [
+      "windows",
+      "hyper-v",
+      "installer",
+      "testing",
+      "automation"
+    ],
+    "category": "devtools",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "external_prereqs": [
+      "Windows 11 Pro, Enterprise, or Education",
+      "Administrator access and Hyper-V capable hardware",
+      "At least 100 GB of free disk space"
+    ],
+    "example_call": {
+      "args": {
+        "action": "status"
+      }
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "windows_vm_install_lab_agent.py",
+      "sha256_lf_v1": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/windows_vm_install_lab_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/windows_vm_install_lab_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

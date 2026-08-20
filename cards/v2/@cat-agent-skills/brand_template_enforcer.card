@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/brand_template_enforcer",
+  "seed": 34161471197824169444,
+  "name_seed": 3658870031,
+  "incantation": "HALL OVERLORD HEDGE ROAR FRAME RISK SEAR",
+  "version": "2.2.0",
+  "face": {
+    "name": "Brand Template Enforcer",
+    "title": "The Calibrator",
+    "mana_cost": "{1}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Creature — Agent Pathfinder",
+    "rarity": "common",
+    "power": 3,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Ensure every generated PowerPoint deck or Word document starts from the correct bundled or SharePoint-hosted brand template."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The humans set the goals. The agent sets the pace.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-15ed0f\"><stop offset=\"0%\" stop-color=\"#2a1a0a\"/><stop offset=\"100%\" stop-color=\"#0a0805\"/></radialGradient><filter id=\"gl-15ed0f\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-15ed0f)\"/><g filter=\"url(#gl-15ed0f)\"><circle cx=\"94\" cy=\"99\" r=\"31\" fill=\"#7ee787\" opacity=\"0.07\"/><circle cx=\"105\" cy=\"120\" r=\"21\" fill=\"#7ee787\" opacity=\"0.09\"/><circle cx=\"84\" cy=\"81\" r=\"32\" fill=\"#7ee787\" opacity=\"0.05\"/><circle cx=\"118\" cy=\"94\" r=\"36\" fill=\"#7ee787\" opacity=\"0.12\"/><circle cx=\"81\" cy=\"88\" r=\"36\" fill=\"#7ee787\" opacity=\"0.06\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#7ee787\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#7ee787\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#7ee787\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"136.0\" y2=\"108.4\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"90.0\" y2=\"141.8\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"57.7\" y2=\"92.5\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"115.0\" y2=\"70.6\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/brand_template_enforcer",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 49,
+    "stats": {
+      "hp": 49,
+      "atk": 37,
+      "def": 32,
+      "spd": 43,
+      "int": 39
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 1,
+        "damage": 26
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 34161471197824169444
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/brand_template_enforcer",
+    "version": "2.2.0",
+    "display_name": "Brand Template Enforcer",
+    "description": "Ensure every generated PowerPoint deck or Word document starts from the correct bundled or SharePoint-hosted brand template.",
+    "author": "Doug Bellingeri",
+    "tags": [
+      "branding",
+      "powerpoint",
+      "word",
+      "templates",
+      "documents",
+      "presentations"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "brand-template-enforcer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#brand-template-enforcer",
+      "upstream_version": "1.2.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "5bd07a11a05931f7"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "brand_template_enforcer_agent.py",
+      "sha256_lf_v1": "ae1779f176150087d15edf582f1193947f2b3df165ad863d53759e62dd1e9061",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/brand_template_enforcer_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/brand_template_enforcer.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

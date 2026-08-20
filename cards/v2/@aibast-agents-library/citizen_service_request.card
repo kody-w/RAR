@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/citizen_service_request",
+  "seed": 8921174840435288387,
+  "name_seed": 2077122880,
+  "incantation": "SILENT PARAGON THISTLE GLEAM STARCH DAYBREAK WELD",
+  "version": "1.1.0",
+  "face": {
+    "name": "Citizen Service Request Agent",
+    "title": "The Prospector",
+    "mana_cost": "{3}{W}{U}{G}",
+    "colors": [
+      "W",
+      "U",
+      "G"
+    ],
+    "type_line": "Creature — Agent Dispatcher",
+    "rarity": "uncommon",
+    "power": 5,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The simplest solution is usually an agent away.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-ce6140\"><stop offset=\"0%\" stop-color=\"#1a0a1e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-ce6140\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-ce6140)\"/><g filter=\"url(#gl-ce6140)\"><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"#79c0ff\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"60\" ry=\"7\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(36 100 100)\"/><circle cx=\"94\" cy=\"92\" r=\"3\" fill=\"#79c0ff\" opacity=\"0.10\"/><circle cx=\"105\" cy=\"101\" r=\"9\" fill=\"#79c0ff\" opacity=\"0.08\"/><circle cx=\"107\" cy=\"96\" r=\"9\" fill=\"#79c0ff\" opacity=\"0.13\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/citizen_service_request",
+    "agent_types": [
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#f0f0f0"
+    ],
+    "hp": 60,
+    "stats": {
+      "hp": 60,
+      "atk": 71,
+      "def": 41,
+      "spd": 55,
+      "int": 69
+    },
+    "typed_abilities": [
+      {
+        "name": "Monitor",
+        "text": "Continuously watch for anomalies. Alert on deviation.",
+        "cost": 1,
+        "damage": 36
+      },
+      {
+        "name": "Enforce",
+        "text": "Apply policy rules. Block non-compliant actions.",
+        "cost": 1,
+        "damage": 16
+      }
+    ],
+    "weakness": "SOCIAL",
+    "weakness_label": "Social",
+    "resistance": "CRAFT",
+    "resistance_label": "Craft",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 8921174840435288387
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/citizen_service_request",
+    "version": "1.1.0",
+    "display_name": "Citizen Service Request Agent",
+    "description": "Handles 311-style intake and routing from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "311",
+      "citizen-services",
+      "municipal",
+      "routing",
+      "SLA",
+      "local-government"
+    ],
+    "category": "slg_government",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "citizen_service_request_agent.py",
+      "sha256_lf_v1": "33b6a25019280cb2c687286897a5bcef088ecef796331b206a1a4827a973246c",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/citizen_service_request.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,134 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/regulation_monitor",
+  "seed": 57388571475478980522,
+  "name_seed": 476916147,
+  "incantation": "CHALICE RUSK FLOOD SLIME DRUM ROGUE GALE",
+  "version": "2.0.0",
+  "face": {
+    "name": "Regulation Monitor",
+    "title": "The Herald",
+    "mana_cost": "{3}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Machinist",
+    "rarity": "rare",
+    "power": 3,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Calibrate",
+        "cost": "",
+        "text": "Configure once, then on a schedule sweeps a locked list of authoritative sources (auto-discovered at setup, confirmed by the user) plus any user-supplied seeds. Classifies each item, flags items relev"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Where others see a task, it sees a system.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-6d29b3\"><stop offset=\"0%\" stop-color=\"#1e0a1e\"/><stop offset=\"100%\" stop-color=\"#0a050a\"/></radialGradient><filter id=\"gl-6d29b3\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-6d29b3)\"/><g filter=\"url(#gl-6d29b3)\"><circle cx=\"94\" cy=\"110\" r=\"17\" fill=\"#8b949e\" opacity=\"0.10\"/><circle cx=\"93\" cy=\"112\" r=\"25\" fill=\"#8b949e\" opacity=\"0.06\"/><circle cx=\"107\" cy=\"103\" r=\"27\" fill=\"#8b949e\" opacity=\"0.06\"/><circle cx=\"96\" cy=\"125\" r=\"30\" fill=\"#8b949e\" opacity=\"0.10\"/><circle cx=\"120\" cy=\"115\" r=\"18\" fill=\"#8b949e\" opacity=\"0.09\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#8b949e\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#8b949e\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#8b949e\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"144.2\" y2=\"112.8\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"98.4\" y2=\"131.0\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"67.8\" y2=\"89.2\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"110.5\" y2=\"60.4\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/regulation_monitor",
+    "agent_types": [
+      "LOGIC",
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#f0f0f0"
+    ],
+    "hp": 40,
+    "stats": {
+      "hp": 40,
+      "atk": 37,
+      "def": 35,
+      "spd": 31,
+      "int": 42
+    },
+    "typed_abilities": [
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 3,
+        "damage": 20
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 57388571475478980522
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/regulation_monitor",
+    "version": "2.0.0",
+    "display_name": "Regulation Monitor",
+    "description": "Configure once, then on a schedule sweeps a locked list of authoritative sources (auto-discovered at setup, confirmed by the user) plus any user-supplied seeds. Classifies each item, flags items relevant to the user's team using a light WorkIQ-derived profile, and renders a self-contained HTML dashboard. A tightly-bounded fallback web search is used only when a locked source is silent in the wind…",
+    "author": "Jagmeet Chabra",
+    "tags": [
+      "regulation",
+      "monitoring",
+      "compliance",
+      "dashboard",
+      "research"
+    ],
+    "category": "analysis",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "regulation-monitor",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#regulation-monitor",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "455a25cb3f6e394c"
+    },
+    "platforms": [
+      "Cowork",
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "regulation_monitor_agent.py",
+      "sha256_lf_v1": "094fa86c7092388fb65e3ce1e381c016d4d8b9fb2ddcdb92be6e720016a6b0e7",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/regulation_monitor_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/regulation_monitor.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

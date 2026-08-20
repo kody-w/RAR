@@ -1,0 +1,134 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/power_automate_desktop_assessment",
+  "seed": 68788066229896752167,
+  "name_seed": 3131067848,
+  "incantation": "SURGE CROAK FLOOD BRIGAND FERN HOST CRACK",
+  "version": "2.1.0",
+  "face": {
+    "name": "Power Automate Desktop Assessment",
+    "title": "The Operator",
+    "mana_cost": "{2}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Analyst",
+    "rarity": "uncommon",
+    "power": 8,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Calibrate",
+        "cost": "",
+        "text": "Assess Power Automate Desktop and hybrid automation projects with evidence-based findings and prioritized remediation guidance."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Efficiency is not a goal. It’s a side effect of clarity.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-a04dc8\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-a04dc8\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-a04dc8)\"/><g filter=\"url(#gl-a04dc8)\"><circle cx=\"104\" cy=\"129\" r=\"36\" fill=\"#8b949e\" opacity=\"0.08\"/><circle cx=\"82\" cy=\"98\" r=\"19\" fill=\"#8b949e\" opacity=\"0.04\"/><circle cx=\"82\" cy=\"115\" r=\"26\" fill=\"#8b949e\" opacity=\"0.05\"/><circle cx=\"111\" cy=\"106\" r=\"17\" fill=\"#8b949e\" opacity=\"0.05\"/><circle cx=\"88\" cy=\"119\" r=\"30\" fill=\"#8b949e\" opacity=\"0.09\"/><circle cx=\"116\" cy=\"81\" r=\"39\" fill=\"#8b949e\" opacity=\"0.11\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#8b949e\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#8b949e\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#8b949e\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"140.1\" y2=\"108.4\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"89.0\" y2=\"137.4\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"62.1\" y2=\"97.6\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"101.0\" y2=\"63.0\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/power_automate_desktop_assessment",
+    "agent_types": [
+      "LOGIC",
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#f0f0f0"
+    ],
+    "hp": 35,
+    "stats": {
+      "hp": 35,
+      "atk": 29,
+      "def": 28,
+      "spd": 28,
+      "int": 41
+    },
+    "typed_abilities": [
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 1,
+        "damage": 39
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 68788066229896752167
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/power_automate_desktop_assessment",
+    "version": "2.1.0",
+    "display_name": "Power Automate Desktop Assessment",
+    "description": "Assess Power Automate Desktop and hybrid automation projects with evidence-based findings and prioritized remediation guidance.",
+    "author": "Ricardo Calejo",
+    "tags": [
+      "power_automate",
+      "desktop_flows",
+      "automation",
+      "assessment",
+      "governance"
+    ],
+    "category": "analysis",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "power-automate-desktop-assessment",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#power-automate-desktop-assessment",
+      "upstream_version": "1.1.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "d026e3d4a8378798"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "power_automate_desktop_assessment_agent.py",
+      "sha256_lf_v1": "a002ab6df0f13d216069dc399971ecec085e96ce854ee960de87ac043cd8435a",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/power_automate_desktop_assessment_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/power_automate_desktop_assessment.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

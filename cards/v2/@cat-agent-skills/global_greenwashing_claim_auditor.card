@@ -1,0 +1,139 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/global_greenwashing_claim_auditor",
+  "seed": 23978027438796975146,
+  "name_seed": 1287852266,
+  "incantation": "PYRE CAST SCEPTER MAZE PATRIARCH PORTENT CLASP",
+  "version": "2.0.0",
+  "face": {
+    "name": "Global Greenwashing Claim Auditor",
+    "title": "The Resolver",
+    "mana_cost": "{1}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Compiler",
+    "rarity": "rare",
+    "power": 7,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Execute",
+        "cost": "",
+        "text": "Audit environmental claims in CSV, XLSX, DOCX, PPTX, conversational text, and public websites with separate ANY, CA, EU, and UK findings."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It works while you sleep. It finishes before you wake.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-c310ea\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-c310ea\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-c310ea)\"/><g filter=\"url(#gl-c310ea)\"><circle cx=\"135.7\" cy=\"84.3\" r=\"19\" fill=\"#7ee787\" opacity=\"0.15\" stroke=\"#7ee787\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"64.3\" cy=\"115.7\" r=\"14\" fill=\"#7ee787\" opacity=\"0.1\" stroke=\"#7ee787\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"135.7\" y1=\"84.3\" x2=\"64.3\" y2=\"115.7\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"49\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/global_greenwashing_claim_auditor",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 45,
+    "stats": {
+      "hp": 45,
+      "atk": 49,
+      "def": 22,
+      "spd": 46,
+      "int": 53
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 2,
+        "damage": 38
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 23978027438796975146
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/global_greenwashing_claim_auditor",
+    "version": "2.0.0",
+    "display_name": "Global Greenwashing Claim Auditor",
+    "description": "Audit environmental claims in CSV, XLSX, DOCX, PPTX, conversational text, and public websites with separate ANY, CA, EU, and UK findings.",
+    "author": "Chris Garty",
+    "tags": [
+      "greenwashing",
+      "environmental_claims",
+      "sustainability",
+      "compliance",
+      "canada",
+      "european_union",
+      "united_kingdom",
+      "documents"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "global-greenwashing-claim-auditor",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#global-greenwashing-claim-auditor",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "4eb5e370798c4538"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "global_greenwashing_claim_auditor_agent.py",
+      "sha256_lf_v1": "3899d6d4b21a00ce391389c46b6172786c9e8e3023f60b715765165d5343d9fe",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/global_greenwashing_claim_auditor.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

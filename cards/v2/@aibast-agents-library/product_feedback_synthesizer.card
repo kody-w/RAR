@@ -1,0 +1,124 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/product_feedback_synthesizer",
+  "seed": 17606540497672480195,
+  "name_seed": 4099342156,
+  "incantation": "MOOR CHAMPION PANTHER DEEP HERALD SHRIEK BIND",
+  "version": "1.2.0",
+  "face": {
+    "name": "Product Feedback Synthesizer Agent",
+    "title": "The Calibrator",
+    "mana_cost": "{2}{U}{R}",
+    "colors": [
+      "U",
+      "R"
+    ],
+    "type_line": "Creature — Agent Tactician",
+    "rarity": "rare",
+    "power": 4,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Synthesizes feedback themes from a live simulated Dynamics 365 tenant's cases and emails, with an offline demo fallback; writes simulated."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“What the dashboard shows, the agent already knew.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-56ff4c\"><stop offset=\"0%\" stop-color=\"#1a1a2e\"/><stop offset=\"100%\" stop-color=\"#08080f\"/></radialGradient><filter id=\"gl-56ff4c\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-56ff4c)\"/><g filter=\"url(#gl-56ff4c)\"><polygon points=\"148.8,104.2 121.0,137.5 89.6,141.7 61.3,109.9 57.8,79.4 90.6,51.9 132.1,76.1\" fill=\"#58a6ff\" opacity=\"0.1\" stroke=\"#58a6ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"124.7,108.1 105.7,116.0 90.6,109.0 86.1,101.3 87.9,86.7 102.3,82.1 121.4,91.7\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#58a6ff\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/product_feedback_synthesizer",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 64,
+    "stats": {
+      "hp": 64,
+      "atk": 68,
+      "def": 48,
+      "spd": 58,
+      "int": 54
+    },
+    "typed_abilities": [
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 3,
+        "damage": 38
+      },
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 2,
+        "damage": 21
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 17606540497672480195
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/product_feedback_synthesizer",
+    "version": "1.2.0",
+    "display_name": "Product Feedback Synthesizer Agent",
+    "description": "Synthesizes feedback themes from a live simulated Dynamics 365 tenant's cases and emails, with an offline demo fallback; writes simulated.",
+    "author": "AIBAST",
+    "tags": [
+      "feedback",
+      "product",
+      "feature-requests",
+      "sentiment",
+      "roadmap",
+      "nps"
+    ],
+    "category": "software_digital_products",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "product_feedback_synthesizer_agent.py",
+      "sha256_lf_v1": "92333a27ab814748b8e39d8132396b0874eee15f045ad777c1048e368bc83aae",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/product_feedback_synthesizer.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

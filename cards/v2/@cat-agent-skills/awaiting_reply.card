@@ -1,0 +1,136 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/awaiting_reply",
+  "seed": 32060860374644044677,
+  "name_seed": 3169783461,
+  "incantation": "MASTER ENDOW CROWN VEIN WARLORD SPLINTER GRIND",
+  "version": "2.0.0",
+  "face": {
+    "name": "Awaiting Reply",
+    "title": "The Vanguard",
+    "mana_cost": "{3}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Surveyor",
+    "rarity": "uncommon",
+    "power": 5,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "A weekday-morning Scout automation that finds emails you sent that asked for something and never got an answer, reports how many are waiting, and prepares follow-up drafts in each thread's own languag"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It works while you sleep. It finishes before you wake.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-ef0ea5\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-ef0ea5\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-ef0ea5)\"/><g filter=\"url(#gl-ef0ea5)\"><line x1=\"84\" y1=\"96\" x2=\"148\" y2=\"63\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"148\" y1=\"63\" x2=\"56\" y2=\"52\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"56\" y1=\"52\" x2=\"90\" y2=\"87\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"90\" y1=\"87\" x2=\"121\" y2=\"159\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"121\" y1=\"159\" x2=\"159\" y2=\"152\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"159\" y1=\"152\" x2=\"84\" y2=\"96\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"84\" y1=\"96\" x2=\"56\" y2=\"52\" stroke=\"#7ee787\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"84\" cy=\"96\" r=\"3\" fill=\"#7ee787\" opacity=\"0.64\"/><circle cx=\"148\" cy=\"63\" r=\"3\" fill=\"#7ee787\" opacity=\"0.38\"/><circle cx=\"56\" cy=\"52\" r=\"6\" fill=\"#7ee787\" opacity=\"0.30\"/><circle cx=\"90\" cy=\"87\" r=\"3\" fill=\"#7ee787\" opacity=\"0.32\"/><circle cx=\"121\" cy=\"159\" r=\"5\" fill=\"#7ee787\" opacity=\"0.51\"/><circle cx=\"159\" cy=\"152\" r=\"3\" fill=\"#7ee787\" opacity=\"0.51\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/awaiting_reply",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 42,
+    "stats": {
+      "hp": 42,
+      "atk": 54,
+      "def": 29,
+      "spd": 42,
+      "int": 51
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 21
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 32060860374644044677
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/awaiting_reply",
+    "version": "2.0.0",
+    "display_name": "Awaiting Reply",
+    "description": "A weekday-morning Scout automation that finds emails you sent that asked for something and never got an answer, reports how many are waiting, and prepares follow-up drafts in each thread's own language that it never sends.",
+    "author": "Allan De Castro",
+    "tags": [
+      "email",
+      "follow_up",
+      "automation",
+      "productivity",
+      "inbox",
+      "reminder",
+      "multilingual"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "awaiting-reply",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#awaiting-reply",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "d269450ca78b236a"
+    },
+    "platforms": [
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "awaiting_reply_agent.py",
+      "sha256_lf_v1": "fbd75b3e3e375301db703b7b0f2205c47d0a33f8b137b721c7380dfac54b5193",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/awaiting_reply_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/awaiting_reply.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

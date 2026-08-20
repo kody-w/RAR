@@ -1,0 +1,136 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/accessibility_pass",
+  "seed": 27950782190482898131,
+  "name_seed": 2212831312,
+  "incantation": "RALLY CHIEFTAIN DIRGE WILD KNELL BEND PRONG",
+  "version": "2.0.0",
+  "face": {
+    "name": "Accessibility Pass",
+    "title": "The Optimizer",
+    "mana_cost": "{1}{R}{U}",
+    "colors": [
+      "R",
+      "U"
+    ],
+    "type_line": "Creature — Agent Marshal",
+    "rarity": "common",
+    "power": 5,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Check a PowerPoint deck, Word document, HTML page, or Markdown file against Microsoft's Accessibility Checker rules (missing alt text, untitled slides, headerless tables, low contrast, illogical readi"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-e52050\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"gl-e52050\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-e52050)\"/><g filter=\"url(#gl-e52050)\"><circle cx=\"119\" cy=\"120\" r=\"20\" fill=\"#f0883e\" opacity=\"0.09\"/><circle cx=\"90\" cy=\"84\" r=\"36\" fill=\"#f0883e\" opacity=\"0.07\"/><circle cx=\"100\" cy=\"91\" r=\"16\" fill=\"#f0883e\" opacity=\"0.12\"/><circle cx=\"96\" cy=\"110\" r=\"28\" fill=\"#f0883e\" opacity=\"0.08\"/><circle cx=\"124\" cy=\"109\" r=\"15\" fill=\"#f0883e\" opacity=\"0.06\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#f0883e\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#f0883e\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#f0883e\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"130.3\" y2=\"115.4\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"81.8\" y2=\"144.4\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"59.0\" y2=\"99.0\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"106.7\" y2=\"54.5\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/accessibility_pass",
+    "agent_types": [
+      "LOGIC",
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#d29922"
+    ],
+    "hp": 44,
+    "stats": {
+      "hp": 44,
+      "atk": 34,
+      "def": 28,
+      "spd": 27,
+      "int": 37
+    },
+    "typed_abilities": [
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 1,
+        "damage": 20
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 27950782190482898131
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/accessibility_pass",
+    "version": "2.0.0",
+    "display_name": "Accessibility Pass",
+    "description": "Check a PowerPoint deck, Word document, HTML page, or Markdown file against Microsoft's Accessibility Checker rules (missing alt text, untitled slides, headerless tables, low contrast, illogical reading order) and fix what it finds.",
+    "author": "Tim Karlsson",
+    "tags": [
+      "accessibility",
+      "documents",
+      "presentations",
+      "powerpoint",
+      "quality",
+      "scripts"
+    ],
+    "category": "devtools",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "accessibility-pass",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#accessibility-pass",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "183550ba28bed17f"
+    },
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "accessibility_pass_agent.py",
+      "sha256_lf_v1": "78b164685399af6a913c512c893a064b71d4476f161bb1f868bf8cd03156ee76",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/accessibility_pass_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/accessibility_pass.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

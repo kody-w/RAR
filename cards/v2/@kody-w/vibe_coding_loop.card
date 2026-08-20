@@ -1,0 +1,129 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/vibe_coding_loop",
+  "seed": 51487962924449407810,
+  "name_seed": 3398040956,
+  "incantation": "STRAND MUSK BADGE THRONE LAW BRED SMOKE",
+  "version": "1.0.1",
+  "face": {
+    "name": "Vibe Coding Demo Loop",
+    "title": "The Navigator",
+    "mana_cost": "{3}{N}{U}",
+    "colors": [
+      "N",
+      "U"
+    ],
+    "type_line": "Creature — Agent Surveyor",
+    "rarity": "common",
+    "power": 6,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Dispatch",
+        "cost": "",
+        "text": "Returns prompt and shell-command templates for shipping batches of single-file HTML demos to a Jekyll site; makes no LLM or network calls itself."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Every edge case was someone’s main case.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-89fd7c\"><stop offset=\"0%\" stop-color=\"#1e0a1e\"/><stop offset=\"100%\" stop-color=\"#0a050a\"/></radialGradient><filter id=\"gl-89fd7c\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-89fd7c)\"/><g filter=\"url(#gl-89fd7c)\"><circle cx=\"78.9\" cy=\"70.8\" r=\"22\" fill=\"#8b949e\" opacity=\"0.15\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"121.1\" cy=\"129.2\" r=\"10\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"78.9\" y1=\"70.8\" x2=\"121.1\" y2=\"129.2\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"46\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/vibe_coding_loop",
+    "agent_types": [
+      "DATA",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#3fb950",
+      "#58a6ff"
+    ],
+    "hp": 62,
+    "stats": {
+      "hp": 62,
+      "atk": 73,
+      "def": 39,
+      "spd": 45,
+      "int": 58
+    },
+    "typed_abilities": [
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 1,
+        "damage": 43
+      },
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 2,
+        "damage": 15
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 51487962924449407810
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/vibe_coding_loop",
+    "version": "1.0.1",
+    "display_name": "Vibe Coding Demo Loop",
+    "description": "Returns prompt and shell-command templates for shipping batches of single-file HTML demos to a Jekyll site; makes no LLM or network calls itself.",
+    "author": "kody-w",
+    "tags": [
+      "publishing",
+      "orchestration",
+      "vibe-coding",
+      "single-file-html",
+      "loop"
+    ],
+    "category": "workflow",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "example_call": {
+      "action": "loop",
+      "domain": "first-person rooftop scenes"
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "vibe_coding_loop_agent.py",
+      "sha256_lf_v1": "931c9224a42c1a609821a5d2fb5b7303a7434fb625d59eae8f8027a7ef7b046e",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/vibe_coding_loop_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/vibe_coding_loop.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

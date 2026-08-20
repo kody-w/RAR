@@ -1,0 +1,135 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/ai_demo_assistant",
+  "seed": 27487402339934676149,
+  "name_seed": 2104942283,
+  "incantation": "SLASH CHAMPION WOVEN INQUISITOR FROZEN REVOKE SPIKE",
+  "version": "2.0.0",
+  "face": {
+    "name": "AI Demo Assistant",
+    "title": "The Machinist",
+    "mana_cost": "{1}{N}{R}",
+    "colors": [
+      "N",
+      "R"
+    ],
+    "type_line": "Creature — Agent Compiler",
+    "rarity": "uncommon",
+    "power": 5,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Configure",
+        "cost": "",
+        "text": "Turns a customer name, line of business, and personas into a ready-to-seed Microsoft 365 Copilot demo — fictional Word/PowerPoint/Excel example files plus a full delivery and provisioning plan, with o"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Where workflows end, this agent begins.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-76decb\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-76decb\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-76decb)\"/><g filter=\"url(#gl-76decb)\"><line x1=\"141\" y1=\"165\" x2=\"89\" y2=\"120\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"89\" y1=\"120\" x2=\"169\" y2=\"72\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"169\" y1=\"72\" x2=\"141\" y2=\"102\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"141\" y1=\"102\" x2=\"63\" y2=\"163\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"63\" y1=\"163\" x2=\"142\" y2=\"49\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"142\" y1=\"49\" x2=\"69\" y2=\"131\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"69\" y1=\"131\" x2=\"165\" y2=\"118\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"165\" y1=\"118\" x2=\"141\" y2=\"165\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"141\" y1=\"165\" x2=\"169\" y2=\"72\" stroke=\"#8b949e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"141\" cy=\"165\" r=\"4\" fill=\"#8b949e\" opacity=\"0.55\"/><circle cx=\"89\" cy=\"120\" r=\"4\" fill=\"#8b949e\" opacity=\"0.38\"/><circle cx=\"169\" cy=\"72\" r=\"4\" fill=\"#8b949e\" opacity=\"0.66\"/><circle cx=\"141\" cy=\"102\" r=\"6\" fill=\"#8b949e\" opacity=\"0.67\"/><circle cx=\"63\" cy=\"163\" r=\"5\" fill=\"#8b949e\" opacity=\"0.51\"/><circle cx=\"142\" cy=\"49\" r=\"6\" fill=\"#8b949e\" opacity=\"0.35\"/><circle cx=\"69\" cy=\"131\" r=\"3\" fill=\"#8b949e\" opacity=\"0.48\"/><circle cx=\"165\" cy=\"118\" r=\"5\" fill=\"#8b949e\" opacity=\"0.56\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/ai_demo_assistant",
+    "agent_types": [
+      "SOCIAL",
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#bc8cff"
+    ],
+    "hp": 46,
+    "stats": {
+      "hp": 46,
+      "atk": 48,
+      "def": 16,
+      "spd": 28,
+      "int": 47
+    },
+    "typed_abilities": [
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 1,
+        "damage": 11
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 27487402339934676149
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/ai_demo_assistant",
+    "version": "2.0.0",
+    "display_name": "AI Demo Assistant",
+    "description": "Turns a customer name, line of business, and personas into a ready-to-seed Microsoft 365 Copilot demo — fictional Word/PowerPoint/Excel example files plus a full delivery and provisioning plan, with optional one-click seeding to OneDrive and Teams.",
+    "author": "Doak Moore",
+    "tags": [
+      "demo",
+      "copilot",
+      "microsoft_365",
+      "sales_enablement",
+      "content",
+      "productivity"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "ai-demo-assistant",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#ai-demo-assistant",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "c768346e949547d4"
+    },
+    "platforms": [
+      "Cowork"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "ai_demo_assistant_agent.py",
+      "sha256_lf_v1": "91fdd28e1096d53816d4397debef31b39e5539d37b57a29783db543dc51482d1",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/ai_demo_assistant_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/ai_demo_assistant.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,133 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/doc_format_converter",
+  "seed": 18875157703004267969,
+  "name_seed": 99747821,
+  "incantation": "BLUFF CHAMPION RAPID KATANA TOKEN BOAR FUSE",
+  "version": "2.0.0",
+  "face": {
+    "name": "Universal Document Converter",
+    "title": "The Prospector",
+    "mana_cost": "{2}{R}{U}",
+    "colors": [
+      "R",
+      "U"
+    ],
+    "type_line": "Creature — Agent Machinist",
+    "rarity": "rare",
+    "power": 8,
+    "toughness": 10,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Convert documents between Markdown, HTML, PDF, Word, PowerPoint, Excel/CSV and text — fully offline, using only the libraries already in the agent sandbox."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The pipeline never sleeps. The agent never forgets.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-f207ed\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-f207ed\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-f207ed)\"/><g filter=\"url(#gl-f207ed)\"><circle cx=\"124\" cy=\"118\" r=\"35\" fill=\"#f0883e\" opacity=\"0.05\"/><circle cx=\"111\" cy=\"97\" r=\"18\" fill=\"#f0883e\" opacity=\"0.07\"/><circle cx=\"88\" cy=\"122\" r=\"28\" fill=\"#f0883e\" opacity=\"0.07\"/><circle cx=\"94\" cy=\"107\" r=\"24\" fill=\"#f0883e\" opacity=\"0.06\"/><circle cx=\"126\" cy=\"107\" r=\"35\" fill=\"#f0883e\" opacity=\"0.09\"/><circle cx=\"72\" cy=\"89\" r=\"27\" fill=\"#f0883e\" opacity=\"0.06\"/><circle cx=\"71\" cy=\"78\" r=\"32\" fill=\"#f0883e\" opacity=\"0.11\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#f0883e\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#f0883e\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#f0883e\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"128.1\" y2=\"113.0\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"92.8\" y2=\"133.2\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"68.4\" y2=\"90.3\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"108.9\" y2=\"67.2\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/doc_format_converter",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 39,
+    "stats": {
+      "hp": 39,
+      "atk": 59,
+      "def": 20,
+      "spd": 38,
+      "int": 45
+    },
+    "typed_abilities": [
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 2,
+        "damage": 47
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 18875157703004267969
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/doc_format_converter",
+    "version": "2.0.0",
+    "display_name": "Universal Document Converter",
+    "description": "Convert documents between Markdown, HTML, PDF, Word, PowerPoint, Excel/CSV and text — fully offline, using only the libraries already in the agent sandbox.",
+    "author": "Andreas Adner",
+    "tags": [
+      "documents",
+      "conversion",
+      "markdown",
+      "pdf",
+      "office",
+      "scripts"
+    ],
+    "category": "devtools",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "doc-format-converter",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#doc-format-converter",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "d1c0d69a8989af49"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "doc_format_converter_agent.py",
+      "sha256_lf_v1": "fe4a32bfd496ea42fe68d4815d3f6835297ca9434e9a3c72129873a4b5ea0f3a",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/doc_format_converter_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/doc_format_converter.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

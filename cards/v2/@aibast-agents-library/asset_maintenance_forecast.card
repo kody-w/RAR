@@ -1,0 +1,126 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/asset_maintenance_forecast",
+  "seed": 5836169530732982279,
+  "name_seed": 1358839108,
+  "incantation": "WELD SOVEREIGN RAY GRAVE COLT BOOM SMELT",
+  "version": "1.3.0",
+  "face": {
+    "name": "Asset Maintenance Forecast Agent",
+    "title": "The Surveyor",
+    "mana_cost": "{3}{R}{G}",
+    "colors": [
+      "R",
+      "G"
+    ],
+    "type_line": "Creature — Agent Forgemaster",
+    "rarity": "common",
+    "power": 7,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Execute",
+        "cost": "",
+        "text": "Monitors asset health from live CRM work orders joined to simulated telemetry sensor stats and alerts, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Between the input and the output, there is judgment.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-fe3d44\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-fe3d44\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-fe3d44)\"/><g filter=\"url(#gl-fe3d44)\"><line x1=\"79\" y1=\"49\" x2=\"130\" y2=\"54\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"130\" y1=\"54\" x2=\"82\" y2=\"54\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"82\" y1=\"54\" x2=\"97\" y2=\"38\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"97\" y1=\"38\" x2=\"51\" y2=\"145\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"51\" y1=\"145\" x2=\"33\" y2=\"128\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"33\" y1=\"128\" x2=\"72\" y2=\"133\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"72\" y1=\"133\" x2=\"79\" y2=\"49\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"79\" y1=\"49\" x2=\"82\" y2=\"54\" stroke=\"#f0883e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"79\" cy=\"49\" r=\"5\" fill=\"#f0883e\" opacity=\"0.36\"/><circle cx=\"130\" cy=\"54\" r=\"3\" fill=\"#f0883e\" opacity=\"0.46\"/><circle cx=\"82\" cy=\"54\" r=\"5\" fill=\"#f0883e\" opacity=\"0.60\"/><circle cx=\"97\" cy=\"38\" r=\"6\" fill=\"#f0883e\" opacity=\"0.54\"/><circle cx=\"51\" cy=\"145\" r=\"4\" fill=\"#f0883e\" opacity=\"0.68\"/><circle cx=\"33\" cy=\"128\" r=\"6\" fill=\"#f0883e\" opacity=\"0.57\"/><circle cx=\"72\" cy=\"133\" r=\"4\" fill=\"#f0883e\" opacity=\"0.34\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/asset_maintenance_forecast",
+    "agent_types": [
+      "CRAFT",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#f85149",
+      "#58a6ff"
+    ],
+    "hp": 62,
+    "stats": {
+      "hp": 62,
+      "atk": 62,
+      "def": 36,
+      "spd": 65,
+      "int": 64
+    },
+    "typed_abilities": [
+      {
+        "name": "Build",
+        "text": "Assemble components into deployable artifact.",
+        "cost": 1,
+        "damage": 34
+      },
+      {
+        "name": "Optimize",
+        "text": "Tune process parameters for maximum throughput.",
+        "cost": 2,
+        "damage": 25
+      }
+    ],
+    "weakness": "SHIELD",
+    "weakness_label": "Shield",
+    "resistance": "HEAL",
+    "resistance_label": "Heal",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 5836169530732982279
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/asset_maintenance_forecast",
+    "version": "1.3.0",
+    "display_name": "Asset Maintenance Forecast Agent",
+    "description": "Monitors asset health from live CRM work orders joined to simulated telemetry sensor stats and alerts, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "maintenance",
+      "asset-health",
+      "energy",
+      "predictive",
+      "work-orders",
+      "budget"
+    ],
+    "category": "energy",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "asset_maintenance_forecast_agent.py",
+      "sha256_lf_v1": "3b19a5b8d75932797bd11152c321ce6d83789f0092ed326df11e145a415120ac",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/energy_stacks/asset_maintenance_forecast_stack/asset_maintenance_forecast_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/asset_maintenance_forecast.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

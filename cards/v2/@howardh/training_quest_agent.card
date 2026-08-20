@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@howardh/training_quest_agent",
+  "seed": 737623649666474497,
+  "name_seed": 171741389,
+  "incantation": "SCEPTER PALADIN BADGE DIVINATION WYRM BROKE FORGE",
+  "version": "1.0.1",
+  "face": {
+    "name": "TrainingQuest",
+    "title": "The Navigator",
+    "mana_cost": "{2}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Creature — Agent Forgemaster",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Generates a gamified HTML onboarding quest from the brainstem's loaded agents, with checkpoints, progress tracking, and copyable prompts."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It reads the room before it reads the data.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-3c90cd\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-3c90cd\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-3c90cd)\"/><g filter=\"url(#gl-3c90cd)\"><line x1=\"50\" y1=\"108\" x2=\"147\" y2=\"50\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"147\" y1=\"50\" x2=\"81\" y2=\"60\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"81\" y1=\"60\" x2=\"129\" y2=\"164\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"129\" y1=\"164\" x2=\"68\" y2=\"98\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"68\" y1=\"98\" x2=\"100\" y2=\"145\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"100\" y1=\"145\" x2=\"50\" y2=\"108\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"50\" y1=\"108\" x2=\"81\" y2=\"60\" stroke=\"#7ee787\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"50\" cy=\"108\" r=\"6\" fill=\"#7ee787\" opacity=\"0.56\"/><circle cx=\"147\" cy=\"50\" r=\"5\" fill=\"#7ee787\" opacity=\"0.47\"/><circle cx=\"81\" cy=\"60\" r=\"6\" fill=\"#7ee787\" opacity=\"0.37\"/><circle cx=\"129\" cy=\"164\" r=\"4\" fill=\"#7ee787\" opacity=\"0.41\"/><circle cx=\"68\" cy=\"98\" r=\"3\" fill=\"#7ee787\" opacity=\"0.32\"/><circle cx=\"100\" cy=\"145\" r=\"5\" fill=\"#7ee787\" opacity=\"0.66\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@howardh/training_quest_agent",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 58,
+    "stats": {
+      "hp": 58,
+      "atk": 61,
+      "def": 38,
+      "spd": 46,
+      "int": 64
+    },
+    "typed_abilities": [
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 3,
+        "damage": 28
+      },
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 3,
+        "damage": 31
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 737623649666474497
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@howardh/training_quest_agent",
+    "version": "1.0.1",
+    "display_name": "TrainingQuest",
+    "description": "Generates a gamified HTML onboarding quest from the brainstem's loaded agents, with checkpoints, progress tracking, and copyable prompts.",
+    "author": "Howard Hoy",
+    "tags": [
+      "training",
+      "onboarding",
+      "quest",
+      "html",
+      "interactive",
+      "gamification"
+    ],
+    "category": "productivity",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "training_quest_agent.py",
+      "sha256_lf_v1": "fc213fa839cf3f39312ba03c31e47e55af61dd636bbcd671d35ee48383c78ab5",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@howardh/training_quest_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@howardh/training_quest_agent.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/customer_sentiment_churn",
+  "seed": 12655086543703912626,
+  "name_seed": 2946491945,
+  "incantation": "CRYPT SOVEREIGN EXTINGUISH MANA SEQUOIA REDWOOD MOLD",
+  "version": "1.2.0",
+  "face": {
+    "name": "Customer Sentiment & Churn Agent",
+    "title": "The Watcher",
+    "mana_cost": "{1}{U}{B}",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "type_line": "Creature — Agent Warden",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Generate",
+        "cost": "",
+        "text": "Scores churn risk and plans retention from a live simulated Dynamics 365 tenant (cases as sentiment signals), with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The code compiles. The agent decides. The work gets done.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-9fe629\"><stop offset=\"0%\" stop-color=\"#1a1a2e\"/><stop offset=\"100%\" stop-color=\"#08080f\"/></radialGradient><filter id=\"gl-9fe629\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-9fe629)\"/><g filter=\"url(#gl-9fe629)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#79c0ff\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#79c0ff\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"9\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(-19 100 100)\"/><circle cx=\"75.7\" cy=\"102.0\" r=\"5\" fill=\"#79c0ff\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"14\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(20 100 100)\"/><circle cx=\"134.2\" cy=\"89.7\" r=\"3\" fill=\"#79c0ff\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"66\" ry=\"33\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.36\" transform=\"rotate(25 100 100)\"/><circle cx=\"43.3\" cy=\"104.5\" r=\"3\" fill=\"#79c0ff\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"84\" ry=\"33\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.44\" transform=\"rotate(-8 100 100)\"/><circle cx=\"84.5\" cy=\"40.0\" r=\"3\" fill=\"#79c0ff\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/customer_sentiment_churn",
+    "agent_types": [
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#bc8cff"
+    ],
+    "hp": 63,
+    "stats": {
+      "hp": 63,
+      "atk": 62,
+      "def": 54,
+      "spd": 69,
+      "int": 68
+    },
+    "typed_abilities": [
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 2,
+        "damage": 48
+      },
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 3,
+        "damage": 28
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 12655086543703912626
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/customer_sentiment_churn",
+    "version": "1.2.0",
+    "display_name": "Customer Sentiment & Churn Agent",
+    "description": "Scores churn risk and plans retention from a live simulated Dynamics 365 tenant (cases as sentiment signals), with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "sentiment",
+      "churn",
+      "retention",
+      "NPS",
+      "analytics",
+      "financial-services"
+    ],
+    "category": "financial_services",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "customer_sentiment_churn_agent.py",
+      "sha256_lf_v1": "196850ced898f6460b04bf9cf38f7cc8f5eb59f0a23c87a920a6b0fa42977c99",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/customer_sentiment_churn.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

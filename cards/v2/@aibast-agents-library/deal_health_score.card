@@ -1,0 +1,124 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/deal_health_score",
+  "seed": 16195268016693984984,
+  "name_seed": 3770754676,
+  "incantation": "CRIMSON BROKE ALLIANCE BAY PEAL FLOOD CARVE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Deal Health Score",
+    "title": "The Pathfinder",
+    "mana_cost": "{2}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Creature — Agent Operator",
+    "rarity": "common",
+    "power": 9,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Scores deal health from live opportunities in a simulated Dynamics 365 tenant, with trends, alerts, and an embedded offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It was designed to assist. It chose to excel.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-c12674\"><stop offset=\"0%\" stop-color=\"#141428\"/><stop offset=\"100%\" stop-color=\"#08081a\"/></radialGradient><filter id=\"gl-c12674\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-c12674)\"/><g filter=\"url(#gl-c12674)\"><polygon points=\"119.1,89.0 119.1,111.0 100.0,122.0 80.9,111.0 80.9,89.0 100.0,78.0\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1.6\" opacity=\"0.40\"/><polygon points=\"138.1,78.0 138.1,122.0 100.0,144.0 61.9,122.0 61.9,78.0 100.0,56.0\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1.2\" opacity=\"0.30\"/><polygon points=\"157.2,67.0 157.2,133.0 100.0,166.0 42.8,133.0 42.8,67.0 100.0,34.0\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"0.8\" opacity=\"0.20\"/><polygon points=\"100.0,85.0 104.1,94.3 114.3,95.4 106.7,102.2 108.8,112.1 100.0,107.0 91.2,112.1 93.3,102.2 85.7,95.4 95.9,94.3\" fill=\"#f47067\" opacity=\"0.3\"/><circle cx=\"138.1\" cy=\"78.0\" r=\"4\" fill=\"#f47067\" opacity=\"0.4\"/><circle cx=\"138.1\" cy=\"122.0\" r=\"4\" fill=\"#f47067\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"144.0\" r=\"4\" fill=\"#f47067\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"122.0\" r=\"4\" fill=\"#f47067\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"78.0\" r=\"4\" fill=\"#f47067\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"56.0\" r=\"4\" fill=\"#f47067\" opacity=\"0.4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/deal_health_score",
+    "agent_types": [
+      "WEALTH",
+      "DATA"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#3fb950"
+    ],
+    "hp": 72,
+    "stats": {
+      "hp": 72,
+      "atk": 70,
+      "def": 37,
+      "spd": 62,
+      "int": 56
+    },
+    "typed_abilities": [
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 3,
+        "damage": 30
+      },
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 3,
+        "damage": 21
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16195268016693984984
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/deal_health_score",
+    "version": "1.1.0",
+    "display_name": "Deal Health Score",
+    "description": "Scores deal health from live opportunities in a simulated Dynamics 365 tenant, with trends, alerts, and an embedded offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "deal-health",
+      "scoring",
+      "pipeline"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "deal_health_score_agent.py",
+      "sha256_lf_v1": "d2e789bbc862d009e54289c5d563dd6c7a554fdfafcc8b6857dce4a5b09b86d0",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_health_score_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/deal_health_score.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}
