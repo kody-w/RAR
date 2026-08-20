@@ -79,12 +79,24 @@ The store (`index.html`) is a single HTML file. Open it in any browser.
 | `delete @pub/slug --reason "..."` | Request hash-bound deletion |
 | `request-read @pub/slug` | Create an auditable read Issue |
 | `request-status ISSUE` | Read the Issues-backed lifecycle |
+| `card pack path.py [--egg file]` | Seal an agent and optional egg in a `.card` |
+| `card unpack path.card [directory]` | Verify and restore exact payload bytes |
+| `card verify path.card` | Verify schema, identity, face, and payload hashes |
+| `card scan URL_OR_SEED` | Resolve and inspect a card without executing it |
 | `card resolve NAME` | Resolve card from name, seed number, or 7-word incantation |
 | `card words NAME` | Get the 7-word incantation for any agent |
 | `egg forge @a @b @c` | Compress agents to a shareable string |
 | `egg hatch STRING` | Reconstruct agents from compact string |
 
 All commands support `--json`.
+
+---
+
+## Cards v2
+
+- **Pack:** `python rapp_sdk.py card pack agent.py --inline` seals a rapplication's agent and optional `.egg` in one inert `.card`.
+- **Scan:** `python rapp_sdk.py card scan URL_OR_SEED` fetches or resolves the card, then verifies its face and payload hashes without execution.
+- **Summon:** scan its QR or speak its seven-word incantation; after verification, a client may explicitly hatch the payload.
 
 ---
 
