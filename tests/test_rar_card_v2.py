@@ -5,6 +5,7 @@ import hashlib
 import http.server
 import json
 import copy
+import shutil
 import subprocess
 import sys
 import threading
@@ -142,6 +143,8 @@ def test_migrated_payloads_are_revision_pinned(v2_index, registry):
         assert f"/{revision}/" in item["url"]
         assert "/main/" not in item["url"]
         assert "inline" not in item
+        readiness = rapp_sdk.card_offline_readiness(card)
+        assert readiness["status"] == "offline: needs 1 pinned payload(s)"
 
 
 def test_tampered_payload_hash_is_refused(tmp_path):
@@ -175,6 +178,32 @@ def test_pack_pin_must_resolve_to_the_local_agent(tmp_path):
         )
 
 
+def test_card_pack_defaults_to_person_kept_inline(tmp_path):
+    agent = tmp_path / "card_fixture_agent.py"
+    agent.write_bytes(_fixture_agent_bytes())
+    card = tmp_path / "default.card"
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(SDK),
+            "card",
+            "pack",
+            str(agent),
+            "--output",
+            str(card),
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    packed = json.loads(card.read_text(encoding="utf-8"))
+    assert packed["payload"]
+    assert all("inline" in item and "url" not in item for item in packed["payload"])
+    assert rapp_sdk.verify_card(card)["offline"]["status"] == "offline: ready"
+
+
 @pytest.mark.parametrize(
     "mutate",
     [
@@ -204,6 +233,7 @@ def test_cli_pack_unpack_preserves_crlf_text_and_binary(tmp_path):
     assert verify.returncode == 0, verify.stdout + verify.stderr
     assert "sha256-lf-v1:" in verify.stdout
     assert "sha256:" in verify.stdout
+    assert "offline: ready" in verify.stdout
 
     output = tmp_path / "unpacked"
     unpack = subprocess.run(
@@ -220,6 +250,52 @@ def test_cli_pack_unpack_preserves_crlf_text_and_binary(tmp_path):
     assert (output / egg.name).read_bytes() == egg.read_bytes()
 
 
+def test_cli_verify_and_scan_label_pinned_card_not_offline_ready(v2_index):
+    agent_id = "@aibast-agents-library/account_intelligence"
+    card = V2_ROOT / f"{agent_id}.card"
+    incantation = v2_index[agent_id]["incantation"]
+    commands = [
+        [sys.executable, str(SDK), "card", "verify", str(card)],
+        [sys.executable, str(SDK), "card", "scan", incantation],
+    ]
+    for command in commands:
+        result = subprocess.run(
+            command,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+        assert "offline: needs 1 pinned payload(s)" in result.stdout
+
+
+def test_charizard_in_the_woods_is_offline_ready(tmp_path, monkeypatch):
+    trailhead = tmp_path / "trailhead"
+    woods = tmp_path / "woods"
+    trailhead.mkdir()
+    woods.mkdir()
+    card, agent, egg = _pack_fixture(trailhead, with_egg=True)
+    copied_card = Path(shutil.copy2(card, woods / card.name))
+
+    def reject_network(*_args, **_kwargs):
+        raise AssertionError("Charizard in the Woods must not fetch")
+
+    monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", reject_network)
+    verified = rapp_sdk.verify_card(copied_card)
+    assert verified["offline"] == {
+        "ready": True,
+        "pinned_payloads": 0,
+        "status": "offline: ready",
+    }
+
+    unpacked = woods / "unpacked"
+    rapp_sdk.unpack_card(copied_card, unpacked)
+    assert (unpacked / agent.name).read_bytes() == agent.read_bytes()
+    assert egg is not None
+    assert (unpacked / egg.name).read_bytes() == egg.read_bytes()
+
+
 def test_card_scan_accepts_local_file_url_without_execution(tmp_path):
     card, _, _ = _pack_fixture(tmp_path)
     marker = tmp_path / "payload-executed"
@@ -233,6 +309,7 @@ def test_card_scan_accepts_local_file_url_without_execution(tmp_path):
     assert result.returncode == 0, result.stdout + result.stderr
     assert "Card Fixture" in result.stdout
     assert "sha256-lf-v1:" in result.stdout
+    assert "offline: ready" in result.stdout
     assert not marker.exists()
 
 
@@ -356,6 +433,14 @@ def test_site_and_api_publish_v2_cards_with_local_qr():
     assert "rarQrSvg" in pages["store.html"]
     assert "rarQrSvg" in pages["grail.html"]
     assert "renderQR" in pages["incantation-hero.html"]
+
+
+def test_readme_uses_lowercase_rapplication_and_states_hero_law():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "RAPPlication" not in readme
+    assert "rapplication" in readme
+    assert "pinned-only card" in readme
+    assert "never called\noffline-ready" in readme
 
 
 @pytest.mark.parametrize(

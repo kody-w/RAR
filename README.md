@@ -94,9 +94,13 @@ All commands support `--json`.
 
 ## Cards v2
 
-- **Pack:** `python rapp_sdk.py card pack agent.py --inline` seals a rapplication's agent and optional `.egg` in one inert `.card`.
-- **Scan:** `python rapp_sdk.py card scan URL_OR_SEED` fetches or resolves the card, then verifies its face and payload hashes without execution.
+- **Pack:** `python rapp_sdk.py card pack agent.py` defaults to `--inline`, sealing a rapplication's agent and optional `.egg` into a card a person can keep.
+- **Scan:** `python rapp_sdk.py card scan URL_OR_SEED` verifies without execution and prints `offline: ready` only when every payload is inline.
 - **Summon:** scan its QR or speak its seven-word incantation; after verification, a client may explicitly hatch the payload.
+
+`--pin <raw-url>` is RAR's compact registry form. A pinned-only card always
+reports `offline: needs <n> pinned payload(s)` and is never called
+offline-ready.
 
 ---
 

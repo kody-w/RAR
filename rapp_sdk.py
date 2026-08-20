@@ -1925,6 +1925,26 @@ def _payload_bytes(item: dict) -> bytes:
         raise ValueError(f"{item['filename']} is not valid base64") from exc
 
 
+def card_offline_readiness(card: dict) -> dict:
+    """Describe whether the card carries every payload in its own bytes."""
+    pinned_payloads = sum(
+        1
+        for item in card.get("payload", [])
+        if isinstance(item, dict) and "url" in item
+    )
+    ready = pinned_payloads == 0
+    status = (
+        "offline: ready"
+        if ready
+        else f"offline: needs {pinned_payloads} pinned payload(s)"
+    )
+    return {
+        "ready": ready,
+        "pinned_payloads": pinned_payloads,
+        "status": status,
+    }
+
+
 def verify_card(
     card_or_source: dict | str | os.PathLike,
     *,
@@ -2000,6 +2020,7 @@ def verify_card(
         "source": source,
         "card": card,
         "payloads": payloads,
+        "offline": card_offline_readiness(card),
     }
 
 
@@ -2213,6 +2234,7 @@ def _print_v2_card(result: dict, *, include_face: bool) -> None:
     print(f"  Seed: {card['seed']}")
     print(f"  Incantation: {card['incantation']}")
     print(f"  State: {card['state']}")
+    print(f"  {result['offline']['status']}")
     if include_face:
         face = card["face"]
         print("  Face:")
@@ -3061,7 +3083,7 @@ def main():
     pack_mode.add_argument(
         "--pin",
         metavar="RAW_URL",
-        help="Reference the agent source by a revision-pinned URL",
+        help="Use RAR's compact form with a revision-pinned agent URL",
     )
     p_card_pack.add_argument(
         "-o",

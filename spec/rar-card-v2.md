@@ -9,6 +9,20 @@ Cards v2 are a strict envelope around the existing card face. The
 reader finds that same object under `face`; migration never re-mints it,
 changes its seed, or changes its incantation.
 
+## The hero law
+
+The `.card` file is the artifact a person keeps. A woods-ready card carries
+every required payload inline, so a second offline device can verify and
+unpack it using only the card's own bytes. After successful verification,
+`card verify` and `card scan` report `offline: ready` only when every payload
+item is inline.
+
+`card pack agent.py` therefore defaults to `--inline`. `--pin <raw-url>` is
+RAR's compact registry form: it preserves a revision-pinned integrity proof
+without duplicating the payload. A pinned-only card is never called
+offline-ready, even when verification can currently fetch its URL; it reports
+`offline: needs <n> pinned payload(s)`.
+
 ## Shape
 
 ```json
@@ -131,11 +145,12 @@ python rapp_sdk.py card verify agent.card
 python rapp_sdk.py card scan <url | seed | "seven words">
 ```
 
-`pack` defaults to inline payload. `--pin` pins the `agent.py`; an optional
-egg remains inline because it has no independent URL argument. `unpack`
-verifies first and writes exact payload bytes. `scan` resolves through the
-local v2 index before attempting the public index, so a cloned RAR works
-offline.
+`pack` defaults to inline payload for a card a person keeps. `--pin` creates
+RAR's compact form by pinning the `agent.py`; an optional egg remains inline
+because it has no independent URL argument. `unpack` verifies first and writes
+exact payload bytes. `scan` resolves through the local v2 index before
+attempting the public index. Resolution from a local clone does not change the
+readiness label: any card with pinned payloads remains not offline-ready.
 
 ## Registry migration
 
