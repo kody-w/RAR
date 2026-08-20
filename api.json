@@ -20,7 +20,19 @@
     "cards": {
       "url": "{base_url}/cards/holo_cards.json",
       "method": "GET",
-      "description": "All minted cards with types, stats, abilities, SVG art, and seeds.",
+      "description": "Frozen v1 card-face index. Preserved for legacy readers.",
+      "auth": "none"
+    },
+    "cards_v2": {
+      "url": "{base_url}/cards/v2/index.json",
+      "method": "GET",
+      "description": "RAR card v2 index. Maps each agent id to its seed, name seed, incantation, exact card-file SHA256, and public scan URL.",
+      "auth": "none"
+    },
+    "card_file": {
+      "url": "{base_url}/cards/v2/{publisher}/{slug}.card",
+      "method": "GET",
+      "description": "Fetch one inert rar-card/2.0 JSON file. Verify its identity and pinned payload hash before unpacking; fetching never executes it.",
       "auth": "none"
     },
     "api_manifest": {

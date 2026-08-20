@@ -389,7 +389,7 @@ header {
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto;
 }
-.summon-qr img { width: 100%; height: 100%; display: block; }
+.summon-qr img, .summon-qr svg { width: 100%; height: 100%; display: block; }
 .summon-info h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; color: var(--text); text-transform: none; letter-spacing: 0; }
 .summon-info p { color: var(--text-dim); font-size: .95rem; margin-bottom: 14px; line-height: 1.55; }
 .summon-link {
@@ -514,6 +514,230 @@ const REGISTRY_URL = 'registry.json';
 const CARDS_URL = 'cards/holo_cards.json';
 const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR';
 
+// Dependency-free QR Model 2 encoder. It emits inert inline SVG and supports
+// the URL sizes used by RAR cards (versions 1-10, error correction level L).
+const _rarQrCache = new Map();
+function rarQrSvg(text, size = 160) {
+  const cacheKey = `${size}\0${text}`;
+  if (_rarQrCache.has(cacheKey)) return _rarQrCache.get(cacheKey);
+  const specs = [
+    null,
+    { data:[19], ecc:7, align:[] },
+    { data:[34], ecc:10, align:[6,18] },
+    { data:[55], ecc:15, align:[6,22] },
+    { data:[80], ecc:20, align:[6,26] },
+    { data:[108], ecc:26, align:[6,30] },
+    { data:[68,68], ecc:18, align:[6,34] },
+    { data:[78,78], ecc:20, align:[6,22,38] },
+    { data:[97,97], ecc:24, align:[6,24,42] },
+    { data:[116,116], ecc:30, align:[6,26,46] },
+    { data:[68,68,69,69], ecc:18, align:[6,28,50] },
+  ];
+  const bytes = [...new TextEncoder().encode(String(text))];
+  let version = 0;
+  for (let candidate = 1; candidate < specs.length; candidate++) {
+    const capacity = specs[candidate].data.reduce((a,b) => a+b, 0) * 8;
+    const countBits = candidate < 10 ? 8 : 16;
+    if (4 + countBits + bytes.length * 8 <= capacity) {
+      version = candidate;
+      break;
+    }
+  }
+  if (!version) throw new Error('RAR card scan URL is too long for the QR encoder');
+  const spec = specs[version];
+  const bits = [];
+  const put = (value, count) => {
+    for (let i = count - 1; i >= 0; i--) bits.push((value >>> i) & 1);
+  };
+  put(4, 4);
+  put(bytes.length, version < 10 ? 8 : 16);
+  bytes.forEach(byte => put(byte, 8));
+  const capacity = spec.data.reduce((a,b) => a+b, 0) * 8;
+  for (let i = 0, n = Math.min(4, capacity - bits.length); i < n; i++) bits.push(0);
+  while (bits.length % 8) bits.push(0);
+  const data = [];
+  for (let i = 0; i < bits.length; i += 8) {
+    data.push(bits.slice(i, i + 8).reduce((value, bit) => value * 2 + bit, 0));
+  }
+  for (let pad = 0; data.length < capacity / 8; pad++) data.push(pad % 2 ? 17 : 236);
+
+  const exp = new Array(512);
+  const log = new Array(256);
+  let value = 1;
+  for (let i = 0; i < 255; i++) {
+    exp[i] = value;
+    log[value] = i;
+    value <<= 1;
+    if (value & 0x100) value ^= 0x11d;
+  }
+  for (let i = 255; i < exp.length; i++) exp[i] = exp[i - 255];
+  const mul = (a,b) => a && b ? exp[log[a] + log[b]] : 0;
+  let generator = [1];
+  for (let i = 0; i < spec.ecc; i++) {
+    const next = new Array(generator.length + 1).fill(0);
+    generator.forEach((coefficient, j) => {
+      next[j] ^= coefficient;
+      next[j + 1] ^= mul(coefficient, exp[i]);
+    });
+    generator = next;
+  }
+  const blocks = [];
+  let offset = 0;
+  for (const dataCount of spec.data) {
+    const block = data.slice(offset, offset + dataCount);
+    offset += dataCount;
+    const remainder = new Array(spec.ecc).fill(0);
+    for (const byte of block) {
+      const factor = byte ^ remainder[0];
+      remainder.shift();
+      remainder.push(0);
+      for (let i = 0; i < spec.ecc; i++) {
+        remainder[i] ^= mul(generator[i + 1], factor);
+      }
+    }
+    blocks.push({ data:block, ecc:remainder });
+  }
+  const codewords = [];
+  const maxData = Math.max(...blocks.map(block => block.data.length));
+  for (let i = 0; i < maxData; i++) {
+    blocks.forEach(block => { if (i < block.data.length) codewords.push(block.data[i]); });
+  }
+  for (let i = 0; i < spec.ecc; i++) blocks.forEach(block => codewords.push(block.ecc[i]));
+
+  const side = 17 + version * 4;
+  const matrix = Array.from({length:side}, () => Array(side).fill(false));
+  const fixed = Array.from({length:side}, () => Array(side).fill(false));
+  const set = (x,y,dark) => {
+    if (x >= 0 && y >= 0 && x < side && y < side) {
+      matrix[y][x] = !!dark;
+      fixed[y][x] = true;
+    }
+  };
+  const finder = (left,top) => {
+    for (let y = -1; y <= 7; y++) for (let x = -1; x <= 7; x++) {
+      const inside = x >= 0 && x <= 6 && y >= 0 && y <= 6;
+      const dark = inside && (
+        x === 0 || x === 6 || y === 0 || y === 6 ||
+        (x >= 2 && x <= 4 && y >= 2 && y <= 4)
+      );
+      set(left + x, top + y, dark);
+    }
+  };
+  finder(0,0);
+  finder(side - 7,0);
+  finder(0,side - 7);
+  for (const cy of spec.align) for (const cx of spec.align) {
+    if (fixed[cy][cx]) continue;
+    for (let y = -2; y <= 2; y++) for (let x = -2; x <= 2; x++) {
+      set(cx + x, cy + y, Math.max(Math.abs(x), Math.abs(y)) === 2 || (!x && !y));
+    }
+  }
+  for (let i = 8; i < side - 8; i++) {
+    if (!fixed[6][i]) set(i,6,i % 2 === 0);
+    if (!fixed[i][6]) set(6,i,i % 2 === 0);
+  }
+  if (version >= 7) {
+    let remainder = version << 12;
+    while (Math.floor(Math.log2(remainder)) >= 12) {
+      remainder ^= 0x1f25 << (Math.floor(Math.log2(remainder)) - 12);
+    }
+    const versionBits = (version << 12) | remainder;
+    for (let i = 0; i < 18; i++) {
+      const dark = ((versionBits >>> i) & 1) !== 0;
+      const a = side - 11 + i % 3;
+      const b = Math.floor(i / 3);
+      set(a,b,dark);
+      set(b,a,dark);
+    }
+  }
+  const drawFormat = (target, mask) => {
+    let remainder = (8 | mask) << 10;
+    while (Math.floor(Math.log2(remainder)) >= 10) {
+      remainder ^= 0x537 << (Math.floor(Math.log2(remainder)) - 10);
+    }
+    const format = (((8 | mask) << 10) | remainder) ^ 0x5412;
+    const bit = i => ((format >>> i) & 1) !== 0;
+    for (let i = 0; i <= 5; i++) set(8,i,bit(i));
+    set(8,7,bit(6)); set(8,8,bit(7)); set(7,8,bit(8));
+    for (let i = 9; i < 15; i++) set(14 - i,8,bit(i));
+    for (let i = 0; i < 8; i++) set(side - 1 - i,8,bit(i));
+    for (let i = 8; i < 15; i++) set(8,side - 15 + i,bit(i));
+    set(8,side - 8,true);
+    for (let y = 0; y < side; y++) for (let x = 0; x < side; x++) {
+      if (fixed[y][x]) target[y][x] = matrix[y][x];
+    }
+  };
+  drawFormat(matrix, 0);
+  const payloadBits = [];
+  codewords.forEach(byte => {
+    for (let i = 7; i >= 0; i--) payloadBits.push((byte >>> i) & 1);
+  });
+  const masks = [
+    (x,y)=>(x+y)%2===0, (x,y)=>y%2===0, x=>x%3===0,
+    (x,y)=>(x+y)%3===0, (x,y)=>(Math.floor(y/2)+Math.floor(x/3))%2===0,
+    (x,y)=>(x*y)%2+(x*y)%3===0,
+    (x,y)=>((x*y)%2+(x*y)%3)%2===0,
+    (x,y)=>((x+y)%2+(x*y)%3)%2===0,
+  ];
+  const score = modules => {
+    let penalty = 0;
+    const lines = [
+      ...modules,
+      ...Array.from({length:side},(_,x)=>modules.map(row=>row[x])),
+    ];
+    for (const line of lines) {
+      let run = 1;
+      for (let i = 1; i <= side; i++) {
+        if (i < side && line[i] === line[i - 1]) run++;
+        else { if (run >= 5) penalty += run - 2; run = 1; }
+      }
+      const pattern = line.map(v=>v?'1':'0').join('');
+      for (let i = 0; i <= side - 11; i++) {
+        const part = pattern.slice(i,i+11);
+        if (part === '00001011101' || part === '10111010000') penalty += 40;
+      }
+    }
+    for (let y = 0; y < side - 1; y++) for (let x = 0; x < side - 1; x++) {
+      const dark = modules[y][x];
+      if (modules[y][x+1]===dark && modules[y+1][x]===dark && modules[y+1][x+1]===dark) penalty += 3;
+    }
+    const darkCount = modules.reduce((sum,row)=>sum+row.filter(Boolean).length,0);
+    penalty += Math.floor(Math.abs(darkCount * 20 - side * side * 10) / (side * side)) * 10;
+    return penalty;
+  };
+  let best = null;
+  for (let mask = 0; mask < 8; mask++) {
+    const candidate = matrix.map(row=>row.slice());
+    drawFormat(candidate, mask);
+    let bitIndex = 0;
+    let upward = true;
+    for (let right = side - 1; right >= 1; right -= 2) {
+      if (right === 6) right--;
+      for (let vertical = 0; vertical < side; vertical++) {
+        const y = upward ? side - 1 - vertical : vertical;
+        for (let j = 0; j < 2; j++) {
+          const x = right - j;
+          if (fixed[y][x]) continue;
+          const dark = bitIndex < payloadBits.length && payloadBits[bitIndex++] === 1;
+          candidate[y][x] = masks[mask](x,y) ? !dark : dark;
+        }
+      }
+      upward = !upward;
+    }
+    const penalty = score(candidate);
+    if (!best || penalty < best.penalty) best = { modules:candidate, penalty };
+  }
+  const quiet = 4;
+  const view = side + quiet * 2;
+  let path = '';
+  best.modules.forEach((row,y)=>row.forEach((dark,x)=>{
+    if (dark) path += `M${x+quiet} ${y+quiet}h1v1h-1z`;
+  }));
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${view} ${view}" role="img" aria-label="RAR card scan QR" shape-rendering="crispEdges"><rect width="${view}" height="${view}" fill="#fff"/><path d="${path}" fill="#111"/></svg>`;
+  _rarQrCache.set(cacheKey, svg);
+  return svg;
+}
+
 // Standalone-export mode — when these are populated, the page skips its
 // network fetches and renders from inlined data. The "Download Standalone"
 // button on the live page produces a copy with these set.
@@ -573,11 +797,6 @@ async function shareAgentPy(url, filename, title, btn) {
     } catch (_) {}
   }
 }
-function qrSrc(data, size = 540) {
-  // Same QR provider store.html uses — no new dep.
-  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&margin=8&qzone=2&format=png&data=${encodeURIComponent(data)}`;
-}
-
 async function load() {
   const root = document.getElementById('root');
   const isInlined = !!window.__INLINED_AGENT__;
@@ -595,13 +814,15 @@ async function load() {
     return;
   }
 
-  let registry, cards, agent, card;
+  let registry, cards, agent, card, cardEnvelope;
   if (isInlined) {
     // Standalone copy — registry + card data baked into this HTML file.
     registry = { agents: [window.__INLINED_AGENT__] };
-    cards = window.__INLINED_CARD__
-      ? { [window.__INLINED_AGENT__.name]: window.__INLINED_CARD__ }
-      : {};
+    cardEnvelope = window.__INLINED_CARD__?.schema === 'rar-card/2.0'
+      ? window.__INLINED_CARD__
+      : null;
+    const inlinedFace = cardEnvelope?.face || window.__INLINED_CARD__;
+    cards = inlinedFace ? { [window.__INLINED_AGENT__.name]: inlinedFace } : {};
   } else {
     try {
       [registry, cards] = await Promise.all([
@@ -630,6 +851,29 @@ async function load() {
       </div>`;
     return;
   }
+  if (!isInlined) {
+    const v2Path = `cards/v2/${agent.name}.card?t=${Date.now()}`;
+    try {
+      const response = await fetch(v2Path);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const envelopeText = (await response.text())
+        .replace(/"seed":\s*(\d+)/g, '"seed":"$1"')
+        .replace(/"name_seed":\s*(\d+)/g, '"name_seed":"$1"');
+      const envelope = JSON.parse(envelopeText);
+      if (
+        envelope?.schema !== 'rar-card/2.0' ||
+        envelope.id !== agent.name ||
+        !envelope.face ||
+        !envelope.scan?.url
+      ) {
+        throw new Error('invalid rar-card/2.0 envelope');
+      }
+      cardEnvelope = envelope;
+      card = envelope.face;
+    } catch (error) {
+      console.warn(`Falling back to the frozen v1 face for ${agent.name}:`, error);
+    }
+  }
   if (!card) card = {};
 
   const rarity = card.rarity || 'common';
@@ -652,6 +896,8 @@ async function load() {
   const latestSha = agent._latest_commit_sha || '';
   const py_url_main = `${RAW_BASE}/main/${filePath}`;
   const py_url_pinned = latestSha ? `${RAW_BASE}/${latestSha}/${filePath}` : py_url_main;
+  const card_file_url = `${RAW_BASE}/main/cards/v2/${agent.name}.card`;
+  const scan_url = cardEnvelope?.scan?.url || card_file_url;
 
   const avatar = card.avatar_svg
     ? card.avatar_svg
@@ -769,16 +1015,16 @@ async function load() {
 
     <div class="summon-section">
       <div class="summon-qr">
-        <img src="${qrSrc(summonUrl(agent.name))}" alt="QR — Summon ${esc(agent.display_name || slug)} on your Virtual Brainstem" loading="eager">
+        ${rarQrSvg(scan_url,252)}
       </div>
       <div class="summon-info">
-        <h2>Summon to your Brainstem</h2>
-        <p>Scan with any phone camera — opens this agent in your Virtual Brainstem and enables it instantly. Tap the card to view it fullscreen with tilt-shine effects.</p>
+        <h2>Scan the sealed card</h2>
+        <p>The QR encodes this v2 card's public <code>scan.url</code>. A client fetches the card, verifies its face and pinned payload hash, then offers it for summoning. Scanning never executes code.</p>
         <div class="summon-link">
-          <span id="summon-url">${esc(summonUrl(agent.name))}</span>
+          <span id="summon-url">${esc(scan_url)}</span>
           <button data-copy="summon-url">copy</button>
         </div>
-        <a class="summon-cta" href="${summonUrl(agent.name)}">⚡ Use in vBrainstem →</a>
+        <a class="summon-cta" href="${card_file_url}">View raw .card →</a>
         <button class="share-btn" data-share-url="${py_url_pinned}" data-share-file="${esc((filePath.split('/').pop()) || 'agent.py')}" data-share-title="${esc(agent.display_name || slug)}">&#x1F4E4; Share .py</button>
       </div>
     </div>
@@ -869,7 +1115,7 @@ async function load() {
 
         // JSON-stringify everything (safe inside <script> blocks).
         const sAgent = JSON.stringify(agent);
-        const sCard = JSON.stringify(card);
+        const sCard = JSON.stringify(cardEnvelope || card);
         const sPy = pySource !== null ? JSON.stringify(pySource) : 'null';
         const sAt = JSON.stringify(new Date().toISOString());
 

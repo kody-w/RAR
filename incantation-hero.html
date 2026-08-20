@@ -669,9 +669,11 @@ function save(){ localStorage.setItem(SAVE_KEY, JSON.stringify(S)); }
 // ── registry data ──
 const RAW_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/registry.json';
 const HOLO_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json';
+const CARD_V2_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/index.json';
 const SHARE_BASE = 'https://kody-w.github.io/RAR/incantation-hero.html'; // QR target (live once published)
 const GRAIL_BASE = 'https://kody-w.github.io/RAR/grail.html'; // canonical single-card renderer we embed
-let HOLO = {};         // agent_name -> real RAR card (avatar_svg, stats, abilities, etc.)
+let HOLO = {};         // frozen v1 face; migration preserves it exactly under v2.face
+let CARD_V2 = {};      // agent_name -> v2 seed/hash/scan URL
 let ALL = [];          // every agent {name, display, desc, cat, tags, tier, seed(BigInt), words[]}
 let POOL = [];         // current realm's agents
 let current = null;    // active question
@@ -711,6 +713,15 @@ async function boot(){
     htext = htext.replace(/"seed":\s*(\d+)/g, '"seed":"$1"'); // cosmetic only, keep parser happy
     HOLO = JSON.parse(htext);
   }catch(e){ HOLO = {}; } // game still works with procedural sigils if forge is unreachable
+  try{
+    let v2text;
+    try{ v2text = await (await fetch(CARD_V2_URL,{cache:'no-store'})).text(); }
+    catch(e){ v2text = await (await fetch('./cards/v2/index.json',{cache:'no-store'})).text(); }
+    v2text = v2text
+      .replace(/"seed":\s*(\d+)/g, '"seed":"$1"')
+      .replace(/"name_seed":\s*(\d+)/g, '"name_seed":"$1"');
+    CARD_V2 = JSON.parse(v2text);
+  }catch(e){ CARD_V2 = {}; }
   buildRealms();
   setRealm(S.realm || 'starter');
   document.getElementById('loading').classList.add('hidden');
@@ -956,8 +967,10 @@ function holoCardHTML(agent){
    </div>`;
 }
 
-// ── the QR back: scan to summon this exact card via its incantation ──
-function summonURL(agent){ return SHARE_BASE + '?summon=' + agent.seed.toString(); }
+// ── the QR back: scan the exact sealed v2 card ──
+function summonURL(agent){
+  return CARD_V2[agent.name]?.url || (SHARE_BASE + '?summon=' + agent.seed.toString());
+}
 function renderQR(text, size){
   try{
     const qr = qrcode(0,'M'); qr.addData(text); qr.make();
@@ -977,7 +990,7 @@ function qrBackHTML(agent){
      <div class="ac-qr">${renderQR(url,128)}</div>
      <div class="ac-back-name">${esc(agent.display)}</div>
      <div class="ac-back-inc">“${esc(spell)}”</div>
-     <div class="ac-back-hint">Scan to summon &middot; or speak the 7 words</div>
+     <div class="ac-back-hint">Scan sealed .card &middot; or speak the 7 words</div>
      <div class="ac-back-actions">
        <button onclick="event.stopPropagation();navigator.clipboard&&navigator.clipboard.writeText('${url}');toast('🔗 Summon link copied')">Copy link</button>
        <button onclick="event.stopPropagation();navigator.clipboard&&navigator.clipboard.writeText('${esc(spell)}');toast('✨ Incantation copied')">Copy spell</button>

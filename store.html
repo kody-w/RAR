@@ -658,7 +658,7 @@
     position: relative; z-index: 1; margin-bottom: 8px;
   }
   .ac-qr { margin: 10px 0; position: relative; z-index: 1; }
-  .ac-qr img {
+  .ac-qr img, .ac-qr svg {
     width: 120px; height: 120px; border-radius: 8px;
     border: 2px solid rgba(139,115,50,.4); padding: 4px;
     background: #0d0a06;
@@ -1423,7 +1423,7 @@
   .pres-biz-chip .label { color: var(--text-muted); font-size: .72rem; text-transform: uppercase; letter-spacing: .5px; }
   .pres-biz-stripe { position: absolute; top: 0; left: 0; right: 0; height: 5px; }
   .pres-biz-qr { position: absolute; bottom: 24px; right: 24px; }
-  .pres-biz-qr img { width: 80px; height: 80px; border-radius: 6px; opacity: .6; }
+  .pres-biz-qr img, .pres-biz-qr svg { width: 80px; height: 80px; border-radius: 6px; opacity: .6; }
 
   /* Creative slide layout */
   .pres-slide-creative {
@@ -3265,6 +3265,230 @@ let UPSTREAM_REPO = null;
 let UPSTREAM_RAW = null;
 let IS_INSTANCE = false;
 
+// Dependency-free QR Model 2 encoder. It emits inert inline SVG and supports
+// the URL sizes used by RAR cards (versions 1-10, error correction level L).
+const _rarQrCache = new Map();
+function rarQrSvg(text, size = 160) {
+  const cacheKey = `${size}\0${text}`;
+  if (_rarQrCache.has(cacheKey)) return _rarQrCache.get(cacheKey);
+  const specs = [
+    null,
+    { data:[19], ecc:7, align:[] },
+    { data:[34], ecc:10, align:[6,18] },
+    { data:[55], ecc:15, align:[6,22] },
+    { data:[80], ecc:20, align:[6,26] },
+    { data:[108], ecc:26, align:[6,30] },
+    { data:[68,68], ecc:18, align:[6,34] },
+    { data:[78,78], ecc:20, align:[6,22,38] },
+    { data:[97,97], ecc:24, align:[6,24,42] },
+    { data:[116,116], ecc:30, align:[6,26,46] },
+    { data:[68,68,69,69], ecc:18, align:[6,28,50] },
+  ];
+  const bytes = [...new TextEncoder().encode(String(text))];
+  let version = 0;
+  for (let candidate = 1; candidate < specs.length; candidate++) {
+    const capacity = specs[candidate].data.reduce((a,b) => a+b, 0) * 8;
+    const countBits = candidate < 10 ? 8 : 16;
+    if (4 + countBits + bytes.length * 8 <= capacity) {
+      version = candidate;
+      break;
+    }
+  }
+  if (!version) throw new Error('RAR card scan URL is too long for the QR encoder');
+  const spec = specs[version];
+  const bits = [];
+  const put = (value, count) => {
+    for (let i = count - 1; i >= 0; i--) bits.push((value >>> i) & 1);
+  };
+  put(4, 4);
+  put(bytes.length, version < 10 ? 8 : 16);
+  bytes.forEach(byte => put(byte, 8));
+  const capacity = spec.data.reduce((a,b) => a+b, 0) * 8;
+  for (let i = 0, n = Math.min(4, capacity - bits.length); i < n; i++) bits.push(0);
+  while (bits.length % 8) bits.push(0);
+  const data = [];
+  for (let i = 0; i < bits.length; i += 8) {
+    data.push(bits.slice(i, i + 8).reduce((value, bit) => value * 2 + bit, 0));
+  }
+  for (let pad = 0; data.length < capacity / 8; pad++) data.push(pad % 2 ? 17 : 236);
+
+  const exp = new Array(512);
+  const log = new Array(256);
+  let value = 1;
+  for (let i = 0; i < 255; i++) {
+    exp[i] = value;
+    log[value] = i;
+    value <<= 1;
+    if (value & 0x100) value ^= 0x11d;
+  }
+  for (let i = 255; i < exp.length; i++) exp[i] = exp[i - 255];
+  const mul = (a,b) => a && b ? exp[log[a] + log[b]] : 0;
+  let generator = [1];
+  for (let i = 0; i < spec.ecc; i++) {
+    const next = new Array(generator.length + 1).fill(0);
+    generator.forEach((coefficient, j) => {
+      next[j] ^= coefficient;
+      next[j + 1] ^= mul(coefficient, exp[i]);
+    });
+    generator = next;
+  }
+  const blocks = [];
+  let offset = 0;
+  for (const dataCount of spec.data) {
+    const block = data.slice(offset, offset + dataCount);
+    offset += dataCount;
+    const remainder = new Array(spec.ecc).fill(0);
+    for (const byte of block) {
+      const factor = byte ^ remainder[0];
+      remainder.shift();
+      remainder.push(0);
+      for (let i = 0; i < spec.ecc; i++) {
+        remainder[i] ^= mul(generator[i + 1], factor);
+      }
+    }
+    blocks.push({ data:block, ecc:remainder });
+  }
+  const codewords = [];
+  const maxData = Math.max(...blocks.map(block => block.data.length));
+  for (let i = 0; i < maxData; i++) {
+    blocks.forEach(block => { if (i < block.data.length) codewords.push(block.data[i]); });
+  }
+  for (let i = 0; i < spec.ecc; i++) blocks.forEach(block => codewords.push(block.ecc[i]));
+
+  const side = 17 + version * 4;
+  const matrix = Array.from({length:side}, () => Array(side).fill(false));
+  const fixed = Array.from({length:side}, () => Array(side).fill(false));
+  const set = (x,y,dark) => {
+    if (x >= 0 && y >= 0 && x < side && y < side) {
+      matrix[y][x] = !!dark;
+      fixed[y][x] = true;
+    }
+  };
+  const finder = (left,top) => {
+    for (let y = -1; y <= 7; y++) for (let x = -1; x <= 7; x++) {
+      const inside = x >= 0 && x <= 6 && y >= 0 && y <= 6;
+      const dark = inside && (
+        x === 0 || x === 6 || y === 0 || y === 6 ||
+        (x >= 2 && x <= 4 && y >= 2 && y <= 4)
+      );
+      set(left + x, top + y, dark);
+    }
+  };
+  finder(0,0);
+  finder(side - 7,0);
+  finder(0,side - 7);
+  for (const cy of spec.align) for (const cx of spec.align) {
+    if (fixed[cy][cx]) continue;
+    for (let y = -2; y <= 2; y++) for (let x = -2; x <= 2; x++) {
+      set(cx + x, cy + y, Math.max(Math.abs(x), Math.abs(y)) === 2 || (!x && !y));
+    }
+  }
+  for (let i = 8; i < side - 8; i++) {
+    if (!fixed[6][i]) set(i,6,i % 2 === 0);
+    if (!fixed[i][6]) set(6,i,i % 2 === 0);
+  }
+  if (version >= 7) {
+    let remainder = version << 12;
+    while (Math.floor(Math.log2(remainder)) >= 12) {
+      remainder ^= 0x1f25 << (Math.floor(Math.log2(remainder)) - 12);
+    }
+    const versionBits = (version << 12) | remainder;
+    for (let i = 0; i < 18; i++) {
+      const dark = ((versionBits >>> i) & 1) !== 0;
+      const a = side - 11 + i % 3;
+      const b = Math.floor(i / 3);
+      set(a,b,dark);
+      set(b,a,dark);
+    }
+  }
+  const drawFormat = (target, mask) => {
+    let remainder = (8 | mask) << 10;
+    while (Math.floor(Math.log2(remainder)) >= 10) {
+      remainder ^= 0x537 << (Math.floor(Math.log2(remainder)) - 10);
+    }
+    const format = (((8 | mask) << 10) | remainder) ^ 0x5412;
+    const bit = i => ((format >>> i) & 1) !== 0;
+    for (let i = 0; i <= 5; i++) set(8,i,bit(i));
+    set(8,7,bit(6)); set(8,8,bit(7)); set(7,8,bit(8));
+    for (let i = 9; i < 15; i++) set(14 - i,8,bit(i));
+    for (let i = 0; i < 8; i++) set(side - 1 - i,8,bit(i));
+    for (let i = 8; i < 15; i++) set(8,side - 15 + i,bit(i));
+    set(8,side - 8,true);
+    for (let y = 0; y < side; y++) for (let x = 0; x < side; x++) {
+      if (fixed[y][x]) target[y][x] = matrix[y][x];
+    }
+  };
+  drawFormat(matrix, 0);
+  const payloadBits = [];
+  codewords.forEach(byte => {
+    for (let i = 7; i >= 0; i--) payloadBits.push((byte >>> i) & 1);
+  });
+  const masks = [
+    (x,y)=>(x+y)%2===0, (x,y)=>y%2===0, x=>x%3===0,
+    (x,y)=>(x+y)%3===0, (x,y)=>(Math.floor(y/2)+Math.floor(x/3))%2===0,
+    (x,y)=>(x*y)%2+(x*y)%3===0,
+    (x,y)=>((x*y)%2+(x*y)%3)%2===0,
+    (x,y)=>((x+y)%2+(x*y)%3)%2===0,
+  ];
+  const score = modules => {
+    let penalty = 0;
+    const lines = [
+      ...modules,
+      ...Array.from({length:side},(_,x)=>modules.map(row=>row[x])),
+    ];
+    for (const line of lines) {
+      let run = 1;
+      for (let i = 1; i <= side; i++) {
+        if (i < side && line[i] === line[i - 1]) run++;
+        else { if (run >= 5) penalty += run - 2; run = 1; }
+      }
+      const pattern = line.map(v=>v?'1':'0').join('');
+      for (let i = 0; i <= side - 11; i++) {
+        const part = pattern.slice(i,i+11);
+        if (part === '00001011101' || part === '10111010000') penalty += 40;
+      }
+    }
+    for (let y = 0; y < side - 1; y++) for (let x = 0; x < side - 1; x++) {
+      const dark = modules[y][x];
+      if (modules[y][x+1]===dark && modules[y+1][x]===dark && modules[y+1][x+1]===dark) penalty += 3;
+    }
+    const darkCount = modules.reduce((sum,row)=>sum+row.filter(Boolean).length,0);
+    penalty += Math.floor(Math.abs(darkCount * 20 - side * side * 10) / (side * side)) * 10;
+    return penalty;
+  };
+  let best = null;
+  for (let mask = 0; mask < 8; mask++) {
+    const candidate = matrix.map(row=>row.slice());
+    drawFormat(candidate, mask);
+    let bitIndex = 0;
+    let upward = true;
+    for (let right = side - 1; right >= 1; right -= 2) {
+      if (right === 6) right--;
+      for (let vertical = 0; vertical < side; vertical++) {
+        const y = upward ? side - 1 - vertical : vertical;
+        for (let j = 0; j < 2; j++) {
+          const x = right - j;
+          if (fixed[y][x]) continue;
+          const dark = bitIndex < payloadBits.length && payloadBits[bitIndex++] === 1;
+          candidate[y][x] = masks[mask](x,y) ? !dark : dark;
+        }
+      }
+      upward = !upward;
+    }
+    const penalty = score(candidate);
+    if (!best || penalty < best.penalty) best = { modules:candidate, penalty };
+  }
+  const quiet = 4;
+  const view = side + quiet * 2;
+  let path = '';
+  best.modules.forEach((row,y)=>row.forEach((dark,x)=>{
+    if (dark) path += `M${x+quiet} ${y+quiet}h1v1h-1z`;
+  }));
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${view} ${view}" role="img" aria-label="RAR card scan QR" shape-rendering="crispEdges"><rect width="${view}" height="${view}" fill="#fff"/><path d="${path}" fill="#111"/></svg>`;
+  _rarQrCache.set(cacheKey, svg);
+  return svg;
+}
+
 // ═══════════════════════════════════════════════════════
 // State
 // ═══════════════════════════════════════════════════════
@@ -3279,7 +3503,8 @@ let ghRatings = { agents: {} };
 // Federated peer-store catalog (rapplications, senses, skills) —
 // snapshot of state/federation.json, rebuilt daily by refresh-ratings.yml.
 let federation = null;
-let _holoCards = {}; // agent_name → full HOLO card data (loaded from cards/holo_cards.json)
+let _holoCards = {}; // frozen v1 faces, byte-identical to each v2 face
+let _v2CardIndex = {}; // agent_name → v2 seed/hash/scan URL
 let currentCat = 'all';
 // Gated (type:'stub') cards default to hidden — most users only want
 // to see agents whose bytes are actually accessible. Authorized users
@@ -3689,15 +3914,17 @@ async function init() {
   await loadConfig();
   await handleAuthCallback();
   checkAuth();
-  const [reg, v, r, holoData, gr, fed] = await Promise.all([
+  const [reg, v, r, holoData, v2Index, gr, fed] = await Promise.all([
     fetchJSON(`${RAW}/registry.json`),
     fetchJSON(`${RAW}/state/votes.json`),
     fetchJSON(`${RAW}/state/reviews.json`),
     fetchJSON(`${RAW}/cards/holo_cards.json`),
+    fetchV2CardIndex(`${RAW}/cards/v2/index.json`),
     fetchJSON(`${RAW}/state/discussion_ratings.json`),
     fetchJSON(`${RAW}/state/federation.json`),
   ]);
   if (holoData) _holoCards = holoData;
+  if (v2Index) _v2CardIndex = v2Index;
   if (reg) {
     allAgents = (reg.agents || []).map(a => ({ ...a, _source: 'local' }));
     allSwarms = (reg.swarms || []);
@@ -3807,6 +4034,19 @@ function getTargetRepo(agentName) {
 async function fetchJSON(url) {
   try { const r = await fetch(url + '?t=' + Date.now()); return r.ok ? r.json() : null; }
   catch { return null; }
+}
+
+async function fetchV2CardIndex(url) {
+  try {
+    const response = await fetch(url + '?t=' + Date.now());
+    if (!response.ok) return null;
+    const text = (await response.text())
+      .replace(/"seed":\s*(\d+)/g, '"seed":"$1"')
+      .replace(/"name_seed":\s*(\d+)/g, '"name_seed":"$1"');
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
 }
 
 // ─── Real metrics: both signals are authenticated GitHub reactions ───
@@ -6826,12 +7066,23 @@ const HOLO_CARD_DB = {
   }
 };
 
-// Lookup helper — every agent has a HOLO card (loaded from cards/holo_cards.json)
-// Falls back to Howard's embedded DB for his 13 starter cards
+function getV2Card(a) {
+  const indexed = _v2CardIndex[a.name];
+  if (!indexed) return null;
+  return {
+    schema: 'rar-card/2.0',
+    id: a.name,
+    face: _holoCards[a.name] || null,
+    scan: { url: indexed.url },
+    ...indexed,
+  };
+}
+
+// The v2 face is the frozen v1 object. Keeping the aggregate v1 face map avoids
+// 307 startup requests while the v2 index supplies the sealed card and scan URL.
 function getHoloCard(a) {
-  // 1. Check the loaded card database (keyed by agent name)
-  if (_holoCards[a.name]) return _holoCards[a.name];
-  // 2. Fall back to Howard's embedded starter cards (keyed by display_name slug)
+  const v2 = getV2Card(a);
+  if (v2?.face) return v2.face;
   const slug = (a.display_name || '').replace(/[^a-zA-Z]/g, '').toLowerCase();
   return HOLO_CARD_DB[slug] || null;
 }
@@ -7726,14 +7977,10 @@ function agentToCard(a) {
   const artStyle = getArtistStyle(a);
   const lines = a._lines || '?';
   const sizeKb = a._size_kb || '?';
-  // QR encodes the raw agent.py URL — scan = get the file directly
-  const agentRawUrl = a._file ? `https://raw.githubusercontent.com/${REPO}/main/${a._file}` : `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
-  // Per-card fingerprint from agent name hash (shown on the back as identity).
-  const qrSalt = Array.from(a.name).reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0).toString(16).replace('-','').slice(0, 8);
-  // QR opens the card's Grail page (visual + lore), which has a one-tap
-  // "Load this into vBrainstem" button to run the agent instantly.
-  const qrData = `https://kody-w.github.io/RAR/grail.html#${a.name}`;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(qrData)}`;
+  const v2Card = getV2Card(a);
+  const qrData = v2Card?.scan?.url ||
+    `https://raw.githubusercontent.com/${REPO}/main/cards/v2/${a.name}.card`;
+  const qrSalt = (v2Card?.sha || '').slice(0, 8);
   const publisher = a.name.split('/')[0] || '';
   const slug = a.name.split('/')[1] || '';
 
@@ -7776,7 +8023,7 @@ function agentToCard(a) {
             <div class="biz-desc">${esc(desc)}</div>
           </div>
           <div style="flex-shrink:0;width:64px;height:64px;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.08)">
-            <img src="${qrUrl}" alt="QR" loading="lazy" style="width:100%;height:100%;display:block">
+             ${rarQrSvg(qrData,64)}
           </div>
         </div>
         <div class="biz-divider"></div>
@@ -7824,8 +8071,8 @@ function agentToCard(a) {
     </div>`;
 
   // ── QR Back Face ──
-  const qrImgHtml = `<div class="ac-qr"><img src="${qrUrl}" alt="QR Code" loading="lazy"></div>
-       <div class="ac-back-hint">Scan to open grail &amp; summon${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
+  const qrImgHtml = `<div class="ac-qr">${rarQrSvg(qrData,120)}</div>
+       <div class="ac-back-hint">Scan sealed .card${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
   const qrFace = `
     <div class="agent-card-back">
       <div class="ac-back-logo">RAPP</div>
@@ -11348,13 +11595,13 @@ async function renderMarketExchange() {
     const ownerLabel = ownerInfo?.alias || `${d.owner.slice(0,8)}...`;
     const setLabel = d.setId === 'GENESIS' ? 'GENESIS' : d.setId === 'HOLO' ? 'HOLO' : 'CORE';
     const agentUrl = d.agentSlug ? `https://raw.githubusercontent.com/kody-w/RAR/main/agents/${d.agentName?.split('/')[0] || 'unknown'}/${d.agentSlug}/agent.py` : '#';
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(agentUrl)}`;
+    const cardScanUrl = _v2CardIndex[d.agentName]?.url || agentUrl;
 
     return `
       <div class="market-row" style="display:grid;grid-template-columns:40px 1fr 100px 80px 90px 100px 80px;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);font-size:.78rem;transition:background .15s;cursor:pointer" onclick="var n='${esc(d.agentName)}';if(typeof showAndTell==='function'){showAndTell(n)}else{openAgent(n)}" title="View ${esc(d.title || d.agentSlug)}" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''">
         <div style="font-size:.65rem;color:#484f58;font-family:monospace">#${block.index}</div>
         <div style="display:flex;align-items:center;gap:8px">
-          <img src="${qrUrl}" alt="" width="28" height="28" style="border-radius:4px;opacity:.7" loading="lazy">
+          <span style="width:28px;height:28px;display:inline-flex;border-radius:4px;overflow:hidden;opacity:.7">${rarQrSvg(cardScanUrl,28)}</span>
           <div>
             <div style="font-weight:700;color:var(--text)">${esc(d.title || d.agentSlug)}</div>
             <div style="font-size:.62rem;color:#484f58">${d.mintId}</div>
@@ -12075,11 +12322,9 @@ function printCard(name) {
   const cc = getCatColor(a.category);
   const tier = a.quality_tier || 'community';
   const rarity = TIER_TO_RARITY[tier] || 'uncommon';
-  const agentFile = a._file || `agents/${a.name}.py`;
-  const printRawUrl = `https://raw.githubusercontent.com/${sourceRepo}/main/${agentFile}`;
-  const printSalt = _thirdSpaceIdentity?.fingerprint?.slice(0, 8) || '';
-  const printQrData = printSalt ? `${printRawUrl}#${printSalt}` : printRawUrl;
-  const qrUrl = _qrShareEnabled ? `https://api.qrserver.com/v1/create-qr-code/?size=200x200&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(printQrData)}` : '';
+  const printQrData = getV2Card(a)?.scan?.url ||
+    `https://raw.githubusercontent.com/${sourceRepo}/main/cards/v2/${a.name}.card`;
+  const qrSvg = _qrShareEnabled ? rarQrSvg(printQrData,135) : '';
   const w = window.open('', '_blank', 'width=400,height=600');
   w.document.write(`<!DOCTYPE html><html><head><title>${a.display_name} — Agent Card</title>
   <style>
@@ -12097,7 +12342,7 @@ function printCard(name) {
     .footer { display: flex; justify-content: space-between; padding: 3px 10px 6px; font-size: 7pt; }
     .rarity { text-transform: uppercase; font-weight: 700; letter-spacing: .5px; }
     .back { width: 2.5in; height: 3.5in; background: #161b22; border: 2px solid ${cc.border}; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-left: 20px; }
-    .qr img { width: 1.4in; height: 1.4in; border-radius: 6px; }
+    .qr svg { width: 1.4in; height: 1.4in; border-radius: 6px; }
     .back-name { font-size: 9pt; font-weight: 600; margin-top: 6px; }
     .back-hint { font-size: 7pt; color: #8b949e; }
     .back-logo { font-size: 18pt; font-weight: 900; opacity: .2; margin-bottom: 8px; }
@@ -12120,9 +12365,9 @@ function printCard(name) {
     </div>
     <div class="back">
       <div class="back-logo">RAPP</div>
-      ${qrUrl ? `<div class="qr"><img src="${qrUrl}"></div>` : '<div style="opacity:.3;font-size:8pt;padding:20px">QR off</div>'}
+      ${qrSvg ? `<div class="qr">${qrSvg}</div>` : '<div style="opacity:.3;font-size:8pt;padding:20px">QR off</div>'}
       <div class="back-name">${esc(a.display_name)}</div>
-      <div class="back-hint">${qrUrl ? 'Scan → raw agent.py' : ''}</div>
+      <div class="back-hint">${qrSvg ? 'Scan sealed .card' : ''}</div>
     </div>
   </div>
   </body></html>`);
@@ -13060,10 +13305,9 @@ function renderPresentation() {
   const cc = getCatColor(a.category);
   const tier = a.quality_tier || 'community';
   const rarity = TIER_TO_RARITY[tier] || 'uncommon';
-  const presRawUrl = a._file ? `https://raw.githubusercontent.com/${REPO}/main/${a._file}` : `https://kody-w.github.io/RAR/#card/${encodeURIComponent(a.name)}`;
-  const presSalt = _thirdSpaceIdentity?.fingerprint?.slice(0, 8) || '';
-  const presQrData = presSalt ? `${presRawUrl}#${presSalt}` : presRawUrl;
-  const qrUrl = _qrShareEnabled ? `https://api.qrserver.com/v1/create-qr-code/?size=100x100&bgcolor=161b22&color=e6edf3&data=${encodeURIComponent(presQrData)}` : '';
+  const presQrData = getV2Card(a)?.scan?.url ||
+    `https://raw.githubusercontent.com/${REPO}/main/cards/v2/${a.name}.card`;
+  const qrSvg = _qrShareEnabled ? rarQrSvg(presQrData,80) : '';
   const publisher = a.name.split('/')[0] || '';
   const tags = (a.tags || []).slice(0, 5);
   const desc = (a.description || '').slice(0, 200);
@@ -13095,7 +13339,7 @@ function renderPresentation() {
         </div>
         <div class="pres-biz-right">
           ${typeof genCreativeArt === 'function' ? `<div style="width:80%;opacity:.3">${genCreativeArt(a)}</div>` : ''}
-          ${qrUrl ? `<div class="pres-biz-qr"><img src="${qrUrl}" alt="QR" loading="lazy"></div>` : ''}
+          ${qrSvg ? `<div class="pres-biz-qr">${qrSvg}</div>` : ''}
         </div>
       </div>`;
   } else {
