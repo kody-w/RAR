@@ -2136,7 +2136,10 @@ def _print_v2_card(result: dict, *, include_face: bool) -> None:
     if include_face:
         face = card["face"]
         print("  Face:")
-        for key in ("name", "title", "type_line", "rarity", "rarity_label", "hp"):
+        for key in (
+            "name", "display_name", "title", "type_line",
+            "rarity", "rarity_label", "hp",
+        ):
             if key in face and face[key] not in (None, ""):
                 print(f"    {key}: {face[key]}")
     print("  Payload hashes:")
