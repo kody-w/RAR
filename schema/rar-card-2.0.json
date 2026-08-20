@@ -1,0 +1,364 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/kody-w/RAR/main/schema/rar-card-2.0.json",
+  "title": "RAR card 2.0",
+  "description": "A portable, inert envelope around a RAR card face and verified agent or egg payloads.",
+  "type": "object",
+  "required": [
+    "schema",
+    "id",
+    "seed",
+    "name_seed",
+    "incantation",
+    "version",
+    "face",
+    "manifest",
+    "payload",
+    "state",
+    "origin",
+    "dimension",
+    "scan",
+    "provenance",
+    "signature"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "rar-card/2.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?/[a-z0-9_]+$"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "name_seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "incantation": {
+      "type": "string",
+      "pattern": "^[A-Z]+(?: [A-Z]+){6}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+    },
+    "face": {
+      "$ref": "#/$defs/face"
+    },
+    "manifest": {
+      "$ref": "#/$defs/manifest"
+    },
+    "payload": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/payload"
+      }
+    },
+    "state": {
+      "enum": [
+        "dormant",
+        "active"
+      ]
+    },
+    "origin": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "minLength": 1
+            },
+            "brainstem": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "twin": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "parkedAt": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "dimension": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "scan": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^(?:https?|file|rar)://.+$"
+        },
+        "qr": {
+          "type": "string"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "minted_by",
+        "rar_revision"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "minted_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rar_revision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{7,40}$"
+        }
+      }
+    },
+    "signature": {
+      "type": [
+        "object",
+        "string",
+        "null"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "scan": {
+            "properties": {
+              "url": {
+                "pattern": "^https?://"
+              }
+            },
+            "required": [
+              "url"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "state": {
+            "const": "dormant"
+          },
+          "dimension": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "face": {
+      "type": "object",
+      "required": [
+        "seed"
+      ],
+      "properties": {
+        "seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "agent_name": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar_svg": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "manifest": {
+      "type": "object",
+      "required": [
+        "schema",
+        "name",
+        "version",
+        "display_name",
+        "description",
+        "author",
+        "tags",
+        "category"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "category": {
+          "type": "string"
+        },
+        "quality_tier": {
+          "type": "string"
+        },
+        "requires_env": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "kind",
+        "filename"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "agent.py",
+            "egg"
+          ]
+        },
+        "filename": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^/\\\\]+$"
+        },
+        "sha256_lf_v1": {
+          "$ref": "#/$defs/digest"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "inline": {
+          "type": "string",
+          "maxLength": 1048576
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^(?:https?|file)://.+$"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "inline"
+          ],
+          "not": {
+            "required": [
+              "url"
+            ]
+          }
+        },
+        {
+          "required": [
+            "url"
+          ],
+          "not": {
+            "required": [
+              "inline"
+            ]
+          }
+        }
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "agent.py"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "sha256_lf_v1"
+            ],
+            "not": {
+              "required": [
+                "sha256"
+              ]
+            }
+          },
+          "else": {
+            "required": [
+              "sha256"
+            ],
+            "not": {
+              "required": [
+                "sha256_lf_v1"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
