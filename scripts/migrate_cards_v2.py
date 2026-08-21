@@ -225,7 +225,7 @@ def apply_migration(planned: dict[Path, bytes], *, check: bool) -> tuple[int, in
                 *(f"stale: {path.relative_to(ROOT)}" for path in stale),
             ]
             raise RuntimeError(
-                "RAR card v2 migration drift:\n  " + "\n  ".join(details)
+                "Rappid tile migration drift:\n  " + "\n  ".join(details)
             )
         return 0, 0
 
@@ -261,7 +261,7 @@ def existing_revision() -> str | None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Migrate frozen RAR v1 card faces to rar-card/2.0",
+        description="Migrate frozen RAR v1 faces to rappid tiles (rar-card/2.0)",
     )
     parser.add_argument(
         "--revision",
@@ -303,12 +303,12 @@ def main() -> int:
     card_count = sum(path.suffix == ".card" for path in planned)
     action = "checked" if args.check else "wrote"
     print(
-        f"RAR cards v2: {action} {card_count} cards at {revision}; "
+        f"Rappid tiles: {action} {card_count} tiles at {revision}; "
         f"{changed} changed, {removed} stale removed"
     )
     if stub_ids:
         print(
-            "RAR cards v2: used _stub_sha256 for gated public stubs: "
+            "Rappid tiles: used _stub_sha256 for gated public stubs: "
             + ", ".join(stub_ids)
         )
     return 0

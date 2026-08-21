@@ -187,7 +187,7 @@ jobs:
           set -euo pipefail
           python scripts/migrate_cards_v2.py
           git add cards/v2
-          git commit -m "Migrate RAR cards v2 for ${ISSUE_NUMBERS}"
+          git commit -m "Migrate rappid tiles for ${ISSUE_NUMBERS}"
           python -m pytest -q
           git restore registry.json api/v1/front.json
           test -z "$(git status --porcelain --untracked-files=no)"

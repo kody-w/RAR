@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/kody-w/RAR/main/schema/rar-card-2.0.json",
-  "title": "RAR card 2.0",
-  "description": "A portable, inert envelope around a RAR card face and verified agent or egg payloads.",
+  "title": "Rappid tile (rar-card/2.0)",
+  "description": "A portable, inert rappid tile around a deterministic face and verified agent or egg payloads.",
   "type": "object",
   "required": [
     "schema",

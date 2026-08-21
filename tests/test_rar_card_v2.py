@@ -56,7 +56,7 @@ def _v2_card_path(agent_id: str, index: dict) -> Path:
 
 def _fixture_agent_bytes() -> bytes:
     lines = [
-        '"""Offline card fixture."""',
+        '"""Offline rappid tile fixture."""',
         "",
         "__manifest__ = {",
         '    "schema": "rapp-agent/1.0",',
@@ -189,7 +189,7 @@ def test_pack_pin_must_resolve_to_the_local_agent(tmp_path):
         )
 
 
-def test_card_pack_defaults_to_person_kept_inline(tmp_path):
+def test_rappid_tile_pack_defaults_to_person_kept_inline(tmp_path):
     agent = tmp_path / "card_fixture_agent.py"
     agent.write_bytes(_fixture_agent_bytes())
     result = subprocess.run(
@@ -207,7 +207,7 @@ def test_card_pack_defaults_to_person_kept_inline(tmp_path):
     )
     assert result.returncode == 0, result.stdout + result.stderr
     card = tmp_path / "card_fixture_agent.py.card"
-    assert f"Packed: {card}" in result.stdout
+    assert f"Packed rappid tile: {card}" in result.stdout
     packed = json.loads(card.read_text(encoding="utf-8"))
     assert packed["payload"]
     assert all("inline" in item and "url" not in item for item in packed["payload"])
@@ -265,7 +265,7 @@ def test_cli_pack_unpack_preserves_crlf_text_and_binary(tmp_path):
     assert (output / egg.name).read_bytes() == egg.read_bytes()
 
 
-def test_cli_verify_and_scan_label_pinned_card_not_offline_ready(v2_index):
+def test_cli_verify_and_scan_label_pinned_tile_not_offline_ready(v2_index):
     agent_id = "@aibast-agents-library/account_intelligence"
     card = _v2_card_path(agent_id, v2_index)
     incantation = v2_index[agent_id]["incantation"]
@@ -311,7 +311,7 @@ def test_charizard_in_the_woods_is_offline_ready(tmp_path, monkeypatch):
     assert (unpacked / egg.name).read_bytes() == egg.read_bytes()
 
 
-def test_unpack_without_directory_strips_final_card_suffix(tmp_path):
+def test_unpack_without_directory_strips_final_dot_card_suffix(tmp_path):
     card, agent, egg = _pack_fixture(tmp_path, with_egg=True)
     agent_bytes = agent.read_bytes()
     egg_bytes = egg.read_bytes() if egg is not None else b""
@@ -337,7 +337,7 @@ def test_reader_refuses_sleeve_name_disagreement(
     wrong_name = tmp_path / "wrong.card"
     shutil.copy2(source, wrong_name)
     reader = rapp_sdk.verify_card if operation == "verify" else rapp_sdk.scan_card
-    with pytest.raises(ValueError, match="card filename.*disagrees"):
+    with pytest.raises(ValueError, match="rappid tile filename.*disagrees"):
         reader(wrong_name)
 
 
@@ -397,7 +397,7 @@ def test_remote_unpack_keeps_sleeve_subdirectory(
     assert restored.read_bytes() == expected
 
 
-def test_card_scan_accepts_local_file_url_without_execution(tmp_path):
+def test_card_scan_command_accepts_local_file_url_without_execution(tmp_path):
     card, _, _ = _pack_fixture(tmp_path)
     marker = tmp_path / "payload-executed"
     result = subprocess.run(
@@ -414,7 +414,7 @@ def test_card_scan_accepts_local_file_url_without_execution(tmp_path):
     assert not marker.exists()
 
 
-def test_card_scan_accepts_directory_served_url_offline(tmp_path):
+def test_card_scan_command_accepts_directory_served_url_offline(tmp_path):
     card, _, _ = _pack_fixture(tmp_path)
 
     class QuietHandler(http.server.SimpleHTTPRequestHandler):
@@ -439,7 +439,7 @@ def test_card_scan_accepts_directory_served_url_offline(tmp_path):
         server.server_close()
         thread.join(timeout=5)
     assert result.returncode == 0, result.stdout + result.stderr
-    assert "Verified: @test/card_fixture" in result.stdout
+    assert "Verified rappid tile: @test/card_fixture" in result.stdout
 
 
 def test_migration_is_idempotent():
@@ -500,7 +500,7 @@ def test_verify_enforces_normative_property_types(
         rapp_sdk.verify_card(copy.deepcopy(card), fetch_payloads=False)
 
 
-def test_scan_refuses_oversized_card_document(tmp_path):
+def test_scan_refuses_oversized_rappid_tile_document(tmp_path):
     oversized = tmp_path / "oversized.card"
     oversized.write_bytes(b"{" + b" " * rapp_sdk.CARD_MAX_DOCUMENT_BYTES + b"}\n")
     with pytest.raises(ValueError, match="exceeds"):
@@ -519,7 +519,7 @@ def test_schema_is_draft_2020_12_and_models_sealed_payloads():
     assert len(payload["oneOf"]) == 2
 
 
-def test_site_and_api_publish_v2_cards_with_local_qr():
+def test_site_and_api_publish_rappid_tiles_with_local_qr():
     api = json.loads((ROOT / "api.json").read_text(encoding="utf-8"))
     assert api["endpoints"]["cards_v2"]["url"].endswith("/cards/v2/index.json")
     assert api["endpoints"]["card_file"]["url"].endswith(
@@ -545,12 +545,23 @@ def test_site_and_api_publish_v2_cards_with_local_qr():
     assert "cardEnvelope?.scan?.url" in pages["grail.html"]
 
 
-def test_readme_uses_lowercase_rapplication_and_states_hero_law():
+def test_user_copy_uses_rappid_tile_and_lowercase_rapplication():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    spec = (ROOT / "spec" / "rar-card-v2.md").read_text(encoding="utf-8")
+    api = (ROOT / "api.json").read_text(encoding="utf-8")
+    pages = [
+        (ROOT / name).read_text(encoding="utf-8")
+        for name in ("store.html", "grail.html", "incantation-hero.html")
+    ]
     assert "RAPPlication" not in readme
     assert "rapplication" in readme
-    assert "pinned-only card" in readme
+    assert "## Rappid tiles" in readme
+    assert spec.startswith("# Rappid tiles (rar-card/2.0)\n")
+    assert "pinned-only rappid tile" in readme
     assert "never called\noffline-ready" in readme
+    assert "Rappid tile index" in api
+    legacy_name = "RAR " + "card"
+    assert legacy_name not in "\n".join([readme, spec, api, *pages])
 
 
 @pytest.mark.parametrize(

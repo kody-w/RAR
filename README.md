@@ -4,7 +4,7 @@
 
 **The open single-file agent ecosystem.** Browse, build, collect, and share AI agents. Every agent is one `.py` file.
 
-180 agents. 8 publishers. 24 categories. 1,144 tests. Every card has a seed.
+180 agents. 8 publishers. 24 categories. 1,144 tests. Every rappid tile has a seed.
 
 **RAPP + X™** is the headless collaboration pattern behind the ecosystem:
 `X` may be a person, AI, twin, rapplication, Brainstem, or neighborhood peer.
@@ -37,7 +37,7 @@ That's it. The SDK creates a versioned GitHub Issue command. RAR records the
 authenticated GitHub identity, stages the exact source hash, and binds approval
 to that immutable revision. Hashes use `sha256-lf-v1`: UTF-8 with CRLF replaced
 by LF and no other normalization. Successful checks produce a receipt committed to
-`main`; the forge then mints the card.
+`main`; the forge then mints the rappid tile.
 
 **Update an agent:** bump the version in `__manifest__` and submit again.
 
@@ -48,8 +48,8 @@ by LF and no other normalization. Successful checks produce a receipt committed 
 RAPP is npm for AI agents — but local-first, single-file, and offline-capable. No `node_modules`. No build step. No server.
 
 - **Every agent is one `.py` file** — the file IS the package, the manifest, and the documentation
-- **Every card has a seed** — a 64-bit number that reconstructs the full card offline, anywhere
-- **Every seed has an incantation** — 7 words that summon the card: `TWIST MOLD BEQUEST VALOR LEFT ORBIT RUNE`
+- **Every rappid tile has a seed** — a 64-bit number that reconstructs the full tile offline, anywhere
+- **Every seed has an incantation** — 7 words that summon the rappid tile: `TWIST MOLD BEQUEST VALOR LEFT ORBIT RUNE`
 - **`git clone` = you have everything** — works from `file://`, no internet required
 
 Read **[The Ode](https://kody-w.github.io/RAR/ode.html)** for why single-file agents are the only pattern that scales to all of humanity.
@@ -61,9 +61,9 @@ Read **[The Ode](https://kody-w.github.io/RAR/ode.html)** for why single-file ag
 The store (`index.html`) is a single HTML file. Open it in any browser.
 
 - **Browse** — search 180 agents across 24 categories, filter by tier, sort by votes
-- **Cards** — every agent is a collectible card with types, stats, abilities, and art
+- **Rappid tiles** — every agent is a collectible tile with types, stats, abilities, and art
 - **Decks** — collect agents into named decks, present as slideshows
-- **Workbench** — write agents in the browser, validate, preview as card
+- **Workbench** — write agents in the browser, validate, preview as a rappid tile
 - **Submit** — publish through the UI or the SDK
 
 ## The SDK
@@ -79,11 +79,11 @@ The store (`index.html`) is a single HTML file. Open it in any browser.
 | `delete @pub/slug --reason "..."` | Request hash-bound deletion |
 | `request-read @pub/slug` | Create an auditable read Issue |
 | `request-status ISSUE` | Read the Issues-backed lifecycle |
-| `card pack path.py [--egg file]` | Seal an agent as `path.py.card` |
+| `card pack path.py [--egg file]` | Seal an agent as a rappid tile at `path.py.card` |
 | `card unpack path.py.card [directory]` | Verify and restore exact payload bytes |
-| `card verify path.py.card` | Verify schema, sleeve name, identity, face, and payload hashes |
-| `card scan URL_OR_SEED` | Resolve and inspect a card without executing it |
-| `card resolve NAME` | Resolve card from name, seed number, or 7-word incantation |
+| `card verify path.py.card` | Verify the rappid tile schema, sleeve name, identity, face, and payload hashes |
+| `card scan URL_OR_SEED` | Resolve and inspect a rappid tile without executing it |
+| `card resolve NAME` | Resolve a rappid tile from name, seed number, or 7-word incantation |
 | `card words NAME` | Get the 7-word incantation for any agent |
 | `egg forge @a @b @c` | Compress agents to a shareable string |
 | `egg hatch STRING` | Reconstruct agents from compact string |
@@ -92,13 +92,13 @@ All commands support `--json`.
 
 ---
 
-## Cards v2
+## Rappid tiles
 
-- **Pack:** `python rapp_sdk.py card pack agent.py` defaults to `--inline`, sealing a rapplication's agent and optional `.egg` into a card a person can keep.
+- **Pack:** `python rapp_sdk.py card pack agent.py` defaults to `--inline`, sealing a rapplication's agent and optional `.egg` into a rappid tile a person can keep.
 - **Scan:** `python rapp_sdk.py card scan URL_OR_SEED` verifies without execution and prints `offline: ready` only when every payload is inline.
 - **Summon:** scan its QR or speak its seven-word incantation; after verification, a client may explicitly hatch the payload.
 
-`--pin <raw-url>` is RAR's compact registry form. A pinned-only card always
+`--pin <raw-url>` is RAR's compact registry form. A pinned-only rappid tile always
 reports `offline: needs <n> pinned payload(s)` and is never called
 offline-ready.
 
@@ -110,7 +110,7 @@ sleeve whose filename disagrees with `payload[0].filename`.
 
 ---
 
-## Card Type System
+## Rappid Tile Type System
 
 7 agent types, deterministic from manifest data:
 
@@ -124,25 +124,25 @@ sleeve whose filename disagrees with `payload[0].filename`.
 | HEAL | Pink | Craft | Wealth |
 | WEALTH | Purple | Heal | Logic |
 
-Cards have HP, ATK/DEF/SPD/INT stats, 1-3 abilities with cost and damage, weakness/resistance, retreat cost, and evolution stage (Seed → Base → Evolved → Legendary).
+Rappid tiles have HP, ATK/DEF/SPD/INT stats, 1-3 abilities with cost and damage, weakness/resistance, retreat cost, and evolution stage (Seed → Base → Evolved → Legendary).
 
 ---
 
 ## The Seed Protocol
 
-Every card has a 64-bit seed forged from the agent's manifest. The seed IS the card's DNA.
+Every rappid tile has a 64-bit seed forged from the agent's manifest. The seed IS the tile's DNA.
 
 ```
-manifest → forge_seed() → resolve_card_from_seed() = the card
+manifest → forge_seed() → resolve_card_from_seed() = the rappid tile
 ```
 
-Three ways to resolve a card:
+Four ways to resolve a rappid tile:
 - **From file:** `python rapp_sdk.py card mint agent.py`
 - **From name:** `python rapp_sdk.py card resolve @kody-w/deal_desk_agent`
 - **From seed:** `python rapp_sdk.py card resolve 3736335358696106227`
 - **From incantation:** `python rapp_sdk.py card resolve TWIST MOLD BEQUEST VALOR LEFT ORBIT RUNE`
 
-All four produce the same card. Lossless. Offline. Permanent.
+All four produce the same rappid tile. Lossless. Offline. Permanent.
 
 ---
 
@@ -203,7 +203,7 @@ Read **[skill.md](https://raw.githubusercontent.com/kody-w/RAR/main/skill.md)** 
 
 ## Quality Tiers
 
-| Tier | Card Stage | Meaning |
+| Tier | Rappid Tile Stage | Meaning |
 |------|------------|---------|
 | `experimental` | Seed | Author says it works |
 | `community` | Base | Passes automated validation (default) |
@@ -220,7 +220,7 @@ Read **[skill.md](https://raw.githubusercontent.com/kody-w/RAR/main/skill.md)** 
 | **@kody-w** | 27 | Core infrastructure, registry, engine, Rappterpedia |
 | **@rapp** | 21 | BasicAgent base class, core platform agents |
 | **@discreetRappers** | 13 | Pipeline, integrations, sales, productivity |
-| **@howardh** | 9 | Assimilation, cards, productivity |
+| **@howardh** | 9 | Assimilation, rappid tiles, productivity |
 | **@wildhaven** | 3 | CEO agent |
 | **@rarbookworld** | 2 | Pipeline |
 | **@bill** | 1 | Core |
@@ -258,4 +258,4 @@ python scripts/federate.py sync      # pull from upstream
 
 ---
 
-*One file. One seed. One incantation. The card self-assembles.*
+*One file. One seed. One incantation. The rappid tile self-assembles.*

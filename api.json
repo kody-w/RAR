@@ -20,19 +20,19 @@
     "cards": {
       "url": "{base_url}/cards/holo_cards.json",
       "method": "GET",
-      "description": "Frozen v1 card-face index. Preserved for legacy readers.",
+      "description": "Frozen v1 rappid-tile face index. Preserved for legacy readers.",
       "auth": "none"
     },
     "cards_v2": {
       "url": "{base_url}/cards/v2/index.json",
       "method": "GET",
-      "description": "RAR card v2 index. Maps each agent id to its seed, name seed, incantation, exact card-file SHA256, and public scan URL.",
+      "description": "Rappid tile index for rar-card/2.0. Maps each agent id to its seed, name seed, incantation, exact .card-file SHA256, and public scan URL.",
       "auth": "none"
     },
     "card_file": {
       "url": "{base_url}/cards/v2/{publisher}/{primary_payload_filename}.card",
       "method": "GET",
-      "description": "Fetch one inert rar-card/2.0 JSON sleeve. Its name is the primary payload filename plus .card (for example, agent.py.card or foo.egg.card). Verify its identity, filename, and payload hash before unpacking; fetching never executes it.",
+      "description": "Fetch one inert rappid tile using the rar-card/2.0 JSON protocol. Its name is the primary payload filename plus .card (for example, agent.py.card or foo.egg.card). Verify its identity, filename, and payload hash before unpacking; fetching never executes it.",
       "auth": "none"
     },
     "api_manifest": {
@@ -195,7 +195,7 @@
     "resolve_card_from_seed": {
       "url": "none \u2014 computed locally",
       "method": "LOCAL",
-      "description": "Resolve a card from a numeric seed. Zero bandwidth. Use the seed_hash + mulberry32 algorithm from rapp_sdk.py.",
+      "description": "Resolve a rappid tile from a numeric seed. Zero bandwidth. Use the seed_hash + mulberry32 algorithm from rapp_sdk.py.",
       "auth": "none",
       "algorithm": "seed -> mulberry32 PRNG -> deterministic type, stats, abilities, rarity"
     },
@@ -261,7 +261,7 @@
   },
   "offline": {
     "description": "RAPP is local-first. Everything works offline.",
-    "seed_resolution": "Any numeric seed resolves to a full card (type, stats, abilities) with zero network. The algorithm is deterministic and public.",
-    "git_clone": "git clone = full registry + all agents + all cards. No server needed."
+    "seed_resolution": "Any numeric seed resolves to a full rappid tile (type, stats, abilities) with zero network. The algorithm is deterministic and public.",
+    "git_clone": "git clone = full registry + all agents + all rappid tiles. No server needed."
   }
 }

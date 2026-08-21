@@ -514,7 +514,7 @@
   <section class="altar" id="altar">
     <div class="rankline">
       <span class="rankbadge" id="rankbadge">Apprentice</span>
-      <span class="rankhint" id="rankhint">Fill the missing word — read it off the flash card.</span>
+      <span class="rankhint" id="rankhint">Fill the missing word — read it off the rappid tile.</span>
     </div>
 
     <div class="flash">
@@ -533,7 +533,7 @@
     </div>
 
     <div class="reference" id="reference">
-      <div class="lbl">The Incantation <span style="opacity:.6">— 7 words summon this card</span></div>
+      <div class="lbl">The Incantation <span style="opacity:.6">— 7 words summon this rappid tile</span></div>
       <div class="studytag hidden" id="studytag"></div>
       <div class="refwords" id="refwords"></div>
     </div>
@@ -561,7 +561,7 @@
 <div class="overlay" id="overlay">
   <div class="summoned">
     <div class="card3d" id="card3d"><div class="card3d-stage" id="cardstage">
-      <div class="face-card" id="facecard"><iframe class="grailframe" id="grailframe" title="RAPP Grail card" loading="eager" referrerpolicy="no-referrer"></iframe></div>
+      <div class="face-card" id="facecard"><iframe class="grailframe" id="grailframe" title="Rappid Tile Grail" loading="eager" referrerpolicy="no-referrer"></iframe></div>
       <div class="face-qr" id="faceqr"></div>
     </div></div>
     <div class="xp" id="gainxp">+0 XP</div>
@@ -595,7 +595,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 </script>
 <script>
 /* ============================================================================
-   INCANTATION HERO  —  a Duolingo-style trainer for RAR card incantations.
+   INCANTATION HERO  —  a Duolingo-style trainer for rappid tile incantations.
    The seed<->words math is a byte-exact port of rapp_sdk.py (validated against
    SDK test vectors). Seeds are 64-bit, so everything uses BigInt and we
    string-wrap "_seed" in the raw JSON before parsing to avoid float corruption.
@@ -705,7 +705,7 @@ async function boot(){
     };
   });
   // load the REAL card data (avatar art + MTG stats) the RAR store renders
-  document.getElementById('loadmsg').textContent='fetching the holo card forge';
+  document.getElementById('loadmsg').textContent='fetching the rappid tile forge';
   try{
     let htext;
     try{ htext = await (await fetch(HOLO_URL,{cache:'no-store'})).text(); }
@@ -804,7 +804,7 @@ function renderCard(){
   document.getElementById('rankbadge').textContent = RANKS[rank];
   document.getElementById('rankhint').textContent = memory
     ? `Recall ${rank} of 7 from memory — the incantation is veiled. Tap Peek for a glimpse.`
-    : `Complete ${rank} blank${rank>1?'s':''} — the answer${rank>1?'s are':' is'} highlighted on the flash card above.`;
+    : `Complete ${rank} blank${rank>1?'s':''} — the answer${rank>1?'s are':' is'} highlighted on the rappid tile above.`;
   // reference incantation (study/hint)
   const ref = document.getElementById('reference');
   ref.classList.toggle('memory', memory);
@@ -870,7 +870,7 @@ function wrongSummon(){
   S.streak=0; S.mana=Math.max(0,S.mana-1); save(); renderMeta();
   beep(160,0.12,'sawtooth');
   if(S.mana<=0){ toast('Out of mana — channeling more…'); setTimeout(()=>{S.mana=5; save(); renderMeta();}, 900); }
-  else toast('Not quite — check the flash card.');
+  else toast('Not quite — check the rappid tile.');
 }
 
 function successSummon(){
@@ -903,7 +903,7 @@ function grailURL(agent){ return GRAIL_BASE + '#' + encodeURIComponent(agent.nam
 function mountCard(agent){
   const fc = document.getElementById('facecard');
   // (re)create the iframe so the new card's grail loads fresh
-  fc.innerHTML = '<iframe class="grailframe" id="grailframe" title="RAPP Grail card" loading="eager" referrerpolicy="no-referrer"></iframe>';
+  fc.innerHTML = '<iframe class="grailframe" id="grailframe" title="Rappid Tile Grail" loading="eager" referrerpolicy="no-referrer"></iframe>';
   const f = document.getElementById('grailframe');
   // if grail (GitHub Pages) is unreachable, fall back to the locally-ported holo card
   f.onerror = ()=>{ fc.innerHTML = holoCardHTML(agent); };
@@ -917,7 +917,7 @@ function showSummon(agent, gain, levelUp){
   mountCard(agent);
   document.getElementById('gainxp').textContent='+'+gain+' XP'+(levelUp?'   🎉 LEVEL UP!':'');
   document.getElementById('summontitle').textContent = (current.rank>=7?'Mastered ✦ ':'Summoned! ')+agent.display;
-  document.getElementById('summoninc').textContent = '“'+agent.words.join(' ')+'”  ·  flip for a summon QR · export from the card';
+  document.getElementById('summoninc').textContent = '“'+agent.words.join(' ')+'”  ·  flip for a summon QR · export from the rappid tile';
   document.getElementById('overlay').classList.add('show');
   spawnSparks(color); chime();
 }
@@ -990,7 +990,7 @@ function qrBackHTML(agent){
      <div class="ac-qr">${renderQR(url,128)}</div>
      <div class="ac-back-name">${esc(agent.display)}</div>
      <div class="ac-back-inc">“${esc(spell)}”</div>
-     <div class="ac-back-hint">Scan sealed .card &middot; or speak the 7 words</div>
+     <div class="ac-back-hint">Scan rappid tile (.card) &middot; or speak the 7 words</div>
      <div class="ac-back-actions">
        <button onclick="event.stopPropagation();navigator.clipboard&&navigator.clipboard.writeText('${url}');toast('🔗 Summon link copied')">Copy link</button>
        <button onclick="event.stopPropagation();navigator.clipboard&&navigator.clipboard.writeText('${esc(spell)}');toast('✨ Incantation copied')">Copy spell</button>
@@ -1024,7 +1024,7 @@ function setFace(which){
   _showingQR = (which==='qr');
   document.getElementById('facecard').style.display = _showingQR?'none':'';
   document.getElementById('faceqr').style.display   = _showingQR?'':'none';
-  document.getElementById('flipbtn').textContent = _showingQR?'⟳ Flip → Card':'⟳ Flip → QR';
+  document.getElementById('flipbtn').textContent = _showingQR?'⟳ Flip → Rappid Tile':'⟳ Flip → QR';
 }
 function flipCard(){
   const stage=document.getElementById('cardstage');
@@ -1076,7 +1076,7 @@ document.getElementById('peek').onclick=()=>{
   } else {
     // answer is already shown; draw the eye to the highlighted words
     ref.animate([{boxShadow:'0 0 0 0 rgba(255,215,106,.7)'},{boxShadow:'0 0 0 10px rgba(255,215,106,0)'}],{duration:650});
-    toast('☝ The answer is highlighted on the flash card');
+    toast('☝ The answer is highlighted on the rappid tile');
   }
 };
 document.getElementById('skip').onclick=()=>{ S.streak=0; save(); renderMeta(); nextCard(); };

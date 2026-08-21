@@ -1,34 +1,35 @@
-# RAR cards v2
+# Rappid tiles (rar-card/2.0)
 
-`rar-card/2.0` is the portable card format for a RAPP agent. A card is one
-UTF-8 JSON object, terminated by one LF byte, with the extension `.card`.
-It is data, never active content.
+`rar-card/2.0` is the protocol behind a portable rappid tile for a RAPP agent.
+Each rappid tile is one UTF-8 JSON object, terminated by one LF byte, with the
+extension `.card`. It is data, never active content.
 
-Cards v2 are a strict envelope around the existing card face. The
+Rappid tiles are a strict envelope around the existing tile face. The
 `cards/holo_cards.json` v1 index remains authoritative and unchanged. A v2
 reader finds that same object under `face`; migration never re-mints it,
 changes its seed, or changes its incantation.
 
 ## The hero law
 
-The `.card` file is the artifact a person keeps. A woods-ready card carries
+The `.card` file is the rappid tile a person keeps. A woods-ready tile carries
 every required payload inline, so a second offline device can verify and
-unpack it using only the card's own bytes. After successful verification,
+unpack it using only the tile's own bytes. After successful verification,
 `card verify` and `card scan` report `offline: ready` only when every payload
 item is inline.
 
 `card pack agent.py` therefore defaults to `--inline`. `--pin <raw-url>` is
 RAR's compact registry form: it preserves a revision-pinned integrity proof
-without duplicating the payload. A pinned-only card is never called
+without duplicating the payload. A pinned-only rappid tile is never called
 offline-ready, even when verification can currently fetch its URL; it reports
 `offline: needs <n> pinned payload(s)`.
 
 ## The file name
 
-The sleeve says what is inside. A card with a primary payload (`payload[0]`) is
-named by appending `.card` to that payload's complete filename:
+The sleeve says what is inside. A rappid tile with a primary payload
+(`payload[0]`) is named by appending `.card` to that payload's complete
+filename:
 
-| Primary payload | Card |
+| Primary payload | Rappid tile |
 |---|---|
 | `bookfactory_agent.py` | `bookfactory_agent.py.card` |
 | `bookfactory.egg` | `bookfactory.egg.card` |
@@ -40,8 +41,8 @@ strips the final `.card` and restores `x_agent.py` beside the sleeve. A verifier
 or scanner refuses a file or URL whose basename disagrees with
 `payload[0].filename`.
 
-A face-only card has no primary payload and uses `<slug>.card`. RAR migration
-publishes `cards/v2/@publisher/<primary payload filename>.card`. Source
+A face-only rappid tile has no primary payload and uses `<slug>.card`. RAR
+migration publishes `cards/v2/@publisher/<primary payload filename>.card`. Source
 basenames are used normally; if legacy agents under one publisher collide
 after flattening, migration uses the registry's canonical collision-safe
 install filename as both the primary payload filename and sleeve name.
@@ -80,7 +81,7 @@ both procedural and hand-forged fields.
 
 ## Identity
 
-The seed is the card identity:
+The seed is the rappid tile identity:
 
 1. `seed` is `forge_seed(manifest)`.
 2. `name_seed` is `seed_hash(id)`.
@@ -90,7 +91,7 @@ The seed is the card identity:
    equals `id`.
 
 A verifier recomputes those values and refuses disagreement. For a migrated
-RAR card, a verifier with the frozen v1 index also requires `face` to equal
+rappid tile, a verifier with the frozen v1 index also requires `face` to equal
 that indexed face in full. This extra comparison is necessary because legacy
 art, prose, environment-derived stats, and curated faces were never encoded
 entirely in the seed. It preserves the v1 protocol rather than pretending
@@ -99,11 +100,11 @@ those bytes can be reconstructed.
 ## Payload sleeve
 
 `payload` contains zero or more `agent.py` and `egg` items. An empty array is
-a face-only card.
+a face-only rappid tile.
 
 Each item has exactly one source:
 
-- `inline` carries the payload in the card.
+- `inline` carries the payload in the rappid tile.
 - `url` points to pinned bytes. GitHub raw URLs must name an immutable
   revision, not `main`, `master`, or `HEAD`.
 
@@ -119,13 +120,14 @@ with LF. It performs no other Unicode, whitespace, or newline normalization.
 Binary payloads use SHA-256 over the exact bytes. Digests are lowercase,
 64-character hexadecimal strings.
 
-A card containing inline payload must be no larger than 1 MiB
+A rappid tile containing inline payload must be no larger than 1 MiB
 (1,048,576 bytes) as serialized on disk. Larger payloads must be pinned.
 Payload filenames are basenames; path traversal is invalid.
 
-The reference SDK also applies defensive read ceilings of 4 MiB for a card
-document and 64 MiB for one pinned payload. Clients that support larger pinned
-artifacts must stream them through verification instead of buffering them.
+The reference SDK also applies defensive read ceilings of 4 MiB for a rappid
+tile document and 64 MiB for one pinned payload. Clients that support larger
+pinned artifacts must stream them through verification instead of buffering
+them.
 
 ## State, dimensions, and publication
 
@@ -134,24 +136,24 @@ artifacts must stream them through verification instead of buffering them.
 - `dormant`: stored in a registry or on disk, with no live process.
 - `active`: attached to a live twin or parked conversation.
 
-`dimension` is local conversation state. A published card, identified by an
+`dimension` is local conversation state. A published rappid tile, identified by an
 HTTP or HTTPS `scan.url`, must have `dimension: null`. Publishing also returns
-the card to `state: "dormant"`. A local export may carry a dimension only by
+the tile to `state: "dormant"`. A local export may carry a dimension only by
 explicit user choice.
 
-`origin` records where a local card came from. `signature` is reserved for a
-future signature profile and is `null` unless such a profile is in use.
+`origin` records where a local rappid tile came from. `signature` is reserved
+for a future signature profile and is `null` unless such a profile is in use.
 
 ## Scanning and summoning
 
-`scan.url` is the value encoded by the QR shown on the card. Registry cards
-use their public, raw GitHub URL. Local cards may use
+`scan.url` is the value encoded by the QR shown on the rappid tile. Registry
+tiles use their public, raw GitHub URL. Local tiles may use
 `rar://@publisher/slug@seed`.
 
 Scanning is always:
 
 1. Resolve a URL, numeric seed, or seven-word incantation.
-2. Parse the card as data.
+2. Parse the rappid tile as data.
 3. Validate the schema and identity.
 4. Fetch or decode each payload and verify its digest.
 5. Display the face and verified payload hashes.
@@ -168,18 +170,18 @@ python rapp_sdk.py card verify agent.py.card
 python rapp_sdk.py card scan <url | seed | "seven words">
 ```
 
-`pack` defaults to inline payload for a card a person keeps. `--pin` creates
+`pack` defaults to inline payload for a rappid tile a person keeps. `--pin` creates
 RAR's compact form by pinning the `agent.py`; an optional egg remains inline
 because it has no independent URL argument. `unpack` verifies first and writes
 exact payload bytes. `scan` resolves through the local v2 index before
 attempting the public index. Resolution from a local clone does not change the
-readiness label: any card with pinned payloads remains not offline-ready.
+readiness label: any rappid tile with pinned payloads remains not offline-ready.
 
 ## Registry migration
 
 `scripts/migrate_cards_v2.py` wraps every v1 entry. Its payload points to the
 agent file at the migration revision and carries the registry's
-`sha256-lf-v1` digest. Generated cards are dormant, public, dimension-free,
+`sha256-lf-v1` digest. Generated rappid tiles are dormant, public, dimension-free,
 named `<primary payload filename>.card`, and indexed by id in
 `cards/v2/index.json`.
 

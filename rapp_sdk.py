@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""RAPP Foundation SDK — Build agents, mint cards, manage your agents/ directory. The open developer toolkit for the RAPP agent ecosystem."""
+"""RAPP Foundation SDK — Build agents, mint rappid tiles, manage your agents/ directory. The open developer toolkit for the RAPP agent ecosystem."""
 
 from __future__ import annotations
 
@@ -1374,7 +1374,7 @@ def _legacy_faces() -> dict:
             loaded = json.loads(path.read_text(encoding="utf-8"))
             _LEGACY_FACE_CACHE = loaded if isinstance(loaded, dict) else {}
         except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
-            raise ValueError(f"Could not read frozen v1 card index: {exc}") from exc
+            raise ValueError(f"Could not read frozen v1 tile index: {exc}") from exc
     return _LEGACY_FACE_CACHE
 
 
@@ -1414,9 +1414,9 @@ def to_v2(
     rar_revision: str | None = None,
     minted_by: str | None = None,
 ) -> dict:
-    """Wrap an existing card face in a validated ``rar-card/2.0`` envelope."""
+    """Wrap an existing tile face in a validated ``rar-card/2.0`` envelope."""
     if not isinstance(card, dict):
-        raise ValueError("Card face must be an object")
+        raise ValueError("Rappid tile face must be an object")
     if not isinstance(manifest, dict):
         raise ValueError("Manifest must be an object")
 
@@ -1427,7 +1427,7 @@ def to_v2(
 
     seed = card.get("seed")
     if type(seed) is not int or seed < 0:
-        raise ValueError("Card face must contain a non-negative integer seed")
+        raise ValueError("Rappid tile face must contain a non-negative integer seed")
 
     if scan_url is None:
         scan_url = f"rar://{agent_id}@{seed}"
@@ -1456,7 +1456,7 @@ def to_v2(
 
 
 def to_v1(card: dict) -> dict:
-    """Return an exact copy of a v2 card's v1 face after local verification."""
+    """Return an exact copy of a v2 rappid tile's v1 face after local verification."""
     verified = verify_card(card, fetch_payloads=False)
     return copy.deepcopy(verified["card"]["face"])
 
@@ -1480,7 +1480,7 @@ def expected_card_filename(card: dict) -> str:
         return f"{primary['filename']}.card"
     agent_id = card.get("id")
     if not isinstance(agent_id, str) or "/" not in agent_id:
-        raise ValueError("Face-only card must have a valid id")
+        raise ValueError("Face-only rappid tile must have a valid id")
     return f"{agent_id.split('/', 1)[1]}.card"
 
 
@@ -1489,13 +1489,13 @@ def _source_card_filename(source: str) -> str:
     if parsed.scheme in {"http", "https", "file"}:
         raw_segment = parsed.path.rsplit("/", 1)[-1]
         if re.search(r"%(?![0-9A-Fa-f]{2})", raw_segment):
-            raise ValueError("Card URL filename has invalid percent encoding")
+            raise ValueError("Rappid tile URL filename has invalid percent encoding")
         try:
             filename = urllib.parse.unquote_to_bytes(raw_segment).decode("utf-8")
         except UnicodeDecodeError as exc:
-            raise ValueError("Card URL filename must be UTF-8") from exc
+            raise ValueError("Rappid tile URL filename must be UTF-8") from exc
         if "/" in filename or "\\" in filename:
-            raise ValueError("Card URL filename must not encode a path separator")
+            raise ValueError("Rappid tile URL filename must not encode a path separator")
         return filename
     return Path(source).name
 
@@ -1600,25 +1600,25 @@ def _read_card_document(source: str | os.PathLike) -> tuple[dict, bytes, str]:
         try:
             if path.stat().st_size > CARD_MAX_DOCUMENT_BYTES:
                 raise ValueError(
-                    f"Card document exceeds {CARD_MAX_DOCUMENT_BYTES} bytes"
+                    f"Rappid tile document exceeds {CARD_MAX_DOCUMENT_BYTES} bytes"
                 )
             raw = path.read_bytes()
         except OSError as exc:
-            raise ValueError(f"Could not read card {path}: {exc}") from exc
+            raise ValueError(f"Could not read rappid tile {path}: {exc}") from exc
         label = str(path)
 
     if not raw.endswith(b"\n") or raw.endswith(b"\r\n"):
-        raise ValueError("Card must be terminated by one LF newline")
+        raise ValueError("Rappid tile must be terminated by one LF newline")
     if raw[:-1].rstrip(b" \t\r\n") != raw[:-1]:
-        raise ValueError("Card has trailing whitespace before its final newline")
+        raise ValueError("Rappid tile has trailing whitespace before its final newline")
     try:
         text = raw[:-1].decode("utf-8")
     except UnicodeDecodeError as exc:
-        raise ValueError("Card must be valid UTF-8") from exc
+        raise ValueError("Rappid tile must be valid UTF-8") from exc
     try:
         card = json.loads(text, object_pairs_hook=_duplicate_safe_object)
     except (json.JSONDecodeError, ValueError) as exc:
-        raise ValueError(f"Invalid card JSON: {exc}") from exc
+        raise ValueError(f"Invalid rappid tile JSON: {exc}") from exc
     return card, raw, label
 
 
@@ -1644,15 +1644,15 @@ def validate_card(card: object, *, serialized_size: int | None = None) -> list[s
     """Validate the dependency-free subset of the normative JSON Schema."""
     errors: list[str] = []
     if not isinstance(card, dict):
-        return ["Card document must be a JSON object"]
+        return ["Rappid tile document must be a JSON object"]
 
     keys = set(card)
     missing = CARD_REQUIRED_FIELDS - keys
     extra = keys - CARD_REQUIRED_FIELDS
     if missing:
-        errors.append(f"Missing required card field(s): {', '.join(sorted(missing))}")
+        errors.append(f"Missing required rappid tile field(s): {', '.join(sorted(missing))}")
     if extra:
-        errors.append(f"Unknown card field(s): {', '.join(sorted(extra))}")
+        errors.append(f"Unknown rappid tile field(s): {', '.join(sorted(extra))}")
     if missing:
         return errors
 
@@ -1755,9 +1755,9 @@ def validate_card(card: object, *, serialized_size: int | None = None) -> list[s
             errors.append("scan.qr must be a string")
     if isinstance(scan_url, str) and scan_url.startswith(("http://", "https://")):
         if card.get("dimension") is not None:
-            errors.append("Published cards must have dimension set to null")
+            errors.append("Published rappid tiles must have dimension set to null")
         if card.get("state") != "dormant":
-            errors.append("Published cards must be dormant")
+            errors.append("Published rappid tiles must be dormant")
 
     provenance = card.get("provenance")
     if not isinstance(provenance, dict):
@@ -1839,7 +1839,7 @@ def validate_card(card: object, *, serialized_size: int | None = None) -> list[s
 
     if has_inline and serialized_size is not None and serialized_size > CARD_MAX_INLINE_BYTES:
         errors.append(
-            f"Card with inline payload exceeds {CARD_MAX_INLINE_BYTES} bytes"
+            f"Rappid tile with inline payload exceeds {CARD_MAX_INLINE_BYTES} bytes"
         )
     return errors
 
@@ -1891,7 +1891,7 @@ def _verify_card_identity(card: dict) -> list[str]:
     legacy = _legacy_faces().get(agent_id)
     if legacy is not None:
         if face != legacy:
-            errors.append("face disagrees with the frozen v1 card")
+            errors.append("face disagrees with the frozen v1 rappid tile")
         return errors
 
     resolved = resolve_card_from_seed(seed, full_seed=True)
@@ -1958,7 +1958,7 @@ def _payload_bytes(item: dict) -> bytes:
 
 
 def card_offline_readiness(card: dict) -> dict:
-    """Describe whether the card carries every payload in its own bytes."""
+    """Describe whether the rappid tile carries every payload in its own bytes."""
     pinned_payloads = sum(
         1
         for item in card.get("payload", [])
@@ -1983,7 +1983,7 @@ def verify_card(
     fetch_payloads: bool = True,
     return_payload_bytes: bool = False,
 ) -> dict:
-    """Validate a card and all available payload hashes without executing it."""
+    """Validate a rappid tile and all available payload hashes without executing it."""
     if isinstance(card_or_source, dict):
         card = copy.deepcopy(card_or_source)
         raw = _card_json_bytes(card)
@@ -1994,7 +1994,7 @@ def verify_card(
     errors = []
     if len(raw) > CARD_MAX_DOCUMENT_BYTES:
         errors.append(
-            f"Card document exceeds {CARD_MAX_DOCUMENT_BYTES} bytes"
+            f"Rappid tile document exceeds {CARD_MAX_DOCUMENT_BYTES} bytes"
         )
     errors.extend(validate_card(card, serialized_size=len(raw)))
     if not errors:
@@ -2004,11 +2004,11 @@ def verify_card(
         expected_filename = expected_card_filename(card)
         if actual_filename != expected_filename:
             errors.append(
-                f"card filename {actual_filename!r} disagrees with primary "
+                f"rappid tile filename {actual_filename!r} disagrees with primary "
                 f"payload filename {expected_filename!r}"
             )
     if errors:
-        raise ValueError("Card verification failed: " + "; ".join(errors))
+        raise ValueError("Rappid tile verification failed: " + "; ".join(errors))
 
     payloads = []
     for item in card["payload"]:
@@ -2030,7 +2030,7 @@ def verify_card(
                 content.decode("utf-8")
             except UnicodeDecodeError as exc:
                 raise ValueError(
-                    f"Card verification failed: {item['filename']} is not UTF-8"
+                    f"Rappid tile verification failed: {item['filename']} is not UTF-8"
                 ) from exc
             digest_key = "sha256_lf_v1"
             digest = sha256_lf_v1(content)
@@ -2039,7 +2039,7 @@ def verify_card(
             digest = hashlib.sha256(content).hexdigest()
         if digest != item[digest_key]:
             raise ValueError(
-                "Card verification failed: "
+                "Rappid tile verification failed: "
                 f"{item['filename']} {digest_key} mismatch "
                 f"(expected {item[digest_key]}, got {digest})"
             )
@@ -2072,7 +2072,7 @@ def pack_card(
     pin_url: str | None = None,
     output_path: str | os.PathLike | None = None,
 ) -> str:
-    """Pack an agent and optional egg into a verified v2 card file."""
+    """Pack an agent and optional egg into a verified rappid tile."""
     path = Path(agent_path)
     manifest = extract_manifest(str(path))
     if manifest is None:
@@ -2155,7 +2155,7 @@ def pack_card(
     raw = _card_json_bytes(card)
     size_errors = validate_card(card, serialized_size=len(raw))
     if size_errors:
-        raise ValueError("Card packing failed: " + "; ".join(size_errors))
+        raise ValueError("Rappid tile packing failed: " + "; ".join(size_errors))
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_bytes(raw)
     return str(destination)
@@ -2201,18 +2201,18 @@ def _load_card_index() -> tuple[dict, Path | None]:
         try:
             index = json.loads(local_path.read_text(encoding="utf-8"))
         except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
-            raise ValueError(f"Could not read local card index: {exc}") from exc
+            raise ValueError(f"Could not read local rappid tile index: {exc}") from exc
         if not isinstance(index, dict):
-            raise ValueError("Local card index must be an object")
+            raise ValueError("Local rappid tile index must be an object")
         return index, local_path
 
     raw = _read_url_bytes(f"{RAW_BASE}/cards/v2/index.json")
     try:
         index = json.loads(raw.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
-        raise ValueError(f"Could not parse public card index: {exc}") from exc
+        raise ValueError(f"Could not parse public rappid tile index: {exc}") from exc
     if not isinstance(index, dict):
-        raise ValueError("Public card index must be an object")
+        raise ValueError("Public rappid tile index must be an object")
     return index, None
 
 
@@ -2225,9 +2225,9 @@ def _resolve_indexed_card(seed: int) -> str:
         and seed in {entry.get("seed"), entry.get("name_seed")}
     ]
     if not matches:
-        raise ValueError(f"No v2 card found for seed {seed}")
+        raise ValueError(f"No v2 rappid tile found for seed {seed}")
     if len(matches) > 1:
-        raise ValueError(f"Seed {seed} is ambiguous in the v2 card index")
+        raise ValueError(f"Seed {seed} is ambiguous in the v2 rappid tile index")
     agent_id, entry = matches[0]
     if local_path is not None:
         url = entry.get("url")
@@ -2244,7 +2244,7 @@ def _resolve_indexed_card(seed: int) -> str:
                         return str(candidate)
     url = entry.get("url")
     if not isinstance(url, str):
-        raise ValueError(f"Card index entry {agent_id} has no URL")
+        raise ValueError(f"Rappid tile index entry {agent_id} has no URL")
     return url
 
 
@@ -2252,7 +2252,7 @@ def scan_card(source: str | os.PathLike) -> dict:
     """Resolve and verify a URL, local path, seed, or seven-word incantation."""
     value = os.fspath(source).strip()
     if not value:
-        raise ValueError("Card scan input is empty")
+        raise ValueError("Rappid tile scan input is empty")
     parsed = urllib.parse.urlparse(value)
     rar_match = re.fullmatch(
         r"rar://(@[A-Za-z0-9][A-Za-z0-9-]*/[a-z0-9_]+)@([0-9]+)",
@@ -2264,7 +2264,7 @@ def scan_card(source: str | os.PathLike) -> dict:
         result = verify_card(_resolve_indexed_card(seed))
         card = result["card"]
         if card["id"] != expected_id or card["seed"] != seed:
-            raise ValueError("rar URL disagrees with the resolved card")
+            raise ValueError("rar URL disagrees with the resolved rappid tile")
         return result
     if parsed.scheme in {"http", "https", "file"} or Path(value).is_file():
         return verify_card(value)
@@ -2277,20 +2277,20 @@ def scan_card(source: str | os.PathLike) -> dict:
             seed = int(value)
         except ValueError as exc:
             raise ValueError(
-                "Card scan expects a URL, file, numeric seed, or seven words"
+                "Rappid tile scan expects a URL, file, numeric seed, or seven words"
             ) from exc
         if seed < 0:
-            raise ValueError("Card seed must be non-negative")
+            raise ValueError("Rappid tile seed must be non-negative")
     else:
         raise ValueError(
-            "Card scan expects a URL, file, numeric seed, or seven words"
+            "Rappid tile scan expects a URL, file, numeric seed, or seven words"
         )
     return verify_card(_resolve_indexed_card(seed))
 
 
 def _print_v2_card(result: dict, *, include_face: bool) -> None:
     card = result["card"]
-    print(f"  Verified: {card['id']}")
+    print(f"  Verified rappid tile: {card['id']}")
     print(f"  Schema: {card['schema']}")
     print(f"  Seed: {card['seed']}")
     print(f"  Incantation: {card['incantation']}")
@@ -3049,7 +3049,7 @@ def _fmt_test_results(results: list[tuple[str, bool, str]], use_json: bool) -> s
 def main():
     parser = argparse.ArgumentParser(
         prog="rapp_sdk",
-        description="RAPP Foundation SDK — Build agents, mint cards, manage your agents/ directory.",
+        description="RAPP Foundation SDK — Build agents, mint rappid tiles, manage your agents/ directory.",
     )
     parser.add_argument("--version", action="version", version=f"rapp_sdk {__version__}")
 
@@ -3122,16 +3122,16 @@ def main():
     p_info.add_argument("--json", action="store_true", help="Output JSON")
 
     # card
-    p_card = sub.add_parser("card", help="Card operations")
+    p_card = sub.add_parser("card", help="Rappid tile operations")
     card_sub = p_card.add_subparsers(dest="card_command", metavar="<subcommand>")
 
-    p_card_mint = card_sub.add_parser("mint", help="Mint a card from an agent file")
+    p_card_mint = card_sub.add_parser("mint", help="Mint a rappid tile from an agent file")
     p_card_mint.add_argument("path", help="Path to agent .py file")
     p_card_mint.add_argument("--json", action="store_true", help="Output JSON")
 
     p_card_pack = card_sub.add_parser(
         "pack",
-        help="Pack an agent and optional egg into a rar-card/2.0 file",
+        help="Pack an agent and optional egg into a rappid tile (.card)",
     )
     p_card_pack.add_argument("path", help="Path to agent .py file")
     p_card_pack.add_argument("--egg", help="Optional binary .egg payload")
@@ -3165,33 +3165,33 @@ def main():
 
     p_card_verify = card_sub.add_parser(
         "verify",
-        help="Verify card schema, identity, and payload hashes",
+        help="Verify rappid tile schema, identity, and payload hashes",
     )
     p_card_verify.add_argument("path", help="Path or URL to a .card file")
     p_card_verify.add_argument("--json", action="store_true", help="Output JSON")
 
     p_card_scan = card_sub.add_parser(
         "scan",
-        help="Resolve and verify a card URL, seed, or seven words",
+        help="Resolve and verify a rappid tile URL, seed, or seven words",
     )
     p_card_scan.add_argument(
         "source",
         nargs="+",
-        help="Card URL, local file, numeric seed, or seven-word incantation",
+        help="Rappid tile URL, local file, numeric seed, or seven-word incantation",
     )
     p_card_scan.add_argument("--json", action="store_true", help="Output JSON")
 
-    p_card_value = card_sub.add_parser("value", help="Check the floor value of an agent card")
+    p_card_value = card_sub.add_parser("value", help="Check the floor value of a rappid tile")
     p_card_value.add_argument("name", help="Agent name: @publisher/my-agent")
     p_card_value.add_argument("--json", action="store_true", help="Output JSON")
 
-    p_card_resolve = card_sub.add_parser("resolve", help="Resolve a full card from just a name — micro-bandwidth self-assembly")
+    p_card_resolve = card_sub.add_parser("resolve", help="Resolve a full rappid tile from just a name — micro-bandwidth self-assembly")
     p_card_resolve.add_argument("name", nargs="+", help="Agent name, numeric seed, or 7-word mnemonic")
     seed_mode = p_card_resolve.add_mutually_exclusive_group()
     seed_mode.add_argument(
         "--full-seed",
         action="store_true",
-        help="Interpret a numeric value as complete card DNA",
+        help="Interpret a numeric value as complete rappid tile DNA",
     )
     seed_mode.add_argument(
         "--short-seed",
@@ -3209,8 +3209,8 @@ def main():
     p_status.add_argument("--json", action="store_true", help="Output JSON")
 
     # transfer
-    p_transfer = sub.add_parser("transfer", help="Transfer a card to another address")
-    p_transfer.add_argument("id", help="Mint ID of the card")
+    p_transfer = sub.add_parser("transfer", help="Transfer a rappid tile to another address")
+    p_transfer.add_argument("id", help="Mint ID of the rappid tile")
     p_transfer.add_argument("to", help="Destination address")
     p_transfer.add_argument("--json", action="store_true", help="Output JSON")
 
@@ -3456,7 +3456,7 @@ def main():
                 if use_json:
                     print(json.dumps({"packed": packed}))
                 else:
-                    print(f"  Packed: {packed}")
+                    print(f"  Packed rappid tile: {packed}")
             except Exception as e:
                 if use_json:
                     print(json.dumps({"error": str(e)}))
@@ -3470,7 +3470,7 @@ def main():
                 if use_json:
                     print(json.dumps({"unpacked": written}, indent=2))
                 else:
-                    print(f"  Unpacked {len(written)} payload(s):")
+                    print(f"  Unpacked rappid tile payload(s): {len(written)}")
                     for path in written:
                         print(f"    {path}")
             except Exception as e:
@@ -3514,7 +3514,7 @@ def main():
                 if use_json:
                     print(json.dumps(card, indent=2))
                 else:
-                    print(f"  Card: {card['display_name']}")
+                    print(f"  Rappid tile: {card['display_name']}")
                     print(f"  Type: {card['type_line']}")
                     print(f"  Rarity: {card['rarity_label']}  ({card['rarity']})")
                     print(f"  Power/Toughness: {card['power']}/{card['toughness']}")
@@ -3554,7 +3554,7 @@ def main():
                     print(f"\n  {card.get('display_name', card.get('name', '?'))}")
                     print(f"  Seed: {seed}")
                     print(f"\n  {mnemonic}")
-                    print(f"\n  Memorize these 7 words. They ARE the card.")
+                    print(f"\n  Memorize these 7 words. They ARE the rappid tile.")
                     print(f"  Resolve anywhere: python rapp_sdk.py card resolve {mnemonic}")
                     print()
             except Exception as e:
@@ -3618,9 +3618,9 @@ def main():
                 print()
                 print(f"  Seed: {result['seed']}  |  Floor: {result['floor_pts']} pts")
                 if result.get("_resolved_from") == "seed_only":
-                    print(f"  Resolved from seed alone. Share the number — card self-assembles.")
+                    print(f"  Resolved from seed alone. Share the number — the rappid tile self-assembles.")
                 else:
-                    print(f"  Resolved from name alone. Send \"{result.get('name', '')}\" — card self-assembles.")
+                    print(f"  Resolved from name alone. Send \"{result.get('name', '')}\" — the rappid tile self-assembles.")
         else:
             p_card.print_help()
 

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAPP Grail</title>
-<meta name="description" content="A shareable permalink for any agent in the RAPP registry — card art, provenance, source, install command. Static, content-addressable.">
-<meta property="og:title" content="RAPP Grail">
-<meta property="og:description" content="Card art + agent.py source + cryptographic provenance, on a shareable static URL.">
+<title>Rappid Tile Grail</title>
+<meta name="description" content="A shareable rappid tile for any agent in the RAPP registry — tile art, provenance, source, and install command. Static and content-addressable.">
+<meta property="og:title" content="Rappid Tile Grail">
+<meta property="og:description" content="Rappid tile art + agent.py source + cryptographic provenance, on a shareable static URL.">
 <style>
 :root {
   --bg: #0d1117;
@@ -498,15 +498,15 @@ header {
 <header>
   <a class="logo" href="index.html">
     <div class="logo-mark">R</div>
-    <span>RAPP Grail</span>
+    <span>Rappid Tile Grail</span>
   </a>
   <div class="header-right">
-    <a class="back-link" href="index.html">All cards</a>
+    <a class="back-link" href="index.html">All rappid tiles</a>
   </div>
 </header>
 
 <div class="container" id="root">
-  <div class="loading" id="initial-loading">Loading card…</div>
+  <div class="loading" id="initial-loading">Loading rappid tile…</div>
 </div>
 
 <script>
@@ -516,7 +516,7 @@ const CARD_INDEX_URL = 'cards/v2/index.json';
 const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR';
 
 // Dependency-free QR Model 2 encoder. It emits inert inline SVG and supports
-// the URL sizes used by RAR cards (versions 1-10, error correction level L).
+// the URL sizes used by rappid tiles (versions 1-10, error correction level L).
 const _rarQrCache = new Map();
 function rarQrSvg(text, size = 160) {
   const cacheKey = `${size}\0${text}`;
@@ -544,7 +544,7 @@ function rarQrSvg(text, size = 160) {
       break;
     }
   }
-  if (!version) throw new Error('RAR card scan URL is too long for the QR encoder');
+  if (!version) throw new Error('Rappid tile scan URL is too long for the QR encoder');
   const spec = specs[version];
   const bits = [];
   const put = (value, count) => {
@@ -734,7 +734,7 @@ function rarQrSvg(text, size = 160) {
   best.modules.forEach((row,y)=>row.forEach((dark,x)=>{
     if (dark) path += `M${x+quiet} ${y+quiet}h1v1h-1z`;
   }));
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${view} ${view}" role="img" aria-label="RAR card scan QR" shape-rendering="crispEdges"><rect width="${view}" height="${view}" fill="#fff"/><path d="${path}" fill="#111"/></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${view} ${view}" role="img" aria-label="Rappid tile scan QR" shape-rendering="crispEdges"><rect width="${view}" height="${view}" fill="#fff"/><path d="${path}" fill="#111"/></svg>`;
   _rarQrCache.set(cacheKey, svg);
   return svg;
 }
@@ -864,7 +864,7 @@ async function load() {
       <div class="error">
         <h2>Agent not found in registry</h2>
         <div class="error-detail">No entry for <code>${esc(key)}</code>.<br>
-        <a href="index.html">Browse all cards</a></div>
+        <a href="index.html">Browse all rappid tiles</a></div>
       </div>`;
     return;
   }
@@ -1017,7 +1017,7 @@ async function load() {
             </div>
             ${agent._card_sha256 ? `
             <div class="row">
-              <div class="label">Card sha256</div>
+              <div class="label">Rappid tile sha256</div>
               <div class="value hash">${esc(agent._card_sha256)}</div>
             </div>` : ''}
             <div class="row">
@@ -1038,8 +1038,8 @@ async function load() {
           <a class="share-btn" href="${py_url_main}" target="_blank">📄 Raw .py</a>
           <a class="share-btn" href="https://github.com/kody-w/RAR/blob/main/${filePath}" target="_blank">🔗 GitHub</a>
           ${isInlined
-            ? '<span class="share-btn" style="opacity:0.65;cursor:default" title="This file is a self-contained standalone Grail — the agent data is baked in. No network required to render this card.">✓ Standalone copy</span>'
-            : '<a class="share-btn" href="javascript:void(0)" id="export-grail" title="Download this card as a single self-contained .html file — works offline, contains the full agent.py, can be emailed or AirDropped">📥 Standalone .html</a>'}
+            ? '<span class="share-btn" style="opacity:0.65;cursor:default" title="This file is a self-contained standalone Grail — the agent data is baked in. No network required to render this rappid tile.">✓ Standalone copy</span>'
+            : '<a class="share-btn" href="javascript:void(0)" id="export-grail" title="Download this rappid tile as a single self-contained .html file — works offline, contains the full agent.py, can be emailed or AirDropped">📥 Standalone .html</a>'}
         </div>
       </div>
     </div>
@@ -1049,8 +1049,8 @@ async function load() {
         ${rarQrSvg(scan_url,252)}
       </div>
       <div class="summon-info">
-        <h2>Scan the sealed card</h2>
-        <p>The QR encodes this v2 card's public <code>scan.url</code>. A client fetches the card, verifies its face and pinned payload hash, then offers it for summoning. Scanning never executes code.</p>
+        <h2>Scan the sealed rappid tile</h2>
+        <p>The QR encodes this rappid tile's public <code>scan.url</code>. A client fetches the tile, verifies its face and pinned payload hash, then offers it for summoning. Scanning never executes code.</p>
         <div class="summon-link">
           <span id="summon-url">${esc(scan_url)}</span>
           <button data-copy="summon-url">copy</button>
@@ -1186,9 +1186,9 @@ async function load() {
   }
 
   // Update document title + meta
-  document.title = `${agent.display_name || slug} — RAPP Grail`;
+  document.title = `${agent.display_name || slug} — Rappid Tile Grail`;
   const ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) ogTitle.setAttribute('content', `${agent.display_name || slug} — RAPP Grail`);
+  if (ogTitle) ogTitle.setAttribute('content', `${agent.display_name || slug} — Rappid Tile Grail`);
 
   // ── Fullscreen tilt-shine mode ─────────────────────────────────
   // Tap the card → expand into the fixed overlay. Re-bind motion handlers

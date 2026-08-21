@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAPP Agent Store</title>
-<meta name="description" content="Discover, collect, and share single-file AI agents. Cards, packs, market, workbench, and more.">
+<meta name="description" content="Discover, collect, and share single-file AI agents as rappid tiles. Packs, market, workbench, and more.">
 <!-- OpenGraph -->
 <meta property="og:title" content="RAPP Agent Store">
 <meta property="og:description" content="Discover, collect, and share single-file AI agents. 133+ agents across 19 categories. Every agent is one Python file.">
@@ -17,7 +17,7 @@
   "@type": "WebApplication",
   "name": "RAPP Agent Store",
   "url": "https://kody-w.github.io/RAR/",
-  "description": "Open registry of single-file AI agents. Every agent is one .py file with embedded manifest, card identity, and deterministic seed. Browse, collect, submit, and resolve agent cards.",
+  "description": "Open registry of single-file AI agents. Every agent is one .py file with embedded manifest, rappid tile identity, and deterministic seed. Browse, collect, submit, and resolve rappid tiles.",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
@@ -25,7 +25,7 @@
   "sourceOrganization": {"@type": "Organization", "name": "RAPP", "url": "https://github.com/kody-w/CommunityRAPP"},
   "hasPart": [
     {"@type": "DataCatalog", "name": "Agent Registry", "url": "https://raw.githubusercontent.com/kody-w/RAR/main/registry.json", "description": "Machine-readable index of all agents with manifests, SHA256 hashes, and metadata."},
-    {"@type": "WebAPI", "name": "RAPP API", "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api.json", "description": "Agent-first API manifest. Autonomous agents discover endpoints, submit themselves, vote, review, and resolve cards."},
+    {"@type": "WebAPI", "name": "RAPP API", "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api.json", "description": "Agent-first API manifest. Autonomous agents discover endpoints, submit themselves, vote, review, and resolve rappid tiles."},
     {"@type": "WebPage", "name": "Rappterpedia", "url": "https://kody-w.github.io/RAR/rappterpedia/index.html", "description": "Community wiki and forum for the RAPP agent ecosystem."}
   ],
   "potentialAction": [
@@ -553,7 +553,7 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ─── Agent Cards ─────────────────────────────────── */
+  /* ─── Rappid Tiles ────────────────────────────────── */
   .cards-header { text-align: center; margin-bottom: 24px; }
   .cards-header h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; color: var(--text); }
   .cards-header .sub { color: var(--text-muted); font-size: .88rem; text-transform: uppercase; letter-spacing: 2px; }
@@ -2464,7 +2464,7 @@
   <nav id="main-nav">
     <button class="nav-btn active" data-tab="browse" onclick="switchTab('browse')">Browse</button>
     <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
-    <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
+    <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Rappid Tiles</button>
     <button class="nav-btn" data-tab="packs" onclick="switchTab('packs')">Packs</button>
     <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
     <button class="nav-btn" data-tab="swarms" onclick="switchTab('swarms')">Swarms</button>
@@ -2539,25 +2539,25 @@
   <div class="panel" id="panel-leaderboard">
     <div style="display:flex;gap:16px;align-items:baseline;margin-bottom:4px">
       <h2 id="lb-tab-critic" class="lb-tab active" onclick="switchLbTab('critic')" style="cursor:pointer">Human</h2>
-      <h2 id="lb-tab-cards" class="lb-tab" onclick="switchLbTab('cards')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Card Rankings</h2>
+      <h2 id="lb-tab-cards" class="lb-tab" onclick="switchLbTab('cards')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Rappid Tile Rankings</h2>
       <h2 id="lb-tab-gauntlet" class="lb-tab" onclick="switchLbTab('gauntlet')" style="cursor:pointer;color:var(--text-muted);font-size:1.1rem">Gauntlet</h2>
     </div>
     <p id="lb-subtitle" style="color:var(--text-dim);margin-bottom:20px">Human reviews — real ratings from authenticated users</p>
     <div id="leaderboard-container"><div class="loading"><div class="spinner"></div><br>Loading...</div></div>
   </div>
 
-  <!-- Agent Cards -->
+  <!-- Rappid Tiles -->
   <div class="panel" id="panel-cards">
     <div class="cards-header">
       <div class="sub">Every agent tells a story</div>
-      <h2>AGENT CARDS</h2>
+      <h2>RAPPID TILES</h2>
       <p style="color:var(--text-muted);font-size:.78rem;margin-top:4px">Inspired by <a href="#" onclick="event.preventDefault();openAgent('@borg/cardsmith_agent')" style="color:var(--accent)">@borg/cardsmith_agent</a> by Howard &mdash; the original CardSmith</p>
       <p style="color:var(--text-muted);font-size:.72rem;margin-top:8px;font-style:italic;line-height:1.6">One file, one purpose<br>A thousand agents waiting<br>Which deck will you build?</p>
     </div>
     <div class="deck-bar" id="deck-bar">
       <select id="deck-select" onchange="switchDeck(this.value)" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.82rem;min-width:140px;cursor:pointer"></select>
-      <span class="deck-count" id="deck-count">0</span> <span style="font-size:.82rem;color:var(--text-dim)">cards</span>
-      <div class="companion-slot" id="companion-slot" onclick="pickCompanion()" title="Set a companion card for this deck">
+      <span class="deck-count" id="deck-count">0</span> <span style="font-size:.82rem;color:var(--text-dim)">rappid tiles</span>
+      <div class="companion-slot" id="companion-slot" onclick="pickCompanion()" title="Set a companion rappid tile for this deck">
         <div class="companion-avatar" id="companion-avatar">?</div>
         <div style="min-width:0">
           <div class="companion-label">Companion</div>
@@ -2593,7 +2593,7 @@
       <span class="pill" data-cf="deck" onclick="setCardFilter('deck',this)" style="color:var(--accent);border-color:rgba(88,166,255,.3)">My Deck</span>
     </div>
     <div class="cards-grid" id="cards-grid">
-      <div class="loading"><div class="spinner"></div><br>Loading cards...</div>
+      <div class="loading"><div class="spinner"></div><br>Loading rappid tiles...</div>
     </div>
   </div>
 
@@ -2787,9 +2787,9 @@
         <div id="wb-build-checks" class="wb-check-list"></div>
         <div class="wb-preview-layout">
           <div>
-            <h3 style="font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--text)">Your Agent Card</h3>
+            <h3 style="font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--text)">Your Rappid Tile</h3>
             <div class="wb-card-preview" id="wb-card-preview">
-              <div style="color:var(--text-muted);font-size:.82rem">Card will appear when you build.</div>
+              <div style="color:var(--text-muted);font-size:.82rem">Rappid tile will appear when you build.</div>
             </div>
           </div>
           <div>
@@ -2943,7 +2943,7 @@
     <div style="text-align:center;margin-bottom:24px">
       <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Collect &bull; Grade &bull; Trade</div>
       <h2 style="font-size:1.4rem;font-weight:800">BOOSTER PACKS</h2>
-      <p style="color:var(--text-dim);font-size:.88rem;max-width:540px;margin:8px auto 0">Open packs to mint unique, graded agent cards. Every card has a serial number, visual variations, and a condition score that changes over time.</p>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:540px;margin:8px auto 0">Open packs to mint unique, graded rappid tiles. Every tile has a serial number, visual variations, and a condition score that changes over time.</p>
     </div>
 
     <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Available Packs</h3>
@@ -2951,7 +2951,7 @@
 
     <div style="margin-top:32px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
-        <h3 style="font-size:.9rem;font-weight:700;color:var(--text-dim)">Your Collection <span id="coll-count" style="color:var(--text-muted);font-weight:400">(0 cards)</span></h3>
+        <h3 style="font-size:.9rem;font-weight:700;color:var(--text-dim)">Your Collection <span id="coll-count" style="color:var(--text-muted);font-weight:400">(0 rappid tiles)</span></h3>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <div class="view-toggle" id="view-toggle">
             <button class="active" onclick="switchCollView('grid',this)">Grid</button>
@@ -2960,7 +2960,7 @@
           <button onclick="openSlidesPresentation()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer">Present</button>
           <select id="coll-sort" onchange="renderCollection()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 10px;color:var(--text);font-size:.78rem;cursor:pointer">
             <option value="grade">By Grade</option>
-            <option value="mintnum">By Card #</option>
+            <option value="mintnum">By Rappid Tile #</option>
             <option value="rarity">By Rarity</option>
             <option value="date">By Date</option>
           </select>
@@ -2970,7 +2970,7 @@
       </div>
       <div id="collection-grid">
         <div class="empty-state" style="grid-column:1/-1;text-align:center;padding:40px 0">
-          <h3>No cards minted yet</h3>
+          <h3>No rappid tiles minted yet</h3>
           <p style="color:var(--text-dim);margin-top:8px">Open a pack above to start your collection.</p>
         </div>
       </div>
@@ -2979,7 +2979,7 @@
     <!-- Trophy Case -->
     <div style="margin-top:32px">
       <div class="trophy-case-header">
-        <h3 style="font-size:.9rem;font-weight:700;color:var(--text-dim)">Trophy Case <span style="color:var(--text-muted);font-weight:400;font-size:.78rem">(showcase up to 6 cards)</span></h3>
+        <h3 style="font-size:.9rem;font-weight:700;color:var(--text-dim)">Trophy Case <span style="color:var(--text-muted);font-weight:400;font-size:.78rem">(showcase up to 6 rappid tiles)</span></h3>
         <button class="trophy-share-btn" onclick="shareTrophyCase()">Share Trophy Case</button>
       </div>
       <div class="trophy-case" id="trophy-case-grid"></div>
@@ -3030,7 +3030,7 @@
         <span style="font-size:.5rem;color:var(--text-muted)">3S</span>
       </div>
       <div style="display:flex;align-items:center;gap:6px;margin-left:8px;border-left:1px solid var(--border);padding-left:10px">
-        <button onclick="toggleQRShare()" id="qr-toggle" style="padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:none;font-size:.6rem;cursor:pointer" title="Toggle QR code sharing on cards">QR</button>
+        <button onclick="toggleQRShare()" id="qr-toggle" style="padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:none;font-size:.6rem;cursor:pointer" title="Toggle QR code sharing on rappid tiles">QR</button>
         <button onclick="toggleGPSFlick()" id="gps-toggle" style="padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:none;font-size:.6rem;cursor:pointer" title="Attach GPS location to flicks">GPS</button>
       </div>
     </div>
@@ -3114,7 +3114,7 @@
               <div class="slot-status" style="color:var(--green)">Always On</div>
             </div>
           </div>
-          <div class="slot-guid">Browse, stream, card, mint, export — no execution</div>
+          <div class="slot-guid">Browse, stream, rappid tile, mint, export — no execution</div>
         </div>
       </div>
     </div>
@@ -3199,15 +3199,15 @@
       <h4 style="font-size:.82rem;font-weight:700;margin-bottom:8px;color:var(--text-dim)">How it works</h4>
       <div style="font-size:.78rem;color:var(--text-muted);line-height:1.7">
         <div><strong style="color:var(--text)">Stream</strong> — Fetches raw .py from GitHub into a JS Map. No file write. Purely in-memory.</div>
-        <div><strong style="color:var(--text)">Hot-Load</strong> — Manifest is parsed, agent appears in browse/cards/search instantly.</div>
+        <div><strong style="color:var(--text)">Hot-Load</strong> — Manifest is parsed, agent appears in browse/rappid tiles/search instantly.</div>
         <div><strong style="color:var(--text)">Deck Router</strong> — Stream an entire deck. Each agent gets a GUID. The deck topology defines the routing group.</div>
         <div><strong style="color:var(--text)">Steer</strong> — Route state through GUID-mapped agents. The same loop that fires perform() can be steered by swapping which agents are live.</div>
         <div><strong style="color:var(--text)">Eject</strong> — Remove from memory. Gone. No trace on disk.</div>
         <div><strong style="color:var(--text)">Brainstem</strong> — Connect to a local RAPP Brainstem. Push agent bytecode for on-device execution. The browser steers, the Brainstem performs.</div>
         <div><strong style="color:var(--text)">Ollama</strong> — True local-first AI. Run Gemma 4 on-device via Ollama. The Brainstem reasons with local models — no cloud, no API key. <code style="font-size:.72rem;background:var(--bg);padding:1px 4px;border-radius:3px">ollama launch brainstem --model gemma4</code></div>
         <div><strong style="color:var(--text)">CommunityRAPP</strong> — Route to a hosted instance. Same agents, cloud execution surface.</div>
-        <div><strong style="color:var(--text)">Flick</strong> — Pick a card, attach a task, flick it to a runtime. The card carries bytecode, the flick carries intent. Multiple flicks in parallel = multiple agents with their own data streams.</div>
-        <div><strong style="color:var(--text)">Encrypt</strong> — E2E encryption via AES-256-GCM. Generate a key, share via QR code on the card back. From scan to stream to steer — encrypted end-to-end.</div>
+        <div><strong style="color:var(--text)">Flick</strong> — Pick a rappid tile, attach a task, flick it to a runtime. The tile carries bytecode, the flick carries intent. Multiple flicks in parallel = multiple agents with their own data streams.</div>
+        <div><strong style="color:var(--text)">Encrypt</strong> — E2E encryption via AES-256-GCM. Generate a key, share via QR code on the tile back. From scan to stream to steer — encrypted end-to-end.</div>
         <div><strong style="color:var(--text)">Universal</strong> — The .py file is the unit. The runtime is a choice. Stream once, route anywhere.</div>
       </div>
     </div>
@@ -3216,9 +3216,9 @@
   <!-- Market Exchange -->
   <div class="panel" id="panel-market">
     <div style="text-align:center;margin-bottom:24px">
-      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">RAPP Card Chain &bull; Live Market</div>
-      <h2 style="font-size:1.4rem;font-weight:800">CARD EXCHANGE</h2>
-      <p style="color:var(--text-dim);font-size:.88rem;max-width:580px;margin:8px auto 0">Public chain. Every forged card is verifiable, transferable, and permanently on-chain.</p>
+      <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">Rappid Tile Chain &bull; Live Market</div>
+      <h2 style="font-size:1.4rem;font-weight:800">RAPPID TILE EXCHANGE</h2>
+      <p style="color:var(--text-dim);font-size:.88rem;max-width:580px;margin:8px auto 0">Public chain. Every forged rappid tile is verifiable, transferable, and permanently on-chain.</p>
     </div>
     <div id="market-ticker" style="margin-bottom:20px"></div>
     <div id="market-grid"></div>
@@ -3266,7 +3266,7 @@ let UPSTREAM_RAW = null;
 let IS_INSTANCE = false;
 
 // Dependency-free QR Model 2 encoder. It emits inert inline SVG and supports
-// the URL sizes used by RAR cards (versions 1-10, error correction level L).
+// the URL sizes used by rappid tiles (versions 1-10, error correction level L).
 const _rarQrCache = new Map();
 function rarQrSvg(text, size = 160) {
   const cacheKey = `${size}\0${text}`;
@@ -3294,7 +3294,7 @@ function rarQrSvg(text, size = 160) {
       break;
     }
   }
-  if (!version) throw new Error('RAR card scan URL is too long for the QR encoder');
+  if (!version) throw new Error('Rappid tile scan URL is too long for the QR encoder');
   const spec = specs[version];
   const bits = [];
   const put = (value, count) => {
@@ -3484,7 +3484,7 @@ function rarQrSvg(text, size = 160) {
   best.modules.forEach((row,y)=>row.forEach((dark,x)=>{
     if (dark) path += `M${x+quiet} ${y+quiet}h1v1h-1z`;
   }));
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${view} ${view}" role="img" aria-label="RAR card scan QR" shape-rendering="crispEdges"><rect width="${view}" height="${view}" fill="#fff"/><path d="${path}" fill="#111"/></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${view} ${view}" role="img" aria-label="Rappid tile scan QR" shape-rendering="crispEdges"><rect width="${view}" height="${view}" fill="#fff"/><path d="${path}" fill="#111"/></svg>`;
   _rarQrCache.set(cacheKey, svg);
   return svg;
 }
@@ -3676,7 +3676,7 @@ async function handleFileDrop(files) {
           await importRarCardV2(file, code, v2Card);
           added++;
           showToast(
-            `${v2Card.manifest.display_name || v2Card.id}: sealed card loaded; verify before hatching`,
+            `${v2Card.manifest.display_name || v2Card.id}: sealed rappid tile loaded; verify before hatching`,
             'success',
           );
           continue;
@@ -4295,7 +4295,7 @@ function downloadAsciiCard(name) {
   link.download = (a.name.split('/')[1] || 'agent') + '.card.txt';
   link.click();
   URL.revokeObjectURL(url);
-  showToast('Card downloaded', 'success');
+  showToast('Rappid tile downloaded', 'success');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -4525,8 +4525,8 @@ function openSwarmDetail(idx) {
   // Open as Pack
   const swarmId = isConverged ? (sw.id || s.name) : s.name.replace(/[^a-z0-9]/gi, '_');
   const packId = isConverged ? `swarm-${swarmId}` : `swarm-stack-${swarmId}`;
-  html += `<h3 style="font-size:.9rem;margin:16px 0 8px">Cards</h3>`;
-  html += `<p style="font-size:.82rem;color:var(--text-dim);margin-bottom:8px">Open this swarm as a pack of agent cards.</p>`;
+  html += `<h3 style="font-size:.9rem;margin:16px 0 8px">Rappid Tiles</h3>`;
+  html += `<p style="font-size:.82rem;color:var(--text-dim);margin-bottom:8px">Open this swarm as a pack of rappid tiles.</p>`;
   html += `<button class="btn-sm" style="background:linear-gradient(135deg,${isConverged ? '#7c3aed,#5b21b6' : '#22c55e,#15803d'});color:#fff;border:none;margin-bottom:16px" onclick="openSwarmAsPack('${esc(packId)}')">Open as Pack</button>`;
 
   // Install
@@ -4874,21 +4874,21 @@ function switchLbTab(tab) {
     if (sub) sub.textContent = 'Human reviews — real ratings from authenticated users';
     renderLeaderboard();
   } else if (tab === 'cards') {
-    if (sub) sub.textContent = 'Global card rankings — agents ranked by play condition across all players';
+    if (sub) sub.textContent = 'Global rappid tile rankings — agents ranked by play condition across all players';
     renderCardRankings();
   } else if (tab === 'gauntlet') {
-    if (sub) sub.textContent = 'Public chain leaderboard — oldest cards with highest Gauntlet Points. Queryable via GitHub raw API.';
+    if (sub) sub.textContent = 'Public chain leaderboard — oldest rappid tiles with highest Gauntlet Points. Queryable via GitHub raw API.';
     renderGauntletLeaderboard();
   }
 }
 
-// ── Global Card Rankings — emergent leaderboard from play ratings ──
+// ── Global Rappid Tile Rankings — emergent leaderboard from play ratings ──
 // RAPP 10 = perfect agents that never fail. Supply diminishes as cards degrade.
 async function renderCardRankings() {
   const container = document.getElementById('leaderboard-container');
   const all = await getAllMinted();
   if (!all.length) {
-    container.innerHTML = '<div class="empty-state"><h3>No cards minted yet</h3><p style="color:var(--text-dim);margin-top:8px">Open <a href="#" onclick="switchTab(\'packs\');return false">Packs</a> to mint cards, then flick them to rate their work. Ratings drive the global rankings.</p></div>';
+    container.innerHTML = '<div class="empty-state"><h3>No rappid tiles minted yet</h3><p style="color:var(--text-dim);margin-top:8px">Open <a href="#" onclick="switchTab(\'packs\');return false">Packs</a> to mint rappid tiles, then flick them to rate their work. Ratings drive the global rankings.</p></div>';
     return;
   }
 
@@ -4983,8 +4983,8 @@ async function renderCardRankings() {
   h += `<div style="font-size:.65rem;color:var(--text-muted);margin-top:12px;text-align:center">
     <strong>Confidence</strong> = inverse risk &middot; <strong>Cube</strong> = avg blocks remaining (512 max) &middot;
     <strong>Burn</strong> = blocks lost per play &middot; <strong>Supply</strong> = pristine / total<br>
-    <em>Sorted by confidence. High confidence = agent completes tasks reliably = card holds value as currency.</em><br>
-    <em>Cards are .egg containers that hatch into .py or .lisp depending on runtime. Burn rate is deflationary pressure.</em>
+    <em>Sorted by confidence. High confidence = agent completes tasks reliably = rappid tile holds value as currency.</em><br>
+    <em>Rappid tiles are .egg containers that hatch into .py or .lisp depending on runtime. Burn rate is deflationary pressure.</em>
   </div>`;
 
   container.innerHTML = h;
@@ -5047,11 +5047,11 @@ async function renderGauntletLeaderboard() {
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 16px;text-align:center">
         <div style="font-size:1.1rem;font-weight:800;color:#d2a8ff">${entries.length}</div>
-        <div style="font-size:.6rem;color:#8b949e;text-transform:uppercase">Forged Cards</div>
+        <div style="font-size:.6rem;color:#8b949e;text-transform:uppercase">Forged Rappid Tiles</div>
       </div>
     </div>
     <table class="lb-table"><thead><tr>
-      <th>#</th><th>Card</th><th>Set</th><th>Rarity</th><th style="color:#d2a8ff">GP</th><th>Age</th><th>Identity</th><th>Edition</th><th>Block</th>
+      <th>#</th><th>Rappid Tile</th><th>Set</th><th>Rarity</th><th style="color:#d2a8ff">GP</th><th>Age</th><th>Identity</th><th>Edition</th><th>Block</th>
     </tr></thead><tbody>`;
 
   const rarityColors = { genesis: '#ff6d00', mythic: '#ff8c00', rare: '#ffd700', core: '#c0c0c0', uncommon: '#c0c0c0', starter: '#8899aa', common: '#8899aa' };
@@ -5182,7 +5182,7 @@ function openAgent(name) {
         </div>
       </div>
       <details style="margin-top:12px;border:1px solid #21262d;border-radius:6px;background:#0d1117;overflow:hidden">
-        <summary style="padding:6px 10px;cursor:pointer;font-family:'SF Mono','Consolas',monospace;font-size:.65rem;color:${modalIsForged ? '#d2a8ff' : '#58a6ff'};user-select:none">${modalIsForged ? 'FORGED Card' : 'ASCII Card'}</summary>
+        <summary style="padding:6px 10px;cursor:pointer;font-family:'SF Mono','Consolas',monospace;font-size:.65rem;color:${modalIsForged ? '#d2a8ff' : '#58a6ff'};user-select:none">${modalIsForged ? 'FORGED RAPPID TILE' : 'ASCII RAPPID TILE'}</summary>
         <div style="padding:6px 10px;font-family:'SF Mono','Consolas',monospace;font-size:.6rem;line-height:1.2;color:#c9d1d9">
           <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="color:#58a6ff;font-weight:700">${esc(a.display_name)}</span><span style="color:#484f58">[${tier.toUpperCase()}]</span></div>
           <pre style="color:#39d353;margin:4px 0;text-align:center;font-size:.5rem;line-height:1.15">${modalAsciiArt}</pre>
@@ -5283,13 +5283,13 @@ function openAgent(name) {
       </div>
       ${(() => {
         const containingDecks = Object.entries(allDecks).filter(([_, cards]) => cards.includes(a.name));
-        if (!containingDecks.length) return `<div class="modal-section"><h3>Decks</h3><p style="color:var(--text-muted);font-size:.88rem">This card is not in any deck yet.</p></div>`;
+        if (!containingDecks.length) return `<div class="modal-section"><h3>Decks</h3><p style="color:var(--text-muted);font-size:.88rem">This rappid tile is not in any deck yet.</p></div>`;
         return `<div class="modal-section"><h3>Decks (${containingDecks.length})</h3>
           ${containingDecks.map(([deckName, cards]) => `
             <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:8px;background:var(--surface2);overflow:hidden">
               <summary style="padding:10px 14px;cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px;user-select:none">
                 <span style="color:var(--accent)">${esc(deckName)}</span>
-                <span style="font-size:.72rem;color:var(--text-muted);font-weight:400">${cards.length} card${cards.length !== 1 ? 's' : ''}</span>
+                <span style="font-size:.72rem;color:var(--text-muted);font-weight:400">${cards.length} rappid tile${cards.length !== 1 ? 's' : ''}</span>
               </summary>
               <div style="padding:4px 10px 10px;display:flex;flex-wrap:wrap;gap:6px">
                 ${cards.map(cn => {
@@ -6415,7 +6415,7 @@ document.addEventListener('keydown', e => {
 });
 
 // ═══════════════════════════════════════════════════════
-// Agent Cards — Trading card system
+// Rappid Tiles — collectible tile system
 // ═══════════════════════════════════════════════════════
 // ── Multi-deck system ──
 let allDecks = JSON.parse(localStorage.getItem('rar_decks') || '{}');
@@ -6621,7 +6621,7 @@ function renameDeck() {
 
 function deleteDeck() {
   if (Object.keys(allDecks).length <= 1) { showToast('Cannot delete your only deck', 'error'); return; }
-  if (!confirm(`Delete deck "${currentDeckName}" and its ${deck.size} cards?`)) return;
+  if (!confirm(`Delete deck "${currentDeckName}" and its ${deck.size} rappid tiles?`)) return;
   delete allDecks[currentDeckName];
   currentDeckName = Object.keys(allDecks)[0];
   deck = new Set(allDecks[currentDeckName]);
@@ -6647,7 +6647,7 @@ function exportDeckFile() {
   a.download = `${currentDeckName.replace(/[^a-z0-9]/gi, '_')}.deck`;
   a.click();
   URL.revokeObjectURL(url);
-  showToast(`Exported "${currentDeckName}" (${deck.size} cards)`, 'success');
+  showToast(`Exported "${currentDeckName}" (${deck.size} rappid tiles)`, 'success');
 }
 
 function importDeckFile(files) {
@@ -6674,7 +6674,7 @@ function importDeckFile(files) {
       renderDeckSelect();
       renderCards();
       renderCompanion();
-      showToast(`Restored "${finalName}" — ${data.cards.length} cards`, 'success');
+      showToast(`Restored "${finalName}" — ${data.cards.length} rappid tiles`, 'success');
     } catch (err) {
       showToast('Could not read deck file', 'error');
     }
@@ -6789,7 +6789,7 @@ function renderCompanion() {
     nameEl.textContent = 'None';
     avatar.textContent = '?';
     avatar.style.color = '';
-    slot.title = 'Set a companion card for this deck';
+    slot.title = 'Set a companion rappid tile for this deck';
     if (forgeEl) forgeEl.style.display = 'none';
   }
 }
@@ -6798,7 +6798,7 @@ function pickCompanion() {
   const current = getCompanion();
   const deckAgents = allAgents.filter(a => deck.has(a.name));
   if (deckAgents.length === 0) {
-    showToast('Add cards to your deck first', 'info');
+    showToast('Add rappid tiles to your deck first', 'info');
     return;
   }
   const choices = deckAgents.map(a => a.display_name).join('\n');
@@ -6824,7 +6824,7 @@ function pickCompanion() {
     showToast(`${match.display_name} is now your companion`, 'success');
     renderCards();
   } else {
-    showToast('No matching card in deck', 'error');
+    showToast('No matching rappid tile in deck', 'error');
   }
 }
 
@@ -8166,7 +8166,7 @@ function agentToCard(a) {
 
   // ── QR Back Face ──
   const qrImgHtml = `<div class="ac-qr">${rarQrSvg(qrData,120)}</div>
-       <div class="ac-back-hint">Scan sealed .card${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
+       <div class="ac-back-hint">Scan rappid tile (.card)${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
   const qrFace = `
     <div class="agent-card-back">
       <div class="ac-back-logo">RAPP</div>
@@ -8272,7 +8272,7 @@ async function showAndTell(name) {
   clone.setAttribute('onclick', 'this.classList.toggle("flipped")');
   clone.removeAttribute('ondblclick');
 
-  overlay.innerHTML += `<div class="showntell-label">click card to flip &middot; F to flip &middot; Esc to close &middot; arrow keys to browse</div>`;
+  overlay.innerHTML += `<div class="showntell-label">click rappid tile to flip &middot; F to flip &middot; Esc to close &middot; arrow keys to browse</div>`;
   overlay.appendChild(clone);
 
   // ── Identity Value ──
@@ -8530,7 +8530,7 @@ async function collectorTransfer(mintId) {
   // Look up the card for display info
   const allMinted = await getAllMinted();
   const card = allMinted.find(c => c.mintId === mintId);
-  if (!card) { showToast('Card not found', 'error'); return; }
+  if (!card) { showToast('Rappid tile not found', 'error'); return; }
 
   const val = calculateValue(card);
   const bv = formatBtcValue(val);
@@ -8543,7 +8543,7 @@ async function collectorTransfer(mintId) {
   modal.innerHTML = `
     <div style="background:linear-gradient(180deg,#1a1510,#0f0c08);border:1px solid rgba(247,147,26,.2);border-radius:16px;padding:32px;max-width:480px;width:92%;color:#e8dcc8;box-shadow:0 0 60px rgba(247,147,26,.08)">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-        <h3 style="margin:0;font-size:1.1rem;color:#f7931a;letter-spacing:1px">Transfer Card</h3>
+        <h3 style="margin:0;font-size:1.1rem;color:#f7931a;letter-spacing:1px">Transfer Rappid Tile</h3>
         <button onclick="this.closest('div[style*=fixed]').remove()" style="background:none;border:none;color:#4a4030;cursor:pointer;font-size:1.2rem">&times;</button>
       </div>
 
@@ -8571,7 +8571,7 @@ async function collectorTransfer(mintId) {
       <div style="margin-bottom:20px">
         <label style="font-size:.65rem;color:#6a5d4a;text-transform:uppercase;letter-spacing:1.5px;display:block;margin-bottom:6px">Identity Address</label>
         <input id="xfer-addr" type="text" placeholder="Destination Identity address" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(90,74,42,.4);background:rgba(15,12,6,.8);color:#58a6ff;font-size:.8rem;font-family:monospace;box-sizing:border-box;outline:none" onfocus="this.style.borderColor='#c9a84c'" onblur="this.style.borderColor='rgba(90,74,42,.4)'">
-        <div style="font-size:.58rem;color:#4a4030;margin-top:4px">The new Identity controls this card on-chain. Anyone can use the agent — only the Identity owns it.</div>
+        <div style="font-size:.58rem;color:#4a4030;margin-top:4px">The new Identity controls this rappid tile on-chain. Anyone can use the agent — only the Identity owns it.</div>
       </div>
 
       <div style="font-size:.65rem;color:#6a5d4a;margin-bottom:14px;padding:10px;border-radius:8px;border:1px solid rgba(90,74,42,.15);background:rgba(90,74,42,.04)">
@@ -8636,7 +8636,7 @@ async function executeCollectorTransfer(mintId) {
   // Update the local card record
   const allMinted = await getAllMinted();
   const card = allMinted.find(c => c.mintId === mintId);
-  if (!card) { showToast('Card not found', 'error'); return; }
+  if (!card) { showToast('Rappid tile not found', 'error'); return; }
 
   // Record transfer in provenance — permanent, immutable history
   if (!card.provenance) card.provenance = [];
@@ -8754,7 +8754,7 @@ function renderCards() {
 
   document.getElementById('deck-count').textContent = deck.size;
   if (!filtered.length && words.length) {
-    document.getElementById('cards-grid').innerHTML = `<div class="empty-state"><h3>No match in ${cardFilter === 'deck' ? 'your deck' : 'the library'}</h3><p style="color:var(--text-dim);margin-top:8px">Try describing what you need differently, or switch to <strong>All</strong> cards.</p></div>`;
+    document.getElementById('cards-grid').innerHTML = `<div class="empty-state"><h3>No match in ${cardFilter === 'deck' ? 'your deck' : 'the library'}</h3><p style="color:var(--text-dim);margin-top:8px">Try describing what you need differently, or switch to <strong>All</strong> rappid tiles.</p></div>`;
     return;
   }
   if (!filtered.length) {
@@ -8776,7 +8776,7 @@ function renderCards() {
       const badge = document.createElement('div');
       badge.className = 'companion-badge';
       badge.textContent = '\u2605';
-      badge.title = 'Companion card';
+      badge.title = 'Companion rappid tile';
       compEl.appendChild(badge);
     }
   }
@@ -8875,14 +8875,14 @@ function toggleDeckCard(name) {
 }
 
 function clearDeck() {
-  if (!confirm(`Clear all ${deck.size} cards from "${currentDeckName}"?`)) return;
+  if (!confirm(`Clear all ${deck.size} rappid tiles from "${currentDeckName}"?`)) return;
   deck.clear();
   saveDecks();
   renderCards();
 }
 
 async function shareDeck() {
-  if (!deck.size) { showToast('Add cards to your deck first', 'error'); return; }
+  if (!deck.size) { showToast('Add rappid tiles to your deck first', 'error'); return; }
   const agents = [...deck].join(',');
   // Third Space: sign the deck manifest (Rule 8: Deck = Routing Manifest)
   const deckManifest = {
@@ -9082,7 +9082,7 @@ async function saveMinted(card) {
 }
 
 async function resetCollection() {
-  if (!confirm('Reset your entire card collection? This cannot be undone.')) return;
+  if (!confirm('Reset your entire rappid tile collection? This cannot be undone.')) return;
   const db = await openCollDB();
   await new Promise((resolve, reject) => {
     const tx = db.transaction(COLL_STORE, 'readwrite');
@@ -9274,7 +9274,7 @@ async function provisionStarterPack() {
   }
   if (minted > 0) {
     localStorage.setItem('rar_howard_starter', String(Date.now()));
-    showToast(`Howard's Starter Pack \u2014 ${minted} HOLO cards added`, 'success');
+    showToast(`Howard's Starter Pack \u2014 ${minted} HOLO rappid tiles added`, 'success');
     renderCollection();
   }
 }
@@ -9557,7 +9557,7 @@ function showFlickRating(agentName) {
         ${[1,2,3,4,5].map(s => `<button onclick="submitFlickRating('${card.mintId}',${s})" style="width:32px;height:32px;border-radius:6px;border:1px solid var(--border);background:${s <= 2 ? 'rgba(248,81,73,.06)' : s >= 4 ? 'rgba(63,185,80,.06)' : 'var(--surface2)'};color:${s <= 2 ? 'var(--red)' : s >= 4 ? 'var(--green)' : 'var(--text-dim)'};font-size:.85rem;cursor:pointer;font-weight:700" title="${['','Failed','Poor','OK','Good','Perfect'][s]}">${s}</button>`).join('')}
         <button onclick="document.getElementById('${id}').remove()" style="margin-left:8px;border:none;background:none;color:var(--text-muted);cursor:pointer;font-size:.7rem">skip</button>
       </div>
-      <div style="font-size:.55rem;color:var(--text-muted);margin-top:8px">1-2 = card wears &middot; 4-5 = card stays mint &middot; logged to provenance</div>
+      <div style="font-size:.55rem;color:var(--text-muted);margin-top:8px">1-2 = tile wears &middot; 4-5 = tile stays mint &middot; logged to provenance</div>
     `;
     document.body.appendChild(overlay);
 
@@ -9574,9 +9574,9 @@ async function submitFlickRating(mintId, rating) {
   if (el) el.remove();
 
   if (rating <= 2) {
-    showToast(`Rated ${rating}/5 — card condition: ${cond.label} (holo fading)`, 'info');
+    showToast(`Rated ${rating}/5 — rappid tile condition: ${cond.label} (holo fading)`, 'info');
   } else if (rating >= 4) {
-    showToast(`Rated ${rating}/5 — card stays ${cond.label}`, 'success');
+    showToast(`Rated ${rating}/5 — rappid tile stays ${cond.label}`, 'success');
   } else {
     showToast(`Rated ${rating}/5 — condition unchanged`, 'info');
   }
@@ -9803,7 +9803,7 @@ function hatchEgg(egg, targetRuntime) {
 
   // Check cube integrity — heavily damaged eggs may refuse to hatch
   if (egg.cube.integrity < 5) {
-    return { hatched: false, reason: 'Cube integrity too low — card is effectively destroyed', integrity: egg.cube.integrity };
+    return { hatched: false, reason: 'Cube integrity too low — rappid tile is effectively destroyed', integrity: egg.cube.integrity };
   }
 
   const runtime = targetRuntime || detectRuntime();
@@ -9991,7 +9991,7 @@ let _edgeSyncEnabled = localStorage.getItem('rar_edge_sync') === 'true';
 function toggleEdgeSync() {
   _edgeSyncEnabled = !_edgeSyncEnabled;
   localStorage.setItem('rar_edge_sync', _edgeSyncEnabled);
-  showToast(_edgeSyncEnabled ? 'Edge sync enabled — card stats will sync to the registry' : 'Edge sync disabled — your card stats stay local', _edgeSyncEnabled ? 'success' : 'info');
+  showToast(_edgeSyncEnabled ? 'Edge sync enabled — rappid tile stats will sync to the registry' : 'Edge sync disabled — your rappid tile stats stay local', _edgeSyncEnabled ? 'success' : 'info');
 }
 
 // ── QR Share — opt-in public shareability ──
@@ -10003,7 +10003,7 @@ let _qrShareEnabled = localStorage.getItem('rar_qr_share') === 'true';
 function toggleQRShare() {
   _qrShareEnabled = !_qrShareEnabled;
   localStorage.setItem('rar_qr_share', _qrShareEnabled);
-  showToast(_qrShareEnabled ? 'QR sharing enabled — cards get scannable codes' : 'QR sharing disabled — cards are private', _qrShareEnabled ? 'success' : 'info');
+  showToast(_qrShareEnabled ? 'QR sharing enabled — rappid tiles get scannable codes' : 'QR sharing disabled — rappid tiles are private', _qrShareEnabled ? 'success' : 'info');
   renderCards();
 }
 
@@ -10333,7 +10333,7 @@ async function dispatchEdgeStats() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        title: `[edge-dispatch] Card stats from ${payload.payload.brainstem}`,
+        title: `[edge-dispatch] Rappid tile stats from ${payload.payload.brainstem}`,
         body: '```json\n' + JSON.stringify(payload, null, 2) + '\n```',
         labels: ['edge-dispatch'],
       }),
@@ -10494,9 +10494,9 @@ async function openPack(setId) {
       <div style="margin-top:24px;animation:showcaseFadeIn .5s ease-out .7s both;opacity:0;display:flex;gap:12px">
         ${isLast ? `
           <button id="reveal-next-btn" style="padding:12px 32px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:all .2s;letter-spacing:1px" onclick="this.closest('.pack-open-overlay').remove();document.body.style.overflow='';renderCollection();renderPullHistory();renderTrophyCase()">Add All to Collection</button>
-          <button style="padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;transition:all .2s" onclick="exportPackCards()">Export legacy .py.card</button>
+          <button style="padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;transition:all .2s" onclick="exportPackCards()">Export legacy sleeve (.py.card)</button>
         ` : `
-          <button id="reveal-next-btn" style="padding:14px 48px;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer;border:2px solid ${glowColor};background:transparent;color:${glowColor};transition:all .2s;letter-spacing:2px;text-transform:uppercase;animation:showcasePulse 2s ease-in-out infinite" onclick="revealNext()">Next Card</button>
+          <button id="reveal-next-btn" style="padding:14px 48px;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer;border:2px solid ${glowColor};background:transparent;color:${glowColor};transition:all .2s;letter-spacing:2px;text-transform:uppercase;animation:showcasePulse 2s ease-in-out infinite" onclick="revealNext()">Next Rappid Tile</button>
         `}
       </div>`;
 
@@ -11031,10 +11031,10 @@ async function renderCollection() {
 
   // Re-grade all cards (grades change over time)
   cards.forEach(c => { c.grade = gradeCard(c); });
-  countEl.textContent = `(${cards.length} cards)`;
+  countEl.textContent = `(${cards.length} rappid tiles)`;
 
   if (!cards.length) {
-    gridEl.innerHTML = '<div class="empty-state" style="grid-column:1/-1;text-align:center;padding:40px 0"><h3>No cards minted yet</h3><p style="color:var(--text-dim);margin-top:8px">Open a pack above to start your collection.</p></div>';
+    gridEl.innerHTML = '<div class="empty-state" style="grid-column:1/-1;text-align:center;padding:40px 0"><h3>No rappid tiles minted yet</h3><p style="color:var(--text-dim);margin-top:8px">Open a pack above to start your collection.</p></div>';
     return;
   }
 
@@ -11063,7 +11063,7 @@ async function renderGridView(cards, gridEl) {
     return `<div class="coll-card" onclick="openSlabViewer('${c.mintId}')" style="position:relative">
       <canvas width="250" height="350" data-mint="${c.mintId}"></canvas>
       <div class="card-value" title="Gauntlet Points — public reputation">${gp} GP</div>
-      <button onclick="event.stopPropagation();deleteCard('${c.mintId}')" title="Remove card" style="position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;border:1px solid rgba(248,81,73,.4);background:rgba(248,81,73,.15);color:#f85149;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;opacity:.6;transition:opacity .15s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.6'">×</button>
+      <button onclick="event.stopPropagation();deleteCard('${c.mintId}')" title="Remove rappid tile" style="position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;border:1px solid rgba(248,81,73,.4);background:rgba(248,81,73,.15);color:#f85149;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;opacity:.6;transition:opacity .15s" onmouseenter="this.style.opacity='1'" onmouseleave="this.style.opacity='.6'">×</button>
       <div class="coll-card-info">
         <div class="coll-card-name">${esc(c.displayName)}</div>
         <div class="coll-card-meta">
@@ -11140,12 +11140,12 @@ async function renderPagesView(cards, gridEl) {
 
 async function exportCollection() {
   const cards = await getAllMinted();
-  if (!cards.length) { showToast('No cards to export', 'error'); return; }
+  if (!cards.length) { showToast('No rappid tiles to export', 'error'); return; }
   for (const card of cards) {
     await exportSingleCard(card);
     await new Promise(r => setTimeout(r, 300));
   }
-  showToast(`Exported ${cards.length} cards`, 'success');
+  showToast(`Exported ${cards.length} rappid tiles`, 'success');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -11157,7 +11157,7 @@ let _slideOverlay = null;
 
 async function openSlidesPresentation() {
   _slideCards = await getAllMinted();
-  if (!_slideCards.length) { showToast('No cards to present', 'error'); return; }
+  if (!_slideCards.length) { showToast('No rappid tiles to present', 'error'); return; }
   _slideCards.forEach(c => { c.grade = gradeCard(c); });
   _slideIdx = 0;
 
@@ -11462,7 +11462,7 @@ async function openSlabViewer(mintId) {
         <div class="slab-panel">
           <h4>Actions</h4>
           <div class="slab-actions">
-            <button class="slab-btn primary" onclick="exportSingleCard(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export legacy .py.card</button>
+            <button class="slab-btn primary" onclick="exportSingleCard(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export legacy sleeve (.py.card)</button>
             <button class="slab-btn" style="background:var(--purple-bg);color:var(--purple);border-color:var(--purple)" onclick="exportRAD(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export .rad.eggs</button>
             <button class="slab-btn" onclick="openSlabZoom('${mintId}')">Zoom</button>
             <button class="slab-btn" style="background:${_defaultHoloTheme === 'starwars' ? 'rgba(80,120,255,.08);color:#5080ff;border-color:rgba(80,120,255,.3)' : 'rgba(0,255,255,.08);color:#0ff;border-color:rgba(0,255,255,.3)'}" onclick="document.getElementById('slab-overlay').remove();openHologramViewer('${esc(card.agentName)}','${_defaultHoloTheme}')">${_defaultHoloTheme === 'starwars' ? 'SW Holo' : 'Hologram'}</button>
@@ -11580,7 +11580,7 @@ async function renderSlabChainStatus(card) {
   } else {
     el.innerHTML = `
       <div style="color:#f0883e;font-weight:600;margin-bottom:6px">UNFORGED</div>
-      <div style="font-size:.75rem;color:#8b949e">This card is not yet on the RAPP Card Chain.</div>
+      <div style="font-size:.75rem;color:#8b949e">This rappid tile is not yet on the Rappid Tile Chain.</div>
       ${myIdentity ? `<div style="font-size:.7rem;color:#484f58;margin-top:4px">Identity: <span style="font-family:monospace;color:#58a6ff">${formatIdentityAddress(myIdentity)}</span></div>` : ''}
     `;
   }
@@ -11607,7 +11607,7 @@ async function signAndShowClaim(chainMintId) {
         <div><span style="color:#58a6ff">timestamp:</span> ${claim.timestamp}</div>
         <div style="margin-top:8px"><span style="color:#39d353">signature:</span> ${claim.signature.slice(0, 64)}...</div>
       </div>
-      <div style="font-size:.7rem;color:#484f58">This cryptographic proof demonstrates that the holder of identity <span style="color:#58a6ff">${formatIdentityAddress(claim.identity ?? claim.binder)}</span> signed a claim for this card at the stated time. The signature can be verified by anyone with the public key.</div>
+      <div style="font-size:.7rem;color:#484f58">This cryptographic proof demonstrates that the holder of identity <span style="color:#58a6ff">${formatIdentityAddress(claim.identity ?? claim.binder)}</span> signed a claim for this rappid tile at the stated time. The signature can be verified by anyone with the public key.</div>
       <div style="margin-top:16px;text-align:right">
         <button onclick="navigator.clipboard.writeText(JSON.stringify(${JSON.stringify(claim).replace(/"/g, '&quot;')}));this.textContent='Copied!'" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;margin-right:8px">Copy Proof</button>
         <button onclick="this.closest('div[style]').remove()" style="background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.8rem">Close</button>
@@ -11663,7 +11663,7 @@ async function renderMarketExchange() {
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
         <div style="font-size:1.1rem;font-weight:800;color:#d2a8ff">${totalCards}</div>
-        <div style="font-size:.65rem;color:#8b949e">Forged Cards</div>
+        <div style="font-size:.65rem;color:#8b949e">Forged Rappid Tiles</div>
       </div>
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 20px;text-align:center">
         <div style="font-size:1.1rem;font-weight:800;color:#58a6ff">${totalIdentities}</div>
@@ -11712,7 +11712,7 @@ async function renderMarketExchange() {
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden">
       <div style="display:grid;grid-template-columns:40px 1fr 100px 80px 90px 100px 80px;gap:8px;padding:10px 14px;font-size:.68rem;color:#8b949e;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);font-weight:700">
         <div>Block</div>
-        <div>Card</div>
+        <div>Rappid Tile</div>
         <div style="text-align:center">Rarity</div>
         <div style="text-align:center">Set</div>
         <div style="text-align:center">Identity</div>
@@ -11897,7 +11897,7 @@ async function toggleTrophyCase(mintId) {
     tc.splice(idx, 1);
     showToast('Removed from Trophy Case', 'success');
   } else {
-    if (tc.length >= 6) { showToast('Trophy Case full (max 6 cards)', 'error'); return; }
+    if (tc.length >= 6) { showToast('Trophy Case full (max 6 rappid tiles)', 'error'); return; }
     tc.push(mintId);
     showToast('Pinned to Trophy Case!', 'success');
   }
@@ -11921,7 +11921,7 @@ function shareTrophyCase() {
 // ═══════════════════════════════════════════════════════
 async function startQuiz() {
   const all = await getAllMinted();
-  if (all.length < 4) { showToast('Need at least 4 cards in your collection to start the quiz!', 'error'); return; }
+  if (all.length < 4) { showToast('Need at least 4 rappid tiles in your collection to start the quiz!', 'error'); return; }
 
   // Pick 5 unique agents for questions
   const shuffled = all.slice().sort(() => Math.random() - 0.5);
@@ -12024,7 +12024,7 @@ function renderPackShelfWithOdds() {
       <div class="pack-icon">${p.icon}</div>
       <div class="pack-name">${p.name}</div>
       <div class="pack-sub">${p.sub}</div>
-      <div class="pack-count">${p.cards} cards &middot; ${pool.length} in pool</div>
+      <div class="pack-count">${p.cards} rappid tiles &middot; ${pool.length} in pool</div>
       <div class="pull-odds" style="margin-top:8px;font-size:.62rem;opacity:.7">
         ${mythicCount ? `<span><span style="width:6px;height:6px;border-radius:50%;background:#ff6d00;display:inline-block"></span>${mythicCount} Official</span>` : ''}
         ${rareCount ? `<span><span style="width:6px;height:6px;border-radius:50%;background:#ffd700;display:inline-block"></span>${rareCount} Verified</span>` : ''}
@@ -12377,7 +12377,7 @@ function exportCardPNG(name) {
   link.download = `${slug}_card.png`;
   link.href = canvas.toDataURL('image/png');
   link.click();
-  showToast(`Exported ${a.display_name} card (750×1050 print-ready)`, 'success');
+  showToast(`Exported ${a.display_name} rappid tile (750×1050 print-ready)`, 'success');
 }
 
 function roundRect(ctx, x, y, w, h, r) {
@@ -12422,7 +12422,7 @@ function printCard(name) {
     );
   const qrSvg = _qrShareEnabled ? rarQrSvg(printQrData,135) : '';
   const w = window.open('', '_blank', 'width=400,height=600');
-  w.document.write(`<!DOCTYPE html><html><head><title>${a.display_name} — Agent Card</title>
+  w.document.write(`<!DOCTYPE html><html><head><title>${a.display_name} — Rappid Tile</title>
   <style>
     @page { size: 2.5in 3.5in; margin: 0; }
     body { margin: 0; background: #0d1117; color: #e6edf3; font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
@@ -12463,7 +12463,7 @@ function printCard(name) {
       <div class="back-logo">RAPP</div>
       ${qrSvg ? `<div class="qr">${qrSvg}</div>` : '<div style="opacity:.3;font-size:8pt;padding:20px">QR off</div>'}
       <div class="back-name">${esc(a.display_name)}</div>
-      <div class="back-hint">${qrSvg ? 'Scan sealed .card' : ''}</div>
+      <div class="back-hint">${qrSvg ? 'Scan rappid tile (.card)' : ''}</div>
     </div>
   </div>
   </body></html>`);
@@ -12874,7 +12874,7 @@ function export3DCard(name) {
   link.download = `${name.replace(/[^a-z0-9]/gi, '_')}_3d_card.png`;
   link.href = canvas.toDataURL('image/png');
   link.click();
-  showToast('Card exported as PNG', 'success');
+  showToast('Rappid tile exported as PNG', 'success');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -13383,7 +13383,7 @@ let presAgents = [];
 
 function presentDeck() {
   presAgents = allAgents.filter(a => deck.has(a.name));
-  if (!presAgents.length) { showToast('Add cards to your deck first', 'error'); return; }
+  if (!presAgents.length) { showToast('Add rappid tiles to your deck first', 'error'); return; }
   presSlideIndex = 0;
   renderPresentation();
 }
@@ -13550,7 +13550,7 @@ function handleCardHash() {
       renderDeckSelect();
       switchTab('cards');
       setCardFilter('deck', null);
-      showToast(`Loaded deck "${dn}" with ${agents.length} cards`, 'success');
+      showToast(`Loaded deck "${dn}" with ${agents.length} rappid tiles`, 'success');
     }
   } else if (hash.startsWith('#trophy/')) {
     try {
@@ -13559,7 +13559,7 @@ function handleCardHash() {
       if (Array.isArray(mintIds) && mintIds.length) {
         localStorage.setItem('rar_trophy_case', JSON.stringify(mintIds.slice(0, 6)));
         switchTab('packs');
-        showToast(`Trophy Case loaded with ${mintIds.length} card${mintIds.length > 1 ? 's' : ''}!`, 'success');
+        showToast(`Trophy Case loaded with ${mintIds.length} rappid tile${mintIds.length > 1 ? 's' : ''}!`, 'success');
       }
     } catch {}
   }
@@ -14032,8 +14032,8 @@ async function airdropCard(name, entry, task) {
   if (navigator.share && navigator.canShare?.({ files: [new File([blob], fileName)] })) {
     try {
       await navigator.share({
-        title: `${payload.card?.displayName || name} — Agent Card Airdrop`,
-        text: task ? `Agent card with task: ${task}` : 'Signed agent card from the Third Space',
+        title: `${payload.card?.displayName || name} — Rappid Tile Airdrop`,
+        text: task ? `Rappid tile with task: ${task}` : 'Signed rappid tile from the Third Space',
         files: [new File([blob], fileName, { type: 'application/json' })],
       });
       showToast(`Airdropped ${payload.card?.displayName || name} (signed)`, 'success');
@@ -14106,7 +14106,7 @@ async function airdropPy(name) {
 
 // Airdrop an entire deck
 async function airdropDeck() {
-  if (!deck.size) { showToast('Add cards to your deck first', 'error'); return; }
+  if (!deck.size) { showToast('Add rappid tiles to your deck first', 'error'); return; }
 
   const allCards = await getAllMinted();
   const deckCards = [];
@@ -14142,10 +14142,10 @@ async function airdropDeck() {
     try {
       await navigator.share({
         title: `${currentDeckName} — Agent Deck Airdrop`,
-        text: `Deck of ${deckCards.length} signed agent cards`,
+        text: `Deck of ${deckCards.length} signed rappid tiles`,
         files: [new File([blob], fileName, { type: 'application/json' })],
       });
-      showToast(`Airdropped deck "${currentDeckName}" (${deckCards.length} cards, signed)`, 'success');
+      showToast(`Airdropped deck "${currentDeckName}" (${deckCards.length} rappid tiles, signed)`, 'success');
       return;
     } catch (e) {
       if (e.name === 'AbortError') { showToast('Airdrop cancelled', 'info'); return; }
@@ -14563,7 +14563,7 @@ const _VERIFIED_AUTHORITY = {
   scope: 'verified',
   binding: 'permanent',
   defaultOwner: true,
-  attestation: 'All agents reaching verified tier are attested by Wildhaven of America. This attestation is permanent, irrevocable, and travels with the card through all future transfers. Wildhaven of America retains verification authority and default ownership rights for public dispersal of verified agent cards.',
+  attestation: 'All agents reaching verified tier are attested by Wildhaven of America. This attestation is permanent, irrevocable, and travels with the rappid tile through all future transfers. Wildhaven of America retains verification authority and default ownership rights for public dispersal of verified rappid tiles.',
 };
 
 // ── Identity Address ──
@@ -14602,7 +14602,7 @@ async function loadCardChainIndex() {
 // Returns { verified, blockIndex, blockHash, owner, cardHash } or { verified: false }
 async function verifyCardOnChain(mintId) {
   const index = await loadCardChainIndex();
-  if (!index || !index[mintId]) return { verified: false, reason: 'Card not found on chain' };
+  if (!index || !index[mintId]) return { verified: false, reason: 'Rappid tile not found on chain' };
 
   const entry = index[mintId];
 
@@ -15064,7 +15064,7 @@ async function renderIdentityBadge() {
     document.body.appendChild(badge);
   }
   const state = await loadChainState();
-  const cardCount = state ? '| Chain: ' + state.totalForged + ' cards' : '';
+  const cardCount = state ? '| Chain: ' + state.totalForged + ' rappid tiles' : '';
   const archLabel = isArchitect() ? '<span style="color:#e3b341;font-weight:700;margin-left:6px">ARCHITECT</span>' : '';
   badge.innerHTML = `<span style="color:#d2a8ff;font-weight:600">Identity</span> <span class="identity-label" style="color:#58a6ff;font-family:monospace">${formatIdentityAddress(addr)}</span>${archLabel} <span style="color:#484f58">${cardCount}</span>`;
 }
@@ -15784,7 +15784,7 @@ async function importRAD(file) {
     if (payload.thirdspace) {
       trustInfo = await verifyCardCredential(payload.thirdspace);
       if (!trustInfo.valid) {
-        showToast(`Warning: Card credential verification FAILED — ${trustInfo.reason}`, 'error');
+        showToast(`Warning: Rappid tile credential verification FAILED — ${trustInfo.reason}`, 'error');
       }
     }
 
@@ -15906,7 +15906,7 @@ async function importDeckAirdrop(payload) {
   saveDecks();
   renderCollection();
   renderDeckSelect();
-  showToast(`Imported deck "${deckName}" — ${imported} cards [${deckTrust}]`, 'success');
+  showToast(`Imported deck "${deckName}" — ${imported} rappid tiles [${deckTrust}]`, 'success');
   return { imported, deckName };
 }
 
@@ -16223,7 +16223,7 @@ function processVoiceCommand(text) {
 
   // Navigation
   if (text.includes('browse') || text.includes('home')) { switchTab('browse'); return; }
-  if (text.includes('cards')) { switchTab('cards'); return; }
+  if (text.includes('rappid tile') || text.includes('tiles') || text.includes('cards')) { switchTab('cards'); return; }
   if (text.includes('packs')) { switchTab('packs'); return; }
   if (text.includes('stream') || text.includes('streaming')) { switchTab('stream'); return; }
   if (text.includes('workbench') || text.includes('build')) { switchTab('workbench'); return; }
