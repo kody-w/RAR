@@ -285,16 +285,16 @@ def test_cli_verify_and_scan_label_pinned_tile_not_offline_ready(v2_index):
         assert "offline: needs 1 pinned payload(s)" in result.stdout
 
 
-def test_charizard_in_the_woods_is_offline_ready(tmp_path, monkeypatch):
+def test_offline_path_tile_is_offline_ready(tmp_path, monkeypatch):
     trailhead = tmp_path / "trailhead"
-    woods = tmp_path / "woods"
+    offline = tmp_path / "offline"
     trailhead.mkdir()
-    woods.mkdir()
+    offline.mkdir()
     card, agent, egg = _pack_fixture(trailhead, with_egg=True)
-    copied_card = Path(shutil.copy2(card, woods / card.name))
+    copied_card = Path(shutil.copy2(card, offline / card.name))
 
     def reject_network(*_args, **_kwargs):
-        raise AssertionError("Charizard in the Woods must not fetch")
+        raise AssertionError("the offline path must not fetch")
 
     monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", reject_network)
     verified = rapp_sdk.verify_card(copied_card)
@@ -304,7 +304,7 @@ def test_charizard_in_the_woods_is_offline_ready(tmp_path, monkeypatch):
         "status": "offline: ready",
     }
 
-    unpacked = woods / "unpacked"
+    unpacked = offline / "unpacked"
     rapp_sdk.unpack_card(copied_card, unpacked)
     assert (unpacked / agent.name).read_bytes() == agent.read_bytes()
     assert egg is not None

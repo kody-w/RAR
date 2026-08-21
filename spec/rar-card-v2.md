@@ -11,7 +11,7 @@ changes its seed, or changes its incantation.
 
 ## The hero law
 
-The `.card` file is the rappid tile a person keeps. A woods-ready tile carries
+The `.card` file is the rappid tile a person keeps. A offline-ready tile carries
 every required payload inline, so a second offline device can verify and
 unpack it using only the tile's own bytes. After successful verification,
 `card verify` and `card scan` report `offline: ready` only when every payload
