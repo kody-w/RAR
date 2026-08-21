@@ -1,0 +1,136 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@kody-w/twin_me",
+  "seed": 7154277121291989206,
+  "name_seed": 1665734947,
+  "key": "FLANK STAMP CHROME SPECTER GROWL FORT TEMPER",
+  "version": "1.0.3",
+  "face": {
+    "name": "TwinMe",
+    "title": "The Synthesizer",
+    "mana_cost": "{1}{W}{G}",
+    "colors": [
+      "W",
+      "G"
+    ],
+    "type_line": "Creature — Agent Warden",
+    "rarity": "common",
+    "power": 4,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Packs a PII-stripped .egg of the current brainstem's persona, custom agents, and calibration baseline, refusing if its content scan finds leaks."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“In a world of noise, the signal belongs to those who listen.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-491923\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-491923\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-491923)\"/><g filter=\"url(#gl-491923)\"><line x1=\"97\" y1=\"124\" x2=\"41\" y2=\"87\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"41\" y1=\"87\" x2=\"104\" y2=\"146\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"104\" y1=\"146\" x2=\"124\" y2=\"47\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"124\" y1=\"47\" x2=\"48\" y2=\"131\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"48\" y1=\"131\" x2=\"97\" y2=\"124\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"97\" y1=\"124\" x2=\"104\" y2=\"146\" stroke=\"#58a6ff\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"97\" cy=\"124\" r=\"5\" fill=\"#58a6ff\" opacity=\"0.50\"/><circle cx=\"41\" cy=\"87\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.31\"/><circle cx=\"104\" cy=\"146\" r=\"3\" fill=\"#58a6ff\" opacity=\"0.35\"/><circle cx=\"124\" cy=\"47\" r=\"6\" fill=\"#58a6ff\" opacity=\"0.61\"/><circle cx=\"48\" cy=\"131\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.50\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/twin_me",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 72,
+    "stats": {
+      "hp": 72,
+      "atk": 61,
+      "def": 34,
+      "spd": 57,
+      "int": 56
+    },
+    "typed_abilities": [
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 3,
+        "damage": 33
+      },
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 1,
+        "damage": 22
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 7154277121291989206
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/twin_me",
+    "version": "1.0.3",
+    "display_name": "TwinMe",
+    "description": "Packs a PII-stripped .egg of the current brainstem's persona, custom agents, and calibration baseline, refusing if its content scan finds leaks.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "twin",
+      "egg",
+      "twin-me",
+      "pii-strip",
+      "persona",
+      "portable",
+      "federation",
+      "rapp"
+    ],
+    "category": "core",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "example_call": "twin me"
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "twin_me_agent.py",
+      "sha256_lf_v1": "d3e0e553b21db6ba2323ebf1119a019bf44b898438fae6432284671359593896",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/twin_me_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@kody-w/twin_me_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,135 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/personalized_marketing",
+  "seed": 13430271910399845800,
+  "name_seed": 3126978853,
+  "key": "GRACE RUSK OAT SCROLL TRUSS GRAIN CAST",
+  "version": "1.2.0",
+  "face": {
+    "name": "Personalized Marketing Agent",
+    "title": "The Watcher",
+    "mana_cost": "{2}{G}{R}{B}",
+    "colors": [
+      "G",
+      "R",
+      "B"
+    ],
+    "type_line": "Creature — Agent Cartographer",
+    "rarity": "rare",
+    "power": 6,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Segments live audiences and designs campaigns from a live simulated Dynamics 365 tenant's contacts and orders, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The code compiles. The agent decides. The work gets done.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-61e925\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-61e925\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-61e925)\"/><g filter=\"url(#gl-61e925)\"><circle cx=\"128.8\" cy=\"91.7\" r=\"17\" fill=\"#f0883e\" opacity=\"0.15\" stroke=\"#f0883e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"71.2\" cy=\"108.3\" r=\"11\" fill=\"#f0883e\" opacity=\"0.1\" stroke=\"#f0883e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"128.8\" y1=\"91.7\" x2=\"71.2\" y2=\"108.3\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"40\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/personalized_marketing",
+    "agent_types": [
+      "CRAFT",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#f85149",
+      "#58a6ff"
+    ],
+    "hp": 53,
+    "stats": {
+      "hp": 53,
+      "atk": 54,
+      "def": 53,
+      "spd": 59,
+      "int": 66
+    },
+    "typed_abilities": [
+      {
+        "name": "Build",
+        "text": "Assemble components into deployable artifact.",
+        "cost": 3,
+        "damage": 28
+      },
+      {
+        "name": "Optimize",
+        "text": "Tune process parameters for maximum throughput.",
+        "cost": 1,
+        "damage": 32
+      }
+    ],
+    "weakness": "SHIELD",
+    "weakness_label": "Shield",
+    "resistance": "HEAL",
+    "resistance_label": "Heal",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 13430271910399845800
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/personalized_marketing",
+    "version": "1.2.0",
+    "display_name": "Personalized Marketing Agent",
+    "description": "Segments live audiences and designs campaigns from a live simulated Dynamics 365 tenant's contacts and orders, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "marketing",
+      "personalization",
+      "segmentation",
+      "campaigns",
+      "retail"
+    ],
+    "category": "retail_cpg",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "personalized_marketing_agent.py",
+      "sha256_lf_v1": "6092f9183c36ec5135ef15dcb022012a8d9a0f86f87ea2595629ab1eac566e1f",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/personalized_marketing_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

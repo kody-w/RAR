@@ -1,0 +1,144 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@cat-agent-skills/pdf_table_data_conversion",
+  "seed": 19375988763041610974,
+  "name_seed": 216356639,
+  "key": "SPITE HEIRLOOM SWARM GLYPH SUN ARTIFACT FUSE",
+  "version": "2.0.0",
+  "face": {
+    "name": "PDF Table Data Conversion",
+    "title": "The Conductor",
+    "mana_cost": "{3}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Legendary Creature — Agent Vanguard",
+    "rarity": "uncommon",
+    "power": 7,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Extract tables from a PDF document (e.g. contract rebate or pricing schedules) and convert them into a clean, workable Excel spreadsheet or CSV."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It doesn’t guess. It calculates.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-e5571f\"><stop offset=\"0%\" stop-color=\"#0a1a1a\"/><stop offset=\"100%\" stop-color=\"#050a0a\"/></radialGradient><filter id=\"gl-e5571f\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-e5571f)\"/><g filter=\"url(#gl-e5571f)\"><polygon points=\"125.5,104.8 123.4,132.5 83.6,136.5 76.8,109.3 56.5,77.4 102.0,62.1 120.7,79.7\" fill=\"#7ee787\" opacity=\"0.1\" stroke=\"#7ee787\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"121.6,108.0 106.2,124.2 86.7,122.3 84.0,99.6 87.1,78.6 101.8,85.1 110.8,94.7\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#7ee787\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/pdf_table_data_conversion",
+    "agent_types": [
+      "SOCIAL",
+      "DATA"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#3fb950"
+    ],
+    "hp": 56,
+    "stats": {
+      "hp": 56,
+      "atk": 48,
+      "def": 16,
+      "spd": 29,
+      "int": 34
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 2,
+        "damage": 29
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 19375988763041610974
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/pdf_table_data_conversion",
+    "version": "2.0.0",
+    "display_name": "PDF Table Data Conversion",
+    "description": "Extract tables from a PDF document (e.g. contract rebate or pricing schedules) and convert them into a clean, workable Excel spreadsheet or CSV.",
+    "author": "Lewis Baybutt",
+    "tags": [
+      "documents",
+      "extraction",
+      "pdf",
+      "csv",
+      "xlsx",
+      "tables",
+      "sharepoint"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "pdf-table-data-conversion",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pdf-table-data-conversion",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "a997eb9d6266624c"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "pdf_table_data_conversion_agent.py",
+      "sha256_lf_v1": "111afc6de615d21bd7a889670fe83fb7a8c062d7eced5a34668f69aad0e6d049",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/pdf_table_data_conversion_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@cat-agent-skills/pdf_table_data_conversion_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

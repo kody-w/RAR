@@ -1,0 +1,133 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/time_entry_billing",
+  "seed": 17145926618142354208,
+  "name_seed": 3992097130,
+  "key": "BRIGAND HUSK STRIKE NERVE INVOKE TRANSCEND CARVE",
+  "version": "1.2.0",
+  "face": {
+    "name": "Time Entry & Billing Agent",
+    "title": "The Assessor",
+    "mana_cost": "{2}{U}",
+    "colors": [
+      "U"
+    ],
+    "type_line": "Creature — Agent Compiler",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Intercept",
+        "cost": "",
+        "text": "Audits time entries and tracks receivables from a live simulated Dynamics 365 tenant invoice ledger, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Built to serve. Designed to scale. Ready to deploy.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-f2916a\"><stop offset=\"0%\" stop-color=\"#15101e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-f2916a\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-f2916a)\"/><g filter=\"url(#gl-f2916a)\"><circle cx=\"91.3\" cy=\"69.2\" r=\"18\" fill=\"#79c0ff\" opacity=\"0.15\" stroke=\"#79c0ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"108.7\" cy=\"130.8\" r=\"17\" fill=\"#79c0ff\" opacity=\"0.1\" stroke=\"#79c0ff\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"91.3\" y1=\"69.2\" x2=\"108.7\" y2=\"130.8\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"42\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/time_entry_billing",
+    "agent_types": [
+      "WEALTH",
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#f0f0f0"
+    ],
+    "hp": 64,
+    "stats": {
+      "hp": 64,
+      "atk": 60,
+      "def": 53,
+      "spd": 67,
+      "int": 67
+    },
+    "typed_abilities": [
+      {
+        "name": "Negotiate",
+        "text": "Propose terms optimized for mutual value.",
+        "cost": 3,
+        "damage": 31
+      },
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 1,
+        "damage": 26
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 17145926618142354208
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/time_entry_billing",
+    "version": "1.2.0",
+    "display_name": "Time Entry & Billing Agent",
+    "description": "Audits time entries and tracks receivables from a live simulated Dynamics 365 tenant invoice ledger, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "billing",
+      "time-entry",
+      "invoicing",
+      "audit",
+      "professional-services"
+    ],
+    "category": "professional_services",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "time_entry_billing_agent.py",
+      "sha256_lf_v1": "93014aaa8e8a0bf9e43818e5eda920ca2b5f73a697cacbbc66d26765d6b7f712",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/time_entry_billing_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

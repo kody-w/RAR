@@ -20,6 +20,8 @@ SDK = ROOT / "rapp_sdk.py"
 V1_PATH = ROOT / "cards" / "holo_cards.json"
 V2_ROOT = ROOT / "cards" / "v2"
 V2_INDEX_PATH = V2_ROOT / "index.json"
+TILE_ROOT = ROOT / "tiles" / "v1"
+TILE_INDEX_PATH = TILE_ROOT / "index.json"
 REGISTRY_PATH = ROOT / "registry.json"
 
 sys.path.insert(0, str(ROOT))
@@ -84,11 +86,11 @@ def _pack_fixture(tmp_path: Path, *, with_egg: bool = False) -> tuple[Path, Path
     egg = tmp_path / "fixture.egg" if with_egg else None
     if egg is not None:
         egg.write_bytes(bytes(range(256)) + b"\x00RAR-CARD\xff")
-    card = tmp_path / "card_fixture_agent.py.card"
+    card = tmp_path / "card_fixture_agent.py.tile"
     command = [
         sys.executable,
         str(SDK),
-        "card",
+        "tile",
         "pack",
         str(agent),
         "--inline",
@@ -96,7 +98,7 @@ def _pack_fixture(tmp_path: Path, *, with_egg: bool = False) -> tuple[Path, Path
         str(card),
     ]
     if egg is not None:
-        command[5:5] = ["--egg", str(egg)]
+        command[5:5] = ["--resource", str(egg)]
     result = subprocess.run(
         command,
         cwd=ROOT,
@@ -109,8 +111,9 @@ def _pack_fixture(tmp_path: Path, *, with_egg: bool = False) -> tuple[Path, Path
 
 
 def test_every_v1_face_round_trips_byte_for_byte(v1_cards, v2_index):
-    assert set(v2_index) == set(v1_cards)
-    for agent_id, v1_face in v1_cards.items():
+    assert set(v2_index) <= set(v1_cards)
+    for agent_id in v2_index:
+        v1_face = v1_cards[agent_id]
         card_path = _v2_card_path(agent_id, v2_index)
         v2 = json.loads(card_path.read_text(encoding="utf-8"))
         assert _face_bytes(v2["face"]) == _face_bytes(v1_face), agent_id
@@ -118,7 +121,7 @@ def test_every_v1_face_round_trips_byte_for_byte(v1_cards, v2_index):
 
 
 def test_every_v2_seed_and_index_hash_recomputes(v1_cards, v2_index, registry):
-    assert set(v2_index) == set(v1_cards) == set(registry)
+    assert set(v2_index) <= set(v1_cards) == set(registry)
     for agent_id, entry in v2_index.items():
         path = _v2_card_path(agent_id, v2_index)
         raw = path.read_bytes()
@@ -162,34 +165,34 @@ def test_tampered_payload_hash_is_refused(tmp_path):
     card_path, _, _ = _pack_fixture(tmp_path)
     card = json.loads(card_path.read_text(encoding="utf-8"))
     card["payload"][0]["inline"] += "# tampered\r\n"
-    card_path.write_bytes(rapp_sdk._card_json_bytes(card))
+    card_path.write_bytes(rapp_sdk._tile_json_bytes(card))
     with pytest.raises(ValueError, match="sha256_lf_v1 mismatch"):
-        rapp_sdk.verify_card(card_path)
+        rapp_sdk.verify_tile(card_path)
 
 
 def test_pack_pin_must_resolve_to_the_local_agent(tmp_path):
     agent = tmp_path / "card_fixture_agent.py"
     agent.write_bytes(_fixture_agent_bytes())
-    packed = tmp_path / "card_fixture_agent.py.card"
-    result = rapp_sdk.pack_card(
+    packed = tmp_path / "card_fixture_agent.py.tile"
+    result = rapp_sdk.pack_tile(
         agent,
         pin_url=agent.as_uri(),
         output_path=packed,
     )
     assert Path(result) == packed
-    assert rapp_sdk.verify_card(packed)["valid"]
+    assert rapp_sdk.verify_tile(packed)["valid"]
 
     wrong = tmp_path / "wrong.py"
     wrong.write_text("not the same agent\n", encoding="utf-8")
     with pytest.raises(ValueError, match="does not match the local agent"):
-        rapp_sdk.pack_card(
+        rapp_sdk.pack_tile(
             agent,
             pin_url=wrong.as_uri(),
-            output_path=tmp_path / "wrong.card",
+            output_path=tmp_path / "card_fixture_agent.py.tile",
         )
 
 
-def test_rappid_tile_pack_defaults_to_person_kept_inline(tmp_path):
+def test_deprecated_card_pack_alias_emits_tile_and_warns(tmp_path):
     agent = tmp_path / "card_fixture_agent.py"
     agent.write_bytes(_fixture_agent_bytes())
     result = subprocess.run(
@@ -199,6 +202,8 @@ def test_rappid_tile_pack_defaults_to_person_kept_inline(tmp_path):
             "card",
             "pack",
             str(agent),
+            "--out",
+            str(tmp_path / "card_fixture_agent.py.tile"),
         ],
         cwd=ROOT,
         capture_output=True,
@@ -206,12 +211,13 @@ def test_rappid_tile_pack_defaults_to_person_kept_inline(tmp_path):
         timeout=30,
     )
     assert result.returncode == 0, result.stdout + result.stderr
-    card = tmp_path / "card_fixture_agent.py.card"
+    card = tmp_path / "card_fixture_agent.py.tile"
     assert f"Packed rappid tile: {card}" in result.stdout
+    assert "DEPRECATED" in result.stderr
     packed = json.loads(card.read_text(encoding="utf-8"))
     assert packed["payload"]
     assert all("inline" in item and "url" not in item for item in packed["payload"])
-    assert rapp_sdk.verify_card(card)["offline"]["status"] == "offline: ready"
+    assert rapp_sdk.verify_tile(card)["offline"]["status"] == "offline: ready"
 
 
 @pytest.mark.parametrize(
@@ -239,7 +245,7 @@ def test_face_and_seed_disagreement_is_refused(
 def test_cli_pack_unpack_preserves_crlf_text_and_binary(tmp_path):
     card, agent, egg = _pack_fixture(tmp_path, with_egg=True)
     verify = subprocess.run(
-        [sys.executable, str(SDK), "card", "verify", str(card)],
+        [sys.executable, str(SDK), "tile", "verify", str(card)],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -252,7 +258,7 @@ def test_cli_pack_unpack_preserves_crlf_text_and_binary(tmp_path):
 
     output = tmp_path / "unpacked"
     unpack = subprocess.run(
-        [sys.executable, str(SDK), "card", "unpack", str(card), str(output)],
+        [sys.executable, str(SDK), "tile", "unpack", str(card), str(output)],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -297,21 +303,22 @@ def test_offline_path_tile_is_offline_ready(tmp_path, monkeypatch):
         raise AssertionError("the offline path must not fetch")
 
     monkeypatch.setattr(rapp_sdk.urllib.request, "urlopen", reject_network)
-    verified = rapp_sdk.verify_card(copied_card)
+    verified = rapp_sdk.verify_tile(copied_card)
     assert verified["offline"] == {
         "ready": True,
         "pinned_payloads": 0,
+        "invalid_payloads": 0,
         "status": "offline: ready",
     }
 
     unpacked = offline / "unpacked"
-    rapp_sdk.unpack_card(copied_card, unpacked)
+    rapp_sdk.unpack_tile(copied_card, unpacked)
     assert (unpacked / agent.name).read_bytes() == agent.read_bytes()
     assert egg is not None
     assert (unpacked / egg.name).read_bytes() == egg.read_bytes()
 
 
-def test_unpack_without_directory_strips_final_dot_card_suffix(tmp_path):
+def test_unpack_without_directory_strips_final_dot_tile_suffix(tmp_path):
     card, agent, egg = _pack_fixture(tmp_path, with_egg=True)
     agent_bytes = agent.read_bytes()
     egg_bytes = egg.read_bytes() if egg is not None else b""
@@ -319,7 +326,7 @@ def test_unpack_without_directory_strips_final_dot_card_suffix(tmp_path):
     assert egg is not None
     egg.unlink()
 
-    written = rapp_sdk.unpack_card(card)
+    written = rapp_sdk.unpack_tile(card)
 
     assert {Path(path) for path in written} == {agent, egg}
     assert agent.read_bytes() == agent_bytes
@@ -334,9 +341,9 @@ def test_reader_refuses_sleeve_name_disagreement(
         "@aibast-agents-library/account_intelligence",
         v2_index,
     )
-    wrong_name = tmp_path / "wrong.card"
+    wrong_name = tmp_path / "wrong.tile"
     shutil.copy2(source, wrong_name)
-    reader = rapp_sdk.verify_card if operation == "verify" else rapp_sdk.scan_card
+    reader = rapp_sdk.verify_tile if operation == "verify" else rapp_sdk.scan_tile
     with pytest.raises(ValueError, match="rappid tile filename.*disagrees"):
         reader(wrong_name)
 
@@ -354,9 +361,9 @@ def test_reader_refuses_encoded_url_separator(
     )
     source = (
         "https://example.invalid/not-the-sleeve%2F"
-        "card_fixture_agent.py.card"
+        "card_fixture_agent.py.tile"
     )
-    reader = rapp_sdk.verify_card if operation == "verify" else rapp_sdk.scan_card
+    reader = rapp_sdk.verify_tile if operation == "verify" else rapp_sdk.scan_tile
     with pytest.raises(ValueError, match="must not encode a path separator"):
         reader(source)
 
@@ -365,9 +372,9 @@ def test_pack_out_rejects_wrong_sleeve_basename(tmp_path):
     agent = tmp_path / "card_fixture_agent.py"
     agent.write_bytes(_fixture_agent_bytes())
     with pytest.raises(ValueError, match="Output filename must be"):
-        rapp_sdk.pack_card(
+        rapp_sdk.pack_tile(
             agent,
-            output_path=tmp_path / "wrong.card",
+            output_path=tmp_path / "wrong.tile",
         )
 
 
@@ -388,8 +395,8 @@ def test_remote_unpack_keeps_sleeve_subdirectory(
     )
     monkeypatch.chdir(receiver)
 
-    written = rapp_sdk.unpack_card(
-        "https://example.invalid/card_fixture_agent.py.card"
+    written = rapp_sdk.unpack_tile(
+        "https://example.invalid/card_fixture_agent.py.tile"
     )
 
     restored = receiver / "card_fixture_agent.py" / "card_fixture_agent.py"
@@ -401,7 +408,7 @@ def test_card_scan_command_accepts_local_file_url_without_execution(tmp_path):
     card, _, _ = _pack_fixture(tmp_path)
     marker = tmp_path / "payload-executed"
     result = subprocess.run(
-        [sys.executable, str(SDK), "card", "scan", card.as_uri()],
+        [sys.executable, str(SDK), "tile", "scan", card.as_uri()],
         cwd=marker.parent,
         capture_output=True,
         text=True,
@@ -428,7 +435,7 @@ def test_card_scan_command_accepts_directory_served_url_offline(tmp_path):
     try:
         url = f"http://127.0.0.1:{server.server_port}/{card.name}"
         result = subprocess.run(
-            [sys.executable, str(SDK), "card", "scan", url],
+            [sys.executable, str(SDK), "tile", "scan", url],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -521,6 +528,10 @@ def test_schema_is_draft_2020_12_and_models_sealed_payloads():
 
 def test_site_and_api_publish_rappid_tiles_with_local_qr():
     api = json.loads((ROOT / "api.json").read_text(encoding="utf-8"))
+    assert api["endpoints"]["tiles"]["url"].endswith("/tiles/v1/index.json")
+    assert api["endpoints"]["tile_file"]["url"].endswith(
+        "/tiles/v1/{publisher}/{primary_payload_filename}.tile"
+    )
     assert api["endpoints"]["cards_v2"]["url"].endswith("/cards/v2/index.json")
     assert api["endpoints"]["card_file"]["url"].endswith(
         "/cards/v2/{publisher}/{primary_payload_filename}.card"
@@ -529,10 +540,13 @@ def test_site_and_api_publish_rappid_tiles_with_local_qr():
         name: (ROOT / name).read_text(encoding="utf-8")
         for name in ("store.html", "grail.html", "incantation-hero.html")
     }
+    assert "tiles/v1/index.json" in pages["store.html"]
     assert "cards/v2/index.json" in pages["store.html"]
     assert "_v2CardIndex" in pages["store.html"]
+    assert "parseRappidTile" in pages["store.html"]
     assert "parseRarCardV2" in pages["store.html"]
     assert "envelope.face" in pages["grail.html"]
+    assert "TILE_V1" in pages["incantation-hero.html"]
     assert "CARD_V2" in pages["incantation-hero.html"]
     for name, page in pages.items():
         assert "api.qrserver.com" not in page, name
@@ -575,7 +589,11 @@ def test_admission_commits_source_before_pinning_and_pushes_after_tests(
         ROOT / ".github" / "workflows" / workflow_name
     ).read_text(encoding="utf-8")
     source_commit = workflow.index('git commit \\\n')
-    migrate = workflow.index("python scripts/migrate_cards_v2.py", source_commit)
+    frozen_check = workflow.index(
+        "python scripts/migrate_cards_v2.py --check",
+        source_commit,
+    )
+    migrate = workflow.index("python scripts/migrate_tiles_v1.py", frozen_check)
     tests = workflow.index("python -m pytest -q", migrate)
     push = workflow.index("git push origin HEAD:main", tests)
-    assert source_commit < migrate < tests < push
+    assert source_commit < frozen_check < migrate < tests < push

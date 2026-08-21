@@ -1,0 +1,138 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@kody-w/bond_rhythm_agent",
+  "seed": 44884320758306451612,
+  "name_seed": 1860510700,
+  "key": "EPIC SOVEREIGN BOND HALBERD SNAP GREATSWORD BOLT",
+  "version": "1.0.1",
+  "face": {
+    "name": "Bond Pulse",
+    "title": "The Interceptor",
+    "mana_cost": "{1}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Legendary Creature — Agent Navigator",
+    "rarity": "mythic",
+    "power": 8,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Dispatch",
+        "cost": "",
+        "text": "Audits local-versus-global RAPP repo drift, classifies push/pull direction, suggests operator actions, and records rhythm bond events."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The simplest solution is usually an agent away.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-e523ec\"><stop offset=\"0%\" stop-color=\"#0a2a2a\"/><stop offset=\"100%\" stop-color=\"#050f0f\"/></radialGradient><filter id=\"gl-e523ec\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-e523ec)\"/><g filter=\"url(#gl-e523ec)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#8b949e\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#8b949e\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"20\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(10 100 100)\"/><circle cx=\"101.3\" cy=\"115.3\" r=\"3\" fill=\"#8b949e\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"32\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(15 100 100)\"/><circle cx=\"58.4\" cy=\"86.4\" r=\"4\" fill=\"#8b949e\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"66\" ry=\"37\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.36\" transform=\"rotate(22 100 100)\"/><circle cx=\"129.9\" cy=\"139.3\" r=\"3\" fill=\"#8b949e\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"84\" ry=\"26\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.44\" transform=\"rotate(-19 100 100)\"/><circle cx=\"29.3\" cy=\"91.4\" r=\"5\" fill=\"#8b949e\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/bond_rhythm_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 84,
+    "stats": {
+      "hp": 84,
+      "atk": 85,
+      "def": 55,
+      "spd": 69,
+      "int": 86
+    },
+    "typed_abilities": [
+      {
+        "name": "Sync",
+        "text": "Synchronize state between two systems.",
+        "cost": 2,
+        "damage": 22
+      },
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 2,
+        "damage": 26
+      },
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 1,
+        "damage": 36
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 2,
+      "label": "Evolved",
+      "icon": "flame"
+    },
+    "tier": "verified",
+    "rarity_tier": "rare",
+    "rarity_label": "Elite",
+    "floor_pts": 100,
+    "seed": 44884320758306451612
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/bond_rhythm_agent",
+    "version": "1.0.1",
+    "display_name": "Bond Pulse",
+    "description": "Audits local-versus-global RAPP repo drift, classifies push/pull direction, suggests operator actions, and records rhythm bond events.",
+    "author": "kody-w",
+    "tags": [
+      "heartbeat",
+      "drift-detection",
+      "ecosystem",
+      "operator-mediated",
+      "bond-pulse",
+      "rhythm"
+    ],
+    "category": "platform",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "bond_rhythm_agent.py",
+      "sha256_lf_v1": "88bb285bbf26b68fee053d24bf70c08ae1ec42e4c3a03b9afe7de2c404a5a219",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@kody-w/bond_rhythm_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

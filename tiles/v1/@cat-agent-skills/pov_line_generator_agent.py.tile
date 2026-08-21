@@ -1,0 +1,142 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@cat-agent-skills/pov_line_generator",
+  "seed": 26216556370724534078,
+  "name_seed": 1809050398,
+  "key": "CRUMB STROKE MERIDIAN NICKEL ASPEN SENTINEL BARB",
+  "version": "1.1.0",
+  "face": {
+    "name": "POV Line Generator",
+    "title": "The Cipher",
+    "mana_cost": "{3}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Tactician",
+    "rarity": "common",
+    "power": 1,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Generate sharp, specific point-of-view lines for posts, slides, talks, campaigns, or positioning work."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Complexity is the enemy. Automation is the ally.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-d3eb1e\"><stop offset=\"0%\" stop-color=\"#2a1a0a\"/><stop offset=\"100%\" stop-color=\"#0a0805\"/></radialGradient><filter id=\"gl-d3eb1e\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-d3eb1e)\"/><g filter=\"url(#gl-d3eb1e)\"><line x1=\"99\" y1=\"87\" x2=\"83\" y2=\"75\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"83\" y1=\"75\" x2=\"32\" y2=\"66\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"32\" y1=\"66\" x2=\"99\" y2=\"90\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"99\" y1=\"90\" x2=\"71\" y2=\"110\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"71\" y1=\"110\" x2=\"66\" y2=\"109\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"66\" y1=\"109\" x2=\"49\" y2=\"106\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"49\" y1=\"106\" x2=\"82\" y2=\"108\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"82\" y1=\"108\" x2=\"99\" y2=\"87\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"99\" y1=\"87\" x2=\"32\" y2=\"66\" stroke=\"#8b949e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"99\" cy=\"87\" r=\"5\" fill=\"#8b949e\" opacity=\"0.37\"/><circle cx=\"83\" cy=\"75\" r=\"5\" fill=\"#8b949e\" opacity=\"0.44\"/><circle cx=\"32\" cy=\"66\" r=\"4\" fill=\"#8b949e\" opacity=\"0.58\"/><circle cx=\"99\" cy=\"90\" r=\"5\" fill=\"#8b949e\" opacity=\"0.51\"/><circle cx=\"71\" cy=\"110\" r=\"3\" fill=\"#8b949e\" opacity=\"0.63\"/><circle cx=\"66\" cy=\"109\" r=\"5\" fill=\"#8b949e\" opacity=\"0.56\"/><circle cx=\"49\" cy=\"106\" r=\"3\" fill=\"#8b949e\" opacity=\"0.34\"/><circle cx=\"82\" cy=\"108\" r=\"3\" fill=\"#8b949e\" opacity=\"0.58\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/pov_line_generator",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 47,
+    "stats": {
+      "hp": 47,
+      "atk": 42,
+      "def": 22,
+      "spd": 26,
+      "int": 44
+    },
+    "typed_abilities": [
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 1,
+        "damage": 20
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 26216556370724534078
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/pov_line_generator",
+    "version": "1.1.0",
+    "display_name": "POV Line Generator",
+    "description": "Generate sharp, specific point-of-view lines for posts, slides, talks, campaigns, or positioning work.",
+    "author": "Simon Owen",
+    "tags": [
+      "writing",
+      "positioning",
+      "marketing",
+      "content",
+      "social_media"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "pov-line-generator",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pov-line-generator",
+      "upstream_version": "0.1.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "bf492abfe32d66ad"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "pov_line_generator_agent.py",
+      "sha256_lf_v1": "181aaa29ab74475fe1d1b73cbfec45f0cdd31f3016bbf34eabcaf3ec23213ded",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/pov_line_generator_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@cat-agent-skills/pov_line_generator_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

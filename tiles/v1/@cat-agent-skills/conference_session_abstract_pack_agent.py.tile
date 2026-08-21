@@ -1,0 +1,143 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@cat-agent-skills/conference_session_abstract_pack",
+  "seed": 26821252143542706731,
+  "name_seed": 1949842104,
+  "key": "CROFT PALADIN MERIDIAN WOVEN BURST PALE SPIKE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Conference Session Abstract Pack",
+    "title": "The Watcher",
+    "mana_cost": "{1}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Resolver",
+    "rarity": "common",
+    "power": 5,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Create CFP-ready talk titles, abstracts, takeaways, speaker notes, and submission copy from a topic."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“What the dashboard shows, the agent already knew.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-383ab8\"><stop offset=\"0%\" stop-color=\"#15101e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-383ab8\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-383ab8)\"/><g filter=\"url(#gl-383ab8)\"><circle cx=\"115\" cy=\"89\" r=\"38\" fill=\"#8b949e\" opacity=\"0.05\"/><circle cx=\"118\" cy=\"92\" r=\"33\" fill=\"#8b949e\" opacity=\"0.09\"/><circle cx=\"103\" cy=\"109\" r=\"32\" fill=\"#8b949e\" opacity=\"0.10\"/><circle cx=\"97\" cy=\"126\" r=\"19\" fill=\"#8b949e\" opacity=\"0.08\"/><circle cx=\"75\" cy=\"104\" r=\"27\" fill=\"#8b949e\" opacity=\"0.10\"/><circle cx=\"108\" cy=\"111\" r=\"20\" fill=\"#8b949e\" opacity=\"0.05\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#8b949e\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#8b949e\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#8b949e\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"136.4\" y2=\"110.8\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"97.7\" y2=\"144.9\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"64.4\" y2=\"89.9\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"117.4\" y2=\"67.3\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/conference_session_abstract_pack",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 41,
+    "stats": {
+      "hp": 41,
+      "atk": 40,
+      "def": 30,
+      "spd": 48,
+      "int": 40
+    },
+    "typed_abilities": [
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 2,
+        "damage": 36
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 26821252143542706731
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/conference_session_abstract_pack",
+    "version": "1.1.0",
+    "display_name": "Conference Session Abstract Pack",
+    "description": "Create CFP-ready talk titles, abstracts, takeaways, speaker notes, and submission copy from a topic.",
+    "author": "Simon Owen",
+    "tags": [
+      "writing",
+      "conference",
+      "abstract",
+      "speaking",
+      "content",
+      "productivity"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "conference-session-abstract-pack",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#conference-session-abstract-pack",
+      "upstream_version": "0.1.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "79b0788cb04dc619"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "conference_session_abstract_pack_agent.py",
+      "sha256_lf_v1": "1555f077ef0d78b201887122101980ce639036b47f08e647ccded556eebc4070",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/conference_session_abstract_pack_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@cat-agent-skills/conference_session_abstract_pack_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,142 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@cat-agent-skills/campaign_deck_builder",
+  "seed": 36222075933341397331,
+  "name_seed": 4138641958,
+  "key": "VERGE SOAK DIRGE LORE MOST GRIT STOKE",
+  "version": "2.0.0",
+  "face": {
+    "name": "Campaign Deck Builder",
+    "title": "The Prospector",
+    "mana_cost": "{1}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Creature — Agent Pilot",
+    "rarity": "common",
+    "power": 4,
+    "toughness": 1,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Turn a short interview into a charming, vibrant 3-slide marketing-campaign deck by filling a bundled PowerPoint template."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It works while you sleep. It finishes before you wake.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-aeaa26\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-aeaa26\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-aeaa26)\"/><g filter=\"url(#gl-aeaa26)\"><circle cx=\"100\" cy=\"100\" r=\"30\" fill=\"#f0883e\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"30\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"45\" ry=\"10\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(23 100 100)\"/><circle cx=\"91\" cy=\"106\" r=\"4\" fill=\"#f0883e\" opacity=\"0.06\"/><circle cx=\"98\" cy=\"91\" r=\"3\" fill=\"#f0883e\" opacity=\"0.09\"/><circle cx=\"90\" cy=\"94\" r=\"6\" fill=\"#f0883e\" opacity=\"0.09\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/campaign_deck_builder",
+    "agent_types": [
+      "LOGIC",
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#d29922"
+    ],
+    "hp": 51,
+    "stats": {
+      "hp": 51,
+      "atk": 49,
+      "def": 23,
+      "spd": 44,
+      "int": 30
+    },
+    "typed_abilities": [
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 2,
+        "damage": 17
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 36222075933341397331
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/campaign_deck_builder",
+    "version": "2.0.0",
+    "display_name": "Campaign Deck Builder",
+    "description": "Turn a short interview into a charming, vibrant 3-slide marketing-campaign deck by filling a bundled PowerPoint template.",
+    "author": "Adi Leibowitz",
+    "tags": [
+      "marketing",
+      "presentations",
+      "powerpoint",
+      "automation",
+      "scripts"
+    ],
+    "category": "devtools",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "campaign-deck-builder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#campaign-deck-builder",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "23b22be138aae9b6"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "campaign_deck_builder_agent.py",
+      "sha256_lf_v1": "9eaee36124c834b7c71a49853abb992be0a0ca4f7db6ab125621475019ee15de",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/campaign_deck_builder_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@cat-agent-skills/campaign_deck_builder_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

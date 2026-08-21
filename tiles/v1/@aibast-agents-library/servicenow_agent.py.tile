@@ -1,0 +1,131 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/voice_to_crm_servicenow",
+  "seed": 11805318406759655329,
+  "name_seed": 2748639883,
+  "key": "TAPESTRY RUSK SENTINEL DROIT PROWL SPIRAL MOLD",
+  "version": "1.2.0",
+  "face": {
+    "name": "Voice to CRM (ServiceNow)",
+    "title": "The Machinist",
+    "mana_cost": "{3}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Catalyst",
+    "rarity": "uncommon",
+    "power": 8,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Configure",
+        "cost": "",
+        "text": "Tracks incidents from a simulated ServiceNow Table-API desk, joining each CI's u_d365_customerassetid to the live D365 asset; offline fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Complexity is the enemy. Automation is the ally.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-d4ea8b\"><stop offset=\"0%\" stop-color=\"#141428\"/><stop offset=\"100%\" stop-color=\"#08081a\"/></radialGradient><filter id=\"gl-d4ea8b\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-d4ea8b)\"/><g filter=\"url(#gl-d4ea8b)\"><line x1=\"154\" y1=\"84\" x2=\"109\" y2=\"79\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"109\" y1=\"79\" x2=\"111\" y2=\"63\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"111\" y1=\"63\" x2=\"100\" y2=\"147\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"100\" y1=\"147\" x2=\"121\" y2=\"76\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"121\" y1=\"76\" x2=\"154\" y2=\"84\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"154\" y1=\"84\" x2=\"111\" y2=\"63\" stroke=\"#8b949e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"154\" cy=\"84\" r=\"3\" fill=\"#8b949e\" opacity=\"0.48\"/><circle cx=\"109\" cy=\"79\" r=\"6\" fill=\"#8b949e\" opacity=\"0.36\"/><circle cx=\"111\" cy=\"63\" r=\"6\" fill=\"#8b949e\" opacity=\"0.64\"/><circle cx=\"100\" cy=\"147\" r=\"3\" fill=\"#8b949e\" opacity=\"0.55\"/><circle cx=\"121\" cy=\"76\" r=\"4\" fill=\"#8b949e\" opacity=\"0.57\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/voice_to_crm_servicenow",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 50,
+    "stats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 45,
+      "spd": 56,
+      "int": 58
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 1,
+        "damage": 21
+      },
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 2,
+        "damage": 32
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 11805318406759655329
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/voice_to_crm_servicenow",
+    "version": "1.2.0",
+    "display_name": "Voice to CRM (ServiceNow)",
+    "description": "Tracks incidents from a simulated ServiceNow Table-API desk, joining each CI's u_d365_customerassetid to the live D365 asset; offline fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "servicenow",
+      "itsm",
+      "incidents",
+      "knowledge-base",
+      "routing"
+    ],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "servicenow_agent.py",
+      "sha256_lf_v1": "b2128e1ecda8d8cd29fc5da99be371a0bd0c914aab05cd0825b77e4c57a19210",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/servicenow_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

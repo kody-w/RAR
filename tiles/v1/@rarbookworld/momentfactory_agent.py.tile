@@ -1,0 +1,148 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@rarbookworld/momentfactory",
+  "seed": 2634476594081183925,
+  "name_seed": 613386881,
+  "key": "SLASH SPOKE PANTHER BADGE ANOINT SNAP BLADE",
+  "version": "0.1.2",
+  "face": {
+    "name": "MomentFactory (converged singleton)",
+    "title": "The Pilot",
+    "mana_cost": "{3}{B}{R}{U}",
+    "colors": [
+      "B",
+      "R",
+      "U"
+    ],
+    "type_line": "Creature — Agent Warden",
+    "rarity": "uncommon",
+    "power": 4,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Converts a moment (commit, message, idea) into a publishable Drop through seven inlined LLM personas, calling Azure OpenAI."
+      },
+      {
+        "keyword": "Requires",
+        "cost": "",
+        "text": "Needs AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT to activate."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Between the input and the output, there is judgment.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-8f8a81\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-8f8a81\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-8f8a81)\"/><g filter=\"url(#gl-8f8a81)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#f778ba\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#f778ba\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"18\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(-30 100 100)\"/><circle cx=\"87.5\" cy=\"80.8\" r=\"5\" fill=\"#f778ba\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"25\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(12 100 100)\"/><circle cx=\"112.3\" cy=\"75.5\" r=\"5\" fill=\"#f778ba\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rarbookworld/momentfactory",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 65,
+    "stats": {
+      "hp": 65,
+      "atk": 49,
+      "def": 59,
+      "spd": 57,
+      "int": 67
+    },
+    "typed_abilities": [
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 1,
+        "damage": 17
+      },
+      {
+        "name": "Sync",
+        "text": "Synchronize state between two systems.",
+        "cost": 2,
+        "damage": 47
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 2634476594081183925
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rarbookworld/momentfactory",
+    "version": "0.1.2",
+    "display_name": "MomentFactory (converged singleton)",
+    "description": "Converts a moment (commit, message, idea) into a publishable Drop through seven inlined LLM personas, calling Azure OpenAI.",
+    "author": "rarbookworld",
+    "tags": [
+      "composite",
+      "moment-pipeline",
+      "rappterbook-engine",
+      "singleton",
+      "rapplication"
+    ],
+    "category": "pipeline",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_OPENAI_ENDPOINT",
+      "AZURE_OPENAI_API_KEY",
+      "AZURE_OPENAI_DEPLOYMENT"
+    ],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "example_call": {
+      "args": {
+        "source": "git commit hash + diff + msg",
+        "source_type": "code-commit"
+      }
+    }
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "momentfactory_agent.py",
+      "sha256_lf_v1": "08cddf370c9a202ceb0e52ecb41dd6882d3e314d46eeb796e9e1387d9b86ecb7",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rarbookworld/momentfactory_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@rarbookworld/momentfactory_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

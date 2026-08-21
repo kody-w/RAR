@@ -1,0 +1,134 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/identify_discounts",
+  "seed": 3288425480277600421,
+  "name_seed": 765646221,
+  "key": "MANA HUSK TEMPEST HAUNT BYPASS IMPALE BLADE",
+  "version": "1.2.0",
+  "face": {
+    "name": "Identify Discounts",
+    "title": "The Analyst",
+    "mana_cost": "{1}{N}{W}",
+    "colors": [
+      "N",
+      "W"
+    ],
+    "type_line": "Creature — Agent Curator",
+    "rarity": "common",
+    "power": 2,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Scans live quotes from a simulated Dynamics 365 tenant for discounts and expiring savings, with eligibility checks and offline fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Precision at the speed of thought.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-a2d58d\"><stop offset=\"0%\" stop-color=\"#1a0a1e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-a2d58d\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-a2d58d)\"/><g filter=\"url(#gl-a2d58d)\"><polygon points=\"126.9,107.8 115.9,128.9 91.5,143.2 64.3,120.2 67.7,93.2 74.8,68.9 110.8,59.4 122.3,78.5\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"115.8,106.3 104.0,112.4 90.0,117.3 82.4,107.1 77.5,87.0 94.5,88.2 107.8,86.0 111.2,95.7\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#8b949e\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/identify_discounts",
+    "agent_types": [
+      "SOCIAL",
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#bc8cff"
+    ],
+    "hp": 63,
+    "stats": {
+      "hp": 63,
+      "atk": 68,
+      "def": 54,
+      "spd": 49,
+      "int": 53
+    },
+    "typed_abilities": [
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 3,
+        "damage": 14
+      },
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 47
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 3288425480277600421
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/identify_discounts",
+    "version": "1.2.0",
+    "display_name": "Identify Discounts",
+    "description": "Scans live quotes from a simulated Dynamics 365 tenant for discounts and expiring savings, with eligibility checks and offline fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "discounts",
+      "pricing",
+      "savings",
+      "eligibility",
+      "approval"
+    ],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "identify_discounts_agent.py",
+      "sha256_lf_v1": "291a85fc41aab99c74b58fff0d3f4bc90a669e9c82ef14cefaae2a961b91c0d2",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/identify_discounts_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

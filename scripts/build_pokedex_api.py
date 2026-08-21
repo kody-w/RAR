@@ -10,7 +10,7 @@ URL shape (relative to repo root, all under api/v1/):
 
     api/v1/index.json                    — paginated list + counts
     api/v1/agent/<id>.json               — single agent entry
-    api/v1/agent/<id>.card               — the .card holocard (.py + magic comment)
+    api/v1/agent/<id>.card               — legacy .py.card mirror (read-only)
     api/v1/agent/<id>.py                 — the bare singleton .py
     api/v1/sprite/<id>.svg               — deterministic generative sprite
 
@@ -41,12 +41,14 @@ from pathlib import Path
 
 _REPO = Path(__file__).resolve().parent.parent
 _REGISTRY = _REPO / "registry.json"
+_TILE_INDEX = _REPO / "tiles" / "v1" / "index.json"
 _AGENTS_ROOT = _REPO / "agents"
 _API = _REPO / "api" / "v1"
 
 SCHEMA_API_INDEX = "rar-pokedex-api/1.0"
 SCHEMA_API_AGENT = "rar-pokedex-agent/1.0"
 _PRIOR_RAPPIDS: dict = {}
+_TILES: dict = {}
 RAW_PREFIX = "https://raw.githubusercontent.com/kody-w/RAR/main"
 
 
@@ -103,6 +105,8 @@ def _build_entry(agent: dict) -> dict:
     publisher = name.split("/")[0] if "/" in name else "@anon"
     file_rel = agent.get("_file", "")           # agents/@rapp/learn_new_agent.py
     has_card = bool(agent.get("_has_card"))
+    tile = _TILES.get(name)
+    has_tile = isinstance(tile, dict)
     card_source = (
         _REPO / file_rel
         if file_rel.endswith(".card")
@@ -153,6 +157,7 @@ def _build_entry(agent: dict) -> dict:
         else None
     )
     api_py_url = f"{RAW_PREFIX}/api/v1/agent/{slug}.py"
+    tile_url = tile.get("url") if has_tile else None
 
     return {
         "schema": SCHEMA_API_AGENT,
@@ -179,6 +184,7 @@ def _build_entry(agent: dict) -> dict:
         "size_kb": agent.get("_size_kb"),
         "sha256": sha256,
         "has_card": has_card,
+        "has_tile": has_tile,
         "added_at": agent.get("_added_at"),
 
         # Lineage
@@ -190,6 +196,7 @@ def _build_entry(agent: dict) -> dict:
         "card_url":    card_url,
         "api_py_url":  api_py_url,
         "api_card_url": api_card_url,
+        "tile_url": tile_url,
 
         # Self-reference + browse-back
         "self_url":    f"{RAW_PREFIX}/api/v1/agent/{slug}.json",
@@ -204,8 +211,19 @@ def main():
         print(f"err: registry.json not found at {_REGISTRY}", file=sys.stderr)
         sys.exit(1)
 
-    global _PRIOR_RAPPIDS
+    global _PRIOR_RAPPIDS, _TILES
     _PRIOR_RAPPIDS = {}
+    _TILES = {}
+    if _TILE_INDEX.is_file():
+        try:
+            tile_index = json.loads(_TILE_INDEX.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            print(f"err: could not read {_TILE_INDEX}: {exc}", file=sys.stderr)
+            sys.exit(1)
+        _TILES = tile_index.get("tiles", {})
+        if not isinstance(_TILES, dict):
+            print("err: tile index tiles section must be an object", file=sys.stderr)
+            sys.exit(1)
     head_paths = subprocess.run(
         [
             "git",
@@ -297,7 +315,7 @@ def main():
         sprite = _sprite_svg(entry["rappid"], entry.get("category") or "default")
         (_API / "sprite" / f"{slug}.svg").write_text(sprite)
 
-        # Mirror the .py + .card under api/v1/agent/ for stable URLs
+        # Mirror .py and any legacy .py.card package for stable read URLs.
         # (the originals stay at agents/@<publisher>/...; the API copies
         # are slug-named for HTTP-friendly fetching).
         file_rel = agent.get("_file", "")
@@ -324,7 +342,8 @@ def main():
             "BasicAgent subclass, perform()). Mirrors the RAPP_Store API "
             "shape so the rapp-zoo can browse all federation stores with "
             "the same client code. Each entry has a sprite, a downloadable "
-            ".py (and .card holocard if shipped), lineage back to the "
+            ".py, a canonical .tile when published, legacy .card links when "
+            "previously shipped, lineage back to the "
             "species root, and stats (lines, size, sha256)."
         ),
         "version": "1.0.0",
@@ -340,13 +359,23 @@ def main():
                 "category":  e["category"],
                 "version":   e["version"],
                 "has_card":  e["has_card"],
+                "has_tile":  e["has_tile"],
                 "url":       e["self_url"],
                 "sprite":    e["sprite_url"],
                 "py":        e["api_py_url"],
                 "card":      e["api_card_url"],
+                "tile":      e["tile_url"],
             }
             for e in entries
         ],
+        "cards": {
+            "schema": "rar-card/2.0",
+            "compatibility": "read-only",
+        },
+        "tiles": {
+            "schema": "rappid-tile/1.0",
+            "index": f"{RAW_PREFIX}/tiles/v1/index.json",
+        },
     }
     (_API / "index.json").write_text(json.dumps(index, indent=2) + "\n")
 

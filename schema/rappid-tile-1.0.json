@@ -1,0 +1,627 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/kody-w/RAR/main/schema/rappid-tile-1.0.json",
+  "title": "Rappid tile",
+  "description": "A portable, inert rappid-tile/1.0 document carrying a deterministic face, an honest runtime footprint, and verified payloads.",
+  "type": "object",
+  "required": [
+    "schema",
+    "supersedes",
+    "id",
+    "seed",
+    "name_seed",
+    "key",
+    "version",
+    "face",
+    "manifest",
+    "stands_on",
+    "payload",
+    "state",
+    "origin",
+    "dimension",
+    "scan",
+    "provenance",
+    "signature"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": "rappid-tile/1.0"
+    },
+    "supersedes": {
+      "const": "rar-card/2.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?/[a-z0-9_]+$"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "name_seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "key": {
+      "type": "string",
+      "pattern": "^[A-Z]+(?: [A-Z]+){6}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$"
+    },
+    "face": {
+      "$ref": "#/$defs/face"
+    },
+    "manifest": {
+      "$ref": "#/$defs/manifest"
+    },
+    "stands_on": {
+      "$ref": "#/$defs/stands_on"
+    },
+    "payload": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/payload"
+      },
+      "allOf": [
+        {
+          "if": {
+            "minItems": 1
+          },
+          "then": {
+            "prefixItems": [
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/payload"
+                  },
+                  {
+                    "properties": {
+                      "role": {
+                        "const": "primary"
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "contains": {
+              "properties": {
+                "role": {
+                  "const": "primary"
+                }
+              },
+              "required": [
+                "role"
+              ]
+            },
+            "minContains": 1,
+            "maxContains": 1
+          }
+        }
+      ]
+    },
+    "lineage": {
+      "$ref": "#/$defs/lineage"
+    },
+    "state": {
+      "enum": [
+        "dormant",
+        "active"
+      ]
+    },
+    "arena": {
+      "$ref": "#/$defs/arena"
+    },
+    "origin": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/origin"
+        }
+      ]
+    },
+    "dimension": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "scan": {
+      "$ref": "#/$defs/scan"
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "signature": {
+      "type": [
+        "object",
+        "string",
+        "null"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "scan": {
+            "properties": {
+              "url": {
+                "pattern": "^https?://"
+              }
+            },
+            "required": [
+              "url"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "state": {
+            "const": "dormant"
+          },
+          "dimension": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "face": {
+      "type": "object",
+      "required": [
+        "seed"
+      ],
+      "properties": {
+        "seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "agent_name": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar_svg": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "manifest": {
+      "type": "object",
+      "required": [
+        "schema",
+        "name",
+        "version",
+        "display_name",
+        "description",
+        "author",
+        "tags",
+        "category"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "category": {
+          "type": "string"
+        },
+        "quality_tier": {
+          "type": "string"
+        },
+        "requires_env": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "python": {
+          "type": "string"
+        },
+        "requires_python": {
+          "type": "string"
+        },
+        "network": {
+          "type": "boolean"
+        },
+        "filesystem": {
+          "enum": [
+            "none",
+            "agent-directory"
+          ]
+        },
+        "tools": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "stands_on": {
+      "type": "object",
+      "required": [
+        "kernel",
+        "python",
+        "network",
+        "filesystem",
+        "tools"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kernel": {
+          "const": "rapp/1"
+        },
+        "python": {
+          "type": "string",
+          "minLength": 1
+        },
+        "network": {
+          "type": "boolean"
+        },
+        "filesystem": {
+          "enum": [
+            "none",
+            "agent-directory"
+          ]
+        },
+        "tools": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "role",
+        "kind",
+        "filename"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "primary",
+            "resource"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "agent.py",
+            "egg",
+            "file"
+          ]
+        },
+        "filename": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^/\\\\]+$"
+        },
+        "sha256_lf_v1": {
+          "$ref": "#/$defs/digest"
+        },
+        "sha256": {
+          "$ref": "#/$defs/digest"
+        },
+        "inline": {
+          "type": "string"
+        },
+        "inline_base64": {
+          "type": "string",
+          "contentEncoding": "base64"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^(?:https?|file)://.+$"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "inline"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "inline_base64"
+                ]
+              },
+              {
+                "required": [
+                  "url"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "inline_base64"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "inline"
+                ]
+              },
+              {
+                "required": [
+                  "url"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "url"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "inline"
+                ]
+              },
+              {
+                "required": [
+                  "inline_base64"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "required": [
+                "sha256_lf_v1"
+              ],
+              "not": {
+                "required": [
+                  "sha256"
+                ]
+              }
+            },
+            {
+              "required": [
+                "sha256"
+              ],
+              "not": {
+                "required": [
+                  "sha256_lf_v1"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "if": {
+            "required": [
+              "inline"
+            ]
+          },
+          "then": {
+            "required": [
+              "sha256_lf_v1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "inline_base64"
+            ]
+          },
+          "then": {
+            "required": [
+              "sha256"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "agent.py"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "sha256_lf_v1"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "egg"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "sha256"
+            ]
+          }
+        }
+      ]
+    },
+    "lineage": {
+      "type": "object",
+      "required": [
+        "ancestor_seed",
+        "ring",
+        "verified_by",
+        "verdict"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "ancestor_seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ring": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verified_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verdict": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "arena": {
+      "type": "object",
+      "required": [
+        "seat",
+        "faceUp"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "seat": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "faceUp": {
+          "type": "boolean"
+        }
+      }
+    },
+    "origin": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "brainstem": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "twin": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parkedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": true
+    },
+    "scan": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^(?:https?|file|rar)://.+$"
+        },
+        "qr": {
+          "type": "string"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "minted_by",
+        "registry_revision"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "minted_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "registry_revision": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{7,40}$"
+        }
+      }
+    }
+  }
+}

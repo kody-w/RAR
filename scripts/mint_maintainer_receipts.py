@@ -7,6 +7,9 @@ update ``state/agent_lifecycle.json``, chaining ``previous`` to the
 prior receipt. Idempotent: agents whose lifecycle digest already
 matches are skipped.
 
+Legacy ``.py.card`` agent packages remain readable source inputs. Canonical
+``.tile`` files are generated transports and never receive source receipts.
+
 This is the maintainer's bulk path for repo-wide maintenance passes
 (description sweeps, template upgrades). Individual submissions still
 ride the Issue notarization pipeline, which produces the same shapes.
@@ -30,6 +33,12 @@ RECEIPTS_DIR = REPO_ROOT / "state" / "receipts"
 
 MAINTAINER = {"github_id": 1735900, "github_login": "kody-w"}
 POLICY = "rar-maintainer-migration/1.0"
+
+
+def agent_source_paths() -> list[Path]:
+    return sorted(REPO_ROOT.glob("agents/**/*.py")) + sorted(
+        REPO_ROOT.glob("agents/**/*.py.card")
+    )
 
 
 def canonical_sha256(content: bytes) -> str:
@@ -63,10 +72,7 @@ def main() -> int:
     now = datetime.now(timezone.utc).isoformat()
     minted = 0
 
-    paths = sorted(REPO_ROOT.glob("agents/**/*.py")) + sorted(
-        REPO_ROOT.glob("agents/**/*.py.card")
-    )
-    for path in paths:
+    for path in agent_source_paths():
         rel = str(path.relative_to(REPO_ROOT))
         content = path.read_bytes()
         manifest = manifest_of(content.decode("utf-8", errors="replace"))

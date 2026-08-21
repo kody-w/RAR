@@ -1,0 +1,144 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@cat-agent-skills/knowledge_corpus_curator",
+  "seed": 21614544198994635773,
+  "name_seed": 737560942,
+  "key": "CRESCENT ANOINT RUNT DECOY FUME BINDER INGOT",
+  "version": "1.8.0",
+  "face": {
+    "name": "Knowledge Corpus Curator",
+    "title": "The Sentinel",
+    "mana_cost": "{2}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Creature — Agent Arbiter",
+    "rarity": "uncommon",
+    "power": 6,
+    "toughness": 1,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Review uploaded knowledge-source files for duplication, redundancy, staleness, overlap, and potentially conflicting guidance, then produce an evidence-based curation backlog."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The code compiles. The agent decides. The work gets done.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-f6496e\"><stop offset=\"0%\" stop-color=\"#2a0a0a\"/><stop offset=\"100%\" stop-color=\"#0a0808\"/></radialGradient><filter id=\"gl-f6496e\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-f6496e)\"/><g filter=\"url(#gl-f6496e)\"><line x1=\"45\" y1=\"102\" x2=\"95\" y2=\"127\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"95\" y1=\"127\" x2=\"153\" y2=\"116\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"153\" y1=\"116\" x2=\"119\" y2=\"30\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"119\" y1=\"30\" x2=\"121\" y2=\"136\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"121\" y1=\"136\" x2=\"45\" y2=\"102\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"45\" y1=\"102\" x2=\"153\" y2=\"116\" stroke=\"#7ee787\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"45\" cy=\"102\" r=\"3\" fill=\"#7ee787\" opacity=\"0.41\"/><circle cx=\"95\" cy=\"127\" r=\"5\" fill=\"#7ee787\" opacity=\"0.53\"/><circle cx=\"153\" cy=\"116\" r=\"3\" fill=\"#7ee787\" opacity=\"0.46\"/><circle cx=\"119\" cy=\"30\" r=\"4\" fill=\"#7ee787\" opacity=\"0.56\"/><circle cx=\"121\" cy=\"136\" r=\"4\" fill=\"#7ee787\" opacity=\"0.57\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/knowledge_corpus_curator",
+    "agent_types": [
+      "SOCIAL",
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#f0f0f0"
+    ],
+    "hp": 57,
+    "stats": {
+      "hp": 57,
+      "atk": 43,
+      "def": 36,
+      "spd": 37,
+      "int": 35
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 2,
+        "damage": 30
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 21614544198994635773
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/knowledge_corpus_curator",
+    "version": "1.8.0",
+    "display_name": "Knowledge Corpus Curator",
+    "description": "Review uploaded knowledge-source files for duplication, redundancy, staleness, overlap, and potentially conflicting guidance, then produce an evidence-based curation backlog.",
+    "author": "Doug Bellingeri",
+    "tags": [
+      "knowledge",
+      "sharepoint",
+      "governance",
+      "deduplication",
+      "documents",
+      "uploads",
+      "excel"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "knowledge-corpus-curator",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#knowledge-corpus-curator",
+      "upstream_version": "0.8.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "44b7b1e672580b5c"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "knowledge_corpus_curator_agent.py",
+      "sha256_lf_v1": "64d1835538128e525a1d912cc3140cda56f126332bd118ed0eeef34adf18b00f",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/knowledge_corpus_curator_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@cat-agent-skills/knowledge_corpus_curator_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

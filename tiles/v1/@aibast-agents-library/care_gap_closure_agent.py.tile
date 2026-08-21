@@ -1,0 +1,133 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/care_gap_closure",
+  "seed": 16835577812647426117,
+  "name_seed": 3919838418,
+  "key": "CHAR WARLORD FRIDGE ELIXIR PIVOT MATCH CARVE",
+  "version": "1.3.0",
+  "face": {
+    "name": "Care Gap Closure Agent",
+    "title": "The Beacon",
+    "mana_cost": "{3}{W}{U}",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "type_line": "Creature — Agent Cipher",
+    "rarity": "uncommon",
+    "power": 7,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Assess",
+        "cost": "",
+        "text": "Analyzes HEDIS care gaps, joining live simulated FHIR appointment gap signals with the Dynamics 365 care-coordination queue; offline fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Where others see a task, it sees a system.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-a3fcd2\"><stop offset=\"0%\" stop-color=\"#0a2a2a\"/><stop offset=\"100%\" stop-color=\"#050f0f\"/></radialGradient><filter id=\"gl-a3fcd2\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-a3fcd2)\"/><g filter=\"url(#gl-a3fcd2)\"><circle cx=\"77.8\" cy=\"81.4\" r=\"22\" fill=\"#56d364\" opacity=\"0.15\" stroke=\"#56d364\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"122.2\" cy=\"118.6\" r=\"18\" fill=\"#56d364\" opacity=\"0.1\" stroke=\"#56d364\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"77.8\" y1=\"81.4\" x2=\"122.2\" y2=\"118.6\" stroke=\"#56d364\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"39\" fill=\"none\" stroke=\"#56d364\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/care_gap_closure",
+    "agent_types": [
+      "HEAL"
+    ],
+    "type_colors": [
+      "#ff7eb3"
+    ],
+    "hp": 61,
+    "stats": {
+      "hp": 61,
+      "atk": 71,
+      "def": 49,
+      "spd": 64,
+      "int": 64
+    },
+    "typed_abilities": [
+      {
+        "name": "Triage",
+        "text": "Assess priority and route to appropriate handler.",
+        "cost": 1,
+        "damage": 38
+      },
+      {
+        "name": "Support",
+        "text": "Provide contextual guidance through complex process.",
+        "cost": 1,
+        "damage": 24
+      }
+    ],
+    "weakness": "CRAFT",
+    "weakness_label": "Craft",
+    "resistance": "WEALTH",
+    "resistance_label": "Wealth",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16835577812647426117
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/care_gap_closure",
+    "version": "1.3.0",
+    "display_name": "Care Gap Closure Agent",
+    "description": "Analyzes HEDIS care gaps, joining live simulated FHIR appointment gap signals with the Dynamics 365 care-coordination queue; offline fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "hedis",
+      "care-gaps",
+      "quality-measures",
+      "outreach",
+      "population-health",
+      "healthcare"
+    ],
+    "category": "healthcare",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "care_gap_closure_agent.py",
+      "sha256_lf_v1": "dfb2de8ae5d620dd765bb9baa6ac77de2e8ff235c423fc3e89640996478a55a6",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/care_gap_closure_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

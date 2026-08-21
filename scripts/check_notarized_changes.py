@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Require receipt evidence for every changed active agent artifact."""
+"""Require receipts for agent sources, including legacy .py.card inputs.
+
+Generated ``tiles/v1/**/*.tile`` documents are derived transport artifacts, not
+canonical agent sources, so their integrity is enforced by tile verification
+rather than lifecycle receipts.
+"""
 
 from __future__ import annotations
 
@@ -12,6 +17,13 @@ from pathlib import Path
 
 
 DEFAULT_REPO_ROOT = Path(__file__).resolve().parent.parent
+
+
+def is_agent_source_path(path: str) -> bool:
+    return (
+        (path.endswith(".py") or path.endswith(".py.card"))
+        and not path.endswith(".py.stub")
+    )
 
 
 def canonical_sha256(content: bytes) -> str:
@@ -177,10 +189,7 @@ def main() -> int:
     errors = []
     checked = 0
     for status, path in changes:
-        if not (
-            path.endswith(".py")
-            or path.endswith(".py.card")
-        ) or path.endswith(".py.stub"):
+        if not is_agent_source_path(path):
             continue
         current_path = repo_root / path
         current = current_path.read_bytes() if current_path.exists() else None

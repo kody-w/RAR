@@ -6,7 +6,8 @@ Registry Builder — Auto-generates registry.json from __manifest__ dicts in age
 Run manually:   python build_registry.py
 Or via CI:      Triggered on every push by .github/workflows/build-registry.yml
 
-Scans agents/@publisher/ for .py and .py.card files with __manifest__ dicts and builds:
+Scans agents/@publisher/ for .py and legacy .py.card files with __manifest__
+dicts and builds:
 - registry.json (full index for programmatic access)
 - Validates all manifests against schema
 - Reports errors for malformed agents
@@ -14,9 +15,9 @@ Scans agents/@publisher/ for .py and .py.card files with __manifest__ dicts and 
 Also scans swarms/@publisher/ for converged multi-agent singletons with __swarm__ dicts,
 and promotes existing agent stacks to downloadable swarm bundles.
 
-Supports three file formats:
+Reads three agent source formats:
 - slug.py      — bare agent (code + manifest)
-- slug.py.card — complete agent+card package (code + manifest + __card__ shell)
+- slug.py.card — legacy complete package (read-only compatibility)
 - slug.py.stub — gated agent (manifest + __source__ pointer, no code).
                  The actual agent.py lives in a private repo; the brainstem
                  resolves the pointer at install time using the user's own
@@ -38,6 +39,7 @@ AGENTS_DIR = Path("agents")
 SWARMS_DIR = Path("swarms")
 REGISTRY_FILE = Path("registry.json")
 HOLO_CARDS_FILE = Path("cards/holo_cards.json")
+TILE_INDEX_FILE = Path("tiles/v1/index.json")
 LIFECYCLE_FILE = Path("state/agent_lifecycle.json")
 RECEIPTS_DIR = Path("state/receipts")
 RECEIPT_SCHEMA = "rar-receipt/1.0"
@@ -67,6 +69,18 @@ def _holo_card_for(agent_name):
         if key in cards:
             return cards[key]
     return None
+
+
+def _artifact_index(path: Path, section: str | None = None) -> dict:
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return {}
+    if not isinstance(data, dict):
+        return {}
+    if section is not None:
+        data = data.get(section, {})
+    return data if isinstance(data, dict) else {}
 REQUIRED_MANIFEST_FIELDS = [
     "schema", "name", "version", "display_name",
     "description", "author", "tags", "category"
@@ -796,12 +810,13 @@ def _validated_tombstones(
 
 
 def build_registry():
-    """Scan all agent .py and .py.card files and build registry.json."""
+    """Scan current agents plus legacy .py.card inputs and build registry.json."""
     agents = []
     publishers = set()
     categories = set()
     errors = []
     seen_names = set()
+    tile_index = _artifact_index(TILE_INDEX_FILE, "tiles")
     previous_agents = {}
     if REGISTRY_FILE.exists():
         try:
@@ -833,7 +848,7 @@ def build_registry():
             errors.append(f"{LIFECYCLE_FILE}: invalid lifecycle JSON: {exc}")
             lifecycle_agents = {}
 
-    # Scan both .py and .py.card files; .py.card takes priority if both exist
+    # Legacy .py.card inputs remain readable and take priority when both exist.
     all_files = sorted(set(
         list(AGENTS_DIR.rglob("*.py")) +
         [p for p in AGENTS_DIR.rglob("*.py.card")]
@@ -898,7 +913,7 @@ def build_registry():
 
         name = manifest["name"]
 
-        # .py.card takes priority over .py for the same agent name
+        # Legacy .py.card takes priority over .py for the same agent name.
         is_card = py_path.name.endswith('.py.card')
         if name in seen_names and not is_card:
             continue  # skip .py if .py.card already registered
@@ -966,6 +981,12 @@ def build_registry():
         manifest["_size_kb"] = round(len(canonical_file_bytes(py_path)) / 1024, 1)
         manifest["_lines"] = len(content.split('\n'))
         manifest["_has_card"] = is_card or _has_holo_card(name)
+        tile_entry = tile_index.get(name)
+        manifest["_has_tile"] = isinstance(tile_entry, dict)
+        if isinstance(tile_entry, dict):
+            manifest["_tile_sha256"] = tile_entry.get("sha")
+            manifest["_tile_url"] = tile_entry.get("url")
+            manifest["_tile_key"] = tile_entry.get("key")
         manifest["_added_at"] = _git_first_committed(py_path)
 
         # Provenance chain — git commit graph IS the ledger.
@@ -1155,6 +1176,12 @@ def build_registry():
         manifest["_size_kb"] = round(len(canonical_file_bytes(py_path)) / 1024, 1)
         manifest["_lines"] = len(content.split('\n'))
         manifest["_has_card"] = _has_holo_card(name)
+        tile_entry = tile_index.get(name)
+        manifest["_has_tile"] = isinstance(tile_entry, dict)
+        if isinstance(tile_entry, dict):
+            manifest["_tile_sha256"] = tile_entry.get("sha")
+            manifest["_tile_url"] = tile_entry.get("url")
+            manifest["_tile_key"] = tile_entry.get("key")
         manifest["_added_at"] = _git_first_committed(py_path)
         manifest["_first_commit_sha"] = _git_first_commit_sha(py_path)
         manifest["_latest_commit_sha"] = _git_latest_commit_sha(py_path)

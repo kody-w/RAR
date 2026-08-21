@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import build_pokedex_api
 
 
 def slug(name: str) -> str:
@@ -43,3 +47,18 @@ def test_card_urls_exist_only_for_shipped_card_artifacts():
             assert api["card_url"] is None
             assert api["api_card_url"] is None
             assert not mirror.exists()
+
+
+def test_pokedex_builder_projects_canonical_tiles_and_legacy_cards():
+    registry = json.loads(
+        (ROOT / "registry.json").read_text(encoding="utf-8")
+    )
+    tile_index = json.loads(
+        (ROOT / "tiles" / "v1" / "index.json").read_text(encoding="utf-8")
+    )["tiles"]
+    build_pokedex_api._TILES = tile_index
+    for agent in registry["agents"]:
+        entry = build_pokedex_api._build_entry(agent)
+        assert entry["has_tile"] is True
+        assert entry["tile_url"] == tile_index[agent["name"]]["url"]
+        assert entry["tile_url"].endswith(".tile")

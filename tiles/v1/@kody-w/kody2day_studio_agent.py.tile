@@ -1,0 +1,154 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@kody-w/kody2day_studio_agent",
+  "seed": 43090629577852075925,
+  "name_seed": 1442884428,
+  "key": "FEDERATION BIND NOON STERN WARP STALLION GUST",
+  "version": "1.0.0",
+  "face": {
+    "name": "Kody2day Studio",
+    "title": "The Overseer",
+    "mana_cost": "{1}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Legendary Creature — Agent Resolver",
+    "rarity": "mythic",
+    "power": 6,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Generate",
+        "cost": "",
+        "text": "Make the daily Kody2day episode: the day's digest → Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts → queue with Y"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Built to serve. Designed to scale. Ready to deploy.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-ab4c\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"gl-ab4c\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-ab4c)\"/><g filter=\"url(#gl-ab4c)\"><circle cx=\"129.8\" cy=\"78.1\" r=\"17\" fill=\"#8b949e\" opacity=\"0.15\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"70.2\" cy=\"121.9\" r=\"11\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"129.8\" y1=\"78.1\" x2=\"70.2\" y2=\"121.9\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"47\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/kody2day_studio_agent",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 95,
+    "stats": {
+      "hp": 95,
+      "atk": 100,
+      "def": 85,
+      "spd": 87,
+      "int": 100
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 37
+      },
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 2,
+        "damage": 48
+      },
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 2,
+        "damage": 24
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 43090629577852075925
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/kody2day_studio_agent",
+    "version": "1.0.0",
+    "display_name": "Kody2day Studio",
+    "description": "Make the daily Kody2day episode: the day's digest → Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts → queue with YouTube metadata.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "video",
+      "youtube",
+      "shorts",
+      "education",
+      "kody2day",
+      "hyperframes",
+      "creative",
+      "autonomous"
+    ],
+    "category": "creative",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "external_prereqs": [
+      "git",
+      "claude CLI (signed in) — the writer",
+      "GitHub Copilot CLI (signed in) — the refute reviewer",
+      "Node.js with npx (HyperFrames renderer)",
+      "ffprobe",
+      "optional: VibeVoice venv for narration (else tts='none')"
+    ],
+    "example_call": {
+      "args": {
+        "action": "run",
+        "date": "2026-08-18"
+      }
+    }
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "kody2day_studio_agent.py",
+      "sha256_lf_v1": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/kody2day_studio_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@kody-w/kody2day_studio_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

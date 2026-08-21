@@ -1,0 +1,144 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@rapp/rapp_publish_agent",
+  "seed": 38408946557819563920,
+  "name_seed": 352845157,
+  "key": "COVENANT MONARCH MANDATE HEW CRESCENT CALM FROST",
+  "version": "0.2.3",
+  "face": {
+    "name": "RappPublish",
+    "title": "The Tactician",
+    "mana_cost": "{3}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Legendary Creature — Agent Sentinel",
+    "rarity": "mythic",
+    "power": 10,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Classifies a RAPP artifact (agent, rapplication, or sense) and opens the matching submission issue in its store repo via the GitHub API."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Data in. Decisions out. Humans in the loop.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-7fd65\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-7fd65\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-7fd65)\"/><g filter=\"url(#gl-7fd65)\"><line x1=\"109\" y1=\"123\" x2=\"109\" y2=\"98\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"109\" y1=\"98\" x2=\"134\" y2=\"62\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"134\" y1=\"62\" x2=\"31\" y2=\"144\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"31\" y1=\"144\" x2=\"45\" y2=\"136\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"45\" y1=\"136\" x2=\"67\" y2=\"161\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"67\" y1=\"161\" x2=\"161\" y2=\"141\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"161\" y1=\"141\" x2=\"59\" y2=\"136\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"59\" y1=\"136\" x2=\"109\" y2=\"123\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"109\" y1=\"123\" x2=\"134\" y2=\"62\" stroke=\"#8b949e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"109\" cy=\"123\" r=\"3\" fill=\"#8b949e\" opacity=\"0.36\"/><circle cx=\"109\" cy=\"98\" r=\"4\" fill=\"#8b949e\" opacity=\"0.67\"/><circle cx=\"134\" cy=\"62\" r=\"4\" fill=\"#8b949e\" opacity=\"0.63\"/><circle cx=\"31\" cy=\"144\" r=\"5\" fill=\"#8b949e\" opacity=\"0.35\"/><circle cx=\"45\" cy=\"136\" r=\"3\" fill=\"#8b949e\" opacity=\"0.44\"/><circle cx=\"67\" cy=\"161\" r=\"5\" fill=\"#8b949e\" opacity=\"0.38\"/><circle cx=\"161\" cy=\"141\" r=\"5\" fill=\"#8b949e\" opacity=\"0.48\"/><circle cx=\"59\" cy=\"136\" r=\"3\" fill=\"#8b949e\" opacity=\"0.51\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rapp/rapp_publish_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 90,
+      "spd": 95,
+      "int": 100
+    },
+    "typed_abilities": [
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 1,
+        "damage": 35
+      },
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 3,
+        "damage": 38
+      },
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 3,
+        "damage": 42
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 38408946557819563920
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/rapp_publish_agent",
+    "display_name": "RappPublish",
+    "version": "0.2.3",
+    "description": "Classifies a RAPP artifact (agent, rapplication, or sense) and opens the matching submission issue in its store repo via the GitHub API.",
+    "author": "RAPP",
+    "tags": [
+      "publish",
+      "submission",
+      "router",
+      "ecosystem",
+      "store",
+      "registry"
+    ],
+    "category": "platform",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "example_call": {
+      "args": {
+        "action": "submit",
+        "path": "/path/to/my_thing"
+      }
+    }
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "rapp_publish_agent.py",
+      "sha256_lf_v1": "fc199e9cd0c478971f5c67d818d6405d32e0035974da2187e29292bf36adc6ed",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rapp/rapp_publish_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@rapp/rapp_publish_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

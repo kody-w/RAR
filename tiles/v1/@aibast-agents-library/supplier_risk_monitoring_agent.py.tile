@@ -1,0 +1,133 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/supplier_risk_monitoring",
+  "seed": 2701276264207625678,
+  "name_seed": 628939891,
+  "key": "CHANNEL CROAK SAGE STRAIT WRATH QUASAR BLADE",
+  "version": "1.3.0",
+  "face": {
+    "name": "Supplier Risk Monitoring Agent",
+    "title": "The Overseer",
+    "mana_cost": "{2}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Creature — Agent Navigator",
+    "rarity": "uncommon",
+    "power": 7,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Computes supplier risk from simulated ERP blocked invoices and late receipts, joined to Dynamics 365 cases, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“One prompt. One purpose. Infinite execution.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-7cdc73\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-7cdc73\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-7cdc73)\"/><g filter=\"url(#gl-7cdc73)\"><polygon points=\"133.1,107.8 116.1,137.7 81.9,122.6 54.4,88.4 88.0,67.1 123.4,61.6\" fill=\"#f0883e\" opacity=\"0.1\" stroke=\"#f0883e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"110.9,107.1 101.2,115.0 84.2,108.6 82.3,93.0 99.8,74.0 110.6,92.5\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#f0883e\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/supplier_risk_monitoring",
+    "agent_types": [
+      "CRAFT",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#f85149",
+      "#58a6ff"
+    ],
+    "hp": 54,
+    "stats": {
+      "hp": 54,
+      "atk": 78,
+      "def": 37,
+      "spd": 57,
+      "int": 53
+    },
+    "typed_abilities": [
+      {
+        "name": "Optimize",
+        "text": "Tune process parameters for maximum throughput.",
+        "cost": 3,
+        "damage": 24
+      },
+      {
+        "name": "Schedule",
+        "text": "Allocate resources across timeline. Minimize conflicts.",
+        "cost": 3,
+        "damage": 10
+      }
+    ],
+    "weakness": "SHIELD",
+    "weakness_label": "Shield",
+    "resistance": "HEAL",
+    "resistance_label": "Heal",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 2701276264207625678
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/supplier_risk_monitoring",
+    "version": "1.3.0",
+    "display_name": "Supplier Risk Monitoring Agent",
+    "description": "Computes supplier risk from simulated ERP blocked invoices and late receipts, joined to Dynamics 365 cases, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "supplier",
+      "risk",
+      "procurement",
+      "supply-chain",
+      "manufacturing"
+    ],
+    "category": "manufacturing",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "supplier_risk_monitoring_agent.py",
+      "sha256_lf_v1": "93ad57d2e6b7a0d36375c39acbb1314bb7f52ebd3b2bacc6136b75fc2e85d392",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/supplier_risk_monitoring_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

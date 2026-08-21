@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 # =============================================================================
 # SECTION 1: CONSTANTS + CONFIG
@@ -57,6 +57,8 @@ RELEASE_BASE = f"https://github.com/{REPO}/releases/latest/download"
 API_BASE = f"https://api.github.com/repos/{REPO}"
 INLINE_ISSUE_COMMAND_LIMIT = 50 * 1024
 CARD_SCHEMA = "rar-card/2.0"
+TILE_SCHEMA = "rappid-tile/1.0"
+TILE_SUPERSEDES = CARD_SCHEMA
 CARD_MAX_INLINE_BYTES = 1024 * 1024
 CARD_MAX_DOCUMENT_BYTES = 4 * 1024 * 1024
 CARD_MAX_PINNED_PAYLOAD_BYTES = 64 * 1024 * 1024
@@ -65,6 +67,13 @@ CARD_REQUIRED_FIELDS = {
     "face", "manifest", "payload", "state", "origin", "dimension",
     "scan", "provenance", "signature",
 }
+CARD_OPTIONAL_FIELDS = {"table"}
+TILE_REQUIRED_FIELDS = {
+    "schema", "supersedes", "id", "seed", "name_seed", "key", "version",
+    "face", "manifest", "stands_on", "payload", "state", "origin",
+    "dimension", "scan", "provenance", "signature",
+}
+TILE_OPTIONAL_FIELDS = {"arena", "lineage"}
 CARD_ID_RE = re.compile(
     r"^@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?/[a-z0-9_]+$"
 )
@@ -1355,6 +1364,7 @@ def resolve_card(name: str) -> dict:
 
 
 _LEGACY_FACE_CACHE: dict | None = None
+_FROZEN_CARD_FACE_CACHE: dict | None = None
 
 
 def sha256_lf_v1(content: bytes | str) -> str:
@@ -1376,6 +1386,44 @@ def _legacy_faces() -> dict:
         except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
             raise ValueError(f"Could not read frozen v1 tile index: {exc}") from exc
     return _LEGACY_FACE_CACHE
+
+
+def _frozen_card_faces() -> dict:
+    """Load faces from the immutable cards/v2 tree when it is available."""
+    global _FROZEN_CARD_FACE_CACHE
+    if _FROZEN_CARD_FACE_CACHE is not None:
+        return _FROZEN_CARD_FACE_CACHE
+    root = Path(__file__).resolve().parent
+    index_path = root / "cards" / "v2" / "index.json"
+    result = {}
+    try:
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        _FROZEN_CARD_FACE_CACHE = result
+        return result
+    if not isinstance(index, dict):
+        _FROZEN_CARD_FACE_CACHE = result
+        return result
+    for agent_id, entry in index.items():
+        if not isinstance(entry, dict) or not isinstance(entry.get("url"), str):
+            continue
+        parsed = urllib.parse.urlparse(entry["url"])
+        marker = "/cards/v2/"
+        if marker not in parsed.path:
+            continue
+        relative = Path(urllib.parse.unquote(parsed.path.split(marker, 1)[1]))
+        if relative.is_absolute() or ".." in relative.parts:
+            continue
+        try:
+            card = json.loads(
+                (index_path.parent / relative).read_text(encoding="utf-8")
+            )
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            continue
+        if isinstance(card, dict) and isinstance(card.get("face"), dict):
+            result[agent_id] = card["face"]
+    _FROZEN_CARD_FACE_CACHE = result
+    return result
 
 
 def _manifest_for_card(manifest: dict) -> dict:
@@ -1648,7 +1696,7 @@ def validate_card(card: object, *, serialized_size: int | None = None) -> list[s
 
     keys = set(card)
     missing = CARD_REQUIRED_FIELDS - keys
-    extra = keys - CARD_REQUIRED_FIELDS
+    extra = keys - CARD_REQUIRED_FIELDS - CARD_OPTIONAL_FIELDS
     if missing:
         errors.append(f"Missing required rappid tile field(s): {', '.join(sorted(missing))}")
     if extra:
@@ -1736,6 +1784,15 @@ def validate_card(card: object, *, serialized_size: int | None = None) -> list[s
                 errors.append(f"origin.{field} must be a string or null")
     if card.get("dimension") is not None and not isinstance(card["dimension"], dict):
         errors.append("dimension must be null or an object")
+    table = card.get("table")
+    if table is not None:
+        if not isinstance(table, dict) or set(table) != {"seat", "faceUp"}:
+            errors.append("table must contain only seat and faceUp")
+        else:
+            if not _is_int(table.get("seat")) or table["seat"] < 0:
+                errors.append("table.seat must be a non-negative integer")
+            if type(table.get("faceUp")) is not bool:
+                errors.append("table.faceUp must be true or false")
 
     scan = card.get("scan")
     scan_url = None
@@ -1888,7 +1945,9 @@ def _verify_card_identity(card: dict) -> list[str]:
         if expected_seed != seed:
             errors.append("seed disagrees with manifest")
 
-    legacy = _legacy_faces().get(agent_id)
+    legacy = _frozen_card_faces().get(agent_id)
+    if legacy is None:
+        legacy = _legacy_faces().get(agent_id)
     if legacy is not None:
         if face != legacy:
             errors.append("face disagrees with the frozen v1 rappid tile")
@@ -2072,93 +2131,19 @@ def pack_card(
     pin_url: str | None = None,
     output_path: str | os.PathLike | None = None,
 ) -> str:
-    """Pack an agent and optional egg into a verified rappid tile."""
-    path = Path(agent_path)
-    manifest = extract_manifest(str(path))
-    if manifest is None:
-        raise ValueError(f"No __manifest__ found in {path}")
-    manifest_errors = validate_manifest(str(path), manifest)
-    if manifest_errors:
-        raise ValueError("Invalid manifest: " + "; ".join(manifest_errors))
-    if inline is None:
-        inline = pin_url is None
-    if pin_url is not None and not inline:
-        pin_errors: list[str] = []
-        _validate_pinned_url(pin_url, "payload[0]", pin_errors)
-        if pin_errors:
-            raise ValueError("; ".join(pin_errors))
-    if pin_url is not None and inline:
-        raise ValueError("Choose inline payload or pin_url, not both")
-
-    try:
-        agent_bytes = path.read_bytes()
-        agent_text = agent_bytes.decode("utf-8")
-    except OSError as exc:
-        raise ValueError(f"Could not read agent {path}: {exc}") from exc
-    except UnicodeDecodeError as exc:
-        raise ValueError(f"Agent {path} must be UTF-8") from exc
-    if pin_url is not None:
-        pinned_bytes = _read_url_bytes(
-            pin_url,
-            max_bytes=CARD_MAX_PINNED_PAYLOAD_BYTES,
-        )
-        try:
-            pinned_bytes.decode("utf-8")
-        except UnicodeDecodeError as exc:
-            raise ValueError("Pinned agent payload must be UTF-8") from exc
-        pinned_digest = sha256_lf_v1(pinned_bytes)
-        local_digest = sha256_lf_v1(agent_bytes)
-        if pinned_digest != local_digest:
-            raise ValueError(
-                "Pinned agent payload does not match the local agent "
-                f"({pinned_digest} != {local_digest})"
-            )
-
-    face = _legacy_faces().get(manifest["name"])
-    face = copy.deepcopy(face) if face is not None else mint_card(str(path))
-    agent_payload = {
-        "kind": "agent.py",
-        "filename": path.name,
-        "sha256_lf_v1": sha256_lf_v1(agent_bytes),
-    }
-    if pin_url is not None:
-        agent_payload["url"] = pin_url
-    else:
-        agent_payload["inline"] = agent_text
-    payload = [agent_payload]
-
-    if egg_path is not None:
-        egg = Path(egg_path)
-        try:
-            egg_bytes = egg.read_bytes()
-        except OSError as exc:
-            raise ValueError(f"Could not read egg {egg}: {exc}") from exc
-        payload.append({
-            "kind": "egg",
-            "filename": egg.name,
-            "sha256": hashlib.sha256(egg_bytes).hexdigest(),
-            "inline": base64.b64encode(egg_bytes).decode("ascii"),
-        })
-
-    card = to_v2(face, manifest, payload=payload)
-    destination = (
-        Path(output_path)
-        if output_path is not None
-        else path.with_name(f"{path.name}.card")
+    """Deprecated alias for :func:`pack_tile`; writers emit ``.tile``."""
+    print(
+        "DEPRECATED: pack_card() writes rappid-tile/1.0; use pack_tile().",
+        file=sys.stderr,
     )
-    expected_filename = expected_card_filename(card)
-    if destination.name != expected_filename:
-        raise ValueError(
-            f"Output filename must be {expected_filename!r}, "
-            f"got {destination.name!r}"
-        )
-    raw = _card_json_bytes(card)
-    size_errors = validate_card(card, serialized_size=len(raw))
-    if size_errors:
-        raise ValueError("Rappid tile packing failed: " + "; ".join(size_errors))
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_bytes(raw)
-    return str(destination)
+    resources = [egg_path] if egg_path is not None else None
+    return pack_tile(
+        agent_path,
+        resources=resources,
+        inline=inline,
+        pin_url=pin_url,
+        output_path=output_path,
+    )
 
 
 def unpack_card(
@@ -2286,6 +2271,1221 @@ def scan_card(source: str | os.PathLike) -> dict:
             "Rappid tile scan expects a URL, file, numeric seed, or seven words"
         )
     return verify_card(_resolve_indexed_card(seed))
+
+
+def _tile_json_bytes(tile: dict) -> bytes:
+    return (
+        json.dumps(tile, ensure_ascii=False, indent=2, separators=(",", ": "))
+        + "\n"
+    ).encode("utf-8")
+
+
+def expected_tile_filename(tile: dict) -> str:
+    """Return the canonical ``.tile`` filename for a tile document."""
+    payload = tile.get("payload")
+    if isinstance(payload, list) and payload:
+        primary = payload[0]
+        if (
+            not isinstance(primary, dict)
+            or primary.get("role") != "primary"
+            or not isinstance(primary.get("filename"), str)
+        ):
+            raise ValueError("Primary payload must be payload[0] with a filename")
+        return f"{primary['filename']}.tile"
+    agent_id = tile.get("id")
+    if not isinstance(agent_id, str) or "/" not in agent_id:
+        raise ValueError("Face-only rappid tile must have a valid id")
+    return f"{agent_id.split('/', 1)[1]}.tile"
+
+
+def derive_stands_on(manifest: dict) -> dict:
+    """Derive the honest local runtime footprint from manifest declarations."""
+    python_requirement = manifest.get(
+        "python",
+        manifest.get("requires_python", ">=3.11"),
+    )
+    network = manifest.get("network", False)
+    filesystem = manifest.get("filesystem", "agent-directory")
+    tools = manifest.get("tools", [])
+    if not isinstance(python_requirement, str) or not python_requirement.strip():
+        raise ValueError("manifest python requirement must be non-empty text")
+    if type(network) is not bool:
+        raise ValueError("manifest network requirement must be true or false")
+    if filesystem not in {"none", "agent-directory"}:
+        raise ValueError(
+            "manifest filesystem requirement must be none or agent-directory"
+        )
+    if not isinstance(tools, list) or not all(
+        isinstance(tool, str) and tool for tool in tools
+    ):
+        raise ValueError("manifest tools must be an array of non-empty strings")
+    return {
+        "kernel": "rapp/1",
+        "python": python_requirement.strip(),
+        "network": network,
+        "filesystem": filesystem,
+        "tools": list(tools),
+    }
+
+
+_PYTHON_REQUIREMENT_RE = re.compile(
+    r"^(~=|>=|<=|==|!=|>|<)?\s*"
+    r"([0-9]+(?:\.[0-9]+){0,2})(\.\*)?$"
+)
+
+
+def _python_requirement_satisfied(requirement: str) -> bool:
+    current = tuple(sys.version_info[:3])
+    for clause in requirement.split(","):
+        match = _PYTHON_REQUIREMENT_RE.fullmatch(clause.strip())
+        if match is None:
+            raise ValueError(
+                f"unsupported Python requirement syntax {requirement!r}"
+            )
+        operator = match.group(1) or "=="
+        target_parts = tuple(int(part) for part in match.group(2).split("."))
+        wildcard = match.group(3) is not None
+        if wildcard:
+            if operator not in {"==", "!="}:
+                raise ValueError(
+                    f"wildcard Python requirement needs == or !=: {requirement!r}"
+                )
+            matches_prefix = current[:len(target_parts)] == target_parts
+            if (operator == "==" and not matches_prefix) or (
+                operator == "!=" and matches_prefix
+            ):
+                return False
+            continue
+        target = target_parts + (0,) * (3 - len(target_parts))
+        if operator == "~=":
+            compatible_prefix = (
+                target_parts[:-1]
+                if len(target_parts) > 2
+                else target_parts[:1]
+            )
+            if (
+                current < target
+                or current[:len(compatible_prefix)] != compatible_prefix
+            ):
+                return False
+            continue
+        comparisons = {
+            ">=": current >= target,
+            "<=": current <= target,
+            "==": current == target,
+            "!=": current != target,
+            ">": current > target,
+            "<": current < target,
+        }
+        if not comparisons[operator]:
+            return False
+    return True
+
+
+def validate_tile(tile: object, *, serialized_size: int | None = None) -> list[str]:
+    """Validate the dependency-free subset of ``rappid-tile/1.0``."""
+    errors: list[str] = []
+    if not isinstance(tile, dict):
+        return ["Rappid tile document must be a JSON object"]
+
+    keys = set(tile)
+    missing = TILE_REQUIRED_FIELDS - keys
+    extra = keys - TILE_REQUIRED_FIELDS - TILE_OPTIONAL_FIELDS
+    if missing:
+        errors.append(
+            "Missing required rappid tile field(s): "
+            + ", ".join(sorted(missing))
+        )
+    if extra:
+        errors.append(
+            "Unknown rappid tile field(s): " + ", ".join(sorted(extra))
+        )
+    if missing:
+        return errors
+
+    if tile.get("schema") != TILE_SCHEMA:
+        errors.append(f"schema must be {TILE_SCHEMA}")
+    if tile.get("supersedes") != TILE_SUPERSEDES:
+        errors.append(f"supersedes must be {TILE_SUPERSEDES}")
+    agent_id = tile.get("id")
+    if not isinstance(agent_id, str) or not CARD_ID_RE.fullmatch(agent_id):
+        errors.append("id must match @publisher/lowercase_snake_case")
+    if not _is_int(tile.get("seed")) or tile["seed"] < 0:
+        errors.append("seed must be a non-negative integer")
+    if (
+        not _is_int(tile.get("name_seed"))
+        or not 0 <= tile["name_seed"] <= 0xFFFFFFFF
+    ):
+        errors.append("name_seed must be a 32-bit unsigned integer")
+    if (
+        not isinstance(tile.get("key"), str)
+        or not re.fullmatch(r"[A-Z]+(?: [A-Z]+){6}", tile["key"])
+    ):
+        errors.append("key must contain exactly seven uppercase words")
+    if (
+        not isinstance(tile.get("version"), str)
+        or not CARD_VERSION_RE.fullmatch(tile["version"])
+    ):
+        errors.append("version must be semantic version text")
+
+    face = tile.get("face")
+    if not isinstance(face, dict):
+        errors.append("face must be an object")
+    elif not _is_int(face.get("seed")) or face["seed"] < 0:
+        errors.append("face.seed must be a non-negative integer")
+    else:
+        for field in ("agent_name", "name", "avatar_svg"):
+            if field in face and not isinstance(face[field], str):
+                errors.append(f"face.{field} must be a string")
+
+    manifest = tile.get("manifest")
+    if not isinstance(manifest, dict):
+        errors.append("manifest must be an object")
+    else:
+        for field in REQUIRED_MANIFEST_FIELDS:
+            if field not in manifest:
+                errors.append(f"manifest: Missing required field: {field}")
+        for field in (
+            "schema", "name", "version", "display_name",
+            "description", "author", "category",
+        ):
+            if field in manifest and not isinstance(manifest[field], str):
+                errors.append(f"manifest.{field} must be a string")
+        for field in ("tags", "requires_env", "dependencies"):
+            if field in manifest and (
+                not isinstance(manifest[field], list)
+                or not all(isinstance(value, str) for value in manifest[field])
+            ):
+                errors.append(f"manifest.{field} must be an array of strings")
+
+    stands_on = tile.get("stands_on")
+    footprint_fields = {
+        "kernel", "python", "network", "filesystem", "tools",
+    }
+    if not isinstance(stands_on, dict):
+        errors.append("stands_on must be an object")
+    else:
+        footprint_missing = footprint_fields - set(stands_on)
+        footprint_extra = set(stands_on) - footprint_fields
+        if footprint_missing:
+            errors.append(
+                "stands_on is missing: " + ", ".join(sorted(footprint_missing))
+            )
+        if footprint_extra:
+            errors.append(
+                "stands_on has unknown field(s): "
+                + ", ".join(sorted(footprint_extra))
+            )
+        if not isinstance(stands_on.get("kernel"), str):
+            errors.append("stands_on.kernel must be a string")
+        python_requirement = stands_on.get("python")
+        if not isinstance(python_requirement, str):
+            errors.append("stands_on.python must be a string")
+        else:
+            try:
+                _python_requirement_satisfied(python_requirement)
+            except ValueError as exc:
+                errors.append(f"stands_on.python: {exc}")
+        if type(stands_on.get("network")) is not bool:
+            errors.append("stands_on.network must be true or false")
+        if stands_on.get("filesystem") not in {"none", "agent-directory"}:
+            errors.append(
+                "stands_on.filesystem must be none or agent-directory"
+            )
+        tools = stands_on.get("tools")
+        if not isinstance(tools, list) or not all(
+            isinstance(tool, str) and tool for tool in tools
+        ):
+            errors.append(
+                "stands_on.tools must be an array of non-empty strings"
+            )
+        elif len(tools) != len(set(tools)):
+            errors.append("stands_on.tools must not contain duplicates")
+
+    if tile.get("state") not in {"dormant", "active"}:
+        errors.append("state must be dormant or active")
+    origin = tile.get("origin")
+    if origin is not None and (
+        not isinstance(origin, dict)
+        or not isinstance(origin.get("kind"), str)
+        or not origin.get("kind")
+    ):
+        errors.append("origin must be null or an object with a non-empty kind")
+    elif isinstance(origin, dict):
+        for field in ("brainstem", "twin", "parkedAt"):
+            if field in origin and origin[field] is not None and not isinstance(
+                origin[field], str
+            ):
+                errors.append(f"origin.{field} must be a string or null")
+    if tile.get("dimension") is not None and not isinstance(
+        tile["dimension"], dict
+    ):
+        errors.append("dimension must be null or an object")
+
+    scan = tile.get("scan")
+    scan_url = None
+    if not isinstance(scan, dict):
+        errors.append("scan must be an object")
+    else:
+        scan_extra = set(scan) - {"url", "qr"}
+        if scan_extra:
+            errors.append(
+                f"Unknown scan field(s): {', '.join(sorted(scan_extra))}"
+            )
+        scan_url = scan.get("url")
+        if (
+            not isinstance(scan_url, str)
+            or not re.fullmatch(r"(?:https?|file|rar)://.+", scan_url)
+        ):
+            errors.append("scan.url must use http, https, file, or rar")
+        if "qr" in scan and not isinstance(scan["qr"], str):
+            errors.append("scan.qr must be a string")
+    if isinstance(scan_url, str) and scan_url.startswith(("http://", "https://")):
+        if tile.get("dimension") is not None:
+            errors.append("Published rappid tiles must have dimension set to null")
+        if tile.get("state") != "dormant":
+            errors.append("Published rappid tiles must be dormant")
+
+    provenance = tile.get("provenance")
+    if not isinstance(provenance, dict):
+        errors.append("provenance must be an object")
+    else:
+        if set(provenance) != {"minted_by", "registry_revision"}:
+            errors.append(
+                "provenance must contain only minted_by and registry_revision"
+            )
+        if (
+            not isinstance(provenance.get("minted_by"), str)
+            or not provenance.get("minted_by")
+        ):
+            errors.append("provenance.minted_by must be a non-empty string")
+        revision = provenance.get("registry_revision")
+        if revision is not None and (
+            not isinstance(revision, str)
+            or not re.fullmatch(r"[0-9a-f]{7,40}", revision)
+        ):
+            errors.append(
+                "provenance.registry_revision must be null or a Git revision"
+            )
+    if tile.get("signature") is not None and not isinstance(
+        tile["signature"], (dict, str)
+    ):
+        errors.append("signature must be null, an object, or a string")
+
+    arena = tile.get("arena")
+    if arena is not None:
+        if not isinstance(arena, dict) or set(arena) != {"seat", "faceUp"}:
+            errors.append("arena must contain only seat and faceUp")
+        else:
+            if not _is_int(arena.get("seat")) or arena["seat"] < 0:
+                errors.append("arena.seat must be a non-negative integer")
+            if type(arena.get("faceUp")) is not bool:
+                errors.append("arena.faceUp must be true or false")
+
+    lineage = tile.get("lineage")
+    if lineage is not None:
+        lineage_fields = {
+            "ancestor_seed", "ring", "verified_by", "verdict",
+        }
+        if not isinstance(lineage, dict) or set(lineage) != lineage_fields:
+            errors.append(
+                "lineage must contain ancestor_seed, ring, verified_by, and verdict"
+            )
+        else:
+            if (
+                not _is_int(lineage.get("ancestor_seed"))
+                or lineage["ancestor_seed"] < 0
+            ):
+                errors.append(
+                    "lineage.ancestor_seed must be a non-negative integer"
+                )
+            if not _is_int(lineage.get("ring")) or lineage["ring"] < 0:
+                errors.append("lineage.ring must be a non-negative integer")
+            for field in ("verified_by", "verdict"):
+                if not isinstance(lineage.get(field), str) or not lineage[field]:
+                    errors.append(f"lineage.{field} must be non-empty text")
+
+    payload = tile.get("payload")
+    has_inline = False
+    filenames: set[str] = set()
+    primary_count = 0
+    if not isinstance(payload, list):
+        errors.append("payload must be an array")
+    else:
+        for index, item in enumerate(payload):
+            where = f"payload[{index}]"
+            if not isinstance(item, dict):
+                errors.append(f"{where} must be an object")
+                continue
+            allowed = {
+                "role", "kind", "filename", "sha256_lf_v1", "sha256",
+                "inline", "inline_base64", "url",
+            }
+            item_extra = set(item) - allowed
+            if item_extra:
+                errors.append(
+                    f"{where} has unknown field(s): "
+                    + ", ".join(sorted(item_extra))
+                )
+            role = item.get("role")
+            if role not in {"primary", "resource"}:
+                errors.append(f"{where}.role must be primary or resource")
+            elif role == "primary":
+                primary_count += 1
+                if index != 0:
+                    errors.append("payload[0] must be the primary payload")
+            elif index == 0:
+                errors.append("payload[0] must be the primary payload")
+            kind = item.get("kind")
+            if kind not in {"agent.py", "egg", "file"}:
+                errors.append(f"{where}.kind must be agent.py, egg, or file")
+            filename = item.get("filename")
+            if (
+                not isinstance(filename, str)
+                or not filename
+                or Path(filename).name != filename
+                or "/" in filename
+                or "\\" in filename
+            ):
+                errors.append(f"{where}.filename must be a basename")
+            elif filename in filenames:
+                errors.append(f"{where}.filename is duplicated")
+            else:
+                filenames.add(filename)
+
+            sources = [
+                key for key in ("inline", "inline_base64", "url")
+                if key in item
+            ]
+            if len(sources) != 1:
+                errors.append(
+                    f"{where} must contain exactly one of inline, "
+                    "inline_base64, or url"
+                )
+            elif sources[0] == "inline":
+                has_inline = True
+                if not isinstance(item["inline"], str):
+                    errors.append(f"{where}.inline must be a string")
+                if "sha256_lf_v1" not in item or "sha256" in item:
+                    errors.append(
+                        f"{where}.inline requires sha256_lf_v1 only"
+                    )
+            elif sources[0] == "inline_base64":
+                has_inline = True
+                if not isinstance(item["inline_base64"], str):
+                    errors.append(f"{where}.inline_base64 must be a string")
+                if "sha256" not in item or "sha256_lf_v1" in item:
+                    errors.append(
+                        f"{where}.inline_base64 requires sha256 only"
+                    )
+            elif not isinstance(item["url"], str):
+                errors.append(f"{where}.url must be a string")
+            else:
+                _validate_pinned_url(item["url"], where, errors)
+
+            digest_keys = [
+                key for key in ("sha256_lf_v1", "sha256") if key in item
+            ]
+            if len(digest_keys) != 1:
+                errors.append(
+                    f"{where} must contain exactly one payload digest"
+                )
+            else:
+                digest = item[digest_keys[0]]
+                if (
+                    not isinstance(digest, str)
+                    or not CARD_DIGEST_RE.fullmatch(digest)
+                ):
+                    errors.append(
+                        f"{where}.{digest_keys[0]} must be a lowercase SHA-256"
+                    )
+                if kind == "agent.py" and digest_keys[0] != "sha256_lf_v1":
+                    errors.append(f"{where}.agent.py must use sha256_lf_v1")
+                if kind == "egg" and digest_keys[0] != "sha256":
+                    errors.append(f"{where}.egg must use sha256")
+        if payload and primary_count != 1:
+            errors.append("payload must contain exactly one primary payload")
+
+    if (
+        has_inline
+        and serialized_size is not None
+        and serialized_size > CARD_MAX_INLINE_BYTES
+    ):
+        errors.append(
+            f"Rappid tile with inline payload exceeds {CARD_MAX_INLINE_BYTES} bytes"
+        )
+    return errors
+
+
+def _verify_tile_identity(tile: dict) -> list[str]:
+    identity = {
+        "id": tile["id"],
+        "seed": tile["seed"],
+        "name_seed": tile["name_seed"],
+        "incantation": tile["key"],
+        "version": tile["version"],
+        "face": tile["face"],
+        "manifest": tile["manifest"],
+    }
+    errors = _verify_card_identity(identity)
+    try:
+        expected_footprint = derive_stands_on(tile["manifest"])
+    except ValueError as exc:
+        errors.append(f"Could not derive stands_on from manifest: {exc}")
+    else:
+        for field, expected in expected_footprint.items():
+            if tile["stands_on"].get(field) != expected:
+                errors.append(
+                    f"stands_on.{field} disagrees with the manifest-derived "
+                    "footprint"
+                )
+    return errors
+
+
+def _verify_stands_on(
+    stands_on: dict,
+    *,
+    available_tools: set[str] | None = None,
+) -> list[str]:
+    errors: list[str] = []
+    if stands_on.get("kernel") != "rapp/1":
+        errors.append(
+            "stands_on.kernel unsatisfied: this reader provides rapp/1, "
+            f"tile requires {stands_on.get('kernel')}"
+        )
+    requirement = stands_on.get("python")
+    if isinstance(requirement, str):
+        try:
+            satisfied = _python_requirement_satisfied(requirement)
+        except ValueError as exc:
+            errors.append(f"stands_on.python unsatisfied: {exc}")
+        else:
+            if not satisfied:
+                current = ".".join(str(part) for part in sys.version_info[:3])
+                errors.append(
+                    "stands_on.python unsatisfied: "
+                    f"this reader has {current}, tile requires {requirement}"
+                )
+    if stands_on.get("filesystem") not in {"none", "agent-directory"}:
+        errors.append(
+            "stands_on.filesystem unsatisfied: "
+            f"{stands_on.get('filesystem')} is unsupported"
+        )
+    if available_tools is not None:
+        required = set(stands_on.get("tools") or [])
+        missing = sorted(required - available_tools)
+        if missing:
+            errors.append(
+                "stands_on.tools unsatisfied: missing " + ", ".join(missing)
+            )
+    return errors
+
+
+def _tile_payload_bytes(item: dict) -> bytes:
+    if "url" in item:
+        return _read_url_bytes(
+            item["url"],
+            max_bytes=CARD_MAX_PINNED_PAYLOAD_BYTES,
+        )
+    if "inline" in item:
+        try:
+            return item["inline"].encode("utf-8")
+        except UnicodeEncodeError as exc:
+            raise ValueError(f"{item['filename']} is not valid UTF-8") from exc
+    try:
+        return base64.b64decode(item["inline_base64"], validate=True)
+    except (binascii.Error, ValueError) as exc:
+        raise ValueError(f"{item['filename']} is not valid base64") from exc
+
+
+def tile_offline_readiness(tile: dict) -> dict:
+    """Describe whether every required payload is inline and hash-valid."""
+    pinned_payloads = sum(
+        1
+        for item in tile.get("payload", [])
+        if isinstance(item, dict) and "url" in item
+    )
+    invalid_payloads = 0
+    for item in tile.get("payload", []):
+        if not isinstance(item, dict) or "url" in item:
+            continue
+        try:
+            content = _tile_payload_bytes(item)
+            if "sha256_lf_v1" in item:
+                content.decode("utf-8")
+                actual = sha256_lf_v1(content)
+                expected = item["sha256_lf_v1"]
+            else:
+                actual = hashlib.sha256(content).hexdigest()
+                expected = item["sha256"]
+        except (KeyError, TypeError, ValueError, UnicodeDecodeError):
+            invalid_payloads += 1
+            continue
+        if actual != expected:
+            invalid_payloads += 1
+    ready = pinned_payloads == 0 and invalid_payloads == 0
+    if ready:
+        status = "offline: ready"
+    elif pinned_payloads:
+        status = f"offline: needs {pinned_payloads} pinned payload(s)"
+    else:
+        status = f"offline: invalid {invalid_payloads} payload(s)"
+    return {
+        "ready": ready,
+        "pinned_payloads": pinned_payloads,
+        "invalid_payloads": invalid_payloads,
+        "status": status,
+    }
+
+
+def tile_downgrade_report(tile: dict) -> dict:
+    """Report fields/resources a ``rar-card/2.0`` downgrade would discard."""
+    losses = ["stands_on"]
+    if tile.get("lineage") is not None:
+        losses.append("lineage")
+    resource_count = sum(
+        1
+        for item in tile.get("payload", [])[1:]
+        if isinstance(item, dict)
+    )
+    if resource_count:
+        losses.append(f"{resource_count} resource payload(s)")
+    return {
+        "lossy": bool(losses),
+        "drops": losses,
+        "renames": {"arena": "table"} if "arena" in tile else {},
+    }
+
+
+def verify_tile(
+    tile_or_source: dict | str | os.PathLike,
+    *,
+    fetch_payloads: bool = True,
+    return_payload_bytes: bool = False,
+    available_tools: set[str] | None = None,
+) -> dict:
+    """Verify a tile, while continuing to accept legacy ``.card`` documents."""
+    if isinstance(tile_or_source, dict):
+        document = copy.deepcopy(tile_or_source)
+        source = "<memory>"
+        schema = document.get("schema")
+        raw = (
+            _card_json_bytes(document)
+            if schema == CARD_SCHEMA
+            else _tile_json_bytes(document)
+        )
+    else:
+        document, raw, source = _read_card_document(tile_or_source)
+        schema = document.get("schema") if isinstance(document, dict) else None
+
+    if schema == CARD_SCHEMA:
+        result = verify_card(
+            document if source == "<memory>" else tile_or_source,
+            fetch_payloads=fetch_payloads,
+            return_payload_bytes=return_payload_bytes,
+        )
+        result["format"] = CARD_SCHEMA
+        result["document"] = result["card"]
+        return result
+    if schema != TILE_SCHEMA:
+        raise ValueError(
+            "Rappid tile verification failed: schema must be "
+            f"{TILE_SCHEMA} or legacy {CARD_SCHEMA}"
+        )
+
+    errors = []
+    if len(raw) > CARD_MAX_DOCUMENT_BYTES:
+        errors.append(
+            f"Rappid tile document exceeds {CARD_MAX_DOCUMENT_BYTES} bytes"
+        )
+    errors.extend(validate_tile(document, serialized_size=len(raw)))
+    if not errors:
+        errors.extend(_verify_tile_identity(document))
+        errors.extend(
+            _verify_stands_on(
+                document["stands_on"],
+                available_tools=available_tools,
+            )
+        )
+    if not errors and source != "<memory>":
+        actual_filename = _source_card_filename(source)
+        expected_filename = expected_tile_filename(document)
+        if actual_filename != expected_filename:
+            errors.append(
+                f"rappid tile filename {actual_filename!r} disagrees with "
+                f"primary payload filename {expected_filename!r}"
+            )
+    if errors:
+        raise ValueError("Rappid tile verification failed: " + "; ".join(errors))
+
+    payloads = []
+    for item in document["payload"]:
+        digest_key = (
+            "sha256_lf_v1" if "sha256_lf_v1" in item else "sha256"
+        )
+        if "url" in item and not fetch_payloads:
+            payloads.append({
+                "role": item["role"],
+                "kind": item["kind"],
+                "filename": item["filename"],
+                "algorithm": digest_key.replace("_", "-"),
+                "hash": item[digest_key],
+                "source": item["url"],
+                "verified": False,
+            })
+            continue
+
+        content = _tile_payload_bytes(item)
+        if digest_key == "sha256_lf_v1":
+            try:
+                content.decode("utf-8")
+            except UnicodeDecodeError as exc:
+                raise ValueError(
+                    "Rappid tile verification failed: "
+                    f"{item['filename']} is not UTF-8"
+                ) from exc
+            digest = sha256_lf_v1(content)
+        else:
+            digest = hashlib.sha256(content).hexdigest()
+        if digest != item[digest_key]:
+            raise ValueError(
+                "Rappid tile verification failed: "
+                f"{item['filename']} {digest_key} mismatch "
+                f"(expected {item[digest_key]}, got {digest})"
+            )
+        payload_result = {
+            "role": item["role"],
+            "kind": item["kind"],
+            "filename": item["filename"],
+            "algorithm": digest_key.replace("_", "-"),
+            "hash": digest,
+            "source": item.get("url", "inline"),
+            "verified": True,
+        }
+        if return_payload_bytes:
+            payload_result["_bytes"] = content
+        payloads.append(payload_result)
+
+    return {
+        "valid": True,
+        "format": TILE_SCHEMA,
+        "source": source,
+        "document": document,
+        "tile": document,
+        "payloads": payloads,
+        "offline": tile_offline_readiness(document),
+        "footprint": copy.deepcopy(document["stands_on"]),
+        "downgrade": tile_downgrade_report(document),
+    }
+
+
+def _payload_with_roles(payload: list[dict] | None) -> list[dict]:
+    result = []
+    for index, item in enumerate(payload or []):
+        converted = copy.deepcopy(item)
+        converted["role"] = "primary" if index == 0 else "resource"
+        result.append(converted)
+    return result
+
+
+def to_tile(
+    face: dict,
+    manifest: dict,
+    *,
+    payload: list[dict] | None = None,
+    state: str = "dormant",
+    arena: dict | None = None,
+    origin: dict | None = None,
+    dimension: dict | None = None,
+    lineage: dict | None = None,
+    scan_url: str | None = None,
+    registry_revision: str | None = None,
+    minted_by: str | None = None,
+) -> dict:
+    """Wrap a deterministic face in a validated ``rappid-tile/1.0`` document."""
+    if not isinstance(face, dict):
+        raise ValueError("Rappid tile face must be an object")
+    if not isinstance(manifest, dict):
+        raise ValueError("Manifest must be an object")
+    clean_manifest = _manifest_for_card(manifest)
+    agent_id = clean_manifest.get("name")
+    if not isinstance(agent_id, str) or not CARD_ID_RE.fullmatch(agent_id):
+        raise ValueError("Manifest name must be a valid @publisher/slug id")
+    seed = face.get("seed")
+    if not _is_int(seed) or seed < 0:
+        raise ValueError(
+            "Rappid tile face must contain a non-negative integer seed"
+        )
+    if scan_url is None:
+        scan_url = f"rar://{agent_id}@{seed}"
+    tile = {
+        "schema": TILE_SCHEMA,
+        "supersedes": TILE_SUPERSEDES,
+        "id": agent_id,
+        "seed": seed,
+        "name_seed": seed_hash(agent_id) & 0xFFFFFFFF,
+        "key": seed_to_words(seed),
+        "version": clean_manifest.get("version", "1.0.0"),
+        "face": copy.deepcopy(face),
+        "manifest": clean_manifest,
+        "stands_on": derive_stands_on(clean_manifest),
+        "payload": _payload_with_roles(payload),
+        "state": state,
+        "origin": copy.deepcopy(origin),
+        "dimension": copy.deepcopy(dimension),
+        "scan": {"url": scan_url},
+        "provenance": {
+            "minted_by": minted_by or f"rapp_sdk {__version__}",
+            "registry_revision": (
+                registry_revision
+                if registry_revision is not None
+                else _git_revision()
+            ),
+        },
+        "signature": None,
+    }
+    if arena is not None:
+        tile["arena"] = copy.deepcopy(arena)
+    if lineage is not None:
+        tile["lineage"] = copy.deepcopy(lineage)
+    verify_tile(tile, fetch_payloads=False)
+    return tile
+
+
+def card_to_tile(
+    card_or_source: dict | str | os.PathLike,
+    *,
+    scan_url: str | None = None,
+    fetch_payloads: bool = True,
+) -> dict:
+    """Mechanically and losslessly migrate one ``rar-card/2.0`` document."""
+    verified = verify_card(
+        card_or_source,
+        fetch_payloads=fetch_payloads,
+    )
+    card = verified["card"]
+    payload = []
+    for index, item in enumerate(card["payload"]):
+        converted = {
+            "role": "primary" if index == 0 else "resource",
+            "kind": item["kind"],
+            "filename": item["filename"],
+        }
+        for field in ("sha256_lf_v1", "sha256", "url"):
+            if field in item:
+                converted[field] = copy.deepcopy(item[field])
+        if "inline" in item:
+            target = "inline_base64" if "sha256" in item else "inline"
+            converted[target] = item["inline"]
+        payload.append(converted)
+
+    if scan_url is None:
+        original_url = card["scan"]["url"]
+        scan_url = original_url.replace("/cards/v2/", "/tiles/v1/")
+        if scan_url.endswith(".card"):
+            scan_url = scan_url.removesuffix(".card") + ".tile"
+    provenance = card["provenance"]
+    tile = {
+        "schema": TILE_SCHEMA,
+        "supersedes": TILE_SUPERSEDES,
+        "id": card["id"],
+        "seed": card["seed"],
+        "name_seed": card["name_seed"],
+        "key": card["incantation"],
+        "version": card["version"],
+        "face": copy.deepcopy(card["face"]),
+        "manifest": copy.deepcopy(card["manifest"]),
+        "stands_on": derive_stands_on(card["manifest"]),
+        "payload": payload,
+        "state": card["state"],
+        "origin": copy.deepcopy(card["origin"]),
+        "dimension": copy.deepcopy(card["dimension"]),
+        "scan": {
+            **copy.deepcopy(card["scan"]),
+            "url": scan_url,
+        },
+        "provenance": {
+            "minted_by": provenance["minted_by"],
+            "registry_revision": provenance["rar_revision"],
+        },
+        "signature": copy.deepcopy(card["signature"]),
+    }
+    if "table" in card:
+        tile["arena"] = copy.deepcopy(card["table"])
+    verify_tile(tile, fetch_payloads=fetch_payloads)
+    return tile
+
+
+def _default_tile_output(agent_path: Path, manifest: dict) -> Path:
+    publisher = manifest["name"].split("/", 1)[0]
+    return (
+        Path(__file__).resolve().parent
+        / "tiles"
+        / "v1"
+        / publisher
+        / f"{agent_path.name}.tile"
+    )
+
+
+def pack_tile(
+    agent_path: str | os.PathLike,
+    *,
+    resources: list[str | os.PathLike] | None = None,
+    inline: bool | None = None,
+    pin_url: str | None = None,
+    output_path: str | os.PathLike | None = None,
+) -> str:
+    """Pack an agent and optional resources into a verified ``.tile``."""
+    path = Path(agent_path)
+    manifest = extract_manifest(str(path))
+    if manifest is None:
+        raise ValueError(f"No __manifest__ found in {path}")
+    manifest_errors = validate_manifest(str(path), manifest)
+    if manifest_errors:
+        raise ValueError("Invalid manifest: " + "; ".join(manifest_errors))
+    if inline is None:
+        inline = pin_url is None
+    if pin_url is not None and inline:
+        raise ValueError("Choose inline payload or pin_url, not both")
+    if pin_url is None and inline is False:
+        raise ValueError("A non-inline primary payload requires pin_url")
+    if pin_url is not None:
+        pin_errors: list[str] = []
+        _validate_pinned_url(pin_url, "payload[0]", pin_errors)
+        if pin_errors:
+            raise ValueError("; ".join(pin_errors))
+
+    try:
+        agent_bytes = path.read_bytes()
+        agent_text = agent_bytes.decode("utf-8")
+    except OSError as exc:
+        raise ValueError(f"Could not read agent {path}: {exc}") from exc
+    except UnicodeDecodeError as exc:
+        raise ValueError(f"Agent {path} must be UTF-8") from exc
+    if pin_url is not None:
+        pinned_bytes = _read_url_bytes(
+            pin_url,
+            max_bytes=CARD_MAX_PINNED_PAYLOAD_BYTES,
+        )
+        try:
+            pinned_bytes.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ValueError("Pinned agent payload must be UTF-8") from exc
+        pinned_digest = sha256_lf_v1(pinned_bytes)
+        local_digest = sha256_lf_v1(agent_bytes)
+        if pinned_digest != local_digest:
+            raise ValueError(
+                "Pinned agent payload does not match the local agent "
+                f"({pinned_digest} != {local_digest})"
+            )
+
+    primary = {
+        "role": "primary",
+        "kind": "agent.py",
+        "filename": path.name,
+        "sha256_lf_v1": sha256_lf_v1(agent_bytes),
+    }
+    if pin_url is not None:
+        primary["url"] = pin_url
+    else:
+        primary["inline"] = agent_text
+    payload = [primary]
+    for resource_path in resources or []:
+        resource = Path(resource_path)
+        try:
+            content = resource.read_bytes()
+        except OSError as exc:
+            raise ValueError(f"Could not read resource {resource}: {exc}") from exc
+        item = {
+            "role": "resource",
+            "kind": "egg" if resource.suffix == ".egg" else "file",
+            "filename": resource.name,
+        }
+        if item["kind"] != "egg":
+            try:
+                text = content.decode("utf-8")
+            except UnicodeDecodeError:
+                text = None
+        else:
+            text = None
+        if text is not None:
+            item["sha256_lf_v1"] = sha256_lf_v1(content)
+            item["inline"] = text
+        else:
+            item["sha256"] = hashlib.sha256(content).hexdigest()
+            item["inline_base64"] = base64.b64encode(content).decode("ascii")
+        payload.append(item)
+
+    face = _legacy_faces().get(manifest["name"])
+    face = copy.deepcopy(face) if face is not None else mint_card(str(path))
+    tile = to_tile(face, manifest, payload=payload)
+    destination = (
+        Path(output_path)
+        if output_path is not None
+        else _default_tile_output(path, manifest)
+    )
+    expected_filename = expected_tile_filename(tile)
+    if destination.name != expected_filename:
+        raise ValueError(
+            f"Output filename must be {expected_filename!r}, "
+            f"got {destination.name!r}"
+        )
+    raw = _tile_json_bytes(tile)
+    errors = validate_tile(tile, serialized_size=len(raw))
+    if errors:
+        raise ValueError("Rappid tile packing failed: " + "; ".join(errors))
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(raw)
+    return str(destination)
+
+
+def unpack_tile(
+    tile_source: str | os.PathLike,
+    output_dir: str | os.PathLike | None = None,
+) -> list[str]:
+    """Verify either transport generation and unpack exact payload bytes."""
+    verified = verify_tile(tile_source, return_payload_bytes=True)
+    document = verified["document"]
+    if output_dir is None:
+        source_text = os.fspath(tile_source)
+        parsed = urllib.parse.urlparse(source_text)
+        if parsed.scheme == "file":
+            destination = Path(
+                urllib.request.url2pathname(parsed.path)
+            ).parent
+        elif parsed.scheme in {"http", "https"}:
+            sleeve_name = _source_card_filename(source_text)
+            destination = Path.cwd() / (
+                sleeve_name.removesuffix(".tile").removesuffix(".card")
+            )
+        else:
+            destination = Path(source_text).parent
+    else:
+        destination = Path(output_dir)
+    destination.mkdir(parents=True, exist_ok=True)
+    written = []
+    for item, payload_result in zip(
+        document["payload"],
+        verified["payloads"],
+        strict=True,
+    ):
+        target = destination / item["filename"]
+        target.write_bytes(payload_result["_bytes"])
+        written.append(str(target))
+    return written
+
+
+def _tile_index_entries(index: dict) -> dict:
+    entries = index.get("tiles", index)
+    if not isinstance(entries, dict):
+        raise ValueError("Rappid tile index tiles section must be an object")
+    return entries
+
+
+def _load_tile_index() -> tuple[dict, Path | None]:
+    local_path = Path(__file__).resolve().parent / "tiles" / "v1" / "index.json"
+    if local_path.is_file():
+        try:
+            index = json.loads(local_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Could not read local rappid tile index: {exc}") from exc
+        if not isinstance(index, dict):
+            raise ValueError("Local rappid tile index must be an object")
+        return _tile_index_entries(index), local_path
+    raw = _read_url_bytes(f"{RAW_BASE}/tiles/v1/index.json")
+    try:
+        index = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ValueError(f"Could not parse public rappid tile index: {exc}") from exc
+    if not isinstance(index, dict):
+        raise ValueError("Public rappid tile index must be an object")
+    return _tile_index_entries(index), None
+
+
+def _resolve_indexed_tile(seed: int) -> str:
+    index, local_path = _load_tile_index()
+    matches = [
+        (agent_id, entry)
+        for agent_id, entry in index.items()
+        if isinstance(entry, dict)
+        and seed in {entry.get("seed"), entry.get("name_seed")}
+    ]
+    if not matches:
+        raise ValueError(f"No rappid tile found for seed {seed}")
+    if len(matches) > 1:
+        raise ValueError(f"Seed {seed} is ambiguous in the rappid tile index")
+    agent_id, entry = matches[0]
+    if local_path is not None:
+        url = entry.get("url")
+        if isinstance(url, str):
+            parsed = urllib.parse.urlparse(url)
+            marker = "/tiles/v1/"
+            if marker in parsed.path:
+                relative = Path(
+                    urllib.parse.unquote(parsed.path.split(marker, 1)[1])
+                )
+                if not relative.is_absolute() and ".." not in relative.parts:
+                    candidate = local_path.parent / relative
+                    if candidate.is_file():
+                        return str(candidate)
+    url = entry.get("url")
+    if not isinstance(url, str):
+        raise ValueError(f"Rappid tile index entry {agent_id} has no URL")
+    return url
+
+
+def scan_tile(source: str | os.PathLike) -> dict:
+    """Resolve and verify a URL, file, seed, or seven-word tile key."""
+    value = os.fspath(source).strip()
+    if not value:
+        raise ValueError("Rappid tile scan input is empty")
+    parsed = urllib.parse.urlparse(value)
+    rar_match = re.fullmatch(
+        r"rar://(@[A-Za-z0-9][A-Za-z0-9-]*/[a-z0-9_]+)@([0-9]+)",
+        value,
+    )
+    if rar_match:
+        expected_id, seed_text = rar_match.groups()
+        seed = int(seed_text)
+        try:
+            resolved = _resolve_indexed_tile(seed)
+        except ValueError as exc:
+            if "ambiguous" in str(exc):
+                raise
+            resolved = _resolve_indexed_card(seed)
+        result = verify_tile(resolved)
+        document = result["document"]
+        if document["id"] != expected_id or document["seed"] != seed:
+            raise ValueError("rar URL disagrees with the resolved rappid tile")
+        return result
+    if parsed.scheme in {"http", "https", "file"} or Path(value).is_file():
+        return verify_tile(value)
+
+    words = value.split()
+    if len(words) == 7:
+        seed = words_to_seed(value)
+    elif len(words) == 1:
+        try:
+            seed = int(value)
+        except ValueError as exc:
+            raise ValueError(
+                "Rappid tile scan expects a URL, file, numeric seed, "
+                "or seven words"
+            ) from exc
+        if seed < 0:
+            raise ValueError("Rappid tile seed must be non-negative")
+    else:
+        raise ValueError(
+            "Rappid tile scan expects a URL, file, numeric seed, or seven words"
+        )
+    try:
+        resolved = _resolve_indexed_tile(seed)
+    except ValueError as exc:
+        if "ambiguous" in str(exc):
+            raise
+        resolved = _resolve_indexed_card(seed)
+    return verify_tile(resolved)
+
+
+def _default_from_card_output(source: str | os.PathLike) -> Path:
+    source_text = os.fspath(source)
+    parsed = urllib.parse.urlparse(source_text)
+    if parsed.scheme in {"http", "https"}:
+        name = _source_card_filename(source_text)
+        return Path.cwd() / (name.removesuffix(".card") + ".tile")
+    if parsed.scheme == "file":
+        path = Path(urllib.request.url2pathname(parsed.path))
+    else:
+        path = Path(source_text)
+    root = Path(__file__).resolve().parent
+    try:
+        relative = path.resolve().relative_to((root / "cards" / "v2").resolve())
+    except ValueError:
+        return path.with_name(path.name.removesuffix(".card") + ".tile")
+    return root / "tiles" / "v1" / relative.with_name(
+        relative.name.removesuffix(".card") + ".tile"
+    )
+
+
+def tile_from_card(
+    card_source: str | os.PathLike,
+    output_path: str | os.PathLike | None = None,
+) -> str:
+    """Migrate one card to a tile and write only the new ``.tile`` document."""
+    destination = (
+        Path(output_path)
+        if output_path is not None
+        else _default_from_card_output(card_source)
+    )
+    root = Path(__file__).resolve().parent
+    try:
+        relative = destination.resolve().relative_to(
+            (root / "tiles" / "v1").resolve()
+        )
+    except ValueError:
+        scan_url = destination.resolve().as_uri()
+    else:
+        scan_url = (
+            f"{RAW_BASE}/tiles/v1/"
+            + urllib.parse.quote(relative.as_posix(), safe="/@")
+        )
+    tile = card_to_tile(card_source, scan_url=scan_url)
+    expected_filename = expected_tile_filename(tile)
+    if destination.name != expected_filename:
+        raise ValueError(
+            f"Output filename must be {expected_filename!r}, "
+            f"got {destination.name!r}"
+        )
+    raw = _tile_json_bytes(tile)
+    errors = validate_tile(tile, serialized_size=len(raw))
+    if errors:
+        raise ValueError("Card migration failed: " + "; ".join(errors))
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(raw)
+    return str(destination)
+
+
+from_card = tile_from_card
+
+
+def _print_tile(result: dict, *, include_face: bool) -> None:
+    if result.get("format") == CARD_SCHEMA:
+        _print_v2_card(result, include_face=include_face)
+        print("  Format: legacy .card (read compatibility)")
+        return
+    tile = result["tile"]
+    print(f"  Verified rappid tile: {tile['id']}")
+    print(f"  Schema: {tile['schema']}")
+    print(f"  Seed: {tile['seed']}")
+    print(f"  Key: {tile['key']}")
+    print(f"  State: {tile['state']}")
+    print(f"  {result['offline']['status']}")
+    footprint = tile["stands_on"]
+    print("  Stands on:")
+    print(f"    kernel: {footprint['kernel']}")
+    print(f"    python: {footprint['python']}")
+    print(f"    network: {str(footprint['network']).lower()}")
+    print(f"    filesystem: {footprint['filesystem']}")
+    print(f"    tools: {', '.join(footprint['tools']) or '(none)'}")
+    if include_face:
+        face = tile["face"]
+        print("  Face:")
+        for key in (
+            "name", "display_name", "title", "type_line",
+            "rarity", "rarity_label", "hp",
+        ):
+            if key in face and face[key] not in (None, ""):
+                print(f"    {key}: {face[key]}")
+    print("  Payload hashes:")
+    if not result["payloads"]:
+        print("    (face-only)")
+    for payload in result["payloads"]:
+        print(
+            f"    {payload['role']} {payload['kind']} {payload['filename']} "
+            f"{payload['algorithm']}:{payload['hash']}"
+        )
+    losses = result["downgrade"]["drops"]
+    print("  Card downgrade loses: " + ", ".join(losses))
 
 
 def _print_v2_card(result: dict, *, include_face: bool) -> None:
@@ -3046,6 +4246,69 @@ def _fmt_test_results(results: list[tuple[str, bool, str]], use_json: bool) -> s
     return "\n".join(lines)
 
 
+def _run_tile_transport_command(
+    command: str | None,
+    args: argparse.Namespace,
+    *,
+    use_json: bool,
+) -> bool:
+    if command not in {"pack", "unpack", "verify", "scan", "from-card"}:
+        return False
+    try:
+        if command == "pack":
+            resources = list(getattr(args, "resource", None) or [])
+            egg = getattr(args, "egg", None)
+            if egg:
+                resources.append(egg)
+            packed = pack_tile(
+                args.path,
+                resources=resources,
+                inline=True if getattr(args, "inline", False) else None,
+                pin_url=getattr(args, "pin", None),
+                output_path=getattr(args, "output", None),
+            )
+            if use_json:
+                print(json.dumps({"packed": packed}))
+            else:
+                print(f"  Packed rappid tile: {packed}")
+        elif command == "unpack":
+            written = unpack_tile(args.path, args.directory)
+            if use_json:
+                print(json.dumps({"unpacked": written}, indent=2))
+            else:
+                print(f"  Unpacked rappid tile payload(s): {len(written)}")
+                for path in written:
+                    print(f"    {path}")
+        elif command == "verify":
+            result = verify_tile(args.path)
+            if use_json:
+                print(json.dumps(result, indent=2))
+            else:
+                _print_tile(result, include_face=False)
+        elif command == "scan":
+            result = scan_tile(" ".join(args.source))
+            if use_json:
+                print(json.dumps(result, indent=2))
+            else:
+                _print_tile(result, include_face=True)
+        else:
+            migrated = tile_from_card(
+                args.path,
+                output_path=getattr(args, "output", None),
+            )
+            if use_json:
+                print(json.dumps({"migrated": migrated}))
+            else:
+                print(f"  Migrated rappid tile: {migrated}")
+    except Exception as exc:
+        if use_json:
+            print(json.dumps({"error": str(exc)}))
+        else:
+            print(f"  Error: {exc}")
+        raise SystemExit(1) from exc
+    return True
+
+
 def main():
     parser = argparse.ArgumentParser(
         prog="rapp_sdk",
@@ -3121,8 +4384,96 @@ def main():
     p_info.add_argument("name", help="Agent name: @publisher/my-agent")
     p_info.add_argument("--json", action="store_true", help="Output JSON")
 
-    # card
-    p_card = sub.add_parser("card", help="Rappid tile operations")
+    # tile
+    p_tile = sub.add_parser("tile", help="Rappid tile operations")
+    tile_sub = p_tile.add_subparsers(dest="tile_command", metavar="<subcommand>")
+
+    p_tile_pack = tile_sub.add_parser(
+        "pack",
+        help="Pack an agent and resources into rappid-tile/1.0",
+    )
+    p_tile_pack.add_argument("path", help="Path to primary agent .py file")
+    p_tile_pack.add_argument(
+        "--resource",
+        action="append",
+        default=[],
+        help="Resource file to carry; repeat for multiple resources",
+    )
+    p_tile_pack.add_argument(
+        "--egg",
+        action="append",
+        dest="resource",
+        help=argparse.SUPPRESS,
+    )
+    tile_pack_mode = p_tile_pack.add_mutually_exclusive_group()
+    tile_pack_mode.add_argument(
+        "--inline",
+        action="store_true",
+        help="Carry the primary source inline (default)",
+    )
+    tile_pack_mode.add_argument(
+        "--pin",
+        metavar="RAW_URL",
+        help="Use a revision-pinned URL for the primary source",
+    )
+    p_tile_pack.add_argument(
+        "-o",
+        "--out",
+        "--output",
+        dest="output",
+        help="Output path; basename must match the primary payload",
+    )
+    p_tile_pack.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_tile_unpack = tile_sub.add_parser(
+        "unpack",
+        help="Verify and unpack exact payload bytes",
+    )
+    p_tile_unpack.add_argument("path", help="Path or URL to a .tile or .card")
+    p_tile_unpack.add_argument("directory", nargs="?", help="Output directory")
+    p_tile_unpack.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_tile_verify = tile_sub.add_parser(
+        "verify",
+        help="Verify schema, identity, footprint, and payload hashes",
+    )
+    p_tile_verify.add_argument("path", help="Path or URL to a .tile or .card")
+    p_tile_verify.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_tile_scan = tile_sub.add_parser(
+        "scan",
+        help="Resolve and verify a URL, seed, or seven-word key",
+    )
+    p_tile_scan.add_argument(
+        "source",
+        nargs="+",
+        help="Tile URL, local file, numeric seed, or seven-word key",
+    )
+    p_tile_scan.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_tile_from_card = tile_sub.add_parser(
+        "from-card",
+        help="Migrate one rar-card/2.0 document to rappid-tile/1.0",
+    )
+    p_tile_from_card.add_argument("path", help="Path or URL to a .card")
+    p_tile_from_card.add_argument(
+        "-o",
+        "--out",
+        "--output",
+        dest="output",
+        help="Optional .tile output path",
+    )
+    p_tile_from_card.add_argument(
+        "--json",
+        action="store_true",
+        help="Output JSON",
+    )
+
+    # card -- read-forever compatibility and deprecated command aliases
+    p_card = sub.add_parser(
+        "card",
+        help="Deprecated aliases; use 'tile' (legacy .card remains readable)",
+    )
     card_sub = p_card.add_subparsers(dest="card_command", metavar="<subcommand>")
 
     p_card_mint = card_sub.add_parser("mint", help="Mint a rappid tile from an agent file")
@@ -3131,7 +4482,7 @@ def main():
 
     p_card_pack = card_sub.add_parser(
         "pack",
-        help="Pack an agent and optional egg into a rappid tile (.card)",
+        help="Deprecated alias for 'tile pack' (writes .tile)",
     )
     p_card_pack.add_argument("path", help="Path to agent .py file")
     p_card_pack.add_argument("--egg", help="Optional binary .egg payload")
@@ -3159,7 +4510,7 @@ def main():
         "unpack",
         help="Verify and unpack exact payload bytes",
     )
-    p_card_unpack.add_argument("path", help="Path or URL to a .card file")
+    p_card_unpack.add_argument("path", help="Path or URL to a .tile or .card")
     p_card_unpack.add_argument("directory", nargs="?", help="Output directory")
     p_card_unpack.add_argument("--json", action="store_true", help="Output JSON")
 
@@ -3167,7 +4518,7 @@ def main():
         "verify",
         help="Verify rappid tile schema, identity, and payload hashes",
     )
-    p_card_verify.add_argument("path", help="Path or URL to a .card file")
+    p_card_verify.add_argument("path", help="Path or URL to a .tile or .card")
     p_card_verify.add_argument("--json", action="store_true", help="Output JSON")
 
     p_card_scan = card_sub.add_parser(
@@ -3442,72 +4793,27 @@ def main():
             if deps:
                 print(f"  Deps:        {', '.join(deps)}")
 
-    # ---- card ----
+    # ---- tile ----
+    elif args.command == "tile":
+        if not _run_tile_transport_command(
+            args.tile_command,
+            args,
+            use_json=use_json,
+        ):
+            p_tile.print_help()
+
+    # ---- card (deprecated aliases) ----
     elif args.command == "card":
-        if args.card_command == "pack":
-            try:
-                packed = pack_card(
-                    args.path,
-                    egg_path=args.egg,
-                    inline=True if args.inline else None,
-                    pin_url=args.pin,
-                    output_path=args.output,
-                )
-                if use_json:
-                    print(json.dumps({"packed": packed}))
-                else:
-                    print(f"  Packed rappid tile: {packed}")
-            except Exception as e:
-                if use_json:
-                    print(json.dumps({"error": str(e)}))
-                else:
-                    print(f"  Error: {e}")
-                sys.exit(1)
-
-        elif args.card_command == "unpack":
-            try:
-                written = unpack_card(args.path, args.directory)
-                if use_json:
-                    print(json.dumps({"unpacked": written}, indent=2))
-                else:
-                    print(f"  Unpacked rappid tile payload(s): {len(written)}")
-                    for path in written:
-                        print(f"    {path}")
-            except Exception as e:
-                if use_json:
-                    print(json.dumps({"error": str(e)}))
-                else:
-                    print(f"  Error: {e}")
-                sys.exit(1)
-
-        elif args.card_command == "verify":
-            try:
-                result = verify_card(args.path)
-                if use_json:
-                    print(json.dumps(result, indent=2))
-                else:
-                    _print_v2_card(result, include_face=False)
-            except Exception as e:
-                if use_json:
-                    print(json.dumps({"error": str(e)}))
-                else:
-                    print(f"  Error: {e}")
-                sys.exit(1)
-
-        elif args.card_command == "scan":
-            try:
-                result = scan_card(" ".join(args.source))
-                if use_json:
-                    print(json.dumps(result, indent=2))
-                else:
-                    _print_v2_card(result, include_face=True)
-            except Exception as e:
-                if use_json:
-                    print(json.dumps({"error": str(e)}))
-                else:
-                    print(f"  Error: {e}")
-                sys.exit(1)
-
+        print(
+            "DEPRECATED: 'card' commands are compatibility aliases; use 'tile'.",
+            file=sys.stderr,
+        )
+        if _run_tile_transport_command(
+            args.card_command,
+            args,
+            use_json=use_json,
+        ):
+            pass
         elif args.card_command == "mint":
             try:
                 card = mint_card(args.path)

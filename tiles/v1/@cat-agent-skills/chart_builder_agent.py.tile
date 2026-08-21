@@ -1,0 +1,143 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@cat-agent-skills/chart_builder",
+  "seed": 31573135600499827265,
+  "name_seed": 3056226188,
+  "key": "BALM GUILD WYRM RUNT SCARCE IRE GRIND",
+  "version": "2.0.1",
+  "face": {
+    "name": "Chart Builder",
+    "title": "The Catalyst",
+    "mana_cost": "{3}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Creature — Agent Sentinel",
+    "rarity": "common",
+    "power": 2,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Not all intelligence is artificial. Some is engineered.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-2a4f8c\"><stop offset=\"0%\" stop-color=\"#1a1a2e\"/><stop offset=\"100%\" stop-color=\"#08080f\"/></radialGradient><filter id=\"gl-2a4f8c\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-2a4f8c)\"/><g filter=\"url(#gl-2a4f8c)\"><line x1=\"118\" y1=\"68\" x2=\"161\" y2=\"41\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"161\" y1=\"41\" x2=\"69\" y2=\"147\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"69\" y1=\"147\" x2=\"89\" y2=\"77\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"89\" y1=\"77\" x2=\"150\" y2=\"109\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"150\" y1=\"109\" x2=\"118\" y2=\"68\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"118\" y1=\"68\" x2=\"69\" y2=\"147\" stroke=\"#f0883e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"118\" cy=\"68\" r=\"5\" fill=\"#f0883e\" opacity=\"0.53\"/><circle cx=\"161\" cy=\"41\" r=\"5\" fill=\"#f0883e\" opacity=\"0.58\"/><circle cx=\"69\" cy=\"147\" r=\"6\" fill=\"#f0883e\" opacity=\"0.62\"/><circle cx=\"89\" cy=\"77\" r=\"3\" fill=\"#f0883e\" opacity=\"0.41\"/><circle cx=\"150\" cy=\"109\" r=\"5\" fill=\"#f0883e\" opacity=\"0.60\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/chart_builder",
+    "agent_types": [
+      "LOGIC",
+      "DATA"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#3fb950"
+    ],
+    "hp": 40,
+    "stats": {
+      "hp": 40,
+      "atk": 48,
+      "def": 28,
+      "spd": 33,
+      "int": 37
+    },
+    "typed_abilities": [
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 2,
+        "damage": 18
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 31573135600499827265
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/chart_builder",
+    "version": "2.0.1",
+    "display_name": "Chart Builder",
+    "description": "Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call.",
+    "author": "Adi Leibowitz",
+    "tags": [
+      "data",
+      "charts",
+      "matplotlib",
+      "scripts"
+    ],
+    "category": "devtools",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "chart-builder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#chart-builder",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "f32fa164a482da33"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "chart_builder_agent.py",
+      "sha256_lf_v1": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/chart_builder_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@cat-agent-skills/chart_builder_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

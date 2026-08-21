@@ -1,0 +1,134 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/deal_tracking",
+  "seed": 6943812563063421267,
+  "name_seed": 1616732348,
+  "key": "VERGE SPOKE WIELD TWILIGHT PULSAR SPIKE TEMPER",
+  "version": "1.0.1",
+  "face": {
+    "name": "Deal Tracking",
+    "title": "The Pathfinder",
+    "mana_cost": "{2}{R}{W}",
+    "colors": [
+      "R",
+      "W"
+    ],
+    "type_line": "Creature — Agent Resolver",
+    "rarity": "rare",
+    "power": 7,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-5d60bc\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-5d60bc\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-5d60bc)\"/><g filter=\"url(#gl-5d60bc)\"><circle cx=\"128.0\" cy=\"89.2\" r=\"24\" fill=\"#f47067\" opacity=\"0.15\" stroke=\"#f47067\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"72.0\" cy=\"110.8\" r=\"15\" fill=\"#f47067\" opacity=\"0.1\" stroke=\"#f47067\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"128.0\" y1=\"89.2\" x2=\"72.0\" y2=\"110.8\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"40\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/deal_tracking",
+    "agent_types": [
+      "WEALTH",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#58a6ff"
+    ],
+    "hp": 49,
+    "stats": {
+      "hp": 49,
+      "atk": 69,
+      "def": 44,
+      "spd": 57,
+      "int": 56
+    },
+    "typed_abilities": [
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 3,
+        "damage": 11
+      },
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 2,
+        "damage": 23
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 6943812563063421267
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/deal_tracking",
+    "version": "1.0.1",
+    "display_name": "Deal Tracking",
+    "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "deal-tracking",
+      "pipeline",
+      "forecasting"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "deal_tracking_agent.py",
+      "sha256_lf_v1": "3d5f5bb65818acd562853d85c7e8e57a392689a99b1e8360d4f08ba56c4d0a73",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/deal_tracking_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/deal_tracking_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

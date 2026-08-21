@@ -512,6 +512,7 @@ header {
 <script>
 const REGISTRY_URL = 'registry.json';
 const CARDS_URL = 'cards/holo_cards.json';
+const TILE_INDEX_URL = 'tiles/v1/index.json';
 const CARD_INDEX_URL = 'cards/v2/index.json';
 const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR';
 
@@ -833,7 +834,9 @@ async function load() {
   if (isInlined) {
     // Standalone copy — registry + card data baked into this HTML file.
     registry = { agents: [window.__INLINED_AGENT__] };
-    cardEnvelope = window.__INLINED_CARD__?.schema === 'rar-card/2.0'
+    cardEnvelope = ['rappid-tile/1.0', 'rar-card/2.0'].includes(
+      window.__INLINED_CARD__?.schema
+    )
       ? window.__INLINED_CARD__
       : null;
     const inlinedFace = cardEnvelope?.face || window.__INLINED_CARD__;
@@ -844,7 +847,13 @@ async function load() {
       [registry, cards, cardIndex] = await Promise.all([
         fetch(REGISTRY_URL + '?t=' + Date.now()).then(r => r.json()),
         fetch(CARDS_URL + '?t=' + Date.now()).then(r => r.json()),
-        fetch(CARD_INDEX_URL + '?t=' + Date.now()).then(r => r.json()),
+        fetch(TILE_INDEX_URL + '?t=' + Date.now())
+          .then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            return r.json();
+          })
+          .then(index => index.tiles || index)
+          .catch(() => fetch(CARD_INDEX_URL + '?t=' + Date.now()).then(r => r.json())),
       ]);
     } catch (e) {
       root.innerHTML = `<div class="error"><h2>Failed to load registry</h2><div class="error-detail">${esc(e.message)}</div></div>`;
@@ -870,15 +879,20 @@ async function load() {
   }
   if (!isInlined) {
     const indexedCardUrl = cardIndex?.[agent.name]?.url || '';
-    const marker = '/cards/v2/';
-    const indexedPath = indexedCardUrl.includes(marker)
-      ? decodeURIComponent(indexedCardUrl.split(marker, 2)[1])
+    const tileMarker = '/tiles/v1/';
+    const cardMarker = '/cards/v2/';
+    const indexedPath = indexedCardUrl.includes(tileMarker)
+      ? decodeURIComponent(indexedCardUrl.split(tileMarker, 2)[1])
+      : indexedCardUrl.includes(cardMarker)
+      ? decodeURIComponent(indexedCardUrl.split(cardMarker, 2)[1])
       : '';
     const publisherName = (agent.name || '').split('/')[0];
     const sourceFilename = primaryPayloadFilename(agent, registry);
     const relativeCardPath = indexedPath ||
-      `${publisherName}/${sourceFilename}.card`;
-    const v2Path = `cards/v2/${relativeCardPath}?t=${Date.now()}`;
+      `${publisherName}/${sourceFilename}.tile`;
+    const v2Path = indexedCardUrl.includes(cardMarker)
+      ? `cards/v2/${relativeCardPath}?t=${Date.now()}`
+      : `tiles/v1/${relativeCardPath}?t=${Date.now()}`;
     try {
       const response = await fetch(v2Path);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -887,12 +901,12 @@ async function load() {
         .replace(/"name_seed":\s*(\d+)/g, '"name_seed":"$1"');
       const envelope = JSON.parse(envelopeText);
       if (
-        envelope?.schema !== 'rar-card/2.0' ||
+        !['rappid-tile/1.0', 'rar-card/2.0'].includes(envelope?.schema) ||
         envelope.id !== agent.name ||
         !envelope.face ||
         !envelope.scan?.url
       ) {
-        throw new Error('invalid rar-card/2.0 envelope');
+        throw new Error('invalid rappid tile envelope');
       }
       cardEnvelope = envelope;
       card = envelope.face;
@@ -927,7 +941,7 @@ async function load() {
     primaryPayloadFilename(agent, registry);
   const card_file_url = cardEnvelope?.scan?.url ||
     cardIndex?.[agent.name]?.url ||
-    `${RAW_BASE}/main/cards/v2/${publisherName}/${sourceFilename}.card`;
+    `${RAW_BASE}/main/tiles/v1/${publisherName}/${sourceFilename}.tile`;
   const scan_url = cardEnvelope?.scan?.url || card_file_url;
 
   const avatar = card.avatar_svg
@@ -1055,7 +1069,7 @@ async function load() {
           <span id="summon-url">${esc(scan_url)}</span>
           <button data-copy="summon-url">copy</button>
         </div>
-        <a class="summon-cta" href="${card_file_url}">View raw .card →</a>
+        <a class="summon-cta" href="${card_file_url}">View raw .tile →</a>
         <button class="share-btn" data-share-url="${py_url_pinned}" data-share-file="${esc((filePath.split('/').pop()) || 'agent.py')}" data-share-title="${esc(agent.display_name || slug)}">&#x1F4E4; Share .py</button>
       </div>
     </div>

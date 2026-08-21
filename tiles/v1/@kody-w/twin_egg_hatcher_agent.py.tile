@@ -1,0 +1,134 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@kody-w/twin_egg_hatcher",
+  "seed": 8075652905997056003,
+  "name_seed": 1880259464,
+  "key": "RUNE LEGACY COBALT HEFT ADVANCE SHARD WELD",
+  "version": "1.0.2",
+  "face": {
+    "name": "HatchTwinEgg",
+    "title": "The Warden",
+    "mana_cost": "{1}{W}{U}",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "type_line": "Creature — Agent Beacon",
+    "rarity": "common",
+    "power": 6,
+    "toughness": 1,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It works while you sleep. It finishes before you wake.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-127b88\"><stop offset=\"0%\" stop-color=\"#15101e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-127b88\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-127b88)\"/><g filter=\"url(#gl-127b88)\"><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"#58a6ff\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"60\" ry=\"11\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(41 100 100)\"/><circle cx=\"95\" cy=\"96\" r=\"6\" fill=\"#58a6ff\" opacity=\"0.13\"/><circle cx=\"90\" cy=\"102\" r=\"5\" fill=\"#58a6ff\" opacity=\"0.08\"/><circle cx=\"98\" cy=\"99\" r=\"5\" fill=\"#58a6ff\" opacity=\"0.13\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/twin_egg_hatcher",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 68,
+    "stats": {
+      "hp": 68,
+      "atk": 67,
+      "def": 39,
+      "spd": 65,
+      "int": 57
+    },
+    "typed_abilities": [
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 1,
+        "damage": 24
+      },
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 1,
+        "damage": 44
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 8075652905997056003
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/twin_egg_hatcher",
+    "version": "1.0.2",
+    "display_name": "HatchTwinEgg",
+    "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "twin",
+      "egg",
+      "hatcher",
+      "organism",
+      "federation",
+      "single-file",
+      "rapp"
+    ],
+    "category": "core",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "twin_egg_hatcher_agent.py",
+      "sha256_lf_v1": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/twin_egg_hatcher_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@kody-w/twin_egg_hatcher_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

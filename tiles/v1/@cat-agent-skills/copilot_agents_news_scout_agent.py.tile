@@ -1,0 +1,142 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@cat-agent-skills/copilot_agents_news_scout",
+  "seed": 35403155120661079520,
+  "name_seed": 3947972098,
+  "key": "RAMP CONSECRATE THRONE CHISEL BRAVE COMPASS HAMMER",
+  "version": "2.0.0",
+  "face": {
+    "name": "Copilot & Agents News Scout",
+    "title": "The Synthesizer",
+    "mana_cost": "{2}{U}",
+    "colors": [
+      "U"
+    ],
+    "type_line": "Creature — Agent Overseer",
+    "rarity": "uncommon",
+    "power": 8,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "A Monday-morning Scout automation that scans authoritative Microsoft sources for the past week's Copilot, Copilot Studio, and agent news and posts a concise, linked digest to Teams."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Some agents wait for instructions. This one has already started.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-514602\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-514602\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-514602)\"/><g filter=\"url(#gl-514602)\"><circle cx=\"100\" cy=\"100\" r=\"49\" fill=\"#bc8cff\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"49\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"64\" ry=\"9\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(24 100 100)\"/><circle cx=\"108\" cy=\"109\" r=\"7\" fill=\"#bc8cff\" opacity=\"0.10\"/><circle cx=\"106\" cy=\"103\" r=\"6\" fill=\"#bc8cff\" opacity=\"0.14\"/><circle cx=\"94\" cy=\"100\" r=\"8\" fill=\"#bc8cff\" opacity=\"0.06\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/copilot_agents_news_scout",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 55,
+    "stats": {
+      "hp": 55,
+      "atk": 58,
+      "def": 23,
+      "spd": 28,
+      "int": 43
+    },
+    "typed_abilities": [
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 3,
+        "damage": 48
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 35403155120661079520
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/copilot_agents_news_scout",
+    "version": "2.0.0",
+    "display_name": "Copilot & Agents News Scout",
+    "description": "A Monday-morning Scout automation that scans authoritative Microsoft sources for the past week's Copilot, Copilot Studio, and agent news and posts a concise, linked digest to Teams.",
+    "author": "Elliot Margot",
+    "tags": [
+      "news",
+      "copilot",
+      "agent",
+      "digest",
+      "automation",
+      "weekly",
+      "teams"
+    ],
+    "category": "integrations",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "copilot-agents-news-scout",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-agents-news-scout",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "fc3502443ed8b977"
+    },
+    "platforms": [
+      "Scout"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "copilot_agents_news_scout_agent.py",
+      "sha256_lf_v1": "6fc2a0fa301aa19d483c4c839feed41debd86262eb0fa2852fdcaccdebed450e",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/copilot_agents_news_scout_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@cat-agent-skills/copilot_agents_news_scout_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

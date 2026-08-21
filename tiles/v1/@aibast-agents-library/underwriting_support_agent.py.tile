@@ -1,0 +1,135 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/underwriting_support",
+  "seed": 18409195487267397654,
+  "name_seed": 4286224834,
+  "key": "BARB PALADIN DIVINATION CHAMPION TRAIN CONDUIT BIND",
+  "version": "1.2.0",
+  "face": {
+    "name": "Underwriting Support Agent",
+    "title": "The Navigator",
+    "mana_cost": "{1}{U}{G}",
+    "colors": [
+      "U",
+      "G"
+    ],
+    "type_line": "Creature — Agent Navigator",
+    "rarity": "uncommon",
+    "power": 3,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Evaluates underwriting queues from a live simulated Dynamics 365 tenant (quotes as submissions), with pricing demos and an offline fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Data in. Decisions out. Humans in the loop.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-7a99c2\"><stop offset=\"0%\" stop-color=\"#2a0a0a\"/><stop offset=\"100%\" stop-color=\"#0a0808\"/></radialGradient><filter id=\"gl-7a99c2\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-7a99c2)\"/><g filter=\"url(#gl-7a99c2)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#79c0ff\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#79c0ff\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"22\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(20 100 100)\"/><circle cx=\"81.7\" cy=\"98.9\" r=\"3\" fill=\"#79c0ff\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"30\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(4 100 100)\"/><circle cx=\"73.0\" cy=\"116.7\" r=\"3\" fill=\"#79c0ff\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"66\" ry=\"29\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.36\" transform=\"rotate(-23 100 100)\"/><circle cx=\"47.8\" cy=\"102.9\" r=\"3\" fill=\"#79c0ff\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"84\" ry=\"34\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.44\" transform=\"rotate(-28 100 100)\"/><circle cx=\"61.0\" cy=\"142.1\" r=\"5\" fill=\"#79c0ff\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/underwriting_support",
+    "agent_types": [
+      "WEALTH",
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#f0f0f0"
+    ],
+    "hp": 72,
+    "stats": {
+      "hp": 72,
+      "atk": 56,
+      "def": 42,
+      "spd": 50,
+      "int": 65
+    },
+    "typed_abilities": [
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 3,
+        "damage": 30
+      },
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 2,
+        "damage": 48
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 18409195487267397654
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/underwriting_support",
+    "version": "1.2.0",
+    "display_name": "Underwriting Support Agent",
+    "description": "Evaluates underwriting queues from a live simulated Dynamics 365 tenant (quotes as submissions), with pricing demos and an offline fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "underwriting",
+      "insurance",
+      "risk",
+      "pricing",
+      "guidelines",
+      "financial-services"
+    ],
+    "category": "financial_services",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "underwriting_support_agent.py",
+      "sha256_lf_v1": "2687b8b34f22b99554c31a34d0cd9588fa27cf746c384603c8f14e07bef95d67",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/underwriting_support_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

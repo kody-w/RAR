@@ -24,6 +24,11 @@ html = STORE_HTML.read_text()
 registry = json.loads(REGISTRY_JSON.read_text())
 
 
+def test_tile_index_loader_is_top_level():
+    assert "\nasync function fetchTileIndex(" in html
+    assert "\n  async function fetchTileIndex(" not in html
+
+
 # ═══════════════════════════════════════════════════════
 # Tier and Rarity Consistency
 # ═══════════════════════════════════════════════════════

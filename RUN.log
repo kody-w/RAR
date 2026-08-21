@@ -1,0 +1,1143 @@
+● skill(rapp-brainstem)
+
+I’ll treat the order and acceptance criteria as authoritative, then implement and verify the complete change without touching unrelated work.
+
+● Read ORDER-rar-card-v2.md
+  └ 48 lines read
+
+● Read SPEC-DRAFT-rar-card-v2.md
+  └ 105 lines read
+
+● Inspect worktree and repository files (shell)
+  │ git --no-pager status --short && printf '\n-- top-level --\n' && find . -maxdepth 2 -type f -not
+  │ -path './.git/*' | sort | sed -n '1,240p'
+  └ 161 lines…
+
+The order requires six staged commits and a before/after full-suite count. I’m establishing the baseline and mapping the SDK, forge, site renderer, workflow, and current tests before the first edit.
+
+● Todo added 7 items
+  │ Establishing baseline and architecture
+  │ Adding v2 contract and schema
+  │ Implementing card SDK commands
+  │ Migrating legacy cards
+  │ Rendering v2 cards and API
+  │ Adding tests and README docs
+  └ Running final acceptance verification
+
+/ Search (grep)
+  │ "def (extract_manifest|validate_manifest|seed_hash|mulberry32|forge_seed|resolve_card_from_seed|
+  │ seed_to_words|words_to_seed|mint_card|submit_agent|main)|argparse|add_parser|card" (rapp_sdk.py)
+  └ 28 lines found
+
+/ Search (grep)
+  │ "rapp_sdk|mint_card|forge_seed|resolve_card|holo_cards|api.json|sha256-lf-v1|sha256_lf" in *.py
+  │ (tests)
+  └ 56 lines found
+
+/ Search (grep)
+  │ "holo|forge|generate_holo|registry|pytest|build_registry" in *.yml (.github/workflows)
+  └ 283 lines found
+
+● Inspect branch and test runner (shell)
+  │ printf '%s\n' '-- branch --' && git branch --show-current && git branch --list feat/rar-card-v2
+  │ && printf '%s\n' '-- head --' && git rev-parse HEAD && printf '%s\n' '-- pytest version --' &&
+  │ pytest --version
+  └ 8 lines…
+
+/ Search (grep)
+  │ "holo_cards|avatar_svg|renderCard|card-face|card.*render|fetch\(|registry\.json|seed_to_words|re
+  │ solve_card" (index.html, front.html, grail.html, store.html)
+  └ 91 lines found
+
+● Measure relevant files and directories (shell)
+  │ wc -l rapp_sdk.py scripts/generate_holo_cards.py build_registry.py api.json index.html
+  │ front.html grail.html store.html README.md CONTRIBUTING.md CONSTITUTION.md
+  │ .github/workflows/build-registry.yml tests/test_rapp_sdk.py tests/test_pokedex_card_artifacts.py
+  │ tests/test_store_consistency.py && printf '\n-- directories --\n' && find spec schema cards
+  │ -maxdepth 2 -type f | sort | sed -n '1,220p'
+  └ 22 lines…
+
+● Run baseline full test suite (shell)                                                        1m 44s
+  │ pytest -q
+  └ 85 lines…
+
+The baseline is **2,194 passed / 3 pre-existing failures** (stale aggregate/front-page artifacts, unrelated to cards). I’ll preserve the explicit ban on changing `agents/` or `registry.json`, implement the card work, and report that baseline honestly while ensuring the new card acceptance suite is green.
+
+● Read api.json
+  └ 255 lines read
+
+● Read generate_holo_cards.py
+  │ scripts/generate_holo_cards.py
+  └ L1:240 (163 lines read)
+
+● Read generate_holo_cards.py
+  │ scripts/generate_holo_cards.py
+  └ L521:708 (188 lines read)
+
+● Read generate_holo_cards.py
+  │ scripts/generate_holo_cards.py
+  └ L241:520 (280 lines read)
+
+/ Search (grep)
+  │ "^def (extract_manifest|validate_manifest|seed_hash|mulberry32|forge_seed|resolve_card_from_seed
+  │ |seed_to_words|words_to_seed|mint_card|submit_agent|build_parser|main)\b|^class " (rapp_sdk.py)
+  └ 12 lines found
+
+● Read build-registry.yml
+  │ .github/workflows/build-registry.yml
+  └ 113 lines read
+
+● Inspect card and registry data shapes (shell)
+  │ python - <<'PY'
+  │ import json
+  │ from pathlib import Path
+  │ cards=json.loads(Path('cards/holo_cards.json').read_text())
+  │ reg=json.loads(Path('registry.json').read_text())…
+  └ 17 lines…
+
+● Read rapp_sdk.py
+  └ L2040:2320 (281 lines read)
+
+● Read rapp_sdk.py
+  └ L2321:2603 (283 lines read)
+
+● Read rapp_sdk.py
+  └ L1:230 (230 lines read)
+
+● Read rapp_sdk.py
+  └ L900:1185 (286 lines read)
+
+● Read rapp_sdk.py
+  └ L560:730 (171 lines read)
+
+● Read test_rapp_sdk.py
+  │ tests/test_rapp_sdk.py
+  └ L1:260 (260 lines read)
+
+● Read test_rapp_sdk.py
+  │ tests/test_rapp_sdk.py
+  └ L260:620 (361 lines read)
+
+● Read test_rapp_sdk.py
+  │ tests/test_rapp_sdk.py
+  └ L620:898 (279 lines read)
+
+● Inspect card and registry data shapes (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ from pathlib import Path
+  │ cards=json.loads(Path('cards/holo_cards.json').read_text())
+  │ reg=json.loads(Path('registry.json').read_text())…
+  └ 144 lines…
+
+/ Search (grep)
+  │ "CARDS_URL|holoCards|holo_cards|function
+  │ .*Card|renderCards|render.*card|cardData|card\.avatar_svg|avatar_svg" (index.html, front.html,
+  │ grail.html, store.html)
+  └ 68 lines found
+
+/ Search (grep)
+  │ "^function |^async function |CARDS_URL|cardData|avatar_svg|fetch\(" (grail.html)
+  └ 15 lines found
+
+/ Search (grep)
+  │ "^function renderCards|^async function .*Cards|^function .*Card|^const .*CARDS|^let
+  │ .*card|holoCard|holoCards|cardData|CARDS_URL" (store.html)
+  └ 27 lines found
+
+/ Search (grep)
+  │ "holo_cards|cards/v2|avatar_svg|rarity_label|typed_abilities|agent_types|mana_cost" (index.html,
+  │ front.html)
+  └ No matches found
+
+● Inspect branch history and order artifacts (shell)
+  │ git --no-pager log --oneline --decorate -8 && printf '\n-- branch divergence --\n' && git
+  │ rev-list --left-right --count main...HEAD 2>/dev/null || true && printf '\n-- untracked sizes
+  │ --\n' && wc -c ORDER-rar-card-v2.md SPEC-DRAFT-rar-card-v2.md RUN.log
+  └ 18 lines…
+
+● Profile every v1 face field (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ from collections import Counter
+  │ from pathlib import Path
+  │ cards=json.loads(Path('cards/holo_cards.json').read_text())…
+  └ 23 lines…
+
+/ Search (grep)
+  │ "_sha256|sha256-lf-v1|replace\(b?"\\r\\n"|canonical" in *.py (rapp_sdk.py, build_registry.py,
+  │ scripts)
+  └ 292 lines found
+
+● Read grail.html
+  └ L500:790 (291 lines read)
+
+● Read store.html
+  └ L3240:3730 (476 lines read)
+
+● Read store.html
+  └ L6380:6900 (354 lines read)
+
+● Read store.html
+  └ L7480:7760 (281 lines read)
+
+● Read store.html
+  └ L8340:8440 (101 lines read)
+
+● Profile every v1 face field (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ from collections import Counter
+  │ from pathlib import Path
+  │ cards=json.loads(Path('cards/holo_cards.json').read_text())…
+  └ 88 lines…
+
+● Check legacy seed and deterministic face agreement (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ from pathlib import Path
+  │ import rapp_sdk
+  │ cards=json.loads(Path('cards/holo_cards.json').read_text())…
+  └ 30 lines…
+
+The legacy audit found all **307 seeds recompute exactly**, but exposed an important protocol constraint: old decorative/stat faces are not fully reconstructible from seed alone even though identity is. The implementation will preserve every legacy face exactly, verify seed from the embedded manifest, and additionally compare known legacy faces against the frozen v1 index.
+
+● Edit
+  │ Create spec/rar-card-v2.md
+  └ Create schema/rar-card-2.0.json
+
+● Validate and commit card contract (shell)
+  │ python3 -m json.tool schema/rar-card-2.0.json >/dev/null && git diff --check && git add
+  │ spec/rar-card-v2.md schema/rar-card-2.0.json && git commit -m "Define RAR card v2 contract" -m
+  │ "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+  └ 5 lines…
+
+● Run suite after contract commit (shell)                                                     1m 49s
+  │ pytest -q
+  └ 85 lines…
+
+✔ Todo completed 2 items
+  │ baseline-map
+  └ contract-schema
+
+The contract commit is in place. I’m now implementing the SDK as an inert parser/verifier: exact byte preservation, no imports or execution, local-first seed resolution, and strict rejection of malformed or tampered sleeves.
+
+● Read rapp_sdk.py
+  └ L390:565 (176 lines read)
+
+● Read rapp_sdk.py
+  └ L1180:1390 (211 lines read)
+
+● Read build_registry.py
+  └ L460:510 (51 lines read)
+
+/ Search (grep)
+  │ "^def (fetch_registry|resolve_card|_load|canonical|sha256|install_agent|get_agent_info)\b"
+  │ (rapp_sdk.py)
+  └ 39 lines found
+
+/ Search (grep)
+  │ "__version__|rapp_sdk 1|version.*1\.1\.0" (README.md, tests, rapp_sdk.py)
+  └ 85 lines found
+
+● Edit
+  └ Edit rapp_sdk.py
+
+● Edit
+  └ Edit rapp_sdk.py
+
+● Inspect SDK worktree changes (shell)
+  │ git diff --check && git --no-pager diff --stat && git status --short
+  └ 11 lines…
+
+● Smoke test byte-identical pack and unpack (shell)
+  │ python3 - <<'PY'
+  │ import hashlib
+  │ import tempfile
+  │ from pathlib import Path
+  │ import rapp_sdk…
+  └ 26 lines…
+
+● Run SDK compile and existing tests (shell)
+  │ python3 -m py_compile rapp_sdk.py && pytest tests/test_rapp_sdk.py -q
+  └ 3 lines…
+
+/ Search (grep)
+  │ "except Exception as e|CARD_|def (to_v2|verify_card|pack_card|unpack_card|scan_card)"
+  │ (rapp_sdk.py)
+  └ 50 lines found
+
+● Inspect test-mutated generated files (shell)
+  │ git --no-pager diff -- registry.json api/v1/front.json
+  └ 26 lines…
+
+● Inspect card command help (shell)
+  │ python3 rapp_sdk.py card --help && printf '\n-- pack help --\n' && python3 rapp_sdk.py card pack
+  │ --help
+  └ 31 lines…
+
+● Edit
+  │ Edit api/v1/front.json
+  └ Edit registry.json
+
+✗ Test file:// and directory-served http scans (shell)
+  │ cd /private/tmp/claude-501/-Users-kodywildfeuer-Documents-GitHub-aibast-agents-library/deb65d5
+  │ f-5b3d-4968-873f-991e3e27fe8f/scratchpad/_review_tmp && (python3 -m http.server 8931 --bind
+  │ 127.0.0.1 >/dev/null 2>&1 &) ; sleep 2; cd ../rar-v2 && ABS=$(cd ../_review_tmp && pwd) &&
+  │ echo "abs=$ABS" && echo "== file:// scan ==" && python3 rapp_sdk.py card scan
+  │ "file://$ABS/demo_agent.card"; echo "rc=$?"; echo "== http dir-served scan =="; python3 …
+  └ Permission denied and could not request permission from user
+
+● Test file:// scan (shell)
+  │ ABS=$(cd ../_review_tmp && pwd) && echo "== file:// scan ==" && python3 rapp_sdk.py card scan
+  │ "file://$ABS/demo_agent.card"; echo "rc=$?"
+  └ 17 lines…
+
+✗ Check _seed representation and CLI --json flag placement (shell)
+  │ python3 -c "
+  │ import json; r=json.load(open('registry.json')); a=r['agents'][0]; print(type(a['_seed']),
+  │ repr(a['_seed']))
+  │ import re; raw=open('registry.json').read(); m=re.search(r'\"_seed\":\s*[^,}]+', raw);
+  │ print(m.group(0))…
+  └ Permission denied and could not request permission from user
+
+● Check --json flag placement for scan (shell)
+  │ grep -n "use_json" rapp_sdk.py | head -3; python3 rapp_sdk.py card scan --json
+  │ ../_review_tmp/demo_agent.card 2>&1 | head -5
+  └ 9 lines…
+
+● Clean up scratch and confirm repo state (shell)
+  │ cd /private/tmp/claude-501/-Users-kodywildfeuer-Documents-GitHub-aibast-agents-library/deb65d5f-
+  │ 5b3d-4968-873f-991e3e27fe8f/scratchpad && rm -rf _review_tmp && cd rar-v2 && git status --short
+  │ && echo "--- agents clean check ---" && git status --short agents registry.json && echo "(empty
+  │ above = clean)"
+  └ 7 lines…
+
+● Rubber-duck(claude-opus-5) Critique card SDK implementation                                 12m 1s
+  └ I read the order, the committed spec/schema, and exercised the new SDK code e...
+
+The SDK critic found three concrete integrity bugs: local verification ignored pinned revisions, unpack fetched pinned bytes twice, and `rar://` scan URLs were not resolvable. I’m correcting those before the SDK commit, along with closing the legacy-face bypass and exposing a safe CLI output path.
+
+● Edit
+  └ Edit rapp_sdk.py
+
+● Edit
+  └ Edit rapp_sdk.py
+
+● Check SDK diff and worktree (shell)
+  │ git diff --check && git status --short && git --no-pager diff --stat
+  └ 7 lines…
+
+● Verify exact pinned Git blob reads (shell)
+  │ python3 - <<'PY'
+  │ import subprocess
+  │ import rapp_sdk
+  │ rev='e47755faaa0486f3abe54a6a5d29aab74d203dc8'
+  │ url=f'https://raw.githubusercontent.com/kody-w/RAR/{rev}/rapp_sdk.py'…
+  └ 9 lines…
+
+● Verify unpack writes once-verified bytes (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ import tempfile
+  │ import threading
+  │ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer…
+  └ 31 lines…
+
+● Re-run SDK tests after fixes (shell)
+  │ python3 -m py_compile rapp_sdk.py && pytest tests/test_rapp_sdk.py -q
+  └ 3 lines…
+
+● Commit card SDK implementation (shell)
+  │ git diff --check && git add rapp_sdk.py && git commit -m "Add RAR card v2 SDK commands" -m
+  │ "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+  └ 3 lines…
+
+● Run suite after SDK commit (shell)                                                          1m 29s
+  │ pytest -q
+  └ 85 lines…
+
+● Check post-test generated drift (shell)
+  │ git status --short && git --no-pager diff -- registry.json api/v1/front.json
+  └ 31 lines…
+
+● Edit
+  │ Edit api/v1/front.json
+  └ Edit registry.json
+
+The SDK commit is complete. The migration will now be built as a deterministic projection: it validates every registry hash first, wraps all 307 frozen faces, pins payloads to the pre-generation HEAD, writes exact card-file hashes into the index, and removes only stale generated `.card` files.
+
+✔ Todo completed sdk-card-commands
+
+● Read test_pokedex_card_artifacts.py
+  │ tests/test_pokedex_card_artifacts.py
+  └ 45 lines read
+
+● Read .gitignore
+  └ 37 lines read
+
+/ Search (grep)
+  │ "generate_holo_cards|holo_cards\.json|forge" in *.yml (.github/workflows)
+  └ 43 lines found
+
+/ Search (grep)
+  │ "scripts/.*\.py|subprocess.run|idempotent|generated" in test_*.py (tests)
+  └ 312 lines found
+
+● Preflight migration inputs (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ from pathlib import Path
+  │ cards=json.loads(Path('cards/holo_cards.json').read_text())
+  │ reg={a['name']:a for a in json.loads(Path('registry.json').read_text())['agents']}…
+  └ 18 lines…
+
+● Read approve-agent.yml
+  │ .github/workflows/approve-agent.yml
+  └ L80:125 (46 lines read)
+
+● Read approve-agent-batch.yml
+  │ .github/workflows/approve-agent-batch.yml
+  └ L100:135 (36 lines read)
+
+● Inspect migration hash outliers (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ from pathlib import Path
+  │ cards=json.loads(Path('cards/holo_cards.json').read_text())
+  │ reg={a['name']:a for a in json.loads(Path('registry.json').read_text())['agents']}…
+  └ 89 lines…
+
+● Inspect nonstandard agent artifacts (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ from pathlib import Path
+  │ reg={a['name']:a for a in json.loads(Path('registry.json').read_text())['agents']}
+  │ for ident in ['@borg/borg_agent','@kody-w/legal_helper','@kody-w/example_private']:…
+  └ 64 lines…
+
+● Edit
+  │ Edit rapp_sdk.py
+  └ Create scripts/migrate_cards_v2.py
+
+● Generate migrated v2 cards (shell)
+  │ python3 scripts/migrate_cards_v2.py
+  └ 3 lines…
+
+● Read approve-agent.yml
+  │ .github/workflows/approve-agent.yml
+  └ L125:180 (56 lines read)
+
+● Read approve-agent-batch.yml
+  │ .github/workflows/approve-agent-batch.yml
+  └ L135:205 (71 lines read)
+
+● Read account_intelligence.card
+  │ cards/v2/@aibast-agents-library/account_intelligence.card
+  └ L1:180 (125 lines read)
+
+● Read index.json
+  │ cards/v2/index.json
+  └ L1:45 (45 lines read)
+
+● Audit generated card index and sizes (shell)
+  │ python3 - <<'PY'
+  │ import hashlib,json
+  │ from pathlib import Path
+  │ cards=json.loads(Path('cards/holo_cards.json').read_text())
+  │ idx=json.loads(Path('cards/v2/index.json').read_text())…
+  └ 19 lines…
+
+● Check migration and acceptance card flows (shell)
+  │ python3 scripts/migrate_cards_v2.py --check && python3 rapp_sdk.py card verify
+  │ cards/v2/@aibast-agents-library/account_intelligence.card && inc=$(python3 -c "import json;
+  │ print(json.load(open('cards/v2/index.json'))['@aibast-agents-library/account_intelligence']['inc
+  │ antation'])") && printf '\n-- scan --\n' && python3 rapp_sdk.py card scan "$inc"
+  └ 26 lines…
+
+● Edit
+  └ Edit .github/workflows/build-registry.yml
+
+● Edit
+  └ Edit scripts/migrate_cards_v2.py
+
+● Validate migration workflow ordering (shell)                                                    6s
+  │ python3 - <<'PY'
+  │ from pathlib import Path
+  │ import yaml
+  │ p=Path('.github/workflows/build-registry.yml')
+  │ data=yaml.safe_load(p.read_text())…
+  └ 9 lines…
+
+● Inspect migration worktree and counts (shell)                                                   6s
+  │ printf '%s\n' '-- tracked modifications --' && git status --short | sed -n '1,30p' && printf
+  │ '%s\n' '-- counts --' && printf 'generated card files: ' && find cards/v2 -type f -name '*.card'
+  │ | wc -l && printf 'v2 files total: ' && find cards/v2 -type f | wc -l && printf 'worktree
+  │ agents/registry changes: ' && git status --short agents registry.json | wc -l && git diff
+  │ --check
+  └ 13 lines…
+
+● Compile and check migration idempotence (shell)                                                 6s
+  │ python3 -m py_compile rapp_sdk.py scripts/migrate_cards_v2.py && python3
+  │ scripts/migrate_cards_v2.py --check
+  └ 3 lines…
+
+● Verify all migrated card payloads (shell)                                                       6s
+  │ python3 - <<'PY'
+  │ from pathlib import Path
+  │ import rapp_sdk
+  │ paths=sorted(Path('cards/v2').glob('@*/*.card'))
+  │ for path in paths:…
+  └ 6 lines…
+
+● Commit migration and generated cards (shell)
+  │ git add .github/workflows/build-registry.yml rapp_sdk.py scripts/migrate_cards_v2.py cards/v2 &&
+  │ git commit -m "Migrate legacy cards to rar-card v2" -m "Co-authored-by: Copilot
+  │ <223556219+Copilot@users.noreply.github.com>"
+  └ 12 lines…
+
+● Summarize migration commit (shell)
+  │ git --no-pager show --stat --oneline --summary HEAD | tail -n 12
+  └ 13 lines…
+
+● Confirm protected paths remain clean (shell)
+  │ git status --short agents registry.json && git status --short | sed -n '1,20p'
+  └ 4 lines…
+
+● Check migration after commit (shell)
+  │ python3 scripts/migrate_cards_v2.py --check
+  └ 3 lines…
+
+● Run suite after migration commit (shell)                                                    1m 18s
+  │ pytest -q
+  └ 85 lines…
+
+● Read post-test timestamp drift (shell)
+  │ git --no-pager diff -- registry.json api/v1/front.json
+  └ 26 lines…
+
+● Edit
+  │ Edit api/v1/front.json
+  └ Edit registry.json
+
+All 307 migrated cards now verify against exact Git blobs. I’m moving to the browser surface: the store and Grail are the actual v1 renderers; both will load v2 envelopes, render `face`, and encode `scan.url` with a bundled SVG QR implementation—no network QR service.
+
+✔ Todo completed migrate-cards
+
+● Read api.json
+  └ L1:45 (45 lines read)
+
+● Read store.html
+  └ L7688:7845 (158 lines read)
+
+/ Search (grep)
+  │ "function fetchJSON|async function fetchJSON" (store.html)
+  └ 11 lines found
+
+/ Search (grep)
+  │ "qrUrl|qrData|agentRawUrl|qrSalt" (store.html)
+  └ 74 lines found
+
+/ Search (grep)
+  │ "api\.json|cards_v2|card_file|endpoints.*cards" in *.py (tests)
+  └ No matches found
+
+/ Search (grep)
+  │ "cards/holo_cards\.json|CARDS_URL|_holoCards|qrserver|create-qr-code" in *.html
+  └ 154 lines found
+
+● Read incantation-hero.html
+  └ L640:760 (121 lines read)
+
+/ Search (grep)
+  │ "HOLO\[|HOLO\.|Object\.values\(HOLO|avatar_svg|render.*card|draw.*card" (incantation-hero.html)
+  └ 29 lines found
+
+/ Search (grep)
+  │ "__INLINED_CARD__|sCard|INLINED_CARD" (grail.html)
+  └ 39 lines found
+
+/ Search (grep)
+  │ "summon-qr|ac-qr|biz.*img|pres-biz-qr|\.qr" (grail.html, store.html, incantation-hero.html)
+  └ 122 lines found
+
+● Read incantation-hero.html
+  └ L900:995 (96 lines read)
+
+/ Search (grep)
+  │ "renderQR\(" (incantation-hero.html)
+  └ 15 lines found
+
+/ Search (grep)
+  │ "function renderQR|class QR|QRCode|qrCode|qrcode" (incantation-hero.html)
+  └ 28 lines found
+
+/ Search (grep)
+  │ "qrcode|QR Code|QR encoder|renderQR" in *.{js,html,mjs}
+  └ 4 files found
+
+● Read incantation-hero.html
+  └ L580:640 (14 lines read)
+
+/ Search (grep)
+  │ "qrcode-generator|var qrcode|function qrcode|qrcode\(" (store.html)
+  └ No matches found
+
+● Measure inline QR encoder (shell)
+  │ sed -n '586,639p' incantation-hero.html | wc -c && sed -n '586,639p' incantation-hero.html | wc
+  │ -l
+  └ 3 lines…
+
+● Edit
+  └ Edit store.html
+
+● Edit
+  └ Edit store.html
+
+● Edit
+  └ Edit store.html
+
+● Edit
+  └ Edit store.html
+
+● Edit
+  └ Edit store.html
+
+● Edit
+  └ Edit store.html
+
+✗ Edit
+  └ Edit store.html
+
+● Read store.html
+  └ L11555:11580 (26 lines read)
+
+/ Search (grep)
+  │ "const qrUrl = `https://api\.qrserver|printRawUrl|presRawUrl|<img src="\$\{qrUrl\}""
+  │ (store.html)
+  └ 58 lines found
+
+● Edit
+  │ Edit store.html
+  │ Edit store.html
+  └ Edit store.html
+
+● Edit
+  └ Edit store.html
+
+/ Search (grep)
+  │ "api\.qrserver|qrUrl" (store.html)
+  └ No matches found
+
+● Generate a local card QR SVG (shell)
+  │ node - <<'JS'
+  │ const fs=require('fs'); const html=fs.readFileSync('store.html','utf8');
+  │ const code=html.slice(html.indexOf('const _rarQrCache'), html.indexOf('//
+  │ ═══════════════════════════════════════════════════════\n// State'));
+  │ eval(code);…
+  └ 9 lines…
+
+● Find local QR validation tools (shell)
+  │ command -v zbarimg || true; command -v magick || true; command -v convert || true; python3 -
+  │ <<'PY'
+  │ for name in ('cv2','cairosvg','PIL','pyzbar'):
+  │ try:
+  │ mod=__import__(name); print(name,'yes')…
+  └ 7 lines…
+
+● Check store edits (shell)
+  │ git diff --check && git --no-pager diff --stat -- store.html
+  └ 3 lines…
+
+● Edit
+  └ Edit grail.html
+
+● Read grail.html
+  └ L820:960 (141 lines read)
+
+● Read grail.html
+  └ L790:825 (36 lines read)
+
+● Edit
+  └ Edit grail.html
+
+● Edit
+  └ Edit grail.html
+
+● Edit
+  └ Edit grail.html
+
+/ Search (grep)
+  │ "CARDS_URL|cardEnvelope|scan_url|rarQrSvg" (grail.html)
+  └ 11 lines found
+
+/ Search (grep)
+  │ "api\.qrserver|cards/v2/index|rarQrSvg|getV2Card" (store.html)
+  └ 12 lines found
+
+/ Search (grep)
+  │ "summonUrl\(|api\.qrserver|qrSrc\(" (grail.html)
+  └ 11 lines found
+
+● Edit
+  └ Edit incantation-hero.html
+
+● Edit
+  └ Edit api.json
+
+● Check v2 API endpoints (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ api=json.load(open('api.json'))
+  │ for key in ('cards_v2','card_file'):
+  │ e=api['endpoints'][key]; assert e['method']=='GET' and e['auth']=='none'…
+  └ 6 lines…
+
+● Parse modified inline JavaScript (shell)
+  │ node - <<'JS'
+  │ const fs=require('fs');
+  │ for (const file of ['store.html','grail.html','incantation-hero.html']) {
+  │ const html=fs.readFileSync(file,'utf8'); let count=0;
+  │ for (const match of html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/gi)) {…
+  └ 13 lines…
+
+● Inspect site and API changes (shell)
+  │ git --no-pager diff --stat && git status --short | sed -n '1,30p'
+  └ 14 lines…
+
+● Validate API and local QR policy (shell)
+  │ python3 -m json.tool api.json >/dev/null && git diff --check && rg -n "api\.qrserver\.com"
+  │ store.html grail.html || true
+  └ 2 lines…
+
+The site code parses cleanly and no card QR depends on a remote service. I’m validating the generated SVG matrices with an independent QR decoder across short, typical, and longest registry URLs before committing the renderer.
+
+● Decode generated QR SVGs independently (shell)
+  │ mkdir -p /tmp/rar-card-v2-jsqr && npm install --prefix /tmp/rar-card-v2-jsqr jsqr@1.4.0
+  │ --silent && node - <<'JS'
+  │ const fs=require('fs');
+  │ const jsQR=require('/tmp/rar-card-v2-jsqr/node_modules/jsqr');
+  │ const html=fs.readFileSync('store.html','utf8');…
+  └ 31 lines…
+
+● Decode QR versions seven through ten (shell)
+  │ mkdir -p /tmp/rar-card-v2-jsqr && npm install --prefix /tmp/rar-card-v2-jsqr jsqr@1.4.0
+  │ --silent && node - <<'JS'
+  │ const fs=require('fs'); const jsQR=require('/tmp/rar-card-v2-jsqr/node_modules/jsqr');
+  │ const html=fs.readFileSync('store.html','utf8'); const code=html.slice(html.indexOf('const
+  │ _rarQrCache'),html.indexOf('// ═══════════════════════════════════════════════════════\n// …
+  └ 22 lines…
+
+● Confirm QR encoder copies match (shell)
+  │ node - <<'JS'
+  │ const fs=require('fs');
+  │ function qrCode(file){const h=fs.readFileSync(file,'utf8');return h.slice(h.indexOf('const
+  │ _rarQrCache'),h.indexOf('// Standalone-export mode'));}
+  │ const store=fs.readFileSync('store.html','utf8');…
+  └ 24 lines…
+
+/ Search (grep)
+  │ "api\.qrserver\.com|cards/holo_cards\.json|cards/v2|scan\.url|rarQrSvg" (store.html, grail.html,
+  │ incantation-hero.html)
+  └ 3 files found
+
+● Check site diff and protected files (shell)
+  │ git diff --check && git status --short agents registry.json && git --no-pager diff --stat
+  └ 6 lines…
+
+● Run card-rendering consistency tests (shell)
+  │ pytest tests/test_store_consistency.py tests/test_pokedex_card_artifacts.py -q
+  └ 3 lines…
+
+● Locate QR encoder drift (shell)
+  │ node - <<'JS'
+  │ const fs=require('fs');const
+  │ s=fs.readFileSync('store.html','utf8'),g=fs.readFileSync('grail.html','utf8');
+  │ const a=s.slice(s.indexOf('const _rarQrCache'),s.indexOf('//
+  │ ═══════════════════════════════════════════════════════\n// State')).trim();…
+  └ 9 lines…
+
+● Edit
+  └ Edit store.html
+
+● Edit
+  │ Edit store.html
+  └ Edit grail.html
+
+/ Search (grep)
+  │ "api\.qrserver\.com" (store.html, grail.html, incantation-hero.html)
+  └ No matches found
+
+● Validate matching QR code and scripts (shell)
+  │ node - <<'JS'
+  │ const fs=require('fs');const
+  │ s=fs.readFileSync('store.html','utf8'),g=fs.readFileSync('grail.html','utf8');
+  │ const a=s.slice(s.indexOf('const _rarQrCache'),s.indexOf('//
+  │ ═══════════════════════════════════════════════════════\n// State')).trim();…
+  └ 13 lines…
+
+● Confirm protected files and site diff (shell)
+  │ git status --short agents registry.json && git --no-pager diff --stat
+  └ 6 lines…
+
+● Run site and API checks (shell)
+  │ pytest tests/test_store_consistency.py tests/test_pokedex_card_artifacts.py -q && python3 -m
+  │ json.tool api.json >/dev/null && git diff --check
+  └ 3 lines…
+
+● Commit site and API support (shell)
+  │ git add api.json store.html grail.html incantation-hero.html && git commit -m "Render sealed v2
+  │ cards on the site" -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+  └ 3 lines…
+
+● Run suite after site commit (shell)                                                         1m 24s
+  │ pytest -q
+  └ 85 lines…
+
+● Read post-site-test timestamp drift (shell)
+  │ git --no-pager diff -- registry.json api/v1/front.json
+  └ 26 lines…
+
+● Edit
+  │ Edit api/v1/front.json
+  └ Edit registry.json
+
+The renderer commit is complete. I’m adding the acceptance suite now, including all-307 face/seed checks, CLI byte round trips with CRLF and binary data, tamper refusals, both offline scan transports, migration idempotence, and site/API invariants.
+
+✔ Todo completed site-api
+
+● Edit
+  └ Create tests/test_rar_card_v2.py
+
+● Run RAR card v2 acceptance tests (shell)
+  │ pytest tests/test_rar_card_v2.py -q
+  └ 49 lines…
+
+● Edit
+  │ Edit rapp_sdk.py
+  └ Edit tests/test_rar_card_v2.py
+
+● Re-run card v2 acceptance tests (shell)
+  │ pytest tests/test_rar_card_v2.py -q
+  └ 3 lines…
+
+● Read README.md
+  └ L140:239 (100 lines read)
+
+● Read README.md
+  └ L1:140 (140 lines read)
+
+/ Search (grep)
+  │ "RAPPlication|rapplication|card|incantation|summon" (README.md)
+  └ 65 lines found
+
+● Inspect tests worktree before README (shell)
+  │ git status --short && git diff --check && git --no-pager diff --stat
+  └ 9 lines…
+
+● Edit
+  └ Edit README.md
+
+● Inspect test and README changes (shell)
+  │ git diff --check && git status --short agents registry.json && git --no-pager diff -- README.md
+  │ rapp_sdk.py | sed -n '1,220p'
+  └ 47 lines…
+
+● Run v2 and SDK test suites (shell)
+  │ pytest tests/test_rar_card_v2.py tests/test_rapp_sdk.py -q
+  └ 4 lines…
+
+● Commit card v2 acceptance tests (shell)
+  │ git add rapp_sdk.py tests/test_rar_card_v2.py && git commit -m "Test RAR card v2 acceptance" -m
+  │ "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+  └ 4 lines…
+
+● Edit
+  └ Edit README.md
+
+/ Search (grep)
+  │ "RAPPlication|rapplication" (README.md)
+  └ 11 lines found
+
+● Check Cards v2 README section (shell)
+  │ git diff --check && git --no-pager diff -- README.md
+  └ 31 lines…
+
+● Confirm protected docs and data clean (shell)
+  │ git status --short TRADEMARKS.md agents registry.json
+  └ 1 line…
+
+● Commit Cards v2 README docs (shell)
+  │ git add README.md && git commit -m "Document RAR cards v2" -m "Co-authored-by: Copilot
+  │ <223556219+Copilot@users.noreply.github.com>"
+  └ 3 lines…
+
+All six ordered commits are now present. I’m running the final acceptance pass exactly as requested, restoring only test-generated timestamps afterward, then I’ll report the literal command outputs and the pre-existing blockers to a green full suite.
+
+✔ Todo completed tests-docs
+
+● Run final full test suite (shell)                                                           1m 27s
+  │ pytest -q
+  └ 85 lines…
+
+● Read final test timestamp drift (shell)
+  │ git --no-pager diff -- registry.json api/v1/front.json
+  └ 26 lines…
+
+● Edit
+  │ Edit api/v1/front.json
+  └ Edit registry.json
+
+● Capture exact acceptance command outputs (shell)
+  │ python() { command python3 "$@"; }
+  │ incantation="DISMISS HUSK WIELD BINDER EFFACE MOON SHARD"
+  │ printf '%s\n' '$ python rapp_sdk.py card verify
+  │ cards/v2/@aibast-agents-library/account_intelligence.card'
+  │ python rapp_sdk.py card verify cards/v2/@aibast-agents-library/account_intelligence.card…
+  └ 49 lines…
+
+● Audit flags, sizes, commits, and final status (shell)
+  │ python3 - <<'PY'
+  │ import json
+  │ from pathlib import Path
+  │ import rapp_sdk
+  │ root=Path('.')…
+  └ 60 lines…
+
+● Code-review Review final RAR v2 diff                                                        13m 2s
+  └ ## Issue: Agent admission workflows now fail before committing new agents
+
+The final review found five real integration gaps, led by new-agent admission ordering and exact pin validation. I’m fixing all five now rather than shipping a branch that passes only the static snapshot.
+
+● Edit
+  │ Edit .github/workflows/approve-agent.yml
+  └ Edit .github/workflows/approve-agent-batch.yml
+
+● Edit
+  └ Edit rapp_sdk.py
+
+● Edit
+  └ Edit scripts/migrate_cards_v2.py
+
+● Read store.html
+  └ L3580:3695 (116 lines read)
+
+/ Search (grep)
+  │ "\.card[`'"]|rar-card/1\.0|Download.*card|export.*card" (store.html)
+  └ 157 lines found
+
+● Edit
+  └ Edit store.html
+
+● Edit
+  └ Edit store.html
+
+● Edit
+  └ Edit tests/test_rar_card_v2.py
+
+● Inspect correction worktree (shell)                                                             9s
+  │ git diff --check && git status --short agents registry.json && git --no-pager diff --stat
+  └ 8 lines…
+
+● Parse workflows and store JavaScript (shell)                                                    9s
+  │ python3 - <<'PY'
+  │ from pathlib import Path
+  │ import yaml
+  │ for name in ('approve-agent.yml','approve-agent-batch.yml','build-registry.yml'):
+  │ data=yaml.safe_load((Path('.github/workflows')/name).read_text())…
+  └ 14 lines…
+
+● Recheck exact pinned migration (shell)                                                          9s
+  │ python3 scripts/migrate_cards_v2.py --check
+  └ 3 lines…
+
+● Run corrected card and SDK tests (shell)                                                        9s
+  │ pytest tests/test_rar_card_v2.py tests/test_rapp_sdk.py -q
+  └ 4 lines…
+
+● Edit
+  │ Edit .github/workflows/approve-agent.yml
+  └ Edit .github/workflows/approve-agent-batch.yml
+
+● Edit
+  │ Edit store.html
+  └ Edit spec/rar-card-v2.md
+
+● Listing background agents
+
+✗ Write 45b46170
+  └ I implemented fixes for all five findings in the working tree: two-commit adm…
+
+● Validate workflows and importer JavaScript (shell)                                             10s
+  │ python3 - <<'PY'
+  │ from pathlib import Path
+  │ import yaml
+  │ for name in ('approve-agent.yml','approve-agent-batch.yml','build-registry.yml'):
+  │ yaml.safe_load((Path('.github/workflows')/name).read_text())…
+  └ 10 lines…
+
+● Inspect final correction diff (shell)                                                          10s
+  │ git diff --check && git status --short agents registry.json && git --no-pager diff --stat && git
+  │ status --short | sed -n '1,40p'
+  └ 20 lines…
+
+● Verify migration and Python syntax (shell)                                                     10s
+  │ python3 scripts/migrate_cards_v2.py --check && python3 -m py_compile rapp_sdk.py
+  │ scripts/migrate_cards_v2.py
+  └ 3 lines…
+
+● Run correction regression tests (shell)                                                        10s
+  │ pytest tests/test_rar_card_v2.py tests/test_rapp_sdk.py tests/test_store_consistency.py -q
+  └ 4 lines…
+
+● Commit final integration hardening (shell)
+  │ git add .github/workflows/approve-agent.yml .github/workflows/approve-agent-batch.yml
+  │ rapp_sdk.py scripts/migrate_cards_v2.py spec/rar-card-v2.md store.html tests/test_rar_card_v2.py
+  │ && git commit -m "Harden RAR card v2 integration" -m "Co-authored-by: Copilot
+  │ <223556219+Copilot@users.noreply.github.com>"
+  └ 3 lines…
+
+● Run hardened final full suite (shell)                                                       2m 16s
+  │ pytest -q
+  └ 85 lines…
+
+● Read hardened test timestamp drift (shell)
+  │ git --no-pager diff -- registry.json api/v1/front.json
+  └ 26 lines…
+
+● Edit
+  │ Edit api/v1/front.json
+  └ Edit registry.json
+
+● Check final commits and worktree (shell)                                                        8s
+  │ git diff --check && printf '%s\n' '-- commits --' && git --no-pager log --oneline main..HEAD &&
+  │ printf '%s\n' '-- status --' && git status --short
+  └ 14 lines…
+
+● Recapture final acceptance outputs (shell)                                                      8s
+  │ python() { command python3 "$@"; }
+  │ incantation="DISMISS HUSK WIELD BINDER EFFACE MOON SHARD"
+  │ printf '%s\n' '$ python rapp_sdk.py card verify
+  │ cards/v2/@aibast-agents-library/account_intelligence.card'
+  │ python rapp_sdk.py card verify cards/v2/@aibast-agents-library/account_intelligence.card…
+  └ 49 lines…
+
+● Run final migration drift check (shell)                                                         8s
+  │ python3 scripts/migrate_cards_v2.py --check
+  └ 3 lines…
+
+● Run final v2 acceptance suite (shell)                                                           8s
+  │ pytest tests/test_rar_card_v2.py -q
+  └ 3 lines…
+
+● Todo blocked acceptance-report
+
+RAR cards v2 is fully implemented and committed on `feat/rar-card-v2` without pushing. The card-specific suite is green, but the repository-wide gate remains blocked by the same three unrelated failures present before this work; resolving them would require prohibited changes under `agents/`.
+
+## Report
+
+**Commits**
+
+```text
+6de75618 Harden RAR card v2 integration
+56c9a166 Document RAR cards v2
+9db1f811 Test RAR card v2 acceptance
+d5561e99 Render sealed v2 cards on the site
+62582f11 Migrate legacy cards to rar-card v2
+1464f7b7 Add RAR card v2 SDK commands
+8223b054 Define RAR card v2 contract
+```
+
+### 1. Full test command — before/after
+
+```text
+Before: 3 failed, 2194 passed in 104.44s (0:01:44)
+After:  3 failed, 2216 passed in 136.02s (0:02:16)
+```
+
+The 22 new v2 acceptance tests pass:
+
+```text
+......................                                                   [100%]
+22 passed in 7.98s
+```
+
+The unchanged baseline failures are:
+
+```text
+FAILED tests/test_front_page.py::test_agents_without_community_signal_are_scored_at_the_median
+FAILED tests/test_skill_toaster.py::test_every_aggregated_item_has_an_agent
+FAILED tests/test_skill_toaster.py::test_generator_reports_no_drift
+```
+
+The latter two report 91 aggregated entries versus 90 generated agents and drift for `@cat-agent-skills/action_items_todo`. Fixing that would modify unrelated generated ecosystem state and `agents/`, contrary to the order.
+
+### 2. Verify and scan outputs
+
+```text
+$ python rapp_sdk.py card verify cards/v2/@aibast-agents-library/account_intelligence.card
+  Verified: @aibast-agents-library/account_intelligence
+  Schema: rar-card/2.0
+  Seed: 4997715477691771520
+  Incantation: DISMISS HUSK WIELD BINDER EFFACE MOON SHARD
+  State: dormant
+  Payload hashes:
+    agent.py account_intelligence_agent.py sha256-lf-v1:db3bf0e8b9dc53a4c16c879a11501783a03b923fa7142132f5d0ad0037d1f376
+
+$ python rapp_sdk.py card scan "DISMISS HUSK WIELD BINDER EFFACE MOON SHARD"
+  Verified: @aibast-agents-library/account_intelligence
+  Schema: rar-card/2.0
+  Seed: 4997715477691771520
+  Incantation: DISMISS HUSK WIELD BINDER EFFACE MOON SHARD
+  State: dormant
+  Face:
+    name: Account Intelligence
+    title: The Pilot
+    type_line: Legendary Creature — Agent Machinist
+    rarity: uncommon
+    rarity_label: Core
+    hp: 70
+  Payload hashes:
+    agent.py account_intelligence_agent.py sha256-lf-v1:db3bf0e8b9dc53a4c16c879a11501783a03b923fa7142132f5d0ad0037d1f376
+```
+
+The host provides `python3`; the requested literal `python` form was mapped to it in the acceptance shell.
+
+### 3. Counts and protected paths
+
+```text
+$ ls cards/v2 | wc -l
+      11
+
+$ python -c "import json; print(len(json.load(open('cards/holo_cards.json'))))"
+307
+
+$ find cards/v2 -type f -name "*.card" | wc -l
+     307
+
+$ git status --short agents registry.json
+<no output>
+```
+
+The root count is 11 because `cards/v2/` contains ten publisher directories plus `index.json`; recursively there are exactly 307 `.card` files for 307 v1 entries.
+
+### 4. Flags and surprises
+
+- Seed recomputation mismatches: **0**
+- Face round-trip mismatches: **0**
+- Cards over 1 MiB: **0**
+- Smallest card: **4,158 bytes**
+- Largest card: **6,787 bytes**
+- Two gated stubs lack `_sha256`; migration uses their canonical `_stub_sha256`: `@kody-w/legal_helper`, `@kody-w/example_private`.
+- All 307 seeds exceed JavaScript’s safe integer range; site readers preserve them as strings.
+- All 307 legacy decorative/stat faces contain information not fully encoded in the seed. Verification therefore checks the embedded manifest-derived identity and compares known migrated faces against the frozen v1 index.
+- Migration drift check: `307 cards … 0 changed, 0 stale removed`.
+- Tracked worktree is clean. The supplied order/spec files, `RUN.log`, and `CORRECTION-hero-law.md` remain untracked and untouched.
+
+
+
+Changes    +2973 -125
+AI Credits 1965.95 (1h 5m 15s)
+Tokens     ↑ 36.4m (35.6m cached, 737.4k written) • ↓ 195.6k (104.0k reasoning)
+Resume     copilot --resume=8064e668-5142-4d8c-9194-3e83f7a391bc
+exit=0

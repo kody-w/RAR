@@ -1,0 +1,144 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@cat-agent-skills/style_analyzer",
+  "seed": 25243945169274548848,
+  "name_seed": 1582596706,
+  "key": "HEDGE SOVEREIGN CROWN ELM OMEN FEDERATION THORN",
+  "version": "2.0.0",
+  "face": {
+    "name": "Communication Style Analyzer",
+    "title": "The Navigator",
+    "mana_cost": "{1}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Creature — Agent Pathfinder",
+    "rarity": "uncommon",
+    "power": 6,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Dispatch",
+        "cost": "",
+        "text": "Analyzes your Teams chats and emails to build a reusable profile of your writing voice — greetings, tone, length, punctuation, sign-offs, common phrases, and quirks — and saves it to memory for other "
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The code compiles. The agent decides. The work gets done.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-548262\"><stop offset=\"0%\" stop-color=\"#2a0a0a\"/><stop offset=\"100%\" stop-color=\"#0a0808\"/></radialGradient><filter id=\"gl-548262\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-548262)\"/><g filter=\"url(#gl-548262)\"><circle cx=\"93\" cy=\"96\" r=\"18\" fill=\"#7ee787\" opacity=\"0.10\"/><circle cx=\"93\" cy=\"83\" r=\"26\" fill=\"#7ee787\" opacity=\"0.06\"/><circle cx=\"108\" cy=\"84\" r=\"31\" fill=\"#7ee787\" opacity=\"0.08\"/><circle cx=\"111\" cy=\"118\" r=\"32\" fill=\"#7ee787\" opacity=\"0.08\"/><circle cx=\"100\" cy=\"83\" r=\"17\" fill=\"#7ee787\" opacity=\"0.06\"/><circle cx=\"102\" cy=\"90\" r=\"25\" fill=\"#7ee787\" opacity=\"0.11\"/><circle cx=\"118\" cy=\"97\" r=\"18\" fill=\"#7ee787\" opacity=\"0.04\"/><circle cx=\"98\" cy=\"107\" r=\"20\" fill=\"#7ee787\" opacity=\"0.06\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#7ee787\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#7ee787\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#7ee787\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"148.4\" y2=\"107.8\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"79.7\" y2=\"137.9\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"55.4\" y2=\"88.8\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"119.8\" y2=\"61.8\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/style_analyzer",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 49,
+    "stats": {
+      "hp": 49,
+      "atk": 52,
+      "def": 21,
+      "spd": 42,
+      "int": 48
+    },
+    "typed_abilities": [
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 2,
+        "damage": 34
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 25243945169274548848
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/style_analyzer",
+    "version": "2.0.0",
+    "display_name": "Communication Style Analyzer",
+    "description": "Analyzes your Teams chats and emails to build a reusable profile of your writing voice — greetings, tone, length, punctuation, sign-offs, common phrases, and quirks — and saves it to memory for other assistants to use.",
+    "author": "Srinivas Varukala",
+    "tags": [
+      "writing",
+      "style",
+      "teams",
+      "email",
+      "memory",
+      "productivity"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "style-analyzer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#style-analyzer",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "e5e6f66aa29bdddf"
+    },
+    "platforms": [
+      "Cowork",
+      "Scout"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "style_analyzer_agent.py",
+      "sha256_lf_v1": "529eb8528b62f6d9e5c1d80182371e91a9c7d725ddb394fb0588a2d6f7608287",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/style_analyzer_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@cat-agent-skills/style_analyzer_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -79,10 +79,11 @@ The store (`index.html`) is a single HTML file. Open it in any browser.
 | `delete @pub/slug --reason "..."` | Request hash-bound deletion |
 | `request-read @pub/slug` | Create an auditable read Issue |
 | `request-status ISSUE` | Read the Issues-backed lifecycle |
-| `card pack path.py [--egg file]` | Seal an agent as a rappid tile at `path.py.card` |
-| `card unpack path.py.card [directory]` | Verify and restore exact payload bytes |
-| `card verify path.py.card` | Verify the rappid tile schema, sleeve name, identity, face, and payload hashes |
-| `card scan URL_OR_SEED` | Resolve and inspect a rappid tile without executing it |
+| `tile pack path.py [--resource file]` | Seal an agent and its resources as `tiles/v1/@publisher/path.py.tile` |
+| `tile unpack path.py.tile [directory]` | Verify and restore exact payload bytes |
+| `tile verify path.py.tile` | Verify schema, identity, face, footprint, and payload hashes |
+| `tile scan URL_OR_SEED` | Resolve and inspect a `.tile` or legacy `.card` without executing it |
+| `tile from-card path.py.card` | Losslessly migrate one `rar-card/2.0` document |
 | `card resolve NAME` | Resolve a rappid tile from name, seed number, or 7-word incantation |
 | `card words NAME` | Get the 7-word incantation for any agent |
 | `egg forge @a @b @c` | Compress agents to a shareable string |
@@ -94,19 +95,19 @@ All commands support `--json`.
 
 ## Rappid tiles
 
-- **Pack:** `python rapp_sdk.py card pack agent.py` defaults to `--inline`, sealing a rapplication's agent and optional `.egg` into a rappid tile a person can keep.
-- **Scan:** `python rapp_sdk.py card scan URL_OR_SEED` verifies without execution and prints `offline: ready` only when every payload is inline.
-- **Summon:** scan its QR or speak its seven-word incantation; after verification, a client may explicitly hatch the payload.
+- **Pack:** `python rapp_sdk.py tile pack agent.py --resource prompt.txt` defaults to `--inline` and writes `tiles/v1/@publisher/agent.py.tile`.
+- **Scan:** `python rapp_sdk.py tile scan URL_OR_SEED` verifies without execution and prints `offline: ready` only when every required payload is inline and hash-valid.
+- **Summon:** scan its QR or speak its seven-word key; after identity, payload, and `stands_on` verification, a client may explicitly hatch it.
 
 `--pin <raw-url>` is RAR's compact registry form. A pinned-only rappid tile always
 reports `offline: needs <n> pinned payload(s)` and is never called
 offline-ready.
 
-The sleeve name is the primary payload's complete filename plus `.card`:
-`agent.py.card` or `foo.egg.card`. `card pack x_agent.py` writes
-`x_agent.py.card` beside the input; `--out` can change its directory but not
-that basename. `card unpack` strips the final `.card`, and verify/scan refuse a
-sleeve whose filename disagrees with `payload[0].filename`.
+The tile name is the primary payload's complete filename plus `.tile`:
+`agent.py.tile` or `foo.egg.tile`; a face-only document is `<slug>.tile`.
+The `card` command group remains as a deprecated alias and `.card` readers stay
+available indefinitely, but no normal writer adds to the frozen `cards/v2/`
+tree.
 
 ---
 

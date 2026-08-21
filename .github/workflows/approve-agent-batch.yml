@@ -178,16 +178,18 @@ jobs:
           commit_sha=$(git rev-parse HEAD)
           echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
 
-      # Pin v2 payloads only after the source revision exists locally. The push
+      # Pin tile payloads only after the source revision exists locally. The push
       # remains atomic: neither commit reaches main unless the full suite passes.
-      - name: Seal payload-named v2 cards and publish
+      - name: Seal payload-named tiles and publish
         env:
           ISSUE_NUMBERS: ${{ inputs.issues }}
         run: |
           set -euo pipefail
-          python scripts/migrate_cards_v2.py
-          git add cards/v2
-          git commit -m "Migrate rappid tiles for ${ISSUE_NUMBERS}"
+          python scripts/migrate_cards_v2.py --check
+          python scripts/migrate_tiles_v1.py
+          python build_registry.py
+          git add tiles/v1 registry.json
+          git commit -m "Build rappid tiles for ${ISSUE_NUMBERS}"
           python -m pytest -q
           git restore registry.json api/v1/front.json
           test -z "$(git status --porcelain --untracked-files=no)"

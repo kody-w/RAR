@@ -1,0 +1,140 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@cat-agent-skills/competitive_battlecard_builder",
+  "seed": 33710534760398727787,
+  "name_seed": 3553878210,
+  "key": "LATCH IRE WOVEN PALADIN TORQUE COIL SEAR",
+  "version": "2.0.0",
+  "face": {
+    "name": "Competitive Battlecard Builder",
+    "title": "The Catalyst",
+    "mana_cost": "{2}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Legendary Creature — Agent Luminary",
+    "rarity": "uncommon",
+    "power": 6,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Generate",
+        "cost": "",
+        "text": "Build an interactive comparison app, either a sales battlecard advocating for your product against named competitors, or a neutral, unbiased comparison across two or more peer items with no side taken"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The code compiles. The agent decides. The work gets done.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-d3e0c2\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"gl-d3e0c2\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-d3e0c2)\"/><g filter=\"url(#gl-d3e0c2)\"><line x1=\"76\" y1=\"47\" x2=\"84\" y2=\"46\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"84\" y1=\"46\" x2=\"131\" y2=\"106\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"131\" y1=\"106\" x2=\"121\" y2=\"132\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"121\" y1=\"132\" x2=\"146\" y2=\"159\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"146\" y1=\"159\" x2=\"68\" y2=\"168\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"68\" y1=\"168\" x2=\"76\" y2=\"47\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"76\" y1=\"47\" x2=\"131\" y2=\"106\" stroke=\"#8b949e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"76\" cy=\"47\" r=\"4\" fill=\"#8b949e\" opacity=\"0.47\"/><circle cx=\"84\" cy=\"46\" r=\"5\" fill=\"#8b949e\" opacity=\"0.68\"/><circle cx=\"131\" cy=\"106\" r=\"6\" fill=\"#8b949e\" opacity=\"0.66\"/><circle cx=\"121\" cy=\"132\" r=\"3\" fill=\"#8b949e\" opacity=\"0.68\"/><circle cx=\"146\" cy=\"159\" r=\"4\" fill=\"#8b949e\" opacity=\"0.55\"/><circle cx=\"68\" cy=\"168\" r=\"6\" fill=\"#8b949e\" opacity=\"0.54\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/competitive_battlecard_builder",
+    "agent_types": [
+      "SOCIAL",
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#bc8cff"
+    ],
+    "hp": 39,
+    "stats": {
+      "hp": 39,
+      "atk": 41,
+      "def": 21,
+      "spd": 38,
+      "int": 33
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 30
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 33710534760398727787
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/competitive_battlecard_builder",
+    "version": "2.0.0",
+    "display_name": "Competitive Battlecard Builder",
+    "description": "Build an interactive comparison app, either a sales battlecard advocating for your product against named competitors, or a neutral, unbiased comparison across two or more peer items with no side taken. Filterable by item and category, with live search, a compact scorecard, and copy-to-clipboard talking points. Every claim is tagged verified or unverified so nothing invented ends up in front of a…",
+    "author": "Michael Heath",
+    "tags": [
+      "sales_enablement",
+      "productivity",
+      "comparison"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "competitive-battlecard-builder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#competitive-battlecard-builder",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "d2d932cf8ec2e523"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "competitive_battlecard_builder_agent.py",
+      "sha256_lf_v1": "0b7356f6516b4afaabbed99ae04111381a60d133eeba92effdad8545f2f05ddd",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/competitive_battlecard_builder_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@cat-agent-skills/competitive_battlecard_builder_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

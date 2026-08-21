@@ -1,0 +1,137 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@howardh/chief_of_staff_agent",
+  "seed": 11483753548010627847,
+  "name_seed": 2673769730,
+  "key": "KNIGHT SANCTIFY NORSE CHISEL BLISS PARAPET BRAND",
+  "version": "1.0.1",
+  "face": {
+    "name": "ChiefOfStaff",
+    "title": "The Operator",
+    "mana_cost": "{1}{G}{W}{R}",
+    "colors": [
+      "G",
+      "W",
+      "R"
+    ],
+    "type_line": "Creature — Agent Conjurer",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Generates M365-grounded briefs, inbox triage, meeting prep, commitment tracking, and drafts via the WorkIQ CLI, plus HN/DDG signal scans."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Efficiency is not a goal. It’s a side effect of clarity.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-5e7d02\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-5e7d02\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-5e7d02)\"/><g filter=\"url(#gl-5e7d02)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#7ee787\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#7ee787\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"22\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(-11 100 100)\"/><circle cx=\"112.2\" cy=\"84.2\" r=\"5\" fill=\"#7ee787\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"24\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(13 100 100)\"/><circle cx=\"83.5\" cy=\"126.3\" r=\"3\" fill=\"#7ee787\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"66\" ry=\"32\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.36\" transform=\"rotate(8 100 100)\"/><circle cx=\"91.9\" cy=\"140.8\" r=\"5\" fill=\"#7ee787\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"84\" ry=\"29\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.44\" transform=\"rotate(26 100 100)\"/><circle cx=\"158.6\" cy=\"113.4\" r=\"3\" fill=\"#7ee787\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@howardh/chief_of_staff_agent",
+    "agent_types": [
+      "SOCIAL",
+      "HEAL"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#ff7eb3"
+    ],
+    "hp": 70,
+    "stats": {
+      "hp": 70,
+      "atk": 68,
+      "def": 47,
+      "spd": 47,
+      "int": 72
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 2,
+        "damage": 23
+      },
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 20
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 11483753548010627847
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@howardh/chief_of_staff_agent",
+    "version": "1.0.1",
+    "display_name": "ChiefOfStaff",
+    "description": "Generates M365-grounded briefs, inbox triage, meeting prep, commitment tracking, and drafts via the WorkIQ CLI, plus HN/DDG signal scans.",
+    "author": "Howard Hoy",
+    "tags": [
+      "productivity",
+      "chief-of-staff",
+      "m365",
+      "workiq",
+      "executive",
+      "triage",
+      "meeting-prep"
+    ],
+    "category": "productivity",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "chief_of_staff_agent.py",
+      "sha256_lf_v1": "5d904f34d63faa2271e66a6d1c6f033c269136c840a1bd4d4dcc57875bbf8354",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@howardh/chief_of_staff_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@howardh/chief_of_staff_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

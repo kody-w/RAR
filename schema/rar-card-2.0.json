@@ -110,6 +110,23 @@
         "null"
       ]
     },
+    "table": {
+      "type": "object",
+      "required": [
+        "seat",
+        "faceUp"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "seat": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "faceUp": {
+          "type": "boolean"
+        }
+      }
+    },
     "scan": {
       "type": "object",
       "required": [

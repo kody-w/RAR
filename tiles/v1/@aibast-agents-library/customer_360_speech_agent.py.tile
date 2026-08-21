@@ -1,0 +1,132 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/customer_360_speech",
+  "seed": 14861492049442254073,
+  "name_seed": 3460210759,
+  "key": "BEND MONARCH COBALT CHIME THREAD HEIRLOOM STAMP",
+  "version": "1.1.0",
+  "face": {
+    "name": "Customer 360 & Speech Agent",
+    "title": "The Arbiter",
+    "mana_cost": "{3}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Creature — Agent Tactician",
+    "rarity": "rare",
+    "power": 5,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The simplest solution is usually an agent away.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-3ea047\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-3ea047\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-3ea047)\"/><g filter=\"url(#gl-3ea047)\"><circle cx=\"68.8\" cy=\"78.3\" r=\"17\" fill=\"#7ee787\" opacity=\"0.15\" stroke=\"#7ee787\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"131.2\" cy=\"121.7\" r=\"13\" fill=\"#7ee787\" opacity=\"0.1\" stroke=\"#7ee787\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"68.8\" y1=\"78.3\" x2=\"131.2\" y2=\"121.7\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/customer_360_speech",
+    "agent_types": [
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#bc8cff"
+    ],
+    "hp": 75,
+    "stats": {
+      "hp": 75,
+      "atk": 62,
+      "def": 35,
+      "spd": 65,
+      "int": 58
+    },
+    "typed_abilities": [
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 2,
+        "damage": 24
+      },
+      {
+        "name": "Negotiate",
+        "text": "Propose terms optimized for mutual value.",
+        "cost": 2,
+        "damage": 45
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 14861492049442254073
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/customer_360_speech",
+    "version": "1.1.0",
+    "display_name": "Customer 360 & Speech Agent",
+    "description": "Builds customer 360 profiles from live accounts, orders, and cases in a simulated Dynamics 365 tenant, with an embedded offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "customer-360",
+      "speech",
+      "sentiment",
+      "omnichannel",
+      "profile",
+      "b2c"
+    ],
+    "category": "b2c_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "customer_360_speech_agent.py",
+      "sha256_lf_v1": "6ba087b8885c52ce347b6692679ee5a8e75b6d4a205615cbe3f0f35531b9d1db",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/customer_360_speech_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

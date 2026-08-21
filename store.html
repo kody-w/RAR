@@ -2516,8 +2516,8 @@
         <option value="verified">Verified First</option>
       </select>
       <button onclick="openAgentSlides()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);font-size:.78rem;cursor:pointer;white-space:nowrap">Present</button>
-      <button onclick="document.getElementById('submit-file-input').click()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--accent);background:rgba(88,166,255,.1);color:var(--accent);font-size:.78rem;cursor:pointer;white-space:nowrap;font-weight:600">Load agent.py / .card</button>
-      <input type="file" id="submit-file-input" accept=".py,.card" multiple style="display:none" onchange="handleFileDrop(this.files);this.value=''">
+      <button onclick="document.getElementById('submit-file-input').click()" style="padding:6px 14px;border-radius:6px;border:1px solid var(--accent);background:rgba(88,166,255,.1);color:var(--accent);font-size:.78rem;cursor:pointer;white-space:nowrap;font-weight:600">Load agent.py / .tile</button>
+      <input type="file" id="submit-file-input" accept=".py,.tile,.card" multiple style="display:none" onchange="handleFileDrop(this.files);this.value=''">
     </div>
     <div class="filter-pills" id="category-pills"></div>
     <div class="local-mgmt" id="local-mgmt" style="display:none;margin-top:12px">
@@ -2525,8 +2525,8 @@
       <button class="local-mgmt-btn" onclick="exportLocalAgents()">Export All</button>
       <button class="local-mgmt-btn danger" onclick="clearLocalAgents()">Clear Local</button>
       <div class="drop-zone" id="drop-zone" style="flex:1;padding:10px;margin-bottom:0">
-        <input type="file" accept=".py,.card,.rad.eggs,.egg" multiple onchange="handleFileDrop(this.files)">
-        <span>Drop .py / .card / .rad.eggs files here</span>
+        <input type="file" accept=".py,.tile,.card,.rad.eggs,.egg" multiple onchange="handleFileDrop(this.files)">
+        <span>Drop .py / .tile / legacy .card / .rad.eggs files here</span>
       </div>
     </div>
     <div id="drop-zone-full" style="display:none"></div>
@@ -3600,30 +3600,41 @@ function parseManifestFromPython(code) {
   } catch { return null; }
 }
 
-function parseRarCardV2(text) {
-  let card;
+function parseRappidTile(text) {
+  let tile;
   try {
     const safe = text
       .replace(/"seed":\s*(\d+)/g, '"seed":"$1"')
       .replace(/"name_seed":\s*(\d+)/g, '"name_seed":"$1"');
-    card = JSON.parse(safe);
+    tile = JSON.parse(safe);
   } catch {
     return null;
   }
-  if (card?.schema !== 'rar-card/2.0') return null;
+  if (!['rappid-tile/1.0', 'rar-card/2.0'].includes(tile?.schema)) return null;
   if (
-    !card.id || card.manifest?.name !== card.id || !card.face ||
-    !Array.isArray(card.payload) || !card.scan?.url ||
-    String(card.face.seed) !== String(card.seed)
+    !tile.id || tile.manifest?.name !== tile.id || !tile.face ||
+    !Array.isArray(tile.payload) || !tile.scan?.url ||
+    String(tile.face.seed) !== String(tile.seed)
   ) {
-    throw new Error('invalid rar-card/2.0 envelope');
+    throw new Error(`invalid ${tile.schema} envelope`);
   }
-  return card;
+  if (
+    tile.schema === 'rappid-tile/1.0' &&
+    (!tile.key || !tile.stands_on || tile.payload[0]?.role !== 'primary')
+  ) {
+    throw new Error('invalid rappid-tile/1.0 footprint or primary payload');
+  }
+  return tile;
 }
 
-async function importRarCardV2(file, text, card) {
-  const manifest = card.manifest;
-  const agentPayload = card.payload.find(item => item.kind === 'agent.py');
+function parseRarCardV2(text) {
+  const document = parseRappidTile(text);
+  return document?.schema === 'rar-card/2.0' ? document : null;
+}
+
+async function importRappidTile(file, text, tile) {
+  const manifest = tile.manifest;
+  const agentPayload = tile.payload.find(item => item.kind === 'agent.py');
   const inlineCode = typeof agentPayload?.inline === 'string'
     ? agentPayload.inline
     : '';
@@ -3635,18 +3646,20 @@ async function importRarCardV2(file, text, card) {
     _lines: inlineCode ? inlineCode.split('\n').length : 0,
     _size_kb: (new Blob([text]).size / 1024).toFixed(1),
     _added: new Date().toISOString(),
-    _card_v2: card,
+    _tile: tile.schema === 'rappid-tile/1.0' ? tile : null,
+    _card_v2: tile.schema === 'rar-card/2.0' ? tile : null,
     quality_tier: manifest.quality_tier || 'unverified',
     tags: manifest.tags || [],
     requires_env: manifest.requires_env || [],
     dependencies: manifest.dependencies || [],
   });
-  _holoCards[card.id] = card.face;
-  _v2CardIndex[card.id] = {
-    seed: card.seed,
-    name_seed: card.name_seed,
-    incantation: card.incantation,
-    url: card.scan.url,
+  _holoCards[tile.id] = tile.face;
+  _v2CardIndex[tile.id] = {
+    schema: tile.schema,
+    seed: tile.seed,
+    name_seed: tile.name_seed,
+    key: tile.key || tile.incantation,
+    url: tile.scan.url,
   };
 }
 
@@ -3665,18 +3678,18 @@ async function handleFileDrop(files) {
       if (card) added++;
       continue;
     }
-    // Accept .py, .card, and .py.card.DeckName files
-    const isPyOrCard = file.name.endsWith('.py') || file.name.endsWith('.card') || /\.py\.card\..+$/.test(file.name);
+    // Accept canonical .tile plus legacy .py and .card inputs.
+    const isPyOrCard = file.name.endsWith('.py') || file.name.endsWith('.tile') || file.name.endsWith('.card') || /\.py\.card\..+$/.test(file.name);
     if (!isPyOrCard) continue;
     let code = await file.text();
-    if (file.name.endsWith('.card')) {
+    if (file.name.endsWith('.tile') || file.name.endsWith('.card')) {
       try {
-        const v2Card = parseRarCardV2(code);
-        if (v2Card) {
-          await importRarCardV2(file, code, v2Card);
+        const tile = parseRappidTile(code);
+        if (tile) {
+          await importRappidTile(file, code, tile);
           added++;
           showToast(
-            `${v2Card.manifest.display_name || v2Card.id}: sealed rappid tile loaded; verify before hatching`,
+            `${tile.manifest.display_name || tile.id}: sealed rappid tile loaded; verify before hatching`,
             'success',
           );
           continue;
@@ -3852,14 +3865,15 @@ async function submitDroppedAgents() {
 async function mergeLocalAgents() {
   const locals = await getAllLocalAgents();
   for (const local of locals) {
-    const card = local._card_v2;
-    if (card?.schema !== 'rar-card/2.0') continue;
-    _holoCards[card.id] = card.face;
-    _v2CardIndex[card.id] = {
-      seed: card.seed,
-      name_seed: card.name_seed,
-      incantation: card.incantation,
-      url: card.scan.url,
+    const tile = local._tile || local._card_v2;
+    if (!['rappid-tile/1.0', 'rar-card/2.0'].includes(tile?.schema)) continue;
+    _holoCards[tile.id] = tile.face;
+    _v2CardIndex[tile.id] = {
+      schema: tile.schema,
+      seed: tile.seed,
+      name_seed: tile.name_seed,
+      key: tile.key || tile.incantation,
+      url: tile.scan.url,
     };
   }
   // Remove any existing local-device entries from allAgents
@@ -3997,7 +4011,10 @@ async function init() {
     fetchJSON(`${RAW}/state/votes.json`),
     fetchJSON(`${RAW}/state/reviews.json`),
     fetchJSON(`${RAW}/cards/holo_cards.json`),
-    fetchV2CardIndex(`${RAW}/cards/v2/index.json`),
+    fetchTileIndex(
+      `${RAW}/tiles/v1/index.json`,
+      `${RAW}/cards/v2/index.json`,
+    ),
     fetchJSON(`${RAW}/state/discussion_ratings.json`),
     fetchJSON(`${RAW}/state/federation.json`),
   ]);
@@ -4125,6 +4142,27 @@ async function fetchV2CardIndex(url) {
   } catch {
     return null;
   }
+}
+
+async function fetchTileIndex(tileUrl, cardUrl) {
+  const canonical = await fetchV2CardIndex(tileUrl);
+  if (canonical?.tiles) {
+    return Object.fromEntries(
+      Object.entries(canonical.tiles).map(([name, entry]) => [
+        name,
+        { schema: 'rappid-tile/1.0', ...entry },
+      ]),
+    );
+  }
+  const cards = await fetchV2CardIndex(cardUrl);
+  return cards
+    ? Object.fromEntries(
+        Object.entries(cards).map(([name, entry]) => [
+          name,
+          { schema: 'rar-card/2.0', ...entry },
+        ]),
+      )
+    : null;
 }
 
 // ─── Real metrics: both signals are authenticated GitHub reactions ───
@@ -4292,7 +4330,7 @@ function downloadAsciiCard(name) {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = (a.name.split('/')[1] || 'agent') + '.card.txt';
+  link.download = (a.name.split('/')[1] || 'agent') + '.tile.txt';
   link.click();
   URL.revokeObjectURL(url);
   showToast('Rappid tile downloaded', 'success');
@@ -5310,9 +5348,9 @@ function openAgent(name) {
           ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">${svgIcon('trash','#f85149',32)} Remove Local Agent</a>
              <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',32)} Submit to Store</a>`
           : `<a href="#" onclick="event.preventDefault();downloadAgentPy('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',32)} agent.py</a>
-             <a href="#" onclick="event.preventDefault();exportAgentCard('${esc(a.name)}')" style="color:var(--green);font-size:.9rem">${svgIcon('arrow','#39d353',32)} agent.py.card</a>
+             <a href="#" onclick="event.preventDefault();exportAgentCard('${esc(a.name)}')" style="color:var(--green);font-size:.9rem">${svgIcon('arrow','#39d353',32)} agent.py.tile</a>
              ${Object.entries(allDecks).filter(([_, cards]) => cards.includes(a.name)).map(([dn]) =>
-               `<a href="#" onclick="event.preventDefault();exportAgentDeckCard('${esc(a.name)}','${esc(dn)}')" style="color:var(--purple);font-size:.9rem">${svgIcon('arrow','#d2a8ff',32)} .py.card.${esc(dn)}</a>`
+               `<a href="#" onclick="event.preventDefault();exportAgentDeckCard('${esc(a.name)}','${esc(dn)}')" style="color:var(--purple);font-size:.9rem">${svgIcon('arrow','#d2a8ff',32)} .tile (${esc(dn)})</a>`
              ).join('')}
              <a href="#" onclick="event.preventDefault();shareAgent('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('link','#58a6ff',32)} Copy Link</a>`}
         <a href="#" onclick="event.preventDefault();toggleCartItem('${esc(a.name)}');openAgent('${esc(a.name)}')" style="color:${cart.has(a.name)?'var(--green)':'var(--accent)'};font-size:.9rem">${cart.has(a.name)?svgIcon('cart','#39d353',32)+' In Cart':svgIcon('cart','#58a6ff',32)+' Add to Cart'}</a>
@@ -7148,7 +7186,8 @@ function getV2Card(a) {
   const indexed = _v2CardIndex[a.name];
   if (!indexed) return null;
   return {
-    schema: 'rar-card/2.0',
+    schema: indexed.schema ||
+      (indexed.url?.endsWith('.card') ? 'rar-card/2.0' : 'rappid-tile/1.0'),
     id: a.name,
     face: _holoCards[a.name] || null,
     scan: { url: indexed.url },
@@ -7158,7 +7197,9 @@ function getV2Card(a) {
 
 function cardFileUrlForAgent(a, rawBase = RAW) {
   const publisher = (a.name || '').split('/')[0];
+  if (a._tile?.scan?.url) return a._tile.scan.url;
   if (a._card_v2?.scan?.url) return a._card_v2.scan.url;
+  if (_v2CardIndex[a.name]?.url) return _v2CardIndex[a.name].url;
   const sourceFilename = (a._file || '').split('/').pop() ||
     `${(a.name || '').split('/').pop()}.py`;
   const collides = allAgents.some(other =>
@@ -7169,11 +7210,11 @@ function cardFileUrlForAgent(a, rawBase = RAW) {
   const primaryFilename = a._card_v2?.payload?.[0]?.filename ||
     (collides ? a._install_filename : null) ||
     sourceFilename;
-  return `${rawBase}/cards/v2/${publisher}/${primaryFilename}.card`;
+  return `${rawBase}/tiles/v1/${publisher}/${primaryFilename}.tile`;
 }
 
-// The v2 face is the frozen v1 object. Keeping the aggregate v1 face map avoids
-// 307 startup requests while the v2 index supplies the sealed card and scan URL.
+// The tile face is the frozen v1 object. The aggregate face map avoids one
+// request per tile while the canonical index supplies its scan URL.
 function getHoloCard(a) {
   const v2 = getV2Card(a);
   if (v2?.face) return v2.face;
@@ -8166,7 +8207,7 @@ function agentToCard(a) {
 
   // ── QR Back Face ──
   const qrImgHtml = `<div class="ac-qr">${rarQrSvg(qrData,120)}</div>
-       <div class="ac-back-hint">Scan rappid tile (.card)${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
+       <div class="ac-back-hint">Scan rappid tile (.tile)${qrSalt ? ` &middot; ${qrSalt}` : ''}</div>`;
   const qrFace = `
     <div class="agent-card-back">
       <div class="ac-back-logo">RAPP</div>
@@ -10494,7 +10535,7 @@ async function openPack(setId) {
       <div style="margin-top:24px;animation:showcaseFadeIn .5s ease-out .7s both;opacity:0;display:flex;gap:12px">
         ${isLast ? `
           <button id="reveal-next-btn" style="padding:12px 32px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:all .2s;letter-spacing:1px" onclick="this.closest('.pack-open-overlay').remove();document.body.style.overflow='';renderCollection();renderPullHistory();renderTrophyCase()">Add All to Collection</button>
-          <button style="padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;transition:all .2s" onclick="exportPackCards()">Export legacy sleeve (.py.card)</button>
+          <button style="padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:1px solid var(--accent);background:var(--accent);color:#fff;transition:all .2s" onclick="exportPackCards()">Export canonical tiles (.tile)</button>
         ` : `
           <button id="reveal-next-btn" style="padding:14px 48px;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer;border:2px solid ${glowColor};background:transparent;color:${glowColor};transition:all .2s;letter-spacing:2px;text-transform:uppercase;animation:showcasePulse 2s ease-in-out infinite" onclick="revealNext()">Next Rappid Tile</button>
         `}
@@ -10826,66 +10867,36 @@ async function renderMiniCard(canvas, card) {
   }
 }
 
-// ── .card File Export (wrapped agent.py — backward compatible) ──
-// Legacy .py.card exports are executable Python wrappers. They are deliberately
-// named differently from inert rar-card/2.0 JSON files.
+// ── Canonical .tile export ──
+async function exportCanonicalTile(a) {
+  const url = cardFileUrlForAgent(a);
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const text = await response.text();
+    const tile = parseRappidTile(text);
+    if (tile?.schema !== 'rappid-tile/1.0') {
+      throw new Error('canonical rappid-tile/1.0 document not found');
+    }
+    const filename = decodeURIComponent(new URL(url).pathname.split('/').pop());
+    const blob = new Blob([text], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.download = filename.endsWith('.tile')
+      ? filename
+      : `${tile.payload?.[0]?.filename || 'rappid'}.tile`;
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    URL.revokeObjectURL(link.href);
+    showToast(`Exported ${a.display_name || a.name} as .tile`, 'success');
+  } catch (error) {
+    showToast(`Could not export tile: ${error.message}`, 'error');
+  }
+}
+
 async function exportSingleCard(card) {
   const a = allAgents.find(x => x.name === card.agentName);
   if (!a) return;
-
-  // Fetch source code
-  let sourceCode = a._code || '';
-  if (!sourceCode && a._file) {
-    try {
-      const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/${a._file}`;
-      const resp = await fetch(rawUrl);
-      if (resp.ok) sourceCode = await resp.text();
-    } catch {}
-  }
-  if (!sourceCode) { showToast('Could not fetch agent source', 'error'); return; }
-
-  const sourceHashHex = hashCode(sourceCode).toString(16).toUpperCase().padStart(8, '0');
-  const slug = (a.name.split('/')[1] || 'agent').replace(/[^a-z0-9_]/gi, '_');
-  const gl = gradeLabel(card.grade);
-
-  // Build card metadata block — valid Python comment, parseable by the store
-  const cardMeta = {
-    format: 'rar-card/1.0',
-    serial: card.serial,
-    mintId: card.mintId,
-    mintedAt: card.mintedAt,
-    grade: card.grade,
-    gradeLabel: gl.label,
-    isFirstEdition: card.isFirstEdition || false,
-    tierAtMint: card.tierAtMint,
-    votesAtMint: card.votesAtMint,
-    transfers: card.transfers,
-    sourceHash: sourceHashHex,
-    variations: card.variations,
-  };
-
-  // Prepend card metadata as a Python comment block
-  // The Brainstem ignores these lines (they're comments)
-  // The store parses them to reconstruct the card
-  const cardHeader = [
-    `# __card__ = ${JSON.stringify(cardMeta)}`,
-    `# Exported from RAPP Agent Store — ${new Date().toISOString()}`,
-    `# This file IS the agent. Drop it into agents/ and it runs.`,
-    `# Card metadata above is ignored by Python but parsed by the store.`,
-    ``,
-  ].join('\n');
-
-  // If source already has a card header, strip it
-  const cleanSource = sourceCode.replace(/^# __card__ = .*\n(# .*\n)*\n?/, '');
-  const cardFile = cardHeader + cleanSource;
-
-  const blob = new Blob([cardFile], { type: 'text/x-python' });
-  const link = document.createElement('a');
-  link.download = `${slug}.py.card`;
-  link.href = URL.createObjectURL(blob);
-  link.click();
-  URL.revokeObjectURL(link.href);
-  showToast(`Exported ${a.display_name} — drop into agents/ to run`, 'success');
+  await exportCanonicalTile(a);
 }
 
 async function exportPackCards() {
@@ -10896,119 +10907,19 @@ async function exportPackCards() {
   }
 }
 
-// Export agent.py.card from agent detail modal (works with or without a minted card)
+// Export the canonical tile from the agent detail modal.
 async function exportAgentCard(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a) return;
-
-  // Check if user has a minted card for this agent
-  const allCards = await getAllMinted();
-  const minted = allCards.find(c => c.agentName === name);
-  if (minted) { await exportSingleCard(minted); return; }
-
-  // No minted card — build a lightweight .py.card with agent metadata only
-  let sourceCode = a._code || '';
-  if (!sourceCode && a._file) {
-    try {
-      const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/${a._file}`;
-      const resp = await fetch(rawUrl);
-      if (resp.ok) sourceCode = await resp.text();
-    } catch {}
-  }
-  if (!sourceCode) { showToast('Could not fetch agent source', 'error'); return; }
-
-  const slug = (a.name.split('/')[1] || 'agent').replace(/[^a-z0-9_]/gi, '_');
-  const cardMeta = {
-    format: 'rar-card/1.0',
-    agentName: a.name,
-    displayName: a.display_name,
-    version: a.version,
-    category: a.category,
-    tier: a.quality_tier || 'community',
-    sourceHash: hashCode(sourceCode).toString(16).toUpperCase().padStart(8, '0'),
-  };
-  const cardHeader = [
-    `# __card__ = ${JSON.stringify(cardMeta)}`,
-    `# Exported from RAPP Agent Store — ${new Date().toISOString()}`,
-    `# This file IS the agent. Drop it into agents/ and it runs.`,
-    `# Card metadata above is ignored by Python but parsed by the store.`,
-    ``,
-  ].join('\n');
-  const cleanSource = sourceCode.replace(/^# __card__ = .*\n(# .*\n)*\n?/, '');
-  const blob = new Blob([cardHeader + cleanSource], { type: 'text/x-python' });
-  const link = document.createElement('a');
-  link.download = `${slug}.py.card`;
-  link.href = URL.createObjectURL(blob);
-  link.click();
-  URL.revokeObjectURL(link.href);
-  showToast(`Exported ${a.display_name}.py.card`, 'success');
+  await exportCanonicalTile(a);
 }
 
-// Export agent.py.card.DeckName — .py.card bundled with deck membership
+// Deck membership stays local; the exported transport is still one canonical tile.
 async function exportAgentDeckCard(name, deckName) {
   const a = allAgents.find(x => x.name === name);
   if (!a) return;
-
-  let sourceCode = a._code || '';
-  if (!sourceCode && a._file) {
-    try {
-      const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/${a._file}`;
-      const resp = await fetch(rawUrl);
-      if (resp.ok) sourceCode = await resp.text();
-    } catch {}
-  }
-  if (!sourceCode) { showToast('Could not fetch agent source', 'error'); return; }
-
-  // Build card metadata — include minted data if available
-  const allCards = await getAllMinted();
-  const minted = allCards.find(c => c.agentName === name);
-  const slug = (a.name.split('/')[1] || 'agent').replace(/[^a-z0-9_]/gi, '_');
-  const deckSlug = deckName.replace(/[^a-z0-9]/gi, '_');
-  const sourceHashHex = hashCode(sourceCode).toString(16).toUpperCase().padStart(8, '0');
-
-  const cardMeta = minted ? {
-    format: 'rar-card/1.0',
-    serial: minted.serial,
-    mintId: minted.mintId,
-    mintedAt: minted.mintedAt,
-    grade: minted.grade,
-    gradeLabel: gradeLabel(minted.grade).label,
-    isFirstEdition: minted.isFirstEdition || false,
-    tierAtMint: minted.tierAtMint,
-    votesAtMint: minted.votesAtMint,
-    transfers: minted.transfers,
-    sourceHash: sourceHashHex,
-    variations: minted.variations,
-    deck: deckName,
-    deckCards: allDecks[deckName] || [],
-  } : {
-    format: 'rar-card/1.0',
-    agentName: a.name,
-    displayName: a.display_name,
-    version: a.version,
-    category: a.category,
-    tier: a.quality_tier || 'community',
-    sourceHash: sourceHashHex,
-    deck: deckName,
-    deckCards: allDecks[deckName] || [],
-  };
-
-  const cardHeader = [
-    `# __card__ = ${JSON.stringify(cardMeta)}`,
-    `# Exported from RAPP Agent Store — ${new Date().toISOString()}`,
-    `# Deck: ${deckName}`,
-    `# This file IS the agent. Drop it into agents/ and it runs.`,
-    `# Card metadata above is ignored by Python but parsed by the store.`,
-    ``,
-  ].join('\n');
-  const cleanSource = sourceCode.replace(/^# __card__ = .*\n(# .*\n)*\n?/, '');
-  const blob = new Blob([cardHeader + cleanSource], { type: 'text/x-python' });
-  const link = document.createElement('a');
-  link.download = `${slug}.py.card.${deckSlug}`;
-  link.href = URL.createObjectURL(blob);
-  link.click();
-  URL.revokeObjectURL(link.href);
-  showToast(`Exported ${a.display_name} with deck "${deckName}"`, 'success');
+  await exportCanonicalTile(a);
+  showToast(`Deck "${deckName}" remains local; tile export is portable`, 'success');
 }
 
 // ── Collection Viewer ──
@@ -11462,7 +11373,7 @@ async function openSlabViewer(mintId) {
         <div class="slab-panel">
           <h4>Actions</h4>
           <div class="slab-actions">
-            <button class="slab-btn primary" onclick="exportSingleCard(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export legacy sleeve (.py.card)</button>
+            <button class="slab-btn primary" onclick="exportSingleCard(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export canonical tile (.tile)</button>
             <button class="slab-btn" style="background:var(--purple-bg);color:var(--purple);border-color:var(--purple)" onclick="exportRAD(${JSON.stringify(card).replace(/"/g,'&quot;')})">Export .rad.eggs</button>
             <button class="slab-btn" onclick="openSlabZoom('${mintId}')">Zoom</button>
             <button class="slab-btn" style="background:${_defaultHoloTheme === 'starwars' ? 'rgba(80,120,255,.08);color:#5080ff;border-color:rgba(80,120,255,.3)' : 'rgba(0,255,255,.08);color:#0ff;border-color:rgba(0,255,255,.3)'}" onclick="document.getElementById('slab-overlay').remove();openHologramViewer('${esc(card.agentName)}','${_defaultHoloTheme}')">${_defaultHoloTheme === 'starwars' ? 'SW Holo' : 'Hologram'}</button>
@@ -12463,7 +12374,7 @@ function printCard(name) {
       <div class="back-logo">RAPP</div>
       ${qrSvg ? `<div class="qr">${qrSvg}</div>` : '<div style="opacity:.3;font-size:8pt;padding:20px">QR off</div>'}
       <div class="back-name">${esc(a.display_name)}</div>
-      <div class="back-hint">${qrSvg ? 'Scan rappid tile (.card)' : ''}</div>
+      <div class="back-hint">${qrSvg ? 'Scan rappid tile (.tile)' : ''}</div>
     </div>
   </div>
   </body></html>`);

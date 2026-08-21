@@ -1,0 +1,145 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@kody-w/copilot_studio_deploy_agent",
+  "seed": 9376612445614782493,
+  "name_seed": 2183162711,
+  "key": "SEAR CARVE BARB ASTRAL OPAL SHAMAN CHISEL",
+  "version": "1.2.0",
+  "face": {
+    "name": "CopilotStudioDeploy",
+    "title": "The Surveyor",
+    "mana_cost": "{1}{W}{U}",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "type_line": "Creature — Agent Machinist",
+    "rarity": "uncommon",
+    "power": 6,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Process",
+        "cost": "",
+        "text": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Drop it in. Watch it work. Move on.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-206b57\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"gl-206b57\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-206b57)\"/><g filter=\"url(#gl-206b57)\"><circle cx=\"100\" cy=\"100\" r=\"36\" fill=\"#58a6ff\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"36\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"51\" ry=\"9\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(25 100 100)\"/><circle cx=\"95\" cy=\"90\" r=\"8\" fill=\"#58a6ff\" opacity=\"0.06\"/><circle cx=\"105\" cy=\"105\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.13\"/><circle cx=\"108\" cy=\"92\" r=\"6\" fill=\"#58a6ff\" opacity=\"0.10\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/copilot_studio_deploy_agent",
+    "agent_types": [
+      "LOGIC",
+      "DATA"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#3fb950"
+    ],
+    "hp": 70,
+    "stats": {
+      "hp": 70,
+      "atk": 75,
+      "def": 53,
+      "spd": 69,
+      "int": 65
+    },
+    "typed_abilities": [
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 1,
+        "damage": 16
+      },
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 2,
+        "damage": 38
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 9376612445614782493
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/copilot_studio_deploy_agent",
+    "version": "1.2.0",
+    "display_name": "CopilotStudioDeploy",
+    "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified).",
+    "author": "kody-w",
+    "tags": [
+      "copilot-studio",
+      "deploy",
+      "dataverse",
+      "power-platform",
+      "pac",
+      "import-solution",
+      "destructive",
+      "assimilated",
+      "factory",
+      "quality-gate",
+      "synthetic-data",
+      "pipeline",
+      "mcp",
+      "new-shape",
+      "blastbox",
+      "connected-agents"
+    ],
+    "category": "core",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "copilot_studio_deploy_agent.py",
+      "sha256_lf_v1": "837ba4ee8c900514f8e5951e1a230663ba5120a8cc7a62d549391e720b21a05f",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/copilot_studio_deploy_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@kody-w/copilot_studio_deploy_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

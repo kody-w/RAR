@@ -1,0 +1,132 @@
+{
+  "schema": "rappid-tile/1.0",
+  "supersedes": "rar-card/2.0",
+  "id": "@aibast-agents-library/deal_stakeholder_engagement",
+  "seed": 11125880910024161837,
+  "name_seed": 2590446013,
+  "key": "BRUNT SPOKE THISTLE WATCHER MATRIARCH TRAIN BRAND",
+  "version": "1.1.0",
+  "face": {
+    "name": "Stakeholder Engagement",
+    "title": "The Tactician",
+    "mana_cost": "{2}{R}{W}",
+    "colors": [
+      "R",
+      "W"
+    ],
+    "type_line": "Creature — Agent Assessor",
+    "rarity": "uncommon",
+    "power": 4,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“In a world of noise, the signal belongs to those who listen.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-6711bd\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-6711bd\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-6711bd)\"/><g filter=\"url(#gl-6711bd)\"><line x1=\"167\" y1=\"71\" x2=\"102\" y2=\"74\" stroke=\"#f47067\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"102\" y1=\"74\" x2=\"53\" y2=\"159\" stroke=\"#f47067\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"53\" y1=\"159\" x2=\"111\" y2=\"131\" stroke=\"#f47067\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"111\" y1=\"131\" x2=\"96\" y2=\"106\" stroke=\"#f47067\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"96\" y1=\"106\" x2=\"77\" y2=\"38\" stroke=\"#f47067\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"77\" y1=\"38\" x2=\"167\" y2=\"71\" stroke=\"#f47067\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"167\" y1=\"71\" x2=\"53\" y2=\"159\" stroke=\"#f47067\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"167\" cy=\"71\" r=\"5\" fill=\"#f47067\" opacity=\"0.46\"/><circle cx=\"102\" cy=\"74\" r=\"4\" fill=\"#f47067\" opacity=\"0.55\"/><circle cx=\"53\" cy=\"159\" r=\"4\" fill=\"#f47067\" opacity=\"0.43\"/><circle cx=\"111\" cy=\"131\" r=\"4\" fill=\"#f47067\" opacity=\"0.36\"/><circle cx=\"96\" cy=\"106\" r=\"6\" fill=\"#f47067\" opacity=\"0.54\"/><circle cx=\"77\" cy=\"38\" r=\"3\" fill=\"#f47067\" opacity=\"0.48\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/deal_stakeholder_engagement",
+    "agent_types": [
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#bc8cff"
+    ],
+    "hp": 57,
+    "stats": {
+      "hp": 57,
+      "atk": 62,
+      "def": 41,
+      "spd": 51,
+      "int": 58
+    },
+    "typed_abilities": [
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 2,
+        "damage": 35
+      },
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 1,
+        "damage": 46
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 11125880910024161837
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/deal_stakeholder_engagement",
+    "version": "1.1.0",
+    "display_name": "Stakeholder Engagement",
+    "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "stakeholder-engagement",
+      "deal-progression",
+      "relationships"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "stands_on": {
+    "kernel": "rapp/1",
+    "python": ">=3.11",
+    "network": false,
+    "filesystem": "agent-directory",
+    "tools": []
+  },
+  "payload": [
+    {
+      "role": "primary",
+      "kind": "agent.py",
+      "filename": "stakeholder_engagement_agent.py",
+      "sha256_lf_v1": "9c279e91ec1743d61866206591ba726b313f28ecd623674cc95314c31db9fb9c",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/tiles/v1/@aibast-agents-library/stakeholder_engagement_agent.py.tile"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "registry_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

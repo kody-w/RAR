@@ -26,13 +26,25 @@
     "cards_v2": {
       "url": "{base_url}/cards/v2/index.json",
       "method": "GET",
-      "description": "Rappid tile index for rar-card/2.0. Maps each agent id to its seed, name seed, incantation, exact .card-file SHA256, and public scan URL.",
+      "description": "Frozen compatibility index for rar-card/2.0. Existing .card URLs remain readable indefinitely; new artifacts are not written here.",
       "auth": "none"
     },
     "card_file": {
       "url": "{base_url}/cards/v2/{publisher}/{primary_payload_filename}.card",
       "method": "GET",
-      "description": "Fetch one inert rappid tile using the rar-card/2.0 JSON protocol. Its name is the primary payload filename plus .card (for example, agent.py.card or foo.egg.card). Verify its identity, filename, and payload hash before unpacking; fetching never executes it.",
+      "description": "Fetch one frozen rar-card/2.0 compatibility document. Readers continue to verify it; writers emit rappid-tile/1.0 instead.",
+      "auth": "none"
+    },
+    "tiles": {
+      "url": "{base_url}/tiles/v1/index.json",
+      "method": "GET",
+      "description": "Canonical Rappid tile index for rappid-tile/1.0. Its tiles section maps each agent id to seed, name seed, seven-word key, exact .tile SHA256, and public scan URL; its cards section points at the frozen compatibility index.",
+      "auth": "none"
+    },
+    "tile_file": {
+      "url": "{base_url}/tiles/v1/{publisher}/{primary_payload_filename}.tile",
+      "method": "GET",
+      "description": "Fetch one inert rappid tile. Verify schema, seed and face, payload hashes, and the stands_on footprint before unpacking; fetching never executes it.",
       "auth": "none"
     },
     "api_manifest": {
@@ -262,6 +274,6 @@
   "offline": {
     "description": "RAPP is local-first. Everything works offline.",
     "seed_resolution": "Any numeric seed resolves to a full rappid tile (type, stats, abilities) with zero network. The algorithm is deterministic and public.",
-    "git_clone": "git clone = full registry + all agents + all rappid tiles. No server needed."
+    "git_clone": "git clone = full registry + all agents + canonical tiles + frozen compatibility cards. No server needed."
   }
 }

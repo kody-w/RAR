@@ -21,7 +21,10 @@ on:
       - 'rapp_sdk.py'
       - 'scripts/generate_holo_cards.py'
       - 'scripts/migrate_cards_v2.py'
+      - 'scripts/migrate_tiles_v1.py'
       - 'schema/rar-card-2.0.json'
+      - 'schema/rappid-tile-1.0.json'
+      - 'tiles/v1/**'
       - 'rar.config.json'
       - '.github/workflows/build-registry.yml'
   pull_request:
@@ -31,7 +34,10 @@ on:
       - 'rapp_sdk.py'
       - 'scripts/generate_holo_cards.py'
       - 'scripts/migrate_cards_v2.py'
+      - 'scripts/migrate_tiles_v1.py'
       - 'schema/rar-card-2.0.json'
+      - 'schema/rappid-tile-1.0.json'
+      - 'tiles/v1/**'
   workflow_dispatch:
 
 permissions:
@@ -80,8 +86,14 @@ jobs:
       - name: Refresh registry card metadata
         run: python build_registry.py
 
-      - name: Migrate v1 cards to rar-card/2.0
-        run: python scripts/migrate_cards_v2.py
+      - name: Verify frozen rar-card/2.0 compatibility tree
+        run: python scripts/migrate_cards_v2.py --check
+
+      - name: Build canonical rappid-tile/1.0 tree
+        run: python scripts/migrate_tiles_v1.py
+
+      - name: Refresh registry tile metadata
+        run: python build_registry.py
 
       # Article XXIII — record newly published agents into the permanent
       # URL ledger the moment they land on main. From this point the path
@@ -110,7 +122,7 @@ jobs:
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
           git add registry.json state/published_paths.json \
-                  cards/holo_cards.json cards/v2 \
+                  cards/holo_cards.json tiles/v1 \
                   manifest.json api/v1/catalog.json api/v1/taxonomy.json \
                   api/v1/match.json api/v1/status.json api/v1/badge.json \
                   api/v1/audience
