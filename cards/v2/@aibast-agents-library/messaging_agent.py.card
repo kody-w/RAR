@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/account_messaging",
+  "seed": 16738861686366810084,
+  "name_seed": 3897319940,
+  "incantation": "CAPSTONE CROAK WIELD ALLOY HIVE BROOD CARVE",
+  "version": "1.0.1",
+  "face": {
+    "name": "Account Messaging",
+    "title": "The Pathfinder",
+    "mana_cost": "{2}{R}{W}",
+    "colors": [
+      "R",
+      "W"
+    ],
+    "type_line": "Creature — Agent Conduit",
+    "rarity": "rare",
+    "power": 7,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Drafts personalized outreach, follow-up emails, and campaign sequences for enterprise accounts using built-in demo data."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Precision at the speed of thought.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-4c6204\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-4c6204\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-4c6204)\"/><g filter=\"url(#gl-4c6204)\"><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"#f47067\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"60\" ry=\"6\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(31 100 100)\"/><circle cx=\"99\" cy=\"94\" r=\"7\" fill=\"#f47067\" opacity=\"0.09\"/><circle cx=\"109\" cy=\"101\" r=\"9\" fill=\"#f47067\" opacity=\"0.12\"/><circle cx=\"93\" cy=\"107\" r=\"5\" fill=\"#f47067\" opacity=\"0.07\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/account_messaging",
+    "agent_types": [
+      "WEALTH",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#58a6ff"
+    ],
+    "hp": 56,
+    "stats": {
+      "hp": 56,
+      "atk": 57,
+      "def": 47,
+      "spd": 62,
+      "int": 54
+    },
+    "typed_abilities": [
+      {
+        "name": "Negotiate",
+        "text": "Propose terms optimized for mutual value.",
+        "cost": 1,
+        "damage": 17
+      },
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 3,
+        "damage": 18
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16738861686366810084
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/account_messaging",
+    "version": "1.0.1",
+    "display_name": "Account Messaging",
+    "description": "Drafts personalized outreach, follow-up emails, and campaign sequences for enterprise accounts using built-in demo data.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "messaging",
+      "outreach",
+      "email-sequences"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "messaging_agent.py",
+      "sha256_lf_v1": "e20cab25e71fc4a8c1051be9eb7c04e7b21d9553f2cf3eee10ec251c5e1b0a86",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/messaging_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

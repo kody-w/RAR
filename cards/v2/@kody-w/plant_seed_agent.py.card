@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/plant_seed_agent",
+  "seed": 37238134152071358347,
+  "name_seed": 80244151,
+  "incantation": "BESTOW CONSECRATE ELM GOLDEN PEARL DEEP FIRE",
+  "version": "1.0.4",
+  "face": {
+    "name": "Plant Seed",
+    "title": "The Synthesizer",
+    "mana_cost": "{2}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Legendary Creature — Agent Pilot",
+    "rarity": "mythic",
+    "power": 4,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Built to serve. Designed to scale. Ready to deploy.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-c86db7\"><stop offset=\"0%\" stop-color=\"#0a2a2a\"/><stop offset=\"100%\" stop-color=\"#050f0f\"/></radialGradient><filter id=\"gl-c86db7\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-c86db7)\"/><g filter=\"url(#gl-c86db7)\"><polygon points=\"140.5,106.5 110.1,122.8 72.9,139.6 63.1,97.3 91.2,71.3 117.1,75.4\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"112.8,107.8 104.9,122.5 86.6,106.7 81.4,92.6 100.5,74.0 110.8,94.7\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#8b949e\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/plant_seed_agent",
+    "agent_types": [
+      "DATA",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#3fb950",
+      "#58a6ff"
+    ],
+    "hp": 81,
+    "stats": {
+      "hp": 81,
+      "atk": 81,
+      "def": 64,
+      "spd": 83,
+      "int": 88
+    },
+    "typed_abilities": [
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 2,
+        "damage": 32
+      },
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 2,
+        "damage": 17
+      },
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 2,
+        "damage": 28
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 2,
+      "label": "Evolved",
+      "icon": "flame"
+    },
+    "tier": "verified",
+    "rarity_tier": "rare",
+    "rarity_label": "Elite",
+    "floor_pts": 100,
+    "seed": 37238134152071358347
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/plant_seed_agent",
+    "version": "1.0.4",
+    "display_name": "Plant Seed",
+    "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
+    "author": "kody-w",
+    "tags": [
+      "plant",
+      "seed",
+      "neighborhood",
+      "twin",
+      "holocard",
+      "grail",
+      "operator-mediated"
+    ],
+    "category": "platform",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "plant_seed_agent.py",
+      "sha256_lf_v1": "86727bec5fc6c29e5925402e0d26fc8b76078755fa3fb1664904a4f1cf190ad6",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/plant_seed_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

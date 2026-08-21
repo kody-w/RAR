@@ -1468,6 +1468,38 @@ def _card_json_bytes(card: dict) -> bytes:
     ).encode("utf-8")
 
 
+def expected_card_filename(card: dict) -> str:
+    """Return the sleeve filename dictated by the primary payload."""
+    payload = card.get("payload")
+    if isinstance(payload, list) and payload:
+        primary = payload[0]
+        if not isinstance(primary, dict) or not isinstance(
+            primary.get("filename"), str
+        ):
+            raise ValueError("Primary payload must have a filename")
+        return f"{primary['filename']}.card"
+    agent_id = card.get("id")
+    if not isinstance(agent_id, str) or "/" not in agent_id:
+        raise ValueError("Face-only card must have a valid id")
+    return f"{agent_id.split('/', 1)[1]}.card"
+
+
+def _source_card_filename(source: str) -> str:
+    parsed = urllib.parse.urlparse(source)
+    if parsed.scheme in {"http", "https", "file"}:
+        raw_segment = parsed.path.rsplit("/", 1)[-1]
+        if re.search(r"%(?![0-9A-Fa-f]{2})", raw_segment):
+            raise ValueError("Card URL filename has invalid percent encoding")
+        try:
+            filename = urllib.parse.unquote_to_bytes(raw_segment).decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise ValueError("Card URL filename must be UTF-8") from exc
+        if "/" in filename or "\\" in filename:
+            raise ValueError("Card URL filename must not encode a path separator")
+        return filename
+    return Path(source).name
+
+
 def _duplicate_safe_object(pairs: list[tuple[str, object]]) -> dict:
     result = {}
     for key, value in pairs:
@@ -1967,6 +1999,14 @@ def verify_card(
     errors.extend(validate_card(card, serialized_size=len(raw)))
     if not errors:
         errors.extend(_verify_card_identity(card))
+    if not errors and source != "<memory>":
+        actual_filename = _source_card_filename(source)
+        expected_filename = expected_card_filename(card)
+        if actual_filename != expected_filename:
+            errors.append(
+                f"card filename {actual_filename!r} disagrees with primary "
+                f"payload filename {expected_filename!r}"
+            )
     if errors:
         raise ValueError("Card verification failed: " + "; ".join(errors))
 
@@ -2101,7 +2141,17 @@ def pack_card(
         })
 
     card = to_v2(face, manifest, payload=payload)
-    destination = Path(output_path) if output_path is not None else path.with_suffix(".card")
+    destination = (
+        Path(output_path)
+        if output_path is not None
+        else path.with_name(f"{path.name}.card")
+    )
+    expected_filename = expected_card_filename(card)
+    if destination.name != expected_filename:
+        raise ValueError(
+            f"Output filename must be {expected_filename!r}, "
+            f"got {destination.name!r}"
+        )
     raw = _card_json_bytes(card)
     size_errors = validate_card(card, serialized_size=len(raw))
     if size_errors:
@@ -2118,9 +2168,17 @@ def unpack_card(
     """Verify and unpack exact payload bytes to a directory."""
     verified = verify_card(card_source, return_payload_bytes=True)
     if output_dir is None:
-        parsed = urllib.parse.urlparse(os.fspath(card_source))
-        stem = Path(parsed.path).stem or verified["card"]["id"].split("/", 1)[1]
-        destination = Path.cwd() / stem
+        source_text = os.fspath(card_source)
+        parsed = urllib.parse.urlparse(source_text)
+        if parsed.scheme == "file":
+            destination = Path(
+                urllib.request.url2pathname(parsed.path)
+            ).parent
+        elif parsed.scheme in {"http", "https"}:
+            sleeve_name = _source_card_filename(source_text)
+            destination = Path.cwd() / sleeve_name.removesuffix(".card")
+        else:
+            destination = Path(source_text).parent
     else:
         destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
@@ -2172,18 +2230,27 @@ def _resolve_indexed_card(seed: int) -> str:
         raise ValueError(f"Seed {seed} is ambiguous in the v2 card index")
     agent_id, entry = matches[0]
     if local_path is not None:
-        candidate = local_path.parent / f"{agent_id}.card"
-        if candidate.is_file():
-            return str(candidate)
+        url = entry.get("url")
+        if isinstance(url, str):
+            parsed = urllib.parse.urlparse(url)
+            marker = "/cards/v2/"
+            if marker in parsed.path:
+                relative = Path(
+                    urllib.parse.unquote(parsed.path.split(marker, 1)[1])
+                )
+                if not relative.is_absolute() and ".." not in relative.parts:
+                    candidate = local_path.parent / relative
+                    if candidate.is_file():
+                        return str(candidate)
     url = entry.get("url")
     if not isinstance(url, str):
         raise ValueError(f"Card index entry {agent_id} has no URL")
     return url
 
 
-def scan_card(source: str) -> dict:
+def scan_card(source: str | os.PathLike) -> dict:
     """Resolve and verify a URL, local path, seed, or seven-word incantation."""
-    value = source.strip()
+    value = os.fspath(source).strip()
     if not value:
         raise ValueError("Card scan input is empty")
     parsed = urllib.parse.urlparse(value)
@@ -2194,13 +2261,7 @@ def scan_card(source: str) -> dict:
     if rar_match:
         expected_id, seed_text = rar_match.groups()
         seed = int(seed_text)
-        local = (
-            Path(__file__).resolve().parent
-            / "cards"
-            / "v2"
-            / f"{expected_id}.card"
-        )
-        result = verify_card(local if local.is_file() else _resolve_indexed_card(seed))
+        result = verify_card(_resolve_indexed_card(seed))
         card = result["card"]
         if card["id"] != expected_id or card["seed"] != seed:
             raise ValueError("rar URL disagrees with the resolved card")
@@ -3087,8 +3148,10 @@ def main():
     )
     p_card_pack.add_argument(
         "-o",
+        "--out",
         "--output",
-        help="Output .card path (default: beside the agent)",
+        dest="output",
+        help="Output path; filename must match the primary payload",
     )
     p_card_pack.add_argument("--json", action="store_true", help="Output JSON")
 

@@ -1,0 +1,136 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/monte_carlo_analysis",
+  "seed": 24127525053766057459,
+  "name_seed": 1322659892,
+  "incantation": "TRIAL BIND ALTAR KEEP RUNT MACHETE CLASP",
+  "version": "2.0.0",
+  "face": {
+    "name": "Monte Carlo Analysis",
+    "title": "The Warden",
+    "mana_cost": "{1}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Creature — Agent Oracle",
+    "rarity": "rare",
+    "power": 3,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Dispatch",
+        "cost": "",
+        "text": "Run Monte Carlo simulations from natural-language risk inputs — triangular, normal, uniform, or log-normal — and return percentiles, a histogram PNG, optional interactive HTML, and a downloadable resu"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Speed without accuracy is just expensive failure.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-d63034\"><stop offset=\"0%\" stop-color=\"#1a1a2e\"/><stop offset=\"100%\" stop-color=\"#08080f\"/></radialGradient><filter id=\"gl-d63034\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-d63034)\"/><g filter=\"url(#gl-d63034)\"><circle cx=\"100\" cy=\"100\" r=\"47\" fill=\"#f0883e\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"47\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"62\" ry=\"7\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(22 100 100)\"/><circle cx=\"108\" cy=\"109\" r=\"7\" fill=\"#f0883e\" opacity=\"0.07\"/><circle cx=\"95\" cy=\"109\" r=\"6\" fill=\"#f0883e\" opacity=\"0.07\"/><circle cx=\"98\" cy=\"109\" r=\"9\" fill=\"#f0883e\" opacity=\"0.12\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/monte_carlo_analysis",
+    "agent_types": [
+      "LOGIC",
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#f0f0f0"
+    ],
+    "hp": 56,
+    "stats": {
+      "hp": 56,
+      "atk": 40,
+      "def": 33,
+      "spd": 35,
+      "int": 52
+    },
+    "typed_abilities": [
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 2,
+        "damage": 15
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 24127525053766057459
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/monte_carlo_analysis",
+    "version": "2.0.0",
+    "display_name": "Monte Carlo Analysis",
+    "description": "Run Monte Carlo simulations from natural-language risk inputs — triangular, normal, uniform, or log-normal — and return percentiles, a histogram PNG, optional interactive HTML, and a downloadable results spreadsheet.",
+    "author": "Nazish Qasim",
+    "tags": [
+      "monte_carlo",
+      "risk_assessment",
+      "python",
+      "simulation",
+      "matplotlib",
+      "charts",
+      "csv",
+      "analysis"
+    ],
+    "category": "devtools",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "monte-carlo-analysis",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#monte-carlo-analysis",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "8a9d6a293cabe5cc"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "monte_carlo_analysis_agent.py",
+      "sha256_lf_v1": "33b7c20af7270399ddff663b9d1f2e284248d5d4d316cf53a57fb526dbaaadc0",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/monte_carlo_analysis_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/monte_carlo_analysis_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

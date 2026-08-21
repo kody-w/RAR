@@ -30,9 +30,9 @@
       "auth": "none"
     },
     "card_file": {
-      "url": "{base_url}/cards/v2/{publisher}/{slug}.card",
+      "url": "{base_url}/cards/v2/{publisher}/{primary_payload_filename}.card",
       "method": "GET",
-      "description": "Fetch one inert rar-card/2.0 JSON file. Verify its identity and pinned payload hash before unpacking; fetching never executes it.",
+      "description": "Fetch one inert rar-card/2.0 JSON sleeve. Its name is the primary payload filename plus .card (for example, agent.py.card or foo.egg.card). Verify its identity, filename, and payload hash before unpacking; fetching never executes it.",
       "auth": "none"
     },
     "api_manifest": {

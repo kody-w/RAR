@@ -1,0 +1,130 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@wildhaven/penumbra_agent",
+  "seed": 3244902051251893157,
+  "name_seed": 755512633,
+  "incantation": "RIDDLE ENDOW KEEPER LEAP VOID STRAND BLADE",
+  "version": "1.0.2",
+  "face": {
+    "name": "Penumbra",
+    "title": "The Strategist",
+    "mana_cost": "{3}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Legendary Creature — Agent Curator",
+    "rarity": "mythic",
+    "power": 10,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Returns any input as twin lines — the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Data in. Decisions out. Humans in the loop.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-83539\"><stop offset=\"0%\" stop-color=\"#15101e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-83539\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-83539)\"/><g filter=\"url(#gl-83539)\"><polygon points=\"119.1,89.0 119.1,111.0 100.0,122.0 80.9,111.0 80.9,89.0 100.0,78.0\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.6\" opacity=\"0.40\"/><polygon points=\"138.1,78.0 138.1,122.0 100.0,144.0 61.9,122.0 61.9,78.0 100.0,56.0\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.2\" opacity=\"0.30\"/><polygon points=\"157.2,67.0 157.2,133.0 100.0,166.0 42.8,133.0 42.8,67.0 100.0,34.0\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.20\"/><polygon points=\"100.0,85.0 104.1,94.3 114.3,95.4 106.7,102.2 108.8,112.1 100.0,107.0 91.2,112.1 93.3,102.2 85.7,95.4 95.9,94.3\" fill=\"#8b949e\" opacity=\"0.3\"/><circle cx=\"138.1\" cy=\"78.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"138.1\" cy=\"122.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"144.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"122.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"61.9\" cy=\"78.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/><circle cx=\"100.0\" cy=\"56.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@wildhaven/penumbra_agent",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 93,
+    "stats": {
+      "hp": 93,
+      "atk": 100,
+      "def": 90,
+      "spd": 86,
+      "int": 100
+    },
+    "typed_abilities": [
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 3,
+        "damage": 24
+      },
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 3,
+        "damage": 41
+      },
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 28
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 3244902051251893157
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@wildhaven/penumbra_agent",
+    "version": "1.0.2",
+    "display_name": "Penumbra",
+    "description": "Returns any input as twin lines — the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls.",
+    "author": "Wildhaven of America",
+    "tags": [
+      "eidolon",
+      "subtext",
+      "legendary",
+      "penumbra",
+      "introspection",
+      "daemon",
+      "caesura"
+    ],
+    "category": "general",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "penumbra_agent.py",
+      "sha256_lf_v1": "00a2946996be36b9234c3e9cbf916eee70fed319104bff2aef7325e437343a6f",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@wildhaven/penumbra_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@wildhaven/penumbra_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

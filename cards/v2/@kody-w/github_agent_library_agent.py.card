@@ -1,0 +1,128 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/github_agent_library_agent",
+  "seed": 12050547483781643440,
+  "name_seed": 2805736727,
+  "incantation": "SHRINE HORDE GLYPH DUNE GUST HARBOR MOLD",
+  "version": "1.0.1",
+  "face": {
+    "name": "GitHubAgentLibrary",
+    "title": "The Operator",
+    "mana_cost": "{2}{W}{R}",
+    "colors": [
+      "W",
+      "R"
+    ],
+    "type_line": "Legendary Creature — Agent Beacon",
+    "rarity": "mythic",
+    "power": 4,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Process",
+        "cost": "",
+        "text": "Browses, searches, and installs agents from the kody-w/AI-Agent-Templates GitHub repo into local agent storage."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The pipeline never sleeps. The agent never forgets.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-3c2517\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"gl-3c2517\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-3c2517)\"/><g filter=\"url(#gl-3c2517)\"><circle cx=\"100\" cy=\"100\" r=\"31\" fill=\"#58a6ff\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"31\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"46\" ry=\"6\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(24 100 100)\"/><circle cx=\"93\" cy=\"104\" r=\"8\" fill=\"#58a6ff\" opacity=\"0.10\"/><circle cx=\"108\" cy=\"99\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.08\"/><circle cx=\"106\" cy=\"108\" r=\"9\" fill=\"#58a6ff\" opacity=\"0.09\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/github_agent_library_agent",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 90,
+      "def": 82,
+      "spd": 100,
+      "int": 92
+    },
+    "typed_abilities": [
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 3,
+        "damage": 39
+      },
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 2,
+        "damage": 22
+      },
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 3,
+        "damage": 12
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 12050547483781643440
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/github_agent_library_agent",
+    "version": "1.0.1",
+    "display_name": "GitHubAgentLibrary",
+    "description": "Browses, searches, and installs agents from the kody-w/AI-Agent-Templates GitHub repo into local agent storage.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "core",
+      "package-manager",
+      "install",
+      "discovery"
+    ],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "github_agent_library_agent.py",
+      "sha256_lf_v1": "7d25b2d553356cfcb2f74921552b984d8e348ab56f20984fcda831eb65336923",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/github_agent_library_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/github_agent_library_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

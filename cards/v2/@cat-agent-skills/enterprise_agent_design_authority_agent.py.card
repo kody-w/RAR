@@ -1,0 +1,134 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/enterprise_agent_design_authority",
+  "seed": 70206976244623097772,
+  "name_seed": 3461433580,
+  "incantation": "GRAIL CHIEFTAIN OBSIDIAN HALBERD JUST ALLIANCE ROAR",
+  "version": "2.0.0",
+  "face": {
+    "name": "Enterprise Agent Design Authority (EADA)",
+    "title": "The Facilitator",
+    "mana_cost": "{2}{N}{G}",
+    "colors": [
+      "N",
+      "G"
+    ],
+    "type_line": "Creature — Agent Cipher",
+    "rarity": "rare",
+    "power": 7,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Configure",
+        "cost": "",
+        "text": "An enterprise design review framework that helps architects build secure, scalable, governable, and production-ready Microsoft Copilot Studio agents."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It reads the room before it reads the data.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-5148ec\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"gl-5148ec\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-5148ec)\"/><g filter=\"url(#gl-5148ec)\"><line x1=\"130\" y1=\"118\" x2=\"84\" y2=\"51\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"84\" y1=\"51\" x2=\"73\" y2=\"159\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"73\" y1=\"159\" x2=\"47\" y2=\"37\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"47\" y1=\"37\" x2=\"144\" y2=\"104\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"144\" y1=\"104\" x2=\"138\" y2=\"151\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"138\" y1=\"151\" x2=\"94\" y2=\"86\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"94\" y1=\"86\" x2=\"58\" y2=\"97\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"58\" y1=\"97\" x2=\"130\" y2=\"118\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"130\" y1=\"118\" x2=\"73\" y2=\"159\" stroke=\"#8b949e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"130\" cy=\"118\" r=\"6\" fill=\"#8b949e\" opacity=\"0.41\"/><circle cx=\"84\" cy=\"51\" r=\"6\" fill=\"#8b949e\" opacity=\"0.54\"/><circle cx=\"73\" cy=\"159\" r=\"6\" fill=\"#8b949e\" opacity=\"0.42\"/><circle cx=\"47\" cy=\"37\" r=\"6\" fill=\"#8b949e\" opacity=\"0.33\"/><circle cx=\"144\" cy=\"104\" r=\"6\" fill=\"#8b949e\" opacity=\"0.39\"/><circle cx=\"138\" cy=\"151\" r=\"3\" fill=\"#8b949e\" opacity=\"0.30\"/><circle cx=\"94\" cy=\"86\" r=\"5\" fill=\"#8b949e\" opacity=\"0.39\"/><circle cx=\"58\" cy=\"97\" r=\"5\" fill=\"#8b949e\" opacity=\"0.37\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/enterprise_agent_design_authority",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 45,
+    "stats": {
+      "hp": 45,
+      "atk": 57,
+      "def": 29,
+      "spd": 39,
+      "int": 41
+    },
+    "typed_abilities": [
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 3,
+        "damage": 19
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 70206976244623097772
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/enterprise_agent_design_authority",
+    "version": "2.0.0",
+    "display_name": "Enterprise Agent Design Authority (EADA)",
+    "description": "An enterprise design review framework that helps architects build secure, scalable, governable, and production-ready Microsoft Copilot Studio agents.",
+    "author": "Faride Ilanda",
+    "tags": [
+      "assessment",
+      "review",
+      "architecture",
+      "enterprise",
+      "design_review",
+      "copilot_studio"
+    ],
+    "category": "analysis",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "enterprise-agent-design-authority",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#enterprise-agent-design-authority",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "b69cc3ecf5e4507e"
+    },
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "enterprise_agent_design_authority_agent.py",
+      "sha256_lf_v1": "1b8d67a3b9d2dab18a77b43f93af6285ad595ac5b44c49ff0568605b8a596f6f",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/enterprise_agent_design_authority_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/enterprise_agent_design_authority_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

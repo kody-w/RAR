@@ -1,0 +1,120 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/hello_world_agent",
+  "seed": 18289705222458979460,
+  "name_seed": 4258403839,
+  "incantation": "SAGE ZAP SENTINEL PIVOT CRUX EXTINGUISH BIND",
+  "version": "1.0.3",
+  "face": {
+    "name": "Hello World",
+    "title": "The Nomad",
+    "mana_cost": "{2}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Machinist",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 1,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Greets the user by name with a canned hello message; a starter example touching no external systems."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Every edge case was someone’s main case.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-d215ff\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-d215ff\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-d215ff)\"/><g filter=\"url(#gl-d215ff)\"><circle cx=\"116\" cy=\"85\" r=\"17\" fill=\"#8b949e\" opacity=\"0.06\"/><circle cx=\"111\" cy=\"78\" r=\"29\" fill=\"#8b949e\" opacity=\"0.05\"/><circle cx=\"77\" cy=\"88\" r=\"29\" fill=\"#8b949e\" opacity=\"0.10\"/><circle cx=\"104\" cy=\"93\" r=\"32\" fill=\"#8b949e\" opacity=\"0.10\"/><circle cx=\"113\" cy=\"109\" r=\"30\" fill=\"#8b949e\" opacity=\"0.11\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#8b949e\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#8b949e\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#8b949e\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"141.8\" y2=\"104.1\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"95.4\" y2=\"135.7\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"66.4\" y2=\"90.2\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"108.1\" y2=\"61.9\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/hello_world_agent",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 65,
+    "stats": {
+      "hp": 65,
+      "atk": 49,
+      "def": 36,
+      "spd": 66,
+      "int": 52
+    },
+    "typed_abilities": [
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 1,
+        "damage": 16
+      },
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 2,
+        "damage": 48
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 18289705222458979460
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/hello_world_agent",
+    "version": "1.0.3",
+    "display_name": "Hello World",
+    "description": "Greets the user by name with a canned hello message; a starter example touching no external systems.",
+    "author": "kody-w",
+    "tags": [
+      "tutorial",
+      "hello-world",
+      "starter"
+    ],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "hello_world_agent.py",
+      "sha256_lf_v1": "d2695f70a412909546a49586487a471e6bca9c2d215d0367d440a80473b75bd1",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/hello_world_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/hello_world_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

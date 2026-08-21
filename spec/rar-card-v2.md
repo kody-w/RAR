@@ -23,6 +23,29 @@ without duplicating the payload. A pinned-only card is never called
 offline-ready, even when verification can currently fetch its URL; it reports
 `offline: needs <n> pinned payload(s)`.
 
+## The file name
+
+The sleeve says what is inside. A card with a primary payload (`payload[0]`) is
+named by appending `.card` to that payload's complete filename:
+
+| Primary payload | Card |
+|---|---|
+| `bookfactory_agent.py` | `bookfactory_agent.py.card` |
+| `bookfactory.egg` | `bookfactory.egg.card` |
+
+`card pack x_agent.py` writes `x_agent.py.card` beside the input by default.
+`--out` may choose another directory, but its basename must still be
+`x_agent.py.card`. Without an output directory, `card unpack x_agent.py.card`
+strips the final `.card` and restores `x_agent.py` beside the sleeve. A verifier
+or scanner refuses a file or URL whose basename disagrees with
+`payload[0].filename`.
+
+A face-only card has no primary payload and uses `<slug>.card`. RAR migration
+publishes `cards/v2/@publisher/<primary payload filename>.card`. Source
+basenames are used normally; if legacy agents under one publisher collide
+after flattening, migration uses the registry's canonical collision-safe
+install filename as both the primary payload filename and sleeve name.
+
 ## Shape
 
 ```json
@@ -40,7 +63,7 @@ offline-ready, even when verification can currently fetch its URL; it reports
   "origin": null,
   "dimension": null,
   "scan": {
-    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@publisher/agent_name.card"
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@publisher/agent_name.py.card"
   },
   "provenance": {
     "minted_by": "rapp_sdk 2.0",
@@ -140,8 +163,8 @@ Execution is a separate, explicit client action after verification.
 
 ```text
 python rapp_sdk.py card pack agent.py [--egg file] [--inline | --pin raw-url]
-python rapp_sdk.py card unpack agent.card [directory]
-python rapp_sdk.py card verify agent.card
+python rapp_sdk.py card unpack agent.py.card [directory]
+python rapp_sdk.py card verify agent.py.card
 python rapp_sdk.py card scan <url | seed | "seven words">
 ```
 
@@ -157,7 +180,8 @@ readiness label: any card with pinned payloads remains not offline-ready.
 `scripts/migrate_cards_v2.py` wraps every v1 entry. Its payload points to the
 agent file at the migration revision and carries the registry's
 `sha256-lf-v1` digest. Generated cards are dormant, public, dimension-free,
-and indexed by id in `cards/v2/index.json`.
+named `<primary payload filename>.card`, and indexed by id in
+`cards/v2/index.json`.
 
 The migration is deterministic for an explicit revision and idempotent.
 `cards/holo_cards.json`, its seeds, its incantations, and

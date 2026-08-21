@@ -1,0 +1,146 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@rapp/moment_factory_agent",
+  "seed": 48759968425442943959,
+  "name_seed": 2762880241,
+  "incantation": "PARAPET MUSK EPIC GHOUL HAUNT LYRE PYRE",
+  "version": "0.1.4",
+  "face": {
+    "name": "MomentFactory",
+    "title": "The Strategist",
+    "mana_cost": "{3}{N}{R}",
+    "colors": [
+      "N",
+      "R"
+    ],
+    "type_line": "Legendary Creature — Agent Warden",
+    "rarity": "mythic",
+    "power": 9,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Assess",
+        "cost": "",
+        "text": "Converts a moment (commit, message, idea) into a publishable Drop — hook, body, channel, card, and seed — through seven inlined LLM personas."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“What the dashboard shows, the agent already knew.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-ae34f1\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-ae34f1\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-ae34f1)\"/><g filter=\"url(#gl-ae34f1)\"><circle cx=\"107.5\" cy=\"62.7\" r=\"19\" fill=\"#8b949e\" opacity=\"0.15\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"92.5\" cy=\"137.3\" r=\"17\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"107.5\" y1=\"62.7\" x2=\"92.5\" y2=\"137.3\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rapp/moment_factory_agent",
+    "agent_types": [
+      "SOCIAL",
+      "DATA"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#3fb950"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 91,
+      "def": 82,
+      "spd": 100,
+      "int": 94
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 3,
+        "damage": 35
+      },
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 3,
+        "damage": 32
+      },
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 1,
+        "damage": 13
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 48759968425442943959
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/moment_factory_agent",
+    "display_name": "MomentFactory",
+    "description": "Converts a moment (commit, message, idea) into a publishable Drop — hook, body, channel, card, and seed — through seven inlined LLM personas.",
+    "author": "RAPP",
+    "version": "0.1.4",
+    "tags": [
+      "composite",
+      "moment-pipeline",
+      "rapplication",
+      "rappterbook-engine",
+      "singleton"
+    ],
+    "category": "creative",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "delegates_to_inlined": [
+      "@rapp/sensorium",
+      "@rapp/significance_filter",
+      "@rapp/hook_writer",
+      "@rapp/body_writer",
+      "@rapp/channel_router",
+      "@rapp/card_forger",
+      "@rapp/seed_stamper"
+    ],
+    "example_call": {
+      "args": {
+        "source": "git commit hash + diff + msg",
+        "source_type": "code-commit"
+      }
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "moment_factory_agent.py",
+      "sha256_lf_v1": "02a5b7154b7bd205223d58d3d61489bfa725ad7218915a0012709fe0d5f1ccf8",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rapp/moment_factory_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/moment_factory_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

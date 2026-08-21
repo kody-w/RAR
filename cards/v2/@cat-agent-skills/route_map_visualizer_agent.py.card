@@ -1,0 +1,135 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/route_map_visualizer",
+  "seed": 30079006195894466956,
+  "name_seed": 2708347077,
+  "incantation": "AIM CARVE SPIN HERMIT DINT REEF HONE",
+  "version": "2.0.0",
+  "face": {
+    "name": "Route Map Visualizer",
+    "title": "The Calibrator",
+    "mana_cost": "{1}{R}{U}",
+    "colors": [
+      "R",
+      "U"
+    ],
+    "type_line": "Creature — Agent Analyst",
+    "rarity": "common",
+    "power": 6,
+    "toughness": 10,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and dur"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It does not ask permission. It asks what needs doing.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-6e18c5\"><stop offset=\"0%\" stop-color=\"#141428\"/><stop offset=\"100%\" stop-color=\"#08081a\"/></radialGradient><filter id=\"gl-6e18c5\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-6e18c5)\"/><g filter=\"url(#gl-6e18c5)\"><circle cx=\"100\" cy=\"100\" r=\"31\" fill=\"#f0883e\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"31\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"46\" ry=\"7\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(44 100 100)\"/><circle cx=\"107\" cy=\"109\" r=\"5\" fill=\"#f0883e\" opacity=\"0.07\"/><circle cx=\"96\" cy=\"96\" r=\"4\" fill=\"#f0883e\" opacity=\"0.06\"/><circle cx=\"102\" cy=\"97\" r=\"7\" fill=\"#f0883e\" opacity=\"0.12\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/route_map_visualizer",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 39,
+    "stats": {
+      "hp": 39,
+      "atk": 65,
+      "def": 30,
+      "spd": 30,
+      "int": 40
+    },
+    "typed_abilities": [
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 2,
+        "damage": 27
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 30079006195894466956
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/route_map_visualizer",
+    "version": "2.0.0",
+    "display_name": "Route Map Visualizer",
+    "description": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and durations. Produces PNG, interactive HTML (Leaflet/OSM), GeoJSON, KML, deep links, and QR codes. Fully offline Python engine — road geometry rendered directly when provided, or OSRM used browser-side as…",
+    "author": "Nazish Qasim",
+    "tags": [
+      "maps",
+      "routing",
+      "visualization",
+      "openstreetmap",
+      "python",
+      "leaflet",
+      "geojson",
+      "kml"
+    ],
+    "category": "devtools",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "route-map-visualizer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#route-map-visualizer",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "f6e86f5cfd0f8994"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "route_map_visualizer_agent.py",
+      "sha256_lf_v1": "5c0cb3810b9ec755c91cad5a437f1fc98cd9de481f8e25c90d58dc0574b032dd",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/route_map_visualizer_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/route_map_visualizer_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

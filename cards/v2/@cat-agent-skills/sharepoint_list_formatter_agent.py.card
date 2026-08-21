@@ -1,0 +1,135 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/sharepoint_list_formatter",
+  "seed": 26600462447276603397,
+  "name_seed": 1898435497,
+  "incantation": "SMELT SPOKE BEAR STEAD DOLMEN DISSOLVE SPIKE",
+  "version": "2.0.0",
+  "face": {
+    "name": "SharePoint List Formatter",
+    "title": "The Conductor",
+    "mana_cost": "{2}{B}{R}{W}",
+    "colors": [
+      "B",
+      "R",
+      "W"
+    ],
+    "type_line": "Legendary Creature — Agent Conjurer",
+    "rarity": "uncommon",
+    "power": 2,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Turns any SharePoint list data into a clean, consistent markdown table. Dynamic columns based on list type and query, plus a one-click Open link for every row."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The pipeline never sleeps. The agent never forgets.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-27d3a9\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-27d3a9\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-27d3a9)\"/><g filter=\"url(#gl-27d3a9)\"><path d=\"M40,120 Q100,51 160,120\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,61 160,125\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f778ba\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f778ba\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#f778ba\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#f778ba\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"76\" r=\"5\" fill=\"#f778ba\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/sharepoint_list_formatter",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 31,
+    "stats": {
+      "hp": 31,
+      "atk": 39,
+      "def": 22,
+      "spd": 35,
+      "int": 35
+    },
+    "typed_abilities": [
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 1,
+        "damage": 26
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 26600462447276603397
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/sharepoint_list_formatter",
+    "version": "2.0.0",
+    "display_name": "SharePoint List Formatter",
+    "description": "Turns any SharePoint list data into a clean, consistent markdown table. Dynamic columns based on list type and query, plus a one-click Open link for every row.",
+    "author": "Mathias Salomonsen",
+    "tags": [
+      "sharepoint",
+      "microsoft_365",
+      "productivity",
+      "tables",
+      "data"
+    ],
+    "category": "pipeline",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "sharepoint-list-formatter",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#sharepoint-list-formatter",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "081ee2e4c6d01a36"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "sharepoint_list_formatter_agent.py",
+      "sha256_lf_v1": "8ce15990887997b95ee23d598dab87d7f22a644e38e5dd49d089571a201564f2",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/sharepoint_list_formatter_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

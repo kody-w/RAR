@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/account_intelligence",
+  "seed": 4997715477691771520,
+  "name_seed": 1163621311,
+  "incantation": "DISMISS HUSK WIELD BINDER EFFACE MOON SHARD",
+  "version": "1.2.0",
+  "face": {
+    "name": "Account Intelligence",
+    "title": "The Pilot",
+    "mana_cost": "{3}{R}{W}",
+    "colors": [
+      "R",
+      "W"
+    ],
+    "type_line": "Legendary Creature — Agent Machinist",
+    "rarity": "uncommon",
+    "power": 3,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It works while you sleep. It finishes before you wake.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-5b73bf\"><stop offset=\"0%\" stop-color=\"#1a1a2e\"/><stop offset=\"100%\" stop-color=\"#08080f\"/></radialGradient><filter id=\"gl-5b73bf\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-5b73bf)\"/><g filter=\"url(#gl-5b73bf)\"><circle cx=\"100\" cy=\"100\" r=\"46\" fill=\"#f47067\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"46\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"61\" ry=\"11\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(38 100 100)\"/><circle cx=\"103\" cy=\"103\" r=\"5\" fill=\"#f47067\" opacity=\"0.08\"/><circle cx=\"95\" cy=\"98\" r=\"3\" fill=\"#f47067\" opacity=\"0.10\"/><circle cx=\"109\" cy=\"91\" r=\"9\" fill=\"#f47067\" opacity=\"0.13\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/account_intelligence",
+    "agent_types": [
+      "WEALTH",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#58a6ff"
+    ],
+    "hp": 70,
+    "stats": {
+      "hp": 70,
+      "atk": 59,
+      "def": 53,
+      "spd": 66,
+      "int": 52
+    },
+    "typed_abilities": [
+      {
+        "name": "Forecast",
+        "text": "Project future values from historical patterns.",
+        "cost": 2,
+        "damage": 16
+      },
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 1,
+        "damage": 39
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 4997715477691771520
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/account_intelligence",
+    "version": "1.2.0",
+    "display_name": "Account Intelligence",
+    "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "account-intelligence",
+      "stakeholder-mapping",
+      "competitive-intel"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "account_intelligence_agent.py",
+      "sha256_lf_v1": "db3bf0e8b9dc53a4c16c879a11501783a03b923fa7142132f5d0ad0037d1f376",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/account_intelligence_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

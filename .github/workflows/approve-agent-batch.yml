@@ -180,7 +180,7 @@ jobs:
 
       # Pin v2 payloads only after the source revision exists locally. The push
       # remains atomic: neither commit reaches main unless the full suite passes.
-      - name: Seal v2 cards and publish
+      - name: Seal payload-named v2 cards and publish
         env:
           ISSUE_NUMBERS: ${{ inputs.issues }}
         run: |

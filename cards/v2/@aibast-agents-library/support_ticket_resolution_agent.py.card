@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/support_ticket_resolution",
+  "seed": 6795368757143024027,
+  "name_seed": 1582170081,
+  "incantation": "FIG SOVEREIGN PANTHER COMMAND REIGN ACCORD SMELT",
+  "version": "1.1.0",
+  "face": {
+    "name": "Support Ticket Resolution Agent",
+    "title": "The Sage",
+    "mana_cost": "{2}{U}",
+    "colors": [
+      "U"
+    ],
+    "type_line": "Creature — Agent Warden",
+    "rarity": "uncommon",
+    "power": 2,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Triages tickets and tracks SLAs from a live simulated Dynamics 365 tenant's support cases, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-4dffe1\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-4dffe1\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-4dffe1)\"/><g filter=\"url(#gl-4dffe1)\"><circle cx=\"118.3\" cy=\"80.2\" r=\"21\" fill=\"#58a6ff\" opacity=\"0.15\" stroke=\"#58a6ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"81.7\" cy=\"119.8\" r=\"19\" fill=\"#58a6ff\" opacity=\"0.1\" stroke=\"#58a6ff\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"118.3\" y1=\"80.2\" x2=\"81.7\" y2=\"119.8\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"37\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/support_ticket_resolution",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 66,
+    "stats": {
+      "hp": 66,
+      "atk": 62,
+      "def": 47,
+      "spd": 68,
+      "int": 58
+    },
+    "typed_abilities": [
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 3,
+        "damage": 43
+      },
+      {
+        "name": "Sync",
+        "text": "Synchronize state between two systems.",
+        "cost": 3,
+        "damage": 41
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 6795368757143024027
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/support_ticket_resolution",
+    "version": "1.1.0",
+    "display_name": "Support Ticket Resolution Agent",
+    "description": "Triages tickets and tracks SLAs from a live simulated Dynamics 365 tenant's support cases, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "support",
+      "tickets",
+      "triage",
+      "sla",
+      "knowledge-base",
+      "escalation"
+    ],
+    "category": "software_digital_products",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "support_ticket_resolution_agent.py",
+      "sha256_lf_v1": "803150569eae5d2f820e74baf9420c32528a8a3a0aec6252a2361f2a77f896bb",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/support_ticket_resolution_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

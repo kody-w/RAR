@@ -1,0 +1,136 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/meeting_analyzer",
+  "seed": 64472069468328966982,
+  "name_seed": 2126171544,
+  "incantation": "LIGAMENT LEGACY FIRE LARCH THYME MAUL PULSE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Meeting Analyzer",
+    "title": "The Alchemist",
+    "mana_cost": "{2}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Overseer",
+    "rarity": "uncommon",
+    "power": 5,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Assess",
+        "cost": "",
+        "text": "Analyzes meeting content pasted as text or provided as audio/video transcripts. Delivers a structured intelligence report: explicit decisions and action items, participant persona profiles, and — most"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“When the signal is clear, the decision makes itself.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-bacd98\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-bacd98\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-bacd98)\"/><g filter=\"url(#gl-bacd98)\"><path d=\"M40,120 Q100,66 160,120\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,76 160,125\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#8b949e\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#8b949e\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#8b949e\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#8b949e\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"83\" r=\"5\" fill=\"#8b949e\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/meeting_analyzer",
+    "agent_types": [
+      "LOGIC",
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#d29922"
+    ],
+    "hp": 56,
+    "stats": {
+      "hp": 56,
+      "atk": 55,
+      "def": 24,
+      "spd": 44,
+      "int": 56
+    },
+    "typed_abilities": [
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 1,
+        "damage": 28
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 64472069468328966982
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/meeting_analyzer",
+    "version": "1.1.0",
+    "display_name": "Meeting Analyzer",
+    "description": "Analyzes meeting content pasted as text or provided as audio/video transcripts. Delivers a structured intelligence report: explicit decisions and action items, participant persona profiles, and — most importantly — hidden insights: unspoken tensions, implicit risks, unresolved topics, and signals that were not made explicit during the meeting but are critical to the context.",
+    "author": "Michael Ferro Pereira",
+    "tags": [
+      "meetings",
+      "analysis",
+      "insights",
+      "personas",
+      "transcription",
+      "productivity",
+      "communication"
+    ],
+    "category": "analysis",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "meeting-analyzer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#meeting-analyzer",
+      "upstream_version": "0.1.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "71c742aa9f713491"
+    },
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "meeting_analyzer_agent.py",
+      "sha256_lf_v1": "bb10c34d0d9a18bf34f0487582f49eeaaaba6c1400fa00a2abe1943c42c44f03",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/meeting_analyzer_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/meeting_analyzer_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

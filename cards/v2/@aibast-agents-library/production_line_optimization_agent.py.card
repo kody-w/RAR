@@ -1,0 +1,124 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/production_line_optimization",
+  "seed": 11447213470199194507,
+  "name_seed": 2665262080,
+  "incantation": "BESTOW MUSK COIL ANVIL BREACH CUTLASS BRAND",
+  "version": "1.3.0",
+  "face": {
+    "name": "Production Line Optimization Agent",
+    "title": "The Facilitator",
+    "mana_cost": "{1}{R}{G}{B}",
+    "colors": [
+      "R",
+      "G",
+      "B"
+    ],
+    "type_line": "Creature — Agent Catalyst",
+    "rarity": "uncommon",
+    "power": 9,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The pipeline never sleeps. The agent never forgets.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-dcac00\"><stop offset=\"0%\" stop-color=\"#1a1e0a\"/><stop offset=\"100%\" stop-color=\"#0a0a05\"/></radialGradient><filter id=\"gl-dcac00\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-dcac00)\"/><g filter=\"url(#gl-dcac00)\"><circle cx=\"100\" cy=\"100\" r=\"35\" fill=\"#f0883e\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"35\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"50\" ry=\"12\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(17 100 100)\"/><circle cx=\"102\" cy=\"91\" r=\"9\" fill=\"#f0883e\" opacity=\"0.08\"/><circle cx=\"106\" cy=\"103\" r=\"8\" fill=\"#f0883e\" opacity=\"0.08\"/><circle cx=\"92\" cy=\"102\" r=\"3\" fill=\"#f0883e\" opacity=\"0.10\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/production_line_optimization",
+    "agent_types": [
+      "CRAFT"
+    ],
+    "type_colors": [
+      "#f85149"
+    ],
+    "hp": 55,
+    "stats": {
+      "hp": 55,
+      "atk": 48,
+      "def": 38,
+      "spd": 61,
+      "int": 55
+    },
+    "typed_abilities": [
+      {
+        "name": "Dispatch",
+        "text": "Route work to available capacity. Track completion.",
+        "cost": 1,
+        "damage": 25
+      },
+      {
+        "name": "Optimize",
+        "text": "Tune process parameters for maximum throughput.",
+        "cost": 3,
+        "damage": 23
+      }
+    ],
+    "weakness": "SHIELD",
+    "weakness_label": "Shield",
+    "resistance": "HEAL",
+    "resistance_label": "Heal",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 11447213470199194507
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/production_line_optimization",
+    "version": "1.3.0",
+    "display_name": "Production Line Optimization Agent",
+    "description": "Analyzes OEE, bottlenecks, live simulated Dynamics 365 downtime cases, and spindle vibration telemetry, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "production",
+      "OEE",
+      "bottleneck",
+      "throughput",
+      "manufacturing"
+    ],
+    "category": "manufacturing",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "production_line_optimization_agent.py",
+      "sha256_lf_v1": "f740a969d2c10b4d2f43e86729ec97b49aff04521d30a57e2b90db79b77124ea",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/production_line_optimization_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,126 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/bulk_crm_data_generator_agent",
+  "seed": 5020671239044998157,
+  "name_seed": 1168966116,
+  "incantation": "ETCH CHAMPION VEIN COVENANT GLOW SERPENT SHARD",
+  "version": "1.1.0",
+  "face": {
+    "name": "Bulk CRM Data Generator",
+    "title": "The Conjurer",
+    "mana_cost": "{1}{N}{W}",
+    "colors": [
+      "N",
+      "W"
+    ],
+    "type_line": "Creature — Agent Resolver",
+    "rarity": "common",
+    "power": 2,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Synthesize",
+        "cost": "",
+        "text": "Generates synthetic CRM records and audits a live simulated Dynamics 365 tenant's data shape, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Built to serve. Designed to scale. Ready to deploy.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-ad01e4\"><stop offset=\"0%\" stop-color=\"#1a0a1e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-ad01e4\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-ad01e4)\"/><g filter=\"url(#gl-ad01e4)\"><polygon points=\"147.0,100.9 119.1,129.3 77.3,140.0 60.8,115.1 71.5,85.5 102.7,52.1 122.8,76.2\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"114.2,104.9 109.1,124.4 85.0,118.7 82.0,99.1 84.6,82.9 105.1,82.7 116.6,93.1\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#8b949e\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/bulk_crm_data_generator_agent",
+    "agent_types": [
+      "SOCIAL",
+      "DATA"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#3fb950"
+    ],
+    "hp": 66,
+    "stats": {
+      "hp": 66,
+      "atk": 67,
+      "def": 37,
+      "spd": 45,
+      "int": 59
+    },
+    "typed_abilities": [
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 2,
+        "damage": 11
+      },
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 3,
+        "damage": 11
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 5020671239044998157
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/bulk_crm_data_generator_agent",
+    "version": "1.1.0",
+    "display_name": "Bulk CRM Data Generator",
+    "description": "Generates synthetic CRM records and audits a live simulated Dynamics 365 tenant's data shape, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "crm",
+      "data-generation",
+      "testing",
+      "contacts",
+      "accounts",
+      "opportunities"
+    ],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "bulk_crm_data_generator_agent.py",
+      "sha256_lf_v1": "587ddfc10256eab771b2371321f0fe22b38f261e57f0344b8b69be7ce534513d",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/bulk_crm_data_generator_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,131 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/acroform_writer",
+  "seed": 29924264348194848336,
+  "name_seed": 2672318433,
+  "incantation": "TERSE BROKE RAPID WIELD RIDGE PAGODA EDGE",
+  "version": "2.0.0",
+  "face": {
+    "name": "AcroForm Writer",
+    "title": "The Conjurer",
+    "mana_cost": "{3}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Creature — Agent Nomad",
+    "rarity": "rare",
+    "power": 9,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Calibrate",
+        "cost": "",
+        "text": "Fill an existing AcroForm PDF's real form fields from supplied data and flatten the result into a finished, non-editable PDF"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The best agent is the one you forget is running.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-4857e1\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-4857e1\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-4857e1)\"/><g filter=\"url(#gl-4857e1)\"><circle cx=\"122.2\" cy=\"88.4\" r=\"22\" fill=\"#f0883e\" opacity=\"0.15\" stroke=\"#f0883e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"77.8\" cy=\"111.6\" r=\"12\" fill=\"#f0883e\" opacity=\"0.1\" stroke=\"#f0883e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"122.2\" y1=\"88.4\" x2=\"77.8\" y2=\"111.6\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"35\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/acroform_writer",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 44,
+    "stats": {
+      "hp": 44,
+      "atk": 31,
+      "def": 27,
+      "spd": 43,
+      "int": 43
+    },
+    "typed_abilities": [
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 3,
+        "damage": 19
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 29924264348194848336
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/acroform_writer",
+    "version": "2.0.0",
+    "display_name": "AcroForm Writer",
+    "description": "Fill an existing AcroForm PDF's real form fields from supplied data and flatten the result into a finished, non-editable PDF",
+    "author": "Sandeep Angara",
+    "tags": [
+      "acroform",
+      "pdf",
+      "forms",
+      "python",
+      "documents"
+    ],
+    "category": "devtools",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "acroform-writer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#acroform-writer",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "b96d3187f92bf269"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "acroform_writer_agent.py",
+      "sha256_lf_v1": "40d2f38bf76d47a54b443ea70f777001ac77ae612979550aab56a5bf2147f8d4",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/acroform_writer_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/acroform_writer_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,135 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@rapp/egg_hatcher",
+  "seed": 11747276046260251558,
+  "name_seed": 2735125843,
+  "incantation": "PUZZLE PARAGON GLYPH WHOLE THEME BOW MOLD",
+  "version": "1.1.1",
+  "face": {
+    "name": "EggHatcher",
+    "title": "The Prospector",
+    "mana_cost": "{3}{W}{B}",
+    "colors": [
+      "W",
+      "B"
+    ],
+    "type_line": "Legendary Creature — Agent Strategist",
+    "rarity": "mythic",
+    "power": 6,
+    "toughness": 11,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“In a world of noise, the signal belongs to those who listen.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-6b553\"><stop offset=\"0%\" stop-color=\"#0a1a1a\"/><stop offset=\"100%\" stop-color=\"#050a0a\"/></radialGradient><filter id=\"gl-6b553\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-6b553)\"/><g filter=\"url(#gl-6b553)\"><line x1=\"121\" y1=\"168\" x2=\"130\" y2=\"138\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"130\" y1=\"138\" x2=\"135\" y2=\"113\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"135\" y1=\"113\" x2=\"39\" y2=\"137\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"39\" y1=\"137\" x2=\"156\" y2=\"117\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"156\" y1=\"117\" x2=\"89\" y2=\"80\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"89\" y1=\"80\" x2=\"121\" y2=\"168\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"121\" y1=\"168\" x2=\"135\" y2=\"113\" stroke=\"#58a6ff\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"121\" cy=\"168\" r=\"6\" fill=\"#58a6ff\" opacity=\"0.54\"/><circle cx=\"130\" cy=\"138\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.51\"/><circle cx=\"135\" cy=\"113\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.51\"/><circle cx=\"39\" cy=\"137\" r=\"3\" fill=\"#58a6ff\" opacity=\"0.33\"/><circle cx=\"156\" cy=\"117\" r=\"6\" fill=\"#58a6ff\" opacity=\"0.41\"/><circle cx=\"89\" cy=\"80\" r=\"6\" fill=\"#58a6ff\" opacity=\"0.40\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rapp/egg_hatcher",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 78,
+      "spd": 100,
+      "int": 100
+    },
+    "typed_abilities": [
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 1,
+        "damage": 21
+      },
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 3,
+        "damage": 26
+      },
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 2,
+        "damage": 13
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 11747276046260251558
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/egg_hatcher",
+    "version": "1.1.1",
+    "display_name": "EggHatcher",
+    "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
+    "author": "RAPP",
+    "tags": [
+      "egg",
+      "cartridge",
+      "hatch",
+      "organism",
+      "rapplication",
+      "lifecycle"
+    ],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "example_call": {
+      "args": {
+        "egg_path": "~/Downloads/dad.egg"
+      }
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "egg_hatcher_agent.py",
+      "sha256_lf_v1": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rapp/egg_hatcher_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/egg_hatcher_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

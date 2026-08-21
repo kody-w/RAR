@@ -1,0 +1,128 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/utility_billing_assistance",
+  "seed": 1823358465969498010,
+  "name_seed": 424533725,
+  "incantation": "DYNASTY BRAND BEDROCK EXTINGUISH WALL SOURCE ANVIL",
+  "version": "1.2.0",
+  "face": {
+    "name": "Utility Billing Assistance Agent",
+    "title": "The Tactician",
+    "mana_cost": "{2}{W}{U}",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "type_line": "Creature — Agent Prospector",
+    "rarity": "uncommon",
+    "power": 7,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Configure",
+        "cost": "",
+        "text": "Answers billing inquiries and screens assistance from a live simulated Dynamics 365 tenant's utility cases, with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Data in. Decisions out. Humans in the loop.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-4ddedd\"><stop offset=\"0%\" stop-color=\"#141428\"/><stop offset=\"100%\" stop-color=\"#08081a\"/></radialGradient><filter id=\"gl-4ddedd\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-4ddedd)\"/><g filter=\"url(#gl-4ddedd)\"><circle cx=\"132.5\" cy=\"80.4\" r=\"15\" fill=\"#79c0ff\" opacity=\"0.15\" stroke=\"#79c0ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"67.5\" cy=\"119.6\" r=\"14\" fill=\"#79c0ff\" opacity=\"0.1\" stroke=\"#79c0ff\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"132.5\" y1=\"80.4\" x2=\"67.5\" y2=\"119.6\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/utility_billing_assistance",
+    "agent_types": [
+      "SHIELD",
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#f0f0f0",
+      "#bc8cff"
+    ],
+    "hp": 65,
+    "stats": {
+      "hp": 65,
+      "atk": 69,
+      "def": 35,
+      "spd": 59,
+      "int": 60
+    },
+    "typed_abilities": [
+      {
+        "name": "Monitor",
+        "text": "Continuously watch for anomalies. Alert on deviation.",
+        "cost": 3,
+        "damage": 25
+      },
+      {
+        "name": "Enforce",
+        "text": "Apply policy rules. Block non-compliant actions.",
+        "cost": 3,
+        "damage": 32
+      }
+    ],
+    "weakness": "SOCIAL",
+    "weakness_label": "Social",
+    "resistance": "CRAFT",
+    "resistance_label": "Craft",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 1823358465969498010
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/utility_billing_assistance",
+    "version": "1.2.0",
+    "display_name": "Utility Billing Assistance Agent",
+    "description": "Answers billing inquiries and screens assistance from a live simulated Dynamics 365 tenant's utility cases, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "utility",
+      "billing",
+      "water",
+      "payment",
+      "assistance",
+      "municipal",
+      "leak-detection",
+      "smart-meter"
+    ],
+    "category": "slg_government",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "utility_billing_assistance_agent.py",
+      "sha256_lf_v1": "fa45e49b921930efabef806a48d00870f16a15511df35aff72523f98715261ee",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/slg_government_stacks/utility_billing_assistance_stack/utility_billing_assistance_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/utility_billing_assistance_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

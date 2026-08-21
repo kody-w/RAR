@@ -79,9 +79,9 @@ The store (`index.html`) is a single HTML file. Open it in any browser.
 | `delete @pub/slug --reason "..."` | Request hash-bound deletion |
 | `request-read @pub/slug` | Create an auditable read Issue |
 | `request-status ISSUE` | Read the Issues-backed lifecycle |
-| `card pack path.py [--egg file]` | Seal an agent and optional egg in a `.card` |
-| `card unpack path.card [directory]` | Verify and restore exact payload bytes |
-| `card verify path.card` | Verify schema, identity, face, and payload hashes |
+| `card pack path.py [--egg file]` | Seal an agent as `path.py.card` |
+| `card unpack path.py.card [directory]` | Verify and restore exact payload bytes |
+| `card verify path.py.card` | Verify schema, sleeve name, identity, face, and payload hashes |
 | `card scan URL_OR_SEED` | Resolve and inspect a card without executing it |
 | `card resolve NAME` | Resolve card from name, seed number, or 7-word incantation |
 | `card words NAME` | Get the 7-word incantation for any agent |
@@ -101,6 +101,12 @@ All commands support `--json`.
 `--pin <raw-url>` is RAR's compact registry form. A pinned-only card always
 reports `offline: needs <n> pinned payload(s)` and is never called
 offline-ready.
+
+The sleeve name is the primary payload's complete filename plus `.card`:
+`agent.py.card` or `foo.egg.card`. `card pack x_agent.py` writes
+`x_agent.py.card` beside the input; `--out` can change its directory but not
+that basename. `card unpack` strips the final `.card`, and verify/scan refuse a
+sleeve whose filename disagrees with `payload[0].filename`.
 
 ---
 

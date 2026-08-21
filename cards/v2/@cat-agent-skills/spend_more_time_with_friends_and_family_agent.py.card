@@ -1,0 +1,131 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/spend_more_time_with_friends_and_family",
+  "seed": 32874899832773812574,
+  "name_seed": 3359316792,
+  "incantation": "NEBULA GUILD THRONE GRUDGE ROGUE LEGION QUENCH",
+  "version": "2.0.0",
+  "face": {
+    "name": "Spend More Time With Friends & Family",
+    "title": "The Prospector",
+    "mana_cost": "{1}{U}{B}",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "type_line": "Creature — Agent Artificer",
+    "rarity": "common",
+    "power": 2,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "While you're out of office, watches a group chat and answers questions from your local knowledge docs (clearly marked AI-generated), logs anything it can't answer for later, and pings you on Teams if "
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It was designed to assist. It chose to excel.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-3b1b38\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-3b1b38\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-3b1b38)\"/><g filter=\"url(#gl-3b1b38)\"><line x1=\"127\" y1=\"111\" x2=\"108\" y2=\"116\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"108\" y1=\"116\" x2=\"108\" y2=\"116\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"108\" y1=\"116\" x2=\"157\" y2=\"60\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"157\" y1=\"60\" x2=\"136\" y2=\"148\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"136\" y1=\"148\" x2=\"127\" y2=\"111\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"127\" y1=\"111\" x2=\"108\" y2=\"116\" stroke=\"#bc8cff\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"127\" cy=\"111\" r=\"4\" fill=\"#bc8cff\" opacity=\"0.46\"/><circle cx=\"108\" cy=\"116\" r=\"4\" fill=\"#bc8cff\" opacity=\"0.61\"/><circle cx=\"108\" cy=\"116\" r=\"4\" fill=\"#bc8cff\" opacity=\"0.60\"/><circle cx=\"157\" cy=\"60\" r=\"3\" fill=\"#bc8cff\" opacity=\"0.40\"/><circle cx=\"136\" cy=\"148\" r=\"5\" fill=\"#bc8cff\" opacity=\"0.64\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/spend_more_time_with_friends_and_family",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 45,
+    "stats": {
+      "hp": 45,
+      "atk": 57,
+      "def": 24,
+      "spd": 48,
+      "int": 33
+    },
+    "typed_abilities": [
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 2,
+        "damage": 47
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 32874899832773812574
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/spend_more_time_with_friends_and_family",
+    "version": "2.0.0",
+    "display_name": "Spend More Time With Friends & Family",
+    "description": "While you're out of office, watches a group chat and answers questions from your local knowledge docs (clearly marked AI-generated), logs anything it can't answer for later, and pings you on Teams if its setup is incomplete.",
+    "author": "Adi Leibowitz",
+    "tags": [
+      "automation",
+      "teams",
+      "out_of_office",
+      "knowledge"
+    ],
+    "category": "integrations",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "spend-more-time-with-friends-and-family",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#spend-more-time-with-friends-and-family",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "bd12abb4ba09a5e5"
+    },
+    "platforms": [
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "spend_more_time_with_friends_and_family_agent.py",
+      "sha256_lf_v1": "d11659b95fb22912398412b573f58ec52b940dcff10574f772ed0a4b4be892db",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

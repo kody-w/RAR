@@ -1,0 +1,124 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/voice_to_crm_email",
+  "seed": 2718308106806898885,
+  "name_seed": 632905426,
+  "incantation": "PLATE SOAK DISK ICHOR NEBULA FALCON BLADE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Voice to CRM Email",
+    "title": "The Conjurer",
+    "mana_cost": "{1}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Beacon",
+    "rarity": "common",
+    "power": 3,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The best agent is the one you forget is running.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-b95ed2\"><stop offset=\"0%\" stop-color=\"#1a1e0a\"/><stop offset=\"100%\" stop-color=\"#0a0a05\"/></radialGradient><filter id=\"gl-b95ed2\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-b95ed2)\"/><g filter=\"url(#gl-b95ed2)\"><polygon points=\"137.5,110.7 121.6,138.3 91.7,140.1 70.8,128.8 64.6,93.7 86.8,77.6 111.7,61.8 135.0,65.7\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"119.2,110.7 104.4,115.4 92.7,116.5 76.2,107.6 79.4,89.7 91.4,83.1 104.6,85.7 117.6,92.8\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#8b949e\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/voice_to_crm_email",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 57,
+    "stats": {
+      "hp": 57,
+      "atk": 52,
+      "def": 36,
+      "spd": 52,
+      "int": 53
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 3,
+        "damage": 35
+      },
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 37
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 2718308106806898885
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/voice_to_crm_email",
+    "version": "1.1.0",
+    "display_name": "Voice to CRM Email",
+    "description": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "voice",
+      "email",
+      "meeting-recap",
+      "action-items",
+      "follow-up"
+    ],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "rar_aibast_agents_library_voice_to_crm_email_agent.py",
+      "sha256_lf_v1": "037bf9d7f2159d70382579eab207cc2f0a4f4baaa15fc148074d44d15e36ab7c",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/rar_aibast_agents_library_voice_to_crm_email_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

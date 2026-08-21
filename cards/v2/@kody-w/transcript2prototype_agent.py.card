@@ -1,0 +1,133 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/transcript2prototype",
+  "seed": 40157413781133075371,
+  "name_seed": 759941906,
+  "incantation": "GOBLET CHISEL BRUNT CORRODE BEHEMOTH REAGENT STORM",
+  "version": "1.0.4",
+  "face": {
+    "name": "Transcript2Prototype",
+    "title": "The Warden",
+    "mana_cost": "{3}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Legendary Creature — Agent Scribe",
+    "rarity": "mythic",
+    "power": 9,
+    "toughness": 11,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Turns a business transcript into a working prototype — demo script, injected M365 demo iframe, generated agents, twin test runs, factory export."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Where workflows end, this agent begins.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-4bcb12\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"gl-4bcb12\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-4bcb12)\"/><g filter=\"url(#gl-4bcb12)\"><circle cx=\"63.4\" cy=\"86.6\" r=\"16\" fill=\"#8b949e\" opacity=\"0.15\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"136.6\" cy=\"113.4\" r=\"16\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"63.4\" y1=\"86.6\" x2=\"136.6\" y2=\"113.4\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"49\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/transcript2prototype",
+    "agent_types": [
+      "DATA",
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#3fb950",
+      "#d29922"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 95,
+      "def": 86,
+      "spd": 93,
+      "int": 100
+    },
+    "typed_abilities": [
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 1,
+        "damage": 46
+      },
+      {
+        "name": "Sync",
+        "text": "Synchronize state between two systems.",
+        "cost": 3,
+        "damage": 37
+      },
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 3,
+        "damage": 19
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 40157413781133075371
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/transcript2prototype",
+    "version": "1.0.4",
+    "display_name": "Transcript2Prototype",
+    "description": "Turns a business transcript into a working prototype — demo script, injected M365 demo iframe, generated agents, twin test runs, factory export.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "rapplication",
+      "pipeline",
+      "prototype",
+      "demo",
+      "cubby",
+      "factory",
+      "twin",
+      "m365"
+    ],
+    "category": "workflow",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "transcript2prototype_agent.py",
+      "sha256_lf_v1": "73d95878bc3f14510eefa8dd16707d5cc49e9c51becd7f2f4e4351197bdce939",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/transcript2prototype_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/transcript2prototype_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

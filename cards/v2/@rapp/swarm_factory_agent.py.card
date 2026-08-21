@@ -1,0 +1,135 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@rapp/swarm_factory_agent",
+  "seed": 10141477066655803476,
+  "name_seed": 2361246633,
+  "incantation": "VALE HUSK GLYPH STEAD MOOR AUGUR CHISEL",
+  "version": "0.3.1",
+  "face": {
+    "name": "SwarmFactory",
+    "title": "The Cipher",
+    "mana_cost": "{3}{W}{U}{B}",
+    "colors": [
+      "W",
+      "U",
+      "B"
+    ],
+    "type_line": "Legendary Creature — Agent Cipher",
+    "rarity": "mythic",
+    "power": 8,
+    "toughness": 10,
+    "abilities": [
+      {
+        "keyword": "Intercept",
+        "cost": "",
+        "text": "Generates, builds, installs, and uninstalls RAPP swarms — converging local agents into single shareable .py files via the RAPP Store catalog."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-bdc3a9\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-bdc3a9\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-bdc3a9)\"/><g filter=\"url(#gl-bdc3a9)\"><polygon points=\"135.5,110.4 106.0,128.4 62.2,126.1 68.5,63.8 111.8,64.9\" fill=\"#58a6ff\" opacity=\"0.1\" stroke=\"#58a6ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"114.6,106.6 97.1,125.8 83.0,100.7 90.0,85.0 113.2,83.6\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#58a6ff\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rapp/swarm_factory_agent",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 96,
+    "stats": {
+      "hp": 96,
+      "atk": 100,
+      "def": 74,
+      "spd": 91,
+      "int": 97
+    },
+    "typed_abilities": [
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 2,
+        "damage": 12
+      },
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 2,
+        "damage": 19
+      },
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 1,
+        "damage": 48
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 10141477066655803476
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/swarm_factory_agent",
+    "display_name": "SwarmFactory",
+    "description": "Generates, builds, installs, and uninstalls RAPP swarms — converging local agents into single shareable .py files via the RAPP Store catalog.",
+    "author": "RAPP",
+    "version": "0.3.1",
+    "tags": [
+      "meta",
+      "build",
+      "singleton",
+      "swarm-factory",
+      "store"
+    ],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "example_call": {
+      "args": {
+        "action": "list"
+      }
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "swarm_factory_agent.py",
+      "sha256_lf_v1": "cfe3a0cffffb9d6395bf3d9377239e24500d3f7ab23c00b059da62f16a529ae0",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rapp/swarm_factory_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/swarm_factory_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

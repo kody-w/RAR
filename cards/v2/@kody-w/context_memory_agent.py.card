@@ -1,0 +1,128 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/context_memory_agent",
+  "seed": 10528932706447274464,
+  "name_seed": 2451458179,
+  "incantation": "RAMP SECT GLYPH SECT PLUME DRUID BRAND",
+  "version": "1.0.1",
+  "face": {
+    "name": "ContextMemory",
+    "title": "The Oracle",
+    "mana_cost": "{1}{G}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Enchantment — Agent Aura",
+    "rarity": "rare",
+    "power": null,
+    "toughness": null,
+    "abilities": [
+      {
+        "keyword": "Total Recall",
+        "cost": "",
+        "text": "At the start of each conversation, search stored memories. Filter by keywords, user, or recall everything."
+      },
+      {
+        "keyword": "System Context Injection",
+        "cost": "",
+        "text": "ContextMemory silently weaves relevant past interactions into the system prompt."
+      }
+    ],
+    "flavor_text": "“You said that on a Tuesday. You were frustrated. You used the word 'elegant' sarcastically. I remember everything.” —The Oracle",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-1e4883\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-1e4883\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-1e4883)\"/><g filter=\"url(#gl-1e4883)\"><ellipse cx=\"100\" cy=\"100\" rx=\"60\" ry=\"30\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"2\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"60\" ry=\"30\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"1\" opacity=\"0.3\" transform=\"rotate(90 100 100)\"/><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"none\" stroke=\"#2e7d32\" stroke-width=\"1\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"55\" fill=\"none\" stroke=\"#1b5e20\" stroke-width=\"0.8\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"65\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"75\" fill=\"none\" stroke=\"#2e7d32\" stroke-width=\"0.5\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"18\" fill=\"#4caf50\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#4caf50\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#66bb6a\" opacity=\"0.9\"/><path d=\"M60,100 Q80,80 100,100 Q120,120 140,100\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"2\" opacity=\"0.6\"/><path d=\"M60,100 Q80,120 100,100 Q120,80 140,100\" fill=\"none\" stroke=\"#4caf50\" stroke-width=\"2\" opacity=\"0.6\"/></g></svg>",
+    "set_code": "HOLO",
+    "promo": true,
+    "artist": "Howard Hoy",
+    "agent_name": "@kody-w/context_memory_agent",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 85,
+      "spd": 100,
+      "int": 92
+    },
+    "typed_abilities": [
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 3,
+        "damage": 21
+      },
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 3,
+        "damage": 37
+      },
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 3,
+        "damage": 15
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 10528932706447274464
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/context_memory_agent",
+    "version": "1.0.1",
+    "display_name": "ContextMemory",
+    "description": "Recalls stored memories and conversation context from the brainstem's JSON memory store, per-user or shared.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "core",
+      "memory",
+      "context",
+      "recall"
+    ],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "context_memory_agent.py",
+      "sha256_lf_v1": "611d0957274b1f584acd9f763bb789b616eca4c1e4297665064bfeef9ed37e7a",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/context_memory_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/context_memory_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

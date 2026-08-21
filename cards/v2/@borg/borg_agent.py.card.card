@@ -1,0 +1,130 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@borg/borg_agent",
+  "seed": 6828785747777692595,
+  "name_seed": 1589950581,
+  "incantation": "SABRE MUSK NICKEL CREEK GUARD GLAIVE SMELT",
+  "version": "1.1.0",
+  "face": {
+    "name": "Borg",
+    "title": "The Assimilator",
+    "mana_cost": "{2}{U}{B}",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "type_line": "Creature — Agent Assimilator",
+    "rarity": "mythic",
+    "power": 6,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Assimilate",
+        "cost": "{T}",
+        "text": "Target GitHub repository or URL becomes part of the collective. Create a structured knowledge report."
+      },
+      {
+        "keyword": "Adaptive Analysis",
+        "cost": "",
+        "text": "When Borg assimilates, it detects the tech stack and maps 40+ framework patterns."
+      }
+    ],
+    "flavor_text": "“Resistance is futile. Your codebase will be added to our own. Your architectural distinctiveness will be catalogued.” —Borg Collective Directive 7.1",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-c4b875\"><stop offset=\"0%\" stop-color=\"#1a0a3e\"/><stop offset=\"100%\" stop-color=\"#080818\"/></radialGradient><filter id=\"gl-c4b875\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-c4b875)\"/><g filter=\"url(#gl-c4b875)\"><rect x=\"55\" y=\"55\" width=\"90\" height=\"90\" fill=\"none\" stroke=\"#4a9eff\" stroke-width=\"2\" rx=\"4\"/><rect x=\"70\" y=\"70\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"#8b5cf6\" stroke-width=\"1.5\" rx=\"2\"/><line x1=\"55\" y1=\"100\" x2=\"145\" y2=\"100\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.6\"/><line x1=\"100\" y1=\"55\" x2=\"100\" y2=\"145\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.6\"/><polygon points=\"100,25 135,45 135,85 100,105 65,85 65,45\" fill=\"none\" stroke=\"#8b5cf6\" stroke-width=\"1\" opacity=\"0.4\"/><polygon points=\"100,95 135,115 135,155 100,175 65,155 65,115\" fill=\"none\" stroke=\"#4a9eff\" stroke-width=\"1\" opacity=\"0.4\"/><circle cx=\"100\" cy=\"100\" r=\"15\" fill=\"#4a9eff\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"6\" fill=\"#8b5cf6\" opacity=\"0.9\"/><circle cx=\"85\" cy=\"85\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"115\" cy=\"85\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"85\" cy=\"115\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/><circle cx=\"115\" cy=\"115\" r=\"3\" fill=\"#4a9eff\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "promo": true,
+    "artist": "Howard Hoy",
+    "agent_name": "@borg/borg_agent",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 86,
+    "stats": {
+      "hp": 86,
+      "atk": 70,
+      "def": 73,
+      "spd": 89,
+      "int": 73
+    },
+    "typed_abilities": [
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 1,
+        "damage": 41
+      },
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 2,
+        "damage": 42
+      },
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 1,
+        "damage": 14
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 2,
+      "label": "Evolved",
+      "icon": "flame"
+    },
+    "tier": "verified",
+    "rarity_tier": "rare",
+    "rarity_label": "Elite",
+    "floor_pts": 100,
+    "seed": 6828785747777692595
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@borg/borg_agent",
+    "version": "1.1.0",
+    "display_name": "Borg",
+    "description": "Assimilates knowledge from GitHub repos and web URLs into structured reports.",
+    "author": "Howard",
+    "tags": [
+      "core",
+      "analysis",
+      "github",
+      "web",
+      "assimilation"
+    ],
+    "category": "core",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "borg_agent.py.card",
+      "sha256_lf_v1": "7710557fc30ce2098c1b4d136004bc7e979ed8441b91dba95c38de830905166f",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@borg/borg_agent.py.card"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@borg/borg_agent.py.card.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

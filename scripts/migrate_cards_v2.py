@@ -9,6 +9,7 @@ import json
 import re
 import subprocess
 import sys
+from collections import Counter
 from pathlib import Path
 
 
@@ -96,6 +97,14 @@ def revision_bytes(revision: str, relative_path: str, agent_id: str) -> bytes:
 def plan_migration(revision: str) -> tuple[dict[Path, bytes], list[str]]:
     faces = load_object(V1_PATH)
     agents = registry_by_name(load_object(REGISTRY_PATH))
+    source_name_counts = Counter(
+        (
+            agent_id.split("/", 1)[0],
+            Path(agent["_file"]).name,
+        )
+        for agent_id, agent in agents.items()
+        if agent_id in faces and isinstance(agent.get("_file"), str)
+    )
     planned: dict[Path, bytes] = {}
     index = {}
     stub_ids = []
@@ -135,11 +144,26 @@ def plan_migration(revision: str) -> tuple[dict[Path, bytes], list[str]]:
         if used_stub_hash:
             stub_ids.append(agent_id)
 
+        publisher = agent_id.split("/", 1)[0]
+        payload_filename = source_path.name
+        if source_name_counts[(publisher, payload_filename)] > 1:
+            payload_filename = agent.get("_install_filename")
+            if (
+                not isinstance(payload_filename, str)
+                or Path(payload_filename).name != payload_filename
+            ):
+                raise RuntimeError(
+                    f"{agent_id}: colliding source filename "
+                    f"{source_path.name!r} has no collision-safe install filename"
+                )
+        card_filename = f"{payload_filename}.card"
         source_url = f"{RAW_ROOT}/{revision}/{relative_source}"
-        scan_url = f"{RAW_ROOT}/main/cards/v2/{agent_id}.card"
+        scan_url = (
+            f"{RAW_ROOT}/main/cards/v2/{publisher}/{card_filename}"
+        )
         payload = [{
             "kind": "agent.py",
-            "filename": source_path.name,
+            "filename": payload_filename,
             "sha256_lf_v1": expected_digest,
             "url": source_url,
         }]
@@ -155,7 +179,12 @@ def plan_migration(revision: str) -> tuple[dict[Path, bytes], list[str]]:
             minted_by="scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
         )
         raw = _card_json_bytes(card)
-        card_path = OUTPUT_ROOT / f"{agent_id}.card"
+        card_path = OUTPUT_ROOT / publisher / card_filename
+        if card_path in planned:
+            raise RuntimeError(
+                f"{agent_id}: duplicate migrated card path "
+                f"{card_path.relative_to(ROOT)}"
+            )
         planned[card_path] = raw
         index[agent_id] = {
             "seed": card["seed"],
@@ -254,9 +283,8 @@ def main() -> int:
         if revision is None:
             prior_revision = existing_revision()
             if prior_revision and re.fullmatch(r"[0-9a-f]{40}", prior_revision):
-                prior_plan, prior_stub_ids = plan_migration(prior_revision)
                 try:
-                    apply_migration(prior_plan, check=True)
+                    prior_plan, prior_stub_ids = plan_migration(prior_revision)
                 except RuntimeError:
                     pass
                 else:

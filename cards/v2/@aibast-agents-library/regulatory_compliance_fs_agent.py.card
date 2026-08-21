@@ -1,0 +1,131 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/fs_regulatory_compliance",
+  "seed": 1477628584621653242,
+  "name_seed": 344037214,
+  "incantation": "LOOP JAW VASSAL OWL DIN KNELL ANVIL",
+  "version": "1.2.0",
+  "face": {
+    "name": "FS Regulatory Compliance Agent",
+    "title": "The Curator",
+    "mana_cost": "{3}{U}{G}",
+    "colors": [
+      "U",
+      "G"
+    ],
+    "type_line": "Creature — Agent Vanguard",
+    "rarity": "common",
+    "power": 3,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Tracks compliance findings and remediation from a live simulated Dynamics 365 tenant (cases and tasks), with an offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Precision at the speed of thought.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-81975e\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-81975e\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-81975e)\"/><g filter=\"url(#gl-81975e)\"><path d=\"M40,120 Q100,51 160,120\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,61 160,125\" fill=\"none\" stroke=\"#79c0ff\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#79c0ff\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#79c0ff\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#79c0ff\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#79c0ff\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"76\" r=\"5\" fill=\"#79c0ff\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#79c0ff\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/fs_regulatory_compliance",
+    "agent_types": [
+      "WEALTH",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#58a6ff"
+    ],
+    "hp": 63,
+    "stats": {
+      "hp": 63,
+      "atk": 67,
+      "def": 49,
+      "spd": 58,
+      "int": 66
+    },
+    "typed_abilities": [
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 1,
+        "damage": 27
+      },
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 1,
+        "damage": 34
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 1477628584621653242
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/fs_regulatory_compliance",
+    "version": "1.2.0",
+    "display_name": "FS Regulatory Compliance Agent",
+    "description": "Tracks compliance findings and remediation from a live simulated Dynamics 365 tenant (cases and tasks), with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "compliance",
+      "SOX",
+      "Dodd-Frank",
+      "BSA",
+      "AML",
+      "regulatory",
+      "financial-services",
+      "MiFID-II",
+      "trade-surveillance",
+      "best-execution",
+      "venue-ranking"
+    ],
+    "category": "financial_services",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "regulatory_compliance_fs_agent.py",
+      "sha256_lf_v1": "3db36e36416a456a6669e40e96b14edd3b31b7eb53228aa97ba9f967ff10334b",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/regulatory_compliance_fs_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

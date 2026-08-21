@@ -152,7 +152,7 @@ jobs:
 
       # The source commit must exist before a card can pin its payload to that
       # immutable revision. Both local commits are tested before one atomic push.
-      - name: Seal v2 cards and publish
+      - name: Seal payload-named v2 cards and publish
         if: steps.apply.outputs.already_applied != 'true'
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}

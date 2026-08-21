@@ -512,6 +512,7 @@ header {
 <script>
 const REGISTRY_URL = 'registry.json';
 const CARDS_URL = 'cards/holo_cards.json';
+const CARD_INDEX_URL = 'cards/v2/index.json';
 const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR';
 
 // Dependency-free QR Model 2 encoder. It emits inert inline SVG and supports
@@ -749,6 +750,20 @@ window.__INLINED_AT__ = null;
 function esc(s) { const d = document.createElement('div'); d.textContent = String(s ?? ''); return d.innerHTML; }
 function shortSha(s) { return s ? String(s).slice(0, 8) : '—'; }
 
+function primaryPayloadFilename(agent, registry) {
+  const sourceFilename = (agent._file || '').split('/').pop() ||
+    `${(agent.name || '').split('/').pop()}.py`;
+  const publisher = (agent.name || '').split('/')[0];
+  const collides = (registry.agents || []).some(other =>
+    other.name !== agent.name &&
+    (other.name || '').split('/')[0] === publisher &&
+    (other._file || '').split('/').pop() === sourceFilename
+  );
+  return collides && agent._install_filename
+    ? agent._install_filename
+    : sourceFilename;
+}
+
 function parseManaCost(cost) {
   if (!cost) return [];
   // {1}{G}{W}{R}  →  ['1', 'G', 'W', 'R']
@@ -814,7 +829,7 @@ async function load() {
     return;
   }
 
-  let registry, cards, agent, card, cardEnvelope;
+  let registry, cards, cardIndex, agent, card, cardEnvelope;
   if (isInlined) {
     // Standalone copy — registry + card data baked into this HTML file.
     registry = { agents: [window.__INLINED_AGENT__] };
@@ -823,11 +838,13 @@ async function load() {
       : null;
     const inlinedFace = cardEnvelope?.face || window.__INLINED_CARD__;
     cards = inlinedFace ? { [window.__INLINED_AGENT__.name]: inlinedFace } : {};
+    cardIndex = {};
   } else {
     try {
-      [registry, cards] = await Promise.all([
+      [registry, cards, cardIndex] = await Promise.all([
         fetch(REGISTRY_URL + '?t=' + Date.now()).then(r => r.json()),
         fetch(CARDS_URL + '?t=' + Date.now()).then(r => r.json()),
+        fetch(CARD_INDEX_URL + '?t=' + Date.now()).then(r => r.json()),
       ]);
     } catch (e) {
       root.innerHTML = `<div class="error"><h2>Failed to load registry</h2><div class="error-detail">${esc(e.message)}</div></div>`;
@@ -852,7 +869,16 @@ async function load() {
     return;
   }
   if (!isInlined) {
-    const v2Path = `cards/v2/${agent.name}.card?t=${Date.now()}`;
+    const indexedCardUrl = cardIndex?.[agent.name]?.url || '';
+    const marker = '/cards/v2/';
+    const indexedPath = indexedCardUrl.includes(marker)
+      ? decodeURIComponent(indexedCardUrl.split(marker, 2)[1])
+      : '';
+    const publisherName = (agent.name || '').split('/')[0];
+    const sourceFilename = primaryPayloadFilename(agent, registry);
+    const relativeCardPath = indexedPath ||
+      `${publisherName}/${sourceFilename}.card`;
+    const v2Path = `cards/v2/${relativeCardPath}?t=${Date.now()}`;
     try {
       const response = await fetch(v2Path);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -896,7 +922,12 @@ async function load() {
   const latestSha = agent._latest_commit_sha || '';
   const py_url_main = `${RAW_BASE}/main/${filePath}`;
   const py_url_pinned = latestSha ? `${RAW_BASE}/${latestSha}/${filePath}` : py_url_main;
-  const card_file_url = `${RAW_BASE}/main/cards/v2/${agent.name}.card`;
+  const publisherName = (agent.name || '').split('/')[0];
+  const sourceFilename = cardEnvelope?.payload?.[0]?.filename ||
+    primaryPayloadFilename(agent, registry);
+  const card_file_url = cardEnvelope?.scan?.url ||
+    cardIndex?.[agent.name]?.url ||
+    `${RAW_BASE}/main/cards/v2/${publisherName}/${sourceFilename}.card`;
   const scan_url = cardEnvelope?.scan?.url || card_file_url;
 
   const avatar = card.avatar_svg

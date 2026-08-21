@@ -7156,6 +7156,22 @@ function getV2Card(a) {
   };
 }
 
+function cardFileUrlForAgent(a, rawBase = RAW) {
+  const publisher = (a.name || '').split('/')[0];
+  if (a._card_v2?.scan?.url) return a._card_v2.scan.url;
+  const sourceFilename = (a._file || '').split('/').pop() ||
+    `${(a.name || '').split('/').pop()}.py`;
+  const collides = allAgents.some(other =>
+    other.name !== a.name &&
+    (other.name || '').split('/')[0] === publisher &&
+    (other._file || '').split('/').pop() === sourceFilename
+  );
+  const primaryFilename = a._card_v2?.payload?.[0]?.filename ||
+    (collides ? a._install_filename : null) ||
+    sourceFilename;
+  return `${rawBase}/cards/v2/${publisher}/${primaryFilename}.card`;
+}
+
 // The v2 face is the frozen v1 object. Keeping the aggregate v1 face map avoids
 // 307 startup requests while the v2 index supplies the sealed card and scan URL.
 function getHoloCard(a) {
@@ -8057,7 +8073,7 @@ function agentToCard(a) {
   const sizeKb = a._size_kb || '?';
   const v2Card = getV2Card(a);
   const qrData = v2Card?.scan?.url ||
-    `https://raw.githubusercontent.com/${REPO}/main/cards/v2/${a.name}.card`;
+    cardFileUrlForAgent(a);
   const qrSalt = (v2Card?.sha || '').slice(0, 8);
   const publisher = a.name.split('/')[0] || '';
   const slug = a.name.split('/')[1] || '';
@@ -12400,7 +12416,10 @@ function printCard(name) {
   const tier = a.quality_tier || 'community';
   const rarity = TIER_TO_RARITY[tier] || 'uncommon';
   const printQrData = getV2Card(a)?.scan?.url ||
-    `https://raw.githubusercontent.com/${sourceRepo}/main/cards/v2/${a.name}.card`;
+    cardFileUrlForAgent(
+      a,
+      `https://raw.githubusercontent.com/${sourceRepo}/main`,
+    );
   const qrSvg = _qrShareEnabled ? rarQrSvg(printQrData,135) : '';
   const w = window.open('', '_blank', 'width=400,height=600');
   w.document.write(`<!DOCTYPE html><html><head><title>${a.display_name} — Agent Card</title>
@@ -13383,7 +13402,7 @@ function renderPresentation() {
   const tier = a.quality_tier || 'community';
   const rarity = TIER_TO_RARITY[tier] || 'uncommon';
   const presQrData = getV2Card(a)?.scan?.url ||
-    `https://raw.githubusercontent.com/${REPO}/main/cards/v2/${a.name}.card`;
+    cardFileUrlForAgent(a);
   const qrSvg = _qrShareEnabled ? rarQrSvg(presQrData,80) : '';
   const publisher = a.name.split('/')[0] || '';
   const tags = (a.tags || []).slice(0, 5);

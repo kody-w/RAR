@@ -9,6 +9,7 @@ import shutil
 import subprocess
 import sys
 import threading
+import urllib.parse
 from pathlib import Path
 
 import pytest
@@ -45,6 +46,14 @@ def _face_bytes(face: dict) -> bytes:
     return json.dumps(face, ensure_ascii=True, separators=(",", ":")).encode()
 
 
+def _v2_card_path(agent_id: str, index: dict) -> Path:
+    url = index[agent_id]["url"]
+    relative = urllib.parse.unquote(
+        urllib.parse.urlparse(url).path.split("/cards/v2/", 1)[1]
+    )
+    return V2_ROOT / relative
+
+
 def _fixture_agent_bytes() -> bytes:
     lines = [
         '"""Offline card fixture."""',
@@ -75,7 +84,7 @@ def _pack_fixture(tmp_path: Path, *, with_egg: bool = False) -> tuple[Path, Path
     egg = tmp_path / "fixture.egg" if with_egg else None
     if egg is not None:
         egg.write_bytes(bytes(range(256)) + b"\x00RAR-CARD\xff")
-    card = tmp_path / "card_fixture.card"
+    card = tmp_path / "card_fixture_agent.py.card"
     command = [
         sys.executable,
         str(SDK),
@@ -83,7 +92,7 @@ def _pack_fixture(tmp_path: Path, *, with_egg: bool = False) -> tuple[Path, Path
         "pack",
         str(agent),
         "--inline",
-        "--output",
+        "--out",
         str(card),
     ]
     if egg is not None:
@@ -102,7 +111,7 @@ def _pack_fixture(tmp_path: Path, *, with_egg: bool = False) -> tuple[Path, Path
 def test_every_v1_face_round_trips_byte_for_byte(v1_cards, v2_index):
     assert set(v2_index) == set(v1_cards)
     for agent_id, v1_face in v1_cards.items():
-        card_path = V2_ROOT / f"{agent_id}.card"
+        card_path = _v2_card_path(agent_id, v2_index)
         v2 = json.loads(card_path.read_text(encoding="utf-8"))
         assert _face_bytes(v2["face"]) == _face_bytes(v1_face), agent_id
         assert _face_bytes(rapp_sdk.to_v1(v2)) == _face_bytes(v1_face), agent_id
@@ -111,7 +120,7 @@ def test_every_v1_face_round_trips_byte_for_byte(v1_cards, v2_index):
 def test_every_v2_seed_and_index_hash_recomputes(v1_cards, v2_index, registry):
     assert set(v2_index) == set(v1_cards) == set(registry)
     for agent_id, entry in v2_index.items():
-        path = V2_ROOT / f"{agent_id}.card"
+        path = _v2_card_path(agent_id, v2_index)
         raw = path.read_bytes()
         card = json.loads(raw)
         manifest = card["manifest"]
@@ -133,7 +142,8 @@ def test_every_v2_seed_and_index_hash_recomputes(v1_cards, v2_index, registry):
 
 def test_migrated_payloads_are_revision_pinned(v2_index, registry):
     for agent_id in v2_index:
-        card = json.loads((V2_ROOT / f"{agent_id}.card").read_text(encoding="utf-8"))
+        path = _v2_card_path(agent_id, v2_index)
+        card = json.loads(path.read_text(encoding="utf-8"))
         item = card["payload"][0]
         expected = registry[agent_id].get("_sha256") or registry[agent_id].get(
             "_stub_sha256"
@@ -143,6 +153,7 @@ def test_migrated_payloads_are_revision_pinned(v2_index, registry):
         assert f"/{revision}/" in item["url"]
         assert "/main/" not in item["url"]
         assert "inline" not in item
+        assert path.name == f"{item['filename']}.card"
         readiness = rapp_sdk.card_offline_readiness(card)
         assert readiness["status"] == "offline: needs 1 pinned payload(s)"
 
@@ -159,7 +170,7 @@ def test_tampered_payload_hash_is_refused(tmp_path):
 def test_pack_pin_must_resolve_to_the_local_agent(tmp_path):
     agent = tmp_path / "card_fixture_agent.py"
     agent.write_bytes(_fixture_agent_bytes())
-    packed = tmp_path / "pinned.card"
+    packed = tmp_path / "card_fixture_agent.py.card"
     result = rapp_sdk.pack_card(
         agent,
         pin_url=agent.as_uri(),
@@ -181,7 +192,6 @@ def test_pack_pin_must_resolve_to_the_local_agent(tmp_path):
 def test_card_pack_defaults_to_person_kept_inline(tmp_path):
     agent = tmp_path / "card_fixture_agent.py"
     agent.write_bytes(_fixture_agent_bytes())
-    card = tmp_path / "default.card"
     result = subprocess.run(
         [
             sys.executable,
@@ -189,8 +199,6 @@ def test_card_pack_defaults_to_person_kept_inline(tmp_path):
             "card",
             "pack",
             str(agent),
-            "--output",
-            str(card),
         ],
         cwd=ROOT,
         capture_output=True,
@@ -198,6 +206,8 @@ def test_card_pack_defaults_to_person_kept_inline(tmp_path):
         timeout=30,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+    card = tmp_path / "card_fixture_agent.py.card"
+    assert f"Packed: {card}" in result.stdout
     packed = json.loads(card.read_text(encoding="utf-8"))
     assert packed["payload"]
     assert all("inline" in item and "url" not in item for item in packed["payload"])
@@ -211,11 +221,16 @@ def test_card_pack_defaults_to_person_kept_inline(tmp_path):
         lambda card: card["face"].__setitem__("title", "A forged face"),
     ],
 )
-def test_face_and_seed_disagreement_is_refused(tmp_path, mutate):
-    source = V2_ROOT / "@aibast-agents-library" / "account_intelligence.card"
+def test_face_and_seed_disagreement_is_refused(
+    tmp_path, mutate, v2_index,
+):
+    source = _v2_card_path(
+        "@aibast-agents-library/account_intelligence",
+        v2_index,
+    )
     card = json.loads(source.read_text(encoding="utf-8"))
     mutate(card)
-    tampered = tmp_path / "tampered.card"
+    tampered = tmp_path / source.name
     tampered.write_bytes(rapp_sdk._card_json_bytes(card))
     with pytest.raises(ValueError, match="face"):
         rapp_sdk.verify_card(tampered)
@@ -252,7 +267,7 @@ def test_cli_pack_unpack_preserves_crlf_text_and_binary(tmp_path):
 
 def test_cli_verify_and_scan_label_pinned_card_not_offline_ready(v2_index):
     agent_id = "@aibast-agents-library/account_intelligence"
-    card = V2_ROOT / f"{agent_id}.card"
+    card = _v2_card_path(agent_id, v2_index)
     incantation = v2_index[agent_id]["incantation"]
     commands = [
         [sys.executable, str(SDK), "card", "verify", str(card)],
@@ -294,6 +309,92 @@ def test_charizard_in_the_woods_is_offline_ready(tmp_path, monkeypatch):
     assert (unpacked / agent.name).read_bytes() == agent.read_bytes()
     assert egg is not None
     assert (unpacked / egg.name).read_bytes() == egg.read_bytes()
+
+
+def test_unpack_without_directory_strips_final_card_suffix(tmp_path):
+    card, agent, egg = _pack_fixture(tmp_path, with_egg=True)
+    agent_bytes = agent.read_bytes()
+    egg_bytes = egg.read_bytes() if egg is not None else b""
+    agent.unlink()
+    assert egg is not None
+    egg.unlink()
+
+    written = rapp_sdk.unpack_card(card)
+
+    assert {Path(path) for path in written} == {agent, egg}
+    assert agent.read_bytes() == agent_bytes
+    assert egg.read_bytes() == egg_bytes
+
+
+@pytest.mark.parametrize("operation", ["verify", "scan"])
+def test_reader_refuses_sleeve_name_disagreement(
+    tmp_path, operation, v2_index,
+):
+    source = _v2_card_path(
+        "@aibast-agents-library/account_intelligence",
+        v2_index,
+    )
+    wrong_name = tmp_path / "wrong.card"
+    shutil.copy2(source, wrong_name)
+    reader = rapp_sdk.verify_card if operation == "verify" else rapp_sdk.scan_card
+    with pytest.raises(ValueError, match="card filename.*disagrees"):
+        reader(wrong_name)
+
+
+@pytest.mark.parametrize("operation", ["verify", "scan"])
+def test_reader_refuses_encoded_url_separator(
+    tmp_path, monkeypatch, operation,
+):
+    card, _, _ = _pack_fixture(tmp_path)
+    raw = card.read_bytes()
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_read_url_bytes",
+        lambda _url, max_bytes=None: raw,
+    )
+    source = (
+        "https://example.invalid/not-the-sleeve%2F"
+        "card_fixture_agent.py.card"
+    )
+    reader = rapp_sdk.verify_card if operation == "verify" else rapp_sdk.scan_card
+    with pytest.raises(ValueError, match="must not encode a path separator"):
+        reader(source)
+
+
+def test_pack_out_rejects_wrong_sleeve_basename(tmp_path):
+    agent = tmp_path / "card_fixture_agent.py"
+    agent.write_bytes(_fixture_agent_bytes())
+    with pytest.raises(ValueError, match="Output filename must be"):
+        rapp_sdk.pack_card(
+            agent,
+            output_path=tmp_path / "wrong.card",
+        )
+
+
+def test_remote_unpack_keeps_sleeve_subdirectory(
+    tmp_path, monkeypatch,
+):
+    packed_dir = tmp_path / "packed"
+    receiver = tmp_path / "receiver"
+    packed_dir.mkdir()
+    receiver.mkdir()
+    card, agent, _ = _pack_fixture(packed_dir)
+    raw = card.read_bytes()
+    expected = agent.read_bytes()
+    monkeypatch.setattr(
+        rapp_sdk,
+        "_read_url_bytes",
+        lambda _url, max_bytes=None: raw,
+    )
+    monkeypatch.chdir(receiver)
+
+    written = rapp_sdk.unpack_card(
+        "https://example.invalid/card_fixture_agent.py.card"
+    )
+
+    restored = receiver / "card_fixture_agent.py" / "card_fixture_agent.py"
+    assert written == [str(restored)]
+    assert restored.read_bytes() == expected
 
 
 def test_card_scan_accepts_local_file_url_without_execution(tmp_path):
@@ -381,8 +482,13 @@ def test_migration_rejects_a_nonexistent_revision():
         (("face", "avatar_svg"), 7, "face.avatar_svg"),
     ],
 )
-def test_verify_enforces_normative_property_types(path, value, message):
-    source = V2_ROOT / "@aibast-agents-library" / "account_intelligence.card"
+def test_verify_enforces_normative_property_types(
+    path, value, message, v2_index,
+):
+    source = _v2_card_path(
+        "@aibast-agents-library/account_intelligence",
+        v2_index,
+    )
     card = json.loads(source.read_text(encoding="utf-8"))
     target = card
     for key in path[:-1]:
@@ -417,7 +523,7 @@ def test_site_and_api_publish_v2_cards_with_local_qr():
     api = json.loads((ROOT / "api.json").read_text(encoding="utf-8"))
     assert api["endpoints"]["cards_v2"]["url"].endswith("/cards/v2/index.json")
     assert api["endpoints"]["card_file"]["url"].endswith(
-        "/cards/v2/{publisher}/{slug}.card"
+        "/cards/v2/{publisher}/{primary_payload_filename}.card"
     )
     pages = {
         name: (ROOT / name).read_text(encoding="utf-8")
@@ -433,6 +539,10 @@ def test_site_and_api_publish_v2_cards_with_local_qr():
     assert "rarQrSvg" in pages["store.html"]
     assert "rarQrSvg" in pages["grail.html"]
     assert "renderQR" in pages["incantation-hero.html"]
+    assert "cardFileUrlForAgent" in pages["store.html"]
+    assert "CARD_INDEX_URL" in pages["grail.html"]
+    assert "_install_filename" in pages["store.html"]
+    assert "cardEnvelope?.scan?.url" in pages["grail.html"]
 
 
 def test_readme_uses_lowercase_rapplication_and_states_hero_law():

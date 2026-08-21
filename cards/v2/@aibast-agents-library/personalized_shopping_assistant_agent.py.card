@@ -1,0 +1,126 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/personalized_shopping_assistant",
+  "seed": 12826547131641504102,
+  "name_seed": 2986413224,
+  "incantation": "WAX PALADIN SINGE BRED STARK DOOM CAST",
+  "version": "1.2.0",
+  "face": {
+    "name": "Personalized Shopping Assistant Agent",
+    "title": "The Machinist",
+    "mana_cost": "{3}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Assessor",
+    "rarity": "common",
+    "power": 7,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Recommends products and checks a live catalog from a simulated Dynamics 365 tenant, with an offline demo fallback for every operation."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It doesn’t guess. It calculates.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-10ca8\"><stop offset=\"0%\" stop-color=\"#0a1a1a\"/><stop offset=\"100%\" stop-color=\"#050a0a\"/></radialGradient><filter id=\"gl-10ca8\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-10ca8)\"/><g filter=\"url(#gl-10ca8)\"><circle cx=\"71\" cy=\"80\" r=\"30\" fill=\"#7ee787\" opacity=\"0.07\"/><circle cx=\"120\" cy=\"88\" r=\"15\" fill=\"#7ee787\" opacity=\"0.12\"/><circle cx=\"127\" cy=\"97\" r=\"31\" fill=\"#7ee787\" opacity=\"0.05\"/><circle cx=\"124\" cy=\"92\" r=\"25\" fill=\"#7ee787\" opacity=\"0.10\"/><circle cx=\"123\" cy=\"71\" r=\"22\" fill=\"#7ee787\" opacity=\"0.08\"/><circle cx=\"101\" cy=\"72\" r=\"35\" fill=\"#7ee787\" opacity=\"0.10\"/><circle cx=\"99\" cy=\"96\" r=\"17\" fill=\"#7ee787\" opacity=\"0.05\"/><circle cx=\"77\" cy=\"122\" r=\"18\" fill=\"#7ee787\" opacity=\"0.11\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#7ee787\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#7ee787\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#7ee787\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"134.9\" y2=\"109.0\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"92.7\" y2=\"145.4\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"60.1\" y2=\"86.9\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"114.8\" y2=\"67.2\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/personalized_shopping_assistant",
+    "agent_types": [
+      "WEALTH",
+      "CRAFT"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#f85149"
+    ],
+    "hp": 57,
+    "stats": {
+      "hp": 57,
+      "atk": 76,
+      "def": 36,
+      "spd": 53,
+      "int": 66
+    },
+    "typed_abilities": [
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 3,
+        "damage": 36
+      },
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 2,
+        "damage": 23
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 12826547131641504102
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/personalized_shopping_assistant",
+    "version": "1.2.0",
+    "display_name": "Personalized Shopping Assistant Agent",
+    "description": "Recommends products and checks a live catalog from a simulated Dynamics 365 tenant, with an offline demo fallback for every operation.",
+    "author": "AIBAST",
+    "tags": [
+      "shopping",
+      "personalization",
+      "recommendations",
+      "style",
+      "inventory",
+      "b2c"
+    ],
+    "category": "b2c_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "personalized_shopping_assistant_agent.py",
+      "sha256_lf_v1": "6f02e955c5212f2deb68cab2674901f367a6eaa77ca0e85834df0da46189d83c",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/personalized_shopping_assistant_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

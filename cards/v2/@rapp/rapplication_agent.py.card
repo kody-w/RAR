@@ -1,0 +1,134 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@rapp/rapplication_agent",
+  "seed": 2918317732439668490,
+  "name_seed": 679473796,
+  "incantation": "PARAGON STROKE GLYPH SWARM MANGROVE DEFT BLADE",
+  "version": "1.0.2",
+  "face": {
+    "name": "Rapplication",
+    "title": "The Sentinel",
+    "mana_cost": "{3}{W}",
+    "colors": [
+      "W"
+    ],
+    "type_line": "Legendary Creature — Agent Scribe",
+    "rarity": "mythic",
+    "power": 11,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Monitor",
+        "cost": "",
+        "text": "Bundles a single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It doesn’t guess. It calculates.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-7ff284\"><stop offset=\"0%\" stop-color=\"#2a1a0a\"/><stop offset=\"100%\" stop-color=\"#0a0805\"/></radialGradient><filter id=\"gl-7ff284\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-7ff284)\"/><g filter=\"url(#gl-7ff284)\"><circle cx=\"100\" cy=\"100\" r=\"42\" fill=\"#58a6ff\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"42\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"57\" ry=\"7\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(33 100 100)\"/><circle cx=\"90\" cy=\"100\" r=\"9\" fill=\"#58a6ff\" opacity=\"0.07\"/><circle cx=\"92\" cy=\"107\" r=\"10\" fill=\"#58a6ff\" opacity=\"0.09\"/><circle cx=\"93\" cy=\"97\" r=\"10\" fill=\"#58a6ff\" opacity=\"0.07\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rapp/rapplication_agent",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 91,
+      "spd": 96,
+      "int": 100
+    },
+    "typed_abilities": [
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 1,
+        "damage": 49
+      },
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 2,
+        "damage": 44
+      },
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 2,
+        "damage": 49
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 2918317732439668490
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/rapplication_agent",
+    "display_name": "Rapplication",
+    "description": "Bundles a single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry.",
+    "author": "RAPP",
+    "version": "1.0.2",
+    "tags": [
+      "meta",
+      "build",
+      "rapplication",
+      "bundler",
+      "publish"
+    ],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "example_call": {
+      "args": {
+        "action": "bundle",
+        "agent_path": "agents/kanban_agent.py"
+      }
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "rapplication_agent.py",
+      "sha256_lf_v1": "a40d2ce08abde9774ebb4d34f02577a31e15a2ef66d2064953ab08a3f39baa0b",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rapp/rapplication_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/rapplication_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

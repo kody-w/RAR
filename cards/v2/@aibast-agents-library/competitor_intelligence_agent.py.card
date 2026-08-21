@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/deal_competitor_intel",
+  "seed": 2665723234406249080,
+  "name_seed": 620662056,
+  "incantation": "STANCE SOAK WIELD OATH STROKE DARK BLADE",
+  "version": "1.1.0",
+  "face": {
+    "name": "Deal Competitor Intelligence",
+    "title": "The Luminary",
+    "mana_cost": "{2}{R}{W}",
+    "colors": [
+      "R",
+      "W"
+    ],
+    "type_line": "Creature — Agent Pilot",
+    "rarity": "common",
+    "power": 5,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Maps competitive exposure across live deals from a simulated Dynamics 365 tenant, with threat scores and an embedded offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“What the dashboard shows, the agent already knew.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-fe8d28\"><stop offset=\"0%\" stop-color=\"#2a0a0a\"/><stop offset=\"100%\" stop-color=\"#0a0808\"/></radialGradient><filter id=\"gl-fe8d28\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-fe8d28)\"/><g filter=\"url(#gl-fe8d28)\"><polygon points=\"130.9,103.0 119.9,141.5 77.4,142.3 62.8,107.6 71.6,77.8 101.0,63.0 130.5,77.3\" fill=\"#f47067\" opacity=\"0.1\" stroke=\"#f47067\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"121.4,108.5 108.1,123.6 88.9,116.7 83.0,99.2 85.8,81.9 103.2,86.4 117.8,88.9\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#f47067\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/deal_competitor_intel",
+    "agent_types": [
+      "WEALTH",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#58a6ff"
+    ],
+    "hp": 67,
+    "stats": {
+      "hp": 67,
+      "atk": 52,
+      "def": 37,
+      "spd": 68,
+      "int": 52
+    },
+    "typed_abilities": [
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 1,
+        "damage": 35
+      },
+      {
+        "name": "Negotiate",
+        "text": "Propose terms optimized for mutual value.",
+        "cost": 2,
+        "damage": 12
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 2665723234406249080
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/deal_competitor_intel",
+    "version": "1.1.0",
+    "display_name": "Deal Competitor Intelligence",
+    "description": "Maps competitive exposure across live deals from a simulated Dynamics 365 tenant, with threat scores and an embedded offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "competitive-intelligence",
+      "deal-progression",
+      "strategy"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "competitor_intelligence_agent.py",
+      "sha256_lf_v1": "fe7b22defb0093ff68c066828af6b63ee4c35dcb0f028193b11218583953dfa7",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/competitor_intelligence_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/competitor_intelligence_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

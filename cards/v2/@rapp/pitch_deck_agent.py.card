@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@rapp/pitch_deck_agent",
+  "seed": 2887497502809669128,
+  "name_seed": 672297902,
+  "incantation": "GUILD CHIEFTAIN SECT SWAY SLEDGE BADGE BLADE",
+  "version": "1.0.2",
+  "face": {
+    "name": "PitchDeck",
+    "title": "The Analyst",
+    "mana_cost": "{2}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Legendary Creature — Agent Luminary",
+    "rarity": "mythic",
+    "power": 6,
+    "toughness": 10,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Generates a self-contained HTML executive pitch deck from a topic — one LLM call shapes the narrative, a fixed template assembles the slides."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“In a world of noise, the signal belongs to those who listen.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-1273ae\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-1273ae\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-1273ae)\"/><g filter=\"url(#gl-1273ae)\"><line x1=\"151\" y1=\"68\" x2=\"145\" y2=\"100\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"145\" y1=\"100\" x2=\"86\" y2=\"99\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"86\" y1=\"99\" x2=\"57\" y2=\"97\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"57\" y1=\"97\" x2=\"148\" y2=\"40\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"148\" y1=\"40\" x2=\"99\" y2=\"76\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"99\" y1=\"76\" x2=\"91\" y2=\"122\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"91\" y1=\"122\" x2=\"151\" y2=\"68\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"151\" y1=\"68\" x2=\"86\" y2=\"99\" stroke=\"#7ee787\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"151\" cy=\"68\" r=\"3\" fill=\"#7ee787\" opacity=\"0.45\"/><circle cx=\"145\" cy=\"100\" r=\"3\" fill=\"#7ee787\" opacity=\"0.61\"/><circle cx=\"86\" cy=\"99\" r=\"3\" fill=\"#7ee787\" opacity=\"0.60\"/><circle cx=\"57\" cy=\"97\" r=\"6\" fill=\"#7ee787\" opacity=\"0.58\"/><circle cx=\"148\" cy=\"40\" r=\"5\" fill=\"#7ee787\" opacity=\"0.32\"/><circle cx=\"99\" cy=\"76\" r=\"4\" fill=\"#7ee787\" opacity=\"0.45\"/><circle cx=\"91\" cy=\"122\" r=\"5\" fill=\"#7ee787\" opacity=\"0.43\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rapp/pitch_deck_agent",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 96,
+      "def": 76,
+      "spd": 96,
+      "int": 96
+    },
+    "typed_abilities": [
+      {
+        "name": "Draft",
+        "text": "Compose human-quality text for target audience.",
+        "cost": 2,
+        "damage": 23
+      },
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 1,
+        "damage": 40
+      },
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 3,
+        "damage": 12
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 2887497502809669128
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/pitch_deck_agent",
+    "display_name": "PitchDeck",
+    "description": "Generates a self-contained HTML executive pitch deck from a topic — one LLM call shapes the narrative, a fixed template assembles the slides.",
+    "author": "RAPP / AIBAST",
+    "version": "1.0.2",
+    "tags": [
+      "pitch",
+      "deck",
+      "slides",
+      "narrative",
+      "html",
+      "executive"
+    ],
+    "category": "productivity",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "example_call": "Generate an executive pitch deck for our internal agent-sharing proposal, framed as a contribution that complements existing tooling"
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "pitch_deck_agent.py",
+      "sha256_lf_v1": "ca3c2f325342769f9d799ccb0fc0cd41a23f90d2e6ddfb1dcb7c79d7bdd78145",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rapp/pitch_deck_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/pitch_deck_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

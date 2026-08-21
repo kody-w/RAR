@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@rapp/twin_agent",
+  "seed": 11907957554557236082,
+  "name_seed": 2772537422,
+  "incantation": "EXPUNGE STAMP WARD ANCIENT JET NADIR MOLD",
+  "version": "1.1.3",
+  "face": {
+    "name": "Twin",
+    "title": "The Prospector",
+    "mana_cost": "{3}{W}{U}",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "type_line": "Legendary Creature — Agent Conductor",
+    "rarity": "mythic",
+    "power": 4,
+    "toughness": 11,
+    "abilities": [
+      {
+        "keyword": "Configure",
+        "cost": "",
+        "text": "Manages the local digital-twin lifecycle — summon, hatch eggs, boot each twin as its own brainstem, stop, chat, inspect — under ~/.rapp/twins/."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Efficiency is not a goal. It’s a side effect of clarity.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-41904e\"><stop offset=\"0%\" stop-color=\"#0a0a2a\"/><stop offset=\"100%\" stop-color=\"#050510\"/></radialGradient><filter id=\"gl-41904e\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-41904e)\"/><g filter=\"url(#gl-41904e)\"><polygon points=\"128.7,104.4 102.4,126.9 76.5,113.3 80.3,83.0 116.0,63.3\" fill=\"#58a6ff\" opacity=\"0.1\" stroke=\"#58a6ff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"122.2,109.1 99.4,112.0 83.8,105.1 90.0,82.7 115.7,80.6\" fill=\"none\" stroke=\"#58a6ff\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#58a6ff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#58a6ff\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@rapp/twin_agent",
+    "agent_types": [
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#58a6ff"
+    ],
+    "hp": 100,
+    "stats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 89,
+      "spd": 85,
+      "int": 95
+    },
+    "typed_abilities": [
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 2,
+        "damage": 34
+      },
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 3,
+        "damage": 36
+      },
+      {
+        "name": "Reason",
+        "text": "Apply chain-of-thought to derive conclusion.",
+        "cost": 2,
+        "damage": 21
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 3,
+      "label": "Legendary",
+      "icon": "crown"
+    },
+    "tier": "official",
+    "rarity_tier": "mythic",
+    "rarity_label": "Legendary",
+    "floor_pts": 200,
+    "seed": 11907957554557236082
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@rapp/twin_agent",
+    "version": "1.1.3",
+    "display_name": "Twin",
+    "description": "Manages the local digital-twin lifecycle — summon, hatch eggs, boot each twin as its own brainstem, stop, chat, inspect — under ~/.rapp/twins/.",
+    "author": "RAPP",
+    "tags": [
+      "twin",
+      "summon",
+      "hatch",
+      "boot",
+      "lifecycle",
+      "egg",
+      "estate",
+      "local-first"
+    ],
+    "category": "core",
+    "quality_tier": "official",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "twin_agent.py",
+      "sha256_lf_v1": "878729c7a59ce520c487d02e6986845a79babce12a6e10ecbbe5e9eec1b71dda",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@rapp/twin_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@rapp/twin_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,134 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/skill_authoring_coach",
+  "seed": 34457608329729024132,
+  "name_seed": 3727819830,
+  "incantation": "SAGE MUSK MERIDIAN ROUT BADGE ENDOW SEAR",
+  "version": "1.1.0",
+  "face": {
+    "name": "Skill Authoring Coach",
+    "title": "The Calibrator",
+    "mana_cost": "{1}{N}{U}",
+    "colors": [
+      "N",
+      "U"
+    ],
+    "type_line": "Legendary Creature — Agent Alchemist",
+    "rarity": "rare",
+    "power": 8,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Where workflows end, this agent begins.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-320436\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-320436\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-320436)\"/><g filter=\"url(#gl-320436)\"><polygon points=\"139.8,103.7 122.4,140.2 85.9,139.6 57.4,120.0 62.7,78.7 95.8,65.3 129.3,72.8\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"117.1,105.5 102.8,119.8 82.0,117.4 85.1,101.4 84.9,85.4 106.5,75.9 114.7,91.4\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#8b949e\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/skill_authoring_coach",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 33,
+    "stats": {
+      "hp": 33,
+      "atk": 40,
+      "def": 21,
+      "spd": 30,
+      "int": 27
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 2,
+        "damage": 46
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 34457608329729024132
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/skill_authoring_coach",
+    "version": "1.1.0",
+    "display_name": "Skill Authoring Coach",
+    "description": "Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.",
+    "author": "Simon Owen",
+    "tags": [
+      "skills",
+      "authoring",
+      "documentation",
+      "productivity",
+      "agent"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "skill-authoring-coach",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#skill-authoring-coach",
+      "upstream_version": "0.1.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "dd0ed10e586119e5"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "skill_authoring_coach_agent.py",
+      "sha256_lf_v1": "123cd43acf80de040e407c00cd0991d61bd4c8dafd7972602a769fc8f647b6e1",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/skill_authoring_coach_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/skill_authoring_coach_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

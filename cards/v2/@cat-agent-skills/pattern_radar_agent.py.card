@@ -1,0 +1,135 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/pattern_radar",
+  "seed": 35591970846606636651,
+  "name_seed": 3991934185,
+  "incantation": "LATCH OVERLORD CROWN ENIGMA CLASP TRANSCEND HAMMER",
+  "version": "2.0.0",
+  "face": {
+    "name": "Pattern Radar",
+    "title": "The Tactician",
+    "mana_cost": "{3}{G}",
+    "colors": [
+      "G"
+    ],
+    "type_line": "Creature — Agent Cartographer",
+    "rarity": "rare",
+    "power": 6,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Assess",
+        "cost": "",
+        "text": "Scans your recent Microsoft 365 signals to surface recurring patterns worth productizing — things you keep explaining (blog candidates) or multi-step tasks you keep doing by hand (automation candidate"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-f014e9\"><stop offset=\"0%\" stop-color=\"#1a1e0a\"/><stop offset=\"100%\" stop-color=\"#0a0a05\"/></radialGradient><filter id=\"gl-f014e9\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-f014e9)\"/><g filter=\"url(#gl-f014e9)\"><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"#7ee787\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"45\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"60\" ry=\"11\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(23 100 100)\"/><circle cx=\"94\" cy=\"90\" r=\"3\" fill=\"#7ee787\" opacity=\"0.10\"/><circle cx=\"96\" cy=\"95\" r=\"9\" fill=\"#7ee787\" opacity=\"0.12\"/><circle cx=\"109\" cy=\"101\" r=\"3\" fill=\"#7ee787\" opacity=\"0.13\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/pattern_radar",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 38,
+    "stats": {
+      "hp": 38,
+      "atk": 54,
+      "def": 32,
+      "spd": 40,
+      "int": 51
+    },
+    "typed_abilities": [
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 1,
+        "damage": 41
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 35591970846606636651
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/pattern_radar",
+    "version": "2.0.0",
+    "display_name": "Pattern Radar",
+    "description": "Scans your recent Microsoft 365 signals to surface recurring patterns worth productizing — things you keep explaining (blog candidates) or multi-step tasks you keep doing by hand (automation candidates).",
+    "author": "Srinivas Varukala",
+    "tags": [
+      "productivity",
+      "automation",
+      "content",
+      "email",
+      "teams",
+      "insights"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "pattern-radar",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pattern-radar",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "cde1b5f304153695"
+    },
+    "platforms": [
+      "Cowork",
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "pattern_radar_agent.py",
+      "sha256_lf_v1": "5ab75e34a67a13fa24db57751e922a5b329554145596e626e4e324b6feb31aac",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/pattern_radar_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/pattern_radar_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

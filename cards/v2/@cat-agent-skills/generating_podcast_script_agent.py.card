@@ -1,0 +1,135 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/generating_podcast_script",
+  "seed": 22514433129985097461,
+  "name_seed": 947082661,
+  "incantation": "WATCHER CHIEFTAIN DISMISS VEIN DISTILL SPLIT RIVET",
+  "version": "2.1.0",
+  "face": {
+    "name": "Podcast Script Generator",
+    "title": "The Cipher",
+    "mana_cost": "{1}{N}{G}",
+    "colors": [
+      "N",
+      "G"
+    ],
+    "type_line": "Creature — Agent Conjurer",
+    "rarity": "rare",
+    "power": 8,
+    "toughness": 1,
+    "abilities": [
+      {
+        "keyword": "Transform",
+        "cost": "",
+        "text": "Turn a topic or a pile of source material — a newsletter, news digest, or set of articles — into a two-host, NotebookLM-style podcast episode, with multi-voice SSML and optional Azure Text-to-Speech a"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Where others see a task, it sees a system.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-7355a5\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-7355a5\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-7355a5)\"/><g filter=\"url(#gl-7355a5)\"><circle cx=\"63.3\" cy=\"90.3\" r=\"20\" fill=\"#8b949e\" opacity=\"0.15\" stroke=\"#8b949e\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"136.7\" cy=\"109.7\" r=\"14\" fill=\"#8b949e\" opacity=\"0.1\" stroke=\"#8b949e\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"63.3\" y1=\"90.3\" x2=\"136.7\" y2=\"109.7\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"48\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/generating_podcast_script",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 51,
+    "stats": {
+      "hp": 51,
+      "atk": 51,
+      "def": 33,
+      "spd": 26,
+      "int": 35
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 37
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 22514433129985097461
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/generating_podcast_script",
+    "version": "2.1.0",
+    "display_name": "Podcast Script Generator",
+    "description": "Turn a topic or a pile of source material — a newsletter, news digest, or set of articles — into a two-host, NotebookLM-style podcast episode, with multi-voice SSML and optional Azure Text-to-Speech audio.",
+    "author": "Remi Dyon",
+    "tags": [
+      "content",
+      "podcast",
+      "audio",
+      "text_to_speech",
+      "ssml",
+      "news"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "generating-podcast-script",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#generating-podcast-script",
+      "upstream_version": "1.1.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "b619697cd53a907a"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "generating_podcast_script_agent.py",
+      "sha256_lf_v1": "38267f60dffe6f5f867e473ee794685bb89ea2833f4716dfd9ea9431b3bef325",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/generating_podcast_script_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/generating_podcast_script_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/copilot_studio_test_planner",
+  "seed": 18855054095499670362,
+  "name_seed": 95067085,
+  "incantation": "SUMMON SECT MERIDIAN DIVINATION DOMAIN RAVEN FUSE",
+  "version": "2.0.0",
+  "face": {
+    "name": "Copilot Studio Test Planner",
+    "title": "The Sentinel",
+    "mana_cost": "{1}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Facilitator",
+    "rarity": "common",
+    "power": 8,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Calibrate",
+        "cost": "",
+        "text": "Reads an exported Copilot Studio agent and generates a graded, runnable test suite (happy-path, paraphrase, disambiguation, negative, knowledge-grounding, multilingual, and safety cases) plus a regres"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-aa9bcd\"><stop offset=\"0%\" stop-color=\"#1a1a2e\"/><stop offset=\"100%\" stop-color=\"#08080f\"/></radialGradient><filter id=\"gl-aa9bcd\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-aa9bcd)\"/><g filter=\"url(#gl-aa9bcd)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#8b949e\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#8b949e\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"9\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(7 100 100)\"/><circle cx=\"110.1\" cy=\"81.5\" r=\"5\" fill=\"#8b949e\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"34\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(-17 100 100)\"/><circle cx=\"83.9\" cy=\"117.0\" r=\"4\" fill=\"#8b949e\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/copilot_studio_test_planner",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 29,
+    "stats": {
+      "hp": 29,
+      "atk": 52,
+      "def": 30,
+      "spd": 35,
+      "int": 39
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 3,
+        "damage": 10
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 18855054095499670362
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/copilot_studio_test_planner",
+    "version": "2.0.0",
+    "display_name": "Copilot Studio Test Planner",
+    "description": "Reads an exported Copilot Studio agent and generates a graded, runnable test suite (happy-path, paraphrase, disambiguation, negative, knowledge-grounding, multilingual, and safety cases) plus a regression set, ready to run in the free Copilot Studio test panel.",
+    "author": "Elliot Margot",
+    "tags": [
+      "qa",
+      "eval",
+      "regression",
+      "agent"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "copilot-studio-test-planner",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-test-planner",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "ddaf3694d8c2a432"
+    },
+    "platforms": [
+      "Cowork"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "copilot_studio_test_planner_agent.py",
+      "sha256_lf_v1": "3cfc5e42ce1e3f436c2129fd6b933475640c6476a63b042d5d0d6ac22e817bd2",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/copilot_studio_test_planner_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,133 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/sharepoint_list_insight_report_generator",
+  "seed": 28781562456426821886,
+  "name_seed": 2406262416,
+  "incantation": "NIGHT SPOKE STALLION QUALM ETHER PORTCULLIS PRONG",
+  "version": "2.0.0",
+  "face": {
+    "name": "SharePoint List Insight Report Generator",
+    "title": "The Optimizer",
+    "mana_cost": "{2}{U}",
+    "colors": [
+      "U"
+    ],
+    "type_line": "Creature — Agent Operator",
+    "rarity": "uncommon",
+    "power": 6,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Automatically discovers and validates a SharePoint list within a connected knowledge source, analyzes its structure and data, identifies key business insights, and generates a downloadable interactive"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Built to serve. Designed to scale. Ready to deploy.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-6ca690\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-6ca690\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-6ca690)\"/><g filter=\"url(#gl-6ca690)\"><polygon points=\"145.5,106.8 117.7,127.9 94.9,144.7 67.8,125.3 67.0,100.0 77.2,67.2 105.9,71.6 130.2,73.8\" fill=\"#bc8cff\" opacity=\"0.1\" stroke=\"#bc8cff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"121.1,111.5 103.1,113.7 92.6,123.9 77.2,107.4 85.1,91.9 95.8,80.4 106.5,86.5 122.5,95.1\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#bc8cff\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
+    "agent_types": [
+      "DATA",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#3fb950",
+      "#58a6ff"
+    ],
+    "hp": 51,
+    "stats": {
+      "hp": 51,
+      "atk": 37,
+      "def": 30,
+      "spd": 28,
+      "int": 44
+    },
+    "typed_abilities": [
+      {
+        "name": "Sync",
+        "text": "Synchronize state between two systems.",
+        "cost": 1,
+        "damage": 11
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 28781562456426821886
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
+    "version": "2.0.0",
+    "display_name": "SharePoint List Insight Report Generator",
+    "description": "Automatically discovers and validates a SharePoint list within a connected knowledge source, analyzes its structure and data, identifies key business insights, and generates a downloadable interactive HTML report. The report includes dynamic filters, interactive charts, sortable and searchable tables with pagination, detailed record drill-down through modal popups, and direct links to open items…",
+    "author": "Marco Rocca",
+    "tags": [
+      "sharepoint",
+      "microsoft_365",
+      "lists",
+      "report",
+      "html"
+    ],
+    "category": "integrations",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "sharepoint-list-insight-report-generator",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#sharepoint-list-insight-report-generator",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "271bccfbe07e039e"
+    },
+    "platforms": [
+      "Copilot Studio"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "sharepoint_list_insight_report_generator_agent.py",
+      "sha256_lf_v1": "1755e4d761977ef94e93304dc8d180edc0dc810f70e304a513ed4909b525f0d7",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

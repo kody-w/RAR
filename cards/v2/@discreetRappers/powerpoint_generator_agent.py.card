@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@discreetRappers/powerpoint_generator_agent",
+  "seed": 4049171833047104537,
+  "name_seed": 942771284,
+  "incantation": "EDGE BROKE FRIDGE NADIR AIM SECT RUNE",
+  "version": "1.0.2",
+  "face": {
+    "name": "PowerPointGeneratorV2",
+    "title": "The Sage",
+    "mana_cost": "{3}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Pathfinder",
+    "rarity": "uncommon",
+    "power": 9,
+    "toughness": 5,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Speed without accuracy is just expensive failure.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-318c54\"><stop offset=\"0%\" stop-color=\"#1e0a1e\"/><stop offset=\"100%\" stop-color=\"#0a050a\"/></radialGradient><filter id=\"gl-318c54\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-318c54)\"/><g filter=\"url(#gl-318c54)\"><circle cx=\"122.6\" cy=\"77.3\" r=\"20\" fill=\"#7ee787\" opacity=\"0.15\" stroke=\"#7ee787\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"77.4\" cy=\"122.7\" r=\"12\" fill=\"#7ee787\" opacity=\"0.1\" stroke=\"#7ee787\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"122.6\" y1=\"77.3\" x2=\"77.4\" y2=\"122.7\" stroke=\"#7ee787\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"42\" fill=\"none\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@discreetRappers/powerpoint_generator_agent",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 49,
+    "stats": {
+      "hp": 49,
+      "atk": 55,
+      "def": 33,
+      "spd": 58,
+      "int": 50
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 24
+      },
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 2,
+        "damage": 33
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 4049171833047104537
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@discreetRappers/powerpoint_generator_agent",
+    "version": "1.0.2",
+    "display_name": "PowerPointGeneratorV2",
+    "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection.",
+    "author": "Bill Whalen",
+    "tags": [
+      "productivity",
+      "powerpoint",
+      "presentations",
+      "templates",
+      "microsoft"
+    ],
+    "category": "productivity",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "powerpoint_generator_agent.py",
+      "sha256_lf_v1": "5a9fc79dfbf2038ba411e2789dc988713389b2219ff5ce721b02d684d88a23f5",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@discreetRappers/powerpoint_generator_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/powerpoint_generator_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

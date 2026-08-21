@@ -1,0 +1,129 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/prototype_lock_factory_agent",
+  "seed": 15808311325904089379,
+  "name_seed": 3680659301,
+  "incantation": "SNAP SOVEREIGN PANTHER HEW CATCH CRIMSON ETCH",
+  "version": "1.0.1",
+  "face": {
+    "name": "Prototype Lock Factory",
+    "title": "The Watcher",
+    "mana_cost": "{1}{B}",
+    "colors": [
+      "B"
+    ],
+    "type_line": "Creature — Agent Sage",
+    "rarity": "common",
+    "power": 3,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Intercept",
+        "cost": "",
+        "text": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It works while you sleep. It finishes before you wake.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-626765\"><stop offset=\"0%\" stop-color=\"#141428\"/><stop offset=\"100%\" stop-color=\"#08081a\"/></radialGradient><filter id=\"gl-626765\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-626765)\"/><g filter=\"url(#gl-626765)\"><path d=\"M40,120 Q100,63 160,120\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,73 160,125\" fill=\"none\" stroke=\"#f778ba\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f778ba\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f778ba\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#f778ba\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#f778ba\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"82\" r=\"5\" fill=\"#f778ba\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#f778ba\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/prototype_lock_factory_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 71,
+    "stats": {
+      "hp": 71,
+      "atk": 64,
+      "def": 33,
+      "spd": 60,
+      "int": 56
+    },
+    "typed_abilities": [
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 3,
+        "damage": 41
+      },
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 1,
+        "damage": 40
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 15808311325904089379
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/prototype_lock_factory_agent",
+    "version": "1.0.1",
+    "display_name": "Prototype Lock Factory",
+    "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff.",
+    "author": "RAPP Community",
+    "tags": [
+      "prototype",
+      "factory",
+      "local_first",
+      "acceptance",
+      "handoff",
+      "no_pii"
+    ],
+    "category": "pipeline",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "example_call": {
+      "args": {
+        "operation": "plan",
+        "contract_json": "{\"schema\":\"rapp-prototype-process/1.0\",\"project_slug\":\"sample_project\"}"
+      }
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "prototype_lock_factory_agent.py",
+      "sha256_lf_v1": "916f1fb4e63074c6302593d80a28f31779ef070b6e4352ec4c45cda14cab431b",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/prototype_lock_factory_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/prototype_lock_factory_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

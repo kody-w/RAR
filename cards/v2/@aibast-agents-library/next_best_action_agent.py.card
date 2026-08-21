@@ -1,0 +1,123 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/next_best_action",
+  "seed": 10025994443272366861,
+  "name_seed": 2334358739,
+  "incantation": "OVERLORD HUSK THISTLE REMEDY TRANSCEND BELOW CHISEL",
+  "version": "1.1.0",
+  "face": {
+    "name": "Next Best Action",
+    "title": "The Compiler",
+    "mana_cost": "{3}{R}{U}",
+    "colors": [
+      "R",
+      "U"
+    ],
+    "type_line": "Creature — Agent Resolver",
+    "rarity": "common",
+    "power": 6,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Recommends next actions for live deals from a simulated Dynamics 365 tenant, matched by CRM stage, with an embedded offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The pipeline never sleeps. The agent never forgets.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-237cd3\"><stop offset=\"0%\" stop-color=\"#0f1e0a\"/><stop offset=\"100%\" stop-color=\"#060a04\"/></radialGradient><filter id=\"gl-237cd3\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-237cd3)\"/><g filter=\"url(#gl-237cd3)\"><polygon points=\"146.2,108.7 107.4,129.1 71.9,115.3 66.6,71.4 115.2,77.7\" fill=\"#f47067\" opacity=\"0.1\" stroke=\"#f47067\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"115.8,106.4 95.3,122.5 76.9,106.3 87.8,81.7 113.2,83.6\" fill=\"none\" stroke=\"#f47067\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#f47067\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#f47067\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/next_best_action",
+    "agent_types": [
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#bc8cff"
+    ],
+    "hp": 69,
+    "stats": {
+      "hp": 69,
+      "atk": 52,
+      "def": 34,
+      "spd": 53,
+      "int": 52
+    },
+    "typed_abilities": [
+      {
+        "name": "Negotiate",
+        "text": "Propose terms optimized for mutual value.",
+        "cost": 2,
+        "damage": 29
+      },
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 1,
+        "damage": 42
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 10025994443272366861
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/next_best_action",
+    "version": "1.1.0",
+    "display_name": "Next Best Action",
+    "description": "Recommends next actions for live deals from a simulated Dynamics 365 tenant, matched by CRM stage, with an embedded offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "b2b",
+      "sales",
+      "next-best-action",
+      "deal-progression",
+      "recommendations"
+    ],
+    "category": "b2b_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "next_best_action_agent.py",
+      "sha256_lf_v1": "b1bca4d4801b40f637da7729f310367c179085a5d1638de4101e77988835ab60",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/next_best_action_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/next_best_action_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

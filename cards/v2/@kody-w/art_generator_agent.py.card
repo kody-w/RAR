@@ -1,0 +1,141 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/art_generator_agent",
+  "seed": 50994286691416024678,
+  "name_seed": 3283098001,
+  "incantation": "THATCH CLAN SAGE HARM EDGE CREEP SMOKE",
+  "version": "1.0.0",
+  "face": {
+    "name": "Art Generator",
+    "title": "The Sage",
+    "mana_cost": "{1}{N}{R}",
+    "colors": [
+      "N",
+      "R"
+    ],
+    "type_line": "Creature — Agent Sentinel",
+    "rarity": "common",
+    "power": 3,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it."
+      },
+      {
+        "keyword": "Requires",
+        "cost": "",
+        "text": "Needs AZURE_OPENAI_ENDPOINT to activate."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“No API key required. No excuses accepted.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-b01991\"><stop offset=\"0%\" stop-color=\"#1a1a2e\"/><stop offset=\"100%\" stop-color=\"#08080f\"/></radialGradient><filter id=\"gl-b01991\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-b01991)\"/><g filter=\"url(#gl-b01991)\"><path d=\"M40,120 Q100,54 160,120\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,64 160,125\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#8b949e\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#8b949e\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#8b949e\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#8b949e\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"77\" r=\"5\" fill=\"#8b949e\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/art_generator_agent",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 65,
+    "stats": {
+      "hp": 65,
+      "atk": 75,
+      "def": 41,
+      "spd": 59,
+      "int": 64
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 2,
+        "damage": 33
+      },
+      {
+        "name": "Present",
+        "text": "Format findings into presentation-ready output.",
+        "cost": 3,
+        "damage": 35
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 50994286691416024678
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/art_generator_agent",
+    "version": "1.0.0",
+    "display_name": "Art Generator",
+    "description": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it.",
+    "author": "RAPP Community",
+    "tags": [
+      "art",
+      "image-generation",
+      "azure-openai",
+      "creative"
+    ],
+    "category": "creative",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_OPENAI_ENDPOINT"
+    ],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "external_prereqs": [
+      "Azure CLI login or managed identity",
+      "Azure OpenAI GPT Image deployments"
+    ],
+    "example_call": {
+      "args": {
+        "description": "A detailed original illustration",
+        "quality": "medium"
+      }
+    }
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "art_generator_agent.py",
+      "sha256_lf_v1": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/art_generator_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/art_generator_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

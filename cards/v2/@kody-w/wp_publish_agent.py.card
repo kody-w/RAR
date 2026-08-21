@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/wp_publish_agent",
+  "seed": 11229273338302576350,
+  "name_seed": 2614518939,
+  "incantation": "FROZEN STROKE ORDEAL PATCH BIRCH WATCHER BRAND",
+  "version": "1.0.1",
+  "face": {
+    "name": "WordPress Publish",
+    "title": "The Strategist",
+    "mana_cost": "{2}{U}{B}",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "type_line": "Creature — Agent Cartographer",
+    "rarity": "common",
+    "power": 6,
+    "toughness": 6,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored."
+      },
+      {
+        "keyword": "Requires",
+        "cost": "",
+        "text": "Needs WP_URL, WP_USER, WP_APP_PASSWORD to activate."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It doesn’t guess. It calculates.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-d6649b\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-d6649b\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-d6649b)\"/><g filter=\"url(#gl-d6649b)\"><polygon points=\"141.2,112.5 102.6,127.9 61.4,126.8 66.0,70.6 121.4,61.5\" fill=\"#bc8cff\" opacity=\"0.1\" stroke=\"#bc8cff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><polygon points=\"119.3,108.4 97.7,115.8 86.0,100.5 86.4,80.2 114.0,88.7\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"1.5\" opacity=\"0.35\"/><line x1=\"60\" y1=\"100\" x2=\"140\" y2=\"100\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.2\"/><line x1=\"100\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"8\" fill=\"#bc8cff\" opacity=\"0.25\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/wp_publish_agent",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 48,
+    "stats": {
+      "hp": 48,
+      "atk": 69,
+      "def": 48,
+      "spd": 69,
+      "int": 70
+    },
+    "typed_abilities": [
+      {
+        "name": "Transform",
+        "text": "Reshape data to match target schema.",
+        "cost": 3,
+        "damage": 25
+      },
+      {
+        "name": "Sync",
+        "text": "Synchronize state between two systems.",
+        "cost": 2,
+        "damage": 30
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 11229273338302576350
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/wp_publish_agent",
+    "version": "1.0.1",
+    "display_name": "WordPress Publish",
+    "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "wordpress",
+      "publishing",
+      "rest-api",
+      "blog",
+      "idempotent"
+    ],
+    "category": "integrations",
+    "quality_tier": "community",
+    "requires_env": [
+      "WP_URL",
+      "WP_USER",
+      "WP_APP_PASSWORD"
+    ],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "wp_publish_agent.py",
+      "sha256_lf_v1": "2240c6e471f6c3c54e35e62553e9cd9af314cd520790120d23e88045120ee87a",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/wp_publish_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/wp_publish_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

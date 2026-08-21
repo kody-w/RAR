@@ -1,0 +1,136 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@discreetRappers/sharepoint_contract_analysis_agent",
+  "seed": 16553900515881791106,
+  "name_seed": 3854255312,
+  "incantation": "REMISS CROAK OAT MOTE SINEW FALCON CARVE",
+  "version": "1.0.2",
+  "face": {
+    "name": "ContractAnalysis",
+    "title": "The Vanguard",
+    "mana_cost": "{2}{U}{B}",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "type_line": "Creature — Agent Overseer",
+    "rarity": "common",
+    "power": 2,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Execute",
+        "cost": "",
+        "text": "Analyzes contract documents in Azure File Storage with Azure OpenAI — clause extraction, risk flagging, and comparison."
+      },
+      {
+        "keyword": "Requires",
+        "cost": "",
+        "text": "Needs AZURE_FILES_SHARE_NAME, AZURE_OPENAI_API_VERSION, AZURE_OPENAI_DEPLOYMENT_NAME, AZURE_OPENAI_ENDPOINT, AZURE_STORAGE_ACCOUNT_NAME to activate."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Trust is earned one successful execution at a time.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-bb44d0\"><stop offset=\"0%\" stop-color=\"#1e0a1e\"/><stop offset=\"100%\" stop-color=\"#0a050a\"/></radialGradient><filter id=\"gl-bb44d0\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-bb44d0)\"/><g filter=\"url(#gl-bb44d0)\"><circle cx=\"100\" cy=\"100\" r=\"31\" fill=\"#bc8cff\" opacity=\"0.15\"/><circle cx=\"100\" cy=\"100\" r=\"31\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"2\" opacity=\"0.6\"/><ellipse cx=\"100\" cy=\"100\" rx=\"46\" ry=\"10\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"1.5\" opacity=\"0.35\" transform=\"rotate(16 100 100)\"/><circle cx=\"97\" cy=\"102\" r=\"10\" fill=\"#bc8cff\" opacity=\"0.13\"/><circle cx=\"95\" cy=\"100\" r=\"6\" fill=\"#bc8cff\" opacity=\"0.09\"/><circle cx=\"100\" cy=\"97\" r=\"7\" fill=\"#bc8cff\" opacity=\"0.06\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@discreetRappers/sharepoint_contract_analysis_agent",
+    "agent_types": [
+      "DATA",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#3fb950",
+      "#58a6ff"
+    ],
+    "hp": 59,
+    "stats": {
+      "hp": 59,
+      "atk": 48,
+      "def": 49,
+      "spd": 59,
+      "int": 53
+    },
+    "typed_abilities": [
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 1,
+        "damage": 46
+      },
+      {
+        "name": "Extract",
+        "text": "Pull data from connected source into working memory.",
+        "cost": 3,
+        "damage": 32
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16553900515881791106
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@discreetRappers/sharepoint_contract_analysis_agent",
+    "version": "1.0.2",
+    "display_name": "ContractAnalysis",
+    "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI — clause extraction, risk flagging, and comparison.",
+    "author": "Bill Whalen",
+    "tags": [
+      "integrations",
+      "sharepoint",
+      "contracts",
+      "analysis",
+      "legal"
+    ],
+    "category": "integrations",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_FILES_SHARE_NAME",
+      "AZURE_OPENAI_API_VERSION",
+      "AZURE_OPENAI_DEPLOYMENT_NAME",
+      "AZURE_OPENAI_ENDPOINT",
+      "AZURE_STORAGE_ACCOUNT_NAME"
+    ],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "sharepoint_contract_analysis_agent.py",
+      "sha256_lf_v1": "befdce082ff846fa57e936fc130bd1e423451de8da911a50674b9a4c9c261d32",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@discreetRappers/sharepoint_contract_analysis_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@discreetRappers/sharepoint_contract_analysis_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

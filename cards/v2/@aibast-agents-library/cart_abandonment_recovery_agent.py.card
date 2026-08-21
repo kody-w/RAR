@@ -1,0 +1,126 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/cart_abandonment_recovery",
+  "seed": 3606179690631149846,
+  "name_seed": 839629138,
+  "incantation": "WAIL WARLORD SHARD DENSE GREATSWORD OMEN RUNE",
+  "version": "1.2.0",
+  "face": {
+    "name": "Cart Abandonment Recovery Agent",
+    "title": "The Herald",
+    "mana_cost": "{3}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Legendary Creature — Agent Compiler",
+    "rarity": "uncommon",
+    "power": 3,
+    "toughness": 9,
+    "abilities": [
+      {
+        "keyword": "Process",
+        "cost": "",
+        "text": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-bb952\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-bb952\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-bb952)\"/><g filter=\"url(#gl-bb952)\"><line x1=\"106\" y1=\"162\" x2=\"84\" y2=\"150\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"84\" y1=\"150\" x2=\"35\" y2=\"95\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"35\" y1=\"95\" x2=\"165\" y2=\"108\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"165\" y1=\"108\" x2=\"37\" y2=\"121\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"37\" y1=\"121\" x2=\"73\" y2=\"151\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"73\" y1=\"151\" x2=\"106\" y2=\"162\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"106\" y1=\"162\" x2=\"35\" y2=\"95\" stroke=\"#7ee787\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"106\" cy=\"162\" r=\"6\" fill=\"#7ee787\" opacity=\"0.53\"/><circle cx=\"84\" cy=\"150\" r=\"4\" fill=\"#7ee787\" opacity=\"0.58\"/><circle cx=\"35\" cy=\"95\" r=\"6\" fill=\"#7ee787\" opacity=\"0.69\"/><circle cx=\"165\" cy=\"108\" r=\"6\" fill=\"#7ee787\" opacity=\"0.32\"/><circle cx=\"37\" cy=\"121\" r=\"6\" fill=\"#7ee787\" opacity=\"0.43\"/><circle cx=\"73\" cy=\"151\" r=\"4\" fill=\"#7ee787\" opacity=\"0.35\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/cart_abandonment_recovery",
+    "agent_types": [
+      "WEALTH",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#bc8cff",
+      "#58a6ff"
+    ],
+    "hp": 66,
+    "stats": {
+      "hp": 66,
+      "atk": 53,
+      "def": 37,
+      "spd": 57,
+      "int": 71
+    },
+    "typed_abilities": [
+      {
+        "name": "Close",
+        "text": "Execute final steps of value exchange. Confirm settlement.",
+        "cost": 3,
+        "damage": 14
+      },
+      {
+        "name": "Prospect",
+        "text": "Identify and qualify potential opportunities.",
+        "cost": 1,
+        "damage": 38
+      }
+    ],
+    "weakness": "HEAL",
+    "weakness_label": "Heal",
+    "resistance": "LOGIC",
+    "resistance_label": "Logic",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 3606179690631149846
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/cart_abandonment_recovery",
+    "version": "1.2.0",
+    "display_name": "Cart Abandonment Recovery Agent",
+    "description": "Analyzes stalled checkouts from live orders in a simulated Dynamics 365 tenant, with recovery tooling and an embedded offline demo fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "cart-abandonment",
+      "recovery",
+      "ecommerce",
+      "conversion",
+      "email",
+      "b2c"
+    ],
+    "category": "b2c_sales",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "cart_abandonment_recovery_agent.py",
+      "sha256_lf_v1": "f74e09c3d9a4fbe53fca3697ab5d147b766ded273023ef10507f94b1278e0dc2",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/cart_abandonment_recovery_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/maintenance_scheduling",
+  "seed": 16055120389735064948,
+  "name_seed": 3738124014,
+  "incantation": "PANTHER RUSK SAGE GREATSWORD CRUMB SABRE ETCH",
+  "version": "1.2.0",
+  "face": {
+    "name": "Maintenance Scheduling Agent",
+    "title": "The Conductor",
+    "mana_cost": "{2}{R}{B}",
+    "colors": [
+      "R",
+      "B"
+    ],
+    "type_line": "Creature — Agent Warden",
+    "rarity": "common",
+    "power": 9,
+    "toughness": 7,
+    "abilities": [
+      {
+        "keyword": "Coordinate",
+        "cost": "",
+        "text": "Builds predictive maintenance schedules and work orders from a live simulated Dynamics 365 tenant, with an offline demo telemetry fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“When the signal is clear, the decision makes itself.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-cf3eee\"><stop offset=\"0%\" stop-color=\"#0a1a2e\"/><stop offset=\"100%\" stop-color=\"#050a14\"/></radialGradient><filter id=\"gl-cf3eee\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-cf3eee)\"/><g filter=\"url(#gl-cf3eee)\"><circle cx=\"78\" cy=\"99\" r=\"29\" fill=\"#f0883e\" opacity=\"0.10\"/><circle cx=\"78\" cy=\"83\" r=\"15\" fill=\"#f0883e\" opacity=\"0.07\"/><circle cx=\"117\" cy=\"102\" r=\"24\" fill=\"#f0883e\" opacity=\"0.07\"/><circle cx=\"72\" cy=\"85\" r=\"20\" fill=\"#f0883e\" opacity=\"0.09\"/><circle cx=\"79\" cy=\"98\" r=\"20\" fill=\"#f0883e\" opacity=\"0.04\"/><circle cx=\"127\" cy=\"79\" r=\"16\" fill=\"#f0883e\" opacity=\"0.10\"/><circle cx=\"95\" cy=\"107\" r=\"37\" fill=\"#f0883e\" opacity=\"0.10\"/><circle cx=\"91\" cy=\"125\" r=\"37\" fill=\"#f0883e\" opacity=\"0.10\"/><circle cx=\"100\" cy=\"100\" r=\"20\" fill=\"#f0883e\" opacity=\"0.1\"/><circle cx=\"100\" cy=\"100\" r=\"10\" fill=\"#f0883e\" opacity=\"0.2\"/><circle cx=\"100\" cy=\"100\" r=\"4\" fill=\"#f0883e\" opacity=\"0.7\"/><line x1=\"100\" y1=\"100\" x2=\"148.0\" y2=\"102.2\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"88.7\" y2=\"135.2\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"56.1\" y2=\"97.5\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/><line x1=\"100\" y1=\"100\" x2=\"112.4\" y2=\"59.9\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/maintenance_scheduling",
+    "agent_types": [
+      "CRAFT",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#f85149",
+      "#58a6ff"
+    ],
+    "hp": 65,
+    "stats": {
+      "hp": 65,
+      "atk": 55,
+      "def": 42,
+      "spd": 53,
+      "int": 67
+    },
+    "typed_abilities": [
+      {
+        "name": "Dispatch",
+        "text": "Route work to available capacity. Track completion.",
+        "cost": 3,
+        "damage": 17
+      },
+      {
+        "name": "Build",
+        "text": "Assemble components into deployable artifact.",
+        "cost": 2,
+        "damage": 29
+      }
+    ],
+    "weakness": "SHIELD",
+    "weakness_label": "Shield",
+    "resistance": "HEAL",
+    "resistance_label": "Heal",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 16055120389735064948
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/maintenance_scheduling",
+    "version": "1.2.0",
+    "display_name": "Maintenance Scheduling Agent",
+    "description": "Builds predictive maintenance schedules and work orders from a live simulated Dynamics 365 tenant, with an offline demo telemetry fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "maintenance",
+      "predictive",
+      "scheduling",
+      "manufacturing",
+      "IoT"
+    ],
+    "category": "manufacturing",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "maintenance_scheduling_agent.py",
+      "sha256_lf_v1": "d6c819ed44648205ffc79f63a1c65f990f552fb45897638e2a59a259630358d2",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/maintenance_scheduling_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

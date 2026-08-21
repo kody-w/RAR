@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/call_for_speakers_digest",
+  "seed": 21366214241022386777,
+  "name_seed": 679742118,
+  "incantation": "TRENCH GUILD MERIDIAN GRAIN MOLD LEFT INGOT",
+  "version": "2.0.0",
+  "face": {
+    "name": "Call for Speakers Digest",
+    "title": "The Luminary",
+    "mana_cost": "{1}{N}",
+    "colors": [
+      "N"
+    ],
+    "type_line": "Creature — Agent Luminary",
+    "rarity": "uncommon",
+    "power": 5,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Dispatch",
+        "cost": "",
+        "text": "Weekly HTML email digest of open conference Call for Speakers (CFP) opportunities matching your topics of interest. Pulls from confs.tech, Papercall, AdatoSystems' CFP tracker, CFP Radar, Sessionize's"
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Complexity is the enemy. Automation is the ally.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-840aa6\"><stop offset=\"0%\" stop-color=\"#1a0a1e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-840aa6\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-840aa6)\"/><g filter=\"url(#gl-840aa6)\"><line x1=\"123\" y1=\"66\" x2=\"80\" y2=\"94\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"80\" y1=\"94\" x2=\"90\" y2=\"165\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"90\" y1=\"165\" x2=\"52\" y2=\"53\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"52\" y1=\"53\" x2=\"148\" y2=\"94\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"148\" y1=\"94\" x2=\"167\" y2=\"104\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"167\" y1=\"104\" x2=\"123\" y2=\"66\" stroke=\"#8b949e\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"123\" y1=\"66\" x2=\"90\" y2=\"165\" stroke=\"#8b949e\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"123\" cy=\"66\" r=\"5\" fill=\"#8b949e\" opacity=\"0.33\"/><circle cx=\"80\" cy=\"94\" r=\"4\" fill=\"#8b949e\" opacity=\"0.62\"/><circle cx=\"90\" cy=\"165\" r=\"3\" fill=\"#8b949e\" opacity=\"0.69\"/><circle cx=\"52\" cy=\"53\" r=\"5\" fill=\"#8b949e\" opacity=\"0.70\"/><circle cx=\"148\" cy=\"94\" r=\"6\" fill=\"#8b949e\" opacity=\"0.55\"/><circle cx=\"167\" cy=\"104\" r=\"6\" fill=\"#8b949e\" opacity=\"0.61\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/call_for_speakers_digest",
+    "agent_types": [
+      "SOCIAL"
+    ],
+    "type_colors": [
+      "#d29922"
+    ],
+    "hp": 51,
+    "stats": {
+      "hp": 51,
+      "atk": 59,
+      "def": 32,
+      "spd": 33,
+      "int": 41
+    },
+    "typed_abilities": [
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 1,
+        "damage": 13
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 21366214241022386777
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/call_for_speakers_digest",
+    "version": "2.0.0",
+    "display_name": "Call for Speakers Digest",
+    "description": "Weekly HTML email digest of open conference Call for Speakers (CFP) opportunities matching your topics of interest. Pulls from confs.tech, Papercall, AdatoSystems' CFP tracker, CFP Radar, Sessionize's public user-groups directory, community-specific hubs (like communitydays.org for the Microsoft ecosystem), targeted search of standalone Sessionize conferences and run.events, and general web searc…",
+    "author": "Michael Heath",
+    "tags": [
+      "productivity",
+      "speaking",
+      "conference",
+      "automation"
+    ],
+    "category": "general",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "call-for-speakers-digest",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#call-for-speakers-digest",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "d964e313b2ca6981"
+    },
+    "platforms": [
+      "Copilot Studio",
+      "Scout",
+      "Cowork"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "call_for_speakers_digest_agent.py",
+      "sha256_lf_v1": "a3e15016b7641d3e6b947d84b323b4343bdb427effe8afb6d280f09d53a39511",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/call_for_speakers_digest_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/call_for_speakers_digest_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@aibast-agents-library/cross_selling",
+  "seed": 17617098655100714102,
+  "name_seed": 4101800419,
+  "incantation": "BRONZE BROKE TEMPEST ENDOW FATE TOLL BIND",
+  "version": "1.2.0",
+  "face": {
+    "name": "Cross-Selling Opportunities",
+    "title": "The Operator",
+    "mana_cost": "{3}{N}{U}",
+    "colors": [
+      "N",
+      "U"
+    ],
+    "type_line": "Creature — Agent Herald",
+    "rarity": "uncommon",
+    "power": 5,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Optimize",
+        "cost": "",
+        "text": "Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Efficiency is not a goal. It’s a side effect of clarity.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-7c81e3\"><stop offset=\"0%\" stop-color=\"#0a2a2a\"/><stop offset=\"100%\" stop-color=\"#050f0f\"/></radialGradient><filter id=\"gl-7c81e3\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-7c81e3)\"/><g filter=\"url(#gl-7c81e3)\"><circle cx=\"100\" cy=\"100\" r=\"12\" fill=\"#8b949e\" opacity=\"0.3\"/><circle cx=\"100\" cy=\"100\" r=\"5\" fill=\"#8b949e\" opacity=\"0.7\"/><ellipse cx=\"100\" cy=\"100\" rx=\"30\" ry=\"23\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.20\" transform=\"rotate(-21 100 100)\"/><circle cx=\"126.1\" cy=\"98.4\" r=\"3\" fill=\"#8b949e\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"48\" ry=\"25\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.28\" transform=\"rotate(-9 100 100)\"/><circle cx=\"111.7\" cy=\"122.7\" r=\"3\" fill=\"#8b949e\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"66\" ry=\"31\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.36\" transform=\"rotate(-5 100 100)\"/><circle cx=\"89.1\" cy=\"137.3\" r=\"5\" fill=\"#8b949e\" opacity=\"0.5\"/><ellipse cx=\"100\" cy=\"100\" rx=\"84\" ry=\"52\" fill=\"none\" stroke=\"#8b949e\" stroke-width=\"1\" opacity=\"0.44\" transform=\"rotate(8 100 100)\"/><circle cx=\"154.9\" cy=\"97.3\" r=\"4\" fill=\"#8b949e\" opacity=\"0.5\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@aibast-agents-library/cross_selling",
+    "agent_types": [
+      "SOCIAL",
+      "WEALTH"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#bc8cff"
+    ],
+    "hp": 67,
+    "stats": {
+      "hp": 67,
+      "atk": 64,
+      "def": 43,
+      "spd": 66,
+      "int": 50
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 1,
+        "damage": 44
+      },
+      {
+        "name": "Assist",
+        "text": "Guide user through task with context-aware suggestions.",
+        "cost": 2,
+        "damage": 45
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 17617098655100714102
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/cross_selling",
+    "version": "1.2.0",
+    "display_name": "Cross-Selling Opportunities",
+    "description": "Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback.",
+    "author": "AIBAST",
+    "tags": [
+      "cross-sell",
+      "upsell",
+      "revenue",
+      "product-affinity",
+      "recommendations"
+    ],
+    "category": "general",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "cross_selling_agent.py",
+      "sha256_lf_v1": "12d3bbf7a218d40f4e2238e57f5441f78a23b11e3e3dfe72de8d5374cf236197",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@aibast-agents-library/cross_selling_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

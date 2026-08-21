@@ -1,0 +1,135 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@kody-w/flight_recorder",
+  "seed": 7703044877886567080,
+  "name_seed": 1793504897,
+  "incantation": "HOST SPECTER VOID BADGE SUPREME FRAY TEMPER",
+  "version": "1.0.1",
+  "face": {
+    "name": "FlightRecorder",
+    "title": "The Arbiter",
+    "mana_cost": "{2}{W}",
+    "colors": [
+      "W"
+    ],
+    "type_line": "Creature — Agent Scribe",
+    "rarity": "rare",
+    "power": 3,
+    "toughness": 3,
+    "abilities": [
+      {
+        "keyword": "Generate",
+        "cost": "",
+        "text": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls."
+      },
+      {
+        "keyword": "Requires",
+        "cost": "",
+        "text": "Needs FLIGHT_RECORDER_DIR to activate."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“The market moved. The agent moved faster.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-e6b681\"><stop offset=\"0%\" stop-color=\"#1a0a1e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-e6b681\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-e6b681)\"/><g filter=\"url(#gl-e6b681)\"><line x1=\"75\" y1=\"71\" x2=\"87\" y2=\"101\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"87\" y1=\"101\" x2=\"108\" y2=\"59\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"108\" y1=\"59\" x2=\"159\" y2=\"114\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"159\" y1=\"114\" x2=\"131\" y2=\"98\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"131\" y1=\"98\" x2=\"150\" y2=\"119\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"150\" y1=\"119\" x2=\"75\" y2=\"71\" stroke=\"#58a6ff\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"75\" y1=\"71\" x2=\"108\" y2=\"59\" stroke=\"#58a6ff\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"75\" cy=\"71\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.42\"/><circle cx=\"87\" cy=\"101\" r=\"3\" fill=\"#58a6ff\" opacity=\"0.31\"/><circle cx=\"108\" cy=\"59\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.42\"/><circle cx=\"159\" cy=\"114\" r=\"6\" fill=\"#58a6ff\" opacity=\"0.55\"/><circle cx=\"131\" cy=\"98\" r=\"3\" fill=\"#58a6ff\" opacity=\"0.37\"/><circle cx=\"150\" cy=\"119\" r=\"4\" fill=\"#58a6ff\" opacity=\"0.36\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@kody-w/flight_recorder",
+    "agent_types": [
+      "LOGIC",
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#f0f0f0"
+    ],
+    "hp": 59,
+    "stats": {
+      "hp": 59,
+      "atk": 62,
+      "def": 48,
+      "spd": 47,
+      "int": 58
+    },
+    "typed_abilities": [
+      {
+        "name": "Analyze",
+        "text": "Inspect target data source. Draw insight.",
+        "cost": 3,
+        "damage": 27
+      },
+      {
+        "name": "Compute",
+        "text": "Process input through algorithm. Return structured result.",
+        "cost": 3,
+        "damage": 17
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 1,
+      "label": "Base",
+      "icon": "sprout"
+    },
+    "tier": "community",
+    "rarity_tier": "core",
+    "rarity_label": "Core",
+    "floor_pts": 40,
+    "seed": 7703044877886567080
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/flight_recorder",
+    "version": "1.0.1",
+    "display_name": "FlightRecorder",
+    "description": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls.",
+    "author": "Kody Wildfeuer",
+    "tags": [
+      "flight-recorder",
+      "black-box",
+      "logging",
+      "observability",
+      "privacy",
+      "conversations",
+      "audit",
+      "local-first",
+      "ownership"
+    ],
+    "category": "core",
+    "quality_tier": "community",
+    "requires_env": [
+      "FLIGHT_RECORDER_DIR"
+    ],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "flight_recorder_agent.py",
+      "sha256_lf_v1": "6a3976cfba0492a585ccab318125caed4ca0820e05dddf4119e98d5f22dea659",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@kody-w/flight_recorder_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@kody-w/flight_recorder_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

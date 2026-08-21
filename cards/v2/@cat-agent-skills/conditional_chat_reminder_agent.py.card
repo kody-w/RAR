@@ -1,0 +1,132 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/conditional_chat_reminder",
+  "seed": 36578908877571633851,
+  "name_seed": 4221723602,
+  "incantation": "STRAY SOAK THRONE ICHOR PERCH TYPHOON STOKE",
+  "version": "2.0.0",
+  "face": {
+    "name": "Conditional Chat Reminder",
+    "title": "The Dispatcher",
+    "mana_cost": "{1}{U}{B}",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "type_line": "Creature — Agent Scribe",
+    "rarity": "uncommon",
+    "power": 4,
+    "toughness": 8,
+    "abilities": [
+      {
+        "keyword": "Analyze",
+        "cost": "",
+        "text": "Schedule a Teams reminder that sends only when the expected person has not already posted a relevant update."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Not all intelligence is artificial. Some is engineered.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-a263d2\"><stop offset=\"0%\" stop-color=\"#0a1e0a\"/><stop offset=\"100%\" stop-color=\"#050a05\"/></radialGradient><filter id=\"gl-a263d2\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-a263d2)\"/><g filter=\"url(#gl-a263d2)\"><circle cx=\"135.5\" cy=\"94.3\" r=\"23\" fill=\"#bc8cff\" opacity=\"0.15\" stroke=\"#bc8cff\" stroke-width=\"2\" stroke-opacity=\"0.5\"/><circle cx=\"64.5\" cy=\"105.7\" r=\"14\" fill=\"#bc8cff\" opacity=\"0.1\" stroke=\"#bc8cff\" stroke-width=\"1.5\" stroke-opacity=\"0.4\"/><line x1=\"135.5\" y1=\"94.3\" x2=\"64.5\" y2=\"105.7\" stroke=\"#bc8cff\" stroke-width=\"1\" opacity=\"0.25\" stroke-dasharray=\"4,4\"/><circle cx=\"100\" cy=\"100\" r=\"46\" fill=\"none\" stroke=\"#bc8cff\" stroke-width=\"0.8\" opacity=\"0.15\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/conditional_chat_reminder",
+    "agent_types": [
+      "DATA"
+    ],
+    "type_colors": [
+      "#3fb950"
+    ],
+    "hp": 51,
+    "stats": {
+      "hp": 51,
+      "atk": 48,
+      "def": 25,
+      "spd": 42,
+      "int": 37
+    },
+    "typed_abilities": [
+      {
+        "name": "Pipeline",
+        "text": "Execute multi-step data flow. Each stage feeds the next.",
+        "cost": 3,
+        "damage": 37
+      }
+    ],
+    "weakness": "LOGIC",
+    "weakness_label": "Logic",
+    "resistance": "SOCIAL",
+    "resistance_label": "Social",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 36578908877571633851
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/conditional_chat_reminder",
+    "version": "2.0.0",
+    "display_name": "Conditional Chat Reminder",
+    "description": "Schedule a Teams reminder that sends only when the expected person has not already posted a relevant update.",
+    "author": "Giorgio Ughini",
+    "tags": [
+      "automation",
+      "teams",
+      "reminders",
+      "follow_up",
+      "productivity"
+    ],
+    "category": "integrations",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "conditional-chat-reminder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#conditional-chat-reminder",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "a519bd3119d92722"
+    },
+    "platforms": [
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "conditional_chat_reminder_agent.py",
+      "sha256_lf_v1": "2ff960cf9799c7e9336fd4eea85e8acf88d5d9ebf2ff5c3a52dce0da0f069171",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/conditional_chat_reminder_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/conditional_chat_reminder_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

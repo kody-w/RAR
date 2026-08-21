@@ -1,0 +1,138 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/phi_deidentifier",
+  "seed": 24418072315665856344,
+  "name_seed": 1390308198,
+  "incantation": "ENCHANT ETCH ALTAR DUB LATCH PARRY THORN",
+  "version": "2.0.0",
+  "face": {
+    "name": "PHI De-identifier",
+    "title": "The Cartographer",
+    "mana_cost": "{3}{R}",
+    "colors": [
+      "R"
+    ],
+    "type_line": "Legendary Creature — Agent Assessor",
+    "rarity": "uncommon",
+    "power": 4,
+    "toughness": 4,
+    "abilities": [
+      {
+        "keyword": "Deploy",
+        "cost": "",
+        "text": "Redact the 18 HIPAA Safe Harbor identifiers from clinical text (or produce a Limited Data Set) with consistent pseudonym tokens and an audit manifest of what was removed."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“It works while you sleep. It finishes before you wake.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-de6b66\"><stop offset=\"0%\" stop-color=\"#1a1a1a\"/><stop offset=\"100%\" stop-color=\"#0a0a0a\"/></radialGradient><filter id=\"gl-de6b66\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-de6b66)\"/><g filter=\"url(#gl-de6b66)\"><path d=\"M40,120 Q100,57 160,120\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"3\" opacity=\"0.5\"/><path d=\"M40,125 Q100,67 160,125\" fill=\"none\" stroke=\"#f0883e\" stroke-width=\"1.5\" opacity=\"0.25\"/><rect x=\"35\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f0883e\" opacity=\"0.2\"/><rect x=\"150\" y=\"120\" width=\"15\" height=\"40\" rx=\"3\" fill=\"#f0883e\" opacity=\"0.2\"/><circle cx=\"42\" cy=\"130\" r=\"4\" fill=\"#f0883e\" opacity=\"0.5\"/><circle cx=\"158\" cy=\"130\" r=\"4\" fill=\"#f0883e\" opacity=\"0.5\"/><circle cx=\"100\" cy=\"79\" r=\"5\" fill=\"#f0883e\" opacity=\"0.4\"/><line x1=\"25\" y1=\"135\" x2=\"175\" y2=\"135\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"143\" x2=\"175\" y2=\"143\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"151\" x2=\"175\" y2=\"151\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/><line x1=\"25\" y1=\"159\" x2=\"175\" y2=\"159\" stroke=\"#f0883e\" stroke-width=\"1\" opacity=\"0.12\" stroke-dasharray=\"4,4\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/phi_deidentifier",
+    "agent_types": [
+      "LOGIC",
+      "SHIELD"
+    ],
+    "type_colors": [
+      "#58a6ff",
+      "#f0f0f0"
+    ],
+    "hp": 44,
+    "stats": {
+      "hp": 44,
+      "atk": 46,
+      "def": 22,
+      "spd": 46,
+      "int": 38
+    },
+    "typed_abilities": [
+      {
+        "name": "Parse",
+        "text": "Decompose complex input into structured components.",
+        "cost": 1,
+        "damage": 31
+      }
+    ],
+    "weakness": "WEALTH",
+    "weakness_label": "Wealth",
+    "resistance": "DATA",
+    "resistance_label": "Data",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 24418072315665856344
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/phi_deidentifier",
+    "version": "2.0.0",
+    "display_name": "PHI De-identifier",
+    "description": "Redact the 18 HIPAA Safe Harbor identifiers from clinical text (or produce a Limited Data Set) with consistent pseudonym tokens and an audit manifest of what was removed.",
+    "author": "Rafael Lopez Alcaraz",
+    "tags": [
+      "healthcare",
+      "hls",
+      "phi",
+      "privacy",
+      "redaction",
+      "hipaa",
+      "compliance",
+      "scripts"
+    ],
+    "category": "devtools",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "phi-deidentifier",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#phi-deidentifier",
+      "upstream_version": "1.0.0",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "4c6bd1961fad5f45"
+    },
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "phi_deidentifier_agent.py",
+      "sha256_lf_v1": "deacbb22ef7601fa437aa51aa7ccdd07ed16fa8c3eaa345c50ff44dc6d975d6f",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/phi_deidentifier_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/phi_deidentifier_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}

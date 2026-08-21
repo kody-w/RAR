@@ -1,0 +1,135 @@
+{
+  "schema": "rar-card/2.0",
+  "id": "@cat-agent-skills/cowork_use_case_one_pager",
+  "seed": 29823587042296868900,
+  "name_seed": 2648877671,
+  "incantation": "QUAKE SOVEREIGN CROWN FOG MOST CONQUER EDGE",
+  "version": "2.0.1",
+  "face": {
+    "name": "Cowork Use Case One-Pager",
+    "title": "The Analyst",
+    "mana_cost": "{1}{G}{W}",
+    "colors": [
+      "G",
+      "W"
+    ],
+    "type_line": "Creature — Agent Pilot",
+    "rarity": "uncommon",
+    "power": 4,
+    "toughness": 2,
+    "abilities": [
+      {
+        "keyword": "Generate",
+        "cost": "",
+        "text": "Turn a Cowork conversation, into a one-page HTML use case write-up — narrative, impact figures, workflow steps, and outputs."
+      },
+      {
+        "keyword": "Synergy",
+        "cost": "",
+        "text": "When @rapp/basic_agent are on the field, this agent gains +1/+1."
+      }
+    ],
+    "flavor_text": "“Every edge case was someone’s main case.”",
+    "avatar_svg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"bg-e2aa67\"><stop offset=\"0%\" stop-color=\"#1a0a1e\"/><stop offset=\"100%\" stop-color=\"#080510\"/></radialGradient><filter id=\"gl-e2aa67\"><feGaussianBlur stdDeviation=\"3\" result=\"b\"/><feMerge><feMergeNode in=\"b\"/><feMergeNode in=\"SourceGraphic\"/></feMerge></filter></defs><rect width=\"200\" height=\"200\" fill=\"url(#bg-e2aa67)\"/><g filter=\"url(#gl-e2aa67)\"><line x1=\"107\" y1=\"135\" x2=\"81\" y2=\"93\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"81\" y1=\"93\" x2=\"128\" y2=\"38\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"128\" y1=\"38\" x2=\"157\" y2=\"138\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"157\" y1=\"138\" x2=\"86\" y2=\"101\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"86\" y1=\"101\" x2=\"107\" y2=\"135\" stroke=\"#7ee787\" stroke-width=\"0.8\" opacity=\"0.3\"/><line x1=\"107\" y1=\"135\" x2=\"128\" y2=\"38\" stroke=\"#7ee787\" stroke-width=\"0.5\" opacity=\"0.15\"/><circle cx=\"107\" cy=\"135\" r=\"3\" fill=\"#7ee787\" opacity=\"0.57\"/><circle cx=\"81\" cy=\"93\" r=\"5\" fill=\"#7ee787\" opacity=\"0.37\"/><circle cx=\"128\" cy=\"38\" r=\"5\" fill=\"#7ee787\" opacity=\"0.51\"/><circle cx=\"157\" cy=\"138\" r=\"3\" fill=\"#7ee787\" opacity=\"0.51\"/><circle cx=\"86\" cy=\"101\" r=\"3\" fill=\"#7ee787\" opacity=\"0.31\"/></g></svg>",
+    "set_code": "HOLO",
+    "artist": "RAPP",
+    "agent_name": "@cat-agent-skills/cowork_use_case_one_pager",
+    "agent_types": [
+      "SOCIAL",
+      "LOGIC"
+    ],
+    "type_colors": [
+      "#d29922",
+      "#58a6ff"
+    ],
+    "hp": 48,
+    "stats": {
+      "hp": 48,
+      "atk": 51,
+      "def": 22,
+      "spd": 49,
+      "int": 37
+    },
+    "typed_abilities": [
+      {
+        "name": "Coach",
+        "text": "Observe performance and provide actionable feedback.",
+        "cost": 2,
+        "damage": 28
+      }
+    ],
+    "weakness": "DATA",
+    "weakness_label": "Data",
+    "resistance": "SHIELD",
+    "resistance_label": "Shield",
+    "retreat_cost": 1,
+    "evolution": {
+      "stage": 0,
+      "label": "Frontier",
+      "icon": "compass"
+    },
+    "tier": "frontier",
+    "rarity_tier": "starter",
+    "rarity_label": "Starter",
+    "floor_pts": 10,
+    "seed": 29823587042296868900
+  },
+  "manifest": {
+    "schema": "rapp-agent/1.0",
+    "name": "@cat-agent-skills/cowork_use_case_one_pager",
+    "version": "2.0.1",
+    "display_name": "Cowork Use Case One-Pager",
+    "description": "Turn a Cowork conversation, into a one-page HTML use case write-up — narrative, impact figures, workflow steps, and outputs.",
+    "author": "Tim Sparks",
+    "tags": [
+      "productivity",
+      "use_case",
+      "html",
+      "documents",
+      "writing",
+      "audit"
+    ],
+    "category": "productivity",
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "source": {
+      "aggregated": true,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "cowork-use-case-one-pager",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#cowork-use-case-one-pager",
+      "upstream_version": "1.0.1",
+      "license": "unverified",
+      "license_verified": false,
+      "content_digest": "e6c8d90451f0dc94"
+    },
+    "platforms": [
+      "Cowork"
+    ]
+  },
+  "payload": [
+    {
+      "kind": "agent.py",
+      "filename": "cowork_use_case_one_pager_agent.py",
+      "sha256_lf_v1": "04d7936c14c1ba540141659716a7bacc34a2cd3fcb057a4625d749fd89492bb7",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/1464f7b73ecb36d29398f698f2a268047c9457f2/agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py"
+    }
+  ],
+  "state": "dormant",
+  "origin": {
+    "kind": "rar"
+  },
+  "dimension": null,
+  "scan": {
+    "url": "https://raw.githubusercontent.com/kody-w/RAR/main/cards/v2/@cat-agent-skills/cowork_use_case_one_pager_agent.py.card"
+  },
+  "provenance": {
+    "minted_by": "scripts/migrate_cards_v2.py | rapp_sdk 2.0.0",
+    "rar_revision": "1464f7b73ecb36d29398f698f2a268047c9457f2"
+  },
+  "signature": null
+}
