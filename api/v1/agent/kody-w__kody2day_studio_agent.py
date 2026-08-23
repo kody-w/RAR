@@ -147,6 +147,10 @@ class Kody2dayStudio(BasicAgent):
             try:
                 pid = int(pf.read_text().strip())
                 os.kill(pid, 0)
+                # a detached child of a long-lived server can linger as a zombie; that is finished, not running
+                st = subprocess.run(["ps", "-o", "stat=", "-p", str(pid)], capture_output=True, text=True, timeout=5).stdout.strip()
+                if not st or st.startswith("Z"):
+                    continue
                 live[pf.stem] = pid
             except Exception:
                 continue

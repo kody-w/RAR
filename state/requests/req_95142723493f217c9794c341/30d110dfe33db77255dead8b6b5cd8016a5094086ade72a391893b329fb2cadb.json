@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@cat-agent-skills/clipchamp_video",
+  "applied_at": "2026-08-23T23:28:20.327665+00:00",
+  "approved_by": {
+    "github_id": "1735900",
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "",
   "base_lifecycle_sha256": "",
   "base_lifecycle_version": "",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-08-23T23:26:01Z",
   "publisher": "@cat-agent-skills",
   "reason": "Materialize the newly indexed Clipchamp Video catalog entry as a lifecycle-bound frontier agent.",
+  "receipt": "rar_30d110dfe33db77255dead8b6b5cd8016a5094086ade72a391893b329fb2cadb",
   "repository_id": 1200565697,
   "request_id": "req_95142723493f217c9794c341",
   "revision_id": "30d110dfe33db77255dead8b6b5cd8016a5094086ade72a391893b329fb2cadb",
@@ -29,5 +35,5 @@
   "slug": "clipchamp_video_agent",
   "source_body_sha256": "e9f8ff92a0ddc48ce3e77cfcbf25eae6b9d8e37fd5b29c22b1e9d4bdbb79fdea",
   "source_url": "https://raw.githubusercontent.com/kody-w/RAR/1fedbdaf970b3703a6da8d5f78f8f5b6782f0279/agents/%40cat-agent-skills/clipchamp_video_agent.py",
-  "status": "pending_review"
+  "status": "applied"
 }

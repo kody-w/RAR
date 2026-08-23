@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__action_items_todo",
+  "name": "Action Items to To Do",
+  "rar_name": "@cat-agent-skills/action_items_todo",
+  "rappid": "rappid:@cat-agent-skills/action_items_todo:f0f0d1251ecfbeef59798ecf5ff7ddf5429bbc919414392e5cdca185bdca5b07",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "productivity",
+    "automation",
+    "tasks",
+    "teams",
+    "email",
+    "meetings",
+    "microsoft_365",
+    "action_items"
+  ],
+  "description": "Watches your Teams chats, meeting transcripts, and Outlook mail for things people actually asked you to do, and files each one as a Microsoft To Do task with a due date, priority, and source link.",
+  "author": "Matteo Pagani",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.0,
+  "sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d",
+  "has_card": true,
+  "added_at": "2026-08-23T19:15:32-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__action_items_todo.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/action_items_todo_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__action_items_todo.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__action_items_todo.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/action_items_todo_agent.py"
+}

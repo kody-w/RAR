@@ -3640,8 +3640,41 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
+    },
+    "@cat-agent-skills/action_items_todo": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/action_items_todo_agent.py",
+      "sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d",
+      "latest_receipt": "rar_425e03cec6253e90b167d1089f10a2a4ddd787ec8231643d2f0d9dd1a9564ab6",
+      "updated_at": "2026-08-23T23:28:20.321581+00:00"
+    },
+    "@cat-agent-skills/clipchamp_video": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/clipchamp_video_agent.py",
+      "sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8",
+      "latest_receipt": "rar_30d110dfe33db77255dead8b6b5cd8016a5094086ade72a391893b329fb2cadb",
+      "updated_at": "2026-08-23T23:28:20.327665+00:00"
+    },
+    "@cat-agent-skills/explainer_video": {
+      "status": "active",
+      "version": "2.0.0",
+      "quality_tier": "frontier",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@cat-agent-skills/explainer_video_agent.py",
+      "sha256": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6",
+      "latest_receipt": "rar_3102e74dc288e3281c7ba9ab9f6d32f25f43c1fb50ac656c7534c8d6e3a2a197",
+      "updated_at": "2026-08-23T23:28:20.333221+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-19T02:27:15.246835+00:00"
+  "updated_at": "2026-08-23T23:28:20.333221+00:00"
 }

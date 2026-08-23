@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-08-19T02:31:18Z",
+  "generated": "2026-08-23T23:28:43Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 106,
     "consumer_only": 3,
-    "both": 198,
-    "in_business_mode": 304,
-    "in_consumer_mode": 201
+    "both": 201,
+    "in_business_mode": 307,
+    "in_consumer_mode": 204
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -124,6 +124,7 @@
     "@borg/borg_agent": "x",
     "@cat-agent-skills/accessibility_pass": "x",
     "@cat-agent-skills/acroform_writer": "x",
+    "@cat-agent-skills/action_items_todo": "x",
     "@cat-agent-skills/agent_evaluation_designer": "x",
     "@cat-agent-skills/agent_harness_explorer": "x",
     "@cat-agent-skills/ai_demo_assistant": "x",
@@ -143,6 +144,7 @@
     "@cat-agent-skills/campaign_deck_builder": "x",
     "@cat-agent-skills/chart_builder": "x",
     "@cat-agent-skills/classic_text_adventure": "c",
+    "@cat-agent-skills/clipchamp_video": "x",
     "@cat-agent-skills/clt_hr_assistant": "x",
     "@cat-agent-skills/commenting_content": "x",
     "@cat-agent-skills/competitive_battlecard_builder": "x",
@@ -161,6 +163,7 @@
     "@cat-agent-skills/enterprise_agent_design_authority": "b",
     "@cat-agent-skills/eu_greenwashing_analysis": "x",
     "@cat-agent-skills/exam_prep_learning_plan_builder": "x",
+    "@cat-agent-skills/explainer_video": "x",
     "@cat-agent-skills/gantt_chart_generator": "x",
     "@cat-agent-skills/generating_podcast_script": "x",
     "@cat-agent-skills/global_greenwashing_claim_auditor": "b",

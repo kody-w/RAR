@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": "1735900",
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "32673685028"
+  },
+  "action": "agent.create",
+  "agent": "@cat-agent-skills/clipchamp_video",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8"
+  },
+  "canonical_path": "agents/@cat-agent-skills/clipchamp_video_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-08-23T23:28:20.327665+00:00",
+  "id": "rar_30d110dfe33db77255dead8b6b5cd8016a5094086ade72a391893b329fb2cadb",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "",
+    "receipt": "",
+    "version": ""
+  },
+  "quality_tier": "frontier",
+  "request_id": "req_95142723493f217c9794c341",
+  "revision_id": "30d110dfe33db77255dead8b6b5cd8016a5094086ade72a391893b329fb2cadb",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABN7X30w",
+    "issue_number": 590,
+    "source_body_sha256": "e9f8ff92a0ddc48ce3e77cfcbf25eae6b9d8e37fd5b29c22b1e9d4bdbb79fdea"
+  },
+  "version": "2.0.0"
+}

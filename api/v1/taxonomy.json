@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-19T02:31:18Z",
+  "generated": "2026-08-23T23:28:43Z",
   "categories": [
     {
       "name": "general",
@@ -8,7 +8,7 @@
     },
     {
       "name": "productivity",
-      "count": 42
+      "count": 43
     },
     {
       "name": "core",
@@ -36,7 +36,7 @@
     },
     {
       "name": "creative",
-      "count": 8
+      "count": 10
     },
     {
       "name": "b2c_sales",
@@ -106,7 +106,7 @@
     },
     {
       "name": "@cat-agent-skills",
-      "count": 90
+      "count": 93
     },
     {
       "name": "@kody-w",
@@ -148,7 +148,7 @@
     },
     {
       "name": "frontier",
-      "count": 90
+      "count": 93
     },
     {
       "name": "official",
@@ -166,7 +166,7 @@
   "tags": [
     {
       "name": "productivity",
-      "count": 39
+      "count": 40
     },
     {
       "name": "sales",
@@ -181,24 +181,24 @@
       "count": 19
     },
     {
-      "name": "content",
+      "name": "automation",
       "count": 18
     },
     {
-      "name": "automation",
-      "count": 17
+      "name": "content",
+      "count": 18
     },
     {
       "name": "writing",
       "count": 15
     },
     {
-      "name": "compliance",
+      "name": "email",
       "count": 14
     },
     {
-      "name": "email",
-      "count": 13
+      "name": "compliance",
+      "count": 14
     },
     {
       "name": "documents",
@@ -207,6 +207,10 @@
     {
       "name": "rapplication",
       "count": 12
+    },
+    {
+      "name": "teams",
+      "count": 11
     },
     {
       "name": "deal-progression",
@@ -225,7 +229,7 @@
       "count": 10
     },
     {
-      "name": "teams",
+      "name": "copilot_studio",
       "count": 10
     },
     {
@@ -241,7 +245,7 @@
       "count": 9
     },
     {
-      "name": "copilot_studio",
+      "name": "video",
       "count": 9
     },
     {
@@ -277,10 +281,6 @@
       "count": 7
     },
     {
-      "name": "video",
-      "count": 7
-    },
-    {
       "name": "governance",
       "count": 7
     },
@@ -306,6 +306,10 @@
     },
     {
       "name": "copilot-studio",
+      "count": 6
+    },
+    {
+      "name": "microsoft_365",
       "count": 6
     },
     {
@@ -377,11 +381,11 @@
       "count": 5
     },
     {
-      "name": "microsoft_365",
+      "name": "agent",
       "count": 5
     },
     {
-      "name": "agent",
+      "name": "playwright",
       "count": 5
     },
     {
@@ -457,6 +461,10 @@
       "count": 4
     },
     {
+      "name": "training",
+      "count": 4
+    },
+    {
       "name": "copilot",
       "count": 4
     },
@@ -482,10 +490,6 @@
     },
     {
       "name": "authoring",
-      "count": 4
-    },
-    {
-      "name": "playwright",
       "count": 4
     },
     {
@@ -653,6 +657,10 @@
       "count": 3
     },
     {
+      "name": "communication",
+      "count": 3
+    },
+    {
       "name": "style",
       "count": 3
     },
@@ -662,10 +670,6 @@
     },
     {
       "name": "product",
-      "count": 3
-    },
-    {
-      "name": "training",
       "count": 3
     },
     {
@@ -697,6 +701,10 @@
       "count": 3
     },
     {
+      "name": "demo",
+      "count": 3
+    },
+    {
       "name": "sales_enablement",
       "count": 3
     },
@@ -722,6 +730,10 @@
     },
     {
       "name": "agents",
+      "count": 3
+    },
+    {
+      "name": "education",
       "count": 3
     },
     {
@@ -957,10 +969,6 @@
       "count": 2
     },
     {
-      "name": "communication",
-      "count": 2
-    },
-    {
       "name": "licenses",
       "count": 2
     },
@@ -1013,11 +1021,11 @@
       "count": 2
     },
     {
-      "name": "evaluation",
+      "name": "meetings",
       "count": 2
     },
     {
-      "name": "demo",
+      "name": "evaluation",
       "count": 2
     },
     {
@@ -1038,6 +1046,10 @@
     },
     {
       "name": "animation",
+      "count": 2
+    },
+    {
+      "name": "ffmpeg",
       "count": 2
     },
     {
@@ -1221,10 +1233,6 @@
       "count": 2
     },
     {
-      "name": "education",
-      "count": 2
-    },
-    {
       "name": "private",
       "count": 2
     },
@@ -1354,14 +1362,6 @@
     },
     {
       "name": "vendor-evaluation",
-      "count": 1
-    },
-    {
-      "name": "action-prioritization",
-      "count": 1
-    },
-    {
-      "name": "resource-allocation",
       "count": 1
     }
   ]
