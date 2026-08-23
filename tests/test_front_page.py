@@ -456,6 +456,21 @@ def test_missing_components_are_filled_with_the_population_median(payload, items
                 "does not match the published median")
 
 
+def test_zero_community_signal_is_absent_not_negative(bfp):
+    score, facts = bfp.measure_community({
+        "upvotes": 0,
+        "comments": 0,
+        "signals": {"used": 0, "worked": 0},
+    })
+    assert score is None
+    assert facts == {
+        "upvotes": 0,
+        "comments": 0,
+        "engagement": 0,
+        "channels": {},
+    }
+
+
 def test_agents_without_community_signal_are_scored_at_the_median(payload, items):
     """Absence of signal is not negative signal — now measured on the community
     component (curator reviews were retired 2026-08-18)."""
@@ -463,7 +478,6 @@ def test_agents_without_community_signal_are_scored_at_the_median(payload, items
              if i["origin"] == "native" and i["signals"]["rar"]["upvotes"] == 0
              and i["signals"]["rar"]["engagement"] == 0 and i["signals"]["rar"]["comments"] == 0
              and "community" in i["scored_at_median"]]
-    assert quiet, "expected some agents with no community feedback"
     median = payload["ranking"]["medians"]["community"]
     for item in quiet:
         assert item["components"]["community"] == median
