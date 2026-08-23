@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-23T23:29:55.995222+00:00",
+  "generated_at": "2026-08-23T23:32:40.966741+00:00",
   "stats": {
     "total_agents": 310,
     "total_swarms": 82,
@@ -17105,7 +17105,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/rapp",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "display_name": "RappAgent",
       "description": "Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map.",
       "author": "Kody Wildfeuer",
@@ -17129,27 +17129,31 @@
       ],
       "_file": "agents/@rapp/rapp_agent.py",
       "_install_filename": "rar_rapp_rapp_agent.py",
-      "_sha256": "941c9d432aabb2a4ff2ce22295c1433d6d169be9d5ed82ae1f2abecc1ced2969",
+      "_sha256": "137f52017fe47f6263fe54b15baa5cdd65d86f664debbe4e26cbbd835f4abedb",
       "_lifecycle": "notarized",
-      "_receipt": "rar_e0a79191dbb7b014b146ea4cc30d5077fb66a91bfb12d5eb35c888a8406b8b1c",
+      "_receipt": "rar_5386ce1a0189ec1a8730d701ef8faa4e8653153e792debd454abaa044261a248",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": null,
+        "issue": 587,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
           "manifest",
+          "namespace",
           "content_sha256",
+          "base_precondition",
+          "security_scan",
           "registry_build",
+          "card_forge",
           "full_test_suite"
         ]
       },
       "_seed": 6614668339448129688,
-      "_size_kb": 173.4,
-      "_lines": 2963,
+      "_size_kb": 172.6,
+      "_lines": 2979,
       "_has_card": true,
       "_added_at": "2026-06-09T21:40:04-04:00",
       "_first_commit_sha": "7b2333f1ee396314f2e926e60282a5904e3fc07c",

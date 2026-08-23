@@ -74,7 +74,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "display_name": "RappAgent",
     "description": ("Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map."),
     "author": "Kody Wildfeuer",
@@ -192,11 +192,14 @@ DASHBOARDS = {"rapp-god": f"https://{RAPP_GOD.split('/')[0]}.github.io/rapp-god/
 RAR_RAW = os.environ.get("RAPP_RAR_RAW", f"{_RAW}/kody-w/RAR/main/agents")
 STORE_INDEX = os.environ.get("RAPPSTORE_URL", f"{_RAW}/kody-w/RAPP_Store/main/index.json")
 SENSE_INDEX = os.environ.get("RAPP_SENSE_URL", f"{_RAW}/kody-w/RAPP_Sense_Store/main/index.json")
-# the drift triangle: rapp-god + rapp-map both publish the SAME ecosystem-spec.json
-SPEC_GOD_URL = os.environ.get("RAPP_SPEC_GOD",
-                              f"{_RAW}/kody-w/rapp-god/main/api/v1/ecosystem-spec.json")
-SPEC_MAP_URL = os.environ.get("RAPP_SPEC_MAP",
-                              f"{_RAW}/kody-w/rapp-map/main/ecosystem-spec.json")
+RAPP1_SPEC_COMMIT = "d2cd5abed48d3f52b86bbb975ac3558286d1db41"
+RAPP1_SPEC_URL = (
+    f"{_RAW}/kody-w/rapp-1/{RAPP1_SPEC_COMMIT}/SPEC.md"
+)
+RAPP1_SPEC_BYTES = 41952
+RAPP1_SPEC_SHA256 = (
+    "cea7847f98f9751734995f46fd4e1bde211c8eb9d03dbbb477934213865bb91a"
+)
 
 # need-keyword → {provides, source, native?}. `native:true` means THIS agent
 # already does it (route names the action); else `install` fetches the provider.
@@ -475,6 +478,19 @@ def _fetch_status(url, timeout=10):
             return r.read().decode("utf-8", "replace"), 200
     except urllib.error.HTTPError as e:
         return None, e.code
+    except Exception:
+        return None, None
+
+
+def _fetch_bytes_status(url, timeout=10):
+    """Offline-safe exact-octet GET → (bytes|None, http_status|None)."""
+    import urllib.error
+    import urllib.request
+    try:
+        with urllib.request.urlopen(url, timeout=timeout) as response:
+            return response.read(), response.status
+    except urllib.error.HTTPError as error:
+        return None, error.code
     except Exception:
         return None, None
 
@@ -2059,51 +2075,51 @@ class RappAgent(BasicAgent):
                                   "local_cubbies": n_cubbies},
                          note="standing = identity floor + memory depth + lineage + estate breadth + cubbies.")
 
-    # ── verify: THE DRIFT-TRIANGLE self-check (god ≡ map, enum ⊇ required) ──
+    # ── verify: exact immutable RAPP/1 authority bytes ───────────────────
     def _verify(self, kwargs, ctx):
         enum = list(self.metadata["parameters"]["properties"]["action"]["enum"])
-        god_text, god_status = _fetch_status(SPEC_GOD_URL)
-        map_text, map_status = _fetch_status(SPEC_MAP_URL)
-        # offline: no network at all → degrade, report we can only self-describe
-        if god_status is None and map_status is None:
-            return self._env("verify", "offline", action_enum=sorted(enum),
-                             god_spec=SPEC_GOD_URL, map_spec=SPEC_MAP_URL,
-                             note=("offline — `verify` needs network to fetch the two "
-                                   "ecosystem-spec.json copies (rapp-god + rapp-map) and prove "
-                                   "they're byte-identical. Re-run online. Until then, the agent "
-                                   "exposes %d actions." % len(enum)))
-        # not-yet-published: both 404 (or one 404 + other offline)
-        if (god_status == 404 or god_status is None) and (map_status == 404 or map_status is None):
-            return self._env("verify", "no_spec", action_enum=sorted(enum),
-                             god_status=god_status, map_status=map_status,
-                             god_spec=SPEC_GOD_URL, map_spec=SPEC_MAP_URL,
-                             note=("spec not yet published (404) — the rapp-god/rapp-map "
-                                   "ecosystem-spec.json doesn't exist yet. Nothing to verify "
-                                   "against; the spec author should publish it with "
-                                   "required_actions[] = this agent's action enum."))
-        god_sha = hashlib.sha256(god_text.encode()).hexdigest() if god_text else None
-        map_sha = hashlib.sha256(map_text.encode()).hexdigest() if map_text else None
-        identical = bool(god_sha and map_sha and god_sha == map_sha)
-        spec = None
-        for t in (god_text, map_text):
-            if t:
-                try:
-                    spec = json.loads(t); break
-                except ValueError:
-                    pass
-        required = (spec or {}).get("required_actions", []) if spec else []
-        enum_set = set(enum)
-        missing = sorted(set(required) - enum_set)
-        extra = sorted(enum_set - set(required)) if required else []
-        drift = bool((not identical and god_sha and map_sha) or missing)
-        return self._env("verify", "success",
-                         god_map_identical=identical, god_sha256=god_sha, map_sha256=map_sha,
-                         spec_version=(spec or {}).get("version") or (spec or {}).get("spec_version"),
-                         required_actions=required, missing_actions=missing, extra_actions=extra,
-                         drift=drift,
-                         note=("drift triangle: rapp-god ≡ rapp-map AND this agent's enum ⊇ "
-                               "required_actions. " + ("DRIFT DETECTED — reconcile." if drift
-                               else "all green — no drift.")))
+        raw, http_status = _fetch_bytes_status(RAPP1_SPEC_URL)
+        if raw is None:
+            return self._env(
+                "verify",
+                "offline" if http_status is None else "unavailable",
+                action_enum=sorted(enum),
+                authority_url=RAPP1_SPEC_URL,
+                authority_http_status=http_status,
+                mirror_contract="retired",
+                active_byte_identical_mirrors=[],
+                drift=True,
+                note=(
+                    "exact RAPP/1 authority bytes could not be fetched; "
+                    "no mirror response was accepted as authority"
+                ),
+            )
+        actual_sha256 = hashlib.sha256(raw).hexdigest()
+        exact = (
+            http_status == 200
+            and len(raw) == RAPP1_SPEC_BYTES
+            and actual_sha256 == RAPP1_SPEC_SHA256
+        )
+        return self._env(
+            "verify",
+            "success" if exact else "drift",
+            action_enum=sorted(enum),
+            authority_url=RAPP1_SPEC_URL,
+            authority_commit=RAPP1_SPEC_COMMIT,
+            authority_expected_bytes=RAPP1_SPEC_BYTES,
+            authority_actual_bytes=len(raw),
+            authority_expected_sha256=RAPP1_SPEC_SHA256,
+            authority_actual_sha256=actual_sha256,
+            authority_exact=exact,
+            mirror_contract="retired",
+            active_byte_identical_mirrors=[],
+            drift=not exact,
+            note=(
+                "exact immutable RAPP/1 authority verified"
+                if exact
+                else "RAPP/1 authority bytes differ from the pinned contract"
+            ),
+        )
 
     # ── on-device cubby ops ──
     def _cubby(self, action, kwargs, ctx):

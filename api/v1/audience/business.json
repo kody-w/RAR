@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-23T23:29:58Z",
+  "generated": "2026-08-23T23:31:23Z",
   "count": 307,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
@@ -10267,7 +10267,7 @@
       "name": "@rapp/rapp",
       "display_name": "RappAgent",
       "description": "Navigates the whole RAPP estate — identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search — and serves the spec map.",
-      "version": "1.0.6",
+      "version": "1.0.7",
       "publisher": "@rapp",
       "author": "Kody Wildfeuer",
       "category": "core",
@@ -10293,11 +10293,11 @@
         "path": "agents/@rapp/rapp_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/rapp_agent.py",
-        "sha256": "941c9d432aabb2a4ff2ce22295c1433d6d169be9d5ed82ae1f2abecc1ced2969"
+        "sha256": "137f52017fe47f6263fe54b15baa5cdd65d86f664debbe4e26cbbd835f4abedb"
       },
       "stats": {
-        "lines": 2963,
-        "size_kb": 173.4,
+        "lines": 2979,
+        "size_kb": 172.6,
         "added_at": "2026-06-09T21:40:04-04:00"
       }
     },

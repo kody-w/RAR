@@ -3257,15 +3257,15 @@
       "version": "1.0.2"
     },
     "@rapp/rapp": {
-      "canonical_path": "agents/@rapp/rapp_agent.py",
-      "latest_receipt": "rar_e0a79191dbb7b014b146ea4cc30d5077fb66a91bfb12d5eb35c888a8406b8b1c",
+      "status": "active",
+      "version": "1.0.7",
+      "quality_tier": "official",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "quality_tier": "official",
-      "sha256": "941c9d432aabb2a4ff2ce22295c1433d6d169be9d5ed82ae1f2abecc1ced2969",
-      "status": "active",
-      "updated_at": "2026-07-26T02:09:02.638179+00:00",
-      "version": "1.0.6"
+      "canonical_path": "agents/@rapp/rapp_agent.py",
+      "sha256": "137f52017fe47f6263fe54b15baa5cdd65d86f664debbe4e26cbbd835f4abedb",
+      "latest_receipt": "rar_5386ce1a0189ec1a8730d701ef8faa4e8653153e792debd454abaa044261a248",
+      "updated_at": "2026-08-23T23:31:01.058072+00:00"
     },
     "@rapp/rapp_publish_agent": {
       "canonical_path": "agents/@rapp/rapp_publish_agent.py",
@@ -3676,5 +3676,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-23T23:28:20.333221+00:00"
+  "updated_at": "2026-08-23T23:31:01.058072+00:00"
 }

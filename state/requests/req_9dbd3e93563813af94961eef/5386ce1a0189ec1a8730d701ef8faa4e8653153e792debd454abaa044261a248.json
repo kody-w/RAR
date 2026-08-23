@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@rapp/rapp",
+  "applied_at": "2026-08-23T23:31:01.058072+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "rar_e0a79191dbb7b014b146ea4cc30d5077fb66a91bfb12d5eb35c888a8406b8b1c",
   "base_lifecycle_sha256": "941c9d432aabb2a4ff2ce22295c1433d6d169be9d5ed82ae1f2abecc1ced2969",
   "base_lifecycle_version": "1.0.6",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-08-23T23:04:08Z",
   "publisher": "@rapp",
   "reason": "Retire the unreachable rapp-god/rapp-map mirror triangle and verify only the exact immutable RAPP/1 rev-5 authority bytes at d2cd5abed48d3f52b86bbb975ac3558286d1db41. Report mirror_contract retired and never treat 404/private responses as mirror content.",
+  "receipt": "rar_5386ce1a0189ec1a8730d701ef8faa4e8653153e792debd454abaa044261a248",
   "repository_id": 1200565697,
   "request_id": "req_9dbd3e93563813af94961eef",
   "revision_id": "5386ce1a0189ec1a8730d701ef8faa4e8653153e792debd454abaa044261a248",
@@ -29,5 +35,5 @@
   "slug": "rapp_agent",
   "source_body_sha256": "de9b2a85b8eee6362da3a828217f2328387532ab6741c8f850e29f680316e3c0",
   "source_url": "https://gist.githubusercontent.com/kody-w/ca750b2704486fb37a015a555aabad32/raw/49c51754ff911eec2398e60bca189fd7884048bf/rapp_agent.py",
-  "status": "pending_review"
+  "status": "applied"
 }
