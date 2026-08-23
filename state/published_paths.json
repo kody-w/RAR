@@ -4,8 +4,8 @@
   "policy": "Append-only. Every path listed here has been published on main and must resolve forever. Add freely. Edit in place. Deprecate with a label. Never move, never rename, never delete.",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "cdn_base": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main",
-  "generated": "2026-08-19T02:31:18Z",
-  "count": 349,
+  "generated": "2026-08-23T23:09:03Z",
+  "count": 352,
   "paths": {
     "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py": {
       "name": "@aibast-agents-library/account_intelligence",
@@ -1402,6 +1402,18 @@
     "agents/@kody-w/kody2day_studio_agent.py": {
       "name": "@kody-w/kody2day_studio_agent",
       "first_seen": "2026-08-19T02:10:51Z"
+    },
+    "agents/@cat-agent-skills/action_items_todo_agent.py": {
+      "name": "@cat-agent-skills/action_items_todo",
+      "first_seen": "2026-08-23T23:09:03Z"
+    },
+    "agents/@cat-agent-skills/clipchamp_video_agent.py": {
+      "name": "@cat-agent-skills/clipchamp_video",
+      "first_seen": "2026-08-23T23:09:03Z"
+    },
+    "agents/@cat-agent-skills/explainer_video_agent.py": {
+      "name": "@cat-agent-skills/explainer_video",
+      "first_seen": "2026-08-23T23:09:03Z"
     }
   }
 }

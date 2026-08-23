@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-23"
+ },
+ "action": "agent.create",
+ "agent": "@cat-agent-skills/explainer_video",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6"
+ },
+ "canonical_path": "agents/@cat-agent-skills/explainer_video_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-23T23:08:41.352721+00:00",
+ "id": "rar_7dfa8124dcd20047abdefe3e8ef63619ddbef404fbcf175dfed339f8c039e563",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_7dfa8124dcd20047abdefe3e",
+ "revision_id": "7dfa8124dcd20047abdefe3e8ef63619ddbef404fbcf175dfed339f8c039e563",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "materialize newly indexed aggregated agents"
+ },
+ "version": "2.0.0"
+}

@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-08-19T02:31:18Z",
-  "count": 201,
+  "generated": "2026-08-23T23:09:10Z",
+  "count": 204,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -907,6 +907,43 @@
       }
     },
     {
+      "id": "cat-agent-skills__action_items_todo",
+      "name": "@cat-agent-skills/action_items_todo",
+      "display_name": "Action Items to To Do",
+      "description": "Watches your Teams chats, meeting transcripts, and Outlook mail for things people actually asked you to do, and files each one as a Microsoft To Do task with a due date, priority, and source link.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Matteo Pagani",
+      "category": "productivity",
+      "tags": [
+        "productivity",
+        "automation",
+        "tasks",
+        "teams",
+        "email",
+        "meetings",
+        "microsoft_365",
+        "action_items"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/action_items_todo_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/action_items_todo_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/action_items_todo_agent.py",
+        "sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.0,
+        "added_at": null
+      }
+    },
+    {
       "id": "cat-agent-skills__agent_evaluation_designer",
       "name": "@cat-agent-skills/agent_evaluation_designer",
       "display_name": "Agent Evaluation Designer",
@@ -1528,6 +1565,43 @@
       }
     },
     {
+      "id": "cat-agent-skills__clipchamp_video",
+      "name": "@cat-agent-skills/clipchamp_video",
+      "display_name": "Clipchamp Narrated Demo Video",
+      "description": "Produce a polished, narrated demo video of a live web app or Copilot Studio agent — real screen-flow footage under an AI (Ava neural) voiceover — either fully headless (ffmpeg + edge-tts) or assembled in the Clipchamp web UI as an editable project.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Phi-Lay Nguyen",
+      "category": "creative",
+      "tags": [
+        "video",
+        "demo",
+        "narration",
+        "playwright",
+        "ffmpeg",
+        "copilot_studio",
+        "clipchamp",
+        "tts"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/clipchamp_video_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/clipchamp_video_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/clipchamp_video_agent.py",
+        "sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 9.1,
+        "added_at": null
+      }
+    },
+    {
       "id": "cat-agent-skills__clt_hr_assistant",
       "name": "@cat-agent-skills/clt_hr_assistant",
       "display_name": "Assistente CLT para RH",
@@ -1970,6 +2044,39 @@
         "lines": 188,
         "size_kb": 9.2,
         "added_at": "2026-07-31T22:43:16-04:00"
+      }
+    },
+    {
+      "id": "cat-agent-skills__explainer_video",
+      "name": "@cat-agent-skills/explainer_video",
+      "display_name": "Explainer Video",
+      "description": "Create narrated, captioned 1080p explainer videos with researched scripts, generated b-roll, and supplied screenshots.",
+      "version": "2.0.0",
+      "publisher": "@cat-agent-skills",
+      "author": "Damien Bird",
+      "category": "creative",
+      "tags": [
+        "video",
+        "education",
+        "training",
+        "communication"
+      ],
+      "quality_tier": "frontier",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@cat-agent-skills/explainer_video_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/explainer_video_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/explainer_video_agent.py",
+        "sha256": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6"
+      },
+      "stats": {
+        "lines": 188,
+        "size_kb": 8.8,
+        "added_at": null
       }
     },
     {

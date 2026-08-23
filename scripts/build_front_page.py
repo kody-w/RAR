@@ -298,6 +298,12 @@ def measure_community(row: dict | None):
         # on first paint, and `engagement: 0` already says the same thing.
         "channels": dict(sorted(channels.items())) if any(channels.values()) else {},
     }
+    if not (
+        upvotes > 0
+        or comments > 0
+        or any(count > 0 for count in channels.values())
+    ):
+        return None, facts
     return saturate(max(value, 0.0), COMMUNITY_SCALE), facts
 
 
