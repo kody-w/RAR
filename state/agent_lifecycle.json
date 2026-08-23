@@ -1199,17 +1199,6 @@
       "updated_at": "2026-08-02T01:35:52.563615+00:00",
       "version": "2.0.0"
     },
-    "@cat-agent-skills/action_items_todo": {
-      "canonical_path": "agents/@cat-agent-skills/action_items_todo_agent.py",
-      "latest_receipt": "rar_3078333e63e3df1dd88238e5303af270216cc35f37c4d9922173f0a526ef254b",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "quality_tier": "frontier",
-      "sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d",
-      "status": "active",
-      "updated_at": "2026-08-23T23:08:41.352721+00:00",
-      "version": "2.0.0"
-    },
     "@cat-agent-skills/agent_evaluation_designer": {
       "canonical_path": "agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
       "latest_receipt": "rar_6f0481e697989c02b21546d5800cc2dbe19aa0c00205b4a7e37941cf7fb5d6d5",
@@ -1419,17 +1408,6 @@
       "updated_at": "2026-08-02T01:35:52.563615+00:00",
       "version": "1.1.0"
     },
-    "@cat-agent-skills/clipchamp_video": {
-      "canonical_path": "agents/@cat-agent-skills/clipchamp_video_agent.py",
-      "latest_receipt": "rar_2570bf409718c3ba0ba6c47225824c2c63305c1e0640c0c403de200e41044c1c",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "quality_tier": "frontier",
-      "sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8",
-      "status": "active",
-      "updated_at": "2026-08-23T23:08:41.352721+00:00",
-      "version": "2.0.0"
-    },
     "@cat-agent-skills/clt_hr_assistant": {
       "canonical_path": "agents/@cat-agent-skills/clt_hr_assistant_agent.py",
       "latest_receipt": "rar_33f697487ce816ec466d56f3bd175bbd14559006042b1b9c1d93009ec0606641",
@@ -1627,17 +1605,6 @@
       "status": "active",
       "updated_at": "2026-08-02T01:35:52.563615+00:00",
       "version": "3.0.1"
-    },
-    "@cat-agent-skills/explainer_video": {
-      "canonical_path": "agents/@cat-agent-skills/explainer_video_agent.py",
-      "latest_receipt": "rar_7dfa8124dcd20047abdefe3e8ef63619ddbef404fbcf175dfed339f8c039e563",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "quality_tier": "frontier",
-      "sha256": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6",
-      "status": "active",
-      "updated_at": "2026-08-23T23:08:41.352721+00:00",
-      "version": "2.0.0"
     },
     "@cat-agent-skills/gantt_chart_generator": {
       "canonical_path": "agents/@cat-agent-skills/gantt_chart_generator_agent.py",
@@ -3676,5 +3643,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-23T23:08:41.352721+00:00"
+  "updated_at": "2026-08-19T02:27:15.246835+00:00"
 }

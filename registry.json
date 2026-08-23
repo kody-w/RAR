@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-23T23:10:28.475879+00:00",
+  "generated_at": "2026-08-19T02:31:16.853265+00:00",
   "stats": {
-    "total_agents": 310,
+    "total_agents": 307,
     "total_swarms": 82,
     "total_stubs": 2,
     "publishers": 10,
@@ -5688,73 +5688,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@cat-agent-skills/action_items_todo",
-      "version": "2.0.0",
-      "display_name": "Action Items to To Do",
-      "description": "Watches your Teams chats, meeting transcripts, and Outlook mail for things people actually asked you to do, and files each one as a Microsoft To Do task with a due date, priority, and source link.",
-      "author": "Matteo Pagani",
-      "tags": [
-        "productivity",
-        "automation",
-        "tasks",
-        "teams",
-        "email",
-        "meetings",
-        "microsoft_365",
-        "action_items"
-      ],
-      "category": "productivity",
-      "quality_tier": "frontier",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "aggregated": true,
-        "source_id": "cat-agent-skills",
-        "source_name": "CAT Agent Skills",
-        "source_url": "https://microsoft.github.io/cat-agent-skills/",
-        "upstream_slug": "action-items-todo",
-        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#action-items-todo",
-        "upstream_version": "1.0.0",
-        "license": "unverified",
-        "license_verified": false,
-        "content_digest": "ad7ddb14bd369108"
-      },
-      "platforms": [
-        "Scout"
-      ],
-      "_file": "agents/@cat-agent-skills/action_items_todo_agent.py",
-      "_install_filename": "rar_cat_agent_skills_action_items_todo_agent.py",
-      "_sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d",
-      "_lifecycle": "notarized",
-      "_receipt": "rar_3078333e63e3df1dd88238e5303af270216cc35f37c4d9922173f0a526ef254b",
-      "_controller": {
-        "github_id": 1735900,
-        "github_login": "kody-w"
-      },
-      "_provenance": {
-        "issue": null,
-        "submitted_by": "kody-w",
-        "accepted_by": "kody-w",
-        "checks": [
-          "manifest",
-          "content_sha256",
-          "registry_build",
-          "full_test_suite"
-        ]
-      },
-      "_seed": 31640234208504327331,
-      "_size_kb": 9.0,
-      "_lines": 188,
-      "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
-      "_card_sha256": "59ea552b51ba6ccf46199225baacc84c0778a69d6a8f1778deb317d80df0c7fc"
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@cat-agent-skills/agent_evaluation_designer",
       "version": "2.0.0",
       "display_name": "Agent Evaluation Designer",
@@ -7068,73 +7001,6 @@
     },
     {
       "schema": "rapp-agent/1.0",
-      "name": "@cat-agent-skills/clipchamp_video",
-      "version": "2.0.0",
-      "display_name": "Clipchamp Narrated Demo Video",
-      "description": "Produce a polished, narrated demo video of a live web app or Copilot Studio agent \u2014 real screen-flow footage under an AI (Ava neural) voiceover \u2014 either fully headless (ffmpeg + edge-tts) or assembled in the Clipchamp web UI as an editable project.",
-      "author": "Phi-Lay Nguyen",
-      "tags": [
-        "video",
-        "demo",
-        "narration",
-        "playwright",
-        "ffmpeg",
-        "copilot_studio",
-        "clipchamp",
-        "tts"
-      ],
-      "category": "creative",
-      "quality_tier": "frontier",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "aggregated": true,
-        "source_id": "cat-agent-skills",
-        "source_name": "CAT Agent Skills",
-        "source_url": "https://microsoft.github.io/cat-agent-skills/",
-        "upstream_slug": "clipchamp-video",
-        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#clipchamp-video",
-        "upstream_version": "1.0.0",
-        "license": "unverified",
-        "license_verified": false,
-        "content_digest": "c2e348b1022ad7a1"
-      },
-      "platforms": [
-        "Scout"
-      ],
-      "_file": "agents/@cat-agent-skills/clipchamp_video_agent.py",
-      "_install_filename": "rar_cat_agent_skills_clipchamp_video_agent.py",
-      "_sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8",
-      "_lifecycle": "notarized",
-      "_receipt": "rar_2570bf409718c3ba0ba6c47225824c2c63305c1e0640c0c403de200e41044c1c",
-      "_controller": {
-        "github_id": 1735900,
-        "github_login": "kody-w"
-      },
-      "_provenance": {
-        "issue": null,
-        "submitted_by": "kody-w",
-        "accepted_by": "kody-w",
-        "checks": [
-          "manifest",
-          "content_sha256",
-          "registry_build",
-          "full_test_suite"
-        ]
-      },
-      "_seed": 73657463708058657429,
-      "_size_kb": 9.1,
-      "_lines": 188,
-      "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
-      "_card_sha256": "ab74c1a78c9cd3721220ee937e81a3287348cf05a58a321608f703c4f799614b"
-    },
-    {
-      "schema": "rapp-agent/1.0",
       "name": "@cat-agent-skills/clt_hr_assistant",
       "version": "1.1.0",
       "display_name": "Assistente CLT para RH",
@@ -8358,69 +8224,6 @@
       "_seed_aliases": [
         7994811168206501417
       ]
-    },
-    {
-      "schema": "rapp-agent/1.0",
-      "name": "@cat-agent-skills/explainer_video",
-      "version": "2.0.0",
-      "display_name": "Explainer Video",
-      "description": "Create narrated, captioned 1080p explainer videos with researched scripts, generated b-roll, and supplied screenshots.",
-      "author": "Damien Bird",
-      "tags": [
-        "video",
-        "education",
-        "training",
-        "communication"
-      ],
-      "category": "creative",
-      "quality_tier": "frontier",
-      "requires_env": [],
-      "dependencies": [
-        "@rapp/basic_agent"
-      ],
-      "source": {
-        "aggregated": true,
-        "source_id": "cat-agent-skills",
-        "source_name": "CAT Agent Skills",
-        "source_url": "https://microsoft.github.io/cat-agent-skills/",
-        "upstream_slug": "explainer-video",
-        "upstream_url": "https://microsoft.github.io/cat-agent-skills/#explainer-video",
-        "upstream_version": "1.0.0",
-        "license": "unverified",
-        "license_verified": false,
-        "content_digest": "3922dbf6d24c64ac"
-      },
-      "platforms": [
-        "Cowork"
-      ],
-      "_file": "agents/@cat-agent-skills/explainer_video_agent.py",
-      "_install_filename": "rar_cat_agent_skills_explainer_video_agent.py",
-      "_sha256": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6",
-      "_lifecycle": "notarized",
-      "_receipt": "rar_7dfa8124dcd20047abdefe3e8ef63619ddbef404fbcf175dfed339f8c039e563",
-      "_controller": {
-        "github_id": 1735900,
-        "github_login": "kody-w"
-      },
-      "_provenance": {
-        "issue": null,
-        "submitted_by": "kody-w",
-        "accepted_by": "kody-w",
-        "checks": [
-          "manifest",
-          "content_sha256",
-          "registry_build",
-          "full_test_suite"
-        ]
-      },
-      "_seed": 58500491637519036813,
-      "_size_kb": 8.8,
-      "_lines": 188,
-      "_has_card": true,
-      "_added_at": null,
-      "_first_commit_sha": null,
-      "_latest_commit_sha": null,
-      "_card_sha256": "e3dc20676ed92a662718d49069a03694370a6b1557635ff0e48827a9b3c64117"
     },
     {
       "schema": "rapp-agent/1.0",
