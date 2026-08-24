@@ -1623,6 +1623,21 @@
       "url": "https://github.com/kody-w/RAR/discussions/425",
       "number": 425
     },
+    "@cat-agent-skills/action_items_todo": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/592",
+      "number": 592
+    },
     "@cat-agent-skills/agent_evaluation_designer": {
       "upvotes": 0,
       "downloads": 0,
@@ -1908,6 +1923,21 @@
       "url": "https://github.com/kody-w/RAR/discussions/444",
       "number": 444
     },
+    "@cat-agent-skills/clipchamp_video": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/593",
+      "number": 593
+    },
     "@cat-agent-skills/clt_hr_assistant": {
       "upvotes": 0,
       "downloads": 0,
@@ -2177,6 +2207,21 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/457",
       "number": 457
+    },
+    "@cat-agent-skills/explainer_video": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/594",
+      "number": 594
     },
     "@cat-agent-skills/gantt_chart_generator": {
       "upvotes": 0,
