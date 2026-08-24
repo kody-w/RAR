@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-23T05:49:33Z",
+ "generated_at": "2026-08-24T05:57:08Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,10 +9,10 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 107,
-  "size_kb": 33361,
+  "open_issues": 108,
+  "size_kb": 21878,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-23T04:31:06Z",
+  "pushed_at": "2026-08-24T04:39:39Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 307,
+  "agents": 310,
   "swarms": 82,
   "publishers": 10,
   "categories": 24,
-  "total_lines": 178314,
-  "total_kb": 8427.0,
+  "total_lines": 178894,
+  "total_kb": 8453.1,
   "votes": 4,
   "upvotes": 4,
   "voters": 2,
@@ -244,7 +244,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1865129,
+  "rank": 1871517,
   "agent_hits": 18,
   "files": [
    {
@@ -571,8 +571,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2963,
-    "size_kb": 173.4,
+    "lines": 2979,
+    "size_kb": 172.6,
     "added_at": "2026-06-09T21:40:04-04:00",
     "file": "agents/@rapp/rapp_agent.py",
     "description": "Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map."
@@ -715,6 +715,57 @@
    }
   ],
   "newest": [
+   {
+    "name": "@cat-agent-skills/action_items_todo",
+    "display_name": "Action Items to To Do",
+    "publisher": "@cat-agent-skills",
+    "category": "productivity",
+    "tier": "frontier",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 188,
+    "size_kb": 9.0,
+    "added_at": "2026-08-23T19:15:32-04:00",
+    "file": "agents/@cat-agent-skills/action_items_todo_agent.py",
+    "description": "Watches your Teams chats, meeting transcripts, and Outlook mail for things people actually asked you to do, and files each one as a Microsoft To Do task with a due date, priority, and source link."
+   },
+   {
+    "name": "@cat-agent-skills/clipchamp_video",
+    "display_name": "Clipchamp Narrated Demo Video",
+    "publisher": "@cat-agent-skills",
+    "category": "creative",
+    "tier": "frontier",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 188,
+    "size_kb": 9.1,
+    "added_at": "2026-08-23T19:15:32-04:00",
+    "file": "agents/@cat-agent-skills/clipchamp_video_agent.py",
+    "description": "Produce a polished, narrated demo video of a live web app or Copilot Studio agent \u2014 real screen-flow footage under an AI (Ava neural) voiceover \u2014 either fully headless (ffmpeg + edge-tts) or assembled in the Clipchamp web UI as an editable project."
+   },
+   {
+    "name": "@cat-agent-skills/explainer_video",
+    "display_name": "Explainer Video",
+    "publisher": "@cat-agent-skills",
+    "category": "creative",
+    "tier": "frontier",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 188,
+    "size_kb": 8.8,
+    "added_at": "2026-08-23T19:15:32-04:00",
+    "file": "agents/@cat-agent-skills/explainer_video_agent.py",
+    "description": "Create narrated, captioned 1080p explainer videos with researched scripts, generated b-roll, and supplied screenshots."
+   },
    {
     "name": "@kody-w/kody2day_studio_agent",
     "display_name": "Kody2day Studio",
@@ -918,57 +969,6 @@
     "added_at": "2026-08-17T18:03:09-04:00",
     "file": "agents/@cat-agent-skills/wcag_power_platform_agent.py",
     "description": "Makes everything the agent builds or reviews conform to WCAG 2.1 AA \u2014 HTML pages, SPAs, theming, PCF controls, model-driven and canvas apps, and Power Pages."
-   },
-   {
-    "name": "@cat-agent-skills/work_iq_signalboard",
-    "display_name": "Work IQ Signalboard",
-    "publisher": "@cat-agent-skills",
-    "category": "general",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 188,
-    "size_kb": 9.0,
-    "added_at": "2026-08-17T18:03:09-04:00",
-    "file": "agents/@cat-agent-skills/work_iq_signalboard_agent.py",
-    "description": "Turn four weeks of Calendar, Mail, and Teams chat activity into a colorful dashboard of reconciled Work IQ counts."
-   },
-   {
-    "name": "@kody-w/factory",
-    "display_name": "RAPP to Copilot Studio Factory",
-    "publisher": "@kody-w",
-    "category": "pipeline",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 495,
-    "size_kb": 18.1,
-    "added_at": "2026-08-11T17:32:02Z",
-    "file": "agents/@kody-w/factory_agent.py",
-    "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft."
-   },
-   {
-    "name": "@kody-w/copilot_studio_parity_deploy",
-    "display_name": "Copilot Studio Parity Deploy",
-    "publisher": "@kody-w",
-    "category": "pipeline",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 7028,
-    "size_kb": 245.5,
-    "added_at": "2026-08-11T17:28:15Z",
-    "file": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
-    "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft."
    }
   ],
   "publishers": [
@@ -983,11 +983,11 @@
    },
    {
     "name": "@cat-agent-skills",
-    "agents": 90,
+    "agents": 93,
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 16920,
+    "lines": 17484,
     "rating": 0.0
    },
    {
@@ -1005,7 +1005,7 @@
     "downloads": 8,
     "score": 0,
     "reviews": 0,
-    "lines": 14179,
+    "lines": 14195,
     "rating": 0.0
    },
    {
@@ -1073,7 +1073,7 @@
    },
    {
     "name": "productivity",
-    "agents": 42,
+    "agents": 43,
     "downloads": 4,
     "score": 0,
     "reviews": 0
@@ -1122,7 +1122,7 @@
    },
    {
     "name": "creative",
-    "agents": 8,
+    "agents": 10,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -1235,7 +1235,7 @@
   ],
   "tiers": {
    "community": 166,
-   "frontier": 90,
+   "frontier": 93,
    "official": 44,
    "verified": 5,
    "private": 2
