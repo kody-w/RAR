@@ -12,7 +12,7 @@
       "license": "unverified",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 93,
+      "item_count": 95,
       "source_downloads": 1258
     }
   ],
@@ -160,6 +160,68 @@
         "downloads": 142,
         "rating": 5,
         "featured": true
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/agent_performance_triage",
+      "source_id": "cat-agent-skills",
+      "source_slug": "agent-performance-triage",
+      "name": "Agent Performance Triage",
+      "description": "Turn a live agent's analytics and transcripts into a diagnosis and a prioritized improvement backlog.",
+      "kind": "skill",
+      "tags": [
+        "copilot-studio",
+        "analytics",
+        "optimization",
+        "operations",
+        "post-launch",
+        "backlog",
+        "assessment",
+        "monitoring"
+      ],
+      "platforms": [
+        "Copilot Studio",
+        "Cowork"
+      ],
+      "author": "Marco Zama",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#agent-performance-triage",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/agent_red_team",
+      "source_id": "cat-agent-skills",
+      "source_slug": "agent-red-team",
+      "name": "Agent Red Team",
+      "description": "Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes.",
+      "kind": "skill",
+      "tags": [
+        "copilot-studio",
+        "security",
+        "prompt-injection",
+        "governance",
+        "responsible-ai",
+        "testing",
+        "risk",
+        "assessment"
+      ],
+      "platforms": [
+        "Copilot Studio",
+        "Cowork"
+      ],
+      "author": "Marco Zama",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#agent-red-team",
+      "source_signal": {
+        "downloads": 0
       }
     },
     {
@@ -2660,7 +2722,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#wikipedia-human-style-writing",
       "source_signal": {
         "downloads": 0,
-        "rating": 1
+        "rating": 2
       }
     },
     {
@@ -2725,7 +2787,7 @@
   ],
   "totals": {
     "sources": 1,
-    "items": 93,
+    "items": 95,
     "source_downloads": 1258
   }
 }
