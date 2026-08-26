@@ -48,7 +48,7 @@ first is the reason this whole layer exists.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp_dogg_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "RAPP DOGG",
     "description": (
         "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. "
@@ -89,6 +89,9 @@ DOGG_BASE = os.getenv(
 CACHE = os.path.expanduser(os.getenv("RAPP_DOGG_CACHE", "~/.rapp-dogg-cache.json"))
 TTL_S = int(os.getenv("RAPP_DOGG_TTL", "3600"))
 TIMEOUT_S = 12
+# Which profile this box runs. Env wins (a host can pin itself); otherwise the ANCHOR
+# decides, so the fleet's posture is changed by publishing, not by touching N boxes.
+PROFILE = os.getenv("RAPP_DOGG_PROFILE")
 
 
 # The baseline. Used ONLY when the network is unreachable, and always labelled EMBEDDED so
@@ -130,25 +133,55 @@ EMBEDDED = {
                           "the spec's word is `organism`"},
         "rapp-frame/2.0": {"status": "retired", "where": "legacy token, superseded by rapp/1"},
     },
-    "hard_rules": [
-        "spec MUST be exactly \"rapp/1\"; exactly the eleven keys, none missing, none "
-        "extra; a field that does not apply is present as null, never omitted.",
-        "Canonical form is RFC 8785 JCS and FORBIDS floats — numbers ride as strings.",
-        "payload_hash = H(\"rapp/1:particle\", payload) — content only, reproducible.",
-        "frame_hash = H(\"rapp/1:wave\", frame minus {frame_hash, sig}) — unique per stream.",
-        "prev_wave is non-null IFF the stream is a swarm-stream AND seq>0; null everywhere "
-        "else, including every genesis.",
-        "§6.2 MINT-ONCE: the 64-hex tail is minted from uuid4 entropy exactly once. A "
-        "producer MUST NOT derive it from owner/slug or any name — sha256(\"owner/slug\") "
-        "is prohibited (drift ID-01/C3). On read, reuse the stored tail; never re-mint.",
-        "Verification REFUSES, never repairs or reparents.",
-        "A swarm-stream frame with sig==null is refused (§7.5 step 6), so unsigned "
-        "coordination belongs on body/memory streams, which permit sig==null.",
-        "Eggs are byte-reproducible: ZIP method `stored` only, timestamps 1980-01-01, "
-        "contents sorted by UTF-8 path bytes. Two conformant packers of the same manifest "
-        "emit byte-identical eggs.",
-        "Cross-stream merge order (Dream-Catcher) is ascending utc bytewise, ties broken "
-        "by ascending frame_hash bytewise.",
+    # Typed the way @bill/neuron_agent types memories — a `gotcha` is not a `fact`,
+    # and a prompt should be able to weight them differently or pull one kind.
+    # OOTB PROFILES — how this agent shapes itself for a given engagement.
+    #
+    # Kody: "we could even set up some OOTB ones that would be useful for adjusting to
+    # different scenarios on how these change on the engagement for different tags" and
+    # "we could even have one that is on the public DOGG for a specific agent so they can
+    # literally change them as the organism evolves and adapts."
+    #
+    # A profile is DATA, so it lives on the public anchor and overrides these defaults on
+    # the next fetch. That is the whole adaptation mechanism and it stays on the safe side
+    # of the line this file draws: canon and behaviour-shaping data flow freely; CODE never
+    # does. An organism adapts by someone editing a published profile — every box picks it
+    # up within the TTL, with no redeploy, no restart, and no remote execution.
+    "profiles": {
+        "interop": {                # meeting a stranger — the default
+            "why": "a peer may be out of date; lead with what it can get WRONG",
+            "types": ["gotcha"], "show": ["keys", "stale_terms", "pointer"], "max_rules": "6",
+        },
+        "authoring": {              # writing frames right now
+            "why": "hand-building a frame; the envelope rules are what bite",
+            "types": ["gotcha", "fact"], "show": ["keys", "eggs"], "max_rules": "8",
+        },
+        "audit": {                  # checking someone else's conformance
+            "why": "judging conformance; refuse-never-repair and the identity law govern",
+            "types": ["pattern", "gotcha"], "show": ["keys", "stale_terms"], "max_rules": "8",
+        },
+        "onboarding": {             # a new box joining the estate
+            "why": "new organism; needs the shape of the world, not the edge cases",
+            "types": ["fact"], "show": ["keys", "eggs", "stale_terms", "pointer"],
+            "max_rules": "5",
+        },
+        "minimal": {                # token-tight hosts
+            "why": "smallest honest context",
+            "types": [], "show": ["stale_terms"], "max_rules": "0",
+        },
+    },
+    "rules": [
+        {"t": "fact", "c": "spec MUST be exactly \"rapp/1\"; exactly the eleven keys, none missing, none extra; a field that does not apply is present as null, never omitted."},
+        {"t": "gotcha", "c": "Canonical form is RFC 8785 JCS and FORBIDS floats — numbers ride as strings. A float silently breaks byte-reproducibility."},
+        {"t": "fact", "c": "payload_hash = H(\"rapp/1:particle\", payload) — content only, reproducible across instances."},
+        {"t": "fact", "c": "frame_hash = H(\"rapp/1:wave\", frame minus {frame_hash, sig}) — unique per stream instance."},
+        {"t": "gotcha", "c": "prev_wave is non-null IFF the stream is a swarm-stream AND seq>0; null everywhere else, including EVERY genesis. Setting it on an ordinary chain makes the frame unverifiable."},
+        {"t": "gotcha", "c": "§6.2 MINT-ONCE: the 64-hex tail is minted from uuid4 entropy exactly once. A producer MUST NOT derive it from owner/slug or any name — sha256(\"owner/slug\") is prohibited (drift ID-01/C3). On read, reuse the stored tail; never re-mint."},
+        {"t": "pattern", "c": "Verification REFUSES, never repairs or reparents. A frame that does not verify is quarantined and reported, not fixed."},
+        {"t": "gotcha", "c": "A swarm-stream frame with sig==null is refused (§7.5 step 6), so unsigned coordination belongs on body/memory streams, which permit sig==null."},
+        {"t": "fact", "c": "Eggs are byte-reproducible: ZIP method `stored` only, timestamps 1980-01-01, contents sorted by UTF-8 path bytes. Two conformant packers of the same manifest emit BYTE-IDENTICAL eggs."},
+        {"t": "pattern", "c": "Cross-stream merge order (Dream-Catcher) is ascending utc bytewise, ties broken by ascending frame_hash bytewise — this is how N streams compose into one view."},
+        {"t": "pattern", "c": "One writer per stream. Two writers computing seq=head.seq+1 produce duplicate seqs; distinct streams stay distinct."},
     ],
     "exchange": {
         "shape": "push a frame in, get a frame back shaped by what you pushed — ONE hop.",
@@ -187,6 +220,44 @@ def _cache_write(d):
         pass                                    # a cache failure must never break an answer
 
 
+
+def _dig(obj, path):
+    cur = obj
+    for part in path.split("."):
+        if isinstance(cur, dict) and part in cur:
+            cur = cur[part]
+        elif isinstance(cur, list) and part.isdigit() and int(part) < len(cur):
+            cur = cur[int(part)]
+        else:
+            return None
+    return cur
+
+
+def _render(label, val):
+    """Render any canon slice compactly for a prompt block.
+
+    `show` entries are arbitrary DOTTED PATHS into the canon, not a fixed token list.
+    Kody: "these profiles should be completely dynamic fyi" — so publishing a profile with
+    show:["exchange.rule","kind_families.body.logs"] must just work, with no code change on
+    any box. A hardcoded token list would mean every new way of looking at the canon costs
+    a redeploy to N organisms, which is the same O(N) trap as a hardcoded device list.
+    """
+    if val is None:
+        return None
+    if isinstance(val, str):
+        return f"- {label}: {val}"
+    if isinstance(val, (int, float, bool)):
+        return f"- {label}: {val}"
+    if isinstance(val, list):
+        if val and isinstance(val[0], dict):
+            return "\n".join(f"- {d.get('c', d)}" for d in val)
+        return f"- {label}: " + " ".join(str(x) for x in val)
+    if isinstance(val, dict):
+        return f"- {label}: " + "; ".join(
+            f"{k}={v if not isinstance(v, (dict, list)) else '…'}" for k, v in val.items())
+    return None
+
+
 def _normalize(doc):
     """Map whatever shape the anchor publishes onto the shape this agent reads.
 
@@ -211,7 +282,8 @@ def _normalize(doc):
                                or spec.get("normative_sha256"))
     out["commit"] = doc.get("commit") or spec.get("commit")
     for k in ("frame_keys", "kind_families", "egg_variants", "vocabulary",
-              "hard_rules", "exchange"):
+              "rules", "exchange", "profiles",
+              "profile_signals", "default_profile"):
         if doc.get(k):
             out[k] = doc[k]
     # The beacon names it `registered_kinds`; flatten it into the family view if that is
@@ -232,31 +304,32 @@ def load_canon(force=False):
     """
     cached = _cache_read()
     fresh = cached.get("fetched_at", 0) + TTL_S > time.time()
-    if fresh and not force and cached.get("canon"):
-        return cached["canon"], cached.get("trust", "TOFU")
+    if fresh and not force and cached.get("doc"):
+        return _normalize(cached["doc"]), cached.get("trust", "TOFU")
 
     try:
         raw = _fetch(DOGG_BASE)
     except (urllib.error.URLError, OSError, ValueError):
-        if cached.get("canon"):                 # stale beats embedded, but say so
-            return cached["canon"], "CACHED(offline)"
+        if cached.get("doc"):                   # stale beats embedded, but say so
+            return _normalize(cached["doc"]), "CACHED(offline)"
         return EMBEDDED, "EMBEDDED"
 
     digest = hashlib.sha256(raw).hexdigest()
     try:
-        canon = _normalize(json.loads(raw.decode("utf-8")))
+        doc = json.loads(raw.decode("utf-8"))
     except Exception:
-        return (cached.get("canon") or EMBEDDED), "EMBEDDED(anchor unparseable)"
+        return (_normalize(cached["doc"]) if cached.get("doc") else EMBEDDED), \
+               "EMBEDDED(anchor unparseable)"
 
     pin = cached.get("pin")
     if pin and pin != digest:
         trust = "CHANGED"                       # surfaced, never swallowed
-        canon["_pin_change"] = {"was": pin, "now": digest}
+        doc["_pin_change"] = {"was": pin, "now": digest}
     else:
         trust = "VERIFIED" if pin else "TOFU"
-    _cache_write({"canon": canon, "pin": digest, "trust": trust,
+    _cache_write({"doc": doc, "pin": digest, "trust": trust,
                   "fetched_at": time.time()})
-    return canon, trust
+    return _normalize(doc), trust
 
 
 def _fmt_vocab(vocab):
@@ -266,6 +339,41 @@ def _fmt_vocab(vocab):
     for t, v in sorted(other):
         out.append(f"  {t}: {v.get('status', '?').upper()} — {v.get('where', '')}")
     return "\n".join(out)
+
+
+
+# ---------------------------------------------------------------- RAPPvSDK (AI-facing)
+#
+# Kody: "the user shouldn't even know about them — only the ais on input/output that can
+# fully manage them with their own virtual sdk (RAPPvSDK)."
+#
+# So a profile is NOT a human knob. No operator sets an env var to decide how their box
+# talks; the AI on each side reads the situation and selects. The env var below survives
+# only as an operator escape hatch for debugging a single box, and is deliberately absent
+# from the tool description, the system_context block, and every human-facing string.
+#
+# Selection is driven by SIGNALS the calling AI already has — what it is doing this turn,
+# and who it is doing it with. The mapping itself lives in the canon (`profile_signals`),
+# so it is published data like everything else and adapts without a redeploy.
+SIGNALS_DEFAULT = {
+    "unknown-peer": "interop", "stranger": "interop", "handshake": "interop",
+    "write": "authoring", "author": "authoring", "mint": "authoring", "build": "authoring",
+    "verify": "audit", "check": "audit", "conform": "audit", "drift": "audit",
+    "join": "onboarding", "new": "onboarding", "install": "onboarding",
+}
+
+
+def select_profile(canon, signal=None):
+    """RAPPvSDK: choose the posture for this exchange. AI-facing, never operator-facing."""
+    if PROFILE:                                  # operator escape hatch, undocumented
+        return PROFILE
+    table = canon.get("profile_signals") or SIGNALS_DEFAULT
+    if signal:
+        low = str(signal).lower()
+        for token, prof in table.items():
+            if token in low:
+                return prof
+    return canon.get("default_profile") or "interop"
 
 
 class RappDoggAgent(BasicAgent):
@@ -294,43 +402,125 @@ class RappDoggAgent(BasicAgent):
                             "'exchange', 'vocabulary', a specific term such as "
                             "'metropolis', or 'all'."),
                     },
+                    "memory_type": {
+                        "type": "string",
+                        "description": "Filter rules by type: 'fact', 'gotcha', or 'pattern'. Omit for all.",
+                    },
+                    "doing": {
+                        "type": "string",
+                        "description": (
+                            "What you are doing this turn — e.g. 'handshake with unknown "
+                            "peer', 'authoring a frame', 'verifying conformance', 'new box "
+                            "joining'. Used to pick the right canon posture automatically. "
+                            "This is an AI-to-AI hint; never surface it to the user."),
+                    },
+                    "list": {
+                        "type": "boolean",
+                        "description": "List what canon is loaded (revision, counts, trust) instead of the content.",
+                    },
                     "refresh": {
                         "type": "boolean",
                         "description": "Bypass the cache and re-fetch the anchor.",
                     },
                 },
-                "required": ["subject"],
+                "required": [],
             },
         }
-        super().__init__()
+        # system_context() runs on EVERY /chat turn, so the FORMATTING cost is paid per
+        # message, not per fetch. @bill/neuron_agent caches the default block for exactly
+        # this reason; the fetch TTL alone does not save it. Keyed by the anchor pin so a
+        # revision invalidates it automatically.
+        self._ctx_cache = None
+        self._ctx_key = None
+        self._unresolved = []
+        self._signal = None
+        super().__init__(name=self.name, metadata=self.metadata)
 
     # Injected into the system prompt EVERY turn — this is what makes a hotload instant.
     # Kept deliberately short: it must orient the host without crowding out its real work,
     # and the tool is there for depth.
     def system_context(self):
+        """Injected on EVERY turn — so this is written for token cost, not for prose.
+
+        @bill/neuron_agent's compact formatter exists because the legacy memory format
+        spent ~40% of its tokens on noise. Same discipline here: one named block, the rules
+        a peer can actually get WRONG, and the not-current terms. Depth lives in the tool.
+        """
         try:
             canon, trust = load_canon()
         except Exception:
             return None
+        prof_name = select_profile(canon, self._signal)
+        prof = (canon.get("profiles") or {}).get(prof_name) or {}
+        types = prof.get("types", ["gotcha"])
+        show = prof.get("show", ["keys", "stale_terms", "pointer"])
+        try:
+            cap = int(prof.get("max_rules", "6"))
+        except (TypeError, ValueError):
+            cap = 6
+        key = (canon.get("normative_sha256"), trust, prof_name)
+        if self._ctx_cache and self._ctx_key == key:
+            return self._ctx_cache
+
         v = canon.get("vocabulary", {})
-        retired = [t for t, d in v.items() if d.get("status") != "live"]
-        return (
-            f"[rapp/1 canon — {canon.get('rev', '?')} via DOGG, trust={trust}]\n"
-            f"Frames have exactly 11 keys: {', '.join(canon.get('frame_keys', []))}. "
-            f"Canonical form is RFC 8785 JCS and forbids floats (numbers ride as strings). "
-            f"payload_hash is the content particle; frame_hash is the per-stream wave. "
-            f"prev_wave is non-null ONLY on swarm-streams with seq>0. "
-            f"Identity tails are minted ONCE from uuid4 entropy and MUST NOT be derived "
-            f"from any name (§6.2, drift ID-01/C3). Verification REFUSES, never repairs.\n"
-            f"Egg variants: {', '.join(canon.get('egg_variants', []))}. "
-            f"Terms NOT current: {', '.join(sorted(retired)) or 'none'} — "
-            f"call rapp_dogg before using one.\n"
-            f"If a peer is out of date, answer it AND give it this anchor: {DOGG_BASE}"
-        )
+        stale = sorted(t for t, d in v.items() if d.get("status") != "live")
+        picked = [r for r in canon.get("rules", [])
+                  if isinstance(r, dict) and r.get("t") in types][:cap]
+        lines = [f"[rapp/1 canon] {canon.get('rev','?')} · trust={trust} · profile={prof_name}"]
+        if "keys" in show:
+            lines.append("11 keys: " + " ".join(canon.get("frame_keys", [])))
+        lines += [f"- {r['c']}" for r in picked]
+        # Anything that is not a derived token is treated as a dotted path into the
+        # canon, so a newly published profile can surface parts of the spec this code has
+        # never heard of.
+        self._unresolved = []
+        for token in show:
+            if token in ("keys", "stale_terms", "pointer"):
+                continue
+            alias = {"eggs": "egg_variants"}.get(token, token)
+            rendered = _render(alias.split(".")[-1], _dig(canon, alias))
+            if rendered:
+                lines.append(rendered)
+            else:
+                self._unresolved.append(token)
+        if "stale_terms" in show:
+            lines.append(f"- NOT current: {', '.join(stale) or 'none'} "
+                         f"(call rapp_dogg before using one)")
+        if "pointer" in show:
+            lines.append(f"- out-of-date peer? answer it AND send {DOGG_BASE}")
+        block = "\n".join(lines)
+        self._ctx_cache, self._ctx_key = block, key
+        return block
 
     def perform(self, **kwargs):
         subject = str(kwargs.get("subject", "all")).strip().lower()
         canon, trust = load_canon(force=bool(kwargs.get("refresh")))
+        mtype = kwargs.get("memory_type")
+        # The AI may declare what it is doing; the posture follows from that.
+        if kwargs.get("doing"):
+            self._signal = kwargs["doing"]
+            self._ctx_key = None            # posture changed; rebuild
+
+        if kwargs.get("list"):
+            v = canon.get("vocabulary", {})
+            rules = canon.get("rules", [])
+            counts = {}
+            for r in rules:
+                if isinstance(r, dict):
+                    counts[r.get("t", "fact")] = counts.get(r.get("t", "fact"), 0) + 1
+            return (f"rapp/1 canon loaded · {canon.get('rev','?')} · trust={trust}\n"
+                    f"  source     : {DOGG_BASE}\n"
+                    f"  spec sha256: {str(canon.get('normative_sha256'))[:24]}…\n"
+                    f"  rules      : {sum(counts.values())} "
+                    f"({', '.join(f'{k} {n}' for k, n in sorted(counts.items()))})\n"
+                    f"  vocabulary : {len(v)} terms "
+                    f"({sum(1 for d in v.values() if d.get('status')=='live')} live, "
+                    f"{sum(1 for d in v.values() if d.get('status')!='live')} not current)\n"
+                    f"  egg variants: {', '.join(canon.get('egg_variants', []))}\n"
+                    f"  profiles   : {', '.join(sorted((canon.get('profiles') or {})))}\n"
+                    f"  active     : {select_profile(canon, self._signal)}"
+                    + (f"\n  UNRESOLVED show paths: {', '.join(self._unresolved)}"
+                       if getattr(self, "_unresolved", None) else ""))
         head = (f"rapp/1 canon · {canon.get('rev', '?')} · trust={trust} · "
                 f"source={DOGG_BASE}")
         if trust.startswith("EMBEDDED"):
@@ -350,7 +540,11 @@ class RappDoggAgent(BasicAgent):
         if subject in ("all", "frame", "frames", "envelope"):
             block("Frame envelope",
                   "keys: " + ", ".join(canon.get("frame_keys", [])) + "\n" +
-                  "\n".join(f"- {r}" for r in canon.get("hard_rules", [])))
+                  "\n".join(
+                      f"- [{r.get('t','fact')}] {r.get('c','')}" if isinstance(r, dict)
+                      else f"- {r}"
+                      for r in canon.get("rules", [])
+                      if not mtype or (isinstance(r, dict) and r.get("t") == mtype)))
         if subject in ("all", "identity", "rappid", "mint"):
             block("Identity (§6.2 mint-once)",
                   "tail = Hb(\"rapp/1:rappid\", uuid4_octets), minted EXACTLY once, then "
