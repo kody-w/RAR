@@ -1,0 +1,42 @@
+{
+  "id": "money",
+  "name": "Money \u2014 any agent.py becomes a real Copilot Studio agent",
+  "version": "1.0.2",
+  "manifest_name": "@kody-w/copilot_studio_parity_deploy",
+  "aliases": [
+    "money_agent",
+    "money",
+    "copilot_studio_parity_deploy"
+  ],
+  "summary": "Turn any local RAPP agent.py into a provisioned, functionally parity-tested Copilot Studio Draft in Power Platform \u2014 using the GitHub Copilot harness. It drives the Microsoft Copilot Studio plugin's authoring specialists (copilot-studio-init builds the sync-connected CLI project, copilot-studio-architect translates the RAPP contracts into modern YAML, copilot-studio-manage pushes the Draft through PAC) and owns the deterministic seams around them: local-agent discovery, source hashing, prompt construction, path and prefix validation, filesystem verification, and immutable run records. Parity is executed, not asserted: it runs the real agent_class().perform(**arguments) in an isolated subprocess and compares the result against what Copilot Studio returns, so black-box equivalence is measured before you rely on it. Self-contained \u2014 its only dependency is the base agent class, and it requires no environment variables. It never publishes an agent live.",
+  "tagline": "The brainstem can be switched off, because parity is measured, not claimed.",
+  "category": "core",
+  "tags": [
+    "copilot-studio",
+    "power-platform",
+    "github-copilot-harness",
+    "parity",
+    "deploy",
+    "pac",
+    "prototype",
+    "portability",
+    "blastbox",
+    "money"
+  ],
+  "singleton_filename": "copilot_studio_parity_deploy_agent.py",
+  "singleton_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40kody-w/copilot_studio_parity_deploy_agent.py",
+  "singleton_sha256": "0a0771ff1dcefef8255a5a9c4db03dfedab4886a644fd2382804e41edb2c1e7a",
+  "singleton_lines": 7027,
+  "singleton_bytes": 251402,
+  "quality_tier": "official",
+  "author": "kody-w",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "companions": [
+    "@kody-w/factory",
+    "@kody-w/copilot_studio_deploy_agent",
+    "@kody-w/copilot_studio_forge_agent"
+  ]
+}
