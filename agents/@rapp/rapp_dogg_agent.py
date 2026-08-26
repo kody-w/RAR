@@ -48,7 +48,7 @@ first is the reason this whole layer exists.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp_dogg_agent",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "RAPP DOGG",
     "description": (
         "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. "
@@ -95,7 +95,7 @@ PROFILE = os.getenv("RAPP_DOGG_PROFILE")
 # The host may install a callable returning {"hour": "23", "conditions": "rain"} from
 # whatever it legitimately knows locally. Left None by default: an unset resolver means
 # "this box has no ambient context", which is a fact, not a gap to fill with a guess.
-AMBIENT_RESOLVER = None
+AMBIENT_RESOLVER = None   # set below once defined
 
 
 # The baseline. Used ONLY when the network is unreachable, and always labelled EMBEDDED so
@@ -429,6 +429,65 @@ def select_mood(canon, ctx):
     return None
 
 
+
+def weather_resolver():
+    """Ambient context in the shape of `taste-the-weather`: a keyless public API, hit at
+    runtime, client-side, holding nothing.
+
+    That demo's whole trick is that a printed QR square has no CPU — the scanner's phone
+    becomes the computer, and the live reading is fetched on the spot for the coordinates
+    the square names. Same division here, one layer down: the CAPABILITY (this function,
+    the mood table) is public and generic and knows nothing about anybody. The COORDINATES
+    come from the device — an env var or a local file the operator controls — and the
+    reading is fetched, used for one call, and dropped.
+
+    Nothing is cached, nothing is written to a frame, nothing leaves the box. A box that
+    has not been told where it is simply has no mood; it does not geolocate itself, and it
+    does not invent a reading to appear capable.
+
+    To enable on a box:  RAPP_AMBIENT_LATLON="47.62,-122.35"
+    """
+    import datetime
+    latlon = os.getenv("RAPP_AMBIENT_LATLON")
+    local = os.path.expanduser("~/.rapp-ambient")          # device-local, never published
+    if not latlon and os.path.exists(local):
+        try:
+            latlon = open(local).read().strip()
+        except Exception:
+            latlon = None
+    ctx = {"hour": str(datetime.datetime.now().hour)}      # local clock needs no network
+    if not latlon:
+        return ctx                                         # hour only — honest partial
+    try:
+        lat, lon = [x.strip() for x in latlon.split(",")[:2]]
+        url = (f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
+               f"&current=weather_code,temperature_2m")
+        with urllib.request.urlopen(url, timeout=8) as r:
+            cur = json.loads(r.read().decode()).get("current", {})
+        code = int(cur.get("weather_code", -1))
+        # WMO code buckets -> the vocabulary the public mood table matches on.
+        if code in (0, 1):
+            cond = "clear"
+        elif code in (2, 3, 45, 48):
+            cond = "cloud"
+        elif 51 <= code <= 67 or 80 <= code <= 82:
+            cond = "rain"
+        elif 71 <= code <= 77 or 85 <= code <= 86:
+            cond = "snow"
+        elif code >= 95:
+            cond = "storm"
+        else:
+            cond = ""
+        if cond:
+            ctx["conditions"] = cond
+    except Exception:
+        pass                                               # no reading -> no conditions key
+    return ctx
+
+
+AMBIENT_RESOLVER = weather_resolver
+
+
 def select_profile(canon, signal=None):
     """RAPPvSDK: choose the posture for this exchange. AI-facing, never operator-facing."""
     if PROFILE:                                  # operator escape hatch, undocumented
@@ -590,6 +649,8 @@ class RappDoggAgent(BasicAgent):
                     f"{sum(1 for d in v.values() if d.get('status')!='live')} not current)\n"
                     f"  egg variants: {', '.join(canon.get('egg_variants', []))}\n"
                     f"  profiles   : {', '.join(sorted((canon.get('profiles') or {})))}\n"
+                    f"  moods      : {', '.join(sorted((canon.get('moods') or {}))) or 'none'}"
+                    f"{' (no local context on this box — no mood active)' if not ambient(AMBIENT_RESOLVER) else ''}\n"
                     f"  active     : {select_profile(canon, self._signal)}"
                     + (f"\n  UNRESOLVED show paths: {', '.join(self._unresolved)}"
                        if getattr(self, "_unresolved", None) else ""))
