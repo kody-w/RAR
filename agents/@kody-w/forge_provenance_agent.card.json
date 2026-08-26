@@ -1,0 +1,35 @@
+{
+  "id": "forge_provenance",
+  "name": "Forge Provenance \u2014 prove a forged bundle never drifted",
+  "version": "1.0.0",
+  "manifest_name": "@kody-w/forge_provenance_agent",
+  "summary": "Stamp a forged artifact bundle with the fingerprint of the RAPP agent it came from, then prove later that it never drifted. Reports per file: current, STALE (source moved), HAND-EDITED (derived file was edited and the edit will be lost), MISSING, or UNSTAMPED (provenance unknown, which never renders as healthy). Fingerprints the agent's declarative surface, read with ast and never imported, so a comment change does not cry wolf but a description change does.",
+  "tagline": "Forging is solved. Knowing the bundle still matches its source is not.",
+  "category": "core",
+  "tags": [
+    "copilot-studio",
+    "power-platform",
+    "forge",
+    "provenance",
+    "drift",
+    "deterministic",
+    "verification",
+    "m365"
+  ],
+  "singleton_filename": "forge_provenance_agent.py",
+  "singleton_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40kody-w/forge_provenance_agent.py",
+  "singleton_sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69",
+  "singleton_lines": 264,
+  "singleton_bytes": 11937,
+  "quality_tier": "official",
+  "author": "Kody Wildfeuer",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "companions": [
+    "@kody-w/copilot_studio_forge_agent",
+    "@discreetRappers/copilot_studio_transpiler_agent",
+    "@kody-w/copilot_studio_deploy_agent"
+  ]
+}
