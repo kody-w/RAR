@@ -1,0 +1,32 @@
+{
+  "id": "rapp_dogg",
+  "name": "RAPP DOGG \u2014 pull protocol canon instead of guessing",
+  "version": "1.0.4",
+  "manifest_name": "@rapter/rapp_dogg_agent",
+  "summary": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon \u2014 frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status \u2014 from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches.",
+  "tagline": "Meet an out-of-date peer, hand it the answer AND the anchor \u2014 both get smarter.",
+  "category": "core",
+  "tags": [
+    "rapp",
+    "rapp-1",
+    "canon",
+    "protocol",
+    "anchor",
+    "bootstrap",
+    "interop",
+    "drift",
+    "vocabulary",
+    "profiles"
+  ],
+  "singleton_filename": "rapp_dogg_agent.py",
+  "singleton_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40rapter/rapp_dogg_agent.py",
+  "singleton_sha256": "950a2053be11b6b2ff4c0abc0e7bf46709a449762f5da26d8179129f83babab5",
+  "singleton_lines": 796,
+  "singleton_bytes": 41586,
+  "quality_tier": "verified",
+  "author": "RapterBox",
+  "requires_env": [],
+  "dependencies": [
+    "@rapter/basic_agent"
+  ]
+}

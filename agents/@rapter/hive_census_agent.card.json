@@ -1,0 +1,30 @@
+{
+  "id": "hive_census",
+  "name": "Hive Census \u2014 deterministic machine census, no model",
+  "version": "1.0.0",
+  "manifest_name": "@rapter/hive_census_agent",
+  "summary": "Emit this box's census as deterministic static JSON \u2014 protocol revision, anchor hash, resident populations, posture, trust \u2014 computed from local filesystem and git facts with NO language-model call. Byte-stable for the same inputs, sorted and string-valued so it drops straight into a rapp/1 frame payload and two boxes computing the same census produce the same hash. Counts things, never names them.",
+  "tagline": "Facts already on disk. Byte-stable, hashable, produced without a language model.",
+  "category": "core",
+  "tags": [
+    "census",
+    "fleet",
+    "deterministic",
+    "static",
+    "no-llm",
+    "frames",
+    "shape",
+    "privacy"
+  ],
+  "singleton_filename": "hive_census_agent.py",
+  "singleton_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40rapter/hive_census_agent.py",
+  "singleton_sha256": "c078c513615c23f87edf14ee12514105af913e06577cfe53b2e2b2368963d4ff",
+  "singleton_lines": 221,
+  "singleton_bytes": 10138,
+  "quality_tier": "verified",
+  "author": "RapterBox",
+  "requires_env": [],
+  "dependencies": [
+    "@rapter/basic_agent"
+  ]
+}
