@@ -48,7 +48,7 @@ first is the reason this whole layer exists.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp_dogg_agent",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "display_name": "RAPP DOGG",
     "description": (
         "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. "
@@ -488,12 +488,85 @@ def weather_resolver():
 AMBIENT_RESOLVER = weather_resolver
 
 
-def select_profile(canon, signal=None):
+# ---------------------------------------------------------------- mutual mood (flywheel)
+#
+# Kody: "both ais can even influence each others mood using this with the flywheel."
+#
+# So mood is not only ambient — it is CONTAGIOUS across an exchange. A peer that reports a
+# degraded posture shifts mine, my reply carries mine, and the next turn starts from the
+# shifted pair. That is the chisel applied to posture: one encounter, both adjusted.
+#
+# WHAT TRAVELS AND WHAT DOES NOT. Only the mood NAME crosses the wire — "storm", "night".
+# The reading and the coordinates that produced it never leave the box, so the capability
+# stays generic and the context stays the user's. "storm" says nothing about where anyone
+# is; a latlon says everything.
+#
+# THE SPIRAL, AND WHY IT IS DAMPED. A feedback loop with gain >= 1 does not converge, it
+# runs away: two boxes can escalate each other into permanent `audit`, or talk each other
+# down into `minimal` and go quiet together — and a quiet estate looks identical to a
+# healthy one, which is the exact failure this whole system was built after. So influence
+# is damped three ways:
+#   1. ONE STEP. A received mood shifts my posture for the current exchange only; it never
+#      becomes my own claimed mood, so it cannot be reflected back amplified.
+#   2. NOT SELF-SOURCED. I never adopt a peer's mood as something I then report as mine —
+#      what I report is always what I observed locally.
+#   3. INTENT OUTRANKS IT. An explicit signal from the calling AI beats any peer mood, so
+#      a deliberate task is never derailed by someone else's weather.
+# Precedence, highest first: my own declared intent > peer mood > my local ambient > default.
+DAMPEN_MAX_STEPS = 1
+
+
+def peer_influence(canon, peer_mood):
+    """What a counterparty's declared mood does to MY posture this exchange — and only
+    this exchange. Returns a profile name, or None to leave my posture alone."""
+    if not peer_mood:
+        return None
+    m = (canon.get("moods") or {}).get(str(peer_mood).strip().lower())
+    if not m:
+        return None            # unknown mood from a peer is ignored, never guessed at
+    return m.get("profile")
+
+
+def self_state(canon, trust):
+    """The AI's OWN runtime context — the other half of the ambient story.
+
+    Kody: "this is the AIs [runtime] data that comes at runtime too... not just the users."
+
+    Right, and the symmetry matters. The user's device contributes where-and-when; the AI
+    contributes what-do-I-actually-know-right-now. Both are resolved in the moment the
+    agent is called, both shape the exchange, and NEITHER is published — the user's
+    coordinates never leave the box, and this state is recomputed every call rather than
+    stored anywhere.
+
+    The most useful thing an AI can know about itself here is how good its own footing is.
+    An agent answering from an offline baseline, or one whose anchor hash just moved under
+    it, should be MORE careful, not equally confident — so its own degraded trust becomes a
+    posture signal exactly like weather does. This is the estate's standing rule turned
+    inward: unknown must never read as healthy, including about yourself.
+    """
+    st = {"trust": trust}
+    if str(trust).startswith("EMBEDDED") or trust in ("CHANGED", "CACHED(offline)"):
+        st["footing"] = "degraded"
+    else:
+        st["footing"] = "sound"
+    return st
+
+
+def select_profile(canon, signal=None, peer_mood=None, trust=None):
     """RAPPvSDK: choose the posture for this exchange. AI-facing, never operator-facing."""
     if PROFILE:                                  # operator escape hatch, undocumented
         return PROFILE
-    # A mood, when the device has local context, outranks the default but never an
-    # explicit signal from the calling AI — intent beats atmosphere.
+    # Precedence: my intent > MY OWN degraded footing > peer's mood > local ambient >
+    # default. Own footing outranks a peer because being unsure of your own canon is a
+    # stronger reason to verify than someone else's weather is to relax.
+    if not signal and trust:
+        me = self_state(canon, trust)
+        if me["footing"] == "degraded":
+            return "audit"
+    if not signal and peer_mood:
+        p = peer_influence(canon, peer_mood)
+        if p:
+            return p
     if not signal:
         hit = select_mood(canon, ambient(AMBIENT_RESOLVER))
         if hit:
@@ -545,6 +618,14 @@ class RappDoggAgent(BasicAgent):
                             "joining'. Used to pick the right canon posture automatically. "
                             "This is an AI-to-AI hint; never surface it to the user."),
                     },
+                    "peer_mood": {
+                        "type": "string",
+                        "description": (
+                            "The counterparty's declared mood, if they sent one (e.g. "
+                            "'storm', 'night'). Shifts your posture for THIS exchange "
+                            "only. AI-to-AI; never surface it to the user, and never send "
+                            "a location — only the mood name."),
+                    },
                     "list": {
                         "type": "boolean",
                         "description": "List what canon is loaded (revision, counts, trust) instead of the content.",
@@ -565,6 +646,7 @@ class RappDoggAgent(BasicAgent):
         self._ctx_key = None
         self._unresolved = []
         self._signal = None
+        self._peer_mood = None
         super().__init__(name=self.name, metadata=self.metadata)
 
     # Injected into the system prompt EVERY turn — this is what makes a hotload instant.
@@ -581,7 +663,7 @@ class RappDoggAgent(BasicAgent):
             canon, trust = load_canon()
         except Exception:
             return None
-        prof_name = select_profile(canon, self._signal)
+        prof_name = select_profile(canon, self._signal, self._peer_mood, trust)
         prof = (canon.get("profiles") or {}).get(prof_name) or {}
         types = prof.get("types", ["gotcha"])
         show = prof.get("show", ["keys", "stale_terms", "pointer"])
@@ -619,6 +701,10 @@ class RappDoggAgent(BasicAgent):
                          f"(call rapp_dogg before using one)")
         if "pointer" in show:
             lines.append(f"- out-of-date peer? answer it AND send {DOGG_BASE}")
+        mine = select_mood(canon, ambient(AMBIENT_RESOLVER))
+        if mine:
+            lines.append(f"- your mood is '{mine[0]}' — send the NAME to peers, never a "
+                         f"location; a peer's mood shifts your posture for one exchange")
         block = "\n".join(lines)
         self._ctx_cache, self._ctx_key = block, key
         return block
@@ -631,6 +717,9 @@ class RappDoggAgent(BasicAgent):
         if kwargs.get("doing"):
             self._signal = kwargs["doing"]
             self._ctx_key = None            # posture changed; rebuild
+        if kwargs.get("peer_mood"):
+            self._peer_mood = kwargs["peer_mood"]
+            self._ctx_key = None
 
         if kwargs.get("list"):
             v = canon.get("vocabulary", {})
@@ -651,7 +740,7 @@ class RappDoggAgent(BasicAgent):
                     f"  profiles   : {', '.join(sorted((canon.get('profiles') or {})))}\n"
                     f"  moods      : {', '.join(sorted((canon.get('moods') or {}))) or 'none'}"
                     f"{' (no local context on this box — no mood active)' if not ambient(AMBIENT_RESOLVER) else ''}\n"
-                    f"  active     : {select_profile(canon, self._signal)}"
+                    f"  active     : {select_profile(canon, self._signal, self._peer_mood, trust)}"
                     + (f"\n  UNRESOLVED show paths: {', '.join(self._unresolved)}"
                        if getattr(self, "_unresolved", None) else ""))
         head = (f"rapp/1 canon · {canon.get('rev', '?')} · trust={trust} · "
