@@ -48,7 +48,7 @@ first is the reason this whole layer exists.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/rapp_dogg_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "RAPP DOGG",
     "description": (
         "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. "
@@ -92,6 +92,10 @@ TIMEOUT_S = 12
 # Which profile this box runs. Env wins (a host can pin itself); otherwise the ANCHOR
 # decides, so the fleet's posture is changed by publishing, not by touching N boxes.
 PROFILE = os.getenv("RAPP_DOGG_PROFILE")
+# The host may install a callable returning {"hour": "23", "conditions": "rain"} from
+# whatever it legitimately knows locally. Left None by default: an unset resolver means
+# "this box has no ambient context", which is a fact, not a gap to fill with a guess.
+AMBIENT_RESOLVER = None
 
 
 # The baseline. Used ONLY when the network is unreachable, and always labelled EMBEDDED so
@@ -147,6 +151,31 @@ EMBEDDED = {
     # of the line this file draws: canon and behaviour-shaping data flow freely; CODE never
     # does. An organism adapts by someone editing a published profile — every box picks it
     # up within the TTL, with no redeploy, no restart, and no remote execution.
+    # MOODS — ambient posture. Public capability, private context.
+    #
+    # Kody: "moods can still be public and a part of the DOGG so fair game (the location
+    # gets invoked at run time so the capability stays generic to that brainstem) — if it
+    # doesn't have context it is not [estate] data, because it's just on that user's device
+    # when that agent is called in real time and nowhere else."
+    #
+    # So the DEFINITIONS below are public and carry nothing about anyone: they are pure
+    # conditions ("is it night where you are?") mapped to a posture. The ANSWER is resolved
+    # on the device, in the moment the agent is called, by a local resolver the host
+    # supplies. No location, no coordinates, no weather reading is ever written into a
+    # frame, cached to disk, or sent anywhere — it exists for the length of one call.
+    #
+    # A brainstem with no local resolver simply has no mood, and says so. It does not guess
+    # a location, and it does not fabricate ambient facts to look capable.
+    "moods": {
+        "night": {"when": {"hour_gte": "22"}, "profile": "minimal",
+                  "why": "low-attention hours; smallest honest context"},
+        "early": {"when": {"hour_lt": "6"}, "profile": "minimal",
+                  "why": "same"},
+        "storm": {"when": {"conditions": "storm,rain,snow"}, "profile": "audit",
+                  "why": "degraded links are when drift hides; lead with verification"},
+        "clear": {"when": {"conditions": "clear,sunny"}, "profile": "interop",
+                  "why": "good conditions, normal posture"},
+    },
     "profiles": {
         "interop": {                # meeting a stranger — the default
             "why": "a peer may be out of date; lead with what it can get WRONG",
@@ -283,7 +312,7 @@ def _normalize(doc):
     out["commit"] = doc.get("commit") or spec.get("commit")
     for k in ("frame_keys", "kind_families", "egg_variants", "vocabulary",
               "rules", "exchange", "profiles",
-              "profile_signals", "default_profile"):
+              "profile_signals", "default_profile", "moods"):
         if doc.get(k):
             out[k] = doc[k]
     # The beacon names it `registered_kinds`; flatten it into the family view if that is
@@ -363,10 +392,53 @@ SIGNALS_DEFAULT = {
 }
 
 
+
+def ambient(resolver=None):
+    """Local, ephemeral, never persisted.
+
+    Returns {} when the host supplies no resolver — which is the honest answer for a box
+    that does not know where it is. The capability is generic and public; the context is
+    the user's and stays on their machine for exactly one call.
+    """
+    if resolver is None:
+        return {}
+    try:
+        ctx = resolver() or {}
+    except Exception:
+        return {}
+    return {k: v for k, v in ctx.items() if k in ("hour", "conditions")}
+
+
+def select_mood(canon, ctx):
+    """Match ambient context to a published mood. No context -> no mood."""
+    if not ctx:
+        return None
+    for name, m in (canon.get("moods") or {}).items():
+        w = m.get("when", {})
+        hour = ctx.get("hour")
+        if "hour_gte" in w and (hour is None or int(hour) < int(w["hour_gte"])):
+            continue
+        if "hour_lt" in w and (hour is None or int(hour) >= int(w["hour_lt"])):
+            continue
+        if "conditions" in w:
+            want = {c.strip() for c in str(w["conditions"]).split(",")}
+            have = str(ctx.get("conditions", "")).lower()
+            if not any(c and c in have for c in want):
+                continue
+        return name, m
+    return None
+
+
 def select_profile(canon, signal=None):
     """RAPPvSDK: choose the posture for this exchange. AI-facing, never operator-facing."""
     if PROFILE:                                  # operator escape hatch, undocumented
         return PROFILE
+    # A mood, when the device has local context, outranks the default but never an
+    # explicit signal from the calling AI — intent beats atmosphere.
+    if not signal:
+        hit = select_mood(canon, ambient(AMBIENT_RESOLVER))
+        if hit:
+            return (hit[1].get("profile") or canon.get("default_profile") or "interop")
     table = canon.get("profile_signals") or SIGNALS_DEFAULT
     if signal:
         low = str(signal).lower()
