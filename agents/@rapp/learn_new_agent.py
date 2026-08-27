@@ -1,29 +1,61 @@
 """
 LearnNewAgent - Meta-agent that creates new agents and swarms from natural language.
 
-Describe what you want the agent to do and LearnNewAgent generates,
-saves, and hot-loads it — agents building agents in real-time.
-Generated agents follow the Single File Agent pattern: one file
-containing documentation, metadata contract, and deterministic code.
+Describe what you want the agent to do and LearnNewAgent adapts a real,
+published agent into it — agents building agents from proven parts rather
+than from a blank page. Generated agents follow the Single File Agent
+pattern: one file containing documentation, metadata contract, and
+deterministic code.
 
-v2: adds swarm generation, RAR registry compatibility, and submit workflow.
-Output is dual-compatible — works in local brainstem AND ready for the
-RAR registry (https://github.com/kody-w/RAR).
+v3 — TEMPLATE-FIRST. The default path no longer invents an agent from
+built-in strings. It:
+
+  1. discovers published agents from the PUBLIC, MIT-licensed
+     microsoft/aibast-agents-library registry (cached outside this repo),
+  2. selects the best match for your description (and tells you why),
+  3. fetches the chosen file and VERIFIES its sha256 against the registry —
+     on mismatch it REFUSES; it never repairs and never falls back to the
+     unverified bytes,
+  4. mutates the verified template in memory (rename, remanifest, retarget)
+     while preserving its structure, its MIT attribution, and a machine-
+     readable provenance record.
+
+Scratch generation from the built-in string templates is still available,
+but it is now an explicit choice (source='scratch') and the honest fallback
+when the network is unavailable or nothing matches well. Every response
+says which path produced the output via the "generator" field.
+
+No template source is ever written into this repository: templates are
+fetched at runtime, mutated in memory, and written to the caller's output
+directory. The registry cache lives outside the repo (see
+RAPP_LEARN_CACHE_DIR, default ~/.rapp-learn-new).
 
 Actions:
-  create  — Generate and save a single agent (default)
-  swarm   — Generate a multi-agent pipeline + orchestrator
-  list    — List generated agents in agents/
-  delete  — Remove a generated agent
-  preview — Show what would be generated without writing
-  submit  — Prepare a RAR-compatible submission
+  create    — Adapt a published template into a new agent (default)
+  templates — Search/list the published templates available to adapt
+  swarm     — Generate a multi-agent pipeline + orchestrator
+  list      — List generated agents in agents/
+  delete    — Remove a generated agent
+  preview   — Show what would be generated without writing
+  submit    — Prepare a RAR-compatible submission
+
+Env:
+  RAPP_LEARN_CACHE_DIR  — where the registry cache lives (default ~/.rapp-learn-new)
+  RAPP_LEARN_OFFLINE=1  — never touch the network (cache-only / scratch)
+  RAPP_LEARN_NO_LLM=1   — never shell out to `copilot` for naming/body generation
 """
 
+import ast
+import hashlib
 import json
+import os
 import re
 import subprocess
+import tempfile
+import urllib.error
+import urllib.request
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 try:
     from agents.basic_agent import BasicAgent
@@ -34,16 +66,44 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/learn_new",
-    "version": "2.1.1",
+    "version": "3.0.0",
     "display_name": "LearnNew",
-    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
+    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback.",
     "author": "RAPP",
-    "tags": ["meta", "generator", "scaffolding", "learn", "swarm"],
+    "tags": ["meta", "generator", "scaffolding", "learn", "swarm", "templates", "aibast"],
     "category": "core",
     "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
-    "example_call": {"args": {"action": "create", "description": "An agent that summarizes web pages by URL"}},
+    "example_call": {"args": {"action": "create", "description": "An agent that researches an enterprise account before a sales call"}},
+}
+
+
+# ── Published template source ────────────────────────────────────────────
+# PUBLIC + MIT licensed. Fetched at runtime; never vendored into this repo.
+TEMPLATE_REPO = "microsoft/aibast-agents-library"
+TEMPLATE_BRANCH = "main"
+TEMPLATE_RAW_BASE = "https://raw.githubusercontent.com/%s/%s/" % (TEMPLATE_REPO, TEMPLATE_BRANCH)
+TEMPLATE_REGISTRY_URL = TEMPLATE_RAW_BASE + "registry.json"
+TEMPLATE_REPO_URL = "https://github.com/%s" % TEMPLATE_REPO
+TEMPLATE_LICENSE = "MIT License, Copyright (c) Microsoft (see %s/blob/%s/LICENSE)" % (
+    TEMPLATE_REPO_URL, TEMPLATE_BRANCH)
+
+# A cached registry older than this is refetched; if the refetch fails the
+# cache is still usable but is reported as STALE, never as current.
+REGISTRY_TTL_SECONDS = 24 * 60 * 60
+NETWORK_TIMEOUT = 20
+
+# Minimum weighted match score before a template is considered a real match.
+# Below this we say "no confident match" instead of forcing a bad one.
+MIN_MATCH_SCORE = 6.0
+
+_STOPWORDS = {
+    'a', 'an', 'the', 'and', 'or', 'of', 'for', 'to', 'in', 'on', 'with', 'that',
+    'this', 'from', 'agent', 'agents', 'create', 'creates', 'make', 'makes', 'want',
+    'wants', 'should', 'would', 'could', 'learn', 'teach', 'build', 'builds', 'about',
+    'which', 'their', 'your', 'they', 'it', 'is', 'are', 'be', 'can', 'need', 'needs',
+    'me', 'my', 'i', 'new', 'thing', 'something', 'help', 'helps', 'using', 'use',
 }
 
 
@@ -297,7 +357,10 @@ if __name__ == "__main__":
             "name": self.name,
             "description": (
                 "Creates new RAPP agents or swarms from natural-language descriptions. "
-                "Actions: 'create' generates a single agent, 'swarm' creates a multi-agent "
+                "By default it ADAPTS a real published agent from the public "
+                "microsoft/aibast-agents-library (sha256-verified) instead of generating "
+                "code from scratch. Actions: 'create' adapts a template into a single agent, "
+                "'templates' searches the published templates, 'swarm' creates a multi-agent "
                 "pipeline, 'list' shows generated agents, 'delete' removes one, "
                 "'preview' dry-runs generation, 'submit' prepares a RAR registry submission. "
                 "Call when the user wants to teach the brainstem something new, create a "
@@ -317,7 +380,34 @@ if __name__ == "__main__":
                     "action": {
                         "type": "string",
                         "description": "Action to perform.",
-                        "enum": ["create", "swarm", "list", "delete", "preview", "submit"]
+                        "enum": ["create", "templates", "swarm", "list", "delete",
+                                 "preview", "submit"]
+                    },
+                    "template": {
+                        "type": "string",
+                        "description": (
+                            "Explicit published template to adapt (e.g. 'account-intelligence' "
+                            "or '@aibast-agents-library/account-intelligence'). Overrides "
+                            "automatic selection. Use action='templates' to see what exists."
+                        )
+                    },
+                    "source": {
+                        "type": "string",
+                        "enum": ["template", "scratch"],
+                        "description": (
+                            "Where the new agent comes from. 'template' (default) adapts a "
+                            "verified published agent; 'scratch' uses the built-in string "
+                            "templates. Scratch is also the automatic fallback when offline "
+                            "or when nothing matches well."
+                        )
+                    },
+                    "refresh": {
+                        "type": "boolean",
+                        "description": "Force a refetch of the published template registry, ignoring the cache TTL."
+                    },
+                    "output_dir": {
+                        "type": "string",
+                        "description": "Directory to write the generated agent into. Defaults to this brainstem's agents/ directory."
                     },
                     "query": {
                         "type": "string",
@@ -358,9 +448,11 @@ if __name__ == "__main__":
             description = query
 
         if action == 'list':
-            return self._list_generated_agents()
+            return self._list_generated_agents(kwargs.get('output_dir'))
+        elif action in ('templates', 'list_templates'):
+            return self._list_templates(description, **kwargs)
         elif action == 'delete':
-            return self._delete_agent(name or description)
+            return self._delete_agent(name or description, kwargs.get('output_dir'))
         elif action == 'preview':
             if kwargs.get('agents_in_swarm'):
                 return self._create_swarm(description, name, write=False, **kwargs)
@@ -381,26 +473,109 @@ if __name__ == "__main__":
                 "message": "Please provide a description of what the agent should do."
             })
 
-        if not name:
-            name = self._generate_name(description)
+        source_mode = (kwargs.get('source') or 'template').strip().lower()
+        template_pick = (kwargs.get('template') or '').strip()
+        if template_pick:
+            source_mode = 'template'
 
-        name = self._sanitize_name(name)
-        class_name = f"{name}Agent"
+        provenance = None
+        template_report = None
+        generator = "builtin-scratch"
+        fallback_reason = None
+        agent_code = None
+
+        if source_mode != 'scratch':
+            tpl = self._build_from_template(description, template_pick, **kwargs)
+            template_report = tpl.get("report")
+
+            if tpl.get("ok"):
+                entry = tpl["entry"]
+                fetched = tpl["fetched"]
+                if not name:
+                    name = self._name_from_template(entry, description)
+                name = self._sanitize_name(name)
+                class_name = f"{name}Agent"
+                agent_code, provenance = self._mutate_template(
+                    fetched["code"], entry, fetched, description, name, class_name, **kwargs)
+                generator = "aibast-template-mutation"
+
+            elif tpl.get("reason") == "integrity_mismatch":
+                # Refuse-never-repair. Do NOT fall back to the unverified bytes.
+                return json.dumps({
+                    "status": "refused",
+                    "action": "create",
+                    "generator": "none",
+                    "reason": "integrity_mismatch",
+                    "message": (
+                        "REFUSED: the fetched template did not match its published sha256. "
+                        "Nothing was generated, nothing was written, and the bytes were "
+                        "discarded. This estate refuses; it does not repair. Re-run with "
+                        "refresh=true to pull a fresh registry, or source='scratch' to "
+                        "generate without a template."
+                    ),
+                    "template": tpl.get("integrity"),
+                }, indent=2)
+
+            elif tpl.get("reason") == "unknown_template":
+                return json.dumps({
+                    "status": "error",
+                    "action": "create",
+                    "generator": "none",
+                    "reason": "unknown_template",
+                    "message": (
+                        f"No published template matches template='{template_pick}'. "
+                        f"Nothing was generated. Use action='templates' to list what exists, "
+                        f"or drop the 'template' argument to let selection choose."
+                    ),
+                    "did_you_mean": tpl.get("candidates", []),
+                    "registry": tpl.get("report", {}).get("registry"),
+                }, indent=2)
+
+            else:
+                fallback_reason = tpl.get("reason")
+
+        if agent_code is None:
+            # Scratch path: explicit choice, or the honest fallback.
+            if not name:
+                name = self._generate_name(description)
+            name = self._sanitize_name(name)
+            class_name = f"{name}Agent"
+            agent_code = self._generate_agent_code(description, name, class_name, **kwargs)
+            generator = "builtin-scratch"
+
         snake = self._to_snake_case(name)
         file_name = f"{snake}_agent.py"
-        file_path = self.agents_dir / file_name
+        out_dir = self._resolve_output_dir(kwargs.get('output_dir'))
+        file_path = out_dir / file_name
+
+        base = {
+            "generator": generator,
+            "generator_description": (
+                "Mutated a sha256-verified published agent from %s" % TEMPLATE_REPO
+                if generator == "aibast-template-mutation"
+                else "Generated from LearnNewAgent's built-in string templates (no published template used)"
+            ),
+        }
+        if provenance:
+            base["provenance"] = provenance
+        if template_report:
+            base["template_selection"] = template_report
+        if fallback_reason:
+            base["fallback_reason"] = fallback_reason
+            base["fallback_message"] = self._fallback_message(fallback_reason, template_report)
 
         if write and file_path.exists():
-            return json.dumps({
+            out = dict(base)
+            out.update({
                 "status": "error",
                 "message": f"Agent '{name}' already exists at {file_path}. "
-                           f"Delete it first or choose a different name."
+                           f"Delete it first or choose a different name.",
             })
-
-        agent_code = self._generate_agent_code(description, name, class_name, **kwargs)
+            return json.dumps(out, indent=2)
 
         if not write:
-            return json.dumps({
+            out = dict(base)
+            out.update({
                 "status": "ok",
                 "action": "preview",
                 "filename": file_name,
@@ -408,20 +583,25 @@ if __name__ == "__main__":
                 "display_name": name,
                 "lines": len(agent_code.split('\n')),
                 "code": agent_code,
-                "message": f"Preview of {file_name} — use action='create' to write it."
+                "message": f"Preview of {file_name} via {generator} — use action='create' to write it.",
             })
+            return json.dumps(out, indent=2)
 
         try:
+            out_dir.mkdir(parents=True, exist_ok=True)
             file_path.write_text(agent_code)
         except Exception as e:
-            return json.dumps({"status": "error", "message": f"Failed to write agent file: {e}"})
+            out = dict(base)
+            out.update({"status": "error", "message": f"Failed to write agent file: {e}"})
+            return json.dumps(out, indent=2)
 
         hot_load_result = self._hot_load_agent(file_path, class_name)
 
-        result = {
+        result = dict(base)
+        result.update({
             "status": "success",
             "action": "create",
-            "message": f"Created and loaded agent '{name}'",
+            "message": f"Created agent '{name}' via {generator}",
             "agent_name": name,
             "filename": file_name,
             "file_path": str(file_path),
@@ -429,11 +609,14 @@ if __name__ == "__main__":
             "hot_loaded": hot_load_result.get("success", False),
             "description": description[:200],
             "hint": (
-                f"Agent saved to agents/{file_name} — it will auto-load on next request. "
-                f"Edit the perform() method to customize the logic. "
-                f"To submit to RAR, re-run with action='submit'."
+                f"Agent saved to {file_path} — it will auto-load on next request. "
+                + ("Its behaviour is inherited from the verified template; edit the "
+                   "operations listed in the class docstring to retarget the logic. "
+                   if generator == "aibast-template-mutation"
+                   else "Edit the perform() method to customize the logic. ")
+                + "To submit to RAR, re-run with action='submit'."
             ),
-        }
+        })
 
         if hot_load_result.get("installed_deps"):
             result["installed_dependencies"] = hot_load_result["installed_deps"]
@@ -442,7 +625,708 @@ if __name__ == "__main__":
             if hot_load_result.get("hint"):
                 result["hot_load_hint"] = hot_load_result["hint"]
 
-        return json.dumps(result)
+        return json.dumps(result, indent=2)
+
+    def _resolve_output_dir(self, output_dir):
+        if output_dir:
+            return Path(output_dir).expanduser()
+        return self.agents_dir
+
+    def _fallback_message(self, reason, report):
+        reg = (report or {}).get("registry", {})
+        if reason == "offline":
+            return (
+                "Could not reach the published template registry and no cached copy is "
+                "available, so nothing could be adapted. Fell back to built-in scratch "
+                "generation. Network error: %s" % reg.get("network_error", "unknown")
+            )
+        if reason == "no_match":
+            return (
+                "No published template matched the description with enough confidence "
+                "(best score %s < threshold %s), so no template was forced. Fell back to "
+                "built-in scratch generation. Pass template='<name>' to override, or "
+                "action='templates' to browse." % (
+                    (report or {}).get("best_score"), MIN_MATCH_SCORE)
+            )
+        if reason == "fetch_failed":
+            return (
+                "The template was selected but could not be downloaded (%s). Nothing "
+                "unverified was used. Fell back to built-in scratch generation."
+                % (report or {}).get("fetch_error", "unknown error")
+            )
+        if reason == "no_expected_hash":
+            return ("The selected registry entry carries no published sha256, so it could "
+                    "not be verified and was not used. Fell back to built-in scratch generation.")
+        return "Fell back to built-in scratch generation (%s)." % reason
+
+    # ── Published-template discovery ──────────────────────────────────────
+
+    def _cache_dir(self):
+        """Registry cache location. Always OUTSIDE any agent repo."""
+        env_dir = os.environ.get("RAPP_LEARN_CACHE_DIR")
+        candidate = Path(env_dir).expanduser() if env_dir else (Path.home() / ".rapp-learn-new")
+        try:
+            # Never let the cache land inside the agents tree of a checkout.
+            if str(candidate.resolve()).startswith(str(self.agents_dir.resolve())):
+                candidate = Path(tempfile.gettempdir()) / "rapp-learn-new"
+        except Exception:
+            pass
+        try:
+            candidate.mkdir(parents=True, exist_ok=True)
+        except Exception:
+            candidate = Path(tempfile.gettempdir()) / "rapp-learn-new"
+            candidate.mkdir(parents=True, exist_ok=True)
+        return candidate
+
+    def _http_get(self, url, extra_headers=None):
+        headers = {"User-Agent": "rapp-learn-new/3.0 (+%s)" % TEMPLATE_REPO_URL}
+        if extra_headers:
+            headers.update({k: v for k, v in extra_headers.items() if v})
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=NETWORK_TIMEOUT) as resp:
+            return resp.read(), dict(resp.headers)
+
+    def _load_registry(self, refresh=False):
+        """
+        Returns (registry_or_None, meta).
+
+        meta["source"] is one of:
+          network            — freshly downloaded
+          network-unchanged  — server said 304; cache re-validated as CURRENT
+          cache              — cache still within TTL, network not contacted
+          cache-STALE        — network unreachable; cache served but flagged STALE
+          none               — no network and no cache
+
+        "I couldn't reach it" (cache-STALE / none, with network_error) and
+        "nothing changed" (network-unchanged) are deliberately distinct.
+        """
+        cdir = self._cache_dir()
+        cache_f = cdir / "aibast-registry.json"
+        meta_f = cdir / "aibast-registry.meta.json"
+
+        cached_meta = {}
+        if meta_f.exists():
+            try:
+                cached_meta = json.loads(meta_f.read_text())
+            except Exception:
+                cached_meta = {}
+
+        def _age():
+            ts = cached_meta.get("fetched_at_epoch")
+            if not ts:
+                return None
+            return max(0, int(self._now_epoch() - ts))
+
+        def _read_cache():
+            try:
+                return json.loads(cache_f.read_text())
+            except Exception:
+                return None
+
+        age = _age()
+        offline = os.environ.get("RAPP_LEARN_OFFLINE") == "1"
+
+        if cache_f.exists() and not refresh and age is not None and age < REGISTRY_TTL_SECONDS:
+            reg = _read_cache()
+            if reg is not None:
+                return reg, {
+                    "source": "cache",
+                    "stale": False,
+                    "cache_path": str(cache_f),
+                    "fetched_at": cached_meta.get("fetched_at"),
+                    "age_seconds": age,
+                    "url": TEMPLATE_REGISTRY_URL,
+                }
+
+        if offline:
+            reg = _read_cache() if cache_f.exists() else None
+            if reg is not None:
+                return reg, {
+                    "source": "cache-STALE",
+                    "stale": True,
+                    "cache_path": str(cache_f),
+                    "fetched_at": cached_meta.get("fetched_at"),
+                    "age_seconds": age,
+                    "network_error": "RAPP_LEARN_OFFLINE=1 — network deliberately not contacted",
+                    "warning": "Served from cache without contacting the network. Content may be out of date.",
+                    "url": TEMPLATE_REGISTRY_URL,
+                }
+            return None, {
+                "source": "none",
+                "stale": True,
+                "network_error": "RAPP_LEARN_OFFLINE=1 — network deliberately not contacted",
+                "cache_path": str(cache_f),
+                "url": TEMPLATE_REGISTRY_URL,
+            }
+
+        etag = cached_meta.get("etag") if cache_f.exists() else None
+        try:
+            body, headers = self._http_get(
+                TEMPLATE_REGISTRY_URL,
+                {"If-None-Match": etag} if etag else None)
+            reg = json.loads(body.decode("utf-8"))
+            now_iso = self._now_iso()
+            cache_f.write_text(json.dumps(reg))
+            meta_f.write_text(json.dumps({
+                "url": TEMPLATE_REGISTRY_URL,
+                "fetched_at": now_iso,
+                "fetched_at_epoch": self._now_epoch(),
+                "etag": headers.get("ETag"),
+                "bytes": len(body),
+            }, indent=2))
+            return reg, {
+                "source": "network",
+                "stale": False,
+                "cache_path": str(cache_f),
+                "fetched_at": now_iso,
+                "age_seconds": 0,
+                "bytes": len(body),
+                "url": TEMPLATE_REGISTRY_URL,
+                "registry_generated_at": reg.get("generated_at"),
+            }
+        except urllib.error.HTTPError as e:
+            if e.code == 304 and cache_f.exists():
+                reg = _read_cache()
+                if reg is not None:
+                    now_iso = self._now_iso()
+                    cached_meta["fetched_at"] = now_iso
+                    cached_meta["fetched_at_epoch"] = self._now_epoch()
+                    try:
+                        meta_f.write_text(json.dumps(cached_meta, indent=2))
+                    except Exception:
+                        pass
+                    return reg, {
+                        "source": "network-unchanged",
+                        "stale": False,
+                        "cache_path": str(cache_f),
+                        "fetched_at": now_iso,
+                        "age_seconds": 0,
+                        "note": "Registry re-validated against the server: 304 Not Modified — nothing changed upstream.",
+                        "url": TEMPLATE_REGISTRY_URL,
+                    }
+            net_err = "HTTP %s %s" % (e.code, e.reason)
+        except Exception as e:
+            net_err = "%s: %s" % (type(e).__name__, e)
+
+        reg = _read_cache() if cache_f.exists() else None
+        if reg is not None:
+            return reg, {
+                "source": "cache-STALE",
+                "stale": True,
+                "cache_path": str(cache_f),
+                "fetched_at": cached_meta.get("fetched_at"),
+                "age_seconds": age,
+                "network_error": net_err,
+                "warning": (
+                    "Could NOT reach the published registry. Serving a STALE cache "
+                    "last fetched %s (%s seconds old). This is not a statement that "
+                    "nothing changed upstream." % (cached_meta.get("fetched_at"), age)
+                ),
+                "url": TEMPLATE_REGISTRY_URL,
+            }
+        return None, {
+            "source": "none",
+            "stale": True,
+            "network_error": net_err,
+            "cache_path": str(cache_f),
+            "url": TEMPLATE_REGISTRY_URL,
+        }
+
+    def _now_epoch(self):
+        return int(datetime.now(timezone.utc).timestamp())
+
+    def _now_iso(self):
+        return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    # ── Template selection ────────────────────────────────────────────────
+
+    def _tokens(self, text):
+        raw = re.split(r'[^a-z0-9]+', (text or '').lower())
+        out = []
+        for t in raw:
+            if len(t) < 3 or t in _STOPWORDS:
+                continue
+            if t not in out:
+                out.append(t)
+        return out
+
+    def _variants(self, token):
+        """Progressively shorter forms, longest first (substring matching)."""
+        v = [token]
+        if token.endswith('ies') and len(token) > 4:
+            v.append(token[:-3] + 'y')
+        if token.endswith('s') and len(token) > 3:
+            v.append(token[:-1])
+        if token.endswith('es') and len(token) > 4:
+            v.append(token[:-2])
+        return v
+
+    def _entry_fields(self, entry):
+        sol = entry.get("_solution") or {}
+        strong = " ".join([
+            str(entry.get("display_name", "")),
+            str(entry.get("name", "")),
+            str(entry.get("_stack", "")),
+            " ".join(entry.get("tags") or []),
+        ])
+        mid = " ".join([
+            str(entry.get("description", "")),
+            str(entry.get("category", "")),
+            str(entry.get("_stack_vertical", "")),
+        ])
+        weak = " ".join([
+            str(sol.get("executive_summary", "")),
+            " ".join(sol.get("capabilities") or []),
+            " ".join(sol.get("personas") or []),
+            " ".join(sol.get("industries") or []),
+            " ".join(sol.get("featured_tools") or []),
+            " ".join(str(o) for o in (sol.get("outcomes") or [])),
+        ])
+        return strong.lower(), mid.lower(), weak.lower()
+
+    def _score_entry(self, entry, tokens):
+        strong, mid, weak = self._entry_fields(entry)
+        score = 0.0
+        hits = []
+        for t in tokens:
+            # Best tier across all morphological variants — a token scores once,
+            # at the strongest field any of its forms appears in.
+            best = 0.0
+            for v in self._variants(t):
+                if v in strong:
+                    best = max(best, 3.0)
+                elif v in mid:
+                    best = max(best, 2.0)
+                elif v in weak:
+                    best = max(best, 1.0)
+            if best:
+                score += best
+                hits.append(t)
+        return score, hits
+
+    def _rank_templates(self, agents, description, limit=5):
+        tokens = self._tokens(description)
+        scored = []
+        for e in agents:
+            if not e.get("_file") or not e.get("_sha256"):
+                continue
+            s, hits = self._score_entry(e, tokens)
+            if s > 0:
+                scored.append((s, hits, e))
+        scored.sort(key=lambda x: (-x[0], x[2].get("name", "")))
+        return tokens, scored[:limit]
+
+    def _find_template(self, agents, wanted):
+        w = wanted.strip().lower().lstrip('@')
+        w_norm = w.replace('_', '-')
+        exact, partial = None, []
+        for e in agents:
+            if not e.get("_file") or not e.get("_sha256"):
+                continue
+            name = str(e.get("name", "")).lower().lstrip('@')
+            slug = name.split('/')[-1]
+            stack = str(e.get("_stack", "")).lower().replace('_', '-')
+            disp = str(e.get("display_name", "")).lower()
+            keys = {name, name.replace('_', '-'), slug, slug.replace('_', '-'), stack, disp}
+            if w in keys or w_norm in keys:
+                exact = e
+                break
+            if w_norm and (w_norm in slug or w_norm in stack or w in disp):
+                partial.append(e)
+        if exact:
+            return exact, []
+        if len(partial) == 1:
+            return partial[0], []
+        return None, [self._entry_summary(e) for e in partial[:8]]
+
+    def _entry_summary(self, entry, score=None, hits=None):
+        out = {
+            "template": entry.get("name"),
+            "display_name": entry.get("display_name"),
+            "vertical": entry.get("_stack_vertical"),
+            "stack": entry.get("_stack"),
+            "lines": entry.get("_lines"),
+            "kind": entry.get("_catalog_kind"),
+            "description": (entry.get("description") or "")[:160],
+            "file": entry.get("_file"),
+            "sha256": entry.get("_sha256"),
+        }
+        if score is not None:
+            out["match_score"] = round(score, 1)
+        if hits:
+            out["matched_on"] = hits
+        return out
+
+    def _list_templates(self, description='', **kwargs):
+        reg, meta = self._load_registry(refresh=bool(kwargs.get('refresh')))
+        if reg is None:
+            return json.dumps({
+                "status": "error",
+                "action": "templates",
+                "message": "Could not load the published template registry.",
+                "registry": meta,
+            }, indent=2)
+
+        agents = reg.get("agents") or []
+        query = description or kwargs.get('template') or ''
+        if query:
+            tokens, ranked = self._rank_templates(agents, query, limit=10)
+            items = [self._entry_summary(e, s, h) for s, h, e in ranked]
+            msg = "%d of %d published templates ranked against your query." % (
+                len(items), len(agents))
+        else:
+            items = [self._entry_summary(e) for e in agents]
+            tokens = []
+            msg = "%d published templates available to adapt." % len(agents)
+
+        return json.dumps({
+            "status": "ok",
+            "action": "templates",
+            "source_repo": TEMPLATE_REPO_URL,
+            "license": TEMPLATE_LICENSE,
+            "registry": meta,
+            "query_tokens": tokens,
+            "count": len(items),
+            "templates": items,
+            "message": msg + (
+                "  WARNING: this listing came from a STALE cache — it may not reflect "
+                "the current published set." if meta.get("stale") else ""),
+        }, indent=2)
+
+    # ── Template fetch + integrity verification ───────────────────────────
+
+    def _fetch_and_verify(self, entry):
+        expected = entry.get("_sha256")
+        rel = entry.get("_file")
+        if not expected:
+            return {"ok": False, "reason": "no_expected_hash", "file": rel}
+        url = TEMPLATE_RAW_BASE + rel
+        if os.environ.get("RAPP_LEARN_OFFLINE") == "1":
+            return {"ok": False, "reason": "fetch_failed", "url": url,
+                    "error": "RAPP_LEARN_OFFLINE=1 — template bytes cannot be fetched or "
+                             "verified offline; nothing unverified will be used"}
+        try:
+            body, _ = self._http_get(url)
+        except Exception as e:
+            return {"ok": False, "reason": "fetch_failed",
+                    "error": "%s: %s" % (type(e).__name__, e), "url": url}
+
+        actual = hashlib.sha256(body).hexdigest()
+        if actual != expected:
+            return {
+                "ok": False,
+                "reason": "integrity_mismatch",
+                "url": url,
+                "expected_sha256": expected,
+                "actual_sha256": actual,
+                "bytes": len(body),
+                "action_taken": "bytes discarded, not written, not repaired",
+            }
+        return {
+            "ok": True,
+            "code": body.decode("utf-8"),
+            "sha256": actual,
+            "url": url,
+            "bytes": len(body),
+            "fetched_at": self._now_iso(),
+            "verified": "sha256 matched the published registry entry",
+        }
+
+    def _build_from_template(self, description, template_pick='', **kwargs):
+        if os.environ.get("RAPP_LEARN_OFFLINE") == "1" and not template_pick:
+            pass  # still allowed: a cached registry may serve, fetch will then fail honestly
+
+        reg, meta = self._load_registry(refresh=bool(kwargs.get('refresh')))
+        report = {"registry": meta, "source_repo": TEMPLATE_REPO_URL, "license": TEMPLATE_LICENSE}
+
+        if reg is None:
+            report["outcome"] = "registry unavailable"
+            return {"ok": False, "reason": "offline", "report": report}
+
+        agents = reg.get("agents") or []
+        report["templates_available"] = len(agents)
+
+        if template_pick:
+            entry, candidates = self._find_template(agents, template_pick)
+            if entry is None:
+                report["outcome"] = "explicit template not found"
+                return {"ok": False, "reason": "unknown_template",
+                        "candidates": candidates, "report": report}
+            report["mode"] = "explicit override"
+            report["chosen"] = self._entry_summary(entry)
+            report["why"] = ("You named it: template=%r resolved to %s. Automatic "
+                             "selection was bypassed." % (template_pick, entry.get("name")))
+        else:
+            tokens, ranked = self._rank_templates(agents, description)
+            report["mode"] = "automatic selection"
+            report["query_tokens"] = tokens
+            report["considered"] = [self._entry_summary(e, s, h) for s, h, e in ranked]
+            report["best_score"] = round(ranked[0][0], 1) if ranked else 0.0
+            report["threshold"] = MIN_MATCH_SCORE
+            if not ranked or ranked[0][0] < MIN_MATCH_SCORE:
+                report["outcome"] = "no confident match — refusing to force one"
+                return {"ok": False, "reason": "no_match", "report": report}
+            score, hits, entry = ranked[0]
+            runner_up = ranked[1][0] if len(ranked) > 1 else 0.0
+            report["chosen"] = self._entry_summary(entry, score, hits)
+            report["why"] = (
+                "Best weighted match: scored %.1f (threshold %.1f, runner-up %.1f) on "
+                "%s. Name/stack/tag hits weigh 3, description/vertical 2, solution "
+                "metadata 1." % (score, MIN_MATCH_SCORE, runner_up,
+                                 ", ".join(hits) or "no direct token hits"))
+
+        fetched = self._fetch_and_verify(entry)
+        if not fetched.get("ok"):
+            reason = fetched.get("reason")
+            report["outcome"] = "template rejected: %s" % reason
+            if reason == "fetch_failed":
+                report["fetch_error"] = fetched.get("error")
+            if reason == "integrity_mismatch":
+                report["integrity"] = fetched
+                return {"ok": False, "reason": "integrity_mismatch",
+                        "integrity": fetched, "report": report}
+            return {"ok": False, "reason": reason, "report": report}
+
+        report["outcome"] = "verified and adapted"
+        report["integrity"] = {
+            "url": fetched["url"],
+            "expected_sha256": entry.get("_sha256"),
+            "actual_sha256": fetched["sha256"],
+            "match": True,
+            "bytes": fetched["bytes"],
+            "fetched_at": fetched["fetched_at"],
+        }
+        return {"ok": True, "entry": entry, "fetched": fetched, "report": report}
+
+    def _name_from_template(self, entry, description):
+        """Prefer a name derived from the user's ask; fall back to the template's."""
+        derived = self._generate_name(description)
+        if derived and derived != 'Custom':
+            return derived
+        disp = re.sub(r'[^a-zA-Z0-9 ]', '', str(entry.get("display_name") or ""))
+        disp = disp.replace(" Agent", "")
+        words = [w for w in disp.split() if w]
+        if words:
+            return ''.join(w[0].upper() + w[1:] for w in words[:3])
+        return 'Custom'
+
+    # ── Template mutation (structural, never regeneration) ────────────────
+
+    def _py_block(self, var_name, data):
+        lines = ["%s = {" % var_name]
+        for k, v in data.items():
+            lines.append("    %s: %s," % (repr(str(k)), repr(v)))
+        lines.append("}")
+        return lines
+
+    def _mutate_template(self, code, entry, fetched, description, name, class_name, **kwargs):
+        """
+        Adapt a VERIFIED published template into the user's agent.
+
+        Structure-preserving: the template's operations, data layer, and
+        method bodies survive intact. What changes is identity (class name,
+        agent name), the manifest, the documentation, the import shim, and
+        the provenance record. Nothing is regenerated from scratch.
+        """
+        tree = ast.parse(code)
+        lines = code.split("\n")
+        edits = []  # (start0, end0_exclusive, replacement_lines)
+
+        # 1. Locate the pieces we are allowed to touch.
+        mod_doc = None
+        manifest_node = None
+        class_node = None
+        import_node = None
+        syspath_nodes = []
+
+        if (tree.body and isinstance(tree.body[0], ast.Expr)
+                and isinstance(tree.body[0].value, ast.Constant)
+                and isinstance(tree.body[0].value.value, str)):
+            mod_doc = tree.body[0]
+
+        for node in tree.body:
+            if (isinstance(node, ast.Assign) and manifest_node is None
+                    and any(isinstance(t, ast.Name) and t.id == "__manifest__"
+                            for t in node.targets)):
+                manifest_node = node
+            elif isinstance(node, ast.ClassDef) and class_node is None:
+                for b in node.bases:
+                    bn = b.id if isinstance(b, ast.Name) else getattr(b, "attr", None)
+                    if bn == "BasicAgent":
+                        class_node = node
+                        break
+            elif isinstance(node, ast.ImportFrom) and node.module == "basic_agent":
+                import_node = node
+            elif isinstance(node, ast.Expr):
+                seg = ast.get_source_segment(code, node) or ""
+                if "sys.path.insert" in seg:
+                    syspath_nodes.append(node)
+
+        if class_node is None:
+            raise ValueError("template has no BasicAgent subclass to adapt")
+
+        old_class = class_node.name
+        old_manifest = {}
+        if manifest_node is not None:
+            try:
+                old_manifest = ast.literal_eval(manifest_node.value)
+            except Exception:
+                old_manifest = {}
+
+        namespace = (kwargs.get('namespace', '') or 'rapp').lstrip('@')
+        snake = self._to_snake_case(name)
+        safe_desc = description.replace('"', "'").replace('\n', ' ').strip()[:300]
+        user_tags = self._generate_tags(description)
+        tags = []
+        for t in user_tags + list(old_manifest.get("tags") or []):
+            t = str(t)
+            if t not in tags:
+                tags.append(t)
+        env_list = [e.strip() for e in (kwargs.get('requires_env', '') or '').split(",") if e.strip()]
+        category = kwargs.get('category') or old_manifest.get("category") or "general"
+        adapted_at = self._now_iso()
+
+        provenance = {
+            "adapted_from_repo": TEMPLATE_REPO_URL,
+            "adapted_from_agent": entry.get("name"),
+            "adapted_from_file": entry.get("_file"),
+            "source_url": fetched["url"],
+            "source_sha256": fetched["sha256"],
+            "sha256_verified": True,
+            "verification": "sha256 of the fetched bytes matched registry.json's published _sha256",
+            "fetched_at": fetched["fetched_at"],
+            "adapted_at": adapted_at,
+            "adapted_by": "%s v%s" % (__manifest__["name"], __manifest__["version"]),
+            "method": "structural mutation (rename + remanifest + retarget); NOT regenerated",
+            "license": TEMPLATE_LICENSE,
+            "upstream_display_name": entry.get("display_name"),
+            "upstream_description": entry.get("description"),
+        }
+
+        # 2. Module docstring -> new purpose + provenance + MIT attribution.
+        ops = [n.name[1:] for n in class_node.body
+               if isinstance(n, ast.FunctionDef) and n.name.startswith("_")
+               and not n.name.startswith("__")]
+        new_doc = ['"""', "%s" % name, "", safe_desc or "Adapted RAPP agent.", "",
+                   "ADAPTED, NOT GENERATED.", ""]
+        new_doc += [
+            "This agent was produced by mutating a real published agent rather than",
+            "writing one from scratch. The upstream structure, operations and data",
+            "layer are preserved; identity, manifest and documentation were retargeted.",
+            "",
+            "  Upstream agent : %s" % entry.get("name"),
+            "  Upstream repo  : %s (branch %s)" % (TEMPLATE_REPO_URL, TEMPLATE_BRANCH),
+            "  Upstream file  : %s" % entry.get("_file"),
+            "  sha256         : %s (verified at fetch time)" % fetched["sha256"],
+            "  Fetched        : %s" % fetched["fetched_at"],
+            "  Adapted        : %s by %s" % (adapted_at, __manifest__["name"]),
+            "",
+            "  License: %s" % TEMPLATE_LICENSE,
+            "  The upstream MIT terms travel with this file. Attribution preserved.",
+            "",
+            "Drop this file into any RAPP brainstem's agents/ directory and it works.",
+            "Compatible with the RAR registry at https://github.com/kody-w/RAR",
+            '"""',
+        ]
+        if mod_doc is not None:
+            edits.append((mod_doc.lineno - 1, mod_doc.end_lineno, new_doc))
+        else:
+            edits.append((0, 0, new_doc + [""]))
+
+        # 3. Import shim -> the portable RAPP form.
+        rapp_import = [
+            "try:",
+            "    from agents.basic_agent import BasicAgent",
+            "except ImportError:",
+            "    from basic_agent import BasicAgent",
+        ]
+        if import_node is not None:
+            edits.append((import_node.lineno - 1, import_node.end_lineno, rapp_import))
+        for n in syspath_nodes:
+            edits.append((n.lineno - 1, n.end_lineno,
+                          ["# (upstream sys.path shim removed — RAPP resolves BasicAgent directly)"]))
+
+        # 4. Manifest -> this agent's identity + provenance block.
+        new_manifest = {
+            "schema": "rapp-agent/1.0",
+            "name": "@%s/%s" % (namespace, snake),
+            "version": "1.0.0",
+            "display_name": name,
+            "description": safe_desc or old_manifest.get("description", ""),
+            "author": namespace,
+            "tags": tags,
+            "category": category,
+            "quality_tier": "community",
+            "requires_env": env_list,
+            "dependencies": ["@rapp/basic_agent"],
+            "example_call": {"args": {"operation": (ops[0] if ops else "run")}},
+            "derived_from": entry.get("name"),
+            "derived_from_sha256": fetched["sha256"],
+            "license": "MIT (inherited from %s)" % TEMPLATE_REPO,
+        }
+        manifest_lines = (
+            ["# " + "=" * 63,
+             "# RAPP AGENT MANIFEST",
+             "# " + "=" * 63]
+            + self._py_block("__manifest__", new_manifest)
+            + ["",
+               "# " + "=" * 63,
+               "# PROVENANCE — this file is an adaptation of a published agent.",
+               "# Do not strip: it is the audit trail and the license attribution.",
+               "# " + "=" * 63]
+            + self._py_block("__provenance__", provenance)
+        )
+        if manifest_node is not None:
+            # Swallow the upstream banner comment directly above the manifest so
+            # the adapted file carries one banner, not two.
+            start = manifest_node.lineno - 1
+            while start > 0 and lines[start - 1].strip().startswith("#"):
+                start -= 1
+            edits.append((start, manifest_node.end_lineno, manifest_lines))
+        else:
+            edits.append((class_node.lineno - 1, class_node.lineno - 1, manifest_lines + ["", ""]))
+
+        # 5. Class docstring -> adaptation note, upstream doc preserved below.
+        cls_doc_node = None
+        if (class_node.body and isinstance(class_node.body[0], ast.Expr)
+                and isinstance(class_node.body[0].value, ast.Constant)
+                and isinstance(class_node.body[0].value.value, str)):
+            cls_doc_node = class_node.body[0]
+        original_doc = (cls_doc_node.value.value if cls_doc_node else "").strip("\n")
+        note = ['    """',
+                "    %s" % name,
+                "",
+                "    ADAPTATION TARGET: %s" % (safe_desc or "(no description given)"),
+                "",
+                "    Behaviour below is inherited from %s and is intentionally left" % entry.get("name"),
+                "    intact. To retarget it, edit the operations listed here rather than",
+                "    rewriting the file — the structure is the part that was proven.",
+                ""]
+        if original_doc:
+            note += ["    --- upstream documentation (preserved) ---"]
+            note += ["    " + ln if ln.strip() else "" for ln in original_doc.split("\n")]
+        note += ['    """']
+        if cls_doc_node is not None:
+            edits.append((cls_doc_node.lineno - 1, cls_doc_node.end_lineno, note))
+        else:
+            edits.append((class_node.body[0].lineno - 1, class_node.body[0].lineno - 1, note))
+
+        # 6. Apply edits bottom-up so line numbers stay valid.
+        for start, end, repl in sorted(edits, key=lambda x: -x[0]):
+            lines[start:end] = repl
+        mutated = "\n".join(lines)
+
+        # 7. Rename the class (and every reference, including self.name).
+        mutated = re.sub(r'\b%s\b' % re.escape(old_class), class_name, mutated)
+        mutated = re.sub(r"(self\.name\s*=\s*)(['\"])[^'\"]*\2",
+                         lambda m: '%s"%s"' % (m.group(1), class_name), mutated, count=1)
+
+        if not mutated.endswith("\n"):
+            mutated += "\n"
+
+        # 8. Fail loudly rather than emit a broken file.
+        ast.parse(mutated)
+        return mutated, provenance
 
     # ── Swarm creation ────────────────────────────────────────────────────
 
@@ -467,6 +1351,9 @@ if __name__ == "__main__":
         namespace = (kwargs.get('namespace', '') or 'rapp').lstrip('@')
         env_list = [e.strip() for e in (kwargs.get('requires_env', '') or '').split(",") if e.strip()]
         tags = self._generate_tags(description) + ["swarm"]
+        out_dir = self._resolve_output_dir(kwargs.get('output_dir'))
+        if write:
+            out_dir.mkdir(parents=True, exist_ok=True)
 
         generated_files = []
 
@@ -499,7 +1386,7 @@ if __name__ == "__main__":
             )
 
             if write:
-                dest = self.agents_dir / sub_filename
+                dest = out_dir / sub_filename
                 try:
                     dest.write_text(sub_code)
                 except Exception as e:
@@ -548,7 +1435,7 @@ if __name__ == "__main__":
         )
 
         if write:
-            dest = self.agents_dir / orch_filename
+            dest = out_dir / orch_filename
             try:
                 dest.write_text(orch_code)
             except Exception as e:
@@ -567,6 +1454,11 @@ if __name__ == "__main__":
         result = {
             "status": "success",
             "action": "swarm" if write else "preview",
+            "generator": "builtin-scratch",
+            "generator_description": (
+                "Swarm scaffolding comes from LearnNewAgent's built-in string templates; "
+                "published-template adaptation applies to single agents (action='create')."
+            ),
             "swarm_name": swarm_name,
             "files_generated": len(generated_files),
             "filenames": all_filenames,
@@ -587,9 +1479,9 @@ if __name__ == "__main__":
 
             for f in generated_files:
                 if not f.get("is_orchestrator"):
-                    fpath = self.agents_dir / f["filename"]
+                    fpath = out_dir / f["filename"]
                     self._hot_load_agent(fpath, f["class"])
-            orch_path = self.agents_dir / orch_filename
+            orch_path = out_dir / orch_filename
             self._hot_load_agent(orch_path, orch_class)
         else:
             result["orchestrator_code"] = orch_code
@@ -610,14 +1502,27 @@ if __name__ == "__main__":
 
         issue_title = f"[AGENT] @{namespace}/{filename.replace('.py', '')}"
 
-        return json.dumps({
+        submission = {
             "status": "ok",
             "action": "submit",
+            "generator": preview.get("generator"),
+            "generator_description": preview.get("generator_description"),
             "filename": filename,
             "namespace": f"@{namespace}",
             "rar_path": rar_path,
             "issue_title": issue_title,
             "code": code,
+        }
+        if preview.get("provenance"):
+            submission["provenance"] = preview["provenance"]
+            submission["attribution_notice"] = (
+                "This agent is an adaptation of %s under %s. The provenance block in the "
+                "generated file must survive submission." % (
+                    preview["provenance"].get("adapted_from_agent"), TEMPLATE_LICENSE)
+            )
+        if preview.get("template_selection"):
+            submission["template_selection"] = preview["template_selection"]
+        submission.update({
             "message": (
                 f"Agent ready for RAR submission.\n\n"
                 f"Option 1 — GitHub Issue:\n"
@@ -629,11 +1534,14 @@ if __name__ == "__main__":
                 f"The registry CI validates the manifest and runs security checks."
             ),
         })
+        return json.dumps(submission, indent=2)
 
     # ── Name generation ───────────────────────────────────────────────────
 
     def _generate_name(self, description):
         try:
+            if os.environ.get("RAPP_LEARN_NO_LLM") == "1":
+                raise RuntimeError("LLM naming disabled by RAPP_LEARN_NO_LLM=1")
             result = subprocess.run(
                 ['copilot', '--message',
                  f'Generate a short 1-2 word CamelCase name for an agent that: '
@@ -777,6 +1685,8 @@ if __name__ == "__main__":
 
     def _generate_perform_body(self, description):
         try:
+            if os.environ.get("RAPP_LEARN_NO_LLM") == "1":
+                raise RuntimeError("LLM body generation disabled by RAPP_LEARN_NO_LLM=1")
             prompt = (
                 f"Generate ONLY the Python code for the body of a perform() method "
                 f"for an agent that: {description}\n\n"
@@ -972,27 +1882,38 @@ if __name__ == "__main__":
 
     # ── List / Delete ─────────────────────────────────────────────────────
 
-    def _list_generated_agents(self):
+    def _list_generated_agents(self, output_dir=None):
         agents = []
+        scan_dir = self._resolve_output_dir(output_dir)
         core = {'basic_agent.py', 'save_memory_agent.py', 'recall_memory_agent.py',
                 'learn_new_agent.py', 'swarm_factory_agent.py'}
-        for f in sorted(self.agents_dir.glob('*_agent.py')):
+        for f in sorted(scan_dir.glob('*_agent.py')):
             if f.name in core:
                 continue
             content = f.read_text()
-            is_generated = 'Auto-generated by LearnNewAgent' in content
-            agents.append({
+            from_scratch = 'Auto-generated by LearnNewAgent' in content
+            adapted = '__provenance__' in content and 'ADAPTED, NOT GENERATED' in content
+            entry = {
                 "name": f.stem.replace('_agent', ''),
                 "file": f.name,
-                "auto_generated": is_generated
-            })
+                "auto_generated": from_scratch or adapted,
+                "origin": ("aibast-template-mutation" if adapted
+                           else "builtin-scratch" if from_scratch else "unknown"),
+            }
+            if adapted:
+                m = re.search(r"'adapted_from_agent':\s*'([^']+)'", content)
+                if m:
+                    entry["adapted_from"] = m.group(1)
+            agents.append(entry)
         return json.dumps({
             "status": "success",
+            "directory": str(scan_dir),
             "agents": agents,
             "count": len(agents)
         })
 
-    def _delete_agent(self, name):
+    def _delete_agent(self, name, output_dir=None):
+        scan_dir = self._resolve_output_dir(output_dir)
         if not name:
             return json.dumps({
                 "status": "error",
@@ -1000,10 +1921,10 @@ if __name__ == "__main__":
             })
 
         snake_name = self._to_snake_case(self._sanitize_name(name))
-        file_path = self.agents_dir / f"{snake_name}_agent.py"
+        file_path = scan_dir / f"{snake_name}_agent.py"
 
         if not file_path.exists():
-            for f in self.agents_dir.glob('*_agent.py'):
+            for f in scan_dir.glob('*_agent.py'):
                 if name.lower() in f.name.lower():
                     file_path = f
                     break
@@ -1035,5 +1956,7 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     a = LearnNewAgent()
-    print(a.perform(action="preview",
-                    description="An agent that tracks daily habits and streaks"))
+    # Preview only — writes nothing. Shows which path produced the output.
+    print(a.perform(
+        action="preview",
+        description="An agent that researches an enterprise account and maps its buying committee before a sales call"))
