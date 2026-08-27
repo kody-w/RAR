@@ -774,7 +774,7 @@ class _ForgeEngine(_EngineBase):
         mcp_action_count = len(mcp_action_personas)
 
         display = display_name or public_class_name
-        prefix = schema_prefix or "rapp"
+        prefix = schema_prefix or _DEFAULT_PUBLISHER_PREFIX
         slug = _slug(public_class_name)
         bundle_id = f"{slug}-{_short_hash(src, 6)}"
 
@@ -5111,6 +5111,14 @@ import json
 import requests
 from typing import Dict, Any, List
 from azure.ai.projects.models import FunctionTool
+
+# PUBLISHER PREFIX. Kody, 2026-08-27: "make it aibast for now."
+#
+# Env-overridable rather than hardcoded, because this repo is public: a bare "aibast"
+# default would stamp every stranger's generated solution with a publisher that is not
+# theirs, and a solution carrying the wrong publisher is a real problem for them to unpick
+# in a tenant. Setting RAPP_PUBLISHER_PREFIX overrides it; unset, it is aibast.
+_DEFAULT_PUBLISHER_PREFIX = os.getenv("RAPP_PUBLISHER_PREFIX", "aibast")
 
 
 RAPP_FUNCTION_APP_URL = "https://your-function-app.azurewebsites.net"
