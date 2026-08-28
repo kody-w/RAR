@@ -121896,6 +121896,11 @@
       "reason": "Published singleton bytes no longer match the federation SHA-256; blocked until the upstream catalog is repaired."
     },
     {
+      "aggregate_id": "holiday-recap",
+      "identity": "@cat-agent-skills/holiday_recap",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "identity": "@kody-w/example_private",
       "reason": "gated stub has no public executable bytes"
     },
