@@ -1,0 +1,86 @@
+{
+  "agent": "@kody-w/full_rapp_leviathan",
+  "agent_file": "full_rapp_leviathan_agent.py",
+  "agent_sha256": "78dac24c84eeca02f8e40144562d9ace2dd4da28b8fd7ca8f78b8b075feaad5a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FullRappLeviathanAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Compiles and assesses public-safe Full RAPP Leviathan blueprints across identity, intelligence, production, truth, and commerce.",
+    "display_name": "FullRappLeviathan",
+    "example_call": {
+      "args": {
+        "customer": "Marketing agencies",
+        "intent": "Sell agent-ready market intelligence through a persistent Brainstem, private execution, evidence, and paid tool calls.",
+        "name": "agent-market-intelligence",
+        "operation": "blueprint"
+      }
+    },
+    "industry": "meta",
+    "name": "@kody-w/full_rapp_leviathan",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "leviathan",
+      "protocol",
+      "brainstem",
+      "foundry",
+      "evidence",
+      "commerce",
+      "x402",
+      "enterprise"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "FullRappLeviathan",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "architecture_json": {
+        "type": "string"
+      },
+      "blueprint_json": {
+        "type": "string"
+      },
+      "customer": {
+        "type": "string"
+      },
+      "intent": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "protocol",
+          "assess",
+          "blueprint",
+          "materialize",
+          "inspect",
+          "list"
+        ],
+        "type": "string"
+      },
+      "revenue_model": {
+        "type": "string"
+      },
+      "trust_anchors_json": {
+        "description": "JSON array of RSA-SHA256 public trust-anchor objects for this assessment.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

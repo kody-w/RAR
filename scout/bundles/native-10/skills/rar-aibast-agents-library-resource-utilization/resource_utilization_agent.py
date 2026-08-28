@@ -1,0 +1,656 @@
+"""
+Resource Utilization Agent — a template you are meant to mutate.
+
+Tracks consultant utilization, billable hours, and capacity across a
+professional-services firm. Forecasts demand, identifies bench resources,
+and generates staffing recommendations to hit utilization targets.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template the tenant's bookable resources are reinterpreted
+     as the consultant bench and their bookings as scheduled billable
+     work — e.g. resource "Riley Chen" with booked hours computed from
+     the live booking calendar.
+     Try: perform(operation="utilization_dashboard")
+  2. No network? Everything falls back to the embedded demo layer below
+     (CONSULTANTS / PROJECT_PIPELINE / UTILIZATION_TARGETS) — the agent
+     never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     RESOURCE_UTILIZATION_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your PSA), or replace
+     _fetch_collection() with a Kantata/OpenAir client. Fields the rest
+     of the file needs are listed in _normalize_live_consultant() —
+     bill rates and skills render as "n/a — enrichment seam" until you
+     wire your rate card and skills matrix.
+
+OPERATIONS
+  utilization_dashboard | capacity_forecast | bench_analysis
+  | staffing_recommendation | skill_gap_options | executive_impact_report
+  kwargs: operation (required), record_id, consultant_id
+"""
+
+import sys
+import os
+import json
+import urllib.request
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
+from basic_agent import BasicAgent
+
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/resource_utilization",
+    "version": "1.2.0",
+    "display_name": "Resource Utilization Agent",
+    "description": "Reports consultant utilization and staffing plans from a live simulated Dynamics 365 tenant booking calendar, with an offline fallback.",
+    "author": "AIBAST",
+    "tags": ["utilization", "staffing", "capacity", "bench", "professional-services"],
+    "category": "professional_services",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export RESOURCE_UTILIZATION_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your PSA client. Downstream
+# code only needs the fields from _normalize_live_consultant().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "RESOURCE_UTILIZATION_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_consultant(row, bookings):
+    """Project a Dynamics bookable resource + its bookings onto the
+    consultant shape this agent renders. THIS is the contract your
+    replacement data source must meet — a dict with these keys. None
+    means 'not knowable from the scheduling records alone' and the
+    renderer labels it as an enrichment seam (wire your rate card and
+    skills matrix)."""
+    name = row.get("name", "Unknown")
+    mine = [b for b in bookings if b.get("resourcename") == name]
+    booked_minutes = sum(
+        int(b.get("duration") or 0) for b in mine
+        if b.get("bookingstatusname") in ("Scheduled", "In Progress", "Completed")
+    )
+    return {
+        "name": name,
+        "booked_hours": round(booked_minutes / 60, 1),  # real, from bookings
+        "bookings": len(mine),
+        "status": "billable" if booked_minutes else "bench",
+        "rate_hr": None,   # enrichment seam — wire your rate card
+        "skills": None,    # enrichment seam — wire your skills matrix
+        "level": None,     # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_bench():
+    """Tenant bookable resources reinterpreted as the consultant bench,
+    with booked hours computed from the live calendar; [] when offline."""
+    rows = _fetch_collection("bookableresources")
+    bookings = _fetch_collection("bookableresourcebookings") if rows else []
+    return [_normalize_live_consultant(r, bookings) for r in rows]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
+# ---------------------------------------------------------------------------
+
+CONSULTANTS = {
+    "CON-401": {"name": "Elena Vasquez", "level": "Senior", "skills": ["Cloud Architecture", "Azure", "DevOps"],
+                 "rate_hr": 275, "utilization_pct": 92, "status": "billable",
+                 "current_project": "TechCorp Transformation", "project_end": "2026-06-30"},
+    "CON-402": {"name": "Michael Chen", "level": "Senior", "skills": ["Data Engineering", "Databricks", "Python"],
+                 "rate_hr": 260, "utilization_pct": 88, "status": "billable",
+                 "current_project": "Apex Analytics Platform", "project_end": "2026-05-15"},
+    "CON-403": {"name": "Priya Sharma", "level": "Manager", "skills": ["Program Management", "Agile", "Change Mgmt"],
+                 "rate_hr": 310, "utilization_pct": 95, "status": "billable",
+                 "current_project": "Pinnacle Energy ERP", "project_end": "2026-08-31"},
+    "CON-404": {"name": "David Okafor", "level": "Mid", "skills": ["Data Analytics", "Power BI", "SQL"],
+                 "rate_hr": 175, "utilization_pct": 0, "status": "bench",
+                 "current_project": None, "project_end": None},
+    "CON-405": {"name": "Sarah Kim", "level": "Mid", "skills": ["Cloud Architecture", "AWS", "Terraform"],
+                 "rate_hr": 185, "utilization_pct": 0, "status": "bench",
+                 "current_project": None, "project_end": None},
+    "CON-406": {"name": "James Wright", "level": "Junior", "skills": ["Business Analysis", "Requirements", "Jira"],
+                 "rate_hr": 125, "utilization_pct": 0, "status": "bench",
+                 "current_project": None, "project_end": None},
+    "CON-407": {"name": "Lisa Tanaka", "level": "Senior", "skills": ["Cybersecurity", "Identity", "Compliance"],
+                 "rate_hr": 290, "utilization_pct": 78, "status": "billable",
+                 "current_project": "Atlas Security Audit", "project_end": "2026-04-10"},
+    "CON-408": {"name": "Robert Garcia", "level": "Mid", "skills": ["ERP", "D365", "Integration"],
+                 "rate_hr": 195, "utilization_pct": 0, "status": "bench",
+                 "current_project": None, "project_end": None},
+    "CON-409": {"name": "Amanda Foster", "level": "Mid", "skills": ["UX Design", "Research", "Figma"],
+                 "rate_hr": 165, "utilization_pct": 85, "status": "billable",
+                 "current_project": "Metro Transit Portal", "project_end": "2026-05-01"},
+    "CON-410": {"name": "Chen Wei", "level": "Senior", "skills": ["AI/ML", "Python", "Azure ML"],
+                 "rate_hr": 295, "utilization_pct": 0, "status": "bench",
+                 "current_project": None, "project_end": None},
+}
+
+PROJECT_PIPELINE = [
+    {"name": "FinanceHub Cloud Migration", "start": "2026-04-01", "months": 6,
+     "needs": [("Cloud Architecture", "Senior", 1), ("DevOps", "Mid", 2)], "probability": 0.85},
+    {"name": "Healthcare Digital Transformation", "start": "2026-04-15", "months": 12,
+     "needs": [("Program Management", "Manager", 1), ("Data Analytics", "Mid", 2), ("Business Analysis", "Junior", 1)], "probability": 0.75},
+    {"name": "Retail Analytics Platform", "start": "2026-05-01", "months": 8,
+     "needs": [("AI/ML", "Senior", 1), ("Data Engineering", "Mid", 1)], "probability": 0.60},
+    {"name": "Government Cyber Assessment", "start": "2026-04-01", "months": 3,
+     "needs": [("Cybersecurity", "Senior", 2), ("Compliance", "Mid", 1)], "probability": 0.90},
+]
+
+UTILIZATION_TARGETS = {
+    "Senior": 85,
+    "Manager": 80,
+    "Mid": 80,
+    "Junior": 75,
+    "firm_target": 85,
+}
+
+BENCH_COST_PER_MONTH = {
+    "Senior": 22000,
+    "Manager": 25000,
+    "Mid": 14000,
+    "Junior": 10000,
+}
+
+EVIDENCE_CAPABILITIES = {
+    "skill_gap_options": {
+        "title": "Near-Ready Skill Gap Options",
+        "write": False,
+        "records": [
+            {
+                "record_id": "RU-601",
+                "consultant": "Sarah Kim",
+                "pipeline_need": "FinanceHub Cloud Migration / Azure architecture",
+                "gap": "AWS-to-Azure platform mapping",
+                "option": "two-week Azure landing-zone accelerator",
+                "delivery_guardrail": "pair with Elena Vasquez for architecture review",
+                "upskilling_roi": "$29,600 monthly billable value versus $14,000 bench cost",
+            },
+            {
+                "record_id": "RU-602",
+                "consultant": "Robert Garcia",
+                "pipeline_need": "FinanceHub Cloud Migration / DevOps",
+                "gap": "Terraform delivery evidence",
+                "option": "three-week Terraform lab plus internal deployment",
+                "delivery_guardrail": "technical gate before client assignment",
+                "upskilling_roi": "$31,200 monthly billable value versus $14,000 bench cost",
+            },
+        ],
+    },
+    "executive_impact_report": {
+        "title": "Executive Utilization Impact Report",
+        "write": True,
+        "records": [
+            {
+                "record_id": "RU-EXEC-601",
+                "scenario": "deploy direct bench-to-pipeline matches",
+                "dashboard": "utilization, bench cost, skills, pipeline, and financial upside",
+            },
+            {
+                "record_id": "RU-EXEC-602",
+                "scenario": "deploy matches, close near-ready gaps, and move remaining bench to billable innovation work",
+                "dashboard": "utilization, bench cost, skills, pipeline, and financial upside",
+            },
+        ],
+    },
+}
+
+
+# ---------------------------------------------------------------------------
+# Helper functions
+# ---------------------------------------------------------------------------
+
+def _firm_utilization():
+    """Average utilization across all consultants."""
+    rates = [c["utilization_pct"] for c in CONSULTANTS.values()]
+    return round(sum(rates) / len(rates), 1)
+
+
+def _bench_consultants():
+    """Return list of bench consultants."""
+    return {cid: c for cid, c in CONSULTANTS.items() if c["status"] == "bench"}
+
+
+def _monthly_bench_cost():
+    """Total monthly cost of bench consultants."""
+    total = 0
+    for c in CONSULTANTS.values():
+        if c["status"] == "bench":
+            total += BENCH_COST_PER_MONTH.get(c["level"], 14000)
+    return total
+
+
+def _skill_match(consultant, required_skill):
+    """Check if a consultant has a matching skill."""
+    return any(required_skill.lower() in s.lower() for s in consultant["skills"])
+
+
+def _find_matches_for_pipeline():
+    """Match bench consultants to pipeline project needs."""
+    matches = []
+    bench = _bench_consultants()
+    for proj in PROJECT_PIPELINE:
+        for skill, level, count in proj["needs"]:
+            candidates = [
+                (cid, c) for cid, c in bench.items()
+                if c["level"] == level and _skill_match(c, skill)
+            ]
+            for cid, c in candidates[:count]:
+                matches.append({
+                    "consultant_id": cid,
+                    "consultant_name": c["name"],
+                    "project": proj["name"],
+                    "skill_matched": skill,
+                    "level": level,
+                    "probability": proj["probability"],
+                    "start": proj["start"],
+                })
+    return matches
+
+
+def _deployment_metrics(consultant_ids):
+    """Calculate financial and utilization impact from current source records."""
+    bench = _bench_consultants()
+    selected_ids = list(dict.fromkeys(
+        cid for cid in consultant_ids if cid in bench
+    ))
+    monthly_savings = sum(
+        BENCH_COST_PER_MONTH.get(bench[cid]["level"], 14000)
+        for cid in selected_ids
+    )
+    monthly_capacity_revenue = sum(
+        bench[cid]["rate_hr"] * 160 for cid in selected_ids
+    )
+    total = len(CONSULTANTS)
+    projected_billable = total - len(bench) + len(selected_ids)
+    projected_utilization = (
+        round(projected_billable / total * 87, 1) if total else 0
+    )
+    return {
+        "monthly_savings": monthly_savings,
+        "monthly_capacity_revenue": monthly_capacity_revenue,
+        "current_utilization": _firm_utilization(),
+        "projected_utilization": projected_utilization,
+    }
+
+
+def _executive_impact_records():
+    """Build executive records from consultants, matches, rates, and cost tables."""
+    templates = EVIDENCE_CAPABILITIES["executive_impact_report"]["records"]
+    direct_ids = [
+        match["consultant_id"] for match in _find_matches_for_pipeline()
+    ]
+    scenario_ids = [
+        direct_ids,
+        list(_bench_consultants()),
+    ]
+    records = []
+    for template, consultant_ids in zip(templates, scenario_ids):
+        metrics = _deployment_metrics(consultant_ids)
+        records.append({
+            "record_id": template["record_id"],
+            "scenario": template["scenario"],
+            "projected_savings": (
+                f"${metrics['monthly_savings']:,.0f} "
+                "monthly bench-cost reduction"
+            ),
+            "new_revenue": (
+                f"${metrics['monthly_capacity_revenue']:,.0f} "
+                "monthly billable capacity/revenue"
+            ),
+            "utilization_progress": (
+                f"{metrics['current_utilization']}% current to "
+                f"{metrics['projected_utilization']}% projected"
+            ),
+            "dashboard": template["dashboard"],
+        })
+    return records
+
+
+def _evidence_matches(user_input, records):
+    """Match explicit scenario IDs without silently substituting another plan."""
+    tokens = {
+        "".join(ch for ch in token.upper() if ch.isalnum())
+        for token in str(user_input).split()
+    }
+    return [
+        record for record in records
+        if "".join(ch for ch in record["record_id"].upper() if ch.isalnum()) in tokens
+    ]
+
+
+def _evidence_selector(capability, kwargs):
+    """Resolve explicit evidence or consultant identifiers to evidence record IDs."""
+    if kwargs.get("record_id"):
+        return kwargs["record_id"]
+    if kwargs.get("consultant_id"):
+        consultant = CONSULTANTS.get(kwargs["consultant_id"])
+        if not consultant:
+            return kwargs["consultant_id"]
+        records = EVIDENCE_CAPABILITIES[capability]["records"]
+        record_ids = [
+            record["record_id"]
+            for record in records
+            if record.get("consultant") == consultant["name"]
+        ]
+        return " ".join(record_ids) or kwargs["consultant_id"]
+    return kwargs.get("user_input", "")
+
+
+def _render_evidence_operation(capability, user_input=""):
+    spec = EVIDENCE_CAPABILITIES[capability]
+    records = (
+        _executive_impact_records()
+        if capability == "executive_impact_report"
+        else spec["records"]
+    )
+    matches = _evidence_matches(user_input, records) if user_input else records
+    lines = [f"## {spec['title']}\n"]
+    if user_input and not matches:
+        lines.append("No exact `record_id` match was found; no substitute scenario was used.")
+    else:
+        lines.append("Deterministic workforce-planning scenarios:")
+        for record in matches:
+            lines.append("- " + "; ".join(f"{key}: {value}" for key, value in record.items()))
+    if spec["write"]:
+        target = matches[0]["record_id"] if matches else "NO-MATCH"
+        lines.extend([
+            "\n### Simulated Write Receipt",
+            f"- receipt_id: SIM-{capability.upper()}-{target}",
+            "- status: simulated",
+            "- target_system: Microsoft Teams executive dashboard",
+            "- No dashboard or message was published; this is a preview-only write.",
+        ])
+    else:
+        lines.append("\n_Read-only analysis; no external system changed._")
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Agent class
+# ---------------------------------------------------------------------------
+
+class ResourceUtilizationAgent(BasicAgent):
+    """Tracks consultant utilization and generates staffing plans."""
+
+    def __init__(self):
+        self.name = "ResourceUtilizationAgent"
+        self.metadata = {
+            "name": self.name,
+            "description": __manifest__["description"],
+            "operations": [
+                "utilization_dashboard",
+                "capacity_forecast",
+                "bench_analysis",
+                "staffing_recommendation",
+                "skill_gap_options",
+                "executive_impact_report",
+            ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to run; defaults to utilization_dashboard when omitted.",
+                        "enum": [
+                            "utilization_dashboard",
+                            "capacity_forecast",
+                            "bench_analysis",
+                            "staffing_recommendation",
+                            "skill_gap_options",
+                            "executive_impact_report",
+                        ],
+                    },
+                    "record_id": {
+                        "type": "string",
+                        "description": "Evidence record identifier for skill_gap_options or executive_impact_report, such as RU-601 or RU-EXEC-601.",
+                    },
+                    "consultant_id": {
+                        "type": "string",
+                        "description": "Consultant identifier, such as CON-405; selects that consultant's skill-gap option.",
+                    },
+                },
+                "required": [],
+            },
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        operation = kwargs.get("operation", "utilization_dashboard")
+        dispatch = {
+            "utilization_dashboard": self._utilization_dashboard,
+            "capacity_forecast": self._capacity_forecast,
+            "bench_analysis": self._bench_analysis,
+            "staffing_recommendation": self._staffing_recommendation,
+            "skill_gap_options": self._skill_gap_options,
+            "executive_impact_report": self._executive_impact_report,
+        }
+        handler = dispatch.get(operation)
+        if handler is None:
+            return f"**Error:** Unknown operation `{operation}`. Valid: {', '.join(dispatch.keys())}"
+        return handler(**kwargs)
+
+    # ------------------------------------------------------------------
+    def _utilization_dashboard(self, **kwargs) -> str:
+        lines = ["## Resource Utilization Dashboard\n"]
+        firm_util = _firm_utilization()
+        target = UTILIZATION_TARGETS["firm_target"]
+        gap = round(target - firm_util, 1)
+        bench = _bench_consultants()
+        lines.append(f"**Firm utilization:** {firm_util}% (target: {target}%, gap: {gap}pp)")
+        lines.append(f"**Total headcount:** {len(CONSULTANTS)}")
+        lines.append(f"**Billable:** {len(CONSULTANTS) - len(bench)}")
+        lines.append(f"**Bench:** {len(bench)}")
+        lines.append(f"**Monthly bench cost:** ${_monthly_bench_cost():,.0f}\n")
+
+        lines.append("| ID | Name | Level | Rate/Hr | Util % | Status | Project | End Date |")
+        lines.append("|----|------|-------|---------|--------|--------|---------|----------|")
+        for cid, c in CONSULTANTS.items():
+            proj = c["current_project"] or "-"
+            end = c["project_end"] or "-"
+            flag = " **BENCH**" if c["status"] == "bench" else ""
+            lines.append(
+                f"| {cid} | {c['name']} | {c['level']} | ${c['rate_hr']} | "
+                f"{c['utilization_pct']}% | {c['status']}{flag} | {proj[:22]} | {end} |"
+            )
+
+        lines.append("\n### Utilization by Level\n")
+        lines.append("| Level | Headcount | Avg Util | Target | Status |")
+        lines.append("|-------|-----------|----------|--------|--------|")
+        for level in ("Senior", "Manager", "Mid", "Junior"):
+            members = [c for c in CONSULTANTS.values() if c["level"] == level]
+            if not members:
+                continue
+            avg = round(sum(c["utilization_pct"] for c in members) / len(members), 1)
+            tgt = UTILIZATION_TARGETS.get(level, 80)
+            status = "On Track" if avg >= tgt else "Below Target"
+            lines.append(f"| {level} | {len(members)} | {avg}% | {tgt}% | {status} |")
+        live = _live_bench()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Consultant Bench (Dynamics bookable resources + bookings)\n")
+            lines.append("| Consultant | Booked Hours | Bookings | Status | Rate/Hr | Skills |")
+            lines.append("|------------|--------------|----------|--------|---------|--------|")
+            for c in live:
+                lines.append(
+                    f"| {c['name']} | {c['booked_hours']} | {c['bookings']} | {c['status']} | "
+                    f"{c['rate_hr'] or seam} | {c['skills'] or seam} |"
+                )
+            lines.append("\n(Booked hours are computed from the live booking calendar; "
+                         "rates and skills await enrichment.)")
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo consultants only._")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _capacity_forecast(self, **kwargs) -> str:
+        lines = ["## Capacity Forecast (Next 90 Days)\n"]
+        lines.append("### Upcoming Project Endings\n")
+        lines.append("| Consultant | Project | End Date | Level | Skills |")
+        lines.append("|------------|---------|----------|-------|--------|")
+        ending_soon = [(cid, c) for cid, c in CONSULTANTS.items()
+                       if c["project_end"] and c["project_end"] <= "2026-06-30"]
+        for cid, c in sorted(ending_soon, key=lambda x: x[1]["project_end"]):
+            lines.append(
+                f"| {c['name']} | {c['current_project']} | {c['project_end']} | "
+                f"{c['level']} | {', '.join(c['skills'][:2])} |"
+            )
+
+        lines.append("\n### Pipeline Demand\n")
+        lines.append("| Project | Start | Duration | Probability | Roles Needed |")
+        lines.append("|---------|-------|----------|-------------|--------------|")
+        for proj in PROJECT_PIPELINE:
+            roles = "; ".join(f"{s} ({l})" for s, l, _ in proj["needs"])
+            lines.append(
+                f"| {proj['name']} | {proj['start']} | {proj['months']}mo | "
+                f"{proj['probability']*100:.0f}% | {roles} |"
+            )
+
+        total_roles = sum(count for proj in PROJECT_PIPELINE for _, _, count in proj["needs"])
+        lines.append(f"\n**Total roles in pipeline:** {total_roles}")
+        lines.append(f"**Bench available:** {len(_bench_consultants())}")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _bench_analysis(self, **kwargs) -> str:
+        lines = ["## Bench Analysis\n"]
+        bench = _bench_consultants()
+        monthly_cost = _monthly_bench_cost()
+        lines.append(f"**Bench headcount:** {len(bench)}")
+        lines.append(f"**Monthly bench cost:** ${monthly_cost:,.0f}")
+        lines.append(f"**Annualized bench cost:** ${monthly_cost * 12:,.0f}\n")
+
+        lines.append("| ID | Name | Level | Rate/Hr | Skills | Monthly Cost | Days on Bench |")
+        lines.append("|----|------|-------|---------|--------|-------------|---------------|")
+        for cid, c in bench.items():
+            mc = BENCH_COST_PER_MONTH.get(c["level"], 14000)
+            skills = ", ".join(c["skills"][:2])
+            lines.append(
+                f"| {cid} | {c['name']} | {c['level']} | ${c['rate_hr']} | {skills} | ${mc:,.0f} | est. 30+ |"
+            )
+
+        lines.append("\n### Skill Inventory on Bench\n")
+        skill_counts = {}
+        for c in bench.values():
+            for s in c["skills"]:
+                skill_counts[s] = skill_counts.get(s, 0) + 1
+        lines.append("| Skill | Available |")
+        lines.append("|-------|-----------|")
+        for s, count in sorted(skill_counts.items(), key=lambda x: x[1], reverse=True):
+            lines.append(f"| {s} | {count} |")
+
+        lines.append(f"\n**Revenue opportunity if deployed:** ${sum(c['rate_hr'] * 160 for c in bench.values()):,.0f}/month")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _staffing_recommendation(self, **kwargs) -> str:
+        lines = ["## Staffing Recommendations\n"]
+        matches = _find_matches_for_pipeline()
+
+        if matches:
+            lines.append("### Bench-to-Pipeline Matches\n")
+            lines.append("| Consultant | Project | Skill Match | Level | Probability | Start |")
+            lines.append("|------------|---------|-------------|-------|-------------|-------|")
+            for m in matches:
+                lines.append(
+                    f"| {m['consultant_name']} | {m['project']} | {m['skill_matched']} | "
+                    f"{m['level']} | {m['probability']*100:.0f}% | {m['start']} |"
+                )
+            deployed_ids = {m["consultant_id"] for m in matches}
+            deployed_cost = sum(
+                BENCH_COST_PER_MONTH.get(CONSULTANTS[cid]["level"], 14000) for cid in deployed_ids
+            )
+            lines.append(f"\n**Bench cost saved if deployed:** ${deployed_cost:,.0f}/month")
+        else:
+            lines.append("No direct bench-to-pipeline matches found.\n")
+
+        # Unmatched bench
+        matched_ids = {m["consultant_id"] for m in matches}
+        unmatched = {cid: c for cid, c in _bench_consultants().items() if cid not in matched_ids}
+        if unmatched:
+            lines.append("\n### Unmatched Bench Resources\n")
+            lines.append("| Consultant | Level | Skills | Recommendation |")
+            lines.append("|------------|-------|--------|----------------|")
+            for cid, c in unmatched.items():
+                rec = "Upskill to cloud/AI" if c["level"] in ("Mid", "Junior") else "Internal innovation project"
+                lines.append(f"| {c['name']} | {c['level']} | {', '.join(c['skills'][:2])} | {rec} |")
+
+        # Utilization projection
+        bench = _bench_consultants()
+        current_util = _firm_utilization()
+        deployable = len(matches)
+        total = len(CONSULTANTS)
+        currently_billable = total - len(bench)
+        projected_billable = currently_billable + deployable
+        projected_util = round(projected_billable / total * 100 * 0.87, 1)  # weighted avg
+        lines.append(f"\n### Projected Utilization Impact")
+        lines.append(f"- Current firm utilization: **{current_util}%**")
+        lines.append(f"- Projected after deployment: **{projected_util}%**")
+        lines.append(f"- Target: **{UTILIZATION_TARGETS['firm_target']}%**")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _skill_gap_options(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "skill_gap_options", _evidence_selector("skill_gap_options", kwargs)
+        )
+
+    # ------------------------------------------------------------------
+    def _executive_impact_report(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "executive_impact_report",
+            _evidence_selector("executive_impact_report", kwargs),
+        )
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    agent = ResourceUtilizationAgent()
+    print("=" * 72)
+    print("EMBEDDED DEMO CONSULTANTS + LIVE TENANT BENCH")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="utilization_dashboard"))
+    print()
+    for op in agent.metadata["operations"][1:]:
+        print("=" * 72)
+        print(agent.perform(operation=op))
+        print()

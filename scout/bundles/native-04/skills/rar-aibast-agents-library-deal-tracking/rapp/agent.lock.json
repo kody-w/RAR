@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/deal_tracking",
+  "agent_file": "deal_tracking_agent.py",
+  "agent_sha256": "3d5f5bb65818acd562853d85c7e8e57a392689a99b1e8360d4f08ba56c4d0a73",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DealTrackingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Reports pipeline snapshots, deal movement, stage velocity, and forecast accuracy from built-in demo CRM data.",
+    "display_name": "Deal Tracking",
+    "name": "@aibast-agents-library/deal_tracking",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "deal-tracking",
+      "pipeline",
+      "forecasting"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "DealTrackingAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The tracking operation to perform",
+        "enum": [
+          "pipeline_snapshot",
+          "deal_movement",
+          "stage_velocity",
+          "forecast_accuracy"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

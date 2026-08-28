@@ -1,0 +1,75 @@
+{
+  "agent": "@wildhaven/wildhaven-ceo-singleton",
+  "agent_file": "wildhaven_ceo_agent.py",
+  "agent_sha256": "63ba8bea6a3fa294de04fcc385a257e24c6a14e768ed6e9546fe32a22a594d22",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "WildhavenCeoAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "@wildhaven",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "CEO workspace agent. Pastes/links a vault of strategy, legal, budget, pitch, and playbook documents and asks questions; answers in a confident operator's voice, treating the vault as the source of truth.",
+    "display_name": "WildhavenCEO",
+    "example_call": {
+      "args": {
+        "action": "ask",
+        "question": "How are the rentals doing this month?",
+        "workspace_context": "(paste your property-summary CSV + budget notes)"
+      }
+    },
+    "name": "@wildhaven/wildhaven_ceo",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "ceo",
+      "persona",
+      "workspace",
+      "vault",
+      "operator",
+      "rapplication"
+    ],
+    "version": "0.1.0"
+  },
+  "runtime_name": "WildhavenCEO",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Which workflow to run.",
+        "enum": [
+          "ask",
+          "decide",
+          "respond_to",
+          "daily_brief",
+          "quarterly_review"
+        ],
+        "type": "string"
+      },
+      "asker": {
+        "description": "Who asked (for respond_to).",
+        "type": "string"
+      },
+      "question": {
+        "description": "What you're asking. Used for ask, decide, respond_to.",
+        "type": "string"
+      },
+      "voice_style": {
+        "description": "How to sound. Default: 'confident operator with skin in the game'.",
+        "type": "string"
+      },
+      "workspace_context": {
+        "description": "A text dump of relevant vault documents. Optional but recommended; without it, the agent flags it's inferring from generic CEO posture.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "0.1.0"
+}

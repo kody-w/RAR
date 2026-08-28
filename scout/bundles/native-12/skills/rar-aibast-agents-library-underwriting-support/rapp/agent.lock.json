@@ -1,0 +1,62 @@
+{
+  "agent": "@aibast-agents-library/underwriting_support",
+  "agent_file": "underwriting_support_agent.py",
+  "agent_sha256": "2687b8b34f22b99554c31a34d0cd9588fa27cf746c384603c8f14e07bef95d67",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "UnderwritingSupportAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "financial_services",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Evaluates underwriting queues from a live simulated Dynamics 365 tenant (quotes as submissions), with pricing demos and an offline fallback.",
+    "display_name": "Underwriting Support Agent",
+    "name": "@aibast-agents-library/underwriting_support",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "underwriting",
+      "insurance",
+      "risk",
+      "pricing",
+      "guidelines",
+      "financial-services"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "UnderwritingSupportAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "application_id": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "risk_evaluation",
+          "pricing_recommendation",
+          "guideline_check",
+          "exception_review",
+          "submission_intake",
+          "risk_assessment",
+          "pricing_guidance",
+          "coverage_structuring",
+          "compliance_authority",
+          "underwriting_summary"
+        ],
+        "type": "string"
+      },
+      "user_input": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

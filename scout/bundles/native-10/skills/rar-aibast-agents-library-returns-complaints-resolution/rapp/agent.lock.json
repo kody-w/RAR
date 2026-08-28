@@ -1,0 +1,67 @@
+{
+  "agent": "@aibast-agents-library/returns_complaints_resolution",
+  "agent_file": "returns_complaints_resolution_agent.py",
+  "agent_sha256": "f6b9bf2368c1baef2175cac9019e0a2fd32622022307361d00f4cacb953e1635",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ReturnsComplaintsResolutionAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "retail_cpg",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Processes returns and complaints from a live simulated Dynamics 365 tenant's service cases, with an offline demo fallback.",
+    "display_name": "Returns & Complaints Resolution Agent",
+    "name": "@aibast-agents-library/returns_complaints_resolution",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "returns",
+      "complaints",
+      "customer-service",
+      "resolution",
+      "retail"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "returns-complaints-resolution-agent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "complaint_text": {
+        "type": "string"
+      },
+      "key": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "return_processing",
+          "complaint_classification",
+          "resolution_recommendation",
+          "trend_analysis",
+          "escalation_snapshot",
+          "recovery_options",
+          "resolution_execution",
+          "follow_up_plan",
+          "quality_fraud_analysis",
+          "recovery_report"
+        ],
+        "type": "string"
+      },
+      "return_id": {
+        "type": "string"
+      },
+      "user_input": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

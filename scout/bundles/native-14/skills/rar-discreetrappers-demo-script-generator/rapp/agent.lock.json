@@ -1,0 +1,118 @@
+{
+  "agent": "@discreetRappers/demo_script_generator_agent",
+  "agent_file": "demo_script_generator_agent.py",
+  "agent_sha256": "8c3f230c67c330e7334e103653e34b810fbbcf2fe2acd120f7806f5f0cf26149",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DemoScriptGeneratorAgent",
+  "host_dependencies": [
+    "env:AZURE_OPENAI_API_VERSION",
+    "env:AZURE_OPENAI_DEPLOYMENT_NAME",
+    "env:AZURE_OPENAI_ENDPOINT",
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates 60-second persona-driven demo script JSON files for ScriptedDemoAgent, via Azure OpenAI or built-in templates.",
+    "display_name": "DemoScriptGenerator",
+    "name": "@discreetRappers/demo_script_generator_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_OPENAI_API_VERSION",
+      "AZURE_OPENAI_DEPLOYMENT_NAME",
+      "AZURE_OPENAI_ENDPOINT"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "productivity",
+      "demos",
+      "generator",
+      "json",
+      "scripted"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "DemoScriptGenerator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Action to perform: 'generate' creates new demo, 'list_templates' shows available templates, 'preview' shows what would be generated without saving",
+        "enum": [
+          "generate",
+          "list_templates",
+          "preview"
+        ],
+        "type": "string"
+      },
+      "agents_list": {
+        "description": "Comma-separated list of agent names used in the demo. Example: 'OrderTracker,WarrantyLookup,DealerSupport'",
+        "type": "string"
+      },
+      "customer_name": {
+        "description": "Name of the customer/company for the demo. Example: 'Atlantic Capital Management'",
+        "type": "string"
+      },
+      "data_sources": {
+        "description": "Comma-separated list of data sources. Example: 'Salesforce,SAP ERP,Power BI'",
+        "type": "string"
+      },
+      "industry": {
+        "description": "Industry vertical for contextual responses. Examples: 'automotive_aftermarket', 'financial_services', 'healthcare', 'manufacturing', 'retail'",
+        "type": "string"
+      },
+      "persona_context": {
+        "description": "Business context for the persona. Example: 'Overseeing compliance for $8B AUM with 5 regulators'",
+        "type": "string"
+      },
+      "persona_name": {
+        "description": "Name of the demo persona. Example: 'Margaret Thompson'",
+        "type": "string"
+      },
+      "persona_title": {
+        "description": "Title of the demo persona. Example: 'Chief Compliance Officer'",
+        "type": "string"
+      },
+      "problem_statement": {
+        "description": "Business problem being solved. Example: 'Manual compliance surveillance of thousands of transactions'",
+        "type": "string"
+      },
+      "roi_metrics": {
+        "description": "Key ROI metrics. Example: '60% reduction in support tickets, 85% faster response time'",
+        "type": "string"
+      },
+      "target_audience": {
+        "description": "Target audience for the demo. Example: 'compliance_officers', 'dealers_distributors', 'sales_managers'",
+        "type": "string"
+      },
+      "template_type": {
+        "description": "Template pattern to use for the demo",
+        "enum": [
+          "self_service_portal",
+          "sales_assistant",
+          "customer_service",
+          "data_analytics",
+          "compliance_monitoring",
+          "custom"
+        ],
+        "type": "string"
+      },
+      "use_case_description": {
+        "description": "Detailed description of the MVP use case including: what it does, who uses it, what systems it integrates with, expected outcomes",
+        "type": "string"
+      },
+      "use_case_name": {
+        "description": "Short name for the use case (becomes filename). Example: 'dealer_self_service_portal'",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

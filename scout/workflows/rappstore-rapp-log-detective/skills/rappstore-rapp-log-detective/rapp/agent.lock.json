@@ -1,0 +1,67 @@
+{
+  "agent": "@rapp/log-detective",
+  "agent_file": "log_detective_agent.py",
+  "agent_sha256": "5d3b06228dddc510fb3a84a30b1e3517387d52388cdf66e6879e4be9e5c7a81f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "LogDetectiveAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "example_call": {
+      "args": {
+        "action": "signatures",
+        "path": "app.log"
+      },
+      "note": "Cluster near-identical errors by shape."
+    },
+    "name": "@rapp/log-detective",
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "logs",
+      "debugging",
+      "observability",
+      "local-first",
+      "singleton"
+    ],
+    "tier": "core",
+    "trust": "community",
+    "version": "1.0.0"
+  },
+  "runtime_name": "LogDetective",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do.",
+        "enum": [
+          "summarise",
+          "signatures",
+          "timeline",
+          "grep"
+        ],
+        "type": "string"
+      },
+      "context": {
+        "description": "For grep: lines of context. Default 1.",
+        "type": "integer"
+      },
+      "path": {
+        "description": "Path to the log file.",
+        "type": "string"
+      },
+      "pattern": {
+        "description": "For grep: a regular expression.",
+        "type": "string"
+      },
+      "top": {
+        "description": "How many signatures/buckets. Default 10.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "action",
+      "path"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

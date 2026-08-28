@@ -1,0 +1,79 @@
+{
+  "agent": "@kody-w/rapp_sdk_builder",
+  "agent_file": "rapp_sdk_builder_agent.py",
+  "agent_sha256": "76799624979a91c7f4f87d64b41d1fe5add10f727c672cc25429442a38ef757a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappSdkBuilderAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "devtools",
+    "description": "Mints rappids, builds and verifies rapp/1 frames, scaffolds organism seeds, and lints public GitHub repos for RAPP spec compliance.",
+    "display_name": "RAPP SDK Builder",
+    "example_call": "scaffold a new RAPP organism called @me/scratch",
+    "name": "@kody-w/rapp_sdk_builder",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "starter",
+      "rapp",
+      "sdk",
+      "identity",
+      "frame",
+      "builder"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "RappSdkBuilder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "mint=mint a rappid · scaffold=new organism seed (rappid+genesis) · frame=build+verify a frame · verify=verify a frame object · canonicalize=canonical bytes + domain hash of a value · check=lint a repo/rappid for compliance · sync=verify embedded SDK vs public repo",
+        "enum": [
+          "mint",
+          "scaffold",
+          "frame",
+          "verify",
+          "canonicalize",
+          "check",
+          "sync"
+        ],
+        "type": "string"
+      },
+      "frame": {
+        "description": "a frame object to verify",
+        "type": "object"
+      },
+      "id": {
+        "description": "identity as '@owner/slug' or a full rappid string",
+        "type": "string"
+      },
+      "kind": {
+        "description": "frame kind, e.g. 'note.write' (noun.verb)",
+        "type": "string"
+      },
+      "payload": {
+        "description": "frame payload / value to canonicalize",
+        "type": "object"
+      },
+      "repo": {
+        "description": "a github repo URL or owner/name to lint for compliance",
+        "type": "string"
+      },
+      "utc": {
+        "description": "millisecond UTC 'YYYY-MM-DDTHH:MM:SS.mmmZ'",
+        "type": "string"
+      },
+      "value": {
+        "description": "any I-JSON value to canonicalize/address"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

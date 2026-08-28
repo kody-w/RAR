@@ -1,0 +1,58 @@
+{
+  "agent": "@aibast-agents-library/time_entry_billing",
+  "agent_file": "time_entry_billing_agent.py",
+  "agent_sha256": "93014aaa8e8a0bf9e43818e5eda920ca2b5f73a697cacbbc66d26765d6b7f712",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "TimeEntryBillingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "professional_services",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Audits time entries and tracks receivables from a live simulated Dynamics 365 tenant invoice ledger, with an offline demo fallback.",
+    "display_name": "Time Entry & Billing Agent",
+    "name": "@aibast-agents-library/time_entry_billing",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "billing",
+      "time-entry",
+      "invoicing",
+      "audit",
+      "professional-services"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "TimeEntryBillingAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "entry_id": {
+        "description": "Time-entry identifier, such as TE-9004; selects its exception-resolution record.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "Operation to run; defaults to unbilled_report when omitted.",
+        "enum": [
+          "unbilled_report",
+          "billing_summary",
+          "time_entry_audit",
+          "invoice_preparation",
+          "exception_resolution",
+          "billing_close_package"
+        ],
+        "type": "string"
+      },
+      "record_id": {
+        "description": "Evidence record identifier for exception_resolution or billing_close_package, such as TEB-701 or TEB-CLOSE-701.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

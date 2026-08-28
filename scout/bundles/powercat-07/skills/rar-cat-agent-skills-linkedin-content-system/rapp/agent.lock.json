@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/linkedin_content_system",
+  "agent_file": "linkedin_content_system_agent.py",
+  "agent_sha256": "cd5a44eb81ec76324921f288cf231f95096b3a9c67f5a5269038dc5b748eb744",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "LinkedinContentSystem",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Simon Owen",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Create evidence-led LinkedIn posts, promos, newsletter intros, and long-form copy from supplied facts or drafts.",
+    "display_name": "LinkedIn Content System",
+    "name": "@cat-agent-skills/linkedin_content_system",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "207c56909d447f78",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "linkedin-content-system",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#linkedin-content-system",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "linkedin",
+      "social_media",
+      "writing",
+      "marketing",
+      "content"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "LinkedinContentSystem",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

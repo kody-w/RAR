@@ -1,0 +1,55 @@
+{
+  "agent": "@aibast-agents-library/dynamics_365_connector",
+  "agent_file": "dynamics_365_agent.py",
+  "agent_sha256": "20284436e19fe975c867b9c69d3720eee9b56cc5fb2b6fa6f398a88122d5fa7a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "Dynamics365ConnectorAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Queries live entities from a simulated Dynamics 365 tenant over HTTP, with simulated writes and an offline schema/demo fallback.",
+    "display_name": "Dynamics 365 Connector",
+    "name": "@aibast-agents-library/dynamics_365_connector",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "dynamics-365",
+      "crm",
+      "d365",
+      "entity",
+      "bulk-import",
+      "schema"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "Dynamics365ConnectorAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "entity_name": {
+        "description": "D365 entity logical name (e.g. 'account', 'contact', 'opportunity')",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The D365 operation to perform",
+        "enum": [
+          "entity_query",
+          "record_create",
+          "bulk_import",
+          "schema_inspect"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

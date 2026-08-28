@@ -1,0 +1,67 @@
+{
+  "agent": "@kody-w/prototype_lock_factory_agent",
+  "agent_file": "prototype_lock_factory_agent.py",
+  "agent_sha256": "916f1fb4e63074c6302593d80a28f31779ef070b6e4352ec4c45cda14cab431b",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PrototypeLockFactoryAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP Community",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff.",
+    "display_name": "Prototype Lock Factory",
+    "example_call": {
+      "args": {
+        "contract_json": "{\"schema\":\"rapp-prototype-process/1.0\",\"project_slug\":\"sample_project\"}",
+        "operation": "plan"
+      }
+    },
+    "name": "@kody-w/prototype_lock_factory_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "prototype",
+      "factory",
+      "local_first",
+      "acceptance",
+      "handoff",
+      "no_pii"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "PrototypeLockFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "contract_json": {
+        "type": "string"
+      },
+      "evidence_json": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "describe",
+          "plan",
+          "scaffold",
+          "gate",
+          "export",
+          "run"
+        ],
+        "type": "string"
+      },
+      "output_dir": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

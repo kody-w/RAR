@@ -1,0 +1,56 @@
+{
+  "agent": "@kody-w/rappter_engine_agent",
+  "agent_file": "rappter_engine_agent.py",
+  "agent_sha256": "5679d82a2ea53a7dc8ae3b9c78e932ed83d068947f07d53be3af7582e32f7fd9",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappterEngine",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Provides a base class for rules-as-data content engines — subclass it, override tick(), and run it as a CLI or brainstem tool.",
+    "display_name": "RappterEngine",
+    "name": "@kody-w/rappter_engine_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "engine",
+      "framework",
+      "content",
+      "automation",
+      "rules-as-data",
+      "heartbeat"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "RappterEngine",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "count": {
+        "description": "Number of ticks for burst mode",
+        "type": "integer"
+      },
+      "operation": {
+        "description": "Engine operation",
+        "enum": [
+          "run_tick",
+          "run_burst",
+          "get_state",
+          "list_rules",
+          "describe"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

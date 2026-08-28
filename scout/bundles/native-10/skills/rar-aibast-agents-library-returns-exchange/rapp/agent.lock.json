@@ -1,0 +1,56 @@
+{
+  "agent": "@aibast-agents-library/returns_exchange",
+  "agent_file": "returns_exchange_agent.py",
+  "agent_sha256": "89065ae5961458e590f5aeb78b797ad3f71bd85632b4e5d9d4f7f951b9c3d444",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ReturnsExchangeAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2c_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Checks return eligibility against live orders from a simulated Dynamics 365 tenant, with exchange and refund flows that work offline.",
+    "display_name": "Returns & Exchange Agent",
+    "name": "@aibast-agents-library/returns_exchange",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "returns",
+      "exchange",
+      "refund",
+      "retail",
+      "customer-service",
+      "b2c"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "ReturnsExchangeAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "item_sku": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "return_initiation",
+          "eligibility_check",
+          "exchange_options",
+          "refund_status"
+        ],
+        "type": "string"
+      },
+      "order_id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

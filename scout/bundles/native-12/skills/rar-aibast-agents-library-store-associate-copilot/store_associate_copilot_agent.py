@@ -1,0 +1,1116 @@
+"""
+Store Associate Copilot Agent — a template you are meant to mutate.
+
+Empowers store associates with product lookup, customer assistance
+scripts, daily task management, and performance dashboards.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted systems (synthetic data, no credentials, works
+     from anywhere):
+       CRM  https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+            — the product catalog and store cases
+       TEL  https://kody-w.github.io/static-telemetry/api/v1/
+            — sensors, alerts, and 672-point reading series
+     Try: perform(operation="product_lookup", query="Mobile Cart")
+     — with network up, that finds the tenant's live "Mobile Cart M8"
+     (AST-CRT-008) even though it is not in the embedded catalog.
+     Try: perform(operation="task_checklist")
+     — the checklist now ends with the LIVE store alert: the
+     temperature_excursion on Harbor Lights Grocery's refrigeration
+     case R-4 (aisle four), joined by ticket number to CRM case
+     CAS-260138 — the case that was created via the CRM Write API.
+  2. No network? Everything falls back to the embedded demo layer below
+     (PRODUCT_CATALOG / DAILY_TASK_LIST) — the agent never crashes
+     offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     STORE_ASSOCIATE_COPILOT_DATA_URL (CRM) and/or
+     STORE_ASSOCIATE_COPILOT_TEL_URL (telemetry) to your own endpoints
+     (your real Dynamics org, your store IoT platform), or replace
+     _fetch_collection() / _fetch_telemetry() with your own catalog
+     API. The fields the rest of the file needs are listed in
+     _normalize_live_product() — aisle location, on-hand, sizes, and
+     care instructions stay "n/a — enrichment seam" until you wire your
+     store systems.
+
+OPERATIONS
+  product_lookup | customer_assist | task_checklist |
+  performance_dashboard | product_intelligence | add_on_commission |
+  product_comparison | transaction_preparation
+  kwargs: operation (required), query, sku_id, scenario, shift, key,
+  user_input
+"""
+
+import sys
+import os
+
+sys.path.insert(
+    0,
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"),
+)
+from basic_agent import BasicAgent
+import json
+import urllib.request
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/store_associate_copilot",
+    "version": "1.3.0",
+    "display_name": "Store Associate Copilot Agent",
+    "description": (
+        "Gives associates product lookups, scripts, dashboards, and a live refrigeration alert joining simulated telemetry to CRM, with offline fallback."
+    ),
+    "author": "AIBAST",
+    "tags": [
+        "store-operations",
+        "associate",
+        "copilot",
+        "product-lookup",
+        "retail",
+    ],
+    "category": "retail_cpg",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export STORE_ASSOCIATE_COPILOT_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your commerce client. Downstream
+# code only needs the fields produced by _normalize_live_product().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "STORE_ASSOCIATE_COPILOT_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+# Sibling live source: the static-telemetry API. Its refrigeration
+# temperature_excursion alert on Harbor Lights Grocery joins CRM case
+# CAS-260138 (created via the CRM Write API) and surfaces on the task
+# checklist. Override with STORE_ASSOCIATE_COPILOT_TEL_URL.
+TELEMETRY_SOURCE_URL = os.environ.get(
+    "STORE_ASSOCIATE_COPILOT_TEL_URL",
+    "https://kody-w.github.io/static-telemetry/api/v1",
+)
+
+
+def _fetch_telemetry(path, key="value", timeout=6):
+    """Bounded GET against the telemetry API, cached in _LIVE_CACHE by
+    full URL. Returns [] on ANY failure — offline-safe. Reading series
+    are large (672 points each) — fetch them lazily, at most a couple
+    per run."""
+    url = f"{TELEMETRY_SOURCE_URL}/{path}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "rapp-agent-template/1.0"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            data = json.loads(resp.read().decode("utf-8")).get(key, [])
+    except Exception:
+        data = []
+    _LIVE_CACHE[url] = data
+    return data
+
+
+def _store_refrigeration_alert():
+    """The live Harbor Lights Grocery temperature_excursion alert
+    joined to its real CRM case (CAS-260138 — created via the CRM
+    Write API), with stats over the case-temperature reading series
+    (ONE lazy 672-point fetch); None when offline."""
+    alert = next(
+        (a for a in _fetch_telemetry("alerts")
+         if a.get("alert_type") == "temperature_excursion"),
+        None,
+    )
+    if not alert:
+        return None
+    case = next(
+        (c for c in _fetch_collection("incidents")
+         if c.get("ticketnumber") == alert.get("crm_case")),
+        None,
+    )
+    points = _fetch_telemetry(
+        f"readings/{alert.get('sensor_id')}", key="points"
+    )
+    values = [
+        p.get("v") for p in points if isinstance(p.get("v"), (int, float))
+    ]
+    return {
+        "alert": alert,
+        "case": case,
+        "latest": values[-1] if values else None,
+        "max": max(values) if values else None,
+        "n": len(values),
+    }
+
+
+def _normalize_live_product(row):
+    """Project a Dynamics product record onto the catalog shape this agent
+    uses. THIS is the contract your replacement data source must meet — a
+    dict with these keys. None means 'not available from the catalog
+    alone' and the renderer labels it as an enrichment seam."""
+    def _f(value):
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None
+    features = [row["description"]] if row.get("description") else []
+    return {
+        "sku_id": row.get("productnumber") or row.get("productid", ""),
+        "name": row.get("name", "Unknown"),
+        "category": row.get(
+            "producttypecode@OData.Community.Display.V1.FormattedValue", "General"
+        ),
+        "brand": "Aster Lane Office Systems (live tenant)",
+        "retail_price": _f(row.get("price")),
+        "sizes": None,            # enrichment seam — wire your PIM
+        "colors": None,           # enrichment seam
+        "materials": None,        # enrichment seam
+        "care": None,             # enrichment seam
+        "location_aisle": None,   # enrichment seam — wire store planogram
+        "location_shelf": None,   # enrichment seam
+        "on_hand": None,          # enrichment seam — wire your POS/WMS
+        "upc": None,              # enrichment seam
+        "features": features,
+        "_live": True,
+    }
+
+
+def _na(value, fmt="{}"):
+    """None = the source system alone can't know this (enrichment seam)."""
+    if value is None:
+        return "n/a — enrichment seam"
+    if isinstance(value, list):
+        return ", ".join(str(v) for v in value)
+    return fmt.format(value)
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback) — Product Catalog
+# ---------------------------------------------------------------------------
+
+PRODUCT_CATALOG = {
+    "SKU-1001": {
+        "name": "Classic Denim Jacket",
+        "category": "Apparel",
+        "brand": "Heritage Line",
+        "retail_price": 89.99,
+        "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+        "colors": ["Indigo Wash", "Light Blue", "Black"],
+        "materials": "100% cotton denim, brass buttons",
+        "care": "Machine wash cold, tumble dry low",
+        "location_aisle": "A3",
+        "location_shelf": "Top rack",
+        "on_hand": 74,
+        "upc": "0-12345-67890-1",
+        "features": ["Adjustable waist tabs", "Two chest pockets", "Vintage fade finish"],
+    },
+    "SKU-1002": {
+        "name": "Wireless Earbuds Pro",
+        "category": "Electronics",
+        "brand": "SoundWave",
+        "retail_price": 59.99,
+        "sizes": ["One Size"],
+        "colors": ["Matte Black", "Pearl White", "Navy"],
+        "materials": "ABS plastic, silicone ear tips",
+        "care": "Wipe with dry cloth. Do not submerge.",
+        "location_aisle": "E1",
+        "location_shelf": "Locked case",
+        "on_hand": 132,
+        "upc": "0-12345-67890-2",
+        "features": ["Active noise cancellation", "8-hour battery", "IPX4 water resistant", "Bluetooth 5.3"],
+    },
+    "SKU-1003": {
+        "name": "Organic Cotton T-Shirt",
+        "category": "Apparel",
+        "brand": "EcoBasics",
+        "retail_price": 29.99,
+        "sizes": ["XS", "S", "M", "L", "XL"],
+        "colors": ["White", "Heather Grey", "Black", "Sage Green", "Dusty Rose"],
+        "materials": "100% GOTS-certified organic cotton",
+        "care": "Machine wash cold with like colors",
+        "location_aisle": "A1",
+        "location_shelf": "Mid rack",
+        "on_hand": 210,
+        "upc": "0-12345-67890-3",
+        "features": ["Pre-shrunk", "Tagless comfort label", "Reinforced shoulder seams"],
+    },
+    "SKU-1004": {
+        "name": "Smart Fitness Tracker",
+        "category": "Electronics",
+        "brand": "FitPulse",
+        "retail_price": 129.99,
+        "sizes": ["S/M Band", "L/XL Band"],
+        "colors": ["Midnight Black", "Arctic White", "Forest Green"],
+        "materials": "Aluminum case, fluoroelastomer band",
+        "care": "Rinse with fresh water after swimming",
+        "location_aisle": "E2",
+        "location_shelf": "Display stand",
+        "on_hand": 45,
+        "upc": "0-12345-67890-4",
+        "features": ["Heart rate monitor", "GPS tracking", "Sleep analysis", "7-day battery", "5ATM water resistant"],
+    },
+    "SKU-1005": {
+        "name": "Premium Running Shoes",
+        "category": "Footwear",
+        "brand": "StrideMax",
+        "retail_price": 149.99,
+        "sizes": ["7", "7.5", "8", "8.5", "9", "9.5", "10", "10.5", "11", "12", "13"],
+        "colors": ["Cloud White/Grey", "Black/Volt", "Navy/Orange"],
+        "materials": "Engineered mesh upper, EVA foam midsole, rubber outsole",
+        "care": "Spot clean with damp cloth. Air dry only.",
+        "location_aisle": "F1",
+        "location_shelf": "Wall display",
+        "on_hand": 38,
+        "upc": "0-12345-67890-5",
+        "features": ["Responsive cushioning", "Breathable knit upper", "Reflective accents", "Carbon fiber plate"],
+    },
+    "SKU-1006": {
+        "name": "Stainless Water Bottle",
+        "category": "Accessories",
+        "brand": "HydroKeep",
+        "retail_price": 24.99,
+        "sizes": ["20oz", "32oz"],
+        "colors": ["Brushed Steel", "Matte Black", "Ocean Blue", "Coral"],
+        "materials": "18/8 stainless steel, BPA-free lid",
+        "care": "Hand wash recommended. Dishwasher safe (top rack).",
+        "location_aisle": "C2",
+        "location_shelf": "End cap",
+        "on_hand": 195,
+        "upc": "0-12345-67890-6",
+        "features": ["Double-wall vacuum insulation", "24h cold / 12h hot", "Leak-proof lid", "Wide mouth"],
+    },
+    "SKU-1007": {
+        "name": "Leather Crossbody Bag",
+        "category": "Accessories",
+        "brand": "UrbanCraft",
+        "retail_price": 79.99,
+        "sizes": ["One Size"],
+        "colors": ["Cognac", "Black", "Olive"],
+        "materials": "Full-grain leather, brass hardware",
+        "care": "Condition with leather balm quarterly",
+        "location_aisle": "B2",
+        "location_shelf": "Display hooks",
+        "on_hand": 61,
+        "upc": "0-12345-67890-7",
+        "features": ["Adjustable strap", "RFID-blocking pocket", "Three compartments", "YKK zippers"],
+    },
+    "SKU-1008": {
+        "name": "UV Protection Sunglasses",
+        "category": "Accessories",
+        "brand": "ClearView",
+        "retail_price": 44.99,
+        "sizes": ["Standard", "Wide"],
+        "colors": ["Tortoise", "Matte Black", "Crystal Clear"],
+        "materials": "Acetate frame, polarized CR-39 lenses",
+        "care": "Clean with included microfiber cloth. Store in case.",
+        "location_aisle": "B1",
+        "location_shelf": "Rotating display",
+        "on_hand": 88,
+        "upc": "0-12345-67890-8",
+        "features": ["100% UV400 protection", "Polarized lenses", "Spring hinges", "Scratch-resistant coating"],
+    },
+    "SKU-1009": {
+        "name": "Performance Yoga Mat",
+        "category": "Fitness",
+        "brand": "ZenGrip",
+        "retail_price": 54.99,
+        "sizes": ["68x24 in", "72x26 in"],
+        "colors": ["Midnight Purple", "Sage", "Charcoal"],
+        "materials": "Natural rubber base, polyurethane top layer",
+        "care": "Wipe with damp cloth after use. Air dry flat.",
+        "location_aisle": "F2",
+        "location_shelf": "Standing rack",
+        "on_hand": 42,
+        "upc": "0-12345-67890-9",
+        "features": ["Non-slip grip", "6mm thickness", "Alignment lines", "Carrying strap included"],
+    },
+    "SKU-1010": {
+        "name": "Aromatherapy Candle Set",
+        "category": "Home",
+        "brand": "Luminary",
+        "retail_price": 34.99,
+        "sizes": ["3-pack (4oz each)"],
+        "colors": ["Lavender/Eucalyptus/Vanilla"],
+        "materials": "Soy wax, cotton wicks, essential oils",
+        "care": "Trim wick to 1/4 inch before lighting. Burn max 4 hours.",
+        "location_aisle": "D1",
+        "location_shelf": "Feature table",
+        "on_hand": 67,
+        "upc": "0-12345-67891-0",
+        "features": ["Clean-burning soy wax", "40-hour burn time per candle", "Reusable glass jars", "No synthetic fragrances"],
+    },
+}
+
+CUSTOMER_INTERACTION_SCRIPTS = {
+    "greeting": {
+        "scenario": "Customer enters the store",
+        "script": "Welcome to our store! Is there anything specific I can help you find today?",
+        "follow_up": "If they mention a product category, guide them to the correct aisle.",
+        "tips": ["Make eye contact", "Smile genuinely", "Keep a comfortable distance"],
+    },
+    "upsell": {
+        "scenario": "Customer is ready to purchase a single item",
+        "script": "Great choice! Did you know that pairs perfectly with our {complementary_product}? Many customers love the combination.",
+        "follow_up": "If interested, walk them to the complementary item. If not, respect their decision.",
+        "tips": ["Suggest only relevant items", "Limit to one upsell attempt", "Focus on value not price"],
+    },
+    "complaint_handling": {
+        "scenario": "Customer has a complaint or issue",
+        "script": "I am sorry to hear about that. Let me make sure I understand the issue so I can help resolve it right away.",
+        "follow_up": "Listen fully, repeat back the issue, offer a concrete solution within your authority.",
+        "tips": ["Never argue", "Acknowledge their frustration", "Offer alternatives if first solution is declined"],
+    },
+    "size_help": {
+        "scenario": "Customer needs sizing assistance",
+        "script": "I would be happy to help you find the right fit. What size do you typically wear in this type of item?",
+        "follow_up": "Check fitting room availability. Bring two sizes if customer is between sizes.",
+        "tips": ["Be sensitive about sizing", "Suggest trying multiple sizes", "Check stock for requested size first"],
+    },
+    "return_at_counter": {
+        "scenario": "Customer wants to make a return at the register",
+        "script": "Of course, I can help with that. Do you have your receipt or order confirmation?",
+        "follow_up": "Verify return eligibility per policy. Process efficiently and offer exchange if applicable.",
+        "tips": ["Stay positive and empathetic", "Explain policy clearly", "Thank them regardless of outcome"],
+    },
+}
+
+DAILY_TASK_LIST = {
+    "opening": [
+        {"task": "Unlock entrance doors and disable alarm", "priority": "critical", "est_minutes": 2},
+        {"task": "Power on POS terminals and verify connectivity", "priority": "critical", "est_minutes": 5},
+        {"task": "Walk floor to check overnight display condition", "priority": "high", "est_minutes": 10},
+        {"task": "Restock fitting rooms with hangers", "priority": "medium", "est_minutes": 5},
+        {"task": "Review daily promotions and update signage", "priority": "high", "est_minutes": 15},
+        {"task": "Check inventory alerts and pull items for floor replenishment", "priority": "high", "est_minutes": 20},
+    ],
+    "midday": [
+        {"task": "Restock high-traffic areas and end caps", "priority": "high", "est_minutes": 20},
+        {"task": "Process online pickup orders (BOPIS)", "priority": "critical", "est_minutes": 15},
+        {"task": "Clean fitting rooms and return abandoned items", "priority": "medium", "est_minutes": 10},
+        {"task": "Rotate break schedule for floor coverage", "priority": "high", "est_minutes": 5},
+        {"task": "Check and respond to customer service queue", "priority": "high", "est_minutes": 10},
+    ],
+    "closing": [
+        {"task": "Process remaining BOPIS orders for next-day pickup", "priority": "critical", "est_minutes": 15},
+        {"task": "Reconcile POS drawers and prepare deposit", "priority": "critical", "est_minutes": 20},
+        {"task": "Tidy all displays and return misplaced merchandise", "priority": "high", "est_minutes": 25},
+        {"task": "Vacuum high-traffic aisles", "priority": "medium", "est_minutes": 15},
+        {"task": "Set alarm and lock all entrances", "priority": "critical", "est_minutes": 3},
+    ],
+}
+
+ASSOCIATE_PERFORMANCE = {
+    "ASC-101": {
+        "name": "Taylor Brooks",
+        "role": "Senior Associate",
+        "shift": "opening",
+        "units_sold_today": 23,
+        "revenue_today": 1847.50,
+        "transactions_today": 14,
+        "avg_basket": 131.96,
+        "upsell_rate": 0.35,
+        "csat_score": 4.8,
+        "tasks_completed": 11,
+        "tasks_total": 12,
+        "hours_this_week": 32.5,
+    },
+    "ASC-102": {
+        "name": "Jordan Kim",
+        "role": "Associate",
+        "shift": "midday",
+        "units_sold_today": 17,
+        "revenue_today": 1295.80,
+        "transactions_today": 11,
+        "avg_basket": 117.80,
+        "upsell_rate": 0.22,
+        "csat_score": 4.5,
+        "tasks_completed": 8,
+        "tasks_total": 10,
+        "hours_this_week": 28.0,
+    },
+    "ASC-103": {
+        "name": "Morgan Lee",
+        "role": "Associate",
+        "shift": "closing",
+        "units_sold_today": 12,
+        "revenue_today": 985.40,
+        "transactions_today": 9,
+        "avg_basket": 109.49,
+        "upsell_rate": 0.18,
+        "csat_score": 4.3,
+        "tasks_completed": 7,
+        "tasks_total": 9,
+        "hours_this_week": 24.0,
+    },
+    "ASC-104": {
+        "name": "Casey Rivera",
+        "role": "Lead Associate",
+        "shift": "opening",
+        "units_sold_today": 29,
+        "revenue_today": 2410.30,
+        "transactions_today": 18,
+        "avg_basket": 133.91,
+        "upsell_rate": 0.40,
+        "csat_score": 4.9,
+        "tasks_completed": 12,
+        "tasks_total": 12,
+        "hours_this_week": 36.0,
+    },
+}
+
+COMPLEMENTARY_PRODUCTS = {
+    "SKU-1001": ["SKU-1003", "SKU-1008"],
+    "SKU-1002": ["SKU-1004", "SKU-1006"],
+    "SKU-1003": ["SKU-1001", "SKU-1008"],
+    "SKU-1004": ["SKU-1005", "SKU-1009"],
+    "SKU-1005": ["SKU-1006", "SKU-1009"],
+    "SKU-1006": ["SKU-1009", "SKU-1005"],
+    "SKU-1007": ["SKU-1008", "SKU-1001"],
+    "SKU-1008": ["SKU-1007", "SKU-1001"],
+    "SKU-1009": ["SKU-1006", "SKU-1004"],
+    "SKU-1010": ["SKU-1009", "SKU-1006"],
+}
+
+
+# ---------------------------------------------------------------------------
+# Demonstrated Retail Store Associate Copilot capabilities
+# ---------------------------------------------------------------------------
+
+EVIDENCE_CAPABILITIES = {
+    "product_intelligence": {
+        "title": "Real-Time Product Intelligence",
+        "response": (
+            "Here is the current product availability, feature, promotion, "
+            "and sales guidance from the simulated commerce view."
+        ),
+        "source_system": "Dynamics 365 Commerce",
+        "write": False,
+        "key_field": "product_id",
+        "knowledge": [
+            "Store associates can surface product specifications, availability, and current promotions without searching multiple systems.",
+            "Unified commerce context supports faster, more confident customer conversations during peak traffic.",
+            "Sales guidance highlights a useful customer-facing talking point alongside the product facts.",
+        ],
+        "records": [
+            {
+                "product_id": "TECHPRO-X",
+                "product": "TechPro X-Series wireless headphones",
+                "availability": "14 units in the Bellevue store",
+                "features": "38-hour battery, active ANC at -42 dB, three-device pairing, foldable design with premium case",
+                "price_and_warranty": "$199.99 sale price; 2-year standard warranty",
+                "promotion": "Save $50 from $249.99; promotion ends Sunday",
+                "reviews": "4.7/5.0 from 847 reviews",
+                "sales_guidance": "Lead with comfort, battery life, and the included premium case",
+            },
+            {
+                "product_id": "PRD-7314",
+                "product": "Premium Noise-Canceling Headphones",
+                "availability": "12 in store",
+                "features": "Adaptive ANC, 30-hour battery, spatial audio",
+                "promotion": "$40 off when bundled with a laptop",
+                "sales_guidance": "Demonstrate ambient mode for frequent travelers",
+            },
+            {
+                "product_id": "PRD-9056",
+                "product": "Ultra-Light 14-inch Laptop",
+                "availability": "Out of stock; pickup tomorrow at North store",
+                "features": "16 GB RAM, 1 TB SSD, 18-hour battery",
+                "promotion": "12 months interest-free financing",
+                "sales_guidance": "Offer PRD-9138 when same-day availability is the priority",
+            },
+        ],
+    },
+    "add_on_commission": {
+        "title": "Add-On, Warranty, and Commission Guidance",
+        "response": (
+            "Here are high-value add-ons, warranty guidance, conversion tips, "
+            "and deterministic commission calculations for the selected bundle."
+        ),
+        "source_system": "Dynamics 365 Commerce",
+        "write": False,
+        "key_field": "bundle_id",
+        "knowledge": [
+            "Relevant accessories and warranties can be suggested in real time instead of relying on associate guesswork.",
+            "Conversion tips keep recommendations tied to customer value and increase accessory attach rates.",
+            "Item-level commission visibility helps associates explain and prioritize complete solutions.",
+        ],
+        "records": [
+            {
+                "bundle_id": "BND-TECHPRO",
+                "anchor_product": "TechPro X-Series wireless headphones",
+                "add_ons": "Premium cleaning kit, travel adapter, replacement cushions",
+                "warranty": "Extended warranty with 3-year coverage",
+                "conversion_tip": "Mention that the cleaning kit extends cushion life; observed conversion is 65%",
+                "bundle_value": "$319.95",
+                "commission_breakdown": "Headphones $16.00; warranty $7.20; accessories $9.60",
+                "commission": "$32.80",
+            },
+            {
+                "bundle_id": "BND-2402",
+                "anchor_product": "Premium Noise-Canceling Headphones",
+                "add_on": "Travel case and airline adapter",
+                "warranty": "2-year accidental damage plan",
+                "conversion_tip": "Position the case as protection for frequent travel",
+                "bundle_value": "$429.97",
+                "commission": "$12.90 at 3%",
+            },
+            {
+                "bundle_id": "BND-2403",
+                "anchor_product": "Ultra-Light 14-inch Laptop",
+                "add_on": "USB-C dock and wireless mouse",
+                "warranty": "3-year premium support",
+                "conversion_tip": "Show the one-cable desk setup",
+                "bundle_value": "$1,829.96",
+                "commission": "$54.90 at 3%",
+            },
+        ],
+    },
+    "product_comparison": {
+        "title": "Alternative Product Comparison",
+        "response": (
+            "Here is a side-by-side alternative comparison with the key "
+            "differences and a recommendation based on the stated customer priority."
+        ),
+        "source_system": "Dynamics 365 Commerce",
+        "write": False,
+        "key_field": "comparison_id",
+        "knowledge": [
+            "The agent compares relevant alternatives and highlights meaningful differences for the associate.",
+            "Recommendations are tied to an explicit customer priority rather than a generic ranking.",
+            "Out-of-stock alternatives can preserve trust and keep the customer interaction moving.",
+        ],
+        "records": [
+            {
+                "comparison_id": "CMP-TECHPRO-SOUNDMAX",
+                "products": "TechPro X-Series vs SoundMax Pro",
+                "key_differences": "$199.99 vs $229.99; 38 vs 30 hours; premium vs audiophile sound; -42 vs -48 dB ANC; 14 vs 3 units",
+                "customer_priority": "Travel and commute vs pure audio quality",
+                "recommendation": "TechPro for travel, all-day use, or budget; SoundMax when pure audio quality matters most",
+            },
+            {
+                "comparison_id": "CMP-3102",
+                "products": "OLED 65 vs Mini-LED 65",
+                "key_differences": "Perfect black levels vs higher peak brightness",
+                "customer_priority": "Bright-room sports viewing",
+                "recommendation": "Mini-LED 65 for higher sustained brightness",
+            },
+            {
+                "comparison_id": "CMP-3103",
+                "products": "Headphones Pro vs Headphones Lite",
+                "key_differences": "Adaptive ANC and 30 hours vs standard ANC and 24 hours",
+                "customer_priority": "Lowest price",
+                "recommendation": "Headphones Lite, saving $120 while retaining ANC",
+            },
+        ],
+    },
+    "transaction_preparation": {
+        "title": "Transaction Preparation",
+        "response": (
+            "The selected transaction has been prepared with the applicable "
+            "loyalty discount, warranty, financing option, and next steps."
+        ),
+        "source_system": "Dynamics 365 Commerce",
+        "write": True,
+        "key_field": "transaction_id",
+        "knowledge": [
+            "Transaction preparation can apply loyalty discounts and include selected warranties without manual price calculations.",
+            "Eligible financing options are surfaced before checkout to reduce friction and pricing errors.",
+            "The associate receives explicit next steps while the demo remains offline and non-mutating.",
+        ],
+        "records": [
+            {
+                "transaction_id": "TXN-TECHPRO",
+                "items": "TechPro headphones $199.99; 3-year warranty $39.99; premium cleaning kit $24.99",
+                "subtotal": "$264.97",
+                "loyalty_discount": "-$13.25 (Gold member, 5% off)",
+                "sales_tax": "$21.40 at 8.5%",
+                "financing": "0% APR for 6 months at $45.52 per month",
+                "prepared_total": "$273.12",
+                "commission": "$32.80",
+                "customer_savings": "$63.25 from sale and loyalty discount",
+                "next_step": "Confirm loyalty discount and customer consent, then proceed to checkout",
+            },
+            {
+                "transaction_id": "TXN-81025",
+                "items": "Headphones, travel kit, 2-year protection",
+                "subtotal": "$429.97",
+                "loyalty_discount": "-$25.00",
+                "financing": "Pay in full",
+                "prepared_total": "$404.97 before tax",
+                "next_step": "Confirm protection plan and complete payment at POS",
+            },
+            {
+                "transaction_id": "TXN-81026",
+                "items": "Laptop, USB-C dock, mouse, 3-year support",
+                "subtotal": "$1,829.96",
+                "loyalty_discount": "-$100.00",
+                "financing": "$144.16/month for 12 months, 0% APR",
+                "prepared_total": "$1,729.96 before tax",
+                "next_step": "Verify financing eligibility and complete payment at POS",
+            },
+        ],
+    },
+}
+
+_EVIDENCE_KEY_PUNCTUATION = "-_.,:;()?!/#@+$%^&*=[]{}<>~`'\""
+
+
+def _normalize_evidence_tokens(text):
+    """Normalize text into tokens used only for exact capability-key matching."""
+    tokens = []
+    for raw in str(text).split():
+        cleaned = "".join(
+            character.lower()
+            for character in raw
+            if character not in _EVIDENCE_KEY_PUNCTUATION
+        )
+        if cleaned:
+            tokens.append(cleaned)
+    return tokens
+
+
+def _record_for_evidence_request(capability, key, user_input):
+    """Resolve an explicit key or an exact key token embedded in user input."""
+    key_field = capability["key_field"]
+    records = capability["records"]
+    if key:
+        wanted = _normalize_evidence_tokens(key)
+        for record in records:
+            if wanted and _normalize_evidence_tokens(record[key_field]) == wanted:
+                return "match", record
+        return "not_found", None
+
+    explicit_input = str(user_input or "").strip()
+    if not explicit_input:
+        return "summary", None
+
+    query_tokens = _normalize_evidence_tokens(explicit_input)
+    for record in records:
+        key_tokens = _normalize_evidence_tokens(record[key_field])
+        width = len(key_tokens)
+        if width and any(
+            query_tokens[index:index + width] == key_tokens
+            for index in range(len(query_tokens) - width + 1)
+        ):
+            return "match", record
+    return "not_found", None
+
+
+def _format_evidence_record(record):
+    return ", ".join(
+        f"{field.replace('_', ' ').title()}: {value}"
+        for field, value in record.items()
+    )
+
+
+# ---------------------------------------------------------------------------
+# Helper Functions
+# ---------------------------------------------------------------------------
+
+def _search_products(query):
+    """Search products by name, category, or SKU."""
+    query_lower = query.lower()
+    results = []
+    for sku_id, prod in PRODUCT_CATALOG.items():
+        if (query_lower in prod["name"].lower()
+                or query_lower in prod["category"].lower()
+                or query_lower in sku_id.lower()):
+            results.append((sku_id, prod))
+    return results
+
+
+def _store_total_revenue():
+    return sum(a["revenue_today"] for a in ASSOCIATE_PERFORMANCE.values())
+
+
+def _store_total_transactions():
+    return sum(a["transactions_today"] for a in ASSOCIATE_PERFORMANCE.values())
+
+
+def _task_completion_rate(shift):
+    tasks = DAILY_TASK_LIST.get(shift, [])
+    total = len(tasks)
+    # Simulate that critical and high tasks are done
+    done = sum(1 for t in tasks if t["priority"] in ("critical", "high"))
+    return round(done / total * 100, 1) if total > 0 else 0
+
+
+# ---------------------------------------------------------------------------
+# Agent Class
+# ---------------------------------------------------------------------------
+
+class StoreAssociateCopilotAgent(BasicAgent):
+    """Copilot agent assisting store associates with daily operations."""
+
+    def __init__(self):
+        self.name = "store-associate-copilot-agent"
+        self.metadata = {
+            "name": self.name,
+            "description": __manifest__["description"],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "enum": [
+                            "product_lookup",
+                            "customer_assist",
+                            "task_checklist",
+                            "performance_dashboard",
+                            "product_intelligence",
+                            "add_on_commission",
+                            "product_comparison",
+                            "transaction_preparation",
+                        ],
+                    },
+                    "query": {"type": "string"},
+                    "sku_id": {"type": "string"},
+                    "scenario": {"type": "string"},
+                    "shift": {"type": "string"},
+                    "key": {
+                        "type": "string",
+                        "description": "Exact record key for a v1.1.0 evidence operation.",
+                    },
+                    "user_input": {
+                        "type": "string",
+                        "description": "Optional request containing an exact v1.1.0 record key.",
+                    },
+                },
+                "required": ["operation"],
+            },
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def _search_live_products(self, query):
+        """Search the live tenant catalog; [] when offline or no match."""
+        q = query.lower()
+        results = []
+        for row in _fetch_collection("products"):
+            prod = _normalize_live_product(row)
+            if not prod["sku_id"]:
+                continue
+            if (q in prod["name"].lower()
+                    or q in prod["sku_id"].lower()
+                    or q in prod["category"].lower()):
+                results.append((prod["sku_id"], prod))
+        return results
+
+    def _product_lookup(self, **kwargs):
+        query = kwargs.get("query", "")
+        sku_id = kwargs.get("sku_id", "")
+        if sku_id and sku_id in PRODUCT_CATALOG:
+            results = [(sku_id, PRODUCT_CATALOG[sku_id])]
+        elif query:
+            # Embedded demo catalog first, then the live tenant catalog.
+            results = _search_products(query) or self._search_live_products(query)
+        else:
+            results = list(PRODUCT_CATALOG.items())
+        lines = ["# Product Lookup", ""]
+        if not results:
+            lines.append(f"No products found for query: \"{query}\"")
+            return "\n".join(lines)
+        for sid, prod in results:
+            live = prod.get("_live", False)
+            lines.append(f"## {prod['name']} (`{sid}`)")
+            lines.append("")
+            if live:
+                lines.append(
+                    f"_Live record from {DATA_SOURCE_URL} "
+                    "(Aster Lane Office Systems)_"
+                )
+            lines.append(f"- **Brand:** {prod['brand']}")
+            lines.append(f"- **Category:** {prod['category']}")
+            lines.append(f"- **Price:** {_na(prod['retail_price'], '${:.2f}')}")
+            lines.append(f"- **Sizes:** {_na(prod['sizes'])}")
+            lines.append(f"- **Colors:** {_na(prod['colors'])}")
+            lines.append(f"- **Materials:** {_na(prod['materials'])}")
+            lines.append(f"- **Care:** {_na(prod['care'])}")
+            if prod["location_aisle"] is None:
+                lines.append("- **Location:** n/a — enrichment seam")
+            else:
+                lines.append(f"- **Location:** Aisle {prod['location_aisle']}, {prod['location_shelf']}")
+            lines.append(f"- **In Stock:** {_na(prod['on_hand'], '{} units')}")
+            lines.append(f"- **UPC:** {_na(prod['upc'])}")
+            lines.append("")
+            if prod["features"]:
+                lines.append("**Key Features:**")
+                for feat in prod["features"]:
+                    lines.append(f"  - {feat}")
+                lines.append("")
+            comp_skus = COMPLEMENTARY_PRODUCTS.get(sid, [])
+            if comp_skus:
+                comp_names = [PRODUCT_CATALOG[c]["name"] for c in comp_skus if c in PRODUCT_CATALOG]
+                lines.append(f"**Pairs Well With:** {', '.join(comp_names)}")
+            lines.append("")
+        return "\n".join(lines)
+
+    def _customer_assist(self, **kwargs):
+        scenario = kwargs.get("scenario", "")
+        if scenario and scenario in CUSTOMER_INTERACTION_SCRIPTS:
+            scripts = {scenario: CUSTOMER_INTERACTION_SCRIPTS[scenario]}
+        else:
+            scripts = CUSTOMER_INTERACTION_SCRIPTS
+        lines = ["# Customer Assistance Guide", ""]
+        for scen_id, scr in scripts.items():
+            lines.append(f"## {scen_id.replace('_', ' ').title()}")
+            lines.append("")
+            lines.append(f"**Scenario:** {scr['scenario']}")
+            lines.append("")
+            lines.append("**Suggested Script:**")
+            lines.append(f"> {scr['script']}")
+            lines.append("")
+            lines.append(f"**Follow-Up:** {scr['follow_up']}")
+            lines.append("")
+            lines.append("**Tips:**")
+            for tip in scr["tips"]:
+                lines.append(f"- {tip}")
+            lines.append("")
+        return "\n".join(lines)
+
+    def _task_checklist(self, **kwargs):
+        shift = kwargs.get("shift", "")
+        if shift and shift in DAILY_TASK_LIST:
+            shifts = {shift: DAILY_TASK_LIST[shift]}
+        else:
+            shifts = DAILY_TASK_LIST
+        lines = ["# Daily Task Checklist", ""]
+        for shift_name, tasks in shifts.items():
+            total_minutes = sum(t["est_minutes"] for t in tasks)
+            comp_rate = _task_completion_rate(shift_name)
+            lines.append(f"## {shift_name.title()} Shift")
+            lines.append(f"**Estimated Time:** {total_minutes} min | **Completion:** {comp_rate}%")
+            lines.append("")
+            lines.append("| # | Task | Priority | Est. Time |")
+            lines.append("|---|------|----------|-----------|")
+            for i, task in enumerate(tasks, 1):
+                lines.append(f"| {i} | {task['task']} | {task['priority'].upper()} | {task['est_minutes']} min |")
+            lines.append("")
+        # Live telemetry overlay — purely additive: everything above is
+        # unchanged, and offline this section simply does not appear.
+        live = _store_refrigeration_alert()
+        if live:
+            alert, case = live["alert"], live["case"]
+            unit = alert.get("unit", "")
+            lines.append("## Live Store Alerts (telemetry overlay)")
+            lines.append("")
+            lines.append(
+                f"- **{alert.get('alert_code', '?')} "
+                f"{alert.get('alert_type', '?')} "
+                f"({str(alert.get('severity', '?')).upper()}):** "
+                f"{alert.get('asset_name', '?')} at "
+                f"{alert.get('account_name', '?')} — "
+                f"{alert.get('title', '')}"
+            )
+            lines.append(
+                f"- **Reading:** peak {alert.get('peak_value')} {unit} vs "
+                f"threshold {alert.get('threshold')} {unit}"
+                + (
+                    f"; latest {live['latest']} {unit}, series max "
+                    f"{live['max']} {unit} ({live['n']} samples @ 15 min)"
+                    if live["latest"] is not None else ""
+                )
+            )
+            if case:
+                case_status = "Open" if case.get("statecode") == 0 else "Resolved"
+                lines.append(
+                    f"- **CRM case:** {case.get('ticketnumber', '?')} — "
+                    f"{case.get('title', '?')} ({case_status}) — the case "
+                    "created via the CRM Write API, joined by ticket number"
+                )
+            else:
+                lines.append(
+                    f"- **CRM case:** {alert.get('crm_case', 'n/a')} "
+                    "(case detail unavailable — CRM offline)"
+                )
+            lines.append(
+                "- **Suggested task:** Check the aisle-four refrigeration "
+                "case, move perishables per SOP, and confirm the case is "
+                "acknowledged."
+            )
+            lines.append("")
+            lines.append(
+                "_Source: live static-telemetry alert + reading series "
+                "joined to the Static Dynamics 365 case by its real ticket "
+                "number._"
+            )
+        return "\n".join(lines)
+
+    def _performance_dashboard(self, **kwargs):
+        total_rev = _store_total_revenue()
+        total_txn = _store_total_transactions()
+        lines = [
+            "# Associate Performance Dashboard",
+            "",
+            f"**Store Total Revenue Today:** ${total_rev:,.2f}",
+            f"**Store Total Transactions:** {total_txn}",
+            f"**Store Avg Basket:** ${total_rev / total_txn:.2f}" if total_txn > 0 else "",
+            "",
+            "| Associate | Role | Shift | Revenue | Units | Txns | Basket | Upsell | CSAT | Tasks |",
+            "|-----------|------|-------|---------|-------|------|--------|--------|------|-------|",
+        ]
+        for asc_id, asc in ASSOCIATE_PERFORMANCE.items():
+            task_pct = round(asc["tasks_completed"] / asc["tasks_total"] * 100) if asc["tasks_total"] > 0 else 0
+            lines.append(
+                f"| {asc['name']} | {asc['role']} | {asc['shift']} "
+                f"| ${asc['revenue_today']:,.2f} | {asc['units_sold_today']} "
+                f"| {asc['transactions_today']} | ${asc['avg_basket']:.2f} "
+                f"| {asc['upsell_rate']*100:.0f}% | {asc['csat_score']}/5.0 "
+                f"| {asc['tasks_completed']}/{asc['tasks_total']} ({task_pct}%) |"
+            )
+        lines.append("")
+        lines.append("## Top Performer Highlights")
+        lines.append("")
+        best_rev = max(ASSOCIATE_PERFORMANCE.values(), key=lambda a: a["revenue_today"])
+        best_csat = max(ASSOCIATE_PERFORMANCE.values(), key=lambda a: a["csat_score"])
+        best_upsell = max(ASSOCIATE_PERFORMANCE.values(), key=lambda a: a["upsell_rate"])
+        lines.append(f"- **Highest Revenue:** {best_rev['name']} — ${best_rev['revenue_today']:,.2f}")
+        lines.append(f"- **Best CSAT:** {best_csat['name']} — {best_csat['csat_score']}/5.0")
+        lines.append(f"- **Top Upsell Rate:** {best_upsell['name']} — {best_upsell['upsell_rate']*100:.0f}%")
+        return "\n".join(lines)
+
+    def _evidence_capability(self, capability_name, **kwargs):
+        capability = EVIDENCE_CAPABILITIES[capability_name]
+        key = kwargs.get("key", "")
+        user_input = str(kwargs.get("user_input") or "").strip()
+        lookup_status, record = _record_for_evidence_request(
+            capability, key, user_input
+        )
+
+        lines = [
+            f"# {capability['title']}",
+            "",
+            capability["response"],
+            "",
+            "## Grounded Capability",
+        ]
+        lines.extend(f"- {fact}" for fact in capability["knowledge"])
+        lines.extend([
+            "",
+            f"## Records — {capability['source_system']} (synthetic demo data)",
+            "",
+        ])
+
+        receipt_key = "BATCH"
+        if lookup_status == "match":
+            receipt_key = record[capability["key_field"]]
+            lines.append(
+                f"Exact match on `{capability['key_field']}`:"
+            )
+            lines.append(f"- {_format_evidence_record(record)}")
+        elif lookup_status == "not_found":
+            lines.append(
+                f"No record matched the requested {capability['key_field']}. "
+                "Not substituting another record."
+            )
+        else:
+            lines.append(
+                "Worked examples (synthetic demo data; no customer data required):"
+            )
+            lines.extend(
+                f"- {_format_evidence_record(item)}"
+                for item in capability["records"]
+            )
+
+        if capability["write"] and lookup_status == "match":
+            lines.extend([
+                "",
+                "## Simulated Write Receipt",
+                "",
+                "- Action Status: simulated",
+                f"- Receipt: SIM-{capability_name.upper()}-{receipt_key}",
+                f"- Target System: {capability['source_system']}",
+                "- No external system changed (no live mutation).",
+            ])
+        elif capability["write"]:
+            lines.extend([
+                "",
+                "_Write-capable operation; provide an exact key to prepare a "
+                "simulated receipt. No external system is modified._",
+            ])
+        else:
+            lines.extend([
+                "",
+                "_Read-only capability; no external system is modified._",
+            ])
+        return "\n".join(lines)
+
+    def _product_intelligence(self, **kwargs):
+        return self._evidence_capability("product_intelligence", **kwargs)
+
+    def _add_on_commission(self, **kwargs):
+        return self._evidence_capability("add_on_commission", **kwargs)
+
+    def _product_comparison(self, **kwargs):
+        return self._evidence_capability("product_comparison", **kwargs)
+
+    def _transaction_preparation(self, **kwargs):
+        return self._evidence_capability("transaction_preparation", **kwargs)
+
+    def perform(self, **kwargs):
+        operation = kwargs.get("operation", "product_lookup")
+        dispatch = {
+            "product_lookup": self._product_lookup,
+            "customer_assist": self._customer_assist,
+            "task_checklist": self._task_checklist,
+            "performance_dashboard": self._performance_dashboard,
+            "product_intelligence": self._product_intelligence,
+            "add_on_commission": self._add_on_commission,
+            "product_comparison": self._product_comparison,
+            "transaction_preparation": self._transaction_preparation,
+        }
+        handler = dispatch.get(operation)
+        if not handler:
+            return f"Unknown operation `{operation}`. Valid: {', '.join(dispatch.keys())}"
+        return handler(**kwargs)
+
+
+# ---------------------------------------------------------------------------
+# Main — exercise all operations
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    agent = StoreAssociateCopilotAgent()
+    print("=" * 80)
+    print("EMBEDDED DEMO PRODUCT (works offline)")
+    print(agent.perform(operation="product_lookup", sku_id="SKU-1005"))
+    print("\n" + "=" * 80)
+    print("LIVE TENANT PRODUCT (fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="product_lookup", query="Mobile Cart"))
+    print("\n" + "=" * 80)
+    print(agent.perform(operation="customer_assist", scenario="upsell"))
+    print("\n" + "=" * 80)
+    print("TASK CHECKLIST + LIVE REFRIGERATION ALERT (telemetry joined to CRM")
+    print("case CAS-260138; overlay disappears offline)")
+    print(agent.perform(operation="task_checklist", shift="opening"))
+    print("\n" + "=" * 80)
+    print(agent.perform(operation="performance_dashboard"))
+    print("=" * 80)

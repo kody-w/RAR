@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/deal_competitor_intel",
+  "agent_file": "competitor_intelligence_agent.py",
+  "agent_sha256": "fe7b22defb0093ff68c066828af6b63ee4c35dcb0f028193b11218583953dfa7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CompetitorIntelligenceAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Maps competitive exposure across live deals from a simulated Dynamics 365 tenant, with threat scores and an embedded offline demo fallback.",
+    "display_name": "Deal Competitor Intelligence",
+    "name": "@aibast-agents-library/deal_competitor_intel",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "competitive-intelligence",
+      "deal-progression",
+      "strategy"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "CompetitorIntelligenceAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The analysis to perform",
+        "enum": [
+          "competitor_snapshot",
+          "threat_assessment",
+          "counter_strategy",
+          "win_loss_patterns"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

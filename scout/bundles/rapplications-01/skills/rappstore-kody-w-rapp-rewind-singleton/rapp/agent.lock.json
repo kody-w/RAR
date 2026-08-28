@@ -1,0 +1,69 @@
+{
+  "agent": "@kody-w/rapp-rewind-singleton",
+  "agent_file": "rapp_rewind_agent.py",
+  "agent_sha256": "8074e7acdeb4877ba705b9ffdab99dabd4b57464b27ad38d4eb77b35e9f2dac3",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappRewindAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "@kody-w",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A local, searchable memory of everything that has been on your screen.",
+    "name": "rapp_rewind",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "screen",
+      "ocr",
+      "search",
+      "memory",
+      "local-first",
+      "privacy"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "RappRewind",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do. Default doctor.",
+        "enum": [
+          "doctor",
+          "search",
+          "stats",
+          "capture",
+          "timeline",
+          "prune",
+          "bench"
+        ],
+        "type": "string"
+      },
+      "app": {
+        "description": "Restrict a search to an app name.",
+        "type": "string"
+      },
+      "days": {
+        "description": "Retention in days for prune.",
+        "type": "integer"
+      },
+      "limit": {
+        "description": "Max results.",
+        "type": "integer"
+      },
+      "query": {
+        "description": "Search text, required for search.",
+        "type": "string"
+      },
+      "since": {
+        "description": "e.g. 30m, 6h, 2d.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

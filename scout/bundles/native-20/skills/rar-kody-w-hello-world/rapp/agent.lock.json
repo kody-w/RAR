@@ -1,0 +1,40 @@
+{
+  "agent": "@kody-w/hello_world_agent",
+  "agent_file": "hello_world_agent.py",
+  "agent_sha256": "d2695f70a412909546a49586487a471e6bca9c2d215d0367d440a80473b75bd1",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "HelloWorldAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Greets the user by name with a canned hello message; a starter example touching no external systems.",
+    "display_name": "Hello World",
+    "name": "@kody-w/hello_world_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "tutorial",
+      "hello-world",
+      "starter"
+    ],
+    "version": "1.0.3"
+  },
+  "runtime_name": "HelloWorldAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "name": {
+        "description": "Name to greet",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.3"
+}

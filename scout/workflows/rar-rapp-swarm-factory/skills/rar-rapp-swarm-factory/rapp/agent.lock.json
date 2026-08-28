@@ -1,0 +1,72 @@
+{
+  "agent": "@rapp/swarm_factory_agent",
+  "agent_file": "swarm_factory_agent.py",
+  "agent_sha256": "cfe3a0cffffb9d6395bf3d9377239e24500d3f7ab23c00b059da62f16a529ae0",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SwarmFactoryAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates, builds, installs, and uninstalls RAPP swarms — converging local agents into single shareable .py files via the RAPP Store catalog.",
+    "display_name": "SwarmFactory",
+    "example_call": {
+      "args": {
+        "action": "list"
+      }
+    },
+    "name": "@rapp/swarm_factory_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meta",
+      "build",
+      "singleton",
+      "swarm-factory",
+      "store"
+    ],
+    "version": "0.3.1"
+  },
+  "runtime_name": "SwarmFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "generate (design+persist a new agent), build (package locals into a singleton), list (browse store), install (pull from store), uninstall (remove)",
+        "enum": [
+          "generate",
+          "build",
+          "list",
+          "install",
+          "uninstall"
+        ],
+        "type": "string"
+      },
+      "agent_code": {
+        "description": "REQUIRED for 'generate'. Full Python source for the new agent, top to bottom — imports, __manifest__ dict, the BasicAgent subclass with __init__/metadata/perform. Will be syntax-checked and contract-checked before persistence.",
+        "type": "string"
+      },
+      "description": {
+        "description": "One-line description of what this agent/swarm does. Used in the agent's manifest and in the LLM-facing description so the LLM knows when to call it.",
+        "type": "string"
+      },
+      "exclude": {
+        "description": "For 'build' only: comma-separated agent names to exclude. Built-in memory/factory agents are excluded automatically.",
+        "type": "string"
+      },
+      "swarm_name": {
+        "description": "PascalCase name for the new agent/swarm (generate, build) OR the swarm id/name (install, uninstall). Example: 'NytSummarizer'",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "0.3.1"
+}

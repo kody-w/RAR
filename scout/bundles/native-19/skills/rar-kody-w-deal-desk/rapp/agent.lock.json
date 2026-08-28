@@ -1,0 +1,47 @@
+{
+  "agent": "@kody-w/deal_desk_agent",
+  "agent_file": "deal_desk_agent.py",
+  "agent_sha256": "4f0a8d4f0c0a8ddd9f4f02b29efcfedb30080938bc14b66ce752170a3a3f88dd",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DealDeskAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Produces templated deal briefings, health scores, and competitive analyses for a named company, listing sales agents from the live RAR registry.",
+    "display_name": "DealDesk",
+    "name": "@kody-w/deal_desk_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "deck",
+      "deal",
+      "sales",
+      "b2b",
+      "account-intelligence",
+      "competitive",
+      "pipeline",
+      "crm"
+    ],
+    "version": "1.1.1"
+  },
+  "runtime_name": "DealDesk",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "command": {
+        "description": "Command to run:\n  analyze <company>   — full deal intelligence briefing for a company\n  score <company>     — deal health score with risk factors\n  compete <company>   — competitive landscape analysis\n  stack               — show all available B2B sales agents in RAPP\n  recommend <company> — suggest which RAPP agents to install for this deal",
+        "type": "string"
+      }
+    },
+    "required": [
+      "command"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.1"
+}

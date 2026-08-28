@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/power_bi_model_review",
+  "agent_file": "power_bi_model_review_agent.py",
+  "agent_sha256": "29cae30baa09510e4c1adaf840d54147afc9476821ab7c5a1303194987097b7c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PowerBiModelReview",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Tim Karlsson",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Review a Power BI or Analysis Services semantic model (TMDL, BIM/JSON, or a pasted table/measure list) for relationship, DAX, date-handling, and naming issues, with corrected DAX for anything flagged.",
+    "display_name": "Power BI Model Review",
+    "name": "@cat-agent-skills/power_bi_model_review",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d7479319485ce4bf",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "power-bi-model-review",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#power-bi-model-review",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "power_bi",
+      "dax",
+      "semantic_model",
+      "data",
+      "review",
+      "fabric"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "PowerBiModelReview",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

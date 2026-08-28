@@ -1,0 +1,548 @@
+"""
+Contract Risk Review Agent — a template you are meant to mutate.
+
+Scans professional-services contracts for risky clauses, checks compliance
+with internal policies, and generates renegotiation briefs highlighting
+liability exposure, IP concerns, and unfavorable terms.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     In this template a Dynamics quote is reinterpreted as an active
+     commercial agreement under review — e.g. quote "QUO-260108,
+     Proposal for Harbor Pine Consulting".
+     Try: perform(operation="risk_scan")
+  2. No network? Everything falls back to the embedded demo layer below
+     (CONTRACTS / CLAUSES / COMPLIANCE_REQUIREMENTS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     CONTRACT_RISK_REVIEW_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your CLM), or replace
+     _fetch_collection() with an Ironclad/Icertis client. Fields the
+     rest of the file needs are listed in _normalize_live_contract() —
+     clause-level risk renders as "n/a — enrichment seam" until you wire
+     a CLM with clause extraction.
+
+OPERATIONS
+  risk_scan | clause_analysis | compliance_check | renegotiation_brief
+  | implementation_package
+  kwargs: operation (required), record_id, contract_id
+"""
+
+import sys
+import os
+import json
+import urllib.request
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
+from basic_agent import BasicAgent
+
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/contract_risk_review",
+    "version": "1.2.0",
+    "display_name": "Contract Risk Review Agent",
+    "description": "Scans agreements for risk and drafts renegotiation briefs from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "author": "AIBAST",
+    "tags": ["contract", "risk", "legal", "compliance", "professional-services"],
+    "category": "professional_services",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export CONTRACT_RISK_REVIEW_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CLM client. Downstream
+# code only needs the fields from _normalize_live_contract().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "CONTRACT_RISK_REVIEW_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+def _normalize_live_contract(row):
+    """Project a Dynamics quote onto the contract-register row this agent
+    renders. THIS is the contract your replacement data source must meet —
+    a dict with these keys. None means 'not knowable from the commercial
+    record alone' and the renderer labels it as an enrichment seam (wire a
+    CLM with clause extraction for risk scoring)."""
+    return {
+        "id": row.get("quotenumber", "?"),
+        "client": row.get("customeridname", "Unknown"),
+        "title": row.get("name", "n/a"),
+        "value": float(row.get("totalamount") or 0),
+        "status": row.get(
+            "statecode@OData.Community.Display.V1.FormattedValue", "Unknown"
+        ),
+        "expires": str(row.get("effectiveto") or "")[:10] or "n/a",
+        "risk_score": None,   # enrichment seam — wire your CLM clause analysis
+        "high_issues": None,  # enrichment seam
+        "_live": True,
+    }
+
+
+def _live_contract_register():
+    """Tenant quotes reinterpreted as the active commercial-agreement
+    register; [] when offline."""
+    rows = _fetch_collection("quotes")
+    return sorted(
+        (_normalize_live_contract(r) for r in rows),
+        key=lambda c: c["value"], reverse=True,
+    )
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
+# ---------------------------------------------------------------------------
+
+CONTRACTS = {
+    "CTR-5001": {
+        "client": "NovaTech Systems",
+        "type": "Master Services Agreement",
+        "value": 25000000,
+        "term_months": 36,
+        "governing_law": "Delaware",
+        "renewal_date": "2028-06-30",
+        "risk_score": 6.5,
+        "pages": 47,
+        "status": "under_review",
+    },
+    "CTR-5002": {
+        "client": "Meridian Healthcare",
+        "type": "Statement of Work",
+        "value": 4200000,
+        "term_months": 18,
+        "governing_law": "New York",
+        "renewal_date": "2027-09-15",
+        "risk_score": 3.8,
+        "pages": 22,
+        "status": "active",
+    },
+    "CTR-5003": {
+        "client": "Atlas Financial Group",
+        "type": "Master Services Agreement",
+        "value": 12000000,
+        "term_months": 24,
+        "governing_law": "California",
+        "renewal_date": "2027-12-01",
+        "risk_score": 5.2,
+        "pages": 38,
+        "status": "active",
+    },
+    "CTR-5004": {
+        "client": "Orion Defense Systems",
+        "type": "IDIQ Task Order",
+        "value": 8500000,
+        "term_months": 60,
+        "governing_law": "Federal (FAR)",
+        "renewal_date": "2030-03-31",
+        "risk_score": 4.1,
+        "pages": 64,
+        "status": "active",
+    },
+}
+
+CLAUSES = {
+    "CTR-5001": [
+        {"section": "7.1", "title": "Liability Cap", "risk": "HIGH",
+         "issue": "Cap limited to fees paid in preceding 12 months ($2-8M range); no carve-outs for IP or data breach",
+         "recommendation": "Increase to annual contract value ($8.3M minimum) with carve-outs"},
+        {"section": "8.2", "title": "IP Ownership", "risk": "HIGH",
+         "issue": "All work product assigned to client including improvements and derivatives; no pre-existing IP protection",
+         "recommendation": "Carve out pre-existing IP; add license-back for client-specific derivatives"},
+        {"section": "9.4", "title": "Payment Terms", "risk": "MEDIUM",
+         "issue": "Net 60 days vs company standard Net 30; creates $1.4M cash-flow delay",
+         "recommendation": "Negotiate to Net 30 or Net 45 with early-pay discount"},
+        {"section": "12.1", "title": "Termination", "risk": "HIGH",
+         "issue": "Client may terminate immediately for any breach with no cure period",
+         "recommendation": "Add 30-day cure period for non-material breaches"},
+        {"section": "14.3", "title": "SLA Penalties", "risk": "MEDIUM",
+         "issue": "Penalties uncapped; could exceed monthly fees in extreme scenarios",
+         "recommendation": "Cap penalties at 10% of monthly fees"},
+        {"section": "15.2", "title": "Change Orders", "risk": "MEDIUM",
+         "issue": "Verbal change approvals accepted; creates scope-creep exposure",
+         "recommendation": "Require written change orders signed by authorized representatives"},
+    ],
+    "CTR-5003": [
+        {"section": "5.1", "title": "Indemnification", "risk": "HIGH",
+         "issue": "One-sided indemnification; we indemnify client but no reciprocal obligation",
+         "recommendation": "Add mutual indemnification clause"},
+        {"section": "6.3", "title": "Data Handling", "risk": "MEDIUM",
+         "issue": "No data destruction timeline after engagement ends; liability lingers",
+         "recommendation": "Add 90-day data destruction clause with certification"},
+        {"section": "11.2", "title": "Non-Compete", "risk": "MEDIUM",
+         "issue": "12-month non-compete for similar engagements in financial services sector",
+         "recommendation": "Narrow scope to specific sub-sector or reduce to 6 months"},
+    ],
+}
+
+COMPLIANCE_REQUIREMENTS = {
+    "liability_cap_minimum": 5000000,
+    "payment_terms_max_days": 45,
+    "ip_preexisting_protection": True,
+    "mutual_indemnification": True,
+    "cure_period_days": 30,
+    "data_destruction_clause": True,
+    "change_order_written": True,
+    "sla_penalty_cap_pct": 15,
+}
+
+RENEWAL_CALENDAR = [
+    {"contract_id": "CTR-5002", "renewal_date": "2027-09-15", "days_out": 547, "action": "Begin renewal discussions Q1 2027"},
+    {"contract_id": "CTR-5003", "renewal_date": "2027-12-01", "days_out": 624, "action": "Address risk clauses before renewal"},
+    {"contract_id": "CTR-5001", "renewal_date": "2028-06-30", "days_out": 835, "action": "Renegotiate critical terms at Year-2 review"},
+    {"contract_id": "CTR-5004", "renewal_date": "2030-03-31", "days_out": 1474, "action": "Option-year review in 2028"},
+]
+
+EVIDENCE_CAPABILITIES = {
+    "implementation_package": {
+        "title": "Prioritized Amendment and Redline Package",
+        "write": True,
+        "records": [
+            {
+                "record_id": "CRR-501",
+                "contract_id": "CTR-5001",
+                "priority": "P0",
+                "benchmark": "liability cap of at least annual contract value",
+                "quantified_impact": "$6.3M additional uncovered exposure at the low end",
+                "amendment": "raise cap to $8.3M and add IP/data-breach carve-outs",
+                "redline": "Section 7.1 replacement language prepared",
+            },
+            {
+                "record_id": "CRR-502",
+                "contract_id": "CTR-5001",
+                "priority": "P0",
+                "benchmark": "supplier retains pre-existing intellectual property",
+                "quantified_impact": "all reusable improvements currently assigned to client",
+                "amendment": "carve out pre-existing IP and add a derivative license-back",
+                "redline": "Section 8.2 replacement language prepared",
+            },
+            {
+                "record_id": "CRR-503",
+                "contract_id": "CTR-5001",
+                "priority": "P1",
+                "benchmark": "Net 30 to Net 45 payment terms",
+                "quantified_impact": "$1.4M cash-flow delay under Net 60",
+                "amendment": "replace Net 60 with Net 30, fallback Net 45",
+                "redline": "Section 9.4 replacement language prepared",
+            },
+        ],
+    },
+}
+
+
+# ---------------------------------------------------------------------------
+# Helper functions
+# ---------------------------------------------------------------------------
+
+def _high_risk_count(contract_id):
+    """Count HIGH-risk clauses for a contract."""
+    return sum(1 for c in CLAUSES.get(contract_id, []) if c["risk"] == "HIGH")
+
+
+def _compliance_gaps(contract_id):
+    """Check contract clauses against compliance requirements."""
+    gaps = []
+    clauses = CLAUSES.get(contract_id, [])
+    clause_titles = {c["title"].lower() for c in clauses}
+    ctr = CONTRACTS[contract_id]
+
+    # Check specific known issues
+    for cl in clauses:
+        if cl["risk"] in ("HIGH", "MEDIUM"):
+            gaps.append({"clause": cl["title"], "section": cl["section"], "severity": cl["risk"],
+                         "requirement": cl["recommendation"]})
+    return gaps
+
+
+def _total_exposure():
+    """Sum the value of contracts with risk score above 5."""
+    return sum(c["value"] for c in CONTRACTS.values() if c["risk_score"] >= 5.0)
+
+
+def _evidence_matches(user_input, records):
+    """Match explicit evidence IDs without falling through to another contract."""
+    tokens = {
+        "".join(ch for ch in token.upper() if ch.isalnum())
+        for token in str(user_input).split()
+    }
+    return [
+        record for record in records
+        if "".join(ch for ch in record["record_id"].upper() if ch.isalnum()) in tokens
+    ]
+
+
+def _evidence_selector(capability, kwargs):
+    """Resolve explicit evidence or contract identifiers to evidence record IDs."""
+    if kwargs.get("record_id"):
+        return kwargs["record_id"]
+    if kwargs.get("contract_id"):
+        record_ids = [
+            record["record_id"]
+            for record in EVIDENCE_CAPABILITIES[capability]["records"]
+            if record["contract_id"] == kwargs["contract_id"]
+        ]
+        return " ".join(record_ids) or kwargs["contract_id"]
+    return kwargs.get("user_input", "")
+
+
+def _render_evidence_operation(capability, user_input=""):
+    spec = EVIDENCE_CAPABILITIES[capability]
+    records = spec["records"]
+    matches = _evidence_matches(user_input, records) if user_input else records
+    lines = [f"## {spec['title']}\n"]
+    if user_input and not matches:
+        lines.append("No exact `record_id` match was found; no substitute contract was used.")
+    else:
+        lines.append("Benchmark-grounded, deterministic amendments:")
+        for record in matches:
+            lines.append("- " + "; ".join(f"{key}: {value}" for key, value in record.items()))
+    target = matches[0]["record_id"] if matches else "NO-MATCH"
+    lines.extend([
+        "\n### Simulated Write Receipt",
+        f"- receipt_id: SIM-{capability.upper()}-{target}",
+        "- status: simulated",
+        "- target_systems: Microsoft Word and Microsoft Teams",
+        "- artifacts: redlined agreement and prioritized implementation plan",
+        "- No document was edited or shared; this is a preview-only write.",
+    ])
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Agent class
+# ---------------------------------------------------------------------------
+
+class ContractRiskReviewAgent(BasicAgent):
+    """Scans contracts for risk and generates compliance reports."""
+
+    def __init__(self):
+        self.name = "ContractRiskReviewAgent"
+        self.metadata = {
+            "name": self.name,
+            "description": __manifest__["description"],
+            "operations": [
+                "risk_scan",
+                "clause_analysis",
+                "compliance_check",
+                "renegotiation_brief",
+                "implementation_package",
+            ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to run; defaults to risk_scan when omitted.",
+                        "enum": [
+                            "risk_scan",
+                            "clause_analysis",
+                            "compliance_check",
+                            "renegotiation_brief",
+                            "implementation_package",
+                        ],
+                    },
+                    "record_id": {
+                        "type": "string",
+                        "description": "Evidence amendment record identifier for implementation_package, such as CRR-501.",
+                    },
+                    "contract_id": {
+                        "type": "string",
+                        "description": "Contract identifier, such as CTR-5001; selects all implementation-package records for that contract.",
+                    },
+                },
+                "required": [],
+            },
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        operation = kwargs.get("operation", "risk_scan")
+        dispatch = {
+            "risk_scan": self._risk_scan,
+            "clause_analysis": self._clause_analysis,
+            "compliance_check": self._compliance_check,
+            "renegotiation_brief": self._renegotiation_brief,
+            "implementation_package": self._implementation_package,
+        }
+        handler = dispatch.get(operation)
+        if handler is None:
+            return f"**Error:** Unknown operation `{operation}`. Valid: {', '.join(dispatch.keys())}"
+        return handler(**kwargs)
+
+    # ------------------------------------------------------------------
+    def _risk_scan(self, **kwargs) -> str:
+        lines = ["## Contract Risk Scan\n"]
+        exposure = _total_exposure()
+        total_val = sum(c["value"] for c in CONTRACTS.values())
+        lines.append(f"**Active contracts:** {len(CONTRACTS)}")
+        lines.append(f"**Total contract value:** ${total_val:,.0f}")
+        lines.append(f"**Value at elevated risk (score >= 5.0):** ${exposure:,.0f}\n")
+
+        lines.append("| Contract | Client | Type | Value | Term | Risk Score | HIGH Issues |")
+        lines.append("|----------|--------|------|-------|------|------------|-------------|")
+        ranked = sorted(CONTRACTS.items(), key=lambda x: x[1]["risk_score"], reverse=True)
+        for cid, c in ranked:
+            hrc = _high_risk_count(cid)
+            lines.append(
+                f"| {cid} | {c['client']} | {c['type']} | ${c['value']:,.0f} | "
+                f"{c['term_months']}mo | {c['risk_score']}/10 | {hrc} |"
+            )
+
+        lines.append("\n### Upcoming Renewals\n")
+        lines.append("| Contract | Client | Renewal Date | Days Out | Action |")
+        lines.append("|----------|--------|-------------|----------|--------|")
+        for r in RENEWAL_CALENDAR:
+            client = CONTRACTS[r["contract_id"]]["client"]
+            lines.append(f"| {r['contract_id']} | {client} | {r['renewal_date']} | {r['days_out']} | {r['action']} |")
+        live = _live_contract_register()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Agreement Register (Dynamics quotes reinterpreted as contracts)\n")
+            lines.append("| Ref | Client | Title | Value | Status | Expires | Risk Score | HIGH Issues |")
+            lines.append("|-----|--------|-------|-------|--------|---------|------------|-------------|")
+            for c in live:
+                lines.append(
+                    f"| {c['id']} | {c['client']} | {c['title'][:32]} | ${c['value']:,.2f} | "
+                    f"{c['status']} | {c['expires']} | {c['risk_score'] or seam} | "
+                    f"{seam if c['high_issues'] is None else c['high_issues']} |"
+                )
+            lines.append("\n(Risk columns await a CLM with clause extraction — see the LIVE DATA SEAM.)")
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo contracts only._")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _clause_analysis(self, **kwargs) -> str:
+        lines = ["## Clause-Level Risk Analysis\n"]
+        for cid in CLAUSES:
+            c = CONTRACTS[cid]
+            lines.append(f"### {cid} -- {c['client']} (${c['value']:,.0f})\n")
+            lines.append("| Section | Clause | Risk | Issue | Recommendation |")
+            lines.append("|---------|--------|------|-------|----------------|")
+            for cl in CLAUSES[cid]:
+                lines.append(
+                    f"| {cl['section']} | {cl['title']} | **{cl['risk']}** | "
+                    f"{cl['issue'][:60]}... | {cl['recommendation'][:50]}... |"
+                )
+            high = sum(1 for cl in CLAUSES[cid] if cl["risk"] == "HIGH")
+            med = sum(1 for cl in CLAUSES[cid] if cl["risk"] == "MEDIUM")
+            lines.append(f"\n**Summary:** {high} HIGH, {med} MEDIUM risk clauses\n")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _compliance_check(self, **kwargs) -> str:
+        lines = ["## Compliance Check Results\n"]
+        lines.append("### Internal Policy Requirements\n")
+        lines.append("| Requirement | Policy Standard |")
+        lines.append("|-------------|----------------|")
+        for key, val in COMPLIANCE_REQUIREMENTS.items():
+            label = key.replace("_", " ").title()
+            lines.append(f"| {label} | {val} |")
+
+        lines.append("\n### Contract Compliance Status\n")
+        for cid, c in CONTRACTS.items():
+            gaps = _compliance_gaps(cid)
+            status = "PASS" if not gaps else f"FAIL ({len(gaps)} gaps)"
+            lines.append(f"#### {cid} -- {c['client']} -- **{status}**\n")
+            if gaps:
+                lines.append("| Clause | Section | Severity | Required Action |")
+                lines.append("|--------|---------|----------|-----------------|")
+                for g in gaps:
+                    lines.append(f"| {g['clause']} | {g['section']} | {g['severity']} | {g['requirement']} |")
+                lines.append("")
+            else:
+                lines.append("All compliance requirements met.\n")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _renegotiation_brief(self, **kwargs) -> str:
+        lines = ["## Renegotiation Brief\n"]
+        # Focus on highest-risk contracts
+        high_risk = [(cid, c) for cid, c in CONTRACTS.items() if c["risk_score"] >= 5.0]
+        high_risk.sort(key=lambda x: x[1]["risk_score"], reverse=True)
+
+        for cid, c in high_risk:
+            clauses = CLAUSES.get(cid, [])
+            lines.append(f"### {cid} -- {c['client']}")
+            lines.append(f"- **Value:** ${c['value']:,.0f} over {c['term_months']} months")
+            lines.append(f"- **Risk score:** {c['risk_score']}/10")
+            lines.append(f"- **Governing law:** {c['governing_law']}")
+            lines.append(f"- **Renewal:** {c['renewal_date']}\n")
+
+            non_negotiable = [cl for cl in clauses if cl["risk"] == "HIGH"]
+            negotiable = [cl for cl in clauses if cl["risk"] == "MEDIUM"]
+
+            if non_negotiable:
+                lines.append("**Non-Negotiable Amendments (must resolve):**")
+                for i, cl in enumerate(non_negotiable, 1):
+                    lines.append(f"{i}. **{cl['title']}** (Section {cl['section']}): {cl['recommendation']}")
+            if negotiable:
+                lines.append("\n**Preferred Amendments:**")
+                for i, cl in enumerate(negotiable, 1):
+                    lines.append(f"{i}. **{cl['title']}** (Section {cl['section']}): {cl['recommendation']}")
+
+            lines.append("\n**Negotiation strategy:**")
+            lines.append(f"- Lead with non-negotiable items; concede on lower-priority terms if needed")
+            lines.append(f"- Fallback: accept current value on MEDIUM items if all HIGH items resolved")
+            lines.append(f"- Escalation path: General Counsel review if impasse on liability cap")
+            lines.append("")
+
+        total_risk_val = sum(c["value"] for _, c in high_risk)
+        lines.append(f"**Total contract value requiring renegotiation:** ${total_risk_val:,.0f}")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _implementation_package(self, **kwargs) -> str:
+        return _render_evidence_operation(
+            "implementation_package",
+            _evidence_selector("implementation_package", kwargs),
+        )
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    agent = ContractRiskReviewAgent()
+    print("=" * 72)
+    print("EMBEDDED DEMO CONTRACTS + LIVE TENANT AGREEMENT REGISTER")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="risk_scan"))
+    print()
+    for op in agent.metadata["operations"][1:]:
+        print("=" * 72)
+        print(agent.perform(operation=op))
+        print()

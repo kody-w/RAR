@@ -17,8 +17,12 @@ on:
       - 'state/agent_lifecycle.json'
       - 'state/receipts/**'
       - 'state/releases.json'
+      - 'state/maintainer_migrations.json'
       - 'build_registry.py'
+      - 'scripts/apply_maintainer_migrations.py'
+      - 'scripts/mint_maintainer_receipts.py'
       - 'rar.config.json'
+      - 'marketplaces.json'
       - '.github/workflows/build-registry.yml'
   pull_request:
     paths:
@@ -47,6 +51,26 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: python scripts/check_notarized_changes.py --base "$BASE_SHA"
+
+      - name: Apply pinned maintainer migrations
+        id: legacy
+        run: |
+          result=$(python scripts/apply_maintainer_migrations.py)
+          echo "$result"
+          changed=$(python -c \
+            'import json,sys; print("true" if json.load(sys.stdin)["changed"] else "false")' \
+            <<< "$result")
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+      - name: Mint migration receipts
+        if: steps.legacy.outputs.changed == 'true'
+        run: |
+          python scripts/mint_maintainer_receipts.py \
+            --agent @kody-w/connected_solution_agent \
+            --agent @kody-w/copilot_studio_forge_agent \
+            --agent @rapp/learn_new \
+            --agent @rapter/rapp_dogg_agent \
+            --note "apply exact hash-pinned legacy registry migrations"
       
       - name: Reject kebab-case agent filenames
         run: |
@@ -70,6 +94,9 @@ jobs:
       - name: Record new agents in the permanent URL ledger
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: python scripts/check_url_stability.py --update
+
+      - name: Rebuild the per-agent Pokedex API
+        run: python scripts/build_pokedex_api.py
 
       # The headless API is what AIdeate, the vBrainstem and the grail
       # brainstem actually read. A stale catalog is an invisible failure —
@@ -95,11 +122,17 @@ jobs:
         run: |
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
-          git add registry.json state/published_paths.json \
+          git add agents/@kody-w/connected_solution_agent.py \
+                  agents/@kody-w/copilot_studio_forge_agent.py \
+                  agents/@rapp/learn_new_agent.py \
+                  agents/@rapter/rapp_dogg_agent.py \
+                  state/agent_lifecycle.json state/receipts \
+                  registry.json state/published_paths.json \
                   state/agent_commit_dates.json \
                   manifest.json api/v1/catalog.json api/v1/taxonomy.json \
-                  api/v1/match.json api/v1/status.json api/v1/badge.json \
-                  api/v1/audience
+                  api/v1/match.json api/v1/marketplaces.json \
+                  api/v1/status.json api/v1/badge.json \
+                  api/v1/audience api/v1/index.json api/v1/agent api/v1/sprite
           git diff --cached --quiet || git commit -m "Auto-build registry.json [skip ci]"
           git push
 

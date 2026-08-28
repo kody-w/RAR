@@ -1,0 +1,67 @@
+{
+  "agent": "@cat-agent-skills/classic_text_adventure",
+  "agent_file": "classic_text_adventure_agent.py",
+  "agent_sha256": "90b57384eee43f39e7dd44a0ba50ba226615e3b65355dcdc8f5b1f49fac559a1",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ClassicTextAdventure",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Andreas Adner",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Play a deterministic, resumable Colossal Cave adventure with exact game output and built-in diagnostics.",
+    "display_name": "Classic Text Adventure",
+    "name": "@cat-agent-skills/classic_text_adventure",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "9a6d89774728370c",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "classic-text-adventure",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#classic-text-adventure",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "adventure",
+      "game",
+      "python"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "ClassicTextAdventure",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to apply this capability to.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

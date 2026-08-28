@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/blog_content_auditor",
+  "agent_file": "blog_content_auditor_agent.py",
+  "agent_sha256": "ba98bc211f37593e39cd7bdcd7c53edd1db5e2484a9378500c897505f902b262",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BlogContentAuditor",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Simon Owen",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Audit blog posts or a blog library for clarity, structure, evidence, audience fit, and improvement priority.",
+    "display_name": "Blog Content Auditor",
+    "name": "@cat-agent-skills/blog_content_auditor",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "a5c6bd31581e4eda",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "blog-content-auditor",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#blog-content-auditor",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "blog",
+      "content",
+      "audit",
+      "writing",
+      "seo",
+      "productivity"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "BlogContentAuditor",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

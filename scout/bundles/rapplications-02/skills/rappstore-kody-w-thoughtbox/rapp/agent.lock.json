@@ -1,0 +1,34 @@
+{
+  "agent": "@kody-w/thoughtbox",
+  "agent_file": "thoughtbox_agent.py",
+  "agent_sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ThoughtboxAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "agent": "singleton/thoughtbox_agent.py",
+    "category": "productivity",
+    "id": "thoughtbox",
+    "name": "Thoughtbox",
+    "publisher": "@kody-w",
+    "schema": "rapp-application/1.0",
+    "summary": "Local-first reflection journal. Append, list, search, tag, export, import.",
+    "tags": [
+      "rapplication",
+      "journal",
+      "local-first",
+      "scratchpad",
+      "has-ui"
+    ],
+    "ui": "ui/index.html",
+    "version": "1.0.0"
+  },
+  "runtime_name": "Thoughtbox",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

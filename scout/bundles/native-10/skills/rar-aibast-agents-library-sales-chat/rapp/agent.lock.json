@@ -1,0 +1,56 @@
+{
+  "agent": "@aibast-agents-library/sales_chat",
+  "agent_file": "sales_chat_agent.py",
+  "agent_sha256": "db0e860853560f566ee7107dad1928d1e5c14256fd8f3074ccd0957d7b6be10c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SalesChatAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2c_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Answers chat questions from a live product catalog on a simulated Dynamics 365 tenant, with promotions and an offline demo fallback.",
+    "display_name": "Sales Chat Agent",
+    "name": "@aibast-agents-library/sales_chat",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "sales",
+      "chat",
+      "product",
+      "promotion",
+      "order",
+      "b2c"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "SalesChatAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "category": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "product_inquiry",
+          "availability_check",
+          "promotion_lookup",
+          "order_assistance"
+        ],
+        "type": "string"
+      },
+      "product_id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

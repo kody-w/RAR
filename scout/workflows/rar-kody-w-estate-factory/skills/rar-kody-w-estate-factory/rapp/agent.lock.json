@@ -1,0 +1,76 @@
+{
+  "agent": "@kody-w/estate_factory",
+  "agent_file": "estate_factory_agent.py",
+  "agent_sha256": "7558023b529e952b58084d09cf0c93c1a8cdea34684302e62e6dba5b0ccbc238",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "EstateFactoryAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "meta",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates a complete digital estate from an intent — org tree, factory agent stubs, souls, HTML dashboard — via brainstem or LLM APIs when available.",
+    "display_name": "EstateFactory",
+    "example_call": {
+      "args": {
+        "action": "design",
+        "intent": "I want an estate that produces a daily blog post and a weekly podcast script."
+      }
+    },
+    "industry": "meta",
+    "name": "@kody-w/estate_factory",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meta",
+      "factory",
+      "estate",
+      "scaffolding",
+      "rapplication",
+      "singleton"
+    ],
+    "version": "0.1.2"
+  },
+  "runtime_name": "EstateFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "design",
+          "generate",
+          "provision",
+          "tour",
+          "list"
+        ],
+        "type": "string"
+      },
+      "intent": {
+        "description": "What the user wants the estate to do. Required for design + generate.",
+        "type": "string"
+      },
+      "name": {
+        "description": "Slug for the estate. Required for generate/provision/tour.",
+        "type": "string"
+      },
+      "type": {
+        "description": "Estate type 1-5. Optional; inferred from intent if omitted.",
+        "maximum": 5,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "write_souls": {
+        "description": "On generate, also call the SoulWriter persona to produce real soul prompts (slower; cheap mode skips this and uses placeholders).",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "0.1.2"
+}

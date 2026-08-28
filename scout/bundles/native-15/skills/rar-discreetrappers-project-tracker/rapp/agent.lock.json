@@ -1,0 +1,186 @@
+{
+  "agent": "@discreetRappers/project_tracker_agent",
+  "agent_file": "project_tracker_agent.py",
+  "agent_sha256": "b9df9cb9d4f0743092aae62cabc5a156bd6b7f73fd773fce14584278f1c56fa4",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ProjectTrackerAgent",
+  "host_dependencies": [
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Creates, updates, lists, imports, and exports RAPP project tracking records stored as JSON in Azure File Storage.",
+    "display_name": "ProjectTracker",
+    "name": "@discreetRappers/project_tracker_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "pipeline",
+      "project-management",
+      "tracking"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "ProjectTracker",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "The action to perform on project data",
+        "enum": [
+          "create",
+          "update",
+          "list",
+          "get",
+          "delete",
+          "export",
+          "import",
+          "add_timeline_event",
+          "list_agents_catalog",
+          "update_agents_catalog"
+        ],
+        "type": "string"
+      },
+      "agents": {
+        "description": "Array of agent names assigned to this project",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "agents_catalog": {
+        "description": "Agents catalog with builtin and custom arrays for update_agents_catalog action",
+        "type": "object"
+      },
+      "competing_solution": {
+        "description": "Competing solutions or vendors",
+        "type": "string"
+      },
+      "completed_steps": {
+        "description": "Array of completed RAPP step numbers for update action",
+        "items": {
+          "type": "integer"
+        },
+        "type": "array"
+      },
+      "contract_details": {
+        "description": "Contract and licensing details",
+        "type": "string"
+      },
+      "current_step": {
+        "description": "Current RAPP step number (1-14) for update action",
+        "type": "integer"
+      },
+      "customer_name": {
+        "description": "Customer name (required for create, optional for update)",
+        "type": "string"
+      },
+      "description": {
+        "description": "Full project description with business context",
+        "type": "string"
+      },
+      "discovery_data": {
+        "description": "Full discovery data including problemStatements, dataSources, stakeholders, successCriteria, timeline, suggestedAgents, riskFactors",
+        "type": "object"
+      },
+      "generated_code": {
+        "description": "Generated agent code including agent_name, class_name, file_name, code content, and features",
+        "type": "object"
+      },
+      "import_data": {
+        "description": "Full AIdeate JSON data structure with projects, agents, and timeline arrays for bulk import",
+        "type": "object"
+      },
+      "mvp_description": {
+        "description": "Detailed MVP description",
+        "type": "string"
+      },
+      "mvp_document": {
+        "description": "MVP Poke document including full document text, features (p0/p1/p2), outOfScope, successMetrics, estimatedDays",
+        "type": "object"
+      },
+      "mvp_timeline": {
+        "description": "MVP timeline or deadline",
+        "type": "string"
+      },
+      "mvp_use_case": {
+        "description": "MVP use case name/title",
+        "type": "string"
+      },
+      "notes": {
+        "description": "General project notes and context",
+        "type": "string"
+      },
+      "project_date": {
+        "description": "Project start date in YYYY-MM-DD format (optional)",
+        "type": "string"
+      },
+      "project_id": {
+        "description": "The unique project ID (required for update, get, delete, export)",
+        "type": "string"
+      },
+      "project_name": {
+        "description": "Project name (required for create, optional for update)",
+        "type": "string"
+      },
+      "qg_results": {
+        "description": "Quality gate results keyed by gate (QG1-QG6). Each contains decision, score, concerns, recommendations",
+        "type": "object"
+      },
+      "stakeholders": {
+        "description": "Key stakeholders and their roles",
+        "type": "string"
+      },
+      "status": {
+        "description": "Project status: planning, poc, active, production, on-hold, completed",
+        "enum": [
+          "planning",
+          "poc",
+          "active",
+          "production",
+          "on-hold",
+          "completed"
+        ],
+        "type": "string"
+      },
+      "step_artifacts": {
+        "description": "Additional artifacts from each step keyed by step number",
+        "type": "object"
+      },
+      "step_checklists": {
+        "description": "Object mapping step number strings to checklist completion objects. Example: {\"1\": {\"item1\": true}}",
+        "type": "object"
+      },
+      "step_decisions": {
+        "description": "Object mapping step number strings to quality gate decisions. Valid: PASS, FAIL, CLARIFY, COMPLETE, HOLD",
+        "type": "object"
+      },
+      "step_notes": {
+        "description": "Object mapping step number strings to note text. Example: {\"1\": \"Discovery completed\"}",
+        "type": "object"
+      },
+      "timeline_event": {
+        "description": "Timeline event with date, title, and description fields",
+        "type": "object"
+      },
+      "type": {
+        "description": "Project type/industry (e.g., legal, customer-service, banking, pharma)",
+        "type": "string"
+      },
+      "user_guid": {
+        "description": "User GUID to scope projects to a specific user",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

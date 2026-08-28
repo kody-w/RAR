@@ -1,0 +1,101 @@
+{
+  "agent": "@kody-w/launch_to_public_agent",
+  "agent_file": "launch_to_public_agent.py",
+  "agent_sha256": "857168ad0d4421f9099e93a63c4805ad22e229c31526b4d1cab37f9548fdff0e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "LaunchToPublicAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "platform",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
+    "display_name": "Launch to Public",
+    "name": "@kody-w/launch_to_public_agent",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "launch",
+      "publish",
+      "local-to-global",
+      "bond-technique",
+      "operator-mediated",
+      "platform"
+    ],
+    "version": "1.0.5"
+  },
+  "runtime_name": "Launch",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "_local_brainstem_dir": {
+        "description": "(test-only) treat this dir as both home + src for the snapshot.",
+        "type": "string"
+      },
+      "_local_target_dir": {
+        "description": "(test-only) graft into this local dir instead of fork+clone.",
+        "type": "string"
+      },
+      "_skip_push": {
+        "description": "(test-only) build locally but skip git push.",
+        "type": "boolean"
+      },
+      "_workspace_dir": {
+        "description": "(test-only) persistent workspace for inspection.",
+        "type": "string"
+      },
+      "brainstem_home": {
+        "description": "~/.brainstem (default). Where rappid.json + bonds.json live.",
+        "type": "string"
+      },
+      "brainstem_src": {
+        "description": "rapp_brainstem src dir (default: ~/.brainstem/src/rapp_brainstem).",
+        "type": "string"
+      },
+      "dry_run": {
+        "default": true,
+        "type": "boolean"
+      },
+      "entry_point": {
+        "description": "First action the resumer should take (one sentence).",
+        "type": "string"
+      },
+      "instructions": {
+        "description": "Markdown text — the continuation instructions any cloud AI will ingest to know what to do next.",
+        "type": "string"
+      },
+      "kernel_version": {
+        "default": "0.6.0",
+        "type": "string"
+      },
+      "kind": {
+        "default": "neighborhood",
+        "type": "string"
+      },
+      "neighborhood_name": {
+        "description": "Display name for the launched neighborhood. Defaults to repo name.",
+        "type": "string"
+      },
+      "target_repo": {
+        "description": "<owner>/<repo> destination. New repo created if absent; existing repo gets bond-technique additive graft.",
+        "type": "string"
+      },
+      "verification_steps": {
+        "description": "Optional override of the default verification checklist.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      }
+    },
+    "required": [
+      "target_repo",
+      "instructions"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.5"
+}

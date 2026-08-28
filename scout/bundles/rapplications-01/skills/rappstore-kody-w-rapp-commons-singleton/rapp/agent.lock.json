@@ -1,0 +1,58 @@
+{
+  "agent": "@kody-w/rapp_commons_singleton",
+  "agent_file": "commons_agent.py",
+  "agent_sha256": "039a2cb71500ed29a0d765c0bed1fdf18f97a4147f18b81e488ca759ab99f063",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CommonsAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Participate in the RAPP Commons social network from Python — mint a rappid, sign rapp-commons-event/1.0 events (WebCrypto-compatible), or emit a signing intent for a host to sign.",
+    "display_name": "CommonsAgent",
+    "name": "@kody-w/rapp_commons",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "commons",
+      "social",
+      "rappid",
+      "signed",
+      "kited",
+      "protocol"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "CommonsAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "whoami",
+          "read",
+          "post",
+          "hello",
+          "verify",
+          "protocol",
+          "help"
+        ],
+        "type": "string"
+      },
+      "event": {
+        "description": "a signed event JSON to verify",
+        "type": "string"
+      },
+      "text": {
+        "description": "post/hello body text",
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

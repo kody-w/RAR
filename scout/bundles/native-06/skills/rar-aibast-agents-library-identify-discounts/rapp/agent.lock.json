@@ -1,0 +1,56 @@
+{
+  "agent": "@aibast-agents-library/identify_discounts",
+  "agent_file": "identify_discounts_agent.py",
+  "agent_sha256": "291a85fc41aab99c74b58fff0d3f4bc90a669e9c82ef14cefaae2a961b91c0d2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "IdentifyDiscountsAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Scans live quotes from a simulated Dynamics 365 tenant for discounts and expiring savings, with eligibility checks and offline fallback.",
+    "display_name": "Identify Discounts",
+    "name": "@aibast-agents-library/identify_discounts",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "discounts",
+      "pricing",
+      "savings",
+      "eligibility",
+      "approval"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "IdentifyDiscountsAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The discount operation to perform",
+        "enum": [
+          "discount_scan",
+          "eligibility_check",
+          "savings_calculation",
+          "approval_workflow",
+          "purchase_savings",
+          "expiring_discounts",
+          "draft_purchase_order",
+          "bulk_order_strategy",
+          "execution_timeline",
+          "setup_tracking"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

@@ -1,0 +1,68 @@
+{
+  "agent": "@rapp/book-factory-singleton",
+  "agent_file": "bookfactory_agent.py",
+  "agent_sha256": "7419619b65eacd27dbfa418f391ba755b9d30fffbf084be211cfa011286b73d9",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BookFactory",
+  "host_dependencies": [],
+  "manifest": {
+    "delegates_to_inlined": [
+      "@rapp/persona-writer",
+      "@rapp/persona-editor",
+      "@rapp/editor-strip-scaffolding",
+      "@rapp/editor-cutweak",
+      "@rapp/editor-restructure",
+      "@rapp/editor-factcheck",
+      "@rapp/editor-voicecheck",
+      "@rapp/persona-ceo",
+      "@rapp/ceo-risk",
+      "@rapp/ceo-decision",
+      "@rapp/persona-publisher",
+      "@rapp/persona-reviewer"
+    ],
+    "example_call": {
+      "args": {
+        "chapter_title": "Chapter 1",
+        "source": "raw notes..."
+      }
+    },
+    "name": "@rapp/book-factory-singleton",
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "composite",
+      "creative-pipeline",
+      "twin-stack",
+      "singleton"
+    ],
+    "tier": "core",
+    "trust": "community",
+    "version": "0.3.0"
+  },
+  "runtime_name": "BookFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "author": {
+        "description": "Author byline",
+        "type": "string"
+      },
+      "chapter_title": {
+        "description": "Working title",
+        "type": "string"
+      },
+      "source": {
+        "description": "Raw source material",
+        "type": "string"
+      },
+      "workspace": {
+        "description": "Dir for intermediate artifacts",
+        "type": "string"
+      }
+    },
+    "required": [
+      "source"
+    ],
+    "type": "object"
+  },
+  "version": "0.3.0"
+}

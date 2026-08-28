@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/deal_stakeholder_engagement",
+  "agent_file": "stakeholder_engagement_agent.py",
+  "agent_sha256": "9c279e91ec1743d61866206591ba726b313f28ecd623674cc95314c31db9fb9c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "StakeholderEngagementAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Maps buying committees for live deals from a simulated Dynamics 365 tenant using real CRM contacts, with an embedded offline demo fallback.",
+    "display_name": "Stakeholder Engagement",
+    "name": "@aibast-agents-library/deal_stakeholder_engagement",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "stakeholder-engagement",
+      "deal-progression",
+      "relationships"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "StakeholderEngagementAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The analysis to perform",
+        "enum": [
+          "engagement_score",
+          "relationship_map",
+          "engagement_plan",
+          "sentiment_analysis"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

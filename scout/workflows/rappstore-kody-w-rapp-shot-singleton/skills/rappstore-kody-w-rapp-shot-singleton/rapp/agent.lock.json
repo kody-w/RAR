@@ -1,0 +1,88 @@
+{
+  "agent": "@kody-w/rapp-shot-singleton",
+  "agent_file": "rapp_shot_agent.py",
+  "agent_sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappShotAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "@kody-w",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Capture, annotate and redact screenshots on-device. Finds credentials with OCR and paints them out opaquely.",
+    "name": "rapp_shot",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "screenshot",
+      "ocr",
+      "redaction",
+      "privacy",
+      "local-first"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "RappShot",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do. Default doctor.",
+        "enum": [
+          "doctor",
+          "capture",
+          "ocr",
+          "redact",
+          "annotate",
+          "list"
+        ],
+        "type": "string"
+      },
+      "auto": {
+        "description": "Redaction: find secrets by OCR.",
+        "type": "boolean"
+      },
+      "box": {
+        "description": "Manual region as x,y,w,h.",
+        "type": "string"
+      },
+      "copy": {
+        "description": "Put the result on the clipboard.",
+        "type": "boolean"
+      },
+      "dry_run": {
+        "description": "Redaction: report without painting.",
+        "type": "boolean"
+      },
+      "image": {
+        "description": "Shot name or path; defaults to the most recent.",
+        "type": "string"
+      },
+      "limit": {
+        "description": "Max rows for list.",
+        "type": "integer"
+      },
+      "mode": {
+        "description": "Capture mode. Only screen works headlessly.",
+        "enum": [
+          "region",
+          "window",
+          "screen"
+        ],
+        "type": "string"
+      },
+      "name": {
+        "description": "Label for the capture.",
+        "type": "string"
+      },
+      "text": {
+        "description": "Annotation text as x,y,message.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

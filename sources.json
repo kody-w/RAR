@@ -28,6 +28,23 @@
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
       "enabled": true
+    },
+    {
+      "id": "cowork-cookbook",
+      "namespace": "@cowork-cookbook",
+      "display_name": "Cowork Cookbook",
+      "publisher": "Sean Galliher and Cowork Cookbook contributors",
+      "home_url": "https://coworkcookbook.com/",
+      "index_url": "https://coworkcookbook.com/data/catalog.json",
+      "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json",
+      "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+      "item_url_template": "https://coworkcookbook.com/recipes/{id}",
+      "format": "cowork-cookbook/1",
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+      "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+      "enabled": true
     }
   ]
 }

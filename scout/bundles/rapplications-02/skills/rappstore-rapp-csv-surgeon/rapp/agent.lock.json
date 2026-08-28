@@ -1,0 +1,64 @@
+{
+  "agent": "@rapp/csv-surgeon",
+  "agent_file": "csv_surgeon_agent.py",
+  "agent_sha256": "4d500fd77ebdc677d2860167748f06d1280bfd10de365f759e3b0e9a682b4076",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CsvSurgeonAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "example_call": {
+      "args": {
+        "action": "profile",
+        "path": "data.csv"
+      },
+      "note": "Per-column types, null rates and cardinality."
+    },
+    "name": "@rapp/csv-surgeon",
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "data",
+      "csv",
+      "profiling",
+      "quality",
+      "local-first",
+      "singleton"
+    ],
+    "tier": "core",
+    "trust": "community",
+    "version": "1.0.0"
+  },
+  "runtime_name": "CsvSurgeon",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do.",
+        "enum": [
+          "profile",
+          "issues",
+          "dupes",
+          "slice"
+        ],
+        "type": "string"
+      },
+      "keys": {
+        "description": "For dupes: comma-separated column names to match on. Default: the whole row.",
+        "type": "string"
+      },
+      "limit": {
+        "description": "For slice: how many rows. Default 10.",
+        "type": "integer"
+      },
+      "path": {
+        "description": "Path to the .csv file.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action",
+      "path"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

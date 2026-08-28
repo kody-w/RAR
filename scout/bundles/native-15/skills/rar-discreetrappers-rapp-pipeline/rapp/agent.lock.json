@@ -1,0 +1,192 @@
+{
+  "agent": "@discreetRappers/rapp_pipeline_agent",
+  "agent_file": "rapp_pipeline_agent.py",
+  "agent_sha256": "feb4bd1dfa316f9aaa83bea4e4c220084794d1207ebee2ba4c3d823aa6bc7b44",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RAPPAgent",
+  "host_dependencies": [
+    "env:AZURE_OPENAI_API_VERSION",
+    "env:AZURE_OPENAI_DEPLOYMENT_NAME",
+    "env:AZURE_OPENAI_ENDPOINT",
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Runs the full RAPP pipeline — discovery, MVP, code gen, quality gates QG1-QG6, PDF reports — using Azure OpenAI and Azure File Storage.",
+    "display_name": "RAPP",
+    "name": "@discreetRappers/rapp_pipeline_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_OPENAI_API_VERSION",
+      "AZURE_OPENAI_DEPLOYMENT_NAME",
+      "AZURE_OPENAI_ENDPOINT"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "pipeline",
+      "rapp",
+      "transcript-to-agent",
+      "code-gen",
+      "quality-gates"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "RAPP",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "The RAPP operation to perform. Use 'transcript_to_agent' for fastest transcript-to-deployable-agent workflow. Use 'auto_process' for full pipeline with PDF reports.",
+        "enum": [
+          "transcript_to_agent",
+          "auto_process",
+          "generate_report",
+          "prepare_discovery_call",
+          "process_transcript",
+          "generate_discovery_summary",
+          "generate_mvp_poke",
+          "prioritize_features",
+          "define_scope",
+          "estimate_timeline",
+          "generate_full_mvp_document",
+          "generate_agent_code",
+          "generate_agent_metadata",
+          "generate_agent_tests",
+          "generate_deployment_config",
+          "review_code",
+          "execute_quality_gate",
+          "get_step_guidance",
+          "get_pipeline_status",
+          "recommend_next_action",
+          "get_step_checklist",
+          "validate_step_completion"
+        ],
+        "type": "string"
+      },
+      "agent_description": {
+        "description": "Description of agent capabilities",
+        "type": "string"
+      },
+      "agent_name": {
+        "description": "Name for generated agent (e.g., 'InventoryOptimizer')",
+        "type": "string"
+      },
+      "agent_priority": {
+        "description": "Which agent to prioritize from transcript (e.g., 'contract', 'chargeback', 'social_media')",
+        "type": "string"
+      },
+      "constraints": {
+        "description": "Timeline, budget, or technical constraints",
+        "type": "object"
+      },
+      "customer_name": {
+        "description": "Customer/company name",
+        "type": "string"
+      },
+      "data_sources": {
+        "description": "Data sources for agent integration",
+        "items": {
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "deploy_to_storage": {
+        "description": "If true, automatically upload generated agent to Azure File Storage agents/ folder (for transcript_to_agent action)",
+        "type": "boolean"
+      },
+      "discovery_data": {
+        "description": "Structured discovery data from transcript processing",
+        "type": "object"
+      },
+      "existing_code": {
+        "description": "Existing code for review or test generation",
+        "type": "string"
+      },
+      "features": {
+        "description": "List of features/capabilities",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "gate": {
+        "description": "Quality gate to execute (required for execute_quality_gate action)",
+        "enum": [
+          "QG1",
+          "QG2",
+          "QG3",
+          "QG4",
+          "QG5",
+          "QG6"
+        ],
+        "type": "string"
+      },
+      "industry": {
+        "description": "Customer industry (e.g., retail, healthcare, manufacturing)",
+        "type": "string"
+      },
+      "input_data": {
+        "description": "Input data for quality gate validation or other operations",
+        "type": "object"
+      },
+      "problem_statement": {
+        "description": "Validated problem statement",
+        "type": "string"
+      },
+      "project_data": {
+        "description": "Current project progress data",
+        "type": "object"
+      },
+      "project_id": {
+        "description": "Project ID for storing results",
+        "type": "string"
+      },
+      "project_name": {
+        "description": "Project name",
+        "type": "string"
+      },
+      "report_type": {
+        "description": "Type of report to generate (for generate_report action)",
+        "enum": [
+          "discovery",
+          "qg1",
+          "qg2",
+          "qg3",
+          "qg4",
+          "qg5",
+          "qg6",
+          "mvp",
+          "code",
+          "deployment",
+          "demo",
+          "executive_summary",
+          "full_pipeline"
+        ],
+        "type": "string"
+      },
+      "step": {
+        "description": "Pipeline step number (1-14) for guidance/checklist/validation actions",
+        "maximum": 14,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "transcript": {
+        "description": "Discovery call transcript to process",
+        "type": "string"
+      },
+      "user_guid": {
+        "description": "User GUID for project data access",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

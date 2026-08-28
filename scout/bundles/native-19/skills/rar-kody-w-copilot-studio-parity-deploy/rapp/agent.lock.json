@@ -1,0 +1,147 @@
+{
+  "agent": "@kody-w/copilot_studio_parity_deploy",
+  "agent_file": "copilot_studio_parity_deploy_agent.py",
+  "agent_sha256": "0a0771ff1dcefef8255a5a9c4db03dfedab4886a644fd2382804e41edb2c1e7a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioDeployAgent",
+  "host_dependencies": [
+    "utils.azure_file_storage",
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "kody-w",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft.",
+    "display_name": "Copilot Studio Parity Deploy",
+    "name": "@kody-w/copilot_studio_parity_deploy",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "copilot_studio",
+      "deployment",
+      "parity",
+      "pipeline",
+      "factory"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "CopilotStudioDeploy",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "doctor",
+          "plan",
+          "deploy",
+          "provision",
+          "parity",
+          "push",
+          "finalize",
+          "release_plan",
+          "release",
+          "sync_plugin"
+        ],
+        "type": "string"
+      },
+      "agents": {
+        "description": "Local RAPP tool names, class names, filenames, or agent paths. The caller must explicitly choose one or more agents for plan/deploy.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "client_id": {
+        "description": "Optional public-client app ID for published-agent chat parity.",
+        "type": "string"
+      },
+      "confirm_publish": {
+        "description": "Exact PUBLISH:<AgentId> token required by action=release.",
+        "type": "string"
+      },
+      "display_name": {
+        "description": "Copilot Studio display name, max 30 characters.",
+        "type": "string"
+      },
+      "dry_run": {
+        "description": "Build manifest/brief without init or push.",
+        "type": "boolean"
+      },
+      "environment": {
+        "description": "Target Power Platform environment ID or URL.",
+        "type": "string"
+      },
+      "infrastructure_manifest": {
+        "description": "Optional infrastructure manifest path under run_dir for action=provision.",
+        "type": "string"
+      },
+      "output_root": {
+        "description": "Optional deployment root under the user's home.",
+        "type": "string"
+      },
+      "parity_cases": {
+        "description": "Optional parity case file under run_dir.",
+        "type": "string"
+      },
+      "principals": {
+        "description": "Team/systemuser principals to grant access before release.",
+        "items": {
+          "properties": {
+            "access_mask": {
+              "type": "string"
+            },
+            "entra_object_id": {
+              "description": "Entra object ID for non-owner profile proof.",
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "enum": [
+                "team",
+                "systemuser"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "id"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "project_dir": {
+        "description": "Existing Copilot Studio project for action=push.",
+        "type": "string"
+      },
+      "publisher_prefix": {
+        "description": "Caller-selected 2-8 character publisher prefix.",
+        "type": "string"
+      },
+      "reuse_parity": {
+        "description": "For finalize, reuse live parity evidence captured within 24 hours after revalidating all local and remote hashes.",
+        "type": "boolean"
+      },
+      "run_dir": {
+        "description": "Deployment run directory for action=finalize.",
+        "type": "string"
+      },
+      "verification_profile": {
+        "description": "Non-owner PAC auth profile used to prove list/clone access.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

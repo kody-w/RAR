@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/vendor_contract_risk_review",
+  "agent_file": "vendor_contract_risk_review_agent.py",
+  "agent_sha256": "b83fe34b7b87dcbf87a736131abad982e5fe477b0823a4204428b09fb1750590",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "VendorContractRiskReview",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Tim Karlsson",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "First-pass review of a vendor contract or SOW for the clauses that commonly cause problems (auto-renewal, liability caps, termination, IP ownership), flagged by risk level to prepare for legal review, not replace it.",
+    "display_name": "Vendor Contract Risk Review",
+    "name": "@cat-agent-skills/vendor_contract_risk_review",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "b809a298c80e1782",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "vendor-contract-risk-review",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#vendor-contract-risk-review",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "contracts",
+      "legal",
+      "procurement",
+      "risk",
+      "vendor_management",
+      "review"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "VendorContractRiskReview",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

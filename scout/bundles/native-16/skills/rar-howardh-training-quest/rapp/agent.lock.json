@@ -1,0 +1,53 @@
+{
+  "agent": "@howardh/training_quest_agent",
+  "agent_file": "training_quest_agent.py",
+  "agent_sha256": "fc213fa839cf3f39312ba03c31e47e55af61dd636bbcd671d35ee48383c78ab5",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "TrainingQuestAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Howard Hoy",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates a gamified HTML onboarding quest from the brainstem's loaded agents, with checkpoints, progress tracking, and copyable prompts.",
+    "display_name": "TrainingQuest",
+    "name": "@howardh/training_quest_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "training",
+      "onboarding",
+      "quest",
+      "html",
+      "interactive",
+      "gamification"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "TrainingQuest",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "generate = build the HTML training quest; preview = show outline only",
+        "enum": [
+          "generate",
+          "preview"
+        ],
+        "type": "string"
+      },
+      "title": {
+        "description": "Custom title for the training quest (default: 'RAPP Brainstem')",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

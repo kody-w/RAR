@@ -1,0 +1,61 @@
+{
+  "agent": "@kody-w/buzzsaw",
+  "agent_file": "buzzsaw_agent.py",
+  "agent_sha256": "68ffa820bc89cd8966f9929725bd9befd616ac26ad26867b828dc790b9cf13bb",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BuzzsawAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "workflow",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Set up an adversarial build-and-verify loop: seed prompt, disjoint region split for parallel builders, harsh read-only critic brief, and an acceptance gate that defines when to stop.",
+    "display_name": "Buzzsaw",
+    "name": "@kody-w/buzzsaw",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "buzzsaw",
+      "verification",
+      "adversarial",
+      "testing",
+      "determinism",
+      "ark"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "Buzzsaw",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "seed | critic | plan | gate | rules",
+        "type": "string"
+      },
+      "constraints": {
+        "description": "Hard constraints (one file, offline, no build step...)",
+        "type": "string"
+      },
+      "reference": {
+        "description": "The best-in-class thing to be judged against",
+        "type": "string"
+      },
+      "regions": {
+        "description": "How many parallel builders to plan for (default 5)",
+        "type": "number"
+      },
+      "target": {
+        "description": "What is being built or improved",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

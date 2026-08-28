@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/monte_carlo_analysis",
+  "agent_file": "monte_carlo_analysis_agent.py",
+  "agent_sha256": "33b7c20af7270399ddff663b9d1f2e284248d5d4d316cf53a57fb526dbaaadc0",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MonteCarloAnalysis",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Nazish Qasim",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Run Monte Carlo simulations from natural-language risk inputs — triangular, normal, uniform, or log-normal — and return percentiles, a histogram PNG, optional interactive HTML, and a downloadable results spreadsheet.",
+    "display_name": "Monte Carlo Analysis",
+    "name": "@cat-agent-skills/monte_carlo_analysis",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "8a9d6a293cabe5cc",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "monte-carlo-analysis",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#monte-carlo-analysis",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "monte_carlo",
+      "risk_assessment",
+      "python",
+      "simulation",
+      "matplotlib",
+      "charts",
+      "csv",
+      "analysis"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "MonteCarloAnalysis",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "data_source": {
+        "description": "Optional. Where the evidence comes from.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The question to answer, stated as a question.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

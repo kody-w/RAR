@@ -1,0 +1,73 @@
+{
+  "agent": "@cat-agent-skills/sharepoint_list_insight_report_generator",
+  "agent_file": "sharepoint_list_insight_report_generator_agent.py",
+  "agent_sha256": "1755e4d761977ef94e93304dc8d180edc0dc810f70e304a513ed4909b525f0d7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SharepointListInsightReportGenerator",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Marco Rocca",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Automatically discovers and validates a SharePoint list within a connected knowledge source, analyzes its structure and data, identifies key business insights, and generates a downloadable interactive HTML report. The report includes dynamic filters, interactive charts, sortable and searchable tables with pagination, detailed record drill-down through modal popups, and direct links to open items…",
+    "display_name": "SharePoint List Insight Report Generator",
+    "name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "271bccfbe07e039e",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "sharepoint-list-insight-report-generator",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#sharepoint-list-insight-report-generator",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "sharepoint",
+      "microsoft_365",
+      "lists",
+      "report",
+      "html"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "SharepointListInsightReportGenerator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

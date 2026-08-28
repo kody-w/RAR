@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/pov_line_generator",
+  "agent_file": "pov_line_generator_agent.py",
+  "agent_sha256": "181aaa29ab74475fe1d1b73cbfec45f0cdd31f3016bbf34eabcaf3ec23213ded",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PovLineGenerator",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Simon Owen",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generate sharp, specific point-of-view lines for posts, slides, talks, campaigns, or positioning work.",
+    "display_name": "POV Line Generator",
+    "name": "@cat-agent-skills/pov_line_generator",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "bf492abfe32d66ad",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "pov-line-generator",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pov-line-generator",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "writing",
+      "positioning",
+      "marketing",
+      "content",
+      "social_media"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "PovLineGenerator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

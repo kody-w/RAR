@@ -1,0 +1,68 @@
+{
+  "agent": "@cat-agent-skills/copilot_studio_test_planner",
+  "agent_file": "copilot_studio_test_planner_agent.py",
+  "agent_sha256": "3cfc5e42ce1e3f436c2129fd6b933475640c6476a63b042d5d0d6ac22e817bd2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioTestPlanner",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Elliot Margot",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Reads an exported Copilot Studio agent and generates a graded, runnable test suite (happy-path, paraphrase, disambiguation, negative, knowledge-grounding, multilingual, and safety cases) plus a regression set, ready to run in the free Copilot Studio test panel.",
+    "display_name": "Copilot Studio Test Planner",
+    "name": "@cat-agent-skills/copilot_studio_test_planner",
+    "platforms": [
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "ddaf3694d8c2a432",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "copilot-studio-test-planner",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-test-planner",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "qa",
+      "eval",
+      "regression",
+      "agent"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CopilotStudioTestPlanner",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to apply this capability to.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,39 @@
+{
+  "agent": "@wildhaven/penumbra_agent",
+  "agent_file": "penumbra_agent.py",
+  "agent_sha256": "00a2946996be36b9234c3e9cbf916eee70fed319104bff2aef7325e437343a6f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "Penumbra",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Wildhaven of America",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Returns any input as twin lines — the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls.",
+    "display_name": "Penumbra",
+    "name": "@wildhaven/penumbra_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "eidolon",
+      "subtext",
+      "legendary",
+      "penumbra",
+      "introspection",
+      "daemon",
+      "caesura"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "Penumbra",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

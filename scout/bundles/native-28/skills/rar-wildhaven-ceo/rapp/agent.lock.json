@@ -1,0 +1,58 @@
+{
+  "agent": "@wildhaven/ceo_agent",
+  "agent_file": "ceo_agent.py",
+  "agent_sha256": "c1e49265becbe104dceacd371dcbc6cce39aa53f3a36075fd47f06d9cf476896",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CEOAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Wildhaven of America",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Answers as the Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
+    "display_name": "CEO Agent",
+    "name": "@wildhaven/ceo_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "ceo",
+      "digital-twin",
+      "wildhaven",
+      "rappter",
+      "strategy",
+      "leadership",
+      "stewardship"
+    ],
+    "version": "1.0.3"
+  },
+  "runtime_name": "CEOAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "enum": [
+          "introduce",
+          "elevator_pitch",
+          "talking_points",
+          "portfolio",
+          "three_rules",
+          "decide",
+          "priorities",
+          "valuation",
+          "superseed",
+          "respond"
+        ],
+        "type": "string"
+      },
+      "question": {
+        "description": "A question for the CEO to answer or a scenario to evaluate",
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "version": "1.0.3"
+}

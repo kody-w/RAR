@@ -1,0 +1,77 @@
+{
+  "agent": "@kody-w/twin_me",
+  "agent_file": "twin_me_agent.py",
+  "agent_sha256": "d3e0e553b21db6ba2323ebf1119a019bf44b898438fae6432284671359593896",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "TwinMeAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Packs a PII-stripped .egg of the current brainstem's persona, custom agents, and calibration baseline, refusing if its content scan finds leaks.",
+    "display_name": "TwinMe",
+    "example_call": "twin me",
+    "name": "@kody-w/twin_me",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "twin",
+      "egg",
+      "twin-me",
+      "pii-strip",
+      "persona",
+      "portable",
+      "federation",
+      "rapp"
+    ],
+    "version": "1.0.3"
+  },
+  "runtime_name": "TwinMe",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "twin_me/pack = build the egg; audit = scan + report only; hatch = materialize a received egg; status = list local eggs/twins.",
+        "enum": [
+          "twin_me",
+          "pack",
+          "audit",
+          "hatch",
+          "status"
+        ],
+        "type": "string"
+      },
+      "display_name": {
+        "description": "Optional display name for the twin.",
+        "type": "string"
+      },
+      "dry_run": {
+        "description": "Scan and report without writing the egg.",
+        "type": "boolean"
+      },
+      "egg": {
+        "description": "For action=hatch: path to a .egg to materialize.",
+        "type": "string"
+      },
+      "flavor": {
+        "description": "basic = persona only (soul + memory agents); full = + your custom agents. Default full.",
+        "enum": [
+          "basic",
+          "full"
+        ],
+        "type": "string"
+      },
+      "redact": {
+        "description": "If true, auto-redact any PII found instead of refusing. Default false.",
+        "type": "boolean"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.3"
+}

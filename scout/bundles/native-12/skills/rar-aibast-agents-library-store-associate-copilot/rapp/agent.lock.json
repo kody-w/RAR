@@ -1,0 +1,73 @@
+{
+  "agent": "@aibast-agents-library/store_associate_copilot",
+  "agent_file": "store_associate_copilot_agent.py",
+  "agent_sha256": "9c75b3deb9ab3750efe6e8dd200630a35dcb42458dc799fc57ae729309ae9a26",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "StoreAssociateCopilotAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "retail_cpg",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Gives associates product lookups, scripts, dashboards, and a live refrigeration alert joining simulated telemetry to CRM, with offline fallback.",
+    "display_name": "Store Associate Copilot Agent",
+    "name": "@aibast-agents-library/store_associate_copilot",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "store-operations",
+      "associate",
+      "copilot",
+      "product-lookup",
+      "retail"
+    ],
+    "version": "1.3.0"
+  },
+  "runtime_name": "store-associate-copilot-agent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "key": {
+        "description": "Exact record key for a v1.1.0 evidence operation.",
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "product_lookup",
+          "customer_assist",
+          "task_checklist",
+          "performance_dashboard",
+          "product_intelligence",
+          "add_on_commission",
+          "product_comparison",
+          "transaction_preparation"
+        ],
+        "type": "string"
+      },
+      "query": {
+        "type": "string"
+      },
+      "scenario": {
+        "type": "string"
+      },
+      "shift": {
+        "type": "string"
+      },
+      "sku_id": {
+        "type": "string"
+      },
+      "user_input": {
+        "description": "Optional request containing an exact v1.1.0 record key.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.3.0"
+}

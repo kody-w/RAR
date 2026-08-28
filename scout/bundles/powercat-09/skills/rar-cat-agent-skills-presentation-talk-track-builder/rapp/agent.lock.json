@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/presentation_talk_track_builder",
+  "agent_file": "presentation_talk_track_builder_agent.py",
+  "agent_sha256": "0b292d4a5a102713a81298e77e673258e3e9dc9d67595b37b4afadf58449e531",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PresentationTalkTrackBuilder",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Jagmeet Chabra",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Writes natural, first-person spoken presenter scripts for the slides in a deck. Treats existing speaker notes as authoritative when they contradict slide text. Calibrates length to a target duration and speaking pace and returns a timing table. Never modifies visible slide content.",
+    "display_name": "Presentation Talk Track Builder",
+    "name": "@cat-agent-skills/presentation_talk_track_builder",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "10389b967a5e68a1",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "presentation-talk-track-builder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#presentation-talk-track-builder",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "presentations",
+      "speaker_notes",
+      "powerpoint",
+      "writing",
+      "productivity"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "PresentationTalkTrackBuilder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

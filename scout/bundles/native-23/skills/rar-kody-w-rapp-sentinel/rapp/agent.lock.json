@@ -1,0 +1,51 @@
+{
+  "agent": "@kody-w/rapp_sentinel_agent",
+  "agent_file": "rapp_sentinel_agent.py",
+  "agent_sha256": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappSentinel",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup reports — a watchdog that can't quietly lie.",
+    "display_name": "RAPP Sentinel",
+    "example_call": {
+      "args": {
+        "action": "health"
+      }
+    },
+    "external_prereqs": [
+      "git",
+      "gh (GitHub CLI, authenticated) for the GitHub health checks",
+      "optional: GitHub Copilot CLI for levels 1+ (repair/evolve arms)",
+      "optional: macOS launchd for install_launchd (every-15-minutes tick)"
+    ],
+    "name": "@kody-w/rapp_sentinel_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "sentinel",
+      "watchdog",
+      "health",
+      "monitoring",
+      "rapp1",
+      "neighborhood",
+      "trifecta",
+      "devtools"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "RappSentinel",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

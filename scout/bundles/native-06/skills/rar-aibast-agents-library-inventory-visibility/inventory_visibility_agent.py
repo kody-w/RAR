@@ -1,0 +1,778 @@
+"""
+Inventory Visibility Agent — a template you are meant to mutate.
+
+Provides omni-channel inventory visibility across stores, warehouses, and
+channels: stock dashboards, stock-out alerts, replenishment plans, and
+channel allocation for retail operations.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from TWO
+     globally hosted simulated systems (synthetic data, no credentials,
+     works anywhere):
+       CRM — Static Dynamics 365 tenant (Aster Lane Office Systems):
+         https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+       ERP — Static ERP (materials, purchase orders, goods receipts):
+         https://kody-w.github.io/static-erp/api/v1/
+     Try: perform(operation="inventory_dashboard")
+     — the dashboard is built from the tenant's live products (e.g.
+     "Mobile Cart M8", AST-CRT-008) plus live sales-order demand, and
+     joins the ERP's 20 materials with goods receipts as REAL inbound
+     supply per CRM product (material CMP-PRH-0420 "Print head assembly,
+     AsterPrint M420" feeds AST-PRN-420 — and only 36 of 40 units
+     arrived on PO-47003, which the dashboard flags).
+  2. No network? Everything falls back to the embedded demo layer below
+     (STORES / SKUS / INVENTORY) — the agent never crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     INVENTORY_VISIBILITY_DATA_URL (CRM side) and/or
+     INVENTORY_VISIBILITY_ERP_URL (ERP side) to any endpoint with the
+     same shapes, or replace _fetch_collection() with your own inventory
+     API. The fields the rest of the file needs are listed in
+     _normalize_live_product() — everything else keeps working
+     untouched. Per-location on-hand and days-of-supply are labeled
+     "n/a — enrichment seam" until you wire your WMS.
+
+OPERATIONS
+  inventory_dashboard | stock_alerts | replenishment_plan |
+  channel_allocation | network_inventory_status | reallocation_scenarios |
+  reallocation_execution | investment_proposal
+  kwargs: operation (required), sku_id, location_id, key, user_input
+"""
+
+import sys
+import os
+
+sys.path.insert(
+    0,
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"),
+)
+from basic_agent import BasicAgent
+import json
+import urllib.request
+from datetime import datetime, timezone
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/inventory_visibility",
+    "version": "1.3.0",
+    "display_name": "Inventory Visibility Agent",
+    "description": (
+        "Reports stock dashboards joining a simulated Dynamics 365 catalog with ERP materials and goods receipts as inbound supply, with offline fallback."
+    ),
+    "author": "AIBAST",
+    "tags": [
+        "inventory",
+        "stock-management",
+        "replenishment",
+        "omni-channel",
+        "retail",
+    ],
+    "category": "retail_cpg",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real systems
+#
+# Defaults: TWO globally hosted simulated systems (synthetic data
+# served as JSON from GitHub Pages). To hook your own world, either:
+#   export INVENTORY_VISIBILITY_DATA_URL=https://your-org/api/data/v9.2
+#   export INVENTORY_VISIBILITY_ERP_URL=https://your-erp/api/v1
+# or replace _fetch_collection() with your ERP/WMS client. Downstream
+# code only needs the fields produced by _normalize_live_product()
+# and _erp_inbound_by_product().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "INVENTORY_VISIBILITY_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+ERP_SOURCE_URL = os.environ.get(
+    "INVENTORY_VISIBILITY_ERP_URL",
+    "https://kody-w.github.io/static-erp/api/v1",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6, base_url=None):
+    """One bounded GET per collection per source per process. Returns []
+    on ANY failure — offline, DNS, bad JSON — so the demo layer takes
+    over. Cache is keyed by full URL so CRM and ERP never collide."""
+    url = f"{base_url or DATA_SOURCE_URL}/{collection}.json"
+    if url in _LIVE_CACHE:
+        return _LIVE_CACHE[url]
+    try:
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[url] = rows
+    return rows
+
+
+def _erp(collection):
+    """Rows from the live simulated ERP (materials, purchase_orders,
+    goods_receipts, suppliers, supplier_invoices); [] offline."""
+    return _fetch_collection(collection, base_url=ERP_SOURCE_URL)
+
+
+def _erp_inbound_by_product(products):
+    """Join live ERP materials + goods receipts to the CRM catalog:
+    each ERP material whose description names a CRM product becomes
+    REAL inbound component supply for that product. Also flags short
+    receipts (received < ordered on receipted POs). Returns (rows,
+    short_flags); ([], []) when the ERP is unreachable."""
+    materials = _erp("materials")
+    if not materials:
+        return [], []
+    received = {}
+    for g in _erp("goods_receipts"):
+        for l in g.get("lines", []):
+            m = l.get("material_number", "?")
+            received[m] = received.get(m, 0) + int(float(l.get("quantity_received") or 0))
+    rows = []
+    for m in materials:
+        desc = m.get("description", "")
+        crm = next(
+            (p for p in products if p.get("name") and p["name"] in desc), None
+        )
+        rows.append({
+            "material": m.get("material_number", "?"),
+            "description": desc,
+            "group": m.get("material_group", "?"),
+            "lead_time_days": m.get("lead_time_days"),
+            "supplier": m.get("preferred_supplier_name", "?"),
+            "inbound_received": received.get(m.get("material_number"), 0),
+            "feeds_sku": (crm.get("productnumber") or crm.get("sku_id")) if crm else None,
+        })
+    shorts = []
+    grs = _erp("goods_receipts")
+    for p in _erp("purchase_orders"):
+        po_no = p.get("po_number")
+        p_grs = [g for g in grs if g.get("po_number") == po_no]
+        if not p_grs:
+            continue
+        got = {}
+        for g in p_grs:
+            for l in g.get("lines", []):
+                m = l.get("material_number", "?")
+                got[m] = got.get(m, 0) + int(float(l.get("quantity_received") or 0))
+        for l in p.get("lines", []):
+            m = l.get("material_number", "?")
+            ordered = int(float(l.get("quantity") or 0))
+            if got.get(m, 0) < ordered:
+                shorts.append(
+                    f"{m} ({l.get('material_description', '')}): "
+                    f"{got.get(m, 0)} of {ordered} received on {po_no} "
+                    f"({p.get('supplier_name', '?')})"
+                )
+    return rows, shorts
+
+
+def _normalize_live_product(row):
+    """Project a Dynamics product record onto the shape this agent uses.
+    THIS is the contract your replacement data source must meet — a dict
+    with these keys. None means 'not available from the catalog alone'
+    and the renderers label it as an enrichment seam."""
+    def _f(value):
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return None
+    return {
+        "sku_id": row.get("productnumber") or row.get("productid", ""),
+        "name": row.get("name", "Unknown"),
+        "category": row.get(
+            "producttypecode@OData.Community.Display.V1.FormattedValue", "General"
+        ),
+        "unit_cost": _f(row.get("currentcost")),
+        "retail_price": _f(row.get("price")),
+        "on_hand": None,          # enrichment seam — wire your WMS
+        "description": row.get("description", ""),
+        "active": row.get("statecode") == 0,
+        "_live": True,
+    }
+
+
+def _na(value, fmt="{}"):
+    """None = the source system alone can't know this (enrichment seam)."""
+    return "n/a — enrichment seam" if value is None else fmt.format(value)
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback) — Stores & Warehouses
+# ---------------------------------------------------------------------------
+
+STORES = {
+    "STR-001": {
+        "name": "Downtown Flagship",
+        "city": "Chicago",
+        "state": "IL",
+        "type": "flagship",
+        "capacity_sqft": 42000,
+    },
+    "STR-002": {
+        "name": "Northshore Mall",
+        "city": "Evanston",
+        "state": "IL",
+        "type": "mall",
+        "capacity_sqft": 18500,
+    },
+    "STR-003": {
+        "name": "Oakbrook Center",
+        "city": "Oak Brook",
+        "state": "IL",
+        "type": "outlet",
+        "capacity_sqft": 12000,
+    },
+    "STR-004": {
+        "name": "Michigan Ave Express",
+        "city": "Chicago",
+        "state": "IL",
+        "type": "express",
+        "capacity_sqft": 6500,
+    },
+}
+
+WAREHOUSES = {
+    "WH-CENTRAL": {
+        "name": "Central Distribution Center",
+        "city": "Romeoville",
+        "state": "IL",
+        "capacity_pallets": 22000,
+    },
+    "WH-EAST": {
+        "name": "East Regional Warehouse",
+        "city": "Indianapolis",
+        "state": "IN",
+        "capacity_pallets": 14000,
+    },
+}
+
+SKUS = {
+    "SKU-1001": {"name": "Classic Denim Jacket", "category": "Apparel", "unit_cost": 34.50, "retail_price": 89.99},
+    "SKU-1002": {"name": "Wireless Earbuds Pro", "category": "Electronics", "unit_cost": 18.75, "retail_price": 59.99},
+    "SKU-1003": {"name": "Organic Cotton T-Shirt", "category": "Apparel", "unit_cost": 8.20, "retail_price": 29.99},
+    "SKU-1004": {"name": "Smart Fitness Tracker", "category": "Electronics", "unit_cost": 42.00, "retail_price": 129.99},
+    "SKU-1005": {"name": "Premium Running Shoes", "category": "Footwear", "unit_cost": 55.00, "retail_price": 149.99},
+    "SKU-1006": {"name": "Stainless Water Bottle", "category": "Accessories", "unit_cost": 6.80, "retail_price": 24.99},
+    "SKU-1007": {"name": "Leather Crossbody Bag", "category": "Accessories", "unit_cost": 27.50, "retail_price": 79.99},
+    "SKU-1008": {"name": "UV Protection Sunglasses", "category": "Accessories", "unit_cost": 12.30, "retail_price": 44.99},
+}
+
+# Current on-hand quantities per location per SKU
+INVENTORY = {
+    "STR-001": {"SKU-1001": 74, "SKU-1002": 132, "SKU-1003": 210, "SKU-1004": 45, "SKU-1005": 38, "SKU-1006": 195, "SKU-1007": 61, "SKU-1008": 88},
+    "STR-002": {"SKU-1001": 35, "SKU-1002": 67, "SKU-1003": 98, "SKU-1004": 22, "SKU-1005": 14, "SKU-1006": 110, "SKU-1007": 29, "SKU-1008": 53},
+    "STR-003": {"SKU-1001": 18, "SKU-1002": 41, "SKU-1003": 65, "SKU-1004": 9, "SKU-1005": 7, "SKU-1006": 72, "SKU-1007": 15, "SKU-1008": 30},
+    "STR-004": {"SKU-1001": 12, "SKU-1002": 28, "SKU-1003": 44, "SKU-1004": 6, "SKU-1005": 5, "SKU-1006": 55, "SKU-1007": 8, "SKU-1008": 19},
+    "WH-CENTRAL": {"SKU-1001": 1450, "SKU-1002": 2300, "SKU-1003": 3800, "SKU-1004": 780, "SKU-1005": 620, "SKU-1006": 4100, "SKU-1007": 950, "SKU-1008": 1700},
+    "WH-EAST": {"SKU-1001": 820, "SKU-1002": 1100, "SKU-1003": 2200, "SKU-1004": 410, "SKU-1005": 350, "SKU-1006": 2600, "SKU-1007": 530, "SKU-1008": 900},
+}
+
+SAFETY_STOCK = {
+    "STR-001": {"SKU-1001": 30, "SKU-1002": 50, "SKU-1003": 80, "SKU-1004": 20, "SKU-1005": 15, "SKU-1006": 70, "SKU-1007": 25, "SKU-1008": 35},
+    "STR-002": {"SKU-1001": 15, "SKU-1002": 30, "SKU-1003": 45, "SKU-1004": 10, "SKU-1005": 8, "SKU-1006": 40, "SKU-1007": 12, "SKU-1008": 20},
+    "STR-003": {"SKU-1001": 10, "SKU-1002": 20, "SKU-1003": 30, "SKU-1004": 5, "SKU-1005": 5, "SKU-1006": 25, "SKU-1007": 8, "SKU-1008": 12},
+    "STR-004": {"SKU-1001": 8, "SKU-1002": 15, "SKU-1003": 20, "SKU-1004": 4, "SKU-1005": 3, "SKU-1006": 20, "SKU-1007": 5, "SKU-1008": 10},
+}
+
+LEAD_TIMES_DAYS = {
+    "WH-CENTRAL": {"STR-001": 1, "STR-002": 1, "STR-003": 2, "STR-004": 1},
+    "WH-EAST": {"STR-001": 2, "STR-002": 2, "STR-003": 3, "STR-004": 2},
+}
+
+CHANNEL_DEMAND = {
+    "in_store": {"weight": 0.45, "daily_units_avg": 320},
+    "online_ship": {"weight": 0.30, "daily_units_avg": 215},
+    "bopis": {"weight": 0.15, "daily_units_avg": 108},
+    "marketplace": {"weight": 0.10, "daily_units_avg": 72},
+}
+
+DAILY_SELL_THROUGH = {
+    "SKU-1001": 6.2, "SKU-1002": 9.8, "SKU-1003": 14.5, "SKU-1004": 3.1,
+    "SKU-1005": 2.7, "SKU-1006": 12.0, "SKU-1007": 4.4, "SKU-1008": 7.3,
+}
+
+EVIDENCE_CAPABILITIES = {
+    "network_inventory_status": {
+        "title": "Cross-Location Inventory Status",
+        "source_system": "Dynamics 365 Commerce",
+        "write": False,
+        "key_field": "status_id",
+        "summary": (
+            "Returns SKU-level inventory across stores, warehouses, in-transit, "
+            "and ecommerce reserves while highlighting allocation imbalances."
+        ),
+        "record": {
+            "status_id": "STATUS-WINTER-JACKETS-NW",
+            "product": "Alpine Pro Winter Jacket",
+            "scope": "51 locations",
+            "inventory": "Stores 1,847; warehouses 940; in-transit 285; ecommerce reserve 128",
+            "imbalance": "Portland Flagship 0 units; Portland Mall 3 units at 8/day; Seattle excess 247 units at 4/day",
+            "opportunity": "Transfer 120 Seattle units to Portland to recover $18,400 in sales",
+            "inputs_considered": "Real-time inventory, POS demand, and demand forecast",
+        },
+    },
+    "reallocation_scenarios": {
+        "title": "Demand-Aware Reallocation Scenarios",
+        "source_system": "Dynamics 365 Supply Chain Management",
+        "write": False,
+        "key_field": "plan_id",
+        "summary": (
+            "Compares urgent and planned transfers using demand forecasts, "
+            "distance, transit time, cost, and revenue recovery."
+        ),
+        "record": {
+            "plan_id": "PLAN-SEATTLE-PORTLAND",
+            "phase_1": "Move 40 units Seattle Flagship to Portland Flagship by overnight van; 12 hours; $340; $6,800 recovery",
+            "phase_2": "Move 80 units from three Seattle suburban stores by regular truck; 24-48 hours; $180; $11,600 recovery",
+            "total": "120 units; $520 transportation; $18,400 recovered revenue; 35:1 ROI",
+            "source_impact": "Seattle retains 127 units, an 8-week supply at current demand",
+            "recommendation": "Execute emergency phase first, then planned replenishment",
+        },
+    },
+    "reallocation_execution": {
+        "title": "Reallocation Execution and Health",
+        "source_system": "Dynamics 365 Supply Chain Management and Microsoft Teams",
+        "write": True,
+        "key_field": "execution_id",
+        "summary": (
+            "Prepares transfer execution, stakeholder notifications, status "
+            "tracking, and a system-wide inventory health view."
+        ),
+        "record": {
+            "execution_id": "EXEC-SEATTLE-PORTLAND",
+            "transfer_status": "Phase 1 van scheduled and pickup confirmed; Phase 2 truck routed",
+            "notifications": "Store teams notified; Portland ecommerce availability prepared",
+            "health": "Balance score 72/100; 43 days supply; $2.8M overstock; 147 stockouts/month",
+            "additional_opportunities": "8 SKU reallocations; 680 units; 15 routes; $84,200 recovery for $3,400",
+            "execution_note": "Simulation only; no quantities, routes, or notifications are changed",
+        },
+    },
+    "investment_proposal": {
+        "title": "Inventory Automation Investment Proposal",
+        "source_system": "Microsoft Teams",
+        "write": True,
+        "key_field": "proposal_id",
+        "summary": (
+            "Builds an automation proposal with RFID, auto-replenishment, "
+            "predictive allocation, and deterministic financial projections."
+        ),
+        "record": {
+            "proposal_id": "PROPOSAL-NW-AUTOMATION",
+            "rfid": "$85,000; accuracy 87% to 99.8%; $127,000 annual labor savings; 8-month payback",
+            "auto_replenishment": "$45,000; stockouts down 62%; $142,000 annual savings; 3.8-month payback",
+            "predictive_allocation": "$32,000; $71,000 annual revenue protection; 5.4-month payback",
+            "three_year_projection": "$162,000 investment; $1,020,000 benefits; $858,000 net value; 530% ROI",
+            "distribution": "Prepared for CFO and operations review in Microsoft Teams",
+        },
+    },
+}
+
+_EVIDENCE_KEY_PUNCTUATION = "-_.,:;()?!/#@+$%^&*=[]{}<>~`'\""
+
+
+def _normalize_evidence_tokens(text):
+    tokens = []
+    for raw in str(text).split():
+        cleaned = "".join(
+            character.lower()
+            for character in raw
+            if character not in _EVIDENCE_KEY_PUNCTUATION
+        )
+        if cleaned:
+            tokens.append(cleaned)
+    return tokens
+
+
+def _record_for_evidence_request(capability, key, user_input):
+    record = capability["record"]
+    key_field = capability["key_field"]
+    if key:
+        if str(record[key_field]).lower() == str(key).strip().lower():
+            return "match", record
+        return "not_found", None
+
+    query_tokens = _normalize_evidence_tokens(user_input)
+    key_tokens = _normalize_evidence_tokens(record[key_field])
+    width = len(key_tokens)
+    if width and any(
+        query_tokens[index:index + width] == key_tokens
+        for index in range(len(query_tokens) - width + 1)
+    ):
+        return "match", record
+    return "summary", None
+
+
+def _format_evidence_record(record):
+    return "\n".join(
+        f"- **{field.replace('_', ' ').title()}:** {value}"
+        for field, value in record.items()
+    )
+
+
+# ---------------------------------------------------------------------------
+# Helper Functions
+# ---------------------------------------------------------------------------
+
+def _total_network_inventory(sku_id):
+    """Sum on-hand across all locations for a given SKU."""
+    return sum(loc.get(sku_id, 0) for loc in INVENTORY.values())
+
+
+def _days_of_supply(sku_id, location_id):
+    """Estimate days-of-supply at a location."""
+    on_hand = INVENTORY.get(location_id, {}).get(sku_id, 0)
+    daily = DAILY_SELL_THROUGH.get(sku_id, 1.0)
+    return round(on_hand / daily, 1) if daily > 0 else 999.0
+
+
+def _stock_status(sku_id, location_id):
+    """Return stock status label for a SKU at a location."""
+    on_hand = INVENTORY.get(location_id, {}).get(sku_id, 0)
+    safety = SAFETY_STOCK.get(location_id, {}).get(sku_id, 0)
+    if on_hand == 0:
+        return "OUT_OF_STOCK"
+    if on_hand <= safety:
+        return "CRITICAL"
+    if on_hand <= safety * 1.5:
+        return "LOW"
+    return "HEALTHY"
+
+
+def _replenishment_qty(sku_id, location_id, target_days=14):
+    """Calculate replenishment quantity targeting N days of supply."""
+    on_hand = INVENTORY.get(location_id, {}).get(sku_id, 0)
+    daily = DAILY_SELL_THROUGH.get(sku_id, 1.0)
+    target_qty = int(daily * target_days)
+    needed = max(0, target_qty - on_hand)
+    return needed
+
+
+def _channel_allocation_units(sku_id, total_available):
+    """Allocate available inventory across channels by demand weight."""
+    allocations = {}
+    for channel, info in CHANNEL_DEMAND.items():
+        allocations[channel] = int(total_available * info["weight"])
+    remainder = total_available - sum(allocations.values())
+    allocations["in_store"] += remainder
+    return allocations
+
+
+# ---------------------------------------------------------------------------
+# Agent Class
+# ---------------------------------------------------------------------------
+
+class InventoryVisibilityAgent(BasicAgent):
+    """Agent providing omni-channel inventory visibility and planning."""
+
+    def __init__(self):
+        self.name = "inventory-visibility-agent"
+        self.metadata = {
+            "name": self.name,
+            "description": __manifest__["description"],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "enum": [
+                            "inventory_dashboard",
+                            "stock_alerts",
+                            "replenishment_plan",
+                            "channel_allocation",
+                            "network_inventory_status",
+                            "reallocation_scenarios",
+                            "reallocation_execution",
+                            "investment_proposal",
+                        ],
+                    },
+                    "sku_id": {"type": "string"},
+                    "location_id": {"type": "string"},
+                    "key": {"type": "string"},
+                    "user_input": {"type": "string"},
+                },
+                "required": ["operation"],
+            },
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    # ---- operations -------------------------------------------------------
+
+    def _live_inventory_dashboard(self, products):
+        """Dashboard built from live tenant records (preferred when online)."""
+        orders = _fetch_collection("salesorders")
+        open_orders = [o for o in orders if o.get("statecode") in (0, 1)]
+        open_demand = sum(float(o.get("totalamount") or 0) for o in open_orders)
+        lines = [
+            "# Inventory Dashboard — Live Tenant Catalog",
+            "",
+            f"Live records from {DATA_SOURCE_URL} (Aster Lane Office Systems).",
+            "Pass `location_id` (e.g. STR-001) for the embedded demo store view.",
+            "",
+            "| SKU | Product | Category | Unit Cost | Retail | On-Hand | Active |",
+            "|-----|---------|----------|-----------|--------|---------|--------|",
+        ]
+        for p in sorted(products, key=lambda x: x["sku_id"]):
+            lines.append(
+                f"| {p['sku_id']} | {p['name']} | {p['category']} "
+                f"| {_na(p['unit_cost'], '${:,.2f}')} | {_na(p['retail_price'], '${:,.2f}')} "
+                f"| {_na(p['on_hand'])} | {'yes' if p['active'] else 'no'} |"
+            )
+        lines.append("")
+        lines.append(f"**Catalog size:** {len(products)} live products")
+        lines.append(
+            f"**Demand signal (live sales orders):** {len(open_orders)} open orders, "
+            f"${open_demand:,.2f} open order value"
+        )
+        lines.append(
+            "**Per-location on-hand / days-of-supply:** n/a — enrichment seam "
+            "(wire your WMS at the LIVE DATA SEAM)"
+        )
+        erp_rows, shorts = _erp_inbound_by_product(products)
+        if erp_rows:
+            lines.append("")
+            lines.append("## Inbound Supply — Live ERP Materials + Goods Receipts")
+            lines.append("")
+            lines.append("| Material | Description | Group | Lead Time | Supplier | Inbound Received | Feeds SKU |")
+            lines.append("|----------|-------------|-------|-----------|----------|------------------|-----------|")
+            for r in erp_rows:
+                lines.append(
+                    f"| {r['material']} | {r['description']} | {r['group']} "
+                    f"| {r['lead_time_days']}d | {r['supplier']} "
+                    f"| {r['inbound_received']:,} | {r['feeds_sku'] or '—'} |"
+                )
+            lines.append("")
+            lines.append(
+                f"**ERP inbound view:** {len(erp_rows)} live materials joined to the "
+                "CRM catalog by product name; quantities are REAL goods-receipt sums."
+            )
+            for s in shorts:
+                lines.append(f"**Short receipt flagged:** {s}")
+        else:
+            lines.append("")
+            lines.append("_Simulated ERP unreachable — inbound supply view unavailable._")
+        return "\n".join(lines)
+
+    def _inventory_dashboard(self, **kwargs):
+        location_id = kwargs.get("location_id")
+        if not location_id:
+            live = [
+                p for p in (
+                    _normalize_live_product(r) for r in _fetch_collection("products")
+                )
+                if p["sku_id"]
+            ]
+            if live:
+                return self._live_inventory_dashboard(live)
+        locations = [location_id] if location_id and location_id in INVENTORY else list(STORES.keys())
+        lines = ["# Inventory Dashboard", ""]
+        for loc_id in locations:
+            loc_info = STORES.get(loc_id, WAREHOUSES.get(loc_id, {}))
+            lines.append(f"## {loc_info.get('name', loc_id)} (`{loc_id}`)")
+            lines.append("")
+            lines.append("| SKU | Product | On-Hand | Safety Stock | Status | Days of Supply |")
+            lines.append("|-----|---------|---------|--------------|--------|----------------|")
+            for sku_id in sorted(SKUS.keys()):
+                sku = SKUS[sku_id]
+                on_hand = INVENTORY[loc_id].get(sku_id, 0)
+                safety = SAFETY_STOCK.get(loc_id, {}).get(sku_id, "N/A")
+                status = _stock_status(sku_id, loc_id)
+                dos = _days_of_supply(sku_id, loc_id)
+                lines.append(f"| {sku_id} | {sku['name']} | {on_hand} | {safety} | {status} | {dos} |")
+            lines.append("")
+        total_units = sum(sum(v.values()) for v in INVENTORY.values())
+        lines.append(f"**Total Network Inventory:** {total_units:,} units across {len(INVENTORY)} locations")
+        return "\n".join(lines)
+
+    def _stock_alerts(self, **kwargs):
+        lines = ["# Stock Alerts", "", "## Critical & Out-of-Stock Items", ""]
+        lines.append("| Location | SKU | Product | On-Hand | Safety Stock | Status | Action Required |")
+        lines.append("|----------|-----|---------|---------|--------------|--------|-----------------|")
+        alert_count = 0
+        for loc_id in sorted(STORES.keys()):
+            for sku_id in sorted(SKUS.keys()):
+                status = _stock_status(sku_id, loc_id)
+                if status in ("CRITICAL", "OUT_OF_STOCK"):
+                    sku = SKUS[sku_id]
+                    on_hand = INVENTORY[loc_id].get(sku_id, 0)
+                    safety = SAFETY_STOCK[loc_id].get(sku_id, 0)
+                    action = "Emergency replenish" if status == "OUT_OF_STOCK" else "Expedite transfer"
+                    loc_name = STORES[loc_id]["name"]
+                    lines.append(
+                        f"| {loc_name} | {sku_id} | {sku['name']} | {on_hand} | {safety} | {status} | {action} |"
+                    )
+                    alert_count += 1
+        lines.append("")
+        lines.append(f"**Total Alerts:** {alert_count}")
+        lines.append("")
+        lines.append("## Low-Stock Warnings")
+        lines.append("")
+        low_count = 0
+        for loc_id in sorted(STORES.keys()):
+            for sku_id in sorted(SKUS.keys()):
+                status = _stock_status(sku_id, loc_id)
+                if status == "LOW":
+                    dos = _days_of_supply(sku_id, loc_id)
+                    lines.append(f"- **{STORES[loc_id]['name']}** / {SKUS[sku_id]['name']}: {dos} days remaining")
+                    low_count += 1
+        lines.append(f"\n**Low-Stock Warnings:** {low_count}")
+        return "\n".join(lines)
+
+    def _replenishment_plan(self, **kwargs):
+        target_days = 14
+        lines = [
+            "# Replenishment Plan",
+            "",
+            f"**Target:** {target_days}-day supply at each store",
+            "",
+        ]
+        total_cost = 0.0
+        for loc_id in sorted(STORES.keys()):
+            store = STORES[loc_id]
+            lines.append(f"## {store['name']} (`{loc_id}`)")
+            lines.append("")
+            lines.append("| SKU | Product | Current | Target | Replenish Qty | Source | Lead Time | Est. Cost |")
+            lines.append("|-----|---------|---------|--------|---------------|--------|-----------|-----------|")
+            for sku_id in sorted(SKUS.keys()):
+                qty = _replenishment_qty(sku_id, loc_id, target_days)
+                if qty > 0:
+                    sku = SKUS[sku_id]
+                    on_hand = INVENTORY[loc_id][sku_id]
+                    target_qty = on_hand + qty
+                    wh_central = INVENTORY["WH-CENTRAL"].get(sku_id, 0)
+                    source = "WH-CENTRAL" if wh_central >= qty else "WH-EAST"
+                    lt = LEAD_TIMES_DAYS.get(source, {}).get(loc_id, 3)
+                    cost = round(qty * sku["unit_cost"], 2)
+                    total_cost += cost
+                    lines.append(
+                        f"| {sku_id} | {sku['name']} | {on_hand} | {target_qty} | {qty} | {source} | {lt}d | ${cost:,.2f} |"
+                    )
+            lines.append("")
+        lines.append(f"**Estimated Total Replenishment Cost:** ${total_cost:,.2f}")
+        return "\n".join(lines)
+
+    def _channel_allocation(self, **kwargs):
+        sku_id = kwargs.get("sku_id", "SKU-1001")
+        sku = SKUS.get(sku_id, SKUS["SKU-1001"])
+        total = _total_network_inventory(sku_id)
+        allocations = _channel_allocation_units(sku_id, total)
+        lines = [
+            "# Channel Allocation",
+            "",
+            f"**SKU:** {sku_id} — {sku['name']}",
+            f"**Total Network Inventory:** {total:,} units",
+            "",
+            "| Channel | Weight | Allocated Units | Daily Demand Avg | Days Coverage |",
+            "|---------|--------|-----------------|------------------|---------------|",
+        ]
+        for channel, units in allocations.items():
+            info = CHANNEL_DEMAND[channel]
+            daily = info["daily_units_avg"]
+            coverage = round(units / daily, 1) if daily > 0 else 0
+            lines.append(
+                f"| {channel.replace('_', ' ').title()} | {info['weight']*100:.0f}% | {units:,} | {daily} | {coverage} |"
+            )
+        lines.append("")
+        lines.append("## Allocation Recommendations")
+        lines.append("")
+        lines.append("- **In-Store Priority:** Flagship and mall locations receive 60% of in-store allocation")
+        lines.append("- **Online Buffer:** Maintain 3-day safety stock for e-commerce fulfillment")
+        lines.append("- **BOPIS Reserve:** Hold 10% buffer for same-day pickup surges")
+        lines.append("- **Marketplace Cap:** Limit marketplace allocation to prevent channel conflict")
+        return "\n".join(lines)
+
+    def _evidence_capability(self, capability_name, **kwargs):
+        capability = EVIDENCE_CAPABILITIES[capability_name]
+        lookup_status, record = _record_for_evidence_request(
+            capability,
+            kwargs.get("key", ""),
+            kwargs.get("user_input", ""),
+        )
+        lines = [
+            f"# {capability['title']}",
+            "",
+            capability["summary"],
+            "",
+            f"## {capability['source_system']} (synthetic demo data)",
+            "",
+        ]
+        if lookup_status == "not_found":
+            lines.append(
+                f"No record matched the requested {capability['key_field']}. "
+                "Not substituting another record."
+            )
+        else:
+            selected = record or capability["record"]
+            label = "Exact keyed record" if lookup_status == "match" else "Worked example"
+            lines.extend([f"**{label}:**", _format_evidence_record(selected)])
+
+        if capability["write"] and lookup_status == "match":
+            receipt_key = record[capability["key_field"]]
+            lines.extend([
+                "",
+                "## Simulated Write Receipt",
+                "",
+                "- **Action Status:** simulated",
+                f"- **Receipt:** SIM-{capability_name.upper()}-{receipt_key}",
+                f"- **Target System:** {capability['source_system']}",
+                "- **External Changes:** none; no live mutation or notification occurred",
+            ])
+        elif capability["write"]:
+            lines.extend([
+                "",
+                "_Write-capable workflow; provide an exact key to generate a "
+                "simulated receipt. No external system is modified._",
+            ])
+        else:
+            lines.extend(["", "_Read-only; no external system is modified._"])
+        return "\n".join(lines)
+
+    # ---- dispatch ----------------------------------------------------------
+
+    def perform(self, **kwargs):
+        operation = kwargs.get("operation", "inventory_dashboard")
+        dispatch = {
+            "inventory_dashboard": self._inventory_dashboard,
+            "stock_alerts": self._stock_alerts,
+            "replenishment_plan": self._replenishment_plan,
+            "channel_allocation": self._channel_allocation,
+            "network_inventory_status": self._evidence_capability,
+            "reallocation_scenarios": self._evidence_capability,
+            "reallocation_execution": self._evidence_capability,
+            "investment_proposal": self._evidence_capability,
+        }
+        handler = dispatch.get(operation)
+        if not handler:
+            return f"Unknown operation `{operation}`. Valid: {', '.join(dispatch.keys())}"
+        if operation in EVIDENCE_CAPABILITIES:
+            return handler(operation, **kwargs)
+        return handler(**kwargs)
+
+
+# ---------------------------------------------------------------------------
+# Main — exercise all operations
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    agent = InventoryVisibilityAgent()
+    print("=" * 80)
+    print("EMBEDDED DEMO STORE (works offline)")
+    print(agent.perform(operation="inventory_dashboard", location_id="STR-001"))
+    print("\n" + "=" * 80)
+    print("LIVE TENANT CATALOG + LIVE ERP INBOUND SUPPLY (goods-receipt join;")
+    print("fetched over HTTP; falls back offline)")
+    print(agent.perform(operation="inventory_dashboard"))
+    print("\n" + "=" * 80)
+    print(agent.perform(operation="stock_alerts"))
+    print("\n" + "=" * 80)
+    print(agent.perform(operation="replenishment_plan"))
+    print("\n" + "=" * 80)
+    print(agent.perform(operation="channel_allocation", sku_id="SKU-1003"))
+    print("=" * 80)

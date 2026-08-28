@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/browser_uat_analyst",
+  "agent_file": "browser_uat_analyst_agent.py",
+  "agent_sha256": "7510a8a0f67113bdb0bafd437d5471c7c655e0420db4c4bcd2672e3678e6f387",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BrowserUatAnalyst",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Al Macey",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Run evidence-driven UAT on any browser-based app — Copilot Studio, Power Platform, Dataverse, Dynamics 365, admin centres, or a custom web app — with Playwright execution, a screenshot evidence ledger, and failure classification that separates product defects from tenant config.",
+    "display_name": "Browser UAT Analyst",
+    "name": "@cat-agent-skills/browser_uat_analyst",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "09f0ebd3b94914ed",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "browser-uat-analyst",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#browser-uat-analyst",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "testing",
+      "uat",
+      "playwright",
+      "quality",
+      "copilot_studio",
+      "power_platform",
+      "automation"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "BrowserUatAnalyst",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

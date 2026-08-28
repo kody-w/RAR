@@ -1,0 +1,68 @@
+{
+  "agent": "@cat-agent-skills/ai_first_process_redesign",
+  "agent_file": "ai_first_process_redesign_agent.py",
+  "agent_sha256": "6fcb40c0aefde81d18f04518bfc8826d717720562bf6014f8f96d11677b90bb9",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AiFirstProcessRedesign",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Tim Sparks",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Redesign your existing processes with AI-first thinking",
+    "display_name": "AI-First Process Redesign",
+    "name": "@cat-agent-skills/ai_first_process_redesign",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "ae3bcfad1b711034",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "ai-first-process-redesign",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#ai-first-process-redesign",
+      "upstream_version": "2.1.1"
+    },
+    "tags": [
+      "productivity",
+      "process_improvement",
+      "agentic_workflow"
+    ],
+    "version": "3.1.1"
+  },
+  "runtime_name": "AiFirstProcessRedesign",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to apply this capability to.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "3.1.1"
+}

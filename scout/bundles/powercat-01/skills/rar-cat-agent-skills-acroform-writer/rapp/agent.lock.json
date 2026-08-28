@@ -1,0 +1,73 @@
+{
+  "agent": "@cat-agent-skills/acroform_writer",
+  "agent_file": "acroform_writer_agent.py",
+  "agent_sha256": "40d2f38bf76d47a54b443ea70f777001ac77ae612979550aab56a5bf2147f8d4",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AcroformWriter",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sandeep Angara",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Fill an existing AcroForm PDF's real form fields from supplied data and flatten the result into a finished, non-editable PDF",
+    "display_name": "AcroForm Writer",
+    "name": "@cat-agent-skills/acroform_writer",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "b96d3187f92bf269",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "acroform-writer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#acroform-writer",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "acroform",
+      "pdf",
+      "forms",
+      "python",
+      "documents"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "AcroformWriter",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

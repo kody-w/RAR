@@ -1,0 +1,63 @@
+{
+  "agent": "@howardh/tuftelove_agent",
+  "agent_file": "tuftelove_agent.py",
+  "agent_sha256": "f5bba7ff967f166255b5220496ae7e86cb5f636730cb01a43abbf32113ebd46d",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "TufteLoveAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Howard Hoy",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Advises on and reviews agent UI design using Tufte principles and Microsoft's Agent Oversight pattern taxonomy.",
+    "display_name": "TufteLove",
+    "name": "@howardh/tuftelove_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "ui",
+      "design",
+      "tufte",
+      "oversight",
+      "ux",
+      "review",
+      "accessibility",
+      "data-visualization"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "TufteLove",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "review = analyze UI against all frameworks; guide = deep dive on a topic (set topic); patterns = list all 32+ oversight patterns; checklist = tailored UI review checklist (set topic for context); principles = 10 core design principles with sources; tufte = Tufte's visual design principles for agent UI",
+        "enum": [
+          "review",
+          "guide",
+          "patterns",
+          "checklist",
+          "principles",
+          "tufte"
+        ],
+        "type": "string"
+      },
+      "source": {
+        "description": "For review: file path to the UI file to analyze.",
+        "type": "string"
+      },
+      "topic": {
+        "description": "For guide: design topic (e.g. 'approval flows', 'monitoring', 'error recovery'). For checklist: use case description (e.g. 'high-risk financial agent'). For review: file path to HTML/code to review, or description of the UI.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

@@ -1,0 +1,76 @@
+{
+  "agent": "@kody-w/rapp-crispy-singleton",
+  "agent_file": "rapp_crispy_agent.py",
+  "agent_sha256": "4229fed6d82f92d9561fd291f4bb61e7862c710f24d0b03b43f514745f665f72",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappCrispyAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "@kody-w",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Local-first meeting stack: record, RNNoise denoise, local whisper.cpp transcription and hook-driven notes.",
+    "name": "rapp_crispy",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meetings",
+      "audio",
+      "denoise",
+      "transcription",
+      "local-first",
+      "privacy"
+    ],
+    "version": "1.4.0"
+  },
+  "runtime_name": "RappCrispy",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do. Default 'doctor'.",
+        "enum": [
+          "doctor",
+          "record",
+          "denoise",
+          "transcribe",
+          "notes",
+          "run",
+          "list",
+          "read",
+          "bench",
+          "live_status"
+        ],
+        "type": "string"
+      },
+      "meeting": {
+        "description": "Meeting id (folder name) for notes/read.",
+        "type": "string"
+      },
+      "name": {
+        "description": "Label for the meeting folder.",
+        "type": "string"
+      },
+      "notes": {
+        "description": "Write notes via the hook. Default true. Set false for a confidential meeting: the DEFAULT hook calls `claude -p` and sends the transcript to Anthropic, and this is the only way to stop that from here.",
+        "type": "boolean"
+      },
+      "path": {
+        "description": "WAV path for denoise/transcribe.",
+        "type": "string"
+      },
+      "screen": {
+        "description": "Also capture screen video.",
+        "type": "boolean"
+      },
+      "seconds": {
+        "description": "Recording length for record/run. Required for headless use; there is no ENTER to press.",
+        "type": "integer"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.4.0"
+}

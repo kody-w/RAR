@@ -1,0 +1,55 @@
+{
+  "agent": "@aibast-agents-library/inventory_rebalancing",
+  "agent_file": "inventory_rebalancing_agent.py",
+  "agent_sha256": "7c44c44d6539d4a22d69eb6ace52608bed017348cd144ec56638b41c102ffd37",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "InventoryRebalancingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "manufacturing",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Analyzes stock vs demand and joins simulated ERP materials and goods receipts to the Dynamics 365 catalog, with an offline demo fallback.",
+    "display_name": "Inventory Rebalancing Agent",
+    "name": "@aibast-agents-library/inventory_rebalancing",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "inventory",
+      "warehouse",
+      "supply-chain",
+      "rebalancing",
+      "manufacturing"
+    ],
+    "version": "1.3.0"
+  },
+  "runtime_name": "InventoryRebalancingAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "Operation to perform. Defaults to inventory_snapshot when omitted.",
+        "enum": [
+          "inventory_snapshot",
+          "rebalance_recommendation",
+          "transfer_plan",
+          "cost_analysis",
+          "portfolio_analysis",
+          "recovery_plan",
+          "policy_update",
+          "continuous_optimization"
+        ],
+        "type": "string"
+      },
+      "sku": {
+        "description": "SKU identifier used to select inventory recovery, policy, and optimization records.",
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "version": "1.3.0"
+}

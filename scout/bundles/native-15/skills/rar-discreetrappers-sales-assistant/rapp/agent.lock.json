@@ -1,0 +1,54 @@
+{
+  "agent": "@discreetRappers/sales_assistant_agent",
+  "agent_file": "sales_assistant_agent.py",
+  "agent_sha256": "3b1ed8a43356939dfeb5d7a5bff8d47de45655c7179c82509d20d5acd78ba695",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SalesAssistantAgent",
+  "host_dependencies": [
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Routes natural-language CRM requests about accounts, contacts, and opportunities to the Dynamics CRUD agent, which serves built-in demo data.",
+    "display_name": "SalesAssistant",
+    "name": "@discreetRappers/sales_assistant_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "integrations",
+      "sales",
+      "crm",
+      "natural-language"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "SalesAssistant",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "conversation_context": {
+        "description": "Previous conversation state for multi-turn interactions",
+        "type": "object"
+      },
+      "request": {
+        "description": "The user's natural language request (e.g., 'What's the status of the Contoso deal?', 'Update my meeting notes for Fabrikam')",
+        "type": "string"
+      },
+      "user_guid": {
+        "description": "User identifier for personalization",
+        "type": "string"
+      }
+    },
+    "required": [
+      "request",
+      "user_guid"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

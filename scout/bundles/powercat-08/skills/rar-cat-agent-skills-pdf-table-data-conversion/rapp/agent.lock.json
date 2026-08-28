@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/pdf_table_data_conversion",
+  "agent_file": "pdf_table_data_conversion_agent.py",
+  "agent_sha256": "111afc6de615d21bd7a889670fe83fb7a8c062d7eced5a34668f69aad0e6d049",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PdfTableDataConversion",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Lewis Baybutt",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Extract tables from a PDF document (e.g. contract rebate or pricing schedules) and convert them into a clean, workable Excel spreadsheet or CSV.",
+    "display_name": "PDF Table Data Conversion",
+    "name": "@cat-agent-skills/pdf_table_data_conversion",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "a997eb9d6266624c",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "pdf-table-data-conversion",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pdf-table-data-conversion",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "documents",
+      "extraction",
+      "pdf",
+      "csv",
+      "xlsx",
+      "tables",
+      "sharepoint"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "PdfTableDataConversion",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The input to convert — path, URL or payload.",
+        "type": "string"
+      },
+      "target_format": {
+        "description": "Optional. The desired output format.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

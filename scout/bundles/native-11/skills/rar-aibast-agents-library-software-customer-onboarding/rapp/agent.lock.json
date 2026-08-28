@@ -1,0 +1,54 @@
+{
+  "agent": "@aibast-agents-library/software_customer_onboarding",
+  "agent_file": "customer_onboarding_agent.py",
+  "agent_sha256": "66ae08bf5fe89d05a0f1cc1a8b365adadb72a72e127d4487111e71baf83effea",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CustomerOnboardingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "software_digital_products",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks onboarding pipelines and blockers from a live simulated Dynamics 365 tenant's accounts and cases, with an offline demo fallback.",
+    "display_name": "Customer Onboarding Agent",
+    "name": "@aibast-agents-library/software_customer_onboarding",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "onboarding",
+      "customer-success",
+      "saas",
+      "adoption",
+      "milestones"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "CustomerOnboardingAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "customer_id": {
+        "description": "Optional customer ID to filter results.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The onboarding operation to perform.",
+        "enum": [
+          "onboarding_status",
+          "milestone_tracking",
+          "adoption_metrics",
+          "risk_flags"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

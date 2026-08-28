@@ -1,0 +1,48 @@
+{
+  "agent": "@kody-w/rapp_leviathan_factory",
+  "agent_file": "rapp_leviathan_factory_agent.py",
+  "agent_sha256": "e381f1fe6add6c47eec0d59307110f136103f8d349c611f7be0bff02edb0c6d0",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappLeviathanFactoryAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Retired compatibility adapter. Use @kody-w/full_rapp_leviathan for the clean-room Full RAPP Leviathan protocol.",
+    "display_name": "RappLeviathanFactory",
+    "industry": "meta",
+    "name": "@kody-w/rapp_leviathan_factory",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "retired",
+      "compatibility",
+      "leviathan"
+    ],
+    "version": "0.3.0"
+  },
+  "runtime_name": "RappLeviathanFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "additionalProperties": true,
+    "properties": {
+      "action": {
+        "description": "Ignored legacy action.",
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "retired"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "0.3.0"
+}

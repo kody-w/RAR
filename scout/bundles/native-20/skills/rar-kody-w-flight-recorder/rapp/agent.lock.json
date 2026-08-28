@@ -1,0 +1,45 @@
+{
+  "agent": "@kody-w/flight_recorder",
+  "agent_file": "flight_recorder_agent.py",
+  "agent_sha256": "6a3976cfba0492a585ccab318125caed4ca0820e05dddf4119e98d5f22dea659",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FlightRecorderAgent",
+  "host_dependencies": [
+    "env:FLIGHT_RECORDER_DIR"
+  ],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Records both sides of every brainstem /chat conversation to append-only local JSONL files, with search, export, pause, and wipe controls.",
+    "display_name": "FlightRecorder",
+    "name": "@kody-w/flight_recorder",
+    "quality_tier": "community",
+    "requires_env": [
+      "FLIGHT_RECORDER_DIR"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "flight-recorder",
+      "black-box",
+      "logging",
+      "observability",
+      "privacy",
+      "conversations",
+      "audit",
+      "local-first",
+      "ownership"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "FlightRecorder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

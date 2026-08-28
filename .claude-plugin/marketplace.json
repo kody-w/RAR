@@ -1,0 +1,30 @@
+{
+  "name": "rar",
+  "owner": {
+    "name": "RAPP Agent Registry"
+  },
+  "description": "Reversible RAPP agents and skills for Microsoft Scout and GitHub Copilot CLI, with a pinned local Brainstem bootstrap.",
+  "plugins": [
+    {
+      "name": "rapp",
+      "description": "Install and operate the RAR catalog, reversible Toasted skills, manual platform exports, external-AI callbacks, and a local RAPP Brainstem.",
+      "source": "./scout/starter",
+      "skills": [
+        "./skills/rapp-skills"
+      ],
+      "version": "1.3.0",
+      "repository": "https://github.com/kody-w/RAR",
+      "license": "MIT",
+      "category": "development",
+      "tags": [
+        "rapp",
+        "rar",
+        "brainstem",
+        "microsoft scout",
+        "github copilot cli",
+        "agent skills",
+        "external ai collaboration"
+      ]
+    }
+  ]
+}

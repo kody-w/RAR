@@ -1,0 +1,68 @@
+{
+  "agent": "@kody-w/workiq",
+  "agent_file": "workiq_agent.py",
+  "agent_sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "WorkIQAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Queries Microsoft 365 data — email, calendar, SharePoint/OneDrive, Teams, people — by shelling out to the workiq CLI with Entra ID auth.",
+    "display_name": "WorkIQ",
+    "example_call": "What emails did I receive from my manager this week?",
+    "external_prereqs": [
+      "npm install -g @microsoft/workiq",
+      "workiq accept-eula",
+      "Entra ID login (run `workiq ask` once)"
+    ],
+    "name": "@kody-w/workiq",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "m365",
+      "microsoft",
+      "email",
+      "calendar",
+      "teams",
+      "sharepoint",
+      "workiq"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "WorkIQ",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "data_type": {
+        "description": "Optional filter to search only specific data types. Default is 'all' which searches across all Microsoft 365 data.",
+        "enum": [
+          "all",
+          "email",
+          "calendar",
+          "documents",
+          "teams",
+          "people"
+        ],
+        "type": "string"
+      },
+      "query": {
+        "description": "The natural language query to search Microsoft 365 data. Examples: 'What emails did I receive from John this week?', 'What meetings do I have tomorrow?', 'Find documents about the Q4 budget', 'What did the team say about the deadline in Teams?'",
+        "type": "string"
+      },
+      "tenant_id": {
+        "description": "Optional Entra tenant ID for multi-tenant scenarios. Leave empty to use the default 'common' tenant.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "query"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

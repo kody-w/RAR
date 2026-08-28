@@ -1,0 +1,42 @@
+{
+  "agent": "@kody-w/power_apps_code_app_agent",
+  "agent_file": "power_apps_code_app_agent.py",
+  "agent_sha256": "fbcd47231e85c44efedbdc661b1e20da4f8cc77f45bbc20d53d7355c25269a10",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PowerAppsCodeApp",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components.",
+    "display_name": "PowerAppsCodeApp",
+    "name": "@kody-w/power_apps_code_app_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "power-apps",
+      "code-apps",
+      "pac",
+      "power-platform",
+      "codegen",
+      "deploy",
+      "package",
+      "alm",
+      "vite",
+      "react"
+    ],
+    "version": "1.1.1"
+  },
+  "runtime_name": "PowerAppsCodeApp",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.1.1"
+}

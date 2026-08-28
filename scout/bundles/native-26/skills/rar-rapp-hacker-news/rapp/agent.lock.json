@@ -1,0 +1,40 @@
+{
+  "agent": "@rapp/hacker_news",
+  "agent_file": "hacker_news_agent.py",
+  "agent_sha256": "51dd9c04dd7eb5a0701c5008a3797945b6188eb39d7de93b2a0467e03e1049a2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "HackerNewsAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "integrations",
+    "description": "Fetches the top N stories from Hacker News.",
+    "display_name": "Hacker News",
+    "example_call": "What are the top 5 stories on Hacker News right now?",
+    "name": "@rapp/hacker_news",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "starter",
+      "news",
+      "http"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "HackerNews",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "count": {
+        "description": "How many top stories to return. Default 10, max 30.",
+        "maximum": 30,
+        "minimum": 1,
+        "type": "integer"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/travel_cost_estimator",
+  "agent_file": "travel_cost_estimator_agent.py",
+  "agent_sha256": "90fc9c773d6b9ea7d45ec20a0c13dde3ab6a6ad370d0c0915fd99ecbac14a9b9",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "TravelCostEstimator",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Al Macey",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Price a business trip from live fares in your corporate booking tool, benchmark the non-bookable lines against your own approved expense reports, and produce an estimate a manager can approve — with a hard guardrail that never enters the booking funnel.",
+    "display_name": "Travel Cost Estimator",
+    "name": "@cat-agent-skills/travel_cost_estimator",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "dc0f5e9e0e0f3842",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "travel-cost-estimator",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#travel-cost-estimator",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "travel",
+      "expenses",
+      "browser_automation",
+      "playwright",
+      "finance",
+      "productivity"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "TravelCostEstimator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

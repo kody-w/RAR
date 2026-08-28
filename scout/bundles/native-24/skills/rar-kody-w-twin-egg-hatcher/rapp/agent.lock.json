@@ -1,0 +1,78 @@
+{
+  "agent": "@kody-w/twin_egg_hatcher",
+  "agent_file": "twin_egg_hatcher_agent.py",
+  "agent_sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "HatchTwinEggAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
+    "display_name": "HatchTwinEgg",
+    "name": "@kody-w/twin_egg_hatcher",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "twin",
+      "egg",
+      "hatcher",
+      "organism",
+      "federation",
+      "single-file",
+      "rapp"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "HatchTwinEgg",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do.  Defaults to 'status'.",
+        "enum": [
+          "hatch",
+          "rollback",
+          "status",
+          "list_twins"
+        ],
+        "type": "string"
+      },
+      "description": {
+        "description": "Optional human description recorded in the twin's rappid.json.",
+        "type": "string"
+      },
+      "egg": {
+        "description": "Path to a .egg file (zip).  Used for private/air-gapped twins.",
+        "type": "string"
+      },
+      "mode": {
+        "description": "Where to hatch.  'twin' (default) = local workspace; 'global' = extend kernel.",
+        "enum": [
+          "twin",
+          "global"
+        ],
+        "type": "string"
+      },
+      "name": {
+        "description": "Optional alias to record alongside the source's rappid.json (does not change rappid).",
+        "type": "string"
+      },
+      "rappid": {
+        "description": "For action='rollback', the rappid of the twin to un-hatch (default: cwd auto-detect).",
+        "type": "string"
+      },
+      "source": {
+        "description": "owner/repo or github URL (e.g. 'kody-w/heimdall').  Set GH_TOKEN for private repos.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

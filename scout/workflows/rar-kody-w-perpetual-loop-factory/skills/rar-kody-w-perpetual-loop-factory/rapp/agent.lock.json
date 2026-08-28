@@ -1,0 +1,39 @@
+{
+  "agent": "@kody-w/perpetual_loop_factory",
+  "agent_file": "perpetual_loop_factory_agent.py",
+  "agent_sha256": "1e53fe183fd90dfda9e8c438e9d8b3fb82f98254763757ed87a9c28869477f53",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PerpetualLoopFactoryAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons.",
+    "display_name": "PerpetualLoopFactory",
+    "name": "@kody-w/perpetual_loop_factory",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meta",
+      "factory",
+      "perpetual",
+      "chain",
+      "twins",
+      "self-correcting",
+      "kaizen"
+    ],
+    "version": "1.0.3"
+  },
+  "runtime_name": "PerpetualLoopFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.3"
+}

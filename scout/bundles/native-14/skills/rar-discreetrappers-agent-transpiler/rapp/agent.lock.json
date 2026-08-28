@@ -1,0 +1,87 @@
+{
+  "agent": "@discreetRappers/agent_transpiler_agent",
+  "agent_file": "agent_transpiler_agent.py",
+  "agent_sha256": "5ae4e24760415ab5d1ad427c6a2f52518d4919d2811bee13914e65f3b159210c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AgentTranspilerAgent",
+  "host_dependencies": [
+    "env:AI_PROJECT_CONNECTION_STRING"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Converts RAPP agent definitions into M365 declarative, Copilot Studio, and Azure AI Foundry formats, with optional Foundry deployment.",
+    "display_name": "AgentTranspiler",
+    "name": "@discreetRappers/agent_transpiler_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "AI_PROJECT_CONNECTION_STRING"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "pipeline",
+      "transpiler",
+      "m365",
+      "copilot-studio",
+      "multi-platform"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "AgentTranspiler",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "The transpilation action to perform",
+        "enum": [
+          "transpile",
+          "analyze",
+          "generate_openapi",
+          "preview",
+          "list_platforms",
+          "batch_transpile"
+        ],
+        "type": "string"
+      },
+      "agent_json": {
+        "description": "Optional: Direct agent JSON instead of loading by name",
+        "type": "object"
+      },
+      "agent_name": {
+        "description": "Name of the RAPP agent to transpile",
+        "type": "string"
+      },
+      "function_app_url": {
+        "description": "URL of the RAPP Function App for API connections",
+        "type": "string"
+      },
+      "output_path": {
+        "description": "Path to save generated files",
+        "type": "string"
+      },
+      "save_files": {
+        "default": false,
+        "description": "Whether to save generated files to disk",
+        "type": "boolean"
+      },
+      "target_platform": {
+        "description": "Target platform for transpilation",
+        "enum": [
+          "m365_copilot",
+          "copilot_studio",
+          "azure_foundry",
+          "all"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

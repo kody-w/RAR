@@ -1,0 +1,23 @@
+{
+  "agent": "@bill/coe-starter-kit-singleton",
+  "agent_file": "coe_starter_kit_agent.py",
+  "agent_sha256": "50a04db67238b2bedd3817fa3ab4225032fb050531671b5dde126881efac4fbe",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BillTeamStarterAgent",
+  "host_dependencies": [],
+  "manifest": {},
+  "runtime_name": "BillTeamStarter",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "dry_run": {
+        "default": false,
+        "description": "If true, fetches the manifest + verifies but does NOT write any files. Useful for inspection.",
+        "type": "boolean"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

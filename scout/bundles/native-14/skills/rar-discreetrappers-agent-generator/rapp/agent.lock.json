@@ -1,0 +1,123 @@
+{
+  "agent": "@discreetRappers/agent_generator_agent",
+  "agent_file": "agent_generator_agent.py",
+  "agent_sha256": "11b58f135dce6bd67bf595c7d5a31576e695a768bf6dba4d46709427e209e61c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AgentGeneratorAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates new RAPP agent JSON configs, Python code, and Copilot Studio assets from natural-language descriptions.",
+    "display_name": "AgentGenerator",
+    "name": "@discreetRappers/agent_generator_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "pipeline",
+      "generator",
+      "scaffolding",
+      "auto-generate"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "AgentGenerator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "The agent generation action to perform",
+        "enum": [
+          "generate_agent",
+          "list_templates",
+          "enhance_agent",
+          "generate_code",
+          "validate_agent",
+          "preview_agent",
+          "list_deployment_channels",
+          "generate_copilot_studio"
+        ],
+        "type": "string"
+      },
+      "agent_description": {
+        "description": "Natural language description of the agent to create",
+        "type": "string"
+      },
+      "agent_name": {
+        "description": "Name for the new agent",
+        "type": "string"
+      },
+      "capabilities": {
+        "description": "List of specific capabilities",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "category": {
+        "description": "Category for the agent",
+        "type": "string"
+      },
+      "copilot_studio_options": {
+        "description": "Options for Copilot Studio deployment",
+        "properties": {
+          "channels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "deploy_immediately": {
+            "default": false,
+            "type": "boolean"
+          },
+          "enable_knowledge": {
+            "default": true,
+            "type": "boolean"
+          },
+          "enable_web_browsing": {
+            "default": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "deployment_channel": {
+        "default": "rapp",
+        "description": "Deployment channel: 'rapp' (default), 'copilot_studio', or 'both'",
+        "enum": [
+          "rapp",
+          "copilot_studio",
+          "both"
+        ],
+        "type": "string"
+      },
+      "generate_python": {
+        "default": false,
+        "description": "Whether to also generate Python code",
+        "type": "boolean"
+      },
+      "integrations": {
+        "description": "External systems to integrate with",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "save_files": {
+        "default": true,
+        "description": "Whether to save generated files to disk",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

@@ -1,0 +1,72 @@
+{
+  "agent": "@cat-agent-skills/powerpoint_deck_designer",
+  "agent_file": "powerpoint_deck_designer_agent.py",
+  "agent_sha256": "eb611944514156ad3588142f26e0526500af98a8a80fd3ce408ee6b0451c6c80",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PowerpointDeckDesigner",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Ferran Chopo",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Creates polished PowerPoint decks from a JSON specification using python-pptx. Designed as a Copilot Studio Skill that runs natively inside the agent's Python container (no Azure Function or custom connector required). Supports 8 layouts plus native charts (bar, column, line, pie, donut with stacked / 100% stacked variants).",
+    "display_name": "PowerPoint Deck Designer",
+    "name": "@cat-agent-skills/powerpoint_deck_designer",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "13a4c71ffb14ed1c",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "powerpoint-deck-designer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#powerpoint-deck-designer",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "powerpoint",
+      "presentations",
+      "python",
+      "charts"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "PowerpointDeckDesigner",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

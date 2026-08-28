@@ -1,0 +1,78 @@
+name: Bug Report
+description: Report a reproducible problem in RAR, its skills, or publication surfaces
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Agent registry or SDK
+        - Agent lifecycle or receipts
+        - Scout / Copilot plugin
+        - Brainstem bootstrap or MCP bridge
+        - Cowork / aggregated source
+        - Store or static API
+        - CI / release automation
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: Agent version, RAR commit, or published URL
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug description
+      description: State the failure clearly and concisely.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Install or invoke ...
+        2. Pass ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs, hashes, or screenshots
+      description: Remove secrets and personal data before attaching evidence.
+      render: shell
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: |
+        - OS:
+        - Python:
+        - Scout or Copilot CLI version:
+        - Agent / skill:
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, tokens, private source, and personal data.
+          required: true

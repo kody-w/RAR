@@ -1,0 +1,83 @@
+{
+  "agent": "@kody-w/plant_seed_agent",
+  "agent_file": "plant_seed_agent.py",
+  "agent_sha256": "86727bec5fc6c29e5925402e0d26fc8b76078755fa3fb1664904a4f1cf190ad6",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PlantSeedAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "platform",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
+    "display_name": "Plant Seed",
+    "name": "@kody-w/plant_seed_agent",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "plant",
+      "seed",
+      "neighborhood",
+      "twin",
+      "holocard",
+      "grail",
+      "operator-mediated"
+    ],
+    "version": "1.0.4"
+  },
+  "runtime_name": "PlantSeed",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "display_name": {
+        "type": "string"
+      },
+      "dry_run": {
+        "default": true,
+        "description": "If true, shows the plan + file list; doesn't create the repo.",
+        "type": "boolean"
+      },
+      "kind": {
+        "enum": [
+          "neighborhood",
+          "ant-farm",
+          "braintrust",
+          "workspace",
+          "twin"
+        ],
+        "type": "string"
+      },
+      "name": {
+        "description": "Repo slug (lowercase + hyphens)",
+        "type": "string"
+      },
+      "owner": {
+        "default": "kody-w",
+        "type": "string"
+      },
+      "purpose": {
+        "description": "1–2 sentence purpose (for neighborhood-kind plantings).",
+        "type": "string"
+      },
+      "register_in_metropolis": {
+        "default": false,
+        "description": "If true (and dry_run=False), opens a PR on kody-w/RAPP adding this seed to pages/metropolis/index.json.",
+        "type": "boolean"
+      },
+      "voice_paragraph": {
+        "description": "1 paragraph defining the twin's voice (for twin-kind).",
+        "type": "string"
+      }
+    },
+    "required": [
+      "kind",
+      "name",
+      "display_name"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.4"
+}

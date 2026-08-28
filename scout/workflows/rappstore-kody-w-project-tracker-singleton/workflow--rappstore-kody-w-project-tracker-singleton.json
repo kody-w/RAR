@@ -1,0 +1,38 @@
+{
+  "createdAt": "2000-01-01T00:00:00.000Z",
+  "description": "Disabled Scout workflow projected from @kody-w/project-tracker-singleton (1.0.0). Edit inputs or schedule before enabling.",
+  "enabled": false,
+  "id": "ec7c0ac53a89ffc7",
+  "lastExecutedAt": null,
+  "name": "Project Tracker",
+  "schedule": {
+    "days": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "hour": 9,
+    "kind": "single",
+    "minute": 0,
+    "naturalLanguage": "every weekday at 9am",
+    "time": {
+      "hour": 9,
+      "minute": 0
+    }
+  },
+  "skillNames": [
+    "rappstore-kody-w-project-tracker-singleton"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "label": "Run rappstore-kody-w-project-tracker-singleton",
+      "prompt": "Use the imported Scout skill `rappstore-kody-w-project-tracker-singleton`. It is the reversible Toasted projection of `@kody-w/project-tracker-singleton`.\n\nRun its checksum-verified `scripts/run_agent.py`; do not recreate or paraphrase the Python behavior. Use these starting arguments:\n\n```json\n{\n  \"action\": \"list_projects\"\n}\n```\n\nIf a value is still a placeholder or a required input is missing, stop and report the exact missing field instead of inventing data. Return only the canonical agent result."
+    }
+  ],
+  "teamsNotify": "auto",
+  "triggerType": "schedule",
+  "updatedAt": "2000-01-01T00:00:00.000Z"
+}

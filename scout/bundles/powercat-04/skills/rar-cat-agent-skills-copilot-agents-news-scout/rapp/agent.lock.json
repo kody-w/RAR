@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/copilot_agents_news_scout",
+  "agent_file": "copilot_agents_news_scout_agent.py",
+  "agent_sha256": "6fc2a0fa301aa19d483c4c839feed41debd86262eb0fa2852fdcaccdebed450e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotAgentsNewsScout",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Elliot Margot",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A Monday-morning Scout automation that scans authoritative Microsoft sources for the past week's Copilot, Copilot Studio, and agent news and posts a concise, linked digest to Teams.",
+    "display_name": "Copilot & Agents News Scout",
+    "name": "@cat-agent-skills/copilot_agents_news_scout",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "fc3502443ed8b977",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "copilot-agents-news-scout",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-agents-news-scout",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "news",
+      "copilot",
+      "agent",
+      "digest",
+      "automation",
+      "weekly",
+      "teams"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CopilotAgentsNewsScout",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

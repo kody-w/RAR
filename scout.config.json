@@ -1,0 +1,20 @@
+{
+  "schema": "rar-scout-export/1.0",
+  "include_registry_agents": true,
+  "include_federated_rapplications": true,
+  "exclude_federation": {
+    "spine_dag": "Published singleton bytes no longer match the federation SHA-256; blocked until the upstream catalog is repaired."
+  },
+  "workflow_overrides": {
+    "@rarbookworld/bookfactory": {
+      "name": "BookFactory - RAPP Test Chapter",
+      "example_args": {
+        "source": "RAPP is a protocol language for agents. It defines canonical bytes, domain-separated content addresses, mint-once rappids, an exact eleven-key frame, one /chat wire, and deterministic eggs. A red conformance result is a finding, not something to patch around.",
+        "chapter_title": "The Wire That Carries Agents",
+        "chapter_number": 1,
+        "max_words": 500,
+        "revision_rounds": 0
+      }
+    }
+  }
+}

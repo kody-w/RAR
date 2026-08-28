@@ -1,0 +1,73 @@
+{
+  "agent": "@cat-agent-skills/iterative_file_editing",
+  "agent_file": "iterative_file_editing_agent.py",
+  "agent_sha256": "cce8b6e20451b55794496c50b14c159915737e03af94e3e7c2d3dcc01b8588f8",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "IterativeFileEditing",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Adi Leibowitz",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "In Copilot Studio, re-sending an edited file under the same name fails to deliver it — the change is made but never reaches the user. This skill gives each iteration a new version-numbered filename (report_v1.docx, report_v2.docx…) so every update actually lands in the chat as its own attachment.",
+    "display_name": "Iterative File Editing",
+    "name": "@cat-agent-skills/iterative_file_editing",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "fe1e0e3d17cbdfee",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "iterative-file-editing",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#iterative-file-editing",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "files",
+      "iteration",
+      "workflow",
+      "collaboration",
+      "productivity"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "IterativeFileEditing",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,71 @@
+{
+  "agent": "@kody-w/rappterpedia_agent",
+  "agent_file": "rappterpedia_agent.py",
+  "agent_sha256": "8c34061cf1ed1fa86071adb0c21896e629879d155405908404d5d6a390233fbb",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappterpediaAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates wiki articles, forum threads, and replies for the Rappterpedia knowledge base from rules-as-data templates.",
+    "display_name": "RappterpediaAgent",
+    "name": "@kody-w/rappterpedia_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "wiki",
+      "forum",
+      "content",
+      "community",
+      "rappterpedia",
+      "engine"
+    ],
+    "version": "1.1.1"
+  },
+  "runtime_name": "RappterpediaAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "category": {
+        "description": "Filter by category/channel",
+        "type": "string"
+      },
+      "count": {
+        "description": "Number of items to generate (for burst)",
+        "type": "integer"
+      },
+      "operation": {
+        "description": "The operation to perform",
+        "enum": [
+          "search",
+          "generate_article",
+          "generate_thread",
+          "list_articles",
+          "list_threads",
+          "generate_burst",
+          "export",
+          "stats"
+        ],
+        "type": "string"
+      },
+      "query": {
+        "description": "Search query (for search operation)",
+        "type": "string"
+      },
+      "topic": {
+        "description": "Optional topic hint for generation",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.1"
+}

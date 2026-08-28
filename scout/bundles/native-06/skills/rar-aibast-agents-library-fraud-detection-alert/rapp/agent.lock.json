@@ -1,0 +1,68 @@
+{
+  "agent": "@aibast-agents-library/fraud_detection_alert",
+  "agent_file": "fraud_detection_alert_agent.py",
+  "agent_sha256": "b2ef284db2b4e93836c6668a16feeafcd78f49cd2a8913f9ce54dbeb128b214a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FraudDetectionAlertAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "financial_services",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Triages fraud alerts and tracks investigations from a live simulated Dynamics 365 tenant (cases as fraud cases), with an offline demo fallback.",
+    "display_name": "Fraud Detection & Alert Agent",
+    "name": "@aibast-agents-library/fraud_detection_alert",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "fraud",
+      "detection",
+      "alerts",
+      "transactions",
+      "investigation",
+      "financial-services"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "FraudDetectionAlertAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "account": {
+        "type": "string"
+      },
+      "case_id": {
+        "type": "string"
+      },
+      "key": {
+        "description": "Optional exact record key for direct lookup on the v1.1.0 fraud-monitoring capabilities.",
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "alert_triage",
+          "transaction_analysis",
+          "pattern_detection",
+          "investigation_summary",
+          "fraud_ring_analysis",
+          "account_takeover_investigation",
+          "case_action",
+          "performance_report"
+        ],
+        "type": "string"
+      },
+      "user_input": {
+        "description": "Optional free-text request; an exact record key (e.g. ALERT-4471, RING-90, CUST-5014, CASE-2201, PERF-Q3) mentioned here triggers an exact-key lookup.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

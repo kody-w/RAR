@@ -1,0 +1,64 @@
+{
+  "agent": "@aibast-agents-library/personalized_shopping_assistant",
+  "agent_file": "personalized_shopping_assistant_agent.py",
+  "agent_sha256": "6f02e955c5212f2deb68cab2674901f367a6eaa77ca0e85834df0da46189d83c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PersonalizedShoppingAssistantAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2c_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Recommends products and checks a live catalog from a simulated Dynamics 365 tenant, with an offline demo fallback for every operation.",
+    "display_name": "Personalized Shopping Assistant Agent",
+    "name": "@aibast-agents-library/personalized_shopping_assistant",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "shopping",
+      "personalization",
+      "recommendations",
+      "style",
+      "inventory",
+      "b2c"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "PersonalizedShoppingAssistantAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "customer_id": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "product_recommendations",
+          "style_profile",
+          "inventory_check",
+          "outfit_builder",
+          "occasion_analysis",
+          "occasion_outfit_options",
+          "network_availability",
+          "loyalty_pricing",
+          "clienteling_follow_up"
+        ],
+        "type": "string"
+      },
+      "sku": {
+        "type": "string"
+      },
+      "user_input": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

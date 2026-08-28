@@ -1,0 +1,50 @@
+{
+  "agent": "@rapp/egg_hatcher",
+  "agent_file": "egg_hatcher_agent.py",
+  "agent_sha256": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "EggHatcherAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
+    "display_name": "EggHatcher",
+    "example_call": {
+      "args": {
+        "egg_path": "~/Downloads/dad.egg"
+      }
+    },
+    "name": "@rapp/egg_hatcher",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "egg",
+      "cartridge",
+      "hatch",
+      "organism",
+      "rapplication",
+      "lifecycle"
+    ],
+    "version": "1.1.1"
+  },
+  "runtime_name": "HatchEgg",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "egg_path": {
+        "description": "Local file path (e.g. /Volumes/usb/dad.egg, ~/Downloads/foo.egg) or HTTP/HTTPS URL to a .egg cartridge.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "egg_path"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.1"
+}

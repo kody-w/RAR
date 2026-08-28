@@ -1,0 +1,82 @@
+{
+  "agent": "@rapp/rar_steward",
+  "agent_file": "rar_steward_agent.py",
+  "agent_sha256": "e8cb15fe4f51fefb7c9f05fe3722dc7eccd67ab22beca8398591479d8fcc9e3e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RarStewardAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Surveys the public RAR catalog over HTTP for health, duplicate clusters, and junk candidates, returning operator-mediated cleanup guidance.",
+    "display_name": "RarStewardAgent",
+    "name": "@rapp/rar_steward",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rar",
+      "steward",
+      "registry",
+      "quality",
+      "dedup",
+      "merge",
+      "curation"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "RarStewardAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "health",
+          "duplicates",
+          "junk",
+          "agent",
+          "file_issues",
+          "help"
+        ],
+        "type": "string"
+      },
+      "confirm": {
+        "description": "file_issues: actually create issues (default false = dry-run plan)",
+        "type": "boolean"
+      },
+      "limit": {
+        "description": "max clusters/items to return (default 25)",
+        "type": "integer"
+      },
+      "name": {
+        "description": "agent: rar_name or id to deep-assess",
+        "type": "string"
+      },
+      "publisher": {
+        "description": "filter to one publisher (e.g. @kody-w)",
+        "type": "string"
+      },
+      "scope": {
+        "description": "file_issues: which findings to file (default all)",
+        "enum": [
+          "merge",
+          "junk",
+          "all"
+        ],
+        "type": "string"
+      },
+      "tracker": {
+        "description": "file_issues: owner/repo to file into (default STEWARD_TRACKER)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

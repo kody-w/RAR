@@ -4,9 +4,14 @@
 # Core infrastructure — admin only
 build_registry.py              @kody-w
 CONSTITUTION.md                @kody-w
+CONTRIBUTING.md                @kody-w
+CODE_OF_CONDUCT.md             @kody-w
+SECURITY.md                    @kody-w
+SUPPORT.md                     @kody-w
 rar.config.json                @kody-w
 skill.md                       @kody-w
 CLAUDE.md                      @kody-w
+.claude-plugin/                @kody-w
 .github/                       @kody-w
 scripts/                       @kody-w
 tests/                         @kody-w

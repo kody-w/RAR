@@ -1,0 +1,38 @@
+{
+  "createdAt": "2000-01-01T00:00:00.000Z",
+  "description": "Disabled Scout workflow projected from @rapp/json-doctor (1.0.0). Edit inputs or schedule before enabling.",
+  "enabled": false,
+  "id": "ec3879987662a711",
+  "lastExecutedAt": null,
+  "name": "JSON Doctor",
+  "schedule": {
+    "days": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "hour": 9,
+    "kind": "single",
+    "minute": 0,
+    "naturalLanguage": "every weekday at 9am",
+    "time": {
+      "hour": 9,
+      "minute": 0
+    }
+  },
+  "skillNames": [
+    "rappstore-rapp-json-doctor"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "label": "Run rappstore-rapp-json-doctor",
+      "prompt": "Use the imported Scout skill `rappstore-rapp-json-doctor`. It is the reversible Toasted projection of `@rapp/json-doctor`.\n\nRun its checksum-verified `scripts/run_agent.py`; do not recreate or paraphrase the Python behavior. Use these starting arguments:\n\n```json\n{\n  \"action\": \"inspect\",\n  \"path\": \"data.json\"\n}\n```\n\nIf a value is still a placeholder or a required input is missing, stop and report the exact missing field instead of inventing data. Return only the canonical agent result."
+    }
+  ],
+  "teamsNotify": "auto",
+  "triggerType": "schedule",
+  "updatedAt": "2000-01-01T00:00:00.000Z"
+}

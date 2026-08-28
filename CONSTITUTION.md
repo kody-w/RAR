@@ -968,6 +968,7 @@ agent. If a future change cannot be made without breaking a published URL, the
 change is wrong — not the contract.
 
 The path is a promise.
+
 ---
 
 ## Article XXIV — The Static Data Covenant
@@ -1018,4 +1019,67 @@ covenant is what lets RAR promise that scale never degrades a visitor's read.
 
 ---
 
-*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. Amended 2026-05-25 to add Article XXI — the Kited Neighborhood (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**, and the **kite mark**), specified in [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md). The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent. The twin is kited; the line is sealed; scan to join. Amended 2026-08-02 to add Article XXIII — the Permanent URL Contract, enforced by `state/published_paths.json` and `scripts/check_url_stability.py`. The path is a promise. Amended 2026-08-27 to add Article XXIV — the Static Data Covenant: pages read committed static data, never the GitHub API; the API is a CI harvester or an authenticated write channel, nothing else. The snapshot is the interface. Clarified 2026-08-27 (§XXIV.5): the visitor-directed lookup — the visitor names the target at the moment of use — is the one sanctioned live read, declared in-code, never on page load.*
+## Article XXV — The `rapp@x` Marketplace Identity
+
+RAPP marketplace projections use one stable install identity:
+
+```text
+rapp@x
+```
+
+`rapp` names the interoperable RAPP capability. `x` names the marketplace or
+host surface that supplies it.
+
+Ratified examples:
+
+| Identity | Purpose |
+|---|---|
+| `rapp@brainstem` | Install and verify a local Brainstem, then install RAR |
+| `rapp@rar` | Operate the registry, skills, exports, and callback bootstrap |
+
+### The marketplace is a projection, never the authority
+
+The `rapp@x` package may carry skills, instructions, runners, installers, and
+host metadata, but it does not replace canonical `agent.py` bytes, notarized
+RAR receipts, or the RAPP/1 Grail. A marketplace wrapper must point back to or
+reversibly preserve its authority.
+
+Generated Scout, Copilot CLI, Claude Code, Cowork, or Copilot Studio artifacts
+must not silently rewrite the behavior they project. If a target platform
+cannot execute the canonical behavior, the wrapper must route to a capable
+Brainstem/MCP host or report the limitation explicitly.
+
+### Cross-client rule
+
+Every ratified `rapp@x` marketplace must:
+
+1. publish a valid `.claude-plugin/marketplace.json`;
+2. publish plugin-local metadata and discoverable `SKILL.md` files;
+3. use the same `plugin@marketplace` identity in Microsoft Scout, GitHub
+   Copilot CLI, and Claude Code wherever those clients support the format;
+4. preserve explicit permissions for installation, local writes, tool use,
+   and external-AI callbacks;
+5. validate the real marketplace loader rather than only JSON syntax;
+6. keep installation additive and back up managed files before replacement;
+7. document conduct, security, support, and contribution paths.
+
+### Bootstrap rule
+
+A `rapp@x` plugin may install another RAPP layer when that is its declared
+purpose. For example, `rapp@brainstem` may install Brainstem and then register
+`rapp@rar`. The bootstrap must be idempotent, checksum-pinned where executable
+bytes are involved, and must never modify the Brainstem kernel or Grail merely
+to satisfy a host integration.
+
+### Namespace rule
+
+The marketplace suffix is a public identity, not a marketing alias. A new
+`rapp@x` suffix requires maintainer approval, a unique marketplace manifest,
+an explicit purpose, and a permanent public repository path. Published
+identities are not repurposed.
+
+The plugin is `rapp`. The marketplace tells you where it lives.
+
+---
+
+*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. Amended 2026-05-25 to add Article XXI — the Kited Neighborhood (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**, and the **kite mark**), specified in [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md). The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent. The twin is kited; the line is sealed; scan to join. Amended 2026-08-02 to add Article XXIII — the Permanent URL Contract, enforced by `state/published_paths.json` and `scripts/check_url_stability.py`. The path is a promise. Amended 2026-08-27 to add Article XXIV — the Static Data Covenant: pages read committed static data, never the GitHub API; the API is a CI harvester or an authenticated write channel, nothing else. The snapshot is the interface. Clarified 2026-08-27 (§XXIV.5): the visitor-directed lookup — the visitor names the target at the moment of use — is the one sanctioned live read, declared in-code, never on page load. Amended 2026-08-27 to add Article XXV — the constitutional `rapp@x` marketplace identity across Scout, GitHub Copilot CLI, and Claude Code. The plugin is `rapp`; the marketplace tells you where it lives.*

@@ -1,0 +1,132 @@
+{
+  "agent": "@kody-w/bakeoff_factory",
+  "agent_file": "bakeoff_factory_agent.py",
+  "agent_sha256": "461620d239ee7c63430f5a5cd4412429d72a049977d5ff2beb04d0ba5e38b786",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BakeoffFactoryAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Runs a persistent tournament where prompt variants compete on a text task, an LLM judge scores outputs, and the worst variant mutates toward the best.",
+    "display_name": "BakeoffFactory",
+    "example_call": {
+      "args": {
+        "action": "spawn",
+        "input_pool": [
+          "productivity hacks",
+          "AI agents",
+          "weekend projects"
+        ],
+        "name": "post-quality",
+        "rounds_per_mutation": 3,
+        "task_description": "Write one short, engaging social-media post.",
+        "variants": [
+          {
+            "id": "v1",
+            "name": "concrete",
+            "system": "Open with a specific number or named thing. No abstractions."
+          },
+          {
+            "id": "v2",
+            "name": "voice",
+            "system": "Open with a strong opinion, defend it in one breath."
+          }
+        ]
+      }
+    },
+    "name": "@kody-w/bakeoff_factory",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meta",
+      "evolution",
+      "tournament",
+      "loop",
+      "self-improving",
+      "composite",
+      "rapplication"
+    ],
+    "version": "0.1.1"
+  },
+  "runtime_name": "BakeoffFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "spawn",
+          "round",
+          "report",
+          "status",
+          "stop",
+          "list",
+          "pump"
+        ],
+        "type": "string"
+      },
+      "control_system": {
+        "description": "System prompt for the bare baseline control.",
+        "type": "string"
+      },
+      "input_pool": {
+        "description": "Inputs randomly sampled each round.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "max_rounds": {
+        "description": "Stop after this many rounds (pump action). Default: forever.",
+        "type": "integer"
+      },
+      "name": {
+        "description": "Bakeoff name (slug). Required for all but list.",
+        "type": "string"
+      },
+      "round_interval_s": {
+        "description": "Pump cadence in seconds. Default 240.",
+        "type": "integer"
+      },
+      "rounds_per_mutation": {
+        "description": "Mutate worst variant every N rounds. Default 3.",
+        "type": "integer"
+      },
+      "rubric_axes": {
+        "description": "Axes the judge scores. Default: ['specificity','voice','hook','craft'].",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "task_description": {
+        "description": "What every variant produces. Required for spawn.",
+        "type": "string"
+      },
+      "task_template": {
+        "description": "Jinja-like {task}/{input} template. Optional.",
+        "type": "string"
+      },
+      "variants": {
+        "description": "List of {id,name,system} for each competing strategy. Required for spawn.",
+        "items": {
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "window": {
+        "description": "Report window. Default 15.",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "0.1.1"
+}

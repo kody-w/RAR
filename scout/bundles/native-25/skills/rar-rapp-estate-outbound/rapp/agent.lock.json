@@ -1,0 +1,63 @@
+{
+  "agent": "@rapp/estate_outbound",
+  "agent_file": "estate_outbound_agent.py",
+  "agent_sha256": "f4f677f2bba5a12b5967fc39a8d0bdb1afad7ad4de57d32d2df8a80dd2bf1b32",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "EstateOutboundAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Writes an already-signed neighborhood event into ~/.brainstem/outbound/ for federation roll-up; pushing to the estate repo stays manual.",
+    "display_name": "EstateOutbound",
+    "example_call": {
+      "args": {
+        "event": {
+          "body": "...",
+          "from": "...",
+          "kind": "hello",
+          "pub": {},
+          "schema": "rapp-commons-event/1.0",
+          "sig": "...",
+          "ts": "..."
+        },
+        "neighborhood_rappid": "rappid:@rapp-commons/origin:3727bc584708e539d69792713fbb200688c634744cce2d9614fa5aefd4ff295f"
+      }
+    },
+    "name": "@rapp/estate_outbound",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "estate",
+      "outbound",
+      "federation",
+      "neighborhood",
+      "publish"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "StageOutboundEvent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "event": {
+        "description": "The signed event object. Must include schema, from, ts, sig, pub at minimum.",
+        "type": "object"
+      },
+      "neighborhood_rappid": {
+        "description": "Target neighborhood's rappid, consolidated form rappid:@<owner>/<slug>:<64hex>. Determines which subdir of ~/.brainstem/outbound/ receives the event.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "neighborhood_rappid",
+      "event"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

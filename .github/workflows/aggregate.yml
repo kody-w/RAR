@@ -39,16 +39,30 @@ jobs:
   aggregate:
     runs-on: ubuntu-latest
     steps:
-      # Shallow on purpose, not an oversight. build_registry.py is the one
-      # builder that derives its output from `git log` and so needs depth 0;
-      # nothing in this job reads history.
+      # Registry and Scout source pins derive from git history, so aggregation
+      # must retain the full source lineage for every regenerated container.
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check pytest pyyaml
+
+      - name: Apply pinned maintainer migrations
+        id: legacy
+        run: |
+          result=$(python scripts/apply_maintainer_migrations.py)
+          echo "$result"
+          changed=$(python -c \
+            'import json,sys; print("true" if json.load(sys.stdin)["changed"] else "false")' \
+            <<< "$result")
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
 
       # `--strict` is the whole difference between this crawl and the one in
       # refresh-ratings.yml. There the crawler is one of six snapshot steps and
@@ -92,6 +106,49 @@ jobs:
           print(f"[aggregate] {len(snapshot['items'])} item(s) across "
                 f"{len(crawled)} source(s).")
           PY
+
+      - name: Regenerate aggregated RAPP containers
+        id: containers
+        run: |
+          python scripts/generate_aggregated_agents.py
+          if [ -n "$(git status --porcelain -- \
+              agents/@cat-agent-skills agents/@cowork-cookbook)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Mint scoped maintainer receipts
+        if: >-
+          steps.containers.outputs.changed == 'true' ||
+          steps.legacy.outputs.changed == 'true'
+        run: |
+          python scripts/mint_maintainer_receipts.py \
+            --namespace @cat-agent-skills \
+            --namespace @cowork-cookbook \
+            --agent @kody-w/connected_solution_agent \
+            --agent @kody-w/copilot_studio_forge_agent \
+            --agent @rapp/learn_new \
+            --agent @rapter/rapp_dogg_agent \
+            --note "regenerate verified aggregated source containers"
+
+      - name: Rebuild registry and static API
+        if: >-
+          steps.containers.outputs.changed == 'true' ||
+          steps.legacy.outputs.changed == 'true'
+        run: |
+          python build_registry.py
+          python scripts/check_url_stability.py --update
+          python scripts/build_pokedex_api.py
+          python scripts/build_static_api.py
+
+      - name: Validate regenerated estate
+        if: >-
+          steps.containers.outputs.changed == 'true' ||
+          steps.legacy.outputs.changed == 'true'
+        run: |
+          python security_scan.py
+          python -m pytest -q --ignore=tests/test_scout_rapp_skill.py
 
       # Unconditional, and so is the commit below. This is the step that used
       # to be gated: build-registry.yml rebuilt the static API behind
@@ -144,7 +201,16 @@ jobs:
         id: commit
         if: github.ref == 'refs/heads/main' && github.event.inputs.dry_run != 'true'
         run: |
-          FILES="state/aggregated.json api/v1/front.json"
+          FILES="state/aggregated.json api/v1/front.json \
+          agents/@kody-w/connected_solution_agent.py \
+          agents/@kody-w/copilot_studio_forge_agent.py \
+          agents/@rapp/learn_new_agent.py agents/@rapter/rapp_dogg_agent.py \
+          agents/@cat-agent-skills agents/@cowork-cookbook \
+          state/agent_lifecycle.json state/receipts \
+          state/published_paths.json registry.json manifest.json \
+          api/v1/catalog.json api/v1/taxonomy.json api/v1/match.json \
+          api/v1/marketplaces.json api/v1/status.json api/v1/badge.json \
+          api/v1/audience api/v1/index.json api/v1/agent api/v1/sprite"
           if [ -z "$(git status --porcelain $FILES)" ]; then
             echo "No change to the catalog or the ranking; nothing to commit."
             echo "committed=false" >> "$GITHUB_OUTPUT"
@@ -160,6 +226,21 @@ jobs:
           git pull --rebase origin main
           git push origin main
           echo "committed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Publish commit-pinned Scout projection
+        if: steps.commit.outputs.committed == 'true'
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          python scripts/build_scout_exports.py
+          python -m pytest -q tests/test_scout_rapp_skill.py
+          git config user.name "RAPP Scout Export Bot"
+          git config user.email "rapp-bot@users.noreply.github.com"
+          git add rapp_skill.md rapp_skills.md scout/
+          if ! git diff --cached --quiet; then
+            git commit -m "Build Scout skills and workflows [skip ci]"
+            git push origin main
+          fi
 
       # A scheduled job nobody watches has to say what it did somewhere a human
       # will actually look. Still runs when the commit was skipped, because

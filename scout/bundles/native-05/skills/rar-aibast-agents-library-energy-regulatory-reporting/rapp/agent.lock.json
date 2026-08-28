@@ -1,0 +1,59 @@
+{
+  "agent": "@aibast-agents-library/energy_regulatory_reporting",
+  "agent_file": "regulatory_reporting_agent.py",
+  "agent_sha256": "45c64ca391d9bddeb695a36cb4a7c013ed744a91a2d50f7e637a81e3cbb93866",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RegulatoryReportingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "energy",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks filing deadlines from live work items on a simulated Dynamics 365 tenant, with validation and audit prep that work offline.",
+    "display_name": "Energy Regulatory Reporting Agent",
+    "name": "@aibast-agents-library/energy_regulatory_reporting",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "regulatory",
+      "reporting",
+      "epa",
+      "ferc",
+      "audit",
+      "compliance",
+      "energy"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "RegulatoryReportingAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The regulatory reporting operation to perform.",
+        "enum": [
+          "report_status",
+          "data_validation",
+          "submission_tracker",
+          "audit_readiness",
+          "emissions_summary",
+          "generate_regulatory_report",
+          "prepare_epa_submission"
+        ],
+        "type": "string"
+      },
+      "report_id": {
+        "description": "Optional report ID to filter results.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

@@ -1,0 +1,78 @@
+{
+  "agent": "@cat-agent-skills/phi_deidentifier",
+  "agent_file": "phi_deidentifier_agent.py",
+  "agent_sha256": "deacbb22ef7601fa437aa51aa7ccdd07ed16fa8c3eaa345c50ff44dc6d975d6f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PhiDeidentifier",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Rafael Lopez Alcaraz",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Redact the 18 HIPAA Safe Harbor identifiers from clinical text (or produce a Limited Data Set) with consistent pseudonym tokens and an audit manifest of what was removed.",
+    "display_name": "PHI De-identifier",
+    "name": "@cat-agent-skills/phi_deidentifier",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "4c6bd1961fad5f45",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "phi-deidentifier",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#phi-deidentifier",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "healthcare",
+      "hls",
+      "phi",
+      "privacy",
+      "redaction",
+      "hipaa",
+      "compliance",
+      "scripts"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "PhiDeidentifier",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,37 @@
+{
+  "agent": "@kody-w/install_rappter_distro_agent",
+  "agent_file": "install_rappter_distro_agent.py",
+  "agent_sha256": "15ee1708f83dc55022bdf74d625b6b443d59f73371cd2f4c68100651c8f001d2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "InstallDistroAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Installs the full rappter-distro over a bare kernel by fetching files from raw.githubusercontent.com with per-file sha256 verification.",
+    "display_name": "Install Rappter Distro",
+    "name": "@kody-w/install_rappter_distro_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "installer",
+      "distro",
+      "rappter",
+      "bootstrap",
+      "organism"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "install_rappter_distro",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

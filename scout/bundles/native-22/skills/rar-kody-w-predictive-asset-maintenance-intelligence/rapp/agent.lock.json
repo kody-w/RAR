@@ -1,0 +1,84 @@
+{
+  "agent": "@kody-w/predictive_asset_maintenance_intelligence",
+  "agent_file": "predictive_asset_maintenance_intelligence_agent.py",
+  "agent_sha256": "d792270520fb82ad23815a9b9d6e940da5428ee5baa5fcddc362846adaff90e0",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PredictiveAssetMaintenanceIntelligenceAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "energy",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Simulates a grid predictive-maintenance pipeline — telemetry scoring, failure ranking, work-order and capex drafts — from seeded synthetic demo data.",
+    "display_name": "Predictive Asset Maintenance Intelligence",
+    "name": "@kody-w/predictive_asset_maintenance_intelligence",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "energy",
+      "predictive-maintenance",
+      "asset-management",
+      "grid",
+      "field-service"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "PredictiveAssetMaintenanceIntelligenceAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "asset_class": {
+        "description": "Restrict the run to a single asset class.",
+        "enum": [
+          "transformer",
+          "switchgear",
+          "underground_cable",
+          "overhead_line"
+        ],
+        "type": "string"
+      },
+      "asset_ids": {
+        "description": "Specific asset IDs to run. If omitted, a synthetic fleet sample is used.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "current_fiscal_year": {
+        "description": "Current FY for the capex pipeline. Defaults to current year.",
+        "type": "integer"
+      },
+      "horizon_days": {
+        "description": "Ranking + work-order horizon. Defaults to 90.",
+        "enum": [
+          30,
+          90,
+          180
+        ],
+        "type": "integer"
+      },
+      "sample_size": {
+        "description": "Fleet sample size when asset_ids is omitted. Defaults to 25.",
+        "type": "integer"
+      },
+      "substation": {
+        "description": "Restrict the run to a single substation (e.g. SUB-44).",
+        "type": "string"
+      },
+      "top_n": {
+        "description": "How many ranked assets to carry forward. Defaults to 25.",
+        "type": "integer"
+      },
+      "work_order_threshold": {
+        "description": "Failure-probability threshold for drafting work orders (0.0-1.0). Defaults to 0.30.",
+        "type": "number"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}
