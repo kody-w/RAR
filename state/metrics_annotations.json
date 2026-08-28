@@ -1,0 +1,12 @@
+[
+  {
+    "date": "2026-08-27",
+    "id": "feeds-over-api-doctrine",
+    "note": "Feeds-over-API doctrine declared (rapp-1 anchor): clients should poll GitHub Atom feeds and fetch content only on a tick. Clients are still on API/CDN polling today; when they cut over, expect CDN hits and page views to step DOWN \u2014 after cutover a CDN hit \u2248 a real content pull, not a timer firing."
+  },
+  {
+    "date": "2026-08-27",
+    "id": "static-data-covenant",
+    "note": "Article XXIV ratified: pages read committed static data, never the GitHub API. Stars/forks on this dashboard now refresh with the nightly snapshot instead of a per-visitor live call (values may lag up to a day; totals unaffected). The removed API calls were never counted in these metrics, so no step-change is expected from this cutover."
+  }
+]

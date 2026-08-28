@@ -971,7 +971,55 @@ The path is a promise.
 
 ---
 
-## Article XXIV — The `rapp@x` Marketplace Identity
+## Article XXIV — The Static Data Covenant
+
+**A visitor's browser never calls the GitHub API.** Every unauthenticated read
+a page needs is served as committed static data: CI harvests once — from git
+history, from the API where it must, from external sources — commits the
+snapshot, and every visitor reads the committed file from Pages or
+`raw.githubusercontent.com`. GitHub's CDN scales with GitHub; sixty API calls
+an hour per visitor does not.
+
+The covenant, concretely:
+
+1. **Pages read data, never the API.** An unauthenticated `api.github.com`
+   fetch in page code is a constitutional violation, however convenient.
+2. **The API is a harvester or a write channel, nothing else.** It may run in
+   CI (with a token, once per build or per day) to produce a committed
+   snapshot; it may serve authenticated user actions — Issues-as-API
+   submissions, votes, reviews, login. Those are exempt because they are
+   per-user writes and identity, not reads a snapshot could serve.
+3. **Snapshots are generator-owned.** Each has a script that builds it and a
+   workflow that commits it; hand-editing one is the same sin as hand-editing
+   `registry.json`.
+4. **A step-change in any published number carries its explanation** — a dated
+   entry in `state/metrics_annotations.json`, published with the metrics it
+   explains.
+5. **The visitor-directed lookup is the one sanctioned live read.** When the
+   visitor themselves names the target at the moment of use — pasting an
+   arbitrary gist ID, typing an arbitrary owner/repo into an in-page browser —
+   there is no fixed data a harvester could have committed ahead of time, and
+   the read spends the visitor's own anonymous budget on the visitor's own
+   request. Such a call site must be the exception, marked in-code as a
+   declared visitor-directed lookup, and must never run on page load or on a
+   timer. Everything a page fetches on its own initiative stays committed
+   static data.
+
+Reference implementation: `state/agent_commit_dates.json` (built by
+`scripts/build_commit_dates.py` from git history — it replaced up to sixteen
+API calls per visitor on the front page), `state/metrics.json`,
+`state/orappter_demo_vault.json`, and the headless static API under `api/v1/`.
+
+### Why this is constitutional rather than a policy
+
+Rate limits are invisible until the audience is real: the page that worked for
+one developer fails for a classroom, a conference, or a fleet of agents — the
+exact moments the registry exists for. Static data has no such cliff. The
+covenant is what lets RAR promise that scale never degrades a visitor's read.
+
+---
+
+## Article XXV — The `rapp@x` Marketplace Identity
 
 RAPP marketplace projections use one stable install identity:
 
@@ -1031,6 +1079,7 @@ an explicit purpose, and a permanent public repository path. Published
 identities are not repurposed.
 
 The plugin is `rapp`. The marketplace tells you where it lives.
+
 ---
 
-*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. Amended 2026-05-25 to add Article XXI — the Kited Neighborhood (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**, and the **kite mark**), specified in [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md). The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent. The twin is kited; the line is sealed; scan to join. Amended 2026-08-02 to add Article XXIII — the Permanent URL Contract, enforced by `state/published_paths.json` and `scripts/check_url_stability.py`. The path is a promise. Amended 2026-08-27 to add Article XXIV — the constitutional `rapp@x` marketplace identity across Scout, GitHub Copilot CLI, and Claude Code. The plugin is `rapp`; the marketplace tells you where it lives.*
+*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. Amended 2026-05-25 to add Article XXI — the Kited Neighborhood (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**, and the **kite mark**), specified in [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md). The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent. The twin is kited; the line is sealed; scan to join. Amended 2026-08-02 to add Article XXIII — the Permanent URL Contract, enforced by `state/published_paths.json` and `scripts/check_url_stability.py`. The path is a promise. Amended 2026-08-27 to add Article XXIV — the Static Data Covenant: pages read committed static data, never the GitHub API; the API is a CI harvester or an authenticated write channel, nothing else. The snapshot is the interface. Clarified 2026-08-27 (§XXIV.5): the visitor-directed lookup — the visitor names the target at the moment of use — is the one sanctioned live read, declared in-code, never on page load. Amended 2026-08-27 to add Article XXV — the constitutional `rapp@x` marketplace identity across Scout, GitHub Copilot CLI, and Claude Code. The plugin is `rapp`; the marketplace tells you where it lives.*

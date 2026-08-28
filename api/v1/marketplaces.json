@@ -1,7 +1,7 @@
 {
   "schema": "rapp-marketplaces/1.0",
-  "description": "Ratified rapp@x marketplace identities governed by RAR Constitution Article XXIV.",
-  "constitutional_article": "https://github.com/kody-w/RAR/blob/main/CONSTITUTION.md#article-xxiv--the-rappx-marketplace-identity",
+  "description": "Ratified rapp@x marketplace identities governed by RAR Constitution Article XXV.",
+  "constitutional_article": "https://github.com/kody-w/RAR/blob/main/CONSTITUTION.md#article-xxv--the-rappx-marketplace-identity",
   "marketplaces": [
     {
       "identity": "rapp@brainstem",

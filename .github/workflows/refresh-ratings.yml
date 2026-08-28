@@ -72,6 +72,14 @@ jobs:
       - name: Crawl aggregated sources
         run: python scripts/crawl_sources.py
 
+      # Static vault listing for orappter/orappter.html — the page reads this
+      # snapshot instead of directory-listing an external repo via the GitHub
+      # API on every visit. Non-fatal: upstream trouble leaves it untouched.
+      - name: Harvest orappter demo vault listing
+        run: python scripts/harvest_orappter_vault.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Snapshot release download counts
         run: python scripts/fetch_download_counts.py
         env:
@@ -102,7 +110,7 @@ jobs:
           FILES=""
           for f in state/discussion_ratings.json state/federation.json \
                    state/downloads.json api/v1/stats/downloads.json \
-                   state/aggregated.json; do
+                   state/aggregated.json state/orappter_demo_vault.json; do
             [ -f "$f" ] && FILES="$FILES $f"
           done
           if [ -z "$FILES" ] || [ -z "$(git status --porcelain $FILES)" ]; then

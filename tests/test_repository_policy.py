@@ -48,7 +48,7 @@ def test_issue_forms_cover_bug_feature_security_and_support_paths():
 
 def test_rapp_at_x_is_constitutional_and_machine_discoverable():
     constitution = (ROOT / "CONSTITUTION.md").read_text(encoding="utf-8")
-    assert "Article XXIV" in constitution
+    assert "Article XXV" in constitution
     assert "The `rapp@x` Marketplace Identity" in constitution
     assert "`rapp@brainstem`" in constitution
     assert "`rapp@rar`" in constitution

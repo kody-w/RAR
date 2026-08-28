@@ -2722,17 +2722,18 @@ async function init() {
 }
 
 async function fetchRemoteVault() {
-  // Attempt to fetch from GitHub API — silently fails if offline
+  // Read the CI-harvested static listing — never the GitHub API from a
+  // visitor's browser (file bodies come straight from raw.githubusercontent).
+  // Silently fails if offline.
   try {
-    const res = await fetch('https://api.github.com/repos/builder-w/orappter-demo/contents/', {
-      headers: { 'Accept': 'application/vnd.github.v3+json' },
+    const res = await fetch('https://raw.githubusercontent.com/kody-w/RAR/main/state/orappter_demo_vault.json', {
       signal: AbortSignal.timeout(5000)
     });
     if (!res.ok) return;
-    const items = await res.json();
+    const items = (await res.json()).files || [];
     let fetched = 0;
     for (const item of items) {
-      if (item.type === 'file' && item.name.endsWith('.md')) {
+      if (item.name && item.name.endsWith('.md')) {
         try {
           const content = await (await fetch(item.download_url, { signal: AbortSignal.timeout(3000) })).text();
           const slug = item.name.replace(/\.md$/, '');
