@@ -7,6 +7,14 @@ Copilot CLI, Cowork, Scout, or another SKILL.md-aware agent to:
 - preserve a Brainstem conversation across turns;
 - start an existing local Brainstem installation;
 - install the canonical RAPP SDK Builder into a local Brainstem;
+- install, sync, verify, and remove checksum-pinned RAR Toasted skills in
+  `~/.copilot/skills`, where Scout and Copilot CLI read them in place;
+- export a verified skill package with a self-contained HTML loading guide for
+  Scout, Microsoft Copilot Cowork, and Copilot Studio;
+- install the self-bootstrapping MCP callback drop-in so a loopback Brainstem
+  can collaborate back with an on-device Scout without changing the Grail;
+- bootstrap the standard global Brainstem when none is installed, using the
+  pinned installer bundled with the Toasted skill;
 - prove that the SDK matches the public RAPP/1 reference implementation; or
 - read and apply the normative RAPP/1 protocol.
 
@@ -17,8 +25,8 @@ and pass the user's request as plain English in `user_input`.
 Operating rules:
 
 1. Run `status` before the first Brainstem call.
-2. If a local Brainstem is down, run `ensure`. It may start an existing
-   installation, but it never downloads or executes a remote installer.
+2. If a local Brainstem is down, run `ensure`. Pass `allow_install=true` only
+   after the user authorizes a fresh global installation.
 3. All capability traffic uses `POST /chat`. Never invent sibling REST routes.
 4. The request field is `user_input`. The reply field is `response`.
 5. Omit `session_id` on the first call, then preserve the returned value on
@@ -55,9 +63,12 @@ it never rewrites them into a false strict-conformance claim.
 from __future__ import annotations
 
 import hashlib
+import html
 import importlib.util
 import json
 import os
+import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -66,7 +77,9 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import zipfile
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 try:
     from agents.basic_agent import BasicAgent
@@ -98,13 +111,16 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_skill_agent",
-    "version": "1.0.0",
+    "version": "1.3.0",
     "display_name": "RAPP Skill",
     "description": (
         "Connects any SKILL-aware claw directly to a local or hosted RAPP "
         "Brainstem over the one /chat wire, preserves sessions, installs and "
-        "proves the canonical RAPP SDK Builder, and supplies the pinned full "
-        "RAPP/1 protocol."
+        "proves the canonical RAPP SDK Builder, hotloads reversible RAR skills "
+        "into Scout and Copilot CLI, exports verified manual-loading guides for "
+        "Scout, Copilot Cowork, and Copilot Studio, installs the optional "
+        "self-bootstrapping Scout callback agent, bootstraps the global "
+        "Brainstem, and supplies the pinned full RAPP/1 protocol."
     ),
     "author": "kody-w",
     "tags": [
@@ -139,6 +155,43 @@ RAPP_SDK_URL = (
 )
 RAPP_SDK_SHA256 = (
     "d635c90a066daecd863a7c0600f57529cb25107313e3eab4e9fb90497ec80b13"
+)
+RAPP_INSTALLER_COMMIT = "5fbde1776a72715935c3d597a9ddfce28a04032b"
+RAPP_INSTALLER_BASE = (
+    "https://raw.githubusercontent.com/kody-w/rapp-installer/"
+    f"{RAPP_INSTALLER_COMMIT}"
+)
+RAPP_INSTALLERS = {
+    "install.sh": {
+        "url": f"{RAPP_INSTALLER_BASE}/install.sh",
+        "sha256": (
+            "cc586dd1752520d05fbff99a637eef308bb7051ffae457b7d037aa0574341794"
+        ),
+    },
+    "install.ps1": {
+        "url": f"{RAPP_INSTALLER_BASE}/install.ps1",
+        "sha256": (
+            "747a5a8b2e6a41292a4b8b1a719fea588bdd21c523e3a3edb474dd651a8a2fda"
+        ),
+    },
+    "install.cmd": {
+        "url": f"{RAPP_INSTALLER_BASE}/install.cmd",
+        "sha256": (
+            "9d4695f8ef7401d8098f2f0ed3bafddd916098d73892f0310f19c7729b514940"
+        ),
+    },
+}
+MCP_CALLBACK_COMMIT = "2f4efd2356be0a239131d377d2fb04269c90a3b8"
+MCP_CALLBACK_URL = (
+    "https://raw.githubusercontent.com/kody-w/rapp-static-mcp/"
+    f"{MCP_CALLBACK_COMMIT}/examples/brainstem/mcp_callback_agent.py"
+)
+MCP_CALLBACK_SHA256 = (
+    "18998f73939c35677b8692cdf0e11c0fc8d6ffd3e015e3452e78a86537550896"
+)
+RAR_SCOUT_CATALOG_URL = (
+    "https://raw.githubusercontent.com/kody-w/RAR/main/"
+    "scout/catalog/catalog.json"
 )
 DEFAULT_BRAINSTEM_URL = "http://localhost:7071"
 DEFAULT_TIMEOUT_SECONDS = 30
@@ -399,6 +452,403 @@ def _fetch_verified(url, expected_sha256, timeout_seconds=None):
     return data
 
 
+def _read_location(location, timeout_seconds=None):
+    value = str(location).strip()
+    parsed = urllib.parse.urlsplit(value)
+    if parsed.scheme in {"http", "https"}:
+        request = urllib.request.Request(
+            value,
+            headers={"User-Agent": "rapp-skills/1.1"},
+        )
+        try:
+            with urllib.request.urlopen(
+                request,
+                timeout=_timeout(timeout_seconds),
+            ) as response:
+                return response.read()
+        except urllib.error.URLError as error:
+            raise BridgeRequestError(
+                "download-failed",
+                f"Could not fetch {value}: {error.reason}",
+            ) from error
+        except TimeoutError as error:
+            raise BridgeRequestError(
+                "download-timeout",
+                f"Timed out fetching {value}",
+            ) from error
+    if parsed.scheme == "file":
+        return Path(urllib.request.url2pathname(parsed.path)).read_bytes()
+    return Path(value).expanduser().read_bytes()
+
+
+def _skills_directory(value=None):
+    return Path(
+        str(
+            value
+            or os.environ.get("COPILOT_SKILLS_DIR")
+            or Path.home() / ".copilot" / "skills"
+        )
+    ).expanduser().resolve()
+
+
+def _skills_state_directory():
+    return Path(
+        os.environ.get(
+            "RAPP_SKILLS_STATE_DIR",
+            str(Path.home() / ".copilot" / "rar-skills"),
+        )
+    ).expanduser().resolve()
+
+
+def _safe_skill_name(value):
+    name = str(value or "").strip()
+    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name):
+        raise ValueError(f"invalid Scout skill name: {name!r}")
+    return name
+
+
+def _catalog_payload(location, timeout_seconds=None):
+    raw = _read_location(location, timeout_seconds)
+    try:
+        catalog = json.loads(raw)
+    except json.JSONDecodeError as error:
+        raise BridgeRequestError(
+            "invalid-catalog",
+            f"RAR Scout catalog is not valid JSON: {error}",
+        ) from error
+    if (
+        not isinstance(catalog, dict)
+        or catalog.get("schema") != "rar-scout-catalog/1.0"
+        or not isinstance(catalog.get("skills"), list)
+    ):
+        raise BridgeRequestError(
+            "invalid-catalog",
+            "RAR Scout catalog has the wrong schema.",
+        )
+    return catalog
+
+
+def _managed_marker(directory):
+    return directory / ".rar-managed.json"
+
+
+def _file_hash_map(files, label, failures):
+    if not isinstance(files, list) or not files:
+        failures.append(f"{label}: no file records")
+        return {}
+    records = {}
+    for item in files:
+        if not isinstance(item, dict):
+            failures.append(f"{label}: file record is not an object")
+            continue
+        relative = Path(str(item.get("path") or ""))
+        relative_text = relative.as_posix()
+        digest = str(item.get("sha256") or "")
+        if (
+            relative.is_absolute()
+            or ".." in relative.parts
+            or relative_text in {"", "."}
+        ):
+            failures.append(f"{label}: invalid path {relative_text!r}")
+            continue
+        if relative_text in records:
+            failures.append(f"{label}: duplicate path {relative_text}")
+            continue
+        if not re.fullmatch(r"[0-9a-f]{64}", digest):
+            failures.append(f"{label}: invalid SHA-256 for {relative_text}")
+            continue
+        records[relative_text] = digest
+    return records
+
+
+def _verify_managed_skill(directory, marker, expected_skill=None):
+    failures = []
+    directory = Path(directory).resolve()
+    marker_files = _file_hash_map(
+        marker.get("files"),
+        "marker",
+        failures,
+    )
+    expected_files = marker_files
+    if expected_skill is not None:
+        expected_files = _file_hash_map(
+            expected_skill.get("files"),
+            "catalog",
+            failures,
+        )
+        expected_fields = {
+            "skill_name": expected_skill.get("skill_name"),
+            "identity": expected_skill.get("identity"),
+            "version": expected_skill.get("version"),
+            "channel": expected_skill.get("channel"),
+            "skill_sha256": expected_skill.get("skill_sha256"),
+        }
+        for key, expected in expected_fields.items():
+            if marker.get(key) != expected:
+                failures.append(
+                    f"marker {key}: {marker.get(key)!r} != {expected!r}"
+                )
+        if marker_files != expected_files:
+            failures.append("marker files do not match the trusted catalog")
+
+    for relative_text, expected_hash in expected_files.items():
+        relative = Path(relative_text)
+        target = (directory / relative).resolve()
+        if (
+            relative.is_absolute()
+            or ".." in relative.parts
+            or (
+                directory != target
+                and directory not in target.parents
+            )
+        ):
+            failures.append(f"{relative}: path escapes skill directory")
+            continue
+        if not target.is_file():
+            failures.append(f"{relative}: missing")
+            continue
+        actual = _sha256(target.read_bytes())
+        if actual != expected_hash:
+            failures.append(
+                f"{relative}: {actual} != {expected_hash}"
+            )
+    actual_files = {
+        path.relative_to(directory).as_posix()
+        for path in directory.rglob("*")
+        if path.is_file()
+    }
+    allowed_files = set(expected_files) | {".rar-managed.json"}
+    for extra in sorted(actual_files - allowed_files):
+        failures.append(f"{extra}: unexpected managed-skill file")
+    return failures
+
+
+def _load_marker(directory):
+    marker_path = _managed_marker(directory)
+    if not marker_path.is_file():
+        return None
+    try:
+        marker = json.loads(marker_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if not isinstance(marker, dict):
+        return None
+    return marker if marker.get("schema") == "rar-managed-skill/1.0" else None
+
+
+def _installer_path(filename, timeout_seconds=None):
+    metadata = RAPP_INSTALLERS[filename]
+    bundled = Path(__file__).resolve().parent / "installer" / filename
+    if bundled.is_file():
+        data = bundled.read_bytes()
+        actual = _sha256(data)
+        if actual != metadata["sha256"]:
+            raise BridgeRequestError(
+                "integrity-mismatch",
+                (
+                    f"Bundled {filename} failed SHA-256 verification "
+                    f"(expected {metadata['sha256']}, got {actual})."
+                ),
+            )
+        return bundled
+
+    state = _skills_state_directory() / "installer"
+    state.mkdir(parents=True, exist_ok=True)
+    destination = state / filename
+    data = _fetch_verified(
+        metadata["url"],
+        metadata["sha256"],
+        timeout_seconds,
+    )
+    destination.write_bytes(data)
+    if filename.endswith(".sh"):
+        destination.chmod(0o700)
+    return destination
+
+
+def _safe_https_url(value):
+    text = str(value or "").strip()
+    if not text:
+        return None
+    parsed = urllib.parse.urlsplit(text)
+    if (
+        parsed.scheme != "https"
+        or not parsed.netloc
+        or parsed.username
+        or parsed.password
+    ):
+        return None
+    return text
+
+
+def _manual_export_html(skill, platform):
+    identity = html.escape(str(skill.get("identity") or ""))
+    skill_name = html.escape(str(skill.get("skill_name") or ""))
+    version = html.escape(str(skill.get("version") or ""))
+    channel = html.escape(str(skill.get("channel") or ""))
+    description = html.escape(str(skill.get("description") or ""))
+    source_sha = html.escape(str(skill.get("source_sha256") or ""))
+    skill_sha = html.escape(str(skill.get("skill_sha256") or ""))
+    safe_import_url = _safe_https_url(skill.get("import_url"))
+    import_link = (
+        '<a href="{0}">{0}</a>'.format(
+            html.escape(safe_import_url, quote=True)
+        )
+        if safe_import_url
+        else "No safe HTTPS bundle URL is published."
+    )
+    target_label = {
+        "all": "All platforms",
+        "scout": "Microsoft Scout",
+        "cowork": "Microsoft Copilot Cowork",
+        "copilot-studio": "Microsoft Copilot Studio",
+    }[platform]
+    rows = []
+    for item in skill.get("files") or []:
+        rows.append(
+            "<tr><td><code>{}</code></td><td><code>{}</code></td></tr>".format(
+                html.escape(str(item.get("path") or "")),
+                html.escape(str(item.get("sha256") or "")),
+            )
+        )
+    file_rows = "\n".join(rows)
+    selected = lambda value: (
+        " platform selected" if platform in {"all", value} else " platform"
+    )
+    bridge_instruction = html.escape(
+        "For capability "
+        + str(skill.get("identity") or "")
+        + ", call the RAPP Brainstem MCP tool brainstem_chat with the user's "
+        "request in user_input. The canonical agent SHA-256 is "
+        + str(skill.get("source_sha256") or "")
+        + ". Do not recreate, translate, or paraphrase the linked Python "
+        "implementation. If the bridge is unavailable, report that exact "
+        "dependency instead of simulating success."
+    )
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAPP manual export - {skill_name}</title>
+<style>
+:root {{ color-scheme: light dark; --ink:#111827; --muted:#5b6473;
+  --panel:#f5f7fb; --line:#d8dee9; --accent:#5b4bdb; --ok:#147d64; }}
+@media (prefers-color-scheme: dark) {{
+  :root {{ --ink:#edf2f7; --muted:#aab4c3; --panel:#151923;
+    --line:#343b4b; --accent:#9e93ff; --ok:#57d9b5; }}
+}}
+* {{ box-sizing:border-box; }}
+body {{ margin:0; font:16px/1.55 ui-sans-serif,system-ui,-apple-system,
+  BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink);
+  background:Canvas; }}
+main {{ width:min(980px,calc(100% - 32px)); margin:36px auto 80px; }}
+h1 {{ margin:0 0 8px; font-size:clamp(2rem,6vw,4rem); line-height:1; }}
+h2 {{ margin-top:0; }}
+.eyebrow {{ color:var(--accent); font-weight:800; letter-spacing:.08em;
+  text-transform:uppercase; }}
+.summary,.platform,.integrity {{ border:1px solid var(--line);
+  border-radius:16px; padding:22px; margin:20px 0; background:var(--panel); }}
+.selected {{ border:2px solid var(--accent); }}
+.badge {{ display:inline-block; border:1px solid var(--line); border-radius:999px;
+  padding:4px 10px; margin:4px 6px 4px 0; }}
+code,pre {{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }}
+pre {{ white-space:pre-wrap; overflow-wrap:anywhere; border:1px solid var(--line);
+  border-radius:10px; padding:14px; background:Canvas; }}
+table {{ width:100%; border-collapse:collapse; }}
+th,td {{ padding:9px; border-bottom:1px solid var(--line); text-align:left;
+  vertical-align:top; overflow-wrap:anywhere; }}
+ol li {{ margin:.55rem 0; }}
+.warning {{ border-left:5px solid #d97706; padding:10px 14px; }}
+.exact {{ color:var(--ok); font-weight:750; }}
+a {{ color:var(--accent); }}
+@media print {{ .platform,.summary,.integrity {{ break-inside:avoid; }} }}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">RAPP/1 verified manual export</div>
+  <h1>{skill_name}</h1>
+  <p>{description}</p>
+  <section class="summary">
+    <span class="badge">{identity}</span>
+    <span class="badge">version {version}</span>
+    <span class="badge">channel {channel}</span>
+    <span class="badge">guide target: {html.escape(target_label)}</span>
+    <p class="exact">The package carries the original agent bytes, an exact
+    reverse capsule, a SHA-256 lock, and the checksum-gated runner.</p>
+    <p>Run the local integrity preflight before loading:</p>
+    <pre>python3 skill/{skill_name}/scripts/run_agent.py --preflight</pre>
+  </section>
+
+  <section class="{selected('scout').strip()}">
+    <h2>Microsoft Scout</h2>
+    <ol>
+      <li>Open this export's <code>skill/{skill_name}/</code> directory.</li>
+      <li>Copy the whole directory to
+      <code>~/.copilot/skills/{skill_name}/</code>. Keep every companion file;
+      the lock and runner are part of the deterministic boundary.</li>
+      <li>In Scout settings, enable <strong>Load Copilot CLI skills</strong>,
+      then refresh or restart Scout so it rescans the shared directory.</li>
+      <li>Ask Scout to use <code>{skill_name}</code>. The skill instructs Scout
+      to run the checksum-verified Python entrypoint instead of recreating it.</li>
+    </ol>
+    <p>GitHub import alternative: {import_link}</p>
+  </section>
+
+  <section class="{selected('cowork').strip()}">
+    <h2>Microsoft Copilot Cowork</h2>
+    <ol>
+      <li>Open <strong>Customize - Skills</strong>, select the arrow beside
+      <strong>Add</strong>, choose <strong>Upload skill</strong>, and upload
+      <code>{skill_name}.zip</code>.</li>
+      <li>Manual OneDrive alternative: copy the files into
+      <code>/Documents/Cowork/skills/{skill_name}/</code>. Cowork discovers
+      custom skills at the start of the next session.</li>
+      <li>Review Cowork's automatic Skill Report and resolve any safety,
+      trigger, or conflict gate before sharing the skill.</li>
+      <li>Keep the package intact. Cowork allows a <code>SKILL.md</code> plus
+      companion files; removing the runner or lock removes exact execution.</li>
+    </ol>
+    <p class="warning">If the Cowork tenant does not permit companion-script
+    execution, route the skill through the RAPP Brainstem MCP bridge. Do not
+    claim the Python behavior ran when only its Markdown instructions loaded.</p>
+    <p><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/use-cowork#build-a-skill-manually-in-onedrive">Official Cowork custom-skill instructions</a></p>
+  </section>
+
+  <section class="{selected('copilot-studio').strip()}">
+    <h2>Microsoft Copilot Studio</h2>
+    <p>Copilot Studio does not directly import a Copilot CLI
+    <code>SKILL.md</code>. Preserve RAPP determinism by binding the agent to
+    the Brainstem MCP tool rather than pasting or translating Python.</p>
+    <ol>
+      <li>Create or clone a CLI-authored Copilot Studio workspace with
+      <code>pac copilot init</code> or <code>pac copilot clone</code>.</li>
+      <li>Add a network-reachable RAPP Brainstem MCP server as a tool. Local
+      stdio is for desktop clients; Copilot Studio needs an HTTPS MCP endpoint.</li>
+      <li>Add the following binding to the agent instructions:</li>
+    </ol>
+    <pre>{bridge_instruction}</pre>
+    <ol start="4">
+      <li>Push with <code>pac copilot push</code>, test the actual MCP call,
+      then publish with <code>pac copilot publish</code>.</li>
+    </ol>
+    <p><a href="https://learn.microsoft.com/en-us/power-platform/developer/cli/reference/copilot">Official PAC Copilot command reference</a></p>
+  </section>
+
+  <section class="integrity">
+    <h2>Integrity ledger</h2>
+    <p>Canonical agent SHA-256: <code>{source_sha}</code><br>
+    Toasted skill SHA-256: <code>{skill_sha}</code></p>
+    <table><thead><tr><th>Package file</th><th>SHA-256</th></tr></thead>
+    <tbody>{file_rows}</tbody></table>
+  </section>
+</main>
+</body>
+</html>
+"""
+
+
 class RappSkillAgent(BasicAgent):
     def __init__(self):
         self.name = "RappSkill"
@@ -408,8 +858,11 @@ class RappSkillAgent(BasicAgent):
             "description": (
                 "Connects any SKILL-aware claw directly to a local or hosted "
                 "RAPP Brainstem over the one /chat wire, preserves sessions, "
-                "installs and proves the canonical RAPP SDK Builder, and "
-                "supplies the pinned full RAPP/1 protocol."
+                "installs and proves the canonical RAPP SDK Builder, hotloads "
+                "reversible RAR skills into Scout and Copilot CLI, exports "
+                "manual-loading guides for Scout, Copilot Cowork, and Copilot "
+                "Studio, bootstraps the global Brainstem, and supplies the "
+                "pinned RAPP/1 protocol."
             ),
             "parameters": {
                 "type": "object",
@@ -421,15 +874,29 @@ class RappSkillAgent(BasicAgent):
                             "ensure",
                             "chat",
                             "install_sdk",
+                            "bootstrap_callback",
                             "prove",
                             "protocol",
+                            "list",
+                            "install",
+                            "sync",
+                            "remove",
+                            "verify",
+                            "manual_export",
                         ],
                         "description": (
                             "status=inspect Brainstem; ensure=start an existing "
-                            "local install; chat=send work over POST /chat; "
+                            "or authorized fresh local install; "
+                            "chat=send work over POST /chat; "
                             "install_sdk=hotload the pinned SDK Builder; "
+                            "bootstrap_callback=install the self-bootstrapping "
+                            "external-AI callback agent into a loopback Brainstem; "
                             "prove=verify SDK parity and live Brainstem routing; "
-                            "protocol=return the RAPP/1 reference."
+                            "protocol=return the RAPP/1 reference; "
+                            "list/install/sync/remove/verify=manage reversible "
+                            "RAR skills in the shared Copilot/Scout skill "
+                            "directory; manual_export=write a verified package "
+                            "and browser-readable loading guide."
                         ),
                     },
                     "brainstem_url": {
@@ -487,11 +954,19 @@ class RappSkillAgent(BasicAgent):
                             "Optional local Brainstem launcher path for ensure."
                         ),
                     },
+                    "allow_install": {
+                        "type": "boolean",
+                        "description": (
+                            "Authorize ensure to launch the checksum-pinned "
+                            "global Brainstem installer when no installation exists."
+                        ),
+                    },
                     "force": {
                         "type": "boolean",
                         "description": (
                             "Allow install_sdk to back up and replace a differing "
-                            "existing SDK Builder."
+                            "existing SDK Builder, or bootstrap_callback to "
+                            "replace a differing callback agent."
                         ),
                     },
                     "install_sdk": {
@@ -507,6 +982,54 @@ class RappSkillAgent(BasicAgent):
                             "For protocol, fetch and return the complete pinned "
                             "SPEC.md after SHA-256 verification."
                         ),
+                    },
+                    "catalog_url": {
+                        "type": "string",
+                        "description": (
+                            "RAR Scout catalog URL or local path. Defaults to "
+                            "the public RAR catalog."
+                        ),
+                    },
+                    "channel": {
+                        "type": "string",
+                        "description": (
+                            "Skill channel for list/sync, such as starter, "
+                            "native, powercat, cowork-cookbook, rapplications, "
+                            "or all."
+                        ),
+                    },
+                    "agent": {
+                        "type": "string",
+                        "description": (
+                            "Canonical RAR identity or Scout skill name for "
+                            "install/remove."
+                        ),
+                    },
+                    "skills_dir": {
+                        "type": "string",
+                        "description": (
+                            "Shared Scout/Copilot skills directory. Defaults "
+                            "to ~/.copilot/skills."
+                        ),
+                    },
+                    "platform": {
+                        "type": "string",
+                        "enum": ["all", "scout", "cowork", "copilot-studio"],
+                        "description": (
+                            "Platform to emphasize in manual_export. The HTML "
+                            "guide always includes all supported platforms."
+                        ),
+                    },
+                    "output_dir": {
+                        "type": "string",
+                        "description": (
+                            "Destination directory for manual_export. Defaults "
+                            "to ~/Downloads/RAPP-Exports/<skill-name>."
+                        ),
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "description": "Optional maximum number of list results.",
                     },
                 },
                 "required": ["operation"],
@@ -526,16 +1049,31 @@ class RappSkillAgent(BasicAgent):
                 return self._chat(kwargs)
             if operation == "install_sdk":
                 return self._install_sdk(kwargs)
+            if operation == "bootstrap_callback":
+                return self._bootstrap_callback(kwargs)
             if operation == "prove":
                 return self._prove(kwargs)
             if operation == "protocol":
                 return self._protocol(kwargs)
+            if operation == "list":
+                return self._skills_list(kwargs)
+            if operation == "install":
+                return self._skills_install(kwargs)
+            if operation == "sync":
+                return self._skills_sync(kwargs)
+            if operation == "remove":
+                return self._skills_remove(kwargs)
+            if operation == "verify":
+                return self._skills_verify(kwargs)
+            if operation == "manual_export":
+                return self._manual_export(kwargs)
             return _json({
                 "status": "error",
                 "code": "unknown-operation",
                 "message": (
                     "operation must be status, ensure, chat, install_sdk, "
-                    "prove, or protocol"
+                    "bootstrap_callback, prove, protocol, list, install, sync, "
+                    "remove, verify, or manual_export"
                 ),
             })
         except BridgeRequestError as error:
@@ -617,19 +1155,16 @@ class RappSkillAgent(BasicAgent):
             )
         ).expanduser()
         if not launcher.is_file():
+            if bool(kwargs.get("allow_install")):
+                return self._bootstrap_global_brainstem(kwargs, base_url)
             return _json({
                 "status": "error",
                 "code": "brainstem-not-installed",
                 "message": "No existing Brainstem launcher was found.",
                 "expected_launcher": str(launcher),
-                "install": (
-                    "curl -sSfL "
-                    "https://raw.githubusercontent.com/kody-w/rapp-installer/"
-                    "main/install.sh | bash"
-                ),
                 "note": (
-                    "This agent does not download or execute remote installers. "
-                    "Run the published installer only after operator approval."
+                    "Re-run ensure with allow_install=true after the operator "
+                    "authorizes a fresh global Brainstem installation."
                 ),
             })
 
@@ -664,6 +1199,103 @@ class RappSkillAgent(BasicAgent):
             "code": "start-timeout",
             "message": "The launcher ran, but /health did not become ready.",
             "brainstem_url": base_url,
+        })
+
+    def _bootstrap_global_brainstem(self, kwargs, base_url):
+        system = platform.system().lower()
+        if system == "windows":
+            filename = "install.ps1"
+            command = [
+                "powershell",
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+            ]
+        elif system in {"darwin", "linux"}:
+            filename = "install.sh"
+            command = ["/bin/bash"]
+        else:
+            return _json({
+                "status": "error",
+                "code": "unsupported-platform",
+                "message": f"No pinned Brainstem installer for {system}.",
+            })
+
+        installer = _installer_path(
+            filename,
+            kwargs.get("timeout_seconds"),
+        )
+        state = _skills_state_directory()
+        logs = state / "logs"
+        logs.mkdir(parents=True, exist_ok=True)
+        log_path = logs / f"brainstem-install-{int(time.time())}.log"
+        log_handle = log_path.open("ab")
+        popen_kwargs = {
+            "stdin": subprocess.DEVNULL,
+            "stdout": log_handle,
+            "stderr": subprocess.STDOUT,
+            "cwd": str(installer.parent),
+            "env": os.environ.copy(),
+        }
+        if os.name == "posix":
+            popen_kwargs["start_new_session"] = True
+        elif os.name == "nt":
+            popen_kwargs["creationflags"] = (
+                subprocess.CREATE_NEW_PROCESS_GROUP
+                | subprocess.DETACHED_PROCESS
+            )
+        process = subprocess.Popen(
+            command + [str(installer)],
+            **popen_kwargs,
+        )
+        log_handle.close()
+
+        wait_seconds = _timeout(kwargs.get("timeout_seconds") or 300)
+        deadline = time.monotonic() + wait_seconds
+        while time.monotonic() < deadline:
+            try:
+                status = json.loads(self._status(kwargs))
+                if status.get("status") == "ok":
+                    sdk = json.loads(self._install_sdk(kwargs))
+                    return _json({
+                        "status": "ok",
+                        "operation": "ensure",
+                        "result": "installed-and-started",
+                        "brainstem": status,
+                        "sdk": sdk,
+                        "installer": {
+                            "commit": RAPP_INSTALLER_COMMIT,
+                            "sha256": RAPP_INSTALLERS[filename]["sha256"],
+                            "log": str(log_path),
+                        },
+                    })
+            except BridgeRequestError as error:
+                if error.code not in {"unreachable", "timeout"}:
+                    raise
+            if process.poll() is not None:
+                return _json({
+                    "status": "error",
+                    "code": "installer-exited",
+                    "message": (
+                        "The pinned Brainstem installer exited before "
+                        "/health became ready."
+                    ),
+                    "returncode": process.returncode,
+                    "log": str(log_path),
+                })
+            time.sleep(2)
+
+        return _json({
+            "status": "installing",
+            "operation": "ensure",
+            "message": (
+                "The pinned installer is still running. Complete any GitHub "
+                "device authorization it opened, then call status."
+            ),
+            "pid": process.pid,
+            "log": str(log_path),
+            "installer_commit": RAPP_INSTALLER_COMMIT,
         })
 
     def _chat(self, kwargs):
@@ -832,6 +1464,116 @@ class RappSkillAgent(BasicAgent):
             "source": RAPP_SDK_URL,
         })
 
+    def _bootstrap_callback(self, kwargs):
+        connection, health = self._health_payload(kwargs)
+        if not _is_loopback(connection["base_url"]):
+            return _json({
+                "status": "error",
+                "code": "remote-callback-bootstrap-unsupported",
+                "message": (
+                    "bootstrap_callback writes only to a loopback Brainstem. "
+                    "Hosted tiers require their own MCP deployment path."
+                ),
+            })
+
+        brainstem_dir = health.get("brainstem_dir")
+        if not isinstance(brainstem_dir, str) or not brainstem_dir:
+            raise BridgeRequestError(
+                "missing-brainstem-dir",
+                "/health did not return brainstem_dir.",
+                payload=health,
+            )
+        agents_dir = Path(brainstem_dir).expanduser().resolve() / "agents"
+        agents_dir.mkdir(parents=True, exist_ok=True)
+        destination = agents_dir / "mcp_callback_agent.py"
+        agent_bytes = _fetch_verified(
+            MCP_CALLBACK_URL,
+            MCP_CALLBACK_SHA256,
+            kwargs.get("timeout_seconds"),
+        )
+
+        existing_sha = None
+        backup = None
+        result = "installed"
+        if destination.exists():
+            existing_sha = _sha256(
+                destination.read_bytes().replace(b"\r\n", b"\n")
+            )
+            if existing_sha == MCP_CALLBACK_SHA256:
+                result = "already-installed"
+            else:
+                if not bool(kwargs.get("force")):
+                    return _json({
+                        "status": "error",
+                        "code": "existing-callback-agent-differs",
+                        "message": (
+                            "A different MCP callback agent already exists. "
+                            "Re-run with force=true to preserve a backup and "
+                            "replace it with the pinned drop-in."
+                        ),
+                        "path": str(destination),
+                        "existing_sha256": existing_sha,
+                        "pinned_sha256": MCP_CALLBACK_SHA256,
+                    })
+                backup = destination.with_name(
+                    destination.name + f".bak-{int(time.time())}"
+                )
+                shutil.copy2(destination, backup)
+
+        if result == "installed":
+            descriptor, temporary_name = tempfile.mkstemp(
+                prefix=".mcp-callback-",
+                suffix=".tmp",
+                dir=str(agents_dir),
+            )
+            try:
+                with os.fdopen(descriptor, "wb") as temporary:
+                    temporary.write(agent_bytes)
+                    temporary.flush()
+                    os.fsync(temporary.fileno())
+                os.replace(temporary_name, destination)
+            finally:
+                if os.path.exists(temporary_name):
+                    os.unlink(temporary_name)
+
+        module_spec = importlib.util.spec_from_file_location(
+            "_rapp_callback_bootstrap",
+            destination,
+        )
+        if module_spec is None or module_spec.loader is None:
+            raise ImportError(f"Could not load MCP callback agent from {destination}")
+        module = importlib.util.module_from_spec(module_spec)
+        previous_bytecode = sys.dont_write_bytecode
+        sys.dont_write_bytecode = True
+        try:
+            module_spec.loader.exec_module(module)
+        finally:
+            sys.dont_write_bytecode = previous_bytecode
+        callback_agent = module.McpCallbackAgent()
+        bootstrap = json.loads(
+            callback_agent.perform(operation="status")
+        )
+        refreshed = _request_json(
+            "GET",
+            connection["base_url"] + "/health",
+            timeout_seconds=connection["timeout_seconds"],
+            secret=connection["secret"],
+        )
+        bootstrap_ok = bootstrap.get("status") == "ok"
+        return _json({
+            "status": "ok" if bootstrap_ok else "error",
+            "operation": "bootstrap_callback",
+            "result": result,
+            "path": str(destination),
+            "sha256": MCP_CALLBACK_SHA256,
+            "source": MCP_CALLBACK_URL,
+            "source_commit": MCP_CALLBACK_COMMIT,
+            "backup": str(backup) if backup else None,
+            "agent_visible": "McpCallback" in (refreshed.get("agents") or []),
+            "bootstrap": bootstrap,
+            "grail_modified": False,
+        })
+
     def _prove(self, kwargs):
         install_enabled = kwargs.get("install_sdk", True) is not False
         install_result = None
@@ -938,6 +1680,595 @@ class RappSkillAgent(BasicAgent):
             )
             payload["spec_markdown"] = spec_bytes.decode("utf-8")
         return _json(payload)
+
+    def _skills_catalog(self, kwargs):
+        location = str(
+            kwargs.get("catalog_url")
+            or os.environ.get("RAPP_SCOUT_CATALOG_URL")
+            or RAR_SCOUT_CATALOG_URL
+        ).strip()
+        return location, _catalog_payload(
+            location,
+            kwargs.get("timeout_seconds"),
+        )
+
+    @staticmethod
+    def _skill_summary(skill):
+        return {
+            "identity": skill.get("identity"),
+            "skill_name": skill.get("skill_name"),
+            "channel": skill.get("channel"),
+            "version": skill.get("version"),
+            "description": skill.get("description"),
+            "requires_env": skill.get("requires_env") or [],
+            "import_url": skill.get("import_url"),
+        }
+
+    def _skills_list(self, kwargs):
+        location, catalog = self._skills_catalog(kwargs)
+        channel = str(kwargs.get("channel") or "all").strip().lower()
+        skills = [
+            skill
+            for skill in catalog["skills"]
+            if channel == "all" or skill.get("channel") == channel
+        ]
+        limit = kwargs.get("limit")
+        if limit is not None:
+            limit = int(limit)
+            if limit < 1:
+                raise ValueError("limit must be positive")
+            skills = skills[:limit]
+        return _json({
+            "status": "ok",
+            "operation": "list",
+            "catalog": location,
+            "channel": channel,
+            "count": len(skills),
+            "skills": [self._skill_summary(skill) for skill in skills],
+            "channels": sorted({
+                skill.get("channel")
+                for skill in catalog["skills"]
+                if skill.get("channel")
+            }),
+        })
+
+    @staticmethod
+    def _find_catalog_skill(catalog, value):
+        wanted = str(value or "").strip().lower()
+        if not wanted:
+            return None
+        matches = [
+            skill
+            for skill in catalog["skills"]
+            if wanted in {
+                str(skill.get("identity") or "").lower(),
+                str(skill.get("skill_name") or "").lower(),
+            }
+        ]
+        if len(matches) > 1:
+            raise ValueError(f"multiple catalog skills matched {value!r}")
+        return matches[0] if matches else None
+
+    def _stage_catalog_skill(
+        self,
+        skill,
+        catalog_location,
+        staging_root,
+        timeout_seconds,
+    ):
+        skill_name = _safe_skill_name(skill.get("skill_name"))
+        files = skill.get("files")
+        if not isinstance(files, list) or not files:
+            raise BridgeRequestError(
+                "invalid-catalog",
+                f"{skill_name} has no catalog files.",
+            )
+        destination = staging_root / skill_name
+        destination.mkdir(parents=True)
+
+        def download(item):
+            relative = Path(str(item.get("path") or ""))
+            if (
+                relative.is_absolute()
+                or ".." in relative.parts
+                or not item.get("url")
+                or not re.fullmatch(
+                    r"[0-9a-f]{64}",
+                    str(item.get("sha256") or ""),
+                )
+            ):
+                raise BridgeRequestError(
+                    "invalid-catalog",
+                    f"{skill_name} contains an invalid file record.",
+                )
+            data = _read_location(item["url"], timeout_seconds)
+            actual = _sha256(data)
+            if actual != item["sha256"]:
+                raise BridgeRequestError(
+                    "integrity-mismatch",
+                    (
+                        f"{skill_name}/{relative} failed SHA-256 "
+                        f"(expected {item['sha256']}, got {actual})."
+                    ),
+                )
+            return relative, data
+
+        downloaded = []
+        with ThreadPoolExecutor(max_workers=min(8, len(files))) as pool:
+            futures = [pool.submit(download, item) for item in files]
+            for future in as_completed(futures):
+                downloaded.append(future.result())
+        for relative, data in sorted(downloaded):
+            target = (destination / relative).resolve()
+            if destination != target and destination not in target.parents:
+                raise BridgeRequestError(
+                    "invalid-catalog",
+                    f"{skill_name}/{relative} escapes the skill directory.",
+                )
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(data)
+            if relative.as_posix() == "scripts/run_agent.py":
+                target.chmod(0o755)
+
+        skill_file = destination / "SKILL.md"
+        if not skill_file.is_file():
+            raise BridgeRequestError(
+                "invalid-catalog",
+                f"{skill_name} does not contain SKILL.md.",
+            )
+        marker = {
+            "schema": "rar-managed-skill/1.0",
+            "skill_name": skill_name,
+            "identity": skill.get("identity"),
+            "version": skill.get("version"),
+            "channel": skill.get("channel"),
+            "catalog": catalog_location,
+            "skill_sha256": skill.get("skill_sha256"),
+            "files": files,
+            "installed_at": int(time.time()),
+        }
+        _managed_marker(destination).write_text(
+            _json(marker),
+            encoding="utf-8",
+        )
+        return destination, marker
+
+    def _install_catalog_skills(self, selected, kwargs, catalog_location):
+        if not selected:
+            return {
+                "status": "ok",
+                "installed": [],
+                "unchanged": [],
+                "backups": [],
+            }
+        skills_dir = _skills_directory(kwargs.get("skills_dir"))
+        skills_dir.mkdir(parents=True, exist_ok=True)
+        state_dir = _skills_state_directory()
+        state_dir.mkdir(parents=True, exist_ok=True)
+        force = bool(kwargs.get("force"))
+
+        with tempfile.TemporaryDirectory(
+            prefix="staging-",
+            dir=state_dir,
+        ) as temporary:
+            staging_root = Path(temporary)
+            staged = {}
+            for skill in selected:
+                directory, marker = self._stage_catalog_skill(
+                    skill,
+                    catalog_location,
+                    staging_root,
+                    kwargs.get("timeout_seconds"),
+                )
+                staged[skill["skill_name"]] = (
+                    directory,
+                    marker,
+                    skill,
+                )
+
+            unchanged = []
+            replacements = []
+            for skill_name, (directory, marker, skill) in staged.items():
+                target = skills_dir / skill_name
+                if not target.exists():
+                    replacements.append((skill_name, directory, target, None))
+                    continue
+                current_marker = _load_marker(target)
+                if current_marker is None:
+                    raise BridgeRequestError(
+                        "unmanaged-skill-conflict",
+                        (
+                            f"{target} already exists and is not managed by RAR. "
+                            "It will not be overwritten."
+                        ),
+                    )
+                failures = _verify_managed_skill(
+                    target,
+                    current_marker,
+                    skill,
+                )
+                if failures and not force:
+                    raise BridgeRequestError(
+                        "managed-skill-modified",
+                        (
+                            f"{skill_name} was modified locally. Re-run with "
+                            "force=true to preserve a backup and replace it."
+                        ),
+                        payload={"failures": failures},
+                    )
+                if (
+                    not failures
+                    and current_marker.get("skill_sha256")
+                    == marker.get("skill_sha256")
+                ):
+                    unchanged.append(skill_name)
+                    continue
+                replacements.append(
+                    (skill_name, directory, target, current_marker)
+                )
+
+            transaction = str(int(time.time() * 1000))
+            backup_root = state_dir / "backups" / transaction
+            moved_backups = []
+            installed = []
+            installed_targets = []
+            try:
+                for skill_name, directory, target, current_marker in replacements:
+                    backup = None
+                    if target.exists():
+                        backup_root.mkdir(parents=True, exist_ok=True)
+                        backup = backup_root / skill_name
+                        os.replace(target, backup)
+                        moved_backups.append((target, backup))
+                    os.replace(directory, target)
+                    installed.append(skill_name)
+                    installed_targets.append(target)
+            except OSError:
+                for target in reversed(installed_targets):
+                    if target.exists():
+                        shutil.rmtree(target)
+                for target, backup in reversed(moved_backups):
+                    if backup.exists():
+                        os.replace(backup, target)
+                raise
+
+        return {
+            "status": "ok",
+            "installed": installed,
+            "unchanged": unchanged,
+            "backups": [
+                str(backup)
+                for _, backup in moved_backups
+                if backup.exists()
+            ],
+            "skills_dir": str(skills_dir),
+        }
+
+    def _skills_install(self, kwargs):
+        value = kwargs.get("agent")
+        location, catalog = self._skills_catalog(kwargs)
+        skill = self._find_catalog_skill(catalog, value)
+        if skill is None:
+            return _json({
+                "status": "error",
+                "code": "skill-not-found",
+                "message": f"No RAR Scout skill matched {value!r}.",
+            })
+        result = self._install_catalog_skills(
+            [skill],
+            kwargs,
+            location,
+        )
+        result.update({
+            "operation": "install",
+            "requested": value,
+        })
+        return _json(result)
+
+    def _skills_sync(self, kwargs):
+        location, catalog = self._skills_catalog(kwargs)
+        channel = str(kwargs.get("channel") or "").strip().lower()
+        if not channel:
+            return _json({
+                "status": "error",
+                "code": "channel-required",
+                "message": (
+                    "sync requires an explicit channel: starter, native, "
+                    "powercat, cowork-cookbook, rapplications, or all"
+                ),
+            })
+        selected = [
+            skill
+            for skill in catalog["skills"]
+            if channel == "all" or skill.get("channel") == channel
+        ]
+        if not selected:
+            return _json({
+                "status": "error",
+                "code": "channel-not-found",
+                "message": f"No skills found for channel {channel!r}.",
+            })
+        result = self._install_catalog_skills(
+            selected,
+            kwargs,
+            location,
+        )
+        result.update({
+            "operation": "sync",
+            "channel": channel,
+            "selected": len(selected),
+        })
+        return _json(result)
+
+    def _skills_remove(self, kwargs):
+        value = kwargs.get("agent")
+        location, catalog = self._skills_catalog(kwargs)
+        skill = self._find_catalog_skill(catalog, value)
+        if skill is None:
+            return _json({
+                "status": "error",
+                "code": "skill-not-found",
+                "message": f"No RAR Scout skill matched {value!r}.",
+            })
+        skills_dir = _skills_directory(kwargs.get("skills_dir"))
+        target = skills_dir / _safe_skill_name(skill["skill_name"])
+        marker = _load_marker(target)
+        if marker is None:
+            return _json({
+                "status": "error",
+                "code": "not-managed",
+                "message": f"{target} is not a RAR-managed skill.",
+            })
+        state_dir = _skills_state_directory()
+        backup = (
+            state_dir
+            / "backups"
+            / f"removed-{int(time.time() * 1000)}"
+            / target.name
+        )
+        backup.parent.mkdir(parents=True, exist_ok=True)
+        os.replace(target, backup)
+        return _json({
+            "status": "ok",
+            "operation": "remove",
+            "skill_name": target.name,
+            "backup": str(backup),
+            "catalog": location,
+        })
+
+    def _manual_export(self, kwargs):
+        value = kwargs.get("agent")
+        location, catalog = self._skills_catalog(kwargs)
+        skill = self._find_catalog_skill(catalog, value)
+        if skill is None:
+            return _json({
+                "status": "error",
+                "code": "skill-not-found",
+                "message": f"No RAR Scout skill matched {value!r}.",
+            })
+
+        platform_name = str(kwargs.get("platform") or "all").strip().lower()
+        platform_aliases = {
+            "copilot_studio": "copilot-studio",
+            "studio": "copilot-studio",
+            "copilot-cowork": "cowork",
+            "microsoft-cowork": "cowork",
+        }
+        platform_name = platform_aliases.get(platform_name, platform_name)
+        allowed = {"all", "scout", "cowork", "copilot-studio"}
+        if platform_name not in allowed:
+            raise ValueError(
+                "platform must be all, scout, cowork, or copilot-studio"
+            )
+
+        skill_name = _safe_skill_name(skill.get("skill_name"))
+        output_value = kwargs.get("output_dir")
+        output = Path(
+            str(
+                output_value
+                or Path.home()
+                / "Downloads"
+                / "RAPP-Exports"
+                / skill_name
+            )
+        ).expanduser().resolve()
+        if output == Path(output.anchor) or output == Path.home().resolve():
+            raise ValueError("output_dir must be a dedicated child directory")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        if output.exists() and not bool(kwargs.get("force")):
+            return _json({
+                "status": "error",
+                "code": "export-exists",
+                "message": (
+                    f"{output} already exists. Re-run with force=true to "
+                    "preserve a backup and replace it."
+                ),
+                "path": str(output),
+            })
+
+        backup = None
+        with tempfile.TemporaryDirectory(
+            prefix=".rapp-manual-export-",
+            dir=str(output.parent),
+        ) as temporary:
+            staging = Path(temporary) / "export"
+            package_root = staging / "skill"
+            package_root.mkdir(parents=True)
+            skill_dir, _ = self._stage_catalog_skill(
+                skill,
+                location,
+                package_root,
+                kwargs.get("timeout_seconds"),
+            )
+            marker = _managed_marker(skill_dir)
+            if marker.exists():
+                marker.unlink()
+
+            zip_path = staging / f"{skill_name}.zip"
+            with zipfile.ZipFile(
+                zip_path,
+                mode="w",
+                compression=zipfile.ZIP_DEFLATED,
+            ) as archive:
+                for path in sorted(
+                    item for item in skill_dir.rglob("*") if item.is_file()
+                ):
+                    archive.write(path, path.relative_to(skill_dir))
+
+            instruction = (
+                f"# Copilot Studio binding for {skill.get('identity')}\n\n"
+                "Copilot Studio does not execute this RAPP agent.py directly. "
+                "Add a network-reachable RAPP Brainstem MCP server as a tool, "
+                "then add this instruction to the CLI-authored agent:\n\n"
+                f"> For capability `{skill.get('identity')}`, call the RAPP "
+                "Brainstem MCP tool `brainstem_chat` with the user's request "
+                f"in `user_input`. The canonical agent SHA-256 is "
+                f"`{skill.get('source_sha256')}`. Do not recreate, translate, "
+                "or paraphrase the linked Python implementation. If the "
+                "bridge is unavailable, report that exact dependency instead "
+                "of simulating success.\n"
+            )
+            (staging / "copilot-studio-instructions.md").write_text(
+                instruction,
+                encoding="utf-8",
+                newline="\n",
+            )
+            export_manifest = {
+                "schema": "rar-manual-export/1.0",
+                "identity": skill.get("identity"),
+                "skill_name": skill_name,
+                "version": skill.get("version"),
+                "channel": skill.get("channel"),
+                "platform": platform_name,
+                "catalog": location,
+                "source_sha256": skill.get("source_sha256"),
+                "skill_sha256": skill.get("skill_sha256"),
+                "linked_agent": skill.get("linked_agent"),
+                "import_url": skill.get("import_url"),
+                "files": skill.get("files") or [],
+                "artifacts": {
+                    "guide": "guide.html",
+                    "skill_directory": f"skill/{skill_name}",
+                    "cowork_upload": f"{skill_name}.zip",
+                    "copilot_studio_instructions": (
+                        "copilot-studio-instructions.md"
+                    ),
+                },
+            }
+            (staging / "rapp-export.json").write_text(
+                _json(export_manifest),
+                encoding="utf-8",
+                newline="\n",
+            )
+            (staging / "guide.html").write_text(
+                _manual_export_html(skill, platform_name),
+                encoding="utf-8",
+                newline="\n",
+            )
+
+            staging_files = [
+                path
+                for path in staging.rglob("*")
+                if path.is_file()
+            ]
+            file_count = len(
+                [path for path in skill_dir.rglob("*") if path.is_file()]
+            )
+            skill_bytes = sum(
+                path.stat().st_size
+                for path in skill_dir.rglob("*")
+                if path.is_file()
+            )
+            if output.exists():
+                backup = output.with_name(
+                    output.name + f".bak-{int(time.time() * 1000)}"
+                )
+                os.replace(output, backup)
+            try:
+                os.replace(staging, output)
+            except OSError:
+                if backup is not None and backup.exists() and not output.exists():
+                    os.replace(backup, output)
+                raise
+
+        return _json({
+            "status": "ok",
+            "operation": "manual_export",
+            "identity": skill.get("identity"),
+            "skill_name": skill_name,
+            "platform": platform_name,
+            "output_dir": str(output),
+            "guide": str(output / "guide.html"),
+            "cowork_upload": str(output / f"{skill_name}.zip"),
+            "skill_directory": str(output / "skill" / skill_name),
+            "copilot_studio_instructions": str(
+                output / "copilot-studio-instructions.md"
+            ),
+            "backup": str(backup) if backup is not None else None,
+            "source_sha256": skill.get("source_sha256"),
+            "skill_sha256": skill.get("skill_sha256"),
+            "package_files": len(staging_files),
+            "skill_files": file_count,
+            "skill_bytes": skill_bytes,
+            "cowork_limits": {
+                "max_skill_md_bytes": 1_000_000,
+                "max_companion_files": 20,
+                "max_total_bytes": 10_000_000,
+                "within_limits": (
+                    file_count <= 21
+                    and skill_bytes <= 10_000_000
+                    and (output / "skill" / skill_name / "SKILL.md").stat().st_size
+                    <= 1_000_000
+                ),
+            },
+        })
+
+    def _skills_verify(self, kwargs):
+        location, catalog = self._skills_catalog(kwargs)
+        catalog_by_name = {
+            skill.get("skill_name"): skill
+            for skill in catalog["skills"]
+            if skill.get("skill_name")
+        }
+        skills_dir = _skills_directory(kwargs.get("skills_dir"))
+        verified = []
+        failures = []
+        if skills_dir.is_dir():
+            for directory in sorted(
+                path for path in skills_dir.iterdir() if path.is_dir()
+            ):
+                marker_path = _managed_marker(directory)
+                marker = _load_marker(directory)
+                if marker is None:
+                    if marker_path.exists() or directory.name in catalog_by_name:
+                        failures.append({
+                            "skill_name": directory.name,
+                            "failures": [
+                                "catalog skill directory has no valid RAR marker"
+                            ],
+                        })
+                    continue
+                expected = catalog_by_name.get(directory.name)
+                problems = (
+                    _verify_managed_skill(directory, marker, expected)
+                    if expected is not None
+                    else ["managed skill is absent from the trusted catalog"]
+                )
+                if problems:
+                    failures.append({
+                        "skill_name": directory.name,
+                        "failures": problems,
+                    })
+                else:
+                    verified.append(directory.name)
+        return _json({
+            "status": "ok" if not failures else "error",
+            "operation": "verify",
+            "skills_dir": str(skills_dir),
+            "catalog": location,
+            "verified": verified,
+            "failures": failures,
+        })
 
 
 def main(argv=None):

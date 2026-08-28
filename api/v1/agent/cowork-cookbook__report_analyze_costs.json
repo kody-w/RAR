@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__report_analyze_costs",
+  "name": "Analyze costs Summary Report",
+  "rar_name": "@cowork-cookbook/report_analyze_costs",
+  "rappid": "rappid:@cowork-cookbook/report_analyze_costs:19ff63fb16a7bc179a64bcc6b8cab2e4a81900d9548958d6f1e983183496399b",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "report",
+    "record_to_report",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Builds a structured summary report of analyze costs activity with totals, trends, and breakdowns.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.0,
+  "sha256": "3625f7f128a0346d12c18275b7dfd86dd334bdd7cfed02dd0a16d055f3ecb89f",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__report_analyze_costs.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/report_analyze_costs_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__report_analyze_costs.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__report_analyze_costs.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/report_analyze_costs_agent.py"
+}

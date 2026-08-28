@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__ppt_exec_estimate_project_contracts",
+  "name": "Estimate project contracts Executive PowerPoint Deck",
+  "rar_name": "@cowork-cookbook/ppt_exec_estimate_project_contracts",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_estimate_project_contracts:67b65f4384d988c2e3eefaa1dda170e61c5cf98322d37facee0ff7ffeb300cba",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "ppt_exec",
+    "project_to_profit",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates an executive-ready PowerPoint deck on estimate project contracts status, complete with charts and talking-point notes.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "21bf97fa5ae4e60aca3130d93c34902379df8a379ae203a501927347e3288882",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_estimate_project_contracts.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/ppt_exec_estimate_project_contracts_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_estimate_project_contracts.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_estimate_project_contracts.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/ppt_exec_estimate_project_contracts_agent.py"
+}

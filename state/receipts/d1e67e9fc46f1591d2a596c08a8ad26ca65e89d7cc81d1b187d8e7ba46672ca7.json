@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/ppt_exec_evaluate_marketing_financials",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "aaf10b83a27dbd73fbcb2a9ed86cbdea76d7ac197079e9a180cd9926204f94c1"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_evaluate_marketing_financials_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_d1e67e9fc46f1591d2a596c08a8ad26ca65e89d7cc81d1b187d8e7ba46672ca7",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "175f6d8e6ef67c0b221922653415c55c2dd5bd7190fa9695bdf16e6fea9d499c",
+  "receipt": "rar_6ceaeb88c81daf34ee0d0a256bcb7c45e9d8c2d3cb350ae01fca07f9ff936f3a",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_d1e67e9fc46f1591d2a596c0",
+ "revision_id": "d1e67e9fc46f1591d2a596c08a8ad26ca65e89d7cc81d1b187d8e7ba46672ca7",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

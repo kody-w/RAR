@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__report_comply_with_customer_data_regulations",
+  "name": "Comply with customer data regulations Summary Report",
+  "rar_name": "@cowork-cookbook/report_comply_with_customer_data_regulations",
+  "rappid": "rappid:@cowork-cookbook/report_comply_with_customer_data_regulations:0861c9e187761b004d17e771463d5fcf06634319b893ba26b73046e73d6d4ade",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "report",
+    "concept_to_market",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Builds a structured summary report of comply with customer data regulations activity with totals, trends, and breakdowns.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.3,
+  "sha256": "d7c742212ddccb4d5b3e96d1361f3904ca535ad0fcaabb52137a6f5e191b4b5c",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__report_comply_with_customer_data_regulations.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/report_comply_with_customer_data_regulations_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__report_comply_with_customer_data_regulations.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__report_comply_with_customer_data_regulations.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/report_comply_with_customer_data_regulations_agent.py"
+}

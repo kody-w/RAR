@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/report_pay_taxes",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ba4485fd5f255529d038853e151158f1b37214f599aebcc4b645210289aae64d"
+ },
+ "canonical_path": "agents/@cowork-cookbook/report_pay_taxes_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_f751a480c3bcf6f7fc099d7e7924367b47fd36a0c844113b88be39c4298f3be4",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "c32aa91817afa25bb7f7576cc71a4c68fa37a8153e8ebfe3e1eaccdf39565697",
+  "receipt": "rar_64d8a8f6247b552e22f47487056407dc91fc9b983b4804002859afcf9fb0ad82",
+  "version": "2.0.0"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_f751a480c3bcf6f7fc099d7e",
+ "revision_id": "f751a480c3bcf6f7fc099d7e7924367b47fd36a0c844113b88be39c4298f3be4",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

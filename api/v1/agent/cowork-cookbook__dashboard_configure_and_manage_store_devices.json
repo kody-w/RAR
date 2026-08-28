@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__dashboard_configure_and_manage_store_devices",
+  "name": "Configure and manage store devices Interactive HTML Dashboard",
+  "rar_name": "@cowork-cookbook/dashboard_configure_and_manage_store_devices",
+  "rappid": "rappid:@cowork-cookbook/dashboard_configure_and_manage_store_devices:d754afe49ffd118096203d272fabbdea4af807f332a25d10e4dcaeebf8f0c2ac",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "dashboard",
+    "administer_to_operate",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Produces a self-contained interactive HTML dashboard for configure and manage store devices - opens in any browser, no D365 access needed by the viewer.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "40c7d4ca1a269ef870a867d4647a7d49c9a4c5a9e7bb84b57fbc42bb63dc1df3",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__dashboard_configure_and_manage_store_devices.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/dashboard_configure_and_manage_store_devices_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__dashboard_configure_and_manage_store_devices.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__dashboard_configure_and_manage_store_devices.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/dashboard_configure_and_manage_store_devices_agent.py"
+}

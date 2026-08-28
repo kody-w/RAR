@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__demo_data_track_additional_information_against_a_case",
+  "name": "Track additional information against a case Demo Data Generator",
+  "rar_name": "@cowork-cookbook/demo_data_track_additional_information_against_a_case",
+  "rappid": "rappid:@cowork-cookbook/demo_data_track_additional_information_against_a_case:2c384f373c6d681d00de709b00e9f4fe9bef7406519f4e4322d14aa5ccaa0625",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "demo_data",
+    "case_to_resolution",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates and creates realistic demo records for track additional information against a case in a sandbox tenant for training and pilot scenarios.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "def6fc2da257056950376e0f56964395f161b9eab5a4503f7dd659bcc513dc67",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__demo_data_track_additional_information_against_a_case.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/demo_data_track_additional_information_against_a_case_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_track_additional_information_against_a_case.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_track_additional_information_against_a_case.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/demo_data_track_additional_information_against_a_case_agent.py"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__ppt_exec_rate_loads",
+  "name": "Rate loads Executive PowerPoint Deck",
+  "rar_name": "@cowork-cookbook/ppt_exec_rate_loads",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_rate_loads:71519a2648c80137a590a7aafa4c70f22b11bb43faa24b7dce11de7e655f036d",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "ppt_exec",
+    "inventory_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates an executive-ready PowerPoint deck on rate loads status, complete with charts and talking-point notes.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "ea06596ec94b54c2d96c10334a7f7a9f977efc3c03d92c058ab949bf9641d5e5",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_rate_loads.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/ppt_exec_rate_loads_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_rate_loads.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_rate_loads.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/ppt_exec_rate_loads_agent.py"
+}

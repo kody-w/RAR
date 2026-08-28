@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__configure_release_goods_for_picking",
+  "name": "Release goods for picking Configuration Bulk Setup",
+  "rar_name": "@cowork-cookbook/configure_release_goods_for_picking",
+  "rappid": "rappid:@cowork-cookbook/configure_release_goods_for_picking:28795386feb438303a8de7984344c8d607617a27796d52d8ba394ee0a4ca2de6",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "configure",
+    "inventory_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Applies a bulk configuration change to release goods for picking from an input Excel file, with validation and rollback support.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.6,
+  "sha256": "9d161e71d48a846e968a4c2114eeda9a323287ffa6d30693539941e9d5785f86",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_release_goods_for_picking.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_release_goods_for_picking_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_release_goods_for_picking.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_release_goods_for_picking.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/configure_release_goods_for_picking_agent.py"
+}

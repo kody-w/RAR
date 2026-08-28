@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__demo_data_monitor_storage_capacity",
+  "name": "Monitor storage capacity Demo Data Generator",
+  "rar_name": "@cowork-cookbook/demo_data_monitor_storage_capacity",
+  "rappid": "rappid:@cowork-cookbook/demo_data_monitor_storage_capacity:125a329bf9f0e653d5e8cb3c5830a64450a51d2475f16bb153f2af8f09e1c99f",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "demo_data",
+    "administer_to_operate",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates and creates realistic demo records for monitor storage capacity in a sandbox tenant for training and pilot scenarios.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.3,
+  "sha256": "ca81ec5d52eb519f59d6e2140ac8a4f6e476fca5e1f129e24044f3a41eabf8ed",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__demo_data_monitor_storage_capacity.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/demo_data_monitor_storage_capacity_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_monitor_storage_capacity.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_monitor_storage_capacity.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/demo_data_monitor_storage_capacity_agent.py"
+}

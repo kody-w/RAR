@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__develop_messaging_and_positioning",
+  "name": "Develop messaging and positioning",
+  "rar_name": "@cowork-cookbook/develop_messaging_and_positioning",
+  "rappid": "rappid:@cowork-cookbook/develop_messaging_and_positioning:c5d481ff3a7e008bc52e1bf4afb8be971e8dd442ed6700a5d627caa0d8f7c242",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "concept_to_market",
+    "intermediate",
+    "integration",
+    "monday_com"
+  ],
+  "description": "Move messaging development out of scattered docs into one working surface the team can pressure-test together.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.1,
+  "sha256": "4f2bc3c52fad6f088602687bd24efed631ad6bd17d2e3dae00729fc8828a0607",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__develop_messaging_and_positioning.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/develop_messaging_and_positioning_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__develop_messaging_and_positioning.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__develop_messaging_and_positioning.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/develop_messaging_and_positioning_agent.py"
+}

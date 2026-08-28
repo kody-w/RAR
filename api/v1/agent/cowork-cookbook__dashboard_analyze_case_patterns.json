@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__dashboard_analyze_case_patterns",
+  "name": "Analyze case patterns Interactive HTML Dashboard",
+  "rar_name": "@cowork-cookbook/dashboard_analyze_case_patterns",
+  "rappid": "rappid:@cowork-cookbook/dashboard_analyze_case_patterns:57dd8c504cc70ff7c22dfa96d032fd7caf5842a2d461ec3ae5280082840aa357",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "dashboard",
+    "case_to_resolution",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Produces a self-contained interactive HTML dashboard for analyze case patterns - opens in any browser, no D365 access needed by the viewer.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "dd179f3a7ef2cd22da439b02901e14f5efdad81a9cd42c71efbafdc9207d5d79",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__dashboard_analyze_case_patterns.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/dashboard_analyze_case_patterns_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__dashboard_analyze_case_patterns.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__dashboard_analyze_case_patterns.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/dashboard_analyze_case_patterns_agent.py"
+}

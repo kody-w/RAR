@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__ppt_exec_develop_new_products",
+  "name": "Develop new products Executive PowerPoint Deck",
+  "rar_name": "@cowork-cookbook/ppt_exec_develop_new_products",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_develop_new_products:70840ef59409c8cead0ea90713d990e3230857255d276e2645e02bd6aa166fc8",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "ppt_exec",
+    "design_to_retire",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates an executive-ready PowerPoint deck on develop new products status, complete with charts and talking-point notes.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.3,
+  "sha256": "2adc96b49f2e7cccbed42f2b5cd836214897d593ebbc3819673183fa5a58defd",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_develop_new_products.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/ppt_exec_develop_new_products_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_develop_new_products.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_develop_new_products.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/ppt_exec_develop_new_products_agent.py"
+}

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_manage_bills_of_materials",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "605e7abd8187fc259558d99152d3ef84f8b8f5c918501c915638cbc0ee8c68bc"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_manage_bills_of_materials_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_1a339ad89fb2903d4f72aac29382e4dd9f1072dd3a45e5e91e77dc2264177c4c",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "07ceebda0583472d6714065779c8a3d468b8452316b76eb1203a6c09bf0236f5",
+  "receipt": "rar_9817b78b56725abc8422ad83bbbd360b32ce555ac48d083778275ea33a753723",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_1a339ad89fb2903d4f72aac2",
+ "revision_id": "1a339ad89fb2903d4f72aac29382e4dd9f1072dd3a45e5e91e77dc2264177c4c",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

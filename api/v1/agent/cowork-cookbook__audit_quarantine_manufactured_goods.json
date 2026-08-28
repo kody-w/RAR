@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__audit_quarantine_manufactured_goods",
+  "name": "Quarantine manufactured goods Completeness Audit",
+  "rar_name": "@cowork-cookbook/audit_quarantine_manufactured_goods",
+  "rappid": "rappid:@cowork-cookbook/audit_quarantine_manufactured_goods:9a5933c525a400f8dce704a7275dda8133ed6423f42bbde3050264cd53efc726",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "audit",
+    "plan_to_produce",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Audits quarantine manufactured goods records for completeness and policy compliance against rule-based checks.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "9f369382cefd2471914cc92addd8e4daa20f71ea923d1a1c3c5347408e320b9f",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__audit_quarantine_manufactured_goods.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/audit_quarantine_manufactured_goods_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_quarantine_manufactured_goods.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_quarantine_manufactured_goods.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/audit_quarantine_manufactured_goods_agent.py"
+}

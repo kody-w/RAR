@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__post_launch_readout_and_optimization",
+  "name": "Post-launch readout and optimization routing",
+  "rar_name": "@cowork-cookbook/post_launch_readout_and_optimization",
+  "rappid": "rappid:@cowork-cookbook/post_launch_readout_and_optimization:2b1958e50aa6c0364205ca16adbfff4b40b6e01b9a9f8daf22bb9a476a36a546",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "concept_to_market",
+    "advanced",
+    "integration",
+    "fabric_iq"
+  ],
+  "description": "Close the [Product name] launch loop - what worked, what didn't, and what comes next - grounded in live launch data, not exported snapshots.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.3,
+  "sha256": "3a0357561dd93cd079e2f422a38334357f476650c6d3252c5af671be6405e4d7",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__post_launch_readout_and_optimization.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/post_launch_readout_and_optimization_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__post_launch_readout_and_optimization.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__post_launch_readout_and_optimization.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/post_launch_readout_and_optimization_agent.py"
+}

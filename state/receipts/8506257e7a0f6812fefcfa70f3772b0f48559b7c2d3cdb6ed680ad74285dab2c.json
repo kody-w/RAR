@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_revalue_currency",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "0c61af0a33cd7195f657be023eb19cfaddc6a096a763fc9d9cde316e9aca7457"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_revalue_currency_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_8506257e7a0f6812fefcfa70f3772b0f48559b7c2d3cdb6ed680ad74285dab2c",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "ecbb67c09e18b0c89149d38e4fd90501ab65c953eba544f292539db1a8915a36",
+  "receipt": "rar_cd9e3f63951b2885d644f42780e1bdf4d2ab4bc942e76e0a4421ecce554ab552",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_8506257e7a0f6812fefcfa70",
+ "revision_id": "8506257e7a0f6812fefcfa70f3772b0f48559b7c2d3cdb6ed680ad74285dab2c",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

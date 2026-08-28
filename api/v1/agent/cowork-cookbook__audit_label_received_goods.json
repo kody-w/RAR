@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__audit_label_received_goods",
+  "name": "Label received goods Completeness Audit",
+  "rar_name": "@cowork-cookbook/audit_label_received_goods",
+  "rappid": "rappid:@cowork-cookbook/audit_label_received_goods:992525d8d770be104e8e89920f26d79422fbc30e4a904e8d15ad55f0f176e656",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "audit",
+    "inventory_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Audits label received goods records for completeness and policy compliance against rule-based checks.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "2a9d4f9bcc1800aaf2d7a52b41198debe380df6b2ee3cb906f2122637508376f",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__audit_label_received_goods.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/audit_label_received_goods_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_label_received_goods.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_label_received_goods.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/audit_label_received_goods_agent.py"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__scheduled_brief_conduct_a_disaster_risk_assessment",
+  "name": "Conduct a disaster risk assessment Scheduled Email Brief",
+  "rar_name": "@cowork-cookbook/scheduled_brief_conduct_a_disaster_risk_assessment",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_conduct_a_disaster_risk_assessment:90fe30f84f898aa9b82947eeb929d13e7e36560376f43e187b2a9d2039d0b79b",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "scheduled_brief",
+    "administer_to_operate",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Schedulable morning-brief email summarizing conduct a disaster risk assessment for the responsible owner; designed to run daily or weekly.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.6,
+  "sha256": "f8eb431d57255a1fa28a7b16cd2a3075ec38fb78d0127b3d792beef817df9b8c",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_conduct_a_disaster_risk_assessment.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/scheduled_brief_conduct_a_disaster_risk_assessment_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_conduct_a_disaster_risk_assessment.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_conduct_a_disaster_risk_assessment.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/scheduled_brief_conduct_a_disaster_risk_assessment_agent.py"
+}

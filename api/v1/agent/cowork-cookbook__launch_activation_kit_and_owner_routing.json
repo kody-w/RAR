@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__launch_activation_kit_and_owner_routing",
+  "name": "Launch activation kit and owner routing",
+  "rar_name": "@cowork-cookbook/launch_activation_kit_and_owner_routing",
+  "rappid": "rappid:@cowork-cookbook/launch_activation_kit_and_owner_routing:b1c1a503e15a4cafabaf5d7456f1ec7ed8182f001d5a3d067e2e95cc7d0175c4",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "concept_to_market",
+    "advanced",
+    "integration",
+    "fabric_iq"
+  ],
+  "description": "Build the full launch kit across customer, field, partner, exec, and creator audiences - grounded in real performance baselines and proof points - and get every asset to the right owner with a review deadline.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "b1b43c163c5cf26b946d3ded3d9cfb13396aa3dbd0c25dc7d0de3a49dc86d893",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__launch_activation_kit_and_owner_routing.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/launch_activation_kit_and_owner_routing_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__launch_activation_kit_and_owner_routing.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__launch_activation_kit_and_owner_routing.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/launch_activation_kit_and_owner_routing_agent.py"
+}

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/demo_data_design_bills_of_materials",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "93ef7f3fa24738eba952d7f9ec88ecff255121dc17030da8a9cdfae2e1648351"
+ },
+ "canonical_path": "agents/@cowork-cookbook/demo_data_design_bills_of_materials_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_54e0af73718f96bed1034817de1479c6ff70144b5e93a840c4d4b0e8f5b7e7c0",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "7812e10033368db1346c20af62cc798841a5a4d6cac9a776388de7fff6339be6",
+  "receipt": "rar_a85aad31c0b61c4600f0f7cd83c6e9646b12980b5ff92e87c1fa6a5b5a091133",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_54e0af73718f96bed1034817",
+ "revision_id": "54e0af73718f96bed1034817de1479c6ff70144b5e93a840c4d4b0e8f5b7e7c0",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

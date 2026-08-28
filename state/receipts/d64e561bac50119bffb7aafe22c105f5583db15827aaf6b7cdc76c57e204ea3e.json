@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_manage_benefits_enrollment",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "a223d0d36e3b966624eb53ce99a13a8c99c5d69275fd0714f93687a7974b22ea"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_manage_benefits_enrollment_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_d64e561bac50119bffb7aafe22c105f5583db15827aaf6b7cdc76c57e204ea3e",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "75c6a6974c60af0defa193a827bde0ad5be3bfacd0f850e3ca9efc2fdd301244",
+  "receipt": "rar_a118f4b8416494026bc61d10a9daf106d321901c5ed90b1f359cb1be1911918f",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_d64e561bac50119bffb7aafe",
+ "revision_id": "d64e561bac50119bffb7aafe22c105f5583db15827aaf6b7cdc76c57e204ea3e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

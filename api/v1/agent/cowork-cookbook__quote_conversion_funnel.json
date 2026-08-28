@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__quote_conversion_funnel",
+  "name": "Quote Conversion Funnel Analysis (HTML)",
+  "rar_name": "@cowork-cookbook/quote_conversion_funnel",
+  "rappid": "rappid:@cowork-cookbook/quote_conversion_funnel:ba0227ef729f20ce700c874538062bf0fd0e00a69b9e64c1c4aa7f8064a14b0c",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "dashboard",
+    "prospect_to_quote",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Analyzes won/lost/expired sales quotes by salesperson, product family, and reason; produces a funnel chart HTML and a workbook.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "57055993cc580afb91039f007a2de7d3f6f5c191f4567bea3a7dc83603c1d2aa",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__quote_conversion_funnel.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/quote_conversion_funnel_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__quote_conversion_funnel.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__quote_conversion_funnel.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/quote_conversion_funnel_agent.py"
+}

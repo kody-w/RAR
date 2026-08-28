@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__adaptive_card_maintain_contacts_and_accounts",
+  "name": "Maintain contacts and accounts Status Adaptive Card",
+  "rar_name": "@cowork-cookbook/adaptive_card_maintain_contacts_and_accounts",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_maintain_contacts_and_accounts:df5fe322f0488be2d5dd35c14668d01f833ac3af94c97c040a7127a5e1fd6dd1",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "adaptive_card",
+    "prospect_to_quote",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Produces a reusable Adaptive Card JSON snapshot of maintain contacts and accounts status for embedding in dashboards, emails, or Teams.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "d4fea7396a00407d9df84e8031fca6f841d9a013cb0747754413ddb579d885ed",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__adaptive_card_maintain_contacts_and_accounts.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/adaptive_card_maintain_contacts_and_accounts_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_maintain_contacts_and_accounts.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_maintain_contacts_and_accounts.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/adaptive_card_maintain_contacts_and_accounts_agent.py"
+}

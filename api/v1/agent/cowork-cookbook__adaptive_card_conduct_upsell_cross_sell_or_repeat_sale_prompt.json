@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt",
+  "name": "Conduct upsell, cross sell or repeat sale prompt Status Adaptive Card",
+  "rar_name": "@cowork-cookbook/adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt:34a950d15d00a3243a2b2dd42944f29a1bf7a840b7a5f78c5a648ce787fe6c3c",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "adaptive_card",
+    "prospect_to_quote",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Produces a reusable Adaptive Card JSON snapshot of conduct upsell, cross sell or repeat sale prompt status for embedding in dashboards, emails, or Teams.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.7,
+  "sha256": "36d39c906c024337b72d37b8e8311551902eb0966e24663b9c0de62eb0da7ab4",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt_agent.py"
+}

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_define_depreciation_and_amortization_policies",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "c468838385fcb0debd4f6a94916d79401ab990c9a307a2df9f0c543456b0f850"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_define_depreciation_and_amortization_policies_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_bef7aa610b58a0ef9ee6ee1c069e3a7b59b5a2302fdc57c8a759d88d37f19334",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "094d4b89a56afdd8b493e058f6b74739496ed9003da802cf2fa36a40f1ec5b86",
+  "receipt": "rar_e63e0d78ce41f56f450987a788c1dea802edde1f6d34f1f7f08430de2ddef5aa",
+  "version": "2.0.0"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_bef7aa610b58a0ef9ee6ee1c",
+ "revision_id": "bef7aa610b58a0ef9ee6ee1c069e3a7b59b5a2302fdc57c8a759d88d37f19334",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

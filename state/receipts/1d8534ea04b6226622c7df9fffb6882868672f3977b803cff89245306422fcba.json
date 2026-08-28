@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-27"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "c499f56e00a6c4321e005b2f4d141374039ad6a3eb39843fd4a7a645d3fabb9b"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-27T23:23:40.627898+00:00",
+ "id": "rar_1d8534ea04b6226622c7df9fffb6882868672f3977b803cff89245306422fcba",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_1d8534ea04b6226622c7df9f",
+ "revision_id": "1d8534ea04b6226622c7df9fffb6882868672f3977b803cff89245306422fcba",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "add Cowork Cookbook industry-use-case aggregation and complete PowerCAT projection"
+ },
+ "version": "2.0.0"
+}

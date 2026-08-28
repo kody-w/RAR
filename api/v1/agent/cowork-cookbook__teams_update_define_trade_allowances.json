@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__teams_update_define_trade_allowances",
+  "name": "Define trade allowances Teams Channel Update",
+  "rar_name": "@cowork-cookbook/teams_update_define_trade_allowances",
+  "rappid": "rappid:@cowork-cookbook/teams_update_define_trade_allowances:9b30426a4001c7371b2bc60973e0ca9f757e09cbf6df872b60af1065d6528270",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "teams_update",
+    "order_to_cash",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Drafts a Teams channel post on define trade allowances status with an interactive Adaptive Card for quick triage.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "fafd1f160758a57ecc900e0fa58c4d9f8e9c8a13813fe02b9db7fcc8ee076e65",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__teams_update_define_trade_allowances.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/teams_update_define_trade_allowances_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_define_trade_allowances.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_define_trade_allowances.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/teams_update_define_trade_allowances_agent.py"
+}

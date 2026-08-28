@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__bulk_update_conduct_research",
+  "name": "Conduct research Bulk Field Update",
+  "rar_name": "@cowork-cookbook/bulk_update_conduct_research",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_conduct_research:9e2b31a88ff8a21c4fa4aee2f49f58b0efcd6ec70197d9b545b55b6516e0eda5",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "bulk_update",
+    "concept_to_market",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Applies a bulk field update across conduct research records from an input list, with dry-run preview before commit.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.3,
+  "sha256": "8b111e9c911b768bf5b09c22e393f05bad2e3bf570e879114c1e64df15ff3f9d",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__bulk_update_conduct_research.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/bulk_update_conduct_research_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__bulk_update_conduct_research.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__bulk_update_conduct_research.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/bulk_update_conduct_research_agent.py"
+}

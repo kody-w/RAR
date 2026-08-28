@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__demo_data_analyze_sales_data",
+  "name": "Analyze sales data Demo Data Generator",
+  "rar_name": "@cowork-cookbook/demo_data_analyze_sales_data",
+  "rappid": "rappid:@cowork-cookbook/demo_data_analyze_sales_data:4e3a8842f82d58460440c6865fcfad7e28b30c0a6a3384c8d29c31f3ba076ae6",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "demo_data",
+    "prospect_to_quote",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates and creates realistic demo records for analyze sales data in a sandbox tenant for training and pilot scenarios.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "a7e3d8bb2ba4b06c75a111a98403d035d3173391f64507fe2b939e1e20955e3c",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__demo_data_analyze_sales_data.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/demo_data_analyze_sales_data_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_analyze_sales_data.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_analyze_sales_data.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/demo_data_analyze_sales_data_agent.py"
+}

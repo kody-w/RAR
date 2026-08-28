@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/demo_data_define_kpis_for_call_center_performance",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "61f4528323c9d6a01a5768dddfac6d4b7b883e7fe8b54d4e97cf8e1e1b9e325c"
+ },
+ "canonical_path": "agents/@cowork-cookbook/demo_data_define_kpis_for_call_center_performance_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_9713d2e2c285fc46e96c1a70331ca422b7ea9cbc3c183fb28549593bb871a839",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "4da86e312bde9a7d450880fba5f7ffc922b9c2c02dc3d17658cbed73767253a8",
+  "receipt": "rar_362dea694230103e40d8e4ff9eeb2d5747d0b9165d58f0392928d514b793a92b",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_9713d2e2c285fc46e96c1a70",
+ "revision_id": "9713d2e2c285fc46e96c1a70331ca422b7ea9cbc3c183fb28549593bb871a839",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

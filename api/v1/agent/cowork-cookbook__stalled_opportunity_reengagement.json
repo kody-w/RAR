@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__stalled_opportunity_reengagement",
+  "name": "Stalled Opportunity Re-Engagement List",
+  "rar_name": "@cowork-cookbook/stalled_opportunity_reengagement",
+  "rappid": "rappid:@cowork-cookbook/stalled_opportunity_reengagement:d066410250fc9f85e1876a9e8abfb38542b91614ed266a07fb92b5d31f4ef582",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "prospect_to_quote",
+    "intermediate",
+    "integration",
+    "dynamics_365_sales"
+  ],
+  "description": "Finds open opportunities with no recent activity and drafts a tailored re-engagement approach for each, so dormant deals get a deliberate next step.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "1fc8b85de55701104f9a785b8d931084c36a68bcc85a2d00bb81f6af8a74900b",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__stalled_opportunity_reengagement.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/stalled_opportunity_reengagement_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__stalled_opportunity_reengagement.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__stalled_opportunity_reengagement.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/stalled_opportunity_reengagement_agent.py"
+}

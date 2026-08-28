@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/teams_update_configure_and_manage_mobile_apps_and_devices",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "136676b859c7a9aedc440b7ade974f1c9e27c73770ce2a7f9d1bb510bed8ceec"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_configure_and_manage_mobile_apps_and_devices_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_13e16e5f624c42ab77d5efd9a542492b71eff5563c9faec2d9f2f9b212d353f3",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "c5534e1ac97ba40a27ea2d8cc5f59cb2da97b0f27444f3c882e3d7102dc8cad3",
+  "receipt": "rar_8a2b49b2812ed76dda3e38e84f26cef0e6e321f3ac5f781b7c47c88e4afba873",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_13e16e5f624c42ab77d5efd9",
+ "revision_id": "13e16e5f624c42ab77d5efd9a542492b71eff5563c9faec2d9f2f9b212d353f3",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

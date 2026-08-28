@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_analyze_marketing_trends",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f5726175e7bfc973edc733351b5f9aab164c2dfcf9d8c678603188d86c36891f"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_analyze_marketing_trends_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_e6336986f618941b36dea07ea46bbd4c4ab49e1f0ca1f47d134c084b2bf46012",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "97f2056858e9f1a052b608561269176c16ae1fd6c68bfecf1214ffd209da106d",
+  "receipt": "rar_010f95c34e804319f5fd51f5ca003f105fdbfa19306e3490d222037c7ea6bb84",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_e6336986f618941b36dea07e",
+ "revision_id": "e6336986f618941b36dea07ea46bbd4c4ab49e1f0ca1f47d134c084b2bf46012",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

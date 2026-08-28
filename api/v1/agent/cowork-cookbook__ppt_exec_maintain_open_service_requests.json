@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__ppt_exec_maintain_open_service_requests",
+  "name": "Maintain open service requests Executive PowerPoint Deck",
+  "rar_name": "@cowork-cookbook/ppt_exec_maintain_open_service_requests",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_maintain_open_service_requests:369d32d99810638f62b32ff67da416a220e7f732f0c42a00554973a172ccc2b4",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "ppt_exec",
+    "service_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates an executive-ready PowerPoint deck on maintain open service requests status, complete with charts and talking-point notes.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "0e26a42992a370a4e4d5761fc8c5f2a981491d44dd961e6545cb5095d47387cf",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_maintain_open_service_requests.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/ppt_exec_maintain_open_service_requests_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_maintain_open_service_requests.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_maintain_open_service_requests.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/ppt_exec_maintain_open_service_requests_agent.py"
+}

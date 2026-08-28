@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__teams_update_configure_and_monitor_system_generated_numbers",
+  "name": "Configure and monitor system generated numbers Teams Channel Update",
+  "rar_name": "@cowork-cookbook/teams_update_configure_and_monitor_system_generated_numbers",
+  "rappid": "rappid:@cowork-cookbook/teams_update_configure_and_monitor_system_generated_numbers:cfc5dfcdeabf70b946d3a4331713b7569479c9e373d9876cb98a31ebc38ff613",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "teams_update",
+    "administer_to_operate",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Drafts a Teams channel post on configure and monitor system generated numbers status with an interactive Adaptive Card for quick triage.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.7,
+  "sha256": "4755670ddd08f773bc0b09e3df6383b17281bcdbe7625af9f8f5f8f2dc9e4057",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__teams_update_configure_and_monitor_system_generated_numbers.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/teams_update_configure_and_monitor_system_generated_numbers_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_configure_and_monitor_system_generated_numbers.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_configure_and_monitor_system_generated_numbers.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/teams_update_configure_and_monitor_system_generated_numbers_agent.py"
+}

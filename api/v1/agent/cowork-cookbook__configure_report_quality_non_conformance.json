@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__configure_report_quality_non_conformance",
+  "name": "Report quality non-conformance Configuration Bulk Setup",
+  "rar_name": "@cowork-cookbook/configure_report_quality_non_conformance",
+  "rappid": "rappid:@cowork-cookbook/configure_report_quality_non_conformance:e5d167c096c50d20899d91c90f1a254b69fcff21271f31eb978e1c0ae91fdeb5",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "configure",
+    "inventory_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Applies a bulk configuration change to report quality non-conformance from an input Excel file, with validation and rollback support.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.6,
+  "sha256": "21880988fc6314536b7a792e312fdb16cd47b4d5747e2152fab3d6d45e1ce924",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_report_quality_non_conformance.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_report_quality_non_conformance_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_report_quality_non_conformance.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_report_quality_non_conformance.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/configure_report_quality_non_conformance_agent.py"
+}

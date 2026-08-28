@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__teams_update_estimate_the_cost_of_production",
+  "name": "Estimate the cost of production Teams Channel Update",
+  "rar_name": "@cowork-cookbook/teams_update_estimate_the_cost_of_production",
+  "rappid": "rappid:@cowork-cookbook/teams_update_estimate_the_cost_of_production:def131d29e9994d2d44df20155b556c33cf60d0a5cc23873fde8157419e76c6d",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "teams_update",
+    "plan_to_produce",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Drafts a Teams channel post on estimate the cost of production status with an interactive Adaptive Card for quick triage.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "5816b90100992cdc16d65d9541ce1f8c7680fd10c5edf9f2fd49aa722dcad850",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__teams_update_estimate_the_cost_of_production.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/teams_update_estimate_the_cost_of_production_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_estimate_the_cost_of_production.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_estimate_the_cost_of_production.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/teams_update_estimate_the_cost_of_production_agent.py"
+}

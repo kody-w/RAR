@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__demo_data_coordinate_service_work_with_customer",
+  "name": "Coordinate service work with customer Demo Data Generator",
+  "rar_name": "@cowork-cookbook/demo_data_coordinate_service_work_with_customer",
+  "rappid": "rappid:@cowork-cookbook/demo_data_coordinate_service_work_with_customer:7aceef7c4811a41f933f81aed1edfe187c97892a849aec2c049ac689039fcf0a",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "demo_data",
+    "service_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates and creates realistic demo records for coordinate service work with customer in a sandbox tenant for training and pilot scenarios.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "59a6a01ae34b39f98432ba7e2dbd32f62b2df0b3a9b7ae063e6de9a6fe479a58",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__demo_data_coordinate_service_work_with_customer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/demo_data_coordinate_service_work_with_customer_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_coordinate_service_work_with_customer.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_coordinate_service_work_with_customer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/demo_data_coordinate_service_work_with_customer_agent.py"
+}

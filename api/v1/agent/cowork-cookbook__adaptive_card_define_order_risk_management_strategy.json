@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__adaptive_card_define_order_risk_management_strategy",
+  "name": "Define order risk management strategy Status Adaptive Card",
+  "rar_name": "@cowork-cookbook/adaptive_card_define_order_risk_management_strategy",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_define_order_risk_management_strategy:e1d3df7308a9e4185c5cc4fb2bf7e99729d322700a5e4afbd0a55cc060920fc2",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "adaptive_card",
+    "order_to_cash",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Produces a reusable Adaptive Card JSON snapshot of define order risk management strategy status for embedding in dashboards, emails, or Teams.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "a35d8de233059da864ede66ba3e0b60cfe5aa02a0d4ef67cc632d6a9c085469a",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__adaptive_card_define_order_risk_management_strategy.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/adaptive_card_define_order_risk_management_strategy_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_define_order_risk_management_strategy.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_define_order_risk_management_strategy.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/adaptive_card_define_order_risk_management_strategy_agent.py"
+}

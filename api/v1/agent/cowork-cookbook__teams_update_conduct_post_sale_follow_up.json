@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__teams_update_conduct_post_sale_follow_up",
+  "name": "Conduct post-sale follow-up Teams Channel Update",
+  "rar_name": "@cowork-cookbook/teams_update_conduct_post_sale_follow_up",
+  "rappid": "rappid:@cowork-cookbook/teams_update_conduct_post_sale_follow_up:f4c9a51b96e2bc8680b43370ba5659fb986802a97b3a88f18270d16b8c7efaf9",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "teams_update",
+    "prospect_to_quote",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Drafts a Teams channel post on conduct post-sale follow-up status with an interactive Adaptive Card for quick triage.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "82847dfe118fa8be39a595f75064956dfd9ea45e4944bdc5bba866acdb108513",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__teams_update_conduct_post_sale_follow_up.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/teams_update_conduct_post_sale_follow_up_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_conduct_post_sale_follow_up.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_conduct_post_sale_follow_up.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/teams_update_conduct_post_sale_follow_up_agent.py"
+}

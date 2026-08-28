@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-27"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/ppt_exec_manage_environmental_social_and_governance_esg_plan",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "405b18dd5c179a133c19e65801b0bdb8fe90c4bc8befeb036ed7e4b59060c654"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_manage_environmental_social_and_governance_esg_plan_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-27T23:23:40.627898+00:00",
+ "id": "rar_743d767d585998fa1697b43470587a91fe6008be160a0dae3ce91f479a743120",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_743d767d585998fa1697b434",
+ "revision_id": "743d767d585998fa1697b43470587a91fe6008be160a0dae3ce91f479a743120",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "add Cowork Cookbook industry-use-case aggregation and complete PowerCAT projection"
+ },
+ "version": "2.0.0"
+}

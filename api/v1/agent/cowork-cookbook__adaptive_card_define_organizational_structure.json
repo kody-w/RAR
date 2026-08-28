@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__adaptive_card_define_organizational_structure",
+  "name": "Define organizational structure Status Adaptive Card",
+  "rar_name": "@cowork-cookbook/adaptive_card_define_organizational_structure",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_define_organizational_structure:d90ed7579540ba634a9bef7b5c62c8bcd5b74ce3eb9d18c2a7f32927d08bf8a1",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "adaptive_card",
+    "hire_to_retire",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Produces a reusable Adaptive Card JSON snapshot of define organizational structure status for embedding in dashboards, emails, or Teams.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "2859d56fb9024aa6fbbcd9dec79647bf61a625715976c1cded1756f1f2205d2f",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__adaptive_card_define_organizational_structure.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/adaptive_card_define_organizational_structure_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_define_organizational_structure.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_define_organizational_structure.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/adaptive_card_define_organizational_structure_agent.py"
+}

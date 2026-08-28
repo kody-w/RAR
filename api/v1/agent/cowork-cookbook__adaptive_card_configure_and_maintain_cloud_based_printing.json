@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__adaptive_card_configure_and_maintain_cloud_based_printing",
+  "name": "Configure and maintain cloud-based printing Status Adaptive Card",
+  "rar_name": "@cowork-cookbook/adaptive_card_configure_and_maintain_cloud_based_printing",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_configure_and_maintain_cloud_based_printing:d54c82ef2774af5920921e3bd02c6f0fdbdaa8d81c04c2a170bdfbfbb56df91b",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "adaptive_card",
+    "administer_to_operate",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Produces a reusable Adaptive Card JSON snapshot of configure and maintain cloud-based printing status for embedding in dashboards, emails, or Teams.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.7,
+  "sha256": "3cca559b7a5b907c38753ebb8f6dbfbbd09421d79f742e8c35d874e9f1a7bb54",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__adaptive_card_configure_and_maintain_cloud_based_printing.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/adaptive_card_configure_and_maintain_cloud_based_printing_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_configure_and_maintain_cloud_based_printing.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__adaptive_card_configure_and_maintain_cloud_based_printing.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/adaptive_card_configure_and_maintain_cloud_based_printing_agent.py"
+}

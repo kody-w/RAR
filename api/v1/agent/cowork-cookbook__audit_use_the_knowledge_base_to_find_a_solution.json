@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__audit_use_the_knowledge_base_to_find_a_solution",
+  "name": "Use the knowledge base to find a solution Completeness Audit",
+  "rar_name": "@cowork-cookbook/audit_use_the_knowledge_base_to_find_a_solution",
+  "rappid": "rappid:@cowork-cookbook/audit_use_the_knowledge_base_to_find_a_solution:35f4333d38f71d6d6301a542c584708c11fbd1a39c68d66db0d9101c03cb4645",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "audit",
+    "case_to_resolution",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Audits use the knowledge base to find a solution records for completeness and policy compliance against rule-based checks.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.6,
+  "sha256": "9d6dfc105e765e68b57caca978e307d600ab3004e2b762476e48a3187a469f31",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__audit_use_the_knowledge_base_to_find_a_solution.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/audit_use_the_knowledge_base_to_find_a_solution_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_use_the_knowledge_base_to_find_a_solution.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_use_the_knowledge_base_to_find_a_solution.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/audit_use_the_knowledge_base_to_find_a_solution_agent.py"
+}

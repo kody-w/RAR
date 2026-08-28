@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__demo_data_revalue_and_adjust_assets",
+  "name": "Revalue and adjust assets Demo Data Generator",
+  "rar_name": "@cowork-cookbook/demo_data_revalue_and_adjust_assets",
+  "rappid": "rappid:@cowork-cookbook/demo_data_revalue_and_adjust_assets:820b77085551be2702de6d0fd98b3182cb5431737a0e6a3d06131c2806769425",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "demo_data",
+    "acquire_to_dispose",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates and creates realistic demo records for revalue and adjust assets in a sandbox tenant for training and pilot scenarios.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.3,
+  "sha256": "92c51529d6487767d0579bf43e344638709e7e8b47f19d42547bd7c44a8c607d",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__demo_data_revalue_and_adjust_assets.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/demo_data_revalue_and_adjust_assets_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_revalue_and_adjust_assets.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__demo_data_revalue_and_adjust_assets.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/demo_data_revalue_and_adjust_assets_agent.py"
+}

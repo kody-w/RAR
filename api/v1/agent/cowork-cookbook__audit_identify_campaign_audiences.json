@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__audit_identify_campaign_audiences",
+  "name": "Identify campaign audiences Completeness Audit",
+  "rar_name": "@cowork-cookbook/audit_identify_campaign_audiences",
+  "rappid": "rappid:@cowork-cookbook/audit_identify_campaign_audiences:d0e62c47ca365169c421d3611a7f662a3243ee670861c10e3aae9d7447cf9d44",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "audit",
+    "concept_to_market",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Audits identify campaign audiences records for completeness and policy compliance against rule-based checks.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "185c768f479df8b65dcc8cc5f8a8a6e7c704dd10256d3f9c84b49b69b66ca9dd",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__audit_identify_campaign_audiences.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/audit_identify_campaign_audiences_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_identify_campaign_audiences.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_identify_campaign_audiences.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/audit_identify_campaign_audiences_agent.py"
+}

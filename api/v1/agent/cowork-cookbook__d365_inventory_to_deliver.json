@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__d365_inventory_to_deliver",
+  "name": "D365 Inventory to deliver Expert",
+  "rar_name": "@cowork-cookbook/d365_inventory_to_deliver",
+  "rappid": "rappid:@cowork-cookbook/d365_inventory_to_deliver:b2551db486f56d3e02742a84c2389f471c7bce1fc92fec754f77951ca35cbd3f",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt_skill",
+    "other",
+    "inventory_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "A Dynamics 365 Finance & Supply Chain Management expert scoped to the Inventory to deliver end-to-end process - covers 7 L2 areas and 41 L3 processes from the Microsoft Business Process Catalog.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "b42227a268dab7dec0408ade50664448211ec33cfde2be32024f432733bd77f7",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__d365_inventory_to_deliver.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/d365_inventory_to_deliver_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_inventory_to_deliver.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_inventory_to_deliver.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/d365_inventory_to_deliver_agent.py"
+}

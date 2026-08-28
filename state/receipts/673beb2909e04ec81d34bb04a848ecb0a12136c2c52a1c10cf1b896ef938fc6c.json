@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-27"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/ppt_exec_design_warehouse_layout",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "faf43c62b9809ba58f9afec5fc6d63606cb4a1e8d1f1ab94eb3a7983c9442f30"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_design_warehouse_layout_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-27T23:23:40.627898+00:00",
+ "id": "rar_673beb2909e04ec81d34bb04a848ecb0a12136c2c52a1c10cf1b896ef938fc6c",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_673beb2909e04ec81d34bb04",
+ "revision_id": "673beb2909e04ec81d34bb04a848ecb0a12136c2c52a1c10cf1b896ef938fc6c",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "add Cowork Cookbook industry-use-case aggregation and complete PowerCAT projection"
+ },
+ "version": "2.0.0"
+}

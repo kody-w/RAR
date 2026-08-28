@@ -39,11 +39,12 @@ jobs:
   aggregate:
     runs-on: ubuntu-latest
     steps:
-      # Shallow on purpose, not an oversight. build_registry.py is the one
-      # builder that derives its output from `git log` and so needs depth 0;
-      # nothing in this job reads history.
+      # Registry and Scout source pins derive from git history, so aggregation
+      # must retain the full source lineage for every regenerated container.
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -92,6 +93,33 @@ jobs:
           print(f"[aggregate] {len(snapshot['items'])} item(s) across "
                 f"{len(crawled)} source(s).")
           PY
+
+      - name: Regenerate aggregated RAPP containers
+        id: containers
+        run: |
+          python scripts/generate_aggregated_agents.py
+          if [ -n "$(git status --porcelain -- \
+              agents/@cat-agent-skills agents/@cowork-cookbook)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Mint scoped maintainer receipts
+        if: steps.containers.outputs.changed == 'true'
+        run: |
+          python scripts/mint_maintainer_receipts.py \
+            --namespace @cat-agent-skills \
+            --namespace @cowork-cookbook \
+            --note "regenerate verified aggregated source containers"
+
+      - name: Rebuild registry and static API
+        if: steps.containers.outputs.changed == 'true'
+        run: |
+          python build_registry.py
+          python scripts/check_url_stability.py --update
+          python scripts/build_pokedex_api.py
+          python scripts/build_static_api.py
 
       # Unconditional, and so is the commit below. This is the step that used
       # to be gated: build-registry.yml rebuilt the static API behind
@@ -144,7 +172,13 @@ jobs:
         id: commit
         if: github.ref == 'refs/heads/main' && github.event.inputs.dry_run != 'true'
         run: |
-          FILES="state/aggregated.json api/v1/front.json"
+          FILES="state/aggregated.json api/v1/front.json \
+          agents/@cat-agent-skills agents/@cowork-cookbook \
+          state/agent_lifecycle.json state/receipts \
+          state/published_paths.json registry.json manifest.json \
+          api/v1/catalog.json api/v1/taxonomy.json api/v1/match.json \
+          api/v1/marketplaces.json api/v1/status.json api/v1/badge.json \
+          api/v1/audience api/v1/index.json api/v1/agent api/v1/sprite"
           if [ -z "$(git status --porcelain $FILES)" ]; then
             echo "No change to the catalog or the ranking; nothing to commit."
             echo "committed=false" >> "$GITHUB_OUTPUT"
@@ -153,7 +187,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add $FILES
-          git commit -m "chore(front): refresh aggregated catalog + ranking [skip ci]"
+          git commit -m "chore(front): refresh aggregated catalog + ranking"
           # Rebase rather than merge so the history stays linear, and let a
           # conflict fail the job: two writers disagreeing about the catalog is
           # exactly the thing that must not be resolved by a bot at 03:40.

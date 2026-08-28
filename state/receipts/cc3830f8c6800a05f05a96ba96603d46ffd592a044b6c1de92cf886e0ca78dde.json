@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-27"
+ },
+ "action": "agent.update",
+ "agent": "@rapp/learn_new",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741"
+ },
+ "canonical_path": "agents/@rapp/learn_new_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-27T23:24:40.601650+00:00",
+ "id": "rar_cc3830f8c6800a05f05a96ba96603d46ffd592a044b6c1de92cf886e0ca78dde",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "ee12a37ef550c9ffb1097334da29ebcb4dcaeeac5b3f8b5dbab366e5178eab71",
+  "receipt": "rar_05fb911fe9fb330c2837766a77b399d2a1413d23ae9be89002ca3daad4b4045b",
+  "version": "2.1.1"
+ },
+ "quality_tier": "official",
+ "request_id": "req_cc3830f8c6800a05f05a96ba",
+ "revision_id": "cc3830f8c6800a05f05a96ba96603d46ffd592a044b6c1de92cf886e0ca78dde",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "publish previously committed behavior under correct patch versions so registry hashes converge"
+ },
+ "version": "3.0.1"
+}

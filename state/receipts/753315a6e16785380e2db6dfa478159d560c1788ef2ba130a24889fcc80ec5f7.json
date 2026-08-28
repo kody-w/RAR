@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/bulk_update_reconcile_bank_accounts",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "7d2c64110d35c1c0e150615ce4c124e7596afe4553f3db79610ac49e23cf4531"
+ },
+ "canonical_path": "agents/@cowork-cookbook/bulk_update_reconcile_bank_accounts_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_753315a6e16785380e2db6dfa478159d560c1788ef2ba130a24889fcc80ec5f7",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "d07b3eb764ef5158b1d0b9a8f9dbb2466947e2da3bdae8059296915af5feaf03",
+  "receipt": "rar_27eb32df4882f14aeee1bda5337ff40a6273d3a9fc984de2f2a72d5916d47956",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_753315a6e16785380e2db6df",
+ "revision_id": "753315a6e16785380e2db6dfa478159d560c1788ef2ba130a24889fcc80ec5f7",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

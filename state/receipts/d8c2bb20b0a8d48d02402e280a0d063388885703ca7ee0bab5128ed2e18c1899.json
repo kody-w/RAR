@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_cancel_sales_orders",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6feae232449c09bfc55913ce116f2e7c2b900ba25a91827e6bb6fc93f29fc8bc"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_cancel_sales_orders_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_d8c2bb20b0a8d48d02402e280a0d063388885703ca7ee0bab5128ed2e18c1899",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "dcc566b142bcd66d458c7a003502f7bcbb7f60d1e1b7194805878affc575dc17",
+  "receipt": "rar_d2d845bb75dbf83a6a2e7822e74280dea88be3d13cc8d6c42115a96d47d72dd6",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_d8c2bb20b0a8d48d02402e28",
+ "revision_id": "d8c2bb20b0a8d48d02402e280a0d063388885703ca7ee0bab5128ed2e18c1899",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__scheduled_brief_process_supplier_rebates_and_incentives",
+  "name": "Process supplier rebates and incentives Scheduled Email Brief",
+  "rar_name": "@cowork-cookbook/scheduled_brief_process_supplier_rebates_and_incentives",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_process_supplier_rebates_and_incentives:8416d08088a7989d4f7c12cf90035e780e98e5cf24dcf17b03bf3cf714d5a0e2",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "scheduled_brief",
+    "source_to_pay",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Schedulable morning-brief email summarizing process supplier rebates and incentives for the responsible owner; designed to run daily or weekly.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.6,
+  "sha256": "e7e6ce8178999eb19a128ffc5251ebb50ad48db74c8c924acf3ef40f1a953646",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_process_supplier_rebates_and_incentives.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/scheduled_brief_process_supplier_rebates_and_incentives_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_process_supplier_rebates_and_incentives.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_process_supplier_rebates_and_incentives.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/scheduled_brief_process_supplier_rebates_and_incentives_agent.py"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__audit_develop_chart_of_accounts_strategy",
+  "name": "Develop chart of accounts strategy Completeness Audit",
+  "rar_name": "@cowork-cookbook/audit_develop_chart_of_accounts_strategy",
+  "rappid": "rappid:@cowork-cookbook/audit_develop_chart_of_accounts_strategy:1e91ffdb411f4ecc09e89d7f0f928cdb26d44387eacc22c67a26b5183f3ef125",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "audit",
+    "record_to_report",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Audits develop chart of accounts strategy records for completeness and policy compliance against rule-based checks.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "5d90f7b59ca5ef7570634921ae8da77463fa32cf70a483840d097a9e93a5eaf0",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__audit_develop_chart_of_accounts_strategy.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/audit_develop_chart_of_accounts_strategy_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_develop_chart_of_accounts_strategy.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__audit_develop_chart_of_accounts_strategy.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/audit_develop_chart_of_accounts_strategy_agent.py"
+}

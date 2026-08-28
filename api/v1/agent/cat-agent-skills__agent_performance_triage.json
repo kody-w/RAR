@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__agent_performance_triage",
+  "name": "Agent Performance Triage",
+  "rar_name": "@cat-agent-skills/agent_performance_triage",
+  "rappid": "rappid:@cat-agent-skills/agent_performance_triage:0a8d03cc5f1b72f28c8bdfa69a5433ca99dbfae5eb470e5c9796e44e5e80c62d",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cat-agent-skills",
+  "category": "analysis",
+  "tags": [
+    "copilot_studio",
+    "analytics",
+    "optimization",
+    "operations",
+    "post_launch",
+    "backlog",
+    "assessment",
+    "monitoring"
+  ],
+  "description": "Turn a live agent's analytics and transcripts into a diagnosis and a prioritized improvement backlog.",
+  "author": "Marco Zama",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 8.9,
+  "sha256": "4e49cebc4376b3a98e567a12ccd7a0cb1dd6d4464d0d44c0de8e742ecb4356be",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__agent_performance_triage.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_performance_triage_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_performance_triage.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_performance_triage.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/agent_performance_triage_agent.py"
+}

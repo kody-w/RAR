@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__catch_up_on_messages_and_send_replies",
+  "name": "Catch up on messages and send replies automatically",
+  "rar_name": "@cowork-cookbook/catch_up_on_messages_and_send_replies",
+  "rappid": "rappid:@cowork-cookbook/catch_up_on_messages_and_send_replies:ad18bec2c804c41dc247e155eb599a56efdf3fde6e5c808c78757d415f6fb5e8",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "work_management",
+    "intermediate",
+    "read_only"
+  ],
+  "description": "Close the loop on unanswered questions without scrolling back through a week of threads.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 9.5,
+  "sha256": "c66ade34996200f9019b892172be4fd546b3696f15d36f2af207f37a77fc16d0",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__catch_up_on_messages_and_send_replies.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/catch_up_on_messages_and_send_replies_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__catch_up_on_messages_and_send_replies.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__catch_up_on_messages_and_send_replies.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/catch_up_on_messages_and_send_replies_agent.py"
+}

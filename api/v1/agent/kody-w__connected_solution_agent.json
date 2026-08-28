@@ -3,13 +3,14 @@
   "id": "kody-w__connected_solution_agent",
   "name": "ConnectedSolution",
   "rar_name": "@kody-w/connected_solution_agent",
-  "rappid": "rappid:@kody-w/connected_solution_agent:a1f9a83e7d67c1f433c5194e5900d517ab56f43ff4bfb77fe3c75bf304c4b122",
-  "_migrated_from": "rappid:@kody-w/connected_solution_agent:64d3aa50276adbd78809df068fa9edfb28439f25939a97f1c0fcf7f81cda1cd5",
+  "rappid": "rappid:@kody-w/connected_solution_agent:076e6f9876054f751b9deafe9dcb4370b81b62b961fdee18026ce8c3dc02a40a",
+  "_migrated_from": "rappid:@kody-w/connected_solution_agent:a1f9a83e7d67c1f433c5194e5900d517ab56f43ff4bfb77fe3c75bf304c4b122",
   "_migrated_from_all": [
-    "rappid:@kody-w/connected_solution_agent:64d3aa50276adbd78809df068fa9edfb28439f25939a97f1c0fcf7f81cda1cd5"
+    "rappid:@kody-w/connected_solution_agent:64d3aa50276adbd78809df068fa9edfb28439f25939a97f1c0fcf7f81cda1cd5",
+    "rappid:@kody-w/connected_solution_agent:a1f9a83e7d67c1f433c5194e5900d517ab56f43ff4bfb77fe3c75bf304c4b122"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "@kody-w",
   "category": "integrations",
   "tags": [
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 2731,
-  "size_kb": 127.3,
-  "sha256": "63b3de4722f83a981745927a80ad07804dfc42815b05c79314d8a6850908aa0f",
+  "lines": 2739,
+  "size_kb": 127.8,
+  "sha256": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af",
   "has_card": true,
   "added_at": "2026-06-22T21:04:42-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

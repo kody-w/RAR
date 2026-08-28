@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__ppt_exec_issue_blanket_purchase_orders",
+  "name": "Issue blanket purchase orders Executive PowerPoint Deck",
+  "rar_name": "@cowork-cookbook/ppt_exec_issue_blanket_purchase_orders",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_issue_blanket_purchase_orders:312e0810bb5ed48f0dfae4d6ea76e88f5013ccdd991962bab9dd40790e8d961b",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "ppt_exec",
+    "source_to_pay",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Generates an executive-ready PowerPoint deck on issue blanket purchase orders status, complete with charts and talking-point notes.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "e14ec44bc4489a4aed0c6f22d6b629e812caa529f2e5ae88aa935db58a5148fa",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_issue_blanket_purchase_orders.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/ppt_exec_issue_blanket_purchase_orders_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_issue_blanket_purchase_orders.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__ppt_exec_issue_blanket_purchase_orders.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/ppt_exec_issue_blanket_purchase_orders_agent.py"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__lead_response_time_audit",
+  "name": "Lead Response Time Audit",
+  "rar_name": "@cowork-cookbook/lead_response_time_audit",
+  "rappid": "rappid:@cowork-cookbook/lead_response_time_audit:682fdcb9cb588661eef6a10c4f882fb55f4b4a10198242d93c24ccbb65f923a4",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "audit",
+    "prospect_to_quote",
+    "intermediate",
+    "integration",
+    "dynamics_365_sales"
+  ],
+  "description": "Measures how long leads wait before someone first works them, and highlights the leads that are still sitting untouched.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "7a09c5fa30021f3131695f8ed14499eb11e2279148e40c9f17beaa9a0bf3c9d0",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__lead_response_time_audit.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/lead_response_time_audit_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__lead_response_time_audit.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__lead_response_time_audit.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/lead_response_time_audit_agent.py"
+}

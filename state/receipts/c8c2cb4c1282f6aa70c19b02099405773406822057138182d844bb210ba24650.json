@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_define_warehouse_management_kpis",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "bf016df58bddb441a967ec9390958ada87c608b68e5c949328bff22d51bdc726"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_define_warehouse_management_kpis_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_c8c2cb4c1282f6aa70c19b02099405773406822057138182d844bb210ba24650",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "a642d277bf009976b330bf93c627b8a98bc88175e8e8e19ef4f5ca0f4a894f2a",
+  "receipt": "rar_e83e11c1c3cad85ae6ee69a45b84fcf721a5b691963298ab162252abd6c93d44",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_c8c2cb4c1282f6aa70c19b02",
+ "revision_id": "c8c2cb4c1282f6aa70c19b02099405773406822057138182d844bb210ba24650",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

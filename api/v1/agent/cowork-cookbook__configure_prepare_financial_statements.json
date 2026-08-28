@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__configure_prepare_financial_statements",
+  "name": "Prepare financial statements Configuration Bulk Setup",
+  "rar_name": "@cowork-cookbook/configure_prepare_financial_statements",
+  "rappid": "rappid:@cowork-cookbook/configure_prepare_financial_statements:f0a4d9221b708495aa4d93deb9398e76bb788e6c630183b49b5a18fccbcbb1cb",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "configure",
+    "record_to_report",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Applies a bulk configuration change to prepare financial statements from an input Excel file, with validation and rollback support.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.6,
+  "sha256": "128a81cb766ad2a1f8c08381ad45d04e7dc1570aa5c7571525ba44579a4a6b2e",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_prepare_financial_statements.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_prepare_financial_statements_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_prepare_financial_statements.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_prepare_financial_statements.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/configure_prepare_financial_statements_agent.py"
+}

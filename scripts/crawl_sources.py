@@ -157,7 +157,98 @@ def parse_cat_skills(items: list, source: dict) -> list[dict]:
     return out
 
 
-ADAPTERS = {"cat-skills/1": parse_cat_skills}
+def parse_cowork_cookbook(items: list, source: dict) -> list[dict]:
+    """Adapter for Cowork Cookbook's public /data/catalog.json shape."""
+    ns = source["namespace"]
+    template = source.get("item_url_template", "")
+    out = []
+    for item in items:
+        recipe_id = str(item.get("id") or "").strip()
+        if not recipe_id:
+            continue
+        slug = normalize_slug(recipe_id)
+        process_tags = [
+            str(value)
+            for value in item.get("process_tags") or []
+            if str(value).strip()
+        ]
+        process_roots = sorted({
+            value.split("/", 1)[0]
+            for value in process_tags
+            if value
+        })
+        recipe_type = str(item.get("recipe_type") or "prompt")
+        category = str(item.get("category") or "other")
+        difficulty = str(item.get("difficulty") or "")
+        plugin = str(item.get("plugin") or "none")
+        status = str(item.get("status") or "")
+        tags = [
+            "industry_solution",
+            "business_process",
+            normalize_slug(recipe_type),
+            normalize_slug(category),
+        ]
+        tags.extend(normalize_slug(root) for root in process_roots)
+        if difficulty:
+            tags.append(normalize_slug(difficulty))
+        if plugin and plugin != "none":
+            tags.extend(["integration", normalize_slug(plugin)])
+        if item.get("mutates_data"):
+            tags.extend(["mutates_data", "workflow"])
+        else:
+            tags.append("read_only")
+        if category in {"audit", "report"}:
+            tags.append("analysis")
+        if category in {"scheduled-brief", "teams-update", "bulk-update"}:
+            tags.append("automation")
+
+        uses_skills = item.get("uses_skills")
+        uses_skills = uses_skills if isinstance(uses_skills, dict) else {}
+        out.append({
+            "ref": f"{ns}/{slug}",
+            "source_id": source["id"],
+            "source_slug": recipe_id,
+            "name": clip(item.get("title") or recipe_id, 120),
+            "description": clip(item.get("summary")),
+            "kind": recipe_type,
+            "tags": list(dict.fromkeys(tags))[:16],
+            "platforms": ["Microsoft 365 Copilot Cowork"],
+            "author": source.get("publisher", ""),
+            "author_github": "seangalliher",
+            "version": str(item.get("version") or "1.0.0"),
+            "created_at": item.get("last_verified_on") or None,
+            "has_bundle": bool(
+                "skill" in recipe_type
+                or uses_skills.get("custom")
+            ),
+            "url": (
+                template.replace("{id}", recipe_id)
+                if template
+                else source.get("home_url", "")
+            ),
+            "source_signal": {
+                "verified": status == "verified",
+            },
+            "process_tags": process_tags,
+            "process_roots": process_roots,
+            "recipe_type": recipe_type,
+            "difficulty": difficulty,
+            "mutates_data": bool(item.get("mutates_data")),
+            "deprecated": bool(item.get("deprecated")),
+            "verification_status": status,
+            "last_verified_on": item.get("last_verified_on"),
+            "plugin": plugin,
+            "uses_skills": uses_skills,
+            "recipe_category": category,
+            "upstream_path": item.get("slug"),
+        })
+    return out
+
+
+ADAPTERS = {
+    "cat-skills/1": parse_cat_skills,
+    "cowork-cookbook/1": parse_cowork_cookbook,
+}
 
 
 def crawl_source(source: dict) -> list[dict] | None:
@@ -172,7 +263,12 @@ def crawl_source(source: dict) -> list[dict] | None:
         return None
 
     items = payload if isinstance(payload, list) else (
-        payload.get("skills") or payload.get("items") or payload.get("agents") or [])
+        payload.get("skills")
+        or payload.get("items")
+        or payload.get("agents")
+        or payload.get("recipes")
+        or []
+    )
     if not isinstance(items, list) or not items:
         fail(f"'{source['id']}': index carried no items; source skipped.")
         return None
@@ -220,10 +316,13 @@ def build(only: str | None = None) -> dict | None:
             "publisher": src.get("publisher", ""),
             "home_url": src.get("home_url", ""),
             "index_url": src.get("index_url", ""),
+            "taxonomy_url": src.get("taxonomy_url", ""),
+            "repository_url": src.get("repository_url", ""),
             # Recorded, never assumed. `license_verified: false` means the
             # licence could not be read — treat as all-rights-reserved, index
             # only, never republish content from it.
             "license": src.get("license", "unverified"),
+            "license_url": src.get("license_url", ""),
             "license_verified": bool(src.get("license_verified")),
             "license_note": src.get("license_note", ""),
             "item_count": len(records),

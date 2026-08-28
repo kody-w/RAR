@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__configure_manage_the_recurring_synchronization_of_data",
+  "name": "Manage the recurring synchronization of data Configuration Bulk Setup",
+  "rar_name": "@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data",
+  "rappid": "rappid:@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data:560c1d62b0951a86684682141b6dd4ef3a64d05556458d432408eca67073410d",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "configure",
+    "administer_to_operate",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Applies a bulk configuration change to manage the recurring synchronization of data from an input Excel file, with validation and rollback support.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.8,
+  "sha256": "599719c18d8b65f1f19e0a840151ddd38e5b6fd0368cfd1a7f8e8d648d5a0df7",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_manage_the_recurring_synchronization_of_data.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_manage_the_recurring_synchronization_of_data.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_manage_the_recurring_synchronization_of_data.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data_agent.py"
+}

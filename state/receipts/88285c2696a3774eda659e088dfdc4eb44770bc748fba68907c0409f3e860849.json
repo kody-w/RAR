@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/dashboard_manage_employee_travel",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "a781f0a1112652265f1f11abdfef14a4d6ed821644d2def1ec7ff0fbef2a586a"
+ },
+ "canonical_path": "agents/@cowork-cookbook/dashboard_manage_employee_travel_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_88285c2696a3774eda659e088dfdc4eb44770bc748fba68907c0409f3e860849",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "3cf949b74156008793919b149eb35cc246ef3b1f876cdf1c2c5469da3e6f63d8",
+  "receipt": "rar_a8f810bc917af03d99398832d5390ceefa15bb3547a7a10887b071e742320936",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_88285c2696a3774eda659e08",
+ "revision_id": "88285c2696a3774eda659e088dfdc4eb44770bc748fba68907c0409f3e860849",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

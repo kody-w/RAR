@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__mcp_callback_agent",
+  "name": "MCP Callback",
+  "rar_name": "@rapp/mcp_callback_agent",
+  "rappid": "rappid:@rapp/mcp_callback_agent:290b3a193d6c9ec32e24e6e60b6d4b91ccd987b7eb0dff404c356da5ce7aa61f",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "integrations",
+  "tags": [
+    "mcp",
+    "callback",
+    "scout",
+    "handoff",
+    "interop",
+    "bootstrap",
+    "local-first"
+  ],
+  "description": "A self-bootstrapping drop-in agent that installs the local RAPP Brainstem MCP adapter and lets Brainstem call an on-device Scout or other sampling-capable MCP client back without changing the Grail.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 453,
+  "size_kb": 53.5,
+  "sha256": "18998f73939c35677b8692cdf0e11c0fc8d6ffd3e015e3452e78a86537550896",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__mcp_callback_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/mcp_callback_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__mcp_callback_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__mcp_callback_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/mcp_callback_agent.py"
+}

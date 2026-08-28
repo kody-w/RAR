@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__messaging_drift_audit_and_remediation",
+  "name": "Messaging drift audit and remediation routing",
+  "rar_name": "@cowork-cookbook/messaging_drift_audit_and_remediation",
+  "rappid": "rappid:@cowork-cookbook/messaging_drift_audit_and_remediation:01978434af1845c0458ff2111c3b85b7446a4db5481d7db4bc9eba716d6eee14",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "analysis",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "audit",
+    "concept_to_market",
+    "advanced",
+    "read_only",
+    "analysis"
+  ],
+  "description": "Catch messaging drift across every asset in [Folder] before it shows up in market.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "65d5b351a8c7e7419c991d910386fe7f06018577cd24bf8378e750928fb4fa43",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__messaging_drift_audit_and_remediation.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/messaging_drift_audit_and_remediation_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__messaging_drift_audit_and_remediation.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__messaging_drift_audit_and_remediation.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/messaging_drift_audit_and_remediation_agent.py"
+}

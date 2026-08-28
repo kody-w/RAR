@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__configure_nurture_trust_relationship_regularly_with_customer",
+  "name": "Nurture trust relationship regularly with customer Configuration Bulk Setup",
+  "rar_name": "@cowork-cookbook/configure_nurture_trust_relationship_regularly_with_customer",
+  "rappid": "rappid:@cowork-cookbook/configure_nurture_trust_relationship_regularly_with_customer:58e4dc92182893fb9197b2d57e121fc7ef4f8689f8876a0ba92853940d804937",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "configure",
+    "prospect_to_quote",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Applies a bulk configuration change to nurture trust relationship regularly with customer from an input Excel file, with validation and rollback support.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.9,
+  "sha256": "4123f5ee545297c7c93f4607fdaa1e925864b9b40011629e035e9aacb31857c5",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_nurture_trust_relationship_regularly_with_customer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_nurture_trust_relationship_regularly_with_customer_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_nurture_trust_relationship_regularly_with_customer.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__configure_nurture_trust_relationship_regularly_with_customer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/configure_nurture_trust_relationship_regularly_with_customer_agent.py"
+}

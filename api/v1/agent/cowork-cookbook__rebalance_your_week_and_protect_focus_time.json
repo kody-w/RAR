@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__rebalance_your_week_and_protect_focus_time",
+  "name": "Rebalance your week and protect focus time",
+  "rar_name": "@cowork-cookbook/rebalance_your_week_and_protect_focus_time",
+  "rappid": "rappid:@cowork-cookbook/rebalance_your_week_and_protect_focus_time:7b416bd9e1fc5002f00c7d045464962f53dde5556a24e14ba7de2885b31ee474",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "work_management",
+    "beginner",
+    "read_only"
+  ],
+  "description": "Take control of a fragmented calendar before it takes control of your week.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 9.5,
+  "sha256": "a1570e97b55813c2048f18ff7bd91bc5a04cd39c25173b90bd208b0f5351ea15",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__rebalance_your_week_and_protect_focus_time.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/rebalance_your_week_and_protect_focus_time_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__rebalance_your_week_and_protect_focus_time.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__rebalance_your_week_and_protect_focus_time.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/rebalance_your_week_and_protect_focus_time_agent.py"
+}

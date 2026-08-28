@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/dashboard_provide_ongoing_support",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6c26cf2108a8d25a1cd0ceccd52d4a9785a10e117356be62dd6b9faa8e05039a"
+ },
+ "canonical_path": "agents/@cowork-cookbook/dashboard_provide_ongoing_support_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_42fc130fe4beec096f2eecd5ddfc16621b2dbf64ff62e09f47123937d2723b3f",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "f0745ed57f978be17e5943a8ea9dc3ccc0058c05523fb25fe84e057cf04ba3d9",
+  "receipt": "rar_6457af59531039f4a8095c6b138fb00669db2344c5374809f49f32cdac451f58",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_42fc130fe4beec096f2eecd5",
+ "revision_id": "42fc130fe4beec096f2eecd5ddfc16621b2dbf64ff62e09f47123937d2723b3f",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

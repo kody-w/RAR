@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__build_a_visual_project_plan_from_work_context",
+  "name": "Build a visual project plan from work context",
+  "rar_name": "@cowork-cookbook/build_a_visual_project_plan_from_work_context",
+  "rappid": "rappid:@cowork-cookbook/build_a_visual_project_plan_from_work_context:2c6081b4bc3ec97a8efed6cadcdb2da19feb954acb2de8bc06a8f19724cd61bd",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "work_management",
+    "intermediate",
+    "integration",
+    "miro"
+  ],
+  "description": "Turn a scattered project picture - emails, meetings, files - into a single visual plan the team can rally around without rebuilding it from scratch.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.3,
+  "sha256": "1d9faafad3e0d547462d464ba521a4b1575fb8ab4c90938c6ee0ed35371c7796",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__build_a_visual_project_plan_from_work_context.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/build_a_visual_project_plan_from_work_context_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__build_a_visual_project_plan_from_work_context.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__build_a_visual_project_plan_from_work_context.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/build_a_visual_project_plan_from_work_context_agent.py"
+}

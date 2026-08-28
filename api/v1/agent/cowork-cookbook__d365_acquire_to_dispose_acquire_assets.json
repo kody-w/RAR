@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__d365_acquire_to_dispose_acquire_assets",
+  "name": "D365 Acquire assets Expert",
+  "rar_name": "@cowork-cookbook/d365_acquire_to_dispose_acquire_assets",
+  "rappid": "rappid:@cowork-cookbook/d365_acquire_to_dispose_acquire_assets:cb041af0bca78accd037647a3c270d0e353c5ce3852b1d29ffd3476943a4c506",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt_skill",
+    "other",
+    "acquire_to_dispose",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "A Dynamics 365 F&SCM expert scoped to the Acquire assets area (a level-2 subdomain of Acquire to dispose) - covers 12 L3 processes.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "1e307b2c63c2a9598b526ff5b50f9a9db782ddb6348bdda29e7331fec4b1cfcb",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__d365_acquire_to_dispose_acquire_assets.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/d365_acquire_to_dispose_acquire_assets_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_acquire_to_dispose_acquire_assets.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_acquire_to_dispose_acquire_assets.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/d365_acquire_to_dispose_acquire_assets_agent.py"
+}

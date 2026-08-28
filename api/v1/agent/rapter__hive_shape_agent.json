@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapter__hive_shape_agent",
+  "name": "Hive Shape",
+  "rar_name": "@rapter/hive_shape_agent",
+  "rappid": "rappid:@rapter/hive_shape_agent:e3ecbbea3c0581588b38a0b1d4a69fbf90b573dcd5a29d0eb750196167a9b7fd",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@rapter",
+  "category": "core",
+  "tags": [
+    "hive",
+    "fleet",
+    "shape",
+    "divergence",
+    "drift",
+    "census",
+    "observability",
+    "private"
+  ],
+  "description": "Look at every cubby in a hive at once and report its SHAPE \u2014 divergence (who disagrees about what the world is), silence (who did not answer, always named), mass (where the population actually lives), and spread (how unlike each other the members are). Private by construction: publishes nothing, writes no frame, and leaves the picture on the operator's machine.",
+  "author": "RapterBox",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapter/basic_agent"
+  ],
+  "lines": 338,
+  "size_kb": 14.7,
+  "sha256": "c4cdee134802fd1ced521940c6ef38d0a5dba2503acc4e8cd8da5e4367d075a3",
+  "has_card": false,
+  "added_at": "2026-08-26T17:18:46-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapter__hive_shape_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/hive_shape_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapter__hive_shape_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapter__hive_shape_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapter/hive_shape_agent.py"
+}

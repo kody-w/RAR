@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/agent_performance_triage",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "4e49cebc4376b3a98e567a12ccd7a0cb1dd6d4464d0d44c0de8e742ecb4356be"
+ },
+ "canonical_path": "agents/@cat-agent-skills/agent_performance_triage_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:54:32.329693+00:00",
+ "id": "rar_71a2fd8790eaeed7993aad84d832b985ab2616eb969b4dcad304d429daa2efbe",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "b4505e9978715a93c24dfb8dbebb89acf753adf6af6bf41a6a862828d41f0096",
+  "receipt": "rar_199f7247734d08710102246ca6d5f7c512b55750da9e317dd866987e408e83c3",
+  "version": "2.0.0"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_71a2fd8790eaeed7993aad84",
+ "revision_id": "71a2fd8790eaeed7993aad84d832b985ab2616eb969b4dcad304d429daa2efbe",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile final generated Power CAT container versions"
+ },
+ "version": "2.0.1"
+}

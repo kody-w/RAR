@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__turn_inbox_noise_into_an_intelligence_brief",
+  "name": "Turn inbox noise into a curated intelligence brief",
+  "rar_name": "@cowork-cookbook/turn_inbox_noise_into_an_intelligence_brief",
+  "rappid": "rappid:@cowork-cookbook/turn_inbox_noise_into_an_intelligence_brief:633cd7c3a241cb41b6e80fa1ac2ed180711ddb8f1de7937c55c94bd62072ff26",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "scheduled_brief",
+    "work_management",
+    "intermediate",
+    "read_only",
+    "automation"
+  ],
+  "description": "Cut through a week of newsletters to the stories that actually matter to your work.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "efb1391aed1a739b4fa40305d79b8bf8acceacdb93baecb99dc5647a9485dcf1",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__turn_inbox_noise_into_an_intelligence_brief.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/turn_inbox_noise_into_an_intelligence_brief_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__turn_inbox_noise_into_an_intelligence_brief.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__turn_inbox_noise_into_an_intelligence_brief.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/turn_inbox_noise_into_an_intelligence_brief_agent.py"
+}

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/configure_allocate_inventory_to_sales_orders",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "e189ecb7926f9b96f57d16d896ffa5a6d7acb8a65acf0bc423e420bdbda45a30"
+ },
+ "canonical_path": "agents/@cowork-cookbook/configure_allocate_inventory_to_sales_orders_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_59d824dc0fb90b349ecd328e1292dc9fed4911352e3d7edcd50d4093d7eb2e1e",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "8b2a484ff19c35c4e24c22446be5962d2d270d5c56401c4f605d90f20cff373a",
+  "receipt": "rar_dc6b00584c4b6be63e4b9638fff1f24ebf08725d5c4165cff6634ad310b85511",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_59d824dc0fb90b349ecd328e",
+ "revision_id": "59d824dc0fb90b349ecd328e1292dc9fed4911352e3d7edcd50d4093d7eb2e1e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

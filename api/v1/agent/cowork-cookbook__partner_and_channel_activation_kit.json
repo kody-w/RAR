@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__partner_and_channel_activation_kit",
+  "name": "Partner and channel activation kit",
+  "rar_name": "@cowork-cookbook/partner_and_channel_activation_kit",
+  "rappid": "rappid:@cowork-cookbook/partner_and_channel_activation_kit:d6b7d5715b0a8b76a3992ed0bd42aea0204692c1a58c41b7152c3993e3d0640a",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "concept_to_market",
+    "intermediate",
+    "read_only"
+  ],
+  "description": "Adapt the [Product/Campaign name] launch materials for partners and channel teams and route them for review.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "fd41112672b2f16c02e2edc8c291971953c63c22a87262228559900ba11041fe",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__partner_and_channel_activation_kit.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/partner_and_channel_activation_kit_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__partner_and_channel_activation_kit.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__partner_and_channel_activation_kit.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/partner_and_channel_activation_kit_agent.py"
+}

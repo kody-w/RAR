@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__vendor_master_cleanup",
+  "name": "Vendor Master Cleanup Report",
+  "rar_name": "@cowork-cookbook/vendor_master_cleanup",
+  "rappid": "rappid:@cowork-cookbook/vendor_master_cleanup:14482d84d29e8934ac4780723416c6f374ed97a54a5422840bec35ce086b3bf7",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "audit",
+    "source_to_pay",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Identifies duplicate, incomplete, or inactive vendors in the master record and proposes a cleanup plan.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "6d2739c00e099c5c3bfc9e396297c37e80841229a70b3224ebde87826a5c8ef5",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__vendor_master_cleanup.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/vendor_master_cleanup_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__vendor_master_cleanup.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__vendor_master_cleanup.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/vendor_master_cleanup_agent.py"
+}

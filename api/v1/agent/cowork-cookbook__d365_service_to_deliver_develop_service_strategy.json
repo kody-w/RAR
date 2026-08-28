@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__d365_service_to_deliver_develop_service_strategy",
+  "name": "D365 Develop service strategy Expert",
+  "rar_name": "@cowork-cookbook/d365_service_to_deliver_develop_service_strategy",
+  "rappid": "rappid:@cowork-cookbook/d365_service_to_deliver_develop_service_strategy:cbb14618ef9007542ed9be64ab007f3a2d102f65e350c8e2cd9cd019226aab7c",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt_skill",
+    "other",
+    "service_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "A Dynamics 365 F&SCM expert scoped to the Develop service strategy area (a level-2 subdomain of Service to deliver) - covers 10 L3 processes.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "b106cd02c707e51a5a6524e79f8f8b3c8a3c3cbd8a2d9e18e94d1f319313a643",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__d365_service_to_deliver_develop_service_strategy.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/d365_service_to_deliver_develop_service_strategy_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_service_to_deliver_develop_service_strategy.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_service_to_deliver_develop_service_strategy.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/d365_service_to_deliver_develop_service_strategy_agent.py"
+}

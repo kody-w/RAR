@@ -13,6 +13,7 @@ ride the Issue notarization pipeline, which produces the same shapes.
 
 Usage:
   python3 scripts/mint_maintainer_receipts.py [--note "why"]
+      [--namespace @publisher] [--agent @publisher/slug]
 """
 
 from __future__ import annotations
@@ -56,7 +57,24 @@ def manifest_of(source: str) -> dict | None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--note", default="maintainer bulk maintenance pass")
+    parser.add_argument(
+        "--namespace",
+        action="append",
+        default=[],
+        help="restrict to one publisher namespace; repeatable",
+    )
+    parser.add_argument(
+        "--agent",
+        action="append",
+        default=[],
+        help="restrict to one exact manifest name; repeatable",
+    )
     args = parser.parse_args()
+    namespaces = {
+        value if value.startswith("@") else "@" + value
+        for value in args.namespace
+    }
+    agents = set(args.agent)
 
     lifecycle = json.loads(LIFECYCLE_FILE.read_text(encoding="utf-8"))
     agents_lc = lifecycle.setdefault("agents", {})
@@ -73,6 +91,10 @@ def main() -> int:
         if not manifest or not manifest.get("name"):
             continue
         name = manifest["name"]
+        publisher = name.split("/", 1)[0]
+        if namespaces or agents:
+            if name not in agents and publisher not in namespaces:
+                continue
         digest = canonical_sha256(content)
         existing = agents_lc.get(name)
         if existing and existing.get("sha256") == digest:
@@ -147,11 +169,12 @@ def main() -> int:
         }
         minted += 1
 
-    lifecycle["updated_at"] = now
-    LIFECYCLE_FILE.write_text(
-        json.dumps(lifecycle, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
+    if minted:
+        lifecycle["updated_at"] = now
+        LIFECYCLE_FILE.write_text(
+            json.dumps(lifecycle, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
     print(f"minted {minted} receipt(s); total records: {len(agents_lc)}")
     return 0
 

@@ -1,0 +1,77 @@
+name: Build Microsoft Scout Exports
+
+on:
+  pull_request:
+    paths:
+      - "agents/**"
+      - "swarms/**"
+      - "registry.json"
+      - "state/federation.json"
+      - "state/aggregated.json"
+      - "state/agent_lifecycle.json"
+      - "rapp_skill_agent.py"
+      - "scout.config.json"
+      - "scripts/build_scout_exports.py"
+      - "scripts/scout_run_agent.py"
+      - "tests/test_scout_rapp_skill.py"
+      - ".claude-plugin/marketplace.json"
+      - ".github/workflows/build-scout-exports.yml"
+  push:
+    branches: [main]
+    paths:
+      - "agents/**"
+      - "swarms/**"
+      - "registry.json"
+      - "state/federation.json"
+      - "state/aggregated.json"
+      - "state/agent_lifecycle.json"
+      - "rapp_skill_agent.py"
+      - "scout.config.json"
+      - "scripts/build_scout_exports.py"
+      - "scripts/scout_run_agent.py"
+      - ".claude-plugin/marketplace.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scout-export-main
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Build deterministic Scout projection
+        run: python scripts/build_scout_exports.py
+
+      - name: Test Scout import surface
+        run: pytest -q tests/test_scout_rapp_skill.py
+
+      - name: Require committed output on pull requests
+        if: github.event_name == 'pull_request'
+        run: |
+          git add -A -- rapp_skill.md rapp_skills.md scout/
+          git diff --cached --exit-code
+
+      - name: Publish changed projection
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "RAPP Scout Export Bot"
+          git config user.email "rapp-bot@users.noreply.github.com"
+          git add rapp_skill.md rapp_skills.md scout/
+          git diff --cached --quiet || git commit -m "Build Scout skills and workflows [skip ci]"
+          git pull --rebase origin main
+          git push

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__scheduled_brief_invoice_project_milestones",
+  "name": "Invoice project milestones Scheduled Email Brief",
+  "rar_name": "@cowork-cookbook/scheduled_brief_invoice_project_milestones",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_invoice_project_milestones:2851e27536fa69d17d56a88a0e5c41495d9e062a91e9a85d8ed0600eda6cb50b",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "scheduled_brief",
+    "project_to_profit",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Schedulable morning-brief email summarizing invoice project milestones for the responsible owner; designed to run daily or weekly.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "08a90ef64ef0d660feada5a5b46d76b079ee7c51d9df43ec1ff2c5cd72ba817f",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_invoice_project_milestones.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/scheduled_brief_invoice_project_milestones_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_invoice_project_milestones.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_invoice_project_milestones.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/scheduled_brief_invoice_project_milestones_agent.py"
+}

@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-27"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/adaptive_card_conduct_exit_interviews",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "2fbeeced5c5691043e3dc8b173bf76a981f0f89052f3ee92abd3b6f4129a7498"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_conduct_exit_interviews_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-27T23:23:40.627898+00:00",
+ "id": "rar_94d0edff2c4cb42747b7c67b3a0def26891553d227fa0408a6fde4a93013c15c",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_94d0edff2c4cb42747b7c67b",
+ "revision_id": "94d0edff2c4cb42747b7c67b3a0def26891553d227fa0408a6fde4a93013c15c",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "add Cowork Cookbook industry-use-case aggregation and complete PowerCAT projection"
+ },
+ "version": "2.0.0"
+}

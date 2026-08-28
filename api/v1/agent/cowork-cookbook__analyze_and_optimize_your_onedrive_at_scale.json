@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__analyze_and_optimize_your_onedrive_at_scale",
+  "name": "Analyze and optimize your OneDrive at scale",
+  "rar_name": "@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale",
+  "rappid": "rappid:@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale:ec8f9d16d054793b2a178ec50c9ff43d5225f230df1185493f9f113c4d1e61f6",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "work_management",
+    "advanced",
+    "read_only"
+  ],
+  "description": "Turn a sprawling OneDrive into a structured catalog you can actually act on.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 9.9,
+  "sha256": "8b1b2e9e5d4de92ac49c51ab33788fabfa6496c362a5b374bdf0ff3b9c84c480",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__analyze_and_optimize_your_onedrive_at_scale.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__analyze_and_optimize_your_onedrive_at_scale.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__analyze_and_optimize_your_onedrive_at_scale.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale_agent.py"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__teams_update_develop_campaign_themes_and_messages",
+  "name": "Develop campaign themes and messages Teams Channel Update",
+  "rar_name": "@cowork-cookbook/teams_update_develop_campaign_themes_and_messages",
+  "rappid": "rappid:@cowork-cookbook/teams_update_develop_campaign_themes_and_messages:9b85d77ba143dd3351cab149c71eb25fa40021a9350d5e8e5c60e09bb66645e3",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "teams_update",
+    "concept_to_market",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Drafts a Teams channel post on develop campaign themes and messages status with an interactive Adaptive Card for quick triage.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "a4bbbc526ad7c03dc626b2ca2f93750171f15f81eb31533c1c99ffe12031d80f",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__teams_update_develop_campaign_themes_and_messages.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/teams_update_develop_campaign_themes_and_messages_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_develop_campaign_themes_and_messages.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_develop_campaign_themes_and_messages.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/teams_update_develop_campaign_themes_and_messages_agent.py"
+}

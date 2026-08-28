@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__d365_plan_to_produce_control_production_quality",
+  "name": "D365 Control production quality Expert",
+  "rar_name": "@cowork-cookbook/d365_plan_to_produce_control_production_quality",
+  "rappid": "rappid:@cowork-cookbook/d365_plan_to_produce_control_production_quality:1ce486767994e2c6ff77c10107c0367a6202ffe26dfa1fab8025157dd783edd1",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt_skill",
+    "other",
+    "plan_to_produce",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "A Dynamics 365 F&SCM expert scoped to the Control production quality area (a level-2 subdomain of Plan to produce) - covers 8 L3 processes.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "76c4b1cd1ee315aa93724ad7c1cf0744e27b00162db7681bd80adaa8c4bc0e9f",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__d365_plan_to_produce_control_production_quality.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/d365_plan_to_produce_control_production_quality_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_plan_to_produce_control_production_quality.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_plan_to_produce_control_production_quality.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/d365_plan_to_produce_control_production_quality_agent.py"
+}

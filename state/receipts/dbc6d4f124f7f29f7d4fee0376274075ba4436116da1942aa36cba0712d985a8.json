@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_manage_service_truck_inventory",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "aad920d5de80ad785380d679c6db5e554303de13c1c918e38e0b2da1a6089235"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_manage_service_truck_inventory_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_dbc6d4f124f7f29f7d4fee0376274075ba4436116da1942aa36cba0712d985a8",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "98db7a1f61f1316bd49714e901c59d79ae0553913e4760fbed95b4b56062ea8d",
+  "receipt": "rar_0b208b6de6adf70c4b386af4c42fa20dbcd9b3529d05eb56723cb6fef028a8b0",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_dbc6d4f124f7f29f7d4fee03",
+ "revision_id": "dbc6d4f124f7f29f7d4fee0376274075ba4436116da1942aa36cba0712d985a8",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

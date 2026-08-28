@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__teams_update_analyze_and_reconcile_compensation_and_benefits",
+  "name": "Analyze and reconcile compensation and benefits Teams Channel Update",
+  "rar_name": "@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits",
+  "rappid": "rappid:@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits:9fc0c0ecf32ece309e6744a1c9047ad8a8d10ce78e025db0f531719c5f0e54b1",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "teams_update",
+    "hire_to_retire",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Drafts a Teams channel post on analyze and reconcile compensation and benefits status with an interactive Adaptive Card for quick triage.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.7,
+  "sha256": "46127eab0197e1796842476c2fd2e4d73dfdf40710b51f3ade2219d8577ec464",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__teams_update_analyze_and_reconcile_compensation_and_benefits.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_analyze_and_reconcile_compensation_and_benefits.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__teams_update_analyze_and_reconcile_compensation_and_benefits.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits_agent.py"
+}

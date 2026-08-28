@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__blueprint_period_close_readiness",
+  "name": "Period Close Readiness Blueprint",
+  "rar_name": "@cowork-cookbook/blueprint_period_close_readiness",
+  "rappid": "rappid:@cowork-cookbook/blueprint_period_close_readiness:fd84770c745d5d98f0b744eab23cf1be286f395f4aac4bd2e8927a40eea79390",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt_blueprint",
+    "blueprint",
+    "record_to_report",
+    "advanced",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Paste this period-close workflow blueprint into Cowork and it assesses whether the period is ready to close \u2014 unposted work, subledger-to-GL differences, and FX exposure.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "6c6066dccbfebbfcdb06bc6185bcdb2c78d7b1e7a2c49735259e06c4a69350f6",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__blueprint_period_close_readiness.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/blueprint_period_close_readiness_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__blueprint_period_close_readiness.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__blueprint_period_close_readiness.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/blueprint_period_close_readiness_agent.py"
+}

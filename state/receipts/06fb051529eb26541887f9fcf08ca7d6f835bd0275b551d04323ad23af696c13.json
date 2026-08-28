@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-27"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/audit_record_cost_accounting_transactions",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "4018fdb26b5579dd1917b31ce2c5ba79ad3e2b71414b18543520464492e7c99c"
+ },
+ "canonical_path": "agents/@cowork-cookbook/audit_record_cost_accounting_transactions_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-27T23:23:40.627898+00:00",
+ "id": "rar_06fb051529eb26541887f9fcf08ca7d6f835bd0275b551d04323ad23af696c13",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_06fb051529eb26541887f9fc",
+ "revision_id": "06fb051529eb26541887f9fcf08ca7d6f835bd0275b551d04323ad23af696c13",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "add Cowork Cookbook industry-use-case aggregation and complete PowerCAT projection"
+ },
+ "version": "2.0.0"
+}

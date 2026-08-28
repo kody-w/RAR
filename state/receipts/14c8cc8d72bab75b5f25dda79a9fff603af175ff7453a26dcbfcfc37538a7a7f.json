@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/ppt_exec_develop_tax_strategy",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "337cb656a47153f9894db52d072586d0a7a9586efc385f4ed79ac6e1e4d2e4a4"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_develop_tax_strategy_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_14c8cc8d72bab75b5f25dda79a9fff603af175ff7453a26dcbfcfc37538a7a7f",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "a4d9c9bf47ba900fbad247ef0e2d3bf5d78d23cd9fa274efc41429c4948ee57f",
+  "receipt": "rar_3f16044282fc5ce78b737ba66c70e70f68972b79dab106e129d05a93dfcfe3aa",
+  "version": "2.0.0"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_14c8cc8d72bab75b5f25dda7",
+ "revision_id": "14c8cc8d72bab75b5f25dda79a9fff603af175ff7453a26dcbfcfc37538a7a7f",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

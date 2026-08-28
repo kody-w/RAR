@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__wrap_up_projects_and_organize_related_work",
+  "name": "Wrap up projects and organize all related work",
+  "rar_name": "@cowork-cookbook/wrap_up_projects_and_organize_related_work",
+  "rappid": "rappid:@cowork-cookbook/wrap_up_projects_and_organize_related_work:59ac7e3d2114a8b672c9a8341fe2c1290e07ef5f4333e66c46bea2af912827fe",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "work_management",
+    "beginner",
+    "read_only"
+  ],
+  "description": "Close out a project with a clean, shareable archive - not a scattered trail of files.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 9.5,
+  "sha256": "3345136cb1f9680638dbcd2159d9cd206ddd7e9c4f18cb06a7027e4d418f04ab",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__wrap_up_projects_and_organize_related_work.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/wrap_up_projects_and_organize_related_work_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__wrap_up_projects_and_organize_related_work.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__wrap_up_projects_and_organize_related_work.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/wrap_up_projects_and_organize_related_work_agent.py"
+}

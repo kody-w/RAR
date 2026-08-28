@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/dashboard_manage_service_truck_inventory",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f812a7127b078c4ed0c8a82d337e7dfd5298ff2a5652d588d4e24b95f4a980ef"
+ },
+ "canonical_path": "agents/@cowork-cookbook/dashboard_manage_service_truck_inventory_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_b0585941bcc4cb9884c1a180bc70503932326c195703f323afcacec5a37e9587",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "6b303b1d045ec5aa3e4aa5ae14247c9aaddf7f6724515d58f3da6a62a7f2c6b8",
+  "receipt": "rar_75eb42a8fab7f02e03d934804f6feea601b5d430bc9f4cd4ac6c2246cac8c01f",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_b0585941bcc4cb9884c1a180",
+ "revision_id": "b0585941bcc4cb9884c1a180bc70503932326c195703f323afcacec5a37e9587",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

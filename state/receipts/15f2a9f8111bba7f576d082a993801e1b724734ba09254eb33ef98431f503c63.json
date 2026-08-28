@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/scheduled_brief_plan_worker_retirement",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "e56b2869ccfc5c1397f8abbdcb401e84589b91d4d83bbc765b6205839d9d4d5e"
+ },
+ "canonical_path": "agents/@cowork-cookbook/scheduled_brief_plan_worker_retirement_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_15f2a9f8111bba7f576d082a993801e1b724734ba09254eb33ef98431f503c63",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "fd443d15e161338c865a0f12acccdca56e20337ee40e35afdc7055ef945e3269",
+  "receipt": "rar_de22cb702b5741bf26680aee08ca5220ee20f066ebad89ed34a9f506a7e9b477",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_15f2a9f8111bba7f576d082a",
+ "revision_id": "15f2a9f8111bba7f576d082a993801e1b724734ba09254eb33ef98431f503c63",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

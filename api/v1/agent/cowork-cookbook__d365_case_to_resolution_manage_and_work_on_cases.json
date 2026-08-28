@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__d365_case_to_resolution_manage_and_work_on_cases",
+  "name": "D365 Manage and work on cases Expert",
+  "rar_name": "@cowork-cookbook/d365_case_to_resolution_manage_and_work_on_cases",
+  "rappid": "rappid:@cowork-cookbook/d365_case_to_resolution_manage_and_work_on_cases:8aae19185dbc0fdb0ffc9ba319695a3c5b28ce964ffe72e06b4a0fd2655af86f",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt_skill",
+    "other",
+    "case_to_resolution",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "A Dynamics 365 F&SCM expert scoped to the Manage and work on cases area (a level-2 subdomain of Case to resolution) - covers 17 L3 processes.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "b023f705c5fd896d7e42dc31af6f2118a2f416b4c05d9556f872d387c40d41cc",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__d365_case_to_resolution_manage_and_work_on_cases.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/d365_case_to_resolution_manage_and_work_on_cases_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_case_to_resolution_manage_and_work_on_cases.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_case_to_resolution_manage_and_work_on_cases.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/d365_case_to_resolution_manage_and_work_on_cases_agent.py"
+}

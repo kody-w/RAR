@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__roi_and_value_selling_artifact",
+  "name": "ROI and value selling artifact",
+  "rar_name": "@cowork-cookbook/roi_and_value_selling_artifact",
+  "rappid": "rappid:@cowork-cookbook/roi_and_value_selling_artifact:3efeda46a0efbe7702f5c5d5e6c54089f3a0f65b71a3a805dbc1ec51144abed3",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "prospect_to_quote",
+    "advanced",
+    "read_only"
+  ],
+  "description": "Build an executive-level business value story for a customer - use cases, ROI model, and call to action - delivered as a deck and microsite.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.0,
+  "sha256": "328c4cf6dc3edc82223dc490e950980648a84136cbe85adecb39b6ebabac2cdb",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__roi_and_value_selling_artifact.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/roi_and_value_selling_artifact_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__roi_and_value_selling_artifact.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__roi_and_value_selling_artifact.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/roi_and_value_selling_artifact_agent.py"
+}

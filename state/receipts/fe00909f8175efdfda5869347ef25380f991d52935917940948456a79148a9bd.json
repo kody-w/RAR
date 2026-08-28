@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/report_develop_budgeting_strategy",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "1ea076604d324fb39f8f3e5ccaca88555074aaf70e49fef287be1299d0b8548c"
+ },
+ "canonical_path": "agents/@cowork-cookbook/report_develop_budgeting_strategy_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_fe00909f8175efdfda5869347ef25380f991d52935917940948456a79148a9bd",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "7b5156103e8440487c9a3536aaab38db86305f9642d33ff8fc2484b45e12b23e",
+  "receipt": "rar_ff36376a007b6405aaad8d7029a352acf37b08f35e98d15e85890d3bfb0db6a8",
+  "version": "2.0.0"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_fe00909f8175efdfda586934",
+ "revision_id": "fe00909f8175efdfda5869347ef25380f991d52935917940948456a79148a9bd",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

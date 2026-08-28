@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__forge_provenance_agent",
+  "name": "Forge Provenance",
+  "rar_name": "@rapp/forge_provenance_agent",
+  "rappid": "rappid:@rapp/forge_provenance_agent:027c01f76551537295bb7d9d7904e3b4853bfd629b64bc4acc8271c4bff45c63",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "copilot-studio",
+    "power-platform",
+    "forge",
+    "provenance",
+    "drift",
+    "deterministic",
+    "verification",
+    "m365"
+  ],
+  "description": "Stamp a forged artifact bundle with the fingerprint of the RAPP agent it came from, then prove later that it never drifted. Reports per file: current, STALE (source moved), HAND-EDITED (derived file was edited and the edit will be lost), MISSING, or UNSTAMPED (provenance unknown, which never renders as healthy). Fingerprints the agent's declarative surface, read with ast and never imported, so a comment change does not cry wolf but a description change does.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 265,
+  "size_kb": 11.7,
+  "sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69",
+  "has_card": false,
+  "added_at": "2026-08-26T17:29:33-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__forge_provenance_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/forge_provenance_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__forge_provenance_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__forge_provenance_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/forge_provenance_agent.py"
+}

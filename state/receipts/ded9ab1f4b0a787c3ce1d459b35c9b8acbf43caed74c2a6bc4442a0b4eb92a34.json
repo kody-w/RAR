@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/dashboard_analyze_marketing_trends",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "035b988cbae05b51231c4ebe43ec65ded4b1c739b13ca4431d85816d1df31746"
+ },
+ "canonical_path": "agents/@cowork-cookbook/dashboard_analyze_marketing_trends_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_ded9ab1f4b0a787c3ce1d459b35c9b8acbf43caed74c2a6bc4442a0b4eb92a34",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "fae86f3eaedec33d68ecd986cc9cfdbe5aa380b23d65a773ecc16faef077311e",
+  "receipt": "rar_1bc2db8990eed0112dd04134490f882f32a4b5f76439089f6b4ad9db0e8ae4c6",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_ded9ab1f4b0a787c3ce1d459",
+ "revision_id": "ded9ab1f4b0a787c3ce1d459b35c9b8acbf43caed74c2a6bc4442a0b4eb92a34",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__report_lease_assets",
+  "name": "Lease assets Summary Report",
+  "rar_name": "@cowork-cookbook/report_lease_assets",
+  "rappid": "rappid:@cowork-cookbook/report_lease_assets:0b84366e053198eca6f56b6eeae85a6942412d6fec985b75d9fcec2f43789437",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "report",
+    "acquire_to_dispose",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Builds a structured summary report of lease assets activity with totals, trends, and breakdowns.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.0,
+  "sha256": "524ed9b52ef8681cced6d0c68ba0f5596706440c75a47e00752dc78cb4f00bd0",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__report_lease_assets.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/report_lease_assets_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__report_lease_assets.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__report_lease_assets.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/report_lease_assets_agent.py"
+}

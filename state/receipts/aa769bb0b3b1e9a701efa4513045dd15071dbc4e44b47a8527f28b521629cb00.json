@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/demo_data_configure_and_maintain_cloud_based_printing",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "884b0fb02d1041d5e1182452defbdaa328fb94b6023dfaeac71873752f985647"
+ },
+ "canonical_path": "agents/@cowork-cookbook/demo_data_configure_and_maintain_cloud_based_printing_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_aa769bb0b3b1e9a701efa4513045dd15071dbc4e44b47a8527f28b521629cb00",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "67d59f5f7686f2e79ff91338ec8f57e9253740be8ee97f62e25e341a3d29e63e",
+  "receipt": "rar_a0f95668a756d389f52071279990324de912d339feb5d1b4c0ad5d80a109ecbf",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_aa769bb0b3b1e9a701efa451",
+ "revision_id": "aa769bb0b3b1e9a701efa4513045dd15071dbc4e44b47a8527f28b521629cb00",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

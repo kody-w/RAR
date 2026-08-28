@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__automate_recurring_project_reporting",
+  "name": "Automate recurring project reporting",
+  "rar_name": "@cowork-cookbook/automate_recurring_project_reporting",
+  "rappid": "rappid:@cowork-cookbook/automate_recurring_project_reporting:d4f51b62b20153b2252f32a711d9122ed7babc363d8ecbdd5f3a6f96fb17b132",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "report",
+    "work_management",
+    "advanced",
+    "integration",
+    "monday_com"
+  ],
+  "description": "Replace the manual \"pull the board, write the update, send it out\" Monday-morning cycle with a status update that writes and sends itself.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.1,
+  "sha256": "e6a745820c852ce105a16c82ae0736190304a7cfa935d368ca77ca601dd64dfa",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__automate_recurring_project_reporting.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/automate_recurring_project_reporting_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__automate_recurring_project_reporting.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__automate_recurring_project_reporting.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/automate_recurring_project_reporting_agent.py"
+}

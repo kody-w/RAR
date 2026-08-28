@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/teams_update_record_employee_absences",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "42037663e721f0e989101afd977e0a0d9b6d908ad43c1ca8e58048e789357e0b"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_record_employee_absences_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_0d34dd8777c4cafa5878b7aaf105346d0a2cc44dc1edcf820e5d8d58c3496ab2",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "03fa465ce4f24419cdb1851241a263f8d1bd789815cd7fb3201fcaddf6daad7a",
+  "receipt": "rar_c191d4acad5ed3e7c542b9475ef9026d49725c753c45830bc76915c96d7ea1bc",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_0d34dd8777c4cafa5878b7aa",
+ "revision_id": "0d34dd8777c4cafa5878b7aaf105346d0a2cc44dc1edcf820e5d8d58c3496ab2",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

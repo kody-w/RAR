@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__upsell_identification",
+  "name": "Upsell identification",
+  "rar_name": "@cowork-cookbook/upsell_identification",
+  "rappid": "rappid:@cowork-cookbook/upsell_identification:2b8d23b13e453d51a77da205c30f7dd76493ad261617f0b8baaab8a25d47897b",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "prospect_to_quote",
+    "advanced",
+    "integration",
+    "dynamics_365_sales"
+  ],
+  "description": "Find the best expansion opportunity in your book this week and arrive with a pitch already built.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.1,
+  "sha256": "5dcc9d0a5e848efb1783e4380d203b0bd66c9d7cd9f4813d8690ce8835a272b1",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__upsell_identification.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/upsell_identification_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__upsell_identification.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__upsell_identification.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/upsell_identification_agent.py"
+}

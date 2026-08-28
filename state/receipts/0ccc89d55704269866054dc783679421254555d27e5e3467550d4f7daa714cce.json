@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-27"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/bulk_update_define_operating_hours_and_schedule",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "9c9e589e97f3c2b85b2a40478c9405136b2f088c2bfc277f74968777fce5ff14"
+ },
+ "canonical_path": "agents/@cowork-cookbook/bulk_update_define_operating_hours_and_schedule_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-27T23:23:40.627898+00:00",
+ "id": "rar_0ccc89d55704269866054dc783679421254555d27e5e3467550d4f7daa714cce",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "frontier",
+ "request_id": "req_0ccc89d55704269866054dc7",
+ "revision_id": "0ccc89d55704269866054dc783679421254555d27e5e3467550d4f7daa714cce",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "add Cowork Cookbook industry-use-case aggregation and complete PowerCAT projection"
+ },
+ "version": "2.0.0"
+}

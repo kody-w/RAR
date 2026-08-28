@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__customer_adoption_materials",
+  "name": "Customer adoption materials",
+  "rar_name": "@cowork-cookbook/customer_adoption_materials",
+  "rappid": "rappid:@cowork-cookbook/customer_adoption_materials:2de3bb40174ef167171d62b3dca1b56851f96dc85973a344a55cb8e2d7eeb231",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "prospect_to_quote",
+    "advanced",
+    "read_only"
+  ],
+  "description": "Build a role-relevant learning curriculum for a customer - structured, sourced, and deployment-ready.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 9.4,
+  "sha256": "e8acc8ad32ef6f2349f4d9dfddca014ce0bf0e75b7bd70c77dd299be70b80392",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__customer_adoption_materials.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/customer_adoption_materials_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__customer_adoption_materials.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__customer_adoption_materials.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/customer_adoption_materials_agent.py"
+}

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/teams_update_forecast_marketing_campaign_targets",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "7a055f0a1b5e3b9f2d9d3a2cfabb77a026ae8d77087b82ca179b8eae91921d78"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_forecast_marketing_campaign_targets_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_04f7919d762541d038ee9c51578f51c7b35ab19c140b5e66e86b2c3e2a1ebf9c",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "b6d7150bcf1f9c2b8a8baac3d839da9faf5161a01e97c3d9211527ad86a98553",
+  "receipt": "rar_9f1888bab35795754b6430b253e42726dee10bb5fc03b08167a8738334b362d8",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_04f7919d762541d038ee9c51",
+ "revision_id": "04f7919d762541d038ee9c51578f51c7b35ab19c140b5e66e86b2c3e2a1ebf9c",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

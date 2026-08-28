@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__generate_and_send_your_weekly_status",
+  "name": "Generate and send your weekly status automatically",
+  "rar_name": "@cowork-cookbook/generate_and_send_your_weekly_status",
+  "rappid": "rappid:@cowork-cookbook/generate_and_send_your_weekly_status:ff7dc966ae71dffdbaea9978815c2bb3da2134f94c155b12f19935b29c80d201",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "report",
+    "work_management",
+    "intermediate",
+    "integration",
+    "fabric_iq"
+  ],
+  "description": "Replace the Monday-morning scramble with a status update that writes itself.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.0,
+  "sha256": "b7b6e3a7c93dcee8c1662b725ab3a4dd3597ce1b3fb5f81acd53de217b19eb21",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__generate_and_send_your_weekly_status.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/generate_and_send_your_weekly_status_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__generate_and_send_your_weekly_status.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__generate_and_send_your_weekly_status.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/generate_and_send_your_weekly_status_agent.py"
+}

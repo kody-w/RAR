@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/configure_configure_and_manage_iot_devices",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "d086ef4185012ea0346272970f35cd2b8875e025b57ebfc690a3ecaad6f0cee2"
+ },
+ "canonical_path": "agents/@cowork-cookbook/configure_configure_and_manage_iot_devices_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_064703c44b272799e82ce67dfc5831f3a56f04ed79c07e6fa9e0b5a5c3c8c09c",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "7d6d85a710d28d7431d657ea42f51147799694734c1bf14423864f3aac9319af",
+  "receipt": "rar_59d4bc13e7293c3b92a5057d8e2e10691328e827a43fa78f01d07fdf16fbd041",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_064703c44b272799e82ce67d",
+ "revision_id": "064703c44b272799e82ce67dfc5831f3a56f04ed79c07e6fa9e0b5a5c3c8c09c",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

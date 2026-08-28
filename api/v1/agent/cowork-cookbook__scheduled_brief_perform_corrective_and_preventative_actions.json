@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__scheduled_brief_perform_corrective_and_preventative_actions",
+  "name": "Perform corrective and preventative actions Scheduled Email Brief",
+  "rar_name": "@cowork-cookbook/scheduled_brief_perform_corrective_and_preventative_actions",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_perform_corrective_and_preventative_actions:8320368f6a1385c42c35f1efca9789cc6e4e6fd0ccc723e9e0ee9df2ba5dd538",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "scheduled_brief",
+    "inventory_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Schedulable morning-brief email summarizing perform corrective and preventative actions for the responsible owner; designed to run daily or weekly.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.7,
+  "sha256": "3350c00ac324619f6da3d94ac93bc10a60f246ab127d2f47a855f563cd8ae09e",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_perform_corrective_and_preventative_actions.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/scheduled_brief_perform_corrective_and_preventative_actions_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_perform_corrective_and_preventative_actions.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_perform_corrective_and_preventative_actions.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/scheduled_brief_perform_corrective_and_preventative_actions_agent.py"
+}

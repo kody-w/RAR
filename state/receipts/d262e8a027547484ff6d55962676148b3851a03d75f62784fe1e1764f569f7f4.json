@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_develop_financial_period_strategy",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "503213b6f015b2d7dba400b9d56d4ac8424c0af8456fbcc45a5c555948a51c48"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_develop_financial_period_strategy_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_d262e8a027547484ff6d55962676148b3851a03d75f62784fe1e1764f569f7f4",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "d3f623f98716647ec0442ceb27920bdb3d741017e2a24755d17a86c7e4140b29",
+  "receipt": "rar_ea8937a733eb643e1a706e14c010279b1fbed579e74ad30ae7394f36ca9a896b",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_d262e8a027547484ff6d5596",
+ "revision_id": "d262e8a027547484ff6d55962676148b3851a03d75f62784fe1e1764f569f7f4",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

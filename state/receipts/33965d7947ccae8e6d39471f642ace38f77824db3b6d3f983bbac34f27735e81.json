@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "862c37d20205f2fa14a27225aa2f5330c5e8637ee509297e7840658af22588bc"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_33965d7947ccae8e6d39471f642ace38f77824db3b6d3f983bbac34f27735e81",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "16e8d8c50452a0932283ac5dd5721833973cb957906b3b0fd3207fe5da8b7763",
+  "receipt": "rar_fc497f003658bbdd303dc65be42ba064858227f4733f37c51f59f12a074bdea3",
+  "version": "2.0.0"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_33965d7947ccae8e6d39471f",
+ "revision_id": "33965d7947ccae8e6d39471f642ace38f77824db3b6d3f983bbac34f27735e81",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

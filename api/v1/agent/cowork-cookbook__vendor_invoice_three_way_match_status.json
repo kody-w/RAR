@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__vendor_invoice_three_way_match_status",
+  "name": "Vendor Invoice Three-Way Match Status Report",
+  "rar_name": "@cowork-cookbook/vendor_invoice_three_way_match_status",
+  "rappid": "rappid:@cowork-cookbook/vendor_invoice_three_way_match_status:dcb4d7d407f240f98f98c3facad0fa64a91d4a94fd3c972aa82cf6740d1b70db",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.1",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "report",
+    "source_to_pay",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Builds a status report of vendor invoices and their three-way-match state against POs and goods receipts.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.1,
+  "sha256": "ab6de39d29ae627d5cc4f914fb2adb470a2375a1c6b2776d99665b90d903e804",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__vendor_invoice_three_way_match_status.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/vendor_invoice_three_way_match_status_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__vendor_invoice_three_way_match_status.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__vendor_invoice_three_way_match_status.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/vendor_invoice_three_way_match_status_agent.py"
+}

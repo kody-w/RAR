@@ -22,12 +22,28 @@ from pathlib import Path
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-AGG_DIR = REPO_ROOT / "agents" / "@cat-agent-skills"
 TOASTER_PATH = REPO_ROOT / "agents" / "@kody-w" / "skill_toaster_agent.py"
 GENERATOR_PATH = REPO_ROOT / "scripts" / "generate_aggregated_agents.py"
 AGGREGATED_JSON = REPO_ROOT / "state" / "aggregated.json"
 
-AGG_FILES = sorted(AGG_DIR.glob("*_agent.py")) if AGG_DIR.exists() else []
+
+def aggregated_files():
+    if not AGGREGATED_JSON.exists():
+        return []
+    items = json.loads(AGGREGATED_JSON.read_text()).get("items", [])
+    paths = []
+    for item in items:
+        publisher, slug = item["ref"].split("/", 1)
+        paths.append(
+            REPO_ROOT
+            / "agents"
+            / publisher
+            / f"{slug}_agent.py"
+        )
+    return sorted(paths)
+
+
+AGG_FILES = aggregated_files()
 
 
 def load_module(path: Path):
@@ -134,6 +150,99 @@ __manifest__ = {
     injected = 'text"""; __manifest__ = {"version": "99.0.0"}; """'
     safe = generator.doc_fragment(injected)
     compile(f'"""{safe}"""', "<doc-fragment>", "exec")
+
+
+def test_removed_upstream_entries_are_deprecated_not_deleted(
+    generator,
+    tmp_path,
+    monkeypatch,
+):
+    source = {
+        "id": "demo-source",
+        "namespace": "@demo-source",
+        "display_name": "Demo Source",
+        "publisher": "Demo",
+        "home_url": "https://example.com",
+        "license": "MIT",
+        "license_verified": True,
+    }
+    active_source = {
+        **source,
+        "id": "active-source",
+        "namespace": "@active-source",
+        "display_name": "Active Source",
+    }
+    stale_item = {
+        "ref": "@demo-source/stale",
+        "source_id": "demo-source",
+        "source_slug": "stale",
+        "name": "Stale",
+        "description": "An upstream entry that disappears.",
+        "kind": "skill",
+        "tags": ["analysis"],
+        "platforms": [],
+        "author": "Demo",
+        "version": "1.0.0",
+        "url": "https://example.com/stale",
+    }
+    current_item = {
+        **stale_item,
+        "ref": "@active-source/current",
+        "source_id": "active-source",
+        "source_slug": "current",
+        "name": "Current",
+        "url": "https://example.com/current",
+    }
+    agents_dir = tmp_path / "agents"
+    stale_path = agents_dir / "@demo-source" / "stale_agent.py"
+    stale_path.parent.mkdir(parents=True)
+    stale_path.write_text(
+        generator.render(stale_item, source, version_override="2.0.0"),
+        encoding="utf-8",
+    )
+    aggregate = tmp_path / "aggregated.json"
+    aggregate.write_text(json.dumps({
+        "sources": [active_source],
+        "items": [current_item],
+    }), encoding="utf-8")
+    registry = tmp_path / "registry.json"
+    registry.write_text(json.dumps({
+        "agents": [{
+            "name": "@demo-source/stale",
+            "version": "2.0.0",
+        }],
+    }), encoding="utf-8")
+
+    monkeypatch.setattr(generator, "AGENTS_DIR", agents_dir)
+    monkeypatch.setattr(generator, "AGG_FILE", aggregate)
+    monkeypatch.setattr(generator, "REGISTRY_FILE", registry)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "generate_aggregated_agents.py",
+            "--only",
+            "demo-source",
+        ],
+    )
+    assert generator.main() == 0
+    assert stale_path.is_file()
+    manifest = generator.generated_manifest(stale_path.read_text())
+    assert manifest["deprecated"] is True
+    assert manifest["source"]["upstream_removed"] is True
+    assert manifest["version"] == "2.0.1"
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "generate_aggregated_agents.py",
+            "--only",
+            "demo-source",
+            "--check",
+        ],
+    )
+    assert generator.main() == 0
 
 
 def test_analysis_recognises_shape(toaster):
@@ -247,6 +356,26 @@ def test_every_aggregated_item_has_an_agent():
     items = json.loads(AGGREGATED_JSON.read_text()).get("items", [])
     assert len(AGG_FILES) == len(items), (
         f"{len(items)} indexed entries but {len(AGG_FILES)} agents")
+
+
+def test_extra_generated_agents_are_deprecated_upstream_removals():
+    items = json.loads(AGGREGATED_JSON.read_text()).get("items", [])
+    expected = {item["ref"] for item in items}
+    namespaces = {ref.split("/", 1)[0] for ref in expected}
+    for namespace in namespaces:
+        for path in (REPO_ROOT / "agents" / namespace).glob("*_agent.py"):
+            manifest = generated_manifest_for_test(path)
+            name = manifest.get("name")
+            if name in expected:
+                continue
+            source = manifest.get("source") or {}
+            assert manifest.get("deprecated") is True, path
+            assert source.get("upstream_removed") is True, path
+
+
+def generated_manifest_for_test(path):
+    module = load_module(path)
+    return module.__manifest__
 
 
 def test_generator_reports_no_drift():

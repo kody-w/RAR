@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/d365_prospect_to_quote_estimate_and_quote_sales",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "72ce4cbe6e452bd58d619d8e893ca092683efa65074edb5d08905c642c4a7bff"
+ },
+ "canonical_path": "agents/@cowork-cookbook/d365_prospect_to_quote_estimate_and_quote_sales_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_65d3c7e9ba7e8a00aa3c406ff9f5adff94fc638d09e9694f40499bd0f2cbfc15",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "95bfe43e1729499819bf359648b53e5379520bc46049e33a693062f6a5791aa2",
+  "receipt": "rar_f5f0c29cf022aad819a6b31466fa0bba2b2bd7d96824176d61c8e8818c1e3ca3",
+  "version": "2.0.0"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_65d3c7e9ba7e8a00aa3c406f",
+ "revision_id": "65d3c7e9ba7e8a00aa3c406ff9f5adff94fc638d09e9694f40499bd0f2cbfc15",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}

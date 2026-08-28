@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/demo_data_define_business_intelligence_reporting_and_analytics_strategy",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "3da79834eea63ac618d89c585f4a911f0edde41e1fd5779b8c4244cc847f488e"
+ },
+ "canonical_path": "agents/@cowork-cookbook/demo_data_define_business_intelligence_reporting_and_analytics_strategy_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T00:53:34.962432+00:00",
+ "id": "rar_479877a56ac55ceb42a969fdb9ff7c964db96fb7f3bb56cd45b8850ef3d56d2d",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "3d5aad600ca3dd67c42ded8eba420f49738ba30fec2a627dd23ebbf798e17112",
+  "receipt": "rar_d20df753ecf6c7c394bcd3541f452035e0f7ac2722ce5d5b429bb52b088b343d",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_479877a56ac55ceb42a969fd",
+ "revision_id": "479877a56ac55ceb42a969fdb9ff7c964db96fb7f3bb56cd45b8850ef3d56d2d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "preserve upstream verification tiers and complete Cowork provenance"
+ },
+ "version": "2.0.1"
+}
