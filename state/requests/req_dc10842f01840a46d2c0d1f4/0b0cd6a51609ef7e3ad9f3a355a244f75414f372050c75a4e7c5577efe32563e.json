@@ -29,5 +29,6 @@
   "slug": "account_intelligence_agent",
   "source_body_sha256": "ffd62aeba63d306e2bab3847a19305e8a3b8d8c6841611d7bd903d2a36839fa3",
   "source_url": "",
-  "status": "pending_review"
+  "status": "cancelled",
+  "cancelled_at": "2026-08-28T16:20:08.346120+00:00"
 }
