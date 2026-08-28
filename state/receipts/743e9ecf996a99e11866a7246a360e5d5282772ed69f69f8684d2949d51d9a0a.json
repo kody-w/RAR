@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/audit_analyze_sourcing_effectiveness",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "afe9495b0d3555fe2877d9001660e1f6c0bcfc1da93743b8aabdb2a4c325b65d"
+ },
+ "canonical_path": "agents/@cowork-cookbook/audit_analyze_sourcing_effectiveness_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_743e9ecf996a99e11866a7246a360e5d5282772ed69f69f8684d2949d51d9a0a",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_743e9ecf996a99e11866a724",
+ "revision_id": "743e9ecf996a99e11866a7246a360e5d5282772ed69f69f8684d2949d51d9a0a",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

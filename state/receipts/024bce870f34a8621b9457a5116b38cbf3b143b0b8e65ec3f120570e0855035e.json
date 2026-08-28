@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_plan_demand_consensus",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6b04fff997ca4cd30e48cfbf9753e25bad6b972b2c8b0e8a006b70497b657882"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_plan_demand_consensus_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_024bce870f34a8621b9457a5116b38cbf3b143b0b8e65ec3f120570e0855035e",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_024bce870f34a8621b9457a5",
+ "revision_id": "024bce870f34a8621b9457a5116b38cbf3b143b0b8e65ec3f120570e0855035e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

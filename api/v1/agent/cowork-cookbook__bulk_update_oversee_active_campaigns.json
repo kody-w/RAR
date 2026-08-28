@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__bulk_update_oversee_active_campaigns",
+  "name": "Oversee active campaigns Bulk Field Update",
+  "rar_name": "@cowork-cookbook/bulk_update_oversee_active_campaigns",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_oversee_active_campaigns:e1c87ec6e385363f048a8a5ae4de71f366e0cca1a549f6846f8c4987f601071e",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "bulk_update",
+    "concept_to_market",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Applies a bulk field update across oversee active campaigns records from an input list, with dry-run preview before commit.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "7034ec9aed4277ca28fa607f48752fdc0e694a2d26760e9c2792994136917618",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__bulk_update_oversee_active_campaigns.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/bulk_update_oversee_active_campaigns_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__bulk_update_oversee_active_campaigns.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__bulk_update_oversee_active_campaigns.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/bulk_update_oversee_active_campaigns_agent.py"
+}

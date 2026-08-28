@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/report_develop_subcontracting_strategy",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "756f277aaccab34abf1bcd4e426c642f0c58e4a806515f0fcbdbaaa7d1053ae8"
+ },
+ "canonical_path": "agents/@cowork-cookbook/report_develop_subcontracting_strategy_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_aa73111a4855c37f1bfe1f0e584115d710e86c528711d9e86e8a05743e01c3a5",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_aa73111a4855c37f1bfe1f0e",
+ "revision_id": "aa73111a4855c37f1bfe1f0e584115d710e86c528711d9e86e8a05743e01c3a5",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

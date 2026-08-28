@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__bulk_update_analyze_and_segment_goods_and_services",
+  "name": "Analyze and segment goods and services Bulk Field Update",
+  "rar_name": "@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services:140b6440eaade6d3295d9b134643391d81d22aee3c70ab2653fb2a738e794621",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "bulk_update",
+    "forecast_to_plan",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Applies a bulk field update across analyze and segment goods and services records from an input list, with dry-run preview before commit.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.6,
+  "sha256": "e51c2dc320ca6713291445f61939927d97984eb587c5c0237d017e62312ff7a7",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__bulk_update_analyze_and_segment_goods_and_services.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__bulk_update_analyze_and_segment_goods_and_services.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__bulk_update_analyze_and_segment_goods_and_services.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services_agent.py"
+}

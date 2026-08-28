@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/report_audit_workplace_for_safety",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "9041c2b1c4d12f859e356c6e72d07f080bf6453955067b414959c21b137c9268"
+ },
+ "canonical_path": "agents/@cowork-cookbook/report_audit_workplace_for_safety_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_cc111bdd7b1d509becd910761c434810664885adeed9a3d5f9e02f1598a94f6e",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_cc111bdd7b1d509becd91076",
+ "revision_id": "cc111bdd7b1d509becd910761c434810664885adeed9a3d5f9e02f1598a94f6e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

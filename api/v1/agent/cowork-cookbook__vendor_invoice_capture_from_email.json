@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__vendor_invoice_capture_from_email",
+  "name": "Vendor Invoice Capture from Email",
+  "rar_name": "@cowork-cookbook/vendor_invoice_capture_from_email",
+  "rappid": "rappid:@cowork-cookbook/vendor_invoice_capture_from_email:6be9612b1ef32848ddad524843422f976dd3f98178a37c3a1f28704f4086574b",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt_skill",
+    "scheduled_brief",
+    "source_to_pay",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Watches the inbox for emails with PDF attachments that look like vendor invoices, extracts every field from the PDF, matches the vendor against USMF master data, and creates a pending vendor invoice record in Dynamics 365 F&O with the header and lines populated.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.8,
+  "sha256": "74aff5e7e60d62993665b35bb9bee48629a27e4eff7d50466256a2128df6d1c7",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__vendor_invoice_capture_from_email.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/vendor_invoice_capture_from_email_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__vendor_invoice_capture_from_email.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__vendor_invoice_capture_from_email.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/vendor_invoice_capture_from_email_agent.py"
+}

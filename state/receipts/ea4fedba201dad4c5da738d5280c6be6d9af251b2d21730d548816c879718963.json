@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_allocate_headcount_to_business_units",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "9d58024b8c3edba7e7dfd1995f6efe6810efc6a28e7979711d90f5c303920783"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_allocate_headcount_to_business_units_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_ea4fedba201dad4c5da738d5280c6be6d9af251b2d21730d548816c879718963",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_ea4fedba201dad4c5da738d5",
+ "revision_id": "ea4fedba201dad4c5da738d5280c6be6d9af251b2d21730d548816c879718963",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

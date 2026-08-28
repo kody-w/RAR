@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/ppt_exec_report_on_production_sustainability_metrics",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f6374ee44b2f55cbe8e123b7362db780d6dee72a869a5a69911ff6fae7a939a8"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_report_on_production_sustainability_metrics_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_e169f022d7656fbe4e22530b0ecb80980b939294f5de935dede9b0dcc0e1e12e",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_e169f022d7656fbe4e22530b",
+ "revision_id": "e169f022d7656fbe4e22530b0ecb80980b939294f5de935dede9b0dcc0e1e12e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

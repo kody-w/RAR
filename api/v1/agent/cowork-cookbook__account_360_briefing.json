@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__account_360_briefing",
+  "name": "Account 360 Briefing Pack",
+  "rar_name": "@cowork-cookbook/account_360_briefing",
+  "rappid": "rappid:@cowork-cookbook/account_360_briefing:da9146c18b3fdb97120bc499f5e5311d2f61c8474084592c2264451a70fd9360",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "scheduled_brief",
+    "prospect_to_quote",
+    "intermediate",
+    "integration",
+    "dynamics_365_sales"
+  ],
+  "description": "Assembles everything Dynamics 365 Sales knows about a named account into a single briefing document you can read before a meeting.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.3,
+  "sha256": "8ee31292f79ce49b2e8db5d4558a0af466b628c2ff2dff52bb8ca308cd4f6dd9",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__account_360_briefing.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/account_360_briefing_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__account_360_briefing.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__account_360_briefing.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/account_360_briefing_agent.py"
+}

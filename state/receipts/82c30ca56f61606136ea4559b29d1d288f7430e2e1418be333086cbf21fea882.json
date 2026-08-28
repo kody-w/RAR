@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/adaptive_card_cancel_sales_orders",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "3a1b4c23c8dd54e4ea00fa5c4f22a6b260965b0180c2c9e9516a348a70eb8542"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_cancel_sales_orders_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_82c30ca56f61606136ea4559b29d1d288f7430e2e1418be333086cbf21fea882",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_82c30ca56f61606136ea4559",
+ "revision_id": "82c30ca56f61606136ea4559b29d1d288f7430e2e1418be333086cbf21fea882",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

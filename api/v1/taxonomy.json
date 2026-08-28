@@ -1,10 +1,14 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-28T04:46:29Z",
+  "generated": "2026-08-28T04:49:09Z",
   "categories": [
     {
+      "name": "integrations",
+      "count": 1474
+    },
+    {
       "name": "general",
-      "count": 65
+      "count": 86
     },
     {
       "name": "productivity",
@@ -27,8 +31,8 @@
       "count": 18
     },
     {
-      "name": "integrations",
-      "count": 17
+      "name": "analysis",
+      "count": 12
     },
     {
       "name": "financial_services",
@@ -40,10 +44,6 @@
     },
     {
       "name": "b2c_sales",
-      "count": 7
-    },
-    {
-      "name": "analysis",
       "count": 7
     },
     {
@@ -101,12 +101,16 @@
   ],
   "publishers": [
     {
+      "name": "@cowork-cookbook",
+      "count": 1481
+    },
+    {
       "name": "@aibast-agents-library",
       "count": 104
     },
     {
       "name": "@cat-agent-skills",
-      "count": 93
+      "count": 95
     },
     {
       "name": "@kody-w",
@@ -148,19 +152,19 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 166
+      "count": 1374
+    },
+    {
+      "name": "verified",
+      "count": 281
     },
     {
       "name": "frontier",
-      "count": 93
+      "count": 95
     },
     {
       "name": "official",
       "count": 46
-    },
-    {
-      "name": "verified",
-      "count": 8
     },
     {
       "name": "private",
@@ -169,8 +173,144 @@
   ],
   "tags": [
     {
+      "name": "industry_solution",
+      "count": 1481
+    },
+    {
+      "name": "business_process",
+      "count": 1481
+    },
+    {
+      "name": "integration",
+      "count": 1459
+    },
+    {
+      "name": "prompt",
+      "count": 1444
+    },
+    {
+      "name": "intermediate",
+      "count": 1434
+    },
+    {
+      "name": "dynamics_365_erp",
+      "count": 1413
+    },
+    {
+      "name": "administer_to_operate",
+      "count": 268
+    },
+    {
+      "name": "audit",
+      "count": 165
+    },
+    {
+      "name": "report",
+      "count": 152
+    },
+    {
+      "name": "dashboard",
+      "count": 149
+    },
+    {
+      "name": "scheduled_brief",
+      "count": 148
+    },
+    {
+      "name": "teams_update",
+      "count": 138
+    },
+    {
+      "name": "bulk_update",
+      "count": 137
+    },
+    {
+      "name": "ppt_exec",
+      "count": 135
+    },
+    {
+      "name": "adaptive_card",
+      "count": 133
+    },
+    {
+      "name": "configure",
+      "count": 129
+    },
+    {
+      "name": "demo_data",
+      "count": 126
+    },
+    {
+      "name": "hire_to_retire",
+      "count": 116
+    },
+    {
+      "name": "record_to_report",
+      "count": 106
+    },
+    {
+      "name": "forecast_to_plan",
+      "count": 93
+    },
+    {
+      "name": "source_to_pay",
+      "count": 93
+    },
+    {
+      "name": "order_to_cash",
+      "count": 91
+    },
+    {
+      "name": "acquire_to_dispose",
+      "count": 90
+    },
+    {
+      "name": "inventory_to_deliver",
+      "count": 85
+    },
+    {
+      "name": "concept_to_market",
+      "count": 82
+    },
+    {
+      "name": "other",
+      "count": 81
+    },
+    {
+      "name": "project_to_profit",
+      "count": 77
+    },
+    {
+      "name": "case_to_resolution",
+      "count": 77
+    },
+    {
+      "name": "service_to_deliver",
+      "count": 77
+    },
+    {
+      "name": "prospect_to_quote",
+      "count": 76
+    },
+    {
+      "name": "plan_to_produce",
+      "count": 65
+    },
+    {
+      "name": "design_to_retire",
+      "count": 65
+    },
+    {
       "name": "productivity",
       "count": 40
+    },
+    {
+      "name": "advanced",
+      "count": 33
+    },
+    {
+      "name": "prompt_skill",
+      "count": 33
     },
     {
       "name": "sales",
@@ -181,12 +321,24 @@
       "count": 24
     },
     {
-      "name": "pipeline",
-      "count": 19
+      "name": "read_only",
+      "count": 24
     },
     {
       "name": "automation",
-      "count": 18
+      "count": 21
+    },
+    {
+      "name": "dynamics_365_sales",
+      "count": 21
+    },
+    {
+      "name": "work_management",
+      "count": 20
+    },
+    {
+      "name": "pipeline",
+      "count": 19
     },
     {
       "name": "content",
@@ -205,8 +357,16 @@
       "count": 14
     },
     {
+      "name": "beginner",
+      "count": 14
+    },
+    {
       "name": "documents",
       "count": 13
+    },
+    {
+      "name": "copilot_studio",
+      "count": 12
     },
     {
       "name": "rapplication",
@@ -225,24 +385,20 @@
       "count": 10
     },
     {
+      "name": "testing",
+      "count": 10
+    },
+    {
       "name": "financial-services",
       "count": 10
     },
     {
-      "name": "audit",
-      "count": 10
-    },
-    {
-      "name": "copilot_studio",
+      "name": "fabric_iq",
       "count": 10
     },
     {
       "name": "meta",
       "count": 10
-    },
-    {
-      "name": "testing",
-      "count": 9
     },
     {
       "name": "powerpoint",
@@ -257,7 +413,15 @@
       "count": 8
     },
     {
+      "name": "analysis",
+      "count": 8
+    },
+    {
       "name": "presentations",
+      "count": 8
+    },
+    {
+      "name": "governance",
       "count": 8
     },
     {
@@ -297,10 +461,6 @@
       "count": 7
     },
     {
-      "name": "governance",
-      "count": 7
-    },
-    {
       "name": "rapp",
       "count": 7
     },
@@ -310,6 +470,10 @@
     },
     {
       "name": "energy",
+      "count": 6
+    },
+    {
+      "name": "analytics",
       "count": 6
     },
     {
@@ -325,6 +489,10 @@
       "count": 6
     },
     {
+      "name": "assessment",
+      "count": 6
+    },
+    {
       "name": "html",
       "count": 6
     },
@@ -334,6 +502,10 @@
     },
     {
       "name": "power_platform",
+      "count": 6
+    },
+    {
+      "name": "miro",
       "count": 6
     },
     {
@@ -361,7 +533,7 @@
       "count": 5
     },
     {
-      "name": "analytics",
+      "name": "risk",
       "count": 5
     },
     {
@@ -378,10 +550,6 @@
     },
     {
       "name": "core",
-      "count": 5
-    },
-    {
-      "name": "analysis",
       "count": 5
     },
     {
@@ -413,7 +581,15 @@
       "count": 5
     },
     {
+      "name": "blueprint",
+      "count": 5
+    },
+    {
       "name": "visualization",
+      "count": 5
+    },
+    {
+      "name": "monday_com",
       "count": 5
     },
     {
@@ -454,10 +630,6 @@
     },
     {
       "name": "customer-service",
-      "count": 4
-    },
-    {
-      "name": "risk",
       "count": 4
     },
     {
@@ -505,7 +677,7 @@
       "count": 4
     },
     {
-      "name": "assessment",
+      "name": "monitoring",
       "count": 4
     },
     {
@@ -526,6 +698,10 @@
     },
     {
       "name": "discovery",
+      "count": 4
+    },
+    {
+      "name": "prompt_blueprint",
       "count": 4
     },
     {
@@ -665,10 +841,6 @@
       "count": 3
     },
     {
-      "name": "dashboard",
-      "count": 3
-    },
-    {
       "name": "intake",
       "count": 3
     },
@@ -758,10 +930,6 @@
     },
     {
       "name": "foundry",
-      "count": 3
-    },
-    {
-      "name": "monitoring",
       "count": 3
     },
     {
@@ -1057,11 +1225,15 @@
       "count": 2
     },
     {
-      "name": "use_case",
+      "name": "operations",
       "count": 2
     },
     {
-      "name": "report",
+      "name": "security",
+      "count": 2
+    },
+    {
+      "name": "use_case",
       "count": 2
     },
     {
@@ -1177,6 +1349,10 @@
       "count": 2
     },
     {
+      "name": "prezi",
+      "count": 2
+    },
+    {
       "name": "demos",
       "count": 2
     },
@@ -1194,178 +1370,6 @@
     },
     {
       "name": "executive",
-      "count": 2
-    },
-    {
-      "name": "recon",
-      "count": 2
-    },
-    {
-      "name": "wiki",
-      "count": 2
-    },
-    {
-      "name": "competition",
-      "count": 2
-    },
-    {
-      "name": "self-improvement",
-      "count": 2
-    },
-    {
-      "name": "tournament",
-      "count": 2
-    },
-    {
-      "name": "heartbeat",
-      "count": 2
-    },
-    {
-      "name": "verification",
-      "count": 2
-    },
-    {
-      "name": "determinism",
-      "count": 2
-    },
-    {
-      "name": "chain",
-      "count": 2
-    },
-    {
-      "name": "virtual-world",
-      "count": 2
-    },
-    {
-      "name": "integration",
-      "count": 2
-    },
-    {
-      "name": "pac",
-      "count": 2
-    },
-    {
-      "name": "assimilated",
-      "count": 2
-    },
-    {
-      "name": "forge",
-      "count": 2
-    },
-    {
-      "name": "parity",
-      "count": 2
-    },
-    {
-      "name": "hyperframes",
-      "count": 2
-    },
-    {
-      "name": "stub",
-      "count": 2
-    },
-    {
-      "name": "leviathan",
-      "count": 2
-    },
-    {
-      "name": "package-manager",
-      "count": 2
-    },
-    {
-      "name": "install",
-      "count": 2
-    },
-    {
-      "name": "installer",
-      "count": 2
-    },
-    {
-      "name": "rappter",
-      "count": 2
-    },
-    {
-      "name": "youtube",
-      "count": 2
-    },
-    {
-      "name": "swarm",
-      "count": 2
-    },
-    {
-      "name": "multi-agent",
-      "count": 2
-    },
-    {
-      "name": "codegen",
-      "count": 2
-    },
-    {
-      "name": "aibast",
-      "count": 2
-    },
-    {
-      "name": "prototype",
-      "count": 2
-    },
-    {
-      "name": "builder",
-      "count": 2
-    },
-    {
-      "name": "rappterbook",
-      "count": 2
-    },
-    {
-      "name": "community",
-      "count": 2
-    },
-    {
-      "name": "cubby",
-      "count": 2
-    },
-    {
-      "name": "alignment",
-      "count": 2
-    },
-    {
-      "name": "steward",
-      "count": 2
-    },
-    {
-      "name": "hatch",
-      "count": 2
-    },
-    {
-      "name": "lifecycle",
-      "count": 2
-    },
-    {
-      "name": "fleet",
-      "count": 2
-    },
-    {
-      "name": "deterministic",
-      "count": 2
-    },
-    {
-      "name": "moment-pipeline",
-      "count": 2
-    },
-    {
-      "name": "rappterbook-engine",
-      "count": 2
-    },
-    {
-      "name": "rapp-1",
-      "count": 2
-    },
-    {
-      "name": "dogg",
-      "count": 2
-    },
-    {
-      "name": "canon",
       "count": 2
     }
   ]

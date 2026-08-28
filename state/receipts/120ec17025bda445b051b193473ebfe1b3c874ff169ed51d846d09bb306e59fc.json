@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/adaptive_card_develop_currency_policies",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6f33b443888d0f2eafe0a68f2f20135b2e6057eaa0c0ac136392648a0c7e861a"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_develop_currency_policies_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_120ec17025bda445b051b193473ebfe1b3c874ff169ed51d846d09bb306e59fc",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_120ec17025bda445b051b193",
+ "revision_id": "120ec17025bda445b051b193473ebfe1b3c874ff169ed51d846d09bb306e59fc",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/adaptive_card_manage_benefits_enrollment",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "01b818cd530ae636f3747588af46f9a64a1234a6ec15fd77901237b352c0181a"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_manage_benefits_enrollment_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_8448a0ab395a0cd5dc79510a9f61ea86153109e5a96577a9e64e211fafc955a4",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_8448a0ab395a0cd5dc79510a",
+ "revision_id": "8448a0ab395a0cd5dc79510a9f61ea86153109e5a96577a9e64e211fafc955a4",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

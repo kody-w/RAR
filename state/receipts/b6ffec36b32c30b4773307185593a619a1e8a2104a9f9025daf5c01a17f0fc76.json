@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/dashboard_plan_marketing_campaigns",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "fd72db42b1d1288f2cf8eff00ec5f530a2a9418c57e76e8cf669b805df3d00a8"
+ },
+ "canonical_path": "agents/@cowork-cookbook/dashboard_plan_marketing_campaigns_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_b6ffec36b32c30b4773307185593a619a1e8a2104a9f9025daf5c01a17f0fc76",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_b6ffec36b32c30b477330718",
+ "revision_id": "b6ffec36b32c30b4773307185593a619a1e8a2104a9f9025daf5c01a17f0fc76",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__scheduled_brief_maintain_quality_certifications",
+  "name": "Maintain quality certifications Scheduled Email Brief",
+  "rar_name": "@cowork-cookbook/scheduled_brief_maintain_quality_certifications",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_maintain_quality_certifications:71c71a3b20cfb5a497c5fc856dc0becdaafdb3c85fbb25f6ce691b6002e455c2",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "scheduled_brief",
+    "inventory_to_deliver",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Schedulable morning-brief email summarizing maintain quality certifications for the responsible owner; designed to run daily or weekly.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.5,
+  "sha256": "5accab39611ece471f2fda2f747076c8455bce0a6d00588caadc40fe9b52716f",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_maintain_quality_certifications.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/scheduled_brief_maintain_quality_certifications_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_maintain_quality_certifications.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__scheduled_brief_maintain_quality_certifications.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/scheduled_brief_maintain_quality_certifications_agent.py"
+}

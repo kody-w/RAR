@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__agent_red_team",
+  "name": "Agent Red Team",
+  "rar_name": "@cat-agent-skills/agent_red_team",
+  "rappid": "rappid:@cat-agent-skills/agent_red_team:a48e9c8913758693093c63db61570c9ea791bf034138a5c598d97c47a406bdfa",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cat-agent-skills",
+  "category": "analysis",
+  "tags": [
+    "copilot_studio",
+    "security",
+    "prompt_injection",
+    "governance",
+    "responsible_ai",
+    "testing",
+    "risk",
+    "assessment"
+  ],
+  "description": "Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes.",
+  "author": "Marco Zama",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 9.2,
+  "sha256": "c39b9166de102478dec3ddc39a765711e471bf743090479f27115e4ab207a879",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__agent_red_team.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_red_team_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_red_team.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_red_team.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/agent_red_team_agent.py"
+}

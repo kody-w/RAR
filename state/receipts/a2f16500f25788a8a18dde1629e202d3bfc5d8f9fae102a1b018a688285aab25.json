@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/audit_process_freight_invoices",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "8459abecd6fc7e6dfaeccaf979eb32c96e1a4399716389f5614ac4468880dc92"
+ },
+ "canonical_path": "agents/@cowork-cookbook/audit_process_freight_invoices_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_a2f16500f25788a8a18dde1629e202d3bfc5d8f9fae102a1b018a688285aab25",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_a2f16500f25788a8a18dde16",
+ "revision_id": "a2f16500f25788a8a18dde1629e202d3bfc5d8f9fae102a1b018a688285aab25",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

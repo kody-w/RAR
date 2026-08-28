@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/ppt_exec_correct_ledger_vouchers",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "be94a1be018994376252cd7743f3692ed62d0148f7c6e68d8fbf41bd860c5237"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_correct_ledger_vouchers_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_b33b976266a80fb3ca76436433cdce8ce3528b78769a4ec13283ebf6618eb4c0",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_b33b976266a80fb3ca764364",
+ "revision_id": "b33b976266a80fb3ca76436433cdce8ce3528b78769a4ec13283ebf6618eb4c0",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

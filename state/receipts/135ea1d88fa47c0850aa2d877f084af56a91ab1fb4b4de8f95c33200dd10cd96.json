@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/configure_furlough_workers",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "9de55d9a04d6ab274a6ead3d44a3d6501e048d256023e002eaddd44bb6324544"
+ },
+ "canonical_path": "agents/@cowork-cookbook/configure_furlough_workers_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_135ea1d88fa47c0850aa2d877f084af56a91ab1fb4b4de8f95c33200dd10cd96",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_135ea1d88fa47c0850aa2d87",
+ "revision_id": "135ea1d88fa47c0850aa2d877f084af56a91ab1fb4b4de8f95c33200dd10cd96",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

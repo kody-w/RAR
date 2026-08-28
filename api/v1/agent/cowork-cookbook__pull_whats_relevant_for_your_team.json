@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__pull_whats_relevant_for_your_team",
+  "name": "Pull what's relevant for your team from a source doc",
+  "rar_name": "@cowork-cookbook/pull_whats_relevant_for_your_team",
+  "rappid": "rappid:@cowork-cookbook/pull_whats_relevant_for_your_team:9f778364af1b0d8c232d381c88f1a65931e18ba8bd77135019fb60de8d0dca08",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "work_management",
+    "intermediate",
+    "read_only"
+  ],
+  "description": "Get your team only the parts of a long document that actually apply to them - without sending them the whole thing and asking them to find their section.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.1,
+  "sha256": "6f764939aa523b0822bc58cb35ea3eff7dd2548066690c8c000a3006d379722d",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__pull_whats_relevant_for_your_team.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/pull_whats_relevant_for_your_team_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__pull_whats_relevant_for_your_team.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__pull_whats_relevant_for_your_team.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/pull_whats_relevant_for_your_team_agent.py"
+}

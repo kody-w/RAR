@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/project_margin_health",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "cec496cab5bf24f829348c6d5d3bbe968eda6cc0e20ae6da245c2d07efdc9051"
+ },
+ "canonical_path": "agents/@cowork-cookbook/project_margin_health_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_d42d1b38e8ed76dd70b9a2e3abe66dade8591c5d6ae5908fee8335669f6cdb00",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_d42d1b38e8ed76dd70b9a2e3",
+ "revision_id": "d42d1b38e8ed76dd70b9a2e3abe66dade8591c5d6ae5908fee8335669f6cdb00",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_schedule_maintenance_jobs",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "bda966bb5fb72d87bfcbec6bad2a720c8bb94de80ed9fe4ee768a53cc434f60e"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_schedule_maintenance_jobs_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_7aa394b60a161f8c2b9c9a8de1e45f3a86e85242c45fe33188d7fc55a21c4a47",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_7aa394b60a161f8c2b9c9a8d",
+ "revision_id": "7aa394b60a161f8c2b9c9a8de1e45f3a86e85242c45fe33188d7fc55a21c4a47",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

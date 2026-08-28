@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/dashboard_create_website_for_campaigns",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "b591066e2f22000631ad7f4c2a5e0fbb27d7c306828ed0ad74cb470f5df3cab4"
+ },
+ "canonical_path": "agents/@cowork-cookbook/dashboard_create_website_for_campaigns_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_fd5ec9bc0f817e135a3c0b1f86ef2fd95f337fa267e28caa21863088f957a1bb",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_fd5ec9bc0f817e135a3c0b1f",
+ "revision_id": "fd5ec9bc0f817e135a3c0b1f86ef2fd95f337fa267e28caa21863088f957a1bb",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

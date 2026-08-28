@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/ppt_exec_manage_employee_travel",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "bc85ca854e64357d2e3eb60bab05962f10a6f941dba874082eb07e52f7a94a59"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_manage_employee_travel_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_adf7dbd57f187acbe00af78461f5f2ce15457dfe6a2fea71dbbb470cc3dfb782",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_adf7dbd57f187acbe00af784",
+ "revision_id": "adf7dbd57f187acbe00af78461f5f2ce15457dfe6a2fea71dbbb470cc3dfb782",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

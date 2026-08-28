@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_manage_sales_channels",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "8548356aff7f5275bb4c5d7ec66d5423de9b5091f6bd5fd467882907a87bddb2"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_manage_sales_channels_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_38d4741bade8209349b806453f6467b1dc3672ad4c0b0f93e2719a31a5c24b26",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_38d4741bade8209349b80645",
+ "revision_id": "38d4741bade8209349b806453f6467b1dc3672ad4c0b0f93e2719a31a5c24b26",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

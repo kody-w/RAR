@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__turn_a_document_into_a_visual_framework",
+  "name": "Turn a document or deck into a visual framework",
+  "rar_name": "@cowork-cookbook/turn_a_document_into_a_visual_framework",
+  "rappid": "rappid:@cowork-cookbook/turn_a_document_into_a_visual_framework:ad7cf09365926bb37ee2fe9044feb8e96a783fccb2268c164c1cfcd1969fa3d9",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "work_management",
+    "beginner",
+    "integration",
+    "miro"
+  ],
+  "description": "Take dense, written content and turn it into a clear visual the team can actually engage with - without spending the afternoon redrawing it by hand.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.1,
+  "sha256": "82fec6ddc21c7c54a3fbd8b9a1a3ee2d2a811ef41320b33abf1e56a8fd8b7575",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__turn_a_document_into_a_visual_framework.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/turn_a_document_into_a_visual_framework_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__turn_a_document_into_a_visual_framework.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__turn_a_document_into_a_visual_framework.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/turn_a_document_into_a_visual_framework_agent.py"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__blueprint_credit_and_collections_review",
+  "name": "Credit & Collections Review Blueprint",
+  "rar_name": "@cowork-cookbook/blueprint_credit_and_collections_review",
+  "rappid": "rappid:@cowork-cookbook/blueprint_credit_and_collections_review:28754c339c1f37c24bc2615318f18a8ff5c4ab5713e01495e586938c8eda5860",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt_blueprint",
+    "blueprint",
+    "order_to_cash",
+    "advanced",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Paste this credit-and-collections workflow blueprint into Cowork and it ranks customers by credit exposure and overdue balance, then proposes a collections worklist.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.4,
+  "sha256": "56bcdc20a1870820b0c53ed54e8319581617fc8ce58a93c03d5501bc88bbe0ad",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__blueprint_credit_and_collections_review.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/blueprint_credit_and_collections_review_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__blueprint_credit_and_collections_review.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__blueprint_credit_and_collections_review.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/blueprint_credit_and_collections_review_agent.py"
+}

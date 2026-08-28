@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/adaptive_card_develop_financial_period_strategy",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "849e19dcd80e3aa4812464e8fb04cd76ea3400500014ad87ce58bf116fb1580f"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_develop_financial_period_strategy_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_632aa342b1db247c1457f41bab2eb1fd13f2a059965201b7f9c39d59f7e489e3",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_632aa342b1db247c1457f41b",
+ "revision_id": "632aa342b1db247c1457f41bab2eb1fd13f2a059965201b7f9c39d59f7e489e3",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

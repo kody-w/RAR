@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__dashboard_report_on_production_sustainability_metrics",
+  "name": "Report on production sustainability metrics Interactive HTML Dashboard",
+  "rar_name": "@cowork-cookbook/dashboard_report_on_production_sustainability_metrics",
+  "rappid": "rappid:@cowork-cookbook/dashboard_report_on_production_sustainability_metrics:9623fdc0eb40c964ac5f06351bcb16b29d970b309245ff52cd75df368b66b2d3",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "dashboard",
+    "plan_to_produce",
+    "intermediate",
+    "integration",
+    "dynamics_365_erp"
+  ],
+  "description": "Produces a self-contained interactive HTML dashboard for report on production sustainability metrics - opens in any browser, no D365 access needed by the viewer.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.6,
+  "sha256": "26f8528d42d0cb4cbc426ded37c77d19738627bade280be65208a07a79cebc92",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__dashboard_report_on_production_sustainability_metrics.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/dashboard_report_on_production_sustainability_metrics_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__dashboard_report_on_production_sustainability_metrics.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__dashboard_report_on_production_sustainability_metrics.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/dashboard_report_on_production_sustainability_metrics_agent.py"
+}

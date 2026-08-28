@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__turn_source_content_into_a_deck",
+  "name": "Turn source content into a deck",
+  "rar_name": "@cowork-cookbook/turn_source_content_into_a_deck",
+  "rappid": "rappid:@cowork-cookbook/turn_source_content_into_a_deck:874e529f0a0810af58aae2da7f1069e43ffe9aba08cbee0e908a75348808a30b",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "work_management",
+    "beginner",
+    "integration",
+    "prezi"
+  ],
+  "description": "Get a working deck built from content you already have - without starting from a blank slide.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.1,
+  "sha256": "6f38a192ebccdcf950fd407c4d8094a454d4396dec4727903a9170437e284a58",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__turn_source_content_into_a_deck.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/turn_source_content_into_a_deck_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__turn_source_content_into_a_deck.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__turn_source_content_into_a_deck.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/turn_source_content_into_a_deck_agent.py"
+}

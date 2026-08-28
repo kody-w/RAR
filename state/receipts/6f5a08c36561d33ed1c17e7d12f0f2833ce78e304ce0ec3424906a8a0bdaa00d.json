@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/d365_forecast_to_plan",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ac600a9ffd1657637aec66db9665df38ad9a8c1b28af1b0bf354393a957e7439"
+ },
+ "canonical_path": "agents/@cowork-cookbook/d365_forecast_to_plan_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_6f5a08c36561d33ed1c17e7d12f0f2833ce78e304ce0ec3424906a8a0bdaa00d",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_6f5a08c36561d33ed1c17e7d",
+ "revision_id": "6f5a08c36561d33ed1c17e7d12f0f2833ce78e304ce0ec3424906a8a0bdaa00d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

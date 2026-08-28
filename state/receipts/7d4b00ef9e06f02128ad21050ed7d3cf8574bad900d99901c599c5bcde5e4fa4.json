@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/bulk_update_define_banking_policies",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f97bd4e13bf95ca1e4e567a815d33d585de97e35897afa25127c71b991303d38"
+ },
+ "canonical_path": "agents/@cowork-cookbook/bulk_update_define_banking_policies_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_7d4b00ef9e06f02128ad21050ed7d3cf8574bad900d99901c599c5bcde5e4fa4",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_7d4b00ef9e06f02128ad2105",
+ "revision_id": "7d4b00ef9e06f02128ad21050ed7d3cf8574bad900d99901c599c5bcde5e4fa4",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__map_a_customer_journey_for_a_campaign",
+  "name": "Map a customer journey for a campaign",
+  "rar_name": "@cowork-cookbook/map_a_customer_journey_for_a_campaign",
+  "rappid": "rappid:@cowork-cookbook/map_a_customer_journey_for_a_campaign:1ffc35c7c5c7be5fda21e5f1d2c7d5520706a405bcfb5f4bde47e597ec32c7dd",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "integrations",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "concept_to_market",
+    "intermediate",
+    "integration",
+    "miro"
+  ],
+  "description": "Turn a campaign brief into a clear, visual customer journey the team can rally around - instead of arguing over interpretations of the same Word doc.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "2810aea892da61f3b34fe3fe5bbc8964b2df8bda2a2250c5112bf951d0da0242",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__map_a_customer_journey_for_a_campaign.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__map_a_customer_journey_for_a_campaign.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__map_a_customer_journey_for_a_campaign.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py"
+}

@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_configure_and_manage_microsoft_teams_integrations",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "759acb068dddbf36a9f95a9e44db6cbaf2718113705c50112f6e14084a073898"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_configure_and_manage_microsoft_teams_integrations_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_bca8ad73e58b2f1072cd9c555e557f2863553e6a4e588f95ebdee18662dd22cc",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_bca8ad73e58b2f1072cd9c55",
+ "revision_id": "bca8ad73e58b2f1072cd9c555e557f2863553e6a4e588f95ebdee18662dd22cc",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

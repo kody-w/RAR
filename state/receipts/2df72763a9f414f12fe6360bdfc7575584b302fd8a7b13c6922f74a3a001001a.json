@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_pay_taxes",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "86f487af575ffdf83ee66b2438e272e5768a8825fb341de59d5789bf84d78b15"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_pay_taxes_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_2df72763a9f414f12fe6360bdfc7575584b302fd8a7b13c6922f74a3a001001a",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_2df72763a9f414f12fe6360b",
+ "revision_id": "2df72763a9f414f12fe6360bdfc7575584b302fd8a7b13c6922f74a3a001001a",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

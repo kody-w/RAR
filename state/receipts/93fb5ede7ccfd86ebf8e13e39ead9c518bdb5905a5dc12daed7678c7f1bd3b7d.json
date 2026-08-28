@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_define_accounts_payable_policies",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "33f92ffff22902b63f495d614d0421bfe5261f7e6a383615647e3ef3b889dacb"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_define_accounts_payable_policies_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_93fb5ede7ccfd86ebf8e13e39ead9c518bdb5905a5dc12daed7678c7f1bd3b7d",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_93fb5ede7ccfd86ebf8e13e3",
+ "revision_id": "93fb5ede7ccfd86ebf8e13e39ead9c518bdb5905a5dc12daed7678c7f1bd3b7d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

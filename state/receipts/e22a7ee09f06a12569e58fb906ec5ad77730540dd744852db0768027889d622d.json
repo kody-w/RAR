@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_establish_sales_commission_and_incentive_structures",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ff2bbaf9292c43a6ad54fb99ac07dab2118e94e574fa8d56432956bd5faa3a11"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_establish_sales_commission_and_incentive_structures_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_e22a7ee09f06a12569e58fb906ec5ad77730540dd744852db0768027889d622d",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_e22a7ee09f06a12569e58fb9",
+ "revision_id": "e22a7ee09f06a12569e58fb906ec5ad77730540dd744852db0768027889d622d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

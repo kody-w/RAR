@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/ppt_exec_maintain_open_service_requests",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "50d7aeba160d71b0dbd1227c8467777c07a031fb0edc57eeb0688ff29b12a1b6"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_maintain_open_service_requests_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_2008835a42485d802a84f40af3fda4fe2024ef413b3ccc2be931adc216775390",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_2008835a42485d802a84f40a",
+ "revision_id": "2008835a42485d802a84f40af3fda4fe2024ef413b3ccc2be931adc216775390",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

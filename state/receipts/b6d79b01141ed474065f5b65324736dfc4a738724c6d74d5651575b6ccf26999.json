@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/ppt_exec_take_inventory_on_hardware_and_devices",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "2eb00bc67b4a5812e324ecc05ae0a34a48b18ef77fa7db94743c51ffce1a9afe"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_take_inventory_on_hardware_and_devices_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_b6d79b01141ed474065f5b65324736dfc4a738724c6d74d5651575b6ccf26999",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_b6d79b01141ed474065f5b65",
+ "revision_id": "b6d79b01141ed474065f5b65324736dfc4a738724c6d74d5651575b6ccf26999",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

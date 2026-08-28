@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/configure_configure_and_manage_iot_devices",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "4ac9df29276dbd5a234799a4e86ba7f355acb5313616564b91c34e1b85e40a4c"
+ },
+ "canonical_path": "agents/@cowork-cookbook/configure_configure_and_manage_iot_devices_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_da24a04a652005d921774635c9fc7477296e0d2c898bcacbb815b631d293d2f5",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_da24a04a652005d921774635",
+ "revision_id": "da24a04a652005d921774635c9fc7477296e0d2c898bcacbb815b631d293d2f5",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

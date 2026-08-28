@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/ppt_exec_create_background_job_schedule",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ced8fd8b0c78953598ac8af616aff095ab4d51fc8eb6dea8fe1347f04688f921"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_create_background_job_schedule_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_963e434d3e2e886fea35cb2bae323b6c009f6d01e38abfa9bd9f9a7a2505ad25",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_963e434d3e2e886fea35cb2b",
+ "revision_id": "963e434d3e2e886fea35cb2bae323b6c009f6d01e38abfa9bd9f9a7a2505ad25",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

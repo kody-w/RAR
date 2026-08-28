@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/scheduled_brief_conduct_a_disaster_risk_assessment",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "d413e3db425080f89ff4a4c34122c62b26310e9be645c3386b9a007811387cf1"
+ },
+ "canonical_path": "agents/@cowork-cookbook/scheduled_brief_conduct_a_disaster_risk_assessment_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_bba13f93880db123f9f8f2561a0a2b9ce3f6d6b210a2830d8bf9f6bf418a291d",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_bba13f93880db123f9f8f256",
+ "revision_id": "bba13f93880db123f9f8f2561a0a2b9ce3f6d6b210a2830d8bf9f6bf418a291d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

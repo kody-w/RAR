@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/teams_update_drive_app_value",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "993d6a393b40ca1b24a1d5761900ccd160908fe1ab8b1d8e53ca19ec9c982b8b"
+ },
+ "canonical_path": "agents/@cowork-cookbook/teams_update_drive_app_value_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_a6b53f619ac476bd84887eaeeec214724496754dbe5c58f8ee5349332aabb040",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_a6b53f619ac476bd84887eae",
+ "revision_id": "a6b53f619ac476bd84887eaeeec214724496754dbe5c58f8ee5349332aabb040",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

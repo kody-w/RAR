@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/audit_implement_compliance_controls_and_measures",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "e9f2ac0ea922f0027b983a4057e934d0ee84ebd59e4f4e6ffec34d4ba1b8b703"
+ },
+ "canonical_path": "agents/@cowork-cookbook/audit_implement_compliance_controls_and_measures_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_7b4739c5b9fc3dc99a0b4bf737f8fff6c657c542d998f41490dff06021997d48",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_7b4739c5b9fc3dc99a0b4bf7",
+ "revision_id": "7b4739c5b9fc3dc99a0b4bf737f8fff6c657c542d998f41490dff06021997d48",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

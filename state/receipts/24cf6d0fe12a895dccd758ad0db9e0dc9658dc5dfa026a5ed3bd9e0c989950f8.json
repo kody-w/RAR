@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/bulk_update_monitor_employee_satisfaction",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "0f87cefc7045a1332064ec1ecd6dce06a014db8e41a9794c41fe286a61919656"
+ },
+ "canonical_path": "agents/@cowork-cookbook/bulk_update_monitor_employee_satisfaction_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_24cf6d0fe12a895dccd758ad0db9e0dc9658dc5dfa026a5ed3bd9e0c989950f8",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_24cf6d0fe12a895dccd758ad",
+ "revision_id": "24cf6d0fe12a895dccd758ad0db9e0dc9658dc5dfa026a5ed3bd9e0c989950f8",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

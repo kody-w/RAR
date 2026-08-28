@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/bulk_update_manage_blanket_sales_orders",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "5b806b91562910546dba6bc21b183e5114933c1e38e3d91731a88b4ca98b5bd0"
+ },
+ "canonical_path": "agents/@cowork-cookbook/bulk_update_manage_blanket_sales_orders_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_8ab1b9e667aa99e2d114848631d707c70304c3fc593e8b41cb4b62a02d03888e",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_8ab1b9e667aa99e2d1148486",
+ "revision_id": "8ab1b9e667aa99e2d114848631d707c70304c3fc593e8b41cb4b62a02d03888e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

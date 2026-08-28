@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/ppt_exec_predict_customer_payments",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "bdc31c71c410aaa1bd118c6f571be2ebb9fa3cac1c479326b005978c7cb66c93"
+ },
+ "canonical_path": "agents/@cowork-cookbook/ppt_exec_predict_customer_payments_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_03248672731b5e2347918f2325f80e16d6f7ecd59b035ad6ad0f6f02b35deddc",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_03248672731b5e2347918f23",
+ "revision_id": "03248672731b5e2347918f2325f80e16d6f7ecd59b035ad6ad0f6f02b35deddc",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/d365_prospect_to_quote_estimate_and_quote_sales",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "94920b9fede510ee10b9e5f4c4112f86027cf6f1099e3c4761326c8abde42e2d"
+ },
+ "canonical_path": "agents/@cowork-cookbook/d365_prospect_to_quote_estimate_and_quote_sales_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_81986a124568193c4fe612be7bab7c67026062334796e0599d3d9f2b498dc279",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_81986a124568193c4fe612be",
+ "revision_id": "81986a124568193c4fe612be7bab7c67026062334796e0599d3d9f2b498dc279",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

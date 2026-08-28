@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/bulk_update_plan_worker_retirement",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "18c8f1ee5fb1561fad731322354cddbd47ceafb400e69824942a10c87352028f"
+ },
+ "canonical_path": "agents/@cowork-cookbook/bulk_update_plan_worker_retirement_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_be035186ab081d4873ccbf56278fde788e3c794cecd9c60af5b33036cd8edad6",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_be035186ab081d4873ccbf56",
+ "revision_id": "be035186ab081d4873ccbf56278fde788e3c794cecd9c60af5b33036cd8edad6",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

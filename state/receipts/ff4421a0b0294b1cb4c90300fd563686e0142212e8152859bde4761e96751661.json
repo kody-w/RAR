@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "8413801950006c8334bc6c08e142f18cac6ff0402eb0858fc3d65ab1ec33d313"
+ },
+ "canonical_path": "agents/@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_ff4421a0b0294b1cb4c90300fd563686e0142212e8152859bde4761e96751661",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_ff4421a0b0294b1cb4c90300",
+ "revision_id": "ff4421a0b0294b1cb4c90300fd563686e0142212e8152859bde4761e96751661",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}

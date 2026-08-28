@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__d365_recipe_planner",
+  "name": "D365 Recipe Planner",
+  "rar_name": "@cowork-cookbook/d365_recipe_planner",
+  "rappid": "rappid:@cowork-cookbook/d365_recipe_planner:afc83c2b14e83bc31785b9dbca977699db682ce943b3ed64715a0e57d58b373f",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt_skill",
+    "other",
+    "administer_to_operate",
+    "beginner",
+    "read_only"
+  ],
+  "description": "A guided planning skill that turns \"I want to automate something in Dynamics 365\" into a runnable Copilot Cowork prompt, plus a predicted cost tier explaining what drives the estimate.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "1c3b4425cfc86a5c3d5250975e457e3b2a96017af042f55656e0590b20e8d70f",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__d365_recipe_planner.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/d365_recipe_planner_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_recipe_planner.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__d365_recipe_planner.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/d365_recipe_planner_agent.py"
+}

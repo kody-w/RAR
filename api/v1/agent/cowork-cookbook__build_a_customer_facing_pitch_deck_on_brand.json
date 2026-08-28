@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__build_a_customer_facing_pitch_deck_on_brand",
+  "name": "Build a customer-facing pitch deck on brand",
+  "rar_name": "@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand",
+  "rappid": "rappid:@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand:b416144bd344f3bf3e4833a6f8bb3d1525d00048759aa3c5ac9ccbc5009f8b8a",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "concept_to_market",
+    "beginner",
+    "read_only"
+  ],
+  "description": "Hand the field a customer-facing pitch deck that's on-brand, on-message, and tailored to a specific exec audience - instead of letting every team rebuild from a generic template.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 10.2,
+  "sha256": "2abe5c63fe631d55484440bad066ff0b96ca7057832867788e634b0a7749a34e",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__build_a_customer_facing_pitch_deck_on_brand.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__build_a_customer_facing_pitch_deck_on_brand.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__build_a_customer_facing_pitch_deck_on_brand.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand_agent.py"
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cowork-cookbook__find_patterns_across_your_meetings",
+  "name": "Find patterns across your meetings",
+  "rar_name": "@cowork-cookbook/find_patterns_across_your_meetings",
+  "rappid": "rappid:@cowork-cookbook/find_patterns_across_your_meetings:0a70e438c89df1f83fca307ab5da0368110f68a92b0843b6b36cd45f4c7616c6",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "2.0.0",
+  "publisher": "@cowork-cookbook",
+  "category": "general",
+  "tags": [
+    "industry_solution",
+    "business_process",
+    "prompt",
+    "other",
+    "work_management",
+    "advanced",
+    "read_only"
+  ],
+  "description": "Surface the themes that are repeating across your meetings - without re-listening, re-reading transcripts, or relying on memory.",
+  "author": "Sean Galliher and Cowork Cookbook contributors",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 190,
+  "size_kb": 9.5,
+  "sha256": "96763343ed4649f04c2a587872f170153f9059416d726ae3bc7d7aac1cd045f0",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__find_patterns_across_your_meetings.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/find_patterns_across_your_meetings_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__find_patterns_across_your_meetings.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cowork-cookbook__find_patterns_across_your_meetings.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cowork-cookbook/find_patterns_across_your_meetings_agent.py"
+}

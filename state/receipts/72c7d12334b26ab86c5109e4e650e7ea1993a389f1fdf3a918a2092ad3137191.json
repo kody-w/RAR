@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@cowork-cookbook/adaptive_card_configure_and_maintain_cloud_based_printing",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f9b2cbb310a77a5856940feac81977ac9c1b04a93e6a900008fbbcc51d90e312"
+ },
+ "canonical_path": "agents/@cowork-cookbook/adaptive_card_configure_and_maintain_cloud_based_printing_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:48:14.663501+00:00",
+ "id": "rar_72c7d12334b26ab86c5109e4e650e7ea1993a389f1fdf3a918a2092ad3137191",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_72c7d12334b26ab86c5109e4",
+ "revision_id": "72c7d12334b26ab86c5109e4e650e7ea1993a389f1fdf3a918a2092ad3137191",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "reconcile pinned legacy and aggregated source containers"
+ },
+ "version": "2.0.0"
+}
