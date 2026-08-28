@@ -79,6 +79,12 @@ jobs:
       - name: Rebuild the headless static API
         run: python scripts/build_static_api.py
 
+      # Static commit-dates sidecar: index.html reads this instead of making
+      # up to 16 unauthenticated GitHub API calls per visitor. CI has the full
+      # clone (fetch-depth: 0); the script refuses shallow history.
+      - name: Build agent commit-dates sidecar
+        run: python scripts/build_commit_dates.py
+
       - name: Commit registry.json
         # Also commits on workflow_dispatch. A dispatch run used to rebuild the
         # API and then throw it away, so the one button a maintainer reaches for
@@ -90,6 +96,7 @@ jobs:
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
           git add registry.json state/published_paths.json \
+                  state/agent_commit_dates.json \
                   manifest.json api/v1/catalog.json api/v1/taxonomy.json \
                   api/v1/match.json api/v1/status.json api/v1/badge.json \
                   api/v1/audience

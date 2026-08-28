@@ -1,0 +1,1493 @@
+{
+ "files": {
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_orchestrator_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/action_prioritization_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/competitive_intelligence_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/deal_tracking_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/meeting_prep_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/messaging_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/risk_assessment_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-28T14:54:06-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/stakeholder_intelligence_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/update_agents.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/activity_gap_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/competitor_intelligence_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/d365_base_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_health_score_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_progression_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/deal_risk_assessment_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/next_best_action_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/pipeline_velocity_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/revenue_forecast_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stakeholder_engagement_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/stalled_deal_detection_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/deal_progression_stack/win_probability_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/proposal_generation_stack/proposal_generation_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/sales_qualification_stack/sales_qualification_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2b_sales_stacks/win_loss_analysis_stack/win_loss_analysis_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2c_sales_stacks/cart_abandonment_recovery_stack/cart_abandonment_recovery_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2c_sales_stacks/customer_360_speech_stack/customer_360_speech_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2c_sales_stacks/customer_loyalty_rewards_stack/customer_loyalty_rewards_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2c_sales_stacks/omnichannel_engagement_stack/omnichannel_engagement_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2c_sales_stacks/personalized_shopping_assistant_stack/personalized_shopping_assistant_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2c_sales_stacks/returns_exchange_stack/returns_exchange_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/b2c_sales_stacks/sales_chat_stack/sales_chat_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/energy_stacks/asset_maintenance_forecast_stack/asset_maintenance_forecast_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/energy_stacks/emission_tracking_stack/emission_tracking_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/energy_stacks/field_service_dispatch_stack/field_service_dispatch_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/energy_stacks/permit_license_management_stack/permit_license_management_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/energy_stacks/regulatory_reporting_stack/regulatory_reporting_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/federal_government_stacks/acquisition_support_stack/acquisition_support_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/federal_government_stacks/federal_grants_oversight_stack/federal_grants_oversight_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/federal_government_stacks/mission_reporting_assistant_stack/mission_reporting_assistant_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/federal_government_stacks/regulatory_compliance_fed_stack/regulatory_compliance_fed_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/federal_government_stacks/workforce_clearance_onboarding_stack/workforce_clearance_onboarding_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/claims_processing_stack/claims_processing_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/customer_onboarding_fs_stack/customer_onboarding_fs_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/customer_sentiment_churn_stack/customer_sentiment_churn_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/financial_advisor_copilot_stack/financial_advisor_copilot_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/fraud_detection_alert_stack/fraud_detection_alert_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/loan_origination_assistant_stack/loan_origination_assistant_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/portfolio_rebalancing_stack/portfolio_rebalancing_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/underwriting_support_stack/underwriting_support_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/financial_services_stacks/wealth_insights_generator_stack/wealth_insights_generator_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/ai_customer_assistant_stack/ai_customer_assistant_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/ask_hr_stack/ask_hr_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/bulk_crm_data_generator_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/dynamics_365_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/crm_bulk_data_creator_stack/one_click_crm_intake_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/cross_selling_opportunities_stack/cross_selling_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/customer_360_stack/customer_360_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/email_drafting_stack/email_drafting_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/find_accurate_models_stack/find_accurate_models_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/identify_discounts_stack/identify_discounts_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/it_ticket_management_stack/it_ticket_management_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/procurement_support_stack/procurement_support_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/product_reference_stack/product_reference_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/sales_coach_stack/sales_coach_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/simulation_sales_stack/sales_simulation_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/speech_to_crm_stack/speech_to_crm_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/triage_bot_stack/triage_bot_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/dynamics_365_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/email_drafting_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/extract_sharepoint_document_url_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/general_stacks/voice_to_crm_stack/servicenow_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/healthcare_stacks/care_gap_closure_stack/care_gap_closure_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/healthcare_stacks/clinical_notes_summarizer_stack/clinical_notes_summarizer_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/healthcare_stacks/patient_intake_stack/patient_intake_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/healthcare_stacks/prior_authorization_stack/prior_authorization_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/human_resources_stacks/ask_hr_stack/ask_hr_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/it_management_stacks/it_helpdesk_stack/it_helpdesk_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/manufacturing_stacks/inventory_rebalancing_stack/inventory_rebalancing_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/manufacturing_stacks/order_status_communication_stack/order_status_communication_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/manufacturing_stacks/production_line_optimization_stack/production_line_optimization_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/manufacturing_stacks/supplier_risk_monitoring_stack/supplier_risk_monitoring_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/professional_services_stacks/contract_risk_review_stack/contract_risk_review_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/professional_services_stacks/proposal_copilot_stack/proposal_copilot_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/professional_services_stacks/resource_utilization_stack/resource_utilization_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/professional_services_stacks/time_entry_billing_stack/time_entry_billing_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/retail_cpg_stacks/inventory_visibility_stack/inventory_visibility_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/retail_cpg_stacks/personalized_marketing_stack/personalized_marketing_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/retail_cpg_stacks/returns_complaints_resolution_stack/returns_complaints_resolution_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/retail_cpg_stacks/store_associate_copilot_stack/store_associate_copilot_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/retail_cpg_stacks/supply_chain_disruption_alert_stack/supply_chain_disruption_alert_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:45:30-04:00"
+  },
+  "agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/slg_government_stacks/citizen_service_request_stack/citizen_service_request_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/slg_government_stacks/foia_request_assistant_stack/foia_request_assistant_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/slg_government_stacks/grants_management_stack/grants_management_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/slg_government_stacks/utility_billing_assistance_stack/utility_billing_assistance_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/software_dp_stacks/competitive_intel_stack/competitive_intel_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/software_dp_stacks/customer_onboarding_stack/customer_onboarding_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/software_dp_stacks/product_feedback_synthesizer_stack/product_feedback_synthesizer_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/software_dp_stacks/support_ticket_resolution_stack/support_ticket_resolution_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-07-21T21:02:27-04:00"
+  },
+  "agents/@aibast-agents-library/templates/adaptive_card_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/basic_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-04T18:44:17-04:00"
+  },
+  "agents/@aibast-agents-library/templates/calendar_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/code_review_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/context_memory_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/duckduckgo_search_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/dynamics365_demo_data_seeder_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/dynamics_365_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/email_drafting_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/extract_sharepoint_document_url_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/fetch_random_wikipedia_article_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-05-24T21:45:25-04:00"
+  },
+  "agents/@aibast-agents-library/templates/fixed_beehiiv_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/hacker_news_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/image_generation_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/m365_demo_updater_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/manage_memory_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/meeting_prep_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/motivational_quote_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-05-24T21:45:25-04:00"
+  },
+  "agents/@aibast-agents-library/templates/powerpoint_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/salesforce_query_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@aibast-agents-library/templates/servicenow_agent.py": {
+   "added": "2026-04-03T16:15:52-04:00",
+   "updated": "2026-04-03T16:15:52-04:00"
+  },
+  "agents/@bill/neuron_agent.py": {
+   "added": "2026-05-12T13:37:05-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@borg/borg_agent.py.card": {
+   "added": "2026-04-04T11:22:10-04:00",
+   "updated": "2026-07-01T15:15:15-04:00"
+  },
+  "agents/@cat-agent-skills/accessibility_pass_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/acroform_writer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/action_items_todo_agent.py": {
+   "added": "2026-08-23T23:29:43Z",
+   "updated": "2026-08-23T23:29:43Z"
+  },
+  "agents/@cat-agent-skills/agent_evaluation_designer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/agent_harness_explorer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/ai_demo_assistant_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/ai_first_process_redesign_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/ai_usecase_assessment_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/anonymised_case_study_writer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/awaiting_reply_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/b2b_outreach_suite_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/blog_content_auditor_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/blog_post_structure_pass_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/booth_loop_video_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/brand_template_enforcer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/brand_voice_pass_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/browser_uat_analyst_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/business_os_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/call_for_speakers_digest_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/campaign_deck_builder_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/chart_builder_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/classic_text_adventure_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/clipchamp_video_agent.py": {
+   "added": "2026-08-23T23:29:43Z",
+   "updated": "2026-08-23T23:29:43Z"
+  },
+  "agents/@cat-agent-skills/clt_hr_assistant_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/commenting_content_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/competitive_battlecard_builder_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/conditional_chat_reminder_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/conference_session_abstract_pack_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/content_quality_auditor_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/copilot_agent_advisor_agent.py": {
+   "added": "2026-08-18T18:26:12-04:00",
+   "updated": "2026-08-18T18:26:12-04:00"
+  },
+  "agents/@cat-agent-skills/copilot_agents_news_scout_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/copilot_studio_agent_test_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/copilot_studio_knowledge_readiness_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/copilot_studio_test_planner_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py": {
+   "added": "2026-08-17T18:03:09-04:00",
+   "updated": "2026-08-17T18:03:09-04:00"
+  },
+  "agents/@cat-agent-skills/doc_format_converter_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/enterprise_agent_design_authority_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/explainer_video_agent.py": {
+   "added": "2026-08-23T23:29:43Z",
+   "updated": "2026-08-23T23:29:43Z"
+  },
+  "agents/@cat-agent-skills/gantt_chart_generator_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/generating_podcast_script_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/grab_my_files_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/idea_refiner_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/institutional_knowledge_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/iterative_file_editing_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/knowledge_corpus_curator_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/knowledge_source_router_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/lab_column_mapper_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/linkedin_content_system_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/linkedin_content_writer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/lookup_dataverse_table_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/mct_excellence_iq_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/meeting_analyzer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/monte_carlo_analysis_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/own_voice_builder_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/pattern_radar_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/pattern_radar_automation_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/pdf_table_data_conversion_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/persona_reaction_panel_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/phi_deidentifier_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/pov_line_generator_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/power_automate_desktop_assessment_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/power_automate_documentation_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/power_bi_model_review_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/powerpoint_deck_designer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/presentation_talk_track_builder_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/process_sop_architect_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/redlining_content_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/regulation_monitor_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/rich_html_presentation_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/route_map_visualizer_agent.py": {
+   "added": "2026-08-17T18:03:09-04:00",
+   "updated": "2026-08-17T18:03:09-04:00"
+  },
+  "agents/@cat-agent-skills/scrollytelling_data_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/sharepoint_list_formatter_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/skill_authoring_coach_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/stoic_negotiator_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/style_analyzer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/tool_tracer_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/travel_cost_estimator_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/vendor_contract_risk_review_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/wcag_power_platform_agent.py": {
+   "added": "2026-08-17T18:03:09-04:00",
+   "updated": "2026-08-17T18:03:09-04:00"
+  },
+  "agents/@cat-agent-skills/what_to_use_when_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@cat-agent-skills/whiteboard_to_infographic_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/work_brief_agent.py": {
+   "added": "2026-07-31T22:43:16-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@cat-agent-skills/work_iq_signalboard_agent.py": {
+   "added": "2026-08-17T18:03:09-04:00",
+   "updated": "2026-08-17T18:03:09-04:00"
+  },
+  "agents/@discreetRappers/agent_generator_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/agent_transpiler_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/architecture_diagram_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/copilot_studio_transpiler_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-04-06T16:39:03-04:00"
+  },
+  "agents/@discreetRappers/demo_script_generator_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/dynamics_crud_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/email_drafting_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-04-06T16:39:03-04:00"
+  },
+  "agents/@discreetRappers/powerpoint_generator_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/project_tracker_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/rapp_pipeline_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/sales_assistant_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/scripted_demo_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@discreetRappers/sharepoint_contract_analysis_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@howardh/cardsmith_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@howardh/chief_of_staff_agent.py": {
+   "added": "2026-04-28T17:29:54-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@howardh/markdown_to_slides_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-05-24T21:45:25-04:00"
+  },
+  "agents/@howardh/prompt_to_video_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-05-24T21:45:25-04:00"
+  },
+  "agents/@howardh/recon_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@howardh/training_quest_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@howardh/tuftelove_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@howardh/vaultmind_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/agent_team_agent.py": {
+   "added": "2026-05-05T10:49:27-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/agent_workbench_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/arena_compete_agent.py": {
+   "added": "2026-06-20T19:39:59-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/art_generator_agent.py": {
+   "added": "2026-08-18T03:01:53Z",
+   "updated": "2026-08-18T03:01:53Z"
+  },
+  "agents/@kody-w/bakeoff_factory_agent.py": {
+   "added": "2026-05-16T16:03:13-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/buzzsaw.py": {
+   "added": "2026-08-02T22:38:06-04:00",
+   "updated": "2026-08-02T22:38:06-04:00"
+  },
+  "agents/@kody-w/commons_life_agent.py": {
+   "added": "2026-06-20T19:05:34-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/commons_show_agent.py": {
+   "added": "2026-06-20T18:41:00-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/connected_solution_agent.py": {
+   "added": "2026-06-22T21:04:42-04:00",
+   "updated": "2026-08-27T08:23:57-04:00"
+  },
+  "agents/@kody-w/context_memory_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/copilot_studio_deploy_agent.py": {
+   "added": "2026-06-07T20:27:02-04:00",
+   "updated": "2026-07-24T01:06:12-04:00"
+  },
+  "agents/@kody-w/copilot_studio_forge_agent.py": {
+   "added": "2026-07-07T00:52:21Z",
+   "updated": "2026-08-27T08:23:57-04:00"
+  },
+  "agents/@kody-w/copilot_studio_parity_deploy_agent.card.json": {
+   "added": "2026-08-26T17:44:55-04:00",
+   "updated": "2026-08-26T17:44:55-04:00"
+  },
+  "agents/@kody-w/copilot_studio_parity_deploy_agent.py": {
+   "added": "2026-08-11T17:28:15Z",
+   "updated": "2026-08-11T18:37:58Z"
+  },
+  "agents/@kody-w/copilot_studio_probe_agent.py": {
+   "added": "2026-07-07T00:32:03Z",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/deal_desk_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/double_jump_agent.py": {
+   "added": "2026-06-20T19:46:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/ecosystem-grail-stack/README.md": {
+   "added": "2026-05-09T15:25:20-04:00",
+   "updated": "2026-05-09T15:25:20-04:00"
+  },
+  "agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py": {
+   "added": "2026-05-09T15:25:16-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py": {
+   "added": "2026-05-09T15:25:18-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py": {
+   "added": "2026-05-09T15:25:17-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py": {
+   "added": "2026-05-09T15:25:19-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/education_shorts_agent.py": {
+   "added": "2026-08-18T18:19:54-04:00",
+   "updated": "2026-08-18T18:19:54-04:00"
+  },
+  "agents/@kody-w/estate_factory_agent.py": {
+   "added": "2026-05-16T16:30:24-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/ez_sharpen_agent.py": {
+   "added": "2026-06-20T18:58:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/factory_agent.py": {
+   "added": "2026-08-11T17:32:02Z",
+   "updated": "2026-08-11T18:40:24Z"
+  },
+  "agents/@kody-w/flight_recorder_agent.py": {
+   "added": "2026-06-27T13:28:13-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/forge_provenance_agent.card.json": {
+   "added": "2026-08-26T17:29:33-04:00",
+   "updated": "2026-08-26T17:29:33-04:00"
+  },
+  "agents/@kody-w/forge_provenance_agent.py": {
+   "added": "2026-08-26T17:29:33-04:00",
+   "updated": "2026-08-26T17:29:33-04:00"
+  },
+  "agents/@kody-w/full_rapp_leviathan_agent.py": {
+   "added": "2026-08-11T09:43:05Z",
+   "updated": "2026-08-11T13:34:43Z"
+  },
+  "agents/@kody-w/git_warehouse_agent.py": {
+   "added": "2026-06-20T18:41:00-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/github_agent_library_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/hello_world_agent.py": {
+   "added": "2026-04-06T16:39:03-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/install_rappter_distro_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/kody2day_agent.py": {
+   "added": "2026-08-18T21:17:02-04:00",
+   "updated": "2026-08-18T21:33:39-04:00"
+  },
+  "agents/@kody-w/kody2day_studio_agent.py": {
+   "added": "2026-08-18T22:13:18-04:00",
+   "updated": "2026-08-18T22:29:20-04:00"
+  },
+  "agents/@kody-w/legal_helper_agent.py.stub": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-08-16T20:44:35-04:00"
+  },
+  "agents/@kody-w/manage_memory_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-05-24T21:45:25-04:00"
+  },
+  "agents/@kody-w/matrix_arena_agent.py": {
+   "added": "2026-06-20T19:39:59-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/microsoft_deck_studio_agent.py": {
+   "added": "2026-07-02T19:31:47Z",
+   "updated": "2026-07-16T13:57:02-05:00"
+  },
+  "agents/@kody-w/neuron_swarm_agent.py": {
+   "added": "2026-06-26T23:08:53-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/perpetual_loop_factory_agent.py": {
+   "added": "2026-05-05T08:57:33-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/play_youtube_video_agent.py": {
+   "added": "2026-08-18T03:06:50Z",
+   "updated": "2026-08-18T03:06:50Z"
+  },
+  "agents/@kody-w/power_apps_code_app_agent.py": {
+   "added": "2026-07-22T15:35:38-04:00",
+   "updated": "2026-07-23T12:26:59-04:00"
+  },
+  "agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py": {
+   "added": "2026-05-24T12:20:22-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/private/example_private_agent.py.stub": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/project_tracker_agent.py": {
+   "added": "2026-07-24T16:53:40Z",
+   "updated": "2026-07-24T16:53:40Z"
+  },
+  "agents/@kody-w/prompt_extractor.py": {
+   "added": "2026-08-03T09:47:21-04:00",
+   "updated": "2026-08-03T09:47:21-04:00"
+  },
+  "agents/@kody-w/prototype_lock_factory_agent.py": {
+   "added": "2026-08-17T22:07:23Z",
+   "updated": "2026-08-17T22:07:23Z"
+  },
+  "agents/@kody-w/rapp_leviathan_factory_agent.py": {
+   "added": "2026-05-16T16:33:02-04:00",
+   "updated": "2026-08-11T09:43:05Z"
+  },
+  "agents/@kody-w/rapp_sdk_builder_agent.py": {
+   "added": "2026-07-15T15:23:19Z",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/rapp_sentinel_agent.py": {
+   "added": "2026-08-18T20:49:04-04:00",
+   "updated": "2026-08-18T20:49:04-04:00"
+  },
+  "agents/@kody-w/rapp_skill_bridge_agent.py": {
+   "added": "2026-07-23T12:26:59-04:00",
+   "updated": "2026-07-23T12:54:06-04:00"
+  },
+  "agents/@kody-w/rapp_x_notary_canary_agent.py": {
+   "added": "2026-07-18T23:41:02Z",
+   "updated": "2026-07-18T23:54:57Z"
+  },
+  "agents/@kody-w/rappter_engine_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/rappterbook_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/rappterpedia_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/rar_remote_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-08-18T18:43:26-04:00"
+  },
+  "agents/@kody-w/recon_deck_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/second_life_agent.py": {
+   "added": "2026-06-20T18:41:00-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/skill_toaster_agent.py": {
+   "added": "2026-08-01T21:33:29-04:00",
+   "updated": "2026-08-01T21:33:29-04:00"
+  },
+  "agents/@kody-w/transcript2prototype_agent.py": {
+   "added": "2026-06-17T17:06:07-04:00",
+   "updated": "2026-07-25T22:10:35-04:00"
+  },
+  "agents/@kody-w/twin_egg_hatcher_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/twin_me_agent.py": {
+   "added": "2026-06-08T13:48:48-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/vibe_coding_loop_agent.py": {
+   "added": "2026-05-03T14:51:56-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/windows_vm_install_lab_agent.py": {
+   "added": "2026-08-18T03:03:49Z",
+   "updated": "2026-08-18T03:03:49Z"
+  },
+  "agents/@kody-w/workiq_agent.py": {
+   "added": "2026-05-24T21:45:25-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/wp_publish.py": {
+   "added": "2026-08-03T09:47:21-04:00",
+   "updated": "2026-08-03T09:47:21-04:00"
+  },
+  "agents/@kody-w/wp_publish_agent.py": {
+   "added": "2026-08-11T09:50:23Z",
+   "updated": "2026-08-11T09:50:23Z"
+  },
+  "agents/@rapp/basic_agent.py": {
+   "added": "2026-04-06T14:07:43-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/commons_post_agent.py": {
+   "added": "2026-05-11T13:43:55-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/drift_agent.card.json": {
+   "added": "2026-06-09T21:40:08-04:00",
+   "updated": "2026-06-10T09:05:25-04:00"
+  },
+  "agents/@rapp/drift_agent.py": {
+   "added": "2026-06-09T21:40:07-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/drift_watcher_agent.card.json": {
+   "added": "2026-06-10T09:05:31-04:00",
+   "updated": "2026-06-10T09:05:31-04:00"
+  },
+  "agents/@rapp/drift_watcher_agent.py": {
+   "added": "2026-06-10T09:05:29-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/egg_hatcher_agent.py": {
+   "added": "2026-05-11T10:53:36-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/estate_outbound_agent.py": {
+   "added": "2026-05-11T13:59:12-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/exec_brief_agent.py": {
+   "added": "2026-04-27T21:23:24Z",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/fleet_commander_agent.py": {
+   "added": "2026-04-21T13:35:42-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/hacker_news_agent.py": {
+   "added": "2026-05-02T14:14:24-04:00",
+   "updated": "2026-05-02T14:14:24-04:00"
+  },
+  "agents/@rapp/learn_new_agent.py": {
+   "added": "2026-04-20T12:38:45-04:00",
+   "updated": "2026-08-27T08:22:40-04:00"
+  },
+  "agents/@rapp/moment_factory_agent.py": {
+   "added": "2026-04-27T21:16:54Z",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/ping_agent.py": {
+   "added": "2026-04-27T23:08:42Z",
+   "updated": "2026-05-18T19:02:03-04:00"
+  },
+  "agents/@rapp/pitch_deck_agent.py": {
+   "added": "2026-04-27T21:24:10Z",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/rapp_agent.card.json": {
+   "added": "2026-06-09T21:40:06-04:00",
+   "updated": "2026-06-10T13:32:07-04:00"
+  },
+  "agents/@rapp/rapp_agent.py": {
+   "added": "2026-06-09T21:40:04-04:00",
+   "updated": "2026-08-23T23:32:50Z"
+  },
+  "agents/@rapp/rapp_dogg_agent.card.json": {
+   "added": "2026-08-26T16:49:28-04:00",
+   "updated": "2026-08-26T17:04:09-04:00"
+  },
+  "agents/@rapp/rapp_dogg_agent.py": {
+   "added": "2026-08-26T16:49:28-04:00",
+   "updated": "2026-08-26T17:04:09-04:00"
+  },
+  "agents/@rapp/rapp_publish_agent.py": {
+   "added": "2026-04-27T23:18:27Z",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/rapplication_agent.py": {
+   "added": "2026-04-27T18:52:27-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/rar_steward_agent.card.json": {
+   "added": "2026-06-09T21:45:38-04:00",
+   "updated": "2026-06-10T09:05:28-04:00"
+  },
+  "agents/@rapp/rar_steward_agent.py": {
+   "added": "2026-06-09T21:45:37-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/store_navigator_agent.py": {
+   "added": "2026-04-27T21:52:47Z",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/swarm_factory_agent.py": {
+   "added": "2026-04-20T12:38:45-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/twin_agent.py": {
+   "added": "2026-05-11T10:53:36-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rapp/vibe_builder_agent.py": {
+   "added": "2026-04-27T21:15:33Z",
+   "updated": "2026-05-18T19:02:03-04:00"
+  },
+  "agents/@rapter/basic_agent.py": {
+   "added": "2026-08-26T17:18:46-04:00",
+   "updated": "2026-08-26T17:18:46-04:00"
+  },
+  "agents/@rapter/hive_census_agent.card.json": {
+   "added": "2026-08-26T17:18:46-04:00",
+   "updated": "2026-08-26T17:18:46-04:00"
+  },
+  "agents/@rapter/hive_census_agent.py": {
+   "added": "2026-08-26T17:18:46-04:00",
+   "updated": "2026-08-26T17:18:46-04:00"
+  },
+  "agents/@rapter/hive_shape_agent.card.json": {
+   "added": "2026-08-26T17:18:46-04:00",
+   "updated": "2026-08-26T17:18:46-04:00"
+  },
+  "agents/@rapter/hive_shape_agent.py": {
+   "added": "2026-08-26T17:18:46-04:00",
+   "updated": "2026-08-26T17:18:46-04:00"
+  },
+  "agents/@rapter/rapp_dogg_agent.card.json": {
+   "added": "2026-08-26T17:18:46-04:00",
+   "updated": "2026-08-26T17:18:46-04:00"
+  },
+  "agents/@rapter/rapp_dogg_agent.py": {
+   "added": "2026-08-26T17:18:46-04:00",
+   "updated": "2026-08-26T17:18:46-04:00"
+  },
+  "agents/@rarbookworld/_sources/body_writer_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/book_factory_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/card_forger_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/ceo_decision_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/ceo_risk_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/channel_router_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/editor_cutweak_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/editor_factcheck_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/editor_restructure_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/editor_strip_scaffolding_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/editor_voicecheck_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/hook_writer_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/moment_factory_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/persona_ceo_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/persona_editor_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/persona_publisher_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/persona_reviewer_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/persona_writer_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/seed_stamper_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/sensorium_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/_sources/significance_filter_agent.py": {
+   "added": "2026-05-24T21:48:44-04:00",
+   "updated": "2026-05-24T21:48:44-04:00"
+  },
+  "agents/@rarbookworld/bookfactory_agent.py": {
+   "added": "2026-04-19T18:58:15-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@rarbookworld/momentfactory_agent.py": {
+   "added": "2026-04-19T18:58:15-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@wildhaven/bellows_agent.py": {
+   "added": "2026-05-16T13:08:37-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@wildhaven/ceo_agent.py": {
+   "added": "2026-04-05T16:48:32-04:00",
+   "updated": "2026-08-16T20:44:35-04:00"
+  },
+  "agents/@wildhaven/penumbra_agent.py": {
+   "added": "2026-05-16T12:50:07-04:00",
+   "updated": "2026-07-21T19:28:49-04:00"
+  }
+ },
+ "schema": "rar-commit-dates/1"
+}

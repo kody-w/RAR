@@ -599,37 +599,24 @@ async function init() {
   }
 }
 
-// Pull live commit timestamps from GitHub for the most-recent commits in
-// agents/. Overlays accurate _added_at on existing agents so Recently
-// Added reflects truth, not the stale build artifact.
+// Overlay accurate commit timestamps from the committed static sidecar
+// (state/agent_commit_dates.json, derived from git history in CI) so
+// Recently Added reflects truth. Static data, never the GitHub API — the
+// old API path cost every visitor up to 16 unauthenticated calls.
 async function refreshLiveAddedDates() {
   try {
-    const r = await fetch('https://api.github.com/repos/kody-w/RAR/commits?path=agents&per_page=15');
+    const r = await fetch(RAW + '/state/agent_commit_dates.json?t=' + Date.now());
     if (!r.ok) return;
-    const commits = await r.json();
-    const fileMap = {};   // path → most-recent-iso-date
-    // Fetch each commit's detail to get files[]
-    for (const c of commits) {
-      try {
-        const detail = await (await fetch(c.url)).json();
-        if (!detail.files) continue;
-        for (const f of detail.files) {
-          if (!f.filename || !f.filename.startsWith('agents/')) continue;
-          if (!fileMap[f.filename] || c.commit.committer.date > fileMap[f.filename]) {
-            fileMap[f.filename] = c.commit.committer.date;
-          }
-        }
-      } catch (e) { /* skip this commit on error */ }
-    }
-    // Overlay onto existing agents
+    const files = (await r.json()).files || {};
     let updated = 0;
     for (const a of allAgents) {
-      if (a._file && fileMap[a._file]) {
-        a._added_at = fileMap[a._file];
+      const d = a._file && files[a._file];
+      if (d && d.added) {
+        a._added_at = d.added;
         updated++;
       }
     }
-    console.log(`[live-dates] overlayed ${updated} agent timestamps from ${commits.length} recent commits`);
+    console.log(`[live-dates] overlayed ${updated} agent timestamps from the static commit-dates sidecar`);
   } catch (e) {
     console.warn('[live-dates] failed:', e);
   }

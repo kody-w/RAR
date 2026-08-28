@@ -316,21 +316,13 @@ async function load() {
   liveTopUp();
 }
 
-/* Client-side top-up: keeps stars/CDN current between nightly snapshots.
-   Uses only unauthenticated public endpoints, so it also works from file://. */
+/* Client-side top-up: keeps CDN hits current between nightly snapshots.
+   jsDelivr only — stars/forks come from the committed snapshot; pages never
+   call the GitHub API (rate-limited per visitor; the snapshot is the truth). */
 async function liveTopUp(force) {
   $('stamp-mode').innerHTML = '<span class="spin"></span> checking live sources…';
-  const [repo, cdn] = await Promise.all([
-    getJSON([`https://api.github.com/repos/${OWNER}/${REPO}`]),
-    getJSON([`https://data.jsdelivr.com/v1/stats/packages/gh/${OWNER}/${REPO}?period=year`])
-  ]);
+  const cdn = await getJSON([`https://data.jsdelivr.com/v1/stats/packages/gh/${OWNER}/${REPO}?period=year`]);
   let live = [];
-  if (repo) {
-    M.repo.stars = repo.stargazers_count;
-    M.repo.forks = repo.forks_count;
-    M.repo.open_issues = repo.open_issues_count;
-    live.push('GitHub');
-  }
   if (cdn && cdn.hits) {
     const hits = cdn.hits.total || 0;
     if (hits > M.totals.cdn_hits) {
@@ -342,7 +334,7 @@ async function liveTopUp(force) {
   renderKPIs();
   $('stamp-mode').textContent = live.length
     ? 'live top-up: ' + live.join(' + ')
-    : 'snapshot only (live APIs unreachable)';
+    : 'snapshot only (CDN stats unreachable)';
 }
 
 /* ----------------------------------------------------------------- render */
