@@ -48,7 +48,7 @@
     },
     {
       "id": "aibast-agents-library",
-      "namespace": "@aibast-agents-library",
+      "namespace": "@aibast-library",
       "display_name": "AIBAST Agents Library",
       "publisher": "microsoft",
       "home_url": "https://microsoft.github.io/aibast-agents-library/",
@@ -58,7 +58,7 @@
       "license": "MIT",
       "license_verified": true,
       "license_note": "Public Microsoft repository with an MIT LICENSE file at the root; indexed as catalog metadata only, bodies stay upstream.",
-      "_why": "Industry-vertical agents (72 across 12 verticals) maintained upstream by Microsoft AIBAST. RAR previously hosted copies under agents/@aibast-agents-library which drifted from the source; this channel replaces the copies so the registry stays current with the library of record."
+      "_why": "Industry-vertical agents (72 across 12 verticals) maintained upstream by Microsoft AIBAST. RAR previously hosted copies under agents/@aibast-agents-library which drifted from the source; this channel replaces the copies so the registry stays current with the library of record. Namespace is @aibast-library (not the native @aibast-agents-library publisher) so channel refs never collide with published agent identities \u2014 RAR's admission tests treat a colliding ref as a vanished native agent."
     }
   ]
 }
