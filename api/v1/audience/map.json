@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-08-28T04:21:58Z",
+  "generated": "2026-08-28T04:46:29Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 106,
     "consumer_only": 3,
-    "both": 201,
-    "in_business_mode": 307,
-    "in_consumer_mode": 204
+    "both": 206,
+    "in_business_mode": 312,
+    "in_consumer_mode": 209
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -308,12 +308,14 @@
     "@rapp/estate_outbound": "x",
     "@rapp/exec_brief_agent": "x",
     "@rapp/fleet_commander": "x",
+    "@rapp/forge_provenance_agent": "x",
     "@rapp/hacker_news": "x",
     "@rapp/learn_new": "x",
     "@rapp/moment_factory_agent": "x",
     "@rapp/ping_agent": "x",
     "@rapp/pitch_deck_agent": "x",
     "@rapp/rapp": "x",
+    "@rapp/rapp_dogg_agent": "x",
     "@rapp/rapp_publish_agent": "x",
     "@rapp/rapplication_agent": "x",
     "@rapp/rar_steward": "x",
@@ -321,6 +323,9 @@
     "@rapp/swarm_factory_agent": "x",
     "@rapp/twin_agent": "x",
     "@rapp/vibe_builder_agent": "x",
+    "@rapter/hive_census_agent": "x",
+    "@rapter/hive_shape_agent": "x",
+    "@rapter/rapp_dogg_agent": "x",
     "@rarbookworld/bookfactory": "x",
     "@rarbookworld/momentfactory": "x",
     "@wildhaven/bellows_agent": "x",

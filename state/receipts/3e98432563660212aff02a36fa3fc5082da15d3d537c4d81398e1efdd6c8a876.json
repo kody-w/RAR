@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@rapter/hive_census_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "c078c513615c23f87edf14ee12514105af913e06577cfe53b2e2b2368963d4ff"
+ },
+ "canonical_path": "agents/@rapter/hive_census_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:46:14.306171+00:00",
+ "id": "rar_3e98432563660212aff02a36fa3fc5082da15d3d537c4d81398e1efdd6c8a876",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_3e98432563660212aff02a36",
+ "revision_id": "3e98432563660212aff02a36fa3fc5082da15d3d537c4d81398e1efdd6c8a876",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "apply exact hash-pinned legacy registry migrations"
+ },
+ "version": "1.0.0"
+}

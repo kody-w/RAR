@@ -76,7 +76,7 @@ Self-contained: standard library only. Drop into any RAPP agents/ directory.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/connected_solution_agent",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "ConnectedSolution",
     "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API.",
     "author": "Kody Wildfeuer",

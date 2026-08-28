@@ -1,7 +1,7 @@
 {
   "schema": "rar-match/1.0",
   "description": "Precomputed use-case matching. A host application asks the user to describe a use case, tokenizes it, sums the term weights from `index`, and returns the top agents — entirely client-side, with no backend and no GitHub access.",
-  "generated": "2026-08-28T04:21:58Z",
+  "generated": "2026-08-28T04:46:29Z",
   "how_to_query": {
     "canonical": "Look up a use_cases[].id for a curated, ranked list.",
     "free_text": "Lowercase the query, split on non-alphanumerics, drop tokens of 2 characters or fewer, then for each token read index[token] (entries are 'agent_id:weight'). Sum weights per agent_id and sort descending."
@@ -17,84 +17,84 @@
           "name": "@aibast-agents-library/win_probability",
           "display_name": "Win Probability",
           "audience": "business",
-          "score": 170.2
+          "score": 171.39
         },
         {
           "id": "aibast-agents-library__revenue_forecast",
           "name": "@aibast-agents-library/revenue_forecast",
           "display_name": "Revenue Forecast",
           "audience": "business",
-          "score": 146.79
+          "score": 147.81
         },
         {
           "id": "aibast-agents-library__win_loss_analysis",
           "name": "@aibast-agents-library/win_loss_analysis",
           "display_name": "Win/Loss Analysis",
           "audience": "business",
-          "score": 102.86
+          "score": 103.56
         },
         {
           "id": "aibast-agents-library__deal_tracking",
           "name": "@aibast-agents-library/deal_tracking",
           "display_name": "Deal Tracking",
           "audience": "business",
-          "score": 80.48
+          "score": 80.99
         },
         {
           "id": "aibast-agents-library__deal_health_score",
           "name": "@aibast-agents-library/deal_health_score",
           "display_name": "Deal Health Score",
           "audience": "business",
-          "score": 66.96
+          "score": 67.38
         },
         {
           "id": "aibast-agents-library__deal_risk_assessment",
           "name": "@aibast-agents-library/deal_risk_assessment",
           "display_name": "Deal Risk Assessment",
           "audience": "business",
-          "score": 66.96
+          "score": 67.38
         },
         {
           "id": "aibast-agents-library__deal_progression",
           "name": "@aibast-agents-library/deal_progression",
           "display_name": "Deal Progression",
           "audience": "business",
-          "score": 65.41
+          "score": 65.81
         },
         {
           "id": "aibast-agents-library__stalled_deal_detection",
           "name": "@aibast-agents-library/stalled_deal_detection",
           "display_name": "Stalled Deal Detection",
           "audience": "business",
-          "score": 61.69
+          "score": 62.07
         },
         {
           "id": "aibast-agents-library__pipeline_velocity",
           "name": "@aibast-agents-library/pipeline_velocity",
           "display_name": "Pipeline Velocity",
           "audience": "business",
-          "score": 60.75
+          "score": 61.12
         },
         {
           "id": "kody-w__deal_desk_agent",
           "name": "@kody-w/deal_desk_agent",
           "display_name": "DealDesk",
           "audience": "business",
-          "score": 54.93
+          "score": 55.27
         },
         {
           "id": "aibast-agents-library__competitive_intelligence",
           "name": "@aibast-agents-library/competitive_intelligence",
           "display_name": "Competitive Intelligence",
           "audience": "business",
-          "score": 51.67
+          "score": 52.01
         },
         {
           "id": "aibast-agents-library__account_risk_assessment",
           "name": "@aibast-agents-library/account_risk_assessment",
           "display_name": "Account Risk Assessment",
           "audience": "business",
-          "score": 51.17
+          "score": 51.5
         }
       ]
     },
@@ -108,84 +108,84 @@
           "name": "@aibast-agents-library/meeting_prep",
           "display_name": "Meeting Prep",
           "audience": "business",
-          "score": 148.48
+          "score": 149.53
         },
         {
           "id": "aibast-agents-library__account_intelligence",
           "name": "@aibast-agents-library/account_intelligence",
           "display_name": "Account Intelligence",
           "audience": "business",
-          "score": 119.35
+          "score": 120.17
         },
         {
           "id": "aibast-agents-library__account_intelligence_orchestrator_agent",
           "name": "@aibast-agents-library/account_intelligence_orchestrator_agent",
           "display_name": "Account Intelligence Orchestrator",
           "audience": "business",
-          "score": 89.4
+          "score": 90.0
         },
         {
           "id": "aibast-agents-library__stakeholder_intelligence",
           "name": "@aibast-agents-library/stakeholder_intelligence",
           "display_name": "Stakeholder Intelligence",
           "audience": "business",
-          "score": 69.88
+          "score": 70.37
         },
         {
           "id": "aibast-agents-library__fs_customer_onboarding",
           "name": "@aibast-agents-library/fs_customer_onboarding",
           "display_name": "FS Customer Onboarding Agent",
           "audience": "business",
-          "score": 66.17
+          "score": 66.62
         },
         {
           "id": "howardh__chief_of_staff_agent",
           "name": "@howardh/chief_of_staff_agent",
           "display_name": "ChiefOfStaff",
           "audience": "both",
-          "score": 65.5
+          "score": 65.97
         },
         {
           "id": "aibast-agents-library__deal_stakeholder_engagement",
           "name": "@aibast-agents-library/deal_stakeholder_engagement",
           "display_name": "Stakeholder Engagement",
           "audience": "business",
-          "score": 53.24
+          "score": 53.62
         },
         {
           "id": "kody-w__recon_deck_agent",
           "name": "@kody-w/recon_deck_agent",
           "display_name": "ReconDeck",
           "audience": "both",
-          "score": 52.13
+          "score": 52.5
         },
         {
           "id": "cat-agent-skills__meeting_analyzer",
           "name": "@cat-agent-skills/meeting_analyzer",
           "display_name": "Meeting Analyzer",
           "audience": "both",
-          "score": 46.49
+          "score": 46.81
         },
         {
           "id": "aibast-agents-library__ai_customer_assistant",
           "name": "@aibast-agents-library/ai_customer_assistant",
           "display_name": "AI Customer Assistant",
           "audience": "both",
-          "score": 39.94
+          "score": 40.2
         },
         {
           "id": "aibast-agents-library__customer_360",
           "name": "@aibast-agents-library/customer_360",
           "display_name": "Customer 360",
           "audience": "both",
-          "score": 39.94
+          "score": 40.2
         },
         {
           "id": "aibast-agents-library__customer_360_speech",
           "name": "@aibast-agents-library/customer_360_speech",
           "display_name": "Customer 360 & Speech Agent",
           "audience": "business",
-          "score": 39.94
+          "score": 40.2
         }
       ]
     },
@@ -199,84 +199,84 @@
           "name": "@aibast-agents-library/support_ticket_resolution",
           "display_name": "Support Ticket Resolution Agent",
           "audience": "business",
-          "score": 173.6
+          "score": 174.84
         },
         {
           "id": "aibast-agents-library__ai_customer_assistant",
           "name": "@aibast-agents-library/ai_customer_assistant",
           "display_name": "AI Customer Assistant",
           "audience": "both",
-          "score": 113.36
+          "score": 114.14
         },
         {
           "id": "aibast-agents-library__returns_complaints_resolution",
           "name": "@aibast-agents-library/returns_complaints_resolution",
           "display_name": "Returns & Complaints Resolution Agent",
           "audience": "business",
-          "score": 100.27
+          "score": 100.97
         },
         {
           "id": "aibast-agents-library__it_ticket_management",
           "name": "@aibast-agents-library/it_ticket_management",
           "display_name": "IT Ticket Management",
           "audience": "both",
-          "score": 74.07
+          "score": 74.61
         },
         {
           "id": "aibast-agents-library__triage_bot",
           "name": "@aibast-agents-library/triage_bot",
           "display_name": "Triage Bot",
           "audience": "both",
-          "score": 53.24
+          "score": 53.62
         },
         {
           "id": "aibast-agents-library__customer_360",
           "name": "@aibast-agents-library/customer_360",
           "display_name": "Customer 360",
           "audience": "both",
-          "score": 39.94
+          "score": 40.2
         },
         {
           "id": "aibast-agents-library__customer_360_speech",
           "name": "@aibast-agents-library/customer_360_speech",
           "display_name": "Customer 360 & Speech Agent",
           "audience": "business",
-          "score": 39.94
+          "score": 40.2
         },
         {
           "id": "aibast-agents-library__field_service_dispatch",
           "name": "@aibast-agents-library/field_service_dispatch",
           "display_name": "Field Service Dispatch Agent",
           "audience": "business",
-          "score": 36.5
+          "score": 36.74
         },
         {
           "id": "howardh__chief_of_staff_agent",
           "name": "@howardh/chief_of_staff_agent",
           "display_name": "ChiefOfStaff",
           "audience": "both",
-          "score": 35.5
+          "score": 35.75
         },
         {
           "id": "aibast-agents-library__order_status_communication",
           "name": "@aibast-agents-library/order_status_communication",
           "display_name": "Order Status Communication Agent",
           "audience": "business",
-          "score": 35.36
+          "score": 35.6
         },
         {
           "id": "aibast-agents-library__returns_exchange",
           "name": "@aibast-agents-library/returns_exchange",
           "display_name": "Returns & Exchange Agent",
           "audience": "business",
-          "score": 35.36
+          "score": 35.6
         },
         {
           "id": "aibast-agents-library__software_customer_onboarding",
           "name": "@aibast-agents-library/software_customer_onboarding",
           "display_name": "Customer Onboarding Agent",
           "audience": "business",
-          "score": 34.23
+          "score": 34.46
         }
       ]
     },
@@ -290,84 +290,84 @@
           "name": "@cat-agent-skills/vendor_contract_risk_review",
           "display_name": "Vendor Contract Risk Review",
           "audience": "business",
-          "score": 158.35
+          "score": 154.52
         },
         {
           "id": "aibast-agents-library__contract_risk_review",
           "name": "@aibast-agents-library/contract_risk_review",
           "display_name": "Contract Risk Review Agent",
           "audience": "business",
-          "score": 151.13
+          "score": 144.8
         },
         {
           "id": "discreetRappers__sharepoint_contract_analysis_agent",
           "name": "@discreetRappers/sharepoint_contract_analysis_agent",
           "display_name": "ContractAnalysis",
           "audience": "business",
-          "score": 54.22
+          "score": 53.37
         },
         {
           "id": "aibast-agents-library__account_risk_assessment",
           "name": "@aibast-agents-library/account_risk_assessment",
           "display_name": "Account Risk Assessment",
           "audience": "business",
-          "score": 52.7
+          "score": 53.05
         },
         {
           "id": "cat-agent-skills__enterprise_agent_design_authority",
           "name": "@cat-agent-skills/enterprise_agent_design_authority",
           "display_name": "Enterprise Agent Design Authority (EADA)",
           "audience": "business",
-          "score": 44.16
+          "score": 44.46
         },
         {
           "id": "cat-agent-skills__power_bi_model_review",
           "name": "@cat-agent-skills/power_bi_model_review",
           "display_name": "Power BI Model Review",
           "audience": "both",
-          "score": 44.16
+          "score": 44.46
         },
         {
           "id": "cat-agent-skills__eu_greenwashing_analysis",
           "name": "@cat-agent-skills/eu_greenwashing_analysis",
           "display_name": "EU Greenwashing Analysis",
           "audience": "both",
-          "score": 39.65
+          "score": 39.91
         },
         {
           "id": "aibast-agents-library__deal_risk_assessment",
           "name": "@aibast-agents-library/deal_risk_assessment",
           "display_name": "Deal Risk Assessment",
           "audience": "business",
-          "score": 36.89
+          "score": 37.13
         },
         {
           "id": "aibast-agents-library__supplier_risk_monitoring",
           "name": "@aibast-agents-library/supplier_risk_monitoring",
           "display_name": "Supplier Risk Monitoring Agent",
           "audience": "business",
-          "score": 36.89
+          "score": 37.13
         },
         {
           "id": "aibast-agents-library__fs_regulatory_compliance",
           "name": "@aibast-agents-library/fs_regulatory_compliance",
           "display_name": "FS Regulatory Compliance Agent",
           "audience": "business",
-          "score": 36.05
+          "score": 36.28
         },
         {
           "id": "kody-w__legal_helper",
           "name": "@kody-w/legal_helper",
           "display_name": "LegalHelper",
           "audience": "both",
-          "score": 35.5
+          "score": 35.75
         },
         {
           "id": "aibast-agents-library__regulatory_compliance_fed",
           "name": "@aibast-agents-library/regulatory_compliance_fed",
           "display_name": "Regulatory Compliance (Federal) Agent",
           "audience": "business",
-          "score": 30.9
+          "score": 31.1
         }
       ]
     },
@@ -381,77 +381,77 @@
           "name": "@aibast-agents-library/ask_hr",
           "display_name": "Ask HR",
           "audience": "business",
-          "score": 96.18
+          "score": 96.88
         },
         {
           "id": "aibast-agents-library__general_ask_hr",
           "name": "@aibast-agents-library/general_ask_hr",
           "display_name": "General Ask HR",
           "audience": "both",
-          "score": 89.32
+          "score": 89.98
         },
         {
           "id": "aibast-agents-library__fs_customer_onboarding",
           "name": "@aibast-agents-library/fs_customer_onboarding",
           "display_name": "FS Customer Onboarding Agent",
           "audience": "business",
-          "score": 53.58
+          "score": 53.96
         },
         {
           "id": "aibast-agents-library__software_customer_onboarding",
           "name": "@aibast-agents-library/software_customer_onboarding",
           "display_name": "Customer Onboarding Agent",
           "audience": "business",
-          "score": 53.58
+          "score": 53.96
         },
         {
           "id": "aibast-agents-library__workforce_clearance_onboarding",
           "name": "@aibast-agents-library/workforce_clearance_onboarding",
           "display_name": "Workforce Clearance & Onboarding Agent",
           "audience": "business",
-          "score": 53.58
+          "score": 53.96
         },
         {
           "id": "howardh__training_quest_agent",
           "name": "@howardh/training_quest_agent",
           "display_name": "TrainingQuest",
           "audience": "both",
-          "score": 30.62
+          "score": 30.83
         },
         {
           "id": "howardh__vaultmind_agent",
           "name": "@howardh/vaultmind_agent",
           "display_name": "VaultMind",
           "audience": "both",
-          "score": 22.96
+          "score": 23.12
         },
         {
           "id": "cat-agent-skills__action_items_todo",
           "name": "@cat-agent-skills/action_items_todo",
           "display_name": "Action Items to To Do",
           "audience": "both",
-          "score": 9.8
+          "score": 9.87
         },
         {
           "id": "cat-agent-skills__work_brief",
           "name": "@cat-agent-skills/work_brief",
           "display_name": "Work Brief",
           "audience": "both",
-          "score": 9.8
+          "score": 9.87
         },
         {
           "id": "kody-w__workiq",
           "name": "@kody-w/workiq",
           "display_name": "WorkIQ",
           "audience": "business",
-          "score": 9.8
+          "score": 9.87
         },
         {
           "id": "aibast-agents-library__staff_credentialing",
           "name": "@aibast-agents-library/staff_credentialing",
           "display_name": "Staff Credentialing Agent",
           "audience": "business",
-          "score": 7.65
+          "score": 7.71
         }
       ]
     },
@@ -465,42 +465,42 @@
           "name": "@cat-agent-skills/travel_cost_estimator",
           "display_name": "Travel Cost Estimator",
           "audience": "both",
-          "score": 53.8
+          "score": 54.2
         },
         {
           "id": "aibast-agents-library__utility_billing_assistance",
           "name": "@aibast-agents-library/utility_billing_assistance",
           "display_name": "Utility Billing Assistance Agent",
           "audience": "business",
-          "score": 40.35
+          "score": 40.65
         },
         {
           "id": "aibast-agents-library__asset_maintenance_forecast",
           "name": "@aibast-agents-library/asset_maintenance_forecast",
           "display_name": "Asset Maintenance Forecast Agent",
           "audience": "business",
-          "score": 29.41
+          "score": 29.62
         },
         {
           "id": "aibast-agents-library__procurement_support",
           "name": "@aibast-agents-library/procurement_support",
           "display_name": "Procurement Support",
           "audience": "business",
-          "score": 29.41
+          "score": 29.62
         },
         {
           "id": "aibast-agents-library__slg_grants_management",
           "name": "@aibast-agents-library/slg_grants_management",
           "display_name": "SLG Grants Management Agent",
           "audience": "business",
-          "score": 29.41
+          "score": 29.62
         },
         {
           "id": "aibast-agents-library__time_entry_billing",
           "name": "@aibast-agents-library/time_entry_billing",
           "display_name": "Time Entry & Billing Agent",
           "audience": "business",
-          "score": 13.45
+          "score": 13.55
         }
       ]
     },
@@ -514,84 +514,84 @@
           "name": "@aibast-agents-library/regulatory_compliance_fed",
           "display_name": "Regulatory Compliance (Federal) Agent",
           "audience": "business",
-          "score": 100.78
+          "score": 101.47
         },
         {
           "id": "aibast-agents-library__energy_regulatory_reporting",
           "name": "@aibast-agents-library/energy_regulatory_reporting",
           "display_name": "Energy Regulatory Reporting Agent",
           "audience": "business",
-          "score": 90.88
+          "score": 91.5
         },
         {
           "id": "aibast-agents-library__fs_regulatory_compliance",
           "name": "@aibast-agents-library/fs_regulatory_compliance",
           "display_name": "FS Regulatory Compliance Agent",
           "audience": "business",
-          "score": 89.29
+          "score": 89.91
         },
         {
           "id": "aibast-agents-library__account_risk_assessment",
           "name": "@aibast-agents-library/account_risk_assessment",
           "display_name": "Account Risk Assessment",
           "audience": "business",
-          "score": 52.7
+          "score": 53.05
         },
         {
           "id": "aibast-agents-library__contract_risk_review",
           "name": "@aibast-agents-library/contract_risk_review",
           "display_name": "Contract Risk Review Agent",
           "audience": "business",
-          "score": 52.34
+          "score": 52.68
         },
         {
           "id": "aibast-agents-library__general_ask_hr",
           "name": "@aibast-agents-library/general_ask_hr",
           "display_name": "General Ask HR",
           "audience": "both",
-          "score": 44.66
+          "score": 44.99
         },
         {
           "id": "aibast-agents-library__federal_grants_oversight",
           "name": "@aibast-agents-library/federal_grants_oversight",
           "display_name": "Federal Grants Oversight Agent",
           "audience": "business",
-          "score": 42.78
+          "score": 43.06
         },
         {
           "id": "aibast-agents-library__permit_license_management",
           "name": "@aibast-agents-library/permit_license_management",
           "display_name": "Permit & License Management Agent",
           "audience": "business",
-          "score": 42.07
+          "score": 42.36
         },
         {
           "id": "cat-agent-skills__content_quality_auditor",
           "name": "@cat-agent-skills/content_quality_auditor",
           "display_name": "Content Quality Auditor",
           "audience": "business",
-          "score": 37.24
+          "score": 37.5
         },
         {
           "id": "cat-agent-skills__power_automate_documentation",
           "name": "@cat-agent-skills/power_automate_documentation",
           "display_name": "Power Automate Documentation",
           "audience": "business",
-          "score": 37.24
+          "score": 37.5
         },
         {
           "id": "aibast-agents-library__deal_risk_assessment",
           "name": "@aibast-agents-library/deal_risk_assessment",
           "display_name": "Deal Risk Assessment",
           "audience": "business",
-          "score": 36.89
+          "score": 37.13
         },
         {
           "id": "aibast-agents-library__supplier_risk_monitoring",
           "name": "@aibast-agents-library/supplier_risk_monitoring",
           "display_name": "Supplier Risk Monitoring Agent",
           "audience": "business",
-          "score": 36.89
+          "score": 37.13
         }
       ]
     },
@@ -605,84 +605,84 @@
           "name": "@aibast-agents-library/supplier_risk_monitoring",
           "display_name": "Supplier Risk Monitoring Agent",
           "audience": "business",
-          "score": 187.14
+          "score": 188.46
         },
         {
           "id": "aibast-agents-library__supply_chain_disruption_alert",
           "name": "@aibast-agents-library/supply_chain_disruption_alert",
           "display_name": "Supply Chain Disruption Alert Agent",
           "audience": "business",
-          "score": 151.22
+          "score": 152.29
         },
         {
           "id": "cat-agent-skills__vendor_contract_risk_review",
           "name": "@cat-agent-skills/vendor_contract_risk_review",
           "display_name": "Vendor Contract Risk Review",
           "audience": "business",
-          "score": 130.08
+          "score": 130.99
         },
         {
           "id": "aibast-agents-library__inventory_rebalancing",
           "name": "@aibast-agents-library/inventory_rebalancing",
           "display_name": "Inventory Rebalancing Agent",
           "audience": "business",
-          "score": 106.35
+          "score": 107.11
         },
         {
           "id": "aibast-agents-library__procurement_support",
           "name": "@aibast-agents-library/procurement_support",
           "display_name": "Procurement Support",
           "audience": "business",
-          "score": 93.79
+          "score": 94.46
         },
         {
           "id": "aibast-agents-library__procurement_agent",
           "name": "@aibast-agents-library/procurement_agent",
           "display_name": "Procurement Agent",
           "audience": "both",
-          "score": 78.54
+          "score": 79.1
         },
         {
           "id": "aibast-agents-library__inventory_visibility",
           "name": "@aibast-agents-library/inventory_visibility",
           "display_name": "Inventory Visibility Agent",
           "audience": "business",
-          "score": 67.01
+          "score": 67.49
         },
         {
           "id": "aibast-agents-library__acquisition_support",
           "name": "@aibast-agents-library/acquisition_support",
           "display_name": "Acquisition Support Agent",
           "audience": "business",
-          "score": 63.78
+          "score": 64.23
         },
         {
           "id": "aibast-agents-library__account_risk_assessment",
           "name": "@aibast-agents-library/account_risk_assessment",
           "display_name": "Account Risk Assessment",
           "audience": "business",
-          "score": 60.89
+          "score": 61.29
         },
         {
           "id": "kody-w__chain_composer_agent",
           "name": "@kody-w/chain_composer_agent",
           "display_name": "Chain Composer",
           "audience": "both",
-          "score": 53.58
+          "score": 53.96
         },
         {
           "id": "aibast-agents-library__contract_risk_review",
           "name": "@aibast-agents-library/contract_risk_review",
           "display_name": "Contract Risk Review Agent",
           "audience": "business",
-          "score": 36.89
+          "score": 37.13
         },
         {
           "id": "aibast-agents-library__deal_risk_assessment",
           "name": "@aibast-agents-library/deal_risk_assessment",
           "display_name": "Deal Risk Assessment",
           "audience": "business",
-          "score": 36.89
+          "score": 37.13
         }
       ]
     },
@@ -696,77 +696,77 @@
           "name": "@aibast-agents-library/care_gap_closure",
           "display_name": "Care Gap Closure Agent",
           "audience": "business",
-          "score": 143.72
+          "score": 144.77
         },
         {
           "id": "aibast-agents-library__prior_authorization",
           "name": "@aibast-agents-library/prior_authorization",
           "display_name": "Prior Authorization Agent",
           "audience": "business",
-          "score": 143.45
+          "score": 144.49
         },
         {
           "id": "aibast-agents-library__patient_intake",
           "name": "@aibast-agents-library/patient_intake",
           "display_name": "Patient Intake Agent",
           "audience": "business",
-          "score": 125.45
+          "score": 126.35
         },
         {
           "id": "aibast-agents-library__clinical_notes_summarizer",
           "name": "@aibast-agents-library/clinical_notes_summarizer",
           "display_name": "Clinical Notes Summarizer Agent",
           "audience": "business",
-          "score": 100.53
+          "score": 101.25
         },
         {
           "id": "cat-agent-skills__lab_column_mapper",
           "name": "@cat-agent-skills/lab_column_mapper",
           "display_name": "Lab Column Mapper",
           "audience": "both",
-          "score": 74.92
+          "score": 75.45
         },
         {
           "id": "aibast-agents-library__claims_processing",
           "name": "@aibast-agents-library/claims_processing",
           "display_name": "Claims Processing Agent",
           "audience": "business",
-          "score": 62.12
+          "score": 62.56
         },
         {
           "id": "aibast-agents-library__staff_credentialing",
           "name": "@aibast-agents-library/staff_credentialing",
           "display_name": "Staff Credentialing Agent",
           "audience": "business",
-          "score": 36.12
+          "score": 36.37
         },
         {
           "id": "cat-agent-skills__global_greenwashing_claim_auditor",
           "name": "@cat-agent-skills/global_greenwashing_claim_auditor",
           "display_name": "Global Greenwashing Claim Auditor",
           "audience": "business",
-          "score": 35.5
+          "score": 35.75
         },
         {
           "id": "cat-agent-skills__phi_deidentifier",
           "name": "@cat-agent-skills/phi_deidentifier",
           "display_name": "PHI De-identifier",
           "audience": "business",
-          "score": 30.55
+          "score": 30.76
         },
         {
           "id": "cat-agent-skills__blog_post_structure_pass",
           "name": "@cat-agent-skills/blog_post_structure_pass",
           "display_name": "Blog Post Structure Pass",
           "audience": "both",
-          "score": 8.87
+          "score": 8.94
         },
         {
           "id": "cat-agent-skills__eu_greenwashing_analysis",
           "name": "@cat-agent-skills/eu_greenwashing_analysis",
           "display_name": "EU Greenwashing Analysis",
           "audience": "both",
-          "score": 8.87
+          "score": 8.94
         }
       ]
     },
@@ -780,84 +780,84 @@
           "name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
           "display_name": "SharePoint List Insight Report Generator",
           "audience": "business",
-          "score": 102.17
+          "score": 100.02
         },
         {
           "id": "cat-agent-skills__regulation_monitor",
           "name": "@cat-agent-skills/regulation_monitor",
           "display_name": "Regulation Monitor",
           "audience": "business",
-          "score": 42.26
-        },
-        {
-          "id": "cat-agent-skills__ai_usecase_assessment",
-          "name": "@cat-agent-skills/ai_usecase_assessment",
-          "display_name": "AI Use Case Assessment",
-          "audience": "business",
-          "score": 38.41
+          "score": 42.55
         },
         {
           "id": "aibast-agents-library__mission_reporting_assistant",
           "name": "@aibast-agents-library/mission_reporting_assistant",
           "display_name": "Mission Reporting Assistant Agent",
           "audience": "business",
-          "score": 38.01
+          "score": 38.29
+        },
+        {
+          "id": "cat-agent-skills__ai_usecase_assessment",
+          "name": "@cat-agent-skills/ai_usecase_assessment",
+          "display_name": "AI Use Case Assessment",
+          "audience": "business",
+          "score": 37.23
         },
         {
           "id": "cat-agent-skills__work_iq_signalboard",
           "name": "@cat-agent-skills/work_iq_signalboard",
           "display_name": "Work IQ Signalboard",
           "audience": "both",
-          "score": 32.75
+          "score": 32.98
         },
         {
           "id": "cat-agent-skills__meeting_analyzer",
           "name": "@cat-agent-skills/meeting_analyzer",
           "display_name": "Meeting Analyzer",
           "audience": "both",
-          "score": 30.99
+          "score": 30.84
         },
         {
           "id": "cat-agent-skills__monte_carlo_analysis",
           "name": "@cat-agent-skills/monte_carlo_analysis",
           "display_name": "Monte Carlo Analysis",
           "audience": "both",
-          "score": 28.52
+          "score": 28.7
         },
         {
           "id": "aibast-agents-library__bulk_crm_data_generator_agent",
           "name": "@aibast-agents-library/bulk_crm_data_generator_agent",
           "display_name": "Bulk CRM Data Generator",
           "audience": "business",
-          "score": 28.14
+          "score": 28.31
         },
         {
           "id": "cat-agent-skills__scrollytelling_data",
           "name": "@cat-agent-skills/scrollytelling_data",
           "display_name": "Scrollytelling Data",
           "audience": "both",
-          "score": 28.14
+          "score": 28.31
         },
         {
           "id": "cat-agent-skills__lab_column_mapper",
           "name": "@cat-agent-skills/lab_column_mapper",
           "display_name": "Lab Column Mapper",
           "audience": "both",
-          "score": 24.12
+          "score": 24.26
         },
         {
           "id": "cat-agent-skills__eu_greenwashing_analysis",
           "name": "@cat-agent-skills/eu_greenwashing_analysis",
           "display_name": "EU Greenwashing Analysis",
           "audience": "both",
-          "score": 21.49
+          "score": 21.27
         },
         {
           "id": "cat-agent-skills__power_bi_model_review",
           "name": "@cat-agent-skills/power_bi_model_review",
           "display_name": "Power BI Model Review",
           "audience": "both",
-          "score": 16.81
+          "score": 16.92
         }
       ]
     },
@@ -871,84 +871,84 @@
           "name": "@cat-agent-skills/pdf_table_data_conversion",
           "display_name": "PDF Table Data Conversion",
           "audience": "business",
-          "score": 73.99
+          "score": 74.51
         },
         {
           "id": "aibast-agents-library__one_click_crm_intake",
           "name": "@aibast-agents-library/one_click_crm_intake",
           "display_name": "One-Click CRM Intake",
           "audience": "both",
-          "score": 62.12
+          "score": 62.56
         },
         {
           "id": "aibast-agents-library__patient_intake",
           "name": "@aibast-agents-library/patient_intake",
           "display_name": "Patient Intake Agent",
           "audience": "business",
-          "score": 62.12
+          "score": 62.56
         },
         {
           "id": "cat-agent-skills__doc_format_converter",
           "name": "@cat-agent-skills/doc_format_converter",
           "display_name": "Universal Document Converter",
           "audience": "both",
-          "score": 53.36
+          "score": 53.73
         },
         {
           "id": "cat-agent-skills__acroform_writer",
           "name": "@cat-agent-skills/acroform_writer",
           "display_name": "AcroForm Writer",
           "audience": "both",
-          "score": 52.11
+          "score": 52.48
         },
         {
           "id": "cat-agent-skills__linkedin_content_system",
           "name": "@cat-agent-skills/linkedin_content_system",
           "display_name": "LinkedIn Content System",
           "audience": "both",
-          "score": 38.29
+          "score": 38.54
         },
         {
           "id": "cat-agent-skills__ai_usecase_assessment",
           "name": "@cat-agent-skills/ai_usecase_assessment",
           "display_name": "AI Use Case Assessment",
           "audience": "business",
-          "score": 35.5
+          "score": 35.75
         },
         {
           "id": "cat-agent-skills__linkedin_content_writer",
           "name": "@cat-agent-skills/linkedin_content_writer",
           "display_name": "LinkedIn Content Writer",
           "audience": "both",
-          "score": 31.65
+          "score": 31.85
         },
         {
           "id": "aibast-agents-library__sharepoint_document_extractor",
           "name": "@aibast-agents-library/sharepoint_document_extractor",
           "display_name": "SharePoint Document Extractor",
           "audience": "both",
-          "score": 27.48
+          "score": 27.66
         },
         {
           "id": "cat-agent-skills__blog_content_auditor",
           "name": "@cat-agent-skills/blog_content_auditor",
           "display_name": "Blog Content Auditor",
           "audience": "both",
-          "score": 27.13
+          "score": 27.3
         },
         {
           "id": "cat-agent-skills__content_quality_auditor",
           "name": "@cat-agent-skills/content_quality_auditor",
           "display_name": "Content Quality Auditor",
           "audience": "business",
-          "score": 27.13
+          "score": 27.3
         },
         {
           "id": "cat-agent-skills__redlining_content",
           "name": "@cat-agent-skills/redlining_content",
           "display_name": "Redlining Content",
           "audience": "both",
-          "score": 20.43
+          "score": 20.57
         }
       ]
     },
@@ -962,84 +962,84 @@
           "name": "@aibast-agents-library/voice_to_crm_d365",
           "display_name": "Voice to CRM (D365)",
           "audience": "both",
-          "score": 73.1
+          "score": 73.6
         },
         {
           "id": "aibast-agents-library__dynamics_365_connector",
           "name": "@aibast-agents-library/dynamics_365_connector",
           "display_name": "Dynamics 365 Connector",
           "audience": "both",
-          "score": 62.0
+          "score": 62.39
         },
         {
           "id": "kody-w__connected_solution_agent",
           "name": "@kody-w/connected_solution_agent",
           "display_name": "ConnectedSolution",
           "audience": "both",
-          "score": 33.5
+          "score": 33.74
         },
         {
           "id": "kody-w__copilot_studio_probe_agent",
           "name": "@kody-w/copilot_studio_probe_agent",
           "display_name": "CopilotStudioProbe",
           "audience": "both",
-          "score": 33.5
+          "score": 33.74
         },
         {
           "id": "aibast-agents-library__bulk_crm_data_generator_agent",
           "name": "@aibast-agents-library/bulk_crm_data_generator_agent",
           "display_name": "Bulk CRM Data Generator",
           "audience": "business",
-          "score": 32.71
+          "score": 32.91
         },
         {
           "id": "aibast-agents-library__one_click_crm_intake",
           "name": "@aibast-agents-library/one_click_crm_intake",
           "display_name": "One-Click CRM Intake",
           "audience": "both",
-          "score": 32.71
+          "score": 32.91
         },
         {
           "id": "aibast-agents-library__speech_to_crm",
           "name": "@aibast-agents-library/speech_to_crm",
           "display_name": "Speech to CRM",
           "audience": "both",
-          "score": 32.71
-        },
-        {
-          "id": "cat-agent-skills__linkedin_content_system",
-          "name": "@cat-agent-skills/linkedin_content_system",
-          "display_name": "LinkedIn Content System",
-          "audience": "both",
-          "score": 26.62
+          "score": 32.91
         },
         {
           "id": "discreetRappers__dynamics_crud_agent",
           "name": "@discreetRappers/dynamics_crud_agent",
           "display_name": "DynamicsCRUD",
           "audience": "business",
-          "score": 24.11
+          "score": 24.25
         },
         {
           "id": "cat-agent-skills__lookup_dataverse_table",
           "name": "@cat-agent-skills/lookup_dataverse_table",
           "display_name": "Dataverse Table Lookup",
           "audience": "business",
-          "score": 23.97
+          "score": 24.13
+        },
+        {
+          "id": "cat-agent-skills__linkedin_content_system",
+          "name": "@cat-agent-skills/linkedin_content_system",
+          "display_name": "LinkedIn Content System",
+          "audience": "both",
+          "score": 23.12
         },
         {
           "id": "discreetRappers__sales_assistant_agent",
           "name": "@discreetRappers/sales_assistant_agent",
           "display_name": "SalesAssistant",
           "audience": "business",
-          "score": 19.9
+          "score": 20.02
         },
         {
           "id": "aibast-agents-library__customer_360",
           "name": "@aibast-agents-library/customer_360",
           "display_name": "Customer 360",
           "audience": "both",
-          "score": 15.63
+          "score": 15.73
         }
       ]
     },
@@ -1053,84 +1053,84 @@
           "name": "@aibast-agents-library/account_messaging",
           "display_name": "Account Messaging",
           "audience": "business",
-          "score": 106.31
+          "score": 107.09
         },
         {
           "id": "aibast-agents-library__email_drafting",
           "name": "@aibast-agents-library/email_drafting",
           "display_name": "Email Drafting",
           "audience": "both",
-          "score": 70.84
+          "score": 71.32
         },
         {
           "id": "aibast-agents-library__proposal_generation",
           "name": "@aibast-agents-library/proposal_generation",
           "display_name": "Proposal Generation",
           "audience": "business",
-          "score": 68.62
+          "score": 69.12
         },
         {
           "id": "cat-agent-skills__campaign_deck_builder",
           "name": "@cat-agent-skills/campaign_deck_builder",
           "display_name": "Campaign Deck Builder",
           "audience": "both",
-          "score": 66.69
+          "score": 67.16
         },
         {
           "id": "aibast-agents-library__proposal_copilot",
           "name": "@aibast-agents-library/proposal_copilot",
           "display_name": "Proposal Copilot Agent",
           "audience": "business",
-          "score": 58.82
+          "score": 59.24
         },
         {
           "id": "cat-agent-skills__linkedin_content_system",
           "name": "@cat-agent-skills/linkedin_content_system",
           "display_name": "LinkedIn Content System",
           "audience": "both",
-          "score": 56.61
+          "score": 56.98
         },
         {
           "id": "rapp__pitch_deck_agent",
           "name": "@rapp/pitch_deck_agent",
           "display_name": "PitchDeck",
           "audience": "both",
-          "score": 53.8
+          "score": 54.2
         },
         {
           "id": "cat-agent-skills__b2b_outreach_suite",
           "name": "@cat-agent-skills/b2b_outreach_suite",
           "display_name": "B2B Outreach Suite",
           "audience": "both",
-          "score": 49.98
+          "score": 50.31
         },
         {
           "id": "aibast-agents-library__personalized_marketing",
           "name": "@aibast-agents-library/personalized_marketing",
           "display_name": "Personalized Marketing Agent",
           "audience": "business",
-          "score": 41.21
+          "score": 41.5
         },
         {
           "id": "aibast-agents-library__omnichannel_engagement",
           "name": "@aibast-agents-library/omnichannel_engagement",
           "display_name": "Omnichannel Engagement Agent",
           "audience": "business",
-          "score": 39.21
+          "score": 39.5
         },
         {
           "id": "aibast-agents-library__voice_to_crm_email",
           "name": "@aibast-agents-library/voice_to_crm_email",
           "display_name": "Voice to CRM Email",
           "audience": "both",
-          "score": 36.89
+          "score": 37.13
         },
         {
           "id": "cat-agent-skills__eu_greenwashing_analysis",
           "name": "@cat-agent-skills/eu_greenwashing_analysis",
           "display_name": "EU Greenwashing Analysis",
           "audience": "both",
-          "score": 36.35
+          "score": 36.6
         }
       ]
     },
@@ -1144,84 +1144,84 @@
           "name": "@aibast-agents-library/store_associate_copilot",
           "display_name": "Store Associate Copilot Agent",
           "audience": "business",
-          "score": 42.37
+          "score": 42.68
         },
         {
           "id": "cat-agent-skills__process_sop_architect",
           "name": "@cat-agent-skills/process_sop_architect",
           "display_name": "Process & SOP Architect",
           "audience": "both",
-          "score": 33.5
+          "score": 33.74
         },
         {
           "id": "aibast-agents-library__find_accurate_models",
           "name": "@aibast-agents-library/find_accurate_models",
           "display_name": "Find Accurate Models",
           "audience": "both",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "aibast-agents-library__fraud_detection_alert",
           "name": "@aibast-agents-library/fraud_detection_alert",
           "display_name": "Fraud Detection & Alert Agent",
           "audience": "business",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "aibast-agents-library__supplier_risk_monitoring",
           "name": "@aibast-agents-library/supplier_risk_monitoring",
           "display_name": "Supplier Risk Monitoring Agent",
           "audience": "business",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "aibast-agents-library__supply_chain_disruption_alert",
           "name": "@aibast-agents-library/supply_chain_disruption_alert",
           "display_name": "Supply Chain Disruption Alert Agent",
           "audience": "business",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "cat-agent-skills__regulation_monitor",
           "name": "@cat-agent-skills/regulation_monitor",
           "display_name": "Regulation Monitor",
           "audience": "business",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "howardh__vaultmind_agent",
           "name": "@howardh/vaultmind_agent",
           "display_name": "VaultMind",
           "audience": "both",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "kody-w__copilot_studio_parity_deploy",
           "name": "@kody-w/copilot_studio_parity_deploy",
           "display_name": "Copilot Studio Parity Deploy",
           "audience": "both",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "kody-w__factory",
           "name": "@kody-w/factory",
           "display_name": "RAPP to Copilot Studio Factory",
           "audience": "both",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "kody-w__rapp_sentinel_agent",
           "name": "@kody-w/rapp_sentinel_agent",
           "display_name": "RAPP Sentinel",
           "audience": "both",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "aibast-agents-library__field_service_dispatch",
           "name": "@aibast-agents-library/field_service_dispatch",
           "display_name": "Field Service Dispatch Agent",
           "audience": "business",
-          "score": 8.87
+          "score": 8.94
         }
       ]
     },
@@ -1235,84 +1235,84 @@
           "name": "@aibast-agents-library/foia_request_assistant",
           "display_name": "FOIA Request Assistant Agent",
           "audience": "business",
-          "score": 145.4
+          "score": 144.37
         },
         {
           "id": "aibast-agents-library__citizen_service_request",
           "name": "@aibast-agents-library/citizen_service_request",
           "display_name": "Citizen Service Request Agent",
           "audience": "business",
-          "score": 112.24
+          "score": 113.06
         },
         {
           "id": "aibast-agents-library__building_permit_processing",
           "name": "@aibast-agents-library/building_permit_processing",
           "display_name": "Building Permit Processing Agent",
           "audience": "business",
-          "score": 87.37
+          "score": 87.99
         },
         {
           "id": "aibast-agents-library__federal_grants_oversight",
           "name": "@aibast-agents-library/federal_grants_oversight",
           "display_name": "Federal Grants Oversight Agent",
           "audience": "business",
-          "score": 78.12
+          "score": 78.67
         },
         {
           "id": "aibast-agents-library__regulatory_compliance_fed",
           "name": "@aibast-agents-library/regulatory_compliance_fed",
           "display_name": "Regulatory Compliance (Federal) Agent",
           "audience": "business",
-          "score": 78.12
+          "score": 78.67
         },
         {
           "id": "aibast-agents-library__acquisition_support",
           "name": "@aibast-agents-library/acquisition_support",
           "display_name": "Acquisition Support Agent",
           "audience": "business",
-          "score": 53.56
+          "score": 53.93
         },
         {
           "id": "aibast-agents-library__mission_reporting_assistant",
           "name": "@aibast-agents-library/mission_reporting_assistant",
           "display_name": "Mission Reporting Assistant Agent",
           "audience": "business",
-          "score": 53.56
+          "score": 53.93
         },
         {
           "id": "aibast-agents-library__workforce_clearance_onboarding",
           "name": "@aibast-agents-library/workforce_clearance_onboarding",
           "display_name": "Workforce Clearance & Onboarding Agent",
           "audience": "business",
-          "score": 53.56
+          "score": 53.93
         },
         {
           "id": "aibast-agents-library__slg_grants_management",
           "name": "@aibast-agents-library/slg_grants_management",
           "display_name": "SLG Grants Management Agent",
           "audience": "business",
-          "score": 50.47
+          "score": 50.81
         },
         {
           "id": "aibast-agents-library__permit_license_management",
           "name": "@aibast-agents-library/permit_license_management",
           "display_name": "Permit & License Management Agent",
           "audience": "business",
-          "score": 44.66
+          "score": 44.99
         },
         {
           "id": "kody-w__launch_to_public_agent",
           "name": "@kody-w/launch_to_public_agent",
           "display_name": "Launch to Public",
           "audience": "both",
-          "score": 26.27
+          "score": 23.69
         },
         {
           "id": "aibast-agents-library__utility_billing_assistance",
           "name": "@aibast-agents-library/utility_billing_assistance",
           "display_name": "Utility Billing Assistance Agent",
           "audience": "business",
-          "score": 12.62
+          "score": 12.7
         }
       ]
     },
@@ -1326,84 +1326,84 @@
           "name": "@aibast-agents-library/maintenance_scheduling",
           "display_name": "Maintenance Scheduling Agent",
           "audience": "business",
-          "score": 109.56
+          "score": 110.35
         },
         {
           "id": "aibast-agents-library__production_line_optimization",
           "name": "@aibast-agents-library/production_line_optimization",
           "display_name": "Production Line Optimization Agent",
           "audience": "business",
-          "score": 99.76
+          "score": 100.47
         },
         {
           "id": "kody-w__plant_seed_agent",
           "name": "@kody-w/plant_seed_agent",
           "display_name": "Plant Seed",
           "audience": "both",
-          "score": 80.7
+          "score": 81.3
         },
         {
           "id": "kody-w__predictive_asset_maintenance_intelligence",
           "name": "@kody-w/predictive_asset_maintenance_intelligence",
           "display_name": "Predictive Asset Maintenance Intelligence",
           "audience": "business",
-          "score": 68.62
+          "score": 69.12
         },
         {
           "id": "aibast-agents-library__asset_maintenance_forecast",
           "name": "@aibast-agents-library/asset_maintenance_forecast",
           "display_name": "Asset Maintenance Forecast Agent",
           "audience": "business",
-          "score": 58.82
+          "score": 59.24
         },
         {
           "id": "cat-agent-skills__content_quality_auditor",
           "name": "@cat-agent-skills/content_quality_auditor",
           "display_name": "Content Quality Auditor",
           "audience": "business",
-          "score": 44.16
+          "score": 44.46
         },
         {
           "id": "aibast-agents-library__inventory_rebalancing",
           "name": "@aibast-agents-library/inventory_rebalancing",
           "display_name": "Inventory Rebalancing Agent",
           "audience": "business",
-          "score": 40.94
+          "score": 41.23
         },
         {
           "id": "aibast-agents-library__order_status_communication",
           "name": "@aibast-agents-library/order_status_communication",
           "display_name": "Order Status Communication Agent",
           "audience": "business",
-          "score": 40.94
+          "score": 41.23
         },
         {
           "id": "aibast-agents-library__supplier_risk_monitoring",
           "name": "@aibast-agents-library/supplier_risk_monitoring",
           "display_name": "Supplier Risk Monitoring Agent",
           "audience": "business",
-          "score": 40.94
+          "score": 41.23
         },
         {
           "id": "aibast-agents-library__store_associate_copilot",
           "name": "@aibast-agents-library/store_associate_copilot",
           "display_name": "Store Associate Copilot Agent",
           "audience": "business",
-          "score": 33.5
+          "score": 33.74
         },
         {
           "id": "cat-agent-skills__process_sop_architect",
           "name": "@cat-agent-skills/process_sop_architect",
           "display_name": "Process & SOP Architect",
           "audience": "both",
-          "score": 33.5
+          "score": 33.74
         },
         {
           "id": "discreetRappers__rapp_pipeline_agent",
           "name": "@discreetRappers/rapp_pipeline_agent",
           "display_name": "RAPP",
           "audience": "both",
-          "score": 25.23
+          "score": 25.41
         }
       ]
     },
@@ -1417,84 +1417,84 @@
           "name": "@aibast-agents-library/store_associate_copilot",
           "display_name": "Store Associate Copilot Agent",
           "audience": "business",
-          "score": 113.67
+          "score": 114.47
         },
         {
           "id": "aibast-agents-library__returns_complaints_resolution",
           "name": "@aibast-agents-library/returns_complaints_resolution",
           "display_name": "Returns & Complaints Resolution Agent",
           "audience": "business",
-          "score": 103.47
+          "score": 104.18
         },
         {
           "id": "aibast-agents-library__returns_exchange",
           "name": "@aibast-agents-library/returns_exchange",
           "display_name": "Returns & Exchange Agent",
           "audience": "business",
-          "score": 81.29
+          "score": 81.85
         },
         {
           "id": "aibast-agents-library__sales_chat",
           "name": "@aibast-agents-library/sales_chat",
           "display_name": "Sales Chat Agent",
           "audience": "business",
-          "score": 50.83
+          "score": 51.19
         },
         {
           "id": "kody-w__full_rapp_leviathan",
           "name": "@kody-w/full_rapp_leviathan",
           "display_name": "FullRappLeviathan",
           "audience": "both",
-          "score": 44.66
+          "score": 44.99
         },
         {
           "id": "aibast-agents-library__order_status_communication",
           "name": "@aibast-agents-library/order_status_communication",
           "display_name": "Order Status Communication Agent",
           "audience": "business",
-          "score": 41.68
+          "score": 41.97
         },
         {
           "id": "aibast-agents-library__ai_customer_assistant",
           "name": "@aibast-agents-library/ai_customer_assistant",
           "display_name": "AI Customer Assistant",
           "audience": "both",
-          "score": 39.94
+          "score": 40.2
         },
         {
           "id": "aibast-agents-library__customer_360",
           "name": "@aibast-agents-library/customer_360",
           "display_name": "Customer 360",
           "audience": "both",
-          "score": 39.94
+          "score": 40.2
         },
         {
           "id": "aibast-agents-library__customer_360_speech",
           "name": "@aibast-agents-library/customer_360_speech",
           "display_name": "Customer 360 & Speech Agent",
           "audience": "business",
-          "score": 39.94
+          "score": 40.2
         },
         {
           "id": "aibast-agents-library__product_feedback_synthesizer",
           "name": "@aibast-agents-library/product_feedback_synthesizer",
           "display_name": "Product Feedback Synthesizer Agent",
           "audience": "business",
-          "score": 39.41
+          "score": 39.67
         },
         {
           "id": "aibast-agents-library__product_reference",
           "name": "@aibast-agents-library/product_reference",
           "display_name": "Product Reference",
           "audience": "both",
-          "score": 39.41
+          "score": 39.67
         },
         {
           "id": "aibast-agents-library__inventory_visibility",
           "name": "@aibast-agents-library/inventory_visibility",
           "display_name": "Inventory Visibility Agent",
           "audience": "business",
-          "score": 38.27
+          "score": 38.54
         }
       ]
     },
@@ -1508,84 +1508,84 @@
           "name": "@kody-w/power_apps_code_app_agent",
           "display_name": "PowerAppsCodeApp",
           "audience": "both",
-          "score": 89.46
+          "score": 92.6
         },
         {
           "id": "cat-agent-skills__vendor_contract_risk_review",
           "name": "@cat-agent-skills/vendor_contract_risk_review",
           "display_name": "Vendor Contract Risk Review",
           "audience": "business",
-          "score": 50.47
+          "score": 50.81
         },
         {
           "id": "cat-agent-skills__enterprise_agent_design_authority",
           "name": "@cat-agent-skills/enterprise_agent_design_authority",
           "display_name": "Enterprise Agent Design Authority (EADA)",
           "audience": "business",
-          "score": 50.04
+          "score": 50.38
         },
         {
           "id": "cat-agent-skills__power_bi_model_review",
           "name": "@cat-agent-skills/power_bi_model_review",
           "display_name": "Power BI Model Review",
           "audience": "both",
-          "score": 44.16
+          "score": 44.46
         },
         {
           "id": "cat-agent-skills__copilot_studio_test_planner",
           "name": "@cat-agent-skills/copilot_studio_test_planner",
           "display_name": "Copilot Studio Test Planner",
           "audience": "both",
-          "score": 32.84
+          "score": 33.06
         },
         {
           "id": "discreetRappers__rapp_pipeline_agent",
           "name": "@discreetRappers/rapp_pipeline_agent",
           "display_name": "RAPP",
           "audience": "both",
-          "score": 27.48
+          "score": 29.1
         },
         {
           "id": "kody-w__connected_solution_agent",
           "name": "@kody-w/connected_solution_agent",
           "display_name": "ConnectedSolution",
           "audience": "both",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "kody-w__copilot_studio_deploy_agent",
           "name": "@kody-w/copilot_studio_deploy_agent",
           "display_name": "CopilotStudioDeploy",
           "audience": "both",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "kody-w__copilot_studio_parity_deploy",
           "name": "@kody-w/copilot_studio_parity_deploy",
           "display_name": "Copilot Studio Parity Deploy",
           "audience": "both",
-          "score": 26.62
+          "score": 26.81
         },
         {
           "id": "cat-agent-skills__copilot_studio_agent_test",
           "name": "@cat-agent-skills/copilot_studio_agent_test",
           "display_name": "Copilot Studio Agent Test",
           "audience": "both",
-          "score": 26.27
+          "score": 26.45
         },
         {
           "id": "rapp__ping_agent",
           "name": "@rapp/ping_agent",
           "display_name": "Ping",
           "audience": "both",
-          "score": 26.27
+          "score": 26.45
         },
         {
           "id": "aibast-agents-library__building_permit_processing",
           "name": "@aibast-agents-library/building_permit_processing",
           "display_name": "Building Permit Processing Agent",
           "audience": "business",
-          "score": 20.61
+          "score": 21.82
         }
       ]
     },
@@ -1599,84 +1599,84 @@
           "name": "@aibast-agents-library/voice_to_crm_email",
           "display_name": "Voice to CRM Email",
           "audience": "both",
-          "score": 80.94
+          "score": 81.5
         },
         {
           "id": "aibast-agents-library__meeting_prep",
           "name": "@aibast-agents-library/meeting_prep",
           "display_name": "Meeting Prep",
           "audience": "business",
-          "score": 64.54
+          "score": 64.99
         },
         {
           "id": "cat-agent-skills__action_items_todo",
           "name": "@cat-agent-skills/action_items_todo",
           "display_name": "Action Items to To Do",
           "audience": "both",
-          "score": 49.4
+          "score": 49.74
         },
         {
           "id": "cat-agent-skills__meeting_analyzer",
           "name": "@cat-agent-skills/meeting_analyzer",
           "display_name": "Meeting Analyzer",
           "audience": "both",
-          "score": 47.81
+          "score": 48.14
         },
         {
           "id": "aibast-agents-library__action_prioritization",
           "name": "@aibast-agents-library/action_prioritization",
           "display_name": "Action Prioritization",
           "audience": "business",
-          "score": 41.21
+          "score": 41.5
         },
         {
           "id": "aibast-agents-library__next_best_action",
           "name": "@aibast-agents-library/next_best_action",
           "display_name": "Next Best Action",
           "audience": "business",
-          "score": 41.21
+          "score": 41.5
         },
         {
           "id": "aibast-agents-library__clinical_notes_summarizer",
           "name": "@aibast-agents-library/clinical_notes_summarizer",
           "display_name": "Clinical Notes Summarizer Agent",
           "audience": "business",
-          "score": 39.41
+          "score": 39.67
         },
         {
           "id": "discreetRappers__rapp_pipeline_agent",
           "name": "@discreetRappers/rapp_pipeline_agent",
           "display_name": "RAPP",
           "audience": "both",
-          "score": 33.5
+          "score": 33.74
         },
         {
           "id": "howardh__chief_of_staff_agent",
           "name": "@howardh/chief_of_staff_agent",
           "display_name": "ChiefOfStaff",
           "audience": "both",
-          "score": 32.75
+          "score": 32.98
         },
         {
           "id": "aibast-agents-library__email_drafting",
           "name": "@aibast-agents-library/email_drafting",
           "display_name": "Email Drafting",
           "audience": "both",
-          "score": 28.9
+          "score": 29.1
         },
         {
           "id": "cat-agent-skills__awaiting_reply",
           "name": "@cat-agent-skills/awaiting_reply",
           "display_name": "Awaiting Reply",
           "audience": "both",
-          "score": 28.9
+          "score": 29.1
         },
         {
           "id": "cat-agent-skills__presentation_talk_track_builder",
           "name": "@cat-agent-skills/presentation_talk_track_builder",
           "display_name": "Presentation Talk Track Builder",
           "audience": "both",
-          "score": 26.27
+          "score": 26.45
         }
       ]
     },
@@ -1690,84 +1690,84 @@
           "name": "@cat-agent-skills/institutional_knowledge",
           "display_name": "Institutional Knowledge Archivist",
           "audience": "both",
-          "score": 72.62
+          "score": 71.09
         },
         {
           "id": "howardh__vaultmind_agent",
           "name": "@howardh/vaultmind_agent",
           "display_name": "VaultMind",
           "audience": "both",
-          "score": 60.87
+          "score": 60.54
         },
         {
           "id": "cat-agent-skills__power_automate_documentation",
           "name": "@cat-agent-skills/power_automate_documentation",
           "display_name": "Power Automate Documentation",
           "audience": "business",
-          "score": 58.82
+          "score": 59.24
         },
         {
           "id": "kody-w__rappterpedia_agent",
           "name": "@kody-w/rappterpedia_agent",
           "display_name": "RappterpediaAgent",
           "audience": "both",
-          "score": 50.06
+          "score": 50.17
         },
         {
           "id": "cat-agent-skills__knowledge_corpus_curator",
           "name": "@cat-agent-skills/knowledge_corpus_curator",
           "display_name": "Knowledge Corpus Curator",
           "audience": "business",
-          "score": 37.81
+          "score": 36.28
         },
         {
           "id": "cat-agent-skills__knowledge_source_router",
           "name": "@cat-agent-skills/knowledge_source_router",
           "display_name": "Knowledge Source Router",
           "audience": "both",
-          "score": 37.81
+          "score": 36.28
         },
         {
           "id": "cat-agent-skills__copilot_studio_knowledge_readiness",
           "name": "@cat-agent-skills/copilot_studio_knowledge_readiness",
           "display_name": "Copilot Studio Knowledge Readiness",
           "audience": "business",
-          "score": 32.41
+          "score": 31.1
         },
         {
           "id": "cat-agent-skills__spend_more_time_with_friends_and_family",
           "name": "@cat-agent-skills/spend_more_time_with_friends_and_family",
           "display_name": "Spend More Time With Friends & Family",
           "audience": "business",
-          "score": 31.41
+          "score": 29.67
         },
         {
           "id": "cat-agent-skills__skill_authoring_coach",
           "name": "@cat-agent-skills/skill_authoring_coach",
           "display_name": "Skill Authoring Coach",
           "audience": "both",
-          "score": 29.41
+          "score": 29.62
         },
         {
           "id": "cat-agent-skills__ai_usecase_assessment",
           "name": "@cat-agent-skills/ai_usecase_assessment",
           "display_name": "AI Use Case Assessment",
           "audience": "business",
-          "score": 26.9
+          "score": 27.1
         },
         {
           "id": "bill__neuron_agent",
           "name": "@bill/neuron_agent",
           "display_name": "Neuron",
           "audience": "both",
-          "score": 21.61
+          "score": 20.73
         },
         {
           "id": "aibast-agents-library__sharepoint_document_extractor",
           "name": "@aibast-agents-library/sharepoint_document_extractor",
           "display_name": "SharePoint Document Extractor",
           "audience": "both",
-          "score": 19.7
+          "score": 19.84
         }
       ]
     }
@@ -1898,7 +1898,6 @@
       "kody-w__power_apps_code_app_agent:1",
       "kody-w__rappterpedia_agent:1",
       "rapp__fleet_commander:1",
-      "rapp__learn_new:1",
       "rapp__pitch_deck_agent:1",
       "rapp__swarm_factory_agent:1"
     ],
@@ -1965,7 +1964,8 @@
       "cat-agent-skills__travel_cost_estimator:1",
       "discreetRappers__rapp_pipeline_agent:1",
       "kody-w__rapp_sentinel_agent:1",
-      "rapp__drift:1"
+      "rapp__drift:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "live": [
       "cat-agent-skills__agent_evaluation_designer:3",
@@ -2251,7 +2251,9 @@
       "aibast-agents-library__order_status_communication:4",
       "aibast-agents-library__account_intelligence_orchestrator_agent:1",
       "aibast-agents-library__building_permit_processing:1",
-      "aibast-agents-library__voice_to_crm_d365:1"
+      "aibast-agents-library__voice_to_crm_d365:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "over": [
       "aibast-agents-library__account_intelligence_orchestrator_agent:1",
@@ -2485,7 +2487,8 @@
       "cat-agent-skills__acroform_writer:1",
       "cat-agent-skills__clipchamp_video:1",
       "cat-agent-skills__own_voice_builder:1",
-      "kody-w__skill_toaster_agent:1"
+      "kody-w__skill_toaster_agent:1",
+      "rapp__learn_new:1"
     ],
     "figures": [
       "aibast-agents-library__account_risk_assessment:1",
@@ -2742,7 +2745,8 @@
     ],
     "missing": [
       "aibast-agents-library__activity_gap:1",
-      "cat-agent-skills__accessibility_pass:1"
+      "cat-agent-skills__accessibility_pass:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "activities": [
       "aibast-agents-library__activity_gap:1"
@@ -2752,7 +2756,8 @@
       "cat-agent-skills__eu_greenwashing_analysis:1",
       "kody-w__context_memory_agent:1",
       "kody-w__install_rappter_distro_agent:1",
-      "rapp__drift:1"
+      "rapp__drift:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "opportunities": [
       "aibast-agents-library__bulk_crm_data_generator_agent:3",
@@ -2837,6 +2842,8 @@
       "aibast-agents-library__support_ticket_resolution:3",
       "aibast-agents-library__voice_to_crm_servicenow:3",
       "howardh__vaultmind_agent:3",
+      "rapp__rapp_dogg_agent:3",
+      "rapter__rapp_dogg_agent:3",
       "borg__borg_agent:1",
       "cat-agent-skills__copilot_studio_test_planner:1",
       "cat-agent-skills__copilot_studio_topic_blueprint:1",
@@ -2850,6 +2857,8 @@
       "aibast-agents-library__support_ticket_resolution:3",
       "aibast-agents-library__voice_to_crm_servicenow:3",
       "howardh__vaultmind_agent:3",
+      "rapp__rapp_dogg_agent:3",
+      "rapter__rapp_dogg_agent:3",
       "kody-w__rappter_engine_agent:1",
       "kody-w__rappterpedia_agent:1"
     ],
@@ -3200,6 +3209,7 @@
       "rapp__exec_brief_agent:1",
       "rapp__rapp:1",
       "rapp__swarm_factory_agent:1",
+      "rapter__hive_census_agent:1",
       "wildhaven__bellows_agent:1"
     ],
     "fees": [
@@ -3212,8 +3222,7 @@
       "discreetRappers__copilot_studio_transpiler_agent:3",
       "kody-w__rapp_skill_bridge_agent:3",
       "discreetRappers__agent_generator_agent:1",
-      "rapp__fleet_commander:1",
-      "rapp__learn_new:1"
+      "rapp__fleet_commander:1"
     ],
     "compliance": [
       "aibast-agents-library__fs_regulatory_compliance:7",
@@ -3331,7 +3340,9 @@
       "kody-w__bond_rhythm_agent:1"
     ],
     "shape": [
+      "rapter__hive_shape_agent:7",
       "kody-w__copilot_studio_deploy_agent:4",
+      "rapter__hive_census_agent:3",
       "aibast-agents-library__bulk_crm_data_generator_agent:1",
       "cat-agent-skills__copilot_studio_harness_picker:1",
       "kody-w__skill_toaster_agent:1"
@@ -3368,7 +3379,8 @@
       "aibast-agents-library__pipeline_velocity:1"
     ],
     "population": [
-      "aibast-agents-library__care_gap_closure:3"
+      "aibast-agents-library__care_gap_closure:3",
+      "rapter__hive_shape_agent:1"
     ],
     "healthcare": [
       "aibast-agents-library__care_gap_closure:5",
@@ -3683,7 +3695,9 @@
       "aibast-agents-library__contract_risk_review:6",
       "cat-agent-skills__vendor_contract_risk_review:4",
       "cat-agent-skills__pdf_table_data_conversion:1",
-      "discreetRappers__sharepoint_contract_analysis_agent:1"
+      "discreetRappers__sharepoint_contract_analysis_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "review": [
       "cat-agent-skills__vendor_contract_risk_review:8",
@@ -4035,6 +4049,7 @@
       "kody-w__kody2day_studio_agent:1",
       "rapp__estate_outbound:1",
       "rapp__fleet_commander:1",
+      "rapter__hive_shape_agent:1",
       "rarbookworld__bookfactory:1"
     ],
     "drafting": [
@@ -4047,14 +4062,14 @@
     ],
     "templates": [
       "discreetRappers__powerpoint_generator_agent:4",
+      "rapp__learn_new:4",
       "aibast-agents-library__email_drafting:3",
       "cat-agent-skills__brand_template_enforcer:3",
       "aibast-agents-library__meeting_prep:1",
       "discreetRappers__demo_script_generator_agent:1",
       "kody-w__github_agent_library_agent:1",
       "kody-w__rappterpedia_agent:1",
-      "kody-w__vibe_coding_loop:1",
-      "rapp__learn_new:1"
+      "kody-w__vibe_coding_loop:1"
     ],
     "emission": [
       "aibast-agents-library__emission_tracking:3"
@@ -4268,7 +4283,8 @@
     "model": [
       "cat-agent-skills__power_bi_model_review:7",
       "aibast-agents-library__find_accurate_models:3",
-      "cat-agent-skills__wcag_power_platform:1"
+      "cat-agent-skills__wcag_power_platform:1",
+      "rapter__hive_census_agent:1"
     ],
     "selection": [
       "aibast-agents-library__find_accurate_models:3",
@@ -4330,7 +4346,10 @@
       "kody-w__kody2day_agent:1",
       "kody-w__plant_seed_agent:1",
       "kody-w__rapp_sdk_builder:1",
-      "rapp__rar_steward:1"
+      "rapp__learn_new:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapp__rar_steward:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "redaction": [
       "aibast-agents-library__foia_request_assistant:3",
@@ -4390,11 +4409,14 @@
       "aibast-agents-library__fs_customer_onboarding:3",
       "kody-w__rapp_sdk_builder:3",
       "kody-w__full_rapp_leviathan:1",
-      "rapp__rapp:1"
+      "rapp__rapp:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "verification": [
       "aibast-agents-library__fs_customer_onboarding:3",
       "kody-w__buzzsaw:3",
+      "rapp__forge_provenance_agent:3",
       "kody-w__copilot_studio_probe_agent:1",
       "kody-w__install_rappter_distro_agent:1"
     ],
@@ -4984,7 +5006,10 @@
       "cat-agent-skills__sharepoint_list_formatter:1",
       "kody-w__education_shorts_agent:1",
       "kody-w__flight_recorder:1",
-      "rapp__basic_agent:1"
+      "rapp__basic_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__hive_shape_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "operation": [
       "aibast-agents-library__personalized_shopping_assistant:1"
@@ -5011,6 +5036,10 @@
       "rapp__drift:4",
       "rapp__drift_watcher:4",
       "cat-agent-skills__lab_column_mapper:3",
+      "rapp__forge_provenance_agent:3",
+      "rapp__rapp_dogg_agent:3",
+      "rapter__hive_shape_agent:3",
+      "rapter__rapp_dogg_agent:3",
       "aibast-agents-library__portfolio_rebalancing:1",
       "kody-w__prototype_lock_factory_agent:1",
       "kody-w__rapp_skill_bridge_agent:1"
@@ -5283,7 +5312,9 @@
       "aibast-agents-library__returns_complaints_resolution:7"
     ],
     "exchange": [
-      "aibast-agents-library__returns_exchange:7"
+      "aibast-agents-library__returns_exchange:7",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "refund": [
       "aibast-agents-library__returns_exchange:4"
@@ -5353,7 +5384,8 @@
       "kody-w__neuron_swarm:1",
       "kody-w__rapp_sentinel_agent:1",
       "rapp__ping_agent:1",
-      "rapp__pitch_deck_agent:1"
+      "rapp__pitch_deck_agent:1",
+      "rapter__hive_census_agent:1"
     ],
     "coaches": [
       "aibast-agents-library__sales_coach:1"
@@ -5924,7 +5956,9 @@
     ],
     "bootstrap": [
       "bill__neuron_agent:3",
-      "kody-w__install_rappter_distro_agent:3"
+      "kody-w__install_rappter_distro_agent:3",
+      "rapp__rapp_dogg_agent:3",
+      "rapter__rapp_dogg_agent:3"
     ],
     "platform": [
       "bill__neuron_agent:6",
@@ -5939,6 +5973,7 @@
       "kody-w__connected_solution_agent:3",
       "kody-w__copilot_studio_deploy_agent:3",
       "kody-w__power_apps_code_app_agent:3",
+      "rapp__forge_provenance_agent:3",
       "kody-w__bond_rhythm_agent:2",
       "kody-w__chain_composer_agent:2",
       "kody-w__plant_seed_agent:2",
@@ -5968,11 +6003,11 @@
       "kody-w__copilot_studio_probe_agent:4",
       "kody-w__kody2day_studio_agent:3",
       "kody-w__microsoft_deck_studio_agent:3",
+      "rapp__forge_provenance_agent:3",
       "cat-agent-skills__business_os:1",
       "cat-agent-skills__copilot_agents_news_scout:1",
       "cat-agent-skills__grab_my_files:1",
-      "cat-agent-skills__iterative_file_editing:1",
-      "cat-agent-skills__knowledge_source_router:1"
+      "cat-agent-skills__iterative_file_editing:1"
     ],
     "dataverse": [
       "cat-agent-skills__lookup_dataverse_table:8",
@@ -5998,6 +6033,7 @@
       "cat-agent-skills__lookup_dataverse_table:3",
       "kody-w__connected_solution_agent:3",
       "kody-w__copilot_studio_deploy_agent:3",
+      "rapp__forge_provenance_agent:3",
       "wildhaven__bellows_agent:3",
       "cat-agent-skills__copilot_studio_knowledge_readiness:1"
     ],
@@ -6023,13 +6059,15 @@
       "rapp__drift_watcher:2",
       "rapp__egg_hatcher:2",
       "rapp__estate_outbound:2",
+      "rapp__forge_provenance_agent:2",
       "rapp__learn_new:2",
       "rapp__rapp:2",
-      "rapp__rapplication_agent:2",
-      "rapp__rar_steward:2"
+      "rapp__rapp_dogg_agent:2"
     ],
     "injects": [
-      "bill__neuron_agent:1"
+      "bill__neuron_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "compact": [
       "bill__neuron_agent:1",
@@ -6062,7 +6100,9 @@
       "kody-w__twin_me:1",
       "rapp__estate_outbound:1",
       "rapp__ping_agent:1",
-      "rapp__twin_agent:1"
+      "rapp__rapp_dogg_agent:1",
+      "rapp__twin_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "prompt": [
       "howardh__prompt_to_video_agent:3",
@@ -6074,6 +6114,8 @@
       "kody-w__buzzsaw:1",
       "kody-w__chain_composer_agent:1",
       "kody-w__vibe_coding_loop:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1",
       "wildhaven__bellows_agent:1"
     ],
     "session": [
@@ -6262,6 +6304,7 @@
       "cat-agent-skills__iterative_file_editing:4",
       "kody-w__vibe_coding_loop:4",
       "kody-w__twin_egg_hatcher:3",
+      "rapp__forge_provenance_agent:2",
       "cat-agent-skills__accessibility_pass:1",
       "cat-agent-skills__ai_usecase_assessment:1",
       "cat-agent-skills__grab_my_files:1",
@@ -6275,7 +6318,9 @@
       "kody-w__plant_seed_agent:1",
       "kody-w__project_tracker_agent:1",
       "rapp__learn_new:1",
-      "rapp__rapplication_agent:1"
+      "rapp__rapp_dogg_agent:1",
+      "rapp__rapplication_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "microsoft": [
       "cat-agent-skills__mct_excellence_iq:8",
@@ -6312,6 +6357,8 @@
       "kody-w__skill_toaster_agent:3",
       "cat-agent-skills__accessibility_pass:1",
       "kody-w__rappterpedia_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1",
       "wildhaven__ceo_agent:1"
     ],
     "alt": [
@@ -6373,6 +6420,7 @@
       "cat-agent-skills__phi_deidentifier:1",
       "cat-agent-skills__work_brief:1",
       "kody-w__kody2day_agent:1",
+      "rapter__hive_shape_agent:1",
       "wildhaven__penumbra_agent:1"
     ],
     "finds": [
@@ -6534,7 +6582,8 @@
     "things": [
       "cat-agent-skills__action_items_todo:1",
       "cat-agent-skills__pattern_radar:1",
-      "cat-agent-skills__pattern_radar_automation:1"
+      "cat-agent-skills__pattern_radar_automation:1",
+      "rapter__hive_census_agent:1"
     ],
     "people": [
       "cat-agent-skills__action_items_todo:1",
@@ -6543,7 +6592,8 @@
     ],
     "actually": [
       "cat-agent-skills__action_items_todo:1",
-      "cat-agent-skills__iterative_file_editing:1"
+      "cat-agent-skills__iterative_file_editing:1",
+      "rapter__hive_shape_agent:1"
     ],
     "asked": [
       "cat-agent-skills__action_items_todo:1",
@@ -6587,7 +6637,8 @@
       "cat-agent-skills__stoic_negotiator:1",
       "kody-w__example_private:1",
       "kody-w__power_apps_code_app_agent:1",
-      "rapp__drift:1"
+      "rapp__drift:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "link": [
       "cat-agent-skills__action_items_todo:1",
@@ -6709,7 +6760,9 @@
       "cat-agent-skills__generating_podcast_script:1",
       "cat-agent-skills__process_sop_architect:1",
       "cat-agent-skills__whiteboard_to_infographic:1",
-      "cat-agent-skills__work_iq_signalboard:1"
+      "cat-agent-skills__work_iq_signalboard:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "results": [
       "cat-agent-skills__lab_column_mapper:4",
@@ -6934,7 +6987,8 @@
       "cat-agent-skills__copilot_studio_agent_test:1",
       "cat-agent-skills__eu_greenwashing_analysis:1",
       "cat-agent-skills__meeting_analyzer:1",
-      "howardh__recon_agent:1"
+      "howardh__recon_agent:1",
+      "rapter__hive_shape_agent:1"
     ],
     "idea": [
       "cat-agent-skills__idea_refiner:3",
@@ -7112,6 +7166,7 @@
       "cat-agent-skills__awaiting_reply:1"
     ],
     "never": [
+      "rapp__forge_provenance_agent:3",
       "cat-agent-skills__awaiting_reply:2",
       "cat-agent-skills__iterative_file_editing:1",
       "cat-agent-skills__presentation_talk_track_builder:1",
@@ -7119,7 +7174,8 @@
       "kody-w__legal_helper:1",
       "kody-w__project_tracker_agent:1",
       "kody-w__wp_publish_agent:1",
-      "rapp__drift_watcher:1"
+      "rapp__drift_watcher:1",
+      "rapter__hive_census_agent:1"
     ],
     "got": [
       "cat-agent-skills__awaiting_reply:1"
@@ -7127,10 +7183,12 @@
     "answer": [
       "cat-agent-skills__awaiting_reply:1",
       "cat-agent-skills__spend_more_time_with_friends_and_family:1",
-      "kody-w__neuron_swarm:1"
+      "kody-w__neuron_swarm:1",
+      "rapter__hive_shape_agent:1"
     ],
     "how": [
-      "cat-agent-skills__awaiting_reply:1"
+      "cat-agent-skills__awaiting_reply:1",
+      "rapter__hive_shape_agent:1"
     ],
     "many": [
       "cat-agent-skills__awaiting_reply:1"
@@ -7165,8 +7223,8 @@
       "discreetRappers__agent_generator_agent:1",
       "kody-w__chain_composer_agent:1",
       "rapp__fleet_commander:1",
-      "rapp__learn_new:1",
-      "rapp__vibe_builder_agent:1"
+      "rapp__vibe_builder_agent:1",
+      "rapter__hive_census_agent:1"
     ],
     "sends": [
       "cat-agent-skills__awaiting_reply:1",
@@ -7272,7 +7330,8 @@
     "library": [
       "cat-agent-skills__blog_content_auditor:1",
       "discreetRappers__architecture_diagram_agent:1",
-      "kody-w__project_tracker_agent:1"
+      "kody-w__project_tracker_agent:1",
+      "rapp__learn_new:1"
     ],
     "clarity": [
       "cat-agent-skills__blog_content_auditor:1"
@@ -7415,7 +7474,11 @@
       "kody-w__rapp_sdk_builder:3",
       "cat-agent-skills__booth_loop_video:2",
       "kody-w__prompt_extractor:2",
-      "kody-w__agent_team_agent:1"
+      "kody-w__agent_team_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__hive_census_agent:1",
+      "rapter__hive_shape_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "pillow": [
       "cat-agent-skills__booth_loop_video:1"
@@ -7599,7 +7662,9 @@
       "cat-agent-skills__linkedin_content_system:3",
       "cat-agent-skills__business_os:1",
       "cat-agent-skills__copilot_studio_knowledge_readiness:1",
-      "cat-agent-skills__lab_column_mapper:1"
+      "cat-agent-skills__lab_column_mapper:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "consistent": [
       "cat-agent-skills__business_os:1",
@@ -7660,7 +7725,8 @@
       "kody-w__rapp_skill_bridge_agent:1"
     ],
     "unlike": [
-      "cat-agent-skills__business_os:1"
+      "cat-agent-skills__business_os:1",
+      "rapter__hive_shape_agent:1"
     ],
     "standard": [
       "cat-agent-skills__copilot_agent_advisor:2",
@@ -7728,7 +7794,9 @@
       "cat-agent-skills__call_for_speakers_digest:1"
     ],
     "pulls": [
-      "cat-agent-skills__call_for_speakers_digest:1"
+      "cat-agent-skills__call_for_speakers_digest:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "confs": [
       "cat-agent-skills__call_for_speakers_digest:1"
@@ -7888,6 +7956,8 @@
       "cat-agent-skills__classic_text_adventure:4"
     ],
     "deterministic": [
+      "rapter__hive_census_agent:4",
+      "rapp__forge_provenance_agent:3",
       "cat-agent-skills__classic_text_adventure:1",
       "kody-w__arena_compete_agent:1"
     ],
@@ -7942,7 +8012,8 @@
       "cat-agent-skills__clipchamp_video:1",
       "cat-agent-skills__knowledge_corpus_curator:1",
       "cat-agent-skills__phi_deidentifier:1",
-      "cat-agent-skills__travel_cost_estimator:1"
+      "cat-agent-skills__travel_cost_estimator:1",
+      "rapter__hive_census_agent:1"
     ],
     "polished": [
       "cat-agent-skills__clipchamp_video:1",
@@ -8146,7 +8217,8 @@
     ],
     "named": [
       "cat-agent-skills__competitive_battlecard_builder:1",
-      "kody-w__deal_desk_agent:1"
+      "kody-w__deal_desk_agent:1",
+      "rapter__hive_shape_agent:1"
     ],
     "competitors": [
       "cat-agent-skills__competitive_battlecard_builder:1"
@@ -8160,7 +8232,8 @@
     "two": [
       "cat-agent-skills__competitive_battlecard_builder:1",
       "cat-agent-skills__generating_podcast_script:1",
-      "kody-w__copilot_studio_deploy_agent:1"
+      "kody-w__copilot_studio_deploy_agent:1",
+      "rapter__hive_census_agent:1"
     ],
     "peer": [
       "cat-agent-skills__competitive_battlecard_builder:1"
@@ -8201,13 +8274,17 @@
       "cat-agent-skills__competitive_battlecard_builder:1",
       "kody-w__copilot_studio_deploy_agent:1",
       "kody-w__prototype_lock_factory_agent:1",
-      "kody-w__windows_vm_install_lab_agent:1"
+      "kody-w__windows_vm_install_lab_agent:1",
+      "rapp__learn_new:1"
     ],
     "unverified": [
       "cat-agent-skills__competitive_battlecard_builder:1"
     ],
     "nothing": [
-      "cat-agent-skills__competitive_battlecard_builder:1"
+      "rapp__rapp_dogg_agent:2",
+      "rapter__rapp_dogg_agent:2",
+      "cat-agent-skills__competitive_battlecard_builder:1",
+      "rapter__hive_shape_agent:1"
     ],
     "invented": [
       "cat-agent-skills__competitive_battlecard_builder:1",
@@ -8261,7 +8338,9 @@
       "kody-w__example_private:1",
       "kody-w__ez_sharpen_agent:1",
       "kody-w__flight_recorder:1",
-      "rapp__drift_watcher:1"
+      "rapp__drift_watcher:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "expected": [
       "cat-agent-skills__conditional_chat_reminder:1"
@@ -8278,7 +8357,10 @@
       "cat-agent-skills__conditional_chat_reminder:1",
       "cat-agent-skills__meeting_analyzer:1",
       "cat-agent-skills__vendor_contract_risk_review:1",
-      "kody-w__prompt_extractor:1"
+      "kody-w__prompt_extractor:1",
+      "rapp__forge_provenance_agent:1",
+      "rapp__learn_new:1",
+      "rapter__hive_shape_agent:1"
     ],
     "already": [
       "cat-agent-skills__conditional_chat_reminder:1",
@@ -8384,12 +8466,14 @@
       "kody-w__transcript2prototype:4",
       "kody-w__copilot_studio_probe_agent:3",
       "kody-w__workiq:3",
+      "rapp__forge_provenance_agent:3",
       "cat-agent-skills__copilot_agent_advisor:1",
       "cat-agent-skills__microsoft_ai_platform_advisor:1"
     ],
     "declarative": [
       "cat-agent-skills__copilot_agent_advisor:1",
-      "discreetRappers__agent_transpiler_agent:1"
+      "discreetRappers__agent_transpiler_agent:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "engine": [
       "kody-w__rappter_engine_agent:3",
@@ -8732,8 +8816,7 @@
     "descriptions": [
       "cat-agent-skills__eu_greenwashing_analysis:1",
       "discreetRappers__agent_generator_agent:1",
-      "howardh__prompt_to_video_agent:1",
-      "rapp__learn_new:1"
+      "howardh__prompt_to_video_agent:1"
     ],
     "directive": [
       "cat-agent-skills__eu_greenwashing_analysis:2"
@@ -8990,7 +9073,8 @@
       "cat-agent-skills__grab_my_files:1"
     ],
     "bundle": [
-      "cat-agent-skills__grab_my_files:1"
+      "cat-agent-skills__grab_my_files:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "produced": [
       "cat-agent-skills__grab_my_files:1"
@@ -9013,7 +9097,8 @@
       "cat-agent-skills__pattern_radar:1",
       "cat-agent-skills__pattern_radar_automation:1",
       "cat-agent-skills__whiteboard_to_infographic:1",
-      "kody-w__prompt_extractor:1"
+      "kody-w__prompt_extractor:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "refiner": [
       "cat-agent-skills__idea_refiner:3"
@@ -9048,6 +9133,7 @@
       "cat-agent-skills__linkedin_content_system:1",
       "cat-agent-skills__linkedin_content_writer:1",
       "kody-w__manage_memory_agent:1",
+      "rapter__hive_census_agent:1",
       "wildhaven__ceo_agent:1"
     ],
     "where": [
@@ -9055,7 +9141,8 @@
       "cat-agent-skills__knowledge_source_router:1",
       "kody-w__arena_compete_agent:1",
       "kody-w__bakeoff_factory:1",
-      "kody-w__power_apps_code_app_agent:1"
+      "kody-w__power_apps_code_app_agent:1",
+      "rapter__hive_shape_agent:1"
     ],
     "possible": [
       "cat-agent-skills__idea_refiner:1",
@@ -9142,9 +9229,11 @@
       "cat-agent-skills__iterative_file_editing:1"
     ],
     "edited": [
+      "rapp__forge_provenance_agent:2",
       "cat-agent-skills__iterative_file_editing:1"
     ],
     "same": [
+      "rapter__hive_census_agent:3",
       "cat-agent-skills__iterative_file_editing:1"
     ],
     "fails": [
@@ -9156,6 +9245,7 @@
     ],
     "change": [
       "cat-agent-skills__persona_reaction_panel:3",
+      "rapp__forge_provenance_agent:2",
       "cat-agent-skills__iterative_file_editing:1",
       "kody-w__git_warehouse_agent:1"
     ],
@@ -9165,7 +9255,8 @@
     ],
     "but": [
       "cat-agent-skills__iterative_file_editing:1",
-      "cat-agent-skills__meeting_analyzer:1"
+      "cat-agent-skills__meeting_analyzer:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "reaches": [
       "cat-agent-skills__iterative_file_editing:1"
@@ -9192,7 +9283,8 @@
       "kody-w__twin_me:1",
       "rapp__basic_agent:1",
       "rapp__rapp_publish_agent:1",
-      "rapp__twin_agent:1"
+      "rapp__twin_agent:1",
+      "rapter__hive_shape_agent:1"
     ],
     "attachment": [
       "cat-agent-skills__iterative_file_editing:1"
@@ -9286,7 +9378,8 @@
     ],
     "unknown": [
       "cat-agent-skills__lab_column_mapper:1",
-      "rapp__egg_hatcher:1"
+      "rapp__egg_hatcher:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "header": [
       "cat-agent-skills__lab_column_mapper:1"
@@ -9397,7 +9490,8 @@
       "kody-w__hello_world_agent:6",
       "kody-w__commons_show_agent:3",
       "kody-w__second_life_agent:3",
-      "cat-agent-skills__mct_excellence_iq:1"
+      "cat-agent-skills__mct_excellence_iq:1",
+      "rapter__hive_shape_agent:1"
     ],
     "class": [
       "rapp__basic_agent:4",
@@ -9422,7 +9516,8 @@
       "cat-agent-skills__meeting_analyzer:1"
     ],
     "explicit": [
-      "cat-agent-skills__meeting_analyzer:2"
+      "cat-agent-skills__meeting_analyzer:2",
+      "rapp__learn_new:1"
     ],
     "participant": [
       "cat-agent-skills__meeting_analyzer:1"
@@ -9525,11 +9620,11 @@
       "discreetRappers__agent_generator_agent:1",
       "kody-w__chain_composer_agent:1",
       "rapp__fleet_commander:1",
-      "rapp__learn_new:1",
       "rapp__vibe_builder_agent:1"
     ],
     "inputs": [
-      "cat-agent-skills__monte_carlo_analysis:1"
+      "cat-agent-skills__monte_carlo_analysis:1",
+      "rapter__hive_census_agent:1"
     ],
     "triangular": [
       "cat-agent-skills__monte_carlo_analysis:1"
@@ -9580,7 +9675,9 @@
       "cat-agent-skills__own_voice_builder:1"
     ],
     "vocabulary": [
-      "cat-agent-skills__own_voice_builder:1"
+      "cat-agent-skills__own_voice_builder:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "taboo": [
       "cat-agent-skills__own_voice_builder:1"
@@ -9613,6 +9710,7 @@
     ],
     "surface": [
       "cat-agent-skills__pattern_radar:1",
+      "rapp__forge_provenance_agent:1",
       "wildhaven__penumbra_agent:1"
     ],
     "recurring": [
@@ -9671,6 +9769,9 @@
       "kody-w__buzzsaw:1",
       "kody-w__second_life_agent:1",
       "kody-w__wp_publish_agent:1",
+      "rapp__forge_provenance_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1",
       "wildhaven__penumbra_agent:1"
     ],
     "rebate": [
@@ -9752,6 +9853,7 @@
     ],
     "was": [
       "cat-agent-skills__phi_deidentifier:1",
+      "rapp__forge_provenance_agent:1",
       "wildhaven__penumbra_agent:1"
     ],
     "removed": [
@@ -9850,7 +9952,8 @@
       "howardh__markdown_to_slides_agent:1",
       "kody-w__context_memory_agent:1",
       "kody-w__microsoft_deck_studio_agent:1",
-      "rapp__rapplication_agent:1"
+      "rapp__rapplication_agent:1",
+      "rapter__hive_census_agent:1"
     ],
     "measure": [
       "cat-agent-skills__power_bi_model_review:1"
@@ -9887,7 +9990,8 @@
     "creates": [
       "cat-agent-skills__powerpoint_deck_designer:1",
       "discreetRappers__project_tracker_agent:1",
-      "kody-w__plant_seed_agent:1"
+      "kody-w__plant_seed_agent:1",
+      "rapp__learn_new:1"
     ],
     "decks": [
       "cat-agent-skills__powerpoint_deck_designer:1",
@@ -10022,7 +10126,8 @@
       "cat-agent-skills__regulation_monitor:1"
     ],
     "once": [
-      "cat-agent-skills__regulation_monitor:1"
+      "cat-agent-skills__regulation_monitor:1",
+      "rapter__hive_shape_agent:1"
     ],
     "sweeps": [
       "cat-agent-skills__regulation_monitor:1"
@@ -10054,13 +10159,15 @@
       "cat-agent-skills__regulation_monitor:1"
     ],
     "derived": [
-      "cat-agent-skills__regulation_monitor:1"
+      "cat-agent-skills__regulation_monitor:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "renders": [
       "cat-agent-skills__regulation_monitor:1",
       "howardh__prompt_to_video_agent:1",
       "kody-w__commons_show_agent:1",
-      "kody-w__kody2day_studio_agent:1"
+      "kody-w__kody2day_studio_agent:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "contained": [
       "cat-agent-skills__regulation_monitor:1",
@@ -10305,7 +10412,8 @@
       "cat-agent-skills__spend_more_time_with_friends_and_family:1"
     ],
     "later": [
-      "cat-agent-skills__spend_more_time_with_friends_and_family:1"
+      "cat-agent-skills__spend_more_time_with_friends_and_family:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "pings": [
       "cat-agent-skills__spend_more_time_with_friends_and_family:1"
@@ -10400,8 +10508,7 @@
     ],
     "saves": [
       "cat-agent-skills__style_analyzer:1",
-      "kody-w__art_generator_agent:1",
-      "rapp__learn_new:1"
+      "kody-w__art_generator_agent:1"
     ],
     "assistants": [
       "cat-agent-skills__style_analyzer:1"
@@ -10418,7 +10525,8 @@
     ],
     "observability": [
       "cat-agent-skills__tool_tracer:3",
-      "kody-w__flight_recorder:3"
+      "kody-w__flight_recorder:3",
+      "rapter__hive_shape_agent:3"
     ],
     "debugging": [
       "cat-agent-skills__tool_tracer:3"
@@ -10664,7 +10772,8 @@
       "cat-agent-skills__work_iq_signalboard:1"
     ],
     "counts": [
-      "cat-agent-skills__work_iq_signalboard:1"
+      "cat-agent-skills__work_iq_signalboard:1",
+      "rapter__hive_census_agent:1"
     ],
     "agentgenerator": [
       "discreetRappers__agent_generator_agent:3"
@@ -10676,6 +10785,8 @@
       "rapp__learn_new:3"
     ],
     "rapp": [
+      "rapp__rapp_dogg_agent:10",
+      "rapter__rapp_dogg_agent:10",
       "kody-w__rapp_sdk_builder:8",
       "discreetRappers__rapp_pipeline_agent:7",
       "kody-w__rapp_x_notary_canary_agent:6",
@@ -10698,9 +10809,7 @@
       "kody-w__chain_composer_agent:1",
       "kody-w__commons_show_agent:1",
       "kody-w__copilot_studio_forge_agent:1",
-      "kody-w__copilot_studio_parity_deploy:1",
-      "kody-w__full_rapp_leviathan:1",
-      "kody-w__kody2day_studio_agent:1"
+      "kody-w__copilot_studio_parity_deploy:1"
     ],
     "configs": [
       "discreetRappers__agent_generator_agent:1",
@@ -10859,7 +10968,8 @@
       "discreetRappers__sales_assistant_agent:3"
     ],
     "about": [
-      "discreetRappers__sales_assistant_agent:1"
+      "discreetRappers__sales_assistant_agent:1",
+      "rapter__hive_shape_agent:1"
     ],
     "serves": [
       "discreetRappers__sales_assistant_agent:1",
@@ -10906,6 +11016,7 @@
       "howardh__cardsmith_agent:1"
     ],
     "forge": [
+      "rapp__forge_provenance_agent:6",
       "kody-w__copilot_studio_forge_agent:3",
       "howardh__cardsmith_agent:1"
     ],
@@ -11104,6 +11215,7 @@
       "kody-w__agent_team_agent:1"
     ],
     "llm": [
+      "rapter__hive_census_agent:3",
       "kody-w__agent_team_agent:1",
       "kody-w__bakeoff_factory:1",
       "kody-w__estate_factory:1",
@@ -11140,6 +11252,7 @@
     "publishes": [
       "kody-w__agent_workbench:1",
       "rapp__fleet_commander:1",
+      "rapter__hive_shape_agent:1",
       "rarbookworld__bookfactory:1"
     ],
     "arena": [
@@ -11269,7 +11382,8 @@
       "kody-w__launch_to_public_agent:3",
       "kody-w__plant_seed_agent:3",
       "rapp__drift_watcher:3",
-      "rapp__rar_steward:1"
+      "rapp__rar_steward:1",
+      "rapter__hive_shape_agent:1"
     ],
     "mediated": [
       "kody-w__bond_rhythm_agent:3",
@@ -11320,7 +11434,9 @@
     ],
     "determinism": [
       "kody-w__buzzsaw:3",
-      "kody-w__rapp_skill_bridge_agent:3"
+      "kody-w__rapp_skill_bridge_agent:3",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "ark": [
       "kody-w__buzzsaw:3"
@@ -11399,6 +11515,7 @@
     "frames": [
       "kody-w__ez_sharpen_agent:5",
       "kody-w__commons_life_agent:4",
+      "rapter__hive_census_agent:3",
       "kody-w__perpetual_loop_factory:1",
       "kody-w__rapp_sdk_builder:1"
     ],
@@ -11730,7 +11847,8 @@
     ],
     "private": [
       "kody-w__example_private:5",
-      "kody-w__legal_helper:4"
+      "kody-w__legal_helper:4",
+      "rapter__hive_shape_agent:4"
     ],
     "stub": [
       "kody-w__example_private:4",
@@ -11778,7 +11896,8 @@
       "kody-w__flight_recorder:3"
     ],
     "box": [
-      "kody-w__flight_recorder:3"
+      "kody-w__flight_recorder:3",
+      "rapter__hive_census_agent:1"
     ],
     "both": [
       "kody-w__flight_recorder:1"
@@ -11806,8 +11925,11 @@
       "kody-w__full_rapp_leviathan:4"
     ],
     "protocol": [
+      "rapp__rapp_dogg_agent:4",
+      "rapter__rapp_dogg_agent:4",
       "kody-w__full_rapp_leviathan:3",
-      "kody-w__rapp_leviathan_factory:1"
+      "kody-w__rapp_leviathan_factory:1",
+      "rapter__hive_census_agent:1"
     ],
     "x402": [
       "kody-w__full_rapp_leviathan:3"
@@ -11820,7 +11942,8 @@
     ],
     "git": [
       "kody-w__git_warehouse_agent:7",
-      "kody-w__perpetual_loop_factory:1"
+      "kody-w__perpetual_loop_factory:1",
+      "rapter__hive_census_agent:1"
     ],
     "datasette": [
       "kody-w__git_warehouse_agent:4"
@@ -11864,7 +11987,9 @@
       "kody-w__github_agent_library_agent:1",
       "kody-w__install_rappter_distro_agent:1",
       "kody-w__rar_remote_agent:1",
-      "rapp__swarm_factory_agent:1"
+      "rapp__rapp_dogg_agent:1",
+      "rapp__swarm_factory_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "kody": [
       "kody-w__kody2day_agent:5",
@@ -11916,7 +12041,8 @@
       "kody-w__install_rappter_distro_agent:1"
     ],
     "sha256": [
-      "kody-w__install_rappter_distro_agent:1"
+      "kody-w__install_rappter_distro_agent:1",
+      "rapp__learn_new:1"
     ],
     "kody2day": [
       "kody-w__kody2day_studio_agent:7",
@@ -11942,6 +12068,7 @@
     ],
     "fleet": [
       "rapp__fleet_commander:3",
+      "rapter__hive_shape_agent:3",
       "kody-w__kody2day_agent:1"
     ],
     "bots": [
@@ -11958,7 +12085,8 @@
     ],
     "byte": [
       "kody-w__rapp_skill_bridge_agent:2",
-      "kody-w__kody2day_studio_agent:1"
+      "kody-w__kody2day_studio_agent:1",
+      "rapter__hive_census_agent:1"
     ],
     "sized": [
       "kody-w__kody2day_studio_agent:1"
@@ -11976,7 +12104,8 @@
       "kody-w__launch_to_public_agent:1"
     ],
     "fingerprint": [
-      "kody-w__launch_to_public_agent:1"
+      "kody-w__launch_to_public_agent:1",
+      "rapp__forge_provenance_agent:1"
     ],
     "legalhelper": [
       "kody-w__legal_helper:3"
@@ -12113,6 +12242,7 @@
     ],
     "artifact": [
       "kody-w__perpetual_loop_factory:1",
+      "rapp__forge_provenance_agent:1",
       "rapp__rapp_publish_agent:1"
     ],
     "daemons": [
@@ -12194,7 +12324,8 @@
       "kody-w__predictive_asset_maintenance_intelligence:1"
     ],
     "aibast": [
-      "kody-w__project_tracker_agent:4"
+      "kody-w__project_tracker_agent:4",
+      "rapp__learn_new:4"
     ],
     "statements": [
       "kody-w__project_tracker_agent:1"
@@ -12213,6 +12344,7 @@
     ],
     "description": [
       "kody-w__project_tracker_agent:1",
+      "rapp__forge_provenance_agent:1",
       "rapp__vibe_builder_agent:1"
     ],
     "merge": [
@@ -12232,7 +12364,9 @@
       "rapp__egg_hatcher:4",
       "rapp__rapp:3",
       "rapp__twin_agent:3",
-      "kody-w__project_tracker_agent:1"
+      "kody-w__project_tracker_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "ocr": [
       "kody-w__prompt_extractor:3"
@@ -12300,6 +12434,7 @@
       "kody-w__prototype_lock_factory_agent:1"
     ],
     "hash": [
+      "rapter__hive_census_agent:2",
       "kody-w__prototype_lock_factory_agent:1",
       "kody-w__windows_vm_install_lab_agent:1"
     ],
@@ -12358,7 +12493,8 @@
       "kody-w__rapp_sentinel_agent:1"
     ],
     "published": [
-      "kody-w__rapp_sentinel_agent:1"
+      "kody-w__rapp_sentinel_agent:1",
+      "rapp__learn_new:1"
     ],
     "heads": [
       "kody-w__rapp_sentinel_agent:1"
@@ -12385,7 +12521,9 @@
       "kody-w__rapp_skill_bridge_agent:4"
     ],
     "interop": [
-      "kody-w__rapp_skill_bridge_agent:3"
+      "kody-w__rapp_skill_bridge_agent:3",
+      "rapp__rapp_dogg_agent:3",
+      "rapter__rapp_dogg_agent:3"
     ],
     "roundtrip": [
       "kody-w__rapp_skill_bridge_agent:3"
@@ -12400,7 +12538,9 @@
       "kody-w__rapp_skill_bridge_agent:1"
     ],
     "executes": [
-      "kody-w__rapp_skill_bridge_agent:1"
+      "kody-w__rapp_skill_bridge_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "verbatim": [
       "kody-w__rapp_skill_bridge_agent:1"
@@ -12468,7 +12608,9 @@
       "kody-w__rappterbook_agent:1",
       "kody-w__rar_remote_agent:1",
       "rapp__drift:1",
-      "rapp__hacker_news:1"
+      "rapp__hacker_news:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "trending": [
       "kody-w__rappterbook_agent:1"
@@ -12575,7 +12717,8 @@
     ],
     "cubby": [
       "kody-w__transcript2prototype:3",
-      "rapp__rapp:3"
+      "rapp__rapp:3",
+      "rapter__hive_shape_agent:1"
     ],
     "injected": [
       "kody-w__transcript2prototype:1"
@@ -12615,7 +12758,10 @@
       "kody-w__twin_me:1"
     ],
     "current": [
-      "kody-w__twin_me:1"
+      "kody-w__twin_me:1",
+      "rapp__forge_provenance_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "calibration": [
       "kody-w__twin_me:1"
@@ -12683,7 +12829,9 @@
       "kody-w__wp_publish_agent:1"
     ],
     "instead": [
-      "kody-w__wp_publish_agent:1"
+      "kody-w__wp_publish_agent:1",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
     ],
     "duplicating": [
       "kody-w__wp_publish_agent:1"
@@ -12806,18 +12954,86 @@
     "iterates": [
       "rapp__fleet_commander:1"
     ],
+    "provenance": [
+      "rapp__forge_provenance_agent:7"
+    ],
+    "stamp": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "forged": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "came": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "prove": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "drifted": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "stale": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "moved": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "edit": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "lost": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "unstamped": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "healthy": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "fingerprints": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "ast": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "imported": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "comment": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "does": [
+      "rapp__forge_provenance_agent:2"
+    ],
+    "cry": [
+      "rapp__forge_provenance_agent:1"
+    ],
+    "wolf": [
+      "rapp__forge_provenance_agent:1"
+    ],
     "learnnew": [
       "rapp__learn_new:3"
     ],
-    "hot": [
+    "adapting": [
       "rapp__learn_new:1"
     ],
-    "loads": [
+    "mit": [
       "rapp__learn_new:1"
     ],
-    "swarms": [
-      "rapp__learn_new:1",
-      "rapp__swarm_factory_agent:1"
+    "attributed": [
+      "rapp__learn_new:1"
+    ],
+    "mutated": [
+      "rapp__learn_new:1"
+    ],
+    "regenerated": [
+      "rapp__learn_new:1"
+    ],
+    "scratch": [
+      "rapp__learn_new:1"
+    ],
+    "remain": [
+      "rapp__learn_new:1"
     ],
     "momentfactory": [
       "rapp__moment_factory_agent:3",
@@ -12903,6 +13119,64 @@
       "rapp__rapp:1",
       "rapp__twin_agent:1"
     ],
+    "dogg": [
+      "rapp__rapp_dogg_agent:7",
+      "rapter__rapp_dogg_agent:7"
+    ],
+    "canon": [
+      "rapp__rapp_dogg_agent:4",
+      "rapter__rapp_dogg_agent:4"
+    ],
+    "anchor": [
+      "rapp__rapp_dogg_agent:4",
+      "rapter__rapp_dogg_agent:4",
+      "rapter__hive_census_agent:1"
+    ],
+    "hotload": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "knows": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "exactly": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "guessing": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "minting": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "law": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "kind": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "families": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "term": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "static": [
+      "rapter__hive_census_agent:4",
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
+    "unauthenticated": [
+      "rapp__rapp_dogg_agent:1",
+      "rapter__rapp_dogg_agent:1"
+    ],
     "rapppublish": [
       "rapp__rapp_publish_agent:3"
     ],
@@ -12948,6 +13222,9 @@
     "uninstalls": [
       "rapp__swarm_factory_agent:1"
     ],
+    "swarms": [
+      "rapp__swarm_factory_agent:1"
+    ],
     "converging": [
       "rapp__swarm_factory_agent:1"
     ],
@@ -12962,6 +13239,116 @@
     ],
     "vibebuilder": [
       "rapp__vibe_builder_agent:3"
+    ],
+    "hive": [
+      "rapter__hive_shape_agent:7",
+      "rapter__hive_census_agent:6"
+    ],
+    "census": [
+      "rapter__hive_census_agent:8",
+      "rapter__hive_shape_agent:3"
+    ],
+    "emit": [
+      "rapter__hive_census_agent:1"
+    ],
+    "revision": [
+      "rapter__hive_census_agent:1"
+    ],
+    "resident": [
+      "rapter__hive_census_agent:1"
+    ],
+    "populations": [
+      "rapter__hive_census_agent:1"
+    ],
+    "posture": [
+      "rapter__hive_census_agent:1"
+    ],
+    "trust": [
+      "rapter__hive_census_agent:1"
+    ],
+    "computed": [
+      "rapter__hive_census_agent:1"
+    ],
+    "filesystem": [
+      "rapter__hive_census_agent:1"
+    ],
+    "stable": [
+      "rapter__hive_census_agent:1"
+    ],
+    "sorted": [
+      "rapter__hive_census_agent:1"
+    ],
+    "string": [
+      "rapter__hive_census_agent:1"
+    ],
+    "valued": [
+      "rapter__hive_census_agent:1"
+    ],
+    "drops": [
+      "rapter__hive_census_agent:1"
+    ],
+    "straight": [
+      "rapter__hive_census_agent:1"
+    ],
+    "payload": [
+      "rapter__hive_census_agent:1"
+    ],
+    "boxes": [
+      "rapter__hive_census_agent:1"
+    ],
+    "computing": [
+      "rapter__hive_census_agent:1"
+    ],
+    "names": [
+      "rapter__hive_census_agent:1"
+    ],
+    "divergence": [
+      "rapter__hive_shape_agent:4"
+    ],
+    "look": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "who": [
+      "rapter__hive_shape_agent:2"
+    ],
+    "disagrees": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "silence": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "did": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "always": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "mass": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "lives": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "spread": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "members": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "construction": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "leaves": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "picture": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "machine": [
+      "rapter__hive_shape_agent:1"
+    ],
+    "rapterbox": [
+      "rapter__rapp_dogg_agent:3"
     ],
     "bookfactory": [
       "rarbookworld__bookfactory:3"

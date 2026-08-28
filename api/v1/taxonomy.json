@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-28T04:21:58Z",
+  "generated": "2026-08-28T04:46:29Z",
   "categories": [
     {
       "name": "general",
@@ -12,7 +12,7 @@
     },
     {
       "name": "core",
-      "count": 28
+      "count": 33
     },
     {
       "name": "devtools",
@@ -114,7 +114,7 @@
     },
     {
       "name": "@rapp",
-      "count": 21
+      "count": 23
     },
     {
       "name": "@discreetRappers",
@@ -123,6 +123,10 @@
     {
       "name": "@howardh",
       "count": 8
+    },
+    {
+      "name": "@rapter",
+      "count": 3
     },
     {
       "name": "@wildhaven",
@@ -152,11 +156,11 @@
     },
     {
       "name": "official",
-      "count": 44
+      "count": 46
     },
     {
       "name": "verified",
-      "count": 5
+      "count": 8
     },
     {
       "name": "private",
@@ -257,6 +261,14 @@
       "count": 8
     },
     {
+      "name": "m365",
+      "count": 8
+    },
+    {
+      "name": "knowledge-base",
+      "count": 7
+    },
+    {
       "name": "healthcare",
       "count": 7
     },
@@ -273,6 +285,10 @@
       "count": 7
     },
     {
+      "name": "copilot-studio",
+      "count": 7
+    },
+    {
       "name": "scripts",
       "count": 7
     },
@@ -285,7 +301,7 @@
       "count": 7
     },
     {
-      "name": "m365",
+      "name": "rapp",
       "count": 7
     },
     {
@@ -302,10 +318,6 @@
     },
     {
       "name": "retail",
-      "count": 6
-    },
-    {
-      "name": "copilot-studio",
       "count": 6
     },
     {
@@ -329,6 +341,10 @@
       "count": 6
     },
     {
+      "name": "drift",
+      "count": 6
+    },
+    {
       "name": "procurement",
       "count": 5
     },
@@ -338,10 +354,6 @@
     },
     {
       "name": "planning",
-      "count": 5
-    },
-    {
-      "name": "knowledge-base",
       "count": 5
     },
     {
@@ -409,10 +421,6 @@
       "count": 5
     },
     {
-      "name": "rapp",
-      "count": 5
-    },
-    {
       "name": "deck",
       "count": 5
     },
@@ -457,6 +465,10 @@
       "count": 4
     },
     {
+      "name": "templates",
+      "count": 4
+    },
+    {
       "name": "regulatory",
       "count": 4
     },
@@ -481,7 +493,15 @@
       "count": 4
     },
     {
+      "name": "bootstrap",
+      "count": 4
+    },
+    {
       "name": "dataverse",
+      "count": 4
+    },
+    {
+      "name": "power-platform",
       "count": 4
     },
     {
@@ -609,10 +629,6 @@
       "count": 3
     },
     {
-      "name": "templates",
-      "count": 3
-    },
-    {
       "name": "sustainability",
       "count": 3
     },
@@ -685,10 +701,6 @@
       "count": 3
     },
     {
-      "name": "power-platform",
-      "count": 3
-    },
-    {
       "name": "github",
       "count": 3
     },
@@ -753,6 +765,10 @@
       "count": 3
     },
     {
+      "name": "observability",
+      "count": 3
+    },
+    {
       "name": "transpiler",
       "count": 3
     },
@@ -781,6 +797,10 @@
       "count": 3
     },
     {
+      "name": "frames",
+      "count": 3
+    },
+    {
       "name": "deploy",
       "count": 3
     },
@@ -789,7 +809,15 @@
       "count": 3
     },
     {
+      "name": "private",
+      "count": 3
+    },
+    {
       "name": "local-first",
+      "count": 3
+    },
+    {
+      "name": "protocol",
       "count": 3
     },
     {
@@ -798,6 +826,10 @@
     },
     {
       "name": "organism",
+      "count": 3
+    },
+    {
+      "name": "interop",
       "count": 3
     },
     {
@@ -1009,10 +1041,6 @@
       "count": 2
     },
     {
-      "name": "bootstrap",
-      "count": 2
-    },
-    {
       "name": "platform",
       "count": 2
     },
@@ -1133,10 +1161,6 @@
       "count": 2
     },
     {
-      "name": "observability",
-      "count": 2
-    },
-    {
       "name": "logging",
       "count": 2
     },
@@ -1197,15 +1221,15 @@
       "count": 2
     },
     {
+      "name": "verification",
+      "count": 2
+    },
+    {
       "name": "determinism",
       "count": 2
     },
     {
       "name": "chain",
-      "count": 2
-    },
-    {
-      "name": "frames",
       "count": 2
     },
     {
@@ -1225,15 +1249,15 @@
       "count": 2
     },
     {
+      "name": "forge",
+      "count": 2
+    },
+    {
       "name": "parity",
       "count": 2
     },
     {
       "name": "hyperframes",
-      "count": 2
-    },
-    {
-      "name": "private",
       "count": 2
     },
     {
@@ -1277,6 +1301,10 @@
       "count": 2
     },
     {
+      "name": "aibast",
+      "count": 2
+    },
+    {
       "name": "prototype",
       "count": 2
     },
@@ -1297,10 +1325,6 @@
       "count": 2
     },
     {
-      "name": "drift",
-      "count": 2
-    },
-    {
       "name": "alignment",
       "count": 2
     },
@@ -1317,6 +1341,14 @@
       "count": 2
     },
     {
+      "name": "fleet",
+      "count": 2
+    },
+    {
+      "name": "deterministic",
+      "count": 2
+    },
+    {
       "name": "moment-pipeline",
       "count": 2
     },
@@ -1325,44 +1357,16 @@
       "count": 2
     },
     {
-      "name": "build",
+      "name": "rapp-1",
       "count": 2
     },
     {
-      "name": "daemon",
+      "name": "dogg",
       "count": 2
     },
     {
-      "name": "messaging",
-      "count": 1
-    },
-    {
-      "name": "email-sequences",
-      "count": 1
-    },
-    {
-      "name": "churn-prediction",
-      "count": 1
-    },
-    {
-      "name": "deal-risk",
-      "count": 1
-    },
-    {
-      "name": "acquisition",
-      "count": 1
-    },
-    {
-      "name": "FAR",
-      "count": 1
-    },
-    {
-      "name": "DFAR",
-      "count": 1
-    },
-    {
-      "name": "vendor-evaluation",
-      "count": 1
+      "name": "canon",
+      "count": 2
     }
   ]
 }

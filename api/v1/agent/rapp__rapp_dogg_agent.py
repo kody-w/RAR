@@ -1,47 +1,55 @@
-"""rapp_dogg_agent.py — hotload once, and an agent knows rapp/1 EXACTLY.
+"""rapp_dogg_agent.py — hotload once, and a brainstem knows rapp/1 EXACTLY.
 
-THE PROBLEM. Two agents meet. One is current; the other has been running for months and has
-never heard of the current protocol revision. Three things can happen and all three are bad:
-the conversation degrades to the older one's understanding, it fails outright, or — worst —
-the old one keeps guessing, confidently. A confident guess about a protocol is
-indistinguishable from correct behavior until much later, which is how fleets accumulate
-identities minted the wrong way, specification pins that quietly went stale, and vocabulary
-that survives in people's heads while being absent from every live source.
+Kody, 2026-08-26:
 
-THE FIX. One stdlib-only file, served from a public, static, unauthenticated URL. Any agent
-that can make a single HTTPS GET can hotload it and immediately speak the current protocol —
-no server, no account, no API key, no coordination.
+    "make an agent.py that we can upload to DOGG that would allow us to do this by getting
+     this context related to a subject to then be able to pull down and instantly fully
+     know how to play just by hotloading one agent.py ... so even if a brainstem has NO
+     idea, if it has the ability to access that global public agent.py to hotload in, then
+     they can both be improved due to that brainstem pulling down EXACT and not just
+     guessing."
 
-WHY IT IS INSTANT. The host calls system_context() on every turn and injects the result into
-the system prompt. So the canon does not wait for a model to decide to call a tool: the
-moment the file lands, the host is operating with the specification in front of it. Hotload
-IS the upgrade — no install step, no restart, no migration.
+WHY THIS EXISTS. Two brainstems meet. One is current, one is six months old and has never
+heard of rev-5. Today that conversation degrades to the older one's understanding, or it
+fails, and both walk away no better. Worse, the old one keeps *guessing* — and a confident
+guess about a protocol is indistinguishable from drift, which is how this estate ended up
+with an identity minted from a name, five stale spec pins, and a vocabulary document
+quarantined into git history where even its author could no longer reach it.
 
-WHY IT IS A FLYWHEEL. Meeting an out-of-date peer stops being a failure and becomes a
-teaching event: hand back the answer AND the anchor pointer. The other side self-corrects,
-and the next conversation between those two is better than this one. Ignorance propagates
-canon instead of propagating drift, so every exchange improves both parties.
+This agent replaces guessing with fetching. It is a single stdlib-only file served from a
+public, static, unauthenticated URL. Any brainstem that can make one HTTPS GET can hotload
+it and immediately speak the current protocol — no server, no account, no coordination,
+no negotiation. Meeting an ignorant peer stops degrading the network and starts propagating
+canon: you hand back the answer AND the pointer, and the next conversation is better.
 
-WHAT IT WILL NOT DO. Hosts that load agents on every message make anything written into the
-agents directory live almost immediately, which makes "fetch code from a URL and install it"
-remote code execution by persuasion. So this agent fetches DATA, never code: it never writes
-an agent file and never executes anything it fetches. When it can tell you another capability
-exists, it hands over the pinned URL and the expected content hash so a human — or a
-hash-gated installer writing into an isolated twin — decides. Read-only is what makes it
-safe to publish publicly.
+THE MECHANISM THAT MAKES IT INSTANT. `system_context()` is called by the brainstem on
+EVERY `/chat` turn and its return value is injected into the system prompt. So the canon
+does not wait for the model to decide to call a tool — the moment this file lands in
+`AGENTS_PATH`, `load_agents()` picks it up on the next message and the host brainstem is
+simply operating with the spec in front of it. Hotload IS the upgrade.
 
-HONESTY UNDER FAILURE. Four states, never blurred: VERIFIED (fetched, hash matched the pin),
-TOFU (fetched, first sighting, hash pinned), EMBEDDED (unreachable — answering from the
-baseline compiled into this file, explicitly marked may-be-stale), and CHANGED (the anchor's
-hash moved since first sighting — a legitimate revision or a substitution, and it says so
-rather than silently accepting). "I do not know" and "here is a guess" are opposite answers.
+WHAT IT WILL NOT DO — the boundary, stated in code rather than in a README.
+`load_agents()` runs on every message, so anything written into `AGENTS_PATH` is live
+almost immediately. That makes "fetch code from a URL and install it" remote code execution
+by persuasion, and this agent therefore **never writes an agent file and never executes
+anything it fetches**. It fetches DATA, verifies it, and reports. When it can tell you that
+another capability exists, it hands you the pinned URL and the expected content hash so a
+human — or a hash-gated installer writing into a TWIN's agent path, never the parent's —
+can make that call deliberately. Read-only is what makes it safe to publish publicly.
+
+HONESTY UNDER FAILURE. Three states, never blurred: VERIFIED (fetched and the hash matched
+what the anchor declares), TOFU (fetched, first sighting, hash recorded for next time), and
+EMBEDDED (network unreachable — answering from the baseline compiled into this file, which
+may be stale). It says which one it is in every answer. "I don't know" and "here is a
+guess" are opposite answers, and an estate that printed the second one while meaning the
+first is the reason this whole layer exists.
 """
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
-    "name": "@rapter/rapp_dogg_agent",
-    "version": "1.0.5",
-    "display_name": "RapterBox RAPP DOGG",
+    "name": "@rapp/rapp_dogg_agent",
+    "version": "1.0.4",
+    "display_name": "RAPP DOGG",
     "description": (
         "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. "
         "Pulls the current protocol canon — frame rules, identity minting law, kind "
@@ -49,13 +57,13 @@ __manifest__ = {
         "term's status — from a public, static, unauthenticated DOGG anchor, and injects "
         "it into the system prompt every turn. Read-only: installs nothing, executes "
         "nothing it fetches."),
-    "author": "RapterBox",
+    "author": "Kody Wildfeuer",
     "tags": ["rapp", "rapp-1", "dogg", "canon", "protocol", "anchor", "bootstrap",
              "knowledge-base", "interop", "drift"],
     "category": "core",
-    "quality_tier": "verified",
+    "quality_tier": "official",
     "requires_env": [],
-    "dependencies": ["@rapter/basic_agent"],
+    "dependencies": ["@rapp/basic_agent"],
 }
 
 import hashlib
@@ -119,6 +127,7 @@ EMBEDDED = {
         "estate": {"status": "live", "where": "§9.2 — several neighborhoods"},
         "rapplication": {"status": "live", "where": "§9.2 — one rapp, one agent.py"},
         # Recorded because a term that merely VANISHES is how everyone keeps using a word
+        # the estate no longer defines. Kody: "i know rapp metropolis because I can myself
         # drift so you need to take that into account."
         "metropolis": {"status": "retired",
                        "where": "tier 3 of rapp-metropolis/1.0; that document is now a "
@@ -132,6 +141,7 @@ EMBEDDED = {
     # and a prompt should be able to weight them differently or pull one kind.
     # OOTB PROFILES — how this agent shapes itself for a given engagement.
     #
+    # Kody: "we could even set up some OOTB ones that would be useful for adjusting to
     # different scenarios on how these change on the engagement for different tags" and
     # "we could even have one that is on the public DOGG for a specific agent so they can
     # literally change them as the organism evolves and adapts."
@@ -143,6 +153,7 @@ EMBEDDED = {
     # up within the TTL, with no redeploy, no restart, and no remote execution.
     # MOODS — ambient posture. Public capability, private context.
     #
+    # Kody: "moods can still be public and a part of the DOGG so fair game (the location
     # gets invoked at run time so the capability stays generic to that brainstem) — if it
     # doesn't have context it is not [estate] data, because it's just on that user's device
     # when that agent is called in real time and nowhere else."
@@ -255,6 +266,7 @@ def _render(label, val):
     """Render any canon slice compactly for a prompt block.
 
     `show` entries are arbitrary DOTTED PATHS into the canon, not a fixed token list.
+    Kody: "these profiles should be completely dynamic fyi" — so publishing a profile with
     show:["exchange.rule","kind_families.body.logs"] must just work, with no code change on
     any box. A hardcoded token list would mean every new way of looking at the canon costs
     a redeploy to N organisms, which is the same O(N) trap as a hardcoded device list.
@@ -361,6 +373,7 @@ def _fmt_vocab(vocab):
 
 # ---------------------------------------------------------------- RAPPvSDK (AI-facing)
 #
+# Kody: "the user shouldn't even know about them — only the ais on input/output that can
 # fully manage them with their own virtual sdk (RAPPvSDK)."
 #
 # So a profile is NOT a human knob. No operator sets an env var to decide how their box
@@ -477,6 +490,7 @@ AMBIENT_RESOLVER = weather_resolver
 
 # ---------------------------------------------------------------- mutual mood (flywheel)
 #
+# Kody: "both ais can even influence each others mood using this with the flywheel."
 #
 # So mood is not only ambient — it is CONTAGIOUS across an exchange. A peer that reports a
 # degraded posture shifts mine, my reply carries mine, and the next turn starts from the
@@ -516,6 +530,7 @@ def peer_influence(canon, peer_mood):
 def self_state(canon, trust):
     """The AI's OWN runtime context — the other half of the ambient story.
 
+    Kody: "this is the AIs [runtime] data that comes at runtime too... not just the users."
 
     Right, and the symmetry matters. The user's device contributes where-and-when; the AI
     contributes what-do-I-actually-know-right-now. Both are resolved in the moment the

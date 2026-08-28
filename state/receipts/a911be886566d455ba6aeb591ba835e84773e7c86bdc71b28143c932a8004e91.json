@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/copilot_studio_forge_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "b74dc71864503e47340899674b0e8b9c17f4e8fc617298ed83e5f148bf87e709"
+ },
+ "canonical_path": "agents/@kody-w/copilot_studio_forge_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:46:14.306171+00:00",
+ "id": "rar_a911be886566d455ba6aeb591ba835e84773e7c86bdc71b28143c932a8004e91",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "80f80484f489a3023354e4528bc52657032f686db909fe3ffdcf99d7ae454abe",
+  "receipt": "rar_69cff12003315ec3c8acd48dfd51c98148057ef9dbf27429d71c32f5797d8ec0",
+  "version": "1.0.1"
+ },
+ "quality_tier": "community",
+ "request_id": "req_a911be886566d455ba6aeb59",
+ "revision_id": "a911be886566d455ba6aeb591ba835e84773e7c86bdc71b28143c932a8004e91",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "apply exact hash-pinned legacy registry migrations"
+ },
+ "version": "1.0.2"
+}

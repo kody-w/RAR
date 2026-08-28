@@ -3,7 +3,7 @@
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_forge_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "CopilotStudioForge",
     "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports.",
     "author": "kody-w",

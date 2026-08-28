@@ -1199,6 +1199,17 @@
       "updated_at": "2026-08-02T01:35:52.563615+00:00",
       "version": "2.0.0"
     },
+    "@cat-agent-skills/action_items_todo": {
+      "canonical_path": "agents/@cat-agent-skills/action_items_todo_agent.py",
+      "latest_receipt": "rar_425e03cec6253e90b167d1089f10a2a4ddd787ec8231643d2f0d9dd1a9564ab6",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "frontier",
+      "sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d",
+      "status": "active",
+      "updated_at": "2026-08-23T23:28:20.321581+00:00",
+      "version": "2.0.0"
+    },
     "@cat-agent-skills/agent_evaluation_designer": {
       "canonical_path": "agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
       "latest_receipt": "rar_6f0481e697989c02b21546d5800cc2dbe19aa0c00205b4a7e37941cf7fb5d6d5",
@@ -1408,6 +1419,17 @@
       "updated_at": "2026-08-02T01:35:52.563615+00:00",
       "version": "1.1.0"
     },
+    "@cat-agent-skills/clipchamp_video": {
+      "canonical_path": "agents/@cat-agent-skills/clipchamp_video_agent.py",
+      "latest_receipt": "rar_30d110dfe33db77255dead8b6b5cd8016a5094086ade72a391893b329fb2cadb",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "frontier",
+      "sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8",
+      "status": "active",
+      "updated_at": "2026-08-23T23:28:20.327665+00:00",
+      "version": "2.0.0"
+    },
     "@cat-agent-skills/clt_hr_assistant": {
       "canonical_path": "agents/@cat-agent-skills/clt_hr_assistant_agent.py",
       "latest_receipt": "rar_33f697487ce816ec466d56f3bd175bbd14559006042b1b9c1d93009ec0606641",
@@ -1605,6 +1627,17 @@
       "status": "active",
       "updated_at": "2026-08-02T01:35:52.563615+00:00",
       "version": "3.0.1"
+    },
+    "@cat-agent-skills/explainer_video": {
+      "canonical_path": "agents/@cat-agent-skills/explainer_video_agent.py",
+      "latest_receipt": "rar_3102e74dc288e3281c7ba9ab9f6d32f25f43c1fb50ac656c7534c8d6e3a2a197",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "frontier",
+      "sha256": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6",
+      "status": "active",
+      "updated_at": "2026-08-23T23:28:20.333221+00:00",
+      "version": "2.0.0"
     },
     "@cat-agent-skills/gantt_chart_generator": {
       "canonical_path": "agents/@cat-agent-skills/gantt_chart_generator_agent.py",
@@ -2521,14 +2554,14 @@
     },
     "@kody-w/connected_solution_agent": {
       "canonical_path": "agents/@kody-w/connected_solution_agent.py",
-      "latest_receipt": "rar_b027eb23f5e60f53763f04481d6b5191a58fd756f5339893cb7f2fd2f01a245c",
+      "latest_receipt": "rar_f2c87c00e610fc9dbe1cf73c69e057fa60576d6b87a8fb5ef65cf0a5a7860d59",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "63b3de4722f83a981745927a80ad07804dfc42815b05c79314d8a6850908aa0f",
+      "sha256": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.2"
+      "updated_at": "2026-08-28T04:46:14.306171+00:00",
+      "version": "1.0.3"
     },
     "@kody-w/context_memory_agent": {
       "canonical_path": "agents/@kody-w/context_memory_agent.py",
@@ -2554,14 +2587,14 @@
     },
     "@kody-w/copilot_studio_forge_agent": {
       "canonical_path": "agents/@kody-w/copilot_studio_forge_agent.py",
-      "latest_receipt": "rar_69cff12003315ec3c8acd48dfd51c98148057ef9dbf27429d71c32f5797d8ec0",
+      "latest_receipt": "rar_a911be886566d455ba6aeb591ba835e84773e7c86bdc71b28143c932a8004e91",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "community",
-      "sha256": "80f80484f489a3023354e4528bc52657032f686db909fe3ffdcf99d7ae454abe",
+      "sha256": "b74dc71864503e47340899674b0e8b9c17f4e8fc617298ed83e5f148bf87e709",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.1"
+      "updated_at": "2026-08-28T04:46:14.306171+00:00",
+      "version": "1.0.2"
     },
     "@kody-w/copilot_studio_parity_deploy": {
       "canonical_path": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
@@ -3201,6 +3234,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
     },
+    "@rapp/forge_provenance_agent": {
+      "canonical_path": "agents/@kody-w/forge_provenance_agent.py",
+      "latest_receipt": "rar_a9a5592a671372c7afb153ac7d7a668a70941d94a9ca821c9e4046fe94eac7e9",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "official",
+      "sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69",
+      "status": "active",
+      "updated_at": "2026-08-28T04:46:14.306171+00:00",
+      "version": "1.0.0"
+    },
     "@rapp/hacker_news": {
       "canonical_path": "agents/@rapp/hacker_news_agent.py",
       "latest_receipt": "rar_cb80819aec97f4bb78f9a4e0eb113131c91aab19dd90bc02500f4f8e8118bc49",
@@ -3214,14 +3258,14 @@
     },
     "@rapp/learn_new": {
       "canonical_path": "agents/@rapp/learn_new_agent.py",
-      "latest_receipt": "rar_05fb911fe9fb330c2837766a77b399d2a1413d23ae9be89002ca3daad4b4045b",
+      "latest_receipt": "rar_cc3830f8c6800a05f05a96ba96603d46ffd592a044b6c1de92cf886e0ca78dde",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "ee12a37ef550c9ffb1097334da29ebcb4dcaeeac5b3f8b5dbab366e5178eab71",
+      "sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
       "status": "active",
-      "updated_at": "2026-08-11T09:42:00.418637+00:00",
-      "version": "2.1.1"
+      "updated_at": "2026-08-28T04:46:14.306171+00:00",
+      "version": "3.0.1"
     },
     "@rapp/moment_factory_agent": {
       "canonical_path": "agents/@rapp/moment_factory_agent.py",
@@ -3257,15 +3301,26 @@
       "version": "1.0.2"
     },
     "@rapp/rapp": {
-      "status": "active",
-      "version": "1.0.7",
-      "quality_tier": "official",
+      "canonical_path": "agents/@rapp/rapp_agent.py",
+      "latest_receipt": "rar_5386ce1a0189ec1a8730d701ef8faa4e8653153e792debd454abaa044261a248",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "canonical_path": "agents/@rapp/rapp_agent.py",
+      "quality_tier": "official",
       "sha256": "137f52017fe47f6263fe54b15baa5cdd65d86f664debbe4e26cbbd835f4abedb",
-      "latest_receipt": "rar_5386ce1a0189ec1a8730d701ef8faa4e8653153e792debd454abaa044261a248",
-      "updated_at": "2026-08-23T23:31:01.058072+00:00"
+      "status": "active",
+      "updated_at": "2026-08-23T23:31:01.058072+00:00",
+      "version": "1.0.7"
+    },
+    "@rapp/rapp_dogg_agent": {
+      "canonical_path": "agents/@rapp/rapp_dogg_agent.py",
+      "latest_receipt": "rar_5addbd43e489eea4ebc942a6fb1aefc752a43ec899af6ba58c243afd0ec7b151",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "official",
+      "sha256": "14bbe3f9f1b3cf98cc5f95eff631bb362db580f331822efc24577682788f7bb4",
+      "status": "active",
+      "updated_at": "2026-08-28T04:46:14.306171+00:00",
+      "version": "1.0.4"
     },
     "@rapp/rapp_publish_agent": {
       "canonical_path": "agents/@rapp/rapp_publish_agent.py",
@@ -3354,6 +3409,39 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
+    },
+    "@rapter/hive_census_agent": {
+      "canonical_path": "agents/@rapter/hive_census_agent.py",
+      "latest_receipt": "rar_3e98432563660212aff02a36fa3fc5082da15d3d537c4d81398e1efdd6c8a876",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "verified",
+      "sha256": "c078c513615c23f87edf14ee12514105af913e06577cfe53b2e2b2368963d4ff",
+      "status": "active",
+      "updated_at": "2026-08-28T04:46:14.306171+00:00",
+      "version": "1.0.0"
+    },
+    "@rapter/hive_shape_agent": {
+      "canonical_path": "agents/@rapter/hive_shape_agent.py",
+      "latest_receipt": "rar_c69e8be53d43f856218e6b6e5e5af4ed0fe008b68f6c8e48ce803b3832035d8c",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "verified",
+      "sha256": "c4cdee134802fd1ced521940c6ef38d0a5dba2503acc4e8cd8da5e4367d075a3",
+      "status": "active",
+      "updated_at": "2026-08-28T04:46:14.306171+00:00",
+      "version": "1.0.0"
+    },
+    "@rapter/rapp_dogg_agent": {
+      "canonical_path": "agents/@rapter/rapp_dogg_agent.py",
+      "latest_receipt": "rar_02c3fab632fbe33f4f58f8133fd3a31c3cd9881064bcd8459fa25bae358c8862",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "verified",
+      "sha256": "bf6bd60cb5c17a940141985ed82be8eac8112213af58fcf1fd80403b1573ff11",
+      "status": "active",
+      "updated_at": "2026-08-28T04:46:14.306171+00:00",
+      "version": "1.0.5"
     },
     "@rarbookworld/body_writer": {
       "canonical_path": "agents/@rarbookworld/_sources/body_writer_agent.py",
@@ -3640,41 +3728,8 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
-    },
-    "@cat-agent-skills/action_items_todo": {
-      "status": "active",
-      "version": "2.0.0",
-      "quality_tier": "frontier",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@cat-agent-skills/action_items_todo_agent.py",
-      "sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d",
-      "latest_receipt": "rar_425e03cec6253e90b167d1089f10a2a4ddd787ec8231643d2f0d9dd1a9564ab6",
-      "updated_at": "2026-08-23T23:28:20.321581+00:00"
-    },
-    "@cat-agent-skills/clipchamp_video": {
-      "status": "active",
-      "version": "2.0.0",
-      "quality_tier": "frontier",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@cat-agent-skills/clipchamp_video_agent.py",
-      "sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8",
-      "latest_receipt": "rar_30d110dfe33db77255dead8b6b5cd8016a5094086ade72a391893b329fb2cadb",
-      "updated_at": "2026-08-23T23:28:20.327665+00:00"
-    },
-    "@cat-agent-skills/explainer_video": {
-      "status": "active",
-      "version": "2.0.0",
-      "quality_tier": "frontier",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@cat-agent-skills/explainer_video_agent.py",
-      "sha256": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6",
-      "latest_receipt": "rar_3102e74dc288e3281c7ba9ab9f6d32f25f43c1fb50ac656c7534c8d6e3a2a197",
-      "updated_at": "2026-08-23T23:28:20.333221+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-23T23:31:01.058072+00:00"
+  "updated_at": "2026-08-28T04:46:14.306171+00:00"
 }

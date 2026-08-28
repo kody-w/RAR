@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-08-28T04:21:58Z",
-  "count": 204,
+  "generated": "2026-08-28T04:46:29Z",
+  "count": 209,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -4468,7 +4468,7 @@
       "name": "@kody-w/connected_solution_agent",
       "display_name": "ConnectedSolution",
       "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API.",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "publisher": "@kody-w",
       "author": "Kody Wildfeuer",
       "category": "integrations",
@@ -4490,11 +4490,11 @@
         "path": "agents/@kody-w/connected_solution_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/connected_solution_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/connected_solution_agent.py",
-        "sha256": "63b3de4722f83a981745927a80ad07804dfc42815b05c79314d8a6850908aa0f"
+        "sha256": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af"
       },
       "stats": {
-        "lines": 2731,
-        "size_kb": 127.3,
+        "lines": 2739,
+        "size_kb": 127.8,
         "added_at": "2026-06-22T21:04:42-04:00"
       }
     },
@@ -4581,7 +4581,7 @@
       "name": "@kody-w/copilot_studio_forge_agent",
       "display_name": "CopilotStudioForge",
       "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines — bundles, topics, solutions, and exports.",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "publisher": "@kody-w",
       "author": "kody-w",
       "category": "pipeline",
@@ -4610,11 +4610,11 @@
         "path": "agents/@kody-w/copilot_studio_forge_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_forge_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/copilot_studio_forge_agent.py",
-        "sha256": "80f80484f489a3023354e4528bc52657032f686db909fe3ffdcf99d7ae454abe"
+        "sha256": "b74dc71864503e47340899674b0e8b9c17f4e8fc617298ed83e5f148bf87e709"
       },
       "stats": {
-        "lines": 5330,
-        "size_kb": 218.4,
+        "lines": 5338,
+        "size_kb": 218.9,
         "added_at": "2026-07-07T00:52:21Z"
       }
     },
@@ -6507,6 +6507,43 @@
       }
     },
     {
+      "id": "rapp__forge_provenance_agent",
+      "name": "@rapp/forge_provenance_agent",
+      "display_name": "Forge Provenance",
+      "description": "Stamp a forged artifact bundle with the fingerprint of the RAPP agent it came from, then prove later that it never drifted. Reports per file: current, STALE (source moved), HAND-EDITED (derived file was edited and the edit will be lost), MISSING, or UNSTAMPED (provenance unknown, which never renders as healthy). Fingerprints the agent's declarative surface, read with ast and never imported, so a comment change does not cry wolf but a description change does.",
+      "version": "1.0.0",
+      "publisher": "@rapp",
+      "author": "Kody Wildfeuer",
+      "category": "core",
+      "tags": [
+        "copilot-studio",
+        "power-platform",
+        "forge",
+        "provenance",
+        "drift",
+        "deterministic",
+        "verification",
+        "m365"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/forge_provenance_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/forge_provenance_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/forge_provenance_agent.py",
+        "sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69"
+      },
+      "stats": {
+        "lines": 265,
+        "size_kb": 11.7,
+        "added_at": "2026-08-26T17:29:33-04:00"
+      }
+    },
+    {
       "id": "rapp__hacker_news",
       "name": "@rapp/hacker_news",
       "display_name": "Hacker News",
@@ -6540,8 +6577,8 @@
       "id": "rapp__learn_new",
       "name": "@rapp/learn_new",
       "display_name": "LearnNew",
-      "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
-      "version": "2.1.1",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback.",
+      "version": "3.0.1",
       "publisher": "@rapp",
       "author": "RAPP",
       "category": "core",
@@ -6550,7 +6587,9 @@
         "generator",
         "scaffolding",
         "learn",
-        "swarm"
+        "swarm",
+        "templates",
+        "aibast"
       ],
       "quality_tier": "official",
       "audience": "both",
@@ -6562,11 +6601,11 @@
         "path": "agents/@rapp/learn_new_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/learn_new_agent.py",
-        "sha256": "ee12a37ef550c9ffb1097334da29ebcb4dcaeeac5b3f8b5dbab366e5178eab71"
+        "sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741"
       },
       "stats": {
-        "lines": 1040,
-        "size_kb": 38.8,
+        "lines": 1963,
+        "size_kb": 80.3,
         "added_at": "2026-04-20T12:38:45-04:00"
       }
     },
@@ -6708,6 +6747,45 @@
         "lines": 2979,
         "size_kb": 172.6,
         "added_at": "2026-06-09T21:40:04-04:00"
+      }
+    },
+    {
+      "id": "rapp__rapp_dogg_agent",
+      "name": "@rapp/rapp_dogg_agent",
+      "display_name": "RAPP DOGG",
+      "description": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon — frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status — from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches.",
+      "version": "1.0.4",
+      "publisher": "@rapp",
+      "author": "Kody Wildfeuer",
+      "category": "core",
+      "tags": [
+        "rapp",
+        "rapp-1",
+        "dogg",
+        "canon",
+        "protocol",
+        "anchor",
+        "bootstrap",
+        "knowledge-base",
+        "interop",
+        "drift"
+      ],
+      "quality_tier": "official",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@rapp/rapp_dogg_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_dogg_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/rapp_dogg_agent.py",
+        "sha256": "14bbe3f9f1b3cf98cc5f95eff631bb362db580f331822efc24577682788f7bb4"
+      },
+      "stats": {
+        "lines": 812,
+        "size_kb": 41.7,
+        "added_at": "2026-08-26T16:49:28-04:00"
       }
     },
     {
@@ -6948,6 +7026,118 @@
         "lines": 532,
         "size_kb": 20.2,
         "added_at": "2026-04-27T21:15:33Z"
+      }
+    },
+    {
+      "id": "rapter__hive_census_agent",
+      "name": "@rapter/hive_census_agent",
+      "display_name": "Hive Census",
+      "description": "Emit this box's census as deterministic static JSON — protocol revision, anchor hash, resident populations, posture, trust — computed from local filesystem and git facts with NO language-model call. Byte-stable for the same inputs, sorted and string-valued so it drops straight into a rapp/1 frame payload and two boxes computing the same census produce the same hash. Counts things, never names them.",
+      "version": "1.0.0",
+      "publisher": "@rapter",
+      "author": "RapterBox",
+      "category": "core",
+      "tags": [
+        "census",
+        "hive",
+        "deterministic",
+        "static",
+        "no-llm",
+        "frames",
+        "shape"
+      ],
+      "quality_tier": "verified",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapter/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@rapter/hive_census_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/hive_census_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapter/hive_census_agent.py",
+        "sha256": "c078c513615c23f87edf14ee12514105af913e06577cfe53b2e2b2368963d4ff"
+      },
+      "stats": {
+        "lines": 222,
+        "size_kb": 9.9,
+        "added_at": "2026-08-26T17:18:46-04:00"
+      }
+    },
+    {
+      "id": "rapter__hive_shape_agent",
+      "name": "@rapter/hive_shape_agent",
+      "display_name": "Hive Shape",
+      "description": "Look at every cubby in a hive at once and report its SHAPE — divergence (who disagrees about what the world is), silence (who did not answer, always named), mass (where the population actually lives), and spread (how unlike each other the members are). Private by construction: publishes nothing, writes no frame, and leaves the picture on the operator's machine.",
+      "version": "1.0.0",
+      "publisher": "@rapter",
+      "author": "RapterBox",
+      "category": "core",
+      "tags": [
+        "hive",
+        "fleet",
+        "shape",
+        "divergence",
+        "drift",
+        "census",
+        "observability",
+        "private"
+      ],
+      "quality_tier": "verified",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapter/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@rapter/hive_shape_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/hive_shape_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapter/hive_shape_agent.py",
+        "sha256": "c4cdee134802fd1ced521940c6ef38d0a5dba2503acc4e8cd8da5e4367d075a3"
+      },
+      "stats": {
+        "lines": 338,
+        "size_kb": 14.7,
+        "added_at": "2026-08-26T17:18:46-04:00"
+      }
+    },
+    {
+      "id": "rapter__rapp_dogg_agent",
+      "name": "@rapter/rapp_dogg_agent",
+      "display_name": "RapterBox RAPP DOGG",
+      "description": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon — frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status — from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches.",
+      "version": "1.0.5",
+      "publisher": "@rapter",
+      "author": "RapterBox",
+      "category": "core",
+      "tags": [
+        "rapp",
+        "rapp-1",
+        "dogg",
+        "canon",
+        "protocol",
+        "anchor",
+        "bootstrap",
+        "knowledge-base",
+        "interop",
+        "drift"
+      ],
+      "quality_tier": "verified",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapter/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@rapter/rapp_dogg_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/rapp_dogg_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapter/rapp_dogg_agent.py",
+        "sha256": "bf6bd60cb5c17a940141985ed82be8eac8112213af58fcf1fd80403b1573ff11"
+      },
+      "stats": {
+        "lines": 797,
+        "size_kb": 40.6,
+        "added_at": "2026-08-26T17:18:46-04:00"
       }
     },
     {

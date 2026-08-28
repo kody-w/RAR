@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-28"
+ },
+ "action": "agent.create",
+ "agent": "@rapter/hive_shape_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "c4cdee134802fd1ced521940c6ef38d0a5dba2503acc4e8cd8da5e4367d075a3"
+ },
+ "canonical_path": "agents/@rapter/hive_shape_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-28T04:46:14.306171+00:00",
+ "id": "rar_c69e8be53d43f856218e6b6e5e5af4ed0fe008b68f6c8e48ce803b3832035d8c",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "verified",
+ "request_id": "req_c69e8be53d43f856218e6b6e",
+ "revision_id": "c69e8be53d43f856218e6b6e5e5af4ed0fe008b68f6c8e48ce803b3832035d8c",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "apply exact hash-pinned legacy registry migrations"
+ },
+ "version": "1.0.0"
+}

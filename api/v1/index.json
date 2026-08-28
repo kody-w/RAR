@@ -3,8 +3,8 @@
   "name": "RAR Pok\u00e9dex API",
   "description": "Static catalog API for bare RAPP agents (single-file Python, BasicAgent subclass, perform()). Mirrors the RAPP_Store API shape so the rapp-zoo can browse all federation stores with the same client code. Each entry has a sprite, a downloadable .py (and .card holocard if shipped), lineage back to the species root, and stats (lines, size, sha256).",
   "version": "1.0.0",
-  "generated_at": "2026-08-23T23:33:04Z",
-  "count": 310,
+  "generated_at": "2026-08-28T04:46:29Z",
+  "count": 315,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/index.json",
   "agents": [
     {
@@ -2977,7 +2977,7 @@
       "rar_name": "@kody-w/connected_solution_agent",
       "publisher": "@kody-w",
       "category": "integrations",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "has_card": true,
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__connected_solution_agent.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__connected_solution_agent.svg",
@@ -3016,7 +3016,7 @@
       "rar_name": "@kody-w/copilot_studio_forge_agent",
       "publisher": "@kody-w",
       "category": "pipeline",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "has_card": true,
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_forge_agent.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__copilot_studio_forge_agent.svg",
@@ -3190,6 +3190,19 @@
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__flight_recorder.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__flight_recorder.svg",
       "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__flight_recorder.py",
+      "card": null
+    },
+    {
+      "id": "rapp__forge_provenance_agent",
+      "name": "Forge Provenance",
+      "rar_name": "@rapp/forge_provenance_agent",
+      "publisher": "@rapp",
+      "category": "core",
+      "version": "1.0.0",
+      "has_card": false,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__forge_provenance_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__forge_provenance_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__forge_provenance_agent.py",
       "card": null
     },
     {
@@ -3796,7 +3809,7 @@
       "rar_name": "@rapp/learn_new",
       "publisher": "@rapp",
       "category": "core",
-      "version": "2.1.1",
+      "version": "3.0.1",
       "has_card": true,
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__learn_new.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__learn_new.svg",
@@ -3853,6 +3866,19 @@
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rapp.svg",
       "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp.py",
+      "card": null
+    },
+    {
+      "id": "rapp__rapp_dogg_agent",
+      "name": "RAPP DOGG",
+      "rar_name": "@rapp/rapp_dogg_agent",
+      "publisher": "@rapp",
+      "category": "core",
+      "version": "1.0.4",
+      "has_card": false,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp_dogg_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rapp_dogg_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp_dogg_agent.py",
       "card": null
     },
     {
@@ -3944,6 +3970,45 @@
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__vibe_builder_agent.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__vibe_builder_agent.svg",
       "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__vibe_builder_agent.py",
+      "card": null
+    },
+    {
+      "id": "rapter__hive_census_agent",
+      "name": "Hive Census",
+      "rar_name": "@rapter/hive_census_agent",
+      "publisher": "@rapter",
+      "category": "core",
+      "version": "1.0.0",
+      "has_card": false,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapter__hive_census_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapter__hive_census_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapter__hive_census_agent.py",
+      "card": null
+    },
+    {
+      "id": "rapter__hive_shape_agent",
+      "name": "Hive Shape",
+      "rar_name": "@rapter/hive_shape_agent",
+      "publisher": "@rapter",
+      "category": "core",
+      "version": "1.0.0",
+      "has_card": false,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapter__hive_shape_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapter__hive_shape_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapter__hive_shape_agent.py",
+      "card": null
+    },
+    {
+      "id": "rapter__rapp_dogg_agent",
+      "name": "RapterBox RAPP DOGG",
+      "rar_name": "@rapter/rapp_dogg_agent",
+      "publisher": "@rapter",
+      "category": "core",
+      "version": "1.0.5",
+      "has_card": false,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapter__rapp_dogg_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapter__rapp_dogg_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapter__rapp_dogg_agent.py",
       "card": null
     },
     {
