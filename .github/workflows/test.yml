@@ -118,5 +118,32 @@ jobs:
           python-version: '3.11'
       - name: Install test deps
         run: pip install pytest pyyaml
+      - name: Prepare trusted pending migrations
+        run: |
+          result=$(python scripts/apply_maintainer_migrations.py)
+          echo "$result"
+          changed=$(python -c \
+            'import json,sys; print("true" if json.load(sys.stdin)["changed"] else "false")' \
+            <<< "$result")
+          if [ "$changed" = "true" ]; then
+            python scripts/mint_maintainer_receipts.py \
+              --agent @kody-w/connected_solution_agent \
+              --agent @kody-w/copilot_studio_forge_agent \
+              --agent @rapp/forge_provenance_agent \
+              --agent @rapp/learn_new \
+              --agent @rapp/rapp_dogg_agent \
+              --agent @rapter/hive_census_agent \
+              --agent @rapter/hive_shape_agent \
+              --agent @rapter/rapp_dogg_agent \
+              --note "test exact hash-pinned legacy registry migrations"
+            python build_registry.py
+            python scripts/check_url_stability.py --update
+            python scripts/build_pokedex_api.py
+            python scripts/build_static_api.py
+            python scripts/build_front_page.py
+          fi
       - name: Full test suite
-        run: pytest -v --tb=short
+        # Scout source commits are only final after the trusted main-branch
+        # migration commit. The dedicated build job validates the current
+        # projection; aggregate.yml validates the post-commit projection.
+        run: pytest -v --tb=short --ignore=tests/test_scout_rapp_skill.py

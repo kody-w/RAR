@@ -128,9 +128,13 @@ jobs:
             --namespace @cowork-cookbook \
             --agent @kody-w/connected_solution_agent \
             --agent @kody-w/copilot_studio_forge_agent \
+            --agent @rapp/forge_provenance_agent \
             --agent @rapp/learn_new \
+            --agent @rapp/rapp_dogg_agent \
+            --agent @rapter/hive_census_agent \
+            --agent @rapter/hive_shape_agent \
             --agent @rapter/rapp_dogg_agent \
-            --note "regenerate verified aggregated source containers"
+            --note "reconcile pinned legacy and aggregated source containers"
 
       - name: Rebuild registry and static API
         if: >-
