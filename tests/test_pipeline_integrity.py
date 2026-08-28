@@ -725,6 +725,8 @@ class TestWorkflowSyntax:
         ).read_text()
         assert "apply_agent_mutation.py" in workflow
         assert "getCollaboratorPermissionLevel" in workflow
+        assert "python scripts/build_scout_exports.py" in workflow
+        assert "rapp_skill.md rapp_skills.md scout/" in workflow
         assert "maintain" in workflow and "admin" in workflow
         assert "ISSUE_TITLE" not in workflow
         assert "target_slug" not in workflow
