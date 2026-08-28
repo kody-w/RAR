@@ -30,6 +30,11 @@ def _discover_agents():
     for py_path in sorted(AGENTS_DIR.rglob("*.py")):
         if py_path.name in SKIP_FILES:
             continue
+        try:
+            if "\nRAR_TOMBSTONE = " in py_path.read_text(encoding="utf-8", errors="ignore")[:4000]:
+                continue      # retired tombstone stub (Article XXIII.3) — resolves, is not an active agent
+        except OSError:
+            pass
         # Skip templates directory
         rel = py_path.relative_to(AGENTS_DIR)
         if rel.parts[0] in SKIP_DIRS:

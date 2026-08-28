@@ -133,7 +133,11 @@ def test_delete_writes_tombstone_and_receipt(mutation_repo):
         approver_login="maintainer",
     )
     assert result["status"] == "deleted"
-    assert not active.exists()
+    # Article XXIII.3: the path still resolves — as a tombstone stub, not the agent
+    assert active.exists()
+    import sys as _sys; _sys.path.insert(0, str(REPO_ROOT / "scripts")) if "REPO_ROOT" in globals() else None
+    from tombstone import is_tombstone
+    assert is_tombstone(active.read_text())
     lifecycle = json.loads(pi.LIFECYCLE_FILE.read_text())
     assert lifecycle["agents"]["@testuser/my_agent"]["status"] == "deleted"
 

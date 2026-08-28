@@ -549,6 +549,11 @@ def _normalize_agent_identity(
     return canonical_publisher, slug, ""
 
 
+def _is_tombstone_text(text: str) -> bool:
+    head = text[:4000]
+    return "\nRAR_TOMBSTONE = " in head or head.startswith("RAR_TOMBSTONE = ")
+
+
 def resolve_registered_agent(name: str) -> tuple[Path, dict] | None:
     candidates = []
     registry_file = REPO_ROOT / "registry.json"
@@ -564,9 +569,10 @@ def resolve_registered_agent(name: str) -> tuple[Path, dict] | None:
                 except ValueError:
                     continue
                 if path.exists():
-                    manifest = extract_manifest_from_code(
-                        path.read_text(encoding="utf-8")
-                    )
+                    _text = path.read_text(encoding="utf-8")
+                    if _is_tombstone_text(_text):
+                        return None          # Article XXIII.3: the path resolves, the agent is retired
+                    manifest = extract_manifest_from_code(_text)
                     if manifest and manifest.get("name") == entry.get("name"):
                         return path, manifest
         except (OSError, json.JSONDecodeError):
@@ -575,7 +581,10 @@ def resolve_registered_agent(name: str) -> tuple[Path, dict] | None:
     patterns = ("*.py.card", "*.py.stub", "*.py")
     for priority, pattern in enumerate(patterns):
         for path in AGENTS_DIR.rglob(pattern):
-            manifest = extract_manifest_from_code(path.read_text(encoding="utf-8"))
+            _t = path.read_text(encoding="utf-8")
+            if _is_tombstone_text(_t):
+                continue
+            manifest = extract_manifest_from_code(_t)
             if (
                 manifest
                 and str(manifest.get("name", "")).casefold() == name.casefold()

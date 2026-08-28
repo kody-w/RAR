@@ -811,6 +811,12 @@ def _load_superseded() -> dict:
     return doc
 
 
+def _is_tombstone_file(py_path) -> bool:
+    if py_path.suffix != ".py":
+        return False
+    head = py_path.read_text(encoding="utf-8", errors="ignore")[:4000]
+    return "\nRAR_TOMBSTONE = " in head or head.startswith("RAR_TOMBSTONE = ")
+
 def build_registry():
     """Scan all agent .py and .py.card files and build registry.json."""
     agents = []
@@ -873,6 +879,11 @@ def build_registry():
 
     for py_path in all_files:
         legacy_manifest = None
+        try:
+            if _is_tombstone_file(py_path):
+                continue          # Article XXIII.3: a retired agent's path resolves but is not indexed
+        except OSError:
+            pass
         if (
             py_path.suffix == ".py"
             and not py_path.name.endswith("_agent.py")

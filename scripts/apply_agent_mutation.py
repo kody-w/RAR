@@ -351,7 +351,12 @@ def apply_request(
         ):
             raise MutationError("Update version must increase semantically")
     elif action == "agent.restore":
-        if agent_file.exists() or previous_lifecycle.get("status") not in {
+        _sys_path = str(Path(__file__).resolve().parent)
+        import sys as _sys
+        if _sys_path not in _sys.path: _sys.path.insert(0, _sys_path)
+        from tombstone import is_tombstone
+        live_file = agent_file.exists() and not is_tombstone(agent_file.read_text(encoding="utf-8", errors="ignore"))
+        if live_file or previous_lifecycle.get("status") not in {
             "deleted",
             "retired",
         }:
@@ -388,7 +393,13 @@ def apply_request(
         previous_sha256 = str(previous_lifecycle.get("sha256", ""))
         previous_version = str(previous_lifecycle.get("version", ""))
     if action == "agent.delete":
-        agent_file.unlink()
+        # Article XXIII.3: the path is a promise — replace the agent with a tombstone stub
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from tombstone import render_stub
+        agent_file.write_text(render_stub(
+            request.get("agent", ""), str(request.get("reason", "")).strip() or "Retired by its owner.",
+            str(request.get("upstream", "") or ""), previous_version), encoding="utf-8")
         status = "deleted"
         artifact_sha256 = previous_sha256
         version = previous_version
