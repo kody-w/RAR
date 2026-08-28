@@ -31,7 +31,7 @@
   "size_kb": 10.3,
   "sha256": "6f0e3e6ac3ec3942fc16ddcfa11ee70efb3f4eb42ad67174573d4c4b44a46b6e",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_forecast_maintenance.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/ppt_exec_forecast_maintenance_agent.py",

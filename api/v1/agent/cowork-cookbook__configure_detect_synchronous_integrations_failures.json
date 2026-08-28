@@ -31,7 +31,7 @@
   "size_kb": 10.8,
   "sha256": "95c9414a8261e7746214d31745b9b391641c869d076e6238332dd28a83534ff4",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_detect_synchronous_integrations_failures.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_detect_synchronous_integrations_failures_agent.py",

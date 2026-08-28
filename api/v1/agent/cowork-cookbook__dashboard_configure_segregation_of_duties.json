@@ -31,7 +31,7 @@
   "size_kb": 10.5,
   "sha256": "a8ed0701dd565bb1005efeef55133663adfffc969a117b56c86cfe1076640886",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__dashboard_configure_segregation_of_duties.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/dashboard_configure_segregation_of_duties_agent.py",

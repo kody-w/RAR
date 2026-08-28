@@ -31,7 +31,7 @@
   "size_kb": 10.3,
   "sha256": "5c2cf0f0f891030a1f5160595ddd9488af620ff0eac6775e9adb186061a793fd",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__audit_forecast_cash_flow.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/audit_forecast_cash_flow_agent.py",

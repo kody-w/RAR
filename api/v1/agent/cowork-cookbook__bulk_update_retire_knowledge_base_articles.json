@@ -31,7 +31,7 @@
   "size_kb": 10.5,
   "sha256": "0328fecd011624f784a0743174855242f8b85295d23cbc3024d2c054f1368acf",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__bulk_update_retire_knowledge_base_articles.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/bulk_update_retire_knowledge_base_articles_agent.py",

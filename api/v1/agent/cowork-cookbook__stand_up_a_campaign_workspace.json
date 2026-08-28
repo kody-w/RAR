@@ -31,7 +31,7 @@
   "size_kb": 10.2,
   "sha256": "f8b33a458645dc784515755234df00e5a5234f4db2815e4f28175d711d1c8ffd",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__stand_up_a_campaign_workspace.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/stand_up_a_campaign_workspace_agent.py",

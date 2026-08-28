@@ -31,7 +31,7 @@
   "size_kb": 10.5,
   "sha256": "7aed0a947362f83c8c876959fa5e04bba8f363ad513585ab9982fae23b1db7e9",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__bulk_update_track_fronline_worker_location.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/bulk_update_track_fronline_worker_location_agent.py",

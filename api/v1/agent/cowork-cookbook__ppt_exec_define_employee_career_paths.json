@@ -31,7 +31,7 @@
   "size_kb": 10.4,
   "sha256": "eb4659f310a3b4df58309b4eca7b430f41ff9183466d1a4a04a8e2f372454668",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_define_employee_career_paths.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/ppt_exec_define_employee_career_paths_agent.py",

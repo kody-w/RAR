@@ -31,7 +31,7 @@
   "size_kb": 10.6,
   "sha256": "0476f5d5a97346829061f0a2756b924b6b1585c81823e47fa7924c166186a47d",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__bulk_update_review_case_loads_and_rebalance_case_loads.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/bulk_update_review_case_loads_and_rebalance_case_loads_agent.py",

@@ -31,7 +31,7 @@
   "size_kb": 10.7,
   "sha256": "ee6c41562ec4f9de3c9899558be2b935c575e2901b5e28021f8319aadf642535",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_manage_signatures_and_signing_limits.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_manage_signatures_and_signing_limits_agent.py",

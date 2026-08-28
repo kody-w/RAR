@@ -30,7 +30,7 @@
   "size_kb": 10.2,
   "sha256": "d0e1fd32dbd0055ffb9ebd47aa7ffc02740bc74a24ba328fd91c24d04352e3a0",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__build_a_customer_facing_pitch_deck_on_brand.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand_agent.py",

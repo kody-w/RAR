@@ -31,7 +31,7 @@
   "size_kb": 10.6,
   "sha256": "34922a3c57ac890bc02718a2aa8a9b1dd5c14454223c036ebca99be11b96c4da",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_record_intercompany_transactions.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/scheduled_brief_record_intercompany_transactions_agent.py",

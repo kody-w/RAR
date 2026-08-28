@@ -31,7 +31,7 @@
   "size_kb": 10.4,
   "sha256": "592d0e1eb1fb0a2a2b5cfc2cfe4f4a39741f8880b38239ba61da5cb8b7276fb1",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__adaptive_card_consolidate_requisitions.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/adaptive_card_consolidate_requisitions_agent.py",

@@ -31,7 +31,7 @@
   "size_kb": 10.4,
   "sha256": "fb16396c23dd43ceba72d5fb64d876b26b55e324f5e2fb0aeaccd5e4c4cd6bd4",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__teams_update_put_away_received_goods.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/teams_update_put_away_received_goods_agent.py",

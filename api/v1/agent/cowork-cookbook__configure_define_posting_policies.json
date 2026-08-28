@@ -31,7 +31,7 @@
   "size_kb": 10.5,
   "sha256": "8f8f066b5f619cc0e2ad6f6e0cf8a848993419c14ad01fadac3d00ce144a003e",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_define_posting_policies.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_define_posting_policies_agent.py",

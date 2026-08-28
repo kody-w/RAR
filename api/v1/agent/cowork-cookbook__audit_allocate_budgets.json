@@ -31,7 +31,7 @@
   "size_kb": 10.3,
   "sha256": "cd980aa8395eeaac8259b7ed8a8ae4b638454fd16612909db1ae561d286a42d1",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__audit_allocate_budgets.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/audit_allocate_budgets_agent.py",

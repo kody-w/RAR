@@ -31,7 +31,7 @@
   "size_kb": 10.4,
   "sha256": "6911e7fa66385d52f158067d7f94433ee19bf0ed1ecfaa4f7a3ba3f449ad4299",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__bulk_update_reclaim_database_storage.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/bulk_update_reclaim_database_storage_agent.py",

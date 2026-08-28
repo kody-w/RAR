@@ -31,7 +31,7 @@
   "size_kb": 10.8,
   "sha256": "599719c18d8b65f1f19e0a840151ddd38e5b6fd0368cfd1a7f8e8d648d5a0df7",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_manage_the_recurring_synchronization_of_data.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data_agent.py",

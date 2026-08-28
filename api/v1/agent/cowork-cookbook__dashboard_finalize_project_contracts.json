@@ -31,7 +31,7 @@
   "size_kb": 10.4,
   "sha256": "9c3d0b8fb35c7163a8b3e00373e28ab61fa3f05a8918d57d2e92292e9df9b1c2",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__dashboard_finalize_project_contracts.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/dashboard_finalize_project_contracts_agent.py",

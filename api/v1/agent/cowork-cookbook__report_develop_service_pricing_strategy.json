@@ -31,7 +31,7 @@
   "size_kb": 10.2,
   "sha256": "11d563262cb110058c4d0d8169b3d7d500bc1ea84154cccf587f4799b7606611",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__report_develop_service_pricing_strategy.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/report_develop_service_pricing_strategy_agent.py",

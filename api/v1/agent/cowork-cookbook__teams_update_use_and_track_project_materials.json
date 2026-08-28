@@ -31,7 +31,7 @@
   "size_kb": 10.5,
   "sha256": "919aabad142d45a5017a9c872840e0170e3f23f88df1686f6f6786348c497fe2",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-27T22:39:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__teams_update_use_and_track_project_materials.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/teams_update_use_and_track_project_materials_agent.py",
