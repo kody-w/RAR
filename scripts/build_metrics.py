@@ -45,6 +45,7 @@ VOTES = ROOT / "state" / "votes.json"
 USER_REVIEWS = ROOT / "state" / "reviews.json"
 OUT = ROOT / "state" / "metrics.json"
 HISTORY = ROOT / "state" / "metrics_history.json"
+ANNOTATIONS = ROOT / "state" / "metrics_annotations.json"
 
 OWNER = "kody-w"
 REPO = "RAR"
@@ -539,6 +540,9 @@ def main():
                      "avg_rating": review_totals["avg_rating"], "distribution": review_totals["distribution"]},
             "note": "Human reviews only, from the Issue pipeline. Automated reviews were retired 2026-08-18.",
         },
+        "annotations": sorted(
+            [a for a in load_json(ANNOTATIONS, []) if isinstance(a, dict) and a.get("date") and a.get("note")],
+            key=lambda a: a["date"]),
         "leaderboards": build_leaderboards(agents),
         "agent_metrics": build_agent_metrics(agents),
         "sources": [
@@ -548,6 +552,7 @@ def main():
             {"name": "registry.json", "metric": "agents, publishers, categories", "url": f"https://{OWNER}.github.io/{REPO}/registry.json"},
             {"name": "state/reviews.json", "metric": "user reviews and ratings", "url": f"https://{OWNER}.github.io/{REPO}/state/reviews.json"},
             {"name": "state/votes.json", "metric": "upvotes (RAR tracks upvotes only)", "url": f"https://{OWNER}.github.io/{REPO}/state/votes.json"},
+            {"name": "state/metrics_annotations.json", "metric": "dated methodology notes explaining step-changes in these numbers", "url": f"https://{OWNER}.github.io/{REPO}/state/metrics_annotations.json"},
         ],
     }
 

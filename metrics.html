@@ -184,6 +184,7 @@ footer { border-top: 1px solid var(--border); margin-top: 46px; padding-top: 20p
         <span><i style="background:var(--purple)"></i>Page views</span>
         <span><i style="background:var(--green)"></i>CDN hits</span>
       </div>
+      <div id="annotations"></div>
     </div>
   </div>
 
@@ -358,6 +359,7 @@ function render() {
   renderKPIs();
   $('board-hint').textContent = `ranked across ${num(t.agents)} single-file agents`;
   renderChart();
+  renderAnnotations();
   renderBoards();
   renderPublishers();
   renderBars('cat-bars', (M.leaderboards.categories || []).slice(0, 12).map(c => ({ label: c.name.replace(/_/g,' '), value: c.agents, extra: `${c.reviews} reviews` })));
@@ -433,6 +435,14 @@ const BOARDS = [
   { id: 'largest', label: 'Biggest', metric: 'lines', unit: 'lines' }
 ];
 let activeBoard = 'most_downloaded';
+
+function renderAnnotations() {
+  const el = $('annotations');
+  const rows = M.annotations || [];
+  if (!rows.length) { el.innerHTML = ''; return; }
+  el.innerHTML = rows.map(a =>
+    `<div class="hint" style="margin-top:8px">⚑ <strong>${a.date}</strong> — ${a.note}</div>`).join('');
+}
 
 function renderBoards() {
   $('tabs').innerHTML = BOARDS.map(b =>

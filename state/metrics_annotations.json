@@ -1,0 +1,7 @@
+[
+  {
+    "date": "2026-08-27",
+    "id": "feeds-over-api-doctrine",
+    "note": "Feeds-over-API doctrine declared (rapp-1 anchor): clients should poll GitHub Atom feeds and fetch content only on a tick. Clients are still on API/CDN polling today; when they cut over, expect CDN hits and page views to step DOWN — after cutover a CDN hit ≈ a real content pull, not a timer firing."
+  }
+]
