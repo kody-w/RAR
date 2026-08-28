@@ -376,7 +376,7 @@ def test_runner_awaits_async_agent_perform():
         [
             sys.executable,
             str(directory / "scripts" / "run_agent.py"),
-            json.dumps({"action": "scaffold"}),
+            json.dumps({"action": "not-a-real-action"}),
         ],
         cwd=directory,
         capture_output=True,
@@ -385,7 +385,7 @@ def test_runner_awaits_async_agent_perform():
     )
     assert process.returncode == 0, process.stderr
     assert "coroutine" not in process.stderr.lower()
-    assert process.stdout.strip()
+    assert "Unknown action" in process.stdout
 
 
 def test_starter_injects_checksum_pinned_platform_installers():
