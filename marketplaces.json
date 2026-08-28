@@ -1,0 +1,47 @@
+{
+  "schema": "rapp-marketplaces/1.0",
+  "description": "Ratified rapp@x marketplace identities governed by RAR Constitution Article XXV.",
+  "constitutional_article": "https://github.com/kody-w/RAR/blob/main/CONSTITUTION.md#article-xxv--the-rappx-marketplace-identity",
+  "marketplaces": [
+    {
+      "identity": "rapp@brainstem",
+      "plugin": "rapp",
+      "marketplace": "brainstem",
+      "version": "1.0.0",
+      "repository": "https://github.com/kody-w/rapp-installer",
+      "manifest": "https://raw.githubusercontent.com/kody-w/rapp-installer/main/.claude-plugin/marketplace.json",
+      "purpose": "Install and verify a local RAPP Brainstem, then register and install RAR.",
+      "clients": [
+        "Microsoft Scout",
+        "GitHub Copilot CLI",
+        "Claude Code"
+      ],
+      "commands": {
+        "copilot_marketplace_add": "copilot plugin marketplace add kody-w/rapp-installer",
+        "copilot_install": "copilot plugin install rapp@brainstem",
+        "claude_marketplace_add": "claude plugin marketplace add kody-w/rapp-installer",
+        "claude_install": "claude plugin install rapp@brainstem"
+      }
+    },
+    {
+      "identity": "rapp@rar",
+      "plugin": "rapp",
+      "marketplace": "rar",
+      "version": "1.3.0",
+      "repository": "https://github.com/kody-w/RAR",
+      "manifest": "https://raw.githubusercontent.com/kody-w/RAR/main/.claude-plugin/marketplace.json",
+      "purpose": "Operate RAR, reversible skills, Brainstem bootstrap, manual exports, and external-AI collaboration callbacks.",
+      "clients": [
+        "Microsoft Scout",
+        "GitHub Copilot CLI",
+        "Claude Code"
+      ],
+      "commands": {
+        "copilot_marketplace_add": "copilot plugin marketplace add kody-w/RAR",
+        "copilot_install": "copilot plugin install rapp@rar",
+        "claude_marketplace_add": "claude plugin marketplace add kody-w/RAR",
+        "claude_install": "claude plugin install rapp@rar"
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "agent": "@aibast-agents-library/omnichannel_engagement",
+  "agent_file": "omnichannel_engagement_agent.py",
+  "agent_sha256": "8e9c11585b63da13bd5ed59343bed3e9ee9a1d32c5b34d89e4daa7087f3b3d12",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "OmnichannelEngagementAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2c_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Analyzes channel mix, journeys, and campaign attribution from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "display_name": "Omnichannel Engagement Agent",
+    "name": "@aibast-agents-library/omnichannel_engagement",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "omnichannel",
+      "engagement",
+      "journey",
+      "attribution",
+      "campaign",
+      "b2c"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "OmnichannelEngagementAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "campaign_id": {
+        "type": "string"
+      },
+      "channel": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "channel_performance",
+          "journey_analysis",
+          "engagement_optimization",
+          "campaign_attribution",
+          "unified_customer_journey",
+          "friction_resolution",
+          "channel_recommendation",
+          "proactive_engagement_plan",
+          "handoff_package"
+        ],
+        "type": "string"
+      },
+      "user_input": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

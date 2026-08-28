@@ -1,0 +1,83 @@
+{
+  "agent": "@discreetRappers/email_drafting_agent",
+  "agent_file": "email_drafting_agent.py",
+  "agent_sha256": "b068d41da7ee04fa27d8ff0b267977914aab1eae186017ad47572e2b2c6cb399",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "EmailDraftingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Drafts professional emails and sends via Microsoft Power Automate flow endpoint.",
+    "display_name": "EmailDrafting",
+    "name": "@discreetRappers/email_drafting_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "integrations",
+      "email",
+      "power-automate",
+      "microsoft"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "EmailDrafting",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "attachments": {
+        "description": "Optional. List of attachment file names or identifiers.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "bcc": {
+        "description": "Optional. List of email addresses to BCC.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "body": {
+        "description": "The full body of the email. This can include any content the caller desires.",
+        "type": "string"
+      },
+      "cc": {
+        "description": "Optional. List of email addresses to CC.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "importance": {
+        "description": "Optional. Importance level of the email.",
+        "enum": [
+          "low",
+          "normal",
+          "high"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The subject line of the email.",
+        "type": "string"
+      },
+      "to": {
+        "description": "Email address of the primary recipient.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "subject",
+      "to",
+      "body"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

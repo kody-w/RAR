@@ -1,0 +1,115 @@
+{
+  "agent": "@discreetRappers/copilot_studio_transpiler_agent",
+  "agent_file": "copilot_studio_transpiler_agent.py",
+  "agent_sha256": "acccbacba2be5acb4aa7583abb1c85aee291c5205f4d7915d6eeafc579c86934",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioTranspilerAgent",
+  "host_dependencies": [
+    "env:AZURE_TENANT_ID",
+    "env:COPILOT_STUDIO_CLIENT_ID",
+    "env:DATAVERSE_ENVIRONMENT_URL"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.",
+    "display_name": "CopilotStudioTranspiler",
+    "name": "@discreetRappers/copilot_studio_transpiler_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_TENANT_ID",
+      "COPILOT_STUDIO_CLIENT_ID",
+      "DATAVERSE_ENVIRONMENT_URL"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "pipeline",
+      "transpiler",
+      "copilot-studio",
+      "native",
+      "no-code"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "CopilotStudioTranspiler",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Transpilation action to perform",
+        "enum": [
+          "transpile",
+          "analyze",
+          "preview",
+          "validate",
+          "list_connectors",
+          "batch_transpile",
+          "package",
+          "deploy",
+          "deploy_status",
+          "configure_deployment"
+        ],
+        "type": "string"
+      },
+      "agent_file": {
+        "description": "Path to the agent Python file (optional, will search if not provided)",
+        "type": "string"
+      },
+      "agent_list": {
+        "description": "List of agent names for batch_transpile",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "agent_name": {
+        "description": "Name of the RAPP agent to transpile (e.g., 'FabrikamCaseTriageOrchestrator')",
+        "type": "string"
+      },
+      "client_id": {
+        "description": "Azure AD app registration client ID",
+        "type": "string"
+      },
+      "dataverse_alternative": {
+        "default": true,
+        "description": "Use Dataverse instead of Cosmos DB where possible",
+        "type": "boolean"
+      },
+      "environment_url": {
+        "description": "Dataverse environment URL for deployment (e.g., https://org.crm.dynamics.com)",
+        "type": "string"
+      },
+      "include_flows": {
+        "default": true,
+        "description": "Generate Power Automate flows for complex actions",
+        "type": "boolean"
+      },
+      "output_format": {
+        "default": "solution",
+        "description": "Output format - 'solution' for importable package",
+        "enum": [
+          "solution",
+          "yaml",
+          "json"
+        ],
+        "type": "string"
+      },
+      "pattern": {
+        "description": "Pattern to match agent names for batch_transpile (e.g., 'contoso')",
+        "type": "string"
+      },
+      "tenant_id": {
+        "description": "Azure AD tenant ID for deployment authentication",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

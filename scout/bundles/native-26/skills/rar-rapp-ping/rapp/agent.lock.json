@@ -1,0 +1,35 @@
+{
+  "agent": "@rapp/ping_agent",
+  "agent_file": "ping_agent.py",
+  "agent_sha256": "4761dcecf8af3893153407860dc6786ac8cd7d3654966bb57923143db885f0af",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Returns 'pong'. The smallest possible agent — useful as a smoke test that the brainstem can discover, load, and dispatch a tool call end-to-end.",
+    "display_name": "Ping",
+    "name": "@rapp/ping_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "diagnostic",
+      "smoke-test",
+      "minimal"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "Ping",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

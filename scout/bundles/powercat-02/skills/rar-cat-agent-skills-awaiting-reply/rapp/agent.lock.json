@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/awaiting_reply",
+  "agent_file": "awaiting_reply_agent.py",
+  "agent_sha256": "fbd75b3e3e375301db703b7b0f2205c47d0a33f8b137b721c7380dfac54b5193",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AwaitingReply",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Allan De Castro",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A weekday-morning Scout automation that finds emails you sent that asked for something and never got an answer, reports how many are waiting, and prepares follow-up drafts in each thread's own language that it never sends.",
+    "display_name": "Awaiting Reply",
+    "name": "@cat-agent-skills/awaiting_reply",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d269450ca78b236a",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "awaiting-reply",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#awaiting-reply",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "email",
+      "follow_up",
+      "automation",
+      "productivity",
+      "inbox",
+      "reminder",
+      "multilingual"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "AwaitingReply",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

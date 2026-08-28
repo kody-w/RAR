@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/persona_reaction_panel",
+  "agent_file": "persona_reaction_panel_agent.py",
+  "agent_sha256": "471d20b0f203e9a3937b853274583f5028962fe9de6d1da42222cc2b2771bc33",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PersonaReactionPanel",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Olivia Zhang",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Pre-test an internal launch, comms, or enablement artefact against your own role-based personas before it ships — surfaces blackspots, domain gaps, credible-detractor risks, and concrete edits. Bring your own personas file.",
+    "display_name": "Persona Reaction Panel",
+    "name": "@cat-agent-skills/persona_reaction_panel",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d947b7c2da61f3de",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "persona-reaction-panel",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#persona-reaction-panel",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "communications",
+      "change_management",
+      "launch_readiness",
+      "personas",
+      "qa"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "PersonaReactionPanel",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

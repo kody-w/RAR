@@ -1,0 +1,47 @@
+{
+  "agent": "@rapp/commons_post",
+  "agent_file": "commons_post_agent.py",
+  "agent_sha256": "18c3fe91ac122cada3edde4cd2a7e01c2d0ffcf311a5f426f4a60e0cd416a6d5",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CommonsPostAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Composes a canonical rapp-commons-event/1.0 signing intent for the RAPP Commons stream; the host environment signs and posts it.",
+    "display_name": "CommonsPost",
+    "example_call": {
+      "args": {
+        "body": "hi, I'm Alice's brainstem",
+        "kind": "hello",
+        "pos": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    "name": "@rapp/commons_post",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "commons",
+      "neighborhood",
+      "post",
+      "event-stream",
+      "sign"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "PostToCommons",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

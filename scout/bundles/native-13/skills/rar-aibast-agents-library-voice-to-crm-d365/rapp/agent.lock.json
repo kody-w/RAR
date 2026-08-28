@@ -1,0 +1,55 @@
+{
+  "agent": "@aibast-agents-library/voice_to_crm_d365",
+  "agent_file": "dynamics_365_agent.py",
+  "agent_sha256": "3a680551c0a075d834a73e2940d47ea69d7e9c6be7035f8c32864bc541c76ee9",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "VoiceToCRMD365Agent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Previews voice-driven Dynamics 365 updates pre-flight checked against a live simulated tenant, with sync status and offline fallback.",
+    "display_name": "Voice to CRM (D365)",
+    "name": "@aibast-agents-library/voice_to_crm_d365",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "voice",
+      "d365",
+      "crm",
+      "speech",
+      "entity-extraction",
+      "sync"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "VoiceToCRMD365Agent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The voice-to-CRM operation to perform",
+        "enum": [
+          "voice_capture",
+          "entity_extraction",
+          "record_update",
+          "sync_status"
+        ],
+        "type": "string"
+      },
+      "voice_id": {
+        "description": "Voice recording ID (e.g. 'VOC-001')",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

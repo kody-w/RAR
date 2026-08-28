@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/power_automate_documentation",
+  "agent_file": "power_automate_documentation_agent.py",
+  "agent_sha256": "db07d9c1a188ccc5657ca62c42bf1782d6716fd9edc11d5efd9ee5c9f9490f30",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PowerAutomateDocumentation",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Mathias Salomonsen",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turns a Power Automate solution .zip into a clean markdown reference for every flow inside it: trigger, plain-English process, connection references, and a read/write/delete table for everything it touches. Maps which flows call each other and unresolved connections automatically.",
+    "display_name": "Power Automate Documentation",
+    "name": "@cat-agent-skills/power_automate_documentation",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "4c5eb6e7dd7c2d70",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "power-automate-documentation",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#power-automate-documentation",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "power_automate",
+      "documentation",
+      "audit",
+      "governance"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "PowerAutomateDocumentation",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

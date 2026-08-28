@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/copilot_studio_knowledge_readiness",
+  "agent_file": "copilot_studio_knowledge_readiness_agent.py",
+  "agent_sha256": "2c9e627e44f3ee2fd57547d82642251701389b02ee2d6252532f8bfa9c6a15e7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioKnowledgeReadiness",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Jay Padimiti",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Assess whether an uploaded or exported document set is ready to power a Copilot Studio agent. Produces a corpus-based readiness score, prioritized cleanup backlog, chunking and metadata guidance, and a test-prompt suite, while calling out any evidence gaps that require live system review.",
+    "display_name": "Copilot Studio Knowledge Readiness",
+    "name": "@cat-agent-skills/copilot_studio_knowledge_readiness",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d4fe7450b56dfe2a",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "copilot-studio-knowledge-readiness",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-knowledge-readiness",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "copilot_studio",
+      "knowledge",
+      "rag",
+      "sharepoint",
+      "dataverse",
+      "governance",
+      "readiness",
+      "assessment"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CopilotStudioKnowledgeReadiness",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

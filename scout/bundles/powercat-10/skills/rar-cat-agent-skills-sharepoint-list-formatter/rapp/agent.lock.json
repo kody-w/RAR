@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/sharepoint_list_formatter",
+  "agent_file": "sharepoint_list_formatter_agent.py",
+  "agent_sha256": "8ce15990887997b95ee23d598dab87d7f22a644e38e5dd49d089571a201564f2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SharepointListFormatter",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Mathias Salomonsen",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turns any SharePoint list data into a clean, consistent markdown table. Dynamic columns based on list type and query, plus a one-click Open link for every row.",
+    "display_name": "SharePoint List Formatter",
+    "name": "@cat-agent-skills/sharepoint_list_formatter",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "081ee2e4c6d01a36",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "sharepoint-list-formatter",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#sharepoint-list-formatter",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "sharepoint",
+      "microsoft_365",
+      "productivity",
+      "tables",
+      "data"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "SharepointListFormatter",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "data_source": {
+        "description": "Optional. Where the evidence comes from.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The question to answer, stated as a question.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

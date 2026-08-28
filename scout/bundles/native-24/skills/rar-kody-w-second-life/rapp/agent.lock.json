@@ -1,0 +1,61 @@
+{
+  "agent": "@kody-w/second_life_agent",
+  "agent_file": "second_life_agent.py",
+  "agent_sha256": "bee60124864e6783bd6de6d039904dd3890a602008b56367bfdc83a754978ba3",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SecondLifeAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "creative",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Drives a headless Playwright browser tab into the live RAPP Commons to join as an avatar, post signed messages, read the stream, and screenshot.",
+    "display_name": "Second Life",
+    "name": "@kody-w/second_life_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "commons",
+      "avatar",
+      "virtual-world",
+      "playwright",
+      "second-life"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "SecondLife",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Default join.",
+        "enum": [
+          "join",
+          "say",
+          "read",
+          "shot",
+          "watch"
+        ],
+        "type": "string"
+      },
+      "seconds": {
+        "description": "For watch: how long to stay present.",
+        "type": "integer"
+      },
+      "text": {
+        "description": "For say: the message to post in the commons.",
+        "type": "string"
+      },
+      "url": {
+        "description": "Optional commons URL (default the live commons).",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

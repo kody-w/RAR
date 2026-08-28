@@ -1,0 +1,107 @@
+{
+  "agent": "@kody-w/github_agent_library_agent",
+  "agent_file": "github_agent_library_agent.py",
+  "agent_sha256": "7d25b2d553356cfcb2f74921552b984d8e348ab56f20984fcda831eb65336923",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "GitHubAgentLibraryManager",
+  "host_dependencies": [
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Browses, searches, and installs agents from the kody-w/AI-Agent-Templates GitHub repo into local agent storage.",
+    "display_name": "GitHubAgentLibrary",
+    "name": "@kody-w/github_agent_library_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "core",
+      "package-manager",
+      "install",
+      "discovery"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "GitHubAgentLibrary",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Action to perform: 'discover' (browse ALL 65+ available agents with no parameters needed), 'search' (find specific agents - REQUIRES search_query parameter with keyword like 'email' or 'sales'), 'install' (download and install an agent - REQUIRES agent_id from search/discover results, NEVER guess the agent_id), 'list_installed' (show installed GitHub agents - no parameters), 'update' (update an agent - REQUIRES agent_id), 'remove' (uninstall agent - REQUIRES agent_id), 'get_info' (detailed agent info - REQUIRES agent_id), 'sync_manifest' (refresh catalogue from GitHub - no parameters), 'create_group' (create a GUID-based agent group - REQUIRES agent_ids list), 'list_groups' (show all GUID-based agent groups - no parameters), 'get_group_info' (get details about a specific GUID group - REQUIRES guid parameter). CRITICAL: Before calling 'install', you MUST call 'search' or 'discover' first to get the exact agent_id.",
+        "enum": [
+          "discover",
+          "search",
+          "install",
+          "list_installed",
+          "update",
+          "remove",
+          "get_info",
+          "sync_manifest",
+          "create_group",
+          "list_groups",
+          "get_group_info"
+        ],
+        "type": "string"
+      },
+      "agent_id": {
+        "description": "REQUIRED for install/update/remove/get_info actions. The unique identifier of the agent (e.g., 'deal_progression_agent', 'email_agent'). CRITICAL: Get this EXACT value from discover or search results first. Do NOT guess or make up agent IDs - they must come from the GitHub library. If you don't have the exact agent_id from a prior search/discover, you MUST search first before attempting to install.",
+        "type": "string"
+      },
+      "agent_ids": {
+        "description": "REQUIRED for create_group action: List of agent IDs to fetch from GitHub and group together. Example: ['deal_progression_agent', 'email_agent', 'sales_forecast_agent']. These must be valid agent IDs from the kody-w/AI-Agent-Templates repository.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "category": {
+        "description": "OPTIONAL: Additional filter to narrow results by industry vertical. Only use if user specifically mentions an industry. Available industries: b2b_sales, b2c_sales, energy, federal_government, financial_services, general, healthcare, manufacturing, professional_services, retail_cpg, slg_government, software_dp",
+        "enum": [
+          "b2b_sales",
+          "b2c_sales",
+          "energy",
+          "federal_government",
+          "financial_services",
+          "general",
+          "healthcare",
+          "manufacturing",
+          "professional_services",
+          "retail_cpg",
+          "slg_government",
+          "software_dp"
+        ],
+        "type": "string"
+      },
+      "force": {
+        "description": "OPTIONAL: Set to true to reinstall an agent even if it already exists. Default is false. Use when updating/fixing an installed agent.",
+        "type": "boolean"
+      },
+      "group_name": {
+        "description": "OPTIONAL for create_group action: A friendly name for the agent group (e.g., 'Sales Team Agents'). This is stored with the GUID for reference.",
+        "type": "string"
+      },
+      "guid": {
+        "description": "REQUIRED for get_group_info action: The GUID of the agent group to retrieve information about.",
+        "type": "string"
+      },
+      "search_query": {
+        "description": "REQUIRED for search action: Keyword to search for in agent names, descriptions, and features. Examples: 'email', 'sales', 'manufacturing', 'automation'. Use broad terms for better results.",
+        "type": "string"
+      },
+      "stack_path": {
+        "description": "OPTIONAL: Only needed when installing a stack agent. Path format: 'industry_stacks/stack_name' (e.g., 'b2b_sales_stacks/deal_progression_stack'). This is provided in search results for stack agents. Leave empty for singular agents.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

@@ -1,0 +1,141 @@
+{
+  "agent": "@kody-w/rar_remote_agent",
+  "agent_file": "rar_remote_agent.py",
+  "agent_sha256": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RARRemoteAgent",
+  "host_dependencies": [
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "RAPP Core Team",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
+    "display_name": "RAR Remote Agent",
+    "name": "@kody-w/rar_remote_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "core",
+      "registry",
+      "package-manager",
+      "install",
+      "discovery",
+      "voting",
+      "community"
+    ],
+    "version": "1.8.0"
+  },
+  "runtime_name": "RARRemoteAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Action to perform. 'discover' — browse all agents (optional: category, tier filters). 'search' — find by keyword (REQUIRES query). 'get_info' — agent details (REQUIRES agent_name). 'leaderboard' — top agents by votes. 'reviews' — show reviews (REQUIRES agent_name). 'install' — download agent (REQUIRES agent_name). For type='stub' entries, resolves the bytes from the private repo declared in __source__ using your GitHub credentials. 'vote' — upvote an agent (REQUIRES agent_name; RAR tracks upvotes only). 'review' — write review (REQUIRES agent_name, rating, text). 'submit' — submit new public agent (REQUIRES code). 'submit_upstream' — federate a local agent to the upstream RAR. 'federation_status' — show federation config. 'request_access' — ask the publisher to grant you access to a gated stub (REQUIRES agent_name; optional: use_case). 'publish_private' — generate and submit a .py.stub pointing at your private agent.py (REQUIRES agent_url; optional: dry_run). 'setup_private_rar' — scaffold + git-init + create a private GitHub repo for hosting gated agents (optional: repo_name, local_path, author, push, force).",
+        "enum": [
+          "discover",
+          "search",
+          "get_info",
+          "leaderboard",
+          "reviews",
+          "install",
+          "vote",
+          "review",
+          "submit",
+          "submit_upstream",
+          "federation_status",
+          "request_access",
+          "publish_private",
+          "setup_private_rar"
+        ],
+        "type": "string"
+      },
+      "agent_name": {
+        "description": "Full @publisher/slug name. Example: '@kody-w/rar_remote_agent'. Get this from discover or search results.",
+        "type": "string"
+      },
+      "agent_url": {
+        "description": "For 'publish_private': a github.com/<owner>/<repo>/blob/<ref>/<path> URL (or matching raw.githubusercontent.com URL) pointing at your private agent.py.",
+        "type": "string"
+      },
+      "author": {
+        "description": "For 'setup_private_rar': name used in the sample agent's manifest. Default: '<login>'.",
+        "type": "string"
+      },
+      "category": {
+        "description": "Filter by category (e.g. 'core', 'pipeline', 'healthcare').",
+        "type": "string"
+      },
+      "code": {
+        "description": "Agent source code for 'submit' action.",
+        "type": "string"
+      },
+      "direction": {
+        "description": "Vote direction. Only 'up' — RAR tracks upvotes only.",
+        "enum": [
+          "up"
+        ],
+        "type": "string"
+      },
+      "dry_run": {
+        "description": "For 'publish_private': return the generated stub without submitting an issue.",
+        "type": "boolean"
+      },
+      "force": {
+        "description": "For 'setup_private_rar': overwrite local_path if it already exists. Default: false.",
+        "type": "boolean"
+      },
+      "local_path": {
+        "description": "For 'setup_private_rar': local directory to scaffold into. Default: './<repo_name>'.",
+        "type": "string"
+      },
+      "output_dir": {
+        "description": "Directory to save installed agents. Default: ./agents/",
+        "type": "string"
+      },
+      "push": {
+        "description": "For 'setup_private_rar': if true, creates the private GitHub repo via gh CLI and pushes. Default: true.",
+        "type": "boolean"
+      },
+      "query": {
+        "description": "Search keyword for 'search' action.",
+        "type": "string"
+      },
+      "rating": {
+        "description": "Star rating 1-5 for 'review' action.",
+        "type": "integer"
+      },
+      "repo_name": {
+        "description": "For 'setup_private_rar': name of the GitHub repo to create. Default: '<login>-private-rar'.",
+        "type": "string"
+      },
+      "text": {
+        "description": "Review text for 'review' action.",
+        "type": "string"
+      },
+      "tier": {
+        "description": "Filter by quality tier.",
+        "enum": [
+          "community",
+          "verified",
+          "official",
+          "experimental"
+        ],
+        "type": "string"
+      },
+      "use_case": {
+        "description": "Optional 'why' text for 'request_access' — included in the issue body the publisher sees.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.8.0"
+}

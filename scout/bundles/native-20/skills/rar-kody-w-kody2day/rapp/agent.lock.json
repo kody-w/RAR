@@ -1,0 +1,48 @@
+{
+  "agent": "@kody-w/kody2day_agent",
+  "agent_file": "kody2day_agent.py",
+  "agent_sha256": "e4dd13bc20c0f1d3c4333cdbefe6f1e09359a7fc7da5309822248d41ba3b0638",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "Kody2day",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Keep up with Kody: today's digest of what he shipped across his public GitHub, any past day, a multi-day catch-up, or a search by repo — Kody's own commits separated from the fleet of bots.",
+    "display_name": "Kody2day",
+    "example_call": {
+      "args": {
+        "action": "today"
+      }
+    },
+    "external_prereqs": [
+      "network access to kody-w.github.io (static site, no token)",
+      "impact only: the owner's private ledger at ~/.rapp/kody2day-private (local, never published)"
+    ],
+    "name": "@kody-w/kody2day_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "digest",
+      "daily",
+      "changelog",
+      "github",
+      "kody",
+      "catch-up",
+      "news"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "Kody2day",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

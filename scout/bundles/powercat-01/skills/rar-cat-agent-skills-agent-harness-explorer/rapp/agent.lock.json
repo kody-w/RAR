@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/agent_harness_explorer",
+  "agent_file": "agent_harness_explorer_agent.py",
+  "agent_sha256": "77aeeb418357389bf065c769985559925b8f7165557d4f2b63421baa21bcc4b7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AgentHarnessExplorer",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Chris Garty and Andrew Hess",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Discover, document, and monitor what the agent harness can do — Python libraries, tools, MCP servers, and runtime capabilities — with repeatable, comparable snapshots.",
+    "display_name": "Agent Harness Explorer",
+    "name": "@cat-agent-skills/agent_harness_explorer",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "61ae6c239cb9c236",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "agent-harness-explorer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#agent-harness-explorer",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "diagnostics",
+      "runtime",
+      "python",
+      "capabilities",
+      "snapshots",
+      "scripts"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "AgentHarnessExplorer",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "environment": {
+        "description": "Optional. Where it happens, and where it does not.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The symptom — what was observed, not what you think caused it.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

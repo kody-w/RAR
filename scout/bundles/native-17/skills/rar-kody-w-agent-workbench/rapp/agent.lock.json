@@ -1,0 +1,86 @@
+{
+  "agent": "@kody-w/agent_workbench",
+  "agent_file": "agent_workbench_agent.py",
+  "agent_sha256": "00b19b2e98b854333dbf7d89d74980f3e54c4f5753f31ac9039cf8f8ed30e2b4",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AgentWorkbenchAgent",
+  "host_dependencies": [
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "RAPP Core Team",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Scaffolds, validates, dry-runs, diffs, and publishes single-file RAPP agents against the registry via GitHub Issues-as-API.",
+    "display_name": "Agent Workbench",
+    "name": "@kody-w/agent_workbench",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "devtools",
+      "workbench",
+      "scaffolding",
+      "validation",
+      "testing",
+      "publishing"
+    ],
+    "version": "1.1.2"
+  },
+  "runtime_name": "AgentWorkbench",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "scaffold: generate new agent from template, validate: check agent file against Constitution, dry_run: execute perform() in sandbox, diff: compare local vs published, publish: submit to RAPP",
+        "enum": [
+          "scaffold",
+          "validate",
+          "dry_run",
+          "diff",
+          "publish"
+        ],
+        "type": "string"
+      },
+      "agent_path": {
+        "description": "Path to the agent .py file (for validate/dry_run/diff/publish)",
+        "type": "string"
+      },
+      "author": {
+        "description": "Author name",
+        "type": "string"
+      },
+      "display_name": {
+        "description": "Human-readable agent name",
+        "type": "string"
+      },
+      "dry_run_kwargs": {
+        "description": "kwargs to pass to perform() during dry_run",
+        "type": "object"
+      },
+      "publisher": {
+        "description": "Your @publisher namespace (e.g. 'kody')",
+        "type": "string"
+      },
+      "slug": {
+        "description": "Agent slug in snake_case (e.g. 'my_agent')",
+        "type": "string"
+      },
+      "template": {
+        "description": "Template to use for scaffold action",
+        "enum": [
+          "blank",
+          "api"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.2"
+}

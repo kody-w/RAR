@@ -1,0 +1,52 @@
+{
+  "agent": "@aibast-agents-library/foia_request_assistant",
+  "agent_file": "foia_request_assistant_agent.py",
+  "agent_sha256": "18fd8a77430845666b98e622f50fea1c65cff93a06ca536d7193f8d1a4917eb1",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FOIARequestAssistantAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "slg_government",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Analyzes FOIA queues and drafts responses from a live simulated Dynamics 365 tenant's records cases, with an offline demo fallback.",
+    "display_name": "FOIA Request Assistant Agent",
+    "name": "@aibast-agents-library/foia_request_assistant",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "FOIA",
+      "public-records",
+      "redaction",
+      "transparency",
+      "government"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "FOIARequestAssistantAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "enum": [
+          "request_analysis",
+          "document_search",
+          "redaction_review",
+          "response_preparation"
+        ],
+        "type": "string"
+      },
+      "request_id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

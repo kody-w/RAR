@@ -1,0 +1,77 @@
+{
+  "agent": "@kody-w/neuron_swarm",
+  "agent_file": "neuron_swarm_agent.py",
+  "agent_sha256": "911cbdf5536d55be0da3f49cf86f6b96fb4dde7eeb05fdd1ae7f67ea945e0498",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "NeuronSwarmAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Fans a task out across parallel expert 'neuron' prompts using the host brainstem's own LLM call, then reconciles them into one converged answer.",
+    "display_name": "NeuronSwarm",
+    "name": "@kody-w/neuron_swarm",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "swarm",
+      "orchestration",
+      "reasoning",
+      "multi-agent",
+      "analysis",
+      "ensemble",
+      "brainstem"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "NeuronSwarm",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "context": {
+        "description": "Optional extra background, source material, constraints, or data the neurons should ground their analysis in.",
+        "type": "string"
+      },
+      "lenses": {
+        "description": "Optional explicit list of perspectives/expert personas to use as neurons, e.g. ['security engineer','first-time user','CFO']. If omitted, the swarm auto-generates diverse lenses tailored to the task. When provided, these override the mode defaults.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "max_parallel": {
+        "description": "Max neurons queried concurrently. Default 4. Set to 1 for fully sequential (gentler on model rate limits).",
+        "type": "integer"
+      },
+      "mode": {
+        "description": "Swarm pattern, one of: analyze | design | review | decide | research | brainstorm. Picks the default set of neuron lenses and how they reason. Default: analyze.",
+        "type": "string"
+      },
+      "neurons": {
+        "description": "Swarm size = how many neuron lenses to spin up. More neurons = more rigor (and more model calls). Default 6. Sensible range 2-12. Ignored when 'lenses' is supplied.",
+        "type": "integer"
+      },
+      "output_format": {
+        "description": "Shape of the final synthesis: report (sectioned prose, default) | decision (recommendation + rationale + risks) | bullets (tight bullets) | directive (concrete action steps).",
+        "type": "string"
+      },
+      "rounds": {
+        "description": "Fan-out rounds. 1 = each neuron answers once, then reconcile. 2 = neurons also see each other's first-round takes and refine before reconciling (deeper convergence, ~2x cost). Default 1. Max 3.",
+        "type": "integer"
+      },
+      "task": {
+        "description": "The question, problem, decision, or task to swarm on. Be specific and self-contained -- include everything the swarm needs to reason about. Required.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "task"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

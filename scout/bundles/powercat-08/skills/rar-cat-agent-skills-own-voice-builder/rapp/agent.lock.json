@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/own_voice_builder",
+  "agent_file": "own_voice_builder_agent.py",
+  "agent_sha256": "c94c678de5a3bd69cf2f1f4e4b50b38cdd931bfcd23aeec345fb3263b86df1b0",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "OwnVoiceBuilder",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Marcel",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Mines your sent emails to extract your real writing voice — languages, tone modes, structure, vocabulary, taboo phrases — and generates a personal voice skill that makes every email and Teams draft sound like you.",
+    "display_name": "Own Voice Builder",
+    "name": "@cat-agent-skills/own_voice_builder",
+    "platforms": [
+      "Cowork",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "45c780ef5e1ffdad",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "own-voice-builder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#own-voice-builder",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "writing",
+      "voice",
+      "email",
+      "teams",
+      "productivity",
+      "microsoft_365"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "OwnVoiceBuilder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

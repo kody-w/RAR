@@ -1,0 +1,62 @@
+{
+  "agent": "@howardh/recon_agent",
+  "agent_file": "recon_agent.py",
+  "agent_sha256": "7c13e82c07ce373aba2729caccfeab00ae44e5c80ef46c8de34e4798361f6f06",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ReconAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Howard Hoy",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Scans any URL and produces an auto-opening HTML recon report covering tech stack, security headers, SSL, performance, and API schema.",
+    "display_name": "Recon",
+    "name": "@howardh/recon_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "recon",
+      "url",
+      "security",
+      "api",
+      "scanner",
+      "headers",
+      "ssl",
+      "tech-stack"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "Recon",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "scan = full recon; api = API schema/auth/pagination focus; security = security headers/SSL audit; compare = two URLs side-by-side; history = list past scans",
+        "enum": [
+          "scan",
+          "api",
+          "security",
+          "compare",
+          "history"
+        ],
+        "type": "string"
+      },
+      "url": {
+        "description": "The URL to scan",
+        "type": "string"
+      },
+      "url2": {
+        "description": "Second URL for compare action",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

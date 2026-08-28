@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/ai_demo_assistant",
+  "agent_file": "ai_demo_assistant_agent.py",
+  "agent_sha256": "91fdd28e1096d53816d4397debef31b39e5539d37b57a29783db543dc51482d1",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AiDemoAssistant",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Doak Moore",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turns a customer name, line of business, and personas into a ready-to-seed Microsoft 365 Copilot demo — fictional Word/PowerPoint/Excel example files plus a full delivery and provisioning plan, with optional one-click seeding to OneDrive and Teams.",
+    "display_name": "AI Demo Assistant",
+    "name": "@cat-agent-skills/ai_demo_assistant",
+    "platforms": [
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "c768346e949547d4",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "ai-demo-assistant",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#ai-demo-assistant",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "demo",
+      "copilot",
+      "microsoft_365",
+      "sales_enablement",
+      "content",
+      "productivity"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "AiDemoAssistant",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,68 @@
+{
+  "agent": "@aibast-agents-library/fs_regulatory_compliance",
+  "agent_file": "regulatory_compliance_fs_agent.py",
+  "agent_sha256": "3db36e36416a456a6669e40e96b14edd3b31b7eb53228aa97ba9f967ff10334b",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FSRegulatoryComplianceAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "financial_services",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks compliance findings and remediation from a live simulated Dynamics 365 tenant (cases and tasks), with an offline demo fallback.",
+    "display_name": "FS Regulatory Compliance Agent",
+    "name": "@aibast-agents-library/fs_regulatory_compliance",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "compliance",
+      "SOX",
+      "Dodd-Frank",
+      "BSA",
+      "AML",
+      "regulatory",
+      "financial-services",
+      "MiFID-II",
+      "trade-surveillance",
+      "best-execution",
+      "venue-ranking"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "FSRegulatoryComplianceAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "enum": [
+          "compliance_dashboard",
+          "regulation_tracker",
+          "remediation_plan",
+          "examiner_prep",
+          "trade_surveillance",
+          "reporting_issue",
+          "batch_remediation",
+          "execution_analysis",
+          "certification_tracking",
+          "compliance_summary"
+        ],
+        "type": "string"
+      },
+      "regulation": {
+        "type": "string"
+      },
+      "user_input": {
+        "description": "Optional. Exact key (e.g. TRD-10432, EXA-5503) for the real-time compliance capabilities; omit for a full summary.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

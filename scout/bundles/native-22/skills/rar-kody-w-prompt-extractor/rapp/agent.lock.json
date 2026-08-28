@@ -1,0 +1,60 @@
+{
+  "agent": "@kody-w/prompt_extractor",
+  "agent_file": "prompt_extractor_agent.py",
+  "agent_sha256": "9b03c1b6d286d219e1f19966eea18eb2ef9c980213455963226b264c038440ba",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PromptExtractorAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Extract the prompts shown on screen in a video by OCRing it frame by frame, merging scrolled and repeated views into one entry each, so prompts demoed in a screen recording do not have to be transcribed by hand.",
+    "display_name": "Prompt Extractor",
+    "name": "@kody-w/prompt_extractor",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "ocr",
+      "video",
+      "prompts",
+      "extraction",
+      "vision"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "ExtractPrompts",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "all_text": {
+        "description": "Return every text block, not just prompt-like ones",
+        "type": "boolean"
+      },
+      "fps": {
+        "description": "Frames sampled per second (default 1.0; 0.5 is faster, 2 catches quick cuts)",
+        "type": "number"
+      },
+      "min_score": {
+        "description": "Prompt-likeness threshold, default 2.0. Lower to catch more.",
+        "type": "number"
+      },
+      "save_to": {
+        "description": "Optional path to write the full markdown result",
+        "type": "string"
+      },
+      "url": {
+        "description": "Video URL or local file path",
+        "type": "string"
+      }
+    },
+    "required": [
+      "url"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

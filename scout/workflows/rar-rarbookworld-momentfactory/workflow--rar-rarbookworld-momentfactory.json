@@ -1,0 +1,38 @@
+{
+  "createdAt": "2026-04-19T22:58:15.000Z",
+  "description": "Disabled Scout workflow projected from @rarbookworld/momentfactory (0.1.2). Edit inputs or schedule before enabling.",
+  "enabled": false,
+  "id": "8adf5cafd9abd259",
+  "lastExecutedAt": null,
+  "name": "MomentFactory (converged singleton)",
+  "schedule": {
+    "days": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "hour": 9,
+    "kind": "single",
+    "minute": 0,
+    "naturalLanguage": "every weekday at 9am",
+    "time": {
+      "hour": 9,
+      "minute": 0
+    }
+  },
+  "skillNames": [
+    "rar-rarbookworld-momentfactory"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "label": "Run rar-rarbookworld-momentfactory",
+      "prompt": "Use the imported Scout skill `rar-rarbookworld-momentfactory`. It is the reversible Toasted projection of `@rarbookworld/momentfactory`.\n\nRun its checksum-verified `scripts/run_agent.py`; do not recreate or paraphrase the Python behavior. Use these starting arguments:\n\n```json\n{\n  \"source\": \"git commit hash + diff + msg\",\n  \"source_type\": \"code-commit\"\n}\n```\n\nIf a value is still a placeholder or a required input is missing, stop and report the exact missing field instead of inventing data. Return only the canonical agent result."
+    }
+  ],
+  "teamsNotify": "auto",
+  "triggerType": "schedule",
+  "updatedAt": "2026-04-19T22:58:15.000Z"
+}

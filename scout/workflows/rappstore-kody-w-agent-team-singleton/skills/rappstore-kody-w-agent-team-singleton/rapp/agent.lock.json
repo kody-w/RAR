@@ -1,0 +1,71 @@
+{
+  "agent": "@kody-w/agent-team-singleton",
+  "agent_file": "agent_team_agent.py",
+  "agent_sha256": "c950b295557f7d25471aeff87b5caac9b51cf49633d9f71108c6e80d24db947f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AgentTeamAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "@kody-w",
+    "based_on": "billwhalenmsft/agent-team-starter-kit",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "The persona-routing brain of the Agent Team Starter Kit as a single agent. Given a project goal, returns the outcome frame, persona route, paste-ready GitHub issue body, and the needs-you questions the team would surface.",
+    "display_name": "AgentTeam",
+    "example_call": {
+      "args": {
+        "action": "route",
+        "goal": "Build a Dataverse-backed intake form that routes customer feedback through Power Automate into a Copilot Studio bot, with a Power BI dashboard for the support lead."
+      }
+    },
+    "name": "@kody-w/agent_team",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rapplication",
+      "agent-team",
+      "persona-routing",
+      "outcome-first",
+      "github-issues",
+      "azure",
+      "planning"
+    ],
+    "version": "0.1.0"
+  },
+  "runtime_name": "AgentTeam",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Which slice of the plan to produce. Default: route (the full envelope).",
+        "enum": [
+          "route",
+          "frame_outcome",
+          "route_personas",
+          "draft_issue"
+        ],
+        "type": "string"
+      },
+      "constraints": {
+        "description": "Optional constraints: deadlines, budget, compliance, must-use stack, must-not-use, etc.",
+        "type": "string"
+      },
+      "domain": {
+        "description": "Optional domain hint to bias persona routing: d365, ai, power-platform, analytics, generic.",
+        "type": "string"
+      },
+      "goal": {
+        "description": "The raw project request. What does the team need to deliver?",
+        "type": "string"
+      }
+    },
+    "required": [
+      "goal"
+    ],
+    "type": "object"
+  },
+  "version": "0.1.0"
+}

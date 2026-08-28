@@ -1,0 +1,62 @@
+{
+  "agent": "@aibast-agents-library/loan_origination_assistant",
+  "agent_file": "loan_origination_assistant_agent.py",
+  "agent_sha256": "2ad6d00682c63994761dfa50167f9ad6457547ee7ac1b624d112f4391012513f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "LoanOriginationAssistantAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "financial_services",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Reviews loan pipelines from a live simulated Dynamics 365 tenant (opportunities as applications), with credit demos and an offline fallback.",
+    "display_name": "Loan Origination Assistant Agent",
+    "name": "@aibast-agents-library/loan_origination_assistant",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "loan",
+      "origination",
+      "credit",
+      "underwriting",
+      "mortgage",
+      "financial-services"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "LoanOriginationAssistantAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "application_id": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "application_review",
+          "credit_analysis",
+          "document_verification",
+          "decision_recommendation",
+          "application_intake",
+          "eligibility_assessment",
+          "credit_property",
+          "condition_tracking",
+          "loan_summary"
+        ],
+        "type": "string"
+      },
+      "user_input": {
+        "description": "Optional free text for the newer spec operations; may name a record key (e.g. APP-40021) or borrower. Omit for a summary view.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

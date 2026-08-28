@@ -1,0 +1,297 @@
+{
+  "agent": "@rapp/rapp",
+  "agent_file": "rapp_agent.py",
+  "agent_sha256": "137f52017fe47f6263fe54b15baa5cdd65d86f664debbe4e26cbbd835f4abedb",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Navigates the whole RAPP estate — identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search — and serves the spec map.",
+    "display_name": "RappAgent",
+    "name": "@rapp/rapp",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rapp",
+      "ecosystem",
+      "estate",
+      "cubby",
+      "neighborhood",
+      "egg",
+      "super-rar",
+      "door",
+      "spec",
+      "universal"
+    ],
+    "version": "1.0.7"
+  },
+  "runtime_name": "RappAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "what to do (action=spec for the full map)",
+        "enum": [
+          "spec",
+          "help",
+          "protocol",
+          "ecosystem",
+          "find",
+          "refresh",
+          "whoami",
+          "estate",
+          "door",
+          "cubby_new",
+          "cubby_list",
+          "cubby_show",
+          "cubby_collect",
+          "cubby_egg",
+          "cubby_import",
+          "cubby_fork",
+          "twin",
+          "twin_from_cubby",
+          "summon",
+          "super_rar",
+          "mount",
+          "join",
+          "browse",
+          "stash",
+          "hatch",
+          "load",
+          "unload",
+          "sync",
+          "branch",
+          "invite",
+          "qr",
+          "enter",
+          "show_and_tell",
+          "install",
+          "route",
+          "mint",
+          "scaffold",
+          "plant",
+          "batcave",
+          "memory",
+          "bond",
+          "lineage",
+          "beacon",
+          "sniff",
+          "mmr",
+          "verify",
+          "assist"
+        ],
+        "type": "string"
+      },
+      "confirm": {
+        "description": "invite: actually run it (default dry-run)",
+        "type": "boolean"
+      },
+      "context": {
+        "description": "bond: a one-line note for the ledger entry",
+        "type": "string"
+      },
+      "cubby": {
+        "description": "cubby/neighborhood/twin: a cubby slug or handle (stash: cubby=<slug> → an owned sub-cubby)",
+        "type": "string"
+      },
+      "display_name": {
+        "description": "plant: human-readable door name",
+        "type": "string"
+      },
+      "egg": {
+        "description": "cubby_fork: pack a self-backup .egg into the new cubby (default true)",
+        "type": "boolean"
+      },
+      "egg_sha256": {
+        "description": "bond: sha256 of the egg involved (optional)",
+        "type": "string"
+      },
+      "estate_url": {
+        "description": "beacon: the operator's public estate URL",
+        "type": "string"
+      },
+      "event": {
+        "description": "bond: lifecycle event kind (birth|bond|hatch|graft|launch|adoption|rhythm)",
+        "type": "string"
+      },
+      "force": {
+        "description": "mint: overwrite an existing rappid (mint-once is the default)",
+        "type": "boolean"
+      },
+      "from": {
+        "description": "cubby_fork/twin: content set — 'non-kernel-agents' | 'brainstem' | 'cubby:<slug>'",
+        "type": "string"
+      },
+      "git_invisible": {
+        "description": "install: register in .git/info/exclude (default false)",
+        "type": "boolean"
+      },
+      "github_login": {
+        "description": "invite: collaborator to add",
+        "type": "string"
+      },
+      "goal": {
+        "description": "assist: alias for problem",
+        "type": "string"
+      },
+      "indexable": {
+        "description": "beacon: list this estate in public discovery (default true)",
+        "type": "boolean"
+      },
+      "key": {
+        "description": "memory: the memory key",
+        "type": "string"
+      },
+      "kind": {
+        "description": "mint/plant: door kind (default operator)",
+        "type": "string"
+      },
+      "name": {
+        "description": "install: exact agent filename (e.g. @rapp/twin_agent.py)",
+        "type": "string"
+      },
+      "need": {
+        "description": "route: free-text operator need ('twin lifecycle', 'sealed channel', …)",
+        "type": "string"
+      },
+      "op": {
+        "description": "memory: read|save|recall · bond: record|list",
+        "enum": [
+          "read",
+          "save",
+          "recall",
+          "record",
+          "list"
+        ],
+        "type": "string"
+      },
+      "owner": {
+        "description": "mint/plant: GitHub owner/login",
+        "type": "string"
+      },
+      "path": {
+        "description": "stash/hatch/cubby_import/cubby_egg/cubby_fork: a file path",
+        "type": "string"
+      },
+      "paths": {
+        "description": "cubby_fork: explicit file paths to fork in",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "port": {
+        "description": "summon: preferred port (default: first free in 7081-7200)",
+        "type": "integer"
+      },
+      "private_estate_pointer": {
+        "description": "beacon: opaque pointer to the private estate",
+        "type": "string"
+      },
+      "problem": {
+        "description": "assist: the user's wish in their OWN plain words ('a private place for my family', 'remember my pills', 'set me up'); the agent translates it into a step-by-step plan + first call",
+        "type": "string"
+      },
+      "push": {
+        "description": "write actions: commit+push (default true)",
+        "type": "boolean"
+      },
+      "query": {
+        "description": "super_rar/cubby_collect: search term across your estate",
+        "type": "string"
+      },
+      "rappid": {
+        "description": "door: any rappid to resolve",
+        "type": "string"
+      },
+      "rapplication": {
+        "description": "summon: which rapplication to hatch as a tailored-UI twin (e.g. 'dataverse'); catalog in ~/.rapp/rapplications/",
+        "type": "string"
+      },
+      "repo": {
+        "description": "neighborhood door owner/repo (or set RAPP_NEIGHBORHOOD)",
+        "type": "string"
+      },
+      "seed": {
+        "description": "sniff: a seed URL serving .well-known/rapp-network.json",
+        "type": "string"
+      },
+      "slug": {
+        "description": "cubby_new/cubby_fork: local cubby slug",
+        "type": "string"
+      },
+      "soul": {
+        "description": "twin: soul.md text for the twin workspace",
+        "type": "string"
+      },
+      "source": {
+        "description": "cubby_collect: where to gather from (default all)",
+        "enum": [
+          "cubbies",
+          "brainstem",
+          "all"
+        ],
+        "type": "string"
+      },
+      "text": {
+        "description": "show_and_tell: post body",
+        "type": "string"
+      },
+      "title": {
+        "description": "show_and_tell: post title",
+        "type": "string"
+      },
+      "topic": {
+        "description": "branch: topic for the personal branch",
+        "type": "string"
+      },
+      "twin": {
+        "description": "cubby_fork: after forking, also boot a twin from the new cubby",
+        "type": "boolean"
+      },
+      "url": {
+        "description": "install: a direct raw URL to an agent file",
+        "type": "string"
+      },
+      "validate": {
+        "description": "door: HEAD/GET the identity URL to check reachability",
+        "type": "boolean"
+      },
+      "value": {
+        "description": "memory: the value to save",
+        "type": "string"
+      },
+      "verify": {
+        "description": "install/load/door: verify sha256 / reachability (default true)",
+        "type": "boolean"
+      },
+      "what": {
+        "description": "cubby_new/join/cubby_fork: one-line 'what I'm working on'",
+        "type": "string"
+      },
+      "where": {
+        "description": "super_rar: which stack (default neighborhood if mounted, else local)",
+        "enum": [
+          "local",
+          "neighborhood"
+        ],
+        "type": "string"
+      },
+      "wish": {
+        "description": "assist: alias for problem",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.7"
+}

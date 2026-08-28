@@ -1,0 +1,61 @@
+{
+  "schema": "rar-maintainer-migrations/1.0",
+  "migrations": [
+    {
+      "agent": "@kody-w/connected_solution_agent",
+      "path": "agents/@kody-w/connected_solution_agent.py",
+      "expected_sha256": "35d82fa434f6726c53bb91fc44c2b7c27e47f40e9d3f4aaa762169e4cafe439e",
+      "target_sha256": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af",
+      "replacements": [
+        {
+          "old": "\"version\": \"1.0.2\"",
+          "new": "\"version\": \"1.0.3\""
+        }
+      ],
+      "note": "Publish the existing aibast publisher-prefix behavior under a fresh patch version."
+    },
+    {
+      "agent": "@kody-w/copilot_studio_forge_agent",
+      "path": "agents/@kody-w/copilot_studio_forge_agent.py",
+      "expected_sha256": "18660d3e6dea7c6d9dc1f5324e182e4540bbed812d75d01f26d31c02eb7fac7d",
+      "target_sha256": "b74dc71864503e47340899674b0e8b9c17f4e8fc617298ed83e5f148bf87e709",
+      "replacements": [
+        {
+          "old": "\"version\": \"1.0.1\"",
+          "new": "\"version\": \"1.0.2\""
+        }
+      ],
+      "note": "Publish the existing aibast schema-prefix behavior under a fresh patch version."
+    },
+    {
+      "agent": "@rapp/learn_new",
+      "path": "agents/@rapp/learn_new_agent.py",
+      "expected_sha256": "65e84770685bea5e8ebe996416f1825aab9a824a3d4ef05db7a592dbff69c7a8",
+      "target_sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
+      "replacements": [
+        {
+          "old": "\"version\": \"3.0.0\"",
+          "new": "\"version\": \"3.0.1\""
+        }
+      ],
+      "note": "Publish the already-shipped LearnNew v3 behavior under a registry-distinct patch version."
+    },
+    {
+      "agent": "@rapter/rapp_dogg_agent",
+      "path": "agents/@rapter/rapp_dogg_agent.py",
+      "expected_sha256": "950a2053be11b6b2ff4c0abc0e7bf46709a449762f5da26d8179129f83babab5",
+      "target_sha256": "bf6bd60cb5c17a940141985ed82be8eac8112213af58fcf1fd80403b1573ff11",
+      "replacements": [
+        {
+          "old": "\"version\": \"1.0.4\"",
+          "new": "\"version\": \"1.0.5\""
+        },
+        {
+          "old": "\"display_name\": \"RAPP DOGG\"",
+          "new": "\"display_name\": \"RapterBox RAPP DOGG\""
+        }
+      ],
+      "note": "Disambiguate the RapterBox leave-behind from the canonical @rapp DOGG."
+    }
+  ]
+}

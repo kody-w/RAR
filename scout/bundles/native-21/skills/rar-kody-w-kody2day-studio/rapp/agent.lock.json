@@ -1,0 +1,54 @@
+{
+  "agent": "@kody-w/kody2day_studio_agent",
+  "agent_file": "kody2day_studio_agent.py",
+  "agent_sha256": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "Kody2dayStudio",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "creative",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Make the daily Kody2day episode: the day's digest → Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts → queue with YouTube metadata.",
+    "display_name": "Kody2day Studio",
+    "example_call": {
+      "args": {
+        "action": "run",
+        "date": "2026-08-18"
+      }
+    },
+    "external_prereqs": [
+      "git",
+      "claude CLI (signed in) — the writer",
+      "GitHub Copilot CLI (signed in) — the refute reviewer",
+      "Node.js with npx (HyperFrames renderer)",
+      "ffprobe",
+      "optional: VibeVoice venv for narration (else tts='none')"
+    ],
+    "name": "@kody-w/kody2day_studio_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "video",
+      "youtube",
+      "shorts",
+      "education",
+      "kody2day",
+      "hyperframes",
+      "creative",
+      "autonomous"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "Kody2dayStudio",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

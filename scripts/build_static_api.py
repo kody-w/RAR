@@ -28,6 +28,7 @@ Written surface (all new paths):
     api/v1/catalog.json            every agent, lean records
     api/v1/taxonomy.json           categories, publishers, tags
     api/v1/match.json              use-case → ranked agents + term index
+    api/v1/marketplaces.json       ratified rapp@x plugin identities
     api/v1/audience/business.json  curated enterprise slice
     api/v1/audience/consumer.json  curated consumer slice
     api/v1/audience/map.json       compact per-agent verdict for UI filtering
@@ -53,6 +54,7 @@ REGISTRY = REPO_ROOT / "registry.json"
 API_DIR = REPO_ROOT / "api" / "v1"
 AUDIENCE_DIR = API_DIR / "audience"
 MANIFEST = REPO_ROOT / "manifest.json"
+MARKETPLACES = REPO_ROOT / "marketplaces.json"
 
 OWNER = "kody-w"
 REPO = "RAR"
@@ -68,6 +70,7 @@ OWNED_PATHS = [
     API_DIR / "catalog.json",
     API_DIR / "taxonomy.json",
     API_DIR / "match.json",
+    API_DIR / "marketplaces.json",
     AUDIENCE_DIR / "business.json",
     AUDIENCE_DIR / "consumer.json",
     AUDIENCE_DIR / "map.json",
@@ -498,6 +501,18 @@ def main() -> int:
     if not agents:
         print("registry.json contains no agents", file=sys.stderr)
         return 1
+    if not MARKETPLACES.exists():
+        print("marketplaces.json not found", file=sys.stderr)
+        return 1
+    marketplaces_source = json.loads(
+        MARKETPLACES.read_text(encoding="utf-8")
+    )
+    if (
+        marketplaces_source.get("schema") != "rapp-marketplaces/1.0"
+        or not isinstance(marketplaces_source.get("marketplaces"), list)
+    ):
+        print("marketplaces.json has the wrong schema", file=sys.stderr)
+        return 1
 
     # Classify and shape.
     records, audience_detail = [], {}
@@ -595,6 +610,12 @@ def main() -> int:
     }
 
     match = build_match(records)
+    marketplaces = {
+        **marketplaces_source,
+        "self_url": f"{RAW_BASE}/api/v1/marketplaces.json",
+        "source_url": f"{RAW_BASE}/marketplaces.json",
+        "count": len(marketplaces_source["marketplaces"]),
+    }
 
     # ── status + badge
     status = {
@@ -619,6 +640,8 @@ def main() -> int:
              "sha8": sha8(consumer_doc)},
             {"name": "audience/map", "count": len(audience_map["map"]),
              "sha8": sha8(audience_map)},
+            {"name": "marketplaces", "count": len(marketplaces["marketplaces"]),
+             "sha8": sha8(marketplaces)},
         ],
     }
 
@@ -693,6 +716,13 @@ def main() -> int:
                 "url": f"{RAW_BASE}/api/v1/taxonomy.json",
                 "description": "Categories, publishers, quality tiers and tags with counts.",
             },
+            "marketplaces": {
+                "url": f"{RAW_BASE}/api/v1/marketplaces.json",
+                "description": (
+                    "Ratified rapp@x marketplace identities and install "
+                    "commands for Scout, Copilot CLI, and Claude Code."
+                ),
+            },
             "status": {
                 "url": f"{RAW_BASE}/api/v1/status.json",
                 "description": "Counts and per-endpoint content hashes for change detection.",
@@ -735,6 +765,7 @@ def main() -> int:
         (API_DIR / "catalog.json", catalog),
         (API_DIR / "taxonomy.json", taxonomy),
         (API_DIR / "match.json", match),
+        (API_DIR / "marketplaces.json", marketplaces),
         (AUDIENCE_DIR / "business.json", business_doc),
         (AUDIENCE_DIR / "consumer.json", consumer_doc),
         (AUDIENCE_DIR / "map.json", audience_map),

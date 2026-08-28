@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/kody-w/RAR/security/advisories/new
+    about: Report vulnerabilities privately. Never include secrets in a public issue.
+  - name: Questions and support
+    url: https://github.com/kody-w/RAR/discussions
+    about: Ask usage, integration, and architecture questions.

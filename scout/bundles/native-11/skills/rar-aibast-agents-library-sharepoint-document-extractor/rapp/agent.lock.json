@@ -1,0 +1,54 @@
+{
+  "agent": "@aibast-agents-library/sharepoint_document_extractor",
+  "agent_file": "extract_sharepoint_document_url_agent.py",
+  "agent_sha256": "fb734ed12acc2be467930af21e236788687c37f4ba4d1d9a08c10abe1ca7e418",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SharePointDocumentExtractorAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Extracts and searches document links from live records in a simulated Dynamics 365 tenant, with metadata seams and offline fallback.",
+    "display_name": "SharePoint Document Extractor",
+    "name": "@aibast-agents-library/sharepoint_document_extractor",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "sharepoint",
+      "documents",
+      "url-extraction",
+      "metadata",
+      "search"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "SharePointDocumentExtractorAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The SharePoint operation to perform",
+        "enum": [
+          "document_search",
+          "url_extraction",
+          "metadata_enrichment",
+          "link_validation"
+        ],
+        "type": "string"
+      },
+      "search_query": {
+        "description": "Search query for documents",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

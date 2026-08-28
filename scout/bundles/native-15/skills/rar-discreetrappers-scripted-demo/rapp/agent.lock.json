@@ -1,0 +1,63 @@
+{
+  "agent": "@discreetRappers/scripted_demo_agent",
+  "agent_file": "scripted_demo_agent.py",
+  "agent_sha256": "feb243a6c7bbd7bf0cb329b0a8c60a6f6d88949e1893f89ccaa1cf2da31a80bc",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ScriptedDemoAgent",
+  "host_dependencies": [
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Plays back scripted demo conversations from JSON files in storage, simulating agent responses for live demonstrations.",
+    "display_name": "ScriptedDemo",
+    "name": "@discreetRappers/scripted_demo_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "productivity",
+      "demos",
+      "scripted",
+      "interactive",
+      "sales"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "ScriptedDemo",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "The action to perform. Options: 'list_demos' (list available demo files), 'load_demo' (load a demo and show its structure), 'respond' (match user input and return canned response)",
+        "enum": [
+          "list_demos",
+          "load_demo",
+          "respond"
+        ],
+        "type": "string"
+      },
+      "demo_name": {
+        "description": "The name of the demo JSON file to load from Azure File Storage (without .json extension). Example: 'Bot_342_Morning_Greeting_Demo'",
+        "type": "string"
+      },
+      "user_guid": {
+        "description": "Optional user GUID for context (used in demo responses that reference user data)",
+        "type": "string"
+      },
+      "user_input": {
+        "description": "The user's message to match against the conversation flow and return the appropriate canned response",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

@@ -1,0 +1,55 @@
+{
+  "agent": "@aibast-agents-library/staff_credentialing",
+  "agent_file": "staff_credentialing_agent.py",
+  "agent_sha256": "f4e2302fd9589e02d08547a24c276c52493a853a3556a6a077ad87bcb50a701e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "StaffCredentialingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "healthcare",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks staff credentials and onboarding, joining a live simulated FHIR practitioner registry with the Dynamics 365 CRM directory; offline fallback.",
+    "display_name": "Staff Credentialing Agent",
+    "name": "@aibast-agents-library/staff_credentialing",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "credentialing",
+      "licenses",
+      "certifications",
+      "dea",
+      "compliance",
+      "healthcare"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "StaffCredentialingAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The credentialing operation to perform.",
+        "enum": [
+          "credential_status",
+          "expiration_alerts",
+          "verification_audit",
+          "onboarding_checklist"
+        ],
+        "type": "string"
+      },
+      "staff_id": {
+        "description": "Optional staff ID to filter results.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

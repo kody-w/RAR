@@ -1,0 +1,51 @@
+{
+  "agent": "@kody-w/education_shorts_agent",
+  "agent_file": "education_shorts_agent.py",
+  "agent_sha256": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "EducationShorts",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "creative",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turns a topic into an animated 9:16 educational YouTube Short: linted script, HyperFrames composition, check, MP4 — every stage a file on a chained ledger.",
+    "display_name": "Education Shorts",
+    "example_call": {
+      "args": {
+        "action": "once",
+        "slug": "sky",
+        "theme": "midnight",
+        "topic": "Why is the sky blue?"
+      }
+    },
+    "external_prereqs": [
+      "git",
+      "Node.js with npx (HyperFrames renderer, pinned per project)",
+      "optional: GitHub Copilot CLI on PATH, if you want the pack's model to write scripts"
+    ],
+    "name": "@kody-w/education_shorts_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "video",
+      "youtube-shorts",
+      "hyperframes",
+      "animation",
+      "education",
+      "creative"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "EducationShorts",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

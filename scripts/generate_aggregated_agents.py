@@ -79,6 +79,20 @@ CATEGORY_HINTS = [
     ("analysis", {"analysis", "research", "assessment", "report", "insights", "chart"}),
     ("creative", {"design", "image", "video", "brand", "creative", "visual"}),
 ]
+INDUSTRY_FIELDS = (
+    "process_tags",
+    "process_roots",
+    "recipe_type",
+    "difficulty",
+    "mutates_data",
+    "deprecated",
+    "verification_status",
+    "last_verified_on",
+    "plugin",
+    "uses_skills",
+    "recipe_category",
+    "upstream_path",
+)
 
 
 def slug_to_class(slug: str) -> str:
@@ -106,8 +120,21 @@ def content_digest(item: dict) -> str:
         ("source_slug", "name", "description", "version", "tags",
          "platforms", "author", "kind", "url")
     }
+    for key in INDUSTRY_FIELDS:
+        if key in item:
+            basis[key] = item.get(key)
     canon = json.dumps(basis, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(canon.encode("utf-8")).hexdigest()[:16]
+
+
+def quality_tier(item: dict) -> str:
+    if "verification_status" not in item:
+        return "frontier"
+    return (
+        "verified"
+        if item.get("verification_status") == "verified"
+        else "community"
+    )
 
 
 def py_lit(value) -> str:
@@ -304,12 +331,12 @@ def normalized_upstream_version(item: dict) -> str:
     return version if re.fullmatch(r"\d+\.\d+\.\d+", version) else "0.1.0"
 
 
-def generated_version(source: str) -> str | None:
+def generated_manifest(source: str) -> dict | None:
     try:
         tree = ast.parse(source)
     except SyntaxError:
         return None
-    versions = []
+    manifests = []
     for node in tree.body:
         if not isinstance(node, ast.Assign):
             continue
@@ -323,14 +350,21 @@ def generated_version(source: str) -> str | None:
             manifest = ast.literal_eval(node.value)
         except (TypeError, ValueError):
             return None
-        version = manifest.get("version") if isinstance(manifest, dict) else None
-        if not (
-            isinstance(version, str)
-            and re.fullmatch(r"\d+\.\d+\.\d+", version)
-        ):
+        if not isinstance(manifest, dict):
             return None
-        versions.append(version)
-    return versions[0] if len(versions) == 1 else None
+        manifests.append(manifest)
+    return manifests[0] if len(manifests) == 1 else None
+
+
+def generated_version(source: str) -> str | None:
+    manifest = generated_manifest(source)
+    version = manifest.get("version") if manifest else None
+    return (
+        version
+        if isinstance(version, str)
+        and re.fullmatch(r"\d+\.\d+\.\d+", version)
+        else None
+    )
 
 
 def doc_fragment(value: object) -> str:
@@ -390,6 +424,84 @@ def choose_container_version(
     return f"{major}.{minor}.{patch + 1}"
 
 
+def render_removed(manifest: dict, version: str) -> str:
+    name = str(manifest["name"])
+    slug = name.split("/", 1)[1]
+    cls = slug_to_class(slug)
+    display = str(manifest.get("display_name") or cls)
+    source = dict(manifest.get("source") or {})
+    source["upstream_removed"] = True
+    tags = list(dict.fromkeys([
+        *[str(tag) for tag in manifest.get("tags") or []],
+        "deprecated",
+        "upstream_removed",
+    ]))
+    removed_manifest = {
+        **manifest,
+        "version": version,
+        "tags": tags,
+        "quality_tier": "community",
+        "deprecated": True,
+        "source": source,
+    }
+    upstream_url = str(source.get("upstream_url") or "")
+    return f'''"""{doc_fragment(display)} — deprecated upstream pointer.
+
+The upstream catalog no longer lists this entry. RAR preserves the published
+path under Constitution Article XXIII, marks it deprecated, and refuses to
+pretend the former upstream behavior is still available.
+"""
+
+__manifest__ = {py_lit(removed_manifest)}
+
+
+try:
+    from agents.basic_agent import BasicAgent
+except ModuleNotFoundError:
+    class BasicAgent:
+        def __init__(self, name, metadata):
+            self.name = name
+            self.metadata = metadata
+
+
+class {cls}(BasicAgent):
+    """Deprecated pointer retained to preserve the permanent public URL."""
+
+    def __init__(self):
+        self.name = {py_lit(cls)}
+        self.metadata = {{
+            "name": self.name,
+            "display_name": __manifest__["display_name"],
+            "description": __manifest__["description"],
+            "parameters": {{
+                "type": "object",
+                "properties": {{
+                    "operation": {{
+                        "type": "string",
+                        "enum": ["status", "describe"],
+                    }},
+                }},
+            }},
+        }}
+        super().__init__(self.name, self.metadata)
+
+    def perform(self, **kwargs):
+        operation = str(kwargs.get("operation") or "status").strip().lower()
+        if operation not in {{"status", "describe"}}:
+            return "Error: this deprecated entry supports status or describe only."
+        return (
+            f"{{__manifest__['display_name']}} is deprecated because its "
+            "upstream catalog entry is no longer present. RAR preserved this "
+            "path instead of deleting it. Last upstream URL: "
+            + {py_lit(upstream_url)}
+        )
+
+
+if __name__ == "__main__":
+    print({cls}().perform())
+'''
+
+
 def render(
     item: dict,
     source: dict,
@@ -409,6 +521,33 @@ def render(
     digest = content_digest(item)
     spec = toast_skill(item)
     archetype = spec["archetype"]
+    tier = quality_tier(item)
+    industry_context = {
+        key: item.get(key)
+        for key in INDUSTRY_FIELDS
+        if key in item
+    }
+    tier_literal = py_lit(tier) if industry_context else '"frontier"'
+    industry_manifest = (
+        f'    "industry_context": {py_lit(industry_context)},\n'
+        if industry_context
+        else ""
+    )
+    source_details = {
+        key: source.get(key)
+        for key in (
+            "repository_url",
+            "taxonomy_url",
+            "license_url",
+            "license_note",
+        )
+        if industry_context and source.get(key)
+    }
+    source_details_manifest = (
+        f'        "details": {py_lit(source_details)},\n'
+        if source_details
+        else ""
+    )
 
     header = f'''"""
 {doc_fragment(display)} — {doc_fragment(desc)}
@@ -442,7 +581,7 @@ __manifest__ = {{
     "author": {py_lit(author)},
     "tags": {py_lit(tags)},
     "category": {py_lit(pick_category(item))},
-    "quality_tier": "frontier",
+    "quality_tier": {tier_literal},
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
     # Provenance. `content_digest` fingerprints the upstream record; when it
@@ -457,8 +596,10 @@ __manifest__ = {{
         "upstream_version": {py_lit(upstream_version)},
         "license": {py_lit(source.get('license', 'unverified'))},
         "license_verified": {py_lit(bool(source.get('license_verified')))},
+{source_details_manifest}\
         "content_digest": {py_lit(digest)},
     }},
+{industry_manifest}\
     # The platforms the upstream entry targets. First-class and queryable, not
     # buried in prose: this is what lets the registry answer "what can I launch
     # into Copilot Studio / Cowork / Scout", which is the whole reason an
@@ -508,11 +649,12 @@ def main() -> int:
     if loaded is None:
         return 1
     sources, items = loaded
+    all_items = list(items)
     if args.only:
         items = [i for i in items if i["source_id"] == args.only]
     if args.limit:
         items = items[: args.limit]
-    if not items:
+    if not items and args.limit:
         print("[gen-agents] no items matched.", file=sys.stderr)
         return 0
 
@@ -559,6 +701,62 @@ def main() -> int:
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(body, encoding="utf-8")
         written += 1
+
+    if not args.limit:
+        expected_items = items if args.only else all_items
+        expected_paths = {
+            AGENTS_DIR
+            / item["ref"].split("/", 1)[0]
+            / f"{item['ref'].split('/', 1)[1]}_agent.py"
+            for item in expected_items
+        }
+        for dest in sorted(AGENTS_DIR.glob("@*/*_agent.py")):
+            if dest in expected_paths:
+                continue
+            existing = dest.read_text(encoding="utf-8")
+            manifest = generated_manifest(existing)
+            manifest_source = (
+                manifest.get("source")
+                if isinstance(manifest, dict)
+                else None
+            )
+            if (
+                not isinstance(manifest_source, dict)
+                or manifest_source.get("aggregated") is not True
+            ):
+                continue
+            source_id = manifest_source.get("source_id")
+            if args.only and source_id != args.only:
+                continue
+            identity = str(manifest.get("name") or dest.stem)
+            file_version = generated_version(existing)
+            existing_version = latest_container_version(
+                file_version,
+                registry_versions.get(identity),
+            )
+            if existing_version is None:
+                drifted.append(identity)
+                continue
+            expected_removed = render_removed(
+                manifest,
+                existing_version,
+            )
+            if existing == expected_removed:
+                unchanged += 1
+                continue
+            major, minor, patch = (
+                int(value)
+                for value in existing_version.split(".")
+            )
+            body = render_removed(
+                manifest,
+                f"{major}.{minor}.{patch + 1}",
+            )
+            if args.check:
+                drifted.append(identity)
+                continue
+            dest.write_text(body, encoding="utf-8")
+            written += 1
 
     if args.check:
         if drifted:

@@ -1,0 +1,34 @@
+{
+  "agent": "@kody-w/rapp_x_notary_canary_agent",
+  "agent_file": "rapp_x_notary_canary_agent.py",
+  "agent_sha256": "5d34d87380925aa0f60c14e0066c8aa5e59ecd884bf19034619ebea58ad27149",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappXNotaryCanaryAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody W",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Validates the Issues-backed RAR notarization lifecycle.",
+    "display_name": "RAPP X Notary Canary",
+    "name": "@kody-w/rapp_x_notary_canary_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "canary",
+      "notary",
+      "rapp_x"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "RappXNotaryCanaryAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

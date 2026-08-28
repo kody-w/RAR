@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/clt_hr_assistant",
+  "agent_file": "clt_hr_assistant_agent.py",
+  "agent_sha256": "c3a3b868ca1ca03b82006c23c3c8829fb083d1e64b9dbaa6d054300752a39688",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CltHrAssistant",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Michael Ferro Pereira",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Assistente de legislação trabalhista brasileira (CLT) para equipes de RH e Departamento Pessoal. Responde dúvidas sobre férias, 13º salário, aviso prévio, jornada e tipos de rescisão, e calcula verbas rescisórias com memória de cálculo completa usando as tabelas oficiais vigentes de 2026 (salário mínimo, INSS e IRRF, incluindo a Lei 15.270/2025).",
+    "display_name": "Assistente CLT para RH",
+    "name": "@cat-agent-skills/clt_hr_assistant",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "b57e7dd7cdb6e7f3",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "clt-hr-assistant",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#clt-hr-assistant",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "rh",
+      "folha",
+      "clt",
+      "brasil",
+      "trabalhista",
+      "rescisao",
+      "inss",
+      "irrf"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "CltHrAssistant",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to apply this capability to.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

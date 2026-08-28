@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/next_best_action",
+  "agent_file": "next_best_action_agent.py",
+  "agent_sha256": "b1bca4d4801b40f637da7729f310367c179085a5d1638de4101e77988835ab60",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "NextBestActionAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Recommends next actions for live deals from a simulated Dynamics 365 tenant, matched by CRM stage, with an embedded offline demo fallback.",
+    "display_name": "Next Best Action",
+    "name": "@aibast-agents-library/next_best_action",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "next-best-action",
+      "deal-progression",
+      "recommendations"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "NextBestActionAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The analysis to perform",
+        "enum": [
+          "recommend_actions",
+          "action_sequence",
+          "impact_forecast",
+          "rep_assignments"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

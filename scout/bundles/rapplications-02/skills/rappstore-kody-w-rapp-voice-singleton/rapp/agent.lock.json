@@ -1,0 +1,58 @@
+{
+  "agent": "@kody-w/rapp-voice-singleton",
+  "agent_file": "rapp_voice_agent.py",
+  "agent_sha256": "cc241dc84953742d1e6925db17f4b20065573687c7d4b71e53699a3c0df2618c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappVoiceAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "@kody-w",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Local hold-to-talk dictation. whisper.cpp on-device, filler stripping, app-aware formatting, weighted personal dictionary.",
+    "name": "rapp_voice",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "dictation",
+      "speech",
+      "whisper",
+      "local-first",
+      "privacy"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "RappVoice",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do. Default doctor.",
+        "enum": [
+          "doctor",
+          "dictionary",
+          "add_term",
+          "stats",
+          "process"
+        ],
+        "type": "string"
+      },
+      "app": {
+        "description": "Frontmost app to format for; terminals and editors get unformatted text.",
+        "type": "string"
+      },
+      "term": {
+        "description": "Vocabulary entry for add_term. Either a bare term, or 'heard text => Canonical Term'.",
+        "type": "string"
+      },
+      "text": {
+        "description": "Text to run through post-processing.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

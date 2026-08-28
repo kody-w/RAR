@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/content_quality_auditor",
+  "agent_file": "content_quality_auditor_agent.py",
+  "agent_sha256": "884464387bc3f9da6f84ffad05a6432081cc32e356efba67a74c2d4a5ed0ed99",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ContentQualityAuditor",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Simon Owen",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Score documents, pages, posts, or artefact libraries against a configurable quality rubric and recommend fixes.",
+    "display_name": "Content Quality Auditor",
+    "name": "@cat-agent-skills/content_quality_auditor",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "b2eca5049c1ef246",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "content-quality-auditor",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#content-quality-auditor",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "content",
+      "quality",
+      "audit",
+      "documents",
+      "productivity",
+      "governance"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "ContentQualityAuditor",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

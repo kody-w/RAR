@@ -1,0 +1,50 @@
+{
+  "agent": "@rapp/pii-scout",
+  "agent_file": "pii_scout_agent.py",
+  "agent_sha256": "fcdbbcc12a04f5f7aebc69d619895c2edf7872354ac03821c0665b7818683513",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PiiScoutAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "example_call": {
+      "args": {
+        "path": ".",
+        "terms": "acme,globex"
+      },
+      "note": "Scan the current folder for secrets, forbidden files and two names."
+    },
+    "name": "@rapp/pii-scout",
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "security",
+      "publishing",
+      "gate",
+      "local-first",
+      "singleton"
+    ],
+    "tier": "core",
+    "trust": "community",
+    "version": "1.0.0"
+  },
+  "runtime_name": "PiiScout",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "max_findings": {
+        "description": "Cap the findings returned. Default 100.",
+        "type": "integer"
+      },
+      "path": {
+        "description": "Folder to scan. Defaults to the current directory.",
+        "type": "string"
+      },
+      "terms": {
+        "description": "Comma-separated names that must not appear (customers, internal codenames, your own handle).",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

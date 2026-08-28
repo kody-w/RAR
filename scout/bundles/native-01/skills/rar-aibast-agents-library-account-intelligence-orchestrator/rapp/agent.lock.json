@@ -1,0 +1,58 @@
+{
+  "agent": "@aibast-agents-library/account_intelligence_orchestrator_agent",
+  "agent_file": "account_intelligence_orchestrator_agent.py",
+  "agent_sha256": "d1ea6994c730d10e73f1687afe32c41b0ca8f233d19fc692ea572fda18bc2d1b",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AccountIntelligenceOrchestrator",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Simulates a multi-agent pipeline for account intelligence briefings, with stage sequencing and status reports over built-in demo data.",
+    "display_name": "Account Intelligence Orchestrator",
+    "name": "@aibast-agents-library/account_intelligence_orchestrator_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "orchestration",
+      "pipeline",
+      "account-intelligence"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "AccountIntelligenceOrchestrator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The orchestration operation to perform",
+        "enum": [
+          "orchestrate_briefing",
+          "run_pipeline",
+          "check_status",
+          "generate_report"
+        ],
+        "type": "string"
+      },
+      "pipeline": {
+        "description": "Pipeline key (full_briefing, quick_snapshot, competitive_deep_dive)",
+        "type": "string"
+      },
+      "run_id": {
+        "description": "Orchestration run ID for status checks",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

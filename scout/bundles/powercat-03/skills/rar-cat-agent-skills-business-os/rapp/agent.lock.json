@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/business_os",
+  "agent_file": "business_os_agent.py",
+  "agent_sha256": "b455d3229e78336c3772968e71167a3aa49c2a131e16710432b069cef3bf77aa",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BusinessOs",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Matthew James Davis",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A practical operating system for Copilot Studio that gives agents a consistent way to clarify outcomes, choose the right approach, solve problems, make decisions, plan projects, improve processes, handle incidents, and turn repeatable work into reusable skills. Unlike a standard Copilot experience that relies mainly on the prompt and available context, Business OS adds a structured way of working…",
+    "display_name": "Business OS",
+    "name": "@cat-agent-skills/business_os",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "0f102cac2f8ea262",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "business-os",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#business-os",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "business",
+      "decision_making",
+      "problem_solving",
+      "project_planning",
+      "process_improvement",
+      "governance",
+      "skill_generation"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "BusinessOs",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

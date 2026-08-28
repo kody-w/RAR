@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/booth_loop_video",
+  "agent_file": "booth_loop_video_agent.py",
+  "agent_sha256": "a57ed23652a00cd4a470cd1e4b9ed2235169a024082d805be21ebc268a01cc6c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BoothLoopVideo",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Al Macey",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generate a silent, looping 1920x1080 MP4 for a conference booth, kiosk, or lobby screen — rendered frame-by-frame in Python (Pillow + ffmpeg), with previews before the full render.",
+    "display_name": "Booth Loop Video",
+    "name": "@cat-agent-skills/booth_loop_video",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "4be125c262ad5707",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "booth-loop-video",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#booth-loop-video",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "video",
+      "animation",
+      "python",
+      "marketing",
+      "events",
+      "design",
+      "ffmpeg"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "BoothLoopVideo",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "constraints": {
+        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being designed.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

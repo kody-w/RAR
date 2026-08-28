@@ -1,0 +1,64 @@
+{
+  "agent": "@rapp/json-doctor",
+  "agent_file": "json_doctor_agent.py",
+  "agent_sha256": "e532be574326b108ede0dbbd7d3c012cf275c9f2aee51793864c45546938f20e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "JsonDoctorAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "example_call": {
+      "args": {
+        "action": "inspect",
+        "path": "data.json"
+      },
+      "note": "Infer the shape of a JSON file, with per-field coverage."
+    },
+    "name": "@rapp/json-doctor",
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "data",
+      "json",
+      "schema",
+      "diff",
+      "local-first",
+      "singleton"
+    ],
+    "tier": "core",
+    "trust": "community",
+    "version": "1.0.0"
+  },
+  "runtime_name": "JsonDoctor",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do.",
+        "enum": [
+          "inspect",
+          "validate",
+          "diff",
+          "query"
+        ],
+        "type": "string"
+      },
+      "key": {
+        "description": "Dotted path for action=query, e.g. users.0.name",
+        "type": "string"
+      },
+      "other": {
+        "description": "Second file, for action=diff.",
+        "type": "string"
+      },
+      "path": {
+        "description": "Path to the JSON/JSONL file.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action",
+      "path"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,95 @@
+{
+  "agent": "@rapp/learn_new",
+  "agent_file": "learn_new_agent.py",
+  "agent_sha256": "ee12a37ef550c9ffb1097334da29ebcb4dcaeeac5b3f8b5dbab366e5178eab71",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "LearnNewAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
+    "display_name": "LearnNew",
+    "example_call": {
+      "args": {
+        "action": "create",
+        "description": "An agent that summarizes web pages by URL"
+      }
+    },
+    "name": "@rapp/learn_new",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meta",
+      "generator",
+      "scaffolding",
+      "learn",
+      "swarm"
+    ],
+    "version": "2.1.1"
+  },
+  "runtime_name": "LearnNew",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Action to perform.",
+        "enum": [
+          "create",
+          "swarm",
+          "list",
+          "delete",
+          "preview",
+          "submit"
+        ],
+        "type": "string"
+      },
+      "agents_in_swarm": {
+        "description": "For swarm: comma-separated sub-agent roles (e.g. 'researcher,writer,editor').",
+        "type": "string"
+      },
+      "category": {
+        "description": "Agent category for the registry.",
+        "enum": [
+          "general",
+          "productivity",
+          "sales",
+          "support",
+          "data",
+          "automation",
+          "integrations",
+          "devtools",
+          "pipeline"
+        ],
+        "type": "string"
+      },
+      "description": {
+        "description": "Natural language description of what the new agent should do.",
+        "type": "string"
+      },
+      "name": {
+        "description": "Name for the new agent (optional, will be generated from description).",
+        "type": "string"
+      },
+      "namespace": {
+        "description": "RAR namespace for submission (e.g. @myname). Defaults to @rapp.",
+        "type": "string"
+      },
+      "query": {
+        "description": "Natural language query that may contain the agent description.",
+        "type": "string"
+      },
+      "requires_env": {
+        "description": "Comma-separated env vars the agent needs (e.g. 'API_KEY,WEBHOOK_URL').",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "2.1.1"
+}

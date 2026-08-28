@@ -1,0 +1,40 @@
+{
+  "agent": "@kody-w/transcript2prototype",
+  "agent_file": "transcript2prototype_agent.py",
+  "agent_sha256": "73d95878bc3f14510eefa8dd16707d5cc49e9c51becd7f2f4e4351197bdce939",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "Transcript2PrototypeAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "workflow",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turns a business transcript into a working prototype — demo script, injected M365 demo iframe, generated agents, twin test runs, factory export.",
+    "display_name": "Transcript2Prototype",
+    "name": "@kody-w/transcript2prototype",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rapplication",
+      "pipeline",
+      "prototype",
+      "demo",
+      "cubby",
+      "factory",
+      "twin",
+      "m365"
+    ],
+    "version": "1.0.4"
+  },
+  "runtime_name": "Transcript2Prototype",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.4"
+}

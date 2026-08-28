@@ -1,0 +1,59 @@
+{
+  "agent": "@aibast-agents-library/find_accurate_models",
+  "agent_file": "find_accurate_models_agent.py",
+  "agent_sha256": "d7f5c04d4c9662d15626ed4658095f16d645842700479c66143fb1e49e9a0e1e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FindAccurateModelsAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Compares models by accuracy, readiness, and cost, merging live catalog entries from a simulated Dynamics 365 tenant with offline fallback.",
+    "display_name": "Find Accurate Models",
+    "name": "@aibast-agents-library/find_accurate_models",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "ai",
+      "ml",
+      "model-selection",
+      "benchmarks",
+      "accuracy",
+      "deployment"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "FindAccurateModelsAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "model_id": {
+        "description": "Model ID for detailed inspection (e.g. 'MDL-001')",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The model search operation to perform",
+        "enum": [
+          "model_search",
+          "accuracy_benchmark",
+          "deployment_readiness",
+          "cost_comparison"
+        ],
+        "type": "string"
+      },
+      "task_filter": {
+        "description": "Filter models by task type",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

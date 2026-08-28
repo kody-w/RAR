@@ -1,0 +1,80 @@
+{
+  "agent": "@kody-w/wp_publish_agent",
+  "agent_file": "wp_publish_agent.py",
+  "agent_sha256": "2240c6e471f6c3c54e35e62553e9cd9af314cd520790120d23e88045120ee87a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "WordPressPublishAgent",
+  "host_dependencies": [
+    "env:WP_APP_PASSWORD",
+    "env:WP_URL",
+    "env:WP_USER"
+  ],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Publish or update a post on a self-hosted WordPress site via the REST API. Idempotent by slug, so re-running updates instead of duplicating. Credentials are read from the environment and never stored.",
+    "display_name": "WordPress Publish",
+    "name": "@kody-w/wp_publish_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "WP_URL",
+      "WP_USER",
+      "WP_APP_PASSWORD"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "wordpress",
+      "publishing",
+      "rest-api",
+      "blog",
+      "idempotent"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "WordPressPublish",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "whoami | post | update | list",
+        "type": "string"
+      },
+      "categories": {
+        "description": "Comma-separated category names",
+        "type": "string"
+      },
+      "content": {
+        "description": "Markdown or HTML body",
+        "type": "string"
+      },
+      "excerpt": {
+        "description": "Optional excerpt / summary",
+        "type": "string"
+      },
+      "slug": {
+        "description": "URL slug; derived from the title if omitted",
+        "type": "string"
+      },
+      "status": {
+        "description": "draft | publish | pending | private",
+        "type": "string"
+      },
+      "tags": {
+        "description": "Comma-separated tag names",
+        "type": "string"
+      },
+      "title": {
+        "description": "Post title",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

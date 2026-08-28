@@ -1,0 +1,52 @@
+{
+  "agent": "@aibast-agents-library/slg_grants_management",
+  "agent_file": "grants_management_agent.py",
+  "agent_sha256": "7f901350c900aa62b69b47e6e015847a8909265b1a0c1a68183c0757bddd1130",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SLGGrantsManagementAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "slg_government",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks grant compliance and budgets from a live simulated Dynamics 365 tenant's grant cases, with an offline demo fallback.",
+    "display_name": "SLG Grants Management Agent",
+    "name": "@aibast-agents-library/slg_grants_management",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "grants",
+      "budget",
+      "reporting",
+      "local-government",
+      "state-government"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "SLGGrantsManagementAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "grant_id": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "grants_portfolio",
+          "application_status",
+          "reporting_calendar",
+          "budget_tracking"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

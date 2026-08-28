@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/knowledge_corpus_curator",
+  "agent_file": "knowledge_corpus_curator_agent.py",
+  "agent_sha256": "64d1835538128e525a1d912cc3140cda56f126332bd118ed0eeef34adf18b00f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "KnowledgeCorpusCurator",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Doug Bellingeri",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Review uploaded knowledge-source files for duplication, redundancy, staleness, overlap, and potentially conflicting guidance, then produce an evidence-based curation backlog.",
+    "display_name": "Knowledge Corpus Curator",
+    "name": "@cat-agent-skills/knowledge_corpus_curator",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "44b7b1e672580b5c",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "knowledge-corpus-curator",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#knowledge-corpus-curator",
+      "upstream_version": "0.8.0"
+    },
+    "tags": [
+      "knowledge",
+      "sharepoint",
+      "governance",
+      "deduplication",
+      "documents",
+      "uploads",
+      "excel"
+    ],
+    "version": "1.8.0"
+  },
+  "runtime_name": "KnowledgeCorpusCurator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.8.0"
+}

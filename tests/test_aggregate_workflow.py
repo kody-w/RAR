@@ -65,9 +65,12 @@ def _bodies(steps: list[dict]) -> list[str]:
 BUILDERS = (
     "build_registry.py",
     "build_static_api.py",
+    "build_pokedex_api.py",
     "build_front_page.py",
     "build_federation.py",
     "crawl_sources.py",
+    "generate_aggregated_agents.py",
+    "mint_maintainer_receipts.py",
     "dream_catcher.py",
     "discussion_ratings.py",
     "fetch_download_counts.py",
@@ -281,6 +284,37 @@ def test_the_scheduled_crawl_runs_strict():
     assert any("crawl_sources.py --strict" in b for b in bodies), (
         "without --strict a 404 upstream is a warning, and the job goes green "
         "on a catalog that is quietly ageing")
+
+
+def test_aggregation_regenerates_notarizes_and_indexes_source_containers():
+    steps = _steps(AGGREGATE, "aggregate")
+    named = {step.get("name"): step for step in steps}
+    migrations = str(
+        named["Apply pinned maintainer migrations"].get("run") or ""
+    )
+    generation = str(
+        named["Regenerate aggregated RAPP containers"].get("run") or ""
+    )
+    receipts = str(named["Mint scoped maintainer receipts"].get("run") or "")
+    registry = str(named["Rebuild registry and static API"].get("run") or "")
+
+    assert "apply_maintainer_migrations.py" in migrations
+    assert "generate_aggregated_agents.py" in generation
+    assert "--namespace @cat-agent-skills" in receipts
+    assert "--namespace @cowork-cookbook" in receipts
+    assert "--agent @kody-w/connected_solution_agent" in receipts
+    assert "--agent @rapter/rapp_dogg_agent" in receipts
+    assert "build_registry.py" in registry
+    assert "check_url_stability.py --update" in registry
+    assert "build_pokedex_api.py" in registry
+    assert "build_static_api.py" in registry
+    publish = str(
+        named["Publish commit-pinned Scout projection"].get("run") or ""
+    )
+    assert "git pull --ff-only origin main" in publish
+    assert "build_scout_exports.py" in publish
+    assert "tests/test_scout_rapp_skill.py" in publish
+    assert "git add rapp_skill.md rapp_skills.md scout/" in publish
 
 
 def _dead_source(tmp_path: Path):

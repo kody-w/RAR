@@ -1,0 +1,72 @@
+{
+  "agent": "@cat-agent-skills/spend_more_time_with_friends_and_family",
+  "agent_file": "spend_more_time_with_friends_and_family_agent.py",
+  "agent_sha256": "d11659b95fb22912398412b573f58ec52b940dcff10574f772ed0a4b4be892db",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SpendMoreTimeWithFriendsAndFamily",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Adi Leibowitz",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "While you're out of office, watches a group chat and answers questions from your local knowledge docs (clearly marked AI-generated), logs anything it can't answer for later, and pings you on Teams if its setup is incomplete.",
+    "display_name": "Spend More Time With Friends & Family",
+    "name": "@cat-agent-skills/spend_more_time_with_friends_and_family",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "bd12abb4ba09a5e5",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "spend-more-time-with-friends-and-family",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#spend-more-time-with-friends-and-family",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "automation",
+      "teams",
+      "out_of_office",
+      "knowledge"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "SpendMoreTimeWithFriendsAndFamily",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

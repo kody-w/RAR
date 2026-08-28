@@ -1,0 +1,50 @@
+{
+  "agent": "@rapp/exec_brief_agent",
+  "agent_file": "exec_brief_agent.py",
+  "agent_sha256": "b43fbf2ac29f381c41c6cd7e2a247ffb7a6143c579e095c4ab2d961bf26ef45d",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ExecBrief",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "@rapp",
+    "category": "analysis",
+    "delegates_to_inlined": [
+      "@rapp/brief-scout",
+      "@rapp/brief-analyst",
+      "@rapp/brief-strategist",
+      "@rapp/brief-writer"
+    ],
+    "description": "Produces an executive brief on a topic by chaining four inlined LLM personas over Azure OpenAI, OpenAI, or a local Copilot session.",
+    "display_name": "Executive Brief",
+    "example_call": {
+      "args": {
+        "topic": "Why our org needs a unified agent sharing standard"
+      }
+    },
+    "name": "@rapp/exec_brief_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "composite",
+      "exec-brief-pipeline",
+      "singleton"
+    ],
+    "version": "1.2.2"
+  },
+  "runtime_name": "ExecBrief",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "topic": {
+        "description": "The business topic or question to brief on",
+        "type": "string"
+      }
+    },
+    "required": [
+      "topic"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.2"
+}

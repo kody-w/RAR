@@ -1,0 +1,92 @@
+{
+  "agent": "@kody-w/copilot_studio_deploy_agent",
+  "agent_file": "copilot_studio_deploy_agent.py",
+  "agent_sha256": "837ba4ee8c900514f8e5951e1a230663ba5120a8cc7a62d549391e720b21a05f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioDeployAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified).",
+    "display_name": "CopilotStudioDeploy",
+    "name": "@kody-w/copilot_studio_deploy_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "copilot-studio",
+      "deploy",
+      "dataverse",
+      "power-platform",
+      "pac",
+      "import-solution",
+      "destructive",
+      "assimilated",
+      "factory",
+      "quality-gate",
+      "synthetic-data",
+      "pipeline",
+      "mcp",
+      "new-shape",
+      "blastbox",
+      "connected-agents"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "CopilotStudioDeploy",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "rest: auth_test|inspect_env|package|plan_deploy|deploy|one_shot ; pac: scan|pipeline|analyze|normalize|package|deploy.",
+        "type": "string"
+      },
+      "confirm": {
+        "description": "Required true for the DESTRUCTIVE import/deploy step.",
+        "type": "boolean"
+      },
+      "engine": {
+        "description": "rest = REST ImportSolutionAsync (service principal); pac = pac-CLI end-to-end pipeline; factory = quality-gated agent.py -> RAPP pipeline chain (SYNTHETIC_DATA seeds, connector hygiene, verified deploy; modes check/scaffold); mcp = NEW Copilot Studio experience (BlastBox two-solution MCP shape: inline-MCP connector + new-generation cliagent parent/connected child, channel-less, publish-verified). actions generate|deploy|verify.",
+        "enum": [
+          "rest",
+          "pac",
+          "factory",
+          "mcp",
+          "help"
+        ],
+        "type": "string"
+      },
+      "environment": {
+        "description": "pac engine: target Dataverse environment URL.",
+        "type": "string"
+      },
+      "forge_dir": {
+        "description": "rest engine: directory of forge output YAMLs to package.",
+        "type": "string"
+      },
+      "input_path": {
+        "description": "pac engine: brainstem agents/ dir or blueprint.",
+        "type": "string"
+      },
+      "output_dir": {
+        "description": "Where to write packaged solution artifacts.",
+        "type": "string"
+      },
+      "package_zip": {
+        "description": "rest engine: path to a prebuilt .solution.zip.",
+        "type": "string"
+      },
+      "swarm_name": {
+        "description": "Swarm/agent set to package + deploy.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

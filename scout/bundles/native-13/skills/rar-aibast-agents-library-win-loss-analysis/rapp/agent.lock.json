@@ -1,0 +1,61 @@
+{
+  "agent": "@aibast-agents-library/win_loss_analysis",
+  "agent_file": "win_loss_analysis_agent.py",
+  "agent_sha256": "9506127641a61d589a0b1966fc7570b0b425bdc90968bc886e1eec84be143c6c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "WinLossAnalysisAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Computes win/loss stats from live closed deals in a simulated Dynamics 365 tenant, with recovery models and an embedded offline demo fallback.",
+    "display_name": "Win/Loss Analysis",
+    "name": "@aibast-agents-library/win_loss_analysis",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "win-loss",
+      "competitive-intel",
+      "revenue-recovery"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "WinLossAnalysisAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "analysis_id": {
+        "description": "Exact analysis ID for publish_findings (e.g. 'Q3-COMPETITORX')",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The analysis to perform",
+        "enum": [
+          "win_loss_overview",
+          "root_cause_analysis",
+          "counter_strategies",
+          "revenue_impact",
+          "board_presentation",
+          "action_summary",
+          "publish_findings"
+        ],
+        "type": "string"
+      },
+      "quarter": {
+        "description": "Quarter to analyze (default: Q3 current)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

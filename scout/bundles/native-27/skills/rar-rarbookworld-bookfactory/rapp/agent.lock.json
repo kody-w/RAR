@@ -1,0 +1,74 @@
+{
+  "agent": "@rarbookworld/bookfactory",
+  "agent_file": "bookfactory_agent.py",
+  "agent_sha256": "dbd9f81e249d1065bb7f86ba34e4d1f8e51ef3da51e3ca487dea0c296b9243a6",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BookFactory",
+  "host_dependencies": [
+    "env:AZURE_OPENAI_API_KEY",
+    "env:AZURE_OPENAI_DEPLOYMENT",
+    "env:AZURE_OPENAI_ENDPOINT"
+  ],
+  "manifest": {
+    "author": "rarbookworld",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Writes, edits, gates, and publishes a chapter through five inlined LLM personas over Azure OpenAI, with structured verdicts that halt on hold.",
+    "display_name": "BookFactory (converged singleton)",
+    "example_call": {
+      "args": {
+        "chapter_title": "Chapter 1",
+        "source": "raw notes..."
+      }
+    },
+    "name": "@rarbookworld/bookfactory",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_OPENAI_ENDPOINT",
+      "AZURE_OPENAI_API_KEY",
+      "AZURE_OPENAI_DEPLOYMENT"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "composite",
+      "creative-pipeline",
+      "twin-stack",
+      "singleton",
+      "rapplication"
+    ],
+    "version": "0.4.1"
+  },
+  "runtime_name": "BookFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "author": {
+        "description": "Author byline",
+        "type": "string"
+      },
+      "chapter_title": {
+        "description": "Working title",
+        "type": "string"
+      },
+      "revision_rounds": {
+        "description": "Revision passes allowed when the Reviewer scores below 4 (default 0, max 1)",
+        "type": "integer"
+      },
+      "source": {
+        "description": "Raw source material",
+        "type": "string"
+      },
+      "workspace": {
+        "description": "Base dir for run artifacts (a fresh subdir is created per run)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "source"
+    ],
+    "type": "object"
+  },
+  "version": "0.4.1"
+}

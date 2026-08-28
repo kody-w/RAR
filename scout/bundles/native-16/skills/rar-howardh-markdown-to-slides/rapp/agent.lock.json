@@ -1,0 +1,59 @@
+{
+  "agent": "@howardh/markdown_to_slides_agent",
+  "agent_file": "markdown_to_slides_agent.py",
+  "agent_sha256": "ab0a2046a0a241148fdae0bfb68ce8f4f16317e96cfe9beabb0f285aaded07b7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MarkdownToSlidesAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP Contributor",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Converts markdown documents into structured JSON slide decks for presentations or video rendering.",
+    "display_name": "MarkdownToSlides",
+    "name": "@howardh/markdown_to_slides_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "markdown",
+      "slides",
+      "presentation",
+      "converter",
+      "deck",
+      "pipeline"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "MarkdownToSlides",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "markdown": {
+        "description": "Raw markdown string to convert into slides",
+        "type": "string"
+      },
+      "style": {
+        "description": "Visual style hint for downstream renderers (default: bold)",
+        "enum": [
+          "bold",
+          "minimal",
+          "neon",
+          "warm"
+        ],
+        "type": "string"
+      },
+      "title": {
+        "description": "Override deck title (uses first H1 if not provided)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "markdown"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

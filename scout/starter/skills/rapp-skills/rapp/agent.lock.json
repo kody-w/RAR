@@ -1,0 +1,160 @@
+{
+  "agent": "@kody-w/rapp_skill_agent",
+  "agent_file": "rapp_skill_agent.py",
+  "agent_sha256": "b85aee04fcc6e47a5fb677665974f43c2807ce348c2caf8e9e4386d8d20e7d17",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappSkillAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Connects any SKILL-aware claw directly to a local or hosted RAPP Brainstem over the one /chat wire, preserves sessions, installs and proves the canonical RAPP SDK Builder, hotloads reversible RAR skills into Scout and Copilot CLI, exports verified manual-loading guides for Scout, Copilot Cowork, and Copilot Studio, installs the optional self-bootstrapping Scout callback agent, bootstraps the global Brainstem, and supplies the pinned full RAPP/1 protocol.",
+    "display_name": "RAPP Skill",
+    "name": "@kody-w/rapp_skill_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rapp",
+      "rapp-1",
+      "brainstem",
+      "skill",
+      "claw",
+      "protocol",
+      "wire",
+      "toasted"
+    ],
+    "version": "1.3.0"
+  },
+  "runtime_name": "RappSkill",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "agent": {
+        "description": "Canonical RAR identity or Scout skill name for install/remove.",
+        "type": "string"
+      },
+      "allow_install": {
+        "description": "Authorize ensure to launch the checksum-pinned global Brainstem installer when no installation exists.",
+        "type": "boolean"
+      },
+      "brainstem_secret": {
+        "description": "Optional X-Brainstem-Secret for non-loopback tiers. Never returned or logged.",
+        "type": "string"
+      },
+      "brainstem_url": {
+        "description": "Brainstem base URL. Defaults to RAPP_BRAINSTEM_URL or http://localhost:7071.",
+        "type": "string"
+      },
+      "catalog_url": {
+        "description": "RAR Scout catalog URL or local path. Defaults to the public RAR catalog.",
+        "type": "string"
+      },
+      "channel": {
+        "description": "Skill channel for list/sync, such as starter, native, powercat, cowork-cookbook, rapplications, or all.",
+        "type": "string"
+      },
+      "conversation_history": {
+        "description": "Optional live-kernel compatibility history. Strict rapp/1 servers may ignore it.",
+        "items": {
+          "properties": {
+            "content": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "role",
+            "content"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "force": {
+        "description": "Allow install_sdk to back up and replace a differing existing SDK Builder, or bootstrap_callback to replace a differing callback agent.",
+        "type": "boolean"
+      },
+      "idempotency_key": {
+        "description": "Optional rapp/1 retry key for de-duplicating a chat call.",
+        "type": "string"
+      },
+      "include_full_spec": {
+        "description": "For protocol, fetch and return the complete pinned SPEC.md after SHA-256 verification.",
+        "type": "boolean"
+      },
+      "install_sdk": {
+        "description": "For prove, install the pinned SDK if absent. Defaults to true.",
+        "type": "boolean"
+      },
+      "launcher": {
+        "description": "Optional local Brainstem launcher path for ensure.",
+        "type": "string"
+      },
+      "limit": {
+        "description": "Optional maximum number of list results.",
+        "type": "integer"
+      },
+      "operation": {
+        "description": "status=inspect Brainstem; ensure=start an existing or authorized fresh local install; chat=send work over POST /chat; install_sdk=hotload the pinned SDK Builder; bootstrap_callback=install the self-bootstrapping external-AI callback agent into a loopback Brainstem; prove=verify SDK parity and live Brainstem routing; protocol=return the RAPP/1 reference; list/install/sync/remove/verify=manage reversible RAR skills in the shared Copilot/Scout skill directory; manual_export=write a verified package and browser-readable loading guide.",
+        "enum": [
+          "status",
+          "ensure",
+          "chat",
+          "install_sdk",
+          "bootstrap_callback",
+          "prove",
+          "protocol",
+          "list",
+          "install",
+          "sync",
+          "remove",
+          "verify",
+          "manual_export"
+        ],
+        "type": "string"
+      },
+      "output_dir": {
+        "description": "Destination directory for manual_export. Defaults to ~/Downloads/RAPP-Exports/<skill-name>.",
+        "type": "string"
+      },
+      "platform": {
+        "description": "Platform to emphasize in manual_export. The HTML guide always includes all supported platforms.",
+        "enum": [
+          "all",
+          "scout",
+          "cowork",
+          "copilot-studio"
+        ],
+        "type": "string"
+      },
+      "session_id": {
+        "description": "Prior Brainstem session ID. Omit on the first turn.",
+        "type": "string"
+      },
+      "skills_dir": {
+        "description": "Shared Scout/Copilot skills directory. Defaults to ~/.copilot/skills.",
+        "type": "string"
+      },
+      "timeout_seconds": {
+        "description": "Network or launcher timeout, 1-300 seconds.",
+        "type": "integer"
+      },
+      "user_input": {
+        "description": "Plain-English request for operation=chat.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.3.0"
+}

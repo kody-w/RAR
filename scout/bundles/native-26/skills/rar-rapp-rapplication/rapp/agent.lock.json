@@ -1,0 +1,76 @@
+{
+  "agent": "@rapp/rapplication_agent",
+  "agent_file": "rapplication_agent.py",
+  "agent_sha256": "a40d2ce08abde9774ebb4d34f02577a31e15a2ef66d2064953ab08a3f39baa0b",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RapplicationAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Bundles a single-file agent (and optional service) into a publish-ready rapplication directory with manifest.json and a catalog index entry.",
+    "display_name": "Rapplication",
+    "example_call": {
+      "args": {
+        "action": "bundle",
+        "agent_path": "agents/kanban_agent.py"
+      }
+    },
+    "name": "@rapp/rapplication_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meta",
+      "build",
+      "rapplication",
+      "bundler",
+      "publish"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "Rapplication",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do with the source file.",
+        "enum": [
+          "bundle",
+          "inspect",
+          "validate"
+        ],
+        "type": "string"
+      },
+      "agent_path": {
+        "description": "Path to the *_agent.py source file. Required for all actions.",
+        "type": "string"
+      },
+      "publisher": {
+        "description": "Publisher handle for the manifest (e.g. 'acme-team'). Defaults to 'team'.",
+        "type": "string"
+      },
+      "rapp_id": {
+        "description": "Override the rapplication id (defaults to the agent filename minus '_agent.py').",
+        "type": "string"
+      },
+      "raw_url_base": {
+        "description": "Optional. Base raw-URL for the catalog index entry, e.g. 'https://raw.githubusercontent.com/acme/rapp_store/main'. The bundler appends '/<id>/<file>' to build singleton_url and service_url.",
+        "type": "string"
+      },
+      "service_path": {
+        "description": "Optional path to a paired *_service.py. Bundled alongside the agent.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action",
+      "agent_path"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

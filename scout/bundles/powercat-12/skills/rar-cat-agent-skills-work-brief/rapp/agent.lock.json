@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/work_brief",
+  "agent_file": "work_brief_agent.py",
+  "agent_sha256": "9a295dbb76bd5acabb6141ccd43ef65992dc2e63b2a0553d06d6f30fb42f24d2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "WorkBrief",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Allan De Castro",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A morning brief that reads your mail, calendar, and Teams, then tells you what you owe people before the week starts.",
+    "display_name": "Work Brief",
+    "name": "@cat-agent-skills/work_brief",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "669d0b5ee44266f3",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "work-brief",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#work-brief",
+      "upstream_version": "0.4.0"
+    },
+    "tags": [
+      "productivity",
+      "automation",
+      "teams",
+      "email",
+      "calendar",
+      "briefing",
+      "multilingual"
+    ],
+    "version": "1.4.0"
+  },
+  "runtime_name": "WorkBrief",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.4.0"
+}

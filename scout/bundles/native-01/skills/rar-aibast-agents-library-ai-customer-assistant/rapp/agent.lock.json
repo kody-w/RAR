@@ -1,0 +1,63 @@
+{
+  "agent": "@aibast-agents-library/ai_customer_assistant",
+  "agent_file": "ai_customer_assistant_agent.py",
+  "agent_sha256": "1008045bc23665d6fc31fd8bb4d4dbaf62a4f376d8d80deb916fd4431733fb9a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AICustomerAssistantAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Handles customer inquiries and escalations from a live simulated Dynamics 365 tenant (cases as tickets), with an offline demo fallback.",
+    "display_name": "AI Customer Assistant",
+    "name": "@aibast-agents-library/ai_customer_assistant",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "customer-service",
+      "support",
+      "knowledge-base",
+      "escalation",
+      "satisfaction",
+      "case-management",
+      "action-plan"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "AICustomerAssistantAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "inquiry_id": {
+        "description": "Inquiry ID (e.g. 'INQ-4001')",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The customer service operation to perform",
+        "enum": [
+          "handle_inquiry",
+          "knowledge_search",
+          "escalation_routing",
+          "satisfaction_survey",
+          "escalation_brief",
+          "escalation_action_plan",
+          "draft_customer_update",
+          "escalation_dashboard",
+          "resolution_recommendation",
+          "process_resolution",
+          "document_resolution"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

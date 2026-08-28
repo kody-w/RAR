@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/accessibility_pass",
+  "agent_file": "accessibility_pass_agent.py",
+  "agent_sha256": "78b164685399af6a913c512c893a064b71d4476f161bb1f868bf8cd03156ee76",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AccessibilityPass",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Tim Karlsson",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Check a PowerPoint deck, Word document, HTML page, or Markdown file against Microsoft's Accessibility Checker rules (missing alt text, untitled slides, headerless tables, low contrast, illogical reading order) and fix what it finds.",
+    "display_name": "Accessibility Pass",
+    "name": "@cat-agent-skills/accessibility_pass",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "183550ba28bed17f",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "accessibility-pass",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#accessibility-pass",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "accessibility",
+      "documents",
+      "presentations",
+      "powerpoint",
+      "quality",
+      "scripts"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "AccessibilityPass",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

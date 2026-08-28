@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/stalled_deal_detection",
+  "agent_file": "stalled_deal_detection_agent.py",
+  "agent_sha256": "f1252b80c13fec14bd4043a2c4365aaf46b9ebc1e2a428ecd5c82582ef8e634a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "StalledDealDetectionAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Detects stalled deals from live opportunities in a simulated Dynamics 365 tenant using real CRM dates, with an embedded offline demo fallback.",
+    "display_name": "Stalled Deal Detection",
+    "name": "@aibast-agents-library/stalled_deal_detection",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "stalled-deals",
+      "deal-progression",
+      "pipeline"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "StalledDealDetectionAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The analysis to perform",
+        "enum": [
+          "detect_stalls",
+          "root_cause_analysis",
+          "intervention_plan",
+          "stall_prevention"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

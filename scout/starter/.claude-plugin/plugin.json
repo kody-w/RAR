@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "RAPP Agent Registry",
+    "url": "https://github.com/kody-w/RAR"
+  },
+  "description": "RAR catalog, reversible Toasted skills, manual exports, and a pinned local RAPP Brainstem bootstrap for Scout and GitHub Copilot CLI.",
+  "homepage": "https://kody-w.github.io/RAR/",
+  "keywords": [
+    "rapp",
+    "rar",
+    "brainstem",
+    "scout",
+    "copilot-cli",
+    "agent-skills"
+  ],
+  "license": "MIT",
+  "name": "rapp",
+  "repository": "https://github.com/kody-w/RAR",
+  "version": "1.3.0"
+}

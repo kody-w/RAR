@@ -1,0 +1,38 @@
+{
+  "createdAt": "2026-04-19T22:58:15.000Z",
+  "description": "Disabled Scout workflow projected from @rarbookworld/bookfactory (0.4.1). Edit inputs or schedule before enabling.",
+  "enabled": false,
+  "id": "2f0ccc320c7f77bf",
+  "lastExecutedAt": null,
+  "name": "BookFactory - RAPP Test Chapter",
+  "schedule": {
+    "days": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "hour": 9,
+    "kind": "single",
+    "minute": 0,
+    "naturalLanguage": "every weekday at 9am",
+    "time": {
+      "hour": 9,
+      "minute": 0
+    }
+  },
+  "skillNames": [
+    "rar-rarbookworld-bookfactory"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "label": "Run rar-rarbookworld-bookfactory",
+      "prompt": "Use the imported Scout skill `rar-rarbookworld-bookfactory`. It is the reversible Toasted projection of `@rarbookworld/bookfactory`.\n\nRun its checksum-verified `scripts/run_agent.py`; do not recreate or paraphrase the Python behavior. Use these starting arguments:\n\n```json\n{\n  \"chapter_number\": 1,\n  \"chapter_title\": \"The Wire That Carries Agents\",\n  \"max_words\": 500,\n  \"revision_rounds\": 0,\n  \"source\": \"RAPP is a protocol language for agents. It defines canonical bytes, domain-separated content addresses, mint-once rappids, an exact eleven-key frame, one /chat wire, and deterministic eggs. A red conformance result is a finding, not something to patch around.\"\n}\n```\n\nIf a value is still a placeholder or a required input is missing, stop and report the exact missing field instead of inventing data. Return only the canonical agent result."
+    }
+  ],
+  "teamsNotify": "auto",
+  "triggerType": "schedule",
+  "updatedAt": "2026-04-19T22:58:15.000Z"
+}

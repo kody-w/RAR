@@ -1,0 +1,95 @@
+{
+  "agent": "@kody-w/copilot_studio_forge_agent",
+  "agent_file": "copilot_studio_forge_agent.py",
+  "agent_sha256": "80f80484f489a3023354e4528bc52657032f686db909fe3ffdcf99d7ae454abe",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioForgeAgent",
+  "host_dependencies": [
+    "env:AI_PROJECT_CONNECTION_STRING",
+    "env:AZURE_TENANT_ID",
+    "env:COPILOT_STUDIO_CLIENT_ID",
+    "env:DATAVERSE_ENVIRONMENT_URL"
+  ],
+  "manifest": {
+    "author": "kody-w",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines — bundles, topics, solutions, and exports.",
+    "display_name": "CopilotStudioForge",
+    "name": "@kody-w/copilot_studio_forge_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "DATAVERSE_ENVIRONMENT_URL",
+      "AZURE_TENANT_ID",
+      "COPILOT_STUDIO_CLIENT_ID",
+      "AI_PROJECT_CONNECTION_STRING"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "copilot-studio",
+      "forge",
+      "transpiler",
+      "mcs",
+      "m365",
+      "foundry",
+      "authoring",
+      "assimilated"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "CopilotStudioForge",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Engine-specific verb (e.g. forge/list/refresh/inspect/validate, wizard/generate/scan, transpile/analyze/preview).",
+        "type": "string"
+      },
+      "agent_filename": {
+        "description": "forge engine: specific agent file.",
+        "type": "string"
+      },
+      "agent_name": {
+        "description": "solution/export engine: agent to convert.",
+        "type": "string"
+      },
+      "agents_dir": {
+        "description": "topics engine: directory of agents/*.py to author topics from.",
+        "type": "string"
+      },
+      "engine": {
+        "description": "Which authoring engine: forge (swarm->CS bundle), topics (agents->topic yaml), solution (agent->full CS solution), export (agent->m365/foundry).",
+        "enum": [
+          "forge",
+          "topics",
+          "solution",
+          "export",
+          "help"
+        ],
+        "type": "string"
+      },
+      "output_dir": {
+        "description": "Where to write generated artifacts.",
+        "type": "string"
+      },
+      "platform": {
+        "description": "export engine target platform.",
+        "enum": [
+          "m365",
+          "copilot_studio",
+          "foundry"
+        ],
+        "type": "string"
+      },
+      "swarm_name": {
+        "description": "forge engine: swarm singleton name.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

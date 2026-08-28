@@ -1,0 +1,97 @@
+{
+  "agent": "@kody-w/matrix_arena_agent",
+  "agent_file": "matrix_arena_agent.py",
+  "agent_sha256": "313121fc5f72c6664069d2b016bf5f3a4566bad3f7bbebe29b411b26cf02425a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MatrixArenaAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Drives multiple headless RAPP Commons browser tabs via a local Playwright harness to sync-test host-led presence, signed actions, and succession.",
+    "display_name": "Matrix Arena",
+    "name": "@kody-w/matrix_arena_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "commons",
+      "multiplayer",
+      "testing",
+      "playwright",
+      "webrtc"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "MatrixArena",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "scenario = full host + N followers sync + succession test (default); host = open one host tab + report room id; join = join an existing room id; drive = drive one tab with an action; probe = open a tab and report its state.",
+        "enum": [
+          "scenario",
+          "host",
+          "join",
+          "drive",
+          "probe"
+        ],
+        "type": "string"
+      },
+      "block": {
+        "description": "drive: block type for voxelPlace() (e.g. 'stone'). Default 'stone'.",
+        "type": "string"
+      },
+      "drive_action": {
+        "description": "drive: the commonsAgent method to call on the tab, e.g. 'where','teleport','walk','face','goto','enter','interact','say','voxelPlace','feed','minimap','residents','fractal','timeOfDay'.",
+        "type": "string"
+      },
+      "n_followers": {
+        "description": "scenario: how many FOLLOWER tabs to join to the host's room. Default 1.",
+        "type": "integer"
+      },
+      "name": {
+        "description": "drive/probe: a label for the tab being driven/probed (e.g. 'host' or 'follower'). Cosmetic.",
+        "type": "string"
+      },
+      "room": {
+        "description": "join: the PeerJS room id (the <ID> from a host's '?host=<ID>' line) to join.",
+        "type": "string"
+      },
+      "seconds": {
+        "description": "scenario: settle/relay window in seconds (how long to let presence connect and signed events relay before asserting). Default 20.",
+        "type": "integer"
+      },
+      "steps": {
+        "description": "drive: number of steps for walk() (paired with text='forward'|'back'|'left'|'right').",
+        "type": "integer"
+      },
+      "text": {
+        "description": "drive: a string argument for the action (the message for say(); the name for enter()/goto(), e.g. 'voxel','poker'; the direction for walk(), e.g. 'forward').",
+        "type": "string"
+      },
+      "url": {
+        "description": "Optional commons URL override. Default the live Pages site.",
+        "type": "string"
+      },
+      "x": {
+        "description": "drive: x coordinate for teleport()/voxelPlace().",
+        "type": "number"
+      },
+      "y": {
+        "description": "drive: y coordinate for teleport()/voxelPlace().",
+        "type": "number"
+      },
+      "z": {
+        "description": "drive: z coordinate for teleport()/voxelPlace().",
+        "type": "number"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

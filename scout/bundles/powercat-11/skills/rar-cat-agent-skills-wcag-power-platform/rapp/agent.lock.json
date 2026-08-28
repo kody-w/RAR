@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/wcag_power_platform",
+  "agent_file": "wcag_power_platform_agent.py",
+  "agent_sha256": "64c5ea9482a1d1ada8874099c362a028318cf35ce157fe91e5642f6eebdaf1b5",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "WcagPowerPlatform",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Mark Christie",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Makes everything the agent builds or reviews conform to WCAG 2.1 AA — HTML pages, SPAs, theming, PCF controls, model-driven and canvas apps, and Power Pages.",
+    "display_name": "WCAG 2.1 for Web Apps & Power Platform",
+    "name": "@cat-agent-skills/wcag_power_platform",
+    "platforms": [
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "df1198a270713293",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "wcag-power-platform",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#wcag-power-platform",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "accessibility",
+      "wcag",
+      "a11y",
+      "power_platform",
+      "power_apps",
+      "pcf",
+      "power_pages",
+      "web"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "WcagPowerPlatform",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

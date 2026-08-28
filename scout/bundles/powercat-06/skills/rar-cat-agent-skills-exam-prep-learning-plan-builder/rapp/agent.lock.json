@@ -1,0 +1,71 @@
+{
+  "agent": "@cat-agent-skills/exam_prep_learning_plan_builder",
+  "agent_file": "exam_prep_learning_plan_builder_agent.py",
+  "agent_sha256": "35509b26742d474c7b205a420085c28a755754e18621d8599f5d4a54f0bdab35",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ExamPrepLearningPlanBuilder",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Michael Heath",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Build a personalized study plan app for an exam or certification: overview timeline, day-by-day schedule with a calendar picker, domain breakdown, one-click .ics download, and a notes tab to track confidence over time.",
+    "display_name": "Exam Prep Learning Plan Builder",
+    "name": "@cat-agent-skills/exam_prep_learning_plan_builder",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "afe330883bb69ced",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "exam-prep-learning-plan-builder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#exam-prep-learning-plan-builder",
+      "upstream_version": "2.0.1"
+    },
+    "tags": [
+      "planning",
+      "productivity",
+      "learning"
+    ],
+    "version": "3.0.1"
+  },
+  "runtime_name": "ExamPrepLearningPlanBuilder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "constraints": {
+        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being designed.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "3.0.1"
+}

@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/power_automate_desktop_assessment",
+  "agent_file": "power_automate_desktop_assessment_agent.py",
+  "agent_sha256": "a002ab6df0f13d216069dc399971ecec085e96ce854ee960de87ac043cd8435a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PowerAutomateDesktopAssessment",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Ricardo Calejo",
+    "category": "analysis",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Assess Power Automate Desktop and hybrid automation projects with evidence-based findings and prioritized remediation guidance.",
+    "display_name": "Power Automate Desktop Assessment",
+    "name": "@cat-agent-skills/power_automate_desktop_assessment",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d026e3d4a8378798",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "power-automate-desktop-assessment",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#power-automate-desktop-assessment",
+      "upstream_version": "1.1.0"
+    },
+    "tags": [
+      "power_automate",
+      "desktop_flows",
+      "automation",
+      "assessment",
+      "governance"
+    ],
+    "version": "2.1.0"
+  },
+  "runtime_name": "PowerAutomateDesktopAssessment",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.1.0"
+}

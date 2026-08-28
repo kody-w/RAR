@@ -1,0 +1,38 @@
+{
+  "createdAt": "2000-01-01T00:00:00.000Z",
+  "description": "Disabled Scout workflow projected from @wildhaven/wildhaven-ceo-singleton (0.1.0). Edit inputs or schedule before enabling.",
+  "enabled": false,
+  "id": "04a9799b681cd315",
+  "lastExecutedAt": null,
+  "name": "WildhavenCEO",
+  "schedule": {
+    "days": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "hour": 9,
+    "kind": "single",
+    "minute": 0,
+    "naturalLanguage": "every weekday at 9am",
+    "time": {
+      "hour": 9,
+      "minute": 0
+    }
+  },
+  "skillNames": [
+    "rappstore-wildhaven-wildhaven-ceo-singleton"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "label": "Run rappstore-wildhaven-wildhaven-ceo-singleton",
+      "prompt": "Use the imported Scout skill `rappstore-wildhaven-wildhaven-ceo-singleton`. It is the reversible Toasted projection of `@wildhaven/wildhaven-ceo-singleton`.\n\nRun its checksum-verified `scripts/run_agent.py`; do not recreate or paraphrase the Python behavior. Use these starting arguments:\n\n```json\n{\n  \"action\": \"ask\",\n  \"question\": \"How are the rentals doing this month?\",\n  \"workspace_context\": \"(paste your property-summary CSV + budget notes)\"\n}\n```\n\nIf a value is still a placeholder or a required input is missing, stop and report the exact missing field instead of inventing data. Return only the canonical agent result."
+    }
+  ],
+  "teamsNotify": "auto",
+  "triggerType": "schedule",
+  "updatedAt": "2000-01-01T00:00:00.000Z"
+}

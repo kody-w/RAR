@@ -1,0 +1,115 @@
+{
+  "agent": "@kody-w/factory",
+  "agent_file": "factory_agent.py",
+  "agent_sha256": "e81878cc359660ac98047c607bea3245cda5967f4725091ded356597309c2b77",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappCopilotStudioFactoryAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent",
+      "@kody-w/copilot_studio_parity_deploy"
+    ],
+    "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
+    "display_name": "RAPP to Copilot Studio Factory",
+    "example_call": {
+      "args": {
+        "action": "plan",
+        "agents": [
+          "HackerNews",
+          "Weatheragent"
+        ],
+        "display_name": "News and Weather",
+        "environment": "00000000-0000-0000-0000-000000000000",
+        "publisher_prefix": "rapp"
+      }
+    },
+    "name": "@kody-w/factory",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "copilot_studio",
+      "factory",
+      "pipeline",
+      "deployment",
+      "parity"
+    ],
+    "version": "1.0.3"
+  },
+  "runtime_name": "RappCopilotStudioFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "doctor",
+          "plan",
+          "build",
+          "extend",
+          "provision",
+          "parity",
+          "finalize",
+          "verify",
+          "release_plan",
+          "status"
+        ],
+        "type": "string"
+      },
+      "agents": {
+        "description": "Tool names, class names, filenames, or paths for the exact local agent.py files to compile.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "client_id": {
+        "description": "Optional public-client ID for published parity.",
+        "type": "string"
+      },
+      "display_name": {
+        "description": "Copilot Studio display name.",
+        "type": "string"
+      },
+      "dry_run": {
+        "description": "For action=build, generate the complete manifest, snapshots, and brief without initializing or pushing.",
+        "type": "boolean"
+      },
+      "environment": {
+        "description": "Target Power Platform environment ID or URL.",
+        "type": "string"
+      },
+      "infrastructure_manifest": {
+        "description": "Optional manifest path under run_dir.",
+        "type": "string"
+      },
+      "output_root": {
+        "description": "Optional root for a new build.",
+        "type": "string"
+      },
+      "parity_cases": {
+        "description": "Optional parity-case path under run_dir.",
+        "type": "string"
+      },
+      "publisher_prefix": {
+        "description": "Caller-selected publisher prefix.",
+        "type": "string"
+      },
+      "reuse_parity": {
+        "description": "For action=finalize, reuse a live parity run from the last 24 hours after full hash revalidation.",
+        "type": "boolean"
+      },
+      "run_dir": {
+        "description": "Existing factory run directory.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.3"
+}

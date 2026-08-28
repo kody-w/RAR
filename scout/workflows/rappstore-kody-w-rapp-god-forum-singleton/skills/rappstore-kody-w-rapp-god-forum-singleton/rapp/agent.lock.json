@@ -1,0 +1,72 @@
+{
+  "agent": "@kody-w/rapp_god_forum_singleton",
+  "agent_file": "forum_agent.py",
+  "agent_sha256": "b5a98826f4698b0082dc1c5164af0ed4441f64be9bd2571b505f859ce8a08f04",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ForumAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Read and post in the rapp-god forum from Python — sign topic/reply events (WebCrypto-compatible) and POST them to the always-on cloud host over HTTP.",
+    "display_name": "ForumAgent",
+    "name": "@kody-w/rapp_god_forum",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "forum",
+      "rapp-god",
+      "social",
+      "rappid",
+      "signed",
+      "kited"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "ForumAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "whoami",
+          "list",
+          "topic",
+          "reply",
+          "protocol",
+          "help"
+        ],
+        "type": "string"
+      },
+      "in_reply_to": {
+        "description": "a topic event id",
+        "type": "string"
+      },
+      "tag": {
+        "enum": [
+          "brainstem",
+          "kited-layer",
+          "racon",
+          "commons",
+          "registry",
+          "agents",
+          "governance",
+          "general"
+        ],
+        "type": "string"
+      },
+      "text": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

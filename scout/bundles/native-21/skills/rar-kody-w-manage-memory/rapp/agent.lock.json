@@ -1,0 +1,73 @@
+{
+  "agent": "@kody-w/manage_memory_agent",
+  "agent_file": "manage_memory_agent.py",
+  "agent_sha256": "a3866eaef31b35e1a7b9bb17755d42950e3b62ab4c04b051f3f0e27808acb435",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ManageMemoryAgent",
+  "host_dependencies": [
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Stores facts, preferences, insights, and tasks to persistent memory.",
+    "display_name": "ManageMemory",
+    "name": "@kody-w/manage_memory_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "core",
+      "memory",
+      "storage",
+      "persistence"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "ManageMemory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "content": {
+        "description": "The content to store in memory. This should be a concise statement that captures the important information.",
+        "type": "string"
+      },
+      "importance": {
+        "description": "Importance rating from 1-5, where 5 is most important.",
+        "maximum": 5,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "memory_type": {
+        "description": "Type of memory to store. Can be 'fact', 'preference', 'insight', or 'task'.",
+        "enum": [
+          "fact",
+          "preference",
+          "insight",
+          "task"
+        ],
+        "type": "string"
+      },
+      "tags": {
+        "description": "Optional list of tags to categorize this memory.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "user_guid": {
+        "description": "Optional unique identifier of the user to store memory in a user-specific location.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "memory_type",
+      "content"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

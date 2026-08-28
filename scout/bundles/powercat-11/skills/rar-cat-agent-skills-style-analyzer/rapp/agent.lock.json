@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/style_analyzer",
+  "agent_file": "style_analyzer_agent.py",
+  "agent_sha256": "529eb8528b62f6d9e5c1d80182371e91a9c7d725ddb394fb0588a2d6f7608287",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "StyleAnalyzer",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Srinivas Varukala",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Analyzes your Teams chats and emails to build a reusable profile of your writing voice — greetings, tone, length, punctuation, sign-offs, common phrases, and quirks — and saves it to memory for other assistants to use.",
+    "display_name": "Communication Style Analyzer",
+    "name": "@cat-agent-skills/style_analyzer",
+    "platforms": [
+      "Cowork",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "e5e6f66aa29bdddf",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "style-analyzer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#style-analyzer",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "writing",
+      "style",
+      "teams",
+      "email",
+      "memory",
+      "productivity"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "StyleAnalyzer",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

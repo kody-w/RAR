@@ -1,5 +1,49 @@
 # Contributing an Agent
 
+RAR accepts contributions and follows the same repository-level shape used by
+Microsoft Power CAT Skills for Scout and GitHub Copilot CLI: a root
+`.claude-plugin/marketplace.json`, plugin-local metadata, `skills/<name>/SKILL.md`,
+structured issue forms, and explicit conduct, security, and support policies.
+RAR is an independent community project and does not imply Microsoft
+affiliation or endorsement.
+
+## Choose the Correct Contribution Path
+
+| Contribution | Path |
+|---|---|
+| New, updated, restored, or deleted canonical `agent.py` | Versioned GitHub Issue mutation and immutable receipt |
+| Registry tooling, tests, docs, marketplace metadata, source adapters | Pull request |
+| Bug report | [Bug report form](https://github.com/kody-w/RAR/issues/new?template=bug_report.yml) |
+| Feature request | [Feature request form](https://github.com/kody-w/RAR/issues/new?template=feature_request.yml) |
+| Security vulnerability | [Private security advisory](https://github.com/kody-w/RAR/security/advisories/new) — never a public issue |
+| Usage question | [GitHub Discussions](https://github.com/kody-w/RAR/discussions) |
+
+Before contributing, read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md),
+[SECURITY.md](SECURITY.md), and [SUPPORT.md](SUPPORT.md).
+
+## Scout and Copilot Plugin Marketplace
+
+Install the unified RAR + Brainstem plugin through the same marketplace flow
+used by Power CAT Skills:
+
+```bash
+copilot plugin marketplace add kody-w/RAR
+copilot plugin install rapp@rar
+```
+
+The `rapp` plugin installs the reversible `rapp-skills` manager. It can browse
+and synchronize RAR channels, create manual HTML exports, install/start a
+pinned loopback Brainstem, and install the optional external-AI callback
+drop-in. Generated files under `scout/` must never be edited by hand; change
+the source agent or `scripts/build_scout_exports.py` and regenerate.
+
+For marketplace changes, run:
+
+```bash
+python scripts/build_scout_exports.py
+pytest -q tests/test_scout_rapp_skill.py
+```
+
 ## Quick Version
 
 ```
@@ -165,6 +209,12 @@ another review.
 6. **Works offline** — handle missing env vars gracefully
 7. **No network calls in `__init__`** — keep constructor fast
 8. **Tool-safe runtime name** — `self.name` and `metadata["name"]` must match `^[A-Za-z0-9_-]+$`; keep spaces and punctuation in `display_name`
+
+Official self-bootstrapping infrastructure agents may perform bounded,
+idempotent, hash-verified local setup at module load only when the behavior is
+the agent's explicit purpose, never changes the Brainstem kernel/Grail, and has
+clean-home plus backup/rollback tests. Community submissions do not receive
+this exception automatically.
 
 ## Security
 

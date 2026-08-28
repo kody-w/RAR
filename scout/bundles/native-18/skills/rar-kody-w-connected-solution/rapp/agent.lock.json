@@ -1,0 +1,103 @@
+{
+  "agent": "@kody-w/connected_solution_agent",
+  "agent_file": "connected_solution_agent.py",
+  "agent_sha256": "63b3de4722f83a981745927a80ad07804dfc42815b05c79314d8a6850908aa0f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ConnectedSolutionAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API.",
+    "display_name": "ConnectedSolution",
+    "name": "@kody-w/connected_solution_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "copilot_studio",
+      "connected_agents",
+      "power_platform",
+      "deploy",
+      "integration",
+      "converter"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "ConnectedSolutionAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "capir_mode": {
+        "description": "How to build the deterministic per-capability topic inside each sub-agent (the topic that runs the agent.py's perform() logic on STATIC synthetic stand-in data): 'auto' (default) uses an embedded CapIR, else real seeded data, else SYNTHESIZES static stand-in records from the agent's inferred data shape — so EVERY agent.py maps to a self-documented topic; 'static' uses only real seeded data (no synthetic stand-in); 'embedded' uses only an embedded CapIR; 'off' emits instructions-only sub-agents. Synthetic data is the swap-for-live seam (Table() -> connector).",
+        "type": "string"
+      },
+      "credentials_path": {
+        "description": "Path to a local.settings.json-style file holding DYNAMICS_365_CLIENT_ID / DYNAMICS_365_CLIENT_SECRET / DYNAMICS_365_TENANT_ID / DYNAMICS_365_RESOURCE (under a top-level 'Values' object or at the root). Used only for deploy; the secret is never echoed back. If omitted, env vars / ~/.rapp_deploy_settings.json / ./local.settings.json are tried.",
+        "type": "string"
+      },
+      "deploy": {
+        "description": "When true, AUTONOMOUSLY import the solution into your Microsoft Copilot Studio (Dataverse) environment and publish every bot (sub-agents first, orchestrator last) — no pac CLI needed, stdlib only. App-registration credentials are read ONLY from env vars (DYNAMICS_365_CLIENT_ID / DYNAMICS_365_CLIENT_SECRET / DYNAMICS_365_TENANT_ID / DYNAMICS_365_RESOURCE) or a settings file — NEVER from chat. Default false (package only).",
+        "type": "boolean"
+      },
+      "environment_url": {
+        "description": "Optional override for the target Dataverse environment URL (e.g. https://yourorg.crm.dynamics.com). Defaults to DYNAMICS_365_RESOURCE from the creds.",
+        "type": "string"
+      },
+      "orchestrator_channels": {
+        "description": "Declare MsTeams + M365 Copilot channels on the orchestrator. Default false (headlessly publishable). True requires a maker-portal publish.",
+        "type": "boolean"
+      },
+      "orchestrator_name": {
+        "description": "Orchestrator display name (auto-capped to 42 chars, 'Orchestrator' kept).",
+        "type": "string"
+      },
+      "output_path": {
+        "description": "Where to write the .zip. Defaults to <SolutionName>_connected_solution.zip.",
+        "type": "string"
+      },
+      "publish": {
+        "description": "When deploy=true, also publish the bots after import (default true). false imports without publishing.",
+        "type": "boolean"
+      },
+      "publisher_display": {
+        "description": "Solution publisher friendly name (default 'Default Publisher').",
+        "type": "string"
+      },
+      "publisher_name": {
+        "description": "Solution publisher unique name (default 'DefaultPublisher'). Pair a fresh publisher_name with a fresh publisher_prefix to create a brand-new publisher.",
+        "type": "string"
+      },
+      "publisher_prefix": {
+        "description": "Customization prefix for the bot schema names (2-8 lowercase alphanumerics, default 'rapp'). Use a FRESH prefix to mint brand-new, isolated bots + a distinct solution instead of updating ones that already exist.",
+        "type": "string"
+      },
+      "solution_display_name": {
+        "description": "Solution friendly name.",
+        "type": "string"
+      },
+      "solution_name": {
+        "description": "Solution unique name (alphanumeric). Defaults from metadata.json id / stack folder name.",
+        "type": "string"
+      },
+      "stack_dir": {
+        "description": "Path to an agent stack folder. Each BasicAgent *.py under it (or its agents/ subfolder) becomes one connected sub-agent; metadata.json (name/description/features/starters) shapes the orchestrator.",
+        "type": "string"
+      },
+      "subagents": {
+        "description": "Alternative to stack_dir: explicit sub-agents, each an object with agent_name, display_name, description, instructions.",
+        "type": "array"
+      },
+      "version": {
+        "description": "Solution version, e.g. 1.0.0.0.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

@@ -1,0 +1,58 @@
+{
+  "agent": "@aibast-agents-library/product_feedback_synthesizer",
+  "agent_file": "product_feedback_synthesizer_agent.py",
+  "agent_sha256": "92333a27ab814748b8e39d8132396b0874eee15f045ad777c1048e368bc83aae",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ProductFeedbackSynthesizerAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "software_digital_products",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Synthesizes feedback themes from a live simulated Dynamics 365 tenant's cases and emails, with an offline demo fallback; writes simulated.",
+    "display_name": "Product Feedback Synthesizer Agent",
+    "name": "@aibast-agents-library/product_feedback_synthesizer",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "feedback",
+      "product",
+      "feature-requests",
+      "sentiment",
+      "roadmap",
+      "nps"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "ProductFeedbackSynthesizerAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "feature_id": {
+        "description": "Exact feature request ID for roadmap activation.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The feedback operation to perform.",
+        "enum": [
+          "feedback_summary",
+          "feature_requests",
+          "sentiment_analysis",
+          "roadmap_impact",
+          "pain_point_analysis",
+          "risk_alerts",
+          "activate_roadmap_action"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

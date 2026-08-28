@@ -1,0 +1,38 @@
+{
+  "createdAt": "2026-04-27T21:52:47.000Z",
+  "description": "Disabled Scout workflow projected from @rapp/store_navigator_agent (0.1.4). Edit inputs or schedule before enabling.",
+  "enabled": false,
+  "id": "9d37010824507ee4",
+  "lastExecutedAt": null,
+  "name": "StoreNavigator",
+  "schedule": {
+    "days": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "hour": 9,
+    "kind": "single",
+    "minute": 0,
+    "naturalLanguage": "every weekday at 9am",
+    "time": {
+      "hour": 9,
+      "minute": 0
+    }
+  },
+  "skillNames": [
+    "rar-rapp-store-navigator"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "label": "Run rar-rapp-store-navigator",
+      "prompt": "Use the imported Scout skill `rar-rapp-store-navigator`. It is the reversible Toasted projection of `@rapp/store_navigator_agent`.\n\nRun its checksum-verified `scripts/run_agent.py`; do not recreate or paraphrase the Python behavior. Use these starting arguments:\n\n```json\n{\n  \"action\": \"recommend\",\n  \"query\": \"I want to turn raw meeting notes into a publishable chapter\"\n}\n```\n\nIf a value is still a placeholder or a required input is missing, stop and report the exact missing field instead of inventing data. Return only the canonical agent result."
+    }
+  ],
+  "teamsNotify": "auto",
+  "triggerType": "schedule",
+  "updatedAt": "2026-04-27T21:52:47.000Z"
+}

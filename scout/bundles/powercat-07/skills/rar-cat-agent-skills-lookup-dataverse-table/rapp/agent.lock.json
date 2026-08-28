@@ -1,0 +1,73 @@
+{
+  "agent": "@cat-agent-skills/lookup_dataverse_table",
+  "agent_file": "lookup_dataverse_table_agent.py",
+  "agent_sha256": "6525511bf6ee244af3473793a5042254fed4e36052023cb062438af1f3636eb4",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "LookupDataverseTable",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Chris Garty",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Search any Microsoft Dataverse table, browse matching records, and drill into full record details — sourced live via the Dataverse MCP Server.",
+    "display_name": "Dataverse Table Lookup",
+    "name": "@cat-agent-skills/lookup_dataverse_table",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "9a79dc859cb36791",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "lookup-dataverse-table",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#lookup-dataverse-table",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "dataverse",
+      "mcp",
+      "data_lookup",
+      "power_platform",
+      "crm"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "LookupDataverseTable",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

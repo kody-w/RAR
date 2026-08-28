@@ -1,0 +1,87 @@
+{
+  "agent": "@rapp/store_navigator_agent",
+  "agent_file": "store_navigator_agent.py",
+  "agent_sha256": "d66b3003e0a562b0af69dfa070eae0a4ca6dc97cb53438b9e636c2ffa55214ef",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "StoreNavigatorAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "platform",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Lists, searches, compares, and recommends rapplications from the RAPP_Store catalog over HTTP, with keyword scoring when no LLM is available.",
+    "display_name": "StoreNavigator",
+    "example_call": {
+      "args": {
+        "action": "recommend",
+        "query": "I want to turn raw meeting notes into a publishable chapter"
+      }
+    },
+    "name": "@rapp/store_navigator_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meta",
+      "navigator",
+      "store",
+      "discovery",
+      "rapplication"
+    ],
+    "version": "0.1.4"
+  },
+  "runtime_name": "StoreNavigator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Which navigator action to run.",
+        "enum": [
+          "list",
+          "search",
+          "describe",
+          "recommend",
+          "install",
+          "compare",
+          "categories",
+          "spec"
+        ],
+        "type": "string"
+      },
+      "category": {
+        "description": "Filter 'list' results to this category. One of: productivity, creative, analysis, data, integration, platform, workspace.",
+        "type": "string"
+      },
+      "id": {
+        "description": "Rapp id (e.g. 'bookfactoryagent') for describe / install.",
+        "type": "string"
+      },
+      "ids": {
+        "description": "Exactly two ids for 'compare'.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "limit": {
+        "description": "Cap on results (default 10).",
+        "type": "integer"
+      },
+      "query": {
+        "description": "Keywords for 'search' OR a natural-language goal for 'recommend'.",
+        "type": "string"
+      },
+      "tag": {
+        "description": "Filter 'list' results to rapps carrying this tag.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "0.1.4"
+}

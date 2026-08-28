@@ -1,0 +1,59 @@
+{
+  "agent": "@aibast-agents-library/general_ask_hr",
+  "agent_file": "ask_hr_agent.py",
+  "agent_sha256": "282fc9a22522b758241ccc3bada4f76bb7f968e49ff3a54101325a4066e84faa",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "GeneralAskHRAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Answers HR policy, leave, and directory queries from a live simulated HRIS (workers, time off, benefits) joined to a D365 CRM, with offline fallback.",
+    "display_name": "General Ask HR",
+    "name": "@aibast-agents-library/general_ask_hr",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "hr",
+      "policy",
+      "benefits",
+      "leave",
+      "directory",
+      "general"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "GeneralAskHRAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "employee_name": {
+        "description": "Employee name or ID for context",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The HR operation to perform",
+        "enum": [
+          "policy_lookup",
+          "benefits_inquiry",
+          "leave_request",
+          "employee_directory"
+        ],
+        "type": "string"
+      },
+      "policy_name": {
+        "description": "Policy key to look up (e.g. 'remote_work', 'pto')",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

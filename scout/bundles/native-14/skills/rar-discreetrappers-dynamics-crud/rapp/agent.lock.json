@@ -1,0 +1,89 @@
+{
+  "agent": "@discreetRappers/dynamics_crud_agent",
+  "agent_file": "dynamics_crud_agent.py",
+  "agent_sha256": "4e5e25a1d96fb04d15be965f7694df521b343684c68eb165da12aab4fbb8e52e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DynamicsCRUDAgent",
+  "host_dependencies": [
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Simulates Dynamics 365 CRUD on accounts, contacts, opportunities, and leads with disambiguation, using built-in demo data.",
+    "display_name": "DynamicsCRUD",
+    "name": "@discreetRappers/dynamics_crud_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "integrations",
+      "dynamics-365",
+      "crm",
+      "crud",
+      "microsoft"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "DynamicsCRUD",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "data": {
+        "description": "Data to create or update (field-value pairs)",
+        "type": "object"
+      },
+      "disambiguation_choice": {
+        "description": "User's choice when disambiguating (1-based index)",
+        "type": "integer"
+      },
+      "entity_type": {
+        "description": "The Dynamics 365 entity type",
+        "enum": [
+          "account",
+          "contact",
+          "opportunity",
+          "lead",
+          "task",
+          "phonecall",
+          "email",
+          "appointment"
+        ],
+        "type": "string"
+      },
+      "operation": {
+        "description": "The CRUD operation to perform",
+        "enum": [
+          "create",
+          "read",
+          "update",
+          "delete",
+          "search",
+          "disambiguate"
+        ],
+        "type": "string"
+      },
+      "query": {
+        "description": "Search query or entity name to find (e.g., 'Contoso', 'Q1 Enterprise Deal', 'SPS-2026-0142')",
+        "type": "string"
+      },
+      "record_id": {
+        "description": "Specific record ID for update/delete operations",
+        "type": "string"
+      },
+      "user_guid": {
+        "description": "User identifier for preference storage",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation",
+      "entity_type"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

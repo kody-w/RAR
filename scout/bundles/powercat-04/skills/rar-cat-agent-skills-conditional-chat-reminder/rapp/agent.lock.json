@@ -1,0 +1,73 @@
+{
+  "agent": "@cat-agent-skills/conditional_chat_reminder",
+  "agent_file": "conditional_chat_reminder_agent.py",
+  "agent_sha256": "2ff960cf9799c7e9336fd4eea85e8acf88d5d9ebf2ff5c3a52dce0da0f069171",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ConditionalChatReminder",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Giorgio Ughini",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Schedule a Teams reminder that sends only when the expected person has not already posted a relevant update.",
+    "display_name": "Conditional Chat Reminder",
+    "name": "@cat-agent-skills/conditional_chat_reminder",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "a519bd3119d92722",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "conditional-chat-reminder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#conditional-chat-reminder",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "automation",
+      "teams",
+      "reminders",
+      "follow_up",
+      "productivity"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "ConditionalChatReminder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

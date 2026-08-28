@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/action_prioritization",
+  "agent_file": "action_prioritization_agent.py",
+  "agent_sha256": "ebd28d87a1c31ff50a12afcab1aa8cfc0d2ae2d7f52bbe2e412d882b605b6d0e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ActionPrioritizationAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Prioritizes sales actions and builds daily plans, weekly reviews, and resource allocations from built-in demo deal data.",
+    "display_name": "Action Prioritization",
+    "name": "@aibast-agents-library/action_prioritization",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "action-prioritization",
+      "planning",
+      "resource-allocation"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "ActionPrioritizationAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The prioritization operation",
+        "enum": [
+          "prioritize_actions",
+          "daily_plan",
+          "weekly_review",
+          "resource_allocation"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

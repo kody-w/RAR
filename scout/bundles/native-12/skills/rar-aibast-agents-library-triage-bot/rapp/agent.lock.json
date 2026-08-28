@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/triage_bot",
+  "agent_file": "triage_bot_agent.py",
+  "agent_sha256": "c8e84498bbdc7aa20908a1d3e920e10f04e0808ed64bf5439c4e0df88102bfff",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "TriageBotAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Classifies live D365 cases and ServiceNow-shaped ITSM incidents, comparing classifier verdicts to live desk priorities; routes and hands off; offline-safe.",
+    "display_name": "Triage Bot",
+    "name": "@aibast-agents-library/triage_bot",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "triage",
+      "classification",
+      "routing",
+      "priority",
+      "handoff"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "TriageBotAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The triage operation to perform",
+        "enum": [
+          "classify_inquiry",
+          "route_request",
+          "priority_assessment",
+          "handoff_summary"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

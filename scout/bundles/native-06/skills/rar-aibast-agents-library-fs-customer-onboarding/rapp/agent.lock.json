@@ -1,0 +1,64 @@
+{
+  "agent": "@aibast-agents-library/fs_customer_onboarding",
+  "agent_file": "customer_onboarding_fs_agent.py",
+  "agent_sha256": "5fdb19d2d6fb379d1f58ec7b4c62a0e496de92b9214d3721eb480553cc08a5ab",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FSCustomerOnboardingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "financial_services",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks bank customer onboarding and KYC from a live simulated Dynamics 365 tenant (leads as applications), with an offline demo fallback.",
+    "display_name": "FS Customer Onboarding Agent",
+    "name": "@aibast-agents-library/fs_customer_onboarding",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "KYC",
+      "onboarding",
+      "account-setup",
+      "compliance",
+      "financial-services",
+      "identity-verification",
+      "sanctions-screening",
+      "account-provisioning"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "FSCustomerOnboardingAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "application_id": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "kyc_verification",
+          "account_setup",
+          "document_checklist",
+          "onboarding_status",
+          "identity_verification",
+          "compliance_screening",
+          "document_collection",
+          "account_provisioning",
+          "onboarding_timeline"
+        ],
+        "type": "string"
+      },
+      "user_input": {
+        "description": "Natural-language request containing an exact record key (e.g. IDV-3001, SCR-4102, DOC-5202, ACCT-6302, MIL-7402) for capability operations.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

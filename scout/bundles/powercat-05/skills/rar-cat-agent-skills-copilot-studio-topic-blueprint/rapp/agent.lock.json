@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/copilot_studio_topic_blueprint",
+  "agent_file": "copilot_studio_topic_blueprint_agent.py",
+  "agent_sha256": "c11337248088a38d1cbbbba408808e2a111734b20ccebd659534832ff67882f2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioTopicBlueprint",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Elliot Margot",
+    "category": "creative",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turn a one-line use case into a build-ready Microsoft Copilot Studio agent blueprint: recommended agent type and orchestration, topics, tools, knowledge, variables, a welcome Adaptive Card, security and Copilot Credits notes, and a first test plan.",
+    "display_name": "Copilot Studio Topic Blueprint",
+    "name": "@cat-agent-skills/copilot_studio_topic_blueprint",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "05163d5246a491ef",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "copilot-studio-topic-blueprint",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-topic-blueprint",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "agent",
+      "blueprint",
+      "topics",
+      "design",
+      "power_platform",
+      "orchestration",
+      "adaptive_card"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CopilotStudioTopicBlueprint",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "constraints": {
+        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being designed.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

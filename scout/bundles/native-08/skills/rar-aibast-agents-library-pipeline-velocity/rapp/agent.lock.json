@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/pipeline_velocity",
+  "agent_file": "pipeline_velocity_agent.py",
+  "agent_sha256": "1dfc4e8edab7dcefee1b54e7160e5ba1854e3bc99f9c500e3827a559c2594b68",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PipelineVelocityAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Measures pipeline velocity from live opportunities in a simulated Dynamics 365 tenant, with bottlenecks and an embedded offline demo fallback.",
+    "display_name": "Pipeline Velocity",
+    "name": "@aibast-agents-library/pipeline_velocity",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "pipeline-velocity",
+      "deal-progression",
+      "analytics"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "PipelineVelocityAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The analysis to perform",
+        "enum": [
+          "velocity_dashboard",
+          "stage_analysis",
+          "bottleneck_detection",
+          "acceleration_plan"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

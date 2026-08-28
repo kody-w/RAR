@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/action_items_todo",
+  "agent_file": "action_items_todo_agent.py",
+  "agent_sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ActionItemsTodo",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Matteo Pagani",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Watches your Teams chats, meeting transcripts, and Outlook mail for things people actually asked you to do, and files each one as a Microsoft To Do task with a due date, priority, and source link.",
+    "display_name": "Action Items to To Do",
+    "name": "@cat-agent-skills/action_items_todo",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "ad7ddb14bd369108",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "action-items-todo",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#action-items-todo",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "productivity",
+      "automation",
+      "tasks",
+      "teams",
+      "email",
+      "meetings",
+      "microsoft_365",
+      "action_items"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "ActionItemsTodo",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

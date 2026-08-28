@@ -1,0 +1,71 @@
+{
+  "agent": "@cat-agent-skills/commenting_content",
+  "agent_file": "commenting_content_agent.py",
+  "agent_sha256": "187b091fcba2f8fb7bbd54d2846dd5fa025aafe300aaf05cb4e79baa06416c15",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CommentingContent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AndrewHessMSFT",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Comments Word or PowerPoint files with Comments.",
+    "display_name": "Commenting Content",
+    "name": "@cat-agent-skills/commenting_content",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "fcac24466182f80a",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "commenting-content",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#commenting-content",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "documents",
+      "productivity"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CommentingContent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}
