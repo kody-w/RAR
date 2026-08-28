@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-28T01:27:57Z",
+ "generated_at": "2026-08-28T13:54:25Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 110,
-  "size_kb": 20431,
+  "size_kb": 37834,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-28T01:25:47Z",
+  "pushed_at": "2026-08-28T05:02:05Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 310,
+  "agents": 1798,
   "swarms": 82,
-  "publishers": 10,
+  "publishers": 12,
   "categories": 24,
-  "total_lines": 178894,
-  "total_kb": 8453.1,
+  "total_lines": 464033,
+  "total_kb": 24022.2,
   "votes": 4,
   "upvotes": 4,
   "voters": 2,
@@ -338,11 +338,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1040,
-    "size_kb": 38.8,
+    "lines": 1963,
+    "size_kb": 80.3,
     "added_at": "2026-04-20T12:38:45-04:00",
     "file": "agents/@rapp/learn_new_agent.py",
-    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates."
+    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback."
    },
    {
     "name": "@kody-w/agent_team_agent",
@@ -515,8 +515,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 5330,
-    "size_kb": 218.4,
+    "lines": 5338,
+    "size_kb": 218.9,
     "added_at": "2026-07-07T00:52:21Z",
     "file": "agents/@kody-w/copilot_studio_forge_agent.py",
     "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports."
@@ -600,8 +600,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2731,
-    "size_kb": 127.3,
+    "lines": 2739,
+    "size_kb": 127.8,
     "added_at": "2026-06-22T21:04:42-04:00",
     "file": "agents/@kody-w/connected_solution_agent.py",
     "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API."
@@ -639,6 +639,23 @@
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/copilot_studio_transpiler_agent.py",
     "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency."
+   },
+   {
+    "name": "@rapp/learn_new",
+    "display_name": "LearnNew",
+    "publisher": "@rapp",
+    "category": "core",
+    "tier": "official",
+    "downloads": 8,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 1963,
+    "size_kb": 80.3,
+    "added_at": "2026-04-20T12:38:45-04:00",
+    "file": "agents/@rapp/learn_new_agent.py",
+    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback."
    },
    {
     "name": "@rapp/twin_agent",
@@ -707,11 +724,13 @@
     "added_at": "2026-07-23T12:26:59-04:00",
     "file": "agents/@kody-w/rapp_skill_bridge_agent.py",
     "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills."
-   },
+   }
+  ],
+  "newest": [
    {
-    "name": "@kody-w/rar_remote_agent",
-    "display_name": "RAR Remote Agent",
-    "publisher": "@kody-w",
+    "name": "@rapp/forge_provenance_agent",
+    "display_name": "Forge Provenance",
+    "publisher": "@rapp",
     "category": "core",
     "tier": "official",
     "downloads": 0,
@@ -719,14 +738,80 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1403,
-    "size_kb": 59.7,
-    "added_at": "2026-05-24T21:45:25-04:00",
-    "file": "agents/@kody-w/rar_remote_agent.py",
-    "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token."
-   }
-  ],
-  "newest": [
+    "lines": 265,
+    "size_kb": 11.7,
+    "added_at": "2026-08-26T17:29:33-04:00",
+    "file": "agents/@kody-w/forge_provenance_agent.py",
+    "description": "Stamp a forged artifact bundle with the fingerprint of the RAPP agent it came from, then prove later that it never drifted. Reports per file: current, STALE (source moved), HAND-EDITED (derived file was edited and the edit will be lost), MISSING, or UNSTAMPED (provenance unknown, which never renders as healthy). Fingerprints the agent's declarative surface, read with ast and never imported, so a comment change does not cry wolf but a description change does."
+   },
+   {
+    "name": "@rapter/hive_census_agent",
+    "display_name": "Hive Census",
+    "publisher": "@rapter",
+    "category": "core",
+    "tier": "verified",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 222,
+    "size_kb": 9.9,
+    "added_at": "2026-08-26T17:18:46-04:00",
+    "file": "agents/@rapter/hive_census_agent.py",
+    "description": "Emit this box's census as deterministic static JSON \u2014 protocol revision, anchor hash, resident populations, posture, trust \u2014 computed from local filesystem and git facts with NO language-model call. Byte-stable for the same inputs, sorted and string-valued so it drops straight into a rapp/1 frame payload and two boxes computing the same census produce the same hash. Counts things, never names them."
+   },
+   {
+    "name": "@rapter/hive_shape_agent",
+    "display_name": "Hive Shape",
+    "publisher": "@rapter",
+    "category": "core",
+    "tier": "verified",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 338,
+    "size_kb": 14.7,
+    "added_at": "2026-08-26T17:18:46-04:00",
+    "file": "agents/@rapter/hive_shape_agent.py",
+    "description": "Look at every cubby in a hive at once and report its SHAPE \u2014 divergence (who disagrees about what the world is), silence (who did not answer, always named), mass (where the population actually lives), and spread (how unlike each other the members are). Private by construction: publishes nothing, writes no frame, and leaves the picture on the operator's machine."
+   },
+   {
+    "name": "@rapter/rapp_dogg_agent",
+    "display_name": "RapterBox RAPP DOGG",
+    "publisher": "@rapter",
+    "category": "core",
+    "tier": "verified",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 797,
+    "size_kb": 40.6,
+    "added_at": "2026-08-26T17:18:46-04:00",
+    "file": "agents/@rapter/rapp_dogg_agent.py",
+    "description": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon \u2014 frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status \u2014 from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches."
+   },
+   {
+    "name": "@rapp/rapp_dogg_agent",
+    "display_name": "RAPP DOGG",
+    "publisher": "@rapp",
+    "category": "core",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 812,
+    "size_kb": 41.7,
+    "added_at": "2026-08-26T16:49:28-04:00",
+    "file": "agents/@rapp/rapp_dogg_agent.py",
+    "description": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon \u2014 frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status \u2014 from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches."
+   },
    {
     "name": "@cat-agent-skills/action_items_todo",
     "display_name": "Action Items to To Do",
@@ -896,94 +981,18 @@
     "added_at": "2026-08-18T03:03:49Z",
     "file": "agents/@kody-w/windows_vm_install_lab_agent.py",
     "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit."
-   },
-   {
-    "name": "@kody-w/art_generator_agent",
-    "display_name": "Art Generator",
-    "publisher": "@kody-w",
-    "category": "creative",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 371,
-    "size_kb": 11.2,
-    "added_at": "2026-08-18T03:01:53Z",
-    "file": "agents/@kody-w/art_generator_agent.py",
-    "description": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it."
-   },
-   {
-    "name": "@kody-w/prototype_lock_factory_agent",
-    "display_name": "Prototype Lock Factory",
-    "publisher": "@kody-w",
-    "category": "pipeline",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 468,
-    "size_kb": 17.0,
-    "added_at": "2026-08-17T22:07:23Z",
-    "file": "agents/@kody-w/prototype_lock_factory_agent.py",
-    "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff."
-   },
-   {
-    "name": "@cat-agent-skills/cowork_use_case_one_pager",
-    "display_name": "Cowork Use Case One-Pager",
-    "publisher": "@cat-agent-skills",
-    "category": "productivity",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 188,
-    "size_kb": 8.9,
-    "added_at": "2026-08-17T18:03:09-04:00",
-    "file": "agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
-    "description": "Turn a Cowork conversation, into a one-page HTML use case write-up \u2014 narrative, impact figures, workflow steps, and outputs."
-   },
-   {
-    "name": "@cat-agent-skills/route_map_visualizer",
-    "display_name": "Route Map Visualizer",
-    "publisher": "@cat-agent-skills",
-    "category": "devtools",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 188,
-    "size_kb": 8.9,
-    "added_at": "2026-08-17T18:03:09-04:00",
-    "file": "agents/@cat-agent-skills/route_map_visualizer_agent.py",
-    "description": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and durations. Produces PNG, interactive HTML (Leaflet/OSM), GeoJSON, KML, deep links, and QR codes. Fully offline Python engine \u2014 road geometry rendered directly when provided, or OSRM used browser-side as\u2026"
-   },
-   {
-    "name": "@cat-agent-skills/wcag_power_platform",
-    "display_name": "WCAG 2.1 for Web Apps & Power Platform",
-    "publisher": "@cat-agent-skills",
-    "category": "general",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 188,
-    "size_kb": 9.2,
-    "added_at": "2026-08-17T18:03:09-04:00",
-    "file": "agents/@cat-agent-skills/wcag_power_platform_agent.py",
-    "description": "Makes everything the agent builds or reviews conform to WCAG 2.1 AA \u2014 HTML pages, SPAs, theming, PCF controls, model-driven and canvas apps, and Power Pages."
    }
   ],
   "publishers": [
+   {
+    "name": "@cowork-cookbook",
+    "agents": 1481,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0,
+    "lines": 281390,
+    "rating": 0.0
+   },
    {
     "name": "@aibast-agents-library",
     "agents": 104,
@@ -995,11 +1004,11 @@
    },
    {
     "name": "@cat-agent-skills",
-    "agents": 93,
+    "agents": 95,
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 17484,
+    "lines": 17860,
     "rating": 0.0
    },
    {
@@ -1008,16 +1017,16 @@
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 56377,
+    "lines": 56393,
     "rating": 5.0
    },
    {
     "name": "@rapp",
-    "agents": 21,
+    "agents": 23,
     "downloads": 8,
     "score": 0,
     "reviews": 0,
-    "lines": 14195,
+    "lines": 16195,
     "rating": 0.0
    },
    {
@@ -1036,6 +1045,15 @@
     "score": 0,
     "reviews": 0,
     "lines": 7229,
+    "rating": 0.0
+   },
+   {
+    "name": "@rapter",
+    "agents": 3,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0,
+    "lines": 1357,
     "rating": 0.0
    },
    {
@@ -1077,8 +1095,15 @@
   ],
   "categories": [
    {
+    "name": "integrations",
+    "agents": 1474,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
     "name": "general",
-    "agents": 65,
+    "agents": 86,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -1092,7 +1117,7 @@
    },
    {
     "name": "core",
-    "agents": 28,
+    "agents": 33,
     "downloads": 8,
     "score": 1,
     "reviews": 0
@@ -1119,8 +1144,8 @@
     "reviews": 0
    },
    {
-    "name": "integrations",
-    "agents": 17,
+    "name": "analysis",
+    "agents": 12,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -1143,13 +1168,6 @@
     "name": "b2c_sales",
     "agents": 7,
     "downloads": 6,
-    "score": 0,
-    "reviews": 0
-   },
-   {
-    "name": "analysis",
-    "agents": 7,
-    "downloads": 0,
     "score": 0,
     "reviews": 0
    },
@@ -1246,10 +1264,10 @@
    }
   ],
   "tiers": {
-   "community": 166,
-   "frontier": 93,
-   "official": 44,
-   "verified": 5,
+   "community": 1374,
+   "verified": 281,
+   "frontier": 95,
+   "official": 46,
    "private": 2
   }
  },

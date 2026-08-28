@@ -433,6 +433,25 @@ def build_leaderboards(agents):
 
 # ----------------------------------------------------------------- assembly
 
+
+def load_annotations():
+    """Annotations are hand-edited; a typo must fail LOUDLY, never silently drop them all
+    (Article XXIV.4 — step-changes carry their explanation; a swallowed parse error deletes
+    every explanation at once)."""
+    if not ANNOTATIONS.exists():
+        return []
+    try:
+        rows = json.loads(ANNOTATIONS.read_text())
+    except Exception as e:
+        log(f"✗ {ANNOTATIONS.name} is not valid JSON ({e}) — refusing to publish a snapshot with zero annotations")
+        raise SystemExit(2)
+    bad = [r for r in rows if not (isinstance(r, dict) and r.get("date") and r.get("note"))]
+    if bad:
+        log(f"✗ {ANNOTATIONS.name}: {len(bad)} row(s) missing date/note — fix them")
+        raise SystemExit(2)
+    return sorted(rows, key=lambda a: a["date"])
+
+
 def main():
     ap = argparse.ArgumentParser(description="Build public metrics snapshot for the RAR dashboard.")
     ap.add_argument("--offline", action="store_true", help="skip all network calls")
@@ -540,9 +559,7 @@ def main():
                      "avg_rating": review_totals["avg_rating"], "distribution": review_totals["distribution"]},
             "note": "Human reviews only, from the Issue pipeline. Automated reviews were retired 2026-08-18.",
         },
-        "annotations": sorted(
-            [a for a in load_json(ANNOTATIONS, []) if isinstance(a, dict) and a.get("date") and a.get("note")],
-            key=lambda a: a["date"]),
+        "annotations": load_annotations(),
         "leaderboards": build_leaderboards(agents),
         "agent_metrics": build_agent_metrics(agents),
         "sources": [
