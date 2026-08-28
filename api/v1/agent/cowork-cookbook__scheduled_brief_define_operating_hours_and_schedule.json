@@ -31,7 +31,7 @@
   "size_kb": 10.6,
   "sha256": "0ab553d774cbaa92bc12fbad3e16b2ecc7788d6b9ca2e24de05eb166b1f16e6c",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_define_operating_hours_and_schedule.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/scheduled_brief_define_operating_hours_and_schedule_agent.py",

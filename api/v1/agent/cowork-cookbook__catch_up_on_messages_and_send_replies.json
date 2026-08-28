@@ -30,7 +30,7 @@
   "size_kb": 9.5,
   "sha256": "df2584d346a31b87577d83441d08eddf9a328147a8cf058be03a89b5332a91f6",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__catch_up_on_messages_and_send_replies.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/catch_up_on_messages_and_send_replies_agent.py",

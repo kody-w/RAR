@@ -31,7 +31,7 @@
   "size_kb": 10.5,
   "sha256": "5bde048d115c9fcc154e2ed451da0a53e673427ad04c0258d330ae482bb8c31c",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_record_fixed_asset_acquisitions.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/scheduled_brief_record_fixed_asset_acquisitions_agent.py",

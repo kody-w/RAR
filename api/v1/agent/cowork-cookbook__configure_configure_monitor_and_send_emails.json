@@ -31,7 +31,7 @@
   "size_kb": 10.7,
   "sha256": "f6e9fa79aa18988e00923e0e63ded63ae066138447485a809015e77222ab74cc",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_configure_monitor_and_send_emails.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_configure_monitor_and_send_emails_agent.py",

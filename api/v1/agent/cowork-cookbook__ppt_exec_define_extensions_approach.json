@@ -31,7 +31,7 @@
   "size_kb": 10.4,
   "sha256": "cadb23f55eea88f691521ab560889a88da5fe2476e79b52ef82a0b2ca3ad4a10",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_define_extensions_approach.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/ppt_exec_define_extensions_approach_agent.py",

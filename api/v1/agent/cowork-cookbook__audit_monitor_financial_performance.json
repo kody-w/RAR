@@ -31,7 +31,7 @@
   "size_kb": 10.5,
   "sha256": "4d9b6e13a8e57b9b4bdb685aa9054cb9f99fa27e9e0500d9e6bb411a8c2e5f72",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__audit_monitor_financial_performance.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/audit_monitor_financial_performance_agent.py",

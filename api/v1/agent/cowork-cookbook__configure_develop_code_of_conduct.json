@@ -31,7 +31,7 @@
   "size_kb": 10.5,
   "sha256": "230a1edcd12c14a7eb1a771714ac509aa9ce0f9b55d5a65362eaac347084bfc0",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_develop_code_of_conduct.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_develop_code_of_conduct_agent.py",

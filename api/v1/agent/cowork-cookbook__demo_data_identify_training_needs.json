@@ -31,7 +31,7 @@
   "size_kb": 10.3,
   "sha256": "52ebcd10aff3e1da542739856f9bb9ba9b1d6c7eb446e586548b5f07bac735a4",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__demo_data_identify_training_needs.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/demo_data_identify_training_needs_agent.py",

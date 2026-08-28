@@ -31,7 +31,7 @@
   "size_kb": 10.6,
   "sha256": "9830cd1711efac4ffca4524cc9cd41aedd36bd9a9216bd9a76ec58593dfa5049",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_reconcile_asset_subledger.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_reconcile_asset_subledger_agent.py",

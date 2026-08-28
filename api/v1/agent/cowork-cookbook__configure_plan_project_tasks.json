@@ -31,7 +31,7 @@
   "size_kb": 10.5,
   "sha256": "0ace5071a7d8a219fa49afd77c211b56adce388a17426e114b7c59bd4f7fcc33",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_plan_project_tasks.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/configure_plan_project_tasks_agent.py",

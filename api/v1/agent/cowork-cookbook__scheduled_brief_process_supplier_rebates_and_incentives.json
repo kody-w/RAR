@@ -31,7 +31,7 @@
   "size_kb": 10.6,
   "sha256": "a17cc1b30f150936a76b992c60fdfa26fd852c5b2ef6b2e3f7f48a298d0b76ef",
   "has_card": false,
-  "added_at": null,
+  "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_process_supplier_rebates_and_incentives.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cowork-cookbook/scheduled_brief_process_supplier_rebates_and_incentives_agent.py",
