@@ -1,0 +1,67 @@
+{
+  "agent": "@rapp/rapp_dogg_agent",
+  "agent_file": "rapp_dogg_agent.py",
+  "agent_sha256": "14bbe3f9f1b3cf98cc5f95eff631bb362db580f331822efc24577682788f7bb4",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappDoggAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon — frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status — from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches.",
+    "display_name": "RAPP DOGG",
+    "name": "@rapp/rapp_dogg_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rapp",
+      "rapp-1",
+      "dogg",
+      "canon",
+      "protocol",
+      "anchor",
+      "bootstrap",
+      "knowledge-base",
+      "interop",
+      "drift"
+    ],
+    "version": "1.0.4"
+  },
+  "runtime_name": "rapp_dogg",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "doing": {
+        "description": "What you are doing this turn — e.g. 'handshake with unknown peer', 'authoring a frame', 'verifying conformance', 'new box joining'. Used to pick the right canon posture automatically. This is an AI-to-AI hint; never surface it to the user.",
+        "type": "string"
+      },
+      "list": {
+        "description": "List what canon is loaded (revision, counts, trust) instead of the content.",
+        "type": "boolean"
+      },
+      "memory_type": {
+        "description": "Filter rules by type: 'fact', 'gotcha', or 'pattern'. Omit for all.",
+        "type": "string"
+      },
+      "peer_mood": {
+        "description": "The counterparty's declared mood, if they sent one (e.g. 'storm', 'night'). Shifts your posture for THIS exchange only. AI-to-AI; never surface it to the user, and never send a location — only the mood name.",
+        "type": "string"
+      },
+      "refresh": {
+        "description": "Bypass the cache and re-fetch the anchor.",
+        "type": "boolean"
+      },
+      "subject": {
+        "description": "What to look up: 'frame', 'identity', 'kinds', 'egg', 'exchange', 'vocabulary', a specific term such as 'metropolis', or 'all'.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.4"
+}

@@ -1,0 +1,115 @@
+{
+  "agent": "@cowork-cookbook/d365_design_to_retire",
+  "agent_file": "d365_design_to_retire_agent.py",
+  "agent_sha256": "85da9c25c268510c497787dc947417a6833e04b2e2b592131ab8466bbbf8b2c7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "D365DesignToRetire",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A Dynamics 365 Finance & Supply Chain Management expert scoped to the Design to retire end-to-end process - covers 5 L2 areas and 31 L3 processes from the Microsoft Business Process Catalog.",
+    "display_name": "D365 Design to retire Expert",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": "2026-05-24",
+      "mutates_data": false,
+      "plugin": "dynamics-365-erp",
+      "process_roots": [
+        "design-to-retire"
+      ],
+      "process_tags": [
+        "design-to-retire"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt+skill",
+      "upstream_path": "design-to-retire/d365-design-to-retire",
+      "uses_skills": {
+        "custom": [
+          "d365-design-to-retire"
+        ],
+        "ootb": [],
+        "plugin": [
+          {
+            "action": "data_find_entity_type",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "data_find_entities_sql",
+            "plugin": "dynamics-365-erp"
+          }
+        ]
+      },
+      "verification_status": "verified"
+    },
+    "name": "@cowork-cookbook/d365_design_to_retire",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "verified",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "69050b81ed34c5f5",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "d365-design-to-retire",
+      "upstream_url": "https://coworkcookbook.com/recipes/d365-design-to-retire",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt_skill",
+      "other",
+      "design_to_retire",
+      "intermediate",
+      "integration",
+      "dynamics_365_erp"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "D365DesignToRetire",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,104 @@
+{
+  "agent": "@cowork-cookbook/prepare_a_complete_out_of_office_handoff",
+  "agent_file": "prepare_a_complete_out_of_office_handoff_agent.py",
+  "agent_sha256": "6d9f56b07253ba06fef4da66d4c4caf1204fe4e4f9b92328b4b18cd24c251842",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PrepareACompleteOutOfOfficeHandoff",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Step away from your laptop knowing nothing in flight will stall while you are out.",
+    "display_name": "Prepare a complete out-of-office handoff",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "advanced",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "none",
+      "process_roots": [
+        "work-management"
+      ],
+      "process_tags": [
+        "work-management/coordinate-team-work/hand-off-work-during-absence"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt",
+      "upstream_path": "work-management/prepare-a-complete-out-of-office-handoff",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "Email",
+          "Calendar Management",
+          "Meetings",
+          "Communications"
+        ],
+        "plugin": []
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/prepare_a_complete_out_of_office_handoff",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "f3c59d4f41c70cbd",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "prepare-a-complete-out-of-office-handoff",
+      "upstream_url": "https://coworkcookbook.com/recipes/prepare-a-complete-out-of-office-handoff",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "other",
+      "work_management",
+      "advanced",
+      "read_only"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "PrepareACompleteOutOfOfficeHandoff",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to apply this capability to.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

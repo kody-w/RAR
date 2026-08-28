@@ -1,0 +1,77 @@
+{
+  "agent": "@cat-agent-skills/agent_red_team",
+  "agent_file": "agent_red_team_agent.py",
+  "agent_sha256": "c39b9166de102478dec3ddc39a765711e471bf743090479f27115e4ab207a879",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AgentRedTeam",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Marco Zama",
+    "category": "analysis",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes.",
+    "display_name": "Agent Red Team",
+    "name": "@cat-agent-skills/agent_red_team",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "a8a2bcecd245a7bb",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "agent-red-team",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#agent-red-team",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "copilot_studio",
+      "security",
+      "prompt_injection",
+      "governance",
+      "responsible_ai",
+      "testing",
+      "risk",
+      "assessment"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "AgentRedTeam",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

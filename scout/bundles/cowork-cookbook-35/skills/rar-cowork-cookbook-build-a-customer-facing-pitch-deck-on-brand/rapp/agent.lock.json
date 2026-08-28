@@ -1,0 +1,108 @@
+{
+  "agent": "@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand",
+  "agent_file": "build_a_customer_facing_pitch_deck_on_brand_agent.py",
+  "agent_sha256": "2abe5c63fe631d55484440bad066ff0b96ca7057832867788e634b0a7749a34e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BuildACustomerFacingPitchDeckOnBrand",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Hand the field a customer-facing pitch deck that's on-brand, on-message, and tailored to a specific exec audience - instead of letting every team rebuild from a generic template.",
+    "display_name": "Build a customer-facing pitch deck on brand",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "beginner",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "none",
+      "process_roots": [
+        "concept-to-market"
+      ],
+      "process_tags": [
+        "concept-to-market/prepare-marketing-campaigns/create-marketing-material"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt",
+      "upstream_path": "concept-to-market/build-a-customer-facing-pitch-deck-on-brand",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "PowerPoint",
+          "Email",
+          "Meetings",
+          "Communications"
+        ],
+        "plugin": []
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "a5221a5283c2153e",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "build-a-customer-facing-pitch-deck-on-brand",
+      "upstream_url": "https://coworkcookbook.com/recipes/build-a-customer-facing-pitch-deck-on-brand",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "other",
+      "concept_to_market",
+      "beginner",
+      "read_only"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "BuildACustomerFacingPitchDeckOnBrand",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

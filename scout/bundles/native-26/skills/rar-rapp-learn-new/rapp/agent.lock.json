@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/learn_new",
   "agent_file": "learn_new_agent.py",
-  "agent_sha256": "ee12a37ef550c9ffb1097334da29ebcb4dcaeeac5b3f8b5dbab366e5178eab71",
+  "agent_sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LearnNewAgent",
   "host_dependencies": [],
@@ -11,12 +11,12 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
+    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback.",
     "display_name": "LearnNew",
     "example_call": {
       "args": {
         "action": "create",
-        "description": "An agent that summarizes web pages by URL"
+        "description": "An agent that researches an enterprise account before a sales call"
       }
     },
     "name": "@rapp/learn_new",
@@ -28,9 +28,11 @@
       "generator",
       "scaffolding",
       "learn",
-      "swarm"
+      "swarm",
+      "templates",
+      "aibast"
     ],
-    "version": "2.1.1"
+    "version": "3.0.1"
   },
   "runtime_name": "LearnNew",
   "schema": "rapp-agent-lock/1.0",
@@ -40,6 +42,7 @@
         "description": "Action to perform.",
         "enum": [
           "create",
+          "templates",
           "swarm",
           "list",
           "delete",
@@ -79,17 +82,37 @@
         "description": "RAR namespace for submission (e.g. @myname). Defaults to @rapp.",
         "type": "string"
       },
+      "output_dir": {
+        "description": "Directory to write the generated agent into. Defaults to this brainstem's agents/ directory.",
+        "type": "string"
+      },
       "query": {
         "description": "Natural language query that may contain the agent description.",
         "type": "string"
       },
+      "refresh": {
+        "description": "Force a refetch of the published template registry, ignoring the cache TTL.",
+        "type": "boolean"
+      },
       "requires_env": {
         "description": "Comma-separated env vars the agent needs (e.g. 'API_KEY,WEBHOOK_URL').",
+        "type": "string"
+      },
+      "source": {
+        "description": "Where the new agent comes from. 'template' (default) adapts a verified published agent; 'scratch' uses the built-in string templates. Scratch is also the automatic fallback when offline or when nothing matches well.",
+        "enum": [
+          "template",
+          "scratch"
+        ],
+        "type": "string"
+      },
+      "template": {
+        "description": "Explicit published template to adapt (e.g. 'account-intelligence' or '@aibast-agents-library/account-intelligence'). Overrides automatic selection. Use action='templates' to see what exists.",
         "type": "string"
       }
     },
     "required": [],
     "type": "object"
   },
-  "version": "2.1.1"
+  "version": "3.0.1"
 }

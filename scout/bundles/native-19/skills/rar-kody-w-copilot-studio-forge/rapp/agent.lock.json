@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/copilot_studio_forge_agent",
   "agent_file": "copilot_studio_forge_agent.py",
-  "agent_sha256": "80f80484f489a3023354e4528bc52657032f686db909fe3ffdcf99d7ae454abe",
+  "agent_sha256": "b74dc71864503e47340899674b0e8b9c17f4e8fc617298ed83e5f148bf87e709",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioForgeAgent",
   "host_dependencies": [
@@ -37,7 +37,7 @@
       "authoring",
       "assimilated"
     ],
-    "version": "1.0.1"
+    "version": "1.0.2"
   },
   "runtime_name": "CopilotStudioForge",
   "schema": "rapp-agent-lock/1.0",
@@ -91,5 +91,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.0.1"
+  "version": "1.0.2"
 }

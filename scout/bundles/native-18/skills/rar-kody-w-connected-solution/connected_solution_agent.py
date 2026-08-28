@@ -76,7 +76,7 @@ Self-contained: standard library only. Drop into any RAPP agents/ directory.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/connected_solution_agent",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "ConnectedSolution",
     "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API.",
     "author": "Kody Wildfeuer",
@@ -103,6 +103,14 @@ import urllib.error
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+# PUBLISHER PREFIX. Kody, 2026-08-27: "make it aibast for now."
+#
+# Env-overridable rather than hardcoded, because this repo is public: a bare "aibast"
+# default would stamp every stranger's generated solution with a publisher that is not
+# theirs, and a solution carrying the wrong publisher is a real problem for them to unpick
+# in a tenant. Setting RAPP_PUBLISHER_PREFIX overrides it; unset, it is aibast.
+_DEFAULT_PUBLISHER_PREFIX = os.getenv("RAPP_PUBLISHER_PREFIX", "aibast")
 
 logger = logging.getLogger("connected_solution_agent")
 
@@ -1507,7 +1515,7 @@ class ConnectedSolutionSpec:
     orchestrator_display_name: str
     subagents: List[SubAgentSpec]
     orchestrator_instructions: str = ""   # synthesized if empty
-    publisher_prefix: str = "rapp"
+    publisher_prefix: str = _DEFAULT_PUBLISHER_PREFIX
     publisher_unique_name: str = "DefaultPublisher"
     publisher_display_name: str = "Default Publisher"
     solution_version: str = "1.0.0.0"
@@ -2673,7 +2681,7 @@ class ConnectedSolutionAgent(BasicAgent):
             # publisher controls — a fresh publisher_prefix mints brand-new bot
             # schema names (an isolated, clearly-distinct solution), instead of
             # updating bots that already exist under the default 'rapp' prefix.
-            publisher_prefix=re.sub(r"[^a-z0-9]", "", str(kwargs.get("publisher_prefix") or "rapp").lower())[:8] or "rapp",
+            publisher_prefix=re.sub(r"[^a-z0-9]", "", str(kwargs.get("publisher_prefix") or _DEFAULT_PUBLISHER_PREFIX).lower())[:8] or _DEFAULT_PUBLISHER_PREFIX,
             publisher_unique_name=kwargs.get("publisher_name") or "DefaultPublisher",
             publisher_display_name=kwargs.get("publisher_display") or "Default Publisher",
         )

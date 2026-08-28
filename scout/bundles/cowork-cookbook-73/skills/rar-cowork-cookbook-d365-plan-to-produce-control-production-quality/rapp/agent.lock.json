@@ -1,0 +1,115 @@
+{
+  "agent": "@cowork-cookbook/d365_plan_to_produce_control_production_quality",
+  "agent_file": "d365_plan_to_produce_control_production_quality_agent.py",
+  "agent_sha256": "0300a0b47e6e6e1540b3ec1913f2894d9f32b8c39432e1453da882750777a063",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "D365PlanToProduceControlProductionQuality",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A Dynamics 365 F&SCM expert scoped to the Control production quality area (a level-2 subdomain of Plan to produce) - covers 8 L3 processes.",
+    "display_name": "D365 Control production quality Expert",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": "2026-05-24",
+      "mutates_data": false,
+      "plugin": "dynamics-365-erp",
+      "process_roots": [
+        "plan-to-produce"
+      ],
+      "process_tags": [
+        "plan-to-produce/control-production-quality"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt+skill",
+      "upstream_path": "plan-to-produce/d365-plan-to-produce-control-production-quality",
+      "uses_skills": {
+        "custom": [
+          "d365-plan-to-produce-control-production-quality"
+        ],
+        "ootb": [],
+        "plugin": [
+          {
+            "action": "data_find_entity_type",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "data_find_entities_sql",
+            "plugin": "dynamics-365-erp"
+          }
+        ]
+      },
+      "verification_status": "verified"
+    },
+    "name": "@cowork-cookbook/d365_plan_to_produce_control_production_quality",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "verified",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "8a6e6b6671934857",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "d365-plan-to-produce-control-production-quality",
+      "upstream_url": "https://coworkcookbook.com/recipes/d365-plan-to-produce-control-production-quality",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt_skill",
+      "other",
+      "plan_to_produce",
+      "intermediate",
+      "integration",
+      "dynamics_365_erp"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "D365PlanToProduceControlProductionQuality",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

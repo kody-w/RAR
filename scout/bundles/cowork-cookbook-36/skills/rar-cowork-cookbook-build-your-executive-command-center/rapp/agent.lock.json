@@ -1,0 +1,106 @@
+{
+  "agent": "@cowork-cookbook/build_your_executive_command_center",
+  "agent_file": "build_your_executive_command_center_agent.py",
+  "agent_sha256": "af8aeed741ed798fd57883e1bf37d69798d8fd72c9ccc9770dba85ab95ee81f3",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BuildYourExecutiveCommandCenter",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Start every day knowing exactly where to focus - without scrolling through emails, meetings, and chats to triangulate it yourself.",
+    "display_name": "Build your executive command center",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "advanced",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "fabric-iq",
+      "process_roots": [
+        "work-management"
+      ],
+      "process_tags": [
+        "work-management/research-and-synthesize/build-personal-insight-dashboards"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt",
+      "upstream_path": "work-management/build-your-executive-command-center",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "Meetings"
+        ],
+        "plugin": []
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/build_your_executive_command_center",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "8a01b3152482f58b",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "build-your-executive-command-center",
+      "upstream_url": "https://coworkcookbook.com/recipes/build-your-executive-command-center",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "other",
+      "work_management",
+      "advanced",
+      "integration",
+      "fabric_iq"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "BuildYourExecutiveCommandCenter",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

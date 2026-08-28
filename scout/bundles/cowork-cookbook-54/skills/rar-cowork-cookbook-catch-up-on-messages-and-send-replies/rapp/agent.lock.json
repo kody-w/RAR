@@ -1,0 +1,102 @@
+{
+  "agent": "@cowork-cookbook/catch_up_on_messages_and_send_replies",
+  "agent_file": "catch_up_on_messages_and_send_replies_agent.py",
+  "agent_sha256": "df2584d346a31b87577d83441d08eddf9a328147a8cf058be03a89b5332a91f6",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CatchUpOnMessagesAndSendReplies",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Close the loop on unanswered questions without scrolling back through a week of threads.",
+    "display_name": "Catch up on messages and send replies automatically",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "none",
+      "process_roots": [
+        "work-management"
+      ],
+      "process_tags": [
+        "work-management/manage-communications/triage-and-respond-to-messages"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt",
+      "upstream_path": "work-management/catch-up-on-messages-and-send-replies",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "Email",
+          "Communications"
+        ],
+        "plugin": []
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/catch_up_on_messages_and_send_replies",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "4bef0a8e9c6a1bb7",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "catch-up-on-messages-and-send-replies",
+      "upstream_url": "https://coworkcookbook.com/recipes/catch-up-on-messages-and-send-replies",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "other",
+      "work_management",
+      "intermediate",
+      "read_only"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CatchUpOnMessagesAndSendReplies",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to apply this capability to.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

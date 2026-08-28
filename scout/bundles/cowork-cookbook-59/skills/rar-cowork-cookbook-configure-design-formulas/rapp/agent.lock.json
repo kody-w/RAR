@@ -1,0 +1,127 @@
+{
+  "agent": "@cowork-cookbook/configure_design_formulas",
+  "agent_file": "configure_design_formulas_agent.py",
+  "agent_sha256": "d7783435fa1706485b67ce2cc13b05242ebf8dda715892f2107e166bbf7a59d9",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ConfigureDesignFormulas",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Applies a bulk configuration change to design formulas from an input Excel file, with validation and rollback support.",
+    "display_name": "Design formulas Configuration Bulk Setup",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": null,
+      "mutates_data": true,
+      "plugin": "dynamics-365-erp",
+      "process_roots": [
+        "design-to-retire"
+      ],
+      "process_tags": [
+        "design-to-retire/introduce-products/design-formulas"
+      ],
+      "recipe_category": "configure",
+      "recipe_type": "prompt",
+      "upstream_path": "design-to-retire/configure-design-formulas",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "Excel"
+        ],
+        "plugin": [
+          {
+            "action": "data_find_entity_type",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "data_update_entities",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "form_open_menu_item",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "form_set_control_values",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "form_save_form",
+            "plugin": "dynamics-365-erp"
+          }
+        ]
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/configure_design_formulas",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "8642107dd7a75fc6",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "configure-design-formulas",
+      "upstream_url": "https://coworkcookbook.com/recipes/configure-design-formulas",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "configure",
+      "design_to_retire",
+      "intermediate",
+      "integration",
+      "dynamics_365_erp"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "ConfigureDesignFormulas",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

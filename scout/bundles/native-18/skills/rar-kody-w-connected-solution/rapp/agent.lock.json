@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/connected_solution_agent",
   "agent_file": "connected_solution_agent.py",
-  "agent_sha256": "63b3de4722f83a981745927a80ad07804dfc42815b05c79314d8a6850908aa0f",
+  "agent_sha256": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConnectedSolutionAgent",
   "host_dependencies": [],
@@ -25,7 +25,7 @@
       "integration",
       "converter"
     ],
-    "version": "1.0.2"
+    "version": "1.0.3"
   },
   "runtime_name": "ConnectedSolutionAgent",
   "schema": "rapp-agent-lock/1.0",
@@ -99,5 +99,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.0.2"
+  "version": "1.0.3"
 }

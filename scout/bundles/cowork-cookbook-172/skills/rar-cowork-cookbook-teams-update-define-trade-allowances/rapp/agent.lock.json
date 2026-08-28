@@ -1,0 +1,116 @@
+{
+  "agent": "@cowork-cookbook/teams_update_define_trade_allowances",
+  "agent_file": "teams_update_define_trade_allowances_agent.py",
+  "agent_sha256": "a0e11e927c6f28a8fbac316aa53cbcfaeb85f5d3ed8675b9604814132f055466",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "TeamsUpdateDefineTradeAllowances",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Drafts a Teams channel post on define trade allowances status with an interactive Adaptive Card for quick triage.",
+    "display_name": "Define trade allowances Teams Channel Update",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "dynamics-365-erp",
+      "process_roots": [
+        "order-to-cash"
+      ],
+      "process_tags": [
+        "order-to-cash/develop-sales-policies/define-trade-allowances"
+      ],
+      "recipe_category": "teams-update",
+      "recipe_type": "prompt",
+      "upstream_path": "order-to-cash/teams-update-define-trade-allowances",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "Communications",
+          "Adaptive Cards"
+        ],
+        "plugin": [
+          {
+            "action": "data_find_entity_type",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "data_find_entities_sql",
+            "plugin": "dynamics-365-erp"
+          }
+        ]
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/teams_update_define_trade_allowances",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "f133654af24a0a30",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "teams-update-define-trade-allowances",
+      "upstream_url": "https://coworkcookbook.com/recipes/teams-update-define-trade-allowances",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "teams_update",
+      "order_to_cash",
+      "intermediate",
+      "integration",
+      "dynamics_365_erp"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "TeamsUpdateDefineTradeAllowances",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,7 +1,7 @@
 ---
 name: "rar-rapp-learn-new"
-description: "Creates new RAPP agents or swarms from natural-language descriptions. Actions: 'create' generates a single agent, 'swarm' creates a multi-agent pipeline, 'list' shows generated agents, 'delete' removes one, 'preview' dry-runs generation, 'submit' prepares a RAR registry submission. Call when the user wants to teach the brainstem something new, create a custom agent, or build an agent swarm."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@rapp/learn_new", "rar_sha256": "ee12a37ef550c9ffb1097334da29ebcb4dcaeeac5b3f8b5dbab366e5178eab71", "source_kind": "rar-agent", "source_commit": "d16979f79339ed06511e0bc50c363f1286d140c7", "version": "2.1.1", "author": "RAPP", "tags": ["meta", "generator", "scaffolding", "learn", "swarm"]}
+description: "Creates new RAPP agents or swarms from natural-language descriptions. By default it ADAPTS a real published agent from the public microsoft/aibast-agents-library (sha256-verified) instead of generating code from scratch. Actions: 'create' adapts a template into a single agent, 'templates' searches the published templates, 'swarm' creates a multi-agent pipeline, 'list' shows generated agents, 'delete' removes one, 'preview' dry-runs generation, 'submit' prepares a RAR registry submission. Call when the user wants to teach the brainstem something new, create a custom agent, or build an agent swarm."
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@rapp/learn_new", "rar_sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741", "source_kind": "rar-agent", "source_commit": "b4ba983328bbb00340c62a83332318dc0ffc22aa", "version": "3.0.1", "author": "RAPP", "tags": ["meta", "generator", "scaffolding", "learn", "swarm", "templates", "aibast"]}
 ---
 
 ## Microsoft Scout runtime
@@ -25,22 +25,48 @@ section are recovery guidance; Scout should prefer the verified runner.
 
 LearnNewAgent - Meta-agent that creates new agents and swarms from natural language.
 
-Describe what you want the agent to do and LearnNewAgent generates,
-saves, and hot-loads it — agents building agents in real-time.
-Generated agents follow the Single File Agent pattern: one file
-containing documentation, metadata contract, and deterministic code.
+Describe what you want the agent to do and LearnNewAgent adapts a real,
+published agent into it — agents building agents from proven parts rather
+than from a blank page. Generated agents follow the Single File Agent
+pattern: one file containing documentation, metadata contract, and
+deterministic code.
 
-v2: adds swarm generation, RAR registry compatibility, and submit workflow.
-Output is dual-compatible — works in local brainstem AND ready for the
-RAR registry (https://github.com/kody-w/RAR).
+v3 — TEMPLATE-FIRST. The default path no longer invents an agent from
+built-in strings. It:
+
+  1. discovers published agents from the PUBLIC, MIT-licensed
+     microsoft/aibast-agents-library registry (cached outside this repo),
+  2. selects the best match for your description (and tells you why),
+  3. fetches the chosen file and VERIFIES its sha256 against the registry —
+     on mismatch it REFUSES; it never repairs and never falls back to the
+     unverified bytes,
+  4. mutates the verified template in memory (rename, remanifest, retarget)
+     while preserving its structure, its MIT attribution, and a machine-
+     readable provenance record.
+
+Scratch generation from the built-in string templates is still available,
+but it is now an explicit choice (source='scratch') and the honest fallback
+when the network is unavailable or nothing matches well. Every response
+says which path produced the output via the "generator" field.
+
+No template source is ever written into this repository: templates are
+fetched at runtime, mutated in memory, and written to the caller's output
+directory. The registry cache lives outside the repo (see
+RAPP_LEARN_CACHE_DIR, default ~/.rapp-learn-new).
 
 Actions:
-  create  — Generate and save a single agent (default)
-  swarm   — Generate a multi-agent pipeline + orchestrator
-  list    — List generated agents in agents/
-  delete  — Remove a generated agent
-  preview — Show what would be generated without writing
-  submit  — Prepare a RAR-compatible submission
+  create    — Adapt a published template into a new agent (default)
+  templates — Search/list the published templates available to adapt
+  swarm     — Generate a multi-agent pipeline + orchestrator
+  list      — List generated agents in agents/
+  delete    — Remove a generated agent
+  preview   — Show what would be generated without writing
+  submit    — Prepare a RAR-compatible submission
+
+Env:
+  RAPP_LEARN_CACHE_DIR  — where the registry cache lives (default ~/.rapp-learn-new)
+  RAPP_LEARN_OFFLINE=1  — never touch the network (cache-only / scratch)
+  RAPP_LEARN_NO_LLM=1   — never shell out to `copilot` for naming/body generation
 
 <!-- toaster:generated:begin -->
 
@@ -55,6 +81,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
       "description": "Action to perform.",
       "enum": [
         "create",
+        "templates",
         "swarm",
         "list",
         "delete",
@@ -94,12 +121,32 @@ The typed contract this capability answers to (JSON Schema — the deterministic
       "description": "RAR namespace for submission (e.g. @myname). Defaults to @rapp.",
       "type": "string"
     },
+    "output_dir": {
+      "description": "Directory to write the generated agent into. Defaults to this brainstem's agents/ directory.",
+      "type": "string"
+    },
     "query": {
       "description": "Natural language query that may contain the agent description.",
       "type": "string"
     },
+    "refresh": {
+      "description": "Force a refetch of the published template registry, ignoring the cache TTL.",
+      "type": "boolean"
+    },
     "requires_env": {
       "description": "Comma-separated env vars the agent needs (e.g. 'API_KEY,WEBHOOK_URL').",
+      "type": "string"
+    },
+    "source": {
+      "description": "Where the new agent comes from. 'template' (default) adapts a verified published agent; 'scratch' uses the built-in string templates. Scratch is also the automatic fallback when offline or when nothing matches well.",
+      "enum": [
+        "template",
+        "scratch"
+      ],
+      "type": "string"
+    },
+    "template": {
+      "description": "Explicit published template to adapt (e.g. 'account-intelligence' or '@aibast-agents-library/account-intelligence'). Overrides automatic selection. Use action='templates' to see what exists.",
       "type": "string"
     }
   },
@@ -114,7 +161,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `learn_new_agent.py` and embedded as the fenced Python below (sha256 ee12a37ef550c9ff…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `learn_new_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `learn_new_agent.py` and embedded as the fenced Python below (sha256 9104535d15333d9a…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `learn_new_agent.py` first:
 
 ```bash
 python3 learn_new_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -128,29 +175,61 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 """
 LearnNewAgent - Meta-agent that creates new agents and swarms from natural language.
 
-Describe what you want the agent to do and LearnNewAgent generates,
-saves, and hot-loads it — agents building agents in real-time.
-Generated agents follow the Single File Agent pattern: one file
-containing documentation, metadata contract, and deterministic code.
+Describe what you want the agent to do and LearnNewAgent adapts a real,
+published agent into it — agents building agents from proven parts rather
+than from a blank page. Generated agents follow the Single File Agent
+pattern: one file containing documentation, metadata contract, and
+deterministic code.
 
-v2: adds swarm generation, RAR registry compatibility, and submit workflow.
-Output is dual-compatible — works in local brainstem AND ready for the
-RAR registry (https://github.com/kody-w/RAR).
+v3 — TEMPLATE-FIRST. The default path no longer invents an agent from
+built-in strings. It:
+
+  1. discovers published agents from the PUBLIC, MIT-licensed
+     microsoft/aibast-agents-library registry (cached outside this repo),
+  2. selects the best match for your description (and tells you why),
+  3. fetches the chosen file and VERIFIES its sha256 against the registry —
+     on mismatch it REFUSES; it never repairs and never falls back to the
+     unverified bytes,
+  4. mutates the verified template in memory (rename, remanifest, retarget)
+     while preserving its structure, its MIT attribution, and a machine-
+     readable provenance record.
+
+Scratch generation from the built-in string templates is still available,
+but it is now an explicit choice (source='scratch') and the honest fallback
+when the network is unavailable or nothing matches well. Every response
+says which path produced the output via the "generator" field.
+
+No template source is ever written into this repository: templates are
+fetched at runtime, mutated in memory, and written to the caller's output
+directory. The registry cache lives outside the repo (see
+RAPP_LEARN_CACHE_DIR, default ~/.rapp-learn-new).
 
 Actions:
-  create  — Generate and save a single agent (default)
-  swarm   — Generate a multi-agent pipeline + orchestrator
-  list    — List generated agents in agents/
-  delete  — Remove a generated agent
-  preview — Show what would be generated without writing
-  submit  — Prepare a RAR-compatible submission
+  create    — Adapt a published template into a new agent (default)
+  templates — Search/list the published templates available to adapt
+  swarm     — Generate a multi-agent pipeline + orchestrator
+  list      — List generated agents in agents/
+  delete    — Remove a generated agent
+  preview   — Show what would be generated without writing
+  submit    — Prepare a RAR-compatible submission
+
+Env:
+  RAPP_LEARN_CACHE_DIR  — where the registry cache lives (default ~/.rapp-learn-new)
+  RAPP_LEARN_OFFLINE=1  — never touch the network (cache-only / scratch)
+  RAPP_LEARN_NO_LLM=1   — never shell out to `copilot` for naming/body generation
 """
 
+import ast
+import hashlib
 import json
+import os
 import re
 import subprocess
+import tempfile
+import urllib.error
+import urllib.request
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 try:
     from agents.basic_agent import BasicAgent
@@ -161,16 +240,44 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/learn_new",
-    "version": "2.1.1",
+    "version": "3.0.1",
     "display_name": "LearnNew",
-    "description": "Generates, saves, and hot-loads new single-file RAPP agents or swarms from natural-language descriptions using built-in code templates.",
+    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback.",
     "author": "RAPP",
-    "tags": ["meta", "generator", "scaffolding", "learn", "swarm"],
+    "tags": ["meta", "generator", "scaffolding", "learn", "swarm", "templates", "aibast"],
     "category": "core",
     "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
-    "example_call": {"args": {"action": "create", "description": "An agent that summarizes web pages by URL"}},
+    "example_call": {"args": {"action": "create", "description": "An agent that researches an enterprise account before a sales call"}},
+}
+
+
+# ── Published template source ────────────────────────────────────────────
+# PUBLIC + MIT licensed. Fetched at runtime; never vendored into this repo.
+TEMPLATE_REPO = "microsoft/aibast-agents-library"
+TEMPLATE_BRANCH = "main"
+TEMPLATE_RAW_BASE = "https://raw.githubusercontent.com/%s/%s/" % (TEMPLATE_REPO, TEMPLATE_BRANCH)
+TEMPLATE_REGISTRY_URL = TEMPLATE_RAW_BASE + "registry.json"
+TEMPLATE_REPO_URL = "https://github.com/%s" % TEMPLATE_REPO
+TEMPLATE_LICENSE = "MIT License, Copyright (c) Microsoft (see %s/blob/%s/LICENSE)" % (
+    TEMPLATE_REPO_URL, TEMPLATE_BRANCH)
+
+# A cached registry older than this is refetched; if the refetch fails the
+# cache is still usable but is reported as STALE, never as current.
+REGISTRY_TTL_SECONDS = 24 * 60 * 60
+NETWORK_TIMEOUT = 20
+
+# Minimum weighted match score before a template is considered a real match.
+# Below this we say "no confident match" instead of forcing a bad one.
+MIN_MATCH_SCORE = 6.0
+
+_STOPWORDS = {
+    'a', 'an', 'the', 'and', 'or', 'of', 'for', 'to', 'in', 'on', 'with', 'that',
+    'this', 'from', 'agent', 'agents', 'create', 'creates', 'make', 'makes', 'want',
+    'wants', 'should', 'would', 'could', 'learn', 'teach', 'build', 'builds', 'about',
+    'which', 'their', 'your', 'they', 'it', 'is', 'are', 'be', 'can', 'need', 'needs',
+    'me', 'my', 'i', 'new', 'thing', 'something', 'help', 'helps', 'using', 'use',
 }
 
 
@@ -424,7 +531,10 @@ if __name__ == "__main__":
             "name": self.name,
             "description": (
                 "Creates new RAPP agents or swarms from natural-language descriptions. "
-                "Actions: 'create' generates a single agent, 'swarm' creates a multi-agent "
+                "By default it ADAPTS a real published agent from the public "
+                "microsoft/aibast-agents-library (sha256-verified) instead of generating "
+                "code from scratch. Actions: 'create' adapts a template into a single agent, "
+                "'templates' searches the published templates, 'swarm' creates a multi-agent "
                 "pipeline, 'list' shows generated agents, 'delete' removes one, "
                 "'preview' dry-runs generation, 'submit' prepares a RAR registry submission. "
                 "Call when the user wants to teach the brainstem something new, create a "
@@ -444,7 +554,34 @@ if __name__ == "__main__":
                     "action": {
                         "type": "string",
                         "description": "Action to perform.",
-                        "enum": ["create", "swarm", "list", "delete", "preview", "submit"]
+                        "enum": ["create", "templates", "swarm", "list", "delete",
+                                 "preview", "submit"]
+                    },
+                    "template": {
+                        "type": "string",
+                        "description": (
+                            "Explicit published template to adapt (e.g. 'account-intelligence' "
+                            "or '@aibast-agents-library/account-intelligence'). Overrides "
+                            "automatic selection. Use action='templates' to see what exists."
+                        )
+                    },
+                    "source": {
+                        "type": "string",
+                        "enum": ["template", "scratch"],
+                        "description": (
+                            "Where the new agent comes from. 'template' (default) adapts a "
+                            "verified published agent; 'scratch' uses the built-in string "
+                            "templates. Scratch is also the automatic fallback when offline "
+                            "or when nothing matches well."
+                        )
+                    },
+                    "refresh": {
+                        "type": "boolean",
+                        "description": "Force a refetch of the published template registry, ignoring the cache TTL."
+                    },
+                    "output_dir": {
+                        "type": "string",
+                        "description": "Directory to write the generated agent into. Defaults to this brainstem's agents/ directory."
                     },
                     "query": {
                         "type": "string",
@@ -485,9 +622,11 @@ if __name__ == "__main__":
             description = query
 
         if action == 'list':
-            return self._list_generated_agents()
+            return self._list_generated_agents(kwargs.get('output_dir'))
+        elif action in ('templates', 'list_templates'):
+            return self._list_templates(description, **kwargs)
         elif action == 'delete':
-            return self._delete_agent(name or description)
+            return self._delete_agent(name or description, kwargs.get('output_dir'))
         elif action == 'preview':
             if kwargs.get('agents_in_swarm'):
                 return self._create_swarm(description, name, write=False, **kwargs)
@@ -508,26 +647,109 @@ if __name__ == "__main__":
                 "message": "Please provide a description of what the agent should do."
             })
 
-        if not name:
-            name = self._generate_name(description)
+        source_mode = (kwargs.get('source') or 'template').strip().lower()
+        template_pick = (kwargs.get('template') or '').strip()
+        if template_pick:
+            source_mode = 'template'
 
-        name = self._sanitize_name(name)
-        class_name = f"{name}Agent"
+        provenance = None
+        template_report = None
+        generator = "builtin-scratch"
+        fallback_reason = None
+        agent_code = None
+
+        if source_mode != 'scratch':
+            tpl = self._build_from_template(description, template_pick, **kwargs)
+            template_report = tpl.get("report")
+
+            if tpl.get("ok"):
+                entry = tpl["entry"]
+                fetched = tpl["fetched"]
+                if not name:
+                    name = self._name_from_template(entry, description)
+                name = self._sanitize_name(name)
+                class_name = f"{name}Agent"
+                agent_code, provenance = self._mutate_template(
+                    fetched["code"], entry, fetched, description, name, class_name, **kwargs)
+                generator = "aibast-template-mutation"
+
+            elif tpl.get("reason") == "integrity_mismatch":
+                # Refuse-never-repair. Do NOT fall back to the unverified bytes.
+                return json.dumps({
+                    "status": "refused",
+                    "action": "create",
+                    "generator": "none",
+                    "reason": "integrity_mismatch",
+                    "message": (
+                        "REFUSED: the fetched template did not match its published sha256. "
+                        "Nothing was generated, nothing was written, and the bytes were "
+                        "discarded. This estate refuses; it does not repair. Re-run with "
+                        "refresh=true to pull a fresh registry, or source='scratch' to "
+                        "generate without a template."
+                    ),
+                    "template": tpl.get("integrity"),
+                }, indent=2)
+
+            elif tpl.get("reason") == "unknown_template":
+                return json.dumps({
+                    "status": "error",
+                    "action": "create",
+                    "generator": "none",
+                    "reason": "unknown_template",
+                    "message": (
+                        f"No published template matches template='{template_pick}'. "
+                        f"Nothing was generated. Use action='templates' to list what exists, "
+                        f"or drop the 'template' argument to let selection choose."
+                    ),
+                    "did_you_mean": tpl.get("candidates", []),
+                    "registry": tpl.get("report", {}).get("registry"),
+                }, indent=2)
+
+            else:
+                fallback_reason = tpl.get("reason")
+
+        if agent_code is None:
+            # Scratch path: explicit choice, or the honest fallback.
+            if not name:
+                name = self._generate_name(description)
+            name = self._sanitize_name(name)
+            class_name = f"{name}Agent"
+            agent_code = self._generate_agent_code(description, name, class_name, **kwargs)
+            generator = "builtin-scratch"
+
         snake = self._to_snake_case(name)
         file_name = f"{snake}_agent.py"
-        file_path = self.agents_dir / file_name
+        out_dir = self._resolve_output_dir(kwargs.get('output_dir'))
+        file_path = out_dir / file_name
+
+        base = {
+            "generator": generator,
+            "generator_description": (
+                "Mutated a sha256-verified published agent from %s" % TEMPLATE_REPO
+                if generator == "aibast-template-mutation"
+                else "Generated from LearnNewAgent's built-in string templates (no published template used)"
+            ),
+        }
+        if provenance:
+            base["provenance"] = provenance
+        if template_report:
+            base["template_selection"] = template_report
+        if fallback_reason:
+            base["fallback_reason"] = fallback_reason
+            base["fallback_message"] = self._fallback_message(fallback_reason, template_report)
 
         if write and file_path.exists():
-            return json.dumps({
+            out = dict(base)
+            out.update({
                 "status": "error",
                 "message": f"Agent '{name}' already exists at {file_path}. "
-                           f"Delete it first or choose a different name."
+                           f"Delete it first or choose a different name.",
             })
-
-        agent_code = self._generate_agent_code(description, name, class_name, **kwargs)
+            return json.dumps(out, indent=2)
 
         if not write:
-            return json.dumps({
+            out = dict(base)
+            out.update({
                 "status": "ok",
                 "action": "preview",
                 "filename": file_name,
@@ -535,20 +757,25 @@ if __name__ == "__main__":
                 "display_name": name,
                 "lines": len(agent_code.split('\n')),
                 "code": agent_code,
-                "message": f"Preview of {file_name} — use action='create' to write it."
+                "message": f"Preview of {file_name} via {generator} — use action='create' to write it.",
             })
+            return json.dumps(out, indent=2)
 
         try:
+            out_dir.mkdir(parents=True, exist_ok=True)
             file_path.write_text(agent_code)
         except Exception as e:
-            return json.dumps({"status": "error", "message": f"Failed to write agent file: {e}"})
+            out = dict(base)
+            out.update({"status": "error", "message": f"Failed to write agent file: {e}"})
+            return json.dumps(out, indent=2)
 
         hot_load_result = self._hot_load_agent(file_path, class_name)
 
-        result = {
+        result = dict(base)
+        result.update({
             "status": "success",
             "action": "create",
-            "message": f"Created and loaded agent '{name}'",
+            "message": f"Created agent '{name}' via {generator}",
             "agent_name": name,
             "filename": file_name,
             "file_path": str(file_path),
@@ -556,11 +783,14 @@ if __name__ == "__main__":
             "hot_loaded": hot_load_result.get("success", False),
             "description": description[:200],
             "hint": (
-                f"Agent saved to agents/{file_name} — it will auto-load on next request. "
-                f"Edit the perform() method to customize the logic. "
-                f"To submit to RAR, re-run with action='submit'."
+                f"Agent saved to {file_path} — it will auto-load on next request. "
+                + ("Its behaviour is inherited from the verified template; edit the "
+                   "operations listed in the class docstring to retarget the logic. "
+                   if generator == "aibast-template-mutation"
+                   else "Edit the perform() method to customize the logic. ")
+                + "To submit to RAR, re-run with action='submit'."
             ),
-        }
+        })
 
         if hot_load_result.get("installed_deps"):
             result["installed_dependencies"] = hot_load_result["installed_deps"]
@@ -569,7 +799,708 @@ if __name__ == "__main__":
             if hot_load_result.get("hint"):
                 result["hot_load_hint"] = hot_load_result["hint"]
 
-        return json.dumps(result)
+        return json.dumps(result, indent=2)
+
+    def _resolve_output_dir(self, output_dir):
+        if output_dir:
+            return Path(output_dir).expanduser()
+        return self.agents_dir
+
+    def _fallback_message(self, reason, report):
+        reg = (report or {}).get("registry", {})
+        if reason == "offline":
+            return (
+                "Could not reach the published template registry and no cached copy is "
+                "available, so nothing could be adapted. Fell back to built-in scratch "
+                "generation. Network error: %s" % reg.get("network_error", "unknown")
+            )
+        if reason == "no_match":
+            return (
+                "No published template matched the description with enough confidence "
+                "(best score %s < threshold %s), so no template was forced. Fell back to "
+                "built-in scratch generation. Pass template='<name>' to override, or "
+                "action='templates' to browse." % (
+                    (report or {}).get("best_score"), MIN_MATCH_SCORE)
+            )
+        if reason == "fetch_failed":
+            return (
+                "The template was selected but could not be downloaded (%s). Nothing "
+                "unverified was used. Fell back to built-in scratch generation."
+                % (report or {}).get("fetch_error", "unknown error")
+            )
+        if reason == "no_expected_hash":
+            return ("The selected registry entry carries no published sha256, so it could "
+                    "not be verified and was not used. Fell back to built-in scratch generation.")
+        return "Fell back to built-in scratch generation (%s)." % reason
+
+    # ── Published-template discovery ──────────────────────────────────────
+
+    def _cache_dir(self):
+        """Registry cache location. Always OUTSIDE any agent repo."""
+        env_dir = os.environ.get("RAPP_LEARN_CACHE_DIR")
+        candidate = Path(env_dir).expanduser() if env_dir else (Path.home() / ".rapp-learn-new")
+        try:
+            # Never let the cache land inside the agents tree of a checkout.
+            if str(candidate.resolve()).startswith(str(self.agents_dir.resolve())):
+                candidate = Path(tempfile.gettempdir()) / "rapp-learn-new"
+        except Exception:
+            pass
+        try:
+            candidate.mkdir(parents=True, exist_ok=True)
+        except Exception:
+            candidate = Path(tempfile.gettempdir()) / "rapp-learn-new"
+            candidate.mkdir(parents=True, exist_ok=True)
+        return candidate
+
+    def _http_get(self, url, extra_headers=None):
+        headers = {"User-Agent": "rapp-learn-new/3.0 (+%s)" % TEMPLATE_REPO_URL}
+        if extra_headers:
+            headers.update({k: v for k, v in extra_headers.items() if v})
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=NETWORK_TIMEOUT) as resp:
+            return resp.read(), dict(resp.headers)
+
+    def _load_registry(self, refresh=False):
+        """
+        Returns (registry_or_None, meta).
+
+        meta["source"] is one of:
+          network            — freshly downloaded
+          network-unchanged  — server said 304; cache re-validated as CURRENT
+          cache              — cache still within TTL, network not contacted
+          cache-STALE        — network unreachable; cache served but flagged STALE
+          none               — no network and no cache
+
+        "I couldn't reach it" (cache-STALE / none, with network_error) and
+        "nothing changed" (network-unchanged) are deliberately distinct.
+        """
+        cdir = self._cache_dir()
+        cache_f = cdir / "aibast-registry.json"
+        meta_f = cdir / "aibast-registry.meta.json"
+
+        cached_meta = {}
+        if meta_f.exists():
+            try:
+                cached_meta = json.loads(meta_f.read_text())
+            except Exception:
+                cached_meta = {}
+
+        def _age():
+            ts = cached_meta.get("fetched_at_epoch")
+            if not ts:
+                return None
+            return max(0, int(self._now_epoch() - ts))
+
+        def _read_cache():
+            try:
+                return json.loads(cache_f.read_text())
+            except Exception:
+                return None
+
+        age = _age()
+        offline = os.environ.get("RAPP_LEARN_OFFLINE") == "1"
+
+        if cache_f.exists() and not refresh and age is not None and age < REGISTRY_TTL_SECONDS:
+            reg = _read_cache()
+            if reg is not None:
+                return reg, {
+                    "source": "cache",
+                    "stale": False,
+                    "cache_path": str(cache_f),
+                    "fetched_at": cached_meta.get("fetched_at"),
+                    "age_seconds": age,
+                    "url": TEMPLATE_REGISTRY_URL,
+                }
+
+        if offline:
+            reg = _read_cache() if cache_f.exists() else None
+            if reg is not None:
+                return reg, {
+                    "source": "cache-STALE",
+                    "stale": True,
+                    "cache_path": str(cache_f),
+                    "fetched_at": cached_meta.get("fetched_at"),
+                    "age_seconds": age,
+                    "network_error": "RAPP_LEARN_OFFLINE=1 — network deliberately not contacted",
+                    "warning": "Served from cache without contacting the network. Content may be out of date.",
+                    "url": TEMPLATE_REGISTRY_URL,
+                }
+            return None, {
+                "source": "none",
+                "stale": True,
+                "network_error": "RAPP_LEARN_OFFLINE=1 — network deliberately not contacted",
+                "cache_path": str(cache_f),
+                "url": TEMPLATE_REGISTRY_URL,
+            }
+
+        etag = cached_meta.get("etag") if cache_f.exists() else None
+        try:
+            body, headers = self._http_get(
+                TEMPLATE_REGISTRY_URL,
+                {"If-None-Match": etag} if etag else None)
+            reg = json.loads(body.decode("utf-8"))
+            now_iso = self._now_iso()
+            cache_f.write_text(json.dumps(reg))
+            meta_f.write_text(json.dumps({
+                "url": TEMPLATE_REGISTRY_URL,
+                "fetched_at": now_iso,
+                "fetched_at_epoch": self._now_epoch(),
+                "etag": headers.get("ETag"),
+                "bytes": len(body),
+            }, indent=2))
+            return reg, {
+                "source": "network",
+                "stale": False,
+                "cache_path": str(cache_f),
+                "fetched_at": now_iso,
+                "age_seconds": 0,
+                "bytes": len(body),
+                "url": TEMPLATE_REGISTRY_URL,
+                "registry_generated_at": reg.get("generated_at"),
+            }
+        except urllib.error.HTTPError as e:
+            if e.code == 304 and cache_f.exists():
+                reg = _read_cache()
+                if reg is not None:
+                    now_iso = self._now_iso()
+                    cached_meta["fetched_at"] = now_iso
+                    cached_meta["fetched_at_epoch"] = self._now_epoch()
+                    try:
+                        meta_f.write_text(json.dumps(cached_meta, indent=2))
+                    except Exception:
+                        pass
+                    return reg, {
+                        "source": "network-unchanged",
+                        "stale": False,
+                        "cache_path": str(cache_f),
+                        "fetched_at": now_iso,
+                        "age_seconds": 0,
+                        "note": "Registry re-validated against the server: 304 Not Modified — nothing changed upstream.",
+                        "url": TEMPLATE_REGISTRY_URL,
+                    }
+            net_err = "HTTP %s %s" % (e.code, e.reason)
+        except Exception as e:
+            net_err = "%s: %s" % (type(e).__name__, e)
+
+        reg = _read_cache() if cache_f.exists() else None
+        if reg is not None:
+            return reg, {
+                "source": "cache-STALE",
+                "stale": True,
+                "cache_path": str(cache_f),
+                "fetched_at": cached_meta.get("fetched_at"),
+                "age_seconds": age,
+                "network_error": net_err,
+                "warning": (
+                    "Could NOT reach the published registry. Serving a STALE cache "
+                    "last fetched %s (%s seconds old). This is not a statement that "
+                    "nothing changed upstream." % (cached_meta.get("fetched_at"), age)
+                ),
+                "url": TEMPLATE_REGISTRY_URL,
+            }
+        return None, {
+            "source": "none",
+            "stale": True,
+            "network_error": net_err,
+            "cache_path": str(cache_f),
+            "url": TEMPLATE_REGISTRY_URL,
+        }
+
+    def _now_epoch(self):
+        return int(datetime.now(timezone.utc).timestamp())
+
+    def _now_iso(self):
+        return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    # ── Template selection ────────────────────────────────────────────────
+
+    def _tokens(self, text):
+        raw = re.split(r'[^a-z0-9]+', (text or '').lower())
+        out = []
+        for t in raw:
+            if len(t) < 3 or t in _STOPWORDS:
+                continue
+            if t not in out:
+                out.append(t)
+        return out
+
+    def _variants(self, token):
+        """Progressively shorter forms, longest first (substring matching)."""
+        v = [token]
+        if token.endswith('ies') and len(token) > 4:
+            v.append(token[:-3] + 'y')
+        if token.endswith('s') and len(token) > 3:
+            v.append(token[:-1])
+        if token.endswith('es') and len(token) > 4:
+            v.append(token[:-2])
+        return v
+
+    def _entry_fields(self, entry):
+        sol = entry.get("_solution") or {}
+        strong = " ".join([
+            str(entry.get("display_name", "")),
+            str(entry.get("name", "")),
+            str(entry.get("_stack", "")),
+            " ".join(entry.get("tags") or []),
+        ])
+        mid = " ".join([
+            str(entry.get("description", "")),
+            str(entry.get("category", "")),
+            str(entry.get("_stack_vertical", "")),
+        ])
+        weak = " ".join([
+            str(sol.get("executive_summary", "")),
+            " ".join(sol.get("capabilities") or []),
+            " ".join(sol.get("personas") or []),
+            " ".join(sol.get("industries") or []),
+            " ".join(sol.get("featured_tools") or []),
+            " ".join(str(o) for o in (sol.get("outcomes") or [])),
+        ])
+        return strong.lower(), mid.lower(), weak.lower()
+
+    def _score_entry(self, entry, tokens):
+        strong, mid, weak = self._entry_fields(entry)
+        score = 0.0
+        hits = []
+        for t in tokens:
+            # Best tier across all morphological variants — a token scores once,
+            # at the strongest field any of its forms appears in.
+            best = 0.0
+            for v in self._variants(t):
+                if v in strong:
+                    best = max(best, 3.0)
+                elif v in mid:
+                    best = max(best, 2.0)
+                elif v in weak:
+                    best = max(best, 1.0)
+            if best:
+                score += best
+                hits.append(t)
+        return score, hits
+
+    def _rank_templates(self, agents, description, limit=5):
+        tokens = self._tokens(description)
+        scored = []
+        for e in agents:
+            if not e.get("_file") or not e.get("_sha256"):
+                continue
+            s, hits = self._score_entry(e, tokens)
+            if s > 0:
+                scored.append((s, hits, e))
+        scored.sort(key=lambda x: (-x[0], x[2].get("name", "")))
+        return tokens, scored[:limit]
+
+    def _find_template(self, agents, wanted):
+        w = wanted.strip().lower().lstrip('@')
+        w_norm = w.replace('_', '-')
+        exact, partial = None, []
+        for e in agents:
+            if not e.get("_file") or not e.get("_sha256"):
+                continue
+            name = str(e.get("name", "")).lower().lstrip('@')
+            slug = name.split('/')[-1]
+            stack = str(e.get("_stack", "")).lower().replace('_', '-')
+            disp = str(e.get("display_name", "")).lower()
+            keys = {name, name.replace('_', '-'), slug, slug.replace('_', '-'), stack, disp}
+            if w in keys or w_norm in keys:
+                exact = e
+                break
+            if w_norm and (w_norm in slug or w_norm in stack or w in disp):
+                partial.append(e)
+        if exact:
+            return exact, []
+        if len(partial) == 1:
+            return partial[0], []
+        return None, [self._entry_summary(e) for e in partial[:8]]
+
+    def _entry_summary(self, entry, score=None, hits=None):
+        out = {
+            "template": entry.get("name"),
+            "display_name": entry.get("display_name"),
+            "vertical": entry.get("_stack_vertical"),
+            "stack": entry.get("_stack"),
+            "lines": entry.get("_lines"),
+            "kind": entry.get("_catalog_kind"),
+            "description": (entry.get("description") or "")[:160],
+            "file": entry.get("_file"),
+            "sha256": entry.get("_sha256"),
+        }
+        if score is not None:
+            out["match_score"] = round(score, 1)
+        if hits:
+            out["matched_on"] = hits
+        return out
+
+    def _list_templates(self, description='', **kwargs):
+        reg, meta = self._load_registry(refresh=bool(kwargs.get('refresh')))
+        if reg is None:
+            return json.dumps({
+                "status": "error",
+                "action": "templates",
+                "message": "Could not load the published template registry.",
+                "registry": meta,
+            }, indent=2)
+
+        agents = reg.get("agents") or []
+        query = description or kwargs.get('template') or ''
+        if query:
+            tokens, ranked = self._rank_templates(agents, query, limit=10)
+            items = [self._entry_summary(e, s, h) for s, h, e in ranked]
+            msg = "%d of %d published templates ranked against your query." % (
+                len(items), len(agents))
+        else:
+            items = [self._entry_summary(e) for e in agents]
+            tokens = []
+            msg = "%d published templates available to adapt." % len(agents)
+
+        return json.dumps({
+            "status": "ok",
+            "action": "templates",
+            "source_repo": TEMPLATE_REPO_URL,
+            "license": TEMPLATE_LICENSE,
+            "registry": meta,
+            "query_tokens": tokens,
+            "count": len(items),
+            "templates": items,
+            "message": msg + (
+                "  WARNING: this listing came from a STALE cache — it may not reflect "
+                "the current published set." if meta.get("stale") else ""),
+        }, indent=2)
+
+    # ── Template fetch + integrity verification ───────────────────────────
+
+    def _fetch_and_verify(self, entry):
+        expected = entry.get("_sha256")
+        rel = entry.get("_file")
+        if not expected:
+            return {"ok": False, "reason": "no_expected_hash", "file": rel}
+        url = TEMPLATE_RAW_BASE + rel
+        if os.environ.get("RAPP_LEARN_OFFLINE") == "1":
+            return {"ok": False, "reason": "fetch_failed", "url": url,
+                    "error": "RAPP_LEARN_OFFLINE=1 — template bytes cannot be fetched or "
+                             "verified offline; nothing unverified will be used"}
+        try:
+            body, _ = self._http_get(url)
+        except Exception as e:
+            return {"ok": False, "reason": "fetch_failed",
+                    "error": "%s: %s" % (type(e).__name__, e), "url": url}
+
+        actual = hashlib.sha256(body).hexdigest()
+        if actual != expected:
+            return {
+                "ok": False,
+                "reason": "integrity_mismatch",
+                "url": url,
+                "expected_sha256": expected,
+                "actual_sha256": actual,
+                "bytes": len(body),
+                "action_taken": "bytes discarded, not written, not repaired",
+            }
+        return {
+            "ok": True,
+            "code": body.decode("utf-8"),
+            "sha256": actual,
+            "url": url,
+            "bytes": len(body),
+            "fetched_at": self._now_iso(),
+            "verified": "sha256 matched the published registry entry",
+        }
+
+    def _build_from_template(self, description, template_pick='', **kwargs):
+        if os.environ.get("RAPP_LEARN_OFFLINE") == "1" and not template_pick:
+            pass  # still allowed: a cached registry may serve, fetch will then fail honestly
+
+        reg, meta = self._load_registry(refresh=bool(kwargs.get('refresh')))
+        report = {"registry": meta, "source_repo": TEMPLATE_REPO_URL, "license": TEMPLATE_LICENSE}
+
+        if reg is None:
+            report["outcome"] = "registry unavailable"
+            return {"ok": False, "reason": "offline", "report": report}
+
+        agents = reg.get("agents") or []
+        report["templates_available"] = len(agents)
+
+        if template_pick:
+            entry, candidates = self._find_template(agents, template_pick)
+            if entry is None:
+                report["outcome"] = "explicit template not found"
+                return {"ok": False, "reason": "unknown_template",
+                        "candidates": candidates, "report": report}
+            report["mode"] = "explicit override"
+            report["chosen"] = self._entry_summary(entry)
+            report["why"] = ("You named it: template=%r resolved to %s. Automatic "
+                             "selection was bypassed." % (template_pick, entry.get("name")))
+        else:
+            tokens, ranked = self._rank_templates(agents, description)
+            report["mode"] = "automatic selection"
+            report["query_tokens"] = tokens
+            report["considered"] = [self._entry_summary(e, s, h) for s, h, e in ranked]
+            report["best_score"] = round(ranked[0][0], 1) if ranked else 0.0
+            report["threshold"] = MIN_MATCH_SCORE
+            if not ranked or ranked[0][0] < MIN_MATCH_SCORE:
+                report["outcome"] = "no confident match — refusing to force one"
+                return {"ok": False, "reason": "no_match", "report": report}
+            score, hits, entry = ranked[0]
+            runner_up = ranked[1][0] if len(ranked) > 1 else 0.0
+            report["chosen"] = self._entry_summary(entry, score, hits)
+            report["why"] = (
+                "Best weighted match: scored %.1f (threshold %.1f, runner-up %.1f) on "
+                "%s. Name/stack/tag hits weigh 3, description/vertical 2, solution "
+                "metadata 1." % (score, MIN_MATCH_SCORE, runner_up,
+                                 ", ".join(hits) or "no direct token hits"))
+
+        fetched = self._fetch_and_verify(entry)
+        if not fetched.get("ok"):
+            reason = fetched.get("reason")
+            report["outcome"] = "template rejected: %s" % reason
+            if reason == "fetch_failed":
+                report["fetch_error"] = fetched.get("error")
+            if reason == "integrity_mismatch":
+                report["integrity"] = fetched
+                return {"ok": False, "reason": "integrity_mismatch",
+                        "integrity": fetched, "report": report}
+            return {"ok": False, "reason": reason, "report": report}
+
+        report["outcome"] = "verified and adapted"
+        report["integrity"] = {
+            "url": fetched["url"],
+            "expected_sha256": entry.get("_sha256"),
+            "actual_sha256": fetched["sha256"],
+            "match": True,
+            "bytes": fetched["bytes"],
+            "fetched_at": fetched["fetched_at"],
+        }
+        return {"ok": True, "entry": entry, "fetched": fetched, "report": report}
+
+    def _name_from_template(self, entry, description):
+        """Prefer a name derived from the user's ask; fall back to the template's."""
+        derived = self._generate_name(description)
+        if derived and derived != 'Custom':
+            return derived
+        disp = re.sub(r'[^a-zA-Z0-9 ]', '', str(entry.get("display_name") or ""))
+        disp = disp.replace(" Agent", "")
+        words = [w for w in disp.split() if w]
+        if words:
+            return ''.join(w[0].upper() + w[1:] for w in words[:3])
+        return 'Custom'
+
+    # ── Template mutation (structural, never regeneration) ────────────────
+
+    def _py_block(self, var_name, data):
+        lines = ["%s = {" % var_name]
+        for k, v in data.items():
+            lines.append("    %s: %s," % (repr(str(k)), repr(v)))
+        lines.append("}")
+        return lines
+
+    def _mutate_template(self, code, entry, fetched, description, name, class_name, **kwargs):
+        """
+        Adapt a VERIFIED published template into the user's agent.
+
+        Structure-preserving: the template's operations, data layer, and
+        method bodies survive intact. What changes is identity (class name,
+        agent name), the manifest, the documentation, the import shim, and
+        the provenance record. Nothing is regenerated from scratch.
+        """
+        tree = ast.parse(code)
+        lines = code.split("\n")
+        edits = []  # (start0, end0_exclusive, replacement_lines)
+
+        # 1. Locate the pieces we are allowed to touch.
+        mod_doc = None
+        manifest_node = None
+        class_node = None
+        import_node = None
+        syspath_nodes = []
+
+        if (tree.body and isinstance(tree.body[0], ast.Expr)
+                and isinstance(tree.body[0].value, ast.Constant)
+                and isinstance(tree.body[0].value.value, str)):
+            mod_doc = tree.body[0]
+
+        for node in tree.body:
+            if (isinstance(node, ast.Assign) and manifest_node is None
+                    and any(isinstance(t, ast.Name) and t.id == "__manifest__"
+                            for t in node.targets)):
+                manifest_node = node
+            elif isinstance(node, ast.ClassDef) and class_node is None:
+                for b in node.bases:
+                    bn = b.id if isinstance(b, ast.Name) else getattr(b, "attr", None)
+                    if bn == "BasicAgent":
+                        class_node = node
+                        break
+            elif isinstance(node, ast.ImportFrom) and node.module == "basic_agent":
+                import_node = node
+            elif isinstance(node, ast.Expr):
+                seg = ast.get_source_segment(code, node) or ""
+                if "sys.path.insert" in seg:
+                    syspath_nodes.append(node)
+
+        if class_node is None:
+            raise ValueError("template has no BasicAgent subclass to adapt")
+
+        old_class = class_node.name
+        old_manifest = {}
+        if manifest_node is not None:
+            try:
+                old_manifest = ast.literal_eval(manifest_node.value)
+            except Exception:
+                old_manifest = {}
+
+        namespace = (kwargs.get('namespace', '') or 'rapp').lstrip('@')
+        snake = self._to_snake_case(name)
+        safe_desc = description.replace('"', "'").replace('\n', ' ').strip()[:300]
+        user_tags = self._generate_tags(description)
+        tags = []
+        for t in user_tags + list(old_manifest.get("tags") or []):
+            t = str(t)
+            if t not in tags:
+                tags.append(t)
+        env_list = [e.strip() for e in (kwargs.get('requires_env', '') or '').split(",") if e.strip()]
+        category = kwargs.get('category') or old_manifest.get("category") or "general"
+        adapted_at = self._now_iso()
+
+        provenance = {
+            "adapted_from_repo": TEMPLATE_REPO_URL,
+            "adapted_from_agent": entry.get("name"),
+            "adapted_from_file": entry.get("_file"),
+            "source_url": fetched["url"],
+            "source_sha256": fetched["sha256"],
+            "sha256_verified": True,
+            "verification": "sha256 of the fetched bytes matched registry.json's published _sha256",
+            "fetched_at": fetched["fetched_at"],
+            "adapted_at": adapted_at,
+            "adapted_by": "%s v%s" % (__manifest__["name"], __manifest__["version"]),
+            "method": "structural mutation (rename + remanifest + retarget); NOT regenerated",
+            "license": TEMPLATE_LICENSE,
+            "upstream_display_name": entry.get("display_name"),
+            "upstream_description": entry.get("description"),
+        }
+
+        # 2. Module docstring -> new purpose + provenance + MIT attribution.
+        ops = [n.name[1:] for n in class_node.body
+               if isinstance(n, ast.FunctionDef) and n.name.startswith("_")
+               and not n.name.startswith("__")]
+        new_doc = ['"""', "%s" % name, "", safe_desc or "Adapted RAPP agent.", "",
+                   "ADAPTED, NOT GENERATED.", ""]
+        new_doc += [
+            "This agent was produced by mutating a real published agent rather than",
+            "writing one from scratch. The upstream structure, operations and data",
+            "layer are preserved; identity, manifest and documentation were retargeted.",
+            "",
+            "  Upstream agent : %s" % entry.get("name"),
+            "  Upstream repo  : %s (branch %s)" % (TEMPLATE_REPO_URL, TEMPLATE_BRANCH),
+            "  Upstream file  : %s" % entry.get("_file"),
+            "  sha256         : %s (verified at fetch time)" % fetched["sha256"],
+            "  Fetched        : %s" % fetched["fetched_at"],
+            "  Adapted        : %s by %s" % (adapted_at, __manifest__["name"]),
+            "",
+            "  License: %s" % TEMPLATE_LICENSE,
+            "  The upstream MIT terms travel with this file. Attribution preserved.",
+            "",
+            "Drop this file into any RAPP brainstem's agents/ directory and it works.",
+            "Compatible with the RAR registry at https://github.com/kody-w/RAR",
+            '"""',
+        ]
+        if mod_doc is not None:
+            edits.append((mod_doc.lineno - 1, mod_doc.end_lineno, new_doc))
+        else:
+            edits.append((0, 0, new_doc + [""]))
+
+        # 3. Import shim -> the portable RAPP form.
+        rapp_import = [
+            "try:",
+            "    from agents.basic_agent import BasicAgent",
+            "except ImportError:",
+            "    from basic_agent import BasicAgent",
+        ]
+        if import_node is not None:
+            edits.append((import_node.lineno - 1, import_node.end_lineno, rapp_import))
+        for n in syspath_nodes:
+            edits.append((n.lineno - 1, n.end_lineno,
+                          ["# (upstream sys.path shim removed — RAPP resolves BasicAgent directly)"]))
+
+        # 4. Manifest -> this agent's identity + provenance block.
+        new_manifest = {
+            "schema": "rapp-agent/1.0",
+            "name": "@%s/%s" % (namespace, snake),
+            "version": "1.0.0",
+            "display_name": name,
+            "description": safe_desc or old_manifest.get("description", ""),
+            "author": namespace,
+            "tags": tags,
+            "category": category,
+            "quality_tier": "community",
+            "requires_env": env_list,
+            "dependencies": ["@rapp/basic_agent"],
+            "example_call": {"args": {"operation": (ops[0] if ops else "run")}},
+            "derived_from": entry.get("name"),
+            "derived_from_sha256": fetched["sha256"],
+            "license": "MIT (inherited from %s)" % TEMPLATE_REPO,
+        }
+        manifest_lines = (
+            ["# " + "=" * 63,
+             "# RAPP AGENT MANIFEST",
+             "# " + "=" * 63]
+            + self._py_block("__manifest__", new_manifest)
+            + ["",
+               "# " + "=" * 63,
+               "# PROVENANCE — this file is an adaptation of a published agent.",
+               "# Do not strip: it is the audit trail and the license attribution.",
+               "# " + "=" * 63]
+            + self._py_block("__provenance__", provenance)
+        )
+        if manifest_node is not None:
+            # Swallow the upstream banner comment directly above the manifest so
+            # the adapted file carries one banner, not two.
+            start = manifest_node.lineno - 1
+            while start > 0 and lines[start - 1].strip().startswith("#"):
+                start -= 1
+            edits.append((start, manifest_node.end_lineno, manifest_lines))
+        else:
+            edits.append((class_node.lineno - 1, class_node.lineno - 1, manifest_lines + ["", ""]))
+
+        # 5. Class docstring -> adaptation note, upstream doc preserved below.
+        cls_doc_node = None
+        if (class_node.body and isinstance(class_node.body[0], ast.Expr)
+                and isinstance(class_node.body[0].value, ast.Constant)
+                and isinstance(class_node.body[0].value.value, str)):
+            cls_doc_node = class_node.body[0]
+        original_doc = (cls_doc_node.value.value if cls_doc_node else "").strip("\n")
+        note = ['    """',
+                "    %s" % name,
+                "",
+                "    ADAPTATION TARGET: %s" % (safe_desc or "(no description given)"),
+                "",
+                "    Behaviour below is inherited from %s and is intentionally left" % entry.get("name"),
+                "    intact. To retarget it, edit the operations listed here rather than",
+                "    rewriting the file — the structure is the part that was proven.",
+                ""]
+        if original_doc:
+            note += ["    --- upstream documentation (preserved) ---"]
+            note += ["    " + ln if ln.strip() else "" for ln in original_doc.split("\n")]
+        note += ['    """']
+        if cls_doc_node is not None:
+            edits.append((cls_doc_node.lineno - 1, cls_doc_node.end_lineno, note))
+        else:
+            edits.append((class_node.body[0].lineno - 1, class_node.body[0].lineno - 1, note))
+
+        # 6. Apply edits bottom-up so line numbers stay valid.
+        for start, end, repl in sorted(edits, key=lambda x: -x[0]):
+            lines[start:end] = repl
+        mutated = "\n".join(lines)
+
+        # 7. Rename the class (and every reference, including self.name).
+        mutated = re.sub(r'\b%s\b' % re.escape(old_class), class_name, mutated)
+        mutated = re.sub(r"(self\.name\s*=\s*)(['\"])[^'\"]*\2",
+                         lambda m: '%s"%s"' % (m.group(1), class_name), mutated, count=1)
+
+        if not mutated.endswith("\n"):
+            mutated += "\n"
+
+        # 8. Fail loudly rather than emit a broken file.
+        ast.parse(mutated)
+        return mutated, provenance
 
     # ── Swarm creation ────────────────────────────────────────────────────
 
@@ -594,6 +1525,9 @@ if __name__ == "__main__":
         namespace = (kwargs.get('namespace', '') or 'rapp').lstrip('@')
         env_list = [e.strip() for e in (kwargs.get('requires_env', '') or '').split(",") if e.strip()]
         tags = self._generate_tags(description) + ["swarm"]
+        out_dir = self._resolve_output_dir(kwargs.get('output_dir'))
+        if write:
+            out_dir.mkdir(parents=True, exist_ok=True)
 
         generated_files = []
 
@@ -626,7 +1560,7 @@ if __name__ == "__main__":
             )
 
             if write:
-                dest = self.agents_dir / sub_filename
+                dest = out_dir / sub_filename
                 try:
                     dest.write_text(sub_code)
                 except Exception as e:
@@ -675,7 +1609,7 @@ if __name__ == "__main__":
         )
 
         if write:
-            dest = self.agents_dir / orch_filename
+            dest = out_dir / orch_filename
             try:
                 dest.write_text(orch_code)
             except Exception as e:
@@ -694,6 +1628,11 @@ if __name__ == "__main__":
         result = {
             "status": "success",
             "action": "swarm" if write else "preview",
+            "generator": "builtin-scratch",
+            "generator_description": (
+                "Swarm scaffolding comes from LearnNewAgent's built-in string templates; "
+                "published-template adaptation applies to single agents (action='create')."
+            ),
             "swarm_name": swarm_name,
             "files_generated": len(generated_files),
             "filenames": all_filenames,
@@ -714,9 +1653,9 @@ if __name__ == "__main__":
 
             for f in generated_files:
                 if not f.get("is_orchestrator"):
-                    fpath = self.agents_dir / f["filename"]
+                    fpath = out_dir / f["filename"]
                     self._hot_load_agent(fpath, f["class"])
-            orch_path = self.agents_dir / orch_filename
+            orch_path = out_dir / orch_filename
             self._hot_load_agent(orch_path, orch_class)
         else:
             result["orchestrator_code"] = orch_code
@@ -737,14 +1676,27 @@ if __name__ == "__main__":
 
         issue_title = f"[AGENT] @{namespace}/{filename.replace('.py', '')}"
 
-        return json.dumps({
+        submission = {
             "status": "ok",
             "action": "submit",
+            "generator": preview.get("generator"),
+            "generator_description": preview.get("generator_description"),
             "filename": filename,
             "namespace": f"@{namespace}",
             "rar_path": rar_path,
             "issue_title": issue_title,
             "code": code,
+        }
+        if preview.get("provenance"):
+            submission["provenance"] = preview["provenance"]
+            submission["attribution_notice"] = (
+                "This agent is an adaptation of %s under %s. The provenance block in the "
+                "generated file must survive submission." % (
+                    preview["provenance"].get("adapted_from_agent"), TEMPLATE_LICENSE)
+            )
+        if preview.get("template_selection"):
+            submission["template_selection"] = preview["template_selection"]
+        submission.update({
             "message": (
                 f"Agent ready for RAR submission.\n\n"
                 f"Option 1 — GitHub Issue:\n"
@@ -756,11 +1708,14 @@ if __name__ == "__main__":
                 f"The registry CI validates the manifest and runs security checks."
             ),
         })
+        return json.dumps(submission, indent=2)
 
     # ── Name generation ───────────────────────────────────────────────────
 
     def _generate_name(self, description):
         try:
+            if os.environ.get("RAPP_LEARN_NO_LLM") == "1":
+                raise RuntimeError("LLM naming disabled by RAPP_LEARN_NO_LLM=1")
             result = subprocess.run(
                 ['copilot', '--message',
                  f'Generate a short 1-2 word CamelCase name for an agent that: '
@@ -904,6 +1859,8 @@ if __name__ == "__main__":
 
     def _generate_perform_body(self, description):
         try:
+            if os.environ.get("RAPP_LEARN_NO_LLM") == "1":
+                raise RuntimeError("LLM body generation disabled by RAPP_LEARN_NO_LLM=1")
             prompt = (
                 f"Generate ONLY the Python code for the body of a perform() method "
                 f"for an agent that: {description}\n\n"
@@ -1099,27 +2056,38 @@ if __name__ == "__main__":
 
     # ── List / Delete ─────────────────────────────────────────────────────
 
-    def _list_generated_agents(self):
+    def _list_generated_agents(self, output_dir=None):
         agents = []
+        scan_dir = self._resolve_output_dir(output_dir)
         core = {'basic_agent.py', 'save_memory_agent.py', 'recall_memory_agent.py',
                 'learn_new_agent.py', 'swarm_factory_agent.py'}
-        for f in sorted(self.agents_dir.glob('*_agent.py')):
+        for f in sorted(scan_dir.glob('*_agent.py')):
             if f.name in core:
                 continue
             content = f.read_text()
-            is_generated = 'Auto-generated by LearnNewAgent' in content
-            agents.append({
+            from_scratch = 'Auto-generated by LearnNewAgent' in content
+            adapted = '__provenance__' in content and 'ADAPTED, NOT GENERATED' in content
+            entry = {
                 "name": f.stem.replace('_agent', ''),
                 "file": f.name,
-                "auto_generated": is_generated
-            })
+                "auto_generated": from_scratch or adapted,
+                "origin": ("aibast-template-mutation" if adapted
+                           else "builtin-scratch" if from_scratch else "unknown"),
+            }
+            if adapted:
+                m = re.search(r"'adapted_from_agent':\s*'([^']+)'", content)
+                if m:
+                    entry["adapted_from"] = m.group(1)
+            agents.append(entry)
         return json.dumps({
             "status": "success",
+            "directory": str(scan_dir),
             "agents": agents,
             "count": len(agents)
         })
 
-    def _delete_agent(self, name):
+    def _delete_agent(self, name, output_dir=None):
+        scan_dir = self._resolve_output_dir(output_dir)
         if not name:
             return json.dumps({
                 "status": "error",
@@ -1127,10 +2095,10 @@ if __name__ == "__main__":
             })
 
         snake_name = self._to_snake_case(self._sanitize_name(name))
-        file_path = self.agents_dir / f"{snake_name}_agent.py"
+        file_path = scan_dir / f"{snake_name}_agent.py"
 
         if not file_path.exists():
-            for f in self.agents_dir.glob('*_agent.py'):
+            for f in scan_dir.glob('*_agent.py'):
                 if name.lower() in f.name.lower():
                     file_path = f
                     break
@@ -1162,10 +2130,12 @@ if __name__ == "__main__":
 
 if __name__ == "__main__":
     a = LearnNewAgent()
-    print(a.perform(action="preview",
-                    description="An agent that tracks daily habits and streaks"))
+    # Preview only — writes nothing. Shows which path produced the output.
+    print(a.perform(
+        action="preview",
+        description="An agent that researches an enterprise account and maps its buying committee before a sales call"))
 ````
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1: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 -->
