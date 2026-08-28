@@ -2,16 +2,16 @@
   "schema": "rar-sources/1.0",
   "_comment": [
     "Third-party agent/skill libraries RAR aggregates. Adding a source is a",
-    "config edit, not a code change — scripts/crawl_sources.py reads this file.",
+    "config edit, not a code change \u2014 scripts/crawl_sources.py reads this file.",
     "",
     "RAR INDEXES, IT DOES NOT MIRROR. Only catalog metadata is stored (name,",
     "description, tags, author, link, and any counts the source itself",
     "publishes). Skill bodies, bundles and source files are never copied into",
-    "this repo — every item links back to the origin. That keeps aggregation on",
+    "this repo \u2014 every item links back to the origin. That keeps aggregation on",
     "the same footing as a search index rather than a redistribution, which is",
     "what makes it safe to do across sources whose licenses differ or cannot be",
     "read. `license` below records what we could actually verify, and",
-    "`license_verified: false` means exactly that — unknown, so treat as",
+    "`license_verified: false` means exactly that \u2014 unknown, so treat as",
     "all-rights-reserved and never republish content from it."
   ],
   "sources": [
@@ -45,6 +45,20 @@
       "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
       "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
       "enabled": true
+    },
+    {
+      "id": "aibast-agents-library",
+      "namespace": "@aibast-agents-library",
+      "display_name": "AIBAST Agents Library",
+      "publisher": "microsoft",
+      "home_url": "https://microsoft.github.io/aibast-agents-library/",
+      "index_url": "https://microsoft.github.io/aibast-agents-library/registry.json",
+      "item_url_template": "https://github.com/microsoft/aibast-agents-library/blob/main/{path}",
+      "format": "aibast-registry/1",
+      "license": "MIT",
+      "license_verified": true,
+      "license_note": "Public Microsoft repository with an MIT LICENSE file at the root; indexed as catalog metadata only, bodies stay upstream.",
+      "_why": "Industry-vertical agents (72 across 12 verticals) maintained upstream by Microsoft AIBAST. RAR previously hosted copies under agents/@aibast-agents-library which drifted from the source; this channel replaces the copies so the registry stays current with the library of record."
     }
   ]
 }

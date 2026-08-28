@@ -245,9 +245,60 @@ def parse_cowork_cookbook(items: list, source: dict) -> list[dict]:
     return out
 
 
+def parse_aibast_registry(items: list, source: dict) -> list[dict]:
+    """Adapter for the ``aibast-registry/1`` shape: the AIBAST agents library
+    publishes a CI-built ``registry.json`` whose ``agents`` are rapp-agent/1.0
+    manifests plus build-time ``_`` fields (file, stack, vertical, sha256).
+
+    Index-only, like every source here: we carry the catalog fields and a link
+    back to the upstream file; the agent bodies stay upstream, which is exactly
+    the point — RAR used to host copies of these agents and they drifted from
+    the source. Now the source IS the record.
+    """
+    ns = source["namespace"]
+    tmpl = source.get("item_url_template", "")
+    out = []
+    for it in items:
+        raw_name = it.get("name") or ""
+        raw_slug = raw_name.split("/", 1)[1] if "/" in raw_name else raw_name
+        if not raw_slug:
+            continue
+        slug = normalize_slug(raw_slug)
+        upstream_path = it.get("_file") or ""
+        signal = {}
+        if it.get("quality_tier"):
+            signal["quality_tier"] = str(it["quality_tier"])
+        if it.get("_synthetic_data"):
+            signal["synthetic_data"] = True
+        out.append({
+            "ref": f"{ns}/{slug}",
+            "source_id": source["id"],
+            "source_slug": raw_slug,
+            "name": clip(it.get("display_name") or raw_slug, 120),
+            "description": clip(it.get("description")),
+            "kind": "agent",
+            "tags": [str(t) for t in (it.get("tags") or [])][:12],
+            "platforms": ["rapp-brainstem"],
+            "author": clip(it.get("author") or "", 120),
+            "author_github": None,
+            "version": str(it.get("version") or ""),
+            "created_at": None,
+            "has_bundle": False,
+            "url": tmpl.replace("{path}", upstream_path) if (tmpl and upstream_path) else source.get("home_url", ""),
+            "source_signal": signal,
+            "category": it.get("category") or "",
+            "stack": it.get("_stack") or "",
+            "vertical": it.get("_stack_vertical") or "",
+            "upstream_path": upstream_path,
+            "upstream_sha256": it.get("_sha256") or "",
+        })
+    return out
+
+
 ADAPTERS = {
     "cat-skills/1": parse_cat_skills,
     "cowork-cookbook/1": parse_cowork_cookbook,
+    "aibast-registry/1": parse_aibast_registry,
 }
 
 
