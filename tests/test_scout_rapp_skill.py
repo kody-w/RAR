@@ -209,6 +209,18 @@ def test_drifted_current_files_use_notarized_historical_bytes():
         assert re.fullmatch(r"[a-f0-9]{40}", record["source_commit"])
 
 
+def test_every_committed_registry_skill_has_a_git_source_commit():
+    records = [
+        entry
+        for entry in CATALOG["skills"]
+        if entry["source_kind"] == "rar-agent"
+    ]
+    assert records
+    for record in records:
+        assert record["source_commit"] != "working-tree"
+        assert re.fullmatch(r"[a-f0-9]{40}", record["source_commit"])
+
+
 def test_powercat_channel_projects_every_aggregated_skill():
     projected = {
         item["identity"]

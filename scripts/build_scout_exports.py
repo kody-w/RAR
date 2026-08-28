@@ -241,9 +241,7 @@ def _resolve_registry_source(entry, source_path):
     if not expected:
         raise RuntimeError(f"{entry.get('name')}: registry has no _sha256")
     current = source_path.read_bytes()
-    if _sha256(_lf(current)) == expected:
-        return current, entry.get("_latest_commit_sha") or "working-tree"
-
+    current_matches = _sha256(_lf(current)) == expected
     relative = source_path.relative_to(ROOT).as_posix()
     history = subprocess.run(
         ["git", "log", "--format=%H", "--", relative],
@@ -267,6 +265,8 @@ def _resolve_registry_source(entry, source_path):
         )
         if shown.returncode == 0 and _sha256(_lf(shown.stdout)) == expected:
             return shown.stdout, commit
+    if current_matches:
+        return current, "working-tree"
     raise RuntimeError(
         f"{entry.get('name')}: no git blob matches notarized hash {expected}"
     )
