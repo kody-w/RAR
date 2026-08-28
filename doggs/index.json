@@ -1,0 +1,12 @@
+{
+  "schema": "rar-dogg-channels/1.0",
+  "channels": [
+    {
+      "id": "holograms",
+      "name": "Hologram DOGGs",
+      "index_url": "https://raw.githubusercontent.com/kody-w/RAR/main/doggs/holograms/index.json",
+      "record_schema": "rar-hologram-dogg/1.0",
+      "consumer": "kody-w/rapp-zoo"
+    }
+  ]
+}

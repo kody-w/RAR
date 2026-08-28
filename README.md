@@ -103,6 +103,25 @@ Read **[The Ode](https://kody-w.github.io/RAR/ode.html)** for why single-file ag
 
 ---
 
+## Hologram DOGGs
+
+RAR also publishes hash-addressed **data-only DOGGs** for compatible renderers.
+The first channel is [`doggs/holograms/`](doggs/holograms/): procedural 3D
+characters and live data projections for RAPP Zoo.
+
+The records contain no HTML, JavaScript, shaders, or remote assets. RAPP Zoo
+downloads a small JSON record, verifies its SHA-256 from the index, validates a
+closed schema, and then renders it with its own sandboxed Three.js runtime.
+
+```text
+https://raw.githubusercontent.com/kody-w/RAR/main/doggs/holograms/index.json
+```
+
+This keeps the DOGG principle intact: RAR distributes capability-shaping data;
+the receiving application owns and constrains execution.
+
+---
+
 ## The Agent Store
 
 The store (`index.html`) is a single HTML file. Open it in any browser.
