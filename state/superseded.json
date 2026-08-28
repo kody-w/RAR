@@ -1,0 +1,20 @@
+{
+  "schema": "rar-superseded/1",
+  "_comment": [
+    "Agents that stay at their published paths (Article XXIII: the path is a promise) but are",
+    "WITHHELD FROM EVERY LOOKUP because a live outside channel now carries the current version.",
+    "build_registry.py drops matching agents, their stacks and swarms from registry.json — and",
+    "since the store, the static API, match.json and brainstem discovery all read registry.json,",
+    "the copies go dark everywhere at once. Nothing is deleted; installers who already fetched a",
+    "path keep resolving it. The registry records the withheld COUNT and the rule, never the list."
+  ],
+  "rules": [
+    {
+      "publisher": "@aibast-agents-library",
+      "superseded_by": "source:aibast-agents-library",
+      "channel_namespace": "@aibast-library",
+      "reason": "RAR indexes the AIBAST Agents Library as an outside channel (sources.json); the hosted copies drifted from the library of record (104 hosted vs 72 upstream).",
+      "since": "2026-08-28"
+    }
+  ]
+}

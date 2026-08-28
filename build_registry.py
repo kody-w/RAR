@@ -795,6 +795,22 @@ def _validated_tombstones(
     return tombstones
 
 
+SUPERSEDED_FILE = Path("state/superseded.json")
+
+
+def _load_superseded() -> dict:
+    """Withhold-from-lookup rules. Missing file = no rules; a malformed file is an error, never silently empty."""
+    if not SUPERSEDED_FILE.exists():
+        return {"rules": []}
+    try:
+        doc = json.loads(SUPERSEDED_FILE.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise SystemExit(f"state/superseded.json is not valid JSON: {exc}")
+    if not isinstance(doc, dict) or not isinstance(doc.get("rules", []), list):
+        raise SystemExit("state/superseded.json must be an object with a 'rules' list")
+    return doc
+
+
 def build_registry():
     """Scan all agent .py and .py.card files and build registry.json."""
     agents = []
@@ -1253,6 +1269,37 @@ def build_registry():
     # Combine all swarms
     all_swarms = converged_swarms + stack_swarms
 
+    # ─── Superseded copies: kept at their paths, withheld from lookups ─
+    # state/superseded.json names publishers/agents whose current version now
+    # lives in an outside channel (sources.json). The files stay (Article
+    # XXIII); the registry — and therefore every surface built from it —
+    # omits them. Only the COUNT and the rule are published, never the list.
+    superseded_doc = _load_superseded()
+    withheld_names = set()
+    if superseded_doc.get("rules"):
+        pubs = {str(r.get("publisher")) for r in superseded_doc["rules"] if r.get("publisher")}
+        names = {str(r.get("agent")) for r in superseded_doc["rules"] if r.get("agent")}
+        def _withheld(a):
+            n = str(a.get("name", ""))
+            return n in names or any(n.startswith(pb + "/") for pb in pubs)
+        withheld_names = {a["name"] for a in agents if _withheld(a)}
+        agents = [a for a in agents if a["name"] not in withheld_names]
+        def _names(members):
+            return [str(m if isinstance(m, str) else (m or {}).get("name", "")) for m in (members or [])]
+        # swarms: drop any that reference a withheld agent (a swarm with a dark member is not runnable)
+        all_swarms = [sw for sw in all_swarms
+                      if not any(n in withheld_names for n in _names(sw.get("agents") or sw.get("members")))]
+        # stacks index: dict of name -> {"agents": [names]}; drop stacks that go fully dark, trim the rest
+        if stacks:
+            kept = {}
+            for st_name, st in stacks.items():
+                remaining = [n for n in _names(st.get("agents")) if n not in withheld_names]
+                if remaining:
+                    kept[st_name] = {**st, "agents": remaining}
+            stacks = kept
+        publishers = {a.get("_publisher") or str(a.get("name", "")).split("/")[0] for a in agents}
+        categories = {a.get("category") for a in agents if a.get("category")}
+
     # ─── Build registry ───────────────────────────────────────────────
     tombstones = _validated_tombstones(lifecycle_agents, errors)
     registry = {
@@ -1275,6 +1322,12 @@ def build_registry():
             "schema": LIFECYCLE_SCHEMA,
             "receipt_schema": RECEIPT_SCHEMA,
             "tombstones": tombstones,
+        },
+        "superseded": {
+            "schema": superseded_doc.get("schema", "rar-superseded/1"),
+            "withheld_count": len(withheld_names),
+            "rules": superseded_doc.get("rules", []),
+            "note": "withheld agents remain at their published paths; they are omitted from every lookup",
         },
     }
 
