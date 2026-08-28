@@ -1,0 +1,77 @@
+{
+  "agent": "@cat-agent-skills/wikipedia_human_style_writing",
+  "agent_file": "wikipedia_human_style_writing_agent.py",
+  "agent_sha256": "1f50f40dc28b1760c266836dc179d8cb5be8ca2151a339e00fe612af9c163131",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "WikipediaHumanStyleWriting",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Chris Garty",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Rewrite or draft prose so it avoids the tell-tale signs of AI writing, using Wikipedia's 'Signs of AI writing' field guide.",
+    "display_name": "Wikipedia Human Style Writing",
+    "name": "@cat-agent-skills/wikipedia_human_style_writing",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "4a55ea6837b037ca",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "wikipedia-human-style-writing",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#wikipedia-human-style-writing",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "writing",
+      "content",
+      "editing",
+      "style",
+      "humanize",
+      "ai_detection",
+      "wikipedia"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "WikipediaHumanStyleWriting",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

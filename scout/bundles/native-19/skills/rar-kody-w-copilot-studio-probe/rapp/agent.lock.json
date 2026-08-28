@@ -1,0 +1,63 @@
+{
+  "agent": "@kody-w/copilot_studio_probe_agent",
+  "agent_file": "copilot_studio_probe_agent.py",
+  "agent_sha256": "59b3c5cdb2228e333e20ea3ef89c41dac9bb8f12a940b68d591619726d2a0367",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioProbeAgent",
+  "host_dependencies": [
+    "env:COPILOT_DIRECTLINE_SECRET",
+    "env:COPILOT_DIRECTLINE_TOKEN_ENDPOINT"
+  ],
+  "manifest": {
+    "author": "kody-w",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification.",
+    "display_name": "CopilotStudioProbe",
+    "name": "@kody-w/copilot_studio_probe_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "COPILOT_DIRECTLINE_TOKEN_ENDPOINT",
+      "COPILOT_DIRECTLINE_SECRET"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "copilot-studio",
+      "direct-line",
+      "probe",
+      "testing",
+      "integration",
+      "m365"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "CopilotStudioProbe",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "query": {
+        "description": "The message to send to the deployed Copilot Studio agent.",
+        "type": "string"
+      },
+      "quiet_seconds": {
+        "description": "Stop waiting after the bot is silent this long (default 5).",
+        "type": "number"
+      },
+      "secret": {
+        "description": "Direct Line secret (else env COPILOT_DIRECTLINE_SECRET).",
+        "type": "string"
+      },
+      "token_endpoint": {
+        "description": "Direct Line token endpoint URL (else env COPILOT_DIRECTLINE_TOKEN_ENDPOINT).",
+        "type": "string"
+      }
+    },
+    "required": [
+      "query"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/clipchamp_video",
+  "agent_file": "clipchamp_video_agent.py",
+  "agent_sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ClipchampVideo",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Phi-Lay Nguyen",
+    "category": "creative",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Produce a polished, narrated demo video of a live web app or Copilot Studio agent — real screen-flow footage under an AI (Ava neural) voiceover — either fully headless (ffmpeg + edge-tts) or assembled in the Clipchamp web UI as an editable project.",
+    "display_name": "Clipchamp Narrated Demo Video",
+    "name": "@cat-agent-skills/clipchamp_video",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "c2e348b1022ad7a1",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "clipchamp-video",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#clipchamp-video",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "video",
+      "demo",
+      "narration",
+      "playwright",
+      "ffmpeg",
+      "copilot_studio",
+      "clipchamp",
+      "tts"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "ClipchampVideo",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

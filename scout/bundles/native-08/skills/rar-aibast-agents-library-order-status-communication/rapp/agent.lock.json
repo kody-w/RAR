@@ -1,0 +1,55 @@
+{
+  "agent": "@aibast-agents-library/order_status_communication",
+  "agent_file": "order_status_communication_agent.py",
+  "agent_sha256": "d42aa6d42446646d0f1307cc0b3b813e6b10f59f211da17d529fceee878135b3",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "OrderStatusCommunicationAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "manufacturing",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks orders and drafts delay and status communications from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "display_name": "Order Status Communication Agent",
+    "name": "@aibast-agents-library/order_status_communication",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "orders",
+      "communication",
+      "shipment",
+      "customer-service",
+      "manufacturing"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "OrderStatusCommunicationAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "Operation to perform. Defaults to order_lookup when omitted.",
+        "enum": [
+          "order_lookup",
+          "shipment_tracking",
+          "delay_notification",
+          "customer_update",
+          "recovery_plan",
+          "engagement_execution",
+          "quality_validation",
+          "performance_review"
+        ],
+        "type": "string"
+      },
+      "order_id": {
+        "description": "Order identifier used to select recovery, engagement, quality, and performance records.",
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

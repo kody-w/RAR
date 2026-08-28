@@ -1,0 +1,54 @@
+{
+  "agent": "@aibast-agents-library/voice_to_crm_email",
+  "agent_file": "email_drafting_agent.py",
+  "agent_sha256": "037bf9d7f2159d70382579eab207cc2f0a4f4baaa15fc148074d44d15e36ab7c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "VoiceToCRMEmailAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Drafts recaps, action items, and follow-ups from live case email threads in a simulated Dynamics 365 tenant, with offline fallback.",
+    "display_name": "Voice to CRM Email",
+    "name": "@aibast-agents-library/voice_to_crm_email",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "voice",
+      "email",
+      "meeting-recap",
+      "action-items",
+      "follow-up"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "VoiceToCRMEmailAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "meeting_id": {
+        "description": "Meeting ID (e.g. 'MTG-001')",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The email operation to perform",
+        "enum": [
+          "meeting_recap",
+          "action_items",
+          "follow_up_draft",
+          "distribution_list"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

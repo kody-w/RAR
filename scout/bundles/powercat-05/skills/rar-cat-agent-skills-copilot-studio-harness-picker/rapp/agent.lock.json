@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/copilot_studio_harness_picker",
+  "agent_file": "copilot_studio_harness_picker_agent.py",
+  "agent_sha256": "1517c780cf92757e91fb379b2b85ddf7d16ea2c1dac2057dae9a320cd351af59",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioHarnessPicker",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Liam O'Grady",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Choose the right Copilot Studio harness and build shape; in Cowork, use GPT-5.6 with High effort for Detailed mode, Claude Opus 5 as fallback, or Auto for Quick mode.",
+    "display_name": "Copilot Studio Harness Picker",
+    "name": "@cat-agent-skills/copilot_studio_harness_picker",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "eff1a28fe7b6e467",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "copilot-studio-harness-picker",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-harness-picker",
+      "upstream_version": "1.1.0"
+    },
+    "tags": [
+      "copilot_studio",
+      "cowork",
+      "architecture",
+      "agent_design",
+      "governance",
+      "licensing"
+    ],
+    "version": "2.1.0"
+  },
+  "runtime_name": "CopilotStudioHarnessPicker",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "constraints": {
+        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being designed.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.1.0"
+}

@@ -1,0 +1,73 @@
+{
+  "agent": "@cat-agent-skills/agent_evaluation_designer",
+  "agent_file": "agent_evaluation_designer_agent.py",
+  "agent_sha256": "20b0e309fde16bdfc1a363d270e1aec083d9c00b1a1d7735edd30dff9d6000a2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AgentEvaluationDesigner",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "James Papadimitriou",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Design a rigorous, platform-aware evaluation for an AI agent - define what good looks like, pick the right grading method, build a test set, and turn results into a defensible go/no-go decision.",
+    "display_name": "Agent Evaluation Designer",
+    "name": "@cat-agent-skills/agent_evaluation_designer",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "5932d5f6ea50fb35",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "agent-evaluation-designer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#agent-evaluation-designer",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "evaluation",
+      "testing",
+      "quality_assurance",
+      "go_live",
+      "decision_making"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "AgentEvaluationDesigner",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,158 @@
+{
+  "agent": "@discreetRappers/architecture_diagram_agent",
+  "agent_file": "architecture_diagram_agent.py",
+  "agent_sha256": "97485b27444625b332f52f9df07e46ed70d6a24dd250eba01bb78660056c36ba",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ArchitectureDiagramAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates architecture diagrams as PNG, SVG, PDF, Mermaid, or Draw.io XML from node/connection configs via the diagrams+graphviz library.",
+    "display_name": "ArchitectureDiagramAgent",
+    "name": "@discreetRappers/architecture_diagram_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "productivity",
+      "diagrams",
+      "architecture",
+      "visualization",
+      "mermaid"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "ArchitectureDiagramAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "create_diagram",
+          "diagram_from_agents",
+          "list_node_types",
+          "generate_mermaid"
+        ],
+        "type": "string"
+      },
+      "agents": {
+        "description": "Agent configurations for diagram_from_agents",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "clusters": {
+        "items": {
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "nodes": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "connections": {
+        "items": {
+          "properties": {
+            "from": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "style": {
+              "type": "string"
+            },
+            "to": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "customer": {
+        "description": "Customer name - creates a subfolder in arch_diagrams for this customer",
+        "type": "string"
+      },
+      "diagram_type": {
+        "enum": [
+          "azure",
+          "agent_system",
+          "multi_tier",
+          "microservices",
+          "data_flow",
+          "custom"
+        ],
+        "type": "string"
+      },
+      "nodes": {
+        "items": {
+          "properties": {
+            "cluster": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "output_dir": {
+        "type": "string"
+      },
+      "output_filename": {
+        "type": "string"
+      },
+      "output_format": {
+        "enum": [
+          "png",
+          "svg",
+          "pdf",
+          "mermaid",
+          "drawio"
+        ],
+        "type": "string"
+      },
+      "style": {
+        "enum": [
+          "default",
+          "dark",
+          "minimal"
+        ],
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

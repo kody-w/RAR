@@ -1,0 +1,66 @@
+{
+  "agent": "@kody-w/arena_compete_agent",
+  "agent_file": "arena_compete_agent.py",
+  "agent_sha256": "cb5fdc2203b8127d5f174fbe9773c1f8f24e01dcdfb7162fb0a17ad40a2239db",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ArenaCompeteAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "workflow",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation.",
+    "display_name": "Arena Compete",
+    "name": "@kody-w/arena_compete_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "competition",
+      "learning",
+      "self-improvement",
+      "agents",
+      "tournament"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "ArenaCompete",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "compete = run the dynamic-learning tournament; demo = self-test that the bottom climbs toward the leader. Default demo.",
+        "enum": [
+          "compete",
+          "demo"
+        ],
+        "type": "string"
+      },
+      "learning_rate": {
+        "description": "How fast the bottom performer adopts the leader's strategy (0-1). Default 0.5.",
+        "type": "number"
+      },
+      "live": {
+        "description": "If true, drive REAL headless commons tabs via the Matrix Arena harness and score from the real signed stream; default false (fast deterministic simulation).",
+        "type": "boolean"
+      },
+      "players": {
+        "description": "How many competitors. Default 4.",
+        "type": "integer"
+      },
+      "rounds": {
+        "description": "How many judge-and-adjust rounds. Default 6.",
+        "type": "integer"
+      },
+      "seconds": {
+        "description": "For live: seconds each competitor plays per round. Default 12.",
+        "type": "integer"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

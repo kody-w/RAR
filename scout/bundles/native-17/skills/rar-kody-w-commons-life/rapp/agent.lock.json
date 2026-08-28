@@ -1,0 +1,76 @@
+{
+  "agent": "@kody-w/commons_life_agent",
+  "agent_file": "commons_life_agent.py",
+  "agent_sha256": "1f097fe46efeb8c2298fde16d0469016cb62bb59b4448d954bb6757fe53f27bc",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CommonsLifeAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "creative",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Records the live commons as signed frames via Playwright, grows in-between fidelity with EZsharpen, and emits an HTML LifePlayer scrubber.",
+    "display_name": "Commons Life",
+    "name": "@kody-w/commons_life_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "commons",
+      "frames",
+      "playback",
+      "lifeplayer",
+      "digital-organism"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "CommonsLife",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "life = record+grow+play (default); record = capture the life frames; grow = EZsharpen an existing recording; play = emit the LifePlayer for an existing recording.",
+        "enum": [
+          "life",
+          "record",
+          "grow",
+          "play"
+        ],
+        "type": "string"
+      },
+      "dir": {
+        "description": "For grow/play: an existing recording dir to operate on.",
+        "type": "string"
+      },
+      "duration": {
+        "description": "Total seconds of life to record (the lifespan window). Default 40.",
+        "type": "number"
+      },
+      "interval": {
+        "description": "Seconds between recorded frames — the FRAME RESOLUTION (lower = higher fidelity). Default 4.",
+        "type": "number"
+      },
+      "slug": {
+        "description": "Output folder name. Default 'commons-life'.",
+        "type": "string"
+      },
+      "subdivide": {
+        "description": "EZsharpen: synthesize this many grown sub-frames between each pair for smoother playback. Default 3.",
+        "type": "integer"
+      },
+      "title": {
+        "description": "Optional player title. Default 'The Life of the Commons'.",
+        "type": "string"
+      },
+      "url": {
+        "description": "Optional commons URL (default the live Pages site).",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

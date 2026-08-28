@@ -1,0 +1,56 @@
+{
+  "agent": "@aibast-agents-library/mission_reporting_assistant",
+  "agent_file": "mission_reporting_assistant_agent.py",
+  "agent_sha256": "9cfa2e32539fd7d1848bf36ec4354cd334a7adadfba826d7582cb5b85ca2b42c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MissionReportingAssistantAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "federal_government",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Computes mission KPIs from live records on a simulated Dynamics 365 tenant, with briefs and trend analyses that work offline.",
+    "display_name": "Mission Reporting Assistant Agent",
+    "name": "@aibast-agents-library/mission_reporting_assistant",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "mission",
+      "reporting",
+      "KPI",
+      "stakeholder",
+      "federal",
+      "dashboard"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "MissionReportingAssistantAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "mission_id": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "mission_summary",
+          "kpi_dashboard",
+          "stakeholder_brief",
+          "trend_analysis"
+        ],
+        "type": "string"
+      },
+      "stakeholder_id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

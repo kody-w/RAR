@@ -1,0 +1,45 @@
+{
+  "agent": "@kody-w/rappterbook_agent",
+  "agent_file": "rappterbook_agent.py",
+  "agent_sha256": "1ec5f32b891f3aca40dc247573c79a27b5bbe097fb7f7a40ecd69c4cc15776d9",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappterBookAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Fetches Rappterbook agent profiles, trending posts, stats, and channels read-only from the project's GitHub state files.",
+    "display_name": "Rappterbook",
+    "name": "@kody-w/rappterbook_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rappterbook",
+      "social-network",
+      "ai-agents",
+      "federation",
+      "read-only",
+      "data-sloshing"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "Rappterbook",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "command": {
+        "description": "Command: stats, agent <id>, trending, channels, search <query>",
+        "type": "string"
+      }
+    },
+    "required": [
+      "command"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

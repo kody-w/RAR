@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/pattern_radar",
+  "agent_file": "pattern_radar_agent.py",
+  "agent_sha256": "5ab75e34a67a13fa24db57751e922a5b329554145596e626e4e324b6feb31aac",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PatternRadar",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Srinivas Varukala",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Scans your recent Microsoft 365 signals to surface recurring patterns worth productizing — things you keep explaining (blog candidates) or multi-step tasks you keep doing by hand (automation candidates).",
+    "display_name": "Pattern Radar",
+    "name": "@cat-agent-skills/pattern_radar",
+    "platforms": [
+      "Cowork",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "cde1b5f304153695",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "pattern-radar",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#pattern-radar",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "productivity",
+      "automation",
+      "content",
+      "email",
+      "teams",
+      "insights"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "PatternRadar",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

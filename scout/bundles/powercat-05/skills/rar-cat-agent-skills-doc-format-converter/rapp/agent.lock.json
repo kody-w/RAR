@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/doc_format_converter",
+  "agent_file": "doc_format_converter_agent.py",
+  "agent_sha256": "fe4a32bfd496ea42fe68d4815d3f6835297ca9434e9a3c72129873a4b5ea0f3a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DocFormatConverter",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Andreas Adner",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Convert documents between Markdown, HTML, PDF, Word, PowerPoint, Excel/CSV and text — fully offline, using only the libraries already in the agent sandbox.",
+    "display_name": "Universal Document Converter",
+    "name": "@cat-agent-skills/doc_format_converter",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d1c0d69a8989af49",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "doc-format-converter",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#doc-format-converter",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "documents",
+      "conversion",
+      "markdown",
+      "pdf",
+      "office",
+      "scripts"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "DocFormatConverter",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

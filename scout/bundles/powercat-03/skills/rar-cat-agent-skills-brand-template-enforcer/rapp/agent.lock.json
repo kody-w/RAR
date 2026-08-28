@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/brand_template_enforcer",
+  "agent_file": "brand_template_enforcer_agent.py",
+  "agent_sha256": "ae1779f176150087d15edf582f1193947f2b3df165ad863d53759e62dd1e9061",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BrandTemplateEnforcer",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Doug Bellingeri",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Ensure every generated PowerPoint deck or Word document starts from the correct bundled or SharePoint-hosted brand template.",
+    "display_name": "Brand Template Enforcer",
+    "name": "@cat-agent-skills/brand_template_enforcer",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "5bd07a11a05931f7",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "brand-template-enforcer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#brand-template-enforcer",
+      "upstream_version": "1.2.0"
+    },
+    "tags": [
+      "branding",
+      "powerpoint",
+      "word",
+      "templates",
+      "documents",
+      "presentations"
+    ],
+    "version": "2.2.0"
+  },
+  "runtime_name": "BrandTemplateEnforcer",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.2.0"
+}

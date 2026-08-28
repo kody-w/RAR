@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/b2b_outreach_suite",
+  "agent_file": "b2b_outreach_suite_agent.py",
+  "agent_sha256": "dd2ff9fa0279217e4c73141b6680ecc31bb0dcf55b50f43d15f580b82452c119",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "B2bOutreachSuite",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Marcel",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A six-playbook toolkit for agentic B2B sales outreach: prospect research briefings, cold emails, LinkedIn/social DMs, follow-up cadences, ad copywriting, and objection handling. Configurable via a company profile template, works for any industry, market, and language.",
+    "display_name": "B2B Outreach Suite",
+    "name": "@cat-agent-skills/b2b_outreach_suite",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "b6d141c5052aba20",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "b2b-outreach-suite",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#b2b-outreach-suite",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "sales_enablement",
+      "email",
+      "linkedin",
+      "writing",
+      "marketing",
+      "content"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "B2bOutreachSuite",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/deal_risk_assessment",
+  "agent_file": "deal_risk_assessment_agent.py",
+  "agent_sha256": "82f7a32137a201c8376188a67c6fe060f9b269fdb48e6af2c08cc203ac365e33",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DealRiskAssessmentAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Assesses deal risk from live opportunities in a simulated Dynamics 365 tenant, with matrices, plans, and an embedded offline demo fallback.",
+    "display_name": "Deal Risk Assessment",
+    "name": "@aibast-agents-library/deal_risk_assessment",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "risk-assessment",
+      "deal-progression",
+      "pipeline"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "DealRiskAssessmentAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The analysis to perform",
+        "enum": [
+          "assess_risks",
+          "risk_matrix",
+          "mitigation_plan",
+          "risk_trend"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,38 @@
+{
+  "createdAt": "2026-08-11T17:28:15.000Z",
+  "description": "Disabled Scout workflow projected from @kody-w/copilot_studio_parity_deploy (1.0.2). Edit inputs or schedule before enabling.",
+  "enabled": false,
+  "id": "b1f9e99ea57fac08",
+  "lastExecutedAt": null,
+  "name": "Copilot Studio Parity Deploy",
+  "schedule": {
+    "days": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "hour": 9,
+    "kind": "single",
+    "minute": 0,
+    "naturalLanguage": "every weekday at 9am",
+    "time": {
+      "hour": 9,
+      "minute": 0
+    }
+  },
+  "skillNames": [
+    "rar-kody-w-copilot-studio-parity-deploy"
+  ],
+  "steps": [
+    {
+      "id": "1",
+      "label": "Run rar-kody-w-copilot-studio-parity-deploy",
+      "prompt": "Use the imported Scout skill `rar-kody-w-copilot-studio-parity-deploy`. It is the reversible Toasted projection of `@kody-w/copilot_studio_parity_deploy`.\n\nRun its checksum-verified `scripts/run_agent.py`; do not recreate or paraphrase the Python behavior. Use these starting arguments:\n\n```json\n{}\n```\n\nIf a value is still a placeholder or a required input is missing, stop and report the exact missing field instead of inventing data. Return only the canonical agent result."
+    }
+  ],
+  "teamsNotify": "auto",
+  "triggerType": "schedule",
+  "updatedAt": "2026-08-11T17:28:15.000Z"
+}

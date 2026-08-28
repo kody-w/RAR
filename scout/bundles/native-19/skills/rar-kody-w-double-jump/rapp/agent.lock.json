@@ -1,0 +1,67 @@
+{
+  "agent": "@kody-w/double_jump_agent",
+  "agent_file": "double_jump_agent.py",
+  "agent_sha256": "a85073b79ec0d416a94d596ac455aa393ed33049aa615b267a5f7ff20a004ab3",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DoubleJumpAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "workflow",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Improves any draft by competing it against the local brainstem's /chat output round over round, keeping each round's winner; defaults to offline demo.",
+    "display_name": "Double Jump",
+    "name": "@kody-w/double_jump_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "improvement",
+      "competition",
+      "brainstem",
+      "double-jump",
+      "self-improvement"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "DoubleJump",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "improve = caller-draft (Jump 1) vs brainstem (Jump 2), ratchet up; compete = two brainstem jumps cross-improve; demo = deterministic self-test. Default demo.",
+        "enum": [
+          "improve",
+          "compete",
+          "demo"
+        ],
+        "type": "string"
+      },
+      "criteria": {
+        "description": "Optional explicit judging criteria (what 'better' means). If omitted the judge infers it from the task.",
+        "type": "string"
+      },
+      "draft": {
+        "description": "For improve: the caller's CURRENT best attempt (Jump 1). The brainstem (Jump 2) tries to beat it; the winner is kept and fed forward.",
+        "type": "string"
+      },
+      "rounds": {
+        "description": "How many compete-and-improve rounds. Default 2 (each round is one or two /chat round-trips).",
+        "type": "integer"
+      },
+      "task": {
+        "description": "What to do / improve — the goal both jumps work on (e.g., 'improve this agent.py to ...', 'make this commons feature better', 'strengthen this plan'). Include the material to improve.",
+        "type": "string"
+      },
+      "timeout": {
+        "description": "Per /chat round-trip timeout in seconds. Default 70.",
+        "type": "integer"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

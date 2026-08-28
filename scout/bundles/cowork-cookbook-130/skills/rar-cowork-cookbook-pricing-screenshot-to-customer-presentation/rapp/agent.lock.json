@@ -1,0 +1,107 @@
+{
+  "agent": "@cowork-cookbook/pricing_screenshot_to_customer_presentation",
+  "agent_file": "pricing_screenshot_to_customer_presentation_agent.py",
+  "agent_sha256": "3d7a8183a0c50ca1080847438247b5581cfa215dcabd4c27ba6901320cfd3fca",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PricingScreenshotToCustomerPresentation",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turn an approved pricing screenshot into a customer-ready deck - numbers exact, deck polished, email drafted.",
+    "display_name": "Pricing screenshot -> customer presentation",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "none",
+      "process_roots": [
+        "prospect-to-quote"
+      ],
+      "process_tags": [
+        "prospect-to-quote/estimate-and-quote-sales/define-sales-quotations"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt",
+      "upstream_path": "prospect-to-quote/pricing-screenshot-to-customer-presentation",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "PowerPoint",
+          "Email",
+          "Meetings"
+        ],
+        "plugin": []
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/pricing_screenshot_to_customer_presentation",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "02b82b73fd7ca9e4",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "pricing-screenshot-to-customer-presentation",
+      "upstream_url": "https://coworkcookbook.com/recipes/pricing-screenshot-to-customer-presentation",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "other",
+      "prospect_to_quote",
+      "intermediate",
+      "read_only"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "PricingScreenshotToCustomerPresentation",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

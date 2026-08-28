@@ -1,0 +1,77 @@
+{
+  "agent": "@cat-agent-skills/ai_usecase_assessment",
+  "agent_file": "ai_usecase_assessment_agent.py",
+  "agent_sha256": "b1c7ceb11b90cd8bd781cbfab3f8c914f11830d1ae2eb360f2aa3b68152fef67",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AiUsecaseAssessment",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Alicja Gilderdale",
+    "category": "analysis",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turn any AI/agentic use case idea (chat, uploaded doc, or attached file) into an evidence-grounded, rubric-scored assessment with a customer-branded HTML report. Guides the user question-by-question through intake, categorisation, strengthening, scoring, and reporting — grounded in the Agentic Use Case Assessment Rubric v2. Runs in Microsoft Scout and Microsoft 365 Copilot Cowork.",
+    "display_name": "AI Use Case Assessment",
+    "name": "@cat-agent-skills/ai_usecase_assessment",
+    "platforms": [
+      "Scout",
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "8d143663df287664",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "ai-usecase-assessment",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#ai-usecase-assessment",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "assessment",
+      "ai",
+      "agent",
+      "use_case",
+      "scoring",
+      "report",
+      "html",
+      "intake"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "AiUsecaseAssessment",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

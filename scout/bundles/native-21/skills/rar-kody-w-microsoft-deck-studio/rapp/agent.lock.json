@@ -1,0 +1,52 @@
+{
+  "agent": "@kody-w/microsoft_deck_studio_agent",
+  "agent_file": "microsoft_deck_studio_agent.py",
+  "agent_sha256": "6aa3761fd90b1be592520185359a02a0bc0651c0c0bd86edb8fe9ff879138445",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MicrosoftDeckStudio",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generate a polished, Microsoft-Fluent-styled PowerPoint (.pptx) deck from a JSON spec of slides and layouts.",
+    "display_name": "Microsoft Deck Studio",
+    "name": "@kody-w/microsoft_deck_studio_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "powerpoint",
+      "pptx",
+      "deck",
+      "slides",
+      "presentation",
+      "microsoft",
+      "fluent",
+      "generator",
+      "design"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "MicrosoftDeckStudio",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "output_path": {
+        "description": "Absolute .pptx path to write. Optional; defaults to ~/Downloads/<title>.pptx (or CWD).",
+        "type": "string"
+      },
+      "spec": {
+        "description": "Deck spec as a JSON object or JSON string: {deck:{wordmark,footLeft,pageLabel}, slides:[{layout, ...}]}. See the agent docstring for each layout's fields; {h}...{/h} highlights a headline span.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "spec"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

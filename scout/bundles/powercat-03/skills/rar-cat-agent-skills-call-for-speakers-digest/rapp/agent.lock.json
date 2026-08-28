@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/call_for_speakers_digest",
+  "agent_file": "call_for_speakers_digest_agent.py",
+  "agent_sha256": "a3e15016b7641d3e6b947d84b323b4343bdb427effe8afb6d280f09d53a39511",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CallForSpeakersDigest",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Michael Heath",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Weekly HTML email digest of open conference Call for Speakers (CFP) opportunities matching your topics of interest. Pulls from confs.tech, Papercall, AdatoSystems' CFP tracker, CFP Radar, Sessionize's public user-groups directory, community-specific hubs (like communitydays.org for the Microsoft ecosystem), targeted search of standalone Sessionize conferences and run.events, and general web searc…",
+    "display_name": "Call for Speakers Digest",
+    "name": "@cat-agent-skills/call_for_speakers_digest",
+    "platforms": [
+      "Copilot Studio",
+      "Scout",
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d964e313b2ca6981",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "call-for-speakers-digest",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#call-for-speakers-digest",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "productivity",
+      "speaking",
+      "conference",
+      "automation"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CallForSpeakersDigest",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

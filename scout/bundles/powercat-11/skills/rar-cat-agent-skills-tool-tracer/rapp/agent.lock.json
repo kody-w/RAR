@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/tool_tracer",
+  "agent_file": "tool_tracer_agent.py",
+  "agent_sha256": "9bdbbbf6039d95cd831a928da5055dd9dec8dd45c1fc63c67142f4c8260c4e84",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ToolTracer",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Rafael Lopez Alcaraz",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "On-demand tool/action trace for Copilot Studio runs (`/special-debug tool-trace` → `tool_trace.json`).",
+    "display_name": "Tool Tracer",
+    "name": "@cat-agent-skills/tool_tracer",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "5fcd9f882c958e11",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "tool-tracer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#tool-tracer",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "transparency",
+      "observability",
+      "debugging",
+      "workflow",
+      "logging",
+      "json",
+      "productivity"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "ToolTracer",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "environment": {
+        "description": "Optional. Where it happens, and where it does not.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The symptom — what was observed, not what you think caused it.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

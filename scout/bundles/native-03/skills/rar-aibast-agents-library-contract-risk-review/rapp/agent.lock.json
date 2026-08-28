@@ -1,0 +1,57 @@
+{
+  "agent": "@aibast-agents-library/contract_risk_review",
+  "agent_file": "contract_risk_review_agent.py",
+  "agent_sha256": "763346bca63b7e157ecfd00418cc0733d96f8235a03d931ebf79c1f374f8fb2f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ContractRiskReviewAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "professional_services",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Scans agreements for risk and drafts renegotiation briefs from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "display_name": "Contract Risk Review Agent",
+    "name": "@aibast-agents-library/contract_risk_review",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "contract",
+      "risk",
+      "legal",
+      "compliance",
+      "professional-services"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "ContractRiskReviewAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "contract_id": {
+        "description": "Contract identifier, such as CTR-5001; selects all implementation-package records for that contract.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "Operation to run; defaults to risk_scan when omitted.",
+        "enum": [
+          "risk_scan",
+          "clause_analysis",
+          "compliance_check",
+          "renegotiation_brief",
+          "implementation_package"
+        ],
+        "type": "string"
+      },
+      "record_id": {
+        "description": "Evidence amendment record identifier for implementation_package, such as CRR-501.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

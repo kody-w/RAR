@@ -1,0 +1,66 @@
+{
+  "agent": "@rarbookworld/momentfactory",
+  "agent_file": "momentfactory_agent.py",
+  "agent_sha256": "08cddf370c9a202ceb0e52ecb41dd6882d3e314d46eeb796e9e1387d9b86ecb7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MomentFactory",
+  "host_dependencies": [
+    "env:AZURE_OPENAI_API_KEY",
+    "env:AZURE_OPENAI_DEPLOYMENT",
+    "env:AZURE_OPENAI_ENDPOINT"
+  ],
+  "manifest": {
+    "author": "rarbookworld",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Converts a moment (commit, message, idea) into a publishable Drop through seven inlined LLM personas, calling Azure OpenAI.",
+    "display_name": "MomentFactory (converged singleton)",
+    "example_call": {
+      "args": {
+        "source": "git commit hash + diff + msg",
+        "source_type": "code-commit"
+      }
+    },
+    "name": "@rarbookworld/momentfactory",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_OPENAI_ENDPOINT",
+      "AZURE_OPENAI_API_KEY",
+      "AZURE_OPENAI_DEPLOYMENT"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "composite",
+      "moment-pipeline",
+      "rappterbook-engine",
+      "singleton",
+      "rapplication"
+    ],
+    "version": "0.1.2"
+  },
+  "runtime_name": "MomentFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "significance_threshold": {
+        "description": "0..1 cutoff. Default 0.5.",
+        "type": "number"
+      },
+      "source": {
+        "description": "Raw moment text",
+        "type": "string"
+      },
+      "source_type": {
+        "description": "code-commit | voice-memo | web-bookmark | agent-run | location | conversation | decision | reading-note",
+        "type": "string"
+      }
+    },
+    "required": [
+      "source"
+    ],
+    "type": "object"
+  },
+  "version": "0.1.2"
+}

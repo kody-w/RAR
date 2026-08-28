@@ -1,0 +1,75 @@
+{
+  "agent": "@cat-agent-skills/enterprise_agent_design_authority",
+  "agent_file": "enterprise_agent_design_authority_agent.py",
+  "agent_sha256": "1b8d67a3b9d2dab18a77b43f93af6285ad595ac5b44c49ff0568605b8a596f6f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "EnterpriseAgentDesignAuthority",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Faride Ilanda",
+    "category": "analysis",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "An enterprise design review framework that helps architects build secure, scalable, governable, and production-ready Microsoft Copilot Studio agents.",
+    "display_name": "Enterprise Agent Design Authority (EADA)",
+    "name": "@cat-agent-skills/enterprise_agent_design_authority",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "b69cc3ecf5e4507e",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "enterprise-agent-design-authority",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#enterprise-agent-design-authority",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "assessment",
+      "review",
+      "architecture",
+      "enterprise",
+      "design_review",
+      "copilot_studio"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "EnterpriseAgentDesignAuthority",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

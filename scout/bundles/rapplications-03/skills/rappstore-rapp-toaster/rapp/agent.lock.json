@@ -1,0 +1,71 @@
+{
+  "agent": "@rapp/toaster",
+  "agent_file": "toaster_agent.py",
+  "agent_sha256": "d4d540104c288152b2761b7890aaf263e58af286acaf702d09422b6f3f198e16",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ToasterAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "example_call": {
+      "args": {
+        "action": "toast",
+        "path": "my-skill/SKILL.md"
+      },
+      "note": "Derive a deterministic layer from a prose skill and anchor it."
+    },
+    "name": "@rapp/toaster",
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "skills",
+      "portability",
+      "drift",
+      "conversion",
+      "local-first",
+      "singleton"
+    ],
+    "tier": "core",
+    "trust": "community",
+    "version": "1.0.0"
+  },
+  "runtime_name": "Toaster",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do.",
+        "enum": [
+          "toast",
+          "inspect",
+          "convert",
+          "soak"
+        ],
+        "type": "string"
+      },
+      "out": {
+        "description": "For convert: output path. Defaults beside the source.",
+        "type": "string"
+      },
+      "path": {
+        "description": "The capability file (SKILL.md or *_agent.py).",
+        "type": "string"
+      },
+      "to": {
+        "description": "For convert: the target format.",
+        "enum": [
+          "agent",
+          "skill",
+          "openclaw",
+          "openrappter",
+          "rci"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "action",
+      "path"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

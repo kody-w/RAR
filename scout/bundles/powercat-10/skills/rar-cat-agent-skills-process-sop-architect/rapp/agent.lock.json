@@ -1,0 +1,73 @@
+{
+  "agent": "@cat-agent-skills/process_sop_architect",
+  "agent_file": "process_sop_architect_agent.py",
+  "agent_sha256": "7b3e33d031c6c6388c76d4fe360cb24beb8092dd33e2d45b60ab5a93431d84a2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ProcessSopArchitect",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Parag Dessai",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turn process notes and transcripts into an editable SOP, process map, RACI, control register, improvement backlog, and polished PowerPoint briefing.",
+    "display_name": "Process & SOP Architect",
+    "name": "@cat-agent-skills/process_sop_architect",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "3851098193863859",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "process-sop-architect",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#process-sop-architect",
+      "upstream_version": "1.1.0"
+    },
+    "tags": [
+      "process_improvement",
+      "sop",
+      "operations",
+      "powerpoint",
+      "productivity"
+    ],
+    "version": "2.1.0"
+  },
+  "runtime_name": "ProcessSopArchitect",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.1.0"
+}

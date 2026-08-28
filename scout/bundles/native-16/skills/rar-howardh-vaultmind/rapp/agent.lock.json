@@ -1,0 +1,158 @@
+{
+  "agent": "@howardh/vaultmind_agent",
+  "agent_file": "vaultmind_agent.py",
+  "agent_sha256": "e669b4fb17fde143672f311dd544159d611928b298587a90f03f5f9f068eaafe",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ObsidianPilotAgent",
+  "host_dependencies": [
+    "env:OBSIDIAN_VAULT"
+  ],
+  "manifest": {
+    "author": "Howard Hoy",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Manages an Obsidian vault through 28 actions — 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks.",
+    "display_name": "VaultMind",
+    "name": "@howardh/vaultmind_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "OBSIDIAN_VAULT"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "obsidian",
+      "30-60-90",
+      "onboarding",
+      "wiki",
+      "knowledge-base",
+      "vault",
+      "automation",
+      "scheduling",
+      "monitoring"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "ObsidianPilot",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "add_person=create a new person's 30-60-90 folder, roster=list all people, check_in=status for one person, retire=archive a person, assign=add a priority task, priorities=show priority board, metrics=person metrics, report=generate HTML dashboard, dashboard=quick text summary, compile=rebuild wiki from raw sources, ingest=add content to vault, health=wiki lint check, query=search wiki, review=weekly review, plan=personal 30-60-90 status, brief=generate morning digest, watch=add/list monitored URLs, job_status=show all scheduled jobs, run_job=manually trigger a job, setup=configure scheduled jobs, pause=pause or resume a job, bootstrap=create vault structure + install Obsidian plugins automatically, training=read a person's learning objectives and design a training quest, build_quest=render training quest HTML from checkpoint JSON, paste=quick-ingest raw text into 01-raw, log=show or add to activity log, okr=track objectives and key results per person, kanban=generate Kanban board from priorities",
+        "enum": [
+          "add_person",
+          "roster",
+          "check_in",
+          "retire",
+          "assign",
+          "priorities",
+          "metrics",
+          "report",
+          "dashboard",
+          "compile",
+          "ingest",
+          "health",
+          "query",
+          "review",
+          "plan",
+          "brief",
+          "watch",
+          "job_status",
+          "run_job",
+          "setup",
+          "pause",
+          "bootstrap",
+          "training",
+          "build_quest",
+          "paste",
+          "log",
+          "okr",
+          "kanban"
+        ],
+        "type": "string"
+      },
+      "checkpoints": {
+        "description": "JSON array of checkpoint objects for build_quest action",
+        "type": "string"
+      },
+      "content": {
+        "description": "Raw text content for paste action",
+        "type": "string"
+      },
+      "context": {
+        "description": "Additional context for add_person",
+        "type": "string"
+      },
+      "enabled": {
+        "description": "Enable (true) or disable (false) a job in setup",
+        "type": "boolean"
+      },
+      "job": {
+        "description": "Job name for run_job/pause/setup actions: morning_brief, content_watch, auto_review, wiki_health, phase_alert, digest",
+        "enum": [
+          "morning_brief",
+          "content_watch",
+          "auto_review",
+          "wiki_health",
+          "phase_alert",
+          "digest"
+        ],
+        "type": "string"
+      },
+      "key_result": {
+        "description": "Key result text for okr action",
+        "type": "string"
+      },
+      "manager": {
+        "description": "Manager name for add_person",
+        "type": "string"
+      },
+      "name": {
+        "description": "Person name for people actions",
+        "type": "string"
+      },
+      "note": {
+        "description": "Manual note for log action",
+        "type": "string"
+      },
+      "objective": {
+        "description": "Objective text for okr action",
+        "type": "string"
+      },
+      "priority": {
+        "description": "now/next/later for assign action",
+        "type": "string"
+      },
+      "role": {
+        "description": "Role/title for add_person",
+        "type": "string"
+      },
+      "start_date": {
+        "description": "Start date YYYY-MM-DD for add_person",
+        "type": "string"
+      },
+      "task": {
+        "description": "Task description for assign action",
+        "type": "string"
+      },
+      "title": {
+        "description": "Title for paste action",
+        "type": "string"
+      },
+      "topic": {
+        "description": "Topic for query action",
+        "type": "string"
+      },
+      "url": {
+        "description": "URL for ingest or watch actions",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

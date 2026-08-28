@@ -1,0 +1,75 @@
+{
+  "agent": "@rapp/drift",
+  "agent_file": "drift_agent.py",
+  "agent_sha256": "00ffb4b96beb3024e1b412caf5d2191a84846e73091132eefa30ffe6c2c5e31c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DriftAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Fetches canonical RAPP spec sources from GitHub, detects schema-version drift, and reports which source wins per the fixed authority order.",
+    "display_name": "DriftAgent",
+    "name": "@rapp/drift",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "drift",
+      "spec",
+      "authority",
+      "rapp-god",
+      "alignment",
+      "audit"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "DriftAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "scan",
+          "canon",
+          "prune",
+          "authority",
+          "part",
+          "graph",
+          "blast_radius",
+          "file_issues",
+          "help"
+        ],
+        "type": "string"
+      },
+      "confirm": {
+        "description": "file_issues: actually create the GitHub Issues (default false = dry-run plan only)",
+        "type": "boolean"
+      },
+      "name": {
+        "description": "part: ecosystem part name (from rapp-god)",
+        "type": "string"
+      },
+      "repo": {
+        "description": "blast_radius: the mutated repo/node",
+        "type": "string"
+      },
+      "tracker": {
+        "description": "file_issues: optional owner/repo override for where Issues land (default DRIFT_TRACKER)",
+        "type": "string"
+      },
+      "verbose": {
+        "description": "scan: include in-sync schemas too",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

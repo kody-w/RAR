@@ -1,0 +1,53 @@
+{
+  "agent": "@kody-w/recon_deck_agent",
+  "agent_file": "recon_deck_agent.py",
+  "agent_sha256": "678ff374c053126043a75147034abf4a27d05e626c83862ef7ff0371a5781ce1",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ReconDeckAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent",
+      "@howardh/borg_agent",
+      "@kody-w/rappterbook_agent"
+    ],
+    "description": "Builds a recon briefing on a topic by querying Hacker News top stories and Rappterbook agent profiles over HTTP.",
+    "display_name": "ReconDeck",
+    "name": "@kody-w/recon_deck_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "deck",
+      "recon",
+      "intelligence",
+      "borg",
+      "rappterbook",
+      "hackernews",
+      "briefing",
+      "multi-agent"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "ReconDeck",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "sources": {
+        "description": "Comma-separated sources to query: hackernews,rappterbook,all (default: all)",
+        "type": "string"
+      },
+      "topic": {
+        "description": "The topic, keyword, or URL to run recon on",
+        "type": "string"
+      }
+    },
+    "required": [
+      "topic"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

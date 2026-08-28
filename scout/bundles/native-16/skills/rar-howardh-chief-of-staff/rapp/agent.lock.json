@@ -1,0 +1,61 @@
+{
+  "agent": "@howardh/chief_of_staff_agent",
+  "agent_file": "chief_of_staff_agent.py",
+  "agent_sha256": "5d904f34d63faa2271e66a6d1c6f033c269136c840a1bd4d4dcc57875bbf8354",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ChiefOfStaffAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Howard Hoy",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates M365-grounded briefs, inbox triage, meeting prep, commitment tracking, and drafts via the WorkIQ CLI, plus HN/DDG signal scans.",
+    "display_name": "ChiefOfStaff",
+    "name": "@howardh/chief_of_staff_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "productivity",
+      "chief-of-staff",
+      "m365",
+      "workiq",
+      "executive",
+      "triage",
+      "meeting-prep"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "ChiefOfStaff",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What the Chief of Staff should do. Use 'brief' for the structured 5-minute morning brief — triage + meetings + #1 priority + quick wins. Use 'triage' for inbox-only structured triage (today / decisions awaiting / FYI / escalated overnight). Use 'prep' for meeting prep using real email + Teams history. Use 'pulse' for industry/market signal scan. Use 'commitments' for open action items from inbox. Use 'draft' to draft a real email reply grounded in the actual thread. Use 'focus' for 'what should I work on now?'. Use 'catch_up' for 'what did I miss?' digest. Use 'weekly_review' on Fridays for commitment audit + drift detection + Monday prep.",
+        "enum": [
+          "brief",
+          "triage",
+          "prep",
+          "pulse",
+          "commitments",
+          "draft",
+          "focus",
+          "catch_up",
+          "weekly_review"
+        ],
+        "type": "string"
+      },
+      "topic": {
+        "description": "Context for the action. For prep: meeting name, person, or topic. For draft: subject or thread description. For commitments: optional filter by person or deal. For catch_up: optional time range (e.g. 'today', 'last 2 days').",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

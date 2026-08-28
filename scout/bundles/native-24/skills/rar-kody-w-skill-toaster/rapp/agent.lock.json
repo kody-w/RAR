@@ -1,0 +1,57 @@
+{
+  "agent": "@kody-w/skill_toaster_agent",
+  "agent_file": "skill_toaster_agent.py",
+  "agent_sha256": "b05707e55b486c96363ae170a6ee0c755bc0c5b797b5e7ff9fcb57c9dc86d625",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SkillToasterEngine",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent",
+      "@kody-w/rappter_engine_agent"
+    ],
+    "description": "Turns an aggregated third-party skill entry into a real, callable RAPP agent by inferring the capability's shape from its metadata and generating a working procedure for it.",
+    "display_name": "SkillToaster",
+    "name": "@kody-w/skill_toaster_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "aggregation",
+      "codegen",
+      "engine",
+      "rules_as_data",
+      "toaster"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "SkillToaster",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What the toaster should do.",
+        "enum": [
+          "describe",
+          "list_rules",
+          "analyze",
+          "toast",
+          "census",
+          "get_state"
+        ],
+        "type": "string"
+      },
+      "slug": {
+        "description": "Aggregated entry to analyze or toast. Defaults to a built-in example.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

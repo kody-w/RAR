@@ -1,0 +1,72 @@
+{
+  "agent": "@cat-agent-skills/linkedin_content_writer",
+  "agent_file": "linkedin_content_writer_agent.py",
+  "agent_sha256": "2e8b65f13ef8f8b4f9470b5fcd78960b3d95028cd00408c86e07adcf1724fab5",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "LinkedinContentWriter",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Becky Still, Digital Boop Ltd",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Create credible LinkedIn content from facts, notes or drafts, with configurable voice and no invented evidence.",
+    "display_name": "LinkedIn Content Writer",
+    "name": "@cat-agent-skills/linkedin_content_writer",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "b67b1c225f5d7237",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "linkedin-content-writer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#linkedin-content-writer",
+      "upstream_version": "1.0.1"
+    },
+    "tags": [
+      "linkedin",
+      "social_media",
+      "writing",
+      "content"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "LinkedinContentWriter",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/anonymised_case_study_writer",
+  "agent_file": "anonymised_case_study_writer_agent.py",
+  "agent_sha256": "acca33c8954fc23a9d6b76b4ab200a7bf5a076cd44c2200f1c42565e98f20361",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AnonymisedCaseStudyWriter",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Simon Owen",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turn engagement notes into anonymised, publishable case studies without exposing client-confidential details.",
+    "display_name": "Anonymised Case Study Writer",
+    "name": "@cat-agent-skills/anonymised_case_study_writer",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "30ca39e3e8405c3e",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "anonymised-case-study-writer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#anonymised-case-study-writer",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "writing",
+      "case_study",
+      "marketing",
+      "documents",
+      "content",
+      "privacy"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "AnonymisedCaseStudyWriter",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

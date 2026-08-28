@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/meeting_analyzer",
+  "agent_file": "meeting_analyzer_agent.py",
+  "agent_sha256": "bb10c34d0d9a18bf34f0487582f49eeaaaba6c1400fa00a2abe1943c42c44f03",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MeetingAnalyzer",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Michael Ferro Pereira",
+    "category": "analysis",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Analyzes meeting content pasted as text or provided as audio/video transcripts. Delivers a structured intelligence report: explicit decisions and action items, participant persona profiles, and — most importantly — hidden insights: unspoken tensions, implicit risks, unresolved topics, and signals that were not made explicit during the meeting but are critical to the context.",
+    "display_name": "Meeting Analyzer",
+    "name": "@cat-agent-skills/meeting_analyzer",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "71c742aa9f713491",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "meeting-analyzer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#meeting-analyzer",
+      "upstream_version": "0.1.0"
+    },
+    "tags": [
+      "meetings",
+      "analysis",
+      "insights",
+      "personas",
+      "transcription",
+      "productivity",
+      "communication"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "MeetingAnalyzer",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "data_source": {
+        "description": "Optional. Where the evidence comes from.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The question to answer, stated as a question.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

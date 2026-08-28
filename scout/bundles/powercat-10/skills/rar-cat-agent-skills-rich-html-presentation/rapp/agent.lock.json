@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/rich_html_presentation",
+  "agent_file": "rich_html_presentation_agent.py",
+  "agent_sha256": "3d19b945bbfafa005314156f60b03bb2f0361556e9f269fae151015b8e007ec8",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RichHtmlPresentation",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Henry Jammes",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Create polished, self-contained HTML slide decks with keynote-style visuals, keyboard navigation, themes, animations, and reusable presentation components.",
+    "display_name": "Rich HTML Presentation",
+    "name": "@cat-agent-skills/rich_html_presentation",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "dc40638371835363",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "rich-html-presentation",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#rich-html-presentation",
+      "upstream_version": "1.2.0"
+    },
+    "tags": [
+      "presentations",
+      "html",
+      "design",
+      "productivity",
+      "writing"
+    ],
+    "version": "2.2.0"
+  },
+  "runtime_name": "RichHtmlPresentation",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.2.0"
+}

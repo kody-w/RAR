@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/gantt_chart_generator",
+  "agent_file": "gantt_chart_generator_agent.py",
+  "agent_sha256": "2df2f858299c6f1239e65bb152f4bbb593ba2072dbcac6316d6362416bdee486",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "GanttChartGenerator",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Nazish Qasim",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generate clean, consistently-styled matplotlib Gantt charts from a schedule CSV or DataFrame — with group colours, completion overlays, and a today line.",
+    "display_name": "Gantt Chart Builder",
+    "name": "@cat-agent-skills/gantt_chart_generator",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "fe66d46e3035d79c",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "gantt-chart-generator",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#gantt-chart-generator",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "gantt",
+      "timeline",
+      "project_management",
+      "matplotlib",
+      "charts",
+      "scripts"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "GanttChartGenerator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

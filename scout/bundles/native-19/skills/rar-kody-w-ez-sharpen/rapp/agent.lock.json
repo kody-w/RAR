@@ -1,0 +1,90 @@
+{
+  "agent": "@kody-w/ez_sharpen_agent",
+  "agent_file": "ez_sharpen_agent.py",
+  "agent_sha256": "ae232a01c0cee6bf5109635803b5cf99ba215201856d4c830b3b11ae972992e6",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "EZSharpenAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "analysis",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Grows in-between detail for recorded commons frames by bounded interpolation, keeping only candidates consistent with signed neighbor frames.",
+    "display_name": "EZSharpen",
+    "name": "@kody-w/ez_sharpen_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "frames",
+      "interpolation",
+      "dream-catcher",
+      "fidelity",
+      "ezsharpen"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "EZSharpen",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "sharpen = polish one frame vs its neighbors; grow = sharpen every interior frame of a recording (recursive frame grower); compete = run MULTIPLE engines that compete to add non-conflicting detail, judged + self-improved over passes (glitches shrink, winners merge); demo = self-test. Default demo.",
+        "enum": [
+          "sharpen",
+          "grow",
+          "compete",
+          "demo"
+        ],
+        "type": "string"
+      },
+      "candidates": {
+        "description": "Optional host-LLM-proposed enhancement records for cur: [{id, v:[numbers], kind, note}]. Each is filtered by the dream catcher.",
+        "items": {
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "cur": {
+        "description": "For sharpen: the frame to polish (same shape). Its signed entities are immutable.",
+        "type": "object"
+      },
+      "frames": {
+        "description": "For grow: an inline ordered list of frames [{ts, entities:{...}}] to grow.",
+        "items": {
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "next": {
+        "description": "For sharpen: the next frame (same shape).",
+        "type": "object"
+      },
+      "passes": {
+        "description": "For compete: how many judge-and-improve rounds to run (engines nudge toward the winner each pass). Default 3.",
+        "type": "integer"
+      },
+      "prev": {
+        "description": "For sharpen: the previous frame {ts, entities:{id:{v:[..], kind, signed}}}.",
+        "type": "object"
+      },
+      "recording": {
+        "description": "For grow: path to a recording dir (frameNN.state.json + manifest.json from CommonsShow record) to grow instead of inline frames.",
+        "type": "string"
+      },
+      "subdivide": {
+        "description": "For grow: synthesize this many interpolated sub-frames between each pair (recursive growth). Default 0 (none).",
+        "type": "integer"
+      },
+      "tolerance": {
+        "description": "Slack allowed beyond the neighbor bound before a candidate is judged contradictory. Default 0 (strict).",
+        "type": "number"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

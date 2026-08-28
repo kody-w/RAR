@@ -1,0 +1,57 @@
+{
+  "agent": "@aibast-agents-library/asset_maintenance_forecast",
+  "agent_file": "asset_maintenance_forecast_agent.py",
+  "agent_sha256": "3b19a5b8d75932797bd11152c321ce6d83789f0092ed326df11e145a415120ac",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AssetMaintenanceForecastAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "energy",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Monitors asset health from live CRM work orders joined to simulated telemetry sensor stats and alerts, with an offline demo fallback.",
+    "display_name": "Asset Maintenance Forecast Agent",
+    "name": "@aibast-agents-library/asset_maintenance_forecast",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "maintenance",
+      "asset-health",
+      "energy",
+      "predictive",
+      "work-orders",
+      "budget"
+    ],
+    "version": "1.3.0"
+  },
+  "runtime_name": "AssetMaintenanceForecastAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "asset_id": {
+        "description": "Asset ID; required by schedule_maintenance.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The maintenance operation to perform.",
+        "enum": [
+          "maintenance_forecast",
+          "asset_health",
+          "budget_projection",
+          "work_order_plan",
+          "iot_failure_analysis",
+          "schedule_maintenance"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.3.0"
+}

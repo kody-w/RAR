@@ -1,0 +1,106 @@
+{
+  "agent": "@kody-w/commons_show_agent",
+  "agent_file": "commons_show_agent.py",
+  "agent_sha256": "c7b97c5fbe3611f175f3812831450a5e559a4fcee17cb46fdad27b30d26a49ee",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CommonsShowAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "creative",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Captures staged shows in the live RAPP Commons via Playwright and renders narrated MP4 episodes with TTS, rsvg-convert, and ffmpeg.",
+    "display_name": "Commons Show",
+    "name": "@kody-w/commons_show_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "commons",
+      "video",
+      "content",
+      "receipts",
+      "virtual-world"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "CommonsShow",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "capture = run the show + return footage/receipts to narrate; video = render the .mp4 from captured frames + your scenes; show = capture then render if scenes given. Default capture.",
+        "enum": [
+          "capture",
+          "video",
+          "show"
+        ],
+        "type": "string"
+      },
+      "episode": {
+        "description": "Optional episode number / beat-count cap for capture.",
+        "type": "integer"
+      },
+      "format": {
+        "description": "Which show to stage in the commons. apex=Last Avatar Standing (co-op elimination); poker=signed Hold'em showdown; day=24 hours via the day-night clock; tour=every venue; bounty=the signed job-market race. Default apex.",
+        "enum": [
+          "apex",
+          "poker",
+          "day",
+          "tour",
+          "bounty"
+        ],
+        "type": "string"
+      },
+      "hook": {
+        "description": "Spoken opener (~8-15s) over the title card — a scroll-stopping MrBeast-style premise.",
+        "type": "string"
+      },
+      "scenes": {
+        "description": "One per captured frame, in order. Each: {frame (int index into the manifest frames), speaker (the AI character whose POV this is, e.g. 'Pip'), kicker (short label like 'CONFESSIONAL' or 'PLAY-BY-PLAY'), caption (punchy on-screen headline), narration (1-3 spoken sentences from that character's POV, grounded in the frame's receipts)}.",
+        "items": {
+          "properties": {
+            "caption": {
+              "type": "string"
+            },
+            "frame": {
+              "type": "integer"
+            },
+            "kicker": {
+              "type": "string"
+            },
+            "narration": {
+              "type": "string"
+            },
+            "speaker": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "slug": {
+        "description": "Optional output folder slug (defaults from the title).",
+        "type": "string"
+      },
+      "title": {
+        "description": "Episode title (the big title card). For action=video/show with scenes.",
+        "type": "string"
+      },
+      "url": {
+        "description": "Optional commons URL (default the live Pages site).",
+        "type": "string"
+      },
+      "voice": {
+        "description": "Optional macOS 'say' voice for narration (e.g. 'Ava','Tom').",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

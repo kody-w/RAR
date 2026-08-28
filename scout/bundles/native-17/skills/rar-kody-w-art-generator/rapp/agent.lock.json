@@ -1,0 +1,50 @@
+{
+  "agent": "@kody-w/art_generator_agent",
+  "agent_file": "art_generator_agent.py",
+  "agent_sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ArtGeneratorAgent",
+  "host_dependencies": [
+    "env:AZURE_OPENAI_ENDPOINT"
+  ],
+  "manifest": {
+    "author": "RAPP Community",
+    "category": "creative",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates original PNG artwork with Azure GPT Image 2, falls back to GPT Image 1.5 on failure, saves it locally, and optionally opens it.",
+    "display_name": "Art Generator",
+    "example_call": {
+      "args": {
+        "description": "A detailed original illustration",
+        "quality": "medium"
+      }
+    },
+    "external_prereqs": [
+      "Azure CLI login or managed identity",
+      "Azure OpenAI GPT Image deployments"
+    ],
+    "name": "@kody-w/art_generator_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_OPENAI_ENDPOINT"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "art",
+      "image-generation",
+      "azure-openai",
+      "creative"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "ArtGenerator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,77 @@
+{
+  "agent": "@kody-w/rapp_skill_bridge_agent",
+  "agent_file": "rapp_skill_bridge_agent.py",
+  "agent_sha256": "32d08f268896a835b4c63b9484ad95f1b1234216e0274f92c8455a6e32f406a5",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappSkillBridge",
+  "host_dependencies": [
+    "azure.functions",
+    "utils.azure_file_storage",
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "kody-w",
+    "category": "pipeline",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills.",
+    "display_name": "RAPP Skill Bridge",
+    "name": "@kody-w/rapp_skill_bridge_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "skill",
+      "plugin",
+      "claude-code",
+      "converter",
+      "bridge",
+      "interop",
+      "determinism",
+      "roundtrip"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "RappSkillBridge",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "marketplace": {
+        "description": "On export, also emit .claude-plugin/marketplace.json so the bundle's repo is directly installable.",
+        "type": "boolean"
+      },
+      "operation": {
+        "description": "export=agent.py to a Claude plugin bundle; import=plugin or SKILL.md back to agent.py (byte-identical when the bundle carries a lock); verify=report drift between a bundle and its carried agent; inspect=identify an artifact.",
+        "enum": [
+          "export",
+          "import",
+          "verify",
+          "inspect"
+        ],
+        "type": "string"
+      },
+      "out_dir": {
+        "description": "Directory to write the converted artifact into. Omit for a dry run that returns the full file map without touching disk.",
+        "type": "string"
+      },
+      "publisher": {
+        "description": "Publisher namespace for an imported agent, e.g. '@kody-w'. Required by import when the source is a foreign skill.",
+        "type": "string"
+      },
+      "registry_snapshot": {
+        "description": "Path to a registry.json used to preflight name, display_name and install-filename collisions before an imported agent is written.",
+        "type": "string"
+      },
+      "source": {
+        "description": "Path to the source artifact: an agent .py for export; a plugin directory, a skill directory, or a SKILL.md for import/verify/inspect.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

@@ -1,0 +1,115 @@
+{
+  "agent": "@cowork-cookbook/dashboard_establish_support_procedures_and_policies",
+  "agent_file": "dashboard_establish_support_procedures_and_policies_agent.py",
+  "agent_sha256": "d479ea2b3b8bf75b116c4dd29ec7c40bb136e308327af4b551e73ab4087453ba",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DashboardEstablishSupportProceduresAndPolicies",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Produces a self-contained interactive HTML dashboard for establish support procedures and policies - opens in any browser, no D365 access needed by the viewer.",
+    "display_name": "Establish support procedures and policies Interactive HTML Dashboard",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "dynamics-365-erp",
+      "process_roots": [
+        "administer-to-operate"
+      ],
+      "process_tags": [
+        "administer-to-operate/support-systems/establish-support-procedures-and-policies"
+      ],
+      "recipe_category": "dashboard",
+      "recipe_type": "prompt",
+      "upstream_path": "administer-to-operate/dashboard-establish-support-procedures-and-policies",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "PDF"
+        ],
+        "plugin": [
+          {
+            "action": "data_find_entity_type",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "data_find_entities_sql",
+            "plugin": "dynamics-365-erp"
+          }
+        ]
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/dashboard_establish_support_procedures_and_policies",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "1874609b20a9d64b",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "dashboard-establish-support-procedures-and-policies",
+      "upstream_url": "https://coworkcookbook.com/recipes/dashboard-establish-support-procedures-and-policies",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "dashboard",
+      "administer_to_operate",
+      "intermediate",
+      "integration",
+      "dynamics_365_erp"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "DashboardEstablishSupportProceduresAndPolicies",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

@@ -1,0 +1,74 @@
+{
+  "agent": "@rapp/pitch_deck_agent",
+  "agent_file": "pitch_deck_agent.py",
+  "agent_sha256": "ca3c2f325342769f9d799ccb0fc0cd41a23f90d2e6ddfb1dcb7c79d7bdd78145",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PitchDeckAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP / AIBAST",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates a self-contained HTML executive pitch deck from a topic — one LLM call shapes the narrative, a fixed template assembles the slides.",
+    "display_name": "PitchDeck",
+    "example_call": "Generate an executive pitch deck for our internal agent-sharing proposal, framed as a contribution that complements existing tooling",
+    "name": "@rapp/pitch_deck_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "pitch",
+      "deck",
+      "slides",
+      "narrative",
+      "html",
+      "executive"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "PitchDeck",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Who the pitch is for (default: 'executive leadership')",
+        "type": "string"
+      },
+      "author": {
+        "description": "Author name for the byline",
+        "type": "string"
+      },
+      "output_path": {
+        "description": "Absolute path for the output HTML. Default: ./pitches/<slug>-pitch.html",
+        "type": "string"
+      },
+      "product_name": {
+        "description": "Name of the product/initiative shown on slides",
+        "type": "string"
+      },
+      "team": {
+        "description": "Team/org affiliation (e.g. 'AIBAST · Microsoft')",
+        "type": "string"
+      },
+      "thesis": {
+        "description": "Core argument in 1-2 sentences",
+        "type": "string"
+      },
+      "tone": {
+        "description": "collaborative (default) | direct | visionary",
+        "type": "string"
+      },
+      "topic": {
+        "description": "What the pitch is about (e.g. 'internal agent sharing proposal')",
+        "type": "string"
+      }
+    },
+    "required": [
+      "topic"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

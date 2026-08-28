@@ -1,0 +1,116 @@
+{
+  "agent": "@cowork-cookbook/blueprint_procurement_spend_review",
+  "agent_file": "blueprint_procurement_spend_review_agent.py",
+  "agent_sha256": "9d3d0c28e76bc98b6f369e0dcfc9993a94261391cfab5e3155e2323c5d804892",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BlueprintProcurementSpendReview",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Paste this procurement-analysis workflow blueprint into Cowork and it profiles spend by vendor, flags concentration risk, and surfaces payable exposure.",
+    "display_name": "Procurement Spend & Supplier Risk Blueprint",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "advanced",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "dynamics-365-erp",
+      "process_roots": [
+        "source-to-pay"
+      ],
+      "process_tags": [
+        "source-to-pay/analyze-procurement-and-sourcing"
+      ],
+      "recipe_category": "blueprint",
+      "recipe_type": "prompt+blueprint",
+      "upstream_path": "source-to-pay/blueprint-procurement-spend-review",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "Excel",
+          "Email"
+        ],
+        "plugin": [
+          {
+            "action": "data_find_entity_type",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "data_find_entities_sql",
+            "plugin": "dynamics-365-erp"
+          }
+        ]
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/blueprint_procurement_spend_review",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "6c0999a13d944789",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "blueprint-procurement-spend-review",
+      "upstream_url": "https://coworkcookbook.com/recipes/blueprint-procurement-spend-review",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt_blueprint",
+      "blueprint",
+      "source_to_pay",
+      "advanced",
+      "integration",
+      "dynamics_365_erp"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "BlueprintProcurementSpendReview",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "constraints": {
+        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being designed.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

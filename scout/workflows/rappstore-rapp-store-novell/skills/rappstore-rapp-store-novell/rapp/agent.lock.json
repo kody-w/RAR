@@ -1,0 +1,35 @@
+{
+  "agent": "@rapp-store/novell",
+  "agent_file": "novell_agent.py",
+  "agent_sha256": "3c49a6cb033ecdc343190e57d36476840b11af4eb7500eb5638df5f9d5fccf91",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "NovellAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "agent": "singleton/novell_agent.py",
+    "category": "analysis",
+    "description": "Adversarial pre-review. Twelve skeptic lenses roast your artifact and tell you the evidence that kills each objection. Archetype only — models no real person, stores no names.",
+    "id": "novell",
+    "name": "Novell",
+    "publisher": "@kody-w",
+    "schema": "rapp-agent/1.0",
+    "summary": "The hater you run before the real one shows up.",
+    "tags": [
+      "rapplication",
+      "review",
+      "adversarial",
+      "local-first",
+      "has-ui"
+    ],
+    "ui": "ui/index.html",
+    "version": "1.0.0"
+  },
+  "runtime_name": "Novell",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

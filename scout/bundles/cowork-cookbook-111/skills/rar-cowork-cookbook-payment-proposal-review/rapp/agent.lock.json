@@ -1,0 +1,115 @@
+{
+  "agent": "@cowork-cookbook/payment_proposal_review",
+  "agent_file": "payment_proposal_review_agent.py",
+  "agent_sha256": "e9cc5729e109397f4e71f2f18090c5739ba26b722a431fba428a2c191ab632b3",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PaymentProposalReview",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Reviews the current payment proposal for accuracy and flags lines that need attention before release.",
+    "display_name": "Payment Proposal Review",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": "2026-05-23",
+      "mutates_data": false,
+      "plugin": "dynamics-365-erp",
+      "process_roots": [
+        "source-to-pay"
+      ],
+      "process_tags": [
+        "source-to-pay/manage-accounts-payable"
+      ],
+      "recipe_category": "audit",
+      "recipe_type": "prompt",
+      "upstream_path": "source-to-pay/payment-proposal-review",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "Excel"
+        ],
+        "plugin": [
+          {
+            "action": "data_find_entity_type",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "data_find_entities_sql",
+            "plugin": "dynamics-365-erp"
+          }
+        ]
+      },
+      "verification_status": "verified"
+    },
+    "name": "@cowork-cookbook/payment_proposal_review",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "verified",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "cd7b114adb7d66ff",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "payment-proposal-review",
+      "upstream_url": "https://coworkcookbook.com/recipes/payment-proposal-review",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "audit",
+      "source_to_pay",
+      "intermediate",
+      "integration",
+      "dynamics_365_erp"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "PaymentProposalReview",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

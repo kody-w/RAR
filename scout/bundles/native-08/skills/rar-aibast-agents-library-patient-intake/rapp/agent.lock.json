@@ -1,0 +1,63 @@
+{
+  "agent": "@aibast-agents-library/patient_intake",
+  "agent_file": "patient_intake_agent.py",
+  "agent_sha256": "f98ba4ec1b98d8a74b3053dcc3acb0e18f7c9daa1f2fc729bf716c23ec14c370",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PatientIntakeAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "healthcare",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Runs patient intake — forms, insurance checks, scheduling — joining a live simulated FHIR patient roster with the Dynamics 365 CRM; offline fallback.",
+    "display_name": "Patient Intake Agent",
+    "name": "@aibast-agents-library/patient_intake",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "intake",
+      "insurance",
+      "scheduling",
+      "patient",
+      "registration",
+      "healthcare"
+    ],
+    "version": "1.3.0"
+  },
+  "runtime_name": "PatientIntakeAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The intake operation to perform.",
+        "enum": [
+          "intake_form",
+          "insurance_verification",
+          "appointment_scheduling",
+          "pre_visit_summary",
+          "register_patient",
+          "book_appointment",
+          "send_digital_intake_packet",
+          "activate_reminder_workflow"
+        ],
+        "type": "string"
+      },
+      "patient_id": {
+        "description": "Optional patient ID to filter results.",
+        "type": "string"
+      },
+      "patient_key": {
+        "description": "Optional exact demo patient key; use Sarah Martinez.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.3.0"
+}

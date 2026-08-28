@@ -1,0 +1,62 @@
+{
+  "agent": "@aibast-agents-library/claims_processing",
+  "agent_file": "claims_processing_agent.py",
+  "agent_sha256": "862839f3377e4d487950a3b8f6bb7cb3b7d4accb29c978d45e9bee6161332a58",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ClaimsProcessingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "financial_services",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Processes claims and disputes from a live simulated Dynamics 365 tenant, with triage, fraud flags, and an offline demo fallback.",
+    "display_name": "Claims Processing Agent",
+    "name": "@aibast-agents-library/claims_processing",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "claims",
+      "insurance",
+      "adjudication",
+      "fraud",
+      "settlement",
+      "financial-services"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "ClaimsProcessingAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "claim_id": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "claim_intake",
+          "adjudication_review",
+          "fraud_flag",
+          "settlement_recommendation",
+          "claim_triage",
+          "fraud_detection",
+          "auto_adjudication",
+          "complex_claim_prep",
+          "performance_metrics"
+        ],
+        "type": "string"
+      },
+      "user_input": {
+        "description": "Optional natural-language request; enables exact-keyed record matching for the v1.1.0 capability operations.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

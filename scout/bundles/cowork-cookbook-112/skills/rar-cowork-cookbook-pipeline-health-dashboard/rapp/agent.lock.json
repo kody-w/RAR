@@ -1,0 +1,119 @@
+{
+  "agent": "@cowork-cookbook/pipeline_health_dashboard",
+  "agent_file": "pipeline_health_dashboard_agent.py",
+  "agent_sha256": "48531a665fd2d83c6167ab98782474e9715c011f90bcdb29f75a8213eb82b13b",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PipelineHealthDashboard",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Produces a self-contained interactive HTML dashboard of pipeline by stage, value, age, and owner that opens in any browser without Dynamics 365 access.",
+    "display_name": "Pipeline Health HTML Dashboard",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "advanced",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "dynamics-365-sales",
+      "process_roots": [
+        "prospect-to-quote"
+      ],
+      "process_tags": [
+        "prospect-to-quote/analyze-sales/analyze-sales-data"
+      ],
+      "recipe_category": "dashboard",
+      "recipe_type": "prompt",
+      "upstream_path": "prospect-to-quote/pipeline-health-dashboard",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "PDF"
+        ],
+        "plugin": [
+          {
+            "action": "search",
+            "plugin": "dynamics-365-sales"
+          },
+          {
+            "action": "describe",
+            "plugin": "dynamics-365-sales"
+          },
+          {
+            "action": "read_query",
+            "plugin": "dynamics-365-sales"
+          }
+        ]
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/pipeline_health_dashboard",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "16f2dc5614c14da0",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "pipeline-health-dashboard",
+      "upstream_url": "https://coworkcookbook.com/recipes/pipeline-health-dashboard",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "dashboard",
+      "prospect_to_quote",
+      "advanced",
+      "integration",
+      "dynamics_365_sales"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "PipelineHealthDashboard",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

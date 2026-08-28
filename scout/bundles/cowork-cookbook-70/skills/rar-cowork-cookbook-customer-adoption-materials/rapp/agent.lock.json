@@ -1,0 +1,101 @@
+{
+  "agent": "@cowork-cookbook/customer_adoption_materials",
+  "agent_file": "customer_adoption_materials_agent.py",
+  "agent_sha256": "e8acc8ad32ef6f2349f4d9dfddca014ce0bf0e75b7bd70c77dd299be70b80392",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CustomerAdoptionMaterials",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Build a role-relevant learning curriculum for a customer - structured, sourced, and deployment-ready.",
+    "display_name": "Customer adoption materials",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "advanced",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "none",
+      "process_roots": [
+        "prospect-to-quote"
+      ],
+      "process_tags": [
+        "prospect-to-quote/estimate-and-quote-sales/conduct-post-sale-follow-up"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt",
+      "upstream_path": "prospect-to-quote/customer-adoption-materials",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "PowerPoint"
+        ],
+        "plugin": []
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/customer_adoption_materials",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "c4f7910726ce044d",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "customer-adoption-materials",
+      "upstream_url": "https://coworkcookbook.com/recipes/customer-adoption-materials",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "other",
+      "prospect_to_quote",
+      "advanced",
+      "read_only"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "CustomerAdoptionMaterials",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to apply this capability to.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

@@ -1,0 +1,61 @@
+{
+  "agent": "@aibast-agents-library/permit_license_management",
+  "agent_file": "permit_license_management_agent.py",
+  "agent_sha256": "4ea739f90368c84d3160f2b39f3cc2bd773c63f48d134df07288fa7004a586f8",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PermitLicenseManagementAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "energy",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks permit applications from a live simulated Dynamics 365 tenant plus renewal calendars and gap analysis, with an offline fallback.",
+    "display_name": "Permit & License Management Agent",
+    "name": "@aibast-agents-library/permit_license_management",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "permits",
+      "licenses",
+      "compliance",
+      "regulatory",
+      "energy",
+      "renewals"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "PermitLicenseManagementAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "facility": {
+        "description": "Optional facility name to filter results.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The permit management operation to perform.",
+        "enum": [
+          "permit_inventory",
+          "renewal_calendar",
+          "compliance_gaps",
+          "application_status",
+          "at_risk_permits",
+          "initiate_renewal_workflow"
+        ],
+        "type": "string"
+      },
+      "permit_id": {
+        "description": "Exact permit ID required by initiate_renewal_workflow.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

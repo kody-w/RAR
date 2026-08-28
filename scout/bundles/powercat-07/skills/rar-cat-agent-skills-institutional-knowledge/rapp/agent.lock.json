@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/institutional_knowledge",
+  "agent_file": "institutional_knowledge_agent.py",
+  "agent_sha256": "b9574a93f4efeb61a83d8e843f8caae6f11d146b20edaca294837c209bc4723a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "InstitutionalKnowledge",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Srinivas Varukala",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Preserve a departing senior leader's institutional knowledge — decisions, rationale, relationships, and tribal knowledge — by mining their M365 signals into a structured, multi-phase archive a successor can ground on.",
+    "display_name": "Institutional Knowledge Archivist",
+    "name": "@cat-agent-skills/institutional_knowledge",
+    "platforms": [
+      "Cowork",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "3ac7896e76455716",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "institutional-knowledge",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#institutional-knowledge",
+      "upstream_version": "1.0.1"
+    },
+    "tags": [
+      "knowledge",
+      "handoff",
+      "leadership",
+      "m365",
+      "offboarding",
+      "documentation",
+      "productivity"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "InstitutionalKnowledge",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The input to convert — path, URL or payload.",
+        "type": "string"
+      },
+      "target_format": {
+        "description": "Optional. The desired output format.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

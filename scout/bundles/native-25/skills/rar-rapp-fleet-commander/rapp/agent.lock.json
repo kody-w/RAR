@@ -1,0 +1,87 @@
+{
+  "agent": "@rapp/fleet_commander",
+  "agent_file": "fleet_commander_agent.py",
+  "agent_sha256": "2ba26bb68c2fdaf8f75f5068fe244d227330e8ab96c7ee6516c6d2530b386487",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FleetCommanderAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Builds new RAR agents from a natural-language spec — plans, writes pytest tests, generates code via the Copilot CLI, iterates, and publishes.",
+    "display_name": "FleetCommander",
+    "example_call": {
+      "args": {
+        "action": "full",
+        "spec": "An agent that fetches the top stories from Hacker News and summarizes them"
+      }
+    },
+    "name": "@rapp/fleet_commander",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meta",
+      "automation",
+      "fleet",
+      "ci",
+      "tdd",
+      "pipeline"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "FleetCommander",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Pipeline stage. 'plan' produces a spec. 'test' writes pytest cases. 'build' generates the agent. 'run' executes tests and iterates. 'publish' pushes to RAR. 'full' runs the entire pipeline end-to-end.",
+        "enum": [
+          "plan",
+          "test",
+          "build",
+          "run",
+          "publish",
+          "full"
+        ],
+        "type": "string"
+      },
+      "agent_name": {
+        "description": "PascalCase name for the agent (auto-generated if omitted).",
+        "type": "string"
+      },
+      "category": {
+        "description": "Agent category for the registry.",
+        "enum": [
+          "general",
+          "productivity",
+          "sales",
+          "support",
+          "data",
+          "automation",
+          "integrations",
+          "devtools"
+        ],
+        "type": "string"
+      },
+      "namespace": {
+        "description": "RAR namespace (default @rapp).",
+        "type": "string"
+      },
+      "plan_json": {
+        "description": "JSON plan from a prior 'plan' step (used by build/test).",
+        "type": "string"
+      },
+      "spec": {
+        "description": "Natural-language description of the agent to build.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

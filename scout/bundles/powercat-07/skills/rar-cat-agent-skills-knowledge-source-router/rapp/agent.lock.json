@@ -1,0 +1,69 @@
+{
+  "agent": "@cat-agent-skills/knowledge_source_router",
+  "agent_file": "knowledge_source_router_agent.py",
+  "agent_sha256": "a6d2ac6a36c781505665b517953328f2dd809e91140dd40f56588569f87edeb6",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "KnowledgeSourceRouter",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Adi Leibowitz",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Route Copilot Studio knowledge searches to the right region-specific source (Americas, EMEA, APAC, or Global) based on where the user is, so answers stay locally accurate.",
+    "display_name": "Knowledge Source Router",
+    "name": "@cat-agent-skills/knowledge_source_router",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "bcc9646e4cda8666",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "knowledge-source-router",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#knowledge-source-router",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "knowledge",
+      "routing",
+      "localization",
+      "location",
+      "grounding"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "KnowledgeSourceRouter",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to apply this capability to.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

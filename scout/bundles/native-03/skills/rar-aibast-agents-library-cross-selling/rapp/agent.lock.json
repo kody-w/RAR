@@ -1,0 +1,58 @@
+{
+  "agent": "@aibast-agents-library/cross_selling",
+  "agent_file": "cross_selling_agent.py",
+  "agent_sha256": "12d3bbf7a218d40f4e2238e57f5441f78a23b11e3e3dfe72de8d5374cf236197",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CrossSellingAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Builds expansion growth plans from a live simulated Dynamics 365 tenant's open pipeline, with affinity demos and an offline fallback.",
+    "display_name": "Cross-Selling Opportunities",
+    "name": "@aibast-agents-library/cross_selling",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "cross-sell",
+      "upsell",
+      "revenue",
+      "product-affinity",
+      "recommendations"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "CrossSellingAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "customer_id": {
+        "description": "Customer ID (e.g. 'CUST-001')",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The cross-selling operation to perform",
+        "enum": [
+          "opportunity_scan",
+          "product_affinity",
+          "recommendation_engine",
+          "revenue_impact",
+          "buying_signals",
+          "outreach_plan",
+          "growth_plan",
+          "account_assignments"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

@@ -1,0 +1,128 @@
+{
+  "agent": "@kody-w/vibe_coding_loop",
+  "agent_file": "vibe_coding_loop_agent.py",
+  "agent_sha256": "931c9224a42c1a609821a5d2fb5b7303a7434fb625d59eae8f8027a7ef7b046e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "VibeCodingLoopAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "workflow",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Returns prompt and shell-command templates for shipping batches of single-file HTML demos to a Jekyll site; makes no LLM or network calls itself.",
+    "display_name": "Vibe Coding Demo Loop",
+    "example_call": {
+      "action": "loop",
+      "domain": "first-person rooftop scenes"
+    },
+    "name": "@kody-w/vibe_coding_loop",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "publishing",
+      "orchestration",
+      "vibe-coding",
+      "single-file-html",
+      "loop"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "VibeCodingLoop",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Which template to generate.",
+        "enum": [
+          "ideate",
+          "worker",
+          "wrapper",
+          "ship",
+          "loop"
+        ],
+        "type": "string"
+      },
+      "category": {
+        "description": "simulator|game|tool|prompt",
+        "type": "string"
+      },
+      "demo_filename": {
+        "description": "Filename of the demo (e.g. '42-foo.html'). Used by wrapper.",
+        "type": "string"
+      },
+      "difficulty": {
+        "description": "beginner|intermediate|advanced",
+        "type": "string"
+      },
+      "domain": {
+        "description": "Domain for ideation (action=ideate or loop). E.g. 'first-person 3D environments'.",
+        "type": "string"
+      },
+      "highlight": {
+        "description": "Signature term to highlight in prompt block.",
+        "type": "string"
+      },
+      "lesson1": {
+        "type": "string"
+      },
+      "lesson2": {
+        "type": "string"
+      },
+      "lesson3": {
+        "type": "string"
+      },
+      "lib": {
+        "description": "Approved external library for the worker. Default: 'three.js'.",
+        "type": "string"
+      },
+      "order": {
+        "description": "Sort order in catalog.",
+        "type": "integer"
+      },
+      "output_path": {
+        "description": "Absolute path where the worker writes the HTML demo (action=worker).",
+        "type": "string"
+      },
+      "prompt": {
+        "description": "Creative brief for a worker (action=worker).",
+        "type": "string"
+      },
+      "slug": {
+        "description": "Kebab-case identifier.",
+        "type": "string"
+      },
+      "slugs": {
+        "description": "Space-separated slugs (action=ship).",
+        "type": "string"
+      },
+      "stack": {
+        "description": "Comma-separated stack components.",
+        "type": "string"
+      },
+      "tagline": {
+        "type": "string"
+      },
+      "tags": {
+        "description": "Comma-separated tags.",
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "what_this_is": {
+        "type": "string"
+      },
+      "why_mind_blowing": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

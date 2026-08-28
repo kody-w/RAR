@@ -1,0 +1,77 @@
+{
+  "agent": "@cat-agent-skills/agent_performance_triage",
+  "agent_file": "agent_performance_triage_agent.py",
+  "agent_sha256": "4e49cebc4376b3a98e567a12ccd7a0cb1dd6d4464d0d44c0de8e742ecb4356be",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AgentPerformanceTriage",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Marco Zama",
+    "category": "analysis",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turn a live agent's analytics and transcripts into a diagnosis and a prioritized improvement backlog.",
+    "display_name": "Agent Performance Triage",
+    "name": "@cat-agent-skills/agent_performance_triage",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "7498e78b8a1f891e",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "agent-performance-triage",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#agent-performance-triage",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "copilot_studio",
+      "analytics",
+      "optimization",
+      "operations",
+      "post_launch",
+      "backlog",
+      "assessment",
+      "monitoring"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "AgentPerformanceTriage",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "data_source": {
+        "description": "Optional. Where the evidence comes from.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The question to answer, stated as a question.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

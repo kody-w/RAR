@@ -1,0 +1,56 @@
+{
+  "agent": "@aibast-agents-library/acquisition_support",
+  "agent_file": "acquisition_support_agent.py",
+  "agent_sha256": "b470bfbe595b3f5c1b01f2d7454c359a20be6ac3714db588a97743a9969fdf13",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AcquisitionSupportAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "federal_government",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks acquisitions from a live simulated Dynamics 365 tenant with FAR/DFAR checklists and vendor scoring, plus an offline fallback.",
+    "display_name": "Acquisition Support Agent",
+    "name": "@aibast-agents-library/acquisition_support",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "acquisition",
+      "FAR",
+      "DFAR",
+      "procurement",
+      "vendor-evaluation",
+      "federal"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "AcquisitionSupportAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "enum": [
+          "acquisition_overview",
+          "vendor_evaluation",
+          "compliance_checklist",
+          "timeline_tracker"
+        ],
+        "type": "string"
+      },
+      "project_id": {
+        "type": "string"
+      },
+      "vendor_id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

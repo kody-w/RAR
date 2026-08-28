@@ -1,0 +1,72 @@
+{
+  "agent": "@cat-agent-skills/what_to_use_when",
+  "agent_file": "what_to_use_when_agent.py",
+  "agent_sha256": "ad03b72ad9729dff9de3030e89da9b9ec4e10c326d6a8685d0557e30f5eafacf",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "WhatToUseWhen",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Gaurav Mahajan",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Routes single-output requests to the best-fit included Microsoft 365 Copilot 1p agents and reserves Cowork for long-running or multi-output work.",
+    "display_name": "What to Use When",
+    "name": "@cat-agent-skills/what_to_use_when",
+    "platforms": [
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d9b46fe1f7df7e9f",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "what-to-use-when",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#what-to-use-when",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "productivity",
+      "automation",
+      "copilot",
+      "routing"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "WhatToUseWhen",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

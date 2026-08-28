@@ -1,0 +1,64 @@
+{
+  "agent": "@rapp/mcp_callback_agent",
+  "agent_file": "mcp_callback_agent.py",
+  "agent_sha256": "18998f73939c35677b8692cdf0e11c0fc8d6ffd3e015e3452e78a86537550896",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "McpCallbackAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A self-bootstrapping drop-in agent that installs the local RAPP Brainstem MCP adapter and lets Brainstem call an on-device Scout or other sampling-capable MCP client back without changing the Grail.",
+    "display_name": "MCP Callback",
+    "name": "@rapp/mcp_callback_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "mcp",
+      "callback",
+      "scout",
+      "handoff",
+      "interop",
+      "bootstrap",
+      "local-first"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "McpCallback",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "max_tokens": {
+        "maximum": 4096,
+        "minimum": 64,
+        "type": "integer"
+      },
+      "message": {
+        "description": "Exact Brainstem result or handoff message the connected MCP host should continue.",
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "callback",
+          "status",
+          "bootstrap"
+        ],
+        "type": "string"
+      },
+      "target": {
+        "enum": [
+          "mcp-client",
+          "scout"
+        ],
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

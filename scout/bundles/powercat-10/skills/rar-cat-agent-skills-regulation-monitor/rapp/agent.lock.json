@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/regulation_monitor",
+  "agent_file": "regulation_monitor_agent.py",
+  "agent_sha256": "094fa86c7092388fb65e3ce1e381c016d4d8b9fb2ddcdb92be6e720016a6b0e7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RegulationMonitor",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Jagmeet Chabra",
+    "category": "analysis",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Configure once, then on a schedule sweeps a locked list of authoritative sources (auto-discovered at setup, confirmed by the user) plus any user-supplied seeds. Classifies each item, flags items relevant to the user's team using a light WorkIQ-derived profile, and renders a self-contained HTML dashboard. A tightly-bounded fallback web search is used only when a locked source is silent in the wind…",
+    "display_name": "Regulation Monitor",
+    "name": "@cat-agent-skills/regulation_monitor",
+    "platforms": [
+      "Cowork",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "455a25cb3f6e394c",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "regulation-monitor",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#regulation-monitor",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "regulation",
+      "monitoring",
+      "compliance",
+      "dashboard",
+      "research"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "RegulationMonitor",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

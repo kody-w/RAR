@@ -1,0 +1,50 @@
+{
+  "agent": "@aibast-agents-library/revenue_forecast",
+  "agent_file": "revenue_forecast_agent.py",
+  "agent_sha256": "e2d9ee1c1ed20bb5257500075b7c648689aa6869c87ba152d863827763fa71c7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RevenueForecastAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Builds weighted forecasts from live opportunities in a simulated Dynamics 365 tenant, with scenarios and an embedded offline demo fallback.",
+    "display_name": "Revenue Forecast",
+    "name": "@aibast-agents-library/revenue_forecast",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "revenue-forecast",
+      "deal-progression",
+      "analytics"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "RevenueForecastAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The analysis to perform",
+        "enum": [
+          "quarterly_forecast",
+          "scenario_analysis",
+          "commit_vs_best_case",
+          "forecast_accuracy"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

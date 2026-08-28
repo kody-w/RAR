@@ -1,0 +1,617 @@
+"""
+Maintenance Scheduling Agent — a template you are meant to mutate.
+
+Manages predictive and preventive maintenance for manufacturing equipment.
+Analyzes sensor telemetry, failure probability models, and technician
+availability to generate optimized work-order schedules that minimize
+unplanned downtime while controlling maintenance spend.
+
+HOW THIS TEMPLATE WORKS
+  1. Out of the box it pulls live records over real HTTP from the
+     globally hosted Static Dynamics 365 tenant (Aster Lane Office
+     Systems — synthetic data, no credentials, works from anywhere):
+     https://kody-w.github.io/static-dynamics-365/api/data/v9.2/
+     The tenant's Field Service work orders and customer assets map onto
+     this agent's world directly — e.g. work order "WO-260100" (printer
+     fault at Cedar Hollow Printing, Break/Fix, unscheduled).
+     Try: perform(operation="schedule_overview")
+  2. No network? Everything falls back to the embedded demo layer below
+     (EQUIPMENT / SENSOR_READINGS / TECHNICIANS) — the agent never
+     crashes offline.
+  3. Make it yours at the LIVE DATA SEAM below: set
+     MAINTENANCE_SCHEDULING_DATA_URL to any OData-shaped endpoint (your
+     real Dynamics org, or JSON exported from your CMMS), or replace
+     _fetch_collection() with a Maximo/Fiix client. Fields the rest of
+     the file needs are listed in _normalize_live_work_order() — runtime
+     hours and failure probabilities render as "n/a — enrichment seam"
+     until you wire IoT telemetry.
+
+OPERATIONS
+  schedule_overview | predictive_alerts | work_order_plan
+  | downtime_analysis | maintenance_plan | create_work_order
+  | maintenance_calendar | fleet_optimization
+  kwargs: operation (required), equipment_id
+"""
+
+import sys
+import os
+import json
+import urllib.request
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "templates"))
+from basic_agent import BasicAgent
+
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@aibast-agents-library/maintenance_scheduling",
+    "version": "1.2.0",
+    "display_name": "Maintenance Scheduling Agent",
+    "description": "Builds predictive maintenance schedules and work orders from a live simulated Dynamics 365 tenant, with an offline demo telemetry fallback.",
+    "author": "AIBAST",
+    "tags": ["maintenance", "predictive", "scheduling", "manufacturing", "IoT"],
+    "category": "manufacturing",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+
+# ═══════════════════════════════════════════════════════════════
+# LIVE DATA SEAM — swap this for your real system
+#
+# Default: the globally hosted Static Dynamics 365 tenant (synthetic
+# Aster Lane Office Systems data served as OData-shaped JSON from
+# GitHub Pages). To hook your own world, either:
+#   export MAINTENANCE_SCHEDULING_DATA_URL=https://your-org/api/data/v9.2
+# or replace _fetch_collection() with your CMMS client. Downstream
+# code only needs the fields from _normalize_live_work_order().
+# ═══════════════════════════════════════════════════════════════
+
+DATA_SOURCE_URL = os.environ.get(
+    "MAINTENANCE_SCHEDULING_DATA_URL",
+    "https://kody-w.github.io/static-dynamics-365/api/data/v9.2",
+)
+_LIVE_CACHE = {}
+
+
+def _fetch_collection(collection, timeout=6):
+    """One bounded GET per collection per process. Returns [] on ANY
+    failure — offline, DNS, bad JSON — so the demo layer takes over."""
+    if collection in _LIVE_CACHE:
+        return _LIVE_CACHE[collection]
+    try:
+        req = urllib.request.Request(
+            f"{DATA_SOURCE_URL}/{collection}.json",
+            headers={"User-Agent": "rapp-agent-template/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8")).get("value", [])
+    except Exception:
+        rows = []
+    _LIVE_CACHE[collection] = rows
+    return rows
+
+
+_FMT = "@OData.Community.Display.V1.FormattedValue"
+
+
+def _normalize_live_work_order(row):
+    """Project a Dynamics Field Service work order onto the schedule row
+    this agent renders. THIS is the contract your replacement data source
+    must meet — a dict with these keys. None means 'not knowable from the
+    work-order record alone' and the renderer labels it as an enrichment
+    seam (wire IoT telemetry / failure models there)."""
+    return {
+        "id": row.get("msdyn_name", "?"),
+        "asset": row.get("msdyn_customerassetname") or "n/a",
+        "account": row.get("msdyn_serviceaccountname", "Unknown"),
+        "issue": row.get("msdyn_primaryincidenttypename") or "n/a",
+        "type": row.get("msdyn_workordertypename") or "n/a",
+        "status": row.get("msdyn_systemstatus" + _FMT, "Unknown"),
+        "priority": row.get("msdyn_priorityname") or "n/a",
+        "runtime_hours": None,   # enrichment seam — wire IoT telemetry
+        "failure_prob": None,    # enrichment seam — wire your failure model
+        "_live": True,
+    }
+
+
+def _live_work_orders():
+    """Open work orders from the live tenant; [] when offline."""
+    rows = _fetch_collection("msdyn_workorders")
+    return [
+        _normalize_live_work_order(r) for r in rows
+        if "Open" in str(r.get("msdyn_systemstatus" + _FMT, ""))
+    ]
+
+
+# ---------------------------------------------------------------------------
+# EMBEDDED DEMO LAYER (offline fallback)
+# ---------------------------------------------------------------------------
+
+EQUIPMENT = {
+    "EQ-CNC-01": {
+        "name": "CNC Milling Center #1",
+        "type": "CNC Mill",
+        "install_date": "2019-03-14",
+        "last_service": "2025-11-02",
+        "runtime_hours": 18420,
+        "mtbf_hours": 4200,
+        "status": "running",
+    },
+    "EQ-CNC-02": {
+        "name": "CNC Milling Center #2",
+        "type": "CNC Mill",
+        "install_date": "2021-07-22",
+        "last_service": "2026-01-18",
+        "runtime_hours": 9840,
+        "mtbf_hours": 4200,
+        "status": "running",
+    },
+    "EQ-PRS-01": {
+        "name": "Hydraulic Press 400T",
+        "type": "Press",
+        "install_date": "2017-11-05",
+        "last_service": "2025-09-30",
+        "runtime_hours": 26100,
+        "mtbf_hours": 5500,
+        "status": "warning",
+    },
+    "EQ-WLD-01": {
+        "name": "Robotic Welder Cell A",
+        "type": "Welder",
+        "install_date": "2022-01-10",
+        "last_service": "2026-02-05",
+        "runtime_hours": 7200,
+        "mtbf_hours": 3800,
+        "status": "running",
+    },
+    "EQ-INJ-01": {
+        "name": "Injection Molder 220T",
+        "type": "Injection Molder",
+        "install_date": "2018-06-18",
+        "last_service": "2025-08-12",
+        "runtime_hours": 22800,
+        "mtbf_hours": 4800,
+        "status": "critical",
+    },
+    "EQ-ASM-01": {
+        "name": "Assembly Line Conveyor",
+        "type": "Conveyor",
+        "install_date": "2020-04-01",
+        "last_service": "2026-01-05",
+        "runtime_hours": 14600,
+        "mtbf_hours": 7000,
+        "status": "running",
+    },
+}
+
+SENSOR_READINGS = {
+    "EQ-CNC-01": {"vibration_mm_s": 4.2, "temp_c": 62, "oil_pressure_bar": 48, "spindle_load_pct": 78},
+    "EQ-CNC-02": {"vibration_mm_s": 2.1, "temp_c": 55, "oil_pressure_bar": 51, "spindle_load_pct": 64},
+    "EQ-PRS-01": {"vibration_mm_s": 7.8, "temp_c": 74, "oil_pressure_bar": 38, "hydraulic_level_pct": 62},
+    "EQ-WLD-01": {"vibration_mm_s": 1.9, "temp_c": 48, "arc_stability_pct": 96, "wire_feed_mpm": 8.4},
+    "EQ-INJ-01": {"vibration_mm_s": 9.3, "temp_c": 88, "barrel_pressure_bar": 1420, "cycle_time_s": 34.7},
+    "EQ-ASM-01": {"vibration_mm_s": 1.4, "temp_c": 38, "belt_tension_n": 620, "motor_current_a": 12.3},
+}
+
+FAILURE_PROBABILITIES = {
+    "EQ-CNC-01": {"30_day": 0.12, "60_day": 0.28, "90_day": 0.41, "failure_mode": "Spindle bearing wear"},
+    "EQ-CNC-02": {"30_day": 0.03, "60_day": 0.08, "90_day": 0.14, "failure_mode": "Normal wear"},
+    "EQ-PRS-01": {"30_day": 0.35, "60_day": 0.58, "90_day": 0.74, "failure_mode": "Hydraulic seal degradation"},
+    "EQ-WLD-01": {"30_day": 0.05, "60_day": 0.11, "90_day": 0.19, "failure_mode": "Wire feed mechanism"},
+    "EQ-INJ-01": {"30_day": 0.62, "60_day": 0.84, "90_day": 0.93, "failure_mode": "Barrel heater band failure"},
+    "EQ-ASM-01": {"30_day": 0.02, "60_day": 0.06, "90_day": 0.10, "failure_mode": "Belt splice fatigue"},
+}
+
+TECHNICIANS = {
+    "TECH-201": {"name": "Marcus Rivera", "certifications": ["CNC Mill", "Press", "General"],
+                  "shift": "Day", "available_hours_week": 40, "committed_hours": 24},
+    "TECH-202": {"name": "Karen Oduya", "certifications": ["Welder", "Conveyor", "General"],
+                  "shift": "Day", "available_hours_week": 40, "committed_hours": 16},
+    "TECH-203": {"name": "James Whitfield", "certifications": ["Injection Molder", "Press", "CNC Mill"],
+                  "shift": "Night", "available_hours_week": 40, "committed_hours": 30},
+    "TECH-204": {"name": "Lin Zhao", "certifications": ["CNC Mill", "Welder", "Injection Molder", "General"],
+                  "shift": "Day", "available_hours_week": 40, "committed_hours": 20},
+}
+
+MAINTENANCE_HISTORY = [
+    {"eq_id": "EQ-INJ-01", "date": "2025-08-12", "type": "Preventive", "hours": 6, "cost": 2400.00,
+     "notes": "Replaced heater bands 3 and 4, calibrated barrel sensors"},
+    {"eq_id": "EQ-PRS-01", "date": "2025-09-30", "type": "Corrective", "hours": 12, "cost": 8750.00,
+     "notes": "Emergency hydraulic seal replacement, fluid flush"},
+    {"eq_id": "EQ-CNC-01", "date": "2025-11-02", "type": "Preventive", "hours": 4, "cost": 1200.00,
+     "notes": "Spindle bearing inspection, oil change, alignment check"},
+    {"eq_id": "EQ-ASM-01", "date": "2026-01-05", "type": "Preventive", "hours": 3, "cost": 650.00,
+     "notes": "Belt tension adjustment, roller lubrication"},
+    {"eq_id": "EQ-CNC-02", "date": "2026-01-18", "type": "Preventive", "hours": 4, "cost": 1100.00,
+     "notes": "Tool holder inspection, coolant system flush"},
+    {"eq_id": "EQ-WLD-01", "date": "2026-02-05", "type": "Preventive", "hours": 5, "cost": 1800.00,
+     "notes": "Wire feed calibration, torch tip replacement, gas flow test"},
+]
+
+DOWNTIME_COST_PER_HOUR = {
+    "CNC Mill": 850, "Press": 1200, "Welder": 600,
+    "Injection Molder": 1400, "Conveyor": 2200,
+}
+
+MAINTENANCE_PLAN_RECORDS = {
+    "EQ-INJ-01": {
+        "production_order": "ORD-7813", "delivery_priority": "critical",
+        "window": "2026-03-21 22:00-2026-03-22 06:00", "capacity_impact_pct": 4.0,
+        "parts": ["Heater band HB-220 x2", "Thermocouple TC-K x1"],
+        "crew": ["James Whitfield", "Lin Zhao"], "backup_equipment": "EQ-INJ-02",
+        "backup_status": "available", "estimated_hours": 8,
+    },
+    "EQ-PRS-01": {
+        "production_order": "ORD-7810", "delivery_priority": "high",
+        "window": "2026-03-28 06:00-11:00", "capacity_impact_pct": 6.5,
+        "parts": ["Hydraulic seal kit HS-400 x1", "ISO 46 fluid x40L"],
+        "crew": ["Marcus Rivera"], "backup_equipment": "EQ-PRS-02",
+        "backup_status": "available at 80% capacity", "estimated_hours": 5,
+    },
+    "EQ-CNC-01": {
+        "production_order": "ORD-7811", "delivery_priority": "standard",
+        "window": "2026-04-04 14:00-17:00", "capacity_impact_pct": 2.0,
+        "parts": ["Spindle bearing kit SB-42 x1"],
+        "crew": ["Marcus Rivera"], "backup_equipment": "EQ-CNC-02",
+        "backup_status": "available", "estimated_hours": 3,
+    },
+}
+
+EVIDENCE_MARKER = (
+    "[Evidence: maintenance-scheduling one-pager and demo transcript; "
+    "production-aware windows, parts/crew staging, work-order execution, and calendar]"
+)
+
+
+# ---------------------------------------------------------------------------
+# Helper functions
+# ---------------------------------------------------------------------------
+
+def _risk_priority(eq_id):
+    """Return a 0-100 risk score combining failure probability and sensor anomalies."""
+    fp = FAILURE_PROBABILITIES[eq_id]["30_day"]
+    sensor = SENSOR_READINGS[eq_id]
+    vib_score = min(sensor.get("vibration_mm_s", 0) / 10.0, 1.0)
+    temp_score = min(sensor.get("temp_c", 20) / 100.0, 1.0)
+    return round((fp * 60 + vib_score * 25 + temp_score * 15) * 100 / 100, 1)
+
+
+def _best_technician(eq_type):
+    """Find the best-fit available technician for an equipment type."""
+    candidates = []
+    for tid, tech in TECHNICIANS.items():
+        if eq_type in tech["certifications"] or "General" in tech["certifications"]:
+            free = tech["available_hours_week"] - tech["committed_hours"]
+            if free > 0:
+                candidates.append((tid, tech, free))
+    candidates.sort(key=lambda x: x[2], reverse=True)
+    return candidates[0] if candidates else None
+
+
+def _estimated_downtime_cost(eq_id, hours):
+    """Calculate cost of downtime for given equipment and hours."""
+    eq_type = EQUIPMENT[eq_id]["type"]
+    return hours * DOWNTIME_COST_PER_HOUR.get(eq_type, 500)
+
+
+def _work_order_hours(failure_prob_30):
+    """Estimate work-order hours from 30-day failure probability."""
+    if failure_prob_30 >= 0.50:
+        return 8
+    elif failure_prob_30 >= 0.25:
+        return 5
+    elif failure_prob_30 >= 0.10:
+        return 3
+    return 2
+
+
+# ---------------------------------------------------------------------------
+# Agent class
+# ---------------------------------------------------------------------------
+
+class MaintenanceSchedulingAgent(BasicAgent):
+    """Predictive maintenance scheduling for manufacturing equipment."""
+
+    def __init__(self):
+        self.name = "MaintenanceSchedulingAgent"
+        self.metadata = {
+            "name": self.name,
+            "description": __manifest__["description"],
+            "operations": [
+                "schedule_overview",
+                "predictive_alerts",
+                "work_order_plan",
+                "downtime_analysis",
+                "maintenance_plan",
+                "create_work_order",
+                "maintenance_calendar",
+                "fleet_optimization",
+            ],
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "operation": {
+                        "type": "string",
+                        "description": "Operation to perform. Defaults to schedule_overview when omitted.",
+                        "enum": [
+                            "schedule_overview",
+                            "predictive_alerts",
+                            "work_order_plan",
+                            "downtime_analysis",
+                            "maintenance_plan",
+                            "create_work_order",
+                            "maintenance_calendar",
+                            "fleet_optimization",
+                        ],
+                    },
+                    "equipment_id": {
+                        "type": "string",
+                        "description": "Equipment identifier used to select maintenance planning and work-order records.",
+                    },
+                },
+            },
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        operation = kwargs.get("operation", "schedule_overview")
+        dispatch = {
+            "schedule_overview": self._schedule_overview,
+            "predictive_alerts": self._predictive_alerts,
+            "work_order_plan": self._work_order_plan,
+            "downtime_analysis": self._downtime_analysis,
+            "maintenance_plan": self._maintenance_plan,
+            "create_work_order": self._create_work_order,
+            "maintenance_calendar": self._maintenance_calendar,
+            "fleet_optimization": self._fleet_optimization,
+        }
+        handler = dispatch.get(operation)
+        if handler is None:
+            return f"**Error:** Unknown operation `{operation}`. Valid: {', '.join(dispatch.keys())}"
+        return handler(**kwargs)
+
+    # ------------------------------------------------------------------
+    def _schedule_overview(self, **kwargs) -> str:
+        lines = ["## Maintenance Schedule Overview\n"]
+        lines.append("### Equipment Status\n")
+        lines.append("| ID | Equipment | Type | Status | Runtime (hrs) | Last Service | Risk Score |")
+        lines.append("|----|-----------|------|--------|---------------|--------------|------------|")
+        for eq_id, eq in EQUIPMENT.items():
+            risk = _risk_priority(eq_id)
+            status_label = {"running": "OK", "warning": "WARN", "critical": "CRIT"}.get(eq["status"], eq["status"])
+            lines.append(
+                f"| {eq_id} | {eq['name']} | {eq['type']} | **{status_label}** | "
+                f"{eq['runtime_hours']:,} | {eq['last_service']} | {risk} |"
+            )
+
+        lines.append("\n### Technician Availability\n")
+        lines.append("| Technician | Shift | Certifications | Avail Hrs/Wk | Committed | Free |")
+        lines.append("|------------|-------|----------------|-------------|-----------|------|")
+        for tid, tech in TECHNICIANS.items():
+            free = tech["available_hours_week"] - tech["committed_hours"]
+            certs = ", ".join(tech["certifications"])
+            lines.append(
+                f"| {tech['name']} | {tech['shift']} | {certs} | "
+                f"{tech['available_hours_week']} | {tech['committed_hours']} | {free} |"
+            )
+
+        lines.append("\n### Recent Maintenance History\n")
+        lines.append("| Date | Equipment | Type | Hours | Cost |")
+        lines.append("|------|-----------|------|-------|------|")
+        for rec in MAINTENANCE_HISTORY[-5:]:
+            eq_name = EQUIPMENT.get(rec["eq_id"], {}).get("name", rec["eq_id"])
+            lines.append(
+                f"| {rec['date']} | {eq_name} | {rec['type']} | {rec['hours']} | ${rec['cost']:,.2f} |"
+            )
+        live = _live_work_orders()
+        if live:
+            seam = "n/a — enrichment seam"
+            lines.append("\n### Live Tenant Open Work Orders (Dynamics Field Service)\n")
+            lines.append("| WO | Asset | Account | Issue | Type | Status | Priority | Runtime (hrs) |")
+            lines.append("|----|-------|---------|-------|------|--------|----------|---------------|")
+            for w in live:
+                runtime = seam if w["runtime_hours"] is None else f"{w['runtime_hours']:,}"
+                lines.append(
+                    f"| {w['id']} | {w['asset']} | {w['account']} | {w['issue']} | "
+                    f"{w['type']} | {w['status']} | {w['priority']} | {runtime} |"
+                )
+        else:
+            lines.append("\n_Live tenant unreachable — showing embedded demo equipment only._")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _predictive_alerts(self, **kwargs) -> str:
+        lines = ["## Predictive Maintenance Alerts\n"]
+        alerts = []
+        for eq_id in EQUIPMENT:
+            fp = FAILURE_PROBABILITIES[eq_id]
+            risk = _risk_priority(eq_id)
+            if fp["30_day"] >= 0.10:
+                severity = "CRITICAL" if fp["30_day"] >= 0.50 else "WARNING" if fp["30_day"] >= 0.25 else "WATCH"
+                alerts.append((severity, eq_id, fp, risk))
+        alerts.sort(key=lambda x: x[3], reverse=True)
+
+        if not alerts:
+            lines.append("No predictive alerts at this time. All equipment within normal parameters.")
+            return "\n".join(lines)
+
+        for severity, eq_id, fp, risk in alerts:
+            eq = EQUIPMENT[eq_id]
+            sensor = SENSOR_READINGS[eq_id]
+            lines.append(f"### [{severity}] {eq['name']} ({eq_id})")
+            lines.append(f"- **Failure mode:** {fp['failure_mode']}")
+            lines.append(f"- **30-day failure probability:** {fp['30_day']*100:.0f}%")
+            lines.append(f"- **60-day failure probability:** {fp['60_day']*100:.0f}%")
+            lines.append(f"- **90-day failure probability:** {fp['90_day']*100:.0f}%")
+            lines.append(f"- **Risk score:** {risk}/100")
+            lines.append("- **Current sensor readings:**")
+            for k, v in sensor.items():
+                lines.append(f"  - {k}: {v}")
+            lines.append("")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _work_order_plan(self, **kwargs) -> str:
+        lines = ["## Work Order Plan\n"]
+        lines.append("Priority-ranked work orders for the next 30 days:\n")
+        lines.append("| Priority | Equipment | Work Description | Est Hours | Assigned Tech | Shift |")
+        lines.append("|----------|-----------|------------------|-----------|---------------|-------|")
+
+        ranked = sorted(EQUIPMENT.keys(), key=lambda e: _risk_priority(e), reverse=True)
+        priority = 0
+        total_hours = 0
+        for eq_id in ranked:
+            fp = FAILURE_PROBABILITIES[eq_id]
+            if fp["30_day"] < 0.10:
+                continue
+            priority += 1
+            eq = EQUIPMENT[eq_id]
+            tech_match = _best_technician(eq["type"])
+            tech_name = tech_match[1]["name"] if tech_match else "UNASSIGNED"
+            shift = tech_match[1]["shift"] if tech_match else "-"
+            est_hours = _work_order_hours(fp["30_day"])
+            total_hours += est_hours
+            lines.append(
+                f"| P{priority} | {eq['name']} | {fp['failure_mode']} -- preventive service | "
+                f"{est_hours} | {tech_name} | {shift} |"
+            )
+
+        lines.append(f"\n**Total work orders:** {priority}")
+        lines.append(f"**Total estimated labor hours:** {total_hours}")
+        lines.append("\n**Scheduling notes:**")
+        lines.append("- P1 work orders should be completed within 7 days")
+        lines.append("- P2 work orders within 14 days")
+        lines.append("- P3+ within 30 days")
+        return "\n".join(lines)
+
+    # ------------------------------------------------------------------
+    def _downtime_analysis(self, **kwargs) -> str:
+        lines = ["## Downtime & Cost Analysis\n"]
+        lines.append("### Unplanned Downtime Risk (Next 90 Days)\n")
+        lines.append("| Equipment | 30-Day P(Fail) | Est Downtime (hrs) | Downtime Cost | Prevention Cost | Net Savings |")
+        lines.append("|-----------|----------------|--------------------|--------------:|----------------:|------------:|")
+        total_dt_cost = 0.0
+        total_prev_cost = 0.0
+        for eq_id, eq in EQUIPMENT.items():
+            fp = FAILURE_PROBABILITIES[eq_id]
+            p = fp["30_day"]
+            if p < 0.10:
+                continue
+            dt_hrs = round(p * 24, 1)
+            dt_cost = _estimated_downtime_cost(eq_id, dt_hrs)
+            prev_cost = round(dt_cost * 0.25, 2)
+            savings = round(dt_cost - prev_cost, 2)
+            total_dt_cost += dt_cost
+            total_prev_cost += prev_cost
+            lines.append(
+                f"| {eq['name']} | {p*100:.0f}% | {dt_hrs} | "
+                f"${dt_cost:,.2f} | ${prev_cost:,.2f} | ${savings:,.2f} |"
+            )
+
+        lines.append(f"\n**Total downtime cost exposure:** ${total_dt_cost:,.2f}")
+        lines.append(f"**Total preventive maintenance cost:** ${total_prev_cost:,.2f}")
+        lines.append(f"**Net savings from preventive action:** ${total_dt_cost - total_prev_cost:,.2f}")
+
+        lines.append("\n### Historical Maintenance Spend\n")
+        total_hist = sum(r["cost"] for r in MAINTENANCE_HISTORY)
+        prev_count = sum(1 for r in MAINTENANCE_HISTORY if r["type"] == "Preventive")
+        corr_count = sum(1 for r in MAINTENANCE_HISTORY if r["type"] == "Corrective")
+        lines.append(f"- Total spend (last 12 months): **${total_hist:,.2f}**")
+        lines.append(f"- Preventive work orders: **{prev_count}**")
+        lines.append(f"- Corrective (unplanned) work orders: **{corr_count}**")
+        lines.append(f"- Preventive-to-corrective ratio: **{prev_count}:{corr_count}** (target 5:1)")
+        return "\n".join(lines)
+
+    def _maintenance_record(self, **kwargs):
+        equipment_id = str(kwargs.get("equipment_id", "EQ-INJ-01")).strip().upper()
+        record = MAINTENANCE_PLAN_RECORDS.get(equipment_id)
+        if record is None:
+            valid = ", ".join(MAINTENANCE_PLAN_RECORDS)
+            return equipment_id, None, f"**Error:** Unknown equipment `{equipment_id}`. Valid: {valid}"
+        return equipment_id, record, ""
+
+    def _maintenance_plan(self, **kwargs) -> str:
+        equipment_id, plan, error = self._maintenance_record(**kwargs)
+        if error:
+            return error
+        eq = EQUIPMENT[equipment_id]
+        fp = FAILURE_PROBABILITIES[equipment_id]
+        return "\n".join([
+            "## Production-Aware Maintenance Plan",
+            EVIDENCE_MARKER,
+            f"**Equipment lookup:** {equipment_id} — {eq['name']}",
+            f"- Related production order: {plan['production_order']} ({plan['delivery_priority']} priority)",
+            f"- 30-day failure probability: {fp['30_day'] * 100:.0f}% ({fp['failure_mode']})",
+            f"- Lowest-impact window: {plan['window']}",
+            f"- Modeled capacity impact: {plan['capacity_impact_pct']}%",
+            f"- Parts confirmed: {', '.join(plan['parts'])}",
+            f"- Crew confirmed: {', '.join(plan['crew'])}",
+            f"- Backup: {plan['backup_equipment']} — {plan['backup_status']}",
+            f"- Estimated duration: {plan['estimated_hours']} hours",
+        ])
+
+    def _create_work_order(self, **kwargs) -> str:
+        equipment_id, plan, error = self._maintenance_record(**kwargs)
+        if error:
+            return error
+        receipt = f"WO-SIM-{equipment_id.replace('EQ-', '')}-202603"
+        return "\n".join([
+            "## Simulated Work-Order Execution",
+            EVIDENCE_MARKER,
+            f"**Equipment lookup:** {equipment_id} — {EQUIPMENT[equipment_id]['name']}",
+            f"- **SIMULATED WRITE RECEIPT:** `{receipt}`",
+            f"- Dynamics 365 work order window: {plan['window']}",
+            f"- Teams crew assignment: {', '.join(plan['crew'])}",
+            f"- Reserved parts: {', '.join(plan['parts'])}",
+            f"- Backup equipment validated: {plan['backup_equipment']} ({plan['backup_status']})",
+            "- Simulation only; no work order, inventory, calendar, or Teams message was created.",
+        ])
+
+    def _maintenance_calendar(self, **kwargs) -> str:
+        lines = ["## 30-Day Maintenance Calendar", EVIDENCE_MARKER, "",
+                 "| Equipment | Window | Production Order | Capacity Impact | Crew |",
+                 "|-----------|--------|------------------|-----------------|------|"]
+        for equipment_id, plan in MAINTENANCE_PLAN_RECORDS.items():
+            lines.append(
+                f"| {equipment_id} | {plan['window']} | {plan['production_order']} | "
+                f"{plan['capacity_impact_pct']}% | {', '.join(plan['crew'])} |"
+            )
+        lines.append("\nAll windows are deterministic planning records; no external calendars were changed.")
+        return "\n".join(lines)
+
+    def _fleet_optimization(self, **kwargs) -> str:
+        ranked = sorted(
+            EQUIPMENT, key=lambda equipment_id: _risk_priority(equipment_id), reverse=True
+        )
+        lines = ["## Long-Term Fleet Maintenance Optimization", EVIDENCE_MARKER, "",
+                 "| Rank | Equipment | Risk | 90-Day Failure Probability | Action |",
+                 "|------|-----------|------|----------------------------|--------|"]
+        for rank, equipment_id in enumerate(ranked, 1):
+            risk = _risk_priority(equipment_id)
+            probability = FAILURE_PROBABILITIES[equipment_id]["90_day"] * 100
+            action = "planned overhaul" if probability >= 70 else "condition monitor" if probability >= 30 else "routine PM"
+            lines.append(
+                f"| {rank} | {equipment_id} | {risk} | {probability:.0f}% | {action} |"
+            )
+        lines.append("\n**Optimization KPIs:** unplanned downtime, schedule adherence, "
+                     "emergency repair spend, and preventive-to-corrective ratio.")
+        return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    agent = MaintenanceSchedulingAgent()
+    print("=" * 72)
+    print("EMBEDDED DEMO FLEET + LIVE TENANT WORK ORDERS")
+    print("(live section fetched over HTTP; falls back offline)")
+    print("=" * 72)
+    print(agent.perform(operation="schedule_overview"))
+    print()
+    for op in agent.metadata["operations"][1:]:
+        print("=" * 72)
+        print(agent.perform(operation=op))
+        print()

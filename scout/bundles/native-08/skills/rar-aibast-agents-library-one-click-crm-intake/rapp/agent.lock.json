@@ -1,0 +1,54 @@
+{
+  "agent": "@aibast-agents-library/one_click_crm_intake",
+  "agent_file": "one_click_crm_intake_agent.py",
+  "agent_sha256": "d025351a091cb6883853cdae93a6f645317936844f5a781e11352d0fd9527bb5",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "OneClickCRMIntakeAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Runs CRM intake with duplicate checks against a live simulated Dynamics 365 tenant's leads, with an offline demo fallback.",
+    "display_name": "One-Click CRM Intake",
+    "name": "@aibast-agents-library/one_click_crm_intake",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "crm",
+      "intake",
+      "data-validation",
+      "duplicate-detection",
+      "import"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "OneClickCRMIntakeAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The intake operation to perform",
+        "enum": [
+          "intake_form",
+          "data_validation",
+          "duplicate_check",
+          "import_preview"
+        ],
+        "type": "string"
+      },
+      "template_name": {
+        "description": "Template name (e.g. 'new_lead', 'new_account', 'support_case')",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

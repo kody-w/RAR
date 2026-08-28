@@ -1,0 +1,73 @@
+{
+  "agent": "@cat-agent-skills/campaign_deck_builder",
+  "agent_file": "campaign_deck_builder_agent.py",
+  "agent_sha256": "9eaee36124c834b7c71a49853abb992be0a0ca4f7db6ab125621475019ee15de",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CampaignDeckBuilder",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Adi Leibowitz",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Turn a short interview into a charming, vibrant 3-slide marketing-campaign deck by filling a bundled PowerPoint template.",
+    "display_name": "Campaign Deck Builder",
+    "name": "@cat-agent-skills/campaign_deck_builder",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "23b22be138aae9b6",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "campaign-deck-builder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#campaign-deck-builder",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "marketing",
+      "presentations",
+      "powerpoint",
+      "automation",
+      "scripts"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CampaignDeckBuilder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

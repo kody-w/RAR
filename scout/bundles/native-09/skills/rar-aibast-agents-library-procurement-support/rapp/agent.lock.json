@@ -1,0 +1,54 @@
+{
+  "agent": "@aibast-agents-library/procurement_support",
+  "agent_file": "procurement_support_agent.py",
+  "agent_sha256": "08de4f1c0f746fef3915574fb31e4a3c55a817402532f4cd58b5756dd3faebf8",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ProcurementSupportAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks requisitions and supplier signals over a simulated Dynamics 365 tenant and ERP (POs, receipts, blocked invoices), with offline fallback.",
+    "display_name": "Procurement Support",
+    "name": "@aibast-agents-library/procurement_support",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "procurement",
+      "requisition",
+      "contracts",
+      "supplier",
+      "budget"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "ProcurementSupportAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "The procurement support operation to perform",
+        "enum": [
+          "requisition_status",
+          "contract_lookup",
+          "supplier_performance",
+          "budget_check"
+        ],
+        "type": "string"
+      },
+      "requisition_id": {
+        "description": "Requisition ID (e.g. 'REQ-7001')",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

@@ -1,0 +1,67 @@
+{
+  "agent": "@rapp/moment_factory_agent",
+  "agent_file": "moment_factory_agent.py",
+  "agent_sha256": "02a5b7154b7bd205223d58d3d61489bfa725ad7218915a0012709fe0d5f1ccf8",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MomentFactory",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "creative",
+    "delegates_to_inlined": [
+      "@rapp/sensorium",
+      "@rapp/significance_filter",
+      "@rapp/hook_writer",
+      "@rapp/body_writer",
+      "@rapp/channel_router",
+      "@rapp/card_forger",
+      "@rapp/seed_stamper"
+    ],
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Converts a moment (commit, message, idea) into a publishable Drop — hook, body, channel, card, and seed — through seven inlined LLM personas.",
+    "display_name": "MomentFactory",
+    "example_call": {
+      "args": {
+        "source": "git commit hash + diff + msg",
+        "source_type": "code-commit"
+      }
+    },
+    "name": "@rapp/moment_factory_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "composite",
+      "moment-pipeline",
+      "rapplication",
+      "rappterbook-engine",
+      "singleton"
+    ],
+    "version": "0.1.4"
+  },
+  "runtime_name": "MomentFactory",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "significance_threshold": {
+        "description": "0..1 cutoff. Default 0.5.",
+        "type": "number"
+      },
+      "source": {
+        "description": "Raw moment text",
+        "type": "string"
+      },
+      "source_type": {
+        "description": "code-commit | voice-memo | web-bookmark | agent-run | location | conversation | decision | reading-note",
+        "type": "string"
+      }
+    },
+    "required": [
+      "source"
+    ],
+    "type": "object"
+  },
+  "version": "0.1.4"
+}

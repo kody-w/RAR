@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/eu_greenwashing_analysis",
+  "agent_file": "eu_greenwashing_analysis_agent.py",
+  "agent_sha256": "60f5b0746b2395fef7e8225ba803aeb9de1264b58c9797df97fb0a80123d7a5e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "EuGreenwashingAnalysis",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Remi Dyon",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Detect greenwashing in product descriptions, marketing copy, and catalog entries against EU Directive 2024/825 and the Green Claims Directive. Returns a structured per-claim findings report with risk levels, regulation references, and recommended corrections.",
+    "display_name": "EU Greenwashing Analysis",
+    "name": "@cat-agent-skills/eu_greenwashing_analysis",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d9597c05205098f3",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "eu-greenwashing-analysis",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#eu-greenwashing-analysis",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "compliance",
+      "sustainability",
+      "greenwashing",
+      "eu_regulation",
+      "marketing_review",
+      "esg"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "EuGreenwashingAnalysis",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

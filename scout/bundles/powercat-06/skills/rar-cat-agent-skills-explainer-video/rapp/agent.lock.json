@@ -1,0 +1,72 @@
+{
+  "agent": "@cat-agent-skills/explainer_video",
+  "agent_file": "explainer_video_agent.py",
+  "agent_sha256": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ExplainerVideo",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Damien Bird",
+    "category": "creative",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Create narrated, captioned 1080p explainer videos with researched scripts, generated b-roll, and supplied screenshots.",
+    "display_name": "Explainer Video",
+    "name": "@cat-agent-skills/explainer_video",
+    "platforms": [
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "3922dbf6d24c64ac",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "explainer-video",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#explainer-video",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "video",
+      "education",
+      "training",
+      "communication"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "ExplainerVideo",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,53 @@
+{
+  "agent": "@aibast-agents-library/federal_grants_oversight",
+  "agent_file": "federal_grants_oversight_agent.py",
+  "agent_sha256": "3e7d38620ad3562d8228c9c5e6b12fe343466117a3984cfb18d991f90dbfa347",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FederalGrantsOversightAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "federal_government",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Monitors grant compliance events from a live simulated Dynamics 365 tenant, with dashboards and audit prep that work offline.",
+    "display_name": "Federal Grants Oversight Agent",
+    "name": "@aibast-agents-library/federal_grants_oversight",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "grants",
+      "oversight",
+      "compliance",
+      "audit",
+      "federal",
+      "reporting"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "FederalGrantsOversightAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "grant_id": {
+        "type": "string"
+      },
+      "operation": {
+        "enum": [
+          "grants_dashboard",
+          "compliance_monitoring",
+          "reporting_status",
+          "audit_preparation"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

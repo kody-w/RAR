@@ -1,0 +1,51 @@
+{
+  "agent": "@borg/borg_agent",
+  "agent_file": "borg_agent.py",
+  "agent_sha256": "7710557fc30ce2098c1b4d136004bc7e979ed8441b91dba95c38de830905166f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BorgAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Howard",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Assimilates knowledge from GitHub repos and web URLs into structured reports.",
+    "display_name": "Borg",
+    "name": "@borg/borg_agent",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "core",
+      "analysis",
+      "github",
+      "web",
+      "assimilation"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "Borg",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "assimilate: inspect a URL (default). history: show past assimilations. dashboard: open the Borg assimilation log web page.",
+        "enum": [
+          "assimilate",
+          "history",
+          "dashboard"
+        ],
+        "type": "string"
+      },
+      "url": {
+        "description": "GitHub repository URL or web URL to assimilate.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

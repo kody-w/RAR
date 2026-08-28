@@ -1,0 +1,122 @@
+{
+  "agent": "@howardh/prompt_to_video_agent",
+  "agent_file": "prompt_to_video_agent.py",
+  "agent_sha256": "3bcdd845998ff84158cc2c2ab54fefcb54b0e3a6106fd4bfb8e59252b58694c6",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PromptToVideoAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP Contributor",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent",
+      "@howardh/markdown_to_slides_agent"
+    ],
+    "description": "Renders videos from structured scene descriptions using Remotion — title, content, quote, and list scenes with style presets.",
+    "display_name": "PromptToVideo",
+    "name": "@howardh/prompt_to_video_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "video",
+      "remotion",
+      "render",
+      "mp4",
+      "scenes",
+      "presentation",
+      "prompt_to_video"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "PromptToVideo",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "resolution": {
+        "description": "Video resolution (default: 1080p)",
+        "enum": [
+          "1080p",
+          "720p",
+          "vertical",
+          "square"
+        ],
+        "type": "string"
+      },
+      "scenes": {
+        "description": "Ordered array of scene objects forming the video",
+        "items": {
+          "properties": {
+            "accent_color": {
+              "description": "Hex accent color",
+              "type": "string"
+            },
+            "background_color": {
+              "description": "Hex background color",
+              "type": "string"
+            },
+            "duration_seconds": {
+              "description": "Duration in seconds (default: 4 for title, 6 for others)",
+              "type": "number"
+            },
+            "items": {
+              "description": "Bullet items (for list scenes)",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "subtitle": {
+              "description": "Secondary text (subtitle/body/attribution)",
+              "type": "string"
+            },
+            "text": {
+              "description": "Primary text (title/heading/quote)",
+              "type": "string"
+            },
+            "text_color": {
+              "description": "Hex text color",
+              "type": "string"
+            },
+            "type": {
+              "description": "Scene layout type",
+              "enum": [
+                "title",
+                "content",
+                "quote",
+                "list"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "text"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "style": {
+        "description": "Visual style preset (default: bold)",
+        "enum": [
+          "minimal",
+          "bold",
+          "neon",
+          "warm"
+        ],
+        "type": "string"
+      },
+      "title": {
+        "description": "Video title (used for filename and title scene)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "title",
+      "scenes"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

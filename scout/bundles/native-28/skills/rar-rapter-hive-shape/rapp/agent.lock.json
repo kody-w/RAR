@@ -1,0 +1,52 @@
+{
+  "agent": "@rapter/hive_shape_agent",
+  "agent_file": "hive_shape_agent.py",
+  "agent_sha256": "c4cdee134802fd1ced521940c6ef38d0a5dba2503acc4e8cd8da5e4367d075a3",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "HiveShapeAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RapterBox",
+    "category": "core",
+    "dependencies": [
+      "@rapter/basic_agent"
+    ],
+    "description": "Look at every cubby in a hive at once and report its SHAPE — divergence (who disagrees about what the world is), silence (who did not answer, always named), mass (where the population actually lives), and spread (how unlike each other the members are). Private by construction: publishes nothing, writes no frame, and leaves the picture on the operator's machine.",
+    "display_name": "Hive Shape",
+    "name": "@rapter/hive_shape_agent",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "hive",
+      "fleet",
+      "shape",
+      "divergence",
+      "drift",
+      "census",
+      "observability",
+      "private"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "hive_shape",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "cubbies": {
+        "description": "Hosts or IPs to look at. Omit to use the HIVE_PEERS setting, or this machine alone. This agent never scans a network it was not pointed at.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "raw": {
+        "description": "Return the composed shape as JSON instead of prose.",
+        "type": "boolean"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

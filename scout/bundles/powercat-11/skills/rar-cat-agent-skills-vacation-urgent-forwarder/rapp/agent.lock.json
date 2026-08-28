@@ -1,0 +1,72 @@
+{
+  "agent": "@cat-agent-skills/vacation_urgent_forwarder",
+  "agent_file": "vacation_urgent_forwarder_agent.py",
+  "agent_sha256": "a945ea6ac53c04d6b788b7a61d287b33fed92bc1d34272178e5a7c74c2c66e7e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "VacationUrgentForwarder",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Giorgio Ughini",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A Scout automation installer that, only during a configured vacation window, scans work email and Teams and forwards genuinely urgent items to your personal email.",
+    "display_name": "Vacation Urgent Forwarder",
+    "name": "@cat-agent-skills/vacation_urgent_forwarder",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "e2fd9f42fce2d9e9",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "vacation-urgent-forwarder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#vacation-urgent-forwarder",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "automation",
+      "email",
+      "teams",
+      "out_of_office"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "VacationUrgentForwarder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

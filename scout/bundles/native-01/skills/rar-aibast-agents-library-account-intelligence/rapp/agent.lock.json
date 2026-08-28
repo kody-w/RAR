@@ -1,0 +1,61 @@
+{
+  "agent": "@aibast-agents-library/account_intelligence",
+  "agent_file": "account_intelligence_agent.py",
+  "agent_sha256": "db3bf0e8b9dc53a4c16c879a11501783a03b923fa7142132f5d0ad0037d1f376",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "AccountIntelligenceAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "b2b_sales",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates account briefings, stakeholder maps, and deal risk reports from a live simulated Dynamics 365 tenant, with an offline demo fallback.",
+    "display_name": "Account Intelligence",
+    "name": "@aibast-agents-library/account_intelligence",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "b2b",
+      "sales",
+      "account-intelligence",
+      "stakeholder-mapping",
+      "competitive-intel"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "AccountIntelligenceAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "account_id": {
+        "description": "Exact CRM account ID for share_briefing (e.g. 'acc-001')",
+        "type": "string"
+      },
+      "account_name": {
+        "description": "Account name to analyze (e.g. 'Acme Corporation')",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The analysis to perform",
+        "enum": [
+          "account_overview",
+          "stakeholder_map",
+          "competitive_intel",
+          "value_messaging",
+          "risk_assessment",
+          "executive_briefing",
+          "share_briefing"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

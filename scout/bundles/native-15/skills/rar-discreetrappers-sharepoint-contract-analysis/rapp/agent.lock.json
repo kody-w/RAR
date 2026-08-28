@@ -1,0 +1,98 @@
+{
+  "agent": "@discreetRappers/sharepoint_contract_analysis_agent",
+  "agent_file": "sharepoint_contract_analysis_agent.py",
+  "agent_sha256": "befdce082ff846fa57e936fc130bd1e423451de8da911a50674b9a4c9c261d32",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ContractAnalysisAgent",
+  "host_dependencies": [
+    "env:AZURE_FILES_SHARE_NAME",
+    "env:AZURE_OPENAI_API_VERSION",
+    "env:AZURE_OPENAI_DEPLOYMENT_NAME",
+    "env:AZURE_OPENAI_ENDPOINT",
+    "env:AZURE_STORAGE_ACCOUNT_NAME"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI — clause extraction, risk flagging, and comparison.",
+    "display_name": "ContractAnalysis",
+    "name": "@discreetRappers/sharepoint_contract_analysis_agent",
+    "quality_tier": "community",
+    "requires_env": [
+      "AZURE_FILES_SHARE_NAME",
+      "AZURE_OPENAI_API_VERSION",
+      "AZURE_OPENAI_DEPLOYMENT_NAME",
+      "AZURE_OPENAI_ENDPOINT",
+      "AZURE_STORAGE_ACCOUNT_NAME"
+    ],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "integrations",
+      "sharepoint",
+      "contracts",
+      "analysis",
+      "legal"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "ContractAnalysis",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Action to perform. Use 'full_workup' when user says 'work on' a contract to run comprehensive analysis.",
+        "enum": [
+          "list_contracts",
+          "full_workup",
+          "analyze_contract",
+          "extract_clauses",
+          "summarize_contract",
+          "identify_risks",
+          "compare_contracts"
+        ],
+        "type": "string"
+      },
+      "audience": {
+        "description": "Target audience for summary: legal, business, executive",
+        "enum": [
+          "legal",
+          "business",
+          "executive"
+        ],
+        "type": "string"
+      },
+      "clause_types": {
+        "description": "Specific clause types to extract: financial, rights, obligations, termination, exclusivity, territory, duration",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "contract_name": {
+        "description": "Name of the contract file in Azure storage (e.g., 'artist_agreement_2026.pdf')",
+        "type": "string"
+      },
+      "contract_name_b": {
+        "description": "Second contract name for comparison (used with compare_contracts action)",
+        "type": "string"
+      },
+      "summary_type": {
+        "description": "Type of summary: executive (brief), detailed, or legal",
+        "enum": [
+          "executive",
+          "detailed",
+          "legal"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

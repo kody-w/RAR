@@ -1,0 +1,61 @@
+{
+  "agent": "@bill/neuron_agent",
+  "agent_file": "neuron_agent.py",
+  "agent_sha256": "093ac6ab4dcd123fdf55998ddc8f1dc904be9bb4b27d7eb82e118099e353fcc1",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "NeuronAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Injects a compact Knowledge Base block of hardcoded Copilot Studio and Dataverse lessons into the brainstem prompt at session start.",
+    "display_name": "Neuron",
+    "name": "@bill/neuron_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "memory",
+      "neuron",
+      "knowledge-base",
+      "bootstrap",
+      "platform",
+      "copilot-studio",
+      "dataverse",
+      "d365",
+      "power-platform"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "Neuron",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "category": {
+        "description": "Filter to one neuron category (e.g., 'copilot-studio', 'dataverse', 'd365', 'power-platform'). Omit for all.",
+        "type": "string"
+      },
+      "list": {
+        "description": "If true, just list the installed neurons (id, name, category, memory count) instead of the full Knowledge Base block.",
+        "type": "boolean"
+      },
+      "memory_type": {
+        "description": "Filter by memory_type ('fact', 'gotcha', 'pattern'). Omit for all.",
+        "type": "string"
+      },
+      "tags": {
+        "description": "Filter individual memories by tag. ANY-match: a memory is included if it has at least one of these tags.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

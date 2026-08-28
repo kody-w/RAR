@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/chart_builder",
+  "agent_file": "chart_builder_agent.py",
+  "agent_sha256": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ChartBuilder",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Adi Leibowitz",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generate clean, consistently-styled matplotlib charts (bar, line, scatter, histogram, pie) from a DataFrame or CSV with one call.",
+    "display_name": "Chart Builder",
+    "name": "@cat-agent-skills/chart_builder",
+    "platforms": [
+      "Cowork",
+      "Copilot Studio",
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "f32fa164a482da33",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "chart-builder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#chart-builder",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "data",
+      "charts",
+      "matplotlib",
+      "scripts"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "ChartBuilder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "data_source": {
+        "description": "Optional. Where the evidence comes from.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The question to answer, stated as a question.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

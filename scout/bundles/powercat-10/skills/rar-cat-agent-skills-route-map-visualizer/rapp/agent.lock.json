@@ -1,0 +1,72 @@
+{
+  "agent": "@cat-agent-skills/route_map_visualizer",
+  "agent_file": "route_map_visualizer_agent.py",
+  "agent_sha256": "5c0cb3810b9ec755c91cad5a437f1fc98cd9de481f8e25c90d58dc0574b032dd",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RouteMapVisualizer",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Nazish Qasim",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and durations. Produces PNG, interactive HTML (Leaflet/OSM), GeoJSON, KML, deep links, and QR codes. Fully offline Python engine — road geometry rendered directly when provided, or OSRM used browser-side as…",
+    "display_name": "Route Map Visualizer",
+    "name": "@cat-agent-skills/route_map_visualizer",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "f6e86f5cfd0f8994",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "route-map-visualizer",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#route-map-visualizer",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "maps",
+      "routing",
+      "visualization",
+      "openstreetmap",
+      "python",
+      "leaflet",
+      "geojson",
+      "kml"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "RouteMapVisualizer",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to apply this capability to.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,70 @@
+{
+  "agent": "@kody-w/git_warehouse_agent",
+  "agent_file": "git_warehouse_agent.py",
+  "agent_sha256": "2848608c2c13c7ff65f8d434845cb522b4940049c6207d80a604c2da54a57ad2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "GitWarehouseAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Builds a queryable git-tracked warehouse from any repo's data by running a shaper script, committing on change, and emitting the Datasette command.",
+    "display_name": "Git Warehouse",
+    "name": "@kody-w/git_warehouse_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "data",
+      "datasette",
+      "git-scraping",
+      "warehouse",
+      "devtools"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "GitWarehouse",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "shape = run the shaper to (re)build the warehouse; scrape = shape then git-commit it (history becomes the time-series); serve = return the datasette command; history = summarize warehouse changes over commits. Default scrape.",
+        "enum": [
+          "shape",
+          "scrape",
+          "serve",
+          "history"
+        ],
+        "type": "string"
+      },
+      "message": {
+        "description": "For scrape: the git commit message. Defaults to a timestamped git-scraper-style message.",
+        "type": "string"
+      },
+      "push": {
+        "description": "For scrape: also `git push` after committing (publishes the warehouse). Default false.",
+        "type": "boolean"
+      },
+      "repo": {
+        "description": "Absolute path to the git repository whose data to warehouse. Required for all actions.",
+        "type": "string"
+      },
+      "shaper": {
+        "description": "Path to the shaper .py to run (the script that reads the repo's raw data and emits the warehouse files). Relative to repo or absolute. Defaults to 'warehouse/build.py'.",
+        "type": "string"
+      },
+      "warehouse": {
+        "description": "Warehouse output directory within the repo (where the shaper writes events.jsonl / frames.jsonl / metadata.json / stats.json). Default 'warehouse'.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "repo"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

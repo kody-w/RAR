@@ -1,0 +1,44 @@
+{
+  "agent": "@rapp/vibe_builder_agent",
+  "agent_file": "vibe_builder_agent.py",
+  "agent_sha256": "8fd77f26eacf4f4f22b7b48c06cc22e0fa76af51c2d20bb21a2194cc16de967f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "VibeBuilderAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "platform",
+    "description": "Builds a complete rapplication (agent + service) from a natural language description.",
+    "display_name": "VibeBuilder",
+    "example_call": "Build me a bookmark manager",
+    "name": "@rapp/vibe_builder_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "meta",
+      "builder",
+      "rapplication"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "VibeBuilder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "description": {
+        "description": "What the rapplication should do, in plain English.",
+        "type": "string"
+      },
+      "name": {
+        "description": "Optional name override (snake_case). Auto-generated if omitted.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "description"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

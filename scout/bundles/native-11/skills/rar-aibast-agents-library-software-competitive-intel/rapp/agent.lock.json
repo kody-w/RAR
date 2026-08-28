@@ -1,0 +1,54 @@
+{
+  "agent": "@aibast-agents-library/software_competitive_intel",
+  "agent_file": "competitive_intel_agent.py",
+  "agent_sha256": "962b38fd4f10ef48c6eb7a3e0076ccc0f7f53126e5e6dffa4da292bfc3721baa",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CompetitiveIntelAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "software_digital_products",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Maps market landscape and threats from a live simulated Dynamics 365 tenant's accounts and pipeline, with an offline demo fallback.",
+    "display_name": "Competitive Intelligence Agent",
+    "name": "@aibast-agents-library/software_competitive_intel",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "competitive-intel",
+      "market-analysis",
+      "saas",
+      "pricing",
+      "threat-assessment"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "CompetitiveIntelAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "competitor_id": {
+        "description": "Optional competitor ID to filter results.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The competitive intelligence operation to perform.",
+        "enum": [
+          "market_landscape",
+          "feature_comparison",
+          "pricing_analysis",
+          "threat_assessment"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

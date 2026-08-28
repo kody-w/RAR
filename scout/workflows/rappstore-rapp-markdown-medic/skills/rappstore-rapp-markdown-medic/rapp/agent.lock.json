@@ -1,0 +1,56 @@
+{
+  "agent": "@rapp/markdown-medic",
+  "agent_file": "markdown_medic_agent.py",
+  "agent_sha256": "68c349d82161b59278bb31dbbafad199f23d1cabba2487c9d0d79f0dfc68882f",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MarkdownMedicAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "example_call": {
+      "args": {
+        "action": "links",
+        "path": "./docs"
+      },
+      "note": "Find relative links and images that point at nothing."
+    },
+    "name": "@rapp/markdown-medic",
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "docs",
+      "markdown",
+      "lint",
+      "links",
+      "local-first",
+      "singleton"
+    ],
+    "tier": "core",
+    "trust": "community",
+    "version": "1.0.0"
+  },
+  "runtime_name": "MarkdownMedic",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "Which check to run.",
+        "enum": [
+          "links",
+          "headings",
+          "toc",
+          "stats"
+        ],
+        "type": "string"
+      },
+      "path": {
+        "description": "A .md file or a folder of them.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action",
+      "path"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

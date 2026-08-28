@@ -1,0 +1,65 @@
+{
+  "agent": "@kody-w/bond_rhythm_agent",
+  "agent_file": "bond_rhythm_agent.py",
+  "agent_sha256": "88bb285bbf26b68fee053d24bf70c08ae1ec42e4c3a03b9afe7de2c404a5a219",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "BondRhythmAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "platform",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Audits local-versus-global RAPP repo drift, classifies push/pull direction, suggests operator actions, and records rhythm bond events.",
+    "display_name": "Bond Pulse",
+    "name": "@kody-w/bond_rhythm_agent",
+    "quality_tier": "verified",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "heartbeat",
+      "drift-detection",
+      "ecosystem",
+      "operator-mediated",
+      "bond-pulse",
+      "rhythm"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "BondRhythm",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "_audit_override": {
+        "description": "(test-only) inject a synthetic audit dict; skip subprocess.",
+        "type": "object"
+      },
+      "_bonds_file": {
+        "description": "(test-only) point bonds.json at a sandboxed location.",
+        "type": "string"
+      },
+      "allow_online": {
+        "default": false,
+        "description": "If true, audit fetches live offspring data; else uses fixtures.",
+        "type": "boolean"
+      },
+      "dry_run": {
+        "default": true,
+        "description": "Cosmetic — rhythm agent never executes regardless.",
+        "type": "boolean"
+      },
+      "repo_filter": {
+        "description": "Restrict pulse to one offspring (name or owner/repo).",
+        "type": "string"
+      },
+      "repo_root": {
+        "description": "Override path to RAPP repo root.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

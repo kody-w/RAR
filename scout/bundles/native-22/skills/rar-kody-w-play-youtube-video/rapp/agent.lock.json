@@ -1,0 +1,52 @@
+{
+  "agent": "@kody-w/play_youtube_video_agent",
+  "agent_file": "play_youtube_video_agent.py",
+  "agent_sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PlayYoutubeVideoAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP Community",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Opens official YouTube URLs or title searches in the local default browser without downloading or extracting media.",
+    "display_name": "Play YouTube Video",
+    "example_call": {
+      "args": {
+        "video_title": "lo-fi beats"
+      }
+    },
+    "external_prereqs": [
+      "A local graphical default browser"
+    ],
+    "name": "@kody-w/play_youtube_video_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "youtube",
+      "video",
+      "browser",
+      "media"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "PlayYoutubeVideo",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "video_title": {
+        "description": "The requested video title, optional 'youtube:' trigger followed by a title, or official YouTube URL.",
+        "maxLength": 500,
+        "type": "string"
+      }
+    },
+    "required": [
+      "video_title"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,71 @@
+{
+  "agent": "@cat-agent-skills/competitive_battlecard_builder",
+  "agent_file": "competitive_battlecard_builder_agent.py",
+  "agent_sha256": "0b7356f6516b4afaabbed99ae04111381a60d133eeba92effdad8545f2f05ddd",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CompetitiveBattlecardBuilder",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Michael Heath",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Build an interactive comparison app, either a sales battlecard advocating for your product against named competitors, or a neutral, unbiased comparison across two or more peer items with no side taken. Filterable by item and category, with live search, a compact scorecard, and copy-to-clipboard talking points. Every claim is tagged verified or unverified so nothing invented ends up in front of a…",
+    "display_name": "Competitive Battlecard Builder",
+    "name": "@cat-agent-skills/competitive_battlecard_builder",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "d2d932cf8ec2e523",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "competitive-battlecard-builder",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#competitive-battlecard-builder",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "sales_enablement",
+      "productivity",
+      "comparison"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CompetitiveBattlecardBuilder",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "data_source": {
+        "description": "Optional. Where the evidence comes from.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The question to answer, stated as a question.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

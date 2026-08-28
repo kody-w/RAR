@@ -1,0 +1,55 @@
+{
+  "agent": "@aibast-agents-library/support_ticket_resolution",
+  "agent_file": "support_ticket_resolution_agent.py",
+  "agent_sha256": "803150569eae5d2f820e74baf9420c32528a8a3a0aec6252a2361f2a77f896bb",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SupportTicketResolutionAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "software_digital_products",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Triages tickets and tracks SLAs from a live simulated Dynamics 365 tenant's support cases, with an offline demo fallback.",
+    "display_name": "Support Ticket Resolution Agent",
+    "name": "@aibast-agents-library/support_ticket_resolution",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "support",
+      "tickets",
+      "triage",
+      "sla",
+      "knowledge-base",
+      "escalation"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "SupportTicketResolutionAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "category": {
+        "description": "Optional category filter for resolution search.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "The support operation to perform.",
+        "enum": [
+          "ticket_triage",
+          "resolution_search",
+          "escalation_routing",
+          "sla_dashboard"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}

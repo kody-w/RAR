@@ -1,0 +1,56 @@
+{
+  "agent": "@rapp/forge_provenance_agent",
+  "agent_file": "forge_provenance_agent.py",
+  "agent_sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ForgeProvenanceAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Stamp a forged artifact bundle with the fingerprint of the RAPP agent it came from, then prove later that it never drifted. Reports per file: current, STALE (source moved), HAND-EDITED (derived file was edited and the edit will be lost), MISSING, or UNSTAMPED (provenance unknown, which never renders as healthy). Fingerprints the agent's declarative surface, read with ast and never imported, so a comment change does not cry wolf but a description change does.",
+    "display_name": "Forge Provenance",
+    "name": "@rapp/forge_provenance_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "copilot-studio",
+      "power-platform",
+      "forge",
+      "provenance",
+      "drift",
+      "deterministic",
+      "verification",
+      "m365"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "forge_provenance",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "stamp | check | toast",
+        "type": "string"
+      },
+      "bundle": {
+        "description": "the forged workspace directory",
+        "type": "string"
+      },
+      "source": {
+        "description": "path to the source RAPP agent .py",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action",
+      "bundle"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

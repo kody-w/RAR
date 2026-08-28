@@ -1,0 +1,67 @@
+{
+  "agent": "@discreetRappers/powerpoint_generator_agent",
+  "agent_file": "powerpoint_generator_agent.py",
+  "agent_sha256": "5a9fc79dfbf2038ba411e2789dc988713389b2219ff5ce721b02d684d88a23f5",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PowerPointGeneratorAgentV2",
+  "host_dependencies": [
+    "utils.storage_factory"
+  ],
+  "manifest": {
+    "author": "Bill Whalen",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection.",
+    "display_name": "PowerPointGeneratorV2",
+    "name": "@discreetRappers/powerpoint_generator_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "productivity",
+      "powerpoint",
+      "presentations",
+      "templates",
+      "microsoft"
+    ],
+    "version": "1.0.2"
+  },
+  "runtime_name": "PowerPointGeneratorV2",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "create_presentation",
+          "list_templates",
+          "list_layouts"
+        ],
+        "type": "string"
+      },
+      "customer": {
+        "description": "Customer name - creates a subfolder in docs/ppt for this customer",
+        "type": "string"
+      },
+      "output_filename": {
+        "type": "string"
+      },
+      "slides": {
+        "items": {
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "template": {
+        "description": "Template name (BaseTemplateBlue, ZavaTemplate, BaseTemplateDynamics)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.2"
+}

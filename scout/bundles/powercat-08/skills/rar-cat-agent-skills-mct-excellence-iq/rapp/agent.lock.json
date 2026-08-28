@@ -1,0 +1,77 @@
+{
+  "agent": "@cat-agent-skills/mct_excellence_iq",
+  "agent_file": "mct_excellence_iq_agent.py",
+  "agent_sha256": "1b62ce1f0c3641b283c403b6a6c3146f554f5222346d9d7a2d127ea6bdc61875",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "MctExcellenceIq",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Faride Ilanda",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "An AI-powered Instructional Intelligence Skill that helps Microsoft Certified Trainers design, deliver, assess, localize, and continuously improve world-class Microsoft learning experiences across Azure, Business Applications, Data & AI, Modern Work, and Security.",
+    "display_name": "MCT Excellence IQ",
+    "name": "@cat-agent-skills/mct_excellence_iq",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "dc7072f847ebe5f9",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "mct-excellence-iq",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#mct-excellence-iq",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "mct",
+      "instructional_intelligence",
+      "microsoft_learning",
+      "courseware",
+      "microsoft_learn",
+      "azure",
+      "business_applications",
+      "data_ai"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "MctExcellenceIq",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

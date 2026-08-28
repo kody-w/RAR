@@ -1,0 +1,73 @@
+{
+  "agent": "@cat-agent-skills/idea_refiner",
+  "agent_file": "idea_refiner_agent.py",
+  "agent_sha256": "1f45a76ddaa7dca12d9857414545d29e8dc4e2ee13f87af6eb03b928acdb7bb7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "IdeaRefiner",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Mathias Salomonsen",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Refines an existing plan, decision, or draft through relentless, branch-by-branch questioning. Grouped in batches of 2-5 with recommended answers, pulling facts from Work IQ where possible, until every part has been fully thought through.",
+    "display_name": "Idea Refiner",
+    "name": "@cat-agent-skills/idea_refiner",
+    "platforms": [
+      "Copilot Studio"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "f0afbd6c6948a24e",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "idea-refiner",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#idea-refiner",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "productivity",
+      "planning",
+      "decision_making",
+      "refinement",
+      "brainstorming"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "IdeaRefiner",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "constraints": {
+        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being designed.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

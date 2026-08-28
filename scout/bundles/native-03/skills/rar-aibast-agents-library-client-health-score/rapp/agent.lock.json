@@ -1,0 +1,58 @@
+{
+  "agent": "@aibast-agents-library/client_health_score",
+  "agent_file": "client_health_score_agent.py",
+  "agent_sha256": "66dd54140f9f2a67673c6ef566ed049e42a285ebb042a6507ead5e63d01c72db",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ClientHealthScoreAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "AIBAST",
+    "category": "professional_services",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Flags at-risk accounts from escalations and pipeline on a live simulated Dynamics 365 tenant, with an offline demo metric fallback.",
+    "display_name": "Client Health Score Agent",
+    "name": "@aibast-agents-library/client_health_score",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "client-health",
+      "NPS",
+      "retention",
+      "professional-services",
+      "churn"
+    ],
+    "version": "1.2.0"
+  },
+  "runtime_name": "ClientHealthScoreAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "client_id": {
+        "description": "Client identifier from the client portfolio, such as CL-301; selects that client's evidence record.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "Operation to run; defaults to health_dashboard when omitted.",
+        "enum": [
+          "health_dashboard",
+          "engagement_analysis",
+          "satisfaction_trend",
+          "at_risk_clients",
+          "retention_roadmap",
+          "stakeholder_outreach"
+        ],
+        "type": "string"
+      },
+      "record_id": {
+        "description": "Evidence record identifier for retention_roadmap or stakeholder_outreach, such as CHS-401 or CHS-OUT-401.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.2.0"
+}

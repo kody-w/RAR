@@ -1,0 +1,64 @@
+{
+  "agent": "@rapp/rapp_publish_agent",
+  "agent_file": "rapp_publish_agent.py",
+  "agent_sha256": "fc199e9cd0c478971f5c67d818d6405d32e0035974da2187e29292bf36adc6ed",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappPublishAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP",
+    "category": "platform",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Classifies a RAPP artifact (agent, rapplication, or sense) and opens the matching submission issue in its store repo via the GitHub API.",
+    "display_name": "RappPublish",
+    "example_call": {
+      "args": {
+        "action": "submit",
+        "path": "/path/to/my_thing"
+      }
+    },
+    "name": "@rapp/rapp_publish_agent",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "publish",
+      "submission",
+      "router",
+      "ecosystem",
+      "store",
+      "registry"
+    ],
+    "version": "0.2.3"
+  },
+  "runtime_name": "RappPublish",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "detect: classify the artifact without submitting; submit: classify and open the right [X] issue; spec: print the routing rules.",
+        "enum": [
+          "detect",
+          "submit",
+          "spec"
+        ],
+        "type": "string"
+      },
+      "dry_run": {
+        "description": "If true, classify and print payload without opening an issue.",
+        "type": "boolean"
+      },
+      "path": {
+        "description": "Local filesystem path to a .py / dir / .zip.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "0.2.3"
+}

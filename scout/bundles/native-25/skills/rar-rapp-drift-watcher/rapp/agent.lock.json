@@ -1,0 +1,72 @@
+{
+  "agent": "@rapp/drift_watcher",
+  "agent_file": "drift_watcher_agent.py",
+  "agent_sha256": "6f2aedf636bbbde6a3b692c2d920c6af283291885886eba3f523179766529dee",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DriftWatcherAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Watches drift-labeled GitHub Issues via the gh CLI and stages each proposed fix as a pull request; proposes only, never merges or closes.",
+    "display_name": "DriftWatcherAgent",
+    "name": "@rapp/drift_watcher",
+    "quality_tier": "official",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "drift",
+      "spec",
+      "github",
+      "issues",
+      "pull-request",
+      "traceability",
+      "steward",
+      "alignment",
+      "operator-mediated"
+    ],
+    "version": "1.0.1"
+  },
+  "runtime_name": "DriftWatcherAgent",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "list",
+          "propose",
+          "help"
+        ],
+        "type": "string"
+      },
+      "confirm": {
+        "description": "propose: False=DRY-RUN plan (default); True=actually stage the PR",
+        "type": "boolean"
+      },
+      "issue": {
+        "description": "propose: the drift Issue number to stage a PR for",
+        "type": "integer"
+      },
+      "label": {
+        "description": "list: Issue label to watch (default rapp-drift)",
+        "type": "string"
+      },
+      "repo": {
+        "description": "propose: target owner/repo to fix (default from the machine block source)",
+        "type": "string"
+      },
+      "tracker": {
+        "description": "list: owner/repo holding the drift Issues (default $DRIFT_TRACKER)",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.1"
+}

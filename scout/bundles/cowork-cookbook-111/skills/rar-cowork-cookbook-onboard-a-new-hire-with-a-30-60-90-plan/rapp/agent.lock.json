@@ -1,0 +1,109 @@
+{
+  "agent": "@cowork-cookbook/onboard_a_new_hire_with_a_30_60_90_plan",
+  "agent_file": "onboard_a_new_hire_with_a_30_60_90_plan_agent.py",
+  "agent_sha256": "2ccaf78f37daa6af0887eef63129200d50638bef7aad811195df255a25d4aeb5",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "OnboardANewHireWithA306090Plan",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Set a new hire up to succeed from day one - without building the plan from scratch.",
+    "display_name": "Onboard a new hire with a complete 30-60-90-plan",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "advanced",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "none",
+      "process_roots": [
+        "hire-to-retire"
+      ],
+      "process_tags": [
+        "hire-to-retire/recruit-and-onboard-talent/onboard-new-employees"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt",
+      "upstream_path": "hire-to-retire/onboard-a-new-hire-with-a-30-60-90-plan",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "Word",
+          "Calendar Management",
+          "Scheduling",
+          "Communications",
+          "Enterprise Search"
+        ],
+        "plugin": []
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/onboard_a_new_hire_with_a_30_60_90_plan",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "ccab66f4acb9cee8",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "onboard-a-new-hire-with-a-30-60-90-plan",
+      "upstream_url": "https://coworkcookbook.com/recipes/onboard-a-new-hire-with-a-30-60-90-plan",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "other",
+      "hire_to_retire",
+      "advanced",
+      "read_only"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "OnboardANewHireWithA306090Plan",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "constraints": {
+        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being designed.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

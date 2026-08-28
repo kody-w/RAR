@@ -1,0 +1,77 @@
+{
+  "agent": "@cat-agent-skills/stoic_negotiator",
+  "agent_file": "stoic_negotiator_agent.py",
+  "agent_sha256": "8575b10ac9af4f658319a16d30a5f1171a7497cf0325d9f7363f461b52657e69",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "StoicNegotiator",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Faride Ilanda",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "A principled negotiation intelligence skill that combines Stoic decision disciplines with evidence-backed research to help individuals, executives, and analyst agents prepare, analyze, and execute high-quality negotiations. Supports interactive scoping workflows, Deep Research sourcing (citations and source URLs), and audit-ready outputs.",
+    "display_name": "Stoic Negotiator",
+    "name": "@cat-agent-skills/stoic_negotiator",
+    "platforms": [
+      "Copilot Studio",
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "c1a8d265f7e75943",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "stoic-negotiator",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#stoic-negotiator",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "negotiation",
+      "decision_making",
+      "offers",
+      "salary",
+      "sales",
+      "commerce",
+      "batna",
+      "zopa"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "StoicNegotiator",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "data_source": {
+        "description": "Optional. Where the evidence comes from.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The question to answer, stated as a question.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

@@ -1,0 +1,74 @@
+{
+  "agent": "@cat-agent-skills/copilot_studio_agent_test",
+  "agent_file": "copilot_studio_agent_test_agent.py",
+  "agent_sha256": "6f7094123eb0552125abc477d11ace64488fb220132b6687d3b97322dd477ab7",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "CopilotStudioAgentTest",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Matteo Pagani",
+    "category": "general",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Test a Copilot Studio agent against your own Q&A set and get a graded pass/fail report — no browser automation.",
+    "display_name": "Copilot Studio Agent Test",
+    "name": "@cat-agent-skills/copilot_studio_agent_test",
+    "platforms": [
+      "Scout"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "ac86f61bb9663d51",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "copilot-studio-agent-test",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-agent-test",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "copilot_studio",
+      "testing",
+      "evaluation",
+      "quality",
+      "agents",
+      "power_platform"
+    ],
+    "version": "2.0.0"
+  },
+  "runtime_name": "CopilotStudioAgentTest",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "criteria": {
+        "description": "Optional. The standard to review against, if narrower than the default.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What is being reviewed — a file path, URL, document or system.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.0"
+}

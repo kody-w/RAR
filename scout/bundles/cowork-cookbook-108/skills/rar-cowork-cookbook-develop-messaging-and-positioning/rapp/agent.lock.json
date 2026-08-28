@@ -1,0 +1,104 @@
+{
+  "agent": "@cowork-cookbook/develop_messaging_and_positioning",
+  "agent_file": "develop_messaging_and_positioning_agent.py",
+  "agent_sha256": "4f2bc3c52fad6f088602687bd24efed631ad6bd17d2e3dae00729fc8828a0607",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "DevelopMessagingAndPositioning",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Move messaging development out of scattered docs into one working surface the team can pressure-test together.",
+    "display_name": "Develop messaging and positioning",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": null,
+      "mutates_data": false,
+      "plugin": "monday-com",
+      "process_roots": [
+        "concept-to-market"
+      ],
+      "process_tags": [
+        "concept-to-market/prepare-marketing-campaigns/develop-campaign-themes-and-messages"
+      ],
+      "recipe_category": "other",
+      "recipe_type": "prompt",
+      "upstream_path": "concept-to-market/develop-messaging-and-positioning",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [],
+        "plugin": []
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/develop_messaging_and_positioning",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "bbf2afef0d8a93ee",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "develop-messaging-and-positioning",
+      "upstream_url": "https://coworkcookbook.com/recipes/develop-messaging-and-positioning",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "other",
+      "concept_to_market",
+      "intermediate",
+      "integration",
+      "monday_com"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "DevelopMessagingAndPositioning",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}

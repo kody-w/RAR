@@ -1,0 +1,44 @@
+{
+  "agent": "@kody-w/project-tracker-singleton",
+  "agent_file": "project_tracker_agent.py",
+  "agent_sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ProjectTrackerAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Local-first tracker for a portfolio of AI-agent projects and their MVP statements. Speaks the aibast-agents-library project-tracker web tool's native JSON (projectTrackerData) so data round-trips via its JSON import/export. Add/update projects, set the MVP use case/description/timeline, register agents, and export a file ready to merge-import into the web tool. Data stays on this device — never in a repo or egg.",
+    "display_name": "Project Tracker",
+    "example_call": {
+      "args": {
+        "action": "list_projects"
+      }
+    },
+    "name": "@kody-w/project_tracker_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "project",
+      "tracker",
+      "portfolio",
+      "mvp",
+      "local-first",
+      "aibast",
+      "rapplication"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "ProjectTracker",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

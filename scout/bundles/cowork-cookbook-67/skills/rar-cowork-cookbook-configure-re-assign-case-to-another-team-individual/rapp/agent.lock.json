@@ -1,0 +1,127 @@
+{
+  "agent": "@cowork-cookbook/configure_re_assign_case_to_another_team_individual",
+  "agent_file": "configure_re_assign_case_to_another_team_individual_agent.py",
+  "agent_sha256": "be4859217dc184d597344a4792c86186e008278876aa3cd1d643629538c6bab0",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ConfigureReAssignCaseToAnotherTeamIndividual",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Sean Galliher and Cowork Cookbook contributors",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Applies a bulk configuration change to re-assign case to another team/individual from an input Excel file, with validation and rollback support.",
+    "display_name": "Re-assign case to another team/individual Configuration Bulk Setup",
+    "industry_context": {
+      "deprecated": false,
+      "difficulty": "intermediate",
+      "last_verified_on": null,
+      "mutates_data": true,
+      "plugin": "dynamics-365-erp",
+      "process_roots": [
+        "case-to-resolution"
+      ],
+      "process_tags": [
+        "case-to-resolution/manage-and-work-on-cases/re-assign-case-to-another-team-individual"
+      ],
+      "recipe_category": "configure",
+      "recipe_type": "prompt",
+      "upstream_path": "case-to-resolution/configure-re-assign-case-to-another-team-individual",
+      "uses_skills": {
+        "custom": [],
+        "ootb": [
+          "Excel"
+        ],
+        "plugin": [
+          {
+            "action": "data_find_entity_type",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "data_update_entities",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "form_open_menu_item",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "form_set_control_values",
+            "plugin": "dynamics-365-erp"
+          },
+          {
+            "action": "form_save_form",
+            "plugin": "dynamics-365-erp"
+          }
+        ]
+      },
+      "verification_status": "draft"
+    },
+    "name": "@cowork-cookbook/configure_re_assign_case_to_another_team_individual",
+    "platforms": [
+      "Microsoft 365 Copilot Cowork"
+    ],
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "74bfb73a51e445ba",
+      "details": {
+        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
+        "repository_url": "https://github.com/seangalliher/Coworkcookbook",
+        "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
+      },
+      "license": "CC-BY-4.0",
+      "license_verified": true,
+      "source_id": "cowork-cookbook",
+      "source_name": "Cowork Cookbook",
+      "source_url": "https://coworkcookbook.com/",
+      "upstream_slug": "configure-re-assign-case-to-another-team-individual",
+      "upstream_url": "https://coworkcookbook.com/recipes/configure-re-assign-case-to-another-team-individual",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "industry_solution",
+      "business_process",
+      "prompt",
+      "configure",
+      "case_to_resolution",
+      "intermediate",
+      "integration",
+      "dynamics_365_erp"
+    ],
+    "version": "2.0.1"
+  },
+  "runtime_name": "ConfigureReAssignCaseToAnotherTeamIndividual",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "The process to automate.",
+        "type": "string"
+      },
+      "trigger": {
+        "description": "Optional. What starts it — schedule, event or manual.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "2.0.1"
+}
