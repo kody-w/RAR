@@ -727,6 +727,8 @@ class TestWorkflowSyntax:
         assert "getCollaboratorPermissionLevel" in workflow
         assert "python scripts/build_scout_exports.py" in workflow
         assert "rapp_skill.md rapp_skills.md scout/" in workflow
+        assert "--ignore=tests/test_scout_rapp_skill.py" in workflow
+        assert "python -m pytest -q tests/test_scout_rapp_skill.py" in workflow
         assert "maintain" in workflow and "admin" in workflow
         assert "ISSUE_TITLE" not in workflow
         assert "target_slug" not in workflow
