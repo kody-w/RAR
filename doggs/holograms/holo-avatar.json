@@ -12,6 +12,14 @@
   "default_seed": "04356bded8854372649c4eba1516673fbb136b39f7f8c29da2437fd6a1aac201",
   "accent": "violet",
   "data_binding": "identity-seed",
+  "bottle": true,
+  "dimensions": [
+    "identity",
+    "character",
+    "companion",
+    "avatar",
+    "embodiment"
+  ],
   "scene": {
     "title": "A creature grown from its own frame",
     "subtitle": "Same identity seed, same character on every machine."
