@@ -12,6 +12,14 @@
   "default_seed": "04356bded8854372649c4eba1516673fbb136b39f7f8c29da2437fd6a1aac201",
   "accent": "ice",
   "data_binding": "live-zoo",
+  "bottle": true,
+  "dimensions": [
+    "briefing",
+    "status",
+    "priorities",
+    "census",
+    "projection"
+  ],
   "scene": {
     "prompt": "Three things need you. Which first?",
     "options": [

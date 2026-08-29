@@ -12,27 +12,51 @@
       "rappid": "rappid:@kody-w/holo-avatar:ce3a3fef2bdcb4debdcc08a4d0e8a1982756d2e269719ccb342a5f734abaf8c2",
       "name": "Holo Avatar",
       "kind": "character",
+      "bottle": true,
+      "dimensions": [
+        "identity",
+        "character",
+        "companion",
+        "avatar",
+        "embodiment"
+      ],
       "version": "1.0.0",
       "record_url": "https://raw.githubusercontent.com/kody-w/RAR/main/doggs/holograms/holo-avatar.json",
-      "record_sha256": "c0f868addb5ef9a45ba2d055b20ec6aa495e9eba8dfc915e8c25b00eebee0e8d"
+      "record_sha256": "a8bbd96a2588bd8bfd28ff789c28ae7bbd731347fa46ab53b03d5931061cd1a9"
     },
     {
       "id": "holo-briefing",
       "rappid": "rappid:@kody-w/holo-briefing:6cf05183da3770824c1d20bfcc0cead35d48d06f98f7764335f5ba7d2fdc8712",
       "name": "The Briefing",
       "kind": "data-projection",
+      "bottle": true,
+      "dimensions": [
+        "briefing",
+        "status",
+        "priorities",
+        "census",
+        "projection"
+      ],
       "version": "1.0.0",
       "record_url": "https://raw.githubusercontent.com/kody-w/RAR/main/doggs/holograms/holo-briefing.json",
-      "record_sha256": "defab3622d8bc40a747658ec6aa1e7a7a88ed39b28f3d576cd66d61eb1768e05"
+      "record_sha256": "92a13730eacdd06a204d4817dccbcdbe7b41a0b65a62658ddd5fb9dcd95c03ac"
     },
     {
       "id": "holo-nexus",
       "rappid": "rappid:@kody-w/holo-nexus:acc37c05ec39e4086b7b9afa3c5fa23f75e9ad9127209e6b1ffb5bcd6c37a217",
       "name": "HOLO in the Nexus",
       "kind": "data-projection",
+      "bottle": true,
+      "dimensions": [
+        "options",
+        "decision",
+        "backup",
+        "command",
+        "projection"
+      ],
       "version": "1.0.0",
       "record_url": "https://raw.githubusercontent.com/kody-w/RAR/main/doggs/holograms/holo-nexus.json",
-      "record_sha256": "fdf32d46a24638762f40d25cd3d9aaf1229d5b5143e470cba17290ea351129e5"
+      "record_sha256": "948277c3053463027596fd9871b6201476fa11e6b512f1773c40a1ccf701454b"
     }
   ]
 }

@@ -109,7 +109,8 @@ RAR also publishes hash-addressed **data-only DOGGs** for compatible renderers.
 The first channel is [`doggs/holograms/`](doggs/holograms/): procedural 3D
 characters and live data projections for RAPP Zoo.
 
-The records contain no HTML, JavaScript, shaders, or remote assets. RAPP Zoo
+The records are caught reusable bottles: stable dimensions and projection
+memory receive fresh per-run `data_slosh`. The records contain no HTML, JavaScript, shaders, or remote assets. RAPP Zoo
 downloads a small JSON record, verifies its SHA-256 from the index, validates a
 closed schema, and then renders it with its own sandboxed Three.js runtime.
 

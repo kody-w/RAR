@@ -12,6 +12,14 @@
   "default_seed": "b691c0494fae2213b9668e4e545d0b48bb490015b06447dc0255b2e8c0b62b64",
   "accent": "cyan",
   "data_binding": "live-zoo",
+  "bottle": true,
+  "dimensions": [
+    "options",
+    "decision",
+    "backup",
+    "command",
+    "projection"
+  ],
   "scene": {
     "prompt": "How do you want to back up the estate tonight?",
     "options": [

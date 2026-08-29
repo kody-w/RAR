@@ -46,6 +46,8 @@ def test_hologram_dogg_index_and_record_hashes():
     ]
     for entry in index["entries"]:
         assert RAPPID.fullmatch(entry["rappid"])
+        assert entry["bottle"] is True
+        assert entry["dimensions"]
         assert HEX64.fullmatch(entry["record_sha256"])
         record_path = CATALOG / f"{entry['id']}.json"
         record_bytes = record_path.read_bytes()
@@ -68,6 +70,8 @@ def test_hologram_doggs_are_closed_data_not_executable_code():
         "default_seed",
         "accent",
         "data_binding",
+        "bottle",
+        "dimensions",
         "scene",
         "summon",
     }
@@ -77,6 +81,9 @@ def test_hologram_doggs_are_closed_data_not_executable_code():
         assert record["schema"] == "rar-hologram-dogg/1.0"
         assert record["kind"] in {"character", "data-projection"}
         assert record["engine"] == "three-r128"
+        assert record["bottle"] is True
+        assert record["dimensions"]
+        assert len(record["dimensions"]) == len(set(record["dimensions"]))
         assert RAPPID.fullmatch(record["rappid"])
         assert HEX64.fullmatch(record["default_seed"])
         assert record["summon"] == {
