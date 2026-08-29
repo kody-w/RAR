@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-28T17:28:48Z",
+ "generated_at": "2026-08-29T11:41:28Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,10 +9,10 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 111,
-  "size_kb": 38107,
+  "open_issues": 110,
+  "size_kb": 43057,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-28T16:33:07Z",
+  "pushed_at": "2026-08-29T08:36:20Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 1694,
+  "agents": 1695,
   "swarms": 2,
   "publishers": 11,
   "categories": 13,
-  "total_lines": 401285,
-  "total_kb": 21041.3,
+  "total_lines": 401510,
+  "total_kb": 21049.5,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -244,7 +244,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1894586,
+  "rank": 1904247,
   "agent_hits": 12,
   "files": [
    {
@@ -660,6 +660,23 @@
   ],
   "newest": [
    {
+    "name": "@kody-w/hologram_dogg",
+    "display_name": "HologramDOGG",
+    "publisher": "@kody-w",
+    "category": "integrations",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 225,
+    "size_kb": 8.2,
+    "added_at": "2026-08-29T00:44:02Z",
+    "file": "agents/@kody-w/hologram_dogg_agent.py",
+    "description": "Lists the public RAR hologram DOGG channel and asks a local RAPP Zoo to summon a named, hash-verified character or data projection. Downloads data only; the zoo owns the sandboxed renderer."
+   },
+   {
     "name": "@cat-agent-skills/agent_performance_triage",
     "display_name": "Agent Performance Triage",
     "publisher": "@cat-agent-skills",
@@ -896,23 +913,6 @@
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/adaptive_card_audit_financial_results_agent.py",
     "description": "Produces a reusable Adaptive Card JSON snapshot of audit financial results status for embedding in dashboards, emails, or Teams."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_bill_subscriptions",
-    "display_name": "Bill subscriptions Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.3,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_bill_subscriptions_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of bill subscriptions status for embedding in dashboards, emails, or Teams."
    }
   ],
   "publishers": [
@@ -936,11 +936,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 64,
+    "agents": 65,
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 56393,
+    "lines": 56618,
     "rating": 5.0
    },
    {
@@ -1019,7 +1019,7 @@
   "categories": [
    {
     "name": "integrations",
-    "agents": 1474,
+    "agents": 1475,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -1110,7 +1110,7 @@
    }
   ],
   "tiers": {
-   "community": 1270,
+   "community": 1271,
    "verified": 281,
    "frontier": 95,
    "official": 46,
