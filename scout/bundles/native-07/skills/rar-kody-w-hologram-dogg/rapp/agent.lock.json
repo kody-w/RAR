@@ -1,0 +1,61 @@
+{
+  "agent": "@kody-w/hologram_dogg",
+  "agent_file": "hologram_dogg_agent.py",
+  "agent_sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "HologramDOGGAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Kody Wildfeuer",
+    "category": "integrations",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Lists the public RAR hologram DOGG channel and asks a local RAPP Zoo to summon a named, hash-verified character or data projection. Downloads data only; the zoo owns the sandboxed renderer.",
+    "display_name": "HologramDOGG",
+    "name": "@kody-w/hologram_dogg",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "hologram",
+      "dogg",
+      "rar",
+      "rapp-zoo",
+      "three-js",
+      "summon"
+    ],
+    "version": "1.1.0"
+  },
+  "runtime_name": "HologramDOGG",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "List, dimension-match, catch one DOGG, or inspect local bottles.",
+        "enum": [
+          "list",
+          "match",
+          "summon",
+          "status"
+        ],
+        "type": "string"
+      },
+      "frame_json": {
+        "description": "Optional RAPP frame whose payload supplies match dimensions.",
+        "type": "string"
+      },
+      "hologram_id": {
+        "description": "RAR DOGG id, for example holo-avatar.",
+        "type": "string"
+      },
+      "query": {
+        "description": "Natural-language dimensions to match against cached bottles.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.1.0"
+}
