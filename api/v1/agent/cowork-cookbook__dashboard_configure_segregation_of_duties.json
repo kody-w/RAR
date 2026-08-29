@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.5,
   "sha256": "6156f6787c113ff88beb4d08218b4435a920a4cc28dc5edb317ab350b3204f91",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__dashboard_configure_segregation_of_duties.svg",

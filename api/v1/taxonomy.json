@@ -1,10 +1,10 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-28T19:26:31Z",
+  "generated": "2026-08-29T00:39:23Z",
   "categories": [
     {
       "name": "integrations",
-      "count": 1474
+      "count": 1475
     },
     {
       "name": "general",
@@ -66,7 +66,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 64
+      "count": 65
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 1270
+      "count": 1271
     },
     {
       "name": "verified",
@@ -729,6 +729,10 @@
       "count": 3
     },
     {
+      "name": "dogg",
+      "count": 3
+    },
+    {
       "name": "organism",
       "count": 3
     },
@@ -1053,6 +1057,14 @@
       "count": 2
     },
     {
+      "name": "rar",
+      "count": 2
+    },
+    {
+      "name": "summon",
+      "count": 2
+    },
+    {
       "name": "installer",
       "count": 2
     },
@@ -1134,10 +1146,6 @@
     },
     {
       "name": "rapp-1",
-      "count": 2
-    },
-    {
-      "name": "dogg",
       "count": 2
     },
     {
@@ -1314,14 +1322,6 @@
     },
     {
       "name": "game",
-      "count": 1
-    },
-    {
-      "name": "narration",
-      "count": 1
-    },
-    {
-      "name": "clipchamp",
       "count": 1
     }
   ]

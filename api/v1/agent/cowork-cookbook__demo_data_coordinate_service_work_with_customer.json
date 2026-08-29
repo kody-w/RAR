@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.4,
   "sha256": "9d04af5b6068c589b3265a0141d9cd8aa75d04aba79cf3ce82ef3976b05e6a36",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__demo_data_coordinate_service_work_with_customer.svg",

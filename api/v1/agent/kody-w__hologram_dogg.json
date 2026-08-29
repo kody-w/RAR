@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__hologram_dogg",
+  "name": "HologramDOGG",
+  "rar_name": "@kody-w/hologram_dogg",
+  "rappid": "rappid:@kody-w/hologram_dogg:97b40d46ebaf6258aadb7cfc39d579513c99e531fd8150f8d676153224908a58",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.1.0",
+  "publisher": "@kody-w",
+  "category": "integrations",
+  "tags": [
+    "hologram",
+    "dogg",
+    "rar",
+    "rapp-zoo",
+    "three-js",
+    "summon"
+  ],
+  "description": "Lists the public RAR hologram DOGG channel and asks a local RAPP Zoo to summon a named, hash-verified character or data projection. Downloads data only; the zoo owns the sandboxed renderer.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 225,
+  "size_kb": 8.2,
+  "sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2",
+  "has_card": true,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__hologram_dogg.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hologram_dogg_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__hologram_dogg.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__hologram_dogg.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/hologram_dogg_agent.py"
+}

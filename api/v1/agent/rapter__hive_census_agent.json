@@ -29,7 +29,7 @@
   "lines": 222,
   "size_kb": 9.9,
   "sha256": "c078c513615c23f87edf14ee12514105af913e06577cfe53b2e2b2368963d4ff",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-26T17:18:46-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapter__hive_census_agent.svg",

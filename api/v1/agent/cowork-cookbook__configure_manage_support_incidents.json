@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.6,
   "sha256": "7bba4b977d2b457c1b75a698b551aa1b122788ecff82509809259a9d0889a9a3",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_manage_support_incidents.svg",

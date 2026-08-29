@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.5,
   "sha256": "1458777452e6cca9511e50bae53cf570a089687150c4980dd9134d4856d01bf0",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_map_value_streams.svg",

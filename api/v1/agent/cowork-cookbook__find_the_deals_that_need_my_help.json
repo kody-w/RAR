@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.1,
   "sha256": "ec6d291a1f54411dbcf7f2999c1bb7b9c0b2a22302c45e3d7a938d626976e8ca",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__find_the_deals_that_need_my_help.svg",

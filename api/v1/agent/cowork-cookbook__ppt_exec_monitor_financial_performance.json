@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.4,
   "sha256": "295c4fee4492f23165a7b7bf265a4b41e167ceeb17d4f30ed553957e0e12861c",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_monitor_financial_performance.svg",

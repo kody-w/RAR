@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.7,
   "sha256": "8447bc2d87b01439368247670a26e34e13ae8e2f43adc7dcb3c1f5ec7d6c0422",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_adjust_notifications_and_alerts.svg",

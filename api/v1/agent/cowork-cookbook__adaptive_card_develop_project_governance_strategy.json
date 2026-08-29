@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.5,
   "sha256": "2716e2baae17405c9b09a4c521da9695998e49d67027a4ae3b2a48038c71ba5c",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__adaptive_card_develop_project_governance_strategy.svg",

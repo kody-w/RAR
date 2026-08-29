@@ -32,7 +32,7 @@
   "lines": 797,
   "size_kb": 40.6,
   "sha256": "bf6bd60cb5c17a940141985ed82be8eac8112213af58fcf1fd80403b1573ff11",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-26T17:18:46-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapter__rapp_dogg_agent.svg",

@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.4,
   "sha256": "7426e52d07d3c45a633a8d0203ed58a64da9533f2b859dddbd2ec23f331fda7a",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__d365_administer_to_operate.svg",

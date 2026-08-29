@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.3,
   "sha256": "ddbf82e84a7ea7bffcd5b30f62450e736eb6d776a14cf86ea7c095cd778834de",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__teams_update_transfer_assets.svg",

@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.7,
   "sha256": "7412edc3616bb8dfca6a9129a0bc35eb50e9b4a233099a95ba5955c382173c19",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__configure_develop_regulatory_compliance_strategy.svg",

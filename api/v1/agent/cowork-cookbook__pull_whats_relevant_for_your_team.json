@@ -29,7 +29,7 @@
   "lines": 190,
   "size_kb": 10.1,
   "sha256": "6f764939aa523b0822bc58cb35ea3eff7dd2548066690c8c000a3006d379722d",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__pull_whats_relevant_for_your_team.svg",

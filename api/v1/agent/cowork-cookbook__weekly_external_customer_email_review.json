@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.4,
   "sha256": "dd29a3bde5d5effec8061353884ddf9b61e2c461d5cd8801745a270d9d6196b2",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__weekly_external_customer_email_review.svg",

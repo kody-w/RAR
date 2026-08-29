@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-28T19:26:31Z",
-  "count": 1691,
+  "generated": "2026-08-29T00:39:23Z",
+  "count": 1692,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -59838,6 +59838,41 @@
         "lines": 39,
         "size_kb": 1.2,
         "added_at": "2026-04-06T16:39:03-04:00"
+      }
+    },
+    {
+      "id": "kody-w__hologram_dogg",
+      "name": "@kody-w/hologram_dogg",
+      "display_name": "HologramDOGG",
+      "description": "Lists the public RAR hologram DOGG channel and asks a local RAPP Zoo to summon a named, hash-verified character or data projection. Downloads data only; the zoo owns the sandboxed renderer.",
+      "version": "1.1.0",
+      "publisher": "@kody-w",
+      "author": "Kody Wildfeuer",
+      "category": "integrations",
+      "tags": [
+        "hologram",
+        "dogg",
+        "rar",
+        "rapp-zoo",
+        "three-js",
+        "summon"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/hologram_dogg_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hologram_dogg_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/hologram_dogg_agent.py",
+        "sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2"
+      },
+      "stats": {
+        "lines": 225,
+        "size_kb": 8.2,
+        "added_at": null
       }
     },
     {

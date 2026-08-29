@@ -30,7 +30,7 @@
   "lines": 338,
   "size_kb": 14.7,
   "sha256": "c4cdee134802fd1ced521940c6ef38d0a5dba2503acc4e8cd8da5e4367d075a3",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-26T17:18:46-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapter__hive_shape_agent.svg",

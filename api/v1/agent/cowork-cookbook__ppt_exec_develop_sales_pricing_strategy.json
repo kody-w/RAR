@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.4,
   "sha256": "7d381d19c23f443f9d77fd889f7f0a6a1ce93cae5fac230a9008c1f2458c44f2",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__ppt_exec_develop_sales_pricing_strategy.svg",

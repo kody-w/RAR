@@ -30,7 +30,7 @@
   "lines": 190,
   "size_kb": 10.3,
   "sha256": "8c1ed48c47ce69885a35cfee7cfc21a64cf71f290add4be7228537410e0b14f6",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cowork-cookbook__scheduled_brief_collect_interest.svg",
