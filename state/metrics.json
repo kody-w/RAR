@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-29T11:41:28Z",
+ "generated_at": "2026-08-30T10:31:02Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,10 +9,10 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 110,
-  "size_kb": 43057,
+  "open_issues": 112,
+  "size_kb": 45512,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-29T08:36:20Z",
+  "pushed_at": "2026-08-30T09:39:40Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -244,7 +244,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1904247,
+  "rank": 1912690,
   "agent_hits": 12,
   "files": [
    {
