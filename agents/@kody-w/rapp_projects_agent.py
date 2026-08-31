@@ -116,7 +116,7 @@ EGG_WARNING = (
     "approval; it contains no artifact bodies."
 )
 
-OPERATIONS = (
+OPERATION_SCHEMA_VALUES = [
     "protocol",
     "open",
     "punchin",
@@ -128,7 +128,68 @@ OPERATIONS = (
     "inspect",
     "export",
     "import",
-)
+]
+OPERATIONS = tuple(OPERATION_SCHEMA_VALUES)
+AGENT_PARAMETERS = {
+    "type": "object",
+    "properties": {
+        "operation": {"type": "string", "enum": OPERATION_SCHEMA_VALUES},
+        "root": {"type": "string"},
+        "project": {"type": "string"},
+        "title": {"type": "string"},
+        "goal": {"type": "string"},
+        "owner": {"type": "string"},
+        "origin": {"type": "string"},
+        "agent": {"type": "string"},
+        "runtime": {"type": "string"},
+        "session_id": {"type": "string"},
+        "location": {"type": "string"},
+        "intent": {"type": "string"},
+        "role": {"type": "string"},
+        "capabilities": {
+            "type": "array",
+            "items": {"type": "string"},
+        },
+        "status": {"type": "string"},
+        "artifacts": {"type": "array"},
+        "blockers": {
+            "type": "array",
+            "items": {"type": "string"},
+        },
+        "next_action": {"type": "string"},
+        "pct": {"type": "integer", "minimum": 0, "maximum": 100},
+        "project_state": {
+            "type": "string",
+            "enum": ["active", "blocked", "done", "parked"],
+        },
+        "from_agent": {"type": "string"},
+        "to_agent": {"type": "string"},
+        "doc": {"type": "string"},
+        "open_questions": {
+            "type": "array",
+            "items": {"type": "string"},
+        },
+        "outcome": {
+            "type": "string",
+            "enum": ["done", "blocked", "abandoned"],
+        },
+        "receipts": {"type": "array"},
+        "summary": {"type": "string"},
+        "egg": {"type": "string"},
+        "output": {"type": "string"},
+        "owner_approved": {"type": "boolean"},
+    },
+    "required": ["operation"],
+}
+AGENT_METADATA = {
+    "name": "RappProjects",
+    "display_name": "RappProjects",
+    "description": (
+        "Coordinates local-first projects through strict RAPP/1 work chains, "
+        "verified derived boards, artifact receipts, and deterministic eggs."
+    ),
+    "parameters": AGENT_PARAMETERS,
+}
 FRAME_KEYS = frozenset(
     {
         "spec",
@@ -2611,62 +2672,7 @@ class RappProjectsAgent(BasicAgent):
 
     def __init__(self):
         self.name = "RappProjects"
-        self.metadata = {
-            "name": self.name,
-            "display_name": __manifest__["display_name"],
-            "description": __manifest__["description"],
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "operation": {"type": "string", "enum": list(OPERATIONS)},
-                    "root": {"type": "string"},
-                    "project": {"type": "string"},
-                    "title": {"type": "string"},
-                    "goal": {"type": "string"},
-                    "owner": {"type": "string"},
-                    "origin": {"type": "string"},
-                    "agent": {"type": "string"},
-                    "runtime": {"type": "string"},
-                    SESSION_ID_FIELD: {"type": "string"},
-                    "location": {"type": "string"},
-                    "intent": {"type": "string"},
-                    "role": {"type": "string"},
-                    "capabilities": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                    },
-                    "status": {"type": "string"},
-                    "artifacts": {"type": "array"},
-                    "blockers": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                    },
-                    "next_action": {"type": "string"},
-                    "pct": {"type": "integer", "minimum": 0, "maximum": 100},
-                    "project_state": {
-                        "type": "string",
-                        "enum": ["active", "blocked", "done", "parked"],
-                    },
-                    "from_agent": {"type": "string"},
-                    "to_agent": {"type": "string"},
-                    "doc": {"type": "string"},
-                    "open_questions": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                    },
-                    "outcome": {
-                        "type": "string",
-                        "enum": ["done", "blocked", "abandoned"],
-                    },
-                    "receipts": {"type": "array"},
-                    "summary": {"type": "string"},
-                    "egg": {"type": "string"},
-                    "output": {"type": "string"},
-                    "owner_approved": {"type": "boolean"},
-                },
-                "required": ["operation"],
-            },
-        }
+        self.metadata = AGENT_METADATA
         super().__init__(name=self.name, metadata=self.metadata)
 
     def to_tool(self) -> dict[str, Any]:

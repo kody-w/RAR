@@ -82,6 +82,7 @@ def test_rapp_projects_scout_projection():
     skill_bytes = skill_path.read_bytes()
     linked_bytes = linked_agent.read_bytes()
     assert linked_bytes == source_bytes
+    assert b"## Parameters" in skill_bytes
     assert re.search(
         rf'^name:\s*"{re.escape(SKILL_NAME)}"$',
         skill_bytes.decode("utf-8"),
@@ -98,6 +99,17 @@ def test_rapp_projects_scout_projection():
     assert record["source_sha256"] == source_digest
     assert registry_entry["_sha256"] == source_digest
     assert record["skill_sha256"] == sha256(skill_bytes)
+
+    tool = subprocess.run(
+        [sys.executable, str(SOURCE), "--tool"],
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert tool.returncode == 0, tool.stderr
+    tool_contract = json.loads(tool.stdout)["function"]["parameters"]
+    assert record["parameters"] == tool_contract
+    assert record["parameters"]["required"] == ["operation"]
 
     for file_record in record["files"]:
         generated = skill_dir / file_record["path"]

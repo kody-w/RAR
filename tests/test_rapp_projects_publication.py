@@ -125,6 +125,9 @@ def _publisher_safe_text(text: str, role: str) -> str:
     if role == "metadata":
         return text.replace("kody-w", "publisher")
 
+    text = text.replace(IDENTITY, "@publisher/rapp_projects")
+    text = text.replace(SKILL_NAME, "rar-publisher-rapp-projects")
+
     spans: list[tuple[int, int]] = []
     if text.startswith("---"):
         frontmatter_end = text.find("\n---", 3)
