@@ -4,8 +4,8 @@
   "policy": "Append-only. Every path listed here has been published on main and must resolve forever. Add freely. Edit in place. Deprecate with a label. Never move, never rename, never delete.",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "cdn_base": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main",
-  "generated": "2026-08-29T00:39:16Z",
-  "count": 1842,
+  "generated": "2026-08-31T19:52:01Z",
+  "count": 1843,
   "paths": {
     "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/account_intelligence_agent.py": {
       "name": "@aibast-agents-library/account_intelligence",
@@ -7374,6 +7374,10 @@
     "agents/@kody-w/hologram_dogg_agent.py": {
       "name": "@kody-w/hologram_dogg",
       "first_seen": "2026-08-29T00:39:16Z"
+    },
+    "agents/@kody-w/rapp_projects_agent.py": {
+      "name": "@kody-w/rapp_projects",
+      "first_seen": "2026-08-31T11:52:12-04:00"
     }
   }
 }

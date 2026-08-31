@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-29T00:45:58Z",
+  "generated": "2026-08-31T19:54:00Z",
   "categories": [
     {
       "name": "integrations",
@@ -66,7 +66,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 65
+      "count": 66
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 1271
+      "count": 1272
     },
     {
       "name": "verified",
@@ -1153,10 +1153,6 @@
       "count": 2
     },
     {
-      "name": "rapp-1",
-      "count": 2
-    },
-    {
       "name": "canon",
       "count": 2
     },
@@ -1326,10 +1322,6 @@
     },
     {
       "name": "adventure",
-      "count": 1
-    },
-    {
-      "name": "game",
       "count": 1
     }
   ]
