@@ -19450,14 +19450,14 @@
     },
     "@kody-w/workiq": {
       "canonical_path": "agents/@kody-w/workiq_agent.py",
-      "latest_receipt": "rar_d02c4c808e78cc953374cb60f91f81e1fa6824ee84a73f46c537bbdcf6bdfb2d",
+      "latest_receipt": "rar_004802bb7bb300d1c245a2d89bfa7f712544c8bf32fe58f2f33d88a65d0230e3",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949",
+      "sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.2"
+      "updated_at": "2026-08-31T22:56:56.052070+00:00",
+      "version": "1.1.2"
     },
     "@kody-w/wp_publish": {
       "canonical_path": "agents/@kody-w/wp_publish.py",
@@ -20066,5 +20066,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-31T20:16:05.519450+00:00"
+  "updated_at": "2026-08-31T22:56:56.052070+00:00"
 }

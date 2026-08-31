@@ -3,13 +3,14 @@
   "id": "kody-w__workiq",
   "name": "WorkIQ",
   "rar_name": "@kody-w/workiq",
-  "rappid": "rappid:@kody-w/workiq:7d99714efccc6959f7addab14ff8798a743062a844810e13da0367b7af4c1d91",
-  "_migrated_from": "rappid:@kody-w/workiq:54ca00599803d99f2796d3ea329ae9f4eb73037bd0c22d1d72898393f61175e9",
+  "rappid": "rappid:@kody-w/workiq:335d8184efc1555eeb67637785d677688a23171f96326ff8c3be764cd14bb0c0",
+  "_migrated_from": "rappid:@kody-w/workiq:7d99714efccc6959f7addab14ff8798a743062a844810e13da0367b7af4c1d91",
   "_migrated_from_all": [
-    "rappid:@kody-w/workiq:54ca00599803d99f2796d3ea329ae9f4eb73037bd0c22d1d72898393f61175e9"
+    "rappid:@kody-w/workiq:54ca00599803d99f2796d3ea329ae9f4eb73037bd0c22d1d72898393f61175e9",
+    "rappid:@kody-w/workiq:7d99714efccc6959f7addab14ff8798a743062a844810e13da0367b7af4c1d91"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.2",
+  "version": "1.1.2",
   "publisher": "@kody-w",
   "category": "integrations",
   "tags": [
@@ -21,16 +22,16 @@
     "sharepoint",
     "workiq"
   ],
-  "description": "Queries Microsoft 365 data \u2014 email, calendar, SharePoint/OneDrive, Teams, people \u2014 by shelling out to the workiq CLI with Entra ID auth.",
+  "description": "Queries Microsoft 365 through the official Work IQ CLI, including direct entity reads for live Teams data when semantic ask results are insufficient.",
   "author": "Kody",
   "quality_tier": "official",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 249,
-  "size_kb": 9.5,
-  "sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949",
+  "lines": 526,
+  "size_kb": 20.6,
+  "sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/workiq",
   "agent_file": "workiq_agent.py",
-  "agent_sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949",
+  "agent_sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WorkIQAgent",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Queries Microsoft 365 data — email, calendar, SharePoint/OneDrive, Teams, people — by shelling out to the workiq CLI with Entra ID auth.",
+    "description": "Queries Microsoft 365 through the official Work IQ CLI, including direct entity reads for live Teams data when semantic ask results are insufficient.",
     "display_name": "WorkIQ",
     "example_call": "What emails did I receive from my manager this week?",
     "external_prereqs": [
@@ -32,12 +32,16 @@
       "sharepoint",
       "workiq"
     ],
-    "version": "1.0.2"
+    "version": "1.1.2"
   },
   "runtime_name": "WorkIQ",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "account": {
+        "description": "Optional cached Work IQ account email. Leave empty to use the CLI default account.",
+        "type": "string"
+      },
       "data_type": {
         "description": "Optional filter to search only specific data types. Default is 'all' which searches across all Microsoft 365 data.",
         "enum": [
@@ -50,19 +54,52 @@
         ],
         "type": "string"
       },
+      "entity_urls": {
+        "description": "Relative Work IQ entity paths for operation='fetch', for example '/me/chats' or '/me/chats/{id}/messages'.",
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "operation": {
+        "default": "auto",
+        "description": "Operation to run. 'auto' uses direct Teams entity reads for Teams queries and semantic ask otherwise.",
+        "enum": [
+          "auto",
+          "ask",
+          "teams_live",
+          "fetch",
+          "search_paths",
+          "get_schema"
+        ],
+        "type": "string"
+      },
       "query": {
         "description": "The natural language query to search Microsoft 365 data. Examples: 'What emails did I receive from John this week?', 'What meetings do I have tomorrow?', 'Find documents about the Q4 budget', 'What did the team say about the deadline in Teams?'",
         "type": "string"
       },
+      "schema_method": {
+        "default": "get",
+        "description": "Optional schema method filter.",
+        "enum": [
+          "get",
+          "post",
+          "patch",
+          "delete"
+        ],
+        "type": "string"
+      },
+      "schema_path": {
+        "description": "Relative Work IQ path for operation='get_schema'.",
+        "type": "string"
+      },
       "tenant_id": {
-        "description": "Optional Entra tenant ID for multi-tenant scenarios. Leave empty to use the default 'common' tenant.",
+        "description": "Legacy compatibility field. Current Work IQ builds select cached identities with the account parameter.",
         "type": "string"
       }
     },
-    "required": [
-      "query"
-    ],
+    "required": [],
     "type": "object"
   },
-  "version": "1.0.2"
+  "version": "1.1.2"
 }

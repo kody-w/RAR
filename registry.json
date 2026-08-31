@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-08-31T20:50:06.103416+00:00",
+  "generated_at": "2026-08-31T23:21:53.629624+00:00",
   "stats": {
     "total_agents": 1696,
     "total_swarms": 2,
@@ -169247,9 +169247,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/workiq",
-      "version": "1.0.2",
+      "version": "1.1.2",
       "display_name": "WorkIQ",
-      "description": "Queries Microsoft 365 data \u2014 email, calendar, SharePoint/OneDrive, Teams, people \u2014 by shelling out to the workiq CLI with Entra ID auth.",
+      "description": "Queries Microsoft 365 through the official Work IQ CLI, including direct entity reads for live Teams data when semantic ask results are insufficient.",
       "author": "Kody",
       "tags": [
         "m365",
@@ -169274,9 +169274,9 @@
       "example_call": "What emails did I receive from my manager this week?",
       "_file": "agents/@kody-w/workiq_agent.py",
       "_install_filename": "rar_kody_w_workiq_agent.py",
-      "_sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949",
+      "_sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
       "_lifecycle": "notarized",
-      "_receipt": "rar_d02c4c808e78cc953374cb60f91f81e1fa6824ee84a73f46c537bbdcf6bdfb2d",
+      "_receipt": "rar_004802bb7bb300d1c245a2d89bfa7f712544c8bf32fe58f2f33d88a65d0230e3",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -169293,8 +169293,8 @@
         ]
       },
       "_seed": 18420763323030972077,
-      "_size_kb": 9.5,
-      "_lines": 249,
+      "_size_kb": 20.6,
+      "_lines": 526,
       "_has_card": true,
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",

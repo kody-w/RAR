@@ -3339,7 +3339,7 @@
       ]
     },
     {
-      "bytes": 548414,
+      "bytes": 577932,
       "channel": "native",
       "files": 32,
       "id": "native-12",
@@ -113071,17 +113071,17 @@
     {
       "bundle": "native-12",
       "channel": "native",
-      "description": "Access Microsoft 365 data using natural language queries. Can search emails, calendar meetings, documents, Teams messages, and people information. Use this agent when the user wants to find or retrieve information from their Microsoft 365 tenant.",
+      "description": "Access Microsoft 365 through the official Work IQ CLI. For current Teams status, use operation='teams_live' or operation='fetch' instead of trusting a semantic 'no update' answer. Also supports ask, search_paths, and get_schema.",
       "example_args": {},
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "5ad8589dafd377d05de021ea892bfbe17c33cf17a37f6ea04e7280b239ea4135",
+          "sha256": "95dd9b5d62ddd0c641d8ae7da303d2753b44d4ac2a1cb0c3eb4988d6ec749925",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-workiq/SKILL.md"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "6bea0102b29a81eab65018977cb5185ad8c3c87d135c77e9d80c9f5977b12a8e",
+          "sha256": "178a643072f90a614a1cc8eaa2dd02c16cf848ce0d5f858417e2788217e8411a",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-workiq/rapp/agent.lock.json"
         },
         {
@@ -113091,7 +113091,7 @@
         },
         {
           "path": "workiq_agent.py",
-          "sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949",
+          "sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-workiq/workiq_agent.py"
         }
       ],
@@ -113100,6 +113100,10 @@
       "linked_agent": "workiq_agent.py",
       "parameters": {
         "properties": {
+          "account": {
+            "description": "Optional cached Work IQ account email. Leave empty to use the CLI default account.",
+            "type": "string"
+          },
           "data_type": {
             "description": "Optional filter to search only specific data types. Default is 'all' which searches across all Microsoft 365 data.",
             "enum": [
@@ -113112,27 +113116,60 @@
             ],
             "type": "string"
           },
+          "entity_urls": {
+            "description": "Relative Work IQ entity paths for operation='fetch', for example '/me/chats' or '/me/chats/{id}/messages'.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "operation": {
+            "default": "auto",
+            "description": "Operation to run. 'auto' uses direct Teams entity reads for Teams queries and semantic ask otherwise.",
+            "enum": [
+              "auto",
+              "ask",
+              "teams_live",
+              "fetch",
+              "search_paths",
+              "get_schema"
+            ],
+            "type": "string"
+          },
           "query": {
             "description": "The natural language query to search Microsoft 365 data. Examples: 'What emails did I receive from John this week?', 'What meetings do I have tomorrow?', 'Find documents about the Q4 budget', 'What did the team say about the deadline in Teams?'",
             "type": "string"
           },
+          "schema_method": {
+            "default": "get",
+            "description": "Optional schema method filter.",
+            "enum": [
+              "get",
+              "post",
+              "patch",
+              "delete"
+            ],
+            "type": "string"
+          },
+          "schema_path": {
+            "description": "Relative Work IQ path for operation='get_schema'.",
+            "type": "string"
+          },
           "tenant_id": {
-            "description": "Optional Entra tenant ID for multi-tenant scenarios. Leave empty to use the default 'common' tenant.",
+            "description": "Legacy compatibility field. Current Work IQ builds select cached identities with the account parameter.",
             "type": "string"
           }
         },
-        "required": [
-          "query"
-        ],
+        "required": [],
         "type": "object"
       },
       "requires_env": [],
       "skill_name": "rar-kody-w-workiq",
-      "skill_sha256": "5ad8589dafd377d05de021ea892bfbe17c33cf17a37f6ea04e7280b239ea4135",
-      "source_commit": "026f18b4093e3ec07c2f359dd9618438e020a0be",
+      "skill_sha256": "95dd9b5d62ddd0c641d8ae7da303d2753b44d4ac2a1cb0c3eb4988d6ec749925",
+      "source_commit": "working-tree",
       "source_kind": "rar-agent",
-      "source_sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949",
-      "version": "1.0.2"
+      "source_sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
+      "version": "1.1.2"
     },
     {
       "bundle": "native-12",
