@@ -113076,7 +113076,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "b6525fab9817fdc3ea2d2ceabd67bbf68eeb3abdbefe1d06cac9ff8ae0f46059",
+          "sha256": "00bceed83bfb61fda32543329fb3ca5cac972c96a93af11f0a6a88b1ed0f89f1",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-workiq/SKILL.md"
         },
         {
@@ -113165,8 +113165,8 @@
       },
       "requires_env": [],
       "skill_name": "rar-kody-w-workiq",
-      "skill_sha256": "b6525fab9817fdc3ea2d2ceabd67bbf68eeb3abdbefe1d06cac9ff8ae0f46059",
-      "source_commit": "c1e5a4e591cee3007b204676a8a236fa341939b4",
+      "skill_sha256": "00bceed83bfb61fda32543329fb3ca5cac972c96a93af11f0a6a88b1ed0f89f1",
+      "source_commit": "18db1bbd65dfdc2f1cd6756f698f4a1d59a7aa71",
       "source_kind": "rar-agent",
       "source_sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
       "version": "1.1.2"
