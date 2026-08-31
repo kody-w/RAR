@@ -20,7 +20,11 @@ other project roots, silently merge divergent histories, or send, publish,
 sign, pay, or delete external resources. It makes no network calls and never
 writes project state beside the agent. Artifact entries are references and
 receipts, not copied bodies. A `handoff` document is hashed and recorded as a
-receipt; its body is not copied into project state.
+receipt; its body is not copied into project state. External receipt paths are
+kept only in a private locator file inside the selected project. Chains,
+derived views, and eggs contain an opaque `local-private://` token instead of
+the machine path. Locator files are never exported; after import, those
+external receipts remain explicitly unverifiable until rebound locally.
 
 Each project lives at `<root>/<slug>/`. Its `chain.jsonl`, `rappid.json`, and
 `head.json` carry the authority; boards, status pages, indexes, and eggs are
@@ -44,9 +48,9 @@ derived projections that can be rebuilt from verified history.
 
 ## Operations
 
-Requests are JSON objects. `operation` is required; `action` is accepted as a
-compatibility alias. Project slugs use lowercase letters, numbers, and single
-hyphens.
+Requests are JSON objects. Supply `operation`, or use `action` as a
+compatibility alias. If both are present, `operation` wins; omitting both is an
+error. Project slugs use lowercase letters, numbers, and single hyphens.
 
 ### `protocol`
 
@@ -115,6 +119,8 @@ receipt without copying its body.
 
 This operation refuses to write without `owner_approved: true`, refuses an
 unverified project, and writes only the selected project's `PROJECT.egg`.
+The optional `output` compatibility field is accepted only when it resolves to
+that exact path; arbitrary output paths are refused.
 The egg is `local-private`: sharing it requires owner approval. Approval is per
 export; installing or invoking the skill is not approval. Its deterministic
 `rapp/1-egg` payload contains verified project metadata and chain projections,
@@ -145,6 +151,11 @@ protocol `step`:
 ```json
 {"status":"error","operation":"verify","error":{"code":"chain-verification","message":"verification failed","step":"<protocol-step>"}}
 ```
+
+An authoritative append remains a success if only its disposable view rebuild
+fails. In that case the result includes `view_refresh.status: "error"` with a
+sanitized error record, so callers do not retry and duplicate the committed
+frame.
 
 ## Use from Claude, Copilot, or Scout
 

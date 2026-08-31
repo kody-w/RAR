@@ -194,15 +194,13 @@ def export_egg(
     root: Path,
     *,
     project: str = PROJECT,
-    output: Path | None = None,
 ) -> tuple[Path, dict[str, object]]:
-    destination = output or root / project / "PROJECT.egg"
+    destination = root / project / "PROJECT.egg"
     result = perform(
         projects.RappProjectsAgent(),
         "export",
         project=project,
         root=str(root),
-        output=str(destination),
         owner_approved=True,
     )
     assert result["status"] == "ok", result
@@ -274,11 +272,11 @@ def mutate_egg(source: Path, destination: Path, mutation: str) -> Path:
     return destination
 
 
-def test_export_requires_fresh_explicit_owner_approval(
+def test_export_requires_approval_and_refuses_unbounded_output(
     projects, tmp_path: Path
 ) -> None:
     root = tmp_path / "projects"
-    output = tmp_path / "approval-project.egg"
+    outside = tmp_path / "must-not-overwrite.txt"
     open_project(projects, root)
 
     refused = perform(
@@ -286,15 +284,29 @@ def test_export_requires_fresh_explicit_owner_approval(
         "export",
         project=PROJECT,
         root=str(root),
-        output=str(output),
     )
 
     assert refused["status"] == "error"
     message = str(refused["error"]["message"]).lower()
     assert "owner" in message
     assert "approv" in message
-    assert not output.exists()
-    export_egg(projects, root, output=output)
+    assert not (root / PROJECT / "PROJECT.egg").exists()
+
+    outside.write_bytes(b"must remain unchanged")
+    unbounded = perform(
+        projects.RappProjectsAgent(),
+        "export",
+        project=PROJECT,
+        root=str(root),
+        output=str(outside),
+        owner_approved=True,
+    )
+    assert unbounded["status"] == "error"
+    assert "project.egg" in str(unbounded["error"]["message"]).lower()
+    assert outside.read_bytes() == b"must remain unchanged"
+
+    egg, _ = export_egg(projects, root)
+    assert egg == root / PROJECT / "PROJECT.egg"
 
 
 def test_export_is_a_canonical_deterministic_rapp_egg(
@@ -307,10 +319,9 @@ def test_export_is_a_canonical_deterministic_rapp_egg(
     open_project(projects, root)
     append_status(projects, root, artifacts=[str(artifact)])
 
-    output = tmp_path / "deterministic-project.egg"
-    egg, _ = export_egg(projects, root, output=output)
+    egg, _ = export_egg(projects, root)
     first_bytes = egg.read_bytes()
-    _, exported = export_egg(projects, root, output=output)
+    _, exported = export_egg(projects, root)
     assert egg.read_bytes() == first_bytes
     assert artifact_marker not in first_bytes
 
@@ -332,6 +343,7 @@ def test_export_is_a_canonical_deterministic_rapp_egg(
             if name != "manifest.json"
         }
 
+    assert ".receipt-locators.json" not in names
     assert manifest_bytes == canonical(manifest).encode("utf-8")
     assert set(manifest) == {
         "schema",
@@ -385,6 +397,75 @@ def test_export_is_a_canonical_deterministic_rapp_egg(
     assert reported_address == expected_address
 
 
+def test_egg_status_is_portable_across_working_directories(
+    projects,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = tmp_path / "projects"
+    open_project(projects, root)
+    punched_in = perform(
+        projects.RappProjectsAgent(),
+        "punchin",
+        root=str(root),
+        project=PROJECT,
+        agent="portable-runtime",
+        runtime="generic-runtime",
+        session_id="portable-session",
+        capabilities=["files"],
+        location=str(root / "private-worktree"),
+        intent="Prove CWD-independent egg verification",
+        role="builder",
+    )
+    assert punched_in["status"] == "ok"
+    egg, _ = export_egg(projects, root)
+
+    unrelated = tmp_path / "unrelated-working-directory"
+    unrelated.mkdir()
+    monkeypatch.chdir(unrelated)
+    verified = projects.verify_project_egg(egg)
+
+    assert verified["manifest"]["payload"]["project"] == PROJECT
+    assert b"[local-private-path]" in verified["files"]["STATUS.md"]
+
+
+def test_imported_external_receipts_are_unverifiable_until_rebound(
+    projects,
+    tmp_path: Path,
+) -> None:
+    source_root = tmp_path / "source-projects"
+    destination = tmp_path / "imported-projects"
+    artifact = tmp_path / "external-artifact.txt"
+    artifact.write_text("generic external evidence\n", encoding="utf-8")
+    open_project(projects, source_root)
+    append_status(projects, source_root, artifacts=[str(artifact)])
+    egg, _ = export_egg(projects, source_root)
+
+    imported = perform(
+        projects.RappProjectsAgent(),
+        "import",
+        root=str(destination),
+        egg=str(egg),
+    )
+    assert imported["status"] == "ok"
+    assert not (
+        destination / PROJECT / ".receipt-locators.json"
+    ).exists()
+
+    verified = perform(
+        projects.RappProjectsAgent(),
+        "verify",
+        root=str(destination),
+        project=PROJECT,
+    )
+    assert verified["status"] == "ok"
+    assert verified["verdict"] == "fail"
+    assert len(verified["broken_receipts"]) == 1
+    assert verified["broken_receipts"][0]["path"].startswith(
+        "local-private://"
+    )
+
+
 @pytest.mark.parametrize(
     "mutation",
     ["traversal", "duplicate", "undeclared", "missing", "hash"],
@@ -394,11 +475,7 @@ def test_import_rejects_malformed_egg_before_creating_destination(
 ) -> None:
     source_root = tmp_path / "source-projects"
     open_project(projects, source_root)
-    source, _ = export_egg(
-        projects,
-        source_root,
-        output=tmp_path / "source-project.egg",
-    )
+    source, _ = export_egg(projects, source_root)
     malformed = mutate_egg(
         source, tmp_path / f"{mutation}-project.egg", mutation
     )
@@ -421,11 +498,7 @@ def test_import_is_idempotent(projects, tmp_path: Path) -> None:
     destination = tmp_path / "imported-projects"
     open_project(projects, source_root)
     append_status(projects, source_root, status="ready", pct=80)
-    egg, _ = export_egg(
-        projects,
-        source_root,
-        output=tmp_path / "portable-project.egg",
-    )
+    egg, _ = export_egg(projects, source_root)
 
     first = perform(
         projects.RappProjectsAgent(),
@@ -454,11 +527,7 @@ def test_divergent_import_is_refused_without_mutation(
     left = tmp_path / "left-projects"
     right = tmp_path / "right-projects"
     open_project(projects, left)
-    seed, _ = export_egg(
-        projects,
-        left,
-        output=tmp_path / "seed-project.egg",
-    )
+    seed, _ = export_egg(projects, left)
     imported = perform(
         projects.RappProjectsAgent(),
         "import",
@@ -468,11 +537,7 @@ def test_divergent_import_is_refused_without_mutation(
     assert imported["status"] == "ok"
     append_status(projects, left, status="left-branch", pct=40)
     append_status(projects, right, status="right-branch", pct=45)
-    left_egg, _ = export_egg(
-        projects,
-        left,
-        output=tmp_path / "left-project.egg",
-    )
+    left_egg, _ = export_egg(projects, left)
     before = snapshot(right)
 
     refused = perform(

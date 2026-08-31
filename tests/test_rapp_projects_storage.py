@@ -339,6 +339,41 @@ def test_corruption_is_never_returned_as_a_success_shaped_result(
     assert authoritative_frame_count(root, "alpha-project") == count_before
 
 
+def test_committed_append_reports_view_refresh_failure_without_retry_signal(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, root, "alpha-project")["status"] == "ok"
+    assert open_project(agent, root, "beta-project")["status"] == "ok"
+    corrupt_genesis_title(root, "beta-project", "unverified sibling mutation")
+    count_before = authoritative_frame_count(root, "alpha-project")
+
+    result = perform(
+        agent,
+        "status",
+        root=root,
+        project="alpha-project",
+        **actor(),
+        location="project://work",
+        status="authoritative append committed",
+        artifacts=[],
+        blockers=[],
+        next_action="Repair the sibling before rebuilding views",
+        pct=60,
+    )
+
+    assert result["status"] == "ok"
+    assert result["operation"] == "status"
+    assert result["view_refresh"]["status"] == "error"
+    assert result["view_refresh"]["error"]["code"] == "chain-verification"
+    assert authoritative_frame_count(root, "alpha-project") == count_before + 1
+    assert frames(root, "alpha-project")[-1]["payload"]["status"] == (
+        "authoritative append committed"
+    )
+
+
 def test_root_and_project_cells_have_exact_manifests_and_separate_lineage(
     projects, tmp_path: Path
 ) -> None:
@@ -568,6 +603,16 @@ def test_artifact_receipts_hash_content_without_copying_artifact_bodies(
     assert receipt["exists"] is True
     assert receipt["sha256"] == hashlib.sha256(body).hexdigest()
     assert receipt.get("bytes", receipt.get("size")) == len(body)
+    assert re.fullmatch(r"local-private://[0-9a-f]{32}", receipt["path"])
+    locators = json.loads(
+        (
+            project_directory(root, "alpha-project")
+            / ".receipt-locators.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert locators["paths"][receipt["path"].removeprefix(
+        "local-private://"
+    )] == str(artifact.resolve())
     project = project_directory(root, "alpha-project")
     assert not any(
         path.is_file() and path.name == artifact.name
@@ -578,6 +623,25 @@ def test_artifact_receipts_hash_content_without_copying_artifact_bodies(
         for path in project.rglob("*")
         if path.is_file()
     )
+
+    verified = perform(
+        agent,
+        "verify",
+        root=root,
+        project="alpha-project",
+    )
+    assert verified["verdict"] == "pass"
+
+    artifact.write_bytes(body + b"-mutated")
+    broken = perform(
+        agent,
+        "verify",
+        root=root,
+        project="alpha-project",
+    )
+    assert broken["status"] == "ok"
+    assert broken["verdict"] == "fail"
+    assert broken["broken_receipts"] == [receipt]
 
 
 def test_windows_file_lock_backend_locks_and_unlocks_one_byte(

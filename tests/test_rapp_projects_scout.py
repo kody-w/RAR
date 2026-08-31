@@ -109,7 +109,10 @@ def test_rapp_projects_scout_projection():
     assert tool.returncode == 0, tool.stderr
     tool_contract = json.loads(tool.stdout)["function"]["parameters"]
     assert record["parameters"] == tool_contract
-    assert record["parameters"]["required"] == ["operation"]
+    assert record["parameters"]["anyOf"] == [
+        {"required": ["operation"]},
+        {"required": ["action"]},
+    ]
 
     for file_record in record["files"]:
         generated = skill_dir / file_record["path"]

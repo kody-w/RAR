@@ -37,10 +37,12 @@ Operations
 The storage root is selected in this order: explicit ``root`` argument,
 ``RAPP_PROJECTS_ROOT``, then ``~/.rapp/projects-control``.  State is never
 written beside this agent.  The implementation uses only Python's standard
-library plus the required ``BasicAgent`` base dependency.
+library plus the required ``BasicAgent`` base dependency. External receipt
+paths stay in private locator metadata under that root and never enter eggs.
 
 Standalone use accepts one JSON object as a Python argv value or on stdin.
-Run the file with ``--tool`` to print its callable operation schema.
+Run the file with ``--tool`` to print its callable operation schema. Supply
+``operation``; ``action`` is a compatibility alias, and omission is refused.
 """
 
 from __future__ import annotations
@@ -77,7 +79,7 @@ except (ImportError, ModuleNotFoundError):
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_projects",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "RappProjects",
     "description": (
         "Coordinates local-first projects through strict RAPP/1 work chains, "
@@ -108,6 +110,7 @@ INDEX_SCHEMA = "rapp-projects/index/1"
 IDENTITY_SCHEMA = "rapp/1"
 HEAD_SCHEMA = "rapp-project-head/1"
 RECEIPT_SCHEMA = "rapp-artifact-receipt/1"
+RECEIPT_LOCATORS_SCHEMA = "rapp-receipt-locators/1"
 ROOT_LINEAGE_SCHEMA = "rapp-project-lineage/1"
 PROJECT_LINEAGE_SCHEMA = "rapp-project-lineage/1"
 SESSION_ID_FIELD = "session_id"
@@ -134,6 +137,13 @@ AGENT_PARAMETERS = {
     "type": "object",
     "properties": {
         "operation": {"type": "string", "enum": OPERATION_SCHEMA_VALUES},
+        "action": {
+            "type": "string",
+            "enum": OPERATION_SCHEMA_VALUES,
+            "description": (
+                "Compatibility alias for operation; operation takes precedence."
+            ),
+        },
         "root": {"type": "string"},
         "project": {"type": "string"},
         "title": {"type": "string"},
@@ -179,7 +189,10 @@ AGENT_PARAMETERS = {
         "output": {"type": "string"},
         "owner_approved": {"type": "boolean"},
     },
-    "required": ["operation"],
+    "anyOf": [
+        {"required": ["operation"]},
+        {"required": ["action"]},
+    ],
 }
 AGENT_METADATA = {
     "name": "RappProjects",
@@ -258,6 +271,7 @@ KIND = re.compile(
     r"\.[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"
 )
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
+LOCATOR_TOKEN = re.compile(r"^[0-9a-f]{32}$")
 UTC = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$")
 RAPPID = re.compile(
     r"^rappid:@"
@@ -1076,6 +1090,62 @@ def _view_path(path: Path, project: str, root: Path) -> str:
     return unicodedata.normalize("NFC", "local-private://" + path.name)
 
 
+def _validate_receipt_locators(value: Any) -> dict[str, Any]:
+    if (
+        not isinstance(value, dict)
+        or set(value) != {"schema", "paths"}
+        or value["schema"] != RECEIPT_LOCATORS_SCHEMA
+        or not isinstance(value["paths"], dict)
+    ):
+        raise RappProjectsError("receipt locator metadata is invalid")
+    paths: dict[str, str] = {}
+    for token, location in value["paths"].items():
+        if (
+            not isinstance(token, str)
+            or not LOCATOR_TOKEN.fullmatch(token)
+            or not isinstance(location, str)
+            or not location
+        ):
+            raise RappProjectsError("receipt locator entry is invalid")
+        path = Path(location).expanduser()
+        if not path.is_absolute():
+            raise RappProjectsError("receipt locator path must be absolute")
+        paths[token] = str(path)
+    normalized = {"schema": RECEIPT_LOCATORS_SCHEMA, "paths": paths}
+    canonical(normalized)
+    return normalized
+
+
+def _load_receipt_locators(project: str, root: Path) -> dict[str, Any]:
+    path = project_dir(project, root) / ".receipt-locators.json"
+    if not path.exists():
+        return {"schema": RECEIPT_LOCATORS_SCHEMA, "paths": {}}
+    return _validate_receipt_locators(_read_json(path))
+
+
+def _register_receipt_locator(path: Path, project: str, root: Path) -> str:
+    directory = project_dir(project, root)
+    if not directory.is_dir() or directory.is_symlink():
+        raise RappProjectsError("receipt project directory is unavailable")
+    location = str(path.resolve())
+    with _PROCESS_LOCK:
+        with file_lock(directory / ".chain.lock"):
+            locators = _load_receipt_locators(project, root)
+            token = next(
+                (
+                    candidate
+                    for candidate, existing in locators["paths"].items()
+                    if existing == location
+                ),
+                None,
+            )
+            if token is None:
+                token = uuid.uuid4().hex
+                locators["paths"][token] = location
+                _atomic_json(directory / ".receipt-locators.json", locators)
+    return "local-private://" + token
+
+
 def _resolve_receipt_path(
     value: str,
     *,
@@ -1093,7 +1163,14 @@ def _resolve_receipt_path(
             return None
         return safe_join(root, relative)
     if value.startswith("local-private://"):
-        return None
+        token = value[len("local-private://") :]
+        if not LOCATOR_TOKEN.fullmatch(token):
+            return None
+        location = _load_receipt_locators(project, root)["paths"].get(token)
+        if location is None:
+            return None
+        path = Path(location).expanduser()
+        return path.resolve() if path.is_absolute() else None
     raw = Path(value).expanduser()
     if raw.is_absolute():
         return raw.resolve()
@@ -1123,7 +1200,9 @@ def artifact_receipt(value: Any, project: Any, root: Any = None) -> dict[str, An
             existing["path"], project=project, root=root_path
         )
         if resolved is None:
-            return existing
+            raise RappProjectsError(
+                "supplied artifact receipt cannot be verified on this device"
+            )
         current = artifact_receipt(
             str(resolved), project=project, root=root_path
         )
@@ -1139,9 +1218,13 @@ def artifact_receipt(value: Any, project: Any, root: Any = None) -> dict[str, An
         raise RappProjectsError(
             "local-private receipt URIs can only be reused as complete receipts"
         )
-    logical = _view_path(resolved, project, root_path)
     if resolved.is_symlink():
         raise RappProjectsError("artifact receipts refuse symbolic links")
+    logical = (
+        _view_path(resolved, project, root_path)
+        if _is_within(resolved, root_path)
+        else _register_receipt_locator(resolved, project, root_path)
+    )
     if not resolved.exists():
         return {
             "schema": RECEIPT_SCHEMA,
@@ -1642,6 +1725,8 @@ def open_project(
     owner: str,
     origin: str,
     root: Any = None,
+    *,
+    refresh: bool = True,
 ) -> dict[str, Any] | None:
     project = require_slug(project)
     root_path = ensure_root(root)
@@ -1709,7 +1794,8 @@ def open_project(
                     shutil.rmtree(directory)
                 _atomic_json(root_path / "manifest.json", old_manifest)
                 raise
-    refresh_views(root_path)
+    if refresh:
+        refresh_views(root_path)
     return frame
 
 
@@ -1734,7 +1820,9 @@ def _verify_receipts(
             resolved = _resolve_receipt_path(
                 receipt["path"], project=project, root=root
             )
-            if resolved is not None and receipt["exists"]:
+            if resolved is None and receipt["exists"]:
+                problem = True
+            elif resolved is not None and receipt["exists"]:
                 if resolved.is_symlink() or not resolved.is_file():
                     problem = True
                 else:
@@ -1908,8 +1996,15 @@ def fold_project(
     return state
 
 
-def _sanitize_text(value: Any, root: Path | None = None) -> str:
+def _sanitize_text(
+    value: Any,
+    root: Path | None = None,
+    *,
+    portable: bool = False,
+) -> str:
     text = str(value or "")
+    if portable:
+        return ABSOLUTE_PATH.sub("[local-private-path]", text)
     replacements = [
         (str(_AGENT_DIRECTORY), "[agent-directory]"),
         (str(Path.home().resolve()), "[home]"),
@@ -1922,18 +2017,34 @@ def _sanitize_text(value: Any, root: Path | None = None) -> str:
     return ABSOLUTE_PATH.sub("[local-private-path]", text)
 
 
-def _public_value(value: Any, root: Path) -> Any:
+def _public_value(
+    value: Any,
+    root: Path | None,
+    *,
+    portable: bool = False,
+) -> Any:
     if isinstance(value, str):
-        return _sanitize_text(value, root)
+        return _sanitize_text(value, root, portable=portable)
     if isinstance(value, list):
-        return [_public_value(item, root) for item in value]
+        return [
+            _public_value(item, root, portable=portable)
+            for item in value
+        ]
     if isinstance(value, dict):
-        return {key: _public_value(child, root) for key, child in value.items()}
+        return {
+            key: _public_value(child, root, portable=portable)
+            for key, child in value.items()
+        }
     return value
 
 
-def _status_markdown(state: dict[str, Any], root: Path) -> str:
-    public = _public_value(state, root)
+def _status_markdown(
+    state: dict[str, Any],
+    root: Path | None,
+    *,
+    portable: bool = False,
+) -> str:
+    public = _public_value(state, root, portable=portable)
     agents = ", ".join(sorted(public["agents"])) or "none"
     blockers = "; ".join(public["blockers"]) or "none"
     artifacts = "\n".join(
@@ -2081,6 +2192,7 @@ def verify_project(
     root: Any = None,
     *,
     append_verdict: bool = True,
+    refresh: bool = True,
 ) -> dict[str, Any]:
     project = require_slug(project)
     root_path = ensure_root(root)
@@ -2105,7 +2217,7 @@ def verify_project(
                     },
                     root_path,
                 )
-    if append_verdict:
+    if append_verdict and refresh:
         refresh_views(root_path)
     return {
         "project": project,
@@ -2237,8 +2349,7 @@ def _export_files(
     directory = project_dir(project, root)
     metadata = _validate_project_metadata(directory, project)
     state = fold_project(project, frames, root)
-    status = _status_markdown(state, root).encode("utf-8")
-    _atomic_bytes(directory / "STATUS.md", status)
+    status = _status_markdown(state, None, portable=True).encode("utf-8")
     rappid = metadata["identity"]["rappid"]
     return {
         "STATUS.md": status,
@@ -2304,15 +2415,18 @@ def export_project_egg(
                 [("manifest.json", manifest_bytes)]
                 + [(item["path"], files[item["path"]]) for item in contents]
             )
-            destination = (
-                Path(str(output)).expanduser()
-                if output not in (None, "")
-                else directory / "PROJECT.egg"
-            )
-            if not destination.is_absolute():
-                destination = (Path.cwd() / destination).resolve()
-            else:
-                destination = destination.resolve()
+            destination = (directory / "PROJECT.egg").resolve()
+            if output not in (None, ""):
+                requested = Path(str(output)).expanduser()
+                requested = (
+                    requested.resolve()
+                    if requested.is_absolute()
+                    else safe_join(directory, requested)
+                )
+                if requested != destination:
+                    raise RappProjectsError(
+                        "egg output must be the selected project's PROJECT.egg"
+                    )
             if destination.exists() and destination.is_symlink():
                 raise RappProjectsError("egg output cannot be a symbolic link")
             _atomic_bytes(destination, archive)
@@ -2492,7 +2606,11 @@ def verify_project_egg(path: Any) -> dict[str, Any]:
     ):
         raise EggVerificationError("egg chain head metadata does not match")
     state = fold_project(project, frames, root=Path.cwd())
-    expected_status = _status_markdown(state, Path.cwd()).encode("utf-8")
+    expected_status = _status_markdown(
+        state,
+        None,
+        portable=True,
+    ).encode("utf-8")
     if files["STATUS.md"] != expected_status:
         raise EggVerificationError("egg STATUS.md is not derived from its chain")
     egg_hash = H(
@@ -2516,7 +2634,12 @@ def _frame_hashes(frames: list[dict[str, Any]]) -> list[str]:
     return [frame["frame_hash"] for frame in frames]
 
 
-def import_project_egg(path: Any, root: Any = None) -> dict[str, Any]:
+def import_project_egg(
+    path: Any,
+    root: Any = None,
+    *,
+    refresh: bool = True,
+) -> dict[str, Any]:
     """Verify the full egg first, then create or fast-forward without reparenting."""
     verified = verify_project_egg(path)
     manifest = verified["manifest"]
@@ -2596,7 +2719,8 @@ def import_project_egg(path: Any, root: Any = None) -> dict[str, Any]:
                         shutil.rmtree(directory)
                     _atomic_json(root_path / "manifest.json", old_manifest)
                     raise
-    refresh_views(root_path)
+    if refresh:
+        refresh_views(root_path)
     return {
         "project": project,
         "created": created,
@@ -2610,7 +2734,7 @@ def import_project_egg(path: Any, root: Any = None) -> dict[str, Any]:
 PROTOCOL = {
     "schema": "rapp-projects-protocol/1",
     "agent": __manifest__["name"],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "operations": list(OPERATIONS),
     "root_precedence": [
         "explicit root",
@@ -2661,6 +2785,10 @@ PROTOCOL = {
     "boundaries": {
         "network": False,
         "artifact_bodies_copied": False,
+        "external_receipts": (
+            "private locators excluded from eggs; unresolved locators fail"
+        ),
+        "egg_output": "<root>/<project>/PROJECT.egg only",
         "corruption_policy": "fail closed",
         "fork_policy": "refuse divergence",
     },
@@ -2702,6 +2830,24 @@ class RappProjectsAgent(BasicAgent):
             separators=(",", ":"),
         )
 
+    def _result_after_refresh(
+        self,
+        operation: str,
+        root: Path,
+        **values: Any,
+    ) -> str:
+        try:
+            refresh_views(root)
+        except (RappProjectsError, OSError) as exc:
+            values["view_refresh"] = {
+                "status": "error",
+                "error": {
+                    "code": getattr(exc, "code", "view-refresh-failed"),
+                    "message": _sanitize_text(str(exc), root)[:MAX_ERROR_CHARS],
+                },
+            }
+        return self._result(operation, **values)
+
     def _error(
         self,
         operation: str,
@@ -2729,15 +2875,24 @@ class RappProjectsAgent(BasicAgent):
         )
 
     def perform(self, **kwargs: Any) -> str:
-        operation_value = kwargs.get("operation", kwargs.get("action", "protocol"))
+        if "operation" in kwargs:
+            operation_value = kwargs["operation"]
+        elif "action" in kwargs:
+            operation_value = kwargs["action"]
+        else:
+            operation_value = None
         operation = (
-            operation_value.lower()[:64]
+            operation_value.strip().lower()[:64]
             if isinstance(operation_value, str)
-            else "invalid"
+            else ("missing" if operation_value is None else "invalid")
         )
         root_path: Path | None = None
         try:
             canonical(dict(kwargs))
+            if operation_value is None:
+                raise RappProjectsError(
+                    "operation is required; action is a compatibility alias"
+                )
             if operation not in OPERATIONS:
                 raise RappProjectsError("unknown operation")
             if operation == "protocol":
@@ -2758,10 +2913,12 @@ class RappProjectsAgent(BasicAgent):
                     _string(kwargs.get("owner"), "owner", 200, "local-owner"),
                     _string(kwargs.get("origin"), "origin", 1000, "local"),
                     root_path,
+                    refresh=False,
                 )
                 frames = load_chain(project, root_path)
-                return self._result(
+                return self._result_after_refresh(
                     operation,
+                    root_path,
                     project=project,
                     created=frame is not None,
                     rappid=frames[0]["stream_id"].rsplit(":", 1)[0],
@@ -2804,8 +2961,12 @@ class RappProjectsAgent(BasicAgent):
                 egg = kwargs.get("egg", kwargs.get("path"))
                 if not isinstance(egg, (str, os.PathLike)) or not str(egg):
                     raise RappProjectsError("import requires egg")
-                result = import_project_egg(egg, root_path)
-                return self._result(operation, **result)
+                result = import_project_egg(egg, root_path, refresh=False)
+                return self._result_after_refresh(
+                    operation,
+                    root_path,
+                    **result,
+                )
 
             project = require_slug(kwargs.get("project"))
 
@@ -2849,9 +3010,11 @@ class RappProjectsAgent(BasicAgent):
                         ),
                     },
                     root_path,
+                    refresh=False,
                 )
-                return self._result(
+                return self._result_after_refresh(
                     operation,
+                    root_path,
                     project=project,
                     seq=frame["seq"],
                     frame_hash=frame["frame_hash"],
@@ -2892,10 +3055,15 @@ class RappProjectsAgent(BasicAgent):
                         kwargs["project_state"], "project_state", 20
                     )
                 frame = append_frame(
-                    project, "work.status", payload, root_path
+                    project,
+                    "work.status",
+                    payload,
+                    root_path,
+                    refresh=False,
                 )
-                return self._result(
+                return self._result_after_refresh(
                     operation,
+                    root_path,
                     project=project,
                     seq=frame["seq"],
                     frame_hash=frame["frame_hash"],
@@ -2934,9 +3102,11 @@ class RappProjectsAgent(BasicAgent):
                         ),
                     },
                     root_path,
+                    refresh=False,
                 )
-                return self._result(
+                return self._result_after_refresh(
                     operation,
+                    root_path,
                     project=project,
                     seq=frame["seq"],
                     frame_hash=frame["frame_hash"],
@@ -2968,19 +3138,27 @@ class RappProjectsAgent(BasicAgent):
                         ),
                     },
                     root_path,
+                    refresh=False,
                 )
-                return self._result(
+                return self._result_after_refresh(
                     operation,
+                    root_path,
                     project=project,
                     seq=frame["seq"],
                     frame_hash=frame["frame_hash"],
                 )
 
             if operation == "verify":
-                result = verify_project(project, root_path, append_verdict=True)
+                result = verify_project(
+                    project,
+                    root_path,
+                    append_verdict=True,
+                    refresh=False,
+                )
                 frame = result.pop("frame")
-                return self._result(
+                return self._result_after_refresh(
                     operation,
+                    root_path,
                     **result,
                     seq=frame["seq"],
                     verification_frame_hash=frame["frame_hash"],

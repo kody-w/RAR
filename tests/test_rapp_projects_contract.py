@@ -36,6 +36,7 @@ EXPECTED_OPERATIONS = [
 
 EXPECTED_PARAMETER_TYPES = {
     "operation": "string",
+    "action": "string",
     "root": "string",
     "project": "string",
     "title": "string",
@@ -118,7 +119,7 @@ def test_manifest_identity_version_category_tags_and_dependency(module):
     manifest = module.__manifest__
     assert manifest["schema"] == "rapp-agent/1.0"
     assert manifest["name"] == "@kody-w/rapp_projects"
-    assert manifest["version"] == "1.0.0"
+    assert manifest["version"] == "1.0.1"
     assert manifest["display_name"] == "RappProjects"
     assert manifest["category"] == "productivity"
     assert manifest["tags"] == [
@@ -139,7 +140,10 @@ def test_class_runtime_name_and_metadata_match(module):
     assert instance.metadata["display_name"] == instance.name
     assert instance.metadata["description"] == module.__manifest__["description"]
     assert instance.metadata["parameters"]["type"] == "object"
-    assert instance.metadata["parameters"]["required"] == ["operation"]
+    assert instance.metadata["parameters"]["anyOf"] == [
+        {"required": ["operation"]},
+        {"required": ["action"]},
+    ]
 
 
 def test_operation_enum_and_parameter_types_are_complete(agent):
@@ -150,6 +154,7 @@ def test_operation_enum_and_parameter_types_are_complete(agent):
         for name, schema in properties.items()
     } == EXPECTED_PARAMETER_TYPES
     assert properties["operation"]["enum"] == EXPECTED_OPERATIONS
+    assert properties["action"]["enum"] == EXPECTED_OPERATIONS
     assert properties["outcome"]["enum"] == ["done", "blocked", "abandoned"]
     for name in STRING_ARRAY_PARAMETERS & {
         "capabilities",
@@ -168,6 +173,33 @@ def test_every_operation_returns_a_json_string(agent, tmp_path):
             project="contract-fixture",
         )
         parse_result(result)
+
+
+def test_operation_is_canonical_and_action_is_a_compatibility_alias(
+    agent,
+    tmp_path,
+):
+    action_only = parse_result(
+        agent.perform(action="board", root=str(tmp_path / "action-root"))
+    )
+    assert action_only["status"] == "ok"
+    assert action_only["operation"] == "board"
+
+    operation_wins = parse_result(
+        agent.perform(
+            operation="protocol",
+            action="board",
+            root=str(tmp_path / "precedence-root"),
+        )
+    )
+    assert operation_wins["status"] == "ok"
+    assert operation_wins["operation"] == "protocol"
+    assert not (tmp_path / "precedence-root").exists()
+
+    missing = parse_result(agent.perform())
+    assert missing["status"] == "error"
+    assert missing["operation"] == "missing"
+    assert "required" in missing["error"]["message"]
 
 
 def test_explicit_root_overrides_environment(module, monkeypatch, tmp_path):

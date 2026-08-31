@@ -81,7 +81,7 @@ def run_source(
         check=False,
     )
     assert process.returncode == 0, process.stderr
-    expected = arguments.get("action", arguments.get("operation"))
+    expected = arguments.get("operation", arguments.get("action"))
     return decode_result(process.stdout, str(expected))
 
 
@@ -131,7 +131,7 @@ def run_scout_or_source(arguments: dict[str, object]) -> dict:
         check=False,
     )
     assert process.returncode == 0, process.stderr
-    expected = arguments.get("action", arguments.get("operation"))
+    expected = arguments.get("operation", arguments.get("action"))
     return decode_result(process.stdout, str(expected))
 
 
@@ -184,9 +184,22 @@ def authoritative_snapshot(root: Path) -> bytes:
 
 def public_operation_key(agent) -> str:
     properties = agent.metadata["parameters"]["properties"]
-    keys = [name for name in ("action", "operation") if name in properties]
-    assert len(keys) == 1
-    return keys[0]
+    assert "operation" in properties
+    assert "action" in properties
+    return "operation"
+
+
+def test_action_alias_is_interoperable_but_operation_takes_precedence():
+    agent = load_agent()
+    direct = decode_result(agent.perform(action="protocol"), "protocol")
+    standalone = run_source({"action": "protocol"})
+    projected = run_scout_or_source({"action": "protocol"})
+    precedence = run_source({"operation": "protocol", "action": "board"})
+
+    assert direct["operation"] == "protocol"
+    assert standalone["operation"] == "protocol"
+    assert projected["operation"] == "protocol"
+    assert precedence["operation"] == "protocol"
 
 
 def test_independent_callers_share_one_append_only_project_chain(tmp_path):

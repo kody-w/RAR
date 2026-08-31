@@ -244,8 +244,9 @@ def scan_public_text(label: str, text: str, role: str = "content") -> list[str]:
 
     metadata_keys = "|".join(PRIVATE_METADATA_KEYS)
     if re.search(
-        rf"(?i)[\"'](?:{metadata_keys})[\"']\s*(?::|=)\s*(?!None|null|"
-        rf"[\"']?(?:<|\{{|demo|example|optional|placeholder|redacted|sample))",
+        rf"(?i)[\"'](?:{metadata_keys})[\"']\s*(?::|=)"
+        rf"(?!\s*(?:None|null|[\"']?(?:<|\{{|demo|example|optional|"
+        rf"placeholder|redacted|sample)))",
         text,
     ):
         add("source chain", "private provenance/session metadata")
@@ -418,13 +419,23 @@ https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40kody-w/rapp_projects
 
 def test_privacy_scanner_accepts_generic_examples_and_public_identity_locations():
     manifest = '__manifest__ = {"name": "@kody-w/rapp_projects"}'
+    schema = '{"session_id": {"type": "string"}}'
     assert scan_public_text("generic examples", SAFE_GENERIC_EXAMPLES) == []
     assert scan_public_text("manifest", manifest, "source") == []
+    assert scan_public_text("tool schema", schema, "source") == []
     assert scan_public_text(
         "catalog",
         '{"identity": "@kody-w/rapp_projects"}',
         "metadata",
     ) == []
+    assert any(
+        ": source chain:" in finding
+        for finding in scan_public_text(
+            "concrete session",
+            '{"session_id": "private-session-value"}',
+            "source",
+        )
+    )
 
 
 SEEDED_MUTATIONS = [
