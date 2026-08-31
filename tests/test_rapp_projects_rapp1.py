@@ -235,6 +235,48 @@ def test_frame_has_exact_keys_and_normative_domain_separated_hashes(module) -> N
     ) == frame["frame_hash"]
 
 
+def test_verification_frame_must_cover_its_immediate_predecessor(module) -> None:
+    stream_id = _stream(module)
+    genesis = _frame(module, stream_id=stream_id)
+    verdict = _frame(
+        module,
+        stream_id=stream_id,
+        kind="project.verify",
+        seq=1,
+        utc=UTC1,
+        prev=genesis["payload_hash"],
+        payload={
+            "project": "alpha",
+            "verdict": "pass",
+            "broken_receipts": [],
+            "verified_frames": 1,
+            "head_frame_hash": genesis["frame_hash"],
+        },
+    )
+    assert module.verify_frame(
+        verdict,
+        head=genesis,
+        stream_id=stream_id,
+        project="alpha",
+    ) == (True, None)
+
+    forged = deepcopy(verdict)
+    forged["payload"]["verified_frames"] = 99
+    forged["payload_hash"] = module.H(
+        "rapp/1:particle",
+        forged["payload"],
+    )
+    forged = _rehash(module, forged)
+    ok, reason = module.verify_frame(
+        forged,
+        head=genesis,
+        stream_id=stream_id,
+        project="alpha",
+    )
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 4:")
+
+
 def test_jcs_numbers_round_trip_or_are_refused(module) -> None:
     assert module.canonical(
         {"n": [0.1, -0.0, 9007199254740992]}

@@ -305,6 +305,27 @@ def test_export_requires_approval_and_refuses_unbounded_output(
     assert "project.egg" in str(unbounded["error"]["message"]).lower()
     assert outside.read_bytes() == b"must remain unchanged"
 
+    default_output = root / PROJECT / "PROJECT.egg"
+    try:
+        default_output.symlink_to(outside)
+    except OSError:
+        pass
+    else:
+        symlinked = perform(
+            projects.RappProjectsAgent(),
+            "export",
+            project=PROJECT,
+            root=str(root),
+            owner_approved=True,
+        )
+        assert symlinked["status"] == "error"
+        assert "symbolic link" in str(
+            symlinked["error"]["message"]
+        ).lower()
+        assert outside.read_bytes() == b"must remain unchanged"
+        assert default_output.is_symlink()
+        default_output.unlink()
+
     egg, _ = export_egg(projects, root)
     assert egg == root / PROJECT / "PROJECT.egg"
 
@@ -452,18 +473,57 @@ def test_imported_external_receipts_are_unverifiable_until_rebound(
         destination / PROJECT / ".receipt-locators.json"
     ).exists()
 
+    unresolved = projects.verify_project(
+        PROJECT,
+        destination,
+        append_verdict=False,
+    )
+    assert unresolved["verdict"] == "fail"
+    [receipt] = unresolved["broken_receipts"]
+    assert receipt["path"].startswith("local-private://")
+
+    local_copy = tmp_path / "restored-external-artifact.txt"
+    local_copy.write_text("wrong content\n", encoding="utf-8")
+    unapproved = perform(
+        projects.RappProjectsAgent(),
+        "verify",
+        root=str(destination),
+        project=PROJECT,
+        receipt_bindings={receipt["path"]: str(local_copy)},
+    )
+    assert unapproved["status"] == "error"
+    assert "owner_approved" in unapproved["error"]["message"]
+
+    mismatch = perform(
+        projects.RappProjectsAgent(),
+        "verify",
+        root=str(destination),
+        project=PROJECT,
+        receipt_bindings={receipt["path"]: str(local_copy)},
+        owner_approved=True,
+    )
+    assert mismatch["status"] == "error"
+    assert "historical hash" in mismatch["error"]["message"]
+    assert not (
+        destination / PROJECT / ".receipt-locators.json"
+    ).exists()
+
+    local_copy.write_text("generic external evidence\n", encoding="utf-8")
     verified = perform(
         projects.RappProjectsAgent(),
         "verify",
         root=str(destination),
         project=PROJECT,
+        receipt_bindings={receipt["path"]: str(local_copy)},
+        owner_approved=True,
     )
     assert verified["status"] == "ok"
-    assert verified["verdict"] == "fail"
-    assert len(verified["broken_receipts"]) == 1
-    assert verified["broken_receipts"][0]["path"].startswith(
-        "local-private://"
-    )
+    assert verified["verdict"] == "pass"
+    assert verified["receipt_bindings"]["bound"] == [receipt["path"]]
+    assert verified["broken_receipts"] == []
+    assert (
+        destination / PROJECT / ".receipt-locators.json"
+    ).is_file()
 
 
 @pytest.mark.parametrize(

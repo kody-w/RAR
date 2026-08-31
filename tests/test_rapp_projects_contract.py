@@ -62,6 +62,7 @@ EXPECTED_PARAMETER_TYPES = {
     "open_questions": "array",
     "outcome": "string",
     "receipts": "array",
+    "receipt_bindings": "object",
     "summary": "string",
     "egg": "string",
     "output": "string",
@@ -119,7 +120,7 @@ def test_manifest_identity_version_category_tags_and_dependency(module):
     manifest = module.__manifest__
     assert manifest["schema"] == "rapp-agent/1.0"
     assert manifest["name"] == "@kody-w/rapp_projects"
-    assert manifest["version"] == "1.0.1"
+    assert manifest["version"] == "1.0.2"
     assert manifest["display_name"] == "RappProjects"
     assert manifest["category"] == "productivity"
     assert manifest["tags"] == [
@@ -156,6 +157,9 @@ def test_operation_enum_and_parameter_types_are_complete(agent):
     assert properties["operation"]["enum"] == EXPECTED_OPERATIONS
     assert properties["action"]["enum"] == EXPECTED_OPERATIONS
     assert properties["outcome"]["enum"] == ["done", "blocked", "abandoned"]
+    assert properties["receipt_bindings"]["additionalProperties"] == {
+        "type": "string"
+    }
     for name in STRING_ARRAY_PARAMETERS & {
         "capabilities",
         "blockers",

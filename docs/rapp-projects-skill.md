@@ -99,6 +99,18 @@ receipt without copying its body.
 {"operation":"verify","project":"example-project"}
 ```
 
+An imported opaque receipt can be rebound during verification only with fresh
+owner approval and a local file whose byte count and SHA-256 match every
+historical use of that token:
+
+```json
+{"operation":"verify","project":"example-project","owner_approved":true,"receipt_bindings":{"local-private://0123456789abcdef0123456789abcdef":"/absolute/path/to/restored-artifact"}}
+```
+
+Binding updates only the private locator file; it does not rewrite a frame or
+copy the artifact into project state. A wrong path, hash, size, token, or
+missing approval is refused before the locator changes.
+
 ### `board`
 
 ```json
@@ -144,6 +156,10 @@ returns `verification_frame_hash`:
 ```json
 {"status":"ok","operation":"verify","project":"example-project","verdict":"pass","verification_frame_hash":"<64-hex>"}
 ```
+
+Board `verified` is true only when the latest frame is a passing
+`project.verify` verdict that covers its immediate predecessor. Any later work
+frame resets it to false until the new head is verified.
 
 Errors keep details under `error`; verification failures may also include a
 protocol `step`:

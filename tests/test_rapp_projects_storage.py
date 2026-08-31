@@ -374,6 +374,64 @@ def test_committed_append_reports_view_refresh_failure_without_retry_signal(
     )
 
 
+def test_public_mutation_helpers_do_not_refresh_after_commit_by_default(
+    projects,
+) -> None:
+    for name in (
+        "append_frame",
+        "open_project",
+        "verify_project",
+        "import_project_egg",
+    ):
+        parameter = inspect.signature(getattr(projects, name)).parameters[
+            "refresh"
+        ]
+        assert parameter.default is False
+
+
+def test_new_work_invalidates_prior_board_verification(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, root)["status"] == "ok"
+    assert perform(
+        agent,
+        "verify",
+        root=root,
+        project="alpha-project",
+    )["verdict"] == "pass"
+    verified_board = perform(agent, "board", root=root)
+    assert verified_board["projects"][0]["verified"] is True
+
+    updated = perform(
+        agent,
+        "status",
+        root=root,
+        project="alpha-project",
+        **actor(),
+        location="project://work",
+        status="new work after verification",
+        artifacts=[],
+        blockers=[],
+        next_action="Verify the new head",
+        pct=70,
+    )
+    assert updated["status"] == "ok"
+    unverified_board = perform(agent, "board", root=root)
+    assert unverified_board["projects"][0]["verified"] is False
+
+    assert perform(
+        agent,
+        "verify",
+        root=root,
+        project="alpha-project",
+    )["verdict"] == "pass"
+    reverified_board = perform(agent, "board", root=root)
+    assert reverified_board["projects"][0]["verified"] is True
+
+
 def test_root_and_project_cells_have_exact_manifests_and_separate_lineage(
     projects, tmp_path: Path
 ) -> None:

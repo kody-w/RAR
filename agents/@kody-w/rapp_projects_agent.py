@@ -22,7 +22,8 @@ Operations
 ``punchout``
     Record a done, blocked, or abandoned outcome and file receipts.
 ``verify``
-    Verify the complete chain and receipts, then append ``project.verify``.
+    Verify the complete chain and receipts, optionally bind owner-approved
+    imported receipt tokens, then append ``project.verify``.
 ``board``
     Rebuild and return the cross-project board.
 ``inspect``
@@ -38,7 +39,8 @@ The storage root is selected in this order: explicit ``root`` argument,
 ``RAPP_PROJECTS_ROOT``, then ``~/.rapp/projects-control``.  State is never
 written beside this agent.  The implementation uses only Python's standard
 library plus the required ``BasicAgent`` base dependency. External receipt
-paths stay in private locator metadata under that root and never enter eggs.
+paths stay in private locator metadata under that root and never enter eggs;
+an imported token can be rebound only to owner-approved matching bytes.
 
 Standalone use accepts one JSON object as a Python argv value or on stdin.
 Run the file with ``--tool`` to print its callable operation schema. Supply
@@ -79,7 +81,7 @@ except (ImportError, ModuleNotFoundError):
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_projects",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "RappProjects",
     "description": (
         "Coordinates local-first projects through strict RAPP/1 work chains, "
@@ -184,6 +186,10 @@ AGENT_PARAMETERS = {
             "enum": ["done", "blocked", "abandoned"],
         },
         "receipts": {"type": "array"},
+        "receipt_bindings": {
+            "type": "object",
+            "additionalProperties": {"type": "string"},
+        },
         "summary": {"type": "string"},
         "egg": {"type": "string"},
         "output": {"type": "string"},
@@ -1131,18 +1137,9 @@ def _register_receipt_locator(path: Path, project: str, root: Path) -> str:
     with _PROCESS_LOCK:
         with file_lock(directory / ".chain.lock"):
             locators = _load_receipt_locators(project, root)
-            token = next(
-                (
-                    candidate
-                    for candidate, existing in locators["paths"].items()
-                    if existing == location
-                ),
-                None,
-            )
-            if token is None:
-                token = uuid.uuid4().hex
-                locators["paths"][token] = location
-                _atomic_json(directory / ".receipt-locators.json", locators)
+            token = uuid.uuid4().hex
+            locators["paths"][token] = location
+            _atomic_json(directory / ".receipt-locators.json", locators)
     return "local-private://" + token
 
 
@@ -1257,6 +1254,101 @@ def _receipt_list(value: Any, project: str, root: Path) -> list[dict[str, Any]]:
     if len(values) > MAX_LIST_ITEMS:
         raise RappProjectsError("artifact list has too many items")
     return [artifact_receipt(item, project, root) for item in values]
+
+
+def _frame_receipts(frame: dict[str, Any]) -> list[dict[str, Any]]:
+    if frame["kind"] == "work.status":
+        return frame["payload"]["artifacts"]
+    if frame["kind"] == "work.handoff":
+        return [frame["payload"]["doc"]]
+    if frame["kind"] == "work.punchout":
+        return frame["payload"]["receipts"]
+    return []
+
+
+def bind_receipt_locators(
+    project: Any,
+    bindings: Any,
+    root: Any = None,
+    *,
+    owner_approved: bool = False,
+) -> dict[str, Any]:
+    """Bind imported opaque receipt tokens to matching local files."""
+    if owner_approved is not True:
+        raise PermissionError("receipt binding requires owner_approved=true")
+    project = require_slug(project)
+    root_path = ensure_root(root)
+    if (
+        not isinstance(bindings, dict)
+        or not bindings
+        or len(bindings) > MAX_LIST_ITEMS
+    ):
+        raise RappProjectsError("receipt_bindings must be a non-empty object")
+
+    requested: dict[str, Path] = {}
+    for logical, location in bindings.items():
+        if (
+            not isinstance(logical, str)
+            or not logical.startswith("local-private://")
+            or not LOCATOR_TOKEN.fullmatch(
+                logical[len("local-private://") :]
+            )
+            or not isinstance(location, (str, os.PathLike))
+            or not str(location)
+        ):
+            raise RappProjectsError("receipt binding entry is invalid")
+        path = Path(str(location)).expanduser()
+        if not path.is_absolute() or path.is_symlink():
+            raise RappProjectsError(
+                "receipt binding must name an absolute regular file"
+            )
+        requested[logical] = path.resolve()
+
+    directory = project_dir(project, root_path)
+    with _PROCESS_LOCK:
+        with file_lock(directory / ".chain.lock"):
+            frames = load_chain(project, root_path)
+            historical: dict[str, list[dict[str, Any]]] = {
+                logical: [] for logical in requested
+            }
+            for frame in frames:
+                for receipt in _frame_receipts(frame):
+                    receipt = _validate_receipt(receipt)
+                    if receipt["path"] in historical:
+                        historical[receipt["path"]].append(receipt)
+            missing = sorted(
+                logical for logical, values in historical.items() if not values
+            )
+            if missing:
+                raise RappProjectsError(
+                    "receipt binding token is absent from the project chain"
+                )
+
+            resolved_bindings: dict[str, str] = {}
+            for logical, path in requested.items():
+                if path.is_symlink() or not path.is_file():
+                    raise RappProjectsError(
+                        "receipt binding must name an existing regular file"
+                    )
+                digest, size = _hash_file(path)
+                if any(
+                    receipt["sha256"] != digest or receipt["size"] != size
+                    for receipt in historical[logical]
+                ):
+                    raise RappProjectsError(
+                        "receipt binding does not match the historical hash"
+                    )
+                resolved_bindings[
+                    logical[len("local-private://") :]
+                ] = str(path)
+
+            locators = _load_receipt_locators(project, root_path)
+            locators["paths"].update(resolved_bindings)
+            _atomic_json(directory / ".receipt-locators.json", locators)
+    return {
+        "bound": sorted(requested),
+        "count": len(requested),
+    }
 
 
 def _validate_payload(kind: str, payload: Any, project: str | None = None) -> None:
@@ -1505,6 +1597,14 @@ def _verify_frame_or_raise(
             raise FrameVerificationError("4", "previous particle does not match")
         if frame["utc"] < head["utc"]:
             raise FrameVerificationError("4", "utc moved backwards")
+        if frame["kind"] == "project.verify" and (
+            frame["payload"]["verified_frames"] != frame["seq"]
+            or frame["payload"]["head_frame_hash"] != head["frame_hash"]
+        ):
+            raise FrameVerificationError(
+                "4",
+                "verification verdict does not cover its predecessor",
+            )
 
     # Step 5 — wire chain. Project streams are never swarm streams.
     if frame["prev_wave"] is not None:
@@ -1703,7 +1803,7 @@ def append_frame(
     payload: dict[str, Any],
     root: Any = None,
     *,
-    refresh: bool = True,
+    refresh: bool = False,
 ) -> dict[str, Any]:
     """Append after locking, reloading, and verifying the authoritative chain."""
     project = require_slug(project)
@@ -1726,7 +1826,7 @@ def open_project(
     origin: str,
     root: Any = None,
     *,
-    refresh: bool = True,
+    refresh: bool = False,
 ) -> dict[str, Any] | None:
     project = require_slug(project)
     root_path = ensure_root(root)
@@ -1806,15 +1906,7 @@ def _verify_receipts(
 ) -> list[dict[str, Any]]:
     broken: list[dict[str, Any]] = []
     for frame in frames:
-        if frame["kind"] == "work.status":
-            receipts = frame["payload"]["artifacts"]
-        elif frame["kind"] == "work.handoff":
-            receipts = [frame["payload"]["doc"]]
-        elif frame["kind"] == "work.punchout":
-            receipts = frame["payload"]["receipts"]
-        else:
-            receipts = []
-        for value in receipts:
+        for value in _frame_receipts(frame):
             receipt = _validate_receipt(value)
             problem = not receipt["exists"]
             resolved = _resolve_receipt_path(
@@ -1878,7 +1970,7 @@ def fold_project(
         "last_work_utc": None,
         "last_frame_utc": None,
         "last_frame_hash": None,
-        "verified": True,
+        "verified": False,
         "frame_count": len(frames),
     }
     for frame in frames:
@@ -1888,6 +1980,7 @@ def fold_project(
         state["last_frame_hash"] = frame["frame_hash"]
         if kind != "project.verify":
             state["last_work_utc"] = frame["utc"]
+            state["verified"] = False
         if kind == "project.genesis":
             state.update(
                 {
@@ -2192,7 +2285,7 @@ def verify_project(
     root: Any = None,
     *,
     append_verdict: bool = True,
-    refresh: bool = True,
+    refresh: bool = False,
 ) -> dict[str, Any]:
     project = require_slug(project)
     root_path = ensure_root(root)
@@ -2415,20 +2508,26 @@ def export_project_egg(
                 [("manifest.json", manifest_bytes)]
                 + [(item["path"], files[item["path"]]) for item in contents]
             )
-            destination = (directory / "PROJECT.egg").resolve()
+            destination = directory / "PROJECT.egg"
+            if destination.is_symlink():
+                raise RappProjectsError("egg output cannot be a symbolic link")
             if output not in (None, ""):
                 requested = Path(str(output)).expanduser()
-                requested = (
-                    requested.resolve()
-                    if requested.is_absolute()
-                    else safe_join(directory, requested)
-                )
-                if requested != destination:
+                if not requested.is_absolute():
+                    requested = directory / requested
+                if requested.is_symlink():
+                    raise RappProjectsError(
+                        "egg output cannot be a symbolic link"
+                    )
+                if (
+                    requested.name != destination.name
+                    or requested.parent.resolve() != directory
+                ):
                     raise RappProjectsError(
                         "egg output must be the selected project's PROJECT.egg"
                     )
-            if destination.exists() and destination.is_symlink():
-                raise RappProjectsError("egg output cannot be a symbolic link")
+            if destination.exists() and not destination.is_file():
+                raise RappProjectsError("egg output must be a regular file")
             _atomic_bytes(destination, archive)
     egg_hash = H(
         "rapp/1:egg-manifest",
@@ -2638,7 +2737,7 @@ def import_project_egg(
     path: Any,
     root: Any = None,
     *,
-    refresh: bool = True,
+    refresh: bool = False,
 ) -> dict[str, Any]:
     """Verify the full egg first, then create or fast-forward without reparenting."""
     verified = verify_project_egg(path)
@@ -2734,7 +2833,7 @@ def import_project_egg(
 PROTOCOL = {
     "schema": "rapp-projects-protocol/1",
     "agent": __manifest__["name"],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "operations": list(OPERATIONS),
     "root_precedence": [
         "explicit root",
@@ -2786,7 +2885,8 @@ PROTOCOL = {
         "network": False,
         "artifact_bodies_copied": False,
         "external_receipts": (
-            "private locators excluded from eggs; unresolved locators fail"
+            "private locators excluded from eggs; unresolved locators fail "
+            "until owner-approved matching bytes are rebound"
         ),
         "egg_output": "<root>/<project>/PROJECT.egg only",
         "corruption_policy": "fail closed",
@@ -3149,6 +3249,14 @@ class RappProjectsAgent(BasicAgent):
                 )
 
             if operation == "verify":
+                binding_result = None
+                if kwargs.get("receipt_bindings") is not None:
+                    binding_result = bind_receipt_locators(
+                        project,
+                        kwargs["receipt_bindings"],
+                        root_path,
+                        owner_approved=kwargs.get("owner_approved") is True,
+                    )
                 result = verify_project(
                     project,
                     root_path,
@@ -3156,6 +3264,8 @@ class RappProjectsAgent(BasicAgent):
                     refresh=False,
                 )
                 frame = result.pop("frame")
+                if binding_result is not None:
+                    result["receipt_bindings"] = binding_result
                 return self._result_after_refresh(
                     operation,
                     root_path,
@@ -3244,6 +3354,7 @@ __all__ = [
     "RappProjectsError",
     "append_frame",
     "artifact_receipt",
+    "bind_receipt_locators",
     "build_frame",
     "canonical",
     "ensure_root",
