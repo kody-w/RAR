@@ -18,6 +18,8 @@ RECEIPT = ROOT / "docs" / "rapp-projects-skill-build.rapp.json"
 CATALOG = ROOT / "scout" / "catalog" / "catalog.json"
 API_RECORD = ROOT / "api" / "v1" / "agent" / "kody-w__rapp_projects.json"
 FRONT = ROOT / "api" / "v1" / "front.json"
+LIFECYCLE = ROOT / "state" / "agent_lifecycle.json"
+RECEIPTS = ROOT / "state" / "receipts"
 IDENTITY = "@kody-w/rapp_projects"
 FRAME_KEYS = {
     "spec",
@@ -184,3 +186,15 @@ def test_build_receipt_binds_the_generated_publication():
         rapp_skill_record["skill_sha256"]
     )
     assert evidence["rapp_proof"] == "pass"
+    lifecycle = json.loads(LIFECYCLE.read_text(encoding="utf-8"))
+    lifecycle_record = lifecycle["agents"][IDENTITY]
+    assert lifecycle_record["latest_receipt"] == evidence["rar_receipt"]
+    receipt_path = RECEIPTS / (
+        evidence["rar_receipt"].removeprefix("rar_") + ".json"
+    )
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    assert evidence["notary_policy"] == "rar-maintainer-migration/1.0"
+    assert evidence["notary_check"] == "pass"
+    assert receipt["acceptance"]["policy"] == evidence["notary_policy"]
+    assert receipt["artifact"]["digest"] == source_sha256
+    assert receipt["agent"] == IDENTITY

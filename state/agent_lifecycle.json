@@ -19063,6 +19063,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.3"
     },
+    "@kody-w/hologram_dogg": {
+      "canonical_path": "agents/@kody-w/hologram_dogg_agent.py",
+      "latest_receipt": "rar_140ff0b2b441692137fb9d54b46864275e3f231df8d122224c1bc07a14921071",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2",
+      "status": "active",
+      "updated_at": "2026-08-29T00:35:54.480752+00:00",
+      "version": "1.1.0"
+    },
     "@kody-w/install_rappter_distro_agent": {
       "canonical_path": "agents/@kody-w/install_rappter_distro_agent.py",
       "latest_receipt": "rar_262de93c75c30da0b76c2dd41458776c4b037de387445999425755654b19ed0c",
@@ -19249,6 +19260,17 @@
       "status": "active",
       "updated_at": "2026-08-11T09:42:00.507093+00:00",
       "version": "0.3.0"
+    },
+    "@kody-w/rapp_projects": {
+      "canonical_path": "agents/@kody-w/rapp_projects_agent.py",
+      "latest_receipt": "rar_dd0ccfbbc4782b7cde6b60ae6d2a428374f59dbc2a26ffda172bf0898ae06308",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca",
+      "status": "active",
+      "updated_at": "2026-08-31T20:16:05.519450+00:00",
+      "version": "1.0.3"
     },
     "@kody-w/rapp_sdk_builder": {
       "canonical_path": "agents/@kody-w/rapp_sdk_builder_agent.py",
@@ -20041,19 +20063,8 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
-    },
-    "@kody-w/hologram_dogg": {
-      "status": "active",
-      "version": "1.1.0",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/hologram_dogg_agent.py",
-      "sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2",
-      "latest_receipt": "rar_140ff0b2b441692137fb9d54b46864275e3f231df8d122224c1bc07a14921071",
-      "updated_at": "2026-08-29T00:35:54.480752+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-29T00:35:54.480752+00:00"
+  "updated_at": "2026-08-31T20:16:05.519450+00:00"
 }

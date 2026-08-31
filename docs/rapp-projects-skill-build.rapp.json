@@ -198,7 +198,7 @@
     "utc": "2026-08-31T19:03:11.008Z"
   },
   {
-    "frame_hash": "0e5852d34154bd04b38972e0cb16ac887f80375d5337974d868464510127fe0d",
+    "frame_hash": "60ac594fcd9322961b051b2056546e5ce0198071d45bc124d3c4093a8dc8d44d",
     "kind": "build.frame",
     "payload": {
       "artifacts": [
@@ -220,6 +220,8 @@
         "front_audience": "both",
         "import_verdict": "pass",
         "integration_tests": 8102,
+        "notary_check": "pass",
+        "notary_policy": "rar-maintainer-migration/1.0",
         "post_import_frames": 7,
         "privacy_mutations": 17,
         "publication_release_tests": 179,
@@ -230,6 +232,7 @@
         "rapp_skill_skill_sha256": "3ab288bd5bfcd0e399ffce446d7ec70457479e199cfab05826c4083cb8e78bcd",
         "rapp_skill_source_sha256": "1fa931266d8646ee3138d0c1bab1e742267a1951765b8ceeee0496a677bd6e4c",
         "rapp_skill_version": "1.3.1",
+        "rar_receipt": "rar_dd0ccfbbc4782b7cde6b60ae6d2a428374f59dbc2a26ffda172bf0898ae06308",
         "runner_operations": 12,
         "runner_preflight": "RAPP_READY",
         "skill_sha256": "4a83a11df0de5c2e9ea62a09752349f26e43656317f5122c4ce933ae40d955c2",
@@ -247,7 +250,7 @@
       "schema": "rapp-skill-build-frame/1",
       "source_commit": "a3391b199669c48572aabdab2087b8c6733f0964"
     },
-    "payload_hash": "299aad58e1a0c02dd8abffdac96154eccef0d1e1e636840716b2d17e1c59bc86",
+    "payload_hash": "c8f4aa2f60b2998a81f828ba0079ac3ac827afe3ef8f929b0ece815d7d9282f0",
     "prev": "38336dc40714164592b72ea81a0b9a872e67c4bd12a490b4ddaef064f96ea132",
     "prev_wave": null,
     "seq": 9,

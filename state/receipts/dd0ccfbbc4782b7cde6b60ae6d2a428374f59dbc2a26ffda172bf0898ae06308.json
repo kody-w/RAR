@@ -1,0 +1,40 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-08-31"
+ },
+ "action": "agent.create",
+ "agent": "@kody-w/rapp_projects",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca"
+ },
+ "canonical_path": "agents/@kody-w/rapp_projects_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-08-31T20:16:05.519450+00:00",
+ "id": "rar_dd0ccfbbc4782b7cde6b60ae6d2a428374f59dbc2a26ffda172bf0898ae06308",
+ "issuer": "github:kody-w/RAR",
+ "previous": null,
+ "quality_tier": "community",
+ "request_id": "req_dd0ccfbbc4782b7cde6b60ae",
+ "revision_id": "dd0ccfbbc4782b7cde6b60ae6d2a428374f59dbc2a26ffda172bf0898ae06308",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "publish generic RAPP Projects 1.0.3 after full RAPP/1, crash-recovery, privacy, Scout, API, and repository test gates"
+ },
+ "version": "1.0.3"
+}
