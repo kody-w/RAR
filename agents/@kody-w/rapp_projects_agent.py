@@ -41,6 +41,10 @@ written beside this agent.  The implementation uses only Python's standard
 library plus the required ``BasicAgent`` base dependency. External receipt
 paths stay in private locator metadata under that root and never enter eggs;
 an imported token can be rebound only to owner-approved matching bytes.
+Minting a root requires ``identity_owner`` or ``RAPP_PROJECTS_OWNER`` so every
+RAPPID names the operator's lowercase GitHub owner rather than a synthetic
+namespace. Fsynced journals recover interrupted root, project, import, and head
+updates without rewriting historical frames.
 
 Standalone use accepts one JSON object as a Python argv value or on stdin.
 Run the file with ``--tool`` to print its callable operation schema. Supply
@@ -49,12 +53,15 @@ Run the file with ``--tool`` to print its callable operation schema. Supply
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import io
 import json
 import math
 import os
 import re
+import secrets
+import shutil
 import struct
 import sys
 import threading
@@ -81,7 +88,7 @@ except (ImportError, ModuleNotFoundError):
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_projects",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "RappProjects",
     "description": (
         "Coordinates local-first projects through strict RAPP/1 work chains, "
@@ -110,9 +117,13 @@ EGG_VARIANT = "rapplication"
 EXPORT_SCHEMA = "rapp-project-export/1"
 INDEX_SCHEMA = "rapp-projects/index/1"
 IDENTITY_SCHEMA = "rapp/1"
-HEAD_SCHEMA = "rapp-project-head/1"
+HEAD_SCHEMA = "rapp-project-head/2"
+LEGACY_HEAD_SCHEMA = "rapp-project-head/1"
 RECEIPT_SCHEMA = "rapp-artifact-receipt/1"
 RECEIPT_LOCATORS_SCHEMA = "rapp-receipt-locators/1"
+ROOT_INIT_SCHEMA = "rapp-project-root-init/1"
+PROJECT_TRANSACTION_SCHEMA = "rapp-project-transaction/1"
+APPEND_TRANSACTION_SCHEMA = "rapp-append-transaction/1"
 ROOT_LINEAGE_SCHEMA = "rapp-project-lineage/1"
 PROJECT_LINEAGE_SCHEMA = "rapp-project-lineage/1"
 SESSION_ID_FIELD = "session_id"
@@ -147,6 +158,12 @@ AGENT_PARAMETERS = {
             ),
         },
         "root": {"type": "string"},
+        "identity_owner": {
+            "type": "string",
+            "description": (
+                "Lowercase GitHub login used only when minting a new root."
+            ),
+        },
         "project": {"type": "string"},
         "title": {"type": "string"},
         "goal": {"type": "string"},
@@ -199,6 +216,7 @@ AGENT_PARAMETERS = {
         {"required": ["operation"]},
         {"required": ["action"]},
     ],
+    "additionalProperties": False,
 }
 AGENT_METADATA = {
     "name": "RappProjects",
@@ -240,7 +258,10 @@ CELL_KEYS = frozenset(
 IDENTITY_KEYS = frozenset(
     {"schema", "rappid", "kind", "name", "visibility"}
 )
-HEAD_KEYS = frozenset({"schema", "stream_id", "seq", "frame_hash"})
+HEAD_KEYS = frozenset(
+    {"schema", "stream_id", "seq", "frame_hash", "chain_hash"}
+)
+LEGACY_HEAD_KEYS = frozenset({"schema", "stream_id", "seq", "frame_hash"})
 RECEIPT_KEYS = frozenset(
     {"schema", "path", "exists", "type", "size", "sha256"}
 )
@@ -271,28 +292,64 @@ MAX_SAFE_INTEGER = 2**53 - 1
 ACTIVE_STALE_HOURS = 4
 IDLE_STALE_HOURS = 24
 
-SLUG = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+LCLABEL = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+SLUG = LCLABEL
 KIND = re.compile(
-    r"^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?"
-    r"\.[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"
+    r"^[a-z0-9]+(?:-[a-z0-9]+)*"
+    r"\.[a-z0-9]+(?:-[a-z0-9]+)*$"
 )
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 LOCATOR_TOKEN = re.compile(r"^[0-9a-f]{32}$")
+STAGING_NAME = re.compile(
+    r"^\.staging-([a-z0-9]+(?:-[a-z0-9]+)*)-([0-9a-f]{32})$"
+)
 UTC = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$")
 RAPPID = re.compile(
     r"^rappid:@"
-    r"([a-z0-9](?:[a-z0-9-]{0,37}[a-z0-9])?)"
+    r"([a-z0-9]+(?:-[a-z0-9]+)*)"
     r"/"
-    r"([a-z0-9](?:[a-z0-9-]{0,98}[a-z0-9])?)"
+    r"([a-z0-9]+(?:-[a-z0-9]+)*)"
     r":([0-9a-f]{64})$"
 )
-INSTANCE = re.compile(
-    r"^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"
-)
+INSTANCE = LCLABEL
 WINDOWS_RESERVED = frozenset(
     {"con", "prn", "aux", "nul"}
     | {f"com{number}" for number in range(1, 10)}
     | {f"lpt{number}" for number in range(1, 10)}
+)
+PROJECT_MANAGED_FILES = frozenset(
+    {
+        ".chain.lock",
+        ".append-transaction.json",
+        ".receipt-locators.json",
+        "PROJECT.egg",
+        "STATUS.md",
+        "chain.jsonl",
+        "head.json",
+        "lineage.json",
+        "manifest.json",
+        "rappid.json",
+    }
+)
+ROOT_MANAGED_FILES = frozenset(
+    {
+        ".project-transaction.json",
+        ".projects.lock",
+        ".root-init.json",
+        ".views.lock",
+        "BOARD.md",
+        "CATCHUP.md",
+        "index.json",
+        "lineage.json",
+        "manifest.json",
+        "rappid.json",
+    }
+)
+PROJECT_MANAGED_CASEFOLD = frozenset(
+    name.casefold() for name in PROJECT_MANAGED_FILES
+)
+ROOT_MANAGED_CASEFOLD = frozenset(
+    name.casefold() for name in ROOT_MANAGED_FILES
 )
 ABSOLUTE_PATH = re.compile(
     r"(?<![A-Za-z0-9+.\-:/])/(?!/)[^\s`\"'<>|]*"
@@ -399,6 +456,18 @@ class FrameVerificationError(ChainVerificationError):
         self.step = step
         self.reason = reason
         super().__init__(f"RAPP/1 step {step}: {reason}")
+
+
+class CommittedFrame(dict):
+    """Exact frame mapping plus out-of-band storage warnings."""
+
+    def __init__(
+        self,
+        frame: dict[str, Any],
+        storage_warnings: list[dict[str, str]] | None = None,
+    ):
+        super().__init__(frame)
+        self.storage_warnings = list(storage_warnings or [])
 
 
 def _has_surrogate(value: str) -> bool:
@@ -677,6 +746,8 @@ def projects_root(root: Any = None) -> Path:
     path = Path(str(selected)).expanduser()
     if not path.is_absolute():
         path = Path.cwd() / path
+    if path.is_symlink():
+        raise RappProjectsError("project root cannot be a symbolic link")
     path = path.resolve()
     if _is_within(path, _AGENT_DIRECTORY):
         raise RappProjectsError("project state cannot live beside the agent")
@@ -695,15 +766,28 @@ def project_dir(project: Any, root: Any = None) -> Path:
     return safe_join(projects_root(root), require_slug(project))
 
 
-def mint_rappid(slug: Any, owner: str = "local") -> str:
+def require_identity_owner(value: Any = None) -> str:
+    selected = (
+        value
+        if value not in (None, "")
+        else os.environ.get("RAPP_PROJECTS_OWNER")
+    )
+    if not isinstance(selected, str) or not selected.strip():
+        raise RappProjectsError(
+            "identity_owner or RAPP_PROJECTS_OWNER is required for a new root"
+        )
+    owner = unicodedata.normalize("NFC", selected.strip().lower())
+    if len(owner) > 39 or not LCLABEL.fullmatch(owner):
+        raise RappProjectsError(
+            "identity_owner must be a lowercase GitHub login"
+        )
+    return owner
+
+
+def mint_rappid(slug: Any, owner: Any = None) -> str:
     """Mint a keyless UUIDv4 RAPPID; no name participates in its hash tail."""
     slug = require_slug(slug)
-    if (
-        not isinstance(owner, str)
-        or len(owner) > 39
-        or not SLUG.fullmatch(owner)
-    ):
-        raise RappProjectsError("RAPPID owner must be a lowercase label")
+    owner = require_identity_owner(owner)
     tail = Hb("rapp/1:rappid", uuid.uuid4().bytes)
     return f"rappid:@{owner}/{slug}:{tail}"
 
@@ -712,7 +796,60 @@ def _valid_rappid(value: Any, *, slug: str | None = None) -> bool:
     if not isinstance(value, str):
         return False
     match = RAPPID.fullmatch(value)
-    return bool(match and (slug is None or match.group(2) == slug))
+    return bool(
+        match
+        and len(match.group(1)) <= 39
+        and len(match.group(2)) <= 100
+        and (slug is None or match.group(2) == slug)
+    )
+
+
+def _rappid_owner(value: str) -> str:
+    match = RAPPID.fullmatch(value)
+    if not match or not _valid_rappid(value):
+        raise RappProjectsError("invalid RAPPID")
+    return match.group(1)
+
+
+def _valid_kind(value: Any) -> bool:
+    if not isinstance(value, str) or not KIND.fullmatch(value):
+        return False
+    left, right = value.split(".", 1)
+    return len(left) <= 64 and len(right) <= 64
+
+
+def _base64url_decode(value: str) -> bytes:
+    if not value or "=" in value or not re.fullmatch(r"[A-Za-z0-9_-]+", value):
+        raise RappProjectsError("JWS segment is not unpadded base64url")
+    padding = "=" * ((4 - len(value) % 4) % 4)
+    try:
+        decoded = base64.urlsafe_b64decode(value + padding)
+    except (ValueError, TypeError) as exc:
+        raise RappProjectsError("JWS segment is invalid") from exc
+    encoded = base64.urlsafe_b64encode(decoded).rstrip(b"=").decode("ascii")
+    if encoded != value:
+        raise RappProjectsError("JWS segment is not canonical base64url")
+    return decoded
+
+
+def _validate_jws_syntax(value: str) -> None:
+    parts = value.split(".")
+    if len(parts) != 3 or parts[1] != "":
+        raise RappProjectsError("sig must use detached compact JWS")
+    protected_bytes = _base64url_decode(parts[0])
+    signature = _base64url_decode(parts[2])
+    protected = _strict_loads(protected_bytes)
+    if (
+        not isinstance(protected, dict)
+        or set(protected) != {"alg", "b64", "crit", "kid"}
+        or protected["alg"] not in {"EdDSA", "ES256"}
+        or protected["b64"] is not False
+        or protected["crit"] != ["b64"]
+        or not _valid_rappid(protected["kid"])
+        or protected_bytes != canonical(protected).encode("utf-8")
+        or len(signature) != 64
+    ):
+        raise RappProjectsError("sig protected header or signature is invalid")
 
 
 def project_stream_id(rappid: str) -> str:
@@ -727,14 +864,30 @@ def _valid_stream_id(value: Any) -> bool:
     if ":" not in value:
         return False
     rappid, instance = value.rsplit(":", 1)
-    return bool(_valid_rappid(rappid) and INSTANCE.fullmatch(instance))
+    return bool(
+        _valid_rappid(rappid)
+        and INSTANCE.fullmatch(instance)
+        and len(instance) <= 64
+    )
+
+
+def _stream_project(value: str) -> str:
+    if not _valid_stream_id(value) or not value.endswith(":project"):
+        raise RappProjectsError("project stream_id is invalid")
+    rappid = value.rsplit(":", 1)[0]
+    match = RAPPID.fullmatch(rappid)
+    if match is None:
+        raise RappProjectsError("project stream RAPPID is invalid")
+    return match.group(2)
 
 
 def _mkdir(path: Path) -> Path:
     if path.is_symlink():
         raise RappProjectsError("storage directories cannot be symbolic links")
-    if path.exists() and not path.is_dir():
-        raise RappProjectsError("storage path is not a directory")
+    if path.exists():
+        if not path.is_dir():
+            raise RappProjectsError("storage path is not a directory")
+        return path
     path.mkdir(parents=True, exist_ok=True, mode=0o700)
     try:
         os.chmod(path, 0o700)
@@ -948,6 +1101,8 @@ def _root_project_directories(root: Path) -> list[str]:
             raise RappProjectsError(f"project root contains a symlink: {entry.name}")
         if not entry.is_dir():
             continue
+        if entry.name.startswith("."):
+            continue
         names.append(require_slug(entry.name))
     return sorted(names)
 
@@ -988,8 +1143,13 @@ def _validate_root_locked(root: Path) -> dict[str, Any]:
         raise RappProjectsError(
             "root cell children do not match project directories"
         )
+    root_owner = _rappid_owner(identity["rappid"])
     for project in directories:
-        _validate_project_metadata(root / project, project)
+        metadata = _validate_project_metadata(root / project, project)
+        if _rappid_owner(metadata["identity"]["rappid"]) != root_owner:
+            raise RappProjectsError(
+                "project RAPPID owner does not match the root authority"
+            )
     return {
         "identity": identity,
         "cell": manifest,
@@ -998,11 +1158,205 @@ def _validate_root_locked(root: Path) -> dict[str, Any]:
     }
 
 
-def ensure_root(root: Any = None) -> Path:
+def _validate_root_init(value: Any) -> dict[str, Any]:
+    if (
+        not isinstance(value, dict)
+        or set(value) != {"schema", "identity", "lineage", "manifest"}
+        or value["schema"] != ROOT_INIT_SCHEMA
+    ):
+        raise RappProjectsError("root initialization journal is invalid")
+    identity = _validate_identity(
+        value["identity"],
+        kind="projects-root",
+        name="projects-control",
+    )
+    lineage = _validate_lineage(
+        value["lineage"],
+        schema=ROOT_LINEAGE_SCHEMA,
+    )
+    manifest = _validate_cell(value["manifest"])
+    if manifest["layer"] != "leviathan" or manifest["path"] != "projects":
+        raise RappProjectsError("root initialization manifest is invalid")
+    return {
+        "schema": ROOT_INIT_SCHEMA,
+        "identity": identity,
+        "lineage": lineage,
+        "manifest": manifest,
+    }
+
+
+def _recover_root_init_locked(root: Path) -> None:
+    journal_path = root / ".root-init.json"
+    if not journal_path.exists():
+        return
+    journal = _validate_root_init(_read_json(journal_path))
+    for filename, value in (
+        ("rappid.json", journal["identity"]),
+        ("lineage.json", journal["lineage"]),
+        ("manifest.json", journal["manifest"]),
+    ):
+        destination = root / filename
+        if destination.exists():
+            if _read_json(destination) != value:
+                raise RappProjectsError(
+                    "root initialization conflicts with existing metadata"
+                )
+        else:
+            _atomic_json(destination, value)
+    journal_path.unlink(missing_ok=True)
+    _fsync_directory(root)
+
+
+def _validate_project_transaction(value: Any) -> dict[str, str]:
+    if (
+        not isinstance(value, dict)
+        or set(value) != {"schema", "operation", "project", "staging"}
+        or value["schema"] != PROJECT_TRANSACTION_SCHEMA
+        or value["operation"] not in {"create", "import"}
+    ):
+        raise RappProjectsError("project transaction journal is invalid")
+    project = require_slug(value["project"])
+    staging = value["staging"]
+    if (
+        not isinstance(staging, str)
+        or not STAGING_NAME.fullmatch(staging)
+        or STAGING_NAME.fullmatch(staging).group(1) != project
+    ):
+        raise RappProjectsError("project transaction staging name is invalid")
+    return {
+        "schema": PROJECT_TRANSACTION_SCHEMA,
+        "operation": value["operation"],
+        "project": project,
+        "staging": staging,
+    }
+
+
+def _write_root_children(
+    root: Path,
+    manifest: dict[str, Any],
+    children: set[str],
+) -> None:
+    updated = dict(manifest)
+    updated["children"] = sorted(children)
+    _validate_cell(updated)
+    _atomic_json(root / "manifest.json", updated)
+
+
+def _recover_project_transaction_locked(root: Path) -> None:
+    transaction_path = root / ".project-transaction.json"
+    if not transaction_path.exists():
+        return
+    transaction = _validate_project_transaction(_read_json(transaction_path))
+    project = transaction["project"]
+    staging = root / transaction["staging"]
+    destination = root / project
+    manifest = _validate_cell(_read_json(root / "manifest.json"))
+    children = set(manifest["children"])
+
+    if destination.exists():
+        if destination.is_symlink() or not destination.is_dir():
+            raise RappProjectsError(
+                "committed project transaction target is unsafe"
+            )
+        try:
+            with file_lock(destination / ".chain.lock"):
+                _validate_project_metadata(destination, project)
+                _load_chain_locked(project, root)
+        except RappProjectsError as exc:
+            quarantine = root / (
+                f".quarantine-{project}-{secrets.token_hex(16)}"
+            )
+            os.replace(destination, quarantine)
+            children.discard(project)
+            _write_root_children(root, manifest, children)
+            transaction_path.unlink(missing_ok=True)
+            _fsync_directory(root)
+            raise RappProjectsError(
+                "incomplete project transaction was quarantined"
+            ) from exc
+        children.add(project)
+        if staging.exists():
+            if staging.is_symlink() or not staging.is_dir():
+                raise RappProjectsError(
+                    "project transaction staging path is unsafe"
+                )
+            shutil.rmtree(staging)
+    else:
+        if staging.exists():
+            if staging.is_symlink() or not staging.is_dir():
+                raise RappProjectsError(
+                    "project transaction staging path is unsafe"
+                )
+            shutil.rmtree(staging)
+        children.discard(project)
+
+    if sorted(children) != manifest["children"]:
+        _write_root_children(root, manifest, children)
+    transaction_path.unlink(missing_ok=True)
+    _fsync_directory(root)
+
+
+def _cleanup_staging_locked(root: Path) -> None:
+    for entry in root.iterdir():
+        if not STAGING_NAME.fullmatch(entry.name):
+            continue
+        if entry.is_symlink() or not entry.is_dir():
+            raise RappProjectsError("project staging path is unsafe")
+        shutil.rmtree(entry)
+    _fsync_directory(root)
+
+
+def _publish_staged_project_locked(
+    root: Path,
+    project: str,
+    staging: Path,
+    manifest: dict[str, Any],
+    operation: str,
+) -> list[dict[str, str]]:
+    transaction_path = root / ".project-transaction.json"
+    _atomic_json(
+        transaction_path,
+        {
+            "schema": PROJECT_TRANSACTION_SCHEMA,
+            "operation": operation,
+            "project": project,
+            "staging": staging.name,
+        },
+    )
+    destination = root / project
+    os.replace(staging, destination)
+    _fsync_directory(root)
+    try:
+        _write_root_children(
+            root,
+            manifest,
+            set(manifest["children"]) | {project},
+        )
+    except (OSError, RappProjectsError):
+        _recover_project_transaction_locked(root)
+        return [
+            {
+                "code": "root-manifest-recovered",
+                "message": (
+                    "project committed; root manifest recovered from journal"
+                ),
+            }
+        ]
+    transaction_path.unlink(missing_ok=True)
+    _fsync_directory(root)
+    return []
+
+
+def ensure_root(
+    root: Any = None,
+    *,
+    identity_owner: Any = None,
+) -> Path:
     root_path = projects_root(root)
     _mkdir(root_path)
     with _PROCESS_LOCK:
         with file_lock(root_path / ".projects.lock"):
+            _recover_root_init_locked(root_path)
             required = (
                 root_path / "rappid.json",
                 root_path / "manifest.json",
@@ -1013,45 +1367,43 @@ def ensure_root(root: Any = None) -> Path:
                 raise RappProjectsError("project root has partial identity metadata")
             if not any(present):
                 directories = _root_project_directories(root_path)
-                other_files = [
+                other_entries = [
                     entry.name
                     for entry in root_path.iterdir()
-                    if entry.is_file()
-                    and entry.name
+                    if entry.name
                     not in {".projects.lock", ".views.lock"}
                 ]
-                if directories or other_files:
+                if directories or other_entries:
                     raise RappProjectsError(
                         "refusing to mint identity into non-empty unowned root"
                     )
-                rappid = mint_rappid("projects-control")
-                created: list[Path] = []
-                try:
-                    for path, value in (
-                        (
-                            root_path / "rappid.json",
-                            _identity_record(
-                                rappid, "projects-root", "projects-control"
-                            ),
+                rappid = mint_rappid(
+                    "projects-control",
+                    owner=require_identity_owner(identity_owner),
+                )
+                _atomic_json(
+                    root_path / ".root-init.json",
+                    {
+                        "schema": ROOT_INIT_SCHEMA,
+                        "identity": _identity_record(
+                            rappid,
+                            "projects-root",
+                            "projects-control",
                         ),
-                        (
-                            root_path / "lineage.json",
-                            {
-                                "schema": ROOT_LINEAGE_SCHEMA,
-                                "parent_rappid": None,
-                            },
+                        "lineage": {
+                            "schema": ROOT_LINEAGE_SCHEMA,
+                            "parent_rappid": None,
+                        },
+                        "manifest": _cell_manifest(
+                            "leviathan",
+                            "projects",
+                            [],
                         ),
-                        (
-                            root_path / "manifest.json",
-                            _cell_manifest("leviathan", "projects", []),
-                        ),
-                    ):
-                        _atomic_json(path, value)
-                        created.append(path)
-                except BaseException:
-                    for path in created:
-                        path.unlink(missing_ok=True)
-                    raise
+                    },
+                )
+                _recover_root_init_locked(root_path)
+            _recover_project_transaction_locked(root_path)
+            _cleanup_staging_locked(root_path)
             _validate_root_locked(root_path)
     return root_path
 
@@ -1061,7 +1413,10 @@ def _validate_receipt(value: Any) -> dict[str, Any]:
         raise RappProjectsError("artifact receipt has an invalid key set")
     if value["schema"] != RECEIPT_SCHEMA:
         raise RappProjectsError("artifact receipt schema is invalid")
-    if not isinstance(value["path"], str) or not value["path"]:
+    if (
+        not isinstance(value["path"], str)
+        or not _valid_receipt_path(value["path"])
+    ):
         raise RappProjectsError("artifact receipt path is invalid")
     if value["type"] not in ("file", "missing"):
         raise RappProjectsError("artifact receipts can describe files only")
@@ -1082,6 +1437,56 @@ def _validate_receipt(value: Any) -> dict[str, Any]:
         raise RappProjectsError("missing artifact receipt must use null metadata")
     canonical(value)
     return dict(value)
+
+
+def _valid_receipt_path(value: str) -> bool:
+    if value.startswith("local-private://"):
+        return bool(
+            LOCATOR_TOKEN.fullmatch(value[len("local-private://") :])
+        )
+    for prefix in ("project://", "projects://"):
+        if value.startswith(prefix):
+            relative = value[len(prefix) :]
+            if (
+                not relative
+                or relative.startswith("/")
+                or "\\" in relative
+            ):
+                return False
+            parts = relative.split("/")
+            if not all(
+                part not in ("", ".", "..")
+                for part in parts
+            ):
+                return False
+            if prefix == "project://":
+                return relative.casefold() not in PROJECT_MANAGED_CASEFOLD
+            if len(parts) == 1:
+                return parts[0].casefold() not in ROOT_MANAGED_CASEFOLD
+            return parts[1].casefold() not in PROJECT_MANAGED_CASEFOLD
+    return False
+
+
+def _managed_storage_path(path: Path, project: str, root: Path) -> bool:
+    path = path.resolve()
+    directory = project_dir(project, root)
+    if _is_within(path, directory):
+        relative = path.relative_to(directory)
+        return (
+            not relative.parts
+            or relative.parts[0].startswith(".staging-")
+            or relative.as_posix().casefold() in PROJECT_MANAGED_CASEFOLD
+        )
+    if _is_within(path, root):
+        relative = path.relative_to(root)
+        if not relative.parts:
+            return True
+        if len(relative.parts) == 1:
+            return relative.parts[0].casefold() in ROOT_MANAGED_CASEFOLD
+        if relative.parts[0].startswith("."):
+            return True
+        return relative.parts[1].casefold() in PROJECT_MANAGED_CASEFOLD
+    return False
 
 
 def _view_path(path: Path, project: str, root: Path) -> str:
@@ -1123,23 +1528,46 @@ def _validate_receipt_locators(value: Any) -> dict[str, Any]:
 
 
 def _load_receipt_locators(project: str, root: Path) -> dict[str, Any]:
-    path = project_dir(project, root) / ".receipt-locators.json"
+    return _load_receipt_locators_from_directory(project_dir(project, root))
+
+
+def _load_receipt_locators_from_directory(
+    directory: Path,
+) -> dict[str, Any]:
+    path = directory / ".receipt-locators.json"
     if not path.exists():
         return {"schema": RECEIPT_LOCATORS_SCHEMA, "paths": {}}
     return _validate_receipt_locators(_read_json(path))
 
 
-def _register_receipt_locator(path: Path, project: str, root: Path) -> str:
+def _merge_receipt_locators(
+    directory: Path,
+    additions: dict[str, str],
+) -> None:
+    if not additions:
+        return
+    locators = _load_receipt_locators_from_directory(directory)
+    locators["paths"].update(additions)
+    _atomic_json(directory / ".receipt-locators.json", locators)
+
+
+def _register_receipt_locator(
+    path: Path,
+    project: str,
+    root: Path,
+    pending_locators: dict[str, str] | None = None,
+) -> str:
     directory = project_dir(project, root)
     if not directory.is_dir() or directory.is_symlink():
         raise RappProjectsError("receipt project directory is unavailable")
     location = str(path.resolve())
+    token = secrets.token_hex(16)
+    if pending_locators is not None:
+        pending_locators[token] = location
+        return "local-private://" + token
     with _PROCESS_LOCK:
         with file_lock(directory / ".chain.lock"):
-            locators = _load_receipt_locators(project, root)
-            token = uuid.uuid4().hex
-            locators["paths"][token] = location
-            _atomic_json(directory / ".receipt-locators.json", locators)
+            _merge_receipt_locators(directory, {token: location})
     return "local-private://" + token
 
 
@@ -1168,10 +1596,7 @@ def _resolve_receipt_path(
             return None
         path = Path(location).expanduser()
         return path.resolve() if path.is_absolute() else None
-    raw = Path(value).expanduser()
-    if raw.is_absolute():
-        return raw.resolve()
-    return safe_join(project_dir(project, root), raw)
+    return None
 
 
 def _hash_file(path: Path) -> tuple[str, int]:
@@ -1187,7 +1612,13 @@ def _hash_file(path: Path) -> tuple[str, int]:
     return digest.hexdigest(), size
 
 
-def artifact_receipt(value: Any, project: Any, root: Any = None) -> dict[str, Any]:
+def artifact_receipt(
+    value: Any,
+    project: Any,
+    root: Any = None,
+    *,
+    pending_locators: dict[str, str] | None = None,
+) -> dict[str, Any]:
     """Hash one file without copying its body into project storage."""
     project = require_slug(project)
     root_path = projects_root(root)
@@ -1201,7 +1632,10 @@ def artifact_receipt(value: Any, project: Any, root: Any = None) -> dict[str, An
                 "supplied artifact receipt cannot be verified on this device"
             )
         current = artifact_receipt(
-            str(resolved), project=project, root=root_path
+            str(resolved),
+            project=project,
+            root=root_path,
+            pending_locators=pending_locators,
         )
         if existing["sha256"] != current["sha256"]:
             raise RappProjectsError("supplied artifact receipt no longer matches")
@@ -1210,17 +1644,50 @@ def artifact_receipt(value: Any, project: Any, root: Any = None) -> dict[str, An
     if not isinstance(raw, (str, os.PathLike)) or not str(raw):
         raise RappProjectsError("artifact receipt requires a file path")
     text = str(raw)
-    resolved = _resolve_receipt_path(text, project=project, root=root_path)
-    if resolved is None:
-        raise RappProjectsError(
-            "local-private receipt URIs can only be reused as complete receipts"
+    if any(
+        text.startswith(prefix)
+        for prefix in ("project://", "projects://", "local-private://")
+    ):
+        if not _valid_receipt_path(text):
+            raise RappProjectsError("artifact receipt path is invalid")
+        resolved = _resolve_receipt_path(
+            text,
+            project=project,
+            root=root_path,
+        )
+        if resolved is None:
+            raise RappProjectsError(
+                "opaque receipt path is not bound on this device"
+            )
+    else:
+        input_path = Path(text).expanduser()
+        candidate = (
+            input_path
+            if input_path.is_absolute()
+            else project_dir(project, root_path) / input_path
+        )
+        if candidate.is_symlink():
+            raise RappProjectsError("artifact receipts refuse symbolic links")
+        resolved = (
+            candidate.resolve()
+            if input_path.is_absolute()
+            else safe_join(project_dir(project, root_path), input_path)
         )
     if resolved.is_symlink():
         raise RappProjectsError("artifact receipts refuse symbolic links")
+    if _managed_storage_path(resolved, project, root_path):
+        raise RappProjectsError(
+            "artifact receipts cannot target project-managed storage"
+        )
     logical = (
         _view_path(resolved, project, root_path)
         if _is_within(resolved, root_path)
-        else _register_receipt_locator(resolved, project, root_path)
+        else _register_receipt_locator(
+            resolved,
+            project,
+            root_path,
+            pending_locators,
+        )
     )
     if not resolved.exists():
         return {
@@ -1244,7 +1711,12 @@ def artifact_receipt(value: Any, project: Any, root: Any = None) -> dict[str, An
     }
 
 
-def _receipt_list(value: Any, project: str, root: Path) -> list[dict[str, Any]]:
+def _receipt_list(
+    value: Any,
+    project: str,
+    root: Path,
+    pending_locators: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
     if value is None:
         values: list[Any] = []
     elif isinstance(value, list):
@@ -1253,7 +1725,15 @@ def _receipt_list(value: Any, project: str, root: Path) -> list[dict[str, Any]]:
         values = [value]
     if len(values) > MAX_LIST_ITEMS:
         raise RappProjectsError("artifact list has too many items")
-    return [artifact_receipt(item, project, root) for item in values]
+    return [
+        artifact_receipt(
+            item,
+            project,
+            root,
+            pending_locators=pending_locators,
+        )
+        for item in values
+    ]
 
 
 def _frame_receipts(frame: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1307,7 +1787,7 @@ def bind_receipt_locators(
     directory = project_dir(project, root_path)
     with _PROCESS_LOCK:
         with file_lock(directory / ".chain.lock"):
-            frames = load_chain(project, root_path)
+            frames = _load_chain_locked(project, root_path)
             historical: dict[str, list[dict[str, Any]]] = {
                 logical: [] for logical in requested
             }
@@ -1454,6 +1934,12 @@ def _validate_payload(kind: str, payload: Any, project: str | None = None) -> No
             raise RappProjectsError("head_frame_hash must be lowercase sha256")
         for receipt in payload["broken_receipts"]:
             _validate_receipt(receipt)
+        if (payload["verdict"] == "pass") != (
+            len(payload["broken_receipts"]) == 0
+        ):
+            raise RappProjectsError(
+                "verification verdict contradicts broken_receipts"
+            )
     for key in ("blockers", "open_questions"):
         if key in payload and not all(isinstance(item, str) for item in payload[key]):
             raise RappProjectsError(f"{key} must contain strings")
@@ -1469,7 +1955,7 @@ def build_frame(
     utc_value: str | None = None,
 ) -> dict[str, Any]:
     """Build one exact unsigned, off-swarm, eleven-key RAPP/1 frame."""
-    if kind not in FRAME_KINDS or not KIND.fullmatch(kind):
+    if kind not in FRAME_KINDS or not _valid_kind(kind):
         raise RappProjectsError("unsupported project frame kind")
     if not _valid_stream_id(stream_id) or not stream_id.endswith(":project"):
         raise RappProjectsError("project stream_id is invalid")
@@ -1483,7 +1969,11 @@ def build_frame(
         raise RappProjectsError("genesis prev must be null")
     if seq > 0 and (not isinstance(prev, str) or not HEX64.fullmatch(prev)):
         raise RappProjectsError("non-genesis prev must be lowercase sha256")
-    _validate_payload(kind, payload)
+    _validate_payload(
+        kind,
+        payload,
+        project=_stream_project(stream_id),
+    )
     stamp = utc_value or utc_now()
     if not _valid_utc(stamp):
         raise RappProjectsError("utc must be a valid millisecond UTC timestamp")
@@ -1517,6 +2007,7 @@ def _verify_frame_or_raise(
     head: dict[str, Any] | None = None,
     stream_id: str | None = None,
     project: str | None = None,
+    signature_verifier: Any = None,
 ) -> None:
     # Step 1 — shape and types.
     if not isinstance(frame, dict) or set(frame) != FRAME_KEYS:
@@ -1525,7 +2016,7 @@ def _verify_frame_or_raise(
         raise FrameVerificationError("1", "spec must be rapp/1")
     if (
         not isinstance(frame.get("kind"), str)
-        or not KIND.fullmatch(frame["kind"])
+        or not _valid_kind(frame["kind"])
         or frame["kind"] not in FRAME_KINDS
     ):
         raise FrameVerificationError("1", "kind is unregistered")
@@ -1558,16 +2049,34 @@ def _verify_frame_or_raise(
             not isinstance(frame[key], str) or not HEX64.fullmatch(frame[key])
         ):
             raise FrameVerificationError("1", f"{key} is invalid")
-    if frame.get("sig") is not None and not isinstance(frame["sig"], str):
-        raise FrameVerificationError("1", "sig must be null or a JWS string")
+    if frame.get("sig") is not None:
+        if not isinstance(frame["sig"], str):
+            raise FrameVerificationError("1", "sig must be null or a JWS string")
+        try:
+            _validate_jws_syntax(frame["sig"])
+        except RappProjectsError as exc:
+            raise FrameVerificationError("1", str(exc)) from exc
     try:
         canonical(frame)
     except RappProjectsError as exc:
         raise FrameVerificationError("1", str(exc)) from exc
 
     # Step 1a — stream binding.
-    if stream_id is not None and frame["stream_id"] != stream_id:
+    if stream_id is None:
+        raise FrameVerificationError("1a", "stream of record is required")
+    if frame["stream_id"] != stream_id:
         raise FrameVerificationError("1a", "frame belongs to another stream")
+    stream_project = _stream_project(frame["stream_id"])
+    if frame["payload"].get("project") != stream_project:
+        raise FrameVerificationError(
+            "1a",
+            "payload project does not match the stream identity",
+        )
+    if project is not None and project != stream_project:
+        raise FrameVerificationError(
+            "1a",
+            "project of record does not match the stream identity",
+        )
 
     # Step 2 — particle.
     if frame["payload_hash"] != H("rapp/1:particle", frame["payload"]):
@@ -1591,6 +2100,11 @@ def _verify_frame_or_raise(
         ):
             raise FrameVerificationError("4", "invalid project genesis")
     else:
+        if frame["kind"] == "project.genesis":
+            raise FrameVerificationError(
+                "4",
+                "project genesis is allowed only at sequence zero",
+            )
         if frame["seq"] != head["seq"] + 1:
             raise FrameVerificationError("4", "sequence is not contiguous")
         if frame["prev"] != head["payload_hash"]:
@@ -1612,7 +2126,20 @@ def _verify_frame_or_raise(
 
     # Step 6 — local project streams are intentionally unsigned.
     if frame["sig"] is not None:
-        raise FrameVerificationError("6", "sig must be null on this local stream")
+        if signature_verifier is None:
+            raise FrameVerificationError(
+                "6",
+                "signed frame requires a RAPP registry trust verifier",
+            )
+        try:
+            verified = signature_verifier(frame)
+        except Exception as exc:
+            raise FrameVerificationError(
+                "6",
+                "signature trust verification failed",
+            ) from exc
+        if verified is not True:
+            raise FrameVerificationError("6", "signature is not trusted")
 
 
 def verify_frame(
@@ -1620,6 +2147,7 @@ def verify_frame(
     head: dict[str, Any] | None = None,
     stream_id: str | None = None,
     project: str | None = None,
+    signature_verifier: Any = None,
 ) -> tuple[bool, str | None]:
     """Return ``(ok, reason)`` after the ordered RAPP/1 checklist."""
     try:
@@ -1628,18 +2156,31 @@ def verify_frame(
             head=head,
             stream_id=stream_id,
             project=project,
+            signature_verifier=signature_verifier,
         )
         return True, None
     except FrameVerificationError as exc:
         return False, str(exc)
 
 
-def _head_record(frame: dict[str, Any]) -> dict[str, Any]:
+def _chain_hash(frames: list[dict[str, Any]]) -> str:
+    digest = hashlib.sha256(b"rapp-project-chain/1\n")
+    for frame in frames:
+        digest.update(frame["frame_hash"].encode("ascii"))
+        digest.update(b"\n")
+    return digest.hexdigest()
+
+
+def _head_record(frames: list[dict[str, Any]]) -> dict[str, Any]:
+    if not frames:
+        raise RappProjectsError("trusted head requires at least one frame")
+    frame = frames[-1]
     return {
         "schema": HEAD_SCHEMA,
         "stream_id": frame["stream_id"],
         "seq": frame["seq"],
         "frame_hash": frame["frame_hash"],
+        "chain_hash": _chain_hash(frames),
     }
 
 
@@ -1654,9 +2195,43 @@ def _validate_head(value: Any, stream_id: str) -> dict[str, Any]:
         or not 0 <= value["seq"] <= MAX_SAFE_INTEGER
         or not isinstance(value["frame_hash"], str)
         or not HEX64.fullmatch(value["frame_hash"])
+        or not isinstance(value["chain_hash"], str)
+        or not HEX64.fullmatch(value["chain_hash"])
     ):
         raise ChainVerificationError("trusted head metadata is invalid")
     return dict(value)
+
+
+def _load_trusted_head(
+    head_path: Path,
+    frames: list[dict[str, Any]],
+    stream_id: str,
+) -> dict[str, Any]:
+    value = _read_json(head_path)
+    if (
+        isinstance(value, dict)
+        and set(value) == LEGACY_HEAD_KEYS
+        and value.get("schema") == LEGACY_HEAD_SCHEMA
+    ):
+        seq = value.get("seq")
+        frame_hash = value.get("frame_hash")
+        if (
+            value.get("stream_id") != stream_id
+            or not isinstance(seq, int)
+            or isinstance(seq, bool)
+            or seq < 0
+            or seq >= len(frames)
+            or not isinstance(frame_hash, str)
+            or not HEX64.fullmatch(frame_hash)
+            or frames[seq]["frame_hash"] != frame_hash
+        ):
+            raise ChainVerificationError(
+                "legacy trusted head does not match the chain"
+            )
+        upgraded = _head_record(frames[: seq + 1])
+        _atomic_json(head_path, upgraded)
+        return upgraded
+    return _validate_head(value, stream_id)
 
 
 def _load_chain_bytes(
@@ -1712,7 +2287,7 @@ def _check_trusted_head(
         return
     if not head_path.is_file() or head_path.is_symlink():
         raise ChainVerificationError("trusted project head is missing")
-    trusted = _validate_head(_read_json(head_path), stream_id)
+    trusted = _load_trusted_head(head_path, frames, stream_id)
     actual = frames[-1]
     if trusted["seq"] > actual["seq"]:
         raise ChainVerificationError("presented chain rolls back the trusted head")
@@ -1721,14 +2296,155 @@ def _check_trusted_head(
     trusted_frame = frames[trusted["seq"]]
     if trusted_frame["frame_hash"] != trusted["frame_hash"]:
         raise ChainVerificationError("chain forks from the trusted head")
+    trusted_chain_hash = _chain_hash(frames[: trusted["seq"] + 1])
+    if trusted_chain_hash != trusted["chain_hash"]:
+        raise ChainVerificationError(
+            "chain history differs beneath the trusted head"
+        )
     if trusted["seq"] < actual["seq"]:
-        _atomic_json(head_path, _head_record(actual))
+        try:
+            _atomic_json(head_path, _head_record(frames))
+        except OSError:
+            pass
 
 
-def load_chain(project: Any, root: Any = None) -> list[dict[str, Any]]:
-    """Load a complete verified chain and enforce its persisted monotonic head."""
-    project = require_slug(project)
-    root_path = projects_root(root)
+def _validate_append_transaction(
+    value: Any,
+    stream_id: str,
+) -> dict[str, Any]:
+    keys = {
+        "schema",
+        "phase",
+        "stream_id",
+        "base_seq",
+        "base_frame_hash",
+        "base_chain_hash",
+        "final_seq",
+        "final_payload_hash",
+        "final_frame_hash",
+        "final_chain_hash",
+        "locators",
+    }
+    if not isinstance(value, dict) or set(value) != keys:
+        raise ChainVerificationError("append transaction has an invalid key set")
+    if (
+        value["schema"] != APPEND_TRANSACTION_SCHEMA
+        or not isinstance(value["phase"], str)
+        or value["phase"] not in {"prepared", "committed"}
+        or value["stream_id"] != stream_id
+        or not isinstance(value["base_seq"], int)
+        or isinstance(value["base_seq"], bool)
+        or not isinstance(value["final_seq"], int)
+        or isinstance(value["final_seq"], bool)
+        or value["base_seq"] < 0
+        or value["final_seq"] <= value["base_seq"]
+        or value["final_seq"] > MAX_SAFE_INTEGER
+        or any(
+            not isinstance(value[key], str)
+            or not HEX64.fullmatch(value[key])
+            for key in (
+                "base_frame_hash",
+                "base_chain_hash",
+                "final_payload_hash",
+                "final_frame_hash",
+                "final_chain_hash",
+            )
+        )
+        or not isinstance(value["locators"], dict)
+    ):
+        raise ChainVerificationError("append transaction is invalid")
+    for token, location in value["locators"].items():
+        if (
+            not isinstance(token, str)
+            or not LOCATOR_TOKEN.fullmatch(token)
+            or not isinstance(location, str)
+            or not Path(location).is_absolute()
+        ):
+            raise ChainVerificationError(
+                "append transaction locator is invalid"
+            )
+    return dict(value)
+
+
+def _append_transaction_record(
+    frames: list[dict[str, Any]],
+    extension: list[dict[str, Any]],
+    phase: str,
+    locators: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    base = frames[-1]
+    final_frames = frames + extension
+    final = final_frames[-1]
+    return {
+        "schema": APPEND_TRANSACTION_SCHEMA,
+        "phase": phase,
+        "stream_id": base["stream_id"],
+        "base_seq": base["seq"],
+        "base_frame_hash": base["frame_hash"],
+        "base_chain_hash": _chain_hash(frames),
+        "final_seq": final["seq"],
+        "final_payload_hash": final["payload_hash"],
+        "final_frame_hash": final["frame_hash"],
+        "final_chain_hash": _chain_hash(final_frames),
+        "locators": dict(locators or {}),
+    }
+
+
+def _recover_append_transaction_locked(
+    directory: Path,
+    frames: list[dict[str, Any]],
+    stream_id: str,
+) -> None:
+    transaction_path = directory / ".append-transaction.json"
+    if not transaction_path.exists():
+        return
+    transaction = _validate_append_transaction(
+        _read_json(transaction_path),
+        stream_id,
+    )
+    current = frames[-1]
+    current_chain_hash = _chain_hash(frames)
+    final_matches = (
+        current["seq"] == transaction["final_seq"]
+        and current["frame_hash"] == transaction["final_frame_hash"]
+        and current["payload_hash"] == transaction["final_payload_hash"]
+        and current_chain_hash == transaction["final_chain_hash"]
+    )
+    base_matches = (
+        current["seq"] == transaction["base_seq"]
+        and current["frame_hash"] == transaction["base_frame_hash"]
+        and current_chain_hash == transaction["base_chain_hash"]
+    )
+    if final_matches:
+        _merge_receipt_locators(
+            directory,
+            transaction["locators"],
+        )
+        try:
+            _atomic_json(
+                directory / "head.json",
+                _head_record(frames),
+            )
+        except OSError:
+            return
+        transaction_path.unlink(missing_ok=True)
+        _fsync_directory(directory)
+        return
+
+    if base_matches and transaction["phase"] == "prepared":
+        transaction_path.unlink(missing_ok=True)
+        _fsync_directory(directory)
+        return
+    if transaction["phase"] == "committed":
+        raise ChainVerificationError(
+            "presented chain rolls back a committed append transaction"
+        )
+    raise ChainVerificationError(
+        "chain does not match append transaction boundaries"
+    )
+
+
+def _load_chain_locked(project: str, root_path: Path) -> list[dict[str, Any]]:
     directory = project_dir(project, root_path)
     metadata = _validate_project_metadata(directory, project)
     stream_id = project_stream_id(metadata["identity"]["rappid"])
@@ -1742,29 +2458,127 @@ def load_chain(project: Any, root: Any = None) -> list[dict[str, Any]]:
     )
     if not frames:
         raise ChainVerificationError("opened project has an empty chain")
+    _recover_append_transaction_locked(directory, frames, stream_id)
     _check_trusted_head(directory, frames, stream_id)
     return frames
+
+
+def load_chain(project: Any, root: Any = None) -> list[dict[str, Any]]:
+    """Read chain and head under one cross-process project lock."""
+    project = require_slug(project)
+    root_path = projects_root(root)
+    directory = project_dir(project, root_path)
+    if directory.is_symlink() or not directory.is_dir():
+        raise ChainVerificationError("project cell must be a regular directory")
+    with _PROCESS_LOCK:
+        with file_lock(directory / ".chain.lock"):
+            return _load_chain_locked(project, root_path)
 
 
 def _append_octets(path: Path, record: bytes) -> None:
     if len(record) > MAX_CANONICAL_BYTES + 1 or not record.endswith(b"\n"):
         raise RappProjectsError("append record exceeds the frame limit")
-    flags = os.O_WRONLY | os.O_APPEND | os.O_CREAT
-    if hasattr(os, "O_BINARY"):
-        flags |= os.O_BINARY
-    descriptor = os.open(path, flags, 0o600)
+    if path.exists():
+        if path.is_symlink() or not path.is_file():
+            raise RappProjectsError("append target must be a regular file")
+        existing = _read_bounded(path, MAX_CHAIN_BYTES, path.name)
+    else:
+        existing = b""
+    if len(existing) + len(record) > MAX_CHAIN_BYTES:
+        raise RappProjectsError("chain exceeds the storage byte limit")
+    _atomic_bytes(path, existing + record)
+
+
+def _commit_chain_extension_locked(
+    directory: Path,
+    project: str,
+    frames: list[dict[str, Any]],
+    extension: list[dict[str, Any]],
+    pending_locators: dict[str, str] | None = None,
+) -> list[dict[str, str]]:
+    if not extension:
+        return []
+    stream_id = frames[0]["stream_id"]
+    chain_path = directory / "chain.jsonl"
+    existing = _read_bounded(chain_path, MAX_CHAIN_BYTES, "chain.jsonl")
+    suffix = b"".join(
+        canonical(frame).encode("utf-8") + b"\n"
+        for frame in extension
+    )
+    updated = existing + suffix
+    _load_chain_bytes(updated, project=project, stream_id=stream_id)
+    transaction_path = directory / ".append-transaction.json"
+    _atomic_json(
+        transaction_path,
+        _append_transaction_record(
+            frames,
+            extension,
+            "prepared",
+            pending_locators,
+        ),
+    )
+    warnings: list[dict[str, str]] = []
     try:
-        written = os.write(descriptor, record)
-        if written != len(record):
-            raise OSError("atomic append wrote a partial record")
-        os.fsync(descriptor)
-    finally:
-        os.close(descriptor)
+        _atomic_bytes(chain_path, updated)
+    except (OSError, RappProjectsError):
+        transaction_path.unlink(missing_ok=True)
+        _fsync_directory(directory)
+        raise
     try:
-        os.chmod(path, 0o600)
+        _atomic_json(
+            transaction_path,
+            _append_transaction_record(
+                frames,
+                extension,
+                "committed",
+                pending_locators,
+            ),
+        )
     except OSError:
-        pass
-    _fsync_directory(path.parent)
+        warnings.append(
+            {
+                "code": "commit-marker-refresh-failed",
+                "message": (
+                    "frame committed; append marker recovery remains pending"
+                ),
+            }
+        )
+    locators_written = True
+    try:
+        _merge_receipt_locators(
+            directory,
+            dict(pending_locators or {}),
+        )
+    except (OSError, RappProjectsError):
+        locators_written = False
+        warnings.append(
+            {
+                "code": "receipt-locator-refresh-failed",
+                "message": (
+                    "frame committed; receipt locator recovery remains pending"
+                ),
+            }
+        )
+    head_written = True
+    try:
+        _atomic_json(
+            directory / "head.json",
+            _head_record(frames + extension),
+        )
+    except OSError:
+        head_written = False
+        warnings.append(
+            {
+                "code": "head-refresh-failed",
+                "message": (
+                    "frame committed; trusted head recovery remains pending"
+                ),
+            }
+        )
+    if locators_written and head_written:
+        transaction_path.unlink(missing_ok=True)
+        _fsync_directory(directory)
+    return warnings
 
 
 def _append_locked(
@@ -1772,9 +2586,10 @@ def _append_locked(
     kind: str,
     payload: dict[str, Any],
     root: Path,
+    pending_locators: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     directory = project_dir(project, root)
-    frames = load_chain(project, root)
+    frames = _load_chain_locked(project, root)
     head = frames[-1]
     frame = build_frame(
         kind,
@@ -1789,12 +2604,14 @@ def _append_locked(
         stream_id=head["stream_id"],
         project=project,
     )
-    _append_octets(
-        directory / "chain.jsonl",
-        canonical(frame).encode("utf-8") + b"\n",
+    warnings = _commit_chain_extension_locked(
+        directory,
+        project,
+        frames,
+        [frame],
+        pending_locators,
     )
-    _atomic_json(directory / "head.json", _head_record(frame))
-    return frame
+    return CommittedFrame(frame, warnings)
 
 
 def append_frame(
@@ -1804,6 +2621,7 @@ def append_frame(
     root: Any = None,
     *,
     refresh: bool = False,
+    pending_locators: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """Append after locking, reloading, and verifying the authoritative chain."""
     project = require_slug(project)
@@ -1812,7 +2630,13 @@ def append_frame(
     directory = project_dir(project, root_path)
     with _PROCESS_LOCK:
         with file_lock(directory / ".chain.lock"):
-            frame = _append_locked(project, kind, payload, root_path)
+            frame = _append_locked(
+                project,
+                kind,
+                payload,
+                root_path,
+                pending_locators,
+            )
     if refresh:
         refresh_views(root_path)
     return frame
@@ -1827,9 +2651,10 @@ def open_project(
     root: Any = None,
     *,
     refresh: bool = False,
+    identity_owner: Any = None,
 ) -> dict[str, Any] | None:
     project = require_slug(project)
-    root_path = ensure_root(root)
+    root_path = ensure_root(root, identity_owner=identity_owner)
     directory = project_dir(project, root_path)
     payload = {
         "project": project,
@@ -1845,20 +2670,26 @@ def open_project(
             root_metadata = _validate_root_locked(root_path)
             if directory.exists():
                 with file_lock(directory / ".chain.lock"):
-                    load_chain(project, root_path)
+                    _load_chain_locked(project, root_path)
                 return None
             old_manifest = root_metadata["cell"]
-            created = False
+            staging = root_path / (
+                f".staging-{project}-{secrets.token_hex(16)}"
+            )
             try:
-                _mkdir(directory)
-                created = True
-                project_rappid = mint_rappid(project)
+                _mkdir(staging)
+                project_rappid = mint_rappid(
+                    project,
+                    owner=_rappid_owner(
+                        root_metadata["identity"]["rappid"]
+                    ),
+                )
                 _atomic_json(
-                    directory / "rappid.json",
+                    staging / "rappid.json",
                     _identity_record(project_rappid, "project", project),
                 )
                 _atomic_json(
-                    directory / "lineage.json",
+                    staging / "lineage.json",
                     {
                         "schema": PROJECT_LINEAGE_SCHEMA,
                         "parent_rappid": root_metadata["identity"]["rappid"],
@@ -1866,7 +2697,7 @@ def open_project(
                     },
                 )
                 _atomic_json(
-                    directory / "manifest.json",
+                    staging / "manifest.json",
                     _cell_manifest("factory", f"projects/{project}", []),
                 )
                 frame = build_frame(
@@ -1876,27 +2707,43 @@ def open_project(
                     payload,
                     None,
                 )
-                with file_lock(directory / ".chain.lock"):
+                with file_lock(staging / ".chain.lock"):
                     _append_octets(
-                        directory / "chain.jsonl",
+                        staging / "chain.jsonl",
                         canonical(frame).encode("utf-8") + b"\n",
                     )
-                    _atomic_json(directory / "head.json", _head_record(frame))
-                updated = dict(old_manifest)
-                updated["children"] = sorted(old_manifest["children"] + [project])
-                _validate_cell(updated)
-                _atomic_json(root_path / "manifest.json", updated)
+                    _atomic_json(staging / "head.json", _head_record([frame]))
+                metadata = _validate_project_metadata(staging, project)
+                stream_id = project_stream_id(
+                    metadata["identity"]["rappid"]
+                )
+                staged_frames = _load_chain_bytes(
+                    _read_bounded(
+                        staging / "chain.jsonl",
+                        MAX_CHAIN_BYTES,
+                        "chain.jsonl",
+                    ),
+                    project=project,
+                    stream_id=stream_id,
+                )
+                _check_trusted_head(staging, staged_frames, stream_id)
+                warnings = _publish_staged_project_locked(
+                    root_path,
+                    project,
+                    staging,
+                    old_manifest,
+                    "create",
+                )
                 _validate_root_locked(root_path)
-            except BaseException:
-                if created and directory.exists():
-                    import shutil
-
-                    shutil.rmtree(directory)
-                _atomic_json(root_path / "manifest.json", old_manifest)
+            except (OSError, RappProjectsError):
+                if (root_path / ".project-transaction.json").exists():
+                    _recover_project_transaction_locked(root_path)
+                elif staging.exists():
+                    shutil.rmtree(staging)
                 raise
     if refresh:
         refresh_views(root_path)
-    return frame
+    return CommittedFrame(frame, warnings)
 
 
 def _verify_receipts(
@@ -1934,8 +2781,7 @@ def fold_project(
     now: datetime | None = None,
 ) -> dict[str, Any]:
     project = require_slug(project)
-    root_path = projects_root(root)
-    frames = load_chain(project, root_path) if frames is None else list(frames)
+    frames = load_chain(project, root) if frames is None else list(frames)
     if not frames:
         raise ChainVerificationError("cannot fold an empty project chain")
     stream_id = frames[0]["stream_id"]
@@ -2124,10 +2970,20 @@ def _public_value(
             for item in value
         ]
     if isinstance(value, dict):
-        return {
-            key: _public_value(child, root, portable=portable)
-            for key, child in value.items()
-        }
+        public: dict[str, Any] = {}
+        for key, child in value.items():
+            base_key = _sanitize_text(key, root, portable=portable)
+            public_key = base_key
+            ordinal = 2
+            while public_key in public:
+                public_key = f"{base_key}#{ordinal}"
+                ordinal += 1
+            public[public_key] = _public_value(
+                child,
+                root,
+                portable=portable,
+            )
+        return public
     return value
 
 
@@ -2263,8 +3119,16 @@ def refresh_views(root: Any = None) -> list[dict[str, Any]]:
                 for project in root_metadata["projects"]:
                     directory = project_dir(project, root_path)
                     with file_lock(directory / ".chain.lock"):
-                        frames = load_chain(project, root_path)
+                        frames = _load_chain_locked(project, root_path)
                         state = fold_project(project, frames, root_path)
+                        state["verified"] = bool(
+                            state["verified"]
+                            and not _verify_receipts(
+                                frames,
+                                project,
+                                root_path,
+                            )
+                        )
                     states.append(state)
                     status_documents.append(
                         (directory / "STATUS.md", _status_markdown(state, root_path))
@@ -2292,7 +3156,7 @@ def verify_project(
     directory = project_dir(project, root_path)
     with _PROCESS_LOCK:
         with file_lock(directory / ".chain.lock"):
-            frames = load_chain(project, root_path)
+            frames = _load_chain_locked(project, root_path)
             broken = _verify_receipts(frames, project, root_path)
             verdict = "fail" if broken else "pass"
             frame = None
@@ -2329,9 +3193,10 @@ def inspect_project(project: Any, root: Any = None) -> dict[str, Any]:
     with _PROCESS_LOCK:
         with file_lock(directory / ".chain.lock"):
             metadata = _validate_project_metadata(directory, project)
-            frames = load_chain(project, root_path)
+            frames = _load_chain_locked(project, root_path)
             state = fold_project(project, frames, root_path)
             broken = _verify_receipts(frames, project, root_path)
+            state["verified"] = bool(state["verified"] and not broken)
     return {
         "project": project,
         "identity": metadata["identity"],
@@ -2468,7 +3333,7 @@ def export_project_egg(
     directory = project_dir(project, root_path)
     with _PROCESS_LOCK:
         with file_lock(directory / ".chain.lock"):
-            frames = load_chain(project, root_path)
+            frames = _load_chain_locked(project, root_path)
             broken = _verify_receipts(frames, project, root_path)
             if broken:
                 raise RappProjectsError(
@@ -2693,18 +3558,21 @@ def verify_project_egg(path: Any) -> dict[str, Any]:
     )
     if files["agent.py"] != _egg_agent_bytes(project, identity["rappid"]):
         raise EggVerificationError("metadata-only agent.py marker is invalid")
-    frames = _load_chain_bytes(
-        files["chain.jsonl"],
-        project=project,
-        stream_id=payload["stream_id"],
-    )
+    try:
+        frames = _load_chain_bytes(
+            files["chain.jsonl"],
+            project=project,
+            stream_id=payload["stream_id"],
+        )
+    except ChainVerificationError as exc:
+        raise EggVerificationError(str(exc)) from exc
     if (
         len(frames) != payload["frame_count"]
         or frames[-1]["frame_hash"] != payload["head_frame_hash"]
         or frames[-1]["utc"] != manifest["created_utc"]
     ):
         raise EggVerificationError("egg chain head metadata does not match")
-    state = fold_project(project, frames, root=Path.cwd())
+    state = fold_project(project, frames)
     expected_status = _status_markdown(
         state,
         None,
@@ -2738,16 +3606,18 @@ def import_project_egg(
     root: Any = None,
     *,
     refresh: bool = False,
+    identity_owner: Any = None,
 ) -> dict[str, Any]:
     """Verify the full egg first, then create or fast-forward without reparenting."""
     verified = verify_project_egg(path)
     manifest = verified["manifest"]
     project = manifest["payload"]["project"]
     incoming_frames = verified["frames"]
-    root_path = ensure_root(root)
+    root_path = ensure_root(root, identity_owner=identity_owner)
     directory = project_dir(project, root_path)
     imported_frames = 0
     created = False
+    storage_warnings: list[dict[str, str]] = []
     with _PROCESS_LOCK:
         with file_lock(root_path / ".projects.lock"):
             root_metadata = _validate_root_locked(root_path)
@@ -2758,7 +3628,7 @@ def import_project_egg(
                         raise DivergentChainError(
                             "local project uses a different RAPPID"
                         )
-                    local_frames = load_chain(project, root_path)
+                    local_frames = _load_chain_locked(project, root_path)
                     local_hashes = _frame_hashes(local_frames)
                     incoming_hashes = _frame_hashes(incoming_frames)
                     common = 0
@@ -2776,47 +3646,72 @@ def import_project_egg(
                         raise DivergentChainError(
                             "egg is stale and would roll back the local head"
                         )
-                    for frame in incoming_frames[len(local_frames) :]:
-                        _append_octets(
-                            directory / "chain.jsonl",
-                            canonical(frame).encode("utf-8") + b"\n",
+                    extension = incoming_frames[len(local_frames) :]
+                    storage_warnings.extend(
+                        _commit_chain_extension_locked(
+                            directory,
+                            project,
+                            local_frames,
+                            extension,
                         )
-                        _atomic_json(directory / "head.json", _head_record(frame))
-                        imported_frames += 1
-                    load_chain(project, root_path)
+                    )
+                    imported_frames = len(extension)
             else:
                 old_manifest = root_metadata["cell"]
+                staging = (
+                    root_path
+                    / f".staging-{project}-{secrets.token_hex(16)}"
+                )
                 try:
-                    _mkdir(directory)
-                    _atomic_json(directory / "rappid.json", verified["identity"])
-                    _atomic_json(directory / "manifest.json", verified["cell"])
-                    _atomic_json(directory / "lineage.json", verified["lineage"])
+                    if _rappid_owner(
+                        verified["identity"]["rappid"]
+                    ) != _rappid_owner(root_metadata["identity"]["rappid"]):
+                        raise RappProjectsError(
+                            "imported project owner does not match root authority"
+                        )
+                    _mkdir(staging)
+                    _atomic_json(staging / "rappid.json", verified["identity"])
+                    _atomic_json(staging / "manifest.json", verified["cell"])
+                    _atomic_json(staging / "lineage.json", verified["lineage"])
                     _atomic_bytes(
-                        directory / "chain.jsonl", verified["files"]["chain.jsonl"]
+                        staging / "chain.jsonl",
+                        verified["files"]["chain.jsonl"],
                     )
                     _atomic_json(
-                        directory / "head.json",
-                        _head_record(incoming_frames[-1]),
+                        staging / "head.json",
+                        _head_record(incoming_frames),
                     )
-                    _atomic_bytes(
-                        directory / "STATUS.md", verified["files"]["STATUS.md"]
+                    metadata = _validate_project_metadata(staging, project)
+                    stream_id = project_stream_id(
+                        metadata["identity"]["rappid"]
                     )
-                    updated = dict(old_manifest)
-                    updated["children"] = sorted(
-                        old_manifest["children"] + [project]
+                    staged_frames = _load_chain_bytes(
+                        _read_bounded(
+                            staging / "chain.jsonl",
+                            MAX_CHAIN_BYTES,
+                            "chain.jsonl",
+                        ),
+                        project=project,
+                        stream_id=stream_id,
                     )
-                    _validate_cell(updated)
-                    _atomic_json(root_path / "manifest.json", updated)
+                    _check_trusted_head(staging, staged_frames, stream_id)
+                    storage_warnings.extend(
+                        _publish_staged_project_locked(
+                            root_path,
+                            project,
+                            staging,
+                            old_manifest,
+                            "import",
+                        )
+                    )
                     _validate_root_locked(root_path)
-                    load_chain(project, root_path)
                     imported_frames = len(incoming_frames)
                     created = True
-                except BaseException:
-                    if directory.exists():
-                        import shutil
-
-                        shutil.rmtree(directory)
-                    _atomic_json(root_path / "manifest.json", old_manifest)
+                except (OSError, RappProjectsError):
+                    if (root_path / ".project-transaction.json").exists():
+                        _recover_project_transaction_locked(root_path)
+                    elif staging.exists():
+                        shutil.rmtree(staging)
                     raise
     if refresh:
         refresh_views(root_path)
@@ -2827,13 +3722,14 @@ def import_project_egg(
         "head_frame_hash": incoming_frames[-1]["frame_hash"],
         "egg_hash": verified["egg_hash"],
         "visibility": VISIBILITY,
+        "storage_warnings": storage_warnings,
     }
 
 
 PROTOCOL = {
     "schema": "rapp-projects-protocol/1",
     "agent": __manifest__["name"],
-    "version": "1.0.2",
+    "version": "1.0.3",
     "operations": list(OPERATIONS),
     "root_precedence": [
         "explicit root",
@@ -2841,6 +3737,9 @@ PROTOCOL = {
         "~/.rapp/projects-control",
     ],
     "identity": {
+        "owner": (
+            "explicit identity_owner or RAPP_PROJECTS_OWNER when minting root"
+        ),
         "mint": "UUIDv4 keyless RAPPID once per root and project",
         "project_stream": "<project-rappid>:project",
         "name_hash_identity": False,
@@ -2853,7 +3752,10 @@ PROTOCOL = {
         "frame_hash": 'H("rapp/1:wave", frame without frame_hash and sig)',
         "prev": "previous payload_hash",
         "prev_wave": None,
-        "sig": None,
+        "sig": (
+            "producer emits null; signed input requires exact detached JWS "
+            "plus a caller-supplied RAPP registry trust verifier"
+        ),
         "verification_order": ["1", "1a", "2", "3", "4", "5", "6"],
         "limits": {
             "canonical_bytes": MAX_CANONICAL_BYTES,
@@ -2889,6 +3791,10 @@ PROTOCOL = {
             "until owner-approved matching bytes are rebound"
         ),
         "egg_output": "<root>/<project>/PROJECT.egg only",
+        "persistence": (
+            "atomic chain replacement, rolling trusted chain digest, and "
+            "fsynced append/root/project journals"
+        ),
         "corruption_policy": "fail closed",
         "fork_policy": "refuse divergence",
     },
@@ -2936,6 +3842,9 @@ class RappProjectsAgent(BasicAgent):
         root: Path,
         **values: Any,
     ) -> str:
+        storage_warnings = values.pop("_storage_warnings", [])
+        if storage_warnings:
+            values["storage_warnings"] = storage_warnings
         try:
             refresh_views(root)
         except (RappProjectsError, OSError) as exc:
@@ -2989,6 +3898,13 @@ class RappProjectsAgent(BasicAgent):
         root_path: Path | None = None
         try:
             canonical(dict(kwargs))
+            unknown = sorted(
+                set(kwargs) - set(AGENT_PARAMETERS["properties"])
+            )
+            if unknown:
+                raise RappProjectsError(
+                    "unknown argument(s): " + ", ".join(unknown)
+                )
             if operation_value is None:
                 raise RappProjectsError(
                     "operation is required; action is a compatibility alias"
@@ -2998,7 +3914,27 @@ class RappProjectsAgent(BasicAgent):
             if operation == "protocol":
                 return self._result(operation, protocol=PROTOCOL)
 
-            root_path = projects_root(kwargs.get("root"))
+            if operation == "import":
+                egg = kwargs.get("egg")
+                if not isinstance(egg, (str, os.PathLike)) or not str(egg):
+                    raise RappProjectsError("import requires egg")
+                root_path = projects_root(kwargs.get("root"))
+                result = import_project_egg(
+                    egg,
+                    root_path,
+                    refresh=False,
+                    identity_owner=kwargs.get("identity_owner"),
+                )
+                return self._result_after_refresh(
+                    operation,
+                    root_path,
+                    **result,
+                )
+
+            root_path = ensure_root(
+                kwargs.get("root"),
+                identity_owner=kwargs.get("identity_owner"),
+            )
             if operation == "open":
                 raw_project = kwargs.get("project")
                 project = (
@@ -3014,6 +3950,7 @@ class RappProjectsAgent(BasicAgent):
                     _string(kwargs.get("origin"), "origin", 1000, "local"),
                     root_path,
                     refresh=False,
+                    identity_owner=kwargs.get("identity_owner"),
                 )
                 frames = load_chain(project, root_path)
                 return self._result_after_refresh(
@@ -3026,6 +3963,11 @@ class RappProjectsAgent(BasicAgent):
                     seq=frame["seq"] if frame else frames[-1]["seq"],
                     frame_hash=(
                         frame["frame_hash"] if frame else frames[-1]["frame_hash"]
+                    ),
+                    _storage_warnings=getattr(
+                        frame,
+                        "storage_warnings",
+                        [],
                     ),
                 )
 
@@ -3043,7 +3985,12 @@ class RappProjectsAgent(BasicAgent):
                             "state": state["state"],
                             "status": state["status"],
                             "pct": state["pct"],
-                            "agents": sorted(state["agents"]),
+                            "agents": sorted(
+                                _public_value(
+                                    state["agents"],
+                                    root_path,
+                                )
+                            ),
                             "blockers": _public_value(
                                 state["blockers"], root_path
                             ),
@@ -3055,17 +4002,6 @@ class RappProjectsAgent(BasicAgent):
                         }
                         for state in states
                     ],
-                )
-
-            if operation == "import":
-                egg = kwargs.get("egg", kwargs.get("path"))
-                if not isinstance(egg, (str, os.PathLike)) or not str(egg):
-                    raise RappProjectsError("import requires egg")
-                result = import_project_egg(egg, root_path, refresh=False)
-                return self._result_after_refresh(
-                    operation,
-                    root_path,
-                    **result,
                 )
 
             project = require_slug(kwargs.get("project"))
@@ -3118,9 +4054,11 @@ class RappProjectsAgent(BasicAgent):
                     project=project,
                     seq=frame["seq"],
                     frame_hash=frame["frame_hash"],
+                    _storage_warnings=frame.storage_warnings,
                 )
 
             if operation == "status":
+                pending_locators: dict[str, str] = {}
                 pct = kwargs.get("pct", 0)
                 if not isinstance(pct, int) or isinstance(pct, bool):
                     raise RappProjectsError("pct must be an integer")
@@ -3142,7 +4080,10 @@ class RappProjectsAgent(BasicAgent):
                         kwargs.get("status"), "status", 500, "working"
                     ),
                     "artifacts": _receipt_list(
-                        kwargs.get("artifacts"), project, root_path
+                        kwargs.get("artifacts"),
+                        project,
+                        root_path,
+                        pending_locators,
                     ),
                     "blockers": _string_list(
                         kwargs.get("blockers"), "blockers", item_limit=1000
@@ -3160,6 +4101,7 @@ class RappProjectsAgent(BasicAgent):
                     payload,
                     root_path,
                     refresh=False,
+                    pending_locators=pending_locators,
                 )
                 return self._result_after_refresh(
                     operation,
@@ -3167,11 +4109,16 @@ class RappProjectsAgent(BasicAgent):
                     project=project,
                     seq=frame["seq"],
                     frame_hash=frame["frame_hash"],
+                    _storage_warnings=frame.storage_warnings,
                 )
 
             if operation == "handoff":
+                pending_locators = {}
                 document = artifact_receipt(
-                    kwargs.get("doc"), project, root_path
+                    kwargs.get("doc"),
+                    project,
+                    root_path,
+                    pending_locators=pending_locators,
                 )
                 if not document["exists"]:
                     raise RappProjectsError(
@@ -3203,6 +4150,7 @@ class RappProjectsAgent(BasicAgent):
                     },
                     root_path,
                     refresh=False,
+                    pending_locators=pending_locators,
                 )
                 return self._result_after_refresh(
                     operation,
@@ -3211,9 +4159,11 @@ class RappProjectsAgent(BasicAgent):
                     seq=frame["seq"],
                     frame_hash=frame["frame_hash"],
                     doc=document,
+                    _storage_warnings=frame.storage_warnings,
                 )
 
             if operation == "punchout":
+                pending_locators = {}
                 frame = append_frame(
                     project,
                     "work.punchout",
@@ -3226,7 +4176,10 @@ class RappProjectsAgent(BasicAgent):
                             kwargs.get("outcome"), "outcome", 20, "done"
                         ),
                         "receipts": _receipt_list(
-                            kwargs.get("receipts"), project, root_path
+                            kwargs.get("receipts"),
+                            project,
+                            root_path,
+                            pending_locators,
                         ),
                         "summary": _string(
                             kwargs.get("summary"), "summary", 4000, ""
@@ -3239,6 +4192,7 @@ class RappProjectsAgent(BasicAgent):
                     },
                     root_path,
                     refresh=False,
+                    pending_locators=pending_locators,
                 )
                 return self._result_after_refresh(
                     operation,
@@ -3246,6 +4200,7 @@ class RappProjectsAgent(BasicAgent):
                     project=project,
                     seq=frame["seq"],
                     frame_hash=frame["frame_hash"],
+                    _storage_warnings=frame.storage_warnings,
                 )
 
             if operation == "verify":
@@ -3272,6 +4227,7 @@ class RappProjectsAgent(BasicAgent):
                     **result,
                     seq=frame["seq"],
                     verification_frame_hash=frame["frame_hash"],
+                    _storage_warnings=frame.storage_warnings,
                 )
 
             if operation == "inspect":
@@ -3342,6 +4298,7 @@ def _main(argv: list[str]) -> int:
 
 __all__ = [
     "ChainVerificationError",
+    "CommittedFrame",
     "DivergentChainError",
     "EggVerificationError",
     "FRAME_KEYS",
@@ -3369,6 +4326,7 @@ __all__ = [
     "project_stream_id",
     "projects_root",
     "refresh_views",
+    "require_identity_owner",
     "require_slug",
     "safe_join",
     "slugify",

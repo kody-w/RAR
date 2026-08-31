@@ -113,6 +113,7 @@ def projects():
 
 
 def perform(instance, action: str, **request) -> dict[str, object]:
+    request.setdefault("identity_owner", "example-owner")
     properties = instance.metadata["parameters"]["properties"]
     action_key = "action" if "action" in properties else "operation"
     choices = properties[action_key].get("enum", [])
@@ -139,7 +140,6 @@ def open_project(projects, root: Path, project: str = PROJECT) -> None:
         goal="Verify portable project records",
         owner="Example Owner",
         origin="generic-test-fixture",
-        visibility="local",
     )
     assert result["status"] == "ok", result
 
@@ -163,12 +163,9 @@ def append_status(
         runtime="generic-test-runtime",
         session_id=f"{name}-session",
         capabilities=["files", "tests"],
-        model="generic-test-model",
-        host="generic-test-host",
         location="project://work/example",
         intent="Exercise portable project eggs",
         role="builder",
-        lease_seconds=86_400,
     )
     assert punched_in["status"] == "ok", punched_in
     updated = perform(
@@ -449,6 +446,80 @@ def test_egg_status_is_portable_across_working_directories(
     assert verified["manifest"]["payload"]["project"] == PROJECT
     assert b"[local-private-path]" in verified["files"]["STATUS.md"]
 
+    monkeypatch.chdir(AGENT_PATH.parent)
+    verified_from_agent_directory = projects.verify_project_egg(egg)
+    assert verified_from_agent_directory["egg_hash"] == verified["egg_hash"]
+
+
+def test_egg_rejects_raw_filesystem_receipt_paths(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "projects"
+    artifact = tmp_path / "artifact.txt"
+    artifact.write_text("generic artifact\n", encoding="utf-8")
+    open_project(projects, root)
+    append_status(projects, root, artifacts=[str(artifact)])
+    egg, _ = export_egg(projects, root)
+
+    with zipfile.ZipFile(egg) as archive:
+        names = archive.namelist()
+        manifest = json.loads(archive.read("manifest.json"))
+        files = {
+            name: archive.read(name)
+            for name in names
+            if name != "manifest.json"
+        }
+
+    frames = [
+        json.loads(line)
+        for line in files["chain.jsonl"].splitlines()
+    ]
+    status_frame = frames[-1]
+    assert status_frame["kind"] == "work.status"
+    body = AGENT_PATH.read_bytes()
+    status_frame["payload"]["artifacts"][0] = {
+        "schema": "rapp-artifact-receipt/1",
+        "path": str(AGENT_PATH),
+        "exists": True,
+        "type": "file",
+        "size": len(body),
+        "sha256": hashlib.sha256(body).hexdigest(),
+    }
+    status_frame["payload_hash"] = projects.H(
+        "rapp/1:particle",
+        status_frame["payload"],
+    )
+    status_frame["frame_hash"] = projects.H(
+        "rapp/1:wave",
+        {
+            key: value
+            for key, value in status_frame.items()
+            if key not in {"frame_hash", "sig"}
+        },
+    )
+    files["chain.jsonl"] = b"".join(
+        projects.canonical(frame).encode("utf-8") + b"\n"
+        for frame in frames
+    )
+    manifest["payload"]["head_frame_hash"] = status_frame["frame_hash"]
+    for item in manifest["contents"]:
+        item["hash"] = projects.Hb(
+            "rapp/1:egg",
+            files[item["path"]],
+        )
+    malicious = tmp_path / "raw-receipt-path.egg"
+    manifest_bytes = projects.canonical(manifest).encode("utf-8")
+    malicious.write_bytes(
+        projects._zip_bytes(
+            [("manifest.json", manifest_bytes)]
+            + [(path, files[path]) for path in sorted(files)]
+        )
+    )
+
+    with pytest.raises(projects.EggVerificationError, match="receipt path"):
+        projects.verify_project_egg(malicious)
+
 
 def test_imported_external_receipts_are_unverifiable_until_rebound(
     projects,
@@ -460,6 +531,13 @@ def test_imported_external_receipts_are_unverifiable_until_rebound(
     artifact.write_text("generic external evidence\n", encoding="utf-8")
     open_project(projects, source_root)
     append_status(projects, source_root, artifacts=[str(artifact)])
+    source_verified = perform(
+        projects.RappProjectsAgent(),
+        "verify",
+        root=str(source_root),
+        project=PROJECT,
+    )
+    assert source_verified["verdict"] == "pass"
     egg, _ = export_egg(projects, source_root)
 
     imported = perform(
@@ -472,6 +550,20 @@ def test_imported_external_receipts_are_unverifiable_until_rebound(
     assert not (
         destination / PROJECT / ".receipt-locators.json"
     ).exists()
+    board = perform(
+        projects.RappProjectsAgent(),
+        "board",
+        root=str(destination),
+    )
+    inspected = perform(
+        projects.RappProjectsAgent(),
+        "inspect",
+        root=str(destination),
+        project=PROJECT,
+    )
+    assert board["projects"][0]["verified"] is False
+    assert inspected["state"]["verified"] is False
+    assert inspected["verification"]["verdict"] == "fail"
 
     unresolved = projects.verify_project(
         PROJECT,
@@ -526,6 +618,58 @@ def test_imported_external_receipts_are_unverifiable_until_rebound(
     ).is_file()
 
 
+def test_failed_multiframe_fast_forward_discards_prepared_journal(
+    projects,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = tmp_path / "source"
+    destination = tmp_path / "destination"
+    open_project(projects, source)
+    seed, _ = export_egg(projects, source)
+    assert perform(
+        projects.RappProjectsAgent(),
+        "import",
+        root=str(destination),
+        egg=str(seed),
+    )["status"] == "ok"
+    append_status(projects, source, status="two-frame-extension", pct=60)
+    updated, _ = export_egg(projects, source)
+
+    original_atomic_bytes = projects._atomic_bytes
+
+    def fail_chain(path, data):
+        if Path(path).name == "chain.jsonl":
+            raise OSError("injected fast-forward chain failure")
+        return original_atomic_bytes(path, data)
+
+    with monkeypatch.context() as context:
+        context.setattr(projects, "_atomic_bytes", fail_chain)
+        refused = perform(
+            projects.RappProjectsAgent(),
+            "import",
+            root=str(destination),
+            egg=str(updated),
+        )
+    assert refused["status"] == "error"
+    transaction = (
+        destination / PROJECT / ".append-transaction.json"
+    )
+    assert not transaction.exists()
+    local = projects.load_chain(PROJECT, destination)
+    assert len(local) == 1
+
+    retried = perform(
+        projects.RappProjectsAgent(),
+        "import",
+        root=str(destination),
+        egg=str(updated),
+    )
+    assert retried["status"] == "ok"
+    assert retried["imported_frames"] == 2
+    assert len(projects.load_chain(PROJECT, destination)) == 3
+
+
 @pytest.mark.parametrize(
     "mutation",
     ["traversal", "duplicate", "undeclared", "missing", "hash"],
@@ -545,7 +689,7 @@ def test_import_rejects_malformed_egg_before_creating_destination(
         projects.RappProjectsAgent(),
         "import",
         root=str(destination),
-        path=str(malformed),
+        egg=str(malformed),
     )
 
     assert refused["status"] == "error"
@@ -564,14 +708,14 @@ def test_import_is_idempotent(projects, tmp_path: Path) -> None:
         projects.RappProjectsAgent(),
         "import",
         root=str(destination),
-        path=str(egg),
+        egg=str(egg),
     )
     after_first = snapshot(destination)
     second = perform(
         projects.RappProjectsAgent(),
         "import",
         root=str(destination),
-        path=str(egg),
+        egg=str(egg),
     )
 
     assert first["status"] == "ok"
@@ -592,7 +736,7 @@ def test_divergent_import_is_refused_without_mutation(
         projects.RappProjectsAgent(),
         "import",
         root=str(right),
-        path=str(seed),
+        egg=str(seed),
     )
     assert imported["status"] == "ok"
     append_status(projects, left, status="left-branch", pct=40)
@@ -604,7 +748,7 @@ def test_divergent_import_is_refused_without_mutation(
         projects.RappProjectsAgent(),
         "import",
         root=str(right),
-        path=str(left_egg),
+        egg=str(left_egg),
     )
 
     assert refused["status"] == "error"

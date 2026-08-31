@@ -38,6 +38,7 @@ EXPECTED_PARAMETER_TYPES = {
     "operation": "string",
     "action": "string",
     "root": "string",
+    "identity_owner": "string",
     "project": "string",
     "title": "string",
     "goal": "string",
@@ -99,6 +100,11 @@ def module():
     return load_agent_module()
 
 
+@pytest.fixture(autouse=True)
+def configured_identity_owner(monkeypatch):
+    monkeypatch.setenv("RAPP_PROJECTS_OWNER", "example")
+
+
 @pytest.fixture
 def agent(module, monkeypatch, tmp_path):
     monkeypatch.setenv("RAPP_PROJECTS_ROOT", str(tmp_path / "env-root"))
@@ -120,7 +126,7 @@ def test_manifest_identity_version_category_tags_and_dependency(module):
     manifest = module.__manifest__
     assert manifest["schema"] == "rapp-agent/1.0"
     assert manifest["name"] == "@kody-w/rapp_projects"
-    assert manifest["version"] == "1.0.2"
+    assert manifest["version"] == "1.0.3"
     assert manifest["display_name"] == "RappProjects"
     assert manifest["category"] == "productivity"
     assert manifest["tags"] == [
@@ -145,6 +151,7 @@ def test_class_runtime_name_and_metadata_match(module):
         {"required": ["operation"]},
         {"required": ["action"]},
     ]
+    assert instance.metadata["parameters"]["additionalProperties"] is False
 
 
 def test_operation_enum_and_parameter_types_are_complete(agent):
@@ -205,6 +212,12 @@ def test_operation_is_canonical_and_action_is_a_compatibility_alias(
     assert missing["operation"] == "missing"
     assert "required" in missing["error"]["message"]
 
+    unknown = parse_result(
+        agent.perform(operation="protocol", host_context="not-declared")
+    )
+    assert unknown["status"] == "error"
+    assert "unknown argument" in unknown["error"]["message"]
+
 
 def test_explicit_root_overrides_environment(module, monkeypatch, tmp_path):
     explicit = tmp_path / "explicit"
@@ -239,6 +252,50 @@ def test_home_root_is_the_product_neutral_fallback(module, monkeypatch, tmp_path
     expected = home / ".rapp" / "projects-control"
     assert result["root"] == "projects://"
     assert expected.exists()
+
+
+def test_new_root_requires_and_reuses_explicit_identity_owner(
+    module,
+    monkeypatch,
+    tmp_path,
+):
+    root = tmp_path / "identity-root"
+    monkeypatch.delenv("RAPP_PROJECTS_OWNER", raising=False)
+    refused = parse_result(
+        module.RappProjectsAgent().perform(
+            operation="board",
+            root=str(root),
+        )
+    )
+    assert refused["status"] == "error"
+    assert "identity_owner" in refused["error"]["message"]
+    assert not (root / "rappid.json").exists()
+
+    opened = parse_result(
+        module.RappProjectsAgent().perform(
+            operation="open",
+            root=str(root),
+            identity_owner="Example-Owner",
+            project="identity-project",
+            title="Identity project",
+            goal="Bind one owner authority",
+            owner="display owner",
+            origin="generic fixture",
+        )
+    )
+    assert opened["status"] == "ok"
+    root_identity = json.loads(
+        (root / "rappid.json").read_text(encoding="utf-8")
+    )["rappid"]
+    project_identity = json.loads(
+        (root / "identity-project" / "rappid.json").read_text(
+            encoding="utf-8"
+        )
+    )["rappid"]
+    assert root_identity.startswith("rappid:@example-owner/projects-control:")
+    assert project_identity.startswith(
+        "rappid:@example-owner/identity-project:"
+    )
 
 
 def test_constructor_and_operations_never_open_network_connections(

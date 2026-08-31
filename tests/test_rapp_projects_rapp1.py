@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import hashlib
 import importlib.util
 import json
@@ -46,6 +47,7 @@ def _load_agent(monkeypatch: pytest.MonkeyPatch, root: Path):
     monkeypatch.setitem(sys.modules, "agents", agents)
     monkeypatch.setitem(sys.modules, "agents.basic_agent", basic)
     monkeypatch.setenv("RAPP_PROJECTS_ROOT", str(root))
+    monkeypatch.setenv("RAPP_PROJECTS_OWNER", "example")
     spec = importlib.util.spec_from_file_location(
         f"rapp_projects_rapp1_test_{uuid.uuid4().hex}",
         AGENT_PATH,
@@ -190,6 +192,7 @@ def test_rappid_is_uuid_based_and_minted_once(
         / "rappid.json"
     )
     stored = json.loads(identity_path.read_text(encoding="utf-8"))["rappid"]
+    assert stored.startswith("rappid:@example/mint-once:")
     repeated = _perform(
         agent,
         "open",
@@ -275,6 +278,205 @@ def test_verification_frame_must_cover_its_immediate_predecessor(module) -> None
     )
     assert ok is False
     assert reason and reason.startswith("RAPP/1 step 4:")
+
+    forged = deepcopy(verdict)
+    forged["payload"]["head_frame_hash"] = "0" * 64
+    forged["payload_hash"] = module.H(
+        "rapp/1:particle",
+        forged["payload"],
+    )
+    forged = _rehash(module, forged)
+    ok, reason = module.verify_frame(
+        forged,
+        head=genesis,
+        stream_id=stream_id,
+        project="alpha",
+    )
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 4:")
+
+
+def test_rappid_kind_and_instance_grammar_refuse_adjacent_hyphens(module) -> None:
+    tail = "0" * 64
+    assert not module._valid_rappid(f"rappid:@bad--owner/alpha:{tail}")
+    assert not module._valid_rappid(f"rappid:@example/bad--slug:{tail}")
+    assert not module._valid_stream_id(
+        f"rappid:@example/alpha:{tail}:bad--instance"
+    )
+    assert module._valid_kind("work.status")
+    assert not module._valid_kind("work--item.status")
+    assert not module._valid_kind("work.status--item")
+
+
+def test_stream_binding_is_mandatory_and_genesis_cannot_repeat(module) -> None:
+    stream_id = _stream(module)
+    with pytest.raises(
+        module.RappProjectsError,
+        match="another project",
+    ):
+        _frame(
+            module,
+            stream_id=stream_id,
+            payload=_genesis_payload("beta"),
+        )
+
+    genesis = _frame(module, stream_id=stream_id)
+    ok, reason = module.verify_frame(genesis)
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 1a:")
+
+    repeated = _frame(
+        module,
+        stream_id=stream_id,
+        kind="project.genesis",
+        seq=1,
+        utc=UTC1,
+        prev=genesis["payload_hash"],
+        payload=_genesis_payload(),
+    )
+    ok, reason = module.verify_frame(
+        repeated,
+        head=genesis,
+        stream_id=stream_id,
+        project="alpha",
+    )
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 4:")
+
+    cross_project = deepcopy(genesis)
+    cross_project["payload"]["project"] = "beta"
+    cross_project["payload_hash"] = module.H(
+        "rapp/1:particle",
+        cross_project["payload"],
+    )
+    cross_project = _rehash(module, cross_project)
+    ok, reason = module.verify_frame(
+        cross_project,
+        stream_id=stream_id,
+        project="beta",
+    )
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 1a:")
+
+
+def test_signature_shape_is_step_one_and_trust_is_step_six(module) -> None:
+    stream_id = _stream(module)
+    genesis = _frame(module, stream_id=stream_id)
+    malformed = {**genesis, "sig": "not-a-jws"}
+    ok, reason = module.verify_frame(malformed, stream_id=stream_id)
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 1:")
+
+    kid = module.mint_rappid("signer", owner="example")
+    header = {
+        "alg": "EdDSA",
+        "b64": False,
+        "crit": ["b64"],
+        "kid": kid,
+    }
+    protected = base64.urlsafe_b64encode(
+        module.canonical(header).encode("utf-8")
+    ).rstrip(b"=").decode("ascii")
+    signature = base64.urlsafe_b64encode(b"\0" * 64).rstrip(
+        b"="
+    ).decode("ascii")
+    signed = {**genesis, "sig": f"{protected}..{signature}"}
+
+    ok, reason = module.verify_frame(signed, stream_id=stream_id)
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 6:")
+
+    class StopVerification(BaseException):
+        pass
+
+    def stop(_frame):
+        raise StopVerification()
+
+    with pytest.raises(StopVerification):
+        module.verify_frame(
+            signed,
+            stream_id=stream_id,
+            signature_verifier=stop,
+        )
+
+    calls = []
+
+    def trusted(frame):
+        calls.append(frame["frame_hash"])
+        return True
+
+    assert module.verify_frame(
+        signed,
+        stream_id=stream_id,
+        signature_verifier=trusted,
+    ) == (True, None)
+    assert calls == [signed["frame_hash"]]
+
+    ok, reason = module.verify_frame(
+        signed,
+        stream_id=stream_id,
+        signature_verifier=lambda _frame: False,
+    )
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 6:")
+
+    class InvalidSignature(Exception):
+        pass
+
+    def invalid(_frame):
+        raise InvalidSignature("bad signature")
+
+    ok, reason = module.verify_frame(
+        signed,
+        stream_id=stream_id,
+        signature_verifier=invalid,
+    )
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 6:")
+
+
+def test_verification_verdict_cannot_contradict_receipts(module) -> None:
+    stream_id = _stream(module)
+    genesis = _frame(module, stream_id=stream_id)
+    verdict = _frame(
+        module,
+        stream_id=stream_id,
+        kind="project.verify",
+        seq=1,
+        utc=UTC1,
+        prev=genesis["payload_hash"],
+        payload={
+            "project": "alpha",
+            "verdict": "pass",
+            "broken_receipts": [],
+            "verified_frames": 1,
+            "head_frame_hash": genesis["frame_hash"],
+        },
+    )
+    forged = deepcopy(verdict)
+    forged["payload"]["broken_receipts"] = [
+        {
+            "schema": "rapp-artifact-receipt/1",
+            "path": "project://missing.txt",
+            "exists": False,
+            "type": "missing",
+            "size": None,
+            "sha256": None,
+        }
+    ]
+    forged["payload_hash"] = module.H(
+        "rapp/1:particle",
+        forged["payload"],
+    )
+    forged = _rehash(module, forged)
+    ok, reason = module.verify_frame(
+        forged,
+        head=genesis,
+        stream_id=stream_id,
+        project="alpha",
+    )
+    assert ok is False
+    assert reason and reason.startswith("RAPP/1 step 1:")
 
 
 def test_jcs_numbers_round_trip_or_are_refused(module) -> None:

@@ -9,11 +9,18 @@ from pathlib import Path
 import subprocess
 import sys
 
+import pytest
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "agents" / "@kody-w" / "rapp_projects_agent.py"
 IDENTITY = "@kody-w/rapp_projects"
 PROJECT = "shared-runtime-project"
+
+
+@pytest.fixture(autouse=True)
+def configured_identity_owner(monkeypatch):
+    monkeypatch.setenv("RAPP_PROJECTS_OWNER", "example")
 
 
 def load_agent():
@@ -113,6 +120,9 @@ def scout_runner() -> tuple[Path, Path] | None:
         )
     runner = skill_dir / "scripts" / "run_agent.py"
     assert runner.is_file()
+    linked = skill_dir / record["linked_agent"]
+    if not linked.is_file() or linked.read_bytes() != SOURCE.read_bytes():
+        return None
     return skill_dir, runner
 
 

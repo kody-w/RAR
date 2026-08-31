@@ -8,11 +8,14 @@ chain and its receipts, and can create a portable project-specific egg.
 ## Data boundary
 
 The root is selected from an explicit `"root"`, then `RAPP_PROJECTS_ROOT`, then
-the default `~/.rapp/projects-control/`. Use an absolute custom root to create
-a separate authority:
+the default `~/.rapp/projects-control/`. Minting a new root also requires the
+operator's lowercase GitHub login from explicit `identity_owner` or
+`RAPP_PROJECTS_OWNER`; it is written into the RAPPID once and reused for every
+project identity. Existing identities are never silently reminted. Use an
+absolute custom root to create a separate authority:
 
 ```json
-{"operation":"board","root":"/absolute/path/to/projects-control"}
+{"operation":"board","root":"/absolute/path/to/projects-control","identity_owner":"github-login"}
 ```
 
 The selected root is the complete storage boundary. The skill does not search
@@ -25,10 +28,24 @@ kept only in a private locator file inside the selected project. Chains,
 derived views, and eggs contain an opaque `local-private://` token instead of
 the machine path. Locator files are never exported; after import, those
 external receipts remain explicitly unverifiable until rebound locally.
+Authority files, locks, locators, derived views, and `PROJECT.egg` itself
+cannot be receipted, because an operation could otherwise invalidate its own
+evidence.
 
 Each project lives at `<root>/<slug>/`. Its `chain.jsonl`, `rappid.json`, and
-`head.json` carry the authority; boards, status pages, indexes, and eggs are
-derived projections that can be rebuilt from verified history.
+`head.json` carry the authority. The trusted head includes a rolling digest of
+every ordered frame hash, so rewriting interior history is detected even
+though RAPP/1 memory-stream `prev` links the prior particle. Boards, status
+pages, indexes, and eggs are derived projections rebuilt from verified history.
+On first locked read, a valid `rapp-project-head/1` from version 1.0.2 is
+checked against its chain and atomically upgraded to `rapp-project-head/2`;
+the chain and RAPPID are never rewritten.
+Root initialization, append/head advancement, project creation, and import use
+fsynced journals plus atomic replacement. Interrupted hidden staging is
+recovered or removed before root validation, so a process crash cannot expose
+a half-created project cell. New external receipt locators are committed by the
+same append journal as their frame, so a rejected request leaves no private
+path side effect.
 
 ## RAPP/1 project lifecycle
 
@@ -50,7 +67,9 @@ derived projections that can be rebuilt from verified history.
 
 Requests are JSON objects. Supply `operation`, or use `action` as a
 compatibility alias. If both are present, `operation` wins; omitting both is an
-error. Project slugs use lowercase letters, numbers, and single hyphens.
+error. Undeclared fields are refused consistently by the canonical agent and
+generated runners. Project slugs use lowercase letters, numbers, and single
+hyphens.
 
 ### `protocol`
 
@@ -61,7 +80,7 @@ error. Project slugs use lowercase letters, numbers, and single hyphens.
 ### `open`
 
 ```json
-{"operation":"open","project":"example-project","title":"Example project","goal":"Ship a verified result","owner":"project-owner","origin":"initial brief"}
+{"operation":"open","identity_owner":"github-login","project":"example-project","title":"Example project","goal":"Ship a verified result","owner":"project-owner","origin":"initial brief"}
 ```
 
 ### `punchin`
@@ -110,6 +129,11 @@ historical use of that token:
 Binding updates only the private locator file; it does not rewrite a frame or
 copy the artifact into project state. A wrong path, hash, size, token, or
 missing approval is refused before the locator changes.
+
+A passing verdict imported from another device is historical evidence, not a
+claim that this device can resolve its private receipts. Local boards and
+inspection remain unverified until every receipt resolves here and a new local
+verification frame passes.
 
 ### `board`
 
@@ -189,13 +213,20 @@ frame.
 All runtimes use the same operation names and RAPP/1 history. `agent` and
 `runtime` are declarations, not an allowlist.
 
+The stored project profile emits unsigned memory-stream frames only:
+`prev_wave: null`, `sig: null`. Frame verification requires the stream of
+record. A syntactically valid signed frame is accepted only when a caller
+supplies a RAPP registry-backed §10 trust verifier; malformed JWS is refused at
+step 1 and missing/untrusted signature authority at step 6.
+
 ## Stable sources
 
-- Generated bundle: `<GENERATED_BUNDLE_RAW_URL>`
 - Stable workflow skill:
   <https://raw.githubusercontent.com/kody-w/RAR/main/scout/workflows/rar-kody-w-rapp-projects/skills/rar-kody-w-rapp-projects/SKILL.md>
 - Canonical agent:
   <https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py>
+- Scout catalog:
+  <https://raw.githubusercontent.com/kody-w/RAR/main/scout/catalog/catalog.json>
 
 Prefer the stable workflow URL for Scout imports. Generated bundle placement
 may change when the catalog is rebuilt; the canonical agent URL is the

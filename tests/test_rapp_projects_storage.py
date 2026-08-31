@@ -7,14 +7,17 @@ never inspect or mutate the user's real project store.
 from __future__ import annotations
 
 import builtins
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 import hashlib
 import importlib.util
 import inspect
 import json
+import multiprocessing
+import os
 from pathlib import Path
 import re
+import stat
 import sys
 from types import SimpleNamespace
 import uuid
@@ -52,9 +55,137 @@ def load_agent(name: str):
     return module
 
 
+def process_status(root: str, index: int) -> dict:
+    os.environ["RAPP_PROJECTS_OWNER"] = "example"
+    module = load_agent(f"rapp_projects_process_writer_{os.getpid()}_{index}")
+    return json.loads(
+        module.RappProjectsAgent().perform(
+            operation="status",
+            root=root,
+            project="alpha-project",
+            agent=f"process-{index}",
+            location=f"project://process/{index}",
+            status=f"process-update-{index}",
+            artifacts=[],
+            blockers=[],
+            next_action=f"Continue after process {index}",
+            pct=index,
+        )
+    )
+
+
+def process_reads(root: str, iterations: int) -> list[str]:
+    os.environ["RAPP_PROJECTS_OWNER"] = "example"
+    module = load_agent(f"rapp_projects_process_reader_{os.getpid()}")
+    failures = []
+    for _ in range(iterations):
+        try:
+            module.load_chain("alpha-project", root)
+        except Exception as exc:
+            failures.append(str(exc))
+    return failures
+
+
+def crash_after_project_rename(root: str) -> None:
+    os.environ["RAPP_PROJECTS_OWNER"] = "example"
+    module = load_agent(f"rapp_projects_crash_{os.getpid()}")
+
+    def terminate_before_manifest(*_args, **_kwargs):
+        os._exit(77)
+
+    module._write_root_children = terminate_before_manifest
+    module.RappProjectsAgent().perform(
+        operation="open",
+        root=root,
+        project="crash-project",
+        title="Crash project",
+        goal="Prove journal recovery",
+        owner="example",
+        origin="process-death fixture",
+    )
+    os._exit(78)
+
+
+def crash_after_chain_replace(root: str) -> None:
+    os.environ["RAPP_PROJECTS_OWNER"] = "example"
+    module = load_agent(f"rapp_projects_append_crash_{os.getpid()}")
+    original = module._atomic_json
+
+    def terminate_before_head(path, value, **kwargs):
+        if Path(path).name == "head.json":
+            os._exit(79)
+        return original(path, value, **kwargs)
+
+    module._atomic_json = terminate_before_head
+    module.RappProjectsAgent().perform(
+        operation="status",
+        root=root,
+        project="alpha-project",
+        agent="crash-runtime",
+        location="project://work",
+        status="committed before process death",
+        artifacts=[],
+        blockers=[],
+        next_action="Recover the head",
+        pct=50,
+    )
+    os._exit(80)
+
+
+def crash_during_root_initialization(root: str) -> None:
+    os.environ["RAPP_PROJECTS_OWNER"] = "example"
+    module = load_agent(f"rapp_projects_root_crash_{os.getpid()}")
+    original = module._atomic_json
+
+    def terminate_before_identity(path, value, **kwargs):
+        if Path(path).name == "rappid.json":
+            os._exit(81)
+        return original(path, value, **kwargs)
+
+    module._atomic_json = terminate_before_identity
+    module.ensure_root(root, identity_owner="example")
+    os._exit(82)
+
+
+def crash_after_import_rename(root: str, egg: str) -> None:
+    os.environ["RAPP_PROJECTS_OWNER"] = "example"
+    module = load_agent(f"rapp_projects_import_crash_{os.getpid()}")
+
+    def terminate_before_manifest(*_args, **_kwargs):
+        os._exit(83)
+
+    module._write_root_children = terminate_before_manifest
+    module.RappProjectsAgent().perform(
+        operation="import",
+        root=root,
+        egg=egg,
+    )
+    os._exit(84)
+
+
+def crash_before_fast_forward_chain(root: str, egg: str) -> None:
+    os.environ["RAPP_PROJECTS_OWNER"] = "example"
+    module = load_agent(f"rapp_projects_fast_forward_crash_{os.getpid()}")
+    original = module._atomic_bytes
+
+    def terminate_before_chain(path, data):
+        if Path(path).name == "chain.jsonl":
+            os._exit(85)
+        return original(path, data)
+
+    module._atomic_bytes = terminate_before_chain
+    module.RappProjectsAgent().perform(
+        operation="import",
+        root=root,
+        egg=egg,
+    )
+    os._exit(86)
+
+
 @pytest.fixture
 def projects(monkeypatch: pytest.MonkeyPatch, tmp_path: Path):
     monkeypatch.setenv("RAPP_PROJECTS_ROOT", str(tmp_path / "configured-root"))
+    monkeypatch.setenv("RAPP_PROJECTS_OWNER", "example")
     return load_agent(f"rapp_projects_storage_{uuid.uuid4().hex}")
 
 
@@ -71,8 +202,6 @@ def actor(name: str = "fixture-agent") -> dict[str, object]:
         "agent": name,
         "runtime": "fixture-runtime",
         "session_id": f"{name}-session",
-        "model": "fixture-model",
-        "host": "fixture-host",
         "capabilities": ["files", "shell"],
     }
 
@@ -87,7 +216,6 @@ def open_project(agent, root: Path, project: str = "alpha-project") -> dict:
         goal="Exercise the generic storage contract",
         owner="example-owner",
         origin="generic-fixture",
-        visibility="local",
     )
 
 
@@ -239,6 +367,31 @@ def test_parallel_appends_are_atomic_and_never_lose_an_update(
     assert updates == {f"parallel-update-{index}" for index in range(1, 17)}
 
 
+def test_multiprocess_readers_never_mix_chain_and_head_snapshots(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, root)["status"] == "ok"
+
+    with ProcessPoolExecutor(max_workers=5) as executor:
+        reader = executor.submit(process_reads, str(root), 80)
+        writers = [
+            executor.submit(process_status, str(root), index)
+            for index in range(1, 9)
+        ]
+        results = [future.result(timeout=60) for future in writers]
+        failures = reader.result(timeout=60)
+
+    assert all(result["status"] == "ok" for result in results)
+    assert failures == []
+    project_frames = frames(root, "alpha-project")
+    assert [frame["seq"] for frame in project_frames] == list(
+        range(len(project_frames))
+    )
+
+
 def test_root_override_precedence_is_explicit_then_environment_then_default(
     projects,
     tmp_path: Path,
@@ -268,6 +421,35 @@ def test_root_override_precedence_is_explicit_then_environment_then_default(
     expected = fake_home / ".rapp" / "projects-control"
     assert default["status"] == "ok"
     assert expected.is_dir()
+
+
+def test_rejected_root_keeps_permissions_and_symlink_target_untouched(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "unowned"
+    root.mkdir(mode=0o755)
+    marker = root / "foreign.txt"
+    marker.write_text("foreign data\n", encoding="utf-8")
+    root.chmod(0o755)
+    before_mode = stat.S_IMODE(root.stat().st_mode)
+
+    refused = perform(projects.RappProjectsAgent(), "board", root=root)
+    assert refused["status"] == "error"
+    assert stat.S_IMODE(root.stat().st_mode) == before_mode
+    assert marker.read_text(encoding="utf-8") == "foreign data\n"
+
+    target = tmp_path / "target"
+    target.mkdir(mode=0o755)
+    target.chmod(0o755)
+    symlink = tmp_path / "root-link"
+    try:
+        symlink.symlink_to(target, target_is_directory=True)
+    except OSError:
+        return
+    linked = perform(projects.RappProjectsAgent(), "board", root=symlink)
+    assert linked["status"] == "error"
+    assert stat.S_IMODE(target.stat().st_mode) == 0o755
 
 
 @pytest.mark.parametrize(
@@ -339,6 +521,122 @@ def test_corruption_is_never_returned_as_a_success_shaped_result(
     assert authoritative_frame_count(root, "alpha-project") == count_before
 
 
+def test_trusted_chain_digest_detects_interior_history_rewrite(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, root)["status"] == "ok"
+    for index in (1, 2):
+        assert perform(
+            agent,
+            "status",
+            root=root,
+            project="alpha-project",
+            **actor(),
+            location="project://work",
+            status=f"status-{index}",
+            artifacts=[],
+            blockers=[],
+            next_action=f"Continue {index}",
+            pct=index * 20,
+        )["status"] == "ok"
+    assert perform(
+        agent,
+        "verify",
+        root=root,
+        project="alpha-project",
+    )["verdict"] == "pass"
+
+    chain_path = root / "alpha-project" / "chain.jsonl"
+    project_frames = frames(root, "alpha-project")
+    trusted_head = json.loads(
+        (root / "alpha-project" / "head.json").read_text(encoding="utf-8")
+    )
+    project_frames[0]["payload"]["title"] = "rewritten history"
+    project_frames[0]["payload_hash"] = projects.H(
+        "rapp/1:particle",
+        project_frames[0]["payload"],
+    )
+    project_frames[0]["frame_hash"] = projects.H(
+        "rapp/1:wave",
+        {
+            key: value
+            for key, value in project_frames[0].items()
+            if key not in {"frame_hash", "sig"}
+        },
+    )
+    project_frames[1]["prev"] = project_frames[0]["payload_hash"]
+    project_frames[1]["frame_hash"] = projects.H(
+        "rapp/1:wave",
+        {
+            key: value
+            for key, value in project_frames[1].items()
+            if key not in {"frame_hash", "sig"}
+        },
+    )
+    assert project_frames[-1]["frame_hash"] == trusted_head["frame_hash"]
+    chain_path.write_text(
+        "".join(
+            projects.canonical(frame) + "\n"
+            for frame in project_frames
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        projects.ChainVerificationError,
+        match="history differs beneath the trusted head",
+    ):
+        projects.load_chain("alpha-project", root)
+
+
+def test_legacy_v1_head_migrates_under_lock_without_rewriting_history(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, root)["status"] == "ok"
+    assert perform(
+        agent,
+        "status",
+        root=root,
+        project="alpha-project",
+        **actor(),
+        location="project://work",
+        status="ready for head migration",
+        artifacts=[],
+        blockers=[],
+        next_action="Upgrade trusted metadata",
+        pct=40,
+    )["status"] == "ok"
+    chain_path = root / "alpha-project" / "chain.jsonl"
+    identity_path = root / "alpha-project" / "rappid.json"
+    chain_before = chain_path.read_bytes()
+    identity_before = identity_path.read_bytes()
+    project_frames = frames(root, "alpha-project")
+    head_path = root / "alpha-project" / "head.json"
+    projects._atomic_json(
+        head_path,
+        {
+            "schema": projects.LEGACY_HEAD_SCHEMA,
+            "stream_id": project_frames[-1]["stream_id"],
+            "seq": project_frames[-1]["seq"],
+            "frame_hash": project_frames[-1]["frame_hash"],
+        },
+    )
+
+    loaded = projects.load_chain("alpha-project", root)
+    upgraded = json.loads(head_path.read_text(encoding="utf-8"))
+    assert loaded == project_frames
+    assert upgraded["schema"] == projects.HEAD_SCHEMA
+    assert upgraded["chain_hash"] == projects._chain_hash(project_frames)
+    assert chain_path.read_bytes() == chain_before
+    assert identity_path.read_bytes() == identity_before
+
+
 def test_committed_append_reports_view_refresh_failure_without_retry_signal(
     projects,
     tmp_path: Path,
@@ -372,6 +670,379 @@ def test_committed_append_reports_view_refresh_failure_without_retry_signal(
     assert frames(root, "alpha-project")[-1]["payload"]["status"] == (
         "authoritative append committed"
     )
+
+
+def test_chain_commit_is_atomic_and_head_failure_is_recoverable(
+    projects,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = tmp_path / "control"
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, root)["status"] == "ok"
+    chain_path = root / "alpha-project" / "chain.jsonl"
+    transaction = root / "alpha-project" / ".append-transaction.json"
+    original_chain = chain_path.read_bytes()
+    original_atomic_bytes = projects._atomic_bytes
+
+    def fail_chain(path, data):
+        if Path(path).name == "chain.jsonl":
+            raise OSError("injected chain replacement failure")
+        return original_atomic_bytes(path, data)
+
+    with monkeypatch.context() as context:
+        context.setattr(projects, "_atomic_bytes", fail_chain)
+        refused = perform(
+            agent,
+            "status",
+            root=root,
+            project="alpha-project",
+            **actor(),
+            location="project://work",
+            status="must not partially append",
+            artifacts=[],
+            blockers=[],
+            next_action="Retry only after a true refusal",
+            pct=10,
+        )
+    assert refused["status"] == "error"
+    assert chain_path.read_bytes() == original_chain
+    projects.load_chain("alpha-project", root)
+    assert not transaction.exists()
+
+    original_atomic_json = projects._atomic_json
+    failed = False
+
+    def fail_head_once(path, value, **kwargs):
+        nonlocal failed
+        if Path(path).name == "head.json" and not failed:
+            failed = True
+            raise OSError("injected head refresh failure")
+        return original_atomic_json(path, value, **kwargs)
+
+    with monkeypatch.context() as context:
+        context.setattr(projects, "_atomic_json", fail_head_once)
+        committed = perform(
+            agent,
+            "status",
+            root=root,
+            project="alpha-project",
+            **actor(),
+            location="project://work",
+            status="committed despite stale head cache",
+            artifacts=[],
+            blockers=[],
+            next_action="Recover the trusted head",
+            pct=20,
+        )
+    assert committed["status"] == "ok"
+    assert committed["storage_warnings"][0]["code"] == "head-refresh-failed"
+    recovered = projects.load_chain("alpha-project", root)
+    assert recovered[-1]["payload"]["status"] == (
+        "committed despite stale head cache"
+    )
+    assert not transaction.exists()
+    trusted = json.loads(
+        (root / "alpha-project" / "head.json").read_text(encoding="utf-8")
+    )
+    assert trusted["frame_hash"] == recovered[-1]["frame_hash"]
+
+
+def test_root_and_project_transactions_recover_after_interrupted_publish(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    projects.ensure_root(root, identity_owner="example")
+    assert open_project(
+        projects.RappProjectsAgent(),
+        root,
+        "beta-project",
+    )["status"] == "ok"
+
+    manifest_path = root / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["children"].remove("beta-project")
+    projects._atomic_json(manifest_path, manifest)
+    projects._atomic_json(
+        root / ".project-transaction.json",
+        {
+            "schema": projects.PROJECT_TRANSACTION_SCHEMA,
+            "operation": "create",
+            "project": "beta-project",
+            "staging": ".staging-beta-project-" + "1" * 32,
+        },
+    )
+    projects.ensure_root(root)
+    recovered = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert "beta-project" in recovered["children"]
+    assert not (root / ".project-transaction.json").exists()
+
+    staging = root / (".staging-gamma-project-" + "2" * 32)
+    staging.mkdir()
+    (staging / "partial").write_text("partial\n", encoding="utf-8")
+    projects._atomic_json(
+        root / ".project-transaction.json",
+        {
+            "schema": projects.PROJECT_TRANSACTION_SCHEMA,
+            "operation": "import",
+            "project": "gamma-project",
+            "staging": staging.name,
+        },
+    )
+    projects.ensure_root(root)
+    assert not staging.exists()
+    assert "gamma-project" not in json.loads(
+        manifest_path.read_text(encoding="utf-8")
+    )["children"]
+
+    new_root = tmp_path / "root-init"
+    new_root.mkdir()
+    root_rappid = projects.mint_rappid(
+        "projects-control",
+        owner="example",
+    )
+    journal = {
+        "schema": projects.ROOT_INIT_SCHEMA,
+        "identity": projects._identity_record(
+            root_rappid,
+            "projects-root",
+            "projects-control",
+        ),
+        "lineage": {
+            "schema": projects.ROOT_LINEAGE_SCHEMA,
+            "parent_rappid": None,
+        },
+        "manifest": projects._cell_manifest(
+            "leviathan",
+            "projects",
+            [],
+        ),
+    }
+    projects._atomic_json(new_root / ".root-init.json", journal)
+    projects._atomic_json(new_root / "rappid.json", journal["identity"])
+    projects.ensure_root(new_root)
+    assert not (new_root / ".root-init.json").exists()
+    assert (new_root / "lineage.json").is_file()
+    assert (new_root / "manifest.json").is_file()
+
+
+def test_process_death_after_project_rename_recovers_on_next_open(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    projects.ensure_root(root, identity_owner="example")
+    process = multiprocessing.get_context("spawn").Process(
+        target=crash_after_project_rename,
+        args=(str(root),),
+    )
+    process.start()
+    process.join(30)
+    assert process.exitcode == 77
+    assert (root / ".project-transaction.json").is_file()
+    assert (root / "crash-project").is_dir()
+
+    projects.ensure_root(root)
+    assert not (root / ".project-transaction.json").exists()
+    assert "crash-project" in json.loads(
+        (root / "manifest.json").read_text(encoding="utf-8")
+    )["children"]
+    assert projects.load_chain("crash-project", root)[0]["seq"] == 0
+
+
+def test_process_death_after_chain_replace_recovers_committed_frame(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    assert open_project(
+        projects.RappProjectsAgent(),
+        root,
+        "alpha-project",
+    )["status"] == "ok"
+    chain_path = root / "alpha-project" / "chain.jsonl"
+    genesis_chain = chain_path.read_bytes()
+    process = multiprocessing.get_context("spawn").Process(
+        target=crash_after_chain_replace,
+        args=(str(root),),
+    )
+    process.start()
+    process.join(30)
+    assert process.exitcode == 79
+    transaction = root / "alpha-project" / ".append-transaction.json"
+    assert transaction.is_file()
+    stale_head = json.loads(
+        (root / "alpha-project" / "head.json").read_text(encoding="utf-8")
+    )
+    assert stale_head["seq"] == 0
+    committed_chain = chain_path.read_bytes()
+    chain_path.write_bytes(genesis_chain)
+    with pytest.raises(
+        projects.ChainVerificationError,
+        match="rolls back a committed append transaction",
+    ):
+        projects.load_chain("alpha-project", root)
+    chain_path.write_bytes(committed_chain)
+
+    recovered = projects.load_chain("alpha-project", root)
+    assert len(recovered) == 2
+    assert recovered[-1]["payload"]["status"] == (
+        "committed before process death"
+    )
+    assert not transaction.exists()
+    trusted = json.loads(
+        (root / "alpha-project" / "head.json").read_text(encoding="utf-8")
+    )
+    assert trusted["seq"] == 1
+    assert trusted["frame_hash"] == recovered[-1]["frame_hash"]
+
+
+def test_process_death_during_root_initialization_recovers_same_identity(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    process = multiprocessing.get_context("spawn").Process(
+        target=crash_during_root_initialization,
+        args=(str(root),),
+    )
+    process.start()
+    process.join(30)
+    assert process.exitcode == 81
+    journal = json.loads(
+        (root / ".root-init.json").read_text(encoding="utf-8")
+    )
+    expected_rappid = journal["identity"]["rappid"]
+
+    projects.ensure_root(root, identity_owner="different-owner")
+    actual_rappid = json.loads(
+        (root / "rappid.json").read_text(encoding="utf-8")
+    )["rappid"]
+    assert actual_rappid == expected_rappid
+    assert actual_rappid.startswith("rappid:@example/projects-control:")
+    assert not (root / ".root-init.json").exists()
+
+
+def test_process_death_after_import_rename_recovers_imported_project(
+    projects,
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "source"
+    target = tmp_path / "target"
+    assert open_project(
+        projects.RappProjectsAgent(),
+        source,
+        "portable-project",
+    )["status"] == "ok"
+    exported = json.loads(
+        projects.RappProjectsAgent().perform(
+            operation="export",
+            root=str(source),
+            project="portable-project",
+            owner_approved=True,
+        )
+    )
+    assert exported["status"] == "ok"
+    projects.ensure_root(target, identity_owner="example")
+
+    process = multiprocessing.get_context("spawn").Process(
+        target=crash_after_import_rename,
+        args=(str(target), exported["egg"]),
+    )
+    process.start()
+    process.join(30)
+    assert process.exitcode == 83
+    assert (target / ".project-transaction.json").is_file()
+    assert (target / "portable-project").is_dir()
+
+    projects.ensure_root(target)
+    assert not (target / ".project-transaction.json").exists()
+    assert projects.load_chain("portable-project", target) == (
+        projects.load_chain("portable-project", source)
+    )
+
+
+def test_process_death_before_multiframe_fast_forward_discards_journal(
+    projects,
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "source"
+    target = tmp_path / "target"
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, source, "portable-project")["status"] == "ok"
+    seed = json.loads(
+        agent.perform(
+            operation="export",
+            root=str(source),
+            project="portable-project",
+            owner_approved=True,
+        )
+    )
+    assert seed["status"] == "ok"
+    imported = json.loads(
+        agent.perform(
+            operation="import",
+            root=str(target),
+            egg=seed["egg"],
+        )
+    )
+    assert imported["status"] == "ok"
+    assert perform(
+        agent,
+        "punchin",
+        root=source,
+        project="portable-project",
+        **actor(),
+        location="project://work",
+        intent="Create a multiframe extension",
+        role="builder",
+    )["status"] == "ok"
+    assert perform(
+        agent,
+        "status",
+        root=source,
+        project="portable-project",
+        **actor(),
+        location="project://work",
+        status="extension ready",
+        artifacts=[],
+        blockers=[],
+        next_action="Import the extension",
+        pct=50,
+    )["status"] == "ok"
+    updated = json.loads(
+        agent.perform(
+            operation="export",
+            root=str(source),
+            project="portable-project",
+            owner_approved=True,
+        )
+    )
+    assert updated["status"] == "ok"
+
+    process = multiprocessing.get_context("spawn").Process(
+        target=crash_before_fast_forward_chain,
+        args=(str(target), updated["egg"]),
+    )
+    process.start()
+    process.join(30)
+    assert process.exitcode == 85
+    transaction = target / "portable-project" / ".append-transaction.json"
+    assert transaction.is_file()
+
+    local = projects.load_chain("portable-project", target)
+    assert len(local) == 1
+    assert not transaction.exists()
+    retried = json.loads(
+        agent.perform(
+            operation="import",
+            root=str(target),
+            egg=updated["egg"],
+        )
+    )
+    assert retried["status"] == "ok"
+    assert retried["imported_frames"] == 2
 
 
 def test_public_mutation_helpers_do_not_refresh_after_commit_by_default(
@@ -564,6 +1235,64 @@ def test_derived_views_sanitize_absolute_user_paths(
     assert "local-private://" in views or "[local-private-path]" in views
 
 
+def test_derived_views_and_api_sanitize_agent_identifier_keys(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, root)["status"] == "ok"
+    private_agent = "/Users/example/private/runtime"
+    result = perform(
+        agent,
+        "punchin",
+        root=root,
+        project="alpha-project",
+        agent=private_agent,
+        runtime="fixture-runtime",
+        session_id="fixture-session",
+        location="project://work",
+        intent="Sanitize agent keys",
+        role="builder",
+        capabilities=[],
+    )
+    assert result["status"] == "ok"
+    literal_placeholder = "[local-private-path]"
+    second = perform(
+        agent,
+        "punchin",
+        root=root,
+        project="alpha-project",
+        agent=literal_placeholder,
+        runtime="fixture-runtime",
+        session_id="fixture-session-2",
+        location="project://work",
+        intent="Exercise redaction collisions",
+        role="reviewer",
+        capabilities=[],
+    )
+    assert second["status"] == "ok"
+
+    board = perform(agent, "board", root=root)
+    inspected = perform(
+        agent,
+        "inspect",
+        root=root,
+        project="alpha-project",
+    )
+    published = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in derived_paths(root)
+    ) + json.dumps([board, inspected], sort_keys=True)
+    assert private_agent not in published
+    assert "[local-private-path]" in published
+    assert "[local-private-path]#2" in published
+    assert sorted(board["projects"][0]["agents"]) == [
+        "[local-private-path]",
+        "[local-private-path]#2",
+    ]
+
+
 def test_stale_thresholds_distinguish_active_idle_and_finished_projects(
     projects, tmp_path: Path
 ) -> None:
@@ -700,6 +1429,106 @@ def test_artifact_receipts_hash_content_without_copying_artifact_bodies(
     assert broken["status"] == "ok"
     assert broken["verdict"] == "fail"
     assert broken["broken_receipts"] == [receipt]
+
+
+def test_artifact_receipts_refuse_project_managed_files(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, root)["status"] == "ok"
+    assert not projects._valid_receipt_path("project://chain.jsonl")
+    assert not projects._valid_receipt_path("project://CHAIN.JSONL")
+    assert not projects._valid_receipt_path(
+        "projects://alpha-project/head.json"
+    )
+    assert not projects._valid_receipt_path(
+        "projects://alpha-project/Head.Json"
+    )
+    assert projects._managed_storage_path(
+        root / "alpha-project" / "CHAIN.JSONL",
+        "alpha-project",
+        root,
+    )
+    chain = root / "alpha-project" / "chain.jsonl"
+    before = chain.read_bytes()
+
+    refused = perform(
+        agent,
+        "status",
+        root=root,
+        project="alpha-project",
+        **actor(),
+        location="project://work",
+        status="must not receipt authority files",
+        artifacts=[str(chain)],
+        blockers=[],
+        next_action="Use an immutable artifact path",
+        pct=30,
+    )
+    assert refused["status"] == "error"
+    assert "managed storage" in refused["error"]["message"]
+    assert chain.read_bytes() == before
+
+    target = tmp_path / "external.txt"
+    target.write_text("external\n", encoding="utf-8")
+    link = tmp_path / "external-link.txt"
+    try:
+        link.symlink_to(target)
+    except OSError:
+        return
+    symlinked = perform(
+        agent,
+        "status",
+        root=root,
+        project="alpha-project",
+        **actor(),
+        location="project://work",
+        status="must not follow a symlink",
+        artifacts=[str(link)],
+        blockers=[],
+        next_action="Use the regular file explicitly",
+        pct=35,
+    )
+    assert symlinked["status"] == "error"
+    assert "symbolic link" in symlinked["error"]["message"]
+    assert chain.read_bytes() == before
+
+
+def test_failed_status_does_not_persist_private_receipt_locator(
+    projects,
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "control"
+    artifact = tmp_path / "external.txt"
+    artifact.write_text("external evidence\n", encoding="utf-8")
+    agent = projects.RappProjectsAgent()
+    assert open_project(agent, root)["status"] == "ok"
+    chain = root / "alpha-project" / "chain.jsonl"
+    before = chain.read_bytes()
+
+    refused = perform(
+        agent,
+        "status",
+        root=root,
+        project="alpha-project",
+        **actor(),
+        location="project://work",
+        status="invalid progress",
+        artifacts=[str(artifact)],
+        blockers=[],
+        next_action="Fix the request",
+        pct=101,
+    )
+    assert refused["status"] == "error"
+    assert chain.read_bytes() == before
+    assert not (
+        root / "alpha-project" / ".receipt-locators.json"
+    ).exists()
+    assert not (
+        root / "alpha-project" / ".append-transaction.json"
+    ).exists()
 
 
 def test_windows_file_lock_backend_locks_and_unlocks_one_byte(

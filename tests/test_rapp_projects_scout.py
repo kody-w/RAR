@@ -53,6 +53,11 @@ def restore_toaster_agent(skill: bytes) -> bytes:
 
 
 def test_rapp_projects_scout_projection():
+    quickstart = (
+        ROOT / "docs" / "rapp-projects-skill.md"
+    ).read_text(encoding="utf-8")
+    assert "<GENERATED_" not in quickstart
+
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     registry = json.loads(
         (ROOT / "registry.json").read_text(encoding="utf-8")
