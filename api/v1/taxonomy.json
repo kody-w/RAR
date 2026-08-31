@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-28T16:22:35Z",
+  "generated": "2026-08-31T19:29:20Z",
   "categories": [
     {
       "name": "integrations",
@@ -12,7 +12,7 @@
     },
     {
       "name": "productivity",
-      "count": 43
+      "count": 44
     },
     {
       "name": "core",
@@ -66,7 +66,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 64
+      "count": 65
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 1270
+      "count": 1271
     },
     {
       "name": "verified",
@@ -254,7 +254,7 @@
     },
     {
       "name": "productivity",
-      "count": 40
+      "count": 41
     },
     {
       "name": "advanced",
@@ -293,6 +293,10 @@
       "count": 14
     },
     {
+      "name": "rapplication",
+      "count": 13
+    },
+    {
       "name": "documents",
       "count": 12
     },
@@ -302,10 +306,6 @@
     },
     {
       "name": "pipeline",
-      "count": 12
-    },
-    {
-      "name": "rapplication",
       "count": 12
     },
     {
@@ -577,6 +577,10 @@
       "count": 4
     },
     {
+      "name": "local-first",
+      "count": 4
+    },
+    {
       "name": "publish",
       "count": 4
     },
@@ -717,10 +721,6 @@
       "count": 3
     },
     {
-      "name": "local-first",
-      "count": 3
-    },
-    {
       "name": "protocol",
       "count": 3
     },
@@ -730,6 +730,10 @@
     },
     {
       "name": "organism",
+      "count": 3
+    },
+    {
+      "name": "rapp-1",
       "count": 3
     },
     {
@@ -957,6 +961,10 @@
       "count": 2
     },
     {
+      "name": "project-management",
+      "count": 2
+    },
+    {
       "name": "interactive",
       "count": 2
     },
@@ -1130,10 +1138,6 @@
     },
     {
       "name": "rappterbook-engine",
-      "count": 2
-    },
-    {
-      "name": "rapp-1",
       "count": 2
     },
     {
@@ -1318,10 +1322,6 @@
     },
     {
       "name": "narration",
-      "count": 1
-    },
-    {
-      "name": "clipchamp",
       "count": 1
     }
   ]

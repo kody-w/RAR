@@ -1,0 +1,202 @@
+{
+  "agent": "@kody-w/rapp_projects",
+  "agent_file": "rapp_projects_agent.py",
+  "agent_sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappProjectsAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs.",
+    "display_name": "RappProjects",
+    "name": "@kody-w/rapp_projects",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rapp-1",
+      "project-management",
+      "local-first",
+      "rapplication",
+      "productivity"
+    ],
+    "version": "1.0.3"
+  },
+  "runtime_name": "RappProjects",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "additionalProperties": false,
+    "anyOf": [
+      {
+        "required": [
+          "operation"
+        ]
+      },
+      {
+        "required": [
+          "action"
+        ]
+      }
+    ],
+    "properties": {
+      "action": {
+        "description": "Compatibility alias for operation; operation takes precedence.",
+        "enum": [
+          "protocol",
+          "open",
+          "punchin",
+          "status",
+          "handoff",
+          "punchout",
+          "verify",
+          "board",
+          "inspect",
+          "export",
+          "import"
+        ],
+        "type": "string"
+      },
+      "agent": {
+        "type": "string"
+      },
+      "artifacts": {
+        "type": "array"
+      },
+      "blockers": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "capabilities": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "doc": {
+        "type": "string"
+      },
+      "egg": {
+        "type": "string"
+      },
+      "from_agent": {
+        "type": "string"
+      },
+      "goal": {
+        "type": "string"
+      },
+      "identity_owner": {
+        "description": "Lowercase GitHub login used only when minting a new root.",
+        "type": "string"
+      },
+      "intent": {
+        "type": "string"
+      },
+      "location": {
+        "type": "string"
+      },
+      "next_action": {
+        "type": "string"
+      },
+      "open_questions": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "operation": {
+        "enum": [
+          "protocol",
+          "open",
+          "punchin",
+          "status",
+          "handoff",
+          "punchout",
+          "verify",
+          "board",
+          "inspect",
+          "export",
+          "import"
+        ],
+        "type": "string"
+      },
+      "origin": {
+        "type": "string"
+      },
+      "outcome": {
+        "enum": [
+          "done",
+          "blocked",
+          "abandoned"
+        ],
+        "type": "string"
+      },
+      "output": {
+        "type": "string"
+      },
+      "owner": {
+        "type": "string"
+      },
+      "owner_approved": {
+        "type": "boolean"
+      },
+      "pct": {
+        "maximum": 100,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "project": {
+        "type": "string"
+      },
+      "project_state": {
+        "enum": [
+          "active",
+          "blocked",
+          "done",
+          "parked"
+        ],
+        "type": "string"
+      },
+      "receipt_bindings": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "type": "object"
+      },
+      "receipts": {
+        "type": "array"
+      },
+      "role": {
+        "type": "string"
+      },
+      "root": {
+        "type": "string"
+      },
+      "runtime": {
+        "type": "string"
+      },
+      "session_id": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "to_agent": {
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "version": "1.0.3"
+}

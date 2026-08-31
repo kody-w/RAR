@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp_skill_agent",
   "agent_file": "rapp_skill_agent.py",
-  "agent_sha256": "b85aee04fcc6e47a5fb677665974f43c2807ce348c2caf8e9e4386d8d20e7d17",
+  "agent_sha256": "1fa931266d8646ee3138d0c1bab1e742267a1951765b8ceeee0496a677bd6e4c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappSkillAgent",
   "host_dependencies": [],
@@ -27,7 +27,7 @@
       "wire",
       "toasted"
     ],
-    "version": "1.3.0"
+    "version": "1.3.1"
   },
   "runtime_name": "RappSkill",
   "schema": "rapp-agent-lock/1.0",
@@ -156,5 +156,5 @@
     ],
     "type": "object"
   },
-  "version": "1.3.0"
+  "version": "1.3.1"
 }

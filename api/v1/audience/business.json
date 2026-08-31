@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-28T16:22:35Z",
-  "count": 1691,
+  "generated": "2026-08-31T19:29:20Z",
+  "count": 1692,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -60469,6 +60469,40 @@
         "lines": 77,
         "size_kb": 2.3,
         "added_at": "2026-05-16T16:33:02-04:00"
+      }
+    },
+    {
+      "id": "kody-w__rapp_projects",
+      "name": "@kody-w/rapp_projects",
+      "display_name": "RappProjects",
+      "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs.",
+      "version": "1.0.3",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "productivity",
+      "tags": [
+        "rapp-1",
+        "project-management",
+        "local-first",
+        "rapplication",
+        "productivity"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/rapp_projects_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_projects_agent.py",
+        "sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca"
+      },
+      "stats": {
+        "lines": 4341,
+        "size_kb": 148.5,
+        "added_at": "2026-08-31T11:52:12-04:00"
       }
     },
     {
