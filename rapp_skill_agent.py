@@ -111,7 +111,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_skill_agent",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "display_name": "RAPP Skill",
     "description": (
         "Connects any SKILL-aware claw directly to a local or hosted RAPP "
@@ -140,21 +140,21 @@ __manifest__ = {
 }
 
 
-RAPP1_COMMIT = "5e0889a3928de60836dbbc2210cde8274505cdde"
+RAPP1_COMMIT = "caf6ef276cafa92aa744499af90dc1a28559941a"
 RAPP1_REPO = "https://github.com/kody-w/rapp-1"
 RAPP1_SPEC_URL = (
     "https://raw.githubusercontent.com/kody-w/rapp-1/"
     f"{RAPP1_COMMIT}/SPEC.md"
 )
 RAPP1_SPEC_SHA256 = (
-    "cea7847f98f9751734995f46fd4e1bde211c8eb9d03dbbb477934213865bb91a"
+    "d345235be5bc698d78c5893285abd09f2e62a398f781123d1de8da313a01c7de"
 )
 RAPP_SDK_URL = (
     "https://raw.githubusercontent.com/kody-w/rapp-1/"
     f"{RAPP1_COMMIT}/agents/rapp_sdk_builder_agent.py"
 )
 RAPP_SDK_SHA256 = (
-    "d635c90a066daecd863a7c0600f57529cb25107313e3eab4e9fb90497ec80b13"
+    "aba04a57390d98276eadd9c7decd821bb53549730daec3491cffee45ada48eb2"
 )
 RAPP_INSTALLER_COMMIT = "5fbde1776a72715935c3d597a9ddfce28a04032b"
 RAPP_INSTALLER_BASE = (

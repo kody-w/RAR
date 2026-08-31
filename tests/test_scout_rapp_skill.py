@@ -72,6 +72,25 @@ def load_rapp_skill_module():
     return module
 
 
+def test_rapp_skill_pins_the_current_conformant_sdk():
+    module = load_rapp_skill_module()
+    assert module.__manifest__["version"] == "1.3.1"
+    assert module.RAPP1_COMMIT == (
+        "caf6ef276cafa92aa744499af90dc1a28559941a"
+    )
+    assert module.RAPP1_SPEC_SHA256 == (
+        "d345235be5bc698d78c5893285abd09f2e62a398f781123d1de8da313a01c7de"
+    )
+    assert module.RAPP_SDK_SHA256 == (
+        "aba04a57390d98276eadd9c7decd821bb53549730daec3491cffee45ada48eb2"
+    )
+    assert f"/{module.RAPP1_COMMIT}/SPEC.md" in module.RAPP1_SPEC_URL
+    assert (
+        f"/{module.RAPP1_COMMIT}/agents/rapp_sdk_builder_agent.py"
+        in module.RAPP_SDK_URL
+    )
+
+
 def local_catalog(tmp_path: Path, *records: dict) -> Path:
     localized = []
     for record in records:
