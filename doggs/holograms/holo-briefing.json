@@ -1,0 +1,48 @@
+{
+  "schema": "rar-hologram-dogg/1.0",
+  "id": "holo-briefing",
+  "rappid": "rappid:@kody-w/holo-briefing:6cf05183da3770824c1d20bfcc0cead35d48d06f98f7764335f5ba7d2fdc8712",
+  "name": "The Briefing",
+  "kind": "data-projection",
+  "version": "1.0.0",
+  "engine": "three-r128",
+  "minimum_zoo_version": "1.2.0",
+  "description": "A persistent briefing character that projects the estate census and the three highest-leverage next moves.",
+  "source_file": "holo-briefing.html",
+  "default_seed": "04356bded8854372649c4eba1516673fbb136b39f7f8c29da2437fd6a1aac201",
+  "accent": "ice",
+  "data_binding": "live-zoo",
+  "bottle": true,
+  "dimensions": [
+    "briefing",
+    "status",
+    "priorities",
+    "census",
+    "projection"
+  ],
+  "scene": {
+    "prompt": "Three things need you. Which first?",
+    "options": [
+      {
+        "label": "Keep me alive",
+        "value": "Protect the currently live organism instances."
+      },
+      {
+        "label": "Open the lineage",
+        "value": "Inspect artifact-to-instance ancestry before acting."
+      },
+      {
+        "label": "Remove drift",
+        "value": "Resolve anything the current protocol verifier refuses."
+      }
+    ],
+    "briefing": {
+      "trust": "VERIFIED",
+      "revision": "rev-6"
+    }
+  },
+  "summon": {
+    "adapter": "rapp-zoo",
+    "endpoint": "/api/holograms/summon"
+  }
+}

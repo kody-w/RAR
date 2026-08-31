@@ -102,7 +102,7 @@ jobs:
           python scripts/build_pokedex_api.py
           python scripts/build_static_api.py
           python scripts/build_front_page.py
-          python -m pytest -q
+          python -m pytest -q --ignore=tests/test_scout_rapp_skill.py
 
       - name: Commit notarized mutation
         id: commit
@@ -166,7 +166,9 @@ jobs:
           python scripts/build_pokedex_api.py
           python scripts/build_static_api.py
           python scripts/build_front_page.py
-          git add registry.json api/v1/ manifest.json
+          python scripts/build_scout_exports.py
+          python -m pytest -q tests/test_scout_rapp_skill.py
+          git add registry.json api/v1/ manifest.json rapp_skill.md rapp_skills.md scout/
           if ! git diff --cached --quiet; then
             git commit -m "Refresh registry provenance for #${ISSUE_NUMBER} [skip ci]"
             git push origin HEAD:main

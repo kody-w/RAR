@@ -1,0 +1,44 @@
+{
+  "schema": "rar-hologram-dogg/1.0",
+  "id": "holo-nexus",
+  "rappid": "rappid:@kody-w/holo-nexus:acc37c05ec39e4086b7b9afa3c5fa23f75e9ad9127209e6b1ffb5bcd6c37a217",
+  "name": "HOLO in the Nexus",
+  "kind": "data-projection",
+  "version": "1.0.0",
+  "engine": "three-r128",
+  "minimum_zoo_version": "1.2.0",
+  "description": "A fixed emitter projection that turns an options frame or live zoo state into a volumetric command surface.",
+  "source_file": "holo-nexus.html",
+  "default_seed": "b691c0494fae2213b9668e4e545d0b48bb490015b06447dc0255b2e8c0b62b64",
+  "accent": "cyan",
+  "data_binding": "live-zoo",
+  "bottle": true,
+  "dimensions": [
+    "options",
+    "decision",
+    "backup",
+    "command",
+    "projection"
+  ],
+  "scene": {
+    "prompt": "How do you want to back up the estate tonight?",
+    "options": [
+      {
+        "label": "Snapshot with provenance",
+        "value": "Snapshot the estate tree and preserve proof that nothing drifted."
+      },
+      {
+        "label": "Census only",
+        "value": "Generate a deterministic census for peer access."
+      },
+      {
+        "label": "Git-backed archive",
+        "value": "Commit the state, then generate the census."
+      }
+    ]
+  },
+  "summon": {
+    "adapter": "rapp-zoo",
+    "endpoint": "/api/holograms/summon"
+  }
+}

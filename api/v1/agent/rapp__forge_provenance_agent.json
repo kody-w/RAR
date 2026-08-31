@@ -30,7 +30,7 @@
   "lines": 265,
   "size_kb": 11.7,
   "sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-08-26T17:29:33-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__forge_provenance_agent.svg",

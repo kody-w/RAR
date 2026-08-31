@@ -1,0 +1,31 @@
+{
+  "schema": "rar-hologram-dogg/1.0",
+  "id": "holo-avatar",
+  "rappid": "rappid:@kody-w/holo-avatar:ce3a3fef2bdcb4debdcc08a4d0e8a1982756d2e269719ccb342a5f734abaf8c2",
+  "name": "Holo Avatar",
+  "kind": "character",
+  "version": "1.0.0",
+  "engine": "three-r128",
+  "minimum_zoo_version": "1.2.0",
+  "description": "A deterministic humanoid companion whose proportions and markings are seeded by a RAPP identity or egg address.",
+  "source_file": "holo-avatar.html",
+  "default_seed": "04356bded8854372649c4eba1516673fbb136b39f7f8c29da2437fd6a1aac201",
+  "accent": "violet",
+  "data_binding": "identity-seed",
+  "bottle": true,
+  "dimensions": [
+    "identity",
+    "character",
+    "companion",
+    "avatar",
+    "embodiment"
+  ],
+  "scene": {
+    "title": "A creature grown from its own frame",
+    "subtitle": "Same identity seed, same character on every machine."
+  },
+  "summon": {
+    "adapter": "rapp-zoo",
+    "endpoint": "/api/holograms/summon"
+  }
+}

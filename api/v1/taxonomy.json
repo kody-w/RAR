@@ -1,10 +1,10 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-31T19:29:20Z",
+  "generated": "2026-08-29T00:45:58Z",
   "categories": [
     {
       "name": "integrations",
-      "count": 1474
+      "count": 1475
     },
     {
       "name": "general",
@@ -729,6 +729,10 @@
       "count": 3
     },
     {
+      "name": "dogg",
+      "count": 3
+    },
+    {
       "name": "organism",
       "count": 3
     },
@@ -1061,6 +1065,14 @@
       "count": 2
     },
     {
+      "name": "rar",
+      "count": 2
+    },
+    {
+      "name": "summon",
+      "count": 2
+    },
+    {
       "name": "installer",
       "count": 2
     },
@@ -1141,7 +1153,7 @@
       "count": 2
     },
     {
-      "name": "dogg",
+      "name": "rapp-1",
       "count": 2
     },
     {
@@ -1318,10 +1330,6 @@
     },
     {
       "name": "game",
-      "count": 1
-    },
-    {
-      "name": "narration",
       "count": 1
     }
   ]

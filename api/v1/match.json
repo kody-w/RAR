@@ -1,7 +1,7 @@
 {
   "schema": "rar-match/1.0",
   "description": "Precomputed use-case matching. A host application asks the user to describe a use case, tokenizes it, sums the term weights from `index`, and returns the top agents — entirely client-side, with no backend and no GitHub access.",
-  "generated": "2026-08-31T19:29:20Z",
+  "generated": "2026-08-29T00:45:58Z",
   "how_to_query": {
     "canonical": "Look up a use_cases[].id for a curated, ranked list.",
     "free_text": "Lowercase the query, split on non-alphanumerics, drop tokens of 2 characters or fewer, then for each token read index[token] (entries are 'agent_id:weight'). Sum weights per agent_id and sort descending."
@@ -787,7 +787,7 @@
           "name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
           "display_name": "SharePoint List Insight Report Generator",
           "audience": "business",
-          "score": 122.49
+          "score": 122.48
         },
         {
           "id": "cowork-cookbook__report_conduct_root_cause_analysis",
@@ -801,21 +801,21 @@
           "name": "@cowork-cookbook/report_comply_with_customer_data_regulations",
           "display_name": "Comply with customer data regulations Summary Report",
           "audience": "business",
-          "score": 59.02
+          "score": 58.98
         },
         {
           "id": "cowork-cookbook__report_manage_data_security",
           "name": "@cowork-cookbook/report_manage_data_security",
           "display_name": "Manage data security Summary Report",
           "audience": "both",
-          "score": 59.02
+          "score": 58.98
         },
         {
           "id": "cowork-cookbook__report_manage_the_recurring_synchronization_of_data",
           "name": "@cowork-cookbook/report_manage_the_recurring_synchronization_of_data",
           "display_name": "Manage the recurring synchronization of data Summary Report",
           "audience": "both",
-          "score": 59.02
+          "score": 58.98
         },
         {
           "id": "cowork-cookbook__report_report_on_inventory_quality",
@@ -1242,77 +1242,84 @@
           "name": "@kody-w/launch_to_public_agent",
           "display_name": "Launch to Public",
           "audience": "both",
-          "score": 51.54
+          "score": 49.67
         },
         {
           "id": "cat-agent-skills__call_for_speakers_digest",
           "name": "@cat-agent-skills/call_for_speakers_digest",
           "display_name": "Call for Speakers Digest",
           "audience": "both",
-          "score": 12.88
+          "score": 12.42
         },
         {
           "id": "cat-agent-skills__global_greenwashing_claim_auditor",
           "name": "@cat-agent-skills/global_greenwashing_claim_auditor",
           "display_name": "Global Greenwashing Claim Auditor",
           "audience": "business",
-          "score": 12.88
+          "score": 12.42
         },
         {
           "id": "kody-w__full_rapp_leviathan",
           "name": "@kody-w/full_rapp_leviathan",
           "display_name": "FullRappLeviathan",
           "audience": "both",
-          "score": 12.88
+          "score": 12.42
+        },
+        {
+          "id": "kody-w__hologram_dogg",
+          "name": "@kody-w/hologram_dogg",
+          "display_name": "HologramDOGG",
+          "audience": "both",
+          "score": 12.42
         },
         {
           "id": "kody-w__kody2day_agent",
           "name": "@kody-w/kody2day_agent",
           "display_name": "Kody2day",
           "audience": "both",
-          "score": 12.88
+          "score": 12.42
         },
         {
           "id": "kody-w__plant_seed_agent",
           "name": "@kody-w/plant_seed_agent",
           "display_name": "Plant Seed",
           "audience": "both",
-          "score": 12.88
+          "score": 12.42
         },
         {
           "id": "kody-w__rapp_sdk_builder",
           "name": "@kody-w/rapp_sdk_builder",
           "display_name": "RAPP SDK Builder",
           "audience": "both",
-          "score": 12.88
+          "score": 12.42
         },
         {
           "id": "rapp__learn_new",
           "name": "@rapp/learn_new",
           "display_name": "LearnNew",
           "audience": "both",
-          "score": 12.88
+          "score": 12.42
         },
         {
           "id": "rapp__rapp_dogg_agent",
           "name": "@rapp/rapp_dogg_agent",
           "display_name": "RAPP DOGG",
           "audience": "both",
-          "score": 12.88
+          "score": 12.42
         },
         {
           "id": "rapp__rar_steward",
           "name": "@rapp/rar_steward",
           "display_name": "RarStewardAgent",
           "audience": "both",
-          "score": 12.88
+          "score": 12.42
         },
         {
           "id": "rapter__rapp_dogg_agent",
           "name": "@rapter/rapp_dogg_agent",
           "display_name": "RapterBox RAPP DOGG",
           "audience": "both",
-          "score": 12.88
+          "score": 12.42
         }
       ]
     },
@@ -5903,6 +5910,7 @@
       "cat-agent-skills__call_for_speakers_digest:1",
       "cat-agent-skills__global_greenwashing_claim_auditor:1",
       "kody-w__full_rapp_leviathan:1",
+      "kody-w__hologram_dogg:1",
       "kody-w__kody2day_agent:1",
       "kody-w__plant_seed_agent:1",
       "kody-w__rapp_sdk_builder:1",
@@ -6482,6 +6490,7 @@
       "cowork-cookbook__account_360_briefing:1",
       "cowork-cookbook__onboarding_checklist_generator:1",
       "kody-w__deal_desk_agent:1",
+      "kody-w__hologram_dogg:1",
       "rapter__hive_shape_agent:1"
     ],
     "competitors": [
@@ -6608,6 +6617,7 @@
     "verified": [
       "cat-agent-skills__competitive_battlecard_builder:1",
       "kody-w__copilot_studio_deploy_agent:1",
+      "kody-w__hologram_dogg:1",
       "kody-w__prototype_lock_factory_agent:1",
       "kody-w__rapp_projects:1",
       "kody-w__windows_vm_install_lab_agent:1",
@@ -10381,6 +10391,7 @@
       "cowork-cookbook__build_a_project_board_from_work_context:1",
       "cowork-cookbook__quote_aging_and_follow_up:1",
       "discreetRappers__project_tracker_agent:1",
+      "kody-w__hologram_dogg:1",
       "rapp__store_navigator_agent:1"
     ],
     "discovers": [
@@ -10519,6 +10530,7 @@
       "kody-w__double_jump_agent:1",
       "kody-w__factory:1",
       "kody-w__github_agent_library_agent:1",
+      "kody-w__hologram_dogg:1",
       "kody-w__matrix_arena_agent:1",
       "kody-w__perpetual_loop_factory:1",
       "kody-w__play_youtube_video_agent:1",
@@ -17277,6 +17289,7 @@
     ],
     "three": [
       "cowork-cookbook__vendor_invoice_three_way_match_status:4",
+      "kody-w__hologram_dogg:3",
       "wildhaven__ceo_agent:1"
     ],
     "pos": [
@@ -17357,7 +17370,7 @@
       "kody-w__rapp_x_notary_canary_agent:6",
       "kody-w__twin_egg_hatcher:5",
       "kody-w__factory:4",
-      "kody-w__rapp_projects:4",
+      "kody-w__hologram_dogg:4",
       "kody-w__rapp_sentinel_agent:4",
       "kody-w__rapp_skill_bridge_agent:4",
       "rapp__drift:4",
@@ -18311,6 +18324,7 @@
       "kody-w__deal_desk_agent:1"
     ],
     "rar": [
+      "kody-w__hologram_dogg:4",
       "kody-w__rar_remote_agent:4",
       "rapp__rapp:4",
       "rapp__rar_steward:4",
@@ -18550,6 +18564,51 @@
     ],
     "touching": [
       "kody-w__hello_world_agent:1"
+    ],
+    "hologramdogg": [
+      "kody-w__hologram_dogg:3"
+    ],
+    "hologram": [
+      "kody-w__hologram_dogg:4"
+    ],
+    "dogg": [
+      "rapp__rapp_dogg_agent:7",
+      "rapter__rapp_dogg_agent:7",
+      "kody-w__hologram_dogg:4"
+    ],
+    "zoo": [
+      "kody-w__hologram_dogg:5"
+    ],
+    "summon": [
+      "kody-w__hologram_dogg:4",
+      "rapp__twin_agent:4"
+    ],
+    "asks": [
+      "kody-w__hologram_dogg:1"
+    ],
+    "hash": [
+      "rapter__hive_census_agent:2",
+      "kody-w__hologram_dogg:1",
+      "kody-w__prototype_lock_factory_agent:1",
+      "kody-w__windows_vm_install_lab_agent:1"
+    ],
+    "character": [
+      "kody-w__hologram_dogg:1"
+    ],
+    "projection": [
+      "kody-w__hologram_dogg:1"
+    ],
+    "downloads": [
+      "kody-w__hologram_dogg:1"
+    ],
+    "owns": [
+      "kody-w__hologram_dogg:1"
+    ],
+    "sandboxed": [
+      "kody-w__hologram_dogg:1"
+    ],
+    "renderer": [
+      "kody-w__hologram_dogg:1"
     ],
     "rappter": [
       "kody-w__install_rappter_distro_agent:7",
@@ -18906,11 +18965,6 @@
     ],
     "prevents": [
       "kody-w__prototype_lock_factory_agent:1"
-    ],
-    "hash": [
-      "rapter__hive_census_agent:2",
-      "kody-w__prototype_lock_factory_agent:1",
-      "kody-w__windows_vm_install_lab_agent:1"
     ],
     "rappleviathanfactory": [
       "kody-w__rapp_leviathan_factory:3"
@@ -19517,9 +19571,9 @@
     "cubbies": [
       "rapp__rapp:1"
     ],
-    "dogg": [
-      "rapp__rapp_dogg_agent:7",
-      "rapter__rapp_dogg_agent:7"
+    "eggs": [
+      "rapp__rapp:1",
+      "rapp__twin_agent:1"
     ],
     "canon": [
       "rapp__rapp_dogg_agent:4",
@@ -19617,9 +19671,6 @@
     ],
     "converging": [
       "rapp__swarm_factory_agent:1"
-    ],
-    "summon": [
-      "rapp__twin_agent:4"
     ],
     "vibebuilder": [
       "rapp__vibe_builder_agent:3"
