@@ -1,0 +1,259 @@
+[
+  {
+    "frame_hash": "e5a4162dbe46f4dbd681ebc1a5d250146bf3a10e47e15a630e7fa2eb19596a7f",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "agents/@kody-w/rapp_projects_agent.py"
+      ],
+      "frame": 1,
+      "name": "canonical-agent",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "3f0a4dacbf782b21798e00695c03689dd776272d"
+    },
+    "payload_hash": "0595073fe567b8b531021a8972ffc1acfcacc6f48a54354c3be335d45929ccda",
+    "prev": null,
+    "prev_wave": null,
+    "seq": 0,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.000Z"
+  },
+  {
+    "frame_hash": "2dbc557f3c2bafddf9dbc5d8b2c785b82018638953417aa04614fd72e4c845a6",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "tests/test_rapp_projects_rapp1.py"
+      ],
+      "frame": 2,
+      "name": "rapp1-tests",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "5c5f0322218bc68045a3338d15befabd4e33578b"
+    },
+    "payload_hash": "aeda4612b83c25cba04264524f2255671c1b8be39990c3ddc80c7fd18bbf6af5",
+    "prev": "0595073fe567b8b531021a8972ffc1acfcacc6f48a54354c3be335d45929ccda",
+    "prev_wave": null,
+    "seq": 1,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.001Z"
+  },
+  {
+    "frame_hash": "6618bedca806ba05c6e6aefcf672e0d5a3b77b5b1002e010150eabea7ecfd725",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "tests/test_rapp_projects_storage.py"
+      ],
+      "frame": 3,
+      "name": "storage-tests",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "c72e7521be9a7143a28934650963d9b9c480dd11"
+    },
+    "payload_hash": "31ff5892ac93f8e75491c79f53dc4fcb88ee16b4043b7922d674ba02faaed3a9",
+    "prev": "aeda4612b83c25cba04264524f2255671c1b8be39990c3ddc80c7fd18bbf6af5",
+    "prev_wave": null,
+    "seq": 2,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.002Z"
+  },
+  {
+    "frame_hash": "900358c185a0d7d16bea4bf3ea519f64ea213a55e6760ad7710194d625703945",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "tests/test_rapp_projects_egg.py"
+      ],
+      "frame": 4,
+      "name": "egg-tests",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "bb78f67a928eebb8526746429b9c06affad5fcb5"
+    },
+    "payload_hash": "e6eb36056a0d514138263c47ed84f7d22ffac22b2177b54d1a2b73c27dff94c1",
+    "prev": "31ff5892ac93f8e75491c79f53dc4fcb88ee16b4043b7922d674ba02faaed3a9",
+    "prev_wave": null,
+    "seq": 3,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.003Z"
+  },
+  {
+    "frame_hash": "e73d8f73be31cf1c4511b260f8f3aa7c7423055b6ab77261ab341ae0365b70b8",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "tests/test_rapp_projects_contract.py"
+      ],
+      "frame": 5,
+      "name": "public-contract-tests",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "c128767574c7e5d290764e6c6e5d7157b3ecfe46"
+    },
+    "payload_hash": "92b514dcf426ff4f03cd16d654d48cbb4db4335bc65e4500d22355552e578ab5",
+    "prev": "e6eb36056a0d514138263c47ed84f7d22ffac22b2177b54d1a2b73c27dff94c1",
+    "prev_wave": null,
+    "seq": 4,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.004Z"
+  },
+  {
+    "frame_hash": "1ed8ac9fcaca0a5fa6aee6f8773515dda373b001cca0269e9b1521d89babd6d7",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "docs/rapp-projects-skill.md"
+      ],
+      "frame": 6,
+      "name": "quickstart",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "00dd8de13c549252fa60722058de7cc6e957ed74"
+    },
+    "payload_hash": "bfbdf74f48c2d265497a989074396a9040b5f892e90c22a55edf459e3513de41",
+    "prev": "92b514dcf426ff4f03cd16d654d48cbb4db4335bc65e4500d22355552e578ab5",
+    "prev_wave": null,
+    "seq": 5,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.005Z"
+  },
+  {
+    "frame_hash": "9c01bb67aa45f71c540b69e70943aa3aeea2761bb033044fb42fcb3f6ce734af",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "tests/test_rapp_projects_scout.py"
+      ],
+      "frame": 7,
+      "name": "scout-projection-tests",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "90ba975aa831f2e50acd72e41bd0b205d79ed6eb"
+    },
+    "payload_hash": "3030eda29c6e8f897b27ae6268b8874d7787d53867a316bef43b5d1b51f949a6",
+    "prev": "bfbdf74f48c2d265497a989074396a9040b5f892e90c22a55edf459e3513de41",
+    "prev_wave": null,
+    "seq": 6,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.006Z"
+  },
+  {
+    "frame_hash": "9d5a175f2195978c20541300907a3f8dafe446c54997c0327b615046e4d150df",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "tests/test_rapp_projects_publication.py"
+      ],
+      "frame": 8,
+      "name": "publication-privacy-tests",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "7d63bcfc271070cff83d5f773ff3f04c1eb4d637"
+    },
+    "payload_hash": "b84b1a253ea810e8094ffb786902581cfdf5dc881b3f74e08b45ef5f1608b1fa",
+    "prev": "3030eda29c6e8f897b27ae6268b8874d7787d53867a316bef43b5d1b51f949a6",
+    "prev_wave": null,
+    "seq": 7,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.007Z"
+  },
+  {
+    "frame_hash": "c96248f3dbca9f0bccad19f904bbfd7acc3da876215797228bc9b21778377a76",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "tests/test_rapp_projects_interop.py"
+      ],
+      "frame": 9,
+      "name": "multi-ai-interoperability",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "fa28d1f78812d8fcec697fdeb5a2067b0f2efd58"
+    },
+    "payload_hash": "38336dc40714164592b72ea81a0b9a872e67c4bd12a490b4ddaef064f96ea132",
+    "prev": "b84b1a253ea810e8094ffb786902581cfdf5dc881b3f74e08b45ef5f1608b1fa",
+    "prev_wave": null,
+    "seq": 8,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.008Z"
+  },
+  {
+    "frame_hash": "0e5852d34154bd04b38972e0cb16ac887f80375d5337974d868464510127fe0d",
+    "kind": "build.frame",
+    "payload": {
+      "artifacts": [
+        "registry.json",
+        "rapp_skill_agent.py",
+        ".claude-plugin/marketplace.json",
+        "state/url_stability.json",
+        "scout/catalog/catalog.json",
+        "scout/workflows/rar-kody-w-rapp-projects",
+        "api/v1/agent/kody-w__rapp_projects.json",
+        "api/v1/front.json"
+      ],
+      "evidence": {
+        "agent_source_commit": "a3391b199669c48572aabdab2087b8c6733f0964",
+        "agent_version": "1.0.3",
+        "api_sha256": "4df52c49bccbdaa5118ff0ee7e86e40396bb9382b0557584ea26f2dc2d5c8cb4",
+        "artifact_body_in_egg": false,
+        "build_receipt_tests": 2,
+        "front_audience": "both",
+        "import_verdict": "pass",
+        "integration_tests": 8102,
+        "post_import_frames": 7,
+        "privacy_mutations": 17,
+        "publication_release_tests": 179,
+        "rapp1_commit": "caf6ef276cafa92aa744499af90dc1a28559941a",
+        "rapp1_spec_sha256": "d345235be5bc698d78c5893285abd09f2e62a398f781123d1de8da313a01c7de",
+        "rapp_proof": "pass",
+        "rapp_sdk_sha256": "aba04a57390d98276eadd9c7decd821bb53549730daec3491cffee45ada48eb2",
+        "rapp_skill_skill_sha256": "3ab288bd5bfcd0e399ffce446d7ec70457479e199cfab05826c4083cb8e78bcd",
+        "rapp_skill_source_sha256": "1fa931266d8646ee3138d0c1bab1e742267a1951765b8ceeee0496a677bd6e4c",
+        "rapp_skill_version": "1.3.1",
+        "runner_operations": 12,
+        "runner_preflight": "RAPP_READY",
+        "skill_sha256": "4a83a11df0de5c2e9ea62a09752349f26e43656317f5122c4ce933ae40d955c2",
+        "source_sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca",
+        "source_tests": 97,
+        "source_verdict": "pass",
+        "strict_unknown_fields": true,
+        "targeted_tests": 98,
+        "transfer_byte_identical": true,
+        "transferred_frames": 6
+      },
+      "frame": 10,
+      "name": "integration-publication",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "a3391b199669c48572aabdab2087b8c6733f0964"
+    },
+    "payload_hash": "299aad58e1a0c02dd8abffdac96154eccef0d1e1e636840716b2d17e1c59bc86",
+    "prev": "38336dc40714164592b72ea81a0b9a872e67c4bd12a490b4ddaef064f96ea132",
+    "prev_wave": null,
+    "seq": 9,
+    "sig": null,
+    "spec": "rapp/1",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "utc": "2026-08-31T19:03:11.009Z"
+  }
+]
