@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-09-01T04:24:11Z",
+  "generated": "2026-09-01T04:32:27Z",
   "count": 1697,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -61210,8 +61210,8 @@
       "id": "kody-w__workiq",
       "name": "@kody-w/workiq",
       "display_name": "WorkIQ",
-      "description": "Queries Microsoft 365 data — email, calendar, SharePoint/OneDrive, Teams, people — by shelling out to the workiq CLI with Entra ID auth.",
-      "version": "1.0.2",
+      "description": "Queries Microsoft 365 through the official Work IQ CLI, including direct entity reads for live Teams data when semantic ask results are insufficient.",
+      "version": "1.1.2",
       "publisher": "@kody-w",
       "author": "Kody",
       "category": "integrations",
@@ -61234,11 +61234,11 @@
         "path": "agents/@kody-w/workiq_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/workiq_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/workiq_agent.py",
-        "sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949"
+        "sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4"
       },
       "stats": {
-        "lines": 249,
-        "size_kb": 9.5,
+        "lines": 526,
+        "size_kb": 20.6,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },

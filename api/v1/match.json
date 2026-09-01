@@ -1,7 +1,7 @@
 {
   "schema": "rar-match/1.0",
   "description": "Precomputed use-case matching. A host application asks the user to describe a use case, tokenizes it, sums the term weights from `index`, and returns the top agents — entirely client-side, with no backend and no GitHub access.",
-  "generated": "2026-09-01T04:24:11Z",
+  "generated": "2026-09-01T04:32:27Z",
   "how_to_query": {
     "canonical": "Look up a use_cases[].id for a curated, ranked list.",
     "free_text": "Lowercase the query, split on non-alphanumerics, drop tokens of 2 characters or fewer, then for each token read index[token] (entries are 'agent_id:weight'). Sum weights per agent_id and sort descending."
@@ -2923,8 +2923,7 @@
     ],
     "people": [
       "cat-agent-skills__action_items_todo:1",
-      "cat-agent-skills__work_brief:1",
-      "kody-w__workiq:1"
+      "cat-agent-skills__work_brief:1"
     ],
     "actually": [
       "cat-agent-skills__action_items_todo:1",
@@ -3053,7 +3052,8 @@
       "kody-w__commons_life_agent:1",
       "kody-w__commons_show_agent:1",
       "kody-w__deal_desk_agent:1",
-      "kody-w__second_life_agent:1"
+      "kody-w__second_life_agent:1",
+      "kody-w__workiq:1"
     ],
     "decision": [
       "cat-agent-skills__agent_evaluation_designer:4",
@@ -3302,7 +3302,8 @@
       "cowork-cookbook__scheduled_brief_analyze_production_quality_results:4",
       "cowork-cookbook__scheduled_brief_report_quality_test_results:4",
       "cat-agent-skills__agent_evaluation_designer:1",
-      "cat-agent-skills__monte_carlo_analysis:1"
+      "cat-agent-skills__monte_carlo_analysis:1",
+      "kody-w__workiq:1"
     ],
     "defensible": [
       "cat-agent-skills__agent_evaluation_designer:1"
@@ -4053,8 +4054,7 @@
     ],
     "onedrive": [
       "cowork-cookbook__analyze_and_optimize_your_onedrive_at_scale:4",
-      "cat-agent-skills__ai_demo_assistant:1",
-      "kody-w__workiq:1"
+      "cat-agent-skills__ai_demo_assistant:1"
     ],
     "first": [
       "cat-agent-skills__ai_first_process_redesign:4",
@@ -4283,6 +4283,7 @@
       "kody-w__copilot_studio_forge_agent:1",
       "kody-w__rapp_projects:1",
       "kody-w__rar_installer_troubleshooter_agent:1",
+      "kody-w__workiq:1",
       "rapp__moment_factory_agent:1",
       "rarbookworld__bookfactory:1",
       "rarbookworld__momentfactory:1"
@@ -5213,11 +5214,11 @@
     "sharepoint": [
       "cat-agent-skills__sharepoint_list_formatter:7",
       "cat-agent-skills__sharepoint_list_insight_report_generator:7",
-      "kody-w__workiq:4",
       "cat-agent-skills__copilot_studio_knowledge_readiness:3",
       "cat-agent-skills__knowledge_corpus_curator:3",
       "cat-agent-skills__pdf_table_data_conversion:3",
       "discreetRappers__sharepoint_contract_analysis_agent:3",
+      "kody-w__workiq:3",
       "cat-agent-skills__brand_template_enforcer:1"
     ],
     "hosted": [
@@ -7211,8 +7212,7 @@
       "cowork-cookbook__stand_up_a_campaign_workspace:1",
       "cowork-cookbook__weekly_external_customer_email_review:1",
       "cowork-cookbook__wrap_up_projects_and_organize_related_work:1",
-      "kody-w__neuron_swarm:1",
-      "kody-w__workiq:1"
+      "kody-w__neuron_swarm:1"
     ],
     "gaps": [
       "cat-agent-skills__copilot_studio_knowledge_readiness:1",
@@ -7233,7 +7233,8 @@
     ],
     "reads": [
       "cat-agent-skills__copilot_studio_test_planner:1",
-      "cat-agent-skills__work_brief:1"
+      "cat-agent-skills__work_brief:1",
+      "kody-w__workiq:1"
     ],
     "generates": [
       "cat-agent-skills__copilot_studio_test_planner:1",
@@ -7757,7 +7758,7 @@
     ],
     "calendar": [
       "cat-agent-skills__work_brief:4",
-      "kody-w__workiq:4",
+      "kody-w__workiq:3",
       "cat-agent-skills__exam_prep_learning_plan_builder:1",
       "cat-agent-skills__work_iq_signalboard:1",
       "cowork-cookbook__campaign_kick_off:1",
@@ -9680,7 +9681,8 @@
       "cat-agent-skills__power_bi_model_review:5"
     ],
     "semantic": [
-      "cat-agent-skills__power_bi_model_review:4"
+      "cat-agent-skills__power_bi_model_review:4",
+      "kody-w__workiq:1"
     ],
     "fabric": [
       "cat-agent-skills__power_bi_model_review:3",
@@ -10157,7 +10159,7 @@
       "cat-agent-skills__regulation_monitor:1"
     ],
     "workiq": [
-      "kody-w__workiq:7",
+      "kody-w__workiq:6",
       "howardh__chief_of_staff_agent:4",
       "cat-agent-skills__regulation_monitor:1"
     ],
@@ -10464,7 +10466,8 @@
     ],
     "direct": [
       "kody-w__copilot_studio_probe_agent:4",
-      "cat-agent-skills__sharepoint_list_insight_report_generator:1"
+      "cat-agent-skills__sharepoint_list_insight_report_generator:1",
+      "kody-w__workiq:1"
     ],
     "coach": [
       "cat-agent-skills__skill_authoring_coach:3"
@@ -16255,7 +16258,8 @@
     ],
     "including": [
       "cowork-cookbook__field_service_daily_utilization:1",
-      "cowork-cookbook__planned_order_summary:1"
+      "cowork-cookbook__planned_order_summary:1",
+      "kody-w__workiq:1"
     ],
     "overbooked": [
       "cowork-cookbook__field_service_daily_utilization:1"
@@ -16617,7 +16621,8 @@
       "cowork-cookbook__period_close_checklist:1"
     ],
     "entity": [
-      "cowork-cookbook__period_close_checklist:1"
+      "cowork-cookbook__period_close_checklist:1",
+      "kody-w__workiq:1"
     ],
     "actions": [
       "cowork-cookbook__scheduled_brief_implement_corrective_and_preventative_actions:4",
@@ -18852,7 +18857,8 @@
       "kody-w__plant_seed_agent:1"
     ],
     "official": [
-      "kody-w__play_youtube_video_agent:1"
+      "kody-w__play_youtube_video_agent:1",
+      "kody-w__workiq:1"
     ],
     "downloading": [
       "kody-w__play_youtube_video_agent:1"
@@ -19440,13 +19446,10 @@
     "queries": [
       "kody-w__workiq:1"
     ],
-    "shelling": [
+    "ask": [
       "kody-w__workiq:1"
     ],
-    "entra": [
-      "kody-w__workiq:1"
-    ],
-    "auth": [
+    "insufficient": [
       "kody-w__workiq:1"
     ],
     "wordpress": [
