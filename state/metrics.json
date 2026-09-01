@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-08-31T11:39:43Z",
+ "generated_at": "2026-09-01T10:12:28Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 112,
-  "size_kb": 49169,
+  "size_kb": 47151,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-08-31T10:21:47Z",
+  "pushed_at": "2026-09-01T09:05:10Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 1695,
+  "agents": 1697,
   "swarms": 2,
   "publishers": 11,
   "categories": 13,
-  "total_lines": 401510,
-  "total_kb": 21049.5,
+  "total_lines": 409134,
+  "total_kb": 21314.5,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -244,7 +244,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1929599,
+  "rank": 1946439,
   "agent_hits": 12,
   "files": [
    {
@@ -471,6 +471,23 @@
     "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified)."
    },
    {
+    "name": "@kody-w/rapp_projects",
+    "display_name": "RappProjects",
+    "publisher": "@kody-w",
+    "category": "productivity",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 4341,
+    "size_kb": 148.5,
+    "added_at": "2026-08-31T11:52:12-04:00",
+    "file": "agents/@kody-w/rapp_projects_agent.py",
+    "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs."
+   },
+   {
     "name": "@howardh/vaultmind_agent",
     "display_name": "VaultMind",
     "publisher": "@howardh",
@@ -486,6 +503,23 @@
     "added_at": "2026-05-24T21:45:25-04:00",
     "file": "agents/@howardh/vaultmind_agent.py",
     "description": "Manages an Obsidian vault through 28 actions \u2014 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks."
+   },
+   {
+    "name": "@kody-w/rar_installer_troubleshooter_agent",
+    "display_name": "RAPP Roadside",
+    "publisher": "@kody-w",
+    "category": "devtools",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 3006,
+    "size_kb": 105.4,
+    "added_at": "2026-09-01T04:22:15Z",
+    "file": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
+    "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation."
    },
    {
     "name": "@discreetRappers/rapp_pipeline_agent",
@@ -622,43 +656,43 @@
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/powerpoint_generator_agent.py",
     "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection."
-   },
-   {
-    "name": "@kody-w/full_rapp_leviathan",
-    "display_name": "FullRappLeviathan",
-    "publisher": "@kody-w",
-    "category": "core",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1546,
-    "size_kb": 48.5,
-    "added_at": "2026-08-11T09:43:05Z",
-    "file": "agents/@kody-w/full_rapp_leviathan_agent.py",
-    "description": "Compiles and assesses public-safe Full RAPP Leviathan blueprints across identity, intelligence, production, truth, and commerce."
-   },
-   {
-    "name": "@kody-w/rapp_skill_bridge_agent",
-    "display_name": "RAPP Skill Bridge",
-    "publisher": "@kody-w",
-    "category": "pipeline",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1416,
-    "size_kb": 57.8,
-    "added_at": "2026-07-23T12:26:59-04:00",
-    "file": "agents/@kody-w/rapp_skill_bridge_agent.py",
-    "description": "Converts a RAPP agent.py into an installable Claude plugin (SKILL.md + pinned runner that executes the agent verbatim) and back again byte-for-byte, with drift detection and safety gates for importing foreign skills."
    }
   ],
   "newest": [
+   {
+    "name": "@kody-w/rar_installer_troubleshooter_agent",
+    "display_name": "RAPP Roadside",
+    "publisher": "@kody-w",
+    "category": "devtools",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 3006,
+    "size_kb": 105.4,
+    "added_at": "2026-09-01T04:22:15Z",
+    "file": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
+    "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation."
+   },
+   {
+    "name": "@kody-w/rapp_projects",
+    "display_name": "RappProjects",
+    "publisher": "@kody-w",
+    "category": "productivity",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 4341,
+    "size_kb": 148.5,
+    "added_at": "2026-08-31T11:52:12-04:00",
+    "file": "agents/@kody-w/rapp_projects_agent.py",
+    "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs."
+   },
    {
     "name": "@kody-w/hologram_dogg",
     "display_name": "HologramDOGG",
@@ -879,40 +913,6 @@
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/adaptive_card_analyze_production_costs_agent.py",
     "description": "Produces a reusable Adaptive Card JSON snapshot of analyze production costs status for embedding in dashboards, emails, or Teams."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_approve_budgets",
-    "display_name": "Approve budgets Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.3,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_approve_budgets_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of approve budgets status for embedding in dashboards, emails, or Teams."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_audit_financial_results",
-    "display_name": "Audit financial results Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.4,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_audit_financial_results_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of audit financial results status for embedding in dashboards, emails, or Teams."
    }
   ],
   "publishers": [
@@ -936,11 +936,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 65,
+    "agents": 67,
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 56618,
+    "lines": 64242,
     "rating": 5.0
    },
    {
@@ -1033,7 +1033,7 @@
    },
    {
     "name": "productivity",
-    "agents": 43,
+    "agents": 44,
     "downloads": 4,
     "score": 0,
     "reviews": 0
@@ -1047,7 +1047,7 @@
    },
    {
     "name": "devtools",
-    "agents": 25,
+    "agents": 26,
     "downloads": 0,
     "score": 0,
     "reviews": 1
@@ -1110,7 +1110,7 @@
    }
   ],
   "tiers": {
-   "community": 1271,
+   "community": 1273,
    "verified": 281,
    "frontier": 95,
    "official": 46,
