@@ -236,6 +236,7 @@ def test_build_receipt_binds_the_generated_publication():
         AGENT.read_bytes().replace(b"\r\n", b"\n")
     ).hexdigest()
     skill_sha256 = hashlib.sha256(skill.read_bytes()).hexdigest()
+    api_sha256 = hashlib.sha256(API_RECORD.read_bytes()).hexdigest()
     api = json.loads(API_RECORD.read_text(encoding="utf-8"))
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
     [registry_record] = [
