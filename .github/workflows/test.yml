@@ -110,6 +110,7 @@ jobs:
   # ─── FULL (all tests) ──────────────────────────────────────────
   full:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     needs: [url-stability, smoke, pipeline, contract]
     steps:
       - uses: actions/checkout@v4
