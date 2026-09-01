@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-09-01T04:17:02Z",
+  "generated": "2026-09-01T04:24:11Z",
   "count": 1697,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -60881,7 +60881,7 @@
       "stats": {
         "lines": 3006,
         "size_kb": 105.4,
-        "added_at": null
+        "added_at": "2026-09-01T04:22:15Z"
       }
     },
     {

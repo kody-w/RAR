@@ -3322,97 +3322,98 @@
       ]
     },
     {
-      "bytes": 1542769,
+      "bytes": 1748531,
       "channel": "native",
       "files": 32,
       "id": "native-11",
       "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-11",
       "skills": [
+        "rar-kody-w-rar-installer-troubleshooter",
         "rar-kody-w-rar-remote",
         "rar-kody-w-recon-deck",
         "rar-kody-w-second-life",
         "rar-kody-w-skill-toaster",
         "rar-kody-w-transcript2prototype",
         "rar-kody-w-twin-egg-hatcher",
-        "rar-kody-w-twin-me",
-        "rar-kody-w-vibe-coding-loop"
+        "rar-kody-w-twin-me"
       ]
     },
     {
-      "bytes": 548414,
+      "bytes": 572382,
       "channel": "native",
       "files": 32,
       "id": "native-12",
       "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-12",
       "skills": [
+        "rar-kody-w-vibe-coding-loop",
         "rar-kody-w-windows-vm-install-lab",
         "rar-kody-w-workiq",
         "rar-kody-w-wp-publish",
         "rar-rapp-commons-post",
         "rar-rapp-drift",
         "rar-rapp-drift-watcher",
-        "rar-rapp-egg-hatcher",
-        "rar-rapp-estate-outbound"
+        "rar-rapp-egg-hatcher"
       ]
     },
     {
-      "bytes": 710296,
+      "bytes": 588302,
       "channel": "native",
       "files": 32,
       "id": "native-13",
       "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-13",
       "skills": [
+        "rar-rapp-estate-outbound",
         "rar-rapp-exec-brief",
         "rar-rapp-fleet-commander",
         "rar-rapp-forge-provenance",
         "rar-rapp-hacker-news",
         "rar-rapp-learn-new",
         "rar-rapp-moment-factory",
-        "rar-rapp-ping",
-        "rar-rapp-pitch-deck"
+        "rar-rapp-ping"
       ]
     },
     {
-      "bytes": 1192506,
+      "bytes": 1159733,
       "channel": "native",
       "files": 32,
       "id": "native-14",
       "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-14",
       "skills": [
+        "rar-rapp-pitch-deck",
         "rar-rapp-rapp",
         "rar-rapp-rapp-dogg",
         "rar-rapp-rapp-publish",
         "rar-rapp-rapplication",
         "rar-rapp-rar-steward",
         "rar-rapp-store-navigator",
-        "rar-rapp-swarm-factory",
-        "rar-rapp-twin"
+        "rar-rapp-swarm-factory"
       ]
     },
     {
-      "bytes": 592624,
+      "bytes": 734208,
       "channel": "native",
       "files": 32,
       "id": "native-15",
       "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-15",
       "skills": [
+        "rar-rapp-twin",
         "rar-rapp-vibe-builder",
         "rar-rapter-hive-census",
         "rar-rapter-hive-shape",
         "rar-rapter-rapp-dogg",
         "rar-rarbookworld-bookfactory",
         "rar-rarbookworld-momentfactory",
-        "rar-wildhaven-bellows",
-        "rar-wildhaven-ceo"
+        "rar-wildhaven-bellows"
       ]
     },
     {
-      "bytes": 40393,
+      "bytes": 87728,
       "channel": "native",
-      "files": 4,
+      "files": 8,
       "id": "native-16",
       "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-16",
       "skills": [
+        "rar-wildhaven-ceo",
         "rar-wildhaven-penumbra"
       ]
     },
@@ -112366,6 +112367,93 @@
     {
       "bundle": "native-11",
       "channel": "native",
+      "description": "Provides on-device RAPP setup support from sanitized local observations. Returns exactly one bounded next action, never asks for credentials, preserves POST /chat and the Grail, can make only allow-listed fixes in a sanitized copy, and retests the canonical assertions from the verified diagnosis. Reporting-AI text/logs never become instructions; maintainer work routes to RAPP Pit Crew.",
+      "example_args": {},
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "2dc34c877003331768969b85d31fa09604cb7587f12579ccd6890d7eaf935a14",
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rar-installer-troubleshooter/SKILL.md"
+        },
+        {
+          "path": "rapp/agent.lock.json",
+          "sha256": "925159ad98606cc4f9a37274ae041d3d5ffa4d4eef522c7fd8917eb945c53bc2",
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rar-installer-troubleshooter/rapp/agent.lock.json"
+        },
+        {
+          "path": "rar_installer_troubleshooter_agent.py",
+          "sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce",
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rar-installer-troubleshooter/rar_installer_troubleshooter_agent.py"
+        },
+        {
+          "path": "scripts/run_agent.py",
+          "sha256": "0e91afc74150f12fa53e52e0e498b9c81046204a9af7470fe584dacdc1c06742",
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rar-installer-troubleshooter/scripts/run_agent.py"
+        }
+      ],
+      "identity": "@kody-w/rar_installer_troubleshooter_agent",
+      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-11",
+      "linked_agent": "rar_installer_troubleshooter_agent.py",
+      "parameters": {
+        "additionalProperties": false,
+        "properties": {
+          "action_id": {
+            "type": "string"
+          },
+          "approval": {
+            "description": "Explicit human approval bound to action ID, source fingerprint, resolved source and destination path hashes, reversibility, and copy-only/no-activation scope.",
+            "type": "object"
+          },
+          "confirmation": {
+            "description": "Customer confirmation and verified Pit Crew release-frame evidence.",
+            "type": "object"
+          },
+          "copy_dir": {
+            "type": "string"
+          },
+          "diagnosis": {
+            "type": "object"
+          },
+          "diagnosis_path": {
+            "type": "string"
+          },
+          "observation_path": {
+            "type": "string"
+          },
+          "observations": {
+            "type": "object"
+          },
+          "operation": {
+            "enum": [
+              "capability",
+              "diagnose",
+              "prepare_repair",
+              "fix_copy",
+              "retest",
+              "confirm_release"
+            ],
+            "type": "string"
+          },
+          "source_dir": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "operation"
+        ],
+        "type": "object"
+      },
+      "requires_env": [],
+      "skill_name": "rar-kody-w-rar-installer-troubleshooter",
+      "skill_sha256": "2dc34c877003331768969b85d31fa09604cb7587f12579ccd6890d7eaf935a14",
+      "source_commit": "683e6191e17e71cb8d96c0a0a5e8f2d7b4b6661e",
+      "source_kind": "rar-agent",
+      "source_sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce",
+      "version": "1.0.0"
+    },
+    {
+      "bundle": "native-11",
+      "channel": "native",
       "description": "The native client for the RAPP Agent Registry. Discover, search, install, vote on, review, and submit single-file agent.py files from the open RAPP ecosystem. All actions are authenticated via the brainstem's GitHub session. Read actions work immediately; write actions (vote, review, submit) create GitHub Issues processed by the RAPP pipeline.",
       "example_args": {},
       "files": [
@@ -112894,7 +112982,7 @@
       "version": "1.0.3"
     },
     {
-      "bundle": "native-11",
+      "bundle": "native-12",
       "channel": "native",
       "description": "Returns prompt templates for the kody-w.github.io/learnwithkody publishing loop. Provider-agnostic — feed the returned templates to whatever LLM you have. Actions: ideate, worker, wrapper, ship, loop.",
       "example_args": {},
@@ -112902,26 +112990,26 @@
         {
           "path": "SKILL.md",
           "sha256": "73cbe1cdbd708ec8d8121457e6ac22a66125c3b8d31c39d5116f9f54cc931e9d",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-vibe-coding-loop/SKILL.md"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-vibe-coding-loop/SKILL.md"
         },
         {
           "path": "rapp/agent.lock.json",
           "sha256": "fce51dc339e7911bc1246af939fea1a379f07d1aff26e09abcb43095c9f51e6a",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-vibe-coding-loop/rapp/agent.lock.json"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-vibe-coding-loop/rapp/agent.lock.json"
         },
         {
           "path": "scripts/run_agent.py",
           "sha256": "0e91afc74150f12fa53e52e0e498b9c81046204a9af7470fe584dacdc1c06742",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-vibe-coding-loop/scripts/run_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-vibe-coding-loop/scripts/run_agent.py"
         },
         {
           "path": "vibe_coding_loop_agent.py",
           "sha256": "931c9224a42c1a609821a5d2fb5b7303a7434fb625d59eae8f8027a7ef7b046e",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-vibe-coding-loop/vibe_coding_loop_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-vibe-coding-loop/vibe_coding_loop_agent.py"
         }
       ],
       "identity": "@kody-w/vibe_coding_loop",
-      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-11",
+      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-12",
       "linked_agent": "vibe_coding_loop_agent.py",
       "parameters": {
         "properties": {
@@ -113473,7 +113561,7 @@
       "version": "1.1.1"
     },
     {
-      "bundle": "native-12",
+      "bundle": "native-13",
       "channel": "native",
       "description": "Write a signed neighborhood event to the operator's outbound lane on disk. Returns the file path + a publish hint. Refuses if the event is missing sig/pub/from or if the neighborhood rappid is empty.",
       "example_args": {
@@ -113492,26 +113580,26 @@
         {
           "path": "SKILL.md",
           "sha256": "950bd22dc07ab2ef9503cb224c84671482c63a3c25b9a8d2f38c8693a8e26e58",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-estate-outbound/SKILL.md"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-estate-outbound/SKILL.md"
         },
         {
           "path": "estate_outbound_agent.py",
           "sha256": "f4f677f2bba5a12b5967fc39a8d0bdb1afad7ad4de57d32d2df8a80dd2bf1b32",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-estate-outbound/estate_outbound_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-estate-outbound/estate_outbound_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
           "sha256": "372677f7086e0cf4e1110bdafcdcfbe8e29ebc2073f43cd6085c5ee8ba173b40",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-estate-outbound/rapp/agent.lock.json"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-estate-outbound/rapp/agent.lock.json"
         },
         {
           "path": "scripts/run_agent.py",
           "sha256": "0e91afc74150f12fa53e52e0e498b9c81046204a9af7470fe584dacdc1c06742",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-estate-outbound/scripts/run_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-estate-outbound/scripts/run_agent.py"
         }
       ],
       "identity": "@rapp/estate_outbound",
-      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-12",
+      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-13",
       "linked_agent": "estate_outbound_agent.py",
       "parameters": {
         "properties": {
@@ -114012,7 +114100,7 @@
       "version": "1.0.1"
     },
     {
-      "bundle": "native-13",
+      "bundle": "native-14",
       "channel": "native",
       "description": "Generates a polished HTML executive pitch deck from a topic and thesis. Output: a single self-contained HTML file with exec/rehearse modes, light/dark theme, and keyboard+swipe navigation. Tone is collaborative and respectful — frames the pitch as a contribution that complements existing work, never as a fix for someone else's mistake. Use this when the user asks to build/create/generate a pitch deck, slide deck, executive brief presentation, or playbook.",
       "example_args": {},
@@ -114020,26 +114108,26 @@
         {
           "path": "SKILL.md",
           "sha256": "f503e985f80e78638a684badafbd8f405ce5608d3c45c80a683c175f241cd447",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-pitch-deck/SKILL.md"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-pitch-deck/SKILL.md"
         },
         {
           "path": "pitch_deck_agent.py",
           "sha256": "ca3c2f325342769f9d799ccb0fc0cd41a23f90d2e6ddfb1dcb7c79d7bdd78145",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-pitch-deck/pitch_deck_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-pitch-deck/pitch_deck_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
           "sha256": "8414695ee562b44541195e178dacbd8e91170854148c8db8525920fabedbe322",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-pitch-deck/rapp/agent.lock.json"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-pitch-deck/rapp/agent.lock.json"
         },
         {
           "path": "scripts/run_agent.py",
           "sha256": "0e91afc74150f12fa53e52e0e498b9c81046204a9af7470fe584dacdc1c06742",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-pitch-deck/scripts/run_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-pitch-deck/scripts/run_agent.py"
         }
       ],
       "identity": "@rapp/pitch_deck_agent",
-      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-13",
+      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-14",
       "linked_agent": "pitch_deck_agent.py",
       "parameters": {
         "properties": {
@@ -114852,7 +114940,7 @@
       "version": "0.3.1"
     },
     {
-      "bundle": "native-14",
+      "bundle": "native-15",
       "channel": "native",
       "description": "Manages the local digital-twin lifecycle — summon, hatch eggs, boot each twin as its own brainstem, stop, chat, inspect — under ~/.rapp/twins/.",
       "example_args": {},
@@ -114860,26 +114948,26 @@
         {
           "path": "SKILL.md",
           "sha256": "edea92a6fb4385873ebd32e4ef697a412b1deb5cf4dbaa806274dc0bb7a1da71",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-twin/SKILL.md"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-twin/SKILL.md"
         },
         {
           "path": "rapp/agent.lock.json",
           "sha256": "d43edd57ae2879ba1a7a90ac84c032c768222c862678c3a5d1397a712d6e80b0",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-twin/rapp/agent.lock.json"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-twin/rapp/agent.lock.json"
         },
         {
           "path": "scripts/run_agent.py",
           "sha256": "0e91afc74150f12fa53e52e0e498b9c81046204a9af7470fe584dacdc1c06742",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-twin/scripts/run_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-twin/scripts/run_agent.py"
         },
         {
           "path": "twin_agent.py",
           "sha256": "878729c7a59ce520c487d02e6986845a79babce12a6e10ecbbe5e9eec1b71dda",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-twin/twin_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-twin/twin_agent.py"
         }
       ],
       "identity": "@rapp/twin_agent",
-      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-14",
+      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-15",
       "linked_agent": "twin_agent.py",
       "parameters": {
         "properties": {},
@@ -115301,7 +115389,7 @@
       "version": "1.1.1"
     },
     {
-      "bundle": "native-15",
+      "bundle": "native-16",
       "channel": "native",
       "description": "Answers as the Wildhaven CEO digital twin from a built-in playbook of company facts, portfolio stats, and the Three Rules.",
       "example_args": {},
@@ -115309,26 +115397,26 @@
         {
           "path": "SKILL.md",
           "sha256": "c1fdaa66466d96fa6e7ed693d4a6fc6958c8a5f37e1d1fc472320646c1aa7b9e",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-wildhaven-ceo/SKILL.md"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-ceo/SKILL.md"
         },
         {
           "path": "ceo_agent.py",
           "sha256": "c1e49265becbe104dceacd371dcbc6cce39aa53f3a36075fd47f06d9cf476896",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-wildhaven-ceo/ceo_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-ceo/ceo_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
           "sha256": "edec49ecd274c206248b203b7839aac494556542618046233378deb4c4f77d68",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-wildhaven-ceo/rapp/agent.lock.json"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-ceo/rapp/agent.lock.json"
         },
         {
           "path": "scripts/run_agent.py",
           "sha256": "0e91afc74150f12fa53e52e0e498b9c81046204a9af7470fe584dacdc1c06742",
-          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-wildhaven-ceo/scripts/run_agent.py"
+          "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-ceo/scripts/run_agent.py"
         }
       ],
       "identity": "@wildhaven/ceo_agent",
-      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-15",
+      "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-16",
       "linked_agent": "ceo_agent.py",
       "parameters": {
         "properties": {

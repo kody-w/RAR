@@ -1,0 +1,93 @@
+{
+  "agent": "@kody-w/rar_installer_troubleshooter_agent",
+  "agent_file": "rar_installer_troubleshooter_agent.py",
+  "agent_sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappRoadsideAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "devtools",
+    "closed_loop": "RAPP Roadside Closed Loop",
+    "copyright": "2026 kody-w",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation.",
+    "display_name": "RAPP Roadside",
+    "issue_signature_domain": "rapp-roadside:issue-signature/v1",
+    "license": "MIT",
+    "machine_issue_artifact": "Roadside Frame",
+    "maintainer_system": "RAPP Pit Crew",
+    "name": "@kody-w/rar_installer_troubleshooter_agent",
+    "network_default": false,
+    "participation": "voluntary",
+    "protocol_identity_retained": true,
+    "quality_tier": "community",
+    "repository": "https://github.com/kody-w/rapp-roadside",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rapp",
+      "installer",
+      "troubleshooting",
+      "local-first",
+      "deterministic",
+      "toasted"
+    ],
+    "telemetry": false,
+    "version": "1.0.0"
+  },
+  "runtime_name": "RappRoadside",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "action_id": {
+        "type": "string"
+      },
+      "approval": {
+        "description": "Explicit human approval bound to action ID, source fingerprint, resolved source and destination path hashes, reversibility, and copy-only/no-activation scope.",
+        "type": "object"
+      },
+      "confirmation": {
+        "description": "Customer confirmation and verified Pit Crew release-frame evidence.",
+        "type": "object"
+      },
+      "copy_dir": {
+        "type": "string"
+      },
+      "diagnosis": {
+        "type": "object"
+      },
+      "diagnosis_path": {
+        "type": "string"
+      },
+      "observation_path": {
+        "type": "string"
+      },
+      "observations": {
+        "type": "object"
+      },
+      "operation": {
+        "enum": [
+          "capability",
+          "diagnose",
+          "prepare_repair",
+          "fix_copy",
+          "retest",
+          "confirm_release"
+        ],
+        "type": "string"
+      },
+      "source_dir": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}
