@@ -540,8 +540,16 @@ def test_the_freshness_clock_comes_from_the_data_not_the_wall(payload):
 
 
 def test_on_disk_file_is_current(bfp, payload):
-    assert bfp.comparable(payload) == bfp.comparable(bfp.build()), (
-        "api/v1/front.json is stale — run: python3 scripts/build_front_page.py")
+    on_disk = bfp.comparable(payload)
+    rebuilt = bfp.comparable(bfp.build())
+    if on_disk != rebuilt:
+        on_disk_hash = hashlib.sha256(on_disk.encode()).hexdigest()
+        rebuilt_hash = hashlib.sha256(rebuilt.encode()).hexdigest()
+        pytest.fail(
+            "api/v1/front.json is stale — run: python3 scripts/build_front_page.py "
+            f"(on-disk sha256={on_disk_hash}, rebuilt sha256={rebuilt_hash})",
+            pytrace=False,
+        )
 
 
 # ── the build is additive ───────────────────────────────────────────────────
