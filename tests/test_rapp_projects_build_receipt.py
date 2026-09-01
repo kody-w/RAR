@@ -1,4 +1,4 @@
-"""Exact RAPP/1 receipt for the ten-frame RAPP Projects skill build."""
+"""Exact RAPP/1 receipt for the RAPP Projects build and reconciliation."""
 
 from __future__ import annotations
 
@@ -18,9 +18,44 @@ RECEIPT = ROOT / "docs" / "rapp-projects-skill-build.rapp.json"
 CATALOG = ROOT / "scout" / "catalog" / "catalog.json"
 API_RECORD = ROOT / "api" / "v1" / "agent" / "kody-w__rapp_projects.json"
 FRONT = ROOT / "api" / "v1" / "front.json"
+REGISTRY = ROOT / "registry.json"
+CARDS = ROOT / "cards" / "holo_cards.json"
 LIFECYCLE = ROOT / "state" / "agent_lifecycle.json"
 RECEIPTS = ROOT / "state" / "receipts"
 IDENTITY = "@kody-w/rapp_projects"
+PREFIX_FRAME_HASHES = [
+    "e5a4162dbe46f4dbd681ebc1a5d250146bf3a10e47e15a630e7fa2eb19596a7f",
+    "2dbc557f3c2bafddf9dbc5d8b2c785b82018638953417aa04614fd72e4c845a6",
+    "6618bedca806ba05c6e6aefcf672e0d5a3b77b5b1002e010150eabea7ecfd725",
+    "900358c185a0d7d16bea4bf3ea519f64ea213a55e6760ad7710194d625703945",
+    "e73d8f73be31cf1c4511b260f8f3aa7c7423055b6ab77261ab341ae0365b70b8",
+    "1ed8ac9fcaca0a5fa6aee6f8773515dda373b001cca0269e9b1521d89babd6d7",
+    "9c01bb67aa45f71c540b69e70943aa3aeea2761bb033044fb42fcb3f6ce734af",
+    "9d5a175f2195978c20541300907a3f8dafe446c54997c0327b615046e4d150df",
+    "c96248f3dbca9f0bccad19f904bbfd7acc3da876215797228bc9b21778377a76",
+    "60ac594fcd9322961b051b2056546e5ce0198071d45bc124d3c4093a8dc8d44d",
+]
+PREFIX_SHA256 = (
+    "acce90276506ec61640ffc8f66be1f11285f44c2ca38343640dab54a8b2cc1b1"
+)
+PRIOR_PAYLOAD_HASH = (
+    "c8f4aa2f60b2998a81f828ba0079ac3ac827afe3ef8f929b0ece815d7d9282f0"
+)
+PRIOR_API_SHA256 = (
+    "4df52c49bccbdaa5118ff0ee7e86e40396bb9382b0557584ea26f2dc2d5c8cb4"
+)
+POST_HOLO_API_SHA256 = (
+    "29d3bef143ebf160237b67532a756a6eb9a29680dd2df8830df3a9bfd918e237"
+)
+POST_HOLO_CARD_SHA256 = (
+    "0ea3e4454abc3d21fb1fb042d1cad6aab89e5f40f8910b20694f4153b1987a7b"
+)
+RECONCILIATION_PAYLOAD_HASH = (
+    "b5e9438fd28e45904c1f5a5c9064ac3df0ebc3189d70938a14330ae53ba92e91"
+)
+RECONCILIATION_FRAME_HASH = (
+    "efe2d654184b3c7345866120fef7606b947d6ee71bc7efb52821069281b49069"
+)
 FRAME_KEYS = {
     "spec",
     "kind",
@@ -67,6 +102,15 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
 
     assert isinstance(frames, list)
     assert len(frames) == 11
+    assert [frame["frame_hash"] for frame in frames[:10]] == (
+        PREFIX_FRAME_HASHES
+    )
+    prefix = json.dumps(
+        frames[:10],
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    assert hashlib.sha256(prefix).hexdigest() == PREFIX_SHA256
     assert [frame["seq"] for frame in frames] == list(range(11))
     assert [frame["payload"]["frame"] for frame in frames] == list(range(1, 12))
     assert [frame["payload"]["source_commit"] for frame in frames] == (
@@ -121,15 +165,28 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
         previous = frame
 
     reconciliation = frames[-1]["payload"]["reconciliation"]
-    assert reconciliation["prior_frame_hash"] == frames[-2]["frame_hash"]
-    assert reconciliation["prior_api_sha256"] != (
-        frames[-1]["payload"]["evidence"]["api_sha256"]
+    assert frames[-2]["payload_hash"] == PRIOR_PAYLOAD_HASH
+    assert frames[-2]["payload"]["evidence"]["api_sha256"] == PRIOR_API_SHA256
+    assert frames[-1]["prev"] == PRIOR_PAYLOAD_HASH
+    assert frames[-1]["utc"] == "2026-09-01T00:25:56.072Z"
+    assert frames[-1]["payload_hash"] == RECONCILIATION_PAYLOAD_HASH
+    assert frames[-1]["frame_hash"] == RECONCILIATION_FRAME_HASH
+    assert frames[-1]["payload"]["evidence"]["api_sha256"] == (
+        POST_HOLO_API_SHA256
     )
+    assert reconciliation == {
+        "reason": (
+            "Admission generates HOLO cards before the API projection; bind "
+            "the receipt to that final publication shape."
+        ),
+        "prior_api_sha256": PRIOR_API_SHA256,
+        "prior_frame_hash": PREFIX_FRAME_HASHES[-1],
+        "post_holo_card_sha256": POST_HOLO_CARD_SHA256,
+    }
 
 
 def test_build_receipt_binds_the_generated_publication():
     frames = json.loads(RECEIPT.read_text(encoding="utf-8"))
-    evidence = frames[-1]["payload"]["evidence"]
     catalog = json.loads(CATALOG.read_text(encoding="utf-8"))
     [record] = [
         item for item in catalog["skills"] if item["identity"] == IDENTITY
@@ -155,6 +212,31 @@ def test_build_receipt_binds_the_generated_publication():
     skill_sha256 = hashlib.sha256(skill.read_bytes()).hexdigest()
     api_sha256 = hashlib.sha256(API_RECORD.read_bytes()).hexdigest()
     api = json.loads(API_RECORD.read_text(encoding="utf-8"))
+    registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    [registry_record] = [
+        item for item in registry["agents"] if item["name"] == IDENTITY
+    ]
+    cards = json.loads(CARDS.read_text(encoding="utf-8"))
+    card = cards.get(IDENTITY)
+    has_card = isinstance(card, dict)
+    assert api["has_card"] is has_card
+    assert registry_record["_has_card"] is has_card
+    if has_card:
+        evidence = frames[-1]["payload"]["evidence"]
+        card_bytes = json.dumps(
+            card,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+        assert hashlib.sha256(card_bytes).hexdigest() == (
+            POST_HOLO_CARD_SHA256
+        )
+        assert registry_record["_card_sha256"] == POST_HOLO_CARD_SHA256
+        assert api_sha256 == POST_HOLO_API_SHA256
+    else:
+        evidence = frames[-2]["payload"]["evidence"]
+        assert "_card_sha256" not in registry_record
+        assert api_sha256 == PRIOR_API_SHA256
     front = json.loads(FRONT.read_text(encoding="utf-8"))
     [front_record] = [
         item for item in front["items"] if item["ref"] == IDENTITY

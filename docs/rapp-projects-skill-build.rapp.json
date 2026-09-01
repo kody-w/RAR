@@ -317,13 +317,14 @@
       "reconciliation": {
         "reason": "Admission generates HOLO cards before the API projection; bind the receipt to that final publication shape.",
         "prior_api_sha256": "4df52c49bccbdaa5118ff0ee7e86e40396bb9382b0557584ea26f2dc2d5c8cb4",
-        "prior_frame_hash": "60ac594fcd9322961b051b2056546e5ce0198071d45bc124d3c4093a8dc8d44d"
+        "prior_frame_hash": "60ac594fcd9322961b051b2056546e5ce0198071d45bc124d3c4093a8dc8d44d",
+        "post_holo_card_sha256": "0ea3e4454abc3d21fb1fb042d1cad6aab89e5f40f8910b20694f4153b1987a7b"
       }
     },
-    "payload_hash": "548d8ef17c711595bdd02050dad33e8ce6591535a5942c4fb2cb0bcf042bbc5c",
+    "payload_hash": "b5e9438fd28e45904c1f5a5c9064ac3df0ebc3189d70938a14330ae53ba92e91",
     "prev": "c8f4aa2f60b2998a81f828ba0079ac3ac827afe3ef8f929b0ece815d7d9282f0",
     "prev_wave": null,
     "sig": null,
-    "frame_hash": "7e7928184856f2463ba1a58c32b8f96bc05cc26a5aaf8821afff294111037c2c"
+    "frame_hash": "efe2d654184b3c7345866120fef7606b947d6ee71bc7efb52821069281b49069"
   }
 ]
