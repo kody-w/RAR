@@ -1,7 +1,7 @@
 ---
 name: "rar-kody-w-workiq"
-description: "Access Microsoft 365 data using natural language queries. Can search emails, calendar meetings, documents, Teams messages, and people information. Use this agent when the user wants to find or retrieve information from their Microsoft 365 tenant."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@kody-w/workiq", "rar_sha256": "52075126c877c38ed9d5f135b74f6a490c1593957f6b8fa2367ff2b7eb5c3949", "source_kind": "rar-agent", "source_commit": "026f18b4093e3ec07c2f359dd9618438e020a0be", "version": "1.0.2", "author": "Kody", "tags": ["m365", "microsoft", "email", "calendar", "teams", "sharepoint", "workiq"]}
+description: "Access Microsoft 365 through the official Work IQ CLI. For current Teams status, use operation='teams_live' or operation='fetch' instead of trusting a semantic 'no update' answer. Also supports ask, search_paths, and get_schema."
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@kody-w/workiq", "rar_sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4", "source_kind": "rar-agent", "source_commit": "09f233a024d97f592c70107e1d3dee2b32eac874", "version": "1.1.2", "author": "Kody", "tags": ["m365", "microsoft", "email", "calendar", "teams", "sharepoint", "workiq"]}
 ---
 
 ## Microsoft Scout runtime
@@ -38,12 +38,13 @@ Prerequisites:
     3. Authenticate: Run workiq ask once to complete Entra ID login
 
 Usage:
-    The agent accepts natural language queries about M365 data.
+    The agent supports semantic queries and direct Work IQ entity reads.
     Examples:
     - "What emails did I receive from my manager this week?"
     - "What meetings do I have tomorrow?"
     - "Find documents about project planning"
-    - "What did Sarah say in Teams about the deadline?"
+    - operation="teams_live", query="What changed in Teams?"
+    - operation="fetch", entity_urls=["/me/chats"]
 
 <!-- toaster:generated:begin -->
 
@@ -54,6 +55,10 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 ```json
 {
   "properties": {
+    "account": {
+      "description": "Optional cached Work IQ account email. Leave empty to use the CLI default account.",
+      "type": "string"
+    },
     "data_type": {
       "description": "Optional filter to search only specific data types. Default is 'all' which searches across all Microsoft 365 data.",
       "enum": [
@@ -66,18 +71,51 @@ The typed contract this capability answers to (JSON Schema — the deterministic
       ],
       "type": "string"
     },
+    "entity_urls": {
+      "description": "Relative Work IQ entity paths for operation='fetch', for example '/me/chats' or '/me/chats/{id}/messages'.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "operation": {
+      "default": "auto",
+      "description": "Operation to run. 'auto' uses direct Teams entity reads for Teams queries and semantic ask otherwise.",
+      "enum": [
+        "auto",
+        "ask",
+        "teams_live",
+        "fetch",
+        "search_paths",
+        "get_schema"
+      ],
+      "type": "string"
+    },
     "query": {
       "description": "The natural language query to search Microsoft 365 data. Examples: 'What emails did I receive from John this week?', 'What meetings do I have tomorrow?', 'Find documents about the Q4 budget', 'What did the team say about the deadline in Teams?'",
       "type": "string"
     },
+    "schema_method": {
+      "default": "get",
+      "description": "Optional schema method filter.",
+      "enum": [
+        "get",
+        "post",
+        "patch",
+        "delete"
+      ],
+      "type": "string"
+    },
+    "schema_path": {
+      "description": "Relative Work IQ path for operation='get_schema'.",
+      "type": "string"
+    },
     "tenant_id": {
-      "description": "Optional Entra tenant ID for multi-tenant scenarios. Leave empty to use the default 'common' tenant.",
+      "description": "Legacy compatibility field. Current Work IQ builds select cached identities with the account parameter.",
       "type": "string"
     }
   },
-  "required": [
-    "query"
-  ],
+  "required": [],
   "type": "object"
 }
 ```
@@ -88,7 +126,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `workiq_agent.py` and embedded as the fenced Python below (sha256 52075126c877c38e…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `workiq_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `workiq_agent.py` and embedded as the fenced Python below (sha256 e5cb90e2a731de05…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `workiq_agent.py` first:
 
 ```bash
 python3 workiq_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -115,28 +153,31 @@ Prerequisites:
     3. Authenticate: Run workiq ask once to complete Entra ID login
 
 Usage:
-    The agent accepts natural language queries about M365 data.
+    The agent supports semantic queries and direct Work IQ entity reads.
     Examples:
     - "What emails did I receive from my manager this week?"
     - "What meetings do I have tomorrow?"
     - "Find documents about project planning"
-    - "What did Sarah say in Teams about the deadline?"
+    - operation="teams_live", query="What changed in Teams?"
+    - operation="fetch", entity_urls=["/me/chats"]
 """
 
+import html
 import logging
 import os
 import re
 import subprocess
 import shutil
 import json
+import time
 from agents.basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/workiq",
-    "version": "1.0.2",
+    "version": "1.1.2",
     "display_name": "WorkIQ",
-    "description": "Queries Microsoft 365 data \u2014 email, calendar, SharePoint/OneDrive, Teams, people \u2014 by shelling out to the workiq CLI with Entra ID auth.",
+    "description": "Queries Microsoft 365 through the official Work IQ CLI, including direct entity reads for live Teams data when semantic ask results are insufficient.",
     "author": "Kody",
     "tags": ["m365", "microsoft", "email", "calendar", "teams", "sharepoint", "workiq"],
     "category": "integrations",
@@ -166,9 +207,10 @@ class WorkIQAgent(BasicAgent):
         self.metadata = {
             "name": self.name,
             "description": (
-                "Access Microsoft 365 data using natural language queries. "
-                "Can search emails, calendar meetings, documents, Teams messages, and people information. "
-                "Use this agent when the user wants to find or retrieve information from their Microsoft 365 tenant."
+                "Access Microsoft 365 through the official Work IQ CLI. For "
+                "current Teams status, use operation='teams_live' or "
+                "operation='fetch' instead of trusting a semantic 'no update' "
+                "answer. Also supports ask, search_paths, and get_schema."
             ),
             "parameters": {
                 "type": "object",
@@ -183,11 +225,55 @@ class WorkIQAgent(BasicAgent):
                             "'What did the team say about the deadline in Teams?'"
                         )
                     },
+                    "operation": {
+                        "type": "string",
+                        "enum": [
+                            "auto",
+                            "ask",
+                            "teams_live",
+                            "fetch",
+                            "search_paths",
+                            "get_schema"
+                        ],
+                        "description": (
+                            "Operation to run. 'auto' uses direct Teams entity "
+                            "reads for Teams queries and semantic ask otherwise."
+                        ),
+                        "default": "auto"
+                    },
+                    "entity_urls": {
+                        "type": "array",
+                        "items": {"type": "string"},
+                        "description": (
+                            "Relative Work IQ entity paths for operation='fetch', "
+                            "for example '/me/chats' or "
+                            "'/me/chats/{id}/messages'."
+                        )
+                    },
+                    "schema_path": {
+                        "type": "string",
+                        "description": (
+                            "Relative Work IQ path for operation='get_schema'."
+                        )
+                    },
+                    "schema_method": {
+                        "type": "string",
+                        "enum": ["get", "post", "patch", "delete"],
+                        "description": "Optional schema method filter.",
+                        "default": "get"
+                    },
+                    "account": {
+                        "type": "string",
+                        "description": (
+                            "Optional cached Work IQ account email. Leave empty "
+                            "to use the CLI default account."
+                        )
+                    },
                     "tenant_id": {
                         "type": "string",
                         "description": (
-                            "Optional Entra tenant ID for multi-tenant scenarios. "
-                            "Leave empty to use the default 'common' tenant."
+                            "Legacy compatibility field. Current Work IQ builds "
+                            "select cached identities with the account parameter."
                         )
                     },
                     "data_type": {
@@ -199,7 +285,7 @@ class WorkIQAgent(BasicAgent):
                         )
                     }
                 },
-                "required": ["query"]
+                "required": []
             }
         }
         super().__init__(name=self.name, metadata=self.metadata)
@@ -207,17 +293,59 @@ class WorkIQAgent(BasicAgent):
     def perform(self, **kwargs):
         """Execute a WorkIQ query against Microsoft 365 data."""
         query = kwargs.get('query', '')
+        operation = kwargs.get('operation', 'auto')
+        account = kwargs.get('account', '')
         tenant_id = kwargs.get('tenant_id', '')
         data_type = kwargs.get('data_type', 'all')
-
-        if not query:
-            return "Error: No query provided. Please specify what information you want to find in Microsoft 365."
 
         if not self._check_workiq_installed():
             return self._get_installation_instructions()
 
+        if tenant_id:
+            return (
+                "Error: tenant_id is not supported by the current Work IQ CLI. "
+                "Use the account parameter to select an explicitly cached "
+                "Microsoft 365 identity; the agent will not silently fall back "
+                "to a different tenant."
+            )
+
+        if operation == 'fetch':
+            urls = kwargs.get('entity_urls') or []
+            if not urls:
+                return "Error: operation='fetch' requires entity_urls."
+            return self._execute_entity_fetch(urls, account)
+
+        if operation == 'search_paths':
+            if not query:
+                return "Error: operation='search_paths' requires query."
+            return self._execute_search_paths(query, account)
+
+        if operation == 'get_schema':
+            path = kwargs.get('schema_path', '')
+            if not path:
+                return "Error: operation='get_schema' requires schema_path."
+            return self._execute_get_schema(
+                path,
+                kwargs.get('schema_method', 'get'),
+                account,
+            )
+
+        if not query:
+            return "Error: No query provided. Please specify what information you want to find in Microsoft 365."
+
+        if operation == 'teams_live' or (
+            operation == 'auto'
+            and data_type == 'teams'
+            and re.search(
+                r'\b(live|latest|current|recent|update|status|changed)\b',
+                query,
+                re.I,
+            )
+        ):
+            return self._execute_live_teams_query(query, account)
+
         enhanced_query = self._build_enhanced_query(query, data_type)
-        return self._execute_workiq_query(enhanced_query, tenant_id)
+        return self._execute_workiq_query(enhanced_query, account)
 
     def _check_workiq_installed(self):
         """Check if the workiq CLI is installed and available."""
@@ -246,6 +374,7 @@ class WorkIQAgent(BasicAgent):
             "npx -y @microsoft/workiq accept-eula\n"
             "```\n\n"
             "After installation, run `workiq ask 'test query'` once to complete Entra ID authentication."
+            "\n\nOfficial source: https://github.com/microsoft/work-iq"
         )
 
     def _build_enhanced_query(self, query, data_type):
@@ -263,79 +392,265 @@ class WorkIQAgent(BasicAgent):
 
         return context_hints.get(data_type, query)
 
-    def _execute_workiq_query(self, query, tenant_id=''):
-        """Execute a query using the workiq CLI."""
+    def _command_prefix(self):
+        """Resolve the official Work IQ CLI or its npx fallback."""
         import sys as _sys
-        try:
-            workiq_path = shutil.which('workiq')
-            if not workiq_path and _sys.platform == 'win32':
-                appdata_cmd = os.path.join(os.path.expanduser("~"), "AppData", "Roaming", "npm", "workiq.CMD")
-                if os.path.isfile(appdata_cmd):
-                    workiq_path = appdata_cmd
-
-            if workiq_path:
-                cmd = [workiq_path, 'ask', '-q', query]
-            else:
-                cmd = ['npx', '-y', '@microsoft/workiq', 'ask', '-q', query]
-
-            if tenant_id:
-                cmd.extend(['--tenant-id', tenant_id])
-
-            logging.info(f"WorkIQ Agent executing query: {query[:100]}...")
-
-            use_shell = _sys.platform == 'win32'
-
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                timeout=120,
-                shell=use_shell
+        workiq_path = shutil.which('workiq')
+        if not workiq_path and _sys.platform == 'win32':
+            candidate = os.path.join(
+                os.path.expanduser("~"),
+                "AppData",
+                "Roaming",
+                "npm",
+                "workiq.CMD",
             )
+            if os.path.isfile(candidate):
+                workiq_path = candidate
+        return [workiq_path] if workiq_path else [
+            'npx',
+            '-y',
+            '@microsoft/workiq',
+        ]
 
-            if result.returncode != 0:
-                error_msg = result.stderr.strip() if result.stderr else "Unknown error"
+    def _run_cli(self, args, account='', timeout=180, retries=1):
+        """Run an official Work IQ command with bounded transient retries."""
+        command = self._command_prefix() + list(args)
+        if account:
+            command.extend(['--account', account])
+        last_output = ''
+        for attempt in range(max(1, retries)):
+            try:
+                result = subprocess.run(
+                    command,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout,
+                    shell=False,
+                )
+            except subprocess.TimeoutExpired as exc:
+                if attempt + 1 == retries:
+                    raise RuntimeError(
+                        f"Work IQ command timed out after {timeout} seconds"
+                    ) from exc
+                time.sleep(2 ** attempt)
+                continue
+            output = _strip_ansi(result.stdout or result.stderr).strip()
+            last_output = output
+            if result.returncode == 0 and output:
+                return output
+            retryable = any(
+                token in output.lower()
+                for token in ('internal error', 'internalservererror', 'temporar')
+            )
+            if not retryable or attempt + 1 == retries:
+                raise RuntimeError(output or 'Work IQ returned no content')
+            time.sleep(2 ** attempt)
+        raise RuntimeError(last_output or 'Work IQ command failed')
 
-                if 'EULA' in error_msg or 'accept-eula' in error_msg.lower():
-                    return (
-                        "**EULA not accepted.** Please run the following command first:\n"
-                        "```bash\n"
-                        "workiq accept-eula\n"
-                        "```"
-                    )
-                elif 'login' in error_msg.lower() or 'auth' in error_msg.lower():
-                    return (
-                        "**Authentication required.** Please authenticate with Microsoft Entra ID:\n"
-                        "```bash\n"
-                        "workiq ask 'test'\n"
-                        "```\n"
-                        "This will open a browser window for authentication."
-                    )
+    def _fetch_json(self, entity_url, account=''):
+        """Fetch one Work IQ entity and reject success-shaped error envelopes."""
+        last_error = None
+        for attempt in range(3):
+            output = self._run_cli(
+                ['fetch', '-u', entity_url],
+                account,
+                timeout=180,
+            )
+            try:
+                value = json.loads(output)
+            except json.JSONDecodeError as exc:
+                raise RuntimeError(
+                    f"Work IQ returned invalid JSON for {entity_url}"
+                ) from exc
+            if isinstance(value, dict) and 'results' in value:
+                rows = value.get('results') or []
+                first = rows[0] if rows else {}
+                status = int(first.get('statusCode') or 500)
+                if status < 400:
+                    value = first.get('data') or {}
                 else:
-                    logging.error(f"WorkIQ error: {error_msg}")
-                    return f"Error querying Microsoft 365: {error_msg}"
+                    error = first.get('error')
+                    last_error = (
+                        f"Work IQ fetch failed for {entity_url}: "
+                        f"{json.dumps(error)}"
+                    )
+                    retryable = (
+                        status in (408, 429)
+                        or status >= 500
+                        or 'internal' in str(error).lower()
+                        or 'temporar' in str(error).lower()
+                    )
+                    if not retryable:
+                        raise RuntimeError(last_error)
+                    value = None
+            if isinstance(value, dict):
+                return value
+            if attempt < 2:
+                time.sleep(2 ** attempt)
+        raise RuntimeError(last_error or f"Work IQ fetch failed for {entity_url}")
 
-            output = _strip_ansi(result.stdout).strip()
-
-            if not output:
-                return "No results found for your query. Try rephrasing or broadening your search."
-
-            return self._format_output(output)
-
-        except subprocess.TimeoutExpired:
-            logging.error("WorkIQ query timed out after 120 seconds")
-            return (
-                "The query timed out. This might happen if:\n"
-                "- The query is too broad (try being more specific)\n"
-                "- Network connectivity issues\n"
-                "- Microsoft 365 services are slow to respond\n\n"
-                "Please try a more specific query."
+    def _execute_workiq_query(self, query, account=''):
+        """Execute a semantic Work IQ query."""
+        try:
+            logging.info("WorkIQ Agent executing semantic ask: %s...", query[:100])
+            output = self._run_cli(
+                ['ask', '--json', '-q', query],
+                account,
+                timeout=420,
             )
+            try:
+                value = json.loads(output)
+            except json.JSONDecodeError:
+                return self._format_output(output)
+            if value.get('isError'):
+                return f"Error querying Microsoft 365: {value.get('response')}"
+            response = str(value.get('response') or '').strip()
+            if not response:
+                return (
+                    "No source-backed semantic result was returned. For live "
+                    "Teams status, use operation='teams_live' or 'fetch'."
+                )
+            return self._format_output(response)
         except FileNotFoundError:
             return self._get_installation_instructions()
-        except Exception as e:
-            logging.error(f"WorkIQ Agent error: {str(e)}")
-            return f"Error executing WorkIQ query: {str(e)}"
+        except Exception as exc:
+            logging.error("WorkIQ Agent error: %s", exc)
+            return f"Error executing Work IQ query: {exc}"
+
+    def _execute_entity_fetch(self, entity_urls, account=''):
+        """Fetch exact Microsoft 365 entities through Work IQ."""
+        try:
+            results = []
+            for entity_url in entity_urls:
+                if not isinstance(entity_url, str) or not entity_url.startswith('/'):
+                    return "Error: Work IQ entity URLs must be relative paths beginning with '/'."
+                results.append({
+                    'entityUrl': entity_url,
+                    'data': self._fetch_json(entity_url, account),
+                })
+            return (
+                "**Microsoft 365 Direct Entity Results:**\n\n```json\n"
+                + json.dumps({'results': results}, indent=2)
+                + "\n```"
+            )
+        except Exception as exc:
+            return f"Error fetching Microsoft 365 entities: {exc}"
+
+    def _execute_search_paths(self, query, account=''):
+        """Discover supported Work IQ entity paths."""
+        try:
+            output = self._run_cli(
+                ['search-paths', '-f', query],
+                account,
+                timeout=120,
+            )
+            return f"**Work IQ Paths:**\n\n```text\n{output}\n```"
+        except Exception as exc:
+            return f"Error searching Work IQ paths: {exc}"
+
+    def _execute_get_schema(self, path, method='get', account=''):
+        """Read a Work IQ entity schema."""
+        try:
+            output = self._run_cli(
+                ['get-schema', '-p', path, '-m', method],
+                account,
+                timeout=120,
+            )
+            return f"**Work IQ Schema:**\n\n```text\n{output}\n```"
+        except Exception as exc:
+            return f"Error reading Work IQ schema: {exc}"
+
+    @staticmethod
+    def _plain_text(value):
+        text = html.unescape(re.sub(r'<[^>]+>', ' ', value or ''))
+        return re.sub(r'\s+', ' ', text).strip()
+
+    def _execute_live_teams_query(self, query, account=''):
+        """Read live Teams chat previews through the Work IQ entity API."""
+        try:
+            entity_url = (
+                "/me/chats?$top=50"
+                "&$expand=lastMessagePreview"
+            )
+            value = self._fetch_json(entity_url, account)
+            chats = [
+                item
+                for item in value.get('value', [])
+                if isinstance(item, dict)
+            ]
+            count = value.get('@odata.count')
+            if isinstance(count, int) and len(chats) < count:
+                raise RuntimeError(
+                    f"Work IQ returned only {len(chats)} of {count} chats"
+                )
+            stop = {
+                'about', 'after', 'before', 'change', 'changed', 'current',
+                'find', 'from', 'has', 'have', 'happened', 'latest',
+                'message', 'messages', 'new', 'project', 'recent',
+                'recently', 'said', 'show', 'status', 'team', 'teams', 'the',
+                'this', 'update', 'updates', 'what', 'which', 'with',
+            }
+            terms = [
+                token
+                for token in re.findall(r'[a-z0-9][a-z0-9_-]+', query.lower())
+                if len(token) >= 3 and token not in stop
+            ]
+            rows = []
+            for chat in chats:
+                preview = chat.get('lastMessagePreview') or {}
+                sender = (
+                    ((preview.get('from') or {}).get('user') or {}).get(
+                        'displayName'
+                    )
+                    or ''
+                )
+                body = self._plain_text(
+                    ((preview.get('body') or {}).get('content') or '')
+                )
+                haystack = ' '.join([
+                    str(chat.get('topic') or ''),
+                    sender,
+                    body,
+                ]).lower()
+                if terms and not any(term in haystack for term in terms):
+                    continue
+                rows.append({
+                    'chatId': chat.get('id'),
+                    'topic': chat.get('topic'),
+                    'chatType': chat.get('chatType'),
+                    'previewCreatedDateTime': preview.get('createdDateTime'),
+                    'sender': sender,
+                    'preview': body,
+                    'webUrl': chat.get('webUrl'),
+                })
+            rows.sort(
+                key=lambda item: str(item.get('previewCreatedDateTime') or ''),
+                reverse=True,
+            )
+            return (
+                "**Microsoft 365 Live Teams Entity Results:**\n\n"
+                "This result comes from `/me/chats` and `lastMessagePreview`, "
+                "not semantic `ask`. Use operation='fetch' with the returned "
+                "chat ID to inspect `/me/chats/{id}/messages`. A messages "
+                "response with `@odata.nextLink` is page-capped and must not "
+                "be treated as complete.\n\n```json\n"
+                + json.dumps({
+                    'queryTerms': terms,
+                    'returnedChatCount': len(chats),
+                    'partial': bool(value.get('@odata.nextLink')),
+                    'partialWarning': (
+                        "Work IQ returned @odata.nextLink; do not interpret "
+                        "zero matches as proof that no update exists."
+                        if value.get('@odata.nextLink')
+                        else None
+                    ),
+                    'matchedCount': len(rows),
+                    'chats': rows[:25],
+                }, indent=2)
+                + "\n```"
+            )
+        except Exception as exc:
+            return f"Error reading live Teams entities: {exc}"
 
     def _format_output(self, output):
         """Format the workiq output for better readability."""
@@ -351,4 +666,4 @@ class WorkIQAgent(BasicAgent):
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1:H4sIAAAAAAAC/61ZaZfaWJL9KzrZH1w9OA3aJc/p0w3aQCCBQEigrj629n2X0FJT/32egEyXXZ7uL0PmyUTSi3ix3LgRPH57MdsmyKuXzy/b3BlePr44bm1XYdGEeQZuLm3brWtICu0qr3OvgVAChxyzMaG2DjMfysymrcwESszMb03fhcrWrUK3/gQxZgbVrlnZAeSmZpjUHyHbTNzMMSsodd0GSINbTm63qZs14K3qmmkNHtU10AOuzcyBCjcvEhcKMy+vUnOy6RN0rl2oCcIaAsuyBuoCNwPXLjDIraDOBLqgJoe8EIjnFVS5DbDn9p0OyKvydJIJqx88a9wMKPgEwuD2Zgq2rl8+//NfH19C8P7l828vdmLW4NaLnlfxRllOBoC1k/PgZjGASGbgunCraS9wy3E96Hn1S+0m3kfov/4r7szKr//6+dcMer5+fZl+uN6128aFTOih/R7KAXhphlnd/CQFnx5y3/Q8BP4GPXb45LvNLx/u9z58hD58+Ou3hQ83v4TOD4vf7/8oMG33pRkK9weB9/uTgJkkk8w3qdCDsrx5mPUHd6cXSEtbZcBzrqry6jMk50/riyq/hY7rfIIOiWuCVNeFa4feAPJsNt8lccjbe7rfsx1m3wdpis+frZnS8OmLHbh2/KUDgQ7LL1N8gfGu88tff27mQwZ4/Lb0bsH9omrt6X39y3eeu1lgZrbrfHlLyUOD1YaJ8+X7h7/c/378FuI/hP277d0HPt6Mfgh/r+vjt8z+9eV3ANs/GAjQ+Je//CFAJztvG6hqsyZM3cl2daop8DvVUgUqpqpDC9TeYx1IS+TeFUG5B339RwzI4rWbP2z5+glSgVBehX6YATI4Lg+HX7NHeQKFReWC0ry5DmQNjfsKMvg6vZny9fXpzH3tp2L4eq/68FHQR2YDKKOo28T9NBmoT5X+MMcG5PKMB5TkgFcAApKJNMBWeXJ7EkQdh0kCOWEFLM+nUgK6gcOfJ2Vfv361zDr4NXtULQo9WK+egwXv5kCvr8B4Lwn9oPk1c+0ghz789vsH6H+gfyd1Vz7tcQBk8QwnsFA87WUIlM6D76ApN67p3MP52+/PEAI1GWAxEPzQAyx6F07CLHadt3ie1stXBCcgywVxBDFMi7yauBQKm0/QxoPe7QWbTo8ATUJBDvjDcQtAvm5mD0CrCdx5j+S9KgCiaw8AqL2zqwt9tao777gpqBWz+QpJzAFUWp5M5QbMvC8CwnkWgvC/Z/sbFX+oodWbik+QPAEKKszKLILKfO7hmY+8AJp+EwfKTShzu1+ziXLdKVRP2p/CAxaByNjPlL5OOYfsPE1BYuu3ve9rzAagTc1NsHn1a1Y/kWtWUyrs/DbVpN+GzlQ6//2EVB3kbeLc4wcsnTQ9s+A8s/LA4IOa78wPvf5AyuzUF58d8xaa0ATu17B8Te3ivcAejj5Zrv5z/zQf4iAOP+m5YWYnrQOyDSD8CnH3tnpHtZ1nU8HeQ1VPz5gfW+19GUgCgN70nH3ru9AvpwDE5ZCD2H+E9pnLVuFt4qDXHxryYx/ANpmb3FUcHr3ZvPdZ38zC8b49cAZY04DU1vcaqNzKLduwDhu3frIrDJD64FHoUf8Qs9t8hrIihZ78Cr360D/StwA8aeYhjHy6h7hoIO68W35+02De7726bWI+1qFgHRhtgI8AoI37GToC0L4trmMoB7mfwgzwA9wAPMJlTWVCGxYQCqCxyfbz5PjT5gl+j9w9dqr/z9EHMq0JT9K3Nn1XwD0Hiqe+V9D79KmlPYYjAGkH2kzodEH4HwNKOkAA2UBz9aCzznXjv7/1+3f59wQ7OVAQmBP55WkO2mr33WJ+apHv49bTyCetQwVwIgNa/qR9MusEqjYADDFMJfYAxUN6KhIHcBhgKBfsNU1Coe2Ccnv5nLVJ8vElM1P3fVqaBiOgKQWxruppmAKbg9moCd371Xv/u198N4TuiyewQME3UzTyt8kyz5LhOSFMtDDVyKQCjJ+s65ltcu8/98EEzA8hEHjITUmasAX+Aaz9ZLKaBsCsBRPcP1/AiulqyhL4/zbCToPyWyzB+2aKyn3ym2riBUyMD09eQP8FYZ168b1B/9m3CVc/RdLwBzd/YuE3PEEf/gOOxDzI/oCgaVT7j8iZFv0UMVPOFQyyWgeMQ++qpl2nJ1Mc7kj5M0DewfP3Dy8/Cc/74PJv0v+o0MfKqVBBB4RSkOTw9XmvBugzqzAH+d+5kz9uWjT3QL61NecJiw9T28izD3+Y+H8wCdh0J67KdSYYPNL3LbG5NRXOZDmoneYx7v/2AsBtTul5wvs5MoHllVm91lOfmcOfFmAzcP2YF8Cz74ep58M6MEGbB09xZEHiMELYFEnaKOU6tIN7MIpbJOYRJkYvbBinURonPcKiPBNBCdLzEIt0LdxGaYwG+uq8rWz3y+RyOG24QAgPpixsQaMu6toL0kY8FKcdhyZgCgN7LJCFubDcb6IxgMLTi4fVU3je57rJ26czv71YBAZWrrF6s3y8mDmlmQR6sORgN68qiumHWXxYiVE7d68LbJE6+j7DYMLCo9TZO7d1xyhxfrquAn/ZlER2s0jaWa57tSluInpIWHElkCF1nnlVvetve2o4zYaWTebKgtRVwR/Ecd634mpbRSqOl/R8YzrnM7o59YuusOu6QJRdn61npoFys9QaPZvTc8yud65dq0UegsGgz0/JpoRDveb00mjcXlST5cCjvCkmQ83jEr6361xdCP6J8+v+tKh4WbMZX9vtkGh75Da7OBJS3+lPtXa7CoVzMLQ+nYkLjhzNxXVLJTxaCF5g1c2eQa1lHpN9JvO7ZbU6l7iqGmdGNENfdiQ8jEcV0fsi382NyhRsbJmmtdkNsyPcKRVSuqetSVx1rhPnx4HD+UWlyqwuYMZ8E/bzA79QY8EYpUMxuw2WYzjeKkvqqlvnnlBVcWr09OzAJ+dlGeBy6iQnHzXkxUon/IUd1c657jRcx0pTaxbKVt8KfQ4nq9BTIrETL9pq8OLi1LpGKN3S5Yq0yltDdfhAkAMWoodCrzEh9Ew4KankkJQy22U0fEQlxfFigrqMxplDLCe5MVwm7ple6Wo1MfmRC5FNH2ub3dUXYjkZ6Ei2iTl7OdRjbDN0bjlYynV64HRIwlD4jNELT+9hH4vIxL50jJXvOFnQQrqk8u7icJyGYssx86h6i4eKmC+y7eoqOwcuZBibHnTdXwhJ0Fw85FzegNH70tqWdGB1Yzmr0xRmh8a7IWUhhleqb6xyzpjbAF/DN2aPRw1lsGIr5XEorURPMvUoZEbRQKW9Sp0taTugGx5fUWjftiLlBFfPHbfYLo14e+4ZgljdcDjW9OZaicu5sFtJS3WdeAeOIJeXqs2xysQvBDXwR5uCMXKMri0fWwO921CHaI7XF5WKavu2F/R0IOFU81i5mgWZaF0xHG5rJ90gCbbZwJJKHPsQloWCa2AcOBXGsaL5RRjRsa9WM26BewdHW1QuawSGu8oaQnLXFxdTZtEWJYpGutyE5MLuulwbYb6f73XJdc/cdbZtDGvNsleBqZR6p8oXIVuUoLsiO1lwhK2VmJQRqQ2fozXPdbzK92FXuLBn7ZWjlF4rZjh7vUUf9FGrxvO2WpKjUi3zwUe3groZr7kcxPayH5LQ3NjYAiab3LdFJmasqENtjz1iEnq2o8tG4IdtZwllSMSNf1VNPKNWnnPYleglW9B+N+T6MsiD4qBrLJagzhqm1mPvXvjeXVPknMa8TOsU151n9jh3vAuJOxf+Nsxv7G0m8Ly9Pi2luVc7XoJ7aqlSfK4kVnwOinCPbJj6zLKuaeuBUgkM429kHdnoRxQDmPXDo8JgwW0lKUVwLNKa0mPLWcX1So7pPMQwkRV8fVcMEbo+zDvjWpOr8tJVvUu1RtyrMQDIkj3NwGBshngAJ2SNC6iis1euQkNZvDCFdMsWyYZR3bPs77bxUtVrxcJpKp3pdZ6NmnJwWw010qJeYpuWj8RNtDfkXXVZUVrt8VGMchtZXq2OWz+0d7a2XW6ZHiuNNO/pFUG3e33VtJ2036G3GOaGpU/uMYI0YiSY5yvP5/KV3czWYZk7ZLw6X1I5sEOLPaW+2p7qBWvSQb+xXZZhd/vDLrsuOr9cK6NnqIfgKq91sV4tTPq2OLD7yD5giCXpRwR3jHpZe1jH3TpfJrb80lghERYha9CdsnAVNSK6HNY5a5iJBMfdXDtyFBeJoaAKcl8x83LdHvA5PoudwzHxmv6I1ojL7N05Pwvx1rMd20Q0PkhqQVwihVCrrO61iF0G9Yw5zbW8P4ybxcauB/Is3hwxPjRFdzxzPmVyksHvMAzJSPxqceaGsFOL2G6MOJfgw6Y+si0xZuWwrxeb1fVcotWcd5AFVmbCKWmyZqUUNI/h4Zgsttb1hC1jj6a3hd25cdlRa3opnPZ2OF4zPlW2pyWLBMwxYSN2bBrKV1CthLVr2be5dyylkEhBJ9sqe80XGisR2ltZl2lXbCthWOBNEJv+9qYuI/giwIfY2KshhjhiWGm5tkbMbT3WejIyytmx0b0QJiZWNkgZijfJ2CRZIFZ7RVGYrBvVw1Jse3Fb5Sa7Lhe0J7neER0PXkXsnW3k0HBBXWe3UGTNslJzXXZglcaMqzDrN9tZvKAbZzUogWssBqZNagxZrDfKvkNO5HEPp+Y1IS92ze6iNPbtQ7kVtjTHrQ+9qh/JBRXAt6ETixKwa3DFzLNWOJE9D6MNgl5GZR9xqtCVshWImlWxFDxoh5gISUEM5gYGBwLcoHR6RdZMye90+gJvx94IbzodIAsYkRlq1y+V6Hiy8C0TbFFDXTqC1QkXYn3Z7kP+oloSOQgcP/fEfaPAt4AeFXw9+vosm7W7tccPWlUT25zbG/tIx7LTLFw1cE/Zsx5N9fVCUk1JwvqkXOV4YKxvGh6JfpuvW6pZeXq3XM6oORocfWpQD9Q133LeqSnEbDW1bVmX7dl+m52J2U4yV6pobCtewa6VDZMGWvkXHlHDw9huPaMbYfKk7QQ97qn9aAo3FM5761SovrGQyP3oUE7dOkWDmpiD2vulwuQSzyFdcsIFbtV5safpUjle7T4LrYWsY6G51m2Ganvz0s0asdmdxLXBETN1dob57QU5He31qtu7UU/Nu+BECWo/t+SlIy2HDLUEet3sCGGnCmfldNuQDG4SzX5ZderKdg5z2g/IOqBkWJ0xpELpOt9YBKgXEjlm52VxXhLU/Eod0JV3wov8eCTFtBivenTa+tV1w673I0eg3obZr1SFaCt+b+oFgjPj+gwGoIm5S7ikrVNSescjK4UCqP6u3Mj9SMwPcEYW0W0EoUsypaWS3WpkqhNzrHu6otdj2RNtr3G0mxiyuG4NgjBvvYFIqFZdaMRSb5YojXAkEgp5ddGkdpH0qrYjXF6yrtpVrhUE1lzbeHJUIbIAs+TRy+aZmUcrk1LL6AzrZDGbN4TY1wldlqFOm65eNYsbkvRMuKauyNmr9Btt50KO7C12eysX9e0636Wwd24I4ZhmR3VepibP7Y9OrF6qY16L8FmmA20EQ8F4uzh8Aa9Ep6sG46gZrCmT3XKcX9a9B0BzWgE2o1RLMzgAatIeTXxcjN7lwntqFatoErLcMTKuoFZRk7VqSeub26w7EYjYO+sAc44zIXdsdRURh5E/Y+u14504mDC3TscmLXKJdc4/VCtETgUJliWbClLe57b4VnOvmTSI0oZCSY+TOpMaiEPUzYQQ8N1wSHaol6I+n7XKQhJ3u5UszCslDhaSJx27Wx4PzWgiHaZxhG+6QesochHCgVMDPzwOVF0dNNRmSzFGlLq7iBhtr8fwlCdH1DpeIjItr0OI7KOZjMtyEdBqvkNlzg8bhE01a8eei+vtuM60aAsiwUjUYcNiusUzxPkyP1r+9oiu17NhMwt3aw1zuw7eLAo06SUB603YySWSQJQzRVRKW+x8zTTSBSyTpmZ2iKEp3oLWe8vR0Nm133gX1r3BpG373DpVuWVzY8gYTvpZh3d1Q1gOSreLg2uWkh00Cn7r1VxuxiWJZUiboZebGtADXCc2w/tSH0b16GkgGMOi2YGxwuLJq7yL5YGWSmJwIs2pBhJHgxvvnTZXfbhiWI8tCF1tbKWozs55f7L8okyXsLUio2MwE3cG1+RWRTMWuaOLemXbbCqxM1qYXUh/tOa4NTugLvhoaFyuxLHFo5rGskt7xhmZIyUBPpaGD9q1tlztK1BI6rCQ8bUUYowrs0v2mMwFuG9kuVnulSU7wHoouOvDidmz2Dk2wIzDLfWQHkZn1aanHkzMMYaeDinv7K+KE2SMfx3JE3rZ8oKm7tGA4IlQ0UkAs+C2ybhRWZ1tR2KNvRZEe7YzOAVzz/za1Jwtr8wo7ezMWMBMpBte4BPWxW6XIbjlHA4On+H+oWfZwqSTFUeztZIQtX8QWHU257pytV2YmmdenUtoZRdQHAxSWd2OPJPovNkpjdPACX26mo0jXfFOjxhrkbYySc2JzsDiYNDTgNdFGFvPEdXjrrqV5SgZS8gNLeFA8lceXa0SxUpLnxA9L4QpfiWTkZsegplJrNno0F6WwdI+asR2XBjDOTVxKToc2WVubzaGu47BrKrFaCQOa9aRDiSKzxy77GbHVFzPx12pbdmz2xezDEGKTsnmgbPfr28BcTqDj+l/+xv4uD+dqD8P7X74ZmY6C/h/O5J4nB7kt+nsxXan45XKNZ3P970+/7jxvz6+VHYItn2cnNRJ6z+PIh7nJq/v5yb18Pi+Is/AR/bm7RCyMf3pW9yXFCVwsOj9VPnnp3pvJ3n1dCpeTKfi4OK5A7Dk/rXY/UQHWPMJefn9fwHaC4CiQR8AAA== -->
+<!-- rci-capsule:v1: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 -->
