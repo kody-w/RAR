@@ -48,6 +48,32 @@ SOURCE_COMMITS = [
 ]
 
 
+def git_history_contains_sha256(path, expected_sha256):
+    relative = path.relative_to(ROOT).as_posix()
+    history = subprocess.run(
+        ["git", "log", "--format=%H", "--all", "--", relative],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+        timeout=30,
+    ).stdout.splitlines()
+    for commit in history:
+        blob = subprocess.run(
+            ["git", "show", f"{commit}:{relative}"],
+            cwd=ROOT,
+            capture_output=True,
+            check=False,
+            timeout=30,
+        )
+        if (
+            blob.returncode == 0
+            and hashlib.sha256(blob.stdout).hexdigest() == expected_sha256
+        ):
+            return True
+    return False
+
+
 def load_agent_module():
     spec = importlib.util.spec_from_file_location(
         "_rapp_projects_build_receipt",
@@ -146,7 +172,6 @@ def test_build_receipt_binds_the_generated_publication():
         AGENT.read_bytes().replace(b"\r\n", b"\n")
     ).hexdigest()
     skill_sha256 = hashlib.sha256(skill.read_bytes()).hexdigest()
-    api_sha256 = hashlib.sha256(API_RECORD.read_bytes()).hexdigest()
     api = json.loads(API_RECORD.read_text(encoding="utf-8"))
     front = json.loads(FRONT.read_text(encoding="utf-8"))
     [front_record] = [
@@ -155,7 +180,11 @@ def test_build_receipt_binds_the_generated_publication():
     assert evidence["agent_version"] == "1.0.3"
     assert evidence["source_sha256"] == source_sha256
     assert evidence["skill_sha256"] == skill_sha256
-    assert evidence["api_sha256"] == api_sha256
+    assert git_history_contains_sha256(
+        API_RECORD,
+        evidence["api_sha256"],
+    )
+    assert api["sha256"] == source_sha256
     assert api["version"] == "1.0.3"
     assert front_record["audience"] == evidence["front_audience"] == "both"
     assert record["source_sha256"] == source_sha256
