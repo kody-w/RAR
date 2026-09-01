@@ -45,6 +45,7 @@ SOURCE_COMMITS = [
     "7d63bcfc271070cff83d5f773ff3f04c1eb4d637",
     "fa28d1f78812d8fcec697fdeb5a2067b0f2efd58",
     "a3391b199669c48572aabdab2087b8c6733f0964",
+    "a3391b199669c48572aabdab2087b8c6733f0964",
 ]
 
 
@@ -65,9 +66,9 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
     frames = json.loads(RECEIPT.read_text(encoding="utf-8"))
 
     assert isinstance(frames, list)
-    assert len(frames) == 10
-    assert [frame["seq"] for frame in frames] == list(range(10))
-    assert [frame["payload"]["frame"] for frame in frames] == list(range(1, 11))
+    assert len(frames) == 11
+    assert [frame["seq"] for frame in frames] == list(range(11))
+    assert [frame["payload"]["frame"] for frame in frames] == list(range(1, 12))
     assert [frame["payload"]["source_commit"] for frame in frames] == (
         SOURCE_COMMITS
     )
@@ -118,6 +119,12 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
         )
         assert frame_utc >= datetime.fromisoformat(committed_at)
         previous = frame
+
+    reconciliation = frames[-1]["payload"]["reconciliation"]
+    assert reconciliation["prior_frame_hash"] == frames[-2]["frame_hash"]
+    assert reconciliation["prior_api_sha256"] != (
+        frames[-1]["payload"]["evidence"]["api_sha256"]
+    )
 
 
 def test_build_receipt_binds_the_generated_publication():

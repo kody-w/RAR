@@ -258,5 +258,72 @@
     "spec": "rapp/1",
     "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
     "utc": "2026-08-31T19:03:11.009Z"
+  },
+  {
+    "spec": "rapp/1",
+    "kind": "build.frame",
+    "stream_id": "rappid:@rapp/rapp-projects-skill-build:26d7287abf578723d64c2b317804a5c89f7253af631a0611cc7f557c21dba4f4:build",
+    "seq": 10,
+    "utc": "2026-09-01T00:25:56.072Z",
+    "payload": {
+      "artifacts": [
+        "registry.json",
+        "rapp_skill_agent.py",
+        ".claude-plugin/marketplace.json",
+        "state/url_stability.json",
+        "scout/catalog/catalog.json",
+        "scout/workflows/rar-kody-w-rapp-projects",
+        "api/v1/agent/kody-w__rapp_projects.json",
+        "api/v1/front.json"
+      ],
+      "evidence": {
+        "agent_source_commit": "a3391b199669c48572aabdab2087b8c6733f0964",
+        "agent_version": "1.0.3",
+        "api_sha256": "29d3bef143ebf160237b67532a756a6eb9a29680dd2df8830df3a9bfd918e237",
+        "artifact_body_in_egg": false,
+        "build_receipt_tests": 2,
+        "front_audience": "both",
+        "import_verdict": "pass",
+        "integration_tests": 8102,
+        "notary_check": "pass",
+        "notary_policy": "rar-maintainer-migration/1.0",
+        "post_import_frames": 7,
+        "privacy_mutations": 17,
+        "publication_release_tests": 179,
+        "rapp1_commit": "caf6ef276cafa92aa744499af90dc1a28559941a",
+        "rapp1_spec_sha256": "d345235be5bc698d78c5893285abd09f2e62a398f781123d1de8da313a01c7de",
+        "rapp_proof": "pass",
+        "rapp_sdk_sha256": "aba04a57390d98276eadd9c7decd821bb53549730daec3491cffee45ada48eb2",
+        "rapp_skill_skill_sha256": "3ab288bd5bfcd0e399ffce446d7ec70457479e199cfab05826c4083cb8e78bcd",
+        "rapp_skill_source_sha256": "1fa931266d8646ee3138d0c1bab1e742267a1951765b8ceeee0496a677bd6e4c",
+        "rapp_skill_version": "1.3.1",
+        "rar_receipt": "rar_dd0ccfbbc4782b7cde6b60ae6d2a428374f59dbc2a26ffda172bf0898ae06308",
+        "runner_operations": 12,
+        "runner_preflight": "RAPP_READY",
+        "skill_sha256": "4a83a11df0de5c2e9ea62a09752349f26e43656317f5122c4ce933ae40d955c2",
+        "source_sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca",
+        "source_tests": 97,
+        "source_verdict": "pass",
+        "strict_unknown_fields": true,
+        "targeted_tests": 98,
+        "transfer_byte_identical": true,
+        "transferred_frames": 6
+      },
+      "frame": 11,
+      "name": "publication-reconciliation",
+      "result": "pass",
+      "schema": "rapp-skill-build-frame/1",
+      "source_commit": "a3391b199669c48572aabdab2087b8c6733f0964",
+      "reconciliation": {
+        "reason": "Admission generates HOLO cards before the API projection; bind the receipt to that final publication shape.",
+        "prior_api_sha256": "4df52c49bccbdaa5118ff0ee7e86e40396bb9382b0557584ea26f2dc2d5c8cb4",
+        "prior_frame_hash": "60ac594fcd9322961b051b2056546e5ce0198071d45bc124d3c4093a8dc8d44d"
+      }
+    },
+    "payload_hash": "548d8ef17c711595bdd02050dad33e8ce6591535a5942c4fb2cb0bcf042bbc5c",
+    "prev": "c8f4aa2f60b2998a81f828ba0079ac3ac827afe3ef8f929b0ece815d7d9282f0",
+    "prev_wave": null,
+    "sig": null,
+    "frame_hash": "7e7928184856f2463ba1a58c32b8f96bc05cc26a5aaf8821afff294111037c2c"
   }
 ]
