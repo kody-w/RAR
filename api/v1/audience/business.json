@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-08-31T20:50:17Z",
-  "count": 1693,
+  "generated": "2026-09-01T04:17:02Z",
+  "count": 1694,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -60782,6 +60782,41 @@
         "lines": 540,
         "size_kb": 24.2,
         "added_at": "2026-05-24T21:45:25-04:00"
+      }
+    },
+    {
+      "id": "kody-w__rar_installer_troubleshooter_agent",
+      "name": "@kody-w/rar_installer_troubleshooter_agent",
+      "display_name": "RAPP Roadside",
+      "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "devtools",
+      "tags": [
+        "rapp",
+        "installer",
+        "troubleshooting",
+        "local-first",
+        "deterministic",
+        "toasted"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
+        "sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce"
+      },
+      "stats": {
+        "lines": 3006,
+        "size_kb": 105.4,
+        "added_at": null
       }
     },
     {

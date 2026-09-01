@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "33469002100"
+  },
+  "action": "agent.create",
+  "agent": "@kody-w/rar_installer_troubleshooter_agent",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce"
+  },
+  "canonical_path": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-09-01T04:13:20.524335+00:00",
+  "id": "rar_10c9e3f3fda9b2c89e9c11c284bce77ca085eefac02d9c034d0d16291c4122dc",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "",
+    "receipt": "",
+    "version": ""
+  },
+  "quality_tier": "community",
+  "request_id": "req_e7d78ec763da2f3b0425c38b",
+  "revision_id": "10c9e3f3fda9b2c89e9c11c284bce77ca085eefac02d9c034d0d16291c4122dc",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABPFse2w",
+    "issue_number": 703,
+    "source_body_sha256": "7708fb94ff659ad43876df50b1db502649ef8096030049e29756a5ce705e01b9"
+  },
+  "version": "1.0.0"
+}

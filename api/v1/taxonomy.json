@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-08-31T20:50:17Z",
+  "generated": "2026-09-01T04:17:02Z",
   "categories": [
     {
       "name": "integrations",
@@ -20,7 +20,7 @@
     },
     {
       "name": "devtools",
-      "count": 25
+      "count": 26
     },
     {
       "name": "pipeline",
@@ -66,7 +66,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 66
+      "count": 67
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 1272
+      "count": 1273
     },
     {
       "name": "verified",
@@ -353,6 +353,10 @@
       "count": 8
     },
     {
+      "name": "rapp",
+      "count": 8
+    },
+    {
       "name": "copilot-studio",
       "count": 7
     },
@@ -366,10 +370,6 @@
     },
     {
       "name": "sharepoint",
-      "count": 7
-    },
-    {
-      "name": "rapp",
       "count": 7
     },
     {
@@ -477,6 +477,10 @@
       "count": 5
     },
     {
+      "name": "local-first",
+      "count": 5
+    },
+    {
       "name": "neighborhood",
       "count": 5
     },
@@ -574,10 +578,6 @@
     },
     {
       "name": "estate",
-      "count": 4
-    },
-    {
-      "name": "local-first",
       "count": 4
     },
     {
@@ -733,6 +733,10 @@
       "count": 3
     },
     {
+      "name": "installer",
+      "count": 3
+    },
+    {
       "name": "organism",
       "count": 3
     },
@@ -746,6 +750,10 @@
     },
     {
       "name": "engine",
+      "count": 3
+    },
+    {
+      "name": "deterministic",
       "count": 3
     },
     {
@@ -1073,10 +1081,6 @@
       "count": 2
     },
     {
-      "name": "installer",
-      "count": 2
-    },
-    {
       "name": "rappter",
       "count": 2
     },
@@ -1138,10 +1142,6 @@
     },
     {
       "name": "fleet",
-      "count": 2
-    },
-    {
-      "name": "deterministic",
       "count": 2
     },
     {

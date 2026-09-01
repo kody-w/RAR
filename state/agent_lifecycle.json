@@ -20063,8 +20063,19 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
+    },
+    "@kody-w/rar_installer_troubleshooter_agent": {
+      "status": "active",
+      "version": "1.0.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
+      "sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce",
+      "latest_receipt": "rar_10c9e3f3fda9b2c89e9c11c284bce77ca085eefac02d9c034d0d16291c4122dc",
+      "updated_at": "2026-09-01T04:13:20.524335+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-08-31T20:16:05.519450+00:00"
+  "updated_at": "2026-09-01T04:13:20.524335+00:00"
 }
