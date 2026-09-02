@@ -1,0 +1,89 @@
+{
+  "agent": "@rapp/rapp_agent_converter",
+  "agent_file": "rapp_agent_converter_agent.py",
+  "agent_sha256": "c5f83f431afd25221a7227dbac5dd05f7f1afe1463e5f665c94062137d9a8f8c",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "RappAgentConverterAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "RAPP Agent Registry",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Converts RAR agent.py files and SKILL.md files in both directions, automatically normalizing every raw skill through a valid RAR agent and emitting a RAPP/1 Toasted SKILL.md by default.",
+    "display_name": "RappAgentConverter",
+    "name": "@rapp/rapp_agent_converter",
+    "quality_tier": "official",
+    "rapp": {
+      "default_format": "skill",
+      "kind": "skill",
+      "rappid": "rappid:@rapp/rapp-agent-converter:11ce7bf2e7b301b3a35c919f34a60f9a25742552c9871ee33421d2de313e65fa",
+      "schema": "rapp/1"
+    },
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "rapp",
+      "rapp-1",
+      "rar",
+      "skills",
+      "toasted",
+      "conversion",
+      "fidelity",
+      "local-first"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "RappAgentConverter",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "additionalProperties": false,
+    "properties": {
+      "force": {
+        "description": "Replace a conflicting output file.",
+        "type": "boolean"
+      },
+      "operation": {
+        "description": "auto and convert emit a Toasted skill by default.",
+        "enum": [
+          "auto",
+          "convert",
+          "inspect",
+          "verify",
+          "restore_raw"
+        ],
+        "type": "string"
+      },
+      "out": {
+        "description": "Optional output path.",
+        "type": "string"
+      },
+      "path": {
+        "description": "RAR *_agent.py or SKILL.md input.",
+        "type": "string"
+      },
+      "publisher": {
+        "description": "Publisher for agents synthesized from raw skills. Defaults to RAPP_PUBLISHER or @local.",
+        "type": "string"
+      },
+      "rappid": {
+        "description": "Optional existing mint-once RAPP/1 identity.",
+        "type": "string"
+      },
+      "to": {
+        "description": "Target format. Defaults to skill.",
+        "enum": [
+          "skill",
+          "agent"
+        ],
+        "type": "string"
+      }
+    },
+    "required": [
+      "path"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

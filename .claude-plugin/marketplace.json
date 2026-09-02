@@ -7,10 +7,11 @@
   "plugins": [
     {
       "name": "rapp",
-      "description": "Install and operate the RAR catalog, reversible Toasted skills, manual platform exports, external-AI callbacks, and a local RAPP Brainstem.",
+      "description": "Install and operate the RAR catalog, auto-convert agent.py and raw SKILL.md into reversible RAPP/1 Toasted skills, export to supported platforms, and connect a local RAPP Brainstem.",
       "source": "./scout/starter",
       "skills": [
-        "./skills/rapp-skills"
+        "./skills/rapp-skills",
+        "./skills/rapp-agent-converter"
       ],
       "version": "1.3.1",
       "repository": "https://github.com/kody-w/RAR",

@@ -12,7 +12,9 @@ on:
       - "rapp_skill_agent.py"
       - "scout.config.json"
       - "scripts/build_scout_exports.py"
+      - "scripts/rapp_agent_converter_agent.py"
       - "scripts/scout_run_agent.py"
+      - "tests/test_rapp_agent_converter.py"
       - "tests/test_scout_rapp_skill.py"
       - ".claude-plugin/marketplace.json"
       - ".github/workflows/build-scout-exports.yml"
@@ -28,7 +30,9 @@ on:
       - "rapp_skill_agent.py"
       - "scout.config.json"
       - "scripts/build_scout_exports.py"
+      - "scripts/rapp_agent_converter_agent.py"
       - "scripts/scout_run_agent.py"
+      - "tests/test_rapp_agent_converter.py"
       - ".claude-plugin/marketplace.json"
   workflow_dispatch:
 
@@ -58,7 +62,10 @@ jobs:
         run: python scripts/build_scout_exports.py
 
       - name: Test Scout import surface
-        run: pytest -q tests/test_scout_rapp_skill.py
+        run: >-
+          pytest -q
+          tests/test_scout_rapp_skill.py
+          tests/test_rapp_agent_converter.py
 
       - name: Require committed output on pull requests
         if: github.event_name == 'pull_request'

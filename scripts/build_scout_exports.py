@@ -46,6 +46,12 @@ RUNNER_SOURCE = ROOT / "scripts" / "scout_run_agent.py"
 FOUNDATION_AGENT = ROOT / "rapp_skill_agent.py"
 FOUNDATION_SKILL = ROOT / "rapp_skills.md"
 LEGACY_FOUNDATION_SKILL = ROOT / "rapp_skill.md"
+CONVERTER_AGENT = ROOT / "scripts" / "rapp_agent_converter_agent.py"
+CONVERTER_SKILL_NAME = "rapp-agent-converter"
+CONVERTER_RAPPID = (
+    "rappid:@rapp/rapp-agent-converter:"
+    "11ce7bf2e7b301b3a35c919f34a60f9a25742552c9871ee33421d2de313e65fa"
+)
 
 TOASTER_COMMIT = "d54ba8484b5c5dae6406d2090c03115d12985446"
 TOASTER_URL = (
@@ -193,6 +199,7 @@ def _load_toaster():
         raise RuntimeError(f"could not load RAPP Toaster from {source}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    module._rar_pinned_source_bytes = data
     return module
 
 
@@ -440,6 +447,7 @@ def _write_skill_bundle(
     source_kind,
     source_commit=None,
     channel="native",
+    platform_metadata=None,
 ):
     normalized = _lf(raw)
     actual = _sha256(normalized)
@@ -474,6 +482,7 @@ def _write_skill_bundle(
         "source_kind": source_kind,
         "source_commit": source_commit,
     })
+    metadata.update(platform_metadata or {})
     platform["metadata"] = metadata
     rci["platform"] = platform
     rci["instructions"] = _scout_instructions(
@@ -544,6 +553,20 @@ def _write_skill_bundle(
         "channel": channel,
         "_skill_dir": str(skill_dir),
     }
+
+
+def _install_converter_runtime(record, toaster):
+    skill_dir = Path(record["_skill_dir"])
+    scripts_dir = skill_dir / "scripts"
+    wrapper = CONVERTER_AGENT.read_bytes()
+    core = getattr(toaster, "_rar_pinned_source_bytes", None)
+    if not isinstance(core, bytes) or _sha256(core) != TOASTER_SHA256:
+        raise RuntimeError("pinned RAPP Toaster source bytes are unavailable")
+
+    cli = scripts_dir / "toast.py"
+    cli.write_bytes(wrapper)
+    cli.chmod(cli.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+    (scripts_dir / "_toaster.py").write_bytes(core)
 
 
 def _is_workflow_capability(entry):
@@ -714,11 +737,18 @@ def _catalog_files(skill_dir, scout_relative):
 
 def _publish_skill_bundles(staging, records):
     bundles = []
-    foundation = next(
+    starters = [
         record for record in records if record["channel"] == "starter"
+    ]
+    foundation = next(
+        record for record in starters if record["skill_name"] == "rapp-skills"
     )
     starter = staging / "starter"
-    foundation_dir = _copy_skill(foundation, starter)
+    starter_dirs = {
+        record["skill_name"]: _copy_skill(record, starter)
+        for record in starters
+    }
+    foundation_dir = starter_dirs[foundation["skill_name"]]
     installer_dir = foundation_dir / "installer"
     installer_dir.mkdir()
     for filename in sorted(INSTALLERS):
@@ -726,27 +756,26 @@ def _publish_skill_bundles(staging, records):
         path.write_bytes(_installer_bytes(filename))
         if filename.endswith(".sh"):
             path.chmod(0o755)
-    foundation_relative = (
-        f"starter/skills/{foundation['skill_name']}"
-    )
-    foundation["bundle"] = "starter"
-    foundation["import_url"] = f"{TREE_BASE}/starter"
-    foundation["files"] = _catalog_files(
-        foundation_dir,
-        foundation_relative,
-    )
+    for record in starters:
+        skill_dir = starter_dirs[record["skill_name"]]
+        relative = f"starter/skills/{record['skill_name']}"
+        record["bundle"] = "starter"
+        record["import_url"] = f"{TREE_BASE}/starter"
+        record["files"] = _catalog_files(skill_dir, relative)
     bundles.append({
         "id": "starter",
         "channel": "starter",
         "import_url": f"{TREE_BASE}/starter",
-        "skills": [foundation["skill_name"]],
-        "files": len(foundation["files"]),
-        "bytes": _directory_size(foundation_dir),
+        "skills": [record["skill_name"] for record in starters],
+        "files": sum(len(record["files"]) for record in starters),
+        "bytes": _directory_size(starter / "skills"),
     })
     (starter / "README.md").write_text(
         "# RAPP Scout starter\n\n"
         "Import this directory in Microsoft Scout to install the Toasted "
-        "`rapp-skills` manager and Brainstem bridge.\n",
+        "`rapp-skills` manager, Brainstem bridge, and the RAPP/1 "
+        "`rapp-agent-converter`. The converter makes Toasted `SKILL.md` the "
+        "default while preserving byte-exact RAR agent recovery.\n",
         encoding="utf-8",
         newline="\n",
     )
@@ -757,9 +786,10 @@ def _publish_skill_bundles(staging, records):
             "name": "rapp",
             "version": foundation["version"],
             "description": (
-                "RAR catalog, reversible Toasted skills, manual exports, and "
-                "a pinned local RAPP Brainstem bootstrap for Scout and "
-                "GitHub Copilot CLI."
+                "RAR catalog, automatic agent.py and raw SKILL.md conversion "
+                "into reversible RAPP/1 Toasted skills, manual exports, and a "
+                "pinned local RAPP Brainstem bootstrap for Scout and GitHub "
+                "Copilot CLI."
             ),
             "author": {
                 "name": "RAPP Agent Registry",
@@ -914,6 +944,34 @@ def build(check=False):
             channel="starter",
         )
         records.append(foundation)
+        converter = _write_skill_bundle(
+            pool,
+            toaster,
+            runner_template,
+            identity="@rapp/rapp_agent_converter",
+            raw=CONVERTER_AGENT.read_bytes(),
+            virtual_filename="rapp_agent_converter_agent.py",
+            expected_sha256=_sha256(_lf(CONVERTER_AGENT.read_bytes())),
+            scout_name=CONVERTER_SKILL_NAME,
+            source_kind="foundation",
+            source_commit=None,
+            channel="starter",
+            platform_metadata={
+                "default_format": "skill",
+                "toasted": True,
+                "canonical_agent": "rapp_agent_converter_agent.py",
+                "normalization_path": (
+                    "raw-skill->rar-agent->toasted-skill"
+                ),
+                "rapp": {
+                    "schema": "rapp/1",
+                    "rappid": CONVERTER_RAPPID,
+                    "kind": "skill",
+                },
+            },
+        )
+        _install_converter_runtime(converter, toaster)
+        records.append(converter)
 
         if config.get("include_registry_agents", True):
             for entry in sorted(registry, key=lambda item: item.get("name", "")):
@@ -1091,12 +1149,14 @@ def build(check=False):
             "copilot plugin marketplace add kody-w/RAR\n"
             "copilot plugin install rapp@rar\n"
             "```\n\n"
-            "Start with the Toasted RAPP skill manager:\n\n"
+            "Start with the Toasted RAPP skill manager and converter:\n\n"
             "```text\n"
             "https://github.com/kody-w/RAR/tree/main/scout/starter\n"
             "```\n\n"
-            "The manager hotloads verified skills into `~/.copilot/skills`, "
-            "which Microsoft Scout can read in place. Bounded GitHub-import "
+            "The starter makes Toasted `SKILL.md` the default and normalizes "
+            "raw skills through valid RAR agents. The manager hotloads verified "
+            "skills into `~/.copilot/skills`, which Microsoft Scout can read "
+            "in place. Bounded GitHub-import "
             "shards live under `bundles/`; each factory or rapplication "
             "workflow has an isolated directory under `workflows/` containing "
             "only that workflow and its companion skill. See "

@@ -117,6 +117,9 @@ def test_top_level_is_catalog_not_an_import_root():
     assert not list(SCOUT.glob("*.json"))
     assert CATALOG_PATH.is_file()
     assert (SCOUT / "starter" / "skills" / "rapp-skills").is_dir()
+    assert (
+        SCOUT / "starter" / "skills" / "rapp-agent-converter"
+    ).is_dir()
 
 
 def test_copilot_plugin_marketplace_installs_the_unified_rapp_plugin():
@@ -141,7 +144,8 @@ def test_copilot_plugin_marketplace_installs_the_unified_rapp_plugin():
     assert plugin["name"] == "rapp"
     assert plugin["source"] == "./scout/starter"
     assert plugin["skills"] == [
-        "./skills/rapp-skills"
+        "./skills/rapp-skills",
+        "./skills/rapp-agent-converter",
     ]
     assert plugin["version"] == foundation["version"]
     assert starter_manifest["name"] == "rapp"
