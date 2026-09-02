@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-09-01T04:39:17.934701+00:00",
+  "generated_at": "2026-09-02T19:01:11.168567+00:00",
   "stats": {
     "total_agents": 1697,
     "total_swarms": 2,
@@ -166488,7 +166488,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/copilot_studio_parity_deploy",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "display_name": "Copilot Studio Parity Deploy",
       "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft.",
       "author": "kody-w",
@@ -166512,35 +166512,31 @@
       "_uses_exec": true,
       "_file": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
       "_install_filename": "rar_kody_w_copilot_studio_parity_deploy_agent.py",
-      "_sha256": "0a0771ff1dcefef8255a5a9c4db03dfedab4886a644fd2382804e41edb2c1e7a",
+      "_sha256": "62169eb5c78cef5b82e835f589ca2a8872c29446885325491f552ed446e3664e",
       "_lifecycle": "notarized",
-      "_receipt": "rar_2d85683a8dedf28606259294d1002f137bcbd3939ef8e002857314553ae064e1",
+      "_receipt": "rar_2bebd8245ce10e0885b0f852c8634f5a8a247aba0dbfb653d5f037811deeccfa",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 556,
+        "issue": null,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
           "manifest",
-          "namespace",
           "content_sha256",
-          "base_precondition",
-          "security_scan",
           "registry_build",
-          "card_forge",
           "full_test_suite"
         ]
       },
       "_seed": 618480303241568347,
-      "_size_kb": 245.5,
-      "_lines": 7028,
+      "_size_kb": 245.9,
+      "_lines": 7041,
       "_has_card": true,
       "_added_at": "2026-08-11T17:28:15Z",
       "_first_commit_sha": "4891635294987ab41a44891dc0970bac66e5864e",
-      "_latest_commit_sha": "6917b067280dadb2bf9ee87f7911f54997bf74f5",
+      "_latest_commit_sha": "b8680d0cc51651e3d775883a535827a6fcde7114",
       "_card_sha256": "e191119567a074bbe194c75c712a9bf8846ee4eacf04abed29326b3747c6efca"
     },
     {

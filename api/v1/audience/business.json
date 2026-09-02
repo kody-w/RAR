@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-09-01T04:39:27Z",
+  "generated": "2026-09-02T18:55:04Z",
   "count": 1694,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
@@ -59355,7 +59355,7 @@
       "name": "@kody-w/copilot_studio_parity_deploy",
       "display_name": "Copilot Studio Parity Deploy",
       "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft.",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "publisher": "@kody-w",
       "author": "kody-w",
       "category": "pipeline",
@@ -59376,11 +59376,11 @@
         "path": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_parity_deploy_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/copilot_studio_parity_deploy_agent.py",
-        "sha256": "0a0771ff1dcefef8255a5a9c4db03dfedab4886a644fd2382804e41edb2c1e7a"
+        "sha256": "62169eb5c78cef5b82e835f589ca2a8872c29446885325491f552ed446e3664e"
       },
       "stats": {
-        "lines": 7028,
-        "size_kb": 245.5,
+        "lines": 7041,
+        "size_kb": 245.9,
         "added_at": "2026-08-11T17:28:15Z"
       }
     },
