@@ -1,7 +1,7 @@
 {
   "id": "money",
   "name": "Money \u2014 any agent.py becomes a real Copilot Studio agent",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "manifest_name": "@kody-w/copilot_studio_parity_deploy",
   "aliases": [
     "money_agent",

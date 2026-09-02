@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-09-02"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/copilot_studio_parity_deploy",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "62169eb5c78cef5b82e835f589ca2a8872c29446885325491f552ed446e3664e"
+ },
+ "canonical_path": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-09-02T18:47:00.115629+00:00",
+ "id": "rar_2bebd8245ce10e0885b0f852c8634f5a8a247aba0dbfb653d5f037811deeccfa",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "0a0771ff1dcefef8255a5a9c4db03dfedab4886a644fd2382804e41edb2c1e7a",
+  "receipt": "rar_2d85683a8dedf28606259294d1002f137bcbd3939ef8e002857314553ae064e1",
+  "version": "1.0.2"
+ },
+ "quality_tier": "community",
+ "request_id": "req_2bebd8245ce10e0885b0f852",
+ "revision_id": "2bebd8245ce10e0885b0f852c8634f5a8a247aba0dbfb653d5f037811deeccfa",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Use GPT-5.6 Sol Fast with long context and max effort for the modern Copilot Studio architect harness."
+ },
+ "version": "1.0.3"
+}
