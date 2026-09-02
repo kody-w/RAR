@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-09-02T19:32:05Z",
+  "generated": "2026-09-02T19:37:19Z",
   "legend": {
     "b": "business",
     "c": "consumer",
