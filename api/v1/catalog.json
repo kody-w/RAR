@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-09-02T20:16:21Z",
+  "generated": "2026-09-02T21:20:58Z",
   "count": 1697,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -59420,7 +59420,7 @@
       "name": "@kody-w/copilot_studio_parity_deploy",
       "display_name": "Copilot Studio Parity Deploy",
       "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft.",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "publisher": "@kody-w",
       "author": "kody-w",
       "category": "pipeline",
@@ -59441,11 +59441,11 @@
         "path": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_parity_deploy_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/copilot_studio_parity_deploy_agent.py",
-        "sha256": "c80e205090f345aea81c2b7be495a274cdbb831a77e85417bd3653539ea8ee4f"
+        "sha256": "d7ba7e8468345dc5051b4254c7958e6dca75de015199177feeea0ae226391ec1"
       },
       "stats": {
-        "lines": 7373,
-        "size_kb": 256.6,
+        "lines": 7380,
+        "size_kb": 256.8,
         "added_at": "2026-08-11T17:28:15Z"
       }
     },

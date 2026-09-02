@@ -51,7 +51,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_parity_deploy",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "display_name": "Copilot Studio Parity Deploy",
     "description": (
         "Compiles caller-selected local RAPP agents into a provisioned, "
@@ -1946,7 +1946,10 @@ def _invoke_plugin_agent(
             f"RAPP_COPILOT_STUDIO_MODEL must be {SUBAGENT_MODEL}, got {model!r}"
         )
     cwd = cwd.resolve()
-    file_tools = "view,glob,grep,rg,edit,create,write,task_complete"
+    file_tools = (
+        "view,glob,rg,bash,apply_patch,edit,create,write,"
+        "update_todo,task_complete"
+    )
     command = [
         "copilot",
         "--agent",
@@ -1960,7 +1963,7 @@ def _invoke_plugin_agent(
         "--mode",
         "autopilot",
         "--max-autopilot-continues",
-        "10",
+        "20",
         f"--available-tools={file_tools}",
         f"--allow-tool={file_tools}",
         "--add-dir",
@@ -1972,7 +1975,11 @@ def _invoke_plugin_agent(
         "-C",
         str(cwd),
         "-p",
-        prompt,
+        (
+            "Perform this implementation directly with the available file "
+            "tools. Do not invoke a skill or delegate to another agent. "
+            + prompt
+        ),
     ]
     effort = os.getenv(
         "RAPP_COPILOT_STUDIO_EFFORT",
