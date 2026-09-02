@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-09-01T04:39:27Z",
+  "generated": "2026-09-02T19:32:51Z",
   "counts": {
     "native": 1697,
     "aggregated": 73,
@@ -2467,7 +2467,7 @@
           "channels": {},
           "tier": "community",
           "age_days": 20,
-          "lines": 7028,
+          "lines": 7041,
           "has_card": true
         },
         "source": null
@@ -2476,7 +2476,7 @@
         "no community feedback yet - scored at the population median",
         "community tier",
         "added 20 days ago",
-        "7028 lines",
+        "7041 lines",
         "has a rendered card"
       ]
     },
@@ -128629,7 +128629,7 @@
           "featured": true,
           "has_bundle": false,
           "author": "Adi Leibowitz",
-          "entry_chars": 171,
+          "entry_chars": 132,
           "published_age_days": 70
         }
       },

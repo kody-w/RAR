@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-09-01T04:39:17.934701+00:00",
+  "generated_at": "2026-09-02T19:35:35.548877+00:00",
   "stats": {
     "total_agents": 1697,
     "total_swarms": 2,
@@ -166488,7 +166488,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/copilot_studio_parity_deploy",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "display_name": "Copilot Studio Parity Deploy",
       "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft.",
       "author": "kody-w",
@@ -166512,15 +166512,15 @@
       "_uses_exec": true,
       "_file": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
       "_install_filename": "rar_kody_w_copilot_studio_parity_deploy_agent.py",
-      "_sha256": "0a0771ff1dcefef8255a5a9c4db03dfedab4886a644fd2382804e41edb2c1e7a",
+      "_sha256": "62169eb5c78cef5b82e835f589ca2a8872c29446885325491f552ed446e3664e",
       "_lifecycle": "notarized",
-      "_receipt": "rar_2d85683a8dedf28606259294d1002f137bcbd3939ef8e002857314553ae064e1",
+      "_receipt": "rar_4dc88e167de8308f658a1fbfc24d8715a9558f9f8e6d8b3a80dce2cf49724636",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 556,
+        "issue": 734,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
@@ -166535,8 +166535,8 @@
         ]
       },
       "_seed": 618480303241568347,
-      "_size_kb": 245.5,
-      "_lines": 7028,
+      "_size_kb": 245.9,
+      "_lines": 7041,
       "_has_card": true,
       "_added_at": "2026-08-11T17:28:15Z",
       "_first_commit_sha": "4891635294987ab41a44891dc0970bac66e5864e",

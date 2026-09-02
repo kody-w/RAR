@@ -49,7 +49,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_parity_deploy",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "Copilot Studio Parity Deploy",
     "description": (
         "Compiles caller-selected local RAPP agents into a provisioned, "
@@ -73,7 +73,9 @@ __manifest__ = {
 PLUGIN_REPOSITORY = "https://github.com/microsoft/copilot-studio-plugin.git"
 PLUGIN_REVISION = "882aa4ee2a0dfa0d98b490057e5e907b7ab38eeb"
 MINIMUM_PAC_VERSION = (2, 9, 3)
-SUBAGENT_MODEL = "gpt-5.6-sol"
+SUBAGENT_MODEL = "gpt-5.6-sol-fast"
+SUBAGENT_CONTEXT = "long_context"
+SUBAGENT_EFFORT = "max"
 PLUGIN_AGENTS = {
     "architect": "mcs-assistant:copilot-studio-architect",
 }
@@ -1733,6 +1735,8 @@ def _doctor() -> dict:
         "plugin_revision": PLUGIN_REVISION,
         "plugin_agents": PLUGIN_AGENTS,
         "subagent_model": SUBAGENT_MODEL,
+        "subagent_context": SUBAGENT_CONTEXT,
+        "subagent_effort": SUBAGENT_EFFORT,
         "copilot_cli": copilot_cli,
     }
 
@@ -1963,14 +1967,23 @@ def _invoke_plugin_agent(
         str(cwd),
         "--model",
         model,
+        "--context",
+        SUBAGENT_CONTEXT,
         "-C",
         str(cwd),
         "-p",
         prompt,
     ]
-    effort = os.getenv("RAPP_COPILOT_STUDIO_EFFORT", "high").strip()
-    if effort:
-        command[command.index("-C"):command.index("-C")] = ["--effort", effort]
+    effort = os.getenv(
+        "RAPP_COPILOT_STUDIO_EFFORT",
+        SUBAGENT_EFFORT,
+    ).strip()
+    if effort != SUBAGENT_EFFORT:
+        raise ValueError(
+            "RAPP_COPILOT_STUDIO_EFFORT must be "
+            f"{SUBAGENT_EFFORT}, got {effort!r}"
+        )
+    command[command.index("-C"):command.index("-C")] = ["--effort", effort]
     completed = _run(command, cwd=cwd, timeout=3600)
     output = "\n".join(
         part.strip()

@@ -3,14 +3,15 @@
   "id": "kody-w__copilot_studio_parity_deploy",
   "name": "Copilot Studio Parity Deploy",
   "rar_name": "@kody-w/copilot_studio_parity_deploy",
-  "rappid": "rappid:@kody-w/copilot_studio_parity_deploy:727d64c5d3dd4088f9247e13b8318e933ced0acfb15aa7ed61ffc49de71b2f9e",
-  "_migrated_from": "rappid:@kody-w/copilot_studio_parity_deploy:c581a6e87d6fd00996ec95ef9bbee680dd8dc594ea5c6ae68f6d31bc1d80da55",
+  "rappid": "rappid:@kody-w/copilot_studio_parity_deploy:0a16653772de3436d0b67183883bb971be04e2309be48e6f8730fde4856d172e",
+  "_migrated_from": "rappid:@kody-w/copilot_studio_parity_deploy:727d64c5d3dd4088f9247e13b8318e933ced0acfb15aa7ed61ffc49de71b2f9e",
   "_migrated_from_all": [
     "rappid:@kody-w/copilot_studio_parity_deploy:c4155e20efbeff5d52ae64f33a9a81bf372ead6c26b28064635efb62a6a53a2a",
-    "rappid:@kody-w/copilot_studio_parity_deploy:c581a6e87d6fd00996ec95ef9bbee680dd8dc594ea5c6ae68f6d31bc1d80da55"
+    "rappid:@kody-w/copilot_studio_parity_deploy:c581a6e87d6fd00996ec95ef9bbee680dd8dc594ea5c6ae68f6d31bc1d80da55",
+    "rappid:@kody-w/copilot_studio_parity_deploy:727d64c5d3dd4088f9247e13b8318e933ced0acfb15aa7ed61ffc49de71b2f9e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "@kody-w",
   "category": "pipeline",
   "tags": [
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 7028,
-  "size_kb": 245.5,
-  "sha256": "0a0771ff1dcefef8255a5a9c4db03dfedab4886a644fd2382804e41edb2c1e7a",
+  "lines": 7041,
+  "size_kb": 245.9,
+  "sha256": "62169eb5c78cef5b82e835f589ca2a8872c29446885325491f552ed446e3664e",
   "has_card": true,
   "added_at": "2026-08-11T17:28:15Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@kody-w/copilot_studio_parity_deploy",
+  "applied_at": "2026-09-02T19:29:40.204083+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "rar_2d85683a8dedf28606259294d1002f137bcbd3939ef8e002857314553ae064e1",
   "base_lifecycle_sha256": "0a0771ff1dcefef8255a5a9c4db03dfedab4886a644fd2382804e41edb2c1e7a",
   "base_lifecycle_version": "1.0.2",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-09-02T19:28:25Z",
   "publisher": "@kody-w",
   "reason": "",
+  "receipt": "rar_4dc88e167de8308f658a1fbfc24d8715a9558f9f8e6d8b3a80dce2cf49724636",
   "repository_id": 1200565697,
   "request_id": "req_d45c6c4e4d550f54c0bed654",
   "revision_id": "4dc88e167de8308f658a1fbfc24d8715a9558f9f8e6d8b3a80dce2cf49724636",
@@ -29,5 +35,5 @@
   "slug": "copilot_studio_parity_deploy_agent",
   "source_body_sha256": "d012e7282833416b4088b82a911108454b1bc567b33b9ae157036ac85a82ee03",
   "source_url": "https://gist.githubusercontent.com/kody-w/846029a71667d5b12ef9c934302cdd44/raw/6f13c607c10d08cb6df9305f4e3a12b32f32c622/copilot_studio_parity_deploy_agent.py",
-  "status": "pending_review"
+  "status": "applied"
 }
