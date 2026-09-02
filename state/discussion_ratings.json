@@ -2898,6 +2898,216 @@
       "url": "https://github.com/kody-w/RAR/discussions/718",
       "number": 718
     },
+    "@cowork-cookbook/adaptive_card_monitor_customer_credit": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/719",
+      "number": 719
+    },
+    "@cowork-cookbook/adaptive_card_monitor_product_performance": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/720",
+      "number": 720
+    },
+    "@cowork-cookbook/adaptive_card_monitor_project_status": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/721",
+      "number": 721
+    },
+    "@cowork-cookbook/adaptive_card_monitor_storage_capacity": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/722",
+      "number": 722
+    },
+    "@cowork-cookbook/adaptive_card_optimize_service_performance": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/723",
+      "number": 723
+    },
+    "@cowork-cookbook/adaptive_card_perform_preventative_maintenance": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/724",
+      "number": 724
+    },
+    "@cowork-cookbook/adaptive_card_plan_aggregate_supply": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/725",
+      "number": 725
+    },
+    "@cowork-cookbook/adaptive_card_plan_capital_allocation_and_investments": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/726",
+      "number": 726
+    },
+    "@cowork-cookbook/adaptive_card_plan_marketing_campaigns": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/727",
+      "number": 727
+    },
+    "@cowork-cookbook/adaptive_card_plan_production": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/728",
+      "number": 728
+    },
+    "@cowork-cookbook/adaptive_card_plan_service_contractor_work": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/729",
+      "number": 729
+    },
+    "@cowork-cookbook/adaptive_card_process_customer_refunds": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/730",
+      "number": 730
+    },
+    "@cowork-cookbook/adaptive_card_procure_software_licenses_and_add_ons": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/731",
+      "number": 731
+    },
+    "@cowork-cookbook/adaptive_card_produce_project_materials": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/732",
+      "number": 732
+    },
     "@discreetRappers/agent_generator_agent": {
       "upvotes": 0,
       "downloads": 0,
