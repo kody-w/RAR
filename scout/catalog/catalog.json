@@ -3237,7 +3237,7 @@
       ]
     },
     {
-      "bytes": 1500625,
+      "bytes": 1526023,
       "channel": "native",
       "files": 32,
       "id": "native-06",
@@ -109513,17 +109513,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "7579f8ba76056aa622c5c5c66bae967985124831ffb5b60b52bcb56b564c88b7",
+          "sha256": "762263160857f4ceb964aa9404159a186cad496614f4a3a0f29e0a896b523ed7",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-parity-deploy/SKILL.md"
         },
         {
           "path": "copilot_studio_parity_deploy_agent.py",
-          "sha256": "62169eb5c78cef5b82e835f589ca2a8872c29446885325491f552ed446e3664e",
+          "sha256": "c80e205090f345aea81c2b7be495a274cdbb831a77e85417bd3653539ea8ee4f",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-parity-deploy/copilot_studio_parity_deploy_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "ee3cbb9bb241726dffc8af3c2a995746ad29c31b46341dd3243ec7a6634138a2",
+          "sha256": "3cde2fcc04af12f022d897ea0063911554f5a0c3ef7805bab938e65de2a7b760",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-parity-deploy/rapp/agent.lock.json"
         },
         {
@@ -109649,11 +109649,11 @@
       },
       "requires_env": [],
       "skill_name": "rar-kody-w-copilot-studio-parity-deploy",
-      "skill_sha256": "7579f8ba76056aa622c5c5c66bae967985124831ffb5b60b52bcb56b564c88b7",
-      "source_commit": "4af2eba1b13a3bf962a2767ba6558c686c9b6d48",
+      "skill_sha256": "762263160857f4ceb964aa9404159a186cad496614f4a3a0f29e0a896b523ed7",
+      "source_commit": "3f83a8e42de5585568df700f8b7ece68d4137e82",
       "source_kind": "rar-agent",
-      "source_sha256": "62169eb5c78cef5b82e835f589ca2a8872c29446885325491f552ed446e3664e",
-      "version": "1.0.3"
+      "source_sha256": "c80e205090f345aea81c2b7be495a274cdbb831a77e85417bd3653539ea8ee4f",
+      "version": "1.0.4"
     },
     {
       "bundle": "native-06",
