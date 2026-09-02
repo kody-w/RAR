@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_inventory_to_deliver",
+  "agent_bytes": 10628,
   "agent_file": "d365_inventory_to_deliver_agent.py",
   "agent_sha256": "ab66b4e2b179484bb8c9e5430eb4ee6eb021b9139db91353d3900c7324196a0b",
+  "backup_agent": "d365_inventory_to_deliver_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365InventoryToDeliver",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-inventory-to-deliver:bb128aa88f89eb9a231f7269da861cd48757108e41e3b19bcbf89a8413817510",
+  "rollback_agent_retained": true,
   "runtime_name": "D365InventoryToDeliver",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24661,
+  "skill_sha256": "e9a1e2e49435d6a3ee406373e4352aeb1858690e02f7df9e58c353ba81bcd666",
   "tool_schema": {
     "properties": {
       "operation": {

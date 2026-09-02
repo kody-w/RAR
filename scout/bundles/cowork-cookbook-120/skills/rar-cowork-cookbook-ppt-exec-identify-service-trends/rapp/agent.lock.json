@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_identify_service_trends",
+  "agent_bytes": 10601,
   "agent_file": "ppt_exec_identify_service_trends_agent.py",
   "agent_sha256": "e55565cb2232dd098b3d9ece984b88620d44fb4bf7af63c7bcacaf6ff3c8d41b",
+  "backup_agent": "ppt_exec_identify_service_trends_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecIdentifyServiceTrends",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-identify-service-trends:8dbba69b600f32b272c5b3567a7ed932302d8014d48e059dfd1695305a88bfe4",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecIdentifyServiceTrends",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24584,
+  "skill_sha256": "c22ee56958f9ae4d266878ff2b5d4ee9380cfbf5fe9bab3a992c31a3df7784e5",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_assign_project_resources",
+  "agent_bytes": 10596,
   "agent_file": "ppt_exec_assign_project_resources_agent.py",
   "agent_sha256": "8dfe5d51f3348709caf34a20e325a1d91f543b7a77c67dce9ad17734187efc7d",
+  "backup_agent": "ppt_exec_assign_project_resources_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAssignProjectResources",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-assign-project-resources:b9dd73c818fe1af9548e9b032a1f48517a7cad5191da09e8833440ead4207636",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecAssignProjectResources",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24577,
+  "skill_sha256": "004bd3cfac6b2867dec257eb92861a786c26188f1ecedb4a18c6672e72795867",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_drive_app_value",
+  "agent_bytes": 10587,
   "agent_file": "scheduled_brief_drive_app_value_agent.py",
   "agent_sha256": "b6f6571bf5d44684e0b96858fbad1193c716c79b7061c1b00565f41677ad0291",
+  "backup_agent": "scheduled_brief_drive_app_value_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDriveAppValue",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-drive-app-value:ed8a24ec0298c1dca4ae76b3c2e55ff322fa22292ce524b43bf09ec2f190b568",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDriveAppValue",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24548,
+  "skill_sha256": "57a7dca17b303342e13397a52baaee0e793472152f486647886afd678cbb1ea5",
   "tool_schema": {
     "properties": {
       "operation": {

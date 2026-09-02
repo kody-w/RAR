@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/blueprint_period_close_readiness",
+  "agent_bytes": 10646,
   "agent_file": "blueprint_period_close_readiness_agent.py",
   "agent_sha256": "47724f88cfdbdf0210848faafe49975d7c48dcac79f357f60d9cd53ac71b7a61",
+  "backup_agent": "blueprint_period_close_readiness_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlueprintPeriodCloseReadiness",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -85,8 +88,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/blueprint-period-close-readiness:f654cd154a195d8dcfc5a941555010632db68fc9cf1583ee2f9adb39e7cd2fde",
+  "rollback_agent_retained": true,
   "runtime_name": "BlueprintPeriodCloseReadiness",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24746,
+  "skill_sha256": "0a3576ceb7ffffc766d29f075e64e3216bf4b550d714fb3ea7bf92e44952db01",
   "tool_schema": {
     "properties": {
       "constraints": {

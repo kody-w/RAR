@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_revalue_and_adjust_assets",
+  "agent_bytes": 10547,
   "agent_file": "demo_data_revalue_and_adjust_assets_agent.py",
   "agent_sha256": "dd2201aaffb5423469ce69ed52b2ffa00ec4e7ccc991eb1bce0ff21cbadfec6a",
+  "backup_agent": "demo_data_revalue_and_adjust_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataRevalueAndAdjustAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-revalue-and-adjust-assets:1e32be151fe0cc5ebbd8e46999ed36246d3001e9f8c6f981279e4166e70fdc65",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataRevalueAndAdjustAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24573,
+  "skill_sha256": "fd8492490c04da4ad2af8b35ede8d03062dfac667fc919c212b07e97b82de369",
   "tool_schema": {
     "properties": {
       "operation": {

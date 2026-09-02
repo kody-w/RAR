@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_conduct_post_sale_follow_up",
+  "agent_bytes": 10675,
   "agent_file": "teams_update_conduct_post_sale_follow_up_agent.py",
   "agent_sha256": "a0273dd361aaf2edcec3e669f2b9cc3795c8a15f77e6272f7aa546d293e47948",
+  "backup_agent": "teams_update_conduct_post_sale_follow_up_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConductPostSaleFollowUp",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-conduct-post-sale-follow-up:a89557c264bddcf93ad0a6e2aad2aad61b5ad6d23c7d600836a413831f131b8c",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateConductPostSaleFollowUp",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24792,
+  "skill_sha256": "d7f2a67a0394f3b2ee294159fbdba6b120c8c1cda89c69e692d6fa5a5c0b4324",
   "tool_schema": {
     "properties": {
       "operation": {

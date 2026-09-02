@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_monitor_asset_performance",
+  "agent_bytes": 10624,
   "agent_file": "ppt_exec_monitor_asset_performance_agent.py",
   "agent_sha256": "ffdc5f4b48f52de50ac889584520e9ee7affc41d7f14e1d5868a84a7694c4855",
+  "backup_agent": "ppt_exec_monitor_asset_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMonitorAssetPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-monitor-asset-performance:43833f7cb5200653dae71d64b95a27a9a5ce5104ba7ea63ffe3a264d44a36b60",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMonitorAssetPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24641,
+  "skill_sha256": "282b626c67a63dbc3d2888129acd0eeb7627059bcd58c7c46428b32c25748723",
   "tool_schema": {
     "properties": {
       "operation": {

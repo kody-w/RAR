@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/workiq",
+  "agent_bytes": 21094,
   "agent_file": "workiq_agent.py",
   "agent_sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
+  "backup_agent": "workiq_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WorkIQAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody",
@@ -34,8 +37,16 @@
     ],
     "version": "1.1.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/workiq:0769118dc44e06bf48825f6d9dd3cbf6e24850524936977ae7d48153925c003a",
+  "rollback_agent_retained": true,
   "runtime_name": "WorkIQ",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 39052,
+  "skill_sha256": "dd735c509c85949909f9e8e1bdb22863762a3bf28f6c4c6fe49e290c8493504b",
   "tool_schema": {
     "properties": {
       "account": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_reopen_a_case",
+  "agent_bytes": 10514,
   "agent_file": "audit_reopen_a_case_agent.py",
   "agent_sha256": "2d16379b90c30d95b59ef31b0dc5e41db0dd328946f686be7e8e6a7d25623e94",
+  "backup_agent": "audit_reopen_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditReopenACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-reopen-a-case:a816bd93468e8a27ac66691fc05a99ff6356d7b90e96f62c8ae2e1de58720a3b",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditReopenACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24326,
+  "skill_sha256": "10d443069d02d40ce7d9fd1e5e1143bc1dc5be805dd63994ee213f73e043e549",
   "tool_schema": {
     "properties": {
       "criteria": {

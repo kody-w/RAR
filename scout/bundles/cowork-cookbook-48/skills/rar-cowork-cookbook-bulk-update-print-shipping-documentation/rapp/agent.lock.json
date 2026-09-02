@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_print_shipping_documentation",
+  "agent_bytes": 10703,
   "agent_file": "bulk_update_print_shipping_documentation_agent.py",
   "agent_sha256": "76d6edb90dbc4076065ed406ea8635ff9186c693f77b58c35972d8fb395a00c8",
+  "backup_agent": "bulk_update_print_shipping_documentation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdatePrintShippingDocumentation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-print-shipping-documentation:cbf40cbb0f291a0ca77a6320147b830219cd42e9f4140b323190d71c36c0b96b",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdatePrintShippingDocumentation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24840,
+  "skill_sha256": "3eb8b90644f6852f9d82b0ccf52f1501d703fa430560100dfb3c16d757b9ecb1",
   "tool_schema": {
     "properties": {
       "operation": {

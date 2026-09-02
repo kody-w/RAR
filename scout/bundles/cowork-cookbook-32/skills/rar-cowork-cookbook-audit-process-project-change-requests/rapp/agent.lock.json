@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_process_project_change_requests",
+  "agent_bytes": 10741,
   "agent_file": "audit_process_project_change_requests_agent.py",
   "agent_sha256": "b7b2d5daec4da30b7ce23fd73f27a81a0905ac88440b7306a7e76f5c826343d0",
+  "backup_agent": "audit_process_project_change_requests_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditProcessProjectChangeRequests",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-process-project-change-requests:f5830ad6d585739e6f0a1c25ca2d2fb5f451af17e4bc440a3870f8d966c2ecea",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditProcessProjectChangeRequests",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24882,
+  "skill_sha256": "f04167e6ef59c46dc2881e1546a420bb3a6bdacfeb17fc2f6dd5698b744b1130",
   "tool_schema": {
     "properties": {
       "criteria": {

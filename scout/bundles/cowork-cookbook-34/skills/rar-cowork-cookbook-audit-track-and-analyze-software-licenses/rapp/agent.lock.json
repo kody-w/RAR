@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_track_and_analyze_software_licenses",
+  "agent_bytes": 10823,
   "agent_file": "audit_track_and_analyze_software_licenses_agent.py",
   "agent_sha256": "a33d5a6a4b37e9028fab086b9177e87818fdd319b7e9ca58bfb37ec0f7ea7282",
+  "backup_agent": "audit_track_and_analyze_software_licenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditTrackAndAnalyzeSoftwareLicenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-track-and-analyze-software-licenses:8d11481c73799faf4387d7ad5b59f9d50f11265704050bacdfcee0fc8302cc3c",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditTrackAndAnalyzeSoftwareLicenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25104,
+  "skill_sha256": "79f420498d7b96680713f995e9fc7ee3d0adc411f0ff4690f1bda2d8e8db423e",
   "tool_schema": {
     "properties": {
       "criteria": {

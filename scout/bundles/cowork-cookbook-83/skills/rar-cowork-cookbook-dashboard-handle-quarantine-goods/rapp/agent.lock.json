@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_handle_quarantine_goods",
+  "agent_bytes": 10635,
   "agent_file": "dashboard_handle_quarantine_goods_agent.py",
   "agent_sha256": "3ced2d9a7573ecd23055767840700a3ac5f55cb0515a4b13196ebee18f58a288",
+  "backup_agent": "dashboard_handle_quarantine_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardHandleQuarantineGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-handle-quarantine-goods:02b2ed145b6c27030df0baa203e70e7d291cf08abb63e41af09314e5ab6f34f1",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardHandleQuarantineGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24694,
+  "skill_sha256": "2a31798f9ce7d12a76d6d195ee1635766077f226386e7ddc053793efc4df720b",
   "tool_schema": {
     "properties": {
       "operation": {

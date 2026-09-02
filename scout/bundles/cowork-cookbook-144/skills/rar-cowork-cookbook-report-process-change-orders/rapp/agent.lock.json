@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_process_change_orders",
+  "agent_bytes": 10308,
   "agent_file": "report_process_change_orders_agent.py",
   "agent_sha256": "d8922cdfa3df2fe14978c2a269743730364de3646da290a9b55993c67db6858c",
+  "backup_agent": "report_process_change_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportProcessChangeOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-process-change-orders:a0b2a689a6f9971792c79c1ea8c18e7fe546dcfe63096cdccf047a726c2e44fc",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportProcessChangeOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24066,
+  "skill_sha256": "ba75f79e9e070684b62903f477c570641ca9c0824a13ceff891e61001120e0d9",
   "tool_schema": {
     "properties": {
       "audience": {

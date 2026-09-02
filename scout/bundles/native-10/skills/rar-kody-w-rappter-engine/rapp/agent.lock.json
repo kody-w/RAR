@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rappter_engine_agent",
+  "agent_bytes": 17866,
   "agent_file": "rappter_engine_agent.py",
   "agent_sha256": "5679d82a2ea53a7dc8ae3b9c78e932ed83d068947f07d53be3af7582e32f7fd9",
+  "backup_agent": "rappter_engine_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappterEngine",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rappter-engine:37b3cf26f5461923ebb97b445120852963c38500a7d1e5af2a4be8c92ce117e2",
+  "rollback_agent_retained": true,
   "runtime_name": "RappterEngine",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 33364,
+  "skill_sha256": "ed5e11e8efaf4454b99ab66fed84ff31644a8f644f1f6d2e57812e82f66b9720",
   "tool_schema": {
     "properties": {
       "count": {

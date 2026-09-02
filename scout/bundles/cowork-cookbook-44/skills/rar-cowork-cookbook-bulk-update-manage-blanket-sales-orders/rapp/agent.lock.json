@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_manage_blanket_sales_orders",
+  "agent_bytes": 10645,
   "agent_file": "bulk_update_manage_blanket_sales_orders_agent.py",
   "agent_sha256": "5b806b91562910546dba6bc21b183e5114933c1e38e3d91731a88b4ca98b5bd0",
+  "backup_agent": "bulk_update_manage_blanket_sales_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateManageBlanketSalesOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-manage-blanket-sales-orders:798168804cbd278b5506aa2fb07c6e697a14b3d2f9678ad40328ddba32c48b1e",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateManageBlanketSalesOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24764,
+  "skill_sha256": "4c90bf5d4457d4ae205f5a564e9e1e712a055b28e8837ace3cd893c3162722ac",
   "tool_schema": {
     "properties": {
       "operation": {

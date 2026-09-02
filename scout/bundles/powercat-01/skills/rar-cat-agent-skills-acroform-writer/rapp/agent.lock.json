@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/acroform_writer",
+  "agent_bytes": 9012,
   "agent_file": "acroform_writer_agent.py",
   "agent_sha256": "40d2f38bf76d47a54b443ea70f777001ac77ae612979550aab56a5bf2147f8d4",
+  "backup_agent": "acroform_writer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AcroformWriter",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sandeep Angara",
@@ -41,8 +44,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/acroform-writer:743c13049f4482bfcbd41d5c94be55c0b44d93bfe78f62861419da8ca32fcff8",
+  "rollback_agent_retained": true,
   "runtime_name": "AcroformWriter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21794,
+  "skill_sha256": "a085ad75f182a088432cc633af941cbb58a2e538c427f9efa6e6c04bb4c6394f",
   "tool_schema": {
     "properties": {
       "audience": {

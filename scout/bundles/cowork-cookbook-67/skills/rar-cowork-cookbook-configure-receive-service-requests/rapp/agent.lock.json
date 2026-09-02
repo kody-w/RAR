@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_receive_service_requests",
+  "agent_bytes": 10810,
   "agent_file": "configure_receive_service_requests_agent.py",
   "agent_sha256": "5c609b9b374f8488e26462ff1ffdc4a487005d2df897dd0545b13a2b17edafb7",
+  "backup_agent": "configure_receive_service_requests_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureReceiveServiceRequests",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-receive-service-requests:1e9fb9bcfdab44cb2f5d2a391619024a87bd84ffa61549db7798c4fc02476c90",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureReceiveServiceRequests",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24854,
+  "skill_sha256": "cc6be0a4a04ce11b30bf0bce01b6c395784f1cc41b949ef2dcbcd827ea193d77",
   "tool_schema": {
     "properties": {
       "operation": {

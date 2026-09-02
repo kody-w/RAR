@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_adjust_production_plan",
+  "agent_bytes": 10615,
   "agent_file": "adaptive_card_adjust_production_plan_agent.py",
   "agent_sha256": "a6b0d7069bc960382c3a44aabd738c078304f3524050f12453120f4fb8270f64",
+  "backup_agent": "adaptive_card_adjust_production_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardAdjustProductionPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-adjust-production-plan:613aac8db78a6ff80c171fd24f8bb57bf818a1feda3609048440355332725300",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardAdjustProductionPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24630,
+  "skill_sha256": "003c84c737678554c0884172e0bd95afc3fe3346429bf20cbd15527c245ff9c3",
   "tool_schema": {
     "properties": {
       "operation": {

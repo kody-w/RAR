@@ -3,10 +3,11 @@
   "id": "kody-w__twin_me",
   "name": "TwinMe",
   "rar_name": "@kody-w/twin_me",
-  "rappid": "rappid:@kody-w/twin_me:95db972df632baf44d344c3eafdb2b296ff27e3789ac1481e0a1fbd9ebdfc91c",
-  "_migrated_from": "rappid:@kody-w/twin_me:8ad0dc7e2fa0cdbd3fd2942505b32ec2ac5beba14b55a407f8570b7a70c3c943",
+  "rappid": "rappid:@kody-w/twin-me:88f945122d4c5ce8768f04fbcdfa0b93ec287ddb03120fd3199f425c402db2a5",
+  "_migrated_from": "rappid:@kody-w/twin_me:95db972df632baf44d344c3eafdb2b296ff27e3789ac1481e0a1fbd9ebdfc91c",
   "_migrated_from_all": [
-    "rappid:@kody-w/twin_me:8ad0dc7e2fa0cdbd3fd2942505b32ec2ac5beba14b55a407f8570b7a70c3c943"
+    "rappid:@kody-w/twin_me:8ad0dc7e2fa0cdbd3fd2942505b32ec2ac5beba14b55a407f8570b7a70c3c943",
+    "rappid:@kody-w/twin_me:95db972df632baf44d344c3eafdb2b296ff27e3789ac1481e0a1fbd9ebdfc91c"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.3",
@@ -34,9 +35,18 @@
   "sha256": "d3e0e553b21db6ba2323ebf1119a019bf44b898438fae6432284671359593896",
   "has_card": true,
   "added_at": "2026-06-08T13:48:48-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-twin-me",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__twin_me.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_me_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_me_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-twin-me/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-twin-me/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_me.py",
   "api_card_url": null,

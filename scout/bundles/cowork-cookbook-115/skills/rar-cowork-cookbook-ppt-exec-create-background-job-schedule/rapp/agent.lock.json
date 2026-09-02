@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_create_background_job_schedule",
+  "agent_bytes": 10712,
   "agent_file": "ppt_exec_create_background_job_schedule_agent.py",
   "agent_sha256": "ced8fd8b0c78953598ac8af616aff095ab4d51fc8eb6dea8fe1347f04688f921",
+  "backup_agent": "ppt_exec_create_background_job_schedule_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecCreateBackgroundJobSchedule",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-create-background-job-schedule:0a0e5b3fad49686702dab518b61b8135ff8241f520eef0ea36ab6d6b43afb411",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecCreateBackgroundJobSchedule",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24851,
+  "skill_sha256": "a802364174f075c109fc68881b210ec0fbbacc57c077193eb5e25938735388a4",
   "tool_schema": {
     "properties": {
       "operation": {

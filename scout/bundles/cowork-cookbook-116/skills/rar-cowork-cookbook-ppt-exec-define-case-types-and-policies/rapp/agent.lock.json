@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_case_types_and_policies",
+  "agent_bytes": 10704,
   "agent_file": "ppt_exec_define_case_types_and_policies_agent.py",
   "agent_sha256": "9e6cf285ed9b59ff43d78af82cd5afc1ca13cb92e7b53975a16b9073595d9ad8",
+  "backup_agent": "ppt_exec_define_case_types_and_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineCaseTypesAndPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-define-case-types-and-policies:6565087c5f74dd964eb1348dda710d37fcfb5b94c8acbcb7ca48abbfac8ad87a",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDefineCaseTypesAndPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24844,
+  "skill_sha256": "891a3d1ff0513277a1dd6d66893fa251ce8ea5a3b8baa47555bf4ac91e41d7e3",
   "tool_schema": {
     "properties": {
       "operation": {

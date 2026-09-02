@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_configure_and_manage_offline_mode_for_apps",
+  "agent_bytes": 10847,
   "agent_file": "ppt_exec_configure_and_manage_offline_mode_for_apps_agent.py",
   "agent_sha256": "35a70084c1263029e7dc4dfe993a4182bdd7f6f6106af2e38e1305190240d916",
+  "backup_agent": "ppt_exec_configure_and_manage_offline_mode_for_apps_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecConfigureAndManageOfflineModeForApps",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-configure-and-manage-offline-mode-for-apps:757fba429c1ed248fcad4e7b1503e7b8a378b2a99d127c72bd5771295e8cf266",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecConfigureAndManageOfflineModeForApps",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25262,
+  "skill_sha256": "d2a3d137eafd9780d9d52b0e5482cac93bfb8aa19a4e45b24bd9c90851363b9d",
   "tool_schema": {
     "properties": {
       "operation": {

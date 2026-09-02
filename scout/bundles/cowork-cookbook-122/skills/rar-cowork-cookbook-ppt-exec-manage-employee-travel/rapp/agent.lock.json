@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_manage_employee_travel",
+  "agent_bytes": 10571,
   "agent_file": "ppt_exec_manage_employee_travel_agent.py",
   "agent_sha256": "bc85ca854e64357d2e3eb60bab05962f10a6f941dba874082eb07e52f7a94a59",
+  "backup_agent": "ppt_exec_manage_employee_travel_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecManageEmployeeTravel",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-manage-employee-travel:8522b747e67ba516a2407d2f1bd3a8eaee9e5a1fd17d54da385922e358105c52",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecManageEmployeeTravel",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24543,
+  "skill_sha256": "229377e8e6df7d14c6f860ce4f71f05319911ec09535794ea138c5dcd5d8085b",
   "tool_schema": {
     "properties": {
       "operation": {

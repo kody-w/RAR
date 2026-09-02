@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/launch_to_public_agent",
+  "agent_bytes": 35298,
   "agent_file": "launch_to_public_agent.py",
   "agent_sha256": "857168ad0d4421f9099e93a63c4805ad22e229c31526b4d1cab37f9548fdff0e",
+  "backup_agent": "launch_to_public_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LaunchToPublicAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.5"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/launch-to-public:cf6d58baa0b18e77dd7bf8cbbf76b016b0c042a39bc7f5dabe0591b9e3a4afd6",
+  "rollback_agent_retained": true,
   "runtime_name": "Launch",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 65032,
+  "skill_sha256": "6c4b9912c8fc8685786bead9eb2c3ac95d7d077ada861a5dace8d411acb95dea",
   "tool_schema": {
     "properties": {
       "_local_brainstem_dir": {

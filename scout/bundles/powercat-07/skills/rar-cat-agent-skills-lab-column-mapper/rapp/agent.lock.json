@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/lab_column_mapper",
+  "agent_bytes": 9791,
   "agent_file": "lab_column_mapper_agent.py",
   "agent_sha256": "5589a92823bbb860000ebb088852972236b3df0668bbe743601f90be85ce0aa1",
+  "backup_agent": "lab_column_mapper_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LabColumnMapper",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Rafsan Huseynov",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/lab-column-mapper:b32169e5735f3ec5e0740dabdd4e7555b265c00cb6b07ac0a5ebbcc9514824ef",
+  "rollback_agent_retained": true,
   "runtime_name": "LabColumnMapper",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23713,
+  "skill_sha256": "227eefc75aa169b5dfd746ad84396107f92d7e0bfe2131fc0ea78763bb581dcc",
   "tool_schema": {
     "properties": {
       "criteria": {

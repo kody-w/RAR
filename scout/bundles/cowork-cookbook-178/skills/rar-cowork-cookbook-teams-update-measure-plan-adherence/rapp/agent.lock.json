@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_measure_plan_adherence",
+  "agent_bytes": 10618,
   "agent_file": "teams_update_measure_plan_adherence_agent.py",
   "agent_sha256": "a9d7dc05a79adc024bf6b148cacbea4237c06082005a7b16ec4fedf01f3db382",
+  "backup_agent": "teams_update_measure_plan_adherence_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateMeasurePlanAdherence",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-measure-plan-adherence:59b48e3d41cf76aff472a3966740f081136f1d02dd535b96dc833628618e556d",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateMeasurePlanAdherence",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24639,
+  "skill_sha256": "a7c4403e35fa817ee7e2b7f8eb4432161f50275587879fe8995e5ae34896bfbb",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -3,10 +3,11 @@
   "id": "kody-w__bond_rhythm_agent",
   "name": "Bond Pulse",
   "rar_name": "@kody-w/bond_rhythm_agent",
-  "rappid": "rappid:@kody-w/bond_rhythm_agent:93a4e7b97de1b97272354bf2363c22193fb131edd7eaba46f4e43688b7b9fbb2",
-  "_migrated_from": "rappid:@kody-w/bond_rhythm_agent:ad68b0e9d73b7fa7104fd84b0befc020ea33159b08770d9ca2f97e2eeafb911e",
+  "rappid": "rappid:@kody-w/bond-rhythm:e8964e8d2aa98f003c3a4fdd289d7fbf14e4e712048ad1abb944a3e84edb4560",
+  "_migrated_from": "rappid:@kody-w/bond_rhythm_agent:93a4e7b97de1b97272354bf2363c22193fb131edd7eaba46f4e43688b7b9fbb2",
   "_migrated_from_all": [
-    "rappid:@kody-w/bond_rhythm_agent:ad68b0e9d73b7fa7104fd84b0befc020ea33159b08770d9ca2f97e2eeafb911e"
+    "rappid:@kody-w/bond_rhythm_agent:ad68b0e9d73b7fa7104fd84b0befc020ea33159b08770d9ca2f97e2eeafb911e",
+    "rappid:@kody-w/bond_rhythm_agent:93a4e7b97de1b97272354bf2363c22193fb131edd7eaba46f4e43688b7b9fbb2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -32,9 +33,18 @@
   "sha256": "88bb285bbf26b68fee053d24bf70c08ae1ec42e4c3a03b9afe7de2c404a5a219",
   "has_card": true,
   "added_at": "2026-05-09T15:25:16-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-bond-rhythm",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__bond_rhythm_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-bond-rhythm/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-bond-rhythm/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__bond_rhythm_agent.py",
   "api_card_url": null,

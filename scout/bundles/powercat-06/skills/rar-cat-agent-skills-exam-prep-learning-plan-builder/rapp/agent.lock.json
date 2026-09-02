@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/exam_prep_learning_plan_builder",
+  "agent_bytes": 9417,
   "agent_file": "exam_prep_learning_plan_builder_agent.py",
   "agent_sha256": "35509b26742d474c7b205a420085c28a755754e18621d8599f5d4a54f0bdab35",
+  "backup_agent": "exam_prep_learning_plan_builder_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ExamPrepLearningPlanBuilder",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Michael Heath",
@@ -39,8 +42,16 @@
     ],
     "version": "3.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/exam-prep-learning-plan-builder:54aba7b14bc74ef646777c3354a85eb1f14288f65b5c5881ac7205f13e27e163",
+  "rollback_agent_retained": true,
   "runtime_name": "ExamPrepLearningPlanBuilder",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22846,
+  "skill_sha256": "e431018f5ba55e4b89cc94f6bc0c12b9336755525ebc59d4d9bed38a1187b5b8",
   "tool_schema": {
     "properties": {
       "constraints": {

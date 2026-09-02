@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_record_cost_of_quality",
+  "agent_bytes": 10611,
   "agent_file": "adaptive_card_record_cost_of_quality_agent.py",
   "agent_sha256": "4b78b0b5055d3c401958155a44feb0aa04b17aee506a4c00e292015d7cbc03ab",
+  "backup_agent": "adaptive_card_record_cost_of_quality_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardRecordCostOfQuality",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-record-cost-of-quality:efddebcf7e68e792b62cbcf779d7b36b199dbedf84186c6b6f00eedf72900bf7",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardRecordCostOfQuality",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24634,
+  "skill_sha256": "109e197f09100f5870cab5b110780a4cb2b789f89f6e90d52718278b6f8480f1",
   "tool_schema": {
     "properties": {
       "operation": {

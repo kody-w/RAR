@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/linkedin_content_writer",
+  "agent_bytes": 9094,
   "agent_file": "linkedin_content_writer_agent.py",
   "agent_sha256": "2e8b65f13ef8f8b4f9470b5fcd78960b3d95028cd00408c86e07adcf1724fab5",
+  "backup_agent": "linkedin_content_writer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LinkedinContentWriter",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Becky Still, Digital Boop Ltd",
@@ -40,8 +43,16 @@
     ],
     "version": "2.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/linkedin-content-writer:a33a80047491b6aae05cf062faf7201bb3098ff0a2af36c7de923371ef37b8cf",
+  "rollback_agent_retained": true,
   "runtime_name": "LinkedinContentWriter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22035,
+  "skill_sha256": "15511daff123c2f5ded7fca36233132506de1f0d24d2b8401f53e0f05ad1fd48",
   "tool_schema": {
     "properties": {
       "audience": {

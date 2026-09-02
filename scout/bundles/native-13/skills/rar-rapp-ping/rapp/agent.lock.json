@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/ping_agent",
+  "agent_bytes": 1206,
   "agent_file": "ping_agent.py",
   "agent_sha256": "4761dcecf8af3893153407860dc6786ac8cd7d3654966bb57923143db885f0af",
+  "backup_agent": "ping_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PingAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -24,8 +27,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/ping:60a2b0dc6971cb2e241533502dfa0fa4950230132a9e94d7b94c0fad576d6891",
+  "rollback_agent_retained": true,
   "runtime_name": "Ping",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 6793,
+  "skill_sha256": "010d25fdfcb9edf149e0ef17939a7f9fac0c81facda741ad42bcec21fcf91fae",
   "tool_schema": {
     "properties": {},
     "required": [],

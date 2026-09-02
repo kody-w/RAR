@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_review_access_policies",
+  "agent_bytes": 10641,
   "agent_file": "teams_update_review_access_policies_agent.py",
   "agent_sha256": "f4f63fdb98a978d32fba2d92a7d9175a8f6bcf1de5fc270af805582391e950f7",
+  "backup_agent": "teams_update_review_access_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateReviewAccessPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-review-access-policies:b42559aab8884cd25fed08647742b6fef3ff1199288f8158a2347de3eff21d18",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateReviewAccessPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24667,
+  "skill_sha256": "59496ab3f8279f6ccc19714ae77f6b33544ebef2af0f329444386d46c7174e33",
   "tool_schema": {
     "properties": {
       "operation": {

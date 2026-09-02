@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_reconcile_bank_accounts",
+  "agent_bytes": 10600,
   "agent_file": "bulk_update_reconcile_bank_accounts_agent.py",
   "agent_sha256": "84070826e2756dc50fa52b198ea9f1d1766c50a683dd012abfd425c722ee1b1f",
+  "backup_agent": "bulk_update_reconcile_bank_accounts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateReconcileBankAccounts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-reconcile-bank-accounts:f03eeda94a7d3a150e84d8d4749dc6841e68ad9e6489086ac18694be0e2b967e",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateReconcileBankAccounts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24630,
+  "skill_sha256": "9a3239824200fa204ce78d8397d0b79fe1a396fc48621384f4a17f50d4d77c09",
   "tool_schema": {
     "properties": {
       "operation": {

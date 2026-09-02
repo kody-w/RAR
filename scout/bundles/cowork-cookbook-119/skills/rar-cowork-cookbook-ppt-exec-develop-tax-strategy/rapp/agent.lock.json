@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_develop_tax_strategy",
+  "agent_bytes": 10563,
   "agent_file": "ppt_exec_develop_tax_strategy_agent.py",
   "agent_sha256": "0785f2583c19bb211f3227466184e8f4180a8a1f14f67219dab133ea2dd3f60f",
+  "backup_agent": "ppt_exec_develop_tax_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDevelopTaxStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-develop-tax-strategy:e4ea253c712bc0b5255b07a8f569bec0ef9eeef547d7b521337f8885fcf89133",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDevelopTaxStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24495,
+  "skill_sha256": "6c5f9e60913e84d5e0c7bf719ec9988530d955fa7914c8377644a63a73cb1f05",
   "tool_schema": {
     "properties": {
       "operation": {

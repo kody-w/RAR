@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_handle_background_job_errors_and_exceptions",
+  "agent_bytes": 10859,
   "agent_file": "ppt_exec_handle_background_job_errors_and_exceptions_agent.py",
   "agent_sha256": "c938ecee0c0074d5fcbe472c560ff09f1ee8e9eaa7ab0780cd5568af7270224a",
+  "backup_agent": "ppt_exec_handle_background_job_errors_and_exceptions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecHandleBackgroundJobErrorsAndExceptions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-handle-background-job-errors-and-exceptions:5c2801c478dd4aeace302ccd73ddc8fdb909858deef2acad736e8362a4753742",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecHandleBackgroundJobErrorsAndExceptions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25265,
+  "skill_sha256": "e99124890c15cc36caa9901cf1ddbb9b67cff1c90168a4f946374075c7e0e093",
   "tool_schema": {
     "properties": {
       "operation": {

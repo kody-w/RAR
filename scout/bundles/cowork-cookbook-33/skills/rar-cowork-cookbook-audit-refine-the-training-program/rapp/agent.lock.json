@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_refine_the_training_program",
+  "agent_bytes": 10724,
   "agent_file": "audit_refine_the_training_program_agent.py",
   "agent_sha256": "68bfe28ada2505857c1d2a384e4b0a8acaee60567361aebc58bbf145361f3c3a",
+  "backup_agent": "audit_refine_the_training_program_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditRefineTheTrainingProgram",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-refine-the-training-program:03e3bd98cc26a8a5748c4f13b5c1c6af5e9b87dbe9997dc0655c1dcb10d2bd72",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditRefineTheTrainingProgram",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24849,
+  "skill_sha256": "1ba3b4059bb33b0fe45ef5400ed1d4ff1f979c9df7fe7e7b586b7a982e4c0c6f",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_terminate_workers",
+  "agent_bytes": 10428,
   "agent_file": "demo_data_terminate_workers_agent.py",
   "agent_sha256": "24fc672875e5edbd79108e29153fe37e2c5ccee50c1b9d37d0732c7d791d4a91",
+  "backup_agent": "demo_data_terminate_workers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataTerminateWorkers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-terminate-workers:618084e7f32f2cd7648be63dec1167fac45470e44a9ab78d9bd85745b8b0e815",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataTerminateWorkers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24258,
+  "skill_sha256": "60a5f0d4776aaa6b1e9b9006ce18632b10ea03f72018ea50554bf241f43fdde1",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_qualify_and_disqualify_leads",
+  "agent_bytes": 10681,
   "agent_file": "bulk_update_qualify_and_disqualify_leads_agent.py",
   "agent_sha256": "42a0e815a4a7091ed56315f4963a1c658afb535c73ac8b0838b6ea3078a17ff7",
+  "backup_agent": "bulk_update_qualify_and_disqualify_leads_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateQualifyAndDisqualifyLeads",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-qualify-and-disqualify-leads:9532f9ee4d5d5b8ab691c7db1299d7c1a42d9d8419d873f989d55b3caa2614ae",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateQualifyAndDisqualifyLeads",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24803,
+  "skill_sha256": "f6ad0ed2e35e7ff68f09533cf4a0540f5be894c7178949fd880dac078c018177",
   "tool_schema": {
     "properties": {
       "operation": {

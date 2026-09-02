@@ -390,7 +390,8 @@ function card(hit, best) {
         ${(a.dependencies || []).length
           ? `<div><span class="k">depends on </span>${a.dependencies.map(esc).join(', ')}</div>` : ''}
         <div><span class="k">checksum   </span>${esc((a.source.sha256 || '').slice(0, 32))}…</div>
-        <div><span class="k">source     </span><a href="${esc(a.source.raw)}" rel="noopener">${esc(a.source.path)}</a></div>
+        ${a.skill_url ? `<div><span class="k">Grail      </span><a href="${esc(a.skill_url)}" rel="noopener">Toasted SKILL.md</a></div>` : ''}
+        <div><span class="k">rollback   </span><a href="${esc(a.backup_agent_url || a.source.raw)}" rel="noopener">${esc(a.source.path)}</a></div>
       </div>
     </details>
   </article>`;

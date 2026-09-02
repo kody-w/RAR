@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_identify_common_issues",
+  "agent_bytes": 10333,
   "agent_file": "report_identify_common_issues_agent.py",
   "agent_sha256": "3738b2d30fc36fd3eb2ef9dff00bb5ad41f0eebb2126045a5782a82be888e25c",
+  "backup_agent": "report_identify_common_issues_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportIdentifyCommonIssues",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-identify-common-issues:92f59e4b5aa143ad5b204bb0c09473c26af5f961f15b3a3bbeef3724c5459b5a",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportIdentifyCommonIssues",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24136,
+  "skill_sha256": "d8eae3a24c4a172fe984f4a26c57a283da9ea066fe0c95a378c6718f1174e97d",
   "tool_schema": {
     "properties": {
       "audience": {

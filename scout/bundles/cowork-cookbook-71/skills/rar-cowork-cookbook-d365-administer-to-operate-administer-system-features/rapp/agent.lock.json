@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_administer_to_operate_administer_system_features",
+  "agent_bytes": 10818,
   "agent_file": "d365_administer_to_operate_administer_system_features_agent.py",
   "agent_sha256": "c958d1cfb99160ecd3029d1e13c273ba3e35015aebad83f94b470118604be556",
+  "backup_agent": "d365_administer_to_operate_administer_system_features_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365AdministerToOperateAdministerSystemFeatures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-administer-to-operate-administer-system-features:802b78af89aeb6876be62a041f28ca9aa60d1f6c0051c21a00127eea5e50ce53",
+  "rollback_agent_retained": true,
   "runtime_name": "D365AdministerToOperateAdministerSystemFeatures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25130,
+  "skill_sha256": "5712ba3a6272ef8bff3bf012bbdd17dd001c5e77dc056c6ac43cffe019935876",
   "tool_schema": {
     "properties": {
       "operation": {

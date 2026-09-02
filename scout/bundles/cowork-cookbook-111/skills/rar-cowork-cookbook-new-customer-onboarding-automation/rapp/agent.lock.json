@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/new_customer_onboarding_automation",
+  "agent_bytes": 10345,
   "agent_file": "new_customer_onboarding_automation_agent.py",
   "agent_sha256": "527ace04654f2b2778dbb8147853d3c79e0e9fcd031fc644dfd4db17d0c3e170",
+  "backup_agent": "new_customer_onboarding_automation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "NewCustomerOnboardingAutomation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/new-customer-onboarding-automation:b075636cf664e893680c7cd89847c09fcd74679e3cccf35b5d42620c7daf7e9e",
+  "rollback_agent_retained": true,
   "runtime_name": "NewCustomerOnboardingAutomation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24053,
+  "skill_sha256": "eac8c6a547e0cbb5cb3790dcb3b5854d8f7ebdfa19c9a953fa6d4b8d40a4324d",
   "tool_schema": {
     "properties": {
       "operation": {

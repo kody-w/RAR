@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/grab_my_files",
+  "agent_bytes": 9185,
   "agent_file": "grab_my_files_agent.py",
   "agent_sha256": "7bf1e47a108ee4b7ac096b531ca8a1a6518e55f1e5b25c33b597b31f435852d3",
+  "backup_agent": "grab_my_files_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GrabMyFiles",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Rafael Alcaraz",
@@ -41,8 +44,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/grab-my-files:542df6206e14edd4341365b47b709e2846e496ac70168f11225606e392641cad",
+  "rollback_agent_retained": true,
   "runtime_name": "GrabMyFiles",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22066,
+  "skill_sha256": "9a5c1847c5e5a717a7f591ad7ee506a89a6688520d5493ac8f4dc2ce4cecf8fb",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_quality_procedures_and_tools",
+  "agent_bytes": 10791,
   "agent_file": "teams_update_define_quality_procedures_and_tools_agent.py",
   "agent_sha256": "3ba2874418577c848a0a31d7ec69848a66eceb7d497dda346308cf951052a0fa",
+  "backup_agent": "teams_update_define_quality_procedures_and_tools_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineQualityProceduresAndTools",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-quality-procedures-and-tools:8b4dc6da8595f9f1f61af782945b39fefe60954a79bbf7c495bb68f8960ecd2d",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineQualityProceduresAndTools",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25055,
+  "skill_sha256": "96a101a72ef0cb4e95b235d63b1bed6259bfba90f75319edf3d4ac3a7d016619",
   "tool_schema": {
     "properties": {
       "operation": {

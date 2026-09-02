@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/launch_activation_kit_and_owner_routing",
+  "agent_bytes": 10691,
   "agent_file": "launch_activation_kit_and_owner_routing_agent.py",
   "agent_sha256": "79fc2933161838fb0e1a2e3851fc7868bdcaff5931c3e69b12bbd6ab95094f78",
+  "backup_agent": "launch_activation_kit_and_owner_routing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LaunchActivationKitAndOwnerRouting",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/launch-activation-kit-and-owner-routing:49e11364f8177d35943244dfa2bb5530cb289bed4dfbc68d84b21ba803340bcf",
+  "rollback_agent_retained": true,
   "runtime_name": "LaunchActivationKitAndOwnerRouting",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25085,
+  "skill_sha256": "a543b0395cb3f18a3e9c14a3e40df86a36db8fa2293e183c5da11d425c72f54a",
   "tool_schema": {
     "properties": {
       "operation": {

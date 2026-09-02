@@ -3,10 +3,11 @@
   "id": "howardh__recon_agent",
   "name": "Recon",
   "rar_name": "@howardh/recon_agent",
-  "rappid": "rappid:@howardh/recon_agent:69458559c46219143da3c8ae2fc780569a6c6a5000f945902dacfb1b4886d6a0",
-  "_migrated_from": "rappid:@howardh/recon_agent:5cadb071567b6a14a9df923ea52d73286c5343635a3b28ea2a5459700561f97f",
+  "rappid": "rappid:@howardh/recon:021e59962545c90f24154f2e0ce7cf6868f02dc7313b39fa469d3617db51f320",
+  "_migrated_from": "rappid:@howardh/recon_agent:69458559c46219143da3c8ae2fc780569a6c6a5000f945902dacfb1b4886d6a0",
   "_migrated_from_all": [
-    "rappid:@howardh/recon_agent:5cadb071567b6a14a9df923ea52d73286c5343635a3b28ea2a5459700561f97f"
+    "rappid:@howardh/recon_agent:5cadb071567b6a14a9df923ea52d73286c5343635a3b28ea2a5459700561f97f",
+    "rappid:@howardh/recon_agent:69458559c46219143da3c8ae2fc780569a6c6a5000f945902dacfb1b4886d6a0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -34,9 +35,18 @@
   "sha256": "7c13e82c07ce373aba2729caccfeab00ae44e5c80ef46c8de34e4798361f6f06",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-howardh-recon",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__recon_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-recon/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-recon/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__recon_agent.py",
   "api_card_url": null,

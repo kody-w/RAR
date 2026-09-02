@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_transfer_assets",
+  "agent_bytes": 10249,
   "agent_file": "report_transfer_assets_agent.py",
   "agent_sha256": "794f2828eba0e5def121dd61251d7ced483d773a3b7a13c09d1a5d4ea211172b",
+  "backup_agent": "report_transfer_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportTransferAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-transfer-assets:ab9be87a38d34657cbaeab94524894dc769cb72d7582b6a0cf67300828b3a153",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportTransferAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23903,
+  "skill_sha256": "3d01d96d5bfef4c607537a3f7c27f3f21a19bfab476cfc7ac1b7a8a06e6c953d",
   "tool_schema": {
     "properties": {
       "audience": {

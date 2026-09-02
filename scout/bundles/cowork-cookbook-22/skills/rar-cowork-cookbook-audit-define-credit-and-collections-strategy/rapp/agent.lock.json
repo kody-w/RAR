@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_define_credit_and_collections_strategy",
+  "agent_bytes": 10819,
   "agent_file": "audit_define_credit_and_collections_strategy_agent.py",
   "agent_sha256": "9eafc1113aa4cf3cd77960dbbd65b3c05a8cb0de17b653d1031fb01fdef9d9e3",
+  "backup_agent": "audit_define_credit_and_collections_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineCreditAndCollectionsStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-define-credit-and-collections-strategy:4570dc323926e90ff159930b2434e553978218bdf3071e17d7b1c8c194c7f06d",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDefineCreditAndCollectionsStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25133,
+  "skill_sha256": "dbd103d68aaafcdf2949875f9e5788e68d1dbe53315412e2897811433b242d1f",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_modify_production_plan",
+  "agent_bytes": 10661,
   "agent_file": "scheduled_brief_modify_production_plan_agent.py",
   "agent_sha256": "ef4cb23df7bd09d79143a281f22e7060731ccb7f0f4254688e89eb6a928ed686",
+  "backup_agent": "scheduled_brief_modify_production_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefModifyProductionPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-modify-production-plan:56fd5759c7501330b9a803010a98fc06d5540d5088ae816c26324d873c2907f9",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefModifyProductionPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24705,
+  "skill_sha256": "1c07a48484c7a273c016f6ecb7b2ab4628ad4860bf25ad6effaee13c0984f64c",
   "tool_schema": {
     "properties": {
       "operation": {

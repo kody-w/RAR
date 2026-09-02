@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_integration_strategy",
+  "agent_bytes": 10692,
   "agent_file": "teams_update_define_integration_strategy_agent.py",
   "agent_sha256": "7b60553588756ae0016b05e47f445f300ba46874280aa463babeca1521a98572",
+  "backup_agent": "teams_update_define_integration_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineIntegrationStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-integration-strategy:460cfe73160e438276ba0aa1a4d76466572f0e3f2fb4990511b0f982606609ca",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineIntegrationStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24769,
+  "skill_sha256": "55ee55190609270884a150e5e996a062caacb9eb595867fc77ae675927f94449",
   "tool_schema": {
     "properties": {
       "operation": {

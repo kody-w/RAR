@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_create_background_job_schedule",
+  "agent_bytes": 10742,
   "agent_file": "dashboard_create_background_job_schedule_agent.py",
   "agent_sha256": "d5cb51ed72f3ce09143e4ed91146d07183dd23d4e571f4666d105313cd1920d1",
+  "backup_agent": "dashboard_create_background_job_schedule_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardCreateBackgroundJobSchedule",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-create-background-job-schedule:ae39a3ec3c6c9fcbf2938bafc8cd1f81d131ae81ae42fd1d2cf7d420728e084d",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardCreateBackgroundJobSchedule",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24943,
+  "skill_sha256": "a014072661ee18c196b10e5d064beb08d6fc768b7d4f88c79ebc1336118c4f8c",
   "tool_schema": {
     "properties": {
       "operation": {

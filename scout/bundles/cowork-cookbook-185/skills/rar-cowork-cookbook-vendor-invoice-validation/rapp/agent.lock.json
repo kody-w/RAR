@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/vendor_invoice_validation",
+  "agent_bytes": 10512,
   "agent_file": "vendor_invoice_validation_agent.py",
   "agent_sha256": "9d0ea5ca2757e5d92794def6683b99b9ff22417d1fcc435c724cad192d02eb2b",
+  "backup_agent": "vendor_invoice_validation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VendorInvoiceValidation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/vendor-invoice-validation:e2361b08f950d50be2a53859f387de2b5717d1c46f01b298be3a2541f977d9b1",
+  "rollback_agent_retained": true,
   "runtime_name": "VendorInvoiceValidation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24402,
+  "skill_sha256": "127e6c31157a6efeff6797f827bcc2af4c1f7a817914d1bb7bb340da3e81318a",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/business_os",
+  "agent_bytes": 9878,
   "agent_file": "business_os_agent.py",
   "agent_sha256": "b455d3229e78336c3772968e71167a3aa49c2a131e16710432b069cef3bf77aa",
+  "backup_agent": "business_os_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BusinessOs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Matthew James Davis",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/business-os:78be1562549d7da4cf9a015cffa58f8ad36342ba198121ce9ec2dbe2eb8f5396",
+  "rollback_agent_retained": true,
   "runtime_name": "BusinessOs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23940,
+  "skill_sha256": "16f5c7797a2892f5d749b0dc8ec554f7e4f9a5128c326e1cbb23f2925e977877",
   "tool_schema": {
     "properties": {
       "criteria": {

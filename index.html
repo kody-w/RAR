@@ -575,10 +575,24 @@ async function loadConfig() {
 async function init() {
   await loadConfig();
   try {
-    const res = await fetch(RAW + '/registry.json?t=' + Date.now());
+    const [res, scoutRes] = await Promise.all([
+      fetch(RAW + '/registry.json?t=' + Date.now()),
+      fetch(RAW + '/scout/catalog/catalog.json?t=' + Date.now()),
+    ]);
     if (!res.ok) throw new Error(res.status);
     const reg = await res.json();
-    allAgents = reg.agents || [];
+    const scout = scoutRes.ok ? await scoutRes.json() : { skills: [] };
+    const skills = new Map((scout.skills || []).map(s => [
+      s.identity,
+      {
+        ...s,
+        _skill_url: (s.files || []).find(f => f.path === 'SKILL.md')?.url || null,
+      },
+    ]));
+    allAgents = (reg.agents || []).map(a => ({
+      ...a,
+      ...(skills.get(a.name) || {}),
+    }));
 
     const publishers = new Set(allAgents.map(a => a.name.split('/')[0])).size;
     document.getElementById('stats-bar').style.display = 'flex';
@@ -1015,9 +1029,17 @@ async function downloadCart() {
     const a = allAgents.find(x => x.name === name);
     if (!a || !a._file) continue;
     try {
-      const res = await fetch(`${RAW}/${a._file}?t=${Date.now()}`);
+      const sourceUrl = a._skill_url || `${RAW}/${a._file}`;
+      const res = await fetch(`${sourceUrl}${sourceUrl.includes('?') ? '&' : '?'}t=${Date.now()}`);
       if (res.ok) {
-        files.push({ name: a._file.split('/').pop(), content: await res.text(), agent: a });
+        files.push({
+          name: a._skill_url
+            ? `${a.skill_name || a.name.split('/').pop()}-SKILL.md`
+            : a._file.split('/').pop(),
+          content: await res.text(),
+          agent: a,
+          isSkill: !!a._skill_url,
+        });
       }
     } catch {}
   }
@@ -1025,7 +1047,9 @@ async function downloadCart() {
 
   // Single file → direct download, no zip needed.
   if (files.length === 1) {
-    const blob = new Blob([files[0].content], { type: 'text/x-python' });
+    const blob = new Blob([files[0].content], {
+      type: files[0].isSkill ? 'text/markdown' : 'text/x-python'
+    });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url; link.download = files[0].name;
@@ -1042,19 +1066,27 @@ async function downloadCart() {
     await new Promise(r => s.onload = r);
   }
   const zip = new JSZip();
-  const agentsFolder = zip.folder('agents');
-  files.forEach(f => agentsFolder.file(f.name, f.content));
+  const skillsFolder = zip.folder('skills');
+  const agentsFolder = zip.folder('rollback-agents');
+  files.forEach(f => {
+    if (f.isSkill) {
+      skillsFolder.folder(f.agent.skill_name || f.agent.name.split('/').pop())
+        .file('SKILL.md', f.content);
+    } else {
+      agentsFolder.file(f.name, f.content);
+    }
+  });
   zip.file('README.md',
-    `# RAPP Agent Collection\nDownloaded ${new Date().toISOString().split('T')[0]}\n\n` +
-    `## Agents (${files.length})\n${files.map(f => `- ${f.agent.display_name} (${f.agent.name}) v${f.agent.version}`).join('\n')}\n\n` +
-    `## Install\nCopy the .py files into your project's agents/ directory.\n\n` +
+    `# RAPP Toasted Skill Collection\nDownloaded ${new Date().toISOString().split('T')[0]}\n\n` +
+    `## Grail capabilities (${files.length})\n${files.map(f => `- ${f.agent.display_name} (${f.agent.name}) v${f.agent.version}`).join('\n')}\n\n` +
+    `## Install\nLoad each SKILL.md directory in a skill-aware host. A RAPP Brainstem converter restores exact agent.py bytes when needed.\n\n` +
     `## More\nhttps://${OWNER}.github.io/${REPO_NAME}/\n`);
   const blob = await zip.generateAsync({ type: 'blob' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.href = url; link.download = `rar-agents-${files.length}.zip`;
+  link.href = url; link.download = `rar-toasted-skills-${files.length}.zip`;
   link.click(); URL.revokeObjectURL(url);
-  cartToast(`Downloaded ${files.length} agents as ZIP`);
+  cartToast(`Downloaded ${files.length} Toasted skills as ZIP`);
 }
 
 function shareCart() {
@@ -1162,6 +1194,7 @@ function openAgent(name) {
   if (!a) return;
   const isStub = a.type === 'stub';
   const rawUrl = a._file && !isStub ? RAW + '/' + a._file : null;
+  const skillUrl = !isStub ? a._skill_url : null;
   const ghUrl = a._file ? `https://github.com/${OWNER}/${REPO_NAME}/blob/main/${a._file}` : null;
   const envHtml = (a.requires_env || []).length
     ? a.requires_env.map(e => `<span class="env-tag">${esc(e)}</span>`).join('')
@@ -1199,12 +1232,13 @@ function openAgent(name) {
     <div class="desc">${esc(a.description)}</div>
     ${stubSection}
     ${rawUrl ? `<div class="section">
-      <h3>Get this agent</h3>
+      <h3>Get this capability</h3>
       <div class="install-block">
-        <div style="margin-bottom:8px;color:var(--text-muted)">Download the single .py file and drop it into your agents folder:</div>
-        <a href="${esc(rawUrl)}" target="_blank">${esc(a._file)}</a>
+        <div style="margin-bottom:8px;color:var(--text-muted)">The Toasted SKILL.md is the primary Grail record. The Python source remains available for rollback:</div>
+        ${skillUrl ? `<a href="${esc(skillUrl)}" target="_blank">${esc(a.skill_name || a.name)} / SKILL.md</a><br>` : ''}
+        <a href="${esc(rawUrl)}" target="_blank">rollback: ${esc(a._file)}</a>
       </div>
-      <button class="get-btn" onclick="download('${esc(a.name)}')">Download agent.py</button>
+      <button class="get-btn" onclick="download('${esc(a.name)}')">Download Toasted SKILL.md</button>
     </div>` : ''}
     <div class="section">
       <h3>Environment Variables</h3>
@@ -1251,13 +1285,16 @@ async function download(name) {
   const a = allAgents.find(x => x.name === name);
   if (!a?._file) return;
   try {
-    const res = await fetch(RAW + '/' + a._file + '?t=' + Date.now());
+    const sourceUrl = a._skill_url || (RAW + '/' + a._file);
+    const res = await fetch(sourceUrl + (sourceUrl.includes('?') ? '&' : '?') + 't=' + Date.now());
     if (!res.ok) throw new Error(res.status);
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = a._file.split('/').pop();
+    link.download = a._skill_url
+      ? `${a.skill_name || a.name.split('/').pop()}-SKILL.md`
+      : a._file.split('/').pop();
     document.body.appendChild(link);
     link.click();
     link.remove();

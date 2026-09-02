@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/matrix_arena_agent",
+  "agent_bytes": 14373,
   "agent_file": "matrix_arena_agent.py",
   "agent_sha256": "313121fc5f72c6664069d2b016bf5f3a4566bad3f7bbebe29b411b26cf02425a",
+  "backup_agent": "matrix_arena_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MatrixArenaAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/matrix-arena:ca1891ff4c5d31207dc2cca79ba59e7e1724a805f7b580923fca425436f051f4",
+  "rollback_agent_retained": true,
   "runtime_name": "MatrixArena",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 35191,
+  "skill_sha256": "a32818788d6dd92125079788916548f50cfff0ad991776c43e9df9275856e583",
   "tool_schema": {
     "properties": {
       "action": {

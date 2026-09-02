@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_send_notification_to_customer",
+  "agent_bytes": 10661,
   "agent_file": "ppt_exec_send_notification_to_customer_agent.py",
   "agent_sha256": "86cb0121d9c8ef46c7cc3705465e1b5fbe7ea8ddaa6ab4d86d62b7c031bde44c",
+  "backup_agent": "ppt_exec_send_notification_to_customer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecSendNotificationToCustomer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-send-notification-to-customer:867c8c6e5c368730c80786ff889a1d52d9ec7ac3be6800c7a51f02f2c5473c7a",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecSendNotificationToCustomer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24750,
+  "skill_sha256": "4ce8a1fa299e4b511f59958a8d1075e41be88d0479d079140fbd34f70aeb244b",
   "tool_schema": {
     "properties": {
       "operation": {

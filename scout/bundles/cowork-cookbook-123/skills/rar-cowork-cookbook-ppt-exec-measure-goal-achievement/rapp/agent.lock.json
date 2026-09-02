@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_measure_goal_achievement",
+  "agent_bytes": 10605,
   "agent_file": "ppt_exec_measure_goal_achievement_agent.py",
   "agent_sha256": "d600ef3d69199f2171ab58356d56faee7ce52cc1d1947c2fba402a1d0eeaf7fc",
+  "backup_agent": "ppt_exec_measure_goal_achievement_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMeasureGoalAchievement",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-measure-goal-achievement:7100f68ad963b014221c3aeeaeb6d77630b1b11ca00bdee2e531fa388431288f",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMeasureGoalAchievement",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24625,
+  "skill_sha256": "ab74986d8e958a7e1bce2494f48d1c65368f9fcb691fc35722b1a09fb3beebf0",
   "tool_schema": {
     "properties": {
       "operation": {

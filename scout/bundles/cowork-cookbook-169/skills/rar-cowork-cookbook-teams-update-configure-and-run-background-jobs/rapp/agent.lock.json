@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_configure_and_run_background_jobs",
+  "agent_bytes": 10767,
   "agent_file": "teams_update_configure_and_run_background_jobs_agent.py",
   "agent_sha256": "a7f97d8c66d1c9ee6d4c9833cd46d529602a95249e03447035a7beb7a3cdc3f7",
+  "backup_agent": "teams_update_configure_and_run_background_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConfigureAndRunBackgroundJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-configure-and-run-background-jobs:765dd216453b23835526d3c59c420df63d74f68d7bb8166c0d557a5fce2d8d96",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateConfigureAndRunBackgroundJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25014,
+  "skill_sha256": "240b0c5bc5efeb91957ce3fd5d1c8c90bbfab6dce9fd46978cfc22879083e9ba",
   "tool_schema": {
     "properties": {
       "operation": {

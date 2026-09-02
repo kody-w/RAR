@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_analyze_and_mitigate_risks",
+  "agent_bytes": 10671,
   "agent_file": "audit_analyze_and_mitigate_risks_agent.py",
   "agent_sha256": "f65cb0b73a62274eeb48f79123d3f0838796d0e6c83d9a1c997eb889e8ed81d6",
+  "backup_agent": "audit_analyze_and_mitigate_risks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAnalyzeAndMitigateRisks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-analyze-and-mitigate-risks:51f908b34ca430c00de23b748120e64b720d970d1910b69628de8b1dc561d4ff",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAnalyzeAndMitigateRisks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24764,
+  "skill_sha256": "ca7411a342fd699884e2f8b126ebf3d5a46573245d2536cc807dc22b58cc74d0",
   "tool_schema": {
     "properties": {
       "criteria": {

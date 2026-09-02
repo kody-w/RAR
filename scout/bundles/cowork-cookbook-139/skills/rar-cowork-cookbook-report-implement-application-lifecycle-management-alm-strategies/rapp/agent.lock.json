@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_implement_application_lifecycle_management_alm_strategies",
+  "agent_bytes": 10792,
   "agent_file": "report_implement_application_lifecycle_management_alm_strategies_agent.py",
   "agent_sha256": "3c49031ef6ed42b34b27217f94a62c6c32eb1d16854d9f834bb6bb0ef5000dd1",
+  "backup_agent": "report_implement_application_lifecycle_management_alm_strategies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportImplementApplicationLifecycleManagementAlmStrategies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-implement-application-lifecycle-management-alm-strategies:f3a605a3505c71bd022ea134e88970739e188b111a7dd8d63b02a19aa4ceabb0",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportImplementApplicationLifecycleManagementAlmStrategies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25277,
+  "skill_sha256": "3abd62bf9b5821b4e75ce2f9fcecc04bbacb8424a19cfa101d28e48e4a9d6ecf",
   "tool_schema": {
     "properties": {
       "audience": {

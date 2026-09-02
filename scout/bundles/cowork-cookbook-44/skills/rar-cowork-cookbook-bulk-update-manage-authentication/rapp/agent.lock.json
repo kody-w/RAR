@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_manage_authentication",
+  "agent_bytes": 10619,
   "agent_file": "bulk_update_manage_authentication_agent.py",
   "agent_sha256": "4f9d0ff585e0456c19e782d715153b11e894fa77e7bb7713319ea6ea0569fd9d",
+  "backup_agent": "bulk_update_manage_authentication_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateManageAuthentication",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-manage-authentication:875bd6270b260b5ff357cf91684881e3b6f5318309839212e2f83ebf602089e4",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateManageAuthentication",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24604,
+  "skill_sha256": "0bb0d0002a054117c11b58a1b6e88bc65ada533d43bb0687a7c8c856d725efe9",
   "tool_schema": {
     "properties": {
       "operation": {

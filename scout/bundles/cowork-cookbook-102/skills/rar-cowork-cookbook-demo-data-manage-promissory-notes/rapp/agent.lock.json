@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_manage_promissory_notes",
+  "agent_bytes": 10507,
   "agent_file": "demo_data_manage_promissory_notes_agent.py",
   "agent_sha256": "cd73c3e8df67b17a22c6d21afaa48b4bf79307dc7e89f60a5e98c59e92fcd313",
+  "backup_agent": "demo_data_manage_promissory_notes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataManagePromissoryNotes",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-manage-promissory-notes:67e2775051f7a446fb0bde78fc670c2547e1643552cda1866805984d8c2746d9",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataManagePromissoryNotes",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24466,
+  "skill_sha256": "23ba4a7761d97b30cacf831b0b2750c86f150aab6144af60ea2044f8a3989be6",
   "tool_schema": {
     "properties": {
       "operation": {

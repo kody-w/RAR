@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_cross_dock_received_goods_to_outbound_orders",
+  "agent_bytes": 10893,
   "agent_file": "dashboard_cross_dock_received_goods_to_outbound_orders_agent.py",
   "agent_sha256": "8dc9bac228f9389881c601b653a323ab341311184fb6acbda3b5361829ed2c76",
+  "backup_agent": "dashboard_cross_dock_received_goods_to_outbound_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardCrossDockReceivedGoodsToOutboundOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-cross-dock-received-goods-to-outbound-orders:1e337a891d981ca76aaec8d44607f486902b2c7e9c6e0d198865eee301c47a35",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardCrossDockReceivedGoodsToOutboundOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25407,
+  "skill_sha256": "1bf14be5b1352a97017e1ea2ef1c5194c4b1c7f3e864e5dc43b19e530269dbab",
   "tool_schema": {
     "properties": {
       "operation": {

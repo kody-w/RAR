@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_issue_requests_for_proposals",
+  "agent_bytes": 10740,
   "agent_file": "scheduled_brief_issue_requests_for_proposals_agent.py",
   "agent_sha256": "8d644ff18bbe71d00fda3123ed21306c632ba2a13ec1e60ff0918637ac09e78e",
+  "backup_agent": "scheduled_brief_issue_requests_for_proposals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefIssueRequestsForProposals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-issue-requests-for-proposals:bd22cf6354677696251210a90417f1c589202e2ff09271fa538055114a0b0cfb",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefIssueRequestsForProposals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24936,
+  "skill_sha256": "b17a697eae6de686717dc528ef31e34b73fffc17249bab2883c78a872d7118ff",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_enter_sales_orders",
+  "agent_bytes": 10537,
   "agent_file": "dashboard_enter_sales_orders_agent.py",
   "agent_sha256": "5314af7c06102cac4bb51e6b687364c5fff89cec07b4ceeb438cdfc4fc872f02",
+  "backup_agent": "dashboard_enter_sales_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardEnterSalesOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-enter-sales-orders:0c86c8a55d2757e0621f9370e8edef0256c8ca6482f951c89a13b3c2b6f453d0",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardEnterSalesOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24470,
+  "skill_sha256": "d431b56cf9ef42bd17513340e5deb22d97a5c945732c6625ed63f198b62db7c2",
   "tool_schema": {
     "properties": {
       "operation": {

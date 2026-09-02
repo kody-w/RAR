@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_measure_adoption_and_success",
+  "agent_bytes": 10706,
   "agent_file": "bulk_update_measure_adoption_and_success_agent.py",
   "agent_sha256": "5f4de8689040760a1a0a3e32f5febfc0bdec7bbdd3e71c520e52f385ad3deedf",
+  "backup_agent": "bulk_update_measure_adoption_and_success_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateMeasureAdoptionAndSuccess",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-measure-adoption-and-success:e4b3993bbc797b1d0312bb89e29b580720557d9df43ee1f95e555b85ffca45f7",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateMeasureAdoptionAndSuccess",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24864,
+  "skill_sha256": "bed969661d27995cd4479167c054797fcc11f5559741fb0d32301c2b762d5741",
   "tool_schema": {
     "properties": {
       "operation": {

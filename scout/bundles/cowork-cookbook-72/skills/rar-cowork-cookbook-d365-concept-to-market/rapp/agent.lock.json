@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_concept_to_market",
+  "agent_bytes": 10577,
   "agent_file": "d365_concept_to_market_agent.py",
   "agent_sha256": "2b60df5c23ae412bc6c9391d33e41cde6a3a01bd6c776b56d3789b61bdd85857",
+  "backup_agent": "d365_concept_to_market_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ConceptToMarket",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-concept-to-market:cb6d544dcb49dd10167acd92c13d31b43b100f8b43ea5dcd02c5147f67c7364c",
+  "rollback_agent_retained": true,
   "runtime_name": "D365ConceptToMarket",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24546,
+  "skill_sha256": "e5bbe92e48765860b0ddbde5a3602f68184b2c5c1061b3cfdef4be14b09e0809",
   "tool_schema": {
     "properties": {
       "operation": {

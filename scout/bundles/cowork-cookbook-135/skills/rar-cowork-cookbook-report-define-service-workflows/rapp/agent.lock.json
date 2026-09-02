@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_define_service_workflows",
+  "agent_bytes": 10357,
   "agent_file": "report_define_service_workflows_agent.py",
   "agent_sha256": "726cabbcbef9e7f7775d3c525e08191415955e7d3b3ded181088ba26455c5728",
+  "backup_agent": "report_define_service_workflows_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDefineServiceWorkflows",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-define-service-workflows:8d6e0c38d7c2507cfefdc2832794a53153047b5d2d2e270aa6a678122ab84f39",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDefineServiceWorkflows",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24190,
+  "skill_sha256": "6f612804cf85d9e178f4a75088a20d6f49f6f16451407336c0e0a7658ce8350c",
   "tool_schema": {
     "properties": {
       "audience": {

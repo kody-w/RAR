@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_scrap_defective_inventory",
+  "agent_bytes": 10671,
   "agent_file": "adaptive_card_scrap_defective_inventory_agent.py",
   "agent_sha256": "5823d16a1301b9cd052ba1045745207436ecce51b915ba0a3ca51355097eb90f",
+  "backup_agent": "adaptive_card_scrap_defective_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardScrapDefectiveInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-scrap-defective-inventory:fa5e6d3cac26c696f2d4e272ddd12bd5f5ef3e780916b1e7549ebf28ca22ad09",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardScrapDefectiveInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24764,
+  "skill_sha256": "fcb14601271c471892206e65d37842b297f280f0ba4dd2b8d2bfdd8815a1407e",
   "tool_schema": {
     "properties": {
       "operation": {

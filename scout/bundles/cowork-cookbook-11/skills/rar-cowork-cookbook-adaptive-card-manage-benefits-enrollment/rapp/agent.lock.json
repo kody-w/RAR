@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_manage_benefits_enrollment",
+  "agent_bytes": 10668,
   "agent_file": "adaptive_card_manage_benefits_enrollment_agent.py",
   "agent_sha256": "01b818cd530ae636f3747588af46f9a64a1234a6ec15fd77901237b352c0181a",
+  "backup_agent": "adaptive_card_manage_benefits_enrollment_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardManageBenefitsEnrollment",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-manage-benefits-enrollment:11dd586e2e38c2b6fe2044f2d2409f116d8543013a3fce16d78bc351f92a2953",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardManageBenefitsEnrollment",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24790,
+  "skill_sha256": "a4ca7cf35d353842721973782f79b476d975f10007dacde990c8783e3ab8d947",
   "tool_schema": {
     "properties": {
       "operation": {

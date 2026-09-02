@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_analyze_inventory_levels",
+  "agent_bytes": 10621,
   "agent_file": "ppt_exec_analyze_inventory_levels_agent.py",
   "agent_sha256": "86ff71eb286174a7f549b686342efd284cd0401592e95099c28aee24cf4106fd",
+  "backup_agent": "ppt_exec_analyze_inventory_levels_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAnalyzeInventoryLevels",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-analyze-inventory-levels:7460fdd7c986661d6b59859fda703468039874868266c569c1242ac8db512de4",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecAnalyzeInventoryLevels",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24625,
+  "skill_sha256": "2110374be3961543f86c52516c5a09891b1eb13f0110e8688a14eac008d839f4",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_revalue_currency",
+  "agent_bytes": 10540,
   "agent_file": "adaptive_card_revalue_currency_agent.py",
   "agent_sha256": "3232861e273fab5f290e377562f3a2e61479ae196e22a9ba72f361e2ff367369",
+  "backup_agent": "adaptive_card_revalue_currency_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardRevalueCurrency",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-revalue-currency:5879e593e5216be25b5cd7a08268865a71def2d168659ed21f94262a7cf5fec3",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardRevalueCurrency",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24462,
+  "skill_sha256": "c0ef31c7e1eb208ea38d887a1e1a677a979925760f01a841cab2cce8b93e7974",
   "tool_schema": {
     "properties": {
       "operation": {

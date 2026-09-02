@@ -1,13 +1,16 @@
 {
   "agent": "@kody-w/rapp_skill_bridge_agent",
+  "agent_bytes": 59185,
   "agent_file": "rapp_skill_bridge_agent.py",
   "agent_sha256": "32d08f268896a835b4c63b9484ad95f1b1234216e0274f92c8455a6e32f406a5",
+  "backup_agent": "rapp_skill_bridge_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappSkillBridge",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "azure.functions",
-    "utils.azure_file_storage",
-    "utils.storage_factory"
+    "brainstem:azure.functions",
+    "brainstem:utils.azure_file_storage",
+    "brainstem:utils.storage_factory"
   ],
   "manifest": {
     "author": "kody-w",
@@ -33,8 +36,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-skill-bridge:ef64a38b92056d2498fb2de0e0da9cad67f2be2b2aefdc8c160d2325695bbb91",
+  "rollback_agent_retained": true,
   "runtime_name": "RappSkillBridge",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 95869,
+  "skill_sha256": "1ef6dd7688c5a443a519e4efb233aaf107873521dd03f9bc4914a0c100243765",
   "tool_schema": {
     "properties": {
       "marketplace": {

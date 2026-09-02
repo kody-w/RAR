@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_case_to_resolution_manage_and_work_on_cases",
+  "agent_bytes": 10739,
   "agent_file": "d365_case_to_resolution_manage_and_work_on_cases_agent.py",
   "agent_sha256": "1c40e41758aa86cc75829693710807e9ea86323e38086b629f5f99aa7b1936cb",
+  "backup_agent": "d365_case_to_resolution_manage_and_work_on_cases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365CaseToResolutionManageAndWorkOnCases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-case-to-resolution-manage-and-work-on-cases:5f69d02aab9d2c26989cdf8899ec26830f88b512d5d23b0bb5a27faf609318d5",
+  "rollback_agent_retained": true,
   "runtime_name": "D365CaseToResolutionManageAndWorkOnCases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25024,
+  "skill_sha256": "9fbdd001c317907e9d29eedebfe12573111b8f8576445b4439e1e97242cad739",
   "tool_schema": {
     "properties": {
       "operation": {

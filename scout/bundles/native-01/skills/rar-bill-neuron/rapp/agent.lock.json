@@ -1,9 +1,12 @@
 {
   "agent": "@bill/neuron_agent",
+  "agent_bytes": 28386,
   "agent_file": "neuron_agent.py",
   "agent_sha256": "093ac6ab4dcd123fdf55998ddc8f1dc904be9bb4b27d7eb82e118099e353fcc1",
+  "backup_agent": "neuron_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "NeuronAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Bill Whalen",
@@ -30,8 +33,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@bill/neuron:4bd7866172078d539b02d2d509439d2b4a102beca13c85ebc8908c3433d53994",
+  "rollback_agent_retained": true,
   "runtime_name": "Neuron",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 48489,
+  "skill_sha256": "ddbeee5bbd2d52f592bcb10e137dc44d3d26454bdd0898c791a51fd9fa312d5b",
   "tool_schema": {
     "properties": {
       "category": {

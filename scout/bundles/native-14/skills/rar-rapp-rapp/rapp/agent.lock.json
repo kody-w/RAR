@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/rapp",
+  "agent_bytes": 176712,
   "agent_file": "rapp_agent.py",
   "agent_sha256": "137f52017fe47f6263fe54b15baa5cdd65d86f664debbe4e26cbbd835f4abedb",
+  "backup_agent": "rapp_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -31,8 +34,16 @@
     ],
     "version": "1.0.7"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/rapp:6cd8bff083eaa31ae870eae717908ad8d6769b4b711a2849a5d1e9de793d0759",
+  "rollback_agent_retained": true,
   "runtime_name": "RappAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 268696,
+  "skill_sha256": "caee0770a8227e58617d1e5d4ec75d9fb85ffd91c84990225a17283a3002925b",
   "tool_schema": {
     "properties": {
       "action": {

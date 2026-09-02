@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_process_customer_prepayments",
+  "agent_bytes": 10690,
   "agent_file": "teams_update_process_customer_prepayments_agent.py",
   "agent_sha256": "e391319fb958affbf2db055a33b55773fe6b90f4f5557a74e221ee0930fa9cf0",
+  "backup_agent": "teams_update_process_customer_prepayments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateProcessCustomerPrepayments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-process-customer-prepayments:3e19ecca0d47e64d50ce7ea78c167b19ed23f93e044c4f47b6cfbde34033bf71",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateProcessCustomerPrepayments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24806,
+  "skill_sha256": "d6ec5ff31a9aeb664aec6c0eef09bdba3cbe022d552695ce8262ba3e361b6b6a",
   "tool_schema": {
     "properties": {
       "operation": {

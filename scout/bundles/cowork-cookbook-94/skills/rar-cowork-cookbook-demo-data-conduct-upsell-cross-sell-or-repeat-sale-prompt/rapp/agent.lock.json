@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_conduct_upsell_cross_sell_or_repeat_sale_prompt",
+  "agent_bytes": 10825,
   "agent_file": "demo_data_conduct_upsell_cross_sell_or_repeat_sale_prompt_agent.py",
   "agent_sha256": "da3c2683d8884bd2cde937e47c355e36a520bc63ca3e62cea0e5d4c6005eba20",
+  "backup_agent": "demo_data_conduct_upsell_cross_sell_or_repeat_sale_prompt_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataConductUpsellCrossSellOrRepeatSalePrompt",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-conduct-upsell-cross-sell-or-repeat-sale-prompt:b922cc045ae13a218875c0caadd8ff7f5d73ebee5d80f0899afd5fbde4ede955",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataConductUpsellCrossSellOrRepeatSalePrompt",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25323,
+  "skill_sha256": "a84b8b3bcbc3b9aca2c568f6f1ca5e39c11a0fec1d24b8d6edb174880917f48a",
   "tool_schema": {
     "properties": {
       "operation": {

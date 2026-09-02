@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_develop_subcontracting_strategy",
+  "agent_bytes": 10441,
   "agent_file": "report_develop_subcontracting_strategy_agent.py",
   "agent_sha256": "756f277aaccab34abf1bcd4e426c642f0c58e4a806515f0fcbdbaaa7d1053ae8",
+  "backup_agent": "report_develop_subcontracting_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDevelopSubcontractingStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-develop-subcontracting-strategy:d7c8a326800abae039d7aec655e3d7f11a16536ab109b5ba13e3cfe10884f8f4",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDevelopSubcontractingStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24380,
+  "skill_sha256": "16953316f342b9a715f9866bd353fd9f56af5ce68174789fe8a20dfe34f3e0f9",
   "tool_schema": {
     "properties": {
       "audience": {

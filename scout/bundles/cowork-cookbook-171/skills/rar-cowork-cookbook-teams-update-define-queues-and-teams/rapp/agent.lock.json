@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_queues_and_teams",
+  "agent_bytes": 10653,
   "agent_file": "teams_update_define_queues_and_teams_agent.py",
   "agent_sha256": "3ab3f04dcb04a39c7466cc8ff5a20b6e3835085810b02a1f9f83d5173cf8e7ea",
+  "backup_agent": "teams_update_define_queues_and_teams_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineQueuesAndTeams",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-queues-and-teams:bf292def28b2e17dce51684b6c44c278078850becb991ef9993769093e7ad606",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineQueuesAndTeams",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24695,
+  "skill_sha256": "9ac58dac5d6b2aa42869d8fe7315b6332e4fcfb7aa79ea1f7f2050a90aaf5d49",
   "tool_schema": {
     "properties": {
       "operation": {

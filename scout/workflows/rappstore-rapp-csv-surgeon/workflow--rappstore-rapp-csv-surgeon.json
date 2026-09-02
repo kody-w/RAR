@@ -5,6 +5,13 @@
   "id": "68dd42944fa8fa8e",
   "lastExecutedAt": null,
   "name": "CSV Surgeon",
+  "rapp": {
+    "backup_agent": "csv_surgeon_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-rapp-csv-surgeon"
+  },
   "schedule": {
     "days": [
       1,

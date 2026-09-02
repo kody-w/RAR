@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_manage_the_initial_synchronization_of_data",
+  "agent_bytes": 10765,
   "agent_file": "demo_data_manage_the_initial_synchronization_of_data_agent.py",
   "agent_sha256": "1349d033a2c40d5244f96acff2c53c3300d7035d255cfe3e6a9f25a495eba6c8",
+  "backup_agent": "demo_data_manage_the_initial_synchronization_of_data_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataManageTheInitialSynchronizationOfData",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-manage-the-initial-synchronization-of-data:b2b285491ed4361245369a798065600ddb1eea2d441f076e90e2f595eb3cfadf",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataManageTheInitialSynchronizationOfData",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25125,
+  "skill_sha256": "7892d1ec687c822a95213d9d703602a1611c1825352d126356f34c88a8088edc",
   "tool_schema": {
     "properties": {
       "operation": {

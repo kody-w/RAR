@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/find_patterns_across_your_meetings",
+  "agent_bytes": 9724,
   "agent_file": "find_patterns_across_your_meetings_agent.py",
   "agent_sha256": "96763343ed4649f04c2a587872f170153f9059416d726ae3bc7d7aac1cd045f0",
+  "backup_agent": "find_patterns_across_your_meetings_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FindPatternsAcrossYourMeetings",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/find-patterns-across-your-meetings:3dc3f6a9c5dfbc72dab162160ebdc4518a72d4310d4dba25b15e8c0b76671b12",
+  "rollback_agent_retained": true,
   "runtime_name": "FindPatternsAcrossYourMeetings",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23088,
+  "skill_sha256": "1d2f987c4cba2265258c0e196bd52c6bb67269a1771c94a20ad04a15c686cce5",
   "tool_schema": {
     "properties": {
       "operation": {

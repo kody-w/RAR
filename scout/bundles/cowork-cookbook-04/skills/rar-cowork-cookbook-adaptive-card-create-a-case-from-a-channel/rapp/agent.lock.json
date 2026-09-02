@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_create_a_case_from_a_channel",
+  "agent_bytes": 10681,
   "agent_file": "adaptive_card_create_a_case_from_a_channel_agent.py",
   "agent_sha256": "f7dd38a3fffa82057652d5a2bcda3faf99b29e3acab9bbe4c135a02cb582301c",
+  "backup_agent": "adaptive_card_create_a_case_from_a_channel_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardCreateACaseFromAChannel",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-create-a-case-from-a-channel:047f2aa5a8f204f4b8415ae2554f5c89742e2bc6e5e944a66990bd21266ccc85",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardCreateACaseFromAChannel",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24869,
+  "skill_sha256": "08f8ed385d2c88c1914cf99971ba0045c79d2bbf00d8ea1d670bdfc0f89929fe",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_process_allocations",
+  "agent_bytes": 10750,
   "agent_file": "configure_process_allocations_agent.py",
   "agent_sha256": "0e808d8ba638c6d77f28177fea276c15fe48995371b9cc971522af16b8c91803",
+  "backup_agent": "configure_process_allocations_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureProcessAllocations",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-process-allocations:9322f723ee836503700f766b4491341cc66268e20ac46ab5dc7279b55d5ae227",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureProcessAllocations",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24689,
+  "skill_sha256": "b7260b60fd62aafa7b60f8643a0f4649bd1a817f7e9f715a1cc43a301879e53d",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_issue_purchase_orders",
+  "agent_bytes": 10610,
   "agent_file": "audit_issue_purchase_orders_agent.py",
   "agent_sha256": "1c3d4ed03c50af539e0a4a7bcbc27184240d0fe5b8f12c7877b3c90be8fcf48c",
+  "backup_agent": "audit_issue_purchase_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditIssuePurchaseOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-issue-purchase-orders:bed541bd7500af0e65ae56a789551b76f183dd74b17119430544e406a974e738",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditIssuePurchaseOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24593,
+  "skill_sha256": "e28a104f96ff12bef43b465a614e79eebeb2c7e6e21145ab979598d37dbb9ecc",
   "tool_schema": {
     "properties": {
       "criteria": {

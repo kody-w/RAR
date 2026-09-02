@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/scrollytelling_data",
+  "agent_bytes": 8883,
   "agent_file": "scrollytelling_data_agent.py",
   "agent_sha256": "0dc2134948992af0c75f37446ddf370d42a355e9e563a6988f0de3c719d35e18",
+  "backup_agent": "scrollytelling_data_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScrollytellingData",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "AndrewHessMSFT",
@@ -40,8 +43,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/scrollytelling-data:e542937b87c24bc9287f82721c32eae42af529014f0062352816f0af86ca0f62",
+  "rollback_agent_retained": true,
   "runtime_name": "ScrollytellingData",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21416,
+  "skill_sha256": "0b789b84fb737d6a66bb9b18a590e4eca56f46745d0ba725b92eda97bc9b4705",
   "tool_schema": {
     "properties": {
       "data_source": {

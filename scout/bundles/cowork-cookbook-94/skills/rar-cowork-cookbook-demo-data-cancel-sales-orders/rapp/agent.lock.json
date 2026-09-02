@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_cancel_sales_orders",
+  "agent_bytes": 10451,
   "agent_file": "demo_data_cancel_sales_orders_agent.py",
   "agent_sha256": "00558cc01d2d7976b8c46b8a17f4038587a5ab9704efc6d18dea3e8b08616d47",
+  "backup_agent": "demo_data_cancel_sales_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataCancelSalesOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-cancel-sales-orders:af866ea28585638a6ecdf9d50427b0ca53b5f0e1bb8af875f709ec209ec16e17",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataCancelSalesOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24346,
+  "skill_sha256": "47f40b8508818e32b041f507a763e3e141d5f673572666c32d0c4be969477f4d",
   "tool_schema": {
     "properties": {
       "operation": {

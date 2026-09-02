@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_configure_and_manage_file_storage",
+  "agent_bytes": 10751,
   "agent_file": "ppt_exec_configure_and_manage_file_storage_agent.py",
   "agent_sha256": "3945dee4813c7a4eb6fcd0554c421eb6895ef70d367e994b2e2d6170b2eb657b",
+  "backup_agent": "ppt_exec_configure_and_manage_file_storage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecConfigureAndManageFileStorage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-configure-and-manage-file-storage:718ce7176345fb74827a84ced269095c7812dfc4464aa188aa7eb8bf2e9dedf4",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecConfigureAndManageFileStorage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24975,
+  "skill_sha256": "018c1408b41d06608f27246d380f4a5b98a1e83e214ba810b2c4486d59c8e6a9",
   "tool_schema": {
     "properties": {
       "operation": {

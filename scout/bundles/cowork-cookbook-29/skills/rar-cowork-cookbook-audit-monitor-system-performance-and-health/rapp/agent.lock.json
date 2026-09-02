@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_monitor_system_performance_and_health",
+  "agent_bytes": 10859,
   "agent_file": "audit_monitor_system_performance_and_health_agent.py",
   "agent_sha256": "a3ebf51d86fce5607dddba7b1b8cbbb5fe45d0765ba59af0748e501065a826f1",
+  "backup_agent": "audit_monitor_system_performance_and_health_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditMonitorSystemPerformanceAndHealth",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-monitor-system-performance-and-health:5bcf98be05bcae2fc57ef14a57a2cca92334c9bfbedd86e1f5ed5cff06199924",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditMonitorSystemPerformanceAndHealth",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25162,
+  "skill_sha256": "c3a1f0814efb087f40041343aab9eebcf7bc977a57e20b188ce51e04a9872cca",
   "tool_schema": {
     "properties": {
       "criteria": {

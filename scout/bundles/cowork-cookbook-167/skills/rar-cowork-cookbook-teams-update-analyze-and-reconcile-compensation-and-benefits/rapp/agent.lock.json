@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits",
+  "agent_bytes": 10915,
   "agent_file": "teams_update_analyze_and_reconcile_compensation_and_benefits_agent.py",
   "agent_sha256": "4ad772f55a98a6f5ea356dbd30b2590b378f5643856f500961ea205cb768cf35",
+  "backup_agent": "teams_update_analyze_and_reconcile_compensation_and_benefits_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAnalyzeAndReconcileCompensationAndBenefits",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-analyze-and-reconcile-compensation-and-benefits:13c0114947143a5ff4a6ce818842b4199e564950f7ccddb344a594c5ce0efa18",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateAnalyzeAndReconcileCompensationAndBenefits",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25393,
+  "skill_sha256": "c940cf295a9f6cb5f2c1cdf58a6af677cc93d5decd973932e2f12c28b3ad2de5",
   "tool_schema": {
     "properties": {
       "operation": {

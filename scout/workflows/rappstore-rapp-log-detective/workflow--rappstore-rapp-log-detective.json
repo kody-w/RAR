@@ -5,6 +5,13 @@
   "id": "c9758ddbfe1bd4fd",
   "lastExecutedAt": null,
   "name": "Log Detective",
+  "rapp": {
+    "backup_agent": "log_detective_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-rapp-log-detective"
+  },
   "schedule": {
     "days": [
       1,

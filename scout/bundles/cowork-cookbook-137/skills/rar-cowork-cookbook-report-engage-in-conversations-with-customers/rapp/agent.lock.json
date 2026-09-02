@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_engage_in_conversations_with_customers",
+  "agent_bytes": 10533,
   "agent_file": "report_engage_in_conversations_with_customers_agent.py",
   "agent_sha256": "e3e00d706c0e802bf32a04de0d1b33a59972fc8f64464ce3d49fbaf5cce05f1d",
+  "backup_agent": "report_engage_in_conversations_with_customers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportEngageInConversationsWithCustomers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-engage-in-conversations-with-customers:eafdf6c42d6bd2f693c48b0532be283646e3846da8047f43ade8d146a1cb8778",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportEngageInConversationsWithCustomers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24644,
+  "skill_sha256": "d44bdba8940ffdce8ca191fe44cf3c693692aafcdd36ae7101a8c61739d69884",
   "tool_schema": {
     "properties": {
       "audience": {

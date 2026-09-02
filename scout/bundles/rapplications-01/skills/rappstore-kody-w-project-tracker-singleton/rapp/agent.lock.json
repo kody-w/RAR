@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/project-tracker-singleton",
+  "agent_bytes": 27588,
   "agent_file": "project_tracker_agent.py",
   "agent_sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
+  "backup_agent": "project_tracker_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProjectTrackerAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -33,8 +36,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/project-tracker-singleton:810a8573b9015c9e37359fafaac80e9c5776de64f2d06fb57d362fd35e043de3",
+  "rollback_agent_retained": true,
   "runtime_name": "ProjectTracker",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 45164,
+  "skill_sha256": "bf405a3d9e90b4489224880f4ced7492d0b713504f8007ece56ac85a01e882c1",
   "tool_schema": {
     "properties": {},
     "required": [],

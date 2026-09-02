@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_use_similar_cases_to_find_a_solution",
+  "agent_bytes": 10778,
   "agent_file": "bulk_update_use_similar_cases_to_find_a_solution_agent.py",
   "agent_sha256": "713c5500c6596fa07e1792f4899387f99eb14bf74a152e5794d9219a6c91c640",
+  "backup_agent": "bulk_update_use_similar_cases_to_find_a_solution_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateUseSimilarCasesToFindASolution",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-use-similar-cases-to-find-a-solution:726dbfc4c2200d6502ac894e3330552a5ec0b2f59617e1482086369f75a3bb8d",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateUseSimilarCasesToFindASolution",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25101,
+  "skill_sha256": "6f9d27e468b8e6667dff86a1a89c78f8cc98a389eb23ed11cd3d2b728caab7bf",
   "tool_schema": {
     "properties": {
       "operation": {

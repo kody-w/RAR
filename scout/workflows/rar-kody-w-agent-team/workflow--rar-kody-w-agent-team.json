@@ -5,6 +5,13 @@
   "id": "00bcce237e003b82",
   "lastExecutedAt": null,
   "name": "AgentTeam",
+  "rapp": {
+    "backup_agent": "agent_team_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-kody-w-agent-team"
+  },
   "schedule": {
     "days": [
       1,

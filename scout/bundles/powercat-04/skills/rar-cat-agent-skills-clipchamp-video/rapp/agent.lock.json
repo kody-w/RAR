@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/clipchamp_video",
+  "agent_bytes": 9325,
   "agent_file": "clipchamp_video_agent.py",
   "agent_sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8",
+  "backup_agent": "clipchamp_video_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ClipchampVideo",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Phi-Lay Nguyen",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/clipchamp-video:af0ebc2dfd21bf917db4b54f5efca53e6a7608640487ed8e2059eabdd13eb8ec",
+  "rollback_agent_retained": true,
   "runtime_name": "ClipchampVideo",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22688,
+  "skill_sha256": "ed0feecc38b333fd4197e9041dcd2e9137e8fa973d6a2ae98f569780166bfd8c",
   "tool_schema": {
     "properties": {
       "audience": {

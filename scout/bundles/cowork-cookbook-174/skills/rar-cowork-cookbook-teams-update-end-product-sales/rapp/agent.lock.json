@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_end_product_sales",
+  "agent_bytes": 10538,
   "agent_file": "teams_update_end_product_sales_agent.py",
   "agent_sha256": "d1269ab87c458bf068fb22887615f9058c71a5fc8d2e7fabd9c5bba01c7f11a4",
+  "backup_agent": "teams_update_end_product_sales_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateEndProductSales",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-end-product-sales:d28562c2c8bda0d5dbe8e669fed718537d94009a3615db9b6a545a4215e1f18a",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateEndProductSales",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24436,
+  "skill_sha256": "c358ffcedfd91a7263875fbc1b84abc977c8a23180ce1e5e8583c444715f1aab",
   "tool_schema": {
     "properties": {
       "operation": {

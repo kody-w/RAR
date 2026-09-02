@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_develop_procurement_catalogs",
+  "agent_bytes": 10590,
   "agent_file": "demo_data_develop_procurement_catalogs_agent.py",
   "agent_sha256": "3f83185db7af5c5b424f034b710593bcc670805703d6673e8de2cf1e4ca4dd10",
+  "backup_agent": "demo_data_develop_procurement_catalogs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDevelopProcurementCatalogs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-develop-procurement-catalogs:eb6585682b75d16d8026a5079f22c2377ecd9880074410214fc5015250b2ef06",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDevelopProcurementCatalogs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24644,
+  "skill_sha256": "ecb9661a8e2d9ae21f4431c8e21ccb0c1eea35fb65708783384aeadca2cab7f0",
   "tool_schema": {
     "properties": {
       "operation": {

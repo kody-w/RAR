@@ -3,10 +3,11 @@
   "id": "rapp__estate_outbound",
   "name": "EstateOutbound",
   "rar_name": "@rapp/estate_outbound",
-  "rappid": "rappid:@rapp/estate_outbound:8e43f6238aa88b2c43861e757846ed98757a0b19fac517c998cb8e7672813690",
-  "_migrated_from": "rappid:@rapp/estate_outbound:8956636fc00d4379642df53ef239d15160231d55a99fc96b1f80c57b4c543591",
+  "rappid": "rappid:@rapp/estate-outbound:487da63be5cb9b530abc7866f28748842003ff097f54b54ebabb879d733b0cb2",
+  "_migrated_from": "rappid:@rapp/estate_outbound:8e43f6238aa88b2c43861e757846ed98757a0b19fac517c998cb8e7672813690",
   "_migrated_from_all": [
-    "rappid:@rapp/estate_outbound:8956636fc00d4379642df53ef239d15160231d55a99fc96b1f80c57b4c543591"
+    "rappid:@rapp/estate_outbound:8956636fc00d4379642df53ef239d15160231d55a99fc96b1f80c57b4c543591",
+    "rappid:@rapp/estate_outbound:8e43f6238aa88b2c43861e757846ed98757a0b19fac517c998cb8e7672813690"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -31,9 +32,18 @@
   "sha256": "f4f677f2bba5a12b5967fc39a8d0bdb1afad7ad4de57d32d2df8a80dd2bf1b32",
   "has_card": true,
   "added_at": "2026-05-11T13:59:12-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-estate-outbound",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__estate_outbound.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-estate-outbound/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-estate-outbound/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.py",
   "api_card_url": null,

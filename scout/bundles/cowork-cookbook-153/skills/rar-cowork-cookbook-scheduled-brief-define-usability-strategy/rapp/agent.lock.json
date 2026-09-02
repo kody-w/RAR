@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_usability_strategy",
+  "agent_bytes": 10717,
   "agent_file": "scheduled_brief_define_usability_strategy_agent.py",
   "agent_sha256": "55798514956fd10243e380c865a15605d5817e240ed4d3fffc61531bb39cae42",
+  "backup_agent": "scheduled_brief_define_usability_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineUsabilityStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-usability-strategy:479db8545265450c625da120aa39e552bde5c1391b57e81d4f55df9a19b046c6",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineUsabilityStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24848,
+  "skill_sha256": "5194eef7fc660a6a76cfa50b33ccdd564ab2ef3e9c97ed1aa98a9b6618ea0c96",
   "tool_schema": {
     "properties": {
       "operation": {

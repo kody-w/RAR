@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_track_cash_position",
+  "agent_bytes": 10729,
   "agent_file": "configure_track_cash_position_agent.py",
   "agent_sha256": "ac00b968d6019016070d8e7c175cac94f7227916c2ae6d96338bd858eb88dea8",
+  "backup_agent": "configure_track_cash_position_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureTrackCashPosition",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-track-cash-position:3865150c542c9f28015c7cd3dc4262e1fe6bc50f535e4f71e886b8c76ae148da",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureTrackCashPosition",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24680,
+  "skill_sha256": "7a63dc805971cdf49d402f144dbdaa7c84955acea40ebfdeb6cfdb35ac43059a",
   "tool_schema": {
     "properties": {
       "operation": {

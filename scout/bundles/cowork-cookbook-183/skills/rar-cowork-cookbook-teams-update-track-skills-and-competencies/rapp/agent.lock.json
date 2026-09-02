@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_track_skills_and_competencies",
+  "agent_bytes": 10697,
   "agent_file": "teams_update_track_skills_and_competencies_agent.py",
   "agent_sha256": "026a0f8f79fd0e3bfbb18de63ecdc47bc7860bb25c71ec030b0b67083b5b1e64",
+  "backup_agent": "teams_update_track_skills_and_competencies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateTrackSkillsAndCompetencies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-track-skills-and-competencies:a82e5123e4123ca029beedea487809c420790f562cb15775675bf7c40fd9f288",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateTrackSkillsAndCompetencies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24837,
+  "skill_sha256": "24050d15af83c658db0e0714eee7b0e88ac39444b12bcaad995900935df7f9e2",
   "tool_schema": {
     "properties": {
       "operation": {

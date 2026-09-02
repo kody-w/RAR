@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_manage_opportunity_process",
+  "agent_bytes": 10652,
   "agent_file": "bulk_update_manage_opportunity_process_agent.py",
   "agent_sha256": "11c530647d46e95ddce250ee2ad825c123af4e438f5809c087a3b0d0635c37f5",
+  "backup_agent": "bulk_update_manage_opportunity_process_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateManageOpportunityProcess",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-manage-opportunity-process:741ea0c8ba29ef6218083476d43513819dd18cf2bfc626c78bb9c753ab998b8d",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateManageOpportunityProcess",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24724,
+  "skill_sha256": "25386288f8ae0ddebb22d16abd6986266538745702dcd31eac2aa5f9418e3095",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_maintain_knowledge_base_articles",
+  "agent_bytes": 10743,
   "agent_file": "dashboard_maintain_knowledge_base_articles_agent.py",
   "agent_sha256": "c4ff7ff7e7bea73800e5796703867e920e2b79a56d5ec50db063e2265c6dd9f5",
+  "backup_agent": "dashboard_maintain_knowledge_base_articles_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMaintainKnowledgeBaseArticles",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-maintain-knowledge-base-articles:2b5bd2118bc3ecf7611713c6602de013b6298c46f6b938f928e572156fa76d5d",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardMaintainKnowledgeBaseArticles",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24963,
+  "skill_sha256": "8c001819fb48e73b6b4508591f5deba15751dcaa39c121e689787b6eff659354",
   "tool_schema": {
     "properties": {
       "operation": {

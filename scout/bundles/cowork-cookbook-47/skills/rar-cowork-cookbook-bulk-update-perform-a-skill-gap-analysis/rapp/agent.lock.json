@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_perform_a_skill_gap_analysis",
+  "agent_bytes": 10669,
   "agent_file": "bulk_update_perform_a_skill_gap_analysis_agent.py",
   "agent_sha256": "5fb0b0d09268b33ea228fac612d7b4cc24185eebe87e249f701ef90d38548984",
+  "backup_agent": "bulk_update_perform_a_skill_gap_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdatePerformASkillGapAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-perform-a-skill-gap-analysis:1f698033442af243d75e318c6c339c69fafcd7bef822d2784743e3a0469494fd",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdatePerformASkillGapAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24816,
+  "skill_sha256": "948a2fec517b9d2d03b6b13a28568cf150914327783b5ba39eb88f8c28f78d8f",
   "tool_schema": {
     "properties": {
       "operation": {

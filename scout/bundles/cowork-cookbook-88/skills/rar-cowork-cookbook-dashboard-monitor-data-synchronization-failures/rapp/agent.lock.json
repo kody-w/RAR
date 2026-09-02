@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_monitor_data_synchronization_failures",
+  "agent_bytes": 10805,
   "agent_file": "dashboard_monitor_data_synchronization_failures_agent.py",
   "agent_sha256": "a4fe3f16022cc206e98f69a099e9579860e6051538ef6b3affcf045eee8a3598",
+  "backup_agent": "dashboard_monitor_data_synchronization_failures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMonitorDataSynchronizationFailures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-monitor-data-synchronization-failures:d9c96d2773ea28b9fa3c7f0bd30444ab80efc7accf4ae947b5c44f86ea71673f",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardMonitorDataSynchronizationFailures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25119,
+  "skill_sha256": "4688c4b9b16bc0b548bc40223fa550e42f9489b6421ac9cfb7d2408cffb73d1a",
   "tool_schema": {
     "properties": {
       "operation": {

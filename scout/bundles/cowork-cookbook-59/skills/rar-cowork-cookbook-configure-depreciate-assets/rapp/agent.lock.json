@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_depreciate_assets",
+  "agent_bytes": 10723,
   "agent_file": "configure_depreciate_assets_agent.py",
   "agent_sha256": "23eba458705bdabe144d5143f483f1501264411a198d273462a285af20f1f185",
+  "backup_agent": "configure_depreciate_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDepreciateAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-depreciate-assets:dcbdf46747d187ace9173a798a70932cfde976e8faa3be37aaf369d91bc7e191",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDepreciateAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24638,
+  "skill_sha256": "e4833b419c7311121842e3c29f16e8516d00e9cc80ed57714c3a893bdcfbe54b",
   "tool_schema": {
     "properties": {
       "operation": {

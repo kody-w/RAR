@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_monitor_asset_inventory",
+  "agent_bytes": 10684,
   "agent_file": "scheduled_brief_monitor_asset_inventory_agent.py",
   "agent_sha256": "efed03c2a467f10a1207527ea480ebfb44633d25ab7693a9be439b1449cca6f1",
+  "backup_agent": "scheduled_brief_monitor_asset_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefMonitorAssetInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-monitor-asset-inventory:6483a378c4f3c7d3df1d50eac1f4dfc8d145e944bbde39891c5944012ebb23f4",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefMonitorAssetInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24786,
+  "skill_sha256": "37e4ddaed660d4806290119f4f7473f2b989a68528e91f6316e182f9e1c91e1d",
   "tool_schema": {
     "properties": {
       "operation": {

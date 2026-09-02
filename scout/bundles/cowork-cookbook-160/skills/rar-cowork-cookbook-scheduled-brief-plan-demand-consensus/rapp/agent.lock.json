@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_plan_demand_consensus",
+  "agent_bytes": 10663,
   "agent_file": "scheduled_brief_plan_demand_consensus_agent.py",
   "agent_sha256": "b5e0e3827202f298a96cb8186d4303ea728f472520d38dcf1cd9a395ea1d9e6d",
+  "backup_agent": "scheduled_brief_plan_demand_consensus_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefPlanDemandConsensus",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-plan-demand-consensus:77d9d2a87c774f5f838bdcdb31df70e116ecd81bdf3fed8e5e9847afab8117aa",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefPlanDemandConsensus",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24725,
+  "skill_sha256": "0ed35310b1d43a85c822e2ecbf7f5a7a24593288b31543759134e9ee05b5ff15",
   "tool_schema": {
     "properties": {
       "operation": {

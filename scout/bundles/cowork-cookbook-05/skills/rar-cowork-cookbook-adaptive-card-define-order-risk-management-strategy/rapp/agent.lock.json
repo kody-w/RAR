@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_order_risk_management_strategy",
+  "agent_bytes": 10793,
   "agent_file": "adaptive_card_define_order_risk_management_strategy_agent.py",
   "agent_sha256": "c1a0b88ddbe91765abe6096c473d93ee29983fa68191a0c0e568ab2042836032",
+  "backup_agent": "adaptive_card_define_order_risk_management_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineOrderRiskManagementStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-define-order-risk-management-strategy:61641044632d48baec1f9321655579df3eba6034fba1ac528eba85c7b66cbf4d",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDefineOrderRiskManagementStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25151,
+  "skill_sha256": "ebe9735cce0322ea6739ca030f162db7b68ebfa95c95d4acfdbb5329a2671baa",
   "tool_schema": {
     "properties": {
       "operation": {

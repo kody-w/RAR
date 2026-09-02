@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_put_away_received_goods",
+  "agent_bytes": 10635,
   "agent_file": "teams_update_put_away_received_goods_agent.py",
   "agent_sha256": "d17deb55c876439c6c8512468239c7319dc9d202f714462755155b6f42fcf95e",
+  "backup_agent": "teams_update_put_away_received_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdatePutAwayReceivedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-put-away-received-goods:1ebfa60f9b7f1424f94b75361e85a8fe7384d5b2894b4dc5e3c0ac20399ee017",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdatePutAwayReceivedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24691,
+  "skill_sha256": "8c98b43effa1aca53bbbc8edd9b6f1799ead879ca5a1634eb35757ed6d239634",
   "tool_schema": {
     "properties": {
       "operation": {

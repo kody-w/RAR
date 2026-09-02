@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_manage_signatures_and_signing_limits",
+  "agent_bytes": 10986,
   "agent_file": "configure_manage_signatures_and_signing_limits_agent.py",
   "agent_sha256": "fdb9fc77fdc2a924a3384e113549f5c3164c5088ee1480cffae15c7559c04710",
+  "backup_agent": "configure_manage_signatures_and_signing_limits_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageSignaturesAndSigningLimits",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-manage-signatures-and-signing-limits:72649e420c6ff1a10f837885d12df5a5015bdd17030efcea62c75a578ff57448",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureManageSignaturesAndSigningLimits",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25301,
+  "skill_sha256": "ef6e14dd493d3ec43762a3555d2b9f517a5e2ffbb63b429b28956fdf24db5f88",
   "tool_schema": {
     "properties": {
       "operation": {

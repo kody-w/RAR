@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_customer_order_requirements",
+  "agent_bytes": 10775,
   "agent_file": "adaptive_card_define_customer_order_requirements_agent.py",
   "agent_sha256": "9c79ea68666e24f1b2c30c3a0e6a4d0b2aed8908e0c8161bc8afab115459a86c",
+  "backup_agent": "adaptive_card_define_customer_order_requirements_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineCustomerOrderRequirements",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-define-customer-order-requirements:a489263de985a008cbbda86173353f7c0f86966463bf5da53e362b0821897073",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDefineCustomerOrderRequirements",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25048,
+  "skill_sha256": "49574929167c824d02df14f57a43bac0c9c1dfb0cd4493691704a5da98a3193a",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_manage_service_accounts_and_certificates",
+  "agent_bytes": 10580,
   "agent_file": "report_manage_service_accounts_and_certificates_agent.py",
   "agent_sha256": "dd351038ba67c4643304794fe3d6ce2fd3114600e40c5c349a18e0d455402aa7",
+  "backup_agent": "report_manage_service_accounts_and_certificates_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportManageServiceAccountsAndCertificates",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-manage-service-accounts-and-certificates:e69ac05b48dd62148eb3ca0602599bfe4bcceaa78fdf5530bcdc7138dacfb4b8",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportManageServiceAccountsAndCertificates",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24756,
+  "skill_sha256": "17f57bea9c432fe6ba05458d47efff8d111bd58cfeb31da7649edd3af39e59d7",
   "tool_schema": {
     "properties": {
       "audience": {

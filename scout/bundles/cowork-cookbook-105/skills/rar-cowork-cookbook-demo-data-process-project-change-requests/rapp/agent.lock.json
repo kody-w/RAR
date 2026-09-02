@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_process_project_change_requests",
+  "agent_bytes": 10625,
   "agent_file": "demo_data_process_project_change_requests_agent.py",
   "agent_sha256": "f3e1034392d9c3b36c3ccd1b35fbd584be763deb5a5d8bf8b8da6c32162687e9",
+  "backup_agent": "demo_data_process_project_change_requests_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataProcessProjectChangeRequests",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-process-project-change-requests:112fd67dc0f48a7423e0d6484fd701924dc0194d8aed73e02fcecf065057fbe2",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataProcessProjectChangeRequests",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24728,
+  "skill_sha256": "d88a6b518184f69c78d5a97002fd63489638c877f86a0461758b335f33196e47",
   "tool_schema": {
     "properties": {
       "operation": {

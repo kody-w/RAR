@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/explainer_video",
+  "agent_bytes": 8988,
   "agent_file": "explainer_video_agent.py",
   "agent_sha256": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6",
+  "backup_agent": "explainer_video_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ExplainerVideo",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Damien Bird",
@@ -40,8 +43,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/explainer-video:e1293b619dfd5fccee2d7906766817a4b7710e86555e39a9337084221465cf17",
+  "rollback_agent_retained": true,
   "runtime_name": "ExplainerVideo",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21712,
+  "skill_sha256": "ea496bd4b85131e63ddd3e598962b681469dd3a4ccd1ab1d0b2ab527023c3918",
   "tool_schema": {
     "properties": {
       "audience": {

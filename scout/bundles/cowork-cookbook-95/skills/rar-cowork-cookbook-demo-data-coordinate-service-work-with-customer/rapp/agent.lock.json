@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_coordinate_service_work_with_customer",
+  "agent_bytes": 10699,
   "agent_file": "demo_data_coordinate_service_work_with_customer_agent.py",
   "agent_sha256": "9d04af5b6068c589b3265a0141d9cd8aa75d04aba79cf3ce82ef3976b05e6a36",
+  "backup_agent": "demo_data_coordinate_service_work_with_customer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataCoordinateServiceWorkWithCustomer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-coordinate-service-work-with-customer:563b783efb10deefe637bbc0902a59a2fe338cc7d470f303ae61451976a19cf6",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataCoordinateServiceWorkWithCustomer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24953,
+  "skill_sha256": "8162725cc313446200a92d94f0dd8af4b4011cdf336040b09f51d8e483b55868",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_order_risk_management_strategy",
+  "agent_bytes": 10783,
   "agent_file": "dashboard_define_order_risk_management_strategy_agent.py",
   "agent_sha256": "343415bf341d3344c32a39499ac9806700cf4fd7825d340c8802d89a8712b4e9",
+  "backup_agent": "dashboard_define_order_risk_management_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefineOrderRiskManagementStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-define-order-risk-management-strategy:e33e43f1c4c9a07af285b5da150c9f7894cd764eb2a4914bd6b0af1b262ea56c",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDefineOrderRiskManagementStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25125,
+  "skill_sha256": "755efdb20edcd37e109c401805752683c78a5362920977fe8aab35583a04ab76",
   "tool_schema": {
     "properties": {
       "operation": {

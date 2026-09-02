@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_retire_knowledge_base_articles",
+  "agent_bytes": 10711,
   "agent_file": "bulk_update_retire_knowledge_base_articles_agent.py",
   "agent_sha256": "9372c88b18d705f592bb5f71ad1acffce360903786eedc90d037c17d77e8b8f1",
+  "backup_agent": "bulk_update_retire_knowledge_base_articles_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateRetireKnowledgeBaseArticles",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-retire-knowledge-base-articles:e8536cde3ffe6e708a523637c89fbe042405e17a6e204f91bcc9e2b4839b06a0",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateRetireKnowledgeBaseArticles",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24884,
+  "skill_sha256": "7f1e82fd526879dec1100db1da954f3c655aa642cd307917beb5482d73029f62",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_establish_banking_relationships",
+  "agent_bytes": 10720,
   "agent_file": "dashboard_establish_banking_relationships_agent.py",
   "agent_sha256": "cce0ea496fcc6f22f0fec574cd3b9536b6b709a3904f9816e4a02e571a6a7eee",
+  "backup_agent": "dashboard_establish_banking_relationships_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardEstablishBankingRelationships",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-establish-banking-relationships:223e0ba82e38b45b1165b9171c5ec2deb8d0b2e0ae02ed010da9943adead34c3",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardEstablishBankingRelationships",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24915,
+  "skill_sha256": "8e2daae73d182663d75158afd1cd54b41270180f0fa79b6ac414ae94ead3b148",
   "tool_schema": {
     "properties": {
       "operation": {

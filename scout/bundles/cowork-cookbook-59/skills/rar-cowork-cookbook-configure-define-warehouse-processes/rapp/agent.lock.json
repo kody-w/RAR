@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_define_warehouse_processes",
+  "agent_bytes": 10852,
   "agent_file": "configure_define_warehouse_processes_agent.py",
   "agent_sha256": "fb25b106b5db5f04494a18598ec9781f3b29882ae1e33b2ee78092e20f7a4196",
+  "backup_agent": "configure_define_warehouse_processes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDefineWarehouseProcesses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-define-warehouse-processes:90a490c2ace575cfd205d991d491e9108f53f919074307e87d62ec52e009b519",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDefineWarehouseProcesses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24944,
+  "skill_sha256": "d128a3ac74b9422c890de26bc24f52a346656c2f7e44c29c6cb53bf06da4be50",
   "tool_schema": {
     "properties": {
       "operation": {

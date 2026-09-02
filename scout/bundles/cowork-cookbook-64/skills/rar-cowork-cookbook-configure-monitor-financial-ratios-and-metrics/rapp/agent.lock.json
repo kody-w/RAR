@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_monitor_financial_ratios_and_metrics",
+  "agent_bytes": 10962,
   "agent_file": "configure_monitor_financial_ratios_and_metrics_agent.py",
   "agent_sha256": "4ea116c6c9a26f70f30ace9c311a27d814170894e5611dd75874a3f7ace9abc0",
+  "backup_agent": "configure_monitor_financial_ratios_and_metrics_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureMonitorFinancialRatiosAndMetrics",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-monitor-financial-ratios-and-metrics:feabc8bfd59c2b25916272b6cd22043b9000ef54e4fc55fc933eb475285aeb5d",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureMonitorFinancialRatiosAndMetrics",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25272,
+  "skill_sha256": "24d3bf31ce705fb56e46fc47ea7226c152e3296da0bd7fc909bfc722e3cb9592",
   "tool_schema": {
     "properties": {
       "operation": {

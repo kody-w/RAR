@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/thoughtbox",
+  "agent_bytes": 11272,
   "agent_file": "thoughtbox_agent.py",
   "agent_sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b",
+  "backup_agent": "thoughtbox_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ThoughtboxAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "agent": "singleton/thoughtbox_agent.py",
@@ -23,8 +26,16 @@
     "ui": "ui/index.html",
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/thoughtbox:bd0ae282d790619539ddd1e56cf2d37c1453dd7a83bf0c2d929a3701ad9d7fe9",
+  "rollback_agent_retained": true,
   "runtime_name": "Thoughtbox",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22346,
+  "skill_sha256": "844e8198fba22cbb9747899ffdc588bddd60d1df786f9afe2509b669935c6cde",
   "tool_schema": {
     "properties": {},
     "required": [],

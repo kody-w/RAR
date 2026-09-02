@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_service_truck_inventory",
+  "agent_bytes": 10707,
   "agent_file": "dashboard_manage_service_truck_inventory_agent.py",
   "agent_sha256": "87a1fc6dc850ac840fa891b988f370569167fb3dd101c1ecac0a33b839823003",
+  "backup_agent": "dashboard_manage_service_truck_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageServiceTruckInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-service-truck-inventory:5016bbdabc74279c6946d43577a5030645c5461ddb0257305ee03ae012824aa6",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageServiceTruckInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24873,
+  "skill_sha256": "cccdcc4ff38030c2bc40e4d900b6daf6b93d23a5de37f0febd19baacd4ffb168",
   "tool_schema": {
     "properties": {
       "operation": {

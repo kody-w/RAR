@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_identify_business_continuity_risks",
+  "agent_bytes": 10503,
   "agent_file": "report_identify_business_continuity_risks_agent.py",
   "agent_sha256": "12190d3db1f8c1038dbb7a770ca06f89d20c3a1701f530eff289403cab575e5f",
+  "backup_agent": "report_identify_business_continuity_risks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportIdentifyBusinessContinuityRisks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-identify-business-continuity-risks:3379373c973eccd3bd33d61bc1bf3d9e8909261a589c76d77fb8dc2b402452ca",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportIdentifyBusinessContinuityRisks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24517,
+  "skill_sha256": "79807820d812e977ca4408ed5c84c6f47cfc9d33a244f0f7b834ac32f5ab347b",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_develop_procurement_policies",
+  "agent_bytes": 10660,
   "agent_file": "ppt_exec_develop_procurement_policies_agent.py",
   "agent_sha256": "2d46fe53edfe9c15518c14ea7878ecb87f3620d6e7f4d7368e4f924aae201d4f",
+  "backup_agent": "ppt_exec_develop_procurement_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDevelopProcurementPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-develop-procurement-policies:73682b89bc48fcd4edde0348447bbf5a3612a10b77e2f8ffdf2724ea9ed81bda",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDevelopProcurementPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24717,
+  "skill_sha256": "78e44e09316c590c4895e6034df16204bf24c120dcd34e7c2af2ed1b41a22b4f",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@howardh/recon_agent",
+  "agent_bytes": 33005,
   "agent_file": "recon_agent.py",
   "agent_sha256": "7c13e82c07ce373aba2729caccfeab00ae44e5c80ef46c8de34e4798361f6f06",
+  "backup_agent": "recon_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReconAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Howard Hoy",
@@ -29,8 +32,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@howardh/recon:021e59962545c90f24154f2e0ce7cf6868f02dc7313b39fa469d3617db51f320",
+  "rollback_agent_retained": true,
   "runtime_name": "Recon",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 53224,
+  "skill_sha256": "1afad117a6dc942f74a886126c011182dc191778ffa7e1ca2888dfa8ef70c088",
   "tool_schema": {
     "properties": {
       "action": {

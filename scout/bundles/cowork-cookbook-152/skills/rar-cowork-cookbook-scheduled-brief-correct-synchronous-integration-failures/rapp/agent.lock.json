@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_correct_synchronous_integration_failures",
+  "agent_bytes": 10931,
   "agent_file": "scheduled_brief_correct_synchronous_integration_failures_agent.py",
   "agent_sha256": "b9b47c05691108221d633007ac058e8bd4400f7cf1df61f72c5aea403b6648e2",
+  "backup_agent": "scheduled_brief_correct_synchronous_integration_failures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefCorrectSynchronousIntegrationFailures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-correct-synchronous-integration-failures:e84a2cc19591f47c21e59f29ea86ba7a18c2d321e74be02d582ba08cc6fd0e7c",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefCorrectSynchronousIntegrationFailures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25375,
+  "skill_sha256": "2cc5a7a29ff6a5b3bfe1d4178e9a502cb4195c40d73674c027ef1d018dcac4dc",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_record_cost_accounting_transactions",
+  "agent_bytes": 10804,
   "agent_file": "audit_record_cost_accounting_transactions_agent.py",
   "agent_sha256": "7ef14ed8ee7a5fb674295989c2dc69864061e8ec62e89077a87e42e19d861d16",
+  "backup_agent": "audit_record_cost_accounting_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditRecordCostAccountingTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-record-cost-accounting-transactions:0f0b0664c315c637bdac5feb9bdd6de171474c014020577cd171f2ceb03c1771",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditRecordCostAccountingTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25032,
+  "skill_sha256": "aaf8e813aa1c905b977107505cb9b6d83fb1f749b091557889f869cca48bc914",
   "tool_schema": {
     "properties": {
       "criteria": {

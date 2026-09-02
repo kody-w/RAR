@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_develop_program_charter",
+  "agent_bytes": 10594,
   "agent_file": "ppt_exec_develop_program_charter_agent.py",
   "agent_sha256": "cb0b12992260c3fd396b51f84c0c246c38e42166065a8822299dcb72146b0d7b",
+  "backup_agent": "ppt_exec_develop_program_charter_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDevelopProgramCharter",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-develop-program-charter:3a4eb7157c3603cf4fb1b23f9a89b1cbbfd6d01bc8660e7a6469dd50f71d8a52",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDevelopProgramCharter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24572,
+  "skill_sha256": "4bb5d991b198343165b1ef9a0d87abb771ac02a92cf9e984e8d5631c3c0bb31b",
   "tool_schema": {
     "properties": {
       "operation": {

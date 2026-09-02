@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/campaign_narrative_architecture_board",
+  "agent_bytes": 10561,
   "agent_file": "campaign_narrative_architecture_board_agent.py",
   "agent_sha256": "cd11bbd026ebac6308b3cea4564b341615b46400720aedb6c5afbca2c29a7c6c",
+  "backup_agent": "campaign_narrative_architecture_board_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CampaignNarrativeArchitectureBoard",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -72,8 +75,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/campaign-narrative-architecture-board:81828cc3960ce0849496ce617da39d5b3dd46eb37bcf7e63edaa76cb318594e1",
+  "rollback_agent_retained": true,
   "runtime_name": "CampaignNarrativeArchitectureBoard",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24732,
+  "skill_sha256": "1158b9a6f20b6e36ebadedf57dc9fa146d3588e024e3381a370215345cf246b7",
   "tool_schema": {
     "properties": {
       "operation": {

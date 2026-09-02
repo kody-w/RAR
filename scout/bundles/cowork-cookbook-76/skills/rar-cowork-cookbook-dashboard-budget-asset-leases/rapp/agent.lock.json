@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_budget_asset_leases",
+  "agent_bytes": 10575,
   "agent_file": "dashboard_budget_asset_leases_agent.py",
   "agent_sha256": "bb671a0e8750aaed17ef224393aab35c2938fe6c76512d62373809484c63f9f6",
+  "backup_agent": "dashboard_budget_asset_leases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardBudgetAssetLeases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-budget-asset-leases:59c109f868b8b129c5753183d99fe2031f00f49a5f98b2abb4abd36c3096bea8",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardBudgetAssetLeases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24552,
+  "skill_sha256": "8f562cc837bd9dad520191c008606da538da9d8b75bb678bb9eece9eda8f8f60",
   "tool_schema": {
     "properties": {
       "operation": {

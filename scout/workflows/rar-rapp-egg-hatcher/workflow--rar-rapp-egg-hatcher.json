@@ -5,6 +5,13 @@
   "id": "a2744b9cec26dc34",
   "lastExecutedAt": null,
   "name": "EggHatcher",
+  "rapp": {
+    "backup_agent": "egg_hatcher_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-rapp-egg-hatcher"
+  },
   "schedule": {
     "days": [
       1,

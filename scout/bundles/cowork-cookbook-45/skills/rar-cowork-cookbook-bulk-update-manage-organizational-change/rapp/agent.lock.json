@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_manage_organizational_change",
+  "agent_bytes": 10693,
   "agent_file": "bulk_update_manage_organizational_change_agent.py",
   "agent_sha256": "1b6167ada46eb807421bda8b0d7d434c838c1a9badc43366f98aee8bdcc4c880",
+  "backup_agent": "bulk_update_manage_organizational_change_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateManageOrganizationalChange",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-manage-organizational-change:8fb8f35c220dda96ba5229b17e17636233ecd8392605699f17c4a0f0e0db7791",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateManageOrganizationalChange",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24827,
+  "skill_sha256": "7d402e8c1a6c58ea80bcc900adfbe4ee1ccfa3b4c5ac993e3e743b45561bcab7",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_manage_product_pricing",
+  "agent_bytes": 10321,
   "agent_file": "report_manage_product_pricing_agent.py",
   "agent_sha256": "9585da349888a15228ea33495825659b382b9a93bb393d5c567df9e7643ef1e9",
+  "backup_agent": "report_manage_product_pricing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportManageProductPricing",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-manage-product-pricing:17f2841f2f043c80f3d315e5afe715f83ede7dc709c1ba3b9fab6515d8aa77b7",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportManageProductPricing",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24102,
+  "skill_sha256": "2f159b29e43f094a0fdd5b2cc64e33e15e96c0c3aea05d44342bc45c079e822a",
   "tool_schema": {
     "properties": {
       "audience": {

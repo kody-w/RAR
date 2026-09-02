@@ -3,10 +3,11 @@
   "id": "bill__neuron_agent",
   "name": "Neuron",
   "rar_name": "@bill/neuron_agent",
-  "rappid": "rappid:@bill/neuron_agent:3ffdf670d411cc6307351926dfab8d0fbb7f66314cadbf87b073a488e4f2acf3",
-  "_migrated_from": "rappid:@bill/neuron_agent:8a3c88f21fc23793c519b959aaf1b9e72f95bc38355003fec85304fb83ac8ea5",
+  "rappid": "rappid:@bill/neuron:4bd7866172078d539b02d2d509439d2b4a102beca13c85ebc8908c3433d53994",
+  "_migrated_from": "rappid:@bill/neuron_agent:3ffdf670d411cc6307351926dfab8d0fbb7f66314cadbf87b073a488e4f2acf3",
   "_migrated_from_all": [
-    "rappid:@bill/neuron_agent:8a3c88f21fc23793c519b959aaf1b9e72f95bc38355003fec85304fb83ac8ea5"
+    "rappid:@bill/neuron_agent:8a3c88f21fc23793c519b959aaf1b9e72f95bc38355003fec85304fb83ac8ea5",
+    "rappid:@bill/neuron_agent:3ffdf670d411cc6307351926dfab8d0fbb7f66314cadbf87b073a488e4f2acf3"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -35,9 +36,18 @@
   "sha256": "093ac6ab4dcd123fdf55998ddc8f1dc904be9bb4b27d7eb82e118099e353fcc1",
   "has_card": true,
   "added_at": "2026-05-12T13:37:05-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-bill-neuron",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/bill__neuron_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-bill-neuron/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-bill-neuron/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/bill__neuron_agent.py",
   "api_card_url": null,

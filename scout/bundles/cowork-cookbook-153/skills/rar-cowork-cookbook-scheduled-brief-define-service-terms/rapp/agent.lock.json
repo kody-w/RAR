@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_service_terms",
+  "agent_bytes": 10645,
   "agent_file": "scheduled_brief_define_service_terms_agent.py",
   "agent_sha256": "a0409bcc96518293e36a8dec10f286fbcab75ba1b2fa70abe47cf4149488b7a9",
+  "backup_agent": "scheduled_brief_define_service_terms_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineServiceTerms",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-service-terms:ecc6f5123de04245f8debb5344d380b43372b9acfc4511533a426cd10da2af69",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineServiceTerms",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24686,
+  "skill_sha256": "4795822e444be6ed3ea9e088578e3e213b503a9f65590c8c605278ddafd4c1b1",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/browser_uat_analyst",
+  "agent_bytes": 9656,
   "agent_file": "browser_uat_analyst_agent.py",
   "agent_sha256": "7510a8a0f67113bdb0bafd437d5471c7c655e0420db4c4bcd2672e3678e6f387",
+  "backup_agent": "browser_uat_analyst_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BrowserUatAnalyst",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Al Macey",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/browser-uat-analyst:e3fa18a06a71b979a57242ffa7c183b94ccfc63239e32c6af8b3534f39941920",
+  "rollback_agent_retained": true,
   "runtime_name": "BrowserUatAnalyst",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23391,
+  "skill_sha256": "5a1b385fd1d80d09b5208ef5b021f36c3fd7764b335d057576daf75e2f3585e3",
   "tool_schema": {
     "properties": {
       "criteria": {

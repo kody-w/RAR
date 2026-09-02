@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_implement_project_governance_approach",
+  "agent_bytes": 10833,
   "agent_file": "adaptive_card_implement_project_governance_approach_agent.py",
   "agent_sha256": "aadca1df9e62ed204be9cb0922dc31b06bde275d71e479a3e607b34222b5c243",
+  "backup_agent": "adaptive_card_implement_project_governance_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardImplementProjectGovernanceApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-implement-project-governance-approach:867aa861ec92bfa446acdd353efbdcc241d2309b921815f45ade62a4f282bedd",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardImplementProjectGovernanceApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25159,
+  "skill_sha256": "ce27e4a79cc30c06a12e1482f8fe1fac2a38e23c455abbe222fd6b3adeef7b1d",
   "tool_schema": {
     "properties": {
       "operation": {

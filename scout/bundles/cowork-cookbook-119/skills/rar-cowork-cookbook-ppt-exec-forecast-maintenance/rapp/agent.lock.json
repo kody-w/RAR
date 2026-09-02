@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_forecast_maintenance",
+  "agent_bytes": 10573,
   "agent_file": "ppt_exec_forecast_maintenance_agent.py",
   "agent_sha256": "f350fceabbecdce62aa79d01265fc3b469f3fa09abb97c058ef3bb102360525e",
+  "backup_agent": "ppt_exec_forecast_maintenance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecForecastMaintenance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-forecast-maintenance:64c629434d218132ce2e2e083b686f97ad9ec9fb4dab339bd83d983460152aba",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecForecastMaintenance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24467,
+  "skill_sha256": "b7cc17b972479b758f2215073ac1cc0437f17ae277a5c8b882d39341788a3bea",
   "tool_schema": {
     "properties": {
       "operation": {

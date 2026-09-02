@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_calculate_sales_commissions",
+  "agent_bytes": 10728,
   "agent_file": "scheduled_brief_calculate_sales_commissions_agent.py",
   "agent_sha256": "6acb3e480cc6f56c01fd7c49738797ca62f3e5d82e1d4c57a3cd44c1277a029a",
+  "backup_agent": "scheduled_brief_calculate_sales_commissions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefCalculateSalesCommissions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-calculate-sales-commissions:b8151a7d540c60fb4317d235b8b261315e64b0fd4e9ff62d17200115645a3488",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefCalculateSalesCommissions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24905,
+  "skill_sha256": "8e6b44306a55dc1e677a917492f8f7f23cfac518db4991223f29ae1ed2ed67ff",
   "tool_schema": {
     "properties": {
       "operation": {

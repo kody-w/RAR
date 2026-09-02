@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/swarm_factory_agent",
+  "agent_bytes": 41393,
   "agent_file": "swarm_factory_agent.py",
   "agent_sha256": "cfe3a0cffffb9d6395bf3d9377239e24500d3f7ab23c00b059da62f16a529ae0",
+  "backup_agent": "swarm_factory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SwarmFactoryAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -31,8 +34,16 @@
     ],
     "version": "0.3.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/swarm-factory:b9b1fe9d690d0df5eb2b9e1f2a7c4eeaacd48d196d2be33605a882ab7c05c1bc",
+  "rollback_agent_retained": true,
   "runtime_name": "SwarmFactory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 86005,
+  "skill_sha256": "84f9952f89f5f1780b964213a53759d48b1c6a77d2602eb4528451f0d12fd5c1",
   "tool_schema": {
     "properties": {
       "action": {

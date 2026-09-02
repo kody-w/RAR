@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_report_an_injury_or_illness",
+  "agent_bytes": 10670,
   "agent_file": "adaptive_card_report_an_injury_or_illness_agent.py",
   "agent_sha256": "a21b01ffceb13a2197f99807ba6a7c96f2ddec6ffe8ed0b97f9c85326d13b106",
+  "backup_agent": "adaptive_card_report_an_injury_or_illness_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardReportAnInjuryOrIllness",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-report-an-injury-or-illness:f0f0ad90ebbea5765696221a5aecb302b4bf93fc006062044bf5d1fb92a058ff",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardReportAnInjuryOrIllness",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24827,
+  "skill_sha256": "a11420e5e3c14a5e73de47af4156e1ea5c2d0b55f46c7f6069f41dd6a3fd7994",
   "tool_schema": {
     "properties": {
       "operation": {

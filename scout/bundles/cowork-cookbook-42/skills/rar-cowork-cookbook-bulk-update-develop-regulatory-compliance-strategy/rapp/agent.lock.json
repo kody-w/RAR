@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_develop_regulatory_compliance_strategy",
+  "agent_bytes": 10813,
   "agent_file": "bulk_update_develop_regulatory_compliance_strategy_agent.py",
   "agent_sha256": "7292f4e0d5eca70924270f681cfc8c7af0649235845af1f69a86997513188a93",
+  "backup_agent": "bulk_update_develop_regulatory_compliance_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDevelopRegulatoryComplianceStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-develop-regulatory-compliance-strategy:2a2050db50465771e0ccf9da282b49e1cfd567d15c76c98caaa902d3757534c7",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDevelopRegulatoryComplianceStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25149,
+  "skill_sha256": "225b6807e84e7681244f5e55d40648738dc4c2d7fd245e5a76f0ead50d4edb54",
   "tool_schema": {
     "properties": {
       "operation": {

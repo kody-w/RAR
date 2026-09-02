@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_monitor_budget_to_actuals",
+  "agent_bytes": 10657,
   "agent_file": "dashboard_monitor_budget_to_actuals_agent.py",
   "agent_sha256": "f6f64c9ef778b4d05aab6cfdeb005abdf6086d7cbef806024b99b15327aa43cb",
+  "backup_agent": "dashboard_monitor_budget_to_actuals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMonitorBudgetToActuals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-monitor-budget-to-actuals:9f9660e97b27d2bb80ca3af5420d45c2ee8ad92ff986cdcaab8273a1df45805a",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardMonitorBudgetToActuals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24758,
+  "skill_sha256": "d653f472cd71a9ed3b8de6576631ff85103990e4fbdab7f3b4ea3d0619c8182e",
   "tool_schema": {
     "properties": {
       "operation": {

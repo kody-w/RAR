@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_analyze_and_segment_customers_and_markets",
+  "agent_bytes": 10749,
   "agent_file": "demo_data_analyze_and_segment_customers_and_markets_agent.py",
   "agent_sha256": "19fdd6e2e6305233b7ed5b93f036ae2f51781d157a3c94c7ae3914b6f0070e9b",
+  "backup_agent": "demo_data_analyze_and_segment_customers_and_markets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataAnalyzeAndSegmentCustomersAndMarkets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-analyze-and-segment-customers-and-markets:3a9180584237877ee96c1a428f1da2756c0d5f580e8d52fbd59161900874a473",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataAnalyzeAndSegmentCustomersAndMarkets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25089,
+  "skill_sha256": "fff912acda6527e78a9e965ef0c8c90db6f17fcb0daca7f037cbdfe541628d18",
   "tool_schema": {
     "properties": {
       "operation": {

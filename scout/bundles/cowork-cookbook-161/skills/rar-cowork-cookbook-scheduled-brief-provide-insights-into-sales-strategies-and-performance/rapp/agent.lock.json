@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_provide_insights_into_sales_strategies_and_performance",
+  "agent_bytes": 11060,
   "agent_file": "scheduled_brief_provide_insights_into_sales_strategies_and_performance_agent.py",
   "agent_sha256": "c7125e2615b6bc1474dc44758662587b7fb3eaa18d01ce718a3d341154e0f3d7",
+  "backup_agent": "scheduled_brief_provide_insights_into_sales_strategies_and_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefProvideInsightsIntoSalesStrategiesAndPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-provide-insights-into-sales-strategies-and-performance:0fed8dd29800de5757d7f5d181c3af4facd764bf67f1e781938300547d1725bb",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefProvideInsightsIntoSalesStrategiesAndPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25770,
+  "skill_sha256": "f60ff0ae570b78655c920816cff171fad2e899d21fd00fe8baee8a400827d5f4",
   "tool_schema": {
     "properties": {
       "operation": {

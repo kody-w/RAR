@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/csv-surgeon",
+  "agent_bytes": 11501,
   "agent_file": "csv_surgeon_agent.py",
   "agent_sha256": "4d500fd77ebdc677d2860167748f06d1280bfd10de365f759e3b0e9a682b4076",
+  "backup_agent": "csv_surgeon_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CsvSurgeonAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "example_call": {
@@ -27,8 +30,16 @@
     "trust": "community",
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/csv-surgeon:3fb58c33eb2230129258ce6fcd1e96b91bfa8e53a3bbcd240d8c199f6d5af481",
+  "rollback_agent_retained": true,
   "runtime_name": "CsvSurgeon",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 27002,
+  "skill_sha256": "49f65cadc0aecfe4acae6589d4f3f9c0cf1922a81b07c82dbf03fecb7ab3ed98",
   "tool_schema": {
     "properties": {
       "action": {

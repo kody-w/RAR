@@ -18,6 +18,8 @@ from __future__ import annotations
 
 import argparse
 import ast
+import base64
+import gzip
 import hashlib
 import importlib.util
 import json
@@ -31,6 +33,7 @@ import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -42,6 +45,7 @@ REGISTRY_PATH = ROOT / "registry.json"
 FEDERATION_PATH = ROOT / "state" / "federation.json"
 AGGREGATED_PATH = ROOT / "state" / "aggregated.json"
 LIFECYCLE_PATH = ROOT / "state" / "agent_lifecycle.json"
+SKILL_IDENTITIES_PATH = ROOT / "state" / "scout_skill_identities.json"
 RUNNER_SOURCE = ROOT / "scripts" / "scout_run_agent.py"
 FOUNDATION_AGENT = ROOT / "rapp_skill_agent.py"
 FOUNDATION_SKILL = ROOT / "rapp_skills.md"
@@ -52,6 +56,12 @@ CONVERTER_RAPPID = (
     "rappid:@rapp/rapp-agent-converter:"
     "11ce7bf2e7b301b3a35c919f34a60f9a25742552c9871ee33421d2de313e65fa"
 )
+CONVERTER_EMBED_MARKER = "__RAPP_TOASTER_EMBEDDED_GZIP_BASE64__"
+CONVERTER_CLI = """#!/usr/bin/env python3
+from run_agent import execute_agent_main
+
+execute_agent_main()
+"""
 
 TOASTER_COMMIT = "d54ba8484b5c5dae6406d2090c03115d12985446"
 TOASTER_URL = (
@@ -82,7 +92,8 @@ INSTALLERS = {
 }
 
 WORKFLOW_SCHEMA = "rar-scout-workflow/1.0"
-LOCK_SCHEMA = "rapp-agent-lock/1.0"
+LOCK_SCHEMA = "rapp-grail-lock/2.0"
+SKILL_IDENTITIES_SCHEMA = "rapp-scout-skill-identities/1.0"
 DEFAULT_TIMESTAMP = "2000-01-01T00:00:00.000Z"
 MAX_BUNDLE_SKILLS = 8
 MAX_BUNDLE_BYTES = 2_000_000
@@ -96,6 +107,10 @@ DEFAULT_SCHEDULE = {
     "hour": 9,
     "minute": 0,
 }
+RAPPID_RE = re.compile(
+    r"^rappid:@[a-z0-9]+(?:-[a-z0-9]+)*/"
+    r"[a-z0-9]+(?:-[a-z0-9]+)*:[0-9a-f]{64}$"
+)
 
 
 def _json(value):
@@ -104,6 +119,108 @@ def _json(value):
 
 def _sha256(data):
     return hashlib.sha256(data).hexdigest()
+
+
+def _stable_gzip(data):
+    compressed = bytearray(gzip.compress(data, 9, mtime=0))
+    if len(compressed) >= 10:
+        compressed[9] = 255
+    return bytes(compressed)
+
+
+def _mint_skill_rappid(identity):
+    owner, slug = identity.lstrip("@").split("/", 1)
+    owner = _kebab(owner)
+    slug = _kebab(slug.removesuffix("_agent"))
+    tail = hashlib.sha256(
+        b"rapp/1:rappid\n" + uuid.uuid4().bytes
+    ).hexdigest()
+    return f"rappid:@{owner}/{slug}:{tail}"
+
+
+def _load_skill_identities():
+    if not SKILL_IDENTITIES_PATH.exists():
+        return {
+            "schema": SKILL_IDENTITIES_SCHEMA,
+            "entries": {},
+        }
+    value = _load_json(SKILL_IDENTITIES_PATH)
+    if (
+        value.get("schema") != SKILL_IDENTITIES_SCHEMA
+        or not isinstance(value.get("entries"), dict)
+    ):
+        raise RuntimeError(
+            f"{SKILL_IDENTITIES_PATH}: invalid skill identity ledger"
+        )
+    return value
+
+
+def _manifest_rappid(raw):
+    manifest = _source_manifest(raw)
+    rapp = manifest.get("rapp")
+    if rapp is None:
+        return None
+    if not isinstance(rapp, dict):
+        raise RuntimeError(
+            f"{manifest.get('name')}: invalid agent RAPP identity envelope"
+        )
+    if "schema" not in rapp and "rappid" not in rapp:
+        return None
+    if rapp.get("schema") != "rapp/1":
+        raise RuntimeError(
+            f"{manifest.get('name')}: unsupported agent RAPP identity envelope"
+        )
+    rappid = rapp.get("rappid")
+    if not isinstance(rappid, str) or RAPPID_RE.fullmatch(rappid) is None:
+        raise RuntimeError(f"{manifest.get('name')}: invalid agent RAPPID")
+    return rappid
+
+
+def _skill_rappid(ledger, identity, raw, mint_missing):
+    entries = ledger["entries"]
+    existing = entries.get(identity)
+    existing_id = (
+        existing.get("rappid")
+        if isinstance(existing, dict)
+        else None
+    )
+    authoritative = _manifest_rappid(raw)
+    if (
+        existing_id is not None
+        and (
+            not isinstance(existing_id, str)
+            or RAPPID_RE.fullmatch(existing_id) is None
+        )
+    ):
+        raise RuntimeError(f"{identity}: invalid committed skill RAPPID")
+    if (
+        authoritative is not None
+        and existing_id is not None
+        and authoritative != existing_id
+    ):
+        raise RuntimeError(
+            f"{identity}: committed skill RAPPID conflicts with agent identity"
+        )
+    if existing_id is not None:
+        return existing_id, False
+    if not mint_missing and authoritative is None:
+        raise RuntimeError(
+            f"{identity}: missing committed skill RAPPID; "
+            "run build_scout_exports.py --mint-skill-identities"
+        )
+    rappid = authoritative or _mint_skill_rappid(identity)
+    entries[identity] = {
+        "rappid": rappid,
+        "source": (
+            "agent-manifest"
+            if authoritative is not None
+            else "projection-genesis"
+        ),
+        "minted_at": datetime.now(timezone.utc).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"
+        ),
+    }
+    return rappid, True
 
 
 def _lf(data):
@@ -397,13 +514,43 @@ def _public_agent_contract(toaster, raw, manifest):
 
 def _host_dependencies(source, manifest):
     dependencies = []
+    try:
+        tree = ast.parse(source, filename="<agent>")
+    except SyntaxError:
+        tree = None
+    if tree is not None:
+        stdlib = set(getattr(sys, "stdlib_module_names", ()))
+        for statement in tree.body:
+            modules = []
+            if isinstance(statement, ast.Import):
+                modules = [alias.name for alias in statement.names]
+            elif (
+                isinstance(statement, ast.ImportFrom)
+                and statement.level == 0
+                and statement.module
+            ):
+                modules = [statement.module]
+            for module in modules:
+                root = module.split(".", 1)[0]
+                if module in {
+                    "__future__",
+                    "agents.basic_agent",
+                    "basic_agent",
+                }:
+                    continue
+                if module.startswith("agents."):
+                    dependencies.append(f"agent:{module}")
+                elif module.startswith("utils."):
+                    dependencies.append(f"brainstem:{module}")
+                elif root not in stdlib:
+                    dependencies.append(f"python:{module}")
     for module in (
         "utils.azure_file_storage",
         "utils.storage_factory",
         "azure.functions",
     ):
         if re.search(rf"\b{re.escape(module)}\b", source):
-            dependencies.append(module)
+            dependencies.append(f"brainstem:{module}")
     dependencies.extend(
         f"env:{name}" for name in manifest.get("requires_env", []) if name
     )
@@ -413,8 +560,9 @@ def _host_dependencies(source, manifest):
 def _scout_instructions(identity, linked_name, original):
     preface = f"""## Microsoft Scout runtime
 
-This is the reversible Scout projection of `{identity}`. The original RAPP
-agent is preserved byte-for-byte in `{linked_name}` and in the RCI capsule.
+This Toasted `SKILL.md` is the default Grail projection of `{identity}`. The
+original RAPP agent is checksum-vaulted in the RCI capsule; `{linked_name}` is
+retained temporarily as a byte-exact rollback backup.
 
 When Scout can execute local files, resolve this skill directory and run:
 
@@ -423,12 +571,12 @@ python3 scripts/run_agent.py --preflight
 echo '{{}}' | python3 scripts/run_agent.py
 ```
 
-Pass the real JSON arguments instead of `{{}}`. The runner verifies the linked
-agent SHA-256 before importing it. If preflight reports a host dependency that
-Scout cannot satisfy, use the `brainstem_chat` MCP tool to run the canonical
-agent in the user's Brainstem. Never paraphrase the factory or agent into a new
-implementation. The generic direct-file commands in the generated Toaster
-section are recovery guidance; Scout should prefer the verified runner.
+Pass the real JSON arguments instead of `{{}}`. The runner verifies the
+`SKILL.md` and agent checksums, prefers the rollback backup while it exists,
+and otherwise executes the exact vaulted agent bytes directly from the Grail
+record. If preflight reports a host dependency that Scout cannot satisfy, use
+the `brainstem_chat` MCP tool to run the canonical agent in the user's
+Brainstem. Never paraphrase the factory or agent into a new implementation.
 
 """
     return preface + original.strip()
@@ -445,6 +593,7 @@ def _write_skill_bundle(
     expected_sha256,
     scout_name,
     source_kind,
+    rappid,
     source_commit=None,
     channel="native",
     platform_metadata=None,
@@ -460,6 +609,11 @@ def _write_skill_bundle(
     restored = toaster.restore(rci, "agent")
     if restored != raw:
         raise RuntimeError(f"{identity}: Toaster did not preserve source bytes")
+    preserved_agent = rci["preserved"]["agent"]
+    preserved_agent["bytes"] = len(raw)
+    preserved_agent["gzip_bytes"] = len(
+        base64.b64decode(preserved_agent["b64"])
+    )
     manifest = _source_manifest(raw)
     public_contract = _public_agent_contract(toaster, raw, manifest)
     if public_contract:
@@ -481,6 +635,17 @@ def _write_skill_bundle(
         "rar_sha256": actual,
         "source_kind": source_kind,
         "source_commit": source_commit,
+        "default_artifact": "skill",
+        "canonical_format": "skill",
+        "grail_record": True,
+        "materializes": ["agent"],
+        "backup_agent": virtual_filename,
+        "rollback_agent_retained": True,
+        "rapp": {
+            "schema": "rapp/1",
+            "rappid": rappid,
+            "kind": "skill",
+        },
     })
     metadata.update(platform_metadata or {})
     platform["metadata"] = metadata
@@ -500,10 +665,19 @@ def _write_skill_bundle(
     source_text = raw.decode("utf-8")
     lock = {
         "schema": LOCK_SCHEMA,
+        "primary_artifact": "skill",
+        "grail_file": "SKILL.md",
+        "rappid": rappid,
+        "backup_agent": virtual_filename,
+        "rollback_agent_retained": True,
+        "materializes": ["agent"],
         "agent": identity,
         "version": str(manifest.get("version") or rci.get("version") or "0.0.0"),
         "agent_file": virtual_filename,
         "agent_sha256": actual,
+        "skill_sha256": _sha256(skill_bytes),
+        "agent_bytes": len(raw),
+        "skill_bytes": len(skill_bytes),
         "digest_algorithm": "sha256-lf-v1",
         "manifest": manifest,
         "tool_schema": rci.get("parameters") or {
@@ -545,6 +719,12 @@ def _write_skill_bundle(
         "source_sha256": actual,
         "skill_sha256": _sha256(skill_bytes),
         "linked_agent": virtual_filename,
+        "default_artifact": "skill",
+        "grail_record": "SKILL.md",
+        "backup_agent": virtual_filename,
+        "rollback_agent_retained": True,
+        "materializes": ["agent"],
+        "rappid": rappid,
         "requires_env": manifest.get("requires_env", []),
         "description": rci.get("description") or "",
         "parameters": rci.get("parameters") or {},
@@ -555,18 +735,25 @@ def _write_skill_bundle(
     }
 
 
-def _install_converter_runtime(record, toaster):
+def _install_converter_runtime(record):
     skill_dir = Path(record["_skill_dir"])
     scripts_dir = skill_dir / "scripts"
-    wrapper = CONVERTER_AGENT.read_bytes()
+    cli = scripts_dir / "toast.py"
+    cli.write_text(CONVERTER_CLI, encoding="utf-8", newline="\n")
+    cli.chmod(cli.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+
+
+def _bundled_converter_agent(toaster):
+    source = CONVERTER_AGENT.read_text(encoding="utf-8")
+    if source.count(CONVERTER_EMBED_MARKER) != 1:
+        raise RuntimeError("converter source has the wrong embed marker count")
     core = getattr(toaster, "_rar_pinned_source_bytes", None)
     if not isinstance(core, bytes) or _sha256(core) != TOASTER_SHA256:
         raise RuntimeError("pinned RAPP Toaster source bytes are unavailable")
-
-    cli = scripts_dir / "toast.py"
-    cli.write_bytes(wrapper)
-    cli.chmod(cli.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
-    (scripts_dir / "_toaster.py").write_bytes(core)
+    payload = base64.b64encode(_stable_gzip(core)).decode("ascii")
+    bundled = source.replace(CONVERTER_EMBED_MARKER, payload)
+    compile(bundled, "rapp_agent_converter_agent.py", "exec")
+    return bundled.encode("utf-8")
 
 
 def _is_workflow_capability(entry):
@@ -644,6 +831,13 @@ def _workflow_json(record, source_entry, lifecycle, override=None):
         "lastExecutedAt": None,
         "skillNames": [record["skill_name"]],
         "teamsNotify": "auto",
+        "rapp": {
+            "schema": "rapp/1",
+            "skill_name": record["skill_name"],
+            "default_artifact": "skill",
+            "grail_record": "SKILL.md",
+            "backup_agent": record["backup_agent"],
+        },
     }
 
 
@@ -689,15 +883,18 @@ def _fetch_federated(entry):
 
 
 def _compare_trees(expected, actual):
+    def comparable(path):
+        return "__pycache__" not in path.parts and path.suffix != ".pyc"
+
     expected_files = {
         path.relative_to(expected): path
         for path in expected.rglob("*")
-        if path.is_file()
+        if path.is_file() and comparable(path)
     }
     actual_files = {
         path.relative_to(actual): path
         for path in actual.rglob("*")
-        if path.is_file()
+        if path.is_file() and comparable(path)
     } if actual.exists() else {}
     differences = []
     for relative in sorted(set(expected_files) | set(actual_files)):
@@ -774,8 +971,10 @@ def _publish_skill_bundles(staging, records):
         "# RAPP Scout starter\n\n"
         "Import this directory in Microsoft Scout to install the Toasted "
         "`rapp-skills` manager, Brainstem bridge, and the RAPP/1 "
-        "`rapp-agent-converter`. The converter makes Toasted `SKILL.md` the "
-        "default while preserving byte-exact RAR agent recovery.\n",
+        "`rapp-agent-converter`. Toasted `SKILL.md` is the persistent Grail "
+        "record; `agent.py` is generated only when selected or hotloaded. "
+        "Use `scripts/toast.py config --default-format agent` to flip the "
+        "global materialization without changing the canonical record.\n",
         encoding="utf-8",
         newline="\n",
     )
@@ -786,10 +985,9 @@ def _publish_skill_bundles(staging, records):
             "name": "rapp",
             "version": foundation["version"],
             "description": (
-                "RAR catalog, automatic agent.py and raw SKILL.md conversion "
-                "into reversible RAPP/1 Toasted skills, manual exports, and a "
-                "pinned local RAPP Brainstem bootstrap for Scout and GitHub "
-                "Copilot CLI."
+                "RAR catalog, RAPP/1 Toasted Grail records, global skill or "
+                "agent materialization, format-agnostic Brainstem hotload, "
+                "manual exports, and a pinned local RAPP Brainstem bootstrap."
             ),
             "author": {
                 "name": "RAPP Agent Registry",
@@ -899,17 +1097,30 @@ def _publish_workflow_bundles(staging, pending_workflows):
             encoding="utf-8",
             newline="\n",
         )
+        grail_url = next(
+            (
+                item["url"]
+                for item in record.get("files", [])
+                if item.get("path") == "SKILL.md"
+            ),
+            None,
+        )
         published.append({
             "identity": record["identity"],
             "file": filename,
             "id": workflow["id"],
             "skill_name": record["skill_name"],
             "import_url": f"{TREE_BASE}/workflows/{bundle_id}",
+            "rappid": record["rappid"],
+            "default_artifact": "skill",
+            "grail_record": "SKILL.md",
+            "grail_url": grail_url,
+            "backup_agent": record["backup_agent"],
         })
     return published
 
 
-def build(check=False):
+def build(check=False, mint_skill_identities=False):
     config = _load_json(CONFIG_PATH)
     registry = _load_json(REGISTRY_PATH).get("agents", [])
     federation = _load_json(FEDERATION_PATH).get("rapplications", [])
@@ -918,6 +1129,19 @@ def build(check=False):
     toaster = _load_toaster()
     runner_template = RUNNER_SOURCE.read_text(encoding="utf-8")
     overrides = config.get("workflow_overrides") or {}
+    skill_identities = _load_skill_identities()
+    identities_changed = False
+
+    def skill_rappid(identity, raw):
+        nonlocal identities_changed
+        value, changed = _skill_rappid(
+            skill_identities,
+            identity,
+            raw,
+            mint_skill_identities,
+        )
+        identities_changed = identities_changed or changed
+        return value
 
     with tempfile.TemporaryDirectory(prefix=".scout-build-", dir=ROOT) as temp:
         staging = Path(temp) / "scout"
@@ -930,34 +1154,44 @@ def build(check=False):
         legacy_foundation_skill, foundation_skill = _render_root_foundation(
             toaster
         )
+        foundation_raw = FOUNDATION_AGENT.read_bytes()
         foundation = _write_skill_bundle(
             pool,
             toaster,
             runner_template,
             identity="@kody-w/rapp_skill_agent",
-            raw=FOUNDATION_AGENT.read_bytes(),
+            raw=foundation_raw,
             virtual_filename=FOUNDATION_AGENT.name,
-            expected_sha256=_sha256(_lf(FOUNDATION_AGENT.read_bytes())),
+            expected_sha256=_sha256(_lf(foundation_raw)),
             scout_name="rapp-skills",
             source_kind="foundation",
+            rappid=skill_rappid("@kody-w/rapp_skill_agent", foundation_raw),
             source_commit=None,
             channel="starter",
         )
         records.append(foundation)
+        converter_agent = _bundled_converter_agent(toaster)
         converter = _write_skill_bundle(
             pool,
             toaster,
             runner_template,
             identity="@rapp/rapp_agent_converter",
-            raw=CONVERTER_AGENT.read_bytes(),
+            raw=converter_agent,
             virtual_filename="rapp_agent_converter_agent.py",
-            expected_sha256=_sha256(_lf(CONVERTER_AGENT.read_bytes())),
+            expected_sha256=_sha256(_lf(converter_agent)),
             scout_name=CONVERTER_SKILL_NAME,
             source_kind="foundation",
+            rappid=skill_rappid(
+                "@rapp/rapp_agent_converter",
+                converter_agent,
+            ),
             source_commit=None,
             channel="starter",
             platform_metadata={
                 "default_format": "skill",
+                "canonical_format": "skill",
+                "grail_record": True,
+                "materializes": ["agent"],
                 "toasted": True,
                 "canonical_agent": "rapp_agent_converter_agent.py",
                 "normalization_path": (
@@ -968,9 +1202,11 @@ def build(check=False):
                     "rappid": CONVERTER_RAPPID,
                     "kind": "skill",
                 },
+                "reader_versions": ["raw-skill", "rci/1", "rapp/1"],
+                "writer_version": "rapp/1",
             },
         )
-        _install_converter_runtime(converter, toaster)
+        _install_converter_runtime(converter)
         records.append(converter)
 
         if config.get("include_registry_agents", True):
@@ -1002,6 +1238,7 @@ def build(check=False):
                     expected_sha256=entry.get("_sha256"),
                     scout_name=_scout_skill_name(identity),
                     source_kind="rar-agent",
+                    rappid=skill_rappid(identity, raw),
                     source_commit=source_commit,
                     channel=_skill_channel(identity),
                 )
@@ -1070,6 +1307,7 @@ def build(check=False):
                     expected_sha256=entry.get("singleton_sha256"),
                     scout_name=_scout_skill_name(identity, prefix="rappstore"),
                     source_kind="federated-rapplication",
+                    rappid=skill_rappid(identity, raw),
                     source_commit=None,
                     channel="rapplications",
                 )
@@ -1088,6 +1326,17 @@ def build(check=False):
                     overrides.get(identity),
                 )
                 pending_workflows.append((record, workflow))
+
+        if identities_changed:
+            if check:
+                raise RuntimeError(
+                    "skill identity ledger would change during --check"
+                )
+            SKILL_IDENTITIES_PATH.write_text(
+                _json(skill_identities),
+                encoding="utf-8",
+                newline="\n",
+            )
 
         skill_names = [record["skill_name"] for record in records]
         if len(skill_names) != len(set(skill_names)):
@@ -1149,14 +1398,16 @@ def build(check=False):
             "copilot plugin marketplace add kody-w/RAR\n"
             "copilot plugin install rapp@rar\n"
             "```\n\n"
-            "Start with the Toasted RAPP skill manager and converter:\n\n"
+            "Start with the Toasted RAPP skill manager and Grail converter:\n\n"
             "```text\n"
             "https://github.com/kody-w/RAR/tree/main/scout/starter\n"
             "```\n\n"
-            "The starter makes Toasted `SKILL.md` the default and normalizes "
-            "raw skills through valid RAR agents. The manager hotloads verified "
-            "skills into `~/.copilot/skills`, which Microsoft Scout can read "
-            "in place. Bounded GitHub-import "
+            "The starter keeps Toasted `SKILL.md` as the persistent Grail "
+            "record, materializes `agent.py` deterministically when selected, "
+            "and lets Brainstem hotload raw skills, Toasted skills, or agents "
+            "through one converter. The manager hotloads verified skills into "
+            "`~/.copilot/skills`, which Microsoft Scout can read in place. "
+            "Bounded GitHub-import "
             "shards live under `bundles/`; each factory or rapplication "
             "workflow has an isolated directory under `workflows/` containing "
             "only that workflow and its companion skill. See "
@@ -1212,8 +1463,16 @@ def main(argv=None):
         action="store_true",
         help="compare generated output without modifying scout/",
     )
+    parser.add_argument(
+        "--mint-skill-identities",
+        action="store_true",
+        help="mint and persist missing RAPP/1 identities for Toasted skills",
+    )
     args = parser.parse_args(argv)
-    return build(check=args.check)
+    return build(
+        check=args.check,
+        mint_skill_identities=args.mint_skill_identities,
+    )
 
 
 if __name__ == "__main__":

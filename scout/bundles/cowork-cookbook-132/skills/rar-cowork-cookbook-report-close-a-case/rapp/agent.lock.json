@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_close_a_case",
+  "agent_bytes": 10201,
   "agent_file": "report_close_a_case_agent.py",
   "agent_sha256": "87d9fe26852c77dae6306831960f334e91736996697074243662fd2b0ed5e9ab",
+  "backup_agent": "report_close_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportCloseACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-close-a-case:012641a2a454028eb28b1b516dbbcd065d90deb62d44d492083cb799886009cf",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportCloseACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23802,
+  "skill_sha256": "337dd4ae20feef524b96bdb3a7c7e7ef7f452cdd2c4c2ddb81eb71e945da0ee1",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_manage_bills_of_exchange",
+  "agent_bytes": 10629,
   "agent_file": "adaptive_card_manage_bills_of_exchange_agent.py",
   "agent_sha256": "0b0c1a95bd70ed6128a3fc2279fc209455369eea673f189e34a88cfe12c9d9a3",
+  "backup_agent": "adaptive_card_manage_bills_of_exchange_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardManageBillsOfExchange",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-manage-bills-of-exchange:bfbf6d0d836cdd1dae8ece493c251635e9e7648fb7bd61ac47b83e8e6948224e",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardManageBillsOfExchange",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24716,
+  "skill_sha256": "86e7bf14d735348b0b0de7aeab3cad3bf6d2f829978dcc177cfc9830f29d1190",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_define_environment_strategy",
+  "agent_bytes": 10403,
   "agent_file": "report_define_environment_strategy_agent.py",
   "agent_sha256": "7431b271b1d4fdf23e42c6d9a3c5575991a78b9b1c9582eb41685a710317653e",
+  "backup_agent": "report_define_environment_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDefineEnvironmentStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-define-environment-strategy:1e2d5ca0a7f5fbba43674c813ed5fc5abf8998609d224f1f1bc84d92e6f3533a",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDefineEnvironmentStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24300,
+  "skill_sha256": "65e8fc118e8bbdbc78275218ae988d7189ed41468dbb0a60257c51ffc2566289",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_install_and_commission_assets",
+  "agent_bytes": 10702,
   "agent_file": "dashboard_install_and_commission_assets_agent.py",
   "agent_sha256": "76f639527c416774ccacd2f5575431e3fe65dc9a0f6dfb2335406718bb86901c",
+  "backup_agent": "dashboard_install_and_commission_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardInstallAndCommissionAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-install-and-commission-assets:e5444d724fc9e440b54fd6802c8e1fe37261e2f1da908fe6ccaa2fc35e5c2691",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardInstallAndCommissionAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24877,
+  "skill_sha256": "b5cec753a41638054eec61c5bf4f821794a2bff662e312350a33d8593f9bdeb5",
   "tool_schema": {
     "properties": {
       "operation": {

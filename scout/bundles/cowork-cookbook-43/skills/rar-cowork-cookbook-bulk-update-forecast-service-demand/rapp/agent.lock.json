@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_forecast_service_demand",
+  "agent_bytes": 10621,
   "agent_file": "bulk_update_forecast_service_demand_agent.py",
   "agent_sha256": "f69fb2f83987e976bf5f5e667e5aeef115aec1e312e327109741343b41b07756",
+  "backup_agent": "bulk_update_forecast_service_demand_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateForecastServiceDemand",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-forecast-service-demand:f9a62f3a513acda3809c9fd611f376b95a89a42aa4ce1b61e590e1b825917645",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateForecastServiceDemand",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24657,
+  "skill_sha256": "6f549ec63c272a787a744b391f942837e0a0453f55958dcf884d0225661a1d69",
   "tool_schema": {
     "properties": {
       "operation": {

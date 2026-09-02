@@ -5,6 +5,13 @@
   "id": "058d8980476c9e5f",
   "lastExecutedAt": null,
   "name": "RAPP Rewind",
+  "rapp": {
+    "backup_agent": "rapp_rewind_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-kody-w-rapp-rewind-singleton"
+  },
   "schedule": {
     "days": [
       1,

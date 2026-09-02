@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_correct_ledger_vouchers",
+  "agent_bytes": 10634,
   "agent_file": "dashboard_correct_ledger_vouchers_agent.py",
   "agent_sha256": "81d8eb5118593f8674df9e42fa9ee08e8cbca2ae5663f4dab94abfd8912d03ec",
+  "backup_agent": "dashboard_correct_ledger_vouchers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardCorrectLedgerVouchers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-correct-ledger-vouchers:4c8becd8af158144bd7666985999e9cf064cd48c3d157820627c28abc54e0143",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardCorrectLedgerVouchers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24681,
+  "skill_sha256": "669ac3bc40595012be14b238d22706c996b5156d961554fa7abb0a8286f510ce",
   "tool_schema": {
     "properties": {
       "operation": {

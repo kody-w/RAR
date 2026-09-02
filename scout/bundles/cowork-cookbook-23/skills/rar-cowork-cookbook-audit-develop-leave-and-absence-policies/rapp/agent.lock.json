@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_develop_leave_and_absence_policies",
+  "agent_bytes": 10767,
   "agent_file": "audit_develop_leave_and_absence_policies_agent.py",
   "agent_sha256": "606fb1be5d6de0889972ee322b4574e5779ab3599dff728b8f66d1c2a3e73d6d",
+  "backup_agent": "audit_develop_leave_and_absence_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDevelopLeaveAndAbsencePolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-develop-leave-and-absence-policies:4c2cf7f628b68a5073d937a1a9010f32e70cd57566d9de2bc7bf2024f33b1b94",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDevelopLeaveAndAbsencePolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25018,
+  "skill_sha256": "9220e5e0cbac8fbaba579af6c35bd918fc043e5672f58d0b1467c7f296ed0aec",
   "tool_schema": {
     "properties": {
       "criteria": {

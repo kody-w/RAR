@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_define_operating_hours",
+  "agent_bytes": 10812,
   "agent_file": "configure_define_operating_hours_agent.py",
   "agent_sha256": "99b3609be98006e43b42c6ccb0fa0484a9876bf13604daca0591bdfb670d8ba5",
+  "backup_agent": "configure_define_operating_hours_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDefineOperatingHours",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-define-operating-hours:64ee4220d3aa7d49ae53f9f042236d085b7b3b6fa63f73229f76f6f066f8773a",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDefineOperatingHours",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24842,
+  "skill_sha256": "7ef13bd66c8a120bea4c1e2adc07dab004c0c5983fb9a7642ed1668421f83863",
   "tool_schema": {
     "properties": {
       "operation": {

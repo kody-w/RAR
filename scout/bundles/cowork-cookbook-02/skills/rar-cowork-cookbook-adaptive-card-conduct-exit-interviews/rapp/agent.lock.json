@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_conduct_exit_interviews",
+  "agent_bytes": 10612,
   "agent_file": "adaptive_card_conduct_exit_interviews_agent.py",
   "agent_sha256": "b9aa77a1e731b02365dad5aa141743c98872a5c3ced6e9f0a9895e43caca79ce",
+  "backup_agent": "adaptive_card_conduct_exit_interviews_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConductExitInterviews",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-conduct-exit-interviews:f350d33bd5ae0708082678cea891abeffce742408210bff7b37958b8aaa472b5",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardConductExitInterviews",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24669,
+  "skill_sha256": "3bf73a0bf60c6028aa3873818670f0c4ff60c95378d6b4119d18adbd0cf07845",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_process_customer_returns_and_exchanges",
+  "agent_bytes": 10797,
   "agent_file": "teams_update_process_customer_returns_and_exchanges_agent.py",
   "agent_sha256": "692d349a4683992f152bf420a729aa3462714f5a2eb35208ddab5aafefa51af9",
+  "backup_agent": "teams_update_process_customer_returns_and_exchanges_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateProcessCustomerReturnsAndExchanges",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-process-customer-returns-and-exchanges:de8f7825417f39599de79c30568feee4a01228be8fadfa7d498aae0b169b407b",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateProcessCustomerReturnsAndExchanges",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25095,
+  "skill_sha256": "260b52b35f87579859e8988b63cd69f72db94fcda1c60a8c8c47f1e77a0a4d7c",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_record_life_events",
+  "agent_bytes": 10560,
   "agent_file": "teams_update_record_life_events_agent.py",
   "agent_sha256": "8fef4bcc170dc924abbab059d7999ed055b56534ff2113fce81ac136ecce9117",
+  "backup_agent": "teams_update_record_life_events_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateRecordLifeEvents",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-record-life-events:aedcf03a1af6d42d3b3e7ee005dae78e822cb39112ea24a1e317beabeaec98d5",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateRecordLifeEvents",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24491,
+  "skill_sha256": "2f287e0ef122261a49e42d6951e900f2bd85f61bfd260610998f87feca5ef5bd",
   "tool_schema": {
     "properties": {
       "operation": {

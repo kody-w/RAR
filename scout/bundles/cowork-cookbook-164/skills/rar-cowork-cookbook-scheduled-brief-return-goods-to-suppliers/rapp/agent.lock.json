@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_return_goods_to_suppliers",
+  "agent_bytes": 10689,
   "agent_file": "scheduled_brief_return_goods_to_suppliers_agent.py",
   "agent_sha256": "16f27320b6093dc8e91e080562da2d7c78280c0ea81560d540f8f91f90ac5db7",
+  "backup_agent": "scheduled_brief_return_goods_to_suppliers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefReturnGoodsToSuppliers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-return-goods-to-suppliers:b2ce8cf9ab91d36f4f791d01c4a0e41543a39363846fb15fe6ddaec68d41a963",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefReturnGoodsToSuppliers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24820,
+  "skill_sha256": "75f4829d2a2c7c597d3914a467b303036a590419a0c538b22ec457eabb8c21e7",
   "tool_schema": {
     "properties": {
       "operation": {

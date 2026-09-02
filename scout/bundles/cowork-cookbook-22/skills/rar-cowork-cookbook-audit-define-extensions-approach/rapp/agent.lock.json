@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_define_extensions_approach",
+  "agent_bytes": 10698,
   "agent_file": "audit_define_extensions_approach_agent.py",
   "agent_sha256": "56f4e2845aedd5e9e1919e3003d934194835b06350124ec4e733674ccb2a0446",
+  "backup_agent": "audit_define_extensions_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineExtensionsApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-define-extensions-approach:f9495e606a5cbaf1b0a21288b8cc82b9a14acec12592969fd8a61637821aacd7",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDefineExtensionsApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24764,
+  "skill_sha256": "677eadfad35a48bad907e7feedd790f32b35ac99f4fa956a65fb542faa193720",
   "tool_schema": {
     "properties": {
       "criteria": {

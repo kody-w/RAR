@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_onboard_new_contractors",
+  "agent_bytes": 10330,
   "agent_file": "report_onboard_new_contractors_agent.py",
   "agent_sha256": "31548e71fc2af7a8648c8a32325a2cd14a52408abade0324e47faaf36c07c747",
+  "backup_agent": "report_onboard_new_contractors_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportOnboardNewContractors",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-onboard-new-contractors:d3a0683fbd7792ad9048da3f6bbad4e30be7f7c54d4129438c58b2d0f324536c",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportOnboardNewContractors",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24128,
+  "skill_sha256": "53747cc2027ba9126091630d00bab3422ca7f37cc4a6228b18b439b9371c85d5",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_adjust_inventory_levels",
+  "agent_bytes": 10646,
   "agent_file": "adaptive_card_adjust_inventory_levels_agent.py",
   "agent_sha256": "2add617758d006a0c9ab61306e0cfd6791a3269b7a2eb9b29aa979aecd214b75",
+  "backup_agent": "adaptive_card_adjust_inventory_levels_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardAdjustInventoryLevels",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-adjust-inventory-levels:d05fde5e1f13e3973d88a1a39b5c48444768bd5f18ec265f5b82652410e60ac8",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardAdjustInventoryLevels",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24697,
+  "skill_sha256": "b0b2ae0c4eb38d212e6688d3426261e84339c8f23f6ca6e83cb8ecc9c0a535a3",
   "tool_schema": {
     "properties": {
       "operation": {

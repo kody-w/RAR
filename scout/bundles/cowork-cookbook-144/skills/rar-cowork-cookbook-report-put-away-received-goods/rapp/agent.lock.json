@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_put_away_received_goods",
+  "agent_bytes": 10346,
   "agent_file": "report_put_away_received_goods_agent.py",
   "agent_sha256": "91a357609f8f1489fbf0c576a3627c9a4f262c6001370cc4294d3da49e3c67c5",
+  "backup_agent": "report_put_away_received_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportPutAwayReceivedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-put-away-received-goods:4ca7c359ac10930a781e3148ede3da02c1f740cf3a3c664aea69f10594725ec0",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportPutAwayReceivedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24182,
+  "skill_sha256": "81d103bf5567bf394aaa98f732d693ae20d1399716f54a203de809f818354b26",
   "tool_schema": {
     "properties": {
       "audience": {

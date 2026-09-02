@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/regulation_monitor",
+  "agent_bytes": 9873,
   "agent_file": "regulation_monitor_agent.py",
   "agent_sha256": "094fa86c7092388fb65e3ce1e381c016d4d8b9fb2ddcdb92be6e720016a6b0e7",
+  "backup_agent": "regulation_monitor_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RegulationMonitor",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Jagmeet Chabra",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/regulation-monitor:fe537b4039edbbf4a465087fc1250ec3d47330c27a5714b1898d6dc99055f9da",
+  "rollback_agent_retained": true,
   "runtime_name": "RegulationMonitor",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23964,
+  "skill_sha256": "ab0a5a4188e19506c7bd3e7e70b972ee1ee3be7747efb3c7a66fc2ca7c86ef5e",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/agent_harness_explorer",
+  "agent_bytes": 9357,
   "agent_file": "agent_harness_explorer_agent.py",
   "agent_sha256": "77aeeb418357389bf065c769985559925b8f7165557d4f2b63421baa21bcc4b7",
+  "backup_agent": "agent_harness_explorer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentHarnessExplorer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Chris Garty and Andrew Hess",
@@ -44,8 +47,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/agent-harness-explorer:73c3d8f12e39626797dcf8f0f7289d5bca3487a96477a8c084ca393022f992e4",
+  "rollback_agent_retained": true,
   "runtime_name": "AgentHarnessExplorer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22592,
+  "skill_sha256": "ab7e09f4448c961ce088b177383e901f31202dcac53517eb1ef0235c99e1bfe1",
   "tool_schema": {
     "properties": {
       "environment": {

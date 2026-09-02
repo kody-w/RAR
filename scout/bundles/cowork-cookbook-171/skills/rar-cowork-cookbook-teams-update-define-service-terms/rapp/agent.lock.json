@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_service_terms",
+  "agent_bytes": 10594,
   "agent_file": "teams_update_define_service_terms_agent.py",
   "agent_sha256": "3c15c4428f3f6b97158a26eb30023a0c394fe1d3864d2b22f9761b094d6a1de1",
+  "backup_agent": "teams_update_define_service_terms_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineServiceTerms",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-service-terms:c0f1f34a4583605ef71afb38e18751b18f651964dbd57e4393b474c8e2ed542f",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineServiceTerms",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24555,
+  "skill_sha256": "7fc6f515b1e5fb6846ec01d5cdf9b4b0a5563a946639821541ebfdfe40292e1a",
   "tool_schema": {
     "properties": {
       "operation": {

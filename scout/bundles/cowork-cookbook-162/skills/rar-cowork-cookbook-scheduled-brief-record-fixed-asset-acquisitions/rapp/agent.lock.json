@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_record_fixed_asset_acquisitions",
+  "agent_bytes": 10785,
   "agent_file": "scheduled_brief_record_fixed_asset_acquisitions_agent.py",
   "agent_sha256": "5bde048d115c9fcc154e2ed451da0a53e673427ad04c0258d330ae482bb8c31c",
+  "backup_agent": "scheduled_brief_record_fixed_asset_acquisitions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefRecordFixedAssetAcquisitions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-record-fixed-asset-acquisitions:cfea392d7838643eeff2926a4ba2a92b088a08195d54829f30045ad9570cb962",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefRecordFixedAssetAcquisitions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25035,
+  "skill_sha256": "d61ca2842442bd4b7282c6a7bb001a0f4902265c16bb12e40400b4fb99d4664b",
   "tool_schema": {
     "properties": {
       "operation": {

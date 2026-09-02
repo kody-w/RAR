@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_define_sales_channels",
+  "agent_bytes": 10782,
   "agent_file": "configure_define_sales_channels_agent.py",
   "agent_sha256": "ab9ae7fef52139ab77555e6588378d6cfd13f42a7e948081d669d88e5706dba5",
+  "backup_agent": "configure_define_sales_channels_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDefineSalesChannels",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-define-sales-channels:aa5d91d8e2e16fc536f82f4f601cc430ba33957ef1c755553de9f7348adec656",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDefineSalesChannels",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24780,
+  "skill_sha256": "921ad2279405474d551a4a5309cb477073d4f94bd4fd2102b9f871a4c1ba6c62",
   "tool_schema": {
     "properties": {
       "operation": {

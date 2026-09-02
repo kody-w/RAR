@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/anonymised_case_study_writer",
+  "agent_bytes": 9160,
   "agent_file": "anonymised_case_study_writer_agent.py",
   "agent_sha256": "acca33c8954fc23a9d6b76b4ab200a7bf5a076cd44c2200f1c42565e98f20361",
+  "backup_agent": "anonymised_case_study_writer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AnonymisedCaseStudyWriter",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Simon Owen",
@@ -44,8 +47,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/anonymised-case-study-writer:9c3cf74e60df2ffae80a8423fc80fe176c0dc436afc143499ccbfb21458d6520",
+  "rollback_agent_retained": true,
   "runtime_name": "AnonymisedCaseStudyWriter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22191,
+  "skill_sha256": "d223cd343bf293d7277b67710f7a18385fb5c235e389da87f237735e1b975490",
   "tool_schema": {
     "properties": {
       "audience": {

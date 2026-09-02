@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_develop_a_business_continuity_plan",
+  "agent_bytes": 10805,
   "agent_file": "adaptive_card_develop_a_business_continuity_plan_agent.py",
   "agent_sha256": "d2ebc9f7b35ec0591ca1ca06a720093d6116f954eab03996b0b8450dcb9e38db",
+  "backup_agent": "adaptive_card_develop_a_business_continuity_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDevelopABusinessContinuityPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-develop-a-business-continuity-plan:d7ac853ba31060f34476bc039e1bf5e21116bf0994ad1134ae2f67304d0cc950",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDevelopABusinessContinuityPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25090,
+  "skill_sha256": "babdd9a9e72e899847d6ab933a92fab32e7507e6ee964e60699be5b20566e9a0",
   "tool_schema": {
     "properties": {
       "operation": {

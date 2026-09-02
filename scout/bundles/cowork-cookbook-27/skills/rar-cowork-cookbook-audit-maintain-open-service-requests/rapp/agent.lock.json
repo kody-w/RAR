@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_maintain_open_service_requests",
+  "agent_bytes": 10727,
   "agent_file": "audit_maintain_open_service_requests_agent.py",
   "agent_sha256": "fb160a5a2353162fbb7879e1d9e8110e713df6bb0cd8881347b2ce84614193aa",
+  "backup_agent": "audit_maintain_open_service_requests_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditMaintainOpenServiceRequests",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-maintain-open-service-requests:3415217183928dfebe73f7c13cfe090d5d18e60b2016ae36d73bc6b6a8eb4f91",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditMaintainOpenServiceRequests",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24878,
+  "skill_sha256": "3134cf94ba19ffe462738a000f987463e7a8bdb3347eeb6b171b49325118b095",
   "tool_schema": {
     "properties": {
       "criteria": {

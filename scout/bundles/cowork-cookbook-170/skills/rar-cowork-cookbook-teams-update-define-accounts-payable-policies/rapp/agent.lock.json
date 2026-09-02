@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_accounts_payable_policies",
+  "agent_bytes": 10744,
   "agent_file": "teams_update_define_accounts_payable_policies_agent.py",
   "agent_sha256": "33f92ffff22902b63f495d614d0421bfe5261f7e6a383615647e3ef3b889dacb",
+  "backup_agent": "teams_update_define_accounts_payable_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineAccountsPayablePolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-accounts-payable-policies:3825e2c83eb8ec42af2e4d3f0e91658df7b15148614eb9ea9e87e76047f53733",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineAccountsPayablePolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24956,
+  "skill_sha256": "99a383526001ef8ec0f725c723690d630a949a58a302626e49c1e3b7fbba2ba9",
   "tool_schema": {
     "properties": {
       "operation": {

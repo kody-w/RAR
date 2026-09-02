@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_estimate_the_cost_of_production",
+  "agent_bytes": 10721,
   "agent_file": "teams_update_estimate_the_cost_of_production_agent.py",
   "agent_sha256": "2d4fe8a4d0236a0dbe485b7aa1ac3c7a7d35f4ad072d9e9eee55d7465b26d911",
+  "backup_agent": "teams_update_estimate_the_cost_of_production_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateEstimateTheCostOfProduction",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-estimate-the-cost-of-production:665bd5b29ff79483fae1f3765844d6f70ed5a4036de6bad9fa222cdc61fc8d8c",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateEstimateTheCostOfProduction",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24880,
+  "skill_sha256": "6fe64298bb137bcbdf07314cbbf5085ecd8d0ab075fb093dfb8fa937b5cdf8e7",
   "tool_schema": {
     "properties": {
       "operation": {

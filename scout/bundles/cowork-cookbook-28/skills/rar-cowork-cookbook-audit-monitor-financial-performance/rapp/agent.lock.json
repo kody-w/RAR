@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_monitor_financial_performance",
+  "agent_bytes": 10718,
   "agent_file": "audit_monitor_financial_performance_agent.py",
   "agent_sha256": "4d9b6e13a8e57b9b4bdb685aa9054cb9f99fa27e9e0500d9e6bb411a8c2e5f72",
+  "backup_agent": "audit_monitor_financial_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditMonitorFinancialPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-monitor-financial-performance:a6bcf60307f2b777c1f109a931b0d11870b4714ddf0fc0129e69587efe22e3ac",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditMonitorFinancialPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24832,
+  "skill_sha256": "9867077bc0628778edf59d7d90cb374ad65ecff5dbdb05c8f098515408bacaca",
   "tool_schema": {
     "properties": {
       "criteria": {

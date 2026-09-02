@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_audit_workplace_for_safety",
+  "agent_bytes": 10367,
   "agent_file": "report_audit_workplace_for_safety_agent.py",
   "agent_sha256": "9041c2b1c4d12f859e356c6e72d07f080bf6453955067b414959c21b137c9268",
+  "backup_agent": "report_audit_workplace_for_safety_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportAuditWorkplaceForSafety",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-audit-workplace-for-safety:a9247bcd140554c1591d47c12f82d03986688d424a2562b43971cd4bb2ee9d37",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportAuditWorkplaceForSafety",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24250,
+  "skill_sha256": "d60f5a4bbe0bff47a4630f0be3f61545140f9ba948ece4e89eb655079d4fa53f",
   "tool_schema": {
     "properties": {
       "audience": {

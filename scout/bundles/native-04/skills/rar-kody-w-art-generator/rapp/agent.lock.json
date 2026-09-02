@@ -1,11 +1,15 @@
 {
   "agent": "@kody-w/art_generator_agent",
+  "agent_bytes": 11474,
   "agent_file": "art_generator_agent.py",
   "agent_sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
+  "backup_agent": "art_generator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ArtGeneratorAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "env:AZURE_OPENAI_ENDPOINT"
+    "env:AZURE_OPENAI_ENDPOINT",
+    "python:requests"
   ],
   "manifest": {
     "author": "RAPP Community",
@@ -39,8 +43,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/art-generator:eb37ea0b483c4dbd52cd93433ac199ebbcca417d13126088378d7fd980c06bfc",
+  "rollback_agent_retained": true,
   "runtime_name": "ArtGenerator",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22069,
+  "skill_sha256": "01ed01cfe0c8c37f114c29a9cc7fb651de77cc8110d128177826d08cb3a20ce3",
   "tool_schema": {
     "properties": {},
     "required": [],

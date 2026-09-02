@@ -5,6 +5,13 @@
   "id": "04a9799b681cd315",
   "lastExecutedAt": null,
   "name": "WildhavenCEO",
+  "rapp": {
+    "backup_agent": "wildhaven_ceo_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-wildhaven-wildhaven-ceo-singleton"
+  },
   "schedule": {
     "days": [
       1,

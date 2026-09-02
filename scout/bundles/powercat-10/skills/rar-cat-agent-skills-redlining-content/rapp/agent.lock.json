@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/redlining_content",
+  "agent_bytes": 8933,
   "agent_file": "redlining_content_agent.py",
   "agent_sha256": "1196f5449b1e765cd968e70f0a5568c40598968414f4ffb10380e02b9bdfed98",
+  "backup_agent": "redlining_content_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RedliningContent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "AndrewHessMSFT",
@@ -39,8 +42,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/redlining-content:d2653579cf2bbc6980d49a7f75f294b04c75e3255b1a1174ad469f5c650183d4",
+  "rollback_agent_retained": true,
   "runtime_name": "RedliningContent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21495,
+  "skill_sha256": "a211ec9ec28299116ad79d25ce7e83ba5d9a5b86e1c0c67e01f63a796b3bb8a2",
   "tool_schema": {
     "properties": {
       "audience": {

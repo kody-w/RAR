@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_purchase_project_materials",
+  "agent_bytes": 10632,
   "agent_file": "ppt_exec_purchase_project_materials_agent.py",
   "agent_sha256": "f1026d771ac3e1cc1744edebabea409575e145a0fbdb6660e1314730b161a305",
+  "backup_agent": "ppt_exec_purchase_project_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecPurchaseProjectMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-purchase-project-materials:1e32b01d542f6a5d849c2103d665da2252e1e00c1e846d1142baf7ae68f57ce2",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecPurchaseProjectMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24655,
+  "skill_sha256": "74bac86c747a39f75385e9b50a787e3ede2881e0121454a93f748251a078d0a3",
   "tool_schema": {
     "properties": {
       "operation": {

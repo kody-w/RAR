@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_monitor_system_usage",
+  "agent_bytes": 10611,
   "agent_file": "bulk_update_monitor_system_usage_agent.py",
   "agent_sha256": "9786c57c176e356af47703180b3962d9711f3e6edc10176d70bb795da711a85d",
+  "backup_agent": "bulk_update_monitor_system_usage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateMonitorSystemUsage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-monitor-system-usage:1d0b0ea43314b63cd16934ec534c156b48c573dd2803c73e7cf80ab41e1f82f0",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateMonitorSystemUsage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24621,
+  "skill_sha256": "d954b188736f838e9ef516af2ae26d090639be2ba93011f10db4c63d91d9f50f",
   "tool_schema": {
     "properties": {
       "operation": {

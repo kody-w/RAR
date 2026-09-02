@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rar_installer_troubleshooter_agent",
+  "agent_bytes": 107959,
   "agent_file": "rar_installer_troubleshooter_agent.py",
   "agent_sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce",
+  "backup_agent": "rar_installer_troubleshooter_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappRoadsideAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -38,8 +41,16 @@
     "telemetry": false,
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rar-installer-troubleshooter:21320a48a6b5074a851ddca9db5bb0eb4ef55a35b172fff66f0d032b89372f45",
+  "rollback_agent_retained": true,
   "runtime_name": "RappRoadside",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 147229,
+  "skill_sha256": "e8371acb55ae869a0d2f84fadf8d654680fafbd6928ef4d4f3c3f094701a1287",
   "tool_schema": {
     "additionalProperties": false,
     "properties": {

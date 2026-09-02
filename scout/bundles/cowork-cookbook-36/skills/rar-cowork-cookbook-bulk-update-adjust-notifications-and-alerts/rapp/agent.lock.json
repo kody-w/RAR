@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_adjust_notifications_and_alerts",
+  "agent_bytes": 10737,
   "agent_file": "bulk_update_adjust_notifications_and_alerts_agent.py",
   "agent_sha256": "58659a013ad349021e3b600f3e005f3284e87539f5680ec7e2084db296b36282",
+  "backup_agent": "bulk_update_adjust_notifications_and_alerts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAdjustNotificationsAndAlerts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-adjust-notifications-and-alerts:ca9161d4f2cf2b2d3658644c1d63fb1b5d53b3a560bb3cc59b0c2c69578ad98b",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAdjustNotificationsAndAlerts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24928,
+  "skill_sha256": "ad4277ca457ff61262a0e17596431d53b29cd05dc3d519548e84ea2c04435018",
   "tool_schema": {
     "properties": {
       "operation": {

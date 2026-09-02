@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_forecast_sales",
+  "agent_bytes": 10575,
   "agent_file": "scheduled_brief_forecast_sales_agent.py",
   "agent_sha256": "73d5f3d2865b8e13b2b906b92b582bc1126ed109012d93f61d9489ccab19b28a",
+  "backup_agent": "scheduled_brief_forecast_sales_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefForecastSales",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-forecast-sales:64511148edf4458d48970555bb654cff5a87adca0eb428c9e6891d403fcff826",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefForecastSales",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24472,
+  "skill_sha256": "36b55a6add02c10a92476cba50b92d101ff75e0096f437bf1c2fe8d993cb17d9",
   "tool_schema": {
     "properties": {
       "operation": {

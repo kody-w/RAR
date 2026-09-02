@@ -111,7 +111,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_skill_agent",
-    "version": "1.3.1",
+    "version": "1.4.0",
     "display_name": "RAPP Skill",
     "description": (
         "Connects any SKILL-aware claw directly to a local or hosted RAPP "
@@ -525,6 +525,28 @@ def _catalog_payload(location, timeout_seconds=None):
             "invalid-catalog",
             "RAR Scout catalog has the wrong schema.",
         )
+    for skill in catalog["skills"]:
+        if not isinstance(skill, dict):
+            raise BridgeRequestError(
+                "invalid-catalog",
+                "RAR Scout catalog contains a non-object skill.",
+            )
+        if "default_artifact" not in skill:
+            continue
+        if (
+            skill.get("default_artifact") != "skill"
+            or skill.get("grail_record") != "SKILL.md"
+            or skill.get("materializes") != ["agent"]
+            or not re.fullmatch(
+                r"rappid:@[a-z0-9]+(?:-[a-z0-9]+)*/"
+                r"[a-z0-9]+(?:-[a-z0-9]+)*:[0-9a-f]{64}",
+                str(skill.get("rappid") or ""),
+            )
+        ):
+            raise BridgeRequestError(
+                "invalid-catalog",
+                "RAR Scout catalog contains an invalid Grail skill record.",
+            )
     return catalog
 
 
@@ -582,6 +604,14 @@ def _verify_managed_skill(directory, marker, expected_skill=None):
             "version": expected_skill.get("version"),
             "channel": expected_skill.get("channel"),
             "skill_sha256": expected_skill.get("skill_sha256"),
+            "rappid": expected_skill.get("rappid"),
+            "default_artifact": expected_skill.get("default_artifact"),
+            "grail_record": expected_skill.get("grail_record"),
+            "backup_agent": expected_skill.get("backup_agent"),
+            "rollback_agent_retained": expected_skill.get(
+                "rollback_agent_retained"
+            ),
+            "materializes": expected_skill.get("materializes"),
         }
         for key, expected in expected_fields.items():
             if marker.get(key) != expected:
@@ -774,9 +804,12 @@ a {{ color:var(--accent); }}
     <span class="badge">{identity}</span>
     <span class="badge">version {version}</span>
     <span class="badge">channel {channel}</span>
+    <span class="badge">default: Toasted SKILL.md Grail</span>
     <span class="badge">guide target: {html.escape(target_label)}</span>
-    <p class="exact">The package carries the original agent bytes, an exact
-    reverse capsule, a SHA-256 lock, and the checksum-gated runner.</p>
+    <p class="exact">The Toasted SKILL.md is the primary Grail record. It
+    carries the original agent bytes, an exact reverse capsule, a SHA-256
+    lock, and the checksum-gated runner. The linked agent is retained only as
+    a rollback backup during migration.</p>
     <p>Run the local integrity preflight before loading:</p>
     <pre>python3 skill/{skill_name}/scripts/run_agent.py --preflight</pre>
   </section>
@@ -787,11 +820,13 @@ a {{ color:var(--accent); }}
       <li>Open this export's <code>skill/{skill_name}/</code> directory.</li>
       <li>Copy the whole directory to
       <code>~/.copilot/skills/{skill_name}/</code>. Keep every companion file;
-      the lock and runner are part of the deterministic boundary.</li>
+      the lock and runner are part of the deterministic boundary, while the
+      backup agent remains available for rollback.</li>
       <li>In Scout settings, enable <strong>Load Copilot CLI skills</strong>,
       then refresh or restart Scout so it rescans the shared directory.</li>
       <li>Ask Scout to use <code>{skill_name}</code>. The skill instructs Scout
-      to run the checksum-verified Python entrypoint instead of recreating it.</li>
+      to execute the checksum-vaulted agent from the Grail instead of
+      recreating it.</li>
     </ol>
     <p>GitHub import alternative: {import_link}</p>
   </section>
@@ -807,8 +842,9 @@ a {{ color:var(--accent); }}
       custom skills at the start of the next session.</li>
       <li>Review Cowork's automatic Skill Report and resolve any safety,
       trigger, or conflict gate before sharing the skill.</li>
-      <li>Keep the package intact. Cowork allows a <code>SKILL.md</code> plus
-      companion files; removing the runner or lock removes exact execution.</li>
+      <li>Keep the Grail, runner, and lock intact. The agent backup may be
+      removed only after the rollback window closes because exact execution
+      can already restore it from the capsule.</li>
     </ol>
     <p class="warning">If the Cowork tenant does not permit companion-script
     execution, route the skill through the RAPP Brainstem MCP bridge. Do not
@@ -1702,6 +1738,15 @@ class RappSkillAgent(BasicAgent):
             "description": skill.get("description"),
             "requires_env": skill.get("requires_env") or [],
             "import_url": skill.get("import_url"),
+            "rappid": skill.get("rappid"),
+            "default_artifact": skill.get("default_artifact", "skill"),
+            "grail_record": skill.get("grail_record", "SKILL.md"),
+            "backup_agent": skill.get("backup_agent"),
+            "rollback_agent_retained": skill.get(
+                "rollback_agent_retained",
+                bool(skill.get("linked_agent")),
+            ),
+            "materializes": skill.get("materializes") or ["agent"],
         }
 
     def _skills_list(self, kwargs):
@@ -1824,6 +1869,15 @@ class RappSkillAgent(BasicAgent):
             "channel": skill.get("channel"),
             "catalog": catalog_location,
             "skill_sha256": skill.get("skill_sha256"),
+            "rappid": skill.get("rappid"),
+            "default_artifact": skill.get("default_artifact", "skill"),
+            "grail_record": skill.get("grail_record", "SKILL.md"),
+            "backup_agent": skill.get("backup_agent"),
+            "rollback_agent_retained": skill.get(
+                "rollback_agent_retained",
+                bool(skill.get("linked_agent")),
+            ),
+            "materializes": skill.get("materializes") or ["agent"],
             "files": files,
             "installed_at": int(time.time()),
         }
@@ -2144,6 +2198,15 @@ class RappSkillAgent(BasicAgent):
                 "source_sha256": skill.get("source_sha256"),
                 "skill_sha256": skill.get("skill_sha256"),
                 "linked_agent": skill.get("linked_agent"),
+                "rappid": skill.get("rappid"),
+                "default_artifact": skill.get("default_artifact", "skill"),
+                "grail_record": skill.get("grail_record", "SKILL.md"),
+                "backup_agent": skill.get("backup_agent"),
+                "rollback_agent_retained": skill.get(
+                    "rollback_agent_retained",
+                    bool(skill.get("linked_agent")),
+                ),
+                "materializes": skill.get("materializes") or ["agent"],
                 "import_url": skill.get("import_url"),
                 "files": skill.get("files") or [],
                 "artifacts": {

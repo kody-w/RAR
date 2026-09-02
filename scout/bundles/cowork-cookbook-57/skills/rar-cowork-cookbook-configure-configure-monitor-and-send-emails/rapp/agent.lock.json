@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_configure_monitor_and_send_emails",
+  "agent_bytes": 10948,
   "agent_file": "configure_configure_monitor_and_send_emails_agent.py",
   "agent_sha256": "f6e9fa79aa18988e00923e0e63ded63ae066138447485a809015e77222ab74cc",
+  "backup_agent": "configure_configure_monitor_and_send_emails_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureConfigureMonitorAndSendEmails",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-configure-monitor-and-send-emails:8b140fbd97a48b05fa5260d4a6c81027b8907d82671078c4b8001f022314910a",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureConfigureMonitorAndSendEmails",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25212,
+  "skill_sha256": "4265c9adbee18477f2ebaf7cbd6871a0c1bb061258ad7af1683af8a8f1f493a1",
   "tool_schema": {
     "properties": {
       "operation": {

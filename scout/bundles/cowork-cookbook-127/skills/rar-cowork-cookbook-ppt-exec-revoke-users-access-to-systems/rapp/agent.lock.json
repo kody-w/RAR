@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_revoke_users_access_to_systems",
+  "agent_bytes": 10704,
   "agent_file": "ppt_exec_revoke_users_access_to_systems_agent.py",
   "agent_sha256": "16e42f61e7ba300fd94b31203812ea6ac49ba4d8aa0597f552211382b94a02a2",
+  "backup_agent": "ppt_exec_revoke_users_access_to_systems_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecRevokeUsersAccessToSystems",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-revoke-users-access-to-systems:bda71c1431ab3d59c7ac16eda0ddcff6b70301c0047b1b5ae2d334c05db05703",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecRevokeUsersAccessToSystems",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24879,
+  "skill_sha256": "4387d96c28d6634441a67acb0c43bb43b4fae200d1b9a012675466423c24266a",
   "tool_schema": {
     "properties": {
       "operation": {

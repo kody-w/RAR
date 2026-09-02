@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_develop_brand_kit",
+  "agent_bytes": 10557,
   "agent_file": "adaptive_card_develop_brand_kit_agent.py",
   "agent_sha256": "40b2e906c692b66e79f0f89672aa5693d6b658a5b2d808c01b9fb5aec5a7ebcd",
+  "backup_agent": "adaptive_card_develop_brand_kit_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDevelopBrandKit",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-develop-brand-kit:3290ba800c24df932e7b0bfc0692876271aa818cd98f7674214865ebe5045a69",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDevelopBrandKit",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24523,
+  "skill_sha256": "db0efc0a665e4f7083e1b087531ad5382d0050b9b38dc5cf7b493af9d5080e28",
   "tool_schema": {
     "properties": {
       "operation": {

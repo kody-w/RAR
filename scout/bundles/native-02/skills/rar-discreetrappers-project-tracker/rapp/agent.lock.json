@@ -1,11 +1,14 @@
 {
   "agent": "@discreetRappers/project_tracker_agent",
+  "agent_bytes": 40094,
   "agent_file": "project_tracker_agent.py",
   "agent_sha256": "b9df9cb9d4f0743092aae62cabc5a156bd6b7f73fd773fce14584278f1c56fa4",
+  "backup_agent": "project_tracker_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProjectTrackerAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.storage_factory"
+    "brainstem:utils.storage_factory"
   ],
   "manifest": {
     "author": "Bill Whalen",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/project-tracker:d3ed069ac4f071cef934ce499956823ecb0371dad7a84b53cdeadad7f3ca8918",
+  "rollback_agent_retained": true,
   "runtime_name": "ProjectTracker",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 63881,
+  "skill_sha256": "60c35228eb879061678220b4d731611f446d1ed549963a555b2e5f541a728748",
   "tool_schema": {
     "properties": {
       "action": {

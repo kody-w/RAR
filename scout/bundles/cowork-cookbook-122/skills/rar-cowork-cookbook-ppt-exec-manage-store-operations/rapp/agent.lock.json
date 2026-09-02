@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_manage_store_operations",
+  "agent_bytes": 10573,
   "agent_file": "ppt_exec_manage_store_operations_agent.py",
   "agent_sha256": "ce1c7e4b0e734d574cd8d106547c19ad65fbdd918182384ed85cdf5ad0fb2adb",
+  "backup_agent": "ppt_exec_manage_store_operations_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecManageStoreOperations",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-manage-store-operations:64f5945ae9f8bb957e5554acd3f933bdacc275808fdf2a8e1895db7bb6cca48a",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecManageStoreOperations",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24543,
+  "skill_sha256": "a902311ec1e26c1115f396e3b7360898fffe9ad3123d126a12619f9a1680a2da",
   "tool_schema": {
     "properties": {
       "operation": {

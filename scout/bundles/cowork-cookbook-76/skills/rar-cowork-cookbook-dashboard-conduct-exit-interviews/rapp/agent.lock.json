@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_conduct_exit_interviews",
+  "agent_bytes": 10602,
   "agent_file": "dashboard_conduct_exit_interviews_agent.py",
   "agent_sha256": "72280e6a8f6a9283acaef79b33def4e8033abf73e0fd89c7e298f687a608e377",
+  "backup_agent": "dashboard_conduct_exit_interviews_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardConductExitInterviews",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-conduct-exit-interviews:cd484b15d46da971f1bbb79752bfde178341c84f95384e76a61453358015b73b",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardConductExitInterviews",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24631,
+  "skill_sha256": "ec34b70b045c0f55299acdea7b2201600a505ec19064b13558289f805a1fdfc2",
   "tool_schema": {
     "properties": {
       "operation": {

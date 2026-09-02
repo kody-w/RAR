@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/vacation_urgent_forwarder",
+  "agent_bytes": 9350,
   "agent_file": "vacation_urgent_forwarder_agent.py",
   "agent_sha256": "a945ea6ac53c04d6b788b7a61d287b33fed92bc1d34272178e5a7c74c2c66e7e",
+  "backup_agent": "vacation_urgent_forwarder_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VacationUrgentForwarder",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Giorgio Ughini",
@@ -40,8 +43,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/vacation-urgent-forwarder:2c117443d0b1c6a3d4c18b2ac9f9945de1c429dce77b9f2c469a4ed127fa4c44",
+  "rollback_agent_retained": true,
   "runtime_name": "VacationUrgentForwarder",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22490,
+  "skill_sha256": "9ca867dee85a08ef168388c06fa0267cd27271c0efcb817e8b4397a77e7977ce",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -3,10 +3,11 @@
   "id": "kody-w__bakeoff_factory",
   "name": "BakeoffFactory",
   "rar_name": "@kody-w/bakeoff_factory",
-  "rappid": "rappid:@kody-w/bakeoff_factory:3283d03504d00d0d2099b59a0f880cdd4b3113604d6f25b63f75820ff7278f8e",
-  "_migrated_from": "rappid:@kody-w/bakeoff_factory:ccfd843d36da222837a1a9be8c9dff174016f92534a2ad371b1e02dc006088c8",
+  "rappid": "rappid:@kody-w/bakeoff-factory:7b22406672acd622052f2dd226ad0e337f41076a2b5d849c9ad406d019eaed67",
+  "_migrated_from": "rappid:@kody-w/bakeoff_factory:3283d03504d00d0d2099b59a0f880cdd4b3113604d6f25b63f75820ff7278f8e",
   "_migrated_from_all": [
-    "rappid:@kody-w/bakeoff_factory:ccfd843d36da222837a1a9be8c9dff174016f92534a2ad371b1e02dc006088c8"
+    "rappid:@kody-w/bakeoff_factory:ccfd843d36da222837a1a9be8c9dff174016f92534a2ad371b1e02dc006088c8",
+    "rappid:@kody-w/bakeoff_factory:3283d03504d00d0d2099b59a0f880cdd4b3113604d6f25b63f75820ff7278f8e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.1.1",
@@ -33,9 +34,18 @@
   "sha256": "461620d239ee7c63430f5a5cd4412429d72a049977d5ff2beb04d0ba5e38b786",
   "has_card": true,
   "added_at": "2026-05-16T16:03:13-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-bakeoff-factory",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__bakeoff_factory.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/bakeoff_factory_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/bakeoff_factory_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-bakeoff-factory/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-bakeoff-factory/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__bakeoff_factory.py",
   "api_card_url": null,

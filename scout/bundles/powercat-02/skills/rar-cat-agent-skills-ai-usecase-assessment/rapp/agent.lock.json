@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/ai_usecase_assessment",
+  "agent_bytes": 9618,
   "agent_file": "ai_usecase_assessment_agent.py",
   "agent_sha256": "b1c7ceb11b90cd8bd781cbfab3f8c914f11830d1ae2eb360f2aa3b68152fef67",
+  "backup_agent": "ai_usecase_assessment_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AiUsecaseAssessment",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Alicja Gilderdale",
@@ -45,8 +48,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/ai-usecase-assessment:3ce5f6a18d08a85d221449278c1927dbc5a8d6fa143a39dd95cf84566f89ec0d",
+  "rollback_agent_retained": true,
   "runtime_name": "AiUsecaseAssessment",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23487,
+  "skill_sha256": "fa0aa3841118c3fefc281f463dba9d652c2ce5ac1494371640c78ecb3f9f6a88",
   "tool_schema": {
     "properties": {
       "audience": {

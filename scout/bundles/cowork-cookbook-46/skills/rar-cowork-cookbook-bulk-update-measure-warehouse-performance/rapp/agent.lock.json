@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_measure_warehouse_performance",
+  "agent_bytes": 10713,
   "agent_file": "bulk_update_measure_warehouse_performance_agent.py",
   "agent_sha256": "b0b9fe5c857185c91ef9e2ffc6fa543fe4fa37b11fac7e55ff4df1217350d2c1",
+  "backup_agent": "bulk_update_measure_warehouse_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateMeasureWarehousePerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-measure-warehouse-performance:6b3741862d6a6e08e52e5807851875c364d77fd4d06d04f308e9b4b15115c003",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateMeasureWarehousePerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24853,
+  "skill_sha256": "5a2a4ed73668dcb14b5efc85196c2819350c210a3adc6aefff35b354666db42d",
   "tool_schema": {
     "properties": {
       "operation": {

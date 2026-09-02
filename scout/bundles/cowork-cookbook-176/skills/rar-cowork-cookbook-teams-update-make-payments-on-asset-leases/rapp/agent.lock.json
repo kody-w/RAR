@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_make_payments_on_asset_leases",
+  "agent_bytes": 10711,
   "agent_file": "teams_update_make_payments_on_asset_leases_agent.py",
   "agent_sha256": "5ade59413d24f6c421ae395e1f8d5c921775b5e04f299b9c0dd0d134f5f94e07",
+  "backup_agent": "teams_update_make_payments_on_asset_leases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateMakePaymentsOnAssetLeases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-make-payments-on-asset-leases:b4bd052f282b7ce92b09cae8f4b53a1553a55886e8c2940ee1fc9b2a4defc001",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateMakePaymentsOnAssetLeases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24891,
+  "skill_sha256": "67ab725adfb1fa3bf6f3a794a2b67aa183311ca6dc514f1c855b3146aec66705",
   "tool_schema": {
     "properties": {
       "operation": {

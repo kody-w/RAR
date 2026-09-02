@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/wcag_power_platform",
+  "agent_bytes": 9447,
   "agent_file": "wcag_power_platform_agent.py",
   "agent_sha256": "64c5ea9482a1d1ada8874099c362a028318cf35ce157fe91e5642f6eebdaf1b5",
+  "backup_agent": "wcag_power_platform_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WcagPowerPlatform",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Mark Christie",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/wcag-power-platform:b33a0bf534cce1d48fdc21636e7ee6445307a7971502a14f4f812f84bcc83d9e",
+  "rollback_agent_retained": true,
   "runtime_name": "WcagPowerPlatform",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22781,
+  "skill_sha256": "997af07cce8b75ee8d49246f31f736e678c1bc9ca929e33e6af9bba330d1f6ac",
   "tool_schema": {
     "properties": {
       "criteria": {

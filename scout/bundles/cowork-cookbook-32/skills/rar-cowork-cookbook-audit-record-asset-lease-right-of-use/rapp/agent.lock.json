@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_record_asset_lease_right_of_use",
+  "agent_bytes": 10739,
   "agent_file": "audit_record_asset_lease_right_of_use_agent.py",
   "agent_sha256": "7b8f1c2203250220ae3fbb28d4f7485722d73e3937f3de9860e3c96e9f8f44fd",
+  "backup_agent": "audit_record_asset_lease_right_of_use_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditRecordAssetLeaseRightOfUse",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-record-asset-lease-right-of-use:f02ab5496c2b4e9f6da00f18091f3a78719b3fecfc3aa8f8fb577f1b05f9de74",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditRecordAssetLeaseRightOfUse",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24937,
+  "skill_sha256": "3700974eaa6cfdbb5350d244bbac0977d4dd7878e55b2aff1bcbdee613c6fafd",
   "tool_schema": {
     "properties": {
       "criteria": {

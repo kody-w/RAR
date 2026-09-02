@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_run_events",
+  "agent_bytes": 10465,
   "agent_file": "teams_update_run_events_agent.py",
   "agent_sha256": "fe7d21d3f0c69f0f72ef209de7832782917a6293377cf7a68e4efbc85d49e12c",
+  "backup_agent": "teams_update_run_events_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateRunEvents",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-run-events:9d33cdf37067d70891e185253d94be4d06a0a5c28e6d3463d0d0883620164d0f",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateRunEvents",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24243,
+  "skill_sha256": "16b2a21c7d24f8d36cf7d0280f6b75353811cf1eaebf44c580d84cee05b57e21",
   "tool_schema": {
     "properties": {
       "operation": {

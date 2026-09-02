@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_analyze_marketing_trends",
+  "agent_bytes": 10642,
   "agent_file": "dashboard_analyze_marketing_trends_agent.py",
   "agent_sha256": "beeff119eb8b6abf02179be57c177c8ca11963fbf3afc79a1a9244f4d1981eb7",
+  "backup_agent": "dashboard_analyze_marketing_trends_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardAnalyzeMarketingTrends",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-analyze-marketing-trends:635369362ea935dfff405e5dbc24e23426222da6eaebdba845175fc9065bf1e1",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardAnalyzeMarketingTrends",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24713,
+  "skill_sha256": "8806ef6b5556521f28ed15a114f1c190437d010d5256b15c080889e3c80d300c",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_retire_services",
+  "agent_bytes": 10493,
   "agent_file": "ppt_exec_retire_services_agent.py",
   "agent_sha256": "255c4ff7aa4462dc9525477b2fecc06d96d5998449b209e1fe46f844d4d9011b",
+  "backup_agent": "ppt_exec_retire_services_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecRetireServices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-retire-services:6e5c617a3b5328fb9d4170970d6df5a1c60e5b1ef5569483510301a4ee913f15",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecRetireServices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24315,
+  "skill_sha256": "13ea4d3c0c41122411a4eeedd20f67ae22afe4f73814b07c02e1366f9e29ae85",
   "tool_schema": {
     "properties": {
       "operation": {

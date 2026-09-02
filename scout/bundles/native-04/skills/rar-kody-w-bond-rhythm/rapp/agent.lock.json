@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/bond_rhythm_agent",
+  "agent_bytes": 15474,
   "agent_file": "bond_rhythm_agent.py",
   "agent_sha256": "88bb285bbf26b68fee053d24bf70c08ae1ec42e4c3a03b9afe7de2c404a5a219",
+  "backup_agent": "bond_rhythm_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BondRhythmAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/bond-rhythm:e8964e8d2aa98f003c3a4fdd289d7fbf14e4e712048ad1abb944a3e84edb4560",
+  "rollback_agent_retained": true,
   "runtime_name": "BondRhythm",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 33934,
+  "skill_sha256": "bffd50e62be7ff98df84ddb766fdbd83671d44ae597a0214e8873371e547ea6d",
   "tool_schema": {
     "properties": {
       "_audit_override": {

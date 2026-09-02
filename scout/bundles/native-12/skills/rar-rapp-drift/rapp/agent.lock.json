@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/drift",
+  "agent_bytes": 37190,
   "agent_file": "drift_agent.py",
   "agent_sha256": "00ffb4b96beb3024e1b412caf5d2191a84846e73091132eefa30ffe6c2c5e31c",
+  "backup_agent": "drift_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DriftAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/drift:4523e5c2bcd34920563a88366d0b639d3d9afc6c62c02edce4e062e8fd9d7bcf",
+  "rollback_agent_retained": true,
   "runtime_name": "DriftAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 64823,
+  "skill_sha256": "245decf99df2820971d67f68bcebf217a635d1eb514c1c46a265fe71130fccb1",
   "tool_schema": {
     "properties": {
       "action": {

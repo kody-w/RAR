@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp_sentinel_agent",
+  "agent_bytes": 21865,
   "agent_file": "rapp_sentinel_agent.py",
   "agent_sha256": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884",
+  "backup_agent": "rapp_sentinel_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappSentinel",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -40,8 +43,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-sentinel:4d8eb0e062e92dee97bf36fe7b39cba2c3557db44ecce2c40b9368a238add9a6",
+  "rollback_agent_retained": true,
   "runtime_name": "RappSentinel",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 38993,
+  "skill_sha256": "0b6afa3a59887105365fee03c2253f505f32fc0f33efed41dc2117f4e1545d2e",
   "tool_schema": {
     "properties": {},
     "required": [],

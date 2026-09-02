@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_configure_and_manage_microsoft_teams_integrations",
+  "agent_bytes": 10687,
   "agent_file": "report_configure_and_manage_microsoft_teams_integrations_agent.py",
   "agent_sha256": "bac9c98b973f564185040a2e053dea81f73a886ba75de4cbfdbee78621e7c372",
+  "backup_agent": "report_configure_and_manage_microsoft_teams_integrations_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportConfigureAndManageMicrosoftTeamsIntegrations",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-configure-and-manage-microsoft-teams-integrations:85638dd959de1049d9b363c1bdcb43aadc3ac1a2e8a83a1406f0b4804ad14526",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportConfigureAndManageMicrosoftTeamsIntegrations",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25030,
+  "skill_sha256": "a651c15747e735b3e009bd4035222684365d9d46191da4b0e055dde59f229232",
   "tool_schema": {
     "properties": {
       "audience": {

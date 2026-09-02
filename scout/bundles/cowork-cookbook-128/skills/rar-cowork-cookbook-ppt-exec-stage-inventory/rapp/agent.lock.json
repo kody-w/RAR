@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_stage_inventory",
+  "agent_bytes": 10506,
   "agent_file": "ppt_exec_stage_inventory_agent.py",
   "agent_sha256": "769cdbcd4aaec60e3e2e2bd8926c7447af43a00a232c6f46af7647cf37ecab94",
+  "backup_agent": "ppt_exec_stage_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecStageInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-stage-inventory:4967e34a17942442bae6ea0f8672e93f385bae32b46a888d0843351c9500c070",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecStageInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24327,
+  "skill_sha256": "f907c2618426ed2a2c173552c0565e58662d69be1f25452b54bb03d422dd51b5",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_hire_for_open_positions",
+  "agent_bytes": 10667,
   "agent_file": "scheduled_brief_hire_for_open_positions_agent.py",
   "agent_sha256": "4d329b2fed0635c9d70dc2c3e61781bc2439adea57c29cee2d1d3f0a2938c1b2",
+  "backup_agent": "scheduled_brief_hire_for_open_positions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefHireForOpenPositions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-hire-for-open-positions:eb7867f1090a87f7fde5f4564af95b1e35fe9d13be808623ea30758144b4e7b7",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefHireForOpenPositions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24785,
+  "skill_sha256": "9f4cc42f5d8a4f7eb495c6bd7944d4425af4ba5d7353b2fb5b143d1f84331d7c",
   "tool_schema": {
     "properties": {
       "operation": {

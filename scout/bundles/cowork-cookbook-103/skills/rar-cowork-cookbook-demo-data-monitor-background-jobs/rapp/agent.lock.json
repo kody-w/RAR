@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_monitor_background_jobs",
+  "agent_bytes": 10538,
   "agent_file": "demo_data_monitor_background_jobs_agent.py",
   "agent_sha256": "6bbe02d53a3336a709d4bf840ac486cc24e9bf155085cb21e721dc13294f973a",
+  "backup_agent": "demo_data_monitor_background_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataMonitorBackgroundJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-monitor-background-jobs:e36c79e49634208c82936fa3a8813d2271e67a8f5b0da9019e19601adf43ffee",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataMonitorBackgroundJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24513,
+  "skill_sha256": "d1757bd6bee1af8ba6beca307d0fc0b36409d9e96e7b7dd661ac8af394d157f5",
   "tool_schema": {
     "properties": {
       "operation": {

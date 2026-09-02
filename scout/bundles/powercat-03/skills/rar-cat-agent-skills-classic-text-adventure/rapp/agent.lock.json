@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/classic_text_adventure",
+  "agent_bytes": 8495,
   "agent_file": "classic_text_adventure_agent.py",
   "agent_sha256": "90b57384eee43f39e7dd44a0ba50ba226615e3b65355dcdc8f5b1f49fac559a1",
+  "backup_agent": "classic_text_adventure_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ClassicTextAdventure",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Andreas Adner",
@@ -39,8 +42,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/classic-text-adventure:7d10670a901cf58f8d1172d38431ca4144b3bd4af0df55f097b889170d11775e",
+  "rollback_agent_retained": true,
   "runtime_name": "ClassicTextAdventure",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 20804,
+  "skill_sha256": "de628404838c4ff3bb95103c424d010a671c6e47764775d77832e7257c908abc",
   "tool_schema": {
     "properties": {
       "operation": {

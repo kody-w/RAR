@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_analyze_rebates_and_incentives",
+  "agent_bytes": 10699,
   "agent_file": "bulk_update_analyze_rebates_and_incentives_agent.py",
   "agent_sha256": "e86090b3d7a95d535bee06304055d4420ecd7b8b0a3d89686d79f81032d1f5d5",
+  "backup_agent": "bulk_update_analyze_rebates_and_incentives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAnalyzeRebatesAndIncentives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-analyze-rebates-and-incentives:b4e25cb66386c402b7fd4696b9b00b22bf3ce2c9c0c091c63aa27a4cb5235e27",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAnalyzeRebatesAndIncentives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24863,
+  "skill_sha256": "249829201e013f722e22ae2f20544f5dc4d823a71ae623454d878bb1b3fc7a43",
   "tool_schema": {
     "properties": {
       "operation": {

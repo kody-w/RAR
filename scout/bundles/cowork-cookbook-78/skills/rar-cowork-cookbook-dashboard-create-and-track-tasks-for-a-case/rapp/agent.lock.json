@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_create_and_track_tasks_for_a_case",
+  "agent_bytes": 10745,
   "agent_file": "dashboard_create_and_track_tasks_for_a_case_agent.py",
   "agent_sha256": "88c44a50e7c38144026fd2ea81cf76792b3fe08347094dd03159febfee023cce",
+  "backup_agent": "dashboard_create_and_track_tasks_for_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardCreateAndTrackTasksForACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-create-and-track-tasks-for-a-case:56bd330dd8cfeab824aa1c31eb8fb16bd6e99a248a06f0f31673630b5a4f9aec",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardCreateAndTrackTasksForACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25036,
+  "skill_sha256": "7317f8ea108a42b9dc2d4500f6a35541dd6c8289c9446f609280c43980c6d331",
   "tool_schema": {
     "properties": {
       "operation": {

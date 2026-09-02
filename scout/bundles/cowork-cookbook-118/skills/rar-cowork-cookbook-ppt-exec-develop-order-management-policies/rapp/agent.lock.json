@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_develop_order_management_policies",
+  "agent_bytes": 10703,
   "agent_file": "ppt_exec_develop_order_management_policies_agent.py",
   "agent_sha256": "3614cdfe1e067cc0c763a7a6d4cae8d8f6a455a38ba2bc9860d5bcce5540e908",
+  "backup_agent": "ppt_exec_develop_order_management_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDevelopOrderManagementPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-develop-order-management-policies:9874985126f06c84868e6a6141ece6b5e4df19fd1070c804fdd1ff20c446933e",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDevelopOrderManagementPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24867,
+  "skill_sha256": "ebdce5560df541094ce015a9445eb9ab230958e4d009d3a336a3ee91d183fbcb",
   "tool_schema": {
     "properties": {
       "operation": {

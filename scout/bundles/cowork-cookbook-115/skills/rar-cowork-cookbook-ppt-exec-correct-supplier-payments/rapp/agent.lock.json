@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_correct_supplier_payments",
+  "agent_bytes": 10613,
   "agent_file": "ppt_exec_correct_supplier_payments_agent.py",
   "agent_sha256": "83c33726f3f832415c827ee7f8fbf3c621060b896c1bf97a1724f508301169df",
+  "backup_agent": "ppt_exec_correct_supplier_payments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecCorrectSupplierPayments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-correct-supplier-payments:76b3705965d150abb390654ff8d14989da889b690105bbcec7ea625ea2dc2608",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecCorrectSupplierPayments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24629,
+  "skill_sha256": "21116b8667d8106be88503df6609df8d2a749e9a9dce8e60905c162db7b91daa",
   "tool_schema": {
     "properties": {
       "operation": {

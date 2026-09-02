@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/perpetual_loop_factory",
+  "agent_bytes": 55617,
   "agent_file": "perpetual_loop_factory_agent.py",
   "agent_sha256": "1e53fe183fd90dfda9e8c438e9d8b3fb82f98254763757ed87a9c28869477f53",
+  "backup_agent": "perpetual_loop_factory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PerpetualLoopFactoryAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "claude-opus-4.7-1m-internal (Copilot CLI)",
@@ -28,8 +31,16 @@
     ],
     "version": "1.0.3"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/perpetual-loop-factory:4b225f1abb9a64b97583f7287b5075d9acf7e64fc4916abdf0725cc5788b3ee3",
+  "rollback_agent_retained": true,
   "runtime_name": "PerpetualLoopFactory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 88869,
+  "skill_sha256": "6f9310795c410b26dcff15a8fc3cfec46175500341f46ccdc60f4806a56295d6",
   "tool_schema": {
     "properties": {},
     "required": [],

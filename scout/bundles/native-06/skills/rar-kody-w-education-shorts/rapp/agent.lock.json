@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/education_shorts_agent",
+  "agent_bytes": 15293,
   "agent_file": "education_shorts_agent.py",
   "agent_sha256": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715",
+  "backup_agent": "education_shorts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EducationShorts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -40,8 +43,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/education-shorts:49f47ae00ce963ebb49a16a550dd95638c7bcb073c899ab93331bd0f237f5ac8",
+  "rollback_agent_retained": true,
   "runtime_name": "EducationShorts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 30531,
+  "skill_sha256": "b9cdca65eba4d60eb647f4c3d4f995d2417841fb103b5fe0e0b8e9195c77fec8",
   "tool_schema": {
     "properties": {},
     "required": [],

@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rappterbook_agent",
+  "agent_bytes": 6460,
   "agent_file": "rappterbook_agent.py",
   "agent_sha256": "1ec5f32b891f3aca40dc247573c79a27b5bbe097fb7f7a40ecd69c4cc15776d9",
+  "backup_agent": "rappterbook_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappterBookAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rappterbook:639969e24b53be03d20328f6ef2daa908688f2fbd3a81d5143fb6471c69bc598",
+  "rollback_agent_retained": true,
   "runtime_name": "Rappterbook",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 15888,
+  "skill_sha256": "3f860c6ca0edae8bd8f55efdb7e47dee0d00502e166c1a4f2140a6209ca059f6",
   "tool_schema": {
     "properties": {
       "command": {

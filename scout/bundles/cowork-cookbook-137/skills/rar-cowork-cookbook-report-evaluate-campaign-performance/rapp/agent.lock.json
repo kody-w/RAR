@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_evaluate_campaign_performance",
+  "agent_bytes": 10425,
   "agent_file": "report_evaluate_campaign_performance_agent.py",
   "agent_sha256": "ffca062dc109d47d683d17057c6ccc3d42de3786dbe2db15460ff9232335adb5",
+  "backup_agent": "report_evaluate_campaign_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportEvaluateCampaignPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-evaluate-campaign-performance:1b2d03a78ae5767d8141393426f6e6604c993a348f9d8d544af6fff78fe91cd0",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportEvaluateCampaignPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24318,
+  "skill_sha256": "309b8d5930cce17abb61d2baf4bc8ca9919209f9f3cad5d5f9a3af02fd477e8e",
   "tool_schema": {
     "properties": {
       "data_source": {

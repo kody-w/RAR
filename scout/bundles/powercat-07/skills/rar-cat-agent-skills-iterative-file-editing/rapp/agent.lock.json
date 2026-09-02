@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/iterative_file_editing",
+  "agent_bytes": 9596,
   "agent_file": "iterative_file_editing_agent.py",
   "agent_sha256": "cce8b6e20451b55794496c50b14c159915737e03af94e3e7c2d3dcc01b8588f8",
+  "backup_agent": "iterative_file_editing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "IterativeFileEditing",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Adi Leibowitz",
@@ -41,8 +44,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/iterative-file-editing:11c3d818e24a7b1fbfc5cb8038cc811f19bb3e5ed6c6bbf8f74933e7123bebba",
+  "rollback_agent_retained": true,
   "runtime_name": "IterativeFileEditing",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23167,
+  "skill_sha256": "e3f6619b5c8f3d1fdc3ee73242d03636ad1cb1a11a34d73056fd28d40c6f1aac",
   "tool_schema": {
     "properties": {
       "operation": {

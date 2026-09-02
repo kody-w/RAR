@@ -3,11 +3,12 @@
   "id": "kody-w__hello_world_agent",
   "name": "Hello World",
   "rar_name": "@kody-w/hello_world_agent",
-  "rappid": "rappid:@kody-w/hello_world_agent:5945217feeb3579e243ff0e016ccd68080164d3661bdd6951948b262be96dd8d",
-  "_migrated_from": "rappid:@kody-w/hello_world_agent:8add60ff91c8a9ce79e3bcce0174f595639ba4961d8dea70bdaf78eadca9a037",
+  "rappid": "rappid:@kody-w/hello-world:13cc8a648bd0a09a4458f52f952b2c9e5d64ed740a9c59625238d7a943ca809a",
+  "_migrated_from": "rappid:@kody-w/hello_world_agent:5945217feeb3579e243ff0e016ccd68080164d3661bdd6951948b262be96dd8d",
   "_migrated_from_all": [
     "rappid:v2:agent:@kody-w/hello_world_agent:bc98fc54ed0471fcc12b075ebba0a591",
-    "rappid:@kody-w/hello_world_agent:8add60ff91c8a9ce79e3bcce0174f595639ba4961d8dea70bdaf78eadca9a037"
+    "rappid:@kody-w/hello_world_agent:8add60ff91c8a9ce79e3bcce0174f595639ba4961d8dea70bdaf78eadca9a037",
+    "rappid:@kody-w/hello_world_agent:5945217feeb3579e243ff0e016ccd68080164d3661bdd6951948b262be96dd8d"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.3",
@@ -30,9 +31,18 @@
   "sha256": "d2695f70a412909546a49586487a471e6bca9c2d215d0367d440a80473b75bd1",
   "has_card": true,
   "added_at": "2026-04-06T16:39:03-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-hello-world",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__hello_world_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hello_world_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hello_world_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-hello-world/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-hello-world/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__hello_world_agent.py",
   "api_card_url": null,

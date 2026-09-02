@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_analyze_sourcing_market",
+  "agent_bytes": 10799,
   "agent_file": "configure_analyze_sourcing_market_agent.py",
   "agent_sha256": "acf25fd6c825035dd577f572fce9f0b1511fdc62cf739e2495b2da31e7515e7a",
+  "backup_agent": "configure_analyze_sourcing_market_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureAnalyzeSourcingMarket",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-analyze-sourcing-market:f9e319fe4427432962778c8053870b6d81653d9cc3166ce89781854b91ad17ae",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureAnalyzeSourcingMarket",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24843,
+  "skill_sha256": "3830490b1be195dec6cbe79506d374dadae26eaf0bd9ffc042c17b83920c6e5c",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/run_deep_research_with_a_citation_map",
+  "agent_bytes": 10508,
   "agent_file": "run_deep_research_with_a_citation_map_agent.py",
   "agent_sha256": "4fa6475f40c9acc7235e456544efc1dfb33b1926371ea452b70941035e17a563",
+  "backup_agent": "run_deep_research_with_a_citation_map_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RunDeepResearchWithACitationMap",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/run-deep-research-with-a-citation-map:57a591accc94b4dc22cec74a122b6ef2d877bb7b0d29b392739c9e8d31707075",
+  "rollback_agent_retained": true,
   "runtime_name": "RunDeepResearchWithACitationMap",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24654,
+  "skill_sha256": "3a314882571c4c4a96b9efcd897ac784cf4a9773430c1cd115f7a45a9f8182a3",
   "tool_schema": {
     "properties": {
       "operation": {

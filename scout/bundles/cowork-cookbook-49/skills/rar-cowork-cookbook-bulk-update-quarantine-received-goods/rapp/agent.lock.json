@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_quarantine_received_goods",
+  "agent_bytes": 10652,
   "agent_file": "bulk_update_quarantine_received_goods_agent.py",
   "agent_sha256": "51b3637ab8a34fc5029849b1647ee2f27e4865ad560044b212611550af395d34",
+  "backup_agent": "bulk_update_quarantine_received_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateQuarantineReceivedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-quarantine-received-goods:5b98fa65d972bc6ad1e230633e2ca606f9824989d6f5808419fb06332d61564b",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateQuarantineReceivedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24740,
+  "skill_sha256": "da2cf6c74d1509157c6c2c6097cd92eebb006fd8504bca79fde75ea0c5f37f4e",
   "tool_schema": {
     "properties": {
       "operation": {

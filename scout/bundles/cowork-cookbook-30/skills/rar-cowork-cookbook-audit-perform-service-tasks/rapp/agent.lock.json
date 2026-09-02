@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_perform_service_tasks",
+  "agent_bytes": 10610,
   "agent_file": "audit_perform_service_tasks_agent.py",
   "agent_sha256": "ad0881568b7ab3535038f2b1cc564cd23421461237f42c74a96a4a897561112a",
+  "backup_agent": "audit_perform_service_tasks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditPerformServiceTasks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-perform-service-tasks:1b22703eb12da801012e22f28c259e0693fce71987420fc8a065912b5298f284",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditPerformServiceTasks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24570,
+  "skill_sha256": "0eecd6a19daa87a2b4b09cfe8065c0698da924a7d03d0556d762cb7620975067",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_audit_regulatory_compliance",
+  "agent_bytes": 10696,
   "agent_file": "audit_audit_regulatory_compliance_agent.py",
   "agent_sha256": "3a915f97829bb77230e4965b888130af93d2a0df242f193ef760d96fd960a9cb",
+  "backup_agent": "audit_audit_regulatory_compliance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAuditRegulatoryCompliance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-audit-regulatory-compliance:380cad76712913aec2191eb0f6a03ae92f74cb4b46c3fe8115eedcd23464b211",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAuditRegulatoryCompliance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24753,
+  "skill_sha256": "3afd63854f00394eb633a2bdbce7941627735c3c8cb8bc507c7372e8c6640c91",
   "tool_schema": {
     "properties": {
       "criteria": {

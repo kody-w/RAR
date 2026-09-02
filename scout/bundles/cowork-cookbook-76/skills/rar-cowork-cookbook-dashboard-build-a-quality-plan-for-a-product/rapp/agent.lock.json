@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_build_a_quality_plan_for_a_product",
+  "agent_bytes": 10768,
   "agent_file": "dashboard_build_a_quality_plan_for_a_product_agent.py",
   "agent_sha256": "84872fd2a5ca2fe8c17a05e3592cb7a470540aaec55fa9f8980b4b1d85b798b5",
+  "backup_agent": "dashboard_build_a_quality_plan_for_a_product_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardBuildAQualityPlanForAProduct",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-build-a-quality-plan-for-a-product:9953e5663dc5659a372d82c24acb743ec523fbf91b93ede780a59e777c44a15a",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardBuildAQualityPlanForAProduct",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25072,
+  "skill_sha256": "427beb977ecb98fe6cc2f059e2bd13894bbcbc3b53517533a7681445d0ea0762",
   "tool_schema": {
     "properties": {
       "operation": {

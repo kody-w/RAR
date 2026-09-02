@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_manage_support_incidents",
+  "agent_bytes": 10818,
   "agent_file": "configure_manage_support_incidents_agent.py",
   "agent_sha256": "7bba4b977d2b457c1b75a698b551aa1b122788ecff82509809259a9d0889a9a3",
+  "backup_agent": "configure_manage_support_incidents_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageSupportIncidents",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-manage-support-incidents:72c507c89bfab3a8fd8604a3f853e049f03d96b21c60b2cda16b4db282f78a7f",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureManageSupportIncidents",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24869,
+  "skill_sha256": "1ee71ce6d490bf3c28728726942eeffe63f3100fd89d40ff5dbf52601a271c82",
   "tool_schema": {
     "properties": {
       "operation": {

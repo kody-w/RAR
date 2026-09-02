@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_order_to_cash",
+  "agent_bytes": 10509,
   "agent_file": "d365_order_to_cash_agent.py",
   "agent_sha256": "fc702e5d63639e5c85fb87234bb7e0d1c46773b49b39d083ec543a1543f29bf9",
+  "backup_agent": "d365_order_to_cash_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365OrderToCash",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-order-to-cash:66b60a16c71cf93de2dae6f8dd0b0c68301d304ddd3e89208a1bd7c992044d63",
+  "rollback_agent_retained": true,
   "runtime_name": "D365OrderToCash",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24414,
+  "skill_sha256": "e7ceaef11ab6564e59e355b5434720e214f755a8161171227daea3b36c4abd41",
   "tool_schema": {
     "properties": {
       "operation": {

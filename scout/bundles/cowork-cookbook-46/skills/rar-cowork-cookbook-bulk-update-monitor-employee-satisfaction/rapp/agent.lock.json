@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_monitor_employee_satisfaction",
+  "agent_bytes": 10678,
   "agent_file": "bulk_update_monitor_employee_satisfaction_agent.py",
   "agent_sha256": "0f87cefc7045a1332064ec1ecd6dce06a014db8e41a9794c41fe286a61919656",
+  "backup_agent": "bulk_update_monitor_employee_satisfaction_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateMonitorEmployeeSatisfaction",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-monitor-employee-satisfaction:759704bffcd66bf4041e3398ca5dc70517b88c286ab5965a3f98f24e3db28bdf",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateMonitorEmployeeSatisfaction",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24824,
+  "skill_sha256": "4f50ee9b1f53fb1e7415fe7ca8fa58e157307924d2bce4ed504b8cd16d9aa23d",
   "tool_schema": {
     "properties": {
       "operation": {

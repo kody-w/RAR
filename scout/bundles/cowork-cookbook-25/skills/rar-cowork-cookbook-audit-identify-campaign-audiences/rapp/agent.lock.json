@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_identify_campaign_audiences",
+  "agent_bytes": 10695,
   "agent_file": "audit_identify_campaign_audiences_agent.py",
   "agent_sha256": "a05b699d8699abf20a652bc09125a60567f156caab3136c9084cf2ca3942290e",
+  "backup_agent": "audit_identify_campaign_audiences_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditIdentifyCampaignAudiences",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-identify-campaign-audiences:da7f3d486dee3008089e8fa5b3d854ecafb3c0c6bb27c0732ddb96716e2c0ff5",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditIdentifyCampaignAudiences",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24788,
+  "skill_sha256": "5fdd9466e593115cac611c158493d7f9637a3d59235d739493bf2fccff2cf6fd",
   "tool_schema": {
     "properties": {
       "criteria": {

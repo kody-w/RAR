@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_maintain_and_update_the_business_continuity_plan",
+  "agent_bytes": 11134,
   "agent_file": "configure_maintain_and_update_the_business_continuity_plan_agent.py",
   "agent_sha256": "620470dac2c3b06bd9fb6fa326cf0baeac659f36f5a9d13d7aab4075e12e133c",
+  "backup_agent": "configure_maintain_and_update_the_business_continuity_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureMaintainAndUpdateTheBusinessContinuityPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-maintain-and-update-the-business-continuity-plan:7cd8efd52cb2f0554b6b20798e517ce463caa9d5180d26c4b0b34ea1c4871a33",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureMaintainAndUpdateTheBusinessContinuityPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25681,
+  "skill_sha256": "b999cc994ceb157430a971387712333e689441d9ee69c4b4328662e634c3fa85",
   "tool_schema": {
     "properties": {
       "operation": {

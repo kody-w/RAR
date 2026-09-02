@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_plan_project_tasks",
+  "agent_bytes": 10264,
   "agent_file": "report_plan_project_tasks_agent.py",
   "agent_sha256": "0c1da496a250d707e4466167e9f495bcd60fffb7db23f7cb41dd21cb4e5d7755",
+  "backup_agent": "report_plan_project_tasks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportPlanProjectTasks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-plan-project-tasks:ef2c7feb070372f553f2cc8144e62a0d75d6419518d508268a9e2107d25f3b3d",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportPlanProjectTasks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23958,
+  "skill_sha256": "daf1b3cd05c6c82c7624ab0f1ef71a3de1ac9be791f9588b734b0bce97276430",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_manage_sales_order_holds",
+  "agent_bytes": 10329,
   "agent_file": "report_manage_sales_order_holds_agent.py",
   "agent_sha256": "9cc3b71330a539be9cc1787c9785e12004011d4c6451f2597599899d4ef5fd3b",
+  "backup_agent": "report_manage_sales_order_holds_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportManageSalesOrderHolds",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-manage-sales-order-holds:5c8627f572e0ee89c266bd8b8ab49d86ac11a0a062a23a89888d4254b97d68d8",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportManageSalesOrderHolds",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24165,
+  "skill_sha256": "4378a5878a2456bf3a5e302b13fcf5fbea9d94733de2827a5eb67b18d035dbe9",
   "tool_schema": {
     "properties": {
       "audience": {

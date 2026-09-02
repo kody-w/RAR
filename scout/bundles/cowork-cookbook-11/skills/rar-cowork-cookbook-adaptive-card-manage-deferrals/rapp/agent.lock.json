@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_manage_deferrals",
+  "agent_bytes": 10546,
   "agent_file": "adaptive_card_manage_deferrals_agent.py",
   "agent_sha256": "77975301bdd769241dd01cdfa8801e9c7e84a100ad62ca110d80dfeeeb61e642",
+  "backup_agent": "adaptive_card_manage_deferrals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardManageDeferrals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-manage-deferrals:500c5d062bc159f29b5f79f16d22e973f48d446bc46cd802f20ada8028a3c8b2",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardManageDeferrals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24484,
+  "skill_sha256": "3ec3b5f1e2a1b85dccbc5ec134873489344c7bcdbc8835b8e03b6dcbed1979da",
   "tool_schema": {
     "properties": {
       "operation": {

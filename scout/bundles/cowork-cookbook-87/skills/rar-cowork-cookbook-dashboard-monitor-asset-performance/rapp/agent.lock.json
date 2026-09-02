@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_monitor_asset_performance",
+  "agent_bytes": 10653,
   "agent_file": "dashboard_monitor_asset_performance_agent.py",
   "agent_sha256": "698bf1d069ede4ac1561a05d1d5c6a5a978f2203b01e7338ebff1d0328f35873",
+  "backup_agent": "dashboard_monitor_asset_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMonitorAssetPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-monitor-asset-performance:4f2f07f19bb6f45f32420dc2aa017b1c4a0e70f6ad1d4a993f013b158c1ad41b",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardMonitorAssetPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24716,
+  "skill_sha256": "193245def7f61bfbf084e8ffb9821f08a3ce51fdb964ede8fed8defd09376f4f",
   "tool_schema": {
     "properties": {
       "operation": {

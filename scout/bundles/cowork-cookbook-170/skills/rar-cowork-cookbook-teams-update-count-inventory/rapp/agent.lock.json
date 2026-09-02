@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_count_inventory",
+  "agent_bytes": 10541,
   "agent_file": "teams_update_count_inventory_agent.py",
   "agent_sha256": "c82441143eb98bc576890881e1441700504992b693f4b3b264583fa7ffdb5e36",
+  "backup_agent": "teams_update_count_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCountInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-count-inventory:e6f077db586b63fe5dd0fb8a69d5df5d99faf9dd7be444a0d8acf37997fee1d7",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateCountInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24401,
+  "skill_sha256": "cdebab18349990991a3ddecdf43146171fe7380505b60f4543a08d303bed8d93",
   "tool_schema": {
     "properties": {
       "operation": {

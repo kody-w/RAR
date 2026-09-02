@@ -5,6 +5,13 @@
   "id": "0d867825c00abe4d",
   "lastExecutedAt": null,
   "name": "Prototype Lock Factory",
+  "rapp": {
+    "backup_agent": "prototype_lock_factory_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-kody-w-prototype-lock-factory"
+  },
   "schedule": {
     "days": [
       1,

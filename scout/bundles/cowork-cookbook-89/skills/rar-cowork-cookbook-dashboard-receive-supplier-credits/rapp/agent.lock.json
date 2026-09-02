@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_receive_supplier_credits",
+  "agent_bytes": 10619,
   "agent_file": "dashboard_receive_supplier_credits_agent.py",
   "agent_sha256": "28ed5afeb2f27c55c91b4893cd1c6ffd234e15f762345a9a2b97f79ed46cf541",
+  "backup_agent": "dashboard_receive_supplier_credits_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardReceiveSupplierCredits",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-receive-supplier-credits:c8ac34295b8c5c8e3aea3863609089d266923666defa96af83a475f80c1c083b",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardReceiveSupplierCredits",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24654,
+  "skill_sha256": "1fe06786b75a892b4c3789f77df51da0d075b1b053681eae40bbb7dfc8fb99e8",
   "tool_schema": {
     "properties": {
       "operation": {

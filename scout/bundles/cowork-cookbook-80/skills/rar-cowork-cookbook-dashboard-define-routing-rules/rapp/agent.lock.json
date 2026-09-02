@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_routing_rules",
+  "agent_bytes": 10613,
   "agent_file": "dashboard_define_routing_rules_agent.py",
   "agent_sha256": "210461c031a617f848f5e5b92ffd89fc1b4d477b3850a92e9a5d0faf0ec227b2",
+  "backup_agent": "dashboard_define_routing_rules_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefineRoutingRules",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-define-routing-rules:eca28cf5db6b8033c584c75b94f01acf7929f770bba49db8c4a9432bb0275a01",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDefineRoutingRules",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24617,
+  "skill_sha256": "5b5dd4474208bffddcea08b47c9d936b15da987786235630a4f1ffc3ecf7ebb0",
   "tool_schema": {
     "properties": {
       "operation": {

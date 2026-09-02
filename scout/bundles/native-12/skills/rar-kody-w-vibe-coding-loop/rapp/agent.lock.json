@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/vibe_coding_loop",
+  "agent_bytes": 15038,
   "agent_file": "vibe_coding_loop_agent.py",
   "agent_sha256": "931c9224a42c1a609821a5d2fb5b7303a7434fb625d59eae8f8027a7ef7b046e",
+  "backup_agent": "vibe_coding_loop_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VibeCodingLoopAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -30,8 +33,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/vibe-coding-loop:863fcb7d8c325a97690ff32cb05eb90dd71c7aacb8f98f8dcbd895a4479f76e2",
+  "rollback_agent_retained": true,
   "runtime_name": "VibeCodingLoop",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 34007,
+  "skill_sha256": "5496bd6ab1ebacdffa102ef1691e9a6c602c5ad11d6a4207489da4f7de2bd129",
   "tool_schema": {
     "properties": {
       "action": {

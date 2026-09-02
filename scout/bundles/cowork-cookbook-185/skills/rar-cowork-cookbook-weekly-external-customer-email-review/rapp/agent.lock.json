@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/weekly_external_customer_email_review",
+  "agent_bytes": 10639,
   "agent_file": "weekly_external_customer_email_review_agent.py",
   "agent_sha256": "dd29a3bde5d5effec8061353884ddf9b61e2c461d5cd8801745a270d9d6196b2",
+  "backup_agent": "weekly_external_customer_email_review_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WeeklyExternalCustomerEmailReview",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/weekly-external-customer-email-review:7e93e3ae2e3575a184f164b8b63a183153d8d508e04f9acb91ee59103ac301a2",
+  "rollback_agent_retained": true,
   "runtime_name": "WeeklyExternalCustomerEmailReview",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24897,
+  "skill_sha256": "61fa2de2896b724230b9531338349dbf3f27ccd4eb3d82f39a4cb5c7c96baf44",
   "tool_schema": {
     "properties": {
       "criteria": {

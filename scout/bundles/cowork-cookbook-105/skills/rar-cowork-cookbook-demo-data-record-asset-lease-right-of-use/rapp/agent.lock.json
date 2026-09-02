@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_record_asset_lease_right_of_use",
+  "agent_bytes": 10613,
   "agent_file": "demo_data_record_asset_lease_right_of_use_agent.py",
   "agent_sha256": "23c24e8f7152d45c5a7e79043aedd81a65b38f81e73890612d489643eccfa21c",
+  "backup_agent": "demo_data_record_asset_lease_right_of_use_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataRecordAssetLeaseRightOfUse",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-record-asset-lease-right-of-use:ad701ca2e255479e2e1765c0a848294ee106013a395c5d69047ae4a0ad6e275d",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataRecordAssetLeaseRightOfUse",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24761,
+  "skill_sha256": "76e1c7a7728ec8a65e87f32d6f8ae57dfe393f8cae78cbe40352e64470d78ff4",
   "tool_schema": {
     "properties": {
       "operation": {

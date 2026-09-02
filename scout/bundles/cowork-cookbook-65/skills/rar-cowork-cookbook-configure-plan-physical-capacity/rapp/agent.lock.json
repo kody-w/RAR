@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_plan_physical_capacity",
+  "agent_bytes": 10794,
   "agent_file": "configure_plan_physical_capacity_agent.py",
   "agent_sha256": "4d2f687a0069a4c043674b81583e1ee2a230d3b105f1e806b7c8d478a1a1b0e7",
+  "backup_agent": "configure_plan_physical_capacity_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigurePlanPhysicalCapacity",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-plan-physical-capacity:c4bd8572930d139dd67a5de366f9a9ea5bd69bbd04bdb0b1aaa1c46350105051",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigurePlanPhysicalCapacity",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24826,
+  "skill_sha256": "82d12ce7ee9e501d020eec348885eda0c918a2f2d71e0a1acee51943d1d303ad",
   "tool_schema": {
     "properties": {
       "operation": {

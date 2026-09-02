@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/catch_up_on_what_moved_on_my_deals",
+  "agent_bytes": 10365,
   "agent_file": "catch_up_on_what_moved_on_my_deals_agent.py",
   "agent_sha256": "3efae1999657ddd1dc7e525cd8e51b7133a9412a54bea00a7d60933eafbbbb18",
+  "backup_agent": "catch_up_on_what_moved_on_my_deals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CatchUpOnWhatMovedOnMyDeals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/catch-up-on-what-moved-on-my-deals:44a83c219b485c4f5b7a5d60c8a34175574f9c2acd8c6baeb93093647e7967ac",
+  "rollback_agent_retained": true,
   "runtime_name": "CatchUpOnWhatMovedOnMyDeals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24255,
+  "skill_sha256": "5b8455ac27aa6266b6c17e44e1879f7daba2d806990185564ac56e2eb343995f",
   "tool_schema": {
     "properties": {
       "operation": {

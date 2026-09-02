@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_process_allocations",
+  "agent_bytes": 10569,
   "agent_file": "bulk_update_process_allocations_agent.py",
   "agent_sha256": "05d28e75662209767fd8fca24cc7c021e868cae65108f4fe460ff66bb486b3ed",
+  "backup_agent": "bulk_update_process_allocations_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateProcessAllocations",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-process-allocations:9cc49262b9c3223f0718fd580736c31e591ede288eeaefe9d15a236f1648f201",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateProcessAllocations",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24495,
+  "skill_sha256": "28a6cf2f54d3f513050828fd485a7a0e9c4bf2e12fc2c4fe690c3eb57c05f9e2",
   "tool_schema": {
     "properties": {
       "operation": {

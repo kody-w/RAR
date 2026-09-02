@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_configure_and_manage_store_devices",
+  "agent_bytes": 10798,
   "agent_file": "adaptive_card_configure_and_manage_store_devices_agent.py",
   "agent_sha256": "b9e89db6aa4c95df63cf4b4678dd3d70f460b7c9f4186d5f1a29f772cc365219",
+  "backup_agent": "adaptive_card_configure_and_manage_store_devices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConfigureAndManageStoreDevices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-configure-and-manage-store-devices:365a6698140fe3235032a2a8f6e255b956e46d85394c0285387efed2ec3f6702",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardConfigureAndManageStoreDevices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25119,
+  "skill_sha256": "ae2f37603d5c37d746a9002a1c17b3d95e471d05e711a5dec1afe847d52f1a4c",
   "tool_schema": {
     "properties": {
       "operation": {

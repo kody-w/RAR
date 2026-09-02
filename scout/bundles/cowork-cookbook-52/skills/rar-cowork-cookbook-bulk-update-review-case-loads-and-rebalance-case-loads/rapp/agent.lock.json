@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_review_case_loads_and_rebalance_case_loads",
+  "agent_bytes": 10858,
   "agent_file": "bulk_update_review_case_loads_and_rebalance_case_loads_agent.py",
   "agent_sha256": "6662cbcb751534dd7b60f22e166cf12ba697209d5cb431e05f99f510e493d640",
+  "backup_agent": "bulk_update_review_case_loads_and_rebalance_case_loads_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateReviewCaseLoadsAndRebalanceCaseLoads",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-review-case-loads-and-rebalance-case-loads:24c7ad7adf1bd21a880eda4d9e9687a868f31b6fdf82a152d85102324c73e7f0",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateReviewCaseLoadsAndRebalanceCaseLoads",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25243,
+  "skill_sha256": "140b09ca3f14fbad7e70c6ec6b4776e1efb465f060816a2e6bd9e8d3cf6b2892",
   "tool_schema": {
     "properties": {
       "operation": {

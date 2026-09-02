@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_define_business_continuity_objectives",
+  "agent_bytes": 11000,
   "agent_file": "configure_define_business_continuity_objectives_agent.py",
   "agent_sha256": "6db96d63a916cfd6bde5760b95defba133987f1698e9a4e210f6f776b8964aa2",
+  "backup_agent": "configure_define_business_continuity_objectives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDefineBusinessContinuityObjectives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-define-business-continuity-objectives:b9c2ac077bb912b4e5d15a6d37ce8c0a6d118794b4a497c8b9fb8c5d91fe941a",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDefineBusinessContinuityObjectives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25302,
+  "skill_sha256": "dfe236313b0806520e993745d3fab6042fdea204060b088f9be3ace8a9845800",
   "tool_schema": {
     "properties": {
       "operation": {

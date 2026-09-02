@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_conduct_succession_planning",
+  "agent_bytes": 10660,
   "agent_file": "teams_update_conduct_succession_planning_agent.py",
   "agent_sha256": "188f4afd9c154ddb631d53ee4d0ec7ddfc8e90b0ae1c3eb3d833a7d8c700cbaf",
+  "backup_agent": "teams_update_conduct_succession_planning_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConductSuccessionPlanning",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-conduct-succession-planning:3805cf1c33c680aadb727a3d8ef768d73bbdc37bafd660d1264bc2762a43ddc3",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateConductSuccessionPlanning",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24742,
+  "skill_sha256": "26fe4fc7d3f96de61674a3585cad938444c458ad1e8bb50fa390896fafaac242",
   "tool_schema": {
     "properties": {
       "operation": {

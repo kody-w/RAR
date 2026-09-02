@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_enable_and_configure_audit_logs",
+  "agent_bytes": 10742,
   "agent_file": "bulk_update_enable_and_configure_audit_logs_agent.py",
   "agent_sha256": "982eb71d2203795c3beb4cd32a28fbe3f4de1a2e389104f45186d2559ae33f19",
+  "backup_agent": "bulk_update_enable_and_configure_audit_logs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateEnableAndConfigureAuditLogs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-enable-and-configure-audit-logs:f36c61ef71a90661f6153bf89c7e834ccd11ea11d63ea2b92e121b1c49e71f1e",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateEnableAndConfigureAuditLogs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24981,
+  "skill_sha256": "8e736fb99338bf1ea38a5f56db0468b0098aae026e04525eaf918fc810d0a0ee",
   "tool_schema": {
     "properties": {
       "operation": {

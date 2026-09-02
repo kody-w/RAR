@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_record_life_events",
+  "agent_bytes": 10271,
   "agent_file": "report_record_life_events_agent.py",
   "agent_sha256": "1c101960babca3a7551ea32d030f82b9507ddc0164361be33b6db1b74e23d114",
+  "backup_agent": "report_record_life_events_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportRecordLifeEvents",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-record-life-events:897d27e565c2ce88c8abeef0122bbce8b00011a51f117d00d76e54a1a7438225",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportRecordLifeEvents",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23994,
+  "skill_sha256": "8b35569804b12d7f20082f44f0e05eed62a37c88729f665932d9124d1521a916",
   "tool_schema": {
     "properties": {
       "audience": {

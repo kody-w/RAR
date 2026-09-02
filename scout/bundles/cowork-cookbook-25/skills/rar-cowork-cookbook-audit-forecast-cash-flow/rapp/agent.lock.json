@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_forecast_cash_flow",
+  "agent_bytes": 10568,
   "agent_file": "audit_forecast_cash_flow_agent.py",
   "agent_sha256": "36ed5d139bf28ffd912b5a70b302a90d555a94c2714ac9c62613b1a3999a10a6",
+  "backup_agent": "audit_forecast_cash_flow_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditForecastCashFlow",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-forecast-cash-flow:915ed162f12ea2f9b43ffd261a840ce1059de51ef2cbf009b473f1daee84ce99",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditForecastCashFlow",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24477,
+  "skill_sha256": "ecc52c8d8cd4ff79d871980c2be0d804209dca186865eeeccd12bde4b5798509",
   "tool_schema": {
     "properties": {
       "criteria": {

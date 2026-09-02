@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_measure_and_analyze_procurement_spend",
+  "agent_bytes": 10809,
   "agent_file": "teams_update_measure_and_analyze_procurement_spend_agent.py",
   "agent_sha256": "1851943934ac7750ba5d1146caaf84bb255fab373a62b4cb5f269c34e498b151",
+  "backup_agent": "teams_update_measure_and_analyze_procurement_spend_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateMeasureAndAnalyzeProcurementSpend",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-measure-and-analyze-procurement-spend:3f414b3ca04c57d19a4f623cf8f178c44c2ec89f6903d927f7d5053fa13c78bf",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateMeasureAndAnalyzeProcurementSpend",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25112,
+  "skill_sha256": "ab04a8579ac4648dd40f02feb2ddb4f34ed851dd89a3b5a37a29f184da9ac217",
   "tool_schema": {
     "properties": {
       "operation": {

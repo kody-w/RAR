@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_enter_sales_orders",
+  "agent_bytes": 10547,
   "agent_file": "adaptive_card_enter_sales_orders_agent.py",
   "agent_sha256": "00712e5246f026be096ea18cb83d261baec36943f9177d7124b807dc32032adf",
+  "backup_agent": "adaptive_card_enter_sales_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardEnterSalesOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-enter-sales-orders:38ed7a4b6e26a440677717138e83b4d9b70203c0fed5d0e4ffdb01ffd04800d6",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardEnterSalesOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24504,
+  "skill_sha256": "4aa64dfef7cba28063f2ebfbfd17cb199a41f2bfd96bacad0af3fe6af73c1571",
   "tool_schema": {
     "properties": {
       "operation": {

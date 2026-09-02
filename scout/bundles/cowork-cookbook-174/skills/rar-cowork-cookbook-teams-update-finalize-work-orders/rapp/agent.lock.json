@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_finalize_work_orders",
+  "agent_bytes": 10586,
   "agent_file": "teams_update_finalize_work_orders_agent.py",
   "agent_sha256": "3307e3674850eb7098eab4bd76ed3f9c67a45fc48f859706d5f0f42792918beb",
+  "backup_agent": "teams_update_finalize_work_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateFinalizeWorkOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-finalize-work-orders:b65a285545ba62e6af4483eec1db75410ba37e6ddffd1a536a2ee23ef04474c0",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateFinalizeWorkOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24555,
+  "skill_sha256": "0878896b30f2577a650b967fe4718222fed4ec793a593bf04065eef06af79027",
   "tool_schema": {
     "properties": {
       "operation": {

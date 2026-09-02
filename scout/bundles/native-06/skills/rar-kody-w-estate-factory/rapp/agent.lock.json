@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/estate_factory",
+  "agent_bytes": 38215,
   "agent_file": "estate_factory_agent.py",
   "agent_sha256": "7558023b529e952b58084d09cf0c93c1a8cdea34684302e62e6dba5b0ccbc238",
+  "backup_agent": "estate_factory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EstateFactoryAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -34,8 +37,16 @@
     ],
     "version": "0.1.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/estate-factory:df50e1b2b94aa28e31a9f228f89cba64f28fee66929ff01b88192a10ca9981ad",
+  "rollback_agent_retained": true,
   "runtime_name": "EstateFactory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 63619,
+  "skill_sha256": "9e7608328b0187fe92cadc404d088e8c97af0f19d05b2d273d35da54a18b1388",
   "tool_schema": {
     "properties": {
       "action": {

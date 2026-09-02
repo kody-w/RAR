@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_reallocate_asset_budgets",
+  "agent_bytes": 10697,
   "agent_file": "scheduled_brief_reallocate_asset_budgets_agent.py",
   "agent_sha256": "3bd5d524128c860963604b3369341df1bfeca9b6435e8ff49d86fc8f86ef0472",
+  "backup_agent": "scheduled_brief_reallocate_asset_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefReallocateAssetBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-reallocate-asset-budgets:89aef692dd2bd723fbdc5dd54b1bd0d3bef1938438335e870de096ef90f8820a",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefReallocateAssetBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24818,
+  "skill_sha256": "6890ab5bb2b068f3f85ca4e23d0273f65899aa5176a8dc7e961647fb8ea30a84",
   "tool_schema": {
     "properties": {
       "operation": {

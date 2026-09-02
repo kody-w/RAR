@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/product_launch_readiness_scorecard",
+  "agent_bytes": 10480,
   "agent_file": "product_launch_readiness_scorecard_agent.py",
   "agent_sha256": "26a8baac5f7a3ac17f0ffa8ec43de81ab6789469c41f12e717f2a6e189b31fed",
+  "backup_agent": "product_launch_readiness_scorecard_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProductLaunchReadinessScorecard",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/product-launch-readiness-scorecard:c8c8fe669b8ac888ebbea626b1fa4a7cab154d9a0dc7e419f7802a119b105439",
+  "rollback_agent_retained": true,
   "runtime_name": "ProductLaunchReadinessScorecard",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24548,
+  "skill_sha256": "bcc7a2b215cd94f90c1cc82ed73443d4cccd6108ab4b9e078fbb2cb19a3f4c9b",
   "tool_schema": {
     "properties": {
       "audience": {

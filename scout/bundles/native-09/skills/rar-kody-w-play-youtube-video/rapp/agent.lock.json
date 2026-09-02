@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/play_youtube_video_agent",
+  "agent_bytes": 5114,
   "agent_file": "play_youtube_video_agent.py",
   "agent_sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
+  "backup_agent": "play_youtube_video_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PlayYoutubeVideoAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP Community",
@@ -33,8 +36,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/play-youtube-video:57d7c8b458360cfcdbd2ceaf3b6a20cd013155f34e6c1de1ae0322ab1ec5a280",
+  "rollback_agent_retained": true,
   "runtime_name": "PlayYoutubeVideo",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 13932,
+  "skill_sha256": "a41fae045fbf6063da7ad3104e8687c1ebc10e75ee41d8d788ff1fd892a6c49a",
   "tool_schema": {
     "properties": {
       "video_title": {

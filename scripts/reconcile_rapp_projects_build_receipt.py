@@ -74,7 +74,7 @@ def canonical_card_sha256(card: dict) -> str:
 
 
 def validate_prefix(frames: list[dict]) -> dict:
-    if len(frames) not in {10, 11}:
+    if len(frames) not in {10, 11, 12, 13}:
         raise RuntimeError(
             "Expected the immutable ten-frame receipt, optionally followed by "
             "its one reconciliation frame"
@@ -175,8 +175,24 @@ def main() -> int:
     module = load_agent_module()
     frames = json.loads(RECEIPT.read_text(encoding="utf-8"))
     prior = validate_prefix(frames)
+    if len(frames) >= 11:
+        validate_reconciliation(module, prior, frames[10])
+    if len(frames) >= 12:
+        if frames[11].get("payload", {}).get("name") != (
+            "skill-first-grail-migration"
+        ):
+            raise RuntimeError("Unexpected frame after publication reconciliation")
+    if len(frames) == 13:
+        if frames[12].get("payload", {}).get("name") != (
+            "skill-first-runtime-hardening"
+        ):
+            raise RuntimeError("Unexpected skill-first runtime frame")
+        print("RAPP Projects skill-first runtime receipt is already exact")
+        return 0
+    if len(frames) == 12:
+        print("RAPP Projects skill-first reconciliation is already exact")
+        return 0
     if len(frames) == 11:
-        validate_reconciliation(module, prior, frames[-1])
         print("RAPP Projects publication reconciliation is already exact")
         return 0
 

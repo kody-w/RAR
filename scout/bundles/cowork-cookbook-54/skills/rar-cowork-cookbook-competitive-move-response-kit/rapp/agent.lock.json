@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/competitive_move_response_kit",
+  "agent_bytes": 10465,
   "agent_file": "competitive_move_response_kit_agent.py",
   "agent_sha256": "45f0c7fceb9d48154c2535ec62324e1c0f9e2e456e3bd9209ad4715dbeb866dc",
+  "backup_agent": "competitive_move_response_kit_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CompetitiveMoveResponseKit",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/competitive-move-response-kit:db95e3676e9c435f15897218731ec311ceeec566e9cbabc0f6b4f23460f096f9",
+  "rollback_agent_retained": true,
   "runtime_name": "CompetitiveMoveResponseKit",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24445,
+  "skill_sha256": "24c18461d7f6f54bbda1d47caf63fbe20232034d5e10cad1c8191e66593a478a",
   "tool_schema": {
     "properties": {
       "operation": {

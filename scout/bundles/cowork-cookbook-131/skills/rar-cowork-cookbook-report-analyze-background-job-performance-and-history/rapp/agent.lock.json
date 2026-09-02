@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_analyze_background_job_performance_and_history",
+  "agent_bytes": 10646,
   "agent_file": "report_analyze_background_job_performance_and_history_agent.py",
   "agent_sha256": "b22da71b53dcd844cf3661835f6f9e74c97b9444ed3150f1098e9780e24926ee",
+  "backup_agent": "report_analyze_background_job_performance_and_history_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportAnalyzeBackgroundJobPerformanceAndHistory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-analyze-background-job-performance-and-history:10463f7270e93c2ef655f164f3a4a0f967834ce53df4c0b301845bc6080ab2c2",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportAnalyzeBackgroundJobPerformanceAndHistory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24886,
+  "skill_sha256": "1ef7fd9438a9c5f14bed6d55883b69eff8d64bcc43c9836d6d8c222292ae2452",
   "tool_schema": {
     "properties": {
       "data_source": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_manage_service_truck_inventory",
+  "agent_bytes": 10717,
   "agent_file": "adaptive_card_manage_service_truck_inventory_agent.py",
   "agent_sha256": "d02066e8a31ba6ff28507b3132d876259972f1376761944d4871f9370409e56e",
+  "backup_agent": "adaptive_card_manage_service_truck_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardManageServiceTruckInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-manage-service-truck-inventory:56a75d52519fad688cff584a25d335f61667e0dcd3f2c006c07ad28637453d4e",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardManageServiceTruckInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24919,
+  "skill_sha256": "7f305a9030409f0186fa9c61cb1190f5f87dafec13020cc18b3a4b20bd728305",
   "tool_schema": {
     "properties": {
       "operation": {

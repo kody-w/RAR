@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_test_notification_and_alerts",
+  "agent_bytes": 10605,
   "agent_file": "demo_data_test_notification_and_alerts_agent.py",
   "agent_sha256": "d253a58f57a0bcec87a460bc7057488591da7426c5d5cc9ee948d2ea767a318d",
+  "backup_agent": "demo_data_test_notification_and_alerts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataTestNotificationAndAlerts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-test-notification-and-alerts:5a1e9a73ebfb8ca346f72bc3b6b9a3e2c28fc06ebf58ee4f611c1d79e7d14d83",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataTestNotificationAndAlerts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24679,
+  "skill_sha256": "f00464e78deb30a85bae3566491601350352beb51f21feb359cda2e59dd87ca6",
   "tool_schema": {
     "properties": {
       "operation": {

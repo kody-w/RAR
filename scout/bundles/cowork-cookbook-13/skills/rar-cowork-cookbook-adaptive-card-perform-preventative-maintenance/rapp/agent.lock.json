@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_perform_preventative_maintenance",
+  "agent_bytes": 10765,
   "agent_file": "adaptive_card_perform_preventative_maintenance_agent.py",
   "agent_sha256": "49a0f3619d6c6be1d3d0f22716f95fbf5535dd047bc0677e4cac1a461b359e8b",
+  "backup_agent": "adaptive_card_perform_preventative_maintenance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardPerformPreventativeMaintenance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-perform-preventative-maintenance:75d3cc0417202d9954cd2f28aad8895028402b6d3dd9d65f297bbe34aa592caf",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardPerformPreventativeMaintenance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24977,
+  "skill_sha256": "0d1d066b9ae1d92c59b5bc16d5e1474d8998184d95fc617e67333933fa911337",
   "tool_schema": {
     "properties": {
       "operation": {

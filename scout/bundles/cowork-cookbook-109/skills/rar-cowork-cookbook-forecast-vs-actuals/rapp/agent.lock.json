@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/forecast_vs_actuals",
+  "agent_bytes": 10308,
   "agent_file": "forecast_vs_actuals_agent.py",
   "agent_sha256": "bc7bdf6d2cbaf70172d7b13ba0c150ba2bc8acd1e4cf7117692b4685f9a754a5",
+  "backup_agent": "forecast_vs_actuals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ForecastVsActuals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/forecast-vs-actuals:0f69450b5f23495607de5bcf13b43c9dce60c567229c91d12b546c399771b01f",
+  "rollback_agent_retained": true,
   "runtime_name": "ForecastVsActuals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24085,
+  "skill_sha256": "bfbe704ae81a9a199c399ad926a00d313270e69cba89ba27dfcab70d86c94810",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_record_employee_absences",
+  "agent_bytes": 10343,
   "agent_file": "report_record_employee_absences_agent.py",
   "agent_sha256": "b18eede1df10d5266387221a5888987fd980bb95f3b752d7faee99cf08681878",
+  "backup_agent": "report_record_employee_absences_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportRecordEmployeeAbsences",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-record-employee-absences:c29a3525a060523562c17e712d82b270480a0cd3f745b06311eeec167ac429db",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportRecordEmployeeAbsences",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24172,
+  "skill_sha256": "85f74a26abe9306def3515ef5afbaa59c0b15b1bf7bedef736cd7ccc0612a073",
   "tool_schema": {
     "properties": {
       "audience": {

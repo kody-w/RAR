@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_perform_preventative_maintenance",
+  "agent_bytes": 10646,
   "agent_file": "demo_data_perform_preventative_maintenance_agent.py",
   "agent_sha256": "5d1c969b6f17401395309c9fa4c760cfcca99f6b375ee6b89b4c07a1d9ca5154",
+  "backup_agent": "demo_data_perform_preventative_maintenance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataPerformPreventativeMaintenance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-perform-preventative-maintenance:99adc1bcf164d065a907e7c6f5b3987b8582b7e16c749a6e50f3fc26be3fdfd0",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataPerformPreventativeMaintenance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24765,
+  "skill_sha256": "1268a625182ef62036d42eddc4e5e2c499b0e3ca97231ff7e80259e0699e0ca2",
   "tool_schema": {
     "properties": {
       "operation": {

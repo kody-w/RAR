@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_manage_sales_channels",
+  "agent_bytes": 10585,
   "agent_file": "teams_update_manage_sales_channels_agent.py",
   "agent_sha256": "8548356aff7f5275bb4c5d7ec66d5423de9b5091f6bd5fd467882907a87bddb2",
+  "backup_agent": "teams_update_manage_sales_channels_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateManageSalesChannels",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-manage-sales-channels:19111a31b45c5b2eb59b3f8f4c6c76d33bf7ce49195d82ce9785501731757ef5",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateManageSalesChannels",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24572,
+  "skill_sha256": "69e9fd539cf7323b0129d7045e124c2fce2554cc881459d7ceffefe4d36b6139",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_case_types_and_policies",
+  "agent_bytes": 10737,
   "agent_file": "dashboard_define_case_types_and_policies_agent.py",
   "agent_sha256": "9429c2220aa903a7d673c781a3b489383258712f806a3d8d2e218e667caa7387",
+  "backup_agent": "dashboard_define_case_types_and_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefineCaseTypesAndPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-define-case-types-and-policies:c49616661e8b075a322eefea42607aa137c26fd55b1aaf2a3fd4de6c6c033e19",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDefineCaseTypesAndPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24959,
+  "skill_sha256": "2a3c54d7930ae018fda47b1213dcec2c782f3572e6eaa859acbeab4f2b079588",
   "tool_schema": {
     "properties": {
       "operation": {

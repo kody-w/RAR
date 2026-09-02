@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_measure_frontline_worker_service_performance",
+  "agent_bytes": 10903,
   "agent_file": "teams_update_measure_frontline_worker_service_performance_agent.py",
   "agent_sha256": "3cff8310166325fc90e325811565a0d6dd797291d51532d4e91478e6f69f5bf2",
+  "backup_agent": "teams_update_measure_frontline_worker_service_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateMeasureFrontlineWorkerServicePerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-measure-frontline-worker-service-performance:3f1c8e7cba07c0d1efa00c3eca4734b900ba9e090d86f4507a4dbf5ec6cdd747",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateMeasureFrontlineWorkerServicePerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25328,
+  "skill_sha256": "096c450415b37bc30608dd1b5bd0115bd331f589ee0344e86e22625a9655969d",
   "tool_schema": {
     "properties": {
       "operation": {

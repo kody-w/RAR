@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/lead_response_time_audit",
+  "agent_bytes": 10611,
   "agent_file": "lead_response_time_audit_agent.py",
   "agent_sha256": "8122afe519f09d14fe79b5b1b4e32690c7c59cb5c1b95e608dfd0ddb4c3fe614",
+  "backup_agent": "lead_response_time_audit_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LeadResponseTimeAudit",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -87,8 +90,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/lead-response-time-audit:a45b39f91959300d9c87919ef7da136b020de21a2ba67d4c8d39ee7a31d9ce51",
+  "rollback_agent_retained": true,
   "runtime_name": "LeadResponseTimeAudit",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24640,
+  "skill_sha256": "9da1182af7c28d714161f06c53d98ae0322dc80d085649b2148884a259ebae49",
   "tool_schema": {
     "properties": {
       "criteria": {

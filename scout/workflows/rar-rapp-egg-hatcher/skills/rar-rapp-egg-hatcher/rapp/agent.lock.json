@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/egg_hatcher",
+  "agent_bytes": 14802,
   "agent_file": "egg_hatcher_agent.py",
   "agent_sha256": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f",
+  "backup_agent": "egg_hatcher_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EggHatcherAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -32,8 +35,16 @@
     ],
     "version": "1.1.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/egg-hatcher:f95763924a0732ac22a4ca9128b5270be8ee82e6cd4ba96c939d04d5736c4f7f",
+  "rollback_agent_retained": true,
   "runtime_name": "HatchEgg",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 31108,
+  "skill_sha256": "303c0fc9756aa62b9e4132a6fb950294d61950d0e8544756eeecef908b3c4840",
   "tool_schema": {
     "properties": {
       "egg_path": {

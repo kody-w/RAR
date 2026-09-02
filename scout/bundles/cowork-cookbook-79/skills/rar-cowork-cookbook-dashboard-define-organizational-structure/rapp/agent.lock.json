@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_organizational_structure",
+  "agent_bytes": 10653,
   "agent_file": "dashboard_define_organizational_structure_agent.py",
   "agent_sha256": "39675117fb21d45138ab691076c4cb9184228d77eb414a8cad533eb2fbb07f5a",
+  "backup_agent": "dashboard_define_organizational_structure_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefineOrganizationalStructure",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-define-organizational-structure:c3509cb1b98fd81c700f255fc6b1191a511161b67d5ffd76c18f0b82b211e278",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDefineOrganizationalStructure",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24794,
+  "skill_sha256": "26200d423ec148094bd112720a8bc063bdb55044ccd2e97b78f63bed6153f4e8",
   "tool_schema": {
     "properties": {
       "constraints": {

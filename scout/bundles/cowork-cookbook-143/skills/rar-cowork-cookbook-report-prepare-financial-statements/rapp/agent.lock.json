@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_prepare_financial_statements",
+  "agent_bytes": 10410,
   "agent_file": "report_prepare_financial_statements_agent.py",
   "agent_sha256": "ce1741413f97a866adfbd9377b914abeeb732631434f13cdc85ad89425425095",
+  "backup_agent": "report_prepare_financial_statements_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportPrepareFinancialStatements",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-prepare-financial-statements:d17df272028ab1b81428eae7f444e3992ae7cec3f7ce3f024f812015f66c0bb1",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportPrepareFinancialStatements",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24293,
+  "skill_sha256": "603077fad995224f79fcac3cfd4d5dfc026e7cd25b247f5b095abe53ee72241e",
   "tool_schema": {
     "properties": {
       "audience": {

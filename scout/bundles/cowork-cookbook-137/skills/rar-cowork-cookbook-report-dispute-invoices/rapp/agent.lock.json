@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_dispute_invoices",
+  "agent_bytes": 10245,
   "agent_file": "report_dispute_invoices_agent.py",
   "agent_sha256": "4aad2bea060a1c404d4037d365c0a82c12e1a744a49868b434da66ae9f8762c6",
+  "backup_agent": "report_dispute_invoices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDisputeInvoices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-dispute-invoices:bf8bae0ec9d402d0e75a694b31657b0b5ed07c77b25777e73008c0f665149077",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDisputeInvoices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23897,
+  "skill_sha256": "51b79550e6361bcac415c7d06a5aa7ccca11d328704d750c99adbb8f800e0173",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_issue_and_settle_supplier_payments",
+  "agent_bytes": 10737,
   "agent_file": "bulk_update_issue_and_settle_supplier_payments_agent.py",
   "agent_sha256": "3038f849c47d552a545f21a27e18a0955127250a5efd02f2cf372746eabff168",
+  "backup_agent": "bulk_update_issue_and_settle_supplier_payments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateIssueAndSettleSupplierPayments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-issue-and-settle-supplier-payments:5a89c299341cbd7f9a0ac9cf552e59d1cfb7964d4960c6b5615896703124007d",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateIssueAndSettleSupplierPayments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24993,
+  "skill_sha256": "14fb5a5432dad4747806fa210066a3a984e0d7affa01ea7380aae0f3d20c824c",
   "tool_schema": {
     "properties": {
       "operation": {

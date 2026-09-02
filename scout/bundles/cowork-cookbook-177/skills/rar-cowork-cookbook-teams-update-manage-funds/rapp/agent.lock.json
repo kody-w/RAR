@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_manage_funds",
+  "agent_bytes": 10482,
   "agent_file": "teams_update_manage_funds_agent.py",
   "agent_sha256": "b23791246a02810036702d0fe7bfd353509cf691347dc59d822d7cceed99282c",
+  "backup_agent": "teams_update_manage_funds_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateManageFunds",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-manage-funds:bff8846279486416ffd186a332c77e98004b84738912dfac4ab876c08a996d3d",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateManageFunds",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24285,
+  "skill_sha256": "a56abb8cb3bf7ce19cb3397b1690f30abbeca2294bd96b1d9a111670356d7dfc",
   "tool_schema": {
     "properties": {
       "operation": {

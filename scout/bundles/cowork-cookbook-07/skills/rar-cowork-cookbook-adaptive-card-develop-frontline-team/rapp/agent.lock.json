@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_develop_frontline_team",
+  "agent_bytes": 10624,
   "agent_file": "adaptive_card_develop_frontline_team_agent.py",
   "agent_sha256": "3916005c1a01dc131cbb03bfedb935e25edfd7cef9cf01d3ba8561f0ee5376dc",
+  "backup_agent": "adaptive_card_develop_frontline_team_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDevelopFrontlineTeam",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-develop-frontline-team:5ded57e5e8d6caae323405edd23e64ffab769e7f126bd273b6919083223a5877",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDevelopFrontlineTeam",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24682,
+  "skill_sha256": "9f9c7a50e72227525f8a2dc344347d54b2a3dba66c5cf5792f2d947d736e83ea",
   "tool_schema": {
     "properties": {
       "operation": {

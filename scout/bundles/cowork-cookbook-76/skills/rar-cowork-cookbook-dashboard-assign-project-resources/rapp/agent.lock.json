@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_assign_project_resources",
+  "agent_bytes": 10625,
   "agent_file": "dashboard_assign_project_resources_agent.py",
   "agent_sha256": "030716f609c613d63f5510e2544b5498669856befa96846123fffe158fb711c3",
+  "backup_agent": "dashboard_assign_project_resources_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardAssignProjectResources",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-assign-project-resources:4b8c53ca1f5860a032bc50a3728674569c09f93609559684d3ef9379382eca97",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardAssignProjectResources",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24664,
+  "skill_sha256": "27699b38e02fafb8bfdb53daa0680f1200423fd883d3c2f0a934fc931bdd8eba",
   "tool_schema": {
     "properties": {
       "operation": {

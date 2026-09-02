@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/prototype_lock_factory_agent",
+  "agent_bytes": 17419,
   "agent_file": "prototype_lock_factory_agent.py",
   "agent_sha256": "916f1fb4e63074c6302593d80a28f31779ef070b6e4352ec4c45cda14cab431b",
+  "backup_agent": "prototype_lock_factory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PrototypeLockFactoryAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP Community",
@@ -33,8 +36,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/prototype-lock-factory:f1e10603170d0e6ea17ac83f03e30f4e1b04f644451c0f9bfa2d0a57d97c4b44",
+  "rollback_agent_retained": true,
   "runtime_name": "PrototypeLockFactory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 35798,
+  "skill_sha256": "b59dfab4b10930378c4272d29ac114ce3bfcb4fdc5a16d3e64bec4b18c539f15",
   "tool_schema": {
     "properties": {
       "contract_json": {

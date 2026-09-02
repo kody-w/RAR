@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_process_customer_prepayments",
+  "agent_bytes": 10401,
   "agent_file": "report_process_customer_prepayments_agent.py",
   "agent_sha256": "6ac8c2551879841a67efdead33c8e4bcdf43ce3b4073a6afbeaa005289309e81",
+  "backup_agent": "report_process_customer_prepayments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportProcessCustomerPrepayments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-process-customer-prepayments:94f074bbe3fa2067c9f0a3853576250318577b217970dc042422ca24d6500030",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportProcessCustomerPrepayments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24301,
+  "skill_sha256": "ad1f79660a9af50aaca4b4aa0fe5322dba0c2c43a4dd574337fd8c3247fdef5b",
   "tool_schema": {
     "properties": {
       "audience": {

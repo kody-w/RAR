@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_detect_asynchronous_integrations_failures",
+  "agent_bytes": 10887,
   "agent_file": "dashboard_detect_asynchronous_integrations_failures_agent.py",
   "agent_sha256": "7e702586be20e23a082d458ebe15e578714247a843201816c94830f56828b174",
+  "backup_agent": "dashboard_detect_asynchronous_integrations_failures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDetectAsynchronousIntegrationsFailures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-detect-asynchronous-integrations-failures:f60b27afb855c379924ad6941161035110c37eb34c502efaed941bca67e87c98",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDetectAsynchronousIntegrationsFailures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25289,
+  "skill_sha256": "e9210eefbda401c6d58567a2a16ff0c4e7d7207665c6182ba976066b7a6abfe7",
   "tool_schema": {
     "properties": {
       "operation": {

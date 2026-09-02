@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_plan_to_produce",
+  "agent_bytes": 10543,
   "agent_file": "d365_plan_to_produce_agent.py",
   "agent_sha256": "6a87f9b46894475b65dceaee8ac8287a1cd09607d0b4bda05bb903a142d88362",
+  "backup_agent": "d365_plan_to_produce_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365PlanToProduce",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-plan-to-produce:123bdea62ec239f6f55240fc93ab1552d68cdf4b2c8aec667997032ed6c04902",
+  "rollback_agent_retained": true,
   "runtime_name": "D365PlanToProduce",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24464,
+  "skill_sha256": "2703f97556b21d50d6e656751324fb259155f24c1734f04bea43a5e7a0837ab3",
   "tool_schema": {
     "properties": {
       "operation": {

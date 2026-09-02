@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/find_the_deals_that_need_my_help",
+  "agent_bytes": 10380,
   "agent_file": "find_the_deals_that_need_my_help_agent.py",
   "agent_sha256": "ec6d291a1f54411dbcf7f2999c1bb7b9c0b2a22302c45e3d7a938d626976e8ca",
+  "backup_agent": "find_the_deals_that_need_my_help_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FindTheDealsThatNeedMyHelp",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/find-the-deals-that-need-my-help:9015babdbe5c3e7c5c579c1103a1d1b7ae6a8ede8773ada3b02d8e97aa835489",
+  "rollback_agent_retained": true,
   "runtime_name": "FindTheDealsThatNeedMyHelp",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24348,
+  "skill_sha256": "22692fa6f004d49ef79456a1477c8ec6980fe3ec973779855c4203403c344455",
   "tool_schema": {
     "properties": {
       "operation": {

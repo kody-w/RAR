@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_test_and_validate_the_business_continuity_plan",
+  "agent_bytes": 10977,
   "agent_file": "audit_test_and_validate_the_business_continuity_plan_agent.py",
   "agent_sha256": "b48b80a30883eee53cd27f64a976f85afb025318a4da0c1c6e32f201143fb617",
+  "backup_agent": "audit_test_and_validate_the_business_continuity_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditTestAndValidateTheBusinessContinuityPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-test-and-validate-the-business-continuity-plan:c31bfb5a521107388d5d0bc8be2d6c85f0c83b401178c397223b952b840b62fc",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditTestAndValidateTheBusinessContinuityPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25467,
+  "skill_sha256": "727f6f5388445756a1f1074b4b0749e9c8677a19031149bc298afc04112ef69e",
   "tool_schema": {
     "properties": {
       "criteria": {

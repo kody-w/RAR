@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/moment_factory_agent",
+  "agent_bytes": 24175,
   "agent_file": "moment_factory_agent.py",
   "agent_sha256": "02a5b7154b7bd205223d58d3d61489bfa725ad7218915a0012709fe0d5f1ccf8",
+  "backup_agent": "moment_factory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MomentFactory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -41,8 +44,16 @@
     ],
     "version": "0.1.4"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/moment-factory:85a57e72d45a752431792a6be3c39caa9856ea90a20b4acefba5354e8e18bd65",
+  "rollback_agent_retained": true,
   "runtime_name": "MomentFactory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 44535,
+  "skill_sha256": "e5de275873b435f40ff7eba5f177c9812141dbcc142fda722169d3b5966ced25",
   "tool_schema": {
     "properties": {
       "significance_threshold": {

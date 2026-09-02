@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_use_and_track_project_materials",
+  "agent_bytes": 10726,
   "agent_file": "teams_update_use_and_track_project_materials_agent.py",
   "agent_sha256": "5a1e175e57a910448ada38d607ec6621303e62ea8f3ed57afdac07d52963206e",
+  "backup_agent": "teams_update_use_and_track_project_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateUseAndTrackProjectMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-use-and-track-project-materials:a5e3f94706b4c47f5ef67f2b3ef09971653253bb7d453dc5aa8e3debb48a1e6a",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateUseAndTrackProjectMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24911,
+  "skill_sha256": "587fee1d924b412405b29211e63e336487b6bee16eb6e917d4073eb83aaaba7f",
   "tool_schema": {
     "properties": {
       "operation": {

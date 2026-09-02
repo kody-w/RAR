@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_analyze_product_profitability",
+  "agent_bytes": 10715,
   "agent_file": "audit_analyze_product_profitability_agent.py",
   "agent_sha256": "9986b320a3c586268f3d22f5d9cca468edd7a68bfcbe4ffcea53cd7e03b8d947",
+  "backup_agent": "audit_analyze_product_profitability_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAnalyzeProductProfitability",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-analyze-product-profitability:4404abc29222908f8ac9b6100072a47b20d71a23adbce5bc88c6485085019409",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAnalyzeProductProfitability",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24813,
+  "skill_sha256": "7978469a7021ca1ac4a7cc4e2aea74e72c1714e0de7013822513e4a635899ec0",
   "tool_schema": {
     "properties": {
       "criteria": {

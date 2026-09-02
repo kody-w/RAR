@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_define_service_risk_management_strategy",
+  "agent_bytes": 11004,
   "agent_file": "configure_define_service_risk_management_strategy_agent.py",
   "agent_sha256": "e42bc541f4d460c06dd988efb0a2926b41e6079a37ace353bc45fda171e7f80d",
+  "backup_agent": "configure_define_service_risk_management_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDefineServiceRiskManagementStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-define-service-risk-management-strategy:483f0387504c937d891bf7fe4f511e65a923f2985b1f3bce8b3126320cf65fe2",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDefineServiceRiskManagementStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25369,
+  "skill_sha256": "d67ae1e4a05cc8dc2bd31c93645a231b7012e1c0f62e90601ab3fd0a36a53db8",
   "tool_schema": {
     "properties": {
       "operation": {

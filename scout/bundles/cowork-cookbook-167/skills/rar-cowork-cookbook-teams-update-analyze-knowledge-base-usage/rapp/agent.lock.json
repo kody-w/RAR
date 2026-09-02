@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_analyze_knowledge_base_usage",
+  "agent_bytes": 10695,
   "agent_file": "teams_update_analyze_knowledge_base_usage_agent.py",
   "agent_sha256": "2d6242b267bfee0cb531a651789a0e0f53b9e011bc857ffe419f673453088471",
+  "backup_agent": "teams_update_analyze_knowledge_base_usage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAnalyzeKnowledgeBaseUsage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-analyze-knowledge-base-usage:108cfae4fbb4f2704eca249ae86bec43df748e3166c261de4d0708752aeb92dd",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateAnalyzeKnowledgeBaseUsage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24844,
+  "skill_sha256": "9d00520642838971dd2e9966bee2788b2924732fcf87335efbd2671f1feadeb1",
   "tool_schema": {
     "properties": {
       "operation": {

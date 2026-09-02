@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/recon_deck_agent",
+  "agent_bytes": 7080,
   "agent_file": "recon_deck_agent.py",
   "agent_sha256": "678ff374c053126043a75147034abf4a27d05e626c83862ef7ff0371a5781ce1",
+  "backup_agent": "recon_deck_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReconDeckAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -31,8 +34,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/recon-deck:0803ff8134c25a050bbc33df3610b3a47867b05feb827d890bec6f61e207c4c3",
+  "rollback_agent_retained": true,
   "runtime_name": "ReconDeck",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 17144,
+  "skill_sha256": "b0c0a297d691ccc0d381bccb6371edc29b3dec3ad04df3163c9cd6084df4d2df",
   "tool_schema": {
     "properties": {
       "sources": {

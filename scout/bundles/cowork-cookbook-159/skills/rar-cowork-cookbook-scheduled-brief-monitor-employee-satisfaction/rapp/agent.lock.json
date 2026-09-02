@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_monitor_employee_satisfaction",
+  "agent_bytes": 10741,
   "agent_file": "scheduled_brief_monitor_employee_satisfaction_agent.py",
   "agent_sha256": "63b50696d48a0406ee97f6046ecb3bc9438bdbdda1b8267dc55ae53f5561a159",
+  "backup_agent": "scheduled_brief_monitor_employee_satisfaction_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefMonitorEmployeeSatisfaction",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-monitor-employee-satisfaction:7bc83c33666e73960763eb96bb41e45dadd6a5985b18e452e6e9e2a7777f511c",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefMonitorEmployeeSatisfaction",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24925,
+  "skill_sha256": "e485392c96463d2bfc91516d9ba65ce6f5a2c149133c035bc53961f1b312b89f",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_implement_corrective_and_preventative_actions",
+  "agent_bytes": 10954,
   "agent_file": "scheduled_brief_implement_corrective_and_preventative_actions_agent.py",
   "agent_sha256": "7e0c08b57fef58ca76c3c8f75bf706ab9bab67835dfe5abd48dcc00900d1f7e1",
+  "backup_agent": "scheduled_brief_implement_corrective_and_preventative_actions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefImplementCorrectiveAndPreventativeActions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-implement-corrective-and-preventative-actions:55f2b6c8fc54dde5c10942bf37e2da6b3b67851a4cc0e1bfcae493f158ac4cdc",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefImplementCorrectiveAndPreventativeActions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25435,
+  "skill_sha256": "3c346e7994854d218c0a5d80b8ee970f608fc2ce053aa32913fbe57f6999c271",
   "tool_schema": {
     "properties": {
       "operation": {

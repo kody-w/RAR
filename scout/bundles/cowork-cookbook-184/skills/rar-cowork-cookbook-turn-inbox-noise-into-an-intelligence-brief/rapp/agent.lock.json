@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/turn_inbox_noise_into_an_intelligence_brief",
+  "agent_bytes": 10459,
   "agent_file": "turn_inbox_noise_into_an_intelligence_brief_agent.py",
   "agent_sha256": "516be93d42ea2b0be80566acf353e4fdfff2733151a6abfb36727bf0e9a8688f",
+  "backup_agent": "turn_inbox_noise_into_an_intelligence_brief_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TurnInboxNoiseIntoAnIntelligenceBrief",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/turn-inbox-noise-into-an-intelligence-brief:813d0f7274043afcdff2797cee0fd8f670b684d45416b3a635fba36b18b0efea",
+  "rollback_agent_retained": true,
   "runtime_name": "TurnInboxNoiseIntoAnIntelligenceBrief",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24503,
+  "skill_sha256": "358034702f44526c3f8a74316439a71073464d7977661dd9f7592bc56792ae7a",
   "tool_schema": {
     "properties": {
       "operation": {

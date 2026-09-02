@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_notification_channels",
+  "agent_bytes": 10764,
   "agent_file": "scheduled_brief_define_notification_channels_agent.py",
   "agent_sha256": "ae402389888c1ab7778ac3389f95c35f4be1d3446c178cf0ee852c739d0f5a6c",
+  "backup_agent": "scheduled_brief_define_notification_channels_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineNotificationChannels",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-notification-channels:7188fa650ceb2f3991dc50fadc943ef212ba7466b30539be1eabb4fb63bb3481",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineNotificationChannels",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24956,
+  "skill_sha256": "e1ce2b05fd4e4896d6a17c4ae968ac624945bd1c9600e68223bbf1125aa4afba",
   "tool_schema": {
     "properties": {
       "operation": {

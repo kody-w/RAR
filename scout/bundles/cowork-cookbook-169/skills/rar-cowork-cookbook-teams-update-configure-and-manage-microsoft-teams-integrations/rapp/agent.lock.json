@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_configure_and_manage_microsoft_teams_integrations",
+  "agent_bytes": 10976,
   "agent_file": "teams_update_configure_and_manage_microsoft_teams_integrations_agent.py",
   "agent_sha256": "759acb068dddbf36a9f95a9e44db6cbaf2718113705c50112f6e14084a073898",
+  "backup_agent": "teams_update_configure_and_manage_microsoft_teams_integrations_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConfigureAndManageMicrosoftTeamsIntegrations",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-configure-and-manage-microsoft-teams-integrations:e3fc6b965bb6cd5d4ffb867545ab7f7b35077b749caf3b3ece2746c9512b52ab",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateConfigureAndManageMicrosoftTeamsIntegrations",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25491,
+  "skill_sha256": "78dfce8a507787f587f59f0c0fd3ee96ff30e2ef088c6360d4716ad07ada5b14",
   "tool_schema": {
     "properties": {
       "operation": {

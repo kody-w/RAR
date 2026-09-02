@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_develop_sales_catalogs",
+  "agent_bytes": 10586,
   "agent_file": "bulk_update_develop_sales_catalogs_agent.py",
   "agent_sha256": "4b4f9552c9d82ce873598df7b3e61f38311f7a3cb0142cca9d1a5c9af5082ee6",
+  "backup_agent": "bulk_update_develop_sales_catalogs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDevelopSalesCatalogs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-develop-sales-catalogs:5dcd4ece29f908a026b8abd6cd2865e523da3190f8afe9ee041a3c8397ea1840",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDevelopSalesCatalogs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24598,
+  "skill_sha256": "ad582d5167465e11af3f1f1db0bcdfba2c256041d12804958e4b6fb1aa1668f1",
   "tool_schema": {
     "properties": {
       "operation": {

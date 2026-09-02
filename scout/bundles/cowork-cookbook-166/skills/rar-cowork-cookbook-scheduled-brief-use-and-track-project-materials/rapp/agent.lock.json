@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_use_and_track_project_materials",
+  "agent_bytes": 10777,
   "agent_file": "scheduled_brief_use_and_track_project_materials_agent.py",
   "agent_sha256": "b88bcf9b7539d36445ed6e7d78210f0b5af7bccc8c2582075f97023f6c1d58c9",
+  "backup_agent": "scheduled_brief_use_and_track_project_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefUseAndTrackProjectMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-use-and-track-project-materials:65bc4bba36e2d066458f18bfdae8a9a8ebe097564e432ad83a234248de3557c7",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefUseAndTrackProjectMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25034,
+  "skill_sha256": "484ecd61e22ec7970d63e2db2b3f1956d2ffa13227dda635706e3386c86fc1aa",
   "tool_schema": {
     "properties": {
       "operation": {

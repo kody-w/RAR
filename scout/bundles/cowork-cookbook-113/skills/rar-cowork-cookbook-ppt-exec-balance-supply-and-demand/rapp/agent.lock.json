@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_balance_supply_and_demand",
+  "agent_bytes": 10626,
   "agent_file": "ppt_exec_balance_supply_and_demand_agent.py",
   "agent_sha256": "55bbb3d00cb48d56dbeb627f3b81f780cc0f460c9f363faccf69bb461595ba7f",
+  "backup_agent": "ppt_exec_balance_supply_and_demand_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecBalanceSupplyAndDemand",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-balance-supply-and-demand:6083fb6641cb9c0cb44c988276ad6ccb068d749b74a29da866793b00943854b1",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecBalanceSupplyAndDemand",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24681,
+  "skill_sha256": "e4ef0e826e0745c207ca105e47fc041f9bae43fb7730d0c5e7ab6d7594a09df0",
   "tool_schema": {
     "properties": {
       "operation": {

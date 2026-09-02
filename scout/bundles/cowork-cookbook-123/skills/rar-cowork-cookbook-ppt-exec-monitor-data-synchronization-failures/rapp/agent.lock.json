@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_monitor_data_synchronization_failures",
+  "agent_bytes": 10776,
   "agent_file": "ppt_exec_monitor_data_synchronization_failures_agent.py",
   "agent_sha256": "b97469677697893b6174dccb5e5f63263eae5985ba6544bd06e76a1d1685d5c5",
+  "backup_agent": "ppt_exec_monitor_data_synchronization_failures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMonitorDataSynchronizationFailures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-monitor-data-synchronization-failures:8aad5271f3cf3502f8533f5f3c297a11304596563e30d9c7b437dfc808a143e6",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMonitorDataSynchronizationFailures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25048,
+  "skill_sha256": "d615567b132fca3e002c82f750f5f383f1dce9fffab8f3db7b258b6ee1734525",
   "tool_schema": {
     "properties": {
       "operation": {

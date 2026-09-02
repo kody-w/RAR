@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_expense_policies",
+  "agent_bytes": 10579,
   "agent_file": "ppt_exec_define_expense_policies_agent.py",
   "agent_sha256": "3c973faad8364f4745b009c8c1a16bed80d362238062ff59ced91b4b31d8a25f",
+  "backup_agent": "ppt_exec_define_expense_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineExpensePolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-define-expense-policies:fb5a977d910b5690cc6e9c9cd42a1425346a4cab3653f7c7694966e434ad1179",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDefineExpensePolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24566,
+  "skill_sha256": "b1163f8b1e6f40f0df3ee5509398d5ffd4b89027837a5c455f35dad9d1c736e1",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_update_work_order_details",
+  "agent_bytes": 10642,
   "agent_file": "dashboard_update_work_order_details_agent.py",
   "agent_sha256": "b428e2ada58b5cd5104959b79d2b9ceac83e6f8ca5c214ab824301132fd94175",
+  "backup_agent": "dashboard_update_work_order_details_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardUpdateWorkOrderDetails",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-update-work-order-details:3b31a0e4da2556796ef04dbd4cc48be9c298ab5440df1db691cc184d9110eed3",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardUpdateWorkOrderDetails",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24745,
+  "skill_sha256": "15488481e9a46235508bc258e88ef131ae7f1e7ef52db01f78dd7ea4fe137e6e",
   "tool_schema": {
     "properties": {
       "operation": {

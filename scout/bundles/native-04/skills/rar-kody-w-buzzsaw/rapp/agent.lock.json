@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/buzzsaw",
+  "agent_bytes": 15776,
   "agent_file": "buzzsaw_agent.py",
   "agent_sha256": "68ffa820bc89cd8966f9929725bd9befd616ac26ad26867b828dc790b9cf13bb",
+  "backup_agent": "buzzsaw_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BuzzsawAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/buzzsaw:d3d8eee224c2ef7a0252edd49ca4a8fa5fdec86d9aff6eceb7ad4b946da5ae68",
+  "rollback_agent_retained": true,
   "runtime_name": "Buzzsaw",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 33440,
+  "skill_sha256": "03bc39e84f6975f428c8a7e24567f431785fa8f6a2369abbf0f1e7a7c24a82b8",
   "tool_schema": {
     "properties": {
       "action": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_allocate_headcount_to_business_units",
+  "agent_bytes": 10790,
   "agent_file": "teams_update_allocate_headcount_to_business_units_agent.py",
   "agent_sha256": "9d58024b8c3edba7e7dfd1995f6efe6810efc6a28e7979711d90f5c303920783",
+  "backup_agent": "teams_update_allocate_headcount_to_business_units_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAllocateHeadcountToBusinessUnits",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-allocate-headcount-to-business-units:a362e7a903d74f29202c069d8acf03073eca244f6d94c86439ad3517069a6d2b",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateAllocateHeadcountToBusinessUnits",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25073,
+  "skill_sha256": "5267ed594da59449b5ad20875da6bd20a145b9147446ef4276a30dbde22cb0b9",
   "tool_schema": {
     "properties": {
       "operation": {

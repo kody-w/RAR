@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_estimate_project_contracts",
+  "agent_bytes": 10679,
   "agent_file": "audit_estimate_project_contracts_agent.py",
   "agent_sha256": "9291ad2563ae0a20df5ea6e33fa820dce555fef852dd444417bf79c0a5958da6",
+  "backup_agent": "audit_estimate_project_contracts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditEstimateProjectContracts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-estimate-project-contracts:d48356b6ea1cf391640646b92dbbc0c3569d9329f1ad9862b11531b68cba09cd",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditEstimateProjectContracts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24709,
+  "skill_sha256": "c4119024f26b71452fd4f520c604c386eb59fe45084eb667f897eb81bb33e86f",
   "tool_schema": {
     "properties": {
       "criteria": {

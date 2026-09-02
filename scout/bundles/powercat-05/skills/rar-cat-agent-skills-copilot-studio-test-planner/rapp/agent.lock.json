@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_test_planner",
+  "agent_bytes": 8848,
   "agent_file": "copilot_studio_test_planner_agent.py",
   "agent_sha256": "3cfc5e42ce1e3f436c2129fd6b933475640c6476a63b042d5d0d6ac22e817bd2",
+  "backup_agent": "copilot_studio_test_planner_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioTestPlanner",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Elliot Margot",
@@ -40,8 +43,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/copilot-studio-test-planner:8df6eb21fc5bf82b5a4d981f8ef3caf1113de2d3c965c89df14696d3ba8979e2",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotStudioTestPlanner",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21786,
+  "skill_sha256": "3764a53fb8ff3fd30e24f8c0d8a56b8d58437de6231560a3eb1ff966af7abb39",
   "tool_schema": {
     "properties": {
       "operation": {

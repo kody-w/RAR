@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_issue_requests_for_information",
+  "agent_bytes": 10715,
   "agent_file": "teams_update_issue_requests_for_information_agent.py",
   "agent_sha256": "4013420969b4b11c2fef9177e66263d1ee9ca415df53794e4c29e18edcf7af11",
+  "backup_agent": "teams_update_issue_requests_for_information_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateIssueRequestsForInformation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-issue-requests-for-information:1bc8041ace443d8e0b8624b113dbbb818cffa7e430e3a6e7f56dc55a0032a677",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateIssueRequestsForInformation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24873,
+  "skill_sha256": "26e520e431ac163f7c6c7cef916be2f402a763e436ce51bff35bf86afcc3fd56",
   "tool_schema": {
     "properties": {
       "operation": {

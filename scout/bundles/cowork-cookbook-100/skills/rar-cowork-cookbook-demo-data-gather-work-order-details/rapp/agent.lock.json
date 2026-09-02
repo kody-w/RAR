@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_gather_work_order_details",
+  "agent_bytes": 10543,
   "agent_file": "demo_data_gather_work_order_details_agent.py",
   "agent_sha256": "f44a5d6d0c31cce5f249eec7b6a0bffdf811e8958e34813247a42bbc71038557",
+  "backup_agent": "demo_data_gather_work_order_details_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataGatherWorkOrderDetails",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-gather-work-order-details:642cd81759373df6739c4b6fb22eba2e45baa13d1a279b5c2662a4cc07ffe9f3",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataGatherWorkOrderDetails",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24573,
+  "skill_sha256": "a9a956c507b6d8da6edb28e3190355e60fe12d432ff3bc098ad2fd4c7c26174d",
   "tool_schema": {
     "properties": {
       "operation": {

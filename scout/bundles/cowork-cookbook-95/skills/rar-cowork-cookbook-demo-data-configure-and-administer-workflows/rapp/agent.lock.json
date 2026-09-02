@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_configure_and_administer_workflows",
+  "agent_bytes": 10682,
   "agent_file": "demo_data_configure_and_administer_workflows_agent.py",
   "agent_sha256": "570c5c1b71ec5e51d2939a27515b5239823737c899fa6222fc9a714bf5685e9a",
+  "backup_agent": "demo_data_configure_and_administer_workflows_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataConfigureAndAdministerWorkflows",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-configure-and-administer-workflows:d3284224757ec04031bab388abea00f985a741cb34a34d37aec61e9e998664c9",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataConfigureAndAdministerWorkflows",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24870,
+  "skill_sha256": "8626ff9bcc9cf88470ad9525117fd051864c07dd68b7addd438b8c95a22ea401",
   "tool_schema": {
     "properties": {
       "operation": {

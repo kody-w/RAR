@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_supplier_pricing",
+  "agent_bytes": 10612,
   "agent_file": "dashboard_manage_supplier_pricing_agent.py",
   "agent_sha256": "604f551d1bea7a83933e7ac5313975f2f0674144109afb6571f31146cc92925c",
+  "backup_agent": "dashboard_manage_supplier_pricing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageSupplierPricing",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-supplier-pricing:a8701727ec1b2f60d4d4dc3608854f554cbc854d7f935c4eaa08c76b4fd01366",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageSupplierPricing",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24632,
+  "skill_sha256": "68fd0c6d0eda75701b2afded552a7b1487d19593ac7429f42cbdd2ab768cd3b9",
   "tool_schema": {
     "properties": {
       "operation": {

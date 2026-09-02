@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_issue_requests_for_quotation",
+  "agent_bytes": 10683,
   "agent_file": "dashboard_issue_requests_for_quotation_agent.py",
   "agent_sha256": "ea3268ea6554bbfbd9d46c19de8df7995a4b588b6beec3fd1939d63590375b56",
+  "backup_agent": "dashboard_issue_requests_for_quotation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardIssueRequestsForQuotation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-issue-requests-for-quotation:a634c5365edffdfa83f7e9e5824955cfd8542f841ccb07e751bf7c5430879697",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardIssueRequestsForQuotation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24822,
+  "skill_sha256": "afbe0a0bd9cba84a6cc41b7b969466a226dc7feb956a97da3d22676d6142c0ab",
   "tool_schema": {
     "properties": {
       "operation": {

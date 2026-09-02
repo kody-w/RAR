@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_extensions_approach",
+  "agent_bytes": 10642,
   "agent_file": "ppt_exec_define_extensions_approach_agent.py",
   "agent_sha256": "cadb23f55eea88f691521ab560889a88da5fe2476e79b52ef82a0b2ca3ad4a10",
+  "backup_agent": "ppt_exec_define_extensions_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineExtensionsApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-define-extensions-approach:f2d9dc0ff09d096093d916aac1d67bc7fdd7b61f5a2202a6665fb7c1fc3cfc45",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDefineExtensionsApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24689,
+  "skill_sha256": "df3fdf4bff7ec2c93706deeab1ecba516a78f894de1fc21869072651b1ab1647",
   "tool_schema": {
     "properties": {
       "operation": {

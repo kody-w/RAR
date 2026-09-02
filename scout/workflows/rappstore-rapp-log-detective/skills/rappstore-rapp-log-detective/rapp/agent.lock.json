@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/log-detective",
+  "agent_bytes": 12425,
   "agent_file": "log_detective_agent.py",
   "agent_sha256": "5d3b06228dddc510fb3a84a30b1e3517387d52388cdf66e6879e4be9e5c7a81f",
+  "backup_agent": "log_detective_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LogDetectiveAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "example_call": {
@@ -26,8 +29,16 @@
     "trust": "community",
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/log-detective:2d4ab305c3145c0e16960f41f58c082334de16a872388e1f62264ea14ef1ad42",
+  "rollback_agent_retained": true,
   "runtime_name": "LogDetective",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 28651,
+  "skill_sha256": "df699278bb2e15dfc6e1cc0e60f7cd29e700e5e93b80decdd634590d5a2533a9",
   "tool_schema": {
     "properties": {
       "action": {

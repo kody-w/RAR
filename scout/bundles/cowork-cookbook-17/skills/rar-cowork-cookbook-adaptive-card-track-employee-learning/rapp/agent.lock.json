@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_track_employee_learning",
+  "agent_bytes": 10616,
   "agent_file": "adaptive_card_track_employee_learning_agent.py",
   "agent_sha256": "399dbefea93eb8b0451917daf10502d6d87bcc95e10ca0635d020484ef743b77",
+  "backup_agent": "adaptive_card_track_employee_learning_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardTrackEmployeeLearning",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-track-employee-learning:71dd040dd12a32981fc4bbb554d6b8b94b5742433200e26cc7542963aaf7d128",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardTrackEmployeeLearning",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24685,
+  "skill_sha256": "f1eaebff627c565e86c8cf8961c8995e2d427d0a1c6eb64382893207b2e71bbc",
   "tool_schema": {
     "properties": {
       "operation": {

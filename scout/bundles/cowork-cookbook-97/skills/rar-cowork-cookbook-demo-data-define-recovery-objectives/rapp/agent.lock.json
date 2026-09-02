@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_define_recovery_objectives",
+  "agent_bytes": 10586,
   "agent_file": "demo_data_define_recovery_objectives_agent.py",
   "agent_sha256": "e8f340486f30b7864fdf6fe69a95251002a3b298a42c0c1aa8380c33a2987327",
+  "backup_agent": "demo_data_define_recovery_objectives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDefineRecoveryObjectives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-define-recovery-objectives:612cf3d3eed9f45e108e3a44adbaa7d270e8cb104e8fca0ef64a52736473b6d9",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDefineRecoveryObjectives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24630,
+  "skill_sha256": "98f65eadb8b93e1da484990db0c21684f55ad3d162fd0a0706757a21469cd9a5",
   "tool_schema": {
     "properties": {
       "operation": {

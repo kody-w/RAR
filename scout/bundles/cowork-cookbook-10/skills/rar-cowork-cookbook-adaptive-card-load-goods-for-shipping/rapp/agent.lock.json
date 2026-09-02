@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_load_goods_for_shipping",
+  "agent_bytes": 10640,
   "agent_file": "adaptive_card_load_goods_for_shipping_agent.py",
   "agent_sha256": "9a99aa7d74afeeb68ff75d137ba547ef7182aa99cd97b376c78aa9626a4e9536",
+  "backup_agent": "adaptive_card_load_goods_for_shipping_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardLoadGoodsForShipping",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-load-goods-for-shipping:c54a243098e0c4a737d3dc0ed07e01217d16072c39f50d3f6479177acd4c558f",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardLoadGoodsForShipping",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24739,
+  "skill_sha256": "b18c88b2ad3c78f2dd5b8408b4d5e160bb853a0c3673fa0b41f77ed64ec2fafe",
   "tool_schema": {
     "properties": {
       "operation": {

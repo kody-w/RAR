@@ -3,10 +3,11 @@
   "id": "kody-w__chain_composer_agent",
   "name": "Chain Composer",
   "rar_name": "@kody-w/chain_composer_agent",
-  "rappid": "rappid:@kody-w/chain_composer_agent:340f18f1660e9594bac57da15c5db9904ea841f8cbebf9fa1311fdbb44dda14c",
-  "_migrated_from": "rappid:@kody-w/chain_composer_agent:18215a9c13d2e3d4a5a42871eef3b122b60abdd07382e75b3d42a9ce4f7452ea",
+  "rappid": "rappid:@kody-w/chain-composer:3f909e9d31339c8c53bc4d87eec18b55a30fc249aa47889e2610cced0edf0e06",
+  "_migrated_from": "rappid:@kody-w/chain_composer_agent:340f18f1660e9594bac57da15c5db9904ea841f8cbebf9fa1311fdbb44dda14c",
   "_migrated_from_all": [
-    "rappid:@kody-w/chain_composer_agent:18215a9c13d2e3d4a5a42871eef3b122b60abdd07382e75b3d42a9ce4f7452ea"
+    "rappid:@kody-w/chain_composer_agent:18215a9c13d2e3d4a5a42871eef3b122b60abdd07382e75b3d42a9ce4f7452ea",
+    "rappid:@kody-w/chain_composer_agent:340f18f1660e9594bac57da15c5db9904ea841f8cbebf9fa1311fdbb44dda14c"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -32,9 +33,18 @@
   "sha256": "5c3eec3b482e9a812b963cfb7570175ec73fe1cec384269a9c9a0a9866347d18",
   "has_card": true,
   "added_at": "2026-05-09T15:25:18-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-chain-composer",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__chain_composer_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-chain-composer/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-chain-composer/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__chain_composer_agent.py",
   "api_card_url": null,

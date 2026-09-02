@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_subcontract_production",
+  "agent_bytes": 10616,
   "agent_file": "adaptive_card_subcontract_production_agent.py",
   "agent_sha256": "68fb1529ce4397d4668abe8320ced359ece56aa6970d2fb0ec09f78e3dcd1cd3",
+  "backup_agent": "adaptive_card_subcontract_production_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardSubcontractProduction",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-subcontract-production:367b2e8bc630441a8092d576dcdadaa6ec37bc62d01a6cafad68e8285b136dba",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardSubcontractProduction",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24615,
+  "skill_sha256": "c4e13e0a0d792cecfbd0bfa205298226b7032ed66f1c40862b96b1571998c027",
   "tool_schema": {
     "properties": {
       "operation": {

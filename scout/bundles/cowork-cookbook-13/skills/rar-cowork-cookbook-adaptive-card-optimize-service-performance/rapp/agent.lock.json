@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_optimize_service_performance",
+  "agent_bytes": 10705,
   "agent_file": "adaptive_card_optimize_service_performance_agent.py",
   "agent_sha256": "f740e92c770489aa642ba4923bb338eb0dd16a33d3daa85a032f0e99913415b8",
+  "backup_agent": "adaptive_card_optimize_service_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardOptimizeServicePerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-optimize-service-performance:b546d5b078230f605266a8492c3210a8fe74e69dbc972bd4d008a58fadd6dfcc",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardOptimizeServicePerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24845,
+  "skill_sha256": "84304c7954ad7cc5645bbddf49f2d600ebaf357711e37e8193982ba64d37a452",
   "tool_schema": {
     "properties": {
       "operation": {

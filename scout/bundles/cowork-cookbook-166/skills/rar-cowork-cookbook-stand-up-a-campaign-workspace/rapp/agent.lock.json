@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/stand_up_a_campaign_workspace",
+  "agent_bytes": 10470,
   "agent_file": "stand_up_a_campaign_workspace_agent.py",
   "agent_sha256": "35eba29ffd98e987ee4f9eb74a5bae0ae286df7ff6e9a499dd002ee7e0f5fa10",
+  "backup_agent": "stand_up_a_campaign_workspace_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StandUpACampaignWorkspace",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -75,8 +78,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/stand-up-a-campaign-workspace:d3b7d5ca7b9b99b747e90d697351dc75417df7b8630868e1c385b6d9feb520e4",
+  "rollback_agent_retained": true,
   "runtime_name": "StandUpACampaignWorkspace",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24501,
+  "skill_sha256": "07bf258ffdb0b421e9225942c5cd166cd9424c48da6b4c47463ba9f3fdb39501",
   "tool_schema": {
     "properties": {
       "operation": {

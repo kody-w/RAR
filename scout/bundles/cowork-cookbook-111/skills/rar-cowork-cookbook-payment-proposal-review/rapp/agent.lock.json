@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/payment_proposal_review",
+  "agent_bytes": 10486,
   "agent_file": "payment_proposal_review_agent.py",
   "agent_sha256": "3516253ef9d600a853cab068bc87554a5ad1d20033effabe0b6bd35ce3cca7bd",
+  "backup_agent": "payment_proposal_review_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PaymentProposalReview",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/payment-proposal-review:12cb58190cd4f0c33e695f9a12ac631637ca547fee98d6132a10dd36d95ba368",
+  "rollback_agent_retained": true,
   "runtime_name": "PaymentProposalReview",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24342,
+  "skill_sha256": "c9bf48f1a8834af8227f293616c06711ae0dbb474f1fb1e523a35f48bc35e403",
   "tool_schema": {
     "properties": {
       "criteria": {

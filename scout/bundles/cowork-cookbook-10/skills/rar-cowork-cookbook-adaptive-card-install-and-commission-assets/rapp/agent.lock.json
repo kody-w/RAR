@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_install_and_commission_assets",
+  "agent_bytes": 10712,
   "agent_file": "adaptive_card_install_and_commission_assets_agent.py",
   "agent_sha256": "251bb212f38a1b1b3db896afb94d6f3c27a45b70bf3733c719b7b15bc48f74c8",
+  "backup_agent": "adaptive_card_install_and_commission_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardInstallAndCommissionAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-install-and-commission-assets:e668bf2844978c8f0ae32e94599e5cf23d250d3e322c3a3a4d844cc8a05d8d27",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardInstallAndCommissionAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24887,
+  "skill_sha256": "54823c96133b3a0c0a5f5f0a99cf1f0c89bafaa9c0051a71c903ab14c0d5a72b",
   "tool_schema": {
     "properties": {
       "operation": {

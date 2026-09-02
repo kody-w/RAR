@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_maintain_product_costs",
+  "agent_bytes": 10621,
   "agent_file": "audit_maintain_product_costs_agent.py",
   "agent_sha256": "83e8f270c243df7dfcbde02459a224a36632eac17d4353069a957d5307a273e5",
+  "backup_agent": "audit_maintain_product_costs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditMaintainProductCosts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-maintain-product-costs:a95a4b2c05c29114a654b3fe47628e7b72f504d5a773adf2013b36761f385dc0",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditMaintainProductCosts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24594,
+  "skill_sha256": "8db759cf1bb9f1c225ee11a81c84d48add583a8643bca86c7fb510a224d282c4",
   "tool_schema": {
     "properties": {
       "criteria": {

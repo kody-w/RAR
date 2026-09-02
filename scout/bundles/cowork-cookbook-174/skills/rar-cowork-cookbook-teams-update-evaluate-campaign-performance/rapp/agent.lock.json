@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_evaluate_campaign_performance",
+  "agent_bytes": 10711,
   "agent_file": "teams_update_evaluate_campaign_performance_agent.py",
   "agent_sha256": "46a9d5cb908e960c84513744b3e37137915b48dfecab689405f8a0b0b849778a",
+  "backup_agent": "teams_update_evaluate_campaign_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateEvaluateCampaignPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-evaluate-campaign-performance:8df17140186bfcf99fdf6379d5bac3efc71de925a331d80aba696327cc4e0ad2",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateEvaluateCampaignPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24834,
+  "skill_sha256": "839404c23c691d74a8acc2e8594bacd03e7da5f9788bccdf273ba13d12d257ca",
   "tool_schema": {
     "properties": {
       "operation": {

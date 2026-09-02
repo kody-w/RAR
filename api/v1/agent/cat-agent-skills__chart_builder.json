@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__chart_builder",
   "name": "Chart Builder",
   "rar_name": "@cat-agent-skills/chart_builder",
-  "rappid": "rappid:@cat-agent-skills/chart_builder:7f7a6b9ea3458caffe425fbe60d71d253e966af884c502e27041d9fe8c51baf2",
-  "_migrated_from": "rappid:@cat-agent-skills/chart_builder:8e746d7ca11f6dc69efbcdc05d32ee4a4ac351da2398e51ee947c64d40159536",
+  "rappid": "rappid:@cat-agent-skills/chart-builder:8ac4e40970de2216662b82c9982f27e8c92fcf2b82d9208bf5d4f66a7a5a6b02",
+  "_migrated_from": "rappid:@cat-agent-skills/chart_builder:7f7a6b9ea3458caffe425fbe60d71d253e966af884c502e27041d9fe8c51baf2",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/chart_builder:8e746d7ca11f6dc69efbcdc05d32ee4a4ac351da2398e51ee947c64d40159536"
+    "rappid:@cat-agent-skills/chart_builder:8e746d7ca11f6dc69efbcdc05d32ee4a4ac351da2398e51ee947c64d40159536",
+    "rappid:@cat-agent-skills/chart_builder:7f7a6b9ea3458caffe425fbe60d71d253e966af884c502e27041d9fe8c51baf2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "2.0.1",
@@ -30,9 +31,18 @@
   "sha256": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-cat-agent-skills-chart-builder",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__chart_builder.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/chart_builder_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/chart_builder_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-chart-builder/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-chart-builder/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__chart_builder.py",
   "api_card_url": null,

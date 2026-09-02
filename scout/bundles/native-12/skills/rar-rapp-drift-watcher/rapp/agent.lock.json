@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/drift_watcher",
+  "agent_bytes": 20651,
   "agent_file": "drift_watcher_agent.py",
   "agent_sha256": "6f2aedf636bbbde6a3b692c2d920c6af283291885886eba3f523179766529dee",
+  "backup_agent": "drift_watcher_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DriftWatcherAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -30,8 +33,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/drift-watcher:f67a627076324230ffd1067559894e4e345fb88852d09fb20ebd36e2f6c1b2b3",
+  "rollback_agent_retained": true,
   "runtime_name": "DriftWatcherAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 38219,
+  "skill_sha256": "d6aebca4185b2fa00ffde84e268ba08e02ebddc5a6ef7b09bac6910cf241990a",
   "tool_schema": {
     "properties": {
       "action": {

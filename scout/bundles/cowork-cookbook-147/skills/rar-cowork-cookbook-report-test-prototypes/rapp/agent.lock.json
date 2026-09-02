@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_test_prototypes",
+  "agent_bytes": 10245,
   "agent_file": "report_test_prototypes_agent.py",
   "agent_sha256": "727771c3182c86859be479d1e86e5242333ea6cf2f2aebd3593170f469a66d54",
+  "backup_agent": "report_test_prototypes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportTestPrototypes",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-test-prototypes:bc300c33b2fa9aaf9d25fc7a7558c60107f556b701ac7c2db49ab5ee89278a89",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportTestPrototypes",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23906,
+  "skill_sha256": "bcae8b50f9a153c6e98d1c84737edff4c028ac559209ec1607fe94a700b53d52",
   "tool_schema": {
     "properties": {
       "audience": {

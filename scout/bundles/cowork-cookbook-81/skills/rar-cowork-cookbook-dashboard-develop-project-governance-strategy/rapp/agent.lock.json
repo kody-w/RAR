@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_develop_project_governance_strategy",
+  "agent_bytes": 10776,
   "agent_file": "dashboard_develop_project_governance_strategy_agent.py",
   "agent_sha256": "b7afac13fb3b133064e92d9c6676b40012d78198eab7968ad184b9a7d7c9646f",
+  "backup_agent": "dashboard_develop_project_governance_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDevelopProjectGovernanceStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-develop-project-governance-strategy:15e4a1d63f8f5f8926a0bc7a967fde7c40acbfea54c8b7bcd7d7e19ccd107387",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDevelopProjectGovernanceStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25040,
+  "skill_sha256": "83eec80482440b79a9fab78720df86638e01e373ee12a7f2a41c11b4d613b5a6",
   "tool_schema": {
     "properties": {
       "operation": {

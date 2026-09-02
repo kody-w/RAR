@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_develop_sales_strategy",
+  "agent_bytes": 10508,
   "agent_file": "demo_data_develop_sales_strategy_agent.py",
   "agent_sha256": "572f16a9a27f32d7feafcc0e6c488a32f11070ffc039c5f27e748cf3742a5128",
+  "backup_agent": "demo_data_develop_sales_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDevelopSalesStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-develop-sales-strategy:3218910eb073ed88cc556ace05b8b5bf967a7d05173569375355bb64dc27b4a8",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDevelopSalesStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24463,
+  "skill_sha256": "2db3d1a869355c033aec2ba472f5cf6e6d4595820bca6bc7d69735f11b395c47",
   "tool_schema": {
     "properties": {
       "operation": {

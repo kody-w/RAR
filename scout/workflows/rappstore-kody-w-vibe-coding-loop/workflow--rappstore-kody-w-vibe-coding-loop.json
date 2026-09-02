@@ -5,6 +5,13 @@
   "id": "da9724796d2914cd",
   "lastExecutedAt": null,
   "name": "Vibe Coding Loop",
+  "rapp": {
+    "backup_agent": "vibe_coding_loop_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-kody-w-vibe-coding-loop"
+  },
   "schedule": {
     "days": [
       1,

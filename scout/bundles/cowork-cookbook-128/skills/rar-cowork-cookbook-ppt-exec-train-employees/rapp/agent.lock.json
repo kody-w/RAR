@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_train_employees",
+  "agent_bytes": 10486,
   "agent_file": "ppt_exec_train_employees_agent.py",
   "agent_sha256": "84512a4694f8a77c672897aba5e329b5dbd087080fcf0bf244daf11493aeb1b5",
+  "backup_agent": "ppt_exec_train_employees_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecTrainEmployees",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-train-employees:73b8691f4c5b9bcba0960db417e7ac8de0ec6a82ad0035308feab15df1a509f0",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecTrainEmployees",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24309,
+  "skill_sha256": "61092e68f3e0e58f5cca5c1318562d84ef575bf227215120bea1b170dd5c8790",
   "tool_schema": {
     "properties": {
       "operation": {

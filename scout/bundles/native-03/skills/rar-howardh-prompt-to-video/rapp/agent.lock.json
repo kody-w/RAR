@@ -1,9 +1,12 @@
 {
   "agent": "@howardh/prompt_to_video_agent",
+  "agent_bytes": 26881,
   "agent_file": "prompt_to_video_agent.py",
   "agent_sha256": "3bcdd845998ff84158cc2c2ab54fefcb54b0e3a6106fd4bfb8e59252b58694c6",
+  "backup_agent": "prompt_to_video_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PromptToVideoAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP Contributor",
@@ -29,8 +32,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@howardh/prompt-to-video:360e83c9863d8fdd6598a3cda1a1f53de2ff183cb600bfdbd4bcdf4ae2f0695a",
+  "rollback_agent_retained": true,
   "runtime_name": "PromptToVideo",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 46003,
+  "skill_sha256": "c11063a8906fa28f8e6faa39adc1d4d81a252c1d68d4958da4f10800fed83317",
   "tool_schema": {
     "properties": {
       "resolution": {

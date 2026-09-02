@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_return_goods_to_vendor",
+  "agent_bytes": 10634,
   "agent_file": "audit_return_goods_to_vendor_agent.py",
   "agent_sha256": "fa131ee0e2465086329bdaf61426408a4ad6db1e51821257dec4394429c55a4b",
+  "backup_agent": "audit_return_goods_to_vendor_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditReturnGoodsToVendor",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-return-goods-to-vendor:01043ed48ac2bf0fd1e5c5bd7792a640c41ebfdd1dd6dabaea0db207239ad7c3",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditReturnGoodsToVendor",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24643,
+  "skill_sha256": "6f17d53160a71e2eb19e730fa750f8003c5ae7bfd47b52716feef96eddde2eda",
   "tool_schema": {
     "properties": {
       "criteria": {

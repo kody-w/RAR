@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/map_a_workflow_from_a_process_description",
+  "agent_bytes": 10447,
   "agent_file": "map_a_workflow_from_a_process_description_agent.py",
   "agent_sha256": "f2bc882e02104c377f714e9db4d24699caf74d79bf15064b7ba5a81062103adb",
+  "backup_agent": "map_a_workflow_from_a_process_description_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MapAWorkflowFromAProcessDescription",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/map-a-workflow-from-a-process-description:e5bdbfa5343eca99fec8a5c9439fef7977a6a3640c4da8d4d7eaa0c2e3e347cf",
+  "rollback_agent_retained": true,
   "runtime_name": "MapAWorkflowFromAProcessDescription",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24402,
+  "skill_sha256": "581c05e6e27cf6e71137a03bf6af608a619273a26265c6caebafc892731884d6",
   "tool_schema": {
     "properties": {
       "operation": {

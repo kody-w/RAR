@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_define_preliminary_budgets",
+  "agent_bytes": 10549,
   "agent_file": "demo_data_define_preliminary_budgets_agent.py",
   "agent_sha256": "80b9d6331558bac909c5956fdc67ef5533791371d8d2e5c38f3c2a42cfb76278",
+  "backup_agent": "demo_data_define_preliminary_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDefinePreliminaryBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-define-preliminary-budgets:6704b4c7fa581e0c4281116bd60a78f834db2f140ccd70594f20be9be7023014",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDefinePreliminaryBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24584,
+  "skill_sha256": "29d9da99dd6b792ccb745cbdbd0404329656c3b6f11c325dfc036029bc32184a",
   "tool_schema": {
     "properties": {
       "operation": {

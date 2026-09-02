@@ -3,10 +3,11 @@
   "id": "kody-w__commons_show_agent",
   "name": "Commons Show",
   "rar_name": "@kody-w/commons_show_agent",
-  "rappid": "rappid:@kody-w/commons_show_agent:bcee24c720374ea3fcdf60062afbf8dc6b25c810b0057455850c22743ebf0d60",
-  "_migrated_from": "rappid:@kody-w/commons_show_agent:48589424bdef41ed1bfcfc8220cd4a58a68923c08ea6dd0934475fd936843e70",
+  "rappid": "rappid:@kody-w/commons-show:eeb77bab52ef30981915aac44fc972a1b3849a30bc0d68eee997148ab3beb749",
+  "_migrated_from": "rappid:@kody-w/commons_show_agent:bcee24c720374ea3fcdf60062afbf8dc6b25c810b0057455850c22743ebf0d60",
   "_migrated_from_all": [
-    "rappid:@kody-w/commons_show_agent:48589424bdef41ed1bfcfc8220cd4a58a68923c08ea6dd0934475fd936843e70"
+    "rappid:@kody-w/commons_show_agent:48589424bdef41ed1bfcfc8220cd4a58a68923c08ea6dd0934475fd936843e70",
+    "rappid:@kody-w/commons_show_agent:bcee24c720374ea3fcdf60062afbf8dc6b25c810b0057455850c22743ebf0d60"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -31,9 +32,18 @@
   "sha256": "c7b97c5fbe3611f175f3812831450a5e559a4fcee17cb46fdad27b30d26a49ee",
   "has_card": true,
   "added_at": "2026-06-20T18:41:00-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-commons-show",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__commons_show_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_show_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_show_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-05/skills/rar-kody-w-commons-show/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-05/skills/rar-kody-w-commons-show/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__commons_show_agent.py",
   "api_card_url": null,

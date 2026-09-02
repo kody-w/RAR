@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage every agent.py as a flat GitHub Release asset.
+"""Stage every Toasted skill plus its rollback agent as release assets.
 
 Why this exists
 ---------------
@@ -35,10 +35,13 @@ import argparse
 import json
 import shutil
 import sys
+import zipfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_FILE = REPO_ROOT / "registry.json"
+SCOUT_CATALOG = REPO_ROOT / "scout" / "catalog" / "catalog.json"
+SCOUT_ROOT = REPO_ROOT / "scout"
 DEFAULT_OUT = REPO_ROOT / "dist" / "release-assets"
 
 
@@ -56,6 +59,19 @@ def stage(out_dir: Path) -> int:
     if not agents:
         print("[stage-assets] no agents in registry; nothing to stage.", file=sys.stderr)
         return 1
+    if not SCOUT_CATALOG.exists():
+        print(
+            "[stage-assets] Scout catalog missing — run "
+            "build_scout_exports.py first.",
+            file=sys.stderr,
+        )
+        return 1
+    scout = json.loads(SCOUT_CATALOG.read_text(encoding="utf-8"))
+    skills = {
+        item.get("identity"): item
+        for item in scout.get("skills", [])
+        if isinstance(item, dict) and item.get("identity")
+    }
 
     if out_dir.exists():
         shutil.rmtree(out_dir)
@@ -63,6 +79,7 @@ def stage(out_dir: Path) -> int:
 
     seen: dict[str, str] = {}
     staged = 0
+    skill_staged = 0
     skipped_stub = 0
     missing: list[str] = []
 
@@ -105,6 +122,54 @@ def stage(out_dir: Path) -> int:
         shutil.copy2(src, out_dir / asset)
         staged += 1
 
+        skill = skills.get(name)
+        if skill:
+            skill_asset = asset.removesuffix("_agent.py") + ".skill.zip"
+            if skill_asset in seen:
+                print(
+                    f"[stage-assets] FATAL: skill asset collision "
+                    f"{skill_asset!r}.",
+                    file=sys.stderr,
+                )
+                return 1
+            seen[skill_asset] = name
+            if skill.get("bundle") == "starter":
+                skill_dir = (
+                    SCOUT_ROOT
+                    / "starter"
+                    / "skills"
+                    / skill["skill_name"]
+                )
+            else:
+                skill_dir = (
+                    SCOUT_ROOT
+                    / "bundles"
+                    / skill["bundle"]
+                    / "skills"
+                    / skill["skill_name"]
+                )
+            if not skill_dir.is_dir():
+                missing.append(f"{name} ({skill_dir})")
+                continue
+            with zipfile.ZipFile(
+                out_dir / skill_asset,
+                "w",
+                compression=zipfile.ZIP_DEFLATED,
+                compresslevel=9,
+            ) as archive:
+                for path in sorted(
+                    item for item in skill_dir.rglob("*") if item.is_file()
+                ):
+                    relative = path.relative_to(skill_dir).as_posix()
+                    info = zipfile.ZipInfo(relative, (2000, 1, 1, 0, 0, 0))
+                    info.compress_type = zipfile.ZIP_DEFLATED
+                    info.external_attr = (
+                        (0o755 if path.stat().st_mode & 0o111 else 0o644)
+                        << 16
+                    )
+                    archive.writestr(info, path.read_bytes())
+            skill_staged += 1
+
     if missing:
         print(f"[stage-assets] FATAL: {len(missing)} agent(s) have no readable "
               f"source: {', '.join(missing[:5])}"
@@ -114,14 +179,38 @@ def stage(out_dir: Path) -> int:
     # The manifest lets fetch_download_counts.py map an asset back to an
     # agent without re-deriving the naming rule, and lets a client resolve
     # a download URL from the release alone.
+    agent_assets = {
+        agent["name"]: agent["_install_filename"]
+        for agent in agents
+        if agent.get("_install_filename") and agent.get("name") in seen.values()
+    }
+    skill_assets = {
+        identity: asset
+        for asset, identity in seen.items()
+        if asset.endswith(".skill.zip")
+    }
     manifest = {
-        "schema": "rar-release-assets/1.0",
-        "assets": {seen[a]: a for a in sorted(seen)},
+        "schema": "rar-release-assets/2.0",
+        "default_artifact": "skill",
+        "assets": agent_assets,
+        "skill_assets": {
+            identity: skill_assets[identity]
+            for identity in sorted(skill_assets)
+        },
+        "default_assets": {
+            identity: skill_assets.get(identity, agent_assets.get(identity))
+            for identity in sorted(agent_assets)
+        },
+        "roles": {
+            "skill_assets": "primary-grail",
+            "assets": "rollback-agent",
+        },
     }
     (out_dir / "release-assets.json").write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 
-    print(f"[stage-assets] staged {staged} agent asset(s) into {out_dir} "
+    print(f"[stage-assets] staged {skill_staged} Toasted skill asset(s) and "
+          f"{staged} rollback agent asset(s) into {out_dir} "
           f"({skipped_stub} private stub(s) skipped).")
     return 0
 

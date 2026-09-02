@@ -3,10 +3,11 @@
   "id": "wildhaven__bellows_agent",
   "name": "Bellows",
   "rar_name": "@wildhaven/bellows_agent",
-  "rappid": "rappid:@wildhaven/bellows_agent:5f8e3a99322c7ba061e4b7e5694e9dffe8d59270a22ebf0245c53d65c2c7a908",
-  "_migrated_from": "rappid:@wildhaven/bellows_agent:ee69d591584138c90fd7be3a69cbb23f8056334b6f86bc62dc3e24da313bfb33",
+  "rappid": "rappid:@wildhaven/bellows:84ce546eeddd950dc88ec1e3f2870980c46f997b652d0a22882661e6be38fbab",
+  "_migrated_from": "rappid:@wildhaven/bellows_agent:5f8e3a99322c7ba061e4b7e5694e9dffe8d59270a22ebf0245c53d65c2c7a908",
   "_migrated_from_all": [
-    "rappid:@wildhaven/bellows_agent:ee69d591584138c90fd7be3a69cbb23f8056334b6f86bc62dc3e24da313bfb33"
+    "rappid:@wildhaven/bellows_agent:ee69d591584138c90fd7be3a69cbb23f8056334b6f86bc62dc3e24da313bfb33",
+    "rappid:@wildhaven/bellows_agent:5f8e3a99322c7ba061e4b7e5694e9dffe8d59270a22ebf0245c53d65c2c7a908"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.1.1",
@@ -34,9 +35,18 @@
   "sha256": "70aca84f711e97ddfc78ac555e826b60332ce5eae25bc90e85c7d8f42dddc608",
   "has_card": true,
   "added_at": "2026-05-16T13:08:37-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-wildhaven-bellows",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/wildhaven__bellows_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/bellows_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/bellows_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-wildhaven-bellows/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-wildhaven-bellows/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__bellows_agent.py",
   "api_card_url": null,

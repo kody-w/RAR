@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/brand_template_enforcer",
+  "agent_bytes": 9192,
   "agent_file": "brand_template_enforcer_agent.py",
   "agent_sha256": "ae1779f176150087d15edf582f1193947f2b3df165ad863d53759e62dd1e9061",
+  "backup_agent": "brand_template_enforcer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BrandTemplateEnforcer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Doug Bellingeri",
@@ -42,8 +45,16 @@
     ],
     "version": "2.2.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/brand-template-enforcer:df95a977c3bc8ac3c0b6d938705e6374e3d2a657a9702fa20b9884044907e687",
+  "rollback_agent_retained": true,
   "runtime_name": "BrandTemplateEnforcer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22202,
+  "skill_sha256": "3683232bfe6056456d9809280daee23053e045ad5c6b8d996c9b681c52bf5cdb",
   "tool_schema": {
     "properties": {
       "audience": {

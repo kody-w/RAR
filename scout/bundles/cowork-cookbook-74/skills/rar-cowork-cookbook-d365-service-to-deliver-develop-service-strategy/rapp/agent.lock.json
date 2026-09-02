@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_service_to_deliver_develop_service_strategy",
+  "agent_bytes": 10745,
   "agent_file": "d365_service_to_deliver_develop_service_strategy_agent.py",
   "agent_sha256": "1cb78f50010b775cc38c258b7aa3f6b56d8fd816677418e31373d200358ed8ef",
+  "backup_agent": "d365_service_to_deliver_develop_service_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ServiceToDeliverDevelopServiceStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-service-to-deliver-develop-service-strategy:30a490035206622f25a625d0090adc32aabeff110cab45d4f32c587fe80c3263",
+  "rollback_agent_retained": true,
   "runtime_name": "D365ServiceToDeliverDevelopServiceStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24982,
+  "skill_sha256": "dc22c17e9106b7b1c32bb1f2f0558f978785bd5722566483be47df5e375b6712",
   "tool_schema": {
     "properties": {
       "operation": {

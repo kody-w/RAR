@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_compensation_policies",
+  "agent_bytes": 10686,
   "agent_file": "dashboard_define_compensation_policies_agent.py",
   "agent_sha256": "15bb8f6e15a41f60ec1cbb77dc9eda415e34d6342705380b970ce5409c180dcd",
+  "backup_agent": "dashboard_define_compensation_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefineCompensationPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-define-compensation-policies:08a2431ee0f39c60287a2c8128c51bcda2fb785a5167b849acc62ee8db2a1f64",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDefineCompensationPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24802,
+  "skill_sha256": "bffe881f401b670ab51c03f5e4210d3d6e8b1553b70c9ee787bf0e6b00d2d0af",
   "tool_schema": {
     "properties": {
       "operation": {

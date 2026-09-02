@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/journal_entry_validation",
+  "agent_bytes": 10559,
   "agent_file": "journal_entry_validation_agent.py",
   "agent_sha256": "6b9711a1812f44c713d1df7c028eee0c12b79b9d333a924ea7ced6d57c600794",
+  "backup_agent": "journal_entry_validation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "JournalEntryValidation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/journal-entry-validation:65242a79d8a2815bf3040741c281745531a7cab29183f8e4d2de5d9b3c7ac097",
+  "rollback_agent_retained": true,
   "runtime_name": "JournalEntryValidation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24487,
+  "skill_sha256": "80c8f5f31ad9305b98f397ce18ca2fa370d5f01964b487097500334f01f077af",
   "tool_schema": {
     "properties": {
       "criteria": {

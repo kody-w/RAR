@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/customer_adoption_materials",
+  "agent_bytes": 9600,
   "agent_file": "customer_adoption_materials_agent.py",
   "agent_sha256": "54fa4622b85df72e5a5aab85fd1fca7a124a986ebb243cfd7225b508fe1c6697",
+  "backup_agent": "customer_adoption_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CustomerAdoptionMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -73,8 +76,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/customer-adoption-materials:97417e69e9c40ce1dbea3d16a7902b5d0d9fc5b3ec96d186df0836f4fe263fc9",
+  "rollback_agent_retained": true,
   "runtime_name": "CustomerAdoptionMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22745,
+  "skill_sha256": "b0aa0f14c60db5d34160f51d3a74446dbb4e2fbed84f675dd6255ba350eb80d1",
   "tool_schema": {
     "properties": {
       "operation": {

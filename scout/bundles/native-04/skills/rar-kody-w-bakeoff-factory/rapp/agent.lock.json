@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/bakeoff_factory",
+  "agent_bytes": 37067,
   "agent_file": "bakeoff_factory_agent.py",
   "agent_sha256": "461620d239ee7c63430f5a5cd4412429d72a049977d5ff2beb04d0ba5e38b786",
+  "backup_agent": "bakeoff_factory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BakeoffFactoryAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -53,8 +56,16 @@
     ],
     "version": "0.1.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/bakeoff-factory:7b22406672acd622052f2dd226ad0e337f41076a2b5d849c9ad406d019eaed67",
+  "rollback_agent_retained": true,
   "runtime_name": "BakeoffFactory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 64990,
+  "skill_sha256": "6a6142a88f4ef0e4c5cda0c7498da0349d269c23d8efa3284dbd9677e713f365",
   "tool_schema": {
     "properties": {
       "action": {

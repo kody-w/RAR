@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_and_surface_against_a_standard",
+  "agent_bytes": 10662,
   "agent_file": "audit_and_surface_against_a_standard_agent.py",
   "agent_sha256": "451d4d8183d19ad8bcd8db61b032ca203d7cbcac77f4af04a1411d8e18741510",
+  "backup_agent": "audit_and_surface_against_a_standard_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAndSurfaceAgainstAStandard",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-and-surface-against-a-standard:3847c8f161753dbb2ff84c877e98c077a8e246d57a2014b3601751de6d6423e4",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAndSurfaceAgainstAStandard",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24979,
+  "skill_sha256": "80d918efddf84743540ffea20e68e6f721403c26024baefdeaf7c43c64a79796",
   "tool_schema": {
     "properties": {
       "criteria": {

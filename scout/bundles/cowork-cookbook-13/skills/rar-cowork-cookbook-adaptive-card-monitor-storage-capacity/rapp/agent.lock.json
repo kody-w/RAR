@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_monitor_storage_capacity",
+  "agent_bytes": 10689,
   "agent_file": "adaptive_card_monitor_storage_capacity_agent.py",
   "agent_sha256": "3c02a12167d11af5b4b1577ada4c3bdc9bc63d855b8efdd2b765db88e70eca40",
+  "backup_agent": "adaptive_card_monitor_storage_capacity_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardMonitorStorageCapacity",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-monitor-storage-capacity:7cee177c01a6b64828e756d81cf60c3f1a86518e973f0d416e950ccb5948c54b",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardMonitorStorageCapacity",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24784,
+  "skill_sha256": "9278bd9e4bf015424dfa35aa36b59d916f6e773cda5edd08ad540ff7e0682ccf",
   "tool_schema": {
     "properties": {
       "operation": {

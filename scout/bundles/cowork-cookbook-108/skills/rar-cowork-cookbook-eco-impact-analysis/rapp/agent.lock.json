@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/eco_impact_analysis",
+  "agent_bytes": 10432,
   "agent_file": "eco_impact_analysis_agent.py",
   "agent_sha256": "342629ab28db05ce912e4199dcf7edf9c1988f159a5c388250075d00a78b70b2",
+  "backup_agent": "eco_impact_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EcoImpactAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/eco-impact-analysis:2107e11aeb6afe49e6ce601089b03c3671e11028d58398f175eb15721ec7b2c0",
+  "rollback_agent_retained": true,
   "runtime_name": "EcoImpactAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24229,
+  "skill_sha256": "1f76499e454ee714968d8ab5dd962e6c09eb5bb8a2650234dc5d23ef7c2b280c",
   "tool_schema": {
     "properties": {
       "operation": {

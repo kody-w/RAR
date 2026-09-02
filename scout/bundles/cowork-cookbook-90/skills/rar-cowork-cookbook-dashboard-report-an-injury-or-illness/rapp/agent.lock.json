@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_report_an_injury_or_illness",
+  "agent_bytes": 10660,
   "agent_file": "dashboard_report_an_injury_or_illness_agent.py",
   "agent_sha256": "bdbdb83b8ce93b6510072af2c801177087e6a4b9ac6e2e88d768bba6a3dc58f3",
+  "backup_agent": "dashboard_report_an_injury_or_illness_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardReportAnInjuryOrIllness",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-report-an-injury-or-illness:4ba450ab983ae11d424bb26687db39226f99e0f9bdd1ab2955bd2b5336ec0339",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardReportAnInjuryOrIllness",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24793,
+  "skill_sha256": "e3bfc0e8c4005c957a578984ff02fe7de336ddecabbbbc6cdaada8e81d14ddc1",
   "tool_schema": {
     "properties": {
       "operation": {

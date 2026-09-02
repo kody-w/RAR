@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/twin_egg_hatcher",
+  "agent_bytes": 33006,
   "agent_file": "twin_egg_hatcher_agent.py",
   "agent_sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
+  "backup_agent": "twin_egg_hatcher_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HatchTwinEggAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -28,8 +31,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/twin-egg-hatcher:990d0181ffa7fcc78626c7efea1842d459527d4a55bd4d036c11f66d2fee4b5f",
+  "rollback_agent_retained": true,
   "runtime_name": "HatchTwinEgg",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 57043,
+  "skill_sha256": "6c10f1146f5c4b18c8ddd47b7817e9b813d3b309f7edf0e4225bf0b9ee638d03",
   "tool_schema": {
     "properties": {
       "action": {

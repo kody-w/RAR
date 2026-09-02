@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_measure_plan_adherence",
+  "agent_bytes": 10669,
   "agent_file": "scheduled_brief_measure_plan_adherence_agent.py",
   "agent_sha256": "57e2df6708886022d7934dfb783a77667bcda8eaf6ab782cbfe1f5c3df31bfec",
+  "backup_agent": "scheduled_brief_measure_plan_adherence_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefMeasurePlanAdherence",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-measure-plan-adherence:0794e7f06e98295d53556886391cdca4fb0e309fdbdc443c3c1468f0c1c5213a",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefMeasurePlanAdherence",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24750,
+  "skill_sha256": "2b80f76ba7e92a7884b72e500dbd6b8870881c0c21cbe45ba22de0a820b306a7",
   "tool_schema": {
     "properties": {
       "operation": {

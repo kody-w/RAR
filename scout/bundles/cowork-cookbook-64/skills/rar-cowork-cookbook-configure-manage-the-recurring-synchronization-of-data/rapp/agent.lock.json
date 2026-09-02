@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data",
+  "agent_bytes": 11065,
   "agent_file": "configure_manage_the_recurring_synchronization_of_data_agent.py",
   "agent_sha256": "84faffbd9118032bf33f49b0dd2e6f919b736d1869012cc4beac4734870db4f7",
+  "backup_agent": "configure_manage_the_recurring_synchronization_of_data_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageTheRecurringSynchronizationOfData",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-manage-the-recurring-synchronization-of-data:314df02545d65ba35ab12bebcef2b685bf02e69496e02cc37fcd8e1fc533b09a",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureManageTheRecurringSynchronizationOfData",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25528,
+  "skill_sha256": "a84de4126a5974a75d0526fefa2b7e0e4a5dcbe9cefca504a9bb6d2651960732",
   "tool_schema": {
     "properties": {
       "operation": {

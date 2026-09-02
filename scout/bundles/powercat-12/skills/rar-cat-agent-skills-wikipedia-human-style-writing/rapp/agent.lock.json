@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/wikipedia_human_style_writing",
+  "agent_bytes": 9199,
   "agent_file": "wikipedia_human_style_writing_agent.py",
   "agent_sha256": "1f50f40dc28b1760c266836dc179d8cb5be8ca2151a339e00fe612af9c163131",
+  "backup_agent": "wikipedia_human_style_writing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WikipediaHumanStyleWriting",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Chris Garty",
@@ -45,8 +48,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/wikipedia-human-style-writing:5d71d6040d021b19bd253245a9044830ebf2a2551fd460e799a9384dc3a8dff8",
+  "rollback_agent_retained": true,
   "runtime_name": "WikipediaHumanStyleWriting",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22299,
+  "skill_sha256": "cae29833ebaa90b5aa8dad0b5521fc93716dc0194609e84053411423188c65ad",
   "tool_schema": {
     "properties": {
       "audience": {

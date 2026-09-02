@@ -141,6 +141,7 @@ jobs:
               --note "test exact hash-pinned legacy registry migrations"
             python build_registry.py
             python scripts/check_url_stability.py --update
+            python scripts/build_scout_exports.py
             python scripts/build_pokedex_api.py
             python scripts/build_static_api.py
             python scripts/build_front_page.py

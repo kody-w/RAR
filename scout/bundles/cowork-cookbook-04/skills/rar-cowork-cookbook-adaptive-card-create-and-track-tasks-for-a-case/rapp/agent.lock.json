@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_create_and_track_tasks_for_a_case",
+  "agent_bytes": 10755,
   "agent_file": "adaptive_card_create_and_track_tasks_for_a_case_agent.py",
   "agent_sha256": "485d2dd87b805de268c059642e63f0a3bc405c04559ba914864620ed24749128",
+  "backup_agent": "adaptive_card_create_and_track_tasks_for_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardCreateAndTrackTasksForACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-create-and-track-tasks-for-a-case:6ba4de44390bcbbb62ac1e77fa4c087d09b598f22aa0cc0c594db1a1d944afef",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardCreateAndTrackTasksForACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25082,
+  "skill_sha256": "0b81a431a493c848eeadd8992d120ef1ac8b60de0634258bcf3cd528f11a3b89",
   "tool_schema": {
     "properties": {
       "operation": {

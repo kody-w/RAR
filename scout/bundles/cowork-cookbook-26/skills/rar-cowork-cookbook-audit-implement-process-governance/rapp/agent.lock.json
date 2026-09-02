@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_implement_process_governance",
+  "agent_bytes": 10726,
   "agent_file": "audit_implement_process_governance_agent.py",
   "agent_sha256": "72854e1589df2791f3600aa40891644d6c3cf287dc71db3dfa36f1a100d90395",
+  "backup_agent": "audit_implement_process_governance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditImplementProcessGovernance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-implement-process-governance:5625a896a0ab8f4ca22516b615abaf903646d4e46ae7d7c4a60a5d8e589c079a",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditImplementProcessGovernance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24810,
+  "skill_sha256": "608848ea0379ef31de813f1264766a7d29b0644c4bb57bdb948ca0c547f373b1",
   "tool_schema": {
     "properties": {
       "criteria": {

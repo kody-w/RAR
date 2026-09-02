@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/fx_revaluation_health_check",
+  "agent_bytes": 10560,
   "agent_file": "fx_revaluation_health_check_agent.py",
   "agent_sha256": "f07e99f99ba79a79dd9976eb3781050b351ec9276a018af83893e60084185355",
+  "backup_agent": "fx_revaluation_health_check_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FxRevaluationHealthCheck",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/fx-revaluation-health-check:bfee7d4bdd47f16ef204e1c0b4f8189a21b70003b5ab61b6e46647867f1abd31",
+  "rollback_agent_retained": true,
   "runtime_name": "FxRevaluationHealthCheck",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24573,
+  "skill_sha256": "69ef33dd04acca8d082d0e441c65c8ba193724bbcf11f3ad935668c7298063ab",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/lookup_dataverse_table",
+  "agent_bytes": 9273,
   "agent_file": "lookup_dataverse_table_agent.py",
   "agent_sha256": "6525511bf6ee244af3473793a5042254fed4e36052023cb062438af1f3636eb4",
+  "backup_agent": "lookup_dataverse_table_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LookupDataverseTable",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Chris Garty",
@@ -41,8 +44,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/lookup-dataverse-table:820c3f0a819ad8f8d3c10770e50445bcc62062724fe13a580eebe147e3bb00c8",
+  "rollback_agent_retained": true,
   "runtime_name": "LookupDataverseTable",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22292,
+  "skill_sha256": "55cfc71ee72f5d658ff5f01e3fc98c5955fc0f40e2329026db805c7ac7918d32",
   "tool_schema": {
     "properties": {
       "operation": {

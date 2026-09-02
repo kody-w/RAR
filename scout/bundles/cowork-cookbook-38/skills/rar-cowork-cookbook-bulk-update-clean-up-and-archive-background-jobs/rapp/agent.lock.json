@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_clean_up_and_archive_background_jobs",
+  "agent_bytes": 10791,
   "agent_file": "bulk_update_clean_up_and_archive_background_jobs_agent.py",
   "agent_sha256": "4135f5b9d37ce291f71e0c99015cf937c17b1f795b4058ae47d8723851feeb72",
+  "backup_agent": "bulk_update_clean_up_and_archive_background_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateCleanUpAndArchiveBackgroundJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-clean-up-and-archive-background-jobs:09cbdee930dd815e98e981314c5e8bc533292b9e28b92449672d0a97ecd8cc0d",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateCleanUpAndArchiveBackgroundJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25125,
+  "skill_sha256": "f7f841fbc0d23d64055ad575782cd5f5295ef5f819fcf2e0f324991748c56e75",
   "tool_schema": {
     "properties": {
       "operation": {

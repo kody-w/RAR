@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_develop_financial_period_strategy",
+  "agent_bytes": 10758,
   "agent_file": "adaptive_card_develop_financial_period_strategy_agent.py",
   "agent_sha256": "849e19dcd80e3aa4812464e8fb04cd76ea3400500014ad87ce58bf116fb1580f",
+  "backup_agent": "adaptive_card_develop_financial_period_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDevelopFinancialPeriodStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-develop-financial-period-strategy:f43b63b5a3ab0079f44c43a093a5568e68ac3f062c885346f9febf29a0bd279c",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDevelopFinancialPeriodStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25023,
+  "skill_sha256": "d2943340447aaf40f1d46ec0689cd285f3061365645a0faa47bf59c295ba33f8",
   "tool_schema": {
     "properties": {
       "operation": {

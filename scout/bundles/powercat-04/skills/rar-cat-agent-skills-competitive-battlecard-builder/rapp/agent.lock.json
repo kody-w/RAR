@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/competitive_battlecard_builder",
+  "agent_bytes": 9679,
   "agent_file": "competitive_battlecard_builder_agent.py",
   "agent_sha256": "0b7356f6516b4afaabbed99ae04111381a60d133eeba92effdad8545f2f05ddd",
+  "backup_agent": "competitive_battlecard_builder_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CompetitiveBattlecardBuilder",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Michael Heath",
@@ -39,8 +42,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/competitive-battlecard-builder:4692329ff55f18521e06bee588972515a36180cf2262063f55feed9e73e99147",
+  "rollback_agent_retained": true,
   "runtime_name": "CompetitiveBattlecardBuilder",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23668,
+  "skill_sha256": "e96102f20b72cbc4cded2e27ee0a1352352da73c0537e0241cfdc4cb6c54c5ad",
   "tool_schema": {
     "properties": {
       "data_source": {

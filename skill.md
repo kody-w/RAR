@@ -26,14 +26,18 @@
 
 ```
 repo: kody-w/RAR
-type: agent-registry
+type: toasted-skill-registry
 registry: registry.json
+skill_catalog: scout/catalog/catalog.json
 api: api.json
 base_url: https://raw.githubusercontent.com/kody-w/RAR/main
 site: https://kody-w.github.io/RAR
 releases: https://kody-w.github.io/RAR/releases.html
+default_artifact: RAPP/1 Toasted SKILL.md Grail
+rollback_artifact: agent.py (byte-exact backup)
+skill_package: scout/**/skills/<skill-name>/SKILL.md
 agent_base_class: BasicAgent (@rapp/basic_agent)
-package_structure: agents/@publisher/slug.py (single file, __manifest__ embedded)
+source_structure: agents/@publisher/slug.py (legacy authoring + rollback)
 naming: snake_case everywhere (filenames, manifest names, dependencies — no dashes)
 ```
 
@@ -73,13 +77,27 @@ Each agent entry has:
 - `_file` — file path in repo (e.g., `agents/@discreetRappers/dynamics_crud_agent.py`)
 - `_sha256` — SHA256 hash of the file (integrity verification)
 
-### 2. Fetch an Agent
+For installable artifacts, join `agents[].name` to `skills[].identity` in:
 
 ```
-GET https://raw.githubusercontent.com/kody-w/RAR/main/agents/@publisher/agent_slug.py
+GET https://raw.githubusercontent.com/kody-w/RAR/main/scout/catalog/catalog.json
 ```
 
-### 3. Fetch Cards
+Each skill record exposes `rappid`, `default_artifact: "skill"`,
+`grail_record: "SKILL.md"`, checksum-pinned files, and the retained
+`backup_agent`.
+
+### 2. Fetch a Toasted Skill (default)
+
+Fetch the `files[]` entry whose path is `SKILL.md`. Its terminal RCI capsule
+restores the original agent bytes exactly.
+
+### 3. Fetch an Agent (rollback/materialization)
+
+Use `backup_agent` from the skill record or `_file` from `registry.json` only
+when a host explicitly needs `agent.py`.
+
+### 4. Fetch Cards
 
 ```
 GET https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json
@@ -87,17 +105,22 @@ GET https://raw.githubusercontent.com/kody-w/RAR/main/cards/holo_cards.json
 
 Returns all minted cards with types, stats (HP/ATK/DEF/SPD/INT), abilities, weakness/resistance, seeds, and SVG art.
 
-### 4. Install an Agent
+### 5. Install a Capability
 
 ```python
-registry = http_get(f"{base_url}/registry.json")
-agent = find_agent(registry, query)
-content = http_get(f"{base_url}/{agent['_file']}")
-filename = agent['_file'].split('/')[-1]
-storage.write_file('agents', filename, content)
+catalog = http_get(f"{base_url}/scout/catalog/catalog.json")
+skill = find_skill(catalog, query)
+for file in skill["files"]:
+    content = http_get(file["url"])
+    assert sha256(content) == file["sha256"]
+    storage.write_file(f"skills/{skill['skill_name']}", file["path"], content)
 ```
 
-### 5. Search (one-liner for local LLMs)
+If the destination is a RAPP Brainstem, hotload the Toasted `SKILL.md` through
+`rapp-agent-converter`; it verifies the Grail and restores `agent.py`
+deterministically.
+
+### 6. Search (one-liner for local LLMs)
 
 Fetch the registry and search it locally — no API key, no auth, works offline after first fetch:
 
@@ -109,7 +132,7 @@ import json,sys; q=sys.argv[1].lower(); [print(f\"{a['display_name']} — {a['de
 
 Replace `YOUR SEARCH TERM` with what you need (e.g. `"sales"`, `"memory"`, `"healthcare"`). Match against `name`, `display_name`, `description`, `tags`, `category`, and `author`.
 
-### 6. Resolve a Card from Seed (offline, zero bandwidth)
+### 7. Resolve a Card from Seed (offline, zero bandwidth)
 
 Any numeric seed resolves to a full card deterministically. No network needed.
 
@@ -117,7 +140,7 @@ Algorithm: `seed → mulberry32 PRNG → type, stats, abilities, rarity`
 
 Implementation: `rapp_sdk.py` (Python). Deterministic algorithm — same seed always yields the same card.
 
-### 7. MCP On-Ramp (for MCP hosts)
+### 8. MCP On-Ramp (for MCP hosts)
 
 MCP is transport, not a new agent unit — it is how an MCP-native AI reaches RAR and a running brainstem. Framing: MCP clients are Layer 2 callers of `/chat` ("Chat Is The Only Wire").
 

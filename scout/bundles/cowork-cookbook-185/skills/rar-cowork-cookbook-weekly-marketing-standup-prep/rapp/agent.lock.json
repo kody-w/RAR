@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/weekly_marketing_standup_prep",
+  "agent_bytes": 10432,
   "agent_file": "weekly_marketing_standup_prep_agent.py",
   "agent_sha256": "83556dfba32db0afcc05dc67d9668516d3890f20bcc41d6df0091e9b61811130",
+  "backup_agent": "weekly_marketing_standup_prep_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WeeklyMarketingStandupPrep",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/weekly-marketing-standup-prep:f24decf6440a027d77cf9850e1d13e73debf29613d3e7066ccd9622ef3c53f86",
+  "rollback_agent_retained": true,
   "runtime_name": "WeeklyMarketingStandupPrep",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24334,
+  "skill_sha256": "85a9afe3862c1e505402e7b15735d78e2e23bdea16fc1378a3234327c8a8e942",
   "tool_schema": {
     "properties": {
       "operation": {

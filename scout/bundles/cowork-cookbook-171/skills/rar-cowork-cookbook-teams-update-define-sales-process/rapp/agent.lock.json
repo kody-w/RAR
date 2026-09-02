@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_sales_process",
+  "agent_bytes": 10600,
   "agent_file": "teams_update_define_sales_process_agent.py",
   "agent_sha256": "80b9e3787c8862fe5e7ff754b0a631841dc5dd30b3e0b7f4b2f439eb85c73ff3",
+  "backup_agent": "teams_update_define_sales_process_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineSalesProcess",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-sales-process:e0a1758ac25f08d3ea2ac581952978007de611d782b8ea96f54ae4755140a90c",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineSalesProcess",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24564,
+  "skill_sha256": "ac7c9ced0fcbc7845dd053da5b0c4a3a0231157855e4e086b217f7aa969142bf",
   "tool_schema": {
     "properties": {
       "operation": {

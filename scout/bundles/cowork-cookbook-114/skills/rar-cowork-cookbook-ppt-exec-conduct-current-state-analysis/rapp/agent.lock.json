@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_conduct_current_state_analysis",
+  "agent_bytes": 10679,
   "agent_file": "ppt_exec_conduct_current_state_analysis_agent.py",
   "agent_sha256": "480034430f13cc7896ff3ce1b2cd1d47345aab7dee1b529faf8dc58a04dd4eee",
+  "backup_agent": "ppt_exec_conduct_current_state_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecConductCurrentStateAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-conduct-current-state-analysis:03be078aa65b9b018e70af3313c2f01fd3fdf33e457a38b7d372b221c1c43050",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecConductCurrentStateAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24813,
+  "skill_sha256": "800b604d891510d9438edc88208bba0b1c26cffe9ce587099f2d6064c56eeae5",
   "tool_schema": {
     "properties": {
       "operation": {

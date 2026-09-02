@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_define_quality_procedures_and_tools",
+  "agent_bytes": 10502,
   "agent_file": "report_define_quality_procedures_and_tools_agent.py",
   "agent_sha256": "913966a38a3ae27b7ab969fb0afbca23fec01c736ae3fd9e1205be818173ed22",
+  "backup_agent": "report_define_quality_procedures_and_tools_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDefineQualityProceduresAndTools",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-define-quality-procedures-and-tools:c20be88026ddd3ece80a741fa99d02c14c68cce1f04473af3d45cc2827bf9d24",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDefineQualityProceduresAndTools",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24554,
+  "skill_sha256": "8465efbc0a4a1944778983f457e353d93125aee84351bd9f8855d11b251976f4",
   "tool_schema": {
     "properties": {
       "audience": {

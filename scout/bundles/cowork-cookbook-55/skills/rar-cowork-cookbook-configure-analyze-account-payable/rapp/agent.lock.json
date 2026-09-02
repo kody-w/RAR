@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_analyze_account_payable",
+  "agent_bytes": 10790,
   "agent_file": "configure_analyze_account_payable_agent.py",
   "agent_sha256": "9a6d355cbe7a8d14f8b8dd980820c460de047c7675eb488fcad373c4535ee2e5",
+  "backup_agent": "configure_analyze_account_payable_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureAnalyzeAccountPayable",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-analyze-account-payable:8739abdcc569f7ad1aa141c61a143142c959adaf6817fd0d6e8383940b55a234",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureAnalyzeAccountPayable",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24806,
+  "skill_sha256": "cbb65be3eecf64dc7f945893a04f7a85f90e96f1d0a52176bd51024e33ff39e9",
   "tool_schema": {
     "properties": {
       "operation": {

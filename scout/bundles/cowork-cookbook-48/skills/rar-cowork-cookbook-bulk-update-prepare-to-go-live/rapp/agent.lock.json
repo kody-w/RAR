@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_prepare_to_go_live",
+  "agent_bytes": 10560,
   "agent_file": "bulk_update_prepare_to_go_live_agent.py",
   "agent_sha256": "57bcd271f599dbd0e5d431dea947e0df0f64946e28bdaa00bf891b505aca554e",
+  "backup_agent": "bulk_update_prepare_to_go_live_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdatePrepareToGoLive",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-prepare-to-go-live:cbb0abd22c13b7c4317c43b0cb65f39d81b446e50a93bd295249fd6f97278fd2",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdatePrepareToGoLive",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24512,
+  "skill_sha256": "ce53a71aed5b4079f57f573e4363ddc564e9784b8e8beab6186ab57c9d163c4a",
   "tool_schema": {
     "properties": {
       "operation": {

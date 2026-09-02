@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_identify_critical_system_and_data",
+  "agent_bytes": 10770,
   "agent_file": "dashboard_identify_critical_system_and_data_agent.py",
   "agent_sha256": "285c39a6607ba50de777bea33d1f55b616975e3bac293c373eaef467ef94357d",
+  "backup_agent": "dashboard_identify_critical_system_and_data_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardIdentifyCriticalSystemAndData",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-identify-critical-system-and-data:48cc10d20ce5bc8f806dafbdc1c0892205627efaa13e65dcf917f6dd4a85b730",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardIdentifyCriticalSystemAndData",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25040,
+  "skill_sha256": "e3d9bdbaf4fb910069f6de0bce93d85acb90ed7ee2685107ea76e28772e9e049",
   "tool_schema": {
     "properties": {
       "operation": {

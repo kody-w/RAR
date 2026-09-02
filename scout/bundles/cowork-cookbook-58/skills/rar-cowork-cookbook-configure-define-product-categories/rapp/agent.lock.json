@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_define_product_categories",
+  "agent_bytes": 10820,
   "agent_file": "configure_define_product_categories_agent.py",
   "agent_sha256": "2c463845c8d32048eef8e725939b6d88e89bac1cb6a03984b480d48172a46828",
+  "backup_agent": "configure_define_product_categories_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDefineProductCategories",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-define-product-categories:a32a7d350e55f6f985b95139873c2a17e0ebfae72029e5d762b27fd4cdaaa70d",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDefineProductCategories",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24861,
+  "skill_sha256": "7015349a37d6525d24bbf6a58ab89927b0b65dae2a1fac680838e9efc67e0a12",
   "tool_schema": {
     "properties": {
       "operation": {

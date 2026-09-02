@@ -3,10 +3,11 @@
   "id": "kody-w__transcript2prototype",
   "name": "Transcript2Prototype",
   "rar_name": "@kody-w/transcript2prototype",
-  "rappid": "rappid:@kody-w/transcript2prototype:db2c115f8cd57ea8ef77a897361f57e8104f4f2fd96ba310e6a0c9862da438a0",
-  "_migrated_from": "rappid:@kody-w/transcript2prototype:ac3731e541781cd4748b9f3698bbb3057acba5a2e8f7309076fb319b669a49ae",
+  "rappid": "rappid:@kody-w/transcript2prototype:f830545bb538cbcea143dcd4655dd65154cfac69670398ff48f57eccf04f9082",
+  "_migrated_from": "rappid:@kody-w/transcript2prototype:db2c115f8cd57ea8ef77a897361f57e8104f4f2fd96ba310e6a0c9862da438a0",
   "_migrated_from_all": [
-    "rappid:@kody-w/transcript2prototype:ac3731e541781cd4748b9f3698bbb3057acba5a2e8f7309076fb319b669a49ae"
+    "rappid:@kody-w/transcript2prototype:ac3731e541781cd4748b9f3698bbb3057acba5a2e8f7309076fb319b669a49ae",
+    "rappid:@kody-w/transcript2prototype:db2c115f8cd57ea8ef77a897361f57e8104f4f2fd96ba310e6a0c9862da438a0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.4",
@@ -34,9 +35,18 @@
   "sha256": "73d95878bc3f14510eefa8dd16707d5cc49e9c51becd7f2f4e4351197bdce939",
   "has_card": true,
   "added_at": "2026-06-17T17:06:07-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-transcript2prototype",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__transcript2prototype.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/transcript2prototype_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/transcript2prototype_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-transcript2prototype/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-transcript2prototype/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__transcript2prototype.py",
   "api_card_url": null,

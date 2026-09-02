@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/monte_carlo_analysis",
+  "agent_bytes": 9273,
   "agent_file": "monte_carlo_analysis_agent.py",
   "agent_sha256": "33b7c20af7270399ddff663b9d1f2e284248d5d4d316cf53a57fb526dbaaadc0",
+  "backup_agent": "monte_carlo_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MonteCarloAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Nazish Qasim",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/monte-carlo-analysis:3e5c458a38ad2d6f313e1ad0403124d3fadf07754895d18f50a680c7f06fe3bc",
+  "rollback_agent_retained": true,
   "runtime_name": "MonteCarloAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22582,
+  "skill_sha256": "29837f3a23e4c46d780e60baf3947ca8ce236fa7f422a22246c5b00df6a4aa15",
   "tool_schema": {
     "properties": {
       "data_source": {

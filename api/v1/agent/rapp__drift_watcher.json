@@ -3,10 +3,11 @@
   "id": "rapp__drift_watcher",
   "name": "DriftWatcherAgent",
   "rar_name": "@rapp/drift_watcher",
-  "rappid": "rappid:@rapp/drift_watcher:5d35bca0458a831f69d875e2bc03c89584e121f551b00839ef425f27097f71b2",
-  "_migrated_from": "rappid:@rapp/drift_watcher:94bfdf486d2c3f4fce2bc9ea3776de3e60b0c61e7f31a1700f94e026533df188",
+  "rappid": "rappid:@rapp/drift-watcher:f67a627076324230ffd1067559894e4e345fb88852d09fb20ebd36e2f6c1b2b3",
+  "_migrated_from": "rappid:@rapp/drift_watcher:5d35bca0458a831f69d875e2bc03c89584e121f551b00839ef425f27097f71b2",
   "_migrated_from_all": [
-    "rappid:@rapp/drift_watcher:94bfdf486d2c3f4fce2bc9ea3776de3e60b0c61e7f31a1700f94e026533df188"
+    "rappid:@rapp/drift_watcher:94bfdf486d2c3f4fce2bc9ea3776de3e60b0c61e7f31a1700f94e026533df188",
+    "rappid:@rapp/drift_watcher:5d35bca0458a831f69d875e2bc03c89584e121f551b00839ef425f27097f71b2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -35,9 +36,18 @@
   "sha256": "6f2aedf636bbbde6a3b692c2d920c6af283291885886eba3f523179766529dee",
   "has_card": true,
   "added_at": "2026-06-10T09:05:29-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-drift-watcher",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__drift_watcher.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_watcher_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_watcher_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-drift-watcher/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-drift-watcher/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift_watcher.py",
   "api_card_url": null,

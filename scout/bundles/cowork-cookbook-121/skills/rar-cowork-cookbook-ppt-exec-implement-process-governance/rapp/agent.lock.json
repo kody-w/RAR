@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_implement_process_governance",
+  "agent_bytes": 10670,
   "agent_file": "ppt_exec_implement_process_governance_agent.py",
   "agent_sha256": "309d410d60fa788e05eaf9f5c76376e92dcc4977b0b2ecfe01baf3ffcf231ec3",
+  "backup_agent": "ppt_exec_implement_process_governance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecImplementProcessGovernance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-implement-process-governance:049e8735788093938cb39922c75d07721b20daa07d6aa276b0dfc9b165ff6b17",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecImplementProcessGovernance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24719,
+  "skill_sha256": "9ee58f02c74d08a516eb7a7fd5465ad3434e771580fad04ef70e784d8f76fcd4",
   "tool_schema": {
     "properties": {
       "operation": {

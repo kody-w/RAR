@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/second_life_agent",
+  "agent_bytes": 5722,
   "agent_file": "second_life_agent.py",
   "agent_sha256": "bee60124864e6783bd6de6d039904dd3890a602008b56367bfdc83a754978ba3",
+  "backup_agent": "second_life_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SecondLifeAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/second-life:27e0478195359fc2a4de6e3bc32561fc43d37a57d22fc0491404dc550f94d90b",
+  "rollback_agent_retained": true,
   "runtime_name": "SecondLife",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 18069,
+  "skill_sha256": "d490be78806f952c97b017fcd28b26f6a8cf9d34c891b15dd0a3cd095e427fd4",
   "tool_schema": {
     "properties": {
       "action": {

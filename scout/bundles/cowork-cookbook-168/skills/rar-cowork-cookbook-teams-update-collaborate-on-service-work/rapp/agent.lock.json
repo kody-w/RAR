@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_collaborate_on_service_work",
+  "agent_bytes": 10674,
   "agent_file": "teams_update_collaborate_on_service_work_agent.py",
   "agent_sha256": "cca9db411eadb5deb4f97ac018433f4b1731647ca6ec182c5ace8c3d462e109d",
+  "backup_agent": "teams_update_collaborate_on_service_work_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCollaborateOnServiceWork",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-collaborate-on-service-work:8b79de711c50f2bf9ed704726c4af88097bda3f2dd5fea1e0d5da0fe5685b9a1",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateCollaborateOnServiceWork",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24768,
+  "skill_sha256": "587e9b337efbf82a86b1420ba7641a8602f6e0854c2a3658a2ba92fe7bbbc446",
   "tool_schema": {
     "properties": {
       "operation": {

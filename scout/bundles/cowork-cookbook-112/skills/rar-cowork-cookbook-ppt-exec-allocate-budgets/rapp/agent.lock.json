@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_allocate_budgets",
+  "agent_bytes": 10502,
   "agent_file": "ppt_exec_allocate_budgets_agent.py",
   "agent_sha256": "95aa0231a754f5af3a778c5c86357ba10e25cef4afd46eb691423cb808f59499",
+  "backup_agent": "ppt_exec_allocate_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAllocateBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-allocate-budgets:9405342f7130b2a5357c0de465e484d8cb7cd73128f546277a07d0adf26b6e8a",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecAllocateBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24338,
+  "skill_sha256": "2c272126527e8ade7b2032b8558df810dda9bbab4ea8d4fe17ab9f7fdaedde13",
   "tool_schema": {
     "properties": {
       "operation": {

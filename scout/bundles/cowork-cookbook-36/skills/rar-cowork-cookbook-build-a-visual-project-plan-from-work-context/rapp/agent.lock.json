@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/build_a_visual_project_plan_from_work_context",
+  "agent_bytes": 10544,
   "agent_file": "build_a_visual_project_plan_from_work_context_agent.py",
   "agent_sha256": "3c41b4be395f68f01460dfa7d06a013f2edc8ea6fc47c34f301ad07c2edaed88",
+  "backup_agent": "build_a_visual_project_plan_from_work_context_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BuildAVisualProjectPlanFromWorkContext",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -75,8 +78,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/build-a-visual-project-plan-from-work-context:1916e9f8f7894a544f2f13463380adbd557339f0afb588f262ff684df34b1deb",
+  "rollback_agent_retained": true,
   "runtime_name": "BuildAVisualProjectPlanFromWorkContext",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24739,
+  "skill_sha256": "f3c401dd4287526b7d4ac5d38380f8f3bd3f09f772a46e419dc0d0b4ae980cb8",
   "tool_schema": {
     "properties": {
       "operation": {

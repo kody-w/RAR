@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/event_marketing_command_center",
+  "agent_bytes": 10528,
   "agent_file": "event_marketing_command_center_agent.py",
   "agent_sha256": "bf5e15f1e4eccb2d938c9ad2d28037fc7642baee0b16f13a3174964eeb349e79",
+  "backup_agent": "event_marketing_command_center_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EventMarketingCommandCenter",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -78,8 +81,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/event-marketing-command-center:79b14f26e0600a48e6b926156449738a26d5863ab200d74b52f91ee56c7ef130",
+  "rollback_agent_retained": true,
   "runtime_name": "EventMarketingCommandCenter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24611,
+  "skill_sha256": "fc766b4621fad061e4126570f2d477591e9bc090be2601dcc5c0d29a0fff1c5d",
   "tool_schema": {
     "properties": {
       "operation": {

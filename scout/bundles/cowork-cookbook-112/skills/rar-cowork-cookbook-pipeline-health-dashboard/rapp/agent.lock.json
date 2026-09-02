@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/pipeline_health_dashboard",
+  "agent_bytes": 10572,
   "agent_file": "pipeline_health_dashboard_agent.py",
   "agent_sha256": "1943f07bfb66bd571a7aba3f79916c25ebe0a18ed8eca7df48d68658f4136582",
+  "backup_agent": "pipeline_health_dashboard_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PipelineHealthDashboard",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -87,8 +90,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/pipeline-health-dashboard:2982dceb46c895745a703b55a0fcff770224d83012f3d3364945cefe6a0174f7",
+  "rollback_agent_retained": true,
   "runtime_name": "PipelineHealthDashboard",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24502,
+  "skill_sha256": "9346e1e4ea14acf9039c424fcd8da5c3239cb30e8716f68af68f794c4132dce7",
   "tool_schema": {
     "properties": {
       "operation": {

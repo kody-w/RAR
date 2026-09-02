@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_security_approach",
+  "agent_bytes": 10649,
   "agent_file": "dashboard_define_security_approach_agent.py",
   "agent_sha256": "3dc51647d76726edff4fed42ef675dfa7ae873603df2c7940bb6653f269a519b",
+  "backup_agent": "dashboard_define_security_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefineSecurityApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-define-security-approach:dc641e2e0cdd4daac2c987aec54f21d5119b8a7f7feaae899e56bb6a3c347edd",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDefineSecurityApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24716,
+  "skill_sha256": "455259246f901f1894d36551e526970150f34328bd0a549f8f02e2bec78ca9ae",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_develop_training_materials",
+  "agent_bytes": 10862,
   "agent_file": "configure_develop_training_materials_agent.py",
   "agent_sha256": "c1b650dfaacf7a54db7f2df736c6efca4c508e71331a5c8346a057ee19c7849e",
+  "backup_agent": "configure_develop_training_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDevelopTrainingMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-develop-training-materials:607904d522d985449f12a93b41ba6dd1b7255bbce6a5909e6bccf5a5fe413d63",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDevelopTrainingMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24979,
+  "skill_sha256": "967a23c1682702815884c9ca4c28d179263274dfc3ffe20295e4f4826b253c33",
   "tool_schema": {
     "properties": {
       "operation": {

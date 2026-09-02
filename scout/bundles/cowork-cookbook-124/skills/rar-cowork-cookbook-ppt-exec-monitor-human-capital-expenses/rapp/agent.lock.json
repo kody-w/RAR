@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_monitor_human_capital_expenses",
+  "agent_bytes": 10665,
   "agent_file": "ppt_exec_monitor_human_capital_expenses_agent.py",
   "agent_sha256": "8ca4f6eb4348883d7c5bf9d2e9acebc990b4227ab62c363217478a755e4ce781",
+  "backup_agent": "ppt_exec_monitor_human_capital_expenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMonitorHumanCapitalExpenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-monitor-human-capital-expenses:44e40826c0afcd5c72ec189904043ec0f0cd37950d92b46d3dd93ec150ee8867",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMonitorHumanCapitalExpenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24813,
+  "skill_sha256": "4e4708368dfb30176723e332c89ddfd49e84a38963141a4a04fa78b000bb83a6",
   "tool_schema": {
     "properties": {
       "operation": {

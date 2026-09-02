@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_perform_license_requirements_analysis",
+  "agent_bytes": 10833,
   "agent_file": "teams_update_perform_license_requirements_analysis_agent.py",
   "agent_sha256": "f3628584b3580db957379f38296a396e94a50f0b1edd9a5b3669c9712c056256",
+  "backup_agent": "teams_update_perform_license_requirements_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdatePerformLicenseRequirementsAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-perform-license-requirements-analysis:7e96f00dfe76a0ed8b780cd9d61d61ff0d8cbbc894de7e732167069d131fdd3e",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdatePerformLicenseRequirementsAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25124,
+  "skill_sha256": "6a1c26957af7c99a1b24159137e40be7ee750088a138158cbad3754f04e7cf92",
   "tool_schema": {
     "properties": {
       "operation": {

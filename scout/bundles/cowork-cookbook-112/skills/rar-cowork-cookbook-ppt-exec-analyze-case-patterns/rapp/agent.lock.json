@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_analyze_case_patterns",
+  "agent_bytes": 10570,
   "agent_file": "ppt_exec_analyze_case_patterns_agent.py",
   "agent_sha256": "ab63fa1ceab1e723a847e8138dfdd5bffcf22c5cdee58387a65fbe543cd41b00",
+  "backup_agent": "ppt_exec_analyze_case_patterns_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAnalyzeCasePatterns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-analyze-case-patterns:7cbc8e48657fdd7b795dfe83ed36b54d8633999b76e1dff2ef1d0d8aa1681b90",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecAnalyzeCasePatterns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24519,
+  "skill_sha256": "8128367edd77692966041690e384a4c2b826201aee4c88ee2dd6f3b4d45dc124",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_retire_assets",
+  "agent_bytes": 10509,
   "agent_file": "teams_update_retire_assets_agent.py",
   "agent_sha256": "5f911535d746619df1972be8e7b6c5af971b100cdb25db31b0c942df5e3699cc",
+  "backup_agent": "teams_update_retire_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateRetireAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-retire-assets:63ad1dc25199e747ac0fa999149c2f388d8a0032d28b0c77fbbed8d1baeec03b",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateRetireAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24329,
+  "skill_sha256": "eb85195b5a0b991a592b9f49412fa9c9edf9134b3d741b66c3fc60a37527a36d",
   "tool_schema": {
     "properties": {
       "operation": {

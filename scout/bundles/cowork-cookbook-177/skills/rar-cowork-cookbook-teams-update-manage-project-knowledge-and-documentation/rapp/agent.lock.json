@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_manage_project_knowledge_and_documentation",
+  "agent_bytes": 10869,
   "agent_file": "teams_update_manage_project_knowledge_and_documentation_agent.py",
   "agent_sha256": "05b0fc57ecb347ed4f1abd80b49d9a3854ef02dce1d465ee3861b3ff28794a9a",
+  "backup_agent": "teams_update_manage_project_knowledge_and_documentation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateManageProjectKnowledgeAndDocumentation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-manage-project-knowledge-and-documentation:469a18716ac3f35f4281f9a08965210d2010df495b119ebb30840f2581b43285",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateManageProjectKnowledgeAndDocumentation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25239,
+  "skill_sha256": "9eda1917696f988548076b3eecc6077323d57381e50326421529117522641f0b",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_develop_code_of_conduct",
+  "agent_bytes": 10782,
   "agent_file": "configure_develop_code_of_conduct_agent.py",
   "agent_sha256": "230a1edcd12c14a7eb1a771714ac509aa9ce0f9b55d5a65362eaac347084bfc0",
+  "backup_agent": "configure_develop_code_of_conduct_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDevelopCodeOfConduct",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-develop-code-of-conduct:af305db46c024e18e258e56ddb33489c31204235945914a4041346c1c1190bd7",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDevelopCodeOfConduct",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24819,
+  "skill_sha256": "183c0e342938bedcbad56cd44890c7285afca23f88cbeb6f8e1cf460a5e6c95f",
   "tool_schema": {
     "properties": {
       "operation": {

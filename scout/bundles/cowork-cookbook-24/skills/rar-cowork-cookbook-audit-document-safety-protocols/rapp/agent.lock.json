@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_document_safety_protocols",
+  "agent_bytes": 10655,
   "agent_file": "audit_document_safety_protocols_agent.py",
   "agent_sha256": "cf33b25ab9808a54cd17278af3e668cfe9ce074035d3a10137c33dbb6619f5d3",
+  "backup_agent": "audit_document_safety_protocols_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDocumentSafetyProtocols",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-document-safety-protocols:5243d49ed7a9011abffa5c739c93a0c9fde266387cce79aa1c58c3a4123373de",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDocumentSafetyProtocols",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24691,
+  "skill_sha256": "5303822eb42ff9ce94c15fe3f2b5faef5a626775fcb563541031be051cb21450",
   "tool_schema": {
     "properties": {
       "criteria": {

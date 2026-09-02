@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_inspect_manufactured_goods",
+  "agent_bytes": 10662,
   "agent_file": "teams_update_inspect_manufactured_goods_agent.py",
   "agent_sha256": "ce1424896aed2c8203664811f25b51a20103e4dad0cb9cc80b6301008733b8d0",
+  "backup_agent": "teams_update_inspect_manufactured_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateInspectManufacturedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-inspect-manufactured-goods:6782d9211b1608f2d74309ab8764bb6358fb0271db971188541dc4b82f72e2c8",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateInspectManufacturedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24718,
+  "skill_sha256": "d34a19ab2dd6c47baf2235efaaf8379ddd4d17070e69a80ae96ec42b32085b90",
   "tool_schema": {
     "properties": {
       "operation": {

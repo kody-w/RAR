@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_audit_financial_results",
+  "agent_bytes": 10636,
   "agent_file": "adaptive_card_audit_financial_results_agent.py",
   "agent_sha256": "21ec9847834958380f156017a84fb138e43278850983e70dc928a13e49fb20dc",
+  "backup_agent": "adaptive_card_audit_financial_results_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardAuditFinancialResults",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-audit-financial-results:14f50156d92db4ad074438f37d2ccf04d81374920b3779c20e2d35255f2c387c",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardAuditFinancialResults",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24695,
+  "skill_sha256": "2927d419089dc8b06d48176f530823987651592ba24ae8dabbc3c70613e531ad",
   "tool_schema": {
     "properties": {
       "operation": {

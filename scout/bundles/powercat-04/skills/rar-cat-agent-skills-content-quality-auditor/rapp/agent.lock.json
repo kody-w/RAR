@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/content_quality_auditor",
+  "agent_bytes": 9398,
   "agent_file": "content_quality_auditor_agent.py",
   "agent_sha256": "884464387bc3f9da6f84ffad05a6432081cc32e356efba67a74c2d4a5ed0ed99",
+  "backup_agent": "content_quality_auditor_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ContentQualityAuditor",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Simon Owen",
@@ -44,8 +47,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/content-quality-auditor:48d71c12be10cbaef6cdfe37363c8092bfab5bb020097a24e48227a59e4d6842",
+  "rollback_agent_retained": true,
   "runtime_name": "ContentQualityAuditor",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22528,
+  "skill_sha256": "30b92944189b5ff2d9ac78f96863cf41c0dd305faadff3159f51afe72d498636",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/windows_vm_install_lab_agent",
+  "agent_bytes": 50633,
   "agent_file": "windows_vm_install_lab_agent.py",
   "agent_sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
+  "backup_agent": "windows_vm_install_lab_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WindowsVmLabAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP Community",
@@ -36,8 +39,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/windows-vm-install-lab:957aac89deb34b545af7bdf0e483ca4fb2c3ecca74155ce2e34d6919fa3da832",
+  "rollback_agent_retained": true,
   "runtime_name": "WindowsVmInstallLab",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 100806,
+  "skill_sha256": "a3912ccf1a0dfb1bbe26ae24162c7ab53154990b154323152a88a8aa6e28da20",
   "tool_schema": {
     "properties": {},
     "required": [],

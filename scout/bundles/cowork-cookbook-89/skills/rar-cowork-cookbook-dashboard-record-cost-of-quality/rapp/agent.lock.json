@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_record_cost_of_quality",
+  "agent_bytes": 10601,
   "agent_file": "dashboard_record_cost_of_quality_agent.py",
   "agent_sha256": "321ef529614e21ea698d8ed1099df3a528bd62726288c38068da0fe6294e9e17",
+  "backup_agent": "dashboard_record_cost_of_quality_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardRecordCostOfQuality",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-record-cost-of-quality:35ad0f844e050d9dee825bd035f2beff62e8081fd6ea85ef35608e5b14831f5e",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardRecordCostOfQuality",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24608,
+  "skill_sha256": "62bd8a45ee72e4ea0dffeb8159d4354c32b85fd2a6d8c04455aa10451844ed56",
   "tool_schema": {
     "properties": {
       "operation": {

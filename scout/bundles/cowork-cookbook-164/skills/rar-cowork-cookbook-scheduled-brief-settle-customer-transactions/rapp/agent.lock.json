@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_settle_customer_transactions",
+  "agent_bytes": 10731,
   "agent_file": "scheduled_brief_settle_customer_transactions_agent.py",
   "agent_sha256": "0beda0fb47b40e9a2f349fe217d14ded71ab64c48fed4c669945855fc79bb9e1",
+  "backup_agent": "scheduled_brief_settle_customer_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefSettleCustomerTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-settle-customer-transactions:f08b7c7cb1c3007e87918133fe924275bdc83867294ad01b8f73bdaefe633f43",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefSettleCustomerTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24907,
+  "skill_sha256": "a4c2e7007a0d576f61ba7e4e653c291035d8b89c63693252b3984d356f7981a4",
   "tool_schema": {
     "properties": {
       "operation": {

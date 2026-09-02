@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_scrap_defective_inventory",
+  "agent_bytes": 10562,
   "agent_file": "demo_data_scrap_defective_inventory_agent.py",
   "agent_sha256": "07142e634446113d2f2c43246d5cf6c67faaf367f819000ed2a8cb3fe536c1cb",
+  "backup_agent": "demo_data_scrap_defective_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataScrapDefectiveInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-scrap-defective-inventory:c176d13e818437853b89cb02abfd706c51ccaf1747de0dbf797a7ed753cbd686",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataScrapDefectiveInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24570,
+  "skill_sha256": "322f8939bf784564be387a02de98dd3dc9426ae92f9ca2f6f89567318aa236f8",
   "tool_schema": {
     "properties": {
       "operation": {

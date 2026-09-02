@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_enable_and_configure_audit_logs",
+  "agent_bytes": 10921,
   "agent_file": "configure_enable_and_configure_audit_logs_agent.py",
   "agent_sha256": "6729964054860328722c3b1dbf63230868f9f83651c9956790da39a5f6fd602f",
+  "backup_agent": "configure_enable_and_configure_audit_logs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureEnableAndConfigureAuditLogs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-enable-and-configure-audit-logs:9c27c3bf8896690674ef69abec917f0dd31894e22a6611036f1519808d5432ab",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureEnableAndConfigureAuditLogs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25141,
+  "skill_sha256": "384ea9f4124aca72fe5b94af78b4e9a1aa035e2f4ef6ea5cac8eee0a011d5c90",
   "tool_schema": {
     "properties": {
       "operation": {

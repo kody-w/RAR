@@ -5,6 +5,13 @@
   "id": "8ebc3cc6f039c8ff",
   "lastExecutedAt": null,
   "name": "CoE Starter Kit",
+  "rapp": {
+    "backup_agent": "coe_starter_kit_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-bill-coe-starter-kit-singleton"
+  },
   "schedule": {
     "days": [
       1,

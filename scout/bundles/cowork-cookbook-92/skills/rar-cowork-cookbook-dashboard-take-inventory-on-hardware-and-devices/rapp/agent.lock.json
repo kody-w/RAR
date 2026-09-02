@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_take_inventory_on_hardware_and_devices",
+  "agent_bytes": 10834,
   "agent_file": "dashboard_take_inventory_on_hardware_and_devices_agent.py",
   "agent_sha256": "472d91ce7834bebb031c0b821fd4e2e4b03675a3df108ae98e93ac86cd09e5ea",
+  "backup_agent": "dashboard_take_inventory_on_hardware_and_devices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardTakeInventoryOnHardwareAndDevices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-take-inventory-on-hardware-and-devices:db49a2c8af15e23f2df1b300284ac5a189337f0daf805975c07bf3f2066a5faa",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardTakeInventoryOnHardwareAndDevices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25211,
+  "skill_sha256": "c81fcdefed7448873dc7935583333456ef2a4fa270bd73828962593355fb865f",
   "tool_schema": {
     "properties": {
       "operation": {

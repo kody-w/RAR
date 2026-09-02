@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_configure_and_monitor_system_generated_numbers",
+  "agent_bytes": 10937,
   "agent_file": "teams_update_configure_and_monitor_system_generated_numbers_agent.py",
   "agent_sha256": "05c3ad74b65863bf75d2bfb829141ae98fba3cfae4212a8ae86a0ee4966ceecf",
+  "backup_agent": "teams_update_configure_and_monitor_system_generated_numbers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConfigureAndMonitorSystemGeneratedNumbers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-configure-and-monitor-system-generated-numbers:1383da8331ad41214c22549630227369e0305c22914b047f5104f0f0f41343c3",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateConfigureAndMonitorSystemGeneratedNumbers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25419,
+  "skill_sha256": "e9599c60fdd440b04ec30bfbc1c73443c862829e8179a06cae159f5dd8053673",
   "tool_schema": {
     "properties": {
       "operation": {

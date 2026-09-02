@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_analyze_production_quality_results",
+  "agent_bytes": 10817,
   "agent_file": "scheduled_brief_analyze_production_quality_results_agent.py",
   "agent_sha256": "009261234c9fc4e705872ff0206e1e1e86bdfb180409f663dfcca93b4a1fa4c0",
+  "backup_agent": "scheduled_brief_analyze_production_quality_results_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAnalyzeProductionQualityResults",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-analyze-production-quality-results:eaf3c0af5c8e58f86a55ed9ea24e32f380d3aa3d6833d8ae9f2a6965104db6f9",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAnalyzeProductionQualityResults",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25093,
+  "skill_sha256": "0ba7b4e209f6a580e63fd3dda681efe9ac247c1c7d0e46d5d14baa011b852639",
   "tool_schema": {
     "properties": {
       "operation": {

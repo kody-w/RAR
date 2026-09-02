@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_dispute_invoices",
+  "agent_bytes": 10534,
   "agent_file": "teams_update_dispute_invoices_agent.py",
   "agent_sha256": "6e15b58881d256c4e95ed5c8bd68d19bf2cf2823936b8288fbaf655b10fccdd9",
+  "backup_agent": "teams_update_dispute_invoices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDisputeInvoices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-dispute-invoices:01e3bbf667c609674112a138f3c350f1af10b99c45034b67d977f45b0f8cd5cb",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDisputeInvoices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24410,
+  "skill_sha256": "bb0b96c530ec2eeacab2c26102f3f3fd652113ffea0257cde62e8a514ae574d6",
   "tool_schema": {
     "properties": {
       "operation": {

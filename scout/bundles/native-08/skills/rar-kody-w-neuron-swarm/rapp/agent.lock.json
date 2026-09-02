@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/neuron_swarm",
+  "agent_bytes": 19203,
   "agent_file": "neuron_swarm_agent.py",
   "agent_sha256": "911cbdf5536d55be0da3f49cf86f6b96fb4dde7eeb05fdd1ae7f67ea945e0498",
+  "backup_agent": "neuron_swarm_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "NeuronSwarmAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -28,8 +31,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/neuron-swarm:24f21e1b55e4ae73a4ddfadae06492c85c60c766d91d7c5eaa6b14ab30e75c0d",
+  "rollback_agent_retained": true,
   "runtime_name": "NeuronSwarm",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 41360,
+  "skill_sha256": "b5dd16fc8e868a2c501db0016ecd57069ad8b667029b132b3f7475b62af4a05a",
   "tool_schema": {
     "properties": {
       "context": {

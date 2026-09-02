@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_develop_campaign_themes_and_messages",
+  "agent_bytes": 10795,
   "agent_file": "teams_update_develop_campaign_themes_and_messages_agent.py",
   "agent_sha256": "ee6ba4b3adf001419a26389eb9b01e869aa7769a9db3b9bd72e46af79959b0b6",
+  "backup_agent": "teams_update_develop_campaign_themes_and_messages_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDevelopCampaignThemesAndMessages",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-develop-campaign-themes-and-messages:e0039860a46a68cc386541fb1f8f5c7eadd8ef5c8c9bbe1aeb3e95a1fc32611c",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDevelopCampaignThemesAndMessages",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25087,
+  "skill_sha256": "6e0971e2a5fe60e5806552ef062105239fff57fc3ee00e00c9c55f798220c9da",
   "tool_schema": {
     "properties": {
       "operation": {

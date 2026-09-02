@@ -1,9 +1,12 @@
 {
   "agent": "@discreetRappers/agent_transpiler_agent",
+  "agent_bytes": 40092,
   "agent_file": "agent_transpiler_agent.py",
   "agent_sha256": "5ae4e24760415ab5d1ad427c6a2f52518d4919d2811bee13914e65f3b159210c",
+  "backup_agent": "agent_transpiler_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentTranspilerAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
     "env:AI_PROJECT_CONNECTION_STRING"
   ],
@@ -30,8 +33,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/agent-transpiler:279aff6f03c6101ee29d94ff7f5d1a4a21abecc27668f2f5fc5ee2478ec09ecf",
+  "rollback_agent_retained": true,
   "runtime_name": "AgentTranspiler",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 59730,
+  "skill_sha256": "cba2ad04a844fb9fd37dd627272cb46ad2ab0dda483b8b3ebf8328b566d8c6b8",
   "tool_schema": {
     "properties": {
       "action": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/chart_builder",
+  "agent_bytes": 8990,
   "agent_file": "chart_builder_agent.py",
   "agent_sha256": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0",
+  "backup_agent": "chart_builder_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ChartBuilder",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Adi Leibowitz",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/chart-builder:8ac4e40970de2216662b82c9982f27e8c92fcf2b82d9208bf5d4f66a7a5a6b02",
+  "rollback_agent_retained": true,
   "runtime_name": "ChartBuilder",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21740,
+  "skill_sha256": "e73015b920c412e0ad973f8bbda5344b0715330be58e0c5ffd047d78e83cf50d",
   "tool_schema": {
     "properties": {
       "data_source": {

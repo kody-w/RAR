@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_allocate_headcount_to_business_units",
+  "agent_bytes": 10841,
   "agent_file": "scheduled_brief_allocate_headcount_to_business_units_agent.py",
   "agent_sha256": "8e09ea93771ff22ffcb6dc772f45606d840647b62d3579be66931a85fd193ebd",
+  "backup_agent": "scheduled_brief_allocate_headcount_to_business_units_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAllocateHeadcountToBusinessUnits",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-allocate-headcount-to-business-units:a3d94eea0fd01ae70eea29f52bda89b174e47827d71ebf85e79453bbbba231fb",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAllocateHeadcountToBusinessUnits",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25188,
+  "skill_sha256": "f5a8387b2e341eb55829d824e3c0a5e5202e0b29d8e76e96b656200e0bc157b2",
   "tool_schema": {
     "properties": {
       "operation": {

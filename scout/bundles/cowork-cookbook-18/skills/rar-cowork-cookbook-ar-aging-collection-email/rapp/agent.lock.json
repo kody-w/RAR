@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ar_aging_collection_email",
+  "agent_bytes": 10472,
   "agent_file": "ar_aging_collection_email_agent.py",
   "agent_sha256": "506d2305f1393dfdd66d0e2f018115060c46d3b932e57fea0c362c3c3c38486f",
+  "backup_agent": "ar_aging_collection_email_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ArAgingCollectionEmail",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ar-aging-collection-email:f7e228132244b57946d518317199d2ae860baf1bdbe040ae6afa94bfa78875a2",
+  "rollback_agent_retained": true,
   "runtime_name": "ArAgingCollectionEmail",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24317,
+  "skill_sha256": "0009f86e01a9e30633a99a7ea84362e70278672b37a1472075c111676c805c69",
   "tool_schema": {
     "properties": {
       "operation": {

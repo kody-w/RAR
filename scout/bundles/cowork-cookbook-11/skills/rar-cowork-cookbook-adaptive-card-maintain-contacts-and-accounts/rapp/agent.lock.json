@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_maintain_contacts_and_accounts",
+  "agent_bytes": 10726,
   "agent_file": "adaptive_card_maintain_contacts_and_accounts_agent.py",
   "agent_sha256": "a34e594093820c8d7bd24e5dfc6a88c50c3a04265ca11d171efbe2d8033c1e9d",
+  "backup_agent": "adaptive_card_maintain_contacts_and_accounts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardMaintainContactsAndAccounts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-maintain-contacts-and-accounts:ac3c12227171d7e8b4daef98c6d92dbb1625a5dd34bdb30a7b5fd2372e5fb354",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardMaintainContactsAndAccounts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24935,
+  "skill_sha256": "68f70dfb7a1ad2b5ff15f0859249cac2cca05134b89e5a15110b5964aa998a8b",
   "tool_schema": {
     "properties": {
       "operation": {

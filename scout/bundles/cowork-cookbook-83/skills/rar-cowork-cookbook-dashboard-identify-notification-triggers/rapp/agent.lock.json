@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_identify_notification_triggers",
+  "agent_bytes": 10733,
   "agent_file": "dashboard_identify_notification_triggers_agent.py",
   "agent_sha256": "c63619b7a0c3b26ac9a704154749e781a2a532b2147d53685e14435a9755b082",
+  "backup_agent": "dashboard_identify_notification_triggers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardIdentifyNotificationTriggers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-identify-notification-triggers:6efd9e7d92f768149dca79597ccbaa5a826495c2b1b42163b646ab5a8ceb72c0",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardIdentifyNotificationTriggers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24898,
+  "skill_sha256": "762ccda1e5fa13c2f894a6d2dfbad386aaa2d32276aab8b26e0ef6687b7e1b06",
   "tool_schema": {
     "properties": {
       "operation": {

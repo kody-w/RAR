@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_allocate_goods",
+  "agent_bytes": 10420,
   "agent_file": "demo_data_allocate_goods_agent.py",
   "agent_sha256": "6fc3313ecc8fbf8035a0e7f3549158709251065f885ad6f86bcc78c70b6c6fbe",
+  "backup_agent": "demo_data_allocate_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataAllocateGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-allocate-goods:e67f386c6f0a06c0b44b047444a5fcf8bffca5cc4879ee92efa05d0d4f5f91bb",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataAllocateGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24215,
+  "skill_sha256": "97009fc10cd7ffd128530450a5be671cfa180b44b94275e1eb78847ccc28fd57",
   "tool_schema": {
     "properties": {
       "operation": {

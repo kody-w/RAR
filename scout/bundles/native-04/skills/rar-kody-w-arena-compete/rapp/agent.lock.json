@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/arena_compete_agent",
+  "agent_bytes": 13653,
   "agent_file": "arena_compete_agent.py",
   "agent_sha256": "cb5fdc2203b8127d5f174fbe9773c1f8f24e01dcdfb7162fb0a17ad40a2239db",
+  "backup_agent": "arena_compete_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ArenaCompeteAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/arena-compete:22424aa2fca30b44f9ff102d56be894331061e387924bf584f64a8ae856194cd",
+  "rollback_agent_retained": true,
   "runtime_name": "ArenaCompete",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 31904,
+  "skill_sha256": "fa4d8d73f754fbada7908f2f560e457eab8a162e9ea1bd34e696bce33ffa3109",
   "tool_schema": {
     "properties": {
       "action": {

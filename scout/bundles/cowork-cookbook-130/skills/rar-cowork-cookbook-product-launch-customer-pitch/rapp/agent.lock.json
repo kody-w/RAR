@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/product_launch_customer_pitch",
+  "agent_bytes": 10366,
   "agent_file": "product_launch_customer_pitch_agent.py",
   "agent_sha256": "5b3ee2db68235a54b97a3b422dac62f8d8265ec4a62bdbf4e85b5a8495c6157c",
+  "backup_agent": "product_launch_customer_pitch_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProductLaunchCustomerPitch",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/product-launch-customer-pitch:87ed06d3e7748b20c7915c179645b111968d542d975492a16977be59ada129d7",
+  "rollback_agent_retained": true,
   "runtime_name": "ProductLaunchCustomerPitch",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24231,
+  "skill_sha256": "eb64e993104881e26168a66fd42fe174507aeaed57d452a36b3b2710b82c2036",
   "tool_schema": {
     "properties": {
       "operation": {

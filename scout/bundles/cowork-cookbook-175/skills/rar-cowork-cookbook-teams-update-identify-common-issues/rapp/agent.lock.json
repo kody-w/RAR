@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_identify_common_issues",
+  "agent_bytes": 10622,
   "agent_file": "teams_update_identify_common_issues_agent.py",
   "agent_sha256": "d10a9f5b708513d0a8a46cd8bbed4f718231169e196a0db6ec882ca6dbc7032f",
+  "backup_agent": "teams_update_identify_common_issues_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateIdentifyCommonIssues",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-identify-common-issues:be039358df26d56d486d485bb326180ad4354fbd267a92d29fcc40cb4fdaf5b2",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateIdentifyCommonIssues",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24633,
+  "skill_sha256": "084b7b1586992011b0fc65f277895443fbd52b43c58b59955f391af2b61efa22",
   "tool_schema": {
     "properties": {
       "operation": {

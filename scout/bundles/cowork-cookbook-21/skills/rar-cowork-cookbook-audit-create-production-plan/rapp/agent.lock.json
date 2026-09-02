@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_create_production_plan",
+  "agent_bytes": 10619,
   "agent_file": "audit_create_production_plan_agent.py",
   "agent_sha256": "c26dd65fb4324a69f5b6d0dbc6daecfb98f45d2322144ecffc91abff968b6d97",
+  "backup_agent": "audit_create_production_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditCreateProductionPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-create-production-plan:ec297faacf0320acd9e9f477359e0cb8a6bb42b815a5cde813ae7505dc2a94e7",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditCreateProductionPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24571,
+  "skill_sha256": "b272303f49ea1db81f81788b1109f04de3ee10dbf9215eae8d67707711bba792",
   "tool_schema": {
     "properties": {
       "criteria": {

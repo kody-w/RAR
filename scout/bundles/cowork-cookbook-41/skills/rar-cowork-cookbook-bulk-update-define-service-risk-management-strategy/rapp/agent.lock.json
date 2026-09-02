@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_service_risk_management_strategy",
+  "agent_bytes": 10825,
   "agent_file": "bulk_update_define_service_risk_management_strategy_agent.py",
   "agent_sha256": "d9752a61c9d1e2ecf76c1e65e1e1ad44858b82ee70926ae142b17f0be867bc28",
+  "backup_agent": "bulk_update_define_service_risk_management_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineServiceRiskManagementStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-service-risk-management-strategy:07f053af8c4572dc9be546a9e536503195d564124249b354c4167fdab89c7010",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefineServiceRiskManagementStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25181,
+  "skill_sha256": "62f88e0fc01237c15b935afc2d1c3a58c3a08cd14b77dd55026b0586800cd399",
   "tool_schema": {
     "properties": {
       "operation": {

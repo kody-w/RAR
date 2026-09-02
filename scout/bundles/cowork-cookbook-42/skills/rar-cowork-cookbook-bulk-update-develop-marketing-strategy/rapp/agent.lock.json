@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_develop_marketing_strategy",
+  "agent_bytes": 10653,
   "agent_file": "bulk_update_develop_marketing_strategy_agent.py",
   "agent_sha256": "61693a862c5ebae1e5055e9a218bde2a330aba90f0b2b30a524cd403361844b4",
+  "backup_agent": "bulk_update_develop_marketing_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDevelopMarketingStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-develop-marketing-strategy:83708e916d0838c3ecb867b07c97b868aa20e412016037da9e873a465e79eee8",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDevelopMarketingStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24736,
+  "skill_sha256": "465095cfd1bd951fb1e5fd625a4b0ace0aa9a319b5f4bb63db5e6a6821f7ff94",
   "tool_schema": {
     "properties": {
       "operation": {

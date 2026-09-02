@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/rapp_publish_agent",
+  "agent_bytes": 21116,
   "agent_file": "rapp_publish_agent.py",
   "agent_sha256": "fc199e9cd0c478971f5c67d818d6405d32e0035974da2187e29292bf36adc6ed",
+  "backup_agent": "rapp_publish_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappPublishAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -33,8 +36,16 @@
     ],
     "version": "0.2.3"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/rapp-publish:7f62383e691ef4c6eff9955b250fdcd251d028676bc5c59cf17ec5a251147465",
+  "rollback_agent_retained": true,
   "runtime_name": "RappPublish",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 38202,
+  "skill_sha256": "0d48aa350daa30f2301eb61d7165b8ad215aedacf5877872db12cfa0cfdae1ec",
   "tool_schema": {
     "properties": {
       "action": {

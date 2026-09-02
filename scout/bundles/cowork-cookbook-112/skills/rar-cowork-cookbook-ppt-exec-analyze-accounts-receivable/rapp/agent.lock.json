@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_analyze_accounts_receivable",
+  "agent_bytes": 10639,
   "agent_file": "ppt_exec_analyze_accounts_receivable_agent.py",
   "agent_sha256": "bdb95713da68eead750bc6bdcea9a05d2156841a4eb49dd5a56e7432abe16b91",
+  "backup_agent": "ppt_exec_analyze_accounts_receivable_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAnalyzeAccountsReceivable",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-analyze-accounts-receivable:1f31eb3f83f6a9008ae8aacc21f4eed3db679ff86412c47db601df769ae93e60",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecAnalyzeAccountsReceivable",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24709,
+  "skill_sha256": "6e3636b6d92eb7398802e46368e923042c7f5d1c68db1b12a0d645b089aa7427",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_inspect_inventory",
+  "agent_bytes": 10591,
   "agent_file": "audit_inspect_inventory_agent.py",
   "agent_sha256": "e7f41c594b3df71e9ff1b86013978629aa51d28559203fb016cfe99e0e3fd42b",
+  "backup_agent": "audit_inspect_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditInspectInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-inspect-inventory:6d154cc0e901f600a8fbb1b57b0270ad78587472dc99bef662ee984c47b31fb2",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditInspectInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24465,
+  "skill_sha256": "ec5620ba76f15850429e5fdaf8703af6b952e546773246d3d5fab8b9e4abbe6c",
   "tool_schema": {
     "properties": {
       "criteria": {

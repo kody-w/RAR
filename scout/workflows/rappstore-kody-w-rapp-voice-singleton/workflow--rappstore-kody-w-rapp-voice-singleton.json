@@ -5,6 +5,13 @@
   "id": "2eec0d816e26df5b",
   "lastExecutedAt": null,
   "name": "RAPP Voice",
+  "rapp": {
+    "backup_agent": "rapp_voice_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-kody-w-rapp-voice-singleton"
+  },
   "schedule": {
     "days": [
       1,

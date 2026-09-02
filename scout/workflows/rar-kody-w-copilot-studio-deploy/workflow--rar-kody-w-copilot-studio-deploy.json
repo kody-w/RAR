@@ -5,6 +5,13 @@
   "id": "14d9ab00a5fb0e72",
   "lastExecutedAt": null,
   "name": "CopilotStudioDeploy",
+  "rapp": {
+    "backup_agent": "copilot_studio_deploy_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-kody-w-copilot-studio-deploy"
+  },
   "schedule": {
     "days": [
       1,

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_warehouse_management_kpis",
+  "agent_bytes": 10765,
   "agent_file": "adaptive_card_define_warehouse_management_kpis_agent.py",
   "agent_sha256": "fc3c4822b021a590d9e07ec27f6c19465c8a47bce7b50cc2959c94252363ac37",
+  "backup_agent": "adaptive_card_define_warehouse_management_kpis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineWarehouseManagementKpis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-define-warehouse-management-kpis:6017e9713f84acf671feace4221282f5146e8994c46516d7c2b1d5c7e85591e2",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDefineWarehouseManagementKpis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25039,
+  "skill_sha256": "e976cad550f28f21d5dad6082e8672476b01f88423e1485e0d6e5c787dae6fbe",
   "tool_schema": {
     "properties": {
       "operation": {

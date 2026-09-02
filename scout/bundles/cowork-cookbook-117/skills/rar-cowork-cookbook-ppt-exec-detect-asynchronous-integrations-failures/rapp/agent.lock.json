@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_detect_asynchronous_integrations_failures",
+  "agent_bytes": 10858,
   "agent_file": "ppt_exec_detect_asynchronous_integrations_failures_agent.py",
   "agent_sha256": "d99c9467be722f349745b33a0fbeefbe9bc530ad51418136b888dd8b67c19fed",
+  "backup_agent": "ppt_exec_detect_asynchronous_integrations_failures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDetectAsynchronousIntegrationsFailures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-detect-asynchronous-integrations-failures:48ac0bfd5e0638ef4389c27e1bd40eaae4720ee1317ffaff730a0e992d0974b6",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDetectAsynchronousIntegrationsFailures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25218,
+  "skill_sha256": "d873ef91a4b1d9fd499e65d892f92b056de62eb99526a6e6c7f9cdd274f3f006",
   "tool_schema": {
     "properties": {
       "operation": {

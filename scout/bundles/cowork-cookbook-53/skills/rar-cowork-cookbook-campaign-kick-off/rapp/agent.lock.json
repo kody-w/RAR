@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/campaign_kick_off",
+  "agent_bytes": 10353,
   "agent_file": "campaign_kick_off_agent.py",
   "agent_sha256": "402bed53c415c523236e38953678ae94faf302ede36bef716f44dbd8d844511e",
+  "backup_agent": "campaign_kick_off_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CampaignKickOff",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -78,8 +81,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/campaign-kick-off:fd2033aafd68728d3f023b7621dfe71daf835877af1c2221a16281ad7e6b3c1d",
+  "rollback_agent_retained": true,
   "runtime_name": "CampaignKickOff",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24101,
+  "skill_sha256": "609f7cf29abc6c2196dbc8c23765fb720661679cb3b7531646b4de9a0b6c28e1",
   "tool_schema": {
     "properties": {
       "operation": {

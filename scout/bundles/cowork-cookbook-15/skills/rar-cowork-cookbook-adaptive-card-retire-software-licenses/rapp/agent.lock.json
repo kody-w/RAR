@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_retire_software_licenses",
+  "agent_bytes": 10681,
   "agent_file": "adaptive_card_retire_software_licenses_agent.py",
   "agent_sha256": "a8c1332fb3825afa62f243178e5bbc36e1361a0152d852d8c5dfbedd0f11719b",
+  "backup_agent": "adaptive_card_retire_software_licenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardRetireSoftwareLicenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-retire-software-licenses:35f03ceb7644c91fdad283f050d308b13ddcc08f90c85be8adfe92954449b3aa",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardRetireSoftwareLicenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24772,
+  "skill_sha256": "7812d6277fd911527a434f671ef8ba55e037df1755c9768597fd5a132dd7d2ee",
   "tool_schema": {
     "properties": {
       "operation": {

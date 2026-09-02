@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_develop_product_roadmap",
+  "agent_bytes": 10520,
   "agent_file": "demo_data_develop_product_roadmap_agent.py",
   "agent_sha256": "c903bdbc815fa19b10b51e129769d42097a000d1d3b045d9733b56fed8e59d5b",
+  "backup_agent": "demo_data_develop_product_roadmap_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDevelopProductRoadmap",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-develop-product-roadmap:366d21c5df81e96e3b0d577c004fdd2fbbb2044858a1128cf756794c866663a3",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDevelopProductRoadmap",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24486,
+  "skill_sha256": "c106f5db78637790f0fe3e23440dae2f2d794739f584d252af98061a7e44558b",
   "tool_schema": {
     "properties": {
       "operation": {

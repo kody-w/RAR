@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/doc_format_converter",
+  "agent_bytes": 9167,
   "agent_file": "doc_format_converter_agent.py",
   "agent_sha256": "fe4a32bfd496ea42fe68d4815d3f6835297ca9434e9a3c72129873a4b5ea0f3a",
+  "backup_agent": "doc_format_converter_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DocFormatConverter",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Andreas Adner",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/doc-format-converter:d3f9b152b65dbfb2c24473f2f9093c0a74ae690e9864b46db4acf837cb0e546e",
+  "rollback_agent_retained": true,
   "runtime_name": "DocFormatConverter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22225,
+  "skill_sha256": "db9930c41f3641adac37241babad1aebea7bcd17668d60429a9c51e7d6f8c3e2",
   "tool_schema": {
     "properties": {
       "audience": {

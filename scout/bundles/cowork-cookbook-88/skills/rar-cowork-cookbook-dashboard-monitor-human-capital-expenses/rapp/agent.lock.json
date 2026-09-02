@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_monitor_human_capital_expenses",
+  "agent_bytes": 10694,
   "agent_file": "dashboard_monitor_human_capital_expenses_agent.py",
   "agent_sha256": "a1007ceab247d77b90d51eeadefe021b7f65bca2594a2e38b95ecf803cfab4f6",
+  "backup_agent": "dashboard_monitor_human_capital_expenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMonitorHumanCapitalExpenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-monitor-human-capital-expenses:0fa8369a387d4d47668051d2c7cfdb1c193d7a06d123971db36630803c513149",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardMonitorHumanCapitalExpenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24880,
+  "skill_sha256": "22d66cf5ddb4c36ac8a99fb79d196cae03c8f3022fc1db4e01aa532868c206f9",
   "tool_schema": {
     "properties": {
       "operation": {

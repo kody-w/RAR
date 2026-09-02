@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_allocate_inventory_to_sales_orders",
+  "agent_bytes": 10733,
   "agent_file": "bulk_update_allocate_inventory_to_sales_orders_agent.py",
   "agent_sha256": "9d9f4dc7be1b06462beb3e38a05de0df88a45eb1f15a73a05f69ea237b254aee",
+  "backup_agent": "bulk_update_allocate_inventory_to_sales_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAllocateInventoryToSalesOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-allocate-inventory-to-sales-orders:2878836c2b662200fd47b9ee8d97de21aac066b7318008ce638a00421ab72e8f",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAllocateInventoryToSalesOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24977,
+  "skill_sha256": "396184b8933b6941f05c5e54c5327f4d6e5a5c2bdd6f0aa8b740d6c77b742905",
   "tool_schema": {
     "properties": {
       "operation": {

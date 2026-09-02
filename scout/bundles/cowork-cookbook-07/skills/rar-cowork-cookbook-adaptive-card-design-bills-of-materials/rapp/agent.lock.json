@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_design_bills_of_materials",
+  "agent_bytes": 10648,
   "agent_file": "adaptive_card_design_bills_of_materials_agent.py",
   "agent_sha256": "7d55f3b6af8ec1adf7cf34159d8c1f47164dadccf4cf33863ad87b04bf5a3040",
+  "backup_agent": "adaptive_card_design_bills_of_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDesignBillsOfMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-design-bills-of-materials:476c2499a07ccf242f6cd9650ea997e3934ebf9ef5ce2cddb02b1fd519dc840a",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDesignBillsOfMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24749,
+  "skill_sha256": "e6ed910d9b32f58975bf49791d87d3c8f86fd1fcb40220dca661585873db7114",
   "tool_schema": {
     "properties": {
       "operation": {

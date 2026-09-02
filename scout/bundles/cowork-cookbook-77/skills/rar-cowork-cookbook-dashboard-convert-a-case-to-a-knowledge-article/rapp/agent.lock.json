@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_convert_a_case_to_a_knowledge_article",
+  "agent_bytes": 10799,
   "agent_file": "dashboard_convert_a_case_to_a_knowledge_article_agent.py",
   "agent_sha256": "f74c686192dd5bc73feda2c0e5cc1c16ae5a034db802cb5334251cdb9aafa629",
+  "backup_agent": "dashboard_convert_a_case_to_a_knowledge_article_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardConvertACaseToAKnowledgeArticle",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-convert-a-case-to-a-knowledge-article:820497e855c6f62aac94c156a19cc1bce87c08044dd43bad061cebc0d85a89e8",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardConvertACaseToAKnowledgeArticle",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25146,
+  "skill_sha256": "978a7dbd9c933b41990e10b2d7a290c359196c7453def940583bc35f6181e978",
   "tool_schema": {
     "properties": {
       "operation": {

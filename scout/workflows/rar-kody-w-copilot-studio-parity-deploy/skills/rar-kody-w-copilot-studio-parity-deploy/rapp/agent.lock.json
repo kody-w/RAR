@@ -1,12 +1,16 @@
 {
   "agent": "@kody-w/copilot_studio_parity_deploy",
+  "agent_bytes": 251402,
   "agent_file": "copilot_studio_parity_deploy_agent.py",
   "agent_sha256": "0a0771ff1dcefef8255a5a9c4db03dfedab4886a644fd2382804e41edb2c1e7a",
+  "backup_agent": "copilot_studio_parity_deploy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioDeployAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.azure_file_storage",
-    "utils.storage_factory"
+    "brainstem:utils.azure_file_storage",
+    "brainstem:utils.storage_factory",
+    "python:yaml"
   ],
   "manifest": {
     "author": "kody-w",
@@ -29,8 +33,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/copilot-studio-parity-deploy:45bd6283185ec7590ef1f63efa935cf6374367bf2d40585788e836b96cb47f51",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotStudioDeploy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 330275,
+  "skill_sha256": "38422e0477d6effdd4480ccf0898a9455f29a059f723f8a992a58d2354a0b4bd",
   "tool_schema": {
     "properties": {
       "action": {

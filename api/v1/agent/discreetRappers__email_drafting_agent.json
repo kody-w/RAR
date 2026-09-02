@@ -3,10 +3,11 @@
   "id": "discreetRappers__email_drafting_agent",
   "name": "EmailDrafting",
   "rar_name": "@discreetRappers/email_drafting_agent",
-  "rappid": "rappid:@discreetRappers/email_drafting_agent:a99a6b012162d01d0076bfb5555a4a5a5b5aeb35527b967f095ab5ee216610f5",
-  "_migrated_from": "rappid:v2:agent:@discreetRappers/email_drafting_agent:b068d41da7ee04fa27d8ff0b26797791",
+  "rappid": "rappid:@discreetrappers/email-drafting:b30dd658d5172a7468941edd1136c25e460b255386e50390322fcb870c5b17df",
+  "_migrated_from": "rappid:@discreetRappers/email_drafting_agent:a99a6b012162d01d0076bfb5555a4a5a5b5aeb35527b967f095ab5ee216610f5",
   "_migrated_from_all": [
-    "rappid:v2:agent:@discreetRappers/email_drafting_agent:b068d41da7ee04fa27d8ff0b26797791"
+    "rappid:v2:agent:@discreetRappers/email_drafting_agent:b068d41da7ee04fa27d8ff0b26797791",
+    "rappid:@discreetRappers/email_drafting_agent:a99a6b012162d01d0076bfb5555a4a5a5b5aeb35527b967f095ab5ee216610f5"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
@@ -30,9 +31,18 @@
   "sha256": "b068d41da7ee04fa27d8ff0b267977914aab1eae186017ad47572e2b2c6cb399",
   "has_card": true,
   "added_at": "2026-04-06T16:39:03-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-discreetrappers-email-drafting",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__email_drafting_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/email_drafting_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/email_drafting_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-email-drafting/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-email-drafting/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__email_drafting_agent.py",
   "api_card_url": null,

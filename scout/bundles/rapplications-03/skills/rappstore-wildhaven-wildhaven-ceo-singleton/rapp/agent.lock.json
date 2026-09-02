@@ -1,9 +1,12 @@
 {
   "agent": "@wildhaven/wildhaven-ceo-singleton",
+  "agent_bytes": 11893,
   "agent_file": "wildhaven_ceo_agent.py",
   "agent_sha256": "63ba8bea6a3fa294de04fcc385a257e24c6a14e768ed6e9546fe32a22a594d22",
+  "backup_agent": "wildhaven_ceo_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WildhavenCeoAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "@wildhaven",
@@ -34,8 +37,16 @@
     ],
     "version": "0.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@wildhaven/wildhaven-ceo-singleton:d2b2317365797333288c907dd6d7915ddcc6049ad19fa69ee11e499d4c927837",
+  "rollback_agent_retained": true,
   "runtime_name": "WildhavenCEO",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 27274,
+  "skill_sha256": "f6f3cd9895e503815ef4ac7c47365fde231557eb3cd4c2ae26e5c2dbb81124c8",
   "tool_schema": {
     "properties": {
       "action": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/copilot_agents_news_scout",
+  "agent_bytes": 9405,
   "agent_file": "copilot_agents_news_scout_agent.py",
   "agent_sha256": "6fc2a0fa301aa19d483c4c839feed41debd86262eb0fa2852fdcaccdebed450e",
+  "backup_agent": "copilot_agents_news_scout_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotAgentsNewsScout",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Elliot Margot",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/copilot-agents-news-scout:c1c3f93ced021b490cd44b9875e94a9bd5db54b8e3866d9195c258061b767431",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotAgentsNewsScout",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22623,
+  "skill_sha256": "b246685462c7d5d56d3d3c3e5bc0cde48b6d9cef29f48737a73304f1ce435ee6",
   "tool_schema": {
     "properties": {
       "operation": {

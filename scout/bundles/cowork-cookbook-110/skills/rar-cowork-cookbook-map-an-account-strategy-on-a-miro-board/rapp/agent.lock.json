@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/map_an_account_strategy_on_a_miro_board",
+  "agent_bytes": 10503,
   "agent_file": "map_an_account_strategy_on_a_miro_board_agent.py",
   "agent_sha256": "aa47cf2ec553677f627d7881519ddb7e2e76b24417e8002aba8f4242f82a4908",
+  "backup_agent": "map_an_account_strategy_on_a_miro_board_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MapAnAccountStrategyOnAMiroBoard",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/map-an-account-strategy-on-a-miro-board:cf549e1e830cb73786d2a44c7f0e8b4f77aba39d25ec8930e2d6ded800d61705",
+  "rollback_agent_retained": true,
   "runtime_name": "MapAnAccountStrategyOnAMiroBoard",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24594,
+  "skill_sha256": "3eeb195518fdaf0cc7dba88703b60c9ced70349ebda9a26a41b99da658d657a3",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_record_employee_absences",
+  "agent_bytes": 10632,
   "agent_file": "teams_update_record_employee_absences_agent.py",
   "agent_sha256": "cdfe5509246f7ec2101b0e3080e0335974c349cae8ffd0ecc16877ff8bcf1f8c",
+  "backup_agent": "teams_update_record_employee_absences_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateRecordEmployeeAbsences",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-record-employee-absences:b513f1e368b61809a538e0d7267e837142f0ed38a520e1f0b41f850fe70adafc",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateRecordEmployeeAbsences",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24681,
+  "skill_sha256": "8b211f582472be5519c45c8c642c85d3e8dea9a3047cdd010be05269eda6328c",
   "tool_schema": {
     "properties": {
       "operation": {

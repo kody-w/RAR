@@ -1,9 +1,12 @@
 {
   "agent": "@howardh/training_quest_agent",
+  "agent_bytes": 46650,
   "agent_file": "training_quest_agent.py",
   "agent_sha256": "fc213fa839cf3f39312ba03c31e47e55af61dd636bbcd671d35ee48383c78ab5",
+  "backup_agent": "training_quest_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TrainingQuestAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Howard Hoy",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@howardh/training-quest:82af4432088ab4ded405ac070d229299830c042714c453a2ef9e568290f5070f",
+  "rollback_agent_retained": true,
   "runtime_name": "TrainingQuest",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 74099,
+  "skill_sha256": "1232b44249a5a0144cfb3e228091f011dbf373aacbd0865d4ba3c971d88c6c76",
   "tool_schema": {
     "properties": {
       "action": {

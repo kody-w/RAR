@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_develop_chart_of_accounts_strategy",
+  "agent_bytes": 10785,
   "agent_file": "audit_develop_chart_of_accounts_strategy_agent.py",
   "agent_sha256": "efb490240a03a16ed2bc4a50879f154ff983f66c90c4905a7ec6b2624077f765",
+  "backup_agent": "audit_develop_chart_of_accounts_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDevelopChartOfAccountsStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-develop-chart-of-accounts-strategy:a200505dca2c134bfaec54d4aae5bf34154e269f13ff37c16660188ff2290a27",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDevelopChartOfAccountsStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25046,
+  "skill_sha256": "7d3f8129541023a2213317d633c5d5f3440c2b08623fec1f47f4a77a514a9ada",
   "tool_schema": {
     "properties": {
       "criteria": {

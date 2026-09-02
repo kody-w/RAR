@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_conduct_a_compliance_risk_assessment",
+  "agent_bytes": 10977,
   "agent_file": "configure_conduct_a_compliance_risk_assessment_agent.py",
   "agent_sha256": "0dd8c3088c35ffa7416546803a78e80a551b08306d47ba6cec231f670bce4c27",
+  "backup_agent": "configure_conduct_a_compliance_risk_assessment_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureConductAComplianceRiskAssessment",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-conduct-a-compliance-risk-assessment:0c102bc6d6f0862c1ef990e8830c3cdd9e16d1bccf21d692895a5cf4b65ada1b",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureConductAComplianceRiskAssessment",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25284,
+  "skill_sha256": "f326ad72e0f48e5423b299cd2fc452c8606c3f5fd4c97e6692e7015d26a6460d",
   "tool_schema": {
     "properties": {
       "operation": {

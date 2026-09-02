@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_correct_synchronous_integration_failures",
+  "agent_bytes": 10880,
   "agent_file": "teams_update_correct_synchronous_integration_failures_agent.py",
   "agent_sha256": "88dac2188f35e74b852ca493bbaeeca76e3410bbd04006a45dfa7ce590bc569f",
+  "backup_agent": "teams_update_correct_synchronous_integration_failures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCorrectSynchronousIntegrationFailures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-correct-synchronous-integration-failures:2d41302c2a1e8d0117b35dffdf2cff27787a3b50c854cc4691c5e139b6ceeb4a",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateCorrectSynchronousIntegrationFailures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25248,
+  "skill_sha256": "108aac57acadcc9f80fd67c7555e349947c3a6949d85587422a642035a7b6f62",
   "tool_schema": {
     "properties": {
       "operation": {

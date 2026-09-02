@@ -3,10 +3,11 @@
   "id": "kody-w__kody2day_agent",
   "name": "Kody2day",
   "rar_name": "@kody-w/kody2day_agent",
-  "rappid": "rappid:@kody-w/kody2day_agent:3a240421c0028ce6f269a34b5b84edbe5072fe8633119320a3858b959c386090",
-  "_migrated_from": "rappid:@kody-w/kody2day_agent:94943d30dfd8cd306a40785c2f0862f1949d3b9ec0d21ecbeaea07178cfb6055",
+  "rappid": "rappid:@kody-w/kody2day:5079e9d41f7940357f0047bef606547363c94c6dc8f3af2385a2e6200f8f96a7",
+  "_migrated_from": "rappid:@kody-w/kody2day_agent:3a240421c0028ce6f269a34b5b84edbe5072fe8633119320a3858b959c386090",
   "_migrated_from_all": [
-    "rappid:@kody-w/kody2day_agent:94943d30dfd8cd306a40785c2f0862f1949d3b9ec0d21ecbeaea07178cfb6055"
+    "rappid:@kody-w/kody2day_agent:94943d30dfd8cd306a40785c2f0862f1949d3b9ec0d21ecbeaea07178cfb6055",
+    "rappid:@kody-w/kody2day_agent:3a240421c0028ce6f269a34b5b84edbe5072fe8633119320a3858b959c386090"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
@@ -33,9 +34,18 @@
   "sha256": "e4dd13bc20c0f1d3c4333cdbefe6f1e09359a7fc7da5309822248d41ba3b0638",
   "has_card": true,
   "added_at": "2026-08-18T21:17:02-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-kody2day",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__kody2day_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-kody2day/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-kody2day/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__kody2day_agent.py",
   "api_card_url": null,

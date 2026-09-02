@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_contract_suppliers_for_services",
+  "agent_bytes": 10779,
   "agent_file": "scheduled_brief_contract_suppliers_for_services_agent.py",
   "agent_sha256": "5d8f59cd8ae1216222cb4dfa0ea7befc63db8fee9b207c5bb3484d5e813a24d3",
+  "backup_agent": "scheduled_brief_contract_suppliers_for_services_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefContractSuppliersForServices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-contract-suppliers-for-services:8c577e6bc949a1a70549e51f04e37a590dc69a43fd572e975c7f0fb31b3f7266",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefContractSuppliersForServices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25016,
+  "skill_sha256": "8ed4199e7ff813fd8b70ac265afcb9b74c28a23e10cb03cc2e61dfb47dfffb26",
   "tool_schema": {
     "properties": {
       "operation": {

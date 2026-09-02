@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_report_on_production_sustainability_metrics",
+  "agent_bytes": 10845,
   "agent_file": "ppt_exec_report_on_production_sustainability_metrics_agent.py",
   "agent_sha256": "f6374ee44b2f55cbe8e123b7362db780d6dee72a869a5a69911ff6fae7a939a8",
+  "backup_agent": "ppt_exec_report_on_production_sustainability_metrics_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecReportOnProductionSustainabilityMetrics",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-report-on-production-sustainability-metrics:53e2eb753407ffa746325d15bcebbbeda2413c7285a74228be8db167f362031c",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecReportOnProductionSustainabilityMetrics",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25177,
+  "skill_sha256": "a63feebc5c9598e228f0d67e541b06727fc25bc1135109e0d85cbec9822173ec",
   "tool_schema": {
     "properties": {
       "operation": {

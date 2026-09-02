@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/skill_toaster_agent",
+  "agent_bytes": 32161,
   "agent_file": "skill_toaster_agent.py",
   "agent_sha256": "b05707e55b486c96363ae170a6ee0c755bc0c5b797b5e7ff9fcb57c9dc86d625",
+  "backup_agent": "skill_toaster_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SkillToasterEngine",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/skill-toaster:a09d5c3234ff86008313a412c8e10960a4a8f8a2cd405b1f51dd9d9a5f6e98c0",
+  "rollback_agent_retained": true,
   "runtime_name": "SkillToaster",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 55728,
+  "skill_sha256": "48e226dea835e2a5598306a2c82ea051783b0a8eb9a63c9ba905aba0f260094d",
   "tool_schema": {
     "properties": {
       "operation": {

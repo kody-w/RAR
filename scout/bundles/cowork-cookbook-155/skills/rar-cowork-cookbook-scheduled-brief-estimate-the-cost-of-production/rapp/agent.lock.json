@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_estimate_the_cost_of_production",
+  "agent_bytes": 10772,
   "agent_file": "scheduled_brief_estimate_the_cost_of_production_agent.py",
   "agent_sha256": "ff9e8b307416967376b333afdf7735d5063807a7700a6c29e4138c90112933dc",
+  "backup_agent": "scheduled_brief_estimate_the_cost_of_production_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefEstimateTheCostOfProduction",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-estimate-the-cost-of-production:96f6c996359ed85c03d349229eec609732f78f6b137731c4028c1f68ee2945ee",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefEstimateTheCostOfProduction",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25007,
+  "skill_sha256": "3fcf9c9581a4e068ab98f17ad4e67e531da2f74c26adb2f0702cae8b1c9c48e8",
   "tool_schema": {
     "properties": {
       "operation": {

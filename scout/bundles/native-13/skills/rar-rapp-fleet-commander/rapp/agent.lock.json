@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/fleet_commander",
+  "agent_bytes": 31840,
   "agent_file": "fleet_commander_agent.py",
   "agent_sha256": "2ba26bb68c2fdaf8f75f5068fe244d227330e8ab96c7ee6516c6d2530b386487",
+  "backup_agent": "fleet_commander_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FleetCommanderAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -33,8 +36,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/fleet-commander:019697f8d61791dacd7c19df86d6e1e6075c80289b8f8d969fc1930cf5d5eef7",
+  "rollback_agent_retained": true,
   "runtime_name": "FleetCommander",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 50419,
+  "skill_sha256": "e5cadeb50ab8f73c4d26dbc4c31c427801b0e520f47e156234ae1127f36e39ca",
   "tool_schema": {
     "properties": {
       "action": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_clean_up_and_view_log_storage",
+  "agent_bytes": 10442,
   "agent_file": "report_clean_up_and_view_log_storage_agent.py",
   "agent_sha256": "e955fe703f1d4c5e40fd8e400b788414d829fa3de9cc99396f477640e4a9b2ca",
+  "backup_agent": "report_clean_up_and_view_log_storage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportCleanUpAndViewLogStorage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-clean-up-and-view-log-storage:459b7e55fc6c1479f050d53caa342b03ea0c32cc467e3a9a2528e34e5fae6475",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportCleanUpAndViewLogStorage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24437,
+  "skill_sha256": "4ee71b2655cd396b4f3926a4f948a50ad5d67becc5312c43b270d183258525c6",
   "tool_schema": {
     "properties": {
       "audience": {

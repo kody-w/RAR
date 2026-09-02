@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_build_a_quality_plan_for_a_product",
+  "agent_bytes": 10778,
   "agent_file": "adaptive_card_build_a_quality_plan_for_a_product_agent.py",
   "agent_sha256": "4245069fee64ab41fe5b79e541da54e0dd512c7ec9e077bcff1157f41fa2fd3c",
+  "backup_agent": "adaptive_card_build_a_quality_plan_for_a_product_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardBuildAQualityPlanForAProduct",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-build-a-quality-plan-for-a-product:0daba4ef95b48a7d3963630a2dd7f8a8b2c057d47eefa89321fb3deada99f05e",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardBuildAQualityPlanForAProduct",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25094,
+  "skill_sha256": "0a4a6ec69323870acffeb88becd2999e0acd3cba74b4306c69ddd14c4aa20a7f",
   "tool_schema": {
     "properties": {
       "operation": {

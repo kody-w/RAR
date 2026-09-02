@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/rapp_agent_converter",
+  "agent_bytes": 121593,
   "agent_file": "rapp_agent_converter_agent.py",
-  "agent_sha256": "c5f83f431afd25221a7227dbac5dd05f7f1afe1463e5f665c94062137d9a8f8c",
+  "agent_sha256": "81bae056a1736e2499333d7aae869d29a19245d1488e13b9f28dbb2038ad2c4a",
+  "backup_agent": "rapp_agent_converter_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappAgentConverterAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP Agent Registry",
@@ -11,11 +14,12 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Converts RAR agent.py files and SKILL.md files in both directions, automatically normalizing every raw skill through a valid RAR agent and emitting a RAPP/1 Toasted SKILL.md by default.",
+    "description": "Makes a RAPP/1 Toasted SKILL.md the persistent Grail record for raw skills and RAR agents, deterministically materializes agent.py on demand, and hotloads any supported form into a Brainstem.",
     "display_name": "RappAgentConverter",
     "name": "@rapp/rapp_agent_converter",
     "quality_tier": "official",
     "rapp": {
+      "canonical_format": "skill",
       "default_format": "skill",
       "kind": "skill",
       "rappid": "rappid:@rapp/rapp-agent-converter:11ce7bf2e7b301b3a35c919f34a60f9a25742552c9871ee33421d2de313e65fa",
@@ -31,27 +35,71 @@
       "toasted",
       "conversion",
       "fidelity",
-      "local-first"
+      "local-first",
+      "grail",
+      "hotload"
     ],
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/rapp-agent-converter:11ce7bf2e7b301b3a35c919f34a60f9a25742552c9871ee33421d2de313e65fa",
+  "rollback_agent_retained": true,
   "runtime_name": "RappAgentConverter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 189484,
+  "skill_sha256": "8d4fb6d9bd9ff982de51df089f96abe6147cd279a59ba10ee49aa4b6babe5638",
   "tool_schema": {
     "additionalProperties": false,
     "properties": {
+      "agents_dir": {
+        "description": "Exact Brainstem agents directory.",
+        "type": "string"
+      },
+      "brainstem_dir": {
+        "description": "Brainstem root for operation=hotload.",
+        "type": "string"
+      },
+      "default_format": {
+        "description": "Global selected output for config.",
+        "enum": [
+          "skill",
+          "agent"
+        ],
+        "type": "string"
+      },
       "force": {
         "description": "Replace a conflicting output file.",
         "type": "boolean"
       },
+      "in_place": {
+        "description": "Explicitly replace a raw/legacy source SKILL.md after preserving an exact backup.",
+        "type": "boolean"
+      },
+      "mode": {
+        "description": "rapp1 writes a Grail record without duplicates; legacy preserves adjacent pair behavior.",
+        "enum": [
+          "rapp1",
+          "legacy"
+        ],
+        "type": "string"
+      },
       "operation": {
-        "description": "auto and convert emit a Toasted skill by default.",
+        "description": "Convert, materialize, hotload, verify, or configure the agent/skill compatibility membrane.",
         "enum": [
           "auto",
           "convert",
+          "toast",
+          "materialize",
+          "hotload",
           "inspect",
           "verify",
-          "restore_raw"
+          "roundtrip",
+          "soak",
+          "restore_raw",
+          "config"
         ],
         "type": "string"
       },
@@ -72,7 +120,7 @@
         "type": "string"
       },
       "to": {
-        "description": "Target format. Defaults to skill.",
+        "description": "Selected materialization. Defaults to the global converter setting; the Grail remains SKILL.md.",
         "enum": [
           "skill",
           "agent"
@@ -80,10 +128,8 @@
         "type": "string"
       }
     },
-    "required": [
-      "path"
-    ],
+    "required": [],
     "type": "object"
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

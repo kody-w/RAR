@@ -3,10 +3,11 @@
   "id": "rapp__commons_post",
   "name": "CommonsPost",
   "rar_name": "@rapp/commons_post",
-  "rappid": "rappid:@rapp/commons_post:c2a2625666acb4ceb88bc678f1b03328a6aa944bb621ee8c42b2dd85a7809477",
-  "_migrated_from": "rappid:@rapp/commons_post:f2894691c22e7765aed50f6d1318ff82da1dcb8e4d1f30b65efa1886fe1b7bbb",
+  "rappid": "rappid:@rapp/commons-post:85fb2c90e16bca2bfa8e381efd2e3f5fe20b23e8e98c3f21d82c5cf4bc440658",
+  "_migrated_from": "rappid:@rapp/commons_post:c2a2625666acb4ceb88bc678f1b03328a6aa944bb621ee8c42b2dd85a7809477",
   "_migrated_from_all": [
-    "rappid:@rapp/commons_post:f2894691c22e7765aed50f6d1318ff82da1dcb8e4d1f30b65efa1886fe1b7bbb"
+    "rappid:@rapp/commons_post:f2894691c22e7765aed50f6d1318ff82da1dcb8e4d1f30b65efa1886fe1b7bbb",
+    "rappid:@rapp/commons_post:c2a2625666acb4ceb88bc678f1b03328a6aa944bb621ee8c42b2dd85a7809477"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -31,9 +32,18 @@
   "sha256": "18c3fe91ac122cada3edde4cd2a7e01c2d0ffcf311a5f426f4a60e0cd416a6d5",
   "has_card": true,
   "added_at": "2026-05-11T13:43:55-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-commons-post",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__commons_post.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-commons-post/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-commons-post/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__commons_post.py",
   "api_card_url": null,

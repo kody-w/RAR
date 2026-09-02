@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/copilot_studio_forge_agent",
+  "agent_bytes": 224172,
   "agent_file": "copilot_studio_forge_agent.py",
   "agent_sha256": "b74dc71864503e47340899674b0e8b9c17f4e8fc617298ed83e5f148bf87e709",
+  "backup_agent": "copilot_studio_forge_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioForgeAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
     "env:AI_PROJECT_CONNECTION_STRING",
     "env:AZURE_TENANT_ID",
@@ -39,8 +42,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/copilot-studio-forge:00560b4c895457249015dd85da12897e06bbfb608a01ddd09004af78c4635b88",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotStudioForge",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 299611,
+  "skill_sha256": "81c8f1e54c3a7dbdf0380bdf3afd3d5ce9e0c922249acecba60dba44b4f04ca3",
   "tool_schema": {
     "properties": {
       "action": {

@@ -3,10 +3,11 @@
   "id": "howardh__training_quest_agent",
   "name": "TrainingQuest",
   "rar_name": "@howardh/training_quest_agent",
-  "rappid": "rappid:@howardh/training_quest_agent:765e8016aa6b73249de65caf82e55f478d4f75d67aac1d85f059180980f02426",
-  "_migrated_from": "rappid:@howardh/training_quest_agent:9db2f3969e8728374bbc0e56f6be66154b2e1c062d646e5d88cc32a74dce4407",
+  "rappid": "rappid:@howardh/training-quest:82af4432088ab4ded405ac070d229299830c042714c453a2ef9e568290f5070f",
+  "_migrated_from": "rappid:@howardh/training_quest_agent:765e8016aa6b73249de65caf82e55f478d4f75d67aac1d85f059180980f02426",
   "_migrated_from_all": [
-    "rappid:@howardh/training_quest_agent:9db2f3969e8728374bbc0e56f6be66154b2e1c062d646e5d88cc32a74dce4407"
+    "rappid:@howardh/training_quest_agent:9db2f3969e8728374bbc0e56f6be66154b2e1c062d646e5d88cc32a74dce4407",
+    "rappid:@howardh/training_quest_agent:765e8016aa6b73249de65caf82e55f478d4f75d67aac1d85f059180980f02426"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -32,9 +33,18 @@
   "sha256": "fc213fa839cf3f39312ba03c31e47e55af61dd636bbcd671d35ee48383c78ab5",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-howardh-training-quest",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__training_quest_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/training_quest_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/training_quest_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-training-quest/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-training-quest/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__training_quest_agent.py",
   "api_card_url": null,

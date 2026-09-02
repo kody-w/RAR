@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/build_an_account_research_brief",
+  "agent_bytes": 10614,
   "agent_file": "build_an_account_research_brief_agent.py",
   "agent_sha256": "203f228ed329756df46b97b2041763fdb0b20a46ff362a905e37b8d4194bfd9e",
+  "backup_agent": "build_an_account_research_brief_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BuildAnAccountResearchBrief",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/build-an-account-research-brief:6df3cbfa42cda79d64e08dcc46fca5a99c8d0c7080191e63f5e53e19340f6bda",
+  "rollback_agent_retained": true,
   "runtime_name": "BuildAnAccountResearchBrief",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24831,
+  "skill_sha256": "65d62ac2479b77691f17bff7cdf3972080f3efdc4c5fa420704d3a2aeb0a53cc",
   "tool_schema": {
     "properties": {
       "operation": {

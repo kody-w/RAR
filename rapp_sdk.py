@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 # =============================================================================
 # SECTION 1: CONSTANTS + CONFIG
@@ -489,6 +489,61 @@ def get_agent_info(name: str) -> dict | None:
         if agent.get("name") == name:
             return agent
     return None
+
+
+def fetch_skill_catalog() -> dict:
+    local = Path(__file__).resolve().parent / "scout" / "catalog" / "catalog.json"
+    if local.is_file():
+        try:
+            return json.loads(local.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            pass
+    return _fetch_json(
+        f"{RAW_BASE}/scout/catalog/catalog.json",
+        _get_token(),
+    ) or {"skills": []}
+
+
+def install_skill(name: str, output_dir: str = "skills") -> str:
+    catalog = fetch_skill_catalog()
+    skill = next(
+        (
+            item for item in catalog.get("skills", [])
+            if name in {item.get("identity"), item.get("skill_name")}
+        ),
+        None,
+    )
+    if skill is None:
+        raise ValueError(f"Skill '{name}' not found in Toasted catalog")
+    destination = Path(output_dir) / str(skill["skill_name"])
+    destination.mkdir(parents=True, exist_ok=True)
+    token = _get_token()
+    for item in skill.get("files", []):
+        relative = Path(str(item.get("path") or ""))
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError(f"Invalid skill path: {relative}")
+        request = urllib.request.Request(str(item["url"]))
+        if token:
+            request.add_header("Authorization", f"******")
+        with urllib.request.urlopen(request, timeout=30) as response:
+            data = response.read()
+        actual = hashlib.sha256(data).hexdigest()
+        if actual != item.get("sha256"):
+            raise RuntimeError(
+                f"{skill['skill_name']}/{relative} failed SHA-256"
+            )
+        target = destination / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        if relative.as_posix() in {
+            "scripts/run_agent.py",
+            "scripts/toast.py",
+        }:
+            target.chmod(0o755)
+    if not (destination / "SKILL.md").is_file():
+        raise RuntimeError("Toasted skill package has no SKILL.md")
+    track_download(str(skill["identity"]))
+    return str(destination)
 
 
 def install_agent(name: str, output_dir: str = "agents") -> str:
@@ -2130,9 +2185,21 @@ def main():
     p_search.add_argument("--json", action="store_true", help="Output JSON")
 
     # install
-    p_install = sub.add_parser("install", help="Download an agent from the registry")
+    p_install = sub.add_parser(
+        "install",
+        help="Install a Toasted skill (default) or rollback agent",
+    )
     p_install.add_argument("name", help="Agent name: @publisher/my-agent")
-    p_install.add_argument("--output-dir", default="agents", help="Output directory (default: agents)")
+    p_install.add_argument(
+        "--format",
+        choices=("skill", "agent"),
+        default="skill",
+        help="Artifact format (default: skill)",
+    )
+    p_install.add_argument(
+        "--output-dir",
+        help="Output directory (default: skills or agents by format)",
+    )
     p_install.add_argument("--json", action="store_true", help="Output JSON")
 
     # info
@@ -2288,7 +2355,14 @@ def main():
     # ---- install ----
     elif args.command == "install":
         try:
-            path = install_agent(args.name, args.output_dir)
+            output_dir = args.output_dir or (
+                "skills" if args.format == "skill" else "agents"
+            )
+            path = (
+                install_skill(args.name, output_dir)
+                if args.format == "skill"
+                else install_agent(args.name, output_dir)
+            )
             if use_json:
                 print(json.dumps({"installed": path}))
             else:

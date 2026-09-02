@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/opportunity_slip_risk_analysis",
+  "agent_bytes": 10619,
   "agent_file": "opportunity_slip_risk_analysis_agent.py",
   "agent_sha256": "5ec0ee169f8e9f50c7da6cdd75315345e3414593e81afd40688f53f8b7a0e5fa",
+  "backup_agent": "opportunity_slip_risk_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "OpportunitySlipRiskAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -87,8 +90,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/opportunity-slip-risk-analysis:618df9345bb26c159819b290f699bf4bcd7ee0e05692cbaed7547220e8f53909",
+  "rollback_agent_retained": true,
   "runtime_name": "OpportunitySlipRiskAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24647,
+  "skill_sha256": "c79d9131d2628e6825d9a25eacfde8e0824f8ce1f7e47ee9f7e5394d6fa9040f",
   "tool_schema": {
     "properties": {
       "operation": {

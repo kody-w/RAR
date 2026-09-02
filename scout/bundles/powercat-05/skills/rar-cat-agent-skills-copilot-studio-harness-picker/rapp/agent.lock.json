@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_harness_picker",
+  "agent_bytes": 9357,
   "agent_file": "copilot_studio_harness_picker_agent.py",
   "agent_sha256": "1517c780cf92757e91fb379b2b85ddf7d16ea2c1dac2057dae9a320cd351af59",
+  "backup_agent": "copilot_studio_harness_picker_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioHarnessPicker",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Liam O'Grady",
@@ -43,8 +46,16 @@
     ],
     "version": "2.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/copilot-studio-harness-picker:dddc680f2c77dd6a5b96ec3a7a0545176175820118004359a822910e5ffcb9af",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotStudioHarnessPicker",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22633,
+  "skill_sha256": "c5de35b8f56a244d060d8d2788507cb3aaaf1c8f087f199724d29daccc2ba2ff",
   "tool_schema": {
     "properties": {
       "constraints": {

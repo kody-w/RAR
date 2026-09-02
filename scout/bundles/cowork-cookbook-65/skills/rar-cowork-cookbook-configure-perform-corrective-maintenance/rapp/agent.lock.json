@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_perform_corrective_maintenance",
+  "agent_bytes": 10894,
   "agent_file": "configure_perform_corrective_maintenance_agent.py",
   "agent_sha256": "df5e82680e7ad84014431dea0d94d12df57c8e162a67743ed9e9edcedd1b7e02",
+  "backup_agent": "configure_perform_corrective_maintenance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigurePerformCorrectiveMaintenance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-perform-corrective-maintenance:fc78a1d9accaf5f293a82786f11205855b5136bddb202663f9b650da0069b06a",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigurePerformCorrectiveMaintenance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25044,
+  "skill_sha256": "618adcea70ae004748ba1430488601c5046ffa655d4b6780d7a6f89c49ac0b52",
   "tool_schema": {
     "properties": {
       "operation": {

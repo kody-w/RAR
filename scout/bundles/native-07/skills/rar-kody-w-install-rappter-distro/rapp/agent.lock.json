@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/install_rappter_distro_agent",
+  "agent_bytes": 37272,
   "agent_file": "install_rappter_distro_agent.py",
   "agent_sha256": "15ee1708f83dc55022bdf74d625b6b443d59f73371cd2f4c68100651c8f001d2",
+  "backup_agent": "install_rappter_distro_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "InstallDistroAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/install-rappter-distro:d3742eab0bbede4c8b141638baed48fe9bf150b8f68bc2da4c505433be9d8474",
+  "rollback_agent_retained": true,
   "runtime_name": "install_rappter_distro",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 59877,
+  "skill_sha256": "c0f11e2ca1be730a44632308d957bcb7290d16c15b9dbb36505a56f4a024c9c7",
   "tool_schema": {
     "properties": {},
     "required": [],

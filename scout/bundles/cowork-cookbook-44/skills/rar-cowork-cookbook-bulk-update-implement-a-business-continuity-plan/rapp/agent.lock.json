@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_implement_a_business_continuity_plan",
+  "agent_bytes": 10805,
   "agent_file": "bulk_update_implement_a_business_continuity_plan_agent.py",
   "agent_sha256": "e9dd7dfcce22a6a5ec768771107354fcedafbaaa6b0d040b5ef950f3ddc2c40a",
+  "backup_agent": "bulk_update_implement_a_business_continuity_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateImplementABusinessContinuityPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-implement-a-business-continuity-plan:06ba78ec2fa6e970263a55dab36dcc4497b177db149c0c7cef575425b9de2d9a",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateImplementABusinessContinuityPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25091,
+  "skill_sha256": "8d6efca7bb282d6990cc5eb36d3effd0348cbbc2f758d41ca22fe33682dda7fe",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,11 +1,15 @@
 {
   "agent": "@kody-w/github_agent_library_agent",
+  "agent_bytes": 44740,
   "agent_file": "github_agent_library_agent.py",
   "agent_sha256": "7d25b2d553356cfcb2f74921552b984d8e348ab56f20984fcda831eb65336923",
+  "backup_agent": "github_agent_library_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GitHubAgentLibraryManager",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.storage_factory"
+    "brainstem:utils.storage_factory",
+    "python:requests"
   ],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +31,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/github-agent-library:2eec5bacd5b2840381e96ab956bc7c3da6736342241846e7b2944e018af6b0c3",
+  "rollback_agent_retained": true,
   "runtime_name": "GitHubAgentLibrary",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 69217,
+  "skill_sha256": "7b5cace1906fc033b2781a257d7d26b4e1bf2a6718363018f448f7b4684d0160",
   "tool_schema": {
     "properties": {
       "action": {

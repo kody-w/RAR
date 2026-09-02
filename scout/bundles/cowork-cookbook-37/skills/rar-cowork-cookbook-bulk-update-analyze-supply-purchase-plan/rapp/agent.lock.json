@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_analyze_supply_purchase_plan",
+  "agent_bytes": 10666,
   "agent_file": "bulk_update_analyze_supply_purchase_plan_agent.py",
   "agent_sha256": "f3e50a43e6a11ad3c93ec5f3b70c7d400b84f1f539b6515ca431f71d4a556dde",
+  "backup_agent": "bulk_update_analyze_supply_purchase_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAnalyzeSupplyPurchasePlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-analyze-supply-purchase-plan:3e1fe8631410248d77bc574f92d61ba93dd600d22d1a44efc8872b7ead6e65e4",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAnalyzeSupplyPurchasePlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24812,
+  "skill_sha256": "d104607ffdb500aa31b270f245c35c970397201d9e7e16c286606f93d0c2aa44",
   "tool_schema": {
     "properties": {
       "operation": {

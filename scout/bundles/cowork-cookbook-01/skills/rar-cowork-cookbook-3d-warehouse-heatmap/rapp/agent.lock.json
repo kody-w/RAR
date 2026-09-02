@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/3d_warehouse_heatmap",
+  "agent_bytes": 10508,
   "agent_file": "3d_warehouse_heatmap_agent.py",
   "agent_sha256": "3e36cc9cc11ed1b71f7e15bdcb1719a39af69540d9cf5b0dc8ccb791e5096951",
+  "backup_agent": "3d_warehouse_heatmap_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Agent3dWarehouseHeatmap",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/3d-warehouse-heatmap:4674d408a4db9e95b3230b5ed1d1c5d01720b4bdeaecf1273e80be0748a66bc0",
+  "rollback_agent_retained": true,
   "runtime_name": "Agent3dWarehouseHeatmap",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24374,
+  "skill_sha256": "8e35472a0193de599c838cc2ccc5afa0e12d6fb5717ef1f6c8eeadb12a591b7a",
   "tool_schema": {
     "properties": {
       "operation": {

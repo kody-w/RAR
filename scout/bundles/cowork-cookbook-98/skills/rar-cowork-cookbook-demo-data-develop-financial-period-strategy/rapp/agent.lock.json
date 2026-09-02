@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_develop_financial_period_strategy",
+  "agent_bytes": 10649,
   "agent_file": "demo_data_develop_financial_period_strategy_agent.py",
   "agent_sha256": "f792f809cd025f62da0e42bb27ce13f907df0f6b989420c0f557b49523f4d00a",
+  "backup_agent": "demo_data_develop_financial_period_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDevelopFinancialPeriodStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-develop-financial-period-strategy:3952dc95c9702f7995e3f2a29b5ded1a845395b1942a115980a399f5dc80c372",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDevelopFinancialPeriodStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24825,
+  "skill_sha256": "f326439e63749f4f5325a43b92bc64f8fef3a1c9d4c081bbb84d929120380420",
   "tool_schema": {
     "properties": {
       "operation": {

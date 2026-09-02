@@ -3,11 +3,12 @@
   "id": "rapp__exec_brief_agent",
   "name": "Executive Brief",
   "rar_name": "@rapp/exec_brief_agent",
-  "rappid": "rappid:@rapp/exec_brief_agent:64838303ca3c7c1eb3f8a7683ab42f4850743c074448d5d17d523cced4124f3f",
-  "_migrated_from": "rappid:@rapp/exec_brief_agent:fb8f5cabfad968d4fd88958e5bb51bd3ad90a948be5fc8ca1b56caae654f0f90",
+  "rappid": "rappid:@rapp/exec-brief:1b4b08e8ec745ef486f00241dcd823712a969f023ec5c7354d87dd9b93a7831e",
+  "_migrated_from": "rappid:@rapp/exec_brief_agent:64838303ca3c7c1eb3f8a7683ab42f4850743c074448d5d17d523cced4124f3f",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/exec_brief_agent:4f2fea99af55fc820d350f71f91b4e12",
-    "rappid:@rapp/exec_brief_agent:fb8f5cabfad968d4fd88958e5bb51bd3ad90a948be5fc8ca1b56caae654f0f90"
+    "rappid:@rapp/exec_brief_agent:fb8f5cabfad968d4fd88958e5bb51bd3ad90a948be5fc8ca1b56caae654f0f90",
+    "rappid:@rapp/exec_brief_agent:64838303ca3c7c1eb3f8a7683ab42f4850743c074448d5d17d523cced4124f3f"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.2.2",
@@ -28,9 +29,18 @@
   "sha256": "b43fbf2ac29f381c41c6cd7e2a247ffb7a6143c579e095c4ab2d961bf26ef45d",
   "has_card": true,
   "added_at": "2026-04-27T21:23:24Z",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-exec-brief",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__exec_brief_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/exec_brief_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/exec_brief_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-exec-brief/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-exec-brief/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__exec_brief_agent.py",
   "api_card_url": null,

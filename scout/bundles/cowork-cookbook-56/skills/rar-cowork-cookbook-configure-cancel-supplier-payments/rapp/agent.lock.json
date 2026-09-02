@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_cancel_supplier_payments",
+  "agent_bytes": 10794,
   "agent_file": "configure_cancel_supplier_payments_agent.py",
   "agent_sha256": "3a3844d755cf906883e3ea09f5b725eab3f6a59995baa98b86757e8d0b291e69",
+  "backup_agent": "configure_cancel_supplier_payments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureCancelSupplierPayments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-cancel-supplier-payments:63c0e0fc05fd235865e8ab80e744995dfaa824108fa6ca6b0b98bd60218b9cd3",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureCancelSupplierPayments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24829,
+  "skill_sha256": "69e1e2813c336dfe4153c1cedb164771c6f43a27d1ac93c16275bca01d2c696e",
   "tool_schema": {
     "properties": {
       "operation": {

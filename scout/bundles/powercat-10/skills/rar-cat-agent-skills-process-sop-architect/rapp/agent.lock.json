@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/process_sop_architect",
+  "agent_bytes": 9137,
   "agent_file": "process_sop_architect_agent.py",
   "agent_sha256": "7b3e33d031c6c6388c76d4fe360cb24beb8092dd33e2d45b60ab5a93431d84a2",
+  "backup_agent": "process_sop_architect_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProcessSopArchitect",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Parag Dessai",
@@ -41,8 +44,16 @@
     ],
     "version": "2.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/process-sop-architect:90039aa2b73873b20c94c5efffac0aaeed960a0d3ec1150dcba2960857eb3b8e",
+  "rollback_agent_retained": true,
   "runtime_name": "ProcessSopArchitect",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22142,
+  "skill_sha256": "c4c5d262e6434e79224125a559f5440c811c072da5aec820901b585ec7b7e0a5",
   "tool_schema": {
     "properties": {
       "audience": {

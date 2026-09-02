@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_track_customer_managed_inventory_and_consigned_inventory",
+  "agent_bytes": 10954,
   "agent_file": "demo_data_track_customer_managed_inventory_and_consigned_inventory_agent.py",
   "agent_sha256": "98d8b7b128e14a39e7fe75b50b3ec6bf408e1c528b269cf262bbf13271384f1c",
+  "backup_agent": "demo_data_track_customer_managed_inventory_and_consigned_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataTrackCustomerManagedInventoryAndConsignedInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-track-customer-managed-inventory-and-consigned-inventory:5e0d950f1161b58105e411cbeef8a23faf951770d6be863813ac6a70ff6f7cd2",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataTrackCustomerManagedInventoryAndConsignedInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25555,
+  "skill_sha256": "cadeb387808addfb6f3fd4da6a888ef95ae81ac2a01dc4df9cdc181629e4dac4",
   "tool_schema": {
     "properties": {
       "operation": {

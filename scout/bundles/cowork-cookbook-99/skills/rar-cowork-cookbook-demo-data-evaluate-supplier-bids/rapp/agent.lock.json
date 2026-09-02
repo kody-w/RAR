@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_evaluate_supplier_bids",
+  "agent_bytes": 10509,
   "agent_file": "demo_data_evaluate_supplier_bids_agent.py",
   "agent_sha256": "f2c7c4c4451544048ef0732a5aef9cc156d52dd35f14ab4c3adde3f94aedfba9",
+  "backup_agent": "demo_data_evaluate_supplier_bids_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataEvaluateSupplierBids",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-evaluate-supplier-bids:8d294cba910bab291338101fd201d7b3752273b4bcae1a6258284aa74982ed8c",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataEvaluateSupplierBids",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24469,
+  "skill_sha256": "4c1a0a3b9f6c7438f4a226372be6bb06b38ccd570d17899fcb7c6cbd6994e3b0",
   "tool_schema": {
     "properties": {
       "operation": {

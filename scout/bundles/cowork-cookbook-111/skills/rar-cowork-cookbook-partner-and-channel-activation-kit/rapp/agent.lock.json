@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/partner_and_channel_activation_kit",
+  "agent_bytes": 10488,
   "agent_file": "partner_and_channel_activation_kit_agent.py",
   "agent_sha256": "671861042a9a2b2268b882baace5e9f62f131178ab5294e1722fe71b76c3bf36",
+  "backup_agent": "partner_and_channel_activation_kit_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PartnerAndChannelActivationKit",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/partner-and-channel-activation-kit:2e160485fca868e124521bea69cfc6d2886bd028fa6b9f7568636ee1c6d4984b",
+  "rollback_agent_retained": true,
   "runtime_name": "PartnerAndChannelActivationKit",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24535,
+  "skill_sha256": "fb1114c8cab586324752233d45272101f9e9495bda784b18b4a214da867aca2a",
   "tool_schema": {
     "properties": {
       "criteria": {

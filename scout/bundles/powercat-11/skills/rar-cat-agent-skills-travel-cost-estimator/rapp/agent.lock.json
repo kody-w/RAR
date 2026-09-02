@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/travel_cost_estimator",
+  "agent_bytes": 9594,
   "agent_file": "travel_cost_estimator_agent.py",
   "agent_sha256": "90fc9c773d6b9ea7d45ec20a0c13dde3ab6a6ad370d0c0915fd99ecbac14a9b9",
+  "backup_agent": "travel_cost_estimator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TravelCostEstimator",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Al Macey",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/travel-cost-estimator:853de0c3ccd717f292ec57d70545e4199f13c2b17db7a637bbdde07ceb5e2735",
+  "rollback_agent_retained": true,
   "runtime_name": "TravelCostEstimator",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23236,
+  "skill_sha256": "e1312410cf8942bbe29184f52d03a415910d17b89c164969dfa3cb2e33103740",
   "tool_schema": {
     "properties": {
       "criteria": {

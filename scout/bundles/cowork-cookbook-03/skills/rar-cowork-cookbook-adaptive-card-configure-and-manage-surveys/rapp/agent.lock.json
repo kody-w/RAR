@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_configure_and_manage_surveys",
+  "agent_bytes": 10723,
   "agent_file": "adaptive_card_configure_and_manage_surveys_agent.py",
   "agent_sha256": "07e38d68b1f98146076b934d580255d93cb10d5f619fccf58a08e862e757096c",
+  "backup_agent": "adaptive_card_configure_and_manage_surveys_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConfigureAndManageSurveys",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-configure-and-manage-surveys:a63fafd36f4e37bd376326953d9cecbacb2780c11931f3f70c1622fc529310ee",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardConfigureAndManageSurveys",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24906,
+  "skill_sha256": "b994cc190b6a4414b75bb23ccdc91b9f4b1e0af3258decf4c89e0f166dd43b2a",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/twin_me",
+  "agent_bytes": 33909,
   "agent_file": "twin_me_agent.py",
   "agent_sha256": "d3e0e553b21db6ba2323ebf1119a019bf44b898438fae6432284671359593896",
+  "backup_agent": "twin_me_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TwinMeAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -30,8 +33,16 @@
     ],
     "version": "1.0.3"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/twin-me:88f945122d4c5ce8768f04fbcdfa0b93ec287ddb03120fd3199f425c402db2a5",
+  "rollback_agent_retained": true,
   "runtime_name": "TwinMe",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 59109,
+  "skill_sha256": "6af14798daec2a68d85ac4fbe3b241132abb377ca86b3d58db2dc50d0d167966",
   "tool_schema": {
     "properties": {
       "action": {

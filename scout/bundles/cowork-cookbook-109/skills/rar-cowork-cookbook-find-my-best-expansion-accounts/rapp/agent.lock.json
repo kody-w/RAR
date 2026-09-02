@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/find_my_best_expansion_accounts",
+  "agent_bytes": 10390,
   "agent_file": "find_my_best_expansion_accounts_agent.py",
   "agent_sha256": "173643220b7c6bb75a7e6e15a60d7c7d621a4669c4c9c907769e2f2c97cc3e67",
+  "backup_agent": "find_my_best_expansion_accounts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FindMyBestExpansionAccounts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/find-my-best-expansion-accounts:ede3e817be6186237451d266cc3496eff766ef3877bb57d2a937a650ff7114c5",
+  "rollback_agent_retained": true,
   "runtime_name": "FindMyBestExpansionAccounts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24267,
+  "skill_sha256": "d84b968ae8f67678ea5395503466eb7835a66a76f5b905f038feefe52c41435d",
   "tool_schema": {
     "properties": {
       "operation": {

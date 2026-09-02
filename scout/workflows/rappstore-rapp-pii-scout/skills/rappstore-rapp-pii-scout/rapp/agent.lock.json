@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/pii-scout",
+  "agent_bytes": 8850,
   "agent_file": "pii_scout_agent.py",
   "agent_sha256": "fcdbbcc12a04f5f7aebc69d619895c2edf7872354ac03821c0665b7818683513",
+  "backup_agent": "pii_scout_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PiiScoutAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "example_call": {
@@ -26,8 +29,16 @@
     "trust": "community",
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/pii-scout:142266d387d2e31bded7277de1d74920886647cc47119e3b005fe7c85b368e81",
+  "rollback_agent_retained": true,
   "runtime_name": "PiiScout",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24097,
+  "skill_sha256": "aaf96156be7523b57c4ec6ffcfa51c06dbc1947ed9abb737cb8e08f644651dbf",
   "tool_schema": {
     "properties": {
       "max_findings": {

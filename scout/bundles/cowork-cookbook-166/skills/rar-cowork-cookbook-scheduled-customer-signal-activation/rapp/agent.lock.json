@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_customer_signal_activation",
+  "agent_bytes": 10511,
   "agent_file": "scheduled_customer_signal_activation_agent.py",
   "agent_sha256": "75398db71ae59b881207b842c5d6979a6de707f3f70789ddeba7e78f353c4242",
+  "backup_agent": "scheduled_customer_signal_activation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledCustomerSignalActivation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-customer-signal-activation:ceb482b29f53d101e24dfe25cf1dd7ee36d4978c04e00938a36be16caeb402f6",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledCustomerSignalActivation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24504,
+  "skill_sha256": "4610b8a83a363185a448280c937a063ea03b379f86960764dbf6d141dc4c64ca",
   "tool_schema": {
     "properties": {
       "operation": {

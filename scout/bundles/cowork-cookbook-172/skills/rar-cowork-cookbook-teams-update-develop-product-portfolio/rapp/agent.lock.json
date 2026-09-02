@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_develop_product_portfolio",
+  "agent_bytes": 10651,
   "agent_file": "teams_update_develop_product_portfolio_agent.py",
   "agent_sha256": "df7ab03785e875c83eb62d629df360cd1d4f44340dbde06a8976d26ae8cab3a7",
+  "backup_agent": "teams_update_develop_product_portfolio_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDevelopProductPortfolio",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-develop-product-portfolio:7bbed09a49f870dcff2608e85b7e3f593ecab53f8f6adebeb2733e24cb6d21c6",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDevelopProductPortfolio",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24697,
+  "skill_sha256": "2d0b65727491232ba34a09b810110c3b3f75d003fc64dc08e31f8cb33f1ccefe",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_configure_and_maintain_cloud_based_printing",
+  "agent_bytes": 10912,
   "agent_file": "adaptive_card_configure_and_maintain_cloud_based_printing_agent.py",
   "agent_sha256": "f9b2cbb310a77a5856940feac81977ac9c1b04a93e6a900008fbbcc51d90e312",
+  "backup_agent": "adaptive_card_configure_and_maintain_cloud_based_printing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConfigureAndMaintainCloudBasedPrinting",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-configure-and-maintain-cloud-based-printing:1fc66efa10668ba3dd5acf500b385d77c49f80fa2db21284968f33dbaa05d81b",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardConfigureAndMaintainCloudBasedPrinting",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25396,
+  "skill_sha256": "52a59b5b05abe501f4dcbf522ced3da5866e84f86e125ed727d24b9bf8087c62",
   "tool_schema": {
     "properties": {
       "operation": {

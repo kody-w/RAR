@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/whiteboard_to_infographic",
+  "agent_bytes": 9244,
   "agent_file": "whiteboard_to_infographic_agent.py",
   "agent_sha256": "b4b6836d3126428ba7cb3ba517721d886362be50d8ef10c3de03706a275330e5",
+  "backup_agent": "whiteboard_to_infographic_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WhiteboardToInfographic",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Andy Zehr",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/whiteboard-to-infographic:8085836a0d483347849aa37dc5e2407bd8400ea8d1529047e85cc1566160708e",
+  "rollback_agent_retained": true,
   "runtime_name": "WhiteboardToInfographic",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22431,
+  "skill_sha256": "4eda0cb09edbc98faae36f41bb7300f3f542b4568ed42f79d91e633919229931",
   "tool_schema": {
     "properties": {
       "audience": {

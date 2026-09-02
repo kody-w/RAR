@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_test_software_releases",
+  "agent_bytes": 10632,
   "agent_file": "teams_update_test_software_releases_agent.py",
   "agent_sha256": "31dbe431bc6adb83a17e6b9e39d2e9321de96dde6221d9f942a8c07cc9b7a9c4",
+  "backup_agent": "teams_update_test_software_releases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateTestSoftwareReleases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-test-software-releases:07db3a586c4ee2cccd868669acf4dcd303573b4f57b53b27cee3c52c091c7585",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateTestSoftwareReleases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24646,
+  "skill_sha256": "8a1f5ceff93153d8273aaeb4767cdad04597b3db31a733fad8e1e225088120f6",
   "tool_schema": {
     "properties": {
       "operation": {

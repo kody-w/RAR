@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_send_knowledge_article_to_customer",
+  "agent_bytes": 10735,
   "agent_file": "ppt_exec_send_knowledge_article_to_customer_agent.py",
   "agent_sha256": "6f5a336ca89555b6396a48e7f45035297e0be37cf133e7758bf8dd2f25a5b511",
+  "backup_agent": "ppt_exec_send_knowledge_article_to_customer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecSendKnowledgeArticleToCustomer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-send-knowledge-article-to-customer:859fb017cad4b19df997266314eedf7ca80c5ae11e876e355ac217ed24bbd8c3",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecSendKnowledgeArticleToCustomer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24959,
+  "skill_sha256": "76de5da500f2cd2090861dac253c78252a687aa06558934f44098bdd9ebbcd33",
   "tool_schema": {
     "properties": {
       "operation": {

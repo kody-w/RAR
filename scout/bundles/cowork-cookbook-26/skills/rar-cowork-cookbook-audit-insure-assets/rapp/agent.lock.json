@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_insure_assets",
+  "agent_bytes": 10523,
   "agent_file": "audit_insure_assets_agent.py",
   "agent_sha256": "27018a2610fcc6d3c6ef950ecc82e59653083c113a65236050bc08ec23dd4390",
+  "backup_agent": "audit_insure_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditInsureAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-insure-assets:9f94019152fb813d3f34524e46fd1b0ce5d5681560408868b8d9aca92bfcacd5",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditInsureAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24327,
+  "skill_sha256": "4e9563c4fd806e64530d2b829eddafd979d3f1f0b771cabee35d2716f3ea6588",
   "tool_schema": {
     "properties": {
       "criteria": {

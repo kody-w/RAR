@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/commons_show_agent",
+  "agent_bytes": 20798,
   "agent_file": "commons_show_agent.py",
   "agent_sha256": "c7b97c5fbe3611f175f3812831450a5e559a4fcee17cb46fdad27b30d26a49ee",
+  "backup_agent": "commons_show_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommonsShowAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/commons-show:eeb77bab52ef30981915aac44fc972a1b3849a30bc0d68eee997148ab3beb749",
+  "rollback_agent_retained": true,
   "runtime_name": "CommonsShow",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 46141,
+  "skill_sha256": "b4dd062dcb4b467d438bf84ab5204986b07bf740f7909911b11a5ec5054b285b",
   "tool_schema": {
     "properties": {
       "action": {

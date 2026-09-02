@@ -5,6 +5,13 @@
   "id": "8293c95b16934dab",
   "lastExecutedAt": null,
   "name": "Toaster",
+  "rapp": {
+    "backup_agent": "toaster_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-rapp-toaster"
+  },
   "schedule": {
     "days": [
       1,

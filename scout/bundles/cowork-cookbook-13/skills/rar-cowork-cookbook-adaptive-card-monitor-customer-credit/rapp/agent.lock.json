@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_monitor_customer_credit",
+  "agent_bytes": 10622,
   "agent_file": "adaptive_card_monitor_customer_credit_agent.py",
   "agent_sha256": "656745d70e09096030d91d860f4e01770380f08f58196858e1e34c96804617e0",
+  "backup_agent": "adaptive_card_monitor_customer_credit_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardMonitorCustomerCredit",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-monitor-customer-credit:292f03263180113ece2de0aa7731a9c1817fa0a4d3ce6706ba182d1e4753a708",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardMonitorCustomerCredit",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24690,
+  "skill_sha256": "7d404030fbd6185448be1a6bae5b79795d86d6026fa1ab5d95ab65bf9cc4bdc8",
   "tool_schema": {
     "properties": {
       "operation": {

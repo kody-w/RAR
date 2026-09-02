@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/forge_provenance_agent",
+  "agent_bytes": 11937,
   "agent_file": "forge_provenance_agent.py",
   "agent_sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69",
+  "backup_agent": "forge_provenance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ForgeProvenanceAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -29,8 +32,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/forge-provenance:a6a5363a88b7ce466218fb3b6dcee0c2cdee97ea397d32dbdb4a61c9f6d8075b",
+  "rollback_agent_retained": true,
   "runtime_name": "forge_provenance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 29575,
+  "skill_sha256": "bdefceef48284874af285af19aa97ee5b376e0a97dba780c110854bc48796c5a",
   "tool_schema": {
     "properties": {
       "action": {

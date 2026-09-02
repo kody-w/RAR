@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_accounts_receivable_strategy",
+  "agent_bytes": 10815,
   "agent_file": "scheduled_brief_define_accounts_receivable_strategy_agent.py",
   "agent_sha256": "7d096c0c00412b456a04d7bb9fef8c8e64b2470d71543e838e38b46e8d0ee915",
+  "backup_agent": "scheduled_brief_define_accounts_receivable_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineAccountsReceivableStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-accounts-receivable-strategy:4c939e526a314d3e8057102e51adf330eae6a81abb4c3d5b2d5d63435cdfe25d",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineAccountsReceivableStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25144,
+  "skill_sha256": "b1942c97db27349a56e9ac4326d0b86d0a1a1451135f9e428132060c6646b8a2",
   "tool_schema": {
     "properties": {
       "operation": {

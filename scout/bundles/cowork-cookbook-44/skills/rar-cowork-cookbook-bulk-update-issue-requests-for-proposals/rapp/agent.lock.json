@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_issue_requests_for_proposals",
+  "agent_bytes": 10677,
   "agent_file": "bulk_update_issue_requests_for_proposals_agent.py",
   "agent_sha256": "3aaf5e19007e42bcf2c8f36d7d32a51590bec80831e57de756ed95608ec3d0cb",
+  "backup_agent": "bulk_update_issue_requests_for_proposals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateIssueRequestsForProposals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-issue-requests-for-proposals:00a7cf202681c4b335a66ec29601895415c5c38e7cd5d9dd7d15efbc58d2f9d3",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateIssueRequestsForProposals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24807,
+  "skill_sha256": "5ce93b4c4b6e8b751875337cba9d383aff2ca5fe0843711dbb3c1cef9724122e",
   "tool_schema": {
     "properties": {
       "operation": {

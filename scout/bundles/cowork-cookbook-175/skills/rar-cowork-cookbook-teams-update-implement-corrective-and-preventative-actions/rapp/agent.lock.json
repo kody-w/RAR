@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_implement_corrective_and_preventative_actions",
+  "agent_bytes": 10903,
   "agent_file": "teams_update_implement_corrective_and_preventative_actions_agent.py",
   "agent_sha256": "8d7e5168551170eb6ca849571a7f6fbb8bc08565beea34a085738bb5063bc46f",
+  "backup_agent": "teams_update_implement_corrective_and_preventative_actions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateImplementCorrectiveAndPreventativeActions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-implement-corrective-and-preventative-actions:bc2397aa2a0fc26ff74c636fccfc885fc1e73152007b67f548bb48cdd2105899",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateImplementCorrectiveAndPreventativeActions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25312,
+  "skill_sha256": "3aab8e98b81b868ca725a0c5173b0a6a7a39509a7e7ab8414ee8218afc26401e",
   "tool_schema": {
     "properties": {
       "operation": {

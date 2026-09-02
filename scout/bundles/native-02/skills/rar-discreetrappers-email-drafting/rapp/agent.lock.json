@@ -1,10 +1,15 @@
 {
   "agent": "@discreetRappers/email_drafting_agent",
+  "agent_bytes": 6151,
   "agent_file": "email_drafting_agent.py",
   "agent_sha256": "b068d41da7ee04fa27d8ff0b267977914aab1eae186017ad47572e2b2c6cb399",
+  "backup_agent": "email_drafting_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EmailDraftingAgent",
-  "host_dependencies": [],
+  "grail_file": "SKILL.md",
+  "host_dependencies": [
+    "python:requests"
+  ],
   "manifest": {
     "author": "Bill Whalen",
     "category": "integrations",
@@ -25,8 +30,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/email-drafting:b30dd658d5172a7468941edd1136c25e460b255386e50390322fcb870c5b17df",
+  "rollback_agent_retained": true,
   "runtime_name": "EmailDrafting",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 16119,
+  "skill_sha256": "f65d2117d22b254c980369cff39c91b86e47fde6ddf4213774315d99819118f2",
   "tool_schema": {
     "properties": {
       "attachments": {

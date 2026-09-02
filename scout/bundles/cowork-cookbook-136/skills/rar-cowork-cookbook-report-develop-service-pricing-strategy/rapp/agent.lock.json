@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_develop_service_pricing_strategy",
+  "agent_bytes": 10458,
   "agent_file": "report_develop_service_pricing_strategy_agent.py",
   "agent_sha256": "a34845adfa4ef750233b5938f40dd85e9f15e835566fe9e30afd55f00b12782a",
+  "backup_agent": "report_develop_service_pricing_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDevelopServicePricingStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-develop-service-pricing-strategy:7371530c2c8a0ab2542d395efd1b59813ed10f4d4e225974fa38c2349acf763a",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDevelopServicePricingStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24443,
+  "skill_sha256": "72d080c9bfb0108c6629b3fef72c3901e906fb4f72779a587dd19b7ae67caed4",
   "tool_schema": {
     "properties": {
       "audience": {

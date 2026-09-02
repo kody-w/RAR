@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/pull_whats_relevant_for_another_team",
+  "agent_bytes": 10496,
   "agent_file": "pull_whats_relevant_for_another_team_agent.py",
   "agent_sha256": "afb7697ac50f79d1fbf2651299100ca62f4271f8acd335abdd79fab418fa4995",
+  "backup_agent": "pull_whats_relevant_for_another_team_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PullWhatsRelevantForAnotherTeam",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -72,8 +75,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/pull-whats-relevant-for-another-team:f56a91b081bdd3feeefa23898db7f597b1f76cd3c1ce8fdca2e56364c50aea6e",
+  "rollback_agent_retained": true,
   "runtime_name": "PullWhatsRelevantForAnotherTeam",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24575,
+  "skill_sha256": "3ad1e373b700cafb177c2887287b7cdd182703be060a1cf0e3f66ed7152ca85b",
   "tool_schema": {
     "properties": {
       "operation": {

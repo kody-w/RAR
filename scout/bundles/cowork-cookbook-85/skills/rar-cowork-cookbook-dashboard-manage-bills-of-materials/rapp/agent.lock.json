@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_bills_of_materials",
+  "agent_bytes": 10640,
   "agent_file": "dashboard_manage_bills_of_materials_agent.py",
   "agent_sha256": "30f62c1364f1e02176a0896dfafe14b3b820d5ead5173e3d7cbe73be499e0a53",
+  "backup_agent": "dashboard_manage_bills_of_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageBillsOfMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-bills-of-materials:4ef6f07b97d1cf9d4e3f06c5b6eb91498c3d37b5283a636648a7329d10a34034",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageBillsOfMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24729,
+  "skill_sha256": "983c4f988db4c817bf3110865a20fe80dc4dc674cadc7b7380d2708fd6115aaf",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_nurture_opportunities_and_finalize_the_sale",
+  "agent_bytes": 10887,
   "agent_file": "audit_nurture_opportunities_and_finalize_the_sale_agent.py",
   "agent_sha256": "34fcf9159ef5fbf0cf17f634d81a9ee43be45e816d10c7fe753eaf49395a923b",
+  "backup_agent": "audit_nurture_opportunities_and_finalize_the_sale_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditNurtureOpportunitiesAndFinalizeTheSale",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-nurture-opportunities-and-finalize-the-sale:792d5ef6bc6a92275592d894ebe3a730dea4ab3128bdbfadc054c5b6e7cb3592",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditNurtureOpportunitiesAndFinalizeTheSale",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25304,
+  "skill_sha256": "a1f4a071d185e46c2f9ba922524474e8e8af4036d03028e87f0c4877dc5e1a87",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -3,10 +3,11 @@
   "id": "rapp__hacker_news",
   "name": "Hacker News",
   "rar_name": "@rapp/hacker_news",
-  "rappid": "rappid:@rapp/hacker_news:55e0087a15d98b87ee58b3bf8683d301730cfebcfe64f9fbe6491d76ddee3799",
-  "_migrated_from": "rappid:v2:agent:@rapp/hacker_news:51dd9c04dd7eb5a0701c5008a3797945",
+  "rappid": "rappid:@rapp/hacker-news:f18b6f34757505ebdd1121674def882671233d8f6456c875c75ab323db3acf3a",
+  "_migrated_from": "rappid:@rapp/hacker_news:55e0087a15d98b87ee58b3bf8683d301730cfebcfe64f9fbe6491d76ddee3799",
   "_migrated_from_all": [
-    "rappid:v2:agent:@rapp/hacker_news:51dd9c04dd7eb5a0701c5008a3797945"
+    "rappid:v2:agent:@rapp/hacker_news:51dd9c04dd7eb5a0701c5008a3797945",
+    "rappid:@rapp/hacker_news:55e0087a15d98b87ee58b3bf8683d301730cfebcfe64f9fbe6491d76ddee3799"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
@@ -27,9 +28,18 @@
   "sha256": "51dd9c04dd7eb5a0701c5008a3797945b6188eb39d7de93b2a0467e03e1049a2",
   "has_card": true,
   "added_at": "2026-05-02T14:14:24-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-hacker-news",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__hacker_news.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/hacker_news_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/hacker_news_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-hacker-news/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-hacker-news/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__hacker_news.py",
   "api_card_url": null,

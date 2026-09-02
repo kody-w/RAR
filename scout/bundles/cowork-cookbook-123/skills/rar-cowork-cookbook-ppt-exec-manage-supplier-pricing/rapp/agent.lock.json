@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_manage_supplier_pricing",
+  "agent_bytes": 10583,
   "agent_file": "ppt_exec_manage_supplier_pricing_agent.py",
   "agent_sha256": "6402a017d03f78f78eed38e3ae82a288e019dfd4eaeecd9bb8b989f62affc55c",
+  "backup_agent": "ppt_exec_manage_supplier_pricing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecManageSupplierPricing",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-manage-supplier-pricing:5447b09ef510cda943131d6b72021e59b8f720a1e57a2e5d62ac9e276cad20f2",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecManageSupplierPricing",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24557,
+  "skill_sha256": "5a879d7a0c392e7dcfbe0e886aa0cc6ae8ec10aa11316f3b470d644971594627",
   "tool_schema": {
     "properties": {
       "operation": {

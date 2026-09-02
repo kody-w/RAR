@@ -1,11 +1,14 @@
 {
   "agent": "@kody-w/agent_workbench",
+  "agent_bytes": 29865,
   "agent_file": "agent_workbench_agent.py",
   "agent_sha256": "00b19b2e98b854333dbf7d89d74980f3e54c4f5753f31ac9039cf8f8ed30e2b4",
+  "backup_agent": "agent_workbench_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentWorkbenchAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.storage_factory"
+    "brainstem:utils.storage_factory"
   ],
   "manifest": {
     "author": "RAPP Core Team",
@@ -29,8 +32,16 @@
     ],
     "version": "1.1.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/agent-workbench:a14d527025538954d7fde085060c3a05ec1ab3cebbac89abb3090dc8fa76f23a",
+  "rollback_agent_retained": true,
   "runtime_name": "AgentWorkbench",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 47655,
+  "skill_sha256": "e46897b78a68d7ab9dda2d6034b015f0f9cae587ce24820daeee6f58ba438f20",
   "tool_schema": {
     "properties": {
       "action": {

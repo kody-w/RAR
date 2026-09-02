@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_migrate_to_new_versions_of_software",
+  "agent_bytes": 10811,
   "agent_file": "audit_migrate_to_new_versions_of_software_agent.py",
   "agent_sha256": "d83974780ea585c6fbcf4dbba6d93a79be5d9d0f9dedc613701774dfeef9eda0",
+  "backup_agent": "audit_migrate_to_new_versions_of_software_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditMigrateToNewVersionsOfSoftware",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-migrate-to-new-versions-of-software:65a538f29164840ab70a07be2386182b56a25dd8d69f5b6e73cd653f6c883aeb",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditMigrateToNewVersionsOfSoftware",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25096,
+  "skill_sha256": "81be375e2ef026a4f3d1bbacc996337d5e72dda7a5d8d67cc095b99b484951c9",
   "tool_schema": {
     "properties": {
       "criteria": {

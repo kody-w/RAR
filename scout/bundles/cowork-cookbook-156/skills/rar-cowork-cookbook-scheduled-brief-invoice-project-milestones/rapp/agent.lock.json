@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_invoice_project_milestones",
+  "agent_bytes": 10720,
   "agent_file": "scheduled_brief_invoice_project_milestones_agent.py",
   "agent_sha256": "5422e3967a0a0076f1995e868c745135151ef0d78fc49ae8aae8318606c2f7f3",
+  "backup_agent": "scheduled_brief_invoice_project_milestones_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefInvoiceProjectMilestones",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-invoice-project-milestones:abd04476f2406a5633a5f1e00de585a3fb54d3632096de0612bf1012b6bd1a06",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefInvoiceProjectMilestones",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24858,
+  "skill_sha256": "3640df3c39d600429d24e019b17f28ea8f7536d92eb221acad1a19b001790b74",
   "tool_schema": {
     "properties": {
       "operation": {

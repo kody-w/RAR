@@ -3,11 +3,12 @@
   "id": "rapp__store_navigator_agent",
   "name": "StoreNavigator",
   "rar_name": "@rapp/store_navigator_agent",
-  "rappid": "rappid:@rapp/store_navigator_agent:7e677fb9809a17c1acd0706b03ffd65f6449e733455714b256a6b1e671e407e1",
-  "_migrated_from": "rappid:@rapp/store_navigator_agent:ef258a0d18366eb740ecb26e6b348108be58872eab9b9a2480f33491a858445c",
+  "rappid": "rappid:@rapp/store-navigator:9898dce14de8837f7e6813cbe4368793f00c8dac3fa7b76eeb4e7e35ebdf20ec",
+  "_migrated_from": "rappid:@rapp/store_navigator_agent:7e677fb9809a17c1acd0706b03ffd65f6449e733455714b256a6b1e671e407e1",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/store_navigator_agent:be39e9015e595c226b93e3ce44b76fd5",
-    "rappid:@rapp/store_navigator_agent:ef258a0d18366eb740ecb26e6b348108be58872eab9b9a2480f33491a858445c"
+    "rappid:@rapp/store_navigator_agent:ef258a0d18366eb740ecb26e6b348108be58872eab9b9a2480f33491a858445c",
+    "rappid:@rapp/store_navigator_agent:7e677fb9809a17c1acd0706b03ffd65f6449e733455714b256a6b1e671e407e1"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.1.4",
@@ -32,9 +33,18 @@
   "sha256": "d66b3003e0a562b0af69dfa070eae0a4ca6dc97cb53438b9e636c2ffa55214ef",
   "has_card": true,
   "added_at": "2026-04-27T21:52:47Z",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-store-navigator",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__store_navigator_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-store-navigator/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-store-navigator/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__store_navigator_agent.py",
   "api_card_url": null,

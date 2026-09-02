@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_conduct_a_disaster_risk_assessment",
+  "agent_bytes": 10789,
   "agent_file": "teams_update_conduct_a_disaster_risk_assessment_agent.py",
   "agent_sha256": "54dd62740aacb4924e41eba3cc5a799e706b5d714c8a4f13439321d2d7607f76",
+  "backup_agent": "teams_update_conduct_a_disaster_risk_assessment_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConductADisasterRiskAssessment",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-conduct-a-disaster-risk-assessment:0891f8f60b41e1a030a77d10f72796e0ddf33048d101159e506b0bf837f672f1",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateConductADisasterRiskAssessment",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25051,
+  "skill_sha256": "5a988b4a7c5b0409f4d601fd3923731bcccfc4d055577af8c08c2d06dcd4ef3f",
   "tool_schema": {
     "properties": {
       "operation": {

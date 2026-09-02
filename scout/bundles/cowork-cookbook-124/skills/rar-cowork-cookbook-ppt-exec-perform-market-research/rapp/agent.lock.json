@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_perform_market_research",
+  "agent_bytes": 10594,
   "agent_file": "ppt_exec_perform_market_research_agent.py",
   "agent_sha256": "a0cdecacd2e5f642c47ab1d19c1166d7f9ea46d79ce49b78fe399df262654de1",
+  "backup_agent": "ppt_exec_perform_market_research_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecPerformMarketResearch",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-perform-market-research:7123a2c0ad5ed56af0b23119620563041423dfceecb9e9f112eeaf1e59896d89",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecPerformMarketResearch",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24592,
+  "skill_sha256": "3f09059aee00611cf4ea97c2a0ea7d5d0b85dc742972185961e5a12e88e05d42",
   "tool_schema": {
     "properties": {
       "operation": {

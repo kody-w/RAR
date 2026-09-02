@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_troubleshoot_reported_incidents",
+  "agent_bytes": 10759,
   "agent_file": "audit_troubleshoot_reported_incidents_agent.py",
   "agent_sha256": "46e44fb0e00692e7112f42c3facbd4cb5e5b0a01b605952f543ee0bc5f2b4303",
+  "backup_agent": "audit_troubleshoot_reported_incidents_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditTroubleshootReportedIncidents",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-troubleshoot-reported-incidents:196aff1d9eccf2f8178b849de4c3737a9d1c6ac643d0accb5d4999a85b6445b0",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditTroubleshootReportedIncidents",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24912,
+  "skill_sha256": "d625ef1ba5d9b4c6693dc56027b4cdd2289650f2789a8501b1112eb7bb0ba19f",
   "tool_schema": {
     "properties": {
       "criteria": {

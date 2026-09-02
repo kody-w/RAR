@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_research_and_development_approach",
+  "agent_bytes": 10852,
   "agent_file": "teams_update_define_research_and_development_approach_agent.py",
   "agent_sha256": "501188a747a77adfadc933cb1b2e30e043786866a0a43a1020e771a361991ec3",
+  "backup_agent": "teams_update_define_research_and_development_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineResearchAndDevelopmentApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-research-and-development-approach:fefad8f4027a0730d10187c77d3f387764c4455da828551035537ab64a2a6844",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineResearchAndDevelopmentApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25236,
+  "skill_sha256": "a6a00329f49918a5bd565fc7a1d90e28532705dd73caf2978c52f515f8e85e7b",
   "tool_schema": {
     "properties": {
       "operation": {

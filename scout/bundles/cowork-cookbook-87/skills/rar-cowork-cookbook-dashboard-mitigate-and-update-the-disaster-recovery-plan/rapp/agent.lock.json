@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_mitigate_and_update_the_disaster_recovery_plan",
+  "agent_bytes": 10935,
   "agent_file": "dashboard_mitigate_and_update_the_disaster_recovery_plan_agent.py",
   "agent_sha256": "f7ba9923639ed1d3346e2dffda6a8e5463c7733c14fd3f7ae3f0354aaae2d342",
+  "backup_agent": "dashboard_mitigate_and_update_the_disaster_recovery_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMitigateAndUpdateTheDisasterRecoveryPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-mitigate-and-update-the-disaster-recovery-plan:5e3b661a9f48705b27c8f8fbc79455ba894d1b0c56934882bcaa2bda903f1b03",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardMitigateAndUpdateTheDisasterRecoveryPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25464,
+  "skill_sha256": "1726babf4376d51496c1c90529b116c00dabd90f974a8a1b3725d155482c80bb",
   "tool_schema": {
     "properties": {
       "operation": {

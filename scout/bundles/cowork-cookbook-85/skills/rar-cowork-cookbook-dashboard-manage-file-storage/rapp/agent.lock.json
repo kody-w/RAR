@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_file_storage",
+  "agent_bytes": 10589,
   "agent_file": "dashboard_manage_file_storage_agent.py",
   "agent_sha256": "0d500657c54764d0701f667ba6055927547991740eb160900263b03404248741",
+  "backup_agent": "dashboard_manage_file_storage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageFileStorage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-file-storage:b897ae08aea09b9b7aceb404612e35dcbc08e206f34496bd25458a2da4907034",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageFileStorage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24561,
+  "skill_sha256": "b77b8d27a4c7099becb66cd3788ff1843591c852f823703b1b89750258f41bc1",
   "tool_schema": {
     "properties": {
       "operation": {

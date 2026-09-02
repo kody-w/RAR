@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_record_tax_commitments",
+  "agent_bytes": 10592,
   "agent_file": "ppt_exec_record_tax_commitments_agent.py",
   "agent_sha256": "b14bba12dafe2c8fad1ae6978500c53bdadb59aa7773ce3e130e81357c185af4",
+  "backup_agent": "ppt_exec_record_tax_commitments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecRecordTaxCommitments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-record-tax-commitments:93be03b3f16fcfdd2032c49f4d1fc79b90374c9c9c6349260e60561def83fdc5",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecRecordTaxCommitments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24546,
+  "skill_sha256": "b4f2993823fc2ba77a89bbccf48b7dcb642e6bd031514fbbf3a4b8b1d02c6644",
   "tool_schema": {
     "properties": {
       "operation": {

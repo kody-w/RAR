@@ -3,10 +3,11 @@
   "id": "rapp__egg_hatcher",
   "name": "EggHatcher",
   "rar_name": "@rapp/egg_hatcher",
-  "rappid": "rappid:@rapp/egg_hatcher:ce60d06a3865bddc3cb826ead0867d2be4b5811ce39d654693b4b9048aea0ee6",
-  "_migrated_from": "rappid:@rapp/egg_hatcher:30fa90dcb3f58852a3317d95d505e3308c9026277b6a7fa3ab1b6468a2aea526",
+  "rappid": "rappid:@rapp/egg-hatcher:f95763924a0732ac22a4ca9128b5270be8ee82e6cd4ba96c939d04d5736c4f7f",
+  "_migrated_from": "rappid:@rapp/egg_hatcher:ce60d06a3865bddc3cb826ead0867d2be4b5811ce39d654693b4b9048aea0ee6",
   "_migrated_from_all": [
-    "rappid:@rapp/egg_hatcher:30fa90dcb3f58852a3317d95d505e3308c9026277b6a7fa3ab1b6468a2aea526"
+    "rappid:@rapp/egg_hatcher:30fa90dcb3f58852a3317d95d505e3308c9026277b6a7fa3ab1b6468a2aea526",
+    "rappid:@rapp/egg_hatcher:ce60d06a3865bddc3cb826ead0867d2be4b5811ce39d654693b4b9048aea0ee6"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.1.1",
@@ -32,9 +33,18 @@
   "sha256": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f",
   "has_card": true,
   "added_at": "2026-05-11T10:53:36-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-egg-hatcher",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__egg_hatcher.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-egg-hatcher/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-egg-hatcher/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__egg_hatcher.py",
   "api_card_url": null,

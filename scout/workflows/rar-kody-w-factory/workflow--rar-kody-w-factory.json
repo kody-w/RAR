@@ -5,6 +5,13 @@
   "id": "b336ba0a68ce26e3",
   "lastExecutedAt": null,
   "name": "RAPP to Copilot Studio Factory",
+  "rapp": {
+    "backup_agent": "factory_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-kody-w-factory"
+  },
   "schedule": {
     "days": [
       1,

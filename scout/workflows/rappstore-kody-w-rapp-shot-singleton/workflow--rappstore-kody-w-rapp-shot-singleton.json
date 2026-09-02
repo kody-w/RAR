@@ -5,6 +5,13 @@
   "id": "3ab838db23cd6cbf",
   "lastExecutedAt": null,
   "name": "RAPP Shot",
+  "rapp": {
+    "backup_agent": "rapp_shot_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-kody-w-rapp-shot-singleton"
+  },
   "schedule": {
     "days": [
       1,

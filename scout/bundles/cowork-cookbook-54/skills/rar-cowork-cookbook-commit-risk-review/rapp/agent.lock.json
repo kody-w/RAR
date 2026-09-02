@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/commit_risk_review",
+  "agent_bytes": 10341,
   "agent_file": "commit_risk_review_agent.py",
   "agent_sha256": "bb8db9f9005cf9b28de54a16099aea18952b9e177b398c146ed22740b93aa325",
+  "backup_agent": "commit_risk_review_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommitRiskReview",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/commit-risk-review:227d648ae5822906eed639edf3e9989e68531f70c059dacf750c91acde72bb5b",
+  "rollback_agent_retained": true,
   "runtime_name": "CommitRiskReview",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24122,
+  "skill_sha256": "ba634d91751b55e0236c28af73ceed4c5f1c7bacee054b40486f9750497b5460",
   "tool_schema": {
     "properties": {
       "criteria": {

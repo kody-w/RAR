@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_delete_users",
+  "agent_bytes": 10528,
   "agent_file": "adaptive_card_delete_users_agent.py",
   "agent_sha256": "22d86ca4608592c0bc0b4513ad661265b4b2497522ec00d08d43e39f189103b1",
+  "backup_agent": "adaptive_card_delete_users_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDeleteUsers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-delete-users:c069e5feeee11234badd99c5a36e64a751606765d957a38f2b90b55acc5cbf41",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDeleteUsers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24403,
+  "skill_sha256": "0a8a773bc78d6bd9fb4095be8489689ffc5c42858546a9b57da1cb42e30d2150",
   "tool_schema": {
     "properties": {
       "operation": {

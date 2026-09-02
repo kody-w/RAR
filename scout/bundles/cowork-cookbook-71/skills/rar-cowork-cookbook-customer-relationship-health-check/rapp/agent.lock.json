@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/customer_relationship_health_check",
+  "agent_bytes": 10729,
   "agent_file": "customer_relationship_health_check_agent.py",
   "agent_sha256": "8b42b6eb45afa21932d15734e422dd0316e3e50f7dc2fb2b525541a4c7acdabb",
+  "backup_agent": "customer_relationship_health_check_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CustomerRelationshipHealthCheck",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -87,8 +90,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/customer-relationship-health-check:3dcbe65b7e8087d5393f5d52a8928a6952cdb13cea42c747135385db451aa039",
+  "rollback_agent_retained": true,
   "runtime_name": "CustomerRelationshipHealthCheck",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24900,
+  "skill_sha256": "66120793af8938e9e1d3655415ef7686cf6e32f63410eb345dacf74e29c1eba0",
   "tool_schema": {
     "properties": {
       "criteria": {

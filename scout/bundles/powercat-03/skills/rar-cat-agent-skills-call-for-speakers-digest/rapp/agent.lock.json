@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/call_for_speakers_digest",
+  "agent_bytes": 9823,
   "agent_file": "call_for_speakers_digest_agent.py",
   "agent_sha256": "a3e15016b7641d3e6b947d84b323b4343bdb427effe8afb6d280f09d53a39511",
+  "backup_agent": "call_for_speakers_digest_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CallForSpeakersDigest",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Michael Heath",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/call-for-speakers-digest:5f9a8465fab4f9f7fe9fef630ae182cb595c9ddea5e8e7047c3774eecf2c0367",
+  "rollback_agent_retained": true,
   "runtime_name": "CallForSpeakersDigest",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23824,
+  "skill_sha256": "5ff27beef170ccdb5a037ebaab398414c9523c9512718cc07a93a402f2e113fb",
   "tool_schema": {
     "properties": {
       "operation": {

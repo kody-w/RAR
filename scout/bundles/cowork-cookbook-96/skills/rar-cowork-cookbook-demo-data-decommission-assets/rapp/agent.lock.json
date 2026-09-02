@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_decommission_assets",
+  "agent_bytes": 10472,
   "agent_file": "demo_data_decommission_assets_agent.py",
   "agent_sha256": "8776a17318a7ed46872d59d14eb7e06c689a4775fe89c7011556202d5e1a7b79",
+  "backup_agent": "demo_data_decommission_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDecommissionAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-decommission-assets:0dba96e79d227ba69695e7fbb307fe077b83e9787882309732b22f6b8df74e1a",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDecommissionAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24352,
+  "skill_sha256": "16a55e05cad4425426f1553cea1294fa13eba746d97b731bf17bd8f9a0d082cc",
   "tool_schema": {
     "properties": {
       "operation": {

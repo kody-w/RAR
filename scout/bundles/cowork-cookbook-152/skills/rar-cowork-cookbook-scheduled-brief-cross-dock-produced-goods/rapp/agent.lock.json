@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_cross_dock_produced_goods",
+  "agent_bytes": 10713,
   "agent_file": "scheduled_brief_cross_dock_produced_goods_agent.py",
   "agent_sha256": "d4404811302058a61c14031f21f418a4ca56118b792978fffb5d6a94b587948c",
+  "backup_agent": "scheduled_brief_cross_dock_produced_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefCrossDockProducedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-cross-dock-produced-goods:66880ec96a5d11431ba388bb1da3facb6e57cf33d85cb6a59354d924722a4232",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefCrossDockProducedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24867,
+  "skill_sha256": "f2e8c54766164b7841bb92da1f956bb7013d9d83018c22b8e54c2e34881b456b",
   "tool_schema": {
     "properties": {
       "operation": {

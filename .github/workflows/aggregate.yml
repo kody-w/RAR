@@ -143,6 +143,7 @@ jobs:
         run: |
           python build_registry.py
           python scripts/check_url_stability.py --update
+          python scripts/build_scout_exports.py --mint-skill-identities
           python scripts/build_pokedex_api.py
           python scripts/build_static_api.py
 
@@ -211,6 +212,7 @@ jobs:
           agents/@rapp/learn_new_agent.py agents/@rapter/rapp_dogg_agent.py \
           agents/@cat-agent-skills agents/@cowork-cookbook \
           state/agent_lifecycle.json state/receipts \
+          state/scout_skill_identities.json rapp_skill.md rapp_skills.md scout/ \
           state/published_paths.json registry.json manifest.json \
           api/v1/catalog.json api/v1/taxonomy.json api/v1/match.json \
           api/v1/marketplaces.json api/v1/status.json api/v1/badge.json \
@@ -236,11 +238,14 @@ jobs:
         run: |
           set -euo pipefail
           git pull --ff-only origin main
-          python scripts/build_scout_exports.py
-          python -m pytest -q tests/test_scout_rapp_skill.py tests/test_rapp_agent_converter.py
+          python scripts/build_scout_exports.py --mint-skill-identities
+          python scripts/build_pokedex_api.py
+          python scripts/build_static_api.py
+          python scripts/build_front_page.py
+          python -m pytest -q tests/test_scout_rapp_skill.py tests/test_rapp_agent_converter.py tests/test_skill_first_surfaces.py
           git config user.name "RAPP Scout Export Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
-          git add rapp_skill.md rapp_skills.md scout/
+          git add rapp_skill.md rapp_skills.md scout/ state/scout_skill_identities.json api/v1/ manifest.json
           if ! git diff --cached --quiet; then
             git commit -m "Build Scout skills and workflows [skip ci]"
             git push origin main

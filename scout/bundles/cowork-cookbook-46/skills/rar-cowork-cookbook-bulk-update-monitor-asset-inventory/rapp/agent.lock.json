@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_monitor_asset_inventory",
+  "agent_bytes": 10611,
   "agent_file": "bulk_update_monitor_asset_inventory_agent.py",
   "agent_sha256": "9589892e86148575ae33a71eac7a3aadafdf04e9972052f55a028393560684f8",
+  "backup_agent": "bulk_update_monitor_asset_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateMonitorAssetInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-monitor-asset-inventory:a1364fdc2924f8ea168cdbc9a0e0db0697d5814db0129f1a97dd25756214b156",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateMonitorAssetInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24643,
+  "skill_sha256": "85b6ca005f4383a18c3d0ca5fb5f26336ea53b19afbd2d78bcde9b12e909beb5",
   "tool_schema": {
     "properties": {
       "operation": {

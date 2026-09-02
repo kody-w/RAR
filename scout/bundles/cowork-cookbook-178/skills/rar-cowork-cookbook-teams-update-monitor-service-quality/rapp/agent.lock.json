@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_monitor_service_quality",
+  "agent_bytes": 10636,
   "agent_file": "teams_update_monitor_service_quality_agent.py",
   "agent_sha256": "7faf13f3eb52ea74afe1234fadeacea603e66b30758ab8145b94f2e7be15ae79",
+  "backup_agent": "teams_update_monitor_service_quality_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateMonitorServiceQuality",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-monitor-service-quality:ee8b518d568a547383588a8ecbf4e1aa2a275db091d1f0b178c2cc91c4956786",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateMonitorServiceQuality",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24662,
+  "skill_sha256": "60eda53e718af7c5c85e2d1aec9af1b794dacfeead448c260236984d106f223f",
   "tool_schema": {
     "properties": {
       "operation": {

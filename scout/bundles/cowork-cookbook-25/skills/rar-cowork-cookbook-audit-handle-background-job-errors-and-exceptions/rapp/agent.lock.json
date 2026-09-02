@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_handle_background_job_errors_and_exceptions",
+  "agent_bytes": 10915,
   "agent_file": "audit_handle_background_job_errors_and_exceptions_agent.py",
   "agent_sha256": "fad47661b487978a231c7ef9baddd321a0007bc8be3fc4932a551c30cc3c3df7",
+  "backup_agent": "audit_handle_background_job_errors_and_exceptions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditHandleBackgroundJobErrorsAndExceptions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-handle-background-job-errors-and-exceptions:e819ad6aa79c19296d62c741165fe6fdee6006c96e1056b7c6177a02e107499b",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditHandleBackgroundJobErrorsAndExceptions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25356,
+  "skill_sha256": "df19a4885c44418b08303954c3356f67fc3a7c72aca1ef0a3e30d89cd2c4f485",
   "tool_schema": {
     "properties": {
       "criteria": {

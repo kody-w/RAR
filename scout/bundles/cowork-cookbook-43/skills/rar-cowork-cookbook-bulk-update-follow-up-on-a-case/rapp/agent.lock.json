@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_follow_up_on_a_case",
+  "agent_bytes": 10563,
   "agent_file": "bulk_update_follow_up_on_a_case_agent.py",
   "agent_sha256": "d1b1f4b9bd945a02bea0cd8111703fc908ebedf4929b6d05d7526d70b8904db6",
+  "backup_agent": "bulk_update_follow_up_on_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateFollowUpOnACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-follow-up-on-a-case:049f8d24855a4844f481820c40f1f3ba094c3363e0592b4fcccf9da2beb4381b",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateFollowUpOnACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24547,
+  "skill_sha256": "dc1c0d8f003fc42e94578991796534329bb7ced8326bf02ecabdd57ef2bbb917",
   "tool_schema": {
     "properties": {
       "operation": {

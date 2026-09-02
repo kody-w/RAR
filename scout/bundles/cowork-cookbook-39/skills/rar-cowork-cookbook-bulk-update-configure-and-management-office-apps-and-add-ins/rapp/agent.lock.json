@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins",
+  "agent_bytes": 10945,
   "agent_file": "bulk_update_configure_and_management_office_apps_and_add_ins_agent.py",
   "agent_sha256": "1b72b14120ca2245b9f91336f197066e09a4823d69c8f9cfaa7d735bbac258c0",
+  "backup_agent": "bulk_update_configure_and_management_office_apps_and_add_ins_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateConfigureAndManagementOfficeAppsAndAddIns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-configure-and-management-office-apps-and-add-ins:e8679313b8f737b0054d3111b0e2a1ba63d65b25cc463518802501332339fe33",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateConfigureAndManagementOfficeAppsAndAddIns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25507,
+  "skill_sha256": "784be58b03b3ae48cf1a07680b762328ada3927b8c69c38a21b16400ec93cf93",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_scrap_defective_production",
+  "agent_bytes": 10831,
   "agent_file": "configure_scrap_defective_production_agent.py",
   "agent_sha256": "86be7310966b000bbaf92e7cf04845cce49e355ac2b28a886ec0e4b9ce6bc3c3",
+  "backup_agent": "configure_scrap_defective_production_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureScrapDefectiveProduction",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-scrap-defective-production:6475016463606634d61e29296c52c1867aa30b20b2b72a7c7970e5e19d0ba7e2",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureScrapDefectiveProduction",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24882,
+  "skill_sha256": "af30ee6c9417176474deb92de7c204be2bbaeec8d266d2fcd44c5dac506a5d60",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_capture_details_about_a_case",
+  "agent_bytes": 10731,
   "agent_file": "scheduled_brief_capture_details_about_a_case_agent.py",
   "agent_sha256": "d4c6adc65589f37ef0e63d648c16ab6545e8c27303af4d51c95da3dfe9881b1b",
+  "backup_agent": "scheduled_brief_capture_details_about_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefCaptureDetailsAboutACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-capture-details-about-a-case:1fa2b87d17200e8e6049caf30cbd22fb1a880e6e71d320b6181a0cbda9176484",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefCaptureDetailsAboutACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24932,
+  "skill_sha256": "7b73cb5004915afaa681e5b6302f8278b92ef7618f09dff2dbc649442f01b9be",
   "tool_schema": {
     "properties": {
       "operation": {

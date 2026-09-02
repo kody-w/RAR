@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_develop_a_disaster_recovery_plan",
+  "agent_bytes": 10753,
   "agent_file": "bulk_update_develop_a_disaster_recovery_plan_agent.py",
   "agent_sha256": "f1975161d4148b7fd0c488b6c96b9fb0107264cabeb9fa917a00b894f8d430e0",
+  "backup_agent": "bulk_update_develop_a_disaster_recovery_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDevelopADisasterRecoveryPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-develop-a-disaster-recovery-plan:702e4d94f27cce154a7fa6c9283ced698496883a355ec9edc6511ac1e4a1dcb9",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDevelopADisasterRecoveryPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24991,
+  "skill_sha256": "1cbbf4e75b861b5370be53e68c86223b7943b05f4954bfb23cdf523c6ece626f",
   "tool_schema": {
     "properties": {
       "operation": {

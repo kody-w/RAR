@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_configure_segregation_of_duties",
+  "agent_bytes": 10749,
   "agent_file": "dashboard_configure_segregation_of_duties_agent.py",
   "agent_sha256": "6156f6787c113ff88beb4d08218b4435a920a4cc28dc5edb317ab350b3204f91",
+  "backup_agent": "dashboard_configure_segregation_of_duties_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardConfigureSegregationOfDuties",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-configure-segregation-of-duties:f229a8bc1ac9e3b30acbc6a520653315b88d383be0ad0dfec1cc5eb7efc83a4f",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardConfigureSegregationOfDuties",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24969,
+  "skill_sha256": "c14493e500dc1d57af7d72f1d5e98983f95db739a7a318e72580be0915462335",
   "tool_schema": {
     "properties": {
       "operation": {

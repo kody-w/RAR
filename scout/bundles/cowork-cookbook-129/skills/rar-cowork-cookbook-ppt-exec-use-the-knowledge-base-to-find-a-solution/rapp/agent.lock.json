@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_use_the_knowledge_base_to_find_a_solution",
+  "agent_bytes": 10817,
   "agent_file": "ppt_exec_use_the_knowledge_base_to_find_a_solution_agent.py",
   "agent_sha256": "30e220fe410d79d167d4beadc485b70f82c2e487594e2ef604b05892ac1691d1",
+  "backup_agent": "ppt_exec_use_the_knowledge_base_to_find_a_solution_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecUseTheKnowledgeBaseToFindASolution",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-use-the-knowledge-base-to-find-a-solution:a431f56decad7ba02a5d58b70798b406f595bd768b983b058b6df7dc4251e698",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecUseTheKnowledgeBaseToFindASolution",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25190,
+  "skill_sha256": "398149df7268c07a2f95851deaf26f247593351107a6255f846a62cc4328127e",
   "tool_schema": {
     "properties": {
       "operation": {

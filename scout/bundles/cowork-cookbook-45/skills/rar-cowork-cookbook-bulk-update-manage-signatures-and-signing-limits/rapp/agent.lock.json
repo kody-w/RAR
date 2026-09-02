@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_manage_signatures_and_signing_limits",
+  "agent_bytes": 10805,
   "agent_file": "bulk_update_manage_signatures_and_signing_limits_agent.py",
   "agent_sha256": "2ef211e9c1549936b89dbf9df9cd2e828fae3199591dd6855c29e9d45ecdafdc",
+  "backup_agent": "bulk_update_manage_signatures_and_signing_limits_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateManageSignaturesAndSigningLimits",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-manage-signatures-and-signing-limits:98e003f5e45467ad66bca5dac965025f1991970ef575b8cb4062a98567bc6c74",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateManageSignaturesAndSigningLimits",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25111,
+  "skill_sha256": "85b340c860c0537908c82f37356cd3ef0a0669e906b6c01367b6352c3d2c330a",
   "tool_schema": {
     "properties": {
       "operation": {

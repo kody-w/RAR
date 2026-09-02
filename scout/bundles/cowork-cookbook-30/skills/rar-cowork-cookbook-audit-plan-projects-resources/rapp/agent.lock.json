@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_plan_projects_resources",
+  "agent_bytes": 10627,
   "agent_file": "audit_plan_projects_resources_agent.py",
   "agent_sha256": "7369ce7fe1ae5f8bdb43db714fe90814de5d6c24291837d51b75e110db31519d",
+  "backup_agent": "audit_plan_projects_resources_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditPlanProjectsResources",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-plan-projects-resources:433dbfb1e92b89c56911437521c5dd9d68c8927ebeedf6c1c38b6963edc1ad04",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditPlanProjectsResources",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24604,
+  "skill_sha256": "00254849eaf12d07657546c290e7aee9e8665e4f0b5c279a12832d419ae0481b",
   "tool_schema": {
     "properties": {
       "criteria": {

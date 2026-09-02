@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_pay_taxes",
+  "agent_bytes": 10451,
   "agent_file": "teams_update_pay_taxes_agent.py",
   "agent_sha256": "86f487af575ffdf83ee66b2438e272e5768a8825fb341de59d5789bf84d78b15",
+  "backup_agent": "teams_update_pay_taxes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdatePayTaxes",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-pay-taxes:edd1caeabb623da3e82b46f71eca2095eeda728225006d30e557345e53f6928f",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdatePayTaxes",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24213,
+  "skill_sha256": "f9d7a70e1616c3445ace50c9a843e704fca2492f0a3bcaa18a04dbfb4c68dbc1",
   "tool_schema": {
     "properties": {
       "operation": {

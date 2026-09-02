@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_administer_to_operate",
+  "agent_bytes": 10649,
   "agent_file": "d365_administer_to_operate_agent.py",
   "agent_sha256": "7426e52d07d3c45a633a8d0203ed58a64da9533f2b859dddbd2ec23f331fda7a",
+  "backup_agent": "d365_administer_to_operate_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365AdministerToOperate",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-administer-to-operate:d470b1e999faa4e4666e9d7936ad0291e2e86a90fcb515f57514b2f9eb2c98f5",
+  "rollback_agent_retained": true,
   "runtime_name": "D365AdministerToOperate",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24706,
+  "skill_sha256": "341388d0b34b841741538d57b236291a47b1fbd3bd620c466b2b7bb597494333",
   "tool_schema": {
     "properties": {
       "operation": {

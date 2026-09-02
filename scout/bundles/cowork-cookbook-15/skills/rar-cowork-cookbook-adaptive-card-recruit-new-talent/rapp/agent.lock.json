@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_recruit_new_talent",
+  "agent_bytes": 10558,
   "agent_file": "adaptive_card_recruit_new_talent_agent.py",
   "agent_sha256": "326375bdd21fdeda89c48a7a23752ed1490a00b36bb1b07598057c4262592aa7",
+  "backup_agent": "adaptive_card_recruit_new_talent_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardRecruitNewTalent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-recruit-new-talent:5977235f8939a80935246871dfdb6aea443892ed1af3a5ae5af2349c34717580",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardRecruitNewTalent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24528,
+  "skill_sha256": "b7c7378e534ff0cb3b09c962fcdb26ae79b7d0803e78ce2e4644749f3751f6f1",
   "tool_schema": {
     "properties": {
       "operation": {

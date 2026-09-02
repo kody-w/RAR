@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_create_and_schedule_services",
+  "agent_bytes": 10706,
   "agent_file": "dashboard_create_and_schedule_services_agent.py",
   "agent_sha256": "f54e4f23cab4430e2353528cbbffc04be2d79b231173ee1500171aae2559abad",
+  "backup_agent": "dashboard_create_and_schedule_services_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardCreateAndScheduleServices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-create-and-schedule-services:9aea6194c4d17d59e150961d6c7117cfbafaeb045e7d04e1ed3476356c494ab8",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardCreateAndScheduleServices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24850,
+  "skill_sha256": "c5d777e82a4d70e932770aab2a2693131155af97623ee2345444717efe089f82",
   "tool_schema": {
     "properties": {
       "operation": {

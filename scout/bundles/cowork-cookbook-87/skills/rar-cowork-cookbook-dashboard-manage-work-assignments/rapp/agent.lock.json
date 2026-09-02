@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_work_assignments",
+  "agent_bytes": 10638,
   "agent_file": "dashboard_manage_work_assignments_agent.py",
   "agent_sha256": "11b608c47718763c5258a2b7f1349bf08c06c21d5f7a436a58a5e3b40bf5a807",
+  "backup_agent": "dashboard_manage_work_assignments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageWorkAssignments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-work-assignments:e494731c5cfd8e54db260569f671dbee805aa9f4a2ecd5f2335d8efdd91b4228",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageWorkAssignments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24685,
+  "skill_sha256": "3fa598fda58b7a2f98f2028407624c1cf5f88f8f716eae37806c1bfae6a7f42a",
   "tool_schema": {
     "properties": {
       "operation": {

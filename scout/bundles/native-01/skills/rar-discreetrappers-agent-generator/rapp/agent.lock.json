@@ -1,9 +1,12 @@
 {
   "agent": "@discreetRappers/agent_generator_agent",
+  "agent_bytes": 49126,
   "agent_file": "agent_generator_agent.py",
   "agent_sha256": "11b58f135dce6bd67bf595c7d5a31576e695a768bf6dba4d46709427e209e61c",
+  "backup_agent": "agent_generator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentGeneratorAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Bill Whalen",
@@ -25,8 +28,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/agent-generator:9cc36ad11774cf6a0057b93e2ce40ac2ac86de13cb5dd1b41c14e5749c9803fe",
+  "rollback_agent_retained": true,
   "runtime_name": "AgentGenerator",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 74745,
+  "skill_sha256": "56de00f24ccc4244c4154944fb973225258a273b19f254bc947f710c21c8d4fc",
   "tool_schema": {
     "properties": {
       "action": {

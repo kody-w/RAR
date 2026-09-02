@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_capture_details_about_a_case",
+  "agent_bytes": 10680,
   "agent_file": "teams_update_capture_details_about_a_case_agent.py",
   "agent_sha256": "5176fda4b97810fe61f50368fb5f6dd7aa26bc51f4542bdc3af3d4fe263ebabf",
+  "backup_agent": "teams_update_capture_details_about_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCaptureDetailsAboutACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-capture-details-about-a-case:c1fe61c69e5d0663f2a75b478c4232e86d7fd6497e3f90e3ceb21c30f9ef011c",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateCaptureDetailsAboutACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24809,
+  "skill_sha256": "b96a6732396171cd40c2d5e9512c684a177ecdb0a11eec1a97d421572f37388c",
   "tool_schema": {
     "properties": {
       "operation": {

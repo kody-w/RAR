@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_manage_data_security",
+  "agent_bytes": 10326,
   "agent_file": "report_manage_data_security_agent.py",
   "agent_sha256": "f7bd1c353fd18ff90776dcd6926188354081d912785fc77bc82c7c638428f885",
+  "backup_agent": "report_manage_data_security_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportManageDataSecurity",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-manage-data-security:348281c8e19583c943ce56b9b222320b81d9f2416a852975e602b1b987e1ad53",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportManageDataSecurity",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24098,
+  "skill_sha256": "4f65b6e38c8e6bbc84db1d3e497f069abb7e8fb9ef5fbb39a63a5d5805b53d3e",
   "tool_schema": {
     "properties": {
       "audience": {

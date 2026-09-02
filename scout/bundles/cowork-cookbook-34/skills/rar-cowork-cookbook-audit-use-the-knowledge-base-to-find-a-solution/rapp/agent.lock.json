@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_use_the_knowledge_base_to_find_a_solution",
+  "agent_bytes": 10863,
   "agent_file": "audit_use_the_knowledge_base_to_find_a_solution_agent.py",
   "agent_sha256": "e8a88322482652b9f7349783b4372dfb6f860218406fd2a105ae7b2990dbe13e",
+  "backup_agent": "audit_use_the_knowledge_base_to_find_a_solution_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditUseTheKnowledgeBaseToFindASolution",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-use-the-knowledge-base-to-find-a-solution:1bf7e41803cab983ba81d758e74ddd32fc401b4444a3117113d8bd0c0e46a01f",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditUseTheKnowledgeBaseToFindASolution",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25263,
+  "skill_sha256": "0a270335393ae33aadcfebc144137761e5b02cec136fcedce379bdb7f2a88e31",
   "tool_schema": {
     "properties": {
       "criteria": {

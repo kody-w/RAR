@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_manage_project_quality",
+  "agent_bytes": 10788,
   "agent_file": "configure_manage_project_quality_agent.py",
   "agent_sha256": "1d6f3f9c00d76744889494a1f80bd56aba81f67aa4e8766873e4d604cefddaf1",
+  "backup_agent": "configure_manage_project_quality_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageProjectQuality",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-manage-project-quality:3b92c43de9e10c06ae5d7762a0e546f5ed9b283b6d2ed0c827c5445cf273c6e2",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureManageProjectQuality",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24785,
+  "skill_sha256": "e47c57088e88829feace35b4ea69d863e571045fad3131d4bb10a155d8ade780",
   "tool_schema": {
     "properties": {
       "operation": {

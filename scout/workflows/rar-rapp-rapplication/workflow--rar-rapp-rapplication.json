@@ -5,6 +5,13 @@
   "id": "881782d740c74953",
   "lastExecutedAt": null,
   "name": "Rapplication",
+  "rapp": {
+    "backup_agent": "rapplication_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-rapp-rapplication"
+  },
   "schedule": {
     "days": [
       1,

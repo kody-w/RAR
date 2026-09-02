@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_quarantine_received_goods",
+  "agent_bytes": 10715,
   "agent_file": "scheduled_brief_quarantine_received_goods_agent.py",
   "agent_sha256": "50a46d4395c0a78db6e2c56bedf357309d9ffb9e9747c7213da72fa7e3f9721c",
+  "backup_agent": "scheduled_brief_quarantine_received_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefQuarantineReceivedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-quarantine-received-goods:518c07724978388b5829be669452b459746e5d7e874227af3c2ce99a5fb3f159",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefQuarantineReceivedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24857,
+  "skill_sha256": "3c3c4964d088c03ab26b8ea8ef7074b2d66eab44fecef864c828986bdd56b4c7",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/case_heatmap_html",
+  "agent_bytes": 10450,
   "agent_file": "case_heatmap_html_agent.py",
   "agent_sha256": "2bd63f3015231a03db6f4ae00f8c70d31ffc59fba1275b20a4d55353cddd92cf",
+  "backup_agent": "case_heatmap_html_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CaseHeatmapHtml",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/case-heatmap-html:30f9db3927141b16c276d8dd2b2fb8c157bd249f21975b41d1c7d68fc31f441e",
+  "rollback_agent_retained": true,
   "runtime_name": "CaseHeatmapHtml",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24271,
+  "skill_sha256": "51f458f7f186b62a34aace451e62f46f9d9fbd66e798380aca46140425a4a657",
   "tool_schema": {
     "properties": {
       "operation": {

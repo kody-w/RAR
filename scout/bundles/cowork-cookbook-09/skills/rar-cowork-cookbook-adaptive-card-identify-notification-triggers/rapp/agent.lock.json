@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_identify_notification_triggers",
+  "agent_bytes": 10753,
   "agent_file": "adaptive_card_identify_notification_triggers_agent.py",
   "agent_sha256": "2eb1c80c376e8faa18ce66d4216d0440c90e844d69dc14acbcf5cab2089319df",
+  "backup_agent": "adaptive_card_identify_notification_triggers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardIdentifyNotificationTriggers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-identify-notification-triggers:d97b06fc32ff7d3314dd123f443724df7cdc3409bddd65124c57a4ce30f8beee",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardIdentifyNotificationTriggers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24942,
+  "skill_sha256": "b54bdc13535bc85e3a3814272372ef36a94ec98f75059c823c5e734fe092d80b",
   "tool_schema": {
     "properties": {
       "operation": {

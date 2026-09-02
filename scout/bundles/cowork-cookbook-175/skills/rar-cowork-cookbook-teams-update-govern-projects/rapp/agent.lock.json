@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_govern_projects",
+  "agent_bytes": 10527,
   "agent_file": "teams_update_govern_projects_agent.py",
   "agent_sha256": "5cd034c0c57251db5a51e5b75293befecbf47976fac6ae22523cda2b55b584c3",
+  "backup_agent": "teams_update_govern_projects_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateGovernProjects",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-govern-projects:694af9d6ace21e9b593c80008cc7641f22bbf1922f0544befb255f65424fe2e4",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateGovernProjects",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24376,
+  "skill_sha256": "87911330b1f5f512397c64359ea5c5fa9ea9763d39b25ab3468b652683b16b5a",
   "tool_schema": {
     "properties": {
       "operation": {

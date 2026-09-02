@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/hologram_dogg",
+  "agent_bytes": 8430,
   "agent_file": "hologram_dogg_agent.py",
   "agent_sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2",
+  "backup_agent": "hologram_dogg_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HologramDOGGAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/hologram-dogg:443d153d5b820f0fe56ea4666ec44234b0d4cf9f3ef6e69f39a5a291b5fe60a0",
+  "rollback_agent_retained": true,
   "runtime_name": "HologramDOGG",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 19399,
+  "skill_sha256": "75039f761622cd307ea78d5f1f62447dd4e667db35eb5c6e68b33a2d484f41e2",
   "tool_schema": {
     "properties": {
       "action": {

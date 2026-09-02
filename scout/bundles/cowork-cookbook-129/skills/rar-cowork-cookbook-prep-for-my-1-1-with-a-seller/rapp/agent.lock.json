@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/prep_for_my_1_1_with_a_seller",
+  "agent_bytes": 10374,
   "agent_file": "prep_for_my_1_1_with_a_seller_agent.py",
   "agent_sha256": "3ad8663cde83893b7fe1f882c0b280d23f48a317415b453d8d8791cbead4a0bf",
+  "backup_agent": "prep_for_my_1_1_with_a_seller_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PrepForMy11WithASeller",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -75,8 +78,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/prep-for-my-1-1-with-a-seller:7bf270986eafe3a7f9cd5a92aeaaaf904b95e54f79e8a8671fe05525433bed69",
+  "rollback_agent_retained": true,
   "runtime_name": "PrepForMy11WithASeller",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24291,
+  "skill_sha256": "44d124a09679b3246b0bffded87dd7496e4ad9c37b93c2d4c4a4a111a2b726a4",
   "tool_schema": {
     "properties": {
       "operation": {

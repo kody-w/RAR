@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_correct_ledger_vouchers",
+  "agent_bytes": 10605,
   "agent_file": "ppt_exec_correct_ledger_vouchers_agent.py",
   "agent_sha256": "be94a1be018994376252cd7743f3692ed62d0148f7c6e68d8fbf41bd860c5237",
+  "backup_agent": "ppt_exec_correct_ledger_vouchers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecCorrectLedgerVouchers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-correct-ledger-vouchers:0363efbabf864acc20e4aaba7682ead1422894b026a0b353efdd0d12e477a69f",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecCorrectLedgerVouchers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24606,
+  "skill_sha256": "29bd88401ea019b4f16fc7fcfe87865a174812b0c82e79eecde4e88579642842",
   "tool_schema": {
     "properties": {
       "operation": {

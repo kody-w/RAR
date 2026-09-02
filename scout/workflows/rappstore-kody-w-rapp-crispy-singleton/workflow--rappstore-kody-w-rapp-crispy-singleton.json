@@ -5,6 +5,13 @@
   "id": "dcdd200eef7038e5",
   "lastExecutedAt": null,
   "name": "RAPP Crispy",
+  "rapp": {
+    "backup_agent": "rapp_crispy_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-kody-w-rapp-crispy-singleton"
+  },
   "schedule": {
     "days": [
       1,

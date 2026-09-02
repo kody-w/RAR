@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_benefit_offerings",
+  "agent_bytes": 10689,
   "agent_file": "scheduled_brief_define_benefit_offerings_agent.py",
   "agent_sha256": "ca59e718a783de4ae0ee51d54860041e19cac53563d67587c6fb35502c193a7d",
+  "backup_agent": "scheduled_brief_define_benefit_offerings_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineBenefitOfferings",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-benefit-offerings:c415e74a2ddca37ace1b7e29005c1c8380440c0e031ca51bc9cd6c7501dea61b",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineBenefitOfferings",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24790,
+  "skill_sha256": "8bd091ef3b13c67003a9dc2a0dd154e842eedcf835be832a59df03f07004e55d",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_replace_an_asset",
+  "agent_bytes": 10510,
   "agent_file": "ppt_exec_replace_an_asset_agent.py",
   "agent_sha256": "1a4f06aef5b7600ad5422f7efec5da55544732a00c58010a4494d022c52995d6",
+  "backup_agent": "ppt_exec_replace_an_asset_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecReplaceAnAsset",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-replace-an-asset:21b5d5400ea0a5c928cb0380686d06e203e1c80c8cd28ddf31080e1f49feec84",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecReplaceAnAsset",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24376,
+  "skill_sha256": "a20be2bda69698439214facee26837eee753e2e07237d8ca6e19dc4432b0c8f5",
   "tool_schema": {
     "properties": {
       "operation": {

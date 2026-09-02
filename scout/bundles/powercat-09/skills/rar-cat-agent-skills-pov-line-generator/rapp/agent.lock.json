@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/pov_line_generator",
+  "agent_bytes": 9045,
   "agent_file": "pov_line_generator_agent.py",
   "agent_sha256": "181aaa29ab74475fe1d1b73cbfec45f0cdd31f3016bbf34eabcaf3ec23213ded",
+  "backup_agent": "pov_line_generator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PovLineGenerator",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Simon Owen",
@@ -43,8 +46,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/pov-line-generator:a54cecad40aaa4bbf23937a474b975147bf60251155c58d1e5e305c0b88fec2a",
+  "rollback_agent_retained": true,
   "runtime_name": "PovLineGenerator",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21853,
+  "skill_sha256": "d6635d64dd5d9c18c6615d73020b5e5a35dd6e1786fc9cdcb21924c1f6e7ee09",
   "tool_schema": {
     "properties": {
       "audience": {

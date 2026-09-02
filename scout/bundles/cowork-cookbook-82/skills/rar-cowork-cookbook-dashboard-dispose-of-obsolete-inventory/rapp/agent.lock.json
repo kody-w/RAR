@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_dispose_of_obsolete_inventory",
+  "agent_bytes": 10685,
   "agent_file": "dashboard_dispose_of_obsolete_inventory_agent.py",
   "agent_sha256": "ae778115b7a8e732a8bea6d0d58672aa82ab3d24e36a4876840a6235f8484535",
+  "backup_agent": "dashboard_dispose_of_obsolete_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDisposeOfObsoleteInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-dispose-of-obsolete-inventory:e5d6f0c24f108a48f26d66fd0324d6323a463e2d3b52fbc72ebe5ae7392a5475",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDisposeOfObsoleteInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24838,
+  "skill_sha256": "4ecbc0b2f6e375a77952dde1363aa865a31e935c3198ed5bc5b8765c79ad18f6",
   "tool_schema": {
     "properties": {
       "operation": {

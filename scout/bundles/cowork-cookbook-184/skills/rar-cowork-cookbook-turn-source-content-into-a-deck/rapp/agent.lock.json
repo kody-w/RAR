@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/turn_source_content_into_a_deck",
+  "agent_bytes": 10328,
   "agent_file": "turn_source_content_into_a_deck_agent.py",
   "agent_sha256": "6f38a192ebccdcf950fd407c4d8094a454d4396dec4727903a9170437e284a58",
+  "backup_agent": "turn_source_content_into_a_deck_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TurnSourceContentIntoADeck",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -75,8 +78,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/turn-source-content-into-a-deck:09af5dfa797adff52686cba9b359ee861f5c940c73f4436fe6f0ba33f310570c",
+  "rollback_agent_retained": true,
   "runtime_name": "TurnSourceContentIntoADeck",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24096,
+  "skill_sha256": "792794c28a27673822a00e8e29fa25e7272edbe459f4f0aa2e606a69c809a983",
   "tool_schema": {
     "properties": {
       "operation": {

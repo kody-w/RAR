@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_prospect_to_quote",
+  "agent_bytes": 10577,
   "agent_file": "d365_prospect_to_quote_agent.py",
   "agent_sha256": "69dea2746bbd3920e8b6b2b7448aa692cacf4dab7c9d0f9c019dd1b3d79f3f16",
+  "backup_agent": "d365_prospect_to_quote_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ProspectToQuote",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-prospect-to-quote:a52abd47fb75adf8213c4c0c30a7862bcac39084f04985413769b1f39b5b1da8",
+  "rollback_agent_retained": true,
   "runtime_name": "D365ProspectToQuote",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24562,
+  "skill_sha256": "c7ecf5d872727fe0f7c5d92a8460e3ad7ed798c87d9f5d17d2dcdfe5ea594b8c",
   "tool_schema": {
     "properties": {
       "operation": {

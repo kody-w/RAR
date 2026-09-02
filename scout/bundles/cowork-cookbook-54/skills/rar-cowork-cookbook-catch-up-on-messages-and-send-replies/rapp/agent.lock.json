@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/catch_up_on_messages_and_send_replies",
+  "agent_bytes": 9703,
   "agent_file": "catch_up_on_messages_and_send_replies_agent.py",
   "agent_sha256": "df2584d346a31b87577d83441d08eddf9a328147a8cf058be03a89b5332a91f6",
+  "backup_agent": "catch_up_on_messages_and_send_replies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CatchUpOnMessagesAndSendReplies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/catch-up-on-messages-and-send-replies:8bfadf54095469fb0683743ed6676154fe33e37e78ebeb62572c49d52a06c2f3",
+  "rollback_agent_retained": true,
   "runtime_name": "CatchUpOnMessagesAndSendReplies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23040,
+  "skill_sha256": "fe07166b3c0f2e3b22249c549d42b8bd0062becde776c9691aa24709e7e8501a",
   "tool_schema": {
     "properties": {
       "operation": {

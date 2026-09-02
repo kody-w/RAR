@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_maintain_quality_certifications",
+  "agent_bytes": 10796,
   "agent_file": "scheduled_brief_maintain_quality_certifications_agent.py",
   "agent_sha256": "5accab39611ece471f2fda2f747076c8455bce0a6d00588caadc40fe9b52716f",
+  "backup_agent": "scheduled_brief_maintain_quality_certifications_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefMaintainQualityCertifications",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-maintain-quality-certifications:ae5210891902b69655c89d46d73d7f937a8898e56b224ac11d7470df2448a9b6",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefMaintainQualityCertifications",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25020,
+  "skill_sha256": "93b164cfd13077125d91ce6a06e5842fe722e7c11a7aa54e93c42db8e293c60d",
   "tool_schema": {
     "properties": {
       "operation": {

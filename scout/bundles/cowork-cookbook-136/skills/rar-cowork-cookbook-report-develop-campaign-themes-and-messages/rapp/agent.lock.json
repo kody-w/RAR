@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_develop_campaign_themes_and_messages",
+  "agent_bytes": 10506,
   "agent_file": "report_develop_campaign_themes_and_messages_agent.py",
   "agent_sha256": "ce9ea418e7cde80528a4c992b2f307518455c7129cc639f58722d16a850ae754",
+  "backup_agent": "report_develop_campaign_themes_and_messages_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDevelopCampaignThemesAndMessages",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-develop-campaign-themes-and-messages:6b5035070b3761a704302a8d1e984b335ee367834dc774c60094a1c76a785804",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDevelopCampaignThemesAndMessages",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24590,
+  "skill_sha256": "117b24179d26159de3e017770663d22f1daf3bcd7baea4a8fac1f5a1cc0d9040",
   "tool_schema": {
     "properties": {
       "audience": {

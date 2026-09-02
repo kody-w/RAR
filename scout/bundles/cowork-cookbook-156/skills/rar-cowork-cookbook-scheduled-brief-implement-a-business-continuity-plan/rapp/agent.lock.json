@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_implement_a_business_continuity_plan",
+  "agent_bytes": 10866,
   "agent_file": "scheduled_brief_implement_a_business_continuity_plan_agent.py",
   "agent_sha256": "5c7a05dc6ad9995bcc9692270964d367901b443a28ec9bb8379ff0ba17671f5a",
+  "backup_agent": "scheduled_brief_implement_a_business_continuity_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefImplementABusinessContinuityPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-implement-a-business-continuity-plan:9d2f809562f89e39015693607f8ede3176ff61f7f5b76a4dc889a0b6a68d2fbf",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefImplementABusinessContinuityPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25198,
+  "skill_sha256": "de2316072074afca6cbf5e9e32bbc25955971ce86294bd288754ac384cf774da",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_pay_taxes",
+  "agent_bytes": 10172,
   "agent_file": "report_pay_taxes_agent.py",
   "agent_sha256": "a558ecc9fb748bbd99d67f066f291d1ea0dba1eb1624da65f8ac37009d7b5466",
+  "backup_agent": "report_pay_taxes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportPayTaxes",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-pay-taxes:911ba6594425887edda671a6013978d2f771f959adf1441d6181cfb7591b169e",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportPayTaxes",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23706,
+  "skill_sha256": "3032d7d9f974a57377bf2d7cff562fb06b4d8ac118f963d6eca2dbd6bcd5c96e",
   "tool_schema": {
     "properties": {
       "audience": {

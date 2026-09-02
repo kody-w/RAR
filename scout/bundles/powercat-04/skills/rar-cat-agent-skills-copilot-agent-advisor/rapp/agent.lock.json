@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/copilot_agent_advisor",
+  "agent_bytes": 9501,
   "agent_file": "copilot_agent_advisor_agent.py",
   "agent_sha256": "d5cab65242f9c79bd79a21ec4e81f0801c1a64324d0619408d61a25528cbba8d",
+  "backup_agent": "copilot_agent_advisor_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotAgentAdvisor",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sandra Boucenna",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/copilot-agent-advisor:a5a4e6c6a0767532a837967f5d40d1d001fc9c1dca64afa5d9859637317f55a1",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotAgentAdvisor",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22937,
+  "skill_sha256": "2ce457557c494a8becdb2e92566ef5ef6103670c4b641f0d451cedb08c7d1c86",
   "tool_schema": {
     "properties": {
       "constraints": {

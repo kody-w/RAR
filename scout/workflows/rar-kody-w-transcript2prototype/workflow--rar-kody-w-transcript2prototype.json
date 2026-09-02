@@ -5,6 +5,13 @@
   "id": "065b64e60871c19f",
   "lastExecutedAt": null,
   "name": "Transcript2Prototype",
+  "rapp": {
+    "backup_agent": "transcript2prototype_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-kody-w-transcript2prototype"
+  },
   "schedule": {
     "days": [
       1,

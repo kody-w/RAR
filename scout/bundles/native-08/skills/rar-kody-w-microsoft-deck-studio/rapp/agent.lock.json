@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/microsoft_deck_studio_agent",
+  "agent_bytes": 38991,
   "agent_file": "microsoft_deck_studio_agent.py",
   "agent_sha256": "6aa3761fd90b1be592520185359a02a0bc0651c0c0bd86edb8fe9ff879138445",
+  "backup_agent": "microsoft_deck_studio_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MicrosoftDeckStudio",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -30,8 +33,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/microsoft-deck-studio:015e24f699fd002f99d2cb9acebb70d0d5df2680a5fe6480bdf660125615171f",
+  "rollback_agent_retained": true,
   "runtime_name": "MicrosoftDeckStudio",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 63861,
+  "skill_sha256": "1d951bdd7e7823d1be537efed96f6916216c83e5fc9eba6b846c29933e6d7d9e",
   "tool_schema": {
     "properties": {
       "output_path": {

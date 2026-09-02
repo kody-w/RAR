@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_manage_procurement_spend",
+  "agent_bytes": 10809,
   "agent_file": "configure_manage_procurement_spend_agent.py",
   "agent_sha256": "c19dd090588ccc350054cf6d794ee1ba633e9d646d0e18a39b5106619da0b2f1",
+  "backup_agent": "configure_manage_procurement_spend_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageProcurementSpend",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-manage-procurement-spend:3d41b87b4039846fd9644c60c135a606c023208353d12ef868038ddbcc9e15e2",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureManageProcurementSpend",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24860,
+  "skill_sha256": "bb313cf214bc9e1ccdeae06bdc55b7d6bc412a8b50a74edffe06d62e833faded",
   "tool_schema": {
     "properties": {
       "operation": {

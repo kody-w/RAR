@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_rework_defective_inventory",
+  "agent_bytes": 10557,
   "agent_file": "demo_data_rework_defective_inventory_agent.py",
   "agent_sha256": "2fb675fa9f1d3c5cd085771353ca9d8c082db7f12abde45c8a9e71e8fda7daf3",
+  "backup_agent": "demo_data_rework_defective_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataReworkDefectiveInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-rework-defective-inventory:52928c2e3f6f71e39501a7ad3c39f0ced6fb95fe346d9272944322742aa30004",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataReworkDefectiveInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24559,
+  "skill_sha256": "0d9e5dad655d5d1af3c53fba7b357cf687bf924e39e16216fc3d22925bd50619",
   "tool_schema": {
     "properties": {
       "operation": {

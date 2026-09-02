@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/own_voice_builder",
+  "agent_bytes": 9247,
   "agent_file": "own_voice_builder_agent.py",
   "agent_sha256": "c94c678de5a3bd69cf2f1f4e4b50b38cdd931bfcd23aeec345fb3263b86df1b0",
+  "backup_agent": "own_voice_builder_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "OwnVoiceBuilder",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Marcel",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/own-voice-builder:2e1b020d1d655b2f074175b7a25f451eaaa790126ad046f9f82f2b6c7d13f767",
+  "rollback_agent_retained": true,
   "runtime_name": "OwnVoiceBuilder",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22435,
+  "skill_sha256": "1327d06ad30a6eed7abcc5480509f51eabfeccf4ac07f69b0111e5ab72409dad",
   "tool_schema": {
     "properties": {
       "audience": {

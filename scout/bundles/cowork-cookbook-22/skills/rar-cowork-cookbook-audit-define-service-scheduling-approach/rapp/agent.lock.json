@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_define_service_scheduling_approach",
+  "agent_bytes": 10782,
   "agent_file": "audit_define_service_scheduling_approach_agent.py",
   "agent_sha256": "e121d686bc91c6beb93413269ef06564e63b3602b070cb13525c6f863568045c",
+  "backup_agent": "audit_define_service_scheduling_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineServiceSchedulingApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-define-service-scheduling-approach:ca291afb2b0c1771c52ec56b6bfe96991a1a10c49db8be2d418e678f12d1dee7",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDefineServiceSchedulingApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25005,
+  "skill_sha256": "f4ad07e0c83cd0a17a909ed5fbd27393306505767f8d5d74cf09ec9ccad7de17",
   "tool_schema": {
     "properties": {
       "criteria": {

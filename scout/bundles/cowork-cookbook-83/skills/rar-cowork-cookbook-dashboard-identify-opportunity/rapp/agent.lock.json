@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_identify_opportunity",
+  "agent_bytes": 10583,
   "agent_file": "dashboard_identify_opportunity_agent.py",
   "agent_sha256": "166691be42768adaf91c0430a20d680fa144c1d998847c194a3c5547b24b3bd5",
+  "backup_agent": "dashboard_identify_opportunity_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardIdentifyOpportunity",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-identify-opportunity:6da76d2f59d7f0b24c453cc68b2de139f1b76fce34f6f57b78250a7277c9294e",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardIdentifyOpportunity",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24534,
+  "skill_sha256": "4e05c482067a3bfe095b9b3deaff48c56e0c6b613d07aba7b64409fef16def54",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@howardh/chief_of_staff_agent",
+  "agent_bytes": 33257,
   "agent_file": "chief_of_staff_agent.py",
   "agent_sha256": "5d904f34d63faa2271e66a6d1c6f033c269136c840a1bd4d4dcc57875bbf8354",
+  "backup_agent": "chief_of_staff_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ChiefOfStaffAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Howard Hoy",
@@ -28,8 +31,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@howardh/chief-of-staff:4dd1f08529e8b62533794973f77bcce382970987332420f91e92e3f3f888d594",
+  "rollback_agent_retained": true,
   "runtime_name": "ChiefOfStaff",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 58906,
+  "skill_sha256": "32ebff909d6a04028e23323d388d768f163f499e42c40828da45eb2196a97a6c",
   "tool_schema": {
     "properties": {
       "action": {

@@ -3,10 +3,11 @@
   "id": "rapp__rar_steward",
   "name": "RarStewardAgent",
   "rar_name": "@rapp/rar_steward",
-  "rappid": "rappid:@rapp/rar_steward:d086c9d44fcaf1993b4488594c5a6e6dc0beb5a8abcfe9448a66606474ad72e2",
-  "_migrated_from": "rappid:@rapp/rar_steward:bc615bf33f491ee8af49505ed98e0456b44b566ce61c5956ed054a459bbd02a1",
+  "rappid": "rappid:@rapp/rar-steward:40ca915bea4fffbc44d567be9489b8b46cc3c67750800e78911f7c570f6b80f3",
+  "_migrated_from": "rappid:@rapp/rar_steward:d086c9d44fcaf1993b4488594c5a6e6dc0beb5a8abcfe9448a66606474ad72e2",
   "_migrated_from_all": [
-    "rappid:@rapp/rar_steward:bc615bf33f491ee8af49505ed98e0456b44b566ce61c5956ed054a459bbd02a1"
+    "rappid:@rapp/rar_steward:bc615bf33f491ee8af49505ed98e0456b44b566ce61c5956ed054a459bbd02a1",
+    "rappid:@rapp/rar_steward:d086c9d44fcaf1993b4488594c5a6e6dc0beb5a8abcfe9448a66606474ad72e2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -33,9 +34,18 @@
   "sha256": "e8cb15fe4f51fefb7c9f05fe3722dc7eccd67ab22beca8398591479d8fcc9e3e",
   "has_card": true,
   "added_at": "2026-06-09T21:45:37-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-rar-steward",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rar_steward.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rar_steward_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rar_steward_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-rar-steward/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-rar-steward/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rar_steward.py",
   "api_card_url": null,

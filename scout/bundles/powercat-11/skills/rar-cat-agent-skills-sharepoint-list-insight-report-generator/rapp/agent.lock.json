@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/sharepoint_list_insight_report_generator",
+  "agent_bytes": 9782,
   "agent_file": "sharepoint_list_insight_report_generator_agent.py",
   "agent_sha256": "1755e4d761977ef94e93304dc8d180edc0dc810f70e304a513ed4909b525f0d7",
+  "backup_agent": "sharepoint_list_insight_report_generator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SharepointListInsightReportGenerator",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Marco Rocca",
@@ -41,8 +44,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/sharepoint-list-insight-report-generator:f57f55540d4159213e06910ca4c489c6ffeac19488443ffa91e289202a7a89a8",
+  "rollback_agent_retained": true,
   "runtime_name": "SharepointListInsightReportGenerator",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23979,
+  "skill_sha256": "3ee21f766488054dd051cb523a01f2fdd1275fb941acb96509ab942bb2797781",
   "tool_schema": {
     "properties": {
       "audience": {

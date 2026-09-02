@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__ai_first_process_redesign",
   "name": "AI-First Process Redesign",
   "rar_name": "@cat-agent-skills/ai_first_process_redesign",
-  "rappid": "rappid:@cat-agent-skills/ai_first_process_redesign:8e07846f215b5cf3644c26631749d33c2ee1e43b40f8b396830d3a3ca5954667",
-  "_migrated_from": "rappid:@cat-agent-skills/ai_first_process_redesign:efd594b4c9a4dbc6e5ff07f773b3ab09067fc7b6fa5b0a8e4f0a67e4ccbbc723",
+  "rappid": "rappid:@cat-agent-skills/ai-first-process-redesign:f22cf7b97a822a43dd2b6fff909f0fd28da1144a6d4dd6358c92b8a151d18ebf",
+  "_migrated_from": "rappid:@cat-agent-skills/ai_first_process_redesign:8e07846f215b5cf3644c26631749d33c2ee1e43b40f8b396830d3a3ca5954667",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/ai_first_process_redesign:efd594b4c9a4dbc6e5ff07f773b3ab09067fc7b6fa5b0a8e4f0a67e4ccbbc723"
+    "rappid:@cat-agent-skills/ai_first_process_redesign:efd594b4c9a4dbc6e5ff07f773b3ab09067fc7b6fa5b0a8e4f0a67e4ccbbc723",
+    "rappid:@cat-agent-skills/ai_first_process_redesign:8e07846f215b5cf3644c26631749d33c2ee1e43b40f8b396830d3a3ca5954667"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.1.1",
@@ -29,9 +30,18 @@
   "sha256": "6fcb40c0aefde81d18f04518bfc8826d717720562bf6014f8f96d11677b90bb9",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-cat-agent-skills-ai-first-process-redesign",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__ai_first_process_redesign.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-ai-first-process-redesign/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-ai-first-process-redesign/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__ai_first_process_redesign.py",
   "api_card_url": null,

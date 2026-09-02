@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_define_warehouse_management_kpis",
+  "agent_bytes": 10654,
   "agent_file": "demo_data_define_warehouse_management_kpis_agent.py",
   "agent_sha256": "40f92976de71c64532e7986881a9dd7fb163573a5e09e7919870eaca93783f66",
+  "backup_agent": "demo_data_define_warehouse_management_kpis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDefineWarehouseManagementKpis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-define-warehouse-management-kpis:1e78ac648ddf931c7e3cd575dd521e79f723beb325b8970311415ae6f3fe962b",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDefineWarehouseManagementKpis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24835,
+  "skill_sha256": "1d0e876da9f556cc5e24d56778db3a4c2c057028b5ddda5dd97b6f1f41b6c43b",
   "tool_schema": {
     "properties": {
       "operation": {

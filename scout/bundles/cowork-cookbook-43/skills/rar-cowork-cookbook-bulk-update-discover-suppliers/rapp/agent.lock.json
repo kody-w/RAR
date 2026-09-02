@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_discover_suppliers",
+  "agent_bytes": 10544,
   "agent_file": "bulk_update_discover_suppliers_agent.py",
   "agent_sha256": "e62abca6d07946b404132d793cfb907af58fdf71a1ffd440e195a3a507eabf6a",
+  "backup_agent": "bulk_update_discover_suppliers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDiscoverSuppliers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-discover-suppliers:758e84ecd2fdc40593e969cfc400d92e0622e026e0aad8e8fd5269e85064689e",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDiscoverSuppliers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24460,
+  "skill_sha256": "79ae39c8f75948688a55f4682d73b149459c75c0b07eccb2fcb1fe23145f4d33",
   "tool_schema": {
     "properties": {
       "operation": {

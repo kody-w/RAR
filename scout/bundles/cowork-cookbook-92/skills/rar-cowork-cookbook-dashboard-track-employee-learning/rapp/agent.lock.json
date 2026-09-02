@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_track_employee_learning",
+  "agent_bytes": 10606,
   "agent_file": "dashboard_track_employee_learning_agent.py",
   "agent_sha256": "bc5a0fc1a7e36dad3456916c272338d6a128e1221cfe5c20aa0dccf20dd8bdb8",
+  "backup_agent": "dashboard_track_employee_learning_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardTrackEmployeeLearning",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-track-employee-learning:4f162d7eaca6b60ea1cf0e0227ded5782245063e6b27b5c033ff41fbe1e965cf",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardTrackEmployeeLearning",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24639,
+  "skill_sha256": "5d481ddcc230ff062366a5397f354837dd84b2b68e4c914a141f591b873d6a8c",
   "tool_schema": {
     "properties": {
       "operation": {

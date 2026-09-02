@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_record_employee_time",
+  "agent_bytes": 10591,
   "agent_file": "audit_record_employee_time_agent.py",
   "agent_sha256": "b0efe0c777205a4c27989b1236886daa6e22082eeae32186f9a2fda63b4a9767",
+  "backup_agent": "audit_record_employee_time_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditRecordEmployeeTime",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-record-employee-time:64ffdedda57bfc3e0f5cb76c6a8ad613fc27113e37a104081232541dd6da9182",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditRecordEmployeeTime",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24544,
+  "skill_sha256": "7c188e2ccbe939ec48bdef92e7097b0d152ecc582d3b1e608220ca72131f64cc",
   "tool_schema": {
     "properties": {
       "criteria": {

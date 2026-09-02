@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_model_service_capacity",
+  "agent_bytes": 10782,
   "agent_file": "configure_model_service_capacity_agent.py",
   "agent_sha256": "ed257c1d4b006b61f7d8ab5b2c749da16cb970c9d0c0ca97b0471aa09b2511f6",
+  "backup_agent": "configure_model_service_capacity_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureModelServiceCapacity",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-model-service-capacity:d7f758b4346aab7a255daedf98d72d85b39d3f09af3c237817822122c4dccf1b",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureModelServiceCapacity",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24788,
+  "skill_sha256": "69684b4fd3040e3bf377e1257ffc427898eedef7b909168364b5f9caba906091",
   "tool_schema": {
     "properties": {
       "operation": {

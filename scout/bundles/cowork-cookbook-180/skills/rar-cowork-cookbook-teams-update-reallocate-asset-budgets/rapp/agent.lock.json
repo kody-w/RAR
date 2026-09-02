@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_reallocate_asset_budgets",
+  "agent_bytes": 10646,
   "agent_file": "teams_update_reallocate_asset_budgets_agent.py",
   "agent_sha256": "cb27ce3ccd3a95169fe48c27d89fd8dbe6835f71288a5f312bbf6767be08ab4d",
+  "backup_agent": "teams_update_reallocate_asset_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateReallocateAssetBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-reallocate-asset-budgets:15db08a391ad5dc33fd7908c42e5fad8c4c60f8c40ca915ef11a759deafdc86c",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateReallocateAssetBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24695,
+  "skill_sha256": "5aa44ec7cb2b81ec6eca110c4480701edbbee9ff7626358f27097403a00079f6",
   "tool_schema": {
     "properties": {
       "operation": {

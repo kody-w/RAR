@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp-crispy-singleton",
+  "agent_bytes": 30251,
   "agent_file": "rapp_crispy_agent.py",
   "agent_sha256": "4229fed6d82f92d9561fd291f4bb61e7862c710f24d0b03b43f514745f665f72",
+  "backup_agent": "rapp_crispy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappCrispyAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "@kody-w",
@@ -24,8 +27,16 @@
     ],
     "version": "1.4.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-crispy-singleton:9d2568cc6e7def7d01d80b3f4ca0446e5016b629552396735eedaccdd20fcc9a",
+  "rollback_agent_retained": true,
   "runtime_name": "RappCrispy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 52756,
+  "skill_sha256": "8060520ab96fc371ea3975c2bc9178beecff3b82ec0461abd463bf1439849f0b",
   "tool_schema": {
     "properties": {
       "action": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_convert_projects_to_fixed_assets",
+  "agent_bytes": 10747,
   "agent_file": "adaptive_card_convert_projects_to_fixed_assets_agent.py",
   "agent_sha256": "0c7e8b85530270b6832052276f6a36c54e5de1502d1cf07617f2b1b52f9d98e9",
+  "backup_agent": "adaptive_card_convert_projects_to_fixed_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConvertProjectsToFixedAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-convert-projects-to-fixed-assets:c9f2f0aab1a362ff3e003bd59078698a10e30776b03e01d18776fee45f4f0074",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardConvertProjectsToFixedAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25006,
+  "skill_sha256": "90378b7f5ceef945d86c78911dd7f3216fdd00bfc7a83ecf9ed64a32811ea9b8",
   "tool_schema": {
     "properties": {
       "operation": {

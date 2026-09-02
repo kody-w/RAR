@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_develop_scenario_and_contingency_plans",
+  "agent_bytes": 10984,
   "agent_file": "configure_develop_scenario_and_contingency_plans_agent.py",
   "agent_sha256": "f9db387b58f7c69f4f9af634c11e2c4bcca65cc3b8e9a7791a8d4a264644181a",
+  "backup_agent": "configure_develop_scenario_and_contingency_plans_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDevelopScenarioAndContingencyPlans",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-develop-scenario-and-contingency-plans:2a53307dfb1a518bcde3d7592304dd7f0f120330e1e63aafc3fe723556f5730c",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDevelopScenarioAndContingencyPlans",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25328,
+  "skill_sha256": "014324133012f908e82190fff52202ff5683a8c147288e57a60e8b1578fa2747",
   "tool_schema": {
     "properties": {
       "operation": {

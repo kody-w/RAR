@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_procurement_risks",
+  "agent_bytes": 10628,
   "agent_file": "dashboard_manage_procurement_risks_agent.py",
   "agent_sha256": "5e9f4d875ea551765e9a24fb548fc277be7cd430236c242829c0c31e70d733d4",
+  "backup_agent": "dashboard_manage_procurement_risks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageProcurementRisks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-procurement-risks:63c9ee3b0fe6fcdaecace47d63a430fdad3c0982c466aea78687055ab220085c",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageProcurementRisks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24675,
+  "skill_sha256": "b0d50ce4da7f776f3af14f9a8fc9a6aa12d311e7ce5a49e3c54553ff41439fe7",
   "tool_schema": {
     "properties": {
       "operation": {

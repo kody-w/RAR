@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/style_analyzer",
+  "agent_bytes": 9260,
   "agent_file": "style_analyzer_agent.py",
   "agent_sha256": "529eb8528b62f6d9e5c1d80182371e91a9c7d725ddb394fb0588a2d6f7608287",
+  "backup_agent": "style_analyzer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StyleAnalyzer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Srinivas Varukala",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/style-analyzer:19bdd8a06b0a8f031c1784ac2546f772f3a5e6333316def0a18eb8c5fd038ded",
+  "rollback_agent_retained": true,
   "runtime_name": "StyleAnalyzer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22460,
+  "skill_sha256": "0346a3c3822cd844a0b41a96ba39bf86daebff2f7db8f4ebec9b5fdc404c37c5",
   "tool_schema": {
     "properties": {
       "audience": {

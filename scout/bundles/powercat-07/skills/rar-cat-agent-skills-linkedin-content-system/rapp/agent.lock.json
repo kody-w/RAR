@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/linkedin_content_system",
+  "agent_bytes": 9090,
   "agent_file": "linkedin_content_system_agent.py",
   "agent_sha256": "cd5a44eb81ec76324921f288cf231f95096b3a9c67f5a5269038dc5b748eb744",
+  "backup_agent": "linkedin_content_system_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LinkedinContentSystem",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Simon Owen",
@@ -43,8 +46,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/linkedin-content-system:5247ea83113ac0204c8f6ff542cdcc5cd686b0de712b57fde83879c8895a742f",
+  "rollback_agent_retained": true,
   "runtime_name": "LinkedinContentSystem",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21992,
+  "skill_sha256": "3557b4bce210b0a6a5ebc5e283647e5ab17eb9a1e123ba8a51d89a7c46f061d5",
   "tool_schema": {
     "properties": {
       "audience": {

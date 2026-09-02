@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_develop_merchandise_and_assortment_plans",
+  "agent_bytes": 10834,
   "agent_file": "dashboard_develop_merchandise_and_assortment_plans_agent.py",
   "agent_sha256": "23f2b9c2ff11ec390d2a7e364ef5f1d07f665f95ddb1add31d653c7e70a78ea1",
+  "backup_agent": "dashboard_develop_merchandise_and_assortment_plans_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDevelopMerchandiseAndAssortmentPlans",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-develop-merchandise-and-assortment-plans:7cbd08be26873f2441418152628a74b3f8c94893f5f08d90600278876adc44d3",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDevelopMerchandiseAndAssortmentPlans",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25224,
+  "skill_sha256": "06731ee98a17ba752a79759f5c5eb020368e3005a677b73b18480d3e3f27c518",
   "tool_schema": {
     "properties": {
       "operation": {

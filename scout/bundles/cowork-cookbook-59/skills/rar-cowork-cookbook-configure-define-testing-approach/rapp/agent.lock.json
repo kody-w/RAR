@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_define_testing_approach",
+  "agent_bytes": 10809,
   "agent_file": "configure_define_testing_approach_agent.py",
   "agent_sha256": "8772853e8670629f4718753f10f6c731c220d428bdd049c850cf85f09a63c25f",
+  "backup_agent": "configure_define_testing_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDefineTestingApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-define-testing-approach:14c16b84ae9a9e110f1c7038224f8ed9a0a3b4050f8bfb81e764a54aa8b0034b",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDefineTestingApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24849,
+  "skill_sha256": "a6c39fbb897b1042b93aac385c749a1bb900dedc593baa8e093cb7863bc3ce26",
   "tool_schema": {
     "properties": {
       "operation": {

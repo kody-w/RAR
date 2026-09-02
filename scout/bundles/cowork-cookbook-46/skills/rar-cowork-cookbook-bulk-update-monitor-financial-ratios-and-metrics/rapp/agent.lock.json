@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_monitor_financial_ratios_and_metrics",
+  "agent_bytes": 10781,
   "agent_file": "bulk_update_monitor_financial_ratios_and_metrics_agent.py",
   "agent_sha256": "91eab69ca4d7eb872d578353b8e4bfd51981e8697ffbf75d8d02328a75a12af5",
+  "backup_agent": "bulk_update_monitor_financial_ratios_and_metrics_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateMonitorFinancialRatiosAndMetrics",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-monitor-financial-ratios-and-metrics:d4fcb3c4edd383a6afe47774ab0d4b29e0059ffe427ba8c8c0c4d4275dbaa1a6",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateMonitorFinancialRatiosAndMetrics",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25078,
+  "skill_sha256": "ea945ae1f2eacc6465a52045b69fe7e2a2a2bae513f4536f911737bbf2ca856b",
   "tool_schema": {
     "properties": {
       "operation": {

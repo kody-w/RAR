@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_raise_purchase_requisitions",
+  "agent_bytes": 10718,
   "agent_file": "scheduled_brief_raise_purchase_requisitions_agent.py",
   "agent_sha256": "20f0cb121a1eca8fede753e6af23cfbfd98b435ce375cb14c27e6cbe48e3585b",
+  "backup_agent": "scheduled_brief_raise_purchase_requisitions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefRaisePurchaseRequisitions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-raise-purchase-requisitions:dd16708500e63420be0bc27f10caf8ba88ae4d5780beccc0af2f58d6ac2c71f3",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefRaisePurchaseRequisitions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24867,
+  "skill_sha256": "d4cf3cf590e50c3a1ea18c079b4cbc7b640fd068cfd411b0c23f02790a9d8161",
   "tool_schema": {
     "properties": {
       "operation": {

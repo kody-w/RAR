@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_coordinate_service_work_with_customer",
+  "agent_bytes": 10815,
   "agent_file": "audit_coordinate_service_work_with_customer_agent.py",
   "agent_sha256": "50351fc14b4eb86dc528303ee84510b0966f606343d6f102e7e81be26398a53f",
+  "backup_agent": "audit_coordinate_service_work_with_customer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditCoordinateServiceWorkWithCustomer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-coordinate-service-work-with-customer:e7f8e2477ef58806787f4fbfc981d215e757c008cda8851d3e9ebd4c642c41f6",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditCoordinateServiceWorkWithCustomer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25115,
+  "skill_sha256": "5d66d79053f98cbbad0ae636ee41ee65a788ad2c11165a7b5ac948b58bf9fede",
   "tool_schema": {
     "properties": {
       "criteria": {

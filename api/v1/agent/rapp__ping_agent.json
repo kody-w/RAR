@@ -3,10 +3,11 @@
   "id": "rapp__ping_agent",
   "name": "Ping",
   "rar_name": "@rapp/ping_agent",
-  "rappid": "rappid:@rapp/ping_agent:1b56941ea96388cabe960a7466ca617d2ca91f5f6a0f3855080a76758414094b",
-  "_migrated_from": "rappid:v2:agent:@rapp/ping_agent:b069847786f516d1dc3f957fec801505",
+  "rappid": "rappid:@rapp/ping:60a2b0dc6971cb2e241533502dfa0fa4950230132a9e94d7b94c0fad576d6891",
+  "_migrated_from": "rappid:@rapp/ping_agent:1b56941ea96388cabe960a7466ca617d2ca91f5f6a0f3855080a76758414094b",
   "_migrated_from_all": [
-    "rappid:v2:agent:@rapp/ping_agent:b069847786f516d1dc3f957fec801505"
+    "rappid:v2:agent:@rapp/ping_agent:b069847786f516d1dc3f957fec801505",
+    "rappid:@rapp/ping_agent:1b56941ea96388cabe960a7466ca617d2ca91f5f6a0f3855080a76758414094b"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -29,9 +30,18 @@
   "sha256": "4761dcecf8af3893153407860dc6786ac8cd7d3654966bb57923143db885f0af",
   "has_card": true,
   "added_at": "2026-04-27T23:08:42Z",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-ping",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__ping_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/ping_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/ping_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-ping/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-ping/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__ping_agent.py",
   "api_card_url": null,

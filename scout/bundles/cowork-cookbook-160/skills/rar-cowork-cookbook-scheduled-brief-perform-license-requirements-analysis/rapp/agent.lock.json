@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_perform_license_requirements_analysis",
+  "agent_bytes": 10884,
   "agent_file": "scheduled_brief_perform_license_requirements_analysis_agent.py",
   "agent_sha256": "e6b05bc104cb1be26efe0f85f39c631590c9334e3522583f3b313904961e6207",
+  "backup_agent": "scheduled_brief_perform_license_requirements_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefPerformLicenseRequirementsAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-perform-license-requirements-analysis:e594e8160c48f241cb2e66a47d651a0fccdfcfd61f6f3142329989c378ce3016",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefPerformLicenseRequirementsAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25259,
+  "skill_sha256": "e041be72ab0fc85a6caaaa489a0c44f15a2b5130b39140d4e2081b0bf4c2830e",
   "tool_schema": {
     "properties": {
       "operation": {

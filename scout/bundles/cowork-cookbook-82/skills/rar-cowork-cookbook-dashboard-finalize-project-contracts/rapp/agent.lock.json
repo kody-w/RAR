@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_finalize_project_contracts",
+  "agent_bytes": 10662,
   "agent_file": "dashboard_finalize_project_contracts_agent.py",
   "agent_sha256": "e8998828ada5baad255acc6e7f9a7c6cf3f1221c46d8a059d0bf3ff960667a6c",
+  "backup_agent": "dashboard_finalize_project_contracts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardFinalizeProjectContracts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-finalize-project-contracts:78c4ac48cfad07d7477ee728ee76c5dba3d31a3087c1af04c808ca7ecfab99fa",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardFinalizeProjectContracts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24719,
+  "skill_sha256": "4b6701b63b5729537cc716eec44c000a2efab378a9337f1bb43a261ebf11bbda",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_operating_hours_and_schedule",
+  "agent_bytes": 10836,
   "agent_file": "scheduled_brief_define_operating_hours_and_schedule_agent.py",
   "agent_sha256": "0ab553d774cbaa92bc12fbad3e16b2ecc7788d6b9ca2e24de05eb166b1f16e6c",
+  "backup_agent": "scheduled_brief_define_operating_hours_and_schedule_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineOperatingHoursAndSchedule",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-operating-hours-and-schedule:695acad152eae833635ef66a3ec78958548ec1f4840b93c32010b69451fc1f9d",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineOperatingHoursAndSchedule",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25182,
+  "skill_sha256": "9a1e654835e61c87fe246930c5a78958a1ab1d77c3210051d741f09c77790ff6",
   "tool_schema": {
     "properties": {
       "operation": {

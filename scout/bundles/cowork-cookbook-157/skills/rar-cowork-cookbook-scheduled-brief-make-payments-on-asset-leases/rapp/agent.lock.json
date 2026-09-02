@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_make_payments_on_asset_leases",
+  "agent_bytes": 10762,
   "agent_file": "scheduled_brief_make_payments_on_asset_leases_agent.py",
   "agent_sha256": "6e6bab2f2fc3d307f85d62d50c834bb69be780785e78b118e06bf9feb09f7780",
+  "backup_agent": "scheduled_brief_make_payments_on_asset_leases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefMakePaymentsOnAssetLeases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-make-payments-on-asset-leases:c3a2437f66b65ae6fb2bbed7d4a3c649de8601ec3aa56ef11d36be3629e9fe45",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefMakePaymentsOnAssetLeases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25022,
+  "skill_sha256": "db6154e7a5160d0c183a9d2aed8c970b9f33f9fddbd79c17e6dde2079ec1e898",
   "tool_schema": {
     "properties": {
       "operation": {

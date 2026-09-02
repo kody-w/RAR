@@ -3,10 +3,11 @@
   "id": "kody-w__copilot_studio_probe_agent",
   "name": "CopilotStudioProbe",
   "rar_name": "@kody-w/copilot_studio_probe_agent",
-  "rappid": "rappid:@kody-w/copilot_studio_probe_agent:c7ec63955a23abf5c47a4ccc8e26fb45cb2a8f0445ff9bd6bf16c73cc573f3ba",
-  "_migrated_from": "rappid:@kody-w/copilot_studio_probe_agent:490f017dc847c25b607de45a8c4fea5eab949fd4936380f23879b736e2647e9a",
+  "rappid": "rappid:@kody-w/copilot-studio-probe:2c9352fc32a3f9772652ada7236b2c98d512048a1d434bb7a46de226ebc53803",
+  "_migrated_from": "rappid:@kody-w/copilot_studio_probe_agent:c7ec63955a23abf5c47a4ccc8e26fb45cb2a8f0445ff9bd6bf16c73cc573f3ba",
   "_migrated_from_all": [
-    "rappid:@kody-w/copilot_studio_probe_agent:490f017dc847c25b607de45a8c4fea5eab949fd4936380f23879b736e2647e9a"
+    "rappid:@kody-w/copilot_studio_probe_agent:490f017dc847c25b607de45a8c4fea5eab949fd4936380f23879b736e2647e9a",
+    "rappid:@kody-w/copilot_studio_probe_agent:c7ec63955a23abf5c47a4ccc8e26fb45cb2a8f0445ff9bd6bf16c73cc573f3ba"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -35,9 +36,18 @@
   "sha256": "59b3c5cdb2228e333e20ea3ef89c41dac9bb8f12a940b68d591619726d2a0367",
   "has_card": true,
   "added_at": "2026-07-07T00:32:03Z",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-copilot-studio-probe",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__copilot_studio_probe_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-probe/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-probe/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_probe_agent.py",
   "api_card_url": null,

@@ -1,11 +1,14 @@
 {
   "agent": "@kody-w/manage_memory_agent",
+  "agent_bytes": 11051,
   "agent_file": "manage_memory_agent.py",
   "agent_sha256": "a3866eaef31b35e1a7b9bb17755d42950e3b62ab4c04b051f3f0e27808acb435",
+  "backup_agent": "manage_memory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ManageMemoryAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.storage_factory"
+    "brainstem:utils.storage_factory"
   ],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/manage-memory:96e311205d0b86dee407a4630d425816b70c161170a4d63b95fbbfff0e5702ce",
+  "rollback_agent_retained": true,
   "runtime_name": "ManageMemory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21760,
+  "skill_sha256": "a230f18aebce064f6eb6abe2b5670a4cca0314f3741231313bc27aa28614c6bd",
   "tool_schema": {
     "properties": {
       "content": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/ai_first_process_redesign",
+  "agent_bytes": 8452,
   "agent_file": "ai_first_process_redesign_agent.py",
   "agent_sha256": "6fcb40c0aefde81d18f04518bfc8826d717720562bf6014f8f96d11677b90bb9",
+  "backup_agent": "ai_first_process_redesign_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AiFirstProcessRedesign",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Tim Sparks",
@@ -40,8 +43,16 @@
     ],
     "version": "3.1.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/ai-first-process-redesign:f22cf7b97a822a43dd2b6fff909f0fd28da1144a6d4dd6358c92b8a151d18ebf",
+  "rollback_agent_retained": true,
   "runtime_name": "AiFirstProcessRedesign",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 20692,
+  "skill_sha256": "008812c1ae59482d2b03165c5befbd7e95142c2a90358b44ca4ddc88957cc263",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_analyze_maintenance_costs",
+  "agent_bytes": 10710,
   "agent_file": "scheduled_brief_analyze_maintenance_costs_agent.py",
   "agent_sha256": "a675d65b56c4f9df54eb2259b34b44f63de31b48779f1851d2d1203e74b4d0b0",
+  "backup_agent": "scheduled_brief_analyze_maintenance_costs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAnalyzeMaintenanceCosts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-analyze-maintenance-costs:3b060603ace8d8a72808be72647a7ec912243050f2d2388a3124835311a3d000",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAnalyzeMaintenanceCosts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24846,
+  "skill_sha256": "0613cb38befdec8db2013e22e9e40a8ce536781e8f8d1f30a437d481e0863c42",
   "tool_schema": {
     "properties": {
       "operation": {

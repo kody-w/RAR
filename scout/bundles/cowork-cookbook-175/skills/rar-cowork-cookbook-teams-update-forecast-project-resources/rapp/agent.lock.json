@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_forecast_project_resources",
+  "agent_bytes": 10657,
   "agent_file": "teams_update_forecast_project_resources_agent.py",
   "agent_sha256": "fbca85db68f707b8495fd68431268869d02277419901f13d330f900df61abad8",
+  "backup_agent": "teams_update_forecast_project_resources_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateForecastProjectResources",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-forecast-project-resources:b51adb873bb88d99ef3bac0cfc3ca8fd4518f4da40be5043ec714a13f39f7bc2",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateForecastProjectResources",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24703,
+  "skill_sha256": "d419c40276ace666830acaaaf9628909f188b7e34e5aa554296cc4f50721c9f6",
   "tool_schema": {
     "properties": {
       "operation": {

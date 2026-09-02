@@ -3,10 +3,11 @@
   "id": "wildhaven__penumbra_agent",
   "name": "Penumbra",
   "rar_name": "@wildhaven/penumbra_agent",
-  "rappid": "rappid:@wildhaven/penumbra_agent:743d998a765ce5b3279954d27dd10f901ac19cf7803b5d029e83542f75f57cc1",
-  "_migrated_from": "rappid:@wildhaven/penumbra_agent:70cc8d89ff3e96db3e6e9a0d064cff4cf1d509979f192c1a6f5815e8b2bec035",
+  "rappid": "rappid:@wildhaven/penumbra:8e5f0966bf70785fac912772bf4672bd526c9bb893ccafdc5d5f7f5579070efb",
+  "_migrated_from": "rappid:@wildhaven/penumbra_agent:743d998a765ce5b3279954d27dd10f901ac19cf7803b5d029e83542f75f57cc1",
   "_migrated_from_all": [
-    "rappid:@wildhaven/penumbra_agent:70cc8d89ff3e96db3e6e9a0d064cff4cf1d509979f192c1a6f5815e8b2bec035"
+    "rappid:@wildhaven/penumbra_agent:70cc8d89ff3e96db3e6e9a0d064cff4cf1d509979f192c1a6f5815e8b2bec035",
+    "rappid:@wildhaven/penumbra_agent:743d998a765ce5b3279954d27dd10f901ac19cf7803b5d029e83542f75f57cc1"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -33,9 +34,18 @@
   "sha256": "00a2946996be36b9234c3e9cbf916eee70fed319104bff2aef7325e437343a6f",
   "has_card": true,
   "added_at": "2026-05-16T12:50:07-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-wildhaven-penumbra",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/wildhaven__penumbra_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-penumbra/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-penumbra/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__penumbra_agent.py",
   "api_card_url": null,

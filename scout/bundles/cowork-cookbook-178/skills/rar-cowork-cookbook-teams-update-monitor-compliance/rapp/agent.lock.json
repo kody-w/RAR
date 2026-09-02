@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_monitor_compliance",
+  "agent_bytes": 10583,
   "agent_file": "teams_update_monitor_compliance_agent.py",
   "agent_sha256": "42c9c65bfcc00007a2b3c5254ffe9daff65d55aff46cf5a2e1fdcb87aafc3fa3",
+  "backup_agent": "teams_update_monitor_compliance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateMonitorCompliance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-monitor-compliance:0b5b8da78700b3a35a4d83483f34022b7484a230ea69800ed32cd5df5b7fb1d9",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateMonitorCompliance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24505,
+  "skill_sha256": "44433d3f28ba8a9b51010528b221b1d8b76095ce927cfa9a4806364684ac78a7",
   "tool_schema": {
     "properties": {
       "operation": {

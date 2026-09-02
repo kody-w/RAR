@@ -3,10 +3,11 @@
   "id": "kody-w__rapp_projects",
   "name": "RappProjects",
   "rar_name": "@kody-w/rapp_projects",
-  "rappid": "rappid:@kody-w/rapp_projects:bda15d2ae308f3ff842c87fe3fe3fe459101717d52aa497480fc7697a737bc6e",
-  "_migrated_from": "rappid:@kody-w/rapp_projects:62e72af086647516c3e4685f7e46843d11c24bfb4c07978137f84ecc6b5fb1a6",
+  "rappid": "rappid:@kody-w/rapp-projects:901718bc9aaf54d5f849173968dde177d46dd088d22dee04b4ba716322332f9e",
+  "_migrated_from": "rappid:@kody-w/rapp_projects:bda15d2ae308f3ff842c87fe3fe3fe459101717d52aa497480fc7697a737bc6e",
   "_migrated_from_all": [
-    "rappid:@kody-w/rapp_projects:62e72af086647516c3e4685f7e46843d11c24bfb4c07978137f84ecc6b5fb1a6"
+    "rappid:@kody-w/rapp_projects:62e72af086647516c3e4685f7e46843d11c24bfb4c07978137f84ecc6b5fb1a6",
+    "rappid:@kody-w/rapp_projects:bda15d2ae308f3ff842c87fe3fe3fe459101717d52aa497480fc7697a737bc6e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.3",
@@ -31,9 +32,18 @@
   "sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca",
   "has_card": true,
   "added_at": "2026-08-31T11:52:12-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-rapp-projects",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rapp_projects.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-rapp-projects/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-rapp-projects/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_projects.py",
   "api_card_url": null,

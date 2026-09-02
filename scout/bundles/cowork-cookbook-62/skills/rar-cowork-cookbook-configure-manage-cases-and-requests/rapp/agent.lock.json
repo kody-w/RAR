@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_manage_cases_and_requests",
+  "agent_bytes": 10812,
   "agent_file": "configure_manage_cases_and_requests_agent.py",
   "agent_sha256": "4e8d983ab97a670e4c3fac19a00fb9b01fb31b5dfcf26fab33d5c09aaf84b82d",
+  "backup_agent": "configure_manage_cases_and_requests_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageCasesAndRequests",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-manage-cases-and-requests:db1bf29d60d8426d64c38a351a60d4d07b22d14357c863fe06176744b139d0e5",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureManageCasesAndRequests",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24895,
+  "skill_sha256": "9ab06ad20c2fd5c0891fdeed6a3c7aa90dd62edb7be494c52c3e26de60455e8c",
   "tool_schema": {
     "properties": {
       "operation": {

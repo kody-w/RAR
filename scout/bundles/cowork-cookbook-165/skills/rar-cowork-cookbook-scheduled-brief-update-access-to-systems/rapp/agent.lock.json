@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_update_access_to_systems",
+  "agent_bytes": 10715,
   "agent_file": "scheduled_brief_update_access_to_systems_agent.py",
   "agent_sha256": "6e2dfdd825e8920daf3d2bfbe65a605bbd30a9ec5951278551e6b2581a5b35e7",
+  "backup_agent": "scheduled_brief_update_access_to_systems_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefUpdateAccessToSystems",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-update-access-to-systems:98d2741cea7fcc2eb2eb6c225755f21be78c1ba7203f66888a1bfe34ec5eeebf",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefUpdateAccessToSystems",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24859,
+  "skill_sha256": "aba7332aa0bf8a2773b0e56689a39ac51f4194e9535cac092de75756889e78a5",
   "tool_schema": {
     "properties": {
       "operation": {

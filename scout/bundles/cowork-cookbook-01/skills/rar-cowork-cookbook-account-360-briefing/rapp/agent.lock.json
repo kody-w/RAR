@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/account_360_briefing",
+  "agent_bytes": 10541,
   "agent_file": "account_360_briefing_agent.py",
   "agent_sha256": "8ee31292f79ce49b2e8db5d4558a0af466b628c2ff2dff52bb8ca308cd4f6dd9",
+  "backup_agent": "account_360_briefing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Account360Briefing",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -88,8 +91,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/account-360-briefing:f7b2a437a8c6ca0748c29c434207fdcb58bca6c2fb533295e32e35dccfc4a867",
+  "rollback_agent_retained": true,
   "runtime_name": "Account360Briefing",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24374,
+  "skill_sha256": "46954afbecf3a630253361e0b4b0fe75a8d823e4616734e3adfba7e883a6e51d",
   "tool_schema": {
     "properties": {
       "operation": {

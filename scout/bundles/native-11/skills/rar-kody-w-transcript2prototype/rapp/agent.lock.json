@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/transcript2prototype",
+  "agent_bytes": 397197,
   "agent_file": "transcript2prototype_agent.py",
   "agent_sha256": "73d95878bc3f14510eefa8dd16707d5cc49e9c51becd7f2f4e4351197bdce939",
+  "backup_agent": "transcript2prototype_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Transcript2PrototypeAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -29,8 +32,16 @@
     ],
     "version": "1.0.4"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/transcript2prototype:f830545bb538cbcea143dcd4655dd65154cfac69670398ff48f57eccf04f9082",
+  "rollback_agent_retained": true,
   "runtime_name": "Transcript2Prototype",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 557472,
+  "skill_sha256": "f15cd246274df312caf3df0bc30b8c703e2e9b830dd4549f2f0f285af388f4dc",
   "tool_schema": {
     "properties": {},
     "required": [],

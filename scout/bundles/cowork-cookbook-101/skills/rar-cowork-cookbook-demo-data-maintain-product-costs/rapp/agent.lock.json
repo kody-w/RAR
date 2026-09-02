@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_maintain_product_costs",
+  "agent_bytes": 10505,
   "agent_file": "demo_data_maintain_product_costs_agent.py",
   "agent_sha256": "c3a01655635641b863c1169a21fcb613782c3282db877ceaf8540a591e568197",
+  "backup_agent": "demo_data_maintain_product_costs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataMaintainProductCosts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-maintain-product-costs:a5ad569854291b42fa33bfe260e2f103ac098c251adfbcb3d63363228dc9aba1",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataMaintainProductCosts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24456,
+  "skill_sha256": "08309b6ce8ebef897cfa9f6c837202179ea860f43d9be9b0d6c9f8b0886fa8ed",
   "tool_schema": {
     "properties": {
       "operation": {

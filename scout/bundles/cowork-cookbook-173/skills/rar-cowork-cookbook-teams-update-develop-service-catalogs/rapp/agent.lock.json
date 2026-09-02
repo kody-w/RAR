@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_develop_service_catalogs",
+  "agent_bytes": 10646,
   "agent_file": "teams_update_develop_service_catalogs_agent.py",
   "agent_sha256": "4cca61b74b8e150822448d800b42fba02b40748304ad63a0bdbfa3bb72ac4a0e",
+  "backup_agent": "teams_update_develop_service_catalogs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDevelopServiceCatalogs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-develop-service-catalogs:4e7c8c66e4855cb0107cd3230194701cd7a8bf756fb0cf77496e87b24e9cf005",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDevelopServiceCatalogs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24679,
+  "skill_sha256": "0b746acbfb840dae0efc0653e1f462f75d2d301d7d533c96777c211cadc4bcfe",
   "tool_schema": {
     "properties": {
       "operation": {

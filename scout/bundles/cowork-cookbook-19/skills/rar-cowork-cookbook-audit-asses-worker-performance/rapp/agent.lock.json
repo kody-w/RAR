@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_asses_worker_performance",
+  "agent_bytes": 10646,
   "agent_file": "audit_asses_worker_performance_agent.py",
   "agent_sha256": "05c36eee21555aa98f256a8ce24f3b6a58085318e084b9b3be009f7f8feacd37",
+  "backup_agent": "audit_asses_worker_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAssesWorkerPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-asses-worker-performance:c103bcb04e66757b7e1e15ef9d89281af5917244538f3374cdac07daae64b1a2",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAssesWorkerPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24667,
+  "skill_sha256": "234fe4cabfd494d4375d2e3e4db23a609aaaeb6d417303360d45b650f0f0f620",
   "tool_schema": {
     "properties": {
       "criteria": {

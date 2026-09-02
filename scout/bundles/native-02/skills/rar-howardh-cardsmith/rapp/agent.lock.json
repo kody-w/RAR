@@ -1,9 +1,12 @@
 {
   "agent": "@howardh/cardsmith_agent",
+  "agent_bytes": 32911,
   "agent_file": "cardsmith_agent.py",
   "agent_sha256": "d7389ce10549693f4f97098379ca86c4ddbb22c9b4b93f891c99ae2f1aa0d4d4",
+  "backup_agent": "cardsmith_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CardSmithAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Howard",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@howardh/cardsmith:78b081e93ee3180dd48e0d2432279e08d28f7e38f317612bdc6453b6a74215fe",
+  "rollback_agent_retained": true,
   "runtime_name": "CardSmith",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 49202,
+  "skill_sha256": "7169ce5511e22d8b02014575554123a8c984e51531785ccb2a519914ee9daa2d",
   "tool_schema": {
     "properties": {
       "action": {

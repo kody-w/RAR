@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_merge_cases",
+  "agent_bytes": 10375,
   "agent_file": "demo_data_merge_cases_agent.py",
   "agent_sha256": "ecf7f76578d245210568234cbc781874d0cec8bfd833bf0a5406db3d885b607d",
+  "backup_agent": "demo_data_merge_cases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataMergeCases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-merge-cases:959e5b8173778fb22b12de297cd0db83e86c09837ac6817b1dab6e5c7bb07540",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataMergeCases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24111,
+  "skill_sha256": "b3a94dfc8f8a2f0bea9d509329a68a5e1d5f023a5083efba3dcba2439ed8a3de",
   "tool_schema": {
     "properties": {
       "operation": {

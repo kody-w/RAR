@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/ez_sharpen_agent",
+  "agent_bytes": 26427,
   "agent_file": "ez_sharpen_agent.py",
   "agent_sha256": "ae232a01c0cee6bf5109635803b5cf99ba215201856d4c830b3b11ae972992e6",
+  "backup_agent": "ez_sharpen_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EZSharpenAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/ez-sharpen:658a08cba777507f3d5098cc9b6a881aa5ea213c8ca4eac9c70f0055491160e9",
+  "rollback_agent_retained": true,
   "runtime_name": "EZSharpen",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 52291,
+  "skill_sha256": "6348298317de83b344b33e05923d0d3bae66d69724baa04ff61fd5878559e65c",
   "tool_schema": {
     "properties": {
       "action": {

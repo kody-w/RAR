@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_manage_project_communications",
+  "agent_bytes": 10671,
   "agent_file": "ppt_exec_manage_project_communications_agent.py",
   "agent_sha256": "4fe3d419c55626916d21d37421323bf8c1f0e54ea9134c99f0fc2dced26d1b73",
+  "backup_agent": "ppt_exec_manage_project_communications_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecManageProjectCommunications",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-manage-project-communications:60df3423d794103a659bbbda4b83a9ef4a1da0c0803a1bab0b6e00e9c7a22f65",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecManageProjectCommunications",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24751,
+  "skill_sha256": "294c9476e7686fe46ff47426647c1c287066a9b813660629d883e936c0242a9b",
   "tool_schema": {
     "properties": {
       "operation": {

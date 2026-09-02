@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_predict_customer_payments",
+  "agent_bytes": 10613,
   "agent_file": "ppt_exec_predict_customer_payments_agent.py",
   "agent_sha256": "bdc31c71c410aaa1bd118c6f571be2ebb9fa3cac1c479326b005978c7cb66c93",
+  "backup_agent": "ppt_exec_predict_customer_payments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecPredictCustomerPayments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-predict-customer-payments:60ca9a1e78d87ca53aca07ff7a34c93c7b46968db7dc1946abc6374dec1cbf91",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecPredictCustomerPayments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24632,
+  "skill_sha256": "3702f1ec12696c1dd1ad212f9dfcbcd7697075feabe6ac633e376b67c72fab58",
   "tool_schema": {
     "properties": {
       "operation": {

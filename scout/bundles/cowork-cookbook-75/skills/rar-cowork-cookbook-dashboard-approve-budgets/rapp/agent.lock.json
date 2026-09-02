@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_approve_budgets",
+  "agent_bytes": 10518,
   "agent_file": "dashboard_approve_budgets_agent.py",
   "agent_sha256": "c1f22fc11f2c4a3d45a1dcc921e0eb80f25c858a0d1dc7e465484c67a9e9de5e",
+  "backup_agent": "dashboard_approve_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardApproveBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-approve-budgets:d990526a12c9a7232b46a77f3d078babc084ce45455fb4602ead89d4e08c0400",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardApproveBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24397,
+  "skill_sha256": "4384e1c207d2528256ebec63d29b5673d06b034348137dc70c49cdb174b11d6e",
   "tool_schema": {
     "properties": {
       "operation": {

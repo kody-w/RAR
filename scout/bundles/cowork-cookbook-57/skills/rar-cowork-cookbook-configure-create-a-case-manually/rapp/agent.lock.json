@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_create_a_case_manually",
+  "agent_bytes": 10774,
   "agent_file": "configure_create_a_case_manually_agent.py",
   "agent_sha256": "941712f5811073f894c1f99438baff5c2237120352922b122bc5bbf8e285cc07",
+  "backup_agent": "configure_create_a_case_manually_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureCreateACaseManually",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-create-a-case-manually:aa4bb4cca43f8d2cd88b07f75e3981989c9227f76ca7edd0bb0ef0a593504014",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureCreateACaseManually",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24788,
+  "skill_sha256": "0a11fd0a9cce60c6680f3ebe07a6f9da7ae228e8c807a924bf4e21e6ea055551",
   "tool_schema": {
     "properties": {
       "operation": {

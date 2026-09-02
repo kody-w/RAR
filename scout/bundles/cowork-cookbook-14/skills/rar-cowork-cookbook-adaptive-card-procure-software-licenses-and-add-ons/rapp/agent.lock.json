@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_procure_software_licenses_and_add_ons",
+  "agent_bytes": 10841,
   "agent_file": "adaptive_card_procure_software_licenses_and_add_ons_agent.py",
   "agent_sha256": "9b5a68f3396abdd058951e9d54ab44c3aa60e88cc550c615ee2baee0e6951f73",
+  "backup_agent": "adaptive_card_procure_software_licenses_and_add_ons_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardProcureSoftwareLicensesAndAddOns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-procure-software-licenses-and-add-ons:e3c44a432acac4a3fae3a2bb10906f1cd09e70babf4facf122aec84e9e084141",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardProcureSoftwareLicensesAndAddOns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25207,
+  "skill_sha256": "7a40e8e5ba4e242b9216c127302eba790f09f447e5b632201d8dd7cbc14b9c2f",
   "tool_schema": {
     "properties": {
       "operation": {

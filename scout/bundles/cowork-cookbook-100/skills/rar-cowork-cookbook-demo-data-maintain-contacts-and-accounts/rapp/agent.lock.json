@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_maintain_contacts_and_accounts",
+  "agent_bytes": 10617,
   "agent_file": "demo_data_maintain_contacts_and_accounts_agent.py",
   "agent_sha256": "5a08cbc100757428a9031ec3aaf72d4f26e71644c93c7f599fd3ab79f55dc78a",
+  "backup_agent": "demo_data_maintain_contacts_and_accounts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataMaintainContactsAndAccounts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-maintain-contacts-and-accounts:0a30331e2132da88760c658551be545c61d213cc62310b75a5f446e5a5403e23",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataMaintainContactsAndAccounts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24725,
+  "skill_sha256": "c2a8aeca966c62a6a812e6a8a3fe8fc19d558240d8544010950cc998420fe0cc",
   "tool_schema": {
     "properties": {
       "operation": {

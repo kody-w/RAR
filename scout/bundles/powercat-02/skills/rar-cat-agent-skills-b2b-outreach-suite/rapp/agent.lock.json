@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/b2b_outreach_suite",
+  "agent_bytes": 9382,
   "agent_file": "b2b_outreach_suite_agent.py",
   "agent_sha256": "dd2ff9fa0279217e4c73141b6680ecc31bb0dcf55b50f43d15f580b82452c119",
+  "backup_agent": "b2b_outreach_suite_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "B2bOutreachSuite",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Marcel",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/b2b-outreach-suite:1e44b25bc10b98aac8233bf0fc982140889e60a736cfb0c2dd961e28f25ab9a8",
+  "rollback_agent_retained": true,
   "runtime_name": "B2bOutreachSuite",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22832,
+  "skill_sha256": "58b7b765da13ee281e08de7f16aaaa0e83265f7071535e1ae90be89d15d292a2",
   "tool_schema": {
     "properties": {
       "audience": {

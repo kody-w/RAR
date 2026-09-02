@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_define_credit_and_collections_strategy",
+  "agent_bytes": 10695,
   "agent_file": "demo_data_define_credit_and_collections_strategy_agent.py",
   "agent_sha256": "28d8e2996facb121da33eae5d39764abc6df4bfebf8d8730d265e26c6a97672a",
+  "backup_agent": "demo_data_define_credit_and_collections_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDefineCreditAndCollectionsStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-define-credit-and-collections-strategy:167731f0d08bf8f279037eaa6f45bdc091d718d98561dea2856d069c1e693fd6",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDefineCreditAndCollectionsStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24959,
+  "skill_sha256": "89c5d587767758b51bb15943bb7d5121e04b6b79b3bdcd8dd887010334b5d244",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_schedule_maintenance_jobs",
+  "agent_bytes": 10738,
   "agent_file": "scheduled_brief_schedule_maintenance_jobs_agent.py",
   "agent_sha256": "620466c98977cab9f8146fd81a47c9d247af33b8654b1cd753ac3519e9570ef3",
+  "backup_agent": "scheduled_brief_schedule_maintenance_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefScheduleMaintenanceJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-schedule-maintenance-jobs:ce999638fe20e9ab3e648f9e07e3154bd28a130fa7c2c3cc9f545d697d4681d5",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefScheduleMaintenanceJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24874,
+  "skill_sha256": "372d36cb7bce912f7dd425d31a0ce3aeb6ba4d5a48a0b618eaab9ed44a0056b4",
   "tool_schema": {
     "properties": {
       "operation": {

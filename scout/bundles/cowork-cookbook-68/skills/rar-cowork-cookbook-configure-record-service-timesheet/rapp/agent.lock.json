@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_record_service_timesheet",
+  "agent_bytes": 10807,
   "agent_file": "configure_record_service_timesheet_agent.py",
   "agent_sha256": "abeb7f420887e505dfa58193300eeefee66b87a32a10ab18f4df11494d6d9864",
+  "backup_agent": "configure_record_service_timesheet_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureRecordServiceTimesheet",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-record-service-timesheet:2ae379bdb761b2bd0e73a08aaa8d9767c4c9d42bf3f8d88c0180df1d84508973",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureRecordServiceTimesheet",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24835,
+  "skill_sha256": "a090febb2550f8c50c5b013704dc52843250cad4e6f5c9d452234be9592363f8",
   "tool_schema": {
     "properties": {
       "operation": {

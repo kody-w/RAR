@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_develop_marketing_strategy",
+  "agent_bytes": 10834,
   "agent_file": "configure_develop_marketing_strategy_agent.py",
   "agent_sha256": "297d66c6ee383af3e816e1df62d4804d0da1009980b4fd68390256d25b4e3f4e",
+  "backup_agent": "configure_develop_marketing_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDevelopMarketingStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-develop-marketing-strategy:4ff6002cf89e381ecc3acb959286f90931b2424db9c7c08c172b2ae8c972de0c",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDevelopMarketingStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24926,
+  "skill_sha256": "825a0bc3515f14df2b35a55507bcb50a41cf8249304dc389daae4d91f2a6662c",
   "tool_schema": {
     "properties": {
       "operation": {

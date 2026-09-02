@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_document_warehouse_policies",
+  "agent_bytes": 10696,
   "agent_file": "teams_update_document_warehouse_policies_agent.py",
   "agent_sha256": "0a3afefe6ed23305d6e25cb7258f409bd6224fc8a41d0e62d611f928fce4001a",
+  "backup_agent": "teams_update_document_warehouse_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDocumentWarehousePolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-document-warehouse-policies:50b622df69d27bbf20c4eac2e8f42ee04a8c4ecfe7f35d41cb0f5377244869a5",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDocumentWarehousePolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24800,
+  "skill_sha256": "0059585f784cb2743895246f0b4ef74c69c0350f292e054e941715d66bb3516c",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_test_and_validate_the_disaster_recovery_plan",
+  "agent_bytes": 10623,
   "agent_file": "report_test_and_validate_the_disaster_recovery_plan_agent.py",
   "agent_sha256": "68ed0b053676ca2bb87f9d14e0ab653d7ff70f37c75d0bccdbdfac83876207cf",
+  "backup_agent": "report_test_and_validate_the_disaster_recovery_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportTestAndValidateTheDisasterRecoveryPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-test-and-validate-the-disaster-recovery-plan:88307d1e773c9751a65eb2d4f7452bf90ef695988f8e8b69527c829f4a418525",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportTestAndValidateTheDisasterRecoveryPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24879,
+  "skill_sha256": "a8d0be179e471e14490b0fb5c03a5aa9bdab129e4a88f42637ab4c38e2f61dbc",
   "tool_schema": {
     "properties": {
       "audience": {

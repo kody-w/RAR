@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_reconcile_freight",
+  "agent_bytes": 10744,
   "agent_file": "configure_reconcile_freight_agent.py",
   "agent_sha256": "ce9ecc23dc53c6ee7d488ad94f742aeee8401958ca049cfe597ba165c071498a",
+  "backup_agent": "configure_reconcile_freight_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureReconcileFreight",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-reconcile-freight:98e3e02afeea73fccc708baf6cccdc1e03f10c74391101424f505826468b1650",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureReconcileFreight",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24661,
+  "skill_sha256": "ba3257304894fd3fa5fed430b673e04df5fe6307fa584b3462ac394859d8c660",
   "tool_schema": {
     "properties": {
       "operation": {

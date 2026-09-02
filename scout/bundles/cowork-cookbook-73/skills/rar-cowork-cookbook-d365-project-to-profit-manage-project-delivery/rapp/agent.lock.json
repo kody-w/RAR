@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_project_to_profit_manage_project_delivery",
+  "agent_bytes": 10716,
   "agent_file": "d365_project_to_profit_manage_project_delivery_agent.py",
   "agent_sha256": "c025ba108ce87f2c322cb5a725e2f59010f43e8518a4871e4097ac04c7df686f",
+  "backup_agent": "d365_project_to_profit_manage_project_delivery_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ProjectToProfitManageProjectDelivery",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-project-to-profit-manage-project-delivery:f72869935a749532c861b48cf19cc2ede939894a0bb87fa5b626cfbaf2cac9ef",
+  "rollback_agent_retained": true,
   "runtime_name": "D365ProjectToProfitManageProjectDelivery",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24911,
+  "skill_sha256": "80d7d7aed3d6848e6edf7fb6c25a05b607bf77bd4b69d2f026f2fef2735f2dcb",
   "tool_schema": {
     "properties": {
       "operation": {

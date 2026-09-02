@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_plan_logistics_and_distribution",
+  "agent_bytes": 10693,
   "agent_file": "ppt_exec_plan_logistics_and_distribution_agent.py",
   "agent_sha256": "462e9dbd98897fe55500de6c639cc79eb0f633d54ed34cfc5c6dfdab0f27a1ce",
+  "backup_agent": "ppt_exec_plan_logistics_and_distribution_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecPlanLogisticsAndDistribution",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-plan-logistics-and-distribution:fd7d1732dd1096629bd33a91eff33f34a34bc610a8fe46024b331e606d4d17b2",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecPlanLogisticsAndDistribution",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24814,
+  "skill_sha256": "33e9ca8bb4114e51dc9d772dd11afca2ac2532d33dc8a1bb6408dafce30986a4",
   "tool_schema": {
     "properties": {
       "operation": {

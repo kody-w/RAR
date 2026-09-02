@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_verify_employment",
+  "agent_bytes": 10535,
   "agent_file": "bulk_update_verify_employment_agent.py",
   "agent_sha256": "26f3dd39b1c8cfc4943bffbe33f9b4257900356f8f740d728e3d0b26186cb305",
+  "backup_agent": "bulk_update_verify_employment_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateVerifyEmployment",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-verify-employment:17b079581a04a4f72bb3bb920573252a1a56024179a5ea549d62083769a9a364",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateVerifyEmployment",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24457,
+  "skill_sha256": "7585a1c1c1a2a78b06402d533be4219f176a75aba557e79a61281f3d04c01643",
   "tool_schema": {
     "properties": {
       "operation": {

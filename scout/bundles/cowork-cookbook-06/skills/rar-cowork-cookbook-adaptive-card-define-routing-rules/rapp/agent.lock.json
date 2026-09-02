@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_routing_rules",
+  "agent_bytes": 10623,
   "agent_file": "adaptive_card_define_routing_rules_agent.py",
   "agent_sha256": "5f6abf489a021ab84659af4e284a27eea7a8e737695aa458ad03c3c56bd75816",
+  "backup_agent": "adaptive_card_define_routing_rules_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineRoutingRules",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-define-routing-rules:5e268eda6d1b2815b02919b42374af36a0e12523b638452aa2f393de1c324e7c",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDefineRoutingRules",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24651,
+  "skill_sha256": "1a17d544961d0bb9cbf74e8235614c05af81eda2df631f5ee4cd9e0ab3de527f",
   "tool_schema": {
     "properties": {
       "operation": {

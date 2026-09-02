@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_plan_capital_allocation_and_investments",
+  "agent_bytes": 10825,
   "agent_file": "dashboard_plan_capital_allocation_and_investments_agent.py",
   "agent_sha256": "afcc248fdea225eb70006023f0669d6141af4f01b9455b17ad4a9eefcb1f9927",
+  "backup_agent": "dashboard_plan_capital_allocation_and_investments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardPlanCapitalAllocationAndInvestments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-plan-capital-allocation-and-investments:fc6c65cd97a3ecb96339fc658fa93d911514dd65160983abfcdd7ceca2d8594e",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardPlanCapitalAllocationAndInvestments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25196,
+  "skill_sha256": "a8aa488b6628864fcaba3dc7d34115ff098de284007316ef19d1ddce1e5a9b33",
   "tool_schema": {
     "properties": {
       "operation": {

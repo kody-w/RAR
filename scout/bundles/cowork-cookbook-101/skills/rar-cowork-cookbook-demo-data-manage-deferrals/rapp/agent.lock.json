@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_manage_deferrals",
+  "agent_bytes": 10437,
   "agent_file": "demo_data_manage_deferrals_agent.py",
   "agent_sha256": "24d564a8819a7274d42995a53504221781a1f65e1ceca2e744bda825dcea1be0",
+  "backup_agent": "demo_data_manage_deferrals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataManageDeferrals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-manage-deferrals:af3006e523c0222eea5a0c0b857ede897f8b209cb499d60a3aa1f4eee239b9e5",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataManageDeferrals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24274,
+  "skill_sha256": "8880c0418ae66cf541dec41d565fdd9d1ef3ff1432377e5a56e16ce901c6d96c",
   "tool_schema": {
     "properties": {
       "operation": {

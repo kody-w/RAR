@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_record_intercompany_transactions",
+  "agent_bytes": 10808,
   "agent_file": "scheduled_brief_record_intercompany_transactions_agent.py",
   "agent_sha256": "9400ab126f0892b0ef0d47dd9a7ed032d55c89348ddb0a0471d04da4119c9701",
+  "backup_agent": "scheduled_brief_record_intercompany_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefRecordIntercompanyTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-record-intercompany-transactions:6f35f2eb8a7e0e6156fe26bbb298d5004f8494f4e1a611247da163fa7abacda0",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefRecordIntercompanyTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25059,
+  "skill_sha256": "c490d884df0035b964dc8f86ceae3f854bf8b6df671c21f0325dea30faa9fc96",
   "tool_schema": {
     "properties": {
       "operation": {

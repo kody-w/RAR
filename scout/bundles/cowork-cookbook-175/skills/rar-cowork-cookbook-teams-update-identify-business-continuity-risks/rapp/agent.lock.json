@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_identify_business_continuity_risks",
+  "agent_bytes": 10792,
   "agent_file": "teams_update_identify_business_continuity_risks_agent.py",
   "agent_sha256": "5217997c4d7618df5e885d7ec05c122799f0fe78370b355ffeae1bdc74cbb48b",
+  "backup_agent": "teams_update_identify_business_continuity_risks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateIdentifyBusinessContinuityRisks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-identify-business-continuity-risks:c610f0cb43df95ec03af3e2acad983755a4b57c6d380e9b43f3883d118eaa996",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateIdentifyBusinessContinuityRisks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25022,
+  "skill_sha256": "241501484540319dd79cb19e29d98c35d824800e1125a89ae2a9ab89d6b15206",
   "tool_schema": {
     "properties": {
       "operation": {

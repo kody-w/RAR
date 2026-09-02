@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/power_automate_documentation",
+  "agent_bytes": 9745,
   "agent_file": "power_automate_documentation_agent.py",
   "agent_sha256": "db07d9c1a188ccc5657ca62c42bf1782d6716fd9edc11d5efd9ee5c9f9490f30",
+  "backup_agent": "power_automate_documentation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerAutomateDocumentation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Mathias Salomonsen",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/power-automate-documentation:34c1541d8658fb754e21267d4573885239532e2d1b5dca863e0e9604d8c0d0b4",
+  "rollback_agent_retained": true,
   "runtime_name": "PowerAutomateDocumentation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23484,
+  "skill_sha256": "56bc9d08d667e73861d8d5d0200721c54bde399e57e70411415b1e5782aa5805",
   "tool_schema": {
     "properties": {
       "criteria": {

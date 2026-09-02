@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_source_to_pay_manage_supplier_relationships",
+  "agent_bytes": 10738,
   "agent_file": "d365_source_to_pay_manage_supplier_relationships_agent.py",
   "agent_sha256": "ded65032d7f063f83da2ccc9a96b34e9d68f047a06dd83e8593cf30b39f7537b",
+  "backup_agent": "d365_source_to_pay_manage_supplier_relationships_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365SourceToPayManageSupplierRelationships",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-source-to-pay-manage-supplier-relationships:0ca65bc12f459eb42d2c43eb93f73f7b2ce30a0f5de5dba858aae0259073b273",
+  "rollback_agent_retained": true,
   "runtime_name": "D365SourceToPayManageSupplierRelationships",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24977,
+  "skill_sha256": "cef6c0b0ec8c1af3e50119a010da1f0d95de9d564a6fd99224985ef0796ad9e7",
   "tool_schema": {
     "properties": {
       "operation": {

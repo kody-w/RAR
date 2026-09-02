@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_list_open_positions",
+  "agent_bytes": 10278,
   "agent_file": "report_list_open_positions_agent.py",
   "agent_sha256": "f51ffea5849c62b99564e4d3114ddff7404e42ca166c84e449b93a61bc186111",
+  "backup_agent": "report_list_open_positions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportListOpenPositions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-list-open-positions:6e9189bddc9ad39cb04a6624d42f99487cf8045fb0b11c3cd2fac79f955b8888",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportListOpenPositions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24032,
+  "skill_sha256": "12c1034b6f5c10bfcc00c16f351b3221930e41aee8cf919637c6a2b0621a8205",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_define_leasing_policies",
+  "agent_bytes": 10649,
   "agent_file": "audit_define_leasing_policies_agent.py",
   "agent_sha256": "95083dece24cc3cd581927eadd4117cf19971527826fe0141f67aaeee6f9d965",
+  "backup_agent": "audit_define_leasing_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineLeasingPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-define-leasing-policies:403c76fd2de9384fa04af3af4a9bdf8146c3a68704aefc83dd05fe2d01cd1bdf",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDefineLeasingPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24659,
+  "skill_sha256": "5744d37765e3ccdc7d7c92b5906f21a7940be8d7c11e27fc8cc58ccf3153f244",
   "tool_schema": {
     "properties": {
       "criteria": {

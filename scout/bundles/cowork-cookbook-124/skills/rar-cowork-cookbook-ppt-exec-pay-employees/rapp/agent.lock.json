@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_pay_employees",
+  "agent_bytes": 10463,
   "agent_file": "ppt_exec_pay_employees_agent.py",
   "agent_sha256": "e6276b46f602427b6b749ccaf2bd14f2985d57b67b15e15f7128d0074808b540",
+  "backup_agent": "ppt_exec_pay_employees_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecPayEmployees",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-pay-employees:d1d06961340a81226e1647181a6729a7cdfecf0e44481629745c2d7dafa12867",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecPayEmployees",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24268,
+  "skill_sha256": "1d9d051dc76bc58863035751e5643726abaf55ea2357ca90fb7bda202882c1c4",
   "tool_schema": {
     "properties": {
       "operation": {

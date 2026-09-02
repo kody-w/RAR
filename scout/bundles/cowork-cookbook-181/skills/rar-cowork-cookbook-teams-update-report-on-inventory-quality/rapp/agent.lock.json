@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_report_on_inventory_quality",
+  "agent_bytes": 10694,
   "agent_file": "teams_update_report_on_inventory_quality_agent.py",
   "agent_sha256": "807788602993f25139de719a713d8e3243a9cc56c41845c0cba977d29b0a3a01",
+  "backup_agent": "teams_update_report_on_inventory_quality_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateReportOnInventoryQuality",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-report-on-inventory-quality:fc05639d486d8e968afe30474d9dcb2763ab5251ba8489fbf97379b388404eae",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateReportOnInventoryQuality",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24790,
+  "skill_sha256": "3e6266976f87f9143cd56ffcd278789c68fa4152401b7d3eb35d229f45169263",
   "tool_schema": {
     "properties": {
       "operation": {

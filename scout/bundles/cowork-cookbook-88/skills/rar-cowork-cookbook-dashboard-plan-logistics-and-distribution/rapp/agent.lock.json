@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_plan_logistics_and_distribution",
+  "agent_bytes": 10726,
   "agent_file": "dashboard_plan_logistics_and_distribution_agent.py",
   "agent_sha256": "c78deeed5e0b13d665847404803d971521deeeb5d6f7dc40bce5864b1c7f760c",
+  "backup_agent": "dashboard_plan_logistics_and_distribution_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardPlanLogisticsAndDistribution",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-plan-logistics-and-distribution:166e3e84c490ce59cdbe8c44f61132299058377d24ee6db424b661b4195f25c5",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardPlanLogisticsAndDistribution",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24917,
+  "skill_sha256": "40fa702a5c30786b219fc4296490b44066fa3d993f25dda841f1fe3b462c2567",
   "tool_schema": {
     "properties": {
       "operation": {

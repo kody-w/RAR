@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_agent_test",
+  "agent_bytes": 9382,
   "agent_file": "copilot_studio_agent_test_agent.py",
   "agent_sha256": "6f7094123eb0552125abc477d11ace64488fb220132b6687d3b97322dd477ab7",
+  "backup_agent": "copilot_studio_agent_test_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioAgentTest",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Matteo Pagani",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/copilot-studio-agent-test:005f16c4e9385fd7d9b75d15d1346e87519a593ae07c4cf23ab619fe3668d27f",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotStudioAgentTest",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22571,
+  "skill_sha256": "8bb23ea088bb4c01c1a1ec1ae08b2bc11f29055d276c0c7d8b5e509f130abf18",
   "tool_schema": {
     "properties": {
       "criteria": {

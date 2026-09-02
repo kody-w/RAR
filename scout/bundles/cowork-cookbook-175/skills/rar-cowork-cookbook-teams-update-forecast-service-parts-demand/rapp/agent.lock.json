@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_forecast_service_parts_demand",
+  "agent_bytes": 10701,
   "agent_file": "teams_update_forecast_service_parts_demand_agent.py",
   "agent_sha256": "456d6b5949144ed146289cf7113c9ac3dd27dc3095c597aeb16415b9ddb5e4a2",
+  "backup_agent": "teams_update_forecast_service_parts_demand_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateForecastServicePartsDemand",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-forecast-service-parts-demand:c59506622640ac629b6792c4b2a05564ed6e512e89f70f35cf424caa7b5f019d",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateForecastServicePartsDemand",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24845,
+  "skill_sha256": "9a73fdf0dfd89cdc4bfbfbca885b20df2a1c1d0ef30987cb4887a3ab44d1edfd",
   "tool_schema": {
     "properties": {
       "operation": {

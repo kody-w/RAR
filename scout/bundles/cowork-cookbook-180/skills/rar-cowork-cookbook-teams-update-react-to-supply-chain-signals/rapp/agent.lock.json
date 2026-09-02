@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_react_to_supply_chain_signals",
+  "agent_bytes": 10701,
   "agent_file": "teams_update_react_to_supply_chain_signals_agent.py",
   "agent_sha256": "b13be839dd72913b3a915864c88dc0083d374ab511ef13bae485a9f97855122e",
+  "backup_agent": "teams_update_react_to_supply_chain_signals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateReactToSupplyChainSignals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-react-to-supply-chain-signals:ec5b7bbd945b44d3a2783864bea1f16fcbcd5797b6de6b56ddc2b40d4107f86f",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateReactToSupplyChainSignals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24879,
+  "skill_sha256": "2c45959cb18fb51fc10b59a7b128051f93a4e32627a24c39580c43e4661ef35b",
   "tool_schema": {
     "properties": {
       "operation": {

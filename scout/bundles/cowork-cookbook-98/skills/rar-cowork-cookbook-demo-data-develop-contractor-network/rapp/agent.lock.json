@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_develop_contractor_network",
+  "agent_bytes": 10567,
   "agent_file": "demo_data_develop_contractor_network_agent.py",
   "agent_sha256": "b13ffd98f2724487fa1fdfec2ef6097b35cbd8b977fdfafc58373dfd710b6cc8",
+  "backup_agent": "demo_data_develop_contractor_network_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDevelopContractorNetwork",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-develop-contractor-network:3c44aa8f8c37a183ec25b3f50b327cfaa90cafea5b225e4a3a3028c163f2e469",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDevelopContractorNetwork",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24596,
+  "skill_sha256": "b9cb75ceb8d718cb1b3d45cfe7ffd3ceef469ea9c8cd38b02814a35ba9f070c5",
   "tool_schema": {
     "properties": {
       "operation": {

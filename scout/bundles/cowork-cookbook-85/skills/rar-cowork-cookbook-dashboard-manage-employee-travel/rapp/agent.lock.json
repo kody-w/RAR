@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_employee_travel",
+  "agent_bytes": 10600,
   "agent_file": "dashboard_manage_employee_travel_agent.py",
   "agent_sha256": "5798a7a93adce56aec1fdf1a432dac86e8d143e07847e0bb7213dea75f1e4066",
+  "backup_agent": "dashboard_manage_employee_travel_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageEmployeeTravel",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-employee-travel:6906ca29a796b7340f4ab74be79f5cc5bd4e49f56bb29044be0c51a1692d90da",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageEmployeeTravel",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24630,
+  "skill_sha256": "62eae0ff77fb5e87ddd71d21ecbcc6f9c5d31aa6f1aa9e0facdc192ff8f413d2",
   "tool_schema": {
     "properties": {
       "operation": {

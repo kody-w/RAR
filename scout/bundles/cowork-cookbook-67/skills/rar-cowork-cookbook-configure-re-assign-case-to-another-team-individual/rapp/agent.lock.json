@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_re_assign_case_to_another_team_individual",
+  "agent_bytes": 11024,
   "agent_file": "configure_re_assign_case_to_another_team_individual_agent.py",
   "agent_sha256": "8d78f1154673b252a76e021804211a53af9af95ca3c113ede8927357b8b1aee3",
+  "backup_agent": "configure_re_assign_case_to_another_team_individual_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureReAssignCaseToAnotherTeamIndividual",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-re-assign-case-to-another-team-individual:dad62fbb910072958811ee0482b3fce1c0fc5567129e95f1f81efe78dcf349eb",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureReAssignCaseToAnotherTeamIndividual",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25439,
+  "skill_sha256": "a385df82c7d0ca85343578d24459e78f5d39486fe6a4e05ea3fa89a975c0065f",
   "tool_schema": {
     "properties": {
       "operation": {

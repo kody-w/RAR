@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_monitor_financial_performance",
+  "agent_bytes": 10672,
   "agent_file": "ppt_exec_monitor_financial_performance_agent.py",
   "agent_sha256": "295c4fee4492f23165a7b7bf265a4b41e167ceeb17d4f30ed553957e0e12861c",
+  "backup_agent": "ppt_exec_monitor_financial_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMonitorFinancialPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-monitor-financial-performance:63655ad0934af0792889008f25d9c1e581da30b02a8ff1e71fae32ccc61f37a3",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMonitorFinancialPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24747,
+  "skill_sha256": "fe3aec738e403579727a5b32577a7463a6d89e195e17c5ec7881b7bc3346fbcc",
   "tool_schema": {
     "properties": {
       "operation": {

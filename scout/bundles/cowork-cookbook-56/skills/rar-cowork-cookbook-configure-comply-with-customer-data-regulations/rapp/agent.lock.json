@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_comply_with_customer_data_regulations",
+  "agent_bytes": 10977,
   "agent_file": "configure_comply_with_customer_data_regulations_agent.py",
   "agent_sha256": "cf9e34d3926a81c890196bfed34cf267c2938088c0b536b674993b1339d73bf8",
+  "backup_agent": "configure_comply_with_customer_data_regulations_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureComplyWithCustomerDataRegulations",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-comply-with-customer-data-regulations:5e033b467c709245b6c736e01418a1b4b9bd98eac3e0f74c6cbe6fba64dbad89",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureComplyWithCustomerDataRegulations",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25315,
+  "skill_sha256": "f8ca49a42db6b3d45723bb23d1aeaba08c88f7f505be4c8c223a4d710b4432e8",
   "tool_schema": {
     "properties": {
       "operation": {

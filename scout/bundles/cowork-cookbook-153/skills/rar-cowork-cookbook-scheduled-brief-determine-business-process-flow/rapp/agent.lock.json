@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_determine_business_process_flow",
+  "agent_bytes": 10808,
   "agent_file": "scheduled_brief_determine_business_process_flow_agent.py",
   "agent_sha256": "b19b3f06d49b7b1325f2e0a1a8d79414cdcda9510412f6a2aa00a8308bbd1126",
+  "backup_agent": "scheduled_brief_determine_business_process_flow_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDetermineBusinessProcessFlow",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-determine-business-process-flow:96d2d6a9d9984ad81f2c2c0ed195b23a57962d96a33555ed8c70fe15e6f7f2be",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDetermineBusinessProcessFlow",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25058,
+  "skill_sha256": "94f11e5cc02d01f2ecfe3b45e216e4a408147f9170c73d49974950595274d6b8",
   "tool_schema": {
     "properties": {
       "operation": {

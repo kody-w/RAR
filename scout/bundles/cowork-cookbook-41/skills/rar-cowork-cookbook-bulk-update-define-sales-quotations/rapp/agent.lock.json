@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_sales_quotations",
+  "agent_bytes": 10619,
   "agent_file": "bulk_update_define_sales_quotations_agent.py",
   "agent_sha256": "89cee9c85a83ee47656bbf84e068758b8a4ac95d28ac75020f6e87bce8b81c5e",
+  "backup_agent": "bulk_update_define_sales_quotations_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineSalesQuotations",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-sales-quotations:186ad44170b0852973a321d3e150f525fe3a72c0f62f2d33b04dda91b7169b86",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefineSalesQuotations",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24662,
+  "skill_sha256": "d0beafb5bedb9888e34781b20edf9143d53f182de4cc9e2dd7c23d1b7d867fe2",
   "tool_schema": {
     "properties": {
       "operation": {

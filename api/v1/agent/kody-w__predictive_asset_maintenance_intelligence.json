@@ -3,10 +3,11 @@
   "id": "kody-w__predictive_asset_maintenance_intelligence",
   "name": "Predictive Asset Maintenance Intelligence",
   "rar_name": "@kody-w/predictive_asset_maintenance_intelligence",
-  "rappid": "rappid:@kody-w/predictive_asset_maintenance_intelligence:31b4629e8da8fd621a41fa199e246f2dcc3b9d63f76164dbe2520ba5858cd5b2",
-  "_migrated_from": "rappid:@kody-w/predictive_asset_maintenance_intelligence:2f9c3c01a7a770624ef2d411925144ad113c95cdee789d54f0e90b2a133abe2d",
+  "rappid": "rappid:@kody-w/predictive-asset-maintenance-intelligence:8c6264eead8494110036a16e6ee3cb558461d878ed263ab472c407b584536ed5",
+  "_migrated_from": "rappid:@kody-w/predictive_asset_maintenance_intelligence:31b4629e8da8fd621a41fa199e246f2dcc3b9d63f76164dbe2520ba5858cd5b2",
   "_migrated_from_all": [
-    "rappid:@kody-w/predictive_asset_maintenance_intelligence:2f9c3c01a7a770624ef2d411925144ad113c95cdee789d54f0e90b2a133abe2d"
+    "rappid:@kody-w/predictive_asset_maintenance_intelligence:2f9c3c01a7a770624ef2d411925144ad113c95cdee789d54f0e90b2a133abe2d",
+    "rappid:@kody-w/predictive_asset_maintenance_intelligence:31b4629e8da8fd621a41fa199e246f2dcc3b9d63f76164dbe2520ba5858cd5b2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -31,9 +32,18 @@
   "sha256": "d792270520fb82ad23815a9b9d6e940da5428ee5baa5fcddc362846adaff90e0",
   "has_card": true,
   "added_at": "2026-05-24T12:20:22-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-predictive-asset-maintenance-intelligence",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__predictive_asset_maintenance_intelligence.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-predictive-asset-maintenance-intelligence/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-predictive-asset-maintenance-intelligence/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__predictive_asset_maintenance_intelligence.py",
   "api_card_url": null,

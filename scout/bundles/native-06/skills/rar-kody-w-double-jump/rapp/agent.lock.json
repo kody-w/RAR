@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/double_jump_agent",
+  "agent_bytes": 12754,
   "agent_file": "double_jump_agent.py",
   "agent_sha256": "a85073b79ec0d416a94d596ac455aa393ed33049aa615b267a5f7ff20a004ab3",
+  "backup_agent": "double_jump_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DoubleJumpAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/double-jump:8cf4215de61021cf43331e7566fa6260168d7fbecb428c4b3a58fd070b444719",
+  "rollback_agent_retained": true,
   "runtime_name": "DoubleJump",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 30931,
+  "skill_sha256": "46dea040b90bbfe1f0135e7b83616dbad4d85fb42c8318ac416698e8073d8b29",
   "tool_schema": {
     "properties": {
       "action": {

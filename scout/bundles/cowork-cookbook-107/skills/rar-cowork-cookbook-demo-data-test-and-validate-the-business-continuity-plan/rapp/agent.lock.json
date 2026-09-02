@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_test_and_validate_the_business_continuity_plan",
+  "agent_bytes": 10836,
   "agent_file": "demo_data_test_and_validate_the_business_continuity_plan_agent.py",
   "agent_sha256": "c227f6bf92cd77e1d52bb79eaf3d8fd4f8a3622e2fd05c1429fd3eb55e0fc7d9",
+  "backup_agent": "demo_data_test_and_validate_the_business_continuity_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataTestAndValidateTheBusinessContinuityPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-test-and-validate-the-business-continuity-plan:2d9e854bb257a34d38f62e3a173e71c8e0c0a452a6058c30c8dbd3f810888db2",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataTestAndValidateTheBusinessContinuityPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25284,
+  "skill_sha256": "64bddce7f1ce5be7fb73867a4adb0a4efe3c0c9184ad55877378372aabca1fd4",
   "tool_schema": {
     "properties": {
       "operation": {

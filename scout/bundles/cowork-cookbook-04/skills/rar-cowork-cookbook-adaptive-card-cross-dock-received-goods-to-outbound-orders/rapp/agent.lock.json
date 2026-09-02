@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_cross_dock_received_goods_to_outbound_orders",
+  "agent_bytes": 10903,
   "agent_file": "adaptive_card_cross_dock_received_goods_to_outbound_orders_agent.py",
   "agent_sha256": "9134621f175ff36de5e4339f5c70540b40244d3a276317910803d3e369ff1e9f",
+  "backup_agent": "adaptive_card_cross_dock_received_goods_to_outbound_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardCrossDockReceivedGoodsToOutboundOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-cross-dock-received-goods-to-outbound-orders:e7bb51e062290497988b2d29d4a7e6d9ae4cb570e72e4a670fc629c97f2223c9",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardCrossDockReceivedGoodsToOutboundOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25433,
+  "skill_sha256": "3a125d811e005f8cead2998879295ed9f14f0ff12f64aaf3d67087c9bd4508ec",
   "tool_schema": {
     "properties": {
       "operation": {

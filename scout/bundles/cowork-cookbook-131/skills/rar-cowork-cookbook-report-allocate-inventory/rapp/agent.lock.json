@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_allocate_inventory",
+  "agent_bytes": 10278,
   "agent_file": "report_allocate_inventory_agent.py",
   "agent_sha256": "2eaa29da24b2c94779fc32975afeb26cfd4773c66c1e4df94d90f8be714a898c",
+  "backup_agent": "report_allocate_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportAllocateInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-allocate-inventory:50ada4602eea64e6f91cc9d09896c4818884e13dd40236e3384b4298eaa21076",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportAllocateInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23979,
+  "skill_sha256": "df6d206a863daab8cde09894ed113dbdbc29e54e5c986579dd66982ad45cf651",
   "tool_schema": {
     "properties": {
       "audience": {

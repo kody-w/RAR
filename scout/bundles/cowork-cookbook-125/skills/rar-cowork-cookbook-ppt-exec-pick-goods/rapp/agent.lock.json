@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_pick_goods",
+  "agent_bytes": 10438,
   "agent_file": "ppt_exec_pick_goods_agent.py",
   "agent_sha256": "9db7c2224f880d0fd74740a5b3722678515c3b042133b6abf8ab20a66ef5110d",
+  "backup_agent": "ppt_exec_pick_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecPickGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-pick-goods:ca869ab72b1e03c3f0f2094d5b80b0a982e2f3d8e14e7230278a697430a4fb43",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecPickGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24192,
+  "skill_sha256": "fb000c3718000c3c7abda7ec5f4ce1a962cad4e053d2446708d77235414e937e",
   "tool_schema": {
     "properties": {
       "operation": {

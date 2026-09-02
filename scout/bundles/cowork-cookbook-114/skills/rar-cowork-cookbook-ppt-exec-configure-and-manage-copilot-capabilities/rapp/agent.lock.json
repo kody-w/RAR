@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_configure_and_manage_copilot_capabilities",
+  "agent_bytes": 10840,
   "agent_file": "ppt_exec_configure_and_manage_copilot_capabilities_agent.py",
   "agent_sha256": "7f9e28ca3e69a3b2e8b094bcd794994fe87a27eac81a642d830e554d5f36c1b1",
+  "backup_agent": "ppt_exec_configure_and_manage_copilot_capabilities_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecConfigureAndManageCopilotCapabilities",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-configure-and-manage-copilot-capabilities:4cc8f7e40dd0b3dc195e1d4e02f6c2169219ec7b3b7e47c6c8f84c9c233afe93",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecConfigureAndManageCopilotCapabilities",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25184,
+  "skill_sha256": "e2ef0b167c88205c5f468d5f554c72c335946e91928bb0ca767925c633047c05",
   "tool_schema": {
     "properties": {
       "operation": {

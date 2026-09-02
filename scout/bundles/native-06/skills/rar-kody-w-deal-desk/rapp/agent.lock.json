@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/deal_desk_agent",
+  "agent_bytes": 10315,
   "agent_file": "deal_desk_agent.py",
   "agent_sha256": "4f0a8d4f0c0a8ddd9f4f02b29efcfedb30080938bc14b66ce752170a3a3f88dd",
+  "backup_agent": "deal_desk_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DealDeskAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -29,8 +32,16 @@
     ],
     "version": "1.1.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/deal-desk:f82742c29a5896675a600e0ba62cccd147433cf8887a1289250c5e49a5c4a653",
+  "rollback_agent_retained": true,
   "runtime_name": "DealDesk",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21809,
+  "skill_sha256": "712709d05e7a4ea19783d7db3911c496e9bda67e1413308f0db3798fde55bf96",
   "tool_schema": {
     "properties": {
       "command": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_update_worker_information",
+  "agent_bytes": 10541,
   "agent_file": "demo_data_update_worker_information_agent.py",
   "agent_sha256": "2d3874a04f372e320838b95812833da16b32b66d6244586ffbd6acdf9c5a4856",
+  "backup_agent": "demo_data_update_worker_information_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataUpdateWorkerInformation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-update-worker-information:4d8b5c3f856791e69696351d25c1ec1c3bc6f135d446682c385038813a254593",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataUpdateWorkerInformation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24539,
+  "skill_sha256": "446156fc3ecd68b8edb8f3954ac4177ae3e303ef71965d7e257ca1edb429dbd9",
   "tool_schema": {
     "properties": {
       "operation": {

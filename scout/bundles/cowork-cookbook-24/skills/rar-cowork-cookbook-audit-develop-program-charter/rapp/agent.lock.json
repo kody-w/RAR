@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_develop_program_charter",
+  "agent_bytes": 10640,
   "agent_file": "audit_develop_program_charter_agent.py",
   "agent_sha256": "41636a364707b4f807320da54e77fcf0d1545d020b0e0434e077bbbb3c96bfe3",
+  "backup_agent": "audit_develop_program_charter_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDevelopProgramCharter",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-develop-program-charter:0a0ba4ac294e334cf9c932986ab946e23bd9b9f871e6848c8f89072c80f7b4ee",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDevelopProgramCharter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24641,
+  "skill_sha256": "554751ebfc317bff4b52f3bea03127b29b8c27ef761341cbfd418f96a9e968d2",
   "tool_schema": {
     "properties": {
       "criteria": {

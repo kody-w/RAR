@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_acquire_to_dispose_acquire_assets",
+  "agent_bytes": 10608,
   "agent_file": "d365_acquire_to_dispose_acquire_assets_agent.py",
   "agent_sha256": "2c0950f3725fad108aaaa71def9e121cfbebbb96b23061659182c4be362eec7a",
+  "backup_agent": "d365_acquire_to_dispose_acquire_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365AcquireToDisposeAcquireAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-acquire-to-dispose-acquire-assets:5feb53636e581eb5a4ad450a69db8f667349d48a4bdaadb922637308eda54a96",
+  "rollback_agent_retained": true,
   "runtime_name": "D365AcquireToDisposeAcquireAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24647,
+  "skill_sha256": "314ad0c2c9f6bf2686af241615d8bea9779a6bc74ab34bd17149adbbe4dce16d",
   "tool_schema": {
     "properties": {
       "operation": {

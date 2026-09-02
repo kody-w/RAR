@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_analyze_maintenance_costs",
+  "agent_bytes": 10659,
   "agent_file": "teams_update_analyze_maintenance_costs_agent.py",
   "agent_sha256": "fa7d5b22c5cd0376b255ba276a67a1e5bb8236adf1ba273919a0e48b0cbd4a10",
+  "backup_agent": "teams_update_analyze_maintenance_costs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAnalyzeMaintenanceCosts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-analyze-maintenance-costs:63c8447bdd01233045b4f1c29923ef3a16fef066ddf5545cc0cfca27fe2878eb",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateAnalyzeMaintenanceCosts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24715,
+  "skill_sha256": "6d3164918b6d70420a25b4739890f317ee001275ed0e42e0180d4e296d3892ab",
   "tool_schema": {
     "properties": {
       "operation": {

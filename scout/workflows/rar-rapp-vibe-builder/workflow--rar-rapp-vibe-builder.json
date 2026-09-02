@@ -5,6 +5,13 @@
   "id": "45a0fe8102d02bf2",
   "lastExecutedAt": null,
   "name": "VibeBuilder",
+  "rapp": {
+    "backup_agent": "vibe_builder_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-rapp-vibe-builder"
+  },
   "schedule": {
     "days": [
       1,

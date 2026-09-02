@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_dispose_of_obsolete_inventory",
+  "agent_bytes": 10656,
   "agent_file": "ppt_exec_dispose_of_obsolete_inventory_agent.py",
   "agent_sha256": "55049f53e62553a3cf5f30734b220d09d43ed8915af41c82c21b10a1887bd8a8",
+  "backup_agent": "ppt_exec_dispose_of_obsolete_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDisposeOfObsoleteInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-dispose-of-obsolete-inventory:de507a6f61bea79ce7ba9f2eac0712af7684d0b1613ecbd5cdd3e669e6dd7a3b",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDisposeOfObsoleteInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24755,
+  "skill_sha256": "251fcc375996ec99146b6b84924beb0f8e15f1a6d84643d35614e016456d30e8",
   "tool_schema": {
     "properties": {
       "operation": {

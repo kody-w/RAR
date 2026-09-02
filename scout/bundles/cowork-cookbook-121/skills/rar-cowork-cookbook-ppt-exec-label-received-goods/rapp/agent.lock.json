@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_label_received_goods",
+  "agent_bytes": 10564,
   "agent_file": "ppt_exec_label_received_goods_agent.py",
   "agent_sha256": "67120746e84670641df0fbe640a0be9ba71067ea7951772ff2733fdfd621796e",
+  "backup_agent": "ppt_exec_label_received_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecLabelReceivedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-label-received-goods:05286c3c85cf99b6678f126e827490e68df289b133d7ef12e6b48a83620033d0",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecLabelReceivedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24504,
+  "skill_sha256": "1464f9fd4f89abe743c9487a0eed7925c8542c487a17bbc68d0b02b8eac1422c",
   "tool_schema": {
     "properties": {
       "operation": {

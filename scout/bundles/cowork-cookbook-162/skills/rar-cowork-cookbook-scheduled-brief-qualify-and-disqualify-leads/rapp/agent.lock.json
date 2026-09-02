@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_qualify_and_disqualify_leads",
+  "agent_bytes": 10744,
   "agent_file": "scheduled_brief_qualify_and_disqualify_leads_agent.py",
   "agent_sha256": "d054f90cd503546e023f9a3a2b2daf5a70775401afc44fde1629b68f51b0ca3b",
+  "backup_agent": "scheduled_brief_qualify_and_disqualify_leads_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefQualifyAndDisqualifyLeads",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-qualify-and-disqualify-leads:aad7f0ea32cc15909f9571f1d758c24258b188c778d87fa5244dac7061db41db",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefQualifyAndDisqualifyLeads",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24932,
+  "skill_sha256": "8af763b92b2310a9048353c148dccbcb1f9ca8f8c2f2b44f0b8fba577c096f1a",
   "tool_schema": {
     "properties": {
       "operation": {

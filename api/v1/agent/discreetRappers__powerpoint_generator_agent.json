@@ -3,11 +3,12 @@
   "id": "discreetRappers__powerpoint_generator_agent",
   "name": "PowerPointGeneratorV2",
   "rar_name": "@discreetRappers/powerpoint_generator_agent",
-  "rappid": "rappid:@discreetRappers/powerpoint_generator_agent:a4eb325709daf1075eb870b312c808538300e411785e0953f02e8e2a0de68e40",
-  "_migrated_from": "rappid:@discreetRappers/powerpoint_generator_agent:58a2aaac89deaa2277d03c485a76359de6f82d1104bc5d83f14e91ba99de364f",
+  "rappid": "rappid:@discreetrappers/powerpoint-generator:8ea151a306b1714dbe02a37c4a9cbbf5e7c9e2d18676cdce14e2e2256231b0ed",
+  "_migrated_from": "rappid:@discreetRappers/powerpoint_generator_agent:a4eb325709daf1075eb870b312c808538300e411785e0953f02e8e2a0de68e40",
   "_migrated_from_all": [
     "rappid:v2:agent:@discreetRappers/powerpoint_generator_agent:cbd34b4863b492b9a367c2dc8ea00bbc",
-    "rappid:@discreetRappers/powerpoint_generator_agent:58a2aaac89deaa2277d03c485a76359de6f82d1104bc5d83f14e91ba99de364f"
+    "rappid:@discreetRappers/powerpoint_generator_agent:58a2aaac89deaa2277d03c485a76359de6f82d1104bc5d83f14e91ba99de364f",
+    "rappid:@discreetRappers/powerpoint_generator_agent:a4eb325709daf1075eb870b312c808538300e411785e0953f02e8e2a0de68e40"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -32,9 +33,18 @@
   "sha256": "5a9fc79dfbf2038ba411e2789dc988713389b2219ff5ce721b02d684d88a23f5",
   "has_card": true,
   "added_at": "2026-04-06T16:39:03-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-discreetrappers-powerpoint-generator",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__powerpoint_generator_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/powerpoint_generator_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/powerpoint_generator_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-powerpoint-generator/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-powerpoint-generator/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__powerpoint_generator_agent.py",
   "api_card_url": null,

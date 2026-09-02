@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/prompt_extractor",
+  "agent_bytes": 28300,
   "agent_file": "prompt_extractor_agent.py",
   "agent_sha256": "9b03c1b6d286d219e1f19966eea18eb2ef9c980213455963226b264c038440ba",
+  "backup_agent": "prompt_extractor_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PromptExtractorAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/prompt-extractor:b224bc39293bd414700e2914c429c62d9ebbc52f6d2452017c3f0fdd59a02a03",
+  "rollback_agent_retained": true,
   "runtime_name": "ExtractPrompts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 50356,
+  "skill_sha256": "d69034107857e3b81c377f338d11d006a8a73c68ac5798e5e00da2793af489b9",
   "tool_schema": {
     "properties": {
       "all_text": {

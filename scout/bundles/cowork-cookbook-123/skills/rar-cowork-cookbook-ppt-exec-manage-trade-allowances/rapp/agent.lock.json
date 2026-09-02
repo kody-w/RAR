@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_manage_trade_allowances",
+  "agent_bytes": 10580,
   "agent_file": "ppt_exec_manage_trade_allowances_agent.py",
   "agent_sha256": "b027249edeee3b1cc616f0a55b7c945d4e662387093ca195abe18a328c5ec4bb",
+  "backup_agent": "ppt_exec_manage_trade_allowances_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecManageTradeAllowances",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-manage-trade-allowances:3780e869a31be62da779310f4166c4683ca378d3d665208fe31619ed49873edb",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecManageTradeAllowances",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24578,
+  "skill_sha256": "9bd092ae76a30732a74d34e9a2a6c86f76e25be19694d567046ad855298fdabb",
   "tool_schema": {
     "properties": {
       "operation": {

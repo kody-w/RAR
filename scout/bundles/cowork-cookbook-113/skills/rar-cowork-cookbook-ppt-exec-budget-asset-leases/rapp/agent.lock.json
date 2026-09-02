@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_budget_asset_leases",
+  "agent_bytes": 10546,
   "agent_file": "ppt_exec_budget_asset_leases_agent.py",
   "agent_sha256": "f51374578f80be988c9daca1b5e57571dcabad3bbcbc9bd306fa8b92f631c37d",
+  "backup_agent": "ppt_exec_budget_asset_leases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecBudgetAssetLeases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-budget-asset-leases:8a0a50a521fa2e627acff91648da6d094bd7437d7286140dcaba5ff8bddfe1e2",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecBudgetAssetLeases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24473,
+  "skill_sha256": "683d8d0229e51fee08e240bd9e81ba64eb75dfacf59441eda923372bac3a486e",
   "tool_schema": {
     "properties": {
       "operation": {

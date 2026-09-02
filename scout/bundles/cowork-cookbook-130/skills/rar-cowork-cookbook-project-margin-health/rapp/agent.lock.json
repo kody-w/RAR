@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/project_margin_health",
+  "agent_bytes": 10329,
   "agent_file": "project_margin_health_agent.py",
   "agent_sha256": "cec496cab5bf24f829348c6d5d3bbe968eda6cc0e20ae6da245c2d07efdc9051",
+  "backup_agent": "project_margin_health_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProjectMarginHealth",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/project-margin-health:b89c05e4bea20d13afd6ca6434d4eb0c71b3a4f77d93c09f58f370bbbe2557f5",
+  "rollback_agent_retained": true,
   "runtime_name": "ProjectMarginHealth",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24148,
+  "skill_sha256": "fddbc577ece0c4889cf54d33cf3acb5acb167224aa12bbfbe480f0bbd7de2532",
   "tool_schema": {
     "properties": {
       "audience": {

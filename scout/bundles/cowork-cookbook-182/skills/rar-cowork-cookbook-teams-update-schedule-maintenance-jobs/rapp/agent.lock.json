@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_schedule_maintenance_jobs",
+  "agent_bytes": 10687,
   "agent_file": "teams_update_schedule_maintenance_jobs_agent.py",
   "agent_sha256": "bda966bb5fb72d87bfcbec6bad2a720c8bb94de80ed9fe4ee768a53cc434f60e",
+  "backup_agent": "teams_update_schedule_maintenance_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateScheduleMaintenanceJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-schedule-maintenance-jobs:faac86050cf7967e09dbc2305d6e647774a01dc3b4d506d453fd0ad5d4109953",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateScheduleMaintenanceJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24755,
+  "skill_sha256": "f84f7f7ca93a6a6b660183362f179d3c7d62730879b573c94083410773f40ef4",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_perform_corrective_maintenance",
+  "agent_bytes": 10713,
   "agent_file": "bulk_update_perform_corrective_maintenance_agent.py",
   "agent_sha256": "3390c559cead385d344fed955958b92f9bae20a4468e6a4410da747333454273",
+  "backup_agent": "bulk_update_perform_corrective_maintenance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdatePerformCorrectiveMaintenance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-perform-corrective-maintenance:b9a9e5311f16049eac03a97fb389e18d5f4194eb7a1d5d08e7e318ff987b14d6",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdatePerformCorrectiveMaintenance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24850,
+  "skill_sha256": "0d4954977357a01cba5e147f48eb4b66fa8124ae8dea86d3edaaf20aff425e8f",
   "tool_schema": {
     "properties": {
       "operation": {

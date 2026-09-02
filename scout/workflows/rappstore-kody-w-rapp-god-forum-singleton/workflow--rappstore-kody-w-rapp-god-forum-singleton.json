@@ -5,6 +5,13 @@
   "id": "7cad9cead67128f0",
   "lastExecutedAt": null,
   "name": "rapp-god Forum",
+  "rapp": {
+    "backup_agent": "forum_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-kody-w-rapp-god-forum-singleton"
+  },
   "schedule": {
     "days": [
       1,

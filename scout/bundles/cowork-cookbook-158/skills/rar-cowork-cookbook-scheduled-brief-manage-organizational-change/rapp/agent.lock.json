@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_manage_organizational_change",
+  "agent_bytes": 10756,
   "agent_file": "scheduled_brief_manage_organizational_change_agent.py",
   "agent_sha256": "8bec17e19bd0eb0691ffc5340884c74e8daa3f4e1e9cd877203e7d37a0a6afc6",
+  "backup_agent": "scheduled_brief_manage_organizational_change_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefManageOrganizationalChange",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-manage-organizational-change:6f67fcdd2ca81251fa04116f4045516b4f0a9a55c5bdb0487ca6483cc53e934f",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefManageOrganizationalChange",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24944,
+  "skill_sha256": "89a5e7e01e4136fb800e71db61d383a3d1302720488b6099c1713ae17eb9d598",
   "tool_schema": {
     "properties": {
       "operation": {

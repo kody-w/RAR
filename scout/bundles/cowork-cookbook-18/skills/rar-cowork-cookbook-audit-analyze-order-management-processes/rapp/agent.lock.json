@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_analyze_order_management_processes",
+  "agent_bytes": 10773,
   "agent_file": "audit_analyze_order_management_processes_agent.py",
   "agent_sha256": "8598e4c49a70fa8271b628ba63333bb604901a4f0efdeefe3ffc5a0696b67ecc",
+  "backup_agent": "audit_analyze_order_management_processes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAnalyzeOrderManagementProcesses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-analyze-order-management-processes:1ba32d2e5a8836ccc2b4b816ee564195b78468e9f3cc6150739ee898091f8e02",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAnalyzeOrderManagementProcesses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24987,
+  "skill_sha256": "e3711d4f2bbcb9ce41764336c4c19af1e05bddffad12550ff3af51a3f1f757af",
   "tool_schema": {
     "properties": {
       "criteria": {

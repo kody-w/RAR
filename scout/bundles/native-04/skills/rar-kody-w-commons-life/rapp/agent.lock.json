@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/commons_life_agent",
+  "agent_bytes": 21567,
   "agent_file": "commons_life_agent.py",
   "agent_sha256": "1f097fe46efeb8c2298fde16d0469016cb62bb59b4448d954bb6757fe53f27bc",
+  "backup_agent": "commons_life_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommonsLifeAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/commons-life:5ce87e6feef76e8cbbd53499c17d6aaf35497430b322f35ef44dc1e9705a6c4a",
+  "rollback_agent_retained": true,
   "runtime_name": "CommonsLife",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 44670,
+  "skill_sha256": "333c1c840b1c0ce8fa15a632da0192e8d42917adc5bdec256c378357139e37db",
   "tool_schema": {
     "properties": {
       "action": {

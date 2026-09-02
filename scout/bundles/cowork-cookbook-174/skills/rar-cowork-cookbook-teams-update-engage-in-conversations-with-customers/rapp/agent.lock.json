@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_engage_in_conversations_with_customers",
+  "agent_bytes": 10822,
   "agent_file": "teams_update_engage_in_conversations_with_customers_agent.py",
   "agent_sha256": "66e3c6903851c97941a5973d01ed35035231c954caf38be52c43e0137488c60a",
+  "backup_agent": "teams_update_engage_in_conversations_with_customers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateEngageInConversationsWithCustomers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-engage-in-conversations-with-customers:2fecbad1a63a38dac82ec0dbb205125c439e746a16ccda0cb7dbae788f0576fd",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateEngageInConversationsWithCustomers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25149,
+  "skill_sha256": "cc69325628a68d390a26a1ff538bf66f43ae8a878c3add3229a27ef1d057aae9",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_hire_to_retire",
+  "agent_bytes": 10526,
   "agent_file": "d365_hire_to_retire_agent.py",
   "agent_sha256": "45f50e5967de3de38ffc7d775f5a92b695130c30661356eff7cb68c6af4bd651",
+  "backup_agent": "d365_hire_to_retire_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365HireToRetire",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-hire-to-retire:c240f190afde245a8405b7d1ce9a0b83f826c7722847d375d282d3154630b024",
+  "rollback_agent_retained": true,
   "runtime_name": "D365HireToRetire",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24443,
+  "skill_sha256": "45aee32f19cd5146031f6531b67ccf6afbc3d1d5d81879be1fff62e630c80241",
   "tool_schema": {
     "properties": {
       "operation": {

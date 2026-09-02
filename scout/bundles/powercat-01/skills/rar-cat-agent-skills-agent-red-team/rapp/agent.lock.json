@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/agent_red_team",
+  "agent_bytes": 9379,
   "agent_file": "agent_red_team_agent.py",
   "agent_sha256": "c39b9166de102478dec3ddc39a765711e471bf743090479f27115e4ab207a879",
+  "backup_agent": "agent_red_team_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentRedTeam",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Marco Zama",
@@ -45,8 +48,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/agent-red-team:b386c6fba2e42bab0a278a74e587b2c6cff8ddb6b42b46c9afbecc68f3152a52",
+  "rollback_agent_retained": true,
   "runtime_name": "AgentRedTeam",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22561,
+  "skill_sha256": "66b3a75b40dd27df292ac8b4564ad173dd64d809e93e276a8723a4f0df9ab5ec",
   "tool_schema": {
     "properties": {
       "criteria": {

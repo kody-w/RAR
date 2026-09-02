@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_conduct_training",
+  "agent_bytes": 10566,
   "agent_file": "teams_update_conduct_training_agent.py",
   "agent_sha256": "1ee9172de5d0b0999062629fe05f7e2fb0336092ca2d42e616e292f45fffa0cc",
+  "backup_agent": "teams_update_conduct_training_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConductTraining",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-conduct-training:556d159ff49f414d0e62e37a5db44dc8928e77730e7a995e87ef8d562be63665",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateConductTraining",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24466,
+  "skill_sha256": "126005e9af5ebefc3090d4da596b82785bf502988102d7b9af469361e8d039af",
   "tool_schema": {
     "properties": {
       "operation": {

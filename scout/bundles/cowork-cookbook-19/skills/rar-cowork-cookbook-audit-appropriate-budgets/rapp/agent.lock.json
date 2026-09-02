@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_appropriate_budgets",
+  "agent_bytes": 10587,
   "agent_file": "audit_appropriate_budgets_agent.py",
   "agent_sha256": "9e5eecf813c43941a9ca01f37e6fe30c3b3dc0b7c7772fe899a7c13a1e447012",
+  "backup_agent": "audit_appropriate_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAppropriateBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-appropriate-budgets:03723e8bc22b85d3400cba902a9afd726648be507dbbb2fa6601a89d722d4f28",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAppropriateBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24499,
+  "skill_sha256": "9987df548b9b41e8062940b58683f4db524cfa2eb3fb5d02efd92cdd830c87c5",
   "tool_schema": {
     "properties": {
       "criteria": {

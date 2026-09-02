@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_configure_and_monitor_system_generated_numbers",
+  "agent_bytes": 10988,
   "agent_file": "scheduled_brief_configure_and_monitor_system_generated_numbers_agent.py",
   "agent_sha256": "f212d9152d9303a10d3329fe100057b0006dd90444480f7fb73850407020cb9e",
+  "backup_agent": "scheduled_brief_configure_and_monitor_system_generated_numbers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefConfigureAndMonitorSystemGeneratedNumbers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-configure-and-monitor-system-generated-numbers:18f173bd06d195ef760d02aa9608f10ac64b046a4cbc9db4a04f17d648a135e2",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefConfigureAndMonitorSystemGeneratedNumbers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25546,
+  "skill_sha256": "1e7c837a97bf83cd84423dc1d6a3796cafaee14a3e512192f497922e600b8e50",
   "tool_schema": {
     "properties": {
       "operation": {

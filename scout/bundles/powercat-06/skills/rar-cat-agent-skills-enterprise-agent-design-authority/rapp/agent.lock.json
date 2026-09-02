@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/enterprise_agent_design_authority",
+  "agent_bytes": 9550,
   "agent_file": "enterprise_agent_design_authority_agent.py",
   "agent_sha256": "1b8d67a3b9d2dab18a77b43f93af6285ad595ac5b44c49ff0568605b8a596f6f",
+  "backup_agent": "enterprise_agent_design_authority_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EnterpriseAgentDesignAuthority",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Faride Ilanda",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/enterprise-agent-design-authority:281c99f71b215bbc5a28c85ca6f4c5eed5d1489b2d875f76473fe200b9a3319d",
+  "rollback_agent_retained": true,
   "runtime_name": "EnterpriseAgentDesignAuthority",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22998,
+  "skill_sha256": "a65f29efd59642f1d70a6a7a42ab891dc97df466f73685e622f804b5bb13ddf2",
   "tool_schema": {
     "properties": {
       "criteria": {

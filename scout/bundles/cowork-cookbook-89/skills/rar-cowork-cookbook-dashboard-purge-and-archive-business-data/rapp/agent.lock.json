@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_purge_and_archive_business_data",
+  "agent_bytes": 10754,
   "agent_file": "dashboard_purge_and_archive_business_data_agent.py",
   "agent_sha256": "85b59e79625b4aeba5f3010e6be87be6a30ca1a229bc03d1279abebc620cf620",
+  "backup_agent": "dashboard_purge_and_archive_business_data_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardPurgeAndArchiveBusinessData",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-purge-and-archive-business-data:b47ae539bb087f8f6a1a7b6beaa17dcf4232aaccf410cf832bbb2fb8dcf2135f",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardPurgeAndArchiveBusinessData",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25002,
+  "skill_sha256": "08ca706ffeddf6e01a8a95bd0e6349e45889d09b39f77194aaa1a4dc22702ce9",
   "tool_schema": {
     "properties": {
       "operation": {

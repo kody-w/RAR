@@ -5,6 +5,13 @@
   "id": "4264c61b2579e045",
   "lastExecutedAt": null,
   "name": "EstateFactory",
+  "rapp": {
+    "backup_agent": "estate_factory_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-kody-w-estate-factory"
+  },
   "schedule": {
     "days": [
       1,

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_define_learning_paths",
+  "agent_bytes": 10765,
   "agent_file": "configure_define_learning_paths_agent.py",
   "agent_sha256": "e687b6514a290fc0eddf7e6c726574bcbc2ec26e2636afe95a4703d39872d2f8",
+  "backup_agent": "configure_define_learning_paths_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDefineLearningPaths",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-define-learning-paths:9070fb4026969a7923be5a846d63022fdab2fb67fc1a8962573d13a6c1ab8ef9",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDefineLearningPaths",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24772,
+  "skill_sha256": "64e2cb159b1662c4eb405fceba3d8068c6ebcc1af3e4c656adfb630309d20b40",
   "tool_schema": {
     "properties": {
       "operation": {

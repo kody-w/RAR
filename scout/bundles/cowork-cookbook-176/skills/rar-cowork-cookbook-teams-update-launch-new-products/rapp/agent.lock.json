@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_launch_new_products",
+  "agent_bytes": 10567,
   "agent_file": "teams_update_launch_new_products_agent.py",
   "agent_sha256": "69078bf55554f7f89365fafccdd25f8dc354eef93d51453d980b60d07fe8ddfa",
+  "backup_agent": "teams_update_launch_new_products_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateLaunchNewProducts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-launch-new-products:7957eb5b1978384db728c67d09319fe0aba89f4ca1ee8eb28a602649e980859c",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateLaunchNewProducts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24491,
+  "skill_sha256": "6d931b21ef7dd8fd970b94adfa74d4479d87596e6e8b7e78602bac608d209f71",
   "tool_schema": {
     "properties": {
       "operation": {

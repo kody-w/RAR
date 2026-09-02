@@ -1,6 +1,6 @@
 {
-  "schema": "rar-api/1.1",
-  "description": "RAPP Agent Registry \u2014 headless RAPP + X\u2122 API. Static reads come from main; authenticated CRUD commands use GitHub Issues as the durable control and audit surface. UI is optional.",
+  "schema": "rar-api/1.2",
+  "description": "RAPP Agent Registry \u2014 RAPP/1 Toasted SKILL.md Grails are the default portable artifact; exact agent.py files remain rollback and authoring sources.",
   "base_url": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "site_url": "https://kody-w.github.io/RAR",
   "endpoints": {
@@ -10,10 +10,22 @@
       "description": "Full agent registry. Returns all agents with manifests, SHA256 hashes, and metadata.",
       "auth": "none"
     },
+    "skill_catalog": {
+      "url": "{base_url}/scout/catalog/catalog.json",
+      "method": "GET",
+      "description": "Primary capability catalog. Join skills[].identity to registry agents[].name; install SKILL.md and verify every file hash.",
+      "auth": "none"
+    },
+    "toasted_skill": {
+      "url": "{skill_catalog.skills[].files[path=SKILL.md].url}",
+      "method": "GET",
+      "description": "Default RAPP/1 Grail record. Its terminal RCI capsule restores the exact agent.py bytes.",
+      "auth": "none"
+    },
     "agent_file": {
       "url": "{base_url}/agents/{publisher}/{slug}.py",
       "method": "GET",
-      "description": "Download a single agent file. The file IS the package.",
+      "description": "Rollback/materialized agent source. Prefer the Toasted skill unless the host explicitly requires agent.py.",
       "auth": "none",
       "example": "{base_url}/agents/@kody-w/deal_desk_agent.py"
     },
@@ -188,12 +200,12 @@
       "algorithm": "seed -> mulberry32 PRNG -> deterministic type, stats, abilities, rarity"
     },
     "mcp": {
-      "url": "{base_url}/registry.json",
+      "url": "{base_url}/scout/catalog/catalog.json",
       "method": "GET",
-      "description": "MCP on-ramp. This static surface IS a rapp-static-mcp/1.0 catalog: catalog = registry.json, frames = agents/* pinned by _sha256 / _first_commit_sha. Any MCP host reads the catalog, fetches a content-addressed agent frame, and verifies-before-exec against the published hash. MCP is transport realizing 'Chat Is The Only Wire' \u2014 MCP clients are Layer 2 callers of a brainstem's /chat (via rapp_brainstem_mcp.py), not a new agent unit.",
+      "description": "MCP on-ramp. Read the Toasted skill catalog, fetch the checksum-pinned SKILL.md Grail, and restore the exact agent bytes from its terminal RCI capsule only when execution requires them.",
       "auth": "none",
       "profile": "rapp-static-mcp/1.0 (built on rapp-static-api/1.0)",
-      "verify_before_exec": "Pin each agent by registry _sha256 (and _first_commit_sha for first-seen provenance); recompute the SHA256 of the fetched agent file and refuse to exec on mismatch."
+      "verify_before_exec": "Verify the catalog file SHA-256, terminal capsule, Grail RAPPID, and restored agent SHA-256. The registry _file remains the rollback alias."
     },
     "federation_catalog": {
       "url": "{base_url}/state/federation.json",

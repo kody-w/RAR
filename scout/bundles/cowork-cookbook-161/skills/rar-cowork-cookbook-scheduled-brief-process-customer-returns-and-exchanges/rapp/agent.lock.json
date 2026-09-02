@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_process_customer_returns_and_exchanges",
+  "agent_bytes": 10848,
   "agent_file": "scheduled_brief_process_customer_returns_and_exchanges_agent.py",
   "agent_sha256": "ddc67d9d077c380453a9449aa37a842c0f34d50312eb8f3c8d142399d31f4aab",
+  "backup_agent": "scheduled_brief_process_customer_returns_and_exchanges_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefProcessCustomerReturnsAndExchanges",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-process-customer-returns-and-exchanges:7ece0c8f794692edff666db76e6aea1c049bfe52db77031a53552a6c77a45af1",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefProcessCustomerReturnsAndExchanges",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25218,
+  "skill_sha256": "9dcb55fc26a2c2a274f2f2fddfd442caa9498c787fc4c0a6ebd1cb27b0153246",
   "tool_schema": {
     "properties": {
       "operation": {

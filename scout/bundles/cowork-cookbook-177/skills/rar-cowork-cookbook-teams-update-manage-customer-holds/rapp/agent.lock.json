@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_manage_customer_holds",
+  "agent_bytes": 10592,
   "agent_file": "teams_update_manage_customer_holds_agent.py",
   "agent_sha256": "7ad2018747a96032f9a7fa6e7b3dcbba7a182b9f0be0a4af60028af3c349cdd4",
+  "backup_agent": "teams_update_manage_customer_holds_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateManageCustomerHolds",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-manage-customer-holds:62e756ae441429e0d56269b82a145b9e23a2aed844de20240edb5fed3df44bfd",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateManageCustomerHolds",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24583,
+  "skill_sha256": "bf57f4a785f0ad38d658ec958e5b0462c1e3a74a025480aa8a5953def606488e",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_assess_product_portfolio",
+  "agent_bytes": 10618,
   "agent_file": "bulk_update_assess_product_portfolio_agent.py",
   "agent_sha256": "ad868b05a0f42ecc6db5c4aa7bd55458c4e78a592f6f2f613a8e8ce39c134f17",
+  "backup_agent": "bulk_update_assess_product_portfolio_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAssessProductPortfolio",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-assess-product-portfolio:46e3501b48bc89ec7ef2dc930ba2f87ef01d286e79e1de861ec76c572b9ad233",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAssessProductPortfolio",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24655,
+  "skill_sha256": "282c19bed0cf4321c31bb3c1e7ea5fd743e11cc77debc7ea4a45170938a4198a",
   "tool_schema": {
     "properties": {
       "operation": {

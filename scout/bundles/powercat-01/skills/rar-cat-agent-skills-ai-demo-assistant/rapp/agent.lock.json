@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/ai_demo_assistant",
+  "agent_bytes": 9290,
   "agent_file": "ai_demo_assistant_agent.py",
   "agent_sha256": "91fdd28e1096d53816d4397debef31b39e5539d37b57a29783db543dc51482d1",
+  "backup_agent": "ai_demo_assistant_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AiDemoAssistant",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Doak Moore",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/ai-demo-assistant:0f816977b1c864ae3c648327c1aaa4dcc6a90c2b4c1c30d5207417f35ad68cd6",
+  "rollback_agent_retained": true,
   "runtime_name": "AiDemoAssistant",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22621,
+  "skill_sha256": "ab90c6a91043ecd82fe431a9bf1bbf47f3ccfeb7281dfc2b6908fff62e600eb7",
   "tool_schema": {
     "properties": {
       "audience": {

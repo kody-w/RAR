@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_map_value_streams",
+  "agent_bytes": 10536,
   "agent_file": "bulk_update_map_value_streams_agent.py",
   "agent_sha256": "2eb55f48a7fbf89322b76ff2c7bf0dccd24844ac2406b43a2a3b0520942ecc6a",
+  "backup_agent": "bulk_update_map_value_streams_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateMapValueStreams",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-map-value-streams:96b1c5e4ca61fe5ac375743af32a00000a38c6141868c12d8690c7f0f633b525",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateMapValueStreams",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24459,
+  "skill_sha256": "adc50687d4b029e04a0375e325f5601a9ba45b5fcc2f71a6b3d73a2bcd1ea032",
   "tool_schema": {
     "properties": {
       "operation": {

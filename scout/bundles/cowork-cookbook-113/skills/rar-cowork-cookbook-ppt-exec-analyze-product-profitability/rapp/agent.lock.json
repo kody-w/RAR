@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_analyze_product_profitability",
+  "agent_bytes": 10669,
   "agent_file": "ppt_exec_analyze_product_profitability_agent.py",
   "agent_sha256": "a57ceeff6479bfe5816ab2cbd5ad911646f169d0a797f9be5da1c99e5964c9c9",
+  "backup_agent": "ppt_exec_analyze_product_profitability_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAnalyzeProductProfitability",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-analyze-product-profitability:2eed47cec6626b410e0eef4d1cf26f49c55c114a617878f142bb4daa3bf5cfb4",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecAnalyzeProductProfitability",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24736,
+  "skill_sha256": "f1c6d15104874ec56c5e23641b920b1030f4608776b4fb8519b8a8f885f265de",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_develop_currency_policies",
+  "agent_bytes": 10657,
   "agent_file": "dashboard_develop_currency_policies_agent.py",
   "agent_sha256": "3832242466ebbd49bbf14d930e63d3d31ade12c304d8fe17049829ae692e0cb5",
+  "backup_agent": "dashboard_develop_currency_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDevelopCurrencyPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-develop-currency-policies:30d341c6bfaa279e4b60206b8676a4b50a61bf28aff126dd7932918a024c5664",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDevelopCurrencyPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24742,
+  "skill_sha256": "5af6b16a4042485beae71ab12b8529283141903fbe71d79f2d3556decf76175f",
   "tool_schema": {
     "properties": {
       "operation": {

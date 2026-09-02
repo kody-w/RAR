@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_market_test_new_products",
+  "agent_bytes": 10594,
   "agent_file": "ppt_exec_market_test_new_products_agent.py",
   "agent_sha256": "ebc05b63e1e4d8cd23faf22b0abaaec72f377f52253a89b0bd78d1679f524fb6",
+  "backup_agent": "ppt_exec_market_test_new_products_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMarketTestNewProducts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-market-test-new-products:20e136aee144f2f635a0854c53cbd1a077efcd21c5abf5fc7bd160658a419412",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMarketTestNewProducts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24614,
+  "skill_sha256": "daa9750169027eab33a95b56c68548a9edd8e395033e3247a9491c133787d965",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp_x_notary_canary_agent",
+  "agent_bytes": 1345,
   "agent_file": "rapp_x_notary_canary_agent.py",
   "agent_sha256": "5d34d87380925aa0f60c14e0066c8aa5e59ecd884bf19034619ebea58ad27149",
+  "backup_agent": "rapp_x_notary_canary_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappXNotaryCanaryAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody W",
@@ -24,8 +27,16 @@
     ],
     "version": "1.2.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-x-notary-canary:33eee7877885635c66aa7660de86e5c23e515d6195eed0d5c504c45db331c01b",
+  "rollback_agent_retained": true,
   "runtime_name": "RappXNotaryCanaryAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 7307,
+  "skill_sha256": "e243dd32644be60a2b429d9402d6ed2cec67db48d60e51e836afae0a63353a87",
   "tool_schema": {
     "properties": {},
     "type": "object"

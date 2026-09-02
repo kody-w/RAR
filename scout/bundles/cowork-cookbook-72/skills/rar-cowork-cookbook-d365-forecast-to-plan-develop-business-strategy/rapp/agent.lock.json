@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_forecast_to_plan_develop_business_strategy",
+  "agent_bytes": 10731,
   "agent_file": "d365_forecast_to_plan_develop_business_strategy_agent.py",
   "agent_sha256": "8fe55d7da2ecfffc82ac86d5a92cdd9ab16c64fdb23570ec8478d42c84a182d2",
+  "backup_agent": "d365_forecast_to_plan_develop_business_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ForecastToPlanDevelopBusinessStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-forecast-to-plan-develop-business-strategy:b127fa5a87b0ad437623fe10ab77b090b31d7780498ecf3d845b9fc6b7f30e9d",
+  "rollback_agent_retained": true,
   "runtime_name": "D365ForecastToPlanDevelopBusinessStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24961,
+  "skill_sha256": "35ca74396a30869fedc002b147506f52fccb03771e87505b83fdd7c3a774c52d",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/prepare_a_leadership_update",
+  "agent_bytes": 10229,
   "agent_file": "prepare_a_leadership_update_agent.py",
   "agent_sha256": "427cbf153ff2bd8457657b5db886e3457e79320a686d51be50c28360636ee005",
+  "backup_agent": "prepare_a_leadership_update_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PrepareALeadershipUpdate",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -75,8 +78,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/prepare-a-leadership-update:cb799c0d089b7cd82179a5ffee49596e41e2bee46c16294f07a4d69c077d7dc0",
+  "rollback_agent_retained": true,
   "runtime_name": "PrepareALeadershipUpdate",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24064,
+  "skill_sha256": "bfa8e5d4816762db7150dc9023e3404504e85d4c176d13f0bb0ea398de6a1897",
   "tool_schema": {
     "properties": {
       "audience": {

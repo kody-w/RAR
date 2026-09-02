@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/booth_loop_video",
+  "agent_bytes": 9219,
   "agent_file": "booth_loop_video_agent.py",
   "agent_sha256": "a57ed23652a00cd4a470cd1e4b9ed2235169a024082d805be21ebc268a01cc6c",
+  "backup_agent": "booth_loop_video_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BoothLoopVideo",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Al Macey",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/booth-loop-video:65003022916ac9764151495fd1f8b259a437b8a65e86dc9b3c044d7917041b2f",
+  "rollback_agent_retained": true,
   "runtime_name": "BoothLoopVideo",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22309,
+  "skill_sha256": "53140a0e4f6413fcfe895ee7cb5ca4c0c47640a0d962962e3ceccb247e503ffa",
   "tool_schema": {
     "properties": {
       "constraints": {

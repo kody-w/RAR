@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_define_kpis_for_call_center_performance",
+  "agent_bytes": 10864,
   "agent_file": "audit_define_kpis_for_call_center_performance_agent.py",
   "agent_sha256": "00d85df12a6778b8234a0f0043c189a1e1c70ac2839438bdfa3548fffb70a883",
+  "backup_agent": "audit_define_kpis_for_call_center_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineKpisForCallCenterPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-define-kpis-for-call-center-performance:c20901004fe1111930b452cc19409adcc982761d16aa861771310ea7f5430268",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDefineKpisForCallCenterPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25226,
+  "skill_sha256": "f8d41518d5f674cc70a56160ef58d95d3f6aaa8d59ce50debbe15b3e6dbf1f7f",
   "tool_schema": {
     "properties": {
       "criteria": {

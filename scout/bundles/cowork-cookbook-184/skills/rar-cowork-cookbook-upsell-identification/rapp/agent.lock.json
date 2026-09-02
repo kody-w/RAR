@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/upsell_identification",
+  "agent_bytes": 10334,
   "agent_file": "upsell_identification_agent.py",
   "agent_sha256": "b38d258a531fcf523748fff8473682194181626f8bd13f32268dcceaa7e9f8c1",
+  "backup_agent": "upsell_identification_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "UpsellIdentification",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/upsell-identification:acd08e0a3c1808db9d367108a19bae3bcdeb8017c6ac5b858f0afe5b63987a75",
+  "rollback_agent_retained": true,
   "runtime_name": "UpsellIdentification",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23991,
+  "skill_sha256": "9da3121b38c85249afbabc8c587c2ad02ca2aa4b1a666f56deb43a24c58690d2",
   "tool_schema": {
     "properties": {
       "operation": {

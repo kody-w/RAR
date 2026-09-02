@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_track_supplier_certifications_and_compliance",
+  "agent_bytes": 10875,
   "agent_file": "bulk_update_track_supplier_certifications_and_compliance_agent.py",
   "agent_sha256": "b81be689017dae1de65e0bc25a0664fa5aaa6665fa7e3d4d619e99bd1ebe7dcf",
+  "backup_agent": "bulk_update_track_supplier_certifications_and_compliance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateTrackSupplierCertificationsAndCompliance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-track-supplier-certifications-and-compliance:9e82dddddeb8ef5375f4a36a32f5947483d1a8c30fe254ada1ca16093c93a086",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateTrackSupplierCertificationsAndCompliance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25297,
+  "skill_sha256": "cf010d064d1cba04402d7b141bdfe21ea676823bd5399055d19a6d80b393f2f1",
   "tool_schema": {
     "properties": {
       "operation": {

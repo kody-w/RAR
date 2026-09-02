@@ -1,13 +1,24 @@
 {
   "agent": "@bill/coe-starter-kit-singleton",
+  "agent_bytes": 11253,
   "agent_file": "coe_starter_kit_agent.py",
   "agent_sha256": "50a04db67238b2bedd3817fa3ab4225032fb050531671b5dde126881efac4fbe",
+  "backup_agent": "coe_starter_kit_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BillTeamStarterAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {},
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@bill/coe-starter-kit-singleton:2bcdf05bb883c499cf5272990009814460d0138b301fac5af893029d1df68e64",
+  "rollback_agent_retained": true,
   "runtime_name": "BillTeamStarter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 27340,
+  "skill_sha256": "1be7f9a5990dfcc89f4659bd87489f2c3da7e8fc9ef036d619aecd3efc5b9273",
   "tool_schema": {
     "properties": {
       "dry_run": {

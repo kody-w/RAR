@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/pitch_deck_agent",
+  "agent_bytes": 57344,
   "agent_file": "pitch_deck_agent.py",
   "agent_sha256": "ca3c2f325342769f9d799ccb0fc0cd41a23f90d2e6ddfb1dcb7c79d7bdd78145",
+  "backup_agent": "pitch_deck_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PitchDeckAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP / AIBAST",
@@ -28,8 +31,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/pitch-deck:2aa8c176e2e04972def961b7ab3b40523e89dfdc491285a75591637ab8a388ce",
+  "rollback_agent_retained": true,
   "runtime_name": "PitchDeck",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 90877,
+  "skill_sha256": "30b8177c3c336835e7b6250812f4a2a557786674cf85cbfc5f0cdc5352a52d46",
   "tool_schema": {
     "properties": {
       "audience": {

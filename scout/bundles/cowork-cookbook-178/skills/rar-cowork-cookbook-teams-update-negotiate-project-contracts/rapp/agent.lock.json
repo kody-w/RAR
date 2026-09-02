@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_negotiate_project_contracts",
+  "agent_bytes": 10681,
   "agent_file": "teams_update_negotiate_project_contracts_agent.py",
   "agent_sha256": "1c95eeac1f0db458a63c10ff1dd26ca779ba69e1f86ef2b4c828f8b79e7cb02e",
+  "backup_agent": "teams_update_negotiate_project_contracts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateNegotiateProjectContracts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-negotiate-project-contracts:554e769b30118d94fd71b9727e8c2f23a90e800f2b960643aec1aa99739c17da",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateNegotiateProjectContracts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24750,
+  "skill_sha256": "1a0c325a8b93dfd01711684ce4699450cf6e925c9e04e38eddd1e0bab211458c",
   "tool_schema": {
     "properties": {
       "operation": {

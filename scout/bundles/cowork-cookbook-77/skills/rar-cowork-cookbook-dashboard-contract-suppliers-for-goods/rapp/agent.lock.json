@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_contract_suppliers_for_goods",
+  "agent_bytes": 10683,
   "agent_file": "dashboard_contract_suppliers_for_goods_agent.py",
   "agent_sha256": "2630268cb5ef019db68e764b913b2b46889f9d7bbcae51658737c2eaa35f9252",
+  "backup_agent": "dashboard_contract_suppliers_for_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardContractSuppliersForGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-contract-suppliers-for-goods:741e7ae3c08d7504a32ea4c3c5831b33fa1bb163dfdd31b2b35b4610ac0c7c99",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardContractSuppliersForGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24814,
+  "skill_sha256": "0c6d659bdb741ac3d6a324ac6e3a130fdf7c1fe6205b7a8ccff7c08a64679ee6",
   "tool_schema": {
     "properties": {
       "operation": {

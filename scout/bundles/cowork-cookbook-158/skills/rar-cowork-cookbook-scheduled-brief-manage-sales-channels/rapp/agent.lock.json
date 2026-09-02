@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_manage_sales_channels",
+  "agent_bytes": 10636,
   "agent_file": "scheduled_brief_manage_sales_channels_agent.py",
   "agent_sha256": "f7862a1d6b76f23a909e6b010ea8c25a8afdebce6e2a68a96cb16c3aa1b54377",
+  "backup_agent": "scheduled_brief_manage_sales_channels_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefManageSalesChannels",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-manage-sales-channels:3395d9803ef89ddb2e32d33985e7b0987379eeb5be25b5052795f08d08e89b2f",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefManageSalesChannels",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24695,
+  "skill_sha256": "78e039480cbee6750a20e58404457dfb90784ca9f8249a6c95725e3266f52b09",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_recovery_objectives",
+  "agent_bytes": 10707,
   "agent_file": "adaptive_card_define_recovery_objectives_agent.py",
   "agent_sha256": "07e3fe10d5b15285af7921404e23657d31a8c759b8ad35c4cc381dfeafd36b89",
+  "backup_agent": "adaptive_card_define_recovery_objectives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineRecoveryObjectives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-define-recovery-objectives:9ad262ed7ceef176daa74d876b243d3e01cecf0cd06787f367800cf4a1104c99",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDefineRecoveryObjectives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24836,
+  "skill_sha256": "5681928584878682f15200d4a6bd83542ca1815232e6344a8fcf32b1a66b2ebd",
   "tool_schema": {
     "properties": {
       "operation": {

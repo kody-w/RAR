@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_furlough_workers",
+  "agent_bytes": 10689,
   "agent_file": "configure_furlough_workers_agent.py",
   "agent_sha256": "9de55d9a04d6ab274a6ead3d44a3d6501e048d256023e002eaddd44bb6324544",
+  "backup_agent": "configure_furlough_workers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureFurloughWorkers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-furlough-workers:7c6a7198d0f3cff6da7c268a9bd16607b8a92589e863b683d855bd9064630228",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureFurloughWorkers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24581,
+  "skill_sha256": "6ca61a37400b22d3ddbfb4738c91d3f024a549a826ecbc95265085cc3ee5ad01",
   "tool_schema": {
     "properties": {
       "operation": {

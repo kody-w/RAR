@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_report_on_production_sustainability_metrics",
+  "agent_bytes": 10874,
   "agent_file": "dashboard_report_on_production_sustainability_metrics_agent.py",
   "agent_sha256": "26f8528d42d0cb4cbc426ded37c77d19738627bade280be65208a07a79cebc92",
+  "backup_agent": "dashboard_report_on_production_sustainability_metrics_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardReportOnProductionSustainabilityMetrics",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-report-on-production-sustainability-metrics:80e5e4d3e7c1836337cda42b8e1c21b1ace28de5496b88cfa1ae612a6761f98a",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardReportOnProductionSustainabilityMetrics",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25256,
+  "skill_sha256": "667fb5a040607a6d64af01338c7dcf405502cebb738e7f78daebe161a946d6a5",
   "tool_schema": {
     "properties": {
       "operation": {

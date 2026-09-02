@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_conduct_succession_planning",
+  "agent_bytes": 10371,
   "agent_file": "report_conduct_succession_planning_agent.py",
   "agent_sha256": "8e2f49c6b6d387b8197addf8ef9639cc997d45a9d885fbe96ed118eb944cd5cf",
+  "backup_agent": "report_conduct_succession_planning_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportConductSuccessionPlanning",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-conduct-succession-planning:81921af11f2d98efede8e2a68a1e98366517659422a5939ade82c0a6a3f700a4",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportConductSuccessionPlanning",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24253,
+  "skill_sha256": "f06495eeaf3f650c7c992dd1572d5e8d0c673b4b3fd8a690c3c26fe941e06334",
   "tool_schema": {
     "properties": {
       "audience": {

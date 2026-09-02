@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_maintain_asset_leases",
+  "agent_bytes": 10578,
   "agent_file": "ppt_exec_maintain_asset_leases_agent.py",
   "agent_sha256": "3bc39ed437ea9fef2a29850e945c9b5b988b6c599dea3cf86d38c677da20e768",
+  "backup_agent": "ppt_exec_maintain_asset_leases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMaintainAssetLeases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-maintain-asset-leases:acfa523cf07bd478ad566d9ced55eef017308de12c7f25772f9de862cb4505d2",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMaintainAssetLeases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24543,
+  "skill_sha256": "078c40e564aaa8f78e49347ed5715ac364f7a7c22195aec6c780df47e3aad58e",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_track_campaign_expenses",
+  "agent_bytes": 10635,
   "agent_file": "adaptive_card_track_campaign_expenses_agent.py",
   "agent_sha256": "5dcb34547a8a0388a92ceb8719cb94a34c518398671c03f5fd3d07bdd82a7a1e",
+  "backup_agent": "adaptive_card_track_campaign_expenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardTrackCampaignExpenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-track-campaign-expenses:cca6fb5383b74205c825420a81e00e36538491081b4b236c8f8c4c8f31d2fd4e",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardTrackCampaignExpenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24703,
+  "skill_sha256": "2f3bedf5567219dfe4f5679fa7047bab2aafc8676b02549f1816c18dda8a79ff",
   "tool_schema": {
     "properties": {
       "operation": {

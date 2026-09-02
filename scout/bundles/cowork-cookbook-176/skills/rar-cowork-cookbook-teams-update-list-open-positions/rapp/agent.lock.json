@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_list_open_positions",
+  "agent_bytes": 10567,
   "agent_file": "teams_update_list_open_positions_agent.py",
   "agent_sha256": "3d343041cb2a080ed75ed4f73afa2fff03e90b6175787e49df19534075f6b4c1",
+  "backup_agent": "teams_update_list_open_positions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateListOpenPositions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-list-open-positions:887185cd6d1e8c0a8747d1bc03f211bb73f4073939258853bf225fce1c8ab3a4",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateListOpenPositions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24513,
+  "skill_sha256": "7c3ea8178fb9170e509dde56499fd83545673db15982401b9cb5b69f786667a4",
   "tool_schema": {
     "properties": {
       "operation": {

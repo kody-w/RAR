@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_maintain_and_optimize_background_jobs",
+  "agent_bytes": 10833,
   "agent_file": "adaptive_card_maintain_and_optimize_background_jobs_agent.py",
   "agent_sha256": "bbdab2c31899d5d0e3a2bbc5db0441ba4ecac4dcc595146643ec34ab1ffcd642",
+  "backup_agent": "adaptive_card_maintain_and_optimize_background_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardMaintainAndOptimizeBackgroundJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-maintain-and-optimize-background-jobs:749cdac0c4aa2b0651f41e8776e7833dc3a600b5add8330381d4d7d6fd7ad8fe",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardMaintainAndOptimizeBackgroundJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25195,
+  "skill_sha256": "3c144e4c5a08976eb832faa5ea1ec7cdf6624d4f63300e83e5fe02d8e4199097",
   "tool_schema": {
     "properties": {
       "operation": {

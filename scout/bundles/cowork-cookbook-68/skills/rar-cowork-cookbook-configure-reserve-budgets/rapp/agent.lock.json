@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_reserve_budgets",
+  "agent_bytes": 10683,
   "agent_file": "configure_reserve_budgets_agent.py",
   "agent_sha256": "75c1e518be4af43832e65b525c6d7ddc82605985bc5463a3f6651c3f0e12ba6b",
+  "backup_agent": "configure_reserve_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureReserveBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-reserve-budgets:c5781e6506ada321ae09d70a08e8f209e39aa313751b4eeaf5bc945ae8a83bb7",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureReserveBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24546,
+  "skill_sha256": "383ffdc7cb9d9327399842af71069339b75d16b63e2cf2bf88066700cc4e137e",
   "tool_schema": {
     "properties": {
       "operation": {

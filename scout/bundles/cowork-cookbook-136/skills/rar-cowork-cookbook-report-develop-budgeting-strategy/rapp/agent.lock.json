@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_develop_budgeting_strategy",
+  "agent_bytes": 10387,
   "agent_file": "report_develop_budgeting_strategy_agent.py",
   "agent_sha256": "75801bc8918ebe9b66aa7eac41ff8c0d873c82a94a42758926864dd8a2dcf91b",
+  "backup_agent": "report_develop_budgeting_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDevelopBudgetingStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-develop-budgeting-strategy:88cea0d49f3a811bde51af30458fc0e28ef4dc708435a97be3b0ff6a484689b0",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDevelopBudgetingStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24252,
+  "skill_sha256": "4dd9a13d1bb8f1adfd160efec631c70db591bd914ad81fb1b791103bcbced830",
   "tool_schema": {
     "properties": {
       "audience": {

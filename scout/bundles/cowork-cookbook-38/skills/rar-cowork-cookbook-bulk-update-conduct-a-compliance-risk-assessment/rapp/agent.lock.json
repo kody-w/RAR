@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_conduct_a_compliance_risk_assessment",
+  "agent_bytes": 10798,
   "agent_file": "bulk_update_conduct_a_compliance_risk_assessment_agent.py",
   "agent_sha256": "33312cffc115bca8cd1d6bf76feea0c91f911f2fa11bd6a0d32a45203f360c44",
+  "backup_agent": "bulk_update_conduct_a_compliance_risk_assessment_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateConductAComplianceRiskAssessment",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-conduct-a-compliance-risk-assessment:7b893e2b95ad3b7eeffe2ec2706daa07692326adde62b7794ca06e88d9951d78",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateConductAComplianceRiskAssessment",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25116,
+  "skill_sha256": "6ff496893c91556590337ceba6813bb1ab42e83bbf7c1792eba75060eda37617",
   "tool_schema": {
     "properties": {
       "operation": {

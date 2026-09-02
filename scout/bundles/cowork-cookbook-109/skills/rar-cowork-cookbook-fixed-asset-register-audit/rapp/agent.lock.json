@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/fixed_asset_register_audit",
+  "agent_bytes": 10563,
   "agent_file": "fixed_asset_register_audit_agent.py",
   "agent_sha256": "6ed6542ca6929599ac160e485c6925697c9a379baffd621e592b9ce94923f1fe",
+  "backup_agent": "fixed_asset_register_audit_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FixedAssetRegisterAudit",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/fixed-asset-register-audit:2e29f03d26fc939632fad03949a01e4faae563e2e729299f1b6f696e7a02fe5e",
+  "rollback_agent_retained": true,
   "runtime_name": "FixedAssetRegisterAudit",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24557,
+  "skill_sha256": "208565f67eafd8ee60cb0425854d51d7b2240145f938b1c54f4adac3e95f8ec9",
   "tool_schema": {
     "properties": {
       "criteria": {

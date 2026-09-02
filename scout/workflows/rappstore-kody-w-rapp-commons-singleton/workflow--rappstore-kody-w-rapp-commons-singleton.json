@@ -5,6 +5,13 @@
   "id": "b70265186f209029",
   "lastExecutedAt": null,
   "name": "RAPP Commons",
+  "rapp": {
+    "backup_agent": "commons_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-kody-w-rapp-commons-singleton"
+  },
   "schedule": {
     "days": [
       1,

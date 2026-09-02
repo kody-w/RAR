@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_analyze_background_job_performance_and_history",
+  "agent_bytes": 10933,
   "agent_file": "teams_update_analyze_background_job_performance_and_history_agent.py",
   "agent_sha256": "e652334716c779979d70c8f9bf6df06ac824c11ca8c2d352000bf0efb5aec09e",
+  "backup_agent": "teams_update_analyze_background_job_performance_and_history_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAnalyzeBackgroundJobPerformanceAndHistory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-analyze-background-job-performance-and-history:159ae6903791d97313ac0bb36dd3ddb90d8df1fd33d3236de4b45dbcc1217146",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateAnalyzeBackgroundJobPerformanceAndHistory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25419,
+  "skill_sha256": "7001ab00bee88bc88988ddb8975a1dfc096ef3e960ab27c2de3e10334a1fd03b",
   "tool_schema": {
     "properties": {
       "operation": {

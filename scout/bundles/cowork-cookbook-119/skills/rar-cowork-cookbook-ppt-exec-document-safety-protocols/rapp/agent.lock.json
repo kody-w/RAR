@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_document_safety_protocols",
+  "agent_bytes": 10460,
   "agent_file": "ppt_exec_document_safety_protocols_agent.py",
   "agent_sha256": "b85b5717a5151d0c70af8a8ba2978ce705410fb46610884d6b1d7968ad01cb90",
+  "backup_agent": "ppt_exec_document_safety_protocols_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDocumentSafetyProtocols",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-document-safety-protocols:2e54f84ecdd256d8ac8eec73c93465606ac2ff79877dec9aae5f15d2630e54ad",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDocumentSafetyProtocols",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24461,
+  "skill_sha256": "3a5a3a2d21bbffcd0bc1089ef7080bae539747c0c815ecbdd8ed79b7bf7b1020",
   "tool_schema": {
     "properties": {
       "audience": {

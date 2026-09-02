@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_mitigate_and_update_the_disaster_recovery_plan",
+  "agent_bytes": 10955,
   "agent_file": "adaptive_card_mitigate_and_update_the_disaster_recovery_plan_agent.py",
   "agent_sha256": "c0d2e6031b9b3b5a3b9f9b36280f79ac75ff4f4a9af69de04412f208b7dd31ba",
+  "backup_agent": "adaptive_card_mitigate_and_update_the_disaster_recovery_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardMitigateAndUpdateTheDisasterRecoveryPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-mitigate-and-update-the-disaster-recovery-plan:8576da17a1eb92d24a977d4f2ab13fa85ed137be73d5bf2bf3b1d290d4ed2aeb",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardMitigateAndUpdateTheDisasterRecoveryPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25520,
+  "skill_sha256": "bd09d59e80cd9bcc5bdf6ef4e430a572dfc4f3ccb119dbd9d30974784adf6ebb",
   "tool_schema": {
     "properties": {
       "operation": {

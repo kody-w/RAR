@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_establish_sales_commission_and_incentive_structures",
+  "agent_bytes": 10994,
   "agent_file": "teams_update_establish_sales_commission_and_incentive_structures_agent.py",
   "agent_sha256": "ff2bbaf9292c43a6ad54fb99ac07dab2118e94e574fa8d56432956bd5faa3a11",
+  "backup_agent": "teams_update_establish_sales_commission_and_incentive_structures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateEstablishSalesCommissionAndIncentiveStructures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-establish-sales-commission-and-incentive-structures:fa9388c825a0c74492f90dbd41825c0f0d39eb3ae21b4009db65eb288eae4da3",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateEstablishSalesCommissionAndIncentiveStructures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25559,
+  "skill_sha256": "553a0466e45aa1b802370f51dab1f9dc135f998e24ab87f3cff0879675f7c490",
   "tool_schema": {
     "properties": {
       "operation": {

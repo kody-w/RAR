@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_contract_suppliers_for_goods",
+  "agent_bytes": 10654,
   "agent_file": "ppt_exec_contract_suppliers_for_goods_agent.py",
   "agent_sha256": "4cf6407baed4800b1a5f82d19262e52f7d3ddeaba9a1c4acd46b0a1bc63f26c0",
+  "backup_agent": "ppt_exec_contract_suppliers_for_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecContractSuppliersForGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-contract-suppliers-for-goods:240c177d730d15823af71e07314123c342a81f72895cc99257606a90b51e6d3e",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecContractSuppliersForGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24747,
+  "skill_sha256": "de3778692258f75bd68776a298c3c2cae0b1069fd54d2466edfb38c2c6a9995c",
   "tool_schema": {
     "properties": {
       "operation": {

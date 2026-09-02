@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_assign_a_case",
+  "agent_bytes": 10456,
   "agent_file": "ppt_exec_assign_a_case_agent.py",
   "agent_sha256": "689ad6a6eebeb0ee24b8bb4271cc1e415e19bda325dc3dd69571a140b5b59a62",
+  "backup_agent": "ppt_exec_assign_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAssignACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-assign-a-case:875e8f135b6aab1cb8d7eab549cef8cb8f72ca8a0a3a99ee4c7ffe7affadb967",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecAssignACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24249,
+  "skill_sha256": "30d49666283aecec9221b009ed10463ed3a14c6b33f69531d5d8d65e88532f12",
   "tool_schema": {
     "properties": {
       "operation": {

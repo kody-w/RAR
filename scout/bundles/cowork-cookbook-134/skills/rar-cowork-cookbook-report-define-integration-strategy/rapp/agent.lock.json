@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_define_integration_strategy",
+  "agent_bytes": 10403,
   "agent_file": "report_define_integration_strategy_agent.py",
   "agent_sha256": "e873a7422de4f7806a841d23978455e85a85fffded713aad335115e078baddc1",
+  "backup_agent": "report_define_integration_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDefineIntegrationStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-define-integration-strategy:1a675dd233d2de817736a45c1135fb69a38ebf6ae9c9c75601b76b5bfbe07181",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDefineIntegrationStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24284,
+  "skill_sha256": "e52ff20d4c81a420f8c7a674646605ab232963f04be622a88ce33a35e8552eb3",
   "tool_schema": {
     "properties": {
       "audience": {

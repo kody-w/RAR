@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_manage_procurement_risks",
+  "agent_bytes": 10599,
   "agent_file": "ppt_exec_manage_procurement_risks_agent.py",
   "agent_sha256": "4e7dc5ac0c56c7f9da8dc255564c4c63d533779ae24cb31d7209cf6d324e8971",
+  "backup_agent": "ppt_exec_manage_procurement_risks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecManageProcurementRisks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-manage-procurement-risks:61b2a6a113729af4ebe377d1138159acb68603b160cfe245c557ee726a67c52e",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecManageProcurementRisks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24600,
+  "skill_sha256": "084714925b18febb2cc0c2ae3a2ed3d929207140e91dd26f1e5d54caba150790",
   "tool_schema": {
     "properties": {
       "operation": {

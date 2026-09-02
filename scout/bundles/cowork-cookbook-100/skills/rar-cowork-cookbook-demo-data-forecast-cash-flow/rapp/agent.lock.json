@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_forecast_cash_flow",
+  "agent_bytes": 10442,
   "agent_file": "demo_data_forecast_cash_flow_agent.py",
   "agent_sha256": "f0a6f1df0475af160714b3f1916858e094ed5305e22996303c45dce701426667",
+  "backup_agent": "demo_data_forecast_cash_flow_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataForecastCashFlow",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-forecast-cash-flow:5766bdebd33fd24d5924c1591f997abdc38973410e8c6a7f4a9e82be3ec0e642",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataForecastCashFlow",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24309,
+  "skill_sha256": "42b9db10e32438ef03af24854bc06716d7053e6b981b8c6414faadfd18e3aa48",
   "tool_schema": {
     "properties": {
       "operation": {

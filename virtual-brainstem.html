@@ -3484,6 +3484,7 @@ function splitBinaryOp(expr) {
 // ═══════════════════════════════════════════════════════════════════════
 
 const REGISTRY_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/registry.json';
+const SCOUT_CATALOG_URL = 'https://raw.githubusercontent.com/kody-w/RAR/main/scout/catalog/catalog.json';
 const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR/main/';
 
 // ── Virtual Filesystem (VFS) — localStorage-backed, mirrors local agents/ dir ──
@@ -3522,9 +3523,23 @@ const vm = {
 async function loadRegistry() {
   setStatus('loading', 'Loading registry...');
   try {
-    const resp = await fetch(REGISTRY_URL);
-    const data = await resp.json();
-    vm.registry = data.agents || [];
+    const [registryResp, scoutResp] = await Promise.all([
+      fetch(REGISTRY_URL),
+      fetch(SCOUT_CATALOG_URL),
+    ]);
+    const data = await registryResp.json();
+    const scout = scoutResp.ok ? await scoutResp.json() : { skills: [] };
+    const skills = new Map((scout.skills || []).map(s => [
+      s.identity,
+      {
+        ...s,
+        _skill_url: (s.files || []).find(f => f.path === 'SKILL.md')?.url || null,
+      },
+    ]));
+    vm.registry = (data.agents || []).map(a => ({
+      ...a,
+      ...(skills.get(a.name) || {}),
+    }));
     // Filter to agents that can run in browser (verified/community, no requires_env)
     vm.registry = vm.registry.filter(a =>
       (!a.requires_env || a.requires_env.length === 0) &&
@@ -3595,11 +3610,53 @@ async function trackAcquisition(name) {
 }
 
 async function fetchAgent(entry) {
-  const url = RAW_BASE + entry._file;
-  const resp = await fetch(url);
-  if (!resp.ok) throw new Error(`Failed to fetch ${entry._file}: ${resp.status}`);
+  let source = null;
+  if (entry._skill_url && typeof DecompressionStream !== 'undefined') {
+    const skillResp = await fetch(entry._skill_url);
+    if (skillResp.ok) {
+      const skillBytes = new Uint8Array(await skillResp.arrayBuffer());
+      if (entry.skill_sha256) {
+        const skillDigest = await crypto.subtle.digest('SHA-256', skillBytes);
+        const skillActual = [...new Uint8Array(skillDigest)]
+          .map(b => b.toString(16).padStart(2, '0')).join('');
+        if (skillActual !== entry.skill_sha256) {
+          throw new Error('Toasted skill checksum mismatch');
+        }
+      }
+      const skill = new TextDecoder().decode(skillBytes);
+      const match = skill.match(/<!--\s*rci-capsule:v1:([A-Za-z0-9+/=]+)\s*-->\s*$/);
+      if (!match) throw new Error('Toasted skill has no terminal RCI capsule');
+      const decode = async value => {
+        const packed = Uint8Array.from(atob(value), c => c.charCodeAt(0));
+        const stream = new Blob([packed]).stream().pipeThrough(new DecompressionStream('gzip'));
+        return new Uint8Array(await new Response(stream).arrayBuffer());
+      };
+      const capsule = JSON.parse(new TextDecoder().decode(await decode(match[1])));
+      if (entry.rappid && capsule?.platform?.metadata?.rapp?.rappid !== entry.rappid) {
+        throw new Error('Toasted skill RAPPID mismatch');
+      }
+      const preserved = capsule?.preserved?.agent;
+      if (!preserved?.b64 || !preserved?.sha256) {
+        throw new Error('Toasted skill does not vault an agent');
+      }
+      const bytes = await decode(preserved.b64);
+      const digest = await crypto.subtle.digest('SHA-256', bytes);
+      const actual = [...new Uint8Array(digest)]
+        .map(b => b.toString(16).padStart(2, '0')).join('');
+      if (actual !== preserved.sha256) {
+        throw new Error('Toasted skill agent checksum mismatch');
+      }
+      source = new TextDecoder().decode(bytes);
+    }
+  }
+  if (source === null) {
+    const url = RAW_BASE + entry._file;
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`Failed to fetch ${entry._file}: ${resp.status}`);
+    source = await resp.text();
+  }
   trackAcquisition(entry.name);   // fire-and-forget; never awaited
-  return resp.text();
+  return source;
 }
 
 function transpileAndLoad(pythonSource) {

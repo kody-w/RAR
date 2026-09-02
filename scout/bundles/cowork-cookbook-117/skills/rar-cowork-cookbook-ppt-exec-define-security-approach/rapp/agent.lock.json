@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_security_approach",
+  "agent_bytes": 10616,
   "agent_file": "ppt_exec_define_security_approach_agent.py",
   "agent_sha256": "9d0cf5aedd684816d266cec8eebc412ca814b3ea3226a3535d327e7153a12bc3",
+  "backup_agent": "ppt_exec_define_security_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineSecurityApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-define-security-approach:c04f43fa999fe8cbe0a502b944173721cbeb0ea033c3519187ffec52f3041ef0",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDefineSecurityApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24621,
+  "skill_sha256": "c5198953d81162ed67354105eb1305e7b32bcc8afa429cc5c2e4d6a875f0b3ea",
   "tool_schema": {
     "properties": {
       "operation": {

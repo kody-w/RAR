@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/agent_performance_triage",
+  "agent_bytes": 9093,
   "agent_file": "agent_performance_triage_agent.py",
   "agent_sha256": "b4505e9978715a93c24dfb8dbebb89acf753adf6af6bf41a6a862828d41f0096",
+  "backup_agent": "agent_performance_triage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentPerformanceTriage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Marco Zama",
@@ -45,8 +48,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/agent-performance-triage:0ef575b333b2318d9a0648150beac584750f522fabae8dd46d6d88fba4765e95",
+  "rollback_agent_retained": true,
   "runtime_name": "AgentPerformanceTriage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22044,
+  "skill_sha256": "a317af1851dc1e5689e1cbc5641dfb2fecd98f74cc850260611d9466a206ca95",
   "tool_schema": {
     "properties": {
       "data_source": {

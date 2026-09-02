@@ -1,6 +1,6 @@
 {
   "schema": "rar-static-api-status/1.0",
-  "generated": "2026-09-01T04:39:27Z",
+  "generated": "2026-09-02T19:01:13Z",
   "summary": {
     "agents": 1697,
     "publishers": 11,
@@ -14,32 +14,32 @@
     {
       "name": "catalog",
       "count": 1697,
-      "sha8": "bbaaeaa4722e"
+      "sha8": "a9a47b0a98ee"
     },
     {
       "name": "taxonomy",
       "count": 13,
-      "sha8": "7246c6fe83f2"
+      "sha8": "6f23d98f7fba"
     },
     {
       "name": "match",
       "count": 20,
-      "sha8": "a1af936f809c"
+      "sha8": "dc59f493e8e8"
     },
     {
       "name": "audience/business",
       "count": 1694,
-      "sha8": "f1f5ecdb8f8d"
+      "sha8": "d7128f5328ee"
     },
     {
       "name": "audience/consumer",
       "count": 1334,
-      "sha8": "9587c26163d7"
+      "sha8": "0a380ff9d29c"
     },
     {
       "name": "audience/map",
       "count": 1697,
-      "sha8": "879292935d93"
+      "sha8": "07501d03160e"
     },
     {
       "name": "marketplaces",

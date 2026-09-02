@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_identify_strategic_initiatives",
+  "agent_bytes": 10711,
   "agent_file": "dashboard_identify_strategic_initiatives_agent.py",
   "agent_sha256": "1879d9a5d2aa2f702d6f06df68a82d70885214928866005d734a6dd06f3ce0a3",
+  "backup_agent": "dashboard_identify_strategic_initiatives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardIdentifyStrategicInitiatives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-identify-strategic-initiatives:7b52d3317f2b72180a9862b9ce6d411e791a0a384e47a3b2f8df2e034d1da167",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardIdentifyStrategicInitiatives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24875,
+  "skill_sha256": "5cc5f9310c03ce5e8bb712c43827b877eeb24f4cb6e3084f8d20c4c4498d3613",
   "tool_schema": {
     "properties": {
       "operation": {

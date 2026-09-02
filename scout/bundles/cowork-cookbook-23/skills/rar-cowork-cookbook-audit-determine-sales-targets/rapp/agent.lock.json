@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_determine_sales_targets",
+  "agent_bytes": 10650,
   "agent_file": "audit_determine_sales_targets_agent.py",
   "agent_sha256": "17f88e729adb092ce193a45729f6f7d141570370b2b79c05efccb7be3a23c7d9",
+  "backup_agent": "audit_determine_sales_targets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDetermineSalesTargets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-determine-sales-targets:238f241437d20b24321f7100cc998bfe95b64d390d2c3db4e7b825ada27fb8a8",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDetermineSalesTargets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24675,
+  "skill_sha256": "7498b02a2f75da7d11c031a77b1170dd5f109d4729f680436cde7bd50bcfd4e7",
   "tool_schema": {
     "properties": {
       "criteria": {

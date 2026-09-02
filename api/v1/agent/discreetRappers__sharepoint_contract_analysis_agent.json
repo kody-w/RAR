@@ -3,11 +3,12 @@
   "id": "discreetRappers__sharepoint_contract_analysis_agent",
   "name": "ContractAnalysis",
   "rar_name": "@discreetRappers/sharepoint_contract_analysis_agent",
-  "rappid": "rappid:@discreetRappers/sharepoint_contract_analysis_agent:53dd16eab1991e4cecf0ca63cdb2753ece530b3ce97aa538c035b9d8240377c0",
-  "_migrated_from": "rappid:@discreetRappers/sharepoint_contract_analysis_agent:1a8b06af02c5ed90f0461483fd59316c8311bdb4f78cb99fa07416c142766ffd",
+  "rappid": "rappid:@discreetrappers/sharepoint-contract-analysis:e190260c1300b93326fdb899e202a8b3fc7816c63950d663e041c97e158f38f7",
+  "_migrated_from": "rappid:@discreetRappers/sharepoint_contract_analysis_agent:53dd16eab1991e4cecf0ca63cdb2753ece530b3ce97aa538c035b9d8240377c0",
   "_migrated_from_all": [
     "rappid:v2:agent:@discreetRappers/sharepoint_contract_analysis_agent:bbe89adb2e1271c1d44004afeffac1f0",
-    "rappid:@discreetRappers/sharepoint_contract_analysis_agent:1a8b06af02c5ed90f0461483fd59316c8311bdb4f78cb99fa07416c142766ffd"
+    "rappid:@discreetRappers/sharepoint_contract_analysis_agent:1a8b06af02c5ed90f0461483fd59316c8311bdb4f78cb99fa07416c142766ffd",
+    "rappid:@discreetRappers/sharepoint_contract_analysis_agent:53dd16eab1991e4cecf0ca63cdb2753ece530b3ce97aa538c035b9d8240377c0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -38,9 +39,18 @@
   "sha256": "befdce082ff846fa57e936fc130bd1e423451de8da911a50674b9a4c9c261d32",
   "has_card": true,
   "added_at": "2026-04-06T16:39:03-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-discreetrappers-sharepoint-contract-analysis",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__sharepoint_contract_analysis_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-sharepoint-contract-analysis/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-sharepoint-contract-analysis/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__sharepoint_contract_analysis_agent.py",
   "api_card_url": null,

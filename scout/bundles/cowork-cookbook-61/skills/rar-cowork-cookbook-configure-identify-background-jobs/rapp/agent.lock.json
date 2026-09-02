@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_identify_background_jobs",
+  "agent_bytes": 10825,
   "agent_file": "configure_identify_background_jobs_agent.py",
   "agent_sha256": "e166b6139f0793fb5662220dd3c954721d5ace5d556e7d4a38c54fe8604de596",
+  "backup_agent": "configure_identify_background_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureIdentifyBackgroundJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-identify-background-jobs:de5fd8d63462ea725e37dd52c6d16b201a794d706099c92697d0c861f650316d",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureIdentifyBackgroundJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24884,
+  "skill_sha256": "1ffca2fe1541468591c413d3680ed294bc4af8e38ae41211bbf9b42f933fe004",
   "tool_schema": {
     "properties": {
       "operation": {

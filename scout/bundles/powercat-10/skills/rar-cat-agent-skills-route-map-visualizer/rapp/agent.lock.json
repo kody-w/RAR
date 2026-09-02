@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/route_map_visualizer",
+  "agent_bytes": 9136,
   "agent_file": "route_map_visualizer_agent.py",
   "agent_sha256": "5c0cb3810b9ec755c91cad5a437f1fc98cd9de481f8e25c90d58dc0574b032dd",
+  "backup_agent": "route_map_visualizer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RouteMapVisualizer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Nazish Qasim",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/route-map-visualizer:25260c83e0b6bcbf7622aafc4ca0838d2e26d32e399504543f5c01a4405f11ec",
+  "rollback_agent_retained": true,
   "runtime_name": "RouteMapVisualizer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22676,
+  "skill_sha256": "3c56e833e323d7234622f4f89e50fd7e0425641bd72a1464de0522aceb9886ba",
   "tool_schema": {
     "properties": {
       "operation": {

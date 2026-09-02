@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_develop_scenario_and_contingency_plans",
+  "agent_bytes": 10526,
   "agent_file": "report_develop_scenario_and_contingency_plans_agent.py",
   "agent_sha256": "286036fe9c48499521d15d90efcb8e32fbf83b8422e11953e26ded939152c4c3",
+  "backup_agent": "report_develop_scenario_and_contingency_plans_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDevelopScenarioAndContingencyPlans",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-develop-scenario-and-contingency-plans:b2a2f661cb6d617d8580f05786d51433f7271d93a0cc2ac288f5deb97ea0583c",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDevelopScenarioAndContingencyPlans",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24635,
+  "skill_sha256": "263c4bccf6be97fbce07cf7a63765bdf319516e157223064890fac394da49549",
   "tool_schema": {
     "properties": {
       "audience": {

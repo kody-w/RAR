@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/field_service_daily_utilization",
+  "agent_bytes": 10668,
   "agent_file": "field_service_daily_utilization_agent.py",
   "agent_sha256": "3769455d269bc64b76d817d4447a0388f55806024987b3485b8cf23db9120383",
+  "backup_agent": "field_service_daily_utilization_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FieldServiceDailyUtilization",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/field-service-daily-utilization:4bc60032a8bc4ec49637f70ba32839e75a0ef315681d133a0f68d1349099fd35",
+  "rollback_agent_retained": true,
   "runtime_name": "FieldServiceDailyUtilization",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24769,
+  "skill_sha256": "bd5a8c2b9c9729dac5daba4fd5bfeb767d25339297c3272b440d44dfe08e6283",
   "tool_schema": {
     "properties": {
       "operation": {

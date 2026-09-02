@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/pipeline_risk_and_next_best_actions_review",
+  "agent_bytes": 10634,
   "agent_file": "pipeline_risk_and_next_best_actions_review_agent.py",
   "agent_sha256": "51ab2487dc01ba09aae099b79aa438302a57904a7b87d4cfb31a0cb958724a85",
+  "backup_agent": "pipeline_risk_and_next_best_actions_review_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PipelineRiskAndNextBestActionsReview",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/pipeline-risk-and-next-best-actions-review:738e45d510516321e42783774b5cdc62b170042a3a8e27e073e98ce1eca36f86",
+  "rollback_agent_retained": true,
   "runtime_name": "PipelineRiskAndNextBestActionsReview",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24961,
+  "skill_sha256": "6289e41bfdf6b24f0f542ce016d41cca9459e91dc4721c61b56717aab2b90bf1",
   "tool_schema": {
     "properties": {
       "criteria": {

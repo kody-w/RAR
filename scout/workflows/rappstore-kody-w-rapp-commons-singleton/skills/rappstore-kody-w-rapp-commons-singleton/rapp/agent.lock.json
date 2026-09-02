@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp_commons_singleton",
+  "agent_bytes": 14030,
   "agent_file": "commons_agent.py",
   "agent_sha256": "039a2cb71500ed29a0d765c0bed1fdf18f97a4147f18b81e488ca759ab99f063",
+  "backup_agent": "commons_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommonsAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-commons-singleton:7cfdc994f39338f1b91c92312fb9f5df0f7f932771eb274e3924ba3307f4c0b0",
+  "rollback_agent_retained": true,
   "runtime_name": "CommonsAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 31826,
+  "skill_sha256": "a8c3ad174137e30d85e9e0fea271b0d2104de30136372759b2133e9ffb4fb4d8",
   "tool_schema": {
     "properties": {
       "action": {

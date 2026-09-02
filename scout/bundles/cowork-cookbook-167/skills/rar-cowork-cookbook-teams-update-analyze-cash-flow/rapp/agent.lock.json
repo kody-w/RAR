@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_analyze_cash_flow",
+  "agent_bytes": 10546,
   "agent_file": "teams_update_analyze_cash_flow_agent.py",
   "agent_sha256": "08d4da8a274f3ddcb317f89e4c6fa7d36e1eaa607db55f2cfb6adb2a5fe93ce4",
+  "backup_agent": "teams_update_analyze_cash_flow_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAnalyzeCashFlow",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-analyze-cash-flow:ba81d0b349d9d476050c6a1072d50c30309b52a53e19efcaae3de80b5b8887c0",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateAnalyzeCashFlow",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24473,
+  "skill_sha256": "1a36c73cef462130cd45dc44ca74006abc9c99fc01155dc3fd03dfd661a79859",
   "tool_schema": {
     "properties": {
       "operation": {

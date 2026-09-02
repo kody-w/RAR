@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_migrate_to_new_versions_of_software",
+  "agent_bytes": 10687,
   "agent_file": "demo_data_migrate_to_new_versions_of_software_agent.py",
   "agent_sha256": "ddd8aa83b6053462593854d2e4afcc7ac41efa652cc5cdb5e1846e22f6686b67",
+  "backup_agent": "demo_data_migrate_to_new_versions_of_software_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataMigrateToNewVersionsOfSoftware",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-migrate-to-new-versions-of-software:dc608328e255b59320518d56abbb996983ddad3b2b09f183160efec8b7501745",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataMigrateToNewVersionsOfSoftware",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24930,
+  "skill_sha256": "fbdd5b1379f2ca2c5aa6f7ad8372a273ecc30e6dc94a208f0e7b7f226e741424",
   "tool_schema": {
     "properties": {
       "operation": {

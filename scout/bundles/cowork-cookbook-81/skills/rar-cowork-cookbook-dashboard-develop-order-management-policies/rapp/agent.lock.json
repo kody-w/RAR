@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_develop_order_management_policies",
+  "agent_bytes": 10732,
   "agent_file": "dashboard_develop_order_management_policies_agent.py",
   "agent_sha256": "1d450ec284c842e9b180cec43bcee81190759c433ef5453f0ac544f4b193db35",
+  "backup_agent": "dashboard_develop_order_management_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDevelopOrderManagementPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-develop-order-management-policies:26a97977ab4abdf13f560b8fc8449db589467e2b5e158064ea347f36655042fa",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDevelopOrderManagementPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24962,
+  "skill_sha256": "816ebedbb6024ad0f7857a15fb7cf096e5cc58e1bbb32885f05a74fb783c1a27",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_analyze_project_metrics",
+  "agent_bytes": 10683,
   "agent_file": "scheduled_brief_analyze_project_metrics_agent.py",
   "agent_sha256": "434f8fb6de70ab167fb070cb51e81bba2a1c8d319a9e52250bb67751e933c5cf",
+  "backup_agent": "scheduled_brief_analyze_project_metrics_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAnalyzeProjectMetrics",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-analyze-project-metrics:f738cb62d785ff3e7353aea1b171bf92bc94ac757fd404e355e4e5776c2e589a",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAnalyzeProjectMetrics",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24760,
+  "skill_sha256": "0f54c9d318d9ed70a2f35701e19a86daae9917e7d27d5e14db814dbbdd9bf93e",
   "tool_schema": {
     "properties": {
       "operation": {

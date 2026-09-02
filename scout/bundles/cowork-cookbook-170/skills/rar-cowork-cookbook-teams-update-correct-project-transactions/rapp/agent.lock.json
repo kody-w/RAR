@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_correct_project_transactions",
+  "agent_bytes": 10695,
   "agent_file": "teams_update_correct_project_transactions_agent.py",
   "agent_sha256": "870ca4752133607290daeeb5239e6e4a6f293fb2bf5fcdbea8b1352c76eb9937",
+  "backup_agent": "teams_update_correct_project_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCorrectProjectTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-correct-project-transactions:0cb419a6c098f210438b7630e93a603ff918d27698c1af9e8073c7fdb2494926",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateCorrectProjectTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24783,
+  "skill_sha256": "85da1fc6a1f132cd3d2a11558850109a23e0d8eab75ac76ea37d44b89aacd427",
   "tool_schema": {
     "properties": {
       "operation": {

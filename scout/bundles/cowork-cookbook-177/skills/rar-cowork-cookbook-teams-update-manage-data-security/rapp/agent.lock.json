@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_manage_data_security",
+  "agent_bytes": 10615,
   "agent_file": "teams_update_manage_data_security_agent.py",
   "agent_sha256": "e06fb55f5be5f8488822c2ea9944713a26f31d55a64d1623c0b7f3a9336ce299",
+  "backup_agent": "teams_update_manage_data_security_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateManageDataSecurity",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-manage-data-security:64cc616ddc5b993d5b122ac03b571ec5bc54eee5077430b561bf37f2407ca39b",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateManageDataSecurity",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24595,
+  "skill_sha256": "fd85ecae73de2e8b52d2295fb5ed28d4473385eb0bc7f2fd6d7a8ca7a47426d0",
   "tool_schema": {
     "properties": {
       "operation": {

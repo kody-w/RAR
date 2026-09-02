@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_take_inventory_on_software_licenses",
+  "agent_bytes": 10515,
   "agent_file": "report_take_inventory_on_software_licenses_agent.py",
   "agent_sha256": "1fc5d2adb8440621c6186df385c3a3236632619c56132286925da154a7420d5d",
+  "backup_agent": "report_take_inventory_on_software_licenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportTakeInventoryOnSoftwareLicenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-take-inventory-on-software-licenses:e7297c2104969171e68b19fea26aee91fd1b3b5f4b29d58e8649efb846871f5c",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportTakeInventoryOnSoftwareLicenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24600,
+  "skill_sha256": "29266d350588fed41edbb7ba061fe538008bf8fad3af4ef0df733a5a122f8b13",
   "tool_schema": {
     "properties": {
       "audience": {

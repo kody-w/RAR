@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_send_case_close_notification",
+  "agent_bytes": 10746,
   "agent_file": "scheduled_brief_send_case_close_notification_agent.py",
   "agent_sha256": "0bb76737f05b5718d7c862553aa1f42a68a5534f68e7f73f0b6be468713e1dc0",
+  "backup_agent": "scheduled_brief_send_case_close_notification_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefSendCaseCloseNotification",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-send-case-close-notification:5f2c9c19e79d3237645760e3cb40eb5c3c18006daa33f919fcfbfe5f58d8124c",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefSendCaseCloseNotification",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24951,
+  "skill_sha256": "1bea51c58c469b916e5dba99c340368a539814c27a71b9d282f139581d4001be",
   "tool_schema": {
     "properties": {
       "operation": {

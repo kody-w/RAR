@@ -1,11 +1,15 @@
 {
   "agent": "@discreetRappers/scripted_demo_agent",
+  "agent_bytes": 55524,
   "agent_file": "scripted_demo_agent.py",
   "agent_sha256": "feb243a6c7bbd7bf0cb329b0a8c60a6f6d88949e1893f89ccaa1cf2da31a80bc",
+  "backup_agent": "scripted_demo_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScriptedDemoAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.storage_factory"
+    "brainstem:utils.storage_factory",
+    "python:requests"
   ],
   "manifest": {
     "author": "Bill Whalen",
@@ -28,8 +32,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/scripted-demo:9343e13d4007098a43b32a536eca246ed6cadf99191ce18ee87b0be415d7fd7a",
+  "rollback_agent_retained": true,
   "runtime_name": "ScriptedDemo",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 79727,
+  "skill_sha256": "5dd4b25fa4c1e3c78ed30724a4329ff1279cdc54192ba8995c93ebf690e42d24",
   "tool_schema": {
     "properties": {
       "action": {

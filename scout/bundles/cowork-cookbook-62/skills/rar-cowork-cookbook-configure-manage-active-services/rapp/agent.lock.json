@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_manage_active_services",
+  "agent_bytes": 10785,
   "agent_file": "configure_manage_active_services_agent.py",
   "agent_sha256": "dc3af5aa61a369816fe7b29f689c8afcde5f22f92e7a0ac90eaa83e1baa523db",
+  "backup_agent": "configure_manage_active_services_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageActiveServices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-manage-active-services:d0ff45e5d5ec5bf86461fcc90309cd727e7084a84ad2ca21a7ab69f7a9ee2252",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureManageActiveServices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24810,
+  "skill_sha256": "523a9d200c2dbb72cf19fc28a0d1f76860a6a04cc983207f60f9502bec109bd8",
   "tool_schema": {
     "properties": {
       "operation": {

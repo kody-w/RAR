@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/planned_order_summary",
+  "agent_bytes": 10229,
   "agent_file": "planned_order_summary_agent.py",
   "agent_sha256": "a96f9bd059fa1a5b1ec9e6f88a8049daf82de5b4d3a63df7594a94542a1244ac",
+  "backup_agent": "planned_order_summary_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PlannedOrderSummary",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/planned-order-summary:c38f5d16702541abe064e7a0b992afe22a155977fecb97daa965d852ef4bc0f5",
+  "rollback_agent_retained": true,
   "runtime_name": "PlannedOrderSummary",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23871,
+  "skill_sha256": "11d8fe75cb2c7ac616977960c889ff617ad3c57a7d1213d9faa8b6502332916f",
   "tool_schema": {
     "properties": {
       "audience": {

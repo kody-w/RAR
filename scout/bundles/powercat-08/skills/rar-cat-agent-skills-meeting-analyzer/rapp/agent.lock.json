@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/meeting_analyzer",
+  "agent_bytes": 9605,
   "agent_file": "meeting_analyzer_agent.py",
   "agent_sha256": "bb10c34d0d9a18bf34f0487582f49eeaaaba6c1400fa00a2abe1943c42c44f03",
+  "backup_agent": "meeting_analyzer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MeetingAnalyzer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Michael Ferro Pereira",
@@ -44,8 +47,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/meeting-analyzer:037420bce5ca0d9ea892b3c96997bfa90f9e06490dab2dba62eecd96584442ed",
+  "rollback_agent_retained": true,
   "runtime_name": "MeetingAnalyzer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23327,
+  "skill_sha256": "9c9cd8f44e4fb4755d8d51a6d1328f0b71640ce562758aaa8c958869aa5fe1e0",
   "tool_schema": {
     "properties": {
       "data_source": {

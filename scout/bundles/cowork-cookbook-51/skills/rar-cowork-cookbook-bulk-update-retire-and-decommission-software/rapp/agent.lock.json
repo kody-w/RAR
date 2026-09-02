@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_retire_and_decommission_software",
+  "agent_bytes": 10747,
   "agent_file": "bulk_update_retire_and_decommission_software_agent.py",
   "agent_sha256": "de49bdfb459e72456f1a3a146bc9b82ed1235d4b616529fee04eeb8b7fa18689",
+  "backup_agent": "bulk_update_retire_and_decommission_software_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateRetireAndDecommissionSoftware",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-retire-and-decommission-software:7ff849cb0d8e9ad3def893fec8fd7a5492f176753496abc0ef8de38671ebba09",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateRetireAndDecommissionSoftware",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24961,
+  "skill_sha256": "bbff8b3d9228bbc9f1a40a094b71e8527816c0f5621f5a89bedf2f8bf19a77f2",
   "tool_schema": {
     "properties": {
       "operation": {

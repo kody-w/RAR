@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_prepare_to_go_live",
+  "agent_bytes": 10623,
   "agent_file": "scheduled_brief_prepare_to_go_live_agent.py",
   "agent_sha256": "43555b388702ee2000daf0c00bc277e4a60164ad697ac3c8217e4fb569b08f10",
+  "backup_agent": "scheduled_brief_prepare_to_go_live_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefPrepareToGoLive",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-prepare-to-go-live:e4fc22ac08684717bfe080106c396918a73fde11b63e62d7680f0a3647f7bbb5",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefPrepareToGoLive",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24625,
+  "skill_sha256": "e8bff7f94467f341057224b4afb318c1eae0599dc1ca6afbbce7082f844a8941",
   "tool_schema": {
     "properties": {
       "operation": {

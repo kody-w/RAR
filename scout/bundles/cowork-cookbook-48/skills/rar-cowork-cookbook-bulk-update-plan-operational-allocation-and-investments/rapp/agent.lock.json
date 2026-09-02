@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_plan_operational_allocation_and_investments",
+  "agent_bytes": 10871,
   "agent_file": "bulk_update_plan_operational_allocation_and_investments_agent.py",
   "agent_sha256": "7bb9c843892d80d8771a744528f319586d989e8bb2ba64b9a53c4266dcbe7b3e",
+  "backup_agent": "bulk_update_plan_operational_allocation_and_investments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdatePlanOperationalAllocationAndInvestments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-plan-operational-allocation-and-investments:663f32ea07e3bf3ce49c8de8f495d6d98cdcd690d3e05052a10c8a99728a3ea5",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdatePlanOperationalAllocationAndInvestments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25297,
+  "skill_sha256": "b01718ee93e7e7a791b5852d2bce33efb0f57896d5acfff9aaef04c17ba33daf",
   "tool_schema": {
     "properties": {
       "operation": {

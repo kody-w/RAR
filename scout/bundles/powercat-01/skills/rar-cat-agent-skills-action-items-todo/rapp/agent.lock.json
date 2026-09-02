@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/action_items_todo",
+  "agent_bytes": 9217,
   "agent_file": "action_items_todo_agent.py",
   "agent_sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d",
+  "backup_agent": "action_items_todo_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ActionItemsTodo",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Matteo Pagani",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/action-items-todo:639882e7e147a46153000177e067b787807de4891db8dc0b73e137e6bdf88f04",
+  "rollback_agent_retained": true,
   "runtime_name": "ActionItemsTodo",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22418,
+  "skill_sha256": "1709155a555a09526f78acb84a8617ce8cee17c6e865f265c80d408acf88a9b2",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -3,11 +3,12 @@
   "id": "rapp__drift",
   "name": "DriftAgent",
   "rar_name": "@rapp/drift",
-  "rappid": "rappid:@rapp/drift:4111570a6821186ad1f54d806344ee23e6d116b1c3a7b7fd4664055c2e5824e6",
-  "_migrated_from": "rappid:@rapp/drift:8ed7405158cbf360b3fe5b5c5d648eaf73c7d0830b7a593d8a7ee4f62362358c",
+  "rappid": "rappid:@rapp/drift:4523e5c2bcd34920563a88366d0b639d3d9afc6c62c02edce4e062e8fd9d7bcf",
+  "_migrated_from": "rappid:@rapp/drift:4111570a6821186ad1f54d806344ee23e6d116b1c3a7b7fd4664055c2e5824e6",
   "_migrated_from_all": [
     "rappid:@rapp/drift:6a8ba760bac1f79e922616fdc9b8c237c213f16fc201d327d4cd8190b942e3d3",
-    "rappid:@rapp/drift:8ed7405158cbf360b3fe5b5c5d648eaf73c7d0830b7a593d8a7ee4f62362358c"
+    "rappid:@rapp/drift:8ed7405158cbf360b3fe5b5c5d648eaf73c7d0830b7a593d8a7ee4f62362358c",
+    "rappid:@rapp/drift:4111570a6821186ad1f54d806344ee23e6d116b1c3a7b7fd4664055c2e5824e6"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -33,9 +34,18 @@
   "sha256": "00ffb4b96beb3024e1b412caf5d2191a84846e73091132eefa30ffe6c2c5e31c",
   "has_card": true,
   "added_at": "2026-06-09T21:40:07-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-drift",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__drift.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-drift/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-rapp-drift/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift.py",
   "api_card_url": null,

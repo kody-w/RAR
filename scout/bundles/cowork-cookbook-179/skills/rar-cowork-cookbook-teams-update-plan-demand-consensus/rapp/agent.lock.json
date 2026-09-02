@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_plan_demand_consensus",
+  "agent_bytes": 10612,
   "agent_file": "teams_update_plan_demand_consensus_agent.py",
   "agent_sha256": "6b04fff997ca4cd30e48cfbf9753e25bad6b972b2c8b0e8a006b70497b657882",
+  "backup_agent": "teams_update_plan_demand_consensus_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdatePlanDemandConsensus",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-plan-demand-consensus:ce0b1f64fe9fa4bae0410836a215a16b2cf5805c2e52abea94bd37681c342a41",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdatePlanDemandConsensus",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24610,
+  "skill_sha256": "a1ec89141249e8b21123c398a8c1f8a11a648c7d26211e4274fe0a7981e07009",
   "tool_schema": {
     "properties": {
       "operation": {

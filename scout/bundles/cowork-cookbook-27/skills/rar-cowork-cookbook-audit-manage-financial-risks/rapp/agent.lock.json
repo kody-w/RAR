@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_manage_financial_risks",
+  "agent_bytes": 10625,
   "agent_file": "audit_manage_financial_risks_agent.py",
   "agent_sha256": "b205e8c5eb201c7d906a80dfc7d077e8cef1f3a4648e7109d982f88d4d5a65bc",
+  "backup_agent": "audit_manage_financial_risks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditManageFinancialRisks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-manage-financial-risks:5ba40b9a291c6e03e2a8c25c8177d89109c4a0b72e09391b55899b84c53abe1a",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditManageFinancialRisks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24626,
+  "skill_sha256": "afbcf55226d8e62bb8e55066fa0fb55ce57ec0ad46b60d0721dce409c73afc01",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_develop_sales_pricing_strategy",
+  "agent_bytes": 10664,
   "agent_file": "ppt_exec_develop_sales_pricing_strategy_agent.py",
   "agent_sha256": "7d381d19c23f443f9d77fd889f7f0a6a1ce93cae5fac230a9008c1f2458c44f2",
+  "backup_agent": "ppt_exec_develop_sales_pricing_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDevelopSalesPricingStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-develop-sales-pricing-strategy:d373aa4c2e0ec9e5b62787a93e086d3fa40f732a98d10b5c3da5eba97012d89c",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDevelopSalesPricingStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24795,
+  "skill_sha256": "5de830dea374b36f8616faffff9f7e85228582f8da65a52e0d74b8d09af575e7",
   "tool_schema": {
     "properties": {
       "operation": {

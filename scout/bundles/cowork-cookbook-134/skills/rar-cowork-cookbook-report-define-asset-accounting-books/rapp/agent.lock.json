@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_define_asset_accounting_books",
+  "agent_bytes": 10426,
   "agent_file": "report_define_asset_accounting_books_agent.py",
   "agent_sha256": "9516572384aa294c4c56587ec31f882739e099138baeb72548dbde15087fd661",
+  "backup_agent": "report_define_asset_accounting_books_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDefineAssetAccountingBooks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-define-asset-accounting-books:1cc2defa29c16d9b110e96b0683e5ad102bb16e4e0d2bd26a07f6e56778daf2a",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDefineAssetAccountingBooks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24382,
+  "skill_sha256": "70a5be66cc36e27758c0c125386fc041a526bb491bb6f3fb719cf8e350856412",
   "tool_schema": {
     "properties": {
       "audience": {

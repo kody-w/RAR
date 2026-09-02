@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/presentation_talk_track_builder",
+  "agent_bytes": 9561,
   "agent_file": "presentation_talk_track_builder_agent.py",
   "agent_sha256": "0b292d4a5a102713a81298e77e673258e3e9dc9d67595b37b4afadf58449e531",
+  "backup_agent": "presentation_talk_track_builder_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PresentationTalkTrackBuilder",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Jagmeet Chabra",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/presentation-talk-track-builder:f16221796e51f3fa83948f3270e2977e48fa30a7a94c20220be602734062be3b",
+  "rollback_agent_retained": true,
   "runtime_name": "PresentationTalkTrackBuilder",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23235,
+  "skill_sha256": "11d4e5cd4ef3c1915908814b7aa1fb3b7d126ac990b029c38ecabed0aebaf10b",
   "tool_schema": {
     "properties": {
       "audience": {

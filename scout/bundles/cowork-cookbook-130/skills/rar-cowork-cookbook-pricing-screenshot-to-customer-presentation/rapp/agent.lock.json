@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/pricing_screenshot_to_customer_presentation",
+  "agent_bytes": 10304,
   "agent_file": "pricing_screenshot_to_customer_presentation_agent.py",
   "agent_sha256": "a95931c5b1c78d2d63b5e4f21dcea810974298609fe10f21360b8b4c8b8f2054",
+  "backup_agent": "pricing_screenshot_to_customer_presentation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PricingScreenshotToCustomerPresentation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -75,8 +78,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/pricing-screenshot-to-customer-presentation:a55c5200cfe7326f189ca313aacf0b626b7f1d847dd4db6e44dbe97f36eb40c7",
+  "rollback_agent_retained": true,
   "runtime_name": "PricingScreenshotToCustomerPresentation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24255,
+  "skill_sha256": "4c65cc58322f5a40bfa0613fc549a709a6fb13a99e02a6cc791f5525541a19db",
   "tool_schema": {
     "properties": {
       "audience": {

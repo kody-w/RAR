@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_source_to_pay",
+  "agent_bytes": 10509,
   "agent_file": "d365_source_to_pay_agent.py",
   "agent_sha256": "3fd89b6e077f77ccffc0bd7908a04c6a6d31944807a03f8a7588656ccff3f6a8",
+  "backup_agent": "d365_source_to_pay_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365SourceToPay",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-source-to-pay:0a0274a2bc7f77b847c0d1ca4bc3eb4427ec2c795330c8ff849b7c456873fc96",
+  "rollback_agent_retained": true,
   "runtime_name": "D365SourceToPay",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24390,
+  "skill_sha256": "7aaaf7c51a6496458678972b9d42c9d34a8dfca1480108f35f2f2d38087dc1bd",
   "tool_schema": {
     "properties": {
       "operation": {

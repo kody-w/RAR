@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_create_website_for_campaigns",
+  "agent_bytes": 10659,
   "agent_file": "ppt_exec_create_website_for_campaigns_agent.py",
   "agent_sha256": "f5950c3d39a948da29bda5b2603e70e2c7d8ba1b0222f8ea007ca93833222f5a",
+  "backup_agent": "ppt_exec_create_website_for_campaigns_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecCreateWebsiteForCampaigns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-create-website-for-campaigns:0a4f49401f5f50834ca320d96298f4953df724990f4a179701d5a16293ab5f2e",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecCreateWebsiteForCampaigns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24768,
+  "skill_sha256": "5221b6ef2b67d0e7e290d9aaf6688c690ba6eb8dee9af0cbf23fd8f7bbe412e8",
   "tool_schema": {
     "properties": {
       "operation": {

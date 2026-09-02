@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/customer_revenue_globe",
+  "agent_bytes": 10431,
   "agent_file": "customer_revenue_globe_agent.py",
   "agent_sha256": "0e52328a49528e4ac340a5af212a7355325f55afedd6c9344ffb5b5c73d44dd1",
+  "backup_agent": "customer_revenue_globe_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CustomerRevenueGlobe",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/customer-revenue-globe:0b818c4523529cff1b4d7b8b18790a2264a08f08b2e7a61ea521e48cacb2a1e8",
+  "rollback_agent_retained": true,
   "runtime_name": "CustomerRevenueGlobe",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24204,
+  "skill_sha256": "e79d46cd71ffe9f1e49e67211765b05e7fdfd0cb4959c5e7005a8ef8e685eb7a",
   "tool_schema": {
     "properties": {
       "operation": {

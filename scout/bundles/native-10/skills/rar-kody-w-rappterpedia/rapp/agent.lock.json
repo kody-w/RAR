@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rappterpedia_agent",
+  "agent_bytes": 24798,
   "agent_file": "rappterpedia_agent.py",
   "agent_sha256": "8c34061cf1ed1fa86071adb0c21896e629879d155405908404d5d6a390233fbb",
+  "backup_agent": "rappterpedia_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappterpediaAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.1.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rappterpedia:efcde0edda294a7f89d4613da44dd2070110b8167d04b6f478b73784c1243316",
+  "rollback_agent_retained": true,
   "runtime_name": "RappterpediaAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 42458,
+  "skill_sha256": "61ba41021597b78c2e04d65ea35517f705bfcb4d363c2551696a7355cb311b78",
   "tool_schema": {
     "properties": {
       "category": {

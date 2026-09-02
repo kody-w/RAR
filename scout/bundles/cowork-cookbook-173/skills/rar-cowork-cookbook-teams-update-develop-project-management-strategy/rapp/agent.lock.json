@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_develop_project_management_strategy",
+  "agent_bytes": 10782,
   "agent_file": "teams_update_develop_project_management_strategy_agent.py",
   "agent_sha256": "2b8272ceaedb7be990c7ccf91bc41b845eabc53ac6f0311a38f85030f28d10ab",
+  "backup_agent": "teams_update_develop_project_management_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDevelopProjectManagementStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-develop-project-management-strategy:a8ceddca39b7ec5533d0b172fe7db6edaf6bf3c7010b735044fec4e6b52cbe12",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDevelopProjectManagementStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25027,
+  "skill_sha256": "dff105a644463258cdf097f00829b82b2188946d1cf8a510b5e0ca0f5ff65147",
   "tool_schema": {
     "properties": {
       "operation": {

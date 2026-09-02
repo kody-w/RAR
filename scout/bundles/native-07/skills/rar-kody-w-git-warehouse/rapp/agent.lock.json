@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/git_warehouse_agent",
+  "agent_bytes": 12266,
   "agent_file": "git_warehouse_agent.py",
   "agent_sha256": "2848608c2c13c7ff65f8d434845cb522b4940049c6207d80a604c2da54a57ad2",
+  "backup_agent": "git_warehouse_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GitWarehouseAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/git-warehouse:97c419af073cfc8f4deef66df66baaa853abedd83d8031896124177b14e8c2c6",
+  "rollback_agent_retained": true,
   "runtime_name": "GitWarehouse",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 30750,
+  "skill_sha256": "c960731452b879ea0b0b76cbbd1267d5ddfce541551c5edc236521e404858d52",
   "tool_schema": {
     "properties": {
       "action": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_inventory_to_deliver_manage_inventory_quality",
+  "agent_bytes": 10773,
   "agent_file": "d365_inventory_to_deliver_manage_inventory_quality_agent.py",
   "agent_sha256": "2f7282738c39b285078bb21f0a908f2fb9d378767024a561873d22978e2a88cd",
+  "backup_agent": "d365_inventory_to_deliver_manage_inventory_quality_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365InventoryToDeliverManageInventoryQuality",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-inventory-to-deliver-manage-inventory-quality:2ddd134f7fba9ec58f86eae7706d65724152f8a75f50202a6da5682b271c3092",
+  "rollback_agent_retained": true,
   "runtime_name": "D365InventoryToDeliverManageInventoryQuality",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25038,
+  "skill_sha256": "4f126362dd312e1d53c1e3932a92d661e0bfb96e3a4c6f6a7b3ff5e76032e53a",
   "tool_schema": {
     "properties": {
       "operation": {

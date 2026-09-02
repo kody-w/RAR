@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_rate_loads",
+  "agent_bytes": 10449,
   "agent_file": "ppt_exec_rate_loads_agent.py",
   "agent_sha256": "5c899635d3b6006dc74bfe8e105a6ee4608954dc5a940c3109c4a52d77f2669f",
+  "backup_agent": "ppt_exec_rate_loads_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecRateLoads",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-rate-loads:7c5cbdb81d2eb6125176a4ca49570f0f788140b43c97bee32e4a20a1a4e8eedd",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecRateLoads",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24199,
+  "skill_sha256": "633c14358186ac8e943e7790c6f5a27d0d73ed4b4cc7e427c17321f761406f9d",
   "tool_schema": {
     "properties": {
       "operation": {

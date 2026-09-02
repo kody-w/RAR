@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/customer_credit_limit_review",
+  "agent_bytes": 10511,
   "agent_file": "customer_credit_limit_review_agent.py",
   "agent_sha256": "6607a422fad3816166663dc62894ff2b27ce8f5a0c9ec87e13838f90edb79174",
+  "backup_agent": "customer_credit_limit_review_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CustomerCreditLimitReview",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/customer-credit-limit-review:915927450dcbc2259d6b222b321615996c3e1163b36dbad93c7d5514378bfdea",
+  "rollback_agent_retained": true,
   "runtime_name": "CustomerCreditLimitReview",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24444,
+  "skill_sha256": "228e09d1df82a637c14d6b3b4b2a54291f64ecf4d59fd41fcbc165d6ecea14d9",
   "tool_schema": {
     "properties": {
       "criteria": {

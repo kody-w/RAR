@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/rapp_dogg_agent",
+  "agent_bytes": 42721,
   "agent_file": "rapp_dogg_agent.py",
   "agent_sha256": "14bbe3f9f1b3cf98cc5f95eff631bb362db580f331822efc24577682788f7bb4",
+  "backup_agent": "rapp_dogg_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappDoggAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -31,8 +34,16 @@
     ],
     "version": "1.0.4"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/rapp-dogg:3dde322a273c6c6c9092f3572780b8a09288f47a9eaee724e3f67e4ec727b11e",
+  "rollback_agent_retained": true,
   "runtime_name": "rapp_dogg",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 80900,
+  "skill_sha256": "cb9c9389b24f18a45c403ba670ab1786de9ed654815f4b6ec5731e67d9d8d754",
   "tool_schema": {
     "properties": {
       "doing": {

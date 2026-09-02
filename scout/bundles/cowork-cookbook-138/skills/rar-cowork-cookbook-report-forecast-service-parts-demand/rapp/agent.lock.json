@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_forecast_service_parts_demand",
+  "agent_bytes": 10412,
   "agent_file": "report_forecast_service_parts_demand_agent.py",
   "agent_sha256": "a43bbf8a356570952434a42d396e21f79a167878b165d5ccf42319d96107b7ba",
+  "backup_agent": "report_forecast_service_parts_demand_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportForecastServicePartsDemand",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-forecast-service-parts-demand:a1fd1d23d13d0b5fcc6800316d87497bdbe5c2170517580fdf68f08ec03ecd6f",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportForecastServicePartsDemand",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24356,
+  "skill_sha256": "b6416d5c855d24f6d15fe646a14401a0c48c42b4131653aaa2e70c26c812fd27",
   "tool_schema": {
     "properties": {
       "audience": {

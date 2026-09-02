@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp-shot-singleton",
+  "agent_bytes": 8042,
   "agent_file": "rapp_shot_agent.py",
   "agent_sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907",
+  "backup_agent": "rapp_shot_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappShotAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "@kody-w",
@@ -23,8 +26,16 @@
     ],
     "version": "1.2.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-shot-singleton:1958d66a5c246abd055b40c1f0ab3cbeef7c07b8c68e34c649ce99095d8ac51f",
+  "rollback_agent_retained": true,
   "runtime_name": "RappShot",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 20222,
+  "skill_sha256": "1de625d6e0ad9a715922b07db729b93472682373aa7f8069aa1a11947bc60166",
   "tool_schema": {
     "properties": {
       "action": {

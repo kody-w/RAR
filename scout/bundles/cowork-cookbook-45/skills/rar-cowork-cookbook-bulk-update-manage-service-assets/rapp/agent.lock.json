@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_manage_service_assets",
+  "agent_bytes": 10588,
   "agent_file": "bulk_update_manage_service_assets_agent.py",
   "agent_sha256": "c399311498ab9e0ff2de1d8ae37256e0d0b5df8c4a37bb59f3e42e8b91a05978",
+  "backup_agent": "bulk_update_manage_service_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateManageServiceAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-manage-service-assets:033f097d43aab3c3690b796f1c271ef0082dfbeaca54172ab3ea2ae889557e37",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateManageServiceAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24574,
+  "skill_sha256": "5947bdaea8c5c15b9e2433e6c3fa71ac0806eff95fbfc41e7f62039ef7a5e63b",
   "tool_schema": {
     "properties": {
       "operation": {

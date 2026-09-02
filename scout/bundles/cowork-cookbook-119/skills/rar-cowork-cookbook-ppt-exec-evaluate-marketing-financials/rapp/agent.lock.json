@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_evaluate_marketing_financials",
+  "agent_bytes": 10674,
   "agent_file": "ppt_exec_evaluate_marketing_financials_agent.py",
   "agent_sha256": "731160328cc1b649265a0b9b52dd023253b8f440483687aee6c40653f354d982",
+  "backup_agent": "ppt_exec_evaluate_marketing_financials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecEvaluateMarketingFinancials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-evaluate-marketing-financials:2f96e39571ee13cf801d4d12696d1e0a5800c3121f33ff70c0d3db8782e87dfd",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecEvaluateMarketingFinancials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24762,
+  "skill_sha256": "cd6b5e772ed102ddba2d1bb274b3ef8f5f0ec65855ac8ad5ac661cb1606eb36c",
   "tool_schema": {
     "properties": {
       "operation": {

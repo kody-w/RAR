@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_develop_project_management_strategy",
+  "agent_bytes": 10493,
   "agent_file": "report_develop_project_management_strategy_agent.py",
   "agent_sha256": "e50d4b60068fe0962b99c61d3f27de226daf37ea33c49b6ebf7335d523ac207a",
+  "backup_agent": "report_develop_project_management_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDevelopProjectManagementStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-develop-project-management-strategy:1e212e02ea4bcfa4e7004888c6954bda451bf79c6fba22f59c2abaf0f5594769",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDevelopProjectManagementStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24518,
+  "skill_sha256": "b97d5bb346a2b234e8b0a8f551cbf4b1b7b38a14fe3dc5e2748a23bdef17655a",
   "tool_schema": {
     "properties": {
       "audience": {

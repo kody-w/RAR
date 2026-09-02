@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_create_knowledge_base_articles",
+  "agent_bytes": 10688,
   "agent_file": "ppt_exec_create_knowledge_base_articles_agent.py",
   "agent_sha256": "4c70c784753dd2e19eddc75812c046cbb60d83bf49e2e7c993f3afdc2f1698a3",
+  "backup_agent": "ppt_exec_create_knowledge_base_articles_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecCreateKnowledgeBaseArticles",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-create-knowledge-base-articles:e07eb2d2cc3ec4765dbac475adf59e1aeca62f4d3f21b4f8b7a28233abd16291",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecCreateKnowledgeBaseArticles",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24820,
+  "skill_sha256": "d6d4771cb2a3e0dd1c6842e8b01055210a797330a717bb7a60666991db7baca0",
   "tool_schema": {
     "properties": {
       "operation": {

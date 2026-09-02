@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_assess_customer_credit_risk",
+  "agent_bytes": 10630,
   "agent_file": "ppt_exec_assess_customer_credit_risk_agent.py",
   "agent_sha256": "79fe949db112201dcab770783115ca46fe4ecff34fddefb0341d58b050bce40b",
+  "backup_agent": "ppt_exec_assess_customer_credit_risk_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAssessCustomerCreditRisk",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-assess-customer-credit-risk:137399cb5c40f1e79527c38c5eb3dc8f0dfb4fe3ed41121656478a55e0a95bef",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecAssessCustomerCreditRisk",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24716,
+  "skill_sha256": "fe3895332b49e1eeb050328f9588e307a0da8eb974cc29c9b14d38f7e508bf98",
   "tool_schema": {
     "properties": {
       "operation": {

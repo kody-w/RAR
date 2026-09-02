@@ -3,10 +3,11 @@
   "id": "kody-w__ez_sharpen_agent",
   "name": "EZSharpen",
   "rar_name": "@kody-w/ez_sharpen_agent",
-  "rappid": "rappid:@kody-w/ez_sharpen_agent:2909e7adb719253dd3b497b99135da06f61dd99f8aa44e93cc003469f484abc2",
-  "_migrated_from": "rappid:@kody-w/ez_sharpen_agent:32959ba5bffcd56ff1449bebcfa1b4e6b0fa6c3a9cab6f4a6850794e71433bd9",
+  "rappid": "rappid:@kody-w/ez-sharpen:658a08cba777507f3d5098cc9b6a881aa5ea213c8ca4eac9c70f0055491160e9",
+  "_migrated_from": "rappid:@kody-w/ez_sharpen_agent:2909e7adb719253dd3b497b99135da06f61dd99f8aa44e93cc003469f484abc2",
   "_migrated_from_all": [
-    "rappid:@kody-w/ez_sharpen_agent:32959ba5bffcd56ff1449bebcfa1b4e6b0fa6c3a9cab6f4a6850794e71433bd9"
+    "rappid:@kody-w/ez_sharpen_agent:32959ba5bffcd56ff1449bebcfa1b4e6b0fa6c3a9cab6f4a6850794e71433bd9",
+    "rappid:@kody-w/ez_sharpen_agent:2909e7adb719253dd3b497b99135da06f61dd99f8aa44e93cc003469f484abc2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -31,9 +32,18 @@
   "sha256": "ae232a01c0cee6bf5109635803b5cf99ba215201856d4c830b3b11ae972992e6",
   "has_card": true,
   "added_at": "2026-06-20T18:58:25-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-ez-sharpen",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__ez_sharpen_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-ez-sharpen/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-ez-sharpen/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__ez_sharpen_agent.py",
   "api_card_url": null,

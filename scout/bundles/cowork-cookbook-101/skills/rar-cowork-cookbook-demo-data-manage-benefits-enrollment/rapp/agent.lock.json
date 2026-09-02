@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_manage_benefits_enrollment",
+  "agent_bytes": 10559,
   "agent_file": "demo_data_manage_benefits_enrollment_agent.py",
   "agent_sha256": "d4a6a2419730674efc60e9ef8338576651cc816e4416fba8149b013819e8c623",
+  "backup_agent": "demo_data_manage_benefits_enrollment_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataManageBenefitsEnrollment",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-manage-benefits-enrollment:cab5b595ff7591e47a4b8f609bda0bb6ab04ac4528d5cdae473cdc957575e130",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataManageBenefitsEnrollment",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24580,
+  "skill_sha256": "282b7cd09230909e4d73740f21b806a710a859db85c7b6a6a988c472b89f1578",
   "tool_schema": {
     "properties": {
       "operation": {

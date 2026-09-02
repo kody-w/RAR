@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_monitor_operational_performance",
+  "agent_bytes": 10733,
   "agent_file": "teams_update_monitor_operational_performance_agent.py",
   "agent_sha256": "b8565ba781295596e478456fa3c9c558ba9755fb7e672033bd37620fd2e6ae9d",
+  "backup_agent": "teams_update_monitor_operational_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateMonitorOperationalPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-monitor-operational-performance:75ca9f12edb97052cfb21e286f38b163ae76313dcd076d48476fd8ae1a529f21",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateMonitorOperationalPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24889,
+  "skill_sha256": "0ea616e55339496d93d2931122c131d920b1f1eee2846c076a7392bd2babb610",
   "tool_schema": {
     "properties": {
       "operation": {

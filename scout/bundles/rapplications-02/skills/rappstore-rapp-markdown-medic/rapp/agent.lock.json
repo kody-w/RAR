@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/markdown-medic",
+  "agent_bytes": 10311,
   "agent_file": "markdown_medic_agent.py",
   "agent_sha256": "68c349d82161b59278bb31dbbafad199f23d1cabba2487c9d0d79f0dfc68882f",
+  "backup_agent": "markdown_medic_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MarkdownMedicAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "example_call": {
@@ -27,8 +30,16 @@
     "trust": "community",
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/markdown-medic:cd5ee46b6da3004408957a50ff197c0f5322958d457de6183b34db1312d9edfe",
+  "rollback_agent_retained": true,
   "runtime_name": "MarkdownMedic",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24363,
+  "skill_sha256": "f1f97aaac14b9455582290b647338c90ee3d08c1a4c3e2e48d7d53a3f7f1569f",
   "tool_schema": {
     "properties": {
       "action": {

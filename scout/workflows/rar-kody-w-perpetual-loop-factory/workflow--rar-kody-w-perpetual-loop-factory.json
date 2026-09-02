@@ -5,6 +5,13 @@
   "id": "0873c03fbe9e79ea",
   "lastExecutedAt": null,
   "name": "PerpetualLoopFactory",
+  "rapp": {
+    "backup_agent": "perpetual_loop_factory_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-kody-w-perpetual-loop-factory"
+  },
   "schedule": {
     "days": [
       1,

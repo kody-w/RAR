@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_transfer_budgets",
+  "agent_bytes": 10515,
   "agent_file": "bulk_update_transfer_budgets_agent.py",
   "agent_sha256": "ca0d31a957498cf5b0095f70f0bfe3b98223ea796418df8c07e4a310c843d137",
+  "backup_agent": "bulk_update_transfer_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateTransferBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-transfer-budgets:36500bf0482ffb34facd997285cbb4108991e1c9f20421db94660194a3153d75",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateTransferBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24392,
+  "skill_sha256": "926ab956f3f4818bdb2eb5f2daf9b391e5b194a71ce31760e43049e86742cd6b",
   "tool_schema": {
     "properties": {
       "operation": {

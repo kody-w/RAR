@@ -29,9 +29,18 @@
   "sha256": "41e0a5a7e2eb75df92ef107444dda944e01837e95a1c32caaec74836601f8ba8",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
+  "default_artifact": "agent",
+  "grail_record": null,
+  "skill_name": null,
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__example_private.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/private/example_private_agent.py.stub",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/private/example_private_agent.py.stub",
+  "skill_url": null,
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/private/example_private_agent.py.stub",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__example_private.py",
   "api_card_url": null,

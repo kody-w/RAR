@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_quarantine_manufactured_goods",
+  "agent_bytes": 10666,
   "agent_file": "ppt_exec_quarantine_manufactured_goods_agent.py",
   "agent_sha256": "a34a42d27a5acd9f03a7d9cdfc10ca89a124d9d7b65399e94993ed67f973da16",
+  "backup_agent": "ppt_exec_quarantine_manufactured_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecQuarantineManufacturedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-quarantine-manufactured-goods:f185658ae0f0b9a42904caa9b75eedeb93aee42d964a6d268eb1e394a3edc256",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecQuarantineManufacturedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24752,
+  "skill_sha256": "77244d8b96f20b786ac3926db9f1593936dd21b30dc73969f0b8ee8292c2b8e8",
   "tool_schema": {
     "properties": {
       "operation": {

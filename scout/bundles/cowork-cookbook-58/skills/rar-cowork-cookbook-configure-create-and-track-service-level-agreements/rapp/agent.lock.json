@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_create_and_track_service_level_agreements",
+  "agent_bytes": 11027,
   "agent_file": "configure_create_and_track_service_level_agreements_agent.py",
   "agent_sha256": "68deee7354572e81832ff42288e2d70954e23a9ea24d21b61cb13e55f96c1654",
+  "backup_agent": "configure_create_and_track_service_level_agreements_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureCreateAndTrackServiceLevelAgreements",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-create-and-track-service-level-agreements:5adcb06db29d2f6bfdc3a1954c2751181bb1b6cb6727427a1a1c6e946cf4752f",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureCreateAndTrackServiceLevelAgreements",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25438,
+  "skill_sha256": "c1d8c8543d6bd6ff8100c5abb37859c437122d40d49f89899a0fa5aa09e78bb3",
   "tool_schema": {
     "properties": {
       "operation": {

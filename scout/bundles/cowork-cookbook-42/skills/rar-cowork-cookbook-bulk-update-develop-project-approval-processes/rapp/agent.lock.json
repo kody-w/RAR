@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_develop_project_approval_processes",
+  "agent_bytes": 10757,
   "agent_file": "bulk_update_develop_project_approval_processes_agent.py",
   "agent_sha256": "d8d26ca8ede4c587129003026c05d28be52c78c9eeca92e79f700c7e2680f5fa",
+  "backup_agent": "bulk_update_develop_project_approval_processes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDevelopProjectApprovalProcesses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-develop-project-approval-processes:adb9cc6dc19d00db9907d229ba0223540ab0eddad416d612e943ddd4df9464ea",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDevelopProjectApprovalProcesses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24981,
+  "skill_sha256": "ba8b3120d467e66792d09edf26f91cde7e4bd5821b9e7311952d90167d2b4776",
   "tool_schema": {
     "properties": {
       "operation": {

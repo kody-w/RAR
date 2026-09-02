@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_develop_leave_and_absence_policies",
+  "agent_bytes": 10721,
   "agent_file": "ppt_exec_develop_leave_and_absence_policies_agent.py",
   "agent_sha256": "c48c7490f848b4f672284c85d9c2f4d5a5d343ea86fd89316705c3e4320cb57a",
+  "backup_agent": "ppt_exec_develop_leave_and_absence_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDevelopLeaveAndAbsencePolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-develop-leave-and-absence-policies:608b63b4758665e0eb0e25cefe1442af060be2b9dc249de009b37183a847910e",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDevelopLeaveAndAbsencePolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24953,
+  "skill_sha256": "c902519ed0223e5537b435cd64bbebc3b05fef9d22bbce91a677337c63cbf8db",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_route_loads",
+  "agent_bytes": 10497,
   "agent_file": "teams_update_route_loads_agent.py",
   "agent_sha256": "c6f57480b88c6b82e2ac7d1bb69340a45103ccc539fa2f6df804ef86fb84a964",
+  "backup_agent": "teams_update_route_loads_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateRouteLoads",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-route-loads:9db1f95b9693be12d9194eae615b9f6b645b4d94e1eebc6331f193dc2ca8dff7",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateRouteLoads",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24317,
+  "skill_sha256": "853f5ad9d88d67a410d521add3f4086c7d5bb4bf64651386f7a9c6cae1866e4d",
   "tool_schema": {
     "properties": {
       "operation": {

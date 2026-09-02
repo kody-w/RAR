@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/stalled_opportunity_reengagement",
+  "agent_bytes": 10673,
   "agent_file": "stalled_opportunity_reengagement_agent.py",
   "agent_sha256": "d72ba0991e8a63405ed186a11abd1b61f12ff1ee7071942182aea42a0de7f8e5",
+  "backup_agent": "stalled_opportunity_reengagement_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StalledOpportunityReengagement",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -88,8 +91,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/stalled-opportunity-reengagement:63d304d6252a8cacac5a4028770bd6cc3c8f6702a8da8a9f98f8dfe3380d4d13",
+  "rollback_agent_retained": true,
   "runtime_name": "StalledOpportunityReengagement",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24741,
+  "skill_sha256": "f9972c0ce01ed90e6d8ecb28dde6975ec2a647d123a47407977ab5b575ae8b23",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_conduct_current_state_analysis",
+  "agent_bytes": 10725,
   "agent_file": "audit_conduct_current_state_analysis_agent.py",
   "agent_sha256": "b203070b9e71395b6dc2107d14375c79343be03ddb60d785faa6f3dcdfc2a394",
+  "backup_agent": "audit_conduct_current_state_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditConductCurrentStateAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-conduct-current-state-analysis:5186349ba205d830c9673240239c7c279520c5d973a8acba72bde9d9305563e7",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditConductCurrentStateAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24882,
+  "skill_sha256": "d76a0ccb65930215efc76ae09c986e74e7481ff26284bebeffffc16d30473e49",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_process_supplier_invoices",
+  "agent_bytes": 10613,
   "agent_file": "ppt_exec_process_supplier_invoices_agent.py",
   "agent_sha256": "103753f92f061b68f87b4cd3c12fa2c371177acefd11a7a54d720407351b23d1",
+  "backup_agent": "ppt_exec_process_supplier_invoices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecProcessSupplierInvoices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-process-supplier-invoices:8cab86fa2bde212ddd13a53e3ce4d36415ba1231374cc44b61860f490349c49d",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecProcessSupplierInvoices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24625,
+  "skill_sha256": "abfd0377fce4551a3d3661ca53571e5c6e617adcbd96508b9bc3eed0d14d0736",
   "tool_schema": {
     "properties": {
       "operation": {

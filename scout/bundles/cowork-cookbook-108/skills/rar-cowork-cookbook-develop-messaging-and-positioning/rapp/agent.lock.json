@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/develop_messaging_and_positioning",
+  "agent_bytes": 10387,
   "agent_file": "develop_messaging_and_positioning_agent.py",
   "agent_sha256": "4b5fe52e2821bce76747177d2a9306a38a61a4826524886f5171fdfbbac13ddc",
+  "backup_agent": "develop_messaging_and_positioning_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DevelopMessagingAndPositioning",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -72,8 +75,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/develop-messaging-and-positioning:ed1e7783da80d8a96695b652f03b5ebc7784dac4c126c6879b2f9200cec4805d",
+  "rollback_agent_retained": true,
   "runtime_name": "DevelopMessagingAndPositioning",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24242,
+  "skill_sha256": "ae134acf0e90ff77a5979c287d72fac2ca3f1783f9e1f2004a94dceee039b576",
   "tool_schema": {
     "properties": {
       "operation": {

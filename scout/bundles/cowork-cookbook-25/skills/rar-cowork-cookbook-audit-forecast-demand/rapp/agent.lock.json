@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_forecast_demand",
+  "agent_bytes": 10548,
   "agent_file": "audit_forecast_demand_agent.py",
   "agent_sha256": "ecf4ad3901a981b7887a78d3fd2c892487855862eb1b3eba0bb473bc233d2c37",
+  "backup_agent": "audit_forecast_demand_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditForecastDemand",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-forecast-demand:e7397bcf3dc0ea72c07e25dd54a9f036eb305944d06d8f03a8d77a0088822931",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditForecastDemand",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24392,
+  "skill_sha256": "6b843390c2451f37eff6183c9b2d1284f76dbc42ea5d92cf5913a763645ef479",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/estate_outbound",
+  "agent_bytes": 6851,
   "agent_file": "estate_outbound_agent.py",
   "agent_sha256": "f4f677f2bba5a12b5967fc39a8d0bdb1afad7ad4de57d32d2df8a80dd2bf1b32",
+  "backup_agent": "estate_outbound_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EstateOutboundAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -40,8 +43,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/estate-outbound:487da63be5cb9b530abc7866f28748842003ff097f54b54ebabb879d733b0cb2",
+  "rollback_agent_retained": true,
   "runtime_name": "StageOutboundEvent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 19709,
+  "skill_sha256": "7161cb9f07b1d8a564f94ffd5f09f9d618a3b9e34d731b02d3edd42baa583719",
   "tool_schema": {
     "properties": {
       "event": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_forecast_revenue",
+  "agent_bytes": 10539,
   "agent_file": "teams_update_forecast_revenue_agent.py",
   "agent_sha256": "2466a13183d7bf95c8ca2521572906bd146613f990c9013f61ed23c339202551",
+  "backup_agent": "teams_update_forecast_revenue_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateForecastRevenue",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-forecast-revenue:4c411d9aece3d47d42fa6243f2e938761529366aa64e984a7a03038393533450",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateForecastRevenue",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24406,
+  "skill_sha256": "22e772f7f235d981695eb18958c7117c351ee32a2eba6d14eb9e7a44dbeab437",
   "tool_schema": {
     "properties": {
       "operation": {

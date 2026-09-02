@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_confirm_purchase_details",
+  "agent_bytes": 10607,
   "agent_file": "ppt_exec_confirm_purchase_details_agent.py",
   "agent_sha256": "b2a22b7f846a817ddee8521cedd3cfa040be5d013221c8336bd3c9186451d637",
+  "backup_agent": "ppt_exec_confirm_purchase_details_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecConfirmPurchaseDetails",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-confirm-purchase-details:ae8d1a1358a78a39d317c181b7a1c61bcf85804c962dc036882b248adaf74e98",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecConfirmPurchaseDetails",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24608,
+  "skill_sha256": "181e7cd922144a0a16477b6878dffbd9b612e4058f8a77ad71ecdfe9c400d920",
   "tool_schema": {
     "properties": {
       "operation": {

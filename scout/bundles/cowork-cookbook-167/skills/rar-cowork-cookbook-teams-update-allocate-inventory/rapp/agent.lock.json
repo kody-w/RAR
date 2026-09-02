@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_allocate_inventory",
+  "agent_bytes": 10567,
   "agent_file": "teams_update_allocate_inventory_agent.py",
   "agent_sha256": "eec96c1904e1e963e2b6ccdc371737248b85aab36693a7b3be60b74a97089c63",
+  "backup_agent": "teams_update_allocate_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAllocateInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-allocate-inventory:353057f79e8e07c213a7f1876e2432a4fa4e620369982be444f69ed62adeb455",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateAllocateInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24480,
+  "skill_sha256": "8f2a652e8c09c5b462f45648cb8a712be3cadfddac11c44bca80a9f3baea7718",
   "tool_schema": {
     "properties": {
       "operation": {

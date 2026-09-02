@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_analyze_customer_risk",
+  "agent_bytes": 10594,
   "agent_file": "adaptive_card_analyze_customer_risk_agent.py",
   "agent_sha256": "7d287c89cc6869c261382dae7084f378d0e507026e842823ae2b6af09b611ce4",
+  "backup_agent": "adaptive_card_analyze_customer_risk_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardAnalyzeCustomerRisk",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-analyze-customer-risk:8993722f7a4111d545d7ad369368c2e9caa888e149844a78302b3da8127504c4",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardAnalyzeCustomerRisk",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24628,
+  "skill_sha256": "b7966fc285aa8ada5647557ee397efa2e344f1c3624d63f234a1047165475e50",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_retire_software_licenses",
+  "agent_bytes": 10661,
   "agent_file": "dashboard_retire_software_licenses_agent.py",
   "agent_sha256": "40747695a6645e36dd7b210407872d73f7679186109f5b5f9e0a852f86ac505c",
+  "backup_agent": "dashboard_retire_software_licenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardRetireSoftwareLicenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-retire-software-licenses:d35f022b3206a2d61052168c5b48048f599d6df7078fa71d01735194e0d17c89",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardRetireSoftwareLicenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24724,
+  "skill_sha256": "2d0bc0437bb5c5dad995289c1853416f91001542bb19d8f55760b57e9b158ec7",
   "tool_schema": {
     "properties": {
       "operation": {

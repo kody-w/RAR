@@ -41,12 +41,14 @@ from pathlib import Path
 
 _REPO = Path(__file__).resolve().parent.parent
 _REGISTRY = _REPO / "registry.json"
+_SCOUT_CATALOG = _REPO / "scout" / "catalog" / "catalog.json"
 _AGENTS_ROOT = _REPO / "agents"
 _API = _REPO / "api" / "v1"
 
 SCHEMA_API_INDEX = "rar-pokedex-api/1.0"
 SCHEMA_API_AGENT = "rar-pokedex-agent/1.0"
 _PRIOR_RAPPIDS: dict = {}
+_SKILLS_BY_IDENTITY: dict = {}
 RAW_PREFIX = "https://raw.githubusercontent.com/kody-w/RAR/main"
 
 
@@ -123,12 +125,24 @@ def _build_entry(agent: dict) -> dict:
         ).hexdigest()
     else:
         _tail = None
-    rappid = f"rappid:{publisher}/{name.split('/')[-1]}:{_tail}" if _tail else None
+    legacy_rappid = (
+        f"rappid:{publisher}/{name.split('/')[-1]}:{_tail}"
+        if _tail
+        else None
+    )
+    skill = _SKILLS_BY_IDENTITY.get(name) or {}
+    rappid = skill.get("rappid") or legacy_rappid
     # legacy bridge: carry the previously served identity as _migrated_from
     _old, _old_aliases = _PRIOR_RAPPIDS.get(slug) or (None, [])
     migrated_from_all = list(_old_aliases)
     if _old and _old != rappid and _old not in migrated_from_all:
         migrated_from_all.append(_old)
+    if (
+        legacy_rappid
+        and legacy_rappid != rappid
+        and legacy_rappid not in migrated_from_all
+    ):
+        migrated_from_all.append(legacy_rappid)
     migrated_from = (
         migrated_from_all[-1]
         if migrated_from_all
@@ -153,6 +167,14 @@ def _build_entry(agent: dict) -> dict:
         else None
     )
     api_py_url = f"{RAW_PREFIX}/api/v1/agent/{slug}.py"
+    skill_url = next(
+        (
+            item.get("url")
+            for item in skill.get("files", [])
+            if item.get("path") == "SKILL.md"
+        ),
+        None,
+    )
 
     return {
         "schema": SCHEMA_API_AGENT,
@@ -180,6 +202,14 @@ def _build_entry(agent: dict) -> dict:
         "sha256": sha256,
         "has_card": has_card,
         "added_at": agent.get("_added_at"),
+        "default_artifact": (
+            skill.get("default_artifact")
+            if skill
+            else "agent"
+        ),
+        "grail_record": skill.get("grail_record"),
+        "skill_name": skill.get("skill_name"),
+        "materializes": skill.get("materializes") or ["agent"],
 
         # Lineage
         "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
@@ -187,6 +217,9 @@ def _build_entry(agent: dict) -> dict:
         # Asset URLs
         "sprite_url":  f"{RAW_PREFIX}/api/v1/sprite/{slug}.svg",
         "py_url":      py_url,
+        "backup_agent_url": py_url,
+        "skill_url": skill_url,
+        "default_url": skill_url or py_url,
         "card_url":    card_url,
         "api_py_url":  api_py_url,
         "api_card_url": api_card_url,
@@ -204,8 +237,20 @@ def main():
         print(f"err: registry.json not found at {_REGISTRY}", file=sys.stderr)
         sys.exit(1)
 
-    global _PRIOR_RAPPIDS
+    global _PRIOR_RAPPIDS, _SKILLS_BY_IDENTITY
     _PRIOR_RAPPIDS = {}
+    if not _SCOUT_CATALOG.is_file():
+        print(
+            f"err: Scout catalog not found at {_SCOUT_CATALOG}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    scout_catalog = json.loads(_SCOUT_CATALOG.read_text(encoding="utf-8"))
+    _SKILLS_BY_IDENTITY = {
+        item["identity"]: item
+        for item in scout_catalog.get("skills", [])
+        if isinstance(item, dict) and item.get("identity")
+    }
     head_paths = subprocess.run(
         [
             "git",

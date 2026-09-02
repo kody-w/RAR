@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_develop_service_policies",
+  "agent_bytes": 10611,
   "agent_file": "ppt_exec_develop_service_policies_agent.py",
   "agent_sha256": "31441faa5e612840437fe587b833d3ca91f7803c85847475b210a812fa0c7f2e",
+  "backup_agent": "ppt_exec_develop_service_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDevelopServicePolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-develop-service-policies:2eefd19d1a6ccda185a00cf56ad9eba92b8407a62785a2f8964141121d0f9b73",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDevelopServicePolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24605,
+  "skill_sha256": "fdfcc2894f4958f51bed2047b5890c62c22df735f38d91ce4412273d87808466",
   "tool_schema": {
     "properties": {
       "operation": {

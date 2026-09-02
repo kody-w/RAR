@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_bill_subscriptions",
+  "agent_bytes": 10557,
   "agent_file": "adaptive_card_bill_subscriptions_agent.py",
   "agent_sha256": "b15abeb128afe3114623a32a1f6017e6be44d2bf758343a71df4313413037726",
+  "backup_agent": "adaptive_card_bill_subscriptions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardBillSubscriptions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-bill-subscriptions:36d18919275798617ea928d63ba7a2089a684af034d07a487879cb6b3ce96a4b",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardBillSubscriptions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24506,
+  "skill_sha256": "9ec9fedaec9e42a7f658b04bd3ba2f9408f0170ca45051ad3c3a52276e1718e0",
   "tool_schema": {
     "properties": {
       "operation": {

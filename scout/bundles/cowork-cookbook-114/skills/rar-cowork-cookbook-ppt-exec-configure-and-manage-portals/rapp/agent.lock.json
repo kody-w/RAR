@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_configure_and_manage_portals",
+  "agent_bytes": 10674,
   "agent_file": "ppt_exec_configure_and_manage_portals_agent.py",
   "agent_sha256": "5f04fb211a44e5c5a451aae1d2a0539bb7bc35cbf3955c3033144748fcdc840d",
+  "backup_agent": "ppt_exec_configure_and_manage_portals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecConfigureAndManagePortals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-configure-and-manage-portals:3b486e3d3fad02e21855f731ed98b14de767dbf86022017c048c4efbba8bdf45",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecConfigureAndManagePortals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24783,
+  "skill_sha256": "f039cb68170604ac59307c62e75fe66a1f0e2e1748d043fdce513ef4a69554e0",
   "tool_schema": {
     "properties": {
       "operation": {

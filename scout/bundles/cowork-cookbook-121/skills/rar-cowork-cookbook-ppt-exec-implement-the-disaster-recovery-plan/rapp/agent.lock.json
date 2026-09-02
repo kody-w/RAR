@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_implement_the_disaster_recovery_plan",
+  "agent_bytes": 10778,
   "agent_file": "ppt_exec_implement_the_disaster_recovery_plan_agent.py",
   "agent_sha256": "7fea9bab0aafb1e83b8016618c67d08e24a9108cb3c18dcd00a3426293a97923",
+  "backup_agent": "ppt_exec_implement_the_disaster_recovery_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecImplementTheDisasterRecoveryPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-implement-the-disaster-recovery-plan:0ed0886cb478d52e72ada3754cb2a908c258c914ef3a7540fb34b2592350fc0d",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecImplementTheDisasterRecoveryPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25023,
+  "skill_sha256": "8d96ed2e18e9f3c86bd41d645b67e93c39d52e2bd989f247b326bd3559038c3b",
   "tool_schema": {
     "properties": {
       "operation": {

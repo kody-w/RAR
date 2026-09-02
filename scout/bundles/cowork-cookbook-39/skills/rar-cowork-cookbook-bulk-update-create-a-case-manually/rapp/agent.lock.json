@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_create_a_case_manually",
+  "agent_bytes": 10593,
   "agent_file": "bulk_update_create_a_case_manually_agent.py",
   "agent_sha256": "f6bd9640d0290ec2267136492b113c55c7621273149cb7aa218730f8a5e9e1ca",
+  "backup_agent": "bulk_update_create_a_case_manually_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateCreateACaseManually",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-create-a-case-manually:4e6df8acf65033bbbb82e1e67eb90c081e5f986c4eec743c1356707a30f972d5",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateCreateACaseManually",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24602,
+  "skill_sha256": "2190a74f376390666a13eaaad77a651f4b53263c64cb392e6fba35135762f24f",
   "tool_schema": {
     "properties": {
       "operation": {

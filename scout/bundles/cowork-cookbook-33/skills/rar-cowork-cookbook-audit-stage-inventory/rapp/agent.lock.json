@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_stage_inventory",
+  "agent_bytes": 10552,
   "agent_file": "audit_stage_inventory_agent.py",
   "agent_sha256": "ada5208f911cf27d42ac41490e234b124a65609307d52add159e6b659b422b13",
+  "backup_agent": "audit_stage_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditStageInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-stage-inventory:235b6c6d68632f70d30c63b0e8f20a19fe9d143fdf34da3d458e5cba111b4c96",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditStageInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24392,
+  "skill_sha256": "f6d4b2dda286b18f5940e413698406cca40b1969bb46ae62d79a45caaa09fd60",
   "tool_schema": {
     "properties": {
       "criteria": {

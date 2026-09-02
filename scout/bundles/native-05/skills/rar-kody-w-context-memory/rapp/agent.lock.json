@@ -1,11 +1,14 @@
 {
   "agent": "@kody-w/context_memory_agent",
+  "agent_bytes": 8628,
   "agent_file": "context_memory_agent.py",
   "agent_sha256": "611d0957274b1f584acd9f763bb789b616eca4c1e4297665064bfeef9ed37e7a",
+  "backup_agent": "context_memory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ContextMemoryAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.storage_factory"
+    "brainstem:utils.storage_factory"
   ],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/context-memory:398b0ad267346c75e1dc516d50ab52fce908d2b587dc46671f7f930432027d9f",
+  "rollback_agent_retained": true,
   "runtime_name": "ContextMemory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 18412,
+  "skill_sha256": "197a6b192dcc7e82c23d231807e1766bb3f401607674df3cbd9cac3b1729bb7a",
   "tool_schema": {
     "properties": {
       "full_recall": {

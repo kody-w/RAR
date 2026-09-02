@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_sell_product_subscriptions",
+  "agent_bytes": 10647,
   "agent_file": "teams_update_sell_product_subscriptions_agent.py",
   "agent_sha256": "6c713437d18eba109fa3390100bab460d9861694426b1b88347bae74b111be28",
+  "backup_agent": "teams_update_sell_product_subscriptions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateSellProductSubscriptions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-sell-product-subscriptions:c1920a77bf1d12ce06fac09d9e55a7a1da08a70782ebbc82230cfff222c9b065",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateSellProductSubscriptions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24717,
+  "skill_sha256": "807339cf3eda2310535020344ac3f10798ef177ffbb438374ee963b8c6dea0ad",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_define_employee_career_paths",
+  "agent_bytes": 10693,
   "agent_file": "audit_define_employee_career_paths_agent.py",
   "agent_sha256": "b539a37888dc94a6cdf2730d074584ff8f3e1c238b494e67c7e2f103a91f908c",
+  "backup_agent": "audit_define_employee_career_paths_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineEmployeeCareerPaths",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-define-employee-career-paths:d9146dbfbab519650159c54d47dab30b1ba37b11ffa6e0226e9c647874193d9e",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDefineEmployeeCareerPaths",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24810,
+  "skill_sha256": "fd70ff1924e53042c25e65551a0698526f1c1a77665ad9cf86fc7a7a249ea380",
   "tool_schema": {
     "properties": {
       "criteria": {

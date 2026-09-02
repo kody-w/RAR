@@ -1,9 +1,12 @@
 {
   "agent": "@rapter/hive_census_agent",
+  "agent_bytes": 10138,
   "agent_file": "hive_census_agent.py",
   "agent_sha256": "c078c513615c23f87edf14ee12514105af913e06577cfe53b2e2b2368963d4ff",
+  "backup_agent": "hive_census_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HiveCensusAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RapterBox",
@@ -28,8 +31,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapter/hive-census:05ef7a9d5b6d9fab4ec5e61742e4f6ce084965951a1a35858f7d1dd09a57b540",
+  "rollback_agent_retained": true,
   "runtime_name": "hive_census",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25832,
+  "skill_sha256": "d4c1728f0b0a0527da06fe368ecee8e2dadb460cd27f5dd902bde87158fb07fc",
   "tool_schema": {
     "properties": {
       "write": {

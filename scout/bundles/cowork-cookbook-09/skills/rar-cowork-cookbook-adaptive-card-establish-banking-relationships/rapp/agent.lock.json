@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_establish_banking_relationships",
+  "agent_bytes": 10720,
   "agent_file": "adaptive_card_establish_banking_relationships_agent.py",
   "agent_sha256": "c72ec9ba0105be9a5d4d8fa1ca6f29381bd13c91e1880ff68a6735697cdc6030",
+  "backup_agent": "adaptive_card_establish_banking_relationships_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardEstablishBankingRelationships",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-establish-banking-relationships:ebeb8049ea2f32df1a0a3f98652e8f6b6c40c49da55a6c13f6feae927a594403",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardEstablishBankingRelationships",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24931,
+  "skill_sha256": "ef3fc805e204ff8e9bf2d462a3014c562049ff31af38e1e6ed08d947f9b25785",
   "tool_schema": {
     "properties": {
       "operation": {

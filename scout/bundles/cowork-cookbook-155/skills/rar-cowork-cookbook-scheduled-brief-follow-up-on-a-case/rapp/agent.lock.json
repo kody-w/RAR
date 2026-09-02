@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_follow_up_on_a_case",
+  "agent_bytes": 10626,
   "agent_file": "scheduled_brief_follow_up_on_a_case_agent.py",
   "agent_sha256": "b526fdcac20bb7dc0d8c9c9e78b90c6e12256ca85ccf1c651b731b6fa0d08b10",
+  "backup_agent": "scheduled_brief_follow_up_on_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefFollowUpOnACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-follow-up-on-a-case:3881b24d9b105a263c7e08adb72fbe2ae844efde4d3bf268cad9b9ecd8b4b12f",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefFollowUpOnACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24668,
+  "skill_sha256": "37c48b93731ac4e00b9791d7157d7465ebb22ab644a2ac8c86eab0e44ecec153",
   "tool_schema": {
     "properties": {
       "operation": {

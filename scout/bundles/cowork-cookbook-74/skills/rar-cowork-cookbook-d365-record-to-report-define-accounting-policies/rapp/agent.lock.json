@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_record_to_report_define_accounting_policies",
+  "agent_bytes": 10745,
   "agent_file": "d365_record_to_report_define_accounting_policies_agent.py",
   "agent_sha256": "5d6bfd1a2661a353bfce12896469eca39e78cc99f8c0088595b66e02096ca0ad",
+  "backup_agent": "d365_record_to_report_define_accounting_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365RecordToReportDefineAccountingPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-record-to-report-define-accounting-policies:efd8d0a334c59330c3a175a2e2c15e1c1fdc83ce0303b99299c0768dffcee09b",
+  "rollback_agent_retained": true,
   "runtime_name": "D365RecordToReportDefineAccountingPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25002,
+  "skill_sha256": "9e70b208540455b1367e996f67a4fe7c4f54c22f4e199f38cb7d6ee292e508b6",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/period_close_checklist",
+  "agent_bytes": 10573,
   "agent_file": "period_close_checklist_agent.py",
   "agent_sha256": "c05be623a9f7a688bc6868900007691a0701dfc09f1afd7620a2fb03621bda9d",
+  "backup_agent": "period_close_checklist_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PeriodCloseChecklist",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -85,8 +88,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/period-close-checklist:95d1de050ae3c179795b0fd64a7f5488d7f4763fd232c5be11d9ccd6c6277ce7",
+  "rollback_agent_retained": true,
   "runtime_name": "PeriodCloseChecklist",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24563,
+  "skill_sha256": "d1acd56d0677285d56a1065dcff1b6074d7c8669a8b9da1c82ad118d98326e41",
   "tool_schema": {
     "properties": {
       "criteria": {

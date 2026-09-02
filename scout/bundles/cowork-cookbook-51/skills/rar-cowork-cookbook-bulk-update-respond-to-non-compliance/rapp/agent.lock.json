@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_respond_to_non_compliance",
+  "agent_bytes": 10658,
   "agent_file": "bulk_update_respond_to_non_compliance_agent.py",
   "agent_sha256": "d957fb206b964afc3c48872245f1f08d95176abd5feb012c42e22809573a2b2d",
+  "backup_agent": "bulk_update_respond_to_non_compliance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateRespondToNonCompliance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-respond-to-non-compliance:3f60f73dc223af1221e80398f3230f3e672b9b05e35e7c602562979d656d6cb7",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateRespondToNonCompliance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24743,
+  "skill_sha256": "5e5fe673f24372bd8f7ad149d7be516678ced3cd5febf87ff437e6350409b3b2",
   "tool_schema": {
     "properties": {
       "operation": {

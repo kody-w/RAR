@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_manage_accruals",
+  "agent_bytes": 10590,
   "agent_file": "scheduled_brief_manage_accruals_agent.py",
   "agent_sha256": "283d3c0428dbb5f8b9e881c46c79c8f93723d7445051059f7b1a2f5c4a47a95c",
+  "backup_agent": "scheduled_brief_manage_accruals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefManageAccruals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-manage-accruals:98af929870dd21cd1396b69282f70eaa989175007f629efe1f27ef4c21881942",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefManageAccruals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24534,
+  "skill_sha256": "eb592c13edbc13046e6c89cdf9de16b8693163f3fd1f1a81715b9cd52d9fd852",
   "tool_schema": {
     "properties": {
       "operation": {

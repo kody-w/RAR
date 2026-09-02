@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_record_tax_commitments",
+  "agent_bytes": 10638,
   "agent_file": "audit_record_tax_commitments_agent.py",
   "agent_sha256": "68daaf9b759e0647b694cdca447228592b7f9659c4b34324a0af4633aeb0e3c5",
+  "backup_agent": "audit_record_tax_commitments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditRecordTaxCommitments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-record-tax-commitments:a2fa968dd0fe4f0411aecb78b48e6e007f49103f7a711615222b6604855d4a11",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditRecordTaxCommitments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24611,
+  "skill_sha256": "dab1b0d96395ef20229e6fc0905163540945cfacc69af95bf96ecfa5a0e28369",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_define_human_resources_policies",
+  "agent_bytes": 10726,
   "agent_file": "audit_define_human_resources_policies_agent.py",
   "agent_sha256": "da5a0a9d16f665a3e6a52919bf8581e4f45edd05bfe5516a1768b4bfda2a22ab",
+  "backup_agent": "audit_define_human_resources_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineHumanResourcesPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-define-human-resources-policies:254bc7511656a4fdb31cad36520860eebb459d356984e17fac4d7e606d3305e7",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDefineHumanResourcesPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24896,
+  "skill_sha256": "76a80529680a049d77cd81956ce9a68da48782612c40ab7c8b94b168d45b0f75",
   "tool_schema": {
     "properties": {
       "criteria": {

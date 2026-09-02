@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_determine_sales_targets",
+  "agent_bytes": 10604,
   "agent_file": "ppt_exec_determine_sales_targets_agent.py",
   "agent_sha256": "565721477aa04b6393d1d0c9081a2e13547774a1941a0476f022e0ce2540a983",
+  "backup_agent": "ppt_exec_determine_sales_targets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDetermineSalesTargets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-determine-sales-targets:40b061e28f602a1cfa10d509ff090a854aae4df3e633fdbb2e3625602cff7654",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDetermineSalesTargets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24590,
+  "skill_sha256": "0ec8f0f1a1dc2acfb5f676752cf7af092a68810517e1231c6200677c202baa56",
   "tool_schema": {
     "properties": {
       "operation": {

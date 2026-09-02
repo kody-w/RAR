@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_configure_and_manage_file_storage",
+  "agent_bytes": 10807,
   "agent_file": "audit_configure_and_manage_file_storage_agent.py",
   "agent_sha256": "0d2f89920110023bf7e9b77fe6a5315d468389f5a1b82fe1b059e58415801a37",
+  "backup_agent": "audit_configure_and_manage_file_storage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditConfigureAndManageFileStorage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-configure-and-manage-file-storage:57b873c19b8f7a05a86805cf951ebca97d2b8afa3092208f94b06fd67f3de4f8",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditConfigureAndManageFileStorage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25062,
+  "skill_sha256": "2d65e76c4b184d08b77dbcd0924cfe36099946d69980797629102b375f8874b3",
   "tool_schema": {
     "properties": {
       "criteria": {

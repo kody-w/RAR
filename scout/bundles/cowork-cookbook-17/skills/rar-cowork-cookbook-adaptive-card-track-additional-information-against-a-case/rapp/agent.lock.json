@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_track_additional_information_against_a_case",
+  "agent_bytes": 10890,
   "agent_file": "adaptive_card_track_additional_information_against_a_case_agent.py",
   "agent_sha256": "92d617fc3a44c443d5adb175865e5222d1ba8c0c4d8442bc9f7e51f951039bf1",
+  "backup_agent": "adaptive_card_track_additional_information_against_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardTrackAdditionalInformationAgainstACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-track-additional-information-against-a-case:f3f3cf22cca75a1c64cfa7f6f52422397da1f2df07e168321b64d10b3c40f56a",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardTrackAdditionalInformationAgainstACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25367,
+  "skill_sha256": "3d3c7cfb04427f91d4fb368a0edf0699a54da07e243c699a84183a3966b590b7",
   "tool_schema": {
     "properties": {
       "operation": {

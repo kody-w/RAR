@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_create_website_for_campaigns",
+  "agent_bytes": 10688,
   "agent_file": "dashboard_create_website_for_campaigns_agent.py",
   "agent_sha256": "b591066e2f22000631ad7f4c2a5e0fbb27d7c306828ed0ad74cb470f5df3cab4",
+  "backup_agent": "dashboard_create_website_for_campaigns_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardCreateWebsiteForCampaigns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-create-website-for-campaigns:8d1ded3c6e4010184be092bbbd1f81e4e55e9e8d45e0091905d98ace19792e67",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardCreateWebsiteForCampaigns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24855,
+  "skill_sha256": "59cd201e02ba97bd1f216e204dcee9ca58ee7e318a3cad00538fc73404905833",
   "tool_schema": {
     "properties": {
       "operation": {

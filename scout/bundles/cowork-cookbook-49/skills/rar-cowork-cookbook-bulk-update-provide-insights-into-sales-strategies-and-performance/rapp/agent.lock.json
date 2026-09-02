@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_provide_insights_into_sales_strategies_and_performance",
+  "agent_bytes": 10999,
   "agent_file": "bulk_update_provide_insights_into_sales_strategies_and_performance_agent.py",
   "agent_sha256": "e6db444911afc1acf7f1457e3c003bf594857ba1f36c6db86582ad9e7cb0fe07",
+  "backup_agent": "bulk_update_provide_insights_into_sales_strategies_and_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateProvideInsightsIntoSalesStrategiesAndPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-provide-insights-into-sales-strategies-and-performance:43cf05f7d32dc2712a0fd55e0558e8971b4ed10e0ea401c264c6c8f6833642ed",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateProvideInsightsIntoSalesStrategiesAndPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25647,
+  "skill_sha256": "c2294a54ca3158357d56699e264e53674a50c04f7d029f9e6efc734239cedf99",
   "tool_schema": {
     "properties": {
       "operation": {

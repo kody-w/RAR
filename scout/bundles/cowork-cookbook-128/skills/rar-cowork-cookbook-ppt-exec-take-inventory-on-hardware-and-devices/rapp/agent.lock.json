@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_take_inventory_on_hardware_and_devices",
+  "agent_bytes": 10805,
   "agent_file": "ppt_exec_take_inventory_on_hardware_and_devices_agent.py",
   "agent_sha256": "2eb00bc67b4a5812e324ecc05ae0a34a48b18ef77fa7db94743c51ffce1a9afe",
+  "backup_agent": "ppt_exec_take_inventory_on_hardware_and_devices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecTakeInventoryOnHardwareAndDevices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-take-inventory-on-hardware-and-devices:9b28280f666bb737634eb9ad2574013d47098a33571a7cfa6b23a21356e4490b",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecTakeInventoryOnHardwareAndDevices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25136,
+  "skill_sha256": "f3687f748088b3f87534427df7db015a4aa0f4741c9f4aba3a4691f373e59335",
   "tool_schema": {
     "properties": {
       "operation": {

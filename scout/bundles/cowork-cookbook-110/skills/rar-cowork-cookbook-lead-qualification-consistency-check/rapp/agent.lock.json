@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/lead_qualification_consistency_check",
+  "agent_bytes": 10751,
   "agent_file": "lead_qualification_consistency_check_agent.py",
   "agent_sha256": "55e84afa7b1ea56b2b27eab723f388fb6ae26a48595ab757f25c3a324c3afb76",
+  "backup_agent": "lead_qualification_consistency_check_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LeadQualificationConsistencyCheck",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -87,8 +90,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/lead-qualification-consistency-check:658f6aaeec69ed8fa7cbf296e99531f5897873516075b565fe26372ccf3b3b63",
+  "rollback_agent_retained": true,
   "runtime_name": "LeadQualificationConsistencyCheck",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24958,
+  "skill_sha256": "f8785f15ebb666dfd6e70ebdf752b68e2f895d47676e159a240ebd10ec695673",
   "tool_schema": {
     "properties": {
       "criteria": {

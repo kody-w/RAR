@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_implement_compliance_controls_and_measures",
+  "agent_bytes": 10849,
   "agent_file": "ppt_exec_implement_compliance_controls_and_measures_agent.py",
   "agent_sha256": "7cbac06ea5a10a64ab986abba5605e569d93b0c9ea1ea691c5b2b7b8014520b1",
+  "backup_agent": "ppt_exec_implement_compliance_controls_and_measures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecImplementComplianceControlsAndMeasures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-implement-compliance-controls-and-measures:18cdead22efc1b6543f6ff2ee91a7fd3824b167dc4272d84bd23532804e3129f",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecImplementComplianceControlsAndMeasures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25192,
+  "skill_sha256": "5a48859b284e1b8473f96192c24508ed5b774fb77561a60c1bf83a7c5daed426",
   "tool_schema": {
     "properties": {
       "operation": {

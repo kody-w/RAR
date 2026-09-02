@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_test_notification_and_alerts",
+  "agent_bytes": 10724,
   "agent_file": "adaptive_card_test_notification_and_alerts_agent.py",
   "agent_sha256": "74e9e52418e815d6b82533f268d893c29a84691c0acfceca9479f89b119c1319",
+  "backup_agent": "adaptive_card_test_notification_and_alerts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardTestNotificationAndAlerts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-test-notification-and-alerts:f8b97dc4d95c378dbe6e1bf93a8aa68a1541d3fb01074812a632b692eaf6bfea",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardTestNotificationAndAlerts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24903,
+  "skill_sha256": "ae54490d4e6eba2e676a00d274391a82c4b78fae247fac401af2e8d1a70ffb7b",
   "tool_schema": {
     "properties": {
       "operation": {

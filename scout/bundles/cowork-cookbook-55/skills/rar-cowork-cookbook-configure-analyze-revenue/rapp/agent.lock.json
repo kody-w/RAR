@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_analyze_revenue",
+  "agent_bytes": 10682,
   "agent_file": "configure_analyze_revenue_agent.py",
   "agent_sha256": "44363dc84157ead4f9dbe743e471f7047d7fdc65e347d762a2fae2fa799ce18a",
+  "backup_agent": "configure_analyze_revenue_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureAnalyzeRevenue",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-analyze-revenue:5156b62f87aa193c7e4a911e75cc1695a0cf2be5d78886f6c86aff867a430d21",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureAnalyzeRevenue",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24554,
+  "skill_sha256": "2d659e4d7d3ab36ed5515c8f6b72e8bba4de19d849adee5fb22edd939d568afd",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -29,7 +29,14 @@ AGGREGATED = json.loads(
 FEDERATION = json.loads(
     (ROOT / "state" / "federation.json").read_text()
 )["rapplications"]
+SKILL_IDENTITIES = json.loads(
+    (ROOT / "state" / "scout_skill_identities.json").read_text()
+)
 CAPSULE = re.compile(r"<!--\s*rci-capsule:v1:([A-Za-z0-9+/=]+)\s*-->")
+RAPPID = re.compile(
+    r"^rappid:@[a-z0-9]+(?:-[a-z0-9]+)*/"
+    r"[a-z0-9]+(?:-[a-z0-9]+)*:[0-9a-f]{64}$"
+)
 
 
 def lf(data: bytes) -> bytes:
@@ -72,9 +79,19 @@ def load_rapp_skill_module():
     return module
 
 
+def load_runner_module(path):
+    spec = importlib.util.spec_from_file_location(
+        f"_runner_{hashlib.sha256(str(path).encode()).hexdigest()[:12]}",
+        path,
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_rapp_skill_pins_the_current_conformant_sdk():
     module = load_rapp_skill_module()
-    assert module.__manifest__["version"] == "1.3.1"
+    assert module.__manifest__["version"] == "1.4.0"
     assert module.RAPP1_COMMIT == (
         "caf6ef276cafa92aa744499af90dc1a28559941a"
     )
@@ -207,14 +224,64 @@ def test_every_primary_skill_is_reversible_and_exactly_pinned():
         )
         assert sha256(linked.read_bytes()) == preserved["sha256"]
         assert sha256(lf(linked.read_bytes())) == lock["agent_sha256"]
+        assert sha256(skill_path.read_bytes()) == lock["skill_sha256"]
         assert lock["agent_file"] == linked.name
-        assert lock["agent"] == capsule["platform"]["metadata"]["rar_agent"]
+        metadata = capsule["platform"]["metadata"]
+        assert lock["agent"] == metadata["rar_agent"]
+        assert metadata["default_artifact"] == "skill"
+        assert metadata["canonical_format"] == "skill"
+        assert metadata["grail_record"] is True
+        assert metadata["rapp"]["schema"] == "rapp/1"
+        assert metadata["rapp"]["rappid"] == record["rappid"]
         assert lock["entry_class"]
+        assert record["default_artifact"] == "skill"
+        assert record["grail_record"] == "SKILL.md"
+        assert record["backup_agent"] == linked.name
+        assert record["rollback_agent_retained"] is True
+        assert record["materializes"] == ["agent"]
         assert record["files"]
         for file in record["files"]:
             target = directory / file["path"]
             assert target.is_file()
             assert sha256(target.read_bytes()) == file["sha256"]
+
+
+def test_every_toasted_skill_has_committed_mint_once_identity():
+    entries = SKILL_IDENTITIES["entries"]
+    assert SKILL_IDENTITIES["schema"] == "rapp-scout-skill-identities/1.0"
+    assert set(entries) == {
+        record["identity"]
+        for record in CATALOG["skills"]
+    }
+    assert len({entry["rappid"] for entry in entries.values()}) == len(entries)
+    for record in CATALOG["skills"]:
+        identity = entries[record["identity"]]
+        assert RAPPID.fullmatch(identity["rappid"])
+        assert record["rappid"] == identity["rappid"]
+        assert identity["source"] in {
+            "agent-manifest",
+            "projection-genesis",
+        }
+
+
+def test_dependency_locks_expose_unconditional_third_party_imports():
+    expected = {
+        "@discreetRappers/email_drafting_agent": "python:requests",
+        "@kody-w/copilot_studio_parity_deploy": "python:yaml",
+    }
+    for identity, dependency in expected.items():
+        record = next(
+            item for item in CATALOG["skills"]
+            if item["identity"] == identity
+        )
+        lock = json.loads(
+            (
+                primary_skill_dir(record)
+                / "rapp"
+                / "agent.lock.json"
+            ).read_text()
+        )
+        assert dependency in lock["host_dependencies"]
 
 
 def test_drifted_current_files_use_notarized_historical_bytes():
@@ -391,6 +458,116 @@ def test_bookfactory_tamper_refusal(tmp_path):
     assert "RAPP_UNAVAILABLE:integrity-mismatch" in after.stderr
 
 
+def test_runner_executes_from_grail_capsule_without_backup_agent(tmp_path):
+    record = next(
+        entry
+        for entry in CATALOG["skills"]
+        if entry["identity"] == "@rapp/ping_agent"
+    )
+    source = primary_skill_dir(record)
+    bundle = tmp_path / source.name
+    shutil.copytree(source, bundle)
+    (bundle / record["backup_agent"]).unlink()
+    runner = bundle / "scripts" / "run_agent.py"
+
+    preflight = subprocess.run(
+        [sys.executable, str(runner), "--preflight"],
+        cwd=bundle,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert preflight.returncode == 0, preflight.stderr
+    run = subprocess.run(
+        [sys.executable, str(runner), "{}"],
+        cwd=bundle,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert run.returncode == 0, run.stderr
+    assert run.stdout.strip()
+
+
+def test_runner_uses_grail_by_default_and_backup_only_on_request(tmp_path):
+    record = next(
+        entry
+        for entry in CATALOG["skills"]
+        if entry["identity"] == "@rapp/ping_agent"
+    )
+    source = primary_skill_dir(record)
+    bundle = tmp_path / source.name
+    shutil.copytree(source, bundle)
+    runner = bundle / "scripts" / "run_agent.py"
+
+    primary = subprocess.run(
+        [sys.executable, str(runner), "--preflight"],
+        cwd=bundle,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    rollback = subprocess.run(
+        [sys.executable, str(runner), "--preflight", "--rollback-agent"],
+        cwd=bundle,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert primary.stdout.strip() == "RAPP_READY:source=grail"
+    assert rollback.stdout.strip() == "RAPP_READY:source=rollback-agent"
+
+
+def test_capsule_loader_supports_dataclasses_and_self_source(
+    tmp_path,
+    monkeypatch,
+):
+    monkeypatch.setenv("RAPP_CACHE_HOME", str(tmp_path / "cache"))
+    for identity in (
+        "@kody-w/connected_solution_agent",
+        "@kody-w/rapp_sdk_builder",
+    ):
+        record = next(
+            entry
+            for entry in CATALOG["skills"]
+            if entry["identity"] == identity
+        )
+        source = primary_skill_dir(record)
+        bundle = tmp_path / record["skill_name"]
+        shutil.copytree(source, bundle)
+        (bundle / record["backup_agent"]).unlink()
+        runner = load_runner_module(bundle / "scripts" / "run_agent.py")
+        lock = runner.load_lock()
+        agent_source, path = runner.agent_source(lock)
+        agent = runner.load_agent(lock, agent_source, path)
+        assert agent.name == lock["runtime_name"]
+        assert path.is_file()
+        assert path.read_bytes() == agent_source
+
+
+def test_capsule_runner_refuses_tampered_grail(tmp_path):
+    record = next(
+        entry
+        for entry in CATALOG["skills"]
+        if entry["identity"] == "@rapp/ping_agent"
+    )
+    source = primary_skill_dir(record)
+    bundle = tmp_path / source.name
+    shutil.copytree(source, bundle)
+    skill = bundle / "SKILL.md"
+    skill.write_bytes(skill.read_bytes() + b"\n<!-- mutation -->\n")
+
+    run = subprocess.run(
+        [sys.executable, str(bundle / "scripts" / "run_agent.py"), "--preflight"],
+        cwd=bundle,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert run.returncode == 3
+    assert "RAPP_UNAVAILABLE:skill-" in run.stderr
+
+
 def test_runner_awaits_async_agent_perform():
     record = next(
         entry
@@ -457,6 +634,21 @@ def test_rapp_skill_hotloads_verifies_replaces_and_removes(
     assert installed["status"] == "ok"
     target = skills_dir / record["skill_name"]
     assert (target / ".rar-managed.json").is_file()
+    marker = json.loads((target / ".rar-managed.json").read_text())
+    assert marker["rappid"] == record["rappid"]
+    assert marker["default_artifact"] == "skill"
+    assert marker["grail_record"] == "SKILL.md"
+    assert marker["backup_agent"] == record["backup_agent"]
+
+    listed = json.loads(agent.perform(
+        operation="list",
+        agent=record["identity"],
+        catalog_url=str(catalog),
+    ))
+    [summary] = listed["skills"]
+    assert summary["rappid"] == record["rappid"]
+    assert summary["default_artifact"] == "skill"
+    assert summary["grail_record"] == "SKILL.md"
 
     verified = json.loads(agent.perform(
         operation="verify",
@@ -635,6 +827,14 @@ def test_manual_export_writes_verified_cross_platform_html_package(tmp_path):
     assert "pac copilot push" in guide
     assert record["identity"] in guide
     assert record["source_sha256"] in guide
+    assert "primary Grail record" in guide
+    export_manifest = json.loads(
+        (output / "rapp-export.json").read_text()
+    )
+    assert export_manifest["rappid"] == record["rappid"]
+    assert export_manifest["default_artifact"] == "skill"
+    assert export_manifest["grail_record"] == "SKILL.md"
+    assert export_manifest["backup_agent"] == record["backup_agent"]
 
     skill_dir = output / "skill" / record["skill_name"]
     assert not (skill_dir / ".rar-managed.json").exists()

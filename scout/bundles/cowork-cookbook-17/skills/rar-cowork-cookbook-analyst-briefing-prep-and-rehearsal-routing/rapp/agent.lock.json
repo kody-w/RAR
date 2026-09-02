@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing",
+  "agent_bytes": 10454,
   "agent_file": "analyst_briefing_prep_and_rehearsal_routing_agent.py",
   "agent_sha256": "8413801950006c8334bc6c08e142f18cac6ff0402eb0858fc3d65ab1ec33d313",
+  "backup_agent": "analyst_briefing_prep_and_rehearsal_routing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AnalystBriefingPrepAndRehearsalRouting",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/analyst-briefing-prep-and-rehearsal-routing:0e88817d9b8474947a61e5abe1f9b7b2b3e1d45de269404eef24aeaa07427380",
+  "rollback_agent_retained": true,
   "runtime_name": "AnalystBriefingPrepAndRehearsalRouting",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24443,
+  "skill_sha256": "71d36c875e22078ad718a7179ff6bc31f0ad369ff0f514f8b451db2dfb87ec8b",
   "tool_schema": {
     "properties": {
       "operation": {

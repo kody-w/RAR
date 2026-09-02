@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp_god_forum_singleton",
+  "agent_bytes": 10823,
   "agent_file": "forum_agent.py",
   "agent_sha256": "b5a98826f4698b0082dc1c5164af0ed4441f64be9bd2571b505f859ce8a08f04",
+  "backup_agent": "forum_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ForumAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-god-forum-singleton:6f1475e412ad51f8539b08604c4d301eba71c13b0648bb6e2d7d140f9c7a085d",
+  "rollback_agent_retained": true,
   "runtime_name": "ForumAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 26011,
+  "skill_sha256": "891c4bb349a286f9d7e115177d1d9b28e6cba0c2c2d866c1c832c1aed316e430",
   "tool_schema": {
     "properties": {
       "action": {

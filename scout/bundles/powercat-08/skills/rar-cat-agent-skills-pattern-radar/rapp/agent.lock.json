@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/pattern_radar",
+  "agent_bytes": 9196,
   "agent_file": "pattern_radar_agent.py",
   "agent_sha256": "5ab75e34a67a13fa24db57751e922a5b329554145596e626e4e324b6feb31aac",
+  "backup_agent": "pattern_radar_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PatternRadar",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Srinivas Varukala",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/pattern-radar:445e91fd54a6e07515eb790232bbd3e67c034a8576c769f1003d11fc40c8e998",
+  "rollback_agent_retained": true,
   "runtime_name": "PatternRadar",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22287,
+  "skill_sha256": "5e7bcadb4f38488b3eba91ba6c08ae557144ee8e1d62dc8c9ba8e2888fba6b7d",
   "tool_schema": {
     "properties": {
       "audience": {

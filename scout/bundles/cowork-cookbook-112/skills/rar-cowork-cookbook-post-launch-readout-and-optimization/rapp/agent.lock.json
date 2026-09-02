@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/post_launch_readout_and_optimization",
+  "agent_bytes": 10510,
   "agent_file": "post_launch_readout_and_optimization_agent.py",
   "agent_sha256": "2014529f4b23606dc04e303068e6dc0ac3ada61aedbf504962090208f4534eef",
+  "backup_agent": "post_launch_readout_and_optimization_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PostLaunchReadoutAndOptimization",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/post-launch-readout-and-optimization:8d723b8d4b66cc540c46de18befcb887fd342fd64f72378d7cef16706a599ce1",
+  "rollback_agent_retained": true,
   "runtime_name": "PostLaunchReadoutAndOptimization",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24587,
+  "skill_sha256": "31adcb6cd08f5ca14aed590ed834eac4f409201c782a6f28f67f205b0728c3e8",
   "tool_schema": {
     "properties": {
       "operation": {

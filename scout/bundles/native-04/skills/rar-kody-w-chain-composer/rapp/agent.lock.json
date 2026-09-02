@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/chain_composer_agent",
+  "agent_bytes": 17302,
   "agent_file": "chain_composer_agent.py",
   "agent_sha256": "5c3eec3b482e9a812b963cfb7570175ec73fe1cec384269a9c9a0a9866347d18",
+  "backup_agent": "chain_composer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ChainComposerAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/chain-composer:3f909e9d31339c8c53bc4d87eec18b55a30fc249aa47889e2610cced0edf0e06",
+  "rollback_agent_retained": true,
   "runtime_name": "ChainComposer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 37859,
+  "skill_sha256": "4cb859750641b7b61915484ded435ec62aad7a8b9817bdbed96ee94e049a701d",
   "tool_schema": {
     "properties": {},
     "required": [],

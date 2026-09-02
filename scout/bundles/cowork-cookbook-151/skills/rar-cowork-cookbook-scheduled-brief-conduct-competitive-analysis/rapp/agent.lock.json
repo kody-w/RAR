@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_conduct_competitive_analysis",
+  "agent_bytes": 10749,
   "agent_file": "scheduled_brief_conduct_competitive_analysis_agent.py",
   "agent_sha256": "a1d796d255edb706c13b4eca2bdd09971cfd9ec0c5b35001a1a39c51f1beb663",
+  "backup_agent": "scheduled_brief_conduct_competitive_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefConductCompetitiveAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-conduct-competitive-analysis:315ba171eb329fa1e31e1b7bfdb66e98d97aa4bd81e0e598f2c07a44afca1bdf",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefConductCompetitiveAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24933,
+  "skill_sha256": "030a5f02904ff99f285aef7d33093d1044b0a76363014802117886cf2c2cf134",
   "tool_schema": {
     "properties": {
       "operation": {

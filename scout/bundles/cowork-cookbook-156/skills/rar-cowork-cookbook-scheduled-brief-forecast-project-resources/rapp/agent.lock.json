@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_forecast_project_resources",
+  "agent_bytes": 10708,
   "agent_file": "scheduled_brief_forecast_project_resources_agent.py",
   "agent_sha256": "c09a5a73244a571a46e0eade0b7e9f102f792f5576b82005c3cc99dd7ae05b16",
+  "backup_agent": "scheduled_brief_forecast_project_resources_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefForecastProjectResources",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-forecast-project-resources:5e11988d641649bc16106f5e915385a5abd128cae39f1169399368da096a6426",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefForecastProjectResources",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24830,
+  "skill_sha256": "8c6ec81c6a0445a779b9547c91f496976b9451ce0e3c45ee72183bb9a176d931",
   "tool_schema": {
     "properties": {
       "operation": {

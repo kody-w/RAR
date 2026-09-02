@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_track_campaign_expenses",
+  "agent_bytes": 10526,
   "agent_file": "demo_data_track_campaign_expenses_agent.py",
   "agent_sha256": "d703e6102687d31fefa5c588c9398170532767bc4417c3a37e7f6aa6516a41fd",
+  "backup_agent": "demo_data_track_campaign_expenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataTrackCampaignExpenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-track-campaign-expenses:e24ae629e3562c6ed8c0c9204df87788e3b4c0c5ec55157e84ed186ce1192f25",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataTrackCampaignExpenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24505,
+  "skill_sha256": "195fa490ddc8ebcf4c4b9969cb4347ce11407fb742c9ef9fc49a9871304ab2de",
   "tool_schema": {
     "properties": {
       "operation": {

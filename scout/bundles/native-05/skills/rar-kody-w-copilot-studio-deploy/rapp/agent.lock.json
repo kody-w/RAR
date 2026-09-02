@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/copilot_studio_deploy_agent",
+  "agent_bytes": 453476,
   "agent_file": "copilot_studio_deploy_agent.py",
   "agent_sha256": "837ba4ee8c900514f8e5951e1a230663ba5120a8cc7a62d549391e720b21a05f",
+  "backup_agent": "copilot_studio_deploy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioDeployAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -37,8 +40,16 @@
     ],
     "version": "1.2.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/copilot-studio-deploy:95bcc5268effdcac09f0aa159f88af5bb9b68c320b76c9cde1957d2cef2d3e63",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotStudioDeploy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 768689,
+  "skill_sha256": "79a329528abed1a5b7d7b381e3df5e4b73e3743553656f4e069acc381b59092e",
   "tool_schema": {
     "properties": {
       "action": {

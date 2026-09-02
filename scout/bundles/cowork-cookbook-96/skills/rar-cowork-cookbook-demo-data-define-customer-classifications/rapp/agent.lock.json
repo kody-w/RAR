@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_define_customer_classifications",
+  "agent_bytes": 10610,
   "agent_file": "demo_data_define_customer_classifications_agent.py",
   "agent_sha256": "86daf0e1799b3a45f367fc9d833c6d66c07015430de796f47a2e5e90f80a891c",
+  "backup_agent": "demo_data_define_customer_classifications_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDefineCustomerClassifications",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-define-customer-classifications:f3ea8f78c2a3d8f25d49da93d2566806dfb9c5a03af6d036a04d39438a5666d6",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDefineCustomerClassifications",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24717,
+  "skill_sha256": "e956fa906039ca21202f2cbafecc659008a404a61ebeb4ab4979b3bfb65dc67d",
   "tool_schema": {
     "properties": {
       "operation": {

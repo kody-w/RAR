@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale",
+  "agent_bytes": 10187,
   "agent_file": "analyze_and_optimize_your_onedrive_at_scale_agent.py",
   "agent_sha256": "cde6df9da0973b3b0e0482eddcd4521ca5b1e33a1d3701ec7ff0cd552170fd14",
+  "backup_agent": "analyze_and_optimize_your_onedrive_at_scale_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AnalyzeAndOptimizeYourOnedriveAtScale",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -73,8 +76,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/analyze-and-optimize-your-onedrive-at-scale:f5ab595c48cfe56cd428c3bc62fd10d4a409e5d1d8432d1106afdf001457817d",
+  "rollback_agent_retained": true,
   "runtime_name": "AnalyzeAndOptimizeYourOnedriveAtScale",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24004,
+  "skill_sha256": "b80d67132b79e7ed36317ddbfa2d297083dd3e87dc07f7118fd5e88e0ff1e05e",
   "tool_schema": {
     "properties": {
       "data_source": {

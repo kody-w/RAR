@@ -3,10 +3,11 @@
   "id": "kody-w__install_rappter_distro_agent",
   "name": "Install Rappter Distro",
   "rar_name": "@kody-w/install_rappter_distro_agent",
-  "rappid": "rappid:@kody-w/install_rappter_distro_agent:0c0cd7dd5b04e37f33c9aa1a786987bf416c726ab9f3862f0408029141ead8e8",
-  "_migrated_from": "rappid:@kody-w/install_rappter_distro_agent:efc1fa81b7573e43c21f6b1a16a0ccefc2bcc0c35d85b9397cdb5992fc84773b",
+  "rappid": "rappid:@kody-w/install-rappter-distro:d3742eab0bbede4c8b141638baed48fe9bf150b8f68bc2da4c505433be9d8474",
+  "_migrated_from": "rappid:@kody-w/install_rappter_distro_agent:0c0cd7dd5b04e37f33c9aa1a786987bf416c726ab9f3862f0408029141ead8e8",
   "_migrated_from_all": [
-    "rappid:@kody-w/install_rappter_distro_agent:efc1fa81b7573e43c21f6b1a16a0ccefc2bcc0c35d85b9397cdb5992fc84773b"
+    "rappid:@kody-w/install_rappter_distro_agent:efc1fa81b7573e43c21f6b1a16a0ccefc2bcc0c35d85b9397cdb5992fc84773b",
+    "rappid:@kody-w/install_rappter_distro_agent:0c0cd7dd5b04e37f33c9aa1a786987bf416c726ab9f3862f0408029141ead8e8"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -31,9 +32,18 @@
   "sha256": "15ee1708f83dc55022bdf74d625b6b443d59f73371cd2f4c68100651c8f001d2",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-install-rappter-distro",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__install_rappter_distro_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/install_rappter_distro_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/install_rappter_distro_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-install-rappter-distro/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-install-rappter-distro/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__install_rappter_distro_agent.py",
   "api_card_url": null,

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_assess_software_releases",
+  "agent_bytes": 10829,
   "agent_file": "configure_assess_software_releases_agent.py",
   "agent_sha256": "dd39638bf65b3e3ef81af376dc14cedf6b102d1734ca1e4d0e6806c6b8fc7cdf",
+  "backup_agent": "configure_assess_software_releases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureAssessSoftwareReleases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-assess-software-releases:2113a9668b9678d44307d0ae1942912cb9fa1cc962d20b11ec5e802860989ed4",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureAssessSoftwareReleases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24892,
+  "skill_sha256": "641c561a812477c82062006f134cd3770d6a6feaed58b65862aed964d7ca658e",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_analyze_accounts_receivable",
+  "agent_bytes": 10672,
   "agent_file": "dashboard_analyze_accounts_receivable_agent.py",
   "agent_sha256": "f2884838154a21074b09f6ba2c172eb72666d7a9079ba04002d526190f2dace1",
+  "backup_agent": "dashboard_analyze_accounts_receivable_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardAnalyzeAccountsReceivable",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-analyze-accounts-receivable:accb43c9578d94a29c93b2c2042fc61feba4a216577ef862c9bbc28e14311993",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardAnalyzeAccountsReceivable",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24788,
+  "skill_sha256": "2a41ca25d2661b76b4e7baa6f533f91d7f5324cc55d834fb5463b6273693df35",
   "tool_schema": {
     "properties": {
       "operation": {

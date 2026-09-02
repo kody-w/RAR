@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_verify_employment",
+  "agent_bytes": 10596,
   "agent_file": "scheduled_brief_verify_employment_agent.py",
   "agent_sha256": "e780eb8d83643d392024f76c74d3b835ecc401fa66806816748cce8b431abd80",
+  "backup_agent": "scheduled_brief_verify_employment_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefVerifyEmployment",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-verify-employment:d7057760b552024aef8df43a08f5ac0f08945cb6f5eadb6143a6bf41929a008f",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefVerifyEmployment",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24556,
+  "skill_sha256": "94207642e5c8b24d14af35043729a5cd3ed58e7112fbcd86374f66ee6b4121a1",
   "tool_schema": {
     "properties": {
       "operation": {

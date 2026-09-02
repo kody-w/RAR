@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_subcontract_project_components",
+  "agent_bytes": 10888,
   "agent_file": "configure_subcontract_project_components_agent.py",
   "agent_sha256": "bc962d353717e50bad9485a5656b70bfd671135264065d1b709b0a879840c513",
+  "backup_agent": "configure_subcontract_project_components_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureSubcontractProjectComponents",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-subcontract-project-components:51db06ee3d78c93c39c8a5c9e4c9637655afefbaed508f530b7ed619b79f9926",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureSubcontractProjectComponents",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25033,
+  "skill_sha256": "3fa2bc611837792437588db67a5a381a649383a9e5040e92dcb7d81cdce849f2",
   "tool_schema": {
     "properties": {
       "operation": {

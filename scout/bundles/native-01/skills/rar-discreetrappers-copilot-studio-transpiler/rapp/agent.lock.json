@@ -1,9 +1,12 @@
 {
   "agent": "@discreetRappers/copilot_studio_transpiler_agent",
+  "agent_bytes": 90630,
   "agent_file": "copilot_studio_transpiler_agent.py",
   "agent_sha256": "acccbacba2be5acb4aa7583abb1c85aee291c5205f4d7915d6eeafc579c86934",
+  "backup_agent": "copilot_studio_transpiler_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioTranspilerAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
     "env:AZURE_TENANT_ID",
     "env:COPILOT_STUDIO_CLIENT_ID",
@@ -34,8 +37,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/copilot-studio-transpiler:4e3cd89201ddb2eef403ce09eff5dae26d49e34075d94c9ee0b4f76fe873867f",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotStudioTranspiler",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 125345,
+  "skill_sha256": "78298179994c5984e5be6c69446bda868ac420def7c706f7ca701091dad1075b",
   "tool_schema": {
     "properties": {
       "action": {

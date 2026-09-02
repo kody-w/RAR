@@ -583,9 +583,8 @@ def test_the_builder_refuses_to_write_anywhere_else(bfp, tmp_path, monkeypatch):
     assert not (tmp_path / "elsewhere.json").exists()
 
 
-def test_published_paths_ledger_is_untouched_by_ranking(items):
-    """Ranking never renames a file, so every native install URL must still be
-    the path the ledger froze."""
+def test_published_paths_ledger_is_retained_as_rollback(items):
+    """Skill-first ranking keeps every frozen agent URL as rollback."""
     ledger_path = REPO_ROOT / "state" / "published_paths.json"
     if not ledger_path.exists():
         pytest.skip("published_paths.json not present")
@@ -595,9 +594,13 @@ def test_published_paths_ledger_is_untouched_by_ranking(items):
         (p.get("path") if isinstance(p, dict) else p) for p in paths}
     checked = 0
     for item in items:
-        if item["origin"] != "native" or not item["install"]:
+        if item["origin"] != "native" or not item.get("backup_install"):
             continue
-        rel = item["install"].split("/main/", 1)[-1]
+        if item.get("default_artifact") != "skill":
+            continue
+        assert item["default_artifact"] == "skill"
+        assert item["install"].endswith("/SKILL.md")
+        rel = item["backup_install"].split("/main/", 1)[-1]
         if rel in known:
             checked += 1
     assert checked, "no native install URL matched the published-path ledger"

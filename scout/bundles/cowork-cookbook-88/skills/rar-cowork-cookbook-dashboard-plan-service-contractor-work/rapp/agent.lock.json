@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_plan_service_contractor_work",
+  "agent_bytes": 10684,
   "agent_file": "dashboard_plan_service_contractor_work_agent.py",
   "agent_sha256": "4ccfdfd861dba22ecb679a535ce4ab0be29d3473d2fdf52a969b5bdab9675808",
+  "backup_agent": "dashboard_plan_service_contractor_work_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardPlanServiceContractorWork",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-plan-service-contractor-work:2a98ad7796cbfa622ba71846214dbd32c2533861f970180c96a9da90ea4a035c",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardPlanServiceContractorWork",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24820,
+  "skill_sha256": "867664fde44b9eaa270a06f1cd64ae739a96a8ba8106bdd45a6f26c50b3e4d7a",
   "tool_schema": {
     "properties": {
       "operation": {

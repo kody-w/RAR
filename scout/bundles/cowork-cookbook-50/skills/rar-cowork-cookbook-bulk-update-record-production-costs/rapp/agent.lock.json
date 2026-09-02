@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_record_production_costs",
+  "agent_bytes": 10610,
   "agent_file": "bulk_update_record_production_costs_agent.py",
   "agent_sha256": "368d6cfbc13c88dcd00a6d6b021aa830d15ba7fb4a936214b68382336f070bf7",
+  "backup_agent": "bulk_update_record_production_costs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateRecordProductionCosts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-record-production-costs:ca9e830bd4f2ca5105202afbc4d2fbb60307370456096a85765aaf66e473f3d1",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateRecordProductionCosts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24603,
+  "skill_sha256": "f73ccbfa89e0d007c39476c1f6a5542985421e7a123039bb5752757a5a15c5b3",
   "tool_schema": {
     "properties": {
       "operation": {

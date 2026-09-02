@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/persona_reaction_panel",
+  "agent_bytes": 9562,
   "agent_file": "persona_reaction_panel_agent.py",
   "agent_sha256": "471d20b0f203e9a3937b853274583f5028962fe9de6d1da42222cc2b2771bc33",
+  "backup_agent": "persona_reaction_panel_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PersonaReactionPanel",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Olivia Zhang",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/persona-reaction-panel:90ae0da3532138f9bea4558527e1b60bc6e270dc9d57658ee39d6ddf632e17fe",
+  "rollback_agent_retained": true,
   "runtime_name": "PersonaReactionPanel",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23113,
+  "skill_sha256": "701a971e84633f5417c88a10759678c06cc899be38b9b102921f497eb4419291",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_analyze_and_mitigate_risks",
+  "agent_bytes": 10557,
   "agent_file": "demo_data_analyze_and_mitigate_risks_agent.py",
   "agent_sha256": "5eb1c5e06f064c416ee02de744bbb41e59cbabb54585f1f1c683f6abd3a76691",
+  "backup_agent": "demo_data_analyze_and_mitigate_risks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataAnalyzeAndMitigateRisks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-analyze-and-mitigate-risks:084969280889e6b254f771ca0323d3004c36eeb5bd4cc69b99bd26d55484c00e",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataAnalyzeAndMitigateRisks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24604,
+  "skill_sha256": "b8a2fd78b8051d7c1fb6850d8bfbac0513f760d1f1dfcd7dd20ad3592be6eb73",
   "tool_schema": {
     "properties": {
       "operation": {

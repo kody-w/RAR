@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_order_to_cash_manage_accounts_receivable",
+  "agent_bytes": 10698,
   "agent_file": "d365_order_to_cash_manage_accounts_receivable_agent.py",
   "agent_sha256": "414b1ea1463981b85da652cdb533e5d23a1862d5e59818879500c44d4d96ae77",
+  "backup_agent": "d365_order_to_cash_manage_accounts_receivable_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365OrderToCashManageAccountsReceivable",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-order-to-cash-manage-accounts-receivable:5ad3d9667441e03e784f06ba01c11eae54e027d7888817c84993e0eaef336c47",
+  "rollback_agent_retained": true,
   "runtime_name": "D365OrderToCashManageAccountsReceivable",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24902,
+  "skill_sha256": "047b6501061e99505b5a7e9c3eed4b08f382417f39f5e3b1115d7ba076ee2b0b",
   "tool_schema": {
     "properties": {
       "operation": {

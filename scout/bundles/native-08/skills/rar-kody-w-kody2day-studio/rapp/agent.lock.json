@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/kody2day_studio_agent",
+  "agent_bytes": 17414,
   "agent_file": "kody2day_studio_agent.py",
   "agent_sha256": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9",
+  "backup_agent": "kody2day_studio_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Kody2dayStudio",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -43,8 +46,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/kody2day-studio:8480595cf98f9334aee0fdb2103bfb0eabb0a5324ceba8bcb8ee84dfe4e0cdd7",
+  "rollback_agent_retained": true,
   "runtime_name": "Kody2dayStudio",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 32529,
+  "skill_sha256": "2d670528964a6c4bc592cf58de636b62897f7cc1002175b004566aca6b574e6a",
   "tool_schema": {
     "properties": {},
     "required": [],

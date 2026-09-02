@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_sales_quotations",
+  "agent_bytes": 10680,
   "agent_file": "scheduled_brief_define_sales_quotations_agent.py",
   "agent_sha256": "aee091c88f8fded8b064f60b7bc917e895f2c0ae25c4b4c50f8b28108fca9c31",
+  "backup_agent": "scheduled_brief_define_sales_quotations_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineSalesQuotations",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-sales-quotations:c3a33789136f8ffaab2411cb09c49bf66665175cbdf8f1f50ba74bef397227cc",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineSalesQuotations",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24769,
+  "skill_sha256": "400684c50aa67f7c0505d7f4b0238a5916baeebaf3b7f9c829e473f4c5ce92b1",
   "tool_schema": {
     "properties": {
       "operation": {

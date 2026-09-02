@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_route_loads",
+  "agent_bytes": 10208,
   "agent_file": "report_route_loads_agent.py",
   "agent_sha256": "1a6f99532348de5cfd827f1ade3f1b0e4f9942f46af60714da0e5ba498b49312",
+  "backup_agent": "report_route_loads_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportRouteLoads",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-route-loads:c743107f8a955e114574475860d76eb80b896cc859821a90275ac267c9540b5b",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportRouteLoads",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23800,
+  "skill_sha256": "4dfc079679ec181922f42a2fb40145a649c568199b023e7c8d7e13724c7eaaee",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_plan_aggregate_supply",
+  "agent_bytes": 10507,
   "agent_file": "demo_data_plan_aggregate_supply_agent.py",
   "agent_sha256": "d7086b14b497ff08a65e09c0a6fafe6dda6673037abec220cd9b8f904f633c25",
+  "backup_agent": "demo_data_plan_aggregate_supply_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataPlanAggregateSupply",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-plan-aggregate-supply:bf6d8ba5a6e4b1a71a628c4441f4aaafaf913f51afe867ecc26cce984f3e6191",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataPlanAggregateSupply",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24447,
+  "skill_sha256": "87651e9bcd8a70708d9720c35deae0b2f832dfdd098d335bf65a59dc8c1e6822",
   "tool_schema": {
     "properties": {
       "operation": {

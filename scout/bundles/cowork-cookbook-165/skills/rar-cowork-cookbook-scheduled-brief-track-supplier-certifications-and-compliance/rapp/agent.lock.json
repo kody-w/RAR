@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_track_supplier_certifications_and_compliance",
+  "agent_bytes": 10946,
   "agent_file": "scheduled_brief_track_supplier_certifications_and_compliance_agent.py",
   "agent_sha256": "93fe72dbeec7ab8381dcbb09e66efbeafadc8a14ac13264dee8e3fdbc7eafbcb",
+  "backup_agent": "scheduled_brief_track_supplier_certifications_and_compliance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefTrackSupplierCertificationsAndCompliance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-track-supplier-certifications-and-compliance:0c668f23d0e9e49fd0fd9b4bf75b12c521e2eada50462eeb399556a59ecd17ac",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefTrackSupplierCertificationsAndCompliance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25434,
+  "skill_sha256": "8a4e4138a590be304bc8fac826a9bd8e17462c2417303c4c7109f39b1f6d6d78",
   "tool_schema": {
     "properties": {
       "operation": {

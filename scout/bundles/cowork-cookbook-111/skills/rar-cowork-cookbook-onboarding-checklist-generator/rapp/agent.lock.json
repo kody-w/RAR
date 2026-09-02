@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/onboarding_checklist_generator",
+  "agent_bytes": 10395,
   "agent_file": "onboarding_checklist_generator_agent.py",
   "agent_sha256": "56f1094f7a422ba7a11fd49a38b35c1927625fd05c1d233945eb2343950867e7",
+  "backup_agent": "onboarding_checklist_generator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "OnboardingChecklistGenerator",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -75,8 +78,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/onboarding-checklist-generator:483e0b4d8afcc07088003cfc76b65c9ee95d9dc7401cb3a2a09b6d6eeb5647f4",
+  "rollback_agent_retained": true,
   "runtime_name": "OnboardingChecklistGenerator",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24263,
+  "skill_sha256": "4fd8f8fad1bfa33c21f0563ed6af4ebded6e3ba0da012ca3c14f716ff2c94d74",
   "tool_schema": {
     "properties": {
       "criteria": {

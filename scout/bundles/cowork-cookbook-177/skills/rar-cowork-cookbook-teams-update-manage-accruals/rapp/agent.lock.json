@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_manage_accruals",
+  "agent_bytes": 10539,
   "agent_file": "teams_update_manage_accruals_agent.py",
   "agent_sha256": "0634902fb7ba457eeea18575c68304f36184799511838abc187527876a892d97",
+  "backup_agent": "teams_update_manage_accruals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateManageAccruals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-manage-accruals:9aa05d6ca4ce00cffc5f5af9792c5df16b85599e16fd7ce713a7f861da94f6c2",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateManageAccruals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24431,
+  "skill_sha256": "4f01339874ffdf343598a217dbef725e5ca8c0dee90fd47f810d6191967eccd6",
   "tool_schema": {
     "properties": {
       "operation": {

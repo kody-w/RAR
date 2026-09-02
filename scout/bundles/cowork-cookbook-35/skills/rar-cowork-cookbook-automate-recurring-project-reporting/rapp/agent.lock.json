@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/automate_recurring_project_reporting",
+  "agent_bytes": 10332,
   "agent_file": "automate_recurring_project_reporting_agent.py",
   "agent_sha256": "8ee6baf76060e5b0b1a34acc7a0d672246f08d5acef6c6391a02455bea1ee05e",
+  "backup_agent": "automate_recurring_project_reporting_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AutomateRecurringProjectReporting",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/automate-recurring-project-reporting:922464754c4906c949b493523d2d288cad338b509460f7adadfd9e60fbc94b9e",
+  "rollback_agent_retained": true,
   "runtime_name": "AutomateRecurringProjectReporting",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24291,
+  "skill_sha256": "ee5aa892d77df53687a3d550d476b71bad12b1dcedb91dff54a716685fec3043",
   "tool_schema": {
     "properties": {
       "audience": {

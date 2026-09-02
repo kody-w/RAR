@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_reconcile_ledger_and_subledger",
+  "agent_bytes": 10722,
   "agent_file": "teams_update_reconcile_ledger_and_subledger_agent.py",
   "agent_sha256": "abaadad9fa7fd873c94b46622c766eeb219430b01967ecc0b4564cb290ca966e",
+  "backup_agent": "teams_update_reconcile_ledger_and_subledger_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateReconcileLedgerAndSubledger",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-reconcile-ledger-and-subledger:cf52086d152b08d8bbfeabd4ef79b387d4934452a8f54233a9212b1040085511",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateReconcileLedgerAndSubledger",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24883,
+  "skill_sha256": "163b1b961c092ba43ce91ab3fac8c258245782d200c3d7c39500f06279ba670b",
   "tool_schema": {
     "properties": {
       "operation": {

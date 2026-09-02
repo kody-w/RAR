@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_close_periods",
+  "agent_bytes": 10507,
   "agent_file": "teams_update_close_periods_agent.py",
   "agent_sha256": "b07a7247635b6177c72461409a72f208868b37dca7fc33f8c52dd2bdd7ca6fac",
+  "backup_agent": "teams_update_close_periods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateClosePeriods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-close-periods:efd46f904ba930c67e644e9e7c388f6a84051fda2ed97f13048996654df6c9ec",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateClosePeriods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24345,
+  "skill_sha256": "2d90b3fc343daec78e6cd4b9db2ea2f4862c5e7d9984c42a229b07fc26408ed9",
   "tool_schema": {
     "properties": {
       "operation": {

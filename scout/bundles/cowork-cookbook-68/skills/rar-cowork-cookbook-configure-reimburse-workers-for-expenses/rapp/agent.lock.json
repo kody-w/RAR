@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_reimburse_workers_for_expenses",
+  "agent_bytes": 10882,
   "agent_file": "configure_reimburse_workers_for_expenses_agent.py",
   "agent_sha256": "e256cfe4b94508187e25193d962e2672eb4d49f01910826294f366cb3e3933d5",
+  "backup_agent": "configure_reimburse_workers_for_expenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureReimburseWorkersForExpenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-reimburse-workers-for-expenses:d17fdfee90353fd37887b972e87ea96c16b21bd3d478bb011c329e9018b1e22a",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureReimburseWorkersForExpenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25056,
+  "skill_sha256": "90c9e777e1b4ce121a9a156c0eb1724b348c4e30db331ad1905475b3a8d5eb3a",
   "tool_schema": {
     "properties": {
       "operation": {

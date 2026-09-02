@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_manage_cases_and_requests",
+  "agent_bytes": 10354,
   "agent_file": "report_manage_cases_and_requests_agent.py",
   "agent_sha256": "e2bc1997dc51dd571cdc579b5ac4fa9e8eced7e522ab943bfa000bf293fc87e9",
+  "backup_agent": "report_manage_cases_and_requests_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportManageCasesAndRequests",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-manage-cases-and-requests:62534077f33c585129bb9a4396c415959cd82080c89c6deab43e6d1826ea3575",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportManageCasesAndRequests",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24218,
+  "skill_sha256": "e8a663124a41ed16d0d1565b8f0ba6867d2db3d230b986dffee82e0ea4e0feab",
   "tool_schema": {
     "properties": {
       "audience": {

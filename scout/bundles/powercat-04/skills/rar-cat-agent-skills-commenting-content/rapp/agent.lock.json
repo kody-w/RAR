@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/commenting_content",
+  "agent_bytes": 8877,
   "agent_file": "commenting_content_agent.py",
   "agent_sha256": "187b091fcba2f8fb7bbd54d2846dd5fa025aafe300aaf05cb4e79baa06416c15",
+  "backup_agent": "commenting_content_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommentingContent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "AndrewHessMSFT",
@@ -39,8 +42,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/commenting-content:ce1466220c5933852adffe6a295b574675b93f7fc397d6aa02c47d75cebb7aa6",
+  "rollback_agent_retained": true,
   "runtime_name": "CommentingContent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21368,
+  "skill_sha256": "aa0e9f7595e6f435e7478df80cfab4099adaf1f3e563a4486b80d27643b6006a",
   "tool_schema": {
     "properties": {
       "audience": {

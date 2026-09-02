@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/power_automate_desktop_assessment",
+  "agent_bytes": 9486,
   "agent_file": "power_automate_desktop_assessment_agent.py",
   "agent_sha256": "a002ab6df0f13d216069dc399971ecec085e96ce854ee960de87ac043cd8435a",
+  "backup_agent": "power_automate_desktop_assessment_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerAutomateDesktopAssessment",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Ricardo Calejo",
@@ -42,8 +45,16 @@
     ],
     "version": "2.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/power-automate-desktop-assessment:66a70fddee121a0710d00e3e856648cd1300dd6e6153833f7814a7c638609f35",
+  "rollback_agent_retained": true,
   "runtime_name": "PowerAutomateDesktopAssessment",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22833,
+  "skill_sha256": "c24d97bae70976d4a0b405f9b8351b09bbf8523597909b6db7b7cc481c5c3610",
   "tool_schema": {
     "properties": {
       "criteria": {

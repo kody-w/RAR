@@ -51,6 +51,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = REPO_ROOT / "registry.json"
+SCOUT_CATALOG = REPO_ROOT / "scout" / "catalog" / "catalog.json"
 API_DIR = REPO_ROOT / "api" / "v1"
 AUDIENCE_DIR = API_DIR / "audience"
 MANIFEST = REPO_ROOT / "manifest.json"
@@ -61,6 +62,7 @@ REPO = "RAR"
 RAW_BASE = f"https://raw.githubusercontent.com/{OWNER}/{REPO}/main"
 CDN_BASE = f"https://cdn.jsdelivr.net/gh/{OWNER}/{REPO}@main"
 PAGES_BASE = f"https://{OWNER}.github.io/{REPO}"
+SKILLS_BY_IDENTITY = {}
 
 # Paths this script owns. Anything not listed here is never written.
 OWNED_PATHS = [
@@ -267,6 +269,15 @@ def lean_record(agent: dict, audience: str) -> dict:
     """
     name = agent.get("name", "")
     rel = agent.get("_file", "")
+    skill = SKILLS_BY_IDENTITY.get(name) or {}
+    skill_url = next(
+        (
+            item.get("url")
+            for item in skill.get("files", [])
+            if item.get("path") == "SKILL.md"
+        ),
+        None,
+    )
     return {
         "id": agent_id(name),
         "name": name,
@@ -281,11 +292,20 @@ def lean_record(agent: dict, audience: str) -> dict:
         "audience": audience,
         "requires_env": agent.get("requires_env", []),
         "dependencies": agent.get("dependencies", []),
+        "rappid": skill.get("rappid"),
+        "default_artifact": skill.get("default_artifact", "agent"),
+        "grail_record": skill.get("grail_record"),
+        "skill_name": skill.get("skill_name"),
+        "default_url": skill_url or f"{RAW_BASE}/{rel}",
+        "skill_url": skill_url,
+        "backup_agent_url": f"{RAW_BASE}/{rel}",
+        "materializes": skill.get("materializes") or ["agent"],
         "source": {
             "path": rel,
             "raw": f"{RAW_BASE}/{rel}",
             "cdn": f"{CDN_BASE}/{rel}",
             "sha256": agent.get("_sha256", ""),
+            "role": "rollback-agent",
         },
         "stats": {
             "lines": agent.get("_lines", 0),
@@ -501,6 +521,19 @@ def main() -> int:
     if not agents:
         print("registry.json contains no agents", file=sys.stderr)
         return 1
+    if not SCOUT_CATALOG.exists():
+        print(
+            "Scout catalog not found — run build_scout_exports.py first",
+            file=sys.stderr,
+        )
+        return 1
+    global SKILLS_BY_IDENTITY
+    scout_catalog = json.loads(SCOUT_CATALOG.read_text(encoding="utf-8"))
+    SKILLS_BY_IDENTITY = {
+        item["identity"]: item
+        for item in scout_catalog.get("skills", [])
+        if isinstance(item, dict) and item.get("identity")
+    }
     if not MARKETPLACES.exists():
         print("marketplaces.json not found", file=sys.stderr)
         return 1

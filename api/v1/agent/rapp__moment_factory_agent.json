@@ -3,11 +3,12 @@
   "id": "rapp__moment_factory_agent",
   "name": "MomentFactory",
   "rar_name": "@rapp/moment_factory_agent",
-  "rappid": "rappid:@rapp/moment_factory_agent:8c5ac449441a68d1f61995109dd0a885048eb49e14122f8e58aa5bdf91582cfd",
-  "_migrated_from": "rappid:@rapp/moment_factory_agent:f282fb0b34299ab5ba73722359a1429c088b4ea32ac1d48a743d37b6da6bc306",
+  "rappid": "rappid:@rapp/moment-factory:85a57e72d45a752431792a6be3c39caa9856ea90a20b4acefba5354e8e18bd65",
+  "_migrated_from": "rappid:@rapp/moment_factory_agent:8c5ac449441a68d1f61995109dd0a885048eb49e14122f8e58aa5bdf91582cfd",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/moment_factory_agent:099d6645c9f837609f63b439ead2e4d1",
-    "rappid:@rapp/moment_factory_agent:f282fb0b34299ab5ba73722359a1429c088b4ea32ac1d48a743d37b6da6bc306"
+    "rappid:@rapp/moment_factory_agent:f282fb0b34299ab5ba73722359a1429c088b4ea32ac1d48a743d37b6da6bc306",
+    "rappid:@rapp/moment_factory_agent:8c5ac449441a68d1f61995109dd0a885048eb49e14122f8e58aa5bdf91582cfd"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.1.4",
@@ -32,9 +33,18 @@
   "sha256": "02a5b7154b7bd205223d58d3d61489bfa725ad7218915a0012709fe0d5f1ccf8",
   "has_card": true,
   "added_at": "2026-04-27T21:16:54Z",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-moment-factory",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__moment_factory_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-moment-factory/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-moment-factory/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__moment_factory_agent.py",
   "api_card_url": null,

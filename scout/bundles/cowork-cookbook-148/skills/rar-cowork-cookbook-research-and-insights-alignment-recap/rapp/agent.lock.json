@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/research_and_insights_alignment_recap",
+  "agent_bytes": 10260,
   "agent_file": "research_and_insights_alignment_recap_agent.py",
   "agent_sha256": "4cd5174fe215d81f99321344163b4a2919a99d8b3c6d2a85b710ebf1766643d0",
+  "backup_agent": "research_and_insights_alignment_recap_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ResearchAndInsightsAlignmentRecap",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -75,8 +78,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/research-and-insights-alignment-recap:759058fb3fef2bad05f7dad8c1a2296f25136e603faff956263b51e72ab422e4",
+  "rollback_agent_retained": true,
   "runtime_name": "ResearchAndInsightsAlignmentRecap",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24149,
+  "skill_sha256": "f7a48e50ea92b289b29af7b2f04a6e0478832e3346ea70832ec3f17b4cf9e3c1",
   "tool_schema": {
     "properties": {
       "data_source": {

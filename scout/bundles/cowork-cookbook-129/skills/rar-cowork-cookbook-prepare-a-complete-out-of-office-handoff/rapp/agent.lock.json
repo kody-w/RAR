@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/prepare_a_complete_out_of_office_handoff",
+  "agent_bytes": 9717,
   "agent_file": "prepare_a_complete_out_of_office_handoff_agent.py",
   "agent_sha256": "6d9f56b07253ba06fef4da66d4c4caf1204fe4e4f9b92328b4b18cd24c251842",
+  "backup_agent": "prepare_a_complete_out_of_office_handoff_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PrepareACompleteOutOfOfficeHandoff",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/prepare-a-complete-out-of-office-handoff:cd2a65a64d073587cea2da5ef596fb0e81d596e9264462bed036667f504f6b37",
+  "rollback_agent_retained": true,
   "runtime_name": "PrepareACompleteOutOfOfficeHandoff",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23079,
+  "skill_sha256": "70a7a8fcefd3daaa04182e2da420d6e59c5ca18718235238c36f43dd19c45827",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@rapter/rapp_dogg_agent",
+  "agent_bytes": 41596,
   "agent_file": "rapp_dogg_agent.py",
   "agent_sha256": "bf6bd60cb5c17a940141985ed82be8eac8112213af58fcf1fd80403b1573ff11",
+  "backup_agent": "rapp_dogg_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappDoggAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RapterBox",
@@ -31,8 +34,16 @@
     ],
     "version": "1.0.5"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapter/rapp-dogg:8b5b28c43430e15a934793dd0b24fee11dcc09cf648424be2c555f28864c9ded",
+  "rollback_agent_retained": true,
   "runtime_name": "rapp_dogg",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 78376,
+  "skill_sha256": "9edf9ec2aad7a91c151324e53caedce04232b89c15c6ca0ed9b6938382e26415",
   "tool_schema": {
     "properties": {
       "doing": {

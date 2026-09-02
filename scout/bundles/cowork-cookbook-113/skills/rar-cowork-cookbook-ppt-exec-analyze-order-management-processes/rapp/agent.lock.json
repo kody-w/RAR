@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_analyze_order_management_processes",
+  "agent_bytes": 10727,
   "agent_file": "ppt_exec_analyze_order_management_processes_agent.py",
   "agent_sha256": "0b2198cc34eacfd80afd9d3e53f5f635c3e4ae7f9b2088c18a707a5846fe8095",
+  "backup_agent": "ppt_exec_analyze_order_management_processes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAnalyzeOrderManagementProcesses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-analyze-order-management-processes:6336bc2ba67d04b5271002a62c0caa834300e165f93c8419a86b09fda31e13e0",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecAnalyzeOrderManagementProcesses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24922,
+  "skill_sha256": "2b698d3d5a5a2930d921af827f2c6df8e0d466649cce40f938664b3c47f9b57c",
   "tool_schema": {
     "properties": {
       "operation": {

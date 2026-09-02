@@ -5,6 +5,13 @@
   "id": "ec3879987662a711",
   "lastExecutedAt": null,
   "name": "JSON Doctor",
+  "rapp": {
+    "backup_agent": "json_doctor_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-rapp-json-doctor"
+  },
   "schedule": {
     "days": [
       1,

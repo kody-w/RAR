@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_contract_suppliers_for_services",
+  "agent_bytes": 10728,
   "agent_file": "teams_update_contract_suppliers_for_services_agent.py",
   "agent_sha256": "71d6de08d6a594efe8d5d86af08620ddc6a49c7e2a35aca9ee18853d790bc714",
+  "backup_agent": "teams_update_contract_suppliers_for_services_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateContractSuppliersForServices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-contract-suppliers-for-services:b91c9116baef967191df92bac589026de5e1438e0f341a3d928b5436a12d6ac3",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateContractSuppliersForServices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24897,
+  "skill_sha256": "a788c6ebb66f3a3bbee48b87922ae211dd70d0d5e176be2f4579161969b48735",
   "tool_schema": {
     "properties": {
       "operation": {

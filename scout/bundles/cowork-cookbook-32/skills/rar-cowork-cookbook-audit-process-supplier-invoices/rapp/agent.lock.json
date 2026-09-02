@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_process_supplier_invoices",
+  "agent_bytes": 10659,
   "agent_file": "audit_process_supplier_invoices_agent.py",
   "agent_sha256": "009124bc35ee6e803de149f85c27ff5f933f263b8e7b7a8c968e0f31c0525568",
+  "backup_agent": "audit_process_supplier_invoices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditProcessSupplierInvoices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-process-supplier-invoices:c52a83dedb60d3dcbc662fba6e77e1fe06c5f8bf9e010cd68dbc04f7368facfe",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditProcessSupplierInvoices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24682,
+  "skill_sha256": "f8006be3e4a00a92ed467d9e7cbae36183a0881b7df84365f5ccad7e91986678",
   "tool_schema": {
     "properties": {
       "criteria": {

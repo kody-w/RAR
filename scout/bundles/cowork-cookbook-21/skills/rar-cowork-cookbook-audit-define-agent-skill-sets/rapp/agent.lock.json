@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_define_agent_skill_sets",
+  "agent_bytes": 10662,
   "agent_file": "audit_define_agent_skill_sets_agent.py",
   "agent_sha256": "a2853f82222eb6c3dc6115b53f3226bc7f79595a18230eb4eee02262fe585b36",
+  "backup_agent": "audit_define_agent_skill_sets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineAgentSkillSets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-define-agent-skill-sets:dc38be46560505b288b11917c81ec813abb38f31249cfc9543b0029376a80f77",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDefineAgentSkillSets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24688,
+  "skill_sha256": "02441d67cf2a30036b1a3e02baf5919ede9cbaf70d3966188d7d2821c1d376eb",
   "tool_schema": {
     "properties": {
       "criteria": {

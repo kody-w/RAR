@@ -3,10 +3,11 @@
   "id": "rapp__vibe_builder_agent",
   "name": "VibeBuilder",
   "rar_name": "@rapp/vibe_builder_agent",
-  "rappid": "rappid:@rapp/vibe_builder_agent:73d4e945749ca5c657c1b835f2fae80885897eef2d68be21403cb3bbc71ac87c",
-  "_migrated_from": "rappid:v2:agent:@rapp/vibe_builder_agent:294001aa426d891c7024e0e4fbd7ac6b",
+  "rappid": "rappid:@rapp/vibe-builder:577377816bfe14958ec97d367d8c265b658235afbc4bf80f2b2d66b9de234f8f",
+  "_migrated_from": "rappid:@rapp/vibe_builder_agent:73d4e945749ca5c657c1b835f2fae80885897eef2d68be21403cb3bbc71ac87c",
   "_migrated_from_all": [
-    "rappid:v2:agent:@rapp/vibe_builder_agent:294001aa426d891c7024e0e4fbd7ac6b"
+    "rappid:v2:agent:@rapp/vibe_builder_agent:294001aa426d891c7024e0e4fbd7ac6b",
+    "rappid:@rapp/vibe_builder_agent:73d4e945749ca5c657c1b835f2fae80885897eef2d68be21403cb3bbc71ac87c"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -27,9 +28,18 @@
   "sha256": "8fd77f26eacf4f4f22b7b48c06cc22e0fa76af51c2d20bb21a2194cc16de967f",
   "has_card": true,
   "added_at": "2026-04-27T21:15:33Z",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-vibe-builder",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__vibe_builder_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/vibe_builder_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/vibe_builder_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-vibe-builder/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-vibe-builder/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__vibe_builder_agent.py",
   "api_card_url": null,

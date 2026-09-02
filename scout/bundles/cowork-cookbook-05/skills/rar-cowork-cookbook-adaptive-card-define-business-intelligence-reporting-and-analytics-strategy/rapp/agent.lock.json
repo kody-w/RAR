@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_business_intelligence_reporting_and_analytics_strategy",
+  "agent_bytes": 11146,
   "agent_file": "adaptive_card_define_business_intelligence_reporting_and_analytics_strategy_agent.py",
   "agent_sha256": "68582217014b5587c92fb737a48e8a724992984bdee998e21c373cc5fa42549a",
+  "backup_agent": "adaptive_card_define_business_intelligence_reporting_and_analytics_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineBusinessIntelligenceReportingAndAnalyticsStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-define-business-intelligence-reporting-and-analytics-strategy:83b80024f27b781721aa41957bda912478c32b126c33422dbf51bc09b05d1b07",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDefineBusinessIntelligenceReportingAndAnalyticsStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25978,
+  "skill_sha256": "ac2d768d62b14ca81e2487828ef71870f5bbf06f97d49e84ef0f21dde2177569",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -3,10 +3,11 @@
   "id": "kody-w__double_jump_agent",
   "name": "Double Jump",
   "rar_name": "@kody-w/double_jump_agent",
-  "rappid": "rappid:@kody-w/double_jump_agent:c275da883c8badef0d892e361ae4ef6438434487776579d092c900f1625e6da2",
-  "_migrated_from": "rappid:@kody-w/double_jump_agent:b82907e29dee21f297f664744935305537af6e35d40fcb3bc82b953673e3c67d",
+  "rappid": "rappid:@kody-w/double-jump:8cf4215de61021cf43331e7566fa6260168d7fbecb428c4b3a58fd070b444719",
+  "_migrated_from": "rappid:@kody-w/double_jump_agent:c275da883c8badef0d892e361ae4ef6438434487776579d092c900f1625e6da2",
   "_migrated_from_all": [
-    "rappid:@kody-w/double_jump_agent:b82907e29dee21f297f664744935305537af6e35d40fcb3bc82b953673e3c67d"
+    "rappid:@kody-w/double_jump_agent:b82907e29dee21f297f664744935305537af6e35d40fcb3bc82b953673e3c67d",
+    "rappid:@kody-w/double_jump_agent:c275da883c8badef0d892e361ae4ef6438434487776579d092c900f1625e6da2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -31,9 +32,18 @@
   "sha256": "a85073b79ec0d416a94d596ac455aa393ed33049aa615b267a5f7ff20a004ab3",
   "has_card": true,
   "added_at": "2026-06-20T19:46:03-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-double-jump",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__double_jump_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/double_jump_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/double_jump_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-double-jump/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-double-jump/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__double_jump_agent.py",
   "api_card_url": null,

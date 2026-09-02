@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_develop_loyalty_programs",
+  "agent_bytes": 10540,
   "agent_file": "demo_data_develop_loyalty_programs_agent.py",
   "agent_sha256": "3278be9c760e820a97473196aebab3c3cedf0d92ca7a34274bdb2d441b95d294",
+  "backup_agent": "demo_data_develop_loyalty_programs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDevelopLoyaltyPrograms",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-develop-loyalty-programs:923bbe15ba680037f6c45775830630ce7aca78db79b09ca3d35ffbec3fdd19fb",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDevelopLoyaltyPrograms",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24550,
+  "skill_sha256": "2a17f63bca7a11fe79640602478a86b47a6e95adf4664c94df45edb61b39c306",
   "tool_schema": {
     "properties": {
       "operation": {

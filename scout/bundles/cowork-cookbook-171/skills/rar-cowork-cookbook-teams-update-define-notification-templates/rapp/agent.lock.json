@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_notification_templates",
+  "agent_bytes": 10726,
   "agent_file": "teams_update_define_notification_templates_agent.py",
   "agent_sha256": "e5665b7bc9bd947c9722eb48a52d705f3be268dbbe5b6c6d24d86a041e53f3f3",
+  "backup_agent": "teams_update_define_notification_templates_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineNotificationTemplates",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-notification-templates:e726a86bbf8d8d3685a542c9ab84fbba8a2f7f8201e6db8a22cb2cf29558d645",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineNotificationTemplates",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24861,
+  "skill_sha256": "7e3aafcc66f034beed12a7a585e26af1221f1cdb14b3c637d56a3fc38b2a9569",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/json-doctor",
+  "agent_bytes": 10970,
   "agent_file": "json_doctor_agent.py",
   "agent_sha256": "e532be574326b108ede0dbbd7d3c012cf275c9f2aee51793864c45546938f20e",
+  "backup_agent": "json_doctor_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "JsonDoctorAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "example_call": {
@@ -27,8 +30,16 @@
     "trust": "community",
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/json-doctor:629680009d40e825cdd1e7cd9faadd772cef28f453ab0a613d1cd62e2d3e7a2f",
+  "rollback_agent_retained": true,
   "runtime_name": "JsonDoctor",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25257,
+  "skill_sha256": "913c39a9bf1f2928eaee21b2a6d4a68bc1e64e8942d450899b08248d9287714b",
   "tool_schema": {
     "properties": {
       "action": {

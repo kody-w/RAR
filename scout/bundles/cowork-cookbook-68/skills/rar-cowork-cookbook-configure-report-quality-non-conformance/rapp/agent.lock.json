@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_report_quality_non_conformance",
+  "agent_bytes": 10898,
   "agent_file": "configure_report_quality_non_conformance_agent.py",
   "agent_sha256": "826f8bb290cc75da099919a06b1000d433178e54582a84e8af8c37334108935c",
+  "backup_agent": "configure_report_quality_non_conformance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureReportQualityNonConformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-report-quality-non-conformance:563f68c4935954b2104cdd85787d5d89b35fa16635801558dea308dcaeb7585d",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureReportQualityNonConformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25054,
+  "skill_sha256": "b28e5df6e2f693737462810c386816c8e0f6b6ac7374ba93420355f805cfd56a",
   "tool_schema": {
     "properties": {
       "operation": {

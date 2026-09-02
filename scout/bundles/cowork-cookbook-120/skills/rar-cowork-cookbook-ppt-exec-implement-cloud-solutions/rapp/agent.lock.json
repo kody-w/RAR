@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_implement_cloud_solutions",
+  "agent_bytes": 10631,
   "agent_file": "ppt_exec_implement_cloud_solutions_agent.py",
   "agent_sha256": "4e5ec5fe565f3f04bf769f8d99f5da19d320fb13f888573527982b4c00eca15e",
+  "backup_agent": "ppt_exec_implement_cloud_solutions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecImplementCloudSolutions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-implement-cloud-solutions:a723190dc2a64170919112573fc4aca5e13e2a2f027bff587165683295280ff6",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecImplementCloudSolutions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24639,
+  "skill_sha256": "9735005874c3a4e03c3e6a4f78f90cff04421971727c29268274d1e351769079",
   "tool_schema": {
     "properties": {
       "operation": {

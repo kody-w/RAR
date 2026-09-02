@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_forecast_marketing_campaign_targets",
+  "agent_bytes": 10835,
   "agent_file": "scheduled_brief_forecast_marketing_campaign_targets_agent.py",
   "agent_sha256": "9aa6cc11e8af5a4a50e28fa6b8cca4bbec7266e46522e8e5641fcea7ac1cb0ca",
+  "backup_agent": "scheduled_brief_forecast_marketing_campaign_targets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefForecastMarketingCampaignTargets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-forecast-marketing-campaign-targets:54faaac6b981c2c21bce22bde8ac6e1d8b2e5853fea58b235864b9f86b519675",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefForecastMarketingCampaignTargets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25148,
+  "skill_sha256": "a88062403c24bb3aae6ad0c96f062cff1241f2b935609b1ed2246ed50f6b17eb",
   "tool_schema": {
     "properties": {
       "operation": {

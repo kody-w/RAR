@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_configure_and_maintain_electronically_generated_documents",
+  "agent_bytes": 11249,
   "agent_file": "configure_configure_and_maintain_electronically_generated_documents_agent.py",
   "agent_sha256": "466f1e02bc14b4c0f38847dca78e3eab6ae2b3c2dc813fd6d3c68b8c449fde99",
+  "backup_agent": "configure_configure_and_maintain_electronically_generated_documents_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureConfigureAndMaintainElectronicallyGeneratedDocuments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-configure-and-maintain-electronically-generated-documents:ab36a736d4988f6368bcb9f0dfdc042ed2d5d6e2aad49e85cc37e55c8a36d799",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureConfigureAndMaintainElectronicallyGeneratedDocuments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25927,
+  "skill_sha256": "d8a4f36f8341f4c9e7f487c93e23ad30d2e3a6a2b0a62e674bea6334f57f3e66",
   "tool_schema": {
     "properties": {
       "operation": {

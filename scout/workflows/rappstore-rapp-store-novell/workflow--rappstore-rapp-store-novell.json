@@ -5,6 +5,13 @@
   "id": "1fedb18d5e2a422c",
   "lastExecutedAt": null,
   "name": "Novell",
+  "rapp": {
+    "backup_agent": "novell_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-rapp-store-novell"
+  },
   "schedule": {
     "days": [
       1,

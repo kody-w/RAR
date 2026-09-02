@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_manage_and_implement_encryption",
+  "agent_bytes": 10776,
   "agent_file": "audit_manage_and_implement_encryption_agent.py",
   "agent_sha256": "6e544ebae7531d73140b606e63e4da68ab79e3382434ce9221eda85e945fbba2",
+  "backup_agent": "audit_manage_and_implement_encryption_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditManageAndImplementEncryption",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-manage-and-implement-encryption:80823b1d8e7d82583f7ec28a36f6e8f4af5a2d7d0780074355b726b7f3c7ab80",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditManageAndImplementEncryption",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24949,
+  "skill_sha256": "f6c17f1f0a38b6454078c8016a4087c026073c5215f2d67bb86d7c78ffb1eded",
   "tool_schema": {
     "properties": {
       "criteria": {

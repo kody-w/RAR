@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_request_travel",
+  "agent_bytes": 10674,
   "agent_file": "configure_request_travel_agent.py",
   "agent_sha256": "f2397b52536cb7cbec0b7a9f50e900d26908c5a06522c6f15db2ff5714b00d32",
+  "backup_agent": "configure_request_travel_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureRequestTravel",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-request-travel:d30952ba3aaa40a08b897ca08e5c29f27ee75be786fc0165a00929e797befe91",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureRequestTravel",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24520,
+  "skill_sha256": "fe5f84917a9b04221a828e8fc2549786143a67fdb274c3b1c2d36ec80be6e6d9",
   "tool_schema": {
     "properties": {
       "operation": {

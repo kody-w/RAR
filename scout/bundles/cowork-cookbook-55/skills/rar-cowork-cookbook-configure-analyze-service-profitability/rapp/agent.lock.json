@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_analyze_service_profitability",
+  "agent_bytes": 10883,
   "agent_file": "configure_analyze_service_profitability_agent.py",
   "agent_sha256": "941f62698fa88e7d393f87ac8a217b4a55b58f6681c1cbdb46bc06a7684dcc19",
+  "backup_agent": "configure_analyze_service_profitability_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureAnalyzeServiceProfitability",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-analyze-service-profitability:db401a486c5b3c4d111adb09dd8a5d655513563e8b3cbf5bf7f35b6fbd78c0d6",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureAnalyzeServiceProfitability",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24998,
+  "skill_sha256": "1cb3dd020d26e9495d2b753ff5e557481629cc1c9890d0a61fe254dc8f276969",
   "tool_schema": {
     "properties": {
       "operation": {

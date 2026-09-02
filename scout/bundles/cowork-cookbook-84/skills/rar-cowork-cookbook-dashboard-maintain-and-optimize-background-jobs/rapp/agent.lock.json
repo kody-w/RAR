@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_maintain_and_optimize_background_jobs",
+  "agent_bytes": 10813,
   "agent_file": "dashboard_maintain_and_optimize_background_jobs_agent.py",
   "agent_sha256": "2d492788f73b5b66139dfb9b319c20eb1b20d66a96cabc470bffa42681256947",
+  "backup_agent": "dashboard_maintain_and_optimize_background_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMaintainAndOptimizeBackgroundJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-maintain-and-optimize-background-jobs:cee37b01e858e5045697a90c3eca2611e00ca7ab3eed24420dc385064ea84e5c",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardMaintainAndOptimizeBackgroundJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25151,
+  "skill_sha256": "242956f30aa0d69a8bb5e19996789259c1ec8ab20eb25781eabb2acfe819dd79",
   "tool_schema": {
     "properties": {
       "operation": {

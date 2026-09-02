@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_process_customer_payments",
+  "agent_bytes": 10662,
   "agent_file": "audit_process_customer_payments_agent.py",
   "agent_sha256": "da21d9f3a3ba07c47b45f92b4c992fe465bd748830c2f27f1d289864926149c1",
+  "backup_agent": "audit_process_customer_payments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditProcessCustomerPayments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-process-customer-payments:053e2911aa542ce138d0a1a46dd4f9887880122396aa9e29a8e994508d65773d",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditProcessCustomerPayments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24713,
+  "skill_sha256": "2dedadabe9cb69281f0adcd64667960c28969ea4495000307e4329508a760f85",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_configure_and_manage_copilot_capabilities",
+  "agent_bytes": 10896,
   "agent_file": "audit_configure_and_manage_copilot_capabilities_agent.py",
   "agent_sha256": "18b1883e216fc6fbfe310f4d8ef8f4431a08cb4f7704f7d8707ce584510abc1b",
+  "backup_agent": "audit_configure_and_manage_copilot_capabilities_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditConfigureAndManageCopilotCapabilities",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-configure-and-manage-copilot-capabilities:7d3fea447fb77b788066bb0d32283305c378afd73ec10ecbaa10b3e0ffc7ed23",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditConfigureAndManageCopilotCapabilities",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25267,
+  "skill_sha256": "a720e1508404053899a6c084c73b5290cd8a760a7dec9c731ce8b21719ddccf9",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_identify_applicable_regulations_and_compliance_requirements",
+  "agent_bytes": 11104,
   "agent_file": "teams_update_identify_applicable_regulations_and_compliance_requirements_agent.py",
   "agent_sha256": "a4b893bde7d4ee9d85cd2ff8d4198bd7678fad9bfa5edd26d4bc35acc33d99ed",
+  "backup_agent": "teams_update_identify_applicable_regulations_and_compliance_requirements_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateIdentifyApplicableRegulationsAndComplianceRequirements",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-identify-applicable-regulations-and-compliance-requirements:c915097019fe7ace05b4437610fafb9581e18a15c6e046917b4060ab1ca681fa",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateIdentifyApplicableRegulationsAndComplianceRequirements",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25809,
+  "skill_sha256": "b76b8893d23c3e1f5b31798c8a55722130d49828263728535387c54568220279",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/onboard_a_new_hire_with_a_30_60_90_plan",
+  "agent_bytes": 10329,
   "agent_file": "onboard_a_new_hire_with_a_30_60_90_plan_agent.py",
   "agent_sha256": "96132de281cbd1920cd14db062100b705919cc271dcf5be58dfd0cded2c772fa",
+  "backup_agent": "onboard_a_new_hire_with_a_30_60_90_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "OnboardANewHireWithA306090Plan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/onboard-a-new-hire-with-a-30-60-90-plan:f123a85f5ad61e3c555fada4c5ef26faea18cc285b40e17c064fa0987b04ad12",
+  "rollback_agent_retained": true,
   "runtime_name": "OnboardANewHireWithA306090Plan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24242,
+  "skill_sha256": "67e87ff35b71e79dbdb1ada04f1f0b8f75cd3744ef89ac76f59b9fd38a333c7d",
   "tool_schema": {
     "properties": {
       "constraints": {

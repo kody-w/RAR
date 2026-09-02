@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/sales_order_validation",
+  "agent_bytes": 10502,
   "agent_file": "sales_order_validation_agent.py",
   "agent_sha256": "bb8d0dfd8674a39fa2e8f3b14616b168f209445bdc870d6c54d5cca7015c0e63",
+  "backup_agent": "sales_order_validation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SalesOrderValidation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/sales-order-validation:9827fd485a83dd20616790561fcd6b8f1f076071f251c5cd9c6b4a8ee261cfe7",
+  "rollback_agent_retained": true,
   "runtime_name": "SalesOrderValidation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24367,
+  "skill_sha256": "9cf036557498a7b14c34bd88adf90210f4a150fd612ad0d7f86cf7d93134e4ff",
   "tool_schema": {
     "properties": {
       "criteria": {

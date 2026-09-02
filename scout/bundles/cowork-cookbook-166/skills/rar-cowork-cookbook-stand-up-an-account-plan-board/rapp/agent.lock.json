@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/stand_up_an_account_plan_board",
+  "agent_bytes": 10368,
   "agent_file": "stand_up_an_account_plan_board_agent.py",
   "agent_sha256": "b21eefb05b5ed5f1cb631b5ba79e0c2b8f179c1d0e46b6d1d23b0e49665946d4",
+  "backup_agent": "stand_up_an_account_plan_board_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StandUpAnAccountPlanBoard",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/stand-up-an-account-plan-board:42afed95addd231d2e171e6a78cd199156eb5ab15cc89817aa1ad9fafe818184",
+  "rollback_agent_retained": true,
   "runtime_name": "StandUpAnAccountPlanBoard",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24182,
+  "skill_sha256": "5cef83cb333218cf29d916df76f07a4607b54da723b52f9b7b7dc13b4a34da4c",
   "tool_schema": {
     "properties": {
       "operation": {

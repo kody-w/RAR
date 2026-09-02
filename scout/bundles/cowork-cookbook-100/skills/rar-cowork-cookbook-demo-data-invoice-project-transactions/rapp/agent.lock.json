@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_invoice_project_transactions",
+  "agent_bytes": 10590,
   "agent_file": "demo_data_invoice_project_transactions_agent.py",
   "agent_sha256": "112a1b8c482bb24eecf0d9529e7aa5ad049b3a4a1e75a31033be9f938cdfab26",
+  "backup_agent": "demo_data_invoice_project_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataInvoiceProjectTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-invoice-project-transactions:3b7e8d6e50c471f6d32dcb42a9878d7de3df302f1c60a0b8085100c1fe4e7072",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataInvoiceProjectTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24644,
+  "skill_sha256": "d731e9c9bfef6176cf9852643bcaa3078337e1e290033181ecb60a677d4f6704",
   "tool_schema": {
     "properties": {
       "operation": {

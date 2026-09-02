@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/store_navigator_agent",
+  "agent_bytes": 17005,
   "agent_file": "store_navigator_agent.py",
   "agent_sha256": "d66b3003e0a562b0af69dfa070eae0a4ca6dc97cb53438b9e636c2ffa55214ef",
+  "backup_agent": "store_navigator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StoreNavigatorAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -32,8 +35,16 @@
     ],
     "version": "0.1.4"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/store-navigator:9898dce14de8837f7e6813cbe4368793f00c8dac3fa7b76eeb4e7e35ebdf20ec",
+  "rollback_agent_retained": true,
   "runtime_name": "StoreNavigator",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 32411,
+  "skill_sha256": "de82851747853cab681c52659c12054cc48b163c2407989785e596157086d0db",
   "tool_schema": {
     "properties": {
       "action": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/cowork_use_case_one_pager",
+  "agent_bytes": 9132,
   "agent_file": "cowork_use_case_one_pager_agent.py",
   "agent_sha256": "04d7936c14c1ba540141659716a7bacc34a2cd3fcb057a4625d749fd89492bb7",
+  "backup_agent": "cowork_use_case_one_pager_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CoworkUseCaseOnePager",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Tim Sparks",
@@ -42,8 +45,16 @@
     ],
     "version": "2.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/cowork-use-case-one-pager:73538ada056689315fd6b0810905f5be382d7755b7b70f3f02f8cbd53f7305c4",
+  "rollback_agent_retained": true,
   "runtime_name": "CoworkUseCaseOnePager",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22201,
+  "skill_sha256": "6f8b3f5d1927e278fcf642ca332bb250ae0c7279d9031fb9be847484fbbeca38",
   "tool_schema": {
     "properties": {
       "audience": {

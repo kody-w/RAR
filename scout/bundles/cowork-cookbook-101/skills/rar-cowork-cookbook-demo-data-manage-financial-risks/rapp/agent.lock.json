@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_manage_financial_risks",
+  "agent_bytes": 10509,
   "agent_file": "demo_data_manage_financial_risks_agent.py",
   "agent_sha256": "9f217f8844e605dd8ea205a8cfeb617a5e4b52f410fa5dd719f7a91e0989c966",
+  "backup_agent": "demo_data_manage_financial_risks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataManageFinancialRisks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-manage-financial-risks:c0d569f668aad0c20d6b22f400db26128b53da7b84a971b9de81286996ab99ae",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataManageFinancialRisks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24464,
+  "skill_sha256": "8903f8a0fb6c6578b3b4fa90f85e7f5791cbe8bd8f1fdaeea32b3de61d17f22c",
   "tool_schema": {
     "properties": {
       "operation": {

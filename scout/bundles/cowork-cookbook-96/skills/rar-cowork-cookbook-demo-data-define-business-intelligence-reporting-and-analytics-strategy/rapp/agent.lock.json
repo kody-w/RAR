@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_define_business_intelligence_reporting_and_analytics_strategy",
+  "agent_bytes": 11025,
   "agent_file": "demo_data_define_business_intelligence_reporting_and_analytics_strategy_agent.py",
   "agent_sha256": "d5f65d8d6c0601c8d1eab48203db05a9cb880ed4eaa691c76d9314dead4106f8",
+  "backup_agent": "demo_data_define_business_intelligence_reporting_and_analytics_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDefineBusinessIntelligenceReportingAndAnalyticsStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-define-business-intelligence-reporting-and-analytics-strategy:445efd0dfb557be825b94b40bbc93ca0dc8667cbb99485269467ac53f75c56d8",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDefineBusinessIntelligenceReportingAndAnalyticsStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25752,
+  "skill_sha256": "e247b02db09aaba5a06d2d811a670e2699aa24a4e7e77dfbfad5fd698aecfc73",
   "tool_schema": {
     "properties": {
       "operation": {

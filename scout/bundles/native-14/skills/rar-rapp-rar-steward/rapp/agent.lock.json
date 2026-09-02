@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/rar_steward",
+  "agent_bytes": 23975,
   "agent_file": "rar_steward_agent.py",
   "agent_sha256": "e8cb15fe4f51fefb7c9f05fe3722dc7eccd67ab22beca8398591479d8fcc9e3e",
+  "backup_agent": "rar_steward_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RarStewardAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -28,8 +31,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/rar-steward:40ca915bea4fffbc44d567be9489b8b46cc3c67750800e78911f7c570f6b80f3",
+  "rollback_agent_retained": true,
   "runtime_name": "RarStewardAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 46901,
+  "skill_sha256": "ba95a403acf7829714efd85eefaf3fdb7d2e518b780e9ba9e6550e7c473d8e1e",
   "tool_schema": {
     "properties": {
       "action": {

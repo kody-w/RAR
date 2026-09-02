@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_process_customer_refunds",
+  "agent_bytes": 10622,
   "agent_file": "dashboard_process_customer_refunds_agent.py",
   "agent_sha256": "1605ecd4bbfcc389bd4edde4953e4b4ac4368893e7a032227f64d78f31986b3f",
+  "backup_agent": "dashboard_process_customer_refunds_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardProcessCustomerRefunds",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-process-customer-refunds:5c86258f3f37e4cf767294f1accecb26c61f211c70c78695a442578436d78507",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardProcessCustomerRefunds",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24673,
+  "skill_sha256": "a4c381cdb95920b2b29965f4d511e04c9017fd404d52bdffd06cce12e04c954e",
   "tool_schema": {
     "properties": {
       "operation": {

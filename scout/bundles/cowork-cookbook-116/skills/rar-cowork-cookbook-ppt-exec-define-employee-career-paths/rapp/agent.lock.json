@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_employee_career_paths",
+  "agent_bytes": 10647,
   "agent_file": "ppt_exec_define_employee_career_paths_agent.py",
   "agent_sha256": "4f59c8cca92ff2f498702fb96ef0a65cd149704af8101735808524cacf47c363",
+  "backup_agent": "ppt_exec_define_employee_career_paths_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineEmployeeCareerPaths",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-define-employee-career-paths:02a974410ad37b37ab7c3d5031d4e7b9ecfae502f5046690ce3044c932a94678",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDefineEmployeeCareerPaths",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24749,
+  "skill_sha256": "f72b5fbb32bd82de97f22620f6fca952181006480092d8c02c8cda983fb77b14",
   "tool_schema": {
     "properties": {
       "operation": {

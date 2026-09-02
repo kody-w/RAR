@@ -3,11 +3,12 @@
   "id": "rapp__pitch_deck_agent",
   "name": "PitchDeck",
   "rar_name": "@rapp/pitch_deck_agent",
-  "rappid": "rappid:@rapp/pitch_deck_agent:ac978ad102e2b9609ecc8d98930bec01888b5a5a4be1ddf4e1da6ab0ab559248",
-  "_migrated_from": "rappid:@rapp/pitch_deck_agent:bd041b2e1d13d31c61a12c2cf12ecd279fbfeaacc201a4dd778b194756776671",
+  "rappid": "rappid:@rapp/pitch-deck:2aa8c176e2e04972def961b7ab3b40523e89dfdc491285a75591637ab8a388ce",
+  "_migrated_from": "rappid:@rapp/pitch_deck_agent:ac978ad102e2b9609ecc8d98930bec01888b5a5a4be1ddf4e1da6ab0ab559248",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/pitch_deck_agent:7882b22bae29b0092079a7568dcfc13a",
-    "rappid:@rapp/pitch_deck_agent:bd041b2e1d13d31c61a12c2cf12ecd279fbfeaacc201a4dd778b194756776671"
+    "rappid:@rapp/pitch_deck_agent:bd041b2e1d13d31c61a12c2cf12ecd279fbfeaacc201a4dd778b194756776671",
+    "rappid:@rapp/pitch_deck_agent:ac978ad102e2b9609ecc8d98930bec01888b5a5a4be1ddf4e1da6ab0ab559248"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -33,9 +34,18 @@
   "sha256": "ca3c2f325342769f9d799ccb0fc0cd41a23f90d2e6ddfb1dcb7c79d7bdd78145",
   "has_card": true,
   "added_at": "2026-04-27T21:24:10Z",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-pitch-deck",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__pitch_deck_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/pitch_deck_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/pitch_deck_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-pitch-deck/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-pitch-deck/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__pitch_deck_agent.py",
   "api_card_url": null,

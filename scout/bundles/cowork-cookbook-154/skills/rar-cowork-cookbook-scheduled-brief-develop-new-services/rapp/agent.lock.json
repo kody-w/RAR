@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_develop_new_services",
+  "agent_bytes": 10641,
   "agent_file": "scheduled_brief_develop_new_services_agent.py",
   "agent_sha256": "5fb45ad2fb32a90128021cd56f28b661c1501422e4b8cce72727f7e77ebb9d02",
+  "backup_agent": "scheduled_brief_develop_new_services_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDevelopNewServices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-develop-new-services:b09d59df056911239ee35187c82c853c03336efaa170df0bf0f86d443e55e127",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDevelopNewServices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24697,
+  "skill_sha256": "f4b625be0eda8df682153810c10cee2249b7eb1924a37089b20504fe6dacda88",
   "tool_schema": {
     "properties": {
       "operation": {

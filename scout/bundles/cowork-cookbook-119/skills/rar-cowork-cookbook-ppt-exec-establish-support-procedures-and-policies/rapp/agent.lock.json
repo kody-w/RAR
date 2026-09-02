@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_establish_support_procedures_and_policies",
+  "agent_bytes": 10829,
   "agent_file": "ppt_exec_establish_support_procedures_and_policies_agent.py",
   "agent_sha256": "1f4c511827a033fec13155ed0fe33a92310bb8d653b5713b8257ac8aef452c20",
+  "backup_agent": "ppt_exec_establish_support_procedures_and_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecEstablishSupportProceduresAndPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-establish-support-procedures-and-policies:b6756a66e21b2fc0d1637e9032dc0780f762ba95ed6c370748af9acc3d5628f3",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecEstablishSupportProceduresAndPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25173,
+  "skill_sha256": "7aa50601558f23d877d419465d44255a81171876d6e3e3984dbad583b9ea4ad1",
   "tool_schema": {
     "properties": {
       "operation": {

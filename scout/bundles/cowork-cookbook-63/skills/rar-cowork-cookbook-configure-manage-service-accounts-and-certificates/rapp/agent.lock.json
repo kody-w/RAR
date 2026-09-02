@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_manage_service_accounts_and_certificates",
+  "agent_bytes": 11038,
   "agent_file": "configure_manage_service_accounts_and_certificates_agent.py",
   "agent_sha256": "ca087ca83d343da1fab0f43cdc5ab92e91c36fdddb7c01e1b8fbbc49bb37beaa",
+  "backup_agent": "configure_manage_service_accounts_and_certificates_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageServiceAccountsAndCertificates",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-manage-service-accounts-and-certificates:19920de55730c2a27a13e9a3f0ab101f5fdf3a47381c751edd4aa52ff1a47119",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureManageServiceAccountsAndCertificates",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25437,
+  "skill_sha256": "9585ee5cde895ed7243da2343c2e4a2b639a1a282e35f5d870401b1237e79f23",
   "tool_schema": {
     "properties": {
       "operation": {

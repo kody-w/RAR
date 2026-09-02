@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bom_completeness_audit",
+  "agent_bytes": 10465,
   "agent_file": "bom_completeness_audit_agent.py",
   "agent_sha256": "1391ef31c56ca86c0f6d4198c1ec90b6cbf7e21b8a9acff91d6223765a9d24e8",
+  "backup_agent": "bom_completeness_audit_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BomCompletenessAudit",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bom-completeness-audit:b1a8226125e402170d3c9b046af5fcc3698a29e34f941193a27a6286f455d159",
+  "rollback_agent_retained": true,
   "runtime_name": "BomCompletenessAudit",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24290,
+  "skill_sha256": "4dc698d723267bf42d9cd4aaabdee2df8c8b3b3f2e8312b65605ea02679d9113",
   "tool_schema": {
     "properties": {
       "criteria": {

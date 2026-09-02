@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_identify_critical_system_and_data",
+  "agent_bytes": 10741,
   "agent_file": "ppt_exec_identify_critical_system_and_data_agent.py",
   "agent_sha256": "2ddd2f432920e4af66d41b5b3862ef909d45079f254746570a6a9a01f04bdfa3",
+  "backup_agent": "ppt_exec_identify_critical_system_and_data_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecIdentifyCriticalSystemAndData",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-identify-critical-system-and-data:3c64928c159927d159b6148f467f3520a5056dc74a9837f82371c6a2d103fba0",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecIdentifyCriticalSystemAndData",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24965,
+  "skill_sha256": "c83b7d09b82151a71bf4408a4001568fc7cd1aafb70d036f032009090e4fb04e",
   "tool_schema": {
     "properties": {
       "operation": {

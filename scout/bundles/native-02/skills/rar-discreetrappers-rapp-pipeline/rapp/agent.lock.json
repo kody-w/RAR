@@ -1,14 +1,17 @@
 {
   "agent": "@discreetRappers/rapp_pipeline_agent",
+  "agent_bytes": 124478,
   "agent_file": "rapp_pipeline_agent.py",
   "agent_sha256": "feb4bd1dfa316f9aaa83bea4e4c220084794d1207ebee2ba4c3d823aa6bc7b44",
+  "backup_agent": "rapp_pipeline_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RAPPAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
+    "brainstem:utils.storage_factory",
     "env:AZURE_OPENAI_API_VERSION",
     "env:AZURE_OPENAI_DEPLOYMENT_NAME",
-    "env:AZURE_OPENAI_ENDPOINT",
-    "utils.storage_factory"
+    "env:AZURE_OPENAI_ENDPOINT"
   ],
   "manifest": {
     "author": "Bill Whalen",
@@ -35,8 +38,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/rapp-pipeline:20fe30927ecc5b0a83a316260132127f82dadbdbf8ad8e1c6b3af0ad79f1edee",
+  "rollback_agent_retained": true,
   "runtime_name": "RAPP",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 175168,
+  "skill_sha256": "3fa1eef1de208033ca1e17f4d40fb8c58f618e2bede21e3a406856b363d3f965",
   "tool_schema": {
     "properties": {
       "action": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_review_call_center_performance",
+  "agent_bytes": 10727,
   "agent_file": "adaptive_card_review_call_center_performance_agent.py",
   "agent_sha256": "45c5494595505e7094398d16269f753dae31d88221ec70f012c5b620b0c658b6",
+  "backup_agent": "adaptive_card_review_call_center_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardReviewCallCenterPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-review-call-center-performance:843c479dc3f7f3a6ceb79f0893a999fe475a8cd6d46d2afb7d060e35a35042fa",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardReviewCallCenterPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24937,
+  "skill_sha256": "c3dc2b1a2f0a9c3f8a21e07f360dbf8596a2fd39b18a9610f2b4783b072ab0f5",
   "tool_schema": {
     "properties": {
       "operation": {

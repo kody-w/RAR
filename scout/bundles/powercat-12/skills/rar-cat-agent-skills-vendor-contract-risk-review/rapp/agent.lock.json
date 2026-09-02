@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/vendor_contract_risk_review",
+  "agent_bytes": 9610,
   "agent_file": "vendor_contract_risk_review_agent.py",
   "agent_sha256": "b83fe34b7b87dcbf87a736131abad982e5fe477b0823a4204428b09fb1750590",
+  "backup_agent": "vendor_contract_risk_review_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VendorContractRiskReview",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Tim Karlsson",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/vendor-contract-risk-review:753ee07346ea4397a415bd80a9745e3e6175bc45fdfbd895213995ac51a986be",
+  "rollback_agent_retained": true,
   "runtime_name": "VendorContractRiskReview",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23208,
+  "skill_sha256": "d833007cd4db8aedadb2289e7a9bb8e4e34cc631daae4388923a0f95db16414c",
   "tool_schema": {
     "properties": {
       "criteria": {

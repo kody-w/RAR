@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_manage_organizational_structure",
+  "agent_bytes": 10751,
   "agent_file": "teams_update_manage_organizational_structure_agent.py",
   "agent_sha256": "5ef35c18f3c33095313bd60e00b1fc109dfe966a243f8bb67e173f508991214b",
+  "backup_agent": "teams_update_manage_organizational_structure_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateManageOrganizationalStructure",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-manage-organizational-structure:bae98b50a41a1bd1471772be2d517b4bb297cb6fa1f481742282bfcc54e919ac",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateManageOrganizationalStructure",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24924,
+  "skill_sha256": "78432f4336621de5ee787312ac0900138f91c0ae39236daf13ceb65550ea821f",
   "tool_schema": {
     "properties": {
       "operation": {

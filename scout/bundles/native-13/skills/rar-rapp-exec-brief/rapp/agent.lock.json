@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/exec_brief_agent",
+  "agent_bytes": 27830,
   "agent_file": "exec_brief_agent.py",
   "agent_sha256": "b43fbf2ac29f381c41c6cd7e2a247ffb7a6143c579e095c4ab2d961bf26ef45d",
+  "backup_agent": "exec_brief_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ExecBrief",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "@rapp",
@@ -32,8 +35,16 @@
     ],
     "version": "1.2.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/exec-brief:1b4b08e8ec745ef486f00241dcd823712a969f023ec5c7354d87dd9b93a7831e",
+  "rollback_agent_retained": true,
   "runtime_name": "ExecBrief",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 49481,
+  "skill_sha256": "2b2f92b63e88d87d3d515d504f14c2b03f1f7d5c51d2009b14009b2269f7f34b",
   "tool_schema": {
     "properties": {
       "topic": {

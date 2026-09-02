@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_produce_project_materials",
+  "agent_bytes": 10549,
   "agent_file": "demo_data_produce_project_materials_agent.py",
   "agent_sha256": "56e09629c17989e221ad9c2aa270bcffed01f38122d14691dae388918edad4b3",
+  "backup_agent": "demo_data_produce_project_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataProduceProjectMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-produce-project-materials:73bd5c079ead9430e10ee226b718998367ea2b4d3744af1d8c4eee4b7a2adc79",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataProduceProjectMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24542,
+  "skill_sha256": "57becb4533b34dbf0f80a4c93514e4a2147c1bad1fdb4b0555d9c5eb1e8a0331",
   "tool_schema": {
     "properties": {
       "operation": {

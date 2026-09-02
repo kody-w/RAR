@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_schedule_dock_appointments",
+  "agent_bytes": 10710,
   "agent_file": "adaptive_card_schedule_dock_appointments_agent.py",
   "agent_sha256": "feb48a9df779b1fd71b814174f2164408a172eef1b9b5486f3faff3978562aca",
+  "backup_agent": "adaptive_card_schedule_dock_appointments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardScheduleDockAppointments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-schedule-dock-appointments:35035c6daf8ff32423f02bd806d4e30e7f21144ebdb5cbe69253265305fb619c",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardScheduleDockAppointments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24858,
+  "skill_sha256": "dbb07398112083251ac74cfed1127b9f7a26b577bdf12b53a7094fc70692846f",
   "tool_schema": {
     "properties": {
       "operation": {

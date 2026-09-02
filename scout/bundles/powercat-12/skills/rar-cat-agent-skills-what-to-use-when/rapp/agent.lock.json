@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/what_to_use_when",
+  "agent_bytes": 9208,
   "agent_file": "what_to_use_when_agent.py",
   "agent_sha256": "ad03b72ad9729dff9de3030e89da9b9ec4e10c326d6a8685d0557e30f5eafacf",
+  "backup_agent": "what_to_use_when_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WhatToUseWhen",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Gaurav Mahajan",
@@ -40,8 +43,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/what-to-use-when:d784aee25a3988be04119c8bbc898ce3d64262eee64a576d2a1ea2e245d1056b",
+  "rollback_agent_retained": true,
   "runtime_name": "WhatToUseWhen",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22138,
+  "skill_sha256": "8c0c6242974eedd2ea6a63ba85bda84305a57168cc618297990428f4a626addb",
   "tool_schema": {
     "properties": {
       "operation": {

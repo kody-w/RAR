@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_service_workflows",
+  "agent_bytes": 10646,
   "agent_file": "teams_update_define_service_workflows_agent.py",
   "agent_sha256": "a2d15774f1516abd0ccfbd96a9aad2cab9e2f75d042794f7831cf8c64221efaf",
+  "backup_agent": "teams_update_define_service_workflows_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineServiceWorkflows",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-service-workflows:0014207c2a1aace14f00fb3407260a657a74d3d81d92ec658027461eadbb3c1d",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineServiceWorkflows",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24695,
+  "skill_sha256": "1b552f2a17fe0c68a5254d11546a8e39af973ce5795fdb9387cc62f8fd7ab9e6",
   "tool_schema": {
     "properties": {
       "operation": {

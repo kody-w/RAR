@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_trade_allowances",
+  "agent_bytes": 10611,
   "agent_file": "teams_update_define_trade_allowances_agent.py",
   "agent_sha256": "a0e11e927c6f28a8fbac316aa53cbcfaeb85f5d3ed8675b9604814132f055466",
+  "backup_agent": "teams_update_define_trade_allowances_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineTradeAllowances",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-trade-allowances:5e5cf59480d85deee3fbe2cc556cebb72cee6190bbf514083d6fa15fca9e0485",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineTradeAllowances",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24636,
+  "skill_sha256": "6a57143a02c19b5c1c242b2b6d5a6153a633a5f343db3cf053aeaf203ac5674c",
   "tool_schema": {
     "properties": {
       "operation": {

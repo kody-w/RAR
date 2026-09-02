@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt",
+  "agent_bytes": 10934,
   "agent_file": "adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt_agent.py",
   "agent_sha256": "362fdab08ace77b4bddc4deb4a3278dc84ee8b754d28ec2e586d1b847b0b28d1",
+  "backup_agent": "adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConductUpsellCrossSellOrRepeatSalePrompt",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-conduct-upsell-cross-sell-or-repeat-sale-prompt:50472229c8043731b574f6109d0e594cb1744a0233c02187a9bf06517a00f550",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardConductUpsellCrossSellOrRepeatSalePrompt",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25517,
+  "skill_sha256": "646ffa2e592e26b7fba98f13fe5f2eaaf98a9be9ce62d32bbf0801851f1defa3",
   "tool_schema": {
     "properties": {
       "operation": {

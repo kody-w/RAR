@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_modify_production_plan",
+  "agent_bytes": 10600,
   "agent_file": "bulk_update_modify_production_plan_agent.py",
   "agent_sha256": "03edfa94ed654ec6253359d593b4612dfe51ab88d9083caaa800f20e8e4304f6",
+  "backup_agent": "bulk_update_modify_production_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateModifyProductionPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-modify-production-plan:60728b38e60a74916e300babd67fe8be57fe02fd78c1a05fafebd3def44d8cc0",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateModifyProductionPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24586,
+  "skill_sha256": "83be2ef7dc49868b621ddc9288769d1dd47dd7f0885af2782d77940c13eb5065",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_performance_strategy",
+  "agent_bytes": 10688,
   "agent_file": "dashboard_define_performance_strategy_agent.py",
   "agent_sha256": "7d9a850b5910bfff62f5cb1f41edfad903bc54e678a5cbcc571f98add5eb5150",
+  "backup_agent": "dashboard_define_performance_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefinePerformanceStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-define-performance-strategy:8fd6ee540d6e74b5e9e4e38c7e22ea6d30c64f3fdc4096b2cd46628090cf1c86",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDefinePerformanceStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24804,
+  "skill_sha256": "2d58406c0babead1fe34c0a85697f4bd69431a614074fc3b87338ab480650096",
   "tool_schema": {
     "properties": {
       "operation": {

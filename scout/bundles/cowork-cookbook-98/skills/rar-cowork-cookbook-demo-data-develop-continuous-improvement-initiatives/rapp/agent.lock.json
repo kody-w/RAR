@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_develop_continuous_improvement_initiatives",
+  "agent_bytes": 10768,
   "agent_file": "demo_data_develop_continuous_improvement_initiatives_agent.py",
   "agent_sha256": "16da5c0953877283566e3c3a837d82aeae22aae2bf9fb641008e6ac28e124ef1",
+  "backup_agent": "demo_data_develop_continuous_improvement_initiatives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDevelopContinuousImprovementInitiatives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-develop-continuous-improvement-initiatives:279a70733f128d17d0f26db07caf44b1b6cbfe16176fe538eff6ae2ff82eb44f",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDevelopContinuousImprovementInitiatives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25091,
+  "skill_sha256": "bcac5ab3a23467243e4383c38352eac1f67117cce85b014786402a17c3d61e0f",
   "tool_schema": {
     "properties": {
       "operation": {

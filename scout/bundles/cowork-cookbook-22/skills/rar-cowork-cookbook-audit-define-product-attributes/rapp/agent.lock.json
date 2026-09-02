@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_define_product_attributes",
+  "agent_bytes": 10660,
   "agent_file": "audit_define_product_attributes_agent.py",
   "agent_sha256": "d69e6a86297e539d5d5fefc99cc4b11aba432e2c106ced12e3a23b07dd89cdfd",
+  "backup_agent": "audit_define_product_attributes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineProductAttributes",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-define-product-attributes:edbb7062ac422133946bc7681aafcb3b1b1fb1433c2dbd8041f70c6729670e8c",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDefineProductAttributes",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24706,
+  "skill_sha256": "171973aa3258dd3e4755657820912992b921cad9548e717880b6d199c9da10b7",
   "tool_schema": {
     "properties": {
       "criteria": {

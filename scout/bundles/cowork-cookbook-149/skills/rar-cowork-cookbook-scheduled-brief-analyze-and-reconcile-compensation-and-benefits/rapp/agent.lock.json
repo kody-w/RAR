@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_analyze_and_reconcile_compensation_and_benefits",
+  "agent_bytes": 10966,
   "agent_file": "scheduled_brief_analyze_and_reconcile_compensation_and_benefits_agent.py",
   "agent_sha256": "12adb210b268681ad631e05bce2476966708147e23094477d9ee8fcd698e7470",
+  "backup_agent": "scheduled_brief_analyze_and_reconcile_compensation_and_benefits_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAnalyzeAndReconcileCompensationAndBenefits",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-analyze-and-reconcile-compensation-and-benefits:933fb851656d5329e23a3e6f4fc8a031006db47db2309ab0a0d2aea1cd09f718",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAnalyzeAndReconcileCompensationAndBenefits",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25508,
+  "skill_sha256": "182e06fc3f680eca291fc555705f8b832e96588707ac8cfa4ebcbaddd3b23ac5",
   "tool_schema": {
     "properties": {
       "operation": {

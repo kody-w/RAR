@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_process_freight_invoices",
+  "agent_bytes": 10558,
   "agent_file": "demo_data_process_freight_invoices_agent.py",
   "agent_sha256": "3a002f9fe031426e777667ed0631fe7bae288b9b2114947f031289eefe395dfb",
+  "backup_agent": "demo_data_process_freight_invoices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataProcessFreightInvoices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-process-freight-invoices:f470154836e52280427e0c13cf054f861c530b0005aa93480894ddd07bfb82dc",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataProcessFreightInvoices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24555,
+  "skill_sha256": "34508da6c92e36e98417bf0cafc59f57840f1b9e05794eda27d0c27bf30e22c8",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_manage_compensation_changes",
+  "agent_bytes": 10681,
   "agent_file": "adaptive_card_manage_compensation_changes_agent.py",
   "agent_sha256": "5b06b331d26d3acc33aea212243859bda8efc5bf3afa0ca618e1f03b76419540",
+  "backup_agent": "adaptive_card_manage_compensation_changes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardManageCompensationChanges",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-manage-compensation-changes:e6f9c727cf42200122c7b6da1d18d11602d785716851858ba6b6b66abb4ccf9d",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardManageCompensationChanges",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24802,
+  "skill_sha256": "ec3c16ee972b61ffa74a04236d867d17ff64286da04f0ca0a6d6cb4bb9456027",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_maintain_budgets",
+  "agent_bytes": 10537,
   "agent_file": "teams_update_maintain_budgets_agent.py",
   "agent_sha256": "3da1cf735128989adfa2cf821354ff3f53152e615f12e597428b3b511b95e074",
+  "backup_agent": "teams_update_maintain_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateMaintainBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-maintain-budgets:8146627056bdba2ad011d54e6cf41d46e849f6d9393156bc0bc27c1329c12bfc",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateMaintainBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24420,
+  "skill_sha256": "4e83c00c1bdc3ed1e05bee2446990f80f1ebb6dd221bf4600fef4123f86b04e5",
   "tool_schema": {
     "properties": {
       "operation": {

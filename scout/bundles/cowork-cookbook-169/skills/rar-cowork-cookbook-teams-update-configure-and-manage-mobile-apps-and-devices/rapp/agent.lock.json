@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_configure_and_manage_mobile_apps_and_devices",
+  "agent_bytes": 10908,
   "agent_file": "teams_update_configure_and_manage_mobile_apps_and_devices_agent.py",
   "agent_sha256": "ad6dda744beb474b01f6fa5455158386787cd9c26a704bffcbc59d0f0909c462",
+  "backup_agent": "teams_update_configure_and_manage_mobile_apps_and_devices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConfigureAndManageMobileAppsAndDevices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-configure-and-manage-mobile-apps-and-devices:b30610ba803dd5c89e03b67697230473bd10a63fa509e7f8c1546061a4155abf",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateConfigureAndManageMobileAppsAndDevices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25376,
+  "skill_sha256": "70caf3d2a2a26aa7fda6a89ed8f65a267b219f933b4ca4448a1cdde0fbda91bf",
   "tool_schema": {
     "properties": {
       "operation": {

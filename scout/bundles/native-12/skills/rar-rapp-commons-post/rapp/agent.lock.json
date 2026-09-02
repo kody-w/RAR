@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/commons_post",
+  "agent_bytes": 10127,
   "agent_file": "commons_post_agent.py",
   "agent_sha256": "18c3fe91ac122cada3edde4cd2a7e01c2d0ffcf311a5f426f4a60e0cd416a6d5",
+  "backup_agent": "commons_post_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommonsPostAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -36,8 +39,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/commons-post:85fb2c90e16bca2bfa8e381efd2e3f5fe20b23e8e98c3f21d82c5cf4bc440658",
+  "rollback_agent_retained": true,
   "runtime_name": "PostToCommons",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24776,
+  "skill_sha256": "b14aad880051b54dbc0b63e57005f78b8fba1c7fbb9db2f2a09e22940cecf45e",
   "tool_schema": {
     "properties": {},
     "required": [],

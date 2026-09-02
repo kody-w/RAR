@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_consume_materials",
+  "agent_bytes": 10716,
   "agent_file": "configure_consume_materials_agent.py",
   "agent_sha256": "70b2425548b52ac8f538ebd3d2555aa7fcd7978c9fc4ac0d944919ceb15dce8d",
+  "backup_agent": "configure_consume_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureConsumeMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-consume-materials:229236ac2b65845405f139bf6b6d5d349b5eb19d3170a88d9a736508359f4d55",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureConsumeMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24616,
+  "skill_sha256": "4db13bd9152bbb0273daa197aa31442bfbefc0ede4a49d85bc573d7e3156f34f",
   "tool_schema": {
     "properties": {
       "operation": {

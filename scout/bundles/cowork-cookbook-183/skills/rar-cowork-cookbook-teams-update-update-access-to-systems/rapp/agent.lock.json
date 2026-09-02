@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_update_access_to_systems",
+  "agent_bytes": 10664,
   "agent_file": "teams_update_update_access_to_systems_agent.py",
   "agent_sha256": "a98bc3852adb8e407f869b5be334969d9248e2cb6ea8d32bb296d631764d06d3",
+  "backup_agent": "teams_update_update_access_to_systems_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateUpdateAccessToSystems",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-update-access-to-systems:2fc7de06bcb6b3e181e0e12c1b87766799e0b91ddf79cd30c72cc47f88ed2b3c",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateUpdateAccessToSystems",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24712,
+  "skill_sha256": "fa35a1d9f5e560f4815d9d4ebeb795834be6bced95af08988c717be279f68c22",
   "tool_schema": {
     "properties": {
       "operation": {

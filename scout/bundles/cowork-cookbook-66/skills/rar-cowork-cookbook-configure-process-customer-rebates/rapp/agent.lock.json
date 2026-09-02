@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_process_customer_rebates",
+  "agent_bytes": 10797,
   "agent_file": "configure_process_customer_rebates_agent.py",
   "agent_sha256": "bee916b55162c3ade3b9c39a521b9f019e4aeda4412bf92278372360a8f92d50",
+  "backup_agent": "configure_process_customer_rebates_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureProcessCustomerRebates",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-process-customer-rebates:a094401266d3d6d7e0e27febb4c1b39bd4029d163a125b25641c1e1045e2d297",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureProcessCustomerRebates",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24848,
+  "skill_sha256": "f6b2531a384da7baa8052e833a6b30e67de3ec3e26bf995fcbcc485d5bd220f9",
   "tool_schema": {
     "properties": {
       "operation": {

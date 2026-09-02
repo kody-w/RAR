@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/build_your_executive_command_center",
+  "agent_bytes": 10427,
   "agent_file": "build_your_executive_command_center_agent.py",
   "agent_sha256": "af8aeed741ed798fd57883e1bf37d69798d8fd72c9ccc9770dba85ab95ee81f3",
+  "backup_agent": "build_your_executive_command_center_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BuildYourExecutiveCommandCenter",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/build-your-executive-command-center:bd42d71b8ab134d39e2555d9a631aae78d09c1e49794e6967f32d9b7f3eef063",
+  "rollback_agent_retained": true,
   "runtime_name": "BuildYourExecutiveCommandCenter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24421,
+  "skill_sha256": "0524d826b5faaacdae680f5d829165911e97e1b6fc3c12973af0526fb71ba64a",
   "tool_schema": {
     "properties": {
       "operation": {

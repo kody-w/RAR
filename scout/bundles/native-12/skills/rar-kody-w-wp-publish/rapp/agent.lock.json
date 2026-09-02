@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/wp_publish_agent",
+  "agent_bytes": 12040,
   "agent_file": "wp_publish_agent.py",
   "agent_sha256": "2240c6e471f6c3c54e35e62553e9cd9af314cd520790120d23e88045120ee87a",
+  "backup_agent": "wp_publish_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WordPressPublishAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
     "env:WP_APP_PASSWORD",
     "env:WP_URL",
@@ -34,8 +37,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/wp-publish:5636cf586d62c76181220f982751611eb84f4188b33b62ad5d6dcf12002cbfed",
+  "rollback_agent_retained": true,
   "runtime_name": "WordPressPublish",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25521,
+  "skill_sha256": "cb166ff0a7b58fe06f8caebb3fbe3a81bd441d81832bb5ba74748add0fd43b40",
   "tool_schema": {
     "properties": {
       "action": {

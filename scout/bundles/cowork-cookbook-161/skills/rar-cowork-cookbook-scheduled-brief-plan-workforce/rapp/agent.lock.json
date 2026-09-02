@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_plan_workforce",
+  "agent_bytes": 10553,
   "agent_file": "scheduled_brief_plan_workforce_agent.py",
   "agent_sha256": "8dedbbf5fd94b33941f33e4a19df9bc8f8c64a9fc4389c95ffdff19312ad25a7",
+  "backup_agent": "scheduled_brief_plan_workforce_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefPlanWorkforce",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-plan-workforce:a96eb4e44a0bcfe687fcd93dbbd07efb4630aa990365be5fd36d5076e8c65d62",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefPlanWorkforce",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24460,
+  "skill_sha256": "88397f13c03dac44aea3b6e226c9b4a1ba8be8ffaeabec155c6dc9e2cdf776ee",
   "tool_schema": {
     "properties": {
       "operation": {

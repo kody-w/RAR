@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_track_fronline_worker_location",
+  "agent_bytes": 10882,
   "agent_file": "configure_track_fronline_worker_location_agent.py",
   "agent_sha256": "d5829d8ae47c1dffcd389d8165735abb7c482f9a6fe8597790f900e21d7b7466",
+  "backup_agent": "configure_track_fronline_worker_location_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureTrackFronlineWorkerLocation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-track-fronline-worker-location:d4810d4238c8792b8c9b60c501737f9fe43bb924aa315d2a1e4a9a3a01db3e76",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureTrackFronlineWorkerLocation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25048,
+  "skill_sha256": "dbf54c05a38be753045e27f279b3493370ce33cee3a7020e5b672d5a76d6c9bc",
   "tool_schema": {
     "properties": {
       "operation": {

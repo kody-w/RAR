@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/blog_content_auditor",
+  "agent_bytes": 9054,
   "agent_file": "blog_content_auditor_agent.py",
   "agent_sha256": "ba98bc211f37593e39cd7bdcd7c53edd1db5e2484a9378500c897505f902b262",
+  "backup_agent": "blog_content_auditor_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlogContentAuditor",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Simon Owen",
@@ -44,8 +47,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/blog-content-auditor:4235deb0d1619539975082a4aace512167010387ee792cb877ad42a9f0c55071",
+  "rollback_agent_retained": true,
   "runtime_name": "BlogContentAuditor",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21848,
+  "skill_sha256": "c9d26b63e5fbfa1b8a47d203afdeb41d58d3f9730e1f2de0c8c991039b9a4d9c",
   "tool_schema": {
     "properties": {
       "audience": {

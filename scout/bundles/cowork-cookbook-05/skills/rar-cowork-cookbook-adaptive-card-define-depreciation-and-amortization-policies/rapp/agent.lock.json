@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_depreciation_and_amortization_policies",
+  "agent_bytes": 10926,
   "agent_file": "adaptive_card_define_depreciation_and_amortization_policies_agent.py",
   "agent_sha256": "3ed9823e1921ba26b5267f12829c9535616397b6fdf6a5b83d9d0738aadbf469",
+  "backup_agent": "adaptive_card_define_depreciation_and_amortization_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineDepreciationAndAmortizationPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-define-depreciation-and-amortization-policies:7268d6e06556b85eaa00dc2a3244da9c2ea5c93b91d8fd4735bc9e173b6a52ba",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDefineDepreciationAndAmortizationPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25425,
+  "skill_sha256": "31e5d116172379c2f8c210774f2ff2d6ea2012be261ce64476330e1edbcf43f6",
   "tool_schema": {
     "properties": {
       "operation": {

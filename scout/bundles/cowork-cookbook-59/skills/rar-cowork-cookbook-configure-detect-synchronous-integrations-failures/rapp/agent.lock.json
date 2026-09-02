@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_detect_synchronous_integrations_failures",
+  "agent_bytes": 11049,
   "agent_file": "configure_detect_synchronous_integrations_failures_agent.py",
   "agent_sha256": "e0e545c5d4dfba790f0725624f154e5c3b33ef8a38ed8782b93c94fc78c9d668",
+  "backup_agent": "configure_detect_synchronous_integrations_failures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDetectSynchronousIntegrationsFailures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-detect-synchronous-integrations-failures:a13b25e4f5bbaff0180313f4adc607cd21eb5428eecd68dea89bc50928506ab1",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDetectSynchronousIntegrationsFailures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25428,
+  "skill_sha256": "8fd6db6374e76dcd2ed4548cc6892555a13f5c2cafd50855b82ad6986d113f04",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_review_call_center_performance",
+  "agent_bytes": 10616,
   "agent_file": "demo_data_review_call_center_performance_agent.py",
   "agent_sha256": "c13299cb7d6bdf2856a4c0ee5d23501e83566d926b17c34acf077723b0d73b85",
+  "backup_agent": "demo_data_review_call_center_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataReviewCallCenterPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-review-call-center-performance:d7a9ed390c26d929b48be21d2a43957f03e401b7496f27e92090aa7f70c9f774",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataReviewCallCenterPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24717,
+  "skill_sha256": "15f11f7a99a4d059d60c6badb7a09722890c815565aa0e4ec58b334962f9d58e",
   "tool_schema": {
     "properties": {
       "operation": {

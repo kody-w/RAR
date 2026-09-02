@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_develop_product_strategy",
+  "agent_bytes": 10690,
   "agent_file": "scheduled_brief_develop_product_strategy_agent.py",
   "agent_sha256": "42d36f533af409ec021a140853fd71911c8754b5650a1d46f21bd738acb22441",
+  "backup_agent": "scheduled_brief_develop_product_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDevelopProductStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-develop-product-strategy:b32f5de2e0c41dd3b5dab836d6d68e32377b5e7fcb6ee932443ddf2c978df4e5",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDevelopProductStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24789,
+  "skill_sha256": "936132a2cf81edda4b57f520e6a211c0fe0424a9b4f087b119d6b657d16712f5",
   "tool_schema": {
     "properties": {
       "operation": {

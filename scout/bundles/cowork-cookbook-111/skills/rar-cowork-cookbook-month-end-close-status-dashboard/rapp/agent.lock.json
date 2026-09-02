@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/month_end_close_status_dashboard",
+  "agent_bytes": 10471,
   "agent_file": "month_end_close_status_dashboard_agent.py",
   "agent_sha256": "172221d868f3b44d13a2d20589369706391f05d020bfd670cbd8ab80364e12af",
+  "backup_agent": "month_end_close_status_dashboard_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MonthEndCloseStatusDashboard",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/month-end-close-status-dashboard:bfc52dabbae4aa0bae8f9a5b49aadf376b1b39968ab1b61dfae27e378dcd4009",
+  "rollback_agent_retained": true,
   "runtime_name": "MonthEndCloseStatusDashboard",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24322,
+  "skill_sha256": "3f40619526cb2ad73420ae71b039a571f0b228ffef187955fff06e3c0134d230",
   "tool_schema": {
     "properties": {
       "operation": {

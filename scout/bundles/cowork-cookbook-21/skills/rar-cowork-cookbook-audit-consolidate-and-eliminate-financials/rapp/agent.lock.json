@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_consolidate_and_eliminate_financials",
+  "agent_bytes": 10811,
   "agent_file": "audit_consolidate_and_eliminate_financials_agent.py",
   "agent_sha256": "6964711aa692de3abfc84fb989ae34a461863af5d63e00e8204b6a583449d291",
+  "backup_agent": "audit_consolidate_and_eliminate_financials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditConsolidateAndEliminateFinancials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-consolidate-and-eliminate-financials:8ac02898e074a92c9e504b071b9c2da41a344d71d7d5a2c39c0daaa135948b62",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditConsolidateAndEliminateFinancials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25070,
+  "skill_sha256": "4f4de9262507e57226c3f42a2bdbd4f4eee2ae2f361205d54544f8405ff4eec6",
   "tool_schema": {
     "properties": {
       "criteria": {

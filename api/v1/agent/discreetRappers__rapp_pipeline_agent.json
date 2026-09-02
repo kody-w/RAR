@@ -3,11 +3,12 @@
   "id": "discreetRappers__rapp_pipeline_agent",
   "name": "RAPP",
   "rar_name": "@discreetRappers/rapp_pipeline_agent",
-  "rappid": "rappid:@discreetRappers/rapp_pipeline_agent:c4ed91b4db3af9a98410906de73b385b584300f3b70bc8328bf5518afb8643c8",
-  "_migrated_from": "rappid:@discreetRappers/rapp_pipeline_agent:3ab737bb204cff5731f4b20fd771273123583244d45846ec2795e5ae919c3930",
+  "rappid": "rappid:@discreetrappers/rapp-pipeline:20fe30927ecc5b0a83a316260132127f82dadbdbf8ad8e1c6b3af0ad79f1edee",
+  "_migrated_from": "rappid:@discreetRappers/rapp_pipeline_agent:c4ed91b4db3af9a98410906de73b385b584300f3b70bc8328bf5518afb8643c8",
   "_migrated_from_all": [
     "rappid:v2:agent:@discreetRappers/rapp_pipeline_agent:ad8745e98be7491d061f5c5ea49eb25e",
-    "rappid:@discreetRappers/rapp_pipeline_agent:3ab737bb204cff5731f4b20fd771273123583244d45846ec2795e5ae919c3930"
+    "rappid:@discreetRappers/rapp_pipeline_agent:3ab737bb204cff5731f4b20fd771273123583244d45846ec2795e5ae919c3930",
+    "rappid:@discreetRappers/rapp_pipeline_agent:c4ed91b4db3af9a98410906de73b385b584300f3b70bc8328bf5518afb8643c8"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -36,9 +37,18 @@
   "sha256": "feb4bd1dfa316f9aaa83bea4e4c220084794d1207ebee2ba4c3d823aa6bc7b44",
   "has_card": true,
   "added_at": "2026-04-06T16:39:03-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-discreetrappers-rapp-pipeline",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__rapp_pipeline_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/rapp_pipeline_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/rapp_pipeline_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-rapp-pipeline/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-rapp-pipeline/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__rapp_pipeline_agent.py",
   "api_card_url": null,

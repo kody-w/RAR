@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_develop_prototypes",
+  "agent_bytes": 10584,
   "agent_file": "audit_develop_prototypes_agent.py",
   "agent_sha256": "b99c89b3461557412123261961ed63139352d3d3260bd7e3d2ff98c08b232752",
+  "backup_agent": "audit_develop_prototypes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDevelopPrototypes",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-develop-prototypes:dd97cca2d218bc9ea1383c792552e88cb2decffac478c1947b9a82243238a290",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDevelopPrototypes",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24494,
+  "skill_sha256": "ffa0ddc7aedd2150e8c9aaca125c582cde654911f4f856862489b47fe3ff2ecd",
   "tool_schema": {
     "properties": {
       "criteria": {

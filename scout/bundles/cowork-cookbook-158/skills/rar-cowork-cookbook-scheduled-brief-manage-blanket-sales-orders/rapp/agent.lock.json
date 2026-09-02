@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_manage_blanket_sales_orders",
+  "agent_bytes": 10708,
   "agent_file": "scheduled_brief_manage_blanket_sales_orders_agent.py",
   "agent_sha256": "6f00dc2a36c46148edd63352f4e7f406cfa70accd28d7c31fab23adf3ea21bbf",
+  "backup_agent": "scheduled_brief_manage_blanket_sales_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefManageBlanketSalesOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-manage-blanket-sales-orders:49ae04cd315a14367e2a0c20f65c292af56db6db9c7c9b4af7f82b13f78dd343",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefManageBlanketSalesOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24889,
+  "skill_sha256": "e344d5692c6769fdb3a2ed7637064f3c01c5fd4849fe713614567731ca8a18e8",
   "tool_schema": {
     "properties": {
       "operation": {

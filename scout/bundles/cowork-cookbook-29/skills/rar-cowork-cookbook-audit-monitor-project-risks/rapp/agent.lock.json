@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_monitor_project_risks",
+  "agent_bytes": 10617,
   "agent_file": "audit_monitor_project_risks_agent.py",
   "agent_sha256": "cb21c37d83e0dc77939a3ef239a321770a633454312c0e02b1fda1655c87f09f",
+  "backup_agent": "audit_monitor_project_risks_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditMonitorProjectRisks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-monitor-project-risks:5a51c742693260244bfd9f98f9d8fa1dc6dede1560dd047d5fd0e782f1ae8dae",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditMonitorProjectRisks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24576,
+  "skill_sha256": "b2c16f825a300cf7889149f8331f0e8853352328e0cec820ad8071123fb6dc92",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/awaiting_reply",
+  "agent_bytes": 9414,
   "agent_file": "awaiting_reply_agent.py",
   "agent_sha256": "fbd75b3e3e375301db703b7b0f2205c47d0a33f8b137b721c7380dfac54b5193",
+  "backup_agent": "awaiting_reply_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AwaitingReply",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Allan De Castro",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/awaiting-reply:048382f79b64c28c04eb4986125a21db4b06a58ebcb4278c112b603528ebc4a1",
+  "rollback_agent_retained": true,
   "runtime_name": "AwaitingReply",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22659,
+  "skill_sha256": "4ef03d15e0d9c3572ab427de2fdce39809e4f2a369a942ee129d4ed1f390ea14",
   "tool_schema": {
     "properties": {
       "operation": {

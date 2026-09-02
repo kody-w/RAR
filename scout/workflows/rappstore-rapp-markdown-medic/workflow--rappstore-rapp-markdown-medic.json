@@ -5,6 +5,13 @@
   "id": "0133a6fe21664f10",
   "lastExecutedAt": null,
   "name": "Markdown Medic",
+  "rapp": {
+    "backup_agent": "markdown_medic_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-rapp-markdown-medic"
+  },
   "schedule": {
     "days": [
       1,

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_measure_warehouse_performance",
+  "agent_bytes": 10892,
   "agent_file": "configure_measure_warehouse_performance_agent.py",
   "agent_sha256": "2a314dc6a1b98ffb6975000261b7f26970825750159d4287de69c486417a859a",
+  "backup_agent": "configure_measure_warehouse_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureMeasureWarehousePerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-measure-warehouse-performance:6e35688a55d5e03fac90c1c7347d4d21520b9c56d74be4ca353fb9c9fb57f8d1",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureMeasureWarehousePerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25041,
+  "skill_sha256": "dfd19f920feb49c473c24e50a8c89911b04109642884a7660427d0633faa0380",
   "tool_schema": {
     "properties": {
       "operation": {

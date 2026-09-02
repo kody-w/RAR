@@ -3,10 +3,11 @@
   "id": "kody-w__rapp_sdk_builder",
   "name": "RAPP SDK Builder",
   "rar_name": "@kody-w/rapp_sdk_builder",
-  "rappid": "rappid:@kody-w/rapp_sdk_builder:a7a171009fe1df866d5530e4abdb463f8a6eba627d0538e3e48cc6ab7078ed34",
-  "_migrated_from": "rappid:@kody-w/rapp_sdk_builder:65f5989e1b72215d8a27f98661beaba281d6cc7fc54eb0ac1b0563ad7df9cbda",
+  "rappid": "rappid:@kody-w/rapp-sdk-builder:acfa1fcda010a6307fe0d737f06f8309a90b1fa5162e308a947a17ed4620bd00",
+  "_migrated_from": "rappid:@kody-w/rapp_sdk_builder:a7a171009fe1df866d5530e4abdb463f8a6eba627d0538e3e48cc6ab7078ed34",
   "_migrated_from_all": [
-    "rappid:@kody-w/rapp_sdk_builder:65f5989e1b72215d8a27f98661beaba281d6cc7fc54eb0ac1b0563ad7df9cbda"
+    "rappid:@kody-w/rapp_sdk_builder:65f5989e1b72215d8a27f98661beaba281d6cc7fc54eb0ac1b0563ad7df9cbda",
+    "rappid:@kody-w/rapp_sdk_builder:a7a171009fe1df866d5530e4abdb463f8a6eba627d0538e3e48cc6ab7078ed34"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -30,9 +31,18 @@
   "sha256": "76799624979a91c7f4f87d64b41d1fe5add10f727c672cc25429442a38ef757a",
   "has_card": true,
   "added_at": "2026-07-15T15:23:19Z",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-rapp-sdk-builder",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rapp_sdk_builder.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sdk_builder_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sdk_builder_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-rapp-sdk-builder/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-rapp-sdk-builder/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_sdk_builder.py",
   "api_card_url": null,

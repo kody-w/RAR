@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp-rewind-singleton",
+  "agent_bytes": 6647,
   "agent_file": "rapp_rewind_agent.py",
   "agent_sha256": "8074e7acdeb4877ba705b9ffdab99dabd4b57464b27ad38d4eb77b35e9f2dac3",
+  "backup_agent": "rapp_rewind_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappRewindAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "@kody-w",
@@ -24,8 +27,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-rewind-singleton:cc07181bf1e48015be1235a0270baf92d87f59dd947a09d07ff5087598c8e9fa",
+  "rollback_agent_retained": true,
   "runtime_name": "RappRewind",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 18217,
+  "skill_sha256": "f4474893ae37869faaa6e1bb19604e2ee16563b4a5525addaa20ea7163ee471d",
   "tool_schema": {
     "properties": {
       "action": {

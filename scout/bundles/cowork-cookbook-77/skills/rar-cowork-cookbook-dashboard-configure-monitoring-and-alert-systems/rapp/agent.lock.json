@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_configure_monitoring_and_alert_systems",
+  "agent_bytes": 10831,
   "agent_file": "dashboard_configure_monitoring_and_alert_systems_agent.py",
   "agent_sha256": "8986df07f2c9a1044e1bd35a911981f85f4ecfda329c214a68e5ad1c3017592a",
+  "backup_agent": "dashboard_configure_monitoring_and_alert_systems_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardConfigureMonitoringAndAlertSystems",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-configure-monitoring-and-alert-systems:7deb0326041cfbd3888a3fd0c3c8e5e5f51f14b7a7eda7b941633ef6926f023c",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardConfigureMonitoringAndAlertSystems",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25208,
+  "skill_sha256": "69aa8fff8ce08a997a50403457620b3127e30bf9d67c9408436e0611da45a74f",
   "tool_schema": {
     "properties": {
       "operation": {

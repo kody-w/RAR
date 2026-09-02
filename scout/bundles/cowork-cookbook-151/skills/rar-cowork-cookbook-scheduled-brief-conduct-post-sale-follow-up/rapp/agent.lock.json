@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_conduct_post_sale_follow_up",
+  "agent_bytes": 10726,
   "agent_file": "scheduled_brief_conduct_post_sale_follow_up_agent.py",
   "agent_sha256": "7466e508077be2e328998c793196fff8c6516b0ad30a190f57ae490bd0c32297",
+  "backup_agent": "scheduled_brief_conduct_post_sale_follow_up_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefConductPostSaleFollowUp",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-conduct-post-sale-follow-up:9ea37c0efd260b94ea587ccc6645fa4b0febec36278a30f277ef412fc55ef67f",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefConductPostSaleFollowUp",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24927,
+  "skill_sha256": "3c074a20786ab4c2bc0d9a7571ea05984291fbfc657f86f89c00f2f4ed082a44",
   "tool_schema": {
     "properties": {
       "operation": {

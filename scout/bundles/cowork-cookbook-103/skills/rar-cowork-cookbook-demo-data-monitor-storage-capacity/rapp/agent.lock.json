@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_monitor_storage_capacity",
+  "agent_bytes": 10570,
   "agent_file": "demo_data_monitor_storage_capacity_agent.py",
   "agent_sha256": "1bcb678afc46a7b52138f9b325079bbb710c722e9e79d54381f7d17ec2c9d802",
+  "backup_agent": "demo_data_monitor_storage_capacity_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataMonitorStorageCapacity",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-monitor-storage-capacity:67acecba0d72228e1dcc9e2e5b8ff5dc5416591d1bf5643cd76e057f77927176",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataMonitorStorageCapacity",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24580,
+  "skill_sha256": "f6f3bad26c3c253a724d4f6b1a2f9e6fd806c711bc6c8a3909d0920456c8e25e",
   "tool_schema": {
     "properties": {
       "operation": {

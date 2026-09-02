@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_maintain_project_contracts",
+  "agent_bytes": 10656,
   "agent_file": "bulk_update_maintain_project_contracts_agent.py",
   "agent_sha256": "4cac072de579fb40584b567ac8059089442f92cdf11de91f4e14a0693c4a24df",
+  "backup_agent": "bulk_update_maintain_project_contracts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateMaintainProjectContracts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-maintain-project-contracts:acb91b932a1c645b232c15fbf6dc57965055faefceb4df8dcb6a4e9ffa07ac2b",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateMaintainProjectContracts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24720,
+  "skill_sha256": "fc4c7e9ed7ea63e7fc39f679043f5c78e0cb5fffdb3326e44bb427a5cb7439bc",
   "tool_schema": {
     "properties": {
       "operation": {

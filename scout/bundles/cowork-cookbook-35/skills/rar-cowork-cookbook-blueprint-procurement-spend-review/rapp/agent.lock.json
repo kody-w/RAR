@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/blueprint_procurement_spend_review",
+  "agent_bytes": 10591,
   "agent_file": "blueprint_procurement_spend_review_agent.py",
   "agent_sha256": "6bd7ed4bcb1f27858f5e3b6fc5f3905bb51d1d419e2c76f43be10c8aeaae76d9",
+  "backup_agent": "blueprint_procurement_spend_review_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlueprintProcurementSpendReview",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/blueprint-procurement-spend-review:75b4ea0a6987361c838c3f21e0e9df6c6fda93ff91bf459600212b44c198b836",
+  "rollback_agent_retained": true,
   "runtime_name": "BlueprintProcurementSpendReview",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24664,
+  "skill_sha256": "49ea414a3115e051deccfbc3086a5b1a0ae311688a3e735a654d02cc53c37751",
   "tool_schema": {
     "properties": {
       "constraints": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_analyze_project_metrics",
+  "agent_bytes": 10622,
   "agent_file": "bulk_update_analyze_project_metrics_agent.py",
   "agent_sha256": "923965ce01e57b014f96c75c81306cad7d43e0db50587dfe9ea62bbe5353adb5",
+  "backup_agent": "bulk_update_analyze_project_metrics_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAnalyzeProjectMetrics",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-analyze-project-metrics:0e1d6281230bac9ba052a707f2873b7a5d717ddc74dc54b0c0b79da08178f748",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAnalyzeProjectMetrics",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24637,
+  "skill_sha256": "f5d9fb7d9cf1c129753d632b1dc168905a6d9dfd26dd4d891c71d3fb2272e40e",
   "tool_schema": {
     "properties": {
       "operation": {

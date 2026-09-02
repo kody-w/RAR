@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/work_iq_signalboard",
+  "agent_bytes": 9198,
   "agent_file": "work_iq_signalboard_agent.py",
   "agent_sha256": "952f4d5714c90395e690cd9cb0dca9eae1d70e15f5a568f375f573ac5d4fe3d2",
+  "backup_agent": "work_iq_signalboard_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WorkIqSignalboard",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Andreas Adner",
@@ -42,8 +45,16 @@
     ],
     "version": "3.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/work-iq-signalboard:5d3b030873073eff0381f875b582cfb1315d4c9a76610ce9e262308db56afd74",
+  "rollback_agent_retained": true,
   "runtime_name": "WorkIqSignalboard",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22183,
+  "skill_sha256": "83067f1dc670d25e6e68ac932d03076dde532f2c55b46088427b20be5e0b270e",
   "tool_schema": {
     "properties": {
       "operation": {

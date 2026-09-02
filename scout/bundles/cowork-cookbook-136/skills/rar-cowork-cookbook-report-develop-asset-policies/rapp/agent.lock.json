@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_develop_asset_policies",
+  "agent_bytes": 10335,
   "agent_file": "report_develop_asset_policies_agent.py",
   "agent_sha256": "585d35d7f5bd21101e0a459a26dd4e6ffb96521d4ffdb3dce59704258df2bd78",
+  "backup_agent": "report_develop_asset_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDevelopAssetPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-develop-asset-policies:5155165be749c1519805e5dbac8a0e84ec0577259cd8718c07b35e0828900a53",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDevelopAssetPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24128,
+  "skill_sha256": "4f5d6e8c9e3e350a1a336c960d1747351c0e55d531bbbab7d2b0f0db2d99dd9b",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_plan_workforce_capacity",
+  "agent_bytes": 10349,
   "agent_file": "report_plan_workforce_capacity_agent.py",
   "agent_sha256": "5ec24ed50604bdf64c49c5e9eb23e46ef12d58e10dc4103e5254da807a54b344",
+  "backup_agent": "report_plan_workforce_capacity_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportPlanWorkforceCapacity",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-plan-workforce-capacity:14623012964feac38b18c888e35c6ad50beb89b47c78315b0f6918f0f7ed18e6",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportPlanWorkforceCapacity",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24161,
+  "skill_sha256": "3e7c8d7d2ca531291596692332d38f68dceaf4cd5aed5d835402f850dc5cb627",
   "tool_schema": {
     "properties": {
       "audience": {

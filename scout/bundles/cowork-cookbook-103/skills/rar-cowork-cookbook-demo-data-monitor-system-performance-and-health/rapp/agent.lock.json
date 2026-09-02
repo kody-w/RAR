@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_monitor_system_performance_and_health",
+  "agent_bytes": 10733,
   "agent_file": "demo_data_monitor_system_performance_and_health_agent.py",
   "agent_sha256": "564301f8700d68e5f8378be9f64a423cdae093bd9142c07a0dbb781842612a75",
+  "backup_agent": "demo_data_monitor_system_performance_and_health_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataMonitorSystemPerformanceAndHealth",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-monitor-system-performance-and-health:5ab4fd62c4496380f0957eb24d319a1be21603f3d717c51b982b2635861f7719",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataMonitorSystemPerformanceAndHealth",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25018,
+  "skill_sha256": "d0c0beac1b0db54adb0c9d803999cadeded85baf039764f1b7e1fa43a380f611",
   "tool_schema": {
     "properties": {
       "operation": {

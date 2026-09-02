@@ -1,9 +1,12 @@
 {
   "agent": "@rapp-store/novell",
+  "agent_bytes": 34785,
   "agent_file": "novell_agent.py",
   "agent_sha256": "3c49a6cb033ecdc343190e57d36476840b11af4eb7500eb5638df5f9d5fccf91",
+  "backup_agent": "novell_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "NovellAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "agent": "singleton/novell_agent.py",
@@ -24,8 +27,16 @@
     "ui": "ui/index.html",
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp-store/novell:e19a5b124593405cad999a800e504baee7745ed8319e22691791281e1e8062f0",
+  "rollback_agent_retained": true,
   "runtime_name": "Novell",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 58270,
+  "skill_sha256": "ffe3679157cbb7a8b441c7d0d2a1707bcd5e3e81e645fbcbe805245b84431646",
   "tool_schema": {
     "properties": {},
     "required": [],

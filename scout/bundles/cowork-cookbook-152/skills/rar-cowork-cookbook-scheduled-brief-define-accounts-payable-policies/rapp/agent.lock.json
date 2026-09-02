@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_accounts_payable_policies",
+  "agent_bytes": 10795,
   "agent_file": "scheduled_brief_define_accounts_payable_policies_agent.py",
   "agent_sha256": "f7b52c976bf72b5db6cc71b98a2bf7a60f46eee8826e487da5eb0ccf6b87a757",
+  "backup_agent": "scheduled_brief_define_accounts_payable_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineAccountsPayablePolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-accounts-payable-policies:c51a4c26f6c6150b87386bddfce318d8aad6b1e5d0ebeabf2f309cb3c4d31211",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineAccountsPayablePolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25071,
+  "skill_sha256": "a2504047224b841b3564da7f89046757ab5706cf60e7d092200c01f031674232",
   "tool_schema": {
     "properties": {
       "operation": {

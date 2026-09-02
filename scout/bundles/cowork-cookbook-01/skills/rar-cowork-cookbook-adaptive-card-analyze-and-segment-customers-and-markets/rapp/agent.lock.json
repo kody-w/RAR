@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_analyze_and_segment_customers_and_markets",
+  "agent_bytes": 10860,
   "agent_file": "adaptive_card_analyze_and_segment_customers_and_markets_agent.py",
   "agent_sha256": "59500d13fac16ccad5ee49730020f0408891d2be6c886aa496c567f5198668e1",
+  "backup_agent": "adaptive_card_analyze_and_segment_customers_and_markets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardAnalyzeAndSegmentCustomersAndMarkets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-analyze-and-segment-customers-and-markets:7da58c3dd75faf1fc479dfa630f4b143528885a3f484cbd0a1391ec45c195287",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardAnalyzeAndSegmentCustomersAndMarkets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25297,
+  "skill_sha256": "a82e34b51a2a76c4220f4c5f62577bea3ba3f638f3f83b6aa5e788cc72395136",
   "tool_schema": {
     "properties": {
       "operation": {

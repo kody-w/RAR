@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_develop_support_transition_strategy",
+  "agent_bytes": 10803,
   "agent_file": "adaptive_card_develop_support_transition_strategy_agent.py",
   "agent_sha256": "f966005e8bf01fcfe0faf77c5e005b612e4453b6ba47b89ff766179401a39ee8",
+  "backup_agent": "adaptive_card_develop_support_transition_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDevelopSupportTransitionStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-develop-support-transition-strategy:c4bc4b92590a78be5ee0388efd8b535a66e4425ddec92f5cdbc4318c3c413348",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDevelopSupportTransitionStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25111,
+  "skill_sha256": "193f43bd8cab852cb00ea01ce1862850e5a340142c274c47b833cc72c0db9f4d",
   "tool_schema": {
     "properties": {
       "operation": {

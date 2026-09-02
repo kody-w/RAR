@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services",
+  "agent_bytes": 10805,
   "agent_file": "bulk_update_analyze_and_segment_goods_and_services_agent.py",
   "agent_sha256": "e51c2dc320ca6713291445f61939927d97984eb587c5c0237d017e62312ff7a7",
+  "backup_agent": "bulk_update_analyze_and_segment_goods_and_services_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAnalyzeAndSegmentGoodsAndServices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-analyze-and-segment-goods-and-services:8043db7b475ce9a79b982c3d7964de43be65515e38a6b2fecad4646ffd277e9b",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAnalyzeAndSegmentGoodsAndServices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25152,
+  "skill_sha256": "fec2916e3e6f56a0f6ff8af52cd3e04d3c9c453b2b3982e56f06965215a924c9",
   "tool_schema": {
     "properties": {
       "operation": {

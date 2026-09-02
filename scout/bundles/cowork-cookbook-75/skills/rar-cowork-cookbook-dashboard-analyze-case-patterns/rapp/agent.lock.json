@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_analyze_case_patterns",
+  "agent_bytes": 10603,
   "agent_file": "dashboard_analyze_case_patterns_agent.py",
   "agent_sha256": "96a807ac2b8a848e69580841ce2d746e42a9f77a8d88cf93bcf2f520afea04ad",
+  "backup_agent": "dashboard_analyze_case_patterns_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardAnalyzeCasePatterns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-analyze-case-patterns:18471bbc0f8d61e315525932bb345c3fca9f32c04294083d35f8394cdcac5c8e",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardAnalyzeCasePatterns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24610,
+  "skill_sha256": "d1dc8b641bff429896806c27032f781502f44f18d8dc1f6375bcfab80032a44f",
   "tool_schema": {
     "properties": {
       "operation": {

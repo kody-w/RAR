@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_business_continuity_objectives",
+  "agent_bytes": 10821,
   "agent_file": "bulk_update_define_business_continuity_objectives_agent.py",
   "agent_sha256": "8a97b92ac8a83fddf2ad98a358bc11696decd7d5cf4636fa4defaecfd67bf23f",
+  "backup_agent": "bulk_update_define_business_continuity_objectives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineBusinessContinuityObjectives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-business-continuity-objectives:343d45d5aff4f92c404fe879a2862bb60864fa8d6cead9d2960c5a93569c835c",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefineBusinessContinuityObjectives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25114,
+  "skill_sha256": "0e8fc5e28c0751e29a817340e1d93c66b6207d7cd0763cad1989b2e150ff5483",
   "tool_schema": {
     "properties": {
       "operation": {

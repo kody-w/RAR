@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_load_goods_for_shipping",
+  "agent_bytes": 10630,
   "agent_file": "dashboard_load_goods_for_shipping_agent.py",
   "agent_sha256": "4eede99ca6ba017d782c5b7ed68f42a5c39db6d4766f8916efa4eef9b8125e53",
+  "backup_agent": "dashboard_load_goods_for_shipping_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardLoadGoodsForShipping",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-load-goods-for-shipping:4fd41575436ac387c9f8544385f8810cfa34be7a8f3c7a240214045cc0eb4796",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardLoadGoodsForShipping",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24705,
+  "skill_sha256": "1ea144b6e9a589aecb02eb8e6d94d195e5c55204ab1cba0d3eec6b058f543a13",
   "tool_schema": {
     "properties": {
       "operation": {

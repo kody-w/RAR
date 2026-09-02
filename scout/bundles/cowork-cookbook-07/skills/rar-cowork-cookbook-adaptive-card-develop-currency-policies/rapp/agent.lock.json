@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_develop_currency_policies",
+  "agent_bytes": 10657,
   "agent_file": "adaptive_card_develop_currency_policies_agent.py",
   "agent_sha256": "6f33b443888d0f2eafe0a68f2f20135b2e6057eaa0c0ac136392648a0c7e861a",
+  "backup_agent": "adaptive_card_develop_currency_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDevelopCurrencyPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-develop-currency-policies:b491f00e9985b913735d7bc6fcfac0fafd833ecc0da794a503f22318407268e9",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDevelopCurrencyPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24750,
+  "skill_sha256": "d8b8d741cc55cd22b4e897d6f33e5909bef47b51d36c9d52993930c54e882644",
   "tool_schema": {
     "properties": {
       "operation": {

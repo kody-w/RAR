@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_asset_accounting_books",
+  "agent_bytes": 10715,
   "agent_file": "teams_update_define_asset_accounting_books_agent.py",
   "agent_sha256": "38085e691dee2f1a6c3c97c1d5bf9d74ba18709eb16bc6cd90e93a16e604ab8a",
+  "backup_agent": "teams_update_define_asset_accounting_books_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineAssetAccountingBooks",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-asset-accounting-books:dbf6c9c5a9fe219616ef4844a8af55279ff3e5dcd3690fe637f49dd10a8e662f",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineAssetAccountingBooks",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24871,
+  "skill_sha256": "20d16a69ce4ec96da19204488c66283df656b61aac705b47833268cd452c21c1",
   "tool_schema": {
     "properties": {
       "operation": {

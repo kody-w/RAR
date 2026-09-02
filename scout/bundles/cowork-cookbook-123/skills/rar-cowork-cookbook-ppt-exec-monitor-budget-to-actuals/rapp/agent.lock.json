@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_monitor_budget_to_actuals",
+  "agent_bytes": 10628,
   "agent_file": "ppt_exec_monitor_budget_to_actuals_agent.py",
   "agent_sha256": "28731c646cf6942a17ba386f6c1dcbfb24a3a949331dfd9ce957e35098a2da05",
+  "backup_agent": "ppt_exec_monitor_budget_to_actuals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMonitorBudgetToActuals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-monitor-budget-to-actuals:d4e86462cc6f305245562164502adfcfd136851032132203103acf610b415e0f",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMonitorBudgetToActuals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24675,
+  "skill_sha256": "bf0a9c00e1dc84b5f375628c807b6e4bddeffc3af60679ad10c89c5ae13dc4b8",
   "tool_schema": {
     "properties": {
       "operation": {

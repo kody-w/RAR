@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_identify_campaign_audiences",
+  "agent_bytes": 10649,
   "agent_file": "ppt_exec_identify_campaign_audiences_agent.py",
   "agent_sha256": "b9c20533fc77b8b534ee348c09e954a353b29d8c54e0fc5e1f5f6464f3359295",
+  "backup_agent": "ppt_exec_identify_campaign_audiences_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecIdentifyCampaignAudiences",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-identify-campaign-audiences:11906c98466dd824f4d1f69f78a52122e1f154401dd8e0217bc067392114de58",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecIdentifyCampaignAudiences",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24707,
+  "skill_sha256": "77b72e62eee5ed3bbd4607edd1e0f7bce4d2cf978e9c3e3065127c354f4e42dd",
   "tool_schema": {
     "properties": {
       "operation": {

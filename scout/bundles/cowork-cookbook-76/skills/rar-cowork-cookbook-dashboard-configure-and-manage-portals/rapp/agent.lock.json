@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_configure_and_manage_portals",
+  "agent_bytes": 10713,
   "agent_file": "dashboard_configure_and_manage_portals_agent.py",
   "agent_sha256": "e9bd9a73424ee90cc4940877f63998890d75c892a12a2687cd1afa4fb1ce9ad7",
+  "backup_agent": "dashboard_configure_and_manage_portals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardConfigureAndManagePortals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-configure-and-manage-portals:1661770bd7d1286030ec5d46ceee6fad27e26bf50e198238df54f9368d9fb720",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardConfigureAndManagePortals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24880,
+  "skill_sha256": "e091e9633ce1047eacb8144d56594421e93b8943b1d38c9e9a123c24cd3c0c2a",
   "tool_schema": {
     "properties": {
       "operation": {

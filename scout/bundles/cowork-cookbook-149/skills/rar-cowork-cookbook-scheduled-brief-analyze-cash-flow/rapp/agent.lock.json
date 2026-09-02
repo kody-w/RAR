@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_analyze_cash_flow",
+  "agent_bytes": 10597,
   "agent_file": "scheduled_brief_analyze_cash_flow_agent.py",
   "agent_sha256": "5cad100794689bb9a0ff2a8f979a2ad257c0014d3f56f73a6777410bc6fac048",
+  "backup_agent": "scheduled_brief_analyze_cash_flow_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAnalyzeCashFlow",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-analyze-cash-flow:e9a7a79b62c7cb3311d5f4587acacb0e745bee6ab3814b78a6851a9e3dc20aab",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAnalyzeCashFlow",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24588,
+  "skill_sha256": "6e91786b67c8c4090667a5900a9c6ff873b01d7e30e22575def0a66b3e9e4d6b",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_conduct_root_cause_analysis",
+  "agent_bytes": 10685,
   "agent_file": "teams_update_conduct_root_cause_analysis_agent.py",
   "agent_sha256": "81364704ab6164ad25d13aa44293f4c317bfa9b0aebf537fa7d3893751713bb7",
+  "backup_agent": "teams_update_conduct_root_cause_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConductRootCauseAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-conduct-root-cause-analysis:87cd350409aba0cfcc2edfe4a5821c76ccdc2a0c831513b3ce409db38f73672d",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateConductRootCauseAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24814,
+  "skill_sha256": "6d641e15efd48314b4e0fc6ce49aee9829cf6cfa85f2d853e97c9ed1acf5aae8",
   "tool_schema": {
     "properties": {
       "operation": {

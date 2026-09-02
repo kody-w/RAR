@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_plan_capital_allocation_and_investments",
+  "agent_bytes": 10835,
   "agent_file": "adaptive_card_plan_capital_allocation_and_investments_agent.py",
   "agent_sha256": "0fa3821085dbf8b2da942a0d63a6d9aebf29b8df8b4694d3a93e40d551d72b91",
+  "backup_agent": "adaptive_card_plan_capital_allocation_and_investments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardPlanCapitalAllocationAndInvestments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-plan-capital-allocation-and-investments:cd5c79cb5dfd4f5c9f0c00136f2fd1cda4b74a14884319687c3eef332f10f23b",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardPlanCapitalAllocationAndInvestments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25226,
+  "skill_sha256": "34d643febec528f70e53d7f6d853ceb842f4d249625839f837d30d326038d900",
   "tool_schema": {
     "properties": {
       "operation": {

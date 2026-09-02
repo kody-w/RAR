@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_manage_environmental_social_and_governance_esg_plan",
+  "agent_bytes": 10957,
   "agent_file": "ppt_exec_manage_environmental_social_and_governance_esg_plan_agent.py",
   "agent_sha256": "c0f15ed6368786168f195e8f0ae518311845b248f5a0a7cf3a7f3fcf3057eaae",
+  "backup_agent": "ppt_exec_manage_environmental_social_and_governance_esg_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecManageEnvironmentalSocialAndGovernanceEsgPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-manage-environmental-social-and-governance-esg-plan:7b38769853dd7c74550d8fbd774fd8b1d0ece3213c217c486278b819d792de5b",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecManageEnvironmentalSocialAndGovernanceEsgPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25542,
+  "skill_sha256": "6dfb3342a47634da67e73857b69873f2eaa7889dad2e678fbb08dcd8eb9ccaa5",
   "tool_schema": {
     "properties": {
       "operation": {

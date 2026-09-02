@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_design_warehouse_layout",
+  "agent_bytes": 10653,
   "agent_file": "audit_design_warehouse_layout_agent.py",
   "agent_sha256": "7b56b9837a26f7584a0ccbde42a912ca3abfbd03123a5d13075c6d06c631d5fc",
+  "backup_agent": "audit_design_warehouse_layout_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDesignWarehouseLayout",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-design-warehouse-layout:4412b2131eedb997ebaee85bcff55003fc6a6ca9402520472eb699b3f1279ea7",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDesignWarehouseLayout",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24673,
+  "skill_sha256": "3d57275e5aace68b3536ed411ac03cadbc6e091add1cc40ff60a404b0bc13f08",
   "tool_schema": {
     "properties": {
       "criteria": {

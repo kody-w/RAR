@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_manage_formulas",
+  "agent_bytes": 10510,
   "agent_file": "bulk_update_manage_formulas_agent.py",
   "agent_sha256": "da977b07cf1503840cc15e446281007bce5c9dce850fa3f8121a95a4803f0c48",
+  "backup_agent": "bulk_update_manage_formulas_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateManageFormulas",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-manage-formulas:ff18c2b4563b02fa368b4af4bba574acf3a2497afcb06ec89c67afab09d087d2",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateManageFormulas",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24368,
+  "skill_sha256": "a56957576fd7acfb873a09e73c497c0103f1a9edd823a71ef9a5c6b923c9e176",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -5,6 +5,13 @@
   "id": "f0cea8b574e99878",
   "lastExecutedAt": null,
   "name": "Project Tracker",
+  "rapp": {
+    "backup_agent": "project_tracker_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-kody-w-project-tracker"
+  },
   "schedule": {
     "days": [
       1,

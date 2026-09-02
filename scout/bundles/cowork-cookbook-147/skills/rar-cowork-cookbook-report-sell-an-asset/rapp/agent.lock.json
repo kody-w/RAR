@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_sell_an_asset",
+  "agent_bytes": 10217,
   "agent_file": "report_sell_an_asset_agent.py",
   "agent_sha256": "174c5ecbf4f2df823b105010d5641147d4815e552d5e98d069d22f0776fce6d6",
+  "backup_agent": "report_sell_an_asset_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportSellAnAsset",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-sell-an-asset:61dfa744480b7f0e9d188076002afab4bc401a615b672d89e39e74a089200aa0",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportSellAnAsset",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23869,
+  "skill_sha256": "5c9815e0e309e3308d9eb4168852dcad348aa408578feb7ac67aadd7251d4cd2",
   "tool_schema": {
     "properties": {
       "audience": {

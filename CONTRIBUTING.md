@@ -31,17 +31,18 @@ copilot plugin marketplace add kody-w/RAR
 copilot plugin install rapp@rar
 ```
 
-The `rapp` plugin installs the reversible `rapp-skills` manager. It can browse
-and synchronize RAR channels, create manual HTML exports, install/start a
-pinned loopback Brainstem, and install the optional external-AI callback
-drop-in. Generated files under `scout/` must never be edited by hand; change
-the source agent or `scripts/build_scout_exports.py` and regenerate.
+The `rapp` plugin installs the reversible `rapp-skills` manager and the
+`rapp-agent-converter`. Every callable agent is published primarily as a
+RAPP/1 Toasted `SKILL.md` Grail record; the exact `agent.py` remains a rollback
+backup and can always be restored from the skill capsule. Generated files
+under `scout/` must never be edited by hand; change the source agent or
+`scripts/build_scout_exports.py` and regenerate.
 
 For marketplace changes, run:
 
 ```bash
-python scripts/build_scout_exports.py
-pytest -q tests/test_scout_rapp_skill.py
+python scripts/build_scout_exports.py --mint-skill-identities
+pytest -q tests/test_scout_rapp_skill.py tests/test_rapp_agent_converter.py
 ```
 
 ## Quick Version

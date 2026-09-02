@@ -1,11 +1,14 @@
 {
   "agent": "@kody-w/rar_remote_agent",
+  "agent_bytes": 61098,
   "agent_file": "rar_remote_agent.py",
   "agent_sha256": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a",
+  "backup_agent": "rar_remote_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RARRemoteAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.storage_factory"
+    "brainstem:utils.storage_factory"
   ],
   "manifest": {
     "author": "RAPP Core Team",
@@ -30,8 +33,16 @@
     ],
     "version": "1.8.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rar-remote:6aceba6c63e4a71953f1b6002d825a4d325e84592cbcb6feddd9fda77d7cc735",
+  "rollback_agent_retained": true,
   "runtime_name": "RARRemoteAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 94471,
+  "skill_sha256": "7c4a7ec141240889aebe2f97e3b6f169e517baca1e6da0b24caf96bab8b5b49c",
   "tool_schema": {
     "properties": {
       "action": {

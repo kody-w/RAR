@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_nurture_trust_relationship_regularly_with_customer",
+  "agent_bytes": 10959,
   "agent_file": "bulk_update_nurture_trust_relationship_regularly_with_customer_agent.py",
   "agent_sha256": "6f96a815442bea9e2f747b64b80cffa6cf695176267bfd6e29cf2341b481356f",
+  "backup_agent": "bulk_update_nurture_trust_relationship_regularly_with_customer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateNurtureTrustRelationshipRegularlyWithCustomer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-nurture-trust-relationship-regularly-with-customer:cac3bfd65b0668fa76bfae797af883b9227d06be173b02bce922f46e92b4db0c",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateNurtureTrustRelationshipRegularlyWithCustomer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25527,
+  "skill_sha256": "a7dff4d8d23ef00c4bf07cf1bb22275fdbdd2dff04ae955df60b55125a1b8c46",
   "tool_schema": {
     "properties": {
       "operation": {

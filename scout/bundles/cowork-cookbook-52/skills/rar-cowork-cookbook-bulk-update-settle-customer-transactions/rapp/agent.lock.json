@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_settle_customer_transactions",
+  "agent_bytes": 10668,
   "agent_file": "bulk_update_settle_customer_transactions_agent.py",
   "agent_sha256": "aaaf243d5eea2c2ef3a14e68025f2042839e05a38d748fcbbc821162baf5e79a",
+  "backup_agent": "bulk_update_settle_customer_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateSettleCustomerTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-settle-customer-transactions:614f60541e9fdc84168c625a7ff72b2284f2b87c230c63a71ca003e3ab5b9a1a",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateSettleCustomerTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24802,
+  "skill_sha256": "2e2db52029fe360d9d96baf214f22ac0bc2a27fe6dc6780cd87ca4e822f13306",
   "tool_schema": {
     "properties": {
       "operation": {

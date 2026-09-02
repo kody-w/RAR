@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_consolidate_and_eliminate_financials",
+  "agent_bytes": 10685,
   "agent_file": "demo_data_consolidate_and_eliminate_financials_agent.py",
   "agent_sha256": "29f215cf93fd0c17a2e388b0586a6e3f7a8cc5db91499fa74149f6eee2952312",
+  "backup_agent": "demo_data_consolidate_and_eliminate_financials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataConsolidateAndEliminateFinancials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-consolidate-and-eliminate-financials:eda86854a41610dbb17d1f3bb5bc1f1e9024afdcc7a5eef9c4ae82703b825510",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataConsolidateAndEliminateFinancials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24898,
+  "skill_sha256": "fe8cae9b275ad2a9e2c6f7c1e0d198379c007d6513a89c155ccea3c6bbc2d069",
   "tool_schema": {
     "properties": {
       "operation": {

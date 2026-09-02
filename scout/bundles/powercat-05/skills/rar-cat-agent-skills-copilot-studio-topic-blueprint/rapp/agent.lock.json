@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_topic_blueprint",
+  "agent_bytes": 9560,
   "agent_file": "copilot_studio_topic_blueprint_agent.py",
   "agent_sha256": "c11337248088a38d1cbbbba408808e2a111734b20ccebd659534832ff67882f2",
+  "backup_agent": "copilot_studio_topic_blueprint_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioTopicBlueprint",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Elliot Margot",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/copilot-studio-topic-blueprint:332f77b003a8fd8b4aa6815068e23dd858062a5c0eb10a3160311c5e47568e0e",
+  "rollback_agent_retained": true,
   "runtime_name": "CopilotStudioTopicBlueprint",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23106,
+  "skill_sha256": "fb920f8ccc96c4e0188c253a98f51648ab0cd715631b9fb5a4857be9a15d7bfd",
   "tool_schema": {
     "properties": {
       "constraints": {

@@ -3,10 +3,11 @@
   "id": "kody-w__arena_compete_agent",
   "name": "Arena Compete",
   "rar_name": "@kody-w/arena_compete_agent",
-  "rappid": "rappid:@kody-w/arena_compete_agent:4e41b0960033dcdac452cfc30b52aad5788ab5472dcbe628c93e0bc1b3653909",
-  "_migrated_from": "rappid:@kody-w/arena_compete_agent:ae4ec8131dabf89a0b9a3a887257eabc06882a35e1cf34f83ffbc313b5358e45",
+  "rappid": "rappid:@kody-w/arena-compete:22424aa2fca30b44f9ff102d56be894331061e387924bf584f64a8ae856194cd",
+  "_migrated_from": "rappid:@kody-w/arena_compete_agent:4e41b0960033dcdac452cfc30b52aad5788ab5472dcbe628c93e0bc1b3653909",
   "_migrated_from_all": [
-    "rappid:@kody-w/arena_compete_agent:ae4ec8131dabf89a0b9a3a887257eabc06882a35e1cf34f83ffbc313b5358e45"
+    "rappid:@kody-w/arena_compete_agent:ae4ec8131dabf89a0b9a3a887257eabc06882a35e1cf34f83ffbc313b5358e45",
+    "rappid:@kody-w/arena_compete_agent:4e41b0960033dcdac452cfc30b52aad5788ab5472dcbe628c93e0bc1b3653909"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -31,9 +32,18 @@
   "sha256": "cb5fdc2203b8127d5f174fbe9773c1f8f24e01dcdfb7162fb0a17ad40a2239db",
   "has_card": true,
   "added_at": "2026-06-20T19:39:59-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-arena-compete",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__arena_compete_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/arena_compete_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/arena_compete_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-arena-compete/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-arena-compete/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__arena_compete_agent.py",
   "api_card_url": null,

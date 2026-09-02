@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_sales_teams",
+  "agent_bytes": 10580,
   "agent_file": "adaptive_card_define_sales_teams_agent.py",
   "agent_sha256": "cdaa7b9c62d9ff8c8b5b09f050d0b6cfb28258651dcfeac33b3ceac789c0c57d",
+  "backup_agent": "adaptive_card_define_sales_teams_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineSalesTeams",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-define-sales-teams:39f428b76467964f4dcab4d4bf3eb8bb4682161efcef788c6c78411112deb615",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDefineSalesTeams",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24561,
+  "skill_sha256": "4ad121a07cdf1b978f1aeabc0cf3cb60542f4f5e3396128133c18e57e913a9af",
   "tool_schema": {
     "properties": {
       "operation": {

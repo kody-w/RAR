@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_clean_up_and_view_log_storage",
+  "agent_bytes": 10731,
   "agent_file": "teams_update_clean_up_and_view_log_storage_agent.py",
   "agent_sha256": "fbd380c70f5d0b9f574af5433ca8326043179511492645036d670f1ebbfbbfff",
+  "backup_agent": "teams_update_clean_up_and_view_log_storage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCleanUpAndViewLogStorage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-clean-up-and-view-log-storage:dc06742c42acacdbfc3af54811f990917455e529a524864244a013965e0fd312",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateCleanUpAndViewLogStorage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24946,
+  "skill_sha256": "938154b04f5f7c84665b0a5f8d86d2cf47f48f821bc4a869ca796f7597b76633",
   "tool_schema": {
     "properties": {
       "operation": {

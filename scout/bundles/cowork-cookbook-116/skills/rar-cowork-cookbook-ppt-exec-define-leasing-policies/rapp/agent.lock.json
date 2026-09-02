@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_leasing_policies",
+  "agent_bytes": 10603,
   "agent_file": "ppt_exec_define_leasing_policies_agent.py",
   "agent_sha256": "da9703edf5623dd4a9054fb4fc79041072329aae6a6285f0aaafa77e7ea1c2ca",
+  "backup_agent": "ppt_exec_define_leasing_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineLeasingPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-define-leasing-policies:f907f0eb8efa6d7cd2c008165c6fdbd518407749e32cdd639336b6e6fd2fca2c",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDefineLeasingPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24598,
+  "skill_sha256": "bb211fa542fb026c13e9c23baef1015cdfa28732f37c5bcbe6bd7bc9becde2fc",
   "tool_schema": {
     "properties": {
       "operation": {

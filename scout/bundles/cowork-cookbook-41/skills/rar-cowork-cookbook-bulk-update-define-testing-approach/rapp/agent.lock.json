@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_testing_approach",
+  "agent_bytes": 10630,
   "agent_file": "bulk_update_define_testing_approach_agent.py",
   "agent_sha256": "64e351eaf58f88a44dbe451f4a62677216b4d430bd5defc3179bf68fde9d491c",
+  "backup_agent": "bulk_update_define_testing_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineTestingApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-testing-approach:f6daf7a9ccab8c1235960f35bf019fb54f7e8c4f1580cee43932a3d11d25e1d5",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefineTestingApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24681,
+  "skill_sha256": "4395e1b770f9eebd4912891b19a4170041b4a35085ee5eed6ba5c2ad08cb49fd",
   "tool_schema": {
     "properties": {
       "operation": {

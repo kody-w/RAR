@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_maintain_open_service_requests",
+  "agent_bytes": 10681,
   "agent_file": "ppt_exec_maintain_open_service_requests_agent.py",
   "agent_sha256": "50d7aeba160d71b0dbd1227c8467777c07a031fb0edc57eeb0688ff29b12a1b6",
+  "backup_agent": "ppt_exec_maintain_open_service_requests_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMaintainOpenServiceRequests",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-maintain-open-service-requests:3a1c1c7eaf72df5818271ac4641ff82dfb4b56abf24104caec668733d3b81e5a",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMaintainOpenServiceRequests",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24805,
+  "skill_sha256": "3816c3a183fbe059360a1b8106ebe3698d6db60acc30750905e2f0fd433669ce",
   "tool_schema": {
     "properties": {
       "operation": {

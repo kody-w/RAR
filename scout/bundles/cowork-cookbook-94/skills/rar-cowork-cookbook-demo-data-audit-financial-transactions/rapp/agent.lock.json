@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_audit_financial_transactions",
+  "agent_bytes": 10590,
   "agent_file": "demo_data_audit_financial_transactions_agent.py",
   "agent_sha256": "0daf3a05c492836fe9c4ee7be4f23bb3f0f1d9f843ec5ad42633fd40e380e276",
+  "backup_agent": "demo_data_audit_financial_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataAuditFinancialTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-audit-financial-transactions:7a337cc8bcbd00e34986e08ea99f2290d33d60bc4b14c936f5b05d311ee5c247",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataAuditFinancialTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24655,
+  "skill_sha256": "16e6831ab35a7e15b7b0f14073af1a670af18ce2e6b21cc602672d20789f2ce4",
   "tool_schema": {
     "properties": {
       "operation": {

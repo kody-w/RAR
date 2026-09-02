@@ -5,6 +5,13 @@
   "id": "2f0ccc320c7f77bf",
   "lastExecutedAt": null,
   "name": "BookFactory - RAPP Test Chapter",
+  "rapp": {
+    "backup_agent": "bookfactory_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-rarbookworld-bookfactory"
+  },
   "schedule": {
     "days": [
       1,

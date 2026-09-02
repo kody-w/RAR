@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_operating_hours_and_schedule",
+  "agent_bytes": 10773,
   "agent_file": "bulk_update_define_operating_hours_and_schedule_agent.py",
   "agent_sha256": "96fed5d82271cfffa186f23a1df15c34b8bafefdf81619c820d67a35c7f739b9",
+  "backup_agent": "bulk_update_define_operating_hours_and_schedule_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineOperatingHoursAndSchedule",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-operating-hours-and-schedule:e4d6eec838867c24e9d7b4b7af055431894d92472c2a58acb5a604e516f536f3",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefineOperatingHoursAndSchedule",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25073,
+  "skill_sha256": "1005eb1cc0fb37e138365f04e29658f59ceb2fe3b9ef3a71d3b8f79f8ad491a6",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_conduct_a_business_impact_analysis",
+  "agent_bytes": 10810,
   "agent_file": "audit_conduct_a_business_impact_analysis_agent.py",
   "agent_sha256": "618429668a37fbfe2c04a96a7cf756b8eeb94909bcdeb696e0d7c0d6ea3fd9ac",
+  "backup_agent": "audit_conduct_a_business_impact_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditConductABusinessImpactAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-conduct-a-business-impact-analysis:45d97ec9485bd4a109d60a60c50206bd3aede9b015f0a6c9b431b81de248af32",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditConductABusinessImpactAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25048,
+  "skill_sha256": "7863dcb11861ca6c4e7f8052550c21f0f9a8ec3cc892301fdc7241789c5621b3",
   "tool_schema": {
     "properties": {
       "criteria": {

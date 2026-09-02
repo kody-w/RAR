@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_configure_and_manage_store_devices",
+  "agent_bytes": 10778,
   "agent_file": "dashboard_configure_and_manage_store_devices_agent.py",
   "agent_sha256": "69b9874d022131f35a9a24879fdbcf22b3ee73145d0365feae0830222fea2037",
+  "backup_agent": "dashboard_configure_and_manage_store_devices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardConfigureAndManageStoreDevices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-configure-and-manage-store-devices:bfc2c1f98c1db74d5e1d70b24d046d7ab276f7fdcce5ecad4200e872f592d681",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardConfigureAndManageStoreDevices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25063,
+  "skill_sha256": "ca218d03987ed06a7ef128187f589c521c47017cced81b620f0a066d8c13af7e",
   "tool_schema": {
     "properties": {
       "operation": {

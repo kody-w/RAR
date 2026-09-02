@@ -3,10 +3,11 @@
   "id": "kody-w__agent_workbench",
   "name": "Agent Workbench",
   "rar_name": "@kody-w/agent_workbench",
-  "rappid": "rappid:@kody-w/agent_workbench:8881ee2399f4745d70b3da9e4be3b9a16b86319845eac85232ad97813b6bc41a",
-  "_migrated_from": "rappid:@kody-w/agent_workbench:99e15443437f0bea78df5161ab887cf5aa6480835729b7fcf2dc16cbb7c548f3",
+  "rappid": "rappid:@kody-w/agent-workbench:a14d527025538954d7fde085060c3a05ec1ab3cebbac89abb3090dc8fa76f23a",
+  "_migrated_from": "rappid:@kody-w/agent_workbench:8881ee2399f4745d70b3da9e4be3b9a16b86319845eac85232ad97813b6bc41a",
   "_migrated_from_all": [
-    "rappid:@kody-w/agent_workbench:99e15443437f0bea78df5161ab887cf5aa6480835729b7fcf2dc16cbb7c548f3"
+    "rappid:@kody-w/agent_workbench:99e15443437f0bea78df5161ab887cf5aa6480835729b7fcf2dc16cbb7c548f3",
+    "rappid:@kody-w/agent_workbench:8881ee2399f4745d70b3da9e4be3b9a16b86319845eac85232ad97813b6bc41a"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.1.2",
@@ -32,9 +33,18 @@
   "sha256": "00b19b2e98b854333dbf7d89d74980f3e54c4f5753f31ac9039cf8f8ed30e2b4",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-agent-workbench",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__agent_workbench.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_workbench_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_workbench_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-agent-workbench/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-agent-workbench/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_workbench.py",
   "api_card_url": null,

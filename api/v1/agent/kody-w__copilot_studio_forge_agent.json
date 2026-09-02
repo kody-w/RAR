@@ -3,11 +3,12 @@
   "id": "kody-w__copilot_studio_forge_agent",
   "name": "CopilotStudioForge",
   "rar_name": "@kody-w/copilot_studio_forge_agent",
-  "rappid": "rappid:@kody-w/copilot_studio_forge_agent:8644fe6c6ac7ccee15d1fdc171f5ed1201242ceef6bff556c3456ffab2273175",
-  "_migrated_from": "rappid:@kody-w/copilot_studio_forge_agent:3fb9d412b8f55b0c54a9a024e449e7f1906a394ad8d097cb111c1a758c17d381",
+  "rappid": "rappid:@kody-w/copilot-studio-forge:00560b4c895457249015dd85da12897e06bbfb608a01ddd09004af78c4635b88",
+  "_migrated_from": "rappid:@kody-w/copilot_studio_forge_agent:8644fe6c6ac7ccee15d1fdc171f5ed1201242ceef6bff556c3456ffab2273175",
   "_migrated_from_all": [
     "rappid:@kody-w/copilot_studio_forge_agent:ffae3873f9ac8e2c53f30d4dc5ca00be82375098f68f0efe78c64e767f29ad55",
-    "rappid:@kody-w/copilot_studio_forge_agent:3fb9d412b8f55b0c54a9a024e449e7f1906a394ad8d097cb111c1a758c17d381"
+    "rappid:@kody-w/copilot_studio_forge_agent:3fb9d412b8f55b0c54a9a024e449e7f1906a394ad8d097cb111c1a758c17d381",
+    "rappid:@kody-w/copilot_studio_forge_agent:8644fe6c6ac7ccee15d1fdc171f5ed1201242ceef6bff556c3456ffab2273175"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -40,9 +41,18 @@
   "sha256": "b74dc71864503e47340899674b0e8b9c17f4e8fc617298ed83e5f148bf87e709",
   "has_card": true,
   "added_at": "2026-07-07T00:52:21Z",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-copilot-studio-forge",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__copilot_studio_forge_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_forge_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_forge_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-forge/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-forge/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_forge_agent.py",
   "api_card_url": null,

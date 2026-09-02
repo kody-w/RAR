@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_onboard_new_suppliers",
+  "agent_bytes": 10557,
   "agent_file": "ppt_exec_onboard_new_suppliers_agent.py",
   "agent_sha256": "ecd3b37ae8509af718011e7cba828dbf6328e99339bf06125bf65c1387c38366",
+  "backup_agent": "ppt_exec_onboard_new_suppliers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecOnboardNewSuppliers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-onboard-new-suppliers:0e45f646003bfb69163344168b4ed61a16ab6c19161dc0e165fd4d3b9ee94e83",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecOnboardNewSuppliers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24509,
+  "skill_sha256": "e9448fadcd32cb9ac8287f90cb8160ad4537362c90290f0dc8200e4a0f2519d4",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_develop_merchandise_and_assortment_plans",
+  "agent_bytes": 10844,
   "agent_file": "adaptive_card_develop_merchandise_and_assortment_plans_agent.py",
   "agent_sha256": "b7615fcfda551037a6468da2b463ee07b93e18f6e24a70525029f69d98121370",
+  "backup_agent": "adaptive_card_develop_merchandise_and_assortment_plans_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDevelopMerchandiseAndAssortmentPlans",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-develop-merchandise-and-assortment-plans:8924f432990331e18ae8004b28ef879b23b66f57f0bf713e842eeab7b5f9dd16",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDevelopMerchandiseAndAssortmentPlans",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25246,
+  "skill_sha256": "32c194814c6bc4bbff6208777610d8964033bb5fa3f2001071246a322e1c66b3",
   "tool_schema": {
     "properties": {
       "operation": {

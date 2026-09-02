@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_manage_service_pricing",
+  "agent_bytes": 10627,
   "agent_file": "audit_manage_service_pricing_agent.py",
   "agent_sha256": "9dd460e414e6072cf390aca002086fe1d075dff9415ad09fd80d3612d6e30b34",
+  "backup_agent": "audit_manage_service_pricing_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditManageServicePricing",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-manage-service-pricing:1709da08654c392476c218524b20d5a550b1beee88b2818d1df38adad4baef1b",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditManageServicePricing",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24633,
+  "skill_sha256": "aeb9d06c5c26dca0b72929a672d0b8df56cb73d869b9bb641ecf2ce883ed50ef",
   "tool_schema": {
     "properties": {
       "criteria": {

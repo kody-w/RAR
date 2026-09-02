@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_conduct_root_cause_analysis",
+  "agent_bytes": 10396,
   "agent_file": "report_conduct_root_cause_analysis_agent.py",
   "agent_sha256": "a66f5418fa672958ca11053c074e9c5f6aba888f1cf185aa95d5a69efab2e697",
+  "backup_agent": "report_conduct_root_cause_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportConductRootCauseAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-conduct-root-cause-analysis:948b91158174e3b9fd4896fe95eb273aaa033533463c5f3e29f1956ca79e57b8",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportConductRootCauseAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24309,
+  "skill_sha256": "ed8e87e6d73a49d403cdb9c84c1a19bebb56aea94309cedaec823435024e94d8",
   "tool_schema": {
     "properties": {
       "audience": {

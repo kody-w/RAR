@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/blueprint_credit_and_collections_review",
+  "agent_bytes": 10649,
   "agent_file": "blueprint_credit_and_collections_review_agent.py",
   "agent_sha256": "56bcdc20a1870820b0c53ed54e8319581617fc8ce58a93c03d5501bc88bbe0ad",
+  "backup_agent": "blueprint_credit_and_collections_review_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlueprintCreditAndCollectionsReview",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/blueprint-credit-and-collections-review:c53068ae549158043ae1a8304d488b1fd3429b4c2055946daad679849992402f",
+  "rollback_agent_retained": true,
   "runtime_name": "BlueprintCreditAndCollectionsReview",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24806,
+  "skill_sha256": "d958016edeb211ea392ab2fb66b8c957e1f9d18a62942d41916e565ce10e97f6",
   "tool_schema": {
     "properties": {
       "constraints": {

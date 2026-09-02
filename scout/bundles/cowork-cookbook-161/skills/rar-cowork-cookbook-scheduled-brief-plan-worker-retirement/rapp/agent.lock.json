@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_plan_worker_retirement",
+  "agent_bytes": 10646,
   "agent_file": "scheduled_brief_plan_worker_retirement_agent.py",
   "agent_sha256": "c6f332627bd6fff42d4a0720730213bb5da6e71187ff04a2e977023ee69b995e",
+  "backup_agent": "scheduled_brief_plan_worker_retirement_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefPlanWorkerRetirement",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-plan-worker-retirement:29d7462d90b2a0827417a3289dd4038043667c439cc32a4586ec6975dd61ff19",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefPlanWorkerRetirement",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24713,
+  "skill_sha256": "d6b5215b728831cc0a2017df371515d13237bdb0a8ee0d26e39b46fe26c51b3a",
   "tool_schema": {
     "properties": {
       "operation": {

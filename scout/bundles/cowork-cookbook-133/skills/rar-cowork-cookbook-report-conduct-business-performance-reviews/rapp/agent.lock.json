@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_conduct_business_performance_reviews",
+  "agent_bytes": 10506,
   "agent_file": "report_conduct_business_performance_reviews_agent.py",
   "agent_sha256": "d4ee5e4cb2fcf0ad0afd4da2199dae4d4c0a26f3312ab02738c00eb47e5be7d2",
+  "backup_agent": "report_conduct_business_performance_reviews_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportConductBusinessPerformanceReviews",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-conduct-business-performance-reviews:6fe1694bd8658de094dfe1ee06bfd412f86402c691f2f5f584b0007294ca1aa7",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportConductBusinessPerformanceReviews",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24545,
+  "skill_sha256": "7d5acb423ef33d7e9ed823a17400e0cdfca31c6456b877478a10777634d9794e",
   "tool_schema": {
     "properties": {
       "audience": {

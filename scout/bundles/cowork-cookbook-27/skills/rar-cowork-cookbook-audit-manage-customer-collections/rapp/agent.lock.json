@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_manage_customer_collections",
+  "agent_bytes": 10681,
   "agent_file": "audit_manage_customer_collections_agent.py",
   "agent_sha256": "6bc8c8d81f81166d6ad3208486bf287d59bb046ffce6c7bc483a3a8ad4d1c092",
+  "backup_agent": "audit_manage_customer_collections_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditManageCustomerCollections",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-manage-customer-collections:5f8df677e749127f78195f809896c32fe1f7965872a8a7774725587ea8fa9420",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditManageCustomerCollections",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24758,
+  "skill_sha256": "643eb6bc25705c64bd6194476bddbb097dca29c02c72e52d8071ca25a4719b27",
   "tool_schema": {
     "properties": {
       "criteria": {

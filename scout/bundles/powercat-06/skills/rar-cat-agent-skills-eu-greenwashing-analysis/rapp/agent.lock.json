@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/eu_greenwashing_analysis",
+  "agent_bytes": 9684,
   "agent_file": "eu_greenwashing_analysis_agent.py",
   "agent_sha256": "60f5b0746b2395fef7e8225ba803aeb9de1264b58c9797df97fb0a80123d7a5e",
+  "backup_agent": "eu_greenwashing_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EuGreenwashingAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Remi Dyon",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/eu-greenwashing-analysis:b387017d7f3cb988dd0c9c5b3423468464f415bc68e9ad9a2a6327595fa62a2f",
+  "rollback_agent_retained": true,
   "runtime_name": "EuGreenwashingAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23363,
+  "skill_sha256": "9a5f04dcf4373ec09e42ded82a3f117c0d976719a4fea472271ca749d729c9b7",
   "tool_schema": {
     "properties": {
       "criteria": {

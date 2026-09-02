@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/catch_up_on_follow_ups_i_owe",
+  "agent_bytes": 10272,
   "agent_file": "catch_up_on_follow_ups_i_owe_agent.py",
   "agent_sha256": "9e995fae1369a852687aaa25c0855404c71d764521f066aaf1065589a4c4ed82",
+  "backup_agent": "catch_up_on_follow_ups_i_owe_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CatchUpOnFollowUpsIOwe",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -75,8 +78,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/catch-up-on-follow-ups-i-owe:983595776462608c7b0d286e4e53f2e049ca7a93edbfb6249ffb9b1d6a5efbb2",
+  "rollback_agent_retained": true,
   "runtime_name": "CatchUpOnFollowUpsIOwe",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23990,
+  "skill_sha256": "ec0894e2f111640f3a0be641279725a54569e1e111f041eb816b52c29924cacc",
   "tool_schema": {
     "properties": {
       "operation": {

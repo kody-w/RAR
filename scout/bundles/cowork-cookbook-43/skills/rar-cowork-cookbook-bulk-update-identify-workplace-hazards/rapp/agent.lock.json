@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_identify_workplace_hazards",
+  "agent_bytes": 10647,
   "agent_file": "bulk_update_identify_workplace_hazards_agent.py",
   "agent_sha256": "e0ee9fe72edf26dc405fb0f9f15fe022d96c1277820bd99bb64758075e2100ad",
+  "backup_agent": "bulk_update_identify_workplace_hazards_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateIdentifyWorkplaceHazards",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-identify-workplace-hazards:856934f1c0b62a730bdd9d83059c094655391d311207b8d37d2e0aae43f00957",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateIdentifyWorkplaceHazards",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24728,
+  "skill_sha256": "930d242ec2e930616cdb832d1f8ea81c9f0c760d0b6214281b4ba21fb01ab654",
   "tool_schema": {
     "properties": {
       "operation": {

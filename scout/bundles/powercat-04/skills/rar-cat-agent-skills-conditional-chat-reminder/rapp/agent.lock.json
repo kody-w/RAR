@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/conditional_chat_reminder",
+  "agent_bytes": 9252,
   "agent_file": "conditional_chat_reminder_agent.py",
   "agent_sha256": "2ff960cf9799c7e9336fd4eea85e8acf88d5d9ebf2ff5c3a52dce0da0f069171",
+  "backup_agent": "conditional_chat_reminder_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConditionalChatReminder",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Giorgio Ughini",
@@ -41,8 +44,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/conditional-chat-reminder:c6e9b38300f6bac337831cfd9cfc2bf57e2abaabd89b828001ac3a9a120ddee3",
+  "rollback_agent_retained": true,
   "runtime_name": "ConditionalChatReminder",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22222,
+  "skill_sha256": "ea14f1ec9381e34aa7552e43afcaf1f5cc5f7b2d4e806b5f71c52d8282c4112f",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,13 +1,14 @@
 ---
 name: "rar-kody-w-hello-world"
 description: "Says hello to the user."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@kody-w/hello_world_agent", "rar_sha256": "d2695f70a412909546a49586487a471e6bca9c2d215d0367d440a80473b75bd1", "source_kind": "rar-agent", "source_commit": "026f18b4093e3ec07c2f359dd9618438e020a0be", "version": "1.0.3", "author": "kody-w", "tags": ["tutorial", "hello-world", "starter"]}
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@kody-w/hello_world_agent", "rar_sha256": "d2695f70a412909546a49586487a471e6bca9c2d215d0367d440a80473b75bd1", "source_kind": "rar-agent", "source_commit": "026f18b4093e3ec07c2f359dd9618438e020a0be", "default_artifact": "skill", "canonical_format": "skill", "grail_record": true, "materializes": ["agent"], "backup_agent": "hello_world_agent.py", "rollback_agent_retained": true, "rapp": {"schema": "rapp/1", "rappid": "rappid:@kody-w/hello-world:13cc8a648bd0a09a4458f52f952b2c9e5d64ed740a9c59625238d7a943ca809a", "kind": "skill"}, "version": "1.0.3", "author": "kody-w", "tags": ["tutorial", "hello-world", "starter"]}
 ---
 
 ## Microsoft Scout runtime
 
-This is the reversible Scout projection of `@kody-w/hello_world_agent`. The original RAPP
-agent is preserved byte-for-byte in `hello_world_agent.py` and in the RCI capsule.
+This Toasted `SKILL.md` is the default Grail projection of `@kody-w/hello_world_agent`. The
+original RAPP agent is checksum-vaulted in the RCI capsule; `hello_world_agent.py` is
+retained temporarily as a byte-exact rollback backup.
 
 When Scout can execute local files, resolve this skill directory and run:
 
@@ -16,12 +17,12 @@ python3 scripts/run_agent.py --preflight
 echo '{}' | python3 scripts/run_agent.py
 ```
 
-Pass the real JSON arguments instead of `{}`. The runner verifies the linked
-agent SHA-256 before importing it. If preflight reports a host dependency that
-Scout cannot satisfy, use the `brainstem_chat` MCP tool to run the canonical
-agent in the user's Brainstem. Never paraphrase the factory or agent into a new
-implementation. The generic direct-file commands in the generated Toaster
-section are recovery guidance; Scout should prefer the verified runner.
+Pass the real JSON arguments instead of `{}`. The runner verifies the
+`SKILL.md` and agent checksums, prefers the rollback backup while it exists,
+and otherwise executes the exact vaulted agent bytes directly from the Grail
+record. If preflight reports a host dependency that Scout cannot satisfy, use
+the `brainstem_chat` MCP tool to run the canonical agent in the user's
+Brainstem. Never paraphrase the factory or agent into a new implementation.
 
 Hello World Agent — A friendly greeting agent that demonstrates the basics.
 
@@ -103,4 +104,4 @@ class HelloWorldAgent(BasicAgent):
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1:H4sIAAAAAAAC/61Wa3PqOBL9K1rPhzszJAGMMTZbd2uBkACXV3gEwrKVyLYMCkYykswrk/++LZvk3pmd2U9LpVJG7sfp091HvBk4UWsujKqx4cHp+mBcGQGRvqCxopzB8RifJFqTKOJIwd+aoEQScQN25Ii3cUSkUf3Xv68MCs9G9c3wIyzhyGhplxkXUVBbEabAPsJsBS/iEyRk8D0mIuRiC0cBCdHl28+SROEV+vXXzQGLlfwFXf8DSSWqS4YuH4a3BH1F2fubFVE/Lw19tjSu0NJIMy6NX77bC6ISwVC4zCBdoTdt/f43NCORzyHWpaxRbThEKVZEfC5PUpHtzdIw3qE2BhASXzOiS/vpJ9SjvuCShwqNfZ4oJBKmKGBgSzZZU4kmHIN/gF7G39rd7s02eEFwqtNArTiJFLoXmEYoFvyVpIERD9HLP7Mm5FO+nw+6lmesIb3coMkawnNBV5ThKEObvtKB/TXxNzLZXu91bMhLWVZTo418HMskIn9HL/8V9SY+aVxLBhxhysAPao65wIJGJ4Qlwsg7KXINnfahRh5FHvY3SP9L4htd7GxN2IUCHzNEjsRPFEER9wFjSGE6rqABkkd74FkTIzc0ilBABVTNBSRhgSavqoO9vLx4WK6XLBuREsrmUObB4BMwur6OBQkjulqrJSP+mqMvb+9f0G/of3mlwXWOIUxnSo0ggLAzHvQRzFGyBTOJdJ8JDtJWvL1nnGt0jAi0J4KGlKTOEO17X3UFWSM+ugA1a4hEXDL9njd0WAMviMKYHalU8mrJdAgOpuJAJfkgMXPOqP9oa5ZH90ReOIQ+hYJvU9t0pHQzfS6CG9QO0SdTUC70VemOrrlUMIUxYQFh/gk8sfreQsYVklhRGZ6u9KYvmY784kFoTc722QfzF9RrDGFveKSXBwhK04M3Z1Q3/jKX7FMuvsCM1T9C3KA+ATZRjAWO1wJLktqFOJsILj79IThGjByQFheie4T1qqSTly4zStf9srXLxCwULVQDQigUB8ysBCGKstUlYFppQLZcrzP+YBhGjvpSC1pEfcIkMaosiaKrVFT+VMg08C1R0F8teLDCoF2KkvRb5vT2BxHt40xnUkAQQZ1iHRpgADrjHSRGkF0CDQ0yMb28554WB61AcYRVJpZvBqTGAVZYP2cjlY05OPzZhkO6z8486xhYW6Z7mIp9KkfPGCrQHfjh1UqP03M2TUYVBJBcGeAMe4Ajek5138gSA+LvQgYRQECupZ6ofPGmAJGgz7FGu6Es+CGBPqZBaq8fqr9Tv+u0imqx5PsOti3HCwq44GLLKjth2QzdsumZvkvKgW2RoGIVsOuXXdssmyUnqGDXKvnYAXtII2Evt/iSJl/UdALAT87+UnONzE6usVm29S1l2m45rBSwVTTdglu2bGy5ZQewVbBVKRLb8wGEGZjFclAo2ZXAAlROwaqUvErZC4o63kUKsgTPH7L7wa7kifDJM9xKW6qhFUw7LDqeVXBLpET8QsU3w1LZDQLXLjpWySEFE0jxiPHpemFYNyCrQc8WqADs4F7nebt0TI+ObenptmS7ln0aebM4PcwqXq92cnMnabFFm/oTTxZ3d7fSUeY9KEih13+4b8f9QZGr02LOF5un0VM9d+y6p/lrpyNjc8umhXZus3GdyXHRCHv3pprXxfxxX1ebu1tnGJZa7rpRGY3xbm2u/Ce6mdR6p8V2s2+MxbTI1qeNqp/r9022H8dul0/actd9KOxWeDia3s17d5M6OzW7ecJjb9W0ZpO5mA3OZ2/viEca7TtN/JD37FLk3ebE7aJerNy1w9quzVaN4a57PsW7WjnsOvnReB8NXDwYjSbc9OfbU4uPbd++lzK/LssoL4qtekXWH16b/t2gWH+g2/7hgdNmcMuHwdA6tO6GhXXr1lmE0/mTqimaLz1NW/c+P5xHwlvVCzlOxsNX3GeTkuCHflDc07gvh80g3xiIzoA+evKhPRrZ1pBOdvvuqjANzH7/NFN7UVeNvmv1kqjxOF3lXK8+7dfH296hsBPBzLF6q6Y/3E++8XH+YdjG5SDf3w3iJ2+CNwfH2wx6W5OKZJi7n4ueVPGC4fPKMYPFtLs7vyb1SaM5DReP0UypToU2O83WrOP4T23ZzQ0Pja3kDTktULO7lrjUIreva+9YfkxGPBrOp+PyifY7DdXx954fNBb7s1eclXObudqvkvo5t5uwhXm0J5t5/7FztItPUaWxd6y7jonvu0MxrrDi65jmxPQQbAYtPOvvc5UDG4pJqV0OW3OpzEH7DtZ3PZ4erH0UHMP+PMnVnXt+THZ2e3x2v7Gc29uXJi1yPPdyhfFKuo9mY3H24tNoZgavqvY4vzv7LXsk8vXurJXfBMliOODOQ8wmQZuWRsX9NrAPUi7suG4v7PogiF7r00ONlJyaUttjiTUnFSXM8r3n8llfFFpsMMo/9PC8w2Ln8ACr8vUrrFx6DRvVomlXrgz9W+dyYfyFCK/ONH6++NhFG1b2/yYs2ZLzPSBgPtG6DL9ugmqavPqncECxhU8hdybQMkpWF9nI1PD6Bw3W70/Z3c+ZIkf1cUEqvEovAZXAxQ2XAhj+wU3BtUKEzgYXvswuB8h4UzLe/wPgR+w+egwAAA== -->

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_analyze_financial_statements",
+  "agent_bytes": 10756,
   "agent_file": "scheduled_brief_analyze_financial_statements_agent.py",
   "agent_sha256": "09d4cfb68e47b85478b56d2f83d3c9b15fa5ebdbf937ad8f52fe963c3a775a7a",
+  "backup_agent": "scheduled_brief_analyze_financial_statements_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAnalyzeFinancialStatements",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-analyze-financial-statements:6d732aaaf22ae89c42091fe70eca135a548c7f64b9d9000a1112bc1754fd05d6",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAnalyzeFinancialStatements",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24931,
+  "skill_sha256": "5845c925e09507c06aef6fa23f5e6d8ab9a3b63493cdae00006ed44a4ff84e7a",
   "tool_schema": {
     "properties": {
       "operation": {

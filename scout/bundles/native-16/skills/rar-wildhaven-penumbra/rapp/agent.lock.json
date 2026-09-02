@@ -1,9 +1,12 @@
 {
   "agent": "@wildhaven/penumbra_agent",
+  "agent_bytes": 10794,
   "agent_file": "penumbra_agent.py",
   "agent_sha256": "00a2946996be36b9234c3e9cbf916eee70fed319104bff2aef7325e437343a6f",
+  "backup_agent": "penumbra_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Penumbra",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Wildhaven of America",
@@ -28,8 +31,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@wildhaven/penumbra:8e5f0966bf70785fac912772bf4672bd526c9bb893ccafdc5d5f7f5579070efb",
+  "rollback_agent_retained": true,
   "runtime_name": "Penumbra",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22859,
+  "skill_sha256": "d383bec0cee618aa567a44fe504cd8f1acdc34a65f768527d9a08903323ce13c",
   "tool_schema": {
     "properties": {},
     "required": [],

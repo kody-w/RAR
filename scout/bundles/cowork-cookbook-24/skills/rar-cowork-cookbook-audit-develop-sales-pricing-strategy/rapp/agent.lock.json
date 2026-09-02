@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_develop_sales_pricing_strategy",
+  "agent_bytes": 10720,
   "agent_file": "audit_develop_sales_pricing_strategy_agent.py",
   "agent_sha256": "6aeda032b42088508a86fe2e3e53777cb8745dc680b703488f921d59b136330f",
+  "backup_agent": "audit_develop_sales_pricing_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDevelopSalesPricingStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-develop-sales-pricing-strategy:d48616107bc0da8d8a21b8539d6af9d5cf74089ae8439e1728dea16d2ff50060",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDevelopSalesPricingStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24886,
+  "skill_sha256": "fa16ccd5a38c1864ff698b877ba3f42c7aac63627f79ae1df98195cdf4a9bef6",
   "tool_schema": {
     "properties": {
       "criteria": {

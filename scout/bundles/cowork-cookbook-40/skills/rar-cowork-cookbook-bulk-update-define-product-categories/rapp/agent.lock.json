@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_product_categories",
+  "agent_bytes": 10641,
   "agent_file": "bulk_update_define_product_categories_agent.py",
   "agent_sha256": "402473a1f2ba9679b286a4ea1f5893df0a547f47ffb49840e031bfa081873bb5",
+  "backup_agent": "bulk_update_define_product_categories_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineProductCategories",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-product-categories:d85fef815d085f50619a8a3192f9a1ea5ed0becb3cb869121cbb8d87b57c6765",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefineProductCategories",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24693,
+  "skill_sha256": "b01ac17ad9649fd0f51a6dafb05734589a6b9988e91cae612939e9cf011b7bfd",
   "tool_schema": {
     "properties": {
       "operation": {

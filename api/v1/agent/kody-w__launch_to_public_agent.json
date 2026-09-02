@@ -3,11 +3,12 @@
   "id": "kody-w__launch_to_public_agent",
   "name": "Launch to Public",
   "rar_name": "@kody-w/launch_to_public_agent",
-  "rappid": "rappid:@kody-w/launch_to_public_agent:a53115c5537ff1823313cf969b4f2089b345d87e4c448f553f70dc0ad8f26a24",
-  "_migrated_from": "rappid:@kody-w/launch_to_public_agent:0ec91494afc86c5eb9c467a1cf73fde889b172adadfdfc2330534d350cb3db06",
+  "rappid": "rappid:@kody-w/launch-to-public:cf6d58baa0b18e77dd7bf8cbbf76b016b0c042a39bc7f5dabe0591b9e3a4afd6",
+  "_migrated_from": "rappid:@kody-w/launch_to_public_agent:a53115c5537ff1823313cf969b4f2089b345d87e4c448f553f70dc0ad8f26a24",
   "_migrated_from_all": [
     "rappid:@kody-w/launch_to_public_agent:a124f8270d4746f0257e453a64f30adff330e876330c81769f2ee9ed7e7808d7",
-    "rappid:@kody-w/launch_to_public_agent:0ec91494afc86c5eb9c467a1cf73fde889b172adadfdfc2330534d350cb3db06"
+    "rappid:@kody-w/launch_to_public_agent:0ec91494afc86c5eb9c467a1cf73fde889b172adadfdfc2330534d350cb3db06",
+    "rappid:@kody-w/launch_to_public_agent:a53115c5537ff1823313cf969b4f2089b345d87e4c448f553f70dc0ad8f26a24"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.5",
@@ -33,9 +34,18 @@
   "sha256": "857168ad0d4421f9099e93a63c4805ad22e229c31526b4d1cab37f9548fdff0e",
   "has_card": true,
   "added_at": "2026-05-09T15:25:17-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-launch-to-public",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__launch_to_public_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-launch-to-public/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-launch-to-public/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__launch_to_public_agent.py",
   "api_card_url": null,

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_establish_support_subscription",
+  "agent_bytes": 10727,
   "agent_file": "teams_update_establish_support_subscription_agent.py",
   "agent_sha256": "739095eb5fd2b76e531852e874d2f4c78412ce2729ef0667154b3b564d5d351a",
+  "backup_agent": "teams_update_establish_support_subscription_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateEstablishSupportSubscription",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-establish-support-subscription:d97c2dd69614c8e4198afc52a64292f9b8bc76d91db5ff7c587780bc19c2c154",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateEstablishSupportSubscription",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24873,
+  "skill_sha256": "2df6ecff6989ef094b0ae7c52839381c5acc7c4d9b93bcf20f7907fcf6c73f96",
   "tool_schema": {
     "properties": {
       "operation": {

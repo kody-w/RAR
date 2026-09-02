@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_plan_risks_and_opportunities",
+  "agent_bytes": 10663,
   "agent_file": "ppt_exec_plan_risks_and_opportunities_agent.py",
   "agent_sha256": "0fcc4a4cc39af35a4414666715ccaf8819813037193ba2737c5a5cd471dacacd",
+  "backup_agent": "ppt_exec_plan_risks_and_opportunities_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecPlanRisksAndOpportunities",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-plan-risks-and-opportunities:a69b46b518ae7315c73e32ebb50960f9777dddb06b3d5280b8bb481375047238",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecPlanRisksAndOpportunities",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24771,
+  "skill_sha256": "5ab45ba644e845e4958673a8b44182fda6871b2556013da83f24d04b4039dbb9",
   "tool_schema": {
     "properties": {
       "operation": {

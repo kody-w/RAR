@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_process_change_requests",
+  "agent_bytes": 10588,
   "agent_file": "ppt_exec_process_change_requests_agent.py",
   "agent_sha256": "b40e0067bec916ca1471015629e0e9092915debf0052cd2715436938f764b7dc",
+  "backup_agent": "ppt_exec_process_change_requests_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecProcessChangeRequests",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-process-change-requests:d67bccf3615eb476eb71a97ee6132e0d7f1335110b9a2489fbd33b6613ee414a",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecProcessChangeRequests",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24549,
+  "skill_sha256": "3219a5880e6cdfeb396b68c0806037eb59e4d777deaaf322dbc63919eb886530",
   "tool_schema": {
     "properties": {
       "operation": {

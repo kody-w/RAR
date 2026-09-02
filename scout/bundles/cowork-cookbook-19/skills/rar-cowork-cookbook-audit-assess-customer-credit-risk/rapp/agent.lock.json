@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_assess_customer_credit_risk",
+  "agent_bytes": 10703,
   "agent_file": "audit_assess_customer_credit_risk_agent.py",
   "agent_sha256": "4d1df90b953648eed37206501c49ecfbd753b210fb5d7967aac12cf1d4b037be",
+  "backup_agent": "audit_assess_customer_credit_risk_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAssessCustomerCreditRisk",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-assess-customer-credit-risk:0e7ccf6cf0fcf1d842c23d29d379a03a4aad22bbae9ab78dc50702c407dbb53c",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAssessCustomerCreditRisk",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24812,
+  "skill_sha256": "44756a8534a3b14ada978b8afd1873393d6c4da4f2f1dd54baa93383576cf920",
   "tool_schema": {
     "properties": {
       "criteria": {

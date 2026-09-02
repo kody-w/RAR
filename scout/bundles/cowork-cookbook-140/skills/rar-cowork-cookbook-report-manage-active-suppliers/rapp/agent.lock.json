@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_manage_active_suppliers",
+  "agent_bytes": 10329,
   "agent_file": "report_manage_active_suppliers_agent.py",
   "agent_sha256": "bf1c5560ede53e0d13f28e11334479a0bf0cab5285f1bf8cc718d785a70b753b",
+  "backup_agent": "report_manage_active_suppliers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportManageActiveSuppliers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-manage-active-suppliers:fbe77d48ea7ce801a3793b7d2d0b6a7ebac48cd06974a68deee139da3767dd94",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportManageActiveSuppliers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24122,
+  "skill_sha256": "c13c99522cba3510d52658ab405deb44ab8dd7648ff6c6addd0bb1d3f1fcde80",
   "tool_schema": {
     "properties": {
       "audience": {

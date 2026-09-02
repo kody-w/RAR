@@ -5,6 +5,13 @@
   "id": "9d37010824507ee4",
   "lastExecutedAt": null,
   "name": "StoreNavigator",
+  "rapp": {
+    "backup_agent": "store_navigator_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-rapp-store-navigator"
+  },
   "schedule": {
     "days": [
       1,

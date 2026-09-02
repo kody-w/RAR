@@ -3,10 +3,11 @@
   "id": "kody-w__context_memory_agent",
   "name": "ContextMemory",
   "rar_name": "@kody-w/context_memory_agent",
-  "rappid": "rappid:@kody-w/context_memory_agent:90c4190766f6ebd727222183d10107a3b3f168742e1f54f59cce99bca0504518",
-  "_migrated_from": "rappid:@kody-w/context_memory_agent:f04e20396413320cebe4e67f70ad92e84e4a8efca97f3259d0700ab1ea38f58a",
+  "rappid": "rappid:@kody-w/context-memory:398b0ad267346c75e1dc516d50ab52fce908d2b587dc46671f7f930432027d9f",
+  "_migrated_from": "rappid:@kody-w/context_memory_agent:90c4190766f6ebd727222183d10107a3b3f168742e1f54f59cce99bca0504518",
   "_migrated_from_all": [
-    "rappid:@kody-w/context_memory_agent:f04e20396413320cebe4e67f70ad92e84e4a8efca97f3259d0700ab1ea38f58a"
+    "rappid:@kody-w/context_memory_agent:f04e20396413320cebe4e67f70ad92e84e4a8efca97f3259d0700ab1ea38f58a",
+    "rappid:@kody-w/context_memory_agent:90c4190766f6ebd727222183d10107a3b3f168742e1f54f59cce99bca0504518"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -30,9 +31,18 @@
   "sha256": "611d0957274b1f584acd9f763bb789b616eca4c1e4297665064bfeef9ed37e7a",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-context-memory",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__context_memory_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/context_memory_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/context_memory_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-05/skills/rar-kody-w-context-memory/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-05/skills/rar-kody-w-context-memory/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__context_memory_agent.py",
   "api_card_url": null,

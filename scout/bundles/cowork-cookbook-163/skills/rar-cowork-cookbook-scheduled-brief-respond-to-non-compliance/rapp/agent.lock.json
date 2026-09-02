@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_respond_to_non_compliance",
+  "agent_bytes": 10719,
   "agent_file": "scheduled_brief_respond_to_non_compliance_agent.py",
   "agent_sha256": "12bd4be5cc9fba4d2b4a9868fd210927e23accc607d0373d0c7ee4cfbae1d689",
+  "backup_agent": "scheduled_brief_respond_to_non_compliance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefRespondToNonCompliance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-respond-to-non-compliance:00351a15e627c1c020d0c6ab67912cece99565860ba0fe2eb3c9da687e395e8f",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefRespondToNonCompliance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24850,
+  "skill_sha256": "63b45a75e1921c3a14dbfb912606b887de4e882dcc26dc1a55f0ed98194cc164",
   "tool_schema": {
     "properties": {
       "operation": {

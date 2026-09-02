@@ -1,9 +1,12 @@
 {
   "agent": "@wildhaven/bellows_agent",
+  "agent_bytes": 19285,
   "agent_file": "bellows_agent.py",
   "agent_sha256": "70aca84f711e97ddfc78ac555e826b60332ce5eae25bc90e85c7d8f42dddc608",
+  "backup_agent": "bellows_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Bellows",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Wildhaven of America",
@@ -29,8 +32,16 @@
     ],
     "version": "1.1.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@wildhaven/bellows:84ce546eeddd950dc88ec1e3f2870980c46f997b652d0a22882661e6be38fbab",
+  "rollback_agent_retained": true,
   "runtime_name": "Bellows",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 37283,
+  "skill_sha256": "b743d9c5d052e96d9490de2da611be226994adf9a30a5fbce7a53074b62e20f9",
   "tool_schema": {
     "properties": {},
     "required": [],

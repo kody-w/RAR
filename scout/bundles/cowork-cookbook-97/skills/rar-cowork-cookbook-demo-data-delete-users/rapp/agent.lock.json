@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_delete_users",
+  "agent_bytes": 10409,
   "agent_file": "demo_data_delete_users_agent.py",
   "agent_sha256": "8a0707a5c46df05b942796b6240ac2b82227efb083480b882362276a14e63ea3",
+  "backup_agent": "demo_data_delete_users_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDeleteUsers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-delete-users:56e0b88777d25376c751bc7db737ec18fb1137c2d207ab065dd38209bba9bb33",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDeleteUsers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24199,
+  "skill_sha256": "8427c394fb4dad9e32f4adbb9d9122402372ae2747b68ae0f477f6b5400df73f",
   "tool_schema": {
     "properties": {
       "operation": {

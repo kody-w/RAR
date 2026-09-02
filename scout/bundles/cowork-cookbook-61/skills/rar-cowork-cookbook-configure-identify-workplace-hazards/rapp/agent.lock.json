@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_identify_workplace_hazards",
+  "agent_bytes": 10828,
   "agent_file": "configure_identify_workplace_hazards_agent.py",
   "agent_sha256": "718ef5475e26a77341c68b49a45a3b1b63e3b16b6e4239364c84529c3ae942d8",
+  "backup_agent": "configure_identify_workplace_hazards_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureIdentifyWorkplaceHazards",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-identify-workplace-hazards:0f4a13e40d8cf646a6e95115dc11e0b06d2c3d03bf7b8cbe5b7f12259c313e9b",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureIdentifyWorkplaceHazards",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24918,
+  "skill_sha256": "f85874589c9af7080fb23a38fd28a440d84fb63c991df952e201f2a5f099623a",
   "tool_schema": {
     "properties": {
       "operation": {

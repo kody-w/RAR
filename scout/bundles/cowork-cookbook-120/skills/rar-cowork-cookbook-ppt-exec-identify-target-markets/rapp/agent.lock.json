@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_identify_target_markets",
+  "agent_bytes": 10600,
   "agent_file": "ppt_exec_identify_target_markets_agent.py",
   "agent_sha256": "1ecd9e88a9751b5bba8aae2fc444650ce18e3e172e10c82f47ea6d8db4bfb82a",
+  "backup_agent": "ppt_exec_identify_target_markets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecIdentifyTargetMarkets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-identify-target-markets:6db0cb5c0f77bc8adc8d7bec56b1476bcf6e210c833f9d80d1ae275ea365850a",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecIdentifyTargetMarkets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24602,
+  "skill_sha256": "b0342dd44b882d3b0093d1d5c262640be74fe2208e49f099854e7363def9e558",
   "tool_schema": {
     "properties": {
       "operation": {

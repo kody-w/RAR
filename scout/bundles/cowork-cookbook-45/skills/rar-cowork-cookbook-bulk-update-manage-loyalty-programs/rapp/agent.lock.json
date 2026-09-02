@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_manage_loyalty_programs",
+  "agent_bytes": 10622,
   "agent_file": "bulk_update_manage_loyalty_programs_agent.py",
   "agent_sha256": "a26d10f0895633c69c1b34e46bdf637b89ed42537411529b5534efa7d3e7a079",
+  "backup_agent": "bulk_update_manage_loyalty_programs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateManageLoyaltyPrograms",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-manage-loyalty-programs:5984b89d0f9417967cd01f164f7158171ced4c0237441c482e700d46c9bcdf27",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateManageLoyaltyPrograms",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24669,
+  "skill_sha256": "89346bc0b6db283c3dc8280fad48901afdfd73d5268d248ea8f750fe4f59c73f",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_create_a_case_from_a_channel",
+  "agent_bytes": 10572,
   "agent_file": "demo_data_create_a_case_from_a_channel_agent.py",
   "agent_sha256": "8f320dfb42289062ab3d219714de73eded62b71e67c9ee90cd09fe7adb33cbae",
+  "backup_agent": "demo_data_create_a_case_from_a_channel_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataCreateACaseFromAChannel",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-create-a-case-from-a-channel:4923982ae41f2d5a9e183d8ed4f58fb354b2ad267f9df49b51ef2c643dbe5cd5",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataCreateACaseFromAChannel",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24651,
+  "skill_sha256": "3805784f29c1ee76e152c88ce1113fd9736764d46943b8a9bdc9ca62851c148e",
   "tool_schema": {
     "properties": {
       "operation": {

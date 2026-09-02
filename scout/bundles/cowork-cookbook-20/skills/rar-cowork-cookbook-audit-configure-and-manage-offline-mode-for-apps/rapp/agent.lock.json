@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_configure_and_manage_offline_mode_for_apps",
+  "agent_bytes": 10903,
   "agent_file": "audit_configure_and_manage_offline_mode_for_apps_agent.py",
   "agent_sha256": "6b95fe6280296cb3b470f98a81a38d412da37089aeb6714b8a73842368aa6431",
+  "backup_agent": "audit_configure_and_manage_offline_mode_for_apps_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditConfigureAndManageOfflineModeForApps",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-configure-and-manage-offline-mode-for-apps:fd7901b11f4a103d4cde92d802173f987b9c8c9da11e4e1817f92f6a717b694b",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditConfigureAndManageOfflineModeForApps",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25341,
+  "skill_sha256": "d3a2824416f869039d5067de5c6589ed13bab01cd4c6844c5056fc3ad9491c4d",
   "tool_schema": {
     "properties": {
       "criteria": {

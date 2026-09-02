@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_manage_bills_of_exchange",
+  "agent_bytes": 10520,
   "agent_file": "demo_data_manage_bills_of_exchange_agent.py",
   "agent_sha256": "57c5671556245dac6acf204d495fb1ed9d52d35484c2f561e3457f7e90a21b19",
+  "backup_agent": "demo_data_manage_bills_of_exchange_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataManageBillsOfExchange",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-manage-bills-of-exchange:446fce72b5787bdbff44c108e20a15c7a22b7d9f17f2423ce6c5dfef4ba32379",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataManageBillsOfExchange",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24534,
+  "skill_sha256": "564d34ad699d8622cd4a1b782487fb392adc3db138936e3cfa1f58f755de8c26",
   "tool_schema": {
     "properties": {
       "operation": {

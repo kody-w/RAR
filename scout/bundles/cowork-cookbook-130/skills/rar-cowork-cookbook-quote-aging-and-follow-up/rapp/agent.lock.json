@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/quote_aging_and_follow_up",
+  "agent_bytes": 10545,
   "agent_file": "quote_aging_and_follow_up_agent.py",
   "agent_sha256": "361f6ca455b56cba62caf585a8468d468bb60ab7f5181257fab8910b80d459ca",
+  "backup_agent": "quote_aging_and_follow_up_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "QuoteAgingAndFollowUp",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -87,8 +90,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/quote-aging-and-follow-up:64b012e9764b0f09fb0455a6899a7b908abf06128feef6f861476958ebf92c74",
+  "rollback_agent_retained": true,
   "runtime_name": "QuoteAgingAndFollowUp",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24466,
+  "skill_sha256": "03916e48059ebe3a8ba381dc47e2418e77e21f17990a135cf793dd36ef069df8",
   "tool_schema": {
     "properties": {
       "operation": {

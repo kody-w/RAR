@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/blog_post_structure_pass",
+  "agent_bytes": 9089,
   "agent_file": "blog_post_structure_pass_agent.py",
   "agent_sha256": "b337e49ea0b120fa4994304c114666c76182f2b76b6081e1c3d478d82ee4b5b5",
+  "backup_agent": "blog_post_structure_pass_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlogPostStructurePass",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Simon Owen",
@@ -44,8 +47,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/blog-post-structure-pass:a652a12e0227893abb676ba9f93cff7eb1a844c154c5f2ca0b8ed0b7bc2bcaf3",
+  "rollback_agent_retained": true,
   "runtime_name": "BlogPostStructurePass",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21981,
+  "skill_sha256": "268d992753403e3e2019da2c73a02c7175a7d7404979184da360c85557167f3e",
   "tool_schema": {
     "properties": {
       "audience": {

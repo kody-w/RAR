@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_document_warehouse_policies",
+  "agent_bytes": 10424,
   "agent_file": "report_document_warehouse_policies_agent.py",
   "agent_sha256": "9175d05ec95d3de7534822d577ba0f46f4eb548bd487871152419df7735bbb18",
+  "backup_agent": "report_document_warehouse_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDocumentWarehousePolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-document-warehouse-policies:61fa004e103168aafd5fdfcec7e448cb0a81166d03e72760a3ad992dda019156",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDocumentWarehousePolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24308,
+  "skill_sha256": "b0d636fc83a3b1d9073c3513e43efb19c335082b542a7b0a5613cf44d6754f82",
   "tool_schema": {
     "properties": {
       "audience": {

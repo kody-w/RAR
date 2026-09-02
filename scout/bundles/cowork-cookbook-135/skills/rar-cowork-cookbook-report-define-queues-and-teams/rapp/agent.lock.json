@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_define_queues_and_teams",
+  "agent_bytes": 10364,
   "agent_file": "report_define_queues_and_teams_agent.py",
   "agent_sha256": "e2d593aa5bbb243d28154174431557d164c8bde90c2cb7ea405aba9510b062d0",
+  "backup_agent": "report_define_queues_and_teams_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDefineQueuesAndTeams",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-define-queues-and-teams:40da017e6c7fd6066365d38351b4872127000ee6a1bde0ac5ca5271a7d716506",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDefineQueuesAndTeams",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24214,
+  "skill_sha256": "cfd9e2436675ca91db4f29f469a51bfdeb9693388fc83bdc06a58bff30429195",
   "tool_schema": {
     "properties": {
       "audience": {

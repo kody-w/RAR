@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_track_project_time",
+  "agent_bytes": 10574,
   "agent_file": "audit_track_project_time_agent.py",
   "agent_sha256": "0092c0e80e3a93a591435cb13836924a89220eeeb9c54773ac3c1c590bd94a93",
+  "backup_agent": "audit_track_project_time_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditTrackProjectTime",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-track-project-time:42a8d970f677909ec965f03211966fd15fc3c25774b5cdae879cdf9a9de1abbf",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditTrackProjectTime",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24504,
+  "skill_sha256": "eab882de6615d19eae01f3b1ebe38aba683ade22c10dc522b40c0f4c8e9006d5",
   "tool_schema": {
     "properties": {
       "criteria": {

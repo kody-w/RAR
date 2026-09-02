@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_invoice_project_transactions",
+  "agent_bytes": 10706,
   "agent_file": "audit_invoice_project_transactions_agent.py",
   "agent_sha256": "8fb2cc8b44b7419a9a55188e1fd1e8724a5a3caae5c3f32075421cf37c50f864",
+  "backup_agent": "audit_invoice_project_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditInvoiceProjectTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-invoice-project-transactions:f31277f401d1befbe06f32bbe9cdaafabea4dd729b1da2fadbb4508f75628805",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditInvoiceProjectTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24794,
+  "skill_sha256": "4714f686cbcc831ed74bc530faf2d93f9d09c46387503b4bd2379c9988776449",
   "tool_schema": {
     "properties": {
       "criteria": {

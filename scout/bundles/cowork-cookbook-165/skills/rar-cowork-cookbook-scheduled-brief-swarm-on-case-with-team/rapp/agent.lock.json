@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_swarm_on_case_with_team",
+  "agent_bytes": 10678,
   "agent_file": "scheduled_brief_swarm_on_case_with_team_agent.py",
   "agent_sha256": "46105a577d044bacae7960c4d39d9c51a5d9ba9776ae27b6ae3baae29a641b00",
+  "backup_agent": "scheduled_brief_swarm_on_case_with_team_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefSwarmOnCaseWithTeam",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-swarm-on-case-with-team:df81f0007057e410868cd3bb4ec9117c2cb21600568314fb91dd9b1ba7c92200",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefSwarmOnCaseWithTeam",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24804,
+  "skill_sha256": "1bc4fad4111d6f4cfb28ace1b12432d47dae230c72ac54750cb921ed2b6c1a9f",
   "tool_schema": {
     "properties": {
       "operation": {

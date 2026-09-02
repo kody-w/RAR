@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/messaging_drift_audit_and_remediation",
+  "agent_bytes": 10475,
   "agent_file": "messaging_drift_audit_and_remediation_agent.py",
   "agent_sha256": "1b72e8b0bd7f3e54571bcd27d9b27bfeb05361b30ecccc75e7fbed00bbb627ee",
+  "backup_agent": "messaging_drift_audit_and_remediation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MessagingDriftAuditAndRemediation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/messaging-drift-audit-and-remediation:39105db508b3541b47136ca80912b826be8ed4dbe1f8e8703fc867ffcaeaafe5",
+  "rollback_agent_retained": true,
   "runtime_name": "MessagingDriftAuditAndRemediation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24509,
+  "skill_sha256": "3e02bfcb6c7cf99a91c061cb8a4f57fe0abf6075f29cd94f3062b55946a175eb",
   "tool_schema": {
     "properties": {
       "criteria": {

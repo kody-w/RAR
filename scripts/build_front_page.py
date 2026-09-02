@@ -61,6 +61,7 @@ REGISTRY = REPO_ROOT / "registry.json"
 DISCUSSION = REPO_ROOT / "state" / "discussion_ratings.json"
 AGGREGATED = REPO_ROOT / "state" / "aggregated.json"
 AUDIENCE_MAP = REPO_ROOT / "api" / "v1" / "audience" / "map.json"
+SCOUT_CATALOG = REPO_ROOT / "scout" / "catalog" / "catalog.json"
 
 OUT_FILE = REPO_ROOT / "api" / "v1" / "front.json"
 
@@ -404,6 +405,16 @@ def build() -> dict:
     agents = registry.get("agents") or []
     if not agents:
         raise SystemExit("registry.json contains no agents; run build_registry.py")
+    if not SCOUT_CATALOG.exists():
+        raise SystemExit(
+            "Scout catalog missing; run build_scout_exports.py first"
+        )
+    scout = load(SCOUT_CATALOG)
+    skills = {
+        item.get("identity"): item
+        for item in scout.get("skills", [])
+        if isinstance(item, dict) and item.get("identity")
+    }
 
     discussions = discussion_index(load(DISCUSSION)) if DISCUSSION.exists() else {}
     audiences = audience_index(load(AUDIENCE_MAP)) if AUDIENCE_MAP.exists() else {}
@@ -447,6 +458,15 @@ def build() -> dict:
         has_card = bool(agent.get("_has_card"))
         tier = str(agent.get("quality_tier") or "community")
         path = agent.get("_file", "")
+        skill = skills.get(ref) or {}
+        skill_url = next(
+            (
+                item.get("url")
+                for item in skill.get("files", [])
+                if item.get("path") == "SKILL.md"
+            ),
+            None,
+        )
 
         rows.append({
             "origin": "native",
@@ -457,7 +477,11 @@ def build() -> dict:
             "tags": list(agent.get("tags") or []),
             "audience": audiences.get(ref),
             "url": f"{PAGES_BASE}/#agent/{urllib.parse.quote(ref, safe='')}",
-            "install": f"{RAW_BASE}/{path}" if path else None,
+            "install": skill_url or (f"{RAW_BASE}/{path}" if path else None),
+            "backup_install": f"{RAW_BASE}/{path}" if path else None,
+            "default_artifact": skill.get("default_artifact", "agent"),
+            "grail_record": skill.get("grail_record"),
+            "rappid": skill.get("rappid"),
             "source": None,
             "raw": {"community": comm_sub,
                     "tier": TIER_SCORE.get(tier, TIER_DEFAULT),
@@ -633,6 +657,10 @@ def build() -> dict:
             "audience": row["audience"],
             "url": row["url"],
             "install": row["install"],
+            "backup_install": row.get("backup_install"),
+            "default_artifact": row.get("default_artifact"),
+            "grail_record": row.get("grail_record"),
+            "rappid": row.get("rappid"),
             "source": row["source"],
             "score": row["score"],
             "origin_rank": row["origin_rank"],
@@ -740,7 +768,7 @@ def main() -> int:
                         help="exit non-zero if the file on disk is stale")
     args = parser.parse_args()
 
-    for path in (REGISTRY, AGGREGATED):
+    for path in (REGISTRY, AGGREGATED, SCOUT_CATALOG):
         if not path.exists():
             print(f"[front-page] {path.relative_to(REPO_ROOT)} missing", file=sys.stderr)
             return 1

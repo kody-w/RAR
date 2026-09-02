@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/depreciation_forecast",
+  "agent_bytes": 10202,
   "agent_file": "depreciation_forecast_agent.py",
   "agent_sha256": "142a9fcc0006429dff6791ac42021d70a510890f3b71798b20dc67a4f1387be8",
+  "backup_agent": "depreciation_forecast_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DepreciationForecast",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/depreciation-forecast:e099c0ea698eab28f9d84e3ee25853260f217d0d7b671e1357e96391a8223eb1",
+  "rollback_agent_retained": true,
   "runtime_name": "DepreciationForecast",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23781,
+  "skill_sha256": "43eb3b71acab2a86cb78abe64998eaad89f8cae2e3c484317d58c4e84ad50e19",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -81,6 +81,8 @@ SOURCE_COMMITS = [
     "fa28d1f78812d8fcec697fdeb5a2067b0f2efd58",
     "a3391b199669c48572aabdab2087b8c6733f0964",
     "a3391b199669c48572aabdab2087b8c6733f0964",
+    "a3391b199669c48572aabdab2087b8c6733f0964",
+    "a3391b199669c48572aabdab2087b8c6733f0964",
 ]
 
 
@@ -127,7 +129,7 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
     frames = json.loads(RECEIPT.read_text(encoding="utf-8"))
 
     assert isinstance(frames, list)
-    assert len(frames) == 11
+    assert len(frames) == 13
     assert [frame["frame_hash"] for frame in frames[:10]] == (
         PREFIX_FRAME_HASHES
     )
@@ -137,8 +139,8 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
         separators=(",", ":"),
     ).encode("utf-8")
     assert hashlib.sha256(prefix).hexdigest() == PREFIX_SHA256
-    assert [frame["seq"] for frame in frames] == list(range(11))
-    assert [frame["payload"]["frame"] for frame in frames] == list(range(1, 12))
+    assert [frame["seq"] for frame in frames] == list(range(13))
+    assert [frame["payload"]["frame"] for frame in frames] == list(range(1, 14))
     assert [frame["payload"]["source_commit"] for frame in frames] == (
         SOURCE_COMMITS
     )
@@ -190,14 +192,15 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
         assert frame_utc >= datetime.fromisoformat(committed_at)
         previous = frame
 
-    reconciliation = frames[-1]["payload"]["reconciliation"]
-    assert frames[-2]["payload_hash"] == PRIOR_PAYLOAD_HASH
-    assert frames[-2]["payload"]["evidence"]["api_sha256"] == PRIOR_API_SHA256
-    assert frames[-1]["prev"] == PRIOR_PAYLOAD_HASH
-    assert frames[-1]["utc"] == "2026-09-01T00:25:56.072Z"
-    assert frames[-1]["payload_hash"] == RECONCILIATION_PAYLOAD_HASH
-    assert frames[-1]["frame_hash"] == RECONCILIATION_FRAME_HASH
-    assert frames[-1]["payload"]["evidence"]["api_sha256"] == (
+    reconciliation_frame = frames[-3]
+    reconciliation = reconciliation_frame["payload"]["reconciliation"]
+    assert frames[-4]["payload_hash"] == PRIOR_PAYLOAD_HASH
+    assert frames[-4]["payload"]["evidence"]["api_sha256"] == PRIOR_API_SHA256
+    assert reconciliation_frame["prev"] == PRIOR_PAYLOAD_HASH
+    assert reconciliation_frame["utc"] == "2026-09-01T00:25:56.072Z"
+    assert reconciliation_frame["payload_hash"] == RECONCILIATION_PAYLOAD_HASH
+    assert reconciliation_frame["frame_hash"] == RECONCILIATION_FRAME_HASH
+    assert reconciliation_frame["payload"]["evidence"]["api_sha256"] == (
         POST_HOLO_API_SHA256
     )
     assert reconciliation == {
@@ -209,6 +212,18 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
         "prior_frame_hash": PREFIX_FRAME_HASHES[-1],
         "post_holo_card_sha256": POST_HOLO_CARD_SHA256,
     }
+    migration = frames[-2]
+    assert migration["prev"] == reconciliation_frame["payload_hash"]
+    assert migration["payload"]["name"] == "skill-first-grail-migration"
+    assert migration["payload"]["skill_first_migration"]["prior_frame_hash"] == (
+        reconciliation_frame["frame_hash"]
+    )
+    runtime = frames[-1]
+    assert runtime["prev"] == migration["payload_hash"]
+    assert runtime["payload"]["name"] == "skill-first-runtime-hardening"
+    assert runtime["payload"]["skill_first_runtime"]["prior_frame_hash"] == (
+        migration["frame_hash"]
+    )
 
 
 def test_build_receipt_binds_the_generated_publication():
@@ -247,8 +262,8 @@ def test_build_receipt_binds_the_generated_publication():
     has_card = isinstance(card, dict)
     assert api["has_card"] is has_card
     assert registry_record["_has_card"] is has_card
+    evidence = frames[-1]["payload"]["evidence"]
     if has_card:
-        evidence = frames[-1]["payload"]["evidence"]
         card_bytes = json.dumps(
             card,
             sort_keys=True,
@@ -258,11 +273,8 @@ def test_build_receipt_binds_the_generated_publication():
             POST_HOLO_CARD_SHA256
         )
         assert registry_record["_card_sha256"] == POST_HOLO_CARD_SHA256
-        assert api_sha256 == POST_HOLO_API_SHA256
     else:
-        evidence = frames[-2]["payload"]["evidence"]
         assert "_card_sha256" not in registry_record
-        assert api_sha256 == PRIOR_API_SHA256
     front = json.loads(FRONT.read_text(encoding="utf-8"))
     [front_record] = [
         item for item in front["items"] if item["ref"] == IDENTITY
@@ -270,10 +282,7 @@ def test_build_receipt_binds_the_generated_publication():
     assert evidence["agent_version"] == "1.0.3"
     assert evidence["source_sha256"] == source_sha256
     assert evidence["skill_sha256"] == skill_sha256
-    assert git_history_contains_sha256(
-        API_RECORD,
-        evidence["api_sha256"],
-    )
+    assert evidence["api_sha256"] == api_sha256
     assert api["sha256"] == source_sha256
     assert api["version"] == "1.0.3"
     assert front_record["audience"] == evidence["front_audience"] == "both"
@@ -286,7 +295,7 @@ def test_build_receipt_binds_the_generated_publication():
     assert evidence["integration_tests"] >= 8102
     assert evidence["build_receipt_tests"] == 2
     assert evidence["privacy_mutations"] == 17
-    assert evidence["runner_preflight"] == "RAPP_READY"
+    assert evidence["runner_preflight"] == "RAPP_READY:source=grail"
     assert evidence["transfer_byte_identical"] is True
     assert evidence["artifact_body_in_egg"] is False
     assert evidence["source_verdict"] == "pass"
@@ -297,13 +306,19 @@ def test_build_receipt_binds_the_generated_publication():
     assert evidence["rapp_sdk_sha256"] == (
         "aba04a57390d98276eadd9c7decd821bb53549730daec3491cffee45ada48eb2"
     )
-    assert evidence["rapp_skill_version"] == "1.3.1"
+    assert evidence["rapp_skill_version"] == "1.4.0"
     assert evidence["rapp_skill_source_sha256"] == (
         rapp_skill_record["source_sha256"]
     )
     assert evidence["rapp_skill_skill_sha256"] == (
         rapp_skill_record["skill_sha256"]
     )
+    assert evidence["rappid"] == record["rappid"]
+    assert evidence["rapp_skill_rappid"] == rapp_skill_record["rappid"]
+    assert evidence["default_artifact"] == "skill"
+    assert evidence["grail_record"] == "SKILL.md"
+    assert evidence["backup_agent_retained"] is True
+    assert evidence["lock_schema"] == "rapp-grail-lock/2.0"
     assert evidence["rapp_proof"] == "pass"
     lifecycle = json.loads(LIFECYCLE.read_text(encoding="utf-8"))
     lifecycle_record = lifecycle["agents"][IDENTITY]

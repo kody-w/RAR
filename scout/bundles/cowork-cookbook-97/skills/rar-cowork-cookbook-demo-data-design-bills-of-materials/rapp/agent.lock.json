@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_design_bills_of_materials",
+  "agent_bytes": 10537,
   "agent_file": "demo_data_design_bills_of_materials_agent.py",
   "agent_sha256": "55fe5bee556582bf2ecffa3b0ce64f7d6e9c88e7654afccba7220de5e429ff8b",
+  "backup_agent": "demo_data_design_bills_of_materials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDesignBillsOfMaterials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-design-bills-of-materials:522caf4de8ce853dfce225a6edb2c819988706295112b906a6cb62db95f672a0",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDesignBillsOfMaterials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24545,
+  "skill_sha256": "798b979269f179fa49b57a0e180e572d5c2544535edb1b4dab7455234ae9d9ca",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -5,6 +5,13 @@
   "id": "375dd38a032dc92d",
   "lastExecutedAt": null,
   "name": "BookFactory",
+  "rapp": {
+    "backup_agent": "bookfactory_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-rapp-book-factory-singleton"
+  },
   "schedule": {
     "days": [
       1,

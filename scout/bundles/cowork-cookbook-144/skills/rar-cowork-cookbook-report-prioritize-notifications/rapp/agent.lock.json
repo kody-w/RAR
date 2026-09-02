@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_prioritize_notifications",
+  "agent_bytes": 10375,
   "agent_file": "report_prioritize_notifications_agent.py",
   "agent_sha256": "bf25815f86c2422c0582df138d488a64482d3499f95411b1551649653dd0d67a",
+  "backup_agent": "report_prioritize_notifications_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportPrioritizeNotifications",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-prioritize-notifications:caab19513df59574f772682308242dde8cc28eb58a64e7a52537e2afc1a3e257",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportPrioritizeNotifications",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24187,
+  "skill_sha256": "1429b56506b0ff2f17d19ebf82814748bc106c0d7884ffd0fa269ffb9bc6a68d",
   "tool_schema": {
     "properties": {
       "audience": {

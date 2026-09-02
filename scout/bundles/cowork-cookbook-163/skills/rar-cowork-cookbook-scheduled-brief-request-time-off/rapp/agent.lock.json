@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_request_time_off",
+  "agent_bytes": 10579,
   "agent_file": "scheduled_brief_request_time_off_agent.py",
   "agent_sha256": "a709e01ab5a3c9b9802df3ee613b104b9a7cb31633375402e06923e1a219861e",
+  "backup_agent": "scheduled_brief_request_time_off_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefRequestTimeOff",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-request-time-off:8dc8ad143f990e07a35a645b52e4096c919be4d55c3f7cb17c3d6967d9ba9963",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefRequestTimeOff",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24548,
+  "skill_sha256": "0e321659488db25aa5dee1bac7ddbf42b701baa3bf2077e1c58e18c064b71536",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_analyze_financial_statements",
+  "agent_bytes": 10705,
   "agent_file": "teams_update_analyze_financial_statements_agent.py",
   "agent_sha256": "45614052fe1778c05a8735a74d3ccd617ca6e4c56cf7f102681be2c88b85022b",
+  "backup_agent": "teams_update_analyze_financial_statements_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAnalyzeFinancialStatements",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-analyze-financial-statements:c9a17179f3aa12be20614c48f1542f353b7ecd545cb4fe9b8062c969ae1c2ff0",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateAnalyzeFinancialStatements",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24816,
+  "skill_sha256": "2e2f63cbe7b7641c3f8fcbeb6c8a3e493061656d1dfb645cb853332f4ac8d43f",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@howardh/markdown_to_slides_agent",
+  "agent_bytes": 8071,
   "agent_file": "markdown_to_slides_agent.py",
   "agent_sha256": "ab0a2046a0a241148fdae0bfb68ce8f4f16317e96cfe9beabb0f285aaded07b7",
+  "backup_agent": "markdown_to_slides_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MarkdownToSlidesAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP Contributor",
@@ -27,8 +30,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@howardh/markdown-to-slides:afb37723e03f30010df3e59338836bf8175d0cbce2c1a91a2334a419364a72d8",
+  "rollback_agent_retained": true,
   "runtime_name": "MarkdownToSlides",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 18543,
+  "skill_sha256": "6b6d8ecaf43094f7bc23eb52c0dc1bb60b0375c46f1a73de605f0d36e3db2e9c",
   "tool_schema": {
     "properties": {
       "markdown": {

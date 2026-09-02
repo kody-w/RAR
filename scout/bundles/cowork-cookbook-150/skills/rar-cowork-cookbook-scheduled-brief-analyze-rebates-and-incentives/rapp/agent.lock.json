@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_analyze_rebates_and_incentives",
+  "agent_bytes": 10770,
   "agent_file": "scheduled_brief_analyze_rebates_and_incentives_agent.py",
   "agent_sha256": "aa313be370e20877dfe8ae9805be78b721a0d664450d1a274aad894aa91e7fcd",
+  "backup_agent": "scheduled_brief_analyze_rebates_and_incentives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAnalyzeRebatesAndIncentives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-analyze-rebates-and-incentives:efabe176d972f92cbe7e4f02041c6ec0ba0779a6693d8c3e6124589d825f1419",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAnalyzeRebatesAndIncentives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24996,
+  "skill_sha256": "96a966e7480d81fe5497f8f9e2e8cd0e0201f8f8a38c0831da01d71be4c8b12f",
   "tool_schema": {
     "properties": {
       "operation": {

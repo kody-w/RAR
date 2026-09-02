@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_transfer_assets",
+  "agent_bytes": 10538,
   "agent_file": "teams_update_transfer_assets_agent.py",
   "agent_sha256": "ddbf82e84a7ea7bffcd5b30f62450e736eb6d776a14cf86ea7c095cd778834de",
+  "backup_agent": "teams_update_transfer_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateTransferAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-transfer-assets:f692815842b7ff9778f4063d9c51de8001c7d6ca3c2d2b7f544c563900f611e2",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateTransferAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24412,
+  "skill_sha256": "7256bca2529c796eb585dba96261ba464790c223fcc08370e4531296109e3d1c",
   "tool_schema": {
     "properties": {
       "operation": {

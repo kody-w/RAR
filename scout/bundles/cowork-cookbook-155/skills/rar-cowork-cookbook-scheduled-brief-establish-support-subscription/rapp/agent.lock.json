@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_establish_support_subscription",
+  "agent_bytes": 10778,
   "agent_file": "scheduled_brief_establish_support_subscription_agent.py",
   "agent_sha256": "825e18373b4821e6dce0b910f78fb59b0e2d84fa9b137a8221594f57da42a36a",
+  "backup_agent": "scheduled_brief_establish_support_subscription_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefEstablishSupportSubscription",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-establish-support-subscription:5ec33f940ae59f611feebf1361f704e88448eba9a078af5092fed1bd936e1a48",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefEstablishSupportSubscription",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24996,
+  "skill_sha256": "18bd2a1b585becea01970f536e15518d8a5f2705e067012bfc71570575a79369",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/vendor_master_cleanup",
+  "agent_bytes": 10475,
   "agent_file": "vendor_master_cleanup_agent.py",
   "agent_sha256": "e35db88e2b480e9fc65cf124389bd28c1148750d116ce79201593f5779c51b4b",
+  "backup_agent": "vendor_master_cleanup_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VendorMasterCleanup",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/vendor-master-cleanup:6f59959de4c3b14d5bd6afac282f1cea709aa2664a05d026a60b464fa01cb6ad",
+  "rollback_agent_retained": true,
   "runtime_name": "VendorMasterCleanup",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24328,
+  "skill_sha256": "06fb7c447209929996be0acb742b606f33cee7b0cdd5c352c1bb6cf8f1a3201c",
   "tool_schema": {
     "properties": {
       "criteria": {

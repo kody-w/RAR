@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_measure_project_progress",
+  "agent_bytes": 10641,
   "agent_file": "dashboard_measure_project_progress_agent.py",
   "agent_sha256": "2cf32ea64fd0f645f24e83f7e418f957cebd497d2ec823ff29a2747c463dfa4d",
+  "backup_agent": "dashboard_measure_project_progress_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMeasureProjectProgress",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-measure-project-progress:2c9cefc3c33715e21f418d8e3b5abe0df983bc6f357d0b9e47de12dbb9cbe834",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardMeasureProjectProgress",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24692,
+  "skill_sha256": "babd390683689da8a29d3114cd2b65628ee6093a56cc9d6e1eca2231b3e4e1da",
   "tool_schema": {
     "properties": {
       "operation": {

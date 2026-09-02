@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_finalize_and_post_transactions",
+  "agent_bytes": 10687,
   "agent_file": "ppt_exec_finalize_and_post_transactions_agent.py",
   "agent_sha256": "1bb5bd6ddf75e0e1cc62a4d74aa78007f3e824272a0d9f911711572b3abba855",
+  "backup_agent": "ppt_exec_finalize_and_post_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecFinalizeAndPostTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-finalize-and-post-transactions:921ed31e6b5926ce4cf0d558348a5936f877bf589b116c91fba443f053965db8",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecFinalizeAndPostTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24825,
+  "skill_sha256": "3d3e3dbb5cf6de1997d3d19ba47cfae2db76ec8a197a3ec062ecdd2801578b13",
   "tool_schema": {
     "properties": {
       "operation": {

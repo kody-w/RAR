@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_analyze_sourcing_effectiveness",
+  "agent_bytes": 10731,
   "agent_file": "audit_analyze_sourcing_effectiveness_agent.py",
   "agent_sha256": "afe9495b0d3555fe2877d9001660e1f6c0bcfc1da93743b8aabdb2a4c325b65d",
+  "backup_agent": "audit_analyze_sourcing_effectiveness_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAnalyzeSourcingEffectiveness",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-analyze-sourcing-effectiveness:726e5d905d2072017c9fe6c538fb329677a1fde361895081943bd038e8f96133",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAnalyzeSourcingEffectiveness",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24845,
+  "skill_sha256": "d4cbaaa16a1b700c7cd178cf3454cdf371c12da3a2baebf3c75fa366fa18b415",
   "tool_schema": {
     "properties": {
       "criteria": {

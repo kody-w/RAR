@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_reclaim_database_storage",
+  "agent_bytes": 10663,
   "agent_file": "bulk_update_reclaim_database_storage_agent.py",
   "agent_sha256": "0e2ea83b985ba639ece899120f84858f2696267c1c49b8f6741663617a4aa3f6",
+  "backup_agent": "bulk_update_reclaim_database_storage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateReclaimDatabaseStorage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-reclaim-database-storage:051ad10503d8d2d8f360cee6cc4de9f9420493b6eb64bfe66d7bfce95e7b5ff1",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateReclaimDatabaseStorage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24741,
+  "skill_sha256": "cc3082be8c6503c053609d70bde7a5e08fc13520afd34e5d81783f4ec3f459ce",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_reconcile_asset_subledger",
+  "agent_bytes": 10818,
   "agent_file": "configure_reconcile_asset_subledger_agent.py",
   "agent_sha256": "9830cd1711efac4ffca4524cc9cd41aedd36bd9a9216bd9a76ec58593dfa5049",
+  "backup_agent": "configure_reconcile_asset_subledger_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureReconcileAssetSubledger",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-reconcile-asset-subledger:a837628776207c15609381d3e385ffb4fe0d3f6015cbae29d9d1960e9d1c059d",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureReconcileAssetSubledger",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24881,
+  "skill_sha256": "417f5ea50995283545eef1947e396d5e3b69d8eed6550b27a876de8d3d90edf8",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@rarbookworld/bookfactory",
+  "agent_bytes": 38438,
   "agent_file": "bookfactory_agent.py",
   "agent_sha256": "dbd9f81e249d1065bb7f86ba34e4d1f8e51ef3da51e3ca487dea0c296b9243a6",
+  "backup_agent": "bookfactory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BookFactory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
     "env:AZURE_OPENAI_API_KEY",
     "env:AZURE_OPENAI_DEPLOYMENT",
@@ -40,8 +43,16 @@
     ],
     "version": "0.4.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rarbookworld/bookfactory:2e6241aa85d826ea4479a2ecc86492ec9e840e43257730c7c9dbad3737b501ab",
+  "rollback_agent_retained": true,
   "runtime_name": "BookFactory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 67823,
+  "skill_sha256": "8a19edce636f4c55e2970cc80342b491377c3e2bc8ffa88b1243dd19b0ac5f9f",
   "tool_schema": {
     "properties": {
       "author": {

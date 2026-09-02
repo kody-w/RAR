@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_analyze_sales_data",
+  "agent_bytes": 10562,
   "agent_file": "audit_analyze_sales_data_agent.py",
   "agent_sha256": "30309535cf8944842601633086423b7fb98b5139b3e4534a0e19696eb48e2d25",
+  "backup_agent": "audit_analyze_sales_data_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAnalyzeSalesData",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-analyze-sales-data:f50fc871b2f2b6272f0f9c6f1b9efeb46cd04d01dafd8057817c1e7f0171e40b",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditAnalyzeSalesData",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24472,
+  "skill_sha256": "7bcf53eb47aa06d628de78b38d6f7e68eeb2f67542a86e5d0ad1167026517336",
   "tool_schema": {
     "properties": {
       "criteria": {

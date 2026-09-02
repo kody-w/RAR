@@ -3,10 +3,11 @@
   "id": "kody-w__deal_desk_agent",
   "name": "DealDesk",
   "rar_name": "@kody-w/deal_desk_agent",
-  "rappid": "rappid:@kody-w/deal_desk_agent:d521ad72bb9a0aee8626109a1596a2606ed470650418266c43648248f7f67b4e",
-  "_migrated_from": "rappid:@kody-w/deal_desk_agent:528a8a89f504677a339b8660f9085b28989aaaa4cf36008bf22f79154b8e3bfc",
+  "rappid": "rappid:@kody-w/deal-desk:f82742c29a5896675a600e0ba62cccd147433cf8887a1289250c5e49a5c4a653",
+  "_migrated_from": "rappid:@kody-w/deal_desk_agent:d521ad72bb9a0aee8626109a1596a2606ed470650418266c43648248f7f67b4e",
   "_migrated_from_all": [
-    "rappid:@kody-w/deal_desk_agent:528a8a89f504677a339b8660f9085b28989aaaa4cf36008bf22f79154b8e3bfc"
+    "rappid:@kody-w/deal_desk_agent:528a8a89f504677a339b8660f9085b28989aaaa4cf36008bf22f79154b8e3bfc",
+    "rappid:@kody-w/deal_desk_agent:d521ad72bb9a0aee8626109a1596a2606ed470650418266c43648248f7f67b4e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.1.1",
@@ -34,9 +35,18 @@
   "sha256": "4f0a8d4f0c0a8ddd9f4f02b29efcfedb30080938bc14b66ce752170a3a3f88dd",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-deal-desk",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__deal_desk_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/deal_desk_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/deal_desk_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-deal-desk/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-deal-desk/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__deal_desk_agent.py",
   "api_card_url": null,

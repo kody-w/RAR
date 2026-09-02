@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_release_goods_for_picking",
+  "agent_bytes": 10650,
   "agent_file": "bulk_update_release_goods_for_picking_agent.py",
   "agent_sha256": "251ca18279e719ea8c4c941c7d2da6619bc874228a0898fbba5cd37cf3d027f5",
+  "backup_agent": "bulk_update_release_goods_for_picking_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateReleaseGoodsForPicking",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-release-goods-for-picking:70dd340ef6f361a109659c73901ee90dd53163c21217f0936ff2450f6a4966b0",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateReleaseGoodsForPicking",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24750,
+  "skill_sha256": "7b0506961e532cfcd1f97917c20818455b49c0af74b2db37a534a98d99e78e3f",
   "tool_schema": {
     "properties": {
       "operation": {

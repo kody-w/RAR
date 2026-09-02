@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_set_strategic_goals_and_incentives",
+  "agent_bytes": 10763,
   "agent_file": "teams_update_set_strategic_goals_and_incentives_agent.py",
   "agent_sha256": "b2c6fec5fd0291b19083c3dc2c23e562fc45841338518b7b7a564d9251e95905",
+  "backup_agent": "teams_update_set_strategic_goals_and_incentives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateSetStrategicGoalsAndIncentives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-set-strategic-goals-and-incentives:937a4f0ee610f014a739f4fe125cc0453f11da11a15daa31560525eb69d96166",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateSetStrategicGoalsAndIncentives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25020,
+  "skill_sha256": "61df07632ce67e95ec103ce7a4950952cc96d67c9bcd48a84184d650a47f2c6a",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_banking_policies",
+  "agent_bytes": 10688,
   "agent_file": "scheduled_brief_define_banking_policies_agent.py",
   "agent_sha256": "d20d6b5302ca1d7e3395c2a107f618210377030da586f090cb3dadcc81753f09",
+  "backup_agent": "scheduled_brief_define_banking_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineBankingPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-banking-policies:3fcf9d9ab2697b6fd15d590bbaa4c149378d957adad7f2ce67a1226d89492515",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineBankingPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24788,
+  "skill_sha256": "81ff6d8d1e85080a9d00f624ac6b9e7b819617705d6db6987b657dd01b6fa2ff",
   "tool_schema": {
     "properties": {
       "operation": {

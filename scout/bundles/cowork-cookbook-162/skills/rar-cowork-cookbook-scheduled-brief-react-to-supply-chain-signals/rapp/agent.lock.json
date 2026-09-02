@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_react_to_supply_chain_signals",
+  "agent_bytes": 10752,
   "agent_file": "scheduled_brief_react_to_supply_chain_signals_agent.py",
   "agent_sha256": "b8bc4a5a1ea0e00044be8d3befd4fae5a151ca019a1a2680e76ca1f8dfe81311",
+  "backup_agent": "scheduled_brief_react_to_supply_chain_signals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefReactToSupplyChainSignals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-react-to-supply-chain-signals:a3cca049c72960eb7dcfa7b29718873df9b7c99af0f6efaedfe1763ba9740218",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefReactToSupplyChainSignals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24998,
+  "skill_sha256": "4def859250f2e7e9989062985bc8b2ba2bdfe75d540c8e77788b0086005a1b94",
   "tool_schema": {
     "properties": {
       "operation": {

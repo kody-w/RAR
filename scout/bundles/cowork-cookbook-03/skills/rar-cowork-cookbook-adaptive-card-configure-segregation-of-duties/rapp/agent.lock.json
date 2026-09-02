@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_configure_segregation_of_duties",
+  "agent_bytes": 10769,
   "agent_file": "adaptive_card_configure_segregation_of_duties_agent.py",
   "agent_sha256": "b51241db1ab37ea712af1889c131270b72266bde6495ebce8e2d05d587a1763e",
+  "backup_agent": "adaptive_card_configure_segregation_of_duties_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConfigureSegregationOfDuties",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-configure-segregation-of-duties:948849e8562df3b875c10ccefc6709afd6058c064f8daf486a9bdbc2915b5187",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardConfigureSegregationOfDuties",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25013,
+  "skill_sha256": "0ec8307cd913685255bef7fd301b55ec5e1ffc9ac119d45a332ce2da52192a24",
   "tool_schema": {
     "properties": {
       "operation": {

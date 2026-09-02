@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_correct_supplier_payments",
+  "agent_bytes": 10642,
   "agent_file": "dashboard_correct_supplier_payments_agent.py",
   "agent_sha256": "eaca80d1745b07b88a4c738b3ebff2a3157893b74f4c5cbfc4d5ca66794ee686",
+  "backup_agent": "dashboard_correct_supplier_payments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardCorrectSupplierPayments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-correct-supplier-payments:e49dd61e9f11cc0958dd1d6af63ff5a03d6e71ca9f781027171a967dd83a08dc",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardCorrectSupplierPayments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24708,
+  "skill_sha256": "88b14ecda3dba69ef5c541a08340e2c2f46e7533f42de1c69f6156e2dd38b1ec",
   "tool_schema": {
     "properties": {
       "operation": {

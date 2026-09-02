@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_correct_data_synchronization_failures",
+  "agent_bytes": 10811,
   "agent_file": "teams_update_correct_data_synchronization_failures_agent.py",
   "agent_sha256": "59578c4e397988f81e3b60acc95b2d9d9efc0516ca6df03df8b5323decb95e35",
+  "backup_agent": "teams_update_correct_data_synchronization_failures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCorrectDataSynchronizationFailures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-correct-data-synchronization-failures:d3a64ab05838e5a3544999c4d4fb71f203b7a3a980339178506a0b9230b75f1a",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateCorrectDataSynchronizationFailures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25106,
+  "skill_sha256": "f03809294ddd2ca070a6932b98da5ca8c50d6ed959caa166f3e08af15c936f29",
   "tool_schema": {
     "properties": {
       "operation": {

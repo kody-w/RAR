@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_plan_to_produce_control_production_quality",
+  "agent_bytes": 10726,
   "agent_file": "d365_plan_to_produce_control_production_quality_agent.py",
   "agent_sha256": "0300a0b47e6e6e1540b3ec1913f2894d9f32b8c39432e1453da882750777a063",
+  "backup_agent": "d365_plan_to_produce_control_production_quality_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365PlanToProduceControlProductionQuality",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-plan-to-produce-control-production-quality:734ca9a74e2844ead9cf2d753ac080bf9e3a00d2a903eefba5813c1c63ac2e28",
+  "rollback_agent_retained": true,
   "runtime_name": "D365PlanToProduceControlProductionQuality",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24942,
+  "skill_sha256": "725e04018075b4e78431fc518c35ab6a592a1be35dd3d65f69ca62f787c6179e",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_forecast_demand",
+  "agent_bytes": 10432,
   "agent_file": "demo_data_forecast_demand_agent.py",
   "agent_sha256": "d10527bc7e9589d89a367d9336333839812ca3d295a4b096969456958ed2b093",
+  "backup_agent": "demo_data_forecast_demand_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataForecastDemand",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-forecast-demand:699b5f8f79065a4aacac1bcc21af8a349b0c8aad80c47e57a2afa829f85ddaea",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataForecastDemand",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24234,
+  "skill_sha256": "6e9a1a7631f8533ac5488d089a2beec4f7df0e64659c1a0669806ba2fc87be42",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/mct_excellence_iq",
+  "agent_bytes": 9672,
   "agent_file": "mct_excellence_iq_agent.py",
   "agent_sha256": "1b62ce1f0c3641b283c403b6a6c3146f554f5222346d9d7a2d127ea6bdc61875",
+  "backup_agent": "mct_excellence_iq_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MctExcellenceIq",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Faride Ilanda",
@@ -45,8 +48,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/mct-excellence-iq:33e597d62762828b1ecae34d2847ec747c0e418ac9ed5abb90c8cce9d8b13f54",
+  "rollback_agent_retained": true,
   "runtime_name": "MctExcellenceIq",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23403,
+  "skill_sha256": "cac3f4763997d31bbbd6eecef7aedfee6ac55d9c7ccb814c367b48707f20e284",
   "tool_schema": {
     "properties": {
       "criteria": {

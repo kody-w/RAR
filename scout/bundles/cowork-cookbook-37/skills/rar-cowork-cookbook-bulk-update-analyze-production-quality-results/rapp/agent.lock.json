@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_analyze_production_quality_results",
+  "agent_bytes": 10756,
   "agent_file": "bulk_update_analyze_production_quality_results_agent.py",
   "agent_sha256": "3697538499196f7b27af7666ba7033a96732ab0f793bc670e0525a4476f9d0c5",
+  "backup_agent": "bulk_update_analyze_production_quality_results_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAnalyzeProductionQualityResults",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-analyze-production-quality-results:60d8f8390f6b9c701c0b07fcb03b26ff05a590619b3e04c73b70128854336841",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAnalyzeProductionQualityResults",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24974,
+  "skill_sha256": "3f267f033937419a4716c04d3f9e698c4d2f4d9aa56140a1b53f27d8e23527d7",
   "tool_schema": {
     "properties": {
       "operation": {

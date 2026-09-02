@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_release_production_to_the_shop_floor",
+  "agent_bytes": 10748,
   "agent_file": "ppt_exec_release_production_to_the_shop_floor_agent.py",
   "agent_sha256": "d7c8401a42142c810c74a07b6a091b17f95290ea8a35c79391e1d34e97fe32fb",
+  "backup_agent": "ppt_exec_release_production_to_the_shop_floor_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecReleaseProductionToTheShopFloor",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-release-production-to-the-shop-floor:ef3508bc703ab200188166fb625a884b2aaa22afe27b7c3ca3680019d69f5d41",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecReleaseProductionToTheShopFloor",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25007,
+  "skill_sha256": "8392e0f67b1281bfdad95f8393dbfd195f17652c8c9a73146e191bf1eb66f817",
   "tool_schema": {
     "properties": {
       "operation": {

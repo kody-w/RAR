@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_report_on_and_analyze_trends",
+  "agent_bytes": 10739,
   "agent_file": "scheduled_brief_report_on_and_analyze_trends_agent.py",
   "agent_sha256": "cec9479270393e8c609546c361980ed24b10ba807b4f10ca12c3ba8e51209025",
+  "backup_agent": "scheduled_brief_report_on_and_analyze_trends_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefReportOnAndAnalyzeTrends",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-report-on-and-analyze-trends:6a8da00677379d6341753315376ec7472a309d4e98aaa37340c4dd3ce47fbccb",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefReportOnAndAnalyzeTrends",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24950,
+  "skill_sha256": "a20e5cdc895baf25adbc2b41a79ce0ee5805bf2a428592f7d4b19580252b7ff0",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -5,6 +5,13 @@
   "id": "384c80823cadfaa5",
   "lastExecutedAt": null,
   "name": "PII Scout",
+  "rapp": {
+    "backup_agent": "pii_scout_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-rapp-pii-scout"
+  },
   "schedule": {
     "days": [
       1,

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_analyze_safety_achievement",
+  "agent_bytes": 10364,
   "agent_file": "report_analyze_safety_achievement_agent.py",
   "agent_sha256": "9d6fb5c743d9a0f955b270cc321b8e258f5d0525e53ab3932d95f164efca6354",
+  "backup_agent": "report_analyze_safety_achievement_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportAnalyzeSafetyAchievement",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-analyze-safety-achievement:b2cdccee33dce685968aab29920b910e18e9f2fc43bed6af81f971a87ea23acf",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportAnalyzeSafetyAchievement",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24189,
+  "skill_sha256": "fd854f8fa9823ce0ffe69c5b3ca0ae0b90edb3ec12ad92f9e9de57256d5f6a88",
   "tool_schema": {
     "properties": {
       "data_source": {

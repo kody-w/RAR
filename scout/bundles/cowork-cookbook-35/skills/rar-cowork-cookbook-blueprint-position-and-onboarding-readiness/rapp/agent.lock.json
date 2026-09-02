@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/blueprint_position_and_onboarding_readiness",
+  "agent_bytes": 10718,
   "agent_file": "blueprint_position_and_onboarding_readiness_agent.py",
   "agent_sha256": "b86f56064705bcb4742c8e97a7e61bb3e8f81191be9525c7a60a74eeb07fc3e0",
+  "backup_agent": "blueprint_position_and_onboarding_readiness_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlueprintPositionAndOnboardingReadiness",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/blueprint-position-and-onboarding-readiness:3dd84718535d38575daf9bac3fe06c5c7cfe66f16a0cc135762442d21d9415a6",
+  "rollback_agent_retained": true,
   "runtime_name": "BlueprintPositionAndOnboardingReadiness",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25005,
+  "skill_sha256": "b9c056c34a544e99fcf7475e8b414beb4e457550a63dc4913db285729cf28806",
   "tool_schema": {
     "properties": {
       "constraints": {

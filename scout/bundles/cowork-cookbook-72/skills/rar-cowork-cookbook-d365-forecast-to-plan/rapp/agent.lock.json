@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_forecast_to_plan",
+  "agent_bytes": 10399,
   "agent_file": "d365_forecast_to_plan_agent.py",
   "agent_sha256": "ac600a9ffd1657637aec66db9665df38ad9a8c1b28af1b0bf354393a957e7439",
+  "backup_agent": "d365_forecast_to_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ForecastToPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-forecast-to-plan:73d463ff3bb6c4eae6a6813d811c5caba534c04e9868bedfffd7c561bd34927e",
+  "rollback_agent_retained": true,
   "runtime_name": "D365ForecastToPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24321,
+  "skill_sha256": "2826d6733bbfd6b21a1636635abc70fe62fca9c0c17e27001d1588e9eeb23595",
   "tool_schema": {
     "properties": {
       "audience": {

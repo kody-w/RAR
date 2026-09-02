@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/connected_solution_agent",
+  "agent_bytes": 130850,
   "agent_file": "connected_solution_agent.py",
   "agent_sha256": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af",
+  "backup_agent": "connected_solution_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConnectedSolutionAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.3"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/connected-solution:92a19ce22c7e7a8150289b8865aecffd635f579a7647be205ab5780a11128a3d",
+  "rollback_agent_retained": true,
   "runtime_name": "ConnectedSolutionAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 216483,
+  "skill_sha256": "750fd16fd122b02f07562657eec8cd8cd93fea0133828188ffc82f214572b5f0",
   "tool_schema": {
     "properties": {
       "capir_mode": {

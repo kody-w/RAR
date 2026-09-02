@@ -3,11 +3,12 @@
   "id": "kody-w__rapp_leviathan_factory",
   "name": "RappLeviathanFactory",
   "rar_name": "@kody-w/rapp_leviathan_factory",
-  "rappid": "rappid:@kody-w/rapp_leviathan_factory:367e653548ca4433eb6ecb69a456db1f6a3d645ea2c5fdaf52c22b0bbbe895e9",
-  "_migrated_from": "rappid:@kody-w/rapp_leviathan_factory:fb06736919457ee8799272a96167760b9d801db76c3f42ec64996290182e3caa",
+  "rappid": "rappid:@kody-w/rapp-leviathan-factory:4cc795daafd85d336d022195c77fd9da590130de92426f4790c9d7811f1695f5",
+  "_migrated_from": "rappid:@kody-w/rapp_leviathan_factory:367e653548ca4433eb6ecb69a456db1f6a3d645ea2c5fdaf52c22b0bbbe895e9",
   "_migrated_from_all": [
     "rappid:@kody-w/rapp_leviathan_factory:55d30b84ddbbe9c5efab5874f8ebac1c532a0361f949365fa9a1e5e02aebcb33",
-    "rappid:@kody-w/rapp_leviathan_factory:fb06736919457ee8799272a96167760b9d801db76c3f42ec64996290182e3caa"
+    "rappid:@kody-w/rapp_leviathan_factory:fb06736919457ee8799272a96167760b9d801db76c3f42ec64996290182e3caa",
+    "rappid:@kody-w/rapp_leviathan_factory:367e653548ca4433eb6ecb69a456db1f6a3d645ea2c5fdaf52c22b0bbbe895e9"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.3.0",
@@ -30,9 +31,18 @@
   "sha256": "e381f1fe6add6c47eec0d59307110f136103f8d349c611f7be0bff02edb0c6d0",
   "has_card": true,
   "added_at": "2026-05-16T16:33:02-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-rapp-leviathan-factory",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rapp_leviathan_factory.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_leviathan_factory_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_leviathan_factory_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-rapp-leviathan-factory/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-rapp-leviathan-factory/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_leviathan_factory.py",
   "api_card_url": null,

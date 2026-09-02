@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_develop_chart_of_accounts_strategy",
+  "agent_bytes": 10739,
   "agent_file": "ppt_exec_develop_chart_of_accounts_strategy_agent.py",
   "agent_sha256": "185904845c3fd992a72ad844de81e8344486010332ff62b9d4fc46c30b0d1fde",
+  "backup_agent": "ppt_exec_develop_chart_of_accounts_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDevelopChartOfAccountsStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-develop-chart-of-accounts-strategy:6e5c6444e5e1484dc239e649822602f7f6d9dc5485fa67b2debd44a5d1539ef7",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDevelopChartOfAccountsStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24961,
+  "skill_sha256": "cebe730174f9a07ac5e4b3ea9633a4f5d4615d047ea77a28d081f99138435013",
   "tool_schema": {
     "properties": {
       "operation": {

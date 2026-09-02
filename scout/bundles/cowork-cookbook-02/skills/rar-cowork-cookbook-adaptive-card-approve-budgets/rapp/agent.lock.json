@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_approve_budgets",
+  "agent_bytes": 10518,
   "agent_file": "adaptive_card_approve_budgets_agent.py",
   "agent_sha256": "8728e39fd1bc49e97694abf9f54035a47b584aaf569decb7a0347f761ccde800",
+  "backup_agent": "adaptive_card_approve_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardApproveBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-approve-budgets:cb39b52a2186fd9b542dbc271f85abf990a4018ed5c993c5419ec17e78857135",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardApproveBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24413,
+  "skill_sha256": "aee696601524e652f25f0c90077f5382787876436cd2eabd6e5d05893ed7137a",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_forecast_marketing_campaign_targets",
+  "agent_bytes": 10784,
   "agent_file": "teams_update_forecast_marketing_campaign_targets_agent.py",
   "agent_sha256": "f97c267193bee2f39202ca7e73a65e0df832a7ed99050b25156d7da1685dd749",
+  "backup_agent": "teams_update_forecast_marketing_campaign_targets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateForecastMarketingCampaignTargets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-forecast-marketing-campaign-targets:4b0ec5b3f893e5c6aab75166e1bc7e0a0590749e072f827b5b9c23c7c22e6232",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateForecastMarketingCampaignTargets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25037,
+  "skill_sha256": "10c91d5b942b87de1de454e1b1fced54072cb5565aecbff14bd47b97e69f6baf",
   "tool_schema": {
     "properties": {
       "operation": {

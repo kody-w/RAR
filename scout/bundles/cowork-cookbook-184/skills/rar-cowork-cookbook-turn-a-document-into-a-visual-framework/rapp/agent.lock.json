@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/turn_a_document_into_a_visual_framework",
+  "agent_bytes": 10361,
   "agent_file": "turn_a_document_into_a_visual_framework_agent.py",
   "agent_sha256": "82fec6ddc21c7c54a3fbd8b9a1a3ee2d2a811ef41320b33abf1e56a8fd8b7575",
+  "backup_agent": "turn_a_document_into_a_visual_framework_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TurnADocumentIntoAVisualFramework",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -74,8 +77,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/turn-a-document-into-a-visual-framework:5875ee06e73672b167b0a15e6fc68ff4cdfcc4d29d3daef4977827a9366c7497",
+  "rollback_agent_retained": true,
   "runtime_name": "TurnADocumentIntoAVisualFramework",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24450,
+  "skill_sha256": "4703eefc2149fc8b05f9bd7ad805a3b5ecd26b6b27bfd45a97a2011aeb49bd74",
   "tool_schema": {
     "properties": {
       "audience": {

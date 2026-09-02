@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_record_production_costs",
+  "agent_bytes": 10673,
   "agent_file": "scheduled_brief_record_production_costs_agent.py",
   "agent_sha256": "550b088a1fea0dc4eaa365a55da4502ea282d14a430811be4cacbe5d29fd93fc",
+  "backup_agent": "scheduled_brief_record_production_costs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefRecordProductionCosts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-record-production-costs:45f76086aa073ec96b3e527df2ede02f655f436452200234da83aff3f31693f8",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefRecordProductionCosts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24720,
+  "skill_sha256": "c0ee60c059b2e8a395ed57870cafec86ad91477768b9ced44b9c959306f0f856",
   "tool_schema": {
     "properties": {
       "operation": {

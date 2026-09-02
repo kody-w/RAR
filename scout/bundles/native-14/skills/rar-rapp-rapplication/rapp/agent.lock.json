@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/rapplication_agent",
+  "agent_bytes": 23785,
   "agent_file": "rapplication_agent.py",
   "agent_sha256": "a40d2ce08abde9774ebb4d34f02577a31e15a2ef66d2064953ab08a3f39baa0b",
+  "backup_agent": "rapplication_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RapplicationAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -32,8 +35,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/rapplication:a688baf6fa232496c28cee39e3621b98163ef432fb7e7ab5a623704c533c2cd3",
+  "rollback_agent_retained": true,
   "runtime_name": "Rapplication",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 41847,
+  "skill_sha256": "cfaf4e27369030a31a35dcf99a5ffb57560fe556bca575e983a41ab2b65ea947",
   "tool_schema": {
     "properties": {
       "action": {

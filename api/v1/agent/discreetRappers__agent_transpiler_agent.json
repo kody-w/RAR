@@ -3,11 +3,12 @@
   "id": "discreetRappers__agent_transpiler_agent",
   "name": "AgentTranspiler",
   "rar_name": "@discreetRappers/agent_transpiler_agent",
-  "rappid": "rappid:@discreetRappers/agent_transpiler_agent:5b791fa732b009d98c427e86b1d8c9f86cc3b84845d0ce4c28abfaee04658fde",
-  "_migrated_from": "rappid:@discreetRappers/agent_transpiler_agent:da9dd6bb654fd2a2fcd661d254006d8763292823946a3c56209effc881984608",
+  "rappid": "rappid:@discreetrappers/agent-transpiler:279aff6f03c6101ee29d94ff7f5d1a4a21abecc27668f2f5fc5ee2478ec09ecf",
+  "_migrated_from": "rappid:@discreetRappers/agent_transpiler_agent:5b791fa732b009d98c427e86b1d8c9f86cc3b84845d0ce4c28abfaee04658fde",
   "_migrated_from_all": [
     "rappid:v2:agent:@discreetRappers/agent_transpiler_agent:966e2b299ccdd9b57bcb085522f79def",
-    "rappid:@discreetRappers/agent_transpiler_agent:da9dd6bb654fd2a2fcd661d254006d8763292823946a3c56209effc881984608"
+    "rappid:@discreetRappers/agent_transpiler_agent:da9dd6bb654fd2a2fcd661d254006d8763292823946a3c56209effc881984608",
+    "rappid:@discreetRappers/agent_transpiler_agent:5b791fa732b009d98c427e86b1d8c9f86cc3b84845d0ce4c28abfaee04658fde"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -34,9 +35,18 @@
   "sha256": "5ae4e24760415ab5d1ad427c6a2f52518d4919d2811bee13914e65f3b159210c",
   "has_card": true,
   "added_at": "2026-04-06T16:39:03-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-discreetrappers-agent-transpiler",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__agent_transpiler_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_transpiler_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_transpiler_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-discreetrappers-agent-transpiler/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-discreetrappers-agent-transpiler/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__agent_transpiler_agent.py",
   "api_card_url": null,

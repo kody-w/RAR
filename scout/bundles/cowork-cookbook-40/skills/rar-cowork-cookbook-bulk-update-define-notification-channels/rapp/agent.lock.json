@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_notification_channels",
+  "agent_bytes": 10703,
   "agent_file": "bulk_update_define_notification_channels_agent.py",
   "agent_sha256": "3b0c08f52f8d4d2939c9f806ce63cc66dab4adca7793405e0e1e2686f4cb3813",
+  "backup_agent": "bulk_update_define_notification_channels_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineNotificationChannels",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-notification-channels:fab2b535fad184f71580bc4021279361162dcd60e37d480a02a0f3e703121700",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefineNotificationChannels",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24829,
+  "skill_sha256": "27744f9cf4fac2054cb1f1bcecc2f46e5c137fe84ba210910c68661457d34244",
   "tool_schema": {
     "properties": {
       "operation": {

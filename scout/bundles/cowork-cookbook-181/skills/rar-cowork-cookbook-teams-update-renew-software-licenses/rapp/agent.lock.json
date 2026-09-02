@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_renew_software_licenses",
+  "agent_bytes": 10654,
   "agent_file": "teams_update_renew_software_licenses_agent.py",
   "agent_sha256": "63bccd67ac5773059ce33f5345d746b2bd436b7e683c603caf2c4dbc290cd78a",
+  "backup_agent": "teams_update_renew_software_licenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateRenewSoftwareLicenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-renew-software-licenses:b87590bb5344522766390943c2d28625f55077b7284f21d737f3a2018f24f74d",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateRenewSoftwareLicenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24687,
+  "skill_sha256": "ae267b4e5f510efe2bf6902dd97c5836e8091cc26a99a195894adda996e8c711",
   "tool_schema": {
     "properties": {
       "operation": {

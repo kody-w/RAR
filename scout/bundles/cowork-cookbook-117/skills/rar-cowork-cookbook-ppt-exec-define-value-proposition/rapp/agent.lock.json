@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_value_proposition",
+  "agent_bytes": 10607,
   "agent_file": "ppt_exec_define_value_proposition_agent.py",
   "agent_sha256": "ba9b7df12ba190aea09c66dff19e1d5f540d9c0a08d5baa00f29b1c53c1b5c62",
+  "backup_agent": "ppt_exec_define_value_proposition_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineValueProposition",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-define-value-proposition:ce1cf62179cee6937c5d8120ebe6607bfbc83fcd09fe11decc163aa25932e03e",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDefineValueProposition",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24620,
+  "skill_sha256": "3ff2e73809d04f27bb2ae844e913090b24c3c2fd1827f58f595dc60577eca7bc",
   "tool_schema": {
     "properties": {
       "operation": {

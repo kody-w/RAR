@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_convert_a_case_to_a_knowledge_article",
+  "agent_bytes": 10809,
   "agent_file": "adaptive_card_convert_a_case_to_a_knowledge_article_agent.py",
   "agent_sha256": "358bfcfa08422a1a330db4dc927f80bafb8a7410962549f574496fe5f63c1479",
+  "backup_agent": "adaptive_card_convert_a_case_to_a_knowledge_article_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConvertACaseToAKnowledgeArticle",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-convert-a-case-to-a-knowledge-article:6c642b14aa2a2519a539cdc248bfe47b4c6b4d6c19e51f3409a4758b0cdb0fd5",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardConvertACaseToAKnowledgeArticle",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25180,
+  "skill_sha256": "36967ed88a5aea1c3be59630e00ef556a4b3880bb7dcf5427deae9ae93202ab5",
   "tool_schema": {
     "properties": {
       "operation": {

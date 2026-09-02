@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_purge_and_archive_business_data",
+  "agent_bytes": 10774,
   "agent_file": "adaptive_card_purge_and_archive_business_data_agent.py",
   "agent_sha256": "0590cbe558a0a2fb3bde22426c2ac340bb33d08c41d8757ba528ec0b64fc30bb",
+  "backup_agent": "adaptive_card_purge_and_archive_business_data_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardPurgeAndArchiveBusinessData",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-purge-and-archive-business-data:e7965d0c8da6837f590e04880c6c636fe98731b816d2a956ee80816d907c97af",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardPurgeAndArchiveBusinessData",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25042,
+  "skill_sha256": "8cec09f3ab9dd1bc1c483301059e470006b031d247056b800e1e65b19cf5604b",
   "tool_schema": {
     "properties": {
       "operation": {

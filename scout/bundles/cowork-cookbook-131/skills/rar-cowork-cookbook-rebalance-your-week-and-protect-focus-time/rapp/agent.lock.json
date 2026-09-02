@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/rebalance_your_week_and_protect_focus_time",
+  "agent_bytes": 9716,
   "agent_file": "rebalance_your_week_and_protect_focus_time_agent.py",
   "agent_sha256": "30277545414dd92cf18a6e6b5ec2677a579d4fa171adca8cfa9a277a47f5c4fe",
+  "backup_agent": "rebalance_your_week_and_protect_focus_time_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RebalanceYourWeekAndProtectFocusTime",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/rebalance-your-week-and-protect-focus-time:422a3a7be27a0fa2a18cf427c5121ff790e67da3dfb31bec6da23a45434b1781",
+  "rollback_agent_retained": true,
   "runtime_name": "RebalanceYourWeekAndProtectFocusTime",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23078,
+  "skill_sha256": "7f80e53baf292166dc467c237940e3f6916bb820c33f637695df20e3ab5f618f",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_determine_business_process_flow",
+  "agent_bytes": 10745,
   "agent_file": "bulk_update_determine_business_process_flow_agent.py",
   "agent_sha256": "5eee37ddd22445e4614ccf34b4c462b702ed51f3fe43a22d7efc157167d17074",
+  "backup_agent": "bulk_update_determine_business_process_flow_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDetermineBusinessProcessFlow",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-determine-business-process-flow:b24c02f4ce332903ef7d649df5073b9a82b0b2afc7d2f336cd95608570bde754",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDetermineBusinessProcessFlow",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24925,
+  "skill_sha256": "f89adcea7401d678080537ead87b2f982b5c3011897a60782642fc7525f4ef68",
   "tool_schema": {
     "properties": {
       "operation": {

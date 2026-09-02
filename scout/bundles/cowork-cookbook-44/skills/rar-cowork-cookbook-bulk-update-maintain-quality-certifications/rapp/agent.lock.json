@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_maintain_quality_certifications",
+  "agent_bytes": 10733,
   "agent_file": "bulk_update_maintain_quality_certifications_agent.py",
   "agent_sha256": "6a42c919547b8084f266ef5b380172e0a1f766c0deec8bfbf10922b6ea70dda5",
+  "backup_agent": "bulk_update_maintain_quality_certifications_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateMaintainQualityCertifications",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-maintain-quality-certifications:8ec2343b5dac2187592084ec4592713bf9d93ec331610cc131e0f4d0a6fb1379",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateMaintainQualityCertifications",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24907,
+  "skill_sha256": "ae7ea85ee1d8849a243d713cd9df053ccea3938f8a50ea355fb596d51224a1fb",
   "tool_schema": {
     "properties": {
       "operation": {

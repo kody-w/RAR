@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_calculate_sales_commissions",
+  "agent_bytes": 10677,
   "agent_file": "teams_update_calculate_sales_commissions_agent.py",
   "agent_sha256": "94b74a63d58de4ebfb7ec3ef5bf5ef9771c2d93a2fbb846b8fee411db268afd9",
+  "backup_agent": "teams_update_calculate_sales_commissions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCalculateSalesCommissions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-calculate-sales-commissions:759f6915d78170ebb98aa52dd30a0120d7069466b5a9497de91627067f2a4cf9",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateCalculateSalesCommissions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24786,
+  "skill_sha256": "58ed77838cd0ae7cba5bf251d228a028f4c232833453240b42026852c7112b82",
   "tool_schema": {
     "properties": {
       "operation": {

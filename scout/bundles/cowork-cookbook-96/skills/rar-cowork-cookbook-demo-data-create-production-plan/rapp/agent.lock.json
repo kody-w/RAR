@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_create_production_plan",
+  "agent_bytes": 10505,
   "agent_file": "demo_data_create_production_plan_agent.py",
   "agent_sha256": "ff97129c25f9a6a153c582102ce6bf183562e1cf8e2d0769e197be340daa6114",
+  "backup_agent": "demo_data_create_production_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataCreateProductionPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-create-production-plan:9bbbb01eadd4c1c007379238dce9a23252b48ce622f81e84870e2e54db32c091",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataCreateProductionPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24423,
+  "skill_sha256": "2260fcca99c7847ec67920e0e5830a6a2beb9098e00dbb29817f32ce4be9a24e",
   "tool_schema": {
     "properties": {
       "operation": {

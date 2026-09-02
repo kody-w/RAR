@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_report_production_quality_non_conformance",
+  "agent_bytes": 10816,
   "agent_file": "ppt_exec_report_production_quality_non_conformance_agent.py",
   "agent_sha256": "b926c0be09901c9ab225192ee9293f70a255b10660f69cdfdb0923dba8e3bdcc",
+  "backup_agent": "ppt_exec_report_production_quality_non_conformance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecReportProductionQualityNonConformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-report-production-quality-non-conformance:3c666d5ebad17643c2030eab5ffde3f8fb48ca5dc80b3d475a07f78b6582d038",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecReportProductionQualityNonConformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25118,
+  "skill_sha256": "4a790e0bcde7166554838f8a945c91da973370ba377106ca8575e235db3843c3",
   "tool_schema": {
     "properties": {
       "operation": {

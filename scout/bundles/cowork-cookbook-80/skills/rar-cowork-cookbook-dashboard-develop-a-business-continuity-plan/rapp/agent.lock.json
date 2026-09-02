@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_develop_a_business_continuity_plan",
+  "agent_bytes": 10785,
   "agent_file": "dashboard_develop_a_business_continuity_plan_agent.py",
   "agent_sha256": "7d98d9fcdb6e63560835a845f960fac665939c7a36b03f6180bf60ae2e5de9d1",
+  "backup_agent": "dashboard_develop_a_business_continuity_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDevelopABusinessContinuityPlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-develop-a-business-continuity-plan:801a62422ceeb0754ccb798216c2ebc303db631a0f552cb44ed18ee317de80b0",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDevelopABusinessContinuityPlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25046,
+  "skill_sha256": "8bbdbe629a1337e80c8ed8efdd68a02c08b695c0ad7834f1ed853b58ad8d2048",
   "tool_schema": {
     "properties": {
       "operation": {

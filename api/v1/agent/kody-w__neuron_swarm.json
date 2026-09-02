@@ -3,10 +3,11 @@
   "id": "kody-w__neuron_swarm",
   "name": "NeuronSwarm",
   "rar_name": "@kody-w/neuron_swarm",
-  "rappid": "rappid:@kody-w/neuron_swarm:40e7652a403648e8e08a9a41e3cd45a07b2f623f7f10951cfe7d68cd86108ddf",
-  "_migrated_from": "rappid:@kody-w/neuron_swarm:a9c20c16bd9d3450e7b34e918f88dd97ba142a8730eb3b7ac7c415e03a13eb9d",
+  "rappid": "rappid:@kody-w/neuron-swarm:24f21e1b55e4ae73a4ddfadae06492c85c60c766d91d7c5eaa6b14ab30e75c0d",
+  "_migrated_from": "rappid:@kody-w/neuron_swarm:40e7652a403648e8e08a9a41e3cd45a07b2f623f7f10951cfe7d68cd86108ddf",
   "_migrated_from_all": [
-    "rappid:@kody-w/neuron_swarm:a9c20c16bd9d3450e7b34e918f88dd97ba142a8730eb3b7ac7c415e03a13eb9d"
+    "rappid:@kody-w/neuron_swarm:a9c20c16bd9d3450e7b34e918f88dd97ba142a8730eb3b7ac7c415e03a13eb9d",
+    "rappid:@kody-w/neuron_swarm:40e7652a403648e8e08a9a41e3cd45a07b2f623f7f10951cfe7d68cd86108ddf"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -33,9 +34,18 @@
   "sha256": "911cbdf5536d55be0da3f49cf86f6b96fb4dde7eeb05fdd1ae7f67ea945e0498",
   "has_card": true,
   "added_at": "2026-06-26T23:08:53-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-neuron-swarm",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__neuron_swarm.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/neuron_swarm_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/neuron_swarm_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-neuron-swarm/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-neuron-swarm/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__neuron_swarm.py",
   "api_card_url": null,

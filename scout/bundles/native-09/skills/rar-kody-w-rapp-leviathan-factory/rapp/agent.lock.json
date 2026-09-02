@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp_leviathan_factory",
+  "agent_bytes": 2366,
   "agent_file": "rapp_leviathan_factory_agent.py",
   "agent_sha256": "e381f1fe6add6c47eec0d59307110f136103f8d349c611f7be0bff02edb0c6d0",
+  "backup_agent": "rapp_leviathan_factory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappLeviathanFactoryAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -25,8 +28,16 @@
     ],
     "version": "0.3.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-leviathan-factory:4cc795daafd85d336d022195c77fd9da590130de92426f4790c9d7811f1695f5",
+  "rollback_agent_retained": true,
   "runtime_name": "RappLeviathanFactory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 9625,
+  "skill_sha256": "755ce76afa2c584533a34dc3e768d86a94c87f58e3f3a2000e0497343fb7396b",
   "tool_schema": {
     "additionalProperties": true,
     "properties": {

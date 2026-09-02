@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_configure_and_manage_mobile_apps_and_devices",
+  "agent_bytes": 10619,
   "agent_file": "report_configure_and_manage_mobile_apps_and_devices_agent.py",
   "agent_sha256": "e4cdb7a2e91aa33dbf40b6393785bb6e5e9c8b13f099c5bf55e3b1bd4a690e89",
+  "backup_agent": "report_configure_and_manage_mobile_apps_and_devices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportConfigureAndManageMobileAppsAndDevices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-configure-and-manage-mobile-apps-and-devices:c7804bf8e007760fecb080bb130a5b00536cb9847a12bd1dd015a663d8f66074",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportConfigureAndManageMobileAppsAndDevices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24883,
+  "skill_sha256": "4283eacfd4814c1a8e00511cff5ed291b28a91c1fc886e436e8963da7a734fde",
   "tool_schema": {
     "properties": {
       "audience": {

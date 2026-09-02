@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/win_loss_theme_analysis",
+  "agent_bytes": 10550,
   "agent_file": "win_loss_theme_analysis_agent.py",
   "agent_sha256": "3c07691b700b5f096ed77c40f7b9b4fe17b139cf9ef6cb54f2c4282259605d50",
+  "backup_agent": "win_loss_theme_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WinLossThemeAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -88,8 +91,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/win-loss-theme-analysis:ac55972391b35c1b57dfbe106a8f0ed0bcc0b80046d96487f6d30ee9ebe0a66f",
+  "rollback_agent_retained": true,
   "runtime_name": "WinLossThemeAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24483,
+  "skill_sha256": "059511cb4f455bc6359fae5014cf2045bc57d0b98453dff3d59bb2ccb83a2742",
   "tool_schema": {
     "properties": {
       "operation": {

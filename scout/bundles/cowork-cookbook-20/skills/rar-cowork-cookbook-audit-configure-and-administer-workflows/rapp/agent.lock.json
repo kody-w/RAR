@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_configure_and_administer_workflows",
+  "agent_bytes": 10808,
   "agent_file": "audit_configure_and_administer_workflows_agent.py",
   "agent_sha256": "5674c25965063847b4bb3e38a982980b6447007c54b1237a8d32b3a3f5c44f26",
+  "backup_agent": "audit_configure_and_administer_workflows_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditConfigureAndAdministerWorkflows",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-configure-and-administer-workflows:d506965fcc88d3cebd7322bfedfb740ec0cd2bc12281aef1d974cbef89b6a8c7",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditConfigureAndAdministerWorkflows",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25030,
+  "skill_sha256": "6a52e3d7732a6b9bf64799f02f31bcc2dbb97b6883ea2a794b9dc6982be6fe83",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_quarantine_manufactured_goods",
+  "agent_bytes": 10712,
   "agent_file": "audit_quarantine_manufactured_goods_agent.py",
   "agent_sha256": "607b9c22621b8d617979ce3de3c73c4dc62e0a55a22f27e1591b1e28b16d4c7a",
+  "backup_agent": "audit_quarantine_manufactured_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditQuarantineManufacturedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-quarantine-manufactured-goods:fae6fc7ed377ae7018b7b27c0b98c57a7932b95de9bb965084de3f60304164dc",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditQuarantineManufacturedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24821,
+  "skill_sha256": "ff9b7e42acb38c4a4c9c3f54938bffe2616efc599fd328542132e4d4a843735a",
   "tool_schema": {
     "properties": {
       "criteria": {

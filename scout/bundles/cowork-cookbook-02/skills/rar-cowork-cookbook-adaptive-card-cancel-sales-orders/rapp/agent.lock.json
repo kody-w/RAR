@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_cancel_sales_orders",
+  "agent_bytes": 10560,
   "agent_file": "adaptive_card_cancel_sales_orders_agent.py",
   "agent_sha256": "3a1b4c23c8dd54e4ea00fa5c4f22a6b260965b0180c2c9e9516a348a70eb8542",
+  "backup_agent": "adaptive_card_cancel_sales_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardCancelSalesOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-cancel-sales-orders:8f13cc4421f836905ab41b3ffff8a637060b1ab3e3ef78272554d89da6f44836",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardCancelSalesOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24536,
+  "skill_sha256": "372cddcae374a06347c84e8d820470f75b9a6f4290b3f26f7c6452dc850728b7",
   "tool_schema": {
     "properties": {
       "operation": {

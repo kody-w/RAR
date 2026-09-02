@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_design_to_retire_manage_active_products",
+  "agent_bytes": 10687,
   "agent_file": "d365_design_to_retire_manage_active_products_agent.py",
   "agent_sha256": "611f75399b0b976ef887b57fffe80c9303a2daa1224d0b100fa12ed181374033",
+  "backup_agent": "d365_design_to_retire_manage_active_products_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365DesignToRetireManageActiveProducts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-design-to-retire-manage-active-products:2cc297df4af4907d7730fcfbc23225693c90b2505e30056a9f4771b4648a7ef7",
+  "rollback_agent_retained": true,
   "runtime_name": "D365DesignToRetireManageActiveProducts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24866,
+  "skill_sha256": "587be73df5ef86c85161f617c9c142ba958eac78530e444f249ae3af9eede29a",
   "tool_schema": {
     "properties": {
       "operation": {

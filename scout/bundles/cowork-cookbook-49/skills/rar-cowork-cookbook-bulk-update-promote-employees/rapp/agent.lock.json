@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_promote_employees",
+  "agent_bytes": 10535,
   "agent_file": "bulk_update_promote_employees_agent.py",
   "agent_sha256": "32132bac31e527bd24a4491d9a2e4f7eab47666d20baf5cdfeb565f2602d8e3c",
+  "backup_agent": "bulk_update_promote_employees_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdatePromoteEmployees",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-promote-employees:17d93244f07135fa35b5e9fcdf4c0e6980cbc9c206283b38f68f6e13218b6541",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdatePromoteEmployees",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24445,
+  "skill_sha256": "ca3b620caf7fa4b67a0ceeaa7884bcdf567c51a53390935d978d4024f3e995bb",
   "tool_schema": {
     "properties": {
       "operation": {

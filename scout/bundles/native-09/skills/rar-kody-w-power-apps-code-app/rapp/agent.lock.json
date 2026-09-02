@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/power_apps_code_app_agent",
+  "agent_bytes": 40559,
   "agent_file": "power_apps_code_app_agent.py",
   "agent_sha256": "fbcd47231e85c44efedbdc661b1e20da4f8cc77f45bbc20d53d7355c25269a10",
+  "backup_agent": "power_apps_code_app_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerAppsCodeApp",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -31,8 +34,16 @@
     ],
     "version": "1.1.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/power-apps-code-app:0f812757911fed5ff8eadd05cb7ced043933dba8d351b236f7512e2aa30f9163",
+  "rollback_agent_retained": true,
   "runtime_name": "PowerAppsCodeApp",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 66138,
+  "skill_sha256": "136b8bfaf8235dbbd956df86b4e73d9379f3aec2ea4d975768b58de573790051",
   "tool_schema": {
     "properties": {},
     "required": [],

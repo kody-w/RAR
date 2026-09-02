@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/vendor_invoice_capture_skill",
+  "agent_bytes": 10966,
   "agent_file": "vendor_invoice_capture_skill_agent.py",
   "agent_sha256": "726bfc1e7f14bb64da0ac946394374d25418bdf169715a0ca0ac269ce3bd3410",
+  "backup_agent": "vendor_invoice_capture_skill_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VendorInvoiceCaptureSkill",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -94,8 +97,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/vendor-invoice-capture-skill:e9b6fc1f12867b61c6974bcd790acdea20ff60e9b51871761e899eac83d63219",
+  "rollback_agent_retained": true,
   "runtime_name": "VendorInvoiceCaptureSkill",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25321,
+  "skill_sha256": "8c7d81e5d0f0351f6cc4440304ee40a3ecd4177b06e08c133e286f8713ef43ca",
   "tool_schema": {
     "properties": {
       "operation": {

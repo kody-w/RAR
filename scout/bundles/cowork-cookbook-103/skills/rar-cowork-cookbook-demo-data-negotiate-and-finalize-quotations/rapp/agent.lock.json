@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_negotiate_and_finalize_quotations",
+  "agent_bytes": 10651,
   "agent_file": "demo_data_negotiate_and_finalize_quotations_agent.py",
   "agent_sha256": "1719513173aab59033daa4496b51d8982afcf9efb22cc1682e338d99ce57b787",
+  "backup_agent": "demo_data_negotiate_and_finalize_quotations_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataNegotiateAndFinalizeQuotations",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-negotiate-and-finalize-quotations:4149dd6843a469a9cc34f24800ebedb04dbd81a2423c7142236bcb56b05e503e",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataNegotiateAndFinalizeQuotations",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24816,
+  "skill_sha256": "bfc7ed50b2abedf6d68643d4aea99676a16e8a3f6af8245c5061ea569a137fbd",
   "tool_schema": {
     "properties": {
       "operation": {

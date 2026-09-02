@@ -94,6 +94,7 @@ def asset_to_agent() -> dict[str, str]:
         asset, name = a.get("_install_filename"), a.get("name")
         if asset and name:
             mapping[asset] = name
+            mapping[asset.removesuffix("_agent.py") + ".skill.zip"] = name
     return mapping
 
 
@@ -117,7 +118,14 @@ def build_snapshot(releases: list[dict], mapping: dict[str, str]) -> dict:
             # renamed or retired. Counted in the total, not attributed.
             unmapped += count
             continue
-        agents[name] = {"downloads": count, "asset": fname}
+        entry = agents.setdefault(
+            name,
+            {"downloads": 0, "asset": fname, "assets": {}},
+        )
+        entry["downloads"] += count
+        entry["assets"][fname] = count
+        if fname.endswith(".skill.zip"):
+            entry["asset"] = fname
 
     return {
         "schema": SNAPSHOT_SCHEMA,

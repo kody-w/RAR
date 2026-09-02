@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_agent_skill_sets",
+  "agent_bytes": 10616,
   "agent_file": "ppt_exec_define_agent_skill_sets_agent.py",
   "agent_sha256": "8fff37fe77b6a6b98ad00f9283ab4840319fd90d4368fd6478cad33fb405525f",
+  "backup_agent": "ppt_exec_define_agent_skill_sets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineAgentSkillSets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-define-agent-skill-sets:b4b0958d87d8e868273746900cc04227f7e62c2b36b5b53ce575eb15c062e718",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDefineAgentSkillSets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24623,
+  "skill_sha256": "16daa65ec12583d7c8de7f50bf9fae3943aef12f879a495b7ce44b97745c65c8",
   "tool_schema": {
     "properties": {
       "operation": {

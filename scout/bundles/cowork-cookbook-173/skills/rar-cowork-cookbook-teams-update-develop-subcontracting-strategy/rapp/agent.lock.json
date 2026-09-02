@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_develop_subcontracting_strategy",
+  "agent_bytes": 10730,
   "agent_file": "teams_update_develop_subcontracting_strategy_agent.py",
   "agent_sha256": "d8b8fb0698d21fdac1b096f5d80b5eadde71645662f0ccb5c6ff03efcdcd3df2",
+  "backup_agent": "teams_update_develop_subcontracting_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDevelopSubcontractingStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-develop-subcontracting-strategy:5df7a18479c588f56fdf562f879f1a819aec592bb525b7a5779f59eca9192e9b",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDevelopSubcontractingStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24877,
+  "skill_sha256": "d92dc76f2c202ea0d513d19b88584a6509b519d1f9448e6261ab6429be18fc22",
   "tool_schema": {
     "properties": {
       "operation": {

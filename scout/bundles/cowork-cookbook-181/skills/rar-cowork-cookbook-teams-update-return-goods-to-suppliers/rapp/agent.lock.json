@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_return_goods_to_suppliers",
+  "agent_bytes": 10638,
   "agent_file": "teams_update_return_goods_to_suppliers_agent.py",
   "agent_sha256": "24bcc3413ba12d659214c300dc4974ed4f757717c4a9af8b71115a8beb1d885f",
+  "backup_agent": "teams_update_return_goods_to_suppliers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateReturnGoodsToSuppliers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-return-goods-to-suppliers:8e5798d29cb302f44a6bb089a157e5c2ba3415101ffd9eb445a6ca8c5a30c3d7",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateReturnGoodsToSuppliers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24701,
+  "skill_sha256": "d6539f1a315c8d38088540e9611bb69de3cfc9eafb92843f116ac0c2c67aa6b7",
   "tool_schema": {
     "properties": {
       "operation": {

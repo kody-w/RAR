@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_manage_sales_order_changes",
+  "agent_bytes": 10539,
   "agent_file": "demo_data_manage_sales_order_changes_agent.py",
   "agent_sha256": "d54fee2e0b7cb32d4c44b517efc30ccd03fb72ea0fe3c657d7ff6cfda3769053",
+  "backup_agent": "demo_data_manage_sales_order_changes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataManageSalesOrderChanges",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-manage-sales-order-changes:5f44f6e8859fab1a87201c1b80a7acf4751228d2deca2c7b130d088d3c7732d7",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataManageSalesOrderChanges",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24559,
+  "skill_sha256": "a45a422de15a1b3eb3a6450164f86506da1b2bb52a91c648c273a5b92e22ab7e",
   "tool_schema": {
     "properties": {
       "operation": {

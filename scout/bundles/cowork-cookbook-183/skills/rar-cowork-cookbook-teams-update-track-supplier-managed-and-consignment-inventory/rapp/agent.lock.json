@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_track_supplier_managed_and_consignment_inventory",
+  "agent_bytes": 10958,
   "agent_file": "teams_update_track_supplier_managed_and_consignment_inventory_agent.py",
   "agent_sha256": "79416024d8ecf63796dea1e75b82a2cb745ffb2604ecd1f2be8ea96e5ecc2344",
+  "backup_agent": "teams_update_track_supplier_managed_and_consignment_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateTrackSupplierManagedAndConsignmentInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-track-supplier-managed-and-consignment-inventory:7e6bcfe717b90f965e1c8fc6b43740a46c02d048d43f76c0356da03c6c56c254",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateTrackSupplierManagedAndConsignmentInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25465,
+  "skill_sha256": "b12f14f69e4f8a71a84983f37a42364ac88c66410998654c401d32af2308005a",
   "tool_schema": {
     "properties": {
       "operation": {

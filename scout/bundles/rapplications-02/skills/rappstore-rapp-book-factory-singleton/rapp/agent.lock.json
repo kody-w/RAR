@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/book-factory-singleton",
+  "agent_bytes": 23555,
   "agent_file": "bookfactory_agent.py",
   "agent_sha256": "7419619b65eacd27dbfa418f391ba755b9d30fffbf084be211cfa011286b73d9",
+  "backup_agent": "bookfactory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BookFactory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "delegates_to_inlined": [
@@ -38,8 +41,16 @@
     "trust": "community",
     "version": "0.3.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/book-factory-singleton:a08d2d44b05c381d3caf1c05cf208c6adb375d3958f7589656309cf570dde3ac",
+  "rollback_agent_retained": true,
   "runtime_name": "BookFactory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 41637,
+  "skill_sha256": "89e6c13575ca5404dda7babfe2d0fe347fcac4d32acd7ffe80d11ee344a33b3e",
   "tool_schema": {
     "properties": {
       "author": {

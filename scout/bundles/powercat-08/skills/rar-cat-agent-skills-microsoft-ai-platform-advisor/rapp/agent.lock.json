@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/microsoft_ai_platform_advisor",
+  "agent_bytes": 9610,
   "agent_file": "microsoft_ai_platform_advisor_agent.py",
   "agent_sha256": "8bbf35ee4a97ee4ed92876adbbfd13d2b7624c98a137dc949f1f46080a0637d4",
+  "backup_agent": "microsoft_ai_platform_advisor_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MicrosoftAiPlatformAdvisor",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Rafsan Huseynov",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/microsoft-ai-platform-advisor:fa30c647a442b6334fb843c4226a3b59f1a7332132de5563b5ffba79faf64c04",
+  "rollback_agent_retained": true,
   "runtime_name": "MicrosoftAiPlatformAdvisor",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23483,
+  "skill_sha256": "46317f7718a1ad0851ba86e75f1846c1b1c1ad561c877cbb99e2837ccb79667e",
   "tool_schema": {
     "properties": {
       "data_source": {

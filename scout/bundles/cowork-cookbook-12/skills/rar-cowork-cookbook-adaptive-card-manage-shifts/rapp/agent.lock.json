@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_manage_shifts",
+  "agent_bytes": 10496,
   "agent_file": "adaptive_card_manage_shifts_agent.py",
   "agent_sha256": "387b33ee9553fed500d5a5e21ffcf356c1d2e291872201fb43bb430ba41a85fc",
+  "backup_agent": "adaptive_card_manage_shifts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardManageShifts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-manage-shifts:e8050587104d9f64993c2bca8a37fc66ed3a4a28dfd10d1118cb84cacf58197e",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardManageShifts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24367,
+  "skill_sha256": "8bdecd43baa32fd37a8ec56d7fcc46c6e895df3b389d6de90d088a3d88e080f6",
   "tool_schema": {
     "properties": {
       "operation": {

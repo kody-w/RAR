@@ -5,6 +5,13 @@
   "id": "aecee7f4721a4a8b",
   "lastExecutedAt": null,
   "name": "MomentFactory",
+  "rapp": {
+    "backup_agent": "moment_factory_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-rapp-moment-factory"
+  },
   "schedule": {
     "days": [
       1,

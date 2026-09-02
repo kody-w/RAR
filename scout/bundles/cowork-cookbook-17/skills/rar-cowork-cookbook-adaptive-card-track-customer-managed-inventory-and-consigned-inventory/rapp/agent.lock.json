@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_track_customer_managed_inventory_and_consigned_inventory",
+  "agent_bytes": 11063,
   "agent_file": "adaptive_card_track_customer_managed_inventory_and_consigned_inventory_agent.py",
   "agent_sha256": "0bef6f133be31988472a99107e703cdc25f8efd44b6ba807ad959c428162fe3e",
+  "backup_agent": "adaptive_card_track_customer_managed_inventory_and_consigned_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardTrackCustomerManagedInventoryAndConsignedInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-track-customer-managed-inventory-and-consigned-inventory:d2c9e51ca4a8def4d9b7303129fb54bb46b16be4db897f7c7f2197ad759b9387",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardTrackCustomerManagedInventoryAndConsignedInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25765,
+  "skill_sha256": "7b0f44ba41bb2d7bb006be7b9bf066238baa98c3612d382658fff8af12e0f844",
   "tool_schema": {
     "properties": {
       "operation": {

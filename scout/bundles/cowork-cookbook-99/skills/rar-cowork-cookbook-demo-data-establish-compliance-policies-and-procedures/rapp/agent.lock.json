@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_establish_compliance_policies_and_procedures",
+  "agent_bytes": 10807,
   "agent_file": "demo_data_establish_compliance_policies_and_procedures_agent.py",
   "agent_sha256": "93fc5828b3755da1a6680730ae27824f8b20cfa5945d1308bf0bcba142a9b41a",
+  "backup_agent": "demo_data_establish_compliance_policies_and_procedures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataEstablishCompliancePoliciesAndProcedures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-establish-compliance-policies-and-procedures:439507d2f7652a517f95b138f579dd6abc99b58ac522817e56c88d43c63c41d7",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataEstablishCompliancePoliciesAndProcedures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25185,
+  "skill_sha256": "fe59101541a9a76c5cdc6a2bd625215fe3904eee299291c3cc20d65c4b24af97",
   "tool_schema": {
     "properties": {
       "operation": {

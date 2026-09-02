@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_process_supplier_rebates_and_incentives",
+  "agent_bytes": 10814,
   "agent_file": "teams_update_process_supplier_rebates_and_incentives_agent.py",
   "agent_sha256": "6cd3252dc7b78785bae95376ea5ca8b21873ea8d98756710a10a2e3e6302c0ec",
+  "backup_agent": "teams_update_process_supplier_rebates_and_incentives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateProcessSupplierRebatesAndIncentives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-process-supplier-rebates-and-incentives:013c43e3feba0ad6a349840b03dc47ab85a154f21757882302898e14fc95dcdd",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateProcessSupplierRebatesAndIncentives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25131,
+  "skill_sha256": "aa51ce639dded153ea7ff09b057ace7fdaafb8e5d76a39feb34ae3e1f8b51965",
   "tool_schema": {
     "properties": {
       "operation": {

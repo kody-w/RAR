@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/tool_tracer",
+  "agent_bytes": 9109,
   "agent_file": "tool_tracer_agent.py",
   "agent_sha256": "9bdbbbf6039d95cd831a928da5055dd9dec8dd45c1fc63c67142f4c8260c4e84",
+  "backup_agent": "tool_tracer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ToolTracer",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Rafael Lopez Alcaraz",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/tool-tracer:b18aaae64b6dc0c14360e82d0ce3a0f047984cdb5c8b526016809c51c8a9c622",
+  "rollback_agent_retained": true,
   "runtime_name": "ToolTracer",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21951,
+  "skill_sha256": "1f3556368e32643b4f243274f0e9d0643da31c1ff29b50e95fdc2329be4f0f87",
   "tool_schema": {
     "properties": {
       "environment": {

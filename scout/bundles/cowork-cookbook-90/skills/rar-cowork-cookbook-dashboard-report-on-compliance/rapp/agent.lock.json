@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_report_on_compliance",
+  "agent_bytes": 10602,
   "agent_file": "dashboard_report_on_compliance_agent.py",
   "agent_sha256": "c12888da867ac347054f67659e2aff90330a7467865b4e143337fbf3251ee1c0",
+  "backup_agent": "dashboard_report_on_compliance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardReportOnCompliance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-report-on-compliance:14340a64997ba71bf31d14cf8b10e58e2ea643aaccbb897af62807d7b2659a50",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardReportOnCompliance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24577,
+  "skill_sha256": "32fe9018330a1184b7c6c6fcfbb56d7c4294b33f563b1069cbe7c8a5f2894c3b",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_plan_workforce",
+  "agent_bytes": 10502,
   "agent_file": "teams_update_plan_workforce_agent.py",
   "agent_sha256": "ec0f2ac2b60ba8bb82977df02941b4b2961773e0a4634d782ca896eccae23299",
+  "backup_agent": "teams_update_plan_workforce_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdatePlanWorkforce",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-plan-workforce:6a7648cb84745eddf4d0b99a1774534e3365bd27f256db31a1886c39290c18b8",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdatePlanWorkforce",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24353,
+  "skill_sha256": "fa163d8fac83a92d33f4777071fe5e0b886809b4db9489c183f0a5f041502fa8",
   "tool_schema": {
     "properties": {
       "operation": {

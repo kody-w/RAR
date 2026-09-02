@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_develop_project_approval_processes",
+  "agent_bytes": 10820,
   "agent_file": "scheduled_brief_develop_project_approval_processes_agent.py",
   "agent_sha256": "f7212a4cdf82884a10199f586aa48d3109a8418525954ff8f953c68c19b83828",
+  "backup_agent": "scheduled_brief_develop_project_approval_processes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDevelopProjectApprovalProcesses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-develop-project-approval-processes:a04e295bce868c8fe833a7f0e4fbc33e3451272a2aabfcc010aecd0bf8ee2c75",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDevelopProjectApprovalProcesses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25114,
+  "skill_sha256": "53e40277ae71080438eeb8fadef404930dae58b94343baf952dab8af13857f05",
   "tool_schema": {
     "properties": {
       "operation": {

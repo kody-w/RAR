@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/full_rapp_leviathan",
+  "agent_bytes": 49706,
   "agent_file": "full_rapp_leviathan_agent.py",
   "agent_sha256": "78dac24c84eeca02f8e40144562d9ace2dd4da28b8fd7ca8f78b8b075feaad5a",
+  "backup_agent": "full_rapp_leviathan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FullRappLeviathanAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -38,8 +41,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/full-rapp-leviathan:2fc9be8794302bc94fb268508047a4bb6b0c84f5505d6c9b74af7213a62923cf",
+  "rollback_agent_retained": true,
   "runtime_name": "FullRappLeviathan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 76154,
+  "skill_sha256": "f5922d3eabcf7b8123b9a7fa87a286fd9013e5543802af08a65469b9b8ec8c11",
   "tool_schema": {
     "additionalProperties": false,
     "properties": {

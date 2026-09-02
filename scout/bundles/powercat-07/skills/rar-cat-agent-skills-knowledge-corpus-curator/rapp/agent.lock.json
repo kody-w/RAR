@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/knowledge_corpus_curator",
+  "agent_bytes": 9510,
   "agent_file": "knowledge_corpus_curator_agent.py",
   "agent_sha256": "64d1835538128e525a1d912cc3140cda56f126332bd118ed0eeef34adf18b00f",
+  "backup_agent": "knowledge_corpus_curator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "KnowledgeCorpusCurator",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Doug Bellingeri",
@@ -43,8 +46,16 @@
     ],
     "version": "1.8.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/knowledge-corpus-curator:f0575e685f239da56ffa30943e7f9bbbba25ad315ba8a2a9d1af0f2b1336da77",
+  "rollback_agent_retained": true,
   "runtime_name": "KnowledgeCorpusCurator",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22946,
+  "skill_sha256": "2cc997fab94b108e59f1602209fbfb9d1e76308dd07947e929bacf3faf448492",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_track_supplier_managed_and_consignment_inventory",
+  "agent_bytes": 11009,
   "agent_file": "scheduled_brief_track_supplier_managed_and_consignment_inventory_agent.py",
   "agent_sha256": "a0e6c566c8b684dac41327728b05c52025ad7059f0e01169722e614533d1ef32",
+  "backup_agent": "scheduled_brief_track_supplier_managed_and_consignment_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefTrackSupplierManagedAndConsignmentInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-track-supplier-managed-and-consignment-inventory:0842d3538342b175879c90bda6ae4cbaa600fee7c4bd96a86bd5b221d3e2552f",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefTrackSupplierManagedAndConsignmentInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25604,
+  "skill_sha256": "5b225ae6468ba33b1dfd018843701a1577974cb83d6bee524ba3b5854cc63d3b",
   "tool_schema": {
     "properties": {
       "operation": {

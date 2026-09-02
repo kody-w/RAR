@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_process_inventory_movements",
+  "agent_bytes": 10863,
   "agent_file": "configure_process_inventory_movements_agent.py",
   "agent_sha256": "e84a3e1ed2452a38c70891ac14952749a95cf997e42bbb49be0546a0d6a0d1f7",
+  "backup_agent": "configure_process_inventory_movements_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureProcessInventoryMovements",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-process-inventory-movements:1e67cd2cf13268c31191af843722b2e9ed37cc4fb5fbb0493aa774bb013fb523",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureProcessInventoryMovements",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24954,
+  "skill_sha256": "17b783fb196520e4f0889cc9c22ee5a357b4b48c6e5a55a503042ee94420bb70",
   "tool_schema": {
     "properties": {
       "operation": {

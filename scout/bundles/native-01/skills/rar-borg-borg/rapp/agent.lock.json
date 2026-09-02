@@ -1,9 +1,12 @@
 {
   "agent": "@borg/borg_agent",
+  "agent_bytes": 40703,
   "agent_file": "borg_agent.py",
   "agent_sha256": "7710557fc30ce2098c1b4d136004bc7e979ed8441b91dba95c38de830905166f",
+  "backup_agent": "borg_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BorgAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Howard",
@@ -26,8 +29,16 @@
     ],
     "version": "1.1.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@borg/borg:aa5b44b17bfc6db2b2c91664a79678d8cb545f9b2b90448489bfa672b26ec490",
+  "rollback_agent_retained": true,
   "runtime_name": "Borg",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 65582,
+  "skill_sha256": "73ef7c09f7a88c540de274abbe97e682bd39d45812b13b135754d4a8bfaeb757",
   "tool_schema": {
     "properties": {
       "action": {

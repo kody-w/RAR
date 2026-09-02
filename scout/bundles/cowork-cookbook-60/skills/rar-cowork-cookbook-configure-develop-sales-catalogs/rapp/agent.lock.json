@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_develop_sales_catalogs",
+  "agent_bytes": 10767,
   "agent_file": "configure_develop_sales_catalogs_agent.py",
   "agent_sha256": "21175272b2fc65993e2db4066ac109b65184794040d72a18bad0245d65694bf3",
+  "backup_agent": "configure_develop_sales_catalogs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDevelopSalesCatalogs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-develop-sales-catalogs:597f37ae61cce466eeaeb9fe9d013eb8725f72f3c727b7a85b543d886602c2c1",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureDevelopSalesCatalogs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24784,
+  "skill_sha256": "6f3f81507d6c04929277226bd5a10194dc7bdd1d172fd75f69100b545cc5077f",
   "tool_schema": {
     "properties": {
       "operation": {

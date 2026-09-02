@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_manage_customer_holds",
+  "agent_bytes": 10303,
   "agent_file": "report_manage_customer_holds_agent.py",
   "agent_sha256": "e619196bde9c02cce00ac58b69095b4b085533b786970888f226add964edabed",
+  "backup_agent": "report_manage_customer_holds_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportManageCustomerHolds",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-manage-customer-holds:e0f3c3bdbcba5843d8fdad6af5cc9feb87f674e73817a13e021e3f8b7ff2bcd6",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportManageCustomerHolds",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24086,
+  "skill_sha256": "0ed54314f9c085e8d174cf29dae53c7a70da816f63e6ff7cfc78759fea294571",
   "tool_schema": {
     "properties": {
       "audience": {

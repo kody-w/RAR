@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/hacker_news",
+  "agent_bytes": 4327,
   "agent_file": "hacker_news_agent.py",
   "agent_sha256": "51dd9c04dd7eb5a0701c5008a3797945b6188eb39d7de93b2a0467e03e1049a2",
+  "backup_agent": "hacker_news_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HackerNewsAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -22,8 +25,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/hacker-news:f18b6f34757505ebdd1121674def882671233d8f6456c875c75ab323db3acf3a",
+  "rollback_agent_retained": true,
   "runtime_name": "HackerNews",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 13804,
+  "skill_sha256": "a81c235cf3963ceb6ce97731cd3006435268a1ec11435a749efa9547a3e3d36a",
   "tool_schema": {
     "properties": {
       "count": {

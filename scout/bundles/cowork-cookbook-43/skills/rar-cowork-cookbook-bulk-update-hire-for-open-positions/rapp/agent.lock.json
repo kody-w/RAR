@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_hire_for_open_positions",
+  "agent_bytes": 10604,
   "agent_file": "bulk_update_hire_for_open_positions_agent.py",
   "agent_sha256": "2df159badddbc45433daec8cd17a5df8b9a5774ebf7bb4b74e37d54b3315362e",
+  "backup_agent": "bulk_update_hire_for_open_positions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateHireForOpenPositions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-hire-for-open-positions:cf0b4176e2fd79d5d106d0b9b266f196dc0ffe68b5ad092f7deddb87f80f9163",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateHireForOpenPositions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24656,
+  "skill_sha256": "ef04b5c6f6e83693caecefc39bf45a784a2665bfe63a0e73f1562dcd94633a97",
   "tool_schema": {
     "properties": {
       "operation": {

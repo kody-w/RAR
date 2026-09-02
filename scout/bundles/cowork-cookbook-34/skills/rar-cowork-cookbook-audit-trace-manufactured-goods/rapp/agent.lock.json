@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_trace_manufactured_goods",
+  "agent_bytes": 10650,
   "agent_file": "audit_trace_manufactured_goods_agent.py",
   "agent_sha256": "92dc48e4fe3bae684b2051e382520d06d0e102b881387496c4eff27b9112eb02",
+  "backup_agent": "audit_trace_manufactured_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditTraceManufacturedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-trace-manufactured-goods:41ca4b91b7ab7be5412836a31d2fc4321e5b8c0d6e5ee2484eed4cefe966553f",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditTraceManufacturedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24664,
+  "skill_sha256": "a77580f7faf5470d0b5462f138399b930cd4689eb5832b56bcb30d2b02dbcb24",
   "tool_schema": {
     "properties": {
       "criteria": {

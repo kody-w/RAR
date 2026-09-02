@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_create_solution_blueprint",
+  "agent_bytes": 10656,
   "agent_file": "bulk_update_create_solution_blueprint_agent.py",
   "agent_sha256": "b7c692f677651c9e1f0577def0e3e57cd4789adb313ca51d97a310f4cc70ac8e",
+  "backup_agent": "bulk_update_create_solution_blueprint_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateCreateSolutionBlueprint",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-create-solution-blueprint:db3d564d53417f2161ee8bc6a8eac5cc4800bcdbf58fbb2610d4f500988017fa",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateCreateSolutionBlueprint",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24725,
+  "skill_sha256": "7b62a4ac3a6a2016bcf67028d4c32a4b900bc8b99732cf90705cfbe17ae1a699",
   "tool_schema": {
     "properties": {
       "operation": {

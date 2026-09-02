@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_govern_projects",
+  "agent_bytes": 10238,
   "agent_file": "report_govern_projects_agent.py",
   "agent_sha256": "9eb84b632b246a3b372b392a203f6cd3783ee6ea7897c90d46d33181a9a48600",
+  "backup_agent": "report_govern_projects_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportGovernProjects",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-govern-projects:48900b582159218733838f6d2befbc062c3eba09359b3fcad0308e95b8535c99",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportGovernProjects",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23875,
+  "skill_sha256": "941fd873c239975b902c9c5fbb6bebe798d2013a289499b26b4b21e6e17f7644",
   "tool_schema": {
     "properties": {
       "audience": {

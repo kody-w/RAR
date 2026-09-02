@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_pay_employees",
+  "agent_bytes": 10509,
   "agent_file": "audit_pay_employees_agent.py",
   "agent_sha256": "92374eb569a4920a7b95080cd54f4c3e0525c9261f8d87e86f1dd086d661a92b",
+  "backup_agent": "audit_pay_employees_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditPayEmployees",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-pay-employees:bd7f24c455d7286d0ec73f099e5e7b029e5ed2c5b3be14f99d47cc0e5ff43b16",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditPayEmployees",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24321,
+  "skill_sha256": "1254b92961afa0f2da1e8b796d3f7e4d2af43733884897bc042b93da1522b538",
   "tool_schema": {
     "properties": {
       "criteria": {

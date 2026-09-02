@@ -1,11 +1,14 @@
 {
   "agent": "@discreetRappers/powerpoint_generator_agent",
+  "agent_bytes": 62736,
   "agent_file": "powerpoint_generator_agent.py",
   "agent_sha256": "5a9fc79dfbf2038ba411e2789dc988713389b2219ff5ce721b02d684d88a23f5",
+  "backup_agent": "powerpoint_generator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerPointGeneratorAgentV2",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.storage_factory"
+    "brainstem:utils.storage_factory"
   ],
   "manifest": {
     "author": "Bill Whalen",
@@ -28,8 +31,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/powerpoint-generator:8ea151a306b1714dbe02a37c4a9cbbf5e7c9e2d18676cdce14e2e2256231b0ed",
+  "rollback_agent_retained": true,
   "runtime_name": "PowerPointGeneratorV2",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 87586,
+  "skill_sha256": "ce906e9c33b188921f8ffce5f28422ca5a53c67a2a4dfc7ad4bc1e247bd5466f",
   "tool_schema": {
     "properties": {
       "action": {

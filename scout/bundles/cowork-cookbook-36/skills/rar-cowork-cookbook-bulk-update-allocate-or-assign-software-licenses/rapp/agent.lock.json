@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_allocate_or_assign_software_licenses",
+  "agent_bytes": 10805,
   "agent_file": "bulk_update_allocate_or_assign_software_licenses_agent.py",
   "agent_sha256": "5122f98a2d646493fceea75dac44aaab7611b7626e0b74d42e3bcf269bbfab4f",
+  "backup_agent": "bulk_update_allocate_or_assign_software_licenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAllocateOrAssignSoftwareLicenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-allocate-or-assign-software-licenses:0ba2ba54d2e45c1c2bd00838643ec840df8d96c564ff93bc166f75bc047ad0ae",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAllocateOrAssignSoftwareLicenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25103,
+  "skill_sha256": "8dd23da61dfea950fc919a22eabd80c1dfe03eac12df023ab07adece10cca677",
   "tool_schema": {
     "properties": {
       "operation": {

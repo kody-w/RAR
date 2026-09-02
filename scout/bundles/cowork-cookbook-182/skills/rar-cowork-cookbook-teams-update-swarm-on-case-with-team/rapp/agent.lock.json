@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_swarm_on_case_with_team",
+  "agent_bytes": 10627,
   "agent_file": "teams_update_swarm_on_case_with_team_agent.py",
   "agent_sha256": "9b796e6103b200d7cced9bbbc02cd25b315c0c22dbd5c5ec82d870ff150449a8",
+  "backup_agent": "teams_update_swarm_on_case_with_team_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateSwarmOnCaseWithTeam",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-swarm-on-case-with-team:1bc3d7910f10883f41197c3d527eb529daa762c9ffe61bae88a70f0b6e001bbf",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateSwarmOnCaseWithTeam",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24685,
+  "skill_sha256": "943bab3928f34cdcc70dbcdb6d2de56743b22deccd26a70285d0ef16e3fdb67c",
   "tool_schema": {
     "properties": {
       "operation": {

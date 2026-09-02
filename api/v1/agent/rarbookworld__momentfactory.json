@@ -3,11 +3,12 @@
   "id": "rarbookworld__momentfactory",
   "name": "MomentFactory (converged singleton)",
   "rar_name": "@rarbookworld/momentfactory",
-  "rappid": "rappid:@rarbookworld/momentfactory:5e2b4d285c830da3303df4f4349cac47d048dfe9787213c1ad0399863260059a",
-  "_migrated_from": "rappid:@rarbookworld/momentfactory:b582303218152a71e18589eae58a785699c3e27cb784677e21ee45aa3d8ba5d2",
+  "rappid": "rappid:@rarbookworld/momentfactory:e816e6990b47d0456db37998b6df0c2e9fecbc15b6bfe24c8a934e0d37ec12b1",
+  "_migrated_from": "rappid:@rarbookworld/momentfactory:5e2b4d285c830da3303df4f4349cac47d048dfe9787213c1ad0399863260059a",
   "_migrated_from_all": [
     "rappid:v2:agent:@rarbookworld/momentfactory:d339ee576abe2968190a246caa6354d8",
-    "rappid:@rarbookworld/momentfactory:b582303218152a71e18589eae58a785699c3e27cb784677e21ee45aa3d8ba5d2"
+    "rappid:@rarbookworld/momentfactory:b582303218152a71e18589eae58a785699c3e27cb784677e21ee45aa3d8ba5d2",
+    "rappid:@rarbookworld/momentfactory:5e2b4d285c830da3303df4f4349cac47d048dfe9787213c1ad0399863260059a"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.1.2",
@@ -36,9 +37,18 @@
   "sha256": "08cddf370c9a202ceb0e52ecb41dd6882d3e314d46eeb796e9e1387d9b86ecb7",
   "has_card": true,
   "added_at": "2026-04-19T18:58:15-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rarbookworld-momentfactory",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__momentfactory.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/momentfactory_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/momentfactory_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rarbookworld-momentfactory/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rarbookworld-momentfactory/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__momentfactory.py",
   "api_card_url": null,

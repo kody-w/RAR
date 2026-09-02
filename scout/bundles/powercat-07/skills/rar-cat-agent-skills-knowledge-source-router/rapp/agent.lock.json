@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/knowledge_source_router",
+  "agent_bytes": 8671,
   "agent_file": "knowledge_source_router_agent.py",
   "agent_sha256": "a6d2ac6a36c781505665b517953328f2dd809e91140dd40f56588569f87edeb6",
+  "backup_agent": "knowledge_source_router_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "KnowledgeSourceRouter",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Adi Leibowitz",
@@ -41,8 +44,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/knowledge-source-router:76983aef509c9560166b4ccf73db557efdf8c0e0f4710a7b7f412d5bc7c1baf1",
+  "rollback_agent_retained": true,
   "runtime_name": "KnowledgeSourceRouter",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21285,
+  "skill_sha256": "ac4503b354f45a72cdb5eb1a6f894d977ac9d08dba2ef1eed3c8788726d9bf8a",
   "tool_schema": {
     "properties": {
       "operation": {

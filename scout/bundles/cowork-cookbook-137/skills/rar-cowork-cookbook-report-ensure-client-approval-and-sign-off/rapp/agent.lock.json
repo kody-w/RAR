@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_ensure_client_approval_and_sign_off",
+  "agent_bytes": 10487,
   "agent_file": "report_ensure_client_approval_and_sign_off_agent.py",
   "agent_sha256": "b90d45cad92cfa811ebe91a356a9c64c8a29901133586b5e2b3604ea943f480d",
+  "backup_agent": "report_ensure_client_approval_and_sign_off_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportEnsureClientApprovalAndSignOff",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-ensure-client-approval-and-sign-off:d8059c0ee96dbd7ba274797e947a3f2fa9b778446a7d8f1dff4d595b6bdb6d18",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportEnsureClientApprovalAndSignOff",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24572,
+  "skill_sha256": "28bdfb1581dbd69142ea905abadfe207232ef6f8597bfdadb4e2311cc2885fb6",
   "tool_schema": {
     "properties": {
       "audience": {

@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/learn_new",
+  "agent_bytes": 82261,
   "agent_file": "learn_new_agent.py",
   "agent_sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
+  "backup_agent": "learn_new_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LearnNewAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RAPP",
@@ -34,8 +37,16 @@
     ],
     "version": "3.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/learn-new:b34f04ce326a6f9a34bc4368ea5dca3cdbe3da10a791aea4e3b08d48d30cfe93",
+  "rollback_agent_retained": true,
   "runtime_name": "LearnNew",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 122868,
+  "skill_sha256": "28c3886c49108df2e3428bc87174cb70eab964dbc8ad79295da6f1cedbd07c10",
   "tool_schema": {
     "properties": {
       "action": {

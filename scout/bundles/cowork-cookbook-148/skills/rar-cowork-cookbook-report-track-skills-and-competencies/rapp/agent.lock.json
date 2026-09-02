@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_track_skills_and_competencies",
+  "agent_bytes": 10408,
   "agent_file": "report_track_skills_and_competencies_agent.py",
   "agent_sha256": "1f43b1d9a3c679d631cc4e1a3c94a32a68f89f04b96600ea41c040e5b5485b18",
+  "backup_agent": "report_track_skills_and_competencies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportTrackSkillsAndCompetencies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-track-skills-and-competencies:61cd31b8b78a59dddf6765b4dc3c64741338a3f787fa8b516da9dca2aec972f4",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportTrackSkillsAndCompetencies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24336,
+  "skill_sha256": "22baf91332e91ecd9433bd5521183a15dd03bd007f7fed92879b9dfbba3de4ed",
   "tool_schema": {
     "properties": {
       "audience": {

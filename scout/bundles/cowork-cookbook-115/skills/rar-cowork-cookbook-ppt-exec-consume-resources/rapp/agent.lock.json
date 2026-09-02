@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_consume_resources",
+  "agent_bytes": 10512,
   "agent_file": "ppt_exec_consume_resources_agent.py",
   "agent_sha256": "df06a75c24277eb660e7f9b4f8280ba22f8a4f69891f723240da0e736ab5f563",
+  "backup_agent": "ppt_exec_consume_resources_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecConsumeResources",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-consume-resources:60eba46661400e82daa01553bb6a5251e97509991d3f4c6618e978921ff7d8e6",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecConsumeResources",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24346,
+  "skill_sha256": "1cd76a5ad5e2a25dd73d08fc99a8c53fc882a6b3cc2a2ebb93e9725329e42159",
   "tool_schema": {
     "properties": {
       "operation": {

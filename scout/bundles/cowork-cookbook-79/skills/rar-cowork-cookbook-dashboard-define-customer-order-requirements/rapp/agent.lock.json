@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_customer_order_requirements",
+  "agent_bytes": 10765,
   "agent_file": "dashboard_define_customer_order_requirements_agent.py",
   "agent_sha256": "33347d6b28ccb3c296b07b399f1eb9901b79d1fabb924470a842cd0bb52fed4f",
+  "backup_agent": "dashboard_define_customer_order_requirements_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefineCustomerOrderRequirements",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-define-customer-order-requirements:8a04884ce95834dd7d6e8023f869c2d37ba6e413ad9c0056ea35bd71670c0b0a",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDefineCustomerOrderRequirements",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25022,
+  "skill_sha256": "fd2ce0dd074a690ec91b208a4d70de6f75812a2c20981eb7d1629507f6c34db2",
   "tool_schema": {
     "properties": {
       "operation": {

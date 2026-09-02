@@ -3,10 +3,11 @@
   "id": "kody-w__recon_deck_agent",
   "name": "ReconDeck",
   "rar_name": "@kody-w/recon_deck_agent",
-  "rappid": "rappid:@kody-w/recon_deck_agent:cfd6e458aa71350e01e9d509bd9850f184c43bd89973342b8f0ffa977e0d1dd0",
-  "_migrated_from": "rappid:@kody-w/recon_deck_agent:c30ff701b509a63c0d408e9b68ed336b691abcffa9d9c7506d30e7f4ae7cdff4",
+  "rappid": "rappid:@kody-w/recon-deck:0803ff8134c25a050bbc33df3610b3a47867b05feb827d890bec6f61e207c4c3",
+  "_migrated_from": "rappid:@kody-w/recon_deck_agent:cfd6e458aa71350e01e9d509bd9850f184c43bd89973342b8f0ffa977e0d1dd0",
   "_migrated_from_all": [
-    "rappid:@kody-w/recon_deck_agent:c30ff701b509a63c0d408e9b68ed336b691abcffa9d9c7506d30e7f4ae7cdff4"
+    "rappid:@kody-w/recon_deck_agent:c30ff701b509a63c0d408e9b68ed336b691abcffa9d9c7506d30e7f4ae7cdff4",
+    "rappid:@kody-w/recon_deck_agent:cfd6e458aa71350e01e9d509bd9850f184c43bd89973342b8f0ffa977e0d1dd0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -36,9 +37,18 @@
   "sha256": "678ff374c053126043a75147034abf4a27d05e626c83862ef7ff0371a5781ce1",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-recon-deck",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__recon_deck_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/recon_deck_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/recon_deck_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-recon-deck/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-recon-deck/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__recon_deck_agent.py",
   "api_card_url": null,

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_plan_operational_allocation_and_investments",
+  "agent_bytes": 10932,
   "agent_file": "scheduled_brief_plan_operational_allocation_and_investments_agent.py",
   "agent_sha256": "3664b4af97250d1d761cc576d38a070adea574041c5ef6db0eba2bdc38555717",
+  "backup_agent": "scheduled_brief_plan_operational_allocation_and_investments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefPlanOperationalAllocationAndInvestments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-plan-operational-allocation-and-investments:808651f091d62041bc25eebee1991c551585d6e60344c08632b9e1e4ebe73ee8",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefPlanOperationalAllocationAndInvestments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25416,
+  "skill_sha256": "dfb8905682678c4807f6a6349c0ef933b910fc5dad3e9d63e9d6606e5723c0a4",
   "tool_schema": {
     "properties": {
       "operation": {

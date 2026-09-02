@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_establish_compliance_policies_and_procedures",
+  "agent_bytes": 10928,
   "agent_file": "adaptive_card_establish_compliance_policies_and_procedures_agent.py",
   "agent_sha256": "fd55041fb2a3c038fddde0fd3773dc5eb1d2169da9b3bab66d07185055e082da",
+  "backup_agent": "adaptive_card_establish_compliance_policies_and_procedures_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardEstablishCompliancePoliciesAndProcedures",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-establish-compliance-policies-and-procedures:d3d3a7264877f99d8f27780162d1d3758e21ec9f61ac9b18d631e010c9191f61",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardEstablishCompliancePoliciesAndProcedures",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25395,
+  "skill_sha256": "30416df396de388adad1039e9fd6c183daf0cf4ff42636fddc48bcc9092a533b",
   "tool_schema": {
     "properties": {
       "operation": {

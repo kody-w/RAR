@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_assess_product_portfolio",
+  "agent_bytes": 10682,
   "agent_file": "scheduled_brief_assess_product_portfolio_agent.py",
   "agent_sha256": "1efab3ca9c5ce687ad4eac577122e12a7a1ddccf8b067776bfd556fc695c618a",
+  "backup_agent": "scheduled_brief_assess_product_portfolio_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAssessProductPortfolio",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-assess-product-portfolio:2a21113d01127198ec81c8183a980ec3e0a43cbf1f2449e300378aa681dc16ae",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAssessProductPortfolio",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24789,
+  "skill_sha256": "f88fd16b116f5a438222f407d3023ef936bd3599f2e1c7e6835a4a911b714a79",
   "tool_schema": {
     "properties": {
       "operation": {

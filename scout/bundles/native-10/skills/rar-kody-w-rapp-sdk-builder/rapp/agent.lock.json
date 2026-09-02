@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp_sdk_builder",
+  "agent_bytes": 19719,
   "agent_file": "rapp_sdk_builder_agent.py",
   "agent_sha256": "76799624979a91c7f4f87d64b41d1fe5add10f727c672cc25429442a38ef757a",
+  "backup_agent": "rapp_sdk_builder_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappSdkBuilderAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -25,8 +28,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-sdk-builder:acfa1fcda010a6307fe0d737f06f8309a90b1fa5162e308a947a17ed4620bd00",
+  "rollback_agent_retained": true,
   "runtime_name": "RappSdkBuilder",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 37731,
+  "skill_sha256": "2bd5e8bf0a1549c83ba3f275d9748ddaa89e96e1fc7af5b43dd9b09e761d1734",
   "tool_schema": {
     "properties": {
       "action": {

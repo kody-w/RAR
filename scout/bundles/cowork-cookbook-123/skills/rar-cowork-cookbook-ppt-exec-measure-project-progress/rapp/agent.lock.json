@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_measure_project_progress",
+  "agent_bytes": 10608,
   "agent_file": "ppt_exec_measure_project_progress_agent.py",
   "agent_sha256": "1394049db3787e0363ca0e39068681273b44e8c3f39f6a5583cd14132045d8ab",
+  "backup_agent": "ppt_exec_measure_project_progress_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecMeasureProjectProgress",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-measure-project-progress:1610bcbe8fefc070cb4b2ee8502a34699f8cb951d31ffd9d7367374295493573",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecMeasureProjectProgress",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24605,
+  "skill_sha256": "b35d9e477bfe0a0d47ddf6714f9ed4f3790221f7826bbfb611f5c1ae76ab14df",
   "tool_schema": {
     "properties": {
       "operation": {

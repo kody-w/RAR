@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_project_inventory_levels",
+  "agent_bytes": 10651,
   "agent_file": "teams_update_project_inventory_levels_agent.py",
   "agent_sha256": "a3e6313e1698d86e3200c7df09d500030c2434e29c350dc6a84bff39f548dfa9",
+  "backup_agent": "teams_update_project_inventory_levels_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateProjectInventoryLevels",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-project-inventory-levels:af657946abb27a260f9e5996dc3c306e11826e465e6c8a8c70356ee8c958a7ec",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateProjectInventoryLevels",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24702,
+  "skill_sha256": "2172a62382efe66f27eee26268d673c559bbb29584bf645570620dcf32357cd1",
   "tool_schema": {
     "properties": {
       "operation": {

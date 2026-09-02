@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_monitor_product_performance",
+  "agent_bytes": 10684,
   "agent_file": "adaptive_card_monitor_product_performance_agent.py",
   "agent_sha256": "f15f52e7c5d6b01da5c2102cb89d63a53aa82f2ff57c2c991ab678ad95be4e51",
+  "backup_agent": "adaptive_card_monitor_product_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardMonitorProductPerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-monitor-product-performance:d6e07d6a92992fbaf6c9a2ec8765626272ca0ad87f4348b8a13ae29151bf6ac4",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardMonitorProductPerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24795,
+  "skill_sha256": "70c7faef3adb3b5734a222470ac48185b5ff164a59ed89d9ca45710c5f1154c4",
   "tool_schema": {
     "properties": {
       "operation": {

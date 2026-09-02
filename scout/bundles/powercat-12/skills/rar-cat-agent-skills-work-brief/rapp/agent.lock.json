@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/work_brief",
+  "agent_bytes": 8981,
   "agent_file": "work_brief_agent.py",
   "agent_sha256": "9a295dbb76bd5acabb6141ccd43ef65992dc2e63b2a0553d06d6f30fb42f24d2",
+  "backup_agent": "work_brief_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WorkBrief",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Allan De Castro",
@@ -43,8 +46,16 @@
     ],
     "version": "1.4.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/work-brief:3421f6d14687e3caadd9a6aff77a0c9dd7b980c1cdb31f8de2db4c71ed6d9faf",
+  "rollback_agent_retained": true,
   "runtime_name": "WorkBrief",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 21755,
+  "skill_sha256": "884d0e022c2dc69d6210e8d26d0f3838772b9495ca1f59af3737e415c5a89350",
   "tool_schema": {
     "properties": {
       "audience": {

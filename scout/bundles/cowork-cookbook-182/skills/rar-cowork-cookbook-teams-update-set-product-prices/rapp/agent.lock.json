@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_set_product_prices",
+  "agent_bytes": 10554,
   "agent_file": "teams_update_set_product_prices_agent.py",
   "agent_sha256": "3986ef52207c0bd0e5148a5955aa0fcb95243fb7d94fd162ab5f6603f8f4e193",
+  "backup_agent": "teams_update_set_product_prices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateSetProductPrices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-set-product-prices:3b31e7ec52394dfb72fd6786789ffec4765dd91dd9c8e325a870acaa776f3286",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateSetProductPrices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24479,
+  "skill_sha256": "3e9347aebf6701294a9006bd377f75746d2dfbac640c2f38374f216cae50d894",
   "tool_schema": {
     "properties": {
       "operation": {

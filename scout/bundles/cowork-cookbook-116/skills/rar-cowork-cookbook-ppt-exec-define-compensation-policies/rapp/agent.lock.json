@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_compensation_policies",
+  "agent_bytes": 10653,
   "agent_file": "ppt_exec_define_compensation_policies_agent.py",
   "agent_sha256": "cb8611accad6f58cf6e50adf20054fd0890d29a10a9252c39b5e9119456fd10c",
+  "backup_agent": "ppt_exec_define_compensation_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineCompensationPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-define-compensation-policies:410561fbeb48f823465b875b4a3a76d67e64aaf7faf12c258b3cec43b448f22e",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDefineCompensationPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24711,
+  "skill_sha256": "a8e12aeace697122ed800527ac177297c788c65237a439fe18d7309521cdac04",
   "tool_schema": {
     "properties": {
       "operation": {

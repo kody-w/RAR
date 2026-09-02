@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_finalize_and_post_transactions",
+  "agent_bytes": 10733,
   "agent_file": "audit_finalize_and_post_transactions_agent.py",
   "agent_sha256": "60771174cc7876eab0db22638f939f9d55174c303f99116cd4e7d6c0c7cd0109",
+  "backup_agent": "audit_finalize_and_post_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditFinalizeAndPostTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-finalize-and-post-transactions:dfa8ceee2019f1f1745bb10d1d7cf28572f975b17378749f3f5a68bbc6d7b547",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditFinalizeAndPostTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24886,
+  "skill_sha256": "b2dac703778e11cb374153ce9df0782fc984c275f37e1dc39624682134034759",
   "tool_schema": {
     "properties": {
       "criteria": {

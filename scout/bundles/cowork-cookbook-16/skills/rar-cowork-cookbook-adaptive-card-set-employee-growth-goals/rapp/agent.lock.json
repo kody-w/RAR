@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_set_employee_growth_goals",
+  "agent_bytes": 10649,
   "agent_file": "adaptive_card_set_employee_growth_goals_agent.py",
   "agent_sha256": "cfeb97aeb8c2f662aa1d948229c93c77ce3e004306c1735ba92896c75ad2898c",
+  "backup_agent": "adaptive_card_set_employee_growth_goals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardSetEmployeeGrowthGoals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-set-employee-growth-goals:e36d2674db7bd2c011657d61458aa7a431b576e96332b3b6f7e0244c96ee0c64",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardSetEmployeeGrowthGoals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24776,
+  "skill_sha256": "1d95ff0593f10b9835faa699c00643c1154acf05fbe987273af64e3dab2f8dc4",
   "tool_schema": {
     "properties": {
       "operation": {

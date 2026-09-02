@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_issue_customer_credits",
+  "agent_bytes": 10602,
   "agent_file": "teams_update_issue_customer_credits_agent.py",
   "agent_sha256": "e2d2fa90623c3dbeb1b64b3028755df59ae079ee2924339841c99ab8438b871e",
+  "backup_agent": "teams_update_issue_customer_credits_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateIssueCustomerCredits",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-issue-customer-credits:11dc5f790fa22a33ec0cdd230328ace28f2c4f3b9d722411624cd4bdf7e3bffa",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateIssueCustomerCredits",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24612,
+  "skill_sha256": "fff821fe311fb8b7029de7a5f2746eb3f69527907d13532a8cfbb2ed59b84368",
   "tool_schema": {
     "properties": {
       "operation": {

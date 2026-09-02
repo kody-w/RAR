@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_record_cost_accounting_transactions",
+  "agent_bytes": 10678,
   "agent_file": "demo_data_record_cost_accounting_transactions_agent.py",
   "agent_sha256": "b2c4cd83729dc4566e1ebdff5224bcebbe02aec59740daff97588eb467ee941f",
+  "backup_agent": "demo_data_record_cost_accounting_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataRecordCostAccountingTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-record-cost-accounting-transactions:f25c2f9ebbd684713469f4393bbef3b0a09f1d0a40bceb84b5f1fc48e5bacebc",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataRecordCostAccountingTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24852,
+  "skill_sha256": "8568cbe4fead2aedf7bc7e30f0eb41f47709b37f3fa4ff21459d6e1cd1355d9f",
   "tool_schema": {
     "properties": {
       "operation": {

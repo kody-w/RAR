@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_trade_allowances",
+  "agent_bytes": 10609,
   "agent_file": "dashboard_manage_trade_allowances_agent.py",
   "agent_sha256": "ca903dd16f4654050cc171942f05719c407d11ed1d0dd8c27808c771d817721b",
+  "backup_agent": "dashboard_manage_trade_allowances_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageTradeAllowances",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-trade-allowances:2d55f5bea1551c9db9a5eaac52df072d617dea996443c4649f94d658de7a40fd",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageTradeAllowances",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24649,
+  "skill_sha256": "e97e0970e60474ce6fecdbc7a9f64bb8ac901f3ca9845dbab886821420afeb84",
   "tool_schema": {
     "properties": {
       "operation": {

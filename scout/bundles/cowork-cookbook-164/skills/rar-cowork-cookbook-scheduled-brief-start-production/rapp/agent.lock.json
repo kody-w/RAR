@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_start_production",
+  "agent_bytes": 10585,
   "agent_file": "scheduled_brief_start_production_agent.py",
   "agent_sha256": "8316f27131bffb78f13580bffdf293b28587b2867f2c63d6c57edab2a010ba66",
+  "backup_agent": "scheduled_brief_start_production_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefStartProduction",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-start-production:a60b4d75f0ddbe14e24fab337e6d14e8c93e5583cc9252d0ac2dbf3d9e5ee2fd",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefStartProduction",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24503,
+  "skill_sha256": "c3268a2c10764ad865b63887642dee00559a946b445979f71532b3845db238b8",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_set_employee_growth_goals",
+  "agent_bytes": 10639,
   "agent_file": "dashboard_set_employee_growth_goals_agent.py",
   "agent_sha256": "3830df1a6c11e9423c128cb46842c521452504cfe16b3c65d56514654f381ad8",
+  "backup_agent": "dashboard_set_employee_growth_goals_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardSetEmployeeGrowthGoals",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-set-employee-growth-goals:029c592d4fbbbe17a1bc73791d4688a843ad8f0fe446825765f4eb44cd5d9f7d",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardSetEmployeeGrowthGoals",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24738,
+  "skill_sha256": "e64a19cf5104427b40c6435f7aef98faddeb0e5dc3ad30be2af7c303117b83b6",
   "tool_schema": {
     "properties": {
       "operation": {

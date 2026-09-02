@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_perform_a_skill_gap_analysis",
+  "agent_bytes": 10732,
   "agent_file": "scheduled_brief_perform_a_skill_gap_analysis_agent.py",
   "agent_sha256": "19afce86f56dda5f93ebd162c5d4f009278094586a0fb4fd91c0a6e480e12970",
+  "backup_agent": "scheduled_brief_perform_a_skill_gap_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefPerformASkillGapAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-perform-a-skill-gap-analysis:f2ef4298a351f3bf66baf9014090aea946e7f69a2edc6c5586ca48f3b7b3c7c1",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefPerformASkillGapAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24937,
+  "skill_sha256": "f288e68eb1c8d5480025308737a891181bfb32c437cc0a72ebbb47c4b7ecd0d8",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_oversee_active_campaigns",
+  "agent_bytes": 10813,
   "agent_file": "configure_oversee_active_campaigns_agent.py",
   "agent_sha256": "c51be291157daa3067b9f1abf2d0a43003e97d27a9400c9e83c80c1169136e1c",
+  "backup_agent": "configure_oversee_active_campaigns_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureOverseeActiveCampaigns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-oversee-active-campaigns:8871655e2e9f96929cd93042cfe2819c6ae48843c55f13001f1f80c522571255",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureOverseeActiveCampaigns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24888,
+  "skill_sha256": "5470d2fc2e7d181a26903eb31069115832c626d3ee0dbee8c4414c09a67be3db",
   "tool_schema": {
     "properties": {
       "operation": {

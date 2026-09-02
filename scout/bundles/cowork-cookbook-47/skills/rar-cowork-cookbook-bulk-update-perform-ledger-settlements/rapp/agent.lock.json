@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_perform_ledger_settlements",
+  "agent_bytes": 10651,
   "agent_file": "bulk_update_perform_ledger_settlements_agent.py",
   "agent_sha256": "e3ff1c3faf789a46bb8e65964fb2f8634d1d860c49c8a33cc20f826611a8a1da",
+  "backup_agent": "bulk_update_perform_ledger_settlements_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdatePerformLedgerSettlements",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-perform-ledger-settlements:30b375b71dc8e559fb62dd96b054a40490b8fa0ea57a4815342ec19d5b2ff04f",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdatePerformLedgerSettlements",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24738,
+  "skill_sha256": "d45de72dd358a975e279c37adc152e6c2af611023dd2e0cb6331ca87863e5421",
   "tool_schema": {
     "properties": {
       "operation": {

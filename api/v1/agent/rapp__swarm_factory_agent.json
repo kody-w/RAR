@@ -3,11 +3,12 @@
   "id": "rapp__swarm_factory_agent",
   "name": "SwarmFactory",
   "rar_name": "@rapp/swarm_factory_agent",
-  "rappid": "rappid:@rapp/swarm_factory_agent:ab82df0fdd98b16b8fb384f6e529587bde2b6573eda3c23c01f86a86c9c87f01",
-  "_migrated_from": "rappid:@rapp/swarm_factory_agent:62ced5449be9a30f08aefc7d7be841ef9a40e7d9d8bf9a5a6d9e775c72918df3",
+  "rappid": "rappid:@rapp/swarm-factory:b9b1fe9d690d0df5eb2b9e1f2a7c4eeaacd48d196d2be33605a882ab7c05c1bc",
+  "_migrated_from": "rappid:@rapp/swarm_factory_agent:ab82df0fdd98b16b8fb384f6e529587bde2b6573eda3c23c01f86a86c9c87f01",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/swarm_factory_agent:b0cde195f8b3ca50caac01f1651d904b",
-    "rappid:@rapp/swarm_factory_agent:62ced5449be9a30f08aefc7d7be841ef9a40e7d9d8bf9a5a6d9e775c72918df3"
+    "rappid:@rapp/swarm_factory_agent:62ced5449be9a30f08aefc7d7be841ef9a40e7d9d8bf9a5a6d9e775c72918df3",
+    "rappid:@rapp/swarm_factory_agent:ab82df0fdd98b16b8fb384f6e529587bde2b6573eda3c23c01f86a86c9c87f01"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.3.1",
@@ -32,9 +33,18 @@
   "sha256": "cfe3a0cffffb9d6395bf3d9377239e24500d3f7ab23c00b059da62f16a529ae0",
   "has_card": true,
   "added_at": "2026-04-20T12:38:45-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-swarm-factory",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__swarm_factory_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/swarm_factory_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/swarm_factory_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-swarm-factory/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-swarm-factory/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__swarm_factory_agent.py",
   "api_card_url": null,

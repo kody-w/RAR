@@ -1,9 +1,12 @@
 {
   "agent": "@discreetRappers/sharepoint_contract_analysis_agent",
+  "agent_bytes": 122778,
   "agent_file": "sharepoint_contract_analysis_agent.py",
   "agent_sha256": "befdce082ff846fa57e936fc130bd1e423451de8da911a50674b9a4c9c261d32",
+  "backup_agent": "sharepoint_contract_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ContractAnalysisAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
     "env:AZURE_FILES_SHARE_NAME",
     "env:AZURE_OPENAI_API_VERSION",
@@ -38,8 +41,16 @@
     ],
     "version": "1.0.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/sharepoint-contract-analysis:e190260c1300b93326fdb899e202a8b3fc7816c63950d663e041c97e158f38f7",
+  "rollback_agent_retained": true,
   "runtime_name": "ContractAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 172189,
+  "skill_sha256": "c39499bb6083daf51a5154d5ce29e44bc4fd89db4076bdafabf9fc224df82ca1",
   "tool_schema": {
     "properties": {
       "action": {

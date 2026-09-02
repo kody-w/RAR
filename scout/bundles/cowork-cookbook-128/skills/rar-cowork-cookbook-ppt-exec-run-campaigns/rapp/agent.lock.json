@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_run_campaigns",
+  "agent_bytes": 10469,
   "agent_file": "ppt_exec_run_campaigns_agent.py",
   "agent_sha256": "6c1fea1123659aa5ed5b0379053b1886a29511f758f7c8cbba71a5a7d9dff5f3",
+  "backup_agent": "ppt_exec_run_campaigns_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecRunCampaigns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-run-campaigns:ad17c3cb6065ac3a92039d98053884bac3aef98819811e9f776a8cb4369d0a03",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecRunCampaigns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24261,
+  "skill_sha256": "6624641297d5c7e4a0a3cf8753dd634d64d0434080ed3e83a7e95128a4a85428",
   "tool_schema": {
     "properties": {
       "operation": {

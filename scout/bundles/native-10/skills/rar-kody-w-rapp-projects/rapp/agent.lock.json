@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/rapp_projects",
+  "agent_bytes": 152085,
   "agent_file": "rapp_projects_agent.py",
   "agent_sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca",
+  "backup_agent": "rapp_projects_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappProjectsAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "kody-w",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.3"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/rapp-projects:901718bc9aaf54d5f849173968dde177d46dd088d22dee04b4ba716322332f9e",
+  "rollback_agent_retained": true,
   "runtime_name": "RappProjects",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 211789,
+  "skill_sha256": "e900bbf2b0c82ce289d185678bf75ac1aeb1099751a0ef98e35048bd695e003b",
   "tool_schema": {
     "additionalProperties": false,
     "anyOf": [

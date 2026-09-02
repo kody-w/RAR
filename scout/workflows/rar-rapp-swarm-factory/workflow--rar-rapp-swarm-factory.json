@@ -5,6 +5,13 @@
   "id": "17820d259a71b6fa",
   "lastExecutedAt": null,
   "name": "SwarmFactory",
+  "rapp": {
+    "backup_agent": "swarm_factory_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rar-rapp-swarm-factory"
+  },
   "schedule": {
     "days": [
       1,

@@ -5,6 +5,13 @@
   "id": "ca04ebf8498866a5",
   "lastExecutedAt": null,
   "name": "Thoughtbox",
+  "rapp": {
+    "backup_agent": "thoughtbox_agent.py",
+    "default_artifact": "skill",
+    "grail_record": "SKILL.md",
+    "schema": "rapp/1",
+    "skill_name": "rappstore-kody-w-thoughtbox"
+  },
   "schedule": {
     "days": [
       1,

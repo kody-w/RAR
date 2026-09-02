@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_develop_tax_strategy",
+  "agent_bytes": 10592,
   "agent_file": "dashboard_develop_tax_strategy_agent.py",
   "agent_sha256": "5502821e9c0ba5add78a1fb267b4a42cdc677056a360607c7c6d49f48cb57cca",
+  "backup_agent": "dashboard_develop_tax_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDevelopTaxStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-develop-tax-strategy:32b875d757125cf63547e6c893ca24781c13b82dbd082f5cad5d9ed4db530b37",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDevelopTaxStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24598,
+  "skill_sha256": "c38fd3ae1219feeae0ceed7bd0e634fde646c32462750fb4f6ab6dc1944b8c84",
   "tool_schema": {
     "properties": {
       "operation": {

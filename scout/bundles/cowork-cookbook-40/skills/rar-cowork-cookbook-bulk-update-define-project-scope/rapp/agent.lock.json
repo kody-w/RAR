@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_project_scope",
+  "agent_bytes": 10569,
   "agent_file": "bulk_update_define_project_scope_agent.py",
   "agent_sha256": "49e6e39cf4cd3fb2dd61bbd043c72ee82ec66d72151fdf6211862fdbfa3db917",
+  "backup_agent": "bulk_update_define_project_scope_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineProjectScope",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-project-scope:a9629f54df0b5dd19833136fd6625f2087a56059317a5375bca3b228194cda4b",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefineProjectScope",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24527,
+  "skill_sha256": "d92070abab0046ff38dc88c6d467483d77673f1b596dc1d6395547af81907398",
   "tool_schema": {
     "properties": {
       "operation": {

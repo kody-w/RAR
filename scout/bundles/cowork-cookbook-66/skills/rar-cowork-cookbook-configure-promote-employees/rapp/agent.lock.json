@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_promote_employees",
+  "agent_bytes": 10716,
   "agent_file": "configure_promote_employees_agent.py",
   "agent_sha256": "4aa7190ca9f153f44328a80868925905a9c20ca2726d8ac6dae93338a85a816d",
+  "backup_agent": "configure_promote_employees_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigurePromoteEmployees",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-promote-employees:5ad647e00d6cfb06a2babbc8c77de000bd3e5de0d3009c774f4b67960ea5c77a",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigurePromoteEmployees",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24631,
+  "skill_sha256": "c952d6ec80ecaecc6b167ea78723c6bc41f12c8c9f274437698f4b8cddf5651e",
   "tool_schema": {
     "properties": {
       "operation": {

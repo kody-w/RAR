@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_configure_monitoring_and_alert_systems",
+  "agent_bytes": 10802,
   "agent_file": "ppt_exec_configure_monitoring_and_alert_systems_agent.py",
   "agent_sha256": "7be7776149cddac41e8e620e82664edb83fbce56d9f6ec930c19cb87e686f350",
+  "backup_agent": "ppt_exec_configure_monitoring_and_alert_systems_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecConfigureMonitoringAndAlertSystems",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-configure-monitoring-and-alert-systems:7b6048e13738b8646000acc1a7747fe2929b067fed2fc5e2597e5e729bb9c917",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecConfigureMonitoringAndAlertSystems",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25117,
+  "skill_sha256": "b549ed27872910143d52076576eea9195957faa96c768f532ec9c679bcac7e8b",
   "tool_schema": {
     "properties": {
       "operation": {

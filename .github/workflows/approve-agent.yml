@@ -99,10 +99,11 @@ jobs:
           python scripts/generate_holo_cards.py
           python build_registry.py
           python scripts/check_url_stability.py --update
+          python scripts/build_scout_exports.py --mint-skill-identities
           python scripts/build_pokedex_api.py
           python scripts/build_static_api.py
           python scripts/build_front_page.py
-          python -m pytest -q --ignore=tests/test_scout_rapp_skill.py
+          python -m pytest -q
 
       - name: Commit notarized mutation
         id: commit
@@ -140,7 +141,7 @@ jobs:
           PY
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
-          git add agents/ staging/ state/ registry.json cards/ api/v1/ manifest.json || true
+          git add agents/ staging/ state/ registry.json cards/ api/v1/ manifest.json rapp_skill.md rapp_skills.md scout/ || true
           test -n "$(git diff --cached --name-only)"
           git commit \
             -m "Notarize ${AGENT} from #${ISSUE_NUMBER}" \
@@ -163,12 +164,12 @@ jobs:
           git pull --ff-only origin main
           python build_registry.py
           python scripts/check_url_stability.py --update
+          python scripts/build_scout_exports.py --mint-skill-identities
           python scripts/build_pokedex_api.py
           python scripts/build_static_api.py
           python scripts/build_front_page.py
-          python scripts/build_scout_exports.py
-          python -m pytest -q tests/test_scout_rapp_skill.py tests/test_rapp_agent_converter.py
-          git add registry.json api/v1/ manifest.json rapp_skill.md rapp_skills.md scout/
+          python -m pytest -q tests/test_scout_rapp_skill.py tests/test_rapp_agent_converter.py tests/test_skill_first_surfaces.py
+          git add registry.json api/v1/ manifest.json rapp_skill.md rapp_skills.md scout/ state/scout_skill_identities.json
           if ! git diff --cached --quiet; then
             git commit -m "Refresh registry provenance for #${ISSUE_NUMBER} [skip ci]"
             git push origin HEAD:main

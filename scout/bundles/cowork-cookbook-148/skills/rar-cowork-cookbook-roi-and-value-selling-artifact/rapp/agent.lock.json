@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/roi_and_value_selling_artifact",
+  "agent_bytes": 10223,
   "agent_file": "roi_and_value_selling_artifact_agent.py",
   "agent_sha256": "d4bf8fd4aa97770f8b9f268a6fef1aff49351f9ddd6309628e7c02d7f6f851d6",
+  "backup_agent": "roi_and_value_selling_artifact_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RoiAndValueSellingArtifact",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -73,8 +76,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/roi-and-value-selling-artifact:7f779b4b9b31a285ba5aaeaca708fe199d61aea6da54ca2bf164709779dd6b5a",
+  "rollback_agent_retained": true,
   "runtime_name": "RoiAndValueSellingArtifact",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24087,
+  "skill_sha256": "98644d32fa8087994069706341945c6a6994961474fb65d03e4aff93e9986eab",
   "tool_schema": {
     "properties": {
       "audience": {

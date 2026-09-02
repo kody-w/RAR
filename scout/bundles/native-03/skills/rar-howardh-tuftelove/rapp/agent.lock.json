@@ -1,9 +1,12 @@
 {
   "agent": "@howardh/tuftelove_agent",
+  "agent_bytes": 29008,
   "agent_file": "tuftelove_agent.py",
   "agent_sha256": "f5bba7ff967f166255b5220496ae7e86cb5f636730cb01a43abbf32113ebd46d",
+  "backup_agent": "tuftelove_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TufteLoveAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Howard Hoy",
@@ -29,8 +32,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@howardh/tuftelove:53a27ba1944feb402e8d28652b77ba3624e2833c7411e805a05b6a9c2838fd23",
+  "rollback_agent_retained": true,
   "runtime_name": "TufteLove",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 52145,
+  "skill_sha256": "9422c0ea6253d610c4902ab6f9c201a1dcc5a3625e09027b64505c05defed7cc",
   "tool_schema": {
     "properties": {
       "action": {

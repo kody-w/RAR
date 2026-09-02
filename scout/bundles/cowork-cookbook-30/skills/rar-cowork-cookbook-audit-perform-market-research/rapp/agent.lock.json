@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_perform_market_research",
+  "agent_bytes": 10640,
   "agent_file": "audit_perform_market_research_agent.py",
   "agent_sha256": "45586fe2e0a9cf871317a3aa44c101e560b3da1e0be0778d6ee2aecbb7ff21f1",
+  "backup_agent": "audit_perform_market_research_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditPerformMarketResearch",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-perform-market-research:2380803cd231595fd203ef0952e6e7157d7fdaf119aeb43e1223afdf1fb38096",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditPerformMarketResearch",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24661,
+  "skill_sha256": "c0516f32a43543eb38e562787effa9e741bada7a81c519d734a7b36f3993ea75",
   "tool_schema": {
     "properties": {
       "criteria": {

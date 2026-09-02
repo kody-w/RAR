@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_analyze_costs",
+  "agent_bytes": 10226,
   "agent_file": "report_analyze_costs_agent.py",
   "agent_sha256": "09304482f1e5cf85dd5bbed81627e2dd87b1e29be345235d6fc64d058f3673a9",
+  "backup_agent": "report_analyze_costs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportAnalyzeCosts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-analyze-costs:e2b2fd336201f6be3517da6a07420cd2786b902f86b7b18c011536ace222668d",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportAnalyzeCosts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23790,
+  "skill_sha256": "fb136049a8057c6d4f08f96dd2a91b195701606648f091fb66e8fbf6a0709d6f",
   "tool_schema": {
     "properties": {
       "data_source": {

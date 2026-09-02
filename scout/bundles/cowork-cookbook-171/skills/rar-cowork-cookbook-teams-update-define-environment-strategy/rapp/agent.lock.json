@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_environment_strategy",
+  "agent_bytes": 10692,
   "agent_file": "teams_update_define_environment_strategy_agent.py",
   "agent_sha256": "58e4e2b1f3beaf1122e012545a58d540ef5bd7adea01b53967fef278c0a84c81",
+  "backup_agent": "teams_update_define_environment_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineEnvironmentStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-environment-strategy:7411cedde980ebd2d275d767a59cc8ee31a02c44a5c5452c1fce9946bbb21a96",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineEnvironmentStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24801,
+  "skill_sha256": "6a808931e2bcc591f2a1b25d4eeb53a6388f9554b629eb1a542db9fac7d4a240",
   "tool_schema": {
     "properties": {
       "operation": {

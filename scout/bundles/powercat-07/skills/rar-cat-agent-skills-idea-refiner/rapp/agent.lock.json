@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/idea_refiner",
+  "agent_bytes": 9342,
   "agent_file": "idea_refiner_agent.py",
   "agent_sha256": "1f45a76ddaa7dca12d9857414545d29e8dc4e2ee13f87af6eb03b928acdb7bb7",
+  "backup_agent": "idea_refiner_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "IdeaRefiner",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Mathias Salomonsen",
@@ -41,8 +44,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/idea-refiner:5e635294318c9e65c823a6780c0f3cb526245dcc329a4b69602519dc3ed4390a",
+  "rollback_agent_retained": true,
   "runtime_name": "IdeaRefiner",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22580,
+  "skill_sha256": "652d0374615e0262a85e262e9ce74c1a084531c0cc8cae315693f64bbcd9c68b",
   "tool_schema": {
     "properties": {
       "constraints": {

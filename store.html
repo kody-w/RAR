@@ -3689,17 +3689,29 @@ async function init() {
   await loadConfig();
   await handleAuthCallback();
   checkAuth();
-  const [reg, v, r, holoData, gr, fed] = await Promise.all([
+  const [reg, v, r, holoData, gr, fed, scout] = await Promise.all([
     fetchJSON(`${RAW}/registry.json`),
     fetchJSON(`${RAW}/state/votes.json`),
     fetchJSON(`${RAW}/state/reviews.json`),
     fetchJSON(`${RAW}/cards/holo_cards.json`),
     fetchJSON(`${RAW}/state/discussion_ratings.json`),
     fetchJSON(`${RAW}/state/federation.json`),
+    fetchJSON(`${RAW}/scout/catalog/catalog.json`),
   ]);
   if (holoData) _holoCards = holoData;
   if (reg) {
-    allAgents = (reg.agents || []).map(a => ({ ...a, _source: 'local' }));
+    const skillByIdentity = new Map((scout?.skills || []).map(s => [
+      s.identity,
+      {
+        ...s,
+        _skill_url: (s.files || []).find(f => f.path === 'SKILL.md')?.url || null,
+      },
+    ]));
+    allAgents = (reg.agents || []).map(a => ({
+      ...a,
+      ...(skillByIdentity.get(a.name) || {}),
+      _source: 'local',
+    }));
     allSwarms = (reg.swarms || []);
     // Sync stack decks — maps AI Agent Templates stacks to browsable decks
     _registryStacks = reg.stacks || null;
@@ -3714,15 +3726,27 @@ async function init() {
 
   // If instance, merge upstream registry
   if (IS_INSTANCE && UPSTREAM_RAW) {
-    const [uReg, uV, uR, uGR] = await Promise.all([
+    const [uReg, uV, uR, uGR, uScout] = await Promise.all([
       fetchJSON(`${UPSTREAM_RAW}/registry.json`),
       fetchJSON(`${UPSTREAM_RAW}/state/votes.json`),
       fetchJSON(`${UPSTREAM_RAW}/state/reviews.json`),
       fetchJSON(`${UPSTREAM_RAW}/state/discussion_ratings.json`),
+      fetchJSON(`${UPSTREAM_RAW}/scout/catalog/catalog.json`),
     ]);
     if (uReg) {
       const localNames = new Set(allAgents.map(a => a.name));
-      const upstream = (uReg.agents || []).filter(a => !localNames.has(a.name)).map(a => ({ ...a, _source: 'upstream' }));
+      const upstreamSkills = new Map((uScout?.skills || []).map(s => [
+        s.identity,
+        {
+          ...s,
+          _skill_url: (s.files || []).find(f => f.path === 'SKILL.md')?.url || null,
+        },
+      ]));
+      const upstream = (uReg.agents || []).filter(a => !localNames.has(a.name)).map(a => ({
+        ...a,
+        ...(upstreamSkills.get(a.name) || {}),
+        _source: 'upstream',
+      }));
       allAgents = [...allAgents, ...upstream];
     }
     if (uV) { for (const [k, d] of Object.entries(uV.agents || {})) { if (!votes.agents[k]) votes.agents[k] = d; } }
@@ -3885,6 +3909,97 @@ function bumpGhRatings(name, field, delta) {
 
 // Stable alias that always 302s to the newest release's copy of an asset.
 const RELEASE_BASE = `https://github.com/${REPO}/releases/latest/download/`;
+
+function toastedSkillUrl(a) {
+  return a?._skill_url || a?.skill_url || a?.default_url || null;
+}
+
+function base64Bytes(value) {
+  const binary = atob(value);
+  return Uint8Array.from(binary, ch => ch.charCodeAt(0));
+}
+
+async function gunzipBytes(bytes) {
+  if (typeof DecompressionStream === 'undefined') {
+    throw new Error('This browser cannot decode a Toasted skill capsule');
+  }
+  const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+  return new Uint8Array(await new Response(stream).arrayBuffer());
+}
+
+async function sha256Hex(bytes) {
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function decodeToastedSkill(skill, url, expectedRappid = null) {
+  const match = skill.match(/<!--\s*rci-capsule:v1:([A-Za-z0-9+/=]+)\s*-->\s*$/);
+  if (!match) throw new Error('Toasted skill has no terminal RCI capsule');
+  const capsule = JSON.parse(new TextDecoder().decode(
+    await gunzipBytes(base64Bytes(match[1]))
+  ));
+  if (expectedRappid && capsule?.platform?.metadata?.rapp?.rappid !== expectedRappid) {
+    throw new Error('Toasted skill RAPPID mismatch');
+  }
+  const preserved = capsule?.preserved?.agent;
+  if (!preserved?.b64 || !preserved?.sha256) {
+    throw new Error('Toasted skill does not vault an agent');
+  }
+  const sourceBytes = await gunzipBytes(base64Bytes(preserved.b64));
+  const actual = await sha256Hex(sourceBytes);
+  if (actual !== preserved.sha256) {
+    throw new Error('Toasted skill agent checksum mismatch');
+  }
+  return {
+    code: new TextDecoder().decode(sourceBytes),
+    url,
+    fromSkill: true,
+  };
+}
+
+async function agentSourceFor(a) {
+  const skillUrl = toastedSkillUrl(a);
+  if (skillUrl) {
+    const response = await fetch(skillUrl);
+    if (!response.ok) throw new Error(`skill fetch failed (${response.status})`);
+    const skillBytes = new Uint8Array(await response.arrayBuffer());
+    if (a.skill_sha256 && await sha256Hex(skillBytes) !== a.skill_sha256) {
+      throw new Error('Toasted skill checksum mismatch');
+    }
+    const skill = new TextDecoder().decode(skillBytes);
+    return decodeToastedSkill(skill, skillUrl, a.rappid);
+  }
+  const rawUrl = a?._file ? `${RAW}/${a._file}` : null;
+  if (!rawUrl) throw new Error('No capability artifact URL');
+  const response = await fetch(rawUrl);
+  if (!response.ok) throw new Error(`agent fetch failed (${response.status})`);
+  return { code: await response.text(), url: rawUrl, fromSkill: false };
+}
+
+async function downloadToastedSkill(name) {
+  const a = allAgents.find(x => x.name === name);
+  const url = toastedSkillUrl(a);
+  if (!a || !url) return downloadAgentPy(name);
+  try {
+    const res = await fetch(`${url}${url.includes('?') ? '&' : '?'}t=${Date.now()}`);
+    if (!res.ok) throw new Error(res.status);
+    const bytes = new Uint8Array(await res.arrayBuffer());
+    if (a.skill_sha256 && await sha256Hex(bytes) !== a.skill_sha256) {
+      throw new Error('Toasted skill checksum mismatch');
+    }
+    const blob = new Blob([bytes], { type: 'text/markdown' });
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = objectUrl;
+    link.download = `${a.skill_name || a.name.split('/').pop()}-SKILL.md`;
+    link.click();
+    URL.revokeObjectURL(objectUrl);
+    trackDownload(a.name);
+  } catch {
+    window.open(url, '_blank');
+    trackDownload(a.name);
+  }
+}
 
 // Download agent.py by NAVIGATING to the release asset.
 //
@@ -4414,7 +4529,7 @@ function agentCard(a) {
         </div>
         <div style="display:flex;gap:6px;align-items:center">
           ${isStub ? `<span class="add-cart-btn" title="${esc(lockedTitle)}" style="font-size:.7rem;padding:2px 6px;cursor:help;opacity:.7;display:inline-flex;align-items:center;gap:4px">${svgIcon('lock','#bc8cff',11)}gated</span>` : ''}
-          ${!isLocal && a._file && !isStub ? `<button class="add-cart-btn" onclick="event.stopPropagation();downloadAgentPy('${esc(a.name)}')" title="Download agent.py" style="font-size:.7rem;padding:2px 6px">&#11015; .py</button>` : ''}
+          ${!isLocal && a._file && !isStub ? `<button class="add-cart-btn" onclick="event.stopPropagation();downloadToastedSkill('${esc(a.name)}')" title="Download Toasted SKILL.md" style="font-size:.7rem;padding:2px 6px">&#11015; skill</button>` : ''}
           ${true ? `${IS_INSTANCE && a._source === 'local' ? `<button class="add-cart-btn" onclick="event.stopPropagation();submitToUpstream('${esc(a.name)}')" title="Submit to main RAPP registry" style="font-size:.7rem;padding:2px 6px">&#8593; RAPP</button>` : ''}
           <button class="add-cart-btn ${cart.has(a.name)?'in-cart':''}" onclick="event.stopPropagation();toggleCartItem('${esc(a.name)}')">${cart.has(a.name)?'&#10003;':'+'}</button>
           ${s > 0 ? `<div class="vote-chip ${voted ? 'voted' : ''}" onclick="event.stopPropagation();quickVote('${esc(a.name)}')">&#9650; ${s}</div>` : ''}
@@ -4457,7 +4572,10 @@ function renderEcosystem() {
   const senses = federation.senses || [];
   const skills = federation.skills || [];
 
-  const rappCards = rapps.map(r => `
+  const rappCards = rapps.map(r => {
+    const projected = allAgents.find(a => a.name === r.scout_identity || a.name === r.manifest_name);
+    const grailUrl = toastedSkillUrl(projected);
+    return `
     <div class="agent-card">
       <div class="card-top"><span class="card-title">${esc(r.name)}</span>
         ${r.access === 'private' ? `<span class="seal" style="font-size:.65rem;padding:2px 6px;background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.35)">${svgIcon('lock','#bc8cff',12)}GATED</span>` : `<span class="tier tier-community">v${esc(r.version)}</span>`}
@@ -4468,11 +4586,13 @@ function renderEcosystem() {
       <div class="card-footer">
         <div class="card-meta"><span class="cat-badge">${esc((r.category || 'general').replace(/_/g,' '))}</span></div>
         <div style="display:flex;gap:6px;align-items:center">
-          ${r.singleton_url && r.access !== 'private' ? `<button class="add-cart-btn" style="font-size:.7rem;padding:2px 6px" onclick="copyFedUrl('${esc(r.singleton_url)}', this)" title="Copy singleton URL — curl it into your brainstem's agents/ directory">copy .py url</button>` : ''}
+          ${grailUrl && r.access !== 'private' ? `<button class="add-cart-btn" style="font-size:.7rem;padding:2px 6px" onclick="copyFedUrl('${esc(grailUrl)}', this)" title="Copy Toasted SKILL.md Grail URL">copy skill url</button>` : ''}
+          ${r.singleton_url && r.access !== 'private' ? `<button class="add-cart-btn" style="font-size:.65rem;padding:2px 6px" onclick="copyFedUrl('${esc(r.singleton_url)}', this)" title="Rollback singleton agent URL">rollback .py</button>` : ''}
           <a class="add-cart-btn" style="font-size:.7rem;padding:2px 6px;text-decoration:none" href="${esc(r.store_url)}#${esc(r.id)}" target="_blank" rel="noopener">open &#8599;</a>
         </div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   const senseCards = senses.map(s => `
     <div class="agent-card">
@@ -4776,15 +4896,17 @@ function buildInstallBlock(a, rawUrl, repo) {
     + lbl + 'Registry</span><span style="font-weight:600;color:var(--text)">' + esc(repo) + '</span>'
     + lbl + 'Branch</span><span style="color:var(--green);font-family:monospace;font-size:.82rem">main</span>'
     + lbl + 'Publisher</span><span style="color:var(--accent);font-weight:600">' + esc(publisher) + '</span>'
-    + lbl + 'Agent</span><span style="font-family:monospace;font-size:.82rem;color:var(--text)">' + esc(fileName) + '</span>'
+    + lbl + 'Grail</span><span style="font-family:monospace;font-size:.82rem;color:var(--text)">SKILL.md</span>'
+    + lbl + 'Rollback</span><span style="font-family:monospace;font-size:.82rem;color:var(--text)">' + esc(fileName) + '</span>'
     + lbl + 'Size</span><span style="color:var(--text-dim)">' + (a._size_kb || '?') + ' KB &middot; ' + (a._lines || '?') + ' lines</span>'
     + lbl + 'Version</span><span style="font-family:monospace;font-size:.82rem;color:var(--text)">v' + esc(a.version) + '</span>'
     + '</div>'
     + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
-    + '<button onclick="downloadAgentPy(\'' + esc(a.name) + '\')" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:.85rem;font-weight:600">&#11015; agent.py</button>'
+    + '<button onclick="downloadToastedSkill(\'' + esc(a.name) + '\')" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:.85rem;font-weight:600">&#11015; Toasted SKILL.md</button>'
+    + '<button class="copy-btn" onclick="downloadAgentPy(\'' + esc(a.name) + '\')" style="padding:6px 14px;border-radius:8px;font-size:.82rem">Rollback agent.py</button>'
     + '<button class="copy-btn" onclick="copyEl(\'install-cmd\')" style="padding:6px 14px;border-radius:8px;font-size:.82rem">Copy one-liner</button>'
     + '</div>'
-    + '<code id="install-cmd" style="display:none">curl -sO ' + rawUrl + '</code>'
+    + '<code id="install-cmd" style="display:none">curl -sO ' + (toastedSkillUrl(a) || rawUrl) + '</code>'
     + '</div>';
 }
 
@@ -4906,7 +5028,7 @@ function openAgent(name) {
         <a class="vote-btn" href="${esc(ghDiscussionUrl(a))}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px" title="One thread per agent on GitHub Discussions. React with a thumbs-up to upvote (counted daily); reply to discuss. ⬇ counts unique installers (thumbs-up on the thread's download-tally comment).">${GH_THUMB_SVG} ${ghUp(a)} on GitHub${ghDownloads(a) > 0 ? ` &middot; &#8595; ${ghDownloads(a)} installs` : ''} &middot; ${GH_COMMENT_SVG} Discuss${ghComments(a) > 0 ? ` (${ghComments(a)})` : ''}</a>
       </div>` : ''}
       <div class="modal-section"><h3>Description</h3><div class="modal-desc">${esc(a.description)}</div></div>
-      <div class="modal-section"><h3>${isLocalDevice ? 'Source' : 'Get agent.py'}</h3>
+      <div class="modal-section"><h3>${isLocalDevice ? 'Source' : 'Get Toasted skill'}</h3>
         <div id="modal-install">${isLocalDevice
           ? '<div style="color:var(--green);font-size:.88rem"><span class="local-badge" style="font-size:.75rem;padding:3px 10px">LOCAL AGENT</span> Loaded from your device. Not published to any registry.</div>'
           : buildInstallBlock(a, rawUrl, sourceRepo)}</div>
@@ -4991,7 +5113,8 @@ function openAgent(name) {
         ${isLocalDevice
           ? `<a href="#" onclick="event.preventDefault();removeLocalAgent('${esc(a.name)}')" style="color:var(--red);font-size:.9rem">${svgIcon('trash','#f85149',32)} Remove Local Agent</a>
              <a href="#" onclick="event.preventDefault();submitLocalToStore('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',32)} Submit to Store</a>`
-          : `<a href="#" onclick="event.preventDefault();downloadAgentPy('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',32)} agent.py</a>
+          : `<a href="#" onclick="event.preventDefault();downloadToastedSkill('${esc(a.name)}')" style="color:var(--accent);font-size:.9rem">${svgIcon('arrow','#58a6ff',32)} Toasted SKILL.md</a>
+             <a href="#" onclick="event.preventDefault();downloadAgentPy('${esc(a.name)}')" style="color:var(--text-muted);font-size:.78rem">rollback agent.py</a>
              <a href="#" onclick="event.preventDefault();exportAgentCard('${esc(a.name)}')" style="color:var(--green);font-size:.9rem">${svgIcon('arrow','#39d353',32)} agent.py.card</a>
              ${Object.entries(allDecks).filter(([_, cards]) => cards.includes(a.name)).map(([dn]) =>
                `<a href="#" onclick="event.preventDefault();exportAgentDeckCard('${esc(a.name)}','${esc(dn)}')" style="color:var(--purple);font-size:.9rem">${svgIcon('arrow','#d2a8ff',32)} .py.card.${esc(dn)}</a>`
@@ -5968,17 +6091,21 @@ async function downloadCart() {
 
   showToast('Preparing download...', 'success');
 
-  // Fetch all agent source files
+  // Fetch Toasted Grail records; fall back to rollback agents only for legacy rows.
   const files = [];
   for (const name of cart) {
     const a = allAgents.find(x => x.name === name);
     if (!a) continue;
     try {
-      const res = await fetch(`${RAW}/${a._file}?t=${Date.now()}`);
+      const skillUrl = toastedSkillUrl(a);
+      const sourceUrl = skillUrl || `${RAW}/${a._file}`;
+      const res = await fetch(`${sourceUrl}${sourceUrl.includes('?') ? '&' : '?'}t=${Date.now()}`);
       if (res.ok) {
         const code = await res.text();
-        const filename = a._file.split('/').pop();
-        files.push({ name: filename, content: code, agent: a });
+        const filename = skillUrl
+          ? `${a.skill_name || a.name.split('/').pop()}-SKILL.md`
+          : a._file.split('/').pop();
+        files.push({ name: filename, content: code, agent: a, isSkill: !!skillUrl });
         trackDownload(a.name);
       }
     } catch {}
@@ -5988,7 +6115,9 @@ async function downloadCart() {
 
   // Single file — download directly
   if (files.length === 1) {
-    const blob = new Blob([files[0].content], { type: 'text/x-python' });
+    const blob = new Blob([files[0].content], {
+      type: files[0].isSkill ? 'text/markdown' : 'text/x-python'
+    });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url; link.download = files[0].name;
@@ -6006,21 +6135,30 @@ async function downloadCart() {
   }
 
   const zip = new JSZip();
-  const agentsFolder = zip.folder('agents');
+  const skillsFolder = zip.folder('skills');
+  const agentsFolder = zip.folder('rollback-agents');
 
-  // Add each agent
-  files.forEach(f => agentsFolder.file(f.name, f.content));
+  files.forEach(f => {
+    if (f.isSkill) {
+      skillsFolder.folder(f.agent.skill_name || f.agent.name.split('/').pop())
+        .file('SKILL.md', f.content);
+    } else {
+      agentsFolder.file(f.name, f.content);
+    }
+  });
 
   // Add a README
-  const readme = `# RAPP Agent Collection
+  const readme = `  # RAPP Toasted Skill Collection
 Downloaded from the RAPP Agent Registry
 Date: ${new Date().toISOString().split('T')[0]}
 
-## Agents included (${files.length})
+## Grail capabilities included (${files.length})
 ${files.map(f => `- ${f.agent.display_name} (${f.agent.name}) v${f.agent.version}`).join('\n')}
 
 ## Installation
-Copy the .py files into your project's agents/ directory.
+Install each skill directory in a SKILL.md-aware host. A RAPP Brainstem with
+rapp_agent_converter_agent.py can hotload the Toasted skills and restore the
+exact agent.py bytes. Any files under rollback-agents/ are legacy fallbacks.
 
 ## More agents
 Browse the full registry at: https://${OWNER}.github.io/${REPO_NAME}/
@@ -6031,7 +6169,7 @@ Browse the full registry at: https://${OWNER}.github.io/${REPO_NAME}/
   const blob = await zip.generateAsync({ type: 'blob' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.href = url; link.download = `rar-agents-${files.length}.zip`;
+  link.href = url; link.download = `rar-toasted-skills-${files.length}.zip`;
   link.click(); URL.revokeObjectURL(url);
   showToast(`Downloaded ${files.length} agents as ZIP`, 'success');
 }
@@ -9721,7 +9859,7 @@ function clearGPSPin() {
 // ═══════════════════════════════════════════════════════
 // Search by task → pick an agent → select service → dispatch to device.
 // Service tiers:
-//   agent.py  — download the file (default, always available)
+//   Toasted skill — download the Grail record (default)
 //   Stream    — hot-load into browser memory
 //   Flick     — stream + auto-execute with your task + GPS
 let _hailSelected = null;
@@ -9747,7 +9885,7 @@ function openHail() {
         </div>
       </div>
       <div class="hail-services" id="hail-services">
-        <button class="hail-svc active" onclick="setHailService('download',this)">agent.py</button>
+        <button class="hail-svc active" onclick="setHailService('download',this)">Toasted Skill</button>
         <button class="hail-svc" onclick="setHailService('stream',this)">Stream</button>
         <button class="hail-svc" onclick="setHailService('flick',this)">Send</button>
       </div>
@@ -9875,14 +10013,7 @@ async function dispatchHail() {
   const name = a.display_name || _hailSelected;
 
   if (_hailService === 'download') {
-    // Simple download
-    const rawUrl = a._file ? `${RAW}/${a._file}` : '#';
-    if (rawUrl !== '#') {
-      const link = document.createElement('a');
-      link.href = rawUrl; link.download = 'agent.py';
-      document.body.appendChild(link); link.click(); document.body.removeChild(link);
-      trackDownload(a.name);
-    }
+    await downloadToastedSkill(a.name);
     showToast(`Downloaded ${name}`, 'success');
     closeHail();
     return;
@@ -9903,17 +10034,15 @@ async function dispatchHail() {
   }
 
   // Stream the agent
-  const rawUrl = a._file ? `${RAW}/${a._file}` : null;
-  if (rawUrl) {
+  if (toastedSkillUrl(a) || a._file) {
     try {
-      const resp = await fetch(rawUrl);
-      if (!resp.ok) throw new Error('fetch failed');
-      const code = await resp.text();
+      const resolved = await agentSourceFor(a);
+      const code = resolved.code;
       const manifest = parseManifestFromSource(code) || a;
       const guid = generateGUID();
       _streamedAgents.set(a.name, {
         code, manifest, loadedAt: new Date().toISOString(), guid,
-        url: rawUrl, sizeBytes: new Blob([code]).size,
+        url: resolved.url, sizeBytes: new Blob([code]).size,
         _trustLevel: TRUST_LEVELS.LOCAL,
       });
       renderStreamedAgents();
@@ -13379,14 +13508,25 @@ async function streamAgent(url) {
   const input = url || document.getElementById('stream-url')?.value;
   if (!input) return;
   const statusEl = document.getElementById('stream-status');
-  const resolvedUrl = resolveStreamUrl(input);
+  const knownAgent = allAgents.find(a => a.name === input);
+  let resolvedUrl = knownAgent ? (toastedSkillUrl(knownAgent) || resolveStreamUrl(input)) : resolveStreamUrl(input);
 
   statusEl.innerHTML = `<div class="stream-indicator"><div class="pulse"></div> Streaming from ${resolvedUrl.split('/').slice(-2).join('/')}...</div>`;
 
   try {
-    const resp = await fetch(resolvedUrl);
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    const code = await resp.text();
+    let code;
+    if (knownAgent) {
+      const resolved = await agentSourceFor(knownAgent);
+      code = resolved.code;
+      resolvedUrl = resolved.url;
+    } else {
+      const resp = await fetch(resolvedUrl);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      code = await resp.text();
+      if (/<!--\s*rci-capsule:v1:[A-Za-z0-9+/=]+\s*-->\s*$/.test(code)) {
+        code = (await decodeToastedSkill(code, resolvedUrl)).code;
+      }
+    }
     const manifest = parseManifestFromSource(code);
     if (!manifest || !manifest.name) throw new Error('No valid __manifest__ found in source');
 

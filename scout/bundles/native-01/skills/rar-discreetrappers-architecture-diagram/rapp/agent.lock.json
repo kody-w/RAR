@@ -1,9 +1,12 @@
 {
   "agent": "@discreetRappers/architecture_diagram_agent",
+  "agent_bytes": 39283,
   "agent_file": "architecture_diagram_agent.py",
   "agent_sha256": "97485b27444625b332f52f9df07e46ed70d6a24dd250eba01bb78660056c36ba",
+  "backup_agent": "architecture_diagram_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ArchitectureDiagramAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Bill Whalen",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/architecture-diagram:abfc6de19cc04b7f37992824d310a670480aa0327900a2a92014baa0b2a801b5",
+  "rollback_agent_retained": true,
   "runtime_name": "ArchitectureDiagramAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 62110,
+  "skill_sha256": "77f1ae975f4ac8e652b7b333ffd3da574d72104b6b4542c3df4100b672872df0",
   "tool_schema": {
     "properties": {
       "action": {

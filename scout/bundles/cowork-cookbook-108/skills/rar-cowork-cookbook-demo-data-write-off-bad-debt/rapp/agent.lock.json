@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_write_off_bad_debt",
+  "agent_bytes": 10442,
   "agent_file": "demo_data_write_off_bad_debt_agent.py",
   "agent_sha256": "d246bc66a729aa0fd8d868bc7a3702a922b2e94fcb2861a06ffdc1b2db1cb082",
+  "backup_agent": "demo_data_write_off_bad_debt_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataWriteOffBadDebt",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-write-off-bad-debt:a91b62fbaf7ecfa2d1c4fce6e14155d24c22a756686a9dfd8b65a870ca053bfc",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataWriteOffBadDebt",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24354,
+  "skill_sha256": "4bf1b2550a761fb9029b1362738ef99ae161cda96c250e7c0ca00aa38df86558",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_track_project_time",
+  "agent_bytes": 10458,
   "agent_file": "demo_data_track_project_time_agent.py",
   "agent_sha256": "472510e58316a77e5726dc8d50cfcb08d9546ad28fb902cf9b84233dfa2a79dc",
+  "backup_agent": "demo_data_track_project_time_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataTrackProjectTime",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-track-project-time:e70d27c94d9238df39d631277eeb9349f6d7a2efbf69202569c89dd961462455",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataTrackProjectTime",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24326,
+  "skill_sha256": "99c3264678481d376245fd5d3333da6285c2b4c5f4090f6592d6429533ce5c07",
   "tool_schema": {
     "properties": {
       "operation": {

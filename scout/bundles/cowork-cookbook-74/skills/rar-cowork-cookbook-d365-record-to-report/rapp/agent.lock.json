@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_record_to_report",
+  "agent_bytes": 10399,
   "agent_file": "d365_record_to_report_agent.py",
   "agent_sha256": "548441a5b5059922b432e45aed4fe9e9131700856c7d9627e35c572bcc691f85",
+  "backup_agent": "d365_record_to_report_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365RecordToReport",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-record-to-report:a40f8658e7dd6bd5b6561f376e14e5ebe1d6f798038afecbb0238a0a324993ff",
+  "rollback_agent_retained": true,
   "runtime_name": "D365RecordToReport",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24309,
+  "skill_sha256": "81c44d05c24736fce93fce908774cc3b53205b8fec0ae10f3aa188d2a06ad1bc",
   "tool_schema": {
     "properties": {
       "audience": {

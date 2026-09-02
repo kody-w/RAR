@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_develop_long_range_plan",
+  "agent_bytes": 10674,
   "agent_file": "scheduled_brief_develop_long_range_plan_agent.py",
   "agent_sha256": "4bdfcc4e6cce452593d4e76cea53afcd60812783526748092ede881cf928e093",
+  "backup_agent": "scheduled_brief_develop_long_range_plan_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDevelopLongRangePlan",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-develop-long-range-plan:586bd81ad97361a078ed77f766341872d89fecb4638bc9241c7948f96ffc0fc3",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDevelopLongRangePlan",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24778,
+  "skill_sha256": "655c47e96fb36375c57429a5127d4b5572327ec6d2cc4635d7f55aefbf67d286",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_configure_and_manage_iot_devices",
+  "agent_bytes": 10927,
   "agent_file": "configure_configure_and_manage_iot_devices_agent.py",
   "agent_sha256": "4ac9df29276dbd5a234799a4e86ba7f355acb5313616564b91c34e1b85e40a4c",
+  "backup_agent": "configure_configure_and_manage_iot_devices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureConfigureAndManageIotDevices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-configure-and-manage-iot-devices:9701488ae784313132e4e9c1889181b6ff1c46506e919f4de2de830dd4029037",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureConfigureAndManageIotDevices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25158,
+  "skill_sha256": "9dacb4a1c9a0f248737cab367eba28242855d07686378dce900bf6b79f2aa081",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_manage_and_implement_encryption",
+  "agent_bytes": 10650,
   "agent_file": "demo_data_manage_and_implement_encryption_agent.py",
   "agent_sha256": "ac44f11dfcb851dc5a11564a1065a9241389c21e4c0e90f0eef0b01dce36172f",
+  "backup_agent": "demo_data_manage_and_implement_encryption_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataManageAndImplementEncryption",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-manage-and-implement-encryption:9d264c646ef700fab900f0c16d03ada70e0ff382f30489c477ae04cd256c4a8e",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataManageAndImplementEncryption",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24789,
+  "skill_sha256": "d41858fbd8225e66a21050e3191f547fca878f4f3085cecd39a1e179332c277d",
   "tool_schema": {
     "properties": {
       "operation": {

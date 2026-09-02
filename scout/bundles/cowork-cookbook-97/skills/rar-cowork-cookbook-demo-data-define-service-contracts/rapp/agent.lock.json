@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_define_service_contracts",
+  "agent_bytes": 10541,
   "agent_file": "demo_data_define_service_contracts_agent.py",
   "agent_sha256": "2384cc4718323e119ef321eed81bf8d9fb7a4b8c2fc7297c888acf9a91d20207",
+  "backup_agent": "demo_data_define_service_contracts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDefineServiceContracts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-define-service-contracts:1e2334c4f6af2677af12f1a5fc7fdaba067a820dfb08a6a0bcd15161e9c5b8b0",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDefineServiceContracts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24528,
+  "skill_sha256": "e64418f25ef3503d4bb06186b477852a4e76dc837651dee15ff00d7824c6c5d8",
   "tool_schema": {
     "properties": {
       "operation": {

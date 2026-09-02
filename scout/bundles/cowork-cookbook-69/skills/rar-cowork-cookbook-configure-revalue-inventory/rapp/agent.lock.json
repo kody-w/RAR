@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_revalue_inventory",
+  "agent_bytes": 10724,
   "agent_file": "configure_revalue_inventory_agent.py",
   "agent_sha256": "b1decf0e7c6e25eb36c7d2a737a14e00b559deebde4ff1a57b7a05b80a88cf18",
+  "backup_agent": "configure_revalue_inventory_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureRevalueInventory",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-revalue-inventory:88162c862dff9bb1bb318030b9227142862544baa41b0ce313a6d7fdf0e41508",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureRevalueInventory",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24633,
+  "skill_sha256": "2639cc94c53c3712900f310bcb3cf4ed67cac67ee75eba6b3690910c9f3c7af9",
   "tool_schema": {
     "properties": {
       "operation": {

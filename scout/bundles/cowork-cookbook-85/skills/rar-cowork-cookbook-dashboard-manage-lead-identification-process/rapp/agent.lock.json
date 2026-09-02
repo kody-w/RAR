@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_lead_identification_process",
+  "agent_bytes": 10765,
   "agent_file": "dashboard_manage_lead_identification_process_agent.py",
   "agent_sha256": "900ca17d19457d53af1a5d280e223e6afa5358ab37326b00a55b99163cd39620",
+  "backup_agent": "dashboard_manage_lead_identification_process_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageLeadIdentificationProcess",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-lead-identification-process:978d9f46d8618758fda7a84dc169fb2fc32508572f4c42f8502b067f6ffaf29b",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageLeadIdentificationProcess",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25014,
+  "skill_sha256": "ee8d02aefdba08f8908068bbbaec0df165821842d66da962b8bb5e6a88a4be0e",
   "tool_schema": {
     "properties": {
       "operation": {

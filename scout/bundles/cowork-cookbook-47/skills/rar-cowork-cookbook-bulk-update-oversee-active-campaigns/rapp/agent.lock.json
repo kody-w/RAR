@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_oversee_active_campaigns",
+  "agent_bytes": 10632,
   "agent_file": "bulk_update_oversee_active_campaigns_agent.py",
   "agent_sha256": "7034ec9aed4277ca28fa607f48752fdc0e694a2d26760e9c2792994136917618",
+  "backup_agent": "bulk_update_oversee_active_campaigns_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateOverseeActiveCampaigns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-oversee-active-campaigns:19632a39775a3f2896aa1e1cf306a1461ca2420e9629cea8fedba00c14a3e5e6",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateOverseeActiveCampaigns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24706,
+  "skill_sha256": "56dd7ece46e810bc0bad2f419180849d4438c9671fd44918506b0d75b91a7d7c",
   "tool_schema": {
     "properties": {
       "operation": {

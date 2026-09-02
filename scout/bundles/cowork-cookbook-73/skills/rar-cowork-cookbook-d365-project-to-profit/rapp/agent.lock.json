@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_project_to_profit",
+  "agent_bytes": 10577,
   "agent_file": "d365_project_to_profit_agent.py",
   "agent_sha256": "1383c80478ee8daf498233059d1c5812613c320a8c19b722332d1d0704c771b5",
+  "backup_agent": "d365_project_to_profit_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ProjectToProfit",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-project-to-profit:21daf5873c02f2386f1cc7edad24e1424e4e661b11b42906ea0dc4b973edc31a",
+  "rollback_agent_retained": true,
   "runtime_name": "D365ProjectToProfit",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24558,
+  "skill_sha256": "fe2a3c964d808a6a8f1906bf4c8b1d756e66f5519620801b387f6c55a6a89051",
   "tool_schema": {
     "properties": {
       "operation": {

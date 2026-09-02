@@ -1,11 +1,14 @@
 {
   "agent": "@discreetRappers/sales_assistant_agent",
+  "agent_bytes": 27422,
   "agent_file": "sales_assistant_agent.py",
   "agent_sha256": "3b1ed8a43356939dfeb5d7a5bff8d47de45655c7179c82509d20d5acd78ba695",
+  "backup_agent": "sales_assistant_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SalesAssistantAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
-    "utils.storage_factory"
+    "brainstem:utils.storage_factory"
   ],
   "manifest": {
     "author": "Bill Whalen",
@@ -27,8 +30,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/sales-assistant:701f736589b8347f92be7814ce4b716e7d872f1530fd901a1cc967d6c01ad439",
+  "rollback_agent_retained": true,
   "runtime_name": "SalesAssistant",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 44265,
+  "skill_sha256": "c54e03891b86b87fa671ad67a2b689ef1baaf23b6a7209ae1df8d8c2cfd149ea",
   "tool_schema": {
     "properties": {
       "conversation_context": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_update_work_order_details",
+  "agent_bytes": 10613,
   "agent_file": "ppt_exec_update_work_order_details_agent.py",
   "agent_sha256": "3b153d30361261ec4f239f87d9819250523bf325079a316969bf3866f7fb98bb",
+  "backup_agent": "ppt_exec_update_work_order_details_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecUpdateWorkOrderDetails",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-update-work-order-details:5de725fdfd89d325b6b38f101193fef69795831186457963816b8fd266decb3d",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecUpdateWorkOrderDetails",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24650,
+  "skill_sha256": "2cca68b52616ce7c3ef755ce813aa47e42c59d1f6473749027858e02e59a838f",
   "tool_schema": {
     "properties": {
       "operation": {

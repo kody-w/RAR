@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_benefit_offerings",
+  "agent_bytes": 10638,
   "agent_file": "teams_update_define_benefit_offerings_agent.py",
   "agent_sha256": "2748a2065eb8f346e5378004c2d88ee3483454481925607aa2a30e09ebded7a1",
+  "backup_agent": "teams_update_define_benefit_offerings_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineBenefitOfferings",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-benefit-offerings:5075310dd741ecc5be34c59445e4934158d710d3942ba6eca71aa05247615bbd",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineBenefitOfferings",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24687,
+  "skill_sha256": "0d8f83c6b4174a016c51ffda5fed016b1f48c2eb6e4d2075ad5459dccc9b8d09",
   "tool_schema": {
     "properties": {
       "operation": {

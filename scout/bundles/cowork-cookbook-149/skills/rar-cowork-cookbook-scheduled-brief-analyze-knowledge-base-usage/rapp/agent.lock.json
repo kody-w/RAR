@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_analyze_knowledge_base_usage",
+  "agent_bytes": 10746,
   "agent_file": "scheduled_brief_analyze_knowledge_base_usage_agent.py",
   "agent_sha256": "41ccb25544809711232ed8593cb5aee7ac186bbf8e4bd1d93af1836e9215f3ac",
+  "backup_agent": "scheduled_brief_analyze_knowledge_base_usage_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefAnalyzeKnowledgeBaseUsage",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-analyze-knowledge-base-usage:6f707bda5294e3a58ce04a723632dccf7e8985189912855f8fff9853ec37661a",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefAnalyzeKnowledgeBaseUsage",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24947,
+  "skill_sha256": "f86260128d099317168803977215bb0b3cdcb6ad00a5e5e56343113935f35e69",
   "tool_schema": {
     "properties": {
       "operation": {

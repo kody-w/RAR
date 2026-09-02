@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_recognize_project_revenue",
+  "agent_bytes": 10825,
   "agent_file": "configure_recognize_project_revenue_agent.py",
   "agent_sha256": "8ef9e3dc9d3ed5d17591a06de013272527471aeeb6c357fa0301400521851189",
+  "backup_agent": "configure_recognize_project_revenue_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureRecognizeProjectRevenue",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-recognize-project-revenue:8b520bb22e8ef7644224ec2603b6cc25dcb779b216a634cd74a072e49e509a13",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureRecognizeProjectRevenue",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24883,
+  "skill_sha256": "f9d969a0f8343b0fe6ad06e17a1630ac48fde029bb3c8096cf85c73e74e80ebf",
   "tool_schema": {
     "properties": {
       "operation": {

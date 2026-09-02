@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_balance_supply_and_demand",
+  "agent_bytes": 10655,
   "agent_file": "dashboard_balance_supply_and_demand_agent.py",
   "agent_sha256": "c24a9d8fa9c9e7173f3b1543d9fb0e8706dde86e509092de9d27001c9ff2fe3e",
+  "backup_agent": "dashboard_balance_supply_and_demand_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardBalanceSupplyAndDemand",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-balance-supply-and-demand:76c196a50163145d4c52a2b52e1122a3169186733857cc31abee8457979ae23b",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardBalanceSupplyAndDemand",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24760,
+  "skill_sha256": "58dce2f59699901101a60f1109cde321a423c243f9d37ca593e28c888dfd4433",
   "tool_schema": {
     "properties": {
       "operation": {

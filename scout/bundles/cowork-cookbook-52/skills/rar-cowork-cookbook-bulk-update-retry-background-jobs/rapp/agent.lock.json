@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_retry_background_jobs",
+  "agent_bytes": 10605,
   "agent_file": "bulk_update_retry_background_jobs_agent.py",
   "agent_sha256": "762e5ae6f37a1c8cd16f30283f3d446d8612e55c494a46972ef4aaa56d04c297",
+  "backup_agent": "bulk_update_retry_background_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateRetryBackgroundJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-retry-background-jobs:6c111d6d79e36c5d4ad6e30e9bbc39e534da112395e55e7bdc2f5d294592bf9b",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateRetryBackgroundJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24602,
+  "skill_sha256": "85a59cf3329746e58993c5e765d4b651641bbea2884b3b3eec8af94400af2d85",
   "tool_schema": {
     "properties": {
       "operation": {

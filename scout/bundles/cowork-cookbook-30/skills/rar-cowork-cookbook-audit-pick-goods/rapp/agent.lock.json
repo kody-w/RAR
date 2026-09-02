@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_pick_goods",
+  "agent_bytes": 10484,
   "agent_file": "audit_pick_goods_agent.py",
   "agent_sha256": "75e466c3ff6b58477b911ca60396812555f7b9cfcae7e9889edec759b935b6e1",
+  "backup_agent": "audit_pick_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditPickGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-pick-goods:68ab000a557c783eb2bd79fd36459c0a601a0f5a04e8b4a4d7d19d50a0f23995",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditPickGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24249,
+  "skill_sha256": "c78270d1e72626c36fa53fc885819b6746f0de7364deefcd1f23d75aaa9b0904",
   "tool_schema": {
     "properties": {
       "criteria": {

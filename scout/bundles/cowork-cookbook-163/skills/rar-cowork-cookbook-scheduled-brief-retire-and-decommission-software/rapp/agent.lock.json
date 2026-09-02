@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_retire_and_decommission_software",
+  "agent_bytes": 10810,
   "agent_file": "scheduled_brief_retire_and_decommission_software_agent.py",
   "agent_sha256": "2ea83ffb837c1c8fde619e3951e9f035e50b3e3f24a9339d5cd49787a738f68f",
+  "backup_agent": "scheduled_brief_retire_and_decommission_software_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefRetireAndDecommissionSoftware",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-retire-and-decommission-software:3b603d11d2c315b6755940ec06974d9f9d8069051339ab713fb62f8d2fea78fe",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefRetireAndDecommissionSoftware",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25090,
+  "skill_sha256": "b6b33950ac6ebd97d0ce8f1e60dfdc06b065409e56e0be2b9bb118d60647f43c",
   "tool_schema": {
     "properties": {
       "operation": {

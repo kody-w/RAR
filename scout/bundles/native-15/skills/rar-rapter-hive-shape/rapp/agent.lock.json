@@ -1,9 +1,12 @@
 {
   "agent": "@rapter/hive_shape_agent",
+  "agent_bytes": 15084,
   "agent_file": "hive_shape_agent.py",
   "agent_sha256": "c4cdee134802fd1ced521940c6ef38d0a5dba2503acc4e8cd8da5e4367d075a3",
+  "backup_agent": "hive_shape_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HiveShapeAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "RapterBox",
@@ -29,8 +32,16 @@
     ],
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapter/hive-shape:5f51e0bc8252e7a872c1972aa99098002e3449e136c3dd4663254da699b482fe",
+  "rollback_agent_retained": true,
   "runtime_name": "hive_shape",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 33868,
+  "skill_sha256": "49ac86a213e9ba7ac387c7905a47370332685e57a4a8394a988409e3334467ca",
   "tool_schema": {
     "properties": {
       "cubbies": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_adjust_inventory_levels",
+  "agent_bytes": 10636,
   "agent_file": "dashboard_adjust_inventory_levels_agent.py",
   "agent_sha256": "6bebaad56adb787aeea31983d73ef0132b32756a6af8daa2af48bf32ba095173",
+  "backup_agent": "dashboard_adjust_inventory_levels_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardAdjustInventoryLevels",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-adjust-inventory-levels:880ac73a3bbe284612756f52573a12bbf85756686d69dbb76ba4739fdbc0bbb1",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardAdjustInventoryLevels",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24671,
+  "skill_sha256": "257fe7071d98821b3eb774a6b471010fa8f07598ad70d8a5703832285b18c5a9",
   "tool_schema": {
     "properties": {
       "operation": {

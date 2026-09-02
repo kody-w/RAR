@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_reopen_a_case",
+  "agent_bytes": 10398,
   "agent_file": "demo_data_reopen_a_case_agent.py",
   "agent_sha256": "77bcace760aad2744760317fb9c49684256b0ca8bebd0c9b3ae023f9c6fa97ce",
+  "backup_agent": "demo_data_reopen_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataReopenACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-reopen-a-case:edc43e4da9e73942bcc39f7eeb2a7f2cc7807fb70521f789d2da6cee66cf0b51",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataReopenACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24168,
+  "skill_sha256": "5c04f8bbaf241e89ab559e92aed8a1c781108aaef1a32193c45eee8fcb6a34eb",
   "tool_schema": {
     "properties": {
       "operation": {

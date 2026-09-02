@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_analyze_service_profitability",
+  "agent_bytes": 10704,
   "agent_file": "bulk_update_analyze_service_profitability_agent.py",
   "agent_sha256": "ec6f9b012356b7e6de1f9a2f65e3b562926219de397f9b74e308bc613f3f0b06",
+  "backup_agent": "bulk_update_analyze_service_profitability_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAnalyzeServiceProfitability",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-analyze-service-profitability:d27adf880025dc9023a5de2d4c6570e9b145b6a5c9e10f1c0ded3d31db2d242f",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAnalyzeServiceProfitability",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24834,
+  "skill_sha256": "33fc58367bb3a233029201a35a77222c8be03fa387165ccf91b08856bdf65535",
   "tool_schema": {
     "properties": {
       "operation": {

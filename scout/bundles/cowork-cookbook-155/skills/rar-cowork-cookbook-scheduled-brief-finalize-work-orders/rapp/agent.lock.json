@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_finalize_work_orders",
+  "agent_bytes": 10637,
   "agent_file": "scheduled_brief_finalize_work_orders_agent.py",
   "agent_sha256": "a3c02bb4e9a724add8613c3dc9cf5524e187a2ed35136a8f929f18d127d3926d",
+  "backup_agent": "scheduled_brief_finalize_work_orders_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefFinalizeWorkOrders",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-finalize-work-orders:b39ff325a073f488d80eed004fd1737029387e96efe060340b892e7ea373a16e",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefFinalizeWorkOrders",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24678,
+  "skill_sha256": "b739b5636b5567f5f61c39b95397d56de1dfb1547b5a4172f419e63a80a3afd5",
   "tool_schema": {
     "properties": {
       "operation": {

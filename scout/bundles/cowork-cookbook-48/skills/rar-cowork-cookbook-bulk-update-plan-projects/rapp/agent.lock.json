@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_plan_projects",
+  "agent_bytes": 10492,
   "agent_file": "bulk_update_plan_projects_agent.py",
   "agent_sha256": "579f25df6bd32c6d33cf30114403f630a24f4210bee9dd9a6f10cce57c0907dc",
+  "backup_agent": "bulk_update_plan_projects_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdatePlanProjects",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-plan-projects:abaef33b1d856f1c31545dfb940b84a6f3c23243b771db24d34823c372976ffa",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdatePlanProjects",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24320,
+  "skill_sha256": "5d8bd89a5af4ff18a2ffb9a31d40ea9e640d605a1663218d99fc65cb61173907",
   "tool_schema": {
     "properties": {
       "operation": {

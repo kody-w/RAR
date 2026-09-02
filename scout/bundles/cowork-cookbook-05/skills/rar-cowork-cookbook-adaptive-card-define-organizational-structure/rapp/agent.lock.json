@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_organizational_structure",
+  "agent_bytes": 10663,
   "agent_file": "adaptive_card_define_organizational_structure_agent.py",
   "agent_sha256": "94005c733c2b325ec32c47282fe11342a43e4ebc48466185a9d31c10021077bd",
+  "backup_agent": "adaptive_card_define_organizational_structure_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineOrganizationalStructure",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/adaptive-card-define-organizational-structure:33d353531dfb6b7680ad90a1404316867e5109ffd17f04a1821a4c7ce6c3dba6",
+  "rollback_agent_retained": true,
   "runtime_name": "AdaptiveCardDefineOrganizationalStructure",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24824,
+  "skill_sha256": "99053628d2c8c451c522012185752546f8b2c12409a16295f44fd284ace2f696",
   "tool_schema": {
     "properties": {
       "constraints": {

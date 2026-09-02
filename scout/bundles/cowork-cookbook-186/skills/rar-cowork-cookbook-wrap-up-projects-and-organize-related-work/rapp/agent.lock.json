@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/wrap_up_projects_and_organize_related_work",
+  "agent_bytes": 9692,
   "agent_file": "wrap_up_projects_and_organize_related_work_agent.py",
   "agent_sha256": "8345d26f8d12ae87557dcd7a7c72cc10c9e5e2ce1e7efc5feaa712e2842ddd44",
+  "backup_agent": "wrap_up_projects_and_organize_related_work_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WrapUpProjectsAndOrganizeRelatedWork",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -73,8 +76,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/wrap-up-projects-and-organize-related-work:210c54ad3d83b5b653d4fc7162d528500e8e39658cb4618bb42cd87d16f90dce",
+  "rollback_agent_retained": true,
   "runtime_name": "WrapUpProjectsAndOrganizeRelatedWork",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23070,
+  "skill_sha256": "93b1d66761e168d8d9dcaf7ace01013681ec31c651162a2e8f21ae1244d34e1c",
   "tool_schema": {
     "properties": {
       "operation": {

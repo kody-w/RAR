@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_update_product_assortments",
+  "agent_bytes": 10713,
   "agent_file": "scheduled_brief_update_product_assortments_agent.py",
   "agent_sha256": "719d1435448b882a0b118936ff186200b7525f98ccf1250b9aa6a14d338fb105",
+  "backup_agent": "scheduled_brief_update_product_assortments_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefUpdateProductAssortments",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-update-product-assortments:c375adad1dd7cf7e668cf211d1593dab0e95c10ef9db83a12b2cab360a049ee3",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefUpdateProductAssortments",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24858,
+  "skill_sha256": "bdb427435455c25eaf9f6d02f10688215eda010b01b2214aa22e3c96ea4ef9ee",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_depreciate_assets",
+  "agent_bytes": 10542,
   "agent_file": "bulk_update_depreciate_assets_agent.py",
   "agent_sha256": "4511dbdb7b8759b8775f9d6a613bbdd117e70da252ca5c61da0f6482ec56600c",
+  "backup_agent": "bulk_update_depreciate_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDepreciateAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-depreciate-assets:ad2455b672722fd128090e2ee0f0a3c29f423c2eae8458cd04ef86f1db05f6f6",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDepreciateAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24440,
+  "skill_sha256": "df3c475b393326eb9ef17163ae31ae0c87479d1199a2457b0a42cbb464025923",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_warehouse_processes",
+  "agent_bytes": 10673,
   "agent_file": "bulk_update_define_warehouse_processes_agent.py",
   "agent_sha256": "313a3e051a63339cc233cbaea75352e90ce90a126e848f191daeaac571780ae5",
+  "backup_agent": "bulk_update_define_warehouse_processes_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineWarehouseProcesses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-warehouse-processes:e953a147d30ed5b3e83792b32cdcb24e12cf3ae872c8ecf81624152d16fcbd59",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefineWarehouseProcesses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24748,
+  "skill_sha256": "acdc75ce5f1f3876c42a0281978c43502df9fc4ce3db251402a6fd48197b63fb",
   "tool_schema": {
     "properties": {
       "operation": {

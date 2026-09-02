@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_develop_frontline_team",
+  "agent_bytes": 10614,
   "agent_file": "dashboard_develop_frontline_team_agent.py",
   "agent_sha256": "e52c3f1e41731d181e57042e87070716c69fe1c440551f280a197e9dc572cc1f",
+  "backup_agent": "dashboard_develop_frontline_team_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDevelopFrontlineTeam",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-develop-frontline-team:fc6afe517e44e025e30f86f054f2434cc1a6cbae48ffcfe74f424774e5098969",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDevelopFrontlineTeam",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24648,
+  "skill_sha256": "bea7c211209a086f5cf2a159c359071aa3f4b1ca18a139c3e3920c92fb2f1845",
   "tool_schema": {
     "properties": {
       "operation": {

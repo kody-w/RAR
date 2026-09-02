@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_define_research_and_development_approach",
+  "agent_bytes": 10564,
   "agent_file": "report_define_research_and_development_approach_agent.py",
   "agent_sha256": "f7bd291394fbfc1bc4e5047e1552a1d627185ac3405d83eac9939ff89e18b0ac",
+  "backup_agent": "report_define_research_and_development_approach_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportDefineResearchAndDevelopmentApproach",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-define-research-and-development-approach:84a0ff9581e8a1394b8dd0ac39901cc8bbef42315ce534fd3b9ca4e09fb2a07b",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportDefineResearchAndDevelopmentApproach",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24706,
+  "skill_sha256": "f366457d166b53884ca9b0d0ab0d42652bb62e1c10ac61b472e22ff8ffe47ba8",
   "tool_schema": {
     "properties": {
       "data_source": {

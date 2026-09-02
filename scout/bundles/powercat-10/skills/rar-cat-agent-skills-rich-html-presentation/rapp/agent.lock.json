@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/rich_html_presentation",
+  "agent_bytes": 9174,
   "agent_file": "rich_html_presentation_agent.py",
   "agent_sha256": "3d19b945bbfafa005314156f60b03bb2f0361556e9f269fae151015b8e007ec8",
+  "backup_agent": "rich_html_presentation_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RichHtmlPresentation",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Henry Jammes",
@@ -42,8 +45,16 @@
     ],
     "version": "2.2.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/rich-html-presentation:85317476d161c81f9bb288b710576f054bbeee9524041c8fd3026cf1a2c8cd50",
+  "rollback_agent_retained": true,
   "runtime_name": "RichHtmlPresentation",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22228,
+  "skill_sha256": "a2b50b57fc8ea5c620a480ed294eb5bf5cf8817a801925c5e4428fb741d8b0ce",
   "tool_schema": {
     "properties": {
       "audience": {

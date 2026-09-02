@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_procure_software_licenses_and_add_ons",
+  "agent_bytes": 10722,
   "agent_file": "demo_data_procure_software_licenses_and_add_ons_agent.py",
   "agent_sha256": "4463ed1f00bc8ad341b27bd4a9f0204243f2ee176eb374dca123787d5b944485",
+  "backup_agent": "demo_data_procure_software_licenses_and_add_ons_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataProcureSoftwareLicensesAndAddOns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-procure-software-licenses-and-add-ons:cc4750c0f84ae8a47480dbea605fede00f7695e6c62e52388db1d8a4156c6d4e",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataProcureSoftwareLicensesAndAddOns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24995,
+  "skill_sha256": "3d392922e3db8e76bd12f042e9ce1aa36c03b88182c27a36505f6fc8f09a9f8b",
   "tool_schema": {
     "properties": {
       "operation": {

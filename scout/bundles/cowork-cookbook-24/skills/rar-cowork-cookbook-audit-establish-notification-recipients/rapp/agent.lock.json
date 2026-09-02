@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_establish_notification_recipients",
+  "agent_bytes": 10799,
   "agent_file": "audit_establish_notification_recipients_agent.py",
   "agent_sha256": "ac835e0c1d0b7d22a248b4397f9fecbfa57e74805f8ad7be0afdabaf7cbccebe",
+  "backup_agent": "audit_establish_notification_recipients_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditEstablishNotificationRecipients",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-establish-notification-recipients:84ad84ed3190e38423bbc0dee7484169248acc28a9eb240bab236e827325616c",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditEstablishNotificationRecipients",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24986,
+  "skill_sha256": "df6bda3d8613d21eea50c058e77ad79e52b0fa40d2f90b3cc05b9fa8f305187d",
   "tool_schema": {
     "properties": {
       "criteria": {

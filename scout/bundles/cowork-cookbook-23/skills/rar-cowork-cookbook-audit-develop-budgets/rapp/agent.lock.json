@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_develop_budgets",
+  "agent_bytes": 10537,
   "agent_file": "audit_develop_budgets_agent.py",
   "agent_sha256": "3a0291a746a37eb3a42707054fdd1a7100a1a17c66bca3ddf0a79c694fe44170",
+  "backup_agent": "audit_develop_budgets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDevelopBudgets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-develop-budgets:1eab232d23cd40ed4ee1dd61a2958330f749e56322fba54b8e03848b1b854f32",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditDevelopBudgets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24389,
+  "skill_sha256": "a51a0f042b9e57762ebd6f176ba49c2a95b8c78701eff49d759988d6ac186de9",
   "tool_schema": {
     "properties": {
       "criteria": {

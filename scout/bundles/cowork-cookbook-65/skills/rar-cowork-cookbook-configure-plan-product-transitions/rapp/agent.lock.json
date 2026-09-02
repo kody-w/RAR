@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_plan_product_transitions",
+  "agent_bytes": 10798,
   "agent_file": "configure_plan_product_transitions_agent.py",
   "agent_sha256": "d7cfc9eba04dbafda2d31cf8956b945837be3d25b66b82d4179620577ed277dc",
+  "backup_agent": "configure_plan_product_transitions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigurePlanProductTransitions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-plan-product-transitions:7dde5eb4e5e2bfd07d5a3a0c42169eb2dd83a5989a40e48982d75b7a61f1f3e5",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigurePlanProductTransitions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24836,
+  "skill_sha256": "7d91f50ffd377782244a98c9858ac1cd8657916d3270d359b2a98d9d5158d46a",
   "tool_schema": {
     "properties": {
       "operation": {

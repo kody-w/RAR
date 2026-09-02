@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_convert_projects_to_fixed_assets",
+  "agent_bytes": 10737,
   "agent_file": "dashboard_convert_projects_to_fixed_assets_agent.py",
   "agent_sha256": "0ae95dca49486076eaaa90e03cfdc3d6201e54d52c376a4f3bcb021ba298151b",
+  "backup_agent": "dashboard_convert_projects_to_fixed_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardConvertProjectsToFixedAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-convert-projects-to-fixed-assets:f3b1e24be36e436eca04fa655874fc539295c4ad0da70349ca122fad160bef97",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardConvertProjectsToFixedAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24976,
+  "skill_sha256": "89cbd507a0c99f6d1e0ac6bdba9ad64844e8dd156de02cf6a8d546603b3daffc",
   "tool_schema": {
     "properties": {
       "operation": {

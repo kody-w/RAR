@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_run_campaigns",
+  "agent_bytes": 10498,
   "agent_file": "dashboard_run_campaigns_agent.py",
   "agent_sha256": "a765a4003e1bc370811f3d079a303d542ed81823ec8ec2aa830f5b8803cb8e4b",
+  "backup_agent": "dashboard_run_campaigns_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardRunCampaigns",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-run-campaigns:87330af3e143530c0e70a33e0b04672037a9146a1254c268bb9a7fcda2fdc342",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardRunCampaigns",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24340,
+  "skill_sha256": "091541b3d8ad2fe483463025be0f21bc78bde29eac0f89402170f1f793591339",
   "tool_schema": {
     "properties": {
       "operation": {

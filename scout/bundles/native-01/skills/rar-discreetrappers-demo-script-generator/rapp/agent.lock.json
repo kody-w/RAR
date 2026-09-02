@@ -1,14 +1,17 @@
 {
   "agent": "@discreetRappers/demo_script_generator_agent",
+  "agent_bytes": 59793,
   "agent_file": "demo_script_generator_agent.py",
   "agent_sha256": "8c3f230c67c330e7334e103653e34b810fbbcf2fe2acd120f7806f5f0cf26149",
+  "backup_agent": "demo_script_generator_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoScriptGeneratorAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
+    "brainstem:utils.storage_factory",
     "env:AZURE_OPENAI_API_VERSION",
     "env:AZURE_OPENAI_DEPLOYMENT_NAME",
-    "env:AZURE_OPENAI_ENDPOINT",
-    "utils.storage_factory"
+    "env:AZURE_OPENAI_ENDPOINT"
   ],
   "manifest": {
     "author": "Bill Whalen",
@@ -35,8 +38,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@discreetrappers/demo-script-generator:7b3ca2687a55a326a9032aeabadf0bcc6f02bafd5828152ee3da6b3571ccfc42",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoScriptGenerator",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 89513,
+  "skill_sha256": "26ef321cc9b78d92e8992f19e83b28f2d9ea02dbe870d9093b2847972296ec67",
   "tool_schema": {
     "properties": {
       "action": {

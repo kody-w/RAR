@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_send_case_close_notification",
+  "agent_bytes": 10683,
   "agent_file": "bulk_update_send_case_close_notification_agent.py",
   "agent_sha256": "af92f54b1b85eca73b7e0781b113c32b405db6d641d1a0271010d589af703fcf",
+  "backup_agent": "bulk_update_send_case_close_notification_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateSendCaseCloseNotification",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-send-case-close-notification:7fc2b87c3b620265c78a666b2af965ceea59841485283ac3d7f48200883a1dbf",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateSendCaseCloseNotification",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24802,
+  "skill_sha256": "068eed06e3f733f3d176f84af04ced07f17efbb4032447ff35915c4226ced862",
   "tool_schema": {
     "properties": {
       "operation": {

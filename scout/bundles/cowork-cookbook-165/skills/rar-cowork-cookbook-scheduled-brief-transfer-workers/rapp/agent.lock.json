@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_transfer_workers",
+  "agent_bytes": 10585,
   "agent_file": "scheduled_brief_transfer_workers_agent.py",
   "agent_sha256": "e71faa8de020906f6ff44cb70c984c0dea5a9ad46ae301944112633fd6a932b7",
+  "backup_agent": "scheduled_brief_transfer_workers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefTransferWorkers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-transfer-workers:e599afbd70675a9daca3984ce73f2205fa7eb1d8ccbc516e3db04f59c8b9c1b6",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefTransferWorkers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24542,
+  "skill_sha256": "b65700e5f7c36f3e7724664765c3d2702d724ae3d25e5310111e0cd0db47148f",
   "tool_schema": {
     "properties": {
       "operation": {

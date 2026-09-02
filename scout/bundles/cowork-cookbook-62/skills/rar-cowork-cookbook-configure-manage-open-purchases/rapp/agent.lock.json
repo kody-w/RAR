@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_manage_open_purchases",
+  "agent_bytes": 10758,
   "agent_file": "configure_manage_open_purchases_agent.py",
   "agent_sha256": "6513ccf1fe74b5ca8284badd9ca3798f4d9ba8405dcfabe748106d918b557221",
+  "backup_agent": "configure_manage_open_purchases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageOpenPurchases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-manage-open-purchases:26c70d89d02bf9a71418fb2dd45635d8ee435ab82df6790643ce1da1934d4274",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureManageOpenPurchases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24748,
+  "skill_sha256": "fbbed397a007391c1270036bf59cfd8acf69b32eaa893b83122be754ef3ee2f0",
   "tool_schema": {
     "properties": {
       "operation": {

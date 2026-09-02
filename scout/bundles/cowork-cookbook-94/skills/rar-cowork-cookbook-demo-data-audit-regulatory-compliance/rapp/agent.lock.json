@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_audit_regulatory_compliance",
+  "agent_bytes": 10582,
   "agent_file": "demo_data_audit_regulatory_compliance_agent.py",
   "agent_sha256": "5ddc2b3cb6afbfe53905f08698790b765100920cadf3e84db31d1dd3b8b39b1e",
+  "backup_agent": "demo_data_audit_regulatory_compliance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataAuditRegulatoryCompliance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-audit-regulatory-compliance:057efd0a6ec43f86b995bed46040c41a921821f8f53d432dad6900d8043d3583",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataAuditRegulatoryCompliance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24633,
+  "skill_sha256": "0735e992a9da0fbe568ad3144a92431d5a5ebb95ac39e5e7aad2e589f6d63b4f",
   "tool_schema": {
     "properties": {
       "operation": {

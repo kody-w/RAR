@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_evaluate_marketing_financials",
+  "agent_bytes": 10720,
   "agent_file": "audit_evaluate_marketing_financials_agent.py",
   "agent_sha256": "57d05e4296224e1337e02660fa6fd62192e9fe59e2ebe92d3db59f6113b8c92d",
+  "backup_agent": "audit_evaluate_marketing_financials_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditEvaluateMarketingFinancials",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-evaluate-marketing-financials:ddf9e5a1c22ef01eae6b3a2cfa2a1cb5f641aa404cca6db81c4ac04c029e9a15",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditEvaluateMarketingFinancials",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24851,
+  "skill_sha256": "0c9574c0bf2b07e42b754d9b65e1e36a1165f2eaec36ff1ad869dadb1a62ae6f",
   "tool_schema": {
     "properties": {
       "criteria": {

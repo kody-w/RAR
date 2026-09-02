@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/prep_for_next_customer_meeting",
+  "agent_bytes": 10392,
   "agent_file": "prep_for_next_customer_meeting_agent.py",
   "agent_sha256": "39769fdbab6ded7312db55e5d89a3b4fc099a6b7154a77bc691ce95e9c9d6e96",
+  "backup_agent": "prep_for_next_customer_meeting_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PrepForNextCustomerMeeting",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -77,8 +80,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/prep-for-next-customer-meeting:8c0f34320b2d5b0b23a9670709093eeec8faf537ae18128494113ede2322933b",
+  "rollback_agent_retained": true,
   "runtime_name": "PrepForNextCustomerMeeting",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24289,
+  "skill_sha256": "17fe49b823f2f06b021d91890a272aaefab528df40bb6fd10ddac23278df39f2",
   "tool_schema": {
     "properties": {
       "operation": {

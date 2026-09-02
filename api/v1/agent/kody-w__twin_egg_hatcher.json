@@ -3,10 +3,11 @@
   "id": "kody-w__twin_egg_hatcher",
   "name": "HatchTwinEgg",
   "rar_name": "@kody-w/twin_egg_hatcher",
-  "rappid": "rappid:@kody-w/twin_egg_hatcher:d6802d18761f81ebef3758b3d1d2bc78eae68ceb9d2309f04d046e578309c999",
-  "_migrated_from": "rappid:@kody-w/twin_egg_hatcher:f7a37cc24aabbc9d9b0f20555b5df6f6724e8acb3d8fb39a36a332d571c566dc",
+  "rappid": "rappid:@kody-w/twin-egg-hatcher:990d0181ffa7fcc78626c7efea1842d459527d4a55bd4d036c11f66d2fee4b5f",
+  "_migrated_from": "rappid:@kody-w/twin_egg_hatcher:d6802d18761f81ebef3758b3d1d2bc78eae68ceb9d2309f04d046e578309c999",
   "_migrated_from_all": [
-    "rappid:@kody-w/twin_egg_hatcher:f7a37cc24aabbc9d9b0f20555b5df6f6724e8acb3d8fb39a36a332d571c566dc"
+    "rappid:@kody-w/twin_egg_hatcher:f7a37cc24aabbc9d9b0f20555b5df6f6724e8acb3d8fb39a36a332d571c566dc",
+    "rappid:@kody-w/twin_egg_hatcher:d6802d18761f81ebef3758b3d1d2bc78eae68ceb9d2309f04d046e578309c999"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -33,9 +34,18 @@
   "sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-kody-w-twin-egg-hatcher",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__twin_egg_hatcher.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-twin-egg-hatcher/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-twin-egg-hatcher/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__twin_egg_hatcher.py",
   "api_card_url": null,

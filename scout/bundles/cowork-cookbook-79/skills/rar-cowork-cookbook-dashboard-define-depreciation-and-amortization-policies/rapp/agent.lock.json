@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_depreciation_and_amortization_policies",
+  "agent_bytes": 10916,
   "agent_file": "dashboard_define_depreciation_and_amortization_policies_agent.py",
   "agent_sha256": "82f97321edaabfe5c308e5fb1a85447e6bf44ed207dd9650eb5b11537e70874b",
+  "backup_agent": "dashboard_define_depreciation_and_amortization_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefineDepreciationAndAmortizationPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-define-depreciation-and-amortization-policies:608cfa7dfd6ad630e6ffb59af51dffa906958abeb8db84ba5fa461eccc4302d7",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardDefineDepreciationAndAmortizationPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25395,
+  "skill_sha256": "889e5baba793eba7a1837dfc654e631ba683cf4d09e52d8ff6055670c144702a",
   "tool_schema": {
     "properties": {
       "operation": {

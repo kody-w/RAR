@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/institutional_knowledge",
+  "agent_bytes": 9486,
   "agent_file": "institutional_knowledge_agent.py",
   "agent_sha256": "b9574a93f4efeb61a83d8e843f8caae6f11d146b20edaca294837c209bc4723a",
+  "backup_agent": "institutional_knowledge_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "InstitutionalKnowledge",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Srinivas Varukala",
@@ -44,8 +47,16 @@
     ],
     "version": "2.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/institutional-knowledge:368cedcf3965caa166b3fee19a64f963d9a3a7c96e3430d8e8f691593bc0b505",
+  "rollback_agent_retained": true,
   "runtime_name": "InstitutionalKnowledge",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22923,
+  "skill_sha256": "f6169cd5bac00c654c1cd9049ff5132d62e1ab4db04fb0b7dabfdadfba4eec0f",
   "tool_schema": {
     "properties": {
       "operation": {

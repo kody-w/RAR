@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_budget_fixed_assets",
+  "agent_bytes": 10292,
   "agent_file": "report_budget_fixed_assets_agent.py",
   "agent_sha256": "048dc3382acd0174ad6fce2b6fe2ced8eed5683a0c1bf5322d72dfb84e9a091c",
+  "backup_agent": "report_budget_fixed_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportBudgetFixedAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-budget-fixed-assets:d76bcb4dd33903be5bb5e1a42ce798bb827cb03ee150bed5b99784abfb7f82c5",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportBudgetFixedAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24050,
+  "skill_sha256": "d6adc0f8fada45b51716c5ffba10dd17da0e0f691fb1e54b2f7c94a53c08250e",
   "tool_schema": {
     "properties": {
       "audience": {

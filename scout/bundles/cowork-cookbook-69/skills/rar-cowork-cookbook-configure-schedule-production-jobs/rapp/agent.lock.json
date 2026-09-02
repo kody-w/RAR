@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_schedule_production_jobs",
+  "agent_bytes": 10822,
   "agent_file": "configure_schedule_production_jobs_agent.py",
   "agent_sha256": "d927ca5086ae828524e70c8bed9cf5ffaf54eaa8131ad9e471f64ddb439478b3",
+  "backup_agent": "configure_schedule_production_jobs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureScheduleProductionJobs",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-schedule-production-jobs:da41f74c0d7f607f452a09cf0bb002a68ca6c6db38a7ae48670a08f9bd4ffb52",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureScheduleProductionJobs",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24855,
+  "skill_sha256": "8c105754124ef028a0fce6b6e7141c5fe4fa0622d511af9bf9d84709c349a15a",
   "tool_schema": {
     "properties": {
       "operation": {

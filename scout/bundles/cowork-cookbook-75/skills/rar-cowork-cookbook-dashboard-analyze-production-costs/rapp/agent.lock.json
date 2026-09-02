@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_analyze_production_costs",
+  "agent_bytes": 10635,
   "agent_file": "dashboard_analyze_production_costs_agent.py",
   "agent_sha256": "dcacc0b60da54dc3cbf0e6ca2b12eb565f8eb6fc3e76b27979d24890f1f81d99",
+  "backup_agent": "dashboard_analyze_production_costs_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardAnalyzeProductionCosts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-analyze-production-costs:ff2a2925095be9b00a660635ff23da817c89b6b6e6e66dc4398b265fb98e9772",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardAnalyzeProductionCosts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24660,
+  "skill_sha256": "7cdb8ec85b99d08f7a63a167f5427549392dcd4dcaf418f04a46f68af91e02e7",
   "tool_schema": {
     "properties": {
       "operation": {

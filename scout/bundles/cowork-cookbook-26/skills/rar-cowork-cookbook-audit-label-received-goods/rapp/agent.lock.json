@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/audit_label_received_goods",
+  "agent_bytes": 10610,
   "agent_file": "audit_label_received_goods_agent.py",
   "agent_sha256": "0c1a1cd39f38ddc7bb77c5a272c89d18b92075439249aba1adfdbb4af57298d7",
+  "backup_agent": "audit_label_received_goods_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditLabelReceivedGoods",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/audit-label-received-goods:036c941b7be8f302be2ddfd80cf2509e6d365ac1486ca0fb629a36a495a4ecbb",
+  "rollback_agent_retained": true,
   "runtime_name": "AuditLabelReceivedGoods",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24573,
+  "skill_sha256": "eb9c5eaa720879086583c7490f237616599632deeb26836374be602a907a71bc",
   "tool_schema": {
     "properties": {
       "criteria": {

@@ -16,6 +16,9 @@
         "azure"
       ],
       "manifest_name": "@kody-w/agent-team-singleton",
+      "scout_identity": "@kody-w/agent-team-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/agent_team/singleton/agent_team_agent.py",
       "singleton_sha256": "c950b295557f7d25471aeff87b5caac9b51cf49633d9f71108c6e80d24db947f",
@@ -36,6 +39,9 @@
         "rapplication"
       ],
       "manifest_name": "@rapp/book-factory-singleton",
+      "scout_identity": "@rapp/book-factory-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/bookfactory/singleton/bookfactory_agent.py",
       "singleton_sha256": "7419619b65eacd27dbfa418f391ba755b9d30fffbf084be211cfa011286b73d9",
@@ -57,6 +63,9 @@
         "private"
       ],
       "manifest_name": "@wildhaven/cockpit",
+      "scout_identity": "@wildhaven/cockpit",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "private",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store_Private/main/apps/@wildhaven/cockpit/singleton/cockpit_agent.py",
       "singleton_sha256": "c77195ef84de42e4c1a13c509d0262e6c44c1ee2e27abcb26673bec40eb753ef",
@@ -78,6 +87,9 @@
         "bootstrap"
       ],
       "manifest_name": "@bill/coe-starter-kit-singleton",
+      "scout_identity": "@bill/coe-starter-kit-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@bill/coe_starter_kit/singleton/coe_starter_kit_agent.py",
       "singleton_sha256": "50a04db67238b2bedd3817fa3ab4225032fb050531671b5dde126881efac4fbe",
@@ -99,6 +111,9 @@
         "rapplication"
       ],
       "manifest_name": "@rapp/csv-surgeon",
+      "scout_identity": "@rapp/csv-surgeon",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/singleton/csv_surgeon_agent.py",
       "singleton_sha256": "4d500fd77ebdc677d2860167748f06d1280bfd10de365f759e3b0e9a682b4076",
@@ -120,6 +135,9 @@
         "rapplication"
       ],
       "manifest_name": "@rapp/json-doctor",
+      "scout_identity": "@rapp/json-doctor",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/json_doctor/singleton/json_doctor_agent.py",
       "singleton_sha256": "e532be574326b108ede0dbbd7d3c012cf275c9f2aee51793864c45546938f20e",
@@ -141,6 +159,9 @@
         "rapplication"
       ],
       "manifest_name": "@rapp/log-detective",
+      "scout_identity": "@rapp/log-detective",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/log_detective/singleton/log_detective_agent.py",
       "singleton_sha256": "5d3b06228dddc510fb3a84a30b1e3517387d52388cdf66e6879e4be9e5c7a81f",
@@ -162,6 +183,9 @@
         "rapplication"
       ],
       "manifest_name": "@rapp/markdown-medic",
+      "scout_identity": "@rapp/markdown-medic",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/markdown_medic/singleton/markdown_medic_agent.py",
       "singleton_sha256": "68c349d82161b59278bb31dbbafad199f23d1cabba2487c9d0d79f0dfc68882f",
@@ -183,6 +207,9 @@
         "ci-gate"
       ],
       "manifest_name": "",
+      "scout_identity": "",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/novell/singleton/novell_agent.py",
       "singleton_sha256": "3c49a6cb033ecdc343190e57d36476840b11af4eb7500eb5638df5f9d5fccf91",
@@ -204,6 +231,9 @@
         "rapplication"
       ],
       "manifest_name": "@rapp/pii-scout",
+      "scout_identity": "@rapp/pii-scout",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/pii_scout/singleton/pii_scout_agent.py",
       "singleton_sha256": "fcdbbcc12a04f5f7aebc69d619895c2edf7872354ac03821c0665b7818683513",
@@ -225,6 +255,9 @@
         "local-first"
       ],
       "manifest_name": "@kody-w/project-tracker-singleton",
+      "scout_identity": "@kody-w/project-tracker-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/project_tracker/singleton/project_tracker_agent.py",
       "singleton_sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
@@ -246,6 +279,9 @@
         "signed"
       ],
       "manifest_name": "@kody-w/rapp_commons_singleton",
+      "scout_identity": "@kody-w/rapp_commons_singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_commons/singleton/commons_agent.py",
       "singleton_sha256": "039a2cb71500ed29a0d765c0bed1fdf18f97a4147f18b81e488ca759ab99f063",
@@ -267,6 +303,9 @@
         "noise-cancellation"
       ],
       "manifest_name": "@kody-w/rapp-crispy-singleton",
+      "scout_identity": "@kody-w/rapp-crispy-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/main/rapp_crispy/singleton/rapp_crispy_agent.py",
       "singleton_sha256": "4229fed6d82f92d9561fd291f4bb61e7862c710f24d0b03b43f514745f665f72",
@@ -288,6 +327,9 @@
         "kited"
       ],
       "manifest_name": "@kody-w/rapp_god_forum_singleton",
+      "scout_identity": "@kody-w/rapp_god_forum_singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_god_forum/singleton/forum_agent.py",
       "singleton_sha256": "b5a98826f4698b0082dc1c5164af0ed4441f64be9bd2571b505f859ce8a08f04",
@@ -309,6 +351,9 @@
         "local-first"
       ],
       "manifest_name": "@kody-w/rapp-rewind-singleton",
+      "scout_identity": "@kody-w/rapp-rewind-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/main/rapp_rewind/singleton/rapp_rewind_agent.py",
       "singleton_sha256": "8074e7acdeb4877ba705b9ffdab99dabd4b57464b27ad38d4eb77b35e9f2dac3",
@@ -330,6 +375,9 @@
         "local-first"
       ],
       "manifest_name": "@kody-w/rapp-shot-singleton",
+      "scout_identity": "@kody-w/rapp-shot-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/main/rapp_shot/singleton/rapp_shot_agent.py",
       "singleton_sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907",
@@ -351,6 +399,9 @@
         "privacy"
       ],
       "manifest_name": "@kody-w/rapp-voice-singleton",
+      "scout_identity": "@kody-w/rapp-voice-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/main/rapp_voice/singleton/rapp_voice_agent.py",
       "singleton_sha256": "cc241dc84953742d1e6925db17f4b20065573687c7d4b71e53699a3c0df2618c",
@@ -372,6 +423,9 @@
         "mermaid"
       ],
       "manifest_name": "@blazingbeard/spine-dag-singleton",
+      "scout_identity": "@blazingbeard/spine-dag-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@blazingbeard/spine_dag/singleton/spine_dag_agent.py",
       "singleton_sha256": "3f71c8e61bc69f8553bbdaecaf6dd5bdf78b7df29702fbd26ef0c53fc1246776",
@@ -393,6 +447,9 @@
         "stateless-agent"
       ],
       "manifest_name": "@kody-w/thoughtbox",
+      "scout_identity": "@kody-w/thoughtbox",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/singleton/thoughtbox_agent.py",
       "singleton_sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b",
@@ -414,6 +471,9 @@
         "rapplication"
       ],
       "manifest_name": "@rapp/toaster",
+      "scout_identity": "@rapp/toaster",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/singleton/toaster_agent.py",
       "singleton_sha256": "d4d540104c288152b2761b7890aaf263e58af286acaf702d09422b6f3f198e16",
@@ -435,6 +495,9 @@
         "templates"
       ],
       "manifest_name": "@kody-w/vibe-coding-loop",
+      "scout_identity": "@kody-w/vibe-coding-loop",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/vibe-coding-loop/singleton/vibe_coding_loop_agent.py",
       "singleton_sha256": "fcbba7d2b73f340e1bdcf27a263e9f7a50b9d5ae117af80496cfcda287847b1d",
@@ -456,6 +519,9 @@
         "operator"
       ],
       "manifest_name": "@wildhaven/wildhaven-ceo-singleton",
+      "scout_identity": "@wildhaven/wildhaven-ceo-singleton",
+      "default_artifact": "skill",
+      "rollback_artifact": "singleton-agent",
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@wildhaven/wildhaven_ceo/singleton/wildhaven_ceo_agent.py",
       "singleton_sha256": "63ba8bea6a3fa294de04fcc385a257e24c6a14e768ed6e9546fe32a22a594d22",

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_record_intercompany_transactions",
+  "agent_bytes": 10735,
   "agent_file": "bulk_update_record_intercompany_transactions_agent.py",
   "agent_sha256": "ac9ba8e0027241cace809272b0c2c02026ddf0b30dd4f1722684df92d17dc961",
+  "backup_agent": "bulk_update_record_intercompany_transactions_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateRecordIntercompanyTransactions",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-record-intercompany-transactions:3f524ca82ac1170ab8f0a6a179b9ce276eb6d39ac6fe81eb615b13356fffbae4",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateRecordIntercompanyTransactions",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24916,
+  "skill_sha256": "65585890f90d0fbd1e10c6f66e5125e742cd7c6d2dd7c0590e047cad4ff028b5",
   "tool_schema": {
     "properties": {
       "operation": {

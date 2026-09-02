@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_usability_strategy",
+  "agent_bytes": 10666,
   "agent_file": "teams_update_define_usability_strategy_agent.py",
   "agent_sha256": "2357cc531ff0b580edd2a26fbbc4b2939dd7a61221a8ecdfe2bdeb601fa7e4ad",
+  "backup_agent": "teams_update_define_usability_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineUsabilityStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-define-usability-strategy:f3215573eb9ccb9e1787ef97e9957b0850d2b66947c9d55f5093fb835e8a3c8a",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateDefineUsabilityStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24717,
+  "skill_sha256": "22327eacac1945bc76bf1d901ee08260d0b7a0408c50de2c96d3900626425957",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/generate_and_send_your_weekly_status",
+  "agent_bytes": 10238,
   "agent_file": "generate_and_send_your_weekly_status_agent.py",
   "agent_sha256": "db94ab2c81b668d9e81704c23a28d8401cd9b63203dd54d595c2f1186ea5f0bc",
+  "backup_agent": "generate_and_send_your_weekly_status_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GenerateAndSendYourWeeklyStatus",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -76,8 +79,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/generate-and-send-your-weekly-status:0a9fa133416655686e68acd394a8bcbb09903c3465f40dce4d89c668f7cf08b9",
+  "rollback_agent_retained": true,
   "runtime_name": "GenerateAndSendYourWeeklyStatus",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24076,
+  "skill_sha256": "f63882ac436e29e6513538161120521f0adb97caad566a34f42d298965f3f925",
   "tool_schema": {
     "properties": {
       "audience": {

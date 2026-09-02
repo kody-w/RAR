@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_project_scope",
+  "agent_bytes": 10630,
   "agent_file": "scheduled_brief_define_project_scope_agent.py",
   "agent_sha256": "179b66b69ba7896b8bd4b847610b99a851b4140c41719acd6f743e3ccaea62ac",
+  "backup_agent": "scheduled_brief_define_project_scope_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineProjectScope",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-define-project-scope:f2051fd6a0e10dc38c35f759c193d620291d130779da6756480ca3955a46823f",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefDefineProjectScope",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24658,
+  "skill_sha256": "6dbe43059c295594ed00263320195adaf6b7510570ac2b3f5e1a25f7c5f011b1",
   "tool_schema": {
     "properties": {
       "operation": {

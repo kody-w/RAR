@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/pdf_table_data_conversion",
+  "agent_bytes": 9351,
   "agent_file": "pdf_table_data_conversion_agent.py",
   "agent_sha256": "111afc6de615d21bd7a889670fe83fb7a8c062d7eced5a34668f69aad0e6d049",
+  "backup_agent": "pdf_table_data_conversion_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PdfTableDataConversion",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Lewis Baybutt",
@@ -43,8 +46,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/pdf-table-data-conversion:53186306ec688a18af56abad0783899beac9658c988f013092c59794c50e712f",
+  "rollback_agent_retained": true,
   "runtime_name": "PdfTableDataConversion",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 22543,
+  "skill_sha256": "9c7764f9151b6302cc355f7aac38adb00496878b70ebc862809e1e6f55b53a58",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_configure_and_manage_geofencing_and_geolocation_settings",
+  "agent_bytes": 11068,
   "agent_file": "dashboard_configure_and_manage_geofencing_and_geolocation_settings_agent.py",
   "agent_sha256": "8c41ae153dba90e21c2650af4945bb61b50f0aed7279e6689230be2e32331c96",
+  "backup_agent": "dashboard_configure_and_manage_geofencing_and_geolocation_settings_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardConfigureAndManageGeofencingAndGeolocationSettings",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-configure-and-manage-geofencing-and-geolocation-settings:6cd566c6f6161d073ca78ca3ebded67c8a25f85252285126719142aec4524c22",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardConfigureAndManageGeofencingAndGeolocationSettings",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25775,
+  "skill_sha256": "aee6ba02d4a2ac3918c2cb14ee87c9f2fa29e826ed285ab41e90d2a19d6c984d",
   "tool_schema": {
     "properties": {
       "operation": {

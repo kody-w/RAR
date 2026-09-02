@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_retire_assets",
+  "agent_bytes": 10560,
   "agent_file": "scheduled_brief_retire_assets_agent.py",
   "agent_sha256": "d296c6069831e230682319d338d77f7fd980667b39080fd9e3e48f75276633f6",
+  "backup_agent": "scheduled_brief_retire_assets_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefRetireAssets",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-retire-assets:03124bc9d788206ab4f03622aee9dd7b2f21bf36c43e8d1d085dd6d86debdf0a",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefRetireAssets",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24456,
+  "skill_sha256": "98a701e21b93ccd1863c8a2ed72681f019f28b975c74e5b080c21a38d777d208",
   "tool_schema": {
     "properties": {
       "operation": {

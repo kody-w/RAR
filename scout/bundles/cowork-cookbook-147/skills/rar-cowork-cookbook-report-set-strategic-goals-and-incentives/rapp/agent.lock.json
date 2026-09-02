@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_set_strategic_goals_and_incentives",
+  "agent_bytes": 10474,
   "agent_file": "report_set_strategic_goals_and_incentives_agent.py",
   "agent_sha256": "6c2d63fda97279e72dcea27fa0ba4b6aa6a864c25141c3f9cfcf38b9550a7811",
+  "backup_agent": "report_set_strategic_goals_and_incentives_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportSetStrategicGoalsAndIncentives",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-set-strategic-goals-and-incentives:485773086cce90d38f108d545a20cb7c329eb9f16d0e48bb79373ead089903fd",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportSetStrategicGoalsAndIncentives",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24527,
+  "skill_sha256": "aabaaf80a15940f800ff95b05a01df99b5544cc113eeac64781a5dc5f304b590",
   "tool_schema": {
     "properties": {
       "audience": {

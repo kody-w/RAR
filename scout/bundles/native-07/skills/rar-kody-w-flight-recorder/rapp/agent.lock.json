@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/flight_recorder",
+  "agent_bytes": 23195,
   "agent_file": "flight_recorder_agent.py",
   "agent_sha256": "6a3976cfba0492a585ccab318125caed4ca0820e05dddf4119e98d5f22dea659",
+  "backup_agent": "flight_recorder_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FlightRecorderAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [
     "env:FLIGHT_RECORDER_DIR"
   ],
@@ -34,8 +37,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/flight-recorder:e2f78f98124b0571827913346c11afd1b040b4adbffc14cb46ba40722876cb82",
+  "rollback_agent_retained": true,
   "runtime_name": "FlightRecorder",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 45361,
+  "skill_sha256": "e12e53f51d9e33592c4672bd204e785ab1f13fa07475b2322124fc4adcf0b6f4",
   "tool_schema": {
     "properties": {},
     "required": [],

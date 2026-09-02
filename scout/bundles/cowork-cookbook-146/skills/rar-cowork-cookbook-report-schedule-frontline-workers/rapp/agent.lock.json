@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/report_schedule_frontline_workers",
+  "agent_bytes": 10560,
   "agent_file": "report_schedule_frontline_workers_agent.py",
   "agent_sha256": "792a6ed2d24f91e395f0a3f7cc85359400b5fbfccd0a7e7f7793b74c834ac300",
+  "backup_agent": "report_schedule_frontline_workers_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportScheduleFrontlineWorkers",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/report-schedule-frontline-workers:7b0f5bbba1973d5f3c6344605c3b2658c4d8b4cb27151299b35032c937cf1999",
+  "rollback_agent_retained": true,
   "runtime_name": "ReportScheduleFrontlineWorkers",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24459,
+  "skill_sha256": "d8655ab8267c4bef310585b98e53d2d924ac5f39c4aa071cd5284da749d00f1a",
   "tool_schema": {
     "properties": {
       "operation": {

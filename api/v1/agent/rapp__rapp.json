@@ -3,11 +3,12 @@
   "id": "rapp__rapp",
   "name": "RappAgent",
   "rar_name": "@rapp/rapp",
-  "rappid": "rappid:@rapp/rapp:7b5317f54a30522cde0fec22f2174314f9aaa59a9dadb41945dc8705a7dc5226",
-  "_migrated_from": "rappid:@rapp/rapp:c8aac07450d7cdd5f28b606b8c796c736dc117001332accf131426b0f9600dba",
+  "rappid": "rappid:@rapp/rapp:6cd8bff083eaa31ae870eae717908ad8d6769b4b711a2849a5d1e9de793d0759",
+  "_migrated_from": "rappid:@rapp/rapp:7b5317f54a30522cde0fec22f2174314f9aaa59a9dadb41945dc8705a7dc5226",
   "_migrated_from_all": [
     "rappid:@rapp/rapp:96246d625e1eac1e223b07289d0a484648762eaf9336b1a113bdf84b80ee767d",
-    "rappid:@rapp/rapp:c8aac07450d7cdd5f28b606b8c796c736dc117001332accf131426b0f9600dba"
+    "rappid:@rapp/rapp:c8aac07450d7cdd5f28b606b8c796c736dc117001332accf131426b0f9600dba",
+    "rappid:@rapp/rapp:7b5317f54a30522cde0fec22f2174314f9aaa59a9dadb41945dc8705a7dc5226"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.7",
@@ -37,9 +38,18 @@
   "sha256": "137f52017fe47f6263fe54b15baa5cdd65d86f664debbe4e26cbbd835f4abedb",
   "has_card": true,
   "added_at": "2026-06-09T21:40:04-04:00",
+  "default_artifact": "skill",
+  "grail_record": "SKILL.md",
+  "skill_name": "rar-rapp-rapp",
+  "materializes": [
+    "agent"
+  ],
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rapp.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_agent.py",
+  "backup_agent_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_agent.py",
+  "skill_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-rapp/SKILL.md",
+  "default_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-rapp/SKILL.md",
   "card_url": null,
   "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp.py",
   "api_card_url": null,

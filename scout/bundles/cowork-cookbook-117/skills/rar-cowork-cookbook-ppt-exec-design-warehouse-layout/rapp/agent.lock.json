@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_design_warehouse_layout",
+  "agent_bytes": 10607,
   "agent_file": "ppt_exec_design_warehouse_layout_agent.py",
   "agent_sha256": "f31cb7d3d089354bfbc1df4865fb7b306de73724d65f325dcf42cb5dcca2a5a3",
+  "backup_agent": "ppt_exec_design_warehouse_layout_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDesignWarehouseLayout",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/ppt-exec-design-warehouse-layout:574b4a575a9f621e6adc6c3273fe4ead1a3e99e5ce38397dd1c8fd1807509f23",
+  "rollback_agent_retained": true,
   "runtime_name": "PptExecDesignWarehouseLayout",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24604,
+  "skill_sha256": "d7912fdfb296ae9aabe341dcc577eaf1821376bccbfa40e848e76d073ce3aebc",
   "tool_schema": {
     "properties": {
       "operation": {

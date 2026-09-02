@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/agent_team_agent",
+  "agent_bytes": 16160,
   "agent_file": "agent_team_agent.py",
   "agent_sha256": "0ed520946386fb7d52aa8f9af1774f2656f4e9bc33d7ff911737e6f67b498332",
+  "backup_agent": "agent_team_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentTeamAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "@kody-w",
@@ -35,8 +38,16 @@
     ],
     "version": "0.1.2"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/agent-team:50d0767d5d2ef83f34d1c314a75c2f1e25726a97c9211bcfd546e721e096357f",
+  "rollback_agent_retained": true,
   "runtime_name": "AgentTeam",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 34231,
+  "skill_sha256": "456b7558543da80322c7130620acd7ccfc1cbfb5f87bc01d0642aec77963ff58",
   "tool_schema": {
     "properties": {
       "action": {

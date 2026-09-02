@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_prepare_statutory_financial_reports",
+  "agent_bytes": 10781,
   "agent_file": "dashboard_prepare_statutory_financial_reports_agent.py",
   "agent_sha256": "fed863143b57e6966331d08ef0ae3616211fd858b248c44189f39ac8ff7156e6",
+  "backup_agent": "dashboard_prepare_statutory_financial_reports_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardPrepareStatutoryFinancialReports",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-prepare-statutory-financial-reports:778afb5e27059fb0d62b2d425c672d18047eded3fc245c954bac24eaf96fb641",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardPrepareStatutoryFinancialReports",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25040,
+  "skill_sha256": "a1760a1b95969e17c9c2646b5a0378976f6216defb1a93f063635e9ba0be9b93",
   "tool_schema": {
     "properties": {
       "operation": {

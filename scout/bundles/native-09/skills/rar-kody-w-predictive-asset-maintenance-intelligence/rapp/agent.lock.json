@@ -1,9 +1,12 @@
 {
   "agent": "@kody-w/predictive_asset_maintenance_intelligence",
+  "agent_bytes": 55313,
   "agent_file": "predictive_asset_maintenance_intelligence_agent.py",
   "agent_sha256": "d792270520fb82ad23815a9b9d6e940da5428ee5baa5fcddc362846adaff90e0",
+  "backup_agent": "predictive_asset_maintenance_intelligence_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PredictiveAssetMaintenanceIntelligenceAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Kody Wildfeuer",
@@ -26,8 +29,16 @@
     ],
     "version": "1.0.1"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@kody-w/predictive-asset-maintenance-intelligence:8c6264eead8494110036a16e6ee3cb558461d878ed263ab472c407b584536ed5",
+  "rollback_agent_retained": true,
   "runtime_name": "PredictiveAssetMaintenanceIntelligenceAgent",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 82131,
+  "skill_sha256": "5051281325d0f10f7cf4e45c4d61b616521dc436a8b6938397380b0726858c68",
   "tool_schema": {
     "properties": {
       "asset_class": {

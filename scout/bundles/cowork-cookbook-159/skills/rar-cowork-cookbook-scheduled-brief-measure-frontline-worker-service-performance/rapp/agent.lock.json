@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_measure_frontline_worker_service_performance",
+  "agent_bytes": 10954,
   "agent_file": "scheduled_brief_measure_frontline_worker_service_performance_agent.py",
   "agent_sha256": "a898d30859ceeed8f849eeabe150196f88d7c31c702bc7736afd864133f86e44",
+  "backup_agent": "scheduled_brief_measure_frontline_worker_service_performance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefMeasureFrontlineWorkerServicePerformance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-measure-frontline-worker-service-performance:78d66b75cf8d26919b04775c071ac2489d26b98efd0edb3596b0c51ea82a36f8",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefMeasureFrontlineWorkerServicePerformance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25451,
+  "skill_sha256": "e1ba77ab9810f2a95e21879cf21b6334af4f68cf371172245a1510cb05a601f3",
   "tool_schema": {
     "properties": {
       "operation": {

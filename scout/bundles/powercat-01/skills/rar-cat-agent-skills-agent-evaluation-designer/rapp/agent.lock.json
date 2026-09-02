@@ -1,9 +1,12 @@
 {
   "agent": "@cat-agent-skills/agent_evaluation_designer",
+  "agent_bytes": 9556,
   "agent_file": "agent_evaluation_designer_agent.py",
   "agent_sha256": "20b0e309fde16bdfc1a363d270e1aec083d9c00b1a1d7735edd30dff9d6000a2",
+  "backup_agent": "agent_evaluation_designer_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentEvaluationDesigner",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "James Papadimitriou",
@@ -41,8 +44,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cat-agent-skills/agent-evaluation-designer:ba57b8c3997f8f73b464f98eeea1eaa24330082833e6c3f893fb8bd4b2684100",
+  "rollback_agent_retained": true,
   "runtime_name": "AgentEvaluationDesigner",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 23062,
+  "skill_sha256": "465433e356e031ca0c38f45dfef0efe5222b42bb3b13c02e039440cd8fc81350",
   "tool_schema": {
     "properties": {
       "criteria": {

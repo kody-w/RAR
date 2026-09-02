@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_issue_sales_invoices",
+  "agent_bytes": 10580,
   "agent_file": "dashboard_issue_sales_invoices_agent.py",
   "agent_sha256": "5c8570fa6680bcdc3c8a08cc80c7e4531a17211bbe6ddd1dc89e20577de1b385",
+  "backup_agent": "dashboard_issue_sales_invoices_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardIssueSalesInvoices",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-issue-sales-invoices:8af61ea9d3e98c17ef203e43c5de8668c84b241d6b4aa29d7559a6498159b2f7",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardIssueSalesInvoices",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24579,
+  "skill_sha256": "642974f32ee27f8857fa25b94b9c23c081eac4bb493a101e6a180becba1e1b09",
   "tool_schema": {
     "properties": {
       "operation": {

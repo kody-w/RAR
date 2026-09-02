@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/d365_recipe_planner",
+  "agent_bytes": 10403,
   "agent_file": "d365_recipe_planner_agent.py",
   "agent_sha256": "1c3b4425cfc86a5c3d5250975e457e3b2a96017af042f55656e0590b20e8d70f",
+  "backup_agent": "d365_recipe_planner_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365RecipePlanner",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -73,8 +76,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/d365-recipe-planner:b37a2e1f7cc19449a9db46d0716163493fe63377270de596c442bf8c3801d57c",
+  "rollback_agent_retained": true,
   "runtime_name": "D365RecipePlanner",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24288,
+  "skill_sha256": "f053395a8a70bc946ff6e74e7e38464ce4144852122bcb774e5890b06789f66d",
   "tool_schema": {
     "properties": {
       "operation": {

@@ -1,9 +1,12 @@
 {
   "agent": "@rapp/toaster",
+  "agent_bytes": 73820,
   "agent_file": "toaster_agent.py",
   "agent_sha256": "d4d540104c288152b2761b7890aaf263e58af286acaf702d09422b6f3f198e16",
+  "backup_agent": "toaster_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ToasterAgent",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "example_call": {
@@ -27,8 +30,16 @@
     "trust": "community",
     "version": "1.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@rapp/toaster:8d8624ff9b7db3bd966f4552dbe3d26637fe7e1379ba1584d7ef34b295acca75",
+  "rollback_agent_retained": true,
   "runtime_name": "Toaster",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 112300,
+  "skill_sha256": "9ff993b15244758b94a475e709782ea36384f13f13a4a06c102982493e65439c",
   "tool_schema": {
     "properties": {
       "action": {

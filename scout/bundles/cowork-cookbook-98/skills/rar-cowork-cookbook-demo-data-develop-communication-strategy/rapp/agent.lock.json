@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_develop_communication_strategy",
+  "agent_bytes": 10602,
   "agent_file": "demo_data_develop_communication_strategy_agent.py",
   "agent_sha256": "e5991292073059183eec3405987ff2f3dbf11f7b693335b8be04ea7328196e13",
+  "backup_agent": "demo_data_develop_communication_strategy_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataDevelopCommunicationStrategy",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-develop-communication-strategy:1d981da9f28b402b62e2deb5c1b70d78ac76e8cbd7bb38001356bcf31e39cb53",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataDevelopCommunicationStrategy",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24679,
+  "skill_sha256": "664e8ef82504a7ff36becb4a06d7549b7f1f31625d0f4b5cb4a05e81141bec06",
   "tool_schema": {
     "properties": {
       "operation": {

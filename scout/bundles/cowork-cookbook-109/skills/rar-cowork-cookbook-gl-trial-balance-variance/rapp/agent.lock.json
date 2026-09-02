@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/gl_trial_balance_variance",
+  "agent_bytes": 10296,
   "agent_file": "gl_trial_balance_variance_agent.py",
   "agent_sha256": "551e3f9e867735ac4ab2dff898356682733cdc32ac836dbf84a535ac49d887ec",
+  "backup_agent": "gl_trial_balance_variance_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GlTrialBalanceVariance",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/gl-trial-balance-variance:cb1c3945be812cff7a02b03371cadc2c18ed919d1144931acc95c2c23019d5d8",
+  "rollback_agent_retained": true,
   "runtime_name": "GlTrialBalanceVariance",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24062,
+  "skill_sha256": "8e0bbdb42094ec700f3c17d56f0a995880e7b50c226fb93ec3d9aa79bba21e0e",
   "tool_schema": {
     "properties": {
       "audience": {

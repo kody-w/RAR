@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_track_project_expenses",
+  "agent_bytes": 10666,
   "agent_file": "scheduled_brief_track_project_expenses_agent.py",
   "agent_sha256": "361cf831759605a496cee6d7a3badb675f54b7b5b6d4fafd24f433c588460862",
+  "backup_agent": "scheduled_brief_track_project_expenses_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefTrackProjectExpenses",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/scheduled-brief-track-project-expenses:f58748373dfde9ebfa2d93fe30176fdcaf856d13e99d8d32a50f722f63d0c227",
+  "rollback_agent_retained": true,
   "runtime_name": "ScheduledBriefTrackProjectExpenses",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24724,
+  "skill_sha256": "5f8776d7c5a487b09386731105750d19464bb67fe6daa3bf6e1a00afd949662a",
   "tool_schema": {
     "properties": {
       "operation": {

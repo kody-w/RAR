@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/dashboard_manage_shifts",
+  "agent_bytes": 10486,
   "agent_file": "dashboard_manage_shifts_agent.py",
   "agent_sha256": "4905a0020e026dcbe4f24a42d96a9c402999ed9dfc9e58522134f6414728c580",
+  "backup_agent": "dashboard_manage_shifts_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardManageShifts",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/dashboard-manage-shifts:3011005808a5ee7299f2e84b044400f2f5007d618dde129f5bcfaf70a5963c73",
+  "rollback_agent_retained": true,
   "runtime_name": "DashboardManageShifts",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24329,
+  "skill_sha256": "6b3b2c8d1403e6327fa34d35fcb74ba959d30e2bf505122857fb8584714a20ae",
   "tool_schema": {
     "properties": {
       "operation": {

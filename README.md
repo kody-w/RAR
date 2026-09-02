@@ -28,7 +28,7 @@ Skills:
 | Plugin identity | Purpose |
 |---|---|
 | `rapp@brainstem` | Install and verify Brainstem, then install RAR |
-| `rapp@rar` | Operate RAR, skills, exports, and callback bootstrap |
+| `rapp@rar` | Install Toasted Grail skills, materialize rollback agents, and operate Brainstem |
 
 ```bash
 copilot plugin marketplace add kody-w/RAR
@@ -41,6 +41,11 @@ Claude Code:
 claude plugin marketplace add kody-w/RAR
 claude plugin install rapp@rar
 ```
+
+The default portable artifact is now a RAPP/1 Toasted `SKILL.md`. Every skill
+checksum-vaults the exact source agent, so any ecosystem can consume the Grail
+directly while a Brainstem deterministically restores `agent.py` when needed.
+The published Python files remain byte-exact rollback backups during migration.
 
 From an interactive Copilot CLI session:
 
@@ -216,15 +221,15 @@ it names every other endpoint, so one URL is the only thing worth hardcoding.
 # The curated enterprise catalog, ready to render
 curl -s https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json
 
-# Installing an agent is one request — the response body is the whole package
-curl -s https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py
+# Discover the Toasted SKILL.md Grail URL and its rollback agent
+curl -s https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift.json
 ```
 
 **[discover.html](https://kody-w.github.io/RAR/discover.html)** is this API with a
 face on it: search, recommend and copy an install command without a GitHub
 account. It is the reference implementation for embedding RAR elsewhere.
 
-Those agent URLs are permanent. See
+Those agent URLs remain permanent rollback aliases. See
 [Article XXIII](CONSTITUTION.md#article-xxiii--the-permanent-url-contract) — a
 published agent path is a public contract and is never renamed, moved or
 deleted. `scripts/check_url_stability.py` enforces it in CI on every push.

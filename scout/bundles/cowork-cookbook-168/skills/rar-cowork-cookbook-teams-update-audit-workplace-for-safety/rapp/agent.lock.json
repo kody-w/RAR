@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/teams_update_audit_workplace_for_safety",
+  "agent_bytes": 10656,
   "agent_file": "teams_update_audit_workplace_for_safety_agent.py",
   "agent_sha256": "6977bb9398d2c392198b19c011bb6ed521695f6d8140d8e4daaa91151942ee15",
+  "backup_agent": "teams_update_audit_workplace_for_safety_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAuditWorkplaceForSafety",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -84,8 +87,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/teams-update-audit-workplace-for-safety:131675fb8990beb42882e6141f78f8485085ed11f96a36a70b0f1e273eabc82e",
+  "rollback_agent_retained": true,
   "runtime_name": "TeamsUpdateAuditWorkplaceForSafety",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24743,
+  "skill_sha256": "696633054ae009602e4b840a27e980db8e0f83789c7697eaaf118cc1ed2f65bc",
   "tool_schema": {
     "properties": {
       "operation": {

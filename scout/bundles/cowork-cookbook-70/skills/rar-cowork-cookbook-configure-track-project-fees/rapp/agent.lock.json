@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/configure_track_project_fees",
+  "agent_bytes": 10732,
   "agent_file": "configure_track_project_fees_agent.py",
   "agent_sha256": "97dae94ae66e2a55ebe42c4794dfa0721a2557e1594718b7711c184ecdc04bc7",
+  "backup_agent": "configure_track_project_fees_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureTrackProjectFees",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -95,8 +98,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/configure-track-project-fees:3d1b10530355b145c1a5e03b51314119fe40ca299028611f306036ac81ae9170",
+  "rollback_agent_retained": true,
   "runtime_name": "ConfigureTrackProjectFees",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24669,
+  "skill_sha256": "f0a12463bed16a09f904cfea1249110b5e7f6ec8835d142bba125877016097a6",
   "tool_schema": {
     "properties": {
       "operation": {

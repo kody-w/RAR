@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_conduct_competitive_analysis",
+  "agent_bytes": 10686,
   "agent_file": "bulk_update_conduct_competitive_analysis_agent.py",
   "agent_sha256": "c03f6a8982f3a230dc41b89d3bd4054a305d4d9dc2f45959931e195c975da446",
+  "backup_agent": "bulk_update_conduct_competitive_analysis_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateConductCompetitiveAnalysis",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-conduct-competitive-analysis:2bc5405e0e9873c0a8c024540c95d98f1c179f811df3e2404f17cfe08f2f51eb",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateConductCompetitiveAnalysis",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24816,
+  "skill_sha256": "4e2185e56074f02fca693b6382075f881dc993f4b80aae973f7cfe6187b5683c",
   "tool_schema": {
     "properties": {
       "operation": {

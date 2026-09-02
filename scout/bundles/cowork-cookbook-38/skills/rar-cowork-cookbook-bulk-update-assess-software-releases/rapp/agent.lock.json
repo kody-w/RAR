@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_assess_software_releases",
+  "agent_bytes": 10647,
   "agent_file": "bulk_update_assess_software_releases_agent.py",
   "agent_sha256": "d95b5341ec0fbf7a4788c43ed014ae72cfa49aaff25364bc10e922ed3b97affc",
+  "backup_agent": "bulk_update_assess_software_releases_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAssessSoftwareReleases",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-assess-software-releases:0b738575fdbece8952a1d2d9bc9e07f0d2cab1a5264800c06e427727ae7b5cff",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateAssessSoftwareReleases",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24717,
+  "skill_sha256": "26a46e4fcdc975a2fdfe41839edded1934285afe7b59b618dab14dc062da2673",
   "tool_schema": {
     "properties": {
       "operation": {

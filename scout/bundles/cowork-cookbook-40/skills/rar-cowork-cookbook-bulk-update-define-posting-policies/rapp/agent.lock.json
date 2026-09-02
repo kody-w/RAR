@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_posting_policies",
+  "agent_bytes": 10617,
   "agent_file": "bulk_update_define_posting_policies_agent.py",
   "agent_sha256": "eb25aa1f15d6fd6e350446947d21d4a6f3b4885c375f5a54441874a823f8320d",
+  "backup_agent": "bulk_update_define_posting_policies_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefinePostingPolicies",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -83,8 +86,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/bulk-update-define-posting-policies:29f6f2cdc01488ba38d44912c28b3f044a3e2313352f1ded75f2b3bc8bd2992d",
+  "rollback_agent_retained": true,
   "runtime_name": "BulkUpdateDefinePostingPolicies",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 24651,
+  "skill_sha256": "07cae74a7f6c24e023685a4123da28f683d32f9ca5cc95051b2f9be9bcd095c6",
   "tool_schema": {
     "properties": {
       "operation": {

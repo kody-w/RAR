@@ -1,9 +1,12 @@
 {
   "agent": "@cowork-cookbook/demo_data_track_additional_information_against_a_case",
+  "agent_bytes": 10779,
   "agent_file": "demo_data_track_additional_information_against_a_case_agent.py",
   "agent_sha256": "444a4b91826be5471802881a52309f1304d6a4096aee2390a90b97b48f5f7158",
+  "backup_agent": "demo_data_track_additional_information_against_a_case_agent.py",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataTrackAdditionalInformationAgainstACase",
+  "grail_file": "SKILL.md",
   "host_dependencies": [],
   "manifest": {
     "author": "Sean Galliher and Cowork Cookbook contributors",
@@ -79,8 +82,16 @@
     ],
     "version": "2.0.0"
   },
+  "materializes": [
+    "agent"
+  ],
+  "primary_artifact": "skill",
+  "rappid": "rappid:@cowork-cookbook/demo-data-track-additional-information-against-a-case:22b03a0e0c70e7dbf1d0ad6724ecdc54ea33a65eb616f57b120689f358663c2b",
+  "rollback_agent_retained": true,
   "runtime_name": "DemoDataTrackAdditionalInformationAgainstACase",
-  "schema": "rapp-agent-lock/1.0",
+  "schema": "rapp-grail-lock/2.0",
+  "skill_bytes": 25155,
+  "skill_sha256": "f691d68ddb8217e464448203d8c01084c2b8a20a5e5db60d5299543d8ab53828",
   "tool_schema": {
     "properties": {
       "operation": {
