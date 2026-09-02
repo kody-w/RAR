@@ -3,17 +3,18 @@
   "id": "kody-w__copilot_studio_parity_deploy",
   "name": "Copilot Studio Parity Deploy",
   "rar_name": "@kody-w/copilot_studio_parity_deploy",
-  "rappid": "rappid:@kody-w/copilot_studio_parity_deploy:1015a9a3ce2750fd05ca84c2e0d79a172f9e292273c02c3cd72ea7b16cf4bcec",
-  "_migrated_from": "rappid:@kody-w/copilot_studio_parity_deploy:66c90c71ddb1919488acd314f68ab1ad2bff3f9f49055a9a3abc8611bfb007c0",
+  "rappid": "rappid:@kody-w/copilot_studio_parity_deploy:469d7fca00d926626b6af0df3f432e570ced0a25e008c22c768826d28cf7c432",
+  "_migrated_from": "rappid:@kody-w/copilot_studio_parity_deploy:1015a9a3ce2750fd05ca84c2e0d79a172f9e292273c02c3cd72ea7b16cf4bcec",
   "_migrated_from_all": [
     "rappid:@kody-w/copilot_studio_parity_deploy:c4155e20efbeff5d52ae64f33a9a81bf372ead6c26b28064635efb62a6a53a2a",
     "rappid:@kody-w/copilot_studio_parity_deploy:c581a6e87d6fd00996ec95ef9bbee680dd8dc594ea5c6ae68f6d31bc1d80da55",
     "rappid:@kody-w/copilot_studio_parity_deploy:727d64c5d3dd4088f9247e13b8318e933ced0acfb15aa7ed61ffc49de71b2f9e",
     "rappid:@kody-w/copilot_studio_parity_deploy:0a16653772de3436d0b67183883bb971be04e2309be48e6f8730fde4856d172e",
-    "rappid:@kody-w/copilot_studio_parity_deploy:66c90c71ddb1919488acd314f68ab1ad2bff3f9f49055a9a3abc8611bfb007c0"
+    "rappid:@kody-w/copilot_studio_parity_deploy:66c90c71ddb1919488acd314f68ab1ad2bff3f9f49055a9a3abc8611bfb007c0",
+    "rappid:@kody-w/copilot_studio_parity_deploy:1015a9a3ce2750fd05ca84c2e0d79a172f9e292273c02c3cd72ea7b16cf4bcec"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "publisher": "@kody-w",
   "category": "pipeline",
   "tags": [
@@ -30,9 +31,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 7380,
-  "size_kb": 256.8,
-  "sha256": "d7ba7e8468345dc5051b4254c7958e6dca75de015199177feeea0ae226391ec1",
+  "lines": 7530,
+  "size_kb": 262.5,
+  "sha256": "e651d4f65d4cee2243e7c2bbfe35854d8c57aebda7db3a2fbc64a4338591ef14",
   "has_card": true,
   "added_at": "2026-08-11T17:28:15Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
