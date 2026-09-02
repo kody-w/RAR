@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/copilot_studio_parity_deploy",
   "agent_file": "copilot_studio_parity_deploy_agent.py",
-  "agent_sha256": "d7ba7e8468345dc5051b4254c7958e6dca75de015199177feeea0ae226391ec1",
+  "agent_sha256": "e651d4f65d4cee2243e7c2bbfe35854d8c57aebda7db3a2fbc64a4338591ef14",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioDeployAgent",
   "host_dependencies": [
@@ -27,7 +27,7 @@
       "pipeline",
       "factory"
     ],
-    "version": "1.0.5"
+    "version": "1.0.6"
   },
   "runtime_name": "CopilotStudioDeploy",
   "schema": "rapp-agent-lock/1.0",
@@ -143,5 +143,5 @@
     ],
     "type": "object"
   },
-  "version": "1.0.5"
+  "version": "1.0.6"
 }

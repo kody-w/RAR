@@ -1,6 +1,6 @@
 {
   "createdAt": "2026-08-11T17:28:15.000Z",
-  "description": "Disabled Scout workflow projected from @kody-w/copilot_studio_parity_deploy (1.0.5). Edit inputs or schedule before enabling.",
+  "description": "Disabled Scout workflow projected from @kody-w/copilot_studio_parity_deploy (1.0.6). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "b1f9e99ea57fac08",
   "lastExecutedAt": null,

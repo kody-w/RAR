@@ -51,7 +51,7 @@ except ModuleNotFoundError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/copilot_studio_parity_deploy",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "display_name": "Copilot Studio Parity Deploy",
     "description": (
         "Compiles caller-selected local RAPP agents into a provisioned, "
@@ -3721,6 +3721,65 @@ def _component_tree_digest(project: Path) -> dict:
     }
 
 
+def _write_no_infrastructure_receipts(
+    run_dir: Path,
+    manifest: dict,
+) -> dict:
+    manifest_path = run_dir / "rapp-deploy-manifest.json"
+    project = run_dir / "project"
+    if not manifest_path.is_file():
+        raise RuntimeError(
+            f"deployment manifest is missing: {manifest_path}"
+        )
+    if not project.is_dir():
+        raise RuntimeError(f"Copilot Studio project is missing: {project}")
+    persisted_manifest = json.loads(
+        manifest_path.read_text(encoding="utf-8")
+    )
+    normalized_manifest = json.loads(json.dumps(manifest))
+    if persisted_manifest != normalized_manifest:
+        raise RuntimeError(
+            "deployment manifest changed before infrastructure receipts"
+        )
+    if persisted_manifest.get("infrastructure_requests") != []:
+        raise RuntimeError(
+            "empty infrastructure receipts require zero infrastructure requests"
+        )
+    contracts = _contracts_by_tool(
+        persisted_manifest.get("source_agents", [])
+    )
+    receipts = {
+        "schema": "rapp-to-copilot-studio-infrastructure-receipts/1.0",
+        "captured_at": _utc_now(),
+        "status": "no_infrastructure_required",
+        "infrastructure_status": "not_required",
+        "provisioning_status": "not_performed",
+        "resolved_source_agents": sorted(contracts),
+        "resolved_requests": [],
+        "request_resolutions": [],
+        "deployment_manifest_sha256": _sha256(manifest_path),
+        "project_tree_sha256": _component_tree_digest(project)["sha256"],
+        "connectors": [],
+        "workflows": [],
+        "connection_references": [],
+        "connection_reference_files": [],
+        "actions": [],
+        "workflow_components": [],
+        "bot_component_associations": [],
+        "connection_associations": [],
+        "action_connection_associations": [],
+        "tools": [],
+        "published": False,
+    }
+    infrastructure_manifest = run_dir / "infrastructure" / "manifest.json"
+    if infrastructure_manifest.is_file():
+        receipts["infrastructure_manifest_sha256"] = _sha256(
+            infrastructure_manifest
+        )
+    _write_json(run_dir / "infrastructure-receipts.json", receipts)
+    return receipts
+
+
 def _target_identity(project: Path) -> dict:
     connection = project / ".mcs" / "conn.json"
     try:
@@ -5580,6 +5639,51 @@ def _completion_evidence(
         for request in manifest.get("infrastructure_requests", [])
         if isinstance(request, dict) and request.get("id")
     }
+    if manifest.get("infrastructure_requests") == []:
+        if (
+            receipts.get("schema")
+            != "rapp-to-copilot-studio-infrastructure-receipts/1.0"
+        ):
+            raise RuntimeError("unsupported infrastructure receipts schema")
+        if receipts.get("published") is not False:
+            raise RuntimeError(
+                "infrastructure receipts must describe an unpublished Draft"
+            )
+        if (
+            receipts.get("status") != "no_infrastructure_required"
+            or receipts.get("infrastructure_status") != "not_required"
+            or receipts.get("provisioning_status") != "not_performed"
+        ):
+            raise RuntimeError(
+                "zero-infrastructure receipts must record that infrastructure "
+                "was not required and provisioning was not performed"
+            )
+        if (
+            receipts.get("deployment_manifest_sha256")
+            != expected_manifest_sha256
+        ):
+            raise RuntimeError(
+                "zero-infrastructure receipts are bound to a different "
+                "deployment manifest"
+            )
+        empty_fields = (
+            "resolved_requests",
+            "request_resolutions",
+            "connectors",
+            "workflows",
+            "connection_references",
+            "connection_reference_files",
+            "actions",
+            "workflow_components",
+            "bot_component_associations",
+            "connection_associations",
+            "action_connection_associations",
+            "tools",
+        )
+        if any(receipts.get(field) != [] for field in empty_fields):
+            raise RuntimeError(
+                "zero-infrastructure receipts contain provisioned resources"
+            )
     resolution_rows = receipts.get("request_resolutions")
     if not isinstance(resolution_rows, list):
         raise RuntimeError(
@@ -7062,6 +7166,25 @@ def _deploy(
         "stage": "pushed" if pac_result["pushed"] else "up-to-date",
     })
     _write_json(state_path, state)
+    no_infrastructure_receipts = None
+    if not infrastructure_pending:
+        no_infrastructure_receipts = _write_no_infrastructure_receipts(
+            run_dir,
+            manifest,
+        )
+        receipts_path = run_dir / "infrastructure-receipts.json"
+        state.update({
+            "updated_at": _utc_now(),
+            "infrastructure_status": no_infrastructure_receipts[
+                "infrastructure_status"
+            ],
+            "provisioning_status": no_infrastructure_receipts[
+                "provisioning_status"
+            ],
+            "infrastructure_receipts": str(receipts_path),
+            "infrastructure_receipts_sha256": _sha256(receipts_path),
+        })
+        _write_json(state_path, state)
 
     result = {
         "status": (
@@ -7126,6 +7249,12 @@ def _push_existing(project_dir: str, publisher_prefix: str) -> dict:
             include_file_hashes=False,
         ),
     )
+    manifest = None
+    manifest_path = run_dir / "rapp-deploy-manifest.json"
+    if manifest_path.is_file():
+        candidate = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if candidate.get("infrastructure_requests") == []:
+            manifest = candidate
     state_path = project.parent / "state.json"
     if state_path.is_file():
         state = json.loads(state_path.read_text(encoding="utf-8"))
@@ -7135,6 +7264,27 @@ def _push_existing(project_dir: str, publisher_prefix: str) -> dict:
             "published": False,
         })
         _write_json(state_path, state)
+    no_infrastructure_receipts = None
+    if manifest is not None:
+        no_infrastructure_receipts = _write_no_infrastructure_receipts(
+            run_dir,
+            manifest,
+        )
+        if state_path.is_file():
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            receipts_path = run_dir / "infrastructure-receipts.json"
+            state.update({
+                "updated_at": _utc_now(),
+                "infrastructure_status": no_infrastructure_receipts[
+                    "infrastructure_status"
+                ],
+                "provisioning_status": no_infrastructure_receipts[
+                    "provisioning_status"
+                ],
+                "infrastructure_receipts": str(receipts_path),
+                "infrastructure_receipts_sha256": _sha256(receipts_path),
+            })
+            _write_json(state_path, state)
     return {
         "status": "success",
         "project_dir": str(project),
