@@ -113,6 +113,7 @@ def test_store_and_browser_brainstem_are_skill_first():
     index = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "/scout/catalog/catalog.json" in index
     assert "Download Toasted SKILL.md" in index
+    assert "rollback .py" in index
     discover = (ROOT / "discover.html").read_text(encoding="utf-8")
     assert "Toasted SKILL.md" in discover
     assert "backup_agent_url" in discover
@@ -123,6 +124,25 @@ def test_store_and_browser_brainstem_are_skill_first():
     assert api["endpoints"]["agent_file"]["description"].startswith(
         "Rollback"
     )
+    grail = (ROOT / "grail.html").read_text(encoding="utf-8")
+    assert "SCOUT_CATALOG_URL" in grail
+    assert "Toasted SKILL.md" in grail
+    assert "Rollback .py" in grail
+    front = (ROOT / "front.html").read_text(encoding="utf-8")
+    assert "Toasted skill" in front
+    assert "rollback .py" in front
+
+
+def test_pages_keeps_brainstem_installer_agent_abi():
+    index = (ROOT / "index.html").read_text(encoding="utf-8")
+    assert "registry.json" in index
+    assert "a._file" in index
+    api = json.loads(
+        (ROOT / "api" / "v1" / "agent" / "rapp__ping_agent.json").read_text()
+    )
+    assert api["backup_agent_url"].endswith("/agents/@rapp/ping_agent.py")
+    assert api["py_url"] == api["backup_agent_url"]
+    assert api["default_url"].endswith("/SKILL.md")
 
 
 def test_federation_marks_singletons_as_rollback():

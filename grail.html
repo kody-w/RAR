@@ -6,7 +6,7 @@
 <title>RAPP Grail</title>
 <meta name="description" content="A shareable permalink for any agent in the RAPP registry — card art, provenance, source, install command. Static, content-addressable.">
 <meta property="og:title" content="RAPP Grail">
-<meta property="og:description" content="Card art + agent.py source + cryptographic provenance, on a shareable static URL.">
+<meta property="og:description" content="Card art + Toasted SKILL.md Grail + rollback agent provenance, on a shareable static URL.">
 <style>
 :root {
   --bg: #0d1117;
@@ -512,6 +512,7 @@ header {
 <script>
 const REGISTRY_URL = 'registry.json';
 const CARDS_URL = 'cards/holo_cards.json';
+const SCOUT_CATALOG_URL = 'scout/catalog/catalog.json';
 const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR';
 
 // Standalone-export mode — when these are populated, the page skips its
@@ -520,6 +521,7 @@ const RAW_BASE = 'https://raw.githubusercontent.com/kody-w/RAR';
 window.__INLINED_AGENT__ = null;
 window.__INLINED_CARD__ = null;
 window.__INLINED_PY__ = null;
+window.__INLINED_SKILL__ = null;
 window.__INLINED_AT__ = null;
 
 function esc(s) { const d = document.createElement('div'); d.textContent = String(s ?? ''); return d.innerHTML; }
@@ -540,8 +542,8 @@ function summonUrl(name) {
   return `${SUMMON_BASE}?agent=${encodeURIComponent(name)}`;
 }
 
-// Share the actual agent.py through the native share sheet (Mail / Messages /
-// Teams / …). Falls back to sharing a link, then to copying the raw URL.
+// Share the primary Toasted Grail through the native share sheet. The same
+// helper also handles the retained rollback agent when explicitly selected.
 async function shareAgentPy(url, filename, title, btn) {
   const label = btn ? btn.textContent : '';
   const restore = () => { if (btn) setTimeout(() => { btn.textContent = label; }, 1600); };
@@ -549,17 +551,21 @@ async function shareAgentPy(url, filename, title, btn) {
     let file = null;
     try {
       const res = await fetch(url, { cache: 'no-store' });
-      if (res.ok) file = new File([await res.text()], filename, { type: 'text/x-python' });
+      if (res.ok) file = new File(
+        [await res.text()],
+        filename,
+        { type: filename.endsWith('.md') ? 'text/markdown' : 'text/x-python' }
+      );
     } catch (e) { /* offline / CORS — fall back to link share */ }
 
     // 1) Share the real .py file as an attachment (iOS/Android Web Share L2).
     if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
-      await navigator.share({ files: [file], title: filename, text: `${title} — RAPP single-file agent` });
+      await navigator.share({ files: [file], title: filename, text: `${title} — RAPP portable capability` });
       return;
     }
     // 2) No file-share support — share a link + text.
     if (navigator.share) {
-      await navigator.share({ title, text: `${title} — RAPP agent (agent.py): ${url}`, url });
+      await navigator.share({ title, text: `${title} — RAPP capability: ${url}`, url });
       return;
     }
     // 3) Desktop / no Web Share — copy the raw .py URL.
@@ -595,18 +601,20 @@ async function load() {
     return;
   }
 
-  let registry, cards, agent, card;
+  let registry, cards, scout, agent, card, skill;
   if (isInlined) {
     // Standalone copy — registry + card data baked into this HTML file.
     registry = { agents: [window.__INLINED_AGENT__] };
     cards = window.__INLINED_CARD__
       ? { [window.__INLINED_AGENT__.name]: window.__INLINED_CARD__ }
       : {};
+    scout = { skills: window.__INLINED_SKILL__ ? [window.__INLINED_SKILL__] : [] };
   } else {
     try {
-      [registry, cards] = await Promise.all([
+      [registry, cards, scout] = await Promise.all([
         fetch(REGISTRY_URL + '?t=' + Date.now()).then(r => r.json()),
         fetch(CARDS_URL + '?t=' + Date.now()).then(r => r.json()),
+        fetch(SCOUT_CATALOG_URL + '?t=' + Date.now()).then(r => r.json()),
       ]);
     } catch (e) {
       root.innerHTML = `<div class="error"><h2>Failed to load registry</h2><div class="error-detail">${esc(e.message)}</div></div>`;
@@ -631,6 +639,7 @@ async function load() {
     return;
   }
   if (!card) card = {};
+  skill = (scout.skills || []).find(item => item.identity === agent.name) || null;
 
   const rarity = card.rarity || 'common';
 
@@ -652,6 +661,8 @@ async function load() {
   const latestSha = agent._latest_commit_sha || '';
   const py_url_main = `${RAW_BASE}/main/${filePath}`;
   const py_url_pinned = latestSha ? `${RAW_BASE}/${latestSha}/${filePath}` : py_url_main;
+  const skill_url = (skill?.files || []).find(file => file.path === 'SKILL.md')?.url || null;
+  const skill_file = `${skill?.skill_name || slug}-SKILL.md`;
 
   const avatar = card.avatar_svg
     ? card.avatar_svg
@@ -744,8 +755,13 @@ async function load() {
               <div class="value hash">${esc(agent._card_sha256)}</div>
             </div>` : ''}
             <div class="row">
-              <div class="label">Pinned raw URL</div>
-              <div class="value"><a href="${py_url_pinned}" target="_blank">raw @ ${shortSha(latestSha)}</a></div>
+              <div class="label">Grail artifact</div>
+              <div class="value">${skill_url ? `<a href="${skill_url}" target="_blank">Toasted SKILL.md</a>` : 'legacy agent only'}</div>
+            </div>
+            ${skill?.rappid ? `<div class="row"><div class="label">RAPPID</div><div class="value hash">${esc(skill.rappid)}</div></div>` : ''}
+            <div class="row">
+              <div class="label">Rollback source</div>
+              <div class="value"><a href="${py_url_pinned}" target="_blank">agent.py @ ${shortSha(latestSha)}</a></div>
             </div>
           </div>
         </div>
@@ -758,7 +774,8 @@ async function load() {
 
         <div class="share-row">
           <a class="share-btn" href="javascript:void(0)" id="share-link">📋 Copy permalink</a>
-          <a class="share-btn" href="${py_url_main}" target="_blank">📄 Raw .py</a>
+          ${skill_url ? `<a class="share-btn" href="${skill_url}" target="_blank">📄 Toasted SKILL.md</a>` : ''}
+          <a class="share-btn" href="${py_url_main}" target="_blank">↩ Rollback .py</a>
           <a class="share-btn" href="https://github.com/kody-w/RAR/blob/main/${filePath}" target="_blank">🔗 GitHub</a>
           ${isInlined
             ? '<span class="share-btn" style="opacity:0.65;cursor:default" title="This file is a self-contained standalone Grail — the agent data is baked in. No network required to render this card.">✓ Standalone copy</span>'
@@ -779,7 +796,7 @@ async function load() {
           <button data-copy="summon-url">copy</button>
         </div>
         <a class="summon-cta" href="${summonUrl(agent.name)}">⚡ Use in vBrainstem →</a>
-        <button class="share-btn" data-share-url="${py_url_pinned}" data-share-file="${esc((filePath.split('/').pop()) || 'agent.py')}" data-share-title="${esc(agent.display_name || slug)}">&#x1F4E4; Share .py</button>
+        <button class="share-btn" data-share-url="${skill_url || py_url_pinned}" data-share-file="${esc(skill_url ? skill_file : ((filePath.split('/').pop()) || 'agent.py'))}" data-share-title="${esc(agent.display_name || slug)}">&#x1F4E4; Share ${skill_url ? 'Grail' : '.py'}</button>
       </div>
     </div>
 
@@ -789,7 +806,7 @@ async function load() {
       <div class="agent-card-wrap" id="fs-wrap"></div>
       <div class="fs-actions">
         <a class="fs-summon-cta" href="${summonUrl(agent.name)}">⚡ Use in vBrainstem</a>
-        <button class="fs-share-cta" data-share-url="${py_url_pinned}" data-share-file="${esc((filePath.split('/').pop()) || 'agent.py')}" data-share-title="${esc(agent.display_name || slug)}">&#x1F4E4; Share</button>
+        <button class="fs-share-cta" data-share-url="${skill_url || py_url_pinned}" data-share-file="${esc(skill_url ? skill_file : ((filePath.split('/').pop()) || 'agent.py'))}" data-share-title="${esc(agent.display_name || slug)}">&#x1F4E4; Share</button>
       </div>
       <div class="fs-tilt-prompt" id="fs-tilt-prompt" style="display:none">Tap to enable motion</div>
     </div>
@@ -807,7 +824,7 @@ async function load() {
       });
     };
   });
-  // Wire share buttons — send the actual agent.py via the native share sheet.
+  // Wire share buttons — Toasted Grail first, rollback agent only if needed.
   document.querySelectorAll('[data-share-url]').forEach(btn => {
     btn.addEventListener('click', () => shareAgentPy(btn.dataset.shareUrl, btn.dataset.shareFile || 'agent.py', btn.dataset.shareTitle || 'RAPP agent', btn));
   });
@@ -845,7 +862,7 @@ async function load() {
 
   // ── Standalone export ────────────────────────────────────────────
   // Fetch our own HTML source, inline the registry entry + card data +
-  // agent.py source as JS literals, trigger a Blob download. The result
+  // Grail record metadata + rollback agent source, trigger a Blob download. The result
   // is a single .html file that renders the same card offline. The
   // recipient just opens it in a browser — no network, no server, no SDK.
   const exportBtn = document.getElementById('export-grail');
@@ -870,6 +887,7 @@ async function load() {
         // JSON-stringify everything (safe inside <script> blocks).
         const sAgent = JSON.stringify(agent);
         const sCard = JSON.stringify(card);
+        const sSkill = JSON.stringify(skill);
         const sPy = pySource !== null ? JSON.stringify(pySource) : 'null';
         const sAt = JSON.stringify(new Date().toISOString());
 
@@ -878,6 +896,7 @@ async function load() {
         html = html
           .replace('window.__INLINED_AGENT__ = null;', `window.__INLINED_AGENT__ = ${sAgent};`)
           .replace('window.__INLINED_CARD__ = null;',  `window.__INLINED_CARD__ = ${sCard};`)
+          .replace('window.__INLINED_SKILL__ = null;', `window.__INLINED_SKILL__ = ${sSkill};`)
           .replace('window.__INLINED_PY__ = null;',    `window.__INLINED_PY__ = ${sPy};`)
           .replace('window.__INLINED_AT__ = null;',    `window.__INLINED_AT__ = ${sAt};`);
 

@@ -817,7 +817,10 @@ function renderEcosystemIndex() {
       <div class="agents-grid">${cards}</div>
     </div>` : '';
 
-  const rappCards = rapps.map(r => `
+  const rappCards = rapps.map(r => {
+    const projected = allAgents.find(a => a.name === r.scout_identity || a.name === r.manifest_name);
+    const grailUrl = projected?._skill_url || null;
+    return `
     <div class="agent-card" style="cursor:default">
       <div class="card-name">${esc(r.name)} ${r.access === 'private' ? '<span class="cat-badge" style="background:rgba(188,140,255,.12);color:#bc8cff;border-color:rgba(188,140,255,.3)">GATED</span>' : `<span class="cat-badge">v${esc(r.version)}</span>`}</div>
       <div class="card-desc">${esc(r.summary)}</div>
@@ -827,11 +830,13 @@ function renderEcosystemIndex() {
           <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc((r.category || 'general').replace(/_/g,' '))}</span>
         </span>
         <span style="display:flex;gap:6px">
-          ${r.singleton_url && r.access !== 'private' ? `<button class="add-cart-btn" onclick="copyFedUrl('${esc(r.singleton_url)}', this)" title="Copy singleton .py URL">copy .py</button>` : ''}
+          ${grailUrl && r.access !== 'private' ? `<button class="add-cart-btn" onclick="copyFedUrl('${esc(grailUrl)}', this)" title="Copy Toasted SKILL.md URL">copy skill</button>` : ''}
+          ${r.singleton_url && r.access !== 'private' ? `<button class="add-cart-btn" onclick="copyFedUrl('${esc(r.singleton_url)}', this)" title="Copy rollback singleton .py URL">rollback .py</button>` : ''}
           <a class="add-cart-btn" style="text-decoration:none" href="${esc(r.store_url)}#${esc(r.id)}" target="_blank" rel="noopener" title="Open in the rapplication store">&#8599;</a>
         </span>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 
   const senseCards = senses.map(s => `
     <div class="agent-card" style="cursor:default">

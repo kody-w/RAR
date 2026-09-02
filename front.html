@@ -517,7 +517,10 @@ function rowHtml(it) {
     acts.push('<a class="act" href="' + esc(it.url) + '" target="_blank" rel="noopener">Open in RAR &#8599;</a>');
   }
   if (it.install) {
-    acts.push('<a class="act" href="' + esc(it.install) + '" target="_blank" rel="noopener">Agent file &#8599;</a>');
+    acts.push('<a class="act" href="' + esc(it.install) + '" target="_blank" rel="noopener">Toasted skill &#8599;</a>');
+  }
+  if (it.backup_install) {
+    acts.push('<a class="act subtle" href="' + esc(it.backup_install) + '" target="_blank" rel="noopener">rollback .py &#8599;</a>');
   }
   const away = sourced ? (it.source.url || it.source.home_url || (!hosted ? it.url : '')) : '';
   if (away) {
