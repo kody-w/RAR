@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-02T09:42:32Z",
+ "generated_at": "2026-09-03T09:55:26Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 112,
-  "size_kb": 50201,
+  "size_kb": 73616,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-02T08:18:43Z",
+  "pushed_at": "2026-09-03T08:28:04Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -35,8 +35,8 @@
   "swarms": 2,
   "publishers": 11,
   "categories": 13,
-  "total_lines": 409134,
-  "total_kb": 21314.5,
+  "total_lines": 409636,
+  "total_kb": 21331.5,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -244,7 +244,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1954179,
+  "rank": 1961380,
   "agent_hits": 12,
   "files": [
    {
@@ -413,8 +413,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 7028,
-    "size_kb": 245.5,
+    "lines": 7530,
+    "size_kb": 262.5,
     "added_at": "2026-08-11T17:28:15Z",
     "file": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
     "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft."
@@ -940,7 +940,7 @@
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 64242,
+    "lines": 64744,
     "rating": 5.0
    },
    {
