@@ -4930,7 +4930,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#stoic-negotiator",
       "source_signal": {
         "downloads": 0,
-        "rating": 2
+        "rating": 1
       }
     },
     {
@@ -5128,7 +5128,8 @@
       "has_bundle": false,
       "url": "https://microsoft.github.io/cat-agent-skills/#what-to-use-when",
       "source_signal": {
-        "downloads": 0
+        "downloads": 0,
+        "rating": 1
       }
     },
     {
