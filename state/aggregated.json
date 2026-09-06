@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 96,
+      "item_count": 97,
       "source_downloads": 1258
     },
     {
@@ -2979,6 +2979,35 @@
       "created_at": "2026-07-17T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#brand-voice-pass",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/breathing_room",
+      "source_id": "cat-agent-skills",
+      "source_slug": "breathing-room",
+      "name": "Breathing Room",
+      "description": "Shows where your own week has room to breathe and where it does not, from your calendar and what you send: meeting density, back-to-back runs, deep-work blocks, evenings and weekends, and the load already building three to ten days out. When a day or a coming week is overloaded it points to the most movable meetings, and it recognises time off rather than reading it as a quiet week. Reports on yo\u2026",
+      "kind": "skill",
+      "tags": [
+        "calendar",
+        "workload",
+        "focus",
+        "work-life-balance",
+        "meetings",
+        "deep-work",
+        "self-service"
+      ],
+      "platforms": [
+        "Scout"
+      ],
+      "author": "Allan De Castro",
+      "author_github": "allandecastro",
+      "version": "1.1.1",
+      "created_at": "2026-07-28T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#breathing-room",
       "source_signal": {
         "downloads": 0
       }
@@ -99237,7 +99266,7 @@
   ],
   "totals": {
     "sources": 3,
-    "items": 1649,
+    "items": 1650,
     "source_downloads": 1258
   }
 }
