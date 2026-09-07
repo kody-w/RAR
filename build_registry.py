@@ -1078,6 +1078,9 @@ def build_registry():
                 "quality_tier": manifest.get("quality_tier", "community"),
                 "requires_env": manifest.get("requires_env", []),
                 "dependencies": manifest.get("dependencies", []),
+                # rhyme declarations (scripts/check_near_duplicates.py); carried only when present
+                **({"supersedes": manifest["supersedes"]} if manifest.get("supersedes") else {}),
+                **({"distinct_from": manifest["distinct_from"]} if manifest.get("distinct_from") else {}),
                 "_file": registry_path(py_path),
                 "_install_filename": install_filename(name),
                 "_sha256": sha256,

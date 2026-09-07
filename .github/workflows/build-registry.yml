@@ -52,6 +52,12 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: python scripts/check_notarized_changes.py --base "$BASE_SHA"
 
+      - name: Rhyme check changed agents (near-duplicate gate)
+        if: github.event_name == 'push'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python scripts/check_near_duplicates.py --base "$BASE_SHA"
+
       - name: Apply pinned maintainer migrations
         id: legacy
         run: |

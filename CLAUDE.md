@@ -40,7 +40,9 @@ Path convention: `agents/@publisher/agent_slug_agent.py` (lowercase snake_case)
 
 Required fields: `schema`, `name`, `version`, `display_name`, `description`, `author`, `tags`, `category`.
 
-Optional: `quality_tier` (default `community`), `requires_env` (env var names), `dependencies` (list of `@publisher/slug`).
+Optional: `quality_tier` (default `community`), `requires_env` (env var names), `dependencies` (list of `@publisher/slug`), `supersedes` (list of `@publisher/slug` this agent replaces), `distinct_from` (`{"@publisher/slug": "one-line reason"}` for a deliberate lookalike).
+
+**Rhyme gate.** CI runs `scripts/check_near_duplicates.py --base <sha>` on every changed agent: if its slug or description/tags overlap strongly with an existing agent, the push fails unless the manifest declares `supersedes` or `distinct_from` for that agent (agents that list each other in `dependencies` or share a stack directory are exempt). `python scripts/check_near_duplicates.py --report` prints the rhyme clusters the registry already holds.
 
 ```python
 __manifest__ = {
