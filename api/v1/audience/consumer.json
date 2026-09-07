@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-09-02T22:47:11Z",
-  "count": 1334,
+  "generated": "2026-09-07T23:37:34Z",
+  "count": 1335,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -46655,6 +46655,45 @@
         "lines": 225,
         "size_kb": 8.2,
         "added_at": "2026-08-29T00:44:02Z"
+      }
+    },
+    {
+      "id": "kody-w__host_compat_agent",
+      "name": "@kody-w/host_compat_agent",
+      "display_name": "Host Compat",
+      "description": "Makes a Brainstem speak every agent-host dialect from one file: Claude Code, GitHub Copilot CLI and open Agent Skills — skills, plugins, slash commands/prompts, subagent personas, hooks, MCP servers, instruction files — plus cross-host search of your local Claude Code and Copilot CLI session transcripts.",
+      "version": "1.0.1",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "devtools",
+      "tags": [
+        "skills",
+        "plugins",
+        "claude-code",
+        "copilot-cli",
+        "agent-skills",
+        "mcp",
+        "hooks",
+        "transcripts",
+        "interop",
+        "compat"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/host_compat_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/host_compat_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/host_compat_agent.py",
+        "sha256": "a85517d560dcab529e0c4fc1dce80472c27ca85e6620e6202aee695c2f4dfa79"
+      },
+      "stats": {
+        "lines": 1617,
+        "size_kb": 80.7,
+        "added_at": "2026-09-07T19:31:02-04:00"
       }
     },
     {

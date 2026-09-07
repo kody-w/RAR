@@ -6958,7 +6958,7 @@
   },
   "agents/@kody-w/copilot_studio_parity_deploy_agent.py": {
    "added": "2026-08-11T17:28:15Z",
-   "updated": "2026-08-11T18:37:58Z"
+   "updated": "2026-09-02T22:44:53Z"
   },
   "agents/@kody-w/copilot_studio_probe_agent.py": {
    "added": "2026-07-07T00:32:03Z",
@@ -7039,6 +7039,10 @@
   "agents/@kody-w/hologram_dogg_agent.py": {
    "added": "2026-08-29T00:44:02Z",
    "updated": "2026-08-29T00:44:02Z"
+  },
+  "agents/@kody-w/host_compat_agent.py": {
+   "added": "2026-09-07T19:31:02-04:00",
+   "updated": "2026-09-07T19:33:58-04:00"
   },
   "agents/@kody-w/install_rappter_distro_agent.py": {
    "added": "2026-05-24T21:45:25-04:00",
@@ -7140,6 +7144,10 @@
    "added": "2026-05-24T21:45:25-04:00",
    "updated": "2026-07-21T19:28:49-04:00"
   },
+  "agents/@kody-w/rar_installer_troubleshooter_agent.py": {
+   "added": "2026-09-01T04:22:15Z",
+   "updated": "2026-09-01T04:22:15Z"
+  },
   "agents/@kody-w/rar_remote_agent.py": {
    "added": "2026-05-24T21:45:25-04:00",
    "updated": "2026-08-18T18:43:26-04:00"
@@ -7178,7 +7186,7 @@
   },
   "agents/@kody-w/workiq_agent.py": {
    "added": "2026-05-24T21:45:25-04:00",
-   "updated": "2026-07-21T19:28:49-04:00"
+   "updated": "2026-09-01T04:37:34Z"
   },
   "agents/@kody-w/wp_publish.py": {
    "added": "2026-08-03T09:47:21-04:00",

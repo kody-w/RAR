@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-09-02T22:47:11Z",
+  "generated": "2026-09-07T23:37:34Z",
   "categories": [
     {
       "name": "integrations",
@@ -20,7 +20,7 @@
     },
     {
       "name": "devtools",
-      "count": 26
+      "count": 27
     },
     {
       "name": "pipeline",
@@ -66,7 +66,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 67
+      "count": 68
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
   "quality_tiers": [
     {
       "name": "community",
-      "count": 1273
+      "count": 1274
     },
     {
       "name": "verified",
@@ -581,6 +581,10 @@
       "count": 4
     },
     {
+      "name": "interop",
+      "count": 4
+    },
+    {
       "name": "publish",
       "count": 4
     },
@@ -658,6 +662,10 @@
     },
     {
       "name": "social_media",
+      "count": 3
+    },
+    {
+      "name": "mcp",
       "count": 3
     },
     {
@@ -742,10 +750,6 @@
     },
     {
       "name": "rapp-1",
-      "count": 3
-    },
-    {
-      "name": "interop",
       "count": 3
     },
     {
@@ -893,10 +897,6 @@
       "count": 2
     },
     {
-      "name": "mcp",
-      "count": 2
-    },
-    {
       "name": "azure",
       "count": 2
     },
@@ -922,6 +922,10 @@
     },
     {
       "name": "power_automate",
+      "count": 2
+    },
+    {
+      "name": "skills",
       "count": 2
     },
     {
@@ -1078,6 +1082,10 @@
     },
     {
       "name": "summon",
+      "count": 2
+    },
+    {
+      "name": "claude-code",
       "count": 2
     },
     {
@@ -1314,14 +1322,6 @@
     },
     {
       "name": "project_planning",
-      "count": 1
-    },
-    {
-      "name": "skill_generation",
-      "count": 1
-    },
-    {
-      "name": "adventure",
       "count": 1
     }
   ]

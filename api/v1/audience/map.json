@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-09-02T22:47:11Z",
+  "generated": "2026-09-07T23:37:34Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 363,
     "consumer_only": 3,
-    "both": 1331,
-    "in_business_mode": 1694,
-    "in_consumer_mode": 1334
+    "both": 1332,
+    "in_business_mode": 1695,
+    "in_consumer_mode": 1335
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -1644,6 +1644,7 @@
     "@kody-w/github_agent_library_agent": "x",
     "@kody-w/hello_world_agent": "x",
     "@kody-w/hologram_dogg": "x",
+    "@kody-w/host_compat_agent": "x",
     "@kody-w/install_rappter_distro_agent": "x",
     "@kody-w/kody2day_agent": "x",
     "@kody-w/kody2day_studio_agent": "x",
