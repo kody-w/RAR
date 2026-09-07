@@ -21,6 +21,7 @@ on:
       - 'build_registry.py'
       - 'scripts/apply_maintainer_migrations.py'
       - 'scripts/mint_maintainer_receipts.py'
+      - 'scripts/check_near_duplicates.py'
       - 'rar.config.json'
       - 'marketplaces.json'
       - '.github/workflows/build-registry.yml'
