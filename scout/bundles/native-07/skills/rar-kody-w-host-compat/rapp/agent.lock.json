@@ -1,0 +1,148 @@
+{
+  "agent": "@kody-w/host_compat_agent",
+  "agent_file": "host_compat_agent.py",
+  "agent_sha256": "2d48518a96d17ecdf8f8379fc184647554304aeff533b39166b3387d8afcb889",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "HostCompatAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "devtools",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Makes a Brainstem speak every agent-host dialect from one file: Claude Code, GitHub Copilot CLI and open Agent Skills — skills, plugins, slash commands/prompts, subagent personas, hooks, MCP servers, instruction files — plus cross-host search of your local Claude Code and Copilot CLI session transcripts.",
+    "display_name": "Host Compat",
+    "name": "@kody-w/host_compat_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "skills",
+      "plugins",
+      "claude-code",
+      "copilot-cli",
+      "agent-skills",
+      "mcp",
+      "hooks",
+      "transcripts",
+      "interop",
+      "compat"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "HostCompat",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do.",
+        "enum": [
+          "list",
+          "load",
+          "read",
+          "run",
+          "hook",
+          "mcp_tools",
+          "mcp_call",
+          "install",
+          "uninstall",
+          "promote",
+          "export",
+          "instructions",
+          "transcripts",
+          "transcript",
+          "index",
+          "doctor",
+          "refresh"
+        ],
+        "type": "string"
+      },
+      "args": {
+        "description": "For load ($ARGUMENTS), run (script args), or hook (matcher / tool name).",
+        "type": "string"
+      },
+      "arguments": {
+        "description": "For mcp_call: the tool's arguments object.",
+        "type": "object"
+      },
+      "cwd": {
+        "description": "For transcripts: only sessions whose working directory contains this text.",
+        "type": "string"
+      },
+      "days": {
+        "description": "For transcripts/index: how many days back to index (default 30).",
+        "type": "integer"
+      },
+      "host": {
+        "description": "Restrict to one host's catalog or transcripts (default all).",
+        "enum": [
+          "all",
+          "claude-code",
+          "copilot-cli",
+          "agent-skills"
+        ],
+        "type": "string"
+      },
+      "kind": {
+        "description": "For list: which catalog to show (default all).",
+        "enum": [
+          "all",
+          "skills",
+          "plugins",
+          "commands",
+          "agents",
+          "hooks",
+          "mcp",
+          "instructions"
+        ],
+        "type": "string"
+      },
+      "limit": {
+        "description": "For transcripts/transcript: max results (default 20 / 200).",
+        "type": "integer"
+      },
+      "name": {
+        "description": "Skill / command / persona / plugin / MCP server / agent / session id (plugin-qualified 'plugin:name' allowed).",
+        "type": "string"
+      },
+      "path": {
+        "description": "For read/run: file path relative to the skill or plugin directory. For export: output directory.",
+        "type": "string"
+      },
+      "query": {
+        "description": "For list: substring filter. For transcripts: the search terms (all must match).",
+        "type": "string"
+      },
+      "role": {
+        "description": "For transcripts: only messages from this role.",
+        "enum": [
+          "user",
+          "assistant"
+        ],
+        "type": "string"
+      },
+      "source": {
+        "description": "For install: local directory path or git URL of a plugin (or a bare skill folder).",
+        "type": "string"
+      },
+      "stdin": {
+        "description": "For run/hook: text (usually JSON) sent on stdin.",
+        "type": "string"
+      },
+      "timeout": {
+        "description": "Seconds to allow a script/hook/MCP call or an index pass (default 120).",
+        "type": "integer"
+      },
+      "tool": {
+        "description": "For mcp_call: the MCP tool name.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}
