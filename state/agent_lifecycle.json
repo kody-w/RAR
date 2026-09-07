@@ -19076,14 +19076,14 @@
     },
     "@kody-w/host_compat_agent": {
       "canonical_path": "agents/@kody-w/host_compat_agent.py",
-      "latest_receipt": "rar_cb6838b9f6f04c819df2290fc423e3efd7ba3ec3dce9524caece0866054a9b87",
+      "latest_receipt": "rar_7d93c8d8384203ae071b7aecfa2559f9f1d90b7e8f8d0ee24062f14cec5e843e",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "community",
-      "sha256": "2d48518a96d17ecdf8f8379fc184647554304aeff533b39166b3387d8afcb889",
+      "sha256": "a85517d560dcab529e0c4fc1dce80472c27ca85e6620e6202aee695c2f4dfa79",
       "status": "active",
-      "updated_at": "2026-09-07T23:29:37.751565+00:00",
-      "version": "1.0.0"
+      "updated_at": "2026-09-07T23:32:30.351133+00:00",
+      "version": "1.0.1"
     },
     "@kody-w/install_rappter_distro_agent": {
       "canonical_path": "agents/@kody-w/install_rappter_distro_agent.py",
@@ -20088,5 +20088,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-09-07T23:29:37.751565+00:00"
+  "updated_at": "2026-09-07T23:32:30.351133+00:00"
 }

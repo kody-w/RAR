@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-09-07"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/host_compat_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "a85517d560dcab529e0c4fc1dce80472c27ca85e6620e6202aee695c2f4dfa79"
+ },
+ "canonical_path": "agents/@kody-w/host_compat_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-09-07T23:32:30.351133+00:00",
+ "id": "rar_7d93c8d8384203ae071b7aecfa2559f9f1d90b7e8f8d0ee24062f14cec5e843e",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "2d48518a96d17ecdf8f8379fc184647554304aeff533b39166b3387d8afcb889",
+  "receipt": "rar_cb6838b9f6f04c819df2290fc423e3efd7ba3ec3dce9524caece0866054a9b87",
+  "version": "1.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_7d93c8d8384203ae071b7aec",
+ "revision_id": "7d93c8d8384203ae071b7aecfa2559f9f1d90b7e8f8d0ee24062f14cec5e843e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "host_compat_agent v1.0.1: BasicAgent(name, metadata) init for CommunityRAPP compatibility"
+ },
+ "version": "1.0.1"
+}
