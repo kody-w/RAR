@@ -185,7 +185,7 @@ def changed_agent_files(repo_root: Path, base: str) -> list[Path]:
 def gate(repo_root: Path, base: str, registry: list[dict]) -> tuple[int, dict]:
     catalog = [profile(e) for e in registry]
     by_name = {c["name"]: c for c in catalog}
-    findings, cleared, checked = [], [], []
+    findings, cleared, checked, warnings = [], [], [], []
     for py_path in changed_agent_files(repo_root, base):
         manifest = extract_manifest(py_path)
         if not manifest or not manifest.get("name"):
@@ -204,9 +204,14 @@ def gate(repo_root: Path, base: str, registry: list[dict]) -> tuple[int, dict]:
             why = declared(p, q)
             if why:
                 cleared.append({**r, "declared": why})
+            elif p["aggregated_ns"]:
+                # generated from an upstream catalog: nobody can hand-declare on it, so
+                # a cross-library rhyme is reported (for --report and the maintainers)
+                # rather than blocking the mirror from tracking its source.
+                warnings.append({"agent": p["name"], "rhymes_with": q["name"], **r})
             else:
                 findings.append({"agent": p["name"], "rhymes_with": q["name"], **r})
-    return (1 if findings else 0), {"checked": checked, "findings": findings, "cleared": cleared}
+    return (1 if findings else 0), {"checked": checked, "findings": findings, "cleared": cleared, "warnings": warnings}
 
 
 def report(registry: list[dict]) -> dict:
@@ -280,6 +285,8 @@ def main() -> int:
         return 0
     for c in doc["cleared"]:
         print(f"ok  {c['a']} ~ {c['b']} ({c['declared']})")
+    for w in doc.get("warnings", []):
+        print(f"warn {w['agent']} rhymes with {w['rhymes_with']} (aggregated mirror; cross-library — review upstream)")
     for f in doc["findings"]:
         if "error" in f:
             print(f"ERROR {f['agent']}: {f['error']}")
