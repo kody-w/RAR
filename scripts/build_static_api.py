@@ -352,6 +352,16 @@ USE_CASES = [
      "meeting notes summary transcript action item follow up agenda"),
     ("knowledge-search", "Search internal knowledge",
      "knowledge search retrieval index question answer documentation wiki"),
+    # Added to close a gap found while auditing search diversity on the live
+    # registry: these D365-style value-chain stages had real tagged agents
+    # (tags/*_to_*, e.g. design_to_retire, project_to_profit,
+    # administer_to_operate) but no curated use case surfacing them by name.
+    ("asset-lifecycle", "Manage assets from design through retirement",
+     "design retire asset lifecycle maintenance depreciation disposal equipment"),
+    ("project-profitability", "Track project cost and profitability",
+     "project profit cost budget margin billing utilization resource"),
+    ("workplace-operations", "Administer and operate workplace services",
+     "administer operate facility workplace service request ticket asset"),
 ]
 
 
@@ -605,6 +615,19 @@ def main() -> int:
         "self_url": f"{RAW_BASE}/api/v1/audience/map.json",
         "map": {
             r["name"]: {"business": "b", "consumer": "c", "both": "x"}[r["audience"]]
+            for r in records
+        },
+        # Additive, never consulted for inclusion/exclusion (that stays a soft
+        # filter on the extremes per Article's segmentation philosophy — see
+        # tests/test_audience_segmentation.py::test_both_is_the_dominant_verdict).
+        # A client that already shows every "both" agent can use this continuous
+        # signal to rank the strongest business-language matches first instead of
+        # leaving them interleaved alphabetically with the safe-default filler.
+        "scores": {
+            r["name"]: {
+                "b": audience_detail[r["name"]]["business"],
+                "c": audience_detail[r["name"]]["consumer"],
+            }
             for r in records
         },
     }

@@ -1,7 +1,7 @@
 {
   "schema": "rar-match/1.0",
   "description": "Precomputed use-case matching. A host application asks the user to describe a use case, tokenizes it, sums the term weights from `index`, and returns the top agents — entirely client-side, with no backend and no GitHub access.",
-  "generated": "2026-09-08T00:00:05Z",
+  "generated": "2026-09-08T00:38:57Z",
   "how_to_query": {
     "canonical": "Look up a use_cases[].id for a curated, ranked list.",
     "free_text": "Lowercase the query, split on non-alphanumerics, drop tokens of 2 characters or fewer, then for each token read index[token] (entries are 'agent_id:weight'). Sum weights per agent_id and sort descending."
@@ -1775,6 +1775,279 @@
           "display_name": "Spend More Time With Friends & Family",
           "audience": "business",
           "score": 53.03
+        }
+      ]
+    },
+    {
+      "id": "asset-lifecycle",
+      "label": "Manage assets from design through retirement",
+      "query": "design retire asset lifecycle maintenance depreciation disposal equipment",
+      "matches": [
+        {
+          "id": "kody-w__predictive_asset_maintenance_intelligence",
+          "name": "@kody-w/predictive_asset_maintenance_intelligence",
+          "display_name": "Predictive Asset Maintenance Intelligence",
+          "audience": "business",
+          "score": 117.84
+        },
+        {
+          "id": "cowork-cookbook__depreciation_forecast",
+          "name": "@cowork-cookbook/depreciation_forecast",
+          "display_name": "Depreciation Forecast (12 months)",
+          "audience": "business",
+          "score": 84.86
+        },
+        {
+          "id": "cowork-cookbook__adaptive_card_define_depreciation_and_amortization_policies",
+          "name": "@cowork-cookbook/adaptive_card_define_depreciation_and_amortization_policies",
+          "display_name": "Define depreciation and amortization policies Status Adaptive Card",
+          "audience": "both",
+          "score": 77.71
+        },
+        {
+          "id": "cowork-cookbook__dashboard_define_depreciation_and_amortization_policies",
+          "name": "@cowork-cookbook/dashboard_define_depreciation_and_amortization_policies",
+          "display_name": "Define depreciation and amortization policies Interactive HTML Dashboard",
+          "audience": "both",
+          "score": 77.71
+        },
+        {
+          "id": "cowork-cookbook__configure_budget_asset_maintenance",
+          "name": "@cowork-cookbook/configure_budget_asset_maintenance",
+          "display_name": "Budget asset maintenance Configuration Bulk Setup",
+          "audience": "both",
+          "score": 71.42
+        },
+        {
+          "id": "cowork-cookbook__report_budget_asset_maintenance",
+          "name": "@cowork-cookbook/report_budget_asset_maintenance",
+          "display_name": "Budget asset maintenance Summary Report",
+          "audience": "both",
+          "score": 71.42
+        },
+        {
+          "id": "cowork-cookbook__configure_implement_application_lifecycle_management_alm_strategies",
+          "name": "@cowork-cookbook/configure_implement_application_lifecycle_management_alm_strategies",
+          "display_name": "Implement application lifecycle management (ALM) strategies Configuration Bulk Setup",
+          "audience": "both",
+          "score": 71.29
+        },
+        {
+          "id": "cowork-cookbook__report_implement_application_lifecycle_management_alm_strategies",
+          "name": "@cowork-cookbook/report_implement_application_lifecycle_management_alm_strategies",
+          "display_name": "Implement application lifecycle management (ALM) strategies Summary Report",
+          "audience": "both",
+          "score": 71.29
+        },
+        {
+          "id": "rapp__twin_agent",
+          "name": "@rapp/twin_agent",
+          "display_name": "Twin",
+          "audience": "both",
+          "score": 71.29
+        },
+        {
+          "id": "cowork-cookbook__d365_design_to_retire",
+          "name": "@cowork-cookbook/d365_design_to_retire",
+          "display_name": "D365 Design to retire Expert",
+          "audience": "both",
+          "score": 67.27
+        },
+        {
+          "id": "rapp__egg_hatcher",
+          "name": "@rapp/egg_hatcher",
+          "display_name": "EggHatcher",
+          "audience": "both",
+          "score": 53.47
+        },
+        {
+          "id": "cowork-cookbook__adaptive_card_design_bills_of_materials",
+          "name": "@cowork-cookbook/adaptive_card_design_bills_of_materials",
+          "display_name": "Design bills of materials Status Adaptive Card",
+          "audience": "both",
+          "score": 51.37
+        }
+      ]
+    },
+    {
+      "id": "project-profitability",
+      "label": "Track project cost and profitability",
+      "query": "project profit cost budget margin billing utilization resource",
+      "matches": [
+        {
+          "id": "cowork-cookbook__project_margin_health",
+          "name": "@cowork-cookbook/project_margin_health",
+          "display_name": "Project Margin Health Report",
+          "audience": "both",
+          "score": 204.81
+        },
+        {
+          "id": "cowork-cookbook__field_service_daily_utilization",
+          "name": "@cowork-cookbook/field_service_daily_utilization",
+          "display_name": "Field Service Resource Utilization Daily Email",
+          "audience": "both",
+          "score": 160.79
+        },
+        {
+          "id": "cowork-cookbook__adaptive_card_manage_project_budget",
+          "name": "@cowork-cookbook/adaptive_card_manage_project_budget",
+          "display_name": "Manage project budget Status Adaptive Card",
+          "audience": "both",
+          "score": 101.64
+        },
+        {
+          "id": "cowork-cookbook__demo_data_manage_project_budget",
+          "name": "@cowork-cookbook/demo_data_manage_project_budget",
+          "display_name": "Manage project budget Demo Data Generator",
+          "audience": "both",
+          "score": 101.64
+        },
+        {
+          "id": "cowork-cookbook__planned_order_summary",
+          "name": "@cowork-cookbook/planned_order_summary",
+          "display_name": "Planned Order Summary by Resource",
+          "audience": "both",
+          "score": 99.16
+        },
+        {
+          "id": "cowork-cookbook__adaptive_card_analyze_asset_utilization",
+          "name": "@cowork-cookbook/adaptive_card_analyze_asset_utilization",
+          "display_name": "Analyze asset utilization Status Adaptive Card",
+          "audience": "both",
+          "score": 86.41
+        },
+        {
+          "id": "cowork-cookbook__demo_data_analyze_asset_utilization",
+          "name": "@cowork-cookbook/demo_data_analyze_asset_utilization",
+          "display_name": "Analyze asset utilization Demo Data Generator",
+          "audience": "both",
+          "score": 86.41
+        },
+        {
+          "id": "cowork-cookbook__d365_project_to_profit",
+          "name": "@cowork-cookbook/d365_project_to_profit",
+          "display_name": "D365 Project to profit Expert",
+          "audience": "both",
+          "score": 76.25
+        },
+        {
+          "id": "cowork-cookbook__production_variance_report",
+          "name": "@cowork-cookbook/production_variance_report",
+          "display_name": "Production Cost Variance Report",
+          "audience": "both",
+          "score": 67.12
+        },
+        {
+          "id": "cowork-cookbook__d365_project_to_profit_manage_project_delivery",
+          "name": "@cowork-cookbook/d365_project_to_profit_manage_project_delivery",
+          "display_name": "D365 Manage project delivery Expert",
+          "audience": "both",
+          "score": 64.48
+        },
+        {
+          "id": "cowork-cookbook__adaptive_card_record_cost_of_quality",
+          "name": "@cowork-cookbook/adaptive_card_record_cost_of_quality",
+          "display_name": "Record cost of quality Status Adaptive Card",
+          "audience": "both",
+          "score": 53.7
+        },
+        {
+          "id": "cowork-cookbook__audit_record_cost_accounting_transactions",
+          "name": "@cowork-cookbook/audit_record_cost_accounting_transactions",
+          "display_name": "Record cost accounting transactions Completeness Audit",
+          "audience": "business",
+          "score": 53.7
+        }
+      ]
+    },
+    {
+      "id": "workplace-operations",
+      "label": "Administer and operate workplace services",
+      "query": "administer operate facility workplace service request ticket asset",
+      "matches": [
+        {
+          "id": "cowork-cookbook__bulk_update_identify_workplace_hazards",
+          "name": "@cowork-cookbook/bulk_update_identify_workplace_hazards",
+          "display_name": "Identify workplace hazards Bulk Field Update",
+          "audience": "both",
+          "score": 77.71
+        },
+        {
+          "id": "cowork-cookbook__configure_identify_workplace_hazards",
+          "name": "@cowork-cookbook/configure_identify_workplace_hazards",
+          "display_name": "Identify workplace hazards Configuration Bulk Setup",
+          "audience": "both",
+          "score": 77.71
+        },
+        {
+          "id": "cowork-cookbook__report_audit_workplace_for_safety",
+          "name": "@cowork-cookbook/report_audit_workplace_for_safety",
+          "display_name": "Audit workplace for safety Summary Report",
+          "audience": "business",
+          "score": 77.71
+        },
+        {
+          "id": "cowork-cookbook__teams_update_audit_workplace_for_safety",
+          "name": "@cowork-cookbook/teams_update_audit_workplace_for_safety",
+          "display_name": "Audit workplace for safety Teams Channel Update",
+          "audience": "business",
+          "score": 77.71
+        },
+        {
+          "id": "cowork-cookbook__bulk_update_request_time_off",
+          "name": "@cowork-cookbook/bulk_update_request_time_off",
+          "display_name": "Request time off Bulk Field Update",
+          "audience": "both",
+          "score": 71.29
+        },
+        {
+          "id": "cowork-cookbook__configure_request_travel",
+          "name": "@cowork-cookbook/configure_request_travel",
+          "display_name": "Request travel Configuration Bulk Setup",
+          "audience": "both",
+          "score": 71.29
+        },
+        {
+          "id": "cowork-cookbook__report_request_travel",
+          "name": "@cowork-cookbook/report_request_travel",
+          "display_name": "Request travel Summary Report",
+          "audience": "both",
+          "score": 71.29
+        },
+        {
+          "id": "cowork-cookbook__scheduled_brief_request_time_off",
+          "name": "@cowork-cookbook/scheduled_brief_request_time_off",
+          "display_name": "Request time off Scheduled Email Brief",
+          "audience": "both",
+          "score": 71.29
+        },
+        {
+          "id": "rapp__drift_watcher",
+          "name": "@rapp/drift_watcher",
+          "display_name": "DriftWatcherAgent",
+          "audience": "both",
+          "score": 71.29
+        },
+        {
+          "id": "kody-w__predictive_asset_maintenance_intelligence",
+          "name": "@kody-w/predictive_asset_maintenance_intelligence",
+          "display_name": "Predictive Asset Maintenance Intelligence",
+          "audience": "business",
+          "score": 58.68
+        },
+        {
+          "id": "cowork-cookbook__d365_administer_to_operate",
+          "name": "@cowork-cookbook/d365_administer_to_operate",
+          "display_name": "D365 Administer to operate Expert",
+          "audience": "both",
+          "score": 49.17
+        },
+        {
+          "id": "cowork-cookbook__bulk_update_update_asset_register",
+          "name": "@cowork-cookbook/bulk_update_update_asset_register",
+          "display_name": "Update asset register Bulk Field Update",
+          "audience": "both",
+          "score": 44.39
         }
       ]
     }

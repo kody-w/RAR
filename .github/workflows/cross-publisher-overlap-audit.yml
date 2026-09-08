@@ -1,0 +1,73 @@
+name: Cross-Publisher Overlap Audit
+
+# A second opinion alongside the CI rhyme gate (check_near_duplicates.py),
+# focused on the highest-signal case that gate doesn't specially rank: the
+# same capability shipped twice under two different publisher namespaces.
+# Report-only, on a schedule — never gates a PR, never fails a build, never
+# merges/deprecates/edits anything. See scripts/check_cross_publisher_overlap.py.
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'  # Mondays, 12:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  overlap-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run cross-publisher overlap audit
+        id: audit
+        run: |
+          python scripts/check_cross_publisher_overlap.py --json > /tmp/overlap_report.json
+          python scripts/check_cross_publisher_overlap.py > /tmp/overlap_report.txt
+          echo "count=$(python3 -c "import json; print(json.load(open('/tmp/overlap_report.json'))['overlap_found'])")" >> "$GITHUB_OUTPUT"
+
+      - name: Open or update tracking issue
+        if: steps.audit.outputs.count != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('/tmp/overlap_report.txt', 'utf8');
+            const title = 'Cross-publisher overlap audit — weekly report';
+
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'overlap-audit,automated',
+            });
+            const found = existing.find(i => i.title === title);
+
+            if (found) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: found.number,
+                body,
+              });
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: found.number,
+                body: `Refreshed ${new Date().toISOString().split('T')[0]}. Nothing was changed automatically — see CONSTITUTION.md Article XXIII.`,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['overlap-audit', 'automated'],
+              });
+            }
