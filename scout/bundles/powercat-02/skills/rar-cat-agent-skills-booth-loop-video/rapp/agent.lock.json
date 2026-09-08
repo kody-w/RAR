@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/booth_loop_video",
   "agent_file": "booth_loop_video_agent.py",
-  "agent_sha256": "a57ed23652a00cd4a470cd1e4b9ed2235169a024082d805be21ebc268a01cc6c",
+  "agent_sha256": "e7d0efd552cb1b7678b8324be22afc0e9e6ebee21df4fef2a23393d575f5b113",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BoothLoopVideo",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "design",
       "ffmpeg"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "BoothLoopVideo",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

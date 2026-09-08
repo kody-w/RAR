@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_analyze_fixed_assets",
   "name": "Analyze fixed assets Summary Report",
   "rar_name": "@cowork-cookbook/report_analyze_fixed_assets",
-  "rappid": "rappid:@cowork-cookbook/report_analyze_fixed_assets:3dfec66c2ba7328f19fc4be3c57c7e163de780c4916fb1202504f7a9610b50ce",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_analyze_fixed_assets:850ce73e28e0777ba5b4d80aa01430b7b52c7b57ea1c3ab6e434137e05a92b48",
+  "_migrated_from": "rappid:@cowork-cookbook/report_analyze_fixed_assets:3dfec66c2ba7328f19fc4be3c57c7e163de780c4916fb1202504f7a9610b50ce",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_analyze_fixed_assets:3dfec66c2ba7328f19fc4be3c57c7e163de780c4916fb1202504f7a9610b50ce"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of analyze fixed assets activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only fixed assets summary report from Dynamics 365 F&SCM (legal entity USMF) for the most recent posted period, and outputs an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "bc75f05c1e3bee49bff1c69115ac7129d68bee13489772b670479ef6b23e5698",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "4e187bbb3aa1be2b403abc32daa421a069b974e0662e9805084a3704d84f580c",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

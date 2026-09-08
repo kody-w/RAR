@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/customer_relationship_health_check",
   "agent_file": "customer_relationship_health_check_agent.py",
-  "agent_sha256": "8b42b6eb45afa21932d15734e422dd0316e3e50f7dc2fb2b525541a4c7acdabb",
+  "agent_sha256": "fa913eb21736991f61f215ca478c96d600ae0b1c7f95c516d2854600ca28d418",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CustomerRelationshipHealthCheck",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Scores the accounts you own for relationship health using contact coverage, engagement recency, and open-pipeline signals.",
+    "description": "Scores the Dynamics 365 Sales accounts you own for relationship health (contact coverage, engagement recency, open pipeline, win/loss history) and returns an account-health.xlsx workbook with Summary, Detail, and Single-",
     "display_name": "Customer Relationship Health Check",
     "industry_context": {
       "deprecated": false,
@@ -59,9 +59,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "ec768a5a495ba82f",
+      "content_digest": "04732e773c708440",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -85,28 +85,25 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "CustomerRelationshipHealthCheck",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
         "type": "string"
       }
     },
@@ -115,5 +112,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/enterprise_agent_design_authority",
   "agent_file": "enterprise_agent_design_authority_agent.py",
-  "agent_sha256": "1b8d67a3b9d2dab18a77b43f93af6285ad595ac5b44c49ff0568605b8a596f6f",
+  "agent_sha256": "6332036335d5ea258d4f3f653326bece852ce05b4ac1cd5e7f10b442b0f8c49b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EnterpriseAgentDesignAuthority",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "design_review",
       "copilot_studio"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "EnterpriseAgentDesignAuthority",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

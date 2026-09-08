@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_manage_data_security",
   "name": "Manage data security Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_manage_data_security",
-  "rappid": "rappid:@cowork-cookbook/teams_update_manage_data_security:416f99fa7cb8505617d210f46fd2009be8628752809b7d1c548c0af2113bfedd",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_manage_data_security:33d39c09e4d6017ca64ee816b31d1516e6bdca21186301568dcb61dbe45927fc",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_manage_data_security:416f99fa7cb8505617d210f46fd2009be8628752809b7d1c548c0af2113bfedd",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_manage_data_security:416f99fa7cb8505617d210f46fd2009be8628752809b7d1c548c0af2113bfedd"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on manage data security status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes data security status from Dynamics 365 F&SCM for a given legal entity and saves two artifacts: a markdown Teams channel post and an Adaptive Card JSON with KPIs and quick-action buttons; nothing is posted.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "e06fb55f5be5f8488822c2ea9944713a26f31d55a64d1623c0b7f3a9336ce299",
+  "lines": 265,
+  "size_kb": 16.1,
+  "sha256": "04b74ef826b62b4c77f1d9f9cf7dce52dfdda6da80d30ea00c05ade9e8b66403",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

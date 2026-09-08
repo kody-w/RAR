@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_develop_procurement_policies",
   "name": "Develop procurement policies Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_develop_procurement_policies",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_develop_procurement_policies:41af7a3a6522417985efe77df7c93ba265456f8c9768b0cc1d3bc097d13a4fb4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_develop_procurement_policies:a9305242c87515a8fe0d2d3981a8a7579d79782e844895af5b036b71989a6b6d",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_develop_procurement_policies:41af7a3a6522417985efe77df7c93ba265456f8c9768b0cc1d3bc097d13a4fb4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_develop_procurement_policies:41af7a3a6522417985efe77df7c93ba265456f8c9768b0cc1d3bc097d13a4fb4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on develop procurement policies status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on procurement policy development from Dynamics 365 ERP data for a legal entity, with title, KPI, trend, red-flag, actions and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "2d46fe53edfe9c15518c14ea7878ecb87f3620d6e7f4d7368e4f924aae201d4f",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "f5c203b32eb8bb981ef8c6bc72e5fdbdb89cda9ba0a1a2d6a1eccb7b70e88515",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

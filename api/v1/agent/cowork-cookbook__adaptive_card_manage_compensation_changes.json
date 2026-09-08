@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_manage_compensation_changes",
   "name": "Manage compensation changes Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_manage_compensation_changes",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_manage_compensation_changes:2e2bc6da2ca2655a18c55325381c1c540b1caaf75e501047d48dae63f113c5b3",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_manage_compensation_changes:0e767fe689b8d923e28ce706fe7d9207a08a6dbac377ec43c998cab9d88a4678",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_manage_compensation_changes:2e2bc6da2ca2655a18c55325381c1c540b1caaf75e501047d48dae63f113c5b3",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_manage_compensation_changes:2e2bc6da2ca2655a18c55325381c1c540b1caaf75e501047d48dae63f113c5b3"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of manage compensation changes status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing manage compensation changes status from Dynamics 365 F&SCM (legal entity USMF), with header, KPI tiles, RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "5b06b331d26d3acc33aea212243859bda8efc5bf3afa0ca618e1f03b76419540",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "0b283c4319422b0d351be034b51ea50e86fd42425eb116ece19c82438c72a4ae",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_refine_the_training_program",
   "name": "Refine the training program Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_refine_the_training_program",
-  "rappid": "rappid:@cowork-cookbook/demo_data_refine_the_training_program:a671d34926bc81096c26e3f74e2d84fb171321d2859195f46c3d589c8d606fa3",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_refine_the_training_program:ad607354dece89f431b5f87691e381d92897e85db574ce1070c7befac18c15a0",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_refine_the_training_program:a671d34926bc81096c26e3f74e2d84fb171321d2859195f46c3d589c8d606fa3",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_refine_the_training_program:a671d34926bc81096c26e3f74e2d84fb171321d2859195f46c3d589c8d606fa3"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for refine the training program in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo records for refining the training program in a Dynamics 365 F&SCM sandbox legal entity (default USMF), stages them in an Excel workbook, creates them, and returns each new record's primary key",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "eea789b01c44187fe5d10e437cae2f87d03da7cbf0367913080b1ba0c6989cbb",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "d6fb7b15d537f5672e95cd224d37eac24b155ab7c15a2c7e883ee1e11c6f4e64",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

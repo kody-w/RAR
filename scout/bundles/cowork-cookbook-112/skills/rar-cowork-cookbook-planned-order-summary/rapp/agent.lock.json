@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/planned_order_summary",
   "agent_file": "planned_order_summary_agent.py",
-  "agent_sha256": "a96f9bd059fa1a5b1ec9e6f88a8049daf82de5b4d3a63df7594a94542a1244ac",
+  "agent_sha256": "35c22e7c40cfa37c1e2dda0220c350f72ff2db55eeb59862bea8ee4dc891957c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PlannedOrderSummary",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Summarizes planned production orders by resource for the next four weeks, including load vs capacity.",
+    "description": "Returns an Excel workbook summarizing planned production orders for the next 4 weeks aggregated by primary resource and week, with planned load hours vs configured capacity and weeks over 90% flagged.",
     "display_name": "Planned Order Summary by Resource",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "0eb3dd922e7ca635",
+      "content_digest": "b4ebe5ea87c70bfc",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PlannedOrderSummary",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What to produce, and about what.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__journal_entry_validation",
   "name": "Journal Entry Pre-Posting Validation",
   "rar_name": "@cowork-cookbook/journal_entry_validation",
-  "rappid": "rappid:@cowork-cookbook/journal_entry_validation:3780aa73a6e5e5f6f1235998b2ea271afa21f82c83aabe4dab962a56071ef7bb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/journal_entry_validation:a56c5197fc0428b5e96441e2df02cf476d575293b968d2c927b3247c209d7c82",
+  "_migrated_from": "rappid:@cowork-cookbook/journal_entry_validation:3780aa73a6e5e5f6f1235998b2ea271afa21f82c83aabe4dab962a56071ef7bb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/journal_entry_validation:3780aa73a6e5e5f6f1235998b2ea271afa21f82c83aabe4dab962a56071ef7bb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Validates open journal entries against a configurable rule set before posting and produces an exception report.",
+  "description": "Checks open, unposted general journal entries in the current period against four rules (active account, valid dimensions, balanced debits/credits, non-empty description) and returns an Excel exception report; nothing is",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "6b9711a1812f44c713d1df7c028eee0c12b79b9d333a924ea7ced6d57c600794",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "1fad25199ab0cac70a4bc4bbfc749d3f76c0e02487ae336e730cb21b99d6d71e",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

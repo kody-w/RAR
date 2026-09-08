@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/audit_and_surface_against_a_standard",
   "agent_file": "audit_and_surface_against_a_standard_agent.py",
-  "agent_sha256": "451d4d8183d19ad8bcd8db61b032ca203d7cbcac77f4af04a1411d8e18741510",
+  "agent_sha256": "c57c41ca65305e8cb2417f858aa4b1e445a56e9af710f4892ba5dc1a1a462f9c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditAndSurfaceAgainstAStandard",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Apply a brand guide, naming convention, compliance policy, or quality standard across dozens of files - without manually reviewing each one and without risking accidental changes.",
+    "description": "Audits every file in a specified folder against a named standard and returns a sortable Excel report of violations by severity (Critical/Major/Minor) with impact and recommended fixes; makes no changes to files.",
     "display_name": "Audit and surface against a standard",
     "industry_context": {
       "deprecated": false,
@@ -46,9 +46,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "5a319565f3963a7d",
+      "content_digest": "755d198aabc53809",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -72,28 +72,37 @@
       "read_only",
       "analysis"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AuditAndSurfaceAgainstAStandard",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "folder": {
+        "description": "The folder or location containing the items to audit.",
+        "type": "string"
+      },
+      "item_type": {
+        "description": "The kind of item to review, e.g. file, image, asset, or document.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "standard": {
+        "description": "The standard to audit against: brand guidelines, compliance policy, naming convention, or internal quality standard.",
         "type": "string"
       }
     },
@@ -102,5 +111,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

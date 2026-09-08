@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_develop_training_strategy",
   "agent_file": "scheduled_brief_develop_training_strategy_agent.py",
-  "agent_sha256": "7c0cbddd9e31d802783a2dc44d389158130b94d6636df12d0f5c3df955903b99",
+  "agent_sha256": "45ebb9ea19ac2079e905de797bff064cd03bc2d962e13c8d639510e031c9627e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDevelopTrainingStrategy",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Schedulable morning-brief email summarizing develop training strategy for the responsible owner; designed to run daily or weekly.",
+    "description": "Builds a morning brief on develop training strategy from Dynamics 365 ERP data for legal entity USMF: top 5 items by impact, anomalies vs the 7-day rolling average, and recommended next actions; drafts an email to the re",
     "display_name": "Develop training strategy Scheduled Email Brief",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "5ee90fa9b124bea0",
+      "content_digest": "620f281d0c5a76c7",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ScheduledBriefDevelopTrainingStrategy",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to query; the recipe uses USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "responsible_owner": {
+        "description": "Person the brief is written for and whose email draft is addressed to them.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "schedule": {
+        "description": "Optional cadence for running it, e.g. weekday mornings at 7am.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

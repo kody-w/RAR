@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_manage_organizational_structure",
   "name": "Manage organizational structure Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_manage_organizational_structure",
-  "rappid": "rappid:@cowork-cookbook/teams_update_manage_organizational_structure:1dcadbff17475f5c038accf44d57aef86c4bf04f68d4cbdccff923fb2fdd8a2b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_manage_organizational_structure:008f4670dadfdd67fc7a10ae33e48246283061bd7378a6a048fbbfb68a9a110a",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_manage_organizational_structure:1dcadbff17475f5c038accf44d57aef86c4bf04f68d4cbdccff923fb2fdd8a2b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_manage_organizational_structure:1dcadbff17475f5c038accf44d57aef86c4bf04f68d4cbdccff923fb2fdd8a2b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on manage organizational structure status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes the current state of manage organizational structure from Dynamics 365 F&SCM for a given legal entity and returns a markdown Teams channel post plus a saved Adaptive Card JSON file; nothing is posted.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "5ef35c18f3c33095313bd60e00b1fc109dfe966a243f8bb67e173f508991214b",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "7467be3fe16d589acb5b8dc7dd1003cde0f8777ae3318e6cc2735de572697c39",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

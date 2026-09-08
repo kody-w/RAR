@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/product_launch_customer_pitch",
   "agent_file": "product_launch_customer_pitch_agent.py",
-  "agent_sha256": "5b3ee2db68235a54b97a3b422dac62f8d8265ec4a62bdbf4e85b5a8495c6157c",
+  "agent_sha256": "acdc04faaeb09554c47c29590a085741c1bf0da7a8bce798aecbe7eeb796bd8e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProductLaunchCustomerPitch",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Turn a competitor announcement into a sharp, differentiated customer pitch - built and ready before tomorrow's meeting.",
+    "description": "Produces a three-artifact competitive pitch kit for a customer meeting: an Excel comparison of your product vs. a competitor product, a Word value prop doc, and a customer-ready PowerPoint deck.",
     "display_name": "Product launch customer pitch",
     "industry_context": {
       "deprecated": false,
@@ -50,9 +50,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "8500d2c63ef4fe8d",
+      "content_digest": "ddb75d72e477afad",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -75,28 +75,33 @@
       "advanced",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ProductLaunchCustomerPitch",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "competitor_product": {
+        "description": "The competitor product just announced that you need to differentiate against.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The input to convert — path, URL or payload.",
-        "type": "string"
-      },
-      "target_format": {
-        "description": "Optional. The desired output format.",
+      "product": {
+        "description": "Your product being positioned in the pitch.",
         "type": "string"
       }
     },
@@ -105,5 +110,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

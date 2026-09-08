@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_perform_service_tasks",
   "agent_file": "ppt_exec_perform_service_tasks_agent.py",
-  "agent_sha256": "04f04f41b9976dd86ae041a771735e16cf7b300e4eb28546225cce988803a9d1",
+  "agent_sha256": "efcb197c028b832b895ac107b8c4edff168470647e7f34973ee89848db92796d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecPerformServiceTasks",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on perform service tasks status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on perform service tasks status from Dynamics 365 F&SCM data, with KPI, trend, issues, actions and appendix slides plus speaker notes. Call for a monthly review deck.",
     "display_name": "Perform service tasks Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "6e36b0918ce218e3",
+      "content_digest": "47598ba14f88f413",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecPerformServiceTasks",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to report on, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the .pptx file to produce, e.g. ppt-exec-perform-service-tasks-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_period": {
+        "description": "Reporting period and comparison basis for the trend chart (current period vs prior period).",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

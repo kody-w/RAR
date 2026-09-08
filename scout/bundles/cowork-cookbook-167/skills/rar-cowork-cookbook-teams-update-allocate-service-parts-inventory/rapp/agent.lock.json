@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_allocate_service_parts_inventory",
   "agent_file": "teams_update_allocate_service_parts_inventory_agent.py",
-  "agent_sha256": "0039885e1853b48ab7e473d1810ddb952688bab8d37080a5853aec5450ba8594",
+  "agent_sha256": "5a2a0bad45982d66a3d3e08e6add26836c5a1fa03b8a12ff7e2eface7c9fbb55",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateAllocateServicePartsInventory",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on allocate service parts inventory status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes service parts inventory allocation for a Dynamics 365 legal entity and returns a draft Teams channel post plus an Adaptive Card JSON file with KPIs and quick actions; nothing is posted.",
     "display_name": "Allocate service parts inventory Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "b34e68f098d8b3f8",
+      "content_digest": "92db232663cbe95a",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateAllocateServicePartsInventory",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "card_filename": {
+        "description": "Output filename for the Adaptive Card JSON, e.g. teams-update-allocate-service-parts-inventory-2026-05-24-card.json.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to summarize, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "scope": {
+        "description": "Optional scope adjustments for the inventory allocation summary.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

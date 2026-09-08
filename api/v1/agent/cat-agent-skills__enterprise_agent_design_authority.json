@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__enterprise_agent_design_authority",
   "name": "Enterprise Agent Design Authority (EADA)",
   "rar_name": "@cat-agent-skills/enterprise_agent_design_authority",
-  "rappid": "rappid:@cat-agent-skills/enterprise_agent_design_authority:bcc9f7b4434796c2d34069a99b8a70f7c68e3bc347184f337f3f6f530a941079",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/enterprise_agent_design_authority:2a9a87cff6406afe0a946a4bb59ae218ab00e55fb174773b8222b33c4a1ef287",
+  "_migrated_from": "rappid:@cat-agent-skills/enterprise_agent_design_authority:bcc9f7b4434796c2d34069a99b8a70f7c68e3bc347184f337f3f6f530a941079",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/enterprise_agent_design_authority:bcc9f7b4434796c2d34069a99b8a70f7c68e3bc347184f337f3f6f530a941079"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "analysis",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.3,
-  "sha256": "1b8d67a3b9d2dab18a77b43f93af6285ad595ac5b44c49ff0568605b8a596f6f",
+  "lines": 262,
+  "size_kb": 12.7,
+  "sha256": "6332036335d5ea258d4f3f653326bece852ce05b4ac1cd5e7f10b442b0f8c49b",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

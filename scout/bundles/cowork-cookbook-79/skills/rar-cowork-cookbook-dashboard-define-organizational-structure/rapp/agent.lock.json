@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/dashboard_define_organizational_structure",
   "agent_file": "dashboard_define_organizational_structure_agent.py",
-  "agent_sha256": "39675117fb21d45138ab691076c4cb9184228d77eb414a8cad533eb2fbb07f5a",
+  "agent_sha256": "a5a04270fe04cf8c595ed761137bbc26e2ce3d8ec70464ef57fab831ff929f2b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardDefineOrganizationalStructure",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a self-contained interactive HTML dashboard for define organizational structure - opens in any browser, no D365 access needed by the viewer.",
+    "description": "Pulls organizational structure data from Dynamics 365 F&SCM for a given legal entity and fiscal period (read-only) and saves a standalone interactive HTML dashboard with totals, inline SVG charts, a sortable detail table",
     "display_name": "Define organizational structure Interactive HTML Dashboard",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "4cc5c9486ebf52de",
+      "content_digest": "6c418468dcf1159c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DashboardDefineOrganizationalStructure",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "constraints": {
-        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "fiscal_period": {
+        "description": "Fiscal period to report on; defaults to the most recent available.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to pull from, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being designed.",
+      "output_filename": {
+        "description": "Name of the HTML file to write, e.g. dashboard-define-organizational-structure-2026-05-24.html.",
+        "type": "string"
+      },
+      "output_folder": {
+        "description": "Folder where the HTML file is saved, e.g. Documents/Cowork/output/.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

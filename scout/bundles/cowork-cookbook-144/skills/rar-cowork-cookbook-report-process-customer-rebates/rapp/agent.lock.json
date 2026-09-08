@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/report_process_customer_rebates",
   "agent_file": "report_process_customer_rebates_agent.py",
-  "agent_sha256": "e239c3978bf582acd0d20453774b469b2b9967968087513fffdc923904ef5438",
+  "agent_sha256": "ce2d52eec2f623287289fe8814dbcceee0636178fb87a82323e019f1d8709b97",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportProcessCustomerRebates",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds a structured summary report of process customer rebates activity with totals, trends, and breakdowns.",
+    "description": "Builds a read-only customer rebate summary report from Dynamics 365 F&SCM for a legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top 10 by value sheets.",
     "display_name": "Process customer rebates Summary Report",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "ac3370e129780c93",
+      "content_digest": "55f5709d236baf5b",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ReportProcessCustomerRebates",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. report-process-customer-rebates-2026-05-24.xlsx.",
+        "type": "string"
+      },
+      "posted_period": {
+        "description": "Posted period to report on; defaults to the most recent posted period available in the tenant.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

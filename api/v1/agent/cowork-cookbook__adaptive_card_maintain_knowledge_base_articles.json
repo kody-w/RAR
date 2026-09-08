@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_maintain_knowledge_base_articles",
   "name": "Maintain knowledge base articles Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_maintain_knowledge_base_articles",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_maintain_knowledge_base_articles:ad00a9a7c966739cdfdb055537c34cbe8b5781969d6f9ffa73d43bc54d27b775",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_maintain_knowledge_base_articles:7ef59222c6106060b065ca71f8331e6e519eb49128d56dd0c0bd0c17af7c6f4f",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_maintain_knowledge_base_articles:ad00a9a7c966739cdfdb055537c34cbe8b5781969d6f9ffa73d43bc54d27b775",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_maintain_knowledge_base_articles:ad00a9a7c966739cdfdb055537c34cbe8b5781969d6f9ffa73d43bc54d27b775"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of maintain knowledge base articles status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file summarizing knowledge base article maintenance status from Dynamics 365 ERP, with header, KPI tiles, RAG row, and action buttons; call when you need an embeddable status card",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "c8b35c4658d81366c0ae116921610ca705b647f1e597daf13b156befba5c15b0",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "ad5761df3168d4dec896a5c7b573605ea035fc2a1f333f70cf86a605df16ec57",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

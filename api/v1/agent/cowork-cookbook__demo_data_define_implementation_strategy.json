@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_define_implementation_strategy",
   "name": "Define implementation strategy Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_define_implementation_strategy",
-  "rappid": "rappid:@cowork-cookbook/demo_data_define_implementation_strategy:5d4215dbf9483542c4421edf86be3296eaa3a0c31b5a98343220be7546a10b57",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_define_implementation_strategy:880cec56ff9bd2d8145dafe88e89952c1c7f61cd28368d84524455bf1e51dc87",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_define_implementation_strategy:5d4215dbf9483542c4421edf86be3296eaa3a0c31b5a98343220be7546a10b57",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_define_implementation_strategy:5d4215dbf9483542c4421edf86be3296eaa3a0c31b5a98343220be7546a10b57"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for define implementation strategy in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo records for define implementation strategy in a sandbox D365 F&SCM legal entity (default USMF), stages them in an Excel workbook, creates them, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "20ce55314d5721defb8696416fb0b93d1360be3829d54c126277b194245508e9",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "972fc947da6244c772b3b1b724257620cbd3c58826da6e6e8769846681c03302",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

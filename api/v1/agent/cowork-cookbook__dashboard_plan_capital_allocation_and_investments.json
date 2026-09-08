@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_plan_capital_allocation_and_investments",
   "name": "Plan capital allocation and investments Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_plan_capital_allocation_and_investments",
-  "rappid": "rappid:@cowork-cookbook/dashboard_plan_capital_allocation_and_investments:0915e14bfec8e11e2e8403aebf5afd3e50888d2a8442b1389dc0a061a111007c",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_plan_capital_allocation_and_investments:7a69c027c31eaea39e235b020aad97e60c58ee3ce7d728260f3c6337c175c94f",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_plan_capital_allocation_and_investments:0915e14bfec8e11e2e8403aebf5afd3e50888d2a8442b1389dc0a061a111007c",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_plan_capital_allocation_and_investments:0915e14bfec8e11e2e8403aebf5afd3e50888d2a8442b1389dc0a061a111007c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for plan capital allocation and investments - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls plan capital allocation and investment data from Dynamics 365 F&SCM for a legal entity and most recent fiscal period, and writes a standalone interactive HTML dashboard file to the output folder; read-only.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "afcc248fdea225eb70006023f0669d6141af4f01b9455b17ad4a9eefcb1f9927",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "3e0e59707610e581af7f7f436d34359658356e47bb4450f35497d82e6c8c6f07",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__pull_whats_relevant_for_another_team",
   "name": "Pull what's relevant for another team from a campaign brief",
   "rar_name": "@cowork-cookbook/pull_whats_relevant_for_another_team",
-  "rappid": "rappid:@cowork-cookbook/pull_whats_relevant_for_another_team:ac3a66d293137b269587b48f74031876d5f4f4af181ee44dc4272d4a2bd10c4b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/pull_whats_relevant_for_another_team:30a775bfe505d8c3f781458d892f56cbe5e65fb2fd14944c82d307542bfb8e44",
+  "_migrated_from": "rappid:@cowork-cookbook/pull_whats_relevant_for_another_team:ac3a66d293137b269587b48f74031876d5f4f4af181ee44dc4272d4a2bd10c4b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/pull_whats_relevant_for_another_team:ac3a66d293137b269587b48f74031876d5f4f4af181ee44dc4272d4a2bd10c4b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "general",
   "tags": [
@@ -20,16 +22,16 @@
     "read_only",
     "automation"
   ],
-  "description": "Get a partner team only the parts of a campaign brief that apply to them - without making them read the whole thing to find their section.",
+  "description": "Extracts the sections of a campaign brief in Box that apply to a specified team, preserving original headings and wording, then saves the excerpt as a new Box doc and shares it with that team.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "afb7697ac50f79d1fbf2651299100ca62f4271f8acd335abdd79fab418fa4995",
+  "lines": 265,
+  "size_kb": 16.0,
+  "sha256": "647e7c99d108f4b05cfbacd816e1bbb0a6dc7d8ff82f98bcdf9105b941504e21",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -35,3 +35,4 @@ dist/
 # that would live in git history forever; a `git add -A` should never sweep
 # them in. Publish renders as release assets instead.
 videos/
+state/toasted_skills.lock

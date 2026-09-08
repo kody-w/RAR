@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_release_production_to_the_shop_floor",
   "name": "Release production to the shop floor Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_release_production_to_the_shop_floor",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_release_production_to_the_shop_floor:bf3ca4f57bb79d40888a53749f8fef1e429d1d5b2540d986080f55988fec42ee",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_release_production_to_the_shop_floor:02ebbab4c5eb19fce297a0c6af353df4aa30a274669b053b993a358451dde2a1",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_release_production_to_the_shop_floor:bf3ca4f57bb79d40888a53749f8fef1e429d1d5b2540d986080f55988fec42ee",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_release_production_to_the_shop_floor:bf3ca4f57bb79d40888a53749f8fef1e429d1d5b2540d986080f55988fec42ee"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on release production to the shop floor status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on release-production-to-the-shop-floor status from Dynamics 365 F&SCM data, with title, KPI, trend, issues, actions and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "d7c8401a42142c810c74a07b6a091b17f95290ea8a35c79391e1d34e97fe32fb",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "cda0d55284188e6cfea15c55343c1a30bbdd44035202948dd9472a7156da5dab",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

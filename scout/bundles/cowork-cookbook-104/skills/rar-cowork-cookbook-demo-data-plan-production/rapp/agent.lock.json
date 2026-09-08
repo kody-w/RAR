@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/demo_data_plan_production",
   "agent_file": "demo_data_plan_production_agent.py",
-  "agent_sha256": "255c03ce65162253941b8f466a4c8a3368af1b65c79963c66432d888574aea84",
+  "agent_sha256": "3b5e5dcc30b846a114532a1d6b6c75de3d94fa94aa8d81d24cf3f85ffa8b8660",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataPlanProduction",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates and creates realistic demo records for plan production in a sandbox tenant for training and pilot scenarios.",
+    "description": "Generates 25 realistic demo plan production records for a Dynamics 365 F&SCM sandbox legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key.",
     "display_name": "Plan production Demo Data Generator",
     "industry_context": {
       "deprecated": false,
@@ -51,9 +51,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "8672439d2d608843",
+      "content_digest": "7bbe72fdae16e03e",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -77,28 +77,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DemoDataPlanProduction",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Sandbox D365 legal entity to target (default USMF); must not be production.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "record_count": {
+        "description": "Number of demo plan production records to generate (default 25).",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "workbook_name": {
+        "description": "Excel staging file name, e.g. 'demo-data-plan-production-2026-05-24.xlsx'.",
         "type": "string"
       }
     },
@@ -107,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

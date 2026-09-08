@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_issue_and_settle_supplier_payments",
   "name": "Issue and settle supplier payments Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_issue_and_settle_supplier_payments",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_issue_and_settle_supplier_payments:fb4e58e4b5e9822cfa575a791136c87ae39555388dde494928489850fc48767a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_issue_and_settle_supplier_payments:8442b104e9b9390067411e35c7901cc15e73dd110030a69bf20490b5da8db426",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_issue_and_settle_supplier_payments:fb4e58e4b5e9822cfa575a791136c87ae39555388dde494928489850fc48767a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_issue_and_settle_supplier_payments:fb4e58e4b5e9822cfa575a791136c87ae39555388dde494928489850fc48767a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across issue and settle supplier payments records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to issue-and-settle supplier payment records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied ID list, returning a dry-run preview workbook, then a confirmation workbo",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "3038f849c47d552a545f21a27e18a0955127250a5efd02f2cf372746eabff168",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "2470aa79f46d5c9e166ef62ae1c185ca798865e77e80a4766bc3eb696caf5561",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

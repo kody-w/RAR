@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_determine_business_process_flow",
   "agent_file": "bulk_update_determine_business_process_flow_agent.py",
-  "agent_sha256": "5eee37ddd22445e4614ccf34b4c462b702ed51f3fe43a22d7efc157167d17074",
+  "agent_sha256": "189188beeabcf9d841ea75f070169b4dd5390173f0fc86a9cf41cb77b6837f22",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDetermineBusinessProcessFlow",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across determine business process flow records from an input list, with dry-run preview before commit.",
+    "description": "Applies a bulk field update to Dynamics 365 business process flow records from a caller-supplied ID list, producing a dry-run preview workbook, pausing for approval, then a confirmation workbook after commit.",
     "display_name": "Determine business process flow Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "d43c76b21ba53c6b",
+      "content_digest": "76ff0e1e6136b839",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdateDetermineBusinessProcessFlow",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit go-ahead after reviewing the dry-run preview workbook.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against, e.g. USMF; sandbox environment only.",
+        "type": "string"
+      },
+      "new_values": {
+        "description": "The new field value(s) to apply to those records.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "record_ids": {
+        "description": "List of business process flow record IDs to update.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

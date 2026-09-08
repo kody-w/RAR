@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_develop_product_catalogs",
   "name": "Develop product catalogs Summary Report",
   "rar_name": "@cowork-cookbook/report_develop_product_catalogs",
-  "rappid": "rappid:@cowork-cookbook/report_develop_product_catalogs:0b4e9589c42114348443a439deb8bed9956ff8e1aabde93e43257f904de58751",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_develop_product_catalogs:b4cf6319212a701f0edff38e918bbec8ef153998b89ff966e127ceac5551f579",
+  "_migrated_from": "rappid:@cowork-cookbook/report_develop_product_catalogs:0b4e9589c42114348443a439deb8bed9956ff8e1aabde93e43257f904de58751",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_develop_product_catalogs:0b4e9589c42114348443a439deb8bed9956ff8e1aabde93e43257f904de58751"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of develop product catalogs activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only product catalog summary report from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top 10 by value sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "8bdf74617a5e43c0eb6edeb1d2ffbc9d1d6920bf0d138b5f6b9f0c1a8544cc99",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "dc65f342ba2f95fb958ea5f9f718465b7d4be701462a31b8da70e6a9ba60326b",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/wikipedia_human_style_writing",
   "agent_file": "wikipedia_human_style_writing_agent.py",
-  "agent_sha256": "1f50f40dc28b1760c266836dc179d8cb5be8ca2151a339e00fe612af9c163131",
+  "agent_sha256": "fd27623e4e77260d8a51a01f90010f62888a7b07f3eb2d4dbd7363d5ccf6e8bd",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WikipediaHumanStyleWriting",
   "host_dependencies": [],
@@ -43,7 +43,7 @@
       "ai_detection",
       "wikipedia"
     ],
-    "version": "1.1.0"
+    "version": "2.1.2"
   },
   "runtime_name": "WikipediaHumanStyleWriting",
   "schema": "rapp-agent-lock/1.0",
@@ -73,5 +73,5 @@
     ],
     "type": "object"
   },
-  "version": "1.1.0"
+  "version": "2.1.2"
 }

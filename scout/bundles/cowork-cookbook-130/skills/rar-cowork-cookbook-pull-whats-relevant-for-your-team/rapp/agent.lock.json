@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/pull_whats_relevant_for_your_team",
   "agent_file": "pull_whats_relevant_for_your_team_agent.py",
-  "agent_sha256": "6f764939aa523b0822bc58cb35ea3eff7dd2548066690c8c000a3006d379722d",
+  "agent_sha256": "5d287d435f426c545f8c78f8149018f01a8766dfa3729fdefa47132905845ed5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PullWhatsRelevantForYourTeam",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Get your team only the parts of a long document that actually apply to them - without sending them the whole thing and asking them to find their section.",
+    "description": "Extracts the sections of a source document in Box that are relevant to a named team, preserving original headings and wording, then saves the trimmed doc in Box and shares it with that team.",
     "display_name": "Pull what's relevant for your team from a source doc",
     "industry_context": {
       "deprecated": false,
@@ -44,9 +44,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "d4eab744a786086b",
+      "content_digest": "0d19f985e6714bbd",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -69,28 +69,37 @@
       "intermediate",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PullWhatsRelevantForYourTeam",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "distribution": {
+        "description": "The team or distribution group to share the new Box doc with.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "source_document": {
+        "description": "The source document in Box to extract sections from.",
+        "type": "string"
+      },
+      "team_name": {
+        "description": "The team whose relevant sections should be extracted.",
         "type": "string"
       }
     },
@@ -99,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

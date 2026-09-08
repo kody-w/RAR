@@ -77,6 +77,8 @@ def profile(entry: dict) -> dict:
         "distinct_from": {str(k): str(v) for k, v in (entry.get("distinct_from") or {}).items()}
                          if isinstance(entry.get("distinct_from"), dict) else {},
         "stack": _stack_dir(str(entry.get("_file", ""))),
+        # an aggregated family (one upstream library, one namespace) is designed together
+        "aggregated_ns": name.split("/")[0] if (isinstance(entry.get("source"), dict) and entry["source"].get("aggregated")) or str(entry.get("_file", "")).startswith(("agents/@cowork-cookbook/", "agents/@cat-agent-skills/", "agents/@aibast-library/")) else "",
     }
 
 
@@ -118,6 +120,8 @@ def declared(p: dict, q: dict) -> str | None:
         return "designed together (dependencies)"
     if p["stack"] and p["stack"] == q["stack"]:
         return f"same stack {p['stack']}"
+    if p["aggregated_ns"] and p["aggregated_ns"] == q["name"].split("/")[0]:
+        return f"same aggregated library {p['aggregated_ns']}"
     if q["name"] in q.get("_superseded_by", set()):
         return "already superseded"
     return None

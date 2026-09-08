@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__wikipedia_human_style_writing",
   "name": "Wikipedia Human Style Writing",
   "rar_name": "@cat-agent-skills/wikipedia_human_style_writing",
-  "rappid": "rappid:@cat-agent-skills/wikipedia_human_style_writing:0e78883a3d64684021a65ce065032dcd76d79e373a0f0a13e43aaebd5b34dba3",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "1.1.0",
+  "rappid": "rappid:@cat-agent-skills/wikipedia_human_style_writing:c636c44aa558907d19dc5a7413aa51503d1aeec963a072aecc6a026878d36587",
+  "_migrated_from": "rappid:@cat-agent-skills/wikipedia_human_style_writing:0e78883a3d64684021a65ce065032dcd76d79e373a0f0a13e43aaebd5b34dba3",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/wikipedia_human_style_writing:0e78883a3d64684021a65ce065032dcd76d79e373a0f0a13e43aaebd5b34dba3"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -26,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.0,
-  "sha256": "1f50f40dc28b1760c266836dc179d8cb5be8ca2151a339e00fe612af9c163131",
+  "lines": 262,
+  "size_kb": 12.4,
+  "sha256": "fd27623e4e77260d8a51a01f90010f62888a7b07f3eb2d4dbd7363d5ccf6e8bd",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

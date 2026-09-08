@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/payment_proposal_review",
   "agent_file": "payment_proposal_review_agent.py",
-  "agent_sha256": "3516253ef9d600a853cab068bc87554a5ad1d20033effabe0b6bd35ce3cca7bd",
+  "agent_sha256": "7594cc30558d66c5016c0da05e50425f6c0bcd89aabdf42d5e5d6bc4861575f4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PaymentProposalReview",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Reviews the current payment proposal for accuracy and flags lines that need attention before release.",
+    "description": "Reviews the current Dynamics 365 F&SCM payment proposal and returns an Excel workbook flagging vendors on hold, expiring-discount invoices missing from the proposal, duplicates, sub-$50 payments, and missing bank details",
     "display_name": "Payment Proposal Review",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "cd7b114adb7d66ff",
+      "content_digest": "5fad29b0e055bc08",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PaymentProposalReview",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

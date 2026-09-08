@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__map_an_account_strategy_on_a_miro_board",
   "name": "Map an account strategy on a Miro board",
   "rar_name": "@cowork-cookbook/map_an_account_strategy_on_a_miro_board",
-  "rappid": "rappid:@cowork-cookbook/map_an_account_strategy_on_a_miro_board:66e06c12b4c410431965b4b3f3bcf516a4046be414a371752fe0c154bdbcb900",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/map_an_account_strategy_on_a_miro_board:e9c8b507566dbb09868e0b34858e92deeba42e9ba8b20a2ae679be7e33eb1c22",
+  "_migrated_from": "rappid:@cowork-cookbook/map_an_account_strategy_on_a_miro_board:66e06c12b4c410431965b4b3f3bcf516a4046be414a371752fe0c154bdbcb900",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/map_an_account_strategy_on_a_miro_board:66e06c12b4c410431965b4b3f3bcf516a4046be414a371752fe0c154bdbcb900"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "miro"
   ],
-  "description": "Turn an account strategy conversation into a visual map the team can rally around - without spending an afternoon assembling it by hand.",
+  "description": "Builds a Miro account strategy board for a named customer by reviewing your recent emails, meetings, and CRM notes to map stakeholders, deal stages, initiatives, and priorities, plus a tracking table.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "aa47cf2ec553677f627d7881519ddb7e2e76b24417e8002aba8f4242f82a4908",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "dc55a6e8a40313301d3fe086859a991f0bd935bde3216411f147073435d24a1b",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

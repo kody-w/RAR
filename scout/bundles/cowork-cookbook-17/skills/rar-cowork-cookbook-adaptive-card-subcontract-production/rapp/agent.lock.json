@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_subcontract_production",
   "agent_file": "adaptive_card_subcontract_production_agent.py",
-  "agent_sha256": "68fb1529ce4397d4668abe8320ced359ece56aa6970d2fb0ec09f78e3dcd1cd3",
+  "agent_sha256": "2f711a77752563275c85da5a65f8b59daef5c298a30ddd28b15f651bc90d2b60",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardSubcontractProduction",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a reusable Adaptive Card JSON snapshot of subcontract production status for embedding in dashboards, emails, or Teams.",
+    "description": "Generates a read-only Adaptive Card JSON file summarizing subcontract production status from Dynamics 365 F&SCM for a given legal entity, with header, KPI tiles, RAG row, and action buttons.",
     "display_name": "Subcontract production Status Adaptive Card",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "f75505b2fd3a03ad",
+      "content_digest": "fb38e54c7a413615",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AdaptiveCardSubcontractProduction",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "action_buttons": {
+        "description": "Which 2-3 action buttons the card should offer.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "kpi_count": {
+        "description": "How many KPI tiles to include (3-5).",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report on, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the Adaptive Card JSON file to produce.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "snapshot_date": {
+        "description": "Date used for the snapshot timestamp and output filename.",
         "type": "string"
       }
     },
@@ -111,5 +128,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_define_testing_approach",
   "name": "Define testing approach Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_define_testing_approach",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_define_testing_approach:ac640f185d97bafc6fde5181bd3fa83b02b7a7848f9f6d5d6ebdfc1ebe25b3d1",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_define_testing_approach:94cf151fb0e1c1f83acedb9cbd7690133c55d7ecd5bb752c64a6d3e6355188d4",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_define_testing_approach:ac640f185d97bafc6fde5181bd3fa83b02b7a7848f9f6d5d6ebdfc1ebe25b3d1",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_define_testing_approach:ac640f185d97bafc6fde5181bd3fa83b02b7a7848f9f6d5d6ebdfc1ebe25b3d1"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across define testing approach records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to define testing approach records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, producing a dry-run preview workbook, pausing for approval, then a confirm",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "64e351eaf58f88a44dbe451f4a62677216b4d430bd5defc3179bf68fde9d491c",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "756801bfed5bdd7b2e0f3ec6fd808833e5dfc24436903b5f89c06a528138b3bc",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

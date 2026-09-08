@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/find_patterns_across_your_meetings",
   "agent_file": "find_patterns_across_your_meetings_agent.py",
-  "agent_sha256": "96763343ed4649f04c2a587872f170153f9059416d726ae3bc7d7aac1cd045f0",
+  "agent_sha256": "4b1112720678d85a0b97fb5b33fd7f0df76b4daf9a974494a73c64c3ee6541e7",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FindPatternsAcrossYourMeetings",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Surface the themes that are repeating across your meetings - without re-listening, re-reading transcripts, or relying on memory.",
+    "description": "Returns a ranked pattern report across a set of your meetings: top recurring themes, a 1-2 sentence summary each, representative quotes, the meetings where each surfaced, and a recommended action.",
     "display_name": "Find patterns across your meetings",
     "industry_context": {
       "deprecated": false,
@@ -47,9 +47,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c9119b37586c96b9",
+      "content_digest": "51191ed0dabd2cd9",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -72,24 +72,37 @@
       "advanced",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "FindPatternsAcrossYourMeetings",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "meeting_type": {
+        "description": "Which meetings to look across, e.g. customer calls, team standups, partner reviews.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to apply this capability to.",
+      "theme_types": {
+        "description": "Optional kinds of themes to rank, e.g. objections, feature requests, blockers, decisions, concerns.",
+        "type": "string"
+      },
+      "time_window": {
+        "description": "The period to cover, e.g. the last 30 days.",
         "type": "string"
       }
     },
@@ -98,5 +111,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

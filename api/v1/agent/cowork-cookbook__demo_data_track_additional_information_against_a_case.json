@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_track_additional_information_against_a_case",
   "name": "Track additional information against a case Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_track_additional_information_against_a_case",
-  "rappid": "rappid:@cowork-cookbook/demo_data_track_additional_information_against_a_case:ae9fbb1e18c35d53e514e459f6bde322b29846c42f25c36c7cf40a85a8e05d84",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_track_additional_information_against_a_case:fc26f7acd28febccfb26d23c6c32ecad388ad489cf4f0dce12102044f019f9c8",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_track_additional_information_against_a_case:ae9fbb1e18c35d53e514e459f6bde322b29846c42f25c36c7cf40a85a8e05d84",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_track_additional_information_against_a_case:ae9fbb1e18c35d53e514e459f6bde322b29846c42f25c36c7cf40a85a8e05d84"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for track additional information against a case in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo case-additional-information records in a sandbox D365 F&SCM legal entity (default USMF), stages them in an Excel workbook first, creates them, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "444a4b91826be5471802881a52309f1304d6a4096aee2390a90b97b48f5f7158",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "678d021f0cd1e666d0ab3f0b1e9903af7cdfc7773f675d00d6f8294ef2acab75",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

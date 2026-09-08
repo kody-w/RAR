@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_estimate_the_cost_of_production",
   "name": "Estimate the cost of production Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_estimate_the_cost_of_production",
-  "rappid": "rappid:@cowork-cookbook/teams_update_estimate_the_cost_of_production:4abad47249aca0d16c4e988a686368e64e32b2798b11f67fec0169d5068c7e8a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_estimate_the_cost_of_production:dc4c7503765244968b314939fa596e25ce8d50e69396c43e0070ed111646391e",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_estimate_the_cost_of_production:4abad47249aca0d16c4e988a686368e64e32b2798b11f67fec0169d5068c7e8a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_estimate_the_cost_of_production:4abad47249aca0d16c4e988a686368e64e32b2798b11f67fec0169d5068c7e8a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on estimate the cost of production status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes production cost estimates from Dynamics 365 F&SCM for a given legal entity and returns a draft Teams channel post plus an Adaptive Card JSON file with KPIs and quick-action buttons, saved for review rather tha",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "2d4fe8a4d0236a0dbe485b7aa1ac3c7a7d35f4ad072d9e9eee55d7465b26d911",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "14c01f7e5d40fde75da2457d4a4a9abff5846e784211a2a48e72314143b7ab08",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

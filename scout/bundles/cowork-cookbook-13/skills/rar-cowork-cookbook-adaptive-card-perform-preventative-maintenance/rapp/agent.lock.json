@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_perform_preventative_maintenance",
   "agent_file": "adaptive_card_perform_preventative_maintenance_agent.py",
-  "agent_sha256": "49a0f3619d6c6be1d3d0f22716f95fbf5535dd047bc0677e4cac1a461b359e8b",
+  "agent_sha256": "519e228304406e104fef280d235a2d6238fe83f66af78a2a379ba3ffd2eb86c6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardPerformPreventativeMaintenance",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a reusable Adaptive Card JSON snapshot of perform preventative maintenance status for embedding in dashboards, emails, or Teams.",
+    "description": "Generates a read-only Adaptive Card JSON file visualizing preventative maintenance status from Dynamics 365 F&SCM (legal entity USMF), with header, KPI tiles, RAG row, and action buttons. Call when you need a card snapsh",
     "display_name": "Perform preventative maintenance Status Adaptive Card",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "baeddee26c9306ea",
+      "content_digest": "a9286f38beb9905f",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AdaptiveCardPerformPreventativeMaintenance",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the Adaptive Card JSON file to produce, e.g. adaptive-card-perform-preventative-maintenance-2026-05-24-card.json.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "snapshot_date": {
+        "description": "Date the status snapshot represents, used in the card timestamp and filename.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

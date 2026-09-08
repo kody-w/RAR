@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_configure_and_manage_iot_devices",
   "name": "Configure and manage IoT devices Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_configure_and_manage_iot_devices",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_configure_and_manage_iot_devices:504dac1a1735711f2e340f0308aba2e9b4b986cbc6a2be292717c4c6b8540ec8",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_configure_and_manage_iot_devices:74b29db412466e2c35a9256c3a5ce6d5694a2a88c90879dc0555c3ff1abfbf2a",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_configure_and_manage_iot_devices:504dac1a1735711f2e340f0308aba2e9b4b986cbc6a2be292717c4c6b8540ec8",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_configure_and_manage_iot_devices:504dac1a1735711f2e340f0308aba2e9b4b986cbc6a2be292717c4c6b8540ec8"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across configure and manage IoT devices records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to IoT device records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, producing a dry-run preview workbook, pausing for approval, then a confirmation workboo",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "2a69eff6344abd6c08c74a12ad82c286c9f9a92794e6f24867ebfed2421dbdcc",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "6e151e51a334277f5bb2428ed1433a68f188d7e84acb2065c243893ef787016f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

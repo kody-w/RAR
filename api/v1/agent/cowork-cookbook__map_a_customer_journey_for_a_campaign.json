@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__map_a_customer_journey_for_a_campaign",
   "name": "Map a customer journey for a campaign",
   "rar_name": "@cowork-cookbook/map_a_customer_journey_for_a_campaign",
-  "rappid": "rappid:@cowork-cookbook/map_a_customer_journey_for_a_campaign:1ffc35c7c5c7be5fda21e5f1d2c7d5520706a405bcfb5f4bde47e597ec32c7dd",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/map_a_customer_journey_for_a_campaign:516d3ff9b1e576d7d9f4259db2c1a582fa3f42c1449b1d2ceb27821e805cdb18",
+  "_migrated_from": "rappid:@cowork-cookbook/map_a_customer_journey_for_a_campaign:1ffc35c7c5c7be5fda21e5f1d2c7d5520706a405bcfb5f4bde47e597ec32c7dd",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/map_a_customer_journey_for_a_campaign:1ffc35c7c5c7be5fda21e5f1d2c7d5520706a405bcfb5f4bde47e597ec32c7dd"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "miro"
   ],
-  "description": "Turn a campaign brief into a clear, visual customer journey the team can rally around - instead of arguing over interpretations of the same Word doc.",
+  "description": "Builds a Miro customer journey board for a named campaign from its brief, audience definition, and messaging files, plus a stage/channel/asset/owner/status tracking table; call before asset production.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "2810aea892da61f3b34fe3fe5bbc8964b2df8bda2a2250c5112bf951d0da0242",
+  "lines": 265,
+  "size_kb": 17.7,
+  "sha256": "3c30c9bb144354f962b9a24a887995c89ab7d18bf95f5e287cb507f40fced766",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

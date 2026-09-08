@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/catch_up_on_messages_and_send_replies",
   "agent_file": "catch_up_on_messages_and_send_replies_agent.py",
-  "agent_sha256": "df2584d346a31b87577d83441d08eddf9a328147a8cf058be03a89b5332a91f6",
+  "agent_sha256": "7afb7ea1e7bd43db83ef6a98952d75fd97a18ba3b295594514f0c5c00e239924",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CatchUpOnMessagesAndSendReplies",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Close the loop on unanswered questions without scrolling back through a week of threads.",
+    "description": "Scans this week's Teams messages and emails for direct questions you haven't answered, auto-sends short acknowledgments, and drafts higher-stakes replies for your review before sending.",
     "display_name": "Catch up on messages and send replies automatically",
     "industry_context": {
       "deprecated": false,
@@ -47,9 +47,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "4bef0a8e9c6a1bb7",
+      "content_digest": "980c21c35db85f61",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -72,24 +72,29 @@
       "intermediate",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "CatchUpOnMessagesAndSendReplies",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to apply this capability to.",
+      "time_range": {
+        "description": "The period of messages to review; defaults to this week.",
         "type": "string"
       }
     },
@@ -98,5 +103,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

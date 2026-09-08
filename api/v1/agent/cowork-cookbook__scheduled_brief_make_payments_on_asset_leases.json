@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_make_payments_on_asset_leases",
   "name": "Make payments on asset leases Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_make_payments_on_asset_leases",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_make_payments_on_asset_leases:0f618e8ddb4b0f9be48c62164e5d3b9082eb290814bb05f8c7a04c2ee7c4f463",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_make_payments_on_asset_leases:0dc2acdf5d199b28c3ea683c0f53d2d7e85419575ce32b5dff04e4ee97ab9c2a",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_make_payments_on_asset_leases:0f618e8ddb4b0f9be48c62164e5d3b9082eb290814bb05f8c7a04c2ee7c4f463",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_make_payments_on_asset_leases:0f618e8ddb4b0f9be48c62164e5d3b9082eb290814bb05f8c7a04c2ee7c4f463"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing make payments on asset leases for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on asset lease payments from Dynamics 365 ERP for a legal entity, with top 5 items by impact, anomalies vs the 7-day rolling average, and next actions, then saves a draft email to the owner plus a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "6e6bab2f2fc3d307f85d62d50c834bb69be780785e78b118e06bf9feb09f7780",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "89cc5bd78118b4a368553fef9f937077d4333560f4518c0fd3013e59d94b5213",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

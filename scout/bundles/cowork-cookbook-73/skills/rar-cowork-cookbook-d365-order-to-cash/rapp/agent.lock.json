@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/d365_order_to_cash",
   "agent_file": "d365_order_to_cash_agent.py",
-  "agent_sha256": "fc702e5d63639e5c85fb87234bb7e0d1c46773b49b39d083ec543a1543f29bf9",
+  "agent_sha256": "eeee1d0ebf32b052bdd76a4f63089ac736864953e2490392681365f092515f27",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365OrderToCash",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "A Dynamics 365 Finance & Supply Chain Management expert scoped to the Order to cash end-to-end process - covers 5 L2 areas and 42 L3 processes from the Microsoft Business Process Catalog.",
+    "description": "Scopes the conversation to Dynamics 365 Finance & Supply Chain Order to Cash (5 L2 areas, 42 L3 processes), answering using D365 entities and USMF legal entity conventions via the ERP plugin.",
     "display_name": "D365 Order to cash Expert",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "89b6091838ba5b4c",
+      "content_digest": "4463babd043c52a9",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "D365OrderToCash",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

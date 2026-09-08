@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/monte_carlo_analysis",
   "agent_file": "monte_carlo_analysis_agent.py",
-  "agent_sha256": "33b7c20af7270399ddff663b9d1f2e284248d5d4d316cf53a57fb526dbaaadc0",
+  "agent_sha256": "d859c727b6e268c23f6f7f423d0bc639d26deaef4653339360369ae84fae43e9",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MonteCarloAnalysis",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "csv",
       "analysis"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "MonteCarloAnalysis",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

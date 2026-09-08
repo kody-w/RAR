@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/demo_data_conduct_upsell_cross_sell_or_repeat_sale_prompt",
   "agent_file": "demo_data_conduct_upsell_cross_sell_or_repeat_sale_prompt_agent.py",
-  "agent_sha256": "da3c2683d8884bd2cde937e47c355e36a520bc63ca3e62cea0e5d4c6005eba20",
+  "agent_sha256": "dc11447ad23ed34baa8cce232741fe2a2c9d0c6a68115e875b34197ce014bdfc",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataConductUpsellCrossSellOrRepeatSalePrompt",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates and creates realistic demo records for conduct upsell, cross sell or repeat sale prompt in a sandbox tenant for training and pilot scenarios.",
+    "description": "Generates 25 realistic demo records for an upsell/cross-sell/repeat-sale scenario in a sandbox D365 F&SCM legal entity, staging them in an Excel workbook first, then creating them and listing each new primary key.",
     "display_name": "Conduct upsell, cross sell or repeat sale prompt Demo Data Generator",
     "industry_context": {
       "deprecated": false,
@@ -51,9 +51,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "ed5828303285d798",
+      "content_digest": "66e66e0b816a0fbe",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -77,28 +77,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DemoDataConductUpsellCrossSellOrRepeatSalePrompt",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Sandbox D365 legal entity to write to (default USMF); must not be production.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "record_count": {
+        "description": "How many demo records to generate (default 25).",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "workbook_name": {
+        "description": "Excel staging file name, e.g. demo-data-conduct-upsell-cross-sell-or-repeat-sale-prompt-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -107,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

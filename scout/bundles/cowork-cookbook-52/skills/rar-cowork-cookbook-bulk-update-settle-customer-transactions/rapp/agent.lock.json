@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_settle_customer_transactions",
   "agent_file": "bulk_update_settle_customer_transactions_agent.py",
-  "agent_sha256": "aaaf243d5eea2c2ef3a14e68025f2042839e05a38d748fcbbc821162baf5e79a",
+  "agent_sha256": "5626452acec355bd30507e2c41bf5302ff6932f476ac82357c73ac49f1c67d19",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateSettleCustomerTransactions",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across settle customer transactions records from an input list, with dry-run preview before commit.",
+    "description": "Applies a bulk field update to settle customer transactions records in Dynamics 365 F&SCM via the Cowork ERP plugin, producing a dry-run preview workbook for approval before committing changes.",
     "display_name": "Settle customer transactions Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "89b45043e126cedf",
+      "content_digest": "c77b061721e06fef",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdateSettleCustomerTransactions",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit approval after reviewing the dry-run preview workbook.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against, e.g. USMF; sandbox only.",
+        "type": "string"
+      },
+      "new_values": {
+        "description": "The field(s) and new value(s) to apply to each record.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "record_ids": {
+        "description": "List of settle customer transactions record IDs to update.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

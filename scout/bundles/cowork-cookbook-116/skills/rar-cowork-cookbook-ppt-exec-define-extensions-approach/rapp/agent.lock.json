@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_extensions_approach",
   "agent_file": "ppt_exec_define_extensions_approach_agent.py",
-  "agent_sha256": "cadb23f55eea88f691521ab560889a88da5fe2476e79b52ef82a0b2ca3ad4a10",
+  "agent_sha256": "10172870bd575cda52699046db7ee0b9831a6daba6bdc12f0c4e499235cb79e2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineExtensionsApproach",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on define extensions approach status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on define extensions approach status from Dynamics 365 ERP data for a legal entity, with KPIs, trend chart, red flags, actions, appendix, and speaker notes.",
     "display_name": "Define extensions approach Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "fa922bffff553dd1",
+      "content_digest": "41288af9c7ec030f",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecDefineExtensionsApproach",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "comparison_period": {
+        "description": "Prior period to trend the KPIs against.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to pull data from (e.g. USMF).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Target .pptx filename, e.g. ppt-exec-define-extensions-approach-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_length": {
+        "description": "Meeting length the deck is scoped for, e.g. 15-minute monthly review.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

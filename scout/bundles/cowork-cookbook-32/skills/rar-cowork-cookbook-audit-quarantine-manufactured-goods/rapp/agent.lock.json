@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/audit_quarantine_manufactured_goods",
   "agent_file": "audit_quarantine_manufactured_goods_agent.py",
-  "agent_sha256": "607b9c22621b8d617979ce3de3c73c4dc62e0a55a22f27e1591b1e28b16d4c7a",
+  "agent_sha256": "0c84b0c533ee2a56501224fd19d81975f7c46a7ddda461e8e425a718e665f21c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditQuarantineManufacturedGoods",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits quarantine manufactured goods records for completeness and policy compliance against rule-based checks.",
+    "description": "Runs a read-only completeness and policy audit of quarantine manufactured goods records in Dynamics 365 F&SCM (legal entity USMF) and returns an Excel workbook with one sheet per finding category plus a Summary sheet.",
     "display_name": "Quarantine manufactured goods Completeness Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "33dc2e802681d6e5",
+      "content_digest": "7c5a78abec0ce302",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "AuditQuarantineManufacturedGoods",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_window": {
+        "description": "Date range for stale-date checks; USMF demo data is mostly FY2017.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to audit; defaults to USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_filename": {
+        "description": "Excel workbook name, e.g. audit-quarantine-manufactured-goods-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

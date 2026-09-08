@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_manage_service_truck_inventory",
   "name": "Manage service truck inventory Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_manage_service_truck_inventory",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_manage_service_truck_inventory:110c0a697d9cf82fedd045a4a125408d0daac92271867de16fbecd05109301e1",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_manage_service_truck_inventory:c90a0fab89756d43f93b6b07ece50a70df907efda883a92e8b2e96e6e6a73897",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_manage_service_truck_inventory:110c0a697d9cf82fedd045a4a125408d0daac92271867de16fbecd05109301e1",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_manage_service_truck_inventory:110c0a697d9cf82fedd045a4a125408d0daac92271867de16fbecd05109301e1"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of manage service truck inventory status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file summarizing service truck inventory status from Dynamics 365 F&SCM (legal entity USMF), with header, KPI tiles, RAG row, and action buttons. Call when you need an embeddable",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "d02066e8a31ba6ff28507b3132d876259972f1376761944d4871f9370409e56e",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "471a33b59b31fc0f632b63965f3069633fc3e7a29a9f5395d63498961a7b6291",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

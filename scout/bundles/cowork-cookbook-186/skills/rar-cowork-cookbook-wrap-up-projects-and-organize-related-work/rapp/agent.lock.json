@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/wrap_up_projects_and_organize_related_work",
   "agent_file": "wrap_up_projects_and_organize_related_work_agent.py",
-  "agent_sha256": "8345d26f8d12ae87557dcd7a7c72cc10c9e5e2ce1e7efc5feaa712e2842ddd44",
+  "agent_sha256": "189dceb72a28e49a7b9a67177cac64485326efa65613d1b8aca823a15af50a54",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WrapUpProjectsAndOrganizeRelatedWork",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Close out a project with a clean, shareable archive - not a scattered trail of files.",
+    "description": "Collects a finished project's OneDrive files into a new '[Project] - Archive' folder, shares it with the project team, and adds an HTML recap page; call when closing out a project.",
     "display_name": "Wrap up projects and organize all related work",
     "industry_context": {
       "deprecated": false,
@@ -46,9 +46,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "f351da4abc366491",
+      "content_digest": "8f08adf774a926df",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -71,24 +71,33 @@
       "beginner",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "WrapUpProjectsAndOrganizeRelatedWork",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to apply this capability to.",
+      "project_name": {
+        "description": "Name of the completed project; used to find related files and to name the '[Project name] - Archive' folder.",
+        "type": "string"
+      },
+      "team": {
+        "description": "The project team to share the archive folder with.",
         "type": "string"
       }
     },
@@ -97,5 +106,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

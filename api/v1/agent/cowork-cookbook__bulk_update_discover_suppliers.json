@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_discover_suppliers",
   "name": "Discover suppliers Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_discover_suppliers",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_discover_suppliers:55db5c3251ecae752b61c60c24d41ee5c6525699f0e81fb038f625616b29fce2",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_discover_suppliers:9acb525eca0670dd45d5745e0787b5e84606159af16ec5e4f01a09ef92df7e55",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_discover_suppliers:55db5c3251ecae752b61c60c24d41ee5c6525699f0e81fb038f625616b29fce2",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_discover_suppliers:55db5c3251ecae752b61c60c24d41ee5c6525699f0e81fb038f625616b29fce2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across discover suppliers records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to discover-suppliers records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork ERP plugin, returning a dry-run preview workbook first and a confirmation workbook after approva",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "e62abca6d07946b404132d793cfb907af58fdf71a1ffd440e195a3a507eabf6a",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "b9ed58b0bfebae79ff5f343c6746adce9316e16d3cd6fe86b944afbfb22d0875",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

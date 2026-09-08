@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_enter_sales_orders",
   "name": "Enter sales orders Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_enter_sales_orders",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_enter_sales_orders:cd86886f40c2a8bfa5f1205cf5ed11c6b0f0238eb0e9ccf56586086c36d0a3c8",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_enter_sales_orders:021d6d6ca150a8d30f3bf03dbd33a2ab2af795ddcdffe52bc2128cb469d6d19e",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_enter_sales_orders:cd86886f40c2a8bfa5f1205cf5ed11c6b0f0238eb0e9ccf56586086c36d0a3c8",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_enter_sales_orders:cd86886f40c2a8bfa5f1205cf5ed11c6b0f0238eb0e9ccf56586086c36d0a3c8"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of enter sales orders status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing enter sales orders status from Dynamics 365 F&SCM (legal entity USMF), with header, KPI tiles, RAG row, and action buttons for Teams, Outlook, or the designer.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "00712e5246f026be096ea18cb83d261baec36943f9177d7124b807dc32032adf",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "e872e2f0cd4607bc85a3d14380d4d0480e0c4d81839d1a80ecd22afff876823e",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/knowledge_corpus_curator",
   "agent_file": "knowledge_corpus_curator_agent.py",
-  "agent_sha256": "64d1835538128e525a1d912cc3140cda56f126332bd118ed0eeef34adf18b00f",
+  "agent_sha256": "0c3aead2f0ab4312a0b116210443d47034268810152022a21ef72612b84c7fa6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "KnowledgeCorpusCurator",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "uploads",
       "excel"
     ],
-    "version": "1.8.0"
+    "version": "2.8.2"
   },
   "runtime_name": "KnowledgeCorpusCurator",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "1.8.0"
+  "version": "2.8.2"
 }

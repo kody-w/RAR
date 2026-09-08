@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_conduct_training",
   "agent_file": "teams_update_conduct_training_agent.py",
-  "agent_sha256": "1ee9172de5d0b0999062629fe05f7e2fb0336092ca2d42e616e292f45fffa0cc",
+  "agent_sha256": "adde43dcbc43087f9ca1b19de5a11a52a5a59b97e673230e87b5adeb1b71b5f9",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConductTraining",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on conduct training status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes conduct training status from Dynamics 365 ERP for a given legal entity and saves two artifacts: a markdown Teams channel post and an Adaptive Card JSON with KPIs and quick-action buttons; nothing is posted.",
     "display_name": "Conduct training Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "2f6d5ba5ce57c94d",
+      "content_digest": "6335e806faf195a5",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,33 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateConductTraining",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "card_filename": {
+        "description": "Filename for the saved Adaptive Card JSON, e.g. teams-update-conduct-training-2026-05-24-card.json.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report on, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -112,5 +117,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

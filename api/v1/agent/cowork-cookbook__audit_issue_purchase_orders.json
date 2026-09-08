@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_issue_purchase_orders",
   "name": "Issue purchase orders Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_issue_purchase_orders",
-  "rappid": "rappid:@cowork-cookbook/audit_issue_purchase_orders:a14a2214ba0b03a1d995cd292c7210b5603fa45491b85205080e04c449441f33",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_issue_purchase_orders:7ae59db053320ef4bb7f2396c635029b8970e93031fca43d3045b9f9a6da16fb",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_issue_purchase_orders:a14a2214ba0b03a1d995cd292c7210b5603fa45491b85205080e04c449441f33",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_issue_purchase_orders:a14a2214ba0b03a1d995cd292c7210b5603fa45491b85205080e04c449441f33"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits issue purchase orders records for completeness and policy compliance against rule-based checks.",
+  "description": "Audits purchase order records in Dynamics 365 F&SCM (legal entity USMF) read-only for missing required fields, stale dates, blank descriptions, inactive-entity references, and policy violations, returning an Excel workbo",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "1c3d4ed03c50af539e0a4a7bcbc27184240d0fe5b8f12c7877b3c90be8fcf48c",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "f680bb401d52d4f8a9049931a11557510634a5de7dd9899369155896e3c1e098",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_configure_and_manage_microsoft_teams_integrations",
   "name": "Configure and manage Microsoft Teams integrations Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_configure_and_manage_microsoft_teams_integrations",
-  "rappid": "rappid:@cowork-cookbook/teams_update_configure_and_manage_microsoft_teams_integrations:8d37d034e1871706b2f47a556ed83a27b3411f376bca385ca3813f23ddad17b8",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_configure_and_manage_microsoft_teams_integrations:b4be7aa823cff286c7e83f248fbd4f954b09540a25667d2998a57ce0174abc5b",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_configure_and_manage_microsoft_teams_integrations:8d37d034e1871706b2f47a556ed83a27b3411f376bca385ca3813f23ddad17b8",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_configure_and_manage_microsoft_teams_integrations:8d37d034e1871706b2f47a556ed83a27b3411f376bca385ca3813f23ddad17b8"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on configure and manage Microsoft Teams integrations status with an interactive Adaptive Card for quick triage.",
+  "description": "Drafts a Teams channel post (markdown summary plus 3 bullets) and a saved Adaptive Card JSON with KPIs, status indicators, and quick-action buttons on Teams integration status, using the D365 ERP plugin for a legal entit",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.7,
-  "sha256": "759acb068dddbf36a9f95a9e44db6cbaf2718113705c50112f6e14084a073898",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "e2e5dc5f82fd832f1385e05c43c5e66cea5460b9e7083daa3880e9e99c644f18",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

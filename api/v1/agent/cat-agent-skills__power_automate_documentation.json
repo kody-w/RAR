@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__power_automate_documentation",
   "name": "Power Automate Documentation",
   "rar_name": "@cat-agent-skills/power_automate_documentation",
-  "rappid": "rappid:@cat-agent-skills/power_automate_documentation:5a703496504b0c68544b1a4b69a7c58d311dc07deaf08f25f27f4528971bbb89",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/power_automate_documentation:97bdfa37a8780db100f46de4ca6e43dab55f32ce49232e7214363a761fefe439",
+  "_migrated_from": "rappid:@cat-agent-skills/power_automate_documentation:5a703496504b0c68544b1a4b69a7c58d311dc07deaf08f25f27f4528971bbb89",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/power_automate_documentation:5a703496504b0c68544b1a4b69a7c58d311dc07deaf08f25f27f4528971bbb89"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -23,9 +25,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.5,
-  "sha256": "db07d9c1a188ccc5657ca62c42bf1782d6716fd9edc11d5efd9ee5c9f9490f30",
+  "lines": 262,
+  "size_kb": 12.9,
+  "sha256": "2f6813624393f9855a67039690460b474cd338bc60bad710bc594790761b4ab0",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

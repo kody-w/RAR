@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_create_production_plan",
   "name": "Create production plan Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_create_production_plan",
-  "rappid": "rappid:@cowork-cookbook/audit_create_production_plan:7bb180b51a0913cf619a5dc04d80ccf078761a691d39c268862c7276e5a5d5f9",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_create_production_plan:f23f36fe742f714e57e8bb4ae432e474b75d89d660bdd59ab88941e6689125c7",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_create_production_plan:7bb180b51a0913cf619a5dc04d80ccf078761a691d39c268862c7276e5a5d5f9",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_create_production_plan:7bb180b51a0913cf619a5dc04d80ccf078761a691d39c268862c7276e5a5d5f9"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits create production plan records for completeness and policy compliance against rule-based checks.",
+  "description": "Audits create production plan records in a Dynamics 365 F&SCM legal entity for completeness and policy compliance (missing fields, stale dates, blank descriptions, inactive references) and returns a read-only Excel audit",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "c26dd65fb4324a69f5b6d0dbc6daecfb98f45d2322144ecffc91abff968b6d97",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "63e4fb3884f7a9edd58bbe30409e01baf592fccceb19cffcab616eb8a6f3e127",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

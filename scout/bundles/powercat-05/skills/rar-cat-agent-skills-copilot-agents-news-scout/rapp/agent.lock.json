@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_agents_news_scout",
   "agent_file": "copilot_agents_news_scout_agent.py",
-  "agent_sha256": "6fc2a0fa301aa19d483c4c839feed41debd86262eb0fa2852fdcaccdebed450e",
+  "agent_sha256": "9d45dca1f4eeae058b0f07c698721c49a4bc3bb408dbbc74401899aef8225a40",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotAgentsNewsScout",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "weekly",
       "teams"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "CopilotAgentsNewsScout",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

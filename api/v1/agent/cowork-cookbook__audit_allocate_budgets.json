@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_allocate_budgets",
   "name": "Allocate budgets Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_allocate_budgets",
-  "rappid": "rappid:@cowork-cookbook/audit_allocate_budgets:1d90273b47bdf5cbc8e575eaf7476854a4bd2f2a99328b96a38f4e0310a6e71a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_allocate_budgets:fcc2270766b664d3d6aca0f692b7e5b37d982b992b42245bb44e2274766a5102",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_allocate_budgets:1d90273b47bdf5cbc8e575eaf7476854a4bd2f2a99328b96a38f4e0310a6e71a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_allocate_budgets:1d90273b47bdf5cbc8e575eaf7476854a4bd2f2a99328b96a38f4e0310a6e71a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits allocate budgets records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of allocate budgets records in Dynamics 365 F&SCM (legal entity USMF) via the Cowork D365 ERP plugin and returns an Excel workbook with one sheet per finding category plus a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "8a55a9ab94ade5e58ed00e53709914d8ac31f3205d81c9f5c5670ff936ef6585",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "1c1c7cc8893e08f6faec1800faaba6b75311de6504ff0b519991a9cb1eb11cac",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/develop_messaging_and_positioning",
   "agent_file": "develop_messaging_and_positioning_agent.py",
-  "agent_sha256": "4b5fe52e2821bce76747177d2a9306a38a61a4826524886f5171fdfbbac13ddc",
+  "agent_sha256": "e2d99b4302accf938befe16fa3de5a96995218af879eb7ef82d5f751cef4ba84",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DevelopMessagingAndPositioning",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Move messaging development out of scattered docs into one working surface the team can pressure-test together.",
+    "description": "Builds a Monday.com messaging and positioning board for a named product or campaign, grouped by section (value pillars, feature-to-benefit, persona cards, business alignment, competitive positioning), pre-filled from you",
     "display_name": "Develop messaging and positioning",
     "industry_context": {
       "deprecated": false,
@@ -44,9 +44,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "bbf2afef0d8a93ee",
+      "content_digest": "b57f6e2e90962c54",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -70,28 +70,41 @@
       "integration",
       "monday_com"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DevelopMessagingAndPositioning",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "audience": {
+        "description": "The target audience the messaging should be tailored to.",
+        "type": "string"
+      },
+      "competitor_name": {
+        "description": "The competitor to differentiate against in the positioning statements.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "product_or_campaign_name": {
+        "description": "The product or campaign the messaging and positioning is being developed for.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "source_documents": {
+        "description": "Product Strategy doc, Customer Insights Report, Competitive Summary, and approved Brand Voice guidelines to pull from.",
         "type": "string"
       }
     },
@@ -100,5 +113,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

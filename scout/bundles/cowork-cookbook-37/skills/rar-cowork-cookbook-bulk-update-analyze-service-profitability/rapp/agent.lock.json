@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_analyze_service_profitability",
   "agent_file": "bulk_update_analyze_service_profitability_agent.py",
-  "agent_sha256": "ec6f9b012356b7e6de1f9a2f65e3b562926219de397f9b74e308bc613f3f0b06",
+  "agent_sha256": "b67b10004482ffe1fefd2f57a7c98afbbdb8ff03f35d3b10234050221074e3ce",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAnalyzeServiceProfitability",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across analyze service profitability records from an input list, with dry-run preview before commit.",
+    "description": "Applies a bulk field update to service profitability records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied list of record IDs and new values, with a dry-run preview workbook and approval pause",
     "display_name": "Analyze service profitability Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "6ee3dd1b7e3ce0ba",
+      "content_digest": "33790a7835cf3391",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdateAnalyzeServiceProfitability",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit approval after reviewing the dry-run preview workbook.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Legal entity to run against; defaults to USMF sandbox.",
+        "type": "string"
+      },
+      "new_values": {
+        "description": "The field(s) and new value(s) to apply to those records.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "record_ids": {
+        "description": "List of service profitability record IDs to update.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

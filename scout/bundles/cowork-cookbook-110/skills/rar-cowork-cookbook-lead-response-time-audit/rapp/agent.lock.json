@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/lead_response_time_audit",
   "agent_file": "lead_response_time_audit_agent.py",
-  "agent_sha256": "8122afe519f09d14fe79b5b1b4e32690c7c59cb5c1b95e608dfd0ddb4c3fe614",
+  "agent_sha256": "a911e692ad8ba7c7fa00551bca0e1e518e0a113e42dafb12b0be2e3aca911639",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LeadResponseTimeAudit",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Measures how long leads wait before someone first works them, and highlights the leads that are still sitting untouched.",
+    "description": "Audits how quickly leads owned by you or your team are first worked in Dynamics 365 Sales, and returns an Excel workbook with median and 90th-percentile response times plus untouched leads.",
     "display_name": "Lead Response Time Audit",
     "industry_context": {
       "deprecated": false,
@@ -59,9 +59,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "9cbb47434cf8126e",
+      "content_digest": "f358938a00e3753c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -85,28 +85,41 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "LeadResponseTimeAudit",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "analysis_window": {
+        "description": "Optional preferred date window; otherwise the most recent three months of actual lead creation dates is chosen.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "environment": {
+        "description": "The Dynamics 365 Sales environment the plugin is bound to for the analysis.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_file": {
+        "description": "Name of the Excel workbook to produce, default 'lead-response-audit.xlsx'.",
+        "type": "string"
+      },
+      "ownership_scope": {
+        "description": "Whose leads to include — leads owned by you or by your team.",
         "type": "string"
       }
     },
@@ -115,5 +128,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

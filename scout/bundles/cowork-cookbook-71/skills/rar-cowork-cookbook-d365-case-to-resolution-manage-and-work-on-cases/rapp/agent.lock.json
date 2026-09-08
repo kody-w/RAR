@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/d365_case_to_resolution_manage_and_work_on_cases",
   "agent_file": "d365_case_to_resolution_manage_and_work_on_cases_agent.py",
-  "agent_sha256": "1c40e41758aa86cc75829693710807e9ea86323e38086b629f5f99aa7b1936cb",
+  "agent_sha256": "c47ed869dd094f0997e44d93c3fbf187c22f2c7885b5cb08b4432ade5f721a9b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365CaseToResolutionManageAndWorkOnCases",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "A Dynamics 365 F&SCM expert scoped to the Manage and work on cases area (a level-2 subdomain of Case to resolution) - covers 17 L3 processes.",
+    "description": "Scopes the conversation to Dynamics 365 F&SCM 'Manage and work on cases' (17 L3 processes under Case to resolution), answering with that area's entities and USMF conventions; call it for case-handling questions in D365.",
     "display_name": "D365 Manage and work on cases Expert",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "fd04f6600b157185",
+      "content_digest": "cef51efc074187c4",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "D365CaseToResolutionManageAndWorkOnCases",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

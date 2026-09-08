@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/configure_assess_software_releases",
   "agent_file": "configure_assess_software_releases_agent.py",
-  "agent_sha256": "dd39638bf65b3e3ef81af376dc14cedf6b102d1734ca1e4d0e6806c6b8fc7cdf",
+  "agent_sha256": "7258ed2efddf7b26fd6bcae61a874583fc77ecff9846c72dd10f943432fba896",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureAssessSoftwareReleases",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk configuration change to assess software releases from an input Excel file, with validation and rollback support.",
+    "description": "Reads an attached configuration Excel file of assess-software-releases rows in Dynamics 365 F&SCM (legal entity USMF), validates every row, emits a validation workbook, waits for your approval, then applies changes and e",
     "display_name": "Assess software releases Configuration Bulk Setup",
     "industry_context": {
       "deprecated": false,
@@ -67,9 +67,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "3d6dff430f4c9ee3",
+      "content_digest": "dc375dbc7ccfdb3d",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -93,28 +93,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ConfigureAssessSoftwareReleases",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit go-ahead after reviewing the validation workbook, before any changes are applied.",
+        "type": "string"
+      },
+      "configuration_excel_file": {
+        "description": "Attached Excel file with one row per assess software releases target and the new field values.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against (e.g. USMF); use a sandbox first.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -123,5 +132,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

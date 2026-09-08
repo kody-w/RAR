@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/launch_activation_kit_and_owner_routing",
   "agent_file": "launch_activation_kit_and_owner_routing_agent.py",
-  "agent_sha256": "79fc2933161838fb0e1a2e3851fc7868bdcaff5931c3e69b12bbd6ab95094f78",
+  "agent_sha256": "c3395e1272dce98f7a6668b166354a8afe0154c66ac6ca85744204bb487255f4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LaunchActivationKitAndOwnerRouting",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Build the full launch kit across customer, field, partner, exec, and creator audiences - grounded in real performance baselines and proof points - and get every asset to the right owner with a review deadline.",
+    "description": "Builds a full launch activation kit (customer announcement, exec blog, partner one-pager, field talking points, creator pack, sales quick-start deck, social calendar, owner routing plan) and files each asset by owner wit",
     "display_name": "Launch activation kit and owner routing",
     "industry_context": {
       "deprecated": false,
@@ -51,9 +51,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "49c0d6204b4fab80",
+      "content_digest": "855a1a0a116eab96",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -77,28 +77,45 @@
       "integration",
       "fabric_iq"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "LaunchActivationKitAndOwnerRouting",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "exec_direction": {
+        "description": "Executive name and the meeting, email, or briefing where they set direction.",
+        "type": "string"
+      },
+      "kickoff_meeting": {
+        "description": "Launch kickoff meeting name and date to ground content in.",
+        "type": "string"
+      },
+      "launch_date": {
+        "description": "The launch date to sequence assets around.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "owner_map_and_workspace": {
+        "description": "Optional owner map for routing, plus the launch workspace folder to file assets into.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "product_name": {
+        "description": "Name of the product launching.",
         "type": "string"
       }
     },
@@ -107,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

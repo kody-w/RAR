@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_map_value_streams",
   "name": "Map value streams Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_map_value_streams",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_map_value_streams:0e119d46662a831554c377398697bbae54b357faf21f2e5ef20e4a938a7e012e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_map_value_streams:2205318b5754b426bce217ae4506174641da39bfd2159ea42e6d4fd2965ed740",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_map_value_streams:0e119d46662a831554c377398697bbae54b357faf21f2e5ef20e4a938a7e012e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_map_value_streams:0e119d46662a831554c377398697bbae54b357faf21f2e5ef20e4a938a7e012e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across map value streams records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to map value streams records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied list of record IDs and new values, with a dry-run preview workbook before commit.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "2eb55f48a7fbf89322b76ff2c7bf0dccd24844ac2406b43a2a3b0520942ecc6a",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "196286e54e0e1e6b4145a241b0de966ba37168b1b2ff18eb2c888da25e7b7cef",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

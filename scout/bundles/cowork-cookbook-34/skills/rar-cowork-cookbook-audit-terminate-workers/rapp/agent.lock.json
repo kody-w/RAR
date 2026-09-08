@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/audit_terminate_workers",
   "agent_file": "audit_terminate_workers_agent.py",
-  "agent_sha256": "55fd1247d1d5ad73f763119aa7b2beff7296e992c84e5b9eed84c0883a71840e",
+  "agent_sha256": "250ddd93f20f28701e398da064ddb4fcd01e308ff8342ff4448323d81c2b0040",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditTerminateWorkers",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits terminate workers records for completeness and policy compliance against rule-based checks.",
+    "description": "Audits Dynamics 365 F&SCM terminate-workers records in a given legal entity for completeness and policy compliance, returning a read-only Excel workbook with a sheet per finding category and a Summary sheet of counts.",
     "display_name": "Terminate workers Completeness Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "d71815ebff73ed24",
+      "content_digest": "4aedf68bd8c0b3b8",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "AuditTerminateWorkers",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_window": {
+        "description": "Date range used to judge stale dates; adjust for demo data era (USMF is mostly FY2017).",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to audit, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_filename": {
+        "description": "Excel workbook name, e.g. audit-terminate-workers-2026-05-24.xlsx, saved to Documents/Cowork/output/.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/whiteboard_to_infographic",
   "agent_file": "whiteboard_to_infographic_agent.py",
-  "agent_sha256": "b4b6836d3126428ba7cb3ba517721d886362be50d8ef10c3de03706a275330e5",
+  "agent_sha256": "11818cb6790bb3fa12ce584fccfe160c66297eecba69ae252c3de296a25c47a8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WhiteboardToInfographic",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "design",
       "consulting"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "WhiteboardToInfographic",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

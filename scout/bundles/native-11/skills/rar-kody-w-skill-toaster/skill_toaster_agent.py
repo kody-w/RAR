@@ -10,9 +10,19 @@ upstream entry — kind, tags, description, platforms — infers the SHAPE of th
 capability, and emits a working procedure for that shape, bound to whatever the
 caller passes in.
 
-It never copies upstream content. It cannot: RAR's aggregation policy is
-index-only, and the upstream body is never fetched. What it produces is RAR's own
-method for the capability's shape, which is why the output is ours to publish.
+Two kinds of entry arrive here. A metadata-only entry (no licence to carry the
+body) is toasted from its SHAPE: RAR's own method for that kind of work. A
+licensed entry (CC BY and friends, `recipe` present on the record) is toasted
+from its BODY: the upstream prompt verbatim, with attribution, plus its
+prerequisites, steps and expected output — the recipe becomes a deterministic,
+callable agent. That is the point of toasting: a prompt a model interprets
+differently every time becomes code that returns the same thing every time.
+
+A model may sharpen either kind out of band — `refine` passes an entry through
+the local Brainstem and caches the structured result (a tailored description,
+the inputs to ask for, when to use it) keyed by the entry's content digest. The
+BUILD never calls a model: it reads the cache, so regeneration is byte-stable and
+the drift gate stays meaningful. Stale cache (digest moved) is ignored.
 
 Same analysis pattern as the curator reviews: score real metadata, pick from
 rules-as-data, optionally let a model sharpen the result, fall back to the rules
@@ -21,26 +31,33 @@ byte-stable and the drift gate stays meaningful.
 
   Rules as data     — add an archetype by adding a row; no control flow changes.
   Deterministic     — same input, same toast, forever.
-  Never reproduces  — synthesises method from shape, never mirrors upstream text.
+  Attributed        — bodies are carried only from sources whose licence allows it.
 
 Usage:
     python skill_toaster_agent.py                     # describe the engine
     python skill_toaster_agent.py analyze <slug>      # show the inferred shape
     python skill_toaster_agent.py toast <slug>        # show the generated spec
+    python skill_toaster_agent.py refine <slug>       # one pass through the local Brainstem -> cache
+    python skill_toaster_agent.py refine_all [N]      # refine up to N entries that lack a fresh refinement
 """
 
+import fcntl
+import hashlib
 import json
 import os
 import re
 import sys
+import urllib.error
+import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/skill_toaster_agent",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "display_name": "SkillToaster",
-    "description": "Turns an aggregated third-party skill entry into a real, callable RAPP agent by inferring the capability's shape from its metadata and generating a working procedure for it.",
+    "description": "Turns an aggregated third-party entry into a real, deterministic RAPP agent: licensed recipes are carried verbatim with attribution (prompt, prerequisites, steps, expected output), metadata-only entries get a method for their shape, and a model pass through the local Brainstem can enrich either into a cached, digest-keyed refinement the build consumes.",
     "author": "Kody Wildfeuer",
     "tags": ["aggregation", "codegen", "engine", "rules_as_data", "toaster"],
     "category": "devtools",
@@ -445,6 +462,10 @@ class SkillToasterEngine(RappterEngine):
         Pure function of the entry plus RULES plus any cached model refinement,
         so regeneration is byte-stable.
         """
+        recipe = item.get("recipe") if isinstance(item.get("recipe"), dict) else {}
+        if recipe.get("prompt"):
+            return cls.toast_recipe(item, recipe)
+
         analysis = cls.analyze(item)
         rule = cls.RULES.get(analysis["archetype"], cls.RULES["general"])
 
@@ -470,6 +491,157 @@ class SkillToasterEngine(RappterEngine):
             "refined_by": cached.get("model") or "rules",
         }
 
+    RECIPE_OPERATIONS = ["run", "prompt", "plan", "checklist", "describe"]
+
+    @classmethod
+    def recipe_digest(cls, item):
+        """Fingerprint of the carried body; a refinement is valid only for the
+        body it was made from."""
+        recipe = item.get("recipe") if isinstance(item.get("recipe"), dict) else {}
+        basis = json.dumps({"ref": item.get("ref"), "recipe": recipe, "description": item.get("description")},
+                           sort_keys=True, separators=(",", ":"))
+        return hashlib.sha256(basis.encode("utf-8")).hexdigest()[:16]
+
+    @classmethod
+    def toast_recipe(cls, item, recipe):
+        """A licensed recipe becomes a deterministic agent: its prompt verbatim,
+        its prerequisites as the checklist, its steps as the plan."""
+        cached = cls.cached_refinement(item)
+        steps = [str(x) for x in (recipe.get("steps") or []) if str(x).strip()] or [
+            "Paste the prompt into the target platform and answer what it asks for.",
+            "Review the output against the expected result below.",
+        ]
+        prereqs = [str(x) for x in (recipe.get("prerequisites") or []) if str(x).strip()]
+        expected = str(recipe.get("expected_output") or recipe.get("what_it_does") or "").strip()
+        checks = [f"Prerequisite: {p}" for p in prereqs]
+        if expected:
+            checks.append(f"Output matches: {expected}")
+        inputs = cached.get("inputs") if isinstance(cached.get("inputs"), list) else []
+        params = {"context": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for."}
+        for inp in inputs[:6]:
+            if isinstance(inp, dict) and inp.get("name"):
+                key = re.sub(r"[^a-z0-9_]+", "_", str(inp["name"]).lower()).strip("_")[:40]
+                if key and key not in params:
+                    params[key] = str(inp.get("description") or "")[:200]
+        platforms = item.get("platforms") or []
+        return {
+            "archetype": "recipe",
+            "verb": "Run",
+            "subject_label": "context for the recipe",
+            "confidence": 1.0,
+            "signals": ["recipe:prompt"] + (["refined"] if cached else []),
+            "operations": list(cls.RECIPE_OPERATIONS),
+            "params": params,
+            "steps": steps,
+            "checks": checks,
+            "deliverable": expected or "The recipe's output, produced on the target platform.",
+            "refined_by": cached.get("model") or "recipe",
+            "recipe": {
+                "prompt": str(recipe.get("prompt") or "").strip(),
+                "prerequisites": prereqs,
+                "steps": steps,
+                "expected_output": expected,
+                "business_value": str(recipe.get("business_value") or "").strip(),
+                "what_it_does": str(recipe.get("what_it_does") or "").strip(),
+                "tenant_caveat": str(recipe.get("tenant_caveat") or "").strip(),
+                "authors": [str(a) for a in (recipe.get("authors") or [])],
+                "verified_against": str(recipe.get("verified_against") or "").strip(),
+                "platform": ", ".join(str(p) for p in platforms) or "the target platform",
+            },
+            "refinement": {
+                "description": str(cached.get("description") or "").strip(),
+                "when_to_use": str(cached.get("when_to_use") or "").strip(),
+                "example_request": str(cached.get("example_request") or "").strip(),
+                "inputs": [{"name": str(i.get("name")), "description": str(i.get("description") or "")}
+                           for i in inputs if isinstance(i, dict) and i.get("name")][:6],
+                "model": str(cached.get("model") or ""),
+            } if cached else {},
+        }
+
+    # ── the pass through the local Brainstem ─────────────────────────────
+
+    REFINE_CONTRACT = (
+        "You are toasting a recipe into a deterministic agent. Read the recipe below and answer with ONE JSON "
+        "object and nothing else, keys exactly: description (one sentence, <=220 chars, says what a caller gets "
+        "and when to call this; no marketing), when_to_use (<=200 chars), inputs (array of up to 5 objects "
+        "{name, description} — the concrete things the prompt asks the user for, e.g. warehouse id, account "
+        "name, date range; empty array if none), example_request (<=160 chars, how a user would ask for this "
+        "in chat). Do not invent capabilities the prompt does not have.\n\n"
+    )
+
+    @classmethod
+    def brainstem_url(cls):
+        return os.environ.get("BRAINSTEM_URL", "http://localhost:7071").rstrip("/")
+
+    @classmethod
+    def _brainstem_model(cls):
+        try:
+            with urllib.request.urlopen(cls.brainstem_url() + "/health", timeout=10) as resp:
+                return str(json.loads(resp.read().decode("utf-8")).get("model") or "brainstem")
+        except (urllib.error.URLError, OSError, ValueError):
+            return "brainstem"
+
+    @classmethod
+    def refine_via_brainstem(cls, item, timeout=180):
+        """One pass: recipe -> local Brainstem /chat -> validated JSON -> cache entry.
+        Returns the cache entry, or raises with a reason. Never called by the build."""
+        recipe = item.get("recipe") if isinstance(item.get("recipe"), dict) else {}
+        body = {
+            "title": item.get("name"), "summary": item.get("description"),
+            "prompt": recipe.get("prompt"), "prerequisites": recipe.get("prerequisites"),
+            "steps": recipe.get("steps"), "expected_output": recipe.get("expected_output"),
+            "platform": ", ".join(item.get("platforms") or []),
+        }
+        user_input = cls.REFINE_CONTRACT + "RECIPE:\n" + json.dumps(body, ensure_ascii=False, indent=1)
+        req = urllib.request.Request(
+            cls.brainstem_url() + "/chat", method="POST",
+            data=json.dumps({"user_input": user_input}).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            answer = json.loads(resp.read().decode("utf-8"))
+        text = str(answer.get("response") or "")
+        m = re.search(r"\{.*\}", text, re.S)
+        if not m:
+            raise ValueError("brainstem answer carried no JSON object")
+        data = json.loads(m.group(0))
+        desc = str(data.get("description") or "").strip()
+        if len(desc) < 20:
+            raise ValueError("refinement description too short")
+        inputs = [{"name": str(i.get("name"))[:60], "description": str(i.get("description") or "")[:200]}
+                  for i in (data.get("inputs") or []) if isinstance(i, dict) and i.get("name")][:5]
+        return {
+            "model": cls._brainstem_model(),
+            "content_digest": cls.recipe_digest(item),
+            "archetype": "recipe",
+            "description": desc[:220],
+            "when_to_use": str(data.get("when_to_use") or "").strip()[:200],
+            "example_request": str(data.get("example_request") or "").strip()[:160],
+            "inputs": inputs,
+            "refined_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        }
+
+    @classmethod
+    def save_refinement(cls, item, entry):
+        """Read-modify-write of the cache under an exclusive file lock, so
+        several refine workers can run side by side without losing entries."""
+        cls.STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        lock_path = cls.STATE_FILE.with_suffix(".lock")
+        with open(lock_path, "w") as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            try:
+                state = cls.load_json(cls.STATE_FILE) or {}
+                refs = state.setdefault("refinements", {})
+                refs[str(item.get("ref"))] = entry
+                state["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+                state["schema"] = "rar-toasted-skills/2"
+                tmp = cls.STATE_FILE.with_suffix(".tmp")
+                tmp.write_text(json.dumps(state, indent=1, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
+                os.replace(tmp, cls.STATE_FILE)
+            finally:
+                fcntl.flock(lock, fcntl.LOCK_UN)
+        return entry
+
     @classmethod
     def cached_refinement(cls, item):
         """Model refinements are cached in state, keyed by upstream digest.
@@ -485,6 +657,9 @@ class SkillToasterEngine(RappterEngine):
         entry = (state.get("refinements") or {}).get(digest)
         if not isinstance(entry, dict):
             return {}
+        if isinstance(item.get("recipe"), dict) and item["recipe"].get("prompt"):
+            # a refinement is only valid for the body it was made from
+            return entry if entry.get("content_digest") == cls.recipe_digest(item) else {}
         if entry.get("archetype") and entry["archetype"] != cls.analyze(item)["archetype"]:
             return {}
         return entry
@@ -579,8 +754,9 @@ class SkillToasterEngine(RappterEngine):
                 f"Operations emitted per toasted agent: "
                 f"{', '.join(self.OPERATIONS)}\n"
                 "Deterministic: the same entry always toasts to the same agent.\n"
-                "Never reproduces upstream content — it generates a method for "
-                "the capability's shape."
+                "Licensed recipes are carried verbatim with attribution; metadata-only "
+                "entries get a method for their shape; `refine` passes an entry through "
+                "the local Brainstem and caches the result for the build."
             )
 
         if op == "list_rules":
@@ -628,6 +804,44 @@ class SkillToasterEngine(RappterEngine):
                 lines.append(note)
             return "\n".join(lines)
 
+        if op == "refine":
+            item, note = self._resolve(kwargs.get("slug"))
+            if not (isinstance(item.get("recipe"), dict) and item["recipe"].get("prompt")):
+                return f"{item.get('ref')}: no carried recipe body; only licensed recipe entries are refined."
+            try:
+                entry = self.refine_via_brainstem(item, timeout=int(kwargs.get("timeout") or 180))
+            except (urllib.error.URLError, OSError, ValueError) as exc:
+                return f"refine failed for {item.get('ref')}: {exc}"
+            self.save_refinement(item, entry)
+            return (f"refined {item.get('ref')} via {entry['model']} (digest {entry['content_digest']})\n"
+                    f"description: {entry['description']}\n"
+                    f"when_to_use: {entry['when_to_use']}\n"
+                    f"inputs: {', '.join(i['name'] for i in entry['inputs']) or 'none'}\n"
+                    f"example: {entry['example_request']}")
+
+        if op == "refine_all":
+            limit = int(kwargs.get("limit") or 25)
+            # workers: pass offset=i stride=n to N processes and they partition the
+            # list without coordination; the cache write is locked, so nothing is lost.
+            offset, stride = int(kwargs.get("offset") or 0), max(1, int(kwargs.get("stride") or 1))
+            done, failed, skipped = [], [], 0
+            candidates = [it for it in self.load_items()
+                          if isinstance(it.get("recipe"), dict) and it["recipe"].get("prompt")]
+            for item in candidates[offset::stride]:
+                if len(done) + len(failed) >= limit:
+                    break
+                if self.cached_refinement(item):
+                    skipped += 1
+                    continue
+                try:
+                    self.save_refinement(item, self.refine_via_brainstem(item, timeout=int(kwargs.get("timeout") or 180)))
+                    done.append(str(item.get("ref")))
+                except (urllib.error.URLError, OSError, ValueError) as exc:
+                    failed.append(f"{item.get('ref')}: {exc}")
+            return (f"refine_all: {len(done)} refined, {len(failed)} failed, {skipped} already fresh\n"
+                    + "\n".join(f"  + {r}" for r in done) + ("\n" if done else "")
+                    + "\n".join(f"  ! {f}" for f in failed))
+
         if op == "census":
             state = {}
             log = self.tick(state)
@@ -644,7 +858,7 @@ class SkillToasterEngine(RappterEngine):
                     f"updated {state.get('updated_at', 'unknown')}")
 
         return (f"Unknown operation {op!r}. Valid operations: "
-                "describe, list_rules, analyze, toast, census, get_state")
+                "describe, list_rules, analyze, toast, refine, refine_all, census, get_state")
 
 
 # ── module-level helpers, used by scripts/generate_aggregated_agents.py ─────
@@ -683,4 +897,10 @@ if __name__ == "__main__":
     argv = sys.argv[1:]
     op = argv[0] if argv else "describe"
     slug = argv[1] if len(argv) > 1 else None
-    print(engine.perform(operation=op, slug=slug))
+    if op == "refine_all":
+        # refine_all [limit] [offset] [stride]
+        print(engine.perform(operation=op, limit=int(slug or 25),
+                             offset=int(argv[2]) if len(argv) > 2 else 0,
+                             stride=int(argv[3]) if len(argv) > 3 else 1))
+    else:
+        print(engine.perform(operation=op, slug=slug))

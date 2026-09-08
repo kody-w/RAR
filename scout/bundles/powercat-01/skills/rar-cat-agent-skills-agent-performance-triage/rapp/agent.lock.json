@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/agent_performance_triage",
   "agent_file": "agent_performance_triage_agent.py",
-  "agent_sha256": "b4505e9978715a93c24dfb8dbebb89acf753adf6af6bf41a6a862828d41f0096",
+  "agent_sha256": "d5ab5d95947d61784c790645d416c6ead847ceededcefbe615a1b505b80d59b3",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentPerformanceTriage",
   "host_dependencies": [],
@@ -43,7 +43,7 @@
       "assessment",
       "monitoring"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AgentPerformanceTriage",
   "schema": "rapp-agent-lock/1.0",
@@ -73,5 +73,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

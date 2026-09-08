@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/lookup_dataverse_table",
   "agent_file": "lookup_dataverse_table_agent.py",
-  "agent_sha256": "6525511bf6ee244af3473793a5042254fed4e36052023cb062438af1f3636eb4",
+  "agent_sha256": "7b24a8b526f90b9df0e2d3d9c0e0402b8757bba8c615da546a617fff0815b959",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LookupDataverseTable",
   "host_dependencies": [],
@@ -39,7 +39,7 @@
       "power_platform",
       "crm"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "LookupDataverseTable",
   "schema": "rapp-agent-lock/1.0",
@@ -69,5 +69,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__planned_order_summary",
   "name": "Planned Order Summary by Resource",
   "rar_name": "@cowork-cookbook/planned_order_summary",
-  "rappid": "rappid:@cowork-cookbook/planned_order_summary:d16251c4dad8fb09434cbf68da31cc7113359c0aa3c703dc6306c165a8475aa8",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/planned_order_summary:896cd5eed5cabbf3c83046d4a60ac82af2a94b3d0fe532c71e85f80b444e71d1",
+  "_migrated_from": "rappid:@cowork-cookbook/planned_order_summary:d16251c4dad8fb09434cbf68da31cc7113359c0aa3c703dc6306c165a8475aa8",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/planned_order_summary:d16251c4dad8fb09434cbf68da31cc7113359c0aa3c703dc6306c165a8475aa8"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Summarizes planned production orders by resource for the next four weeks, including load vs capacity.",
+  "description": "Returns an Excel workbook summarizing planned production orders for the next 4 weeks aggregated by primary resource and week, with planned load hours vs configured capacity and weeks over 90% flagged.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.0,
-  "sha256": "a96f9bd059fa1a5b1ec9e6f88a8049daf82de5b4d3a63df7594a94542a1244ac",
+  "lines": 265,
+  "size_kb": 15.2,
+  "sha256": "35c22e7c40cfa37c1e2dda0220c350f72ff2db55eeb59862bea8ee4dc891957c",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

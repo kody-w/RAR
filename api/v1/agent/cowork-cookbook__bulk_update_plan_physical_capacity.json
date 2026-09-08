@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_plan_physical_capacity",
   "name": "Plan physical capacity Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_plan_physical_capacity",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_plan_physical_capacity:0d582eeed1f0c96d8f259cebc1c150e63f37a298dd842469c9060582456abc1c",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_plan_physical_capacity:69b287a21674d477e633cde731db3b145ccc5a1383da48b6ba1ce66017dd548a",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_plan_physical_capacity:0d582eeed1f0c96d8f259cebc1c150e63f37a298dd842469c9060582456abc1c",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_plan_physical_capacity:0d582eeed1f0c96d8f259cebc1c150e63f37a298dd842469c9060582456abc1c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across plan physical capacity records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 plan physical capacity records for a given legal entity, producing a dry-run preview workbook for approval before committing and a confirmation workbook after.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "d1f65904af71cfa6c7f4dffe31788f463cd2405ae13f3e8aa7309d35d5edb567",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "670f53d4b84c32148cb7742e9213df6d8debd3245b036862e9d83ff01acd1f1e",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

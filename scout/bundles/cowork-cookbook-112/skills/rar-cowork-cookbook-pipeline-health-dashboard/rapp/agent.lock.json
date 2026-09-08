@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/pipeline_health_dashboard",
   "agent_file": "pipeline_health_dashboard_agent.py",
-  "agent_sha256": "1943f07bfb66bd571a7aba3f79916c25ebe0a18ed8eca7df48d68658f4136582",
+  "agent_sha256": "7b13e935c0a3872c04e9c224871968fd0e6fb88c98a7bc78661831acdadc1a58",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PipelineHealthDashboard",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a self-contained interactive HTML dashboard of pipeline by stage, value, age, and owner that opens in any browser without Dynamics 365 access.",
+    "description": "Reads open Dynamics 365 Sales opportunities owned by you or your team and generates a single self-contained pipeline-health.html dashboard with value by stage, age distribution, owner breakdown, and a sortable detail tab",
     "display_name": "Pipeline Health HTML Dashboard",
     "industry_context": {
       "deprecated": false,
@@ -59,9 +59,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "16f2dc5614c14da0",
+      "content_digest": "6d2aa6bb87aae92a",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -85,28 +85,37 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PipelineHealthDashboard",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "dynamics_environment": {
+        "description": "The Dynamics 365 Sales environment the plugin is bound to and should be analyzed.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_file": {
+        "description": "Name/location of the generated HTML file (defaults to pipeline-health.html).",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "ownership_scope": {
+        "description": "Whose open opportunities to include — the caller and/or their team.",
         "type": "string"
       }
     },
@@ -115,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

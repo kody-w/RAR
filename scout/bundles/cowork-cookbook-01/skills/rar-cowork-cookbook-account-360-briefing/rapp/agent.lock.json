@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/account_360_briefing",
   "agent_file": "account_360_briefing_agent.py",
-  "agent_sha256": "8ee31292f79ce49b2e8db5d4558a0af466b628c2ff2dff52bb8ca308cd4f6dd9",
+  "agent_sha256": "0304a970d3e1556cb5abde57bad9b2c0719ece0066c364176ae467490e97f45f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Account360Briefing",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Assembles everything Dynamics 365 Sales knows about a named account into a single briefing document you can read before a meeting.",
+    "description": "Builds a read-only Account 360 briefing pack from Dynamics 365 Sales for one named account — profile, contacts, open and closed opportunities, activity timeline, and risks — as 'account-briefing.docx'. Call before a cust",
     "display_name": "Account 360 Briefing Pack",
     "industry_context": {
       "deprecated": false,
@@ -60,9 +60,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "b4bf8117712cb471",
+      "content_digest": "45d1966d91a95e4a",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -86,28 +86,29 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "Account360Briefing",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "account_name": {
+        "description": "The exact Dynamics 365 Sales account name to brief on; ambiguous names return close matches instead of a brief.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -116,5 +117,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_issue_customer_credits",
   "name": "Issue customer credits Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_issue_customer_credits",
-  "rappid": "rappid:@cowork-cookbook/teams_update_issue_customer_credits:72facf6b8210e6be3aa8ec168a555547c35e96270b75f9eb57c750519ffe15aa",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_issue_customer_credits:74210a6387e9c9b5d1c0bfd268aec8a8109d14dde7d74c27578fea210aef2e89",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_issue_customer_credits:72facf6b8210e6be3aa8ec168a555547c35e96270b75f9eb57c750519ffe15aa",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_issue_customer_credits:72facf6b8210e6be3aa8ec168a555547c35e96270b75f9eb57c750519ffe15aa"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on issue customer credits status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes issue customer credits from the Dynamics 365 ERP plugin for a legal entity and saves a draft Teams channel post (markdown) plus an Adaptive Card JSON with KPIs and quick-action buttons; nothing is posted.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "e2d2fa90623c3dbeb1b64b3028755df59ae079ee2924339841c99ab8438b871e",
+  "lines": 265,
+  "size_kb": 16.1,
+  "sha256": "07def25f39cf5898c577dcdfbfe02602bf1368769b5161652fa49f2c6140a3e9",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

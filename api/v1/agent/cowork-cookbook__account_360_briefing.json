@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__account_360_briefing",
   "name": "Account 360 Briefing Pack",
   "rar_name": "@cowork-cookbook/account_360_briefing",
-  "rappid": "rappid:@cowork-cookbook/account_360_briefing:da9146c18b3fdb97120bc499f5e5311d2f61c8474084592c2264451a70fd9360",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/account_360_briefing:64384edb92e6a497704eecb94d3b6c66fea8426afd8f93e19a2462dd8a043c93",
+  "_migrated_from": "rappid:@cowork-cookbook/account_360_briefing:da9146c18b3fdb97120bc499f5e5311d2f61c8474084592c2264451a70fd9360",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/account_360_briefing:da9146c18b3fdb97120bc499f5e5311d2f61c8474084592c2264451a70fd9360"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_sales"
   ],
-  "description": "Assembles everything Dynamics 365 Sales knows about a named account into a single briefing document you can read before a meeting.",
+  "description": "Builds a read-only Account 360 briefing pack from Dynamics 365 Sales for one named account \u2014 profile, contacts, open and closed opportunities, activity timeline, and risks \u2014 as 'account-briefing.docx'. Call before a cust",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "8ee31292f79ce49b2e8db5d4558a0af466b628c2ff2dff52bb8ca308cd4f6dd9",
+  "lines": 265,
+  "size_kb": 17.4,
+  "sha256": "0304a970d3e1556cb5abde57bad9b2c0719ece0066c364176ae467490e97f45f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/audit_develop_program_charter",
   "agent_file": "audit_develop_program_charter_agent.py",
-  "agent_sha256": "41636a364707b4f807320da54e77fcf0d1545d020b0e0434e077bbbb3c96bfe3",
+  "agent_sha256": "615da6ab1cdd5a55963ce2931959dc2b80c22e3629895796150722749193cdd1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDevelopProgramCharter",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits develop program charter records for completeness and policy compliance against rule-based checks.",
+    "description": "Audits develop program charter records in Dynamics 365 F&SCM (legal entity USMF) read-only for missing required fields, stale dates, blank descriptions, inactive entity references, and policy violations, returning an Exc",
     "display_name": "Develop program charter Completeness Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "8b4695453f491a85",
+      "content_digest": "ee354ec540a87a1f",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AuditDevelopProgramCharter",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_window": {
+        "description": "Date range used to judge stale dates; USMF demo data is mostly FY2017.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to audit, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. audit-develop-program-charter-2026-05-24.xlsx.",
+        "type": "string"
+      },
+      "record_type": {
+        "description": "The record set to audit, e.g. develop program charter.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

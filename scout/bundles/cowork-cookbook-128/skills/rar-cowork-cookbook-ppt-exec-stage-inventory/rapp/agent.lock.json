@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_stage_inventory",
   "agent_file": "ppt_exec_stage_inventory_agent.py",
-  "agent_sha256": "769cdbcd4aaec60e3e2e2bd8926c7447af43a00a232c6f46af7647cf37ecab94",
+  "agent_sha256": "d76a581f7ae593298410969ecc61b39c26e10de57d43236f9d81389592feb8ba",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecStageInventory",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on stage inventory status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on stage inventory from Dynamics 365 F&SCM data, with title, KPI, trend, red-flag, actions, and appendix slides plus speaker notes; call for a monthly review deck.",
     "display_name": "Stage inventory Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "7174ae9dcd7a9dde",
+      "content_digest": "5f7e7fe70088f410",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecStageInventory",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to pull stage inventory from, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the .pptx file to produce, e.g. ppt-exec-stage-inventory-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_length": {
+        "description": "Target meeting length the deck is scoped to, e.g. 15-minute monthly review.",
+        "type": "string"
+      },
+      "review_period": {
+        "description": "Reporting period and prior period used for the trend chart comparison.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

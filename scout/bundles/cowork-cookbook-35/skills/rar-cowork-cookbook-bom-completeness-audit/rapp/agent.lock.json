@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bom_completeness_audit",
   "agent_file": "bom_completeness_audit_agent.py",
-  "agent_sha256": "1391ef31c56ca86c0f6d4198c1ec90b6cbf7e21b8a9acff91d6223765a9d24e8",
+  "agent_sha256": "e4d54fdeb06905171e1d3ae595f8e28daf6abb40733655f8dea21e1d91fbd080",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BomCompletenessAudit",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits active BOMs for missing components, expired versions, and items that are obsolete.",
+    "description": "Audits all active BOMs in Dynamics 365 F&SCM and returns an Excel workbook listing hygiene issues by category: open-ended effective dates with no successor version, lines referencing inactive items, zero-quantity lines,",
     "display_name": "BOM Completeness Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "6d2f831e34b92f83",
+      "content_digest": "bd3f2700c2bd7c7d",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BomCompletenessAudit",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

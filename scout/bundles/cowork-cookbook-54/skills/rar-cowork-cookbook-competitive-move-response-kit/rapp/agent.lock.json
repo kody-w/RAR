@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/competitive_move_response_kit",
   "agent_file": "competitive_move_response_kit_agent.py",
-  "agent_sha256": "45f0c7fceb9d48154c2535ec62324e1c0f9e2e456e3bd9209ad4715dbeb866dc",
+  "agent_sha256": "9aff2f12ffadb1a35cb4b70f6eb6996f88f4aedda714291cc5f5eabcd90a6935",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CompetitiveMoveResponseKit",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Get a coordinated response to [Competitor]'s move on the table by end of day - one story across PR, sales, and field - backed by our own performance proof.",
+    "description": "Builds a same-day competitive response kit in Microsoft 365 Copilot Cowork: exec overview deck, internal guidance memo, customer talking points, sales objection sheet, Teams update, plus draft email and Teams message hel",
     "display_name": "Competitive move response kit",
     "industry_context": {
       "deprecated": false,
@@ -49,9 +49,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "4d2160db17ac407e",
+      "content_digest": "737840e32bc4ef19",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -75,28 +75,45 @@
       "integration",
       "fabric_iq"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "CompetitiveMoveResponseKit",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "competitor_and_move": {
+        "description": "Competitor name, the announcement/move, and its URL.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "marketing_channel": {
+        "description": "Marketing channel where the Teams update should be posted.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "owners": {
+        "description": "PR owner, Sales Enablement owner, and Field Marketing owner to address the draft email to.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "product_category_and_messaging": {
+        "description": "Product or category to position, plus the messaging doc and battlecard folder to pull from.",
+        "type": "string"
+      },
+      "team_channel": {
+        "description": "Teams channel holding prior competitor discussions.",
         "type": "string"
       }
     },
@@ -105,5 +122,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

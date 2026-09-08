@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_dispute_invoices",
   "name": "Dispute invoices Summary Report",
   "rar_name": "@cowork-cookbook/report_dispute_invoices",
-  "rappid": "rappid:@cowork-cookbook/report_dispute_invoices:d46d76e1dffef5c1f7e65b08c99fa25eff6f1465abde48d40720c2400de51b77",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_dispute_invoices:9cba820b0e9d82464d3af1d1c624b17e3c85620b764458b7175d436fad2e9516",
+  "_migrated_from": "rappid:@cowork-cookbook/report_dispute_invoices:d46d76e1dffef5c1f7e65b08c99fa25eff6f1465abde48d40720c2400de51b77",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_dispute_invoices:d46d76e1dffef5c1f7e65b08c99fa25eff6f1465abde48d40720c2400de51b77"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of dispute invoices activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only dispute invoices summary report from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top 10 by value sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.0,
-  "sha256": "4aad2bea060a1c404d4037d365c0a82c12e1a744a49868b434da66ae9f8762c6",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "1954507c36c583a552a5a8d3c256747d062e79e85d9b2a4a07f54731caece16e",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

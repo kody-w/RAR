@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__lookup_dataverse_table",
   "name": "Dataverse Table Lookup",
   "rar_name": "@cat-agent-skills/lookup_dataverse_table",
-  "rappid": "rappid:@cat-agent-skills/lookup_dataverse_table:4777286236a6f0c0cad647bdb9eced03d928c8253652572cab45fc84d8fa8238",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/lookup_dataverse_table:55bb1ca5126803ef689a2c59895bf64d652c242c58aa37989cf3c9d91249a976",
+  "_migrated_from": "rappid:@cat-agent-skills/lookup_dataverse_table:4777286236a6f0c0cad647bdb9eced03d928c8253652572cab45fc84d8fa8238",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/lookup_dataverse_table:4777286236a6f0c0cad647bdb9eced03d928c8253652572cab45fc84d8fa8238"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "integrations",
   "tags": [
@@ -24,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.1,
-  "sha256": "6525511bf6ee244af3473793a5042254fed4e36052023cb062438af1f3636eb4",
+  "lines": 262,
+  "size_kb": 12.4,
+  "sha256": "7b24a8b526f90b9df0e2d3d9c0e0402b8757bba8c615da546a617fff0815b959",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

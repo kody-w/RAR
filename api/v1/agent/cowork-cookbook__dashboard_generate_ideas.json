@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_generate_ideas",
   "name": "Generate ideas Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_generate_ideas",
-  "rappid": "rappid:@cowork-cookbook/dashboard_generate_ideas:74acb803588d56c77b4ce166acbd230ca0ab57f4792beb6c2b3b54cb146755eb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_generate_ideas:766aa0b0be7c4120d3620ab60b67e74cb43ecebe77eff6bc996f968907212447",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_generate_ideas:74acb803588d56c77b4ce166acbd230ca0ab57f4792beb6c2b3b54cb146755eb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_generate_ideas:74acb803588d56c77b4ce166acbd230ca0ab57f4792beb6c2b3b54cb146755eb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for generate ideas - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls generate-ideas data for the most recent fiscal period from Dynamics 365 F&SCM (legal entity USMF) via the Cowork D365 ERP plugin and saves a standalone interactive HTML dashboard file to the output folder, read-onl",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "b22c1eb2de066f554b54a475d65f4603c1838384088cfec0a3a806bc9cbaac2e",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "c4c532e845e7eff4309a03ad3328f4921f4ff983aa1601aecbb7ccb98ee8962d",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

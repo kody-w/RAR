@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_define_routing_rules",
   "name": "Define routing rules Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_define_routing_rules",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_define_routing_rules:6dee7282893dd14ef3d406b843b24178ab94d5ebeb37098af1f6693ece4e20c2",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_define_routing_rules:c77e1b245dbeecbdccd029d7017490cac0b93174ef14fcaccee41d9c64162340",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_define_routing_rules:6dee7282893dd14ef3d406b843b24178ab94d5ebeb37098af1f6693ece4e20c2",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_define_routing_rules:6dee7282893dd14ef3d406b843b24178ab94d5ebeb37098af1f6693ece4e20c2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of define routing rules status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing define routing rules status from Dynamics 365 F&SCM for a given legal entity, with KPI tiles, a RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "5f6abf489a021ab84659af4e284a27eea7a8e737695aa458ad03c3c56bd75816",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "1c2dfb0b1b635a266eb9186ff98efa4cb4768c46c1bfbbd2ada66832e3125804",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

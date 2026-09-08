@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/competitive_battlecard_builder",
   "agent_file": "competitive_battlecard_builder_agent.py",
-  "agent_sha256": "0b7356f6516b4afaabbed99ae04111381a60d133eeba92effdad8545f2f05ddd",
+  "agent_sha256": "c2ecfa863e2631bbee32804ad0b3e1d10b4af20af55d7938b5d97c88c56e92f8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CompetitiveBattlecardBuilder",
   "host_dependencies": [],
@@ -37,7 +37,7 @@
       "productivity",
       "comparison"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "CompetitiveBattlecardBuilder",
   "schema": "rapp-agent-lock/1.0",
@@ -67,5 +67,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

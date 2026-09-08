@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/sharepoint_list_insight_report_generator",
   "agent_file": "sharepoint_list_insight_report_generator_agent.py",
-  "agent_sha256": "1755e4d761977ef94e93304dc8d180edc0dc810f70e304a513ed4909b525f0d7",
+  "agent_sha256": "c915c29c6311ad09ee768d4267ba02b6fb91324750ffc62d9cc02c2cb6b5ea82",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SharepointListInsightReportGenerator",
   "host_dependencies": [],
@@ -39,7 +39,7 @@
       "report",
       "html"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "SharepointListInsightReportGenerator",
   "schema": "rapp-agent-lock/1.0",
@@ -69,5 +69,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/institutional_knowledge",
   "agent_file": "institutional_knowledge_agent.py",
-  "agent_sha256": "b9574a93f4efeb61a83d8e843f8caae6f11d146b20edaca294837c209bc4723a",
+  "agent_sha256": "dea44d1c2bf0f7803a9848d3d09ce9e461afd0b5dad71a53f21c4e8f374a544b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "InstitutionalKnowledge",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "documentation",
       "productivity"
     ],
-    "version": "2.0.1"
+    "version": "3.0.3"
   },
   "runtime_name": "InstitutionalKnowledge",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.1"
+  "version": "3.0.3"
 }

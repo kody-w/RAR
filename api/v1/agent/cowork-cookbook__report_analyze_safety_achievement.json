@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_analyze_safety_achievement",
   "name": "Analyze safety achievement Summary Report",
   "rar_name": "@cowork-cookbook/report_analyze_safety_achievement",
-  "rappid": "rappid:@cowork-cookbook/report_analyze_safety_achievement:b14b8dd6591c24bff14b5f0e31589d1d6582e7862cac498502b430b71111f821",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_analyze_safety_achievement:315477767bbe54c4fb3cc55b69ef524ef2c97ce48bffbd991ab2fc0cd1efde53",
+  "_migrated_from": "rappid:@cowork-cookbook/report_analyze_safety_achievement:b14b8dd6591c24bff14b5f0e31589d1d6582e7862cac498502b430b71111f821",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_analyze_safety_achievement:b14b8dd6591c24bff14b5f0e31589d1d6582e7862cac498502b430b71111f821"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of analyze safety achievement activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only safety achievement summary report from Dynamics 365 F&SCM (legal entity USMF) for the most recent posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "9d6fb5c743d9a0f955b270cc321b8e258f5d0525e53ab3932d95f164efca6354",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "2ccd8615c0926441e69f777a059f3bb36a7ec680f850cc659b3c8c40b69439f6",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

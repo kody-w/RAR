@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_use_and_track_project_materials",
   "name": "Use and track project materials Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_use_and_track_project_materials",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_use_and_track_project_materials:280f702198e3f97f13949aa328c972bacedc6e816da5146146ec2e8facaf9380",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_use_and_track_project_materials:a0ecb87f30fee88e2012513ce42de2e6e3688b8902bd72969f344161ad9717ca",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_use_and_track_project_materials:280f702198e3f97f13949aa328c972bacedc6e816da5146146ec2e8facaf9380",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_use_and_track_project_materials:280f702198e3f97f13949aa328c972bacedc6e816da5146146ec2e8facaf9380"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing use and track project materials for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on project materials usage from Dynamics 365 ERP (legal entity USMF): top 5 items by impact, anomalies vs 7-day rolling average, and next actions; drafts an email to the owner (unsent) plus a Teams",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "b88bcf9b7539d36445ed6e7d78210f0b5af7bccc8c2582075f97023f6c1d58c9",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "a40b73c74de00f07a853c57264db8fb5cde1800dfc6f6e46ebacfcabdda2318a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

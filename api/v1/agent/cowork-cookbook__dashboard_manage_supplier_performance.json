@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_manage_supplier_performance",
   "name": "Manage supplier performance Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_manage_supplier_performance",
-  "rappid": "rappid:@cowork-cookbook/dashboard_manage_supplier_performance:355cad17b0adb51074c1acc613f059817cba6e32215f1fad6b331612fdbc82a8",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_manage_supplier_performance:9df1be6d2eff816be9637bf5adb4cc21581e86659e4d9d2df38cb5c4701f2085",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_manage_supplier_performance:355cad17b0adb51074c1acc613f059817cba6e32215f1fad6b331612fdbc82a8",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_manage_supplier_performance:355cad17b0adb51074c1acc613f059817cba6e32215f1fad6b331612fdbc82a8"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for manage supplier performance - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls supplier performance data from Dynamics 365 F&SCM for a legal entity and the most recent fiscal period, then saves a standalone interactive HTML dashboard (totals header, inline SVG charts, sortable table, RAG indi",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "1e27bfc90a792a5131cd4cffad04a02b9797c8601dd4e5c1754fc7ed16179685",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "4ab9eefbcaa7ae2319e15fa891e08d7a2b46efb03d294d036ca74eaab1b7a317",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

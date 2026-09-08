@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_define_sales_quotations",
   "name": "Define sales quotations Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_define_sales_quotations",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_define_sales_quotations:77e4c0fdf17ac578d5fe80d21dc88be24ce00396439c11cb423814f8e2bee916",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_define_sales_quotations:28974261899a198c9eb73e665b90df10a9075266cab0daf89e4bef23409ac29e",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_define_sales_quotations:77e4c0fdf17ac578d5fe80d21dc88be24ce00396439c11cb423814f8e2bee916",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_define_sales_quotations:77e4c0fdf17ac578d5fe80d21dc88be24ce00396439c11cb423814f8e2bee916"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across define sales quotations records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 sales quotation records in legal entity USMF via the Cowork D365 ERP plugin, producing a dry-run preview workbook for approval before committing and a confirmation workbook aft",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "89cee9c85a83ee47656bbf84e068758b8a4ac95d28ac75020f6e87bce8b81c5e",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "ed5aeba30c43c7ebdaf7a19cef9998b400337a1dabb48df0e16b6fb1509891a8",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

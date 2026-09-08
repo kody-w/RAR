@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_define_quality_procedures_and_tools",
   "name": "Define quality procedures and tools Summary Report",
   "rar_name": "@cowork-cookbook/report_define_quality_procedures_and_tools",
-  "rappid": "rappid:@cowork-cookbook/report_define_quality_procedures_and_tools:92232ff1b58816599d14be3e56cb35a1787852cff1362abca763550040951ce9",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_define_quality_procedures_and_tools:2e671d44a9a857df3352f91d18c35c52387400162ac608e786476add57528bea",
+  "_migrated_from": "rappid:@cowork-cookbook/report_define_quality_procedures_and_tools:92232ff1b58816599d14be3e56cb35a1787852cff1362abca763550040951ce9",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_define_quality_procedures_and_tools:92232ff1b58816599d14be3e56cb35a1787852cff1362abca763550040951ce9"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of define quality procedures and tools activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of define quality procedures and tools activity from Dynamics 365 F&SCM for a given legal entity and posted period, exporting an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "913966a38a3ae27b7ab969fb0afbca23fec01c736ae3fd9e1205be818173ed22",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "099bdc6d7feb1436358cfc6ef4cb87c05ab361f3c6be4e17ffe5b41c51727f4c",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

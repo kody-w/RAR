@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_define_service_workflows",
   "agent_file": "teams_update_define_service_workflows_agent.py",
-  "agent_sha256": "a2d15774f1516abd0ccfbd96a9aad2cab9e2f75d042794f7831cf8c64221efaf",
+  "agent_sha256": "26eaa4beb2649e5eb954250b914bca3906341b92f9154d4426356b184f1defa6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateDefineServiceWorkflows",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on define service workflows status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes the current state of define service workflows from the Dynamics 365 ERP plugin for a legal entity and returns a draft Teams channel post (markdown) plus an Adaptive Card JSON file, saved for review and not pos",
     "display_name": "Define service workflows Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "57c6689ba0876cd1",
+      "content_digest": "52a7913e0bf4166c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateDefineServiceWorkflows",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "as_of_date": {
+        "description": "Date used in the output card filename, e.g. 2026-05-24.",
+        "type": "string"
+      },
+      "card_filename": {
+        "description": "Optional name for the Adaptive Card JSON artifact.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to summarize, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "topic": {
+        "description": "The workstream or process to summarize, e.g. define service workflows.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

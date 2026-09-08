@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/dashboard_measure_business_performance",
   "agent_file": "dashboard_measure_business_performance_agent.py",
-  "agent_sha256": "33ea5c3cce6f7b00516ecfb9ec3d8eae5a32b8df6bdc16e74cbb2cda373c4442",
+  "agent_sha256": "3a4cb90dc48f26c747c2e18b6a652e0fdc30524ea7b2293ab270d19b9030080c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMeasureBusinessPerformance",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a self-contained interactive HTML dashboard for measure business performance - opens in any browser, no D365 access needed by the viewer.",
+    "description": "Pulls business performance data for the most recent fiscal period from Dynamics 365 F&SCM (legal entity USMF) via the D365 ERP plugin and saves a standalone interactive HTML dashboard, read-only; call when you want a sha",
     "display_name": "Measure business performance Interactive HTML Dashboard",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "91048919d59346b6",
+      "content_digest": "8c74cb205c8f1cee",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DashboardMeasureBusinessPerformance",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to pull from (recipe default: USMF).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the HTML file to write, e.g. dashboard-measure-business-performance-2026-05-24.html.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_folder": {
+        "description": "Folder to save the HTML file to (Documents/Cowork/output/ in OneDrive).",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_security_approach",
   "agent_file": "ppt_exec_define_security_approach_agent.py",
-  "agent_sha256": "9d0cf5aedd684816d266cec8eebc412ca814b3ea3226a3535d327e7153a12bc3",
+  "agent_sha256": "29fd84925593e6d36baae497512796492062eae5d21a4cc8f9bba9d306fa7799",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineSecurityApproach",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on define security approach status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on define security approach from Dynamics 365 F&SCM data for a given legal entity, with title, KPI, trend, red-flag, actions and appendix slides plus speaker notes.",
     "display_name": "Define security approach Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "dc49bdd666c5b170",
+      "content_digest": "106156c1ecfdae5a",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecDefineSecurityApproach",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report on, e.g. USMF.",
+        "type": "string"
+      },
+      "meeting_length": {
+        "description": "Briefing length the deck is scoped to, e.g. 15-minute monthly review.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Target .pptx filename, e.g. ppt-exec-define-security-approach-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_period": {
+        "description": "Reporting period and prior period used for the trend chart comparison.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

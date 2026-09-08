@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/configure_re_assign_case_to_another_team_individual",
   "agent_file": "configure_re_assign_case_to_another_team_individual_agent.py",
-  "agent_sha256": "8d78f1154673b252a76e021804211a53af9af95ca3c113ede8927357b8b1aee3",
+  "agent_sha256": "963b4901d88a2e5a7dc705ba7d874756fc2cbf96561ef259ce6dc6a6a77e979a",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureReAssignCaseToAnotherTeamIndividual",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk configuration change to re-assign case to another team/individual from an input Excel file, with validation and rollback support.",
+    "description": "Reads an attached Excel file of case re-assignment targets, validates every row against Dynamics 365 F&SCM (legal entity USMF), returns a validation workbook, and after your approval applies the changes with a before/aft",
     "display_name": "Re-assign case to another team/individual Configuration Bulk Setup",
     "industry_context": {
       "deprecated": false,
@@ -67,9 +67,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "74bfb73a51e445ba",
+      "content_digest": "077475467d08273f",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -93,28 +93,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ConfigureReAssignCaseToAnotherTeamIndividual",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit go-ahead after reviewing the validation workbook, before changes are applied.",
+        "type": "string"
+      },
+      "configuration_excel_file": {
+        "description": "Excel file with one row per case re-assignment target and the new field values.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to run against (e.g. USMF); sandbox first.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -123,5 +132,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

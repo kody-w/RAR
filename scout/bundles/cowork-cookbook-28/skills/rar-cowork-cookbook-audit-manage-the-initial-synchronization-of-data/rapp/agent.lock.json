@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/audit_manage_the_initial_synchronization_of_data",
   "agent_file": "audit_manage_the_initial_synchronization_of_data_agent.py",
-  "agent_sha256": "7c0aaffbc088825cc683ef111fce3f6cb26c8ea3c6ac8f6ab3f060d700b32bc3",
+  "agent_sha256": "5407b51627704c275e8cba816db14b584abec4ad8d3d012c0a090f0afcd89fd0",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditManageTheInitialSynchronizationOfData",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits manage the initial synchronization of data records for completeness and policy compliance against rule-based checks.",
+    "description": "Runs a read-only completeness and policy audit of initial data synchronization records in Dynamics 365 F&SCM via the Cowork D365 ERP plugin, returning an Excel workbook of findings by category plus a summary.",
     "display_name": "Manage the initial synchronization of data Completeness Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "14a85acfb27fdc76",
+      "content_digest": "0e1c5f0e1a6b4a84",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "AuditManageTheInitialSynchronizationOfData",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_window": {
+        "description": "Date range for stale-date checks; USMF demo data is mostly FY2017.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to audit, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. audit-manage-the-initial-synchronization-of-data-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

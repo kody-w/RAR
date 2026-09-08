@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/d365_record_to_report",
   "agent_file": "d365_record_to_report_agent.py",
-  "agent_sha256": "548441a5b5059922b432e45aed4fe9e9131700856c7d9627e35c572bcc691f85",
+  "agent_sha256": "4cca93e21260feb46032d1d69d7b1f08841223a31f9bb8d5ee74b43ae15206c5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365RecordToReport",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "A Dynamics 365 Finance & Supply Chain Management expert scoped to the Record to report end-to-end process - covers 6 L2 areas and 49 L3 processes from the Microsoft Business Process Catalog.",
+    "description": "Scopes the conversation to Dynamics 365 Finance & Supply Chain Management record-to-report guidance (6 L2 areas, 49 L3 processes), answering against USMF legal entity conventions via the D365 ERP plugin.",
     "display_name": "D365 Record to report Expert",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "607f773f438fef7e",
+      "content_digest": "d4d6b9cdb91c4897",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "D365RecordToReport",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What to produce, and about what.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/demo_data_configure_and_manage_surveys",
   "agent_file": "demo_data_configure_and_manage_surveys_agent.py",
-  "agent_sha256": "8c074ac97ead57e1424c3e864dd9d861ea37e330283ef9d06b3e22d2592a0167",
+  "agent_sha256": "0885b851cf8f0a4b16753393b41cbc213db5bb1ab1b3fe0f67cb79bd5f0459ea",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataConfigureAndManageSurveys",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates and creates realistic demo records for configure and manage surveys in a sandbox tenant for training and pilot scenarios.",
+    "description": "Generates 25 realistic demo survey-configuration records in a sandbox D365 F&SCM legal entity (default USMF), stages them in an Excel workbook first, creates them, then returns each new record's primary key.",
     "display_name": "Configure and manage surveys Demo Data Generator",
     "industry_context": {
       "deprecated": false,
@@ -51,9 +51,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "beaa1f31b4f3225b",
+      "content_digest": "a3a3db1fa7af449f",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -77,28 +77,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DemoDataConfigureAndManageSurveys",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Sandbox D365 legal entity to write to (default USMF); production is not allowed.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "record_count": {
+        "description": "How many demo records to generate (default 25).",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "workbook_name": {
+        "description": "Excel staging file name, e.g. demo-data-configure-and-manage-surveys-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -107,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

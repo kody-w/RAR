@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_plan_project_tasks",
   "name": "Plan project tasks Summary Report",
   "rar_name": "@cowork-cookbook/report_plan_project_tasks",
-  "rappid": "rappid:@cowork-cookbook/report_plan_project_tasks:2d589f11568da2827a5307bb2dff1af4a9b418a5e0998329214ee88ab7d6cbb2",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_plan_project_tasks:12a5d60b56fc2626d0ad4120dfb54a25c99e61668a030f7a23ce0898974423a7",
+  "_migrated_from": "rappid:@cowork-cookbook/report_plan_project_tasks:2d589f11568da2827a5307bb2dff1af4a9b418a5e0998329214ee88ab7d6cbb2",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_plan_project_tasks:2d589f11568da2827a5307bb2dff1af4a9b418a5e0998329214ee88ab7d6cbb2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of plan project tasks activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of plan project tasks from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.0,
-  "sha256": "0c1da496a250d707e4466167e9f495bcd60fffb7db23f7cb41dd21cb4e5d7755",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "f395f63d30389ee6aa69c489b58e639cc004b12417cf7496cbad8c301c517ee7",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

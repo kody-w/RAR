@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_train_employees",
   "agent_file": "ppt_exec_train_employees_agent.py",
-  "agent_sha256": "84512a4694f8a77c672897aba5e329b5dbd087080fcf0bf244daf11493aeb1b5",
+  "agent_sha256": "ae5fd6e40d00eaf0ecf9f38ce5a7de5f1e5e1024505be2d70933b64e43007bdf",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecTrainEmployees",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on train employees status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on train employees status from Dynamics 365 ERP data for a legal entity, with title, KPI, trend, red-flag, actions and appendix slides plus speaker notes.",
     "display_name": "Train employees Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "bf4a233723903eec",
+      "content_digest": "faf09bff1b1e3870",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecTrainEmployees",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "comparison_period": {
+        "description": "Prior period to trend the current numbers against.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to report on (e.g. USMF).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Target .pptx filename, e.g. ppt-exec-train-employees-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_length": {
+        "description": "Meeting length the deck is scoped to, e.g. 15-minute monthly review.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

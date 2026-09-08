@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/d365_plan_to_produce_control_production_quality",
   "agent_file": "d365_plan_to_produce_control_production_quality_agent.py",
-  "agent_sha256": "0300a0b47e6e6e1540b3ec1913f2894d9f32b8c39432e1453da882750777a063",
+  "agent_sha256": "c715cf0a4df3613ee8aecedf1bcc25a06add1263598865e68f705e57f83ef1a3",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365PlanToProduceControlProductionQuality",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "A Dynamics 365 F&SCM expert scoped to the Control production quality area (a level-2 subdomain of Plan to produce) - covers 8 L3 processes.",
+    "description": "Scopes the conversation to Dynamics 365 F&SCM Control production quality (a level-2 subdomain of Plan to produce, 8 L3 processes), answering using documented entities, USMF conventions, and honest-degrade options. Call w",
     "display_name": "D365 Control production quality Expert",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "8a6e6b6671934857",
+      "content_digest": "7a7f7d756b7fa015",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "D365PlanToProduceControlProductionQuality",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

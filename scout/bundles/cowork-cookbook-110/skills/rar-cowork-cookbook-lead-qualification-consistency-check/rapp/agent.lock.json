@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/lead_qualification_consistency_check",
   "agent_file": "lead_qualification_consistency_check_agent.py",
-  "agent_sha256": "55e84afa7b1ea56b2b27eab723f388fb6ae26a48595ab757f25c3a324c3afb76",
+  "agent_sha256": "8a1f868359589d216f42e3b2be644f46165235bd8f7cc9628d3c09e285e7bba9",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LeadQualificationConsistencyCheck",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Checks whether leads are being qualified and disqualified consistently, and surfaces disqualifications with missing or vague reasons.",
+    "description": "Read-only review of lead qualification and disqualification consistency in Dynamics 365 Sales for leads owned by you or your team, returning an Excel workbook of findings; call it to audit lead qualification hygiene.",
     "display_name": "Lead Qualification Consistency Check",
     "industry_context": {
       "deprecated": false,
@@ -59,9 +59,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "0e18c74d7ad5bc1c",
+      "content_digest": "113bb93c7f191892",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -85,28 +85,41 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "LeadQualificationConsistencyCheck",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "analysis_period": {
+        "description": "The period analyzed; chosen as the most recent complete period within the available lead status change date range.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "environment": {
+        "description": "The Dynamics 365 Sales environment the plugin is bound to for the analysis.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_workbook": {
+        "description": "Name of the Excel workbook produced, default 'lead-qualification-review.xlsx'.",
+        "type": "string"
+      },
+      "ownership_scope": {
+        "description": "Whose leads to analyze — leads owned by you or by your team.",
         "type": "string"
       }
     },
@@ -115,5 +128,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

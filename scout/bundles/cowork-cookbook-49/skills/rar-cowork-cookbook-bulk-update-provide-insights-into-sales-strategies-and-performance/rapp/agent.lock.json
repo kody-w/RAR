@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_provide_insights_into_sales_strategies_and_performance",
   "agent_file": "bulk_update_provide_insights_into_sales_strategies_and_performance_agent.py",
-  "agent_sha256": "e6db444911afc1acf7f1457e3c003bf594857ba1f36c6db86582ad9e7cb0fe07",
+  "agent_sha256": "cff80692b50500a8bded60b959fe9333f7663a9cc075a554cf9c432613039fc4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateProvideInsightsIntoSalesStrategiesAndPerformance",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across provide insights into sales strategies and performance records from an input list, with dry-run preview before commit.",
+    "description": "Applies a bulk field update to Dynamics 365 F&SCM sales-performance records from a supplied list of record IDs, producing a dry-run preview workbook for approval before committing and a confirmation workbook after.",
     "display_name": "Provide insights into sales strategies and performance Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "8f7a7e9275398509",
+      "content_digest": "22c7ba06d0d6807c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdateProvideInsightsIntoSalesStrategiesAndPerformance",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "User confirmation after reviewing the dry-run preview workbook.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against (e.g. USMF, sandbox).",
+        "type": "string"
+      },
+      "new_values": {
+        "description": "The field(s) and new value(s) to apply to those records.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "record_ids": {
+        "description": "List of record IDs to update.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

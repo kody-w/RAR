@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__stalled_opportunity_reengagement",
   "name": "Stalled Opportunity Re-Engagement List",
   "rar_name": "@cowork-cookbook/stalled_opportunity_reengagement",
-  "rappid": "rappid:@cowork-cookbook/stalled_opportunity_reengagement:7fb6a0817bcd16f8c71be8f6371b9099eeea2489c471f72fc3201850c8c3e9f0",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/stalled_opportunity_reengagement:c8f1994722f004ad25dcc7ae2f5c7e0706a57797eb6ecd947e23ce06873582e3",
+  "_migrated_from": "rappid:@cowork-cookbook/stalled_opportunity_reengagement:7fb6a0817bcd16f8c71be8f6371b9099eeea2489c471f72fc3201850c8c3e9f0",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/stalled_opportunity_reengagement:7fb6a0817bcd16f8c71be8f6371b9099eeea2489c471f72fc3201850c8c3e9f0"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_sales"
   ],
-  "description": "Finds open opportunities with no recent activity and drafts a tailored re-engagement approach for each, so dormant deals get a deliberate next step.",
+  "description": "Builds a read-only re-engagement list of your open, owner-assigned Dynamics 365 Sales opportunities with no activity beyond a dormancy threshold, returning an Excel workbook and a Teams-ready summary.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "d72ba0991e8a63405ed186a11abd1b61f12ff1ee7071942182aea42a0de7f8e5",
+  "lines": 265,
+  "size_kb": 18.4,
+  "sha256": "17f32191335095eaf9ba2f912ebf6a89d1a43d84ac5cc258b07d7f5b9f6bdf10",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

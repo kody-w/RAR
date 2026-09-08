@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_model_service_capacity",
   "agent_file": "bulk_update_model_service_capacity_agent.py",
-  "agent_sha256": "9b5aef6958da45d47b43fb38a4ec833d33b7c19d193e7eb2d88b9c98bc64cd34",
+  "agent_sha256": "f6a4692f47199e26e3f5d2e1594bcc675b27153d7312ff629a2e750e7e3cde30",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateModelServiceCapacity",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across model service capacity records from an input list, with dry-run preview before commit.",
+    "description": "Applies a bulk field update to Dynamics 365 model service capacity records from a caller-supplied ID list, producing a dry-run preview workbook for approval before committing and a confirmation workbook after.",
     "display_name": "Model service capacity Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "12c4bbb97ae1b977",
+      "content_digest": "7b00e5e8df20fad3",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdateModelServiceCapacity",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit approval after reviewing the dry-run preview workbook.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "environment": {
+        "description": "Target environment; sandbox first, since this modifies data.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against (e.g. USMF).",
+        "type": "string"
+      },
+      "new_values": {
+        "description": "The field(s) and new value(s) to apply to each record.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "record_ids": {
+        "description": "List of model service capacity record IDs to update.",
         "type": "string"
       }
     },
@@ -111,5 +128,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_revalue_currency",
   "name": "Revalue currency Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_revalue_currency",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_revalue_currency:55ad3312867a2c7d25fcf726ee0fe9547da8209e10160b594a9369b6ee8dc1b9",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_revalue_currency:c888ee1cc936ba1e253a1079555059a33590db378d302da10efaabe6461d0b58",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_revalue_currency:55ad3312867a2c7d25fcf726ee0fe9547da8209e10160b594a9369b6ee8dc1b9",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_revalue_currency:55ad3312867a2c7d25fcf726ee0fe9547da8209e10160b594a9369b6ee8dc1b9"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of revalue currency status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file showing current revalue currency status for a Dynamics 365 F&SCM legal entity, with header, KPI tiles, RAG row, and action buttons. Call when you need an embeddable status ca",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "3232861e273fab5f290e377562f3a2e61479ae196e22a9ba72f361e2ff367369",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "509b644662fcadaaeba68e44e452cdcac0da58009ede87ad46ca9e109025126e",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

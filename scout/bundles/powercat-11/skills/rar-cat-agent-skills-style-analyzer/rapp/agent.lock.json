@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/style_analyzer",
   "agent_file": "style_analyzer_agent.py",
-  "agent_sha256": "529eb8528b62f6d9e5c1d80182371e91a9c7d725ddb394fb0588a2d6f7608287",
+  "agent_sha256": "640028ca7ac28a8544a35fd8371ecdd351608fe501ca4b59525f116e1e3c0b7c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StyleAnalyzer",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "memory",
       "productivity"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "StyleAnalyzer",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

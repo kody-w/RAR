@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__route_map_visualizer",
   "name": "Route Map Visualizer",
   "rar_name": "@cat-agent-skills/route_map_visualizer",
-  "rappid": "rappid:@cat-agent-skills/route_map_visualizer:67e62759f5ef35528d671535beac795b0873963a1e37bea1b2dabdbadb3ead23",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/route_map_visualizer:5a4c3254d6146294257a91319cd0a520b890418e6f6ec9d77d429c7c4309e396",
+  "_migrated_from": "rappid:@cat-agent-skills/route_map_visualizer:67e62759f5ef35528d671535beac795b0873963a1e37bea1b2dabdbadb3ead23",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/route_map_visualizer:67e62759f5ef35528d671535beac795b0873963a1e37bea1b2dabdbadb3ead23"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "devtools",
   "tags": [
@@ -27,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.9,
-  "sha256": "5c0cb3810b9ec755c91cad5a437f1fc98cd9de481f8e25c90d58dc0574b032dd",
+  "lines": 262,
+  "size_kb": 12.3,
+  "sha256": "1b02f419c31f24a0b8e108a23abe9a6c0007030ef20d5d10c1833c293035080c",
   "has_card": true,
   "added_at": "2026-08-17T18:03:09-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

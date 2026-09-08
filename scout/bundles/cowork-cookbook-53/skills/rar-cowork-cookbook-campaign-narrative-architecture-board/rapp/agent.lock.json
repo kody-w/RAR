@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/campaign_narrative_architecture_board",
   "agent_file": "campaign_narrative_architecture_board_agent.py",
-  "agent_sha256": "cd11bbd026ebac6308b3cea4564b341615b46400720aedb6c5afbca2c29a7c6c",
+  "agent_sha256": "78b5a05a88b7f717feb12458bdd59622fcae455ff2dc2f62f36df54b4fcbd958",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CampaignNarrativeArchitectureBoard",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Turn a campaign narrative into a structured visual the team can pressure-test before any copy gets written - so the story holds together across every audience, channel, and asset.",
+    "description": "Builds a Miro narrative architecture board for a campaign from its brief, approved messaging, audience definitions, and positioning files — core narrative, message pillars, proof points, audience adaptations, plus a cove",
     "display_name": "Build a campaign narrative architecture board",
     "industry_context": {
       "deprecated": false,
@@ -44,9 +44,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "a763243606223948",
+      "content_digest": "7700b56b2b66a651",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -70,28 +70,37 @@
       "integration",
       "miro"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "CampaignNarrativeArchitectureBoard",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "campaign_name": {
+        "description": "The campaign whose narrative architecture is being built.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "messaging_doc": {
+        "description": "Document containing the approved campaign messaging.",
+        "type": "string"
+      },
+      "onedrive_folder": {
+        "description": "Folder holding the campaign brief, audience definitions, and recent positioning work.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -100,5 +109,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

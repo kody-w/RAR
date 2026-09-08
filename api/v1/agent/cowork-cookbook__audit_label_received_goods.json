@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_label_received_goods",
   "name": "Label received goods Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_label_received_goods",
-  "rappid": "rappid:@cowork-cookbook/audit_label_received_goods:5c157f7c8d76e1b14411987dd6eed927be1bbc829e906f24f6f89ea0f51bf5e5",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_label_received_goods:000644045e1543e735d7ecec4ae4dcbf967c16f6bcea32210c2b16e1386cf3f5",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_label_received_goods:5c157f7c8d76e1b14411987dd6eed927be1bbc829e906f24f6f89ea0f51bf5e5",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_label_received_goods:5c157f7c8d76e1b14411987dd6eed927be1bbc829e906f24f6f89ea0f51bf5e5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits label received goods records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of label received goods records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with a sheet per finding category plus a Summary sheet of counts.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "0c1a1cd39f38ddc7bb77c5a272c89d18b92075439249aba1adfdbb4af57298d7",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "0b67ace1985b0f058e76b87d35ffeec607e0ce56455b0b6f75770e5512be38ae",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

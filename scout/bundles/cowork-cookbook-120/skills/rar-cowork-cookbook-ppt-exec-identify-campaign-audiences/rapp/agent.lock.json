@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_identify_campaign_audiences",
   "agent_file": "ppt_exec_identify_campaign_audiences_agent.py",
-  "agent_sha256": "b9c20533fc77b8b534ee348c09e954a353b29d8c54e0fc5e1f5f6464f3359295",
+  "agent_sha256": "57d638b17936e3f96dbe9d9d7c3e3044ab824201757989e9c81cbbf8c691ded4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecIdentifyCampaignAudiences",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on identify campaign audiences status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on campaign audience identification from Dynamics 365 ERP data for a named legal entity, with KPI, trend, red-flag, action, and appendix slides plus speaker notes.",
     "display_name": "Identify campaign audiences Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "0044bf674b8dd176",
+      "content_digest": "e3d01d1b479f3554",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecIdentifyCampaignAudiences",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "briefing_length": {
+        "description": "Length of the review the deck must fit, e.g. 15 minutes.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to report on, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Target .pptx filename, e.g. ppt-exec-identify-campaign-audiences-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_period": {
+        "description": "Reporting period and prior period used for the trend comparison, e.g. monthly.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

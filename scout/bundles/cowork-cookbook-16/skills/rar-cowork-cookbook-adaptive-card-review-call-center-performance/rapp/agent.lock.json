@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_review_call_center_performance",
   "agent_file": "adaptive_card_review_call_center_performance_agent.py",
-  "agent_sha256": "45c5494595505e7094398d16269f753dae31d88221ec70f012c5b620b0c658b6",
+  "agent_sha256": "da80ba96ea7c8cbeb1234b8dcc82d97359c7ecc16f136b239c3413afcc22623f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardReviewCallCenterPerformance",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a reusable Adaptive Card JSON snapshot of review call center performance status for embedding in dashboards, emails, or Teams.",
+    "description": "Generates a read-only Adaptive Card JSON file summarizing call center performance from Dynamics 365 F&SCM (legal entity USMF), with a header, KPI tiles with trend arrows, a RAG row, and action buttons.",
     "display_name": "Review call center performance Status Adaptive Card",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "583827d0d92a41a4",
+      "content_digest": "2a8ea1138aefe77b",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AdaptiveCardReviewCallCenterPerformance",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "action_buttons": {
+        "description": "The 2-3 action buttons to include on the card.",
+        "type": "string"
+      },
+      "as_of_date": {
+        "description": "Date used for the card timestamp and reporting snapshot.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "kpi_count": {
+        "description": "How many KPI tiles to include (3-5).",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_filename": {
+        "description": "Name of the Adaptive Card JSON file to produce, e.g. adaptive-card-review-call-center-performance-2026-05-24-card.json.",
         "type": "string"
       }
     },
@@ -111,5 +128,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

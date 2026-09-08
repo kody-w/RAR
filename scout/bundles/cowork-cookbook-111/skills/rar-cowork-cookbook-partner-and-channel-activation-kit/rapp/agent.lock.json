@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/partner_and_channel_activation_kit",
   "agent_file": "partner_and_channel_activation_kit_agent.py",
-  "agent_sha256": "671861042a9a2b2268b882baace5e9f62f131178ab5294e1722fe71b76c3bf36",
+  "agent_sha256": "e0401888bfe929e84aa8ced188cd230b12d28a50e89f295b3fbc8bc4f618b637",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PartnerAndChannelActivationKit",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Adapt the [Product/Campaign name] launch materials for partners and channel teams and route them for review.",
+    "description": "Adapts existing launch materials into a partner and channel activation kit — partner one-pager, co-marketing talking points, FAQ, and email template in Word plus a social pack in Excel — and drafts routing emails for rev",
     "display_name": "Partner and channel activation kit",
     "industry_context": {
       "deprecated": false,
@@ -49,9 +49,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "057c7b6e05b24458",
+      "content_digest": "761f62d78a320e87",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,28 +74,45 @@
       "intermediate",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PartnerAndChannelActivationKit",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "channel_marketing_owner": {
+        "description": "Person to receive the drafted channel readiness email.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "messaging_doc": {
+        "description": "Document containing the approved messaging.",
+        "type": "string"
+      },
+      "onedrive_folder": {
+        "description": "OneDrive folder holding the latest launch materials.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "partner_marketing_owner": {
+        "description": "Person to receive the drafted partner-facing review email.",
+        "type": "string"
+      },
+      "product_or_campaign_name": {
+        "description": "Name of the product or campaign being activated.",
         "type": "string"
       }
     },
@@ -104,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

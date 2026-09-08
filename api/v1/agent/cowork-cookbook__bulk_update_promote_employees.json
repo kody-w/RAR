@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_promote_employees",
   "name": "Promote employees Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_promote_employees",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_promote_employees:b5b5304b9ff66cc109fb26573a9c78be262e7020fdcbfb36f00208ad6a3f7921",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_promote_employees:43fd5dbf69ac50f78c315ccae9eb1dcfe827dcb9624d0eb5bf38c03c9930efe3",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_promote_employees:b5b5304b9ff66cc109fb26573a9c78be262e7020fdcbfb36f00208ad6a3f7921",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_promote_employees:b5b5304b9ff66cc109fb26573a9c78be262e7020fdcbfb36f00208ad6a3f7921"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across promote employees records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to promote-employees records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, producing a dry-run preview workbook, pausing for approval, then a confirmation",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "32132bac31e527bd24a4491d9a2e4f7eab47666d20baf5cdfeb565f2602d8e3c",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "75c863680c358893b207b7c6ad159dc93c7c59aec3e73efe876a791304fe9e1c",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/demo_data_review_call_center_performance",
   "agent_file": "demo_data_review_call_center_performance_agent.py",
-  "agent_sha256": "c13299cb7d6bdf2856a4c0ee5d23501e83566d926b17c34acf077723b0d73b85",
+  "agent_sha256": "2b23f25584b2531edbd73c57d7b17c5997c3374572af290838f3452b43f7dc60",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataReviewCallCenterPerformance",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates and creates realistic demo records for review call center performance in a sandbox tenant for training and pilot scenarios.",
+    "description": "Generates 25 realistic demo records for review call center performance in a sandbox Dynamics 365 F&SCM legal entity, staging them in an Excel workbook first, then creating them and returning each new record's primary key",
     "display_name": "Review call center performance Demo Data Generator",
     "industry_context": {
       "deprecated": false,
@@ -51,9 +51,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "106101c3cb43cd0f",
+      "content_digest": "72e8828e2a73d26c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -77,28 +77,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DemoDataReviewCallCenterPerformance",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Sandbox D365 legal entity to write to (default USMF); must not be production.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "record_count": {
+        "description": "How many demo records to generate (default 25).",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "workbook_name": {
+        "description": "Excel staging file name, e.g. demo-data-review-call-center-performance-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -107,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

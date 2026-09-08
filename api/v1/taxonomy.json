@@ -1,10 +1,10 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-09-08T00:38:57Z",
+  "generated": "2026-09-08T20:28:50Z",
   "categories": [
     {
       "name": "integrations",
-      "count": 1475
+      "count": 1476
     },
     {
       "name": "general",
@@ -12,7 +12,7 @@
     },
     {
       "name": "productivity",
-      "count": 44
+      "count": 45
     },
     {
       "name": "core",
@@ -62,7 +62,7 @@
     },
     {
       "name": "@cat-agent-skills",
-      "count": 95
+      "count": 97
     },
     {
       "name": "@kody-w",
@@ -112,7 +112,7 @@
     },
     {
       "name": "frontier",
-      "count": 95
+      "count": 97
     },
     {
       "name": "official",
@@ -254,7 +254,7 @@
     },
     {
       "name": "productivity",
-      "count": 41
+      "count": 42
     },
     {
       "name": "advanced",
@@ -301,20 +301,20 @@
       "count": 12
     },
     {
+      "name": "teams",
+      "count": 12
+    },
+    {
+      "name": "email",
+      "count": 12
+    },
+    {
       "name": "copilot_studio",
       "count": 12
     },
     {
       "name": "pipeline",
       "count": 12
-    },
-    {
-      "name": "teams",
-      "count": 11
-    },
-    {
-      "name": "email",
-      "count": 11
     },
     {
       "name": "fabric_iq",
@@ -349,6 +349,10 @@
       "count": 8
     },
     {
+      "name": "sharepoint",
+      "count": 8
+    },
+    {
       "name": "m365",
       "count": 8
     },
@@ -366,10 +370,6 @@
     },
     {
       "name": "python",
-      "count": 7
-    },
-    {
-      "name": "sharepoint",
       "count": 7
     },
     {
@@ -513,11 +513,19 @@
       "count": 4
     },
     {
+      "name": "meetings",
+      "count": 4
+    },
+    {
       "name": "monitoring",
       "count": 4
     },
     {
       "name": "authoring",
+      "count": 4
+    },
+    {
+      "name": "calendar",
       "count": 4
     },
     {
@@ -781,10 +789,6 @@
       "count": 2
     },
     {
-      "name": "meetings",
-      "count": 2
-    },
-    {
       "name": "evaluation",
       "count": 2
     },
@@ -954,10 +958,6 @@
     },
     {
       "name": "diagrams",
-      "count": 2
-    },
-    {
-      "name": "calendar",
       "count": 2
     },
     {
@@ -1309,19 +1309,19 @@
       "count": 1
     },
     {
-      "name": "uat",
+      "name": "workload",
       "count": 1
     },
     {
-      "name": "business",
+      "name": "focus",
       "count": 1
     },
     {
-      "name": "problem_solving",
+      "name": "work_life_balance",
       "count": 1
     },
     {
-      "name": "project_planning",
+      "name": "deep_work",
       "count": 1
     }
   ]

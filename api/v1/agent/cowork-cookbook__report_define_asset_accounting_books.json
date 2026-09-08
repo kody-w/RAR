@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_define_asset_accounting_books",
   "name": "Define asset accounting books Summary Report",
   "rar_name": "@cowork-cookbook/report_define_asset_accounting_books",
-  "rappid": "rappid:@cowork-cookbook/report_define_asset_accounting_books:cbff5bf0f03ca432d65613aad9f97e454a2bb2c44c6fa272200892809e76aac5",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_define_asset_accounting_books:78e2a3b99c6b2a0c9933352ea6d7c921bd6723b96188024d0aca2fa077f2b2ae",
+  "_migrated_from": "rappid:@cowork-cookbook/report_define_asset_accounting_books:cbff5bf0f03ca432d65613aad9f97e454a2bb2c44c6fa272200892809e76aac5",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_define_asset_accounting_books:cbff5bf0f03ca432d65613aad9f97e454a2bb2c44c6fa272200892809e76aac5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of define asset accounting books activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of asset accounting books from Dynamics 365 F&SCM for a legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top 10 by value sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "9516572384aa294c4c56587ec31f882739e099138baeb72548dbde15087fd661",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "99be8bafc68789867bfaa3f2f1ae0c41ddba44309180d8dc7896a2f0c8d4c899",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

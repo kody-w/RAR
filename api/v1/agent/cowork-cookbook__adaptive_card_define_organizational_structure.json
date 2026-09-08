@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_define_organizational_structure",
   "name": "Define organizational structure Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_define_organizational_structure",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_define_organizational_structure:1e81d021dbbf28f115f588832ede8ee54738e162d15e32d02b17a1805379d3bb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_define_organizational_structure:bb2945bcdf712031b7b27968b30a587c5d2bb7eac48b7819afa76a0a8c7d00cb",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_define_organizational_structure:1e81d021dbbf28f115f588832ede8ee54738e162d15e32d02b17a1805379d3bb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_define_organizational_structure:1e81d021dbbf28f115f588832ede8ee54738e162d15e32d02b17a1805379d3bb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of define organizational structure status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file summarizing organizational-structure status from Dynamics 365 F&SCM for a given legal entity, with KPI tiles, RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "94005c733c2b325ec32c47282fe11342a43e4ebc48466185a9d31c10021077bd",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "c8969fea9d587f161b729a3503a8816f3044d8f7288eb0aa5b9b18a7785cd0db",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

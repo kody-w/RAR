@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_manage_supplier_pricing",
   "agent_file": "ppt_exec_manage_supplier_pricing_agent.py",
-  "agent_sha256": "6402a017d03f78f78eed38e3ae82a288e019dfd4eaeecd9bb8b989f62affc55c",
+  "agent_sha256": "99d3fcb278b493d729bbc14f472611c3d38821f363e7818ae4c51ab1a1048de2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecManageSupplierPricing",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on manage supplier pricing status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on supplier pricing status from Dynamics 365 F&SCM data for a given legal entity, with title, KPI, trend, red-flag, action and appendix slides plus speaker notes.",
     "display_name": "Manage supplier pricing Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "b27d875c676dfd6c",
+      "content_digest": "6cbe3d5e4607919e",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecManageSupplierPricing",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "comparison_period": {
+        "description": "Prior period to compare against for the trend chart.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to pull data from (e.g. USMF).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the .pptx file to produce, e.g. ppt-exec-manage-supplier-pricing-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_length": {
+        "description": "Length/cadence of the review the deck must fit, e.g. 15-minute monthly review.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

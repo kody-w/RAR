@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_define_sales_channels",
   "name": "Define sales channels Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_define_sales_channels",
-  "rappid": "rappid:@cowork-cookbook/configure_define_sales_channels:f4a4496d47781873360c6215bc02ae01058e828a47c3bff129fa12e2a7c5cfcc",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_define_sales_channels:6f0289c9773e9624b9e7c75d7c7be718c663d8911bfb5e12bb09ff772fd2650d",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_define_sales_channels:f4a4496d47781873360c6215bc02ae01058e828a47c3bff129fa12e2a7c5cfcc",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_define_sales_channels:f4a4496d47781873360c6215bc02ae01058e828a47c3bff129fa12e2a7c5cfcc"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to define sales channels from an input Excel file, with validation and rollback support.",
+  "description": "Reads an attached Excel file of sales channel configuration rows in Dynamics 365 F&SCM (legal entity USMF), validates every row, returns a validation workbook, waits for your approval, then applies changes and emits a be",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "ab9ae7fef52139ab77555e6588378d6cfd13f42a7e948081d669d88e5706dba5",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "f250c4e4f77b044964361601a0e61bc10eee266b93dc2a683b8fefc310966e56",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

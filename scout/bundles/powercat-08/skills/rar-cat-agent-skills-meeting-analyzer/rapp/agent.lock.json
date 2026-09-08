@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/meeting_analyzer",
   "agent_file": "meeting_analyzer_agent.py",
-  "agent_sha256": "bb10c34d0d9a18bf34f0487582f49eeaaaba6c1400fa00a2abe1943c42c44f03",
+  "agent_sha256": "cff073328a4f633a926aca3452f228aa971695a532761e72af7a40d99c3f14cd",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MeetingAnalyzer",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "productivity",
       "communication"
     ],
-    "version": "1.1.0"
+    "version": "2.1.2"
   },
   "runtime_name": "MeetingAnalyzer",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "1.1.0"
+  "version": "2.1.2"
 }

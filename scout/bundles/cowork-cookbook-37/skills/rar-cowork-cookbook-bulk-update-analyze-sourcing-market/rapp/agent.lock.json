@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_analyze_sourcing_market",
   "agent_file": "bulk_update_analyze_sourcing_market_agent.py",
-  "agent_sha256": "2901fe3860393c0e9eb779962d9a3ffea7f079930145ebf3c2019887687b646d",
+  "agent_sha256": "6437b3493d4199f62820dc3be1ad8de65c5f5a0ea2af5cf6f1e8701aacc5edca",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateAnalyzeSourcingMarket",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across analyze sourcing market records from an input list, with dry-run preview before commit.",
+    "description": "Applies a bulk field update to Dynamics 365 F&SCM sourcing-market records via the ERP plugin: builds a dry-run preview workbook (before/after/status), waits for approval, then commits and emits a confirmation workbook.",
     "display_name": "Analyze sourcing market Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c5555bf89a931efa",
+      "content_digest": "a850b533cdfed226",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdateAnalyzeSourcingMarket",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit go-ahead after reviewing the dry-run preview workbook.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "environment": {
+        "description": "Target environment; use sandbox first before production.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against, e.g. USMF.",
+        "type": "string"
+      },
+      "new_values": {
+        "description": "The field(s) and new value(s) to apply to those records.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "record_ids": {
+        "description": "List of the sourcing-market record IDs to update.",
         "type": "string"
       }
     },
@@ -111,5 +128,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

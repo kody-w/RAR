@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt",
   "agent_file": "adaptive_card_conduct_upsell_cross_sell_or_repeat_sale_prompt_agent.py",
-  "agent_sha256": "362fdab08ace77b4bddc4deb4a3278dc84ee8b754d28ec2e586d1b847b0b28d1",
+  "agent_sha256": "3d9b82454db6dc6747ed7da8542277baca80f18a227eb9520bf1bedf19fd6cad",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConductUpsellCrossSellOrRepeatSalePrompt",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a reusable Adaptive Card JSON snapshot of conduct upsell, cross sell or repeat sale prompt status for embedding in dashboards, emails, or Teams.",
+    "description": "Generates a read-only Adaptive Card JSON file visualizing upsell/cross-sell/repeat-sale prompt status from Dynamics 365 ERP, with KPI tiles, RAG row, and action buttons; call when you need an embeddable status card.",
     "display_name": "Conduct upsell, cross sell or repeat sale prompt Status Adaptive Card",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "105f197f2c7c8121",
+      "content_digest": "b5e27618f25a3172",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AdaptiveCardConductUpsellCrossSellOrRepeatSalePrompt",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "as_of_date": {
+        "description": "Date used for the card timestamp and file name.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_filename": {
+        "description": "Name of the Adaptive Card JSON file to produce, e.g. adaptive-card-...-2026-05-24-card.json.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

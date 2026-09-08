@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/report_list_open_positions",
   "agent_file": "report_list_open_positions_agent.py",
-  "agent_sha256": "f51ffea5849c62b99564e4d3114ddff7404e42ca166c84e449b93a61bc186111",
+  "agent_sha256": "3ff6d7d1f14edc697b5a239776e9b0a63fa4ac4c970eefe7ec86ac1cf75205d6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportListOpenPositions",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds a structured summary report of list open positions activity with totals, trends, and breakdowns.",
+    "description": "Builds a read-only summary report of open positions from Dynamics 365 F&SCM for a given legal entity and posted period, output as an Excel workbook with Summary, Detail, and Top10 sheets.",
     "display_name": "List open positions Summary Report",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "32ea5259d6f85cb8",
+      "content_digest": "8b55dda5024c16cb",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ReportListOpenPositions",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "breakdown_dimensions": {
+        "description": "Dimensions to break down by where applicable: department, category, responsible owner.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report against, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "output_filename": {
+        "description": "Excel workbook filename, e.g. report-list-open-positions-2026-05-24.xlsx.",
+        "type": "string"
+      },
+      "period": {
+        "description": "Posted period to summarize; defaults to the most recent posted period available.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

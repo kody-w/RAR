@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/report_conduct_succession_planning",
   "agent_file": "report_conduct_succession_planning_agent.py",
-  "agent_sha256": "8e2f49c6b6d387b8197addf8ef9639cc997d45a9d885fbe96ed118eb944cd5cf",
+  "agent_sha256": "1e4ad72d267248e4f29de4b3bd100a32ae075f5a768204135f3ad68567391589",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportConductSuccessionPlanning",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds a structured summary report of conduct succession planning activity with totals, trends, and breakdowns.",
+    "description": "Generates a read-only conduct succession planning summary report from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
     "display_name": "Conduct succession planning Summary Report",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "d669d7786914d530",
+      "content_digest": "1da977895b7c63c0",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ReportConductSuccessionPlanning",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "breakdown_dimensions": {
+        "description": "Dimensions for breakdowns where applicable: department, category, responsible owner.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report against, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. report-conduct-succession-planning-2026-05-24.xlsx.",
+        "type": "string"
+      },
+      "period": {
+        "description": "Posted period to report on; defaults to the most recent posted period available.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

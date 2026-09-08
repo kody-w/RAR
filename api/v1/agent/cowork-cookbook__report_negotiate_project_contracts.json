@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_negotiate_project_contracts",
   "name": "Negotiate project contracts Summary Report",
   "rar_name": "@cowork-cookbook/report_negotiate_project_contracts",
-  "rappid": "rappid:@cowork-cookbook/report_negotiate_project_contracts:b1d408100d1230796ff44cf9bfc9ca8db51818df079e70dbedd0495cd8b85338",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_negotiate_project_contracts:dbcdbd21ee065d01d99ec0c44e2908dc533e42a2b113463ea0929ca81801e754",
+  "_migrated_from": "rappid:@cowork-cookbook/report_negotiate_project_contracts:b1d408100d1230796ff44cf9bfc9ca8db51818df079e70dbedd0495cd8b85338",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_negotiate_project_contracts:b1d408100d1230796ff44cf9bfc9ca8db51818df079e70dbedd0495cd8b85338"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of negotiate project contracts activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of negotiate project contracts activity from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "4b30e64d9e5f438927734e07f9d75ee3740b9f23c3a8adf0a34ad8cf4584abbd",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "274ce32f06c7c8c589a87e6f5bc8b5754acd43ee31aff834e8883742cbb075bc",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

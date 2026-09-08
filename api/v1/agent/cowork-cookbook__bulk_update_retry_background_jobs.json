@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_retry_background_jobs",
   "name": "Retry background jobs Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_retry_background_jobs",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_retry_background_jobs:0ab34d36c28e7f535d4123583d20135ba98459d5d471d0757dc3629a002f0fa0",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_retry_background_jobs:49c5895b60ff5a170e7be26a614c71a9cbc92952ac5d4fbdb627bb27df2f0a1e",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_retry_background_jobs:0ab34d36c28e7f535d4123583d20135ba98459d5d471d0757dc3629a002f0fa0",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_retry_background_jobs:0ab34d36c28e7f535d4123583d20135ba98459d5d471d0757dc3629a002f0fa0"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across retry background jobs records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 retry background jobs records in legal entity USMF via the Cowork D365 ERP plugin, producing a dry-run preview workbook for approval before committing changes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "762e5ae6f37a1c8cd16f30283f3d446d8612e55c494a46972ef4aaa56d04c297",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "56cdc1dc7c772c9390e04d18abbb4f118d600bf6e559ba0e1c0e19c255d06c27",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

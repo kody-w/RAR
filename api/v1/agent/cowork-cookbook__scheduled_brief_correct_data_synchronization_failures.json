@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_correct_data_synchronization_failures",
   "name": "Correct data synchronization failures Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_correct_data_synchronization_failures",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_correct_data_synchronization_failures:0db2c05861dc7cb71b07f435692ca536d23a07c7dd5603f7ddc66079e104aac3",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_correct_data_synchronization_failures:b339b6566ac305fb6d16382573de1f94433af5fa7c4fe11bccabe14195a287d9",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_correct_data_synchronization_failures:0db2c05861dc7cb71b07f435692ca536d23a07c7dd5603f7ddc66079e104aac3",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_correct_data_synchronization_failures:0db2c05861dc7cb71b07f435692ca536d23a07c7dd5603f7ddc66079e104aac3"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing correct data synchronization failures for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on data synchronization failures from Dynamics 365 ERP for a given legal entity, with top 5 items by impact, anomalies vs the 7-day rolling average, and next actions, then saves a draft email to th",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "99ec13f23c908259facd6ce594c2165ebf113b77bcde52257fe529061b34ba32",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "91385dedf5f5bee3333ba7794649f71b722e73132524fbf150f21456d9b24a79",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

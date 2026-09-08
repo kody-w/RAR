@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_manage_procurement_spend",
   "name": "Manage procurement spend Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_manage_procurement_spend",
-  "rappid": "rappid:@cowork-cookbook/configure_manage_procurement_spend:faba6d429d5b5630dff600f44d5079ea09939e4c10bb136ddf9eab324308e990",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_manage_procurement_spend:1cf1f7484dd6587761ade56780b7be49186136cf25b036d618d6e75005adde97",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_manage_procurement_spend:faba6d429d5b5630dff600f44d5079ea09939e4c10bb136ddf9eab324308e990",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_manage_procurement_spend:faba6d429d5b5630dff600f44d5079ea09939e4c10bb136ddf9eab324308e990"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to manage procurement spend from an input Excel file, with validation and rollback support.",
+  "description": "Reads an attached configuration Excel file of procurement spend targets, validates every row against Dynamics 365 F&SCM (legal entity USMF), returns a validation workbook, then applies approved changes with a before/afte",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "c19dd090588ccc350054cf6d794ee1ba633e9d646d0e18a39b5106619da0b2f1",
+  "lines": 265,
+  "size_kb": 17.3,
+  "sha256": "2296c435a75e55e869091072c4fda9012285270053b5cfbf09a169e93d1e9fc7",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

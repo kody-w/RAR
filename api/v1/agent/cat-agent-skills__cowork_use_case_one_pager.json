@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__cowork_use_case_one_pager",
   "name": "Cowork Use Case One-Pager",
   "rar_name": "@cat-agent-skills/cowork_use_case_one_pager",
-  "rappid": "rappid:@cat-agent-skills/cowork_use_case_one_pager:64fd1a2953512a32e65f6b179f528a8eddb58e58da11ca89cbefba2e14eddb74",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.1",
+  "rappid": "rappid:@cat-agent-skills/cowork_use_case_one_pager:4b41d75df81d43734e29f9b9d49b2866300127925c73e1ab2a4c5d0025031a39",
+  "_migrated_from": "rappid:@cat-agent-skills/cowork_use_case_one_pager:64fd1a2953512a32e65f6b179f528a8eddb58e58da11ca89cbefba2e14eddb74",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/cowork_use_case_one_pager:64fd1a2953512a32e65f6b179f528a8eddb58e58da11ca89cbefba2e14eddb74"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cat-agent-skills",
   "category": "productivity",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.9,
-  "sha256": "04d7936c14c1ba540141659716a7bacc34a2cd3fcb057a4625d749fd89492bb7",
+  "lines": 262,
+  "size_kb": 12.3,
+  "sha256": "36fd44a76d80525c9ac4de4a7428e0bc4be342ca07dc8c6c8f1ade0df11a895f",
   "has_card": true,
   "added_at": "2026-08-17T18:03:09-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

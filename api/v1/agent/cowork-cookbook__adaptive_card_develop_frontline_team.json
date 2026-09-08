@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_develop_frontline_team",
   "name": "Develop frontline team Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_develop_frontline_team",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_develop_frontline_team:fe96ad73af5fe1ff6abca6161c6f6b7251633a43c1c0fa745e0c9cbb47ba7a9d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_develop_frontline_team:f890043f4ad9fda8817df4d50af7279b4c2563af0115e0fcfd1a7cf124e92db6",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_develop_frontline_team:fe96ad73af5fe1ff6abca6161c6f6b7251633a43c1c0fa745e0c9cbb47ba7a9d",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_develop_frontline_team:fe96ad73af5fe1ff6abca6161c6f6b7251633a43c1c0fa745e0c9cbb47ba7a9d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of develop frontline team status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing develop frontline team status from Dynamics 365 F&SCM (legal entity USMF) with a header, 3-5 KPI tiles, a RAG row, and 2-3 action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "3916005c1a01dc131cbb03bfedb935e25edfd7cef9cf01d3ba8561f0ee5376dc",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "e2922b37983ad758fc4d30d0b1e7f3e9c4362b53779d1c09a25184180a0ed3c4",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

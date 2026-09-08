@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_monitor_product_feedback",
   "name": "Monitor product feedback Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_monitor_product_feedback",
-  "rappid": "rappid:@cowork-cookbook/teams_update_monitor_product_feedback:53b851dbc3e13f3a6ea97ca8638e7b0f5aa70f9f2e18fa179506497d48bc94a7",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_monitor_product_feedback:312da70a0a9c336327b8d8eabe311bab0135701f4a03c896f2fc6290789fc948",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_monitor_product_feedback:53b851dbc3e13f3a6ea97ca8638e7b0f5aa70f9f2e18fa179506497d48bc94a7",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_monitor_product_feedback:53b851dbc3e13f3a6ea97ca8638e7b0f5aa70f9f2e18fa179506497d48bc94a7"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on monitor product feedback status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes monitor product feedback status from the Dynamics 365 ERP plugin for a given legal entity and saves a markdown Teams channel post plus an Adaptive Card JSON file for review; it does not post anything.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "164cb46643a924dcb55f241434673e5ea40cd815241ff5cc46a38fba481df59b",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "e29eb2264e1e1e93cbef99c3f6bdab246647d2d003e552520293bfe39f7a6464",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

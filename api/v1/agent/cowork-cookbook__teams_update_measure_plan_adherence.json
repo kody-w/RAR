@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_measure_plan_adherence",
   "name": "Measure plan adherence Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_measure_plan_adherence",
-  "rappid": "rappid:@cowork-cookbook/teams_update_measure_plan_adherence:87979644004968a6c85b656a44cb490dcfc83a8e7275c1a8356823be13b2caf7",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_measure_plan_adherence:2f87e20d5a1534d75a687f320ee197541ec8417a6f8bb987d6d32a19766a03de",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_measure_plan_adherence:87979644004968a6c85b656a44cb490dcfc83a8e7275c1a8356823be13b2caf7",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_measure_plan_adherence:87979644004968a6c85b656a44cb490dcfc83a8e7275c1a8356823be13b2caf7"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on measure plan adherence status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes measure plan adherence from Dynamics 365 ERP for a given legal entity and saves two artifacts: a markdown Teams channel post and an Adaptive Card JSON with KPIs and quick-action buttons; nothing is posted.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "a9d7dc05a79adc024bf6b148cacbea4237c06082005a7b16ec4fedf01f3db382",
+  "lines": 265,
+  "size_kb": 16.1,
+  "sha256": "e58251d7ef86b01d389d752e1c025e09dbde51434448b10c7e9395a0e57268d9",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

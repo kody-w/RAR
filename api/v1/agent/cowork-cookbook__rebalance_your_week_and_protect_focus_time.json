@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__rebalance_your_week_and_protect_focus_time",
   "name": "Rebalance your week and protect focus time",
   "rar_name": "@cowork-cookbook/rebalance_your_week_and_protect_focus_time",
-  "rappid": "rappid:@cowork-cookbook/rebalance_your_week_and_protect_focus_time:5759aadd0ee8b0e96d2bfd3942ea08939b821c2ba81fc67ae81d898551855c33",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/rebalance_your_week_and_protect_focus_time:668f2d5c4c3fa2802bd499aa8241d9557c7a84ebc49cc12e9138543d8557e762",
+  "_migrated_from": "rappid:@cowork-cookbook/rebalance_your_week_and_protect_focus_time:5759aadd0ee8b0e96d2bfd3942ea08939b821c2ba81fc67ae81d898551855c33",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/rebalance_your_week_and_protect_focus_time:5759aadd0ee8b0e96d2bfd3942ea08939b821c2ba81fc67ae81d898551855c33"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "general",
   "tags": [
@@ -19,16 +21,16 @@
     "beginner",
     "read_only"
   ],
-  "description": "Take control of a fragmented calendar before it takes control of your week.",
+  "description": "Reviews your Outlook calendar for the week, summarizes meeting load and focus time, then proposes and \u2014 after your approval \u2014 applies accept/decline/reschedule and focus-block changes one at a time.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 9.5,
-  "sha256": "30277545414dd92cf18a6e6b5ec2677a579d4fa171adca8cfa9a277a47f5c4fe",
+  "lines": 265,
+  "size_kb": 17.7,
+  "sha256": "19b3c5ab3a68b369f1643e86fc2fe953b565876781e125c5a2dad3e5451ca6cf",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

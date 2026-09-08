@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_conduct_a_compliance_risk_assessment",
   "name": "Conduct a compliance risk assessment Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_conduct_a_compliance_risk_assessment",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_conduct_a_compliance_risk_assessment:bff40da19a9c4ffc01fea9f3adf8be327913da9599f836828c644f80cc1d299b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_conduct_a_compliance_risk_assessment:d0c911cccff6ef2708171172ab2d2c27100ad1dbaf024c9394d5b29520fde842",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_conduct_a_compliance_risk_assessment:bff40da19a9c4ffc01fea9f3adf8be327913da9599f836828c644f80cc1d299b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_conduct_a_compliance_risk_assessment:bff40da19a9c4ffc01fea9f3adf8be327913da9599f836828c644f80cc1d299b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across conduct a compliance risk assessment records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to compliance risk assessment records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied list of record IDs and new values, with a dry-run preview workbook before commit",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "33312cffc115bca8cd1d6bf76feea0c91f911f2fa11bd6a0d32a45203f360c44",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "34807fe6666e46a9bb6a4a947ed0f91d39ae870c3ede16d3eb65a8298dbf598f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

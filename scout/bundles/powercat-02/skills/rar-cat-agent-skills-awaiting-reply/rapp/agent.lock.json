@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/awaiting_reply",
   "agent_file": "awaiting_reply_agent.py",
-  "agent_sha256": "fbd75b3e3e375301db703b7b0f2205c47d0a33f8b137b721c7380dfac54b5193",
+  "agent_sha256": "d02f3e9ab8faeaabb60ad68970f996c478687c29f591f9a0bce8459a68a6968e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AwaitingReply",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "reminder",
       "multilingual"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AwaitingReply",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

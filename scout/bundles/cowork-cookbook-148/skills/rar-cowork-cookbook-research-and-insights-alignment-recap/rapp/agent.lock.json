@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/research_and_insights_alignment_recap",
   "agent_file": "research_and_insights_alignment_recap_agent.py",
-  "agent_sha256": "4cd5174fe215d81f99321344163b4a2919a99d8b3c6d2a85b710ebf1766643d0",
+  "agent_sha256": "4b8c0f371d4928a2871f5e23128a7a561e29fb6cd9df6c8bbcc977b9195dd25b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ResearchAndInsightsAlignmentRecap",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Surface everything that came out of this week's research sessions - what landed, what didn't, and what still needs an owner.",
+    "description": "Reads meeting transcripts, team channel discussions, and email threads from a research project's debrief sessions and returns a draft Teams recap of decisions made, open issues, and items needing a named owner.",
     "display_name": "Research and insights alignment recap",
     "industry_context": {
       "deprecated": false,
@@ -48,9 +48,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "ae70eb16e21980cc",
+      "content_digest": "037ac8078e4159c1",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -73,28 +73,33 @@
       "beginner",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ResearchAndInsightsAlignmentRecap",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "data_source": {
-        "description": "Optional. Where the evidence comes from.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The question to answer, stated as a question.",
+      "research_project": {
+        "description": "Name of the research project whose debrief sessions should be reviewed.",
+        "type": "string"
+      },
+      "team_channel": {
+        "description": "Teams channel to read discussions from and to post the drafted recap to for review.",
         "type": "string"
       }
     },
@@ -103,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_forecast_revenue",
   "name": "Forecast revenue Summary Report",
   "rar_name": "@cowork-cookbook/report_forecast_revenue",
-  "rappid": "rappid:@cowork-cookbook/report_forecast_revenue:0361b51d87d438d400478bed5297c2208ab092c74f0db5f03f12f366b933851d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_forecast_revenue:f5209047f1f78181bef1c7ea6729b365b9cf2d0fbf99a51ab2c777cee0e40106",
+  "_migrated_from": "rappid:@cowork-cookbook/report_forecast_revenue:0361b51d87d438d400478bed5297c2208ab092c74f0db5f03f12f366b933851d",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_forecast_revenue:0361b51d87d438d400478bed5297c2208ab092c74f0db5f03f12f366b933851d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of forecast revenue activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only forecast revenue summary from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.0,
-  "sha256": "d724d53836bcc919b9421181f34cf5cbda6ffd5663a771923f8c8f7d241d131b",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "fc85c0dd398e51f7d0da9bd2f044ba341397b6d8647df9fb364646b59a1fc07c",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

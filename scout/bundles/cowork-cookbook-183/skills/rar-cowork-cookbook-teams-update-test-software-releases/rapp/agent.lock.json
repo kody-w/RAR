@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_test_software_releases",
   "agent_file": "teams_update_test_software_releases_agent.py",
-  "agent_sha256": "31dbe431bc6adb83a17e6b9e39d2e9321de96dde6221d9f942a8c07cc9b7a9c4",
+  "agent_sha256": "3e4769ea0d7ec32d0524d932ea93f816c3abf12198d853e76207f84b6b8b170f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateTestSoftwareReleases",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on test software releases status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes the current state of test software releases from the Dynamics 365 ERP plugin for a given legal entity, returning a markdown Teams channel post plus a saved Adaptive Card JSON file; nothing is posted.",
     "display_name": "Test software releases Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "3dfcfb92b6e69f2e",
+      "content_digest": "fbbc2f30a9ea3039",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateTestSoftwareReleases",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "card_filename": {
+        "description": "Filename for the saved Adaptive Card JSON, e.g. teams-update-test-software-releases-2026-05-24-card.json.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "quick_actions": {
+        "description": "Quick-action buttons to include on the card, e.g. 'View detail', 'Open in D365'.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_estimate_project_contracts",
   "agent_file": "ppt_exec_estimate_project_contracts_agent.py",
-  "agent_sha256": "3d476d24300181b86ee4093487881fc221d299eddd4e6dbd019cdad2417c27c9",
+  "agent_sha256": "0827873676b947300a5bba55f1304ad13d171d684f7860493e47321f49b2ba53",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecEstimateProjectContracts",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on estimate project contracts status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on estimate project contracts from Dynamics 365 F&SCM data for a given legal entity, with title, KPI, trend, red-flag, actions, and appendix slides plus speaker notes.",
     "display_name": "Estimate project contracts Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c468033aca6fe080",
+      "content_digest": "c4d488164d965d0a",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecEstimateProjectContracts",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to pull contract data from (e.g. USMF).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the .pptx file to produce, e.g. ppt-exec-estimate-project-contracts-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_period": {
+        "description": "Reporting period and prior period used for the trend comparison (e.g. monthly review as of 2026-05-24).",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

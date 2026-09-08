@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/pricing_screenshot_to_customer_presentation",
   "agent_file": "pricing_screenshot_to_customer_presentation_agent.py",
-  "agent_sha256": "a95931c5b1c78d2d63b5e4f21dcea810974298609fe10f21360b8b4c8b8f2054",
+  "agent_sha256": "263539c3d99e992167d4d3b2b3e817260364df031e4b7109ef0cd0aaeda0aa1b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PricingScreenshotToCustomerPresentation",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Turn an approved pricing screenshot into a customer-ready deck - numbers exact, deck polished, email drafted.",
+    "description": "Turns an approved pricing screenshot into a customer-ready PowerPoint deck (cover, context, exact pricing breakdown, next steps) plus a draft email to the contact, with the pricing slide shown for approval first.",
     "display_name": "Pricing screenshot -> customer presentation",
     "industry_context": {
       "deprecated": false,
@@ -48,9 +48,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "02b82b73fd7ca9e4",
+      "content_digest": "54e129e4637049af",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -73,28 +73,45 @@
       "intermediate",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PricingScreenshotToCustomerPresentation",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "company_name": {
+        "description": "Customer company name for the cover slide.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "customer_contact_name": {
+        "description": "Person the draft email attaching the deck is addressed to.",
+        "type": "string"
+      },
+      "meeting_date": {
+        "description": "Date of the customer meeting, shown on the cover slide.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "pricing_screenshot": {
+        "description": "Screenshot image of the approved pricing for the product; figures must be reproduced exactly.",
+        "type": "string"
+      },
+      "product": {
+        "description": "Name of the product the approved pricing covers.",
         "type": "string"
       }
     },
@@ -103,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/vendor_contract_risk_review",
   "agent_file": "vendor_contract_risk_review_agent.py",
-  "agent_sha256": "b83fe34b7b87dcbf87a736131abad982e5fe477b0823a4204428b09fb1750590",
+  "agent_sha256": "a1eaff0f2d79f7143b9cd5cd11d58b9144cd6537ce0f81ec7f204ad55c256818",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VendorContractRiskReview",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "vendor_management",
       "review"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "VendorContractRiskReview",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

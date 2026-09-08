@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/exam_prep_learning_plan_builder",
   "agent_file": "exam_prep_learning_plan_builder_agent.py",
-  "agent_sha256": "35509b26742d474c7b205a420085c28a755754e18621d8599f5d4a54f0bdab35",
+  "agent_sha256": "03a5fb8c787b71080cb833cb37f80dd8b7a981731a2b71086670ad239f59a2cc",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ExamPrepLearningPlanBuilder",
   "host_dependencies": [],
@@ -37,7 +37,7 @@
       "productivity",
       "learning"
     ],
-    "version": "3.0.1"
+    "version": "4.0.3"
   },
   "runtime_name": "ExamPrepLearningPlanBuilder",
   "schema": "rapp-agent-lock/1.0",
@@ -67,5 +67,5 @@
     ],
     "type": "object"
   },
-  "version": "3.0.1"
+  "version": "4.0.3"
 }

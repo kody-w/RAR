@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_conduct_business_performance_reviews",
   "name": "Conduct business performance reviews Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_conduct_business_performance_reviews",
-  "rappid": "rappid:@cowork-cookbook/configure_conduct_business_performance_reviews:ded32a03d54722d844033df497a900e6117bd64ca3fa02e08fdbe11fec28eedf",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_conduct_business_performance_reviews:140a9d7d9d434a13e0fad7468a85ca832e4495cd83a7b7ca3a33a0608c7affb6",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_conduct_business_performance_reviews:ded32a03d54722d844033df497a900e6117bd64ca3fa02e08fdbe11fec28eedf",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_conduct_business_performance_reviews:ded32a03d54722d844033df497a900e6117bd64ca3fa02e08fdbe11fec28eedf"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to conduct business performance reviews from an input Excel file, with validation and rollback support.",
+  "description": "Applies bulk configuration changes for business performance review targets in Dynamics 365 F&SCM from an Excel file: validates all rows, emits a validation workbook, waits for approval, then applies and reports before/af",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.7,
-  "sha256": "bfcebd5a523e26259969a0b6594f838ec5c2c5dfdc35d7eb02e20f3bdc5d77d8",
+  "lines": 265,
+  "size_kb": 17.2,
+  "sha256": "710aa04fd99469d666c123afd8599c5a74b7696daa2cab4e9f6964536f044ec1",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

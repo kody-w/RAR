@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_revalue_inventory",
   "name": "Revalue inventory Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_revalue_inventory",
-  "rappid": "rappid:@cowork-cookbook/configure_revalue_inventory:d306d607bfae8096eff02548477a1d979485b51efd8335f927399bac76d62f79",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_revalue_inventory:4a9591be039a6e6e81bd5d6ad529082418cb59b17c0ca33e1a787a43b96b366a",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_revalue_inventory:d306d607bfae8096eff02548477a1d979485b51efd8335f927399bac76d62f79",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_revalue_inventory:d306d607bfae8096eff02548477a1d979485b51efd8335f927399bac76d62f79"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to revalue inventory from an input Excel file, with validation and rollback support.",
+  "description": "Reads an attached configuration Excel file of inventory revaluation targets in Dynamics 365 F&SCM, validates every row, returns a validation workbook, and after your approval applies the changes with a before/after confi",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "b1decf0e7c6e25eb36c7d2a737a14e00b559deebde4ff1a57b7a05b80a88cf18",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "3fde02e455ccaef7d9e060ffbe8355373d9eb850f597f4d7baccc1ca061dcdd7",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

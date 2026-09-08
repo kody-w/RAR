@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/stoic_negotiator",
   "agent_file": "stoic_negotiator_agent.py",
-  "agent_sha256": "8575b10ac9af4f658319a16d30a5f1171a7497cf0325d9f7363f461b52657e69",
+  "agent_sha256": "c39474c15d45f3a477eb894f916d8f5fb8374755f6327fada1a1d2243ac4dfd1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StoicNegotiator",
   "host_dependencies": [],
@@ -43,7 +43,7 @@
       "batna",
       "zopa"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "StoicNegotiator",
   "schema": "rapp-agent-lock/1.0",
@@ -73,5 +73,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/anonymised_case_study_writer",
   "agent_file": "anonymised_case_study_writer_agent.py",
-  "agent_sha256": "acca33c8954fc23a9d6b76b4ab200a7bf5a076cd44c2200f1c42565e98f20361",
+  "agent_sha256": "a33da39c5a36434bb8c16f1d206623b4f32f7826daa65859162fce827c579996",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AnonymisedCaseStudyWriter",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "content",
       "privacy"
     ],
-    "version": "1.1.0"
+    "version": "2.1.2"
   },
   "runtime_name": "AnonymisedCaseStudyWriter",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "1.1.0"
+  "version": "2.1.2"
 }

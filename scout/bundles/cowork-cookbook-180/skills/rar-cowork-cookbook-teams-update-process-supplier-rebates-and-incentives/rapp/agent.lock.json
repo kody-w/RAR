@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_process_supplier_rebates_and_incentives",
   "agent_file": "teams_update_process_supplier_rebates_and_incentives_agent.py",
-  "agent_sha256": "6cd3252dc7b78785bae95376ea5ca8b21873ea8d98756710a10a2e3e6302c0ec",
+  "agent_sha256": "45bdc882f81dba46b8fd6b5d90e9f81d521cf9e4fe320929db84652d980771aa",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateProcessSupplierRebatesAndIncentives",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on process supplier rebates and incentives status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes supplier rebate and incentive status from Dynamics 365 ERP for a legal entity and saves a Teams channel post (markdown) plus an Adaptive Card JSON with KPIs and quick-action buttons for review; nothing is post",
     "display_name": "Process supplier rebates and incentives Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c878686ae633e54f",
+      "content_digest": "00f220da3f5d483b",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,33 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateProcessSupplierRebatesAndIncentives",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "card_filename": {
+        "description": "Output Adaptive Card JSON filename, e.g. teams-update-process-supplier-rebates-and-incentives-2026-05-24-card.json.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to summarize, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -112,5 +117,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_plan_projects",
   "name": "Plan projects Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_plan_projects",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_plan_projects:a2783a1557ffdf329f5386272a3cb1ff58c5dc9e27d8e0f8e627ba4bdf2843fe",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_plan_projects:ce2e86f70a0cd32f31ea7cff8f0e33c6d3c71f2830887a55cb9e03a2449ec7c4",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_plan_projects:a2783a1557ffdf329f5386272a3cb1ff58c5dc9e27d8e0f8e627ba4bdf2843fe",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_plan_projects:a2783a1557ffdf329f5386272a3cb1ff58c5dc9e27d8e0f8e627ba4bdf2843fe"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across plan projects records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to plan projects records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied list of record IDs and new values, producing a dry-run preview workbook for approval before c",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "579f25df6bd32c6d33cf30114403f630a24f4210bee9dd9a6f10cce57c0907dc",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "0f165597a35a00361fcd660df95632679fc4bf8e9fc02cf01c1a9a5df39c8fb5",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

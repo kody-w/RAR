@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/audit_implement_process_governance",
   "agent_file": "audit_implement_process_governance_agent.py",
-  "agent_sha256": "72854e1589df2791f3600aa40891644d6c3cf287dc71db3dfa36f1a100d90395",
+  "agent_sha256": "8ba2c7672a6f9c90139d7fc3d7ef094b0842b82775a72cbde469e2ba7e2a0df0",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditImplementProcessGovernance",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits implement process governance records for completeness and policy compliance against rule-based checks.",
+    "description": "Audits implement process governance records in a Dynamics 365 F&SCM legal entity for completeness and policy compliance (missing fields, stale dates, blank descriptions, inactive references) and returns a read-only Excel",
     "display_name": "Implement process governance Completeness Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "a31359a2132581f4",
+      "content_digest": "62ec7588fea71589",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "AuditImplementProcessGovernance",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_window": {
+        "description": "Date range for stale-date checks; adjust for demo data that is mostly FY2017.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to audit, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. audit-implement-process-governance-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

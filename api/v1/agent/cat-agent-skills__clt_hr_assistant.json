@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__clt_hr_assistant",
   "name": "Assistente CLT para RH",
   "rar_name": "@cat-agent-skills/clt_hr_assistant",
-  "rappid": "rappid:@cat-agent-skills/clt_hr_assistant:4244fb494f33341f2cb84c053f11ff8db33b14bf22d14554b94b53b86417d78d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "1.1.0",
+  "rappid": "rappid:@cat-agent-skills/clt_hr_assistant:666314f9542a54e0617a72e696c31b314dfb8d20f40a9d47f4bad46d0f523b30",
+  "_migrated_from": "rappid:@cat-agent-skills/clt_hr_assistant:4244fb494f33341f2cb84c053f11ff8db33b14bf22d14554b94b53b86417d78d",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/clt_hr_assistant:4244fb494f33341f2cb84c053f11ff8db33b14bf22d14554b94b53b86417d78d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -27,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.8,
-  "sha256": "c3a3b868ca1ca03b82006c23c3c8829fb083d1e64b9dbaa6d054300752a39688",
+  "lines": 262,
+  "size_kb": 12.2,
+  "sha256": "f5b73a62818607a07ab31b5e8dc4218a277a3e7c1d97f5847706efa80d1bd0aa",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

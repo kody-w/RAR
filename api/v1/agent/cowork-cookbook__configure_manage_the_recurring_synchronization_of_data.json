@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_manage_the_recurring_synchronization_of_data",
   "name": "Manage the recurring synchronization of data Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data",
-  "rappid": "rappid:@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data:26a6f93b175f5bf2469e783a573832e8cc8407d00010eab7f65c3f74e09e4598",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data:e068706fe490c39f2d9b6a84caae2698902aa7bf949c991ceaae585ce87e41bb",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data:26a6f93b175f5bf2469e783a573832e8cc8407d00010eab7f65c3f74e09e4598",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data:26a6f93b175f5bf2469e783a573832e8cc8407d00010eab7f65c3f74e09e4598"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to manage the recurring synchronization of data from an input Excel file, with validation and rollback support.",
+  "description": "Applies a bulk configuration change for recurring data synchronization in Dynamics 365 F&SCM from an Excel file: validates every row, emits a validation workbook, waits for approval, then applies changes with a before/af",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.8,
-  "sha256": "84faffbd9118032bf33f49b0dd2e6f919b736d1869012cc4beac4734870db4f7",
+  "lines": 265,
+  "size_kb": 17.5,
+  "sha256": "543905e76d3c30cb6bb1a69ab600b8472ca66c9f9df7166dffe6628fda890e5b",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

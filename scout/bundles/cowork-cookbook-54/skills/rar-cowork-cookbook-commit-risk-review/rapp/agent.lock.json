@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/commit_risk_review",
   "agent_file": "commit_risk_review_agent.py",
-  "agent_sha256": "bb8db9f9005cf9b28de54a16099aea18952b9e177b398c146ed22740b93aa325",
+  "agent_sha256": "6f2d5a4c82acf16a473bcecec558c602ba7d92320adb6cda936c9c1ba32fb59c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommitRiskReview",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Know which Commit deals are at risk before quarter-end - with follow-ups drafted and CRM updated.",
+    "description": "Reviews Commit-stage opportunities you own that close this quarter against email, meeting, and document engagement signals, then returns a one-page PowerPoint risk summary, per-deal follow-up email drafts, and a CRM upda",
     "display_name": "Commit risk review",
     "industry_context": {
       "deprecated": false,
@@ -49,9 +49,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "0966eeb5d7645166",
+      "content_digest": "1f894e03ab8f3993",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -75,28 +75,37 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "CommitRiskReview",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "crm_pipeline_snapshot": {
+        "description": "CRM Pipeline Snapshot spreadsheet (or a connected Dynamics 365 Sales environment) containing the opportunities to review.",
+        "type": "string"
+      },
+      "deal_owner": {
+        "description": "The seller whose owned opportunities should be reviewed.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "quarter_close_period": {
+        "description": "The quarter whose closing deals should be included, with its deadline date.",
         "type": "string"
       }
     },
@@ -105,5 +114,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

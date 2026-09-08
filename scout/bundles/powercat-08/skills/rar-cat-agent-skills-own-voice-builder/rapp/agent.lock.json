@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/own_voice_builder",
   "agent_file": "own_voice_builder_agent.py",
-  "agent_sha256": "c94c678de5a3bd69cf2f1f4e4b50b38cdd931bfcd23aeec345fb3263b86df1b0",
+  "agent_sha256": "e93e7c7eaf21c72cb54ae3b66789bc10826ea31a644041608de32228d84a5ee5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "OwnVoiceBuilder",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "productivity",
       "microsoft_365"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "OwnVoiceBuilder",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

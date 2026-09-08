@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_inspect_inventory",
   "name": "Inspect inventory Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_inspect_inventory",
-  "rappid": "rappid:@cowork-cookbook/demo_data_inspect_inventory:99461048c84d7bddfb0b1a933ecb93a1befeb8ff3fc7b741bc195d5a574da117",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_inspect_inventory:fc9a1a955dfd0331968ebd4c48140af2ed5a7ad56cbc5d8a60bf9f5114d68e67",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_inspect_inventory:99461048c84d7bddfb0b1a933ecb93a1befeb8ff3fc7b741bc195d5a574da117",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_inspect_inventory:99461048c84d7bddfb0b1a933ecb93a1befeb8ff3fc7b741bc195d5a574da117"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for inspect inventory in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo inspect-inventory records for a sandbox D365 F&SCM legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "bd76a96b04cc215e97408de96407d30dd051924685e5704872259846baa9e143",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "4ba99ac8d2834c15f28481faf8c49b1442ff3a4fbfbad86f880b394e2525368c",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

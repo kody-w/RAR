@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_perform_market_research",
   "name": "Perform market research Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_perform_market_research",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_perform_market_research:564f9ec5b82a0b014ea739b5608d13b9816929d19dff6abf5a05aeec8ce6b6f9",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_perform_market_research:dbf095294f0d6aa7e21375f577a6d35ccf3c7993ebadcc9d1ce30b276133ce02",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_perform_market_research:564f9ec5b82a0b014ea739b5608d13b9816929d19dff6abf5a05aeec8ce6b6f9",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_perform_market_research:564f9ec5b82a0b014ea739b5608d13b9816929d19dff6abf5a05aeec8ce6b6f9"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on perform market research status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on market research status from Dynamics 365 F&SCM data for a given legal entity, with KPI, trend, issues, actions, and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "a0cdecacd2e5f642c47ab1d19c1166d7f9ea46d79ce49b78fe399df262654de1",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "f4196a5daf5e170779127cacf46cdc85ab742867951b6334f846ad683b25725f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

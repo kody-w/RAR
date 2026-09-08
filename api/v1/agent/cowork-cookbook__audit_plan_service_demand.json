@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_plan_service_demand",
   "name": "Plan service demand Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_plan_service_demand",
-  "rappid": "rappid:@cowork-cookbook/audit_plan_service_demand:336b9fd3fc8795690dc1357acaa9e44ee232bed837fbb2e4af8634c517da0ba6",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_plan_service_demand:d171b764ecd1751a4c63c3f3b312a37aa0d0a50afbe80a199b26654df39a3574",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_plan_service_demand:336b9fd3fc8795690dc1357acaa9e44ee232bed837fbb2e4af8634c517da0ba6",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_plan_service_demand:336b9fd3fc8795690dc1357acaa9e44ee232bed837fbb2e4af8634c517da0ba6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits plan service demand records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of plan service demand records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary sheet.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "3ab88bdbd385b634df008cf9b82fb934130bb4c05cfd21f41312c58c5aeb8f5f",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "9499ca65c21f68fc99665f76e9dc787afe7d06828346e7864e2f72ad319ee892",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

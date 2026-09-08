@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/turn_source_content_into_a_deck",
   "agent_file": "turn_source_content_into_a_deck_agent.py",
-  "agent_sha256": "6f38a192ebccdcf950fd407c4d8094a454d4396dec4727903a9170437e284a58",
+  "agent_sha256": "e7c77485991a900a91c4f5072f121f654c3cc0f655c09509b6a2c0a396b60e44",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TurnSourceContentIntoADeck",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Get a working deck built from content you already have - without starting from a blank slide.",
+    "description": "Builds a Prezi deck from source content you supply (transcript, notes, or document) with a title slide, themed section breaks, and a closing next-steps slide; call it when you need a deck drafted from existing material.",
     "display_name": "Turn source content into a deck",
     "industry_context": {
       "deprecated": false,
@@ -47,9 +47,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "3968b18a5f8a924e",
+      "content_digest": "875c4d37639b9a37",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -73,28 +73,33 @@
       "integration",
       "prezi"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TurnSourceContentIntoADeck",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "slide_count": {
+        "description": "How many slides the deck should have.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "source_content": {
+        "description": "The material to build from, e.g. a meeting transcript, notes, or a document.",
         "type": "string"
       }
     },
@@ -103,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

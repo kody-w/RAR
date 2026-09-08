@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/map_a_customer_journey_for_a_campaign",
   "agent_file": "map_a_customer_journey_for_a_campaign_agent.py",
-  "agent_sha256": "2810aea892da61f3b34fe3fe5bbc8964b2df8bda2a2250c5112bf951d0da0242",
+  "agent_sha256": "3c30c9bb144354f962b9a24a887995c89ab7d18bf95f5e287cb507f40fced766",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MapACustomerJourneyForACampaign",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Turn a campaign brief into a clear, visual customer journey the team can rally around - instead of arguing over interpretations of the same Word doc.",
+    "description": "Builds a Miro customer journey board for a named campaign from its brief, audience definition, and messaging files, plus a stage/channel/asset/owner/status tracking table; call before asset production.",
     "display_name": "Map a customer journey for a campaign",
     "industry_context": {
       "deprecated": false,
@@ -44,9 +44,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c5922a0657bcc4ae",
+      "content_digest": "0c01bc961ade4c31",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -70,28 +70,37 @@
       "integration",
       "miro"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "MapACustomerJourneyForACampaign",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "campaign_name": {
+        "description": "Name of the campaign the journey is being mapped for.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "onedrive_folder": {
+        "description": "OneDrive folder holding the campaign brief, audience definition, and messaging guidance.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "team_channel": {
+        "description": "Teams channel with recent strategy threads that shaped the campaign angle.",
         "type": "string"
       }
     },
@@ -100,5 +109,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

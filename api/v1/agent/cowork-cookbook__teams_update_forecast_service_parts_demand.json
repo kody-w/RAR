@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_forecast_service_parts_demand",
   "name": "Forecast service parts demand Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_forecast_service_parts_demand",
-  "rappid": "rappid:@cowork-cookbook/teams_update_forecast_service_parts_demand:22ee7cf5b5a1d79bdcdc6ad5a2c4cf01088287395ed7d4a9a061776c65e0959b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_forecast_service_parts_demand:e4c3be7fd076bb03357e8b2a0e44e091d2b102f2aa67bd1c831d70732d3335b7",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_forecast_service_parts_demand:22ee7cf5b5a1d79bdcdc6ad5a2c4cf01088287395ed7d4a9a061776c65e0959b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_forecast_service_parts_demand:22ee7cf5b5a1d79bdcdc6ad5a2c4cf01088287395ed7d4a9a061776c65e0959b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on forecast service parts demand status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes forecast service parts demand from the Dynamics 365 ERP plugin for a legal entity and returns a markdown Teams channel post plus a saved Adaptive Card JSON file; nothing is posted automatically.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "456d6b5949144ed146289cf7113c9ac3dd27dc3095c597aeb16415b9ddb5e4a2",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "a8778c142c53109bf4dc9b122092831e618542d78085a6427a862e905aa8613a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

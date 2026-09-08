@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_evaluate_campaign_performance",
   "agent_file": "teams_update_evaluate_campaign_performance_agent.py",
-  "agent_sha256": "46a9d5cb908e960c84513744b3e37137915b48dfecab689405f8a0b0b849778a",
+  "agent_sha256": "365ac4254ca0907bf611156456e1ac2692bda2e0adec6b595018296b778736ef",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateEvaluateCampaignPerformance",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on evaluate campaign performance status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes campaign performance from Dynamics 365 ERP for a given legal entity and saves two artifacts: a markdown Teams channel post (2-sentence summary plus 3 bullets) and an Adaptive Card JSON with KPIs and quick-acti",
     "display_name": "Evaluate campaign performance Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "b8c4ec60072fd87c",
+      "content_digest": "ab5a20f8007b6787",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateEvaluateCampaignPerformance",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "card_filename": {
+        "description": "Output name for the Adaptive Card JSON, e.g. teams-update-evaluate-campaign-performance-2026-05-24-card.json.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report on, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "topic": {
+        "description": "The process or area to summarize, here 'evaluate campaign performance'.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

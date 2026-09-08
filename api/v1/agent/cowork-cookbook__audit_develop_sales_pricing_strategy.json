@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_develop_sales_pricing_strategy",
   "name": "Develop sales pricing strategy Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_develop_sales_pricing_strategy",
-  "rappid": "rappid:@cowork-cookbook/audit_develop_sales_pricing_strategy:f6817df84ca88466ac8beead24cd7a9c419841ae5d60ae5479ff4d4ed0316253",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_develop_sales_pricing_strategy:b33f6bb1fbd26df1304e585d0571499a4a9302bef85f89d32af5e3ff47d0fca8",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_develop_sales_pricing_strategy:f6817df84ca88466ac8beead24cd7a9c419841ae5d60ae5479ff4d4ed0316253",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_develop_sales_pricing_strategy:f6817df84ca88466ac8beead24cd7a9c419841ae5d60ae5479ff4d4ed0316253"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits develop sales pricing strategy records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of develop sales pricing strategy records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary shee",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "6aeda032b42088508a86fe2e3e53777cb8745dc680b703488f921d59b136330f",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "c01fd617ee00ea89670d003127f2a3aa3f06dbb6def293b755d9f0c4c3840fe6",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

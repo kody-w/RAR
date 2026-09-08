@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/messaging_drift_audit_and_remediation",
   "agent_file": "messaging_drift_audit_and_remediation_agent.py",
-  "agent_sha256": "1b72e8b0bd7f3e54571bcd27d9b27bfeb05361b30ecccc75e7fbed00bbb627ee",
+  "agent_sha256": "703f96d0a26dd50221744ccb985db4a09c7aea0218b074f45c7e69a44131667e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MessagingDriftAuditAndRemediation",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Catch messaging drift across every asset in [Folder] before it shows up in market.",
+    "description": "Audits every asset in a given folder against an approved messaging doc and brand guide, then returns a sortable Excel report of findings by severity with fixes, owners, and fix order.",
     "display_name": "Messaging drift audit and remediation routing",
     "industry_context": {
       "deprecated": false,
@@ -46,9 +46,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "a7fd62b0b1166c2e",
+      "content_digest": "6b5f767bc9591547",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -72,28 +72,37 @@
       "read_only",
       "analysis"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "MessagingDriftAuditAndRemediation",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "brand_guide": {
+        "description": "The brand guidelines document used for tone and naming checks.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "folder": {
+        "description": "The folder containing the assets to review.",
+        "type": "string"
+      },
+      "messaging_doc": {
+        "description": "The approved messaging document to benchmark assets against.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
         "type": "string"
       }
     },
@@ -102,5 +111,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/iterative_file_editing",
   "agent_file": "iterative_file_editing_agent.py",
-  "agent_sha256": "cce8b6e20451b55794496c50b14c159915737e03af94e3e7c2d3dcc01b8588f8",
+  "agent_sha256": "a4d257098864c459b987e5f2d613b74b9ce2dfca94886c34306fbb4869d073db",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "IterativeFileEditing",
   "host_dependencies": [],
@@ -39,7 +39,7 @@
       "collaboration",
       "productivity"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "IterativeFileEditing",
   "schema": "rapp-agent-lock/1.0",
@@ -69,5 +69,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

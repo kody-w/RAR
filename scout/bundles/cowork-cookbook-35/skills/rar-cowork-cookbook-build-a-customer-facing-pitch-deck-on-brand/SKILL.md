@@ -1,7 +1,7 @@
 ---
 name: "rar-cowork-cookbook-build-a-customer-facing-pitch-deck-on-brand"
-description: "Hand the field a customer-facing pitch deck that's on-brand, on-message, and tailored to a specific exec audience - instead of letting every team rebuild from a generic template."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand", "rar_sha256": "2abe5c63fe631d55484440bad066ff0b96ca7057832867788e634b0a7749a34e", "source_kind": "rar-agent", "source_commit": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed", "version": "2.0.0", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "other", "concept_to_market", "beginner", "read_only"]}
+description: "Returns a customer-facing pitch deck built on the approved Templafy corporate template for a named customer and executive audience, grounded in release messaging, recent customer email/meeting context, and battlecards, t"
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand", "rar_sha256": "1fb3baaa7faf775a0523f1b02bee087eb0e88e7d369e455fa101e33bb622aafd", "source_kind": "rar-agent", "source_commit": "working-tree", "version": "3.0.3", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "other", "concept_to_market", "beginner", "read_only"]}
 ---
 
 ## Microsoft Scout runtime
@@ -23,17 +23,18 @@ agent in the user's Brainstem. Never paraphrase the factory or agent into a new
 implementation. The generic direct-file commands in the generated Toaster
 section are recovery guidance; Scout should prefer the verified runner.
 
-Build a customer-facing pitch deck on brand — Hand the field a customer-facing pitch deck that's on-brand, on-message, and tailored to a specific exec audience - instead of letting every team rebuild from a generic template.
+Build a customer-facing pitch deck on brand — Returns a customer-facing pitch deck built on the approved Templafy corporate template for a named customer and executive audience, grounded in release messaging, recent customer email/meeting context, and battlecards, t
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a author capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/build-a-customer-facing-pitch-deck-on-brand
@@ -53,22 +54,39 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 ```json
 {
   "properties": {
-    "audience": {
-      "description": "Optional. Who reads it \u2014 this drives register, length and what can be assumed.",
+    "battlecard_folder": {
+      "description": "Folder of battlecards used for competitive framing.",
+      "type": "string"
+    },
+    "context": {
+      "description": "Optional. Details the recipe should use \u2014 the record, scope, dates or filters it asks for.",
+      "type": "string"
+    },
+    "customer_name": {
+      "description": "The customer account the deck is built for.",
+      "type": "string"
+    },
+    "executive_audience": {
+      "description": "The enterprise exec audience the deck is tailored to (e.g. CFO, CIO).",
+      "type": "string"
+    },
+    "messaging_doc": {
+      "description": "Source doc holding the latest release positioning.",
       "type": "string"
     },
     "operation": {
-      "description": "What to do: run, plan, checklist, describe.",
+      "description": "What to do: run, prompt, plan, checklist, describe.",
       "enum": [
         "run",
+        "prompt",
         "plan",
         "checklist",
         "describe"
       ],
       "type": "string"
     },
-    "subject": {
-      "description": "What to produce, and about what.",
+    "platform_or_release": {
+      "description": "The platform or release the deck introduces.",
       "type": "string"
     }
   },
@@ -85,7 +103,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `build_a_customer_facing_pitch_deck_on_brand_agent.py` and embedded as the fenced Python below (sha256 2abe5c63fe631d55…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `build_a_customer_facing_pitch_deck_on_brand_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `build_a_customer_facing_pitch_deck_on_brand_agent.py` and embedded as the fenced Python below (sha256 1fb3baaa7faf775a…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `build_a_customer_facing_pitch_deck_on_brand_agent.py` first:
 
 ```bash
 python3 build_a_customer_facing_pitch_deck_on_brand_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -97,17 +115,18 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 
 ```python  # rapp:deterministic
 """
-Build a customer-facing pitch deck on brand — Hand the field a customer-facing pitch deck that's on-brand, on-message, and tailored to a specific exec audience - instead of letting every team rebuild from a generic template.
+Build a customer-facing pitch deck on brand — Returns a customer-facing pitch deck built on the approved Templafy corporate template for a named customer and executive audience, grounded in release messaging, recent customer email/meeting context, and battlecards, t
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a author capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/build-a-customer-facing-pitch-deck-on-brand
@@ -122,9 +141,9 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand',
-    "version": '2.0.0',
+    "version": '3.0.3',
     "display_name": 'Build a customer-facing pitch deck on brand',
-    "description": "Hand the field a customer-facing pitch deck that's on-brand, on-message, and tailored to a specific exec audience - instead of letting every team rebuild from a generic template.",
+    "description": 'Returns a customer-facing pitch deck built on the approved Templafy corporate template for a named customer and executive audience, grounded in release messaging, recent customer email/meeting context, and battlecards, t',
     "author": 'Sean Galliher and Cowork Cookbook contributors',
     "tags": ['industry_solution', 'business_process', 'prompt', 'other', 'concept_to_market', 'beginner', 'read_only'],
     "category": 'general',
@@ -143,8 +162,8 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'CC-BY-4.0',
         "license_verified": True,
-        "details": {'license_note': 'Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.', 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
-        "content_digest": 'a5221a5283c2153e',
+        "details": {'license_note': "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.", 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
+        "content_digest": 'b6997b7f8cd858d1',
     },
     "industry_context": {'deprecated': False, 'difficulty': 'beginner', 'last_verified_on': None, 'mutates_data': False, 'plugin': 'none', 'process_roots': ['concept-to-market'], 'process_tags': ['concept-to-market/prepare-marketing-campaigns/create-marketing-material'], 'recipe_category': 'other', 'recipe_type': 'prompt', 'upstream_path': 'concept-to-market/build-a-customer-facing-pitch-deck-on-brand', 'uses_skills': {'custom': [], 'ootb': ['PowerPoint', 'Email', 'Meetings', 'Communications'], 'plugin': []}, 'verification_status': 'draft'},
     # The platforms the upstream entry targets. First-class and queryable, not
@@ -164,15 +183,15 @@ except ModuleNotFoundError:
             self.metadata = metadata
 
 
-# The toasted capability. The upstream entry supplies the WHAT; this procedure
-# is RAR's own method for that shape of work, generated by
-# @kody-w/skill_toaster_agent from the metadata we hold. No upstream text is
-# reproduced here — see the module docstring.
-_SPEC = {'archetype': 'author', 'checks': ['The claim is stated in the first paragraph, not withheld.', 'Every section maps to the claim.', 'Numbers are sourced and current.', 'The ask is explicit and actionable.'], 'confidence': 1.0, 'deliverable': 'A finished draft with a stated claim, an outline that serves it, and an explicit ask.', 'operations': ['run', 'plan', 'checklist', 'describe'], 'params': {'audience': 'Optional. Who reads it — this drives register, length and what can be assumed.', 'subject': 'What to produce, and about what.'}, 'refined_by': 'rules', 'signals': ['word:deck'], 'steps': ['Fix the reader and the decision. A document that does not change a decision does not need to exist.', 'State the single claim in one sentence before writing anything else. If it will not compress, the piece is not ready.', 'Outline to the claim: every section either supports it or is cut.', 'Draft at full length without editing, so structure problems surface before sentence problems.', 'Cut to the shortest version that still lands, then check each remaining paragraph earns its place.', 'Close with what the reader should do next, stated as an action rather than a summary.'], 'subject_label': 'document to produce', 'verb': 'Draft'}
+# The toasted capability, generated by @kody-w/skill_toaster_agent. A licensed
+# recipe entry carries the upstream recipe verbatim (with attribution) in
+# _SPEC["recipe"]; a metadata-only entry carries RAR's own method for that shape
+# of work. See the module docstring for which this is.
+_SPEC = {'archetype': 'recipe', 'checks': ['Prerequisite: Microsoft 365 Copilot licence with access to Cowork', "Output matches: A Templafy pitch deck for an enterprise audience - grounded in the platform release messaging and the customer's strategic context - built on approved corporate templates so the field can lead with it."], 'confidence': 1.0, 'deliverable': "A Templafy pitch deck for an enterprise audience - grounded in the platform release messaging and the customer's strategic context - built on approved corporate templates so the field can lead with it.", 'operations': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'params': {'battlecard_folder': 'Folder of battlecards used for competitive framing.', 'context': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'customer_name': 'The customer account the deck is built for.', 'executive_audience': 'The enterprise exec audience the deck is tailored to (e.g. CFO, CIO).', 'messaging_doc': 'Source doc holding the latest release positioning.', 'platform_or_release': 'The platform or release the deck introduces.'}, 'recipe': {'authors': ['Sean Galliher'], 'business_value': "Hand the field a customer-facing pitch deck that's on-brand, on-message, and tailored to a specific exec audience - instead of letting every team rebuild from a generic template. A Templafy pitch deck for an enterprise audience - grounded in the platform release messaging and the customer's strategic context - built on approved corporate templates so the field can lead with it.", 'expected_output': "A Templafy pitch deck for an enterprise audience - grounded in the platform release messaging and the customer's strategic context - built on approved corporate templates so the field can lead with it.", 'platform': 'Microsoft 365 Copilot Cowork', 'prerequisites': ['Microsoft 365 Copilot licence with access to Cowork'], 'prompt': 'Build a customer-facing pitch deck introducing our new [Platform/Release] for an enterprise [Executive audience] at [Customer name]. Pull the latest release positioning from [Messaging doc], customer-specific context from recent emails and meetings, and competitive framing from [Battlecard folder].\n\nUse Templafy to apply our approved corporate template.\n\nStructure: cover · why now · platform overview · audience value · proof + customer outcomes · differentiation · next steps.\n\nRoute the draft to my manager for a final pass on positioning and stakeholder fit.', 'steps': ['Open Cowork and start a new task.', 'Paste the prompt from `prompt.md`, replacing anything in square brackets with your own values.', 'Review the plan Cowork proposes before letting it run.', 'Check any drafted email or calendar change before approving it — the prompt holds them for review rather than sending.'], 'tenant_caveat': '', 'verified_against': '', 'what_it_does': "A Templafy pitch deck for an enterprise audience - grounded in the platform release messaging and the customer's strategic context - built on approved corporate templates so the field can lead with it."}, 'refined_by': 'claude-opus-5', 'refinement': {'description': 'Returns a customer-facing pitch deck built on the approved Templafy corporate template for a named customer and executive audience, grounded in release messaging, recent customer email/meeting context, and battlecards, t', 'example_request': 'Build a CIO pitch deck for Contoso on our new Fabric release using the Q3 messaging doc and battlecards.', 'inputs': [{'description': 'The platform or release the deck introduces.', 'name': 'platform_or_release'}, {'description': 'The enterprise exec audience the deck is tailored to (e.g. CFO, CIO).', 'name': 'executive_audience'}, {'description': 'The customer account the deck is built for.', 'name': 'customer_name'}, {'description': 'Source doc holding the latest release positioning.', 'name': 'messaging_doc'}, {'description': 'Folder of battlecards used for competitive framing.', 'name': 'battlecard_folder'}], 'model': 'claude-opus-5', 'when_to_use': 'Use when the field needs an on-brand, audience-tailored pitch deck for a platform or release at a specific enterprise customer instead of a generic template.'}, 'signals': ['recipe:prompt', 'refined'], 'steps': ['Open Cowork and start a new task.', 'Paste the prompt from `prompt.md`, replacing anything in square brackets with your own values.', 'Review the plan Cowork proposes before letting it run.', 'Check any drafted email or calendar change before approving it — the prompt holds them for review rather than sending.'], 'subject_label': 'context for the recipe', 'verb': 'Run'}
 
 
 class BuildACustomerFacingPitchDeckOnBrand(BasicAgent):
-    """Draft agent, toasted from an aggregated upstream entry."""
+    """Run agent, toasted from an aggregated upstream entry."""
 
     def __init__(self):
         self.name = 'BuildACustomerFacingPitchDeckOnBrand'
@@ -182,7 +201,7 @@ class BuildACustomerFacingPitchDeckOnBrand(BasicAgent):
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
-                "properties": {'audience': {'description': 'Optional. Who reads it — this drives register, length and what can be assumed.', 'type': 'string'}, 'operation': {'description': 'What to do: run, plan, checklist, describe.', 'enum': ['run', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'subject': {'description': 'What to produce, and about what.', 'type': 'string'}},
+                "properties": {'battlecard_folder': {'description': 'Folder of battlecards used for competitive framing.', 'type': 'string'}, 'context': {'description': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'type': 'string'}, 'customer_name': {'description': 'The customer account the deck is built for.', 'type': 'string'}, 'executive_audience': {'description': 'The enterprise exec audience the deck is tailored to (e.g. CFO, CIO).', 'type': 'string'}, 'messaging_doc': {'description': 'Source doc holding the latest release positioning.', 'type': 'string'}, 'operation': {'description': 'What to do: run, prompt, plan, checklist, describe.', 'enum': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'platform_or_release': {'description': 'The platform or release the deck introduces.', 'type': 'string'}},
                 "required": ["operation"],
             },
         }
@@ -254,12 +273,86 @@ class BuildACustomerFacingPitchDeckOnBrand(BasicAgent):
         ]
         return lines
 
+    # ── recipe entries: the upstream recipe, verbatim, deterministic ─────
+
+    def _recipe_context(self, kwargs):
+        extras = []
+        subject = self._subject(kwargs)
+        if subject:
+            extras.append(f"subject: {subject}")
+        for key in _SPEC["params"]:
+            value = str(kwargs.get(key) or "").strip()
+            if value:
+                extras.append(f"{key}: {value}")
+        return extras
+
+    def _recipe_prompt(self, kwargs):
+        r = _SPEC["recipe"]
+        lines = [r["prompt"]]
+        extras = self._recipe_context(kwargs)
+        if extras:
+            lines += ["", "Context supplied by the caller:"] + [f"- {e}" for e in extras]
+        return lines
+
+    def _recipe_attribution(self):
+        src = __manifest__["source"]
+        r = _SPEC["recipe"]
+        who = ", ".join(r.get("authors") or []) or __manifest__["author"]
+        return [
+            f"Recipe: {__manifest__['display_name']} — by {who}, {src['source_name']} "
+            f"({src['license']}). Source: {src['upstream_url']}",
+        ]
+
+    def _perform_recipe(self, op, kwargs):
+        r = _SPEC["recipe"]
+        ref = _SPEC.get("refinement") or {}
+        if op == "prompt":
+            return "\n".join(self._recipe_prompt(kwargs) + [""] + self._recipe_attribution())
+        if op == "plan":
+            lines = [f"Steps for {__manifest__['display_name']} on {r['platform']}:"]
+            lines += [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "checklist":
+            lines = ["Before you run it:"] + [f"  [ ] {p}" for p in r["prerequisites"]]
+            if r.get("expected_output"):
+                lines += ["", "Done when:", f"  [ ] {r['expected_output']}"]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "describe":
+            lines = self._provenance()
+            if ref.get("when_to_use"):
+                lines += ["", f"When to use: {ref['when_to_use']}"]
+            if ref.get("example_request"):
+                lines += [f"Ask for it like: {ref['example_request']}"]
+            if ref.get("inputs"):
+                lines += ["", "It will ask you for:"] + [f"  - {i['name']}: {i['description']}" for i in ref["inputs"]]
+            if r.get("business_value"):
+                lines += ["", f"Why it matters: {r['business_value']}"]
+            return "\n".join(lines)
+        if op == "run":
+            lines = [f"{__manifest__['display_name']} — run on {r['platform']}", ""]
+            if r.get("what_it_does"):
+                lines += [r["what_it_does"], ""]
+            lines += [f"Prompt (paste into {r['platform']}):", ""] + self._recipe_prompt(kwargs) + [""]
+            lines += ["Procedure:"] + [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)] + [""]
+            lines += ["Acceptance checks:"] + [f"  [ ] {c}" for c in _SPEC["checks"]] + [""]
+            lines += [f"Deliverable: {_SPEC['deliverable']}", ""]
+            if r.get("tenant_caveat"):
+                lines += [f"Verified upstream: {r['tenant_caveat']}", ""]
+            return "\n".join(lines + self._recipe_attribution())
+        return (
+            f"Unknown operation {op!r}. Valid operations: "
+            + ", ".join(_SPEC["operations"])
+        )
+
     # ── entry point ─────────────────────────────────────────────────────
 
     def perform(self, **kwargs):
         """Run the toasted capability. Always returns a string."""
         op = str(kwargs.get("operation") or "run").strip().lower()
         subject = self._subject(kwargs)
+
+        if _SPEC.get("recipe"):
+            return self._perform_recipe(op, kwargs)
 
         if op == "describe":
             return "\n".join(self._provenance())
@@ -289,4 +382,4 @@ if __name__ == "__main__":
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1: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 -->

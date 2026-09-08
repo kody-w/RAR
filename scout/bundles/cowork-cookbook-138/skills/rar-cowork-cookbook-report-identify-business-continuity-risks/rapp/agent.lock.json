@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/report_identify_business_continuity_risks",
   "agent_file": "report_identify_business_continuity_risks_agent.py",
-  "agent_sha256": "12190d3db1f8c1038dbb7a770ca06f89d20c3a1701f530eff289403cab575e5f",
+  "agent_sha256": "e53f9a3815b231ea187fe3d0f88be3c57ef01894fb154f32ad72571619e26202",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportIdentifyBusinessContinuityRisks",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds a structured summary report of identify business continuity risks activity with totals, trends, and breakdowns.",
+    "description": "Builds a read-only business continuity risk summary report from Dynamics 365 F&SCM (legal entity USMF) for the most recent posted period, and outputs an Excel workbook with Summary, Detail, and Top10 sheets.",
     "display_name": "Identify business continuity risks Summary Report",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "55173d5db73adba5",
+      "content_digest": "093a6677d22d8f33",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ReportIdentifyBusinessContinuityRisks",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report against (e.g. USMF).",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. report-identify-business-continuity-risks-2026-05-24.xlsx.",
+        "type": "string"
+      },
+      "period": {
+        "description": "Posted period to cover; defaults to the most recent posted period available.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

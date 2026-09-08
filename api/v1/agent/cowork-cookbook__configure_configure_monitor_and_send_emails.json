@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_configure_monitor_and_send_emails",
   "name": "Configure, monitor, and send emails Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_configure_monitor_and_send_emails",
-  "rappid": "rappid:@cowork-cookbook/configure_configure_monitor_and_send_emails:28a880e2e2434e299719510d1faaa05deccd62c79afa120288e9c0542449d8c8",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_configure_monitor_and_send_emails:04fa04de19a1788165ce65473eb62fd9180656e1d73032c4e5232b8a9385fbd4",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_configure_monitor_and_send_emails:28a880e2e2434e299719510d1faaa05deccd62c79afa120288e9c0542449d8c8",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_configure_monitor_and_send_emails:28a880e2e2434e299719510d1faaa05deccd62c79afa120288e9c0542449d8c8"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to configure, monitor, and send emails from an input Excel file, with validation and rollback support.",
+  "description": "Applies a bulk email-configuration change in Dynamics 365 F&SCM from an Excel file: validates each row, emits a validation workbook, waits for your approval, then applies changes and emits a before/after confirmation wor",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.7,
-  "sha256": "f6e9fa79aa18988e00923e0e63ded63ae066138447485a809015e77222ab74cc",
+  "lines": 265,
+  "size_kb": 17.2,
+  "sha256": "3dc0f56b3d6296e911544e2b4d0f30579d2ca70ebbb141579a6a157ecec66b24",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

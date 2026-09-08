@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/ai_usecase_assessment",
   "agent_file": "ai_usecase_assessment_agent.py",
-  "agent_sha256": "b1c7ceb11b90cd8bd781cbfab3f8c914f11830d1ae2eb360f2aa3b68152fef67",
+  "agent_sha256": "4211e33a8a354bc5487314ad0398877fad82a50b75c97f855d3d613c61aa9a53",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AiUsecaseAssessment",
   "host_dependencies": [],
@@ -43,7 +43,7 @@
       "html",
       "intake"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AiUsecaseAssessment",
   "schema": "rapp-agent-lock/1.0",
@@ -73,5 +73,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

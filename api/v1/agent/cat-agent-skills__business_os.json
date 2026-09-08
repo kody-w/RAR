@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__business_os",
   "name": "Business OS",
   "rar_name": "@cat-agent-skills/business_os",
-  "rappid": "rappid:@cat-agent-skills/business_os:6113839e5b71ed083d97bd3e3785604d05945397df935c7748a11a1143bd8c52",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/business_os:2b51ad7e2501f93ef341798eaf1c52b6b4cfd129a409c83a94ec80df4e2a1146",
+  "_migrated_from": "rappid:@cat-agent-skills/business_os:6113839e5b71ed083d97bd3e3785604d05945397df935c7748a11a1143bd8c52",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/business_os:6113839e5b71ed083d97bd3e3785604d05945397df935c7748a11a1143bd8c52"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -26,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.6,
-  "sha256": "b455d3229e78336c3772968e71167a3aa49c2a131e16710432b069cef3bf77aa",
+  "lines": 262,
+  "size_kb": 13.0,
+  "sha256": "6482b513441d7a7adb56c67fbd6733482e86851f16e151ff3d9f112c8e661bac",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/d365_project_to_profit_manage_project_delivery",
   "agent_file": "d365_project_to_profit_manage_project_delivery_agent.py",
-  "agent_sha256": "c025ba108ce87f2c322cb5a725e2f59010f43e8518a4871e4097ac04c7df686f",
+  "agent_sha256": "c377831220674567bd495927bcad481e5d6f0a9d153c64a08ad1ec37492e1141",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ProjectToProfitManageProjectDelivery",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "A Dynamics 365 F&SCM expert scoped to the Manage project delivery area (a level-2 subdomain of Project to profit) - covers 11 L3 processes.",
+    "description": "Scopes the conversation to a Dynamics 365 F&SCM Manage project delivery expert (11 L3 processes under Project to profit), answering against legal entity USMF via the D365 ERP plugin. Call for project delivery questions.",
     "display_name": "D365 Manage project delivery Expert",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "e18efa2eacc20039",
+      "content_digest": "021d741b0818292c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "D365ProjectToProfitManageProjectDelivery",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_create_knowledge_base_articles",
   "name": "Create knowledge base articles Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_create_knowledge_base_articles",
-  "rappid": "rappid:@cowork-cookbook/audit_create_knowledge_base_articles:896e965b80309176c1c81a6f58c90bec6cfb3dc3d2d083bc3ac206c7c2b5e2c2",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_create_knowledge_base_articles:aadf16ec841e5988f4bdfb4ccae84a3bdd46a7aaa07e78dbf7f5e0b34d1972ab",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_create_knowledge_base_articles:896e965b80309176c1c81a6f58c90bec6cfb3dc3d2d083bc3ac206c7c2b5e2c2",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_create_knowledge_base_articles:896e965b80309176c1c81a6f58c90bec6cfb3dc3d2d083bc3ac206c7c2b5e2c2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits create knowledge base articles records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of knowledge base article records in Dynamics 365 F&SCM (legal entity USMF) and returns an Excel workbook with one sheet per finding category plus a Summary sheet.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "df814f462348dc4c44b9c12a4db8f09035069414e74b2a90134d038f4cc16214",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "1b55d56b61f26ffaa6aaa444635ba4e026b8ddbcac989c18f5d18d48d06909b8",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

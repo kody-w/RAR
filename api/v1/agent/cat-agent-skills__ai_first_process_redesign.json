@@ -3,13 +3,14 @@
   "id": "cat-agent-skills__ai_first_process_redesign",
   "name": "AI-First Process Redesign",
   "rar_name": "@cat-agent-skills/ai_first_process_redesign",
-  "rappid": "rappid:@cat-agent-skills/ai_first_process_redesign:8e07846f215b5cf3644c26631749d33c2ee1e43b40f8b396830d3a3ca5954667",
-  "_migrated_from": "rappid:@cat-agent-skills/ai_first_process_redesign:efd594b4c9a4dbc6e5ff07f773b3ab09067fc7b6fa5b0a8e4f0a67e4ccbbc723",
+  "rappid": "rappid:@cat-agent-skills/ai_first_process_redesign:a6455f57f92cbd0010d4a8b350fce5d59a4c0045d0600ac3621fa2d62a02d1c8",
+  "_migrated_from": "rappid:@cat-agent-skills/ai_first_process_redesign:8e07846f215b5cf3644c26631749d33c2ee1e43b40f8b396830d3a3ca5954667",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/ai_first_process_redesign:efd594b4c9a4dbc6e5ff07f773b3ab09067fc7b6fa5b0a8e4f0a67e4ccbbc723"
+    "rappid:@cat-agent-skills/ai_first_process_redesign:efd594b4c9a4dbc6e5ff07f773b3ab09067fc7b6fa5b0a8e4f0a67e4ccbbc723",
+    "rappid:@cat-agent-skills/ai_first_process_redesign:8e07846f215b5cf3644c26631749d33c2ee1e43b40f8b396830d3a3ca5954667"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "3.1.1",
+  "version": "4.1.3",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -24,9 +25,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.3,
-  "sha256": "6fcb40c0aefde81d18f04518bfc8826d717720562bf6014f8f96d11677b90bb9",
+  "lines": 262,
+  "size_kb": 11.6,
+  "sha256": "fed0d3782855d0c5ce6e0aaa4c9ffb05a91f85f2a156b281c18d7fd7cf3afaa0",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

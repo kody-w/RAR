@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_identify_service_trends",
   "name": "Identify service trends Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_identify_service_trends",
-  "rappid": "rappid:@cowork-cookbook/audit_identify_service_trends:069d5a0a81db0ed5df07db017754a566bc42c56186510d6d72172435e771cf07",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_identify_service_trends:d124841c5998baec4c15b3fa42ec7a0d75f0d8169a004212505a912493d62149",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_identify_service_trends:069d5a0a81db0ed5df07db017754a566bc42c56186510d6d72172435e771cf07",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_identify_service_trends:069d5a0a81db0ed5df07db017754a566bc42c56186510d6d72172435e771cf07"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits identify service trends records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of service-trend records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary sheet of counts.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "ad6b7e78f47baf97cdb65bd253d8389364dd11ecd417b1f446020e97daacd847",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "14111087b4e790db1f707835890d54d76d758c37cabb4d85cea71f7698100371",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

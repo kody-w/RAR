@@ -56,6 +56,8 @@ import argparse
 import json
 import re
 import sys
+import io
+import tarfile
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -157,7 +159,146 @@ def parse_cat_skills(items: list, source: dict) -> list[dict]:
     return out
 
 
-def parse_cowork_cookbook(items: list, source: dict) -> list[dict]:
+RECIPE_FILES = ("prompt.md", "recipe.yaml", "README.md")
+
+
+def fetch_repo_tree(repository_url: str) -> dict[str, str]:
+    """One tarball fetch of a GitHub repo's default branch -> {path: text} for
+    text files. Recipe bodies are CC BY 4.0 (see sources.json); carrying them
+    with attribution is what makes an aggregated agent runnable instead of a
+    link wearing a manifest."""
+    url = repository_url.rstrip("/") + "/archive/refs/heads/main.tar.gz"
+    req = urllib.request.Request(url, headers={"User-Agent": "RAR-crawler/1.0"})
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        blob = resp.read()
+    tree: dict[str, str] = {}
+    with tarfile.open(fileobj=io.BytesIO(blob), mode="r:gz") as tar:
+        for member in tar.getmembers():
+            if not member.isfile() or member.size > 400_000:
+                continue
+            name = member.name.split("/", 1)[1] if "/" in member.name else member.name
+            if not name.endswith((".md", ".yaml", ".yml")):
+                continue
+            fh = tar.extractfile(member)
+            if fh is not None:
+                tree[name] = fh.read().decode("utf-8", "replace")
+    return tree
+
+
+def _yaml_scalar(v: str):
+    v = v.strip()
+    if len(v) >= 2 and v[0] == v[-1] and v[0] in "\"'":
+        return v[1:-1]
+    if v in ("true", "True"):
+        return True
+    if v in ("false", "False"):
+        return False
+    if v == "[]":
+        return []
+    return v
+
+
+def parse_recipe_yaml(text: str) -> dict:
+    """Small YAML subset reader for recipe.yaml (scalars, folded `>-` blocks,
+    lists of scalars, lists of one-level maps). PyYAML is used when present."""
+    try:
+        import yaml  # type: ignore
+        data = yaml.safe_load(text)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        pass
+    out: dict = {}
+    lines = text.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        m = re.match(r"^([A-Za-z0-9_]+):\s*(.*)$", line)
+        if not m:
+            i += 1
+            continue
+        key, rest = m.group(1), m.group(2)
+        if rest in (">-", ">", "|", "|-"):
+            buf = []
+            i += 1
+            while i < len(lines) and (lines[i].startswith("  ") or not lines[i].strip()):
+                buf.append(lines[i].strip())
+                i += 1
+            out[key] = " ".join(b for b in buf if b).strip()
+            continue
+        if rest == "":
+            items, sub = [], {}
+            i += 1
+            while i < len(lines) and (lines[i].startswith("  ") or not lines[i].strip()):
+                s2 = lines[i].strip()
+                if s2.startswith("- "):
+                    body = s2[2:]
+                    m2 = re.match(r"^([A-Za-z0-9_]+):\s*(.*)$", body)
+                    if m2:
+                        entry = {m2.group(1): _yaml_scalar(m2.group(2))}
+                        j = i + 1
+                        while j < len(lines) and re.match(r"^\s{4,}[A-Za-z0-9_]+:", lines[j]):
+                            m3 = re.match(r"^\s+([A-Za-z0-9_]+):\s*(.*)$", lines[j])
+                            entry[m3.group(1)] = _yaml_scalar(m3.group(2))
+                            j += 1
+                        items.append(entry)
+                        i = j
+                        continue
+                    items.append(_yaml_scalar(body))
+                elif s2:
+                    m2 = re.match(r"^([A-Za-z0-9_]+):\s*(.*)$", s2)
+                    if m2:
+                        sub[m2.group(1)] = _yaml_scalar(m2.group(2))
+                i += 1
+            out[key] = items if items else sub
+            continue
+        out[key] = _yaml_scalar(rest)
+        i += 1
+    return out
+
+
+def _readme_section(readme: str, heading: str) -> str:
+    m = re.search(r"^##\s+" + re.escape(heading) + r"\s*$(.*?)(?=^##\s|\Z)", readme, re.S | re.M)
+    return m.group(1).strip() if m else ""
+
+
+def recipe_body(tree: dict[str, str], upstream_path: str) -> dict:
+    """The runnable part of a recipe, verbatim where it matters (the prompt),
+    structured where it helps (prerequisites, steps, expected output)."""
+    base = f"recipes/{upstream_path}/"
+    prompt = tree.get(base + "prompt.md", "").strip()
+    if not prompt:
+        return {}
+    meta = parse_recipe_yaml(tree.get(base + "recipe.yaml", ""))
+    readme = tree.get(base + "README.md", "")
+    steps = [re.sub(r"^\d+\.\s*", "", ln.strip())
+             for ln in _readme_section(readme, "Step-by-step").splitlines()
+             if re.match(r"^\s*\d+\.", ln)]
+    prereqs = meta.get("prerequisites") if isinstance(meta.get("prerequisites"), list) else []
+    if not prereqs:
+        prereqs = [ln.strip()[2:].strip() for ln in _readme_section(readme, "Prerequisites").splitlines()
+                   if ln.strip().startswith("- ")]
+    caveat = ""
+    m = re.search(r"^>\s*ℹ?\s*\*\*Tenant data caveat\.\*\*\s*(.*)$", readme, re.M)
+    if m:
+        caveat = m.group(1).strip()
+    authors = meta.get("authors") if isinstance(meta.get("authors"), list) else []
+    names = [a.get("name") for a in authors if isinstance(a, dict) and a.get("name")]
+    return {
+        "prompt": prompt,
+        "business_value": str(meta.get("business_value") or "").strip(),
+        "what_it_does": _readme_section(readme, "What it does"),
+        "prerequisites": [str(p) for p in prereqs],
+        "steps": steps,
+        "expected_output": re.sub(r"!\[.*?\]\(.*?\)", "", _readme_section(readme, "Expected output")).strip(),
+        "tenant_caveat": caveat,
+        "authors": names,
+        "reviewed_by": str(meta.get("reviewed_by") or ""),
+        "verified_against": str(meta.get("verified_against_cowork_build") or ""),
+        "min_plugin_version": str(meta.get("min_plugin_version") or ""),
+    }
+
+
+def parse_cowork_cookbook(items: list, source: dict, tree: dict[str, str] | None = None) -> list[dict]:
     """Adapter for Cowork Cookbook's public /data/catalog.json shape."""
     ns = source["namespace"]
     template = source.get("item_url_template", "")
@@ -241,6 +382,7 @@ def parse_cowork_cookbook(items: list, source: dict) -> list[dict]:
             "uses_skills": uses_skills,
             "recipe_category": category,
             "upstream_path": item.get("slug"),
+            **({"recipe": body} if (body := recipe_body(tree or {}, str(item.get("slug") or ""))) else {}),
         })
     return out
 
@@ -324,7 +466,18 @@ def crawl_source(source: dict) -> list[dict] | None:
         fail(f"'{source['id']}': index carried no items; source skipped.")
         return None
 
-    records = adapter(items, source)
+    tree = None
+    if source.get("carry_bodies") and source.get("repository_url"):
+        # The recipe bodies (CC BY 4.0, attributed) are what make the toasted
+        # agent runnable. A source that promises bodies but cannot deliver them
+        # is a broken source, not a partial one.
+        try:
+            tree = fetch_repo_tree(source["repository_url"])
+        except (urllib.error.URLError, OSError, tarfile.TarError) as exc:
+            fail(f"'{source['id']}': could not fetch recipe bodies from "
+                 f"{source['repository_url']}: {exc}; source skipped.")
+            return None
+    records = adapter(items, source, tree) if tree is not None else adapter(items, source)
 
     # A slug collision would merge two distinct upstream entries into one ref,
     # and therefore into one feedback thread and one set of counters. Drop the
@@ -390,7 +543,7 @@ def build(only: str | None = None) -> dict | None:
         return None
     return {
         "schema": SCHEMA,
-        "policy": "index-only: catalog metadata and links; content is never copied",
+        "policy": "index-first: catalog metadata and links for every source; recipe bodies are carried verbatim, with attribution, only from sources whose licence permits it (carry_bodies)",
         "sources": out_sources,
         "items": sorted(out_items, key=lambda r: r["ref"]),
         "totals": {

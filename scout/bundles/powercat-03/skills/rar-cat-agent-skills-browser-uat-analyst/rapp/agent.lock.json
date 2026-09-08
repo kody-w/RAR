@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/browser_uat_analyst",
   "agent_file": "browser_uat_analyst_agent.py",
-  "agent_sha256": "7510a8a0f67113bdb0bafd437d5471c7c655e0420db4c4bcd2672e3678e6f387",
+  "agent_sha256": "04643dc07fd9ae22b95b57a4dc006100bfe3cbe9f2336dad00061f7953b55223",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BrowserUatAnalyst",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "power_platform",
       "automation"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "BrowserUatAnalyst",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

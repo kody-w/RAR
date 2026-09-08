@@ -1,7 +1,7 @@
 ---
 name: "rar-cowork-cookbook-vendor-invoice-capture-from-email"
-description: "Watches the inbox for emails with PDF attachments that look like vendor invoices, extracts every field from the PDF, matches the vendor against USMF master data, and creates a pending vendor invoice record in Dynamics 365 F&O with the header and lines populated."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/vendor_invoice_capture_from_email", "rar_sha256": "74aff5e7e60d62993665b35bb9bee48629a27e4eff7d50466256a2128df6d1c7", "source_kind": "rar-agent", "source_commit": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed", "version": "2.0.0", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt_skill", "scheduled_brief", "source_to_pay", "intermediate", "integration", "dynamics_365_erp"]}
+description: "Scans the mailbox for emails with PDF attachments that look like vendor invoices, extracts header and line fields, matches the vendor in USMF, and creates pending vendor invoice records in D365 F&O, skipping duplicates."
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/vendor_invoice_capture_from_email", "rar_sha256": "eefb44368fcdc70c35a1570f3702061a81099b9eaa123086a9912f92023e6122", "source_kind": "rar-agent", "source_commit": "working-tree", "version": "3.0.3", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt_skill", "scheduled_brief", "source_to_pay", "intermediate", "integration", "dynamics_365_erp"]}
 ---
 
 ## Microsoft Scout runtime
@@ -23,17 +23,18 @@ agent in the user's Brainstem. Never paraphrase the factory or agent into a new
 implementation. The generic direct-file commands in the generated Toaster
 section are recovery guidance; Scout should prefer the verified runner.
 
-Vendor Invoice Capture from Email — Watches the inbox for emails with PDF attachments that look like vendor invoices, extracts every field from the PDF, matches the vendor against USMF master data, and creates a pending vendor invoice record in Dynamics 365 F&O with the header and lines populated.
+Vendor Invoice Capture from Email — Scans the mailbox for emails with PDF attachments that look like vendor invoices, extracts header and line fields, matches the vendor in USMF, and creates pending vendor invoice records in D365 F&O, skipping duplicates.
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/vendor-invoice-capture-from-email
@@ -53,22 +54,31 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 ```json
 {
   "properties": {
+    "context": {
+      "description": "Optional. Details the recipe should use \u2014 the record, scope, dates or filters it asks for.",
+      "type": "string"
+    },
+    "legal_entity": {
+      "description": "The D365 F&O legal entity to create pending vendor invoices in; USMF in this recipe.",
+      "type": "string"
+    },
+    "mailbox": {
+      "description": "The signed-in mailbox/inbox to scan for emails with PDF invoice attachments.",
+      "type": "string"
+    },
     "operation": {
-      "description": "What to do: run, plan, checklist, describe.",
+      "description": "What to do: run, prompt, plan, checklist, describe.",
       "enum": [
         "run",
+        "prompt",
         "plan",
         "checklist",
         "describe"
       ],
       "type": "string"
     },
-    "subject": {
-      "description": "The process to automate.",
-      "type": "string"
-    },
-    "trigger": {
-      "description": "Optional. What starts it \u2014 schedule, event or manual.",
+    "processed_message_ids": {
+      "description": "Record of message IDs already handled in prior runs so the same email is not processed twice.",
       "type": "string"
     }
   },
@@ -85,7 +95,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `vendor_invoice_capture_from_email_agent.py` and embedded as the fenced Python below (sha256 74aff5e7e60d6299…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `vendor_invoice_capture_from_email_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `vendor_invoice_capture_from_email_agent.py` and embedded as the fenced Python below (sha256 eefb44368fcdc70c…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `vendor_invoice_capture_from_email_agent.py` first:
 
 ```bash
 python3 vendor_invoice_capture_from_email_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -97,17 +107,18 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 
 ```python  # rapp:deterministic
 """
-Vendor Invoice Capture from Email — Watches the inbox for emails with PDF attachments that look like vendor invoices, extracts every field from the PDF, matches the vendor against USMF master data, and creates a pending vendor invoice record in Dynamics 365 F&O with the header and lines populated.
+Vendor Invoice Capture from Email — Scans the mailbox for emails with PDF attachments that look like vendor invoices, extracts header and line fields, matches the vendor in USMF, and creates pending vendor invoice records in D365 F&O, skipping duplicates.
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/vendor-invoice-capture-from-email
@@ -122,9 +133,9 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cowork-cookbook/vendor_invoice_capture_from_email',
-    "version": '2.0.0',
+    "version": '3.0.3',
     "display_name": 'Vendor Invoice Capture from Email',
-    "description": 'Watches the inbox for emails with PDF attachments that look like vendor invoices, extracts every field from the PDF, matches the vendor against USMF master data, and creates a pending vendor invoice record in Dynamics 365 F&O with the header and lines populated.',
+    "description": 'Scans the mailbox for emails with PDF attachments that look like vendor invoices, extracts header and line fields, matches the vendor in USMF, and creates pending vendor invoice records in D365 F&O, skipping duplicates.',
     "author": 'Sean Galliher and Cowork Cookbook contributors',
     "tags": ['industry_solution', 'business_process', 'prompt_skill', 'scheduled_brief', 'source_to_pay', 'intermediate', 'integration', 'dynamics_365_erp'],
     "category": 'integrations',
@@ -143,8 +154,8 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'CC-BY-4.0',
         "license_verified": True,
-        "details": {'license_note': 'Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.', 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
-        "content_digest": 'edf03ca890a66aed',
+        "details": {'license_note': "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.", 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
+        "content_digest": '8530ce0f820300bb',
     },
     "industry_context": {'deprecated': False, 'difficulty': 'intermediate', 'last_verified_on': '2026-06-05', 'mutates_data': True, 'plugin': 'dynamics-365-erp', 'process_roots': ['source-to-pay'], 'process_tags': ['source-to-pay/manage-accounts-payable/process-supplier-invoices'], 'recipe_category': 'scheduled-brief', 'recipe_type': 'prompt+skill', 'upstream_path': 'source-to-pay/vendor-invoice-capture-from-email', 'uses_skills': {'custom': ['vendor-invoice-capture'], 'ootb': ['Email', 'PDF'], 'plugin': [{'action': 'data_find_entity_type', 'plugin': 'dynamics-365-erp'}, {'action': 'data_get_entity_metadata', 'plugin': 'dynamics-365-erp'}, {'action': 'data_find_entities_sql', 'plugin': 'dynamics-365-erp'}, {'action': 'data_create_entities', 'plugin': 'dynamics-365-erp'}]}, 'verification_status': 'verified'},
     # The platforms the upstream entry targets. First-class and queryable, not
@@ -164,15 +175,15 @@ except ModuleNotFoundError:
             self.metadata = metadata
 
 
-# The toasted capability. The upstream entry supplies the WHAT; this procedure
-# is RAR's own method for that shape of work, generated by
-# @kody-w/skill_toaster_agent from the metadata we hold. No upstream text is
-# reproduced here — see the module docstring.
-_SPEC = {'archetype': 'automate', 'checks': ['Every step is idempotent and the whole run is safely retryable.', 'Failure behaviour is defined per step, and failures are loud.', 'A completion condition exists and is checked.', 'The first production run was reconciled against the manual process.'], 'confidence': 0.857, 'deliverable': 'A runnable automation with a defined trigger, per-step failure policy, an observable signal, and a reconciliation against the manual process.', 'operations': ['run', 'plan', 'checklist', 'describe'], 'params': {'subject': 'The process to automate.', 'trigger': 'Optional. What starts it — schedule, event or manual.'}, 'refined_by': 'rules', 'signals': ['tag:automation', 'tag:integration', 'tag:workflow'], 'steps': ['Run the process manually once and write down every step, including the ones people do without noticing.', 'Identify the trigger and the completion condition. An automation with no defined end does not terminate, it accumulates.', 'Make each step idempotent, so a retry is safe and a partial run can be resumed rather than restarted.', 'Decide failure behaviour per step: retry, skip, or halt. Silent failure is the expensive one.', 'Add an observable signal — a log line, a status file, a notification — so a broken run is noticed without being looked for.', 'Run it alongside the manual process until they agree, then retire the manual path deliberately.'], 'subject_label': 'process to automate', 'verb': 'Automate'}
+# The toasted capability, generated by @kody-w/skill_toaster_agent. A licensed
+# recipe entry carries the upstream recipe verbatim (with attribution) in
+# _SPEC["recipe"]; a metadata-only entry carries RAR's own method for that shape
+# of work. See the module docstring for which this is.
+_SPEC = {'archetype': 'recipe', 'checks': ['Prerequisite: Cowork session signed in with mailbox access (Outlook plugin)', 'Prerequisite: Cowork D365 ERP plugin enabled and pointed at USMF', 'Prerequisite: PDF parsing skill enabled in the session', 'Prerequisite: Optional - Cowork scheduled task to run this prompt hourly so capture is unattended', 'Output matches: A run summary of the form:\n\n> **Vendor invoice intake — INV-2026-05193**\n> - **1 new invoice email found** — Contoso Office Supplies, Inc. (vendor US-111), invoice INV-2026-05193 dated 2026-06-04.\n> - **1 record created in USMF** — pending vendor invoice header `INV-2026-05193-US111` plus all 6 line items, with quantities, unit prices, and descriptions captured from the PDF.\n> - **0 skipped as new** (prior copies were already booked and were skipped as duplicates, as expected).\n\nSubsequent runs with no new invoices return only:\n\n> `No new vendor invoices — same invoices already captured in USMF.`'], 'confidence': 1.0, 'deliverable': 'A run summary of the form:\n\n> **Vendor invoice intake — INV-2026-05193**\n> - **1 new invoice email found** — Contoso Office Supplies, Inc. (vendor US-111), invoice INV-2026-05193 dated 2026-06-04.\n> - **1 record created in USMF** — pending vendor invoice header `INV-2026-05193-US111` plus all 6 line items, with quantities, unit prices, and descriptions captured from the PDF.\n> - **0 skipped as new** (prior copies were already booked and were skipped as duplicates, as expected).\n\nSubsequent runs with no new invoices return only:\n\n> `No new vendor invoices — same invoices already captured in USMF.`', 'operations': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'params': {'context': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'legal_entity': 'The D365 F&O legal entity to create pending vendor invoices in; USMF in this recipe.', 'mailbox': 'The signed-in mailbox/inbox to scan for emails with PDF invoice attachments.', 'processed_message_ids': 'Record of message IDs already handled in prior runs so the same email is not processed twice.'}, 'recipe': {'authors': ['Sean Galliher'], 'business_value': 'Shrinks vendor-invoice intake from a manual data-entry chore to an unattended inbox scan. Each captured PDF becomes a pending invoice in USMF with header + lines pre-filled, so AP only reviews and approves instead of keying. Duplicate detection and message-ID tracking keep the same invoice from being booked twice.', 'expected_output': 'A run summary of the form:\n\n> **Vendor invoice intake — INV-2026-05193**\n> - **1 new invoice email found** — Contoso Office Supplies, Inc. (vendor US-111), invoice INV-2026-05193 dated 2026-06-04.\n> - **1 record created in USMF** — pending vendor invoice header `INV-2026-05193-US111` plus all 6 line items, with quantities, unit prices, and descriptions captured from the PDF.\n> - **0 skipped as new** (prior copies were already booked and were skipped as duplicates, as expected).\n\nSubsequent runs with no new invoices return only:\n\n> `No new vendor invoices — same invoices already captured in USMF.`', 'platform': 'Microsoft 365 Copilot Cowork', 'prerequisites': ['Cowork session signed in with mailbox access (Outlook plugin)', 'Cowork D365 ERP plugin enabled and pointed at USMF', 'PDF parsing skill enabled in the session', 'Optional - Cowork scheduled task to run this prompt hourly so capture is unattended'], 'prompt': 'Check the inbox for emails that have PDF attachments and look like vendor invoices. For each invoice PDF:\n\n1. Download the PDF attachment.\n2. Extract every available field from the invoice — vendor name, vendor account, invoice number, invoice date, due date, currency, PO reference, line items (item, description, quantity, unit price, line amount), subtotal, tax, freight/charges, and invoice total.\n3. Match the vendor against existing USMF vendors in Dynamics 365 (by vendor account if present, otherwise by name). If no confident match exists, skip the create for that invoice and record the reason.\n4. When the vendor is matched, create a pending vendor invoice record in the USMF legal entity in Dynamics 365 F&O using the D365 ERP data tools. Populate the header and lines with every value captured from the PDF — do not invent fields that are not present on the invoice.\n5. Avoid duplicates: before creating, check whether a pending vendor invoice already exists in USMF for that vendor + invoice number, and skip if so. Also track processed message IDs across runs so the same email is not handled twice.\n6. At the end of the run, summarize: how many invoice emails were found, how many records were created, and how many were skipped (with the reason).\n\nIf no invoice emails with PDF attachments are found, exit quietly with a one-line "no new vendor invoices" note.', 'steps': ['Open a fresh Cowork task and paste the prompt body verbatim.', '(Optional) Configure a Cowork scheduled task — `Hourly vendor invoice intake` is the pattern used in the verification run — so the recipe runs unattended every hour.', 'Approve the always-allowed actions list on the first run (Send email, Update record). After approval the recipe runs unattended.', 'Inspect the Output panel for the extracted PDF copy and the run summary card.', 'Open USMF → Accounts payable → Vendor invoices → Pending vendor invoices and confirm the new header and lines.'], 'tenant_caveat': '', 'verified_against': 'm365.cloud.microsoft 2026-06-05', 'what_it_does': 'On every run the recipe:\n\n1. Scans the connected mailbox for emails with PDF attachments that look like vendor invoices.\n2. Downloads each PDF and extracts vendor identity, header dates and totals, currency, PO reference, and full line detail (item, description, quantity, unit price, line amount).\n3. Matches the extracted vendor against USMF vendors in D365 (by vendor account first, then by name). If no confident match exists, the create is skipped and the reason recorded.\n4. Creates a pending `VendorInvoiceHeader` plus matching `VendorInvoiceLine` rows in USMF — populating only fields actually present on the PDF.\n5. Guards against duplicates two ways — a pre-create lookup on vendor + invoice number, and a persisted set of processed message IDs across runs.\n6. Emits a run summary: emails found, records created, and skips with reasons.\n\nIf the inbox has no new invoice emails the recipe exits with a one-line `no new vendor invoices` note so scheduled runs stay quiet.'}, 'refined_by': 'claude-opus-5', 'refinement': {'description': 'Scans the mailbox for emails with PDF attachments that look like vendor invoices, extracts header and line fields, matches the vendor in USMF, and creates pending vendor invoice records in D365 F&O, skipping duplicates.', 'example_request': 'Check my inbox for new vendor invoice PDFs and create the pending vendor invoices in USMF.', 'inputs': [{'description': 'The signed-in mailbox/inbox to scan for emails with PDF invoice attachments.', 'name': 'mailbox'}, {'description': 'The D365 F&O legal entity to create pending vendor invoices in; USMF in this recipe.', 'name': 'legal_entity'}, {'description': 'Record of message IDs already handled in prior runs so the same email is not processed twice.', 'name': 'processed_message_ids'}], 'model': 'claude-opus-5', 'when_to_use': 'Call when the user wants unattended or on-demand capture of vendor invoices arriving as PDF email attachments into pending vendor invoices in USMF.'}, 'signals': ['recipe:prompt', 'refined'], 'steps': ['Open a fresh Cowork task and paste the prompt body verbatim.', '(Optional) Configure a Cowork scheduled task — `Hourly vendor invoice intake` is the pattern used in the verification run — so the recipe runs unattended every hour.', 'Approve the always-allowed actions list on the first run (Send email, Update record). After approval the recipe runs unattended.', 'Inspect the Output panel for the extracted PDF copy and the run summary card.', 'Open USMF → Accounts payable → Vendor invoices → Pending vendor invoices and confirm the new header and lines.'], 'subject_label': 'context for the recipe', 'verb': 'Run'}
 
 
 class VendorInvoiceCaptureFromEmail(BasicAgent):
-    """Automate agent, toasted from an aggregated upstream entry."""
+    """Run agent, toasted from an aggregated upstream entry."""
 
     def __init__(self):
         self.name = 'VendorInvoiceCaptureFromEmail'
@@ -182,7 +193,7 @@ class VendorInvoiceCaptureFromEmail(BasicAgent):
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
-                "properties": {'operation': {'description': 'What to do: run, plan, checklist, describe.', 'enum': ['run', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'subject': {'description': 'The process to automate.', 'type': 'string'}, 'trigger': {'description': 'Optional. What starts it — schedule, event or manual.', 'type': 'string'}},
+                "properties": {'context': {'description': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'type': 'string'}, 'legal_entity': {'description': 'The D365 F&O legal entity to create pending vendor invoices in; USMF in this recipe.', 'type': 'string'}, 'mailbox': {'description': 'The signed-in mailbox/inbox to scan for emails with PDF invoice attachments.', 'type': 'string'}, 'operation': {'description': 'What to do: run, prompt, plan, checklist, describe.', 'enum': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'processed_message_ids': {'description': 'Record of message IDs already handled in prior runs so the same email is not processed twice.', 'type': 'string'}},
                 "required": ["operation"],
             },
         }
@@ -254,12 +265,86 @@ class VendorInvoiceCaptureFromEmail(BasicAgent):
         ]
         return lines
 
+    # ── recipe entries: the upstream recipe, verbatim, deterministic ─────
+
+    def _recipe_context(self, kwargs):
+        extras = []
+        subject = self._subject(kwargs)
+        if subject:
+            extras.append(f"subject: {subject}")
+        for key in _SPEC["params"]:
+            value = str(kwargs.get(key) or "").strip()
+            if value:
+                extras.append(f"{key}: {value}")
+        return extras
+
+    def _recipe_prompt(self, kwargs):
+        r = _SPEC["recipe"]
+        lines = [r["prompt"]]
+        extras = self._recipe_context(kwargs)
+        if extras:
+            lines += ["", "Context supplied by the caller:"] + [f"- {e}" for e in extras]
+        return lines
+
+    def _recipe_attribution(self):
+        src = __manifest__["source"]
+        r = _SPEC["recipe"]
+        who = ", ".join(r.get("authors") or []) or __manifest__["author"]
+        return [
+            f"Recipe: {__manifest__['display_name']} — by {who}, {src['source_name']} "
+            f"({src['license']}). Source: {src['upstream_url']}",
+        ]
+
+    def _perform_recipe(self, op, kwargs):
+        r = _SPEC["recipe"]
+        ref = _SPEC.get("refinement") or {}
+        if op == "prompt":
+            return "\n".join(self._recipe_prompt(kwargs) + [""] + self._recipe_attribution())
+        if op == "plan":
+            lines = [f"Steps for {__manifest__['display_name']} on {r['platform']}:"]
+            lines += [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "checklist":
+            lines = ["Before you run it:"] + [f"  [ ] {p}" for p in r["prerequisites"]]
+            if r.get("expected_output"):
+                lines += ["", "Done when:", f"  [ ] {r['expected_output']}"]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "describe":
+            lines = self._provenance()
+            if ref.get("when_to_use"):
+                lines += ["", f"When to use: {ref['when_to_use']}"]
+            if ref.get("example_request"):
+                lines += [f"Ask for it like: {ref['example_request']}"]
+            if ref.get("inputs"):
+                lines += ["", "It will ask you for:"] + [f"  - {i['name']}: {i['description']}" for i in ref["inputs"]]
+            if r.get("business_value"):
+                lines += ["", f"Why it matters: {r['business_value']}"]
+            return "\n".join(lines)
+        if op == "run":
+            lines = [f"{__manifest__['display_name']} — run on {r['platform']}", ""]
+            if r.get("what_it_does"):
+                lines += [r["what_it_does"], ""]
+            lines += [f"Prompt (paste into {r['platform']}):", ""] + self._recipe_prompt(kwargs) + [""]
+            lines += ["Procedure:"] + [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)] + [""]
+            lines += ["Acceptance checks:"] + [f"  [ ] {c}" for c in _SPEC["checks"]] + [""]
+            lines += [f"Deliverable: {_SPEC['deliverable']}", ""]
+            if r.get("tenant_caveat"):
+                lines += [f"Verified upstream: {r['tenant_caveat']}", ""]
+            return "\n".join(lines + self._recipe_attribution())
+        return (
+            f"Unknown operation {op!r}. Valid operations: "
+            + ", ".join(_SPEC["operations"])
+        )
+
     # ── entry point ─────────────────────────────────────────────────────
 
     def perform(self, **kwargs):
         """Run the toasted capability. Always returns a string."""
         op = str(kwargs.get("operation") or "run").strip().lower()
         subject = self._subject(kwargs)
+
+        if _SPEC.get("recipe"):
+            return self._perform_recipe(op, kwargs)
 
         if op == "describe":
             return "\n".join(self._provenance())
@@ -289,4 +374,4 @@ if __name__ == "__main__":
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1:H4sIAAAAAAAC/917aZPbSJLlX+FqzLarB5Jwg6TGxmwBEgdBXCQAAmSrTYUbIO77qO3/vgFmSlXVXb0zbbafljKJOCI83D3c33PPDP3ywem7uGw+fPmgB06x4Z0sS+Kg2TiFvzmUY9mk4KtMXfB345VF1yRu35VN++HjBz9ovSapuqQs1umeU7SbLg42uZNkbjltwrLZBOtNuxmTLt5oR27jdJ3jxXlQdOtYp9tkq+AsSYPNEBQ+mJEUQ5l4QftxE0xd43hgYBw4/rtKWVIEmzAJMh8MyJ3Oi4O3RX/M3pi6zH18DfaawOnA+wq8S4ro71bYNIFXNn67zjniFLnh/qf6cdOmSVWtg/2+yhJvnf8Z2BpMTl5lQfvhy1/++vFDAq4/fPnlg5c5LXj04fYSfHqTe3Cqrm8CrilzdrUezM6cIgLDqhm4ugD3VdAA5+TgkR+Em/e7n9ogCz9u/v3f09FpovbPX74Wm/fP1w/rn2tfvEztSqftAmCeUzlukiXd/HlDZ6Mzt8AksDTYBmfTgp0qos9vM3+VVFab/1zf/fS2yOco6H76+qEEKjjrPn798OcN8NDXD02/Xn9epVQ//flzVo5B89Off5XT9u4z8LpVGND687f3+3exYOCvQ5Nw803X2MP7WsDrSRUA4b+xb/28qf4u7t0l394G/1RWHzd/LHm15z+Bvm+x6AK5fywW+ADM/PD5WSbFT+9rNCUICKfwgp/+/M/EgvDy0ixpu/+W3L+8CX4L15/eXfLnj6/t++sGerfth8x/vmwFAuZfsQQM/77cD0f9M9mvnf070WtWtT/28g/F/dEE6D83f/mntv3fJnzchF8/HIMsGUDcuVnwZfPLK0T+8if/14d/+uvfgOj/Uoxe9o33kvAtd4okDNru27e//Kl9Pf7TX//yp74CURw4+be+yf5I5h/59bXO7zz4Puqn388F65tFWpRjsfmRQ5tfyup/NH/7vLk5WeL/+rz9svltJq4faLMa8X3RNxf8JhtboOtv/PjnD38D0FMAa3rv9Rrgx7/920ZOvKZsy7Db6F7ZdxuwwV2SB6vyRpwAeHsDyCYAfm0T4Nj3cSD+1x1eNS7Dzc//y3uh/SfvHe3hN7T89o6W37w3WPsWAlz79oL1nz9vDCC4bJIoKZxsc6U17WvhRADc10WrJmiDZgBA5c5d8Ank86f1YoXbn/9L2d9eYj5X888vJE/ekO96OK2o1/ZZ8Hm1z4qD4t0awD6AMAKvBytkpQfUCZNsZRGgRZkNADVXXwB0z7KNnwBcASQ2v2QDf31Zhf3888+u08ZfizeYxjdv7NbCYMAPdTafPgG7wiyJ4u5rEXhxufnTL3/70+Z/b/5vs17C1zU0wBfvuwE0FHVV2YDs6t/4cN1aAB2v3fjlb+/eBWIKwH1g7xJAe2+TQXSmgf/d1bpAf8JIauMGwMXAvXlVNt3KYEn3eXMKNz/0BYuur1Z2iMu22/jBSoxB4c0vKv5a/PBkUXabFoRgG84fN30bvFb92W2cl4o5SHOn+3kjHzTARWUG/lnVfA0Ck8sC0Gb2IxDengMhzZ/aDfNdxOeNssbjpnIap4ob532N0HnbF8BB36cD4c6mCMavxcq6weqqV3K8uQcMAp7x3rf007rnoEzJARK8EXv3fYyzMqbxYs7ma9G+B77TvJUBQJV5E/WJv9LBf7yHVBuXfea//Ac0fSsyXrvgv+/KKwbfuH/zTv6bd/bfrKG8efH/5muPISix+f+4QFr9QPP8leVpgz1uWMW43t/2Zy0Z1318qzJBqfIy+pWLv5Yv3yHqO1J/LbIEBFsz/8fbyNeuvo95Qz/gYR/gzfUlH4QUMH6V+4r4NYKbZs0V52vxnRKAvZsX/oFNB/AA0meN2u8Lrm+/axoDDFjvfy0P3v2wegxE9abqXWD3JgwC33W8FGjVrFn7vssg/IM1g8c48eLfWbUB0kGUAfkboEQCtg3QxucfMP329rvqv5v4VgWtU14VYl+sm70KAHoEq4LrXq4RBNTr3ip0YOeXlxBgRl51q+0uSBtg6dvDoAnqPmmTbo2jN78GFcDnT+v3m6Xr02CqQKYAZ4F8qHrg3VcGrbufg4gDOgAQAQmVJwXgfOCUdye8BDr5CgcAbt+L0jeJr8fvBgWvtFvJ6vvEV1CCOSv/v6WQU8y/RQ3jj8IEyMvXEa91/z7Sfqz2nh0pSJcSrPj97Vuh8PmN69+Kic13uV/+oQX66V/rkl7sbf4+AL5s4q6r2i8w/Ma43wn3M8At+E3X9p18P71n4qd3gvy0uuTTCzJ+J/jN5i+bf02534l4T44vG/Qz8hlZX0nvwfX+Ab44fGLun4j17dfiGvwKq2D5EkDNCvvZDNj+Bwd+HwKIMGqCaB38xontSqUjYO8XCYBt+Fr8NtrXbAMcU0RrdLblb1DgVQyAyH/btR9cBV4VHVjbX4vHKFg7tldutMGHL0WfZR8/FCDu/hud2spH+RrS7drfgeQBtViXBK+7F0JM3Xr5+9ZXfV042efNMehecP6bsHtnkZVFf5Mdb0YC4zywwseN/4JhEJHAyHXxNbOcFoQqiNLVmG6uVu3fmrq1DMyAN7NvwGgQ6P+o0Jol3xF78xq6eRu6gt4b6P8TzF/B/j9eDPHGnkn7bscfavFOZH+sQJtEReCDEP7Od3BSrKwHVGjXau2P2O878/yGBf9w4R8l8j8uba2kCdbwyy8rTX98R0DwDdqaj5sfHQpw+nvP+Orvix60439Zu6M1Cl5T1gswB3z9mPTjpx5u8OGvf6AXmAh82IIwz8EXCPVvid/+o47XtxAHNPE+bHM6ArrKViJZGaLws+BV9FZNArwElGrf0uAdP19uWxlxDf4fa266EfjuD/wFFHvBPSDN1cZfnferCeWr23uZkDnd2w8nfvkAMsEBoem858J7uwCGA3T81K5FEgzgAiwI7t8SG7z71xuJdwFt7IA6FkgIgtAlCJzahZ7vbREPJx2U3CIhvkUwhEKdHYrs9+4+cBwUw5Ed5ez3KBbuMQTDAwrFMCDvDR++raVgsiq1agR88QlATPDra/DIf7fmTfu/vfbwvW9ZrX436pcPLkWAkQLRnui3zwGGUM+1YO9aSZDWQMlzDL2nOD70xn3e+f3OrsfnjKaMrk/3ZxwwchxP+oni2bufQrxI3uLDWECEIGh3m6xCz0Rt/yFqx9S6FkIw9oP8PLBd5uM3bDBQ0yaNp0rw2J3h8/5ZKbgT6ALVHaU5KTXUEDUUqsqtaU3QcBtCNCiGyjPrbOaSmOiQwa8TM43h27msqdirH7ItkTc7qyjYKn1Rt9S92d6qoC4S6iiaW0x/6OK9mpJqZ0NO8CT4BqGHgy1kYiSy4q3cHlT5QHe3kKpR2mqsoBEQCg6WIh9tIggSO3jgkS1eA5+7XQIoTwPuaBRToA5FndgwfKubUyOd5a70OCbzAsMIBW8MtK2iUJA2FAVE9gmnDg20BG1ohybvwFVl9qd0rofz7VEJ5N3R7DOVXIYsIBMsyUWSa1u2PiNN+1iwU4nYPfnoC7mgH5PDPqKIvxnbUUGBCg2Z72JYy43jvbbtmxcVh+C6JIaCxlvdvcjJJBaTV8yntDQ8RYUndZybR/DsMCc8U/s7EuwfRXkCDpSWSIrQUVPqSFebxzXiDzsInkSSPlnHSkwKoki2N1Rv5huFL2fuqCrI1b1f5Osk3gLROj74pfaHo7J1U/w4Z6yFlJfRLslb9jicHKPGWEWy9NM5VUatNBiiq+OTUBxPylaA/Mw2yvjm8+r5tDtq2pjNZV1WZ/MKR49HpXGPVIJ3sVDdwwg6wIhusHUj1wONHoPqRl7SnWEhx2N3udwSHjKq8+m5YFB4lReuOxIZ4d2h4GLeTjJVh9T5wGIdJ9xNOTEsWp7wbGCxLNk9ziq0JJzu8lF37ozboWMcZGSCtu7svdk4bELGfJJZMgZJndzsWWmyqeoK305ufWOw/IZlEIgIfR6tB65GyJ6R0GN4txv32vn34II9j09ku9zpHRJi8Tmss9vj0d6QcA8XiUsFJNxUQbbDrH6WZhNDZhPd7a6IcW8DNrwrym1HbG9XCFMe/aEr1Sroo6CnfWJHoZY4IPBO5cbdYGnpDE/eQFMDHcf2laho8qESJpGwXcxLhlPvNLk8E91exozevi0pcTGVqYTTYT+1NK7Rzjydtwx8r1OUJx1oR55EpDWjzqLCZyrWUnumY/1xtur20FSyoV8u15mbDgm9221zGVIyDy6oKqeEjo4LWgxcCCFNyE7t6qEEx2GrSuySDZ6YMeIQ4zt9NGf5IV0QMisdb8YU1cyeS3e6O1HtPBEjlY0niR1B0CRnafBwrxGYwjlHRdyKFyM0QpVL7izRzjuMhXURV2DlvD0fj1uXibLLxeawdpYU/l6ozNwQzqn2pCTJZdkmhpHTriquykFOVDEkLqZYx9G5J45bOzw9b01F5h6xuIisleV1Z19jFpMGEr5IVFN5olIxCMn4iyCkAdllY1X4wmOLnnYj5i9kZWxhyp5rLVJm6JkKKR3fyyjxDrsHGvjxztwZyvZ6tgK0iI/w3T2fONjwoKtaQdr2cJ7FcCtvrxd4bxT+NV44u1BbV4nGKL+R5HErHfaa3D7NB4kRJzYttlI3xie0NW6l5yfjvZAClU5aWczpAiYyXVIttkU5zjOZ2EXoau5894HLd2wKGs4yS/seBBqRNztx2iFbSTyL9khsuWMTCryvNRR31OZDrTkB3dldHTy0aJEgqb6kVyyGhr6wcbwcPPXo4ojkwazWEcEkJzGrEndlDy9hTpnerbUOGpLajBQgp5kPRkrYSdYghndHpu29epxMG4bK9hQ5nN4O3B7uGSM5QUda6tVZfCLp8VYvw7ODCHpgETlqYhK/jsJ0d3Bi3qanR2TIHKLGSX5NRXeGmjs7nq50f70UB9kwizwb9P2d7zu0QM5uOtPq43IjqOlQ2JRp1mY1mGSvUTu645UHvQIWxvj34VaPKT0QAz10u+GuWUg9DsTTmAwqLjR0eI4A55+7/SmFjBjNz97unIXMdCszjtru5dS29leKEw7jod+HhhbAbk73237an4+dYSYxPBzT3Z0NhWQBOfyMdp7A3GsB1dP97CShIu8hu2G58dHTnWWg2G5/lhKSAR321bsWxC0jh9hXBniKGaN57JctXT2FGNlBeTVHGgR8HaO329nLfVmMs5ohwi7uGF5TEhIM9fanh9eld/4wHSft5O1i5nqb2Ic8Fzc6yrnseVbJ9kjwO7Z/qpOm7buTKFWWx7paiHZsdn1cEuZu4RpzlW/oo3YdVtjWlKZXJ/IcZDo5e8+LzyzbsiSfHQh3u8kStsZ83FO1iL0z2ZPj1G5BkVOAIE8rbPEd5E5waw2H+wmRhZbViUcY7/0nwm5PMWsmuqHqohZJjOUNyfO0R/qi6icsEYHeDj/GZZCY9p646c7TvCIQBydPio7rc5KDApjjrWdpqbvlJD6PAQiAnTsz9NHLI04+MMf4QQ99l2yptB0uIGd5BPXaUtrV4hFqL3v4KsU3XdrzkLwoOrtjTS6+lKfS5I9JQdfjdYFtg8OOLIiImUjkzLyca4KemQk6mof6mdnt7Z7DyHCN8rlInMnlaDUpHtcbW/sljvFoWHgnXQegoN8z9FBAqJ4rWA3TpcUyxr3eS5B5NpAEpm/kxEl63Le8VMuTfNk3HJyLcX58CMttqnxUmxJXi/0rqxkPJz2lZL2f47tY7xGZieRLEYrebLKZv2Xp7N5Y1qO2qbyj9uIcHGUJD8so2mfoOR6qvdVQ7HLxheC+TZ+HXDyJpYjsq4XpOX15cNGVje+gfnywGM3AyoMalECuQvjKij5/kvo43D7CvEzvd2HLluaVNLhrUyfoEw2uyKxKkC+mfL4rbtpTIaRWWVTXaYqk9afxfJGXYldcLEntHLXLlV12OuqwZqSUdpTTQFC3h5x1j3dIv6ppoCIoTau8fVRj02kRREl3N+Z8P0Udk8pln54DaTgmZnEqsrKUzGl/L2GHrqqndDz3OzVgAlOOqL3AbG2IcxTZOmRH3uUQcn9Xz2rPyUzspXmVHAi91Uuo2RU2S0fj5YQGN/1WPILTbd/Fwr4SnpValPt7GhwOzgWypUy3zCo2hZ0tnKAuxY5pK8g0fDxad6ybheuFaGvBBQxCJp2qXrhZHCzS0GbGn9O+vl145XDdIbiVcd5JmmgjrXiZ4e3gdlHOZh7pyHwYGNuoi4I93xI2vja+b7p3gXY4Ja06NUwrSNeoUjjuKQxBUg+TelPthGmP7Qq2P4eatgzTuAsQLRIfz8nU7fhmQMyJqU7jRHtaoBBxSGetvUUSjeFrcyzo8VQISQDVqUeG4ZL4mrAQHr/3WKwcqvGEZdcqCdUUm8l2ZsqAHnlDCgbTd1xJHVrYrZEJUmUzX9IC2wnpBUcDPUcU1sHmO3dpH+VIzDd6lvU0PsrFoLPnbmcyScWo0iVRtMsTb0KGPN/SpQSgJbT+eNVJzo6FHNRCWkZTT/6mPIMzfRasS0H2i4UCNhb2zvOIF2mbaA5iMa7eMp2yiw86er255aVmk3LvU55G7Y9qbkpk8rTZui3ISEHL8LYVQo23d1F6AH1RpYl1xZ5Yl5bvVOmnN+xS2Xtr9nY15PaVyAuZdLygp1NZYaxopJN0pw43FD/lzCgl0MRO3kGp+RgOLb4iJS69Ue5xJmqUPHk5YY8VH90KPorUbaM2WHlgxHDHOMQJOiRCRGFPXmLh8nSGteOWeeSHecrs5DTpJYY6T/zA1SFdhXWRinfzbLqjn6cuNzqhzF4yyWb5xA1PlFocHFHX21PfjqxtwnqS9PeKP7R8HGr+tew40/YdHDlGxZMfdjTuzc/oIODOwtq8tIfKOxkqgugFD2NwdoyMtXFdjgCVhHryxPmodwZ6ruvdmJDeHHtykRweuscZlbKrA1ccKULK1BnqMZb3m+IMjfmzsHd35XCLOI88ndn8OFYCa3CJkDKjOkXNSd/GQmMLNxZ9XB2dyJbDwiSGXnkJRT6MxOANxemJqMOY+0VI2fsBNCoMivJBsT36l/NzKAfmzMbsQOxahH1iUeUFuyEacYsWKKeeby55IRroRFqxYxBTcHY6x+5EXJLl0RmqQZGvsnW64Bc75RchGtHpCdl8xxQZDD/IEA6kDk7L+roFfVayPautlbjbRIG8Bz6lj4Flek8vZobMjZueqs8bd0FJSxCf2R5UirZQDGONbWVp62KFeSPr2r6eFK88ssLCh6JGXLVLfXpUMGNYOdv13aG8wgffK6Fc2qp7f5+cbf5oKLf6SRF3pL4vQaQaJBT7voiNslYXVrIwQ5gE0hXX+4XdQ1kQ0C3yjAyUZB4PLwYFafG8WzUbIktXo6OrTugd7Zui1zvnEo6qaaFnRdOTHehrwnZaYobnqG7G0f3VN3O361LrOF4KoRlqFWn6rdodtsR52Ob8MTUusqceLhl+mmq1i136/Jwc93hkzO7sXMxTyGZMIOzOkTiORpzgD6p5Vn460K5DwVc9S4a0rXi8RLiTrQcl2GK1dLGs6RHbuZ+XUM3rYc/4GY4vVvD0uAcAQFjpBzhF0JYr3JZPti0rKuittWuLMXPdt2W5Qhadjysqta6gGX3qiYfxzfB4lgKhcmEWSnUcpEcWG2/B2bY1kE9U0op1wvEmZfuiG0RJp4HnnjYGVkwiCZoQom0wkkefxhjCFye2rFAItgkS8gZRt07GXBMk0mBMkgQt6ePLRcL1WHcPaQ6zVjnKoiuFR77z2G0pVoxfnqwwrSG65/UJO4VMnNATlxzjIBmIq65SRBOh9d3fClYKuj7YbZ07hTNQbalLcb4HSFmlZjI1KCcl2Rzv/C0GUTg0YBeFsGWpL8mjIzoXnoFynl0elAilinuhpqtNGzglTrRQcnfr1MMsP8kD5Q9GJRyT8oZ1KJ8sxh2VTbh6XmbC4jVToec+YYothJ24s96ROGRh2qE/EpafT+J8rdkD7bZ1XsVptr+QRHEojR41k6N9oNtrcmF0JZA0jXHis41yO9LCzgeduQSge0CuPntB8kf7kDPOn8jKZyvqskiPeoJmOXYdqDjeFzTM8otlMG1wD30soGFBN4UyvofVIWty0eI8ZTlWYkQoWMmbSjJKjQPCY7D2Np3MjFLo4YCHMAoKXh8zkcI3YI3pOEiLMC9X9yzWOwdBtKVRPt8kW92m3siCWJ+fhVaflwnndipP9Kp6p0zluCj+HFI7v+LcZ8MnPCrBBshWNshCOXpYNBKKtxK75LPMjCjrTlXhcRa7TXm49RDkEtEyHTM2Ui4Hl5zRAUEf2elCgf5b1XVRKXvpnieTShlGzpscIZvWGQ17YSq8xky6GbaUA0j5feaMeMynVqiS4XIgfSzByudZ7ll3SK7YqfMFmjtGiQBVWDk7aXHqayqjam1RbN+VDjWGadDV8VTOJ4PuxgosdRalRg9k0vZvEXubm97te/bKZi5LU3BtTDN1f8TGysxseusvS+VA+s5iIDs7F+dE0UGXT6oH76lky42zuNMJtBg73R8pK/V3BuY+QPtb9jRxEmMHHWNavNx6ZiftRtbxGGyvL1hLWXy/+L5gQdWIIsRuIkNyJMklPhZNNsETYJ57cIhIp8rniRGraOhVN51Q4hYz2ql5RDved4bZSgQkjS/Wzh7xLbp9JqWLP2tpXIoswbi4Movm+TAz11ZDI0PvPcmVfaOYIpG3ioTEHHObc38f7w2IurFhH6vqoYncubAHLa+ghM4Ly83MHbS4o+P1PJpuqQPp4Rwv2M71yA/ugwntwRwv8W46V0z2GJt0D0f3C2lfjWq461wrp0hOhy6n+bme9QphjXS0UAo+cXeCqc6JIF8wUSXEnlOLWRZFZzvduZ2cRc+Q83gceh5MiN5LWqRdcHp/TqxhltPd9HQpQbnm5EXNdqojJtT90A9pIqAxEi3XsbtTx22foTSyLUZHcZCgL+Cjd13kDKN0z8eE0t2DNgLbOlTwnCCr33ckzzrtNPHEmfcpqg246EbBJ9/pjUkyWJQ0hK0f+EPhbLch1cK2ZBV+VrvqXu4UEiVhLuNwtDSbCxUHA45KDCOERDXvzYdLQHQSKWbmn0r3Bj3csFgMHOMeVSVVoBkZbnBx61E8wdm9haU9/iRJX90/BpewtrcBlkZDarnDxahNz8RDaMqoJEHglGHRoFMYWyOOloAPItZonO0HwrDseorf9lUadvuHd6TtnW8KKu6gsLWIA39FL3etqxYLJwWcFdwQGhVf1YIGh2Eepo4LgVThnofhdNg98OwhXDtE3W+z7OGHnOjg4sWCj1KuqriEWLwvSx4COniPQkpb1Kjbgzz2PvekKsSgns3kC5du4XYMd9pWguGJ4z6D9MczfDgIdc4WceqTWxxamuBeAj8+49PprBgF8uxxpQ2m9HjP3X1yVEPoOKmoYw0X6mID+MMvhgczQrUdeuTJG6oA2q+cDjQV5/HqiI1uSyxWkoynrfoocA8lsCMSufFyfvh+x4+P3d6UHKVbOoEyb2euQO+QF432ie7V4GKoEWNMERGGqtD5eJsRCYKnlV/pFMZbOG3RN2x+dM6MZnzoGuJtuka6g7egdC+ntkB8C7pIkno2ongRt1S7mBxUtZQeo8+rIh4P9PVwLx53OURYWKzoC30+aLp8t5vr0+n7Q6g0fcXtMFkwCT8gfdxKb3fOoLcRtvdpypOuKUylZBu0BEZQC4PIbXHVDmHVmC0J1YAehCe62Nl1V8oJksRNNw96VhB7QiLDy+W0MIrlcSqNy9uAjNHb3cbdqTcTS/GT81MoloLGeM7aNaGMdFw9B6S8+DrawEVrzff8ROKPhXPPUN7PkpE4EHoYlMYwBLxQuu6GIqor+tYQILKjkwLHb5fyuNd8wI2hfb897EgLhbzCRB0KRsio/ZyYi87TnUfOtUufyfxy82PYZOuJn4bA4hUTk0Kyl7Ynp42LB3bFvO7q7MN9DYpz82AmygEnUa2ZFJpu0xAnl+v5+rSug4szwt2ZF6d6iqdh8C3AHOh0FHaLLZuOau010CFUGoUVmI+f8eWphZe6V8P2uWydwi+MAQluBZvPEAYDdsfx2HiaiK2EDOwYJDznh04KQwpbOnS/hDU0KPC2dJIBu9GOu7iV54tyi2XGPrl1EF1fznV0tBOHy7llcVrYUeFbnWOg+pLRmvTgMhv84ulCbWjb9NKEEASzZvB4VtFO20UOkx+YjOUyLVUrlNpjJ2d8MHVwKVSoCThU2O0g9rBYjPgAu6nM3oAMW/betSKJBap5YMNhlCtfNsh8ZI7P61LNZTxE25E4DjLFpXg/Mux2rOCgHCxlNkOu6rq739zOO/cxZU1GPHxcduxxhvdKcLXhcCgs3o0O5oI5BVWStC6Zwk4lHIjidf8EafiFFOS0gidWi6f9Dd5jIlVt/e4aEmCZQ9Q7ACZbBDI1f04VcYjvtiLcyXEXNjxaI8h9nofO1bv77NqQXlwveVo1x7s2GIUuEeGtOdqnW5XvB5fiIo/3te6Wg+L9XEy10XdE3D2vVxTOHsiYnyb5mczmlnAwIVSGo+ITx8BuHiUSw0LEVM62Px92WxOhMVxPyn5v+jmXRe5BxuMiwzRUVergSkGt6wxG7w9Khfe7hR4oaumQaRE4F7ZnQujxwzWi4CQjH0klqmiUT4cxGq4meWe0Aw21OgltF2nCKxvpKz0qXKayFvRpX9BG6CqjsRPXGzpcDzjSc+aB8etb3gdzRlKkOJcgc8br1rDH+nSf66KtyPhuDiJ7tJKWYrFOL+B7FqaP1jlbGjbqrtYbLdookBA+YdYlWt1piMMZlLZ+Rdpw8WzsCtmN9R6BKIZgot00g1breidRX5IOW9ciC5qeKcVOMMN3rXxSyew6iNoVD1ncxToDZIdtK00XxNvx5PtlHjcZt8s5dX8n7DDLhNAolmrgE8gEWGEMg9EZQ4pC9a5vewuHarVhmn0ynvF+61PcfqkUCH7Kmp2aRoDrM2Ho5bYuG4syGg2eD/y2QwmP8dAF41KX2j8fDf8g5H3yAGUZftiH83yZ8NHp4PwOMj2XneSIEi1tH/fq7Ql6Pk7V7ItXQzr8VLo5U+bCY/AncWdVh+nJXPPFNOKvKlUZpej11aA2Dwa7oWIBbVtL4o2oVzwJsi+se1H0A1Gq2xgyfYI5qUuDp13PJVu3BN1kjk1UX/swKu2d46UIuxwb+MKqJmmH+5fAtPRntwwKtRx5QsrDcPIkxT37V9E4tgf9WSIFD8A0DKQB3nlwntFky1wLjUqF4MrFxKxDt1F6hnvgyyfml5c9CienoMqKe41uI3gnUCQI5UY0aZr+zw8fP6zHd94P4fz3T/+uv6r/f3Yq4O2X+99P9b1OewSO/+W11pd/Qae/fvzQeAnQ6O3sQ5v10fshgr87+fDpvzzFtU6f347Ufj9c9HZcqXOi9f+afEgKv2+7Zv7WltnrVB+Y4fbtejy9/fZ+8uPHgZVvr+PNq0wvDvw+C/xvbpME4a8HHrryW+WsXk2K9dhe4CdOF7zfRu+HQj5+8GewUYnXfsMp8lvQVKvF7+fDgKH4Z+Qz/uFv/wfXzc9iOjQAAA== -->

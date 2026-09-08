@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_process_supplier_invoices",
   "name": "Process supplier invoices Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_process_supplier_invoices",
-  "rappid": "rappid:@cowork-cookbook/audit_process_supplier_invoices:372a2538875a4a6c7881e6f98ee15d907fa3b1d2eac0a91ecfcca2c4b9019803",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_process_supplier_invoices:54da2028c186e1654ffa3c24e5c1bc59c58438022d75601820e33d05af2f11c8",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_process_supplier_invoices:372a2538875a4a6c7881e6f98ee15d907fa3b1d2eac0a91ecfcca2c4b9019803",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_process_supplier_invoices:372a2538875a4a6c7881e6f98ee15d907fa3b1d2eac0a91ecfcca2c4b9019803"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits process supplier invoices records for completeness and policy compliance against rule-based checks.",
+  "description": "Read-only audit of supplier invoice records in Dynamics 365 F&SCM (legal entity USMF) that flags missing fields, stale dates, blank descriptions, inactive-entity references and policy violations, returning an Excel workb",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "009124bc35ee6e803de149f85c27ff5f933f263b8e7b7a8c968e0f31c0525568",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "3e28bc69eb3c70f948e96b583e97f85a911a5347c58020ec668a581c0b2b12c3",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

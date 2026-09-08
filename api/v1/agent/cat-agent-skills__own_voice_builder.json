@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__own_voice_builder",
   "name": "Own Voice Builder",
   "rar_name": "@cat-agent-skills/own_voice_builder",
-  "rappid": "rappid:@cat-agent-skills/own_voice_builder:3335c7b6301e2913a58b19952902e145633f8bce0f751c4bd5635261745f6d79",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/own_voice_builder:54cd1c7b893cd680e00684e51926d53d9ae67f69fcfb6dc1bff8a5ad04f60105",
+  "_migrated_from": "rappid:@cat-agent-skills/own_voice_builder:3335c7b6301e2913a58b19952902e145633f8bce0f751c4bd5635261745f6d79",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/own_voice_builder:3335c7b6301e2913a58b19952902e145633f8bce0f751c4bd5635261745f6d79"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "productivity",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.0,
-  "sha256": "c94c678de5a3bd69cf2f1f4e4b50b38cdd931bfcd23aeec345fb3263b86df1b0",
+  "lines": 262,
+  "size_kb": 12.4,
+  "sha256": "e93e7c7eaf21c72cb54ae3b66789bc10826ea31a644041608de32228d84a5ee5",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

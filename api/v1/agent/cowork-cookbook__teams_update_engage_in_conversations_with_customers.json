@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_engage_in_conversations_with_customers",
   "name": "Engage in conversations with customers Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_engage_in_conversations_with_customers",
-  "rappid": "rappid:@cowork-cookbook/teams_update_engage_in_conversations_with_customers:1687ea879b614bd059a01c29cfd1dc749a405f8d037d809d5fe9a19f495dc8e1",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_engage_in_conversations_with_customers:fa4acfa4acb25e8a032ee8ed67d9cd8c0cba94526361ce3af7c39e699547d34e",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_engage_in_conversations_with_customers:1687ea879b614bd059a01c29cfd1dc749a405f8d037d809d5fe9a19f495dc8e1",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_engage_in_conversations_with_customers:1687ea879b614bd059a01c29cfd1dc749a405f8d037d809d5fe9a19f495dc8e1"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on engage in conversations with customers status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes customer-conversation engagement status from Dynamics 365 ERP for a legal entity and saves two artifacts: a markdown Teams channel post and an Adaptive Card JSON with KPIs and quick-action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "66e3c6903851c97941a5973d01ed35035231c954caf38be52c43e0137488c60a",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "b7afa20c3753e18105b5b294ff8934aa3f5f09ceb7e5c18bfb5fc60b2f5d7ecd",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

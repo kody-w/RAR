@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_implement_corrective_and_preventative_actions",
   "name": "Implement corrective and preventative actions Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_implement_corrective_and_preventative_actions",
-  "rappid": "rappid:@cowork-cookbook/teams_update_implement_corrective_and_preventative_actions:db7f1d5a3dbfa1a8c47a4a569441bcb674ba8757a602b52b4b958df9983c897a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_implement_corrective_and_preventative_actions:68fe5cb3cc2079d2fa8216647c944aa175875146bc42c8e63be9a393772bce55",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_implement_corrective_and_preventative_actions:db7f1d5a3dbfa1a8c47a4a569441bcb674ba8757a602b52b4b958df9983c897a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_implement_corrective_and_preventative_actions:db7f1d5a3dbfa1a8c47a4a569441bcb674ba8757a602b52b4b958df9983c897a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on implement corrective and preventative actions status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes corrective and preventative action status from Dynamics 365 F&SCM for a given legal entity and saves two artifacts: a markdown Teams channel post and an Adaptive Card JSON with KPIs and quick-action buttons; n",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "8d7e5168551170eb6ca849571a7f6fbb8bc08565beea34a085738bb5063bc46f",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "882c873f20eb47851eb8fb072f56edf6324cd5ca06e73874074fcf09252afb17",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

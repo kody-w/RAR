@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__forecast_vs_actuals",
   "name": "Demand Forecast vs Actuals Variance",
   "rar_name": "@cowork-cookbook/forecast_vs_actuals",
-  "rappid": "rappid:@cowork-cookbook/forecast_vs_actuals:b777d9f63329d5fb7ab6902503a4e28ee91c7a6861b9b953f0cda2d05726c428",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/forecast_vs_actuals:9aa77f47af5d20cdd3571e1d5e71c680e464024bbd502e682772220cf6687773",
+  "_migrated_from": "rappid:@cowork-cookbook/forecast_vs_actuals:b777d9f63329d5fb7ab6902503a4e28ee91c7a6861b9b953f0cda2d05726c428",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/forecast_vs_actuals:b777d9f63329d5fb7ab6902503a4e28ee91c7a6861b9b953f0cda2d05726c428"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Compares demand forecast lines to actual sales orders for the same period and items, computes forecast accuracy, and flags poor performers.",
+  "description": "Compares demand forecast quantities to actual sales-order quantities for the same items and period, computes absolute forecast accuracy, flags items under 70%, and returns an Excel workbook; read-only.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "bc7bdf6d2cbaf70172d7b13ba0c150ba2bc8acd1e4cf7117692b4685f9a754a5",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "3d9b94371d5b3ee154f46baff6d22255cd56f7dc4777bb9349dc5b8f567035e3",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

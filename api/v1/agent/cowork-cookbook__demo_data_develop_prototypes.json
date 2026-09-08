@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_develop_prototypes",
   "name": "Develop prototypes Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_develop_prototypes",
-  "rappid": "rappid:@cowork-cookbook/demo_data_develop_prototypes:05b862a576767e24f4ac363c5bb75f6923efa16d8199c2ce5b5b6d02fa492b6d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_develop_prototypes:e4e35f970312686d96ba88ef6ec2d1c39d8b23a34afc6b0dd1e55c45ab24ea04",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_develop_prototypes:05b862a576767e24f4ac363c5bb75f6923efa16d8199c2ce5b5b6d02fa492b6d",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_develop_prototypes:05b862a576767e24f4ac363c5bb75f6923efa16d8199c2ce5b5b6d02fa492b6d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for develop prototypes in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo records for develop prototypes in a sandbox D365 F&SCM legal entity, stages them in an Excel workbook first, creates them, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "04563167abc5b832f1cfee73dae51d2d9f2cd6ba235477516d2e5e012c91dd9d",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "032f42efdef4a6cbe3b4f941a55b174ce103e72645b946a8d3c7a15389137be4",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

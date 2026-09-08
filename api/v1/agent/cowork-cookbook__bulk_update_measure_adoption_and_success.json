@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_measure_adoption_and_success",
   "name": "Measure adoption and success Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_measure_adoption_and_success",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_measure_adoption_and_success:036255d1e217bb114be8e82bd63510a766574e790a98adb47f32afe5ab5925f7",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_measure_adoption_and_success:dfc4904273a7ae25790edca41ac25ab87de88a618dca1a6966a979674ce74160",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_measure_adoption_and_success:036255d1e217bb114be8e82bd63510a766574e790a98adb47f32afe5ab5925f7",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_measure_adoption_and_success:036255d1e217bb114be8e82bd63510a766574e790a98adb47f32afe5ab5925f7"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across measure adoption and success records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to measure adoption and success records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, returning a dry-run preview workbook, then a confirmation workbook af",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "5f4de8689040760a1a0a3e32f5febfc0bdec7bbdd3e71c520e52f385ad3deedf",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "35daca2cb44b6603d1a2359e3a5a0940cd338c63068e9179e921ee292f349bc5",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

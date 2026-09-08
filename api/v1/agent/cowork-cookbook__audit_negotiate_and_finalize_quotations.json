@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_negotiate_and_finalize_quotations",
   "name": "Negotiate and finalize quotations Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_negotiate_and_finalize_quotations",
-  "rappid": "rappid:@cowork-cookbook/audit_negotiate_and_finalize_quotations:9ac61b182ff80e2594d7411d4a75b9bd3b338624fb3644d151ddc53d671c651d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_negotiate_and_finalize_quotations:b57e28699b3dd7abf8726209901b384f04cbf4c8d0ea67ec9cd92eefa715c687",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_negotiate_and_finalize_quotations:9ac61b182ff80e2594d7411d4a75b9bd3b338624fb3644d151ddc53d671c651d",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_negotiate_and_finalize_quotations:9ac61b182ff80e2594d7411d4a75b9bd3b338624fb3644d151ddc53d671c651d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits negotiate and finalize quotations records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of quotation negotiation/finalization records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "e053e88e67016e8c17a7fc5a9de243b9e46cf82257bd80ad0412d885a33a7b7f",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "9be0cd721776380c0e5ab7114fc7d85bbc97fa73894284674bf5c391bb42001b",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/roi_and_value_selling_artifact",
   "agent_file": "roi_and_value_selling_artifact_agent.py",
-  "agent_sha256": "d4bf8fd4aa97770f8b9f268a6fef1aff49351f9ddd6309628e7c02d7f6f851d6",
+  "agent_sha256": "9de1fc3f83470e45fb02ca4d71814d88a94bee60d50c16047cfd13bcfb9741c8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RoiAndValueSellingArtifact",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Build an executive-level business value story for a customer - use cases, ROI model, and call to action - delivered as a deck and microsite.",
+    "description": "Builds an executive business value story for a named customer and product — strategic context, 9 use cases, 2x2 prioritization, pain→outcome map, KPIs, transparent ROI model, and call to action — as a 5-7 slide deck and",
     "display_name": "ROI and value selling artifact",
     "industry_context": {
       "deprecated": false,
@@ -46,9 +46,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "22e4fe0ca920da55",
+      "content_digest": "75015fd71b3ec292",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -71,28 +71,45 @@
       "advanced",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "RoiAndValueSellingArtifact",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "customer_and_product": {
+        "description": "Customer name, their website, and the product being positioned, plus three use case categories.",
+        "type": "string"
+      },
+      "industry_and_personas": {
+        "description": "Customer industry and the primary persona(s) the story targets.",
+        "type": "string"
+      },
+      "kpis_and_population": {
+        "description": "Confirmed KPIs and the impacted user population.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "roi_assumptions": {
+        "description": "Fully loaded hourly cost, volume metric, realization factor (default 0.75), license type, and engagement program.",
+        "type": "string"
+      },
+      "strategic_priorities": {
+        "description": "Known strategic priorities or pain points; left blank, they are researched or labeled as hypotheses.",
         "type": "string"
       }
     },
@@ -101,5 +118,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

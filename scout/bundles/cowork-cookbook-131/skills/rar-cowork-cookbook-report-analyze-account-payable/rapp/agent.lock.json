@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/report_analyze_account_payable",
   "agent_file": "report_analyze_account_payable_agent.py",
-  "agent_sha256": "e33ed2a30a16c171f576e91458a5862a01208c50fb4737a180cb82bef63fa1d0",
+  "agent_sha256": "bf8ec0952e575aaf4a25d26c16272bc926311458b7d5d695a73f7633f492ffd1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportAnalyzeAccountPayable",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds a structured summary report of analyze account payable activity with totals, trends, and breakdowns.",
+    "description": "Builds a read-only accounts payable summary report from Dynamics 365 F&SCM for a legal entity's most recent posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
     "display_name": "Analyze account payable Summary Report",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "ec299e982b748756",
+      "content_digest": "4d483a7154bc92c8",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ReportAnalyzeAccountPayable",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "data_source": {
-        "description": "Optional. Where the evidence comes from.",
+      "breakdown_dimensions": {
+        "description": "Dimensions for breakdowns where applicable: department, category, responsible owner.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report on, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The question to answer, stated as a question.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. report-analyze-account-payable-2026-05-24.xlsx.",
+        "type": "string"
+      },
+      "period": {
+        "description": "Posted period to report; defaults to the most recent posted period available.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

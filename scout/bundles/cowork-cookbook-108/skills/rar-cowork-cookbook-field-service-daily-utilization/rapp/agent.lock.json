@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/field_service_daily_utilization",
   "agent_file": "field_service_daily_utilization_agent.py",
-  "agent_sha256": "3769455d269bc64b76d817d4447a0388f55806024987b3485b8cf23db9120383",
+  "agent_sha256": "232c84c9e357105df06e3d6dda8bdac62a6f3f84dbb72b445d972e84710ee878",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FieldServiceDailyUtilization",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a morning email to service operations summarizing technician utilization for today and the coming week, including overbooked and underbooked resources.",
+    "description": "Reads scheduled field-service work orders for today and the next 7 days, computes per-technician daily utilization, and returns a saved (unsent) email draft plus a Teams-ready summary of overbooked, underbooked, and unas",
     "display_name": "Field Service Resource Utilization Daily Email",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "1cb7801b033ea7ff",
+      "content_digest": "c88ce0341ddceb53",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "FieldServiceDailyUtilization",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_range": {
+        "description": "Coverage window; defaults to today plus the next 7 days.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "overbooked_threshold": {
+        "description": "Utilization percent above which a technician counts as overbooked; default 100%.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "recipient": {
+        "description": "The service operations manager the email draft is addressed to.",
+        "type": "string"
+      },
+      "teams_channel": {
+        "description": "Channel the Communications-ready summary is written for.",
+        "type": "string"
+      },
+      "underbooked_threshold": {
+        "description": "Utilization percent below which a technician counts as slack; default 50%.",
         "type": "string"
       }
     },
@@ -112,5 +129,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

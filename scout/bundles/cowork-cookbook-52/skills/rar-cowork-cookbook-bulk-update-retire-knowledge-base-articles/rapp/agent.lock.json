@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_retire_knowledge_base_articles",
   "agent_file": "bulk_update_retire_knowledge_base_articles_agent.py",
-  "agent_sha256": "9372c88b18d705f592bb5f71ad1acffce360903786eedc90d037c17d77e8b8f1",
+  "agent_sha256": "de861f0b14352dc63ebe21ec25ffbb8fb1265a6e9f8a0b0fd7ea5818a2225bf0",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateRetireKnowledgeBaseArticles",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across retire knowledge base articles records from an input list, with dry-run preview before commit.",
+    "description": "Runs a bulk field update on knowledge base article records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin: returns a dry-run preview workbook of before/after/status, pauses for approval",
     "display_name": "Retire knowledge base articles Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "cc920a1430606841",
+      "content_digest": "870aeddc45fad84b",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdateRetireKnowledgeBaseArticles",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit user approval after reviewing the dry-run preview, required before any write.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against; defaults to USMF sandbox.",
+        "type": "string"
+      },
+      "new_values": {
+        "description": "The new field value(s) to apply to each listed record.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "record_ids": {
+        "description": "List of knowledge base article record IDs to update.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

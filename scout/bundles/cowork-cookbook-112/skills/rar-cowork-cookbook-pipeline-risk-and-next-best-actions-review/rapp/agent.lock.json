@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/pipeline_risk_and_next_best_actions_review",
   "agent_file": "pipeline_risk_and_next_best_actions_review_agent.py",
-  "agent_sha256": "51ab2487dc01ba09aae099b79aa438302a57904a7b87d4cfb31a0cb958724a85",
+  "agent_sha256": "e6c9b0ec39565cd659f56d5efb94f9d57ce0b414cc26992f58cebba5a554567e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PipelineRiskAndNextBestActionsReview",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Know exactly which deals need attention this week - and exactly what to do - without manually digging through CRM and email threads.",
+    "description": "Reviews your Dynamics 365 Sales opportunities for risk signals (stalled deals, dropped engagement, quiet activity logs, slipped close dates), cross-checks email and meeting activity, and returns an interactive HTML pipel",
     "display_name": "Pipeline risk and next-best-actions review",
     "industry_context": {
       "deprecated": false,
@@ -48,9 +48,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "6b53d6af6e0c495e",
+      "content_digest": "77ab3f01e53025f3",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,28 +74,25 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PipelineRiskAndNextBestActionsReview",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
         "type": "string"
       }
     },
@@ -104,5 +101,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

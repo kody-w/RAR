@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__gl_trial_balance_variance",
   "name": "GL Trial Balance Variance Report",
   "rar_name": "@cowork-cookbook/gl_trial_balance_variance",
-  "rappid": "rappid:@cowork-cookbook/gl_trial_balance_variance:07f784ea9a478814b6636b9ed4b783830a1f59219920637e1fa9d1bf2600ef74",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/gl_trial_balance_variance:1e2ff13f6d7447794a62f6379ff80aa44c6ea44567cfa5fc93018df45be71496",
+  "_migrated_from": "rappid:@cowork-cookbook/gl_trial_balance_variance:07f784ea9a478814b6636b9ed4b783830a1f59219920637e1fa9d1bf2600ef74",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/gl_trial_balance_variance:07f784ea9a478814b6636b9ed4b783830a1f59219920637e1fa9d1bf2600ef74"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Compares the current-period trial balance to the prior period and highlights GL accounts with material variances.",
+  "description": "Compares the most recent posted GL period to the prior period for a legal entity, flags accounts with variance >= $10,000 or >= 10%, and returns an Excel workbook plus a draft email to the controller.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "551e3f9e867735ac4ab2dff898356682733cdc32ac836dbf84a535ac49d887ec",
+  "lines": 265,
+  "size_kb": 17.7,
+  "sha256": "8e1980e116808dd09d33dd994a9999b30945ed218831c5583baabc8c545dc818",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

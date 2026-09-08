@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/eco_impact_analysis",
   "agent_file": "eco_impact_analysis_agent.py",
-  "agent_sha256": "342629ab28db05ce912e4199dcf7edf9c1988f159a5c388250075d00a78b70b2",
+  "agent_sha256": "fd387df1a2443852bb2fc4b378ef95312c86a03d8a9ea551113c4801246e2d16",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EcoImpactAnalysis",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "For a proposed item change, finds every BOM, sales order, and inventory location affected and quantifies downstream impact.",
+    "description": "Returns a read-only engineering change impact analysis for a given item number: active BOMs using it, open sales order lines, on-hand inventory by warehouse, and open purchase order lines, packaged as an Excel workbook.",
     "display_name": "Engineering Change Order Impact Analysis",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "517aedd76241ae96",
+      "content_digest": "39a03fc4bee22289",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,33 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "EcoImpactAnalysis",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "item_number": {
+        "description": "The item to analyze (defaults to M0001 'Wiring Harness' if not specified).",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 company/legal entity context (defaults to USMF).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -111,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

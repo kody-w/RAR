@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/phi_deidentifier",
   "agent_file": "phi_deidentifier_agent.py",
-  "agent_sha256": "deacbb22ef7601fa437aa51aa7ccdd07ed16fa8c3eaa345c50ff44dc6d975d6f",
+  "agent_sha256": "71b910db638c5d408f058fbd63d0f7482e247e2dfdad6a3f4c1d73a4de70d1dd",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PhiDeidentifier",
   "host_dependencies": [],
@@ -44,7 +44,7 @@
       "compliance",
       "scripts"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "PhiDeidentifier",
   "schema": "rapp-agent-lock/1.0",
@@ -74,5 +74,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

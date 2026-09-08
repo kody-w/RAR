@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__pattern_radar_automation",
   "name": "Pattern Radar (Scheduled)",
   "rar_name": "@cat-agent-skills/pattern_radar_automation",
-  "rappid": "rappid:@cat-agent-skills/pattern_radar_automation:e65289cf1a3d622a36fab6f8f53812ee081105f23a544dfe2ddd437fe7ba96c0",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/pattern_radar_automation:21b3bfc556af429f0ab44154cf1d410bdb361d6c62dce2e44f8ea2300bdba1b0",
+  "_migrated_from": "rappid:@cat-agent-skills/pattern_radar_automation:e65289cf1a3d622a36fab6f8f53812ee081105f23a544dfe2ddd437fe7ba96c0",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/pattern_radar_automation:e65289cf1a3d622a36fab6f8f53812ee081105f23a544dfe2ddd437fe7ba96c0"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "productivity",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.2,
-  "sha256": "4a46e8a71dfa5a6e08732d289372d52fe203669fef202c3956fa38a1d6f3317a",
+  "lines": 262,
+  "size_kb": 12.6,
+  "sha256": "ab2782b399f23ea2a6097225af0525071d5d663d639f77cd09aef47502710bad",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

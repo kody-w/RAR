@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_define_operating_hours_and_schedule",
   "name": "Define operating hours and schedule Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_define_operating_hours_and_schedule",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_define_operating_hours_and_schedule:cbaf32d0cd2296952c9a258bde1e16101f371639b8f3176a5c6badb5d1715adb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_define_operating_hours_and_schedule:3f5ff41162974a8f420e8d4601637381608f14b555a3818aed1166a6317e3f9b",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_define_operating_hours_and_schedule:cbaf32d0cd2296952c9a258bde1e16101f371639b8f3176a5c6badb5d1715adb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_define_operating_hours_and_schedule:cbaf32d0cd2296952c9a258bde1e16101f371639b8f3176a5c6badb5d1715adb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing define operating hours and schedule for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on operating hours and schedule from Dynamics 365 F&SCM (legal entity USMF) with top 5 items by impact, anomalies vs the 7-day rolling average, and next actions; drafts an email to the owner (unsen",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "0ab553d774cbaa92bc12fbad3e16b2ecc7788d6b9ca2e24de05eb166b1f16e6c",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "3a72f4662eea59c02f8ac2812891c00891bbedbf0aa9d45631c4ec3bf83b8206",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

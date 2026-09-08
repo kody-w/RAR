@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_report_on_and_analyze_trends",
   "agent_file": "scheduled_brief_report_on_and_analyze_trends_agent.py",
-  "agent_sha256": "cec9479270393e8c609546c361980ed24b10ba807b4f10ca12c3ba8e51209025",
+  "agent_sha256": "998274b0f42b7e32e719d9c123be2eff24b3ce45980903ec6af52ad086b6725b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefReportOnAndAnalyzeTrends",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Schedulable morning-brief email summarizing report on and analyze trends for the responsible owner; designed to run daily or weekly.",
+    "description": "Builds a morning brief on trends from Dynamics 365 ERP data for a given legal entity and owner — top 5 items by impact, anomalies vs the 7-day rolling average, and next actions — then saves an email draft (unsent) plus a",
     "display_name": "Report on and analyze trends Scheduled Email Brief",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "2d4675d0d7a2fcd3",
+      "content_digest": "9d002862cb42ac6a",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ScheduledBriefReportOnAndAnalyzeTrends",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "owner": {
+        "description": "Responsible owner who receives the drafted brief email.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "schedule": {
+        "description": "When to run it, e.g. weekday mornings at 7am.",
+        "type": "string"
+      },
+      "topic": {
+        "description": "Subject area of the trend analysis to report on.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_issue_customer_credits",
   "name": "Issue customer credits Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_issue_customer_credits",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_issue_customer_credits:7ea745e425abd02fcac0c0eb3b1b4af66fdf3224cc654d615870f97a446baa06",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_issue_customer_credits:012b5d350adef87a520ec3b8dc7edfab1b90927189fecf2c301bf01b19e83a2e",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_issue_customer_credits:7ea745e425abd02fcac0c0eb3b1b4af66fdf3224cc654d615870f97a446baa06",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_issue_customer_credits:7ea745e425abd02fcac0c0eb3b1b4af66fdf3224cc654d615870f97a446baa06"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing issue customer credits for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on issue customer credits from Dynamics 365 ERP (legal entity USMF): top 5 items by impact, anomalies vs the 7-day rolling average, and next actions, then saves a draft email to the owner plus a Te",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "2ef99e9cdc5b4cd71b77d4b6125f6aa0ff037918f9860b03db8a868b97a2840b",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "e154f701417cf34157284c8cf0de46b5338b47b974a19685e4e2713b2195743b",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

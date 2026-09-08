@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/catch_up_on_what_moved_on_my_deals",
   "agent_file": "catch_up_on_what_moved_on_my_deals_agent.py",
-  "agent_sha256": "3efae1999657ddd1dc7e525cd8e51b7133a9412a54bea00a7d60933eafbbbb18",
+  "agent_sha256": "769b58e6036bebeed070fc4d8aa68c74a515a855f4b03b6b5aba91687a292322",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CatchUpOnWhatMovedOnMyDeals",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Know what changed across your top deals without reading back through a week of threads.",
+    "description": "Returns a per-deal change readout for your top opportunities, combining Dynamics 365 Sales opportunity state with email, meeting, and Teams signals to show what moved, stalled, or went quiet.",
     "display_name": "Catch up on what moved on my deals",
     "industry_context": {
       "deprecated": false,
@@ -48,9 +48,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "95ec6e32e943320b",
+      "content_digest": "2cc53967cc478a30",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,28 +74,33 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "CatchUpOnWhatMovedOnMyDeals",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "number_of_deals": {
+        "description": "How many top deals to cover (e.g. top 5).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "time_range": {
+        "description": "Period of change to summarize, e.g. since last week.",
         "type": "string"
       }
     },
@@ -104,5 +109,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

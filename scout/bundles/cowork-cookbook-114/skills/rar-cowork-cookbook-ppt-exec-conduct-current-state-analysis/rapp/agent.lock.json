@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_conduct_current_state_analysis",
   "agent_file": "ppt_exec_conduct_current_state_analysis_agent.py",
-  "agent_sha256": "480034430f13cc7896ff3ce1b2cd1d47345aab7dee1b529faf8dc58a04dd4eee",
+  "agent_sha256": "0a5f24791d0b7bbe54e1593e192762a620c081ff7bf104a25d61813e8a392ac4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecConductCurrentStateAnalysis",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on conduct current state analysis status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on current state analysis from Dynamics 365 F&SCM data for a given legal entity, with KPI, trend, red-flag, actions and appendix slides plus speaker notes.",
     "display_name": "Conduct current state analysis Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "2b7459c06cf57262",
+      "content_digest": "a645881ae23b219b",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecConductCurrentStateAnalysis",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "analysis_topic": {
+        "description": "Subject of the current state analysis the deck covers.",
+        "type": "string"
+      },
+      "comparison_period": {
+        "description": "Prior period to trend the KPIs against.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to pull data from, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Target .pptx filename, e.g. ppt-exec-conduct-current-state-analysis-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_length": {
+        "description": "Meeting length the deck is scoped to, e.g. 15-minute monthly review.",
         "type": "string"
       }
     },
@@ -112,5 +129,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

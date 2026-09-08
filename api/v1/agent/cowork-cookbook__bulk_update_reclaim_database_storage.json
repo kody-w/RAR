@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_reclaim_database_storage",
   "name": "Reclaim database storage Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_reclaim_database_storage",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_reclaim_database_storage:e12417a08a5a18c7a087dc9c697af0738034336d53c0df5240bc4c82a3fa7c53",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_reclaim_database_storage:52433d46053debc3f75a9fe7f117610c62c7b237d4538933e5c7822d2973f386",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_reclaim_database_storage:e12417a08a5a18c7a087dc9c697af0738034336d53c0df5240bc4c82a3fa7c53",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_reclaim_database_storage:e12417a08a5a18c7a087dc9c697af0738034336d53c0df5240bc4c82a3fa7c53"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across reclaim database storage records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to reclaim-database-storage records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied ID list, with a dry-run preview workbook and approval gate before commit.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "0e2ea83b985ba639ece899120f84858f2696267c1c49b8f6741663617a4aa3f6",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "8030e2a7b4575b90313ec63f1ab760bd1d269d719b8aa6ebb1674f2f12b8840d",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -49,6 +49,32 @@ def test_source_carries_repository_and_cc_by_attribution():
     assert source["license_url"].endswith("/Coworkcookbook/blob/main/LICENSE")
 
 
+def test_adapter_carries_recipe_bodies_only_from_the_licensed_repo_tree():
+    """The catalog's inline fields are never trusted as a body; the body comes
+    from the CC BY 4.0 repository tree (prompt.md / recipe.yaml / README.md),
+    verbatim, with attribution."""
+    crawler = load_module("cowork_crawler2", ROOT / "scripts" / "crawl_sources.py")
+    source = cowork_source()
+    recipe = {"id": "x/demo", "slug": "x/demo", "title": "Demo", "summary": "S", "version": "1.0.0",
+              "process_tags": ["x/y"], "recipe_type": "prompt", "category": "report", "status": "verified"}
+    tree = {
+        "recipes/x/demo/prompt.md": "Read the ledger and produce a PDF.\n",
+        "recipes/x/demo/recipe.yaml": "id: demo\nprerequisites:\n  - Finance role\nbusiness_value: >-\n  Saves\n  time.\nauthors:\n  - github: a\n    name: Ada\n",
+        "recipes/x/demo/README.md": "# Demo\n\n## What it does\n\nMakes a PDF.\n\n## Step-by-step\n\n1. Paste the prompt.\n2. Open the PDF.\n\n## Expected output\n\nOne PDF.\n\n## License\n\nCC-BY-4.0\n",
+    }
+    [record] = crawler.parse_cowork_cookbook([recipe], source, tree)
+    body = record["recipe"]
+    assert body["prompt"] == "Read the ledger and produce a PDF."
+    assert body["prerequisites"] == ["Finance role"]
+    assert body["steps"] == ["Paste the prompt.", "Open the PDF."]
+    assert body["expected_output"] == "One PDF."
+    assert body["what_it_does"] == "Makes a PDF."
+    assert body["business_value"] == "Saves time."
+    assert body["authors"] == ["Ada"]
+    [bare] = crawler.parse_cowork_cookbook([recipe], source)  # no tree: no body, no crash
+    assert "recipe" not in bare
+
+
 def test_adapter_keeps_hierarchy_and_drops_recipe_body():
     crawler = load_module("cowork_crawler", ROOT / "scripts" / "crawl_sources.py")
     source = cowork_source()
@@ -89,8 +115,10 @@ def test_adapter_keeps_hierarchy_and_drops_recipe_body():
     assert "workflow" in record["tags"]
     assert "integration" in record["tags"]
     assert record["url"].endswith("/recipes/source-to-pay/example-recipe")
+    # inline catalog fields are never taken as a body; bodies come from the repo tree
     assert "prompt" not in record
     assert "instructions" not in record
+    assert "recipe" not in record
 
 
 def test_snapshot_and_generated_agent_cover_every_recipe():
@@ -108,6 +136,9 @@ def test_snapshot_and_generated_agent_cover_every_recipe():
     assert len(recipes) == 1481
     assert len({item["ref"] for item in recipes}) == 1481
     assert all("prompt" not in item and "instructions" not in item for item in recipes)
+    # every recipe carries its body from the licensed repo (carry_bodies)
+    assert all(item.get("recipe", {}).get("prompt") for item in recipes)
+    assert all(item["recipe"]["prerequisites"] for item in recipes)
 
     agents = sorted((ROOT / "agents" / "@cowork-cookbook").glob("*_agent.py"))
     assert len(agents) == 1481

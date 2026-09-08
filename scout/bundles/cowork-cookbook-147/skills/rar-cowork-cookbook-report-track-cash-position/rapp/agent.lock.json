@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/report_track_cash_position",
   "agent_file": "report_track_cash_position_agent.py",
-  "agent_sha256": "62060e402fda8a1c638acbcab19881b096fe9023b86e59cae08c2b52933cdfd6",
+  "agent_sha256": "04efc5e1a8d6ac143ca8abb71d1cb28cf94190bca541824713655cb399b4f85d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportTrackCashPosition",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds a structured summary report of track cash position activity with totals, trends, and breakdowns.",
+    "description": "Builds a read-only cash position summary report from Dynamics 365 F&SCM for a legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
     "display_name": "Track cash position Summary Report",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "b1fcdda37f6b7311",
+      "content_digest": "478259cebf6ddbfd",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ReportTrackCashPosition",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "breakdown_dimensions": {
+        "description": "Dimensions for breakdowns, such as department, category, or responsible owner.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report on, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. report-track-cash-position-2026-05-24.xlsx.",
+        "type": "string"
+      },
+      "posting_period": {
+        "description": "Posted period to summarize; defaults to the most recent posted period available.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

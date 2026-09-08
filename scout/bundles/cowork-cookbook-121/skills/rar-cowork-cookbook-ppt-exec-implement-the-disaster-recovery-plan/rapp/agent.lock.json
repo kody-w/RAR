@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_implement_the_disaster_recovery_plan",
   "agent_file": "ppt_exec_implement_the_disaster_recovery_plan_agent.py",
-  "agent_sha256": "7fea9bab0aafb1e83b8016618c67d08e24a9108cb3c18dcd00a3426293a97923",
+  "agent_sha256": "4a9c13b36953b349da23d54a70b3bc9ebe39426f844404a6bda0f0967c9fe6dd",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecImplementTheDisasterRecoveryPlan",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on implement the disaster recovery plan status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on disaster recovery plan implementation from Dynamics 365 F&SCM data for a given legal entity, with title, KPI, trend, risk, action, and appendix slides plus speaker notes.",
     "display_name": "Implement the disaster recovery plan Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "35d240de5fa961bf",
+      "content_digest": "1a49392ebb920ed9",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecImplementTheDisasterRecoveryPlan",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "comparison_period": {
+        "description": "Prior period to compare against in the trend chart.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to pull data from (e.g. USMF).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the .pptx file to produce, e.g. ppt-exec-implement-the-disaster-recovery-plan-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_date": {
+        "description": "Date/period of the monthly review used for the report and filename.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

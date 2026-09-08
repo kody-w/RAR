@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__field_service_daily_utilization",
   "name": "Field Service Resource Utilization Daily Email",
   "rar_name": "@cowork-cookbook/field_service_daily_utilization",
-  "rappid": "rappid:@cowork-cookbook/field_service_daily_utilization:86ffa73bf136e37c9c43da04814721d935a76ba3b1dbce2f81a0feea36fc91ad",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/field_service_daily_utilization:8e8538426610c51c95d6be2a4e354a5895546c5b79c1ac4f862b1b7c08797cd9",
+  "_migrated_from": "rappid:@cowork-cookbook/field_service_daily_utilization:86ffa73bf136e37c9c43da04814721d935a76ba3b1dbce2f81a0feea36fc91ad",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/field_service_daily_utilization:86ffa73bf136e37c9c43da04814721d935a76ba3b1dbce2f81a0feea36fc91ad"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a morning email to service operations summarizing technician utilization for today and the coming week, including overbooked and underbooked resources.",
+  "description": "Reads scheduled field-service work orders for today and the next 7 days, computes per-technician daily utilization, and returns a saved (unsent) email draft plus a Teams-ready summary of overbooked, underbooked, and unas",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "3769455d269bc64b76d817d4447a0388f55806024987b3485b8cf23db9120383",
+  "lines": 265,
+  "size_kb": 18.0,
+  "sha256": "232c84c9e357105df06e3d6dda8bdac62a6f3f84dbb72b445d972e84710ee878",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

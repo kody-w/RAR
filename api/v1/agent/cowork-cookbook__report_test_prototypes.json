@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_test_prototypes",
   "name": "Test prototypes Summary Report",
   "rar_name": "@cowork-cookbook/report_test_prototypes",
-  "rappid": "rappid:@cowork-cookbook/report_test_prototypes:90181f26a166dc1e8dcebb658d39be15dd1f662ced987c707837082c794a81a2",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_test_prototypes:2b9c2566665f03617af24ae79a3208879d9ee343efc337bd9a17936d39b62d64",
+  "_migrated_from": "rappid:@cowork-cookbook/report_test_prototypes:90181f26a166dc1e8dcebb658d39be15dd1f662ced987c707837082c794a81a2",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_test_prototypes:90181f26a166dc1e8dcebb658d39be15dd1f662ced987c707837082c794a81a2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of test prototypes activity with totals, trends, and breakdowns.",
+  "description": "Generates a read-only test prototypes summary report from Dynamics 365 F&SCM via the Cowork ERP plugin, returning an Excel workbook with Summary, Detail, and Top 10 by value sheets. Call when you need that report.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.0,
-  "sha256": "727771c3182c86859be479d1e86e5242333ea6cf2f2aebd3593170f469a66d54",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "d2a50067f2fd2f1cf64f9c8618b9d1c64eb9355e2d8d347b773b66d4239b2734",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

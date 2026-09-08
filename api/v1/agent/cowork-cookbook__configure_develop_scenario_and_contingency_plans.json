@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_develop_scenario_and_contingency_plans",
   "name": "Develop scenario and contingency plans Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_develop_scenario_and_contingency_plans",
-  "rappid": "rappid:@cowork-cookbook/configure_develop_scenario_and_contingency_plans:95da486dee28b8920b44c70672e4465421afd0ee7aa57e87b086e425c06bc1b6",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_develop_scenario_and_contingency_plans:2a26b4ac98b605dc997b0579137009f8d670991cb6d67b14ccbb20cc00c39b48",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_develop_scenario_and_contingency_plans:95da486dee28b8920b44c70672e4465421afd0ee7aa57e87b086e425c06bc1b6",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_develop_scenario_and_contingency_plans:95da486dee28b8920b44c70672e4465421afd0ee7aa57e87b086e425c06bc1b6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to develop scenario and contingency plans from an input Excel file, with validation and rollback support.",
+  "description": "Reads an attached configuration Excel file of scenario and contingency planning rows against a Dynamics 365 F&SCM legal entity, validates each row, emits a validation workbook, and after your approval applies changes wit",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.7,
-  "sha256": "f9db387b58f7c69f4f9af634c11e2c4bcca65cc3b8e9a7791a8d4a264644181a",
+  "lines": 265,
+  "size_kb": 17.2,
+  "sha256": "d852dc64712be40e6db74084a68ec76057b406d08ba92a84193066d77f4e938a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

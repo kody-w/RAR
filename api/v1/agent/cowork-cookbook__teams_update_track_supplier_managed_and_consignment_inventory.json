@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_track_supplier_managed_and_consignment_inventory",
   "name": "Track supplier managed and consignment inventory Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_track_supplier_managed_and_consignment_inventory",
-  "rappid": "rappid:@cowork-cookbook/teams_update_track_supplier_managed_and_consignment_inventory:b767ad2f0e035a91b84dc106b0f9a25401e1180b5802be057e28da42af4c117c",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_track_supplier_managed_and_consignment_inventory:7fadd473e6fc760f1f2ab99dcaefb4a031e28dcbaa50ee581004b67fecd82244",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_track_supplier_managed_and_consignment_inventory:b767ad2f0e035a91b84dc106b0f9a25401e1180b5802be057e28da42af4c117c",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_track_supplier_managed_and_consignment_inventory:b767ad2f0e035a91b84dc106b0f9a25401e1180b5802be057e28da42af4c117c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on track supplier managed and consignment inventory status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes supplier-managed and consignment inventory from Dynamics 365 F&SCM for a given legal entity and saves a draft Teams channel post plus an Adaptive Card JSON file; nothing is posted.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.7,
-  "sha256": "79416024d8ecf63796dea1e75b82a2cb745ffb2604ecd1f2be8ea96e5ecc2344",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "4907519b9e464b3480efdae400ae44b314c9cd4959bd06a27d779476a99be2ca",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

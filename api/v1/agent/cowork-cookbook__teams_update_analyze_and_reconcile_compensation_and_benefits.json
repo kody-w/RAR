@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_analyze_and_reconcile_compensation_and_benefits",
   "name": "Analyze and reconcile compensation and benefits Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits",
-  "rappid": "rappid:@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits:4b898c3312d81d90636921bf634f5101f2ad3a5e17f1a45159f1228435d7243a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits:17fa37313e9a66861ed27359bef267430eed327792991ea1550b6bfdafa81645",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits:4b898c3312d81d90636921bf634f5101f2ad3a5e17f1a45159f1228435d7243a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits:4b898c3312d81d90636921bf634f5101f2ad3a5e17f1a45159f1228435d7243a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on analyze and reconcile compensation and benefits status with an interactive Adaptive Card for quick triage.",
+  "description": "Drafts a Teams channel update on compensation and benefits reconciliation status from Dynamics 365 F&SCM data for a legal entity, returning a markdown post plus an Adaptive Card JSON file saved for review, not posted.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.7,
-  "sha256": "4ad772f55a98a6f5ea356dbd30b2590b378f5643856f500961ea205cb768cf35",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "64cfc12b15c180ef0281053be3dc387a1fe63dbef5ffafaae4df0238380822b3",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

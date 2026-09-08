@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/dashboard_update_work_order_details",
   "agent_file": "dashboard_update_work_order_details_agent.py",
-  "agent_sha256": "b428e2ada58b5cd5104959b79d2b9ceac83e6f8ca5c214ab824301132fd94175",
+  "agent_sha256": "2c73607757293de6217b0f9e92fe67930a0564e2c8aa6062a056a0e382893799",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardUpdateWorkOrderDetails",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a self-contained interactive HTML dashboard for update work order details - opens in any browser, no D365 access needed by the viewer.",
+    "description": "Pulls update work order details data from Dynamics 365 F&SCM for a legal entity and recent fiscal period, then saves a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the output folde",
     "display_name": "Update work order details Interactive HTML Dashboard",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "2f47e979c0164e41",
+      "content_digest": "e0fa2a30a9b4796e",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DashboardUpdateWorkOrderDetails",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "fiscal_period": {
+        "description": "Fiscal period to pull; defaults to the most recent available.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the HTML file to write, e.g. dashboard-update-work-order-details-2026-05-24.html.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_folder": {
+        "description": "Folder where the HTML file is saved, e.g. Documents/Cowork/output/.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

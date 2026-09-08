@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_update_access_to_systems",
   "agent_file": "scheduled_brief_update_access_to_systems_agent.py",
-  "agent_sha256": "6e2dfdd825e8920daf3d2bfbe65a605bbd30a9ec5951278551e6b2581a5b35e7",
+  "agent_sha256": "5c960f07235416e9c9ac1c0a999c6342bb7ea29f4a01aec1789df7befb687043",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefUpdateAccessToSystems",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Schedulable morning-brief email summarizing update access to systems for the responsible owner; designed to run daily or weekly.",
+    "description": "Builds a morning brief on update access to systems from Dynamics 365 F&SCM (legal entity USMF): top 5 items by impact, anomalies vs the 7-day rolling average, and next actions, saved as an email draft plus a Teams-ready",
     "display_name": "Update access to systems Scheduled Email Brief",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "09ad37fd3a260daf",
+      "content_digest": "74fb3b7355c44fcc",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ScheduledBriefUpdateAccessToSystems",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to query; defaults to USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "owner": {
+        "description": "Responsible owner the brief is addressed to in the email draft.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "schedule": {
+        "description": "Optional cadence for the scheduled task, e.g. weekday mornings at 7am.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

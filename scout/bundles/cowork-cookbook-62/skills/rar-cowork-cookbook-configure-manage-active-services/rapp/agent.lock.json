@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/configure_manage_active_services",
   "agent_file": "configure_manage_active_services_agent.py",
-  "agent_sha256": "dc3af5aa61a369816fe7b29f689c8afcde5f22f92e7a0ac90eaa83e1baa523db",
+  "agent_sha256": "69cc10e0a575db6567f356091d9621a44c22be9a5e02370978a6db091c741cca",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureManageActiveServices",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk configuration change to manage active services from an input Excel file, with validation and rollback support.",
+    "description": "Reads an attached configuration Excel file of manage-active-services rows, validates every row, emits a validation workbook, pauses for your approval, then applies changes in Dynamics 365 F&SCM and emits a before/after c",
     "display_name": "Manage active services Configuration Bulk Setup",
     "industry_context": {
       "deprecated": false,
@@ -67,9 +67,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "5a9a04eeeec809fb",
+      "content_digest": "c3ced901e26a381e",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -93,28 +93,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ConfigureManageActiveServices",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit go-ahead after reviewing the validation workbook, before any changes are applied.",
+        "type": "string"
+      },
+      "configuration_workbook": {
+        "description": "Attached Excel file with one row per manage active services target and the new field values.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against (e.g. USMF); use a sandbox environment first.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -123,5 +132,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

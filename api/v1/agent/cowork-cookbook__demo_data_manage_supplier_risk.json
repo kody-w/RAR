@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_manage_supplier_risk",
   "name": "Manage supplier risk Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_manage_supplier_risk",
-  "rappid": "rappid:@cowork-cookbook/demo_data_manage_supplier_risk:9e4266e93329ea7697b84b93abcdee8dbbc7c5fd1ba3f124645c7d21d093d6c7",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_manage_supplier_risk:607cf1705cf43481463ac36fdd9a4f343f8e4f689164a918879f6f34561b223a",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_manage_supplier_risk:9e4266e93329ea7697b84b93abcdee8dbbc7c5fd1ba3f124645c7d21d093d6c7",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_manage_supplier_risk:9e4266e93329ea7697b84b93abcdee8dbbc7c5fd1ba3f124645c7d21d093d6c7"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for manage supplier risk in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo supplier-risk records via the Dynamics 365 ERP plugin, stages them in an Excel workbook, creates them in a sandbox legal entity, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "cfb169b1bc4974c594bb356ad2353dbf1100b0636f6d59efd61300f3b6c64c36",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "6d5446811ffe9f6554ba41678c28e20940746adf160a068f8d81c2ee9e08f9d2",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

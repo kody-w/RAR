@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/dashboard_mitigate_and_update_the_disaster_recovery_plan",
   "agent_file": "dashboard_mitigate_and_update_the_disaster_recovery_plan_agent.py",
-  "agent_sha256": "f7ba9923639ed1d3346e2dffda6a8e5463c7733c14fd3f7ae3f0354aaae2d342",
+  "agent_sha256": "536a25daf5b3be184ee645188848232a96a1840b96f9231b27903526c6fa5fe7",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardMitigateAndUpdateTheDisasterRecoveryPlan",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a self-contained interactive HTML dashboard for mitigate and update the disaster recovery plan - opens in any browser, no D365 access needed by the viewer.",
+    "description": "Pulls disaster recovery plan data from Dynamics 365 F&SCM (legal entity USMF, most recent fiscal period) read-only and saves a standalone interactive HTML dashboard with totals, inline SVG charts, sortable table, and RAG",
     "display_name": "Mitigate and update the disaster recovery plan Interactive HTML Dashboard",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "b05ddac286ed9a54",
+      "content_digest": "daafed20a47694a1",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DashboardMitigateAndUpdateTheDisasterRecoveryPlan",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "fiscal_period": {
+        "description": "Fiscal period to report on; defaults to the most recent available.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query; defaults to USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the HTML file to write, e.g. dashboard-mitigate-and-update-the-disaster-recovery-plan-2026-05-24.html.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_folder": {
+        "description": "Destination folder for the generated HTML, e.g. Documents/Cowork/output/.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

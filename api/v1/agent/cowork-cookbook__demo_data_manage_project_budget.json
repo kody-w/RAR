@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_manage_project_budget",
   "name": "Manage project budget Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_manage_project_budget",
-  "rappid": "rappid:@cowork-cookbook/demo_data_manage_project_budget:8a52cb46c06cbd032a68230597ab6abf341e16910dd0b03f2867da72a3e984f7",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_manage_project_budget:991b975541eaaf73e151ffcfa6dad598a2cf90738c2f1876d0c225c9cf4a4c70",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_manage_project_budget:8a52cb46c06cbd032a68230597ab6abf341e16910dd0b03f2867da72a3e984f7",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_manage_project_budget:8a52cb46c06cbd032a68230597ab6abf341e16910dd0b03f2867da72a3e984f7"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for manage project budget in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo project budget records in a sandbox D365 F&SCM legal entity (default USMF), stages them in an Excel workbook first, creates them, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "84a278256788bea2bb3e22736bb718d997a2f66d5b7637de3589368bed0e536e",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "f8808991a418c4a9da827ef7a523fe1f39b4d06ac51ba8819df871e7968c5dfa",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

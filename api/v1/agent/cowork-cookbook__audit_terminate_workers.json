@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_terminate_workers",
   "name": "Terminate workers Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_terminate_workers",
-  "rappid": "rappid:@cowork-cookbook/audit_terminate_workers:6b7726454a57ca832c3ef95e86105e2cf824db672c07748acc0e6ff8858c88ad",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_terminate_workers:6a1b7a765594310ecf5ba403da78a7868ffd91dc185dce848a7db08dd459242c",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_terminate_workers:6b7726454a57ca832c3ef95e86105e2cf824db672c07748acc0e6ff8858c88ad",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_terminate_workers:6b7726454a57ca832c3ef95e86105e2cf824db672c07748acc0e6ff8858c88ad"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits terminate workers records for completeness and policy compliance against rule-based checks.",
+  "description": "Audits Dynamics 365 F&SCM terminate-workers records in a given legal entity for completeness and policy compliance, returning a read-only Excel workbook with a sheet per finding category and a Summary sheet of counts.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "55fd1247d1d5ad73f763119aa7b2beff7296e992c84e5b9eed84c0883a71840e",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "250ddd93f20f28701e398da064ddb4fcd01e308ff8342ff4448323d81c2b0040",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

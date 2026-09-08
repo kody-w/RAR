@@ -1,15 +1,16 @@
 """
-Vendor Invoice Capture from Email — Watches the inbox for emails with PDF attachments that look like vendor invoices, extracts every field from the PDF, matches the vendor against USMF master data, and creates a pending vendor invoice record in Dynamics 365 F&O with the header and lines populated.
+Vendor Invoice Capture from Email — Scans the mailbox for emails with PDF attachments that look like vendor invoices, extracts header and line fields, matches the vendor in USMF, and creates pending vendor invoice records in D365 F&O, skipping duplicates.
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/vendor-invoice-capture-from-email
@@ -24,9 +25,9 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cowork-cookbook/vendor_invoice_capture_from_email',
-    "version": '2.0.0',
+    "version": '3.0.3',
     "display_name": 'Vendor Invoice Capture from Email',
-    "description": 'Watches the inbox for emails with PDF attachments that look like vendor invoices, extracts every field from the PDF, matches the vendor against USMF master data, and creates a pending vendor invoice record in Dynamics 365 F&O with the header and lines populated.',
+    "description": 'Scans the mailbox for emails with PDF attachments that look like vendor invoices, extracts header and line fields, matches the vendor in USMF, and creates pending vendor invoice records in D365 F&O, skipping duplicates.',
     "author": 'Sean Galliher and Cowork Cookbook contributors',
     "tags": ['industry_solution', 'business_process', 'prompt_skill', 'scheduled_brief', 'source_to_pay', 'intermediate', 'integration', 'dynamics_365_erp'],
     "category": 'integrations',
@@ -45,8 +46,8 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'CC-BY-4.0',
         "license_verified": True,
-        "details": {'license_note': 'Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.', 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
-        "content_digest": 'edf03ca890a66aed',
+        "details": {'license_note': "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.", 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
+        "content_digest": '8530ce0f820300bb',
     },
     "industry_context": {'deprecated': False, 'difficulty': 'intermediate', 'last_verified_on': '2026-06-05', 'mutates_data': True, 'plugin': 'dynamics-365-erp', 'process_roots': ['source-to-pay'], 'process_tags': ['source-to-pay/manage-accounts-payable/process-supplier-invoices'], 'recipe_category': 'scheduled-brief', 'recipe_type': 'prompt+skill', 'upstream_path': 'source-to-pay/vendor-invoice-capture-from-email', 'uses_skills': {'custom': ['vendor-invoice-capture'], 'ootb': ['Email', 'PDF'], 'plugin': [{'action': 'data_find_entity_type', 'plugin': 'dynamics-365-erp'}, {'action': 'data_get_entity_metadata', 'plugin': 'dynamics-365-erp'}, {'action': 'data_find_entities_sql', 'plugin': 'dynamics-365-erp'}, {'action': 'data_create_entities', 'plugin': 'dynamics-365-erp'}]}, 'verification_status': 'verified'},
     # The platforms the upstream entry targets. First-class and queryable, not
@@ -66,15 +67,15 @@ except ModuleNotFoundError:
             self.metadata = metadata
 
 
-# The toasted capability. The upstream entry supplies the WHAT; this procedure
-# is RAR's own method for that shape of work, generated by
-# @kody-w/skill_toaster_agent from the metadata we hold. No upstream text is
-# reproduced here — see the module docstring.
-_SPEC = {'archetype': 'automate', 'checks': ['Every step is idempotent and the whole run is safely retryable.', 'Failure behaviour is defined per step, and failures are loud.', 'A completion condition exists and is checked.', 'The first production run was reconciled against the manual process.'], 'confidence': 0.857, 'deliverable': 'A runnable automation with a defined trigger, per-step failure policy, an observable signal, and a reconciliation against the manual process.', 'operations': ['run', 'plan', 'checklist', 'describe'], 'params': {'subject': 'The process to automate.', 'trigger': 'Optional. What starts it — schedule, event or manual.'}, 'refined_by': 'rules', 'signals': ['tag:automation', 'tag:integration', 'tag:workflow'], 'steps': ['Run the process manually once and write down every step, including the ones people do without noticing.', 'Identify the trigger and the completion condition. An automation with no defined end does not terminate, it accumulates.', 'Make each step idempotent, so a retry is safe and a partial run can be resumed rather than restarted.', 'Decide failure behaviour per step: retry, skip, or halt. Silent failure is the expensive one.', 'Add an observable signal — a log line, a status file, a notification — so a broken run is noticed without being looked for.', 'Run it alongside the manual process until they agree, then retire the manual path deliberately.'], 'subject_label': 'process to automate', 'verb': 'Automate'}
+# The toasted capability, generated by @kody-w/skill_toaster_agent. A licensed
+# recipe entry carries the upstream recipe verbatim (with attribution) in
+# _SPEC["recipe"]; a metadata-only entry carries RAR's own method for that shape
+# of work. See the module docstring for which this is.
+_SPEC = {'archetype': 'recipe', 'checks': ['Prerequisite: Cowork session signed in with mailbox access (Outlook plugin)', 'Prerequisite: Cowork D365 ERP plugin enabled and pointed at USMF', 'Prerequisite: PDF parsing skill enabled in the session', 'Prerequisite: Optional - Cowork scheduled task to run this prompt hourly so capture is unattended', 'Output matches: A run summary of the form:\n\n> **Vendor invoice intake — INV-2026-05193**\n> - **1 new invoice email found** — Contoso Office Supplies, Inc. (vendor US-111), invoice INV-2026-05193 dated 2026-06-04.\n> - **1 record created in USMF** — pending vendor invoice header `INV-2026-05193-US111` plus all 6 line items, with quantities, unit prices, and descriptions captured from the PDF.\n> - **0 skipped as new** (prior copies were already booked and were skipped as duplicates, as expected).\n\nSubsequent runs with no new invoices return only:\n\n> `No new vendor invoices — same invoices already captured in USMF.`'], 'confidence': 1.0, 'deliverable': 'A run summary of the form:\n\n> **Vendor invoice intake — INV-2026-05193**\n> - **1 new invoice email found** — Contoso Office Supplies, Inc. (vendor US-111), invoice INV-2026-05193 dated 2026-06-04.\n> - **1 record created in USMF** — pending vendor invoice header `INV-2026-05193-US111` plus all 6 line items, with quantities, unit prices, and descriptions captured from the PDF.\n> - **0 skipped as new** (prior copies were already booked and were skipped as duplicates, as expected).\n\nSubsequent runs with no new invoices return only:\n\n> `No new vendor invoices — same invoices already captured in USMF.`', 'operations': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'params': {'context': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'legal_entity': 'The D365 F&O legal entity to create pending vendor invoices in; USMF in this recipe.', 'mailbox': 'The signed-in mailbox/inbox to scan for emails with PDF invoice attachments.', 'processed_message_ids': 'Record of message IDs already handled in prior runs so the same email is not processed twice.'}, 'recipe': {'authors': ['Sean Galliher'], 'business_value': 'Shrinks vendor-invoice intake from a manual data-entry chore to an unattended inbox scan. Each captured PDF becomes a pending invoice in USMF with header + lines pre-filled, so AP only reviews and approves instead of keying. Duplicate detection and message-ID tracking keep the same invoice from being booked twice.', 'expected_output': 'A run summary of the form:\n\n> **Vendor invoice intake — INV-2026-05193**\n> - **1 new invoice email found** — Contoso Office Supplies, Inc. (vendor US-111), invoice INV-2026-05193 dated 2026-06-04.\n> - **1 record created in USMF** — pending vendor invoice header `INV-2026-05193-US111` plus all 6 line items, with quantities, unit prices, and descriptions captured from the PDF.\n> - **0 skipped as new** (prior copies were already booked and were skipped as duplicates, as expected).\n\nSubsequent runs with no new invoices return only:\n\n> `No new vendor invoices — same invoices already captured in USMF.`', 'platform': 'Microsoft 365 Copilot Cowork', 'prerequisites': ['Cowork session signed in with mailbox access (Outlook plugin)', 'Cowork D365 ERP plugin enabled and pointed at USMF', 'PDF parsing skill enabled in the session', 'Optional - Cowork scheduled task to run this prompt hourly so capture is unattended'], 'prompt': 'Check the inbox for emails that have PDF attachments and look like vendor invoices. For each invoice PDF:\n\n1. Download the PDF attachment.\n2. Extract every available field from the invoice — vendor name, vendor account, invoice number, invoice date, due date, currency, PO reference, line items (item, description, quantity, unit price, line amount), subtotal, tax, freight/charges, and invoice total.\n3. Match the vendor against existing USMF vendors in Dynamics 365 (by vendor account if present, otherwise by name). If no confident match exists, skip the create for that invoice and record the reason.\n4. When the vendor is matched, create a pending vendor invoice record in the USMF legal entity in Dynamics 365 F&O using the D365 ERP data tools. Populate the header and lines with every value captured from the PDF — do not invent fields that are not present on the invoice.\n5. Avoid duplicates: before creating, check whether a pending vendor invoice already exists in USMF for that vendor + invoice number, and skip if so. Also track processed message IDs across runs so the same email is not handled twice.\n6. At the end of the run, summarize: how many invoice emails were found, how many records were created, and how many were skipped (with the reason).\n\nIf no invoice emails with PDF attachments are found, exit quietly with a one-line "no new vendor invoices" note.', 'steps': ['Open a fresh Cowork task and paste the prompt body verbatim.', '(Optional) Configure a Cowork scheduled task — `Hourly vendor invoice intake` is the pattern used in the verification run — so the recipe runs unattended every hour.', 'Approve the always-allowed actions list on the first run (Send email, Update record). After approval the recipe runs unattended.', 'Inspect the Output panel for the extracted PDF copy and the run summary card.', 'Open USMF → Accounts payable → Vendor invoices → Pending vendor invoices and confirm the new header and lines.'], 'tenant_caveat': '', 'verified_against': 'm365.cloud.microsoft 2026-06-05', 'what_it_does': 'On every run the recipe:\n\n1. Scans the connected mailbox for emails with PDF attachments that look like vendor invoices.\n2. Downloads each PDF and extracts vendor identity, header dates and totals, currency, PO reference, and full line detail (item, description, quantity, unit price, line amount).\n3. Matches the extracted vendor against USMF vendors in D365 (by vendor account first, then by name). If no confident match exists, the create is skipped and the reason recorded.\n4. Creates a pending `VendorInvoiceHeader` plus matching `VendorInvoiceLine` rows in USMF — populating only fields actually present on the PDF.\n5. Guards against duplicates two ways — a pre-create lookup on vendor + invoice number, and a persisted set of processed message IDs across runs.\n6. Emits a run summary: emails found, records created, and skips with reasons.\n\nIf the inbox has no new invoice emails the recipe exits with a one-line `no new vendor invoices` note so scheduled runs stay quiet.'}, 'refined_by': 'claude-opus-5', 'refinement': {'description': 'Scans the mailbox for emails with PDF attachments that look like vendor invoices, extracts header and line fields, matches the vendor in USMF, and creates pending vendor invoice records in D365 F&O, skipping duplicates.', 'example_request': 'Check my inbox for new vendor invoice PDFs and create the pending vendor invoices in USMF.', 'inputs': [{'description': 'The signed-in mailbox/inbox to scan for emails with PDF invoice attachments.', 'name': 'mailbox'}, {'description': 'The D365 F&O legal entity to create pending vendor invoices in; USMF in this recipe.', 'name': 'legal_entity'}, {'description': 'Record of message IDs already handled in prior runs so the same email is not processed twice.', 'name': 'processed_message_ids'}], 'model': 'claude-opus-5', 'when_to_use': 'Call when the user wants unattended or on-demand capture of vendor invoices arriving as PDF email attachments into pending vendor invoices in USMF.'}, 'signals': ['recipe:prompt', 'refined'], 'steps': ['Open a fresh Cowork task and paste the prompt body verbatim.', '(Optional) Configure a Cowork scheduled task — `Hourly vendor invoice intake` is the pattern used in the verification run — so the recipe runs unattended every hour.', 'Approve the always-allowed actions list on the first run (Send email, Update record). After approval the recipe runs unattended.', 'Inspect the Output panel for the extracted PDF copy and the run summary card.', 'Open USMF → Accounts payable → Vendor invoices → Pending vendor invoices and confirm the new header and lines.'], 'subject_label': 'context for the recipe', 'verb': 'Run'}
 
 
 class VendorInvoiceCaptureFromEmail(BasicAgent):
-    """Automate agent, toasted from an aggregated upstream entry."""
+    """Run agent, toasted from an aggregated upstream entry."""
 
     def __init__(self):
         self.name = 'VendorInvoiceCaptureFromEmail'
@@ -84,7 +85,7 @@ class VendorInvoiceCaptureFromEmail(BasicAgent):
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
-                "properties": {'operation': {'description': 'What to do: run, plan, checklist, describe.', 'enum': ['run', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'subject': {'description': 'The process to automate.', 'type': 'string'}, 'trigger': {'description': 'Optional. What starts it — schedule, event or manual.', 'type': 'string'}},
+                "properties": {'context': {'description': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'type': 'string'}, 'legal_entity': {'description': 'The D365 F&O legal entity to create pending vendor invoices in; USMF in this recipe.', 'type': 'string'}, 'mailbox': {'description': 'The signed-in mailbox/inbox to scan for emails with PDF invoice attachments.', 'type': 'string'}, 'operation': {'description': 'What to do: run, prompt, plan, checklist, describe.', 'enum': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'processed_message_ids': {'description': 'Record of message IDs already handled in prior runs so the same email is not processed twice.', 'type': 'string'}},
                 "required": ["operation"],
             },
         }
@@ -156,12 +157,86 @@ class VendorInvoiceCaptureFromEmail(BasicAgent):
         ]
         return lines
 
+    # ── recipe entries: the upstream recipe, verbatim, deterministic ─────
+
+    def _recipe_context(self, kwargs):
+        extras = []
+        subject = self._subject(kwargs)
+        if subject:
+            extras.append(f"subject: {subject}")
+        for key in _SPEC["params"]:
+            value = str(kwargs.get(key) or "").strip()
+            if value:
+                extras.append(f"{key}: {value}")
+        return extras
+
+    def _recipe_prompt(self, kwargs):
+        r = _SPEC["recipe"]
+        lines = [r["prompt"]]
+        extras = self._recipe_context(kwargs)
+        if extras:
+            lines += ["", "Context supplied by the caller:"] + [f"- {e}" for e in extras]
+        return lines
+
+    def _recipe_attribution(self):
+        src = __manifest__["source"]
+        r = _SPEC["recipe"]
+        who = ", ".join(r.get("authors") or []) or __manifest__["author"]
+        return [
+            f"Recipe: {__manifest__['display_name']} — by {who}, {src['source_name']} "
+            f"({src['license']}). Source: {src['upstream_url']}",
+        ]
+
+    def _perform_recipe(self, op, kwargs):
+        r = _SPEC["recipe"]
+        ref = _SPEC.get("refinement") or {}
+        if op == "prompt":
+            return "\n".join(self._recipe_prompt(kwargs) + [""] + self._recipe_attribution())
+        if op == "plan":
+            lines = [f"Steps for {__manifest__['display_name']} on {r['platform']}:"]
+            lines += [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "checklist":
+            lines = ["Before you run it:"] + [f"  [ ] {p}" for p in r["prerequisites"]]
+            if r.get("expected_output"):
+                lines += ["", "Done when:", f"  [ ] {r['expected_output']}"]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "describe":
+            lines = self._provenance()
+            if ref.get("when_to_use"):
+                lines += ["", f"When to use: {ref['when_to_use']}"]
+            if ref.get("example_request"):
+                lines += [f"Ask for it like: {ref['example_request']}"]
+            if ref.get("inputs"):
+                lines += ["", "It will ask you for:"] + [f"  - {i['name']}: {i['description']}" for i in ref["inputs"]]
+            if r.get("business_value"):
+                lines += ["", f"Why it matters: {r['business_value']}"]
+            return "\n".join(lines)
+        if op == "run":
+            lines = [f"{__manifest__['display_name']} — run on {r['platform']}", ""]
+            if r.get("what_it_does"):
+                lines += [r["what_it_does"], ""]
+            lines += [f"Prompt (paste into {r['platform']}):", ""] + self._recipe_prompt(kwargs) + [""]
+            lines += ["Procedure:"] + [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)] + [""]
+            lines += ["Acceptance checks:"] + [f"  [ ] {c}" for c in _SPEC["checks"]] + [""]
+            lines += [f"Deliverable: {_SPEC['deliverable']}", ""]
+            if r.get("tenant_caveat"):
+                lines += [f"Verified upstream: {r['tenant_caveat']}", ""]
+            return "\n".join(lines + self._recipe_attribution())
+        return (
+            f"Unknown operation {op!r}. Valid operations: "
+            + ", ".join(_SPEC["operations"])
+        )
+
     # ── entry point ─────────────────────────────────────────────────────
 
     def perform(self, **kwargs):
         """Run the toasted capability. Always returns a string."""
         op = str(kwargs.get("operation") or "run").strip().lower()
         subject = self._subject(kwargs)
+
+        if _SPEC.get("recipe"):
+            return self._perform_recipe(op, kwargs)
 
         if op == "describe":
             return "\n".join(self._provenance())

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/what_to_use_when",
   "agent_file": "what_to_use_when_agent.py",
-  "agent_sha256": "ad03b72ad9729dff9de3030e89da9b9ec4e10c326d6a8685d0557e30f5eafacf",
+  "agent_sha256": "e80b02d38ecd766df8a02832be60359de48e852c670e6be8764e72cf25538337",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WhatToUseWhen",
   "host_dependencies": [],
@@ -38,7 +38,7 @@
       "copilot",
       "routing"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "WhatToUseWhen",
   "schema": "rapp-agent-lock/1.0",
@@ -68,5 +68,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

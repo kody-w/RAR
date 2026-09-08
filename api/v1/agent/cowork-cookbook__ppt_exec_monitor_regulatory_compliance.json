@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_monitor_regulatory_compliance",
   "name": "Monitor regulatory compliance Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_monitor_regulatory_compliance",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_monitor_regulatory_compliance:8f2914cf6283da60ad6a24a05792e1b20f029aed2386d77caf728ce04f77ef8e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_monitor_regulatory_compliance:091bc73aa044ad62ccec928c2251aafcb90203ea3e26f34a6275f0b5bb0393ce",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_monitor_regulatory_compliance:8f2914cf6283da60ad6a24a05792e1b20f029aed2386d77caf728ce04f77ef8e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_monitor_regulatory_compliance:8f2914cf6283da60ad6a24a05792e1b20f029aed2386d77caf728ce04f77ef8e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on monitor regulatory compliance status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on regulatory compliance status from Dynamics 365 ERP data for a legal entity, with KPI, trend, red-flag, action, and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "e5a2fac8660854bc7be558be52d5d1d26137bab96c21a65a1317019252972494",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "8b0ec5e9e60edae287f89dc5bacabecb5071f45e11ed9964788470961eb3698f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

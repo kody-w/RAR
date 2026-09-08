@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_asses_worker_performance",
   "name": "Asses worker performance Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_asses_worker_performance",
-  "rappid": "rappid:@cowork-cookbook/audit_asses_worker_performance:8b59370c393c9455c6b6bf2ae2d74e175d91a94afc36ce2e795f06f7847c8412",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_asses_worker_performance:14bd105704617d2e8c97d796a816bf08ef0cd37daa13957a6f5f50e11e173a9c",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_asses_worker_performance:8b59370c393c9455c6b6bf2ae2d74e175d91a94afc36ce2e795f06f7847c8412",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_asses_worker_performance:8b59370c393c9455c6b6bf2ae2d74e175d91a94afc36ce2e795f06f7847c8412"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits asses worker performance records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of worker performance records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary sheet of counts.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "05c36eee21555aa98f256a8ce24f3b6a58085318e084b9b3be009f7f8feacd37",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "f4383a7549df8524d4b1dc680a9213375a660dbfd40c04b6820661c037ea1f0a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

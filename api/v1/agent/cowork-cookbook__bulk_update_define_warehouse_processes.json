@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_define_warehouse_processes",
   "name": "Define warehouse processes Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_define_warehouse_processes",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_define_warehouse_processes:62243dfb9a72735ab188b271a53af47d2c8ff64ebd296af017f4acaca9005c65",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_define_warehouse_processes:6d9ea803cda72c3827ff60a5ce9e79ebc34c9d94795777731d3bc54dbf102cb7",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_define_warehouse_processes:62243dfb9a72735ab188b271a53af47d2c8ff64ebd296af017f4acaca9005c65",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_define_warehouse_processes:62243dfb9a72735ab188b271a53af47d2c8ff64ebd296af017f4acaca9005c65"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across define warehouse processes records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 F&SCM warehouse process records from a caller-supplied list of record IDs and new values, producing a dry-run preview workbook for approval before committing changes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "313a3e051a63339cc233cbaea75352e90ce90a126e848f191daeaac571780ae5",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "727ada7d0e32a1a5ab6850c84fba6a4fd36d65ab0a93f2503bd5c0d6b2551bc5",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

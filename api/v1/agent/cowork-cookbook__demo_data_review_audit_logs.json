@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_review_audit_logs",
   "name": "Review audit logs Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_review_audit_logs",
-  "rappid": "rappid:@cowork-cookbook/demo_data_review_audit_logs:1406013183fbb87eb51f3cacca99a864234667452a824a3f3dd66245fd467432",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_review_audit_logs:115f61748573221047d794a12c965a332a6e174a1e526532c0897e025bd943ad",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_review_audit_logs:1406013183fbb87eb51f3cacca99a864234667452a824a3f3dd66245fd467432",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_review_audit_logs:1406013183fbb87eb51f3cacca99a864234667452a824a3f3dd66245fd467432"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for review audit logs in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo review audit log records against a sandbox D365 legal entity (default USMF), stages them in a dated Excel workbook, creates them in D365, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "82dcc202bb7632e19189ca273e91aa14a2bb576efe793efa33c474594a85cbc7",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "483c1a976f9381cb36644d4384e7cffa4ba8ecdec89fec5196be7b2c2e6fd4e2",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

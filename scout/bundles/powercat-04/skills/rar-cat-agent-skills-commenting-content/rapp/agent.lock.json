@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/commenting_content",
   "agent_file": "commenting_content_agent.py",
-  "agent_sha256": "187b091fcba2f8fb7bbd54d2846dd5fa025aafe300aaf05cb4e79baa06416c15",
+  "agent_sha256": "896dfb9f478e7ef61d68fb5008dbe8c805c595a8217abc0e5c3a29e685322821",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommentingContent",
   "host_dependencies": [],
@@ -37,7 +37,7 @@
       "documents",
       "productivity"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "CommentingContent",
   "schema": "rapp-agent-lock/1.0",
@@ -67,5 +67,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

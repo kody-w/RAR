@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/stalled_opportunity_reengagement",
   "agent_file": "stalled_opportunity_reengagement_agent.py",
-  "agent_sha256": "d72ba0991e8a63405ed186a11abd1b61f12ff1ee7071942182aea42a0de7f8e5",
+  "agent_sha256": "17f32191335095eaf9ba2f912ebf6a89d1a43d84ac5cc258b07d7f5b9f6bdf10",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StalledOpportunityReengagement",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Finds open opportunities with no recent activity and drafts a tailored re-engagement approach for each, so dormant deals get a deliberate next step.",
+    "description": "Builds a read-only re-engagement list of your open, owner-assigned Dynamics 365 Sales opportunities with no activity beyond a dormancy threshold, returning an Excel workbook and a Teams-ready summary.",
     "display_name": "Stalled Opportunity Re-Engagement List",
     "industry_context": {
       "deprecated": false,
@@ -60,9 +60,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "2c6fcf710a3498b4",
+      "content_digest": "2609271644f74e10",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -86,28 +86,41 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "StalledOpportunityReengagement",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "dormancy_threshold_days": {
+        "description": "Days without activity before an opportunity counts as stalled; defaults to 45.",
+        "type": "string"
+      },
+      "dynamics_environment": {
+        "description": "The Dynamics 365 Sales environment the plugin is bound to for analysis.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_workbook_name": {
+        "description": "Excel file name for the results; defaults to 'stalled-opportunities.xlsx'.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "owner": {
+        "description": "The opportunity owner to filter on — the requesting user.",
         "type": "string"
       }
     },
@@ -116,5 +129,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

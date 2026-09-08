@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_plan_events",
   "name": "Plan events Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_plan_events",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_plan_events:7cab0aa944d0031c9a50a9fdaef413b129b5d50c8c2e60e03629561ecdcc0198",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_plan_events:e1b27c16f0acda3fe7b73adcb871da8e9a6e472d8c01634943368020e8c7cc70",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_plan_events:7cab0aa944d0031c9a50a9fdaef413b129b5d50c8c2e60e03629561ecdcc0198",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_plan_events:7cab0aa944d0031c9a50a9fdaef413b129b5d50c8c2e60e03629561ecdcc0198"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing plan events for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on plan events for a responsible owner from Dynamics 365 F&SCM (legal entity USMF): top 5 items by impact today, anomalies vs the 7-day rolling average, and recommended next actions, saved as an em",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "880506c451846a19f3d36b2c22778db603efb30f5ef58bc9f8ee2ed7f46ac90f",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "7964ca7942789eea0ee7bff34bf9821594c35e19ea44ac0b49377983e34c90e2",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

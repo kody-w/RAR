@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale",
   "agent_file": "analyze_and_optimize_your_onedrive_at_scale_agent.py",
-  "agent_sha256": "cde6df9da0973b3b0e0482eddcd4521ca5b1e33a1d3701ec7ff0cd552170fd14",
+  "agent_sha256": "dc447a65ffb37189aba9879913de5c649e3a9c93468f03500d2f2729fa92bbcb",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AnalyzeAndOptimizeYourOnedriveAtScale",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Turn a sprawling OneDrive into a structured catalog you can actually act on.",
+    "description": "Catalogs and categorizes all files in the user's OneDrive, produces a six-screen interactive HTML overview of file disposition, age, relevancy, customer and product, and proposes a reorganization and deletion plan for ap",
     "display_name": "Analyze and optimize your OneDrive at scale",
     "industry_context": {
       "deprecated": false,
@@ -46,9 +46,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c0e09e99d98ca30f",
+      "content_digest": "a282f3bd0b80e854",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -71,28 +71,25 @@
       "advanced",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AnalyzeAndOptimizeYourOnedriveAtScale",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "data_source": {
-        "description": "Optional. Where the evidence comes from.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The question to answer, stated as a question.",
         "type": "string"
       }
     },
@@ -101,5 +98,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

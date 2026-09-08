@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_develop_product_roadmap",
   "name": "Develop product roadmap Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_develop_product_roadmap",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_develop_product_roadmap:c296dee0023072db2850a2edefea47707112d363ab024333ae31a395d43cbe4b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_develop_product_roadmap:88187772ccef4e24b2ad55c8b0eb7fe5b6ac4e3a5843c976061de9b490e01e6b",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_develop_product_roadmap:c296dee0023072db2850a2edefea47707112d363ab024333ae31a395d43cbe4b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_develop_product_roadmap:c296dee0023072db2850a2edefea47707112d363ab024333ae31a395d43cbe4b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of develop product roadmap status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing develop product roadmap status from Dynamics 365 F&SCM via the Cowork D365 ERP plugin, with KPI tiles, a RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "048d36a6b6ef5b17968eca32e0b96237deba6ce59e7929d028280fa20e577bba",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "c121ea3847757a4f7fc265cd9fc6ecdfdaafb6cfe2ae6b5679500bf7bf2b42c5",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

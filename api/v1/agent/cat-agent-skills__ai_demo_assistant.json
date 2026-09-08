@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__ai_demo_assistant",
   "name": "AI Demo Assistant",
   "rar_name": "@cat-agent-skills/ai_demo_assistant",
-  "rappid": "rappid:@cat-agent-skills/ai_demo_assistant:e83aa49781ba13ee79f91dbbb240de49330efbb1d8af9012044d5f89650c77df",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/ai_demo_assistant:5c71c3d0c8523f0266f9481cb146ba58dfdfbd2761d3bffca4ae288b694a3fca",
+  "_migrated_from": "rappid:@cat-agent-skills/ai_demo_assistant:e83aa49781ba13ee79f91dbbb240de49330efbb1d8af9012044d5f89650c77df",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/ai_demo_assistant:e83aa49781ba13ee79f91dbbb240de49330efbb1d8af9012044d5f89650c77df"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.1,
-  "sha256": "91fdd28e1096d53816d4397debef31b39e5539d37b57a29783db543dc51482d1",
+  "lines": 262,
+  "size_kb": 12.4,
+  "sha256": "0165c6ce3d00a88f977723874a6fb0151cd850b987b27b34359d4a8f111f09c2",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_harness_picker",
   "agent_file": "copilot_studio_harness_picker_agent.py",
-  "agent_sha256": "1517c780cf92757e91fb379b2b85ddf7d16ea2c1dac2057dae9a320cd351af59",
+  "agent_sha256": "8075c230d2a97c1096252928ca33d87849b787515ea071d1b27fbea0cd27af6d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioHarnessPicker",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "governance",
       "licensing"
     ],
-    "version": "2.1.0"
+    "version": "3.1.2"
   },
   "runtime_name": "CopilotStudioHarnessPicker",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.1.0"
+  "version": "3.1.2"
 }

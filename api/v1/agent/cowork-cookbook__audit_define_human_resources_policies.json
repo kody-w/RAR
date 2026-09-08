@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_define_human_resources_policies",
   "name": "Define human resources policies Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_define_human_resources_policies",
-  "rappid": "rappid:@cowork-cookbook/audit_define_human_resources_policies:02e9eb90ee702433bd3d3fe70eced97136620ccaac85af2c78d0fff2495fd563",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_define_human_resources_policies:9ce4455afc7040dea357c668f5842b0a8e556cb608eadb30ab44b16caa590025",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_define_human_resources_policies:02e9eb90ee702433bd3d3fe70eced97136620ccaac85af2c78d0fff2495fd563",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_define_human_resources_policies:02e9eb90ee702433bd3d3fe70eced97136620ccaac85af2c78d0fff2495fd563"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits define human resources policies records for completeness and policy compliance against rule-based checks.",
+  "description": "Audits human resources policy records in Dynamics 365 F&SCM (read-only) for a given legal entity, flagging missing required fields, stale dates, blank descriptions, inactive-entity references, and policy violations, and",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "da5a0a9d16f665a3e6a52919bf8581e4f45edd05bfe5516a1768b4bfda2a22ab",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "77f6daa3aeabbde1f47a718637be31a0e86e4c3234e4afa06a4e87d1fe3ae6d9",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

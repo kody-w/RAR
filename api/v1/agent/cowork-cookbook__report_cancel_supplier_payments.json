@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_cancel_supplier_payments",
   "name": "Cancel supplier payments Summary Report",
   "rar_name": "@cowork-cookbook/report_cancel_supplier_payments",
-  "rappid": "rappid:@cowork-cookbook/report_cancel_supplier_payments:356c918fee8e775bae1dacbde3908d19d5b5fdd482bf6ba65d1351848e91f1d1",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_cancel_supplier_payments:f947c6e36a849185e552b6ca77bcf7637dd9423d194f15c70ef33a6faf9f1fd1",
+  "_migrated_from": "rappid:@cowork-cookbook/report_cancel_supplier_payments:356c918fee8e775bae1dacbde3908d19d5b5fdd482bf6ba65d1351848e91f1d1",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_cancel_supplier_payments:356c918fee8e775bae1dacbde3908d19d5b5fdd482bf6ba65d1351848e91f1d1"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of cancel supplier payments activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of cancel supplier payments from Dynamics 365 F&SCM for a given legal entity and posted period, and outputs an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "1f4ac4b3af5d751f978647499033ebad7036161aa046e09873081017a00b3258",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "08f16b50e789c4577a309089f5751da83cc492efac45e8310172a2db2babd894",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

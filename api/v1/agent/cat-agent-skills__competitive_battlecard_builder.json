@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__competitive_battlecard_builder",
   "name": "Competitive Battlecard Builder",
   "rar_name": "@cat-agent-skills/competitive_battlecard_builder",
-  "rappid": "rappid:@cat-agent-skills/competitive_battlecard_builder:bcf7b1584e879d861bd8e625f051d565b9f2e68612924dd6803158e903a9a2a6",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/competitive_battlecard_builder:c3cce0bb200b7d1d6c994cfa97ee16c825cdbb63db55bb7e73d33f715e510e3d",
+  "_migrated_from": "rappid:@cat-agent-skills/competitive_battlecard_builder:bcf7b1584e879d861bd8e625f051d565b9f2e68612924dd6803158e903a9a2a6",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/competitive_battlecard_builder:bcf7b1584e879d861bd8e625f051d565b9f2e68612924dd6803158e903a9a2a6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -22,9 +24,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.5,
-  "sha256": "0b7356f6516b4afaabbed99ae04111381a60d133eeba92effdad8545f2f05ddd",
+  "lines": 262,
+  "size_kb": 12.8,
+  "sha256": "c2ecfa863e2631bbee32804ad0b3e1d10b4af20af55d7938b5d97c88c56e92f8",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

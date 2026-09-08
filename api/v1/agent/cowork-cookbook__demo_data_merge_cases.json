@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_merge_cases",
   "name": "Merge cases Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_merge_cases",
-  "rappid": "rappid:@cowork-cookbook/demo_data_merge_cases:187307239828ac9a2d09dfa029b37892393cc08a6ec17318a0ce067419f8d692",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_merge_cases:52e61a2084a0efeb8d379faa3877b4d1ddd05e441d6dedfde572268a9febb64a",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_merge_cases:187307239828ac9a2d09dfa029b37892393cc08a6ec17318a0ce067419f8d692",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_merge_cases:187307239828ac9a2d09dfa029b37892393cc08a6ec17318a0ce067419f8d692"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for merge cases in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo merge-case records in a sandbox D365 legal entity (default USMF), stages them in an Excel workbook first, creates them, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "ecf7f76578d245210568234cbc781874d0cec8bfd833bf0a5406db3d885b607d",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "abee098ff0d2eaa4e76991bfc1cad17220e62521db63fecf4547910fe9a6eeeb",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

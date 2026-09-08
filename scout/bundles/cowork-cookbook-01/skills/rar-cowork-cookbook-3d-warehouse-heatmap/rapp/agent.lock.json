@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/3d_warehouse_heatmap",
   "agent_file": "3d_warehouse_heatmap_agent.py",
-  "agent_sha256": "3e36cc9cc11ed1b71f7e15bdcb1719a39af69540d9cf5b0dc8ccb791e5096951",
+  "agent_sha256": "f4581a3e408052af70ae79d5b958368d75f3b3105b458c27d434db85cf862ec4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Agent3dWarehouseHeatmap",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates a self-contained 3D HTML visualization of warehouse bins colored by fill percentage or inventory value, navigable in any browser.",
+    "description": "Reads on-hand inventory by location for one warehouse in Dynamics 365 F&SCM and returns a standalone interactive 3D HTML file of bins colored by fill percentage, labeled by item count.",
     "display_name": "3D Warehouse Inventory Heatmap (HTML)",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "0496f0a57d216656",
+      "content_digest": "b41eb263135f6c3d",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,33 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "Agent3dWarehouseHeatmap",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_folder": {
+        "description": "Folder where the generated Warehouse-3D-<warehouse>-<YYYY-MM-DD>.html file is saved.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "warehouse": {
+        "description": "Which warehouse to visualize; defaults to the primary USMF warehouse (e.g. 24) if unspecified.",
         "type": "string"
       }
     },
@@ -111,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_manage_deferrals",
   "name": "Manage deferrals Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_manage_deferrals",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_manage_deferrals:83bb7f390013ac1af4e29e6ab7fe8fa6313f738a54000cf3986666a66e5ee851",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_manage_deferrals:8ee16a1b29602851009063f532d88820125d5cdddd505b4cd955308d5dd4b0e7",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_manage_deferrals:83bb7f390013ac1af4e29e6ab7fe8fa6313f738a54000cf3986666a66e5ee851",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_manage_deferrals:83bb7f390013ac1af4e29e6ab7fe8fa6313f738a54000cf3986666a66e5ee851"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of manage deferrals status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing manage deferrals status from Dynamics 365 F&SCM for a given legal entity, with header, KPI tiles, RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "77975301bdd769241dd01cdfa8801e9c7e84a100ad62ca110d80dfeeeb61e642",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "16ea3f507018aec5d50f50743f124e9ab09fb5771d1eff27d0b909fc8701ea29",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_consume_materials",
   "name": "Consume materials Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_consume_materials",
-  "rappid": "rappid:@cowork-cookbook/configure_consume_materials:845c95f9d9c6cfeba4c1b741d8e1a034d5fa12476a4bf03dcb02383003d074d0",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_consume_materials:de15cda7021203b21853c7fae939a4a7d6336e6b8a62fb8938792c7011e3c1f3",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_consume_materials:845c95f9d9c6cfeba4c1b741d8e1a034d5fa12476a4bf03dcb02383003d074d0",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_consume_materials:845c95f9d9c6cfeba4c1b741d8e1a034d5fa12476a4bf03dcb02383003d074d0"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to consume materials from an input Excel file, with validation and rollback support.",
+  "description": "Bulk-applies consume materials configuration changes in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, waits for approval, then applies changes and returns a before/af",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "70b2425548b52ac8f538ebd3d2555aa7fcd7978c9fc4ac0d944919ceb15dce8d",
+  "lines": 265,
+  "size_kb": 17.2,
+  "sha256": "270d9b22663d1c09cd717ac69bc8859fa93f1aebea992c301a8d29b51bf8563d",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

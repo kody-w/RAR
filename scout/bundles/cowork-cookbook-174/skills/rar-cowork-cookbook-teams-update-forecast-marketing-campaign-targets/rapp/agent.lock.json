@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_forecast_marketing_campaign_targets",
   "agent_file": "teams_update_forecast_marketing_campaign_targets_agent.py",
-  "agent_sha256": "f97c267193bee2f39202ca7e73a65e0df832a7ed99050b25156d7da1685dd749",
+  "agent_sha256": "867f2a8e2d8ce15e77cac3e65aeda1122d53aa228b68dee6b8a223d09ccf8aaf",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateForecastMarketingCampaignTargets",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on forecast marketing campaign targets status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes forecast marketing campaign targets from Dynamics 365 ERP for a given legal entity and saves two artifacts for review: a markdown Teams channel post and an Adaptive Card JSON; it does not post anything.",
     "display_name": "Forecast marketing campaign targets Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "cf8cd7be5d438e8d",
+      "content_digest": "89bac41943a7da32",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,33 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateForecastMarketingCampaignTargets",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "card_filename": {
+        "description": "Output Adaptive Card JSON filename, e.g. teams-update-forecast-marketing-campaign-targets-2026-05-24-card.json.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to summarize, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -112,5 +117,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

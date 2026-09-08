@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_and_surface_against_a_standard",
   "name": "Audit and surface against a standard",
   "rar_name": "@cowork-cookbook/audit_and_surface_against_a_standard",
-  "rappid": "rappid:@cowork-cookbook/audit_and_surface_against_a_standard:b74c92a9ad25179a3418f9250cc8c98803d7bc2eed3f7f0e8ebf3905dece5f83",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_and_surface_against_a_standard:857e0ff7c96ec9b5d41c2a4a06129156f61e42dc63d080c57433a3d2ab7819cd",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_and_surface_against_a_standard:b74c92a9ad25179a3418f9250cc8c98803d7bc2eed3f7f0e8ebf3905dece5f83",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_and_surface_against_a_standard:b74c92a9ad25179a3418f9250cc8c98803d7bc2eed3f7f0e8ebf3905dece5f83"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "analysis",
   "tags": [
@@ -20,16 +22,16 @@
     "read_only",
     "analysis"
   ],
-  "description": "Apply a brand guide, naming convention, compliance policy, or quality standard across dozens of files - without manually reviewing each one and without risking accidental changes.",
+  "description": "Audits every file in a specified folder against a named standard and returns a sortable Excel report of violations by severity (Critical/Major/Minor) with impact and recommended fixes; makes no changes to files.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "451d4d8183d19ad8bcd8db61b032ca203d7cbcac77f4af04a1411d8e18741510",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "c57c41ca65305e8cb2417f858aa4b1e445a56e9af710f4892ba5dc1a1a462f9c",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

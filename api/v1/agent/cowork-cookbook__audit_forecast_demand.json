@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_forecast_demand",
   "name": "Forecast demand Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_forecast_demand",
-  "rappid": "rappid:@cowork-cookbook/audit_forecast_demand:c8102bfda06ad1451762f1135d47df4288b7db2c65e3e3cdf07604b6a8d6151e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_forecast_demand:d6169f307ae08e46b2dece7a426ca4e3e94892c0007f22ffc5aa9d9cdb608947",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_forecast_demand:c8102bfda06ad1451762f1135d47df4288b7db2c65e3e3cdf07604b6a8d6151e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_forecast_demand:c8102bfda06ad1451762f1135d47df4288b7db2c65e3e3cdf07604b6a8d6151e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits forecast demand records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of Dynamics 365 forecast demand records for a legal entity, returning an Excel workbook with a sheet per finding category and a Summary sheet of counts.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "ecf4ad3901a981b7887a78d3fd2c892487855862eb1b3eba0bb473bc233d2c37",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "99117e89c675879a673830188d20e90f0cc0e762a68dc82024056e890318eded",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

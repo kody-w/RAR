@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/audit_rework_defective_inventory",
   "agent_file": "audit_rework_defective_inventory_agent.py",
-  "agent_sha256": "47e6880ec4b802c8e1b89b1fb8d13f901bd8cf0863474bdcf37326fa75ac5f7a",
+  "agent_sha256": "a7ce6167f777564be0e90023156cce20d1aefaf05a4144391ea87acad7c0e809",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditReworkDefectiveInventory",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits rework defective inventory records for completeness and policy compliance against rule-based checks.",
+    "description": "Audits rework defective inventory records in Dynamics 365 F&SCM (legal entity USMF) read-only for missing fields, stale dates, blank descriptions, inactive-entity references, and policy violations, returning an Excel wor",
     "display_name": "Rework defective inventory Completeness Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "44ba930729715ef3",
+      "content_digest": "e9dd3ce04145aff4",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "AuditReworkDefectiveInventory",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_window": {
+        "description": "Date range used to judge stale dates; USMF demo data is mostly FY2017.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to audit, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. audit-rework-defective-inventory-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

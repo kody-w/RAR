@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_define_operating_hours_and_schedule",
   "agent_file": "bulk_update_define_operating_hours_and_schedule_agent.py",
-  "agent_sha256": "96fed5d82271cfffa186f23a1df15c34b8bafefdf81619c820d67a35c7f739b9",
+  "agent_sha256": "b875cd6346081b8151986812c4fd1af4f2a83e45a0c09879ad7674e9cd489969",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateDefineOperatingHoursAndSchedule",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across define operating hours and schedule records from an input list, with dry-run preview before commit.",
+    "description": "Applies a bulk field update to operating-hours/schedule records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied list of record IDs and new values, with a dry-run preview workbook and approval ga",
     "display_name": "Define operating hours and schedule Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "aa0daceea3994513",
+      "content_digest": "0f981273a5e6820d",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdateDefineOperatingHoursAndSchedule",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit approval after reviewing the dry-run preview workbook, required before changes are applied.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against; defaults to USMF sandbox.",
+        "type": "string"
+      },
+      "new_values": {
+        "description": "The new field value(s) to apply to those records.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "record_ids": {
+        "description": "List of operating hours/schedule record IDs to update.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

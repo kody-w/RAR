@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/configure_ensure_client_approval_and_sign_off",
   "agent_file": "configure_ensure_client_approval_and_sign_off_agent.py",
-  "agent_sha256": "4146c30a1bcd12f98d02cfeecfb34fe1f3eff157d12ebc76c4c99739f78aa72d",
+  "agent_sha256": "6ee04721ce0b155fb87a5130f26f9d169101cb38fe05411c75c235f82219f3d4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureEnsureClientApprovalAndSignOff",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk configuration change to ensure client approval and sign-off from an input Excel file, with validation and rollback support.",
+    "description": "Validates an attached Excel file of client approval/sign-off configuration rows against Dynamics 365 F&SCM (legal entity USMF), returns a validation workbook, then after your approval applies the changes and returns a be",
     "display_name": "Ensure client approval and sign-off Configuration Bulk Setup",
     "industry_context": {
       "deprecated": false,
@@ -67,9 +67,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "8c59a3aaa163d652",
+      "content_digest": "8f53458923555f26",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -93,28 +93,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ConfigureEnsureClientApprovalAndSignOff",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval_confirmation": {
+        "description": "Your explicit go-ahead after reviewing the validation workbook, before any changes are applied.",
+        "type": "string"
+      },
+      "configuration_excel_file": {
+        "description": "Attached Excel file with one row per approval/sign-off target and the new field values.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "environment": {
+        "description": "Target environment; sandbox first before production.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against (default USMF).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -123,5 +136,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

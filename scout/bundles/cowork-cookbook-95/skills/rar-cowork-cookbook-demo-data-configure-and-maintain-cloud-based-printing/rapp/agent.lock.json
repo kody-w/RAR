@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/demo_data_configure_and_maintain_cloud_based_printing",
   "agent_file": "demo_data_configure_and_maintain_cloud_based_printing_agent.py",
-  "agent_sha256": "e4456c6e51b07f0c8c73ad505286edc5a26d6cc7cd57fec3f96c9fe74c564255",
+  "agent_sha256": "35a2b4a979fe7072705d84652645c9a7624ddfe44a2d53fdb92699e2baf7bce8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoDataConfigureAndMaintainCloudBasedPrinting",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates and creates realistic demo records for configure and maintain cloud-based printing in a sandbox tenant for training and pilot scenarios.",
+    "description": "Generates 25 realistic demo records for cloud-based printing configuration in a Dynamics 365 F&SCM sandbox legal entity, stages them in an Excel workbook, creates them, and returns each new record's primary key.",
     "display_name": "Configure and maintain cloud-based printing Demo Data Generator",
     "industry_context": {
       "deprecated": false,
@@ -51,9 +51,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "1e846f414e9978dd",
+      "content_digest": "2f1e0a814249be92",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -77,28 +77,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DemoDataConfigureAndMaintainCloudBasedPrinting",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Sandbox D365 legal entity to target (default USMF); must not be production.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "record_count": {
+        "description": "Number of demo records to generate (default 25).",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "workbook_name": {
+        "description": "Excel staging file name, e.g. demo-data-configure-and-maintain-cloud-based-printing-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -107,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

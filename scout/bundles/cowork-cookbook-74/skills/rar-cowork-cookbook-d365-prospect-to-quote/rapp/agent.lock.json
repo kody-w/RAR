@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/d365_prospect_to_quote",
   "agent_file": "d365_prospect_to_quote_agent.py",
-  "agent_sha256": "69dea2746bbd3920e8b6b2b7448aa692cacf4dab7c9d0f9c019dd1b3d79f3f16",
+  "agent_sha256": "03294391effeefcd53ae10f6fec57d917d71eda37b5c1b73eccf44e8b26b3d5b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ProspectToQuote",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "A Dynamics 365 Finance & Supply Chain Management expert scoped to the Prospect to quote end-to-end process - covers 6 L2 areas and 22 L3 processes from the Microsoft Business Process Catalog.",
+    "description": "Answers Dynamics 365 Finance & Supply Chain Management questions scoped to the Prospect to Quote process (6 L2 areas, 22 L3 processes), using USMF legal entity conventions via the D365 ERP plugin.",
     "display_name": "D365 Prospect to quote Expert",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "6bcc88d358dc10c9",
+      "content_digest": "d18f96e700847ad6",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,33 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "D365ProspectToQuote",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity context; defaults to USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "question": {
+        "description": "The prospect-to-quote question or task the user wants help with.",
         "type": "string"
       }
     },
@@ -111,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

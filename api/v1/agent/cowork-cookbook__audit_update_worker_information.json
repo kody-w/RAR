@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_update_worker_information",
   "name": "Update worker information Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_update_worker_information",
-  "rappid": "rappid:@cowork-cookbook/audit_update_worker_information:d0fc7f81c1335ce1438511fe2f73649d93fb3e8f92c7c71f59e0e45e7aee702d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_update_worker_information:0d2a57bc48c95e49a3b3a795ae8c547b39ba9153f2103c8d769c4fb6d44a2c0b",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_update_worker_information:d0fc7f81c1335ce1438511fe2f73649d93fb3e8f92c7c71f59e0e45e7aee702d",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_update_worker_information:d0fc7f81c1335ce1438511fe2f73649d93fb3e8f92c7c71f59e0e45e7aee702d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits update worker information records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of update worker information records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook of findings by category plus a summary sheet.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "84551f1866630092496b3ab51c6872316ddc2561553eb2eb7e0a2c46c6edc1d7",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "c6f5ed36ae5a4a99870807d9e84301c622829e1912e6b36ec5d9458f375247c9",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

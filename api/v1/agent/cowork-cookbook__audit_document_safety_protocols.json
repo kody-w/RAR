@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_document_safety_protocols",
   "name": "Document safety protocols Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_document_safety_protocols",
-  "rappid": "rappid:@cowork-cookbook/audit_document_safety_protocols:1a0353585d1f45a92f86973b0ec56fc943498d5453205d4d1e41488a922fd169",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_document_safety_protocols:7770a94f7f59e8a381d5a6f10397900fe3199d8e7621952b7dd257498788f467",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_document_safety_protocols:1a0353585d1f45a92f86973b0ec56fc943498d5453205d4d1e41488a922fd169",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_document_safety_protocols:1a0353585d1f45a92f86973b0ec56fc943498d5453205d4d1e41488a922fd169"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits document safety protocols records for completeness and policy compliance against rule-based checks.",
+  "description": "Read-only audit of document safety protocols records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary sheet of counts.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "cf33b25ab9808a54cd17278af3e668cfe9ce074035d3a10137c33dbb6619f5d3",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "86031a57a192d0e6a3b03044467ad7d64768dcdff42b10cff4d5e858a9471691",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

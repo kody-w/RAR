@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/global_greenwashing_claim_auditor",
   "agent_file": "global_greenwashing_claim_auditor_agent.py",
-  "agent_sha256": "3899d6d4b21a00ce391389c46b6172786c9e8e3023f60b715765165d5343d9fe",
+  "agent_sha256": "37db76bce7c6b135cba2ed0f19ec2c7c15eae8f60f3cb4868d2325f5cff883e5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GlobalGreenwashingClaimAuditor",
   "host_dependencies": [],
@@ -44,7 +44,7 @@
       "united_kingdom",
       "documents"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "GlobalGreenwashingClaimAuditor",
   "schema": "rapp-agent-lock/1.0",
@@ -74,5 +74,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

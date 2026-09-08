@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/dashboard_correct_ledger_vouchers",
   "agent_file": "dashboard_correct_ledger_vouchers_agent.py",
-  "agent_sha256": "81d8eb5118593f8674df9e42fa9ee08e8cbca2ae5663f4dab94abfd8912d03ec",
+  "agent_sha256": "8558856e50b1dc20b9d88ab687c8527617f88a0db9f26f416d17d14bb78e2efa",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardCorrectLedgerVouchers",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a self-contained interactive HTML dashboard for correct ledger vouchers - opens in any browser, no D365 access needed by the viewer.",
+    "description": "Pulls correct ledger vouchers data from Dynamics 365 F&SCM for a given legal entity and fiscal period and writes a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the output folder, r",
     "display_name": "Correct ledger vouchers Interactive HTML Dashboard",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "41a5b126380bb783",
+      "content_digest": "3e0416b7f38d1787",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DashboardCorrectLedgerVouchers",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "fiscal_period": {
+        "description": "Fiscal period to pull; defaults to the most recent available.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the HTML file to write, e.g. dashboard-correct-ledger-vouchers-2026-05-24.html.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_folder": {
+        "description": "Folder where the HTML file is saved (Documents/Cowork/output).",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

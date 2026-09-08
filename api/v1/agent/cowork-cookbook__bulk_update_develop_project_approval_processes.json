@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_develop_project_approval_processes",
   "name": "Develop project approval processes Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_develop_project_approval_processes",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_develop_project_approval_processes:1bc52b88cf7d3ebfa99e30de6e4d1b276dfebc9cdcdd0aa188374cfb8fe4a8fa",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_develop_project_approval_processes:67ff3c1ee24ca9375a76f693bf4b92f0c3c91b8553f0ac9b1fe2a08b778cfaa4",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_develop_project_approval_processes:1bc52b88cf7d3ebfa99e30de6e4d1b276dfebc9cdcdd0aa188374cfb8fe4a8fa",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_develop_project_approval_processes:1bc52b88cf7d3ebfa99e30de6e4d1b276dfebc9cdcdd0aa188374cfb8fe4a8fa"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across develop project approval processes records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to develop project approval processes records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, producing a dry-run preview workbook, pausing for approval, the",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "d8d26ca8ede4c587129003026c05d28be52c78c9eeca92e79f700c7e2680f5fa",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "34c5ce97f9790115e9da887c0e8ae34169e0dbe2fad02d0927ba7d23b1588907",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

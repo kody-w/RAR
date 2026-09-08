@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_define_organizational_structure",
   "agent_file": "adaptive_card_define_organizational_structure_agent.py",
-  "agent_sha256": "94005c733c2b325ec32c47282fe11342a43e4ebc48466185a9d31c10021077bd",
+  "agent_sha256": "c8969fea9d587f161b729a3503a8816f3044d8f7288eb0aa5b9b18a7785cd0db",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDefineOrganizationalStructure",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a reusable Adaptive Card JSON snapshot of define organizational structure status for embedding in dashboards, emails, or Teams.",
+    "description": "Generates a read-only Adaptive Card JSON file summarizing organizational-structure status from Dynamics 365 F&SCM for a given legal entity, with KPI tiles, RAG row, and action buttons.",
     "display_name": "Define organizational structure Status Adaptive Card",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "8fc94787f9c893f4",
+      "content_digest": "e86d953023e6ca10",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AdaptiveCardDefineOrganizationalStructure",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "constraints": {
-        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+      "as_of_date": {
+        "description": "Date/timestamp shown in the card header and used in the filename.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report on, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being designed.",
+      "output_filename": {
+        "description": "Name of the Adaptive Card JSON file to produce, e.g. adaptive-card-define-organizational-structure-2026-05-24-card.json.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

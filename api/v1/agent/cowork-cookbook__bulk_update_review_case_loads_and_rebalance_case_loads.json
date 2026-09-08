@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_review_case_loads_and_rebalance_case_loads",
   "name": "Review case loads and rebalance case loads Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_review_case_loads_and_rebalance_case_loads",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_review_case_loads_and_rebalance_case_loads:124aec9cc283b76db5a0d83eabf17e7c8f5dedf69dd98d9c6595e5acd137aa10",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_review_case_loads_and_rebalance_case_loads:4fde7cce9919a0964958245da3d2d1af1e2af64ebc4d5ed1474a89921a5c2a37",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_review_case_loads_and_rebalance_case_loads:124aec9cc283b76db5a0d83eabf17e7c8f5dedf69dd98d9c6595e5acd137aa10",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_review_case_loads_and_rebalance_case_loads:124aec9cc283b76db5a0d83eabf17e7c8f5dedf69dd98d9c6595e5acd137aa10"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across review case loads and rebalance case loads records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to review/rebalance case load records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a supplied ID list, producing a dry-run preview workbook for approval before committing.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "6662cbcb751534dd7b60f22e166cf12ba697209d5cb431e05f99f510e493d640",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "0cbc9b719276e36f50d7c1a3899891f141dfb93dec53fa197ca7ea52d7737763",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

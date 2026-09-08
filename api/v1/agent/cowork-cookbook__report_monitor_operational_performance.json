@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_monitor_operational_performance",
   "name": "Monitor operational performance Summary Report",
   "rar_name": "@cowork-cookbook/report_monitor_operational_performance",
-  "rappid": "rappid:@cowork-cookbook/report_monitor_operational_performance:7e4db89d66520be597fa7245f964bfc1ed048e05206f02b8dd183c903abb2da6",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_monitor_operational_performance:689aa1b867eb7f3ac07a4277ff71f460f24b858bd02b73336adbba143f52284e",
+  "_migrated_from": "rappid:@cowork-cookbook/report_monitor_operational_performance:7e4db89d66520be597fa7245f964bfc1ed048e05206f02b8dd183c903abb2da6",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_monitor_operational_performance:7e4db89d66520be597fa7245f964bfc1ed048e05206f02b8dd183c903abb2da6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of monitor operational performance activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only operational performance summary report from Dynamics 365 F&SCM for a given legal entity and posted period, and outputs an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "dffa677edbc90d5efe7e4e46ab0b40fe31d4f92a9d2a45a8e0e20205929c1d7f",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "4c31d47625dae818e238ed9c983151dc7fa8d2c0c54ea78229dcbc5a76edb6a7",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_take_inventory_on_software_licenses",
   "name": "Take inventory on software licenses Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_take_inventory_on_software_licenses",
-  "rappid": "rappid:@cowork-cookbook/configure_take_inventory_on_software_licenses:368355b517ab3242a7cad76e6654923ddbb99f706213f5aff031bd788c416e70",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_take_inventory_on_software_licenses:2c423eebbd78613a0a831435ec795124a99e7e101ec0d1bb129920ebda3bd637",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_take_inventory_on_software_licenses:368355b517ab3242a7cad76e6654923ddbb99f706213f5aff031bd788c416e70",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_take_inventory_on_software_licenses:368355b517ab3242a7cad76e6654923ddbb99f706213f5aff031bd788c416e70"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to take inventory on software licenses from an input Excel file, with validation and rollback support.",
+  "description": "Validates an attached configuration Excel file of software license inventory rows against Dynamics 365 F&SCM (legal entity USMF), returns a validation workbook, and after your approval applies the changes with a before/a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.7,
-  "sha256": "2d42da4f2b4f70e2e3ab8f8493dfcf62023c0aa50b00922639ec86d44f1f97ab",
+  "lines": 265,
+  "size_kb": 17.5,
+  "sha256": "2ed84744b84948c92aba6131472f890a9f1537b6b94208beef3f4debd1477818",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

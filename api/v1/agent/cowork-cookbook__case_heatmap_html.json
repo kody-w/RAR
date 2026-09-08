@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__case_heatmap_html",
   "name": "Customer Service Case Heatmap (HTML)",
   "rar_name": "@cowork-cookbook/case_heatmap_html",
-  "rappid": "rappid:@cowork-cookbook/case_heatmap_html:da969f55ea41ac3d9c78cd0bbd76e9771ca176121a2df1b6d76bbe0ed4f1cc91",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/case_heatmap_html:a6444bad9b3df7ef79bf39be996b1f79e5515195936e16bdd6f89e7d63bb5dbc",
+  "_migrated_from": "rappid:@cowork-cookbook/case_heatmap_html:da969f55ea41ac3d9c78cd0bbd76e9771ca176121a2df1b6d76bbe0ed4f1cc91",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/case_heatmap_html:da969f55ea41ac3d9c78cd0bbd76e9771ca176121a2df1b6d76bbe0ed4f1cc91"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds an interactive HTML heatmap of customer service cases by product category \u00d7 priority \u00d7 age bucket, with drill-through tooltips.",
+  "description": "Reads open Dynamics 365 customer service cases and generates a standalone interactive HTML heatmap file of cases by product category vs priority and days-open bucket, with hover tooltips and totals.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "2bd63f3015231a03db6f4ae00f8c70d31ffc59fba1275b20a4d55353cddd92cf",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "3be94a3d38f009dd86a7754fc27771c617179f9f12e038d6d3fe5005a0ea13de",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

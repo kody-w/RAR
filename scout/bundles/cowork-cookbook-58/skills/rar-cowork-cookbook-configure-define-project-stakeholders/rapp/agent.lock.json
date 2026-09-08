@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/configure_define_project_stakeholders",
   "agent_file": "configure_define_project_stakeholders_agent.py",
-  "agent_sha256": "d49142da720f1bcdd02ce47bd03e327d03399991fe73c1fe373f18fe0d87a228",
+  "agent_sha256": "f7fbcfd00c663b9328084c1eb21572a5cc73eea67f024d47fbfca7d850cd2987",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureDefineProjectStakeholders",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk configuration change to define project stakeholders from an input Excel file, with validation and rollback support.",
+    "description": "Bulk-applies project stakeholder configuration changes in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, pauses for approval, then emits a before/after confirmation wo",
     "display_name": "Define project stakeholders Configuration Bulk Setup",
     "industry_context": {
       "deprecated": false,
@@ -67,9 +67,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "0794b831574d11bf",
+      "content_digest": "aa26369efc01f75c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -93,28 +93,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ConfigureDefineProjectStakeholders",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit go-ahead after reviewing the validation workbook, before any changes are applied.",
+        "type": "string"
+      },
+      "configuration_excel": {
+        "description": "Attached Excel file with one row per define-project-stakeholders target and the new field values.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against, e.g. USMF; use a sandbox environment first.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -123,5 +132,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

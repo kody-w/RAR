@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_maintain_and_update_the_business_continuity_plan",
   "name": "Maintain and update the business continuity plan Summary Report",
   "rar_name": "@cowork-cookbook/report_maintain_and_update_the_business_continuity_plan",
-  "rappid": "rappid:@cowork-cookbook/report_maintain_and_update_the_business_continuity_plan:2f2e6dc606893c49fa7420cf78729d8b52a7014b62649c53d7c9a86b50504e9f",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_maintain_and_update_the_business_continuity_plan:3c985a339157114323914ac42ae5972212ab05e7d3a7f380afb8b6360774128f",
+  "_migrated_from": "rappid:@cowork-cookbook/report_maintain_and_update_the_business_continuity_plan:2f2e6dc606893c49fa7420cf78729d8b52a7014b62649c53d7c9a86b50504e9f",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_maintain_and_update_the_business_continuity_plan:2f2e6dc606893c49fa7420cf78729d8b52a7014b62649c53d7c9a86b50504e9f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of maintain and update the business continuity plan activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only business continuity plan summary report from Dynamics 365 F&SCM data for a given legal entity and posted period, exporting an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "6d8f363a42beee90b9cfb4870c85cff111be52d920c73496205645c505a0792c",
+  "lines": 265,
+  "size_kb": 17.2,
+  "sha256": "006e0367513446457c15e539285fdceceb96642f0a0aef5eb1515d058f89c99b",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

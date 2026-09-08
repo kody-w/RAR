@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/weekly_external_customer_email_review",
   "agent_file": "weekly_external_customer_email_review_agent.py",
-  "agent_sha256": "dd29a3bde5d5effec8061353884ddf9b61e2c461d5cd8801745a270d9d6196b2",
+  "agent_sha256": "76a71569a4638c5e6ca08ececbaa8598c1fbd23d7613f797c7ae1de2fb50ce83",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WeeklyExternalCustomerEmailReview",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Every Monday, surface action items from external customer emails, draft replies in thread, and remind yourself to review before anything goes out.",
+    "description": "Reviews the past week's unread external customer emails for action items, creates in-thread draft replies in your Outlook Drafts for review, then sends you an email summary and a Teams self-message reminder.",
     "display_name": "Weekly external customer email review",
     "industry_context": {
       "deprecated": false,
@@ -48,9 +48,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "1f90ab884b7eefd5",
+      "content_digest": "12c3a53ef66cfc91",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,28 +74,29 @@
       "read_only",
       "analysis"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "WeeklyExternalCustomerEmailReview",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "account_team_members": {
+        "description": "Names or addresses of account team members whose action items should also be captured.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
         "type": "string"
       }
     },
@@ -104,5 +105,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/d365_recipe_planner",
   "agent_file": "d365_recipe_planner_agent.py",
-  "agent_sha256": "1c3b4425cfc86a5c3d5250975e457e3b2a96017af042f55656e0590b20e8d70f",
+  "agent_sha256": "e880c6864518da1f2e2a40695f9eed368594591bcc4678b39a92d1b30f78ca77",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365RecipePlanner",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "A guided planning skill that turns \"I want to automate something in Dynamics 365\" into a runnable Copilot Cowork prompt, plus a predicted cost tier explaining what drives the estimate.",
+    "description": "Interviews you across seven discovery points and returns a copy-paste-ready Copilot Cowork prompt for a Dynamics 365 automation plus a predicted cost tier with the factors behind it; planning only, it never runs the reci",
     "display_name": "D365 Recipe Planner",
     "industry_context": {
       "deprecated": false,
@@ -46,9 +46,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c36f119a3c6418a5",
+      "content_digest": "32c43131c60f330e",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -71,28 +71,45 @@
       "beginner",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "D365RecipePlanner",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "business_outcome": {
+        "description": "The business outcome you want and the process to automate.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "d365_app": {
+        "description": "Which D365 surface: Sales, Finance, or ERP/Supply Chain.",
+        "type": "string"
+      },
+      "data_scope_and_frequency": {
+        "description": "Data scope (e.g. legal entity, records, date range) and how often it should run.",
+        "type": "string"
+      },
+      "deliverable_format": {
+        "description": "Desired output format, e.g. summary, HTML dashboard, or Cookbook .md recipe file.",
+        "type": "string"
+      },
+      "mode": {
+        "description": "Read-only versus write-back.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The input to convert — path, URL or payload.",
-        "type": "string"
-      },
-      "target_format": {
-        "description": "Optional. The desired output format.",
         "type": "string"
       }
     },
@@ -101,5 +118,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

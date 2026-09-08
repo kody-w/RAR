@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_update_work_order_details",
   "name": "Update work order details Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_update_work_order_details",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_update_work_order_details:3298c97166914b524ae9e46a7c1ce115728576bd754ae6ce1e8d002b58e7c3b5",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_update_work_order_details:29de37dab0ac936da6612f66b44c9ea56c577f1dad16bdbeb81309135516e3e4",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_update_work_order_details:3298c97166914b524ae9e46a7c1ce115728576bd754ae6ce1e8d002b58e7c3b5",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_update_work_order_details:3298c97166914b524ae9e46a7c1ce115728576bd754ae6ce1e8d002b58e7c3b5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on update work order details status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on update work order details from Dynamics 365 F&SCM data for a given legal entity, with title, KPI, trend, red-flag, actions, and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "3b153d30361261ec4f239f87d9819250523bf325079a316969bf3866f7fb98bb",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "3fa57521757d521b82f882848afa8cb374d9dfce25179a6918d32f241511fd15",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

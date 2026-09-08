@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/onboard_a_new_hire_with_a_30_60_90_plan",
   "agent_file": "onboard_a_new_hire_with_a_30_60_90_plan_agent.py",
-  "agent_sha256": "96132de281cbd1920cd14db062100b705919cc271dcf5be58dfd0cded2c772fa",
+  "agent_sha256": "9ac68e409185a2acf7bb1da1cb165b22706489409ba2ba8bab65060a1a1c2425",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "OnboardANewHireWithA306090Plan",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Set a new hire up to succeed from day one - without building the plan from scratch.",
+    "description": "Builds a 30-60-90-day onboarding package for a new hire: a Word plan with learning goals, stakeholders, weekly deliverables and check-in cadence, an interactive HTML getting-started dashboard, and twice-weekly check-ins",
     "display_name": "Onboard a new hire with a complete 30-60-90-plan",
     "industry_context": {
       "deprecated": false,
@@ -50,9 +50,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "ccab66f4acb9cee8",
+      "content_digest": "541a741fd8d80c56",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -75,28 +75,41 @@
       "advanced",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "OnboardANewHireWithA306090Plan",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "constraints": {
-        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "new_hire_name_role": {
+        "description": "Name and role of the new hire joining.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being designed.",
+      "reference_folder": {
+        "description": "Folder holding the job description, team charter, 5 key stakeholders and SharePoint link.",
+        "type": "string"
+      },
+      "start_date": {
+        "description": "The new hire's first day.",
+        "type": "string"
+      },
+      "team_name": {
+        "description": "Team the new hire is joining, also used to locate the team's SharePoint.",
         "type": "string"
       }
     },
@@ -105,5 +118,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

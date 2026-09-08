@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/case_heatmap_html",
   "agent_file": "case_heatmap_html_agent.py",
-  "agent_sha256": "2bd63f3015231a03db6f4ae00f8c70d31ffc59fba1275b20a4d55353cddd92cf",
+  "agent_sha256": "3be94a3d38f009dd86a7754fc27771c617179f9f12e038d6d3fe5005a0ea13de",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CaseHeatmapHtml",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds an interactive HTML heatmap of customer service cases by product category × priority × age bucket, with drill-through tooltips.",
+    "description": "Reads open Dynamics 365 customer service cases and generates a standalone interactive HTML heatmap file of cases by product category vs priority and days-open bucket, with hover tooltips and totals.",
     "display_name": "Customer Service Case Heatmap (HTML)",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "d2e6ac1bee32eafe",
+      "content_digest": "9900f41d8d162237",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,33 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "CaseHeatmapHtml",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_window": {
+        "description": "Optional date range for which open cases to include; adjust for tenants with older data (e.g. USMF 2017 demo data).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_folder": {
+        "description": "Folder where the generated Case-heatmap-<YYYY-MM-DD>.html file is saved.",
         "type": "string"
       }
     },
@@ -111,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

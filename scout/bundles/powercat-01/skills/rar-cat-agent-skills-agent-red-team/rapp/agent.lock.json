@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/agent_red_team",
   "agent_file": "agent_red_team_agent.py",
-  "agent_sha256": "c39b9166de102478dec3ddc39a765711e471bf743090479f27115e4ab207a879",
+  "agent_sha256": "bd33be4ed1eedbdc195de49a108e26511b59e4ef9ee32e8839cd476334c39dac",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentRedTeam",
   "host_dependencies": [],
@@ -43,7 +43,7 @@
       "risk",
       "assessment"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AgentRedTeam",
   "schema": "rapp-agent-lock/1.0",
@@ -73,5 +73,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_audit_regulatory_compliance",
   "name": "Audit regulatory compliance Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_audit_regulatory_compliance",
-  "rappid": "rappid:@cowork-cookbook/audit_audit_regulatory_compliance:a3b961f36075aaf63a30f4bac1603430985cbc8b16d9d24bc8bbad598b0d3efb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_audit_regulatory_compliance:143b0f7acdfd06ac323600026d14e5aad9920d522dd303d3fe2b0317b2328fe8",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_audit_regulatory_compliance:a3b961f36075aaf63a30f4bac1603430985cbc8b16d9d24bc8bbad598b0d3efb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_audit_regulatory_compliance:a3b961f36075aaf63a30f4bac1603430985cbc8b16d9d24bc8bbad598b0d3efb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits audit regulatory compliance records for completeness and policy compliance against rule-based checks.",
+  "description": "Read-only audit of regulatory compliance records in Dynamics 365 F&SCM (via the Cowork ERP plugin) that flags missing fields, stale dates, blank descriptions, inactive-entity references and policy violations, returning a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "3a915f97829bb77230e4965b888130af93d2a0df242f193ef760d96fd960a9cb",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "f6101b14ba180d7d31cc2cf76d6a035d041c0df65c7993eed1aa79b0b6d1add3",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

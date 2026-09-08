@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_develop_a_business_continuity_plan",
   "name": "Develop a business continuity plan Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_develop_a_business_continuity_plan",
-  "rappid": "rappid:@cowork-cookbook/dashboard_develop_a_business_continuity_plan:c133c02b9ca0a8dcc013c619e2d51c774ae79289cdab0a0dffd8078607579efe",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_develop_a_business_continuity_plan:7667ce780651e53d929eccd14a8274c91438e867b1e7c2615aaf5ae6f54addb7",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_develop_a_business_continuity_plan:c133c02b9ca0a8dcc013c619e2d51c774ae79289cdab0a0dffd8078607579efe",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_develop_a_business_continuity_plan:c133c02b9ca0a8dcc013c619e2d51c774ae79289cdab0a0dffd8078607579efe"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for develop a business continuity plan - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls business continuity plan data from Dynamics 365 ERP for a legal entity's most recent fiscal period and saves a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the output folder;",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "7d98d9fcdb6e63560835a845f960fac665939c7a36b03f6180bf60ae2e5de9d1",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "e37c668bdd4b650b4f5c34b6a58e55e2df2c45ee9680b0412182f9200e2f6e3f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

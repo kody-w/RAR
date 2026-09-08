@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/gantt_chart_generator",
   "agent_file": "gantt_chart_generator_agent.py",
-  "agent_sha256": "2df2f858299c6f1239e65bb152f4bbb593ba2072dbcac6316d6362416bdee486",
+  "agent_sha256": "e65f1661b81bf0103d70144a51f6b3ac3d022e795400f9e8c93ea1780eed398c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GanttChartGenerator",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "charts",
       "scripts"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "GanttChartGenerator",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

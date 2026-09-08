@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/onboarding_checklist_generator",
   "agent_file": "onboarding_checklist_generator_agent.py",
-  "agent_sha256": "56f1094f7a422ba7a11fd49a38b35c1927625fd05c1d233945eb2343950867e7",
+  "agent_sha256": "061e0ddb67049f3ea5f387b837786f05806ad2673074d9ddad00d78e9ca61a1b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "OnboardingChecklistGenerator",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates a role-tailored onboarding checklist as a Word document for a named new hire.",
+    "description": "Produces a role-tailored onboarding checklist as a Word document (IT access, mandatory training, intro meetings, week-1/2/4 milestones) plus an unsent welcome email draft from the manager; call when onboarding a named ne",
     "display_name": "Onboarding Checklist Generator",
     "industry_context": {
       "deprecated": false,
@@ -47,9 +47,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "538f671449e451e0",
+      "content_digest": "90e835672b405339",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -73,28 +73,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "OnboardingChecklistGenerator",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "manager": {
+        "description": "Name of the manager the welcome email draft is written from.",
+        "type": "string"
+      },
+      "new_hire_name": {
+        "description": "Full name of the new hire the checklist is for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "role": {
+        "description": "The new hire's role or job title, used to tailor the checklist.",
+        "type": "string"
+      },
+      "start_date": {
+        "description": "The new hire's start date, used to anchor week-1/2/4 milestones.",
         "type": "string"
       }
     },
@@ -103,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

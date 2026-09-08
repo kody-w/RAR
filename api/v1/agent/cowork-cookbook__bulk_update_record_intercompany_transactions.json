@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_record_intercompany_transactions",
   "name": "Record intercompany transactions Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_record_intercompany_transactions",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_record_intercompany_transactions:594fb273bde767c6e1d90827064d033d891df172e34354af1a806e1a34514e1e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_record_intercompany_transactions:e45b008212b115dd0435b933b596c686530b16b74887f593adcd3c84593e5f4b",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_record_intercompany_transactions:594fb273bde767c6e1d90827064d033d891df172e34354af1a806e1a34514e1e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_record_intercompany_transactions:594fb273bde767c6e1d90827064d033d891df172e34354af1a806e1a34514e1e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across record intercompany transactions records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 intercompany transaction records in legal entity USMF via the ERP plugin, producing a dry-run preview workbook for approval before committing and a confirmation workbook after.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "ac9ba8e0027241cace809272b0c2c02026ddf0b30dd4f1722684df92d17dc961",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "fa1aef8b36e67eb1497d9c6fa8cc673005e1d88c85a22979aea3db26a80e7318",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

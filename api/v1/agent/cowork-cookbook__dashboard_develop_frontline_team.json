@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_develop_frontline_team",
   "name": "Develop frontline team Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_develop_frontline_team",
-  "rappid": "rappid:@cowork-cookbook/dashboard_develop_frontline_team:d22d73f406400006ebecd2aafe26da2bd5c17b9a4ebfab5deb56e9f7eebcde63",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_develop_frontline_team:eed046ab8cef4ce4c4350afe33ee3b09e8ec6bd92738a093aa3a52adfb10fb1f",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_develop_frontline_team:d22d73f406400006ebecd2aafe26da2bd5c17b9a4ebfab5deb56e9f7eebcde63",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_develop_frontline_team:d22d73f406400006ebecd2aafe26da2bd5c17b9a4ebfab5deb56e9f7eebcde63"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for develop frontline team - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls develop frontline team data for the most recent fiscal period from Dynamics 365 F&SCM (legal entity USMF) and writes a standalone interactive HTML dashboard file to the output folder, read-only.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "e52c3f1e41731d181e57042e87070716c69fe1c440551f280a197e9dc572cc1f",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "f9f0cd18acf4c5d651ab44a5a34ea31d2374c9f98c89253231b2a9155d013559",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__redlining_content",
   "name": "Redlining Content",
   "rar_name": "@cat-agent-skills/redlining_content",
-  "rappid": "rappid:@cat-agent-skills/redlining_content:8d14652d434b7699d327dcbac2945d184a3412ab216040056ad992d64cd89d2a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/redlining_content:662ef9500fdae4d8589087c5f87ef35518d994e236b8f9e335ac431737467197",
+  "_migrated_from": "rappid:@cat-agent-skills/redlining_content:8d14652d434b7699d327dcbac2945d184a3412ab216040056ad992d64cd89d2a",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/redlining_content:8d14652d434b7699d327dcbac2945d184a3412ab216040056ad992d64cd89d2a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "productivity",
   "tags": [
@@ -21,9 +23,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.7,
-  "sha256": "1196f5449b1e765cd968e70f0a5568c40598968414f4ffb10380e02b9bdfed98",
+  "lines": 262,
+  "size_kb": 12.1,
+  "sha256": "28f933da117e15feeca641c67a251548a586847b5641189c1780a8633db5b5f8",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

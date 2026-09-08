@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/report_report_quality_non_conformance",
   "agent_file": "report_report_quality_non_conformance_agent.py",
-  "agent_sha256": "0c607b459cff2597b62f08ddcc31d6e5ab91f2f89a5cf965b3e1a18b3626e51c",
+  "agent_sha256": "e3fed605ee3eec314e8183d812162582804b7493118c84831b1fa1d9acab513b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReportReportQualityNonConformance",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds a structured summary report of report quality non-conformance activity with totals, trends, and breakdowns.",
+    "description": "Builds a read-only summary report of quality non-conformance activity from Dynamics 365 F&SCM (legal entity USMF) for the most recent posted period, delivered as an Excel workbook with Summary, Detail, and Top 10 by valu",
     "display_name": "Report quality non-conformance Summary Report",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "60c361c5267dbec1",
+      "content_digest": "df1d602b33e2ffcc",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ReportReportQualityNonConformance",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "breakdown_dimensions": {
+        "description": "Dimensions for breakdowns, such as department, category, or responsible owner.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. report-report-quality-non-conformance-2026-05-24.xlsx.",
+        "type": "string"
+      },
+      "period": {
+        "description": "Posted period to report on; defaults to the most recent posted period available.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

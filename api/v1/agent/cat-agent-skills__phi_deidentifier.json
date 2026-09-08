@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__phi_deidentifier",
   "name": "PHI De-identifier",
   "rar_name": "@cat-agent-skills/phi_deidentifier",
-  "rappid": "rappid:@cat-agent-skills/phi_deidentifier:6377fcb1a937259946a0fefb79e185703b2e5f9ae752bcf5e5c855ccc6a7b4bb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/phi_deidentifier:c958c42735e63d4d83e54d71de775466e5aa9aa71add37d840c68126b60338ae",
+  "_migrated_from": "rappid:@cat-agent-skills/phi_deidentifier:6377fcb1a937259946a0fefb79e185703b2e5f9ae752bcf5e5c855ccc6a7b4bb",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/phi_deidentifier:6377fcb1a937259946a0fefb79e185703b2e5f9ae752bcf5e5c855ccc6a7b4bb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "devtools",
   "tags": [
@@ -27,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.2,
-  "sha256": "deacbb22ef7601fa437aa51aa7ccdd07ed16fa8c3eaa345c50ff44dc6d975d6f",
+  "lines": 262,
+  "size_kb": 12.6,
+  "sha256": "71b910db638c5d408f058fbd63d0f7482e247e2dfdad6a3f4c1d73a4de70d1dd",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

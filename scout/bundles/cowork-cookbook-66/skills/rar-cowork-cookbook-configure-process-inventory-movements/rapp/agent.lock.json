@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/configure_process_inventory_movements",
   "agent_file": "configure_process_inventory_movements_agent.py",
-  "agent_sha256": "e84a3e1ed2452a38c70891ac14952749a95cf997e42bbb49be0546a0d6a0d1f7",
+  "agent_sha256": "ab56cf6d25ebbb99eeb898169469e987766c98354c32c7978cfc8c712938f57b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureProcessInventoryMovements",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk configuration change to process inventory movements from an input Excel file, with validation and rollback support.",
+    "description": "Reads an attached configuration Excel file of process inventory movement changes for a D365 F&SCM legal entity, validates each row, returns a validation workbook, and after your approval applies the changes with a before",
     "display_name": "Process inventory movements Configuration Bulk Setup",
     "industry_context": {
       "deprecated": false,
@@ -67,9 +67,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "32335170b0634c57",
+      "content_digest": "ae1c1794ed30478e",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -93,28 +93,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ConfigureProcessInventoryMovements",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Your explicit go-ahead after reviewing the validation workbook, before any changes are applied.",
+        "type": "string"
+      },
+      "configuration_workbook": {
+        "description": "Attached Excel file with one row per process inventory movements target and the new field values.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against, e.g. USMF; use a sandbox first.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -123,5 +132,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

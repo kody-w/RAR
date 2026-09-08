@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_invoice_project_milestones",
   "agent_file": "scheduled_brief_invoice_project_milestones_agent.py",
-  "agent_sha256": "5422e3967a0a0076f1995e868c745135151ef0d78fc49ae8aae8318606c2f7f3",
+  "agent_sha256": "ae6fac914ab8b1027bbb7b42074322bac838e0c7b81a8699dabb3788fc900cd8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefInvoiceProjectMilestones",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Schedulable morning-brief email summarizing invoice project milestones for the responsible owner; designed to run daily or weekly.",
+    "description": "Builds a morning brief on invoice project milestones from Dynamics 365 ERP (legal entity USMF) with top 5 items by impact, anomalies vs the 7-day rolling average, and recommended next actions; drafts an email to the resp",
     "display_name": "Invoice project milestones Scheduled Email Brief",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "bf49216d61b17d7b",
+      "content_digest": "6e376afa7ed8c594",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ScheduledBriefInvoiceProjectMilestones",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to query; defaults to USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "owner": {
+        "description": "The responsible owner who receives the drafted email brief.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "schedule": {
+        "description": "When to run the brief, e.g. weekday mornings at 7am.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

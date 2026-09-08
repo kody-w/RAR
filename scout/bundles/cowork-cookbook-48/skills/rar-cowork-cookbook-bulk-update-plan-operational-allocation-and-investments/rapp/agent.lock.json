@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_plan_operational_allocation_and_investments",
   "agent_file": "bulk_update_plan_operational_allocation_and_investments_agent.py",
-  "agent_sha256": "7bb9c843892d80d8771a744528f319586d989e8bb2ba64b9a53c4266dcbe7b3e",
+  "agent_sha256": "249489e357b15a71fb24ff70d9f0bb7f90fd5efcc3421f92a043bf7a5e9d4e0b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdatePlanOperationalAllocationAndInvestments",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across plan operational allocation and investments records from an input list, with dry-run preview before commit.",
+    "description": "Applies a bulk field update to Dynamics 365 plan operational allocation and investments records from a supplied ID list, producing a dry-run preview workbook for approval before committing and a confirmation workbook aft",
     "display_name": "Plan operational allocation and investments Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "73afc7572a9c9736",
+      "content_digest": "ebb89459208ba6c0",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdatePlanOperationalAllocationAndInvestments",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit go-ahead after reviewing the dry-run preview workbook.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "field_updates": {
+        "description": "The field(s) and new value(s) to apply to each record.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against, e.g. USMF (sandbox first).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "record_ids": {
+        "description": "List of record IDs for the plan operational allocation and investments records to update.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "rollback_plan": {
+        "description": "How changes will be reverted if the update goes wrong.",
         "type": "string"
       }
     },
@@ -111,5 +128,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

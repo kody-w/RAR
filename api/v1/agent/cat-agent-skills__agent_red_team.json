@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__agent_red_team",
   "name": "Agent Red Team",
   "rar_name": "@cat-agent-skills/agent_red_team",
-  "rappid": "rappid:@cat-agent-skills/agent_red_team:a48e9c8913758693093c63db61570c9ea791bf034138a5c598d97c47a406bdfa",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/agent_red_team:850d4e3cdf94ef8bc724766b96f4c7eb0fe6eed67e09ee1a99eb1ea12ca38b99",
+  "_migrated_from": "rappid:@cat-agent-skills/agent_red_team:a48e9c8913758693093c63db61570c9ea791bf034138a5c598d97c47a406bdfa",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/agent_red_team:a48e9c8913758693093c63db61570c9ea791bf034138a5c598d97c47a406bdfa"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "analysis",
   "tags": [
@@ -27,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.2,
-  "sha256": "c39b9166de102478dec3ddc39a765711e471bf743090479f27115e4ab207a879",
+  "lines": 262,
+  "size_kb": 12.5,
+  "sha256": "bd33be4ed1eedbdc195de49a108e26511b59e4ef9ee32e8839cd476334c39dac",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

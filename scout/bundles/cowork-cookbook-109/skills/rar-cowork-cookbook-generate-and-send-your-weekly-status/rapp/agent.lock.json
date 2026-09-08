@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/generate_and_send_your_weekly_status",
   "agent_file": "generate_and_send_your_weekly_status_agent.py",
-  "agent_sha256": "db94ab2c81b668d9e81704c23a28d8401cd9b63203dd54d595c2f1186ea5f0bc",
+  "agent_sha256": "c92fdc84076bdbe2468d7aead9bde7d9cd546ec7b0f9302dd3c48dcc4ecb15a9",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GenerateAndSendYourWeeklyStatus",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Replace the Monday-morning scramble with a status update that writes itself.",
+    "description": "Drafts a Monday-morning weekly status email for your team, combining your top-of-mind priorities, key executive meetings for the week, and progress metrics pulled from Fabric, held for your review before sending.",
     "display_name": "Generate and send your weekly status automatically",
     "industry_context": {
       "deprecated": false,
@@ -48,9 +48,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "3ec977d736fa8623",
+      "content_digest": "b680518adad3eba7",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,28 +74,45 @@
       "integration",
       "fabric_iq"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "GenerateAndSendYourWeeklyStatus",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "fabric_metrics": {
+        "description": "Which Fabric metrics tied to your priorities to include, with progress since last week.",
+        "type": "string"
+      },
+      "key_meetings": {
+        "description": "The week's meetings to feature, typically executive ones, from your calendar.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "schedule": {
+        "description": "When it should run recurring, e.g. every Monday morning.",
+        "type": "string"
+      },
+      "team_recipients": {
+        "description": "The team distribution list or people the weekly email goes to.",
+        "type": "string"
+      },
+      "top_of_mind": {
+        "description": "Your key priorities and projects for the week to highlight in the update.",
         "type": "string"
       }
     },
@@ -104,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

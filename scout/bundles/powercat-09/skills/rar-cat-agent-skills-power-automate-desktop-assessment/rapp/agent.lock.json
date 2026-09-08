@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/power_automate_desktop_assessment",
   "agent_file": "power_automate_desktop_assessment_agent.py",
-  "agent_sha256": "a002ab6df0f13d216069dc399971ecec085e96ce854ee960de87ac043cd8435a",
+  "agent_sha256": "6ff056fe92c6b801457fd674f9e59f20cb8d232458838a03d7506839420897ec",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerAutomateDesktopAssessment",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "assessment",
       "governance"
     ],
-    "version": "2.1.0"
+    "version": "3.1.2"
   },
   "runtime_name": "PowerAutomateDesktopAssessment",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.1.0"
+  "version": "3.1.2"
 }

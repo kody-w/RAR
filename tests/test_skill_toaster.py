@@ -102,33 +102,18 @@ def test_toast_is_deterministic(toaster):
 
 
 def test_container_version_advances_only_when_bytes_change(generator):
-    assert generator.choose_container_version(
-        "1.0.0",
-        None,
-        False,
-    ) == "2.0.0"
-    assert generator.choose_container_version(
-        "1.0.0",
-        "2.0.1",
-        True,
-    ) == "2.0.1"
-    assert generator.choose_container_version(
-        "1.0.0",
-        "2.0.1",
-        False,
-    ) == "2.0.2"
-    assert generator.choose_container_version(
-        "1.1.0",
-        "2.0.9",
-        False,
-    ) == "2.1.0"
-    published = generator.latest_container_version(None, "2.0.9")
-    assert published == "2.0.9"
-    assert generator.choose_container_version(
-        "1.0.0",
-        published,
-        False,
-    ) == "2.0.10"
+    gen = generator.TOAST_GENERATION
+    first = f"{1 + gen}.0.0"          # upstream 1.0.0 on a fresh publish
+    assert generator.choose_container_version("1.0.0", None, False) == first
+    # unchanged bytes keep whatever is published, even from an older generation
+    assert generator.choose_container_version("1.0.0", "2.0.1", True) == "2.0.1"
+    # changed bytes: a newer generation wins outright...
+    assert generator.choose_container_version("1.0.0", "2.0.1", False) == first
+    assert generator.choose_container_version("1.1.0", "2.0.9", False) == f"{1 + gen}.1.0"
+    # ...and within the current generation the patch advances
+    published = generator.latest_container_version(None, f"{1 + gen}.0.9")
+    assert published == f"{1 + gen}.0.9"
+    assert generator.choose_container_version("1.0.0", published, False) == f"{1 + gen}.0.10"
 
 
 def test_generated_version_reads_only_the_manifest(generator):
@@ -285,7 +270,9 @@ def test_agent_is_callable_not_a_shell(path):
     assert "operation" in props, "no operation parameter — this is a shell"
     ops = props["operation"]["enum"]
     assert len(ops) >= 2, "a single operation is not an interface"
-    assert "subject" in props, "takes no subject — nothing to act on"
+    # shape-toasted agents take a subject; recipe-toasted agents take context
+    # (plus whatever inputs the recipe asks for)
+    assert "subject" in props or "context" in props, "takes no subject/context — nothing to act on"
 
     for op in ops:
         out = agent.perform(operation=op)

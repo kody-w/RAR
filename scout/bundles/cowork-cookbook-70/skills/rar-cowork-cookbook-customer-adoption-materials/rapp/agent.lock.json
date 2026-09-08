@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/customer_adoption_materials",
   "agent_file": "customer_adoption_materials_agent.py",
-  "agent_sha256": "54fa4622b85df72e5a5aab85fd1fca7a124a986ebb243cfd7225b508fe1c6697",
+  "agent_sha256": "15d44695ee41d1433201801bcba8bad95f3e37f2181a766389ae958b6721d612",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CustomerAdoptionMaterials",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Build a role-relevant learning curriculum for a customer - structured, sourced, and deployment-ready.",
+    "description": "Generates a Markdown learning curriculum for a named customer and product with three progressive paths (Beginner, Intermediate, Advanced), sequenced public-resource tables, persona application notes, and a rollout order.",
     "display_name": "Customer adoption materials",
     "industry_context": {
       "deprecated": false,
@@ -46,9 +46,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c4f7910726ce044d",
+      "content_digest": "55d78296864b5bc9",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -71,24 +71,45 @@
       "advanced",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "CustomerAdoptionMaterials",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "customer_name": {
+        "description": "The customer or organization the curriculum is being built for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to apply this capability to.",
+      "product_and_vendor": {
+        "description": "The product the curriculum covers and its vendor, whose public sources are used.",
+        "type": "string"
+      },
+      "program_type": {
+        "description": "Whether this supports a champion program, power user program, or broader enablement rollout.",
+        "type": "string"
+      },
+      "skill_gaps_priorities": {
+        "description": "Known skill gaps, priorities, or use cases to emphasize across the levels.",
+        "type": "string"
+      },
+      "user_base": {
+        "description": "Who the learners are — roles, personas, size, and context of the audience.",
         "type": "string"
       }
     },
@@ -97,5 +118,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

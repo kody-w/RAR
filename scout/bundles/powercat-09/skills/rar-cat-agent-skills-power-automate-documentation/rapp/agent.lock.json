@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/power_automate_documentation",
   "agent_file": "power_automate_documentation_agent.py",
-  "agent_sha256": "db07d9c1a188ccc5657ca62c42bf1782d6716fd9edc11d5efd9ee5c9f9490f30",
+  "agent_sha256": "2f6813624393f9855a67039690460b474cd338bc60bad710bc594790761b4ab0",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerAutomateDocumentation",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "audit",
       "governance"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "PowerAutomateDocumentation",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

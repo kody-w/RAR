@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/user_access_review_audit",
   "agent_file": "user_access_review_audit_agent.py",
-  "agent_sha256": "d274d9c1c300ae5f3e8eafe595379d5d50ec69b4b4e4a112785cbd3d17bb130e",
+  "agent_sha256": "1c57319c138e7c8c44ad40e97ac4ef142628c8e9875b54c38b48195d8c890796",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "UserAccessReviewAudit",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits Dynamics 365 user accounts for segregation-of-duties conflicts, inactive accounts with active role assignments, and roles granted without recent login.",
+    "description": "Runs a read-only Dynamics 365 user access review that lists users, security roles, and last sign-in dates, flags SoD conflicts, stale privileged accounts, and disabled users with roles, then returns an Excel workbook and",
     "display_name": "User Access Review & SoD Audit",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "37bcf4aff678f487",
+      "content_digest": "5cbbbfcc8b58dc4a",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "UserAccessReviewAudit",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "inactivity_window_days": {
+        "description": "Days without sign-in that mark a privileged account as stale; defaults to 90.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "The active Dynamics 365 legal entity to audit (e.g. USMF).",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "report_date": {
+        "description": "Date used in the output filename Access-review-<YYYY-MM-DD>.xlsx.",
+        "type": "string"
+      },
+      "security_lead_email": {
+        "description": "Recipient of the drafted summary email (the IT security lead).",
+        "type": "string"
+      },
+      "sod_role_pair": {
+        "description": "Conflicting role pair to flag; defaults to AP-vendor-maintenance plus AP-payment-release.",
         "type": "string"
       }
     },
@@ -112,5 +129,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

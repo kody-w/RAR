@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__find_patterns_across_your_meetings",
   "name": "Find patterns across your meetings",
   "rar_name": "@cowork-cookbook/find_patterns_across_your_meetings",
-  "rappid": "rappid:@cowork-cookbook/find_patterns_across_your_meetings:0a70e438c89df1f83fca307ab5da0368110f68a92b0843b6b36cd45f4c7616c6",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/find_patterns_across_your_meetings:b28da2af9fd009faa1be92b7520e3b87dbc2b2341e2fbb25a293a97f55e8ab47",
+  "_migrated_from": "rappid:@cowork-cookbook/find_patterns_across_your_meetings:0a70e438c89df1f83fca307ab5da0368110f68a92b0843b6b36cd45f4c7616c6",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/find_patterns_across_your_meetings:0a70e438c89df1f83fca307ab5da0368110f68a92b0843b6b36cd45f4c7616c6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "general",
   "tags": [
@@ -19,16 +21,16 @@
     "advanced",
     "read_only"
   ],
-  "description": "Surface the themes that are repeating across your meetings - without re-listening, re-reading transcripts, or relying on memory.",
+  "description": "Returns a ranked pattern report across a set of your meetings: top recurring themes, a 1-2 sentence summary each, representative quotes, the meetings where each surfaced, and a recommended action.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 9.5,
-  "sha256": "96763343ed4649f04c2a587872f170153f9059416d726ae3bc7d7aac1cd045f0",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "4b1112720678d85a0b97fb5b33fd7f0df76b4daf9a974494a73c64c3ee6541e7",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

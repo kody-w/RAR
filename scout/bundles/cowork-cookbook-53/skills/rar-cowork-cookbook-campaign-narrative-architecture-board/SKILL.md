@@ -1,7 +1,7 @@
 ---
 name: "rar-cowork-cookbook-campaign-narrative-architecture-board"
-description: "Turn a campaign narrative into a structured visual the team can pressure-test before any copy gets written - so the story holds together across every audience, channel, and asset."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/campaign_narrative_architecture_board", "rar_sha256": "cd11bbd026ebac6308b3cea4564b341615b46400720aedb6c5afbca2c29a7c6c", "source_kind": "rar-agent", "source_commit": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed", "version": "2.0.0", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "other", "concept_to_market", "advanced", "integration", "miro"]}
+description: "Builds a Miro narrative architecture board for a campaign from its brief, approved messaging, audience definitions, and positioning files \u2014 core narrative, message pillars, proof points, audience adaptations, plus a cove"
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/campaign_narrative_architecture_board", "rar_sha256": "78b5a05a88b7f717feb12458bdd59622fcae455ff2dc2f62f36df54b4fcbd958", "source_kind": "rar-agent", "source_commit": "working-tree", "version": "3.0.3", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "other", "concept_to_market", "advanced", "integration", "miro"]}
 ---
 
 ## Microsoft Scout runtime
@@ -23,17 +23,18 @@ agent in the user's Brainstem. Never paraphrase the factory or agent into a new
 implementation. The generic direct-file commands in the generated Toaster
 section are recovery guidance; Scout should prefer the verified runner.
 
-Build a campaign narrative architecture board — Turn a campaign narrative into a structured visual the team can pressure-test before any copy gets written - so the story holds together across every audience, channel, and asset.
+Build a campaign narrative architecture board — Builds a Miro narrative architecture board for a campaign from its brief, approved messaging, audience definitions, and positioning files — core narrative, message pillars, proof points, audience adaptations, plus a cove
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/campaign-narrative-architecture-board
@@ -53,22 +54,31 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 ```json
 {
   "properties": {
+    "campaign_name": {
+      "description": "The campaign whose narrative architecture is being built.",
+      "type": "string"
+    },
+    "context": {
+      "description": "Optional. Details the recipe should use \u2014 the record, scope, dates or filters it asks for.",
+      "type": "string"
+    },
+    "messaging_doc": {
+      "description": "Document containing the approved campaign messaging.",
+      "type": "string"
+    },
+    "onedrive_folder": {
+      "description": "Folder holding the campaign brief, audience definitions, and recent positioning work.",
+      "type": "string"
+    },
     "operation": {
-      "description": "What to do: run, plan, checklist, describe.",
+      "description": "What to do: run, prompt, plan, checklist, describe.",
       "enum": [
         "run",
+        "prompt",
         "plan",
         "checklist",
         "describe"
       ],
-      "type": "string"
-    },
-    "subject": {
-      "description": "The process to automate.",
-      "type": "string"
-    },
-    "trigger": {
-      "description": "Optional. What starts it \u2014 schedule, event or manual.",
       "type": "string"
     }
   },
@@ -85,7 +95,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `campaign_narrative_architecture_board_agent.py` and embedded as the fenced Python below (sha256 cd11bbd026ebac63…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `campaign_narrative_architecture_board_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `campaign_narrative_architecture_board_agent.py` and embedded as the fenced Python below (sha256 78b5a05a88b7f717…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `campaign_narrative_architecture_board_agent.py` first:
 
 ```bash
 python3 campaign_narrative_architecture_board_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -97,17 +107,18 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 
 ```python  # rapp:deterministic
 """
-Build a campaign narrative architecture board — Turn a campaign narrative into a structured visual the team can pressure-test before any copy gets written - so the story holds together across every audience, channel, and asset.
+Build a campaign narrative architecture board — Builds a Miro narrative architecture board for a campaign from its brief, approved messaging, audience definitions, and positioning files — core narrative, message pillars, proof points, audience adaptations, plus a cove
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/campaign-narrative-architecture-board
@@ -122,9 +133,9 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cowork-cookbook/campaign_narrative_architecture_board',
-    "version": '2.0.0',
+    "version": '3.0.3',
     "display_name": 'Build a campaign narrative architecture board',
-    "description": 'Turn a campaign narrative into a structured visual the team can pressure-test before any copy gets written - so the story holds together across every audience, channel, and asset.',
+    "description": 'Builds a Miro narrative architecture board for a campaign from its brief, approved messaging, audience definitions, and positioning files — core narrative, message pillars, proof points, audience adaptations, plus a cove',
     "author": 'Sean Galliher and Cowork Cookbook contributors',
     "tags": ['industry_solution', 'business_process', 'prompt', 'other', 'concept_to_market', 'advanced', 'integration', 'miro'],
     "category": 'integrations',
@@ -143,8 +154,8 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'CC-BY-4.0',
         "license_verified": True,
-        "details": {'license_note': 'Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.', 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
-        "content_digest": 'a763243606223948',
+        "details": {'license_note': "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.", 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
+        "content_digest": '7700b56b2b66a651',
     },
     "industry_context": {'deprecated': False, 'difficulty': 'advanced', 'last_verified_on': None, 'mutates_data': False, 'plugin': 'miro', 'process_roots': ['concept-to-market'], 'process_tags': ['concept-to-market/prepare-marketing-campaigns/develop-campaign-themes-and-messages'], 'recipe_category': 'other', 'recipe_type': 'prompt', 'upstream_path': 'concept-to-market/campaign-narrative-architecture-board', 'uses_skills': {'custom': [], 'ootb': [], 'plugin': []}, 'verification_status': 'draft'},
     # The platforms the upstream entry targets. First-class and queryable, not
@@ -164,15 +175,15 @@ except ModuleNotFoundError:
             self.metadata = metadata
 
 
-# The toasted capability. The upstream entry supplies the WHAT; this procedure
-# is RAR's own method for that shape of work, generated by
-# @kody-w/skill_toaster_agent from the metadata we hold. No upstream text is
-# reproduced here — see the module docstring.
-_SPEC = {'archetype': 'automate', 'checks': ['Every step is idempotent and the whole run is safely retryable.', 'Failure behaviour is defined per step, and failures are loud.', 'A completion condition exists and is checked.', 'The first production run was reconciled against the manual process.'], 'confidence': 0.667, 'deliverable': 'A runnable automation with a defined trigger, per-step failure policy, an observable signal, and a reconciliation against the manual process.', 'operations': ['run', 'plan', 'checklist', 'describe'], 'params': {'subject': 'The process to automate.', 'trigger': 'Optional. What starts it — schedule, event or manual.'}, 'refined_by': 'rules', 'signals': ['tag:integration'], 'steps': ['Run the process manually once and write down every step, including the ones people do without noticing.', 'Identify the trigger and the completion condition. An automation with no defined end does not terminate, it accumulates.', 'Make each step idempotent, so a retry is safe and a partial run can be resumed rather than restarted.', 'Decide failure behaviour per step: retry, skip, or halt. Silent failure is the expensive one.', 'Add an observable signal — a log line, a status file, a notification — so a broken run is noticed without being looked for.', 'Run it alongside the manual process until they agree, then retire the manual path deliberately.'], 'subject_label': 'process to automate', 'verb': 'Automate'}
+# The toasted capability, generated by @kody-w/skill_toaster_agent. A licensed
+# recipe entry carries the upstream recipe verbatim (with attribution) in
+# _SPEC["recipe"]; a metadata-only entry carries RAR's own method for that shape
+# of work. See the module docstring for which this is.
+_SPEC = {'archetype': 'recipe', 'checks': ['Prerequisite: Microsoft 365 Copilot licence with access to Cowork', 'Prerequisite: Miro plugin enabled and connected to your workspace', 'Output matches: A Miro narrative architecture board mapping the core campaign story, message pillars, proof points, and audience adaptations - so the entire team is building from the same architecture, not interpreting the brief differently.'], 'confidence': 1.0, 'deliverable': 'A Miro narrative architecture board mapping the core campaign story, message pillars, proof points, and audience adaptations - so the entire team is building from the same architecture, not interpreting the brief differently.', 'operations': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'params': {'campaign_name': 'The campaign whose narrative architecture is being built.', 'context': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'messaging_doc': 'Document containing the approved campaign messaging.', 'onedrive_folder': 'Folder holding the campaign brief, audience definitions, and recent positioning work.'}, 'recipe': {'authors': ['Sean Galliher'], 'business_value': 'Turn a campaign narrative into a structured visual the team can pressure-test before any copy gets written - so the story holds together across every audience, channel, and asset. A Miro narrative architecture board mapping the core campaign story, message pillars, proof points, and audience adaptations - so the entire team is building from the same architecture, not interpreting the brief differently.', 'expected_output': 'A Miro narrative architecture board mapping the core campaign story, message pillars, proof points, and audience adaptations - so the entire team is building from the same architecture, not interpreting the brief differently.', 'platform': 'Microsoft 365 Copilot Cowork', 'prerequisites': ['Microsoft 365 Copilot licence with access to Cowork', 'Miro plugin enabled and connected to your workspace'], 'prompt': "I'm building out the narrative architecture for [Campaign name] and I want it pressure-tested visually before we start writing copy. Pull the campaign brief, the approved messaging in [Messaging doc], the audience definitions, and any recent positioning work from [OneDrive folder].\n\nBuild a Miro narrative architecture board that maps the campaign's structural story: the core narrative (what we're saying at the highest level), the three to four message pillars that support it, the proof points under each pillar, and the audience-specific adaptations (exec, IC, partner, customer, press) that branch off the architecture.\n\nUse frames, shapes, and connectors to show how the story flows together - and add a tracking table beneath the architecture mapping pillar → proof point → audience adaptation → asset, so we can see at a glance what's covered and what still needs work.\n\nboard", 'steps': ['Open Cowork and start a new task.', 'Confirm the required plugin is turned on under **+ > Customize**: Miro plugin enabled and connected to your workspace.', 'Paste the prompt from `prompt.md`, replacing anything in square brackets with your own values.', 'Review the plan Cowork proposes before letting it run.', 'Check any drafted email or calendar change before approving it — the prompt holds them for review rather than sending.'], 'tenant_caveat': '', 'verified_against': '', 'what_it_does': 'A Miro narrative architecture board mapping the core campaign story, message pillars, proof points, and audience adaptations - so the entire team is building from the same architecture, not interpreting the brief differently.'}, 'refined_by': 'claude-opus-5', 'refinement': {'description': 'Builds a Miro narrative architecture board for a campaign from its brief, approved messaging, audience definitions, and positioning files — core narrative, message pillars, proof points, audience adaptations, plus a cove', 'example_request': 'Build a Miro narrative architecture board for the Q3 Secure Launch campaign using our approved messaging doc and the campaign OneDrive folder.', 'inputs': [{'description': 'The campaign whose narrative architecture is being built.', 'name': 'Campaign name'}, {'description': 'Document containing the approved campaign messaging.', 'name': 'Messaging doc'}, {'description': 'Folder holding the campaign brief, audience definitions, and recent positioning work.', 'name': 'OneDrive folder'}], 'model': 'claude-opus-5', 'when_to_use': "Call when a team wants a campaign's narrative structure mapped and pressure-tested visually in Miro before any copy is written."}, 'signals': ['recipe:prompt', 'refined'], 'steps': ['Open Cowork and start a new task.', 'Confirm the required plugin is turned on under **+ > Customize**: Miro plugin enabled and connected to your workspace.', 'Paste the prompt from `prompt.md`, replacing anything in square brackets with your own values.', 'Review the plan Cowork proposes before letting it run.', 'Check any drafted email or calendar change before approving it — the prompt holds them for review rather than sending.'], 'subject_label': 'context for the recipe', 'verb': 'Run'}
 
 
 class CampaignNarrativeArchitectureBoard(BasicAgent):
-    """Automate agent, toasted from an aggregated upstream entry."""
+    """Run agent, toasted from an aggregated upstream entry."""
 
     def __init__(self):
         self.name = 'CampaignNarrativeArchitectureBoard'
@@ -182,7 +193,7 @@ class CampaignNarrativeArchitectureBoard(BasicAgent):
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
-                "properties": {'operation': {'description': 'What to do: run, plan, checklist, describe.', 'enum': ['run', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'subject': {'description': 'The process to automate.', 'type': 'string'}, 'trigger': {'description': 'Optional. What starts it — schedule, event or manual.', 'type': 'string'}},
+                "properties": {'campaign_name': {'description': 'The campaign whose narrative architecture is being built.', 'type': 'string'}, 'context': {'description': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'type': 'string'}, 'messaging_doc': {'description': 'Document containing the approved campaign messaging.', 'type': 'string'}, 'onedrive_folder': {'description': 'Folder holding the campaign brief, audience definitions, and recent positioning work.', 'type': 'string'}, 'operation': {'description': 'What to do: run, prompt, plan, checklist, describe.', 'enum': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'type': 'string'}},
                 "required": ["operation"],
             },
         }
@@ -254,12 +265,86 @@ class CampaignNarrativeArchitectureBoard(BasicAgent):
         ]
         return lines
 
+    # ── recipe entries: the upstream recipe, verbatim, deterministic ─────
+
+    def _recipe_context(self, kwargs):
+        extras = []
+        subject = self._subject(kwargs)
+        if subject:
+            extras.append(f"subject: {subject}")
+        for key in _SPEC["params"]:
+            value = str(kwargs.get(key) or "").strip()
+            if value:
+                extras.append(f"{key}: {value}")
+        return extras
+
+    def _recipe_prompt(self, kwargs):
+        r = _SPEC["recipe"]
+        lines = [r["prompt"]]
+        extras = self._recipe_context(kwargs)
+        if extras:
+            lines += ["", "Context supplied by the caller:"] + [f"- {e}" for e in extras]
+        return lines
+
+    def _recipe_attribution(self):
+        src = __manifest__["source"]
+        r = _SPEC["recipe"]
+        who = ", ".join(r.get("authors") or []) or __manifest__["author"]
+        return [
+            f"Recipe: {__manifest__['display_name']} — by {who}, {src['source_name']} "
+            f"({src['license']}). Source: {src['upstream_url']}",
+        ]
+
+    def _perform_recipe(self, op, kwargs):
+        r = _SPEC["recipe"]
+        ref = _SPEC.get("refinement") or {}
+        if op == "prompt":
+            return "\n".join(self._recipe_prompt(kwargs) + [""] + self._recipe_attribution())
+        if op == "plan":
+            lines = [f"Steps for {__manifest__['display_name']} on {r['platform']}:"]
+            lines += [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "checklist":
+            lines = ["Before you run it:"] + [f"  [ ] {p}" for p in r["prerequisites"]]
+            if r.get("expected_output"):
+                lines += ["", "Done when:", f"  [ ] {r['expected_output']}"]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "describe":
+            lines = self._provenance()
+            if ref.get("when_to_use"):
+                lines += ["", f"When to use: {ref['when_to_use']}"]
+            if ref.get("example_request"):
+                lines += [f"Ask for it like: {ref['example_request']}"]
+            if ref.get("inputs"):
+                lines += ["", "It will ask you for:"] + [f"  - {i['name']}: {i['description']}" for i in ref["inputs"]]
+            if r.get("business_value"):
+                lines += ["", f"Why it matters: {r['business_value']}"]
+            return "\n".join(lines)
+        if op == "run":
+            lines = [f"{__manifest__['display_name']} — run on {r['platform']}", ""]
+            if r.get("what_it_does"):
+                lines += [r["what_it_does"], ""]
+            lines += [f"Prompt (paste into {r['platform']}):", ""] + self._recipe_prompt(kwargs) + [""]
+            lines += ["Procedure:"] + [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)] + [""]
+            lines += ["Acceptance checks:"] + [f"  [ ] {c}" for c in _SPEC["checks"]] + [""]
+            lines += [f"Deliverable: {_SPEC['deliverable']}", ""]
+            if r.get("tenant_caveat"):
+                lines += [f"Verified upstream: {r['tenant_caveat']}", ""]
+            return "\n".join(lines + self._recipe_attribution())
+        return (
+            f"Unknown operation {op!r}. Valid operations: "
+            + ", ".join(_SPEC["operations"])
+        )
+
     # ── entry point ─────────────────────────────────────────────────────
 
     def perform(self, **kwargs):
         """Run the toasted capability. Always returns a string."""
         op = str(kwargs.get("operation") or "run").strip().lower()
         subject = self._subject(kwargs)
+
+        if _SPEC.get("recipe"):
+            return self._perform_recipe(op, kwargs)
 
         if op == "describe":
             return "\n".join(self._provenance())
@@ -289,4 +374,4 @@ if __name__ == "__main__":
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1: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 -->

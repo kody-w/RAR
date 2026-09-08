@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__agent_evaluation_designer",
   "name": "Agent Evaluation Designer",
   "rar_name": "@cat-agent-skills/agent_evaluation_designer",
-  "rappid": "rappid:@cat-agent-skills/agent_evaluation_designer:e879c4f57913ff0d896aa35ac58219123a6e74ebf2bc4298d36491f97275fb50",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/agent_evaluation_designer:346736187e94017a8bf631354e69442773717294e7cf82a114c39e94d6603200",
+  "_migrated_from": "rappid:@cat-agent-skills/agent_evaluation_designer:e879c4f57913ff0d896aa35ac58219123a6e74ebf2bc4298d36491f97275fb50",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/agent_evaluation_designer:e879c4f57913ff0d896aa35ac58219123a6e74ebf2bc4298d36491f97275fb50"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -24,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.3,
-  "sha256": "20b0e309fde16bdfc1a363d270e1aec083d9c00b1a1d7735edd30dff9d6000a2",
+  "lines": 262,
+  "size_kb": 12.7,
+  "sha256": "092e5313a720a8566584b69405d92d384a4563943ea16bf6cb84abf87dd60ff3",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/audit_define_extensions_approach",
   "agent_file": "audit_define_extensions_approach_agent.py",
-  "agent_sha256": "56f4e2845aedd5e9e1919e3003d934194835b06350124ec4e733674ccb2a0446",
+  "agent_sha256": "23ee964442794ce21cb75ac0a7930a5435a14dee49bb57f2c270c3144860cbab",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditDefineExtensionsApproach",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits define extensions approach records for completeness and policy compliance against rule-based checks.",
+    "description": "Read-only audit of 'define extensions approach' records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with a sheet per finding category (missing fields, stale dates, blank descriptions, inac",
     "display_name": "Define extensions approach Completeness Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "4321c07165aa90c5",
+      "content_digest": "0b1ed1be4daad592",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AuditDefineExtensionsApproach",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_window": {
+        "description": "Date range used to judge stale dates; note USMF demo data is mostly FY2017.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to audit, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. audit-define-extensions-approach-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

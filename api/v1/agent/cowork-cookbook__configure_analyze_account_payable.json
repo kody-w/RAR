@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_analyze_account_payable",
   "name": "Analyze account payable Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_analyze_account_payable",
-  "rappid": "rappid:@cowork-cookbook/configure_analyze_account_payable:ae5d335c1abfcfdd26ea0f3067072b77a0c1dc3b6ec4aa47ef0173a7aeb020ea",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_analyze_account_payable:ff822ba68ec6cdb958a1b52b1f7372793a774931d4832bf7f55150dfe888d00b",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_analyze_account_payable:ae5d335c1abfcfdd26ea0f3067072b77a0c1dc3b6ec4aa47ef0173a7aeb020ea",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_analyze_account_payable:ae5d335c1abfcfdd26ea0f3067072b77a0c1dc3b6ec4aa47ef0173a7aeb020ea"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to analyze account payable from an input Excel file, with validation and rollback support.",
+  "description": "Reads an attached Excel file of accounts payable configuration rows for a D365 F&SCM legal entity, validates every row, returns a validation workbook, and after your approval applies the changes with a before/after confi",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "9a6d355cbe7a8d14f8b8dd980820c460de047c7675eb488fcad373c4535ee2e5",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "394c0bf9edd1b580559b775950303e69ae02c8b7e34b6217c1cc458c485b443f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

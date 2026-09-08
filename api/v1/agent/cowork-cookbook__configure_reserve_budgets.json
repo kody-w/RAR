@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_reserve_budgets",
   "name": "Reserve budgets Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_reserve_budgets",
-  "rappid": "rappid:@cowork-cookbook/configure_reserve_budgets:6e1ca1012ba673e61bb3b4488e28476809c6eeb58c204decbfc26681bb0b3dca",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_reserve_budgets:290fc953acb783966aa0fdb9ed20abfb97459edf46366424aaeb223a4e67dd22",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_reserve_budgets:6e1ca1012ba673e61bb3b4488e28476809c6eeb58c204decbfc26681bb0b3dca",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_reserve_budgets:6e1ca1012ba673e61bb3b4488e28476809c6eeb58c204decbfc26681bb0b3dca"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to reserve budgets from an input Excel file, with validation and rollback support.",
+  "description": "Bulk-updates reserve budget records in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, waits for your approval, then applies changes and returns a before/after confirma",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "75c1e518be4af43832e65b525c6d7ddc82605985bc5463a3f6651c3f0e12ba6b",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "c27fba8d1f0b5d8793bd281115191fdc0fa45b70630ba1367bbe13f82ded091d",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

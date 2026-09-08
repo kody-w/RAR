@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_define_leasing_policies",
   "agent_file": "ppt_exec_define_leasing_policies_agent.py",
-  "agent_sha256": "da9703edf5623dd4a9054fb4fc79041072329aae6a6285f0aaafa77e7ea1c2ca",
+  "agent_sha256": "6f77aac765fe60bbe9bc2c19ccac0628c7263797b2ad7f3f52928fb2444fc736",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecDefineLeasingPolicies",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on define leasing policies status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on leasing policy status from Dynamics 365 F&SCM data for a given legal entity, with KPI, trend, issues, actions and appendix slides plus speaker notes.",
     "display_name": "Define leasing policies Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "cd8b7dd3d584d5d3",
+      "content_digest": "e4802593ddba4c87",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecDefineLeasingPolicies",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "comparison_period": {
+        "description": "Prior period to trend the KPIs against.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to pull from, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Target .pptx filename, e.g. ppt-exec-define-leasing-policies-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_length": {
+        "description": "Meeting length the deck is scoped to, e.g. 15-minute monthly review.",
+        "type": "string"
+      },
+      "topic": {
+        "description": "Policy area covered by the deck, e.g. define leasing policies.",
         "type": "string"
       }
     },
@@ -112,5 +129,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

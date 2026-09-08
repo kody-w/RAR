@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_define_customer_order_requirements",
   "name": "Define customer order requirements Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_define_customer_order_requirements",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_define_customer_order_requirements:9500153ab5ffa5ad25c2009b777c9bce55fa8a74b355efd21a8ae5f1db6339c4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_define_customer_order_requirements:79ed17ffbdee3a7c52e0f31f280c6871f78c224b7a4b31c5337be3fb726cc1a2",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_define_customer_order_requirements:9500153ab5ffa5ad25c2009b777c9bce55fa8a74b355efd21a8ae5f1db6339c4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_define_customer_order_requirements:9500153ab5ffa5ad25c2009b777c9bce55fa8a74b355efd21a8ae5f1db6339c4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of define customer order requirements status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing define customer order requirements status from Dynamics 365 F&SCM (legal entity USMF), with header, KPI tiles, RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "9c79ea68666e24f1b2c30c3a0e6a4d0b2aed8908e0c8161bc8afab115459a86c",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "a8462ca8d5d67394e2e251f5a7b7939c262ec29d83a5e23b62092205ce8bdac2",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

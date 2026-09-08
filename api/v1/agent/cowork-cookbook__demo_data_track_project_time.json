@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_track_project_time",
   "name": "Track project time Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_track_project_time",
-  "rappid": "rappid:@cowork-cookbook/demo_data_track_project_time:c030cc6872ba816437d1a26302cf3d801820117268cfd36ab0699727ca49caa5",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_track_project_time:47a4e0a9c5fa4e6e0f07a65b3d286d6f15eec1046d0919a28dc78b68cc0bff25",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_track_project_time:c030cc6872ba816437d1a26302cf3d801820117268cfd36ab0699727ca49caa5",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_track_project_time:c030cc6872ba816437d1a26302cf3d801820117268cfd36ab0699727ca49caa5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for track project time in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo project time-tracking records for a Dynamics 365 F&SCM sandbox legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "472510e58316a77e5726dc8d50cfcb08d9546ad28fb902cf9b84233dfa2a79dc",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "ad0fc61f9cd8a15e226835a47e1d3b65b7609d9669e18466217134bf9eef4578",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

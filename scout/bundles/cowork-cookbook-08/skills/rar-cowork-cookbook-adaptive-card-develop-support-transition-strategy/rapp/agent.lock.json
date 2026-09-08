@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_develop_support_transition_strategy",
   "agent_file": "adaptive_card_develop_support_transition_strategy_agent.py",
-  "agent_sha256": "f966005e8bf01fcfe0faf77c5e005b612e4453b6ba47b89ff766179401a39ee8",
+  "agent_sha256": "0b7d5d57dc6b898408857a7aafbf906c46c018c0f3277574a8c88699762864a8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardDevelopSupportTransitionStrategy",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a reusable Adaptive Card JSON snapshot of develop support transition strategy status for embedding in dashboards, emails, or Teams.",
+    "description": "Generates a read-only Adaptive Card JSON file summarizing support transition strategy status from Dynamics 365 ERP for a legal entity, with header, KPI tiles, RAG row, and action buttons.",
     "display_name": "Develop support transition strategy Status Adaptive Card",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "328ad66101ba6cdc",
+      "content_digest": "72b8ec39fff52fda",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AdaptiveCardDevelopSupportTransitionStrategy",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "as_of_date": {
+        "description": "Date the status snapshot represents, used in the card timestamp and filename.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_filename": {
+        "description": "Name of the Adaptive Card JSON file to produce.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

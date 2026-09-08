@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/host_compat_agent",
   "agent_file": "host_compat_agent.py",
-  "agent_sha256": "2d48518a96d17ecdf8f8379fc184647554304aeff533b39166b3387d8afcb889",
+  "agent_sha256": "a85517d560dcab529e0c4fc1dce80472c27ca85e6620e6202aee695c2f4dfa79",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HostCompatAgent",
   "host_dependencies": [],
@@ -29,7 +29,7 @@
       "interop",
       "compat"
     ],
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "runtime_name": "HostCompat",
   "schema": "rapp-agent-lock/1.0",
@@ -144,5 +144,5 @@
     ],
     "type": "object"
   },
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

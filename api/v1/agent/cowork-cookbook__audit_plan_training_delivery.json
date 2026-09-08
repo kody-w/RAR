@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_plan_training_delivery",
   "name": "Plan training delivery Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_plan_training_delivery",
-  "rappid": "rappid:@cowork-cookbook/audit_plan_training_delivery:25758d9c7eb689f2f31c89cd4fae65d607a218d5f8c81ea699e9194221e1a510",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_plan_training_delivery:cfcbe5ce822f89cfc86e80e8e1c0185872535bfbd292fd7367e02211caf80fd1",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_plan_training_delivery:25758d9c7eb689f2f31c89cd4fae65d607a218d5f8c81ea699e9194221e1a510",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_plan_training_delivery:25758d9c7eb689f2f31c89cd4fae65d607a218d5f8c81ea699e9194221e1a510"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits plan training delivery records for completeness and policy compliance against rule-based checks.",
+  "description": "Read-only audit of plan training delivery records in Dynamics 365 F&SCM for a given legal entity, flagging missing fields, stale dates, blank descriptions, inactive references, and policy violations, returned as an Excel",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "02b105e392ef4c275f64a7d4c00a72d1f7d78067a8e99a56b3de77b144a7c44d",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "ff049183e3e67764ff8e15533d3d257d36e97f6edefb29d7c940502e2501129f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

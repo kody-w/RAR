@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_create_website_for_campaigns",
   "name": "Create website for campaigns Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_create_website_for_campaigns",
-  "rappid": "rappid:@cowork-cookbook/dashboard_create_website_for_campaigns:152d9b5fdfa0b8d3f15c0a01b517c6a2544213147469bbb57ae4c80451b7edff",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_create_website_for_campaigns:24f9204f950d6a66483896592f8ac13b2973f47c3ddd5a503d40d4e31bd66992",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_create_website_for_campaigns:152d9b5fdfa0b8d3f15c0a01b517c6a2544213147469bbb57ae4c80451b7edff",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_create_website_for_campaigns:152d9b5fdfa0b8d3f15c0a01b517c6a2544213147469bbb57ae4c80451b7edff"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for create website for campaigns - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls create-website-for-campaigns data from Dynamics 365 ERP for a legal entity and most recent fiscal period, and saves a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the output",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "b591066e2f22000631ad7f4c2a5e0fbb27d7c306828ed0ad74cb470f5df3cab4",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "589a6240c6f3b0f37d007b3de5af69bad846d32816285a3d84f2ae77073acad4",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

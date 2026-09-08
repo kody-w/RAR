@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/prep_for_my_1_1_with_a_seller",
   "agent_file": "prep_for_my_1_1_with_a_seller_agent.py",
-  "agent_sha256": "3ad8663cde83893b7fe1f882c0b280d23f48a317415b453d8d8791cbead4a0bf",
+  "agent_sha256": "325aea652399b6ceaf43f796c91d412ad302cdb1cd23cf51889cd27634f732fd",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PrepForMy11WithASeller",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Walk into every 1:1 with the full picture on your seller's book - and a coaching plan, not just talking points.",
+    "description": "Builds a 1:1 prep brief for a named seller from their Dynamics 365 Sales pipeline, deal movement, activity and win/loss trends plus email/meeting signals, then an interactive HTML coaching dashboard.",
     "display_name": "Prep for my 1:1 with a seller",
     "industry_context": {
       "deprecated": false,
@@ -47,9 +47,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "309c9ee888e989b6",
+      "content_digest": "40346ffcb10c935c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -73,28 +73,29 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PrepForMy11WithASeller",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "seller_name": {
+        "description": "Name of the seller whose book and 1:1 you are preparing for.",
         "type": "string"
       }
     },
@@ -103,5 +104,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

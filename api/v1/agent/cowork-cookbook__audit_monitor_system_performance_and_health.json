@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_monitor_system_performance_and_health",
   "name": "Monitor system performance and health Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_monitor_system_performance_and_health",
-  "rappid": "rappid:@cowork-cookbook/audit_monitor_system_performance_and_health:ce29b668e4f981dad8d7ac38f1c29816aa9db82b32e11a76e376e0da27037d9a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_monitor_system_performance_and_health:1d07b60d882ecdc845f6f4dcb8d1d7799e9004b7112bc0421b5be19f382211e2",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_monitor_system_performance_and_health:ce29b668e4f981dad8d7ac38f1c29816aa9db82b32e11a76e376e0da27037d9a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_monitor_system_performance_and_health:ce29b668e4f981dad8d7ac38f1c29816aa9db82b32e11a76e376e0da27037d9a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits monitor system performance and health records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness audit of system performance and health monitoring records in Dynamics 365 F&SCM for a legal entity, returning an Excel workbook with a sheet per finding category plus a Summary sheet.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "a3ebf51d86fce5607dddba7b1b8cbbb5fe45d0765ba59af0748e501065a826f1",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "2adb45c3ffa05f559c55b44fd4329e879a506286f230a97b616ea0844d800e8f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

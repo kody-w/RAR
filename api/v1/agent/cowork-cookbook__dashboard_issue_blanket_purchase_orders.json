@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_issue_blanket_purchase_orders",
   "name": "Issue blanket purchase orders Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_issue_blanket_purchase_orders",
-  "rappid": "rappid:@cowork-cookbook/dashboard_issue_blanket_purchase_orders:02870ea91c0895aa7297cfeb1e40f0d1fffe9ed56afa531a5a1dbda5f4be3c0d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_issue_blanket_purchase_orders:e84b0fbd2d5d0c76ec9b22114c971cabd190fcf7f0aea8073c6ba78a761469fb",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_issue_blanket_purchase_orders:02870ea91c0895aa7297cfeb1e40f0d1fffe9ed56afa531a5a1dbda5f4be3c0d",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_issue_blanket_purchase_orders:02870ea91c0895aa7297cfeb1e40f0d1fffe9ed56afa531a5a1dbda5f4be3c0d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for issue blanket purchase orders - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls issue blanket purchase order data from Dynamics 365 F&SCM for a legal entity and fiscal period, then saves a standalone interactive HTML dashboard (totals header, SVG charts, sortable table, RAG indicator) to the o",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "6fee3f76309f66b62d63c8cf176079cbb75700c07d402fad7bfd8a3c13be7936",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "2b36cb2f723b28e32f0007632f58cd69541c67cd550571a6665afed3bdb64888",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

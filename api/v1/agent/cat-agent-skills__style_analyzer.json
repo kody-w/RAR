@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__style_analyzer",
   "name": "Communication Style Analyzer",
   "rar_name": "@cat-agent-skills/style_analyzer",
-  "rappid": "rappid:@cat-agent-skills/style_analyzer:509f089d46abea9339ed46faa834c09a6bfb6d97bf1f3259826254e9ed61bdfa",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/style_analyzer:696a9740173e4c2134fe307b502d08d93a79d4b9b4ddcf65691ddbcea03493d7",
+  "_migrated_from": "rappid:@cat-agent-skills/style_analyzer:509f089d46abea9339ed46faa834c09a6bfb6d97bf1f3259826254e9ed61bdfa",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/style_analyzer:509f089d46abea9339ed46faa834c09a6bfb6d97bf1f3259826254e9ed61bdfa"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "productivity",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.0,
-  "sha256": "529eb8528b62f6d9e5c1d80182371e91a9c7d725ddb394fb0588a2d6f7608287",
+  "lines": 262,
+  "size_kb": 12.4,
+  "sha256": "640028ca7ac28a8544a35fd8371ecdd351608fe501ca4b59525f116e1e3c0b7c",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

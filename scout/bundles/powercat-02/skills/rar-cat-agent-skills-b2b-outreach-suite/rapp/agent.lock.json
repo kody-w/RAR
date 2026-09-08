@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/b2b_outreach_suite",
   "agent_file": "b2b_outreach_suite_agent.py",
-  "agent_sha256": "dd2ff9fa0279217e4c73141b6680ecc31bb0dcf55b50f43d15f580b82452c119",
+  "agent_sha256": "b50fc4375cf3ba5d548b20ed337a1afea0fbc564076f6cab1da021097fb34fd0",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "B2bOutreachSuite",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "marketing",
       "content"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "B2bOutreachSuite",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

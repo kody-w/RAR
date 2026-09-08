@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_develop_new_products",
   "name": "Develop new products Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_develop_new_products",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_develop_new_products:ae089b81913b36adbfca46624df345b2a6fec652cec2a193af1286baf273f68a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_develop_new_products:0772f12868f8b23a47d0bf4f8cc9ea68a124bbee30df1ad29d64cfb2c130eed0",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_develop_new_products:ae089b81913b36adbfca46624df345b2a6fec652cec2a193af1286baf273f68a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_develop_new_products:ae089b81913b36adbfca46624df345b2a6fec652cec2a193af1286baf273f68a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on develop new products status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on develop-new-products status from Dynamics 365 F&SCM data for a given legal entity, with KPI, trend, red-flag, action and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "b53d85de14db24d2f3e86def3d863f5a4e954e04c34fd762b8ba27fc5605fcdb",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "023dacae02b9c1b51415c534059e4563c0fb0ae9d75bca10fb7b436cf77a6c79",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

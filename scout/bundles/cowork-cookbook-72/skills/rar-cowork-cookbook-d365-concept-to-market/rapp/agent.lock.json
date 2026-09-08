@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/d365_concept_to_market",
   "agent_file": "d365_concept_to_market_agent.py",
-  "agent_sha256": "2b60df5c23ae412bc6c9391d33e41cde6a3a01bd6c776b56d3789b61bdd85857",
+  "agent_sha256": "5896dae390879521e8df07910a4c7f033257cec2d680a64f4f7837a360084a5e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "D365ConceptToMarket",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "A Dynamics 365 Finance & Supply Chain Management expert scoped to the Concept to market end-to-end process - covers 6 L2 areas and 31 L3 processes from the Microsoft Business Process Catalog.",
+    "description": "Scopes the assistant to Dynamics 365 F&SCM Concept to market (6 L2 areas, 31 L3 processes), answering using that domain's entities and USMF legal entity conventions; call it for concept-to-market questions.",
     "display_name": "D365 Concept to market Expert",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "97e5339c8e1227b5",
+      "content_digest": "95cf7741c3a09d6f",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "D365ConceptToMarket",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

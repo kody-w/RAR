@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/month_end_close_status_dashboard",
   "agent_file": "month_end_close_status_dashboard_agent.py",
-  "agent_sha256": "172221d868f3b44d13a2d20589369706391f05d020bfd670cbd8ab80364e12af",
+  "agent_sha256": "ea06b8159f6ca6993d4e24e786b0f7ea840cec31dd07dd6651fb71ff2a5e22d5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MonthEndCloseStatusDashboard",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds a one-page status dashboard summarizing where each close task stands as of today.",
+    "description": "Builds a one-page month-end close status dashboard for the current period from Dynamics 365 F&SCM data, returning an Excel workbook plus a draft Adaptive Card summary; it does not post to Teams.",
     "display_name": "Month-End Close Status Dashboard",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "a6e6afcdebca360d",
+      "content_digest": "6d776651561c647e",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "MonthEndCloseStatusDashboard",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -112,5 +109,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

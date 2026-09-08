@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_clean_up_and_archive_background_jobs",
   "name": "Clean up and archive background jobs Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_clean_up_and_archive_background_jobs",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_clean_up_and_archive_background_jobs:72014a35d0b04071b95e413bf0a41e909212acbd3081a65b5b276bf1ae6b9c11",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_clean_up_and_archive_background_jobs:f9d4589d8ff8f6e86870c8ee6d68e3c41ebf36b630ac73755e00aeb7210c9e54",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_clean_up_and_archive_background_jobs:72014a35d0b04071b95e413bf0a41e909212acbd3081a65b5b276bf1ae6b9c11",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_clean_up_and_archive_background_jobs:72014a35d0b04071b95e413bf0a41e909212acbd3081a65b5b276bf1ae6b9c11"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across clean up and archive background jobs records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to background job cleanup/archive records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, with a dry-run preview workbook and approval pause before commit.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "4135f5b9d37ce291f71e0c99015cf937c17b1f795b4058ae47d8723851feeb72",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "33de1a9e879afdcc292096799153116eff146d9a75bb590dc474fc85b8f2d1f3",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

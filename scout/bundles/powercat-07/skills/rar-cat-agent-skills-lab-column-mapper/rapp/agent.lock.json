@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/lab_column_mapper",
   "agent_file": "lab_column_mapper_agent.py",
-  "agent_sha256": "5589a92823bbb860000ebb088852972236b3df0668bbe743601f90be85ce0aa1",
+  "agent_sha256": "914d0b5db16447f3e2a56c419e77f313284b3b6100129f4ee95beafda594537c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LabColumnMapper",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "loinc",
       "azure_ai_search"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "LabColumnMapper",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/vendor_invoice_capture_skill",
   "agent_file": "vendor_invoice_capture_skill_agent.py",
-  "agent_sha256": "726bfc1e7f14bb64da0ac946394374d25418bdf169715a0ca0ac269ce3bd3410",
+  "agent_sha256": "985bf2021a2e32174d9a3ec91d451597d676259608e36ddd8a41d85ff607d703",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VendorInvoiceCaptureSkill",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "The packaged Cowork skill that powers the vendor-invoice intake recipe — runs the PDF extraction, USMF vendor match, and pending invoice creation as a single reusable skill, with a 97/100 quality scorecard from the Cowork skill quality tool.",
+    "description": "Runs the packaged vendor-invoice-capture skill against the connected mailbox and Dynamics 365 USMF: scans unread mail for invoice PDFs, extracts fields, matches vendors, skips duplicates, creates pending vendor invoices,",
     "display_name": "Vendor Invoice Capture Skill (packaged + scored)",
     "industry_context": {
       "deprecated": false,
@@ -66,9 +66,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "fab025314d181057",
+      "content_digest": "bf2c38b92120d435",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -92,28 +92,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "VendorInvoiceCaptureSkill",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -122,5 +119,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

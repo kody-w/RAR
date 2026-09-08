@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/build_an_account_research_brief",
   "agent_file": "build_an_account_research_brief_agent.py",
-  "agent_sha256": "203f228ed329756df46b97b2041763fdb0b20a46ff362a905e37b8d4194bfd9e",
+  "agent_sha256": "1223721cc03b3b24a87d4bb6dec8a31821a62b1dcc448f5785d21c4ff9722bc4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BuildAnAccountResearchBrief",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Walk into account planning already knowing the shape of the opportunity - pipeline, stakeholders, recent activity, and where the deal sits - without piecing it together from CRM tabs.",
+    "description": "Produces a Word account research brief for a named customer by pulling Dynamics 365 Sales opportunity, contact, activity and pipeline data and cross-referencing the last 60 days of your emails, meetings and Teams threads",
     "display_name": "Build an account research brief",
     "industry_context": {
       "deprecated": false,
@@ -49,9 +49,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "23c9fa073f79f483",
+      "content_digest": "b4c94809436a2872",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -75,28 +75,29 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BuildAnAccountResearchBrief",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "customer_name": {
+        "description": "The account/customer to research, used to pull the Dynamics 365 Sales record and match engagement history.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -105,5 +106,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

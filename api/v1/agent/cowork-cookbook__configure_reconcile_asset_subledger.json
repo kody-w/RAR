@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_reconcile_asset_subledger",
   "name": "Reconcile asset subledger Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_reconcile_asset_subledger",
-  "rappid": "rappid:@cowork-cookbook/configure_reconcile_asset_subledger:9acb5e0142e132856c3291de507d4cd0734ca5694528aec88fa75301de1eca6b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_reconcile_asset_subledger:1277b4586ce28aaeadfaa38d4fd2de13015d49de027417904aa72b211882f9bd",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_reconcile_asset_subledger:9acb5e0142e132856c3291de507d4cd0734ca5694528aec88fa75301de1eca6b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_reconcile_asset_subledger:9acb5e0142e132856c3291de507d4cd0734ca5694528aec88fa75301de1eca6b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to reconcile asset subledger from an input Excel file, with validation and rollback support.",
+  "description": "Bulk-applies asset subledger reconciliation configuration changes in Dynamics 365 F&SCM from an attached Excel file, validating every row first and pausing for your approval before any write.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "9830cd1711efac4ffca4524cc9cd41aedd36bd9a9216bd9a76ec58593dfa5049",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "e74b9a60aaa7c16cf85e5757bd708568c5cc8bc66c20e862c7421f9fc70b745d",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

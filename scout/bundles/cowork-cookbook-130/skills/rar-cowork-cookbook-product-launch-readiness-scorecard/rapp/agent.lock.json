@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/product_launch_readiness_scorecard",
   "agent_file": "product_launch_readiness_scorecard_agent.py",
-  "agent_sha256": "26a8baac5f7a3ac17f0ffa8ec43de81ab6789469c41f12e717f2a6e189b31fed",
+  "agent_sha256": "b6ec5f73504f1fa0a08c464884371381a0c5b87896afd3b6339348f6880b59d2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProductLaunchReadinessScorecard",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Scores released products on launch readiness based on setup completeness (dimensions, pricing, BOM, tax, default order settings) and produces a scorecard.",
+    "description": "Scores released products from a chosen release window on six setup checks (dimension groups, default order settings, active sales price, BOM for manufactured items, sales tax group, approval) and returns an Excel workboo",
     "display_name": "Released Product Launch Readiness Scorecard",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "07c7efc65e507d80",
+      "content_digest": "06293f2b67612fb8",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ProductLaunchReadinessScorecard",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "rag_thresholds": {
+        "description": "Optional score cutoffs for the RAG indicator (default <60 Red, 60-85 Amber, 85+ Green).",
+        "type": "string"
+      },
+      "release_window": {
+        "description": "Period for products released, e.g. last 6 months; use FY2017 for the USMF demo tenant.",
+        "type": "string"
+      },
+      "teams_channel": {
+        "description": "Optional target channel for posting the Adaptive Card summary, e.g. product-launch.",
+        "type": "string"
+      },
+      "tenant_or_legal_entity": {
+        "description": "D365 F&SCM tenant/legal entity to query, e.g. USMF.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

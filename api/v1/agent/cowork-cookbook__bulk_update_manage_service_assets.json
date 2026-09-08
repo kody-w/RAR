@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_manage_service_assets",
   "name": "Manage service assets Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_manage_service_assets",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_manage_service_assets:7300ea92f40c355020a27e25590ef27605f38d34b9f2a98e9ef9bc02922eec5e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_manage_service_assets:d55208ff9203d83bb728a4466dcdde52d47867fc915a08dd5083a1f5a2a77cfc",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_manage_service_assets:7300ea92f40c355020a27e25590ef27605f38d34b9f2a98e9ef9bc02922eec5e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_manage_service_assets:7300ea92f40c355020a27e25590ef27605f38d34b9f2a98e9ef9bc02922eec5e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across manage service assets records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to manage service assets records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied list of record IDs and new values, returning a dry-run preview workbook for approval",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "c399311498ab9e0ff2de1d8ae37256e0d0b5df8c4a37bb59f3e42e8b91a05978",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "21d9c860946217703b2934a6bd280d422532b2e43f88a73e846ac691317df2bf",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

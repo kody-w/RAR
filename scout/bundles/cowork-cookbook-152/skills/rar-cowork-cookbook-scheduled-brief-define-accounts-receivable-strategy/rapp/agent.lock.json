@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_define_accounts_receivable_strategy",
   "agent_file": "scheduled_brief_define_accounts_receivable_strategy_agent.py",
-  "agent_sha256": "7d096c0c00412b456a04d7bb9fef8c8e64b2470d71543e838e38b46e8d0ee915",
+  "agent_sha256": "3158b4ac6329ac358eda2ad5a2fadc314b8717f9156275117e4f2aab1d9a2ba0",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefDefineAccountsReceivableStrategy",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Schedulable morning-brief email summarizing define accounts receivable strategy for the responsible owner; designed to run daily or weekly.",
+    "description": "Builds a morning brief on accounts receivable strategy from Dynamics 365 ERP data for a legal entity, covering top 5 items by impact, anomalies vs the 7-day rolling average, and next actions, then saves an email draft to",
     "display_name": "Define accounts receivable strategy Scheduled Email Brief",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "5e2c3ca7a92fc9bc",
+      "content_digest": "9317f9f47a77b6fb",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ScheduledBriefDefineAccountsReceivableStrategy",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to pull data from (e.g. USMF).",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "responsible_owner": {
+        "description": "Person the brief is addressed to and whose email draft is created.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "schedule": {
+        "description": "Optional cadence for running as a scheduled task, e.g. weekday mornings at 7am.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

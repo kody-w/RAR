@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_analyze_customer_risk",
   "name": "Analyze customer risk Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_analyze_customer_risk",
-  "rappid": "rappid:@cowork-cookbook/demo_data_analyze_customer_risk:02b20cafb4f533c3501302f4edb3c24562e600bbda66126ebedb3f4400ab2996",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_analyze_customer_risk:7645243abdf2cf37fa8325b53a972a6e9ac82be9df4be923495e7ba9bd88f0dd",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_analyze_customer_risk:02b20cafb4f533c3501302f4edb3c24562e600bbda66126ebedb3f4400ab2996",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_analyze_customer_risk:02b20cafb4f533c3501302f4edb3c24562e600bbda66126ebedb3f4400ab2996"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for analyze customer risk in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo customer-risk records against a sandbox D365 legal entity (default USMF), stages them in a dated Excel workbook, creates them in D365, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "ed241a2b6f8f2d4423be0bcadb9da876060a1f7150e558f716349f8f63bdc30a",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "2b123f77088f2569fd944d968e26c8655ddaa28ddefdff4ecd3486abc3024766",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

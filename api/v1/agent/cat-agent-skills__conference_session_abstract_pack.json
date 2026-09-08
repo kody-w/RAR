@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__conference_session_abstract_pack",
   "name": "Conference Session Abstract Pack",
   "rar_name": "@cat-agent-skills/conference_session_abstract_pack",
-  "rappid": "rappid:@cat-agent-skills/conference_session_abstract_pack:4134f010ac284bdeb48fb3d83ce8477071a962375598e8f8812d8979b6cbcbe5",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "1.1.0",
+  "rappid": "rappid:@cat-agent-skills/conference_session_abstract_pack:487ba4379e1858e0911afcb1ab39b8bc243ff020b23939ea94c6a48727a2a6bf",
+  "_migrated_from": "rappid:@cat-agent-skills/conference_session_abstract_pack:4134f010ac284bdeb48fb3d83ce8477071a962375598e8f8812d8979b6cbcbe5",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/conference_session_abstract_pack:4134f010ac284bdeb48fb3d83ce8477071a962375598e8f8812d8979b6cbcbe5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.9,
-  "sha256": "1555f077ef0d78b201887122101980ce639036b47f08e647ccded556eebc4070",
+  "lines": 262,
+  "size_kb": 12.3,
+  "sha256": "2f037010b37d46b3b8c438a051efa8a15331159a047f2d7bf66dc4ab81cfa2b2",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

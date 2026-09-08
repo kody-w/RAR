@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__win_loss_theme_analysis",
   "name": "Win/Loss Theme Analysis",
   "rar_name": "@cowork-cookbook/win_loss_theme_analysis",
-  "rappid": "rappid:@cowork-cookbook/win_loss_theme_analysis:76af77540c756a0765cb3eb11646853ca2166c089d4e30c1fbded0b703962549",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/win_loss_theme_analysis:f4665897ddf7c4b0f545e1a5c3b9a3cdce4a2d597c77ed0ad66424dae7b3076a",
+  "_migrated_from": "rappid:@cowork-cookbook/win_loss_theme_analysis:76af77540c756a0765cb3eb11646853ca2166c089d4e30c1fbded0b703962549",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/win_loss_theme_analysis:76af77540c756a0765cb3eb11646853ca2166c089d4e30c1fbded0b703962549"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_sales"
   ],
-  "description": "Analyzes closed opportunities to surface recurring themes in why deals are won and lost, grouped by reason, competitor, value band, and stage.",
+  "description": "Analyzes closed won and lost opportunities in a bound Dynamics 365 Sales environment and returns win rates, ranked win/loss reasons, competitor and stage patterns, plus an Excel workbook and a short deck.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "3c07691b700b5f096ed77c40f7b9b4fe17b139cf9ef6cb54f2c4282259605d50",
+  "lines": 265,
+  "size_kb": 18.1,
+  "sha256": "bd9f4823e2de1f8221a8f3a2a4d2d5764fd7cc3993bb10d639e854bbc11a8bb3",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

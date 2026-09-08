@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/microsoft_ai_platform_advisor",
   "agent_file": "microsoft_ai_platform_advisor_agent.py",
-  "agent_sha256": "8bbf35ee4a97ee4ed92876adbbfd13d2b7624c98a137dc949f1f46080a0637d4",
+  "agent_sha256": "2a51178d9d3362113c7b11eecdb5b13b9ef1fc5e30fd699dea41b19f12f3f82f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MicrosoftAiPlatformAdvisor",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "microsoft_365_copilot",
       "foundry"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "MicrosoftAiPlatformAdvisor",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

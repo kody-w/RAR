@@ -1,0 +1,76 @@
+{
+  "agent": "@cat-agent-skills/holiday_recap",
+  "agent_file": "holiday_recap_agent.py",
+  "agent_sha256": "2c2f3afcaaf83a61a8e802af8b22881c167e51e5fb4b813636c06dc77ce2e32a",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "HolidayRecap",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "Suparna Banerjee",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Catch up after annual leave in one pass — a single prioritised briefing of the mail, meetings, and Teams conversations you missed, with deep links and one-click follow-up actions.",
+    "display_name": "Holiday Recap",
+    "name": "@cat-agent-skills/holiday_recap",
+    "platforms": [
+      "Cowork"
+    ],
+    "quality_tier": "frontier",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "source": {
+      "aggregated": true,
+      "content_digest": "b77bc3573d477e5b",
+      "license": "unverified",
+      "license_verified": false,
+      "source_id": "cat-agent-skills",
+      "source_name": "CAT Agent Skills",
+      "source_url": "https://microsoft.github.io/cat-agent-skills/",
+      "upstream_slug": "holiday-recap",
+      "upstream_url": "https://microsoft.github.io/cat-agent-skills/#holiday-recap",
+      "upstream_version": "1.0.0"
+    },
+    "tags": [
+      "productivity",
+      "outlook",
+      "teams",
+      "email",
+      "meetings",
+      "calendar",
+      "summarization",
+      "catch_up"
+    ],
+    "version": "3.0.2"
+  },
+  "runtime_name": "HolidayRecap",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "audience": {
+        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+        "type": "string"
+      },
+      "operation": {
+        "description": "What to do: run, plan, checklist, describe.",
+        "enum": [
+          "run",
+          "plan",
+          "checklist",
+          "describe"
+        ],
+        "type": "string"
+      },
+      "subject": {
+        "description": "What to produce, and about what.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "operation"
+    ],
+    "type": "object"
+  },
+  "version": "3.0.2"
+}

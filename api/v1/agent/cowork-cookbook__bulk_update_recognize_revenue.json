@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_recognize_revenue",
   "name": "Recognize revenue Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_recognize_revenue",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_recognize_revenue:8954fa9582cd195fef9715d9a3f73a5379efc5b8c764bd8815147e7e9172bf23",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_recognize_revenue:fa6db3ecf72a5ad29da48ec8d88e273aea23f67fcd926dc2fda970a43b8929c4",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_recognize_revenue:8954fa9582cd195fef9715d9a3f73a5379efc5b8c764bd8815147e7e9172bf23",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_recognize_revenue:8954fa9582cd195fef9715d9a3f73a5379efc5b8c764bd8815147e7e9172bf23"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across recognize revenue records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 F&SCM recognize revenue records in a given legal entity, producing a dry-run preview workbook for approval before committing and a confirmation workbook after.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "3ab183e591defcb3345ecb611f98a3f46c3ad7950c106fc6610397109eaff98d",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "1a1b56b988f68dbf8763b70efa2d40e791effa8131945cbec3454dc032119b94",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

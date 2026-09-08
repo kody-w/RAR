@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__process_sop_architect",
   "name": "Process & SOP Architect",
   "rar_name": "@cat-agent-skills/process_sop_architect",
-  "rappid": "rappid:@cat-agent-skills/process_sop_architect:b3883abe5a90e240f32aef98a81753cc554aca11e90f196c14ac05f91747f086",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.1.0",
+  "rappid": "rappid:@cat-agent-skills/process_sop_architect:83d31b149666bae47fa600085d21559b0b94855c3946de162b3301234b71e925",
+  "_migrated_from": "rappid:@cat-agent-skills/process_sop_architect:b3883abe5a90e240f32aef98a81753cc554aca11e90f196c14ac05f91747f086",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/process_sop_architect:b3883abe5a90e240f32aef98a81753cc554aca11e90f196c14ac05f91747f086"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.1.2",
   "publisher": "@cat-agent-skills",
   "category": "productivity",
   "tags": [
@@ -24,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.9,
-  "sha256": "7b3e33d031c6c6388c76d4fe360cb24beb8092dd33e2d45b60ab5a93431d84a2",
+  "lines": 262,
+  "size_kb": 12.3,
+  "sha256": "174c35849b502c0837ad6690e7045929d441db09a00f385fe55e768f99c81a83",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

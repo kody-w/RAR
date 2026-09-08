@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_analyze_order_management_processes",
   "agent_file": "ppt_exec_analyze_order_management_processes_agent.py",
-  "agent_sha256": "0b2198cc34eacfd80afd9d3e53f5f635c3e4ae7f9b2088c18a707a5846fe8095",
+  "agent_sha256": "610c1f3c9439f2eaba3a377a24b2b28b58f3d3ab6485bba655c282090ccd0aa7",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecAnalyzeOrderManagementProcesses",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on analyze order management processes status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck analyzing order management processes from Dynamics 365 F&SCM data for a given legal entity, with KPI, trend, issues, actions and appendix slides plus speaker notes.",
     "display_name": "Analyze order management processes Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "28fc4d17942ea08f",
+      "content_digest": "da8c93e1015e7358",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecAnalyzeOrderManagementProcesses",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to analyze, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the .pptx file to produce, e.g. ppt-exec-analyze-order-management-processes-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_length": {
+        "description": "Length of the review the deck must fit, e.g. 15 minutes.",
+        "type": "string"
+      },
+      "review_period": {
+        "description": "Reporting period and prior period used for the trend chart (e.g. monthly review as of 2026-05-24).",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

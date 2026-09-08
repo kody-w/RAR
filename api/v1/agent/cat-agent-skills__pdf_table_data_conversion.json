@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__pdf_table_data_conversion",
   "name": "PDF Table Data Conversion",
   "rar_name": "@cat-agent-skills/pdf_table_data_conversion",
-  "rappid": "rappid:@cat-agent-skills/pdf_table_data_conversion:deb867307a6bd283cca54d26945dc2b3d1ac038ae4368313981ec0e0f27018b4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/pdf_table_data_conversion:6b5858bfd5106b7e2ae96bf1de620f9f46e5fa7120e04f4a19eff55b798b54fd",
+  "_migrated_from": "rappid:@cat-agent-skills/pdf_table_data_conversion:deb867307a6bd283cca54d26945dc2b3d1ac038ae4368313981ec0e0f27018b4",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/pdf_table_data_conversion:deb867307a6bd283cca54d26945dc2b3d1ac038ae4368313981ec0e0f27018b4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "productivity",
   "tags": [
@@ -26,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.1,
-  "sha256": "111afc6de615d21bd7a889670fe83fb7a8c062d7eced5a34668f69aad0e6d049",
+  "lines": 262,
+  "size_kb": 12.5,
+  "sha256": "8bcc954b577b135098beb82f05358cd014cd4bc96fd361763859a2762af5c0a3",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

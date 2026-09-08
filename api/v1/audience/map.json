@@ -1,18 +1,18 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-09-08T00:38:57Z",
+  "generated": "2026-09-08T20:28:50Z",
   "legend": {
     "b": "business",
     "c": "consumer",
     "x": "both"
   },
   "counts": {
-    "business_only": 363,
+    "business_only": 408,
     "consumer_only": 3,
-    "both": 1332,
-    "in_business_mode": 1695,
-    "in_consumer_mode": 1335
+    "both": 1289,
+    "in_business_mode": 1697,
+    "in_consumer_mode": 1292
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -36,6 +36,7 @@
     "@cat-agent-skills/booth_loop_video": "x",
     "@cat-agent-skills/brand_template_enforcer": "x",
     "@cat-agent-skills/brand_voice_pass": "x",
+    "@cat-agent-skills/breathing_room": "x",
     "@cat-agent-skills/browser_uat_analyst": "x",
     "@cat-agent-skills/business_os": "x",
     "@cat-agent-skills/call_for_speakers_digest": "x",
@@ -66,11 +67,12 @@
     "@cat-agent-skills/generating_podcast_script": "x",
     "@cat-agent-skills/global_greenwashing_claim_auditor": "b",
     "@cat-agent-skills/grab_my_files": "x",
+    "@cat-agent-skills/holiday_recap": "b",
     "@cat-agent-skills/idea_refiner": "x",
     "@cat-agent-skills/institutional_knowledge": "x",
     "@cat-agent-skills/iterative_file_editing": "x",
     "@cat-agent-skills/knowledge_corpus_curator": "b",
-    "@cat-agent-skills/knowledge_source_router": "x",
+    "@cat-agent-skills/knowledge_source_router": "b",
     "@cat-agent-skills/lab_column_mapper": "x",
     "@cat-agent-skills/linkedin_content_system": "x",
     "@cat-agent-skills/linkedin_content_writer": "x",
@@ -118,7 +120,7 @@
     "@cowork-cookbook/adaptive_card_adjust_inventory_levels": "x",
     "@cowork-cookbook/adaptive_card_adjust_production_plan": "x",
     "@cowork-cookbook/adaptive_card_allocate_goods": "x",
-    "@cowork-cookbook/adaptive_card_analyze_and_segment_customers_and_markets": "x",
+    "@cowork-cookbook/adaptive_card_analyze_and_segment_customers_and_markets": "b",
     "@cowork-cookbook/adaptive_card_analyze_asset_utilization": "x",
     "@cowork-cookbook/adaptive_card_analyze_customer_risk": "b",
     "@cowork-cookbook/adaptive_card_analyze_marketing_trends": "x",
@@ -148,7 +150,7 @@
     "@cowork-cookbook/adaptive_card_define_business_intelligence_reporting_and_analytics_strategy": "x",
     "@cowork-cookbook/adaptive_card_define_customer_classifications": "b",
     "@cowork-cookbook/adaptive_card_define_customer_order_requirements": "b",
-    "@cowork-cookbook/adaptive_card_define_depreciation_and_amortization_policies": "x",
+    "@cowork-cookbook/adaptive_card_define_depreciation_and_amortization_policies": "b",
     "@cowork-cookbook/adaptive_card_define_implementation_strategy": "x",
     "@cowork-cookbook/adaptive_card_define_order_risk_management_strategy": "b",
     "@cowork-cookbook/adaptive_card_define_organizational_structure": "x",
@@ -249,7 +251,7 @@
     "@cowork-cookbook/adaptive_card_track_employee_learning": "b",
     "@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing": "x",
     "@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale": "x",
-    "@cowork-cookbook/ar_aging_collection_email": "x",
+    "@cowork-cookbook/ar_aging_collection_email": "b",
     "@cowork-cookbook/audit_allocate_budgets": "b",
     "@cowork-cookbook/audit_analyze_and_mitigate_risks": "b",
     "@cowork-cookbook/audit_analyze_asset_leases": "b",
@@ -387,7 +389,7 @@
     "@cowork-cookbook/audit_use_the_knowledge_base_to_find_a_solution": "b",
     "@cowork-cookbook/audit_write_off_bad_debt": "b",
     "@cowork-cookbook/automate_recurring_project_reporting": "x",
-    "@cowork-cookbook/blueprint_credit_and_collections_review": "x",
+    "@cowork-cookbook/blueprint_credit_and_collections_review": "b",
     "@cowork-cookbook/blueprint_period_close_readiness": "x",
     "@cowork-cookbook/blueprint_position_and_onboarding_readiness": "b",
     "@cowork-cookbook/blueprint_procurement_spend_review": "b",
@@ -461,7 +463,7 @@
     "@cowork-cookbook/bulk_update_invoice_project_milestones": "b",
     "@cowork-cookbook/bulk_update_issue_and_settle_supplier_payments": "b",
     "@cowork-cookbook/bulk_update_issue_requests_for_proposals": "x",
-    "@cowork-cookbook/bulk_update_maintain_project_contracts": "x",
+    "@cowork-cookbook/bulk_update_maintain_project_contracts": "b",
     "@cowork-cookbook/bulk_update_maintain_quality_certifications": "x",
     "@cowork-cookbook/bulk_update_manage_authentication": "x",
     "@cowork-cookbook/bulk_update_manage_blanket_sales_orders": "x",
@@ -539,9 +541,9 @@
     "@cowork-cookbook/case_heatmap_html": "b",
     "@cowork-cookbook/catch_up_on_follow_ups_i_owe": "x",
     "@cowork-cookbook/catch_up_on_messages_and_send_replies": "x",
-    "@cowork-cookbook/catch_up_on_what_moved_on_my_deals": "x",
+    "@cowork-cookbook/catch_up_on_what_moved_on_my_deals": "b",
     "@cowork-cookbook/commit_risk_review": "b",
-    "@cowork-cookbook/competitive_move_response_kit": "x",
+    "@cowork-cookbook/competitive_move_response_kit": "b",
     "@cowork-cookbook/configure_adjust_notifications_and_alerts": "x",
     "@cowork-cookbook/configure_allocate_inventory_to_sales_orders": "x",
     "@cowork-cookbook/configure_allocate_or_assign_software_licenses": "x",
@@ -574,9 +576,9 @@
     "@cowork-cookbook/configure_define_business_continuity_objectives": "x",
     "@cowork-cookbook/configure_define_learning_paths": "x",
     "@cowork-cookbook/configure_define_operating_hours": "x",
-    "@cowork-cookbook/configure_define_posting_policies": "x",
+    "@cowork-cookbook/configure_define_posting_policies": "b",
     "@cowork-cookbook/configure_define_product_categories": "x",
-    "@cowork-cookbook/configure_define_project_stakeholders": "x",
+    "@cowork-cookbook/configure_define_project_stakeholders": "b",
     "@cowork-cookbook/configure_define_sales_channels": "x",
     "@cowork-cookbook/configure_define_service_risk_management_strategy": "b",
     "@cowork-cookbook/configure_define_testing_approach": "x",
@@ -624,7 +626,7 @@
     "@cowork-cookbook/configure_model_service_capacity": "x",
     "@cowork-cookbook/configure_monitor_financial_ratios_and_metrics": "x",
     "@cowork-cookbook/configure_nurture_trust_relationship_regularly_with_customer": "b",
-    "@cowork-cookbook/configure_onboard_new_contractors": "x",
+    "@cowork-cookbook/configure_onboard_new_contractors": "b",
     "@cowork-cookbook/configure_oversee_active_campaigns": "x",
     "@cowork-cookbook/configure_perform_corrective_maintenance": "x",
     "@cowork-cookbook/configure_plan_loads": "x",
@@ -640,7 +642,7 @@
     "@cowork-cookbook/configure_process_allocations": "x",
     "@cowork-cookbook/configure_process_customer_rebates": "b",
     "@cowork-cookbook/configure_process_inventory_movements": "x",
-    "@cowork-cookbook/configure_promote_employees": "x",
+    "@cowork-cookbook/configure_promote_employees": "b",
     "@cowork-cookbook/configure_purchase_assets": "x",
     "@cowork-cookbook/configure_re_assign_case_to_another_team_individual": "x",
     "@cowork-cookbook/configure_receive_goods": "x",
@@ -687,7 +689,7 @@
     "@cowork-cookbook/d365_design_to_retire_manage_active_products": "x",
     "@cowork-cookbook/d365_forecast_to_plan": "b",
     "@cowork-cookbook/d365_forecast_to_plan_develop_business_strategy": "b",
-    "@cowork-cookbook/d365_hire_to_retire": "x",
+    "@cowork-cookbook/d365_hire_to_retire": "b",
     "@cowork-cookbook/d365_hire_to_retire_manage_performance_and_growth": "x",
     "@cowork-cookbook/d365_inventory_to_deliver": "x",
     "@cowork-cookbook/d365_inventory_to_deliver_manage_inventory_quality": "x",
@@ -704,7 +706,7 @@
     "@cowork-cookbook/d365_record_to_report_define_accounting_policies": "x",
     "@cowork-cookbook/d365_service_to_deliver": "x",
     "@cowork-cookbook/d365_service_to_deliver_develop_service_strategy": "x",
-    "@cowork-cookbook/d365_source_to_pay": "x",
+    "@cowork-cookbook/d365_source_to_pay": "b",
     "@cowork-cookbook/d365_source_to_pay_manage_supplier_relationships": "b",
     "@cowork-cookbook/dashboard_adjust_inventory_levels": "x",
     "@cowork-cookbook/dashboard_analyze_accounts_receivable": "x",
@@ -738,9 +740,9 @@
     "@cowork-cookbook/dashboard_create_website_for_campaigns": "x",
     "@cowork-cookbook/dashboard_cross_dock_received_goods_to_outbound_orders": "x",
     "@cowork-cookbook/dashboard_define_case_types_and_policies": "x",
-    "@cowork-cookbook/dashboard_define_compensation_policies": "x",
+    "@cowork-cookbook/dashboard_define_compensation_policies": "b",
     "@cowork-cookbook/dashboard_define_customer_order_requirements": "b",
-    "@cowork-cookbook/dashboard_define_depreciation_and_amortization_policies": "x",
+    "@cowork-cookbook/dashboard_define_depreciation_and_amortization_policies": "b",
     "@cowork-cookbook/dashboard_define_expense_policies": "x",
     "@cowork-cookbook/dashboard_define_order_risk_management_strategy": "b",
     "@cowork-cookbook/dashboard_define_organizational_structure": "x",
@@ -757,7 +759,7 @@
     "@cowork-cookbook/dashboard_develop_frontline_team": "x",
     "@cowork-cookbook/dashboard_develop_merchandise_and_assortment_plans": "x",
     "@cowork-cookbook/dashboard_develop_new_products": "x",
-    "@cowork-cookbook/dashboard_develop_order_management_policies": "x",
+    "@cowork-cookbook/dashboard_develop_order_management_policies": "b",
     "@cowork-cookbook/dashboard_develop_procurement_policies": "b",
     "@cowork-cookbook/dashboard_develop_project_governance_strategy": "b",
     "@cowork-cookbook/dashboard_develop_service_policies": "x",
@@ -848,8 +850,8 @@
     "@cowork-cookbook/dashboard_update_work_order_details": "x",
     "@cowork-cookbook/demo_data_adjust_production_plan": "x",
     "@cowork-cookbook/demo_data_allocate_goods": "x",
-    "@cowork-cookbook/demo_data_analyze_and_mitigate_risks": "x",
-    "@cowork-cookbook/demo_data_analyze_and_segment_customers_and_markets": "x",
+    "@cowork-cookbook/demo_data_analyze_and_mitigate_risks": "b",
+    "@cowork-cookbook/demo_data_analyze_and_segment_customers_and_markets": "b",
     "@cowork-cookbook/demo_data_analyze_asset_leases": "x",
     "@cowork-cookbook/demo_data_analyze_asset_utilization": "x",
     "@cowork-cookbook/demo_data_analyze_customer_risk": "b",
@@ -879,13 +881,13 @@
     "@cowork-cookbook/demo_data_define_costing_policies": "x",
     "@cowork-cookbook/demo_data_define_credit_and_collections_strategy": "x",
     "@cowork-cookbook/demo_data_define_customer_classifications": "b",
-    "@cowork-cookbook/demo_data_define_human_resources_policies": "x",
+    "@cowork-cookbook/demo_data_define_human_resources_policies": "b",
     "@cowork-cookbook/demo_data_define_implementation_strategy": "x",
     "@cowork-cookbook/demo_data_define_kpis_for_call_center_performance": "x",
     "@cowork-cookbook/demo_data_define_preliminary_budgets": "x",
     "@cowork-cookbook/demo_data_define_recovery_objectives": "x",
     "@cowork-cookbook/demo_data_define_sales_teams": "x",
-    "@cowork-cookbook/demo_data_define_service_contracts": "x",
+    "@cowork-cookbook/demo_data_define_service_contracts": "b",
     "@cowork-cookbook/demo_data_define_warehouse_management_kpis": "x",
     "@cowork-cookbook/demo_data_delete_users": "x",
     "@cowork-cookbook/demo_data_design_bills_of_materials": "x",
@@ -931,12 +933,12 @@
     "@cowork-cookbook/demo_data_migrate_to_new_versions_of_software": "x",
     "@cowork-cookbook/demo_data_monitor_background_jobs": "x",
     "@cowork-cookbook/demo_data_monitor_product_performance": "x",
-    "@cowork-cookbook/demo_data_monitor_project_risks": "x",
+    "@cowork-cookbook/demo_data_monitor_project_risks": "b",
     "@cowork-cookbook/demo_data_monitor_storage_capacity": "x",
     "@cowork-cookbook/demo_data_monitor_system_performance_and_health": "x",
     "@cowork-cookbook/demo_data_negotiate_and_finalize_quotations": "x",
     "@cowork-cookbook/demo_data_nurture_opportunities_and_finalize_the_sale": "x",
-    "@cowork-cookbook/demo_data_onboard_new_employees": "x",
+    "@cowork-cookbook/demo_data_onboard_new_employees": "b",
     "@cowork-cookbook/demo_data_optimize_service_performance": "x",
     "@cowork-cookbook/demo_data_perform_preventative_maintenance": "x",
     "@cowork-cookbook/demo_data_plan_aggregate_supply": "x",
@@ -944,11 +946,11 @@
     "@cowork-cookbook/demo_data_plan_product_retirement": "x",
     "@cowork-cookbook/demo_data_plan_production": "x",
     "@cowork-cookbook/demo_data_plan_projects_resources": "x",
-    "@cowork-cookbook/demo_data_process_freight_invoices": "x",
+    "@cowork-cookbook/demo_data_process_freight_invoices": "b",
     "@cowork-cookbook/demo_data_process_project_change_requests": "x",
-    "@cowork-cookbook/demo_data_procure_software_licenses_and_add_ons": "x",
+    "@cowork-cookbook/demo_data_procure_software_licenses_and_add_ons": "b",
     "@cowork-cookbook/demo_data_produce_project_materials": "x",
-    "@cowork-cookbook/demo_data_recognize_employees": "x",
+    "@cowork-cookbook/demo_data_recognize_employees": "b",
     "@cowork-cookbook/demo_data_record_asset_lease_right_of_use": "x",
     "@cowork-cookbook/demo_data_record_cost_accounting_transactions": "x",
     "@cowork-cookbook/demo_data_record_employee_time": "b",
@@ -977,7 +979,7 @@
     "@cowork-cookbook/eco_impact_analysis": "x",
     "@cowork-cookbook/event_marketing_command_center": "b",
     "@cowork-cookbook/field_service_daily_utilization": "x",
-    "@cowork-cookbook/find_my_best_expansion_accounts": "x",
+    "@cowork-cookbook/find_my_best_expansion_accounts": "b",
     "@cowork-cookbook/find_patterns_across_your_meetings": "x",
     "@cowork-cookbook/find_the_deals_that_need_my_help": "b",
     "@cowork-cookbook/fixed_asset_register_audit": "b",
@@ -991,7 +993,7 @@
     "@cowork-cookbook/lead_response_time_audit": "b",
     "@cowork-cookbook/map_a_customer_journey_for_a_campaign": "b",
     "@cowork-cookbook/map_a_workflow_from_a_process_description": "x",
-    "@cowork-cookbook/map_an_account_strategy_on_a_miro_board": "x",
+    "@cowork-cookbook/map_an_account_strategy_on_a_miro_board": "b",
     "@cowork-cookbook/messaging_drift_audit_and_remediation": "b",
     "@cowork-cookbook/month_end_close_status_dashboard": "x",
     "@cowork-cookbook/new_customer_onboarding_automation": "x",
@@ -1004,7 +1006,7 @@
     "@cowork-cookbook/pipeline_health_dashboard": "b",
     "@cowork-cookbook/pipeline_risk_and_next_best_actions_review": "b",
     "@cowork-cookbook/planned_order_summary": "x",
-    "@cowork-cookbook/post_launch_readout_and_optimization": "x",
+    "@cowork-cookbook/post_launch_readout_and_optimization": "b",
     "@cowork-cookbook/ppt_exec_allocate_budgets": "x",
     "@cowork-cookbook/ppt_exec_analyze_accounts_receivable": "x",
     "@cowork-cookbook/ppt_exec_analyze_case_patterns": "x",
@@ -1035,11 +1037,11 @@
     "@cowork-cookbook/ppt_exec_create_website_for_campaigns": "x",
     "@cowork-cookbook/ppt_exec_define_agent_skill_sets": "x",
     "@cowork-cookbook/ppt_exec_define_case_types_and_policies": "x",
-    "@cowork-cookbook/ppt_exec_define_compensation_policies": "x",
+    "@cowork-cookbook/ppt_exec_define_compensation_policies": "b",
     "@cowork-cookbook/ppt_exec_define_employee_career_paths": "b",
-    "@cowork-cookbook/ppt_exec_define_expense_policies": "x",
+    "@cowork-cookbook/ppt_exec_define_expense_policies": "b",
     "@cowork-cookbook/ppt_exec_define_extensions_approach": "x",
-    "@cowork-cookbook/ppt_exec_define_leasing_policies": "x",
+    "@cowork-cookbook/ppt_exec_define_leasing_policies": "b",
     "@cowork-cookbook/ppt_exec_define_product_attributes": "x",
     "@cowork-cookbook/ppt_exec_define_product_policies": "x",
     "@cowork-cookbook/ppt_exec_define_security_approach": "x",
@@ -1052,7 +1054,7 @@
     "@cowork-cookbook/ppt_exec_develop_chart_of_accounts_strategy": "x",
     "@cowork-cookbook/ppt_exec_develop_leave_and_absence_policies": "x",
     "@cowork-cookbook/ppt_exec_develop_new_products": "x",
-    "@cowork-cookbook/ppt_exec_develop_order_management_policies": "x",
+    "@cowork-cookbook/ppt_exec_develop_order_management_policies": "b",
     "@cowork-cookbook/ppt_exec_develop_procurement_policies": "b",
     "@cowork-cookbook/ppt_exec_develop_program_charter": "x",
     "@cowork-cookbook/ppt_exec_develop_sales_pricing_strategy": "x",
@@ -1075,7 +1077,7 @@
     "@cowork-cookbook/ppt_exec_implement_cloud_solutions": "x",
     "@cowork-cookbook/ppt_exec_implement_compliance_controls_and_measures": "b",
     "@cowork-cookbook/ppt_exec_implement_process_governance": "b",
-    "@cowork-cookbook/ppt_exec_implement_the_disaster_recovery_plan": "x",
+    "@cowork-cookbook/ppt_exec_implement_the_disaster_recovery_plan": "b",
     "@cowork-cookbook/ppt_exec_insure_assets": "x",
     "@cowork-cookbook/ppt_exec_issue_blanket_purchase_orders": "x",
     "@cowork-cookbook/ppt_exec_issue_sales_invoices": "x",
@@ -1100,8 +1102,8 @@
     "@cowork-cookbook/ppt_exec_monitor_financial_performance": "x",
     "@cowork-cookbook/ppt_exec_monitor_human_capital_expenses": "x",
     "@cowork-cookbook/ppt_exec_monitor_regulatory_compliance": "b",
-    "@cowork-cookbook/ppt_exec_onboard_new_suppliers": "x",
-    "@cowork-cookbook/ppt_exec_onboard_new_users": "x",
+    "@cowork-cookbook/ppt_exec_onboard_new_suppliers": "b",
+    "@cowork-cookbook/ppt_exec_onboard_new_users": "b",
     "@cowork-cookbook/ppt_exec_pay_employees": "x",
     "@cowork-cookbook/ppt_exec_perform_market_research": "x",
     "@cowork-cookbook/ppt_exec_perform_predictive_maintenance": "x",
@@ -1140,7 +1142,7 @@
     "@cowork-cookbook/ppt_exec_troubleshoot_reported_incidents": "x",
     "@cowork-cookbook/ppt_exec_update_work_order_details": "x",
     "@cowork-cookbook/ppt_exec_use_the_knowledge_base_to_find_a_solution": "x",
-    "@cowork-cookbook/prep_for_my_1_1_with_a_seller": "x",
+    "@cowork-cookbook/prep_for_my_1_1_with_a_seller": "b",
     "@cowork-cookbook/prep_for_next_customer_meeting": "b",
     "@cowork-cookbook/prepare_a_complete_out_of_office_handoff": "x",
     "@cowork-cookbook/prepare_a_leadership_update": "x",
@@ -1205,7 +1207,7 @@
     "@cowork-cookbook/report_develop_supplier_segments": "b",
     "@cowork-cookbook/report_dispute_invoices": "x",
     "@cowork-cookbook/report_document_warehouse_policies": "x",
-    "@cowork-cookbook/report_engage_in_conversations_with_customers": "x",
+    "@cowork-cookbook/report_engage_in_conversations_with_customers": "b",
     "@cowork-cookbook/report_ensure_client_approval_and_sign_off": "x",
     "@cowork-cookbook/report_establish_sales_commission_and_incentive_structures": "x",
     "@cowork-cookbook/report_evaluate_campaign_performance": "x",
@@ -1214,7 +1216,7 @@
     "@cowork-cookbook/report_furlough_workers": "x",
     "@cowork-cookbook/report_govern_projects": "x",
     "@cowork-cookbook/report_identify_background_jobs": "x",
-    "@cowork-cookbook/report_identify_business_continuity_risks": "x",
+    "@cowork-cookbook/report_identify_business_continuity_risks": "b",
     "@cowork-cookbook/report_identify_common_issues": "x",
     "@cowork-cookbook/report_identify_continuous_improvement_opportunities": "x",
     "@cowork-cookbook/report_implement_application_lifecycle_management_alm_strategies": "x",
@@ -1270,7 +1272,7 @@
     "@cowork-cookbook/report_record_employee_absences": "b",
     "@cowork-cookbook/report_record_life_events": "x",
     "@cowork-cookbook/report_record_service_timesheet": "x",
-    "@cowork-cookbook/report_renew_software_licenses": "x",
+    "@cowork-cookbook/report_renew_software_licenses": "b",
     "@cowork-cookbook/report_report_on_inventory_quality": "x",
     "@cowork-cookbook/report_report_production_output": "x",
     "@cowork-cookbook/report_report_quality_non_conformance": "x",
@@ -1439,7 +1441,7 @@
     "@cowork-cookbook/scheduled_customer_signal_activation": "b",
     "@cowork-cookbook/stalled_opportunity_reengagement": "x",
     "@cowork-cookbook/stand_up_a_campaign_workspace": "x",
-    "@cowork-cookbook/stand_up_an_account_plan_board": "x",
+    "@cowork-cookbook/stand_up_an_account_plan_board": "b",
     "@cowork-cookbook/teams_update_allocate_headcount_to_business_units": "x",
     "@cowork-cookbook/teams_update_allocate_inventory": "x",
     "@cowork-cookbook/teams_update_allocate_service_parts_inventory": "x",
@@ -1470,7 +1472,7 @@
     "@cowork-cookbook/teams_update_correct_project_transactions": "x",
     "@cowork-cookbook/teams_update_correct_synchronous_integration_failures": "x",
     "@cowork-cookbook/teams_update_count_inventory": "x",
-    "@cowork-cookbook/teams_update_define_accounts_payable_policies": "x",
+    "@cowork-cookbook/teams_update_define_accounts_payable_policies": "b",
     "@cowork-cookbook/teams_update_define_asset_accounting_books": "x",
     "@cowork-cookbook/teams_update_define_benefit_offerings": "x",
     "@cowork-cookbook/teams_update_define_environment_strategy": "x",
@@ -1498,7 +1500,7 @@
     "@cowork-cookbook/teams_update_document_warehouse_policies": "x",
     "@cowork-cookbook/teams_update_drive_app_value": "x",
     "@cowork-cookbook/teams_update_end_product_sales": "x",
-    "@cowork-cookbook/teams_update_engage_in_conversations_with_customers": "x",
+    "@cowork-cookbook/teams_update_engage_in_conversations_with_customers": "b",
     "@cowork-cookbook/teams_update_establish_sales_commission_and_incentive_structures": "x",
     "@cowork-cookbook/teams_update_establish_support_subscription": "x",
     "@cowork-cookbook/teams_update_estimate_the_cost_of_production": "x",
@@ -1510,7 +1512,7 @@
     "@cowork-cookbook/teams_update_forecast_service_parts_demand": "b",
     "@cowork-cookbook/teams_update_govern_projects": "x",
     "@cowork-cookbook/teams_update_identify_applicable_regulations_and_compliance_requirements": "b",
-    "@cowork-cookbook/teams_update_identify_business_continuity_risks": "x",
+    "@cowork-cookbook/teams_update_identify_business_continuity_risks": "b",
     "@cowork-cookbook/teams_update_identify_common_issues": "x",
     "@cowork-cookbook/teams_update_implement_corrective_and_preventative_actions": "x",
     "@cowork-cookbook/teams_update_inspect_manufactured_goods": "x",
@@ -1522,7 +1524,7 @@
     "@cowork-cookbook/teams_update_maintain_budgets": "x",
     "@cowork-cookbook/teams_update_make_payments_on_asset_leases": "x",
     "@cowork-cookbook/teams_update_manage_accruals": "x",
-    "@cowork-cookbook/teams_update_manage_active_suppliers": "x",
+    "@cowork-cookbook/teams_update_manage_active_suppliers": "b",
     "@cowork-cookbook/teams_update_manage_customer_holds": "b",
     "@cowork-cookbook/teams_update_manage_data_security": "x",
     "@cowork-cookbook/teams_update_manage_funds": "x",
@@ -1581,7 +1583,7 @@
     "@cowork-cookbook/turn_a_document_into_a_visual_framework": "x",
     "@cowork-cookbook/turn_inbox_noise_into_an_intelligence_brief": "x",
     "@cowork-cookbook/turn_source_content_into_a_deck": "x",
-    "@cowork-cookbook/turn_source_content_into_campaign_storytelling": "b",
+    "@cowork-cookbook/turn_source_content_into_campaign_storytelling": "x",
     "@cowork-cookbook/upsell_identification": "x",
     "@cowork-cookbook/user_access_review_audit": "b",
     "@cowork-cookbook/vendor_invoice_capture_from_email": "b",
@@ -1796,6 +1798,10 @@
       "b": 0.0,
       "c": 0.0
     },
+    "@cat-agent-skills/breathing_room": {
+      "b": 0.0,
+      "c": 0.0
+    },
     "@cat-agent-skills/browser_uat_analyst": {
       "b": 0.0,
       "c": 0.0
@@ -1916,6 +1922,10 @@
       "b": 0.0,
       "c": 0.0
     },
+    "@cat-agent-skills/holiday_recap": {
+      "b": 4.5,
+      "c": 1.5
+    },
     "@cat-agent-skills/idea_refiner": {
       "b": 0.0,
       "c": 0.0
@@ -1933,7 +1943,7 @@
       "c": 1.5
     },
     "@cat-agent-skills/knowledge_source_router": {
-      "b": 0.0,
+      "b": 4.0,
       "c": 0.0
     },
     "@cat-agent-skills/lab_column_mapper": {
@@ -2125,7 +2135,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/adaptive_card_analyze_and_segment_customers_and_markets": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/adaptive_card_analyze_asset_utilization": {
@@ -2245,7 +2255,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/adaptive_card_define_depreciation_and_amortization_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/adaptive_card_define_implementation_strategy": {
@@ -2365,7 +2375,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/adaptive_card_establish_compliance_policies_and_procedures": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/adaptive_card_evaluate_supplier_performance": {
@@ -2645,15 +2655,15 @@
       "c": 0.0
     },
     "@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale": {
-      "b": 0.0,
+      "b": 0.6,
       "c": 0.0
     },
     "@cowork-cookbook/ar_aging_collection_email": {
-      "b": 2.5,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/audit_allocate_budgets": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_analyze_and_mitigate_risks": {
@@ -2661,7 +2671,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_analyze_asset_leases": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_analyze_inventory_levels": {
@@ -2669,43 +2679,43 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_analyze_order_management_processes": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_analyze_product_profitability": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_analyze_sales_data": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_analyze_sourcing_effectiveness": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_analyze_worker_performance": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_and_surface_against_a_standard": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_appropriate_budgets": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_asses_worker_performance": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_assess_customer_credit_risk": {
-      "b": 7.0,
+      "b": 6.4,
       "c": 0.0
     },
     "@cowork-cookbook/audit_audit_financial_transactions": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_audit_regulatory_compliance": {
@@ -2713,19 +2723,19 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_budget_workforce": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_collect_customer_feedback": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_conduct_a_business_impact_analysis": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_conduct_current_state_analysis": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_configure_and_administer_workflows": {
@@ -2737,7 +2747,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_configure_and_manage_file_storage": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_configure_and_manage_offline_mode_for_apps": {
@@ -2745,23 +2755,23 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_configure_and_manage_reporting_and_analytics": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_consolidate_and_eliminate_financials": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_consume_resources": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_coordinate_service_work_with_customer": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_create_knowledge_base_articles": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_create_production_plan": {
@@ -2769,15 +2779,15 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_agent_skill_sets": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_costing_policies": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_credit_and_collections_strategy": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_employee_career_paths": {
@@ -2785,127 +2795,127 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_extensions_approach": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_human_resources_policies": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_kpis_for_call_center_performance": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_leasing_policies": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_product_attributes": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_define_service_scheduling_approach": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_design_warehouse_layout": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_determine_sales_targets": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_budgets": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_chart_of_accounts_strategy": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_continuous_improvement_initiatives": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_contractor_network": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_leave_and_absence_policies": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_loyalty_programs": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_procurement_catalogs": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_program_charter": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_prototypes": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_develop_sales_pricing_strategy": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_document_safety_protocols": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_establish_notification_recipients": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_estimate_project_contracts": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_evaluate_marketing_financials": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_evaluate_supplier_bids": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_finalize_and_post_transactions": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_forecast_cash_flow": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_forecast_demand": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_handle_background_job_errors_and_exceptions": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_identify_campaign_audiences": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_identify_production_resources": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_identify_service_trends": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_implement_compliance_controls_and_measures": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_implement_process_governance": {
@@ -2913,43 +2923,43 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_implement_the_disaster_recovery_plan": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_inspect_inventory": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_insure_assets": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_invoice_project_transactions": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_issue_purchase_orders": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_label_received_goods": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_maintain_open_service_requests": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_maintain_product_costs": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_manage_and_implement_encryption": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_manage_customer_collections": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_manage_data": {
@@ -2957,11 +2967,11 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_manage_financial_risks": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_manage_project_communications": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_manage_promissory_notes": {
@@ -2973,35 +2983,35 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_manage_service_pricing": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_manage_supplier_risk": {
-      "b": 7.0,
+      "b": 6.4,
       "c": 0.0
     },
     "@cowork-cookbook/audit_manage_the_initial_synchronization_of_data": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_market_test_new_products": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_merge_cases": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_migrate_to_new_versions_of_software": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_monitor_financial_performance": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_monitor_project_risks": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_monitor_regulatory_compliance": {
@@ -3009,31 +3019,31 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_monitor_system_performance_and_health": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_negotiate_and_finalize_quotations": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_nurture_opportunities_and_finalize_the_sale": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_onboard_new_employees": {
-      "b": 5.8,
+      "b": 6.4,
       "c": 0.0
     },
     "@cowork-cookbook/audit_onboard_new_suppliers": {
-      "b": 5.8,
+      "b": 6.4,
       "c": 0.0
     },
     "@cowork-cookbook/audit_onboard_new_users": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_pay_employees": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_perform_market_research": {
@@ -3041,63 +3051,63 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_perform_predictive_maintenance": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_perform_service_tasks": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_pick_goods": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_plan_asset_leases": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_plan_product_retirement": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_plan_projects_resources": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_plan_risks_and_opportunities": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_plan_service_demand": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_plan_service_operations": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_plan_software_releases": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_plan_training_delivery": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_process_change_requests": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_process_customer_payments": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_process_freight_invoices": {
-      "b": 5.8,
+      "b": 6.4,
       "c": 0.0
     },
     "@cowork-cookbook/audit_process_project_change_requests": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_process_supplier_invoices": {
@@ -3105,23 +3115,23 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_produce_assets": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_quarantine_manufactured_goods": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_rate_loads": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_record_asset_lease_right_of_use": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_record_cost_accounting_transactions": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_record_employee_time": {
@@ -3129,35 +3139,35 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_record_tax_commitments": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_refine_the_training_program": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_reopen_a_case": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_return_goods_to_vendor": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_rework_defective_inventory": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_scrap_an_asset": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_send_notification_to_customer": {
-      "b": 6.4,
+      "b": 5.8,
       "c": 0.0
     },
     "@cowork-cookbook/audit_stage_inventory": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_terminate_workers": {
@@ -3165,35 +3175,35 @@
       "c": 0.0
     },
     "@cowork-cookbook/audit_test_and_validate_the_business_continuity_plan": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_trace_manufactured_goods": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_track_and_analyze_software_licenses": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_track_project_time": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_troubleshoot_reported_incidents": {
-      "b": 5.8,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/audit_update_worker_information": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_use_the_knowledge_base_to_find_a_solution": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/audit_write_off_bad_debt": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/automate_recurring_project_reporting": {
@@ -3201,7 +3211,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/blueprint_credit_and_collections_review": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/blueprint_period_close_readiness": {
@@ -3209,11 +3219,11 @@
       "c": 0.0
     },
     "@cowork-cookbook/blueprint_position_and_onboarding_readiness": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/blueprint_procurement_spend_review": {
-      "b": 4.9,
+      "b": 4.3,
       "c": 0.0
     },
     "@cowork-cookbook/bom_completeness_audit": {
@@ -3497,7 +3507,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/bulk_update_maintain_project_contracts": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/bulk_update_maintain_quality_certifications": {
@@ -3809,15 +3819,15 @@
       "c": 0.0
     },
     "@cowork-cookbook/catch_up_on_what_moved_on_my_deals": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/commit_risk_review": {
-      "b": 4.6,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/competitive_move_response_kit": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/configure_adjust_notifications_and_alerts": {
@@ -3893,7 +3903,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/configure_comply_with_customer_data_regulations": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/configure_conduct_a_compliance_risk_assessment": {
@@ -3949,7 +3959,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/configure_define_posting_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/configure_define_product_categories": {
@@ -3957,7 +3967,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/configure_define_project_stakeholders": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/configure_define_sales_channels": {
@@ -4113,7 +4123,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/configure_manage_supplier_contracts": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/configure_manage_support_incidents": {
@@ -4149,7 +4159,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/configure_onboard_new_contractors": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/configure_oversee_active_campaigns": {
@@ -4213,7 +4223,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/configure_promote_employees": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/configure_purchase_assets": {
@@ -4341,7 +4351,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/customer_credit_limit_review": {
-      "b": 5.2,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/customer_relationship_health_check": {
@@ -4401,7 +4411,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/d365_hire_to_retire": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/d365_hire_to_retire_manage_performance_and_growth": {
@@ -4469,7 +4479,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/d365_source_to_pay": {
-      "b": 2.5,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/d365_source_to_pay_manage_supplier_relationships": {
@@ -4605,7 +4615,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/dashboard_define_compensation_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/dashboard_define_customer_order_requirements": {
@@ -4613,7 +4623,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/dashboard_define_depreciation_and_amortization_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/dashboard_define_expense_policies": {
@@ -4681,11 +4691,11 @@
       "c": 0.0
     },
     "@cowork-cookbook/dashboard_develop_order_management_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/dashboard_develop_procurement_policies": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/dashboard_develop_project_governance_strategy": {
@@ -4825,7 +4835,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/dashboard_manage_procurement_risks": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/dashboard_manage_product_compliance": {
@@ -5045,11 +5055,11 @@
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_analyze_and_mitigate_risks": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_analyze_and_segment_customers_and_markets": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_analyze_asset_leases": {
@@ -5169,7 +5179,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_define_human_resources_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_define_implementation_strategy": {
@@ -5193,7 +5203,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_define_service_contracts": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_define_warehouse_management_kpis": {
@@ -5261,7 +5271,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_establish_compliance_policies_and_procedures": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_establish_notification_recipients": {
@@ -5377,7 +5387,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_monitor_project_risks": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_monitor_storage_capacity": {
@@ -5397,7 +5407,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_onboard_new_employees": {
-      "b": 2.5,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_optimize_service_performance": {
@@ -5429,7 +5439,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_process_freight_invoices": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_process_project_change_requests": {
@@ -5437,7 +5447,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_procure_software_licenses_and_add_ons": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_produce_project_materials": {
@@ -5445,7 +5455,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_recognize_employees": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/demo_data_record_asset_lease_right_of_use": {
@@ -5561,7 +5571,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/find_my_best_expansion_accounts": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/find_patterns_across_your_meetings": {
@@ -5569,7 +5579,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/find_the_deals_that_need_my_help": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/fixed_asset_register_audit": {
@@ -5601,7 +5611,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/lead_qualification_consistency_check": {
-      "b": 4.0,
+      "b": 4.6,
       "c": 0.0
     },
     "@cowork-cookbook/lead_response_time_audit": {
@@ -5617,7 +5627,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/map_an_account_strategy_on_a_miro_board": {
-      "b": 2.5,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/messaging_drift_audit_and_remediation": {
@@ -5633,7 +5643,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/onboard_a_new_hire_with_a_30_60_90_plan": {
-      "b": 0.0,
+      "b": 0.6,
       "c": 0.0
     },
     "@cowork-cookbook/onboarding_checklist_generator": {
@@ -5669,7 +5679,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/post_launch_readout_and_optimization": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_allocate_budgets": {
@@ -5793,7 +5803,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_define_compensation_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_define_employee_career_paths": {
@@ -5801,7 +5811,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_define_expense_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_define_extensions_approach": {
@@ -5809,7 +5819,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_define_leasing_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_define_product_attributes": {
@@ -5861,11 +5871,11 @@
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_develop_order_management_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_develop_procurement_policies": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_develop_program_charter": {
@@ -5953,7 +5963,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_implement_the_disaster_recovery_plan": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_insure_assets": {
@@ -5993,7 +6003,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_manage_procurement_risks": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_manage_product_compliance": {
@@ -6053,11 +6063,11 @@
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_onboard_new_suppliers": {
-      "b": 2.5,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_onboard_new_users": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_pay_employees": {
@@ -6121,7 +6131,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_process_supplier_invoices": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/ppt_exec_produce_assets": {
@@ -6213,7 +6223,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/prep_for_my_1_1_with_a_seller": {
-      "b": 2.5,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/prep_for_next_customer_meeting": {
@@ -6329,7 +6339,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/report_comply_with_customer_data_regulations": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/report_conduct_business_performance_reviews": {
@@ -6473,7 +6483,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/report_engage_in_conversations_with_customers": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/report_ensure_client_approval_and_sign_off": {
@@ -6509,7 +6519,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/report_identify_business_continuity_risks": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/report_identify_common_issues": {
@@ -6609,7 +6619,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/report_manage_supplier_contracts": {
-      "b": 3.1,
+      "b": 3.7,
       "c": 0.0
     },
     "@cowork-cookbook/report_manage_the_recurring_synchronization_of_data": {
@@ -6733,7 +6743,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/report_renew_software_licenses": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/report_report_on_inventory_quality": {
@@ -6833,7 +6843,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/sales_order_validation": {
-      "b": 5.8,
+      "b": 5.2,
       "c": 0.0
     },
     "@cowork-cookbook/sales_target_attainment_tracker": {
@@ -7409,7 +7419,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/stand_up_an_account_plan_board": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/teams_update_allocate_headcount_to_business_units": {
@@ -7533,7 +7543,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/teams_update_define_accounts_payable_policies": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/teams_update_define_asset_accounting_books": {
@@ -7645,7 +7655,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/teams_update_engage_in_conversations_with_customers": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/teams_update_establish_sales_commission_and_incentive_structures": {
@@ -7693,7 +7703,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/teams_update_identify_business_continuity_risks": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/teams_update_identify_common_issues": {
@@ -7741,7 +7751,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/teams_update_manage_active_suppliers": {
-      "b": 2.5,
+      "b": 3.1,
       "c": 0.0
     },
     "@cowork-cookbook/teams_update_manage_customer_holds": {
@@ -7977,7 +7987,7 @@
       "c": 0.0
     },
     "@cowork-cookbook/turn_source_content_into_campaign_storytelling": {
-      "b": 3.1,
+      "b": 2.5,
       "c": 0.0
     },
     "@cowork-cookbook/upsell_identification": {
@@ -7994,7 +8004,7 @@
     },
     "@cowork-cookbook/vendor_invoice_capture_skill": {
       "b": 3.7,
-      "c": 0.8
+      "c": 0.0
     },
     "@cowork-cookbook/vendor_invoice_three_way_match_status": {
       "b": 3.7,

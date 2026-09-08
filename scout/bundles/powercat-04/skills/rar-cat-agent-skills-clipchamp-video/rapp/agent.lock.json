@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/clipchamp_video",
   "agent_file": "clipchamp_video_agent.py",
-  "agent_sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8",
+  "agent_sha256": "99c1a93abfecee1f36363f05c06d8b7f08c9a63e141aeb6e4f2014b6c50b4a4c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ClipchampVideo",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "clipchamp",
       "tts"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "ClipchampVideo",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

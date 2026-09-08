@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_send_case_close_notification",
   "name": "Send case close notification Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_send_case_close_notification",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_send_case_close_notification:889ba5a614f0140ebcadf6a1e5fede72800299de7b87323479b53d67c44016a4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_send_case_close_notification:e686b1355b2a5e2fa0e571e590a572391996f4797ecef069d146e61abf5566d7",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_send_case_close_notification:889ba5a614f0140ebcadf6a1e5fede72800299de7b87323479b53d67c44016a4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_send_case_close_notification:889ba5a614f0140ebcadf6a1e5fede72800299de7b87323479b53d67c44016a4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across send case close notification records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to send case close notification records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, returning a dry-run preview workbook for approval before committing a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "af92f54b1b85eca73b7e0781b113c32b405db6d641d1a0271010d589af703fcf",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "43f203b33ac7816b955b8b5a90a3b039ceaa8467b0cb8dc89016b6e7bd7295f1",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

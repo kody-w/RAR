@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/vendor_invoice_three_way_match_status",
   "agent_file": "vendor_invoice_three_way_match_status_agent.py",
-  "agent_sha256": "2cb439fbe5cf5c566dd0199b043e5dc1e50150e650ac8fcff1cfb39ca93f18d4",
+  "agent_sha256": "2ad732c67447fae36416cbe09fa6073b8499852701ef92951e1258799e4846e6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VendorInvoiceThreeWayMatchStatus",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Builds a status report of vendor invoices and their three-way-match state against POs and goods receipts.",
+    "description": "Read-only report of open vendor invoices posted in the last 30 days whose three-way match is partial or none; returns an Excel workbook grouped by vendor plus an unsent draft email to AP.",
     "display_name": "Vendor Invoice Three-Way Match Status Report",
     "industry_context": {
       "deprecated": false,
@@ -52,9 +52,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "8a903f9e2efd4ea5",
+      "content_digest": "c90c6c5b01666328",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -78,28 +78,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "VendorInvoiceThreeWayMatchStatus",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_range": {
+        "description": "Posting date window for invoices to review; defaults to the last 30 days.",
+        "type": "string"
+      },
+      "email_recipients": {
+        "description": "AP team recipients for the draft summary email (draft only, not sent).",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "output_folder": {
+        "description": "OneDrive Cowork output folder where the workbook is saved.",
         "type": "string"
       }
     },
@@ -108,5 +117,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

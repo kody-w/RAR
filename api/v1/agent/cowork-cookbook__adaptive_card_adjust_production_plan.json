@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_adjust_production_plan",
   "name": "Adjust production plan Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_adjust_production_plan",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_adjust_production_plan:32343f118031e31285c4df2bfd3fc5a365307ab39ac9d49e180b92922f56bf17",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_adjust_production_plan:c5b74e7e120d7e235fc0720bf5c9489f77c6e460a40d4ba9c6c0174f8ab1791d",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_adjust_production_plan:32343f118031e31285c4df2bfd3fc5a365307ab39ac9d49e180b92922f56bf17",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_adjust_production_plan:32343f118031e31285c4df2bfd3fc5a365307ab39ac9d49e180b92922f56bf17"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of adjust production plan status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing adjust production plan status from Dynamics 365 F&SCM for a given legal entity, with header, KPI tiles, RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "a6b0d7069bc960382c3a44aabd738c078304f3524050f12453120f4fb8270f64",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "ce2e372a2cf9f3ed178096d6068b1d1690aaa1cfe3908643b05d6a08674468de",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

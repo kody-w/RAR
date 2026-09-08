@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/fixed_asset_register_audit",
   "agent_file": "fixed_asset_register_audit_agent.py",
-  "agent_sha256": "6ed6542ca6929599ac160e485c6925697c9a379baffd621e592b9ce94923f1fe",
+  "agent_sha256": "f9ecdd88b07558ebe271f15843bc756526c004d6e4e181411812f3df200616fd",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FixedAssetRegisterAudit",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits the fixed asset register for missing fields, inconsistent depreciation profiles, and assets due for retirement.",
+    "description": "Audits a Dynamics 365 F&SCM fixed asset register and returns a workbook flagging assets missing service life or depreciation profile, fully depreciated but not retired, profile mismatched to asset group, or missing locat",
     "display_name": "Fixed Asset Register Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "39d63ed89c228565",
+      "content_digest": "38695a4c2fddf7ae",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "FixedAssetRegisterAudit",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

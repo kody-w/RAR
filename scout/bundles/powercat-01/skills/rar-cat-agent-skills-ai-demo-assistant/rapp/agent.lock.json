@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/ai_demo_assistant",
   "agent_file": "ai_demo_assistant_agent.py",
-  "agent_sha256": "91fdd28e1096d53816d4397debef31b39e5539d37b57a29783db543dc51482d1",
+  "agent_sha256": "0165c6ce3d00a88f977723874a6fb0151cd850b987b27b34359d4a8f111f09c2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AiDemoAssistant",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "content",
       "productivity"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AiDemoAssistant",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

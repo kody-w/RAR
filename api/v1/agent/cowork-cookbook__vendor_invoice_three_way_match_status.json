@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__vendor_invoice_three_way_match_status",
   "name": "Vendor Invoice Three-Way Match Status Report",
   "rar_name": "@cowork-cookbook/vendor_invoice_three_way_match_status",
-  "rappid": "rappid:@cowork-cookbook/vendor_invoice_three_way_match_status:333c4ad265517d71cc9f47fbfd65050abb381053fef5d8bb7d8d1b5ad93c905b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/vendor_invoice_three_way_match_status:7c6997cd93520ddb779c1d4d1e1050cec55e0a00c26d2702d0f836b3708c3f1b",
+  "_migrated_from": "rappid:@cowork-cookbook/vendor_invoice_three_way_match_status:333c4ad265517d71cc9f47fbfd65050abb381053fef5d8bb7d8d1b5ad93c905b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/vendor_invoice_three_way_match_status:333c4ad265517d71cc9f47fbfd65050abb381053fef5d8bb7d8d1b5ad93c905b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a status report of vendor invoices and their three-way-match state against POs and goods receipts.",
+  "description": "Read-only report of open vendor invoices posted in the last 30 days whose three-way match is partial or none; returns an Excel workbook grouped by vendor plus an unsent draft email to AP.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "2cb439fbe5cf5c566dd0199b043e5dc1e50150e650ac8fcff1cfb39ca93f18d4",
+  "lines": 265,
+  "size_kb": 18.3,
+  "sha256": "2ad732c67447fae36416cbe09fa6073b8499852701ef92951e1258799e4846e6",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 ---
 name: "rar-cowork-cookbook-dashboard-define-customer-order-requirements"
-description: "Produces a self-contained interactive HTML dashboard for define customer order requirements - opens in any browser, no D365 access needed by the viewer."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/dashboard_define_customer_order_requirements", "rar_sha256": "33347d6b28ccb3c296b07b399f1eb9901b79d1fabb924470a842cd0bb52fed4f", "source_kind": "rar-agent", "source_commit": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed", "version": "2.0.0", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "dashboard", "prospect_to_quote", "intermediate", "integration", "dynamics_365_erp"]}
+description: "Pulls customer order requirements data from Dynamics 365 F&SCM for a legal entity and most recent fiscal period, then saves a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the outpu"
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/dashboard_define_customer_order_requirements", "rar_sha256": "52e845a5c76ab1e3af7b68daa104979add1956221cde46c61a94a160155ed3f4", "source_kind": "rar-agent", "source_commit": "working-tree", "version": "3.0.3", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "dashboard", "prospect_to_quote", "intermediate", "integration", "dynamics_365_erp"]}
 ---
 
 ## Microsoft Scout runtime
@@ -23,17 +23,18 @@ agent in the user's Brainstem. Never paraphrase the factory or agent into a new
 implementation. The generic direct-file commands in the generated Toaster
 section are recovery guidance; Scout should prefer the verified runner.
 
-Define customer order requirements Interactive HTML Dashboard — Produces a self-contained interactive HTML dashboard for define customer order requirements - opens in any browser, no D365 access needed by the viewer.
+Define customer order requirements Interactive HTML Dashboard — Pulls customer order requirements data from Dynamics 365 F&SCM for a legal entity and most recent fiscal period, then saves a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the outpu
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/dashboard-define-customer-order-requirements
@@ -53,22 +54,35 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 ```json
 {
   "properties": {
+    "context": {
+      "description": "Optional. Details the recipe should use \u2014 the record, scope, dates or filters it asks for.",
+      "type": "string"
+    },
+    "fiscal_period": {
+      "description": "Fiscal period to report on; defaults to the most recent available.",
+      "type": "string"
+    },
+    "legal_entity": {
+      "description": "D365 legal entity to query, e.g. USMF.",
+      "type": "string"
+    },
     "operation": {
-      "description": "What to do: run, plan, checklist, describe.",
+      "description": "What to do: run, prompt, plan, checklist, describe.",
       "enum": [
         "run",
+        "prompt",
         "plan",
         "checklist",
         "describe"
       ],
       "type": "string"
     },
-    "subject": {
-      "description": "The process to automate.",
+    "output_filename": {
+      "description": "Name of the HTML file to write, e.g. dashboard-define-customer-order-requirements-2026-05-24.html.",
       "type": "string"
     },
-    "trigger": {
-      "description": "Optional. What starts it \u2014 schedule, event or manual.",
+    "output_folder": {
+      "description": "Destination folder for the generated HTML, e.g. Documents/Cowork/output/.",
       "type": "string"
     }
   },
@@ -85,7 +99,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `dashboard_define_customer_order_requirements_agent.py` and embedded as the fenced Python below (sha256 33347d6b28ccb3c2…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `dashboard_define_customer_order_requirements_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `dashboard_define_customer_order_requirements_agent.py` and embedded as the fenced Python below (sha256 52e845a5c76ab1e3…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `dashboard_define_customer_order_requirements_agent.py` first:
 
 ```bash
 python3 dashboard_define_customer_order_requirements_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -97,17 +111,18 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 
 ```python  # rapp:deterministic
 """
-Define customer order requirements Interactive HTML Dashboard — Produces a self-contained interactive HTML dashboard for define customer order requirements - opens in any browser, no D365 access needed by the viewer.
+Define customer order requirements Interactive HTML Dashboard — Pulls customer order requirements data from Dynamics 365 F&SCM for a legal entity and most recent fiscal period, then saves a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the outpu
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/dashboard-define-customer-order-requirements
@@ -122,9 +137,9 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cowork-cookbook/dashboard_define_customer_order_requirements',
-    "version": '2.0.0',
+    "version": '3.0.3',
     "display_name": 'Define customer order requirements Interactive HTML Dashboard',
-    "description": 'Produces a self-contained interactive HTML dashboard for define customer order requirements - opens in any browser, no D365 access needed by the viewer.',
+    "description": 'Pulls customer order requirements data from Dynamics 365 F&SCM for a legal entity and most recent fiscal period, then saves a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the outpu',
     "author": 'Sean Galliher and Cowork Cookbook contributors',
     "tags": ['industry_solution', 'business_process', 'prompt', 'dashboard', 'prospect_to_quote', 'intermediate', 'integration', 'dynamics_365_erp'],
     "category": 'integrations',
@@ -143,8 +158,8 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'CC-BY-4.0',
         "license_verified": True,
-        "details": {'license_note': 'Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.', 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
-        "content_digest": 'fcd89656acf904c0',
+        "details": {'license_note': "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.", 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
+        "content_digest": 'a499b5fe949ee7cf',
     },
     "industry_context": {'deprecated': False, 'difficulty': 'intermediate', 'last_verified_on': None, 'mutates_data': False, 'plugin': 'dynamics-365-erp', 'process_roots': ['prospect-to-quote'], 'process_tags': ['prospect-to-quote/estimate-and-quote-sales/define-customer-order-requirements'], 'recipe_category': 'dashboard', 'recipe_type': 'prompt', 'upstream_path': 'prospect-to-quote/dashboard-define-customer-order-requirements', 'uses_skills': {'custom': [], 'ootb': ['PDF'], 'plugin': [{'action': 'data_find_entity_type', 'plugin': 'dynamics-365-erp'}, {'action': 'data_find_entities_sql', 'plugin': 'dynamics-365-erp'}]}, 'verification_status': 'draft'},
     # The platforms the upstream entry targets. First-class and queryable, not
@@ -164,15 +179,15 @@ except ModuleNotFoundError:
             self.metadata = metadata
 
 
-# The toasted capability. The upstream entry supplies the WHAT; this procedure
-# is RAR's own method for that shape of work, generated by
-# @kody-w/skill_toaster_agent from the metadata we hold. No upstream text is
-# reproduced here — see the module docstring.
-_SPEC = {'archetype': 'automate', 'checks': ['Every step is idempotent and the whole run is safely retryable.', 'Failure behaviour is defined per step, and failures are loud.', 'A completion condition exists and is checked.', 'The first production run was reconciled against the manual process.'], 'confidence': 0.667, 'deliverable': 'A runnable automation with a defined trigger, per-step failure policy, an observable signal, and a reconciliation against the manual process.', 'operations': ['run', 'plan', 'checklist', 'describe'], 'params': {'subject': 'The process to automate.', 'trigger': 'Optional. What starts it — schedule, event or manual.'}, 'refined_by': 'rules', 'signals': ['tag:integration'], 'steps': ['Run the process manually once and write down every step, including the ones people do without noticing.', 'Identify the trigger and the completion condition. An automation with no defined end does not terminate, it accumulates.', 'Make each step idempotent, so a retry is safe and a partial run can be resumed rather than restarted.', 'Decide failure behaviour per step: retry, skip, or halt. Silent failure is the expensive one.', 'Add an observable signal — a log line, a status file, a notification — so a broken run is noticed without being looked for.', 'Run it alongside the manual process until they agree, then retire the manual path deliberately.'], 'subject_label': 'process to automate', 'verb': 'Automate'}
+# The toasted capability, generated by @kody-w/skill_toaster_agent. A licensed
+# recipe entry carries the upstream recipe verbatim (with attribution) in
+# _SPEC["recipe"]; a metadata-only entry carries RAR's own method for that shape
+# of work. See the module docstring for which this is.
+_SPEC = {'archetype': 'recipe', 'checks': ['Prerequisite: Dynamics 365 F&SCM access with the appropriate role', 'Prerequisite: Cowork D365 ERP plugin enabled', 'Output matches: See the prompt for the specific deliverable(s). All generated files land in `Documents/Cowork/output/` in OneDrive.'], 'confidence': 1.0, 'deliverable': 'See the prompt for the specific deliverable(s). All generated files land in `Documents/Cowork/output/` in OneDrive.', 'operations': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'params': {'context': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'fiscal_period': 'Fiscal period to report on; defaults to the most recent available.', 'legal_entity': 'D365 legal entity to query, e.g. USMF.', 'output_filename': 'Name of the HTML file to write, e.g. dashboard-define-customer-order-requirements-2026-05-24.html.', 'output_folder': 'Destination folder for the generated HTML, e.g. Documents/Cowork/output/.'}, 'recipe': {'authors': ['Sean Galliher'], 'business_value': 'Lets ops leadership share a live-looking view of define customer order requirements with executives and customers without granting D365 logins.', 'expected_output': 'See the prompt for the specific deliverable(s). All generated files land in `Documents/Cowork/output/` in OneDrive.', 'platform': 'Microsoft 365 Copilot Cowork', 'prerequisites': ['Dynamics 365 F&SCM access with the appropriate role', 'Cowork D365 ERP plugin enabled'], 'prompt': "Using the Dynamics 365 ERP plugin against legal entity USMF, pull define customer order requirements data for the most recent fiscal period available. Produce a standalone HTML file 'dashboard-define-customer-order-requirements-2026-05-24.html' that renders an interactive dashboard with: (a) a header with totals and 'data refreshed at' timestamp, (b) at least two inline SVG charts (bar, donut, or trend), (c) a sortable detail table beneath, (d) a colour-coded RAG indicator. Save the HTML to the output folder. Do not modify any data.", 'steps': ['Open Cowork and confirm the Dynamics 365 ERP plugin is toggled on for your session.', 'Paste the prompt from `prompt.md` into a new task.', 'Review the generated output and adjust scope as needed.'], 'tenant_caveat': '', 'verified_against': '', 'what_it_does': 'Builds a single-file HTML dashboard with inline SVG/d3 charts visualizing define customer order requirements.'}, 'refined_by': 'claude-opus-5', 'refinement': {'description': 'Pulls customer order requirements data from Dynamics 365 F&SCM for a legal entity and most recent fiscal period, then saves a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the outpu', 'example_request': 'Build me an interactive HTML dashboard of customer order requirements for USMF, latest fiscal period.', 'inputs': [{'description': 'D365 legal entity to query, e.g. USMF.', 'name': 'legal_entity'}, {'description': 'Fiscal period to report on; defaults to the most recent available.', 'name': 'fiscal_period'}, {'description': 'Name of the HTML file to write, e.g. dashboard-define-customer-order-requirements-2026-05-24.html.', 'name': 'output_filename'}, {'description': 'Destination folder for the generated HTML, e.g. Documents/Cowork/output/.', 'name': 'output_folder'}], 'model': 'claude-opus-5', 'when_to_use': 'Call when a user wants customer order requirements from D365 packaged as a shareable browser dashboard for viewers who lack D365 access.'}, 'signals': ['recipe:prompt', 'refined'], 'steps': ['Open Cowork and confirm the Dynamics 365 ERP plugin is toggled on for your session.', 'Paste the prompt from `prompt.md` into a new task.', 'Review the generated output and adjust scope as needed.'], 'subject_label': 'context for the recipe', 'verb': 'Run'}
 
 
 class DashboardDefineCustomerOrderRequirements(BasicAgent):
-    """Automate agent, toasted from an aggregated upstream entry."""
+    """Run agent, toasted from an aggregated upstream entry."""
 
     def __init__(self):
         self.name = 'DashboardDefineCustomerOrderRequirements'
@@ -182,7 +197,7 @@ class DashboardDefineCustomerOrderRequirements(BasicAgent):
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
-                "properties": {'operation': {'description': 'What to do: run, plan, checklist, describe.', 'enum': ['run', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'subject': {'description': 'The process to automate.', 'type': 'string'}, 'trigger': {'description': 'Optional. What starts it — schedule, event or manual.', 'type': 'string'}},
+                "properties": {'context': {'description': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'type': 'string'}, 'fiscal_period': {'description': 'Fiscal period to report on; defaults to the most recent available.', 'type': 'string'}, 'legal_entity': {'description': 'D365 legal entity to query, e.g. USMF.', 'type': 'string'}, 'operation': {'description': 'What to do: run, prompt, plan, checklist, describe.', 'enum': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'output_filename': {'description': 'Name of the HTML file to write, e.g. dashboard-define-customer-order-requirements-2026-05-24.html.', 'type': 'string'}, 'output_folder': {'description': 'Destination folder for the generated HTML, e.g. Documents/Cowork/output/.', 'type': 'string'}},
                 "required": ["operation"],
             },
         }
@@ -254,12 +269,86 @@ class DashboardDefineCustomerOrderRequirements(BasicAgent):
         ]
         return lines
 
+    # ── recipe entries: the upstream recipe, verbatim, deterministic ─────
+
+    def _recipe_context(self, kwargs):
+        extras = []
+        subject = self._subject(kwargs)
+        if subject:
+            extras.append(f"subject: {subject}")
+        for key in _SPEC["params"]:
+            value = str(kwargs.get(key) or "").strip()
+            if value:
+                extras.append(f"{key}: {value}")
+        return extras
+
+    def _recipe_prompt(self, kwargs):
+        r = _SPEC["recipe"]
+        lines = [r["prompt"]]
+        extras = self._recipe_context(kwargs)
+        if extras:
+            lines += ["", "Context supplied by the caller:"] + [f"- {e}" for e in extras]
+        return lines
+
+    def _recipe_attribution(self):
+        src = __manifest__["source"]
+        r = _SPEC["recipe"]
+        who = ", ".join(r.get("authors") or []) or __manifest__["author"]
+        return [
+            f"Recipe: {__manifest__['display_name']} — by {who}, {src['source_name']} "
+            f"({src['license']}). Source: {src['upstream_url']}",
+        ]
+
+    def _perform_recipe(self, op, kwargs):
+        r = _SPEC["recipe"]
+        ref = _SPEC.get("refinement") or {}
+        if op == "prompt":
+            return "\n".join(self._recipe_prompt(kwargs) + [""] + self._recipe_attribution())
+        if op == "plan":
+            lines = [f"Steps for {__manifest__['display_name']} on {r['platform']}:"]
+            lines += [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "checklist":
+            lines = ["Before you run it:"] + [f"  [ ] {p}" for p in r["prerequisites"]]
+            if r.get("expected_output"):
+                lines += ["", "Done when:", f"  [ ] {r['expected_output']}"]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "describe":
+            lines = self._provenance()
+            if ref.get("when_to_use"):
+                lines += ["", f"When to use: {ref['when_to_use']}"]
+            if ref.get("example_request"):
+                lines += [f"Ask for it like: {ref['example_request']}"]
+            if ref.get("inputs"):
+                lines += ["", "It will ask you for:"] + [f"  - {i['name']}: {i['description']}" for i in ref["inputs"]]
+            if r.get("business_value"):
+                lines += ["", f"Why it matters: {r['business_value']}"]
+            return "\n".join(lines)
+        if op == "run":
+            lines = [f"{__manifest__['display_name']} — run on {r['platform']}", ""]
+            if r.get("what_it_does"):
+                lines += [r["what_it_does"], ""]
+            lines += [f"Prompt (paste into {r['platform']}):", ""] + self._recipe_prompt(kwargs) + [""]
+            lines += ["Procedure:"] + [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)] + [""]
+            lines += ["Acceptance checks:"] + [f"  [ ] {c}" for c in _SPEC["checks"]] + [""]
+            lines += [f"Deliverable: {_SPEC['deliverable']}", ""]
+            if r.get("tenant_caveat"):
+                lines += [f"Verified upstream: {r['tenant_caveat']}", ""]
+            return "\n".join(lines + self._recipe_attribution())
+        return (
+            f"Unknown operation {op!r}. Valid operations: "
+            + ", ".join(_SPEC["operations"])
+        )
+
     # ── entry point ─────────────────────────────────────────────────────
 
     def perform(self, **kwargs):
         """Run the toasted capability. Always returns a string."""
         op = str(kwargs.get("operation") or "run").strip().lower()
         subject = self._subject(kwargs)
+
+        if _SPEC.get("recipe"):
+            return self._perform_recipe(op, kwargs)
 
         if op == "describe":
             return "\n".join(self._provenance())
@@ -289,4 +378,4 @@ if __name__ == "__main__":
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1: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 -->

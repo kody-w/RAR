@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_implement_a_business_continuity_plan",
   "name": "Implement a business continuity plan Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_implement_a_business_continuity_plan",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_implement_a_business_continuity_plan:3a5d66b3a299a8c84af5786cafbc6c2f1c448bd5b9df57fa9159e5fe277d4a3c",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_implement_a_business_continuity_plan:317395b5eb0b0270e741cff57d699ea4525e5ec2df96864c9b40583df9fa90f2",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_implement_a_business_continuity_plan:3a5d66b3a299a8c84af5786cafbc6c2f1c448bd5b9df57fa9159e5fe277d4a3c",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_implement_a_business_continuity_plan:3a5d66b3a299a8c84af5786cafbc6c2f1c448bd5b9df57fa9159e5fe277d4a3c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across implement a business continuity plan records from an input list, with dry-run preview before commit.",
+  "description": "Runs a bulk field update on business continuity plan records in Dynamics 365 F&SCM via the Cowork D365 ERP plugin: returns a dry-run preview workbook, waits for approval, then applies and confirms.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "e9dd7dfcce22a6a5ec768771107354fcedafbaaa6b0d040b5ef950f3ddc2c40a",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "e2e826a5b60b45e682fe2e81a541f6c34a5b425ce7aa97ddb1eaf9f2894643b0",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

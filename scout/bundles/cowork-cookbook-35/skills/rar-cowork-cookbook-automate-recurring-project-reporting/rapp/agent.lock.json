@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/automate_recurring_project_reporting",
   "agent_file": "automate_recurring_project_reporting_agent.py",
-  "agent_sha256": "8ee6baf76060e5b0b1a34acc7a0d672246f08d5acef6c6391a02455bea1ee05e",
+  "agent_sha256": "38f198377f37a2e2241dc9c968bc1ca49359484af240ac875643e3c7b262bd47",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AutomateRecurringProjectReporting",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Replace the manual \"pull the board, write the update, send it out\" Monday-morning cycle with a status update that writes and sends itself.",
+    "description": "Sets up a recurring bi-weekly project status update in Microsoft 365 Copilot Cowork that pulls from a monday.com board and drafts an update covering health, completed tasks, upcoming deadlines, and blockers for a stakeho",
     "display_name": "Automate recurring project reporting",
     "industry_context": {
       "deprecated": false,
@@ -48,9 +48,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "604027779498dc7b",
+      "content_digest": "22ac98ad8c1e46d7",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,28 +74,41 @@
       "integration",
       "monday_com"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "AutomateRecurringProjectReporting",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "cadence": {
+        "description": "Delivery schedule, e.g. every other Monday (bi-weekly).",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "monday_board": {
+        "description": "The monday.com board to pull task and status data from.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "project_name": {
+        "description": "Name of the project the status update covers.",
+        "type": "string"
+      },
+      "recipients": {
+        "description": "Stakeholder or distribution list the update is sent to.",
         "type": "string"
       }
     },
@@ -104,5 +117,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

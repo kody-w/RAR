@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_monitor_employee_satisfaction",
   "name": "Monitor employee satisfaction Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_monitor_employee_satisfaction",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_monitor_employee_satisfaction:dd27dd2e350780e41502b09da95f977080824ca3b88881f116b0bdfc1d5c8725",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_monitor_employee_satisfaction:fd5a10f3720029cdb0a7ca17e294836b42773a8e64407b79591379a4657bcb63",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_monitor_employee_satisfaction:dd27dd2e350780e41502b09da95f977080824ca3b88881f116b0bdfc1d5c8725",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_monitor_employee_satisfaction:dd27dd2e350780e41502b09da95f977080824ca3b88881f116b0bdfc1d5c8725"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing monitor employee satisfaction for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on employee satisfaction from Dynamics 365 ERP data for a given legal entity: top 5 items by impact, anomalies vs the 7-day rolling average, and recommended next actions, saved as an email draft pl",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "63b50696d48a0406ee97f6046ecb3bc9438bdbdda1b8267dc55ae53f5561a159",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "d873646ea6cbc1b600074d0b95e10025570ada84ecf5f2980ece76b5b1511e1d",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

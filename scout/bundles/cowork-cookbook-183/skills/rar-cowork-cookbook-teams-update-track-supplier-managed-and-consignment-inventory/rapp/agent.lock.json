@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_track_supplier_managed_and_consignment_inventory",
   "agent_file": "teams_update_track_supplier_managed_and_consignment_inventory_agent.py",
-  "agent_sha256": "79416024d8ecf63796dea1e75b82a2cb745ffb2604ecd1f2be8ea96e5ecc2344",
+  "agent_sha256": "4907519b9e464b3480efdae400ae44b314c9cd4959bd06a27d779476a99be2ca",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateTrackSupplierManagedAndConsignmentInventory",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on track supplier managed and consignment inventory status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes supplier-managed and consignment inventory from Dynamics 365 F&SCM for a given legal entity and saves a draft Teams channel post plus an Adaptive Card JSON file; nothing is posted.",
     "display_name": "Track supplier managed and consignment inventory Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "b0a5b67e07845ae0",
+      "content_digest": "088dd86390585645",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateTrackSupplierManagedAndConsignmentInventory",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "as_of_date": {
+        "description": "Date used for the report scope and card filename, e.g. 2026-05-24.",
+        "type": "string"
+      },
+      "card_filename": {
+        "description": "Output name for the Adaptive Card JSON artifact.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report on, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "scope_notes": {
+        "description": "Optional narrowing of scope, such as specific suppliers, sites, or items.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

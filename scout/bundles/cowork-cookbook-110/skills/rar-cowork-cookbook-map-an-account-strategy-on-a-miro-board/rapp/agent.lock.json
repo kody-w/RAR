@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/map_an_account_strategy_on_a_miro_board",
   "agent_file": "map_an_account_strategy_on_a_miro_board_agent.py",
-  "agent_sha256": "aa47cf2ec553677f627d7881519ddb7e2e76b24417e8002aba8f4242f82a4908",
+  "agent_sha256": "dc55a6e8a40313301d3fe086859a991f0bd935bde3216411f147073435d24a1b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MapAnAccountStrategyOnAMiroBoard",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Turn an account strategy conversation into a visual map the team can rally around - without spending an afternoon assembling it by hand.",
+    "description": "Builds a Miro account strategy board for a named customer by reviewing your recent emails, meetings, and CRM notes to map stakeholders, deal stages, initiatives, and priorities, plus a tracking table.",
     "display_name": "Map an account strategy on a Miro board",
     "industry_context": {
       "deprecated": false,
@@ -48,9 +48,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "fed772c3bd49b95d",
+      "content_digest": "c4f840d6a74947e0",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,28 +74,29 @@
       "integration",
       "miro"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "MapAnAccountStrategyOnAMiroBoard",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "customer_name": {
+        "description": "The account or customer the strategy board is being built for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -104,5 +105,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

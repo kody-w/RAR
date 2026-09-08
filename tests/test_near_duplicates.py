@@ -93,6 +93,17 @@ def test_dependencies_and_same_stack_are_designed_together():
     assert all(why and why.startswith("same stack") for _, why in rhymes_with(m))
 
 
+def test_aggregated_family_is_designed_together():
+    reg = REGISTRY + [entry("@cowork-cookbook/inventory_heatmap", "Generates a 3D HTML heatmap of warehouse bins.", ["dashboard"],
+                            source={"aggregated": True, "source_id": "cowork-cookbook"})]
+    m = entry("@cowork-cookbook/inventory_heatmap_by_value", "Generates a 3D HTML heatmap of warehouse bins by value.", ["dashboard"],
+              source={"aggregated": True, "source_id": "cowork-cookbook"})
+    hits = rhymes_with(m, reg)
+    assert hits and all(why == "same aggregated library @cowork-cookbook" for _, why in hits)
+    stranger = entry("@someone/inventory_heatmap_clone", "Generates a 3D HTML heatmap of warehouse bins.", ["dashboard"])
+    assert any(why is None for _, why in rhymes_with(stranger, reg))
+
+
 def test_report_clusters_the_family():
     doc = rc.report(REGISTRY)
     assert doc["agents"] == len(REGISTRY)

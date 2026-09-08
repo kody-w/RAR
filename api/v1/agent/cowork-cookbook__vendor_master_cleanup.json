@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__vendor_master_cleanup",
   "name": "Vendor Master Cleanup Report",
   "rar_name": "@cowork-cookbook/vendor_master_cleanup",
-  "rappid": "rappid:@cowork-cookbook/vendor_master_cleanup:a0e2a0a9c81c3646f36a63758ea3f4c3b52e3479bb3abcafb11de59a898b755d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/vendor_master_cleanup:e21f5dc7451c88bb76a77c4498ca05a9e599b04a3f998a24eaefa9dd5083b7a8",
+  "_migrated_from": "rappid:@cowork-cookbook/vendor_master_cleanup:a0e2a0a9c81c3646f36a63758ea3f4c3b52e3479bb3abcafb11de59a898b755d",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/vendor_master_cleanup:a0e2a0a9c81c3646f36a63758ea3f4c3b52e3479bb3abcafb11de59a898b755d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Identifies duplicate, incomplete, or inactive vendors in the master record and proposes a cleanup plan.",
+  "description": "Scans the Dynamics 365 F&SCM vendor master and returns an Excel workbook with one sheet per issue category (missing tax id, payment terms, bank account; inactive vendors with open POs; likely duplicates). Read-only.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "e35db88e2b480e9fc65cf124389bd28c1148750d116ce79201593f5779c51b4b",
+  "lines": 265,
+  "size_kb": 15.1,
+  "sha256": "a345862996c03f70d4fd77df7cea09869a87124551854b016466a6f5c5d3a184",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

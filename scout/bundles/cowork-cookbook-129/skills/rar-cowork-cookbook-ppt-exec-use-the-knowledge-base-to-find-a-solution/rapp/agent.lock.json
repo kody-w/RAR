@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/ppt_exec_use_the_knowledge_base_to_find_a_solution",
   "agent_file": "ppt_exec_use_the_knowledge_base_to_find_a_solution_agent.py",
-  "agent_sha256": "30e220fe410d79d167d4beadc485b70f82c2e487594e2ef604b05892ac1691d1",
+  "agent_sha256": "3dd256eb4d67352174d1af48784e862b87fba58b72af7ed4fe9bb6ab6218403e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PptExecUseTheKnowledgeBaseToFindASolution",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates an executive-ready PowerPoint deck on use the knowledge base to find a solution status, complete with charts and talking-point notes.",
+    "description": "Builds a read-only executive PowerPoint deck on knowledge-base solution status from Dynamics 365 F&SCM data for a given legal entity, with KPI, trend, issues, actions and appendix slides plus speaker notes.",
     "display_name": "Use the knowledge base to find a solution Executive PowerPoint Deck",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "b9743482596a658d",
+      "content_digest": "433036748fd7bc51",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PptExecUseTheKnowledgeBaseToFindASolution",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 F&SCM legal entity to report on, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the .pptx file to produce, e.g. ppt-exec-<topic>-2026-05-24.pptx.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "review_period": {
+        "description": "Reporting period and prior period for the trend comparison (monthly review).",
+        "type": "string"
+      },
+      "topic": {
+        "description": "Subject of the deck, e.g. use the knowledge base to find a solution.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

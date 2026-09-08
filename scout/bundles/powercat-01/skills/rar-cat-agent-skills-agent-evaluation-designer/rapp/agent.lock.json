@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/agent_evaluation_designer",
   "agent_file": "agent_evaluation_designer_agent.py",
-  "agent_sha256": "20b0e309fde16bdfc1a363d270e1aec083d9c00b1a1d7735edd30dff9d6000a2",
+  "agent_sha256": "092e5313a720a8566584b69405d92d384a4563943ea16bf6cb84abf87dd60ff3",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentEvaluationDesigner",
   "host_dependencies": [],
@@ -39,7 +39,7 @@
       "go_live",
       "decision_making"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AgentEvaluationDesigner",
   "schema": "rapp-agent-lock/1.0",
@@ -69,5 +69,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

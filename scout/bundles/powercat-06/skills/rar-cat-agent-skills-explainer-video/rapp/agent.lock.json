@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/explainer_video",
   "agent_file": "explainer_video_agent.py",
-  "agent_sha256": "e67a73837e765ab5655949ff4d5fca1ed395181db51a69d1ea036fb3852bd6d6",
+  "agent_sha256": "9b6c64387e7189d3525390d4505dc759e7542d6c656deae1f0c1414bdb4ba0bc",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ExplainerVideo",
   "host_dependencies": [],
@@ -38,7 +38,7 @@
       "training",
       "communication"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "ExplainerVideo",
   "schema": "rapp-agent-lock/1.0",
@@ -68,5 +68,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

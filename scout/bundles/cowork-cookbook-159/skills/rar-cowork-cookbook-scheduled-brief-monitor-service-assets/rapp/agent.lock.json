@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_monitor_service_assets",
   "agent_file": "scheduled_brief_monitor_service_assets_agent.py",
-  "agent_sha256": "bb3815b5db90efa669934689260c5ae71ed08777cdcc7d70637135e241008113",
+  "agent_sha256": "82b790d157ff0933ec122532287244d711b7b4a351ec7696dd454f90b15ad0b1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefMonitorServiceAssets",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Schedulable morning-brief email summarizing monitor service assets for the responsible owner; designed to run daily or weekly.",
+    "description": "Builds a morning brief on monitor service assets from Dynamics 365 ERP (legal entity USMF) — top 5 items by impact, anomalies vs the 7-day rolling average, and recommended next actions — then saves an email draft to the",
     "display_name": "Monitor service assets Scheduled Email Brief",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "4b39251510a4eaee",
+      "content_digest": "face2d6da5a5bb67",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ScheduledBriefMonitorServiceAssets",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 F&SCM legal entity to query; recipe default is USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "owner": {
+        "description": "Responsible owner who receives the drafted email brief.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "schedule": {
+        "description": "When to run the brief, e.g. weekday mornings at 7am.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

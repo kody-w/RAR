@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__vendor_contract_risk_review",
   "name": "Vendor Contract Risk Review",
   "rar_name": "@cat-agent-skills/vendor_contract_risk_review",
-  "rappid": "rappid:@cat-agent-skills/vendor_contract_risk_review:ad3b2607c77eee810a64097861846c185f1fb074fa3e14572017d037ad83f619",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/vendor_contract_risk_review:01ea2822ffa0ab57bfd260d01673021e4403471896b453374ccb3b6489653d46",
+  "_migrated_from": "rappid:@cat-agent-skills/vendor_contract_risk_review:ad3b2607c77eee810a64097861846c185f1fb074fa3e14572017d037ad83f619",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/vendor_contract_risk_review:ad3b2607c77eee810a64097861846c185f1fb074fa3e14572017d037ad83f619"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.4,
-  "sha256": "b83fe34b7b87dcbf87a736131abad982e5fe477b0823a4204428b09fb1750590",
+  "lines": 262,
+  "size_kb": 12.8,
+  "sha256": "a1eaff0f2d79f7143b9cd5cd11d58b9144cd6537ce0f81ec7f204ad55c256818",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

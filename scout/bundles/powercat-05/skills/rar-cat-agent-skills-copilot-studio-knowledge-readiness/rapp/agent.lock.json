@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_knowledge_readiness",
   "agent_file": "copilot_studio_knowledge_readiness_agent.py",
-  "agent_sha256": "2c9e627e44f3ee2fd57547d82642251701389b02ee2d6252532f8bfa9c6a15e7",
+  "agent_sha256": "ff5febf605e0ed1a3f38a7e99ef1f90a3eef5861fcdd7ffe650fa70cda95c97d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioKnowledgeReadiness",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "readiness",
       "assessment"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "CopilotStudioKnowledgeReadiness",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

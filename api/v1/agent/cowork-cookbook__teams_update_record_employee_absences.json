@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_record_employee_absences",
   "name": "Record employee absences Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_record_employee_absences",
-  "rappid": "rappid:@cowork-cookbook/teams_update_record_employee_absences:ac93db0e886116a330a3c16679beaf4d3935b64c7ad2b788067883cdacf7f810",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_record_employee_absences:9c6aeeb692856fece196d2d5eba9b22c6e14b7763a258ba4101a9e18c88ee8f0",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_record_employee_absences:ac93db0e886116a330a3c16679beaf4d3935b64c7ad2b788067883cdacf7f810",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_record_employee_absences:ac93db0e886116a330a3c16679beaf4d3935b64c7ad2b788067883cdacf7f810"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on record employee absences status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes employee absence records from Dynamics 365 F&SCM for a given legal entity and returns a Teams channel post in markdown plus an Adaptive Card JSON file with KPIs and quick-action buttons, saved for review rathe",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "cdfe5509246f7ec2101b0e3080e0335974c349cae8ffd0ecc16877ff8bcf1f8c",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "7cea8c0afd97ef7e5453ad76c54eebe2034f307bafdc518626073ff80627c14a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

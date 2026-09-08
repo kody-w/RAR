@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/accessibility_pass",
   "agent_file": "accessibility_pass_agent.py",
-  "agent_sha256": "78b164685399af6a913c512c893a064b71d4476f161bb1f868bf8cd03156ee76",
+  "agent_sha256": "2ce6f88d58c2f5c0ca93ed74369fbcfafcca0c06ec2f5492710a5a20a3ca8f8d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AccessibilityPass",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "quality",
       "scripts"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AccessibilityPass",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

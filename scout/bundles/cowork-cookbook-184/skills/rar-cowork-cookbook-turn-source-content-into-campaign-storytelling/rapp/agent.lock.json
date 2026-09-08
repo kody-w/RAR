@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/turn_source_content_into_campaign_storytelling",
   "agent_file": "turn_source_content_into_campaign_storytelling_agent.py",
-  "agent_sha256": "318091cac6ddecd9c2edec0b506684ff26b988ab29b2746aa7b6999738c29b19",
+  "agent_sha256": "ec8a3513294f9ce838dab1917e1b39510ca12783643c071b9fc6f7f58b40d88a",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TurnSourceContentIntoCampaignStorytelling",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Move from raw inputs - a research debrief transcript, customer interview, or campaign brief - to a polished storytelling deck, with iteration built into the flow instead of bolted on after.",
+    "description": "Builds a Prezi storytelling deck in Microsoft 365 Copilot Cowork from a transcript, research notes, or campaign brief, then deepens a chosen slide and adds a talk track. Call when turning source content into a deck.",
     "display_name": "Turn source content into a campaign storytelling deck",
     "industry_context": {
       "deprecated": false,
@@ -47,9 +47,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "62562f802e94aea9",
+      "content_digest": "d8d6a2c4dfe62de5",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -73,28 +73,41 @@
       "integration",
       "prezi"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TurnSourceContentIntoCampaignStorytelling",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "depth_topic": {
+        "description": "The topic, proof point, or data point to add depth on in that slide.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "slide_count": {
+        "description": "How many slides the deck should have.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "slide_to_expand": {
+        "description": "Which slide number to edit for added depth.",
+        "type": "string"
+      },
+      "source_content": {
+        "description": "The meeting transcript, research notes, or campaign brief to build the deck from.",
         "type": "string"
       }
     },
@@ -103,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

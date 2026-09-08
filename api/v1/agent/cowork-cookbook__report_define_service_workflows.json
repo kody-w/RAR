@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_define_service_workflows",
   "name": "Define service workflows Summary Report",
   "rar_name": "@cowork-cookbook/report_define_service_workflows",
-  "rappid": "rappid:@cowork-cookbook/report_define_service_workflows:b4a36662800544fca7f0cd6e824a1027c1cb8e1d1110569703de7b4aa3fe8ac0",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_define_service_workflows:791d34a9c8abe74bd94ad9f62c4d5c05644ff7afeef228779a08510c7d60b67c",
+  "_migrated_from": "rappid:@cowork-cookbook/report_define_service_workflows:b4a36662800544fca7f0cd6e824a1027c1cb8e1d1110569703de7b4aa3fe8ac0",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_define_service_workflows:b4a36662800544fca7f0cd6e824a1027c1cb8e1d1110569703de7b4aa3fe8ac0"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of define service workflows activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of define service workflows activity from Dynamics 365 F&SCM for a legal entity and posted period, producing an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "726cabbcbef9e7f7775d3c525e08191415955e7d3b3ded181088ba26455c5728",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "5740e1029c6163b70704e29c057d34bdc5d77a66baab557d1320f81604151634",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

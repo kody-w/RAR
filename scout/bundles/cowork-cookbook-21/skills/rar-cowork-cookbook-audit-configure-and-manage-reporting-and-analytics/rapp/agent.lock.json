@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/audit_configure_and_manage_reporting_and_analytics",
   "agent_file": "audit_configure_and_manage_reporting_and_analytics_agent.py",
-  "agent_sha256": "c401c039e10289d577c5668200d1ba1561ee90745becd4f3477b1892265573a8",
+  "agent_sha256": "3f837a389b6dcf0e3a8e47267b609d81cc2702ab52ebe335758fb0be780502be",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AuditConfigureAndManageReportingAndAnalytics",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Audits configure and manage reporting and analytics records for completeness and policy compliance against rule-based checks.",
+    "description": "Runs a read-only completeness and policy audit of Dynamics 365 F&SCM reporting-and-analytics configuration records for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary",
     "display_name": "Configure and manage reporting and analytics Completeness Audit",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "6559c7cc2bc97862",
+      "content_digest": "e0351063000da1cf",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AuditConfigureAndManageReportingAndAnalytics",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "date_window": {
+        "description": "Date range treated as current when flagging stale dates (USMF demo data is mostly FY2017).",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to audit, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce, e.g. audit-configure-and-manage-reporting-and-analytics-2026-05-24.xlsx.",
         "type": "string"
       }
     },
@@ -111,5 +120,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

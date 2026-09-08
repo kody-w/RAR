@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_cross_dock_received_goods_to_outbound_orders",
   "agent_file": "adaptive_card_cross_dock_received_goods_to_outbound_orders_agent.py",
-  "agent_sha256": "9134621f175ff36de5e4339f5c70540b40244d3a276317910803d3e369ff1e9f",
+  "agent_sha256": "d500841466147da58382ad4fc0073fe8f5730cbf89a9f2c7139e4cbb65fdea1b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardCrossDockReceivedGoodsToOutboundOrders",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a reusable Adaptive Card JSON snapshot of cross dock received goods to outbound orders status for embedding in dashboards, emails, or Teams.",
+    "description": "Generates a read-only Adaptive Card JSON file showing cross-dock received-goods-to-outbound-order status from Dynamics 365 F&SCM, with KPI tiles, RAG row, and action buttons; call when you need that card.",
     "display_name": "Cross dock received goods to outbound orders Status Adaptive Card",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "6c7ed5fc7a32e624",
+      "content_digest": "b22f667e1274c106",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AdaptiveCardCrossDockReceivedGoodsToOutboundOrders",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "action_button_count": {
+        "description": "How many action buttons to include (2-3).",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "kpi_tile_count": {
+        "description": "How many KPI tiles to include (3-5), each with current value and trend arrow.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_filename": {
+        "description": "Name of the Adaptive Card JSON file to produce, e.g. adaptive-card-cross-dock-received-goods-to-outbound-orders-2026-05-24-card.json.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

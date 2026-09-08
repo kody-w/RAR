@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_rate_loads",
   "name": "Rate loads Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_rate_loads",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_rate_loads:a5a79dba0ef7b54a748422c21254dc2488646f658841e4d6a6ed21c0aecfc235",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_rate_loads:fa0f48865919b367717357e4762e17392af1e58cec0a546ca65cb603e4b4bedc",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_rate_loads:a5a79dba0ef7b54a748422c21254dc2488646f658841e4d6a6ed21c0aecfc235",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_rate_loads:a5a79dba0ef7b54a748422c21254dc2488646f658841e4d6a6ed21c0aecfc235"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on rate loads status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on rate loads from Dynamics 365 F&SCM data for a legal entity, with title, KPI, trend, red-flag, actions and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "5c899635d3b6006dc74bfe8e105a6ee4608954dc5a940c3109c4a52d77f2669f",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "fff2defc3f43601fd6affffaee9c381c777ec3ba63eb4652592331984847f7eb",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

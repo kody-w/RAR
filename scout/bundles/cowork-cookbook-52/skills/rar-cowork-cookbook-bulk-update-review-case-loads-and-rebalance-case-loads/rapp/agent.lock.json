@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/bulk_update_review_case_loads_and_rebalance_case_loads",
   "agent_file": "bulk_update_review_case_loads_and_rebalance_case_loads_agent.py",
-  "agent_sha256": "6662cbcb751534dd7b60f22e166cf12ba697209d5cb431e05f99f510e493d640",
+  "agent_sha256": "0cbc9b719276e36f50d7c1a3899891f141dfb93dec53fa197ca7ea52d7737763",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BulkUpdateReviewCaseLoadsAndRebalanceCaseLoads",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk field update across review case loads and rebalance case loads records from an input list, with dry-run preview before commit.",
+    "description": "Applies a bulk field update to review/rebalance case load records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a supplied ID list, producing a dry-run preview workbook for approval before committing.",
     "display_name": "Review case loads and rebalance case loads Bulk Field Update",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "9d1f62145e2e3e9e",
+      "content_digest": "be99b02ebec1cf32",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BulkUpdateReviewCaseLoadsAndRebalanceCaseLoads",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit approval after reviewing the dry-run preview workbook, before changes are committed.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "Dynamics 365 legal entity to run against (default USMF, sandbox).",
+        "type": "string"
+      },
+      "new_values": {
+        "description": "The field(s) and new value(s) to apply to those records.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "record_ids": {
+        "description": "List of case load record IDs to update.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

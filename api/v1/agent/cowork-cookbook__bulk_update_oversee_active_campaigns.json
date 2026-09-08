@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_oversee_active_campaigns",
   "name": "Oversee active campaigns Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_oversee_active_campaigns",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_oversee_active_campaigns:e1c87ec6e385363f048a8a5ae4de71f366e0cca1a549f6846f8c4987f601071e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_oversee_active_campaigns:e13d28bde8450fb353080cc3d5cd167fd82019a19dba7548f216e06c68a75fe8",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_oversee_active_campaigns:e1c87ec6e385363f048a8a5ae4de71f366e0cca1a549f6846f8c4987f601071e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_oversee_active_campaigns:e1c87ec6e385363f048a8a5ae4de71f366e0cca1a549f6846f8c4987f601071e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across oversee active campaigns records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to oversee active campaigns records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, producing a dry-run preview workbook, pausing for approval, then a confir",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "7034ec9aed4277ca28fa607f48752fdc0e694a2d26760e9c2792994136917618",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "8b97a0e3bcf5b2bbd07b7c2d56f1c86d81807de6e6419e5dd253c3b777c76a4a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

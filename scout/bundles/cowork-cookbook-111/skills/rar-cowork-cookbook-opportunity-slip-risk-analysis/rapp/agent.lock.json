@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/opportunity_slip_risk_analysis",
   "agent_file": "opportunity_slip_risk_analysis_agent.py",
-  "agent_sha256": "5ec0ee169f8e9f50c7da6cdd75315345e3414593e81afd40688f53f8b7a0e5fa",
+  "agent_sha256": "56dc4c7c155ea78628f0cd1436826224294feb9e511e63df6915c2d641506785",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "OpportunitySlipRiskAnalysis",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Scores your open opportunities for the risk of slipping past their estimated close date and produces a prioritized workbook of the ones that need attention.",
+    "description": "Analyzes your open Dynamics 365 Sales opportunities you own, flags ones at risk of slipping past estimated close, and returns an Excel workbook 'opportunity-slip-risk.xlsx' with Summary, At Risk, and Notes sheets.",
     "display_name": "Opportunity Slip-Risk Analysis",
     "industry_context": {
       "deprecated": false,
@@ -59,9 +59,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "d47a601792a90804",
+      "content_digest": "10e74bf17eb9aac8",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -85,28 +85,41 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "OpportunitySlipRiskAnalysis",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "closing_soon_days": {
+        "description": "Days until estimated close that counts as closing soon when the stage is still early (default 30).",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "early_sales_stages": {
+        "description": "Which sales stage values count as early for the closing-soon risk rule.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the Excel workbook to produce (default 'opportunity-slip-risk.xlsx').",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "stale_threshold_days": {
+        "description": "Days without modification before an opportunity is flagged stale (default 30).",
         "type": "string"
       }
     },
@@ -115,5 +128,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

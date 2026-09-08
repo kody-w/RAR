@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_forecast_project_resources",
   "name": "Forecast project resources Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_forecast_project_resources",
-  "rappid": "rappid:@cowork-cookbook/teams_update_forecast_project_resources:4466c6e26f8c4e330a565ffa41aba368807860a3410e0f07f2714c9451e1382b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_forecast_project_resources:297bd4543fe81ba06bb3393c1d7494d9bccae61b533f8fa5d38a2c3e5a5a2dda",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_forecast_project_resources:4466c6e26f8c4e330a565ffa41aba368807860a3410e0f07f2714c9451e1382b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_forecast_project_resources:4466c6e26f8c4e330a565ffa41aba368807860a3410e0f07f2714c9451e1382b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on forecast project resources status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes forecast project resources from the Dynamics 365 ERP plugin for a given legal entity and returns a markdown Teams channel post plus a saved Adaptive Card JSON with KPIs, status indicators, and quick-action but",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "fbca85db68f707b8495fd68431268869d02277419901f13d330f900df61abad8",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "3f17caa0b29de14afeb9e89604c47aecf5d771d1ff5e3c180ac0f950a33266af",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

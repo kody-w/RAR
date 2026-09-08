@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_manage_compensation_changes",
   "name": "Manage compensation changes Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_manage_compensation_changes",
-  "rappid": "rappid:@cowork-cookbook/dashboard_manage_compensation_changes:e6b43e960e2b0e343d14bc4d634123ffdde38f1310d2cada0067d6c3e68805b5",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_manage_compensation_changes:81716c9297089eb6fdb27ddb562a4f50e44d98051f8c47b1ff3349b571459110",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_manage_compensation_changes:e6b43e960e2b0e343d14bc4d634123ffdde38f1310d2cada0067d6c3e68805b5",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_manage_compensation_changes:e6b43e960e2b0e343d14bc4d634123ffdde38f1310d2cada0067d6c3e68805b5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for manage compensation changes - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls manage compensation changes data from Dynamics 365 F&SCM for a legal entity and most recent fiscal period, then writes a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the outp",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "be782da82742ab7bc94402456db057f8e41f74443489b0dd94f918bb205b8421",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "71cd1a6103c7bfa7c1314b6562b23ce4b8237c1a11805140a8c83731a2b85330",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

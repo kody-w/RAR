@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_develop_leave_and_absence_policies",
   "name": "Develop leave and absence policies Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_develop_leave_and_absence_policies",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_develop_leave_and_absence_policies:f314bf20c81e4fe3cc272f878e28fc9b852ac243b29b8c73d91fd2ad07ec13d2",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_develop_leave_and_absence_policies:b0224f13a586d75f9e2bc16855360db9aaa98bb421ebd3cfd84ffbb538187769",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_develop_leave_and_absence_policies:f314bf20c81e4fe3cc272f878e28fc9b852ac243b29b8c73d91fd2ad07ec13d2",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_develop_leave_and_absence_policies:f314bf20c81e4fe3cc272f878e28fc9b852ac243b29b8c73d91fd2ad07ec13d2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on develop leave and absence policies status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on leave and absence policies from Dynamics 365 ERP data for a legal entity, with title, KPI, trend, red-flag, actions and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "c48c7490f848b4f672284c85d9c2f4d5a5d343ea86fd89316705c3e4320cb57a",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "85a21a6017db2afdf67ceea2a4513b9efb81377e2492e8ccf96f1eefdae79fc2",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

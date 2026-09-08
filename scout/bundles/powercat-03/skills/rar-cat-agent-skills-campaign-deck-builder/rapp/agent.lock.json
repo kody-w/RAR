@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/campaign_deck_builder",
   "agent_file": "campaign_deck_builder_agent.py",
-  "agent_sha256": "9eaee36124c834b7c71a49853abb992be0a0ca4f7db6ab125621475019ee15de",
+  "agent_sha256": "e7d5cb5432ba712afe2da34ab2bec2654a82864cd513b584af374c5a67f49e33",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CampaignDeckBuilder",
   "host_dependencies": [],
@@ -39,7 +39,7 @@
       "automation",
       "scripts"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "CampaignDeckBuilder",
   "schema": "rapp-agent-lock/1.0",
@@ -69,5 +69,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

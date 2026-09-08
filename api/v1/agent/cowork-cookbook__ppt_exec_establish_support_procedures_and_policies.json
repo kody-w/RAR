@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_establish_support_procedures_and_policies",
   "name": "Establish support procedures and policies Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_establish_support_procedures_and_policies",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_establish_support_procedures_and_policies:ccca44ea25f11bf2cef3f1aeae25c79189acb154a2d62bcd20ed25906813614e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_establish_support_procedures_and_policies:83e4a4e60f8e64a3bf86fd69f0c75ef43be6da728486087c7dd8ee48e9bab5de",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_establish_support_procedures_and_policies:ccca44ea25f11bf2cef3f1aeae25c79189acb154a2d62bcd20ed25906813614e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_establish_support_procedures_and_policies:ccca44ea25f11bf2cef3f1aeae25c79189acb154a2d62bcd20ed25906813614e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on establish support procedures and policies status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on support procedures and policies status from Dynamics 365 F&SCM data for a given legal entity, with KPI, trend, red-flag, action and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "1f4c511827a033fec13155ed0fe33a92310bb8d653b5713b8257ac8aef452c20",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "f5d26b0c88c62c5b753b9522c921b44bc8c338676ee404d5a5008bebb189e152",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

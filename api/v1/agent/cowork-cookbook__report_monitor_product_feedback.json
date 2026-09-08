@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_monitor_product_feedback",
   "name": "Monitor product feedback Summary Report",
   "rar_name": "@cowork-cookbook/report_monitor_product_feedback",
-  "rappid": "rappid:@cowork-cookbook/report_monitor_product_feedback:4e497050a9a63a25bac5ef66fcfdc8a30569245bff99d27bdbaa32d53151d0fb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_monitor_product_feedback:3a3b19585dcb2ced09333bb3e6c5984851d72ba6e9f66c164751c86199bf7283",
+  "_migrated_from": "rappid:@cowork-cookbook/report_monitor_product_feedback:4e497050a9a63a25bac5ef66fcfdc8a30569245bff99d27bdbaa32d53151d0fb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_monitor_product_feedback:4e497050a9a63a25bac5ef66fcfdc8a30569245bff99d27bdbaa32d53151d0fb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of monitor product feedback activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only monitor product feedback summary report from Dynamics 365 F&SCM (legal entity USMF) for the most recent posted period, delivered as an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "08ccb5a9295535a3b60d6bd3225205be75c66e7892eae0b6e617ffe45376646e",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "ca42571951be922162c44b6dda7b533502aff96f68fb13483cfe07a3d2eb2f45",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

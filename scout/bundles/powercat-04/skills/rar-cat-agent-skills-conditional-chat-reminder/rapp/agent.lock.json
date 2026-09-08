@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/conditional_chat_reminder",
   "agent_file": "conditional_chat_reminder_agent.py",
-  "agent_sha256": "2ff960cf9799c7e9336fd4eea85e8acf88d5d9ebf2ff5c3a52dce0da0f069171",
+  "agent_sha256": "1452500a768e389d1c97a53057224a79ac96991e2267344caed384994b7a8c46",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConditionalChatReminder",
   "host_dependencies": [],
@@ -39,7 +39,7 @@
       "follow_up",
       "productivity"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "ConditionalChatReminder",
   "schema": "rapp-agent-lock/1.0",
@@ -69,5 +69,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

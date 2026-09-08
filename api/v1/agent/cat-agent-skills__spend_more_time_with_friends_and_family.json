@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__spend_more_time_with_friends_and_family",
   "name": "Spend More Time With Friends & Family",
   "rar_name": "@cat-agent-skills/spend_more_time_with_friends_and_family",
-  "rappid": "rappid:@cat-agent-skills/spend_more_time_with_friends_and_family:3328bc380adee4bcad1f628ea8c80d1e7af3148fbc3646db31350e266f0858b2",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/spend_more_time_with_friends_and_family:ec73611d3023b756781d698a2a90951f5930d94ec7b50fc0ebd0781e89c4af3f",
+  "_migrated_from": "rappid:@cat-agent-skills/spend_more_time_with_friends_and_family:3328bc380adee4bcad1f628ea8c80d1e7af3148fbc3646db31350e266f0858b2",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/spend_more_time_with_friends_and_family:3328bc380adee4bcad1f628ea8c80d1e7af3148fbc3646db31350e266f0858b2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "integrations",
   "tags": [
@@ -23,9 +25,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.4,
-  "sha256": "d11659b95fb22912398412b573f58ec52b940dcff10574f772ed0a4b4be892db",
+  "lines": 262,
+  "size_kb": 12.7,
+  "sha256": "ae5c4e43c1e54091d9c0fba127f9b7f077a61289feb638570df2aaab146c313c",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_verify_employment",
   "name": "Verify employment Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_verify_employment",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_verify_employment:0b1289a068de6698e36567bb5fe92c81479af5d792456c97b57c42c6c1b415ab",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_verify_employment:215d9e65cd51421af776d2eb2cca606712f6360f3d2f758330d52a4d780656e8",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_verify_employment:0b1289a068de6698e36567bb5fe92c81479af5d792456c97b57c42c6c1b415ab",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_verify_employment:0b1289a068de6698e36567bb5fe92c81479af5d792456c97b57c42c6c1b415ab"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across verify employment records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to verify-employment records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, returning a dry-run preview workbook for approval, then a confirmation workbook.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "26f3dd39b1c8cfc4943bffbe33f9b4257900356f8f740d728e3d0b26186cb305",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "045e54becc641752d225ea87e6a5f9a04076e7c8de6ed23a330513c343092f21",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

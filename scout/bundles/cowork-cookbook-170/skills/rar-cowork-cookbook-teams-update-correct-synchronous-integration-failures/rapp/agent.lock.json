@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_correct_synchronous_integration_failures",
   "agent_file": "teams_update_correct_synchronous_integration_failures_agent.py",
-  "agent_sha256": "88dac2188f35e74b852ca493bbaeeca76e3410bbd04006a45dfa7ce590bc569f",
+  "agent_sha256": "022fe9796363150ae888799fe1a9cde19a9008572f48d3efd09f03323008e8ca",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCorrectSynchronousIntegrationFailures",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on correct synchronous integration failures status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes the current state of synchronous integration failures from Dynamics 365 F&SCM for a given legal entity and saves a Teams channel post (markdown) plus an Adaptive Card JSON for review; does not post anything.",
     "display_name": "Correct synchronous integration failures Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "34a27326c31dd7ad",
+      "content_digest": "a33014bca7e36e82",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateCorrectSynchronousIntegrationFailures",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "as_of_date": {
+        "description": "Date the status snapshot represents, used in the card filename and post.",
+        "type": "string"
+      },
+      "card_filename": {
+        "description": "Filename for the saved Adaptive Card JSON, e.g. teams-update-correct-synchronous-integration-failures-2026-05-24-card.json.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 F&SCM legal entity to scope the summary, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

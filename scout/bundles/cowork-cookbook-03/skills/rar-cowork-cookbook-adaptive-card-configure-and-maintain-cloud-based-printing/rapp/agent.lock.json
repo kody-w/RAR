@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_configure_and_maintain_cloud_based_printing",
   "agent_file": "adaptive_card_configure_and_maintain_cloud_based_printing_agent.py",
-  "agent_sha256": "f9b2cbb310a77a5856940feac81977ac9c1b04a93e6a900008fbbcc51d90e312",
+  "agent_sha256": "754d339cbc29b0fd9d66ed417d4d5b563d6e9ec19cbc92ce7f9a9d27eeafcbfd",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardConfigureAndMaintainCloudBasedPrinting",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a reusable Adaptive Card JSON snapshot of configure and maintain cloud-based printing status for embedding in dashboards, emails, or Teams.",
+    "description": "Generates a read-only Adaptive Card JSON file summarizing cloud-based printing configuration status from Dynamics 365 F&SCM, with header, KPI tiles, RAG row, and action buttons.",
     "display_name": "Configure and maintain cloud-based printing Status Adaptive Card",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "6ea19abd1c8ac20b",
+      "content_digest": "c1efcdef9bbdbfad",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AdaptiveCardConfigureAndMaintainCloudBasedPrinting",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "action_button_count": {
+        "description": "How many action buttons to include (2-3).",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "kpi_count": {
+        "description": "How many KPI tiles to include (3-5).",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report against, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_filename": {
+        "description": "Name of the Adaptive Card JSON file to produce, e.g. adaptive-card-configure-and-maintain-cloud-based-printing-2026-05-24-card.json.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/chart_builder",
   "agent_file": "chart_builder_agent.py",
-  "agent_sha256": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0",
+  "agent_sha256": "a3ce3929b7708296679c21b8f9a0e58efd70e3cf3c18c6d5e465ed6585c7c3b1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ChartBuilder",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "matplotlib",
       "scripts"
     ],
-    "version": "2.0.1"
+    "version": "3.0.2"
   },
   "runtime_name": "ChartBuilder",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.1"
+  "version": "3.0.2"
 }

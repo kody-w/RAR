@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/skill_toaster_agent",
   "agent_file": "skill_toaster_agent.py",
-  "agent_sha256": "b05707e55b486c96363ae170a6ee0c755bc0c5b797b5e7ff9fcb57c9dc86d625",
+  "agent_sha256": "e90d6b7dc0ffe83e5274346aeb17f79e94894ee345685f897fbd8aa0e9ea6508",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SkillToasterEngine",
   "host_dependencies": [],
@@ -12,7 +12,7 @@
       "@rapp/basic_agent",
       "@kody-w/rappter_engine_agent"
     ],
-    "description": "Turns an aggregated third-party skill entry into a real, callable RAPP agent by inferring the capability's shape from its metadata and generating a working procedure for it.",
+    "description": "Turns an aggregated third-party entry into a real, deterministic RAPP agent: licensed recipes are carried verbatim with attribution (prompt, prerequisites, steps, expected output), metadata-only entries get a method for their shape, and a model pass through the local Brainstem can enrich either into a cached, digest-keyed refinement the build consumes.",
     "display_name": "SkillToaster",
     "name": "@kody-w/skill_toaster_agent",
     "quality_tier": "official",
@@ -25,7 +25,7 @@
       "rules_as_data",
       "toaster"
     ],
-    "version": "1.0.0"
+    "version": "2.0.0"
   },
   "runtime_name": "SkillToaster",
   "schema": "rapp-agent-lock/1.0",
@@ -53,5 +53,5 @@
     ],
     "type": "object"
   },
-  "version": "1.0.0"
+  "version": "2.0.0"
 }

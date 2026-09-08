@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_assess_software_releases",
   "name": "Assess software releases Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_assess_software_releases",
-  "rappid": "rappid:@cowork-cookbook/configure_assess_software_releases:957ce61ccf37e801ef1834bf24d15faf97997edaa7e9596a74c0a5e1271bd59a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_assess_software_releases:a63ad218fe820b3aa4b657fd4e48dc906f64d619e59d7278975bb26d95fe7f65",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_assess_software_releases:957ce61ccf37e801ef1834bf24d15faf97997edaa7e9596a74c0a5e1271bd59a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_assess_software_releases:957ce61ccf37e801ef1834bf24d15faf97997edaa7e9596a74c0a5e1271bd59a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to assess software releases from an input Excel file, with validation and rollback support.",
+  "description": "Reads an attached configuration Excel file of assess-software-releases rows in Dynamics 365 F&SCM (legal entity USMF), validates every row, emits a validation workbook, waits for your approval, then applies changes and e",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "dd39638bf65b3e3ef81af376dc14cedf6b102d1734ca1e4d0e6806c6b8fc7cdf",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "7258ed2efddf7b26fd6bcae61a874583fc77ecff9846c72dd10f943432fba896",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

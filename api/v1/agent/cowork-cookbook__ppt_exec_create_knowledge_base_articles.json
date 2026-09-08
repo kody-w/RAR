@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_create_knowledge_base_articles",
   "name": "Create knowledge base articles Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_create_knowledge_base_articles",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_create_knowledge_base_articles:b67b4d1e6f05b56b441c15168c76af78e0b8c15c641f9cb536cdca913b354972",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_create_knowledge_base_articles:f44d8ccb1edc1a4bc9ef536d1a1f8d316379c29318958eca00896e20c6eb3b10",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_create_knowledge_base_articles:b67b4d1e6f05b56b441c15168c76af78e0b8c15c641f9cb536cdca913b354972",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_create_knowledge_base_articles:b67b4d1e6f05b56b441c15168c76af78e0b8c15c641f9cb536cdca913b354972"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on create knowledge base articles status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on knowledge base article creation status from Dynamics 365 F&SCM data for a given legal entity, with KPI, trend, issues, actions and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "4c70c784753dd2e19eddc75812c046cbb60d83bf49e2e7c993f3afdc2f1698a3",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "f4411788997e2d6796bda466cc64398d9f75aac11ddc907cac65d8770cca15cf",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

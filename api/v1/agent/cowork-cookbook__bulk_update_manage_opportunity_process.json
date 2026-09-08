@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_manage_opportunity_process",
   "name": "Manage opportunity process Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_manage_opportunity_process",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_manage_opportunity_process:6cfe216247c30e3b454e5fbb6d87984af60993f31d876dcb407babbb0cb1938a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_manage_opportunity_process:e04f56a9db7b3a1ec6b5158b43a4bc535fb777bea7d9405582c4fc5b09e5ad0e",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_manage_opportunity_process:6cfe216247c30e3b454e5fbb6d87984af60993f31d876dcb407babbb0cb1938a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_manage_opportunity_process:6cfe216247c30e3b454e5fbb6d87984af60993f31d876dcb407babbb0cb1938a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across manage opportunity process records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 manage opportunity process records in legal entity USMF via the Cowork D365 ERP plugin, producing a dry-run preview workbook for approval before committing changes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "11c530647d46e95ddce250ee2ad825c123af4e438f5809c087a3b0d0635c37f5",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "5f41daa4cc1a03eade6504344636922ce2e36cf932b41f82ab6ad11e8b97546a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

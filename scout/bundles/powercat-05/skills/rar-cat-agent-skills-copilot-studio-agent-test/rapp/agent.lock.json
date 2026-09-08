@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_agent_test",
   "agent_file": "copilot_studio_agent_test_agent.py",
-  "agent_sha256": "6f7094123eb0552125abc477d11ace64488fb220132b6687d3b97322dd477ab7",
+  "agent_sha256": "571bdedba33c20a1913db0d63202aba452b953bb1a6bfe1bb09559c9fb986c64",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioAgentTest",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "agents",
       "power_platform"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "CopilotStudioAgentTest",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_respond_to_non_compliance",
   "name": "Respond to non-compliance Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_respond_to_non_compliance",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_respond_to_non_compliance:32ed0b59566cbdb9e8a2e83dcd14e30a7a072151b8867350d510a36439fc5859",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_respond_to_non_compliance:318f36c49458d0795da680b5c1e9239ba6823c0a1a2d6e55aa569c801145b064",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_respond_to_non_compliance:32ed0b59566cbdb9e8a2e83dcd14e30a7a072151b8867350d510a36439fc5859",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_respond_to_non_compliance:32ed0b59566cbdb9e8a2e83dcd14e30a7a072151b8867350d510a36439fc5859"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across respond to non-compliance records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 F&SCM respond-to-non-compliance records via the Cowork D365 ERP plugin, producing a dry-run preview workbook for approval before committing changes and a confirmation workbook",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "d957fb206b964afc3c48872245f1f08d95176abd5feb012c42e22809573a2b2d",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "2f6c9350496f26eb7cc15b409763507c95cb4e06147402202de71762a1fd365d",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/dashboard_recruit_new_talent",
   "agent_file": "dashboard_recruit_new_talent_agent.py",
-  "agent_sha256": "8f89706fbf791136f1e8576dae0d3233bc29eacbe8c42819f235f59ed59eba2f",
+  "agent_sha256": "afb66105e3053bf0f4280e03e0056ca83d82d09cf1e2c75ca6b530d0fb66bad6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardRecruitNewTalent",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a self-contained interactive HTML dashboard for recruit new talent - opens in any browser, no D365 access needed by the viewer.",
+    "description": "Pulls recruit-new-talent data from Dynamics 365 F&SCM (legal entity USMF) for the most recent fiscal period and returns a standalone interactive HTML dashboard file with totals, inline SVG charts, sortable table, and RAG",
     "display_name": "Recruit new talent Interactive HTML Dashboard",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "322ca8d5370f2ace",
+      "content_digest": "202b00ad76ff463c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DashboardRecruitNewTalent",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "fiscal_period": {
+        "description": "Reporting period; defaults to the most recent fiscal period available.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query; the recipe uses USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the HTML file to produce, e.g. dashboard-recruit-new-talent-2026-05-24.html.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_folder": {
+        "description": "Destination folder for the saved HTML, typically Documents/Cowork/output/ in OneDrive.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

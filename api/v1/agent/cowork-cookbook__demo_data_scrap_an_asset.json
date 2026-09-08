@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_scrap_an_asset",
   "name": "Scrap an asset Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_scrap_an_asset",
-  "rappid": "rappid:@cowork-cookbook/demo_data_scrap_an_asset:389f8bf8727006956c43e4ceb681c06e49fd410f681f5a0395a258ab8878088a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_scrap_an_asset:631902a671d59b63a58e25e16913724cf4adb88efd5df2d666442c7e53aecc5d",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_scrap_an_asset:389f8bf8727006956c43e4ceb681c06e49fd410f681f5a0395a258ab8878088a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_scrap_an_asset:389f8bf8727006956c43e4ceb681c06e49fd410f681f5a0395a258ab8878088a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for scrap an asset in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo records for scrapping an asset in a Dynamics 365 F&SCM sandbox legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "13ebdae6702a16dc9c525108969694fcb437a3b0274d65f83e6aaff19f6cd873",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "9ab9e8408914ff446712185c99e59e660c940281bc9a7571872ec16c55d19acb",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

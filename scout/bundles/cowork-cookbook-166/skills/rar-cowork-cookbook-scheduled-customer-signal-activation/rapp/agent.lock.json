@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/scheduled_customer_signal_activation",
   "agent_file": "scheduled_customer_signal_activation_agent.py",
-  "agent_sha256": "75398db71ae59b881207b842c5d6979a6de707f3f70789ddeba7e78f353c4242",
+  "agent_sha256": "4fa4dc3a0fa355dc0a27fb0fb88a37e85c8e4ac26885159e1f4c85e680bb89f5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledCustomerSignalActivation",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Run a weekly customer-signal sweep that feeds next week's messaging, content, and campaign moves - correlated against live campaign performance.",
+    "description": "Runs a weekly sweep of customer calls, sales feedback email, Teams channels, support tickets, and market signals, returning a Word customer signal brief, a Teams summary post, and per-owner follow-up drafts held for revi",
     "display_name": "Scheduled customer signal activation",
     "industry_context": {
       "deprecated": false,
@@ -49,9 +49,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "16c7007a4d089f11",
+      "content_digest": "6e592ecba5ff3930",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -75,28 +75,45 @@
       "integration",
       "fabric_iq"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ScheduledCustomerSignalActivation",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "customer_calls_folder": {
+        "description": "Folder holding customer call recordings and notes.",
+        "type": "string"
+      },
+      "industry_segment": {
+        "description": "Industry or segment used to pull market signals from research feeds.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "sales_feedback_tag": {
+        "description": "Email tag identifying sales feedback messages.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "support_ticket_folder": {
+        "description": "Folder or queue of support tickets to mine for themes.",
+        "type": "string"
+      },
+      "teams_channels": {
+        "description": "Sales, Customer Success, and Marketing Teams channels to read and post to.",
         "type": "string"
       }
     },
@@ -105,5 +122,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

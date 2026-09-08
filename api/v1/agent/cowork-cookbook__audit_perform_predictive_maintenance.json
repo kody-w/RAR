@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_perform_predictive_maintenance",
   "name": "Perform predictive maintenance Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_perform_predictive_maintenance",
-  "rappid": "rappid:@cowork-cookbook/audit_perform_predictive_maintenance:6225305e893e94ef76b4f0229f36c588494dc1d6b02b5950a6aa952db42bc646",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_perform_predictive_maintenance:f9247db7319a6c86ef4eb0b4ee76baca82a0734eba99d23f256230f947963b46",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_perform_predictive_maintenance:6225305e893e94ef76b4f0229f36c588494dc1d6b02b5950a6aa952db42bc646",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_perform_predictive_maintenance:6225305e893e94ef76b4f0229f36c588494dc1d6b02b5950a6aa952db42bc646"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits perform predictive maintenance records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of predictive maintenance records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary sheet of cou",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "389c27b29f73995945986bb5e4aa4cfe1c80b4525aadc7aa39047c6d09c9ebc7",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "217eed92960be06c144b2d6b52dc2eadf948f875193695f04433e6a6389e3ed1",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

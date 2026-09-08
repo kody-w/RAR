@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/acroform_writer",
   "agent_file": "acroform_writer_agent.py",
-  "agent_sha256": "40d2f38bf76d47a54b443ea70f777001ac77ae612979550aab56a5bf2147f8d4",
+  "agent_sha256": "443631d1d4364661b643c3d85cf3a0fadab6021e31c0796662765d71940be22a",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AcroformWriter",
   "host_dependencies": [],
@@ -39,7 +39,7 @@
       "python",
       "documents"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AcroformWriter",
   "schema": "rapp-agent-lock/1.0",
@@ -69,5 +69,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

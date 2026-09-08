@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_manage_project_quality",
   "name": "Manage project quality Summary Report",
   "rar_name": "@cowork-cookbook/report_manage_project_quality",
-  "rappid": "rappid:@cowork-cookbook/report_manage_project_quality:5e83cccc7e145492c4b8bd1603e7e964e5e94abda0f5a34936aef2b065a208d4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_manage_project_quality:1f476e0ba4173983c7e98ac1741e3a1f3b1c3a0bfefff408b20213f7587dccda",
+  "_migrated_from": "rappid:@cowork-cookbook/report_manage_project_quality:5e83cccc7e145492c4b8bd1603e7e964e5e94abda0f5a34936aef2b065a208d4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_manage_project_quality:5e83cccc7e145492c4b8bd1603e7e964e5e94abda0f5a34936aef2b065a208d4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of manage project quality activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only manage project quality summary report from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "dea936c74280c19918d044bf8e2c1d530b8fc6f7e0e61e7e8ccbb25763e967d2",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "90e4dff32fb78fe723bc8762debc983eb60805b8891ec79300e0c79d31052983",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

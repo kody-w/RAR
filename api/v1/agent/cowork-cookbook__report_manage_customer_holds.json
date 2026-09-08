@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_manage_customer_holds",
   "name": "Manage customer holds Summary Report",
   "rar_name": "@cowork-cookbook/report_manage_customer_holds",
-  "rappid": "rappid:@cowork-cookbook/report_manage_customer_holds:b2c79c6fd12d0c1c98cb8247e63e2875534b518e46e5cc4db1607a059fd9caeb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_manage_customer_holds:d0d3049f66939d032f2571d62e5dc1493fdd0fe5516457312b45fc6a4cc8cb49",
+  "_migrated_from": "rappid:@cowork-cookbook/report_manage_customer_holds:b2c79c6fd12d0c1c98cb8247e63e2875534b518e46e5cc4db1607a059fd9caeb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_manage_customer_holds:b2c79c6fd12d0c1c98cb8247e63e2875534b518e46e5cc4db1607a059fd9caeb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of manage customer holds activity with totals, trends, and breakdowns.",
+  "description": "Generates a read-only customer holds summary report from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "e619196bde9c02cce00ac58b69095b4b085533b786970888f226add964edabed",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "a4ab6f34a4a37eac03e59166bd0aba808bc4c27ee9063044ca3a1f1c99b55bc8",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

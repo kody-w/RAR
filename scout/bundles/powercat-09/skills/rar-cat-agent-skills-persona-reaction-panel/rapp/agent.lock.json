@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/persona_reaction_panel",
   "agent_file": "persona_reaction_panel_agent.py",
-  "agent_sha256": "471d20b0f203e9a3937b853274583f5028962fe9de6d1da42222cc2b2771bc33",
+  "agent_sha256": "adb83b8e6e07fe792cd7d5f581885ca1a6ada5be3413e82fe4a4620520596f53",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PersonaReactionPanel",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "personas",
       "qa"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "PersonaReactionPanel",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

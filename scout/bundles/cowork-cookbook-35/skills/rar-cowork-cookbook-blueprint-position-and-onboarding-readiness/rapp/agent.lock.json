@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/blueprint_position_and_onboarding_readiness",
   "agent_file": "blueprint_position_and_onboarding_readiness_agent.py",
-  "agent_sha256": "b86f56064705bcb4742c8e97a7e61bb3e8f81191be9525c7a60a74eeb07fc3e0",
+  "agent_sha256": "1599ff453edc3d652655ce739cb28ecce70a466847ea3f7ab51011b1961c903f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlueprintPositionAndOnboardingReadiness",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Paste this recruit-and-onboard workflow blueprint into Cowork and it reports which positions are vacant, how long they have been open, and which new hires lack onboarding records.",
+    "description": "Runs a read-only recruiting and onboarding readiness check against Dynamics 365 F&SCM via the ERP plugin and returns a position-readiness.xlsx workbook (Vacancies, Stale, Pipeline, Onboarding) plus an email staffing summ",
     "display_name": "Open Position & Onboarding Readiness Blueprint",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "12750246048c8972",
+      "content_digest": "4605a20456933bb9",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BlueprintPositionAndOnboardingReadiness",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "constraints": {
-        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+      "asofdate": {
+        "description": "Date the vacancy and onboarding snapshot is taken as of, e.g. 2017-12-31.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legalentity": {
+        "description": "Dynamics 365 legal entity to analyze, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being designed.",
+      "vacancyagedays": {
+        "description": "Days a position must be open before it counts as stale, e.g. 90.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

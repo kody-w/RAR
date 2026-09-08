@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__agent_performance_triage",
   "name": "Agent Performance Triage",
   "rar_name": "@cat-agent-skills/agent_performance_triage",
-  "rappid": "rappid:@cat-agent-skills/agent_performance_triage:a9092a1a103f6eba8187fd939a6ec2e47a3444c13b96d69bb2798d1ba7d59ab6",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/agent_performance_triage:8398c0fe7b1f09ce0b168ac3b75df0d08be705b6f7a9c56508c4689e286dccdc",
+  "_migrated_from": "rappid:@cat-agent-skills/agent_performance_triage:a9092a1a103f6eba8187fd939a6ec2e47a3444c13b96d69bb2798d1ba7d59ab6",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/agent_performance_triage:a9092a1a103f6eba8187fd939a6ec2e47a3444c13b96d69bb2798d1ba7d59ab6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "analysis",
   "tags": [
@@ -27,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.9,
-  "sha256": "b4505e9978715a93c24dfb8dbebb89acf753adf6af6bf41a6a862828d41f0096",
+  "lines": 262,
+  "size_kb": 12.2,
+  "sha256": "d5ab5d95947d61784c790645d416c6ead847ceededcefbe615a1b505b80d59b3",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

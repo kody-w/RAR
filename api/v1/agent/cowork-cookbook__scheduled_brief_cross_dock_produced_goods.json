@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_cross_dock_produced_goods",
   "name": "Cross dock produced goods Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_cross_dock_produced_goods",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_cross_dock_produced_goods:88e2451c8bdc14a17860137e235890234a3a38116ab935c00f518bb0509a21b0",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_cross_dock_produced_goods:d5a9b68c9fdca7942d302c98fa1ca7eadb945294a37d765211d0e6e63ddb7590",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_cross_dock_produced_goods:88e2451c8bdc14a17860137e235890234a3a38116ab935c00f518bb0509a21b0",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_cross_dock_produced_goods:88e2451c8bdc14a17860137e235890234a3a38116ab935c00f518bb0509a21b0"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing cross dock produced goods for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a cross dock produced goods morning brief from Dynamics 365 F&SCM (legal entity USMF): top 5 items by impact, anomalies vs 7-day rolling average, next actions, plus a saved email draft and Teams-ready summary.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "d4404811302058a61c14031f21f418a4ca56118b792978fffb5d6a94b587948c",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "c70667639c1b93286764db5a1d9f2af4a3fb2b5923ce3c5e65c43a4709669c50",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

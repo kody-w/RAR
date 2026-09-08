@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__fixed_asset_register_audit",
   "name": "Fixed Asset Register Audit",
   "rar_name": "@cowork-cookbook/fixed_asset_register_audit",
-  "rappid": "rappid:@cowork-cookbook/fixed_asset_register_audit:db3c95f1580fc82a88c7d65092a30c9d98df69edc6c7cf28664ecaad083e751c",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/fixed_asset_register_audit:368770c3cc20dd450245dbfc930620ae2bd983ece5d564f8df88b57df7503333",
+  "_migrated_from": "rappid:@cowork-cookbook/fixed_asset_register_audit:db3c95f1580fc82a88c7d65092a30c9d98df69edc6c7cf28664ecaad083e751c",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/fixed_asset_register_audit:db3c95f1580fc82a88c7d65092a30c9d98df69edc6c7cf28664ecaad083e751c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits the fixed asset register for missing fields, inconsistent depreciation profiles, and assets due for retirement.",
+  "description": "Audits a Dynamics 365 F&SCM fixed asset register and returns a workbook flagging assets missing service life or depreciation profile, fully depreciated but not retired, profile mismatched to asset group, or missing locat",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "6ed6542ca6929599ac160e485c6925697c9a379baffd621e592b9ce94923f1fe",
+  "lines": 265,
+  "size_kb": 15.1,
+  "sha256": "f9ecdd88b07558ebe271f15843bc756526c004d6e4e181411812f3df200616fd",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

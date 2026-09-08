@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/scheduled_brief_manage_organizational_structure",
   "agent_file": "scheduled_brief_manage_organizational_structure_agent.py",
-  "agent_sha256": "627a892d1b07ffa92ed562971fc3b0d0a9c213095220f96be0d8f36d8941d0a4",
+  "agent_sha256": "5a3f898e38a8983f54e223f33763e8a6f901c83885aa9b9b8f143b5b759d0886",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScheduledBriefManageOrganizationalStructure",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Schedulable morning-brief email summarizing manage organizational structure for the responsible owner; designed to run daily or weekly.",
+    "description": "Builds a morning brief on managing organizational structure from Dynamics 365 ERP data for a legal entity, drafts (not sends) an email to the responsible owner, and produces a Teams-ready summary.",
     "display_name": "Manage organizational structure Scheduled Email Brief",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "2b5b81021ceeb8cf",
+      "content_digest": "7a3013d6a17718c4",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ScheduledBriefManageOrganizationalStructure",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "owner": {
+        "description": "Responsible owner who receives the drafted email.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "schedule": {
+        "description": "Optional cadence for the brief, e.g. weekday mornings at 7am.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

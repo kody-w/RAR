@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/depreciation_forecast",
   "agent_file": "depreciation_forecast_agent.py",
-  "agent_sha256": "142a9fcc0006429dff6791ac42021d70a510890f3b71798b20dc67a4f1387be8",
+  "agent_sha256": "2be3bba3d408e20018e12acea0bbe4fa842ea54647bc556fb764067530904a62",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DepreciationForecast",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Forecasts the next 12 months of depreciation expense by asset group and by GL account.",
+    "description": "Calculates expected depreciation expense for the next 12 months for every active fixed asset under its current depreciation profile, returning an Excel workbook with 'By group', 'By account', and 'Detail' sheets.",
     "display_name": "Depreciation Forecast (12 months)",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "f0a730a4d17f59e3",
+      "content_digest": "c24a38395e3df63e",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DepreciationForecast",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What to produce, and about what.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

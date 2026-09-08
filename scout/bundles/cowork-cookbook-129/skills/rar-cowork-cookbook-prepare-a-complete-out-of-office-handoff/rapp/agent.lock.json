@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/prepare_a_complete_out_of_office_handoff",
   "agent_file": "prepare_a_complete_out_of_office_handoff_agent.py",
-  "agent_sha256": "6d9f56b07253ba06fef4da66d4c4caf1204fe4e4f9b92328b4b18cd24c251842",
+  "agent_sha256": "80aa756c2e49a7e989a5d8a1c60597e22fa161279dc43f9db4e0ecfa8822d839",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PrepareACompleteOutOfOfficeHandoff",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Step away from your laptop knowing nothing in flight will stall while you are out.",
+    "description": "Builds an out-of-office handover from your meetings, emails, Teams chats and calendar — projects, status, next steps, action items, internal cover owners and doc links — then drafts OOO auto-reply and calendar changes fo",
     "display_name": "Prepare a complete out-of-office handoff",
     "industry_context": {
       "deprecated": false,
@@ -49,9 +49,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "f3c59d4f41c70cbd",
+      "content_digest": "c6ef61e55f6776a8",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,24 +74,37 @@
       "advanced",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PrepareACompleteOutOfOfficeHandoff",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "internal_team_members": {
+        "description": "The internal team members allowed to be assigned as cover.",
+        "type": "string"
+      },
+      "ooo_duration": {
+        "description": "How long the user will be out, in weeks.",
+        "type": "string"
+      },
+      "ooo_start_date": {
+        "description": "The date the out-of-office period begins.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What to apply this capability to.",
         "type": "string"
       }
     },
@@ -100,5 +113,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

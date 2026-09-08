@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_plan_marketing_campaigns",
   "name": "Plan marketing campaigns Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_plan_marketing_campaigns",
-  "rappid": "rappid:@cowork-cookbook/dashboard_plan_marketing_campaigns:d23ec6e50443b3acccdd86d15e00bda1e8b815a73aee389660e1eeddf25fcb22",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_plan_marketing_campaigns:d07232f1e240a5f0e5edfc00fc8169f94ea306162b0b97b0fb7a2f0ff7dbff1e",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_plan_marketing_campaigns:d23ec6e50443b3acccdd86d15e00bda1e8b815a73aee389660e1eeddf25fcb22",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_plan_marketing_campaigns:d23ec6e50443b3acccdd86d15e00bda1e8b815a73aee389660e1eeddf25fcb22"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for plan marketing campaigns - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls plan marketing campaigns data from Dynamics 365 F&SCM for a legal entity and most recent fiscal period, then writes a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the output",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "fd72db42b1d1288f2cf8eff00ec5f530a2a9418c57e76e8cf669b805df3d00a8",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "5c723f3b9a8c4472ad84ab2ea3e40e0337b32df1012bced9f6638f150a407dd9",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

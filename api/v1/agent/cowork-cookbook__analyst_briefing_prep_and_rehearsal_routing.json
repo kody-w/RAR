@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__analyst_briefing_prep_and_rehearsal_routing",
   "name": "Analyst briefing prep and rehearsal routing",
   "rar_name": "@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing",
-  "rappid": "rappid:@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing:d66e60a30e785c946845b1fc4722bf5b4de125ad88113e6a9d641160c46a0836",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing:d3fe95a31dec361cd7bedb951c98ea70e5a3004f9147c8e4d700c63e2f4d5feb",
+  "_migrated_from": "rappid:@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing:d66e60a30e785c946845b1fc4722bf5b4de125ad88113e6a9d641160c46a0836",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing:d66e60a30e785c946845b1fc4722bf5b4de125ad88113e6a9d641160c46a0836"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "general",
   "tags": [
@@ -20,16 +22,16 @@
     "read_only",
     "automation"
   ],
-  "description": "Prep the [Analyst Firm] briefing package and get the team rehearsed before the room.",
+  "description": "Builds an interactive HTML analyst briefing dashboard (positioning, top three messages, anticipated Q&A, speaker notes, source links) from prior firm interactions, their research, and your launch materials, then schedule",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "8413801950006c8334bc6c08e142f18cac6ff0402eb0858fc3d65ab1ec33d313",
+  "lines": 265,
+  "size_kb": 18.0,
+  "sha256": "8299484571ff05ed47499550f9b6c9f60fe21d67e20758b381c0738c0bc562c1",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

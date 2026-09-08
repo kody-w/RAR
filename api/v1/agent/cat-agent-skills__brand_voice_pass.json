@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__brand_voice_pass",
   "name": "Brand Voice Pass",
   "rar_name": "@cat-agent-skills/brand_voice_pass",
-  "rappid": "rappid:@cat-agent-skills/brand_voice_pass:94e423414e334076d614e523d99797c3699573165bb43f0f5c7d7eaaa048598b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "1.1.0",
+  "rappid": "rappid:@cat-agent-skills/brand_voice_pass:2a3dc8ed7c409e2eeb90d2581c8ee9bf860f81b4a10c5c474a03954c5069250b",
+  "_migrated_from": "rappid:@cat-agent-skills/brand_voice_pass:94e423414e334076d614e523d99797c3699573165bb43f0f5c7d7eaaa048598b",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/brand_voice_pass:94e423414e334076d614e523d99797c3699573165bb43f0f5c7d7eaaa048598b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -24,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.8,
-  "sha256": "3635849b3dcd5b55c5f9f9d6f3ec7e7a977033ca09ab57020fe9b172e8901cf4",
+  "lines": 262,
+  "size_kb": 12.2,
+  "sha256": "6637408a4175858b78cf4da9cb7fac9012e301e6577cc18e2064dca8629caa63",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

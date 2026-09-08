@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/map_a_workflow_from_a_process_description",
   "agent_file": "map_a_workflow_from_a_process_description_agent.py",
-  "agent_sha256": "f2bc882e02104c377f714e9db4d24699caf74d79bf15064b7ba5a81062103adb",
+  "agent_sha256": "8cbd2af28a5e83a207d99d37291873dc5bbe51226515f973661929d94b3b2e92",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MapAWorkflowFromAProcessDescription",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Make a workflow shareable, reviewable, and improvable - without spending hours building the diagram by hand.",
+    "description": "Turns a described process into a Miro flowchart with labeled shapes, connectors, owners, and decision points, plus a companion Miro doc narrating purpose, handoffs, and risks; call when a workflow needs diagramming.",
     "display_name": "Map a workflow from a process description",
     "industry_context": {
       "deprecated": false,
@@ -46,9 +46,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "2a1cc4e37c979b34",
+      "content_digest": "242b2707d11ad45c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -72,28 +72,37 @@
       "integration",
       "miro"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "MapAWorkflowFromAProcessDescription",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "open_questions": {
+        "description": "Any unresolved questions or purpose notes to include in the header frame.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "process_name": {
+        "description": "The name of the process or workflow to map.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "source_material": {
+        "description": "The document, meeting notes, or description containing the steps, decision points, and owners.",
         "type": "string"
       }
     },
@@ -102,5 +111,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

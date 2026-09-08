@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_cancel_supplier_payments",
   "name": "Cancel supplier payments Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_cancel_supplier_payments",
-  "rappid": "rappid:@cowork-cookbook/configure_cancel_supplier_payments:0a1eb1bda3bd55c7bd004aff76683b7d9e7f688c07f8f9d559609afa6fcd5094",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_cancel_supplier_payments:399ccbb74b847b5e51a079b7bd1aa66d50c5d90f84451dfa46d1695cbfbf7b42",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_cancel_supplier_payments:0a1eb1bda3bd55c7bd004aff76683b7d9e7f688c07f8f9d559609afa6fcd5094",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_cancel_supplier_payments:0a1eb1bda3bd55c7bd004aff76683b7d9e7f688c07f8f9d559609afa6fcd5094"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to cancel supplier payments from an input Excel file, with validation and rollback support.",
+  "description": "Reads an attached configuration Excel file of cancel-supplier-payment rows in Dynamics 365 F&SCM (legal entity USMF), validates each row, returns a validation workbook, and after your approval applies the changes with a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "3a3844d755cf906883e3ea09f5b725eab3f6a59995baa98b86757e8d0b291e69",
+  "lines": 265,
+  "size_kb": 17.3,
+  "sha256": "35998cf927bb2400e41536eb7293481818771d13a9fa3b49216b3544a6c578f8",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

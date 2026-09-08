@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_budget_fixed_assets",
   "name": "Budget fixed assets Summary Report",
   "rar_name": "@cowork-cookbook/report_budget_fixed_assets",
-  "rappid": "rappid:@cowork-cookbook/report_budget_fixed_assets:681dd52b6926ea73782992ca3e8ded8c07e2aee9add7e7e3fb2c555790793670",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_budget_fixed_assets:1a5f3fb254984b009765b02b4f304903ed4b705a7eebaca4a533ee47207db7fb",
+  "_migrated_from": "rappid:@cowork-cookbook/report_budget_fixed_assets:681dd52b6926ea73782992ca3e8ded8c07e2aee9add7e7e3fb2c555790793670",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_budget_fixed_assets:681dd52b6926ea73782992ca3e8ded8c07e2aee9add7e7e3fb2c555790793670"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of budget fixed assets activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of budget fixed assets from Dynamics 365 F&SCM for a legal entity and posted period, producing an Excel workbook with Summary, Detail, and Top 10 by value sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "048dc3382acd0174ad6fce2b6fe2ced8eed5683a0c1bf5322d72dfb84e9a091c",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "2f99f6a537cf2393d5e92da29d43c05c97ce2510efb9aa7a8b6ddfb12c1c5419",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/call_for_speakers_digest",
   "agent_file": "call_for_speakers_digest_agent.py",
-  "agent_sha256": "a3e15016b7641d3e6b947d84b323b4343bdb427effe8afb6d280f09d53a39511",
+  "agent_sha256": "d0d10eab87e4ada8b21db20e33224b2e3b97d5c23eac20300aa8864d64ea5d98",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CallForSpeakersDigest",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "conference",
       "automation"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "CallForSpeakersDigest",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/route_map_visualizer",
   "agent_file": "route_map_visualizer_agent.py",
-  "agent_sha256": "5c0cb3810b9ec755c91cad5a437f1fc98cd9de481f8e25c90d58dc0574b032dd",
+  "agent_sha256": "1b02f419c31f24a0b8e108a23abe9a6c0007030ef20d5d10c1833c293035080c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RouteMapVisualizer",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "geojson",
       "kml"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "RouteMapVisualizer",
   "schema": "rapp-agent-lock/1.0",
@@ -68,5 +68,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

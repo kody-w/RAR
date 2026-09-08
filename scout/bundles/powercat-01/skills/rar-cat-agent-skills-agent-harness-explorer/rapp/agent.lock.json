@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/agent_harness_explorer",
   "agent_file": "agent_harness_explorer_agent.py",
-  "agent_sha256": "77aeeb418357389bf065c769985559925b8f7165557d4f2b63421baa21bcc4b7",
+  "agent_sha256": "ae4ce30f551513975fd4b56323c880f35f9894e07285212f88b81f65ce2f8eae",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentHarnessExplorer",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "snapshots",
       "scripts"
     ],
-    "version": "1.1.0"
+    "version": "2.1.2"
   },
   "runtime_name": "AgentHarnessExplorer",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "1.1.0"
+  "version": "2.1.2"
 }

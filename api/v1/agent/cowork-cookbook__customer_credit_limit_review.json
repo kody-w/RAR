@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__customer_credit_limit_review",
   "name": "Customer Credit Limit Review",
   "rar_name": "@cowork-cookbook/customer_credit_limit_review",
-  "rappid": "rappid:@cowork-cookbook/customer_credit_limit_review:bbb8a0802504d046d91dbdc7db54cb9c1e149ffb398a853c3df56a797b7e718a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/customer_credit_limit_review:45c59de0e0faab909768506b8df520c24ba3da9572ce5403288e1f01ff2a0d6d",
+  "_migrated_from": "rappid:@cowork-cookbook/customer_credit_limit_review:bbb8a0802504d046d91dbdc7db54cb9c1e149ffb398a853c3df56a797b7e718a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/customer_credit_limit_review:bbb8a0802504d046d91dbdc7db54cb9c1e149ffb398a853c3df56a797b7e718a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a review report of customers whose credit limit or exposure looks out of policy.",
+  "description": "Produces a read-only Excel workbook of customers flagged for credit review \u2014 over 80% of limit, no limit with AR over $10,000, or a limit with no 12-month activity \u2014 one sheet per category sorted by exposure descending.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "6607a422fad3816166663dc62894ff2b27ce8f5a0c9ec87e13838f90edb79174",
+  "lines": 265,
+  "size_kb": 15.5,
+  "sha256": "c713ca964e33f302d3b2114731691069d4aa42d308f0e8e3f0713d17aa951a70",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/business_os",
   "agent_file": "business_os_agent.py",
-  "agent_sha256": "b455d3229e78336c3772968e71167a3aa49c2a131e16710432b069cef3bf77aa",
+  "agent_sha256": "6482b513441d7a7adb56c67fbd6733482e86851f16e151ff3d9f112c8e661bac",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BusinessOs",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "governance",
       "skill_generation"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "BusinessOs",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_scrap_defective_inventory",
   "name": "Scrap defective inventory Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_scrap_defective_inventory",
-  "rappid": "rappid:@cowork-cookbook/demo_data_scrap_defective_inventory:4b6eb4e6164c4b31afbbfa4fba73465d9d638b29061b9fafb8ae56ac830d01cb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_scrap_defective_inventory:ee8455dc7206097c95edecf7e2541447cc2aba4ad82d82d3465b2ff50bf7c3b8",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_scrap_defective_inventory:4b6eb4e6164c4b31afbbfa4fba73465d9d638b29061b9fafb8ae56ac830d01cb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_scrap_defective_inventory:4b6eb4e6164c4b31afbbfa4fba73465d9d638b29061b9fafb8ae56ac830d01cb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for scrap defective inventory in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo scrap-defective-inventory records in a sandbox D365 F&SCM legal entity, stages them in an Excel workbook first, creates them, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "07142e634446113d2f2c43246d5cf6c67faaf367f819000ed2a8cb3fe536c1cb",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "a4ab6cb7f77e380029ecbc1c847bbca09df61c85cd75f9d13af86a0a475d3c0d",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

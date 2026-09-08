@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__breathing_room",
+  "name": "Breathing Room",
+  "rar_name": "@cat-agent-skills/breathing_room",
+  "rappid": "rappid:@cat-agent-skills/breathing_room:892a6228a7b645e547312484e8304301af1990a4dfb151bed907e3a44a1c95d5",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "3.1.3",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "calendar",
+    "workload",
+    "focus",
+    "work_life_balance",
+    "meetings",
+    "deep_work",
+    "self_service"
+  ],
+  "description": "Shows where your own week has room to breathe and where it does not, from your calendar and what you send: meeting density, back-to-back runs, deep-work blocks, evenings and weekends, and the load already building three to ten days out. When a day or a coming week is overloaded it points to the most movable meetings, and it recognises time off rather than reading it as a quiet week. Reports on yo\u2026",
+  "author": "Allan De Castro",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 262,
+  "size_kb": 12.2,
+  "sha256": "fe3c40feeeb2605e05593311b3be9795246c664abc303adc3c2602715001418b",
+  "has_card": false,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__breathing_room.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/breathing_room_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__breathing_room.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__breathing_room.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/breathing_room_agent.py"
+}

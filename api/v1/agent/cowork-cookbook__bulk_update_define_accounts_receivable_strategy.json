@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_define_accounts_receivable_strategy",
   "name": "Define accounts receivable strategy Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_define_accounts_receivable_strategy",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_define_accounts_receivable_strategy:9770b7127a0e4c27bfddc45a73e32923a2a927fc34a4db8d857592bb5e5fd06f",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_define_accounts_receivable_strategy:6f8a8b758e4e6286c8c8824eb46a5aa6b8c13da7c3a018c0b2fb83c00d46e5b3",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_define_accounts_receivable_strategy:9770b7127a0e4c27bfddc45a73e32923a2a927fc34a4db8d857592bb5e5fd06f",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_define_accounts_receivable_strategy:9770b7127a0e4c27bfddc45a73e32923a2a927fc34a4db8d857592bb5e5fd06f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across define accounts receivable strategy records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to accounts receivable records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a supplied list of record IDs, producing a dry-run preview workbook for approval before committing and a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "a15e6b10e808c064db3d8eff8892b430465ae4871a61bc0cc05f45216c7b2474",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "92febba9850a5372b92937c2c7810d192117956fa7277ed28cefd30686fb6e60",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

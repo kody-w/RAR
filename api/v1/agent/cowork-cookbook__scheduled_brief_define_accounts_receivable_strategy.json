@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_define_accounts_receivable_strategy",
   "name": "Define accounts receivable strategy Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_define_accounts_receivable_strategy",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_define_accounts_receivable_strategy:d5121cad140257ca3732daf737ae0cb03efd5590e5787ceddf0692aa56298b09",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_define_accounts_receivable_strategy:456f3514e9673731aecdbb05ddb4b7c8bf75988e8c9c80e05d1e78a62556614b",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_define_accounts_receivable_strategy:d5121cad140257ca3732daf737ae0cb03efd5590e5787ceddf0692aa56298b09",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_define_accounts_receivable_strategy:d5121cad140257ca3732daf737ae0cb03efd5590e5787ceddf0692aa56298b09"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing define accounts receivable strategy for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on accounts receivable strategy from Dynamics 365 ERP data for a legal entity, covering top 5 items by impact, anomalies vs the 7-day rolling average, and next actions, then saves an email draft to",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "7d096c0c00412b456a04d7bb9fef8c8e64b2470d71543e838e38b46e8d0ee915",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "3158b4ac6329ac358eda2ad5a2fadc314b8717f9156275117e4f2aab1d9a2ba0",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

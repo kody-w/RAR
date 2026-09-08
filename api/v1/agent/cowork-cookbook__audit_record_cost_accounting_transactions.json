@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_record_cost_accounting_transactions",
   "name": "Record cost accounting transactions Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_record_cost_accounting_transactions",
-  "rappid": "rappid:@cowork-cookbook/audit_record_cost_accounting_transactions:bbeda9c3a488c2af8023c1f22f1fc4b638e9c6a6368dcc5cc721d9c53ff88819",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_record_cost_accounting_transactions:bfc4c0cbe095f628e6ca4ab8dfd36420835b34c9d34b06033ec30fc1c99ac654",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_record_cost_accounting_transactions:bbeda9c3a488c2af8023c1f22f1fc4b638e9c6a6368dcc5cc721d9c53ff88819",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_record_cost_accounting_transactions:bbeda9c3a488c2af8023c1f22f1fc4b638e9c6a6368dcc5cc721d9c53ff88819"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits record cost accounting transactions records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of cost accounting transaction records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with a sheet per finding category plus a Summary sheet.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "7ef14ed8ee7a5fb674295989c2dc69864061e8ec62e89077a87e42e19d861d16",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "b5956212db42f94ab38a63edef963d96317092e9ff7ca6b71b576e844e31958f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

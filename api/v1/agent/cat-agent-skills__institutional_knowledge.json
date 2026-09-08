@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__institutional_knowledge",
   "name": "Institutional Knowledge Archivist",
   "rar_name": "@cat-agent-skills/institutional_knowledge",
-  "rappid": "rappid:@cat-agent-skills/institutional_knowledge:58d7cd58d602587eb3a8e105d8ffe243bb55b6434d4ac1d6f7816863e516cf01",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.1",
+  "rappid": "rappid:@cat-agent-skills/institutional_knowledge:0ae801de47e23207d8c4f34b11f73a0eeb6a1db6e2021c5275678936ef241f82",
+  "_migrated_from": "rappid:@cat-agent-skills/institutional_knowledge:58d7cd58d602587eb3a8e105d8ffe243bb55b6434d4ac1d6f7816863e516cf01",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/institutional_knowledge:58d7cd58d602587eb3a8e105d8ffe243bb55b6434d4ac1d6f7816863e516cf01"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -26,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.3,
-  "sha256": "b9574a93f4efeb61a83d8e843f8caae6f11d146b20edaca294837c209bc4723a",
+  "lines": 262,
+  "size_kb": 12.6,
+  "sha256": "dea44d1c2bf0f7803a9848d3d09ce9e461afd0b5dad71a53f21c4e8f374a544b",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

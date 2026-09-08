@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_define_trade_allowances",
   "name": "Define trade allowances Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_define_trade_allowances",
-  "rappid": "rappid:@cowork-cookbook/teams_update_define_trade_allowances:7bcd097f7f24c9558ff709a7b0141d80368414841c3fe650fb9849efaef94e5b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_define_trade_allowances:131cc5634c382109cfdd5b8f5963fa8bd7a2fd8e1d7a95c483f8a584d39ab273",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_define_trade_allowances:7bcd097f7f24c9558ff709a7b0141d80368414841c3fe650fb9849efaef94e5b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_define_trade_allowances:7bcd097f7f24c9558ff709a7b0141d80368414841c3fe650fb9849efaef94e5b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on define trade allowances status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes the current state of define trade allowances from Dynamics 365 ERP for a legal entity and saves two artifacts: a markdown Teams channel post and an Adaptive Card JSON; it does not post anything.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "a0e11e927c6f28a8fbac316aa53cbcfaeb85f5d3ed8675b9604814132f055466",
+  "lines": 265,
+  "size_kb": 16.1,
+  "sha256": "2cc60cfe48a6d7e5cc75bc6091740e9874f73eb93467b4fb53dc0d693535ad58",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

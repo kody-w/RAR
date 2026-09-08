@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/adaptive_card_install_and_commission_assets",
   "agent_file": "adaptive_card_install_and_commission_assets_agent.py",
-  "agent_sha256": "251bb212f38a1b1b3db896afb94d6f3c27a45b70bf3733c719b7b15bc48f74c8",
+  "agent_sha256": "b36fc2f9ae0849ad002578079fbdf1ea8d79a5bee2ff43f188e95384bffc7a44",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AdaptiveCardInstallAndCommissionAssets",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a reusable Adaptive Card JSON snapshot of install and commission assets status for embedding in dashboards, emails, or Teams.",
+    "description": "Generates a read-only Adaptive Card JSON file visualizing install-and-commission-assets status from Dynamics 365 F&SCM for a given legal entity, with KPI tiles, a RAG row, and action buttons.",
     "display_name": "Install and commission assets Status Adaptive Card",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "da5a866170a550e6",
+      "content_digest": "3a7041f239d60905",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,45 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AdaptiveCardInstallAndCommissionAssets",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "action_buttons": {
+        "description": "The 2-3 action buttons to place on the card.",
+        "type": "string"
+      },
+      "as_of_date": {
+        "description": "Date used for the card timestamp and file naming.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "kpi_count": {
+        "description": "How many KPI tiles to include (3-5).",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 F&SCM legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_filename": {
+        "description": "Name of the Adaptive Card JSON file to produce, e.g. adaptive-card-install-and-commission-assets-2026-05-24-card.json.",
         "type": "string"
       }
     },
@@ -111,5 +128,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

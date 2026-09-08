@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_configure_and_management_office_apps_and_add_ins",
   "name": "Configure and management office apps and add-ins Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins:6abaf74a17545f6d4ca40163cbd42c6a45b65f2ce3a0088bf233173f9ab9fdc2",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins:8cee5968d8300069e8c39ba970327405bb070fc14d4a1b8c09c75da54f4c39a2",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins:6abaf74a17545f6d4ca40163cbd42c6a45b65f2ce3a0088bf233173f9ab9fdc2",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins:6abaf74a17545f6d4ca40163cbd42c6a45b65f2ce3a0088bf233173f9ab9fdc2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across configure and management office apps and add-ins records from an input list, with dry-run preview before commit.",
+  "description": "Runs a bulk field update on Office apps and add-ins configuration records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, producing a dry-run preview workbook, pausing for approval, the",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.7,
-  "sha256": "1b72b14120ca2245b9f91336f197066e09a4823d69c8f9cfaa7d735bbac258c0",
+  "lines": 265,
+  "size_kb": 17.2,
+  "sha256": "df3f9cfb81d8e4267b213fa0520c7180e06b4c9f7657c48bd9d266cb9206db46",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

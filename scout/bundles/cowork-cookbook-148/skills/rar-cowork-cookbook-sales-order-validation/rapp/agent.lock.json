@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/sales_order_validation",
   "agent_file": "sales_order_validation_agent.py",
-  "agent_sha256": "bb8d0dfd8674a39fa2e8f3b14616b168f209445bdc870d6c54d5cca7015c0e63",
+  "agent_sha256": "2eb2b306eccbaaeecc156ce60abdff1bcc3e2d95fb8b9372208ff92488ea20cc",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SalesOrderValidation",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Validates open sales orders against policy: pricing, credit, customer status, delivery terms.",
+    "description": "Reviews open sales orders in Dynamics 365 F&SCM and returns a read-only workbook of out-of-policy orders, one sheet per finding: price deviation >10%, credit hold, missing delivery terms, missing tax group.",
     "display_name": "Sales Order Compliance Check",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "4e4ccc9ad4063bc5",
+      "content_digest": "019ff11eb2b1c48c",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "SalesOrderValidation",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

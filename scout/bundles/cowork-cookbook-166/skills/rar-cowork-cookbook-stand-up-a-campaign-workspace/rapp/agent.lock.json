@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/stand_up_a_campaign_workspace",
   "agent_file": "stand_up_a_campaign_workspace_agent.py",
-  "agent_sha256": "35eba29ffd98e987ee4f9eb74a5bae0ae286df7ff6e9a499dd002ee7e0f5fa10",
+  "agent_sha256": "0313e215fc92edf9bb22fc890b79777bebb69bfa246d6c033fda7a5d25b54c00",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StandUpACampaignWorkspace",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Spin up a working campaign board grounded in real context - not a blank template - so the team has a single source of truth before the kickoff calendar invite goes out.",
+    "description": "Builds a Monday.com campaign board from an intake brief plus recent email and Teams threads, grouped by workstream with owner, deliverable, status, due date and dependency notes, flagging open decisions.",
     "display_name": "Stand up a campaign workspace",
     "industry_context": {
       "deprecated": false,
@@ -47,9 +47,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "f3fcf451ac77ad03",
+      "content_digest": "9b98bc893aae14c5",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -73,28 +73,41 @@
       "integration",
       "monday_com"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "StandUpACampaignWorkspace",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "campaign_name": {
+        "description": "Name of the campaign being launched.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "context_threads": {
+        "description": "Email and Teams discussions where the campaign has been pre-shaped.",
+        "type": "string"
+      },
+      "intake_brief": {
+        "description": "The attached campaign intake brief document.",
+        "type": "string"
+      },
+      "launch_date": {
+        "description": "Target launch date for the campaign.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -103,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

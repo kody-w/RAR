@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_retire_knowledge_base_articles",
   "name": "Retire knowledge base articles Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_retire_knowledge_base_articles",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_retire_knowledge_base_articles:739a6d28d6578948acd2d5cb08997a4c5d634ec120dae67048cd6a6a23aa212e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_retire_knowledge_base_articles:01eec190de3dfb57cc495ca18446ac550fa88555c6c42e46243ab88d1da574da",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_retire_knowledge_base_articles:739a6d28d6578948acd2d5cb08997a4c5d634ec120dae67048cd6a6a23aa212e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_retire_knowledge_base_articles:739a6d28d6578948acd2d5cb08997a4c5d634ec120dae67048cd6a6a23aa212e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing retire knowledge base articles for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on retiring knowledge base articles from Dynamics 365 ERP (legal entity USMF): top 5 items by impact, anomalies vs 7-day rolling average, and recommended next actions, plus a saved email draft to t",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "30deb6641fe728a6aa2ba09e2da8f54f5c25d1ad18bccde60520f7f754073b01",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "94606535860425e77faa9a2574e0a3dfe98dc5c8ccd4705f94c3315d5d0c5211",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

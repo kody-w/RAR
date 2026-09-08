@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_develop_product_portfolio",
   "name": "Develop product portfolio Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_develop_product_portfolio",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_develop_product_portfolio:847c511edb48e554821c68ec88574205ed46b27b2cabebb2cbbd8bb502071822",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_develop_product_portfolio:0adfdbb609333f092b636346e6a91f745927a9dfbb88920a0972291b3cc50368",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_develop_product_portfolio:847c511edb48e554821c68ec88574205ed46b27b2cabebb2cbbd8bb502071822",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_develop_product_portfolio:847c511edb48e554821c68ec88574205ed46b27b2cabebb2cbbd8bb502071822"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing develop product portfolio for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a product-portfolio morning brief from Dynamics 365 ERP data for a legal entity: top 5 items by impact, anomalies vs the 7-day rolling average, and next actions, plus an unsent email draft to the owner and a Teams",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "59898f0f6265c9de6bbb77a4293ed81fceb0f1ed511b0960e8639048e5da76cb",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "56fafcea5bb56ced0d2b8b0eaa3016efab7be5d18e817346cff653e877e755c9",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

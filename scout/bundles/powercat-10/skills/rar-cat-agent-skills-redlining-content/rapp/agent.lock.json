@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/redlining_content",
   "agent_file": "redlining_content_agent.py",
-  "agent_sha256": "1196f5449b1e765cd968e70f0a5568c40598968414f4ffb10380e02b9bdfed98",
+  "agent_sha256": "28f933da117e15feeca641c67a251548a586847b5641189c1780a8633db5b5f8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RedliningContent",
   "host_dependencies": [],
@@ -37,7 +37,7 @@
       "documents",
       "productivity"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "RedliningContent",
   "schema": "rapp-agent-lock/1.0",
@@ -67,5 +67,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

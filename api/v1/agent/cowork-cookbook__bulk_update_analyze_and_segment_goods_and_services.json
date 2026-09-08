@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_analyze_and_segment_goods_and_services",
   "name": "Analyze and segment goods and services Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services:140b6440eaade6d3295d9b134643391d81d22aee3c70ab2653fb2a738e794621",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services:4acb2874e403917e2c10ffe8be08cfaa7f7fe84d1f22e4e60c4bd4b3c576b45e",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services:140b6440eaade6d3295d9b134643391d81d22aee3c70ab2653fb2a738e794621",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_analyze_and_segment_goods_and_services:140b6440eaade6d3295d9b134643391d81d22aee3c70ab2653fb2a738e794621"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across analyze and segment goods and services records from an input list, with dry-run preview before commit.",
+  "description": "Runs a bulk field update on analyze-and-segment goods and services records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork ERP plugin, returning a dry-run preview workbook for approval before committing",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "e51c2dc320ca6713291445f61939927d97984eb587c5c0237d017e62312ff7a7",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "786cb631081f54fdba27b9745b7f467e8258e24add7b0149b3c076ed013f9d71",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/blueprint_period_close_readiness",
   "agent_file": "blueprint_period_close_readiness_agent.py",
-  "agent_sha256": "47724f88cfdbdf0210848faafe49975d7c48dcac79f357f60d9cd53ac71b7a61",
+  "agent_sha256": "fee1dd980d0022c9988e34a5dfc3a9a7e619b7cdbfc184b9ba99f19648a182d4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlueprintPeriodCloseReadiness",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Paste this period-close workflow blueprint into Cowork and it assesses whether the period is ready to close — unposted work, subledger-to-GL differences, and FX exposure.",
+    "description": "Runs a read-only period-close readiness assessment against Dynamics 365 F&SCM for a given period and legal entity, returning a close-readiness.xlsx (Summary, Unposted, Reconciliation, FX) plus an email summary.",
     "display_name": "Period Close Readiness Blueprint",
     "industry_context": {
       "deprecated": false,
@@ -57,9 +57,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "667474295c4ede3e",
+      "content_digest": "8cd624e64d6223fb",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -83,28 +83,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BlueprintPeriodCloseReadiness",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "constraints": {
-        "description": "Optional. Hard constraints — budget, platform, deadline, compliance.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legalentity": {
+        "description": "Legal entity code in D365, e.g. USMF",
+        "type": "string"
+      },
+      "materialitythreshold": {
+        "description": "Currency amount above which differences are flagged, e.g. 10000",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being designed.",
+      "periodname": {
+        "description": "Accounting period to assess, e.g. 2017-12",
         "type": "string"
       }
     },
@@ -113,5 +122,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

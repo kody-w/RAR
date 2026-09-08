@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_track_and_analyze_software_licenses",
   "name": "Track and analyze software licenses Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_track_and_analyze_software_licenses",
-  "rappid": "rappid:@cowork-cookbook/audit_track_and_analyze_software_licenses:4e252c37bbe458e455c0c1245a1f9e2d5c6ba24023564f59833a6258d0f161bd",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_track_and_analyze_software_licenses:5bde38755fae4e9462ee043c4f3de56bcadb0949d7199e202e0c2935b2eb5f66",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_track_and_analyze_software_licenses:4e252c37bbe458e455c0c1245a1f9e2d5c6ba24023564f59833a6258d0f161bd",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_track_and_analyze_software_licenses:4e252c37bbe458e455c0c1245a1f9e2d5c6ba24023564f59833a6258d0f161bd"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits track and analyze software licenses records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of software license tracking records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary sheet.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "a33d5a6a4b37e9028fab086b9177e87818fdd319b7e9ca58bfb37ec0f7ea7282",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "cd23d35dca26e292d66c86fe1d45a7ebb6f5254ad5ffb1bfe2d08f31a155695b",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

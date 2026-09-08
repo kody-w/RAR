@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_test_planner",
   "agent_file": "copilot_studio_test_planner_agent.py",
-  "agent_sha256": "3cfc5e42ce1e3f436c2129fd6b933475640c6476a63b042d5d0d6ac22e817bd2",
+  "agent_sha256": "b844fedd3d1befa33932d43c296c9fc3ede7185c6a805ccd59b5dd0ce70a20c6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioTestPlanner",
   "host_dependencies": [],
@@ -38,7 +38,7 @@
       "regression",
       "agent"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "CopilotStudioTestPlanner",
   "schema": "rapp-agent-lock/1.0",
@@ -64,5 +64,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

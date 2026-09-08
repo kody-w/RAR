@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_qualify_and_disqualify_leads",
   "name": "Qualify and disqualify leads Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_qualify_and_disqualify_leads",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_qualify_and_disqualify_leads:a597617dd9328bfc138ec08c1f75e92c1bffe203decbc991e9520af5a4908fb3",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_qualify_and_disqualify_leads:e53eb729798bbc10178f9ae6b65c90c7f94e993f080d6a4a96184e046f23447c",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_qualify_and_disqualify_leads:a597617dd9328bfc138ec08c1f75e92c1bffe203decbc991e9520af5a4908fb3",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_qualify_and_disqualify_leads:a597617dd9328bfc138ec08c1f75e92c1bffe203decbc991e9520af5a4908fb3"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across qualify and disqualify leads records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to qualify/disqualify leads records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied list of record IDs and new values, with a dry-run preview workbook and approval pa",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "42a0e815a4a7091ed56315f4963a1c658afb535c73ac8b0838b6ea3078a17ff7",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "c67856f22586677d782493b572a0f66edf2a475f0d8aebbd1bec2e570175c3db",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

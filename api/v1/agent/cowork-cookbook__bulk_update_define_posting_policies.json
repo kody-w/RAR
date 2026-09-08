@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_define_posting_policies",
   "name": "Define posting policies Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_define_posting_policies",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_define_posting_policies:9a0bdd9eb571098983b43ebbd32a8613b93bacd4d533944ec2513fe31f6bbaf6",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_define_posting_policies:3de775906a4a5d81e30c3dccc5e1677b2fcfd1628185f14cb49324175278620a",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_define_posting_policies:9a0bdd9eb571098983b43ebbd32a8613b93bacd4d533944ec2513fe31f6bbaf6",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_define_posting_policies:9a0bdd9eb571098983b43ebbd32a8613b93bacd4d533944ec2513fe31f6bbaf6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across define posting policies records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to define posting policies records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, producing a dry-run preview workbook for approval before committing and a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "eb25aa1f15d6fd6e350446947d21d4a6f3b4885c375f5a54441874a823f8320d",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "f4e294797a16b89bacd28d81591f92220908a502a3a8900cc0caa4d05299ffc6",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

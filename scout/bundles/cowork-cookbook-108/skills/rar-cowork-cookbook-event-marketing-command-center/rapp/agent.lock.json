@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/event_marketing_command_center",
   "agent_file": "event_marketing_command_center_agent.py",
-  "agent_sha256": "bf5e15f1e4eccb2d938c9ad2d28037fc7642baee0b16f13a3174964eeb349e79",
+  "agent_sha256": "0bdcb1dae16eba1bf9c12f81a526691fef08818909215605c5028f9827fbbb29",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EventMarketingCommandCenter",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Prep every moment of [Event name] - speaker slots, customer meetings, content drops, social posts - and bring it together in a single interactive command center with live event KPIs.",
+    "description": "Assembles event programming from a OneDrive folder, tagged calendar entries, a Teams channel, prior customer interactions, and Fabric performance data into an interactive HTML command center with linked artifacts and liv",
     "display_name": "Event marketing command center",
     "industry_context": {
       "deprecated": false,
@@ -50,9 +50,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "49c0820930fe9aa0",
+      "content_digest": "3acaf8ca2abf32c8",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -76,28 +76,45 @@
       "integration",
       "fabric_iq"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "EventMarketingCommandCenter",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "event_date": {
+        "description": "Date the event takes place.",
+        "type": "string"
+      },
+      "event_name": {
+        "description": "Name of the event, used to match calendar entries and channel discussion.",
+        "type": "string"
+      },
+      "onedrive_folder": {
+        "description": "OneDrive folder holding the event materials.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "speaker_name": {
+        "description": "Speaker to build the prep brief for; also supply the number of days of social programming.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "team_channel": {
+        "description": "Teams channel where event programming is discussed.",
         "type": "string"
       }
     },
@@ -106,5 +123,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

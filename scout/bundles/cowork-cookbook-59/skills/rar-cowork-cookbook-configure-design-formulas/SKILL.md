@@ -1,7 +1,7 @@
 ---
 name: "rar-cowork-cookbook-configure-design-formulas"
-description: "Applies a bulk configuration change to design formulas from an input Excel file, with validation and rollback support."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/configure_design_formulas", "rar_sha256": "d7783435fa1706485b67ce2cc13b05242ebf8dda715892f2107e166bbf7a59d9", "source_kind": "rar-agent", "source_commit": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed", "version": "2.0.0", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "configure", "design_to_retire", "intermediate", "integration", "dynamics_365_erp"]}
+description: "Bulk-updates design formulas in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, pauses for your approval, then applies changes and returns a before/after confirmation w"
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@cowork-cookbook/configure_design_formulas", "rar_sha256": "2d3c178d08a52933d0c1aaa1a14ba00600f990a2b3cede34494d45a3d7db9ef3", "source_kind": "rar-agent", "source_commit": "working-tree", "version": "3.0.3", "author": "Sean Galliher and Cowork Cookbook contributors", "tags": ["industry_solution", "business_process", "prompt", "configure", "design_to_retire", "intermediate", "integration", "dynamics_365_erp"]}
 ---
 
 ## Microsoft Scout runtime
@@ -23,17 +23,18 @@ agent in the user's Brainstem. Never paraphrase the factory or agent into a new
 implementation. The generic direct-file commands in the generated Toaster
 section are recovery guidance; Scout should prefer the verified runner.
 
-Design formulas Configuration Bulk Setup — Applies a bulk configuration change to design formulas from an input Excel file, with validation and rollback support.
+Design formulas Configuration Bulk Setup — Bulk-updates design formulas in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, pauses for your approval, then applies changes and returns a before/after confirmation w
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/configure-design-formulas
@@ -53,22 +54,31 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 ```json
 {
   "properties": {
+    "approval": {
+      "description": "Explicit go-ahead after reviewing the validation workbook, before changes are applied.",
+      "type": "string"
+    },
+    "configuration_excel_file": {
+      "description": "Attached Excel file with one row per design formulas target and the new field values.",
+      "type": "string"
+    },
+    "context": {
+      "description": "Optional. Details the recipe should use \u2014 the record, scope, dates or filters it asks for.",
+      "type": "string"
+    },
+    "legal_entity": {
+      "description": "D365 legal entity to run against (e.g. USMF); use a sandbox first.",
+      "type": "string"
+    },
     "operation": {
-      "description": "What to do: run, plan, checklist, describe.",
+      "description": "What to do: run, prompt, plan, checklist, describe.",
       "enum": [
         "run",
+        "prompt",
         "plan",
         "checklist",
         "describe"
       ],
-      "type": "string"
-    },
-    "subject": {
-      "description": "The process to automate.",
-      "type": "string"
-    },
-    "trigger": {
-      "description": "Optional. What starts it \u2014 schedule, event or manual.",
       "type": "string"
     }
   },
@@ -85,7 +95,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `configure_design_formulas_agent.py` and embedded as the fenced Python below (sha256 d7783435fa170648…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `configure_design_formulas_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `configure_design_formulas_agent.py` and embedded as the fenced Python below (sha256 2d3c178d08a52933…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `configure_design_formulas_agent.py` first:
 
 ```bash
 python3 configure_design_formulas_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -97,17 +107,18 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 
 ```python  # rapp:deterministic
 """
-Design formulas Configuration Bulk Setup — Applies a bulk configuration change to design formulas from an input Excel file, with validation and rollback support.
+Design formulas Configuration Bulk Setup — Bulk-updates design formulas in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, pauses for your approval, then applies changes and returns a before/after confirmation w
 
 AGGREGATED ENTRY. The content authority for this capability is the upstream
 library; this file is the structured RAR container for it. It carries a
 manifest, a version locked to upstream, a content hash, a provenance record and
 a public feedback thread — none of which the upstream entry has on its own.
 
-Nothing from upstream is reproduced here. What runs below is RAR's own method
-for this shape of work — a automate capability — generated from the metadata
-we index. The upstream library remains the authority for its own instructions;
-this agent is callable on its own terms and links home for the source.
+This entry carries the upstream recipe itself, under its licence and with
+attribution: the prompt verbatim, the prerequisites, the step-by-step and
+the expected output. Toasting made it deterministic — the same call returns
+the same recipe every time — and callable from any Brainstem. The upstream
+library remains the authority for the recipe and links home for the source.
 
   Source library : Cowork Cookbook (Sean Galliher and Cowork Cookbook contributors)
   Upstream entry : https://coworkcookbook.com/recipes/configure-design-formulas
@@ -122,9 +133,9 @@ upstream record changes, so this file and its source cannot silently diverge.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": '@cowork-cookbook/configure_design_formulas',
-    "version": '2.0.0',
+    "version": '3.0.3',
     "display_name": 'Design formulas Configuration Bulk Setup',
-    "description": 'Applies a bulk configuration change to design formulas from an input Excel file, with validation and rollback support.',
+    "description": 'Bulk-updates design formulas in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, pauses for your approval, then applies changes and returns a before/after confirmation w',
     "author": 'Sean Galliher and Cowork Cookbook contributors',
     "tags": ['industry_solution', 'business_process', 'prompt', 'configure', 'design_to_retire', 'intermediate', 'integration', 'dynamics_365_erp'],
     "category": 'integrations',
@@ -143,8 +154,8 @@ __manifest__ = {
         "upstream_version": '1.0.0',
         "license": 'CC-BY-4.0',
         "license_verified": True,
-        "details": {'license_note': 'Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.', 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
-        "content_digest": '8642107dd7a75fc6',
+        "details": {'license_note': "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.", 'license_url': 'https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE', 'repository_url': 'https://github.com/seangalliher/Coworkcookbook', 'taxonomy_url': 'https://coworkcookbook.com/data/taxonomy.json'},
+        "content_digest": '8a9dde4c603f23e7',
     },
     "industry_context": {'deprecated': False, 'difficulty': 'intermediate', 'last_verified_on': None, 'mutates_data': True, 'plugin': 'dynamics-365-erp', 'process_roots': ['design-to-retire'], 'process_tags': ['design-to-retire/introduce-products/design-formulas'], 'recipe_category': 'configure', 'recipe_type': 'prompt', 'upstream_path': 'design-to-retire/configure-design-formulas', 'uses_skills': {'custom': [], 'ootb': ['Excel'], 'plugin': [{'action': 'data_find_entity_type', 'plugin': 'dynamics-365-erp'}, {'action': 'data_update_entities', 'plugin': 'dynamics-365-erp'}, {'action': 'form_open_menu_item', 'plugin': 'dynamics-365-erp'}, {'action': 'form_set_control_values', 'plugin': 'dynamics-365-erp'}, {'action': 'form_save_form', 'plugin': 'dynamics-365-erp'}]}, 'verification_status': 'draft'},
     # The platforms the upstream entry targets. First-class and queryable, not
@@ -164,15 +175,15 @@ except ModuleNotFoundError:
             self.metadata = metadata
 
 
-# The toasted capability. The upstream entry supplies the WHAT; this procedure
-# is RAR's own method for that shape of work, generated by
-# @kody-w/skill_toaster_agent from the metadata we hold. No upstream text is
-# reproduced here — see the module docstring.
-_SPEC = {'archetype': 'automate', 'checks': ['Every step is idempotent and the whole run is safely retryable.', 'Failure behaviour is defined per step, and failures are loud.', 'A completion condition exists and is checked.', 'The first production run was reconciled against the manual process.'], 'confidence': 0.8, 'deliverable': 'A runnable automation with a defined trigger, per-step failure policy, an observable signal, and a reconciliation against the manual process.', 'operations': ['run', 'plan', 'checklist', 'describe'], 'params': {'subject': 'The process to automate.', 'trigger': 'Optional. What starts it — schedule, event or manual.'}, 'refined_by': 'rules', 'signals': ['tag:integration', 'tag:workflow'], 'steps': ['Run the process manually once and write down every step, including the ones people do without noticing.', 'Identify the trigger and the completion condition. An automation with no defined end does not terminate, it accumulates.', 'Make each step idempotent, so a retry is safe and a partial run can be resumed rather than restarted.', 'Decide failure behaviour per step: retry, skip, or halt. Silent failure is the expensive one.', 'Add an observable signal — a log line, a status file, a notification — so a broken run is noticed without being looked for.', 'Run it alongside the manual process until they agree, then retire the manual path deliberately.'], 'subject_label': 'process to automate', 'verb': 'Automate'}
+# The toasted capability, generated by @kody-w/skill_toaster_agent. A licensed
+# recipe entry carries the upstream recipe verbatim (with attribution) in
+# _SPEC["recipe"]; a metadata-only entry carries RAR's own method for that shape
+# of work. See the module docstring for which this is.
+_SPEC = {'archetype': 'recipe', 'checks': ['Prerequisite: Dynamics 365 F&SCM access with the appropriate role', 'Prerequisite: Cowork D365 ERP plugin enabled', 'Output matches: See the prompt for the specific deliverable(s). All generated files land in `Documents/Cowork/output/` in OneDrive.'], 'confidence': 1.0, 'deliverable': 'See the prompt for the specific deliverable(s). All generated files land in `Documents/Cowork/output/` in OneDrive.', 'operations': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'params': {'approval': 'Explicit go-ahead after reviewing the validation workbook, before changes are applied.', 'configuration_excel_file': 'Attached Excel file with one row per design formulas target and the new field values.', 'context': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'legal_entity': 'D365 legal entity to run against (e.g. USMF); use a sandbox first.'}, 'recipe': {'authors': ['Sean Galliher'], 'business_value': 'Eliminates the click-by-click burden of bulk configuration changes for design formulas, cutting setup time from days to minutes while preserving auditability.', 'expected_output': 'See the prompt for the specific deliverable(s). All generated files land in `Documents/Cowork/output/` in OneDrive.', 'platform': 'Microsoft 365 Copilot Cowork', 'prerequisites': ['Dynamics 365 F&SCM access with the appropriate role', 'Cowork D365 ERP plugin enabled'], 'prompt': "Using the Dynamics 365 ERP plugin against legal entity USMF (sandbox first!), read an attached configuration Excel file containing one row per design formulas target with the new field values. Validate every row before applying anything (required fields present, valid references, no duplicates). Produce a 'validation' workbook showing which rows would succeed vs fail and why. Pause and ask me to approve before applying any changes. After approval, apply the validated changes and emit a confirmation workbook with before/after values. WARNING: this recipe modifies data - sandbox first.", 'steps': ['Open Cowork and confirm the Dynamics 365 ERP plugin is toggled on for your session.', 'Paste the prompt from `prompt.md` into a new task.', 'Review the generated output and adjust scope as needed.', '**Before approving any write action, review the dry-run preview.**'], 'tenant_caveat': '', 'verified_against': '', 'what_it_does': 'Reads a configuration Excel file, validates each row, then applies updates via the D365 ERP plugin.'}, 'refined_by': 'claude-opus-5', 'refinement': {'description': 'Bulk-updates design formulas in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, pauses for your approval, then applies changes and returns a before/after confirmation w', 'example_request': "Here's my design formula update spreadsheet — validate it against USMF sandbox and show me what would change before applying.", 'inputs': [{'description': 'Attached Excel file with one row per design formulas target and the new field values.', 'name': 'configuration_excel_file'}, {'description': 'D365 legal entity to run against (e.g. USMF); use a sandbox first.', 'name': 'legal_entity'}, {'description': 'Explicit go-ahead after reviewing the validation workbook, before changes are applied.', 'name': 'approval'}], 'model': 'claude-opus-5', 'when_to_use': 'Use when you need to apply many design formula field changes at once from a spreadsheet, with row-level validation and an approval gate before any write.'}, 'signals': ['recipe:prompt', 'refined'], 'steps': ['Open Cowork and confirm the Dynamics 365 ERP plugin is toggled on for your session.', 'Paste the prompt from `prompt.md` into a new task.', 'Review the generated output and adjust scope as needed.', '**Before approving any write action, review the dry-run preview.**'], 'subject_label': 'context for the recipe', 'verb': 'Run'}
 
 
 class ConfigureDesignFormulas(BasicAgent):
-    """Automate agent, toasted from an aggregated upstream entry."""
+    """Run agent, toasted from an aggregated upstream entry."""
 
     def __init__(self):
         self.name = 'ConfigureDesignFormulas'
@@ -182,7 +193,7 @@ class ConfigureDesignFormulas(BasicAgent):
             "description": __manifest__["description"],
             "parameters": {
                 "type": "object",
-                "properties": {'operation': {'description': 'What to do: run, plan, checklist, describe.', 'enum': ['run', 'plan', 'checklist', 'describe'], 'type': 'string'}, 'subject': {'description': 'The process to automate.', 'type': 'string'}, 'trigger': {'description': 'Optional. What starts it — schedule, event or manual.', 'type': 'string'}},
+                "properties": {'approval': {'description': 'Explicit go-ahead after reviewing the validation workbook, before changes are applied.', 'type': 'string'}, 'configuration_excel_file': {'description': 'Attached Excel file with one row per design formulas target and the new field values.', 'type': 'string'}, 'context': {'description': 'Optional. Details the recipe should use — the record, scope, dates or filters it asks for.', 'type': 'string'}, 'legal_entity': {'description': 'D365 legal entity to run against (e.g. USMF); use a sandbox first.', 'type': 'string'}, 'operation': {'description': 'What to do: run, prompt, plan, checklist, describe.', 'enum': ['run', 'prompt', 'plan', 'checklist', 'describe'], 'type': 'string'}},
                 "required": ["operation"],
             },
         }
@@ -254,12 +265,86 @@ class ConfigureDesignFormulas(BasicAgent):
         ]
         return lines
 
+    # ── recipe entries: the upstream recipe, verbatim, deterministic ─────
+
+    def _recipe_context(self, kwargs):
+        extras = []
+        subject = self._subject(kwargs)
+        if subject:
+            extras.append(f"subject: {subject}")
+        for key in _SPEC["params"]:
+            value = str(kwargs.get(key) or "").strip()
+            if value:
+                extras.append(f"{key}: {value}")
+        return extras
+
+    def _recipe_prompt(self, kwargs):
+        r = _SPEC["recipe"]
+        lines = [r["prompt"]]
+        extras = self._recipe_context(kwargs)
+        if extras:
+            lines += ["", "Context supplied by the caller:"] + [f"- {e}" for e in extras]
+        return lines
+
+    def _recipe_attribution(self):
+        src = __manifest__["source"]
+        r = _SPEC["recipe"]
+        who = ", ".join(r.get("authors") or []) or __manifest__["author"]
+        return [
+            f"Recipe: {__manifest__['display_name']} — by {who}, {src['source_name']} "
+            f"({src['license']}). Source: {src['upstream_url']}",
+        ]
+
+    def _perform_recipe(self, op, kwargs):
+        r = _SPEC["recipe"]
+        ref = _SPEC.get("refinement") or {}
+        if op == "prompt":
+            return "\n".join(self._recipe_prompt(kwargs) + [""] + self._recipe_attribution())
+        if op == "plan":
+            lines = [f"Steps for {__manifest__['display_name']} on {r['platform']}:"]
+            lines += [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "checklist":
+            lines = ["Before you run it:"] + [f"  [ ] {p}" for p in r["prerequisites"]]
+            if r.get("expected_output"):
+                lines += ["", "Done when:", f"  [ ] {r['expected_output']}"]
+            return "\n".join(lines + [""] + self._recipe_attribution())
+        if op == "describe":
+            lines = self._provenance()
+            if ref.get("when_to_use"):
+                lines += ["", f"When to use: {ref['when_to_use']}"]
+            if ref.get("example_request"):
+                lines += [f"Ask for it like: {ref['example_request']}"]
+            if ref.get("inputs"):
+                lines += ["", "It will ask you for:"] + [f"  - {i['name']}: {i['description']}" for i in ref["inputs"]]
+            if r.get("business_value"):
+                lines += ["", f"Why it matters: {r['business_value']}"]
+            return "\n".join(lines)
+        if op == "run":
+            lines = [f"{__manifest__['display_name']} — run on {r['platform']}", ""]
+            if r.get("what_it_does"):
+                lines += [r["what_it_does"], ""]
+            lines += [f"Prompt (paste into {r['platform']}):", ""] + self._recipe_prompt(kwargs) + [""]
+            lines += ["Procedure:"] + [f"  {i}. {s}" for i, s in enumerate(r["steps"], 1)] + [""]
+            lines += ["Acceptance checks:"] + [f"  [ ] {c}" for c in _SPEC["checks"]] + [""]
+            lines += [f"Deliverable: {_SPEC['deliverable']}", ""]
+            if r.get("tenant_caveat"):
+                lines += [f"Verified upstream: {r['tenant_caveat']}", ""]
+            return "\n".join(lines + self._recipe_attribution())
+        return (
+            f"Unknown operation {op!r}. Valid operations: "
+            + ", ".join(_SPEC["operations"])
+        )
+
     # ── entry point ─────────────────────────────────────────────────────
 
     def perform(self, **kwargs):
         """Run the toasted capability. Always returns a string."""
         op = str(kwargs.get("operation") or "run").strip().lower()
         subject = self._subject(kwargs)
+
+        if _SPEC.get("recipe"):
+            return self._perform_recipe(op, kwargs)
 
         if op == "describe":
             return "\n".join(self._provenance())
@@ -289,4 +374,4 @@ if __name__ == "__main__":
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1:H4sIAAAAAAAC/8V6a5OjSLLlX2Hzfqjqq6oUiHeNjdkikEASDwkQArraqnk/hHgjQL393zeQlFld09NzZ8zWbFWVlgIiPNyPux/3CPK3F6dr46J++fKiBU4O8U6WJXFQQ07uQ2zRF/UZ/CrOLviBvCJv68Tt2qJuXj69+EHj1UnZJkUOpjNlmSVBAzmQ22X3sWESdbUzPYa82MmjAGoLCExKohwKi/rSZU4DhXVxAYtBSV52LbQavCCDwiQLPkF90sbQ1ckS/yFj0qgussx1vDPUdGVZ1O0rUCMYnEuZBc3Ll59/+fSSgO8vX3578YBwcOuFfeoRcPeF1891wbwMqAQGlCOwPwfXZVBPWoFbfhBCz6uPTZCFn6D//u9z79RR89OXrzn0/Hx9mf6pXQ618WSa07SBD3lO6bhJlrTjK8RkvTM2UB20XZ1PyDQAvjx6fcz8Lqkoob9Pzz4+FnmNgvbj15cCqHC3/OvLT1BRg/Xqbvr+OkkpP/70mhV9UH/86bucpnPTwGsnYUDr12/P66dYMPD70CS8r/p3IPXhRjf4+vIH46bPQ+/JTjDz5TUtkvzjQ3BZF9cgd3Iv+PjTX4n14sA7Z0nT/ltyf34IjgPHBzY9Ff/p0x3kX6DZ06B3mX+9bAnc+p9YAoa/LfcJegL1V7Lv+P+D6CzJQdC/If5Pxf2zCbO/Qz//pW3/asInKPz6wgVZcgXR4WbBF+i3b9p+xf78wf9+88MvvwPR/6MYrehq7y7h28XJkzBo2m/ffv7Q3G9/+OXnD10JYi1wLt+6OvtnMv8Zrvd1fkDwOerjj3PB+sf8nBd9Dr1HOvRbUf6v+vdXyJjS/vv95gv0x3yZPjNoMuJt0QcEf8iZBuj6Bxx/evkdUEMOrOm8+2OQ5f/1X5CUeHXRFGELaV4B6Ac4uE0uwaS8HicNBP5PuV0HANcmAcA+x4H4nzw8aVyE0K//27sT5WfvSZTzN/ILvj3o7tsb3f36CulAYFEnUZI7GaQy+/3X3ImCvJ0WK+ugCeoroBF3bIPPYNbn6QsgR+jXv5T57T79tRx/vVNk8uAjld1MXNR0WfA62XOKg/ypvQfoNhgCrwOSs8JzHoTbfAJ2NkV2BVw22d6ckyyD/KQGhhb1+KDfLv8yCfv1119dp4m/5g/yRKFHIWjmYMC7OtDnz8CeMEuiuP2aB15cQB9++/0D9H+gfzXrLnxaYw/4+4k+0HCrKTIEsqm7gGHAMcCVgCru6P/2+xNVICYHlQv4KgmnSjRNBtF4Dvw3iDWB+bzACcgNAHgA1stUQwAjQ0n7Cm1C6F1fsOj0aOLsuGhaULXKIPeD3BuBVAeY845kXrRQA0KuCcdPUNcE91V/dWvnruIFpLXT/gpJ7B5UiCKbKmD9rBhgcpEnAP73AHjcB0LqDw20fBPxCslT/EGlUztlXDvPNULn4RdQGd6mA+EOlAf913yqgsEE1T0ZHvCAQQAZ7+nSz5PPQZW+gMz3m7e172OcqY7p93pWf82bZ6A79eQKDxA/WDTqQFUG9P+3Z0g1cdFl/h0/oOkk6ekF/+mVewxy/1D72R96hOXUNmiAK0roa7eAEQz6/9NSTJoyPK+ueEZfcdBK1lXrgeDU/0xIP1omUOKnNR/Z8r3sv5HGG3d+zbMEhEM9/u0x8o77c8yDj0BO+4AJ1Lt84HSA4CT3HpNTjNX1HYSv+RtJfwKI3BkJmAASGAT4BMPbgtPTN01jkKXT9feCffdh7U+mg7iDys7NQEyEQeDfQWjjesqrpwNAgAZTjvVx4sU/WAUB6SAOgHwIKJGATAFEfodOLoCZIKXuXngfnkxtENDC7zygLWgwg1foBFJjCo8G5CPoZaYxAIUPd1HQJQAYAxXfEW5ip3woM/WkTwWdyRfFBUTsHz3wfPg9mO+6TOoDqQ7wPcCyn1jVD4aHZ9/1fPoKKHuZ0u8+6Ud3P22F/lhN/vY1v+v4TuQgq7OpEP8BHAhk06W5h9xESg0glkvwDCAQCfea+/oom4+6/K7Llz814h//s179XgiPP3ruCxS3bdl8mc8fxeutdr0CSpiDGEnKoPlexz4/cuzzW479IPCBzxfoP1PqBxHPaP4CIa/wKzw9EhMvmML1+QEYsJ+X1mdsevo1V4Pvzn1GwMSk2QgK53tZeRsCaktUB9E0+FFmmqk69aAg3nkVwP81fw+AZ3o82AXUxKb4Q9re6ytw58Nb7/QPHuUtWNuf+q8omDYl2aR+E7x8ybss+/SSO5fgX25GJnIHwQlgmDYvIFFAI9Mmwf3qvamZLn7cdN1TaKLA4suUSZ+gqQH9BL33kp+gt+7+vlPKO7C9+XnqY6clwVDw633s+47ODV7ARqody0nlx5Zlap+ebe2flZgSCGjsBVPBLt4zclrxT0LAlygK6j8LUe5fnOxJC03rTOU3ad+SuQF6+t1E4sBpIMlA3gA67MCEPy8D1qmDqgN1zp/M/Y7fd7OKhy2/32FoH/u+317e6OHpg2ePB4aDPPzcTJVuDgIULAiuH6EEnv373d9zImAy0IRM+0ySpFAMxUMHIWECo3CXIL1g4XkI6sL4AlsEbkj5vkMiOEUvwgUCkwFCEK4bkg5O+zSQ94jEb1MdTyZlFo7jUR6JYD5NOoQXoLCLegGyQHwSDWCcRkOKCjCAy/vUM6DBp4UPiyb43hvRCYmnob+9uAQGRgpYs2EeH3ZOG457mrtqLM7qbDYMKHFAjyV87ho3k7o47fZnJlVLSwm63Xpcmvaqdk7dbkR3pp9rfBQSm3kjzs55e/HPmZopPayovcL5g4M3pHJryFqC5fVRV7GyGoI1v+2q7ORrY6vonGAmZKXpZcvud+hNQ/nOXC92KDqndXU0bYcw1oYoOazgF+eF2WRRgVm3TZDe8sw4b0+H2M/Eo17OaC2zOvzWGhuT79D12hsRPM83VisZrLu3bzt6LVqdhih4wDFYeBUScq+vKf+q2zMRpv3uJizEwa/yIth5u+1Cb7PK1dwznLN1eDQqbcw4xYdvewo/Lr2Mtg2twvjOxo0mK+Z0cTirZ4mN0hLxnePomTY1dGMmZvraFU/icGyEITPXPKAheyfkY12orcBnu/M1wUeHHniiKLiLYsQNntGbjghmo5QF1Xl1qtSdoR0XBkwe+AAhZa9c7DpDclEfbvtxnQ6xdjlKgjxcfb30umbGlGMth6vTasWQc7HoClE0l1evXmckKurr7pRcvJw+lvh6rLTGTGaEARdVIe4WViXT/iqaNfuLvbZ2QbTgSW3XHls7OGeS710Szd/NT8cLIMQqz6wTS10ZioJ3B4RncutU4N3GPSXwSFO43eCHKx/ZTF3JhGv7HYVZrkV68Lr1rwKD27J4TkV3D1PZTbL8SlIxQ0Oabgg7DetqI3GyQz1jAGF158JoWXelmHSztM/RZp9UW8r2blc2VLjY9JSjqay2XEiNgw5v+Hp+kJwqbzZmOvPo9rQi13Bda3pBKEeZsGMTAI6oK+pQhjshPQ2lZ80ujS3LgokHviENm2CLKMfDXvASobH2WORbMwO0bWl/m0t7WqfsfTjE87Qxlxe/suRl7J8J0rRq6yRXCEwEg3rAxc3gbDV23CoLbrMQW7+32Ft6XItkwRkkyyjhIeg3dBevtshCqJVEXirSKTYF1qoykDy1bokBQ2nbcwPzmizw9lbZbbtlfthqO1fs1gf4qK4y7SZKVnuLl62wIelg3JoscWVcF18OFs7La3V7jR1t6FOu4fZVerPoTUShN11uxmzWnbFwEODFSJpoRi9bcp5Tussqez9VdExa+TWddngjx7R01DfIjcOVenWpZ7mHHSPJJo11Vh8XBwPfUXYHGEmp/L1WtgeOXlm3SF9vynIO30xjWVTwjYPxar5GsNuVP8qrWXrc5nOaKtqVERg9X6i7g0v1iF11iJ/r7BURRe2ib49YfU0r1kOOZiBvDoZSmXwqWurSMH2xLR2y1Dbu0dgdBv5GyNdRuSh2K1bIymfXq2i+Os2dY8yKObzzNW4nbwRm3hub3kGM05knyLgwsMC7qbEcbW5rN4oDzq4uV2N7UYc+T6TDKrr2Rl2he8VD9Hq/W68vmU2kyLXEMIPlKA6fXZcKDDgpd4nWSXW7zlNSvRiAM6Je9mcXp1BS/BaTu64BYbvFqYWPHgkWbN5dtC/aUVX3YRdc6ZiEUSWYZwuv0Tm9wKOivGl1aDrOUmzz3EyKwCfyGXbL1gfrjPWIu0vUjXw8iBJtobHD9Eta0RtdF/qDggVLWffsgOrqbIFHg47IaKc7e93mr9s5c92wEqf23q4yrE2SU+lcD9a5nG1wWAqyUUcjmFrol9CdtdeTvaEK/hwxhMyPRTmczwDKI4FtuzxuWZwS+92JbQbbri+DFPmotzYs16/GBbOViaF1Rm3tiOddp+jTtlfXxVswbsi8hkmv02E6zEvqoMFSbKVu1+0xrKZMbsy1XHKKkBMus0QbKITeC/t1lNftZW+RpsoIVxHJcGoeXNOoGm+klpPIoN9oKY13i6WGLGwDveb7ZtXEPMwqa9FRcTFX6h2bVzNjzH0LP8st2OfslylyKz2mOl+w1Oy3iH1qNSXdJjouCVFyTk+JrsrGZXETNNFOtdqaZYZ80scyzZeItj5EA0b1mL1flzE2VINBVBssLaPgajFIHKUmCev+ZYNzxvZME8IZwWQWbI9Nc7dx2VLmiVnmr7qZbszYgNoEixE+WiON5OWekinp2KZsvVE9XvL0zEb7VgR1dihQR7wQ/LlYNUJfG9smpXiv2mHzkota4or7nbrg12o2XJYS77CHqxoLShwkx5WtIU5VLfctohQpv06zxfK03A1bJg2rtBS5UUuFKmjnwc609lc/uJjSWWcXQSsasul1hIPtq9WpJyIJ9hvSxbvxfI60aHmijMFECkS/yCnK1fNjlZU6HwPwdRvxESfdHlRe1GLjpJvDWo3mCK4HXnwCpaHKyyuz2qCNTC/1QerYJmCz8aSGpXRluWJojoMh5r2Y53VDwKujJ8NcoeHjRbO5w+564grTmZnbyktL/tivb9GwSDjrGmSZDRfEUPLjoaU5Mq47XUQO7DVvu/VKbo6dyag7eHbZRDRc6JV9JplwgTZ5obInwecii5O2aG8WNBserofDcc3WfZwlVQgT2yTglhpboHqy9jakMYujfGjOc1mpDsWcy8U+luPm4rquhKz7c3KwZhq+4ao5CANGO0qnqh5nPJ9dMVU79keQ3wUyw5MT7gSuWJ96jyHTm7w56xxedkJLu+ugtLSUdx09dsn5MBdcSdAjc+vFKcb5+QUj253RpxXSBbRaVrxfu3v0Al/0mgqP6ukmDFJmLNtb47cwJ3AqtWTzkb4csc0ulg6MNxBWv+6wHaLlUegeFofLoNtHPE8OuUjhe0eYOUlUHyTQoOqOzjBuF3MqvUvp9Wm1cfXSgE0bLnkZ37vxUhOCWcsiFepV+MhHK0xYlB5pUxwGL2NPnmVXecPE8GFbUEouIQJbYzmZLHNlr108Ya/hlS5fvE1vnbbHjdoRlr5dl/NKDzaaTbvyPop49RRGe9uDyViEd/jG3GiUUTrLjmFm3Bnpo5bVJazWYhfwllbYOp8HGuYgDHGIY3JlopJ7Rva6VnpprcL6AhOXR182sDHtYF4l1TGeRSc8Uree34w1tz8aJbMxT77gx3ZmGwY1bolyL12P9nlHUArqY7SUKcMuM3VuK+CbLbK/1tuCs1vOdVbpAacI9mZ4Ri5mFT5r7dusRmQBUeSWIFstlVOS3WKGu/IzFFVuuz0Dskrsa3XOqYAqla1KeaxprNNCYihTFAxOPcBIth2tmxgeDFZMjWA5x7R+CbLr0m7SMenx+oLb12xb2yTBCfZCcHPaCpe7AympcJchsVNtzivuWLUOrVKp71jEigvV3QLjnZWC7rJlT4veck34TDmo6y2l71I+RUIKcyLQRPT0NWvEDSEKR6/UlaZ0OHzgJRkZFtLVPHL+Btlluqw4zKYR+X1lXNcae877zS21xuBwSMNDv5DUzGOP9oKPcK44cmsHtrOBdpm031VmuC2W2HxI2d6KurN9WPpOGmbKmgtiZb7OUyc6H6xFTyLiRYzdfK/YpYzZVUljywuSrlZ8bsVocCIPC0baidLNEi9gB8fXA3aKucvG5iX4LAkk3yIgdDLR0A9lcljw7M3ic/YyegwW1bfYbfr0LBF6ii4PokaGfqrhak+D7u7ArIstcioMdJwJ25pBDuVuNZcUZZ+DbZ10yKLM2RlHoVvWe5LlhSiUFfEI34goms1qW98SRwE+09zALay1bByIi1RUqU1WV7TaIeTNGEpp2BeZSwA71iSLKvlKCERqzyid5XAdUY83w5Xdi42J3lyl8+11Iwf+CsEbESZJhfR5z13IuWvO9g3Bs9G6aHurJPXC0NVyy6cAL7nKImGlChS5P5+whWPmBU9eF464gbcw7DB2sQ2CxYZhyRk6uvX5FGuy3tTWHq16fEseZxK9VFi4g/NRmYneZa6iygk8Y4g8JWAx6AkCdfapJJlisBZNp46vN4lUFhjCIQkzVzYjispXEq2dmxBhrHCd0y0yHxiMNSzCk8M5VoZpvRR2fXDcu5lsFtmizyqmmpkjTxdxTySHTdttg40tC2h/U435oZ0d1BQ530o46eOWV+acZOFMGCnH+KIHO7DFGm006ztQ0G5zVBktYns2bnV1ZeuIJrlaGxGD23GHcEFH3cHH9DQ/X5az2NJsFaU5zEViWbipGkXqi96d2+hsP+tCpVhYYB9Zl6I6hi2NLJaH8paLDZw6x91pr227LeAWEpv3Ow80JHAemkd1YUt5UZtq3blFuAY9YU7XAjqTT1sLltMZYzfsjpaEc0uvYxMNgmslXcYMdY22S8VdPavZTrnJLqgXtW46BtE11iryZ5E3IPvOhMOQKnOFtZLlbQ62oqFqCP1F7Bx1xQXYSu22aE7x63a/FPxrKAtwwitjbJkkIcegndwxrHmDdyeG9M6BZO/VfmUsllRCHy5CbnXp9trPbto1AT1bgzcYPWhNEGr8amVHdKALs4bnVGyeKHsrrBhSkpm960ZzCT+uVwGe2qsqUmHlpjCblpTON7JuxNHvlao64fQW1EORENOMtQ5zngxkkvEXyGJTufE2wkldL2JQ/iOC1MtstrDz5dw47vyh5uFgtR5J3TQ931WuZ/tyDRum9XaK5Jn746avG6FeootMPqLYkhLkeiFTs/hM0US4HRwduexc4sCuErR2udRpPVDm4BG5JuSg3k722BLIWj8rvqKe8gJrWnVBmTQZ42eMTaR5US1FWEPp3hLO3MDv6cYXhIOUnilB7POjYBu0vQ1q5rACiYNF+pxpdf865NyQn1AXHVmrlTuCJMgO9X3qCHPwXJLmKI062W1MWnhPGUUqnPw2bAKhZPVTtcPrgdKacE9lxI1F5bZdpPO5KAo5H6Ko1/OzWSai1kY57r3jkVjKM7ZsTsWN7duQotPacBu7wIw6LGOzv9rKnM8iPmIuyulSJDg96zLpADsr5IjhNEbd0vm66lxQbnDXAbkwPy64Y6MD+mVuhbXopKW8jFxtyeV4WfRe73PBjTMQueFNzkXauKN9edTLeOZWKh45Kuen8GlzpGb9GfP2NLmtHUokZwoicOdINNkVa/KReNuTHLurqYN7tkHJjm5rIiiVJW27rUoYuOITu9PVDPDlbC8Vi8B1AutCmb6Qr6IORht8ptCeHoJGxAprT6xcvHJRB+dwHwWFkyGJ0eUxkU3IdonV7vmGZ33FENkcHuxU9m7XEreHTjlElrUCHbgeElHMcPpBOmjdDU413UpGokzGw1btQLs83DwZtE3ptmXciMaw877y9kzY04YJTCgZhvn7y6eX6RD6eZT8P78Ono74/p+dND4OBd9eIt0PkQPH/3Jf68u/ocsvn15qLwGaPM5Pm6yLnoeO/3B6+vkv3zlM08bHO9Xp7dbQvh2ut040/fHPS5L7XdPW47emyLr7we2nF7drpr9HaL49D6hf7mZcyum0+32lx8n3pHhbfKuDNrnfSvLpjU3gJ077dhk9z5HB+BH4IfGabyiBfwvqcjLw+RJjOoWd3mK8/P5/AQqTPl1dJQAA -->
+<!-- rci-capsule:v1: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 -->

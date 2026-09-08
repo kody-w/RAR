@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/spend_more_time_with_friends_and_family",
   "agent_file": "spend_more_time_with_friends_and_family_agent.py",
-  "agent_sha256": "d11659b95fb22912398412b573f58ec52b940dcff10574f772ed0a4b4be892db",
+  "agent_sha256": "ae5c4e43c1e54091d9c0fba127f9b7f077a61289feb638570df2aaab146c313c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SpendMoreTimeWithFriendsAndFamily",
   "host_dependencies": [],
@@ -38,7 +38,7 @@
       "out_of_office",
       "knowledge"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "SpendMoreTimeWithFriendsAndFamily",
   "schema": "rapp-agent-lock/1.0",
@@ -68,5 +68,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

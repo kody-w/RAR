@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_adjust_inventory_levels",
   "name": "Adjust inventory levels Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_adjust_inventory_levels",
-  "rappid": "rappid:@cowork-cookbook/dashboard_adjust_inventory_levels:bb828199581004ca56dcc7e14ede123f56d04059b7014bccc50c1e5daa5438d4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_adjust_inventory_levels:f5d9d3a74813a4f7b501b6c2f499515a28ba16d8be2551ce69c7f9870adcaf87",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_adjust_inventory_levels:bb828199581004ca56dcc7e14ede123f56d04059b7014bccc50c1e5daa5438d4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_adjust_inventory_levels:bb828199581004ca56dcc7e14ede123f56d04059b7014bccc50c1e5daa5438d4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for adjust inventory levels - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls adjust-inventory-levels data for the most recent fiscal period from Dynamics 365 F&SCM (legal entity USMF) via the Cowork D365 ERP plugin and saves a standalone interactive HTML dashboard; read-only.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "6bebaad56adb787aeea31983d73ef0132b32756a6af8daa2af48bf32ba095173",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "fa07cea45ee219bb8d763d2ddac07ef52d9a81da81978650a449ddb6caabfa2b",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

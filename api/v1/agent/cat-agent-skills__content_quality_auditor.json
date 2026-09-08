@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__content_quality_auditor",
   "name": "Content Quality Auditor",
   "rar_name": "@cat-agent-skills/content_quality_auditor",
-  "rappid": "rappid:@cat-agent-skills/content_quality_auditor:090554ecc3aefc499b4b981ac2af3d5324c6822e8c0d2b68e6fa5bc74a06bfb4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "1.1.0",
+  "rappid": "rappid:@cat-agent-skills/content_quality_auditor:1c7ec82e6faafd15ab780d27f4e24b215ff416ff944ad3130501ab3315b9ed97",
+  "_migrated_from": "rappid:@cat-agent-skills/content_quality_auditor:090554ecc3aefc499b4b981ac2af3d5324c6822e8c0d2b68e6fa5bc74a06bfb4",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/content_quality_auditor:090554ecc3aefc499b4b981ac2af3d5324c6822e8c0d2b68e6fa5bc74a06bfb4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
   "publisher": "@cat-agent-skills",
   "category": "productivity",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.2,
-  "sha256": "884464387bc3f9da6f84ffad05a6432081cc32e356efba67a74c2d4a5ed0ed99",
+  "lines": 262,
+  "size_kb": 12.5,
+  "sha256": "d8b1870486fa4ca8f04150a70925851ae31980f7535850af3297aa10318d464f",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

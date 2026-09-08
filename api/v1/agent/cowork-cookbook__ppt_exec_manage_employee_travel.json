@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_manage_employee_travel",
   "name": "Manage employee travel Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_manage_employee_travel",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_manage_employee_travel:9152cbdfa2e1fdca6dc876bf2785db1bd5b92d9c96cc9e5fd2407820e9470eca",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_manage_employee_travel:7758f6f884208c273bb71a7fec54348864e62010b32a442ccdbbc9dc786ee506",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_manage_employee_travel:9152cbdfa2e1fdca6dc876bf2785db1bd5b92d9c96cc9e5fd2407820e9470eca",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_manage_employee_travel:9152cbdfa2e1fdca6dc876bf2785db1bd5b92d9c96cc9e5fd2407820e9470eca"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on manage employee travel status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on employee travel status from Dynamics 365 ERP data for a given legal entity, with KPI, trend, red-flag, action, and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "bc85ca854e64357d2e3eb60bab05962f10a6f941dba874082eb07e52f7a94a59",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "52eb08f480a30988ef5c8f5f1394d85b50ee0260abfe0b2a1fdfd8f8c544ec70",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

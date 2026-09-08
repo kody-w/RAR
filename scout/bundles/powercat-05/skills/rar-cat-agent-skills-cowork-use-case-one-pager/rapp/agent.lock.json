@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/cowork_use_case_one_pager",
   "agent_file": "cowork_use_case_one_pager_agent.py",
-  "agent_sha256": "04d7936c14c1ba540141659716a7bacc34a2cd3fcb057a4625d749fd89492bb7",
+  "agent_sha256": "36fd44a76d80525c9ac4de4a7428e0bc4be342ca07dc8c6c8f1ade0df11a895f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CoworkUseCaseOnePager",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "writing",
       "audit"
     ],
-    "version": "2.0.1"
+    "version": "3.0.3"
   },
   "runtime_name": "CoworkUseCaseOnePager",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.1"
+  "version": "3.0.3"
 }

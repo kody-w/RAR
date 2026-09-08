@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__copilot_studio_test_planner",
   "name": "Copilot Studio Test Planner",
   "rar_name": "@cat-agent-skills/copilot_studio_test_planner",
-  "rappid": "rappid:@cat-agent-skills/copilot_studio_test_planner:15d44b90b0ae64f439d29d067a6697d29380d26ce7125a717e21e48f7f9b4bd0",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/copilot_studio_test_planner:a97782b9249d7b5a1c9e551f6fe916e90cf07759eb35836c58b28fb8e1adab0d",
+  "_migrated_from": "rappid:@cat-agent-skills/copilot_studio_test_planner:15d44b90b0ae64f439d29d067a6697d29380d26ce7125a717e21e48f7f9b4bd0",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/copilot_studio_test_planner:15d44b90b0ae64f439d29d067a6697d29380d26ce7125a717e21e48f7f9b4bd0"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -23,9 +25,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.6,
-  "sha256": "3cfc5e42ce1e3f436c2129fd6b933475640c6476a63b042d5d0d6ac22e817bd2",
+  "lines": 262,
+  "size_kb": 12.0,
+  "sha256": "b844fedd3d1befa33932d43c296c9fc3ede7185c6a805ccd59b5dd0ce70a20c6",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

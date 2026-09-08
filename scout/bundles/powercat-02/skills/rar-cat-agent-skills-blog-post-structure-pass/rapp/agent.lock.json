@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/blog_post_structure_pass",
   "agent_file": "blog_post_structure_pass_agent.py",
-  "agent_sha256": "b337e49ea0b120fa4994304c114666c76182f2b76b6081e1c3d478d82ee4b5b5",
+  "agent_sha256": "7aa974d9e64cd44bf8b7d1c0b45c56396849d26beefbdb9d853de01547392519",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlogPostStructurePass",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "structure",
       "productivity"
     ],
-    "version": "1.1.0"
+    "version": "2.1.2"
   },
   "runtime_name": "BlogPostStructurePass",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "1.1.0"
+  "version": "2.1.2"
 }

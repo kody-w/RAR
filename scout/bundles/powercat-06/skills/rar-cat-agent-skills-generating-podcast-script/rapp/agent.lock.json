@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/generating_podcast_script",
   "agent_file": "generating_podcast_script_agent.py",
-  "agent_sha256": "38267f60dffe6f5f867e473ee794685bb89ea2833f4716dfd9ea9431b3bef325",
+  "agent_sha256": "7829c0c907532eeddf7c64df1787e7755bd40cf1c3ef745e991f4de682414a4d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GeneratingPodcastScript",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "ssml",
       "news"
     ],
-    "version": "2.1.0"
+    "version": "3.1.2"
   },
   "runtime_name": "GeneratingPodcastScript",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.1.0"
+  "version": "3.1.2"
 }

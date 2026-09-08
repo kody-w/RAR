@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/configure_analyze_and_segment_goods_and_services",
   "agent_file": "configure_analyze_and_segment_goods_and_services_agent.py",
-  "agent_sha256": "52b85d1af95a4fff44fe2b7276691645a139fc9a1123dff49a26016cb17af88b",
+  "agent_sha256": "9b8e1a6312e1a4f049b81eabc80cf04c107a9adc293693199b5614d76ff9a5d2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConfigureAnalyzeAndSegmentGoodsAndServices",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Applies a bulk configuration change to analyze and segment goods and services from an input Excel file, with validation and rollback support.",
+    "description": "Validates a configuration Excel file of analyze-and-segment goods and services changes against Dynamics 365 F&SCM (legal entity USMF), returns a validation workbook, then applies approved rows with a before/after confirm",
     "display_name": "Analyze and segment goods and services Configuration Bulk Setup",
     "industry_context": {
       "deprecated": false,
@@ -67,9 +67,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "e433b724985b2148",
+      "content_digest": "3fbf265451ad87aa",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -93,28 +93,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "ConfigureAnalyzeAndSegmentGoodsAndServices",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "approval": {
+        "description": "Explicit user approval after reviewing the validation workbook, before any changes are applied.",
+        "type": "string"
+      },
+      "configuration_file": {
+        "description": "Excel file with one row per analyze and segment goods and services target and the new field values.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "environment": {
+        "description": "Target environment; sandbox first before production.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to run against; defaults to USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -123,5 +136,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

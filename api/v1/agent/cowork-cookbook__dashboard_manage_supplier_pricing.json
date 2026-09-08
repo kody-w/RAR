@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_manage_supplier_pricing",
   "name": "Manage supplier pricing Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_manage_supplier_pricing",
-  "rappid": "rappid:@cowork-cookbook/dashboard_manage_supplier_pricing:677a67db8d3f562d972970f0184ae5a2d92a61868027e167632a94c9b24bdddb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_manage_supplier_pricing:cc8d026d45dade85a8837e82c337f6e340cfb3f9446b9e144a86fc88b5b56cd0",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_manage_supplier_pricing:677a67db8d3f562d972970f0184ae5a2d92a61868027e167632a94c9b24bdddb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_manage_supplier_pricing:677a67db8d3f562d972970f0184ae5a2d92a61868027e167632a94c9b24bdddb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for manage supplier pricing - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls supplier pricing data from Dynamics 365 ERP for a legal entity and most recent fiscal period, then saves a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the output folder; rea",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "604f551d1bea7a83933e7ac5313975f2f0674144109afb6571f31146cc92925c",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "60fa05b1766feefd91e0e0345cfbced430b8f9076e7180fc4b1b17e347366583",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

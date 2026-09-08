@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__d365_concept_to_market",
   "name": "D365 Concept to market Expert",
   "rar_name": "@cowork-cookbook/d365_concept_to_market",
-  "rappid": "rappid:@cowork-cookbook/d365_concept_to_market:a3f372a89578e893b66ced6424dbce8f72ddd54ef07396cbe94d96f0500a3df8",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/d365_concept_to_market:2b272159a946bb8502b8b6892d2c7fd2eb85d978217224c9b8b6fe978382017b",
+  "_migrated_from": "rappid:@cowork-cookbook/d365_concept_to_market:a3f372a89578e893b66ced6424dbce8f72ddd54ef07396cbe94d96f0500a3df8",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/d365_concept_to_market:a3f372a89578e893b66ced6424dbce8f72ddd54ef07396cbe94d96f0500a3df8"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "A Dynamics 365 Finance & Supply Chain Management expert scoped to the Concept to market end-to-end process - covers 6 L2 areas and 31 L3 processes from the Microsoft Business Process Catalog.",
+  "description": "Scopes the assistant to Dynamics 365 F&SCM Concept to market (6 L2 areas, 31 L3 processes), answering using that domain's entities and USMF legal entity conventions; call it for concept-to-market questions.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "2b60df5c23ae412bc6c9391d33e41cde6a3a01bd6c776b56d3789b61bdd85857",
+  "lines": 265,
+  "size_kb": 14.7,
+  "sha256": "5896dae390879521e8df07910a4c7f033257cec2d680a64f4f7837a360084a5e",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

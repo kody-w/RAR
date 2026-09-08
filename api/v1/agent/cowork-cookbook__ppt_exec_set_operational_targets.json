@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_set_operational_targets",
   "name": "Set operational targets Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_set_operational_targets",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_set_operational_targets:923753756b46a6c6b6bba9bcc4aaebbc7dda22bd3dd7aa39cbc189fab55187db",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_set_operational_targets:66fe7c5a821578efd99818b1398241e9c8e0b164facb09e21e8718b3dc618a2a",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_set_operational_targets:923753756b46a6c6b6bba9bcc4aaebbc7dda22bd3dd7aa39cbc189fab55187db",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_set_operational_targets:923753756b46a6c6b6bba9bcc4aaebbc7dda22bd3dd7aa39cbc189fab55187db"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on set operational targets status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on set operational targets from Dynamics 365 F&SCM data (title, KPIs, trend vs prior period, red flags, actions, appendix) with speaker notes; call for a 15-minute monthly rev",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "5296e40a299ae901ca7f46368cace5a181121ae994f68ae1fd5d1fbdb4023628",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "15a24493ca7a8febcbb36169a018aa15cf40d46365e05f150c684eff90fa2225",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

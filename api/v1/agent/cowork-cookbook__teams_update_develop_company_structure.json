@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_develop_company_structure",
   "name": "Develop company structure Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_develop_company_structure",
-  "rappid": "rappid:@cowork-cookbook/teams_update_develop_company_structure:469baf1e69ee680822599ce29f5baed9dec49272a8d45923087c0e7096d8cca9",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_develop_company_structure:88178550289379dc982b1143164d6b337b9b610092892fba56d98c908c66885c",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_develop_company_structure:469baf1e69ee680822599ce29f5baed9dec49272a8d45923087c0e7096d8cca9",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_develop_company_structure:469baf1e69ee680822599ce29f5baed9dec49272a8d45923087c0e7096d8cca9"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on develop company structure status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes company structure status from Dynamics 365 F&SCM for a given legal entity and saves two artifacts: a markdown Teams channel post and an Adaptive Card JSON with KPIs and quick-action buttons; does not post anyt",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "07ab9e29eed9362250b662d287de0a51b60bc65876f260cc23050042626ab6cb",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "6361e4530f248a29700279d8971b87d1d3243a1d579f4470db87354927dfb3fc",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

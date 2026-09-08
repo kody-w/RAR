@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_define_notification_channels",
   "name": "Define notification channels Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_define_notification_channels",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_define_notification_channels:7e80956457fd20d986efff43ef3b094233225cdd45d600f8596300dbb8a23d26",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_define_notification_channels:1e789b68c09ebe259f9d2bf2e2d87d4fe02df129168df0cecfe2951b1a3ec82c",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_define_notification_channels:7e80956457fd20d986efff43ef3b094233225cdd45d600f8596300dbb8a23d26",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_define_notification_channels:7e80956457fd20d986efff43ef3b094233225cdd45d600f8596300dbb8a23d26"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing define notification channels for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on notification channels from Dynamics 365 ERP data for legal entity USMF: top 5 items by impact, anomalies vs the 7-day rolling average, and recommended next actions, then saves a draft email to t",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "ae402389888c1ab7778ac3389f95c35f4be1d3446c178cf0ee852c739d0f5a6c",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "245124d3ad9d22293a57ca52dc65d406e5396587bdcf45cc4baf0df6e4cbad36",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

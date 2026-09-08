@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__d365_order_to_cash",
   "name": "D365 Order to cash Expert",
   "rar_name": "@cowork-cookbook/d365_order_to_cash",
-  "rappid": "rappid:@cowork-cookbook/d365_order_to_cash:572a6d163e2079d2aa6a51c371e1cd119775ce527e22124c2ca711ddcd21e2ef",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/d365_order_to_cash:9c6af29a8b10dd733099e62ee674161f0df137b64bce36e8d6abfb85b7cec4a5",
+  "_migrated_from": "rappid:@cowork-cookbook/d365_order_to_cash:572a6d163e2079d2aa6a51c371e1cd119775ce527e22124c2ca711ddcd21e2ef",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/d365_order_to_cash:572a6d163e2079d2aa6a51c371e1cd119775ce527e22124c2ca711ddcd21e2ef"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "A Dynamics 365 Finance & Supply Chain Management expert scoped to the Order to cash end-to-end process - covers 5 L2 areas and 42 L3 processes from the Microsoft Business Process Catalog.",
+  "description": "Scopes the conversation to Dynamics 365 Finance & Supply Chain Order to Cash (5 L2 areas, 42 L3 processes), answering using D365 entities and USMF legal entity conventions via the ERP plugin.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "fc702e5d63639e5c85fb87234bb7e0d1c46773b49b39d083ec543a1543f29bf9",
+  "lines": 265,
+  "size_kb": 14.6,
+  "sha256": "eeee1d0ebf32b052bdd76a4f63089ac736864953e2490392681365f092515f27",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

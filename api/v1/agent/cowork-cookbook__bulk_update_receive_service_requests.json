@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_receive_service_requests",
   "name": "Receive service requests Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_receive_service_requests",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_receive_service_requests:1f4a8cc215d2e83365f4cbda536faf4109989ed6ce0f7357fcb329e44985975c",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_receive_service_requests:6757ece2e444026250c5b13532509f651624897655f5c33cffa79d5c3cc8015c",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_receive_service_requests:1f4a8cc215d2e83365f4cbda536faf4109989ed6ce0f7357fcb329e44985975c",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_receive_service_requests:1f4a8cc215d2e83365f4cbda536faf4109989ed6ce0f7357fcb329e44985975c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across receive service requests records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 receive service requests records in legal entity USMF via the Cowork D365 ERP plugin, producing a dry-run preview workbook for approval before committing changes and emitting a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "ca6c0578cfb0cab88c5d907e7df1b7f4bdae096ba48d051c3af23f1805afd1e3",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "d341dfac80fc57eb80844db3a00ba7c4a07505ef83fc3af2bd7f517a4284eef6",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/regulation_monitor",
   "agent_file": "regulation_monitor_agent.py",
-  "agent_sha256": "094fa86c7092388fb65e3ce1e381c016d4d8b9fb2ddcdb92be6e720016a6b0e7",
+  "agent_sha256": "71a681e76f421b7dd2588d5388df0c864edcc7661eb979212c188cd6dcbde484",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RegulationMonitor",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "dashboard",
       "research"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "RegulationMonitor",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

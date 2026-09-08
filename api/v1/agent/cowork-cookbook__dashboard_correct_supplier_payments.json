@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_correct_supplier_payments",
   "name": "Correct supplier payments Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_correct_supplier_payments",
-  "rappid": "rappid:@cowork-cookbook/dashboard_correct_supplier_payments:2787e483be72b7333eba1534ac1e8e1106f4f9f8f6538768e5534c6c8bc59fcc",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_correct_supplier_payments:bfe648cea4aa1944a227f31c550a392fc00af91d3abc37949308442fac31bb7e",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_correct_supplier_payments:2787e483be72b7333eba1534ac1e8e1106f4f9f8f6538768e5534c6c8bc59fcc",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_correct_supplier_payments:2787e483be72b7333eba1534ac1e8e1106f4f9f8f6538768e5534c6c8bc59fcc"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for correct supplier payments - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls correct supplier payments data from Dynamics 365 F&SCM (legal entity USMF) for the most recent fiscal period and saves a standalone interactive HTML dashboard file to the Cowork output folder, read-only.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "eaca80d1745b07b88a4c738b3ebff2a3157893b74f4c5cbfc4d5ca66794ee686",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "c936619ba7f82bb8a9a38965f8ddf372f2c5e9e8c2a16971f52025952681a3f3",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

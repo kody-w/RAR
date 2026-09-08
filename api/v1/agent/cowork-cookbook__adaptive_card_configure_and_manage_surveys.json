@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_configure_and_manage_surveys",
   "name": "Configure and manage surveys Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_configure_and_manage_surveys",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_configure_and_manage_surveys:8312b7f358b5f2f08dc5482bbb4dd4082d4300421c8b8bf6ef919844462c584a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_configure_and_manage_surveys:b579805648221c06ba2b79920efe3451305ee542bad6b7bdf70cab339a4489c5",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_configure_and_manage_surveys:8312b7f358b5f2f08dc5482bbb4dd4082d4300421c8b8bf6ef919844462c584a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_configure_and_manage_surveys:8312b7f358b5f2f08dc5482bbb4dd4082d4300421c8b8bf6ef919844462c584a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of configure and manage surveys status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing configure-and-manage-surveys status from Dynamics 365 F&SCM (legal entity USMF), with KPI tiles, RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "07e38d68b1f98146076b934d580255d93cb10d5f619fccf58a08e862e757096c",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "4f0c46e7b43383e5913bac153c2a24d98f3a9976a25a839ccfbe918f7bbf1865",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__build_an_account_research_brief",
   "name": "Build an account research brief",
   "rar_name": "@cowork-cookbook/build_an_account_research_brief",
-  "rappid": "rappid:@cowork-cookbook/build_an_account_research_brief:fac22d0796dd6d3af51b9fe046a07e591c3ce7b49fd4c9617ede9e68e0669832",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/build_an_account_research_brief:3591952f327bd603c859b4a7cbf3b9e69640856c95a19d4380855562c89b9b29",
+  "_migrated_from": "rappid:@cowork-cookbook/build_an_account_research_brief:fac22d0796dd6d3af51b9fe046a07e591c3ce7b49fd4c9617ede9e68e0669832",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/build_an_account_research_brief:fac22d0796dd6d3af51b9fe046a07e591c3ce7b49fd4c9617ede9e68e0669832"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_sales"
   ],
-  "description": "Walk into account planning already knowing the shape of the opportunity - pipeline, stakeholders, recent activity, and where the deal sits - without piecing it together from CRM tabs.",
+  "description": "Produces a Word account research brief for a named customer by pulling Dynamics 365 Sales opportunity, contact, activity and pipeline data and cross-referencing the last 60 days of your emails, meetings and Teams threads",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "203f228ed329756df46b97b2041763fdb0b20a46ff362a905e37b8d4194bfd9e",
+  "lines": 265,
+  "size_kb": 17.5,
+  "sha256": "1223721cc03b3b24a87d4bb6dec8a31821a62b1dcc448f5785d21c4ff9722bc4",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

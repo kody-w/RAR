@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/presentation_talk_track_builder",
   "agent_file": "presentation_talk_track_builder_agent.py",
-  "agent_sha256": "0b292d4a5a102713a81298e77e673258e3e9dc9d67595b37b4afadf58449e531",
+  "agent_sha256": "461da3b8ecd91d4ae5cc1ae9bc856fda9995910e9ab1048863a1b4435f9c04a0",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PresentationTalkTrackBuilder",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "writing",
       "productivity"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "PresentationTalkTrackBuilder",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

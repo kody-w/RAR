@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_define_accounts_payable_policies",
   "name": "Define accounts payable policies Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_define_accounts_payable_policies",
-  "rappid": "rappid:@cowork-cookbook/teams_update_define_accounts_payable_policies:4559676fa2a4e34176a8506d58774236c826a022b8ff40de43586e1172d5de70",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_define_accounts_payable_policies:20bf765fa9820f81fbf3a5e065d1955a72229bb6bb13988249ede10bb35c8969",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_define_accounts_payable_policies:4559676fa2a4e34176a8506d58774236c826a022b8ff40de43586e1172d5de70",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_define_accounts_payable_policies:4559676fa2a4e34176a8506d58774236c826a022b8ff40de43586e1172d5de70"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on define accounts payable policies status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes accounts payable policy status from Dynamics 365 F&SCM for a given legal entity and returns a markdown Teams channel post plus a saved Adaptive Card JSON with KPIs and quick-action buttons; nothing is posted.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "33f92ffff22902b63f495d614d0421bfe5261f7e6a383615647e3ef3b889dacb",
+  "lines": 265,
+  "size_kb": 16.1,
+  "sha256": "11d950fbf3aed4637a15bcd1d22752a73e7197e089c6235dd62d92ae7972ffb3",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

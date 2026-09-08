@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_perform_a_skill_gap_analysis",
   "name": "Perform a skill gap analysis Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_perform_a_skill_gap_analysis",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_perform_a_skill_gap_analysis:888d92206117360c090d204cd28b56af2bf48cee13b977c4c663e010cf9777d4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_perform_a_skill_gap_analysis:97c13fdbb5a6b5762a3fba5b91d038ac67483ed55ebc499c2044a810f52ff240",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_perform_a_skill_gap_analysis:888d92206117360c090d204cd28b56af2bf48cee13b977c4c663e010cf9777d4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_perform_a_skill_gap_analysis:888d92206117360c090d204cd28b56af2bf48cee13b977c4c663e010cf9777d4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across perform a skill gap analysis records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to skill gap analysis records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied list of record IDs and new values, with a dry-run preview workbook and approval gate bef",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "5fb0b0d09268b33ea228fac612d7b4cc24185eebe87e249f701ef90d38548984",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "bde61f59fa86148f0ab51586ffbf38b4b2937254a4be2ba5330849ff7b0f93a1",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

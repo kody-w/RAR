@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__analyze_and_optimize_your_onedrive_at_scale",
   "name": "Analyze and optimize your OneDrive at scale",
   "rar_name": "@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale",
-  "rappid": "rappid:@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale:231e28f598f4cf10c5b1ca01634e3a610ab085bf49ad638b23566278e6ea7043",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale:a03e93e6fd4ec9fc9c70bdef1f30b6fc7ad7e9e82794b8f3b36fa7c2c98f38da",
+  "_migrated_from": "rappid:@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale:231e28f598f4cf10c5b1ca01634e3a610ab085bf49ad638b23566278e6ea7043",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/analyze_and_optimize_your_onedrive_at_scale:231e28f598f4cf10c5b1ca01634e3a610ab085bf49ad638b23566278e6ea7043"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "general",
   "tags": [
@@ -19,16 +21,16 @@
     "advanced",
     "read_only"
   ],
-  "description": "Turn a sprawling OneDrive into a structured catalog you can actually act on.",
+  "description": "Catalogs and categorizes all files in the user's OneDrive, produces a six-screen interactive HTML overview of file disposition, age, relevancy, customer and product, and proposes a reorganization and deletion plan for ap",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 9.9,
-  "sha256": "cde6df9da0973b3b0e0482eddcd4521ca5b1e33a1d3701ec7ff0cd552170fd14",
+  "lines": 265,
+  "size_kb": 15.6,
+  "sha256": "dc447a65ffb37189aba9879913de5c649e3a9c93468f03500d2f2729fa92bbcb",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

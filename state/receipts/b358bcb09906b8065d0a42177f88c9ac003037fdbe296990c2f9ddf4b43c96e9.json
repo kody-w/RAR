@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-09-08"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/exam_prep_learning_plan_builder",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "03a5fb8c787b71080cb833cb37f80dd8b7a981731a2b71086670ad239f59a2cc"
+ },
+ "canonical_path": "agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-09-08T20:27:06.555078+00:00",
+ "id": "rar_b358bcb09906b8065d0a42177f88c9ac003037fdbe296990c2f9ddf4b43c96e9",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "35509b26742d474c7b205a420085c28a755754e18621d8599f5d4a54f0bdab35",
+  "receipt": "rar_9e0236c8b34120e75c40c8a0389946deac5e8d993be8caf99d3575b10dc9563c",
+  "version": "3.0.1"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_b358bcb09906b8065d0a4217",
+ "revision_id": "b358bcb09906b8065d0a42177f88c9ac003037fdbe296990c2f9ddf4b43c96e9",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "toast generation 2: cookbook recipes carried verbatim (CC BY 4.0, attributed) with Opus 5 refinements cached via the local Brainstem; toaster v2.0.0"
+ },
+ "version": "4.0.3"
+}

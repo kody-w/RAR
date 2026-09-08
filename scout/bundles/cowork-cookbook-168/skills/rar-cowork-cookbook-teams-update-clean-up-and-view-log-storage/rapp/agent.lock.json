@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_clean_up_and_view_log_storage",
   "agent_file": "teams_update_clean_up_and_view_log_storage_agent.py",
-  "agent_sha256": "fbd380c70f5d0b9f574af5433ca8326043179511492645036d670f1ebbfbbfff",
+  "agent_sha256": "d542a98a371e775e2b0c097c4b48dd72a0e6c49fbe5dfe9367b851c7d3f57a40",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateCleanUpAndViewLogStorage",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on clean up and view log storage status with an interactive Adaptive Card for quick triage.",
+    "description": "Summarizes clean up and view log storage status from the Dynamics 365 ERP plugin for a given legal entity and returns a draft Teams channel post plus an Adaptive Card JSON file, saved for review rather than posted.",
     "display_name": "Clean up and view log storage Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "47c55292fdae5131",
+      "content_digest": "504947e8122ebc70",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,37 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateCleanUpAndViewLogStorage",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "card_filename": {
+        "description": "Optional output filename for the Adaptive Card JSON artifact.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to report on, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "report_date": {
+        "description": "Date used in the Adaptive Card filename, e.g. 2026-05-24.",
         "type": "string"
       }
     },
@@ -112,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

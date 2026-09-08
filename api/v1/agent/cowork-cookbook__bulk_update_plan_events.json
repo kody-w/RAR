@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_plan_events",
   "name": "Plan events Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_plan_events",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_plan_events:be164b280673f955060b7fcfd807dc2408c77f2cd06e4015340bb2588d694f80",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_plan_events:e6549418ecdf43b1d111528ddd4e1a5c1c0f8ecfb6942a478bac9fb5af614b82",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_plan_events:be164b280673f955060b7fcfd807dc2408c77f2cd06e4015340bb2588d694f80",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_plan_events:be164b280673f955060b7fcfd807dc2408c77f2cd06e4015340bb2588d694f80"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across plan events records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to plan events records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, returning a dry-run preview workbook and, after approval, a confirmation workbook.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "a6b5be6fed856c1f8da50bbbdbdd7d409fa1e0a82fa79d3ab9336fa38d1f4ccf",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "aeb3509802e19d067bd3be0e036ad94b97e2b8e0b4a55a9524a36e4158f62cca",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

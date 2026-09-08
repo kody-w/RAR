@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/post_launch_readout_and_optimization",
   "agent_file": "post_launch_readout_and_optimization_agent.py",
-  "agent_sha256": "2014529f4b23606dc04e303068e6dc0ac3ada61aedbf504962090208f4534eef",
+  "agent_sha256": "65569ebba1aa00e40cab133c971569cd9c38bddb59faf8217efe7a8f3748adc7",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PostLaunchReadoutAndOptimization",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Close the [Product name] launch loop - what worked, what didn't, and what comes next - grounded in live launch data, not exported snapshots.",
+    "description": "Builds a post-launch readout package from live Fabric IQ launch performance data plus campaign files, leadership threads, and customer signals: a Word exec summary, an 8-12 slide PowerPoint readout deck, and an owner-rou",
     "display_name": "Post-launch readout and optimization routing",
     "industry_context": {
       "deprecated": false,
@@ -49,9 +49,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "d9b7da7b16292559",
+      "content_digest": "f17d9d1bfa30fe27",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -75,28 +75,45 @@
       "integration",
       "fabric_iq"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PostLaunchReadoutAndOptimization",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "campaign_folder": {
+        "description": "Folder holding campaign records and creative variants.",
+        "type": "string"
+      },
+      "channels": {
+        "description": "Leadership channel and marketing channel to pull exec context and reception signals from.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "launch_date_and_window": {
+        "description": "Launch date and number of post-launch weeks to analyze.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "product_name": {
+        "description": "Name of the launched product.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "recipients": {
+        "description": "Exec audience for the readout, plus demand gen, content, and channel owners for the action plan.",
         "type": "string"
       }
     },
@@ -105,5 +122,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

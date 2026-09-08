@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_plan_product_transitions",
   "name": "Plan product transitions Summary Report",
   "rar_name": "@cowork-cookbook/report_plan_product_transitions",
-  "rappid": "rappid:@cowork-cookbook/report_plan_product_transitions:83e0efe9fce977b9feaa66680f6fb21e472b527d28cc17695777a108a59d75c4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_plan_product_transitions:f91c8cdc63cea6217b296099456b5828dc559f2183265b350d20bfc017754dfa",
+  "_migrated_from": "rappid:@cowork-cookbook/report_plan_product_transitions:83e0efe9fce977b9feaa66680f6fb21e472b527d28cc17695777a108a59d75c4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_plan_product_transitions:83e0efe9fce977b9feaa66680f6fb21e472b527d28cc17695777a108a59d75c4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of plan product transitions activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of plan product transitions from Dynamics 365 F&SCM for a given legal entity and posted period, delivered as an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "7855ff6fcc67087236be0d96a3313a87a2cecf282e1fc3205424047000dc261d",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "9083cbd1c79f7b24f997874fb5ffd77220d0706ede28ece89f8c185d417582ea",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

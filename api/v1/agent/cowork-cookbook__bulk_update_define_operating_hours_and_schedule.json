@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_define_operating_hours_and_schedule",
   "name": "Define operating hours and schedule Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_define_operating_hours_and_schedule",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_define_operating_hours_and_schedule:b67822ec45f4d7e2841396932842b343a9e608ccf2864e4f577160bf6c8a070c",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_define_operating_hours_and_schedule:42d0eed8c436f4d93dc6e4ac7a29e44e9a52e6c0cf51436fb8211c05256e2f21",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_define_operating_hours_and_schedule:b67822ec45f4d7e2841396932842b343a9e608ccf2864e4f577160bf6c8a070c",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_define_operating_hours_and_schedule:b67822ec45f4d7e2841396932842b343a9e608ccf2864e4f577160bf6c8a070c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across define operating hours and schedule records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to operating-hours/schedule records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a caller-supplied list of record IDs and new values, with a dry-run preview workbook and approval ga",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "96fed5d82271cfffa186f23a1df15c34b8bafefdf81619c820d67a35c7f739b9",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "b875cd6346081b8151986812c4fd1af4f2a83e45a0c09879ad7674e9cd489969",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

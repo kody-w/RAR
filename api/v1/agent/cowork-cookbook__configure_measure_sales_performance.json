@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_measure_sales_performance",
   "name": "Measure sales performance Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_measure_sales_performance",
-  "rappid": "rappid:@cowork-cookbook/configure_measure_sales_performance:cbda40c1d95038705978a1a4a0b6ccf8612f456b9b43c599dd5fd623b5ac1c37",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_measure_sales_performance:59a0d596eb1ce6955a99b9ef3a00a34dcea0421b2670836b14e9fdf7c08cf8b7",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_measure_sales_performance:cbda40c1d95038705978a1a4a0b6ccf8612f456b9b43c599dd5fd623b5ac1c37",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_measure_sales_performance:cbda40c1d95038705978a1a4a0b6ccf8612f456b9b43c599dd5fd623b5ac1c37"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to measure sales performance from an input Excel file, with validation and rollback support.",
+  "description": "Reads an attached Excel file of measure sales performance configuration rows in Dynamics 365 F&SCM, validates each row, emits a validation workbook, and after your approval applies the changes with a before/after confirm",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "10fb1e419366d3c58e97a23e8b94d72a7e4e4dfa27f6bc3df8203f035f3c2def",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "b1c39decd1c168fa64cb212a29e4459a1a71c2356bd28ad0b5e78d07fb3b9779",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_plan_worker_retirement",
   "name": "Plan worker retirement Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_plan_worker_retirement",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_plan_worker_retirement:d733900bbf8123f5da39be73f460d6e597b579e8dd798a2fcbadcfb99b33ed3e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_plan_worker_retirement:9141aaf069e1113a4fc8b30df3f69aca86076da738cb7ce47fbd8ccc9fbfa7c3",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_plan_worker_retirement:d733900bbf8123f5da39be73f460d6e597b579e8dd798a2fcbadcfb99b33ed3e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_plan_worker_retirement:d733900bbf8123f5da39be73f460d6e597b579e8dd798a2fcbadcfb99b33ed3e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing plan worker retirement for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on plan worker retirement from Dynamics 365 ERP data for a legal entity, covering top 5 items by impact, anomalies vs the 7-day rolling average, and next actions, then saves a draft email to the ow",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "c6f332627bd6fff42d4a0720730213bb5da6e71187ff04a2e977023ee69b995e",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "fc587753709dc6ab61cc121c35d64ffa0d98a2287767930a80f58ca82accaccc",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_define_integration_strategy",
   "name": "Define integration strategy Summary Report",
   "rar_name": "@cowork-cookbook/report_define_integration_strategy",
-  "rappid": "rappid:@cowork-cookbook/report_define_integration_strategy:53ef82513212840fc5e1f2fffb085520f0e0e16a510884ef161672358ec73f11",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_define_integration_strategy:c497e8712c8d3ca0a2761947199c146993700211b51494ea71e83e76d64b5459",
+  "_migrated_from": "rappid:@cowork-cookbook/report_define_integration_strategy:53ef82513212840fc5e1f2fffb085520f0e0e16a510884ef161672358ec73f11",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_define_integration_strategy:53ef82513212840fc5e1f2fffb085520f0e0e16a510884ef161672358ec73f11"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of define integration strategy activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of define integration strategy activity from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "e873a7422de4f7806a841d23978455e85a85fffded713aad335115e078baddc1",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "378fb1a23b77d2b48142b1446807e89c621d7bb696bfa464ed4b401da2693510",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

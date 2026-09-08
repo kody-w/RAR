@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/dashboard_identify_notification_triggers",
   "agent_file": "dashboard_identify_notification_triggers_agent.py",
-  "agent_sha256": "c63619b7a0c3b26ac9a704154749e781a2a532b2147d53685e14435a9755b082",
+  "agent_sha256": "c8887670464a0f967703be44afdbb94421e531dc1e86fa14d2b110da5d90451a",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DashboardIdentifyNotificationTriggers",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Produces a self-contained interactive HTML dashboard for identify notification triggers - opens in any browser, no D365 access needed by the viewer.",
+    "description": "Pulls notification-trigger data from Dynamics 365 F&SCM for a given legal entity and fiscal period via the Cowork D365 ERP plugin, and saves a standalone interactive HTML dashboard file to the output folder, read-only.",
     "display_name": "Identify notification triggers Interactive HTML Dashboard",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "0439ace214f4763f",
+      "content_digest": "a13de68b3cd95d39",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "DashboardIdentifyNotificationTriggers",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "fiscal_period": {
+        "description": "Fiscal period to report on; defaults to the most recent available.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to query, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "output_filename": {
+        "description": "Name of the HTML file to generate, e.g. dashboard-identify-notification-triggers-2026-05-24.html.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "output_folder": {
+        "description": "Destination folder for the saved HTML, e.g. Documents/Cowork/output/.",
         "type": "string"
       }
     },
@@ -111,5 +124,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

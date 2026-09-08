@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_evaluate_supplier_bids",
   "name": "Evaluate supplier bids Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_evaluate_supplier_bids",
-  "rappid": "rappid:@cowork-cookbook/audit_evaluate_supplier_bids:2b4f0988337153944616d90b640f19195f74999cd56b71a1d59928eed34d2ac0",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_evaluate_supplier_bids:7bbe587ec8cbdf65f4acf7081098c3fe8c953c3e7483ce974bc82cf5a6a7a6b6",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_evaluate_supplier_bids:2b4f0988337153944616d90b640f19195f74999cd56b71a1d59928eed34d2ac0",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_evaluate_supplier_bids:2b4f0988337153944616d90b640f19195f74999cd56b71a1d59928eed34d2ac0"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits evaluate supplier bids records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of supplier bid evaluation records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary sheet.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "4df2102e7ae79a1152cb163c4a0f0e25027823cbf870b65730d29e5de7deb619",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "8ed995c3aeb5cf0e4eb265a55ab9bd770cafe66a79ca1d0a014936bba2ec2772",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

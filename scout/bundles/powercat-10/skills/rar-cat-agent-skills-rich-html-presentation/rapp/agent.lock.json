@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/rich_html_presentation",
   "agent_file": "rich_html_presentation_agent.py",
-  "agent_sha256": "3d19b945bbfafa005314156f60b03bb2f0361556e9f269fae151015b8e007ec8",
+  "agent_sha256": "f8f6f22899b994c7047f09873a6508f5e4a0aad70f5551620130f1793d8bfdb4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RichHtmlPresentation",
   "host_dependencies": [],
@@ -40,7 +40,7 @@
       "productivity",
       "writing"
     ],
-    "version": "2.2.0"
+    "version": "3.2.2"
   },
   "runtime_name": "RichHtmlPresentation",
   "schema": "rapp-agent-lock/1.0",
@@ -70,5 +70,5 @@
     ],
     "type": "object"
   },
-  "version": "2.2.0"
+  "version": "3.2.2"
 }

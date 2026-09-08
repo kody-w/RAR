@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/teams_update_configure_and_manage_microsoft_teams_integrations",
   "agent_file": "teams_update_configure_and_manage_microsoft_teams_integrations_agent.py",
-  "agent_sha256": "759acb068dddbf36a9f95a9e44db6cbaf2718113705c50112f6e14084a073898",
+  "agent_sha256": "e2e5dc5f82fd832f1385e05c43c5e66cea5460b9e7083daa3880e9e99c644f18",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TeamsUpdateConfigureAndManageMicrosoftTeamsIntegrations",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Drafts a Teams channel post on configure and manage Microsoft Teams integrations status with an interactive Adaptive Card for quick triage.",
+    "description": "Drafts a Teams channel post (markdown summary plus 3 bullets) and a saved Adaptive Card JSON with KPIs, status indicators, and quick-action buttons on Teams integration status, using the D365 ERP plugin for a legal entit",
     "display_name": "Configure and manage Microsoft Teams integrations Teams Channel Update",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c05fe76870fe77ad",
+      "content_digest": "53e3fcb6294cb5c5",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "TeamsUpdateConfigureAndManageMicrosoftTeamsIntegrations",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "card_filename": {
+        "description": "Filename for the Adaptive Card JSON artifact, including date.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 legal entity to summarize, e.g. USMF.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "quick_actions": {
+        "description": "Buttons to include on the card, e.g. 'View detail', 'Open in D365'.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "topic": {
+        "description": "Subject of the update, e.g. configure and manage Microsoft Teams integrations.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

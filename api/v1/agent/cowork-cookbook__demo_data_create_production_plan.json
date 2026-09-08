@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_create_production_plan",
   "name": "Create production plan Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_create_production_plan",
-  "rappid": "rappid:@cowork-cookbook/demo_data_create_production_plan:b1bb4db4f4dcdf84251a408cfd1c996d3f123426ba93c738efaf0eabcf4dfa0a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_create_production_plan:d7f2539b0d4d468c7665588714df4fb46007745a4e1707fae10adec5d0ca4705",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_create_production_plan:b1bb4db4f4dcdf84251a408cfd1c996d3f123426ba93c738efaf0eabcf4dfa0a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_create_production_plan:b1bb4db4f4dcdf84251a408cfd1c996d3f123426ba93c738efaf0eabcf4dfa0a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for create production plan in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo production plan records for a sandbox D365 F&SCM legal entity (default USMF), stages them in an Excel workbook, creates them, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "ff97129c25f9a6a153c582102ce6bf183562e1cf8e2d0769e197be340daa6114",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "9251625089e4e8eb6fc6946dc6dc416f7a40fd48a445a954210016af5ccf3ccc",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

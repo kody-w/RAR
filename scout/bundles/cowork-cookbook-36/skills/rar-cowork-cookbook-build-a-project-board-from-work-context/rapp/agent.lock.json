@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/build_a_project_board_from_work_context",
   "agent_file": "build_a_project_board_from_work_context_agent.py",
-  "agent_sha256": "70944c0fa56b37b5fd924cec6a80992cdc754fbb7faaaa0ac9f4eba285acaa6e",
+  "agent_sha256": "8cd82b69f908fda7e0daa99d82cbae515e735e140ecf7fb6b9bbeb1841dfaa81",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BuildAProjectBoardFromWorkContext",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Spin up a fully scoped project board without the manual setup tax - no copying from emails, chasing owners, or piecing together task lists from scattered threads.",
+    "description": "Reviews your recent emails, Teams conversations, and related files for a named project, then builds a monday.com board with project name, task owner, status, due date, and priority, grouped by workstream.",
     "display_name": "Build a project board from work context",
     "industry_context": {
       "deprecated": false,
@@ -47,9 +47,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "5d7875195d5c06fa",
+      "content_digest": "27367604374329b1",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -73,28 +73,33 @@
       "integration",
       "monday_com"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BuildAProjectBoardFromWorkContext",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "lookback_weeks": {
+        "description": "How many weeks of emails, Teams chats, and files to review for scope, stakeholders, and tasks.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "project_name": {
+        "description": "Name of the project being kicked off.",
         "type": "string"
       }
     },
@@ -103,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

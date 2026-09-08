@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_identify_workplace_hazards",
   "name": "Identify workplace hazards Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_identify_workplace_hazards",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_identify_workplace_hazards:230fcba877e55b29c2c4fd434eaa4f805efe38bf98b4c924fea7bd28212cc625",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_identify_workplace_hazards:a54375c60fb7a0d725ddfa8df281780843065e6da9c5da3dbb68eb7a1f9bd046",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_identify_workplace_hazards:230fcba877e55b29c2c4fd434eaa4f805efe38bf98b4c924fea7bd28212cc625",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_identify_workplace_hazards:230fcba877e55b29c2c4fd434eaa4f805efe38bf98b4c924fea7bd28212cc625"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across identify workplace hazards records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to workplace-hazard records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, returning a dry-run preview workbook, then a confirmation workbook after approval",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "e0ee9fe72edf26dc405fb0f9f15fe022d96c1277820bd99bb64758075e2100ad",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "d0a50dd1577f1194b6e49e9541122982950e21eae0ec3327f84c30e8c3c06a84",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

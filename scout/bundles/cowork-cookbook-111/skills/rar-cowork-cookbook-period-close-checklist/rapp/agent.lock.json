@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/period_close_checklist",
   "agent_file": "period_close_checklist_agent.py",
-  "agent_sha256": "c05be623a9f7a688bc6868900007691a0701dfc09f1afd7620a2fb03621bda9d",
+  "agent_sha256": "b1b3b6bc760b21c75802e8e4d490d4d31bf45810655145c6b0a2081d9cc43f0f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PeriodCloseChecklist",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Generates a tailored period-close checklist with item owners and ETA estimates based on the active legal entity's configuration.",
+    "description": "Produces a period-close checklist for the active legal entity's current month covering AR/AP aging, FX revaluation, sub-ledger reconciliations, accrual reversals, journal posting, and the close switch, with owner roles a",
     "display_name": "Period Close Checklist Generator",
     "industry_context": {
       "deprecated": false,
@@ -57,9 +57,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "c3a2559184fc7b56",
+      "content_digest": "1da2baa5937af53e",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -83,28 +83,33 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PeriodCloseChecklist",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "The active Dynamics 365 F&SCM legal entity the checklist is generated for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "period": {
+        "description": "The close period, defaulting to the current month.",
         "type": "string"
       }
     },
@@ -113,5 +118,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

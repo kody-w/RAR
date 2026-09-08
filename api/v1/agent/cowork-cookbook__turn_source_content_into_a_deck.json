@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__turn_source_content_into_a_deck",
   "name": "Turn source content into a deck",
   "rar_name": "@cowork-cookbook/turn_source_content_into_a_deck",
-  "rappid": "rappid:@cowork-cookbook/turn_source_content_into_a_deck:874e529f0a0810af58aae2da7f1069e43ffe9aba08cbee0e908a75348808a30b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/turn_source_content_into_a_deck:c31910a805e0a23aac4ec61a9d03d4b97b098a58c91f80f21dd101119bfb499b",
+  "_migrated_from": "rappid:@cowork-cookbook/turn_source_content_into_a_deck:874e529f0a0810af58aae2da7f1069e43ffe9aba08cbee0e908a75348808a30b",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/turn_source_content_into_a_deck:874e529f0a0810af58aae2da7f1069e43ffe9aba08cbee0e908a75348808a30b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "prezi"
   ],
-  "description": "Get a working deck built from content you already have - without starting from a blank slide.",
+  "description": "Builds a Prezi deck from source content you supply (transcript, notes, or document) with a title slide, themed section breaks, and a closing next-steps slide; call it when you need a deck drafted from existing material.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "6f38a192ebccdcf950fd407c4d8094a454d4396dec4727903a9170437e284a58",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "e7c77485991a900a91c4f5072f121f654c3cc0f655c09509b6a2c0a396b60e44",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

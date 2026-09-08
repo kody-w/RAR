@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__ai_usecase_assessment",
   "name": "AI Use Case Assessment",
   "rar_name": "@cat-agent-skills/ai_usecase_assessment",
-  "rappid": "rappid:@cat-agent-skills/ai_usecase_assessment:c49783f01a9d6cd453ecff632719fe9509981417eba5b124ab73eff65b02fc6b",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/ai_usecase_assessment:9520850a10162c39c92596e3e296584aa458b1902ae8f4f555f6adb51198a02b",
+  "_migrated_from": "rappid:@cat-agent-skills/ai_usecase_assessment:c49783f01a9d6cd453ecff632719fe9509981417eba5b124ab73eff65b02fc6b",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/ai_usecase_assessment:c49783f01a9d6cd453ecff632719fe9509981417eba5b124ab73eff65b02fc6b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "analysis",
   "tags": [
@@ -27,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.4,
-  "sha256": "b1c7ceb11b90cd8bd781cbfab3f8c914f11830d1ae2eb360f2aa3b68152fef67",
+  "lines": 262,
+  "size_kb": 12.8,
+  "sha256": "4211e33a8a354bc5487314ad0398877fad82a50b75c97f855d3d613c61aa9a53",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

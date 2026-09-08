@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_invoice_project_transactions",
   "name": "Invoice project transactions Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_invoice_project_transactions",
-  "rappid": "rappid:@cowork-cookbook/audit_invoice_project_transactions:db56ccb188b75c6bdd762ddaafb086b12dfda83cb0ed6631feadee1fc6effb2f",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_invoice_project_transactions:21b6b8330269a65b78c834f24d9b98abf29f5b23850d7663813a1d9ce33ce7a5",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_invoice_project_transactions:db56ccb188b75c6bdd762ddaafb086b12dfda83cb0ed6631feadee1fc6effb2f",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_invoice_project_transactions:db56ccb188b75c6bdd762ddaafb086b12dfda83cb0ed6631feadee1fc6effb2f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits invoice project transactions records for completeness and policy compliance against rule-based checks.",
+  "description": "Runs a read-only completeness and policy audit of invoice project transactions in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary sheet of count",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "8fb2cc8b44b7419a9a55188e1fd1e8724a5a3caae5c3f32075421cf37c50f864",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "004e32a140fd2f0618dc34c540c60d42d27ad09c995d07a991e3d8a75ef766f1",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

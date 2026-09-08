@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand",
   "agent_file": "build_a_customer_facing_pitch_deck_on_brand_agent.py",
-  "agent_sha256": "2abe5c63fe631d55484440bad066ff0b96ca7057832867788e634b0a7749a34e",
+  "agent_sha256": "1fb3baaa7faf775a0523f1b02bee087eb0e88e7d369e455fa101e33bb622aafd",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BuildACustomerFacingPitchDeckOnBrand",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Hand the field a customer-facing pitch deck that's on-brand, on-message, and tailored to a specific exec audience - instead of letting every team rebuild from a generic template.",
+    "description": "Returns a customer-facing pitch deck built on the approved Templafy corporate template for a named customer and executive audience, grounded in release messaging, recent customer email/meeting context, and battlecards, t",
     "display_name": "Build a customer-facing pitch deck on brand",
     "industry_context": {
       "deprecated": false,
@@ -49,9 +49,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "a5221a5283c2153e",
+      "content_digest": "b6997b7f8cd858d1",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,28 +74,45 @@
       "beginner",
       "read_only"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "BuildACustomerFacingPitchDeckOnBrand",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "battlecard_folder": {
+        "description": "Folder of battlecards used for competitive framing.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "customer_name": {
+        "description": "The customer account the deck is built for.",
+        "type": "string"
+      },
+      "executive_audience": {
+        "description": "The enterprise exec audience the deck is tailored to (e.g. CFO, CIO).",
+        "type": "string"
+      },
+      "messaging_doc": {
+        "description": "Source doc holding the latest release positioning.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "platform_or_release": {
+        "description": "The platform or release the deck introduces.",
         "type": "string"
       }
     },
@@ -104,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

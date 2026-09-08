@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__d365_acquire_to_dispose_acquire_assets",
   "name": "D365 Acquire assets Expert",
   "rar_name": "@cowork-cookbook/d365_acquire_to_dispose_acquire_assets",
-  "rappid": "rappid:@cowork-cookbook/d365_acquire_to_dispose_acquire_assets:bae5699d1c572ba4e6d63a1c10d28af45122f51c990af552b1d7d1bb445cad90",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/d365_acquire_to_dispose_acquire_assets:1a37233bb5a22671fca0021d2fd7c53d8e293ebc3b2f54c77e948893fa554517",
+  "_migrated_from": "rappid:@cowork-cookbook/d365_acquire_to_dispose_acquire_assets:bae5699d1c572ba4e6d63a1c10d28af45122f51c990af552b1d7d1bb445cad90",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/d365_acquire_to_dispose_acquire_assets:bae5699d1c572ba4e6d63a1c10d28af45122f51c990af552b1d7d1bb445cad90"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "A Dynamics 365 F&SCM expert scoped to the Acquire assets area (a level-2 subdomain of Acquire to dispose) - covers 12 L3 processes.",
+  "description": "Answers Dynamics 365 F&SCM questions scoped to the Acquire assets subdomain of acquire to dispose (12 L3 processes), using documented entities, USMF legal entity conventions, and honest-degrade options; call it for fixed",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "2c0950f3725fad108aaaa71def9e121cfbebbb96b23061659182c4be362eec7a",
+  "lines": 265,
+  "size_kb": 14.9,
+  "sha256": "33e19674ea73aefa8bab762a60634bbae14d9e9e6de0a4f0c117d256e2ad2c36",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

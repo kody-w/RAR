@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_establish_support_subscription",
   "name": "Establish support subscription Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_establish_support_subscription",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_establish_support_subscription:0e75777810aeb90e7d4d8fefb04adc99ea39cf4bb01b92a6a1bb57bb5b22ea6f",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_establish_support_subscription:bf0008928c2f8b4f6a509b94107a5698abbb7f850ed258fae05129c8891b780d",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_establish_support_subscription:0e75777810aeb90e7d4d8fefb04adc99ea39cf4bb01b92a6a1bb57bb5b22ea6f",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_establish_support_subscription:0e75777810aeb90e7d4d8fefb04adc99ea39cf4bb01b92a6a1bb57bb5b22ea6f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing establish support subscription for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on establish support subscription from Dynamics 365 ERP (legal entity USMF): top 5 items by impact, anomalies vs 7-day rolling average, and recommended next actions, then saves a draft email to the",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "825e18373b4821e6dce0b910f78fb59b0e2d84fa9b137a8221594f57da42a36a",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "39e84ce494bc4940829c9560b8c200df4f550240ec507e5facba474269753715",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

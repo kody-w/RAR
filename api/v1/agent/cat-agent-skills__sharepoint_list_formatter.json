@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__sharepoint_list_formatter",
   "name": "SharePoint List Formatter",
   "rar_name": "@cat-agent-skills/sharepoint_list_formatter",
-  "rappid": "rappid:@cat-agent-skills/sharepoint_list_formatter:1639c8d4c26f7d6ad5381d471b045c23e72b84dc24ff60a193b233099b584064",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/sharepoint_list_formatter:529de51ad8c33e968f714fe76bcc0e1f21f58f007d8c0c7652e601a005865afe",
+  "_migrated_from": "rappid:@cat-agent-skills/sharepoint_list_formatter:1639c8d4c26f7d6ad5381d471b045c23e72b84dc24ff60a193b233099b584064",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/sharepoint_list_formatter:1639c8d4c26f7d6ad5381d471b045c23e72b84dc24ff60a193b233099b584064"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "pipeline",
   "tags": [
@@ -24,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.0,
-  "sha256": "8ce15990887997b95ee23d598dab87d7f22a644e38e5dd49d089571a201564f2",
+  "lines": 262,
+  "size_kb": 12.3,
+  "sha256": "9d5aac2ba3712657aade17d943de5d4935e122c800e3919e3c9202506154441b",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

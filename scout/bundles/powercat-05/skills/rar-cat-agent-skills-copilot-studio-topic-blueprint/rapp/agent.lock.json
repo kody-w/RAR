@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_topic_blueprint",
   "agent_file": "copilot_studio_topic_blueprint_agent.py",
-  "agent_sha256": "c11337248088a38d1cbbbba408808e2a111734b20ccebd659534832ff67882f2",
+  "agent_sha256": "a9be9e59a4cacd1eef693c098ba55c3cac648f190e65d3a0361b5094fcfa48f3",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioTopicBlueprint",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "orchestration",
       "adaptive_card"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "CopilotStudioTopicBlueprint",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

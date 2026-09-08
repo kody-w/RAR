@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_manage_formulas",
   "name": "Manage formulas Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_manage_formulas",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_manage_formulas:9999ad99a522a6effb16a06d060ac2ed7a4199d1e75d16c7879aa4c53436fec9",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_manage_formulas:621e569f043498df8d206fa7547b3e0df615cfe70f1eaa4f15884818ca726e17",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_manage_formulas:9999ad99a522a6effb16a06d060ac2ed7a4199d1e75d16c7879aa4c53436fec9",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_manage_formulas:9999ad99a522a6effb16a06d060ac2ed7a4199d1e75d16c7879aa4c53436fec9"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across manage formulas records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to manage formulas records in Dynamics 365 F&SCM (legal entity USMF) via the Cowork D365 ERP plugin: returns a dry-run preview workbook of before/after/status, pauses for approval, then applie",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "da977b07cf1503840cc15e446281007bce5c9dce850fa3f8121a95a4803f0c48",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "995397dac0f0a00ed82246438a123ec36186ace0ee1327c6beb3e8795897e22e",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

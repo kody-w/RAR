@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__audit_develop_leave_and_absence_policies",
   "name": "Develop leave and absence policies Completeness Audit",
   "rar_name": "@cowork-cookbook/audit_develop_leave_and_absence_policies",
-  "rappid": "rappid:@cowork-cookbook/audit_develop_leave_and_absence_policies:676c7fe365da3b75f4ebebb98861a2cb7986c0db36a2a918e8c0b1146eedff7a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/audit_develop_leave_and_absence_policies:07962575acdda21eb47062c459c41ea05926af994f3da7f09641f210d6013327",
+  "_migrated_from": "rappid:@cowork-cookbook/audit_develop_leave_and_absence_policies:676c7fe365da3b75f4ebebb98861a2cb7986c0db36a2a918e8c0b1146eedff7a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/audit_develop_leave_and_absence_policies:676c7fe365da3b75f4ebebb98861a2cb7986c0db36a2a918e8c0b1146eedff7a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Audits develop leave and absence policies records for completeness and policy compliance against rule-based checks.",
+  "description": "Audits leave and absence policy records in Dynamics 365 F&SCM (legal entity USMF) read-only for completeness, flagging missing fields, stale dates, blank descriptions, inactive references, and policy violations, and retu",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "606fb1be5d6de0889972ee322b4574e5779ab3599dff728b8f66d1c2a3e73d6d",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "9b0bd7c043f405e3aa0be6dfab17eca57d27a6c47ae91558d6cea2ef1e2be9b6",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

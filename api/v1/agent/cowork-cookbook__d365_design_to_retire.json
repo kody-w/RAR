@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__d365_design_to_retire",
   "name": "D365 Design to retire Expert",
   "rar_name": "@cowork-cookbook/d365_design_to_retire",
-  "rappid": "rappid:@cowork-cookbook/d365_design_to_retire:a1fccdb1c7ba53b5bf474b3d7b20f0fd3f36534ddda206fc568aa62261316f83",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/d365_design_to_retire:32a25a68e0f724415a8a9ff093e4a0df73856bc2fca1a85686939f04015e1b8b",
+  "_migrated_from": "rappid:@cowork-cookbook/d365_design_to_retire:a1fccdb1c7ba53b5bf474b3d7b20f0fd3f36534ddda206fc568aa62261316f83",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/d365_design_to_retire:a1fccdb1c7ba53b5bf474b3d7b20f0fd3f36534ddda206fc568aa62261316f83"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "A Dynamics 365 Finance & Supply Chain Management expert scoped to the Design to retire end-to-end process - covers 5 L2 areas and 31 L3 processes from the Microsoft Business Process Catalog.",
+  "description": "Scopes the conversation to a Dynamics 365 F&SCM Design-to-retire expert (5 L2 areas, 31 L3 processes), answering against legal entity USMF via the D365 ERP plugin; call when working in that domain.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "85da9c25c268510c497787dc947417a6833e04b2e2b592131ab8466bbbf8b2c7",
+  "lines": 265,
+  "size_kb": 14.6,
+  "sha256": "d05110d88176f452aea41a461a5ad553cd897aa7f0e2f88e55f5568938f6c061",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

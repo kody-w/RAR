@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_manage_authentication",
   "name": "Manage authentication Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_manage_authentication",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_manage_authentication:4850792dd31a6660ffe38523af75dd3d56974c219e4261bd6a3ff4a82e5fb1bf",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_manage_authentication:5cae806c6d5f3a3a22deb055b823aac7a367b42c10f4ee9f5e31a99d042076aa",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_manage_authentication:4850792dd31a6660ffe38523af75dd3d56974c219e4261bd6a3ff4a82e5fb1bf",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_manage_authentication:4850792dd31a6660ffe38523af75dd3d56974c219e4261bd6a3ff4a82e5fb1bf"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing manage authentication for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a manage-authentication morning brief from Dynamics 365 ERP data for a legal entity, returning top 5 items by impact, anomalies vs the 7-day rolling average, next actions, an email saved to drafts, and a Teams-rea",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "e0272533965f4f4ab1e42fffaa68f7a394a7990c99d80d0d89f9f1ceefeab3dd",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "bb02830b03cdee5f51dac349051b3d9c0ebd9e588df41c639d116fe076b4d533",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

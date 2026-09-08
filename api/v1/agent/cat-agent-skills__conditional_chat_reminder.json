@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__conditional_chat_reminder",
   "name": "Conditional Chat Reminder",
   "rar_name": "@cat-agent-skills/conditional_chat_reminder",
-  "rappid": "rappid:@cat-agent-skills/conditional_chat_reminder:c15df6996f2685c7304f5861178a0f33eb2cffe2f4f36e60a067d6e94bc47ff1",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/conditional_chat_reminder:f833e12dc6d358bcde0d140a889a948252126d2f8c82a511d6cbae72c952a42d",
+  "_migrated_from": "rappid:@cat-agent-skills/conditional_chat_reminder:c15df6996f2685c7304f5861178a0f33eb2cffe2f4f36e60a067d6e94bc47ff1",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/conditional_chat_reminder:c15df6996f2685c7304f5861178a0f33eb2cffe2f4f36e60a067d6e94bc47ff1"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "integrations",
   "tags": [
@@ -24,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.0,
-  "sha256": "2ff960cf9799c7e9336fd4eea85e8acf88d5d9ebf2ff5c3a52dce0da0f069171",
+  "lines": 262,
+  "size_kb": 12.4,
+  "sha256": "1452500a768e389d1c97a53057224a79ac96991e2267344caed384994b7a8c46",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_manage_active_suppliers",
   "name": "Manage active suppliers Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_manage_active_suppliers",
-  "rappid": "rappid:@cowork-cookbook/teams_update_manage_active_suppliers:0706b486cbac1d3896e41774203848cc913cf3731cd8753de6ff0817e6380c27",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_manage_active_suppliers:abebb86d50a5333b4df00602234e1a6cb6bb66cfd5487bf576d9dd3739ca4ced",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_manage_active_suppliers:0706b486cbac1d3896e41774203848cc913cf3731cd8753de6ff0817e6380c27",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_manage_active_suppliers:0706b486cbac1d3896e41774203848cc913cf3731cd8753de6ff0817e6380c27"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on manage active suppliers status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes active supplier status from Dynamics 365 F&SCM for a given legal entity and returns a Teams-ready markdown channel post plus a saved Adaptive Card JSON with KPIs and quick-action buttons; does not post it.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "9b1937f5f2a16b9d263feafce2e479dabd975d414fa68d6eadef8bfe14342045",
+  "lines": 265,
+  "size_kb": 16.2,
+  "sha256": "a29455ee80e4f197f73e55f0091d8b06ed529c32235591248c8facf27d6329dd",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

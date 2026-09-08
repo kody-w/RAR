@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_manage_procurement_risks",
   "name": "Manage procurement risks Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_manage_procurement_risks",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_manage_procurement_risks:dfd35a6d58679ad3a1f31f82f0cb652bfe7f0008022ff075b7a2f5ca01fed90c",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_manage_procurement_risks:885eddb87717614bc51ef9bbf37cc5e8b314c4d43d7ff60c2b1cb1d2f1dc8159",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_manage_procurement_risks:dfd35a6d58679ad3a1f31f82f0cb652bfe7f0008022ff075b7a2f5ca01fed90c",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_manage_procurement_risks:dfd35a6d58679ad3a1f31f82f0cb652bfe7f0008022ff075b7a2f5ca01fed90c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on manage procurement risks status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on procurement risk status from Dynamics 365 F&SCM data for a given legal entity, with KPI, trend, red-flag, action, and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "4e7dc5ac0c56c7f9da8dc255564c4c63d533779ae24cb31d7209cf6d324e8971",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "0325f2022f139bdfc5d6f8e971d6d86baa1f9aa9ae56c279a68d2bbd12a05419",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

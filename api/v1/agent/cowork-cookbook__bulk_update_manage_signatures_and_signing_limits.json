@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_manage_signatures_and_signing_limits",
   "name": "Manage signatures and signing limits Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_manage_signatures_and_signing_limits",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_manage_signatures_and_signing_limits:615360b4f4bae5832a95c1aa7f626187f78e014a774121b1bbc88a994719ac2d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_manage_signatures_and_signing_limits:123176ed23e68b09b4e911151bda3afe46072ee6c339ab88dba2ce2c69d32983",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_manage_signatures_and_signing_limits:615360b4f4bae5832a95c1aa7f626187f78e014a774121b1bbc88a994719ac2d",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_manage_signatures_and_signing_limits:615360b4f4bae5832a95c1aa7f626187f78e014a774121b1bbc88a994719ac2d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across manage signatures and signing limits records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 signature and signing limit records in legal entity USMF via the ERP plugin, producing a dry-run preview workbook for approval before committing changes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "2ef211e9c1549936b89dbf9df9cd2e828fae3199591dd6855c29e9d45ecdafdc",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "be0d58c3ed93e6933c93d90318d17ccdad2d6bd253f559e8752d03ea7ce44d77",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

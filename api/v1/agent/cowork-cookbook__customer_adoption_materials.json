@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__customer_adoption_materials",
   "name": "Customer adoption materials",
   "rar_name": "@cowork-cookbook/customer_adoption_materials",
-  "rappid": "rappid:@cowork-cookbook/customer_adoption_materials:d7cbe066831cb8a31c169af76db62fad0467961fe446682d084fb0f113414ffb",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/customer_adoption_materials:6f71fc5f62d0df37e1eb296c4dbb824ec4557059e91ac530b0599de3bee3fc17",
+  "_migrated_from": "rappid:@cowork-cookbook/customer_adoption_materials:d7cbe066831cb8a31c169af76db62fad0467961fe446682d084fb0f113414ffb",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/customer_adoption_materials:d7cbe066831cb8a31c169af76db62fad0467961fe446682d084fb0f113414ffb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "general",
   "tags": [
@@ -19,16 +21,16 @@
     "advanced",
     "read_only"
   ],
-  "description": "Build a role-relevant learning curriculum for a customer - structured, sourced, and deployment-ready.",
+  "description": "Generates a Markdown learning curriculum for a named customer and product with three progressive paths (Beginner, Intermediate, Advanced), sequenced public-resource tables, persona application notes, and a rollout order.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 9.4,
-  "sha256": "54fa4622b85df72e5a5aab85fd1fca7a124a986ebb243cfd7225b508fe1c6697",
+  "lines": 265,
+  "size_kb": 18.9,
+  "sha256": "15d44695ee41d1433201801bcba8bad95f3e37f2181a766389ae958b6721d612",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

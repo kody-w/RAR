@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_manage_cases_and_requests",
   "name": "Manage cases and requests Summary Report",
   "rar_name": "@cowork-cookbook/report_manage_cases_and_requests",
-  "rappid": "rappid:@cowork-cookbook/report_manage_cases_and_requests:1e2412a9fd1941eff38e54341b52dfde4218c8ebe49a0699b79a9c5c776cb4e2",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_manage_cases_and_requests:f7286c00c1008be8d4671c6887ceb23783ad90f5cad90bbc306173cc009efd69",
+  "_migrated_from": "rappid:@cowork-cookbook/report_manage_cases_and_requests:1e2412a9fd1941eff38e54341b52dfde4218c8ebe49a0699b79a9c5c776cb4e2",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_manage_cases_and_requests:1e2412a9fd1941eff38e54341b52dfde4218c8ebe49a0699b79a9c5c776cb4e2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of manage cases and requests activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of manage cases and requests from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.1,
-  "sha256": "e2bc1997dc51dd571cdc579b5ac4fa9e8eced7e522ab943bfa000bf293fc87e9",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "2a9056fb61306a4fbb227dfcdf0d6bfac306273c219cfa9add8193261c662d6b",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

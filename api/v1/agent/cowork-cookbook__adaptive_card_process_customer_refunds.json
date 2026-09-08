@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_process_customer_refunds",
   "name": "Process customer refunds Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_process_customer_refunds",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_process_customer_refunds:201d908fd29be69e4c26e5e26bc78db1a06e43ce7f91332f39d73c8acdd67866",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_process_customer_refunds:4c6abe454005ac8af3dc765dfda783dd99d1f908b9115a61c7ca300c6625dfff",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_process_customer_refunds:201d908fd29be69e4c26e5e26bc78db1a06e43ce7f91332f39d73c8acdd67866",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_process_customer_refunds:201d908fd29be69e4c26e5e26bc78db1a06e43ce7f91332f39d73c8acdd67866"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of process customer refunds status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing process customer refunds status from Dynamics 365 F&SCM (legal entity USMF), with header, 3-5 KPI tiles, a RAG row, and 2-3 action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "6126670cd219135ce445bf28c999ae31534d32e03bc73bfd7688d28887c1b485",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "4d65203c89a0d6049c25283f4084206be8cceab217c47b709702c38c1516d55f",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

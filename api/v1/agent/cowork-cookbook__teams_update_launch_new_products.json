@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_launch_new_products",
   "name": "Launch new products Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_launch_new_products",
-  "rappid": "rappid:@cowork-cookbook/teams_update_launch_new_products:7e43e2b3053fcef717691777a205095d73f6ea742599352e2f1f49ed29e3f823",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_launch_new_products:cdb68b1cc30b9ae58bc2240264141e26e0e87f3fcad3bddaa74eae295627ca3f",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_launch_new_products:7e43e2b3053fcef717691777a205095d73f6ea742599352e2f1f49ed29e3f823",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_launch_new_products:7e43e2b3053fcef717691777a205095d73f6ea742599352e2f1f49ed29e3f823"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on launch new products status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes launch-new-products status from the Dynamics 365 ERP plugin for a given legal entity and returns a markdown Teams channel post plus a saved Adaptive Card JSON with KPIs and quick-action buttons; does not post",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "69078bf55554f7f89365fafccdd25f8dc354eef93d51453d980b60d07fe8ddfa",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "1915f2d562734435a63daee12197cbd5166184616dbca1d2e62d08515ef2fbaf",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

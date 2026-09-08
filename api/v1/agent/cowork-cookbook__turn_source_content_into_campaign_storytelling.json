@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__turn_source_content_into_campaign_storytelling",
   "name": "Turn source content into a campaign storytelling deck",
   "rar_name": "@cowork-cookbook/turn_source_content_into_campaign_storytelling",
-  "rappid": "rappid:@cowork-cookbook/turn_source_content_into_campaign_storytelling:d318864e4b74130d467e6b1c7d12a43be14f25984cc5fafa288fab32d1646e56",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/turn_source_content_into_campaign_storytelling:5094abded7ebd79b9d14a7a7100b39b4a8b84745a27b97388a52d13a3f288f32",
+  "_migrated_from": "rappid:@cowork-cookbook/turn_source_content_into_campaign_storytelling:d318864e4b74130d467e6b1c7d12a43be14f25984cc5fafa288fab32d1646e56",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/turn_source_content_into_campaign_storytelling:d318864e4b74130d467e6b1c7d12a43be14f25984cc5fafa288fab32d1646e56"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "prezi"
   ],
-  "description": "Move from raw inputs - a research debrief transcript, customer interview, or campaign brief - to a polished storytelling deck, with iteration built into the flow instead of bolted on after.",
+  "description": "Builds a Prezi storytelling deck in Microsoft 365 Copilot Cowork from a transcript, research notes, or campaign brief, then deepens a chosen slide and adds a talk track. Call when turning source content into a deck.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "318091cac6ddecd9c2edec0b506684ff26b988ab29b2746aa7b6999738c29b19",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "ec8a3513294f9ce838dab1917e1b39510ca12783643c071b9fc6f7f58b40d88a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

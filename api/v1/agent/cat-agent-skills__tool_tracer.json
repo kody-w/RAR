@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__tool_tracer",
   "name": "Tool Tracer",
   "rar_name": "@cat-agent-skills/tool_tracer",
-  "rappid": "rappid:@cat-agent-skills/tool_tracer:90a379a52994bdab30828a0fd5c34d11ed10bcf661e94cb46361d91c96c51dd9",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/tool_tracer:f9b1a7e78b766822863cfe46fdd6e7df36ffd011e626763457421a8642adefc7",
+  "_migrated_from": "rappid:@cat-agent-skills/tool_tracer:90a379a52994bdab30828a0fd5c34d11ed10bcf661e94cb46361d91c96c51dd9",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/tool_tracer:90a379a52994bdab30828a0fd5c34d11ed10bcf661e94cb46361d91c96c51dd9"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -26,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.9,
-  "sha256": "9bdbbbf6039d95cd831a928da5055dd9dec8dd45c1fc63c67142f4c8260c4e84",
+  "lines": 262,
+  "size_kb": 12.3,
+  "sha256": "94d1c0edc220629574391ccfba7db23a74bcced8cd5a12e608f317dbfae87151",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

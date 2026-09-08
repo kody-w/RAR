@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_monitor_storage_capacity",
   "name": "Monitor storage capacity Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_monitor_storage_capacity",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_monitor_storage_capacity:1096f5755920b6c80e1eaa9c1c6b2d42ab10f6976142eecd46345d1c95f79afa",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_monitor_storage_capacity:74eaf4c559379386363b9708db087db6f4a4961594a6ed61acf4bf637f27fc28",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_monitor_storage_capacity:1096f5755920b6c80e1eaa9c1c6b2d42ab10f6976142eecd46345d1c95f79afa",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_monitor_storage_capacity:1096f5755920b6c80e1eaa9c1c6b2d42ab10f6976142eecd46345d1c95f79afa"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of monitor storage capacity status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing monitor storage capacity status for a Dynamics 365 F&SCM legal entity, with header, KPI tiles, RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "3c02a12167d11af5b4b1577ada4c3bdc9bc63d855b8efdd2b765db88e70eca40",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "64130eb9d42ac37480cbf130f97f346cd6a176fa8fe56ad9883525ea753ec5f2",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

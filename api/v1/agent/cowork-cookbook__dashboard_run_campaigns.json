@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_run_campaigns",
   "name": "Run campaigns Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_run_campaigns",
-  "rappid": "rappid:@cowork-cookbook/dashboard_run_campaigns:a68be8bcc789b099ad485e64b109431169d27b1cb497a15248bba157bda50af4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_run_campaigns:47ed5a59f6fc3e308e8b15b66d42d978b89513b2a9971d9def0c9a1b34b05d6d",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_run_campaigns:a68be8bcc789b099ad485e64b109431169d27b1cb497a15248bba157bda50af4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_run_campaigns:a68be8bcc789b099ad485e64b109431169d27b1cb497a15248bba157bda50af4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for run campaigns - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls run campaigns data for the most recent fiscal period from Dynamics 365 F&SCM (legal entity USMF) via the ERP plugin and writes a standalone interactive HTML dashboard file to the output folder, read-only.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "a765a4003e1bc370811f3d079a303d542ed81823ec8ec2aa830f5b8803cb8e4b",
+  "lines": 265,
+  "size_kb": 16.5,
+  "sha256": "5bcb98ffe21a85a0a35e8f98bd9d787ce794907d6791734a1948f9e406b741eb",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

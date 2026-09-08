@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__vendor_invoice_capture_skill",
   "name": "Vendor Invoice Capture Skill (packaged + scored)",
   "rar_name": "@cowork-cookbook/vendor_invoice_capture_skill",
-  "rappid": "rappid:@cowork-cookbook/vendor_invoice_capture_skill:864057a4432dea33abed04ea4826a7077af3a70792de520d2cfa875ae097ac6c",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/vendor_invoice_capture_skill:bc56aaa5d02dbf1fea6e798285aaef550974a4f05f9cec0032b4969a4094d1a5",
+  "_migrated_from": "rappid:@cowork-cookbook/vendor_invoice_capture_skill:864057a4432dea33abed04ea4826a7077af3a70792de520d2cfa875ae097ac6c",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/vendor_invoice_capture_skill:864057a4432dea33abed04ea4826a7077af3a70792de520d2cfa875ae097ac6c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "The packaged Cowork skill that powers the vendor-invoice intake recipe \u2014 runs the PDF extraction, USMF vendor match, and pending invoice creation as a single reusable skill, with a 97/100 quality scorecard from the Cowork skill quality tool.",
+  "description": "Runs the packaged vendor-invoice-capture skill against the connected mailbox and Dynamics 365 USMF: scans unread mail for invoice PDFs, extracts fields, matches vendors, skips duplicates, creates pending vendor invoices,",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.7,
-  "sha256": "726bfc1e7f14bb64da0ac946394374d25418bdf169715a0ca0ac269ce3bd3410",
+  "lines": 265,
+  "size_kb": 19.2,
+  "sha256": "985bf2021a2e32174d9a3ec91d451597d676259608e36ddd8a41d85ff607d703",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

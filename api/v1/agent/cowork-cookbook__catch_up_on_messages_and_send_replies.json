@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__catch_up_on_messages_and_send_replies",
   "name": "Catch up on messages and send replies automatically",
   "rar_name": "@cowork-cookbook/catch_up_on_messages_and_send_replies",
-  "rappid": "rappid:@cowork-cookbook/catch_up_on_messages_and_send_replies:6d0d8314c1a8e08c1dd6ea43be223a65d9c788dfcec39de137549ec2f0c15f95",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/catch_up_on_messages_and_send_replies:17c1e3c6faed817b7d060f0d91692b3825cdd7e13b0a76d443a52c1217ff1758",
+  "_migrated_from": "rappid:@cowork-cookbook/catch_up_on_messages_and_send_replies:6d0d8314c1a8e08c1dd6ea43be223a65d9c788dfcec39de137549ec2f0c15f95",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/catch_up_on_messages_and_send_replies:6d0d8314c1a8e08c1dd6ea43be223a65d9c788dfcec39de137549ec2f0c15f95"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "general",
   "tags": [
@@ -19,16 +21,16 @@
     "intermediate",
     "read_only"
   ],
-  "description": "Close the loop on unanswered questions without scrolling back through a week of threads.",
+  "description": "Scans this week's Teams messages and emails for direct questions you haven't answered, auto-sends short acknowledgments, and drafts higher-stakes replies for your review before sending.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 9.5,
-  "sha256": "df2584d346a31b87577d83441d08eddf9a328147a8cf058be03a89b5332a91f6",
+  "lines": 265,
+  "size_kb": 15.7,
+  "sha256": "7afb7ea1e7bd43db83ef6a98952d75fd97a18ba3b295594514f0c5c00e239924",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

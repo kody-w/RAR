@@ -1,17 +1,17 @@
 {
   "agent": "@cat-agent-skills/knowledge_source_router",
   "agent_file": "knowledge_source_router_agent.py",
-  "agent_sha256": "a6d2ac6a36c781505665b517953328f2dd809e91140dd40f56588569f87edeb6",
+  "agent_sha256": "b8e2822507b13775fff2410fd66bb59f29f9c622a8d8e45b844f4fa235f54569",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "KnowledgeSourceRouter",
   "host_dependencies": [],
   "manifest": {
     "author": "Adi Leibowitz",
-    "category": "general",
+    "category": "integrations",
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Route Copilot Studio knowledge searches to the right region-specific source (Americas, EMEA, APAC, or Global) based on where the user is, so answers stay locally accurate.",
+    "description": "Route country-specific SharePoint questions through Country metadata first, then search only the complete set of matching documents.",
     "display_name": "Knowledge Source Router",
     "name": "@cat-agent-skills/knowledge_source_router",
     "platforms": [
@@ -22,7 +22,7 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "bcc9646e4cda8666",
+      "content_digest": "222db16ad4565ae2",
       "license": "unverified",
       "license_verified": false,
       "source_id": "cat-agent-skills",
@@ -30,16 +30,16 @@
       "source_url": "https://microsoft.github.io/cat-agent-skills/",
       "upstream_slug": "knowledge-source-router",
       "upstream_url": "https://microsoft.github.io/cat-agent-skills/#knowledge-source-router",
-      "upstream_version": "1.0.0"
+      "upstream_version": "2.0.0"
     },
     "tags": [
       "knowledge",
       "routing",
-      "localization",
-      "location",
+      "sharepoint",
+      "metadata",
       "grounding"
     ],
-    "version": "2.0.0"
+    "version": "4.0.2"
   },
   "runtime_name": "KnowledgeSourceRouter",
   "schema": "rapp-agent-lock/1.0",
@@ -65,5 +65,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "4.0.2"
 }

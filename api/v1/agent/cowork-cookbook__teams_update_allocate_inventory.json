@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_allocate_inventory",
   "name": "Allocate inventory Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_allocate_inventory",
-  "rappid": "rappid:@cowork-cookbook/teams_update_allocate_inventory:ff40ebb3d50dec6a527daf0a44ec70a92960ac38f615d7a1820b57b71ee95a12",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_allocate_inventory:368a5c4b3a103f7ff8fb16f3705e47e8174cd623dd2a67011d55d32284c5fd47",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_allocate_inventory:ff40ebb3d50dec6a527daf0a44ec70a92960ac38f615d7a1820b57b71ee95a12",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_allocate_inventory:ff40ebb3d50dec6a527daf0a44ec70a92960ac38f615d7a1820b57b71ee95a12"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on allocate inventory status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes allocate inventory status from the Dynamics 365 ERP plugin for a given legal entity and saves two artifacts: a markdown Teams channel post and an Adaptive Card JSON; it does not post anything.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "eec96c1904e1e963e2b6ccdc371737248b85aab36693a7b3be60b74a97089c63",
+  "lines": 265,
+  "size_kb": 16.0,
+  "sha256": "1bcd9efadff73a3843441a775279f3d36ade74bf94a5e0a4468726decc1f6749",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

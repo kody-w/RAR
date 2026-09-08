@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_conduct_competitive_analysis",
   "name": "Conduct competitive analysis Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_conduct_competitive_analysis",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_conduct_competitive_analysis:d647f2e254742cb887ade3562bded2daad3b8ecbcf432d4c3ae0f53eaa1f60f4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_conduct_competitive_analysis:afa03ce0bb6adfa668e165738e8c8515f68ec66f13dd4bde2be753c83557f609",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_conduct_competitive_analysis:d647f2e254742cb887ade3562bded2daad3b8ecbcf432d4c3ae0f53eaa1f60f4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_conduct_competitive_analysis:d647f2e254742cb887ade3562bded2daad3b8ecbcf432d4c3ae0f53eaa1f60f4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing conduct competitive analysis for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a competitive-analysis morning brief from Dynamics 365 ERP data for a legal entity: top 5 items by impact, anomalies vs the 7-day rolling average, and next actions, plus a saved email draft and a Teams-ready summa",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "a1d796d255edb706c13b4eca2bdd09971cfd9ec0c5b35001a1a39c51f1beb663",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "8bcadea32e12d1329cac9f39afacb7ef8637b0f58df92be96807c13d10208c46",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_issue_requests_for_quotation",
   "name": "Issue requests for quotation Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_issue_requests_for_quotation",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_issue_requests_for_quotation:80eed8949b14d5831d909956813d4999d756716923c63ef162fc10ffde172740",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_issue_requests_for_quotation:305933f7b5920d87061483eb177ffcc909b1fd6ef676e70435b8713f67ff0777",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_issue_requests_for_quotation:80eed8949b14d5831d909956813d4999d756716923c63ef162fc10ffde172740",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_issue_requests_for_quotation:80eed8949b14d5831d909956813d4999d756716923c63ef162fc10ffde172740"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of issue requests for quotation status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file summarizing issue requests for quotation status from Dynamics 365 F&SCM for a given legal entity, with KPI tiles, RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "9da0fbaee17034f0bf0b85ade4a96aabccb409f23033fcb60b3d42ff75516e41",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "42d3b0b1942859eebdda12f8158bf17468226d2998e04ecd7f855cddb4280e66",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

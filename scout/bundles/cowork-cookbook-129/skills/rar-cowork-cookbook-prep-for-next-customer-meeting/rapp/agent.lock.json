@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/prep_for_next_customer_meeting",
   "agent_file": "prep_for_next_customer_meeting_agent.py",
-  "agent_sha256": "39769fdbab6ded7312db55e5d89a3b4fc099a6b7154a77bc691ce95e9c9d6e96",
+  "agent_sha256": "72e095a2c367e02dd92226c527996c37e85949f2debc938b1b93c6428c73ff53",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PrepForNextCustomerMeeting",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Walk into your next call already knowing the account cold - no scramble through CRM tabs and email.",
+    "description": "Produces a meeting-prep brief in Word for a named customer, combining Dynamics 365 Sales account history, open opportunities and recent activity with your recent emails and meetings; call it before a customer call.",
     "display_name": "Prep for my next customer meeting",
     "industry_context": {
       "deprecated": false,
@@ -49,9 +49,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "2438ecf80198b98a",
+      "content_digest": "73ce0ae14f16acb9",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -75,28 +75,33 @@
       "integration",
       "dynamics_365_sales"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "PrepForNextCustomerMeeting",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "customer": {
+        "description": "The customer or account name the meeting is with.",
+        "type": "string"
+      },
+      "meeting_time": {
+        "description": "When the meeting is, e.g. 9 a.m., used to identify the call being prepped for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "The process to automate.",
-        "type": "string"
-      },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
         "type": "string"
       }
     },
@@ -105,5 +110,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

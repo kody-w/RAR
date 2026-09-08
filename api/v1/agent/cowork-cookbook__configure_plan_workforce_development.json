@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_plan_workforce_development",
   "name": "Plan workforce development Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_plan_workforce_development",
-  "rappid": "rappid:@cowork-cookbook/configure_plan_workforce_development:d6b49daa6fcc1b2ad40973de6258eafef6d35ee7797b339a42fd475d8769f05a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_plan_workforce_development:040794a564cd1d530315cc5220d54d3f63e01dab1a5efbfaffa6613085903316",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_plan_workforce_development:d6b49daa6fcc1b2ad40973de6258eafef6d35ee7797b339a42fd475d8769f05a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_plan_workforce_development:d6b49daa6fcc1b2ad40973de6258eafef6d35ee7797b339a42fd475d8769f05a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to plan workforce development from an input Excel file, with validation and rollback support.",
+  "description": "Applies bulk workforce development plan configuration changes in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, pauses for approval, then emits a before/after confirma",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "c9120f25a701e6a60c67c89349f783f03ba384f7a2962c321c7a56fa87495135",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "447f00a007972ba9520a53649b13d0cb68472e8dd624cca35acea324cd7e5d68",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

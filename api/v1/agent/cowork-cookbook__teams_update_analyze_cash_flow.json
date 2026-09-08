@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__teams_update_analyze_cash_flow",
   "name": "Analyze cash flow Teams Channel Update",
   "rar_name": "@cowork-cookbook/teams_update_analyze_cash_flow",
-  "rappid": "rappid:@cowork-cookbook/teams_update_analyze_cash_flow:b51cc7ce4f09885c2e7e08d9362a23cd353004a1c40c74c18eeb086ce281b251",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/teams_update_analyze_cash_flow:86907bc512b41e2b0f9c955bc3c3f552f1a240c50f7c61c828f048520ba06a52",
+  "_migrated_from": "rappid:@cowork-cookbook/teams_update_analyze_cash_flow:b51cc7ce4f09885c2e7e08d9362a23cd353004a1c40c74c18eeb086ce281b251",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/teams_update_analyze_cash_flow:b51cc7ce4f09885c2e7e08d9362a23cd353004a1c40c74c18eeb086ce281b251"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Drafts a Teams channel post on analyze cash flow status with an interactive Adaptive Card for quick triage.",
+  "description": "Summarizes cash flow status from Dynamics 365 F&SCM for a legal entity and saves two artifacts: a markdown Teams channel post (2-sentence summary + 3 bullets) and an Adaptive Card JSON with KPIs and quick-action buttons;",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "08d4da8a274f3ddcb317f89e4c6fa7d36e1eaa607db55f2cfb6adb2a5fe93ce4",
+  "lines": 265,
+  "size_kb": 16.1,
+  "sha256": "0ce1e62f3ad9b06568383dfe05ad6795f18cb6b9cbcdbaa957b0a3b01bcc2fdc",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

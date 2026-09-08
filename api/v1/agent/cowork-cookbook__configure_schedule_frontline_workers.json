@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_schedule_frontline_workers",
   "name": "Schedule frontline workers Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_schedule_frontline_workers",
-  "rappid": "rappid:@cowork-cookbook/configure_schedule_frontline_workers:0fea5eae605137c62b8c2500855863e28495b8b45a5d6c42b8b5ddde1b5972f6",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_schedule_frontline_workers:268701caee8a2c00789b7141badb19a76bab080d7a73c2337ca71bb0f17093c9",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_schedule_frontline_workers:0fea5eae605137c62b8c2500855863e28495b8b45a5d6c42b8b5ddde1b5972f6",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_schedule_frontline_workers:0fea5eae605137c62b8c2500855863e28495b8b45a5d6c42b8b5ddde1b5972f6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to schedule frontline workers from an input Excel file, with validation and rollback support.",
+  "description": "Reads an attached Excel file of schedule frontline worker configuration changes for a D365 F&SCM legal entity, validates every row, returns a validation workbook, and after your approval applies the changes with a before",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.6,
-  "sha256": "730b4142576e0fa26e488a9d3c6eed1ec4451e1f0ab0dc5029c1c9a937db0f3e",
+  "lines": 265,
+  "size_kb": 17.1,
+  "sha256": "cdd0118dfe688e3a9556169999ef21ef0bbf5b5e84a38ecc770e76a9fbb01f39",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

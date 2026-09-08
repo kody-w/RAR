@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_identify_notification_triggers",
   "name": "Identify notification triggers Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_identify_notification_triggers",
-  "rappid": "rappid:@cowork-cookbook/dashboard_identify_notification_triggers:20fe33cf3421716c21a495b03b0bef04289aa84ade76872b037afb2495938ebd",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_identify_notification_triggers:0c9f77893494d338b6674191959d75b6114ea365c28b203c08045c18aa1c9c7a",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_identify_notification_triggers:20fe33cf3421716c21a495b03b0bef04289aa84ade76872b037afb2495938ebd",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_identify_notification_triggers:20fe33cf3421716c21a495b03b0bef04289aa84ade76872b037afb2495938ebd"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for identify notification triggers - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls notification-trigger data from Dynamics 365 F&SCM for a given legal entity and fiscal period via the Cowork D365 ERP plugin, and saves a standalone interactive HTML dashboard file to the output folder, read-only.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "c63619b7a0c3b26ac9a704154749e781a2a532b2147d53685e14435a9755b082",
+  "lines": 265,
+  "size_kb": 16.8,
+  "sha256": "c8887670464a0f967703be44afdbb94421e531dc1e86fa14d2b110da5d90451a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

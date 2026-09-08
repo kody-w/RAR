@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__adaptive_card_improve_assets",
   "name": "Improve assets Status Adaptive Card",
   "rar_name": "@cowork-cookbook/adaptive_card_improve_assets",
-  "rappid": "rappid:@cowork-cookbook/adaptive_card_improve_assets:0e4c3c86b52e6c4571417db5be0884d60614ed482635bf7ea613bd4a8a44f1f5",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/adaptive_card_improve_assets:169e8ed448de34ddf01414fbd247e3395b1beed09620f6929adb191d21be4a19",
+  "_migrated_from": "rappid:@cowork-cookbook/adaptive_card_improve_assets:0e4c3c86b52e6c4571417db5be0884d60614ed482635bf7ea613bd4a8a44f1f5",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/adaptive_card_improve_assets:0e4c3c86b52e6c4571417db5be0884d60614ed482635bf7ea613bd4a8a44f1f5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a reusable Adaptive Card JSON snapshot of improve assets status for embedding in dashboards, emails, or Teams.",
+  "description": "Generates a read-only Adaptive Card JSON file visualizing improve assets status from Dynamics 365 F&SCM for a given legal entity, with header, KPI tiles, RAG row, and action buttons.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "55051c82010aa11493901bd2c97f28837501a72c61a445febbed46d8c9978274",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "13a0a4d3162edc05a3cff5afcb346c4b1365f7dc22b75a449fc033d610612087",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

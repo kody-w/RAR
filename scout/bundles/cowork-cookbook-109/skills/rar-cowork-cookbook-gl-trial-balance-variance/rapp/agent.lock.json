@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/gl_trial_balance_variance",
   "agent_file": "gl_trial_balance_variance_agent.py",
-  "agent_sha256": "551e3f9e867735ac4ab2dff898356682733cdc32ac836dbf84a535ac49d887ec",
+  "agent_sha256": "8e1980e116808dd09d33dd994a9999b30945ed218831c5583baabc8c545dc818",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GlTrialBalanceVariance",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Compares the current-period trial balance to the prior period and highlights GL accounts with material variances.",
+    "description": "Compares the most recent posted GL period to the prior period for a legal entity, flags accounts with variance >= $10,000 or >= 10%, and returns an Excel workbook plus a draft email to the controller.",
     "display_name": "GL Trial Balance Variance Report",
     "industry_context": {
       "deprecated": false,
@@ -56,9 +56,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "9b20b898873061ce",
+      "content_digest": "0eedf1ce300d7a58",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -82,28 +82,41 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "GlTrialBalanceVariance",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "audience": {
-        "description": "Optional. Who reads it — this drives register, length and what can be assumed.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
+      "controller_recipient": {
+        "description": "Recipient of the draft summary email; user edits recipients before sending.",
+        "type": "string"
+      },
+      "current_period": {
+        "description": "The most recent posted period to compare, e.g. March 2017.",
+        "type": "string"
+      },
+      "legal_entity": {
+        "description": "D365 F&SCM legal entity to query, e.g. USMF.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What to produce, and about what.",
+      "prior_period": {
+        "description": "The prior period to compare against, e.g. February 2017.",
         "type": "string"
       }
     },
@@ -112,5 +125,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

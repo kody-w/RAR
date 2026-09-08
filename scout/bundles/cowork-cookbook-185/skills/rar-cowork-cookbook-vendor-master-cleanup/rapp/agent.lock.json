@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/vendor_master_cleanup",
   "agent_file": "vendor_master_cleanup_agent.py",
-  "agent_sha256": "e35db88e2b480e9fc65cf124389bd28c1148750d116ce79201593f5779c51b4b",
+  "agent_sha256": "a345862996c03f70d4fd77df7cea09869a87124551854b016466a6f5c5d3a184",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VendorMasterCleanup",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Identifies duplicate, incomplete, or inactive vendors in the master record and proposes a cleanup plan.",
+    "description": "Scans the Dynamics 365 F&SCM vendor master and returns an Excel workbook with one sheet per issue category (missing tax id, payment terms, bank account; inactive vendors with open POs; likely duplicates). Read-only.",
     "display_name": "Vendor Master Cleanup Report",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "8cc312cdb130b37c",
+      "content_digest": "49f35294b69a2904",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,25 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "VendorMasterCleanup",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
-        "type": "string"
-      },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
         "type": "string"
       }
     },
@@ -111,5 +108,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

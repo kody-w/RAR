@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__sharepoint_list_insight_report_generator",
   "name": "SharePoint List Insight Report Generator",
   "rar_name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
-  "rappid": "rappid:@cat-agent-skills/sharepoint_list_insight_report_generator:678fbc815b78d2f9b5b06a972db59d6c07ffdb89e09d04d9174c6e06bb7b3fbf",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/sharepoint_list_insight_report_generator:efa578bda662bce49578cfaf431d18722f8021ad4e51c691b90991c069659aee",
+  "_migrated_from": "rappid:@cat-agent-skills/sharepoint_list_insight_report_generator:678fbc815b78d2f9b5b06a972db59d6c07ffdb89e09d04d9174c6e06bb7b3fbf",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/sharepoint_list_insight_report_generator:678fbc815b78d2f9b5b06a972db59d6c07ffdb89e09d04d9174c6e06bb7b3fbf"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "integrations",
   "tags": [
@@ -24,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.6,
-  "sha256": "1755e4d761977ef94e93304dc8d180edc0dc810f70e304a513ed4909b525f0d7",
+  "lines": 262,
+  "size_kb": 12.9,
+  "sha256": "c915c29c6311ad09ee768d4267ba02b6fb91324750ffc62d9cc02c2cb6b5ea82",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

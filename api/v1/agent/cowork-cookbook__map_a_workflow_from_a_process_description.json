@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__map_a_workflow_from_a_process_description",
   "name": "Map a workflow from a process description",
   "rar_name": "@cowork-cookbook/map_a_workflow_from_a_process_description",
-  "rappid": "rappid:@cowork-cookbook/map_a_workflow_from_a_process_description:fb7f4449eb7e42ce4d7aac7f3f1f66fd2d3fc9b15a5e8260abfda62f0aacff07",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/map_a_workflow_from_a_process_description:2bca7917c6f753566d32e680ec6e9b0e2c077b3040339047bc9d8213f758a4ed",
+  "_migrated_from": "rappid:@cowork-cookbook/map_a_workflow_from_a_process_description:fb7f4449eb7e42ce4d7aac7f3f1f66fd2d3fc9b15a5e8260abfda62f0aacff07",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/map_a_workflow_from_a_process_description:fb7f4449eb7e42ce4d7aac7f3f1f66fd2d3fc9b15a5e8260abfda62f0aacff07"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "miro"
   ],
-  "description": "Make a workflow shareable, reviewable, and improvable - without spending hours building the diagram by hand.",
+  "description": "Turns a described process into a Miro flowchart with labeled shapes, connectors, owners, and decision points, plus a companion Miro doc narrating purpose, handoffs, and risks; call when a workflow needs diagramming.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.2,
-  "sha256": "f2bc882e02104c377f714e9db4d24699caf74d79bf15064b7ba5a81062103adb",
+  "lines": 265,
+  "size_kb": 17.2,
+  "sha256": "8cbd2af28a5e83a207d99d37291873dc5bbe51226515f973661929d94b3b2e92",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

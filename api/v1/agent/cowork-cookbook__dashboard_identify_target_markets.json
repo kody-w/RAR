@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_identify_target_markets",
   "name": "Identify target markets Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_identify_target_markets",
-  "rappid": "rappid:@cowork-cookbook/dashboard_identify_target_markets:aae0b53b2bcde1944673c8187d79d0732b781641eeac42800d93700aee36e414",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_identify_target_markets:265215bbb683637b0e36bf34634e5fc96e563c2cf015ee0998a22e0e7844c630",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_identify_target_markets:aae0b53b2bcde1944673c8187d79d0732b781641eeac42800d93700aee36e414",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_identify_target_markets:aae0b53b2bcde1944673c8187d79d0732b781641eeac42800d93700aee36e414"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for identify target markets - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls target-market data from Dynamics 365 F&SCM for a given legal entity and fiscal period and writes a standalone interactive HTML dashboard (SVG charts, sortable table, RAG indicator) to the output folder, read-only.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "d331aede0c5e83de1de4c98d74151e38b34bda5520451e110e0f4782a2c7d13a",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "7f0de19faaa0f79666774772a872e99e85396433165ed73a7b7ddecbc48365ed",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

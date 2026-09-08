@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing",
   "agent_file": "analyst_briefing_prep_and_rehearsal_routing_agent.py",
-  "agent_sha256": "8413801950006c8334bc6c08e142f18cac6ff0402eb0858fc3d65ab1ec33d313",
+  "agent_sha256": "8299484571ff05ed47499550f9b6c9f60fe21d67e20758b381c0738c0bc562c1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AnalystBriefingPrepAndRehearsalRouting",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Prep the [Analyst Firm] briefing package and get the team rehearsed before the room.",
+    "description": "Builds an interactive HTML analyst briefing dashboard (positioning, top three messages, anticipated Q&A, speaker notes, source links) from prior firm interactions, their research, and your launch materials, then schedule",
     "display_name": "Analyst briefing prep and rehearsal routing",
     "industry_context": {
       "deprecated": false,
@@ -48,9 +48,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "033e08f333f9f0e2",
+      "content_digest": "f90aaeef5b8abf33",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -74,28 +74,45 @@
       "read_only",
       "automation"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "AnalystBriefingPrepAndRehearsalRouting",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
+      "analyst_firm": {
+        "description": "Name of the analyst firm being briefed.",
+        "type": "string"
+      },
+      "briefing_date": {
+        "description": "Date of the analyst briefing; rehearsal is set 48 hours prior.",
+        "type": "string"
+      },
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
+        "type": "string"
+      },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "The process to automate.",
+      "people": {
+        "description": "Speaker name for speaker notes, plus spokesperson and briefing owner for the rehearsal invite.",
         "type": "string"
       },
-      "trigger": {
-        "description": "Optional. What starts it — schedule, event or manual.",
+      "product_area_and_launch": {
+        "description": "Product area for their published research and the product/launch materials to cross-reference.",
+        "type": "string"
+      },
+      "source_locations": {
+        "description": "OneDrive folder with launch materials and the approved messaging doc.",
         "type": "string"
       }
     },
@@ -104,5 +121,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/action_items_todo",
   "agent_file": "action_items_todo_agent.py",
-  "agent_sha256": "9d5f391acb6541f4471f568aae5a21b0216275c8609ea54200778c77c080756d",
+  "agent_sha256": "1c5c79a035333e0169c363cc1f60b4849ce2a8297ef496801fa6e95e5988e3ed",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ActionItemsTodo",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "microsoft_365",
       "action_items"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "ActionItemsTodo",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

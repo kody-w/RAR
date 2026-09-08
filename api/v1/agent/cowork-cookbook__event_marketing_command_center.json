@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__event_marketing_command_center",
   "name": "Event marketing command center",
   "rar_name": "@cowork-cookbook/event_marketing_command_center",
-  "rappid": "rappid:@cowork-cookbook/event_marketing_command_center:c7cbb705c916c53605feed13d7ba64d1fbbac26c6aefdf352899470e6706593a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/event_marketing_command_center:8a0048196534299e01b7bd7e0fd6fd6fa88ea4307df0f568e90aca107f302e78",
+  "_migrated_from": "rappid:@cowork-cookbook/event_marketing_command_center:c7cbb705c916c53605feed13d7ba64d1fbbac26c6aefdf352899470e6706593a",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/event_marketing_command_center:c7cbb705c916c53605feed13d7ba64d1fbbac26c6aefdf352899470e6706593a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "fabric_iq"
   ],
-  "description": "Prep every moment of [Event name] - speaker slots, customer meetings, content drops, social posts - and bring it together in a single interactive command center with live event KPIs.",
+  "description": "Assembles event programming from a OneDrive folder, tagged calendar entries, a Teams channel, prior customer interactions, and Fabric performance data into an interactive HTML command center with linked artifacts and liv",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "bf5e15f1e4eccb2d938c9ad2d28037fc7642baee0b16f13a3174964eeb349e79",
+  "lines": 265,
+  "size_kb": 18.5,
+  "sha256": "0bdcb1dae16eba1bf9c12f81a526691fef08818909215605c5028f9827fbbb29",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

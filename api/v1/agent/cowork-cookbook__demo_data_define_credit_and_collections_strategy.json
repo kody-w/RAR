@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__demo_data_define_credit_and_collections_strategy",
   "name": "Define credit and collections strategy Demo Data Generator",
   "rar_name": "@cowork-cookbook/demo_data_define_credit_and_collections_strategy",
-  "rappid": "rappid:@cowork-cookbook/demo_data_define_credit_and_collections_strategy:f942790ce59a7381d1c38a8a9cb19571d3c1b35bc01c994720c3cc1dac71cfab",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/demo_data_define_credit_and_collections_strategy:775a12c9754a11ba7f1058036427046bf09946b58be5c560fe8b9e21059e4f8a",
+  "_migrated_from": "rappid:@cowork-cookbook/demo_data_define_credit_and_collections_strategy:f942790ce59a7381d1c38a8a9cb19571d3c1b35bc01c994720c3cc1dac71cfab",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/demo_data_define_credit_and_collections_strategy:f942790ce59a7381d1c38a8a9cb19571d3c1b35bc01c994720c3cc1dac71cfab"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates and creates realistic demo records for define credit and collections strategy in a sandbox tenant for training and pilot scenarios.",
+  "description": "Generates 25 realistic demo records for credit and collections strategy in a Dynamics 365 sandbox legal entity, stages them in an Excel workbook, creates them in D365, and returns each new record's primary key.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "28d8e2996facb121da33eae5d39764abc6df4bfebf8d8730d265e26c6a97672a",
+  "lines": 265,
+  "size_kb": 16.7,
+  "sha256": "2e5d83b026afebfa37ac4492d5b0adad8702c27842faefc92ec2032f7b350ee5",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

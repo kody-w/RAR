@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_record_life_events",
   "name": "Record life events Summary Report",
   "rar_name": "@cowork-cookbook/report_record_life_events",
-  "rappid": "rappid:@cowork-cookbook/report_record_life_events:5c0829318e11ebfe2b2d15569c2fd5e2eb541bac9bcb22394b5f45db6d4c19c4",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_record_life_events:838d3bf8954e7654aaef2b3677d1a9477a4f56c9da3d97d007917c842e313040",
+  "_migrated_from": "rappid:@cowork-cookbook/report_record_life_events:5c0829318e11ebfe2b2d15569c2fd5e2eb541bac9bcb22394b5f45db6d4c19c4",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_record_life_events:5c0829318e11ebfe2b2d15569c2fd5e2eb541bac9bcb22394b5f45db6d4c19c4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of record life events activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only summary report of record life events from Dynamics 365 F&SCM for a given legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top 10 by value sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.0,
-  "sha256": "1c101960babca3a7551ea32d030f82b9507ddc0164361be33b6db1b74e23d114",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "cede434df245acebf18e1eb25b65ec82d09dd7149fe4a745324cc07deff55ea8",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

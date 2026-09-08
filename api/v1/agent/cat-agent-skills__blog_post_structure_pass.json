@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__blog_post_structure_pass",
   "name": "Blog Post Structure Pass",
   "rar_name": "@cat-agent-skills/blog_post_structure_pass",
-  "rappid": "rappid:@cat-agent-skills/blog_post_structure_pass:400f01c73ec944779f94e985fd0558b518385a9c752a12afbaa82e57ff10493d",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "1.1.0",
+  "rappid": "rappid:@cat-agent-skills/blog_post_structure_pass:d4e9cb7c7b91545af4de544bfd4abcc5642d6ad80f8945ac5e59bd8d03df4349",
+  "_migrated_from": "rappid:@cat-agent-skills/blog_post_structure_pass:400f01c73ec944779f94e985fd0558b518385a9c752a12afbaa82e57ff10493d",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/blog_post_structure_pass:400f01c73ec944779f94e985fd0558b518385a9c752a12afbaa82e57ff10493d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
   "publisher": "@cat-agent-skills",
   "category": "general",
   "tags": [
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.9,
-  "sha256": "b337e49ea0b120fa4994304c114666c76182f2b76b6081e1c3d478d82ee4b5b5",
+  "lines": 262,
+  "size_kb": 12.2,
+  "sha256": "7aa974d9e64cd44bf8b7d1c0b45c56396849d26beefbdb9d853de01547392519",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

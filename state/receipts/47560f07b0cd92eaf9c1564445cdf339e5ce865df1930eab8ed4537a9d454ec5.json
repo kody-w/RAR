@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-09-08"
+ },
+ "action": "agent.update",
+ "agent": "@cowork-cookbook/demo_data_manage_customer_collections",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "a8a402fb7266c01f87ea2a1ebba59b51bff3212cc939dedff7c662ef3aa859a9"
+ },
+ "canonical_path": "agents/@cowork-cookbook/demo_data_manage_customer_collections_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-09-08T20:27:06.555078+00:00",
+ "id": "rar_47560f07b0cd92eaf9c1564445cdf339e5ce865df1930eab8ed4537a9d454ec5",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "ed267f9cfa6b5d9a0aadb2941467be23c4f0cf3d2578ddb0995e86190dde7cbf",
+  "receipt": "rar_45c8b95441122ccec93b55cb48d63d9c7de7ddb9d06f00fb1c98023272150bf3",
+  "version": "2.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_47560f07b0cd92eaf9c15644",
+ "revision_id": "47560f07b0cd92eaf9c1564445cdf339e5ce865df1930eab8ed4537a9d454ec5",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "toast generation 2: cookbook recipes carried verbatim (CC BY 4.0, attributed) with Opus 5 refinements cached via the local Brainstem; toaster v2.0.0"
+ },
+ "version": "3.0.3"
+}

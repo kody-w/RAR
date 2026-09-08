@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_plan_service_demand",
   "name": "Plan service demand Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_plan_service_demand",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_plan_service_demand:93087e408cb48163f968dd6937eb99289650a4e721d326a2bd2f2e852a4b8e58",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_plan_service_demand:524d1c7e1b083a1d8b9786cd4971245e7ce6956c4d70c81d729d8fb2aff9b2fa",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_plan_service_demand:93087e408cb48163f968dd6937eb99289650a4e721d326a2bd2f2e852a4b8e58",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_plan_service_demand:93087e408cb48163f968dd6937eb99289650a4e721d326a2bd2f2e852a4b8e58"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on plan service demand status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on plan service demand from Dynamics 365 ERP data for a given legal entity, with title, KPI, trend, red-flag, actions and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "6ae6976e40f00d2607c0c1cf796cdf9a080cd75c9f1ef287d9ea0d0f10cf9050",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "1d3547c47d75c4d49900d74dc3de46f4e0023d0178235c7df4ba755a3bd858cb",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

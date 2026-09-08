@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__scheduled_brief_hire_for_open_positions",
   "name": "Hire for open positions Scheduled Email Brief",
   "rar_name": "@cowork-cookbook/scheduled_brief_hire_for_open_positions",
-  "rappid": "rappid:@cowork-cookbook/scheduled_brief_hire_for_open_positions:2118e2e0080e3aa10ce49e0ba1ff0eb3801426b9d71e1aad9a7b4b78448a7fa9",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/scheduled_brief_hire_for_open_positions:bdf92956a3047126f93877c97c284169b18185285e261ab6b95cf2b82fe10b0b",
+  "_migrated_from": "rappid:@cowork-cookbook/scheduled_brief_hire_for_open_positions:2118e2e0080e3aa10ce49e0ba1ff0eb3801426b9d71e1aad9a7b4b78448a7fa9",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/scheduled_brief_hire_for_open_positions:2118e2e0080e3aa10ce49e0ba1ff0eb3801426b9d71e1aad9a7b4b78448a7fa9"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Schedulable morning-brief email summarizing hire for open positions for the responsible owner; designed to run daily or weekly.",
+  "description": "Builds a morning brief on hire for open positions from Dynamics 365 ERP data for a legal entity, returning top 5 items by impact, anomalies vs the 7-day rolling average, recommended next actions, an email saved to drafts",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "4d329b2fed0635c9d70dc2c3e61781bc2439adea57c29cee2d1d3f0a2938c1b2",
+  "lines": 265,
+  "size_kb": 16.3,
+  "sha256": "e81607dec21e66306c81f8f66ec38e4212b29c9ae9e63f86516baccc0ea17f3a",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

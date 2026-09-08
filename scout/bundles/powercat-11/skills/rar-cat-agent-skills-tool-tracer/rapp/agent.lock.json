@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/tool_tracer",
   "agent_file": "tool_tracer_agent.py",
-  "agent_sha256": "9bdbbbf6039d95cd831a928da5055dd9dec8dd45c1fc63c67142f4c8260c4e84",
+  "agent_sha256": "94d1c0edc220629574391ccfba7db23a74bcced8cd5a12e608f317dbfae87151",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ToolTracer",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "json",
       "productivity"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "ToolTracer",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

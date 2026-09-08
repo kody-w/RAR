@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/wcag_power_platform",
   "agent_file": "wcag_power_platform_agent.py",
-  "agent_sha256": "64c5ea9482a1d1ada8874099c362a028318cf35ce157fe91e5642f6eebdaf1b5",
+  "agent_sha256": "37075dfcfef21add8a31629f5621e192de0f1738315b147f734d0f645cf5dff7",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WcagPowerPlatform",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "power_pages",
       "web"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "WcagPowerPlatform",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

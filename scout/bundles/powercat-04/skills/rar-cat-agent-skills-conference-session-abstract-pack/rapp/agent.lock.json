@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/conference_session_abstract_pack",
   "agent_file": "conference_session_abstract_pack_agent.py",
-  "agent_sha256": "1555f077ef0d78b201887122101980ce639036b47f08e647ccded556eebc4070",
+  "agent_sha256": "2f037010b37d46b3b8c438a051efa8a15331159a047f2d7bf66dc4ab81cfa2b2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConferenceSessionAbstractPack",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "content",
       "productivity"
     ],
-    "version": "1.1.0"
+    "version": "2.1.2"
   },
   "runtime_name": "ConferenceSessionAbstractPack",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "1.1.0"
+  "version": "2.1.2"
 }

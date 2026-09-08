@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/pov_line_generator",
   "agent_file": "pov_line_generator_agent.py",
-  "agent_sha256": "181aaa29ab74475fe1d1b73cbfec45f0cdd31f3016bbf34eabcaf3ec23213ded",
+  "agent_sha256": "cbe57f8ea3671d17ab8daec288c8f57ce7641a9c070570cc3fb0e36ade9117d8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PovLineGenerator",
   "host_dependencies": [],
@@ -41,7 +41,7 @@
       "content",
       "social_media"
     ],
-    "version": "1.1.0"
+    "version": "2.1.2"
   },
   "runtime_name": "PovLineGenerator",
   "schema": "rapp-agent-lock/1.0",
@@ -71,5 +71,5 @@
     ],
     "type": "object"
   },
-  "version": "1.1.0"
+  "version": "2.1.2"
 }

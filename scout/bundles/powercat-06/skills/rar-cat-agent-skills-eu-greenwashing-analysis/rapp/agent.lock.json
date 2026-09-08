@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/eu_greenwashing_analysis",
   "agent_file": "eu_greenwashing_analysis_agent.py",
-  "agent_sha256": "60f5b0746b2395fef7e8225ba803aeb9de1264b58c9797df97fb0a80123d7a5e",
+  "agent_sha256": "a134c53dbb6e99e2879716f7e8341eef10280ddd10792464cf9fae79edeb6b59",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EuGreenwashingAnalysis",
   "host_dependencies": [],
@@ -42,7 +42,7 @@
       "marketing_review",
       "esg"
     ],
-    "version": "2.0.0"
+    "version": "3.0.2"
   },
   "runtime_name": "EuGreenwashingAnalysis",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.2"
 }

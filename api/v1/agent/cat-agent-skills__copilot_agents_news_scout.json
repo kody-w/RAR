@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__copilot_agents_news_scout",
   "name": "Copilot & Agents News Scout",
   "rar_name": "@cat-agent-skills/copilot_agents_news_scout",
-  "rappid": "rappid:@cat-agent-skills/copilot_agents_news_scout:fa23537745d539ad86a7cdc700977824800ae86ba15209b21ddb59a0af6b1b92",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/copilot_agents_news_scout:77515ad34afdb63c22f5f57fdc9d5684400aa18210689f99ac1b14a09e95bcf0",
+  "_migrated_from": "rappid:@cat-agent-skills/copilot_agents_news_scout:fa23537745d539ad86a7cdc700977824800ae86ba15209b21ddb59a0af6b1b92",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/copilot_agents_news_scout:fa23537745d539ad86a7cdc700977824800ae86ba15209b21ddb59a0af6b1b92"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "integrations",
   "tags": [
@@ -26,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.2,
-  "sha256": "6fc2a0fa301aa19d483c4c839feed41debd86262eb0fa2852fdcaccdebed450e",
+  "lines": 262,
+  "size_kb": 12.6,
+  "sha256": "9d45dca1f4eeae058b0f07c698721c49a4bc3bb408dbbc74401899aef8225a40",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

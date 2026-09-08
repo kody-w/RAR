@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__configure_plan_physical_capacity",
   "name": "Plan physical capacity Configuration Bulk Setup",
   "rar_name": "@cowork-cookbook/configure_plan_physical_capacity",
-  "rappid": "rappid:@cowork-cookbook/configure_plan_physical_capacity:f1f9fc38c066c67f3869d61d05f0691896041e191bacddfa4734bea0576e863e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/configure_plan_physical_capacity:a519bf2e9f2a5a220e61a09f30a6b027ef524262b5851115d63407eaf05fa491",
+  "_migrated_from": "rappid:@cowork-cookbook/configure_plan_physical_capacity:f1f9fc38c066c67f3869d61d05f0691896041e191bacddfa4734bea0576e863e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/configure_plan_physical_capacity:f1f9fc38c066c67f3869d61d05f0691896041e191bacddfa4734bea0576e863e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk configuration change to plan physical capacity from an input Excel file, with validation and rollback support.",
+  "description": "Bulk-updates plan physical capacity records in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, waits for your approval, then applies changes and returns a before/after",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.5,
-  "sha256": "4d2f687a0069a4c043674b81583e1ee2a230d3b105f1e806b7c8d478a1a1b0e7",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "4b005629ea1ed4fd0f2ed8116fc5cb3a0e77ac34275f826ff7cfdf7fd3b8f9af",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

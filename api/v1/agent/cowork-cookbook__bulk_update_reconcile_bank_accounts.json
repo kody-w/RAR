@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__bulk_update_reconcile_bank_accounts",
   "name": "Reconcile bank accounts Bulk Field Update",
   "rar_name": "@cowork-cookbook/bulk_update_reconcile_bank_accounts",
-  "rappid": "rappid:@cowork-cookbook/bulk_update_reconcile_bank_accounts:56f890473309572f45ce76724648005af5a5fbbed6eb54762390882dd19f8e4e",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/bulk_update_reconcile_bank_accounts:6c12770f39ca69fc88f17e2bae68adeeaef23097f2901a59e7773ffe4f9e017f",
+  "_migrated_from": "rappid:@cowork-cookbook/bulk_update_reconcile_bank_accounts:56f890473309572f45ce76724648005af5a5fbbed6eb54762390882dd19f8e4e",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/bulk_update_reconcile_bank_accounts:56f890473309572f45ce76724648005af5a5fbbed6eb54762390882dd19f8e4e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Applies a bulk field update across reconcile bank accounts records from an input list, with dry-run preview before commit.",
+  "description": "Applies a bulk field update to Dynamics 365 F&SCM reconcile bank accounts records in legal entity USMF via the Cowork ERP plugin, producing a dry-run preview workbook for approval before committing changes and emitting a",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "84070826e2756dc50fa52b198ea9f1d1766c50a683dd012abfd425c722ee1b1f",
+  "lines": 265,
+  "size_kb": 16.9,
+  "sha256": "a9ae36df15e86a50788188a60d48b2f3ffa1faa6860494a2a61950aae0ccbee6",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

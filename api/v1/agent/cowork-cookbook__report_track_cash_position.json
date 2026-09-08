@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__report_track_cash_position",
   "name": "Track cash position Summary Report",
   "rar_name": "@cowork-cookbook/report_track_cash_position",
-  "rappid": "rappid:@cowork-cookbook/report_track_cash_position:10c882ebf7fc7703d9097d087e3c1e6ee91491749f1693eafdcb972482d2f771",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/report_track_cash_position:ec0d93098792349220aebbc73abaee04e92867d189fb280b443bd490573c6500",
+  "_migrated_from": "rappid:@cowork-cookbook/report_track_cash_position:10c882ebf7fc7703d9097d087e3c1e6ee91491749f1693eafdcb972482d2f771",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/report_track_cash_position:10c882ebf7fc7703d9097d087e3c1e6ee91491749f1693eafdcb972482d2f771"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Builds a structured summary report of track cash position activity with totals, trends, and breakdowns.",
+  "description": "Builds a read-only cash position summary report from Dynamics 365 F&SCM for a legal entity and posted period, returning an Excel workbook with Summary, Detail, and Top10 sheets.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "verified",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.0,
-  "sha256": "62060e402fda8a1c638acbcab19881b096fe9023b86e59cae08c2b52933cdfd6",
+  "lines": 265,
+  "size_kb": 16.6,
+  "sha256": "04efc5e1a8d6ac143ca8abb71d1cb28cf94190bca541824713655cb399b4f85d",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

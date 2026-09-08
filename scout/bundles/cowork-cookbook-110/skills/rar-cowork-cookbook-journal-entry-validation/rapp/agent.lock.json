@@ -1,7 +1,7 @@
 {
   "agent": "@cowork-cookbook/journal_entry_validation",
   "agent_file": "journal_entry_validation_agent.py",
-  "agent_sha256": "6b9711a1812f44c713d1df7c028eee0c12b79b9d333a924ea7ced6d57c600794",
+  "agent_sha256": "1fad25199ab0cac70a4bc4bbfc749d3f76c0e02487ae336e730cb21b99d6d71e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "JournalEntryValidation",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Validates open journal entries against a configurable rule set before posting and produces an exception report.",
+    "description": "Checks open, unposted general journal entries in the current period against four rules (active account, valid dimensions, balanced debits/credits, non-empty description) and returns an Excel exception report; nothing is",
     "display_name": "Journal Entry Pre-Posting Validation",
     "industry_context": {
       "deprecated": false,
@@ -55,9 +55,9 @@
     "schema": "rapp-agent/1.0",
     "source": {
       "aggregated": true,
-      "content_digest": "6a2cf8d48f92e7c9",
+      "content_digest": "6980b3ac5d4a9f06",
       "details": {
-        "license_note": "Recipe content is CC BY 4.0 and code is MIT. RAR remains index-only: it stores normalized metadata and attribution, then generates its own callable method from that metadata without copying recipe prompts or bundles.",
+        "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
         "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
         "repository_url": "https://github.com/seangalliher/Coworkcookbook",
         "taxonomy_url": "https://coworkcookbook.com/data/taxonomy.json"
@@ -81,28 +81,33 @@
       "integration",
       "dynamics_365_erp"
     ],
-    "version": "2.0.0"
+    "version": "3.0.3"
   },
   "runtime_name": "JournalEntryValidation",
   "schema": "rapp-agent-lock/1.0",
   "tool_schema": {
     "properties": {
-      "criteria": {
-        "description": "Optional. The standard to review against, if narrower than the default.",
+      "context": {
+        "description": "Optional. Details the recipe should use — the record, scope, dates or filters it asks for.",
         "type": "string"
       },
       "operation": {
-        "description": "What to do: run, plan, checklist, describe.",
+        "description": "What to do: run, prompt, plan, checklist, describe.",
         "enum": [
           "run",
+          "prompt",
           "plan",
           "checklist",
           "describe"
         ],
         "type": "string"
       },
-      "subject": {
-        "description": "What is being reviewed — a file path, URL, document or system.",
+      "output_file_name": {
+        "description": "Name of the Excel workbook, defaulting to Journal-exceptions-<YYYY-MM-DD>.xlsx.",
+        "type": "string"
+      },
+      "period": {
+        "description": "The accounting period to scan; defaults to the current period.",
         "type": "string"
       }
     },
@@ -111,5 +116,5 @@
     ],
     "type": "object"
   },
-  "version": "2.0.0"
+  "version": "3.0.3"
 }

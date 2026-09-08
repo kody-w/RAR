@@ -3,13 +3,14 @@
   "id": "cat-agent-skills__chart_builder",
   "name": "Chart Builder",
   "rar_name": "@cat-agent-skills/chart_builder",
-  "rappid": "rappid:@cat-agent-skills/chart_builder:7f7a6b9ea3458caffe425fbe60d71d253e966af884c502e27041d9fe8c51baf2",
-  "_migrated_from": "rappid:@cat-agent-skills/chart_builder:8e746d7ca11f6dc69efbcdc05d32ee4a4ac351da2398e51ee947c64d40159536",
+  "rappid": "rappid:@cat-agent-skills/chart_builder:bea58baa7e6f456bd0bcfec26f8ad4a05c3ecdc2fc76b5cf8cdeec63f6641311",
+  "_migrated_from": "rappid:@cat-agent-skills/chart_builder:7f7a6b9ea3458caffe425fbe60d71d253e966af884c502e27041d9fe8c51baf2",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/chart_builder:8e746d7ca11f6dc69efbcdc05d32ee4a4ac351da2398e51ee947c64d40159536"
+    "rappid:@cat-agent-skills/chart_builder:8e746d7ca11f6dc69efbcdc05d32ee4a4ac351da2398e51ee947c64d40159536",
+    "rappid:@cat-agent-skills/chart_builder:7f7a6b9ea3458caffe425fbe60d71d253e966af884c502e27041d9fe8c51baf2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "2.0.1",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "devtools",
   "tags": [
@@ -25,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 8.8,
-  "sha256": "f8c8b03dc4628aed2f0ddb36fee0bade66fb9ee1ceff7e2d407c92a7ff4dedf0",
+  "lines": 262,
+  "size_kb": 12.1,
+  "sha256": "a3ce3929b7708296679c21b8f9a0e58efd70e3cf3c18c6d5e465ed6585c7c3b1",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

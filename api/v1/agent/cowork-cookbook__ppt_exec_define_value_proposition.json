@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__ppt_exec_define_value_proposition",
   "name": "Define value proposition Executive PowerPoint Deck",
   "rar_name": "@cowork-cookbook/ppt_exec_define_value_proposition",
-  "rappid": "rappid:@cowork-cookbook/ppt_exec_define_value_proposition:3a1ce97b9b2f6c819f9d67cad136e30ea76f9261209db3267f046c5a444fae91",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/ppt_exec_define_value_proposition:2277600e55396bcc4f42219444631b45a176b6fbff552369f83524501e7352c0",
+  "_migrated_from": "rappid:@cowork-cookbook/ppt_exec_define_value_proposition:3a1ce97b9b2f6c819f9d67cad136e30ea76f9261209db3267f046c5a444fae91",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/ppt_exec_define_value_proposition:3a1ce97b9b2f6c819f9d67cad136e30ea76f9261209db3267f046c5a444fae91"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Generates an executive-ready PowerPoint deck on define value proposition status, complete with charts and talking-point notes.",
+  "description": "Builds a read-only executive PowerPoint deck on define value proposition from Dynamics 365 F&SCM data for a given legal entity, with title, KPI, trend, red-flag, actions and appendix slides plus speaker notes.",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.4,
-  "sha256": "ba9b7df12ba190aea09c66dff19e1d5f540d9c0a08d5baa00f29b1c53c1b5c62",
+  "lines": 265,
+  "size_kb": 17.0,
+  "sha256": "88c605848ab3ede41b8c6f48ee6912d1342b5f82984f3d23662788188839973c",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

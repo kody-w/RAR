@@ -3,11 +3,13 @@
   "id": "cowork-cookbook__dashboard_manage_file_storage",
   "name": "Manage file storage Interactive HTML Dashboard",
   "rar_name": "@cowork-cookbook/dashboard_manage_file_storage",
-  "rappid": "rappid:@cowork-cookbook/dashboard_manage_file_storage:1dc4645a4cb517b2f6535bc78f5bdda86f17636f0d2fcf434df164cc1299a2ca",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cowork-cookbook/dashboard_manage_file_storage:bc3bdea02b5acd1516c20a23afdca4a16f8085bef29ee85f57bf855d59a784db",
+  "_migrated_from": "rappid:@cowork-cookbook/dashboard_manage_file_storage:1dc4645a4cb517b2f6535bc78f5bdda86f17636f0d2fcf434df164cc1299a2ca",
+  "_migrated_from_all": [
+    "rappid:@cowork-cookbook/dashboard_manage_file_storage:1dc4645a4cb517b2f6535bc78f5bdda86f17636f0d2fcf434df164cc1299a2ca"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
   "publisher": "@cowork-cookbook",
   "category": "integrations",
   "tags": [
@@ -20,16 +22,16 @@
     "integration",
     "dynamics_365_erp"
   ],
-  "description": "Produces a self-contained interactive HTML dashboard for manage file storage - opens in any browser, no D365 access needed by the viewer.",
+  "description": "Pulls manage file storage data from Dynamics 365 F&SCM (via the Cowork D365 ERP plugin) for the most recent fiscal period and saves a standalone interactive HTML dashboard with charts, sortable table, and RAG indicator;",
   "author": "Sean Galliher and Cowork Cookbook contributors",
   "quality_tier": "community",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 190,
-  "size_kb": 10.3,
-  "sha256": "0d500657c54764d0701f667ba6055927547991740eb160900263b03404248741",
+  "lines": 265,
+  "size_kb": 16.4,
+  "sha256": "7889079a440a802ab487570344f459b2e644884df2aa29b9302a62858b44741c",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

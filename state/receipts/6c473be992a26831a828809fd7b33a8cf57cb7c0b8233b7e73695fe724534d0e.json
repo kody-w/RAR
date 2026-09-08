@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-09-08"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/travel_cost_estimator",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "9f4e84c8f1066bcc5bf9698772221e2591e0d94f8b680fc9f47dd4c8320c7da1"
+ },
+ "canonical_path": "agents/@cat-agent-skills/travel_cost_estimator_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-09-08T20:27:06.555078+00:00",
+ "id": "rar_6c473be992a26831a828809fd7b33a8cf57cb7c0b8233b7e73695fe724534d0e",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "90fc9c773d6b9ea7d45ec20a0c13dde3ab6a6ad370d0c0915fd99ecbac14a9b9",
+  "receipt": "rar_523b0aac8e8150cc226ddd5d9d0850f152ad417ef7a2f9747257da6f84ecbdf7",
+  "version": "2.0.0"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_6c473be992a26831a828809f",
+ "revision_id": "6c473be992a26831a828809fd7b33a8cf57cb7c0b8233b7e73695fe724534d0e",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "toast generation 2: cookbook recipes carried verbatim (CC BY 4.0, attributed) with Opus 5 refinements cached via the local Brainstem; toaster v2.0.0"
+ },
+ "version": "3.0.2"
+}

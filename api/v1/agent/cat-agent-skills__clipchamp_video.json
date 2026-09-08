@@ -3,11 +3,13 @@
   "id": "cat-agent-skills__clipchamp_video",
   "name": "Clipchamp Narrated Demo Video",
   "rar_name": "@cat-agent-skills/clipchamp_video",
-  "rappid": "rappid:@cat-agent-skills/clipchamp_video:81b4c35388e8b689eedabaa91c5c32d2186a886e29dbca3b1cb081556bb70727",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "2.0.0",
+  "rappid": "rappid:@cat-agent-skills/clipchamp_video:937a0539eb50088657fbea71a23575b0ff9e7d733517fcf6b55947040043a143",
+  "_migrated_from": "rappid:@cat-agent-skills/clipchamp_video:81b4c35388e8b689eedabaa91c5c32d2186a886e29dbca3b1cb081556bb70727",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/clipchamp_video:81b4c35388e8b689eedabaa91c5c32d2186a886e29dbca3b1cb081556bb70727"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "creative",
   "tags": [
@@ -27,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 188,
-  "size_kb": 9.1,
-  "sha256": "2e87128dd2c080ab21531502b82cdfe9e1d8bb835a873d40d586a62fab55e4f8",
+  "lines": 262,
+  "size_kb": 12.5,
+  "sha256": "99c1a93abfecee1f36363f05c06d8b7f08c9a63e141aeb6e4f2014b6c50b4a4c",
   "has_card": true,
   "added_at": "2026-08-23T19:15:32-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
