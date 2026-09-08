@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-07T10:28:17Z",
+ "generated_at": "2026-09-08T09:49:17Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,10 +9,10 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 115,
-  "size_kb": 89826,
+  "open_issues": 117,
+  "size_kb": 74665,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-07T08:49:58Z",
+  "pushed_at": "2026-09-08T08:30:18Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 27,
   "days_tracked": 14,
   "tracking_since": "2026-07-14",
-  "agents": 1697,
+  "agents": 1698,
   "swarms": 2,
   "publishers": 11,
   "categories": 13,
-  "total_lines": 409636,
-  "total_kb": 21331.5,
+  "total_lines": 411253,
+  "total_kb": 21412.2,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -244,7 +244,7 @@
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 1997198,
+  "rank": 2003660,
   "agent_hits": 12,
   "files": [
    {
@@ -641,24 +641,41 @@
     "description": "Manages the local digital-twin lifecycle \u2014 summon, hatch eggs, boot each twin as its own brainstem, stop, chat, inspect \u2014 under ~/.rapp/twins/."
    },
    {
-    "name": "@discreetRappers/powerpoint_generator_agent",
-    "display_name": "PowerPointGeneratorV2",
-    "publisher": "@discreetRappers",
-    "category": "productivity",
+    "name": "@kody-w/host_compat_agent",
+    "display_name": "Host Compat",
+    "publisher": "@kody-w",
+    "category": "devtools",
     "tier": "community",
     "downloads": 0,
     "up": 0,
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1551,
-    "size_kb": 61.3,
-    "added_at": "2026-04-06T16:39:03-04:00",
-    "file": "agents/@discreetRappers/powerpoint_generator_agent.py",
-    "description": "Generates PowerPoint decks from slide specs with python-pptx, using Microsoft templates and smart layout selection."
+    "lines": 1617,
+    "size_kb": 80.7,
+    "added_at": "2026-09-07T19:31:02-04:00",
+    "file": "agents/@kody-w/host_compat_agent.py",
+    "description": "Makes a Brainstem speak every agent-host dialect from one file: Claude Code, GitHub Copilot CLI and open Agent Skills \u2014 skills, plugins, slash commands/prompts, subagent personas, hooks, MCP servers, instruction files \u2014 plus cross-host search of your local Claude Code and Copilot CLI session transcripts."
    }
   ],
   "newest": [
+   {
+    "name": "@kody-w/host_compat_agent",
+    "display_name": "Host Compat",
+    "publisher": "@kody-w",
+    "category": "devtools",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 1617,
+    "size_kb": 80.7,
+    "added_at": "2026-09-07T19:31:02-04:00",
+    "file": "agents/@kody-w/host_compat_agent.py",
+    "description": "Makes a Brainstem speak every agent-host dialect from one file: Claude Code, GitHub Copilot CLI and open Agent Skills \u2014 skills, plugins, slash commands/prompts, subagent personas, hooks, MCP servers, instruction files \u2014 plus cross-host search of your local Claude Code and Copilot CLI session transcripts."
+   },
    {
     "name": "@kody-w/rar_installer_troubleshooter_agent",
     "display_name": "RAPP Roadside",
@@ -896,23 +913,6 @@
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/adaptive_card_analyze_marketing_trends_agent.py",
     "description": "Produces a reusable Adaptive Card JSON snapshot of analyze marketing trends status for embedding in dashboards, emails, or Teams."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_analyze_production_costs",
-    "display_name": "Analyze production costs Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.4,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_analyze_production_costs_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of analyze production costs status for embedding in dashboards, emails, or Teams."
    }
   ],
   "publishers": [
@@ -936,11 +936,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 67,
+    "agents": 68,
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 64744,
+    "lines": 66361,
     "rating": 5.0
    },
    {
@@ -1047,7 +1047,7 @@
    },
    {
     "name": "devtools",
-    "agents": 26,
+    "agents": 27,
     "downloads": 0,
     "score": 0,
     "reviews": 1
@@ -1110,7 +1110,7 @@
    }
   ],
   "tiers": {
-   "community": 1273,
+   "community": 1274,
    "verified": 281,
    "frontier": 95,
    "official": 46,
