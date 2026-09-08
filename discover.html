@@ -202,6 +202,28 @@
   .tech-body a { color: var(--accent); text-decoration: none; word-break: break-all; }
   .tech-body a:hover { text-decoration: underline; }
 
+  /* Same pattern as .tech: available on demand, never leading — a stack
+     family's siblings are one disclosure away, not a wall of extra cards. */
+  details.variants { margin-top: 12px; }
+  details.variants > summary {
+    cursor: pointer; font-size: 13px; color: var(--accent);
+    list-style: none; padding: 3px 0; user-select: none; font-weight: 550;
+  }
+  details.variants > summary::-webkit-details-marker { display: none; }
+  .variant-list {
+    margin: 9px 0 0; padding-left: 18px;
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.7;
+  }
+  .variant-list a { color: var(--accent); text-decoration: none; }
+  .variant-list a:hover { text-decoration: underline; }
+
+  /* Facet chips: same visual language as the "Try:" example chips, so a
+     business-process filter reads as part of the same interaction, not a
+     bolted-on control. */
+  .facets { margin-top: 10px; }
+  .facets .lbl { font-size: 13px; color: var(--ink-faint); margin-right: 8px; }
+  .chip.facet.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
   .empty, .loading {
     padding: 44px 0; text-align: center; color: var(--ink-faint); font-size: 15px;
   }
@@ -265,6 +287,8 @@
     <div class="examples" id="examples">
       <span class="lbl">Try:</span>
     </div>
+
+    <div class="facets" id="facets"></div>
   </section>
 
   <section class="results" id="results"></section>
@@ -292,8 +316,9 @@ const BASE = 'https://raw.githubusercontent.com/kody-w/RAR/main';
 // The business slice is pre-curated, so this surface never has to filter out
 // novelty agents itself — that decision was already made at build time.
 const ENDPOINTS = {
-  catalog: BASE + '/api/v1/audience/business.json',
-  match:   BASE + '/api/v1/match.json'
+  catalog:     BASE + '/api/v1/audience/business.json',
+  match:       BASE + '/api/v1/match.json',
+  audienceMap: BASE + '/api/v1/audience/map.json'
 };
 
 const STOP = new Set(('a an the and or for to of in on with that this it is are be as by from at ' +
@@ -301,7 +326,19 @@ const STOP = new Set(('a an the and or for to of in on with that this it is are 
   'based each one more other than then they my i need needs want help me us have has do does ' +
   'about would could should so if then out up down over under before after new').split(' '));
 
-let CATALOG = null, INDEX = null, USE_CASES = [];
+let CATALOG = null, INDEX = null, USE_CASES = [], SCORES = null;
+let ACTIVE_FACET = null;
+
+// Results shown to the user in one search. Kept modest deliberately: past
+// this, "ranked" stops meaning anything to a human scanning a page.
+const RESULT_SLOTS = 8;
+
+// No more than this many results from one publisher in a single result set.
+// One publisher (a templated batch generator) can be the majority of the
+// entire registry; without this cap every query about a common business
+// term returns 8 near-identical variants of that one publisher's family and
+// the other ten-plus publishers never surface at all.
+const MAX_PER_PUBLISHER = 2;
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g,
@@ -318,11 +355,49 @@ function tokenize(text) {
     w => w.length > 2 && !STOP.has(w)) || [];
 }
 
-/* Rank by summing the precomputed term weights shipped in match.json.
+/* An agent's declared "stack" — a family of agents deliberately generated or
+   curated together, e.g. agents/@pub/foo_stacks/bar_stack/thing_agent.py ->
+   "@pub/bar_stack". Agents outside this convention get no stack (each is its
+   own singleton), so nothing is grouped that wasn't already declared as a
+   family by the publisher. */
+function stackOf(record) {
+  const parts = (record?.source?.path || '').split('/');
+  if (parts.length >= 4 && parts[0] === 'agents' && parts[2].endsWith('_stacks')) {
+    return `${parts[1]}/${parts[3]}`;
+  }
+  return null;
+}
+
+/* Every catalog entry carrying a given facet tag, ranked by the same
+   business-language score used to nudge keyword search — lets a facet chip
+   act as a standalone browse view even with no text typed in. */
+function candidatesForFacet(tag) {
+  const out = [];
+  for (const [id, rec] of CATALOG) {
+    if ((rec.tags || []).includes(tag)) {
+      const b = SCORES?.[rec.name]?.b || 0;
+      out.push({ id, score: b, rawScore: b, terms: [] });
+    }
+  }
+  return out.sort((a, b) => b.score - a.score);
+}
+
+/* Rank by summing the precomputed term weights shipped in match.json, then
+   nudge by the continuous business-language score already computed at build
+   time (api/v1/audience/map.json's "scores" — see build_static_api.py). The
+   nudge is small and additive-only: it can move a near-tie, never overturn a
+   strong keyword match, and it never excludes anything the audience filter
+   already decided to keep (that decision stays a soft filter on the extremes,
+   never a hard partition — see CONSTITUTION.md / test_audience_segmentation.py).
    Keeping the matched terms lets us tell the user WHY something matched,
    which is the difference between a recommendation and a guess. */
-function rank(query) {
+function rawRank(query) {
   const toks = tokenize(query);
+
+  if (!toks.length) {
+    return ACTIVE_FACET ? candidatesForFacet(ACTIVE_FACET) : [];
+  }
+
   const scores = new Map(), reasons = new Map();
 
   for (const t of toks) {
@@ -337,14 +412,83 @@ function rank(query) {
     }
   }
 
-  return [...scores.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 8)
-    .map(([id, score]) => ({ id, score, terms: [...reasons.get(id)] }))
-    .filter(r => CATALOG.has(r.id));
+  let ranked = [...scores.entries()]
+    .map(([id, score]) => {
+      const rec = CATALOG.get(id);
+      if (!rec) return null;
+      const b = SCORES?.[rec.name]?.b || 0;
+      // Cap the boost's influence at +15%: a business-language-heavy but
+      // otherwise irrelevant agent must never outrank a genuine keyword hit.
+      const boosted = score * (1 + Math.min(b, 10) * 0.015);
+      return { id, score: boosted, rawScore: score, terms: [...reasons.get(id)] };
+    })
+    .filter(Boolean);
+
+  // A facet narrows to agents actually carrying that tag — stricter and more
+  // reliable than hoping the keyword search happens to surface them.
+  if (ACTIVE_FACET) {
+    ranked = ranked.filter(hit => (CATALOG.get(hit.id).tags || []).includes(ACTIVE_FACET));
+  }
+
+  return ranked.sort((a, b) => b.score - a.score);
 }
 
-function card(hit, best) {
+/* Publisher/stack-diversity selection over an already-ranked candidate list.
+   Greedy pass 1 enforces the per-publisher cap so one dominant publisher
+   cannot fill every slot; pass 2 backfills any remaining slots from whatever
+   is left, highest score first, so a query with genuinely few matches still
+   returns as many as it has rather than an artificially short list. */
+function diversify(ranked, slots) {
+  const picked = [], seenPerPublisher = new Map(), used = new Set();
+
+  for (const hit of ranked) {
+    if (picked.length >= slots) break;
+    const pub = CATALOG.get(hit.id)?.publisher || '';
+    const count = seenPerPublisher.get(pub) || 0;
+    if (count >= MAX_PER_PUBLISHER) continue;
+    picked.push(hit);
+    used.add(hit.id);
+    seenPerPublisher.set(pub, count + 1);
+  }
+  if (picked.length < slots) {
+    for (const hit of ranked) {
+      if (picked.length >= slots) break;
+      if (used.has(hit.id)) continue;
+      picked.push(hit);
+      used.add(hit.id);
+    }
+  }
+  return picked;
+}
+
+/* Collapse same-stack hits into one card with the rest listed as variants,
+   so a templated family of N near-identical agents reads as one result
+   instead of N — the single biggest driver of "junk" perception at scale. */
+function groupByStack(hits) {
+  const groups = [], byStack = new Map();
+  for (const hit of hits) {
+    const rec = CATALOG.get(hit.id);
+    const stack = stackOf(rec);
+    if (!stack) { groups.push({ primary: hit, variants: [] }); continue; }
+    if (byStack.has(stack)) {
+      byStack.get(stack).variants.push(hit);
+    } else {
+      const group = { primary: hit, variants: [] };
+      byStack.set(stack, group);
+      groups.push(group);
+    }
+  }
+  return groups;
+}
+
+function rank(query) {
+  const ranked = rawRank(query);
+  const picked = diversify(ranked, RESULT_SLOTS);
+  return groupByStack(picked);
+}
+
+function card(group, best) {
+  const hit = group.primary;
   const a = CATALOG.get(hit.id);
   const pct = Math.max(12, Math.round((hit.score / best) * 100));
   const strength = pct > 66 ? 'Strong fit' : pct > 33 ? 'Good fit' : 'Possible fit';
@@ -365,6 +509,22 @@ function card(hit, best) {
     ? `<div class="why">Matched on <b>${hit.terms.slice(0, 6).map(esc).join('</b>, <b>')}</b></div>`
     : '';
 
+  // A stack family reads as ONE result with its siblings tucked behind a
+  // disclosure, not N separate cards competing for the same slot — the
+  // templated-batch "junk" complaint is a presentation problem as much as a
+  // ranking one.
+  const variantsBlock = group.variants.length
+    ? `<details class="variants">
+        <summary>+${group.variants.length} more agent${group.variants.length > 1 ? 's' : ''} in this family</summary>
+        <ul class="variant-list">
+          ${group.variants.map(v => {
+            const va = CATALOG.get(v.id);
+            return `<li><a href="${esc(va.source.raw)}" rel="noopener">${esc(va.display_name || va.name)}</a> — ${esc(va.description)}</li>`;
+          }).join('')}
+        </ul>
+      </details>`
+    : '';
+
   return `
   <article class="card">
     <div class="card-top">
@@ -379,6 +539,7 @@ function card(hit, best) {
     </div>
     <div class="tags">${tier}${env}${tags}</div>
     ${why}
+    ${variantsBlock}
     <details class="tech">
       <summary>Technical details</summary>
       <div class="tech-body">
@@ -398,9 +559,9 @@ function card(hit, best) {
 
 function render(query) {
   const out = $('results');
-  const hits = rank(query);
+  const groups = rank(query);
 
-  if (!hits.length) {
+  if (!groups.length) {
     out.innerHTML = `<div class="empty">
       Nothing matched that description yet. Try naming the business process —
       contracts, forecasting, onboarding, supplier risk, support tickets.
@@ -408,13 +569,14 @@ function render(query) {
     return;
   }
 
-  const best = hits[0].score;
+  const best = groups[0].primary.score;
+  const totalCount = groups.reduce((n, g) => n + 1 + g.variants.length, 0);
   out.innerHTML = `
     <div class="results-head">
-      <h2>${hits.length} agent${hits.length > 1 ? 's' : ''} matched</h2>
+      <h2>${groups.length} result${groups.length > 1 ? 's' : ''} matched${totalCount > groups.length ? ` (${totalCount} agents, grouped by family)` : ''}</h2>
       <div class="meta">ranked in your browser · no query left this device</div>
     </div>
-    ${hits.map(h => card(h, best)).join('')}`;
+    ${groups.map(g => card(g, best)).join('')}`;
   out.querySelector('.results-head').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -426,9 +588,44 @@ function seedExamples() {
     const b = document.createElement('button');
     b.className = 'chip';
     b.textContent = uc.label;
-    b.onclick = () => { $('q').value = uc.label; render(uc.label); };
+    b.onclick = () => { ACTIVE_FACET = null; $('q').value = uc.label; render(uc.label); };
     box.appendChild(b);
   });
+}
+
+/* Facet chips over the business-process value-chain tags already present on
+   every catalog record (order_to_cash, hire_to_retire, ...) — zero data-model
+   change, just a browse path into vocabulary that already exists but had no
+   UI of its own. Clicking a facet restricts results to agents actually
+   carrying that tag, which is a stricter and more reliable filter than
+   keyword search alone. */
+function seedFacets() {
+  const box = $('facets');
+  const freq = new Map();
+  for (const rec of CATALOG.values()) {
+    for (const t of (rec.tags || [])) {
+      if (/^[a-z]+_to_[a-z]+$/.test(t)) freq.set(t, (freq.get(t) || 0) + 1);
+    }
+  }
+  const top = [...freq.entries()].sort((a, b) => b[1] - a[1]).slice(0, 10);
+  if (!top.length) return;
+  box.innerHTML = '<span class="lbl">Browse by business process:</span>';
+  for (const [tag, count] of top) {
+    const b = document.createElement('button');
+    b.className = 'chip facet';
+    b.dataset.tag = tag;
+    b.textContent = `${tag.replace(/_/g, ' ')} (${count})`;
+    b.onclick = () => setFacet(tag);
+    box.appendChild(b);
+  }
+}
+
+function setFacet(tag) {
+  ACTIVE_FACET = (ACTIVE_FACET === tag) ? null : tag;
+  document.querySelectorAll('.chip.facet').forEach(el => {
+    el.classList.toggle('active', el.dataset.tag === ACTIVE_FACET);
+  });
+  render($('q').value.trim());
 }
 
 async function boot() {
@@ -437,8 +634,8 @@ async function boot() {
   const t0 = performance.now();
 
   try {
-    const [catRes, matchRes] = await Promise.all([
-      fetch(ENDPOINTS.catalog), fetch(ENDPOINTS.match)
+    const [catRes, matchRes, scoresRes] = await Promise.all([
+      fetch(ENDPOINTS.catalog), fetch(ENDPOINTS.match), fetch(ENDPOINTS.audienceMap)
     ]);
     if (!catRes.ok || !matchRes.ok) throw new Error('HTTP ' + catRes.status + '/' + matchRes.status);
 
@@ -447,6 +644,10 @@ async function boot() {
     CATALOG = new Map(cat.agents.map(a => [a.id, a]));
     INDEX = match.index;
     USE_CASES = match.use_cases || [];
+    // The continuous business-language score is additive and optional — its
+    // absence (older cache, endpoint unreachable) only turns off the small
+    // ranking nudge, never breaks search.
+    SCORES = scoresRes.ok ? (await scoresRes.json()).scores || null : null;
 
     const ms = Math.round(performance.now() - t0);
     setConn('live', `${cat.count} agents · ${ms} ms`);
@@ -457,6 +658,7 @@ async function boot() {
 
     out.innerHTML = '';
     seedExamples();
+    seedFacets();
   } catch (err) {
     setConn('err', 'offline');
     out.innerHTML = `<div class="empty">
@@ -468,7 +670,7 @@ async function boot() {
 
 $('go').onclick = () => {
   const q = $('q').value.trim();
-  if (q && INDEX) render(q);
+  if ((q || ACTIVE_FACET) && INDEX) render(q);
 };
 $('q').addEventListener('keydown', e => {
   if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') $('go').click();
